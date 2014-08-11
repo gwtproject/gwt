@@ -1005,6 +1005,28 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     return null;
   }
 
+  /**
+   * If the type is a JSO or an array of JSOs it returns JavaScriptObject or an array of
+   * JavaScriptObject respectively; otherwise returns the incoming type.
+   * @param type
+   * @return
+   */
+  public JType normalizeJsoType(JType type) {
+    if (type instanceof JReferenceType) {
+      type = ((JReferenceType) type).getUnderlyingType();
+    }
+
+    if (type instanceof JArrayType) {
+      return getOrCreateArrayType(normalizeJsoType(((JArrayType) type).getLeafType()),
+          ((JArrayType) type).getDims());
+    }
+
+    if (typeOracle.isJavaScriptObject(type)) {
+      return getJavaScriptObject();
+    }
+    return type;
+  }
+
   public void putIntoTypeMap(String qualifiedBinaryName, JDeclaredType type) {
     // Make it into a source type name.
     String srcTypeName = qualifiedBinaryName.replace('$', '.');

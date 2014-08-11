@@ -465,6 +465,10 @@ public class JsoTest extends GWTTestCase {
       fail("Expected ClassCastException");
     } catch (ClassCastException expected) {
     }
+
+    Foo[][] foo2 = new Foo[10][];
+    Object[][] foo3 = foo2;
+    foo3[0] = new Bar[1];
   }
 
   public void testClassInitializerRun() {

@@ -198,15 +198,15 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static String toBinaryString(int value) {
-    return toPowerOfTwoString(value, 1);
+    return toRadixString(value, 2);
   }
 
   public static String toHexString(int value) {
-    return toPowerOfTwoString(value, 4);
+    return toRadixString(value, 16);
   }
 
   public static String toOctalString(int value) {
-    return toPowerOfTwoString(value, 3);
+    return toRadixString(value, 8);
   }
 
   public static String toString(int value) {
@@ -217,26 +217,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     if (radix == 10 || radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
       return String.valueOf(value);
     }
-
-    final int bufSize = 33;
-    char[] buf = new char[bufSize];
-    char[] digits = __Digits.digits;
-    int pos = bufSize - 1;
-    if (value >= 0) {
-      while (value >= radix) {
-        buf[pos--] = digits[value % radix];
-        value /= radix;
-      }
-      buf[pos] = digits[value];
-    } else {
-      while (value <= -radix) {
-        buf[pos--] = digits[-(value % radix)];
-        value /= radix;
-      }
-      buf[pos--] = digits[-value];
-      buf[pos] = '-';
-    }
-    return String.__valueOf(buf, pos, bufSize);
+    return toRadixString(value, radix);
   }
 
   public static Integer valueOf(int i) {
@@ -260,26 +241,13 @@ public final class Integer extends Number implements Comparable<Integer> {
     return Integer.valueOf(Integer.parseInt(s, radix));
   }
 
-  private static String toPowerOfTwoString(int value, int shift) {
-    final int bufSize = 32 / shift;
-    int bitMask = (1 << shift) - 1;
-    char[] buf = new char[bufSize];
-    char[] digits = __Digits.digits;
-    int pos = bufSize - 1;
-    if (value >= 0) {
-      while (value > bitMask) {
-        buf[pos--] = digits[value & bitMask];
-        value >>= shift;
-      }
-    } else {
-      while (pos > 0) {
-        buf[pos--] = digits[value & bitMask];
-        value >>= shift;
-      }
+  private static native String toRadixString(int value, int radix) /*-{
+    // convert to unsigned int
+    if (value < 0) {
+      value += 0x100000000;
     }
-    buf[pos] = digits[value & bitMask];
-    return String.__valueOf(buf, pos, bufSize);
-  }
+    return value.toString(radix);
+  }-*/;
 
   private final transient int value;
 

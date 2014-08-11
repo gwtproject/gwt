@@ -155,10 +155,24 @@ public abstract class TypeOracle {
   public abstract JArrayType getArrayType(JType componentType);
 
   /**
+   * Returns an unmodifiable, live view of all interface types that are
+   * implemented by both a JSO subtype and at least one Object subtype.
+   */
+  public Set<? extends JClassType> getDualJsoImplInterfaces() {
+    return null;
+  }
+
+  /**
    * Gets a reference to the type object representing
    * <code>java.lang.Object</code>.
    */
   public abstract JClassType getJavaLangObject();
+
+  /**
+   * Gets a reference to the type object representing
+   * <code>com.google.gwt.core.client.JavaScriptObject</code>.
+   */
+  public abstract JClassType getJavaScriptObject();
 
   /**
    * Ensure that a package with the specified name exists as well as its parent

@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "76ea93f0_daf4b969",
+        "filename": "dev/core/src/com/google/gwt/core/ext/typeinfo/TypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-11T21:45:16Z",
+      "side": 1,
+      "message": "Can we avoid putting this in the ext interface?",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 5
+      },
+      "revId": "de8ee334eec2a5222bed5384e4da8cd3d5c21e27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16d4f72c_b9a0fb91",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
         "patchSetId": 1
@@ -13,6 +36,47 @@
       "writtenOn": "2014-08-11T21:35:54Z",
       "side": 1,
       "message": "[error] Unused import - org.eclipse.jdt.internal.compiler.problem.ShouldNotImplement.",
+      "revId": "de8ee334eec2a5222bed5384e4da8cd3d5c21e27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76ea93f0_9ab071cb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-11T21:45:16Z",
+      "side": 1,
+      "message": "please fix.",
+      "parentUuid": "16d4f72c_b9a0fb91",
+      "revId": "de8ee334eec2a5222bed5384e4da8cd3d5c21e27",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76ea93f0_7adf0ded",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-11T21:45:16Z",
+      "side": 1,
+      "message": "rename to dualImplJsoTypeName here and elsewhere",
+      "range": {
+        "startLine": 1164,
+        "startChar": 18,
+        "endLine": 1164,
+        "endChar": 35
+      },
       "revId": "de8ee334eec2a5222bed5384e4da8cd3d5c21e27",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

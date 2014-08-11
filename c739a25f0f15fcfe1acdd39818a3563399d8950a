@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "16d4f72c_560ad4b2",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-11T21:04:03Z",
+      "side": 1,
+      "message": "It\u0027s not that simple, but I was able to change it to an object.",
+      "parentUuid": "16ab179f_a128b86f",
+      "range": {
+        "startLine": 260,
+        "startChar": 4,
+        "endLine": 268,
+        "endChar": 5
+      },
+      "revId": "c739a25f0f15fcfe1acdd39818a3563399d8950a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16ab179f_a141d821",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-08-11T18:10:55Z",
       "side": 1,
       "message": "maybe\n\ncacheInputFileState();",
+      "range": {
+        "startLine": 279,
+        "startChar": 6,
+        "endLine": 281,
+        "endChar": 53
+      },
+      "revId": "c739a25f0f15fcfe1acdd39818a3563399d8950a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76ea93f0_518554b8",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-11T21:04:03Z",
+      "side": 1,
+      "message": "Changed to an object.",
+      "parentUuid": "16ab179f_a141d821",
       "range": {
         "startLine": 279,
         "startChar": 6,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "16d4f72c_360758ab",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-11T21:04:03Z",
+      "side": 1,
+      "message": "Changed to an object.",
+      "parentUuid": "16ab179f_6154f0df",
+      "range": {
+        "startLine": 284,
+        "startChar": 6,
+        "endLine": 286,
+        "endChar": 40
+      },
+      "revId": "c739a25f0f15fcfe1acdd39818a3563399d8950a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16ab179f_1e57cd3b",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2014-08-11T18:10:55Z",
       "side": 1,
       "message": "how about make this function part of ModuleDef so that it can be reused by arbitrary callers (not just superdevmode)",
+      "range": {
+        "startLine": 490,
+        "startChar": 21,
+        "endLine": 490,
+        "endChar": 41
+      },
+      "revId": "c739a25f0f15fcfe1acdd39818a3563399d8950a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16d4f72c_f64560d7",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-11T21:04:03Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "16ab179f_1e57cd3b",
       "range": {
         "startLine": 490,
         "startChar": 21,

@@ -141,6 +141,30 @@
     },
     {
       "key": {
+        "uuid": "16d4f72c_dc24c5cf",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-11T23:13:28Z",
+      "side": 1,
+      "message": "Okay, I will let it go.",
+      "parentUuid": "9699c785_d8ef451b",
+      "range": {
+        "startLine": 99,
+        "startChar": 6,
+        "endLine": 99,
+        "endChar": 10
+      },
+      "revId": "4a630e88600a83748c360e68b32986ce80baa76c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3692db12_fcd8402a",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
         "patchSetId": 9
@@ -176,6 +200,30 @@
       "side": 1,
       "message": "I think regexp is not evil, sometimes it is clearer than code searching for separators, and splitting strings and regexp performance is very good. We need the regexp to assure that the md5 hash is correct so reusing it seems more reasonable than having different methods to do almost the same. \n\nI changed the old method because it was buggy, it was returning a valid module even if the module part didn\u0027t finish with \u0027/\u0027 what is wrong since last slash is needed in line 73 (rootDir)",
       "parentUuid": "3692db12_fcd8402a",
+      "range": {
+        "startLine": 110,
+        "startChar": 9,
+        "endLine": 110,
+        "endChar": 33
+      },
+      "revId": "4a630e88600a83748c360e68b32986ce80baa76c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16d4f72c_dcff25ca",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-11T23:13:28Z",
+      "side": 1,
+      "message": "I don\u0027t see that there was a bug before? Perhaps getModuleName() could return null if there is no slash after the module name. This simplifies the calling code slightly, but the if statement at line 73 was checking for this case so it wasn\u0027t a bug.\n\nI still think SOURCEMAP_PATTERN is trying to do too much. The idea behind this code is to first parse the path up to the module name and calculate \"rest\". Then do additional matching against the rest of the URL. So SOURCEMAP_PATTERN shouldn\u0027t be used to parse the module name again since that part of the path has already been parsed. It should be a simpler regexp that just matches the rest of the path.\n\nUsing a regexp to parse the module name might be okay, but it should be a separate regexp.",
+      "parentUuid": "56a3cfb2_13f0ce73",
       "range": {
         "startLine": 110,
         "startChar": 9,

@@ -149,6 +149,7 @@ import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import org.xml.sax.SAXException;
 
@@ -999,6 +1000,7 @@ public abstract class JavaToJavaScriptCompiler {
       Set<String> allRootTypes = new TreeSet<String>();
       CompilationState compilationState = rpo.getCompilationState();
       Memory.maybeDumpMemory("CompStateBuilt");
+      recordJsoTypes(compilationState.getTypeOracle());
       populateRootTypes(allRootTypes, additionalRootTypes, compilationState.getTypeOracle());
       String entryMethodHolderTypeName =
           buildEntryMethodHolder(rpo.getGeneratorContext(), allRootTypes);
@@ -1135,6 +1137,38 @@ public abstract class JavaToJavaScriptCompiler {
           }
         }
       }
+    }
+
+    private void recordJsoTypes(TypeOracle typeOracle) {
+      if (!options.shouldCompilePerFile()) {
+        return;
+      }
+
+      // Names of Classes or Interfaces for which function dispatch is always via a static function.
+      Set<String> jsoTypeNames = Sets.newHashSet();
+
+      // Add names of JSO subtypes.
+      for (com.google.gwt.dev.javac.typemodel.JClassType subtype :
+          typeOracle.getJavaScriptObject().getSubtypes()) {
+        jsoTypeNames.add(subtype.getQualifiedBinaryName());
+      }
+
+      // Add names of interfaces that are always of a JSO (aka there are no non-JSO implementors).
+      for (com.google.gwt.core.ext.typeinfo.JClassType singleJsoImplInterface :
+          typeOracle.getSingleJsoImplInterfaces()) {
+        jsoTypeNames.add(singleJsoImplInterface.getQualifiedBinaryName());
+      }
+
+      // Names of Interfaces for which function dispatch is via a prototypal/static trampoline.
+      Set<String> maybeJsoTypeNames = Sets.newHashSet();
+      // Add names of interfaces that are only sometimes a JSO (aka there are both JSO and non-JSO
+      // imlementors).
+      for (com.google.gwt.core.ext.typeinfo.JClassType dualJsoImplInterface :
+          typeOracle.getDualJsoImplInterfaces()) {
+        maybeJsoTypeNames.add(dualJsoImplInterface.getQualifiedBinaryName());
+      }
+
+      compilerContext.getMinimalRebuildCache().setJsoTypeNames(jsoTypeNames, maybeJsoTypeNames);
     }
 
     private void synthesizeEntryMethodHolderInit(UnifyAst unifyAst,

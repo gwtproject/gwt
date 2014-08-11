@@ -136,6 +136,10 @@ public class MinimalRebuildCache implements Serializable {
   private final Set<String> deletedCompilationUnitNames = Sets.newHashSet();
   private final ImmediateTypeRelations immediateTypeRelations = new ImmediateTypeRelations();
   private final IntTypeIdGenerator intTypeIdGenerator = new IntTypeIdGenerator();
+  private final Set<String> jsoStatusChangedTypeNames = Sets.newHashSet();
+  private final Set<String> jsoTypeNames = Sets.newHashSet();
+  private final Set<String> maybeJsoStatusChangedTypeNames = Sets.newHashSet();
+  private final Set<String> maybeJsoTypeNames = Sets.newHashSet();
   private final Set<String> modifiedCompilationUnitNames = Sets.newHashSet();
   private final Multimap<String, String> nestedTypeNamesByUnitTypeName = HashMultimap.create();
   private final Map<Integer, PermutationRebuildCache> permutationRebuildCacheById =
@@ -192,7 +196,8 @@ public class MinimalRebuildCache implements Serializable {
       // generation.
       ImmutableList<String> modifiedTypeAndSubTypeNames = ImmutableList.copyOf(staleTypeNames);
       appendReferencingTypes(staleTypeNames, modifiedTypeAndSubTypeNames);
-      // TODO(stalcup): turn type JSO status changes into extended type staleness.
+      appendReferencingTypes(staleTypeNames, jsoStatusChangedTypeNames);
+      appendReferencingTypes(staleTypeNames, maybeJsoStatusChangedTypeNames);
       // TODO(stalcup): turn modifications of generator input resources into type staleness.
       staleTypeNames.removeAll(JProgram.SYNTHETIC_TYPE_NAMES);
     }
@@ -316,6 +321,26 @@ public class MinimalRebuildCache implements Serializable {
 
     this.allCompilationUnitNames.clear();
     this.allCompilationUnitNames.addAll(newAllCompilationUnitNames);
+  }
+
+  /**
+   * Records the names of JSO subtypes, single impl interfaces and dual impl interfaces as well as
+   * keeps track of types that entered or left either list in the most recent iteration.
+   */
+  public void setJsoTypeNames(Set<String> jsoTypeNames, Set<String> maybeJsoTypeNames) {
+    // Record the names of types that either became or stopped being a pure JSO (either a subtype or
+    // a single impl interface).
+    jsoStatusChangedTypeNames.clear();
+    jsoStatusChangedTypeNames.addAll(Sets.symmetricDifference(this.jsoTypeNames, jsoTypeNames));
+    this.jsoTypeNames.clear();
+    this.jsoTypeNames.addAll(jsoTypeNames);
+
+    // Record the names of interfaces that either became or stopped being a dual JSO impl.
+    maybeJsoStatusChangedTypeNames.clear();
+    maybeJsoStatusChangedTypeNames.addAll(
+        Sets.symmetricDifference(this.maybeJsoTypeNames, maybeJsoTypeNames));
+    this.maybeJsoTypeNames.clear();
+    this.maybeJsoTypeNames.addAll(maybeJsoTypeNames);
   }
 
   public void setModifiedCompilationUnitNames(TreeLogger logger,

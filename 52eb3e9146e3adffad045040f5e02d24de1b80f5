@@ -22,6 +22,30 @@
       "revId": "52eb3e9146e3adffad045040f5e02d24de1b80f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56ef4fff_300768ab",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Integer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-08-11T20:17:29Z",
+      "side": 1,
+      "message": "It\u0027s needed for hex (JDK uses unsigned int for hex) and I forgot about other radixes.\n\nSorry.",
+      "parentUuid": "76ea93f0_f4b79673",
+      "range": {
+        "startLine": 245,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 5
+      },
+      "revId": "52eb3e9146e3adffad045040f5e02d24de1b80f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

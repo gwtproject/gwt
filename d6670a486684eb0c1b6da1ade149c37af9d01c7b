@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f62cc32f_b5c90039",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-12T23:18:35Z",
+      "side": 1,
+      "message": "Eclipse adds this space gwt sources has plenty of these spaces in javadoc comments. Anyway deleted.",
+      "parentUuid": "56166fdd_9842f554",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 5
+      },
+      "revId": "d6670a486684eb0c1b6da1ade149c37af9d01c7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56166fdd_18e6e5f9",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2014-08-12T20:42:47Z",
       "side": 1,
       "message": "Perhaps this could be called SOURCEMAP_FILENAME_PATTERN",
+      "range": {
+        "startLine": 63,
+        "startChar": 31,
+        "endLine": 63,
+        "endChar": 52
+      },
+      "revId": "d6670a486684eb0c1b6da1ade149c37af9d01c7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f62cc32f_d5efdc90",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-12T23:18:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56166fdd_18e6e5f9",
       "range": {
         "startLine": 63,
         "startChar": 31,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "361bbb08_17855480",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-12T23:18:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56166fdd_d8e70dfa",
+      "range": {
+        "startLine": 64,
+        "startChar": 6,
+        "endLine": 64,
+        "endChar": 15
+      },
+      "revId": "d6670a486684eb0c1b6da1ade149c37af9d01c7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56166fdd_f87a1193",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
         "patchSetId": 10
@@ -82,6 +154,30 @@
       "writtenOn": "2014-08-12T20:42:47Z",
       "side": 1,
       "message": "nit: I\u0027m not sure that \".*$\" is needed, since we are just matching the prefix?",
+      "range": {
+        "startLine": 73,
+        "startChar": 29,
+        "endLine": 73,
+        "endChar": 44
+      },
+      "revId": "d6670a486684eb0c1b6da1ade149c37af9d01c7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1630777d_7657f08c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-12T23:18:35Z",
+      "side": 1,
+      "message": "The only thing is that we have to use matcher.find() instead of matcher.matches() Done",
+      "parentUuid": "56166fdd_f87a1193",
       "range": {
         "startLine": 73,
         "startChar": 29,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "1630777d_3605f877",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-12T23:18:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56166fdd_38988998",
+      "range": {
+        "startLine": 107,
+        "startChar": 51,
+        "endLine": 107,
+        "endChar": 57
+      },
+      "revId": "d6670a486684eb0c1b6da1ade149c37af9d01c7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56166fdd_58bbfdc4",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
         "patchSetId": 10
@@ -128,6 +248,30 @@
       "writtenOn": "2014-08-12T20:42:47Z",
       "side": 1,
       "message": "There should be a slash between the module name and the strong name.",
+      "range": {
+        "startLine": 504,
+        "startChar": 53,
+        "endLine": 504,
+        "endChar": 54
+      },
+      "revId": "d6670a486684eb0c1b6da1ade149c37af9d01c7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "361bbb08_1a1ed97e",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-12T23:18:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56166fdd_58bbfdc4",
       "range": {
         "startLine": 504,
         "startChar": 53,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "f62cc32f_b52d8018",
+        "filename": "dev/codeserver/test/com/google/gwt/dev/codeserver/SourceHandlerTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-12T23:18:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56166fdd_38b2c9e7",
+      "range": {
+        "startLine": 24,
+        "startChar": 14,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "d6670a486684eb0c1b6da1ade149c37af9d01c7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56166fdd_f879b147",
         "filename": "dev/codeserver/test/com/google/gwt/dev/codeserver/SourceHandlerTest.java",
         "patchSetId": 10
@@ -174,6 +342,30 @@
       "writtenOn": "2014-08-12T20:42:47Z",
       "side": 1,
       "message": "I think the methods being tested here can all be made static, so that you don\u0027t have to instantiate SourceHandler at all.",
+      "range": {
+        "startLine": 27,
+        "startChar": 32,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "d6670a486684eb0c1b6da1ade149c37af9d01c7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "361bbb08_3a1b9d8f",
+        "filename": "dev/codeserver/test/com/google/gwt/dev/codeserver/SourceHandlerTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-12T23:18:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56166fdd_f879b147",
       "range": {
         "startLine": 27,
         "startChar": 32,

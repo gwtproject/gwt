@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "361bbb08_3d34f7f0",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsStringMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-08-13T10:37:08Z",
+      "side": 1,
+      "message": "What about supporting here browsers with __proto__ key bug?\n\nI mean we could have field for storing __proto__ key value just like we did it for null key value in previous gwt\u0027s HashMap implementation? It would be nice to have almost modern implementation for android browser at least.",
+      "revId": "1d2c9ce9a3cb495e1b35939a2827942895f97fa6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "361bbb08_fd7aff92",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsStringMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-08-13T10:37:08Z",
+      "side": 1,
+      "message": "I dont understand the purpose of this method if InternalJsStringMapWithObjectsKeysBug just fixes Object.keys bug. What I see is that you work around bug with retrieving  value of __proto key.",
+      "revId": "1d2c9ce9a3cb495e1b35939a2827942895f97fa6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36901b99_32d66ed7",
         "filename": "user/test/org/apache/commons/collections/TestMap.java",
         "patchSetId": 1

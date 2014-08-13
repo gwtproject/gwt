@@ -115,7 +115,7 @@ public final class BeanHelper {
   }
 
   JType getElementType(PropertyDescriptor p, boolean useField) {
-    if (useField) {
+    if (useField && jClass.findField(p.getPropertyName()) != null) {
       return jClass.findField(p.getPropertyName()).getType();
     } else {
       return jClass.findMethod(GwtSpecificValidatorCreator.asGetter(p),

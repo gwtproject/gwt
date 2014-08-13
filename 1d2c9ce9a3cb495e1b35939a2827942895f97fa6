@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36901b99_32d66ed7",
+        "filename": "user/test/org/apache/commons/collections/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-08-13T02:19:14Z",
+      "side": 1,
+      "message": "Do you mean to use undefineds here?",
+      "range": {
+        "startLine": 324,
+        "startChar": 27,
+        "endLine": 324,
+        "endChar": 33
+      },
+      "revId": "1d2c9ce9a3cb495e1b35939a2827942895f97fa6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -51,6 +51,47 @@
       "revId": "564a7ff59b69321afcaf93f6333c681eaa5f6ac5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96df077f_e575f0da",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-14T22:53:44Z",
+      "side": 1,
+      "message": "Originally I wanted to avoid having to implement interfaces like OptionJsInteropMode because the Options class should be read-only and shouldn\u0027t have public setters. (At the time there wasn\u0027t much duplication between Super Dev Mode and the rest of the compiler.)\n\nMaybe each ArgHandler should contain the variable with the flag\u0027s value, and other code can copy the value from the ArgHandler after flag parsing is done? This would be more similar to Google\u0027s flag system.\n\nBut that\u0027s a big refactoring and I don\u0027t want to deal with it now. I\u0027m okay with the duplication, but we could also extend the ArgHandlerJsInteropMode, pass a null option, and override the one line that uses the option?",
+      "parentUuid": "96df077f_650440a4",
+      "revId": "564a7ff59b69321afcaf93f6333c681eaa5f6ac5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96df077f_48e6734c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-14T22:53:44Z",
+      "side": 1,
+      "message": "rename to just JsInteropMode to go with the other arg handlers",
+      "range": {
+        "startLine": 619,
+        "startChar": 16,
+        "endLine": 619,
+        "endChar": 39
+      },
+      "revId": "564a7ff59b69321afcaf93f6333c681eaa5f6ac5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

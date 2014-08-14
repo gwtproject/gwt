@@ -20,9 +20,11 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.ArgProcessorBase;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
 import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
+import com.google.gwt.dev.util.arg.JsInteropMode;
 import com.google.gwt.dev.util.arg.OptionLogLevel;
 import com.google.gwt.dev.util.arg.OptionSourceLevel;
 import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.util.tools.ArgHandler;
 import com.google.gwt.util.tools.ArgHandlerDir;
 import com.google.gwt.util.tools.ArgHandlerExtra;
@@ -47,7 +49,7 @@ public class Options {
   private boolean noPrecompile = false;
   private boolean isCompileTest = false;
   private File workDir;
-  private List<String> moduleNames = new ArrayList<String>();
+  private final List<String> moduleNames = new ArrayList<String>();
   private boolean allowMissingSourceDir = false;
   private final List<File> sourcePath = new ArrayList<File>();
   private String bindAddress = "127.0.0.1";
@@ -60,6 +62,7 @@ public class Options {
   private boolean failOnError = false;
   private boolean strictResources = false;
   private int compileTestRecompiles = 0;
+  private JsInteropMode jsInteropMode = JsInteropMode.NONE;
 
   /**
    * Sets each option to the appropriate value, based on command-line arguments.
@@ -210,6 +213,10 @@ public class Options {
     return failOnError;
   }
 
+  JsInteropMode getJsInteropMode() {
+    return jsInteropMode;
+  }
+
   private class ArgProcessor extends ArgProcessorBase {
 
     public ArgProcessor() {
@@ -248,6 +255,7 @@ public class Options {
           Options.this.logLevel = logLevel;
         }
       }));
+      registerHandler(new ArgHandlerJsInteropMode());
     }
 
     @Override
@@ -604,6 +612,43 @@ public class Options {
     @Override
     public boolean addExtraArg(String arg) {
       moduleNames.add(arg);
+      return true;
+    }
+  }
+
+  private class ArgHandlerJsInteropMode extends ArgHandlerString {
+
+    @Override
+    public String getPurpose() {
+      return "Specifies JsInterop mode, either NONE, JS, or CLOSURE (defaults to NONE)";
+    }
+
+    @Override
+    public String getTag() {
+      return "-XjsInteropMode";
+    }
+
+    @Override
+    public String[] getTagArgs() {
+      return new String[]{"[" + Joiner.on(", ").skipNulls().join(
+          JsInteropMode.values()) + "]"};
+    }
+
+    @Override
+    public boolean setString(String value) {
+      JsInteropMode mode = null;
+      try {
+        mode = JsInteropMode.valueOf(value.trim().toUpperCase());
+      } catch (Exception e) {
+        System.err.println("JsInteropMode " + value + " not recognized");
+      }
+
+      if (mode == null) {
+        System.err.println("JsInteropMode must be one of [" +
+            Joiner.on(", ").skipNulls().join(JsInteropMode.values()) + "].");
+        return false;
+      }
+      jsInteropMode = mode;
       return true;
     }
   }

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "76861367_e6a6e4ae",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-14T21:58:27Z",
+      "side": 1,
+      "message": "ok, I can set different error status per each condition",
+      "parentUuid": "96df077f_02660a2d",
+      "range": {
+        "startLine": 186,
+        "startChar": 54,
+        "endLine": 186,
+        "endChar": 71
+      },
+      "revId": "2b512fe9a9e0adb1bee604b9eb5338ee0d6fad30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96df077f_e275e6da",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2014-08-14T21:21:47Z",
       "side": 1,
       "message": "If we timed out then I don\u0027t think we should call the callback. (It\u0027s too late.)",
+      "range": {
+        "startLine": 196,
+        "startChar": 6,
+        "endLine": 196,
+        "endChar": 14
+      },
+      "revId": "2b512fe9a9e0adb1bee604b9eb5338ee0d6fad30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96df077f_c5742c53",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-14T21:58:27Z",
+      "side": 1,
+      "message": "I think it\u0027s better in this way, it could happen that the server lasts a while to respond, maybe more than the timeout, so we can show a \u0027not responding\u0027 message so as the user knows that something is going on, but then if the server responds we just continue.",
+      "parentUuid": "96df077f_e275e6da",
       "range": {
         "startLine": 196,
         "startChar": 6,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "96df077f_05c8d45a",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-14T21:58:27Z",
+      "side": 1,
+      "message": "Yep, calling progress before compiling is the safe in this patch until server is able to return an \u0027idle\u0027 status. When that is fixed we could change this script to just call recompile. But anyway with this call we will not fire a recompile if the server is bussy.",
+      "parentUuid": "96df077f_628f16d8",
+      "range": {
+        "startLine": 215,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 16
+      },
+      "revId": "2b512fe9a9e0adb1bee604b9eb5338ee0d6fad30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96df077f_42ac9221",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 3
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "76861367_26b5ccce",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-14T21:58:27Z",
+      "side": 1,
+      "message": "we could have some kind of empty div hidden and show it with JS, or hovering the error, I would leave that for a different patch. Normally the developer has opened the superdevmode console, so it is easier for him look at it",
+      "parentUuid": "96df077f_42ac9221",
+      "range": {
+        "startLine": 238,
+        "startChar": 58,
+        "endLine": 238,
+        "endChar": 75
+      },
+      "revId": "2b512fe9a9e0adb1bee604b9eb5338ee0d6fad30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96df077f_82217a03",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 3
@@ -105,6 +201,30 @@
       "writtenOn": "2014-08-14T21:21:47Z",
       "side": 1,
       "message": "This should be a different error; it should say busy instead of failed.",
+      "range": {
+        "startLine": 243,
+        "startChar": 53,
+        "endLine": 243,
+        "endChar": 72
+      },
+      "revId": "2b512fe9a9e0adb1bee604b9eb5338ee0d6fad30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b626cb4d_dfccce70",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-14T21:58:27Z",
+      "side": 1,
+      "message": "yes, it is possible",
+      "parentUuid": "96df077f_82217a03",
       "range": {
         "startLine": 243,
         "startChar": 53,

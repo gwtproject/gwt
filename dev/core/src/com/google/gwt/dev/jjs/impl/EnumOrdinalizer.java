@@ -37,6 +37,7 @@ import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNewArray;
 import com.google.gwt.dev.jjs.ast.JNonNullType;
+import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
@@ -390,18 +391,14 @@ public class EnumOrdinalizer {
         blackListIfEnumExpression(x.getInstance());
       } else if (x.getField().isStatic()) {
         /*
-         * Black list if the $VALUES static field is referenced, unless it's
-         * within the auto-generated clinit or values method, within the enum
-         * class itself.
+         * Black list if the $VALUES static field is referenced. Initially it referenced within
+         * auto-generated clinit and values method but those are pruned if not used.
          *
          * TODO (jbrosenberg): Investigate further whether referencing the
          * $VALUES array (as well as the values() method) should not block
          * ordinalization. Instead, convert $VALUES to an array of int.
          */
-        if (x.getField().getName().equals(JEnumType.VALUES_ARRAY_NAME)
-            && ((this.currentMethod.getEnclosingType() != x.getField().getEnclosingType()) ||
-                (!this.currentMethod.getName().equals("values") &&
-                 !this.currentMethod.getName().equals("$clinit")))) {
+        if (x.getField().getName().equals(JEnumType.VALUES_ARRAY_NAME)) {
           blackListIfEnum(x.getField().getEnclosingType(), x.getSourceInfo());
         }
       }
@@ -430,9 +427,14 @@ public class EnumOrdinalizer {
       } else if (x.getTarget().isStatic()) {
         // black-list static method calls on an enum class only for valueOf()
         // and values()
-        String methodName = x.getTarget().getName();
-        if (methodName.equals("valueOf") || methodName.equals("values")) {
-          blackListIfEnum(x.getTarget().getEnclosingType(), x.getSourceInfo());
+        JMethod target = x.getTarget();
+        maybeBlackListDueToStaticCall(x.getSourceInfo(), target);
+      }
+
+      if (x.getTarget().isNative()) {
+        // Black list enum types declared in parameters of native functions.
+        for (JParameter parameter :x.getTarget().getParams()) {
+          blackListIfEnum(parameter.getType(), x.getSourceInfo());
         }
       }
 
@@ -479,14 +481,11 @@ public class EnumOrdinalizer {
       if (x.getInstance() != null) {
         blackListIfEnumExpression(x.getInstance());
       } else if (x.getTarget().isStatic()) {
-        /*
-         * need to exempt static methodCalls for an enum class if it occurs
-         * within the enum class itself (such as in $clinit() or values())
-         */
-        if (this.currentMethod.getEnclosingType() != x.getTarget().getEnclosingType()) {
-          blackListIfEnum(x.getTarget().getEnclosingType(), x.getSourceInfo());
-        }
+        maybeBlackListDueToStaticCall(x.getSourceInfo(), x.getTarget());
       }
+
+      // Black list enums returned to JSNI.
+      blackListIfEnum(x.getTarget().getType(), x.getSourceInfo());
 
       // defer to ImplicitUpcastAnalyzer to check method call args & params
       super.endVisit(x, ctx);
@@ -609,7 +608,18 @@ public class EnumOrdinalizer {
         blackListIfEnum(instance.getType(), instance.getSourceInfo());
       }
     }
+
+    /**
+     * Blacklist the emun if there is a call to either MyEmun.valueOf() or MyEnum.values().
+     */
+    private void maybeBlackListDueToStaticCall(SourceInfo info, JMethod target) {
+      if (target.getEnclosingType().isEnumOrSubclass() != null &&
+          (target.getName().equals("valueOf") || target.getName().equals("values"))) {
+        blackListIfEnum(target.getEnclosingType(), info);
+      }
+    }
   }
+
   /**
    * A visitor which replaces enum types with an integer.
    *

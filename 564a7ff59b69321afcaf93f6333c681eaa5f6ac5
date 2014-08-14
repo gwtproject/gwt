@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "96df077f_0550d495",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-14T22:13:22Z",
+      "side": 1,
+      "message": "Gerrit commit message are not auto-wrapped. Can you please wrap manually?",
+      "parentUuid": "96df077f_e2a5e6a0",
+      "revId": "564a7ff59b69321afcaf93f6333c681eaa5f6ac5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96df077f_650440a4",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
         "patchSetId": 1

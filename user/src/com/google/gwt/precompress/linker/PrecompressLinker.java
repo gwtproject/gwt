@@ -26,12 +26,16 @@ import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
 import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.core.ext.linker.Shardable;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.util.regexfilter.RegexFilter;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Set;
 import java.util.zip.Deflater;
@@ -152,20 +156,15 @@ public class PrecompressLinker extends AbstractLinker {
         TreeLogger compressBranch = logger.branch(TreeLogger.TRACE,
             "Compressing " + art.getPartialPath());
 
-        InputStream originalBytes = art.getContents(compressBranch);
+        InputStream originalBytes = new BufferedInputStream(art.getContents(compressBranch));
         ByteArrayOutputStream compressedBytes = new ByteArrayOutputStream();
-        GZIPOutputStream gzip = new GZIPOutputStream(compressedBytes) {
+        OutputStream gzip = new BufferedOutputStream(new GZIPOutputStream(compressedBytes) {
             {
               def.setLevel(Deflater.BEST_COMPRESSION);
             }
-        };
+        });
 
-        int originalLength = 0;
-        int n;
-        while ((n = originalBytes.read(buf)) > 0) {
-          originalLength += n;
-          gzip.write(buf, 0, n);
-        }
+        long originalLength = Util.copyNoClose(originalBytes, gzip);
         gzip.close();
 
         byte[] compressed = compressedBytes.toByteArray();

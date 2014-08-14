@@ -255,19 +255,22 @@ public final class Util {
 
   /**
    * Copies all of the bytes from the input stream to the output stream until
-   * the input stream is EOF. Does not close either stream.
+   * the input stream is EOF. Does not close either stream; returns bytes copied
    */
-  public static void copyNoClose(InputStream is, OutputStream os)
+  public static long copyNoClose(InputStream is, OutputStream os)
       throws IOException {
     byte[] buf = takeThreadLocalBuf();
+    long bytesCopied = 0;
     try {
       int i;
       while ((i = is.read(buf)) != -1) {
         os.write(buf, 0, i);
+        bytesCopied += i;
       }
     } finally {
       releaseThreadLocalBuf(buf);
     }
+    return bytesCopied;
   }
 
   public static Reader createReader(TreeLogger logger, URL url)

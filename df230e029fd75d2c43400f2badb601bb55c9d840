@@ -46,6 +46,30 @@
       "revId": "df230e029fd75d2c43400f2badb601bb55c9d840",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96df077f_a8a61f94",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-14T23:40:10Z",
+      "side": 1,
+      "message": "Never mind I misunderstood. Looks fine.",
+      "parentUuid": "96df077f_c8744353",
+      "range": {
+        "startLine": 266,
+        "startChar": 20,
+        "endLine": 266,
+        "endChar": 36
+      },
+      "revId": "df230e029fd75d2c43400f2badb601bb55c9d840",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

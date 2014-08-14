@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1630777d_65d5f07b",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsMapFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-08-14T15:18:29Z",
+      "side": 1,
+      "message": "do you want to use Object.keys here?",
+      "revId": "9eebdde6f59793abe5c1e72f3672a2d18691c548",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

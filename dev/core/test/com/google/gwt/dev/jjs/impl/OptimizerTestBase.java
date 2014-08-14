@@ -291,6 +291,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
     String snippet = Joiner.on("\n").join(mainMethodSnippet);
     JProgram program = compileSnippet(mainMethodReturnType, snippet);
     JMethod method = findMethod(program, methodName);
+    program.addEntryMethod(method);
     boolean madeChanges = optimizeMethod(program, method);
     if (madeChanges && runDeadCodeElimination) {
       DeadCodeElimination.exec(program);

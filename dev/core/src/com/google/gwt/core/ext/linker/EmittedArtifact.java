@@ -21,6 +21,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.util.tools.Utility;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -229,7 +230,7 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
   public void writeTo(TreeLogger logger, OutputStream out)
       throws UnableToCompleteException {
     try {
-      InputStream in = getContents(logger);
+      InputStream in = new BufferedInputStream(getContents(logger));
       Util.copyNoClose(in, out);
       Utility.close(in);
     } catch (IOException e) {

@@ -16,6 +16,24 @@
       "revId": "8a43c98da5e254e1049258d3b6557f509756d4eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96df077f_48d2f30e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 6449
+      },
+      "writtenOn": "2014-08-14T23:29:41Z",
+      "side": 1,
+      "message": "Can someone explain what this means? I\u0027m not clear how to fix.",
+      "parentUuid": "96df077f_4805d3e1",
+      "revId": "8a43c98da5e254e1049258d3b6557f509756d4eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

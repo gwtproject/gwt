@@ -219,7 +219,7 @@ class InternalJsStringMap<K, V> {
   }
 
   protected native String[] keys() /*-{
-    return Object.keys(this.@InternalJsStringMap::backingMap);
+    return Object.getOwnPropertyNames(this.@InternalJsStringMap::backingMap);
   }-*/;
 
   protected final Entry<K, V> newMapEntry(final String key) {

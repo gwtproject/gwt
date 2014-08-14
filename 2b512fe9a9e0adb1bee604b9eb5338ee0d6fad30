@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96df077f_02660a2d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-14T21:21:47Z",
+      "side": 1,
+      "message": "If we set an error, it should be a different one like \"not responding\".\nBut for the progress indicator, actually I don\u0027t think we should show an error at all. If the server is not responding then the UI will freeze and this is a good enough indication that it\u0027s not working. The user can decide for themselves whether to reload the page or wait for the network issue to clear up.",
+      "range": {
+        "startLine": 186,
+        "startChar": 54,
+        "endLine": 186,
+        "endChar": 71
+      },
+      "revId": "2b512fe9a9e0adb1bee604b9eb5338ee0d6fad30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96df077f_e275e6da",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-14T21:21:47Z",
+      "side": 1,
+      "message": "If we timed out then I don\u0027t think we should call the callback. (It\u0027s too late.)",
+      "range": {
+        "startLine": 196,
+        "startChar": 6,
+        "endLine": 196,
+        "endChar": 14
+      },
+      "revId": "2b512fe9a9e0adb1bee604b9eb5338ee0d6fad30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96df077f_628f16d8",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-14T21:21:47Z",
+      "side": 1,
+      "message": "The current behavior is that if a recompile is in progress, the recompile call will block until the previous compile is finished and then do the compile. (This is because of how Java synchronization works.)\n\nPerhaps we should fix this, but I think it should be done by modifying the recompile call on the server to return early with an error code if the compiler is busy. That way we fix it consistently for everyone.\n\nIf we do it by polling the progress API, there is a minor race condition since someone else could start the compile. It doesn\u0027t seem very likely to happen in practice, but I think it\u0027s better to do it right.",
+      "range": {
+        "startLine": 215,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 16
+      },
+      "revId": "2b512fe9a9e0adb1bee604b9eb5338ee0d6fad30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96df077f_42ac9221",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-14T21:21:47Z",
+      "side": 1,
+      "message": "When the compile fails, can we link to the error log or is that too tricky in CSS?",
+      "range": {
+        "startLine": 238,
+        "startChar": 58,
+        "endLine": 238,
+        "endChar": 75
+      },
+      "revId": "2b512fe9a9e0adb1bee604b9eb5338ee0d6fad30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96df077f_82217a03",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-14T21:21:47Z",
+      "side": 1,
+      "message": "This should be a different error; it should say busy instead of failed.",
+      "range": {
+        "startLine": 243,
+        "startChar": 53,
+        "endLine": 243,
+        "endChar": 72
+      },
+      "revId": "2b512fe9a9e0adb1bee604b9eb5338ee0d6fad30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -53,6 +53,7 @@ import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.OutputFileSet;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -516,8 +517,8 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
         }
       }
       try {
-        OutputStream artifactStream = out.openForWrite(partialPath,
-            artifact.getLastModified());
+        OutputStream artifactStream = new BufferedOutputStream(out.openForWrite(partialPath,
+            artifact.getLastModified()));
         artifact.writeTo(artifactLogger, artifactStream);
         artifactStream.close();
       } catch (IOException e) {

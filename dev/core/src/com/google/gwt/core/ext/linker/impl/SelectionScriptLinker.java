@@ -156,7 +156,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     return sb.toString();
   }
 
-  protected static void replaceAll(StringBuilder buf, String search,
+  protected static void replaceAll(StringBuffer buf, String search,
       String replace) {
     int len = search.length();
     for (int pos = buf.indexOf(search); pos >= 0; pos = buf.indexOf(search,
@@ -168,7 +168,6 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
   private static char lastChar(StringBuilder sb) {
     return sb.charAt(sb.length() - 1);
   }
-
   /**
    * This method is left in place for existing subclasses of SelectionScriptLinker that have not
    * been upgraded for the sharding API.
@@ -318,7 +317,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
    * Generate a selection script. The selection information should previously have been scanned
    * using {@link PermutationsUtil#setupPermutationsMap(ArtifactSet)}.
    */
-  protected String fillSelectionScriptTemplate(StringBuilder selectionScript,
+  protected String fillSelectionScriptTemplate(StringBuffer selectionScript,
       TreeLogger logger, LinkerContext context, ArtifactSet artifacts,
       CompilationResult result) throws
       UnableToCompleteException {
@@ -429,7 +428,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
       LinkerContext context, ArtifactSet artifacts, CompilationResult result)
       throws UnableToCompleteException {
     String selectionScriptText;
-    StringBuilder buffer = readFileToStringBuilder(
+    StringBuffer buffer = readFileToStringBuffer(
         getSelectionScriptTemplate(logger, context), logger);
     selectionScriptText = fillSelectionScriptTemplate(
         buffer, logger, context, artifacts, result);
@@ -599,11 +598,11 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     return;
   }
 
-  protected StringBuilder readFileToStringBuilder(String filename,
+  protected StringBuffer readFileToStringBuffer(String filename,
       TreeLogger logger) throws UnableToCompleteException {
-    StringBuilder buffer;
+    StringBuffer buffer;
     try {
-      buffer = new StringBuilder(Utility.getFileFromClassPath(filename));
+      buffer = new StringBuffer(Utility.getFileFromClassPath(filename));
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to read file: " + filename, e);
       throw new UnableToCompleteException();

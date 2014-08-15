@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6540bb2_8c3aa6de",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-15T00:41:34Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 613,
+        "startChar": 21,
+        "endLine": 613,
+        "endChar": 25
+      },
+      "revId": "1dcd079388101c5c81c287f23d155d4d84bc7beb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6540bb2_aca682db",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/EnumOrdinalizerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-15T00:41:34Z",
+      "side": 1,
+      "message": "this was just for debugging and needs to be removed now?",
+      "range": {
+        "startLine": 1039,
+        "startChar": 6,
+        "endLine": 1040,
+        "endChar": 46
+      },
+      "revId": "1dcd079388101c5c81c287f23d155d4d84bc7beb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6540bb2_2c94d27d",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-15T00:41:34Z",
+      "side": 1,
+      "message": "why no blank line",
+      "range": {
+        "startLine": 240,
+        "startChar": 3,
+        "endLine": 241,
+        "endChar": 2
+      },
+      "revId": "1dcd079388101c5c81c287f23d155d4d84bc7beb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

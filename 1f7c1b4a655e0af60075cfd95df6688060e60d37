@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f674c37c_359ff0dc",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-15T22:23:45Z",
+      "side": 1,
+      "message": "I think this might be easier to read if the function to call is a local variable:\n\nvar startCompileIfIdle \u003d function(progress) {\n  ...\n};\nexecuteJsonp(serverUrl + \u0027/progress?\u0027, startCompileIfIdle, 1000);\n\nThis is so that it\u0027s easier to see which calls to executeJsonp have a timeout. (And similarly for other calls to executeJsonp.)",
+      "range": {
+        "startLine": 226,
+        "startChar": 4,
+        "endLine": 226,
+        "endChar": 16
+      },
+      "revId": "1f7c1b4a655e0af60075cfd95df6688060e60d37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f674c37c_d5707ced",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-15T22:23:45Z",
+      "side": 1,
+      "message": "This code might be easier to read using an early return:\n\nif (compiling || progress.status !\u003d \u0027idle\u0027) {\n  compileButton.className \u003d buttonClassName + \u0027 gwt-DevModeBusy\u0027;\n  return;\n}\n\n...",
+      "range": {
+        "startLine": 228,
+        "startChar": 6,
+        "endLine": 228,
+        "endChar": 8
+      },
+      "revId": "1f7c1b4a655e0af60075cfd95df6688060e60d37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f674c37c_d53ebcf5",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-15T22:23:45Z",
+      "side": 1,
+      "message": "Maybe something like this:\n\nfunction requestProgress() {\n  executeJsonp(..., receivedProgress, 1000);\n}\n\nfunction receivedProgress(progress) {\n  ...\n}\n\nvar pollInterval \u003d setInterval(requestProgress, 1000);",
+      "range": {
+        "startLine": 233,
+        "startChar": 39,
+        "endLine": 233,
+        "endChar": 47
+      },
+      "revId": "1f7c1b4a655e0af60075cfd95df6688060e60d37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

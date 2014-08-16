@@ -16,6 +16,24 @@
       "revId": "935dcbf651a4bb93f529ca5fc4602b1fc7d1496d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9310f93f_fae4a945",
+        "filename": "maven/poms/gwt/gwt-dev/pom-template.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2014-08-16T05:55:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9949f84f_192a2c69",
+      "revId": "935dcbf651a4bb93f529ca5fc4602b1fc7d1496d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

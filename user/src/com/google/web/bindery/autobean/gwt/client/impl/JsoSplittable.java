@@ -210,6 +210,14 @@ public final class JsoSplittable extends JavaScriptObject implements Splittable,
     return this[key] === undefined;
   }-*/;
 
+  @Override
+  public native boolean removeReified(String key) /*-{
+    if (this.__reified && this.__reified.hasOwnProperty(':' + key)) {
+      return delete this.__reified[':' + key];
+    }
+    return false;
+  }-*/;
+
   public native void setReified(String key, Object object) /*-{
     // Use a function object so native JSON.stringify will ignore
     (this.__reified || (this.__reified = function() {

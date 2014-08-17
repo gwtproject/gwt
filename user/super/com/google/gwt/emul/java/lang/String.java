@@ -16,6 +16,9 @@
 
 package java.lang;
 
+import static com.google.gwt.core.shared.impl.GwtPreconditions.checkNotNull;
+import static com.google.gwt.core.shared.impl.GwtPreconditions.checkStringBounds;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.impl.DoNotInline;
 
@@ -196,7 +199,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   public static String valueOf(char x[], int offset, int count) {
     int end = offset + count;
-    __checkBounds(x.length, offset, end);
+    checkStringBounds(offset, end, x.length);
     return __valueOf(x, offset, end);
   }
 
@@ -227,27 +230,6 @@ public final class String implements Comparable<String>, CharSequence,
   // CHECKSTYLE_OFF: This class has special needs.
 
   /**
-   * Checks that bounds are correct.
-   *
-   * @param legalCount the end of the legal range
-   * @param start must be >= 0
-   * @param end must be <= legalCount and must be >= start
-   * @throw StringIndexOutOfBoundsException if the range is not legal
-   * @skip
-   */
-  static void __checkBounds(int legalCount, int start, int end) {
-    if (start < 0) {
-      throw new StringIndexOutOfBoundsException(start);
-    }
-    if (end < start) {
-      throw new StringIndexOutOfBoundsException(end - start);
-    }
-    if (end > legalCount) {
-      throw new StringIndexOutOfBoundsException(end);
-    }
-  }
-
-  /**
    * @skip
    */
   static String[] __createArray(int numElements) {
@@ -256,6 +238,14 @@ public final class String implements Comparable<String>, CharSequence,
 
   static native String __substr(String str, int beginIndex, int len) /*-{
     return str.substr(beginIndex, len);
+  }-*/;
+
+  static native String __substring(String str, int beginIndex) /*-{
+    return str.substring(beginIndex);
+  }-*/;
+
+  static native String __substring(String str, int beginIndex, int endIndex) /*-{
+    return str.substring(beginIndex, endIndex);
   }-*/;
 
   /**
@@ -289,6 +279,10 @@ public final class String implements Comparable<String>, CharSequence,
     }
     return s;
   }-*/;
+
+  static String __valueOf(CharSequence x, int start, int end) {
+    return valueOf(x).substring(start, end);
+  }
 
   /**
    * @skip
@@ -686,6 +680,8 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
+    checkStringBounds(srcBegin, srcEnd, length());
+    checkStringBounds(dstBegin, dstBegin + (srcEnd - srcBegin), dst.length);
     for (int srcIdx = srcBegin; srcIdx < srcEnd; ++srcIdx) {
       dst[dstBegin++] = charAt(srcIdx);
     }
@@ -779,9 +775,7 @@ public final class String implements Comparable<String>, CharSequence,
 
   public boolean regionMatches(boolean ignoreCase, int toffset, String other,
       int ooffset, int len) {
-    if (other == null) {
-      throw new NullPointerException();
-    }
+    checkNotNull(other);
     if (toffset < 0 || ooffset < 0 || len <= 0) {
       return false;
     }
@@ -929,16 +923,20 @@ public final class String implements Comparable<String>, CharSequence,
     return toffset >= 0 && __substr(this, toffset, prefix.length()).equals(prefix);
   }
 
+  @Override
   public CharSequence subSequence(int beginIndex, int endIndex) {
-    return this.substring(beginIndex, endIndex);
+    return substring(beginIndex, endIndex);
   }
 
   public String substring(int beginIndex) {
-    return __substr(this, beginIndex, this.length() - beginIndex);
+    int length = length();
+    checkStringBounds(beginIndex, length, length);
+    return __substring(this, beginIndex);
   }
 
   public String substring(int beginIndex, int endIndex) {
-    return __substr(this, beginIndex, endIndex - beginIndex);
+    checkStringBounds(beginIndex, endIndex, length());
+    return __substring(this, beginIndex, endIndex);
   }
 
   public char[] toCharArray() {

@@ -122,6 +122,8 @@ public class StringBufferTest extends GWTTestCase {
     assertEquals(haystack.toString(), "befghi");
     haystack.deleteCharAt(1);
     assertEquals(haystack.toString(), "bfghi");
+    haystack.delete(4, 100);
+    assertEquals("bfgh", haystack.toString());
   }
 
   /**
@@ -188,6 +190,14 @@ public class StringBufferTest extends GWTTestCase {
     x = new StringBuffer("!");
     x.insert(1, C.TRUE_VALUE);
     assertEquals("!" + C.TRUE_STRING, x.toString());
+
+    CharSequence nullCharSequence = null;
+    x = new StringBuffer("!");
+    x.insert(1, nullCharSequence);
+    assertEquals("!null", x.toString());
+    x = new StringBuffer("!");
+    x.insert(1, nullCharSequence, 0, 3);
+    assertEquals("!nul", x.toString());
   }
 
   /**
@@ -278,6 +288,8 @@ public class StringBufferTest extends GWTTestCase {
     StringBuffer x = new StringBuffer("xxyyxx");
     x.replace(2, 4, "YY");
     assertEquals("xxYYxx", x.toString());
+    x.replace(5, 100, "XY");
+    assertEquals("xxYYxXY", x.toString());
   }
 
   public void testReverse() {

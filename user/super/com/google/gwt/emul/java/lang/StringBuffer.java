@@ -73,7 +73,7 @@ public final class StringBuffer extends AbstractStringBuilder implements CharSeq
 
   @Override
   public StringBuffer append(CharSequence x, int start, int end) {
-    append0(x, start, end);
+    string += String.__valueOf(x, start, end);
     return this;
   }
 
@@ -118,13 +118,12 @@ public final class StringBuffer extends AbstractStringBuilder implements CharSeq
   }
 
   public StringBuffer delete(int start, int end) {
-    replace0(start, end, "");
-    return this;
+    return replace(start, end, "");
   }
 
   public StringBuffer deleteCharAt(int start) {
-    replace0(start, start + 1, "");
-    return this;
+    String.__checkIndex(start, length());
+    return replace(start, start + 1, "");
   }
 
   public StringBuffer insert(int index, boolean x) {
@@ -144,11 +143,11 @@ public final class StringBuffer extends AbstractStringBuilder implements CharSeq
   }
 
   public StringBuffer insert(int index, CharSequence chars) {
-    return insert(index, chars.toString());
+    return insert(index, String.valueOf(chars));
   }
 
   public StringBuffer insert(int index, CharSequence chars, int start, int end) {
-    return insert(index, chars.subSequence(start, end).toString());
+    return insert(index, String.__valueOf(chars, start, end));
   }
 
   public StringBuffer insert(int index, double x) {
@@ -172,8 +171,7 @@ public final class StringBuffer extends AbstractStringBuilder implements CharSeq
   }
 
   public StringBuffer insert(int index, String x) {
-    replace0(index, index, x);
-    return this;
+    return replace(index, index, x);
   }
 
   public StringBuffer replace(int start, int end, String toInsert) {

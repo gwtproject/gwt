@@ -450,6 +450,8 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
+    checkStringBounds(srcBegin, srcEnd, length());
+    checkStringBounds(dstBegin, dstBegin + (srcEnd - srcBegin), dst.length);
     for (int srcIdx = srcBegin; srcIdx < srcEnd; ++srcIdx) {
       dst[dstBegin++] = charAt(srcIdx);
     }
@@ -696,15 +698,16 @@ public final class String implements Comparable<String>, CharSequence,
 
   @Override
   public CharSequence subSequence(int beginIndex, int endIndex) {
-    return this.substring(beginIndex, endIndex);
+    return substring(beginIndex, endIndex);
   }
 
   public String substring(int beginIndex) {
-    return __substr(this, beginIndex, this.length() - beginIndex);
+    return substring(beginIndex, length());
   }
 
   public String substring(int beginIndex, int endIndex) {
-    return __substr(this, beginIndex, endIndex - beginIndex);
+    checkStringBounds(beginIndex, endIndex, length());
+    return StringHelper.substring(this, beginIndex, endIndex);
   }
 
   public char[] toCharArray() {

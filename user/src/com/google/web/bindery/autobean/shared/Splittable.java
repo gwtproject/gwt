@@ -136,6 +136,14 @@ public interface Splittable {
   boolean isUndefined(String key);
 
   /**
+   * Removes a tag value from the Splittable.
+   * 
+   * @param key the key for the value to be removed
+   * @returns {@code true} if the value of the key has been removed.
+   */
+  boolean removeReified(String key);
+  
+  /**
    * Associates a tag value with the Splittable.
    */
   void setReified(String key, Object object);

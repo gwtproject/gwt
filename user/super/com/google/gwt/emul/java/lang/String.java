@@ -431,6 +431,8 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
+    checkStringBounds(srcBegin, srcEnd, length());
+    checkStringBounds(dstBegin, dstBegin + (srcEnd - srcBegin), dst.length);
     for (int srcIdx = srcBegin; srcIdx < srcEnd; ++srcIdx) {
       dst[dstBegin++] = charAt(srcIdx);
     }
@@ -456,7 +458,7 @@ public final class String implements Comparable<String>, CharSequence,
   public int indexOf(String str, int startIndex) {
     return asNativeString().indexOf(str, startIndex);
   }
-  
+
   public String intern() {
     return this;
   }
@@ -476,7 +478,7 @@ public final class String implements Comparable<String>, CharSequence,
   public int lastIndexOf(String str) {
     return asNativeString().lastIndexOf(str);
   }
-  
+
   public int lastIndexOf(String str, int start) {
     return asNativeString().lastIndexOf(str, start);
   }
@@ -672,15 +674,16 @@ public final class String implements Comparable<String>, CharSequence,
 
   @Override
   public CharSequence subSequence(int beginIndex, int endIndex) {
-    return this.substring(beginIndex, endIndex);
+    return substring(beginIndex, endIndex);
   }
 
   public String substring(int beginIndex) {
-    return asNativeString().substr(beginIndex, this.length() - beginIndex);
+    return substring(beginIndex, length());
   }
 
   public String substring(int beginIndex, int endIndex) {
-    return asNativeString().substr(beginIndex, endIndex - beginIndex);
+    checkStringBounds(beginIndex, endIndex, length());
+    return asNativeString().substring(beginIndex, endIndex);
   }
 
   public char[] toCharArray() {
@@ -717,7 +720,7 @@ public final class String implements Comparable<String>, CharSequence,
   public String toUpperCase() {
     return asNativeString().toLocaleUpperCase();
   }
-  
+
   // See the notes in lowerCase pair.
   public String toUpperCase(Locale locale) {
     return locale == Locale.getDefault()
@@ -757,6 +760,7 @@ public final class String implements Comparable<String>, CharSequence,
     public native int lastIndexOf(String str, int start);
     public native String replace(NativeRegExp regex, String replace);
     public native String substr(int beginIndex, int len);
+    public native String substring(int beginIndex, int endIndex);
     public native String toLocaleLowerCase();
     public native String toLocaleUpperCase();
     public native String toLowerCase();

@@ -20,6 +20,10 @@ package javaemul.internal;
  * in GWT's emul.
  */
 public class StringHelper {
+  public static native String substring(String str, int beginIndex, int endIndex) /*-{
+    return str.substring(beginIndex, endIndex);
+  }-*/;
+
   public static String valueOf(char x[], int start, int end) {
     // Work around function.prototype.apply call stack size limits:
     // https://code.google.com/p/v8/issues/detail?id=2896
@@ -32,6 +36,10 @@ public class StringHelper {
       batchStart = batchEnd;
     }
     return s;
+  }
+
+  public static String valueOf(CharSequence x, int start, int end) {
+    return String.valueOf(x).substring(start, end);
   }
 
   private static native String fromCharCode(Object array) /*-{

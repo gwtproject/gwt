@@ -63,6 +63,30 @@
       "revId": "adb845058dbde14c834cf44e563b63b54657f584",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9310f93f_1aa3dd9e",
+        "filename": "user/src/com/google/gwt/i18n/shared/impl/cldr/DateTimeFormatInfoImpl_en_MS.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-17T08:43:37Z",
+      "side": 1,
+      "message": "Forget my last comment, the generator is able to figure out the inheritance if we delete these empty classes.\nThe reason why these classes are generated is because in the map of locale data, they are there just with version category info.\nI have modified the getNonEmptyLocales in the cldr script to ignore these entries (see I56d61621591138ac2b568ebe8bb2b7d5173bb3d2)\nI\u0027ll commit a new set with all these empty files removed.",
+      "parentUuid": "5664af99_08630793",
+      "range": {
+        "startLine": 27,
+        "startChar": 13,
+        "endLine": 27,
+        "endChar": 41
+      },
+      "revId": "adb845058dbde14c834cf44e563b63b54657f584",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

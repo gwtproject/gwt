@@ -264,6 +264,11 @@ public class JsonSplittable implements Splittable, HasSplittable {
     return !obj.has(key);
   }
 
+  @Override
+  public boolean removeReified(String key) {
+    return reified.remove(key) != null;
+  }
+
   public void setReified(String key, Object object) {
     reified.put(key, object);
   }

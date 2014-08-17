@@ -143,6 +143,33 @@ public class GwtPreconditions {
   }
 
   /**
+   * Ensures that {@code start} and {@code end} specify a valid <i>positions</i> in a string
+   * of size {@code size}, and are in order. A position index may range from zero to
+   * {@code size}, inclusive.
+   */
+  public static void checkStringBounds(int start, int end, int size) {
+    if (start < 0) {
+      throw new StringIndexOutOfBoundsException(start);
+    }
+    if (end < start) {
+      throw new StringIndexOutOfBoundsException(end - start);
+    }
+    if (end > size) {
+      throw new StringIndexOutOfBoundsException(end);
+    }
+  }
+
+  /**
+   * Ensures that {@code index} specifies a valid <i>element</i> in a string of size
+   * {@code size}. An element index may range from zero, inclusive, to {@code size}, exclusive.
+   */
+  public static void checkStringIndex(int index, int size) {
+    if (index < 0 || index >= size) {
+      throw new StringIndexOutOfBoundsException(index);
+    }
+  }
+
+  /**
    * Ensures that an object reference passed as a parameter to the calling method is not null.
    */
   public static <T> T checkNotNull(T reference) {

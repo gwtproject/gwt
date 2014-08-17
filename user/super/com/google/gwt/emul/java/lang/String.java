@@ -253,6 +253,20 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   /**
+   * Checks that index is correct.
+   *
+   * @param index must be >= 0 and <= legalCount
+   * @param legalCount the end of the legal range
+   * @throw StringIndexOutOfBoundsException if the index is not legal
+   * @skip
+   */
+  static void __checkIndex(int index, int legalCount) {
+    if (index < 0 || index >= legalCount) {
+      throw new StringIndexOutOfBoundsException(index);
+    }
+  }
+
+  /**
    * @skip
    */
   static String[] __createArray(int numElements) {
@@ -261,6 +275,10 @@ public final class String implements Comparable<String>, CharSequence,
 
   static native String __substr(String str, int beginIndex, int len) /*-{
     return str.substr(beginIndex, len);
+  }-*/;
+
+  static native String __substring(String str, int beginIndex, int endIndex) /*-{
+    return str.substring(beginIndex, endIndex);
   }-*/;
 
   /**
@@ -696,6 +714,8 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
+    __checkBounds(length(), srcBegin, srcEnd);
+    __checkBounds(dst.length, dstBegin, dstBegin + (srcEnd - srcBegin));
     for (int srcIdx = srcBegin; srcIdx < srcEnd; ++srcIdx) {
       dst[dstBegin++] = charAt(srcIdx);
     }
@@ -939,17 +959,19 @@ public final class String implements Comparable<String>, CharSequence,
     return toffset >= 0 && indexOf(prefix, toffset) == toffset;
   }
 
+  @Override
   public CharSequence subSequence(int beginIndex, int endIndex) {
-    return this.substring(beginIndex, endIndex);
+    return substring(beginIndex, endIndex);
   }
 
-  public native String substring(int beginIndex) /*-{
-    return this.substr(beginIndex, this.length - beginIndex);
-  }-*/;
+  public String substring(int beginIndex) {
+    return substring(beginIndex, length());
+  }
 
-  public native String substring(int beginIndex, int endIndex) /*-{
-    return this.substr(beginIndex, endIndex - beginIndex);
-  }-*/;
+  public String substring(int beginIndex, int endIndex) {
+    __checkBounds(length(), beginIndex, endIndex);
+    return __substring(this, beginIndex, endIndex);
+  }
 
   public char[] toCharArray() {
     int n = this.length();

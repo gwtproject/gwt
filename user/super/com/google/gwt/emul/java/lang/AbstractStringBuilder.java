@@ -23,6 +23,10 @@ package java.lang;
  */
 abstract class AbstractStringBuilder {
 
+  static String __valueOf(CharSequence x, int start, int end) {
+    return String.valueOf(x).substring(start, end);
+  }
+
   String string;
 
   public AbstractStringBuilder(String string) {
@@ -61,11 +65,7 @@ abstract class AbstractStringBuilder {
   }
 
   public void getChars(int srcStart, int srcEnd, char[] dst, int dstStart) {
-    String.__checkBounds(length(), srcStart, srcEnd);
-    String.__checkBounds(dst.length, dstStart, dstStart + (srcEnd - srcStart));
-    while (srcStart < srcEnd) {
-      dst[dstStart++] = string.charAt(srcStart++);
-    }
+    string.getChars(srcStart, srcEnd, dst, dstStart);
   }
 
   /**
@@ -73,6 +73,7 @@ abstract class AbstractStringBuilder {
    * character level manipulation, you are strongly advised to use a char[] directly.
    */
   public void setCharAt(int index, char x) {
+    String.__checkIndex(index, length());
     replace0(index, index + 1, String.valueOf(x));
   }
 
@@ -109,19 +110,17 @@ abstract class AbstractStringBuilder {
     return string;
   }
 
-  void append0(CharSequence x, int start, int end) {
-    if (x == null) {
-      x = "null";
-    }
-    string += x.subSequence(start, end);
-  }
-
   void appendCodePoint0(int x) {
     string += String.valueOf(Character.toChars(x));
   }
 
   void replace0(int start, int end, String toInsert) {
-    string = string.substring(0, start) + toInsert + string.substring(end);
+    String s = string;
+    string = s.substring(0, start) + toInsert;
+    if (end > start) {
+      end = Math.min(end, s.length());
+      string += s.substring(end);
+    }
   }
 
   void reverse0() {

@@ -63,11 +63,7 @@ abstract class AbstractStringBuilder {
   }
 
   public void getChars(int srcStart, int srcEnd, char[] dst, int dstStart) {
-    checkStringBounds(srcStart, srcEnd, length());
-    checkStringBounds(dstStart, dstStart + (srcEnd - srcStart), dst.length);
-    while (srcStart < srcEnd) {
-      dst[dstStart++] = string.charAt(srcStart++);
-    }
+    string.getChars(srcStart, srcEnd, dst, dstStart);
   }
 
   /**
@@ -111,19 +107,15 @@ abstract class AbstractStringBuilder {
     return string;
   }
 
-  void append0(CharSequence x, int start, int end) {
-    if (x == null) {
-      x = "null";
-    }
-    string += x.subSequence(start, end);
-  }
-
   void appendCodePoint0(int x) {
     string += String.valueOf(Character.toChars(x));
   }
 
   void replace0(int start, int end, String toInsert) {
-    string = string.substring(0, start) + toInsert + string.substring(end);
+    int len = string.length();
+    end = Math.min(end, len);
+    checkStringBounds(start, end, len);
+    string = string.substring(0, start) + toInsert + string.substring(end, len);
   }
 
   void reverse0() {
@@ -145,6 +137,10 @@ abstract class AbstractStringBuilder {
     }
 
     string = new String(buffer);
+  }
+
+  static String valueOf0(CharSequence x, int start, int end) {
+    return String.valueOf(x).substring(start, end);
   }
 
   private static void swap(char[] buffer, int f, int s) {

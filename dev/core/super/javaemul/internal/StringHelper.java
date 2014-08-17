@@ -34,6 +34,10 @@ public class StringHelper {
     return s;
   }
 
+  public static String valueOf(CharSequence x, int start, int end) {
+    return String.valueOf(x).substring(start, end);
+  }
+
   private static native String fromCharCode(Object array) /*-{
     return String.fromCharCode.apply(null, array);
   }-*/;

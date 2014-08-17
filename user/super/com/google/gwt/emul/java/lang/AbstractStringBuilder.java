@@ -63,11 +63,7 @@ abstract class AbstractStringBuilder {
   }
 
   public void getChars(int srcStart, int srcEnd, char[] dst, int dstStart) {
-    checkStringBounds(srcStart, srcEnd, length());
-    checkStringBounds(dstStart, dstStart + (srcEnd - srcStart), dst.length);
-    while (srcStart < srcEnd) {
-      dst[dstStart++] = string.charAt(srcStart++);
-    }
+    string.getChars(srcStart, srcEnd, dst, dstStart);
   }
 
   /**
@@ -111,19 +107,18 @@ abstract class AbstractStringBuilder {
     return string;
   }
 
-  void append0(CharSequence x, int start, int end) {
-    if (x == null) {
-      x = "null";
-    }
-    string += x.subSequence(start, end);
-  }
-
   void appendCodePoint0(int x) {
     string += String.valueOf(Character.toChars(x));
   }
 
   void replace0(int start, int end, String toInsert) {
-    string = string.substring(0, start) + toInsert + string.substring(end);
+    String s = string;
+    int len = s.length();
+    checkStringBounds(start, end, len);
+    string = s.substring(0, start) + toInsert;
+    if (end < len) {
+      string += s.substring(end);
+    }
   }
 
   void reverse0() {

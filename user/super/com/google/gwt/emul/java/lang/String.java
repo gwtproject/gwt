@@ -163,8 +163,12 @@ public final class String implements Comparable<String>, CharSequence,
 
   // CHECKSTYLE_OFF: This class has special needs.
 
-  static native String __substr(String str, int beginIndex, int len) /*-{
+  private static native String __substr(String str, int beginIndex, int len) /*-{
     return str.substr(beginIndex, len);
+  }-*/;
+
+  private static native String __substring(String str, int beginIndex, int endIndex) /*-{
+    return str.substring(beginIndex, endIndex);
   }-*/;
 
   /**
@@ -339,7 +343,7 @@ public final class String implements Comparable<String>, CharSequence,
   public char charAt(int index) {
     return charAt(this, index);
   }
-  
+
   private static native char charAt(String s, int index) /*-{
     return s.charCodeAt(index);
   }-*/;
@@ -368,7 +372,7 @@ public final class String implements Comparable<String>, CharSequence,
   public String concat(String str) {
     return concat(this, str);
   }
-  
+
   private static native String concat(String s, String str) /*-{
     return s + str;
   }-*/;
@@ -403,7 +407,7 @@ public final class String implements Comparable<String>, CharSequence,
   public boolean equalsIgnoreCase(String other) {
     return equalsIgnoreCase(this, other);
   }
-  
+
   private static native boolean equalsIgnoreCase(String s, String other) /*-{
     if (other == null) {
       return false;
@@ -428,6 +432,8 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
+    checkStringBounds(srcBegin, srcEnd, length());
+    checkStringBounds(dstBegin, dstBegin + (srcEnd - srcBegin), dst.length);
     for (int srcIdx = srcBegin; srcIdx < srcEnd; ++srcIdx) {
       dst[dstBegin++] = charAt(srcIdx);
     }
@@ -453,11 +459,11 @@ public final class String implements Comparable<String>, CharSequence,
   private static native int indexOf(String s, String str) /*-{
     return s.indexOf(str);
   }-*/;
-  
+
   public int indexOf(String str, int startIndex) {
     return indexOf(this, str, startIndex);
   }
-  
+
   private static native int indexOf(String s, String str, int startIndex) /*-{
     return s.indexOf(str, startIndex);
   }-*/;
@@ -481,7 +487,7 @@ public final class String implements Comparable<String>, CharSequence,
   public int lastIndexOf(String str) {
     return lastIndexOf(this, str);
   }
-  
+
   private static native int lastIndexOf(String s, String str) /*-{
     return s.lastIndexOf(str);
   }-*/;
@@ -489,7 +495,7 @@ public final class String implements Comparable<String>, CharSequence,
   public int lastIndexOf(String str, int start) {
     return lastIndexOf(this, str, start);
   }
-  
+
   private static native int lastIndexOf(String s, String str, int start) /*-{
     return s.lastIndexOf(str, start);
   }-*/;
@@ -514,7 +520,7 @@ public final class String implements Comparable<String>, CharSequence,
   public boolean matches(String regex) {
     return matches(this, regex);
   }
-  
+
   private static native boolean matches(String s, String regex) /*-{
     // We surround the regex with '^' and '$' because it must match
     // the entire string.
@@ -708,15 +714,16 @@ public final class String implements Comparable<String>, CharSequence,
 
   @Override
   public CharSequence subSequence(int beginIndex, int endIndex) {
-    return this.substring(beginIndex, endIndex);
+    return substring(beginIndex, endIndex);
   }
 
   public String substring(int beginIndex) {
-    return __substr(this, beginIndex, this.length() - beginIndex);
+    return substring(beginIndex, length());
   }
 
   public String substring(int beginIndex, int endIndex) {
-    return __substr(this, beginIndex, endIndex - beginIndex);
+    checkStringBounds(beginIndex, endIndex, length());
+    return __substring(this, beginIndex, endIndex);
   }
 
   public char[] toCharArray() {
@@ -737,7 +744,7 @@ public final class String implements Comparable<String>, CharSequence,
   public String toLowerCase() {
     return toLowerCase(this);
   }
-  
+
   private static native String toLowerCase(String s) /*-{
     return s.toLowerCase();
   }-*/;
@@ -745,7 +752,7 @@ public final class String implements Comparable<String>, CharSequence,
   /**
    * Transforms the String to lower-case based on the native locale of the browser.
    */
-  private native String toLocaleLowerCase(String s) /*-{
+  private static native String toLocaleLowerCase(String s) /*-{
     return s.toLocaleLowerCase();
   }-*/;
 
@@ -763,7 +770,7 @@ public final class String implements Comparable<String>, CharSequence,
   public String toUpperCase() {
     return toLocaleUpperCase(this);
   }
-  
+
   private static native String toUpperCase(String s) /*-{
     return s.toUpperCase();
   }-*/;

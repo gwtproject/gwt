@@ -113,11 +113,19 @@ public class Options {
     return workDir;
   }
 
+  public void setWorkDir(File workDir) {
+    this.workDir = workDir;
+  }
+
   /**
    * The names of the module that will be compiled (along with all its dependencies).
    */
   List<String> getModuleNames() {
     return moduleNames;
+  }
+
+  public void setModuleNames(List<String> moduleNames) {
+    this.moduleNames.addAll(moduleNames);
   }
 
   /**
@@ -127,6 +135,10 @@ public class Options {
     return allowMissingSourceDir;
   }
 
+  public void setAllowMissingSourceDir(boolean allowMissingSourceDir) {
+    this.allowMissingSourceDir = allowMissingSourceDir;
+  }
+
   /**
    * Whether to compile a series of reusable libraries that are linked at the end.
    */
@@ -134,6 +146,9 @@ public class Options {
     return compileIncremental;
   }
 
+  public void setCompileIncremental(boolean compileIncremental) {
+    this.compileIncremental = compileIncremental;
+  }
   /**
    * Compiles faster by creating a JavaScript file per class. Can't be turned on at the same time as
    * shouldCompileIncremental().
@@ -142,18 +157,30 @@ public class Options {
     return compilePerFile;
   }
 
+  public void setCompilePerFile(boolean compilePerFile) {
+    this.compilePerFile = compilePerFile;
+  }
+
   /**
    * Whether the codeServer should start without precompiling modules.
    */
-  boolean getNoPrecompile() {
+  public boolean getNoPrecompile() {
     return noPrecompile;
+  }
+
+  public void setNoPrecompile(boolean noPrecompile) {
+    this.noPrecompile = noPrecompile;
   }
 
   /**
    * The tree logger level.
    */
-  TreeLogger.Type getLogLevel() {
+  public TreeLogger.Type getLogLevel() {
     return logLevel;
+  }
+
+  public void setLogLevel(TreeLogger.Type logLevel) {
+    this.logLevel = logLevel;
   }
 
   /**
@@ -163,36 +190,60 @@ public class Options {
     return sourceLevel;
   }
 
+  public void setSourceLevel(SourceLevel sourceLevel) {
+    this.sourceLevel = sourceLevel;
+  }
+
   /**
    * If true, just compile the modules, then exit.
    */
-  boolean isCompileTest() {
+  public boolean isCompileTest() {
     return isCompileTest;
+  }
+
+  public void setCompileTest(boolean compileTest) {
+    this.isCompileTest = compileTest;
   }
 
   /**
    * The IP address where the code server should listen.
    */
-  String getBindAddress() {
+  public String getBindAddress() {
     return bindAddress;
   }
 
-  int getCompileTestRecompiles() {
+  public void setBindAddress(String bindAddress) {
+    this.bindAddress = bindAddress;
+  }
+
+  public int getCompileTestRecompiles() {
     return compileTestRecompiles;
+  }
+
+  public void setCompileTestRecompiles(int compileTestRecompiles) {
+    this.compileTestRecompiles  = compileTestRecompiles;
   }
 
   /**
    * The hostname to put in a URL pointing to the code server.
    */
-  String getPreferredHost() {
+  public String getPreferredHost() {
     return preferredHost;
+  }
+
+  public void setPreferredHost(String preferredHost) {
+    this.preferredHost = preferredHost;
   }
 
   /**
    * The port where the code server will listen for HTTP requests.
    */
-  int getPort() {
+  public int getPort() {
     return port;
+  }
+
+  public void setPort(int port) {
+    this.port = port;
   }
 
   /**
@@ -202,8 +253,16 @@ public class Options {
     return strictResources;
   }
 
+  public void setStrictResources(boolean strictResources) {
+    this.strictResources = strictResources;
+  }
+
   List<File> getSourcePath() {
     return sourcePath;
+  }
+
+  public void setSourcePath(List<File> sourcePath) {
+    this.sourcePath.addAll(sourcePath);
   }
 
   /**
@@ -214,8 +273,16 @@ public class Options {
     return failOnError;
   }
 
+  public void setFailOnError(boolean failOnError) {
+    this.failOnError = failOnError;
+  }
+
   JsInteropMode getJsInteropMode() {
     return jsInteropMode;
+  }
+
+  public void setJsInteropMode(JsInteropMode jsInteropMode) {
+    this.jsInteropMode = jsInteropMode;
   }
 
   private class ArgProcessor extends ArgProcessorBase {

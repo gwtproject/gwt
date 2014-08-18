@@ -37,12 +37,12 @@ import java.util.concurrent.atomic.AtomicReference;
  * Contains everything that the code server knows about a GWT app (module), including how
  * to recompile it and where the compiler output is.
  */
-class ModuleState {
+public class ModuleState {
   private final AtomicReference<CompileDir> current = new AtomicReference<CompileDir>();
   private final Recompiler recompiler;
   private final TreeLogger logger;
 
-  ModuleState(Recompiler recompiler, TreeLogger logger, boolean noPrecompile)
+  public ModuleState(Recompiler recompiler, TreeLogger logger, boolean noPrecompile)
       throws UnableToCompleteException {
     this.recompiler = recompiler;
     this.logger = logger;

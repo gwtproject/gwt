@@ -27,7 +27,7 @@ import java.io.IOException;
  * In addition, there are some files that are shared between recompiles, such as
  * the unit cache.
  */
-class AppSpace {
+public class AppSpace {
 
   static final String COMPILE_DIR_PREFIX = "compile-";
   private final File root;
@@ -56,7 +56,7 @@ class AppSpace {
    * @param dir the directory to use. It need not exist, but
    * the parent dir should exist.
    */
-  static AppSpace create(File dir) throws IOException {
+  public static AppSpace create(File dir) throws IOException {
     if (!dir.exists() && !dir.mkdir()) {
       throw new IOException("can't create app directory: " + dir);
     }

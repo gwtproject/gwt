@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletResponse;
  * source files to download. Each source file will have a path like
  * "/sourcemaps/\{module name\}/src/{filename}".</p>
  */
-class SourceHandler {
+public class SourceHandler {
 
   /**
    * The URL prefix for all source maps and Java source code.
@@ -78,7 +78,7 @@ class SourceHandler {
 
   private final TreeLogger logger;
 
-  SourceHandler(Modules modules, TreeLogger logger) {
+  public SourceHandler(Modules modules, TreeLogger logger) {
     this.modules = modules;
     this.logger = logger;
   }

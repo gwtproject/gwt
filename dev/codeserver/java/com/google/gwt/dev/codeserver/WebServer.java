@@ -93,7 +93,7 @@ public class WebServer {
   private final TreeLogger logger;
   private Server server;
 
-  WebServer(SourceHandler handler, Modules modules, String bindAddress, int port,
+  public WebServer(SourceHandler handler, Modules modules, String bindAddress, int port,
       TreeLogger logger) {
     this.handler = handler;
     this.modules = modules;

@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * uses this directory to find the {@link ModuleState} associated with a URL and to list all the
  * modules on the front page.
  */
-class Modules implements Iterable<String> {
+public class Modules implements Iterable<String> {
   private final Map<String, ModuleState> moduleStateMap =
       new HashMap<String, ModuleState>();
 
@@ -60,7 +60,7 @@ class Modules implements Iterable<String> {
     return moduleStateMap.keySet().iterator();
   }
 
-  void defaultCompileAll(boolean noPrecompile) throws UnableToCompleteException {
+  public void defaultCompileAll(boolean noPrecompile) throws UnableToCompleteException {
     for (ModuleState m: moduleStateMap.values()) {
       m.defaultCompile(noPrecompile);
     }

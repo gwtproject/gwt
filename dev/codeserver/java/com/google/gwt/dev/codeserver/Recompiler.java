@@ -52,7 +52,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * Recompiles a GWT module on demand.
  */
-class Recompiler {
+public class Recompiler {
 
   private final AppSpace appSpace;
   private final String originalModuleName;
@@ -76,7 +76,7 @@ class Recompiler {
   private CompilerContext compilerContext;
   private Options options;
 
-  Recompiler(AppSpace appSpace, String moduleName, Options options, TreeLogger logger) {
+  public Recompiler(AppSpace appSpace, String moduleName, Options options, TreeLogger logger) {
     this.appSpace = appSpace;
     this.originalModuleName = moduleName;
     this.options = options;

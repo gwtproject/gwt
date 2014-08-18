@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7315452e_b9f07f6c",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/JsonSplittable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-18T18:29:54Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "24a3ac37df9e84d3ef788a3dd0c0d95d8edc64ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

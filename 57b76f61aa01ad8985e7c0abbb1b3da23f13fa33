@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6220389_6561c65f",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/DateTimeFormatInfoProcessor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-08-18T03:29:57Z",
+      "side": 0,
+      "message": "I think the current data is ok since root.xml has these entries, but it might be better to set them as defaults rather than fail.  I\u0027m ok leaving this out, as if it becomes a problem the compile will fail letting us know.",
+      "revId": "57b76f61aa01ad8985e7c0abbb1b3da23f13fa33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "d3043104_3fa1e34d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-18T18:49:43Z",
+      "side": 1,
+      "message": "Yep, those English exceptions hard to understand for us. We learn at school that before vowel we must write \u0027an\u0027, but in advanced English they teach that there are some exceptions depending on pronunciation. You have about 12 vowels since we only differentiate 5 :-(",
+      "parentUuid": "1626b79c_a010062a",
+      "range": {
+        "startLine": 199,
+        "startChar": 15,
+        "endLine": 199,
+        "endChar": 17
+      },
+      "revId": "22fb6be8ee4e0d725a00f5ae70f286906ccf9fa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1626b79c_c01ee252",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 8
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "13fb2935_21c78827",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-18T18:49:43Z",
+      "side": 1,
+      "message": "The only problem here is that when server crashes or stops the polling process continues looping for ever returning a connection error if you open the browser dev console. Thus I think we can remove these two lines and stop the loop in the onCompileResponse function.",
+      "parentUuid": "1626b79c_c01ee252",
+      "range": {
+        "startLine": 228,
+        "startChar": 6,
+        "endLine": 228,
+        "endChar": 19
+      },
+      "revId": "22fb6be8ee4e0d725a00f5ae70f286906ccf9fa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1626b79c_6038cebe",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 8
@@ -82,6 +130,30 @@
       "writtenOn": "2014-08-18T18:18:38Z",
       "side": 1,
       "message": "onIdleResponse seems like the wrong name here because we don\u0027t know that the progress response will be idle. How about \"startCompileIfIdle\"?",
+      "range": {
+        "startLine": 246,
+        "startChar": 11,
+        "endLine": 246,
+        "endChar": 25
+      },
+      "revId": "22fb6be8ee4e0d725a00f5ae70f286906ccf9fa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3043104_7f976bf7",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-18T18:49:43Z",
+      "side": 1,
+      "message": "compileIfIdle seems to mean the same and is shorter.",
+      "parentUuid": "1626b79c_6038cebe",
       "range": {
         "startLine": 246,
         "startChar": 11,

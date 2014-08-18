@@ -16,6 +16,24 @@
       "revId": "57b76f61aa01ad8985e7c0abbb1b3da23f13fa33",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3043104_fc5389f4",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/DateTimeFormatInfoProcessor.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-18T07:17:54Z",
+      "side": 0,
+      "message": "For some reason these lines were necessary when importing cldr-24 [1], but they weren\u0027t here with cldr-21, nor are necessary with cldr-25, so I think it\u0027s safer to have them out and let the compiler fail.\n[1] https://gwt-review.googlesource.com/#/c/6752/12/tools/cldr-import/src/com/google/gwt/tools/cldr/DateTimeFormatInfoProcessor.java@a545",
+      "parentUuid": "f6220389_6561c65f",
+      "revId": "57b76f61aa01ad8985e7c0abbb1b3da23f13fa33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

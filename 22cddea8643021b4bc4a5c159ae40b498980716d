@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d3043104_5f7b8f3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-08-18T16:36:00Z",
+      "side": 1,
+      "message": "Technically, you could just use separate classloaders; but that wouldn\u0027t be that easy to setup (how to easily get the 2 classpaths in your launcher app or Eclipse launcher configuration? invoke buck from the launcher app maybe?)\n\nGoktug floated the idea on the forum to provide SDM as a servlet (or set of servlets) that you could deploy within your app. The prerequisite is that we split gwt-dev though (or provide a trimmed-down JAR, similar to gwt-servlet.jar nowadays), so it won\u0027t happen soon. In the mean time, I think we should rebase our dependencies (I just stumbled on a bug in the tracker where we said we should rebase Eclipse JDT, because people have classpath conflicts when they use JDT on the server-side and can\u0027t easily/don\u0027t setup separate client-side and server-side classpaths).\n\nAs you\u0027re in need of a quick fix or workaround, I\u0027d suggest that you try rebasing Jetty in your build (maybe update Bucklets\u0027 maven_jar to accept a \u0027rename\u0027 in addition to \u0027exclude\u0027 and call JarJar or similar on the downloaded JAR), and possibly contribute rebased JARs (Google might have them so we could also ask them to upload them in the SVN repo) and patch to GWT to use the rebased Jetty (that would also simplify dev/codeserver build/setup). That way, you\u0027d have 2 Jetty versions in the classpath at the same time without them conflicting (except maybe for the javax.servlet version :-/ We could maybe update to Jetty 9.2 *and* do the renaming it at the same time?)",
+      "parentUuid": "9310f93f_3df57ba0",
+      "range": {
+        "startLine": 14,
+        "startChar": 9,
+        "endLine": 15,
+        "endChar": 39
+      },
+      "revId": "22cddea8643021b4bc4a5c159ae40b498980716d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3043104_3c26913f",
         "filename": "user/build.xml",
         "patchSetId": 13

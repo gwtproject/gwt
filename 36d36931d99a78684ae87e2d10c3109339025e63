@@ -113,6 +113,24 @@
       "revId": "36d36931d99a78684ae87e2d10c3109339025e63",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9310f93f_dd02ffda",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/JsonSplittable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-08-18T12:49:48Z",
+      "side": 1,
+      "message": "Yeah I wasn\u0027t sure what could be the preferred public API. \n\nThere are basically three options: void, boolean, Object. \n\nUsing void allows the simplest implementation of Splittable but you are also throwing away information that you have during removal.\n\nUsing boolean/Object would need an additional isReified() call here because the reified value could be \u0027null\u0027 (thats what is missing here but is already done in the Jso version) and in case of returning Object you have an ambiguous return value of \u0027null\u0027.\n\nIn general this CL does not require a return value for the changes I made in SplittableList as the removeReified() call is already guarded by a isReified() call and I would expect removeReified() to always work then. I first had it returning void and then changed it to boolean because it might be better for a public API.",
+      "parentUuid": "9310f93f_9d8fe76a",
+      "revId": "36d36931d99a78684ae87e2d10c3109339025e63",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9310f93f_3df57ba0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2014-08-18T12:17:57Z",
+      "side": 1,
+      "message": "Thanks for your comments. I\u0027am reading them in this and dependent change and try to understand the workarounds that your describing to address our problem. But i have strong impression, that you are missing one use case, that we cannot implement with current situation with all workarounds provided. At least i cannot see how.\n\nGerrit Code Review project has traditionally delivered very sane development environment experience for its contributors. So the separation between Gerrit\u0027s JettyServer process and Codeserver process for SDM doesn\u0027t convince here. This is because it is a big disadvantage to spawn multiple processes; instead it must be combined in one, that i solved here [1]. Really, it worked in one process with DevMode and it works in one with SDM as well, as prototyped in [1]. \n\nBut how can i spawn one process with conflicting Jetty versions in classpath to satisfy Gerrit\u0027\u0027s 9.2 Jetty dependency for one and Codeserver Jetty 8.2 for another? \n\nCan you now see why we don\u0027t have any workarounds for Jetty classpath conflict at our avail and why the only option we have is having Jetty-9 compatible version of code server, that is solved in this change?\n\n [1] https://gerrit-review.googlesource.com/59354",
+      "parentUuid": "9310f93f_ddb79f0c",
+      "range": {
+        "startLine": 14,
+        "startChar": 9,
+        "endLine": 15,
+        "endChar": 39
+      },
+      "revId": "22cddea8643021b4bc4a5c159ae40b498980716d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3043104_3c26913f",
         "filename": "user/build.xml",
         "patchSetId": 13

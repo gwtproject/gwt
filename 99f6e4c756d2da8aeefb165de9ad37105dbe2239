@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3043104_5c94bd30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-08-18T10:00:29Z",
+      "side": 1,
+      "message": "org.json is not excluded for license reasons (otherwise, it would not be bundled at all to begin with). AFAICT it\u0027s excluded because it needed to be excluded from gwt-servlets (see issue 5468) and we didn\u0027t want to have it bundled in some JAR and unbundled in another.\n\nThe problem with Jetty is that it easily conflicts with itself (e.g. jetty-jndi 8.1.13 won\u0027t work with jetty-server 8.1.12) so declaring external dependencies that could be replaced (entirely or partially) and would break GWT is not necessarily better than the current situation.\n\nI feel your pain, but I strongly believe the right outcome is to split gwt-dev to remove the unneeded dependencies. Moreover, gwt-dev is only needed by client-side code, code that\u0027s unlikely to depend on Jetty.\n\nAFAICT, the issue in Gerrit is that you want to use a more recent Jetty in a ServletContainerLauncher in DevMode, and this is mostly for convenience as you have other means of launching the server; the only difference being launching a single process (DevMode+ServletContainerLauncher) vs. launching 2 (DevMode in -noserver mode + Gerrit server).\nThere\u0027s also the issue of dependencies in Eclipse where you have a single project, but there it\u0027s rather easy to just pick the right classpath order.",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "99f6e4c756d2da8aeefb165de9ad37105dbe2239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9310f93f_dde1df33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-08-18T10:00:29Z",
+      "side": 1,
+      "message": "typo: Bug",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 3
+      },
+      "revId": "99f6e4c756d2da8aeefb165de9ad37105dbe2239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9310f93f_7a7419de",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-08-18T10:00:29Z",
+      "side": 1,
+      "message": "I think we should also remove javax/servlets, as jetty-server will bring it as a dependency (org.eclipse.jetty.orbit:javax.servlets). We should however either keep javax/servlets/jsp or externalize it too (maybe remove Jasper from the JAR and add a dependency on jetty-jsp)\n\nIdeally, we\u0027d remove all of javax/*; I have no idea where javax/annotation come from. I suppose it should be safe to delete (from gwt-dev packaging altogether) javax.xml as it ships with the JDK for some time now; same for org/w3c/dom and org/xml/sax.",
+      "revId": "99f6e4c756d2da8aeefb165de9ad37105dbe2239",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

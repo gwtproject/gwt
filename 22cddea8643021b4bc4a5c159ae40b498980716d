@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9310f93f_ddb79f0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-08-18T11:24:01Z",
+      "side": 1,
+      "message": "I believe you could extract Jetty from gwt-dev into another JAR rather than re-downloading Jetty.\n\nThat doesn\u0027t change the fact that it\u0027s an ugly hack.",
+      "range": {
+        "startLine": 14,
+        "startChar": 9,
+        "endLine": 15,
+        "endChar": 39
+      },
+      "revId": "22cddea8643021b4bc4a5c159ae40b498980716d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3043104_3c26913f",
+        "filename": "user/build.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-08-18T11:24:01Z",
+      "side": 1,
+      "message": "If jetty-websocket needs to be in the classpath for tests, then it probably needs to be in the classpath for anyone running GWTTestCase with HtmlUnit, so it must be provided by gwt-dev.",
+      "revId": "22cddea8643021b4bc4a5c159ae40b498980716d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -93,18 +93,6 @@ public enum RoundingMode {
   UNNECESSARY(BigDecimal.ROUND_UNNECESSARY);
   
   /**
-   * Some constant char arrays for optimized comparisons
-   */
-  private static final char[] chCEILING = {'C','E','I','L','I','N','G'};
-  private static final char[] chDOWN = {'D','O','W','N'};
-  private static final char[] chFLOOR = {'F','L','O','O','R'};
-  private static final char[] chHALF_DOWN = {'H','A','L','F','_','D','O','W','N'};
-  private static final char[] chHALF_EVEN = {'H','A','L','F','_','E','V','E','N'};
-  private static final char[] chHALF_UP = {'H','A','L','F','_','U','P'};
-  private static final char[] chUNNECESSARY = {'U','N','N','E','C','E','S','S','A','R','Y'};
-  private static final char[] chUP = {'U','P'};
-  
-  /**
    * Converts rounding mode constants from class {@code BigDecimal} into {@code
    * RoundingMode} values.
    * 
@@ -143,67 +131,28 @@ public enum RoundingMode {
    * @return corresponding rounding mode object
    */
   static RoundingMode valueOfExplicit(String mode) {
-    /*
-     * Note this is optimized to avoid multiple String compares, 
-     * using specific knowledge of the set of allowed enum constants.
-     */
-    
-    if (mode == null) {
-      throw new NullPointerException();
-    } 
-    
-    char[] modeChars = mode.toCharArray();
-    int len = modeChars.length;
-    if (len < chUP.length || len > chUNNECESSARY.length) {
-      throw new IllegalArgumentException();
+    switch (mode) {
+      case "CEILING":
+        return RoundingMode.CEILING;
+      case "DOWN":
+        return RoundingMode.DOWN;
+      case "FLOOR":
+        return RoundingMode.FLOOR;
+      case "HALF_DOWN":
+        return RoundingMode.HALF_DOWN;
+      case "HALF_EVEN":
+        return RoundingMode.HALF_EVEN;
+      case "HALF_UP":
+        return RoundingMode.HALF_UP;
+      case "UNNECESSARY":
+        return RoundingMode.UNNECESSARY;
+      case "UP":
+        return RoundingMode.UP;
+      default:
+        throw new IllegalArgumentException();
     }
-    
-    char[] targetChars = null;
-    RoundingMode target = null;
-    if (modeChars[0] == 'C') {
-      target = RoundingMode.CEILING;
-      targetChars = chCEILING;
-    } else if (modeChars[0] == 'D') {
-      target = RoundingMode.DOWN;
-      targetChars = chDOWN;
-    } else if (modeChars[0] == 'F') {
-      target = RoundingMode.FLOOR;
-      targetChars = chFLOOR;
-    } else if (modeChars[0] == 'H') {
-      if (len > 6) {
-        if (modeChars[5] == 'D') {
-          target = RoundingMode.HALF_DOWN;
-          targetChars = chHALF_DOWN;
-        } else if (modeChars[5] == 'E') {
-          target = RoundingMode.HALF_EVEN;
-          targetChars = chHALF_EVEN;
-        } else if (modeChars[5] == 'U') {
-          target = RoundingMode.HALF_UP;
-          targetChars = chHALF_UP;
-        }
-      }
-    } else if (modeChars[0] == 'U') {
-      if (modeChars[1] == 'P') {
-        target = RoundingMode.UP;
-        targetChars = chUP;
-      } else if (modeChars[1] == 'N') {
-        target = RoundingMode.UNNECESSARY;
-        targetChars = chUNNECESSARY;
-      }
-    }
-    
-    if (target != null && len == targetChars.length) {
-      int i;
-      for (i = 1; i < len && modeChars[i] == targetChars[i]; i++) {
-      }
-      if (i == len) {
-        return target;
-      }
-    }
-    
-    throw new IllegalArgumentException();
   }
-  
+
   /**
    * Set the old constant.
    * @param rm unused

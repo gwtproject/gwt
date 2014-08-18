@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1626b79c_60e60efb",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-18T18:18:38Z",
+      "side": 1,
+      "message": "nit: \"so as\" -\u003e \"until\"",
+      "range": {
+        "startLine": 181,
+        "startChar": 32,
+        "endLine": 181,
+        "endChar": 34
+      },
+      "revId": "22fb6be8ee4e0d725a00f5ae70f286906ccf9fa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1626b79c_a010062a",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-18T18:18:38Z",
+      "side": 1,
+      "message": "nit: \"Compile a unique name\"",
+      "range": {
+        "startLine": 199,
+        "startChar": 15,
+        "endLine": 199,
+        "endChar": 17
+      },
+      "revId": "22fb6be8ee4e0d725a00f5ae70f286906ccf9fa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1626b79c_c01ee252",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-18T18:18:38Z",
+      "side": 1,
+      "message": "Not sure about this part. It\u0027s unlikely, but suppose the progress service returns an \"idle\" status before onCompileResponse is called?\n\nI think that shouldn\u0027t count as being finished with the compile yet, so we should keep polling and stay in the \"compiling\" state until the onCompileResponse() function is called. (If onCompileResponse is never called for some reason, the progress indicator will freeze, indicating that something is wrong. Most likely the user will reload the page.)",
+      "range": {
+        "startLine": 228,
+        "startChar": 6,
+        "endLine": 228,
+        "endChar": 19
+      },
+      "revId": "22fb6be8ee4e0d725a00f5ae70f286906ccf9fa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1626b79c_6038cebe",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-18T18:18:38Z",
+      "side": 1,
+      "message": "onIdleResponse seems like the wrong name here because we don\u0027t know that the progress response will be idle. How about \"startCompileIfIdle\"?",
+      "range": {
+        "startLine": 246,
+        "startChar": 11,
+        "endLine": 246,
+        "endChar": 25
+      },
+      "revId": "22fb6be8ee4e0d725a00f5ae70f286906ccf9fa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -30,6 +30,7 @@ import com.google.gwt.emultest.java.lang.StringBufferTest;
 import com.google.gwt.emultest.java.lang.StringTest;
 import com.google.gwt.emultest.java.lang.SystemTest;
 import com.google.gwt.emultest.java.lang.ThrowableTest;
+import com.google.gwt.emultest.java.math.MathContextWithObfuscatedEnumsTest;
 import com.google.gwt.emultest.java.math.MathContextTest;
 import com.google.gwt.emultest.java.math.RoundingModeTest;
 import com.google.gwt.emultest.java.security.MessageDigestTest;
@@ -73,6 +74,7 @@ public class EmulSuite {
     // BigInteger is tested in {@link BigIntegerSuite}
     suite.addTestSuite(RoundingModeTest.class);
     suite.addTestSuite(MathContextTest.class);
+    suite.addTestSuite(MathContextWithObfuscatedEnumsTest.class);
 
     //-- java.security
     suite.addTestSuite(MessageDigestTest.class);

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9310f93f_80753aa4",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-08-18T18:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3043104_3cfd7149",
+      "range": {
+        "startLine": 215,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 7
+      },
+      "revId": "36d36931d99a78684ae87e2d10c3109339025e63",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13fb2935_9eed9d98",
         "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2014-08-18T11:07:54Z",
       "side": 1,
       "message": "According to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete and given that __reified is unlikely to have an \"own non-configurable property\" whose name starts with a colon, this should always return true [1]; so IMO it\u0027s not worth obfuscating this \"return true\" being a \"return !!(delete …)\".\n\nAlso, the method doesn\u0027t return anything (i.e. returns \u0027undefined\u0027) when the \u0027if\u0027 condition evaluates to false.\n\n\n----\n\n[1] And indeed, in Chrome, this:\n\n var o \u003d {};\n delete o[\u0027:foo\u0027];\n\nis true.\n\n(actually, even \"delete o.__defineGetter__\" or \"delete o.__proto__\" are true, despite they don\u0027t actually delete the property)",
+      "revId": "36d36931d99a78684ae87e2d10c3109339025e63",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9310f93f_607a2694",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-08-18T18:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13fb2935_9eed9d98",
       "revId": "36d36931d99a78684ae87e2d10c3109339025e63",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "13fb2935_e1b1a0c9",
+        "filename": "user/src/com/google/web/bindery/autobean/shared/impl/SplittableList.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-08-18T18:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9310f93f_bd92ab8e",
+      "revId": "36d36931d99a78684ae87e2d10c3109339025e63",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13fb2935_7e4531d7",
         "filename": "user/src/com/google/web/bindery/autobean/shared/impl/SplittableList.java",
         "patchSetId": 2
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "9310f93f_c037b2f3",
+        "filename": "user/src/com/google/web/bindery/autobean/shared/impl/SplittableList.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-08-18T18:45:04Z",
+      "side": 1,
+      "message": "No, the else (now else-if) is needed otherwise you have stale data in the reified map. Consider \"_\" means \"not yet reified\" and you have a list that looks like\n\n  a, b, _ ,  _ , e, _ , _\n\nIf you now remove \"b\", you need to remove \"b\" and \"e\" manually from the reified map because the next index of \"b\" and \"e\" isn\u0027t reified yet.",
+      "parentUuid": "13fb2935_7e4531d7",
+      "revId": "36d36931d99a78684ae87e2d10c3109339025e63",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13fb2935_3e26893f",
         "filename": "user/src/com/google/web/bindery/autobean/shared/impl/SplittableList.java",
         "patchSetId": 2
@@ -87,6 +165,30 @@
       "writtenOn": "2014-08-18T11:07:54Z",
       "side": 1,
       "message": "This is \u0027newSize\u0027",
+      "range": {
+        "startLine": 109,
+        "startChar": 38,
+        "endLine": 109,
+        "endChar": 53
+      },
+      "revId": "36d36931d99a78684ae87e2d10c3109339025e63",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9310f93f_a034beef",
+        "filename": "user/src/com/google/web/bindery/autobean/shared/impl/SplittableList.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-08-18T18:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13fb2935_3e26893f",
       "range": {
         "startLine": 109,
         "startChar": 38,

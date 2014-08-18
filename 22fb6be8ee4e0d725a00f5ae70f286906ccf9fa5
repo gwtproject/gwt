@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "1626b79c_3bdc4bf6",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-18T19:29:28Z",
+      "side": 1,
+      "message": "Yes, polling forever would be issue for a production website since it generates a lot of traffic; we would want to back off somehow. In this case it doesn\u0027t matter much.",
+      "parentUuid": "13fb2935_21c78827",
+      "range": {
+        "startLine": 228,
+        "startChar": 6,
+        "endLine": 228,
+        "endChar": 19
+      },
+      "revId": "22fb6be8ee4e0d725a00f5ae70f286906ccf9fa5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1626b79c_6038cebe",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 8

@@ -24,6 +24,7 @@ package java.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.impl.DoNotInline;
+import com.google.gwt.dev.jjs.impl.JsoDevirtualizer;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -658,7 +659,9 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public native boolean endsWith(String suffix) /*-{
-    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+    // If IE8 supported negative start index, we could have used "-suffixlength".
+    var suffixlength = suffix.length;
+    return this.substr(this.length - suffixlength, suffixlength) === suffix;
   }-*/;
 
   // DO NOT INLINE so that "aaa".equals("bbb") reaches the static evaluator in
@@ -932,24 +935,24 @@ public final class String implements Comparable<String>, CharSequence,
   }-*/;
 
   public boolean startsWith(String prefix) {
-    return indexOf(prefix) == 0;
+    return startsWith(prefix, 0);
   }
 
   public boolean startsWith(String prefix, int toffset) {
-    return toffset >= 0 && indexOf(prefix, toffset) == toffset;
+    return toffset >= 0 && __substr(this, toffset, prefix.length()).equals(prefix);
   }
 
   public CharSequence subSequence(int beginIndex, int endIndex) {
     return this.substring(beginIndex, endIndex);
   }
 
-  public native String substring(int beginIndex) /*-{
-    return this.substr(beginIndex, this.length - beginIndex);
-  }-*/;
+  public String substring(int beginIndex) {
+    return __substr(this, beginIndex, this.length() - beginIndex);
+  }
 
-  public native String substring(int beginIndex, int endIndex) /*-{
-    return this.substr(beginIndex, endIndex - beginIndex);
-  }-*/;
+  public String substring(int beginIndex, int endIndex) {
+    return __substr(this, beginIndex, endIndex - beginIndex);
+  }
 
   public char[] toCharArray() {
     int n = this.length();

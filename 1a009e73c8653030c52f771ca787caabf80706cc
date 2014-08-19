@@ -16,6 +16,29 @@
       "revId": "1a009e73c8653030c52f771ca787caabf80706cc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6220389_b915a719",
+        "filename": "user/src/com/google/gwt/dom/client/StyleInjector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-19T02:17:18Z",
+      "side": 1,
+      "message": "As there is not much to gain, should we just keep it at 30 to be on the safe side?",
+      "range": {
+        "startLine": 99,
+        "startChar": 48,
+        "endLine": 99,
+        "endChar": 50
+      },
+      "revId": "1a009e73c8653030c52f771ca787caabf80706cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

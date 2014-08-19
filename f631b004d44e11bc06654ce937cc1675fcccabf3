@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13fb2935_c1b8e45e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-19T08:15:47Z",
+      "side": 1,
+      "message": "Why you don\u0027t use the same strategy that you use in startsWith, so as the code looks more coherent, something like:\n\nreturn __substr(this, this.length - suffixlength, suffixlength).equals(suffix);",
+      "range": {
+        "startLine": 660,
+        "startChar": 9,
+        "endLine": 660,
+        "endChar": 32
+      },
+      "revId": "f631b004d44e11bc06654ce937cc1675fcccabf3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

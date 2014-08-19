@@ -151,4 +151,9 @@ public class Properties {
   private <T extends Property> T create(String name, Class<T> clazz) {
     return create(name, false, false, clazz);
   }
+
+  public void replaceAllBindinProperties(SortedSet<BindingProperty> newBindingProperties) {
+    bindingProps.clear();
+    bindingProps.addAll(newBindingProperties);
+  }
 }

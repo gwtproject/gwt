@@ -745,6 +745,10 @@ public class ModuleDef implements DepsInfoProvider {
     return linkerTypesByName;
   }
 
+  public long getModuleDefCreationTime() {
+    return moduleDefCreationTime;
+  }
+
   public synchronized String getName() {
     return nameOverride != null ? nameOverride : name;
   }

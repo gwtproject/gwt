@@ -47,6 +47,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
+import java.util.SortedSet;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -75,6 +76,8 @@ class Recompiler {
   private final CompilerContext.Builder compilerContextBuilder = new CompilerContext.Builder();
   private CompilerContext compilerContext;
   private Options options;
+  private SortedSet<BindingProperty> originalBindingProperties;
+  private ModuleDef lastModuleDef;
 
   Recompiler(AppSpace appSpace, String moduleName, Options options, TreeLogger logger) {
     this.appSpace = appSpace;
@@ -309,14 +312,26 @@ class Recompiler {
     // make sure we get the latest version of any modified jar
     ZipFileClassPathEntry.clearCache();
     ResourceOracleImpl.clearCache();
-    ModuleDefLoader.clearModuleCache();
 
     ResourceLoader resources = ResourceLoaders.forClassLoader(Thread.currentThread());
     resources = ResourceLoaders.forPathAndFallback(options.getSourcePath(), resources);
     this.resourceLoader.set(resources);
 
+    // ModuleDefLoader.loadFromResources() checks for modified .gwt.xml files.
     ModuleDef moduleDef = ModuleDefLoader.loadFromResources(
         logger, compilerContext, originalModuleName, resources, true);
+
+    if (lastModuleDef == null) {
+      lastModuleDef = moduleDef;
+      originalBindingProperties = moduleDef.getProperties().getBindingProperties();
+    } else {
+      if (lastModuleDef.getModuleDefCreationTime() == moduleDef.getModuleDefCreationTime()) {
+        moduleDef.getProperties().replaceAllBindinProperties(originalBindingProperties);
+      } else {
+        lastModuleDef = moduleDef;
+        originalBindingProperties = moduleDef.getProperties().getBindingProperties();
+      }
+    }
     compilerContext = compilerContextBuilder.module(moduleDef).build();
 
     // A snapshot of the module's configuration before we modified it.

@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "9310f93f_c0069286",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2014-08-19T09:08:44Z",
+      "side": 1,
+      "message": "| As you\u0027re in need of a quick fix or workaround\n\nIndeed, i do. \n\n| As you\u0027re in need of a quick fix or workaround, I\u0027d suggest that you try rebasing Jetty in your build [...] That way, you\u0027d have 2 Jetty versions in the classpath at the same time without them conflicting [...].\n\nI think the rebasing of outdated Jetty version and burrowing it inside codeserver to prevent classpath conflicts is wrong thing to do. Sure, we all do really weird stuff and ugly workarounds, but this is what the $DAY_JOB is for. Let\u0027s try to keep such quirks away from free software.\n\nI like Brian\u0027s suggestion to drop dependency on Jetty from code server altogether  and replace it with something much more lightweight. That would solve all our problems: we would keep stripping outdated Jetty version from get-dev.jar and SDM would just work, as it wouldn\u0027t depend to Jetty at all.\n\nFor the time being i have found the right solution that i am satisfied with (under current circumstances, of course) for the projects that depends on Jetty-9 and need SDM integration:\n\n* 1. Strip outdated jetty-8 from get-dev.jar\n* 2. Include Jetty 9.2 in the class path\n* 3. Replace WebServer.java in code server with Jetty-9 patched version from this change [1]. Note, only 5 lines of code were changed, compared to original version.\n* 4. Embed Codeserver invocation in own Daemon process to simplify SDM session experience, as it was done on this change [1].\n\nImprovement suggestions: to reduce the pain:\n\n* a. As suggested by Brian drop Jetty dependency from codeserver\n* b. Ship two version of codeserver with outdated and latest jetty-version, with 5 lines changed in WebServer.java, call ist gwt-codeserver-9.jar\n\n[1] https://gerrit-review.googlesource.com/59354",
+      "parentUuid": "d3043104_5f7b8f3e",
+      "range": {
+        "startLine": 14,
+        "startChar": 9,
+        "endLine": 15,
+        "endChar": 39
+      },
+      "revId": "22cddea8643021b4bc4a5c159ae40b498980716d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3043104_3c26913f",
         "filename": "user/build.xml",
         "patchSetId": 13

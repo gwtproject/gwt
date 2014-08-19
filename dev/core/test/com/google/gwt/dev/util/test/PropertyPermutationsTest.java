@@ -235,7 +235,7 @@ public class PropertyPermutationsTest extends TestCase {
       prop.addDefinedValue(prop.getRootCondition(), "false");
       prop.addDefinedValue(prop.getRootCondition(), "true");
       // <set-property name="stackTraces" value="false" />
-      prop.setAllowedValues(prop.getRootCondition(), "false");
+      prop.setTemporaryAllowedValues(prop.getRootCondition(), "false");
 
       /*
        * <set-property name="stackTraces" value="true,false"> <when user.agent
@@ -244,7 +244,7 @@ public class PropertyPermutationsTest extends TestCase {
       ConditionAny cond = new ConditionAny();
       cond.getConditions().add(new ConditionWhenPropertyIs("user.agent", "ie6"));
       cond.getConditions().add(new ConditionWhenPropertyIs("user.agent", "ie8"));
-      prop.setAllowedValues(cond, "true", "false");
+      prop.setTemporaryAllowedValues(cond, "true", "false");
     }
 
     validateTwoDimensionPerm(props, md.getActiveLinkerNames());
@@ -300,7 +300,7 @@ public class PropertyPermutationsTest extends TestCase {
       cond.getConditions().add(
           new ConditionWhenPropertyIs("user.agent", "opera"));
 
-      prop.setAllowedValues(cond, "false");
+      prop.setTemporaryAllowedValues(cond, "false");
     }
 
     validateTwoDimensionPerm(props, md.getActiveLinkerNames());

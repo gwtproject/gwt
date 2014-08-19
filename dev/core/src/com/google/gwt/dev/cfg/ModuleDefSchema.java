@@ -680,7 +680,7 @@ public class ModuleDefSchema extends Schema {
         bindingPropertyCondition = prop.getRootCondition();
       }
 
-      prop.setAllowedValues(bindingPropertyCondition, stringValues);
+      prop.setPermanentAllowedValues(bindingPropertyCondition, stringValues);
     }
 
     @SuppressWarnings("unused") // called reflectively

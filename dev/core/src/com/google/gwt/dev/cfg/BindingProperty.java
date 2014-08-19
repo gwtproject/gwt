@@ -46,11 +46,15 @@ import java.util.regex.Pattern;
  * of the defined set.
  */
 public class BindingProperty extends Property {
+
   public static final String GLOB_STAR = "*";
   private static final String EMPTY = "";
 
   private List<SortedSet<String>> collapsedValues = Lists.create();
-  private final Map<Condition, SortedSet<String>> conditionalValues = new LinkedHashMap<Condition, SortedSet<String>>();
+  private final Map<Condition, SortedSet<String>> temporaryConditionalValues =
+      new LinkedHashMap<Condition, SortedSet<String>>();
+  private final Map<Condition, SortedSet<String>> permanentConditionalValues =
+      new LinkedHashMap<Condition, SortedSet<String>>();
   private final SortedSet<String> definedValues = new TreeSet<String>();
   private String fallback;
   private HashMap<String,LinkedList<LinkedHashSet<String>>> fallbackValueMap;
@@ -61,7 +65,8 @@ public class BindingProperty extends Property {
   private final ConditionAll rootCondition = new ConditionAll();
 
   {
-    conditionalValues.put(rootCondition, new TreeSet<String>());
+    temporaryConditionalValues.put(rootCondition, new TreeSet<String>());
+    permanentConditionalValues.put(rootCondition, new TreeSet<String>());
   }
 
   public BindingProperty(String name) {
@@ -92,11 +97,19 @@ public class BindingProperty extends Property {
 
   public void addDefinedValue(Condition condition, String definedValue) {
     definedValues.add(definedValue);
-    SortedSet<String> set = conditionalValues.get(condition);
+    SortedSet<String> set = temporaryConditionalValues.get(condition);
     if (set == null) {
       set = new TreeSet<String>();
-      set.addAll(conditionalValues.get(rootCondition));
-      conditionalValues.put(condition, set);
+      set.addAll(temporaryConditionalValues.get(rootCondition));
+      temporaryConditionalValues.put(condition, set);
+    }
+    set.add(definedValue);
+
+    set = permanentConditionalValues.get(condition);
+    if (set == null) {
+      set = new TreeSet<String>();
+      set.addAll(permanentConditionalValues.get(rootCondition));
+      permanentConditionalValues.put(condition, set);
     }
     set.add(definedValue);
   }
@@ -126,7 +139,7 @@ public class BindingProperty extends Property {
       BindingProperty that = (BindingProperty) object;
       return Objects.equal(this.name, that.name)
           && Objects.equal(this.collapsedValues, that.collapsedValues)
-          && Objects.equal(this.conditionalValues, that.conditionalValues)
+          && Objects.equal(this.temporaryConditionalValues, that.temporaryConditionalValues)
           && Objects.equal(this.definedValues, that.definedValues)
           && Objects.equal(this.fallback, that.fallback)
           && Objects.equal(this.getFallbackValuesMap(), that.getFallbackValuesMap())
@@ -143,7 +156,7 @@ public class BindingProperty extends Property {
    * is satisfied.
    */
   public String[] getAllowedValues(Condition condition) {
-    Set<String> allowedValues = conditionalValues.get(condition);
+    Set<String> allowedValues = temporaryConditionalValues.get(condition);
     return allowedValues.toArray(new String[allowedValues.size()]);
   }
 
@@ -152,7 +165,7 @@ public class BindingProperty extends Property {
   }
 
   public Map<Condition, SortedSet<String>> getConditionalValues() {
-    return Collections.unmodifiableMap(conditionalValues);
+    return Collections.unmodifiableMap(temporaryConditionalValues);
   }
 
   /**
@@ -161,7 +174,7 @@ public class BindingProperty extends Property {
    */
   public String getConstrainedValue() {
     String constrainedValue = null;
-    for (SortedSet<String> allowedValues : conditionalValues.values()) {
+    for (SortedSet<String> allowedValues : temporaryConditionalValues.values()) {
       if (allowedValues.size() != 1) {
         return null;
       } else if (constrainedValue == null) {
@@ -254,7 +267,7 @@ public class BindingProperty extends Property {
 
   public Set<String> getRequiredProperties() {
     Set<String> toReturn = Sets.create();
-    for (Condition cond : conditionalValues.keySet()) {
+    for (Condition cond : temporaryConditionalValues.keySet()) {
       toReturn = Sets.addAll(toReturn, cond.getRequiredProperties());
     }
     return toReturn;
@@ -266,7 +279,7 @@ public class BindingProperty extends Property {
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(name, collapsedValues, conditionalValues, definedValues, fallback,
+    return Objects.hashCode(name, collapsedValues, temporaryConditionalValues, definedValues, fallback,
         getFallbackValuesMap(), fallbackValues, provider, providerGenerator, rootCondition);
   }
 
@@ -275,10 +288,10 @@ public class BindingProperty extends Property {
   }
 
   /**
-   * Returns true if the supplied value is legal under some condition.
+   * Returns true if the supplied value is part of the permanent allowed values.
    */
   public boolean isAllowedValue(String value) {
-    for (Set<String> values : conditionalValues.values()) {
+    for (Set<String> values : permanentConditionalValues.values()) {
       if (values.contains(value)) {
         return true;
       }
@@ -300,7 +313,7 @@ public class BindingProperty extends Property {
    * BindingProperty, there is exactly one allowed value.
    */
   public boolean isDerived() {
-    for (Set<String> allowedValues : conditionalValues.values()) {
+    for (Set<String> allowedValues : temporaryConditionalValues.values()) {
       if (allowedValues.size() != 1) {
         return false;
       }
@@ -312,30 +325,14 @@ public class BindingProperty extends Property {
    * Set the currently allowed values. The values provided must be a subset of
    * the currently-defined values.
    *
+   * Temporary values allows compiles with less permutations,
+   * see also {@link #setPermanentAllowedValues(ConditionAll, String...)}.
+   *
    * @throws IllegalArgumentException if any of the provided values were not
    *     provided to {@link #addDefinedValue(Condition,String)}.
    */
-  public void setAllowedValues(Condition condition, String... values) {
-    SortedSet<String> temp = new TreeSet<String>(Arrays.asList(values));
-    if (!definedValues.containsAll(temp)) {
-      throw new IllegalArgumentException(
-          "Attempted to set an allowed value that was not previously defined");
-    }
-
-    // XML has a last-one-wins semantic which we reflect in our evaluation order
-    if (condition == rootCondition) {
-      /*
-       * An unconditional set-property would undo any previous conditional
-       * setters, so we can just clear out this map.
-       */
-      conditionalValues.clear();
-    } else {
-      /*
-       * Otherwise, we'll just ensure that this condition is moved to the end.
-       */
-      conditionalValues.remove(condition);
-    }
-    conditionalValues.put(condition, temp);
+  public void setTemporaryAllowedValues(Condition condition, String... values) {
+    updateConditionMap(temporaryConditionalValues, condition, values);
   }
 
   public void setFallback(String token) {
@@ -432,5 +429,42 @@ public class BindingProperty extends Property {
         return s1.compareTo(s2);
       }
     });
+  }
+
+  /**
+   * Set the permanent values of a property.
+   *
+   * Permanent values allows tracking of all possible values for a certain property, even
+   * if allowed values are temporary reduced, like in a super dev mode compile,
+   * also see {@link #setTemporaryAllowedValues(Condition, String...)}.
+   */
+  public void setPermanentAllowedValues(ConditionAll bindingPropertyCondition,
+      String... values) {
+    updateConditionMap(permanentConditionalValues, bindingPropertyCondition, values);
+    updateConditionMap(temporaryConditionalValues, bindingPropertyCondition, values);
+  }
+
+  private void updateConditionMap(Map<Condition, SortedSet<String>>  conditionMap,
+      Condition condition, String... values) {
+    SortedSet<String> temp = new TreeSet<String>(Arrays.asList(values));
+    if (!definedValues.containsAll(temp)) {
+      throw new IllegalArgumentException(
+          "Attempted to set an allowed value that was not previously defined");
+    }
+
+    // XML has a last-one-wins semantic which we reflect in our evaluation order
+    if (condition == rootCondition) {
+      /*
+       * An unconditional set-property would undo any previous conditional
+       * setters, so we can just clear out this map.
+       */
+      conditionMap.clear();
+    } else {
+      /*
+       * Otherwise, we'll just ensure that this condition is moved to the end.
+       */
+      conditionMap.remove(condition);
+    }
+    conditionMap.put(condition, temp);
   }
 }

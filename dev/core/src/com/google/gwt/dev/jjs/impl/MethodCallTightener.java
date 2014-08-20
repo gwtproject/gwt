@@ -74,8 +74,8 @@ public class MethodCallTightener {
       }
 
       JMethod foundMethod =
-          program.typeOracle.getMethodBySignature((JClassType) instanceType, method.getSignature());
-      if (foundMethod == null) {
+          program.typeOracle.getInstanceMethodBySignature((JClassType) instanceType, method.getSignature());
+      if (foundMethod == null || !foundMethod.canBePolymorphic()) {
         // The declared instance type is abstract and doesn't have the method.
         return;
       }

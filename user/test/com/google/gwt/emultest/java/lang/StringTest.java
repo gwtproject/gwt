@@ -276,6 +276,15 @@ public class StringTest extends GWTTestCase {
     assertFalse("AbC".equals("aBC"));
     assertTrue("".equals(""));
     assertFalse("".equals(null));
+
+    double r = Math.random();
+    assertTrue((r + "").equals(r + ""));
+    assertFalse((r + "ABC").equals(r + "abc"));
+    assertFalse((r + "abc").equals(r + "ABC"));
+    assertTrue((r + "abc").equals(r + "abc"));
+    assertTrue((r + "ABC").equals(r + "ABC"));
+    assertFalse((r + "AbC").equals(r + "aBC"));
+    assertFalse((r + "AbC").equals(r + "aBC"));
   }
 
   /*

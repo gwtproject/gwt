@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f6220389_a4ac97be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T02:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6220389_04856b4b",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "7a39658e4f403b2c8221439f6e0891bdff7df875",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6220389_8434fbf2",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "f6220389_44b5a306",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T02:17:52Z",
+      "side": 1,
+      "message": "Discussed offline. What the method is doing will be ambiguous.",
+      "parentUuid": "f6220389_8434fbf2",
+      "range": {
+        "startLine": 1731,
+        "startChar": 0,
+        "endLine": 1735,
+        "endChar": 7
+      },
+      "revId": "7a39658e4f403b2c8221439f6e0891bdff7df875",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6220389_443a03e1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2014-08-20T01:47:43Z",
       "side": 1,
       "message": "It is OK to remove this, if there is any exception during invoke, we can safely ignore it and not optimize the call in that case.",
+      "range": {
+        "startLine": 1743,
+        "startChar": 1,
+        "endLine": 1745,
+        "endChar": 16
+      },
+      "revId": "7a39658e4f403b2c8221439f6e0891bdff7df875",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6220389_64c29f6b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1745,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T02:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6220389_443a03e1",
       "range": {
         "startLine": 1743,
         "startChar": 1,

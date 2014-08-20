@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7315452e_0d0cc15f",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-20T12:51:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "ae0f5316b496372b1083677d34d5c9e83db930e4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

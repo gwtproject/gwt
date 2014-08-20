@@ -49,6 +49,54 @@
     },
     {
       "key": {
+        "uuid": "d33271f0_a1d264dd",
+        "filename": "dev/core/src/com/google/gwt/core/ext/GeneratorContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-20T17:09:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d33271f0_a0bb82a7",
+      "range": {
+        "startLine": 124,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 60
+      },
+      "revId": "4bb8b8208289dd4765a08d2b69d6cb83295cb6d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_c1d570c9",
+        "filename": "dev/core/src/com/google/gwt/core/ext/GeneratorContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-20T17:09:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d33271f0_004016ba",
+      "range": {
+        "startLine": 124,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 60
+      },
+      "revId": "4bb8b8208289dd4765a08d2b69d6cb83295cb6d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d33271f0_c0d56ec9",
         "filename": "user/src/com/google/gwt/user/rebind/ui/ImageBundleGenerator.java",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2014-08-20T03:44:28Z",
       "side": 1,
       "message": "VisibleForTesting (as you have changed the other one)",
+      "range": {
+        "startLine": 140,
+        "startChar": 5,
+        "endLine": 140,
+        "endChar": 12
+      },
+      "revId": "4bb8b8208289dd4765a08d2b69d6cb83295cb6d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_414f40f8",
+        "filename": "user/src/com/google/gwt/user/rebind/ui/ImageBundleGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-20T17:09:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d33271f0_c0d56ec9",
       "range": {
         "startLine": 140,
         "startChar": 5,

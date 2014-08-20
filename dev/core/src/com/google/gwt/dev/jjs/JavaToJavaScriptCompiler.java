@@ -1461,7 +1461,8 @@ public abstract class JavaToJavaScriptCompiler {
     OptimizerStats stats = new OptimizerStats(passName);
     stats.add(Pruner.exec(jprogram, true).recordVisits(numNodes));
     stats.add(Finalizer.exec(jprogram).recordVisits(numNodes));
-    stats.add(MakeCallsStatic.exec(options, jprogram).recordVisits(numNodes));
+    stats.add(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks())
+        .recordVisits(numNodes));
     stats.add(TypeTightener.exec(jprogram).recordVisits(numNodes));
     stats.add(MethodCallTightener.exec(jprogram).recordVisits(numNodes));
     stats.add(MethodCallSpecializer.exec(jprogram).recordVisits(numNodes));

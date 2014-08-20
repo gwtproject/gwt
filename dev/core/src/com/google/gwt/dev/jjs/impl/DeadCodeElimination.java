@@ -70,6 +70,7 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
@@ -1726,26 +1727,42 @@ public class DeadCodeElimination {
         }
       }
 
+      Method actual = getStringMethod(method, paramTypes);
+      if (actual == null) {
+        // Convert to ....
+        Arrays.fill(paramTypes, Object.class);
+        actual = getStringMethod(method, paramTypes);
+      }
+      if (actual == null) {
+        return;
+      }
+
+      Object result = null;
       try {
-        Method actual = String.class.getMethod(method.getName(), paramTypes);
-        if (actual == null) {
-          return;
-        }
-        Object result = actual.invoke(instance, paramValues);
-        if (result instanceof String) {
-          ctx.replaceMe(program.getStringLiteral(x.getSourceInfo(), (String) result));
-        } else if (result instanceof Boolean) {
-          ctx.replaceMe(program.getLiteralBoolean(((Boolean) result).booleanValue()));
-        } else if (result instanceof Character) {
-          ctx.replaceMe(program.getLiteralChar(((Character) result).charValue()));
-        } else if (result instanceof Integer) {
-          ctx.replaceMe(program.getLiteralInt(((Integer) result).intValue()));
-        }
+        result = actual.invoke(instance, paramValues);
       } catch (RuntimeException e) {
         // Don't eat RuntimeExceptions
         throw e;
       } catch (Exception e) {
         // If the call threw an exception, just don't optimize
+        return;
+      }
+      if (result instanceof String) {
+        ctx.replaceMe(program.getStringLiteral(x.getSourceInfo(), (String) result));
+      } else if (result instanceof Boolean) {
+        ctx.replaceMe(program.getLiteralBoolean(((Boolean) result).booleanValue()));
+      } else if (result instanceof Character) {
+        ctx.replaceMe(program.getLiteralChar(((Character) result).charValue()));
+      } else if (result instanceof Integer) {
+        ctx.replaceMe(program.getLiteralInt(((Integer) result).intValue()));
+      }
+    }
+
+    private Method getStringMethod(JMethod method, Class<?>[] paramTypes) {
+      try {
+        return String.class.getMethod(method.getName(), paramTypes);
+      } catch (NoSuchMethodException e) {
+        return null;
       }
     }
 

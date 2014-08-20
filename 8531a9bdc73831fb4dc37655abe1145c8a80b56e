@@ -16,6 +16,29 @@
       "revId": "8531a9bdc73831fb4dc37655abe1145c8a80b56e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_27e7a1ba",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/EnumNameObfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-20T21:06:09Z",
+      "side": 1,
+      "message": "Maybe replace by JVisitor.",
+      "range": {
+        "startLine": 40,
+        "startChar": 51,
+        "endLine": 40,
+        "endChar": 62
+      },
+      "revId": "8531a9bdc73831fb4dc37655abe1145c8a80b56e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

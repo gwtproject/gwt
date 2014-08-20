@@ -82,6 +82,11 @@ public abstract class StubGeneratorContext implements GeneratorContext {
   }
 
   @Override
+  public void recordInputResource(String resourcePath) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public PrintWriter tryCreate(TreeLogger logger, String packageName, String simpleName) {
     throw new UnsupportedOperationException();
   }

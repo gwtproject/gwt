@@ -187,10 +187,11 @@ public abstract class AbstractUiBinderWriterTest extends TestCase {
     MessagesWriter messages =
         new MessagesWriter(types, BINDER_URI, logger, rendererClass.getPath(), "rendererPackage",
             "rendererClassName");
-    writer =
-        new UiBinderWriter(aClass, "foo", "", types, logger, fieldManager, messages,
-            DesignTimeUtilsStub.EMPTY, uiBinderCtx, true, true, BINDER_URI);
-    parser = new UiBinderParser(writer, messages, fieldManager, types, null, BINDER_URI, new UiBinderContext());
+    MockResourceOracle resourceOracle = new MockResourceOracle();
+    writer = new UiBinderWriter(aClass, "foo", "", types, logger, fieldManager, messages,
+        DesignTimeUtilsStub.EMPTY, uiBinderCtx, true, true, BINDER_URI, resourceOracle);
+    parser = new UiBinderParser(writer, messages, fieldManager, types, null, BINDER_URI,
+        new UiBinderContext(), resourceOracle);
     designTime.rememberPathForElements(doc);
   }
 }

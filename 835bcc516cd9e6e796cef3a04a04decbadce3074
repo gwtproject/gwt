@@ -143,6 +143,29 @@
     },
     {
       "key": {
+        "uuid": "d33271f0_ece18033",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T21:30:34Z",
+      "side": 1,
+      "message": "isResourceKnown",
+      "range": {
+        "startLine": 358,
+        "startChar": 17,
+        "endLine": 358,
+        "endChar": 35
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d33271f0_89e2ee62",
         "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
         "patchSetId": 2
@@ -231,6 +254,132 @@
         "endLine": 505,
         "endChar": 45
       },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_874ad5e6",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T21:30:34Z",
+      "side": 1,
+      "message": "RecordingResourceOracle?",
+      "range": {
+        "startLine": 73,
+        "startChar": 16,
+        "endLine": 73,
+        "endChar": 37
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_a745d1d9",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T21:30:34Z",
+      "side": 1,
+      "message": "nit: Ideally this should look like following as a separate class:\n\npublic static class LoggingResourceOracle implements ResourceOracle {\n  public LoggingResourceOracle(ResourceOracle, GeneratorContext) { ... }\n  ....\n}",
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_2c9e6851",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T21:30:34Z",
+      "side": 1,
+      "message": "unrelated nit: for slight performance improvement use \u0027add\u0027 instead of \u0027contains\u0027 and remove the \u0027add\u0027 call below.",
+      "range": {
+        "startLine": 1131,
+        "startChar": 23,
+        "endLine": 1131,
+        "endChar": 31
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_2c754847",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1408,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T21:30:34Z",
+      "side": 1,
+      "message": "This is looks like a method that doesn\u0027t have any side effects but it has. I would find a better name or I would just inline this method and add a comment instead.",
+      "range": {
+        "startLine": 1408,
+        "startChar": 18,
+        "endLine": 1408,
+        "endChar": 53
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_e7399959",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/ResourceOracle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T21:30:34Z",
+      "side": 1,
+      "message": "@deprecated as we discussed. (please also document the reasoning of deprecation via @deprecated javadoc)",
+      "range": {
+        "startLine": 64,
+        "startChar": 24,
+        "endLine": 64,
+        "endChar": 38
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_22542fdd",
+        "filename": "user/src/com/google/gwt/resources/ext/ResourceGeneratorUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T21:30:34Z",
+      "side": 1,
+      "message": "Thinking out loud: If people are using this to access stuff that is not available to ResourceOracle somehow, then we will probably not trigger a recompile anyway because SuperDev will think nothing has changed (right?).",
       "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

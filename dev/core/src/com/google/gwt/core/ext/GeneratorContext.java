@@ -122,6 +122,17 @@ public interface GeneratorContext {
   boolean isProdMode();
 
   /**
+   * Records an input resource associated with the current generation. This
+   * information may later be used by the compiler to invalidate the generated
+   * code and rerun the generator when the recorded input resource has changed.
+   * <p>
+   * Note that usually you don't need to explicitly record input resources as
+   * they should be accessed through ResourceOracle where the recording is
+   * automatically done.
+   */
+  void recordInputResource(String resourcePath);
+
+  /**
    * Attempts to get a <code>PrintWriter</code> so that the caller can generate
    * the source code for the named type. If the named types already exists,
    * <code>null</code> is returned to indicate that no work needs to be done.

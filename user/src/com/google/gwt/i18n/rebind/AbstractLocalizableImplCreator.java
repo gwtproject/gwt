@@ -183,7 +183,7 @@ abstract class AbstractLocalizableImplCreator extends
     ResourceList resourceList = null;
     try {
       resourceList = ResourceFactory.getBundle(logger, targetClass, locale,
-          assignableToConstants, context.getResourcesOracle().getResourceMap(), context);
+          assignableToConstants, context.getResourcesOracle(), context);
     } catch (MissingResourceException e) {
       throw error(logger,
           "Localization failed; there must be at least one resource accessible through"
@@ -221,7 +221,7 @@ abstract class AbstractLocalizableImplCreator extends
         c.emitClass(logger, generatedLocale);
       } else {
         MessagesImplCreator messages = new MessagesImplCreator(logger, writer,
-            targetClass, resourceList, context.getTypeOracle());
+            targetClass, resourceList, context.getTypeOracle(), context.getResourcesOracle());
         messages.emitClass(logger, generatedLocale);
       }
       context.commit(logger, pw);

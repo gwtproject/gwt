@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d33271f0_69eea26a",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-20T19:35:39Z",
+      "side": 1,
+      "message": "replace by\n  Collection\u003cString\u003e reboundTypeNames \u003d reboundTypeNamesByRebinderTypeName.removeAll(rebinderTypeName);",
+      "range": {
+        "startLine": 208,
+        "startChar": 3,
+        "endLine": 209,
+        "endChar": 67
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_0924be12",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-20T19:35:39Z",
+      "side": 1,
+      "message": "You can replace this by\n  \n  rebinderTypeNamesByReboundTypeName.values().removeAll(rebinderTypeName);",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 5
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_69c0e2c6",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-20T19:35:39Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 5
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_89e2ee62",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-20T19:35:39Z",
+      "side": 1,
+      "message": "Maybe replace by\n\n     if (lastModifiedByResourcePath.get(currentResource.getPath())\n          !\u003d currentResource.getLastModified()) {\n        // Added or modified resource.\n        modifiedResourcePaths.add(currentResource.getPath());\n        lastModifiedByResourcePath.put(currentResource.getPath(),\n            currentResource.getLastModified());\n      }",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 390,
+        "endChar": 7
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_e9d29290",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-20T19:35:39Z",
+      "side": 1,
+      "message": "Maybe replace by\n\n    for (String reboundTypeName : reboundTypeNames) {\n      staleTypeNames.addAll(rebinderTypeNamesByReboundTypeName.get(reboundTypeName));\n    }",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 505,
+        "endChar": 45
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

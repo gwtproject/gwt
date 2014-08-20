@@ -310,7 +310,7 @@ public class ShowcaseGenerator extends Generator {
    */
   private String getResourceContents(String path)
       throws UnableToCompleteException {
-    InputStream in = classLoader.getResourceAsStream(path);
+    InputStream in = context.getResourcesOracle().getResourceAsStream(path);
     if (in == null) {
       logger.log(TreeLogger.ERROR, "Resource not found: " + path);
       throw new UnableToCompleteException();

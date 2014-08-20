@@ -29,6 +29,7 @@ import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.i18n.client.Messages.AlternateMessage;
@@ -82,7 +83,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
   private abstract static class AlternateFormSelector {
     protected final int argNumber;
     protected final JType argType;
-    
+
     public AlternateFormSelector(TreeLogger logger, int argNumber, JParameter[] params) {
       this.argNumber = argNumber;
       this.argType = params[argNumber].getType();
@@ -102,7 +103,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
      */
     public abstract void generateSelectMatchStart(SourceWriter out,
         TreeLogger logger, String value) throws UnableToCompleteException;
-    
+
     public abstract void generateSelectStart(SourceWriter out,
         boolean exactMatches);
 
@@ -167,7 +168,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
    * all non-exact matches.
    */
   private static class ExactValueComparator implements Comparator<String> {
-    
+
     private static int compareOne(String a, String b) {
       boolean aExact = a.startsWith("=");
       boolean bExact = a.startsWith("=");
@@ -211,7 +212,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
      * @param m
      * @param i
      * @param params
-     * @throws UnableToCompleteException 
+     * @throws UnableToCompleteException
      */
     public GenericSelector(TreeLogger logger, JMethod m, int i,
         JParameter[] params) throws UnableToCompleteException {
@@ -268,7 +269,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
       }
       out.println("}");
     }
-    
+
     @Override
     public void generateSelectMatchEnd(SourceWriter out, String value) {
       if (!startedIfChain) {
@@ -571,7 +572,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
 
     /**
      * Return the count of parameters.
-     * @return the count of parameters 
+     * @return the count of parameters
      */
     int getCount();
 
@@ -595,7 +596,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
      * Return an expression to get the value of the requested parameter.  Note
      * that for arrays or lists this will return an expression giving the count
      * of items in the array or list.
-     *  
+     *
      * @param i index of the paramter, 0 .. getCount() - 1
      * @return the source of code to access the parameter value
      */
@@ -673,7 +674,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
         return argName + "_count";
       }
       if (isArray[i]) {
-        return argName + ".length"; 
+        return argName + ".length";
       }
       if (isList[i]) {
         return argName + ".size()";
@@ -702,10 +703,10 @@ class MessagesMethodCreator extends AbstractMethodCreator {
     protected final PluralRule pluralRule;
     private boolean hasExactMatches;
     private boolean inExactMatches;
-    
+
     // used to generate unique case values for bogus plural forms
     private int bogusCaseValue = 1000;
-    
+
     public PluralFormSelector(TreeLogger logger, JMethod method, int argNumber,
         JParameter[] params, GwtLocale locale)
         throws UnableToCompleteException {
@@ -724,7 +725,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
           missingPluralForms.add(form.getName());
         }
       }
-      
+
       Offset offsetAnnot = params[argNumber].getAnnotation(Offset.class);
       int offset = 0;
       if (offsetAnnot != null) {
@@ -798,7 +799,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
       out.outdent();
       out.println("}");
     }
-    
+
     @Override
     public void generateSelectMatchEnd(SourceWriter out, String value) {
       out.println("break;");
@@ -866,7 +867,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
     public PluralForm[] getPluralForms() {
       return pluralRule.pluralForms();
     }
-    
+
     @Override
     public void issueWarnings(TreeLogger logger, JMethod m, GwtLocale locale) {
       if (!missingPluralForms.isEmpty()) {
@@ -1049,22 +1050,22 @@ class MessagesMethodCreator extends AbstractMethodCreator {
 
   private SourceWriter writer;
 
+  private final ResourceOracle resourceOracle;
+
   /**
    * Constructor for <code>MessagesMethodCreator</code>.
-   *
-   * @param classCreator associated class creator
-   * @param writer 
    */
   public MessagesMethodCreator(AbstractGeneratorClassCreator classCreator,
-      SourceWriter writer) {
+      SourceWriter writer, ResourceOracle resourceOracle) {
     super(classCreator);
     listPatternCache = new HashMap<GwtLocale, Map<String, String>>();
     this.writer = writer;
+    this.resourceOracle = resourceOracle;
   }
 
   /**
    * Append an argument to the output without doing any formatting.
-   * 
+   *
    * @param buf
    * @param argExpr Java source for expression to produce argument value
    * @param argType type of the argument being appended
@@ -1134,7 +1135,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
     }
 
     // Generate code to format any lists
-    // TODO(jat): handle messages with different list formats in alternate forms 
+    // TODO(jat): handle messages with different list formats in alternate forms
     try {
       for (TemplateChunk chunk : MessageFormatParser.parse(template)) {
         if (chunk instanceof ArgumentChunk) {
@@ -1178,7 +1179,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
       throw error(logger, "Error parsing '" + template + "'", pe);
     }
 
-    if (!seenPluralCount && !seenSelect 
+    if (!seenPluralCount && !seenSelect
         && (m.getAnnotation(AlternateMessage.class) != null
         || m.getAnnotation(PluralText.class) != null)) {
       logger.log(TreeLogger.WARN, "Unused @AlternateMessage or @PluralText on "
@@ -1194,7 +1195,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
       for (AlternateFormSelector selector : selectors) {
         selector.generatePrepCode(writer);
       }
-      
+
       // sort forms so that all exact-value forms come first
       String[] forms = resourceForms.toArray(new String[resourceForms.size()]);
       Arrays.sort(forms, new ExactValueComparator());
@@ -1432,7 +1433,7 @@ class MessagesMethodCreator extends AbstractMethodCreator {
             + " 'other' values, @DefaultMessage will be used");
         continue;
       }
-      
+
       // find where the changes are
       int firstDifferent = 0;
       while (firstDifferent < numSelectors
@@ -1541,10 +1542,9 @@ class MessagesMethodCreator extends AbstractMethodCreator {
       // TODO(jat): get these from ResourceOracle instead
       String baseName = MessagesMethodCreator.class.getPackage().getName().replace('.', '/')
           + "/cldr/ListPatterns_";
-      ClassLoader cl = MessagesMethodCreator.class.getClassLoader();
       for (GwtLocale search : locale.getCompleteSearchList()) {
         String propFile = baseName + search.getAsString() + ".properties";
-        InputStream stream = cl.getResourceAsStream(propFile);
+        InputStream stream = resourceOracle.getResourceAsStream(propFile);
         if (stream != null) {
           try {
             LocalizedPropertiesLoader loader = new LocalizedPropertiesLoader(stream, "UTF-8");

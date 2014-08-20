@@ -27,6 +27,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.i18n.client.impl.LocaleInfoImpl;
 import com.google.gwt.i18n.server.GwtLocaleImpl;
 import com.google.gwt.i18n.shared.GwtLocale;
@@ -125,17 +126,17 @@ public class LocaleInfoGenerator extends Generator {
       LocalizedProperties displayNames = new LocalizedProperties();
       LocalizedProperties displayNamesManual = new LocalizedProperties();
       LocalizedProperties displayNamesOverride = new LocalizedProperties();
-      ClassLoader classLoader = getClass().getClassLoader();
+      ResourceOracle resourceOracle = context.getResourcesOracle();
       try {
-        InputStream str = classLoader.getResourceAsStream(GENERATED_LOCALE_NATIVE_DISPLAY_NAMES);
+        InputStream str = resourceOracle.getResourceAsStream(GENERATED_LOCALE_NATIVE_DISPLAY_NAMES);
         if (str != null) {
           displayNames.load(str, "UTF-8");
         }
-        str = classLoader.getResourceAsStream(MANUAL_LOCALE_NATIVE_DISPLAY_NAMES);
+        str = resourceOracle.getResourceAsStream(MANUAL_LOCALE_NATIVE_DISPLAY_NAMES);
         if (str != null) {
           displayNamesManual.load(str, "UTF-8");
         }
-        str = classLoader.getResourceAsStream(OVERRIDE_LOCALE_NATIVE_DISPLAY_NAMES);
+        str = resourceOracle.getResourceAsStream(OVERRIDE_LOCALE_NATIVE_DISPLAY_NAMES);
         if (str != null) {
           displayNamesOverride.load(str, "UTF-8");
         }

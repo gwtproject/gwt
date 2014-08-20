@@ -24,13 +24,14 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.dev.resource.ResourceOracle;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.user.client.ui.ImageBundle;
 import com.google.gwt.user.client.ui.ImageBundle.Resource;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 
 import java.io.PrintWriter;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,15 +84,18 @@ public class ImageBundleGenerator extends Generator {
       this.delegate = delegate;
     }
 
+    @Override
     @SuppressWarnings("deprecation")
     public Resource getAnnotation(Class<Resource> clazz) {
       return delegate.getAnnotation(clazz);
     }
 
+    @Override
     public String getName() {
       return delegate.getName();
     }
 
+    @Override
     public String getPackageName() {
       return delegate.getEnclosingType().getPackage().getName();
     }
@@ -115,17 +119,19 @@ public class ImageBundleGenerator extends Generator {
 
   private final ResourceLocator resLocator;
 
+  private ResourceOracle resourceOracle;
+
   /**
    * Default constructor for image bundle. Locates resources using this class's
    * own class loader.
    */
   public ImageBundleGenerator() {
-    this(new ResourceLocator() {
+    this.resLocator = new ResourceLocator() {
+      @Override
       public boolean isResourcePresent(String resName) {
-        URL url = getClass().getClassLoader().getResource(resName);
-        return url != null;
+        return resourceOracle.getResource(resName) != null;
       }
-    });
+    };
   }
 
   /**
@@ -139,6 +145,7 @@ public class ImageBundleGenerator extends Generator {
   @Override
   public String generate(TreeLogger logger, GeneratorContext context,
       String typeName) throws UnableToCompleteException {
+    resourceOracle = context.getResourcesOracle();
 
     TypeOracle typeOracle = context.getTypeOracle();
 
@@ -166,7 +173,8 @@ public class ImageBundleGenerator extends Generator {
    * @throws UnableToCompleteException thrown if a resource was specified but
    *           could not be found on the classpath
    */
-  /* private */String getImageResourceName(TreeLogger logger,
+  @VisibleForTesting
+  String getImageResourceName(TreeLogger logger,
       JMethodOracle method) throws UnableToCompleteException {
     String imgName = tryGetImageNameFromMetaData(logger, method);
     if (imgName != null) {

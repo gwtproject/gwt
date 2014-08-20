@@ -122,6 +122,13 @@ public interface GeneratorContext {
   boolean isProdMode();
 
   /**
+   * Records an association between the currently being processed typeName and
+   * the given resourcePath. The collected associations facilitate minimal
+   * rerunning of Generators during incremental compilation.
+   */
+  void recordInputResource(String resourcePath);
+
+  /**
    * Attempts to get a <code>PrintWriter</code> so that the caller can generate
    * the source code for the named type. If the named types already exists,
    * <code>null</code> is returned to indicate that no work needs to be done.

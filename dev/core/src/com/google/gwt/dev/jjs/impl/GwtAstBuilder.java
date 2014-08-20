@@ -3361,18 +3361,15 @@ public class GwtAstBuilder {
     }
   }
 
-  private void maybeAddMethodSpecialization(AbstractMethodDeclaration x,
-      JMethod method) {
-    AnnotationBinding specializeAnnotation = JdtUtil
-        .getAnnotation(x.binding, SpecializeMethod.class.getName());
+  private void maybeAddMethodSpecialization(AbstractMethodDeclaration x, JMethod method) {
+    AnnotationBinding specializeAnnotation =
+        JdtUtil.getAnnotation(x.binding, SpecializeMethod.class.getName());
     if (specializeAnnotation != null) {
-      TypeBinding[] params = JdtUtil
-          .getAnnotationParameterTypeBindingArray(
-              specializeAnnotation, "params");
-      TypeBinding returns = JdtUtil.getAnnotationParameterTypeBinding(
-          specializeAnnotation, "returns");
-      String targetMethod = JdtUtil.getAnnotationParameterString(
-          specializeAnnotation, "target");
+      TypeBinding[] params =
+          JdtUtil.getAnnotationParameterTypeBindingArray(specializeAnnotation, "params");
+      TypeBinding returns =
+          JdtUtil.getAnnotationParameterTypeBinding(specializeAnnotation, "returns");
+      String targetMethod = JdtUtil.getAnnotationParameterString(specializeAnnotation, "target");
       List<JType> paramTypes = null;
       if (params != null) {
         paramTypes = new ArrayList<JType>();
@@ -3386,8 +3383,7 @@ public class GwtAstBuilder {
         returnsType = typeMap.get(returns);
       }
 
-      method.setSpecialization(paramTypes, returnsType,
-          targetMethod);
+      method.setSpecialization(paramTypes, returnsType, targetMethod);
     }
   }
 

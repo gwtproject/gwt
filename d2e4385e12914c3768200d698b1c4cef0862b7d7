@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9310f93f_b4bbe0a7",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-08-20T20:50:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d33271f0_c9cfd6ea",
+      "range": {
+        "startLine": 291,
+        "startChar": 5,
+        "endLine": 291,
+        "endChar": 12
+      },
+      "revId": "d2e4385e12914c3768200d698b1c4cef0862b7d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d33271f0_09af1e1b",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2014-08-20T19:35:23Z",
       "side": 1,
       "message": "This is confusing because setAllowedValues() will have no effect on what\u0027s returned by isAllowedValue(). It seems like we should rename one of the other, not sure what\u0027s best.",
+      "range": {
+        "startLine": 293,
+        "startChar": 17,
+        "endLine": 293,
+        "endChar": 31
+      },
+      "revId": "d2e4385e12914c3768200d698b1c4cef0862b7d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9310f93f_d4be5499",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-08-20T20:50:18Z",
+      "side": 1,
+      "message": "renamed setAllowedValues",
+      "parentUuid": "d33271f0_09af1e1b",
       "range": {
         "startLine": 293,
         "startChar": 17,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9310f93f_14b5ecb5",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-08-20T20:50:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d33271f0_89978ef6",
+      "range": {
+        "startLine": 331,
+        "startChar": 14,
+        "endLine": 331,
+        "endChar": 30
+      },
+      "revId": "d2e4385e12914c3768200d698b1c4cef0862b7d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d33271f0_e93cd24b",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2014-08-20T19:35:23Z",
       "side": 1,
       "message": "Need javadoc to explain what \"authorative\" means or maybe adjust the name to make this clearer. I\u0027m not sure what you\u0027re going for but maybe something like setTempAllowedValues() and setPermanentAllowedValues() or something like that.\n\nAlso, could you add a cross-reference to setAllowedValues and explain the difference.",
+      "range": {
+        "startLine": 431,
+        "startChar": 14,
+        "endLine": 431,
+        "endChar": 41
+      },
+      "revId": "d2e4385e12914c3768200d698b1c4cef0862b7d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9310f93f_f4b158c9",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-08-20T20:50:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d33271f0_e93cd24b",
       "range": {
         "startLine": 431,
         "startChar": 14,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "9310f93f_54ab645f",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-08-20T20:50:18Z",
+      "side": 1,
+      "message": "deleted.",
+      "parentUuid": "d33271f0_89c8ae39",
+      "range": {
+        "startLine": 438,
+        "startChar": 5,
+        "endLine": 438,
+        "endChar": 8
+      },
+      "revId": "d2e4385e12914c3768200d698b1c4cef0862b7d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d33271f0_698342b4",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
         "patchSetId": 3
@@ -128,6 +248,30 @@
       "writtenOn": "2014-08-20T19:35:23Z",
       "side": 1,
       "message": "For clarity let\u0027s not name this helper method the same thing as the public method. Maybe updateConditionMap()?",
+      "range": {
+        "startLine": 444,
+        "startChar": 15,
+        "endLine": 444,
+        "endChar": 31
+      },
+      "revId": "d2e4385e12914c3768200d698b1c4cef0862b7d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9310f93f_74a66899",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/BindingProperty.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-08-20T20:50:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d33271f0_698342b4",
       "range": {
         "startLine": 444,
         "startChar": 15,

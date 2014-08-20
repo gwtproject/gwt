@@ -301,6 +301,7 @@ public class JavaResourceBase {
           "  public char charAt(int index) { return 'a'; }",
           "  public int compareTo(String other) { return -1; }",
           "  public boolean equals(Object obj) { return false; }",
+          "  public boolean equals(String obj) { return false; }",
           "  public boolean equalsIgnoreCase(String str) { return false; }",
           "  public int length() { return 0; }",
           "  public static String valueOf(int i) { return \"\" + i; }",

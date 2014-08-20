@@ -16,6 +16,23 @@
       "revId": "160ce133618cc93754d66a1a0119f8943da094be",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d34b5172_04f716f1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/EnumNameObfuscator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T21:52:59Z",
+      "side": 1,
+      "message": "isTypeInBlackList? (and make it private?)\n\nAlso I don\u0027t think you need to wrap here.",
+      "revId": "160ce133618cc93754d66a1a0119f8943da094be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -577,7 +577,7 @@ public class JTypeOracle implements Serializable {
       return true;
     }
     if (type instanceof JInterfaceType) {
-      for (JReferenceType impl : getTypes(classesByImplementingInterface, type.getName())) {
+      for (JReferenceType impl : getTypes(classesByImplementingInterface.get(type.getName()))) {
         if (isInstantiatedType((JClassType) impl)) {
           return true;
         }
@@ -655,13 +655,13 @@ public class JTypeOracle implements Serializable {
       if (qType instanceof JClassType) {
         return isSubClass(cType, (JClassType) qType);
       } else if (qType instanceof JInterfaceType) {
-        return potentialInterfaceByClass.get(cType.getName()).contains(qType.getName());
+        return potentialInterfaceByClass.containsEntry(cType.getName(), qType.getName());
       }
     } else if (type instanceof JInterfaceType) {
 
       JInterfaceType iType = (JInterfaceType) type;
       if (qType instanceof JClassType) {
-        return classesByPotentialInterface.get(iType.getName()).contains(qType.getName());
+        return classesByPotentialInterface.containsEntry(iType.getName(), qType.getName());
       }
     } else if (type instanceof JNullType) {
     }
@@ -755,11 +755,22 @@ public class JTypeOracle implements Serializable {
   public void computeBeforeAST(StandardTypes standardTypes, Collection<JDeclaredType> declaredTypes,
       Collection<JDeclaredType> moduleDeclaredTypes, Collection<String> deletedTypeNames) {
     this.standardTypes = standardTypes;
+    long time = System.nanoTime();
     recordReferenceTypeByName(declaredTypes);
+    System.out.printf("recordReferenceTypeByName - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
     deleteImmediateTypeRelations(deletedTypeNames);
+    System.out.printf("deleteImmediateTypeRelations - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
     deleteImmediateTypeRelations(getNamesOf(moduleDeclaredTypes));
+    System.out.printf("deleteImmediateTypeRelations - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
     recordImmediateTypeRelations(moduleDeclaredTypes);
+    System.out.printf("recordImmediateTypeRelations - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
     computeExtendedTypeRelations();
+    System.out.printf("computeExtendedTypeRelations - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
 
     jsInterfaces.clear();
 
@@ -914,13 +925,16 @@ public class JTypeOracle implements Serializable {
 
     List<JReferenceType> castableDestinationTypes = Lists.newArrayList();
     if (superclassesByClass.containsKey(type.getName())) {
-      castableDestinationTypes.addAll(getTypes(superclassesByClass, type.getName()));
+      Iterables.addAll(castableDestinationTypes,
+          getTypes(superclassesByClass.get(type.getName())));
     }
     if (superInterfacesByInterface.containsKey(type.getName())) {
-      castableDestinationTypes.addAll(getTypes(superInterfacesByInterface, type.getName()));
+      Iterables.addAll(castableDestinationTypes,
+          getTypes(superInterfacesByInterface.get(type.getName())));
     }
     if (implementedInterfacesByClass.containsKey(type.getName())) {
-      castableDestinationTypes.addAll(getTypes(implementedInterfacesByClass, type.getName()));
+      Iterables.addAll(castableDestinationTypes,
+          getTypes(implementedInterfacesByClass.get(type.getName())));
     }
     if (willCrossCastLikeJso(type)) {
       ensureTypeExistsAndAppend(JProgram.JAVASCRIPTOBJECT, castableDestinationTypes);
@@ -944,7 +958,7 @@ public class JTypeOracle implements Serializable {
   }
 
   public boolean isDualJsoInterface(JType maybeDualImpl) {
-    return dualImplInterfaces.contains(maybeDualImpl.getUnderlyingType().getName());
+    return dualImplInterfaces.contains(maybeDualImpl.getName());
   }
 
   /**
@@ -1123,13 +1137,12 @@ public class JTypeOracle implements Serializable {
    * Returns true if possibleSubType is a subclass of type, directly or indirectly.
    */
   public boolean isSubClass(JClassType type, JClassType possibleSubType) {
-    return subclassesByClass.get(type.getName()).contains(possibleSubType.getName());
+    return subclassesByClass.containsEntry(type.getName(), possibleSubType.getName());
   }
 
   public Set<String> getSubTypeNames(String typeName) {
-    Set<String> subTypeNames = Sets.newHashSet(subclassesByClass.get(typeName));
-    subTypeNames.addAll(subInterfacesByInterface.get(typeName));
-    return subTypeNames;
+    return Sets.union((Set<String>) subclassesByClass.get(typeName),
+        (Set<String>) subInterfacesByInterface.get(typeName) );
   }
 
   /**
@@ -1232,13 +1245,28 @@ public class JTypeOracle implements Serializable {
   }
 
   private void computeExtendedTypeRelations() {
+    long time = System.nanoTime();
     computeAllClasses();
+    System.out.printf("ComputeAllClasses - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
     computeClassMaps();
+    System.out.printf("computeClassMaps - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
     computeInterfaceMaps();
+    System.out.printf("computeInterfaceMaps - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
     computeImplementsMaps();
+    System.out.printf("computeImplementsMaps - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
     computeCouldImplementMaps();
+    System.out.printf("computeCouldImplementMaps - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
     computeSingleJSO();
+    System.out.printf("computeSingleJSO - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
     computeDualJSO();
+    System.out.printf("computeDualJSO - %.3fs\n", (System.nanoTime() - time) / 1000000000.0);
+    time = System.nanoTime();
   }
 
   private void computeAllClasses() {
@@ -1441,7 +1469,7 @@ public class JTypeOracle implements Serializable {
      */
     for (JInterfaceType intf : type.getImplements()) {
       computeVirtualUpRefs(type, intf);
-      for (JReferenceType superIntf : getTypes(superInterfacesByInterface, intf.getName())) {
+      for (JReferenceType superIntf : getTypes(superInterfacesByInterface.get(intf.getName()))) {
         computeVirtualUpRefs(type, (JInterfaceType) superIntf);
       }
     }
@@ -1499,24 +1527,22 @@ public class JTypeOracle implements Serializable {
    * directly or indirectly.
    */
   private boolean extendsInterface(JInterfaceType type, JInterfaceType qType) {
-    return superInterfacesByInterface.get(type.getName()).contains(qType.getName());
+    return superInterfacesByInterface.containsEntry(type.getName(), qType.getName());
   }
 
   private void getAllVirtualOverriddenMethods(JMethod method, Set<JMethod> results) {
     Multimap<JClassType, JMethod> overrideMap = virtualUpRefMap.get(method);
     if (overrideMap != null) {
-      for (Map.Entry<JClassType, JMethod> entry : overrideMap.entries()) {
-        JClassType classType = entry.getKey();
+      for (JClassType classType : overrideMap.keySet()) {
         if (isInstantiatedType(classType)) {
-          results.add(entry.getValue());
+          results.addAll(overrideMap.get(classType));
         }
       }
     }
   }
 
-  private Set<JReferenceType> getTypes(Multimap<String, String> typeNamesByTypeName,
-      String typeName) {
-    return Sets.newHashSet(Iterables.transform(typeNamesByTypeName.get(typeName),
+  private Iterable<JReferenceType> getTypes(Iterable<String> typeNameSet) {
+    return Iterables.transform(typeNameSet,
         new Function<String, JReferenceType>() {
           @Override
           public JReferenceType apply(String typeName) {
@@ -1524,7 +1550,7 @@ public class JTypeOracle implements Serializable {
             assert referenceType != null;
             return referenceType;
           }
-        }));
+        });
   }
 
   private <K, K2, V> Multimap<K2, V> getOrCreateMultimap(Map<K, Multimap<K2, V>> map, K key) {
@@ -1609,8 +1635,8 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * Given two binary relations {@code f} and {@code f} represented as multimap computes the
-   * relational composition, i.e. (a,c) is in f o g iif (a,b) is in f and (b, c) is in g.
+   * Given two binary relations {@code f} and {@code g} represented as multimap computes the
+   * relational composition, i.e. (a,c) is in (f.g) iif (a,b) is in f and (b,c) is in g.
    */
   private <A, B, C> Multimap<A, C> compose(Multimap<A, B> f, Multimap<B, C> g) {
     Multimap<A, C> composition = HashMultimap.create();
@@ -1627,10 +1653,10 @@ public class JTypeOracle implements Serializable {
    * directly or indirectly.
    */
   private boolean implementsInterface(JClassType type, JInterfaceType qType) {
-    return implementedInterfacesByClass.get(type.getName()).contains(qType.getName());
+    return implementedInterfacesByClass.containsEntry(type.getName(), qType.getName());
   }
 
   private boolean isSuperClass(String type, String qType) {
-    return superclassesByClass.get(type).contains(qType);
+    return superclassesByClass.containsEntry(type, qType);
   }
 }

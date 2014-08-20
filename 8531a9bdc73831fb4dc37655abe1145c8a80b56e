@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "d34b5172_eade0327",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/EnumNameObfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-08-20T23:30:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d33271f0_27e7a1ba",
+      "revId": "8531a9bdc73831fb4dc37655abe1145c8a80b56e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d33271f0_e2daa720",
         "filename": "user/src/com/google/gwt/core/CompilerParameters.gwt.xml",
         "patchSetId": 1

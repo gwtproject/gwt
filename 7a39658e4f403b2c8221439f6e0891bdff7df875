@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6220389_8434fbf2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-20T01:47:43Z",
+      "side": 1,
+      "message": "Maybe move this to getStringMethod and rename getStringMethod to getStringMethodOverload?",
+      "range": {
+        "startLine": 1731,
+        "startChar": 0,
+        "endLine": 1735,
+        "endChar": 7
+      },
+      "revId": "7a39658e4f403b2c8221439f6e0891bdff7df875",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6220389_443a03e1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1745,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-20T01:47:43Z",
+      "side": 1,
+      "message": "It is OK to remove this, if there is any exception during invoke, we can safely ignore it and not optimize the call in that case.",
+      "range": {
+        "startLine": 1743,
+        "startChar": 1,
+        "endLine": 1745,
+        "endChar": 16
+      },
+      "revId": "7a39658e4f403b2c8221439f6e0891bdff7df875",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

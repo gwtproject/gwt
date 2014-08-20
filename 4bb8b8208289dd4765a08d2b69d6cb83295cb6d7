@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d33271f0_a0bb82a7",
+        "filename": "dev/core/src/com/google/gwt/core/ext/GeneratorContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T03:44:28Z",
+      "side": 1,
+      "message": "I tried to reword from my (user) perspective:\n\"Records an input resource associated with the current generation.\nThis information may later be used by the compiler to invalidate the generated code and rerun the generator when the recorded input resource has changed.\"\n\n\nTaking a quick look at this, due to ResourceGeneratorUtil it looks like it was inevitable to introduce this method. I\u0027ll take a closer look tomorrow.",
+      "range": {
+        "startLine": 124,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 60
+      },
+      "revId": "4bb8b8208289dd4765a08d2b69d6cb83295cb6d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33271f0_c0d56ec9",
+        "filename": "user/src/com/google/gwt/user/rebind/ui/ImageBundleGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-20T03:44:28Z",
+      "side": 1,
+      "message": "VisibleForTesting (as you have changed the other one)",
+      "range": {
+        "startLine": 140,
+        "startChar": 5,
+        "endLine": 140,
+        "endChar": 12
+      },
+      "revId": "4bb8b8208289dd4765a08d2b69d6cb83295cb6d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "736385f2_8c59e76d",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-20T19:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d33271f0_69eea26a",
+      "range": {
+        "startLine": 208,
+        "startChar": 3,
+        "endLine": 209,
+        "endChar": 67
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d33271f0_0924be12",
         "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2014-08-20T19:35:39Z",
       "side": 1,
       "message": "You can replace this by\n  \n  rebinderTypeNamesByReboundTypeName.values().removeAll(rebinderTypeName);",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 5
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "736385f2_6c46b38e",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-20T19:58:46Z",
+      "side": 1,
+      "message": "i think my way runs faster, but i\u0027ll measure and if i can\u0027t measure any performance difference i\u0027ll do your way since it\u0027s shorter",
+      "parentUuid": "d33271f0_0924be12",
       "range": {
         "startLine": 210,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "736385f2_4c4bef94",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-20T19:58:46Z",
+      "side": 1,
+      "message": "i think my way runs faster, but i\u0027ll measure and if i can\u0027t measure any performance difference i\u0027ll do your way since it\u0027s shorter",
+      "parentUuid": "d33271f0_69c0e2c6",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 5
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d33271f0_89e2ee62",
         "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "736385f2_0fe0492f",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-20T19:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d33271f0_89e2ee62",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 390,
+        "endChar": 7
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d33271f0_e9d29290",
         "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2014-08-20T19:35:39Z",
       "side": 1,
       "message": "Maybe replace by\n\n    for (String reboundTypeName : reboundTypeNames) {\n      staleTypeNames.addAll(rebinderTypeNamesByReboundTypeName.get(reboundTypeName));\n    }",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 505,
+        "endChar": 45
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "736385f2_ef0bb547",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-20T19:58:46Z",
+      "side": 1,
+      "message": "alright. i had done it this way because it made it easier to log the whole added set on one line. but i guess that\u0027s no longer a concern",
+      "parentUuid": "d33271f0_e9d29290",
       "range": {
         "startLine": 501,
         "startChar": 0,

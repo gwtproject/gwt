@@ -168,9 +168,10 @@ public class UiBinderGenerator extends Generator {
         useLazyWidgetBuilders(logger, propertyOracle) && !designTime.isDesignTime();
     FieldManager fieldManager = new FieldManager(oracle, logger, useLazyWidgetBuilders);
 
-    UiBinderWriter uiBinderWriter = new UiBinderWriter(interfaceType, implName,
-        templatePath, oracle, logger, fieldManager, messages, designTime, uiBinderCtx,
-        useSafeHtmlTemplates(logger, propertyOracle), useLazyWidgetBuilders, BINDER_URI);
+    UiBinderWriter uiBinderWriter = new UiBinderWriter(interfaceType, implName, templatePath,
+        oracle, logger, fieldManager, messages, designTime, uiBinderCtx,
+        useSafeHtmlTemplates(logger, propertyOracle), useLazyWidgetBuilders, BINDER_URI,
+        resourceOracle);
 
     Document doc = getW3cDoc(logger, designTime, resourceOracle, templatePath);
     designTime.rememberPathForElements(doc);
@@ -191,7 +192,7 @@ public class UiBinderGenerator extends Generator {
       ResourceOracle resourceOracle, String templatePath)
       throws UnableToCompleteException {
 
-    Resource resource = resourceOracle.getResourceMap().get(templatePath);
+    Resource resource = resourceOracle.getResource(templatePath);
     if (null == resource) {
       logger.die("Unable to find resource: " + templatePath);
     }

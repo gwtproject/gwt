@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "736385f2_b28c0628",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-20T22:36:32Z",
+      "side": 1,
+      "message": "your way is slower, but the numbers are so low (0.1ms versus 1ms in a per file recompile and 17ms versus 155ms in a very large app full compile) that i\u0027m switching to your method, since it\u0027s much nicer to read",
+      "parentUuid": "d33271f0_0924be12",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 5
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d33271f0_69c0e2c6",
         "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
         "patchSetId": 2
@@ -130,6 +154,30 @@
       "writtenOn": "2014-08-20T19:58:46Z",
       "side": 1,
       "message": "i think my way runs faster, but i\u0027ll measure and if i can\u0027t measure any performance difference i\u0027ll do your way since it\u0027s shorter",
+      "parentUuid": "d33271f0_69c0e2c6",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 5
+      },
+      "revId": "835bcc516cd9e6e796cef3a04a04decbadce3074",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "736385f2_72768e58",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-20T22:36:32Z",
+      "side": 1,
+      "message": "your way is slower, but the numbers are so low (0.1ms versus 1ms in a per file recompile and 17ms versus 155ms in a very large app full compile) that i\u0027m switching to your method, since it\u0027s much nicer to read",
       "parentUuid": "d33271f0_69c0e2c6",
       "range": {
         "startLine": 216,

@@ -14,12 +14,6 @@
  * the License.
  */
 
-/**
- * Notes: For efficiency we handle String in a specialized way, in fact, a
- * java.lang.String is actually implemented as a native JavaScript String. Then
- * we just load up the prototype of the JavaScript String object with the
- * appropriate instance methods.
- */
 package java.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -386,11 +380,6 @@ public final class String implements Comparable<String>, CharSequence,
     return valueOf(sb);
   }
 
-  private static native boolean __equals(String me, Object other) /*-{
-    // Coerce me to a primitive string to force string comparison
-    return String(me) == other;
-  }-*/;
-
   // CHECKSTYLE_ON
 
   private static native int compareTo(String thisStr, String otherStr) /*-{
@@ -666,8 +655,14 @@ public final class String implements Comparable<String>, CharSequence,
   @DoNotInline
   @Override
   public boolean equals(Object other) {
-    return (other instanceof String) && __equals(this, other);
+    return (other instanceof String) && equals((String) other);
   }
+
+  // This a non-standard overload for faster code path when the target type is string.
+  public native boolean equals(String other) /*-{
+    // Coerce me to a primitive string to force string comparison
+    return String(me) == other;
+  }-*/;
 
   public native boolean equalsIgnoreCase(String other) /*-{
     if (other == null) {

@@ -92,7 +92,7 @@ public class DynamicPropertyOracle implements PropertyOracle {
     accessedPropertiesChanged |= accessedProperties.add(bindingProperty);
 
     String propertyValue = prescribedPropertyValuesByName.isEmpty()
-        ? bindingProperty.getFirstLegalValue() : prescribedPropertyValuesByName.get(propertyName);
+        ? bindingProperty.chooseDefaultValue() : prescribedPropertyValuesByName.get(propertyName);
     return createSelectionProperty(propertyValue, bindingProperty);
   }
 

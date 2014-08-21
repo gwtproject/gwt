@@ -96,4 +96,15 @@ public abstract class Resource {
 
   public abstract boolean wasRerooted();
 
+  public static InputStream toStreamOrNull(Resource resource) {
+    if (resource == null) {
+      return null;
+    }
+    try {
+      return resource.openContents();
+    } catch (IOException e) {
+      return null;
+    }
+  }
+
 }

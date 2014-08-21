@@ -25,6 +25,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.i18n.client.CurrencyList;
 import com.google.gwt.i18n.client.impl.CurrencyDataImpl;
 import com.google.gwt.i18n.shared.GwtLocale;
@@ -329,12 +330,12 @@ public class CurrencyListGenerator extends Generator {
     String lastDefaultCurrencyCode = null;
     for (int i = searchList.size(); i-- > 0;) {
       GwtLocale search = searchList.get(i);
-      LocalizedProperties newExtra = getProperties(CURRENCY_EXTRA_PREFIX,
-          search);
+      LocalizedProperties newExtra =
+          getProperties(CURRENCY_EXTRA_PREFIX, search, context.getResourcesOracle());
       if (newExtra != null) {
         currencyExtra = newExtra;
       }
-      Map<String, String> currencyData = getCurrencyData(search);
+      Map<String, String> currencyData = getCurrencyData(search, context.getResourcesOracle());
       Set<String> keySet = currencyData.keySet();
       String[] currencies = new String[keySet.size()];
       keySet.toArray(currencies);
@@ -348,7 +349,7 @@ public class CurrencyListGenerator extends Generator {
             currencyData.get(currencyCode), extraData));
       }
 
-      String defCurrencyCode = getDefaultCurrency(search);
+      String defCurrencyCode = getDefaultCurrency(search, context.getResourcesOracle());
       // If this locale specifies a particular locale, or the one that is
       // inherited has been changed in this locale, re-specify the default
       // currency so the method will be generated.
@@ -558,14 +559,11 @@ public class CurrencyListGenerator extends Generator {
    * If a symbol is not supplied, the currency code will be used If # of decimal
    * digits is omitted, 2 is used If a currency is not generally used,
    * not-used-flag=1 Trailing empty fields can be omitted
-   *
-   * @param locale
-   * @return currency data map
    */
   @SuppressWarnings("unchecked")
-  private Map<String, String> getCurrencyData(GwtLocale locale) {
-    LocalizedProperties currencyData = getProperties(CURRENCY_DATA_PREFIX,
-        locale);
+  private Map<String, String> getCurrencyData(GwtLocale locale, ResourceOracle resourceOracle) {
+    LocalizedProperties currencyData =
+        getProperties(CURRENCY_DATA_PREFIX, locale, resourceOracle);
     if (currencyData == null) {
       return Collections.emptyMap();
     }
@@ -574,13 +572,11 @@ public class CurrencyListGenerator extends Generator {
 
   /**
    * Returns the default currency code for the requested locale.
-   *
-   * @param locale
-   * @return ISO4217 currency code
    */
-  private String getDefaultCurrency(GwtLocale locale) {
+  private String getDefaultCurrency(GwtLocale locale, ResourceOracle resourceOracle) {
     String defCurrencyCode = null;
-    LocalizedProperties numberConstants = getProperties(NUMBER_CONSTANTS_PREFIX, locale);
+    LocalizedProperties numberConstants =
+        getProperties(NUMBER_CONSTANTS_PREFIX, locale, resourceOracle);
     if (numberConstants != null) {
       defCurrencyCode = numberConstants.getProperty("defCurrencyCode");
     }
@@ -596,20 +592,21 @@ public class CurrencyListGenerator extends Generator {
    *
    * @param prefix classpath prefix of properties file
    * @param locale locale to load
+   * @param resourceOracle in which to locate resources
    * @return LocalizedProperties instance containing properties file or null if
    *         not found.
    */
-  private LocalizedProperties getProperties(String prefix, GwtLocale locale) {
+  private LocalizedProperties getProperties(String prefix, GwtLocale locale,
+      ResourceOracle resourceOracle) {
     String propFile = prefix;
     if (!locale.isDefault()) {
       propFile += "_" + locale.getAsString();
     }
     propFile += ".properties";
     InputStream str = null;
-    ClassLoader classLoader = getClass().getClassLoader();
     LocalizedProperties props = new LocalizedProperties();
     try {
-      str = classLoader.getResourceAsStream(propFile);
+      str = resourceOracle.getResourceAsStream(propFile);
       if (str != null) {
         props.load(str, "UTF-8");
         return props;

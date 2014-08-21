@@ -275,10 +275,11 @@ public class UiBinderParserUiWithTest extends TestCase {
     item = (Element) doc.getDocumentElement().getElementsByTagName("with").item(0);
     elm = elemProvider.get(item);
     JClassType aClass = types.findType(baseClass);
-    writer =
-        new UiBinderWriter(aClass, "foo", "", types, logger, fieldManager, null,
-            DesignTimeUtilsStub.EMPTY, new UiBinderContext(), true, true, "");
-    parser = new UiBinderParser(writer, null, fieldManager, types, null, "", new UiBinderContext());
+    MockResourceOracle resourceOracle = new MockResourceOracle();
+    writer = new UiBinderWriter(aClass, "foo", "", types, logger, fieldManager, null,
+        DesignTimeUtilsStub.EMPTY, new UiBinderContext(), true, true, "", resourceOracle);
+    parser = new UiBinderParser(writer, null, fieldManager, types, null, "", new UiBinderContext(),
+        resourceOracle);
     designTime.rememberPathForElements(doc);
     UiBinderParser.Resource.WITH.create(parser, elm);
   }

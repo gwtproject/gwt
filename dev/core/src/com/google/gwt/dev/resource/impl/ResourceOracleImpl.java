@@ -482,4 +482,14 @@ public class ResourceOracleImpl implements ResourceOracle {
   List<ClassPathEntry> getClassPathEntries() {
     return classPathEntries;
   }
+
+  @Override
+  public Resource getResource(String pathName) {
+    return getResourceMap().get(pathName);
+  }
+
+  @Override
+  public InputStream getResourceAsStream(String pathName) {
+    return Resource.toStreamOrNull(getResource(pathName));
+  }
 }

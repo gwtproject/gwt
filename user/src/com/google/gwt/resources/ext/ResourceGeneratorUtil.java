@@ -40,7 +40,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Utility methods for building ResourceGenerators.
@@ -54,6 +53,7 @@ public final class ResourceGeneratorUtil {
       this.classLoader = classLoader;
     }
 
+    @Override
     public URL locate(String resourceName) {
       return classLoader.getResource(resourceName);
     }
@@ -64,12 +64,15 @@ public final class ResourceGeneratorUtil {
    * {@link ResourceGeneratorUtil#addNamedFile(String, File)}.
    */
   private static class NamedFileLocator implements Locator {
-    public static final NamedFileLocator INSTANCE = new NamedFileLocator();
+    private GeneratorContext genContext;
 
-    private NamedFileLocator() {
+    private NamedFileLocator(GeneratorContext genContext) {
+      this.genContext = genContext;
     }
 
+    @Override
     public URL locate(String resourceName) {
+      genContext.recordInputResource(resourceName);
       File f = ResourceGeneratorUtilImpl.getGeneratedFile(resourceName);
       if (f != null && f.isFile() && f.canRead()) {
         try {
@@ -91,15 +94,16 @@ public final class ResourceGeneratorUtil {
   }
 
   private static class ResourceOracleLocator implements Locator {
-    private final Map<String, Resource> resourceMap;
+    private final ResourceOracle resourceOracle;
 
-    public ResourceOracleLocator(ResourceOracle oracle) {
-      resourceMap = oracle.getResourceMap();
+    public ResourceOracleLocator(ResourceOracle resourceOracle) {
+      this.resourceOracle = resourceOracle;
     }
 
+    @Override
     @SuppressWarnings("deprecation")
     public URL locate(String resourceName) {
-      Resource r = resourceMap.get(resourceName);
+      Resource r = resourceOracle.getResource(resourceName);
       return (r == null) ? null : r.getURL();
     }
   }
@@ -402,7 +406,7 @@ public final class ResourceGeneratorUtil {
   /**
    * Try to find a resource with the given resourceName.  It will use the default
    * search order to locate the resource as is used by {@link #findResources}.
-   * 
+   *
    * @param logger
    * @param genContext
    * @param resourceContext
@@ -426,7 +430,7 @@ public final class ResourceGeneratorUtil {
 
   /**
    * Add the type dependency requirements for a method, to the context.
-   * 
+   *
    * @param context
    * @param method
    */
@@ -548,13 +552,13 @@ public final class ResourceGeneratorUtil {
 
   /**
    * Get default list of resource Locators, in the default order.
-   * 
+   *
    * @param genContext
    * @return an ordered array of Locator[]
    */
   private static Locator[] getDefaultLocators(GeneratorContext genContext) {
     Locator[] locators = {
-      NamedFileLocator.INSTANCE,
+      new NamedFileLocator(genContext),
       new ResourceOracleLocator(genContext.getResourcesOracle()),
       new ClassLoaderLocator(Thread.currentThread().getContextClassLoader())};
 
@@ -563,7 +567,7 @@ public final class ResourceGeneratorUtil {
 
   /**
    * Get the current locale string.
-   * 
+   *
    * @param logger
    * @param genContext
    * @return the current locale
@@ -579,7 +583,7 @@ public final class ResourceGeneratorUtil {
     }
     return locale;
   }
- 
+
   /**
    * Converts a package relative path into an absolute path.
    *

@@ -128,7 +128,7 @@ public class UiBinderGenerator extends Generator {
 
     if (printWriter != null) {
       generateOnce(interfaceType, implName, printWriter, logger, oracle,
-          resourceOracle, genCtx.getPropertyOracle(), writers, designTime);
+          genCtx, genCtx.getPropertyOracle(), writers, designTime);
     }
     return packageName + "." + implName;
   }
@@ -155,8 +155,8 @@ public class UiBinderGenerator extends Generator {
 
   private void generateOnce(JClassType interfaceType, String implName,
       PrintWriter binderPrintWriter, TreeLogger treeLogger, TypeOracle oracle,
-      ResourceOracle resourceOracle, PropertyOracle propertyOracle,
-      PrintWriterManager writerManager,  DesignTimeUtils designTime)
+      GeneratorContext genCtx, PropertyOracle propertyOracle,
+      PrintWriterManager writerManager, DesignTimeUtils designTime)
   throws UnableToCompleteException {
 
     MortalLogger logger = new MortalLogger(treeLogger);
@@ -168,11 +168,12 @@ public class UiBinderGenerator extends Generator {
         useLazyWidgetBuilders(logger, propertyOracle) && !designTime.isDesignTime();
     FieldManager fieldManager = new FieldManager(oracle, logger, useLazyWidgetBuilders);
 
-    UiBinderWriter uiBinderWriter = new UiBinderWriter(interfaceType, implName,
-        templatePath, oracle, logger, fieldManager, messages, designTime, uiBinderCtx,
-        useSafeHtmlTemplates(logger, propertyOracle), useLazyWidgetBuilders, BINDER_URI);
+    UiBinderWriter uiBinderWriter = new UiBinderWriter(interfaceType, implName, templatePath,
+        oracle, logger, fieldManager, messages, designTime, uiBinderCtx,
+        useSafeHtmlTemplates(logger, propertyOracle), useLazyWidgetBuilders, BINDER_URI,
+        genCtx);
 
-    Document doc = getW3cDoc(logger, designTime, resourceOracle, templatePath);
+    Document doc = getW3cDoc(logger, designTime, genCtx.getResourcesOracle(), templatePath);
     designTime.rememberPathForElements(doc);
 
     uiBinderWriter.parseDocument(doc, binderPrintWriter);
@@ -191,7 +192,7 @@ public class UiBinderGenerator extends Generator {
       ResourceOracle resourceOracle, String templatePath)
       throws UnableToCompleteException {
 
-    Resource resource = resourceOracle.getResourceMap().get(templatePath);
+    Resource resource = resourceOracle.getResource(templatePath);
     if (null == resource) {
       logger.die("Unable to find resource: " + templatePath);
     }

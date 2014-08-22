@@ -15,6 +15,7 @@
  */
 package com.google.gwt.uibinder.rebind;
 
+import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
@@ -358,11 +359,13 @@ public class UiBinderWriter implements Statements {
   private final String binderUri;
   private final boolean isRenderer;
 
+  private final GeneratorContext genCtx;
+
   public UiBinderWriter(JClassType baseClass, String implClassName, String templatePath,
       TypeOracle oracle, MortalLogger logger, FieldManager fieldManager,
       MessagesWriter messagesWriter, DesignTimeUtils designTime, UiBinderContext uiBinderCtx,
-      boolean useSafeHtmlTemplates, boolean useLazyWidgetBuilders, String binderUri)
-      throws UnableToCompleteException {
+      boolean useSafeHtmlTemplates, boolean useLazyWidgetBuilders, String binderUri,
+      GeneratorContext genCtx) throws UnableToCompleteException {
     this.baseClass = baseClass;
     this.implClassName = implClassName;
     this.oracle = oracle;
@@ -375,6 +378,7 @@ public class UiBinderWriter implements Statements {
     this.useSafeHtmlTemplates = useSafeHtmlTemplates;
     this.useLazyWidgetBuilders = useLazyWidgetBuilders;
     this.binderUri = binderUri;
+    this.genCtx = genCtx;
 
     this.htmlTemplates = new HtmlTemplatesWriter(fieldManager, logger);
 
@@ -1360,7 +1364,7 @@ public class UiBinderWriter implements Statements {
     // Allow GWT.create() to init the field, the default behavior
 
     FieldWriter rootField = new UiBinderParser(this, messages, fieldManager, oracle, bundleClass,
-            binderUri, uiBinderCtx).parse(elem);
+            binderUri, uiBinderCtx, genCtx).parse(elem);
 
     fieldManager.validate();
 

@@ -19,6 +19,7 @@ import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -60,6 +61,17 @@ public class CombinedResourceOracle implements ResourceOracle {
     return pathNames;
   }
 
+  @Override
+  public Resource getResource(String pathName) {
+    return getResourceMap().get(pathName);
+  }
+
+  @Override
+  public InputStream getResourceAsStream(String pathName) {
+    return Resource.toStreamOrNull(getResource(pathName));
+  }
+
+  @Deprecated
   @Override
   public Map<String, Resource> getResourceMap() {
     if (buildResourcesByPath == null) {

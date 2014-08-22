@@ -14,6 +14,8 @@
 package com.google.gwt.uibinder.rebind;
 
 import com.google.gwt.codegen.server.AbortablePrintWriter;
+import com.google.gwt.core.ext.GeneratorContext;
+import com.google.gwt.core.ext.StubGeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -187,10 +189,11 @@ public abstract class AbstractUiBinderWriterTest extends TestCase {
     MessagesWriter messages =
         new MessagesWriter(types, BINDER_URI, logger, rendererClass.getPath(), "rendererPackage",
             "rendererClassName");
-    writer =
-        new UiBinderWriter(aClass, "foo", "", types, logger, fieldManager, messages,
-            DesignTimeUtilsStub.EMPTY, uiBinderCtx, true, true, BINDER_URI);
-    parser = new UiBinderParser(writer, messages, fieldManager, types, null, BINDER_URI, new UiBinderContext());
+    GeneratorContext context = new StubGeneratorContext();
+    writer = new UiBinderWriter(aClass, "foo", "", types, logger, fieldManager, messages,
+        DesignTimeUtilsStub.EMPTY, uiBinderCtx, true, true, BINDER_URI, context);
+    parser = new UiBinderParser(writer, messages, fieldManager, types, null, BINDER_URI,
+        new UiBinderContext(), context);
     designTime.rememberPathForElements(doc);
   }
 }

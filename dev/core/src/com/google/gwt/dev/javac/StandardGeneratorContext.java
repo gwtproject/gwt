@@ -34,6 +34,7 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.cfg.RuleGenerateWith;
+import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.Util;
@@ -48,9 +49,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -64,6 +67,51 @@ import java.util.SortedSet;
  * Manages generators and generated units during a single compilation.
  */
 public class StandardGeneratorContext implements GeneratorContext {
+
+  /**
+   * Wraps a ResourceOracle to collect the paths of Resources read by Generators.
+   */
+  private class RecordingResourceOracle implements ResourceOracle {
+
+    private final ResourceOracle wrappedResourceOracle;
+
+    public RecordingResourceOracle(ResourceOracle wrappedResourceOracle) {
+      this.wrappedResourceOracle = wrappedResourceOracle;
+    }
+
+    @Override
+    public void clear() {
+      wrappedResourceOracle.clear();
+    }
+
+    @Override
+    public Set<String> getPathNames() {
+      return wrappedResourceOracle.getPathNames();
+    }
+
+    @Override
+    public Resource getResource(String pathName) {
+      compilerContext.getMinimalRebuildCache().associateReboundTypeWithInputResource(
+          currentRebindBinaryTypeName, pathName);
+      return wrappedResourceOracle.getResource(pathName);
+    }
+
+    @Deprecated
+    @Override
+    public Map<String, Resource> getResourceMap() {
+      return wrappedResourceOracle.getResourceMap();
+    }
+
+    @Override
+    public Set<Resource> getResources() {
+      return wrappedResourceOracle.getResources();
+    }
+
+    @Override
+    public InputStream getResourceAsStream(String pathName) {
+      return Resource.toStreamOrNull(getResource(pathName));
+    }
+  }
 
   /**
    * Extras added to {@link GeneratedUnit}.
@@ -309,6 +357,14 @@ public class StandardGeneratorContext implements GeneratorContext {
 
   private CompilerContext compilerContext;
 
+  private String currentRebindBinaryTypeName;
+
+  private final ResourceOracle buildResourceOracle;
+
+  private int incorrectlyLoadedResourceCount;
+
+  private static final int BAD_RESOURCE_LOAD_REPORT_LIMIT = 10;
+
   /**
    * Normally, the compiler host would be aware of the same types that are
    * available in the supplied type oracle although it isn't strictly required.
@@ -320,6 +376,9 @@ public class StandardGeneratorContext implements GeneratorContext {
     this.genDir = compilerContext.getOptions().getGenDir();
     this.allGeneratedArtifacts = allGeneratedArtifacts;
     this.isProdMode = isProdMode;
+
+    this.buildResourceOracle =
+        new RecordingResourceOracle(compilerContext.getBuildResourceOracle());
   }
 
   /**
@@ -589,7 +648,7 @@ public class StandardGeneratorContext implements GeneratorContext {
 
   @Override
   public ResourceOracle getResourcesOracle() {
-    return compilerContext.getBuildResourceOracle();
+    return buildResourceOracle;
   }
 
   @Override
@@ -738,6 +797,10 @@ public class StandardGeneratorContext implements GeneratorContext {
 
   public void setCurrentGenerator(Class<? extends Generator> currentGenerator) {
     this.currentGenerator = currentGenerator;
+  }
+
+  public void setCurrentRebindBinaryTypeName(String currentRebindBinaryTypeName) {
+    this.currentRebindBinaryTypeName = currentRebindBinaryTypeName;
   }
 
   public void setGeneratorResultCachingEnabled(boolean enabled) {
@@ -900,17 +963,46 @@ public class StandardGeneratorContext implements GeneratorContext {
     }
 
     // Warn the user about uncommitted resources.
-    logger =
-        logger
-            .branch(
-                TreeLogger.WARN,
-                "The following resources will not be created because they were never committed (did you forget to call commit()?)",
-                null);
+    logger = logger.branch(TreeLogger.WARN,
+        "The following resources will not be created because they were never "
+        + "committed (did you forget to call commit()?)", null);
 
     for (Entry<String, PendingResource> entry : pendingResources.entrySet()) {
       logger.log(TreeLogger.WARN, entry.getKey());
       entry.getValue().abort();
     }
     pendingResources.clear();
+  }
+
+  @Override
+  public URL tryFindResourceUrl(TreeLogger logger, String resourceName) {
+    // Also associates the requested resource with the currently being rebound type (via
+    // RecordingResourceOracle).
+    Resource resource = getResourcesOracle().getResource(resourceName);
+    if (resource != null) {
+      return resource.getURL();
+    }
+
+    // Fall back on loading resources via ClassLoader. This is needed for backwards compatibility
+    // but should be avoided in favor of ResourceOracle loads since ResourceOracle loads so that
+    // Resource modifications can be noticed and reacted to in per-file compilation recompiles.
+    URL resourceUrl = Thread.currentThread().getContextClassLoader().getResource(resourceName);
+    if (resourceUrl != null) {
+      if (compilerContext.getOptions().shouldCompilePerFile()
+          && incorrectlyLoadedResourceCount < BAD_RESOURCE_LOAD_REPORT_LIMIT) {
+        incorrectlyLoadedResourceCount++;
+        logger.log(TreeLogger.WARN, "Resource '" + resourceName
+            + "' was located via ClassLoader. As a result changes in that resource will not be "
+            + "reflected in per-file recompiles. It should be registered via  <source /> or "
+            + "<resource /> entry in your .gwt.xml. In a future version of GWT, we will remove "
+            + "this fallback and you application will stop compiling");
+        if (incorrectlyLoadedResourceCount == BAD_RESOURCE_LOAD_REPORT_LIMIT) {
+          logger.log(TreeLogger.WARN, "Suppressing further ClassLoader resource load warnings.");
+        }
+      }
+      return resourceUrl;
+    }
+
+    return null;
   }
 }

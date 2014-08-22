@@ -22,6 +22,7 @@ import com.google.gwt.dev.resource.ResourceOracle;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URL;
 
 /**
  * Provides metadata to deferred binding generators.
@@ -156,6 +157,14 @@ public interface GeneratorContext {
    */
   OutputStream tryCreateResource(TreeLogger logger, String partialPath)
       throws UnableToCompleteException;
+
+  /**
+   * Returns a URL for the given resource as found in the build ResourceOracle.
+   * <p>
+   * For backwards compatibility it will fallback on finding via ClassLoader and
+   * warn the user about the problems this can cause in per-file compiles.
+   */
+  URL tryFindResourceUrl(TreeLogger logger, String resourceName);
 
   /**
    * Mark a type to be reused from the generator result cache, if available.

@@ -202,10 +202,10 @@ public abstract class Number implements Serializable {
   protected static int __parseAndValidateInt(String s, int radix, int lowerBound, int upperBound)
       throws NumberFormatException {
     if (s == null) {
-      throw new NumberFormatException("null");
+      throw NumberFormatException.forNullInputString();
     }
     if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
-      throw new NumberFormatException("radix " + radix + " out of range");
+      throw NumberFormatException.forRadix(radix);
     }
 
     int length = s.length();
@@ -238,10 +238,10 @@ public abstract class Number implements Serializable {
    */
   protected static long __parseAndValidateLong(String s, int radix) throws NumberFormatException {
     if (s == null) {
-      throw new NumberFormatException("null");
+      throw NumberFormatException.forNullInputString();
     }
     if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
-      throw new NumberFormatException("radix " + radix + " out of range");
+      throw NumberFormatException.forRadix(radix);
     }
 
     final String orig = s;
@@ -273,21 +273,10 @@ public abstract class Number implements Serializable {
     }
 
     // Validate the digits
-    int maxNumericDigit = '0' + Math.min(radix, 10);
-    int maxLowerCaseDigit = radix + 'a' - 10;
-    int maxUpperCaseDigit = radix + 'A' - 10;
     for (int i = 0; i < length; i++) {
-      char c = s.charAt(i);
-      if (c >= '0' && c < maxNumericDigit) {
-        continue;
+      if (Character.digit(s.charAt(i), radix) == -1) {
+        throw NumberFormatException.forInputString(orig);
       }
-      if (c >= 'a' && c < maxLowerCaseDigit) {
-        continue;
-      }
-      if (c >= 'A' && c < maxUpperCaseDigit) {
-        continue;
-      }
-      throw NumberFormatException.forInputString(orig);
     }
 
     long toReturn = 0;
@@ -313,7 +302,7 @@ public abstract class Number implements Serializable {
       if (!firstTime) {
         // Check whether multiplying by radixPower will overflow
         if (toReturn < minValue) {
-          throw new NumberFormatException(s);
+          throw NumberFormatException.forInputString(orig);
         }
         toReturn *= radixPower;
       } else {

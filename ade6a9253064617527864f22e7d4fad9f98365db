@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13f169a2_aef96c2b",
+        "filename": "tools/api-checker/config/gwt26_27userApi.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-22T22:34:19Z",
+      "side": 1,
+      "message": "The comments here is mostly to document why it is ok make the change to the API. e.g.\n\"Changed the return type of a non-public API\"",
+      "range": {
+        "startLine": 191,
+        "startChar": 31,
+        "endLine": 191,
+        "endChar": 37
+      },
+      "revId": "ade6a9253064617527864f22e7d4fad9f98365db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

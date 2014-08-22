@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "13f169a2_89a3ca9c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/GeneratorContext.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-22T23:23:00Z",
+      "side": 1,
+      "message": "there are a number of reasons why we shouldn\u0027t or can\u0027t do that.\n\n- ResourceOracle.getResource() is logically about ResourceOracle data and shouldn\u0027t look at ClassLoader\n\n- it would be very inconsistent to pass a TreeLogger instance to ResourceOracle.getResource(), but your suggestion would require it\n\n- some callers are already using just the ResourceOracle to find resources, and if it started finding resources it didn\u0027t previously find that could be a bad change in behavior",
+      "parentUuid": "13f169a2_69d13e69",
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13f169a2_a92de6b4",
         "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-08-22T23:06:14Z",
       "side": 1,
       "message": "Also perhaps add:\n\"In a future version of GWT, we will remove this fallback and you application will stop compiling.\"",
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_89758a49",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-22T23:23:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f169a2_a92de6b4",
       "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "13f169a2_a9704658",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-22T23:23:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f169a2_89490a7c",
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13f169a2_c985d24c",
         "filename": "dev/core/src/com/google/gwt/dev/resource/Resource.java",
         "patchSetId": 7
@@ -64,6 +118,30 @@
       "writtenOn": "2014-08-22T23:06:14Z",
       "side": 1,
       "message": "This is no longer a Resource utility also I don\u0027t like the fact that it ignores the exception. Can we drop it?",
+      "range": {
+        "startLine": 108,
+        "startChar": 28,
+        "endLine": 108,
+        "endChar": 42
+      },
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_29645699",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/Resource.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-22T23:23:00Z",
+      "side": 1,
+      "message": "the behavior is consistent with the ClassLoader.getResourceAsStream() function that it is replacing.\n\ni\u0027d rather not change the semantics at the call sites.",
+      "parentUuid": "13f169a2_c985d24c",
       "range": {
         "startLine": 108,
         "startChar": 28,
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "13f169a2_a9ab265e",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/ResourceOracle.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-22T23:23:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f169a2_895bca2f",
+      "range": {
+        "startLine": 51,
+        "startChar": 40,
+        "endLine": 51,
+        "endChar": 66
+      },
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13f169a2_a9232695",
         "filename": "samples/showcase/src/com/google/gwt/sample/showcase/generator/ShowcaseGenerator.java",
         "patchSetId": 7
@@ -110,6 +212,24 @@
       "writtenOn": "2014-08-22T23:06:14Z",
       "side": 1,
       "message": "Any reason for not using resource oracle?",
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_a9c20614",
+        "filename": "samples/showcase/src/com/google/gwt/sample/showcase/generator/ShowcaseGenerator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-22T23:23:00Z",
+      "side": 1,
+      "message": "yes. previously this Generator explicitly used a ClassLoader search.\n\ncontext.tryFindResourceUrl() is known backwards compatible, and i wasn\u0027t intending to audit and fix this Generator at this time if it was not ResourceOracle compatible.",
+      "parentUuid": "13f169a2_a9232695",
       "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

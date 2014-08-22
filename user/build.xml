@@ -199,7 +199,7 @@
     </outofdate>
   </target>
 
-  <target name="build" depends="precompile.modules"
+  <target name="build" depends="compile"
           description="Build and package this project">
     <mkdir dir="${gwt.build.lib}"/>
     <gwt.jar>
@@ -213,6 +213,10 @@
       <zipfileset
           src="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
     </gwt.jar>
+  </target>
+
+  <target name="precompile.and.build" depends="precompile.modules,build"
+          description="Build and package this project with precompile modules stuff">
   </target>
 
   <target name="checkstyle-source" description="Static analysis of source">
@@ -464,7 +468,7 @@
     <property name="compile.complete" value="true"/>
     <property name="compile.tests.complete" value="true"/>
 
-    <property.ensure name="distro.built" location="${gwt.dev.staging.jar}"
+    <property.ensure name="distro.built" location="${gwt.dev.jar}"
                      message="GWT must be built before performing any tests.  This can be fixed by running ant in the ${gwt.root} directory."/>
     <limit failonerror="true" hours="${test.timeout}">
       <parallel threadsPerProcessor="${gwt.threadsPerProcessor}"
@@ -492,7 +496,7 @@
     <property name="compile.complete" value="true"/>
     <property name="compile.tests.complete" value="true"/>
 
-    <property.ensure name="distro.built" location="${gwt.dev.staging.jar}"
+    <property.ensure name="distro.built" location="${gwt.dev.jar}"
                      message="GWT must be built before performing any tests.  This can be fixed by running ant in the ${gwt.root} directory."/>
     <limit failonerror="true" hours="${test.timeout}">
       <parallel threadsPerProcessor="${gwt.threadsPerProcessor}"
@@ -630,7 +634,7 @@
     <property name="compile.complete" value="true"/>
     <property name="compile.tests.complete" value="true"/>
 
-    <property.ensure name="distro.built" location="${gwt.dev.staging.jar}"
+    <property.ensure name="distro.built" location="${gwt.dev.jar}"
                      message="GWT must be built before performing any tests.  This can be fixed by running ant in the ${gwt.root} directory."/>
     <limit failonerror="true" hours="${test.timeout}">
 

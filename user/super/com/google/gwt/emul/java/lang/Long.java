@@ -51,7 +51,7 @@ public final class Long extends Number implements Comparable<Long> {
 
   public static Long decode(String s) throws NumberFormatException {
     __Decode decode = __decodeNumberString(s);
-    return new Long(parseLong(decode.payload, decode.radix));
+    return valueOf(parseLong(decode.payload, decode.radix));
   }
 
   /**
@@ -207,11 +207,11 @@ public final class Long extends Number implements Comparable<Long> {
   }
 
   public static Long valueOf(String s) throws NumberFormatException {
-    return new Long(Long.parseLong(s));
+    return valueOf(s, 10);
   }
 
   public static Long valueOf(String s, int radix) throws NumberFormatException {
-    return new Long(Long.parseLong(s, radix));
+    return valueOf(parseLong(s, radix));
   }
 
   private static String toPowerOfTwoString(long value, int shift) {

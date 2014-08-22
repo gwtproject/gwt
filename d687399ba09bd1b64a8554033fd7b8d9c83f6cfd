@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13f169a2_c2b492bc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1731,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-22T16:28:00Z",
+      "side": 1,
+      "message": "Add \n\n// TODO(rluble): Generalize this hack by providing this functionality via an annotation @StaticEval() instead of hard coding it here.",
+      "range": {
+        "startLine": 1731,
+        "startChar": 0,
+        "endLine": 1731,
+        "endChar": 8
+      },
+      "revId": "d687399ba09bd1b64a8554033fd7b8d9c83f6cfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_62c79e26",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 3367,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-22T16:28:00Z",
+      "side": 1,
+      "message": "Maybe unnest here.",
+      "revId": "d687399ba09bd1b64a8554033fd7b8d9c83f6cfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_6202fea6",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/DeadCodeEliminationTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-22T16:28:00Z",
+      "side": 1,
+      "message": "Maybe revert this one as it is not really testing. Otherwise you should mock @SpecializeMethod in (JJavaResourceBase or JavaAstConstructor) and add the annotation in the mocked version of String.",
+      "revId": "d687399ba09bd1b64a8554033fd7b8d9c83f6cfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

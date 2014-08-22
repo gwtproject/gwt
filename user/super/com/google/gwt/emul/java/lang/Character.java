@@ -208,12 +208,7 @@ public final class Character implements Comparable<Character>, Serializable {
       return 0;
     }
 
-    final int baseTenMax = 10;
-    if (digit < baseTenMax) {
-      return (char) ('0' + digit);
-    } else {
-      return (char) ('a' + digit - baseTenMax);
-    }
+    return Number.__Digits.digits[digit];
   }
 
   /**

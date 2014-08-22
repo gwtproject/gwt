@@ -15,6 +15,7 @@
  */
 package com.google.gwt.uibinder.elementparsers;
 
+import com.google.gwt.core.ext.StubGeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -111,7 +112,7 @@ class ElementParserTester {
         templatePath, baseType.getPackage().getName(), implName);
 
     writer = new MockUiBinderWriter(baseType, implName, templatePath, types,
-        logger, fieldManager, messages, BINDER_URI);
+        logger, fieldManager, messages, BINDER_URI, new StubGeneratorContext());
     fieldManager.registerField(types.findType(parsedTypeName), FIELD_NAME);
     parsedType = types.findType(parsedTypeName);
   }

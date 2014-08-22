@@ -22,6 +22,7 @@ import com.google.gwt.dev.resource.ResourceOracle;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URL;
 
 /**
  * An abstract generator context class which delegates all methods to a provided
@@ -91,6 +92,7 @@ public abstract class DelegatingGeneratorContext implements GeneratorContext {
   public boolean isProdMode() {
     return baseContext.isProdMode();
   }
+
   @Override
   public PrintWriter tryCreate(TreeLogger logger, String packageName, String simpleName) {
     return baseContext.tryCreate(logger, packageName, simpleName);
@@ -100,6 +102,11 @@ public abstract class DelegatingGeneratorContext implements GeneratorContext {
   public OutputStream tryCreateResource(TreeLogger logger, String partialPath)
       throws UnableToCompleteException {
     return baseContext.tryCreateResource(logger, partialPath);
+  }
+
+  @Override
+  public URL tryFindResourceUrl(TreeLogger logger, String resourceName) {
+    return baseContext.tryFindResourceUrl(logger, resourceName);
   }
 
   @Override

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53ae8194_b84ff9a3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-22T20:50:23Z",
+      "side": 1,
+      "message": "[error] \u0027org.xml.sax.SAXException\u0027 should be separated from previous imports.",
+      "revId": "89536c584bc5b7b282a2052b7c92d826926b7ed9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53ae8194_d85cad5f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-22T20:50:23Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.ByteArrayOutputStream\u0027 import.",
+      "revId": "89536c584bc5b7b282a2052b7c92d826926b7ed9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

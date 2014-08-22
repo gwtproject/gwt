@@ -124,6 +124,7 @@
           description="[action] Builds GWT, including samples, but without distro packaging">
     <call-subproject subproject="dev" subtarget="build"/>
     <call-subproject subproject="codeserver" subtarget="build"/>
+    <call-subproject subproject="user" subtarget="precompile.modules"/>
     <call-subproject subproject="user" subtarget="build"/>
     <call-subproject subproject="requestfactory" subtarget="build"/>
     <call-subproject subproject="servlet" subtarget="build"/>
@@ -145,7 +146,7 @@
     <call-subproject subproject="samples" subtarget="checkstyle"/>
   </target>
 
-  <target name="test" depends="dist-dev,apicheck,checkstyle"
+  <target name="test" depends="buildonly,apicheck,checkstyle"
           description="[action] Runs all the GWT tests, including checkstyle and apicheck">
     <call-subproject subproject="buildtools" subtarget="test"/>
     <call-subproject subproject="dev" subtarget="test"/>
@@ -156,7 +157,7 @@
     <call-subproject subproject="tools" subtarget="test"/>
   </target>
 
-  <target name="testrf" depends="dist-dev"
+  <target name="testrf" depends="buildonly"
           description="[action] Runs the GWT RequestFactory tests">
     <call-subproject subproject="dev" subtarget="compile.tests"/>
     <call-subproject subproject="user" subtarget="compile.tests"/>

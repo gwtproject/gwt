@@ -692,10 +692,17 @@ public class UnifyAst {
     for (String sourceTypeName : sourceTypeNames) {
       JDeclaredType type = internalFindType(sourceTypeName, sourceNameBasedTypeLocator, true);
       binaryTypeNames.add(type.getName());
-      if (type != null && hasAnyExports(type)) {
+      if (type != null && program.typeOracle.isInteropEnabled() &&
+          (isJsType(type) || hasAnyExports(type))) {
         instantiate(type);
+        for (JField field : type.getFields()) {
+          flowInto(field);
+        }
+        for (JMethod method : type.getMethods()) {
+          flowInto(method);
+        }
+
       }
-    }
     minimalRebuildCache.setRootTypeNames(binaryTypeNames);
     if (errorsFound) {
       // Already logged.
@@ -799,20 +806,6 @@ public class UnifyAst {
         }
         for (JMethod method : type.getMethods()) {
           flowInto(method);
-        }
-      }
-    } else if (program.typeOracle.isInteropEnabled()) {
-      Set<String> internalNames = ImmutableSet.copyOf(compiledClassesByInternalName.keySet());
-      for (String internalName : internalNames) {
-        JDeclaredType type = internalFindType(internalName, internalNameBasedTypeLocator, false);
-        if (type != null && (isJsType(type) || hasAnyExports(type))) {
-          instantiate(type);
-          for (JField field : type.getFields()) {
-            flowInto(field);
-          }
-          for (JMethod method : type.getMethods()) {
-            flowInto(method);
-          }
         }
       }
     }

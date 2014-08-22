@@ -208,12 +208,7 @@ public final class Character implements Comparable<Character>, Serializable {
       return 0;
     }
 
-    final int baseTenMax = 10;
-    if (digit < baseTenMax) {
-      return (char) ('0' + digit);
-    } else {
-      return (char) ('a' + digit - baseTenMax);
-    }
+    return __forDigit(digit);
   }
 
   /**
@@ -393,6 +388,20 @@ public final class Character implements Comparable<Character>, Serializable {
       return result;
     }
     return new Character(c);
+  }
+
+  /**
+   * Shared implementation with Long.toString
+   *
+   * @skip
+   */
+  static char __forDigit(int digit) {
+    final int baseTenMax = 10;
+    if (digit < baseTenMax) {
+      return (char) ('0' + digit);
+    } else {
+      return (char) ('a' + digit - baseTenMax);
+    }
   }
 
   static int codePointAt(CharSequence cs, int index, int limit) {

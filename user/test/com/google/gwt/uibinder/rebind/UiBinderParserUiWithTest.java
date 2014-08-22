@@ -13,6 +13,8 @@
  */
 package com.google.gwt.uibinder.rebind;
 
+import com.google.gwt.core.ext.GeneratorContext;
+import com.google.gwt.core.ext.StubGeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -275,10 +277,11 @@ public class UiBinderParserUiWithTest extends TestCase {
     item = (Element) doc.getDocumentElement().getElementsByTagName("with").item(0);
     elm = elemProvider.get(item);
     JClassType aClass = types.findType(baseClass);
-    writer =
-        new UiBinderWriter(aClass, "foo", "", types, logger, fieldManager, null,
-            DesignTimeUtilsStub.EMPTY, new UiBinderContext(), true, true, "");
-    parser = new UiBinderParser(writer, null, fieldManager, types, null, "", new UiBinderContext());
+    GeneratorContext context = new StubGeneratorContext();
+    writer = new UiBinderWriter(aClass, "foo", "", types, logger, fieldManager, null,
+        DesignTimeUtilsStub.EMPTY, new UiBinderContext(), true, true, "", context);
+    parser = new UiBinderParser(writer, null, fieldManager, types, null, "", new UiBinderContext(),
+        context);
     designTime.rememberPathForElements(doc);
     UiBinderParser.Resource.WITH.create(parser, elm);
   }

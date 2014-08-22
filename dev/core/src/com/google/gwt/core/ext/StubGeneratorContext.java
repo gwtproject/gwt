@@ -22,6 +22,7 @@ import com.google.gwt.dev.resource.ResourceOracle;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URL;
 
 /**
  * An abstract generator context class which by default throws
@@ -29,7 +30,7 @@ import java.io.PrintWriter;
  * selectively override individual methods. Useful for mocking and/or selective
  * reuse of generator functionality.
  */
-public abstract class StubGeneratorContext implements GeneratorContext {
+public class StubGeneratorContext implements GeneratorContext {
 
   @Override
   public boolean checkRebindRuleAvailable(String sourceTypeName) {
@@ -88,6 +89,11 @@ public abstract class StubGeneratorContext implements GeneratorContext {
 
   @Override
   public OutputStream tryCreateResource(TreeLogger logger, String partialPath) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public URL tryFindResourceUrl(TreeLogger logger, String resourceName) {
     throw new UnsupportedOperationException();
   }
 

@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13f169a2_69d13e69",
+        "filename": "dev/core/src/com/google/gwt/core/ext/GeneratorContext.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-22T23:06:14Z",
+      "side": 1,
+      "message": "Add @Deprecated or better why don\u0027t we put this logic into ResourceOracle.getResource and not introduce a new API in the first place?",
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_a92de6b4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-22T23:06:14Z",
+      "side": 1,
+      "message": "Also perhaps add:\n\"In a future version of GWT, we will remove this fallback and you application will stop compiling.\"",
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_89490a7c",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-22T23:06:14Z",
+      "side": 1,
+      "message": "When you hit the max, perhaps you can add something that will let the user know we stopped outputting the warning.",
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_c985d24c",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/Resource.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-22T23:06:14Z",
+      "side": 1,
+      "message": "This is no longer a Resource utility also I don\u0027t like the fact that it ignores the exception. Can we drop it?",
+      "range": {
+        "startLine": 108,
+        "startChar": 28,
+        "endLine": 108,
+        "endChar": 42
+      },
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_895bca2f",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/ResourceOracle.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-22T23:06:14Z",
+      "side": 1,
+      "message": "\"path name or null if there is no such resource.\"",
+      "range": {
+        "startLine": 51,
+        "startChar": 40,
+        "endLine": 51,
+        "endChar": 66
+      },
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_a9232695",
+        "filename": "samples/showcase/src/com/google/gwt/sample/showcase/generator/ShowcaseGenerator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-22T23:06:14Z",
+      "side": 1,
+      "message": "Any reason for not using resource oracle?",
+      "revId": "c098159f54afdbc6acaf0e4ced733b2ede01aa0a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

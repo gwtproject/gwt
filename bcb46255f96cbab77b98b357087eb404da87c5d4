@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3dbf536_0003082e",
+        "filename": "user/src/com/google/gwt/core/StackTrace.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-22T14:28:39Z",
+      "side": 0,
+      "message": "Any reason for not removing CollectorLegacy.java? it seems it\u0027s not used anymore",
+      "revId": "bcb46255f96cbab77b98b357087eb404da87c5d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

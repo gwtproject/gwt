@@ -16,6 +16,24 @@
       "revId": "020a4405bd412e7816d6fa913e76b48aab4621b9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3a7d188_7e1e7154",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-22T00:13:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53b4c1af_ae34c3ef",
+      "revId": "020a4405bd412e7816d6fa913e76b48aab4621b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

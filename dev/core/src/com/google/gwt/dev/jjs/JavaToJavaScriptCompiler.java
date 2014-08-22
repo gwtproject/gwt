@@ -46,7 +46,6 @@ import com.google.gwt.dev.cfg.PermProps;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
-import com.google.gwt.dev.javac.typemodel.JConstructor;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.jdt.RebindPermutationOracle;
 import com.google.gwt.dev.jjs.UnifiedAst.AST;
@@ -150,8 +149,9 @@ import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
-
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -168,8 +168,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.zip.GZIPInputStream;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * A base for classes that compile Java <code>JProgram</code> representations into corresponding Js
@@ -876,6 +874,10 @@ public abstract class JavaToJavaScriptCompiler {
 
     protected RebindPermutationOracle rpo;
     protected String[] entryPointTypeNames;
+    public static final String JS_EXPORT_ANN =
+        "com.google.gwt.core.client.js.JsExport";
+    public static final String JS_TYPE_ANN =
+        "com.google.gwt.core.client.js.JsType";
 
     public Precompiler(RebindPermutationOracle rpo, String[] entryPointTypeNames) {
       this.rpo = rpo;
@@ -1134,27 +1136,40 @@ public abstract class JavaToJavaScriptCompiler {
         allRootTypes.add(typeOracle.getSingleJsoImpl(singleJsoIntf).getQualifiedSourceName());
       }
 
-      // find any types with @JsExport could be entry points as well
-      String jsExportAnn = "com.google.gwt.core.client.js.JsExport";
-      nextType: for (com.google.gwt.dev.javac.typemodel.JClassType type :
-          typeOracle.getTypes()) {
-        for (com.google.gwt.dev.javac.typemodel.JMethod meth : type.getMethods()) {
-          for (Annotation ann : meth.getAnnotations()) {
-            if (ann.annotationType().getName().equals(jsExportAnn)) {
+      if (jprogram.typeOracle.isInteropEnabled()) {
+        // find any types with @JsExport could be entry points as well
+        nextType:
+        for (com.google.gwt.dev.javac.typemodel.JClassType type :
+            typeOracle.getTypes()) {
+          for (Annotation ann : type.getAnnotations()) {
+            if (ann.annotationType().getName().equals(JS_EXPORT_ANN)) {
               allRootTypes.add(type.getQualifiedSourceName());
               continue nextType;
             }
           }
-        }
-        for (JConstructor meth : type.getConstructors()) {
-          for (Annotation ann : meth.getAnnotations()) {
-            if (ann.annotationType().getName().equals(jsExportAnn)) {
-              allRootTypes.add(type.getQualifiedSourceName());
-              continue nextType;
-            }
+          if (isJsType(type)) {
+            allRootTypes.add(type.getQualifiedSourceName());
+            continue nextType;
           }
         }
       }
+    }
+
+    private boolean isJsType(
+        com.google.gwt.dev.javac.typemodel.JClassType type) {
+      for (Annotation ann : type.getAnnotations()) {
+        if (ann.annotationType().getName().equals(JS_TYPE_ANN)) {
+          return true;
+        }
+      }
+
+      for (com.google.gwt.dev.javac.typemodel.JClassType intf : type
+          .getImplementedInterfaces()) {
+         if (isJsType(intf)) {
+           return true;
+         }
+      }
+      return false;
     }
 
     private void recordJsoTypes(TypeOracle typeOracle) {

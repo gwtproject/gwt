@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13f169a2_38e78675",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-22T21:04:42Z",
+      "side": 1,
+      "message": "can you make these private?",
+      "range": {
+        "startLine": 878,
+        "startChar": 4,
+        "endLine": 878,
+        "endChar": 10
+      },
+      "revId": "e04195a17bbb77b93c69fdaf1223e21d7f2b1932",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_387946d6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-22T21:04:42Z",
+      "side": 1,
+      "message": "// If the type immediately exports symbols to JS.",
+      "range": {
+        "startLine": 1145,
+        "startChar": 10,
+        "endLine": 1145,
+        "endChar": 56
+      },
+      "revId": "e04195a17bbb77b93c69fdaf1223e21d7f2b1932",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_7873cef3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-22T21:04:42Z",
+      "side": 1,
+      "message": "// If the type or any transitive interface is a JS type.",
+      "range": {
+        "startLine": 1151,
+        "startChar": 10,
+        "endLine": 1151,
+        "endChar": 30
+      },
+      "revId": "e04195a17bbb77b93c69fdaf1223e21d7f2b1932",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_18828a7a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-22T21:04:42Z",
+      "side": 1,
+      "message": "i think this continue is unnecessary now that it\u0027s not inside of a nested for loop",
+      "range": {
+        "startLine": 1153,
+        "startChar": 12,
+        "endLine": 1153,
+        "endChar": 30
+      },
+      "revId": "e04195a17bbb77b93c69fdaf1223e21d7f2b1932",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_585ff257",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-22T21:04:42Z",
+      "side": 1,
+      "message": "please add a small function comment",
+      "range": {
+        "startLine": 1159,
+        "startChar": 20,
+        "endLine": 1159,
+        "endChar": 28
+      },
+      "revId": "e04195a17bbb77b93c69fdaf1223e21d7f2b1932",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

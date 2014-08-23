@@ -91,6 +91,38 @@ public final class System {
     }
   }
 
+  public static void arraycopy(boolean[] src, int srcOfs, boolean[] dest, int destOfs, int len) {
+    unsafeArraycopy(src, srcOfs, dest, destOfs, len);
+  }
+
+  public static void arraycopy(byte[] src, int srcOfs, byte[] dest, int destOfs, int len) {
+    unsafeArraycopy(src, srcOfs, dest, destOfs, len);
+  }
+
+  public static void arraycopy(char[] src, int srcOfs, char[] dest, int destOfs, int len) {
+    unsafeArraycopy(src, srcOfs, dest, destOfs, len);
+  }
+
+  public static void arraycopy(double[] src, int srcOfs, double[] dest, int destOfs, int len) {
+    unsafeArraycopy(src, srcOfs, dest, destOfs, len);
+  }
+
+  public static void arraycopy(float[] src, int srcOfs, float[] dest, int destOfs, int len) {
+    unsafeArraycopy(src, srcOfs, dest, destOfs, len);
+  }
+
+  public static void arraycopy(int[] src, int srcOfs, int[] dest, int destOfs, int len) {
+    unsafeArraycopy(src, srcOfs, dest, destOfs, len);
+  }
+
+  public static void arraycopy(long[] src, int srcOfs, long[] dest, int destOfs, int len) {
+    unsafeArraycopy(src, srcOfs, dest, destOfs, len);
+  }
+
+  public static void arraycopy(short[] src, int srcOfs, short[] dest, int destOfs, int len) {
+    unsafeArraycopy(src, srcOfs, dest, destOfs, len);
+  }
+
   public static long currentTimeMillis() {
     return (long) JsDate.now();
   }
@@ -137,4 +169,25 @@ public final class System {
   private static native int getArrayLength(Object array) /*-{
     return array.length;
   }-*/;
+
+  /**
+   * Used by {@link #arraycopy(Object, int, Object, int, int)}
+   * when types of arrays are known and matched.
+   */
+  private static void unsafeArraycopy(Object src, int srcOfs, Object dest, int destOfs, int len) {
+    if (src == null || dest == null) {
+      throw new NullPointerException();
+    }
+
+    int srclen = getArrayLength(src);
+    int destlen = getArrayLength(dest);
+    if (srcOfs < 0 || destOfs < 0 || len < 0 || srcOfs + len > srclen
+        || destOfs + len > destlen) {
+      throw new IndexOutOfBoundsException();
+    }
+
+    if (len > 0) {
+      Array.nativeArraycopy(src, srcOfs, dest, destOfs, len);
+    }
+  }
 }

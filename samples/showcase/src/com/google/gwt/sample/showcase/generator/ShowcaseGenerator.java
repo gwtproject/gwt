@@ -21,6 +21,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
+import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.sample.showcase.client.ContentWidget;
 import com.google.gwt.sample.showcase.client.Showcase;
 import com.google.gwt.sample.showcase.client.ShowcaseAnnotations.ShowcaseData;
@@ -46,18 +47,13 @@ import java.util.Set;
 public class ShowcaseGenerator extends Generator {
   /**
    * The paths to the CSS style sheets used in Showcase. The paths are relative
-   * to the root path of the {@link ClassLoader}. The variable $THEME will be
+   * to the root path of the module. The variable $THEME will be
    * replaced by the current theme. The variable $RTL will be replaced by "_rtl"
    * for RTL locales.
    */
   private static final String[] SRC_CSS = {
       "com/google/gwt/user/theme/$THEME/public/gwt/$THEME/$THEME$RTL.css",
       "com/google/gwt/sample/showcase/client/Showcase.css"};
-
-  /**
-   * The class loader used to get resources.
-   */
-  private ClassLoader classLoader = null;
 
   /**
    * The generator context.
@@ -81,7 +77,6 @@ public class ShowcaseGenerator extends Generator {
       throws UnableToCompleteException {
     this.logger = logger;
     this.context = context;
-    this.classLoader = Thread.currentThread().getContextClassLoader();
 
     // Only generate files on the first permutation
     if (!isFirstPass()) {
@@ -310,7 +305,7 @@ public class ShowcaseGenerator extends Generator {
    */
   private String getResourceContents(String path)
       throws UnableToCompleteException {
-    InputStream in = classLoader.getResourceAsStream(path);
+    InputStream in = Resource.toStreamOrNull(context.tryFindResourceUrl(logger, path));
     if (in == null) {
       logger.log(TreeLogger.ERROR, "Resource not found: " + path);
       throw new UnableToCompleteException();

@@ -94,6 +94,27 @@ public abstract class Resource {
     return getLocation();
   }
 
-  public abstract boolean wasRerooted();
+  public static InputStream toStreamOrNull(Resource resource) {
+    if (resource == null) {
+      return null;
+    }
+    try {
+      return resource.openContents();
+    } catch (IOException e) {
+      return null;
+    }
+  }
 
+  public static InputStream toStreamOrNull(URL url) {
+    if (url == null) {
+      return null;
+    }
+    try {
+      return url.openStream();
+    } catch (IOException e) {
+      return null;
+    }
+  }
+
+  public abstract boolean wasRerooted();
 }

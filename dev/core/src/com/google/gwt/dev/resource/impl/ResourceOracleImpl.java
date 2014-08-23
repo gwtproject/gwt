@@ -464,9 +464,20 @@ public class ResourceOracleImpl implements ResourceOracle {
     return pathPrefixSet;
   }
 
+  @Deprecated
   @Override
   public Map<String, Resource> getResourceMap() {
     return exposedResourceMap;
+  }
+
+  @Override
+  public Resource getResource(String pathName) {
+    return getResourceMap().get(pathName);
+  }
+
+  @Override
+  public InputStream getResourceAsStream(String pathName) {
+    return Resource.toStreamOrNull(getResource(pathName));
   }
 
   @Override

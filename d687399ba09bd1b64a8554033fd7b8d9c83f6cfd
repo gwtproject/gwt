@@ -92,6 +92,24 @@
       "revId": "d687399ba09bd1b64a8554033fd7b8d9c83f6cfd",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13f169a2_ffb5e063",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/DeadCodeEliminationTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-23T03:10:48Z",
+      "side": 1,
+      "message": "Probably the MakeCallsStatic pass needs to be run (needed because the compiler only knows how to inline static calls)",
+      "parentUuid": "13f169a2_bfab580b",
+      "revId": "d687399ba09bd1b64a8554033fd7b8d9c83f6cfd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

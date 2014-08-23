@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53ae8194_9bd5cf7c",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Character.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-23T16:25:17Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "b7784016bc90f5ff97bb2f51304ddff5d813bcaf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53ae8194_bbd2938f",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Character.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-23T16:25:17Z",
+      "side": 1,
+      "message": "[error] Name \u0027__forDigit\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "b7784016bc90f5ff97bb2f51304ddff5d813bcaf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

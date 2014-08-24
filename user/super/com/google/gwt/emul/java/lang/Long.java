@@ -161,35 +161,47 @@ public final class Long extends Number implements Comparable<Long> {
     return String.valueOf(value);
   }
 
-  public static String toString(long value, int intRadix) {
-    if (intRadix == 10 || intRadix < Character.MIN_RADIX
-        || intRadix > Character.MAX_RADIX) {
+  public static String toString(long value, int radix) {
+    if (radix == 10 || radix < Character.MIN_RADIX
+        || radix > Character.MAX_RADIX) {
       return String.valueOf(value);
     }
 
-    if (Integer.MIN_VALUE <= value && value <= Integer.MAX_VALUE) {
-      return Integer.toString((int) value, intRadix);
+    if (value == 0L) {
+      return "0";
     }
 
+    boolean negative = value < 0;
+    int numberOfLeadingZeros = Long.numberOfLeadingZeros(negative ? -value : value);
+
+    // value fits 32 bits int (all high bits are zeros + 1 bit for sign)
+    if (numberOfLeadingZeros > 32) {
+      return toRadixString((int) value, radix);
+    }
+
+    // value fits 53 bits js integral floating point
+    if (numberOfLeadingZeros > 64 - 53) {
+      return toRadixString((double) value, radix);
+    }
+
+    // Since -Long.MIN_VALUE == Long.MIN_VALUE we cannot convert to positive value
+    if (!negative) {
+      value = -value;
+    }
     final int bufSize = 65;
     char[] buf = new char[bufSize];
     char[] digits = __Digits.digits;
     int pos = bufSize - 1;
     // Cache a converted version for performance (pure long ops are faster).
-    long radix = intRadix;
-    if (value >= 0) {
-      while (value >= radix) {
-        buf[pos--] = digits[(int) (value % radix)];
-        value /= radix;
-      }
-      buf[pos] = digits[(int) value];
-    } else {
-      while (value <= -radix) {
-        buf[pos--] = digits[(int) -(value % radix)];
-        value /= radix;
-      }
-      buf[pos--] = digits[(int) -value];
-      buf[pos] = '-';
+    long lRadix = radix;
+    long negRadix = -lRadix;
+    while (value <= negRadix) {
+      buf[pos--] = digits[-((int) (value % lRadix))];
+      value /= lRadix;
+    }
+    buf[pos] = digits[-((int) value)];
+    if (negative) {
+      buf[--pos] = '-';
     }
     return String.__valueOf(buf, pos, bufSize);
   }
@@ -213,6 +225,14 @@ public final class Long extends Number implements Comparable<Long> {
   public static Long valueOf(String s, int radix) throws NumberFormatException {
     return new Long(Long.parseLong(s, radix));
   }
+
+  private static native String toRadixString(double value, int radix) /*-{
+    return value.toString(radix);
+  }-*/;
+
+  private static native String toRadixString(int value, int radix) /*-{
+    return value.toString(radix);
+  }-*/;
 
   private static String toPowerOfTwoString(long value, int shift) {
     if (Integer.MIN_VALUE <= value && value <= Integer.MAX_VALUE) {

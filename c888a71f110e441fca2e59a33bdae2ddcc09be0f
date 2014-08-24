@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33daed33_e2338826",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-24T08:06:50Z",
+      "side": 1,
+      "message": "I\u0027d rather [\\\\dA-F]{32} to be more secure",
+      "range": {
+        "startLine": 85,
+        "startChar": 54,
+        "endLine": 85,
+        "endChar": 63
+      },
+      "revId": "c888a71f110e441fca2e59a33bdae2ddcc09be0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

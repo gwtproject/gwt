@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3dbf536_43d6fa62",
+        "filename": "dev/codeserver/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-24T07:42:38Z",
+      "side": 1,
+      "message": "Needed so as we can run `ant clean compile.tests` without having to add the `buildonly` parameter to compile all classes.",
+      "range": {
+        "startLine": 17,
+        "startChar": 40,
+        "endLine": 17,
+        "endChar": 47
+      },
+      "revId": "f517b4753bab2f0c46db0f12f1b041a076086298",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -46,6 +46,30 @@
       "revId": "c888a71f110e441fca2e59a33bdae2ddcc09be0f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f389353b_b320e0ff",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-08-25T21:48:17Z",
+      "side": 1,
+      "message": "If the regexp does not match we return a not-found 404 , otherwise we raise a server error 500 with a stacktrace. I prefer not to give those code errors to the user.\nAdditionally a more accurate regexp must perform better, for instance X.cache.js will be rejected when evaluating the second character since with this regexp it will loop until the end of the string, then a call to the fs, and eventually raise an exception.\nAnyway we are running a dev instance, and either security or performance are not very important here.",
+      "parentUuid": "33a82d90_63c22a18",
+      "range": {
+        "startLine": 85,
+        "startChar": 54,
+        "endLine": 85,
+        "endChar": 63
+      },
+      "revId": "c888a71f110e441fca2e59a33bdae2ddcc09be0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

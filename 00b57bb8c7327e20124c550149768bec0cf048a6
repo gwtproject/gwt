@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "33a82d90_9539040d",
+        "filename": "dev/core/src/com/google/gwt/core/ext/impl/ResourceLocatorImpl.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-25T18:17:14Z",
+      "side": 1,
+      "message": "ImplicitCssResource expects a URL.\n\nImageBundleGenerator does a resource existence check whose meaning would change if this were attempting to return a stream.\n\nIndirect caller ImageResourceGenerator.LocalizedImage expects a URL.\n\nAll of the AbstractResourceGenerator subclasses are indirect callers and expect a URL.\n\nThe ResourceGeneratorUtil is a public API used by arbitrary third party Generators and it expects URLs.",
+      "parentUuid": "13f169a2_3ac2d63f",
+      "range": {
+        "startLine": 46,
+        "startChar": 20,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "00b57bb8c7327e20124c550149768bec0cf048a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13f169a2_fae5eeed",
         "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
         "patchSetId": 11
@@ -36,6 +60,30 @@
       "writtenOn": "2014-08-23T21:15:06Z",
       "side": 1,
       "message": "Perhaps can be simplified to following (also requires 1 access to lastModifiedByResourcePath instead of 1):\n\nLong lastKnownModified \u003d lastModifiedByResourcePath.put(currentResource.getPath(), currentResource.getLastModified());\nif (!Objects.equals( lastKnownModified, currentResource.getLastModified()) {\n modifiedResourcePaths.add(currentResource.getPath());\n}",
+      "range": {
+        "startLine": 367,
+        "startChar": 10,
+        "endLine": 369,
+        "endChar": 46
+      },
+      "revId": "00b57bb8c7327e20124c550149768bec0cf048a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33a82d90_38fdadd2",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-25T18:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f169a2_fae5eeed",
       "range": {
         "startLine": 367,
         "startChar": 10,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "33a82d90_78f735f0",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-25T18:17:14Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "13f169a2_3a17761f",
+      "range": {
+        "startLine": 378,
+        "startChar": 4,
+        "endLine": 378,
+        "endChar": 5
+      },
+      "revId": "00b57bb8c7327e20124c550149768bec0cf048a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13f169a2_7a11fe25",
         "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
         "patchSetId": 11
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "33a82d90_98169965",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-25T18:17:14Z",
+      "side": 1,
+      "message": "there are pros and cons.\n\ni think if someone is iterating on fixing incorrectly loaded resource problems and they can only do 5 before having to restart SuperDevMode, they will be annoyed.",
+      "parentUuid": "13f169a2_7a11fe25",
+      "revId": "00b57bb8c7327e20124c550149768bec0cf048a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13f169a2_da0592e5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 11
@@ -99,6 +189,24 @@
       "writtenOn": "2014-08-23T21:15:06Z",
       "side": 1,
       "message": "Perhaps add a todo here for the handling of compilation failures?",
+      "revId": "00b57bb8c7327e20124c550149768bec0cf048a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33a82d90_b8b7dd0c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-25T18:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f169a2_da0592e5",
       "revId": "00b57bb8c7327e20124c550149768bec0cf048a6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "33a82d90_d88ca129",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/Resource.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-25T18:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f169a2_ba0246d9",
+      "range": {
+        "startLine": 108,
+        "startChar": 28,
+        "endLine": 108,
+        "endChar": 42
+      },
+      "revId": "00b57bb8c7327e20124c550149768bec0cf048a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13f169a2_fafcce81",
         "filename": "dev/core/test/com/google/gwt/dev/FooResourceGenerator.java",
         "patchSetId": 11
@@ -139,6 +271,24 @@
       "writtenOn": "2014-08-23T21:15:06Z",
       "side": 1,
       "message": "Do we need the helper in the test class? Can we just use the ResourceOracle instead?",
+      "revId": "00b57bb8c7327e20124c550149768bec0cf048a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33a82d90_18a1c97f",
+        "filename": "dev/core/test/com/google/gwt/dev/FooResourceGenerator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-25T18:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f169a2_fafcce81",
       "revId": "00b57bb8c7327e20124c550149768bec0cf048a6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

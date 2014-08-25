@@ -16,6 +16,41 @@
       "revId": "a3df7b67e8e55acc6e259a55bec141f153975870",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "739e256e_a5e41645",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Character.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-25T22:11:14Z",
+      "side": 1,
+      "message": "pls fix",
+      "parentUuid": "53ae8194_fbcc0bf8",
+      "revId": "a3df7b67e8e55acc6e259a55bec141f153975870",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "739e256e_05c24269",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Character.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-25T22:11:14Z",
+      "side": 1,
+      "message": "Can replace with:\n\n  int overBaseTen \u003d digit - 10;\n  return overBaseTen \u003c 0 ? \u00270\u0027 + digit : \u0027a\u0027 + digit - baseTenMax;\n\n(Also increases the chance of inlining)",
+      "revId": "a3df7b67e8e55acc6e259a55bec141f153975870",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

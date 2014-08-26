@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "739e256e_40cc38a4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/JavaResourceBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-26T00:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "739e256e_a016c464",
+      "revId": "9ce1412d7ce12438d8579169ada325dfbdf4c6a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "739e256e_a03de4d8",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/DeadCodeEliminationTest.java",
         "patchSetId": 6
@@ -60,6 +78,30 @@
     },
     {
       "key": {
+        "uuid": "739e256e_c05028eb",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/DeadCodeEliminationTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-26T00:37:24Z",
+      "side": 1,
+      "message": "Discussed offline: we still need MakeCallsStatic as specialization requires statification (there is a isStatic check).",
+      "parentUuid": "739e256e_a03de4d8",
+      "range": {
+        "startLine": 352,
+        "startChar": 38,
+        "endLine": 352,
+        "endChar": 88
+      },
+      "revId": "9ce1412d7ce12438d8579169ada325dfbdf4c6a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "739e256e_e0928c8f",
         "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
         "patchSetId": 6
@@ -71,6 +113,30 @@
       "writtenOn": "2014-08-26T00:02:07Z",
       "side": 1,
       "message": "I still think we are not in the optimal here. There is a tension here between specialization and devirtualization (MakeClassStatic).\n\nLet\u0027s add back @DoNotInline.",
+      "range": {
+        "startLine": 653,
+        "startChar": 0,
+        "endLine": 665,
+        "endChar": 7
+      },
+      "revId": "9ce1412d7ce12438d8579169ada325dfbdf4c6a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "739e256e_004b103f",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-26T00:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "739e256e_e0928c8f",
       "range": {
         "startLine": 653,
         "startChar": 0,

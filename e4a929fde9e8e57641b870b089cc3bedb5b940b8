@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3d0553d_1b692332",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Long.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-26T18:34:41Z",
+      "side": 1,
+      "message": "New implementation does 3 long operations (1 comparison + 2 negations) instead of 1 (1 comparision) in the old one.",
+      "range": {
+        "startLine": 174,
+        "startChar": 12,
+        "endLine": 174,
+        "endChar": 20
+      },
+      "revId": "e4a929fde9e8e57641b870b089cc3bedb5b940b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

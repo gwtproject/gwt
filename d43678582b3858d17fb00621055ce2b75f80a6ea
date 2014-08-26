@@ -16,6 +16,24 @@
       "revId": "d43678582b3858d17fb00621055ce2b75f80a6ea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3d0553d_0192cdd5",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-26T23:48:08Z",
+      "side": 1,
+      "message": "i did it this way because i thought it would be slightly more readable. but if you prefer it that way, i kind of do as well.\n\ndone.",
+      "parentUuid": "f3d0553d_611e21c7",
+      "revId": "d43678582b3858d17fb00621055ce2b75f80a6ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

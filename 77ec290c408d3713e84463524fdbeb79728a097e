@@ -22,6 +22,30 @@
       "revId": "77ec290c408d3713e84463524fdbeb79728a097e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33810d18_a73a6adc",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-26T00:56:39Z",
+      "side": 1,
+      "message": "We discussed this offline but I\u0027ll document the discussion here:\n\nIn my mind this process traces the Generator execution backwards (for example if Generator A triggered Generator B triggered Generator C then this would trace C -\u003e B -\u003e A).\n\nBut you made the point that if multiple Generators tried to generate the same Type then the recorded data could look like an infinite loop where Generator A triggered Generator B triggered Generator A, etc.\n\nWe agreed that as long as staleGeneratedTypeNames was not allowed to reprocess the same Type more than once then that would end any loops. So I\u0027ll make sure to remove the contents of staleTypeNames from staleGeneratedTypeNames on each iteration.",
+      "parentUuid": "739e256e_80a3809c",
+      "range": {
+        "startLine": 504,
+        "startChar": 1,
+        "endLine": 515,
+        "endChar": 49
+      },
+      "revId": "77ec290c408d3713e84463524fdbeb79728a097e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

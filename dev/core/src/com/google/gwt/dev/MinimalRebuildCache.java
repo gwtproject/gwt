@@ -498,6 +498,7 @@ public class MinimalRebuildCache implements Serializable {
    * recreation of its cached JS without also rerunning the Generator that creates type Foo.
    */
   private void appendTypesToRegenerateStaleGeneratedTypes(Set<String> staleTypeNames) {
+    boolean done = false;
     Set<String> generatedTypeNames = reboundTypeNamesByGeneratedTypeName.keySet();
 
     // Filter the current stale types list for any types that are known to be generated.
@@ -507,16 +508,16 @@ public class MinimalRebuildCache implements Serializable {
       Set<String> generatorTriggeringTypes = computeTypesThatRebindTypes(
           computeReboundTypesThatGenerateTypes(staleGeneratedTypeNames));
       // Mark these generator triggering types stale.
-      staleTypeNames.addAll(generatorTriggeringTypes);
+      boolean discoveredMoreStaleTypes = staleTypeNames.addAll(generatorTriggeringTypes);
+
+      // If after cascading Generator output staleness there are no newly stale types then there is
+      // nothing further to discover.
+      done = !discoveredMoreStaleTypes;
 
       // It's possible that a generator triggering type was itself also created by a Generator.
       // Repeat the backwards trace process till none of the newly stale types are generated types.
       staleGeneratedTypeNames = Sets.intersection(generatorTriggeringTypes, generatedTypeNames);
-
-      // Ensure that no generated type is processed more than once, otherwise poorly written
-      // Generators could trigger an infinite loop.
-      staleGeneratedTypeNames.removeAll(staleTypeNames);
-    } while (!staleGeneratedTypeNames.isEmpty());
+    } while (!done);
   }
 
   private void clearCachedTypeOutput(String staleTypeName) {

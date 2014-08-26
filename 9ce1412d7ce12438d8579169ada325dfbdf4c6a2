@@ -16,6 +16,70 @@
       "revId": "9ce1412d7ce12438d8579169ada325dfbdf4c6a2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "739e256e_a016c464",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/JavaResourceBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-26T00:02:07Z",
+      "side": 1,
+      "message": "Please fix.",
+      "parentUuid": "53ae8194_fed799f5",
+      "revId": "9ce1412d7ce12438d8579169ada325dfbdf4c6a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "739e256e_a03de4d8",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/DeadCodeEliminationTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-26T00:02:07Z",
+      "side": 1,
+      "message": "// required so that the parameter types are tightened.\n\nThis so that the MethodSpecializer sees the opportunity.\n\nMakeCallsStatic is probably unnecessary now, the specializer acts on both instance and statified methods. It was probably there for inlining.",
+      "range": {
+        "startLine": 352,
+        "startChar": 38,
+        "endLine": 352,
+        "endChar": 88
+      },
+      "revId": "9ce1412d7ce12438d8579169ada325dfbdf4c6a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "739e256e_e0928c8f",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-08-26T00:02:07Z",
+      "side": 1,
+      "message": "I still think we are not in the optimal here. There is a tension here between specialization and devirtualization (MakeClassStatic).\n\nLet\u0027s add back @DoNotInline.",
+      "range": {
+        "startLine": 653,
+        "startChar": 0,
+        "endLine": 665,
+        "endChar": 7
+      },
+      "revId": "9ce1412d7ce12438d8579169ada325dfbdf4c6a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

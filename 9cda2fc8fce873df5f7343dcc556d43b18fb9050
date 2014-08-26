@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3b431fe_9c6d250c",
+        "filename": "user/build.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-08-26T09:20:49Z",
+      "side": 1,
+      "message": "We should probably rename the property to \"dev.built\" then (and same below)",
+      "range": {
+        "startLine": 469,
+        "startChar": 27,
+        "endLine": 469,
+        "endChar": 39
+      },
+      "revId": "9cda2fc8fce873df5f7343dcc556d43b18fb9050",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "33a82d90_55a87caa",
+        "filename": "user/super/com/google/gwt/emul/java/util/ConcurrentModificationDetector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-26T00:44:16Z",
+      "side": 1,
+      "message": "I was going to do that but getModCount was used in other places and none of them needs the extra check.",
+      "parentUuid": "b3beddc4_933dbcd9",
+      "revId": "50c70d8bb59bc9a43300f793988cf43680a88446",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3beddc4_73490079",
         "filename": "user/test/org/apache/commons/collections/TestMap.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-08-24T21:52:01Z",
       "side": 1,
       "message": "Correct me if I\u0027m wrong but I saw a pattern in GWT\u0027s codebase: unused parameters are named \u0027ignored\u0027 and expected exceptions are named \u0027expected\u0027.\n\nAnd why do you need final here?",
+      "revId": "50c70d8bb59bc9a43300f793988cf43680a88446",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33a82d90_b529a875",
+        "filename": "user/test/org/apache/commons/collections/TestMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-26T00:44:16Z",
+      "side": 1,
+      "message": "Yes you are right. This is a copy paste from jakarta and I didn\u0027t pay attention.\nI will fix.",
+      "parentUuid": "b3beddc4_73490079",
       "revId": "50c70d8bb59bc9a43300f793988cf43680a88446",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

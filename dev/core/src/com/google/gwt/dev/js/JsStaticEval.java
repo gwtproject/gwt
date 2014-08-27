@@ -19,6 +19,7 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.js.ast.CanBooleanEval;
+import com.google.gwt.dev.js.ast.JsArrayAccess;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsBlock;
@@ -35,6 +36,7 @@ import com.google.gwt.dev.js.ast.JsFor;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsIf;
 import com.google.gwt.dev.js.ast.JsModVisitor;
+import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsNullLiteral;
 import com.google.gwt.dev.js.ast.JsNumberLiteral;
 import com.google.gwt.dev.js.ast.JsPrefixOperation;
@@ -61,6 +63,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * Removes JsFunctions that are never referenced in the program.
@@ -162,6 +165,22 @@ public class JsStaticEval {
      * This is used by {@link #additionCoercesToString}.
      */
     private Map<JsExpression, Boolean> coercesToStringMap = new IdentityHashMap<JsExpression, Boolean>();
+
+    final Pattern JAVASCRIPT_IDENTIFIER_PATTERN = Pattern.compile("[a-zA-Z\\$_][a-zA-Z\\$_0-9]*");
+
+    @Override
+    public void endVisit(JsArrayAccess ref, JsContext ctx) {
+      if (!(ref.getIndexExpr() instanceof JsStringLiteral)) {
+        return;
+      }
+
+      String literal = ((JsStringLiteral) ref.getIndexExpr()).getValue();
+      if (JAVASCRIPT_IDENTIFIER_PATTERN.matcher(literal).matches()) {
+        JsNameRef propertyName = new JsNameRef((ref.getIndexExpr().getSourceInfo()), literal);
+        propertyName.setQualifier(ref.getArrayExpr());
+        ctx.replaceMe(propertyName);
+      }
+    }
 
     @Override
     public void endVisit(JsBinaryOperation x, JsContext ctx) {

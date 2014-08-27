@@ -90,6 +90,10 @@ public class JsStaticEvalTest extends OptimizerTestBase {
         optimize("alert($foo + ($bar + ($baz + $quux)));"));
   }
 
+  public void testLiteralArrayAccess() throws Exception {
+    // Simple test
+    assertEquals("a.sss=1;", optimize("a['sss'] = 1;"));
+  }
   /**
    * Test for issue 7088. JsStatic eval infinite loop in
    * {@link JsStaticEval.StaticEvalVisitor#endVisit(JsBlock, JsContext)}

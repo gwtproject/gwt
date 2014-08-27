@@ -566,6 +566,22 @@ public class CompilerTest extends GWTTestCase {
     }
   }
 
+  public void testOptimizeInstanceOf() {
+    class A {
+      int counter = 0;
+      Object get() {
+        if (counter >= 0) {
+          counter++;
+        }
+        return "aString";
+      }
+    }
+
+    A anA = new A();
+    assertFalse(anA.get() instanceof Integer);
+    assertEquals(1, anA.counter);
+  }
+
   public void testDeadCode() {
     while (returnFalse()) {
       break;

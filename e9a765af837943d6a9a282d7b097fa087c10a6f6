@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1302498d_89483d77",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-27T19:26:36Z",
+      "side": 1,
+      "message": "[warning] \u0027for\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "e9a765af837943d6a9a282d7b097fa087c10a6f6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1302498d_693e21d5",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-27T19:26:36Z",
+      "side": 1,
+      "message": "[warning] \u0027for\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "e9a765af837943d6a9a282d7b097fa087c10a6f6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1302498d_493b65e3",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-27T19:26:36Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "e9a765af837943d6a9a282d7b097fa087c10a6f6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

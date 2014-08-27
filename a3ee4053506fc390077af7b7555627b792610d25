@@ -39,6 +39,30 @@
       "revId": "a3ee4053506fc390077af7b7555627b792610d25",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7321c530_3c039d2f",
+        "filename": "user/super/com/google/gwt/emul/java/math/RoundingMode.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-27T21:50:52Z",
+      "side": 1,
+      "message": "Yes, we can. I sent this patch because it wasn\u0027t clear when we were going to get the blacklisting feature.",
+      "parentUuid": "b3dfbd55_2b1ed9c5",
+      "range": {
+        "startLine": 133,
+        "startChar": 22,
+        "endLine": 133,
+        "endChar": 37
+      },
+      "revId": "a3ee4053506fc390077af7b7555627b792610d25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

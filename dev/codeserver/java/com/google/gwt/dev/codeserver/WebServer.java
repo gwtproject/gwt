@@ -89,18 +89,20 @@ public class WebServer {
   private static final MimeTypes MIME_TYPES = new MimeTypes();
 
   private final SourceHandler handler;
-
   private final Modules modules;
+  private final JobRunner runner;
 
   private final String bindAddress;
   private final int port;
   private final TreeLogger logger;
+
   private Server server;
 
-  WebServer(SourceHandler handler, Modules modules, String bindAddress, int port,
+  WebServer(SourceHandler handler, Modules modules, JobRunner runner, String bindAddress, int port,
       TreeLogger logger) {
     this.handler = handler;
     this.modules = modules;
+    this.runner = runner;
     this.bindAddress = bindAddress;
     this.port = port;
     this.logger = logger;
@@ -205,7 +207,9 @@ public class WebServer {
       // cause a spurious recompile, resulting in an unexpected permutation being loaded later.
       //
       // It would be unsafe to allow a configuration property to be changed.
-      boolean ok = modules.recompile(moduleState, getBindingProperties(request));
+      Job job = new Job(moduleState.getModuleName(), getBindingProperties(request));
+      runner.submit(job);
+      boolean ok = job.waitForResult().isOk();
 
       JsonObject config = modules.getConfig();
       config.put("status", ok ? "ok" : "failed");
@@ -240,7 +244,8 @@ public class WebServer {
 
     if (target.equals("/progress")) {
       setHandled(request);
-      sendJsonResult(modules.getProgress(), request, response);
+      // TODO: return a list of progress objects here, one for each job.
+      sendJsonResult(runner.getRunningJobProgress().toJsonObject(), request, response);
       return;
     }
 

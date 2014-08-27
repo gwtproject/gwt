@@ -71,6 +71,8 @@ public class CodeServer {
       for (int i = 0; i < retries; i++) {
         System.out.println("\n### Recompile " + (i + 1) + "\n");
         try {
+          // TODO: actually test recompiling here.
+          // (This is just running precompiles repeatedly.)
           modules.defaultCompileAll(options.getNoPrecompile());
         } catch (Throwable t) {
           t.printStackTrace();
@@ -112,11 +114,11 @@ public class CodeServer {
     logger.setMaxDetail(options.getLogLevel());
 
     Modules modules = makeModules(options, logger);
-
     SourceHandler sourceHandler = new SourceHandler(modules, logger);
+    JobRunner runner = new JobRunner(modules, logger);
 
     WebServer webServer = new WebServer(sourceHandler, modules,
-        options.getBindAddress(), options.getPort(), logger);
+        runner, options.getBindAddress(), options.getPort(), logger);
     webServer.start();
 
     return webServer;
@@ -136,7 +138,7 @@ public class CodeServer {
       AppSpace appSpace = AppSpace.create(new File(workDir, moduleName));
 
       Recompiler recompiler = new Recompiler(appSpace, moduleName, options, logger);
-      modules.addModuleState(new ModuleState(recompiler, logger, options.getNoPrecompile()));
+      modules.addModuleState(new ModuleState(recompiler, options.getNoPrecompile(), logger));
     }
     return modules;
   }

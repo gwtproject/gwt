@@ -213,7 +213,7 @@ public class Compiler {
           compilePermutationsEvent.end();
 
           ArtifactSet generatedArtifacts = precompilation.getGeneratedArtifacts();
-          JJSOptions precompileOptions = precompilation.getUnifiedAst().getOptions();
+          PrecompileTaskOptions precompileOptions = precompilation.getUnifiedAst().getOptions();
 
           precompilation = null; // No longer needed, so save the memory
           long afterCompileMs = System.currentTimeMillis();

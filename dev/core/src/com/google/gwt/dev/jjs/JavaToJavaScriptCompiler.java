@@ -46,6 +46,7 @@ import com.google.gwt.dev.cfg.PermProps;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
+import com.google.gwt.dev.javac.typemodel.JConstructor;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.jdt.RebindPermutationOracle;
 import com.google.gwt.dev.jjs.UnifiedAst.AST;
@@ -875,8 +876,6 @@ public abstract class JavaToJavaScriptCompiler {
 
     protected RebindPermutationOracle rpo;
     protected String[] entryPointTypeNames;
-    private static final String JS_EXPORT_ANN = "com.google.gwt.core.client.js.JsExport";
-    private static final String JS_TYPE_ANN = "com.google.gwt.core.client.js.JsType";
 
     public Precompiler(RebindPermutationOracle rpo, String[] entryPointTypeNames) {
       this.rpo = rpo;
@@ -1088,10 +1087,13 @@ public abstract class JavaToJavaScriptCompiler {
       // See if we should run the EnumNameObfuscator
       if (module != null) {
         ConfigProps config = new ConfigProps(module);
-        if (config.getBoolean(ENUM_NAME_OBFUSCATION_PROPERTY, false)) {
+        List<String> enumObfProps = config.getStrings(ENUM_NAME_OBFUSCATION_PROPERTY);
+        String enumObfProp = enumObfProps != null ? enumObfProps.get(0) : null;
+        if (!"false".equals(enumObfProp)) {
           EnumNameObfuscator.exec(jprogram, logger,
               config.getCommaSeparatedStrings(
-                  ENUM_NAME_OBFUSCATION_BLACKLIST_PROPERTY));
+                  ENUM_NAME_OBFUSCATION_BLACKLIST_PROPERTY),
+              "closure".equals(enumObfProp));
         }
       }
     }
@@ -1135,44 +1137,27 @@ public abstract class JavaToJavaScriptCompiler {
         allRootTypes.add(typeOracle.getSingleJsoImpl(singleJsoIntf).getQualifiedSourceName());
       }
 
-      if (jprogram.typeOracle.isInteropEnabled()) {
-        // find any types with @JsExport could be entry points as well
-        nextType:
-        for (com.google.gwt.dev.javac.typemodel.JClassType type :
-            typeOracle.getTypes()) {
-          for (Annotation ann : type.getAnnotations()) {
-            // If the type immediately exports symbols to JS.
-            if (ann.annotationType().getName().equals(JS_EXPORT_ANN)) {
+      // find any types with @JsExport could be entry points as well
+      String jsExportAnn = "com.google.gwt.core.client.js.JsExport";
+      nextType: for (com.google.gwt.dev.javac.typemodel.JClassType type :
+          typeOracle.getTypes()) {
+        for (com.google.gwt.dev.javac.typemodel.JMethod meth : type.getMethods()) {
+          for (Annotation ann : meth.getAnnotations()) {
+            if (ann.annotationType().getName().equals(jsExportAnn)) {
               allRootTypes.add(type.getQualifiedSourceName());
               continue nextType;
             }
           }
-          if (isJsType(type)) {
-            // If the type or any transitive interface is a JS type.
-            allRootTypes.add(type.getQualifiedSourceName());
+        }
+        for (JConstructor meth : type.getConstructors()) {
+          for (Annotation ann : meth.getAnnotations()) {
+            if (ann.annotationType().getName().equals(jsExportAnn)) {
+              allRootTypes.add(type.getQualifiedSourceName());
+              continue nextType;
+            }
           }
         }
       }
-    }
-
-    /**
-     * Returns true if the type, or any super-interface has a JsType
-     * annotation.
-     */
-    private boolean isJsType(com.google.gwt.dev.javac.typemodel.JClassType type) {
-      for (Annotation ann : type.getAnnotations()) {
-        if (ann.annotationType().getName().equals(JS_TYPE_ANN)) {
-          return true;
-        }
-      }
-
-      for (com.google.gwt.dev.javac.typemodel.JClassType intf : type
-          .getImplementedInterfaces()) {
-         if (isJsType(intf)) {
-           return true;
-         }
-      }
-      return false;
     }
 
     private void recordJsoTypes(TypeOracle typeOracle) {
@@ -1483,11 +1468,9 @@ public abstract class JavaToJavaScriptCompiler {
     OptimizerStats stats = new OptimizerStats(passName);
     stats.add(Pruner.exec(jprogram, true).recordVisits(numNodes));
     stats.add(Finalizer.exec(jprogram).recordVisits(numNodes));
-    stats.add(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks())
-        .recordVisits(numNodes));
+    stats.add(MakeCallsStatic.exec(options, jprogram).recordVisits(numNodes));
     stats.add(TypeTightener.exec(jprogram).recordVisits(numNodes));
     stats.add(MethodCallTightener.exec(jprogram).recordVisits(numNodes));
-    // Note: Specialization should be done before inlining.
     stats.add(MethodCallSpecializer.exec(jprogram).recordVisits(numNodes));
     stats.add(DeadCodeElimination.exec(jprogram).recordVisits(numNodes));
     stats.add(MethodInliner.exec(jprogram).recordVisits(numNodes));

@@ -7,11 +7,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.runner.RunWith;
 import org.junit.Test;
+import org.junit.runners.JUnit4;
 
 /**
  * Tests for {@link SourceHandler}
  */
+@RunWith(JUnit4.class)
 public class SourceHandlerTest {
 
   private static final String VALID_STRONG_NAME = Util.computeStrongName("foo-bar".getBytes());

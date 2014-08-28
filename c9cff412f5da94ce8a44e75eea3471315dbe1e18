@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3541db2_c922d5c4",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/PathPrefixSetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-28T21:37:45Z",
+      "side": 1,
+      "message": "next time as an alternative you can do this:\n\ntry {\n  // logic\n} catch (AssertionError expected) {\n  // Success\n  return;\n}\nfail(...);",
+      "revId": "c9cff412f5da94ce8a44e75eea3471315dbe1e18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f35a15dc_13a48ea6",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Job.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-29T02:01:24Z",
+      "side": 1,
+      "message": "Job seems really vague to me. I\u0027d prefer something like \"CompileRequest\" or \"CompileJob\"\n\nif you do rename it you\u0027ll need to update \"JobRunner\" as well",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 9
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f35a15dc_33942a30",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Job.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-29T02:01:24Z",
+      "side": 1,
+      "message": "the compiler is full of variables named \"logger\" with type TreeLogger. having a variable named logger that is not a TreeLogger is going to repeatedly confuse me",
+      "range": {
+        "startLine": 55,
+        "startChar": 28,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f35a15dc_b3801aec",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Job.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-29T02:01:24Z",
+      "side": 1,
+      "message": "don\u0027t we put classes at the top?",
+      "range": {
+        "startLine": 194,
+        "startChar": 2,
+        "endLine": 194,
+        "endChar": 5
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f35a15dc_f3c69228",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-29T02:01:24Z",
+      "side": 1,
+      "message": "unnecessary final on parameters",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 18
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f35a15dc_1397aef7",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-29T02:01:24Z",
+      "side": 1,
+      "message": "You\u0027ve basically implemented your own BlockingQueue, might as well use the LinkedBlockingQueue built into Java i think.",
+      "range": {
+        "startLine": 133,
+        "startChar": 2,
+        "endLine": 140,
+        "endChar": 3
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f35a15dc_f37c52f5",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-08-29T02:01:24Z",
+      "side": 1,
+      "message": "when i see a variable named module, i think it\u0027s a ModuleDef, but this isn\u0027t. :-/",
+      "range": {
+        "startLine": 151,
+        "startChar": 4,
+        "endLine": 151,
+        "endChar": 10
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -71,6 +71,23 @@
     },
     {
       "key": {
+        "uuid": "f35a15dc_761e107e",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-29T02:03:19Z",
+      "side": 1,
+      "message": "What about using an ExecutorService (or perhaps ExecutorCompletionService) with single thread and Futures instead?",
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f35a15dc_f3c69228",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
         "patchSetId": 2

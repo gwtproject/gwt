@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53e9212a_e6721aef",
+        "filename": "user/test/com/google/gwt/emultest/EmulSuite.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-29T02:38:39Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.emultest.java.math.MathContextTest\u0027 import.",
+      "revId": "74706fa44f3194a8c2f021e13b097345bc81d18f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53e9212a_4688269d",
+        "filename": "user/test/com/google/gwt/emultest/java/math/MathContextWithObfuscatedEnumsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-08-29T02:38:39Z",
+      "side": 1,
+      "message": "[error] Unused import - java.math.MathContext.",
+      "revId": "74706fa44f3194a8c2f021e13b097345bc81d18f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -34,6 +34,7 @@ import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.dev.cfg.ResourceLoaders;
+import com.google.gwt.dev.codeserver.Job.Result;
 import com.google.gwt.dev.javac.UnitCacheSingleton;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.resource.impl.ZipFileClassPathEntry;
@@ -45,6 +46,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
@@ -57,7 +59,6 @@ class Recompiler {
   private final AppSpace appSpace;
   private final String originalModuleName;
   private IncrementalBuilder incrementalBuilder;
-  private final TreeLogger logger;
   private String serverPrefix;
   private int compilesDone = 0;
   private MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
@@ -76,31 +77,83 @@ class Recompiler {
   private CompilerContext compilerContext;
   private Options options;
 
-  Recompiler(AppSpace appSpace, String moduleName, Options options, TreeLogger logger) {
+  Recompiler(AppSpace appSpace, String moduleName, Options options) {
     this.appSpace = appSpace;
     this.originalModuleName = moduleName;
     this.options = options;
-    this.logger = logger;
     this.serverPrefix = options.getPreferredHost() + ":" + options.getPort();
     compilerContext = compilerContextBuilder.build();
   }
 
-  CompileDir recompile(Map<String, String> bindingProperties, AtomicReference<Progress> progress)
-      throws UnableToCompleteException {
-    if (options.shouldCompilePerFile()) {
-      return compile(bindingProperties, progress, minimalRebuildCache);
+  /**
+   * Compiles the first time, while Super Dev Mode is starting up.
+   * Either this method or {@link #initWithoutPrecompile} should be called first.
+   */
+  synchronized CompileDir precompile(TreeLogger logger) throws UnableToCompleteException {
+    Map<String, String> defaultProps = new HashMap<String, String>();
+    defaultProps.put("user.agent", "safari");
+    defaultProps.put("locale", "en");
+
+    // Create a dummy job for the first compile.
+    // Its progress is not visible externally but will still be logged.
+    //
+    // If we ever start reporting progress on this job, we should make the module name consistent.
+    // (We don't know what the module name will change to before loading the module, so we use
+    // the original name.)
+    Job job = new Job(originalModuleName, defaultProps, logger);
+    job.onSubmitted();
+    Result result = compile(job, new MinimalRebuildCache());
+    job.onFinished(result);
+
+    assert result.isOk();
+    return result.outputDir;
+  }
+
+  /**
+   * Recompiles the module.
+   *
+   * <p>Prerequisite: either {@link #precompile} or {@link #initWithoutPrecompile} should have been
+   * called first.
+   *
+   * <p>Sets the job's result and returns normally whether the compile succeeds or not.
+   *
+   * @param job should already be in the "in progress" state.
+   */
+  synchronized Job.Result recompile(Job job) {
+
+    Job.Result result;
+    try {
+      if (options.shouldCompilePerFile()) {
+        result = compile(job, minimalRebuildCache);
+      } else {
+        result = compile(job, new MinimalRebuildCache());
+      }
+    } catch (UnableToCompleteException e) {
+      // No point in logging a stack trace for this exception
+      job.getLogger().log(TreeLogger.Type.WARN, "recompile failed");
+      result = new Result(null, e);
+    } catch (Throwable error) {
+      job.getLogger().log(TreeLogger.Type.WARN, "recompile failed", error);
+      result = new Result(null, error);
     }
-    return compile(bindingProperties, progress, new MinimalRebuildCache());
+
+    job.onFinished(result);
+    return result;
   }
 
-  synchronized CompileDir compile(Map<String, String> bindingProperties,
-      AtomicReference<Progress> progress) throws UnableToCompleteException {
-    return compile(bindingProperties, progress, new MinimalRebuildCache());
-  }
-
-  private synchronized CompileDir compile(Map<String, String> bindingProperties,
-      AtomicReference<Progress> progress, MinimalRebuildCache minimalRebuildCache)
+  /**
+   * Calls the GWT compiler with the appropriate settings.
+   * Side-effect: the given cache will be used and saved in {@link #minimalRebuildCache}.
+   *
+   * @param job used for reporting progress. (Its result will not be set.)
+   * @return a non-error Job.Result if successful.
+   * @throws UnableToCompleteException for compile failures.
+   */
+  private Job.Result compile(Job job, MinimalRebuildCache minimalRebuildCache)
       throws UnableToCompleteException {
+
+    assert job.isInProgress();
+
     if (compilesDone == 0) {
       System.setProperty("java.awt.headless", "true");
       if (System.getProperty("gwt.speedtracerlog") == null) {
@@ -108,13 +161,13 @@ class Recompiler {
             appSpace.getSpeedTracerLogFile().getAbsolutePath());
       }
       compilerContext = compilerContextBuilder.unitCache(
-          UnitCacheSingleton.get(logger, appSpace.getUnitCacheDir())).build();
+          UnitCacheSingleton.get(job.getLogger(), appSpace.getUnitCacheDir())).build();
     }
 
     long startTime = System.currentTimeMillis();
     int compileId = ++compilesDone;
-    CompileDir compileDir = makeCompileDir(compileId);
-    TreeLogger compileLogger = makeCompileLogger(compileDir);
+    CompileDir compileDir = makeCompileDir(compileId, job.getLogger());
+    TreeLogger compileLogger = makeCompileLogger(compileDir, job.getLogger());
 
     boolean listenerFailed = false;
     try {
@@ -128,12 +181,11 @@ class Recompiler {
     try {
       if (options.shouldCompileIncremental()) {
         // Just have one message for now.
-        progress.set(new Progress.Compiling(moduleName.get(), compilesDone, 0, 1, "Compiling"));
+        job.onCompilerProgress(new Progress.Compiling(job, 0, 1, "Compiling"));
 
         success = compileIncremental(compileLogger, compileDir);
       } else {
-        success = compileMonolithic(compileLogger, bindingProperties, compileDir, progress,
-            minimalRebuildCache);
+        success = compileMonolithic(compileLogger, compileDir, job, minimalRebuildCache);
       }
     } finally {
       try {
@@ -160,13 +212,18 @@ class Recompiler {
       throw new UnableToCompleteException();
     }
 
-    return publishedCompileDir;
+    return new Result(publishedCompileDir, null);
   }
 
-  synchronized CompileDir noCompile() throws UnableToCompleteException {
+  /**
+   * Creates a dummy output directory without compiling the module.
+   * Either this method or {@link #precompile} should be called first.
+   */
+  synchronized CompileDir initWithoutPrecompile(TreeLogger parentLogger)
+      throws UnableToCompleteException {
     long startTime = System.currentTimeMillis();
-    CompileDir compileDir = makeCompileDir(++compilesDone);
-    TreeLogger compileLogger = makeCompileLogger(compileDir);
+    CompileDir compileDir = makeCompileDir(++compilesDone, parentLogger);
+    TreeLogger compileLogger = makeCompileLogger(compileDir, parentLogger);
 
     ModuleDef module = loadModule(compileLogger);
     String newModuleName = module.getName();  // includes any rename.
@@ -231,17 +288,19 @@ class Recompiler {
     return buildResultStatus.isSuccess();
   }
 
-  private boolean compileMonolithic(TreeLogger compileLogger, Map<String, String> bindingProperties,
-      CompileDir compileDir, AtomicReference<Progress> progress, MinimalRebuildCache rebuildCache)
+  private boolean compileMonolithic(TreeLogger compileLogger,
+      CompileDir compileDir, Job job, MinimalRebuildCache rebuildCache)
       throws UnableToCompleteException {
 
-    progress.set(new Progress.Compiling(moduleName.get(), compilesDone, 0, 2, "Loading modules"));
+    job.onCompilerProgress(
+        new Progress.Compiling(job, 0, 2, "Loading modules"));
 
     CompilerOptions loadOptions = new CompilerOptionsImpl(compileDir, originalModuleName, options);
     compilerContext = compilerContextBuilder.options(loadOptions).build();
 
     ModuleDef module = loadModule(compileLogger);
-    bindingProperties = restrictPermutations(logger, module, bindingProperties);
+    Map<String, String> bindingProperties = restrictPermutations(compileLogger, module,
+        job.getBindingProperties());
 
     // Propagates module rename.
     String newModuleName = module.getName();
@@ -254,7 +313,7 @@ class Recompiler {
       return true;
     }
 
-    progress.set(new Progress.Compiling(newModuleName, compilesDone, 1, 2, "Compiling"));
+    job.onCompilerProgress(new Progress.Compiling(job, 1, 2, "Compiling"));
     // TODO: use speed tracer to get more compiler events?
 
     CompilerOptions runOptions = new CompilerOptionsImpl(compileDir, newModuleName, options);
@@ -288,15 +347,15 @@ class Recompiler {
     return resourceLoader.get();
   }
 
-  private TreeLogger makeCompileLogger(CompileDir compileDir)
+  private TreeLogger makeCompileLogger(CompileDir compileDir, TreeLogger parent)
       throws UnableToCompleteException {
     try {
       PrintWriterTreeLogger fileLogger =
           new PrintWriterTreeLogger(compileDir.getLogFile());
       fileLogger.setMaxDetail(options.getLogLevel());
-      return new CompositeTreeLogger(logger, fileLogger);
+      return new CompositeTreeLogger(parent, fileLogger);
     } catch (IOException e) {
-      logger.log(TreeLogger.ERROR, "unable to open log file: " + compileDir.getLogFile(), e);
+      parent.log(TreeLogger.ERROR, "unable to open log file: " + compileDir.getLogFile(), e);
       throw new UnableToCompleteException();
     }
   }
@@ -482,7 +541,7 @@ class Recompiler {
     }
   }
 
-  private CompileDir makeCompileDir(int compileId)
+  private CompileDir makeCompileDir(int compileId, TreeLogger logger)
       throws UnableToCompleteException {
     return CompileDir.create(appSpace.getCompileDir(compileId), logger);
   }

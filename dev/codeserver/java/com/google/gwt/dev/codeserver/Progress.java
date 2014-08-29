@@ -18,7 +18,7 @@ package com.google.gwt.dev.codeserver;
 import com.google.gwt.dev.json.JsonObject;
 
 /**
- * A snapshot of the compiler's current state, for progress dialogs.
+ * A snapshot of {@link Job}'s current state, for progress dialogs.
  */
 abstract class Progress {
 
@@ -41,20 +41,46 @@ abstract class Progress {
   };
 
   /**
+   * Returned when a compile job is waiting to start.
+   */
+  static class Waiting extends Progress {
+
+    /**
+     * The id of the job being compiled. (Unique within the same CodeServer process.)
+     */
+    final String jobId;
+
+    final String module;
+
+    Waiting(Job job) {
+      this.jobId = job.getId();
+      this.module = job.getModuleName();
+    }
+
+    @Override
+    JsonObject toJsonObject() {
+      JsonObject out = new JsonObject();
+      out.put("jobId", jobId);
+      out.put("module", module);
+      out.put("status", "waiting");
+      return out;
+    }
+  }
+
+  /**
    * Returned when a compile is in progress.
    */
   static class Compiling extends Progress {
 
     /**
+     * The id of the job being compiled. (Unique within the same CodeServer process.)
+     */
+    final String jobId;
+
+    /**
      * The module being compiled.
      */
     final String module;
-
-    /**
-     * Identifies the currently running compile.
-     * (It's unique within the same CodeServer process and module.)
-     */
-    final int compileId;
 
     /**
      * The number of steps finished, for showing progress.
@@ -71,9 +97,9 @@ abstract class Progress {
      */
     final String stepMessage;
 
-    Compiling(String module, int compileId, int finishedSteps, int totalSteps, String stepMessage) {
-      this.module = module;
-      this.compileId = compileId;
+    Compiling(Job job, int finishedSteps, int totalSteps, String stepMessage) {
+      this.jobId = job.getId();
+      this.module = job.getModuleName();
       this.finishedSteps = finishedSteps;
       this.totalSteps = totalSteps;
       this.stepMessage = stepMessage;
@@ -82,9 +108,9 @@ abstract class Progress {
     @Override
     JsonObject toJsonObject() {
       JsonObject out = new JsonObject();
-      out.put("status", "compiling");
+      out.put("jobId", jobId);
       out.put("module", module);
-      out.put("compileId", compileId);
+      out.put("status", "compiling");
       out.put("finishedSteps", finishedSteps);
       out.put("totalSteps", totalSteps);
       out.put("stepMessage", stepMessage);

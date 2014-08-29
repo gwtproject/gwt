@@ -15,6 +15,8 @@
  */
 package org.hibernate.jsr303.tck.tests.validation;
 
+import com.google.gwt.core.ext.UnableToCompleteException;
+
 import org.hibernate.jsr303.tck.util.TckCompileTestCase;
 
 import javax.validation.ValidationException;
@@ -25,7 +27,8 @@ import javax.validation.ValidationException;
  */
 public class ValidateCompileTest extends TckCompileTestCase {
 
-  public void testValidatedPropertyDoesNotFollowJavaBeansConvention() {
+  public void testValidatedPropertyDoesNotFollowJavaBeansConvention()
+      throws UnableToCompleteException {
     assertValidatorFailsToCompile(
         TckCompileTestValidatorFactory.GwtValidator.class,
         ValidationException.class, "Unable to create a validator for "

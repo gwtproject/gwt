@@ -15,6 +15,8 @@
  */
 package org.hibernate.jsr303.tck.tests.constraints.groups;
 
+import com.google.gwt.core.ext.UnableToCompleteException;
+
 import org.hibernate.jsr303.tck.tests.constraints.groups.GroupSequenceContainingDefaultValidatorFactory.GroupSequenceContainingDefaultValidator;
 import org.hibernate.jsr303.tck.tests.constraints.groups.GroupSequenceWithNoImplicitDefaultGroupValidatorFactory.TestValidator;
 import org.hibernate.jsr303.tck.util.TckCompileTestCase;
@@ -27,7 +29,7 @@ import javax.validation.GroupDefinitionException;
  */
 public class DefaultGroupRedefinitionCompileTest extends TckCompileTestCase {
 
-  public void testGroupSequenceContainingDefault() {
+  public void testGroupSequenceContainingDefault() throws UnableToCompleteException {
     assertValidatorFailsToCompile(
         GroupSequenceContainingDefaultValidator.class,
         GroupDefinitionException.class, "Unable to create a validator for "
@@ -37,7 +39,7 @@ public class DefaultGroupRedefinitionCompileTest extends TckCompileTestCase {
             + "sequence list.");
   }
 
-  public void testGroupSequenceWithNoImplicitDefaultGroup() {
+  public void testGroupSequenceWithNoImplicitDefaultGroup() throws UnableToCompleteException {
     assertValidatorFailsToCompile(TestValidator.class,
         GroupDefinitionException.class, "Unable to create a validator for "
             + "org.hibernate.jsr303.tck.tests.constraints.groups."

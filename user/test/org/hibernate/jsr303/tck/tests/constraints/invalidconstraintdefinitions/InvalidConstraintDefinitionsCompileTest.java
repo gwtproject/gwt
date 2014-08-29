@@ -15,6 +15,8 @@
  */
 package org.hibernate.jsr303.tck.tests.constraints.invalidconstraintdefinitions;
 
+import com.google.gwt.core.ext.UnableToCompleteException;
+
 import org.hibernate.jsr303.tck.util.TckCompileTestCase;
 
 import javax.validation.ConstraintDefinitionException;
@@ -27,7 +29,7 @@ import javax.validation.Validator;
  */
 public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase {
 
-  public void testConstraintDefinitionWithoutGroupParameter() {
+  public void testConstraintDefinitionWithoutGroupParameter() throws UnableToCompleteException {
     assertConstraintDefinitionException(
         ConstraintDefinitionWithoutGroupParameterFactory.TestValidator.class,
         "Unable to create a validator for org.hibernate.jsr303.tck."
@@ -38,7 +40,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + "annotation, but does not contain a groups parameter.");
   }
 
-  public void testConstraintDefinitionWithoutMessageParameter() {
+  public void testConstraintDefinitionWithoutMessageParameter() throws UnableToCompleteException {
     assertConstraintDefinitionException(
         ConstraintDefinitionWithoutMessageParameterFactory.TestValidator.class,
         "Unable to create a validator for "
@@ -52,7 +54,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + "but does not contain a message parameter.");
   }
 
-  public void testConstraintDefinitionWithoutPayloadParameter() {
+  public void testConstraintDefinitionWithoutPayloadParameter() throws UnableToCompleteException {
     assertConstraintDefinitionException(
         ConstraintDefinitionWithoutPayloadParameterFactory.TestValidator.class,
         "Unable to create a validator for org.hibernate.jsr303.tck.tests"
@@ -64,7 +66,8 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + "parameter.");
   }
 
-  public void testConstraintDefinitionWithParameterStartingWithValid() {
+  public void testConstraintDefinitionWithParameterStartingWithValid()
+      throws UnableToCompleteException {
     assertConstraintDefinitionException(
         ConstraintDefinitionWithParameterStartingWithValidFactory.TestValidator.class,
         "Unable to create a validator for org.hibernate.jsr303.tck.tests"
@@ -73,7 +76,8 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + "because Parameters starting with 'valid' are not allowed in a constraint.");
   }
 
-  public void testConstraintDefinitionWithWrongDefaultGroupValue() {
+  public void testConstraintDefinitionWithWrongDefaultGroupValue()
+      throws UnableToCompleteException {
     assertConstraintDefinitionException(
         ConstraintDefinitionWithWrongDefaultGroupValueFactory.TestValidator.class,
         "Unable to create a validator for "
@@ -86,7 +90,8 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + "but the groups parameter default value is not the empty array.");
   }
 
-  public void testConstraintDefinitionWithWrongDefaultPayloadValue() {
+  public void testConstraintDefinitionWithWrongDefaultPayloadValue()
+      throws UnableToCompleteException {
     assertConstraintDefinitionException(
         ConstraintDefinitionWithWrongDefaultPayloadValueFactory.TestValidator.class,
         "Unable to create a validator for org.hibernate.jsr303.tck.tests"
@@ -99,7 +104,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + "value is not the empty array.");
   }
 
-  public void testConstraintDefinitionWithWrongGroupType() {
+  public void testConstraintDefinitionWithWrongGroupType() throws UnableToCompleteException {
     assertConstraintDefinitionException(
         ConstraintDefinitionWithWrongGroupTypeFactory.TestValidator.class,
         "Unable to create a validator for org.hibernate.jsr303.tck.tests"
@@ -112,7 +117,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + "parameter is of wrong type.");
   }
 
-  public void testConstraintDefinitionWithWrongMessageType() {
+  public void testConstraintDefinitionWithWrongMessageType() throws UnableToCompleteException {
     assertConstraintDefinitionException(
         ConstraintDefinitionWithWrongMessageTypeFactory.TestValidator.class,
         "Unable to create a validator for org.hibernate.jsr303.tck.tests"
@@ -125,7 +130,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + "but the message parameter is not of type java.lang.String.");
   }
 
-  public void testConstraintDefinitionWithWrongPayloadClass() {
+  public void testConstraintDefinitionWithWrongPayloadClass() throws UnableToCompleteException {
     assertConstraintDefinitionException(
         ConstraintDefinitionWithWrongPayloadClassFactory.TestValidator.class,
         "Unable to create a validator for "
@@ -140,7 +145,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
 
   private void assertConstraintDefinitionException(
       final Class<? extends Validator> validatorClass,
-      final String expectedMessage) {
+      final String expectedMessage) throws UnableToCompleteException {
     assertValidatorFailsToCompile(validatorClass,
         ConstraintDefinitionException.class, expectedMessage);
   }

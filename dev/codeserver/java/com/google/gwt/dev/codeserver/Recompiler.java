@@ -371,6 +371,7 @@ class Recompiler {
         "com/google/gwt/core/ext/linker/impl/properties.js");
 
     overrideBinding(moduleDef, "compiler.useSourceMaps", "true");
+    overrideBinding(moduleDef, "compiler.useSymbolMaps", "false");
     overrideBinding(moduleDef, "superdevmode", "on");
     return moduleDef;
   }

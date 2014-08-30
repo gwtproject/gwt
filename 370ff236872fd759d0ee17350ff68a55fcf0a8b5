@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3a7bd22_3fdfef24",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/ProgressTable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-08-30T02:30:13Z",
+      "side": 1,
+      "message": "nit:\n\nI used to alway have difficulty deciding what should be the visibility of the methods of a class that is package visible. Technically every method declared in a package visible class can be package visible as no one else from other packages can call it so there was no reason to make it private. However I got a feedback from one of the readability reviewers in Google and he basically he recommended that the method visibility should be evaluated as the class was public.\n\nI think that is a very good practice for two reasons:\n\n1. It makes it very obvious to the reader what parts of the class considered as the public API without looking at the class visibility.\n\n2. Causes less change in your code when you decide to move the class to public visibility.",
+      "revId": "370ff236872fd759d0ee17350ff68a55fcf0a8b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

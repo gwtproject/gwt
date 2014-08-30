@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b3a7bd22_11acac22",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Job.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-30T01:48:32Z",
+      "side": 1,
+      "message": "Admittedly vague but it\u0027s unambiguous in context, since it\u0027s not used for anything else within Super Dev Mode, GWT, or the JDK. The specialized meaning within Super Dev Mode doesn\u0027t seem hard to learn.",
+      "parentUuid": "f35a15dc_13a48ea6",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 9
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f35a15dc_33942a30",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Job.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2014-08-29T02:01:24Z",
       "side": 1,
       "message": "the compiler is full of variables named \"logger\" with type TreeLogger. having a variable named logger that is not a TreeLogger is going to repeatedly confuse me",
+      "range": {
+        "startLine": 55,
+        "startChar": 28,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3a7bd22_51cd94f0",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Job.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-30T01:48:32Z",
+      "side": 1,
+      "message": "renamed",
+      "parentUuid": "f35a15dc_33942a30",
       "range": {
         "startLine": 55,
         "startChar": 28,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b3a7bd22_9191bcd3",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Job.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-30T01:48:32Z",
+      "side": 1,
+      "message": "That\u0027s traditionally been the case in GWT, but it\u0027s always bugged me so in Super Dev Mode I always put them at the bottom.",
+      "parentUuid": "f35a15dc_b3801aec",
+      "range": {
+        "startLine": 194,
+        "startChar": 2,
+        "endLine": 194,
+        "endChar": 5
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f35a15dc_761e107e",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
         "patchSetId": 2
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "b3a7bd22_51a8f4fd",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-30T01:48:32Z",
+      "side": 1,
+      "message": "I didn\u0027t want to do this since it makes it hard to observe the submit queue, but on second thought, this should be a different data structure anyway. So, now there is ProgressTable and JobRunner is shorter.",
+      "parentUuid": "f35a15dc_761e107e",
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f35a15dc_f3c69228",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
         "patchSetId": 2
@@ -99,6 +189,30 @@
       "writtenOn": "2014-08-29T02:01:24Z",
       "side": 1,
       "message": "unnecessary final on parameters",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 18
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3a7bd22_d17224ef",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-30T01:48:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f35a15dc_f3c69228",
       "range": {
         "startLine": 52,
         "startChar": 12,
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "b3a7bd22_b15e7859",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-30T01:48:32Z",
+      "side": 1,
+      "message": "This was to avoid a minor race condition, but now moved to ProgressTable.",
+      "parentUuid": "f35a15dc_1397aef7",
+      "range": {
+        "startLine": 133,
+        "startChar": 2,
+        "endLine": 140,
+        "endChar": 3
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f35a15dc_f37c52f5",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
         "patchSetId": 2
@@ -145,6 +283,30 @@
       "writtenOn": "2014-08-29T02:01:24Z",
       "side": 1,
       "message": "when i see a variable named module, i think it\u0027s a ModuleDef, but this isn\u0027t. :-/",
+      "range": {
+        "startLine": 151,
+        "startChar": 4,
+        "endLine": 151,
+        "endChar": 10
+      },
+      "revId": "67864e5d23c5df7ff84bebf4d28cc639450f2e7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3a7bd22_54ec6229",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-08-30T01:48:32Z",
+      "side": 1,
+      "message": "renamed to \"m\".",
+      "parentUuid": "f35a15dc_f37c52f5",
       "range": {
         "startLine": 151,
         "startChar": 4,

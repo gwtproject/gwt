@@ -160,13 +160,15 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   }
 
   private void reset() {
-    InternalJsMapFactory factory = GWT.create(InternalJsMapFactory.class);
-    hashCodeMap = factory.createJsHashCodeMap();
-    hashCodeMap.host = this;
-    stringMap = factory.createJsStringMap();
-    stringMap.host = this;
-    size = 0;
-    structureChanged(this);
+    if (size > 0) {
+      InternalJsMapFactory factory = GWT.create(InternalJsMapFactory.class);
+      hashCodeMap = factory.createJsHashCodeMap();
+      hashCodeMap.host = this;
+      stringMap = factory.createJsStringMap();
+      stringMap.host = this;
+      size = 0;
+      structureChanged(this);
+    }
   }
 
   @SpecializeMethod(params = {String.class}, target = "hasStringValue")

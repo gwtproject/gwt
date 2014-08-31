@@ -147,8 +147,18 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
     }
 
     @Override
+    public boolean remove(Object entry) {
+      if (contains(entry)) {
+        Object key = ((Map.Entry<?, ?>) entry).getKey();
+        LinkedHashMap.this.remove(key);
+        return true;
+      }
+      return false;
+    }
+
+    @Override
     public int size() {
-      return map.size();
+      return LinkedHashMap.this.size();
     }
   }
 
@@ -172,34 +182,36 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
    */
   private final transient HashMap<K, ChainEntry> map = new HashMap<K, ChainEntry>();
 
-  {
-    // Initialize the empty linked list.
-    head.prev = head;
-    head.next = head;
-  }
-
   public LinkedHashMap() {
+    reset();
   }
 
   public LinkedHashMap(int ignored) {
-    super(ignored);
+    this(ignored, 0);
   }
 
   public LinkedHashMap(int ignored, float alsoIgnored) {
     super(ignored, alsoIgnored);
+    reset();
   }
 
   public LinkedHashMap(int ignored, float alsoIgnored, boolean accessOrder) {
     super(ignored, alsoIgnored);
     this.accessOrder = accessOrder;
+    reset();
   }
 
   public LinkedHashMap(Map<? extends K, ? extends V> toBeCopied) {
+    reset();
     this.putAll(toBeCopied);
   }
 
   @Override
   public void clear() {
+    reset();
+  }
+
+  private void reset() {
     map.clear();
     head.prev = head;
     head.next = head;

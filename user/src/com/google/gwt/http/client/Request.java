@@ -15,8 +15,8 @@
  */
 package com.google.gwt.http.client;
 
-import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.xhr.client.XMLHttpRequest;
 
 /**
@@ -100,24 +100,16 @@ public class Request {
     return ImplHolder.get().createResponse(xmlHttpRequest);
   }
 
-  private static native int createTimeout(Request request, RequestCallback callback, int timeoutMillis) /*-{
-    return @com.google.gwt.core.client.impl.Impl::setTimeout(Lcom/google/gwt/core/client/JavaScriptObject;I)(
-      $entry(function() {
-        request.@com.google.gwt.http.client.Request::fireOnTimeout(Lcom/google/gwt/http/client/RequestCallback;)(callback);
-      }),
-      timeoutMillis);
-  }-*/;
-
   /**
    * The number of milliseconds to wait for this HTTP request to complete.
    */
   private final int timeoutMillis;
 
-  /**
-   * ID of the timer used to force HTTPRequest timeouts. Only meaningful if
-   * timeoutMillis > 0.
+  /*
+   * Timer used to force HTTPRequest timeouts. If the user has not requested a
+   * timeout then this field is null.
    */
-  private final int timerId;
+  private final Timer timer;
 
   /**
    * JavaScript XmlHttpRequest object that this Java class wraps. This field is
@@ -133,7 +125,7 @@ public class Request {
   protected Request() {
     timeoutMillis = 0;
     xmlHttpRequest = null;
-    timerId = 0;
+    timer = null;
   }
 
   /**
@@ -165,11 +157,17 @@ public class Request {
     this.xmlHttpRequest = xmlHttpRequest;
 
     if (timeoutMillis > 0) {
-      // create and schedule a cancel command
-      timerId = createTimeout(this, callback, timeoutMillis);
+      // create and start a Timer
+      timer = new Timer() {
+        @Override
+        public void run() {
+          fireOnTimeout(callback);
+        }
+      };
+      timer.schedule(timeoutMillis);
     } else {
       // no Timer required
-      timerId = 0;
+      timer = null;
     }
   }
 
@@ -258,15 +256,13 @@ public class Request {
    * Stops the current HTTPRequest timer if there is one.
    */
   private void cancelTimer() {
-    if (timeoutMillis > 0) {
-      Impl.clearTimeout(timerId);
+    if (timer != null) {
+      timer.cancel();
     }
   }
 
   /*
    * Method called when this request times out.
-   * 
-   * NOTE: this method is called from JSNI
    */
   private void fireOnTimeout(RequestCallback callback) {
     if (xmlHttpRequest == null) {

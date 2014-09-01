@@ -16,6 +16,24 @@
       "revId": "99f24910b0fac6b19b658f02fc25be546ce05dc1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "133de99e_0e6aeb69",
+        "filename": "user/src/com/google/gwt/http/HTTP.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-01T09:56:07Z",
+      "side": 1,
+      "message": "Goktug removed dependency on User in Timer.\nCurrently Timer depends only on Core and UserAgent\nand is implemented using Impl API. So it\u0027s not the issue\nbut I agree with you on that it should be done in a separate PR.",
+      "parentUuid": "133de99e_0e2d8b80",
+      "revId": "99f24910b0fac6b19b658f02fc25be546ce05dc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -22,6 +22,30 @@
       "revId": "f89e575a1d4b172ce60d2751029ce11cb8eae802",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "133de99e_2e67a7a0",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-01T09:56:07Z",
+      "side": 0,
+      "message": "That\u0027s a bit tricky.\nSafari\u0027s bug is fixed long time ago.\nFirefox\u0027s bug is open but there\u0027s no evidence on that\nit throws exception in current versions.",
+      "parentUuid": "133de99e_2e2a4769",
+      "range": {
+        "startLine": 295,
+        "startChar": 11,
+        "endLine": 295,
+        "endChar": 63
+      },
+      "revId": "f89e575a1d4b172ce60d2751029ce11cb8eae802",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

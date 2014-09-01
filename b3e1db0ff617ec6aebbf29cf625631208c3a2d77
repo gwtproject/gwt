@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1378896e_76e6d0fa",
+        "filename": "user/super/com/google/gwt/emul/java/lang/AbstractStringBuilder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-01T10:57:12Z",
+      "side": 1,
+      "message": "[error] Name \u0027__valueOf\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "b3e1db0ff617ec6aebbf29cf625631208c3a2d77",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

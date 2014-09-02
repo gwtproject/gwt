@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b395fdbe_3de50240",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-02T21:48:49Z",
+      "side": 1,
+      "message": "Timer object is pretty light weight. What about instantiating it here in the declaration and remove the null checks? That sounds simpler to me.",
+      "range": {
+        "startLine": 112,
+        "startChar": 22,
+        "endLine": 112,
+        "endChar": 27
+      },
+      "revId": "b6c2f07bdab219c834ade04f9b65aaf92f0b9708",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

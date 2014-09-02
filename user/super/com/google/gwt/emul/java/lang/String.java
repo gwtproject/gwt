@@ -966,7 +966,9 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public native String toLowerCase() /*-{
-    return this.toLowerCase();
+    // Fix bug with Turkish on modern browsers, 
+    // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleLowerCase
+    return this.toLocaleLowerCase && this.toLocaleLowerCase() || this.toLowerCase();
   }-*/;
 
   @Override
@@ -979,7 +981,9 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public native String toUpperCase() /*-{
-    return this.toUpperCase();
+    // Fix bug with Turkish on modern browsers, 
+    // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleLowerCase
+    return this.toLocaleUpperCase && this.toLocaleUpperCase() || this.toUpperCase();
   }-*/;
 
   public native String trim() /*-{

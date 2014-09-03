@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90e70f94_e5f89026",
+        "filename": "dev/codeserver/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-03T04:57:54Z",
+      "side": 1,
+      "message": "There is already a test suite in dev folder. Can we just add the pattern there to keep this consistent with the rest?",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 1
+      },
+      "revId": "f8931ad1c96ef9c48e052627e5c7728a5f6a3c6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90e70f94_a5028870",
+        "filename": "dev/codeserver/test/com/google/gwt/dev/codeserver/SourceHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-03T04:57:54Z",
+      "side": 1,
+      "message": "missing copyright",
+      "revId": "f8931ad1c96ef9c48e052627e5c7728a5f6a3c6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90e70f94_252c381c",
+        "filename": "dev/codeserver/test/com/google/gwt/dev/codeserver/SourceHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-03T04:57:54Z",
+      "side": 1,
+      "message": "Can we make this Junit3 style to keep it consistent with rest of the SDK?",
+      "revId": "f8931ad1c96ef9c48e052627e5c7728a5f6a3c6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

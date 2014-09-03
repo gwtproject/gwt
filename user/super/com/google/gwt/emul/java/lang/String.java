@@ -23,6 +23,7 @@ import com.google.gwt.core.client.impl.SpecializeMethod;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * Intrinsic string class.
@@ -965,9 +966,38 @@ public final class String implements Comparable<String>, CharSequence,
     return charArr;
   }
 
+  // Unlike JRE, we don't do locale specific transformation by default. That is backward compatible
+  // and most of the cases what the developer actually wants.
   public native String toLowerCase() /*-{
     return this.toLowerCase();
   }-*/;
+
+  // Best effort locale specific transformation. Falls back to non-locale transformation in legacy
+  // browsers.
+  private native String toLocaleLowerCase() /*-{
+    return this.toLocaleLowerCase ? this.toLocaleLowerCase() : this.toLowerCase();
+  }-*/;
+
+  // Unless it is the default locale, we fallback to toLowerCase which actually performs the right
+  // thing for all Locale's predefined in GWT Locale emulation.
+  public String toLowerCase(Locale locale) {
+    return locale == Locale.getDefault() ? toLocaleLowerCase() : toLowerCase();
+  }
+
+  // See the notes in lowerCase pair.
+  public native String toUpperCase() /*-{
+    return this.toUpperCase();
+  }-*/;
+
+  // See the notes in lowerCase pair.
+  private native String toLocaleUpperCase() /*-{
+    return this.toLocaleUpperCase ? this.toLocaleUpperCase() : this.toUpperCase();
+  }-*/;
+
+  // See the notes in lowerCase pair.
+  public String toUpperCase(Locale locale) {
+    return locale == Locale.getDefault() ? toLocaleUpperCase() : toUpperCase();
+  }
 
   @Override
   public String toString() {
@@ -977,10 +1007,6 @@ public final class String implements Comparable<String>, CharSequence,
      */
     return this;
   }
-
-  public native String toUpperCase() /*-{
-    return this.toUpperCase();
-  }-*/;
 
   public native String trim() /*-{
     if (this.length == 0 || (this[0] > '\u0020' && this[this.length - 1] > '\u0020')) {

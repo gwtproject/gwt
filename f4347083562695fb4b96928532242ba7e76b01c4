@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90e70f94_45685cf9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-03T05:21:03Z",
+      "side": 1,
+      "message": "Wasn\u0027t this also breaking the stack trace information or that was something else?",
+      "revId": "f4347083562695fb4b96928532242ba7e76b01c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90e70f94_657a40cb",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceEmulTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-03T05:21:03Z",
+      "side": 1,
+      "message": "need an update",
+      "revId": "f4347083562695fb4b96928532242ba7e76b01c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

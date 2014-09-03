@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "f04e8b81_2ef30b07",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-03T19:38:49Z",
+      "side": 1,
+      "message": "Perhaps I might be missing spmething but;\n\n- For casing US,ENGLISH and ROOT are actually equivalent and should be treated identically.\n\n- The developer can only pass a limited subset of Locales (US,ENGLISH,ROOT,default) as we have hidden the constructor and not declared anything else. So it is a compilation error if they try to pass something else (e.g. Locale.TR or new Locale(\"tr\")).\n\n- Only locales with languages TR, AZ and LT are special treated for casing per locale and yet there is NO way to pass them as a parameter.\n\n- Browser should handle all unicode character per the ecmascript spec; only thing that is missing is making transformations based on a Locale supplied by the developer. That\u0027s why we only support the Locale.getDefault in addition to US,ENGLISH and ROOT.\n\nPlease let me know if I\u0027m missing anything or have the wrong information, otherwise I think my comment is accurate.",
+      "parentUuid": "50f1174f_60feb2cf",
+      "revId": "6522bbe77d155f2e6a38a0a4ac79a346f1280ad6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f374d57c_3e3ee8d3",
         "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
         "patchSetId": 1
@@ -160,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "f04e8b81_2e578b07",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-03T19:38:49Z",
+      "side": 1,
+      "message": "Yes, that\u0027s my plan but I\u0027ll send a follow up patch because that is a giant patch and will distract the focus on this one.",
+      "parentUuid": "b01a5365_53202433",
+      "revId": "6522bbe77d155f2e6a38a0a4ac79a346f1280ad6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b01a5365_73bc40c6",
         "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
         "patchSetId": 1
@@ -195,6 +231,30 @@
       "side": 1,
       "message": "I don\u0027t think it hurts leaving this check in - much better than getting an exception thrown.",
       "parentUuid": "b01a5365_73bc40c6",
+      "range": {
+        "startLine": 994,
+        "startChar": 16,
+        "endLine": 994,
+        "endChar": 33
+      },
+      "revId": "6522bbe77d155f2e6a38a0a4ac79a346f1280ad6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f04e8b81_4eef67d4",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-03T19:38:49Z",
+      "side": 1,
+      "message": "It looks like even IE6 support so I\u0027ll drop the check.",
+      "parentUuid": "50f1174f_e0d3e294",
       "range": {
         "startLine": 994,
         "startChar": 16,

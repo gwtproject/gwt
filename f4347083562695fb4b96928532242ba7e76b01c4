@@ -33,6 +33,23 @@
       "revId": "f4347083562695fb4b96928532242ba7e76b01c4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90e70f94_c55b4c63",
+        "filename": "user/test/com/google/gwt/core/client/impl/StackTraceEmulTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-03T05:22:13Z",
+      "side": 1,
+      "message": "Can you also add a similar test case for java exceptions?",
+      "revId": "f4347083562695fb4b96928532242ba7e76b01c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

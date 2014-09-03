@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b395fdbe_0d61f3de",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-03T01:41:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f374d57c_eaf2eb47",
+      "range": {
+        "startLine": 337,
+        "startChar": 78,
+        "endLine": 337,
+        "endChar": 90
+      },
+      "revId": "b14551a3f38b453570cfb53c9814c0c38bca6bf7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f374d57c_ca828faf",
         "filename": "dev/core/src/com/google/gwt/dev/NullRebuildCache.java",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2014-09-03T01:36:40Z",
       "side": 1,
       "message": "Let\u0027s throws Unsupported... on getters that should not be called.",
+      "revId": "b14551a3f38b453570cfb53c9814c0c38bca6bf7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90e70f94_e209a64f",
+        "filename": "dev/core/src/com/google/gwt/dev/NullRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-03T01:41:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f374d57c_ca828faf",
       "revId": "b14551a3f38b453570cfb53c9814c0c38bca6bf7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

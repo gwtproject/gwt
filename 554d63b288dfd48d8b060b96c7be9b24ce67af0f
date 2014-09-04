@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30e023af_558efc25",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-04T19:33:09Z",
+      "side": 1,
+      "message": "\"Deactivated\"",
+      "range": {
+        "startLine": 410,
+        "startChar": 35,
+        "endLine": 410,
+        "endChar": 47
+      },
+      "revId": "554d63b288dfd48d8b060b96c7be9b24ce67af0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

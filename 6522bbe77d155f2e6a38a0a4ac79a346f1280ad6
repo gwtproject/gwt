@@ -299,6 +299,24 @@
       "revId": "6522bbe77d155f2e6a38a0a4ac79a346f1280ad6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_9c8b490e",
+        "filename": "user/super/com/google/gwt/emul/java/util/Locale.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-09-04T21:57:12Z",
+      "side": 1,
+      "message": "I mean on the getDefault() method. The JDK says this method is locale-sensitive.",
+      "parentUuid": "30e023af_78cbf58b",
+      "revId": "6522bbe77d155f2e6a38a0a4ac79a346f1280ad6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

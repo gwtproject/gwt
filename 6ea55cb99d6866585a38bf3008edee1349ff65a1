@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b076d3c3_d6a202c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:29:26Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "6ea55cb99d6866585a38bf3008edee1349ff65a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_f69ffe7f",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/typemodel/TypeOracle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:29:26Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u003d\u0027 is not preceded with whitespace.",
+      "revId": "6ea55cb99d6866585a38bf3008edee1349ff65a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_969c8a8d",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/ElementWithTagName.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:29:26Z",
+      "side": 1,
+      "message": "[error] Missing a header - not enough lines in file.",
+      "revId": "6ea55cb99d6866585a38bf3008edee1349ff65a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_b699869c",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/ElementWithTagName.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:29:26Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "6ea55cb99d6866585a38bf3008edee1349ff65a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_56183265",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/JsElementType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:29:26Z",
+      "side": 1,
+      "message": "[error] Missing a header - not enough lines in file.",
+      "revId": "6ea55cb99d6866585a38bf3008edee1349ff65a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_761d2e54",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/JsElementType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:29:26Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "6ea55cb99d6866585a38bf3008edee1349ff65a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

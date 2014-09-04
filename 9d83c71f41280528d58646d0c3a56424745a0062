@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b076d3c3_7c32ed7b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T22:14:21Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "9d83c71f41280528d58646d0c3a56424745a0062",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_1c27393d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T22:14:21Z",
+      "side": 1,
+      "message": "[error] Unused import - src.com.google.gwt.dev.jjs.impl.ReplaceGetClassOverrides.",
+      "revId": "9d83c71f41280528d58646d0c3a56424745a0062",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_3c2c751c",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T22:14:21Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.Serializable\u0027 import.",
+      "revId": "9d83c71f41280528d58646d0c3a56424745a0062",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

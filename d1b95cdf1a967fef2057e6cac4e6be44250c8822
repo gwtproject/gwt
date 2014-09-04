@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b09df327_bbbac7a1",
+        "filename": "elemental/src/elemental/js/util/JsMapFromStringTo.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-09-04T09:34:17Z",
+      "side": 1,
+      "message": "There\u0027s another use of hasOwnProperty in elemental.js.json.JsJsonObject, should we replace it as well? (e.g. if casting from JsMapFromStringTo to JsJsonObject)",
+      "revId": "d1b95cdf1a967fef2057e6cac4e6be44250c8822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

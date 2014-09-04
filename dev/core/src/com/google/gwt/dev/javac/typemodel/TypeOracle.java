@@ -142,6 +142,7 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
   static final String[] NO_STRINGS = new String[0];
 
   private static final String JSO_CLASS = "com.google.gwt.core.client.JavaScriptObject";
+  private static final String DOM_ELEMENT_CLASS = "com.google.gwt.dom.client.Element";
 
   /**
    * Convenience method to sort class types in a consistent way. Note that the

@@ -22,6 +22,30 @@
       "revId": "385c60ae31b4644bbbb4ca0a7dbfac4fe6fbb943",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90d1cfe4_78d53955",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-09-04T19:05:24Z",
+      "side": 1,
+      "message": "After re-reading your comment there is probably no reason. Anyways I changed the API to void in patchset 5.",
+      "parentUuid": "d0a0a75c_5cc93d3a",
+      "range": {
+        "startLine": 216,
+        "startChar": 6,
+        "endLine": 216,
+        "endChar": 46
+      },
+      "revId": "385c60ae31b4644bbbb4ca0a7dbfac4fe6fbb943",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

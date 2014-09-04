@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30e023af_09b61ddb",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/OutboxTable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-04T22:11:57Z",
+      "side": 1,
+      "message": "delete",
+      "range": {
+        "startLine": 40,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 3
+      },
+      "revId": "269a7d79e7b335595bc272959c887e8030235005",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30e023af_787a15cb",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-04T20:35:06Z",
+      "side": 1,
+      "message": "Can you use following instead:\n\nnew ThreadPoolExecutor(0, nThreads, 60L, TimeUnit.SECONDS,                                      \n new LinkedBlockingQueue\u003cRunnable\u003e());\n\nThis will ensure that the thread will be created on demand and will not last forever which what we actually want.",
+      "revId": "8e2482b163031456c52c54530b094a0f1deb5009",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e023af_23da2285",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-04T20:35:06Z",
+      "side": 1,
+      "message": "new ThreadFactoryBuilder().setDaemon(true).build()",
+      "range": {
+        "startLine": 335,
+        "startChar": 10,
+        "endLine": 335,
+        "endChar": 13
+      },
+      "revId": "8e2482b163031456c52c54530b094a0f1deb5009",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e023af_83274ed4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-04T20:35:06Z",
+      "side": 1,
+      "message": "What about extracting a method here and call it from addNewUnits so the flow is more explicit?",
+      "revId": "8e2482b163031456c52c54530b094a0f1deb5009",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e023af_8350ae1e",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-04T20:35:06Z",
+      "side": 1,
+      "message": "Did you read the http://www.ibm.com/developerworks/java/library/j-jtp05236/index.html that I sent earlier? I didn\u0027t read it but you might at least want to restore the interrupted state.",
+      "range": {
+        "startLine": 387,
+        "startChar": 32,
+        "endLine": 387,
+        "endChar": 33
+      },
+      "revId": "8e2482b163031456c52c54530b094a0f1deb5009",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

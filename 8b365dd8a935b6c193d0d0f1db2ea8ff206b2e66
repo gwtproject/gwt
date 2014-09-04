@@ -39,6 +39,30 @@
       "revId": "8b365dd8a935b6c193d0d0f1db2ea8ff206b2e66",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90d1cfe4_58f955e4",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-04T19:43:52Z",
+      "side": 1,
+      "message": "I added it so it looked the same as the code in two other places in this class.\nI guess it\u0027s too pedantic :) Should I delete it?",
+      "parentUuid": "90d1cfe4_38dfb175",
+      "range": {
+        "startLine": 193,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 9
+      },
+      "revId": "8b365dd8a935b6c193d0d0f1db2ea8ff206b2e66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

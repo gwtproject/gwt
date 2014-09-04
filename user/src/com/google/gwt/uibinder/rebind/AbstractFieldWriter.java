@@ -15,13 +15,13 @@
  */
 package com.google.gwt.uibinder.rebind;
 
+import com.google.gwt.core.client.js.JsType;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.rebind.model.OwnerField;
 import com.google.gwt.user.client.ui.RenderablePanel;
 
@@ -281,9 +281,7 @@ abstract class AbstractFieldWriter implements FieldWriter {
       } else {
         attachedVar = getNextAttachVar();
 
-        JClassType elementType = typeOracle.findType(Element.class.getName());
-
-        String elementToAttach = getInstantiableType().isAssignableTo(elementType)
+        String elementToAttach = getInstantiableType().isAssignableTo(typeOracle.getDomElement())
             ? name : name + ".getElement()";
 
         w.write("UiBinderUtil.TempAttachment %s = UiBinderUtil.attachToDom(%s);",
@@ -335,7 +333,14 @@ abstract class AbstractFieldWriter implements FieldWriter {
 
     if ((ownerField != null) && !ownerField.isProvided()) {
       w.newline();
-      w.write("this.owner.%1$s = %1$s;", name);
+      if (!ownerField.getRawType().isAssignableTo(typeOracle.getDomElement())
+          && ownerField.getRawType().getAnnotation(JsType.class) != null) {
+        w.write(
+            "this.owner.%1$s = (%2$s) %1$s;", name,
+            ownerField.getRawType().getQualifiedSourceName());
+      } else {
+        w.write("this.owner.%1$s = %1$s;", name);
+      }
     }
 
     w.newline();

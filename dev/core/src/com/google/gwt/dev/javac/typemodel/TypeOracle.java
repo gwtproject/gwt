@@ -142,6 +142,7 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
   static final String[] NO_STRINGS = new String[0];
 
   private static final String JSO_CLASS = "com.google.gwt.core.client.JavaScriptObject";
+  private static final String DOM_ELEMENT_CLASS = "com.google.gwt.dom.client.Element";
 
   /**
    * Convenience method to sort class types in a consistent way. Note that the
@@ -297,6 +298,11 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
    */
   private JClassType javaScriptObject;
 
+  /**
+   * Cached singleton type representing <code>com.google.gwt.dom.client.Element</code>.
+   */
+  private JClassType domElement;
+
   private final JavaSourceParser javaSourceParser = new JavaSourceParser();
 
   /**
@@ -434,6 +440,15 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
       assert javaScriptObject != null;
     }
     return javaScriptObject;
+  }
+
+  @Override
+  public JClassType getDomElement() {
+    if (domElement == null) {
+      domElement = findType(DOM_ELEMENT_CLASS);
+      assert domElement != null;
+    }
+    return domElement;
   }
 
   /**

@@ -16,6 +16,29 @@
       "revId": "8b365dd8a935b6c193d0d0f1db2ea8ff206b2e66",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90d1cfe4_38dfb175",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-04T19:07:23Z",
+      "side": 1,
+      "message": "why does this need to be final?",
+      "range": {
+        "startLine": 193,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 9
+      },
+      "revId": "8b365dd8a935b6c193d0d0f1db2ea8ff206b2e66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f04e8b81_677a41cb",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CodeServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-04T01:11:02Z",
+      "side": 1,
+      "message": "be aware that at some point in the future when you create outboxes on the fly, this will need to change, otherwise there will be outboxId collisions",
+      "range": {
+        "startLine": 141,
+        "startChar": 4,
+        "endLine": 141,
+        "endChar": 25
+      },
+      "revId": "678800dde4370eeeb72b1b8b3f3372d3688972be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f04e8b81_276d6909",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Progress.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-04T01:11:02Z",
+      "side": 1,
+      "message": "s/inputModule/inputModuleName",
+      "range": {
+        "startLine": 31,
+        "startChar": 15,
+        "endLine": 31,
+        "endChar": 26
+      },
+      "revId": "678800dde4370eeeb72b1b8b3f3372d3688972be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f04e8b81_073b8d03",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-04T01:11:02Z",
+      "side": 1,
+      "message": "s/moduleName/inputModuleName\n\nif this isn\u0027t renamed then callers won\u0027t know which flavor of moduleName they should be passing",
+      "range": {
+        "startLine": 82,
+        "startChar": 39,
+        "endLine": 82,
+        "endChar": 49
+      },
+      "revId": "678800dde4370eeeb72b1b8b3f3372d3688972be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

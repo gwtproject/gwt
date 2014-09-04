@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f04e8b81_0b1a8103",
+        "filename": "dev/codeserver/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-04T00:24:00Z",
+      "side": 1,
+      "message": "That wouldn\u0027t work because dev/codeserver has its own BUILD file. However, I added an alltests target to the parent BUILD file, so that if you run all tests in the directory it will pick up the codeserver tests as well. After submitting this I will also add these tests to the smoke test target.",
+      "parentUuid": "90e70f94_e5f89026",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 1
+      },
+      "revId": "f8931ad1c96ef9c48e052627e5c7728a5f6a3c6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90e70f94_a5028870",
         "filename": "dev/codeserver/test/com/google/gwt/dev/codeserver/SourceHandlerTest.java",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "f04e8b81_44fce34b",
+        "filename": "dev/codeserver/test/com/google/gwt/dev/codeserver/SourceHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-04T00:24:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90e70f94_a5028870",
+      "revId": "f8931ad1c96ef9c48e052627e5c7728a5f6a3c6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90e70f94_252c381c",
         "filename": "dev/codeserver/test/com/google/gwt/dev/codeserver/SourceHandlerTest.java",
         "patchSetId": 1
@@ -53,6 +95,24 @@
       "writtenOn": "2014-09-03T04:57:54Z",
       "side": 1,
       "message": "Can we make this Junit3 style to keep it consistent with rest of the SDK?",
+      "revId": "f8931ad1c96ef9c48e052627e5c7728a5f6a3c6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f04e8b81_04e6ebbd",
+        "filename": "dev/codeserver/test/com/google/gwt/dev/codeserver/SourceHandlerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-04T00:24:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90e70f94_252c381c",
       "revId": "f8931ad1c96ef9c48e052627e5c7728a5f6a3c6e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

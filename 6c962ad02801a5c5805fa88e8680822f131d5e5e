@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b076d3c3_b632e6da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:31:28Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "6c962ad02801a5c5805fa88e8680822f131d5e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_76468e3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:31:28Z",
+      "side": 1,
+      "message": "[warning] Footer fields should be in Title-Case.",
+      "revId": "6c962ad02801a5c5805fa88e8680822f131d5e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_56411223",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:31:28Z",
+      "side": 1,
+      "message": "[warning] Footer lines should form a single paragraph (i.e. must not be separated by blank lines.)",
+      "revId": "6c962ad02801a5c5805fa88e8680822f131d5e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_163b9ab5",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/typemodel/TypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:31:28Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u003d\u0027 is not preceded with whitespace.",
+      "revId": "6c962ad02801a5c5805fa88e8680822f131d5e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_3640161d",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/ElementWithTagName.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:31:28Z",
+      "side": 1,
+      "message": "[error] Missing a header - not enough lines in file.",
+      "revId": "6c962ad02801a5c5805fa88e8680822f131d5e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_d65442e1",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/ElementWithTagName.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:31:28Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "6c962ad02801a5c5805fa88e8680822f131d5e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_f6513eee",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/JsElementType.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:31:28Z",
+      "side": 1,
+      "message": "[error] Missing a header - not enough lines in file.",
+      "revId": "6c962ad02801a5c5805fa88e8680822f131d5e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b076d3c3_964eca4d",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/JsElementType.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T17:31:28Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "6c962ad02801a5c5805fa88e8680822f131d5e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

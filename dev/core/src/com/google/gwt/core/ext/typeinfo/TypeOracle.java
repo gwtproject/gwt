@@ -156,6 +156,12 @@ public abstract class TypeOracle {
 
   /**
    * Gets a reference to the type object representing
+   * <code>com.google.gwt.dom.client.Element</code>.
+   */
+  public abstract JClassType getDomElement();
+
+  /**
+   * Gets a reference to the type object representing
    * <code>java.lang.Object</code>.
    */
   public abstract JClassType getJavaLangObject();

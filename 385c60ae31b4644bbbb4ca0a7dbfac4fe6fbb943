@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0a0a75c_5cc93d3a",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-09-04T09:27:31Z",
+      "side": 1,
+      "message": "Any reason this is not written as:\n\n delete this.__reified[\u0027:\u0027 + key];\n return true;\n\n(see my previous comment in patchset 2)",
+      "range": {
+        "startLine": 216,
+        "startChar": 6,
+        "endLine": 216,
+        "endChar": 46
+      },
+      "revId": "385c60ae31b4644bbbb4ca0a7dbfac4fe6fbb943",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

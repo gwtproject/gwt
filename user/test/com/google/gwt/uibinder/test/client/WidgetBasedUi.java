@@ -216,8 +216,11 @@ public class WidgetBasedUi extends Composite {
   @UiField HTML htmlWithComputedText;
   @UiField Label labelWithComputedText;
   @UiField FlowPanel flowPanelWithTag;
+  @UiField Element myElementWithTagName;
+  @UiField TestJsElementType myJsElementType;
 
   ValueChangeEvent<Double> doubleValueChangeEvent;
+
   @UiHandler("myDoubleBox")
   void onValueChange(ValueChangeEvent<Double> event) {
     this.doubleValueChangeEvent = event;

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f093eb15_d14bf43b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-04T02:29:02Z",
+      "side": 1,
+      "message": "[error] \u0027private\u0027 modifier out of order with the JLS suggestions.",
+      "revId": "e8795fcf984b3d6d2d43d7e36dcccfe087b039ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30e023af_18f3c906",
+        "filename": "dev/core/src/com/google/gwt/core/ext/typeinfo/TypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-04T19:57:00Z",
+      "side": 1,
+      "message": "This is a common API for generators that shouldn\u0027t do anything specific to UiBinder.\n\nInstead the generator should call typeOracle.getType(...) to access a specific type (see other usages in other generators).",
+      "revId": "98eb373b388f4bcc954669fc1d6f2f392732bc35",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e023af_986a59b5",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/AbstractFieldWriter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-04T19:57:00Z",
+      "side": 1,
+      "message": "We might end up needing something more forgiving (e.g. an interface extends a JsType) but it is pretty early to say and we can modify it later if it ever becomes useful to do so.",
+      "range": {
+        "startLine": 337,
+        "startChar": 13,
+        "endLine": 337,
+        "endChar": 72
+      },
+      "revId": "98eb373b388f4bcc954669fc1d6f2f392732bc35",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e023af_d82b016b",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/ElementWithTagName.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-04T19:57:00Z",
+      "side": 1,
+      "message": "MyElementWithTagName?",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 31
+      },
+      "revId": "98eb373b388f4bcc954669fc1d6f2f392732bc35",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e023af_58187165",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/JsElementType.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-04T19:57:00Z",
+      "side": 1,
+      "message": "MyJsElementType? (otherwise we will see it a lot in code complete :))",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 30
+      },
+      "revId": "98eb373b388f4bcc954669fc1d6f2f392732bc35",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

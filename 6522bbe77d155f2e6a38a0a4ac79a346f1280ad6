@@ -264,6 +264,23 @@
       "revId": "6522bbe77d155f2e6a38a0a4ac79a346f1280ad6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e023af_78cbf58b",
+        "filename": "user/super/com/google/gwt/emul/java/util/Locale.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-09-04T19:58:09Z",
+      "side": 1,
+      "message": "Should we assert or warn people calling this?",
+      "revId": "6522bbe77d155f2e6a38a0a4ac79a346f1280ad6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

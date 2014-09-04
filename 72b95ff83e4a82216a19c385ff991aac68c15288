@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f04e8b81_a4cdd7f2",
+        "filename": "dev/core/src/com/google/gwt/dev/util/MemoryBackedObject.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-04T00:24:52Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 30,
+        "endChar": 7
+      },
+      "revId": "72b95ff83e4a82216a19c385ff991aac68c15288",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f04e8b81_446f430b",
+        "filename": "dev/core/src/com/google/gwt/dev/util/MemoryBackedObject.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-04T00:24:52Z",
+      "side": 1,
+      "message": "needs 1 blank line to start the class",
+      "range": {
+        "startLine": 34,
+        "startChar": 95,
+        "endLine": 34,
+        "endChar": 95
+      },
+      "revId": "72b95ff83e4a82216a19c385ff991aac68c15288",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f04e8b81_848c1bbd",
+        "filename": "dev/core/src/com/google/gwt/dev/util/MemoryBackedObject.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-04T00:24:52Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 40,
+        "endChar": 5
+      },
+      "revId": "72b95ff83e4a82216a19c385ff991aac68c15288",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f04e8b81_64911fd1",
+        "filename": "dev/core/src/com/google/gwt/dev/util/MemoryBackedObject.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-04T00:24:52Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 72,
+        "endChar": 31
+      },
+      "revId": "72b95ff83e4a82216a19c385ff991aac68c15288",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

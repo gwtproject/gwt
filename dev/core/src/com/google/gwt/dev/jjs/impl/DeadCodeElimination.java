@@ -316,22 +316,29 @@ public class DeadCodeElimination {
        */
       // We can inline the constant, but we might also need to evaluate an
       // instance and run a clinit.
-      JMultiExpression multi = new JMultiExpression(x.getSourceInfo());
+      List<JExpression> exprs = Lists.newArrayList();
 
       JExpression instance = x.getInstance();
       if (instance != null) {
-        multi.addExpressions(instance);
+        exprs.add(instance);
       }
 
-      if (x.hasClinit()) {
-        multi.addExpressions(createClinitCall(x.getSourceInfo(), x.getField().getEnclosingType()));
+      if (x.hasClinit() && !x.getField().isCompileTimeConstant()) {
+        exprs.add(createClinitCall(x.getSourceInfo(), x.getField().getEnclosingType()));
       }
 
       if (literal != null) {
-        multi.addExpressions(literal);
+        exprs.add(literal);
       }
 
-      ctx.replaceMe(this.accept(multi));
+      JExpression replacement;
+      if (exprs.size() == 1) {
+        replacement = exprs.get(0);
+      } else {
+        replacement = new JMultiExpression(x.getSourceInfo(), exprs);
+      }
+
+      ctx.replaceMe(this.accept(replacement));
     }
 
     /**
@@ -1685,7 +1692,7 @@ public class DeadCodeElimination {
           // TODO(spoon): use Simplifier.cast to shorten this
           if ((x.getType() instanceof JPrimitiveType) && (lit instanceof JValueLiteral)) {
             JPrimitiveType xTypePrim = (JPrimitiveType) x.getType();
-            lit = xTypePrim.coerceLiteral((JValueLiteral) lit);
+            lit = xTypePrim.coerce((JValueLiteral) lit);
           }
           return lit;
         }

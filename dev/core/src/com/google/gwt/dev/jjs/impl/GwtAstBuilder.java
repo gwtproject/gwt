@@ -63,7 +63,6 @@ import com.google.gwt.dev.jjs.ast.JIntLiteral;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JLabel;
 import com.google.gwt.dev.jjs.ast.JLabeledStatement;
-import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JLongLiteral;
@@ -100,7 +99,6 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.js.JsAbstractSymbolResolver;
 import com.google.gwt.dev.js.ast.JsContext;
-import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
@@ -270,21 +268,9 @@ public class GwtAstBuilder {
           processClassLiteral(x, info, type, ctx);
         } else if (binding instanceof FieldBinding) {
           FieldBinding fieldBinding = (FieldBinding) binding;
-          /*
-           * We must replace any compile-time constants with the constant
-           * value of the field.
-           */
-          if (isCompileTimeConstant(fieldBinding)) {
-            assert !ctx.isLvalue();
-            JExpression constant = getConstant(info, fieldBinding.constant());
-            JsExpression result = JjsUtils.translateLiteral((JLiteral) constant);
-            assert (result != null);
-            ctx.replaceMe(result);
-          } else {
-            // Normal: create a jsniRef.
-            JField field = typeMap.get(fieldBinding);
-            processField(x, info, field, ctx);
-          }
+          // Normal: create a jsniRef.
+          JField field = typeMap.get(fieldBinding);
+          processField(x, info, field, ctx);
         } else {
           JMethod method = typeMap.get((MethodBinding) binding);
           processMethod(x, info, method);
@@ -525,20 +511,13 @@ public class GwtAstBuilder {
     public void endVisit(CaseStatement x, BlockScope scope) {
       try {
         SourceInfo info = makeSourceInfo(x);
-        JExpression constantExpression = pop(x.constantExpression);
-        JLiteral caseLiteral;
-        if (constantExpression == null) {
-          caseLiteral = null;
-        } else if (constantExpression instanceof JLiteral) {
-          caseLiteral = (JLiteral) constantExpression;
-        } else {
-          // Adapted from CaseStatement.resolveCase().
-          assert x.constantExpression.resolvedType.isEnum();
+        JExpression caseExpression = pop(x.constantExpression);
+        if (caseExpression != null && x.constantExpression.resolvedType.isEnum()) {
           NameReference reference = (NameReference) x.constantExpression;
           FieldBinding field = reference.fieldBinding();
-          caseLiteral = JIntLiteral.get(field.original().id);
+          caseExpression = JIntLiteral.get(field.original().id);
         }
-        push(new JCaseStatement(info, caseLiteral));
+        push(new JCaseStatement(info, caseExpression));
       } catch (Throwable e) {
         throw translateException(x, e);
       }
@@ -1757,26 +1736,6 @@ public class GwtAstBuilder {
     }
 
     @Override
-    public boolean visit(ForStatement x, BlockScope scope) {
-      // SEE NOTE ON JDT FORCED OPTIMIZATIONS
-      if (isOptimizedFalse(x.condition)) {
-        x.action = null;
-      }
-      return true;
-    }
-
-    @Override
-    public boolean visit(IfStatement x, BlockScope scope) {
-      // SEE NOTE ON JDT FORCED OPTIMIZATIONS
-      if (isOptimizedFalse(x.condition)) {
-        x.thenStatement = null;
-      } else if (isOptimizedTrue(x.condition)) {
-        x.elseStatement = null;
-      }
-      return true;
-    }
-
-    @Override
     public boolean visit(Initializer x, MethodScope scope) {
       try {
         pushInitializerMethodInfo(x, scope);
@@ -1865,15 +1824,6 @@ public class GwtAstBuilder {
     @Override
     public boolean visit(TypeDeclaration x, CompilationUnitScope scope) {
       return visit(x);
-    }
-
-    @Override
-    public boolean visit(WhileStatement x, BlockScope scope) {
-      // SEE NOTE ON JDT FORCED OPTIMIZATIONS
-      if (isOptimizedFalse(x.condition)) {
-        x.action = null;
-      }
-      return true;
     }
 
     @Override
@@ -2738,13 +2688,16 @@ public class GwtAstBuilder {
 
     private JExpression resolveNameReference(NameReference x, BlockScope scope) {
       SourceInfo info = makeSourceInfo(x);
-      if (x.constant != Constant.NotAConstant) {
-        return getConstant(info, x.constant);
-      }
       Binding binding = x.binding;
       JExpression result = null;
       if (binding instanceof LocalVariableBinding) {
         LocalVariableBinding b = (LocalVariableBinding) binding;
+        if (x.constant != Constant.NotAConstant) {
+          // Propagate constants in local variables as the constant is defined in the same
+          // compilation unit as its use. This is necessary as the JDT will not compute an
+          // emulation path for a local constant.
+          return getConstant(info, x.constant);
+        }
         if ((x.bits & ASTNode.DepthMASK) != 0) {
           VariableBinding[] path = scope.getEmulationPath(b);
           if (path == null) {
@@ -2793,10 +2746,6 @@ public class GwtAstBuilder {
     }
 
     private JExpression simplify(JExpression result, Expression x) {
-      if (x.constant != null && x.constant != Constant.NotAConstant) {
-        // Prefer JDT-computed constant value to the actual written expression.
-        result = getConstant(result.getSourceInfo(), x.constant);
-      }
       return maybeBoxOrUnbox(result, x.implicitConversion);
     }
 
@@ -3012,38 +2961,6 @@ public class GwtAstBuilder {
       assert binding.type.isBaseType() || (binding.type.id == TypeIds.T_JavaLangString);
     }
     return isCompileTimeConstant;
-  }
-
-  /**
-   * Returns <code>true</code> if JDT optimized the condition to
-   * <code>false</code>.
-   */
-  private static boolean isOptimizedFalse(Expression condition) {
-    if (condition != null) {
-      Constant cst = condition.optimizedBooleanConstant();
-      if (cst != Constant.NotAConstant) {
-        if (cst.booleanValue() == false) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Returns <code>true</code> if JDT optimized the condition to
-   * <code>true</code>.
-   */
-  private static boolean isOptimizedTrue(Expression condition) {
-    if (condition != null) {
-      Constant cst = condition.optimizedBooleanConstant();
-      if (cst != Constant.NotAConstant) {
-        if (cst.booleanValue()) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   CudInfo curCud = null;

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b076d3c3_3caa305b",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsReportGenerationVisitorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-05T20:45:30Z",
+      "side": 1,
+      "message": "What makes this different from the cases in which the condition is not a constant? Shouldn\u0027t this be present when includeRanges \u003d true?\n\nIt probably does not have any practical implication though.",
+      "range": {
+        "startLine": 116,
+        "startChar": 9,
+        "endLine": 116,
+        "endChar": 31
+      },
+      "revId": "7dac2394176731c5665d174584e81a6771d5e1db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

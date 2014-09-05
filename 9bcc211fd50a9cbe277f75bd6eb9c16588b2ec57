@@ -22,6 +22,30 @@
       "revId": "9bcc211fd50a9cbe277f75bd6eb9c16588b2ec57",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90baaf9a_510123a0",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/Range.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-05T20:24:25Z",
+      "side": 1,
+      "message": "ah you\u0027re right. i was using it when i had also moved the \"combine overlapping\" pruning. but i decided that one was particularly dangerous and to just leave it alone. so this function became unused.\n\ndone.",
+      "parentUuid": "b076d3c3_a8d91f2d",
+      "range": {
+        "startLine": 123,
+        "startChar": 17,
+        "endLine": 123,
+        "endChar": 25
+      },
+      "revId": "9bcc211fd50a9cbe277f75bd6eb9c16588b2ec57",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

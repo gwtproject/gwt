@@ -22,6 +22,30 @@
       "revId": "7dac2394176731c5665d174584e81a6771d5e1db",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "303e63eb_9f12f370",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsReportGenerationVisitorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-05T21:02:52Z",
+      "side": 1,
+      "message": "since it\u0027s a simple condition the nested \"true\" range is being merged into the surrounding \"if(true)\" range, at the very beginning.\n\nthe same is not true for other if statements in these tests because the other conditions have more complex structure",
+      "parentUuid": "b076d3c3_3caa305b",
+      "range": {
+        "startLine": 116,
+        "startChar": 9,
+        "endLine": 116,
+        "endChar": 31
+      },
+      "revId": "7dac2394176731c5665d174584e81a6771d5e1db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

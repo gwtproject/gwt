@@ -16,6 +16,24 @@
       "revId": "bee515512442081a52ff00536f2a14ffc0ff0e7a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90baaf9a_0addbba3",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-05T03:20:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b076d3c3_02da74f9",
+      "revId": "bee515512442081a52ff00536f2a14ffc0ff0e7a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

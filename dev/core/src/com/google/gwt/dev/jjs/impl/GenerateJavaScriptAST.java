@@ -2939,7 +2939,7 @@ public class GenerateJavaScriptAST {
       if (x.getLiteralInitializer() == null) {
         return false;
       }
-      if (x.isFinal() || x.isStatic()) {
+      if (x.isFinal() || x.isStatic() || x.isCompileTimeConstant()) {
         // we can definitely initialize at top-scope, as JVM does so as well
         return true;
       }

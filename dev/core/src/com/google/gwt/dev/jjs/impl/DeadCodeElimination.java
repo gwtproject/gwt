@@ -32,8 +32,10 @@ import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JDoStatement;
 import com.google.gwt.dev.jjs.ast.JDoubleLiteral;
+import com.google.gwt.dev.jjs.ast.JEnumField;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JExpressionStatement;
+import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
 import com.google.gwt.dev.jjs.ast.JForStatement;
 import com.google.gwt.dev.jjs.ast.JIfStatement;
@@ -124,8 +126,10 @@ public class DeadCodeElimination {
      * nodes.
      */
     private final Set<JExpression> ignoringExpressionOutput = new HashSet<JExpression>();
-
     private final JMethod isScriptMethod = program.getIndexedMethod("GWT.isScript");
+    private final JMethod enumOrdinalMethod = program.getIndexedMethod("Enum.ordinal");
+    private final JField enumOrdinalField = program.getIndexedField("Enum.ordinal");
+
 
     /**
      * Expressions being used as lvalues.
@@ -305,6 +309,12 @@ public class DeadCodeElimination {
 
     @Override
     public void endVisit(JFieldRef x, Context ctx) {
+
+      if (x.getField() == enumOrdinalField) {
+        maybeReplaceWithOridnalValue(x.getInstance(), ctx);
+        return;
+      }
+
       JLiteral literal = tryGetConstant(x);
       if (literal == null && !ignoringExpressionOutput.contains(x)) {
         return;
@@ -316,22 +326,30 @@ public class DeadCodeElimination {
        */
       // We can inline the constant, but we might also need to evaluate an
       // instance and run a clinit.
-      JMultiExpression multi = new JMultiExpression(x.getSourceInfo());
+      List<JExpression> exprs = Lists.newArrayList();
 
       JExpression instance = x.getInstance();
       if (instance != null) {
-        multi.addExpressions(instance);
+        exprs.add(instance);
       }
 
-      if (x.hasClinit()) {
-        multi.addExpressions(createClinitCall(x.getSourceInfo(), x.getField().getEnclosingType()));
+      if (x.hasClinit() && !x.getField().isCompileTimeConstant()) {
+        // Access to compile time constants do not trigger class initialization (JLS 12.4.1).
+        exprs.add(createClinitCall(x.getSourceInfo(), x.getField().getEnclosingType()));
       }
 
       if (literal != null) {
-        multi.addExpressions(literal);
+        exprs.add(literal);
       }
 
-      ctx.replaceMe(this.accept(multi));
+      JExpression replacement;
+      if (exprs.size() == 1) {
+        replacement = exprs.get(0);
+      } else {
+        replacement = new JMultiExpression(x.getSourceInfo(), exprs);
+      }
+
+      ctx.replaceMe(this.accept(replacement));
     }
 
     /**
@@ -393,8 +411,9 @@ public class DeadCodeElimination {
     public void endVisit(JMethodCall x, Context ctx) {
       // Restore ignored expressions.
       JMethod target = x.getTarget();
-      if (target.isStatic() && x.getInstance() != null) {
-        ignoringExpressionOutput.remove(x.getInstance());
+      JExpression instance = x.getInstance();
+      if (target.isStatic() && instance != null) {
+        ignoringExpressionOutput.remove(instance);
       }
 
       int paramCount = target.getParams().size();
@@ -410,8 +429,8 @@ public class DeadCodeElimination {
       // Normal optimizations.
       JDeclaredType targetType = target.getEnclosingType();
       if (targetType == program.getTypeJavaLangString() ||
-          (x.getInstance() != null &&
-           x.getInstance().getType().getUnderlyingType() == program.getTypeJavaLangString())) {
+          (instance != null &&
+              instance.getType().getUnderlyingType() == program.getTypeJavaLangString())) {
         tryOptimizeStringCall(x, ctx, target);
       } else if (JProgram.isClinit(target)) {
         // Eliminate the call if the target is now empty.
@@ -424,6 +443,8 @@ public class DeadCodeElimination {
       } else if (target == isScriptMethod) {
         // optimize out in draftCompiles that don't do inlining
         ctx.replaceMe(JBooleanLiteral.TRUE);
+      } else if (target == enumOrdinalMethod) {
+        maybeReplaceWithOridnalValue(instance, ctx);
       }
     }
 
@@ -1331,6 +1352,21 @@ public class DeadCodeElimination {
       }
     }
 
+    private void maybeReplaceWithOridnalValue(JExpression instanceExpr, Context ctx) {
+      if (!(instanceExpr instanceof JFieldRef)) {
+        return;
+      }
+
+      JFieldRef fieldRef = (JFieldRef) instanceExpr;
+      if (!(fieldRef.getField() instanceof JEnumField)) {
+        return;
+      }
+
+      assert fieldRef.getInstance() == null;
+      JEnumField enumField = (JEnumField) fieldRef.getField();
+      ctx.replaceMe(program.getLiteralInt(enumField.ordinal()));
+    }
+
     private int numRemovableExpressions(JMultiExpression x) {
       if (ignoringExpressionOutput.contains(x)) {
         // The result doesn't matter: all expressions can be removed.
@@ -1685,7 +1721,7 @@ public class DeadCodeElimination {
           // TODO(spoon): use Simplifier.cast to shorten this
           if ((x.getType() instanceof JPrimitiveType) && (lit instanceof JValueLiteral)) {
             JPrimitiveType xTypePrim = (JPrimitiveType) x.getType();
-            lit = xTypePrim.coerceLiteral((JValueLiteral) lit);
+            lit = xTypePrim.coerce((JValueLiteral) lit);
           }
           return lit;
         }

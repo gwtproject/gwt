@@ -79,6 +79,10 @@ public abstract class OptimizerTestBase extends JJSTestBase {
       assertTrue(actualMethodSnippets.containsAll(expectedMethodSnippets));
     }
 
+    public JProgram getOptimizedProgram() {
+      return optimizedProgram;
+    }
+
     /**
      * Check whether the resulting is equivalent to {@code expected}.<p>
      *

@@ -18,14 +18,18 @@
  */
 package com.google.gwt.core.ext.soyc;
 
+import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.SourceOrigin;
+
 import java.util.Comparator;
 
 /**
  * Represents a contiguous region of characters in the compiler output.
  */
 public final class Range {
+
   /**
-   * Sorts Ranges so that a Range will be preceeded by any Ranges that enclose
+   * Sorts Ranges so that a Range will be preceded by any Ranges that enclose
    * it.
    */
   public static final Comparator<Range> DEPENDENCY_ORDER_COMPARATOR = new Comparator<Range>() {
@@ -62,6 +66,7 @@ public final class Range {
   final int start;
   final int startColumn;
   final int startLine;
+  final SourceInfo sourceInfo;
 
   /**
    * Constructor.
@@ -70,7 +75,17 @@ public final class Range {
    * @param end must be greater than or equal to <code>start</code>
    */
   public Range(int start, int end) {
-    this(start, end, 0, 0, 0, 0);
+    this(start, end, 0, 0, 0, 0, SourceOrigin.UNKNOWN);
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param start must be non-negative
+   * @param end must be greater than or equal to <code>start</code>
+   */
+  public Range(int start, int end, SourceInfo sourceInfo) {
+    this(start, end, 0, 0, 0, 0, sourceInfo);
   }
 
   /**
@@ -81,8 +96,8 @@ public final class Range {
    * @param start must be non-negative
    * @param end must be greater than or equal to <code>start</code>
    */
-  public Range(int start, int end, int startLine, int startColumn, int endLine, int endColumn) {
-
+  public Range(int start, int end, int startLine, int startColumn, int endLine, int endColumn,
+      SourceInfo sourceInfo) {
     assert start >= 0;
     assert start <= end;
 
@@ -92,6 +107,7 @@ public final class Range {
     this.startColumn = startColumn;
     this.endLine = endLine;
     this.endColumn = endColumn;
+    this.sourceInfo = sourceInfo;
   }
 
   /**
@@ -99,6 +115,13 @@ public final class Range {
    */
   public boolean contains(Range o) {
     return start <= o.start && o.end <= end;
+  }
+
+  /**
+   * Return <code>true</code> if the given Range overlaps the Range.
+   */
+  public boolean overlaps(Range o) {
+    return start < o.end && o.start < end;
   }
 
   /**
@@ -111,7 +134,7 @@ public final class Range {
   public Range createNormalizedCopy(int baseStart, int baseStartLine) {
     if (start < 0) {
       return new Range(baseStartLine, baseStartLine, baseStartLine, baseStartLine, baseStart,
-          baseStartLine);
+          baseStartLine, sourceInfo);
     }
 
     return createOffsetCopy(-baseStart, -baseStartLine);
@@ -126,7 +149,7 @@ public final class Range {
    */
   public Range createOffsetCopy(int positionOffset, int lineOffset) {
     return new Range(start + positionOffset, end + positionOffset, startLine + lineOffset,
-        startColumn, endLine + lineOffset, endColumn);
+        startColumn, endLine + lineOffset, endColumn, sourceInfo);
   }
 
   @Override
@@ -148,6 +171,10 @@ public final class Range {
 
   public int getEndLine() {
     return endLine;
+  }
+
+  public SourceInfo getSourceInfo() {
+    return sourceInfo;
   }
 
   public int getStart() {
@@ -183,6 +210,6 @@ public final class Range {
    * Returns a copy with the end moved.
    */
   public Range withNewEnd(int newEnd, int newEndLine, int newEndColumn) {
-    return new Range(start, newEnd, startLine, startColumn, newEndLine, newEndColumn);
+    return new Range(start, newEnd, startLine, startColumn, newEndLine, newEndColumn, sourceInfo);
   }
 }

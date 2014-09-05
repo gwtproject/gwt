@@ -63,6 +63,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerScriptStyle;
 import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
+import com.google.gwt.dev.util.arg.JsInteropMode;
 import com.google.gwt.junit.JUnitMessageQueue.ClientStatus;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.junit.client.TimeoutException;
@@ -1209,6 +1210,16 @@ public class JUnitShell extends DevMode {
   private boolean mustNotExecuteTest(Set<Platform> bannedPlatforms) {
     if (!Collections.disjoint(bannedPlatforms, runStyle.getPlatforms())) {
       return true;
+    }
+
+    if (options.getJsInteropMode() == JsInteropMode.NONE) {
+      if (bannedPlatforms.contains(Platform.NoInterop)) {
+        return true;
+      }
+    } else if (options.getJsInteropMode() != JsInteropMode.NONE) {
+      if (bannedPlatforms.contains(Platform.Interop)) {
+        return true;
+      }
     }
 
     if (developmentMode) {

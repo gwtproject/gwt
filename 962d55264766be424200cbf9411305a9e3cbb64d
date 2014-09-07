@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "90d1cfe4_26fc6e4b",
+        "filename": "user/src/com/google/gwt/core/client/impl/Coercions.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-07T22:14:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f093eb15_b19c288d",
+      "range": {
+        "startLine": 36,
+        "startChar": 27,
+        "endLine": 36,
+        "endChar": 34
+      },
+      "revId": "962d55264766be424200cbf9411305a9e3cbb64d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f04e8b81_44798302",
         "filename": "user/src/com/google/gwt/core/client/impl/Coercions.java",
         "patchSetId": 12
@@ -83,6 +107,30 @@
       "writtenOn": "2014-09-04T02:21:45Z",
       "side": 1,
       "message": "I have patch to remove String boxing support. I guess we can remove this.",
+      "range": {
+        "startLine": 43,
+        "startChar": 30,
+        "endLine": 43,
+        "endChar": 47
+      },
+      "revId": "962d55264766be424200cbf9411305a9e3cbb64d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90d1cfe4_460172a0",
+        "filename": "user/src/com/google/gwt/core/client/impl/Coercions.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-07T22:14:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f04e8b81_44798302",
       "range": {
         "startLine": 43,
         "startChar": 30,

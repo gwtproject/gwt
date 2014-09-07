@@ -22,6 +22,30 @@
       "revId": "e4a929fde9e8e57641b870b089cc3bedb5b940b8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90d1cfe4_26c30e1d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Long.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-07T21:51:13Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right. I reverted it.",
+      "parentUuid": "f3d0553d_1b692332",
+      "range": {
+        "startLine": 174,
+        "startChar": 12,
+        "endLine": 174,
+        "endChar": 20
+      },
+      "revId": "e4a929fde9e8e57641b870b089cc3bedb5b940b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

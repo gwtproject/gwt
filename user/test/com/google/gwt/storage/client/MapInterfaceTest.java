@@ -679,6 +679,8 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       try {
         entrySet.retainAll(null);
         // Returning successfully is not ideal, but tolerated.
+      } catch (NullPointerException expected) {
+        // Expected in GWT client.
       } catch (JavaScriptException e) {
         // Expected in GWT client.
       }
@@ -1311,6 +1313,8 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       try {
         keySet.retainAll(null);
         // Returning successfully is not ideal, but tolerated.
+      } catch (NullPointerException expected) {
+        // Expected in GWT client.
       } catch (JavaScriptException e) {
         // Expected in GWT client.
       }
@@ -1480,6 +1484,8 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       try {
         values.removeAll(null);
         // Returning successfully is not ideal, but tolerated.
+      } catch (NullPointerException expected) {
+        // Expected in GWT client.
       } catch (JavaScriptException e) {
         // Expected in GWT client.
       }
@@ -1538,6 +1544,8 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       try {
         values.retainAll(null);
         // Returning successfully is not ideal, but tolerated.
+      } catch (NullPointerException expected) {
+        // Expected in GWT client.
       } catch (JavaScriptException e) {
         // Expected in GWT client.
       }

@@ -66,7 +66,6 @@ public class StorageMap extends AbstractMap<String, String> {
     }
 
     @Override
-    @SuppressWarnings("rawtypes")
     public boolean equals(Object obj) {
       if (obj == null) {
         return false;
@@ -76,17 +75,18 @@ public class StorageMap extends AbstractMap<String, String> {
         return false;
       }
 
-      Map.Entry e = (Map.Entry) obj;
-
+      Map.Entry<?, ?> e = (Map.Entry<?, ?>) obj;
       return eq(key, e.getKey()) && eq(getValue(), e.getValue());
     }
 
+    @Override
     public String getKey() {
       return key;
     }
 
+    @Override
     public String getValue() {
-      return storage.getItem(key);
+      return get(key);
     }
 
     @Override
@@ -96,47 +96,49 @@ public class StorageMap extends AbstractMap<String, String> {
           ^ (value == null ? 0 : value.hashCode());
     }
 
+    @Override
     public String setValue(String value) {
-      String oldValue = storage.getItem(key);
-      storage.setItem(key, value);
-      return oldValue;
+      return put(key, value);
+    }
+
+    private boolean eq(Object a, Object b) {
+      if (a == b) {
+        return true;
+      }
+      return a != null && a.equals(b);
     }
   }
 
   /*
    * Represents an Iterator over all Storage items
    */
-  private class StorageEntryIterator implements Iterator<
-      Map.Entry<String, String>> {
+  private class StorageEntryIterator implements Iterator<Map.Entry<String, String>> {
     private int index = -1;
-    private boolean removed = false;
+    private String key;
 
+    @Override
     public boolean hasNext() {
       return index < size() - 1;
     }
 
-    public Map.Entry<String, String> next() {
+    @Override
+    public Entry<String, String> next() {
       if (hasNext()) {
         index++;
-        removed = false;
-        return new StorageEntry(storage.key(index));
+        key = storage.key(index);
+        return new StorageEntry(key);
       }
       throw new NoSuchElementException();
     }
 
+    @Override
     public void remove() {
-      if (index >= 0 && index < size()) {
-        if (removed) {
-          throw new IllegalStateException(
-              "Cannot remove() Entry - already removed!");
-        }
-        storage.removeItem(storage.key(index));
-        removed = true;
-        index--;
-      } else {
-        throw new IllegalStateException(
-            "Cannot remove() Entry - index=" + index + ", size=" + size());
+      if (key == null) {
+        throw new IllegalStateException();
       }
+      storage.removeItem(key);
+      key = null;
+      index--;
     }
   }
 
@@ -149,38 +151,29 @@ public class StorageMap extends AbstractMap<String, String> {
       StorageMap.this.clear();
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public boolean contains(Object o) {
       if (o == null || !(o instanceof Map.Entry)) {
         return false;
       }
-      Map.Entry e = (Map.Entry) o;
+      Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
       Object key = e.getKey();
-      return key != null && containsKey(key) && eq(get(key), e.getValue());
+      Object value = e.getValue();
+      return key != null && value != null && value.equals(get(key));
     }
 
     @Override
-    public Iterator<Map.Entry<String, String>> iterator() {
+    public Iterator<Entry<String, String>> iterator() {
       return new StorageEntryIterator();
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public boolean remove(Object o) {
-      if (o == null || !(o instanceof Map.Entry)) {
+      if (!contains(o)) {
         return false;
       }
-      Map.Entry e = (Map.Entry) o;
-      if (e.getKey() == null) {
-        return false;
-      }
-      String key = e.getKey().toString();
-      String value = storage.getItem(key);
-      if (eq(value, e.getValue())) {
-        return StorageMap.this.remove(key) != null;
-      }
-      return false;
+      Map.Entry<?, ?> entry = (Map.Entry<?, ?>) o;
+      return StorageMap.this.remove(entry.getKey()) != null;
     }
 
     @Override
@@ -190,7 +183,6 @@ public class StorageMap extends AbstractMap<String, String> {
   }
 
   private Storage storage;
-  private StorageEntrySet entrySet;
 
   /**
    * Creates the Map with the specified Storage as data provider.
@@ -220,7 +212,10 @@ public class StorageMap extends AbstractMap<String, String> {
    */
   @Override
   public boolean containsKey(Object key) {
-    return storage.getItem(key.toString()) != null;
+    if (key == null) {
+      throw new NullPointerException();
+    }
+    return get(key) != null;
   }
 
   /**
@@ -230,6 +225,9 @@ public class StorageMap extends AbstractMap<String, String> {
    */
   @Override
   public boolean containsValue(Object value) {
+    if (value == null) {
+      throw new NullPointerException();
+    }
     int s = size();
     for (int i = 0; i < s; i++) {
       if (value.equals(storage.getItem(storage.key(i)))) {
@@ -243,11 +241,8 @@ public class StorageMap extends AbstractMap<String, String> {
    * Returns a Set containing all entries of the Storage.
    */
   @Override
-  public Set<Map.Entry<String, String>> entrySet() {
-    if (entrySet == null) {
-      entrySet = new StorageEntrySet();
-    }
-    return entrySet;
+  public Set<Entry<String, String>> entrySet() {
+    return new StorageEntrySet();
   }
 
   /**
@@ -306,15 +301,5 @@ public class StorageMap extends AbstractMap<String, String> {
   @Override
   public int size() {
     return storage.getLength();
-  }
-
-  private boolean eq(Object a, Object b) {
-    if (a == b) {
-      return true;
-    }
-    if (a == null) {
-      return false;
-    }
-    return a.equals(b);
   }
 }

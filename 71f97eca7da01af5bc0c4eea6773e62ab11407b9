@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30574343_8041fc74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_6046688c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_c03ad4fd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_a037e015",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_0035ec0c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_e031d820",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_4bd0a566",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_2bd57156",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_8bdabd82",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_6bdf6974",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_cbe3153c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_abe06130",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_0beead22",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JPrimitiveType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-08T22:04:44Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "71f97eca7da01af5bc0c4eea6773e62ab11407b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

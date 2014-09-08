@@ -53,25 +53,26 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.collect.Collections2;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Queues;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Builds or rebuilds a {@link com.google.gwt.core.ext.typeinfo.TypeOracle} from a set of
@@ -211,11 +212,9 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
   protected class TypeOracleBuildContext {
     protected final MethodArgNamesLookup allMethodArgs;
 
-    private final Map<String, CollectClassData> classDataByInternalName =
-        new HashMap<String, CollectClassData>();
+    private final Map<String, CollectClassData> classDataByInternalName = Maps.newHashMap();
 
-    private final Map<JRealClassType, CollectClassData> classDataByType =
-        new HashMap<JRealClassType, CollectClassData>();
+    private final Map<JRealClassType, CollectClassData> classDataByType = Maps.newHashMap();
 
     private final Resolver resolver = new CompilationUnitTypeOracleResolver(this);
 
@@ -252,7 +251,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
 
   private static JTypeParameter[] collectTypeParams(String signature) {
     if (signature != null) {
-      List<JTypeParameter> params = new ArrayList<JTypeParameter>();
+      List<JTypeParameter> params = Lists.newArrayList();
       SignatureReader reader = new SignatureReader(signature);
       reader.accept(new CollectTypeParams(params));
       return params.toArray(new JTypeParameter[params.size()]);
@@ -331,16 +330,11 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
    * An executor service to parallelize some of the update process.
    */
   private static ExecutorService executor =
-      Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors(),
-          new ThreadFactory() {
-            public Thread newThread(Runnable r) {
-              Thread t = new Thread(r);
-              // Make sure this executor lets the whole process terminate correctly even if there
-              // are still live threads.
-              t.setDaemon(true);
-              return t;
-            }
-          });
+      new ThreadPoolExecutor(0, Runtime.getRuntime().availableProcessors(), 60L, TimeUnit.SECONDS,
+          Queues.<Runnable>newLinkedBlockingQueue(),
+          // Make sure this executor lets the whole process terminate correctly even if there
+          // are still live threads.
+          new ThreadFactoryBuilder().setDaemon(true).build());
 
   public CompilationUnitTypeOracleUpdater(TypeOracle typeOracle) {
     super(typeOracle);
@@ -365,27 +359,8 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     Event visitClassFileEvent = SpeedTracerLogger.start(
         CompilerEventType.TYPE_ORACLE_UPDATER, "phase", "Visit Class Files");
     TypeOracleBuildContext context = getContext(argsLookup);
-    // Parse bytecode in parallel if there are many units to process by calling
-    // {@code TypeData.getCollectClassData()} in parallel.
-    try {
-      executor.<Void>invokeAll(Collections2.transform(typeDataList,
-          new Function<TypeData, Callable<Void>>() {
-            @Override
-            public Callable<Void> apply(final TypeData typeData) {
-              return new Callable<Void>() {
-                @Override
-                public Void call() {
-                  typeData.getCollectClassData();
-                  return null;
-                }
-              };
-            }
-          }));
-    } catch (InterruptedException e) {
-      // InterruptedException can be safely ignored here as the threads interrupted are only
-      // precomputing data in parallel that will otherwise be computed later sequentially if
-      // the threads are aborted.
-    }
+
+    prefechTypeDataInParallel(typeDataList);
 
     for (TypeData typeData : typeDataList) {
       CollectClassData classData = typeData.getCollectClassData();
@@ -405,7 +380,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     Event identityEvent = SpeedTracerLogger.start(
         CompilerEventType.TYPE_ORACLE_UPDATER, "phase", "Establish Identity");
     // Perform a shallow pass to establish identity for new and old types.
-    Set<JRealClassType> unresolvedTypes = new LinkedHashSet<JRealClassType>();
+    Set<JRealClassType> unresolvedTypes = Sets.newLinkedHashSet();
     for (TypeData typeData : typeDataList) {
       CollectClassData classData = context.classDataByInternalName.get(typeData.internalName);
       if (classData == null) {
@@ -457,6 +432,32 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     typeOracleUpdaterEvent.end();
   }
 
+  private static void prefechTypeDataInParallel(Collection<TypeData> typeDataList) {
+    // Parse bytecode in parallel if there are many units to process by calling
+    // {@code TypeData.getCollectClassData()} in parallel.
+    try {
+      executor.<Void>invokeAll(Collections2.transform(typeDataList,
+          new Function<TypeData, Callable<Void>>() {
+            @Override
+            public Callable<Void> apply(final TypeData typeData) {
+              return new Callable<Void>() {
+                @Override
+                public Void call() {
+                  typeData.getCollectClassData();
+                  return null;
+                }
+              };
+            }
+          }));
+    } catch (InterruptedException e) {
+      // InterruptedException can be safely ignored here as the threads interrupted are only
+      // precomputing data in parallel that will otherwise be computed later sequentially if
+      // the threads are aborted.
+      // Anyway restore the thread interrupted state just in case.
+      Thread.currentThread().interrupt();
+    }
+  }
+
   /**
    * Adds new units to an existing TypeOracle and indexes their type hierarchy.
    */
@@ -475,7 +476,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
 
   protected void addNewTypesDontIndex(TreeLogger logger,
       Collection<CompilationUnit> compilationUnits) {
-    Collection<TypeData> typeDataList = new ArrayList<TypeData>();
+    Collection<TypeData> typeDataList = Lists.newArrayList();
 
     // Create method args data for types to add
     MethodArgNamesLookup argsLookup = new MethodArgNamesLookup();
@@ -525,7 +526,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
   private Annotation createAnnotation(TreeLogger logger,
       Class<? extends Annotation> annotationClass, AnnotationData annotationData) {
     // Make a copy before we mutate the collection.
-    Map<String, Object> values = new HashMap<String, Object>(annotationData.getValues());
+    Map<String, Object> values = Maps.newHashMap(annotationData.getValues());
     for (Map.Entry<String, Object> entry : values.entrySet()) {
       Method method = null;
       Throwable caught = null;
@@ -793,18 +794,18 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     }
   }
 
-  private static final Map<String, Class> BUILT_IN_PRIMITIVE_MAP =
-      new HashMap<String, Class>() { {
-        put("Z",  boolean.class);
-        put("B", byte.class);
-        put("C", char.class);
-        put("S", short.class);
-        put("I", int.class);
-        put("F", float.class);
-        put("D", double.class);
-        put("J", long.class);
-        put("V", void.class);
-      } };
+  private static final Map<String, Class<?>> BUILT_IN_PRIMITIVE_MAP =
+      ImmutableMap.<String, Class<?>>builder()
+        .put("Z",  boolean.class)
+        .put("B", byte.class)
+        .put("C", char.class)
+        .put("S", short.class)
+        .put("I", int.class)
+        .put("F", float.class)
+        .put("D", double.class)
+        .put("J", long.class)
+        .put("V", void.class)
+    .build();
 
   static {
     for (Class c : new Class[] { void.class, boolean.class, byte.class, char.class,
@@ -866,8 +867,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     }
 
     // Resolve annotations
-    Map<Class<? extends Annotation>, Annotation> declaredAnnotations =
-        new HashMap<Class<? extends Annotation>, Annotation>();
+    Map<Class<? extends Annotation>, Annotation> declaredAnnotations = Maps.newHashMap();
     resolveAnnotations(logger, classData.getAnnotations(), declaredAnnotations);
     addAnnotations(unresolvedType, declaredAnnotations);
 
@@ -1033,8 +1033,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
   private boolean resolveField(TreeLogger logger, JRealClassType unresolvedType,
       CollectFieldData field, TypeParameterLookup typeParamLookup, int[] nextEnumOrdinal,
       TypeOracleBuildContext context) {
-    Map<Class<? extends Annotation>, Annotation> declaredAnnotations =
-        new HashMap<Class<? extends Annotation>, Annotation>();
+    Map<Class<? extends Annotation>, Annotation> declaredAnnotations = Maps.newHashMap();
     resolveAnnotations(logger, field.getAnnotations(), declaredAnnotations);
     String name = field.getName();
     JField jfield;
@@ -1077,8 +1076,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
   private boolean resolveMethod(TreeLogger logger, JRealClassType unresolvedType,
       CollectMethodData methodData, TypeParameterLookup typeParamLookup,
       TypeOracleBuildContext context) {
-    Map<Class<? extends Annotation>, Annotation> declaredAnnotations =
-        new HashMap<Class<? extends Annotation>, Annotation>();
+    Map<Class<? extends Annotation>, Annotation> declaredAnnotations = Maps.newHashMap();
     resolveAnnotations(logger, methodData.getAnnotations(), declaredAnnotations);
     String name = methodData.getName();
 
@@ -1176,8 +1174,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
 
   private boolean resolvePackage(TreeLogger logger, JRealClassType unresolvedType,
       List<CollectAnnotationData> annotationVisitors) {
-    Map<Class<? extends Annotation>, Annotation> declaredAnnotations =
-        new HashMap<Class<? extends Annotation>, Annotation>();
+    Map<Class<? extends Annotation>, Annotation> declaredAnnotations = Maps.newHashMap();
     resolveAnnotations(logger, annotationVisitors, declaredAnnotations);
     addAnnotations(unresolvedType.getPackage(), declaredAnnotations);
     return true;
@@ -1205,8 +1202,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
         return false;
       }
       // Try to resolve annotations, ignore any that fail.
-      Map<Class<? extends Annotation>, Annotation> declaredAnnotations =
-          new HashMap<Class<? extends Annotation>, Annotation>();
+      Map<Class<? extends Annotation>, Annotation> declaredAnnotations = Maps.newHashMap();
       resolveAnnotations(logger, paramAnnot[i], declaredAnnotations);
 
       newParameter(method, argJType, argNames[i], declaredAnnotations, argNamesAreReal);

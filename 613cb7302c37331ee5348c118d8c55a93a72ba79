@@ -16,6 +16,75 @@
       "revId": "613cb7302c37331ee5348c118d8c55a93a72ba79",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_ab4ea1a5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-08T23:36:58Z",
+      "side": 1,
+      "message": "it\u0027s very surprising to me to learn that there\u0027s a special case such that referencing a public static final primitive field does not trigger clinits according to the JLS spec.\n\ndo you mind adding a comment to about it?",
+      "range": {
+        "startLine": 326,
+        "startChar": 6,
+        "endLine": 326,
+        "endChar": 67
+      },
+      "revId": "613cb7302c37331ee5348c118d8c55a93a72ba79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0684b04_545de524",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-08T23:36:58Z",
+      "side": 1,
+      "message": "does this mean that \n\ncase FooType.foo:\n\nbecomes\n\ncase 0:\n\n\nand then later if someone edits the definition of the FooType enum the case statement here becomes stale?",
+      "range": {
+        "startLine": 518,
+        "startChar": 10,
+        "endLine": 518,
+        "endChar": 64
+      },
+      "revId": "613cb7302c37331ee5348c118d8c55a93a72ba79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30574343_8b159dd7",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/PrunerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-08T23:36:58Z",
+      "side": 1,
+      "message": "there\u0027s no ; on the end of this?",
+      "range": {
+        "startLine": 167,
+        "startChar": 40,
+        "endLine": 167,
+        "endChar": 41
+      },
+      "revId": "613cb7302c37331ee5348c118d8c55a93a72ba79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -527,6 +527,10 @@ public class JettyLauncher extends ServletContainerLauncher {
       super(webApp, contextPath);
       this.logger = logger;
 
+      // Avoid that getWebInf() returns null when it's used in
+      // AnnotationConfiguration.parseWebInfClasses (issue #8472)
+      setResourceBase(webApp);
+
       // Prevent file locking on Windows; pick up file changes.
       getInitParams().put(
           "org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");

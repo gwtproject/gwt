@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0684b04_e172711e",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Outbox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-08T23:11:35Z",
+      "side": 1,
+      "message": "If getNoPrecompile() is false (that is, the user didn\u0027t explicitly ask for this) maybe we should warn that we turned off precompile automatically.\n\nAlthough, long-term, if we are doing half a compile anyway, I think maybe we could just drop the noPreCompile option altogether and always do half.",
+      "range": {
+        "startLine": 73,
+        "startChar": 45,
+        "endLine": 73,
+        "endChar": 65
+      },
+      "revId": "267ad5efd00aae9b0f69eca793891e9fdad28e45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0684b04_54bcc5c5",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-08T23:11:35Z",
+      "side": 1,
+      "message": "How about \"Loading Java files in \u003cmodule name\u003e.\"\n\n(Or anyway, get the module name in there.)",
+      "range": {
+        "startLine": 192,
+        "startChar": 45,
+        "endLine": 192,
+        "endChar": 52
+      },
+      "revId": "267ad5efd00aae9b0f69eca793891e9fdad28e45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0684b04_b43b99e0",
+        "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-08T23:11:35Z",
+      "side": 1,
+      "message": "Add a TODO here to clean up the mess we talked about?\n\nI also noticed a corner case where WarDir is set to a filename ending with \".zip\". In that case I think we wouldn\u0027t want to create the persistent unit cache either, to be consistent with the .jar case. Maybe it would be better to check that getWarDir() points to a directory instead of looking at file extensions?\n\nSee src/com/google/gwt/dev/Link.java line 337 for how we decide to create a zip file for the WarDir argument or not. (Called at line 401.)",
+      "range": {
+        "startLine": 85,
+        "startChar": 40,
+        "endLine": 85,
+        "endChar": 47
+      },
+      "revId": "267ad5efd00aae9b0f69eca793891e9fdad28e45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

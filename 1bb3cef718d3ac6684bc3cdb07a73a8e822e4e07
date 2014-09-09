@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0edabca_700bee8a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-09T00:20:24Z",
+      "side": 1,
+      "message": "the \u0027if\u0027 part looks old?",
+      "range": {
+        "startLine": 434,
+        "startChar": 33,
+        "endLine": 434,
+        "endChar": 34
+      },
+      "revId": "1bb3cef718d3ac6684bc3cdb07a73a8e822e4e07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

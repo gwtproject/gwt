@@ -28,7 +28,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   /**
    * A mutable {@link Map.Entry} shared by several {@link Map} implementations.
    */
-  public static class SimpleEntry<K, V> extends AbstractMapEntry<K, V> {
+  public static class SimpleEntry<K, V> implements Entry<K, V> {
     private final K key;
     private V value;
 
@@ -42,6 +42,19 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     }
 
     @Override
+    public boolean equals(Object other) {
+      if (this == other) {
+        return true;
+      }
+      if (!(other instanceof Entry)) {
+        return false;
+      }
+      Entry<?, ?> entry = (Entry<?, ?>) other;
+      return Objects.equals(key, entry.getKey())
+          && Objects.equals(value, entry.getValue());
+    }
+
+    @Override
     public K getKey() {
       return key;
     }
@@ -49,6 +62,14 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     @Override
     public V getValue() {
       return value;
+    }
+
+    /**
+     * Calculate the hash code using Sun's specified algorithm.
+     */
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(key) ^ Objects.hashCode(value);
     }
 
     @Override
@@ -57,32 +78,24 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
       this.value = value;
       return oldValue;
     }
+
+    @Override
+    public String toString() {
+      // for compatibility with the real Jre: issue 3422
+      return key + "=" + value;
+    }
   }
 
   /**
    * An immutable {@link Map.Entry} shared by several {@link Map} implementations.
    */
-  public static class SimpleImmutableEntry<K, V> extends AbstractMapEntry<K, V> {
-    private final K key;
-    private final V value;
-
+  public static class SimpleImmutableEntry<K, V> extends SimpleEntry<K, V> {
     public SimpleImmutableEntry(K key, V value) {
-      this.key = key;
-      this.value = value;
+      super(key, value);
     }
 
     public SimpleImmutableEntry(Entry<? extends K, ? extends V> entry) {
-      this(entry.getKey(), entry.getValue());
-    }
-
-    @Override
-    public K getKey() {
-      return key;
-    }
-
-    @Override
-    public V getValue() {
-      return value;
+      super(entry.getKey(), entry.getValue());
     }
 
     @Override

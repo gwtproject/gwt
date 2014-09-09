@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30574343_0636a4d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-09T00:01:25Z",
+      "side": 1,
+      "message": "Let\u0027s call out the external visible change:\n\n\"Bugfix: the persistent unit cache should only be auto-enabled when the -war parameter points to a directory.\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "0f4c9896a00dbc430661fd18881e9c07426d529d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

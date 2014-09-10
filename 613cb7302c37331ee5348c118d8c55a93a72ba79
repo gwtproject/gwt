@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "f0edabca_3962eae4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-10T01:56:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30574343_ab4ea1a5",
+      "range": {
+        "startLine": 326,
+        "startChar": 6,
+        "endLine": 326,
+        "endChar": 67
+      },
+      "revId": "613cb7302c37331ee5348c118d8c55a93a72ba79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0684b04_545de524",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 4
@@ -65,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "f0edabca_d92be66a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-10T01:56:14Z",
+      "side": 1,
+      "message": "Removed the optimization although I think the type reference was bound to appear in the switch condition.",
+      "parentUuid": "f0684b04_545de524",
+      "range": {
+        "startLine": 518,
+        "startChar": 10,
+        "endLine": 518,
+        "endChar": 64
+      },
+      "revId": "613cb7302c37331ee5348c118d8c55a93a72ba79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30574343_8b159dd7",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/PrunerTest.java",
         "patchSetId": 4
@@ -76,6 +124,30 @@
       "writtenOn": "2014-09-08T23:36:58Z",
       "side": 1,
       "message": "there\u0027s no ; on the end of this?",
+      "range": {
+        "startLine": 167,
+        "startChar": 40,
+        "endLine": 167,
+        "endChar": 41
+      },
+      "revId": "613cb7302c37331ee5348c118d8c55a93a72ba79",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0edabca_f94b423b",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/PrunerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-10T01:56:14Z",
+      "side": 1,
+      "message": "Yes. That\u0027s what is implemented in the ToStringGenerationVisitor :)",
+      "parentUuid": "30574343_8b159dd7",
       "range": {
         "startLine": 167,
         "startChar": 40,

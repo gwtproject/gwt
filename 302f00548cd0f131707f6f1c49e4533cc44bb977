@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "30574343_0cda4320",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/BinaryTypeReferenceRestrictionsChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-10T01:56:14Z",
+      "side": 0,
+      "message": "Agree.",
+      "parentUuid": "30574343_4b2d451b",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 100,
+        "endChar": 7
+      },
+      "revId": "302f00548cd0f131707f6f1c49e4533cc44bb977",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0684b04_94d01d36",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2014-09-08T23:36:58Z",
       "side": 0,
       "message": "it seems that we have removed all of the related handling for this comment, so we should probably remove this comment as well",
+      "range": {
+        "startLine": 240,
+        "startChar": 5,
+        "endLine": 240,
+        "endChar": 75
+      },
+      "revId": "302f00548cd0f131707f6f1c49e4533cc44bb977",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0edabca_59c6d686",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-10T01:56:14Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "f0684b04_94d01d36",
       "range": {
         "startLine": 240,
         "startChar": 5,

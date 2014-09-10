@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "702b7bc3_0fbfe94a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-10T01:54:31Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "6e2b1a16f896184e96de1904227a49ba56db7464",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_6fc4a5db",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/CompileTimeConstantsReplacerTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-10T01:54:31Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "6e2b1a16f896184e96de1904227a49ba56db7464",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

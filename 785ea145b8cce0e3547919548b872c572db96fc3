@@ -16,6 +16,29 @@
       "revId": "785ea145b8cce0e3547919548b872c572db96fc3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "306bc3de_4c8731c5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1356,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-10T20:16:50Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 1356,
+        "startChar": 17,
+        "endLine": 1356,
+        "endChar": 45
+      },
+      "revId": "785ea145b8cce0e3547919548b872c572db96fc3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

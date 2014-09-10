@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "702b7bc3_78458d5e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-10T19:52:18Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "c8c1d84c3088edbeacb40bcf092a964202dcc80d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_584a496e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-10T19:52:18Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "c8c1d84c3088edbeacb40bcf092a964202dcc80d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_b83ee5d0",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/CompileTimeConstantsReplacerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-10T19:52:18Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "c8c1d84c3088edbeacb40bcf092a964202dcc80d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_983b21e1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/EnumOrdinalizerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-10T19:52:18Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "c8c1d84c3088edbeacb40bcf092a964202dcc80d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_f8385de5",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/EnumOrdinalizerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-10T19:52:18Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "c8c1d84c3088edbeacb40bcf092a964202dcc80d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

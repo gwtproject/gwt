@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "101a3fb4_cd72fa1e",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-10T19:27:36Z",
+      "side": 1,
+      "message": "nit: Also you no longer need to sort the members (unless it is useful in that context). Can you put equals,hashcode, toString next to each other? It is better to see they are both overridden than seeing them in alphabetical order.",
+      "range": {
+        "startLine": 71,
+        "startChar": 15,
+        "endLine": 71,
+        "endChar": 23
+      },
+      "revId": "d6dc8b8f79e040497f07e665fa8d47ddf144248c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "101a3fb4_8d4e42f9",
         "filename": "user/super/com/google/gwt/emul/java/util/AbstractMapEntry.java",
         "patchSetId": 1

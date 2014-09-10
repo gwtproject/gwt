@@ -19,6 +19,98 @@
     },
     {
       "key": {
+        "uuid": "702b7bc3_efeff58c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-10T01:26:51Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 276,
+        "startChar": 44,
+        "endLine": 276,
+        "endChar": 60
+      },
+      "revId": "ed014432434adc7f99a973c7165c447ab3aaa07e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_cfecb19b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-10T01:26:51Z",
+      "side": 1,
+      "message": "actually the comments are backwards 4 then 3 on purpose, their comment tries to explain that they\u0027re out of order and should someday be reordered",
+      "range": {
+        "startLine": 280,
+        "startChar": 12,
+        "endLine": 280,
+        "endChar": 13
+      },
+      "revId": "ed014432434adc7f99a973c7165c447ab3aaa07e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_2f1bcd0b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-10T01:26:51Z",
+      "side": 1,
+      "message": "missing space",
+      "range": {
+        "startLine": 378,
+        "startChar": 69,
+        "endLine": 378,
+        "endChar": 74
+      },
+      "revId": "ed014432434adc7f99a973c7165c447ab3aaa07e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_af0e9dc6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompileTimeConstantsReplacer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-10T01:26:51Z",
+      "side": 1,
+      "message": "probably mention also that it\u0027s a Java Spec requirement",
+      "range": {
+        "startLine": 29,
+        "startChar": 3,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "ed014432434adc7f99a973c7165c447ab3aaa07e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "702b7bc3_afdcddf6",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/CompileTimeConstantsReplacerTest.java",
         "patchSetId": 5

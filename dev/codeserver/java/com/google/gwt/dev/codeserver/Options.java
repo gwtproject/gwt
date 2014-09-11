@@ -19,10 +19,12 @@ package com.google.gwt.dev.codeserver;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.ArgProcessorBase;
 import com.google.gwt.dev.cfg.ModuleDef;
+import com.google.gwt.dev.util.arg.ArgHandlerCompilePerFile;
 import com.google.gwt.dev.util.arg.ArgHandlerJsInteropMode;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
 import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
 import com.google.gwt.dev.util.arg.JsInteropMode;
+import com.google.gwt.dev.util.arg.OptionCompilePerFile;
 import com.google.gwt.dev.util.arg.OptionJsInteropMode;
 import com.google.gwt.dev.util.arg.OptionLogLevel;
 import com.google.gwt.dev.util.arg.OptionSourceLevel;
@@ -298,7 +300,17 @@ public class Options {
       registerHandler(new ModuleNameArgument());
       registerHandler(new FailOnErrorFlag());
       registerHandler(new StrictResourcesFlag());
-      registerHandler(new CompilePerFileFlag());
+      registerHandler(new ArgHandlerCompilePerFile(new OptionCompilePerFile() {
+        @Override
+        public boolean shouldCompilePerFile() {
+          return compilePerFile;
+        }
+
+        @Override
+        public void setCompilePerFile(boolean enabled) {
+          compilePerFile = enabled;
+        }
+      }));
       registerHandler(new ArgHandlerSourceLevel(new OptionSourceLevel() {
         @Override
         public SourceLevel getSourceLevel() {
@@ -360,35 +372,6 @@ public class Options {
     @Override
     public boolean getDefaultValue() {
       return !noPrecompile;
-    }
-  }
-
-  private class CompilePerFileFlag extends ArgHandlerFlag {
-
-    @Override
-    public String getLabel() {
-      return "compilePerFile";
-    }
-
-    @Override
-    public String getPurposeSnippet() {
-      return "Compiles faster by creating/reusing a JS file per class.";
-    }
-
-    @Override
-    public boolean setFlag(boolean value) {
-      compilePerFile = value;
-      return true;
-    }
-
-    @Override
-    public boolean getDefaultValue() {
-      return false;
-    }
-
-    @Override
-    public boolean isExperimental() {
-      return true;
     }
   }
 

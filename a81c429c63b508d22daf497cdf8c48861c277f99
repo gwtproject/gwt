@@ -22,6 +22,30 @@
       "revId": "a81c429c63b508d22daf497cdf8c48861c277f99",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_9ee2e9a6",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-11T01:01:03Z",
+      "side": 1,
+      "message": "Will be used shortly.",
+      "parentUuid": "101a3fb4_54edee69",
+      "range": {
+        "startLine": 148,
+        "startChar": 27,
+        "endLine": 148,
+        "endChar": 57
+      },
+      "revId": "a81c429c63b508d22daf497cdf8c48861c277f99",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

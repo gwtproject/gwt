@@ -16,6 +16,24 @@
       "revId": "d1b95cdf1a967fef2057e6cac4e6be44250c8822",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0fa6781_35f2f27b",
+        "filename": "elemental/src/elemental/js/util/JsMapFromStringTo.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-09-11T01:43:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b09df327_bbbac7a1",
+      "revId": "d1b95cdf1a967fef2057e6cac4e6be44250c8822",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

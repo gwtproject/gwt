@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "101a3fb4_54edee69",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-11T00:57:19Z",
+      "side": 1,
+      "message": "you\u0027re not using this resource",
+      "range": {
+        "startLine": 148,
+        "startChar": 27,
+        "endLine": 148,
+        "endChar": 57
+      },
+      "revId": "a81c429c63b508d22daf497cdf8c48861c277f99",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

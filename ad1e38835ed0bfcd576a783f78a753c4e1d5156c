@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0fa6781_40a53ea4",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/computeScriptBase.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-09-11T12:12:01Z",
+      "side": 1,
+      "message": "If this script is executed and it does not find a nocache.js file doesn\u0027t that mean this script was embedded into the host html page? If so, can\u0027t we default to the path of current window.location then?",
+      "range": {
+        "startLine": 54,
+        "startChar": 9,
+        "endLine": 54,
+        "endChar": 11
+      },
+      "revId": "ad1e38835ed0bfcd576a783f78a753c4e1d5156c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

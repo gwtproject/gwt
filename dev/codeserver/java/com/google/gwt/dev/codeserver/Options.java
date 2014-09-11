@@ -19,10 +19,12 @@ package com.google.gwt.dev.codeserver;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.ArgProcessorBase;
 import com.google.gwt.dev.cfg.ModuleDef;
+import com.google.gwt.dev.util.arg.ArgHandlerIncrementalCompile;
 import com.google.gwt.dev.util.arg.ArgHandlerJsInteropMode;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
 import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
 import com.google.gwt.dev.util.arg.JsInteropMode;
+import com.google.gwt.dev.util.arg.OptionIncrementalCompile;
 import com.google.gwt.dev.util.arg.OptionJsInteropMode;
 import com.google.gwt.dev.util.arg.OptionLogLevel;
 import com.google.gwt.dev.util.arg.OptionSourceLevel;
@@ -292,14 +294,23 @@ public class Options {
       registerHandler(new CompileTestFlag());
       registerHandler(new CompileTestRecompilesFlag());
       registerHandler(new FailOnErrorFlag());
-      registerHandler(new IncrementalCompileFlag());
       registerHandler(new ModuleNameArgument());
       registerHandler(new NoPrecompileFlag());
       registerHandler(new PortFlag());
       registerHandler(new SourceFlag());
       registerHandler(new StrictResourcesFlag());
       registerHandler(new WorkDirFlag());
+      registerHandler(new ArgHandlerIncrementalCompile(new OptionIncrementalCompile() {
+        @Override
+        public boolean shouldCompilePerFile() {
+          return compilePerFile;
+        }
 
+        @Override
+        public void setCompilePerFile(boolean enabled) {
+          compilePerFile = enabled;
+        }
+      }));
       registerHandler(new ArgHandlerSourceLevel(new OptionSourceLevel() {
         @Override
         public SourceLevel getSourceLevel() {
@@ -361,34 +372,6 @@ public class Options {
     @Override
     public boolean getDefaultValue() {
       return !noPrecompile;
-    }
-  }
-
-  private class IncrementalCompileFlag extends ArgHandlerFlag {
-
-    public IncrementalCompileFlag() {
-      addTagValue("-XcompilePerFile", true);
-    }
-
-    @Override
-    public String getLabel() {
-      return "incremental";
-    }
-
-    @Override
-    public String getPurposeSnippet() {
-      return "Compiles faster by reusing data from the previous compile.";
-    }
-
-    @Override
-    public boolean setFlag(boolean value) {
-      compilePerFile = value;
-      return true;
-    }
-
-    @Override
-    public boolean getDefaultValue() {
-      return false;
     }
   }
 

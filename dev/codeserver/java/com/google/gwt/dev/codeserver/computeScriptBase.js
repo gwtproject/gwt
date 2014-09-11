@@ -39,7 +39,7 @@ function computeScriptBase() {
     if (!tag) {
       break;
     }
-    var candidate = tag.src;
+    var candidate = tag.src.replace(/[?#].*$/,'');
     var lastMatch = candidate.lastIndexOf(expectedSuffix);
     if (lastMatch == candidate.length - expectedSuffix.length) {
       // Assumes that either the URL is absolute, or it's relative
@@ -48,5 +48,5 @@ function computeScriptBase() {
     }
   }
 
-  $wnd.alert('Unable to load Super Dev Mode version of ' + __MODULE_NAME__ + ".");
+  $wnd.alert('Unable to load Super Dev Mode version of __MODULE_NAME__.');
 }

@@ -39,7 +39,8 @@ function computeScriptBase() {
     if (!tag) {
       break;
     }
-    var candidate = tag.src;
+    // Remove QS and hash fragments (#8895)
+    var candidate = tag.src.replace(/[?#].*$/g,'');
     var lastMatch = candidate.lastIndexOf(expectedSuffix);
     if (lastMatch == candidate.length - expectedSuffix.length) {
       // Assumes that either the URL is absolute, or it's relative
@@ -48,5 +49,9 @@ function computeScriptBase() {
     }
   }
 
-  $wnd.alert('Unable to load Super Dev Mode version of ' + __MODULE_NAME__ + ".");
+  $wnd.console && $wnd.console.log(
+    'Returning window location as module base url. Verify that there is a script tag pointing to __MODULE_NAME__.nocache.js.');
+
+  // Return current location, since .nocache.js could be embedded in current page (#8894)
+  return $wnd.location.href.replace(/[?#].*$/g,'').replace(/[^\/]+$/,'');
 }

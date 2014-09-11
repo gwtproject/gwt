@@ -88,6 +88,15 @@ public class SuperDevListener implements CodeServerListener {
       args.add("-logLevel");
       args.add(String.valueOf(options.getLogLevel()));
     }
+
+    // Use a System Property to pass extra arguments to codeserver.
+    String sdmExtraArgs = System.getProperty("gwt.sdm.extra.args");
+    if (sdmExtraArgs != null) {
+        for (String arg : sdmExtraArgs.split(" +")) {
+            args.add(arg);
+        }
+    }
+
     for (String mod : options.getModuleNames()) {
       args.add(mod);
     }

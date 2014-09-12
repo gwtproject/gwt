@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0c4cb62_929f6454",
+        "filename": "user/src/com/google/gwt/core/client/impl/Coercions.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-12T22:06:20Z",
+      "side": 1,
+      "message": "@Roberto, can we write this in java and hope it doesn\u0027t get optimized?",
+      "revId": "fccb2810502b25f933822dca779bd8c1c2a52846",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

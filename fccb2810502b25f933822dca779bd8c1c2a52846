@@ -16,6 +16,24 @@
       "revId": "fccb2810502b25f933822dca779bd8c1c2a52846",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c4cb62_9d27753b",
+        "filename": "user/src/com/google/gwt/core/client/impl/Coercions.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-12T22:47:42Z",
+      "side": 1,
+      "message": "I think you can probably write \n   \n  return (int) (double) value;\n\n\nI think it won\u0027t be optimized, but we have to verify if that is the case. (we use ~~ instead of | 0 in Cast.java though)",
+      "parentUuid": "f0c4cb62_929f6454",
+      "revId": "fccb2810502b25f933822dca779bd8c1c2a52846",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

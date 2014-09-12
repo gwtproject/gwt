@@ -1058,7 +1058,7 @@ public class Arrays {
 
     // nativeObjSort(x, 0, x.length, getNativeComparator(x, c != null ? c :
     // Comparators.natural()));
-    mergeSort(x, 0, x.length, c != null ? c : Comparators.natural());
+    mergeSort(x, 0, x.length, c);
   }
 
   public static <T> void sort(T[] x, int fromIndex, int toIndex,
@@ -1068,7 +1068,7 @@ public class Arrays {
     checkPositionIndexes(fromIndex, toIndex, x.length);
     // nativeObjSort(x, fromIndex, toIndex, getNativeComparator(x, c != null ? c
     // : Comparators.natural()));
-    mergeSort(x, fromIndex, toIndex, c != null ? c : Comparators.natural());
+    mergeSort(x, fromIndex, toIndex, c);
   }
 
   public static String toString(boolean[] a) {
@@ -1359,8 +1359,10 @@ public class Arrays {
    * Uses O(n) temporary space to perform the merge, but is stable.
    */
   @SuppressWarnings("unchecked")
-  private static void mergeSort(Object[] x, int fromIndex, int toIndex,
-      Comparator<?> comp) {
+  private static void mergeSort(Object[] x, int fromIndex, int toIndex, Comparator<?> comp) {
+    if (comp == null) {
+      comp = Comparators.natural();
+    }
     Object[] temp = copyOfRange(x, fromIndex, toIndex);
     mergeSort(temp, x, fromIndex, toIndex, -fromIndex,
         (Comparator<Object>) comp);

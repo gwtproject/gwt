@@ -42,11 +42,7 @@ public abstract class AbstractQueue<E> extends AbstractCollection<E> implements
     if (c == this) {
       throw new IllegalArgumentException("Can't add a queue to itself");
     }
-    boolean modified = false;
-    for (E val : c) {
-      modified |= add(val);
-    }
-    return modified;
+    return super.addAll(c);
   }
 
   @Override

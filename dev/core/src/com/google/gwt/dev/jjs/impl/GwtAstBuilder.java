@@ -63,6 +63,7 @@ import com.google.gwt.dev.jjs.ast.JIntLiteral;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JLabel;
 import com.google.gwt.dev.jjs.ast.JLabeledStatement;
+import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JLongLiteral;
@@ -99,6 +100,7 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.js.JsAbstractSymbolResolver;
 import com.google.gwt.dev.js.ast.JsContext;
+import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
@@ -194,6 +196,7 @@ import org.eclipse.jdt.internal.compiler.ast.WhileStatement;
 import org.eclipse.jdt.internal.compiler.impl.Constant;
 import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
 import org.eclipse.jdt.internal.compiler.lookup.BaseTypeBinding;
+import org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.Binding;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
@@ -262,9 +265,18 @@ public class GwtAstBuilder {
           processClassLiteral(x, info, type, ctx);
         } else if (binding instanceof FieldBinding) {
           FieldBinding fieldBinding = (FieldBinding) binding;
-          // Normal: create a jsniRef.
-          JField field = typeMap.get(fieldBinding);
-          processField(x, info, field, ctx);
+          if (isOptimizableCompileTimeConstant(fieldBinding)) {
+            // Replace any compile-time constants with the constant value of the field.
+            assert !ctx.isLvalue();
+            JExpression constant = getConstant(info, fieldBinding.constant());
+            JsExpression result = JjsUtils.translateLiteral((JLiteral) constant);
+            assert (result != null);
+            ctx.replaceMe(result);
+          } else {
+            // Normal: create a jsniRef.
+            JField field = typeMap.get(fieldBinding);
+            processField(x, info, field, ctx);
+          }
         } else {
           JMethod method = typeMap.get((MethodBinding) binding);
           processMethod(x, info, method);
@@ -2665,15 +2677,12 @@ public class GwtAstBuilder {
     private JExpression resolveNameReference(NameReference x, BlockScope scope) {
       SourceInfo info = makeSourceInfo(x);
       Binding binding = x.binding;
+      if (isOptimizableCompileTimeConstant(binding)) {
+        return getConstant(info, x.constant);
+      }
       JExpression result = null;
       if (binding instanceof LocalVariableBinding) {
         LocalVariableBinding b = (LocalVariableBinding) binding;
-        if (x.constant != Constant.NotAConstant) {
-          // Propagate constants in local variables as the constant is defined in the same
-          // compilation unit as its use. This is necessary as the JDT will not compute an
-          // emulation path for a local constant.
-          return getConstant(info, x.constant);
-        }
         if ((x.bits & ASTNode.DepthMASK) != 0) {
           VariableBinding[] path = scope.getEmulationPath(b);
           if (path == null) {
@@ -2932,13 +2941,28 @@ public class GwtAstBuilder {
     return stringInterner.intern(s);
   }
 
+  private boolean isOptimizableCompileTimeConstant(Binding binding) {
+    if (binding instanceof LocalVariableBinding) {
+      // Propagate constants in local variables regardless whether we are optimizing compile time
+      // constants or not. This is necessary as the JDT will not compute an emulation path for a
+      // local constant referred in a nested class closure.
+      return true;
+    }
+    if (!(binding instanceof FieldBinding)) {
+      return false;
+    }
+    FieldBinding fieldBinding = (FieldBinding) binding;
+    return (optimizeCompileTimeConstants ||
+        fieldBinding.declaringClass instanceof BinaryTypeBinding) &&
+        isCompileTimeConstant(fieldBinding);
+  }
+
   private static boolean isCompileTimeConstant(FieldBinding binding) {
     assert !binding.isFinal() || !binding.isVolatile();
-    boolean isCompileTimeConstant =
-        binding.isStatic() && binding.isFinal() && (binding.constant() != Constant.NotAConstant);
-    if (isCompileTimeConstant) {
-      assert binding.type.isBaseType() || (binding.type.id == TypeIds.T_JavaLangString);
-    }
+    boolean isCompileTimeConstant = binding.isStatic() && binding.isFinal() &&
+        binding.constant() != Constant.NotAConstant;
+    assert !isCompileTimeConstant || binding.type.isBaseType() ||
+        (binding.type.id == TypeIds.T_JavaLangString);
     return isCompileTimeConstant;
   }
 
@@ -2964,6 +2988,8 @@ public class GwtAstBuilder {
 
   private String sourceMapPath;
 
+  private boolean optimizeCompileTimeConstants;
+
   /**
    * Externalized class and method form for Exceptions.safeClose() to provide support
    * for try-with-resources.
@@ -2981,16 +3007,20 @@ public class GwtAstBuilder {
    * @param sourceMapPath the path that should be included in a sourcemap.
    * @param jsniMethods Native methods to add to the AST.
    * @param jsniRefs Map from JSNI references to their JDT definitions.
+   * @param optimizeCompileTimeconstants whether to optimze compile time constants at this stage
+   *        or not.
    * @return All the types seen in this source file.
    */
   public List<JDeclaredType> process(CompilationUnitDeclaration cud, String sourceMapPath,
-      Map<MethodDeclaration, JsniMethod> jsniMethods, Map<String, Binding> jsniRefs) {
+      Map<MethodDeclaration, JsniMethod> jsniMethods, Map<String, Binding> jsniRefs,
+      boolean optimizeCompileTimeconstants) {
     if (cud.types == null) {
       return Collections.emptyList();
     }
     this.sourceMapPath = sourceMapPath;
     this.jsniRefs = jsniRefs;
     this.jsniMethods = jsniMethods;
+    this.optimizeCompileTimeConstants = optimizeCompileTimeconstants;
     newTypes = Lists.newArrayList();
     curCud = new CudInfo(cud);
 

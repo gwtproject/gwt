@@ -35,10 +35,9 @@ public abstract class AbstractCollection<E> implements Collection<E> {
   }
 
   public boolean addAll(Collection<? extends E> c) {
-    Iterator<? extends E> iter = c.iterator();
     boolean changed = false;
-    while (iter.hasNext()) {
-      changed |= add(iter.next());
+    for (E e : c) {
+      changed |= add(e);
     }
     return changed;
   }
@@ -52,14 +51,12 @@ public abstract class AbstractCollection<E> implements Collection<E> {
   }
 
   public boolean contains(Object o) {
-    Iterator<E> iter = advanceToFind(iterator(), o);
-    return iter == null ? false : true;
+    return advanceToFind(o, false);
   }
 
   public boolean containsAll(Collection<?> c) {
-    Iterator<?> iter = c.iterator();
-    while (iter.hasNext()) {
-      if (!contains(iter.next())) {
+    for (Object e : c) {
+      if (!contains(e)) {
         return false;
       }
     }
@@ -73,13 +70,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
   public abstract Iterator<E> iterator();
 
   public boolean remove(Object o) {
-    Iterator<E> iter = advanceToFind(iterator(), o);
-    if (iter != null) {
-      iter.remove();
-      return true;
-    } else {
-      return false;
-    }
+    return advanceToFind(o, true);
   }
 
   public boolean removeAll(Collection<?> c) {
@@ -146,13 +137,16 @@ public abstract class AbstractCollection<E> implements Collection<E> {
     return sb.toString();
   }
 
-  private <T> Iterator<T> advanceToFind(Iterator<T> iter, Object o) {
-    while (iter.hasNext()) {
-      T t = iter.next();
-      if (Objects.equals(o, t)) {
-        return iter;
+  private boolean advanceToFind(Object o, boolean remove) {
+    for (Iterator<E> iter = iterator(); iter.hasNext();) {
+      E e = iter.next();
+      if (Objects.equals(o, e)) {
+        if (remove) {
+          iter.remove();
+        }
+        return true;
       }
     }
-    return null;
+    return false;
   }
 }

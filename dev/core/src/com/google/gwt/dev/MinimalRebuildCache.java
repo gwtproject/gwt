@@ -162,6 +162,7 @@ public class MinimalRebuildCache implements Serializable {
   private final Set<String> staleTypeNames = Sets.newHashSet();
   private final Map<String, StatementRanges> statementRangesByTypeName = Maps.newHashMap();
   private final Multimap<String, String> typeNamesByReferencingTypeName = HashMultimap.create();
+  private final Set<String> sourceCompilationUnitTypeNames = Sets.newHashSet();
 
   /**
    * Accumulates generated artifacts so that they can be output on recompiles even if no generators
@@ -178,6 +179,9 @@ public class MinimalRebuildCache implements Serializable {
     this.modifiedCompilationUnitNames.addAll(modifiedCompilationUnitNames);
   }
 
+  public void addSourceCompilationUnitTypeName(String sourceCompilationUnitTypeName) {
+    this.sourceCompilationUnitTypeNames.add(sourceCompilationUnitTypeName);
+  }
   public void addTypeReference(String fromTypeName, String toTypeName) {
     referencedTypeNamesByTypeName.put(fromTypeName, toTypeName);
     typeNamesByReferencingTypeName.put(toTypeName, fromTypeName);
@@ -378,6 +382,10 @@ public class MinimalRebuildCache implements Serializable {
    */
   public boolean isPopulated() {
     return !immediateTypeRelations.isEmpty();
+  }
+
+  public boolean isSourceCompilationUnit(String name) {
+    return sourceCompilationUnitTypeNames.contains(name);
   }
 
   public IntTypeIdGenerator getIntTypeIdGenerator() {

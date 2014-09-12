@@ -138,7 +138,8 @@ public class CompilationStateBuilder {
             if (!cud.compilationResult().hasErrors()) {
               // The above checks might have recorded errors; so we need to check here again.
               // So only construct the GWT AST if no JDT errors and no errors from our checks.
-              types = astBuilder.process(cud, builder.getSourceMapPath(), jsniMethods, jsniRefs);
+              types = astBuilder.process(cud, builder.getSourceMapPath(), jsniMethods, jsniRefs,
+                  !compilerContext.getOptions().shouldCompilePerFile());
             }
 
             // Only run this pass if JDT was able to compile the unit with no errors, otherwise

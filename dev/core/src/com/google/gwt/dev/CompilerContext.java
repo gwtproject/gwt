@@ -193,6 +193,12 @@ public class CompilerContext {
   private ResourceOracle sourceResourceOracle;
   private TinyCompileSummary tinyCompileSummary = new TinyCompileSummary();
   private UnitCache unitCache = new MemoryUnitCache();
+  private Set<String> sourceCompilationUnitNames = Sets.newHashSet();
+
+
+  public void addSourceCompilationUnitName(String sourceCompilationUnitNames) {
+    this.sourceCompilationUnitNames.add(sourceCompilationUnitNames);
+  }
 
   public ResourceOracle getBuildResourceOracle() {
     return buildResourceOracle;
@@ -271,6 +277,10 @@ public class CompilerContext {
 
   public UnitCache getUnitCache() {
     return unitCache;
+  }
+
+  public boolean isSourceCompilationUnit(String name) {
+    return sourceCompilationUnitNames.contains(name);
   }
 
   public boolean shouldCompileMonolithic() {

@@ -1060,7 +1060,7 @@ public class GenerateJavaScriptAST {
 
       /*
        * Note: the comma expressions here would cause an illegal tree state if
-       * the result expression ended up on the lhs of an assignment. A hack in
+       * the result expression ended up on the lhs of an assCignment. A hack in
        * in endVisit(JBinaryOperation) rectifies the situation.
        */
 

@@ -192,8 +192,6 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
   }
 
-  protected transient int modCount = 0;
-
   protected AbstractList() {
   }
 
@@ -207,11 +205,11 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     throw new UnsupportedOperationException("Add not supported on this list");
   }
 
+  @Override
   public boolean addAll(int index, Collection<? extends E> c) {
-    Iterator<? extends E> iter = c.iterator();
     boolean changed = false;
-    while (iter.hasNext()) {
-      add(index++, iter.next());
+    for (E e : c) {
+      add(index++, e);
       changed = true;
     }
     return changed;

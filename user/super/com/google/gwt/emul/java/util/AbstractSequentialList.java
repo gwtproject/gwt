@@ -38,9 +38,8 @@ public abstract class AbstractSequentialList<E> extends AbstractList<E> {
   public boolean addAll(int index, Collection<? extends E> c) {
     boolean modified = false;
     ListIterator<E> iter = listIterator(index);
-    Iterator<? extends E> colIter = c.iterator();
-    while (colIter.hasNext()) {
-      iter.add(colIter.next());
+    for (E e : c) {
+      iter.add(e);
       modified = true;
     }
     return modified;

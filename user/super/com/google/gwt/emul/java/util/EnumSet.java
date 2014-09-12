@@ -15,6 +15,7 @@
  */
 package java.util;
 
+import com.google.gwt.core.client.impl.SpecializeMethod;
 import com.google.gwt.lang.Array;
 
 /**
@@ -46,7 +47,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
 
       int i = -1, last = -1;
 
-      {
+      IteratorImpl() {
         findNext();
       }
 
@@ -99,13 +100,6 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
     private int size;
 
     /**
-     * Constructs an empty set.
-     */
-    public EnumSetImpl(E[] all) {
-      this(all, Array.createFrom(all), 0);
-    }
-
-    /**
      * Constructs a set taking ownership of the specified set. The size must
      * accurately reflect the number of non-null items in set.
      */
@@ -134,14 +128,14 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
       return new EnumSetImpl<E>(all, clonedSet, size);
     }
 
-    @SuppressWarnings("unchecked")
+    @SpecializeMethod(params = Enum.class, target = "containsEnum")
     @Override
     public boolean contains(Object o) {
-      if (o instanceof Enum) {
-        Enum e = (Enum) o;
-        return set[e.ordinal()] == e;
-      }
-      return false;
+      return (o instanceof Enum) && containsEnum((Enum) o);
+    }
+
+    boolean containsEnum(Enum e) {
+      return e != null && set[e.ordinal()] == e;
     }
 
     @Override
@@ -149,16 +143,17 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
       return new IteratorImpl();
     }
 
-    @SuppressWarnings("unchecked")
+    @SpecializeMethod(params = Enum.class, target = "removeEnum")
     @Override
     public boolean remove(Object o) {
-      if (o instanceof Enum) {
-        Enum e = (Enum) o;
-        if (set[e.ordinal()] == e) {
-          set[e.ordinal()] = null;
-          --size;
-          return true;
-        }
+      return (o instanceof Enum) && removeEnum((Enum) o);
+    }
+
+    boolean removeEnum(Enum e) {
+      if (e != null && set[e.ordinal()] == e) {
+        set[e.ordinal()] = null;
+        --size;
+        return true;
       }
       return false;
     }
@@ -184,13 +179,21 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
     EnumSetImpl<E> s = (EnumSetImpl<E>) other;
     E[] all = s.all;
     E[] oldSet = s.set;
-    E[] newSet = Array.createFrom(oldSet);
-    for (int i = 0, c = oldSet.length; i < c; ++i) {
-      if (oldSet[i] == null) {
-        newSet[i] = all[i];
+    int originalSize = s.size;
+    E[] newSet;
+    if (originalSize > 0) {
+      newSet = Array.createFrom(oldSet);
+      if (originalSize < all.length) {
+        for (int i = 0, c = oldSet.length; i < c; ++i) {
+          if (oldSet[i] == null) {
+            newSet[i] = all[i];
+          }
+        }
       }
+    } else {
+      newSet = Array.clone(all);
     }
-    return new EnumSetImpl<E>(all, newSet, all.length - s.size);
+    return new EnumSetImpl<E>(all, newSet, all.length - originalSize);
   }
 
   public static <E extends Enum<E>> EnumSet<E> copyOf(Collection<E> c) {
@@ -200,9 +203,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
 
     Iterator<E> it = c.iterator();
     E first = it.next();
-    Class<E> clazz = first.getDeclaringClass();
-    EnumSet<E> set = EnumSet.noneOf(clazz);
-    set.add(first);
+    EnumSet<E> set = EnumSet.of(first);
     while (it.hasNext()) {
       set.add(it.next());
     }
@@ -226,18 +227,11 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
   }
 
   public static <E extends Enum<E>> EnumSet<E> of(E first, E... rest) {
-    E[] all = first.getDeclaringClass().getEnumConstants();
-    E[] set = Array.createFrom(all);
-    set[first.ordinal()] = first;
-    int size = 1;
+    EnumSet<E> set = EnumSet.of(first);
     for (E e : rest) {
-      int ordinal = e.ordinal();
-      if (set[ordinal] == null) {
-        set[ordinal] = e;
-        ++size; // count only new elements
-      }
+      set.add(e);
     }
-    return new EnumSetImpl<E>(all, set, size);
+    return set;
   }
 
   public static <E extends Enum<E>> EnumSet<E> range(E from, E to) {

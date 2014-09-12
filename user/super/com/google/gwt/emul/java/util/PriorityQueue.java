@@ -89,10 +89,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
     if (c.isEmpty()) {
       return false;
     }
-    Iterator<? extends E> iter = c.iterator();
-    while (iter.hasNext()) {
-      heap.add(iter.next());
-    }
+    heap.addAll(c);
     makeHeap(0);
     return true;
   }

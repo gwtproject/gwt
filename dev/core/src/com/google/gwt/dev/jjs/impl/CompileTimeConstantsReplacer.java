@@ -73,6 +73,6 @@ public class CompileTimeConstantsReplacer {
     }
   }
   public static void exec(JProgram program) {
-    new CompileTimeConstantsReplacingVisitor(program).accept(program);
+    //new CompileTimeConstantsReplacingVisitor(program).accept(program);
   }
 }

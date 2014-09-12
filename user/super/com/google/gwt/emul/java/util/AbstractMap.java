@@ -123,8 +123,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   }
 
   public boolean containsValue(Object value) {
-    for (Iterator<Entry<K, V>> iter = entrySet().iterator(); iter.hasNext();) {
-      Entry<K, V> entry = iter.next();
+    for (Entry<K, V> entry : entrySet()) {
       V v = entry.getValue();
       if (Objects.equals(value, v)) {
         return true;
@@ -143,11 +142,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     }
 
     // Perhaps it was null and we don't contain the key?
-    if (ourValue == null && !containsKey(key)) {
-      return false;
-    }
-
-    return true;
+    return !(ourValue == null && !containsKey(key));
   }
 
   public abstract Set<Entry<K, V>> entrySet();
@@ -247,10 +242,9 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     throw new UnsupportedOperationException("Put not supported on this map");
   }
 
+  @Override
   public void putAll(Map<? extends K, ? extends V> t) {
-    for (Iterator<? extends Entry<? extends K, ? extends V>> iter = t.entrySet().iterator();
-        iter.hasNext(); ) {
-      Entry<? extends K, ? extends V> e = iter.next();
+    for (Entry<? extends K, ? extends V> e : t.entrySet()) {
       put(e.getKey(), e.getValue());
     }
   }
@@ -268,8 +262,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   public String toString() {
     String s = "{";
     boolean comma = false;
-    for (Iterator<Entry<K, V>> iter = entrySet().iterator(); iter.hasNext();) {
-      Entry<K, V> entry = iter.next();
+    for (Entry<K, V> entry : entrySet()) {
       if (comma) {
         s += ", ";
       } else {

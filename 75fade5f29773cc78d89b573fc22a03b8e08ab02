@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "702b7bc3_b70b8bb6",
+        "filename": "user/test/com/google/gwt/resources/rg/CssOutputTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-13T00:04:12Z",
+      "side": 1,
+      "message": "[error] Unused import - org.mockito.Mockito.times.",
+      "revId": "75fade5f29773cc78d89b573fc22a03b8e08ab02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_1709b7bd",
+        "filename": "user/test/com/google/gwt/resources/rg/CssOutputTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-13T00:04:12Z",
+      "side": 1,
+      "message": "[error] Unused import - org.mockito.Mockito.verifyZeroInteractions.",
+      "revId": "75fade5f29773cc78d89b573fc22a03b8e08ab02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

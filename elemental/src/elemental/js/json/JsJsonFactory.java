@@ -29,6 +29,7 @@ import elemental.json.JsonValue;
 public class JsJsonFactory implements JsonFactory {
 
   public JsonString create(String string) {
+    assert string != null;
     return JsJsonString.create(string);
   }
 

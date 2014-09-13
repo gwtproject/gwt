@@ -15,6 +15,9 @@
  */
 package java.util;
 
+import static com.google.gwt.core.shared.impl.GwtPreconditions.checkArrayElementIndex;
+import static com.google.gwt.core.shared.impl.GwtPreconditions.checkElement;
+
 import java.io.Serializable;
 
 /**
@@ -27,12 +30,6 @@ import java.io.Serializable;
  */
 public class Vector<E> extends AbstractList<E> implements List<E>,
     RandomAccess, Cloneable, Serializable {
-
-  private static void checkArrayIndex(int index, int size) {
-    if (index < 0 || index >= size) {
-      throw new ArrayIndexOutOfBoundsException(index);
-    }
-  }
 
   private transient ArrayList<E> arrayList;
 
@@ -71,7 +68,7 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public void add(int index, E o) {
-    checkArrayIndex(index, size() + 1);
+    checkArrayElementIndex(index, size() + 1);
     arrayList.add(index, o);
   }
 
@@ -82,7 +79,7 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public boolean addAll(int index, Collection<? extends E> c) {
-    checkArrayIndex(index, size() + 1);
+    checkArrayElementIndex(index, size() + 1);
     return arrayList.addAll(index, c);
   }
 
@@ -134,15 +131,13 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
   }
 
   public E firstElement() {
-    if (isEmpty()) {
-      throw new NoSuchElementException();
-    }
+    checkElement(!isEmpty());
     return get(0);
   }
 
   @Override
   public E get(int index) {
-    checkArrayIndex(index, size());
+    checkArrayElementIndex(index, size());
     return arrayList.get(index);
   }
 
@@ -152,9 +147,6 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
   }
 
   public int indexOf(Object elem, int index) {
-    if (index < 0) {
-      indexOutOfBounds(index, size());
-    }
     return arrayList.indexOf(elem, index);
   }
 
@@ -173,9 +165,7 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
   }
 
   public E lastElement() {
-    if (isEmpty()) {
-      throw new NoSuchElementException();
-    }
+    checkElement(!isEmpty());
     return get(size() - 1);
   }
 
@@ -185,15 +175,12 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
   }
 
   public int lastIndexOf(Object o, int index) {
-    if (index >= size()) {
-      indexOutOfBounds(index, size());
-    }
     return arrayList.lastIndexOf(o, index);
   }
 
   @Override
   public E remove(int index) {
-    checkArrayIndex(index, size());
+    checkArrayElementIndex(index, size());
     return arrayList.remove(index);
   }
 
@@ -216,7 +203,7 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public E set(int index, E elem) {
-    checkArrayIndex(index, size());
+    checkArrayElementIndex(index, size());
     return arrayList.set(index, elem);
   }
 
@@ -225,9 +212,6 @@ public class Vector<E> extends AbstractList<E> implements List<E>,
   }
 
   public void setSize(int size) {
-    if (size < 0) {
-      throw new ArrayIndexOutOfBoundsException();
-    }
     arrayList.setSize(size);
   }
 

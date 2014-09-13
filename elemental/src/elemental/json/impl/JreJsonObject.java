@@ -133,7 +133,11 @@ public class JreJsonObject extends JreJsonValue implements JsonObject {
   }
 
   public void put(String key, String value) {
-    put(key, factory.create(value));
+    if (value == null) {
+      put(key, factory.createNull());
+    } else {
+      put(key, factory.create(value));
+    }
   }
 
   public void put(String key, double value) {

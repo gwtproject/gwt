@@ -132,7 +132,11 @@ public class JreJsonArray extends JreJsonValue implements JsonArray {
   }
 
   public void set(int index, String string) {
-    set(index, factory.create(string));
+    if (string == null) {
+      set(index, factory.createNull());
+    } else {
+      set(index, factory.create(string));
+    }
   }
 
   public void set(int index, double number) {

@@ -34,6 +34,24 @@
       "revId": "fccb2810502b25f933822dca779bd8c1c2a52846",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c4cb62_4cd1ac8b",
+        "filename": "user/src/com/google/gwt/core/client/impl/Coercions.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-13T01:47:15Z",
+      "side": 1,
+      "message": "Ok let\u0027s go with what Roberto is suggesting so that we could have things inlined in java level.\nAndre, can you also add a test for this utility? It will be little tricky, we need to be sure it is not evaluated by JDT. So something like following should work:\n\n // x should be equal to 2\n int _2 \u003d Random.nextInt(1) + 1;\n assertEquals(..., ensureInt(_2 * Integer.MAX))",
+      "parentUuid": "f0c4cb62_9d27753b",
+      "revId": "fccb2810502b25f933822dca779bd8c1c2a52846",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

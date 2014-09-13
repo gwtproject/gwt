@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "702b7bc3_17eb7612",
+        "filename": "user/test/com/google/gwt/uibinder/rebind/FieldWriterOfLazyDomElementTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-13T01:30:10Z",
+      "side": 1,
+      "message": "[error] Unused import - org.mockito.Mockito.times.",
+      "revId": "b85a5ef8fbd28fd0662dd14230633d5a5c648398",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_77f912e5",
+        "filename": "user/test/com/google/gwt/uibinder/rebind/FieldWriterOfLazyDomElementTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-13T01:30:10Z",
+      "side": 1,
+      "message": "[error] Unused import - org.mockito.Mockito.verify.",
+      "revId": "b85a5ef8fbd28fd0662dd14230633d5a5c648398",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_57fe8ece",
+        "filename": "user/test/com/google/gwt/uibinder/rebind/FieldWriterOfLazyDomElementTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-13T01:30:10Z",
+      "side": 1,
+      "message": "[error] Unused import - org.mockito.Mockito.verifyNoMoreInteractions.",
+      "revId": "b85a5ef8fbd28fd0662dd14230633d5a5c648398",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9099cf85_5b226f94",
+        "filename": "user/test/com/google/gwt/resources/rg/CssOutputTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-13T00:03:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0c4cb62_b74a926b",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 28
+      },
+      "revId": "f0f945ef82cadf349ca8f0b97f29e3444b452bf6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0c4cb62_97575605",
         "filename": "user/test/com/google/gwt/resources/rg/CssOutputTestCase.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-09-12T21:33:03Z",
       "side": 1,
       "message": "EasyMock tests tend to be overly strict and we don\u0027t need to do that in Mockito. Here, we don\u0027t really care how many times getGeneratorContext() is called, so I think we can delete this line and the next.\n\n(The tryCreateResource() and commitResource() calls are the important part of the test.)",
+      "range": {
+        "startLine": 71,
+        "startChar": 38,
+        "endLine": 71,
+        "endChar": 39
+      },
+      "revId": "f0f945ef82cadf349ca8f0b97f29e3444b452bf6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9099cf85_7b2733a3",
+        "filename": "user/test/com/google/gwt/resources/rg/CssOutputTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-13T00:03:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0c4cb62_97575605",
       "range": {
         "startLine": 71,
         "startChar": 38,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9099cf85_bb28bb6f",
+        "filename": "user/test/com/google/gwt/resources/rg/CssOutputTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-13T00:03:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0c4cb62_57bcdec5",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 10
+      },
+      "revId": "f0f945ef82cadf349ca8f0b97f29e3444b452bf6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0c4cb62_b79d3255",
         "filename": "user/test/com/google/gwt/resources/rg/CssOutputTestCase.java",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2014-09-12T21:33:03Z",
       "side": 1,
       "message": "Similarly, we only need these two verify calls. (And so on in the rest of the file.)",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 113,
+        "endChar": 10
+      },
+      "revId": "f0f945ef82cadf349ca8f0b97f29e3444b452bf6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9099cf85_db357fc6",
+        "filename": "user/test/com/google/gwt/resources/rg/CssOutputTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-13T00:03:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0c4cb62_b79d3255",
       "range": {
         "startLine": 113,
         "startChar": 4,

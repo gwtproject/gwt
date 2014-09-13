@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1076bf12_a6126670",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-09-13T21:19:22Z",
+      "side": 1,
+      "message": "We have a convention of linking to issues using a footer line (just next to the Change-Id line, without blank line in between):\n\n Bug: issue 8898\n\nAs a bonus, reviews become searchable in Gerrit using \"tr:8898\" (\"tr\" for \"tracking number\") as the search term.",
+      "range": {
+        "startLine": 7,
+        "startChar": 67,
+        "endLine": 7,
+        "endChar": 72
+      },
+      "revId": "6f5d26a27fbad092b4bc2a014f8fd4ec15d4af28",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0aa0b52_8763dd1f",
+        "filename": "elemental/src/elemental/js/json/JsJsonFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-09-13T21:19:22Z",
+      "side": 1,
+      "message": "+1 (given we have this in JreJsonFactory)",
+      "revId": "6f5d26a27fbad092b4bc2a014f8fd4ec15d4af28",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

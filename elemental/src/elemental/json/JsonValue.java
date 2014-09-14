@@ -36,6 +36,16 @@ public interface JsonValue {
   String asString();
 
   /**
+   * Coerces the underlying value to a JsonObject according to the rules of JavaScript coercion.
+   */
+  JsonObject asObject();
+
+  /**
+   * Coerces the underlying value to a JsonArray according to the rules of JavaScript coercion.
+   */
+  JsonArray asArray();
+
+  /**
    * Returns an enumeration representing the fundamental JSON type.
    */
   JsonType getType();

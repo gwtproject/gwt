@@ -19,10 +19,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 
 import elemental.json.JsonArray;
-import elemental.json.JsonBoolean;
-import elemental.json.JsonNumber;
 import elemental.json.JsonObject;
-import elemental.json.JsonString;
 import elemental.json.JsonValue;
 
 /**
@@ -45,24 +42,24 @@ final public class JsJsonObject extends JsJsonValue
   }-*/;
 
   public JsonArray getArray(String key) {
-    return (JsonArray) get(key);
+    return get(key).asArray();
   }
 
   public boolean getBoolean(String key) {
-    return ((JsonBoolean) get(key)).getBoolean();
+    return get(key).asBoolean();
   }
 
 
   public double getNumber(String key) {
-    return ((JsonNumber) get(key)).getNumber();
+    return get(key).asNumber();
   }
 
   public JsonObject getObject(String key) {
-    return (JsonObject) get(key);
+    return get(key).asObject();
   }
 
   public String getString(String key) {
-    return ((JsonString) get(key)).getString();
+    return get(key).asString();
   }
 
   public native boolean hasKey(String key) /*-{

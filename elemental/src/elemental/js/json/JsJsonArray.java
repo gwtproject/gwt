@@ -16,15 +16,11 @@
 package elemental.js.json;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArrayNumber;
 import com.google.gwt.core.client.JsArrayString;
 
 import elemental.js.util.JsArrayOf;
 import elemental.json.JsonArray;
-import elemental.json.JsonBoolean;
-import elemental.json.JsonNumber;
 import elemental.json.JsonObject;
-import elemental.json.JsonString;
 import elemental.json.JsonValue;
 
 /**
@@ -45,23 +41,23 @@ final public class JsJsonArray extends JsJsonValue
   }-*/;
 
   public JsonArray getArray(int index) {
-    return (JsonArray) get(index);
+    return get(index).asArray();
   }
 
   public boolean getBoolean(int index) {
-    return ((JsonBoolean) get(index)).getBoolean();
+    return get(index).asBoolean();
   }
 
   public double getNumber(int index) {
-    return ((JsonNumber) get(index)).getNumber();
+    return get(index).asNumber();
   }
 
   public JsonObject getObject(int index) {
-    return (JsonObject) get(index);
+    return get(index).asObject();
   }
 
   public String getString(int index) {
-    return ((JsonString) get(index)).getString();
+    return get(index).asString();
   }
 
   @Override

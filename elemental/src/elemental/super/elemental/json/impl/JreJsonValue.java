@@ -19,10 +19,12 @@ import com.google.gwt.core.client.JsonUtils;
 
 import elemental.json.JsonValue;
 
+import java.io.Serializable;
+
 /**
  * Client-side Dev-Mode implementation of JreJsonValue.
  */
-public abstract class JreJsonValue implements JsonValue {
+public abstract class JreJsonValue implements JsonValue, Serializable {
   public abstract Object getObject();
   public abstract void traverse(JsonVisitor visitor, JsonContext ctx);
 

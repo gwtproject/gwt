@@ -738,6 +738,10 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     return method;
   }
 
+  public JMethod maybeGetIndexedMethod(String string) {
+    return indexedMethods.get(string);
+  }
+
   public Collection<JMethod> getIndexedMethods() {
     return Collections.unmodifiableCollection(indexedMethods.values());
   }

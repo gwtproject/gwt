@@ -1901,10 +1901,11 @@ public class GenerateJavaScriptAST {
       if (program.isReferenceOnly(program.getIndexedType("Class"))) {
         return Collections.emptyList();
       }
-      // Include in the preamble all classes that are reachable for Class.createForClass and
-      // Class.createForEnum that are not JSOs nor interfaces.
+      // Include in the preamble all classes that are reachable for Class.createForClass,
+      // Class.createForInterface
       SortedSet<JDeclaredType> reachableClasses =
-          computeReachableTypes(program.getTypeClassLiteralHolder().getClinitMethod());
+          computeReachableTypes(program.getIndexedMethod("Class.createForClass"),
+              program.getIndexedMethod("Class.createForInterface"));
 
       assert !modularCompile || checkCoreModulePreambleComplete(program,
           program.getTypeClassLiteralHolder().getClinitMethod());
@@ -1912,7 +1913,7 @@ public class GenerateJavaScriptAST {
       // TODO(stalcup): modify CFA to not artificially add all JSOs.
       Set<JDeclaredType> orderedPreambleClasses = Sets.newLinkedHashSet();
       for (JDeclaredType type : reachableClasses) {
-        if (typeOracle.isJavaScriptObject(type) || alreadyProcessedTypes.contains(type)) {
+        if (alreadyProcessedTypes.contains(type)) {
           continue;
         }
         insertInTopologicalOrder(type, orderedPreambleClasses);
@@ -1952,11 +1953,15 @@ public class GenerateJavaScriptAST {
     }
 
     /**
-     * Computes the set of types whose methods or fields are reachable from {@code method}.
+     * Computes the set of types whose methods or fields are reachable from {@code methods}.
      */
-    private SortedSet<JDeclaredType> computeReachableTypes(JMethod method) {
+    private SortedSet<JDeclaredType> computeReachableTypes(JMethod... methods) {
       ControlFlowAnalyzer cfa = new ControlFlowAnalyzer(program);
-      cfa.traverseFrom(method);
+      for (JMethod method: methods) {
+        if (method != null) {
+          cfa.traverseFrom(method);
+        }
+      }
 
       // Get the list of enclosing classes that were not excluded.
       SortedSet<JDeclaredType> reachableTypes = ImmutableSortedSet.copyOf(HasName.BY_NAME_COMPARATOR,

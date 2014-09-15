@@ -611,6 +611,7 @@ public class Pruner {
     OptimizerStats stats = new OptimizerStats(NAME);
 
     ControlFlowAnalyzer livenessAnalyzer = new ControlFlowAnalyzer(program);
+    livenessAnalyzer.rescue(program.typeOracle.getInstantiatedJsoTypesViaCast());
     livenessAnalyzer.setForPruning();
 
     // SPECIAL: Immortal codegen types are never pruned

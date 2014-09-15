@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "702b7bc3_1a039b77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-15T19:54:41Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "d33270988fd1aa9576b6014477f98749665a7623",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_7a11f7b9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CompileTimeConstantsReplacer.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-15T19:54:41Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "d33270988fd1aa9576b6014477f98749665a7623",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_5a16b3b3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2979,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-15T19:54:41Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "d33270988fd1aa9576b6014477f98749665a7623",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702b7bc3_ba0b6f89",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 3026,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-15T19:54:41Z",
+      "side": 1,
+      "message": "[info] Unused @param tag for \u0027optimizeCompileTimeconstants\u0027.",
+      "revId": "d33270988fd1aa9576b6014477f98749665a7623",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

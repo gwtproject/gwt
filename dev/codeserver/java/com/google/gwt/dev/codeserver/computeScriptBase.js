@@ -48,5 +48,6 @@ function computeScriptBase() {
     }
   }
 
-  $wnd.alert('Unable to load Super Dev Mode version of ' + __MODULE_NAME__ + ".");
+  $wnd.alert('Unable to load Super Dev Mode version of __MODULE_NAME__.');
+  return null;
 }

@@ -59,15 +59,25 @@ public class PropertiesUtil {
 
     // Add property providers
     startPos = selectionScript.indexOf("// __PROPERTIES_END__");
-    if (startPos != -1) {
-      for (SelectionProperty p : context.getProperties()) {
-        String text = generatePropertyProvider(logger, p,
-            context.getConfigurationProperties());
-        selectionScript.insert(startPos, text);
-        startPos += text.length();
-      }
+    if (startPos == -1) {
+      return selectionScript;
     }
+    selectionScript.insert(startPos, generatePropertyProviders(logger, context));
     return selectionScript;
+  }
+
+  /**
+   * Generates JavaScript to create a property provider for each non-derived binding property
+   * in the given linker. The JavaScript mutates the "providers" and "values" variables which
+   * must already exist.
+   */
+  public static String generatePropertyProviders(TreeLogger logger, LinkerContext context)
+      throws UnableToCompleteException {
+    StringBuilder out = new StringBuilder();
+    for (SelectionProperty p : context.getProperties()) {
+      out.append(generatePropertyProvider(logger, p, context.getConfigurationProperties()));
+    }
+    return out.toString();
   }
 
   private static String generatePropertyProvider(TreeLogger logger,

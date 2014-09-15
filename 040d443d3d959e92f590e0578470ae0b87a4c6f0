@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d06fc739_de06453f",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-15T22:55:41Z",
+      "side": 1,
+      "message": "i wonder if this should be in PropertiesUtil.java",
+      "range": {
+        "startLine": 264,
+        "startChar": 11,
+        "endLine": 264,
+        "endChar": 28
+      },
+      "revId": "040d443d3d959e92f590e0578470ae0b87a4c6f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc739_fe03012c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-15T22:55:41Z",
+      "side": 1,
+      "message": "i wonder if this should be in PropertiesUtil.java",
+      "range": {
+        "startLine": 286,
+        "startChar": 11,
+        "endLine": 286,
+        "endChar": 30
+      },
+      "revId": "040d443d3d959e92f590e0578470ae0b87a4c6f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc739_5396ceca",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/computeScriptBase.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-15T22:55:41Z",
+      "side": 1,
+      "message": "it\u0027s missed details like this that make me like Java",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 14
+      },
+      "revId": "040d443d3d959e92f590e0578470ae0b87a4c6f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc739_93cf6664",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/nomodule.nocache.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-15T22:55:41Z",
+      "side": 1,
+      "message": "please also describe what type of variable \"providers\" and \"values\" are.\n\nare they lists of strings? sets of objects? maps from string to string?",
+      "range": {
+        "startLine": 21,
+        "startChar": 11,
+        "endLine": 21,
+        "endChar": 34
+      },
+      "revId": "040d443d3d959e92f590e0578470ae0b87a4c6f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc739_b39f0281",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/nomodule.nocache.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-15T22:55:41Z",
+      "side": 1,
+      "message": "this line reads really strange to me.\n\n\"values\" sounds like a list of value objects, but here we\u0027re iterating over it and calling each content \"key\"",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 29
+      },
+      "revId": "040d443d3d959e92f590e0578470ae0b87a4c6f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

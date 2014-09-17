@@ -15,10 +15,11 @@
  */
 package com.google.gwt.dev.javac.asm;
 
-import com.google.gwt.dev.asm.AnnotationVisitor;
-import com.google.gwt.dev.asm.Opcodes;
 import com.google.gwt.dev.javac.asm.CollectClassData.AnnotationEnum;
 import com.google.gwt.dev.util.StringInterner;
+
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.Opcodes;
 
 import java.util.ArrayList;
 import java.util.HashMap;

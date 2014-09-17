@@ -15,14 +15,15 @@
  */
 package com.google.gwt.dev.shell.rewrite;
 
-import com.google.gwt.dev.asm.ClassVisitor;
-import com.google.gwt.dev.asm.MethodVisitor;
-import com.google.gwt.dev.asm.Opcodes;
-import com.google.gwt.dev.asm.Type;
-import com.google.gwt.dev.asm.commons.GeneratorAdapter;
-import com.google.gwt.dev.asm.commons.Method;
 import com.google.gwt.dev.shell.JavaScriptHost;
 import com.google.gwt.dev.util.Name.InternalName;
+
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.commons.GeneratorAdapter;
+import org.objectweb.asm.commons.Method;
 
 import java.lang.reflect.Modifier;
 import java.util.Locale;

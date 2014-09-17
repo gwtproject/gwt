@@ -150,6 +150,14 @@ class Outbox {
   }
 
   /**
+   * Returns true if the Outbox contains the result of a "stub compile". (That is,
+   * precompile is off and we haven't compiled yet.)
+   */
+  boolean containsStubCompile() {
+    return publishedJob == null;
+  }
+
+  /**
    * Returns the module name that will be sent to the compiler (before renaming).
    */
   String getInputModuleName() {
@@ -285,5 +293,4 @@ class Outbox {
     File prefix = new File(getOutputDir().getExtraDir(), getOutputModuleName());
     return new File(prefix, path);
   }
-
 }

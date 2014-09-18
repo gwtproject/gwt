@@ -27,6 +27,7 @@ import com.google.gwt.dev.javac.testing.impl.MockResource;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.thirdparty.guava.common.base.Charsets;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
@@ -36,6 +37,8 @@ import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.Set;
 
@@ -437,6 +440,65 @@ public class CompilerTest extends ArgProcessorTestBase {
           "<entry-point class='com.foo.TestEntryPoint'/>",
           "</module>");
 
+  private MockResource myWidgetUiXml =
+      JavaResourceBase.createMockResource("com/foo/MyWidget.ui.xml",
+          "<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'",
+          "    xmlns:g='urn:import:com.google.gwt.user.client.ui'>",
+          "<g:HTMLPanel>",
+          "  Hello, <g:ListBox ui:field='myListBox' visibleItemCount='1'/>.",
+          "</g:HTMLPanel>",
+          "</ui:UiBinder>");
+
+  private MockJavaResource myWidget =
+      JavaResourceBase.createMockJavaResource("com.foo.MyWidget",
+          "package com.foo;",
+          "import com.google.gwt.core.client.GWT;",
+          "import com.google.gwt.core.client.JavaScriptObject;",
+          "import com.google.gwt.uibinder.client.UiBinder;",
+          "import com.google.gwt.uibinder.client.UiField;",
+          "import com.google.gwt.user.client.ui.Composite;",
+          "import com.google.gwt.user.client.ui.ListBox;",
+          "import com.google.gwt.user.client.ui.Widget;",
+          "public class MyWidget extends Composite {",
+          "  interface Binder extends UiBinder<Widget, MyWidget> {",
+          "  }",
+          "  private static final Binder binder = GWT.create(Binder.class);",
+          "  @UiField ListBox myListBox;",
+          "  public MyWidget() {",
+          "    init();",
+          "  }",
+          "  protected void init() {",
+          "    initWidget(binder.createAndBindUi(this));",
+          "    myListBox.addItem(\"One\");",
+          "  }",
+          "}");
+
+  private MockJavaResource uiBinderTestEntryPointResource =
+      JavaResourceBase.createMockJavaResource("com.foo.TestEntryPoint",
+          "package com.foo;",
+          "import com.google.gwt.core.client.EntryPoint;",
+          "import com.google.gwt.dom.client.Node;",
+          "import com.google.gwt.user.client.ui.RootPanel;",
+          "public class TestEntryPoint implements EntryPoint {",
+          "  private Node node;",
+          "  private MyWidget widget;",
+          "  @Override",
+          "  public void onModuleLoad() {",
+          "    node = null; widget = new MyWidget();",
+          "    RootPanel.get().add(widget);",
+          "  }",
+          "}");
+
+  private MockResource uiBinderTestModuleResource =
+      JavaResourceBase.createMockResource("com/foo/UiBinderTestModule.gwt.xml",
+          "<module>",
+          "  <inherits name='com.google.gwt.core.Core'/>",
+          "  <inherits name='com.google.gwt.user.User' />",
+          "  <source path=''/>",
+          "  <set-property name='user.agent' value='safari'/>",
+          "  <entry-point class='com.foo.TestEntryPoint'/>",
+          "</module>");
+
   private Set<String> emptySet = stringSet();
 
   public CompilerTest() {
@@ -578,6 +640,12 @@ public class CompilerTest extends ArgProcessorTestBase {
     checkPerFileRecompile_dateStampChange(JsOutputOption.DETAILED);
   }
 
+  public void testPerFileRecompile_deterministicUiBinder() throws UnableToCompleteException, IOException,
+      InterruptedException {
+    checkPerFileRecompile_deterministicUiBinder(JsOutputOption.PRETTY);
+    checkPerFileRecompile_deterministicUiBinder(JsOutputOption.DETAILED);
+  }
+
   public void testPerFileRecompile_unstableGeneratorReferencesModifiedType()
       throws UnableToCompleteException, IOException, InterruptedException {
     checkPerFileRecompile_unstableGeneratorReferencesModifiedType(JsOutputOption.PRETTY);
@@ -682,7 +750,7 @@ public class CompilerTest extends ArgProcessorTestBase {
 
     // Recompile with no changes, which should not trigger any Generator runs.
     compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
-        Lists.<MockResource> newArrayList(), relinkMinimalRebuildCache, emptySet, output);
+        Lists.<MockResource>newArrayList(), relinkMinimalRebuildCache, emptySet, output);
 
     // Since there were no changes BarReferencesFoo Generator was not run again.
     assertEquals(1, BarReferencesFooGenerator.runCount);
@@ -690,7 +758,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     // Recompile with a modified Foo class, which should invalidate Bar which was generated by a
     // GWT.create() call in the entry point.
     compileToJs(compilerOptions, relinkApplicationDir, "com.foo.SimpleModule",
-        Lists.<MockResource> newArrayList(fooResource), relinkMinimalRebuildCache,
+        Lists.<MockResource>newArrayList(fooResource), relinkMinimalRebuildCache,
         stringSet("com.foo.TestEntryPoint", "com.foo.Foo", "com.foo.Bar"), output);
 
     // BarReferencesFoo Generator was run again.
@@ -818,6 +886,18 @@ public class CompilerTest extends ArgProcessorTestBase {
         stringSet("com.foo.TestEntryPoint", "com.foo.SimpleModel"), output);
 
     assertTrue(originalJs.equals(relinkedJs));
+  }
+
+  private void checkPerFileRecompile_deterministicUiBinder(JsOutputOption output)
+      throws UnableToCompleteException, IOException, InterruptedException {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+
+    checkRecompiledModifiedApp(compilerOptions, "com.foo.UiBinderTestModule", Lists.newArrayList(
+        uiBinderTestModuleResource, uiBinderTestEntryPointResource, myWidgetUiXml), myWidget,
+        myWidget, stringSet("com.foo.MyWidget", "com.foo.MyWidget_BinderImpl_GenBundle",
+        "com.foo.MyWidget$Binder", "com.foo.MyWidget_BinderImpl$Template", "com.foo.TestEntryPoint",
+        "com.foo.MyWidget_BinderImpl", "com.foo.MyWidget_BinderImpl$Widgets"), output);
   }
 
   private void checkPerFileRecompile_packagePrivateOverride(JsOutputOption output)
@@ -1047,59 +1127,69 @@ public class CompilerTest extends ArgProcessorTestBase {
     System.setProperty(GWT_PERSISTENTUNITCACHE, "false");
     // Wait 1 second so that any new file modification times are actually different.
     Thread.sleep(1001);
-    TreeLogger logger = TreeLogger.NULL;
-
+    StringWriter compilerOutput = new StringWriter();
+    PrintWriterTreeLogger logger = new PrintWriterTreeLogger(new PrintWriter(compilerOutput));
+    logger.setMaxDetail(TreeLogger.WARN);
     // We might be reusing the same application dir but we want to make sure that the output dir is
     // clean to avoid confusion when returning the output JS.
-    File outputDir = new File(applicationDir.getPath() + File.separator + moduleName);
-    if (outputDir.exists()) {
-      Util.recursiveDelete(outputDir, true);
-    }
+    try {
+      File outputDir = new File(applicationDir.getPath() + File.separator + moduleName);
+      if (outputDir.exists()) {
+        Util.recursiveDelete(outputDir, true);
+      }
 
-    // Fake out the resource loader to read resources both from the normal classpath as well as this
-    // new application directory.
-    ResourceLoader resourceLoader = ResourceLoaders.forClassLoader(Thread.currentThread());
-    resourceLoader =
-        ResourceLoaders.forPathAndFallback(ImmutableList.of(applicationDir), resourceLoader);
+      // Fake out the resource loader to read resources both from the normal classpath as well as this
+      // new application directory.
+      ResourceLoader resourceLoader = ResourceLoaders.forClassLoader(Thread.currentThread());
+      resourceLoader =
+          ResourceLoaders.forPathAndFallback(ImmutableList.of(applicationDir), resourceLoader);
 
-    // Setup options to perform a per-file compile, output to this new application directory and
-    // compile the given module.
-    compilerOptions.setCompilePerFile(true);
-    compilerOptions.setWarDir(applicationDir);
-    compilerOptions.setModuleNames(ImmutableList.of(moduleName));
-    compilerOptions.setOutput(output);
+      // Setup options to perform a per-file compile, output to this new application directory and
+      // compile the given module.
+      compilerOptions.setCompilePerFile(true);
+      compilerOptions.setWarDir(applicationDir);
+      compilerOptions.setModuleNames(ImmutableList.of(moduleName));
+      compilerOptions.setOutput(output);
 
-    CompilerContext compilerContext = new CompilerContext.Builder().options(compilerOptions)
-        .minimalRebuildCache(minimalRebuildCache).build();
+      CompilerContext compilerContext = new CompilerContext.Builder().options(compilerOptions)
+          .minimalRebuildCache(minimalRebuildCache).build();
 
-    // Write the Java/XML/etc resources that make up the test application.
-    for (MockResource applicationResource : applicationResources) {
-      writeResourceTo(applicationResource, applicationDir);
-    }
+      // Write the Java/XML/etc resources that make up the test application.
+      for (MockResource applicationResource : applicationResources) {
+        writeResourceTo(applicationResource, applicationDir);
+      }
 
-    // Cause the module to be cached with a reference to the prefixed resource loader so that the
-    // compile process will see those resources.
-    ModuleDefLoader.clearModuleCache();
-    ModuleDefLoader.loadFromResources(logger, compilerContext, moduleName, resourceLoader, true);
+      // Cause the module to be cached with a reference to the prefixed resource loader so that the
+      // compile process will see those resources.
+      ModuleDefLoader.clearModuleCache();
+      ModuleDefLoader.loadFromResources(logger, compilerContext, moduleName, resourceLoader, true);
 
-    // Run the compile.
-    Compiler compiler = new Compiler(compilerOptions, minimalRebuildCache);
-    compiler.run(logger);
+      // Run the compile.
+      Compiler compiler = new Compiler(compilerOptions, minimalRebuildCache);
+      compiler.run(logger);
 
-    // Find, read and return the created JS.
-    File outputJsFile = null;
-    outputDir = new File(applicationDir.getPath() + File.separator + moduleName);
-    if (outputDir.exists()) {
-      for (File outputFile : outputDir.listFiles()) {
-        if (outputFile.getPath().endsWith(".cache.js")) {
-          outputJsFile = outputFile;
-          break;
+      // Find, read and return the created JS.
+      File outputJsFile = null;
+      outputDir = new File(applicationDir.getPath() + File.separator + moduleName);
+      if (outputDir.exists()) {
+        for (File outputFile : outputDir.listFiles()) {
+          if (outputFile.getPath().endsWith(".cache.js")) {
+            outputJsFile = outputFile;
+            break;
+          }
         }
       }
+      if (outputJsFile == null) {
+        System.out.println(compilerOutput.getBuffer());
+      }
+      assertNotNull(outputJsFile);
+      assertEquals(expectedStaleTypeNames, minimalRebuildCache.getStaleTypeNames());
+      return Files.toString(outputJsFile, Charsets.UTF_8);
+
+    } catch (UnableToCompleteException e) {
+      System.out.println(compilerOutput.getBuffer());
+      throw e;
     }
-    assertNotNull(outputJsFile);
-    assertEquals(expectedStaleTypeNames, minimalRebuildCache.getStaleTypeNames());
-    return Files.toString(outputJsFile, Charsets.UTF_8);
   }
 
   private Set<String> stringSet(String... strings) {

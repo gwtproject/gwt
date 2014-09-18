@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "901c6ffc_40322226",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/AbstractFieldWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-18T19:26:55Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "6becb01efc94cf9e87b83d38abc8e25f5d26c1d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

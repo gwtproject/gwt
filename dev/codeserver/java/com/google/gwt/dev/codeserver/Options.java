@@ -54,7 +54,7 @@ public class Options {
   private ImmutableList<String> args;
   private Set<String> tags = new LinkedHashSet<String>();
 
-  private boolean compilePerFile = false;
+  private boolean compilePerFile = true;
   private boolean noPrecompile = false;
   private boolean isCompileTest = false;
   private File workDir;
@@ -287,18 +287,20 @@ public class Options {
   private class ArgProcessor extends ArgProcessorBase {
 
     public ArgProcessor() {
-      registerHandler(new NoPrecompileFlag());
+      registerHandler(new AllowMissingSourceDirFlag());
+      registerHandler(new BindAddressFlag());
+      registerHandler(new CompilePerFileFlag());
       registerHandler(new CompileTestFlag());
       registerHandler(new CompileTestRecompilesFlag());
-      registerHandler(new BindAddressFlag());
-      registerHandler(new PortFlag());
-      registerHandler(new WorkDirFlag());
-      registerHandler(new AllowMissingSourceDirFlag());
-      registerHandler(new SourceFlag());
-      registerHandler(new ModuleNameArgument());
       registerHandler(new FailOnErrorFlag());
+      registerHandler(new IncrementalCompileFlag());
+      registerHandler(new ModuleNameArgument());
+      registerHandler(new NoPrecompileFlag());
+      registerHandler(new PortFlag());
+      registerHandler(new SourceFlag());
       registerHandler(new StrictResourcesFlag());
-      registerHandler(new CompilePerFileFlag());
+      registerHandler(new WorkDirFlag());
+
       registerHandler(new ArgHandlerSourceLevel(new OptionSourceLevel() {
         @Override
         public SourceLevel getSourceLevel() {
@@ -388,6 +390,30 @@ public class Options {
 
     @Override
     public boolean isExperimental() {
+      return true;
+    }
+  }
+
+  private class IncrementalCompileFlag extends ArgHandlerFlag {
+
+    @Override
+    public String getLabel() {
+      return "incremental";
+    }
+
+    @Override
+    public String getPurposeSnippet() {
+      return "Compiles faster by creating/reusing a JS file per class.";
+    }
+
+    @Override
+    public boolean setFlag(boolean value) {
+      compilePerFile = value;
+      return true;
+    }
+
+    @Override
+    public boolean getDefaultValue() {
       return true;
     }
   }

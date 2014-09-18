@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d07ee724_0050b61c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-18T21:00:51Z",
+      "side": 1,
+      "message": "that\u0027s not one word :-P",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "83484a8e3a056cc90f82de3fc2adb931a9b502cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d07ee724_603f3acf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-18T21:00:51Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 9,
+        "startChar": 22,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "83484a8e3a056cc90f82de3fc2adb931a9b502cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d07ee724_c0f70eef",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-18T21:00:51Z",
+      "side": 1,
+      "message": "this line isn\u0027t actually necessary is it?",
+      "range": {
+        "startLine": 894,
+        "startChar": 4,
+        "endLine": 894,
+        "endChar": 48
+      },
+      "revId": "83484a8e3a056cc90f82de3fc2adb931a9b502cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d07ee724_600dfa5a",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-18T21:00:51Z",
+      "side": 1,
+      "message": "revert, etc",
+      "range": {
+        "startLine": 1131,
+        "startChar": 4,
+        "endLine": 1132,
+        "endChar": 41
+      },
+      "revId": "83484a8e3a056cc90f82de3fc2adb931a9b502cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d07ee724_2007f23c",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-18T21:00:51Z",
+      "side": 1,
+      "message": "cleanup",
+      "range": {
+        "startLine": 1182,
+        "startChar": 6,
+        "endLine": 1184,
+        "endChar": 7
+      },
+      "revId": "83484a8e3a056cc90f82de3fc2adb931a9b502cc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

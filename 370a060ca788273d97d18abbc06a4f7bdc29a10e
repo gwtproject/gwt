@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10479fed_67d0a003",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-18T00:21:07Z",
+      "side": 1,
+      "message": "Maybe add a TODO to remove this once we have a more permanent fix that doesn\u0027t increase code size so much?",
+      "range": {
+        "startLine": 447,
+        "startChar": 8,
+        "endLine": 447,
+        "endChar": 9
+      },
+      "revId": "370a060ca788273d97d18abbc06a4f7bdc29a10e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

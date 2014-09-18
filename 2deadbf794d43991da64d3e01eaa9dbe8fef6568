@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d07ee724_7be12b33",
+        "filename": "user/src/com/google/gwt/storage/client/StorageMap.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-18T21:43:10Z",
+      "side": 1,
+      "message": "I think we want to sync about this one with goktug. Maybe we should use the new preconditions here.",
+      "revId": "2deadbf794d43991da64d3e01eaa9dbe8fef6568",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d07ee724_dbf85fe4",
+        "filename": "user/src/com/google/gwt/storage/client/StorageMap.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-18T21:43:10Z",
+      "side": 1,
+      "message": "dito",
+      "revId": "2deadbf794d43991da64d3e01eaa9dbe8fef6568",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

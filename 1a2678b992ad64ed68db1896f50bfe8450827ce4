@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "901c6ffc_21912dd2",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T22:45:39Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.util.arg.ArgHandlerCompilePerFile.",
+      "revId": "1a2678b992ad64ed68db1896f50bfe8450827ce4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

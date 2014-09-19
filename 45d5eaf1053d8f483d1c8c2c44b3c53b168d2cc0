@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5064b799_71e38aad",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-19T00:22:03Z",
+      "side": 1,
+      "message": "I think we should support -XcompilePerFile for a short while, for backward compatibility until we remove it from the build targets.\n\nYou can use addTagValue() for this (see other examples like -strict).",
+      "range": {
+        "startLine": 397,
+        "startChar": 16,
+        "endLine": 397,
+        "endChar": 38
+      },
+      "revId": "45d5eaf1053d8f483d1c8c2c44b3c53b168d2cc0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

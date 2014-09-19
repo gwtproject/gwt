@@ -46,6 +46,30 @@
       "revId": "09fefed74e9acfc9213ae39e70e33add4d6f6d2c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b05413b2_a30f7a94",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/jetty/JettyLauncher.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-09-19T17:22:12Z",
+      "side": 1,
+      "message": "@Brian: Although we included the annotations.jar in our distribution, we would have to add the className literal to the array of configurations because it\u0027s not in the default WebAppContext.__dftConfigurationClasses. So this setup would be very similar except from the class.forName exception.\n\nRelated with adding the .jar I don\u0027t think it\u0027s necessary to overweight gwt-dev.jar unless there are people demanding it. The message is clear enough and anyone using this feature can add the dependency by hand.\nAnyway if we decide to include it I would do in a different patch since we need first update gwt_tools",
+      "parentUuid": "f0c4cb62_06223a08",
+      "range": {
+        "startLine": 738,
+        "startChar": 8,
+        "endLine": 738,
+        "endChar": 9
+      },
+      "revId": "09fefed74e9acfc9213ae39e70e33add4d6f6d2c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,480 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "901c6ffc_648f336a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[warning] Subject line and body should be separated by a blank line.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_045d1725",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/BytecodeSignatureMaker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.util.Util\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_24629be5",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnit.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] \u0027org.objectweb.asm.ClassReader\u0027 should be separated from previous imports.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_c4563f09",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnit.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.asmbridge.EmptyVisitor\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_e45b432e",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] \u0027org.objectweb.asm.ClassReader\u0027 should be separated from previous imports.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_847127ad",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.asm.CollectAnnotationData\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_a46eabc9",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/CollectAnnotationData.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.asm.CollectClassData.AnnotationEnum\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_446b0fbb",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/CollectClassData.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.asmbridge.EmptyVisitor\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_646893bd",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/CollectReferencesVisitor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.asmbridge.EmptyVisitor\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_04c67785",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/ResolveClassSignature.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] \u0027org.objectweb.asm.signature.SignatureVisitor\u0027 should be separated from previous imports.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_24cb7b8d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/ResolveClassSignature.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.Resolver\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_c4cf1f95",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/ResolveMethodSignature.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] \u0027org.objectweb.asm.Type\u0027 should be separated from previous imports.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_e4d4a329",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/ResolveMethodSignature.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.MethodArgNamesLookup\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_84ba87f5",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/ResolveTypeSignature.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] \u0027org.objectweb.asm.signature.SignatureVisitor\u0027 should be separated from previous imports.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_a4b78b0d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/ResolveTypeSignature.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.Resolver\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_44c46f76",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/rewrite/HasAnnotation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.asmbridge.EmptyVisitor\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_64c17365",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/rewrite/HostedModeClassRewriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] \u0027org.objectweb.asm.ClassReader\u0027 should be separated from previous imports.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_04af57b5",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/rewrite/HostedModeClassRewriter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.asmbridge.EmptyVisitor\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_24b4db04",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/rewrite/RewriteJsniMethods.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.shell.JavaScriptHost\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_c4a87fac",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/rewrite/RewriteRefsToJsoClasses.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.shell.rewrite.HostedModeClassRewriter.InstanceMethodOracle\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_e4ad83b9",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/rewrite/RewriteSingleJsoImplDispatches.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] \u0027org.objectweb.asm.ClassVisitor\u0027 should be separated from previous imports.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_84a367cd",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/rewrite/RewriteSingleJsoImplDispatches.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.shell.rewrite.HostedModeClassRewriter.SingleJsoImplData\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_a4a0ebc0",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/rewrite/WriteJsoImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.shell.rewrite.HostedModeClassRewriter.InstanceMethodOracle\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_449d4f86",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/asm/CollectClassDataTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.asm.CollectAnnotationData.AnnotationData\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_649ad391",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/asm/CollectReferencesVisitorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.typemodel.test.TestAnnotation\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_0418b764",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/asm/ResolveGenericsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] \u0027org.objectweb.asm.Opcodes\u0027 should be separated from previous imports.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_241dbb54",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/asm/ResolveGenericsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.javac.CompilationUnitTypeOracleUpdater\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_c4215f90",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/RequestFactoryJarExtractor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-19T23:38:17Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.util.Name\u0027 import.",
+      "revId": "9282b783009ca6fe7e256b59351a6a822c5c7382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

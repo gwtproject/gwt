@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "901c6ffc_af568907",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-19T18:45:51Z",
+      "side": 1,
+      "message": "maybe rename to calculateAndClear... (or recalculate)",
+      "range": {
+        "startLine": 493,
+        "startChar": 35,
+        "endLine": 493,
+        "endChar": 63
+      },
+      "revId": "66c3f66c8ec0c19982e3e78730e0bb85050e4cfe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_af7d2989",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-19T18:45:51Z",
+      "side": 1,
+      "message": "remove.",
+      "range": {
+        "startLine": 870,
+        "startChar": 0,
+        "endLine": 871,
+        "endChar": 94
+      },
+      "revId": "66c3f66c8ec0c19982e3e78730e0bb85050e4cfe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

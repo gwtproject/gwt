@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "901c6ffc_c4dcffa9",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/asm/CollectReferencesVisitor.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-20T01:45:40Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should be on the previous line.",
+      "revId": "c46a026057d9a8da7d774bdcc38e332833e09dd7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

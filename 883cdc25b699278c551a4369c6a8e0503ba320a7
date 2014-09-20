@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "508bd76f_c4de3e77",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/dev_mode_on.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-20T14:32:22Z",
+      "side": 1,
+      "message": "Can you add comment about IE8 here as well so it would be easier to find it",
+      "revId": "883cdc25b699278c551a4369c6a8e0503ba320a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

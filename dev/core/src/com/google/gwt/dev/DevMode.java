@@ -36,9 +36,11 @@ import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableUpdateCheck;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
 import com.google.gwt.dev.util.arg.ArgHandlerModuleName;
+import com.google.gwt.dev.util.arg.ArgHandlerModulePathPrefix;
 import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
+import com.google.gwt.dev.util.arg.OptionModulePathPrefix;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -65,7 +67,8 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
   /**
    * Handles the -superDevMode command line flag.
    */
-  public interface HostedModeOptions extends HostedModeBaseOptions, CompilerOptions, OptionSuperDevMode {
+  public interface HostedModeOptions extends HostedModeBaseOptions, CompilerOptions,
+      OptionSuperDevMode, OptionModulePathPrefix {
     ServletContainerLauncher getServletContainerLauncher();
 
     String getServletContainerLauncherArgs();
@@ -230,6 +233,7 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
       registerHandler(new ArgHandlerWarDir(options));
       registerHandler(new ArgHandlerDeployDir(options));
       registerHandler(new ArgHandlerExtraDir(options));
+      registerHandler(new ArgHandlerModulePathPrefix(options));
       registerHandler(new ArgHandlerWorkDirOptional(options));
       registerHandler(new ArgHandlerDisableUpdateCheck(options));
       registerHandler(new ArgHandlerSourceLevel(options));
@@ -259,6 +263,8 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
     private ServletContainerLauncher scl;
     private String sclArgs;
     private boolean sdm;
+    private File moduleBaseDir;
+    private String modulePathPrefix = "";
     private File warDir;
 
     @Override
@@ -284,6 +290,11 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
     @Override
     public ServletContainerLauncher getServletContainerLauncher() {
       return scl;
+    }
+
+    @Override
+    public File getModuleBaseDir() {
+      return moduleBaseDir;
     }
 
     @Override
@@ -316,9 +327,17 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
       this.localWorkers = localWorkers;
     }
 
+    @Override
+    public void setModulePathPrefix(String prefix) {
+      if (!prefix.equals(modulePathPrefix)) {
+        modulePathPrefix = prefix;
+        updateModuleBaseDir();
+      }
+    }
+
     @Deprecated
     public void setOutDir(File outDir) {
-      this.warDir = outDir;
+      setWarDir(outDir);
     }
 
     @Override
@@ -344,6 +363,11 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
     @Override
     public void setWarDir(File warDir) {
       this.warDir = warDir;
+      updateModuleBaseDir();
+    }
+
+    private void updateModuleBaseDir() {
+      this.moduleBaseDir = new File(warDir, modulePathPrefix);
     }
   }
 

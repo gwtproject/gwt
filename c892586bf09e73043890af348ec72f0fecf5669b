@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b05413b2_e6a4a091",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/modulepage.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-09-22T07:07:52Z",
+      "side": 1,
+      "message": "Why a loop here, shouldn\u0027t be just one element with this class per document? so use an id and getElementById, or querySelector which returns one element.",
+      "revId": "c892586bf09e73043890af348ec72f0fecf5669b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "508bd76f_e4e7c28b",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/rewrite/RewriteJsniMethods.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-09-22T08:34:50Z",
+      "side": 0,
+      "message": "@Ray, if you remove this check, there is a test failing:\n\nhttp://build.gwtproject.org/job/gwt/189/testReport/junit/com.google.gwt.dev.jjs.test/CompilerMiscRegressionTest/testJsoShouldNullPointerExceptionInDevMode/",
+      "range": {
+        "startLine": 260,
+        "startChar": 8,
+        "endLine": 260,
+        "endChar": 23
+      },
+      "revId": "ad0af16c4d320061e345fa50c842a08780b1d424",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

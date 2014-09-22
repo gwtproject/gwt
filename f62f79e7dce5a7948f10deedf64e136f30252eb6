@@ -16,6 +16,29 @@
       "revId": "f62f79e7dce5a7948f10deedf64e136f30252eb6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b05413b2_ac3f679e",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-09-22T17:47:05Z",
+      "side": 1,
+      "message": "This should fail in IE8, better use this.__reified[\u0027:\u0027 + key] \u003d undefined",
+      "range": {
+        "startLine": 215,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 10
+      },
+      "revId": "f62f79e7dce5a7948f10deedf64e136f30252eb6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

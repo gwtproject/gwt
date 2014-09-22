@@ -16,6 +16,24 @@
       "revId": "c892586bf09e73043890af348ec72f0fecf5669b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "700d3be9_cd43a9d4",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/modulepage.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-22T19:19:56Z",
+      "side": 1,
+      "message": "Yes, this is more general than it needs to be, but it wasn\u0027t hard to write and makes it easy to reuse the class on another DOM element later.",
+      "parentUuid": "b05413b2_e6a4a091",
+      "revId": "c892586bf09e73043890af348ec72f0fecf5669b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b05413b2_ec4f9f7d",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-09-22T16:36:47Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be wrapped in an\n\n if (this.__reified) {\n }\n\n?",
+      "revId": "f62f79e7dce5a7948f10deedf64e136f30252eb6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

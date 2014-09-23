@@ -81,6 +81,30 @@
       "revId": "f62f79e7dce5a7948f10deedf64e136f30252eb6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "508bd76f_c53f189e",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-09-23T10:06:35Z",
+      "side": 1,
+      "message": "AIUI, IE will only fail if the object whose property we try to delete is a \"host object\", and this.__reified is NOT a host object (it\u0027s a function, see line 220 below).\n\nIn I158a90995634bb02023d6ce6c7bcbd478ee1930f, stub.nocache.js tries to delete a property of $wnd, which IS a host object, and fails in IE.",
+      "parentUuid": "b05413b2_ac3f679e",
+      "range": {
+        "startLine": 215,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 10
+      },
+      "revId": "f62f79e7dce5a7948f10deedf64e136f30252eb6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

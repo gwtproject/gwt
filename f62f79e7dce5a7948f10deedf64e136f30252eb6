@@ -39,6 +39,48 @@
       "revId": "f62f79e7dce5a7948f10deedf64e136f30252eb6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "508bd76f_4536c8f9",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-09-23T09:39:58Z",
+      "side": 1,
+      "message": "Hmm don\u0027t have an IE 8 at hand to test it but I can change it for the time being. Once GWT does not support IE8 anymore we can change it back to delete.",
+      "parentUuid": "b05413b2_ac3f679e",
+      "range": {
+        "startLine": 215,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 10
+      },
+      "revId": "f62f79e7dce5a7948f10deedf64e136f30252eb6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "508bd76f_6a739b24",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-09-23T09:39:58Z",
+      "side": 1,
+      "message": "Oops, yes it should. Will fix that.",
+      "parentUuid": "b05413b2_ec4f9f7d",
+      "revId": "f62f79e7dce5a7948f10deedf64e136f30252eb6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

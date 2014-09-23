@@ -129,6 +129,48 @@
       "revId": "f62f79e7dce5a7948f10deedf64e136f30252eb6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "508bd76f_1791d3d1",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-09-23T18:08:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b05413b2_ec4f9f7d",
+      "revId": "f62f79e7dce5a7948f10deedf64e136f30252eb6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "508bd76f_d79a6beb",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/client/impl/JsoSplittable.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-09-23T18:08:17Z",
+      "side": 1,
+      "message": "Thanks for having it verified in IE8.",
+      "parentUuid": "9081cf4e_6cfc171a",
+      "range": {
+        "startLine": 215,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 10
+      },
+      "revId": "f62f79e7dce5a7948f10deedf64e136f30252eb6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

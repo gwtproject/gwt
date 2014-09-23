@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "901c6ffc_680941bd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_880615ad",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_2844a9db",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_4849ddf1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1678,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[error] \u0027while\u0027 is not followed by whitespace.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_e84d51fe",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MixinDefenderMethods.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_0853e5a1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_a858b9ba",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_c855ed82",
+        "filename": "user/super/com/google/gwt/emul/java/lang/annotation/FunctionalInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[error] Missing a header - not enough lines in file.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_6862a169",
+        "filename": "user/super/com/google/gwt/emul/java/lang/annotation/FunctionalInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_885ff59e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/annotation/FunctionalInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not preceded with whitespace.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_282d891b",
+        "filename": "user/super/com/google/gwt/emul/java/lang/annotation/FunctionalInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not preceded with whitespace.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_48323d7c",
+        "filename": "user/super/com/google/gwt/emul/java/lang/annotation/FunctionalInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_e826b13e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/annotation/FunctionalInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "901c6ffc_082c451b",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-23T07:51:16Z",
+      "side": 1,
+      "message": "[error] Got an exception - expecting EOF, found \u0027}\u0027",
+      "revId": "20420bdf1ec8088cf125624835b98e727ce43170",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

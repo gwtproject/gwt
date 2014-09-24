@@ -67,6 +67,24 @@
       "revId": "552a93df1a18d72563c80d62cd8295d3c389b3ea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30bca331_c107e439",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-09-24T07:05:26Z",
+      "side": 1,
+      "message": "Checkstyle doesn\u0027t support java8, so this will never resolve :(",
+      "parentUuid": "108f9fae_e114e0da",
+      "revId": "552a93df1a18d72563c80d62cd8295d3c389b3ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

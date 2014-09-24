@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "108f9fae_e14dc0fe",
+        "filename": "user/super/com/google/gwt/emul/java/lang/annotation/FunctionalInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-24T07:14:08Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "c58f8db9d8d67365b317e31c4ca64e386e4ed362",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "108f9fae_01538ca1",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-24T07:14:08Z",
+      "side": 1,
+      "message": "[error] Got an exception - expecting EOF, found \u0027}\u0027",
+      "revId": "c58f8db9d8d67365b317e31c4ca64e386e4ed362",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

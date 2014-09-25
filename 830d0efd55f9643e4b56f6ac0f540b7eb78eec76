@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "108f9fae_58702516",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-25T06:38:34Z",
+      "side": 1,
+      "message": "[error] Got an exception - expecting EOF, found \u0027}\u0027",
+      "revId": "830d0efd55f9643e4b56f6ac0f540b7eb78eec76",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

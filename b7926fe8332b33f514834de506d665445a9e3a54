@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "9049cf4f_26e6eebd",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTreeNodeView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-25T19:35:54Z",
+      "side": 1,
+      "message": "There are a fair number of methods marked public that aren\u0027t really public since they\u0027re on a class that isn\u0027t public. We should probably fix that, I think that\u0027s for another patch.",
+      "parentUuid": "9049cf4f_e6c22617",
+      "revId": "b7926fe8332b33f514834de506d665445a9e3a54",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30d58379_4d1ded7d",
         "filename": "user/test/com/google/gwt/user/cellview/client/CellTreeTest.java",
         "patchSetId": 1

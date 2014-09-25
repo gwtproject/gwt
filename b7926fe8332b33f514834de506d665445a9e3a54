@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9049cf4f_66be369a",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTree.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-25T19:32:26Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "30d58379_ad4aa96e",
+      "revId": "b7926fe8332b33f514834de506d665445a9e3a54",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d071878d_4955b180",
         "filename": "user/src/com/google/gwt/user/cellview/client/CellTreeNodeView.java",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "9049cf4f_e6c22617",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTreeNodeView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-25T19:32:26Z",
+      "side": 1,
+      "message": "I\u0027m going to skip this.",
+      "parentUuid": "10ca3fde_0c85bb4b",
+      "revId": "b7926fe8332b33f514834de506d665445a9e3a54",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30d58379_4d1ded7d",
         "filename": "user/test/com/google/gwt/user/cellview/client/CellTreeTest.java",
         "patchSetId": 1
@@ -65,6 +101,30 @@
       "writtenOn": "2014-09-25T07:59:21Z",
       "side": 1,
       "message": "Wouldn\u0027t all these blocks be clearer written like:\n\n try {\n   cellTree.setKeyboardSelectedTreeNode(l3Node, 0, true);\n   fail(\"Should have thrown an IAE\");\n } catch (IllegalStateException iae) {\n   assertEquals(e.getMessage(), …);\n }\n\n(in case another exception is thrown, it\u0027s unexpected and the exception bubbles and marks the test as \"in error\", rather than a failure).",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 314,
+        "endChar": 5
+      },
+      "revId": "b7926fe8332b33f514834de506d665445a9e3a54",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9049cf4f_06c80a34",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTreeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-25T19:32:26Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "30d58379_4d1ded7d",
       "range": {
         "startLine": 305,
         "startChar": 0,

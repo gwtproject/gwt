@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "30d58379_ad4aa96e",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTree.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-09-25T07:59:21Z",
+      "side": 1,
+      "message": "nit: shouldn\u0027t there be a blank line above? (I always put one, but maybe JavaDoc doesn\u0027t care)",
+      "revId": "b7926fe8332b33f514834de506d665445a9e3a54",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d071878d_4955b180",
         "filename": "user/src/com/google/gwt/user/cellview/client/CellTreeNodeView.java",
         "patchSetId": 1
@@ -13,6 +30,47 @@
       "writtenOn": "2014-09-25T02:33:42Z",
       "side": 1,
       "message": "Some of the visibility checks looks related to testing. Can you add @VisibleForTesting where appropriate?",
+      "revId": "b7926fe8332b33f514834de506d665445a9e3a54",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10ca3fde_0c85bb4b",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTreeNodeView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-09-25T07:59:21Z",
+      "side": 1,
+      "message": "We don\u0027t have the annotation available for client code, but we seem to have a convention of adding the annotation and comment it:\n\n  // @VisibleForTesting\n  void foo() {\n\nSee in JsonpRequest for an example.\n\nNow maybe this is just legacy and we can now use the annotation in client code; that\u0027d be a good thing.\n\nThat being said, the two new methods are called by CellTree, not by tests.",
+      "parentUuid": "d071878d_4955b180",
+      "revId": "b7926fe8332b33f514834de506d665445a9e3a54",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30d58379_4d1ded7d",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTreeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-09-25T07:59:21Z",
+      "side": 1,
+      "message": "Wouldn\u0027t all these blocks be clearer written like:\n\n try {\n   cellTree.setKeyboardSelectedTreeNode(l3Node, 0, true);\n   fail(\"Should have thrown an IAE\");\n } catch (IllegalStateException iae) {\n   assertEquals(e.getMessage(), …);\n }\n\n(in case another exception is thrown, it\u0027s unexpected and the exception bubbles and marks the test as \"in error\", rather than a failure).",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 314,
+        "endChar": 5
+      },
       "revId": "b7926fe8332b33f514834de506d665445a9e3a54",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

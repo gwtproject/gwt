@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d071878d_4955b180",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTreeNodeView.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-25T02:33:42Z",
+      "side": 1,
+      "message": "Some of the visibility checks looks related to testing. Can you add @VisibleForTesting where appropriate?",
+      "revId": "b7926fe8332b33f514834de506d665445a9e3a54",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -151,6 +151,24 @@
     },
     {
       "key": {
+        "uuid": "f0c68bd8_19a05bbf",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-09-25T20:29:14Z",
+      "side": 1,
+      "message": "In Java8 variables only need to be \"effectively final\" for lambda expressions and anonymous classes. \n\nThat means this method will work as the java compiler detects that x is effectively final but the compiler will fail as soon as you assign something else to x again.",
+      "parentUuid": "9049cf4f_c6be024d",
+      "revId": "830d0efd55f9643e4b56f6ac0f540b7eb78eec76",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9049cf4f_e60a2686",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 7

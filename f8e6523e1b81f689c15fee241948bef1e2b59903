@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0c68bd8_99456b32",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CoverageTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-09-25T22:39:04Z",
+      "side": 1,
+      "message": "Don\u0027t get it. How should that fix the test failures? \n\nMy understanding is that this test method should make sure that betterNotEval() will not be called because the left side of \u0026\u0026 is already false (by default i seems to be initialized to 6 and z to false). \n\nSetting i to 1 would fail the test because betterNotEval() will be executed?",
+      "revId": "f8e6523e1b81f689c15fee241948bef1e2b59903",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

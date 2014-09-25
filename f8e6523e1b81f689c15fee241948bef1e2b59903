@@ -34,6 +34,24 @@
       "revId": "f8e6523e1b81f689c15fee241948bef1e2b59903",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c68bd8_594c9354",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CoverageTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-09-25T23:23:41Z",
+      "side": 1,
+      "message": "A bit hard to follow the class structure in Gerrit, so maybe I am still missing something :)\n\nSo this method is defined in class Inner which extends Super which in turn initializes static variable \"i\" three times. After Inner is created as final field in CoverageTest, \"Super.i\" should be initialized to 3. \nNow if any test method changes \"i\" to 1 testAndAndExpression() will fail because betterNotEval() will call fail().\n\nSo either make variable \"inner\" in CoverageTest non-final so that gwtSetup() can create a fresh instance per test method or let gwtSetup() initialize Super/Inner.i to anything but not 1 (ideally set Super.i to 3)",
+      "parentUuid": "9049cf4f_fc7d5688",
+      "revId": "f8e6523e1b81f689c15fee241948bef1e2b59903",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

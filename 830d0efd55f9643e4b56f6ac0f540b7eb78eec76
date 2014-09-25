@@ -2,6 +2,80 @@
   "comments": [
     {
       "key": {
+        "uuid": "9049cf4f_15e676bd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-25T17:02:50Z",
+      "side": 1,
+      "message": "Doesn\u0027t clinit get added twice?, once in line 1160 and then again in this loop.\n\nI would rewrite this as:\n\n      if (x.getClinitTarget() \u003d\u003d x) {\n        JsFunction clinitFunc \u003d jsFuncs.get(0);\n        handleClinit(clinitFunc, null);\n        globalStmts.add(func.makeStmt());\n      } \n\n      // Remove clinit as it was already processed or not needed.\n      assert jsFuncs.get(0) is actually clinit.\n      jsFuncs.remove(0);\n\n \n      // declare all static methods (Java8) into the global scope\n      for (JsFunction func : jsFuncs) {\n        // don\u0027t add polymorphic JsFuncs, inline decl into vtable assignment\n        if (!polymorphicJsFunctions.contains(func)) {\n          globalStmts.add(func.makeStmt());\n        }\n      }",
+      "range": {
+        "startLine": 1170,
+        "startChar": 0,
+        "endLine": 1170,
+        "endChar": 10
+      },
+      "revId": "830d0efd55f9643e4b56f6ac0f540b7eb78eec76",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9049cf4f_556d5e3c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 3466,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-25T17:02:50Z",
+      "side": 1,
+      "message": "private also?",
+      "revId": "830d0efd55f9643e4b56f6ac0f540b7eb78eec76",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9049cf4f_95e7c68c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 3518,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-25T17:02:50Z",
+      "side": 1,
+      "message": "private?",
+      "revId": "830d0efd55f9643e4b56f6ac0f540b7eb78eec76",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9049cf4f_b5be8a4b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1729,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-25T17:02:50Z",
+      "side": 1,
+      "message": "Remove this. If it was already in program this method should have returned in line 1577.\n\nIf that is not the case then there is a more general bug we need to fix.",
+      "revId": "830d0efd55f9643e4b56f6ac0f540b7eb78eec76",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "108f9fae_58702516",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 7
@@ -13,6 +87,24 @@
       "writtenOn": "2014-09-25T06:38:34Z",
       "side": 1,
       "message": "[error] Got an exception - expecting EOF, found \u0027}\u0027",
+      "revId": "830d0efd55f9643e4b56f6ac0f540b7eb78eec76",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9049cf4f_d5dceea9",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-25T17:02:50Z",
+      "side": 1,
+      "message": "Aahh, checkstyle does not support Java 8 yet I think.",
+      "parentUuid": "108f9fae_58702516",
       "revId": "830d0efd55f9643e4b56f6ac0f540b7eb78eec76",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

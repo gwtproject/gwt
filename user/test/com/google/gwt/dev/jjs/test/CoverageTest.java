@@ -124,6 +124,7 @@ public class CoverageTest extends CoverageBase {
 
     private void testAndAndExpression() {
       // AND_AND_Expression
+      i = 1;
       z = i == 1 && betterNotEval();
       assertFalse(z);
     }

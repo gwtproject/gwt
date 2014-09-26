@@ -5,11 +5,16 @@ Import this module to use Hibernate Validator during the compilation of validati
 gwt clients.
  -->
   <inherits name='com.google.gwt.validation.Validation' />
-  <source path="constraints">
-    <exclude name="impl/scriptassert/" />
+  <source path="constraints"/>
+  <source path="internal/util">
+  	<include name="Contracts.java"/>
+    <include name="logging/Log.java"/>
+    <include name="logging/LoggerFactory.java"/>
+  </source>
+  <source path="internal/constraintvalidators">
     <exclude name="super/" />
   </source>
-  <source path="engine">
+  <source path="internal/engine">
     <include name="ConstraintViolationImpl*.java"/>
     <include name="ValidationSupport.java"/>
     <include name="NodeImpl.java"/>

@@ -18,6 +18,7 @@ package com.google.gwt.sample.validation.shared;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -25,45 +26,31 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * A sample bean to show validation on.
+ * A bean interface to show validation on.
  */
-@ServerConstraint(groups = ServerGroup.class)
-public class Person implements IsSerializable {
+public interface Person extends IsSerializable {
 
   @Valid
-  private Address address;
+  Address getMainAddress();
 
   @Valid
-  private Map<String, Address> otherAddresses;
+  Map<String, Address> getMappedAddresses();
 
-  @NotNull
+  @Valid
+  Set<Address> getOtherAddresses();
+
+  @Valid
+  Group getGroup();
+
   @Size(min = 4, message = "{custom.name.size.message}")
-  private String name;
+  @NotNull
+  String getName();
 
-  private long ssn;
+  void setMainAddress(Address address);
 
-  public Address getAddress() {
-    return address;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setAddress(Address address) {
-    this.address = address;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setSsn(long ssn) {
-    this.ssn = ssn;
-  }
+  void setName(String name);
 
   @Max(999999999)
-  protected long getSsn() {
-    return ssn;
-  }
+  void setSsn(long ssn);
+
 }

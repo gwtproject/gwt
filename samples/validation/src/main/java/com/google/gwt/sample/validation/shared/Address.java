@@ -20,15 +20,18 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import javax.validation.constraints.NotNull;
 
 /**
- * Sample address for validation
+ * Sample address for validation.
  */
-public class Address implements IsSerializable {
+public interface Address extends IsSerializable {
 
   @NotNull
-  public String street;
+  String getStreet();
+
+  void setStreet(String street);
 
   @Zip
-  public String zip;
+  String getZip();
 
+  void setZip(String zip);
 
 }

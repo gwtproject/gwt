@@ -22,7 +22,7 @@ import com.google.gwt.sample.validation.shared.Person;
 import com.google.gwt.sample.validation.shared.ServerGroup;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import org.hibernate.validator.engine.ValidationSupport;
+import org.hibernate.validator.internal.engine.ValidationSupport;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -12,6 +12,7 @@
   <properties>
     <!-- Convenience property to set the GWT version -->
     <gwtVersion>2.6.1</gwtVersion>
+    <gwt.style>OBF</gwt.style>
 
     <!-- GWT needs at least java 1.6 -->
     <maven.compiler.source>1.6</maven.compiler.source>
@@ -44,7 +45,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>4.1.0.Final</version>
+      <version>4.3.2.Final</version>
       <exclusions>
         <exclusion>
           <groupId>javax.xml.bind</groupId>
@@ -62,7 +63,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>4.1.0.Final</version>
+      <version>4.3.2.Final</version>
       <classifier>sources</classifier>
       <exclusions>
         <exclusion>
@@ -90,7 +91,7 @@
       <version>1.6.1</version>
     </dependency>
   </dependencies>
-  
+
   <build>
     <!-- Generate compiled stuff in the folder used for development mode -->
     <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>

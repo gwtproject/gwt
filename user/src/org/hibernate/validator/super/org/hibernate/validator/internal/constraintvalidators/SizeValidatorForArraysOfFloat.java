@@ -13,10 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.sample.validation.shared;
+package org.hibernate.validator.internal.constraintvalidators;
 
 /**
- * Client Validation Group.
+ * Override the Hibernate implementation with the GWT version.
  */
-public interface ClientGroup {
+public class SizeValidatorForArraysOfFloat extends
+    com.google.gwt.validation.client.constraints.SizeValidatorForArrayOfFloat {
 }

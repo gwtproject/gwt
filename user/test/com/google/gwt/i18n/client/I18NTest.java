@@ -276,6 +276,7 @@ public class I18NTest extends GWTTestCase {
 
   public void testConstantFloats() {
     TestConstants types = GWT.create(TestConstants.class);
+    // Float.MAX_VALUE is inlined here because GWT interprets it as double.
     double delta = 0.0000001;
     assertEquals(3.14159f, types.floatPi(), delta);
     assertEquals(0.0f, types.floatZero(), delta);

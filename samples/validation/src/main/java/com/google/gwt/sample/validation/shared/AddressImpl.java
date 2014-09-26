@@ -15,28 +15,26 @@
  */
 package com.google.gwt.sample.validation.shared;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
+public class AddressImpl implements Address {
 
-import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Map;
-import java.util.Set;
+  private String street;
+  private String zip;
 
-public interface Person extends IsSerializable {
-  @Valid Address getMainAddress();
+  @Override
+  public String getStreet() {
+    return street;
+  }
 
-  @Valid Map<String, Address> getMappedAddresses();
+  @Override public void setStreet(String street) {
+    this.street = street;
+  }
 
-  @Valid Set<Address> getOtherAddresses();
+  @Override
+  public String getZip() {
+    return zip;
+  }
 
-  @Size(min = 4, message = "{custom.name.size.message}")
-  @NotNull String getName();
-
-  void setMainAddress(Address address);
-
-  void setName(String name);
-
-  @Max(999999999) void setSsn(long ssn);
+  @Override public void setZip(String zip) {
+    this.zip = zip;
+  }
 }

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.hibernate.validator.engine;
+package org.hibernate.validator.internal.engine;
 
 import com.google.gwt.user.client.rpc.CustomFieldSerializer;
 import com.google.gwt.user.client.rpc.SerializationException;
@@ -27,8 +27,8 @@ public class PathImpl_CustomFieldSerializer extends
     CustomFieldSerializer<PathImpl> {
 
   @SuppressWarnings("unused")
-  public static void deserialize(SerializationStreamReader streamReader,
-      PathImpl instance) throws SerializationException {
+  public static void deserialize(SerializationStreamReader streamReader, PathImpl instance)
+      throws SerializationException {
     // no fields
   }
 
@@ -39,14 +39,14 @@ public class PathImpl_CustomFieldSerializer extends
     return PathImpl.createPathFromString(propertyPath);
   }
 
-  public static void serialize(SerializationStreamWriter streamWriter,
-      PathImpl instance) throws SerializationException {
+  public static void serialize(SerializationStreamWriter streamWriter, PathImpl instance)
+      throws SerializationException {
     streamWriter.writeString(instance.toString());
   }
 
   @Override
-  public void deserializeInstance(SerializationStreamReader streamReader,
-      PathImpl instance) throws SerializationException {
+  public void deserializeInstance(SerializationStreamReader streamReader, PathImpl instance)
+      throws SerializationException {
     deserialize(streamReader, instance);
   }
 
@@ -62,8 +62,8 @@ public class PathImpl_CustomFieldSerializer extends
   }
 
   @Override
-  public void serializeInstance(SerializationStreamWriter streamWriter,
-      PathImpl instance) throws SerializationException {
+  public void serializeInstance(SerializationStreamWriter streamWriter, PathImpl instance)
+      throws SerializationException {
     serialize(streamWriter, instance);
   }
 }

@@ -18,6 +18,7 @@ package com.google.gwt.sample.validation.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.sample.validation.shared.Person;
+import com.google.gwt.sample.validation.shared.PersonImpl;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -34,7 +35,7 @@ public class Validation implements EntryPoint {
    * This is the entry point method.
    */
   public void onModuleLoad() {
-    Person person = new Person();
+    Person person = new PersonImpl();
     ValidationView view = new ValidationView(person, greetingService);
     RootPanel.get("view").add(view);
   }

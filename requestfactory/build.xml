@@ -139,9 +139,10 @@
         <fileset dir="${gwt.tools.lib}" includes="apache/log4j/log4j-1.2.16.jar" />
         <fileset dir="${gwt.tools.lib}" includes="slf4j/slf4j-api/slf4j-api-1.6.1.jar" />
         <fileset dir="${gwt.tools.lib}" includes="slf4j/slf4j-log4j12/slf4j-log4j12-1.6.1.jar" />
-        <fileset dir="${gwt.tools.lib}" includes="hibernate/validator/hibernate-validator-4.1.0.Final.jar" />
+        <fileset dir="${gwt.tools.lib}" includes="hibernate/validator/hibernate-validator-4.3.2.Final.jar" />
         <fileset dir="${gwt.tools.lib}" includes="javax/validation/validation-api-1.0.0.GA.jar" />
         <fileset dir="${gwt.tools.lib}" includes="javax/xml/bind/jaxb-api-2.1.jar" />
+        <fileset dir="${gwt.tools.lib}" includes="jboss/logging/jboss-logging-3.1.4.GA.jar"/>
         <fileset dir="${gwt.build.lib}" includes="requestfactory-test.jar" />
         <fileset dir="${gwt.build.lib}" includes="requestfactory-test-src.jar" />
         <fileset dir="${gwt.build.lib}" includes="requestfactory-test-validated.jar" />

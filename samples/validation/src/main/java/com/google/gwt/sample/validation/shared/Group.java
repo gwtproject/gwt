@@ -15,8 +15,38 @@
  */
 package com.google.gwt.sample.validation.shared;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
- * Client Validation Group.
+ * A simple bean.
  */
-public interface ClientGroup {
+public class Group implements IsSerializable {
+
+  @NotNull
+  private String name;
+
+  @Min(2)
+  @Max(10)
+  private int size;
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public int getSize() {
+    return size;
+  }
+
+  public void setSize(int size) {
+    this.size = size;
+  }
+
 }

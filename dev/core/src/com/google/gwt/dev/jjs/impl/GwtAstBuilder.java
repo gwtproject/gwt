@@ -226,6 +226,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Constructs a GWT Java AST from a single isolated compilation unit. The AST is
@@ -862,7 +864,14 @@ public class GwtAstBuilder {
     @Override
     public void endVisit(FloatLiteral x, BlockScope scope) {
       try {
-        push(JFloatLiteral.get(x.constant.floatValue()));
+        Double value = null;
+        if (!curClass.isStrictfp && !curMethod.isStrictfp) {
+          value = interpretConstantAsDouble(x);
+        }
+        if (value == null)  {
+          value = x.constant.doubleValue();
+        }
+        push(JFloatLiteral.get(value));
       } catch (Throwable e) {
         throw translateException(x, e);
       }
@@ -1669,7 +1678,7 @@ public class GwtAstBuilder {
         assert !method.isExternal();
         JMethodBody body = new JMethodBody(method.getSourceInfo());
         method.setBody(body);
-        pushMethodInfo(new MethodInfo(method, body, x.scope));
+        pushMethodInfo(new MethodInfo(method, body, x.scope, x.binding.isStrictfp()));
 
         // Map all arguments.
         Iterator<JParameter> it = method.getParams().iterator();
@@ -1773,7 +1782,7 @@ public class GwtAstBuilder {
           body = new JMethodBody(method.getSourceInfo());
           method.setBody(body);
         }
-        pushMethodInfo(new MethodInfo(method, body, x.scope));
+        pushMethodInfo(new MethodInfo(method, body, x.scope, x.binding.isStrictfp()));
 
         // Map user arguments.
         Iterator<JParameter> it = method.getParams().iterator();
@@ -2541,7 +2550,8 @@ public class GwtAstBuilder {
       } else {
         initMeth = curClass.type.getInitMethod();
       }
-      pushMethodInfo(new MethodInfo(initMeth, (JMethodBody) initMeth.getBody(), scope));
+      pushMethodInfo(new MethodInfo(initMeth, (JMethodBody) initMeth.getBody(), scope,
+          curClass.isStrictfp));
     }
 
     private void pushMethodInfo(MethodInfo newInfo) {
@@ -2839,12 +2849,13 @@ public class GwtAstBuilder {
         new IdentityHashMap<SyntheticArgumentBinding, JField>();
     public final JDeclaredType type;
     public final TypeDeclaration typeDecl;
-
+    public final boolean isStrictfp;
     public ClassInfo(JDeclaredType type, TypeDeclaration x) {
       this.type = type;
       this.classType = (type instanceof JClassType) ? (JClassType) type : null;
       this.typeDecl = x;
       this.scope = x.scope;
+      this.isStrictfp = x.binding.isStrictfp();
     }
   }
 
@@ -2865,11 +2876,14 @@ public class GwtAstBuilder {
         new IdentityHashMap<LocalVariableBinding, JVariable>();
     public final JMethod method;
     public final MethodScope scope;
+    public final boolean isStrictfp;
 
-    public MethodInfo(JMethod method, JMethodBody methodBody, MethodScope methodScope) {
+    public MethodInfo(JMethod method, JMethodBody methodBody, MethodScope methodScope,
+        boolean isStrictfp) {
       this.method = method;
       this.body = methodBody;
       this.scope = methodScope;
+      this.isStrictfp = isStrictfp;
     }
   }
 
@@ -3474,5 +3488,20 @@ public class GwtAstBuilder {
       default:
         return new JMultiExpression(info, incrementsExpressions);
     }
+  }
+
+  private static Pattern floatPattern = Pattern.compile("(.+)[fF]");
+
+  private Double interpretConstantAsDouble(FloatLiteral x) {
+    Matcher matcher = floatPattern.matcher(x.toString());
+    if (matcher.matches() && !matcher.group(1).isEmpty()) {
+      try {
+        double value = Double.parseDouble(matcher.group(1));
+        return value;
+      } catch (NumberFormatException e) {
+        return null;
+      }
+    }
+    return null;
   }
 }

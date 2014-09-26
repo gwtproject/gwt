@@ -59,7 +59,7 @@ public class RandomTest extends GWTTestCase {
     assertEquals(0.9677559094241207, r.nextDouble());
   }
   
-  public void testNextFloat() {
+  public strictfp void testNextFloat() {
     Random r = new Random(1);
     assertEquals(0.7308782f, r.nextFloat());
     assertEquals(0.100473166f, r.nextFloat());
@@ -125,7 +125,7 @@ public class RandomTest extends GWTTestCase {
     assertEquals(-594798593157429144L, r.nextLong());
   }
   
-  public void testSetSeed() {
+  public strictfp void testSetSeed() {
     Random r = new Random();
     
     r.setSeed(1);

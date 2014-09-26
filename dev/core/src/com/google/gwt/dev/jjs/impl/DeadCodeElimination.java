@@ -37,6 +37,7 @@ import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JExpressionStatement;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
+import com.google.gwt.dev.jjs.ast.JFloatLiteral;
 import com.google.gwt.dev.jjs.ast.JForStatement;
 import com.google.gwt.dev.jjs.ast.JIfStatement;
 import com.google.gwt.dev.jjs.ast.JInstanceOf;
@@ -66,6 +67,7 @@ import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
+import com.google.gwt.dev.util.Ieee754_64_Arithmetic;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -793,11 +795,8 @@ public class DeadCodeElimination {
       if (isTypeBoolean(lhs)) {
         return toBoolean(lhs) == toBoolean(rhs);
       }
-      if (isTypeDouble(lhs) || isTypeDouble(rhs)) {
-        return toDouble(lhs) == toDouble(rhs);
-      }
-      if (isTypeFloat(lhs) || isTypeFloat(rhs)) {
-        return toFloat(lhs) == toFloat(rhs);
+      if (isTypeFloatOrDouble(lhs) || isTypeFloatOrDouble(rhs)) {
+        return Ieee754_64_Arithmetic.eq(toDouble(lhs), toDouble(rhs));
       }
       if (isTypeLong(lhs) || isTypeLong(rhs)) {
         return toLong(lhs) == toLong(rhs);
@@ -833,11 +832,11 @@ public class DeadCodeElimination {
             return true;
           }
           if (isTypeDouble(exp)) {
-            ctx.replaceMe(program.getLiteralDouble(-toDouble(exp)));
+            ctx.replaceMe(program.getLiteralDouble(Ieee754_64_Arithmetic.neg(toDouble(exp))));
             return true;
           }
           if (isTypeFloat(exp)) {
-            ctx.replaceMe(program.getLiteralFloat(-toFloat(exp)));
+            ctx.replaceMe(program.getLiteralFloat(Ieee754_64_Arithmetic.neg(toDouble(exp))));
             return true;
           }
           return false;
@@ -883,19 +882,19 @@ public class DeadCodeElimination {
             double res;
             switch (op) {
               case ADD:
-                res = left + right;
+                res = Ieee754_64_Arithmetic.add(left, right);
                 break;
               case SUB:
-                res = left - right;
+                res = Ieee754_64_Arithmetic.subtract(left, right);
                 break;
               case MUL:
-                res = left * right;
+                res = Ieee754_64_Arithmetic.multiply(left, right);
                 break;
               case DIV:
-                res = left / right;
+                res = Ieee754_64_Arithmetic.divide(left, right);
                 break;
               case MOD:
-                res = left % right;
+                res = Ieee754_64_Arithmetic.mod(left, right);
                 break;
               default:
                 assert false;
@@ -904,7 +903,7 @@ public class DeadCodeElimination {
             if (isTypeDouble(lhs) || isTypeDouble(rhs)) {
               ctx.replaceMe(program.getLiteralDouble(res));
             } else {
-              ctx.replaceMe(program.getLiteralFloat((float) res));
+              ctx.replaceMe(program.getLiteralFloat(res));
             }
             return true;
           } else if (isTypeIntegral(lhs) && isTypeIntegral(rhs)) {
@@ -962,16 +961,16 @@ public class DeadCodeElimination {
             boolean res;
             switch (op) {
               case LT:
-                res = left < right;
+                res = Ieee754_64_Arithmetic.lt(left, right);
                 break;
               case LTE:
-                res = left <= right;
+                res = Ieee754_64_Arithmetic.le(left, right);
                 break;
               case GT:
-                res = left > right;
+                res = Ieee754_64_Arithmetic.gt(left, right);
                 break;
               case GTE:
-                res = left >= right;
+                res = Ieee754_64_Arithmetic.ge(left, right);
                 break;
               default:
                 assert false;
@@ -1209,35 +1208,29 @@ public class DeadCodeElimination {
     }
 
     private boolean isLiteralNegativeOne(JExpression exp) {
-      if (exp instanceof JValueLiteral) {
-        JValueLiteral lit = (JValueLiteral) exp;
-        if (isTypeIntegral(lit)) {
-          if (toLong(lit) == -1) {
-            return true;
-          }
-        }
-        if (isTypeFloatOrDouble(lit)) {
-          if (toDouble(lit) == -1.0) {
-            return true;
-          }
-        }
+      if (!(exp instanceof JValueLiteral)) {
+        return false;
+      }
+      JValueLiteral lit = (JValueLiteral) exp;
+      if (isTypeIntegral(lit) && toLong(lit) == -1) {
+        return true;
+      }
+      if (isTypeFloatOrDouble(lit) && toDouble(lit) == -1.0) {
+        return true;
       }
       return false;
     }
 
     private boolean isLiteralOne(JExpression exp) {
-      if (exp instanceof JValueLiteral) {
-        JValueLiteral lit = (JValueLiteral) exp;
-        if (isTypeIntegral(lit)) {
-          if (toLong(lit) == 1) {
-            return true;
-          }
-        }
-        if (isTypeFloatOrDouble(lit)) {
-          if (toDouble(lit) == 1.0) {
-            return true;
-          }
-        }
+      if (!(exp instanceof JValueLiteral)) {
+        return false;
+      }
+      JValueLiteral lit = (JValueLiteral) exp;
+      if (isTypeIntegral(lit) && toLong(lit) == 1) {
+        return true;
+      }
+      if (isTypeFloatOrDouble(lit) && toDouble(lit) == 1.0) {
+        return true;
       }
       return false;
     }
@@ -1683,10 +1676,6 @@ public class DeadCodeElimination {
       }
     }
 
-    private float toFloat(JValueLiteral x) {
-      return (float) toDouble(x);
-    }
-
     /**
      * Cast a Java wrapper class (Integer, Double, Float, etc.) to a long.
      */
@@ -1897,11 +1886,11 @@ public class DeadCodeElimination {
       if (type == char.class && maybeLit instanceof JCharLiteral) {
         return Character.valueOf(((JCharLiteral) maybeLit).getValue());
       }
+      if (type == double.class && maybeLit instanceof JFloatLiteral) {
+        return new Double(((JFloatLiteral) maybeLit).getValue());
+      }
       if (type == double.class && maybeLit instanceof JDoubleLiteral) {
         return new Double(((JDoubleLiteral) maybeLit).getValue());
-      }
-      if (type == float.class && maybeLit instanceof JIntLiteral) {
-        return new Float(((JIntLiteral) maybeLit).getValue());
       }
       if (type == int.class && maybeLit instanceof JIntLiteral) {
         return Integer.valueOf(((JIntLiteral) maybeLit).getValue());

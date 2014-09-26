@@ -64,7 +64,7 @@ public class ConstraintCompositionCompileTest extends TckCompileTestCase {
         Pattern.compile("Unable to create a validator for "
             + "org.hibernate.jsr303.tck.tests.constraints.constraintcomposition."
             + "ConstraintCompositionTest.DummyEntityWithZipCode "
-            + "because The overriding type of a composite constraint must be "
+            + "because HV000081: The overriding type of a composite constraint must be "
             + "identical to the overridden one. "
             + "Expected int found class java.lang.String", Pattern.LITERAL));
   }

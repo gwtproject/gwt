@@ -20,7 +20,7 @@ import com.google.gwt.sample.validation.shared.Person;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-import org.hibernate.validator.engine.ValidationSupport;
+import org.hibernate.validator.internal.engine.ValidationSupport;
 
 import javax.validation.ConstraintViolationException;
 

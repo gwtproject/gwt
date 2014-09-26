@@ -13,11 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.hibernate.validator.constraints.impl;
+package org.hibernate.validator.internal.constraintvalidators;
 
 /**
  * Override the Hibernate implementation with the GWT version.
  */
-public class SizeValidatorForArraysOfShort extends
-    com.google.gwt.validation.client.constraints.SizeValidatorForArrayOfShort {
+public class SizeValidatorForArray extends
+    com.google.gwt.validation.client.constraints.SizeValidatorForArrayOfObject {
 }

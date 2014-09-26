@@ -13,15 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.hibernate.validator.constraints.impl;
-
-import com.google.gwt.validation.client.constraints.NotGwtCompatibleValidator;
-
-import org.hibernate.validator.constraints.URL;
+package org.hibernate.validator.internal.constraintvalidators;
 
 /**
- * This Validator is not GWT complatible.
+ * Override the Hibernate implementation with the GWT version.
  */
-public class URLValidator extends
- NotGwtCompatibleValidator<URL, Object> {
+public class SizeValidatorForArraysOfFloat extends
+    com.google.gwt.validation.client.constraints.SizeValidatorForArrayOfFloat {
 }

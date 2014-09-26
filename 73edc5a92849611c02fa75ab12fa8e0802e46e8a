@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "108f9fae_f9a49091",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-09-26T15:50:01Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.core.client.impl.Coercions.ensureInt\u0027 import.",
+      "revId": "73edc5a92849611c02fa75ab12fa8e0802e46e8a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -462,7 +462,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   @Override
   public boolean visit(JFloatLiteral x, Context ctx) {
-    printFloatLiteral(x.getValue());
+    printDoubleLiteral(x.getValue());
     return false;
   }
 

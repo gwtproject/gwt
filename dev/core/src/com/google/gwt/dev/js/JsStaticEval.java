@@ -65,7 +65,7 @@ import java.util.Set;
 /**
  * Removes JsFunctions that are never referenced in the program.
  */
-public class JsStaticEval {
+public strictfp class JsStaticEval {
   /**
    * Examines code to find out whether it contains any break or continue
    * statements.

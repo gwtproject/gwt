@@ -22,6 +22,30 @@
       "revId": "dcfc7e6436b572351cc2ef1f144bf46f4fc1d604",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10ca3fde_daad15ba",
+        "filename": "dev/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-09-26T11:19:33Z",
+      "side": 0,
+      "message": "Ha, actually no: I removed the dependency of RequestFactory on ASM a year and a half ago, in Iec08206c60905ccce972b0400f3c1253afa01755 ;-)\n\nBut gwt-servlet might now need a dependency on ASM (and gwt-servlet-deps.jar would then bundle it); could you confirm that your //third_party/java_src/gwt/svn/tools:servlet_deps rule includes ASM? Too bad the BUILD file is not open-source (maybe you could add it to the SVN tools?)",
+      "parentUuid": "10ca3fde_ef401171",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 61
+      },
+      "revId": "dcfc7e6436b572351cc2ef1f144bf46f4fc1d604",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -13,10 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.sample.validation.shared;
+package org.hibernate.validator.internal.constraintvalidators;
+
+import com.google.gwt.validation.client.constraints.NotGwtCompatibleValidator;
+
+import org.hibernate.validator.constraints.Email;
 
 /**
- * Client Validation Group.
+ * This Validator is not GWT complatible.
  */
-public interface ClientGroup {
+public class EmailValidator extends NotGwtCompatibleValidator<Email, String> {
+  // TODO(nchalko) make compatible
 }

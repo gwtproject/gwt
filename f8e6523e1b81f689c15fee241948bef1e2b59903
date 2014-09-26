@@ -52,6 +52,24 @@
       "revId": "f8e6523e1b81f689c15fee241948bef1e2b59903",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "108f9fae_7eb306ea",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CoverageTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-26T00:44:19Z",
+      "side": 1,
+      "message": "Well the cl makes the test fail always now (it accomplish the spirit of the patch, it not flaky anymore :).\n\nMy mistake it should be i \u003d 0; sorry will fix.",
+      "parentUuid": "f0c68bd8_594c9354",
+      "revId": "f8e6523e1b81f689c15fee241948bef1e2b59903",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

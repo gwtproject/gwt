@@ -62,7 +62,7 @@ public class GwtSpecificValidatorCreatorTest extends TestCase {
   }
 
   public void testAsLiteral_1_1f() {
-    assertLiteral("1.1f", 1.1f);
+    assertLiteral(String.format("%.16g", (double) 1.1f), 1.1f);
   }
 
   public void testAsLiteral_1L() {

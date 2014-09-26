@@ -25,6 +25,8 @@ import com.google.gwt.dev.jjs.test.overrides.package2.SomeSubClassInAnotherPacka
 import com.google.gwt.dev.jjs.test.overrides.package2.SomeSubSubClassInAnotherPackage;
 import com.google.gwt.dev.jjs.test.overrides.package3.SomeInterface;
 import com.google.gwt.dev.jjs.test.overrides.package3.SomePackageConfusedParent;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.ArrayList;
@@ -257,6 +259,33 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
     @junit.framework.Assert::assertEquals(ZZ)(
        regExp1.test(str), regExp2.test(str));
   }-*/;
+
+  @DoNotRunWith(Platform.Devel)
+  public void testLocalVariable() {
+    float num = getRoundedValue(1.005f);
+    assertEquals(1.00, num, 0.001);
+  }
+
+  @DoNotRunWith(Platform.Devel)
+  public void testParameterAssignment() {
+    float num = getRoundedValue2(1.005f);
+    assertEquals(1.00, num, 0.001);
+  }
+
+  @DoNotRunWith(Platform.Devel)
+  public float getRoundedValue(float parameter) {
+    float local = parameter;
+    local = local * 100f;
+    return Math.round(local) / 100f;
+  }
+
+  @DoNotRunWith(Platform.Devel)
+  public float getRoundedValue2(float parameter) {
+    parameter = parameter * 100f;
+    return Math.round(parameter) / 100f;
+  }
+
+
 
   private static void assertEqualContents(float[] expected, float[] actual) {
 

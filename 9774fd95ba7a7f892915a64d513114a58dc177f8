@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3058231a_eff84199",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-26T03:17:36Z",
+      "side": 1,
+      "message": "ack",
+      "parentUuid": "f0c68bd8_390717ef",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0c68bd8_99172b1e",
         "filename": "user/super/com/google/gwt/emul/java/math/BigInteger.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-09-26T00:50:28Z",
       "side": 1,
       "message": "This check duplicates package private NumberFormatException.forRadix().\nShould we move this check to GwtPreconditions too?",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3058231a_f25bc62d",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigInteger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-26T03:17:36Z",
+      "side": 1,
+      "message": "I didn\u0027t move them because these are not optimizable but it sounds reasonable if you want to move them later.",
+      "parentUuid": "f0c68bd8_99172b1e",
       "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "3058231a_526bb2ba",
+        "filename": "user/super/com/google/gwt/emul/java/math/MathContext.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-26T03:17:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0c68bd8_99ee0bd6",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0c68bd8_f9f3bfbb",
         "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "3058231a_92c51a7b",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-26T03:17:36Z",
+      "side": 1,
+      "message": "let\u0027s do it later.",
+      "parentUuid": "f0c68bd8_f9f3bfbb",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0c68bd8_d9f88399",
         "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2014-09-26T00:50:28Z",
       "side": 1,
       "message": "I think this looks better:\nE was \u003d get(index);\n\nalthough if this check meant to be optimized out, then ignore my suggestion",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3058231a_52c49276",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-26T03:17:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0c68bd8_d9f88399",
       "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -122,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "3058231a_72c19665",
+        "filename": "user/super/com/google/gwt/emul/java/util/LinkedHashMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-26T03:17:36Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f0c68bd8_f90c5f13",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0c68bd8_79e86fc6",
         "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
         "patchSetId": 3
@@ -133,6 +241,24 @@
       "writtenOn": "2014-09-26T00:50:28Z",
       "side": 1,
       "message": "I think it should be checkArrayElementIndex",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3058231a_5292d292",
+        "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-26T03:17:36Z",
+      "side": 1,
+      "message": "indexof only throws if index \u003c 0 not if index \u003e size.",
+      "parentUuid": "f0c68bd8_79e86fc6",
       "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -156,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "3058231a_728fd669",
+        "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-26T03:17:36Z",
+      "side": 1,
+      "message": "see my earlier comment.",
+      "parentUuid": "f0c68bd8_19db3b37",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0c68bd8_59e5b3ec",
         "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
         "patchSetId": 3
@@ -173,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "3058231a_925c3a2b",
+        "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-26T03:17:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0c68bd8_59e5b3ec",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0c68bd8_39def726",
         "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
         "patchSetId": 3
@@ -184,6 +346,24 @@
       "writtenOn": "2014-09-26T00:50:28Z",
       "side": 1,
       "message": "index \u003c 0",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3058231a_b2613ee2",
+        "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-26T03:17:36Z",
+      "side": 1,
+      "message": "good catch!",
+      "parentUuid": "f0c68bd8_39def726",
       "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

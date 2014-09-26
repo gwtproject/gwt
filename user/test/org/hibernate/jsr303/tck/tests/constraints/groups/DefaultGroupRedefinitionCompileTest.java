@@ -33,7 +33,7 @@ public class DefaultGroupRedefinitionCompileTest extends TckCompileTestCase {
         GroupDefinitionException.class, "Unable to create a validator for "
             + "org.hibernate.jsr303.tck.tests.constraints.groups."
             + "DefaultGroupRedefinitionTest.AddressWithDefaultInGroupSequence "
-            + "because 'Default.class' cannot appear in default group "
+            + "because HV000053: 'Default.class' cannot appear in default group "
             + "sequence list.");
   }
 
@@ -42,7 +42,7 @@ public class DefaultGroupRedefinitionCompileTest extends TckCompileTestCase {
         GroupDefinitionException.class, "Unable to create a validator for "
             + "org.hibernate.jsr303.tck.tests.constraints.groups."
             + "DefaultGroupRedefinitionTest.AddressWithDefaultInGroupSequence "
-            + "because 'Default.class' cannot appear in default group "
+            + "because HV000053: 'Default.class' cannot appear in default group "
             + "sequence list.");
   }
 }

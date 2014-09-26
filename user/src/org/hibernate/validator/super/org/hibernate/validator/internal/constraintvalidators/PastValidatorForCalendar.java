@@ -13,11 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.hibernate.validator.constraints.impl;
+package org.hibernate.validator.internal.constraintvalidators;
+
+import com.google.gwt.validation.client.constraints.NotGwtCompatibleValidator;
+
+import javax.validation.constraints.Past;
 
 /**
- * Override the Hibernate implementation with the GWT version.
+ * This Validator is not GWT complatible.
  */
-public class SizeValidatorForArraysOfByte extends
-    com.google.gwt.validation.client.constraints.SizeValidatorForArrayOfByte {
+public class PastValidatorForCalendar extends
+    NotGwtCompatibleValidator<Past, Object> {
 }

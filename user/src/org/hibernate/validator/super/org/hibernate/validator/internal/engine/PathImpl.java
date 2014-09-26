@@ -16,7 +16,7 @@
 * limitations under the License.
 */
 // Modified by Google: Replace java.util.Pattern with gwt RegExp
-package org.hibernate.validator.engine;
+package org.hibernate.validator.internal.engine;
 
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;

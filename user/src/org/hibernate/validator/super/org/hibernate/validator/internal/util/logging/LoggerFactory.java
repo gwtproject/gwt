@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Google Inc.
+ * Copyright 2014 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,11 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.hibernate.validator.constraints.impl;
+package org.hibernate.validator.internal.util.logging;
 
 /**
- * Override the Hibernate implementation with the GWT version.
+ * A stub replacement for logging in hibernate.
  */
-public class SizeValidatorForArraysOfChar extends
-    com.google.gwt.validation.client.constraints.SizeValidatorForArrayOfChar {
+public final class LoggerFactory {
+
+  public static Log make() {
+    return Log.INSTANCE;
+  }
+
+  // private constructor to avoid instantiation
+  private LoggerFactory(){
+  }
 }

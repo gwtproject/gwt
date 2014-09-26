@@ -32,7 +32,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
         ConstraintDefinitionWithoutGroupParameterFactory.TestValidator.class,
         "Unable to create a validator for org.hibernate.jsr303.tck."
             + "tests.constraints.invalidconstraintdefinitions."
-            + "InvalidConstraintDefinitionsTest.DummyEntityNoGroups because "
+            + "InvalidConstraintDefinitionsTest.DummyEntityNoGroups because HV000074: "
             + "org.hibernate.jsr303.tck.tests.constraints."
             + "invalidconstraintdefinitions.NoGroups contains Constraint "
             + "annotation, but does not contain a groups parameter.");
@@ -45,7 +45,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + "org.hibernate.jsr303.tck.tests.constraints"
             + ".invalidconstraintdefinitions."
             + "InvalidConstraintDefinitionsTest"
-            + ".DummyEntityNoMessage because "
+            + ".DummyEntityNoMessage because HV000074: "
             + "org.hibernate.jsr303.tck.tests.constraints"
             + ".invalidconstraintdefinitions"
             + ".NoMessage contains Constraint annotation, "
@@ -58,7 +58,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
         "Unable to create a validator for org.hibernate.jsr303.tck.tests"
             + ".constraints.invalidconstraintdefinitions"
             + ".InvalidConstraintDefinitionsTest"
-            + ".DummyEntityNoPayload because org.hibernate.jsr303.tck.tests"
+            + ".DummyEntityNoPayload because HV000074: org.hibernate.jsr303.tck.tests"
             + ".constraints.invalidconstraintdefinitions.NoPayload contains "
             + "Constraint annotation, but does not contain a payload "
             + "parameter.");
@@ -70,7 +70,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
         "Unable to create a validator for org.hibernate.jsr303.tck.tests"
             + ".constraints.invalidconstraintdefinitions"
             + ".InvalidConstraintDefinitionsTest.DummyEntityValidProperty "
-            + "because Parameters starting with 'valid' are not allowed in a constraint.");
+            + "because HV000073: Parameters starting with 'valid' are not allowed in a constraint.");
   }
 
   public void testConstraintDefinitionWithWrongDefaultGroupValue() {
@@ -80,7 +80,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + "org.hibernate.jsr303.tck.tests.constraints"
             + ".invalidconstraintdefinitions.InvalidConstraintDefinitionsTest"
             + ".DummyEntityInvalidDefaultGroup "
-            + "because org.hibernate.jsr303.tck.tests.constraints"
+            + "because HV000077: org.hibernate.jsr303.tck.tests.constraints"
             + ".invalidconstraintdefinitions"
             + ".InvalidDefaultGroup contains Constraint annotation, "
             + "but the groups parameter default value is not the empty array.");
@@ -93,7 +93,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + ".constraints.invalidconstraintdefinitions"
             + ".InvalidConstraintDefinitionsTest"
             + ".DummyEntityInvalidDefaultPayload "
-            + "because org.hibernate.jsr303.tck.tests.constraints"
+            + "because HV000075: org.hibernate.jsr303.tck.tests.constraints"
             + ".invalidconstraintdefinitions.InvalidDefaultPayload contains "
             + "Constraint annotation, but the payload parameter default "
             + "value is not the empty array.");
@@ -105,7 +105,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
         "Unable to create a validator for org.hibernate.jsr303.tck.tests"
             + ".constraints.invalidconstraintdefinitions"
             + ".InvalidConstraintDefinitionsTest"
-            + ".DummyEntityInvalidGroupsType because "
+            + ".DummyEntityInvalidGroupsType because HV000078: "
             + "org.hibernate.jsr303.tck.tests.constraints"
             + ".invalidconstraintdefinitions.InvalidGroupsType "
             + "contains Constraint annotation, but the groups "
@@ -118,7 +118,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
         "Unable to create a validator for org.hibernate.jsr303.tck.tests"
             + ".constraints"
             + ".invalidconstraintdefinitions.InvalidConstraintDefinitionsTest"
-            + ".DummyEntityInvalidMessageType because "
+            + ".DummyEntityInvalidMessageType because HV000079: "
             + "org.hibernate.jsr303.tck.tests.constraints"
             + ".invalidconstraintdefinitions.InvalidMessageType "
             + "contains Constraint annotation, "
@@ -132,7 +132,7 @@ public class InvalidConstraintDefinitionsCompileTest extends TckCompileTestCase 
             + "org.hibernate.jsr303.tck.tests"
             + ".constraints.invalidconstraintdefinitions"
             + ".InvalidConstraintDefinitionsTest.DummyEntityInvalidPayloadClass "
-            + "because org.hibernate.jsr303.tck.tests.constraints"
+            + "because HV000076: org.hibernate.jsr303.tck.tests.constraints"
             + ".invalidconstraintdefinitions.InvalidPayloadClass "
             + "contains Constraint annotation, "
             + "but the payload parameter is of wrong type.");

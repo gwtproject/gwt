@@ -2,6 +2,91 @@
   "comments": [
     {
       "key": {
+        "uuid": "f0c68bd8_390717ef",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-26T00:50:28Z",
+      "side": 1,
+      "message": "JDK throws here ArrayIndexOutOfBoundsException\nI know it should not be fixed in this pull request, just noted for myself",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c68bd8_99172b1e",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigInteger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-26T00:50:28Z",
+      "side": 1,
+      "message": "This check duplicates package private NumberFormatException.forRadix().\nShould we move this check to GwtPreconditions too?",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c68bd8_99ee0bd6",
+        "filename": "user/super/com/google/gwt/emul/java/math/MathContext.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-26T00:50:28Z",
+      "side": 1,
+      "message": "We should add here\ncheckCriticalArgument(precision \u003e\u003d 0, \"Digits \u003c 0\")\nto be compliant to JDK.\nBut I think it can be added in a separate pull request.",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c68bd8_f9f3bfbb",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-26T00:50:28Z",
+      "side": 1,
+      "message": "alsoIgnored \u003e 0 \u0026\u0026 !Float.isNaN(alsoIgnored)\nas per JDK\n\nI guess it shouldn\u0027t be fixed now as it\u0027ll break existing code",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c68bd8_d9f88399",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-26T00:50:28Z",
+      "side": 1,
+      "message": "I think this looks better:\nE was \u003d get(index);\n\nalthough if this check meant to be optimized out, then ignore my suggestion",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "108f9fae_185cdd25",
         "filename": "user/super/com/google/gwt/emul/java/util/LinkedHashMap.java",
         "patchSetId": 3
@@ -13,6 +98,92 @@
       "writtenOn": "2014-09-25T02:16:53Z",
       "side": 1,
       "message": "[error] \u0027java.util.ConcurrentModificationDetector.checkStructuralChange\u0027 should be separated from previous imports.",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c68bd8_f90c5f13",
+        "filename": "user/super/com/google/gwt/emul/java/util/LinkedHashMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-26T00:50:28Z",
+      "side": 1,
+      "message": "Please fix it",
+      "parentUuid": "108f9fae_185cdd25",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c68bd8_79e86fc6",
+        "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-26T00:50:28Z",
+      "side": 1,
+      "message": "I think it should be checkArrayElementIndex",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c68bd8_19db3b37",
+        "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-26T00:50:28Z",
+      "side": 1,
+      "message": "I think it should be checkArrayElementIndex",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c68bd8_59e5b3ec",
+        "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-26T00:50:28Z",
+      "side": 1,
+      "message": "since it\u0027s always called with size \u003d size(), we can remove this parameter and just use size() of the vector",
+      "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c68bd8_39def726",
+        "filename": "user/super/com/google/gwt/emul/java/util/Vector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-26T00:50:28Z",
+      "side": 1,
+      "message": "index \u003c 0",
       "revId": "9774fd95ba7a7f892915a64d513114a58dc177f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

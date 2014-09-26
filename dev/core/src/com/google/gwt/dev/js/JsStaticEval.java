@@ -65,7 +65,9 @@ import java.util.Set;
 /**
  * Removes JsFunctions that are never referenced in the program.
  */
-public class JsStaticEval {
+public strictfp class JsStaticEval {
+  // TODO(rluble): refactor arithmetic to a strcitfp JsArithmetic class and remove strictfp.
+  // strictfp is needed in order to conform to JS arithmetic semantics.
   /**
    * Examines code to find out whether it contains any break or continue
    * statements.

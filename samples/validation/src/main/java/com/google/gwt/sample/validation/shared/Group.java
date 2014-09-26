@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,8 +15,37 @@
  */
 package com.google.gwt.sample.validation.shared;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
- * Client Validation Group.
+ * A simple bean.
  */
-public interface ClientGroup {
+public class Group implements IsSerializable {
+
+  @NotNull
+  private String name;
+
+  @Min(2)
+  @Max(10)
+  private int size;
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public int getSize() {
+    return size;
+  }
+
+  public void setSize(int size) {
+    this.size = size;
+  }
 }

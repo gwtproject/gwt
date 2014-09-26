@@ -37,6 +37,7 @@ import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JExpressionStatement;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
+import com.google.gwt.dev.jjs.ast.JFloatLiteral;
 import com.google.gwt.dev.jjs.ast.JForStatement;
 import com.google.gwt.dev.jjs.ast.JIfStatement;
 import com.google.gwt.dev.jjs.ast.JInstanceOf;
@@ -91,7 +92,7 @@ import java.util.Set;
  * expression) rather than global transformations. Global optimizations done in
  * other passes will feed into this, however.
  */
-public class DeadCodeElimination {
+public strictfp class DeadCodeElimination {
   /**
    * Eliminates dead or unreachable code when possible, and makes local
    * simplifications like changing "<code>x || true</code>" to "<code>x</code>".
@@ -793,11 +794,8 @@ public class DeadCodeElimination {
       if (isTypeBoolean(lhs)) {
         return toBoolean(lhs) == toBoolean(rhs);
       }
-      if (isTypeDouble(lhs) || isTypeDouble(rhs)) {
+      if (isTypeFloatOrDouble(lhs) || isTypeFloatOrDouble(rhs)) {
         return toDouble(lhs) == toDouble(rhs);
-      }
-      if (isTypeFloat(lhs) || isTypeFloat(rhs)) {
-        return toFloat(lhs) == toFloat(rhs);
       }
       if (isTypeLong(lhs) || isTypeLong(rhs)) {
         return toLong(lhs) == toLong(rhs);
@@ -837,7 +835,7 @@ public class DeadCodeElimination {
             return true;
           }
           if (isTypeFloat(exp)) {
-            ctx.replaceMe(program.getLiteralFloat(-toFloat(exp)));
+            ctx.replaceMe(program.getLiteralFloat(-toDouble(exp)));
             return true;
           }
           return false;
@@ -904,7 +902,7 @@ public class DeadCodeElimination {
             if (isTypeDouble(lhs) || isTypeDouble(rhs)) {
               ctx.replaceMe(program.getLiteralDouble(res));
             } else {
-              ctx.replaceMe(program.getLiteralFloat((float) res));
+              ctx.replaceMe(program.getLiteralFloat(res));
             }
             return true;
           } else if (isTypeIntegral(lhs) && isTypeIntegral(rhs)) {
@@ -1683,10 +1681,6 @@ public class DeadCodeElimination {
       }
     }
 
-    private float toFloat(JValueLiteral x) {
-      return (float) toDouble(x);
-    }
-
     /**
      * Cast a Java wrapper class (Integer, Double, Float, etc.) to a long.
      */
@@ -1897,11 +1891,11 @@ public class DeadCodeElimination {
       if (type == char.class && maybeLit instanceof JCharLiteral) {
         return Character.valueOf(((JCharLiteral) maybeLit).getValue());
       }
+      if (type == double.class && maybeLit instanceof JFloatLiteral) {
+        return new Double(((JFloatLiteral) maybeLit).getValue());
+      }
       if (type == double.class && maybeLit instanceof JDoubleLiteral) {
         return new Double(((JDoubleLiteral) maybeLit).getValue());
-      }
-      if (type == float.class && maybeLit instanceof JIntLiteral) {
-        return new Float(((JIntLiteral) maybeLit).getValue());
       }
       if (type == int.class && maybeLit instanceof JIntLiteral) {
         return Integer.valueOf(((JIntLiteral) maybeLit).getValue());

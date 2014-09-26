@@ -306,7 +306,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     // are needed for obscure IEEE754 functionality -- specifically, converting
     // 0.0 - v into -v means the sign of the result is the opposite of the input
     // rathe than always being positive.
-    optimize("float", "return 0.0F - f;").intoString("return 0.0f - EntryPoint.f;");
+    optimize("float", "return 0.0F - f;").intoString("return 0.0 - EntryPoint.f;");
     optimize("double", "return 0.0 - d;").intoString("return 0.0 - EntryPoint.d;");
   }
 

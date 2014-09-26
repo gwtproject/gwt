@@ -284,7 +284,7 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
   }
 
   private static ConstraintOrigin convertConstraintOriginEnum(
-      org.hibernate.validator.metadata.ConstraintOrigin definedOn) {
+      org.hibernate.validator.internal.metadata.core.ConstraintOrigin definedOn) {
     switch (definedOn) {
       case DEFINED_IN_HIERARCHY:
         return ConstraintOrigin.DEFINED_IN_HIERARCHY;
@@ -313,8 +313,8 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
    * @throws UnexpectedTypeException if there is not exactly one maximally
    *           specific constraint validator for targetType.
    */
-  private static <A extends Annotation> Class<? extends ConstraintValidator<A, ?>> getValidatorForType(
-      ConstraintDescriptor<A> constraint, Class<?> targetType)
+  private static <A extends Annotation> Class<? extends ConstraintValidator<A, ?>>
+      getValidatorForType(ConstraintDescriptor<A> constraint, Class<?> targetType)
       throws UnexpectedTypeException {
     List<Class<? extends ConstraintValidator<A, ?>>> constraintValidatorClasses
         = constraint.getConstraintValidatorClasses();
@@ -574,8 +574,10 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
     }
     // for non-cascaded properties
     for (ConstraintDescriptor<?> constraint : p.getConstraintDescriptors()) {
-      org.hibernate.validator.metadata.ConstraintDescriptorImpl<?> constraintHibernate = 
-          (org.hibernate.validator.metadata.ConstraintDescriptorImpl<?>) constraint;
+      org.hibernate.validator.internal.metadata.descriptor.ConstraintDescriptorImpl<?>
+          constraintHibernate =
+          (org.hibernate.validator.internal.metadata.descriptor.ConstraintDescriptorImpl<?>)
+              constraint;
       if (constraintHibernate.getElementType() ==
           (useField ? ElementType.FIELD : ElementType.METHOD)) {
         return true;
@@ -1079,8 +1081,10 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
          beanHelper.getBeanDescriptor().getConstrainedProperties()) {
       int count = 0;
       for (ConstraintDescriptor<?> constraint : p.getConstraintDescriptors()) {
-        org.hibernate.validator.metadata.ConstraintDescriptorImpl<?> constraintHibernate = 
-            (org.hibernate.validator.metadata.ConstraintDescriptorImpl<?>) constraint;
+        org.hibernate.validator.internal.metadata.descriptor.ConstraintDescriptorImpl<?>
+            constraintHibernate =
+                (org.hibernate.validator.internal.metadata.descriptor.ConstraintDescriptorImpl<?>)
+                    constraint;
         if (areConstraintDescriptorGroupsValid(constraint)) {
           writeConstraintDescriptor(sw, constraint, constraintHibernate.getElementType(),
               convertConstraintOriginEnum(constraintHibernate.getDefinedOn()),
@@ -1099,8 +1103,10 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
     int count = 0;
     for (ConstraintDescriptor<?> constraint :
         beanHelper.getBeanDescriptor().getConstraintDescriptors()) {
-      org.hibernate.validator.metadata.ConstraintDescriptorImpl<?> constraintHibernate =
-          (org.hibernate.validator.metadata.ConstraintDescriptorImpl<?>) constraint;
+      org.hibernate.validator.internal.metadata.descriptor.ConstraintDescriptorImpl<?>
+          constraintHibernate =
+          (org.hibernate.validator.internal.metadata.descriptor.ConstraintDescriptorImpl<?>)
+              constraint;
       if (areConstraintDescriptorGroupsValid(constraint)) {
         writeConstraintDescriptor(sw, constraint, ElementType.TYPE,
             convertConstraintOriginEnum(constraintHibernate.getDefinedOn()),

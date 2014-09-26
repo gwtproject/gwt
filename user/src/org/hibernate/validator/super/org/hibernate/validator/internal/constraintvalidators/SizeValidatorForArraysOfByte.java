@@ -13,15 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.hibernate.validator.constraints.impl;
-
-import com.google.gwt.validation.client.constraints.NotGwtCompatibleValidator;
-
-import org.hibernate.validator.constraints.Email;
+package org.hibernate.validator.internal.constraintvalidators;
 
 /**
- * This Validator is not GWT complatible.
+ * Override the Hibernate implementation with the GWT version.
  */
-public class ScriptAssertValidator extends
-    NotGwtCompatibleValidator<Email, String> {
+public class SizeValidatorForArraysOfByte extends
+    com.google.gwt.validation.client.constraints.SizeValidatorForArrayOfByte {
 }

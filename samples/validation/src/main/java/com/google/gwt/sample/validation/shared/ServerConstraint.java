@@ -31,8 +31,8 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * Sample constraint that is designed to only run on the server. It will fail if
- * the Persons name is "Fail"
+ * Sample constraint that is designed to only run on the server.
+ * It will fail if the Persons name is "Fail".
  */
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE})
 @Retention(RUNTIME)

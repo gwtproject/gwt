@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "502cb77a_abc0f538",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStaticEval.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-09-27T05:19:40Z",
+      "side": 1,
+      "message": "sttrcitfp -\u003e strictfp",
+      "revId": "151104ca9e4bf7cfee10aa460414c1b365e407ef",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

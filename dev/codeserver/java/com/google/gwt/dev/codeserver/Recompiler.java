@@ -234,10 +234,11 @@ class Recompiler {
       }
 
       // Create a "module_name.nocache.js" that calculates the permutation and forces a recompile.
+      // TODO(dankurka): remove this once we have always recompile on reload.
       String stubJs = generateStub(module, compileLogger);
       PageUtil.writeFile(outputDir.getCanonicalPath() + "/" + outputModuleName + ".nocache.js",
           stubJs);
-
+      generateRecompileNoCacheJs(module, compileLogger, outputDir, outputModuleName);
     } catch (IOException e) {
       compileLogger.log(Type.ERROR, "Error creating stub compile directory.", e);
       UnableToCompleteException wrapped = new UnableToCompleteException();
@@ -254,7 +255,7 @@ class Recompiler {
 
     String outputModuleName = module.getName();
 
-    String stub = PageUtil.loadResource(Recompiler.class, "nomodule.nocache.js");
+    String stub = PageUtil.loadResource(Recompiler.class, "recompile.nocache.js");
 
     return "(function() {\n"
         + " var moduleName = '" + outputModuleName  + "';\n"
@@ -304,6 +305,8 @@ class Recompiler {
     if (success) {
       publishedCompileDir = compileDir;
       lastBuildInput = input;
+      String moduleName = outputModuleName.get();
+      generateRecompileNoCacheJs(module, compileLogger, new File(publishedCompileDir.getWarDir(), moduleName), moduleName);
     } else {
       // always recompile after an error
       lastBuildInput = null;
@@ -311,6 +314,18 @@ class Recompiler {
     lastBuild.set(compileDir); // makes compile log available over HTTP
 
     return success;
+  }
+
+  private static void generateRecompileNoCacheJs(ModuleDef module, TreeLogger compileLogger,
+      File outputDir, String moduleName) throws UnableToCompleteException {
+    try {
+      String stubJs = generateStub(module, compileLogger);
+      PageUtil.writeFile(outputDir.getCanonicalPath() + "/" + "/" + moduleName
+          + ".recompilenocache.js", stubJs);
+    } catch (IOException e) {
+      compileLogger.log(Type.ERROR, "Can not generate recompile.nocache.js", e);
+      throw new UnableToCompleteException();
+    }
   }
 
   /**

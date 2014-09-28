@@ -237,7 +237,8 @@ class Recompiler {
       String stubJs = generateStub(module, compileLogger);
       PageUtil.writeFile(outputDir.getCanonicalPath() + "/" + outputModuleName + ".nocache.js",
           stubJs);
-
+      String nocacheJs = generateRecompileNoCacheJs(module, compileLogger);
+      writeRecompileNoCacheJs(outputDir, outputModuleName, nocacheJs, compileLogger);
     } catch (IOException e) {
       compileLogger.log(Type.ERROR, "Error creating stub compile directory.", e);
       UnableToCompleteException wrapped = new UnableToCompleteException();
@@ -254,7 +255,7 @@ class Recompiler {
 
     String outputModuleName = module.getName();
 
-    String stub = PageUtil.loadResource(Recompiler.class, "nomodule.nocache.js");
+    String stub = PageUtil.loadResource(Recompiler.class, "recompile.nocache.js");
 
     return "(function() {\n"
         + " var moduleName = '" + outputModuleName  + "';\n"
@@ -272,6 +273,9 @@ class Recompiler {
     compilerContext = compilerContextBuilder.options(loadOptions).build();
 
     ModuleDef module = loadModule(compileLogger);
+    // We need to generate the stub before restricting permutations
+    String recompileJs = generateRecompileNoCacheJs(module, compileLogger);
+
     Map<String, String> bindingProperties = restrictPermutations(compileLogger, module,
         job.getBindingProperties());
 
@@ -304,6 +308,9 @@ class Recompiler {
     if (success) {
       publishedCompileDir = compileDir;
       lastBuildInput = input;
+      String moduleName = outputModuleName.get();
+      writeRecompileNoCacheJs(new File(publishedCompileDir.getWarDir(), moduleName), moduleName,
+          recompileJs, compileLogger);
     } else {
       // always recompile after an error
       lastBuildInput = null;
@@ -311,6 +318,27 @@ class Recompiler {
     lastBuild.set(compileDir); // makes compile log available over HTTP
 
     return success;
+  }
+
+  private static void writeRecompileNoCacheJs(File outputDir, String moduleName, String content,
+      TreeLogger compileLogger) throws UnableToCompleteException {
+    try {
+      PageUtil.writeFile(outputDir.getCanonicalPath() + "/" + moduleName + ".recompilenocache.js",
+          content);
+    } catch (IOException e) {
+      compileLogger.log(Type.ERROR, "Can not write recompilenocache.js", e);
+      throw new UnableToCompleteException();
+    }
+  }
+
+  private static String generateRecompileNoCacheJs(ModuleDef module, TreeLogger compileLogger)
+      throws UnableToCompleteException {
+    try {
+      return generateStub(module, compileLogger);
+    } catch (IOException e) {
+      compileLogger.log(Type.ERROR, "Can not generate recompilenocache.js", e);
+      throw new UnableToCompleteException();
+    }
   }
 
   /**

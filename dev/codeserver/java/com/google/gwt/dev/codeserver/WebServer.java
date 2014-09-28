@@ -81,7 +81,7 @@ public class WebServer {
       Pattern.compile("/(" + SAFE_DIRECTORY + "/)+" + SAFE_FILENAME + "$");
 
   private static final Pattern SAFE_CALLBACK =
-      Pattern.compile("([a-zA-Z_][a-zA-Z0-9_]*\\.)*[a-zA-Z_][a-zA-Z0-9_]*");
+      Pattern.compile("([a-zA-Z_][a-zA-Z0-9_\\$]*\\.)*[a-zA-Z_][a-zA-Z0-9_\\$]*");
 
   static final Pattern STRONG_NAME = Pattern.compile("[\\dA-F]{32}");
 

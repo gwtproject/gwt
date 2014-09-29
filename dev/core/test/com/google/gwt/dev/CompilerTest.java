@@ -568,7 +568,7 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testAllValidArgs() {
     assertProcessSuccess(argProcessor, new String[] {"-logLevel", "DEBUG", "-style",
         "PRETTY", "-ea", "-XdisableAggressiveOptimization", "-gen", "myGen",
-        "-war", "myWar", "-workDir", "myWork", "-extra", "myExtra", "-XcompilePerFile",
+        "-war", "myWar", "-workDir", "myWork", "-extra", "myExtra", "-incremental",
         "-localWorkers", "2", "-sourceLevel", "1.7", "c.g.g.h.H", "my.Module"});
 
     assertEquals(new File("myGen").getAbsoluteFile(),
@@ -587,7 +587,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     assertFalse(options.shouldOptimizeDataflow());
     assertFalse(options.shouldOrdinalizeEnums());
     assertFalse(options.shouldRemoveDuplicateFunctions());
-    assertTrue(options.shouldCompilePerFile());
+    assertTrue(options.isIncrementalCompileEnabled());
 
     assertEquals(SourceLevel.JAVA7, options.getSourceLevel());
 
@@ -613,7 +613,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     assertTrue(options.shouldOptimizeDataflow());
     assertTrue(options.shouldOrdinalizeEnums());
     assertTrue(options.shouldRemoveDuplicateFunctions());
-    assertFalse(options.shouldCompilePerFile());
+    assertFalse(options.isIncrementalCompileEnabled());
 
     assertEquals(1, options.getLocalWorkers());
 
@@ -1236,7 +1236,7 @@ public class CompilerTest extends ArgProcessorTestBase {
 
     // Setup options to perform a per-file compile, output to this new application directory and
     // compile the given module.
-    compilerOptions.setCompilePerFile(true);
+    compilerOptions.setIncrementalCompileEnabled(true);
     compilerOptions.setWarDir(applicationDir);
     compilerOptions.setModuleNames(ImmutableList.of(moduleName));
     compilerOptions.setOutput(output);

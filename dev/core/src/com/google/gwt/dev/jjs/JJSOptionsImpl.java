@@ -72,7 +72,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
     setClassMetadataDisabled(other.isClassMetadataDisabled());
     setClosureCompilerEnabled(other.isClosureCompilerEnabled());
     setClusterSimilarFunctions(other.shouldClusterSimilarFunctions());
-    setCompilePerFile(other.shouldCompilePerFile());
+    setIncrementalCompileEnabled(other.isIncrementalCompileEnabled());
     setCompilerMetricsEnabled(other.isCompilerMetricsEnabled());
     setEnableAssertions(other.isEnableAssertions());
     setFragmentCount(other.getFragmentCount());
@@ -239,7 +239,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
-  public void setCompilePerFile(boolean enabled) {
+  public void setIncrementalCompileEnabled(boolean enabled) {
     compilePerFile = enabled;
   }
 
@@ -364,7 +364,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
-  public boolean shouldCompilePerFile() {
+  public boolean isIncrementalCompileEnabled() {
     return compilePerFile;
   }
 
@@ -375,7 +375,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
 
   @Override
   public boolean shouldJDTInlineCompileTimeConstants() {
-    return !shouldCompilePerFile();
+    return !isIncrementalCompileEnabled();
   }
 
   @Override

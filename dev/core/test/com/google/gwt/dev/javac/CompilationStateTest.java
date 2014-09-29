@@ -94,7 +94,7 @@ public class CompilationStateTest extends CompilationStateTestBase {
   }
 
   private void checkAddGeneratedCompilationUnit(boolean compilePerFile) {
-    compilerContext.getOptions().setCompilePerFile(compilePerFile);
+    compilerContext.getOptions().setIncrementalCompileEnabled(compilePerFile);
 
     MinimalRebuildCache minimalRebuildCache = compilerContext.getMinimalRebuildCache();
 

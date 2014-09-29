@@ -105,6 +105,7 @@ public class OptGroupListBox extends ListBox {
    * @param label
    */
   public void removeGroup(String label) {
+    checkLabel(label);
     NodeList<Element> nodeList = getSelectElement().getElementsByTagName(OPT_GROUP);
     for (int i = 0; i < nodeList.getLength(); i++) {
       OptGroupElement optGroupElement = (OptGroupElement) nodeList.getItem(i);
@@ -122,6 +123,7 @@ public class OptGroupListBox extends ListBox {
    */
   public void setGroup(int index, String newLabel) {
     checkIndex(index);
+    checkLabel(newLabel);
     ((OptGroupElement) getSelectElement().getChild(index)).setLabel(newLabel);
   }
 
@@ -130,6 +132,8 @@ public class OptGroupListBox extends ListBox {
    * @param newLabel
    */
   public void setGroup(String oldLabel, String newLabel) {
+    checkLabel(oldLabel);
+    checkLabel(newLabel);
     NodeList<Element> nodeList = getSelectElement().getElementsByTagName(OPT_GROUP);
     for (int i = 0; i < nodeList.getLength(); i++)
       if (((OptGroupElement) nodeList.getItem(i)).getLabel().equalsIgnoreCase(oldLabel))
@@ -145,6 +149,7 @@ public class OptGroupListBox extends ListBox {
    */
   public void insertGroup(String label, String[] items, String[] values, Direction dir, int index,
       boolean disabled) {
+    checkLabel(label);
     OptGroupElement optGroupElement = Document.get().createOptGroupElement();
     optGroupElement.setLabel(label);
     optGroupElement.setDisabled(disabled);
@@ -172,4 +177,7 @@ public class OptGroupListBox extends ListBox {
     assert index > -1 && index < getSelectElement().getChildCount() : new IndexOutOfBoundsException();
   }
 
+  private final void checkLabel(String label) {
+    assert label != null && !label.isEmpty() : new Exception("label is mandatory");
+  }
 }

@@ -71,13 +71,20 @@
   // Set bookmarklet params in window
   $wnd.__gwt_bookmarklet_params = {'server_url': serverUrl};
 
-  // Save the original module base. (Returned by GWT.getModuleBaseURL in the app)
-  // querySelector is in IE8
-  var script = $doc.querySelector("script[src*='/__MODULE_NAME__.nocache.js']");
-  // fallback to location if script is embedded (#8894)
-  var src = script && script.src || $wnd.location.href;
-  // Remove QS and hash fragment (#8895)
-  $wnd[devModeHookKey + ':moduleBase'] = src.replace(/[?#].*$/g,'').replace(/[^\/]+$/,'');
+  // Save the original module base. (Returned by GWT.getModuleBaseURL in the app).
+  // We use the same sequence than computeScriptBase.js does.
+  // Note that querySelector works in IE8 when docMode >= 8
+  $wnd[devModeHookKey + ':moduleBase'] =
+    // try gwt baseUrl meta tag
+    ((e = $doc.querySelector("meta[name='gwt:property'][content^='baseUrl=']")) &&
+        e.content.replace(/^baseUrl=/, '')) ||
+    // try .nocache.js script directory
+    ((e = $doc.querySelector("script[src*='/__MODULE_NAME__.nocache.js']")) &&
+        e.src.replace(/\/__MODULE_NAME__.nocache.js.*$/,'')) ||
+    // try document base tag
+    ((e = $doc.querySelector("base")) && e.href) ||
+    // fall back to window location directory
+    $wnd.location.href.replace(/[?#].*$/g,'').replace(/[^\/]+$/,'');
 
   // Needed in the real nocache.js logic
   $wnd.__gwt_activeModules['__MODULE_NAME__'].canRedirect = true;

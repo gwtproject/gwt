@@ -86,6 +86,23 @@
       "revId": "84e8e617863176180c4c1cf863e172db2dc08229",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0ec287c_415292db",
+        "filename": "user/super/com/google/gwt/emul/java/util/EnumSet.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-29T16:35:50Z",
+      "side": 1,
+      "message": "Unfortunately, it\u0027s a bug.\nShould be \u0027of(first)\u0027",
+      "revId": "84e8e617863176180c4c1cf863e172db2dc08229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

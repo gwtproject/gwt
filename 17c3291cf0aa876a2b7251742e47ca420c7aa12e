@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "103ddf9e_71b0b2dc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ToStringGenerationVisitor.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-29T20:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3058231a_522012b7",
+      "revId": "17c3291cf0aa876a2b7251742e47ca420c7aa12e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3058231a_b24f7e7e",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsStaticEval.java",
         "patchSetId": 7
@@ -30,6 +48,30 @@
       "writtenOn": "2014-09-26T02:54:38Z",
       "side": 1,
       "message": "Can you add a comment describing the need for strictfp?",
+      "range": {
+        "startLine": 68,
+        "startChar": 7,
+        "endLine": 68,
+        "endChar": 15
+      },
+      "revId": "17c3291cf0aa876a2b7251742e47ca420c7aa12e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103ddf9e_918d1e2a",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStaticEval.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-29T20:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3058231a_b24f7e7e",
       "range": {
         "startLine": 68,
         "startChar": 7,
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "103ddf9e_3168ea6e",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-29T20:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3058231a_5239f2e6",
+      "revId": "17c3291cf0aa876a2b7251742e47ca420c7aa12e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3058231a_123f6acf",
         "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
         "patchSetId": 7
@@ -70,6 +130,30 @@
       "writtenOn": "2014-09-26T02:54:38Z",
       "side": 1,
       "message": "private",
+      "range": {
+        "startLine": 275,
+        "startChar": 2,
+        "endLine": 275,
+        "endChar": 8
+      },
+      "revId": "17c3291cf0aa876a2b7251742e47ca420c7aa12e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103ddf9e_51657695",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-29T20:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3058231a_123f6acf",
       "range": {
         "startLine": 275,
         "startChar": 2,
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "103ddf9e_71627290",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-29T20:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3058231a_323c6ed8",
+      "range": {
+        "startLine": 281,
+        "startChar": 2,
+        "endLine": 281,
+        "endChar": 8
+      },
+      "revId": "17c3291cf0aa876a2b7251742e47ca420c7aa12e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3058231a_b2785e9a",
         "filename": "user/test/com/google/gwt/validation/rebind/GwtSpecificValidatorCreatorTest.java",
         "patchSetId": 7
@@ -116,6 +224,24 @@
       "writtenOn": "2014-09-26T02:54:38Z",
       "side": 1,
       "message": "Shouldn\u0027t be same as \"testAsLiteral_1_1d\" ?",
+      "revId": "17c3291cf0aa876a2b7251742e47ca420c7aa12e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103ddf9e_d1a96667",
+        "filename": "user/test/com/google/gwt/validation/rebind/GwtSpecificValidatorCreatorTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-29T20:12:45Z",
+      "side": 1,
+      "message": "Here we have a choice (and both options will work exactly the same at runtime).\n\nIf a user writes in Java 1.1f does he really mean 1.1f or 1.1 in a precision of float or more? I think we can make the argument for make all float literals be treated as double literals.",
+      "parentUuid": "3058231a_b2785e9a",
       "revId": "17c3291cf0aa876a2b7251742e47ca420c7aa12e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -237,6 +237,99 @@
     },
     {
       "key": {
+        "uuid": "90f63048_685d77eb",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-29T23:16:09Z",
+      "side": 1,
+      "message": "Not really convinced since Main constructs the PropertyHelper object, calls it immediately, then never uses it again. It seems clearer for that API to be a function call.\n\nBefore I had a function that depends on magic globals directly. I think passing its dependencies as 3 parameters is a good cleanup, and then it\u0027s just as testable as an object would be.",
+      "parentUuid": "90f63048_e5dc129e",
+      "range": {
+        "startLine": 60,
+        "startChar": 25,
+        "endLine": 60,
+        "endChar": 49
+      },
+      "revId": "aa1a1d36c732160f8d4864465b767dc48c9f4229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90f63048_28708ffb",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-29T23:16:09Z",
+      "side": 1,
+      "message": "nit: could you use a local var here to reduce duplication at the beginning of each line?\n\nvar div \u003d $doc.createElement...\ndiv.style.zIndex \u003d ...\n...\nthis.__dialog \u003d div;\n\nSimilarly for overlay.",
+      "range": {
+        "startLine": 75,
+        "startChar": 2,
+        "endLine": 75,
+        "endChar": 6
+      },
+      "revId": "aa1a1d36c732160f8d4864465b767dc48c9f4229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90f63048_539a647c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-29T23:16:09Z",
+      "side": 1,
+      "message": "This api is kind of low level. How about this:\n\n dialog.showCompiling(moduleName);\n dialog.showError(status, logUrl, tryAgainCallback);\n dialog.hide();",
+      "range": {
+        "startLine": 116,
+        "startChar": 17,
+        "endLine": 116,
+        "endChar": 20
+      },
+      "revId": "aa1a1d36c732160f8d4864465b767dc48c9f4229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90f63048_93346c85",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-29T23:16:09Z",
+      "side": 1,
+      "message": "\"A map of binding property names (string) to their values (string).\"\nAlso remove @returns",
+      "range": {
+        "startLine": 151,
+        "startChar": 43,
+        "endLine": 151,
+        "endChar": 44
+      },
+      "revId": "aa1a1d36c732160f8d4864465b767dc48c9f4229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90f63048_82fc1c86",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
         "patchSetId": 1
@@ -272,6 +365,30 @@
       "side": 1,
       "message": "If we do not build it as on object we are getting into a callback mess with renderError and other things, where we need scoped variables again for the dialog.\nThis way code stays more maintainable and its clear which dependencies are needed.",
       "parentUuid": "90f63048_82fc1c86",
+      "range": {
+        "startLine": 275,
+        "startChar": 9,
+        "endLine": 275,
+        "endChar": 13
+      },
+      "revId": "aa1a1d36c732160f8d4864465b767dc48c9f4229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90f63048_33512025",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-29T23:16:09Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you mean since there are three dependencies either way and if they\u0027re passed as parameters, it\u0027s clear.",
+      "parentUuid": "90f63048_45cf3eea",
       "range": {
         "startLine": 275,
         "startChar": 9,

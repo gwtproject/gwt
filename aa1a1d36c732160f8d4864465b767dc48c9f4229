@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "90f63048_857ae6e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-29T21:30:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90f63048_9f1113c3",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "aa1a1d36c732160f8d4864465b767dc48c9f4229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90f63048_dfb55b54",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-09-29T20:12:45Z",
       "side": 1,
       "message": "I\u0027m not sure we would ever remove this. When running the Super Dev Mode from a static html page instead of a server, people link directly to .nocache.js, so it should always exist.",
+      "range": {
+        "startLine": 237,
+        "startChar": 25,
+        "endLine": 237,
+        "endChar": 31
+      },
+      "revId": "aa1a1d36c732160f8d4864465b767dc48c9f4229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90f63048_45b3be92",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-29T21:30:48Z",
+      "side": 1,
+      "message": "removed the comment",
+      "parentUuid": "90f63048_dfb55b54",
       "range": {
         "startLine": 237,
         "startChar": 25,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "90f63048_2541dad2",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-29T21:30:48Z",
+      "side": 1,
+      "message": "fixed naming to be recompilenocache.js.",
+      "parentUuid": "90f63048_5fca6bdb",
+      "range": {
+        "startLine": 326,
+        "startChar": 54,
+        "endLine": 326,
+        "endChar": 63
+      },
+      "revId": "aa1a1d36c732160f8d4864465b767dc48c9f4229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90f63048_5ff14b29",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2014-09-29T20:12:45Z",
       "side": 1,
       "message": "For consistency, let\u0027s allow $ in the last JavaScript identifier as well.\n\n(I\u0027m curious where you ran into this.)",
+      "range": {
+        "startLine": 84,
+        "startChar": 74,
+        "endLine": 84,
+        "endChar": 79
+      },
+      "revId": "aa1a1d36c732160f8d4864465b767dc48c9f4229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90f63048_a57a8a10",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-29T21:30:48Z",
+      "side": 1,
+      "message": "I named the callback __$sdm__something and this is why I hit that issue.\n\nDone",
+      "parentUuid": "90f63048_5ff14b29",
       "range": {
         "startLine": 84,
         "startChar": 74,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "90f63048_e5dc129e",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-29T21:30:48Z",
+      "side": 1,
+      "message": "I\u0027d rather have objects depending on each other since this way we can do stubbing for tests.\n\nThis also encapsulate the deps for calculating the properties. I very much prefer the same style for everything, since its makes things more readable.",
+      "parentUuid": "90f63048_02adacaa",
+      "range": {
+        "startLine": 60,
+        "startChar": 25,
+        "endLine": 60,
+        "endChar": 49
+      },
+      "revId": "aa1a1d36c732160f8d4864465b767dc48c9f4229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90f63048_82fc1c86",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2014-09-29T20:12:45Z",
       "side": 1,
       "message": "I don\u0027t think Main needs to be an object. We are just constructing it and calling it, so it can be a function.",
+      "range": {
+        "startLine": 275,
+        "startChar": 9,
+        "endLine": 275,
+        "endChar": 13
+      },
+      "revId": "aa1a1d36c732160f8d4864465b767dc48c9f4229",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90f63048_45cf3eea",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-29T21:30:48Z",
+      "side": 1,
+      "message": "If we do not build it as on object we are getting into a callback mess with renderError and other things, where we need scoped variables again for the dialog.\nThis way code stays more maintainable and its clear which dependencies are needed.",
+      "parentUuid": "90f63048_82fc1c86",
       "range": {
         "startLine": 275,
         "startChar": 9,

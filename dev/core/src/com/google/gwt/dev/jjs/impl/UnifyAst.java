@@ -704,7 +704,7 @@ public class UnifyAst {
 
   public UnifyAst(TreeLogger logger, CompilerContext compilerContext, JProgram program,
       JsProgram jsProgram, RebindPermutationOracle rpo) {
-    this.compilePerFile = compilerContext.getOptions().shouldCompilePerFile();
+    this.compilePerFile = compilerContext.getOptions().isIncrementalCompileEnabled();
     this.isLibraryCompile = !compilerContext.shouldCompileMonolithic();
 
     this.logger = logger;

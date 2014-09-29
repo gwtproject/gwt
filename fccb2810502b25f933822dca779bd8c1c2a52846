@@ -106,6 +106,24 @@
       "revId": "fccb2810502b25f933822dca779bd8c1c2a52846",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90f63048_e27be8ae",
+        "filename": "user/src/com/google/gwt/core/client/impl/Coercions.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-29T19:38:47Z",
+      "side": 1,
+      "message": "Yes. The compiler does not optimize \"n|0\" because it does not track overflows hence it does not know (for the most) whether n is already really an int.",
+      "parentUuid": "f0c68bd8_bfe927d2",
+      "revId": "fccb2810502b25f933822dca779bd8c1c2a52846",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

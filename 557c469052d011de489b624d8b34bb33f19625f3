@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0ec287c_a7004e23",
+        "filename": "user/super/com/google/gwt/emul/java/util/LinkedList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-30T13:52:07Z",
+      "side": 1,
+      "message": "typo: Tail node",
+      "revId": "557c469052d011de489b624d8b34bb33f19625f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0ec287c_8752ea2a",
+        "filename": "user/super/com/google/gwt/emul/java/util/LinkedList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-09-30T13:52:07Z",
+      "side": 1,
+      "message": "Maybe it\u0027s worth to initialize header and tail right in the field declaration?",
+      "revId": "557c469052d011de489b624d8b34bb33f19625f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

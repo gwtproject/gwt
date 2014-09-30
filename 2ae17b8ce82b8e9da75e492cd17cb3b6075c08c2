@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3033c4f6_6fcfcdbc",
+        "filename": "user/src/com/google/gwt/core/client/impl/Coercions.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-30T21:20:55Z",
+      "side": 1,
+      "message": "I think you misinterpreted my earlier comments.\n\nFirst can you added a test for this function:\n\n // x should be equal to 2\n int _2 \u003d Random.nextInt(1) + 1;\n assertEquals(..., ensureInt(_2 * Integer.MAX))\n\nMy second suggestion was to delegate to compiler on coercing so we don\u0027t have two different ways:\n\n public static in ensureInt(int value) {\n   return (int)(double) value;\n }",
+      "revId": "2ae17b8ce82b8e9da75e492cd17cb3b6075c08c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103080e8_ab4fe9fc",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-30T21:20:55Z",
+      "side": 1,
+      "message": "as you are changing this, you can just short circuit similar to JRE:\n\n  hashCode \u003d 31 * hashCode + (e ? 1231 : 1237);",
+      "range": {
+        "startLine": 868,
+        "startChar": 33,
+        "endLine": 868,
+        "endChar": 64
+      },
+      "revId": "2ae17b8ce82b8e9da75e492cd17cb3b6075c08c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103080e8_cbf6b56f",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-09-30T21:20:55Z",
+      "side": 1,
+      "message": "I think it should be fine to always use 31, doesn\u0027t need to be parametric.",
+      "revId": "2ae17b8ce82b8e9da75e492cd17cb3b6075c08c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

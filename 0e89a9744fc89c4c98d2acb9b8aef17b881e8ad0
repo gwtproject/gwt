@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "101b206c_4de63d72",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-30T21:20:51Z",
+      "side": 1,
+      "message": "As brian set on first compile (noprecompile) when setting up the dir these files need to have the same content.",
+      "parentUuid": "101b206c_2251d024",
+      "range": {
+        "startLine": 240,
+        "startChar": 6,
+        "endLine": 240,
+        "endChar": 61
+      },
+      "revId": "0e89a9744fc89c4c98d2acb9b8aef17b881e8ad0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0ec287c_4774e2f9",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
         "patchSetId": 6
@@ -60,6 +84,30 @@
       "writtenOn": "2014-09-30T18:50:07Z",
       "side": 1,
       "message": "Maybe rename to generateModuleRecompileJs",
+      "range": {
+        "startLine": 253,
+        "startChar": 24,
+        "endLine": 253,
+        "endChar": 36
+      },
+      "revId": "0e89a9744fc89c4c98d2acb9b8aef17b881e8ad0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "101b206c_ed2e29fe",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-30T21:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0ec287c_4774e2f9",
       "range": {
         "startLine": 253,
         "startChar": 24,
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "101b206c_ad2831f0",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-30T21:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0ec287c_674da6b9",
+      "range": {
+        "startLine": 265,
+        "startChar": 37,
+        "endLine": 265,
+        "endChar": 73
+      },
+      "revId": "0e89a9744fc89c4c98d2acb9b8aef17b881e8ad0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0ec287c_c787d26b",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
         "patchSetId": 6
@@ -106,6 +178,30 @@
       "writtenOn": "2014-09-30T18:50:07Z",
       "side": 1,
       "message": "I would use \".recompile.nocache.js\". Reads better, follows GWT naming convention and it is better to match using Regexp for applying no-cache HTTP headers if needed.",
+      "range": {
+        "startLine": 329,
+        "startChar": 77,
+        "endLine": 329,
+        "endChar": 93
+      },
+      "revId": "0e89a9744fc89c4c98d2acb9b8aef17b881e8ad0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "101b206c_6dca19dc",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-30T21:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0ec287c_c787d26b",
       "range": {
         "startLine": 329,
         "startChar": 77,
@@ -369,6 +465,30 @@
     },
     {
       "key": {
+        "uuid": "101b206c_2da2e10b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-30T21:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0ec287c_0755ba47",
+      "range": {
+        "startLine": 231,
+        "startChar": 36,
+        "endLine": 231,
+        "endChar": 52
+      },
+      "revId": "0e89a9744fc89c4c98d2acb9b8aef17b881e8ad0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0ec287c_e751b65b",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
         "patchSetId": 6
@@ -392,6 +512,30 @@
     },
     {
       "key": {
+        "uuid": "101b206c_eda3c90b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-30T21:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0ec287c_e751b65b",
+      "range": {
+        "startLine": 251,
+        "startChar": 71,
+        "endLine": 251,
+        "endChar": 91
+      },
+      "revId": "0e89a9744fc89c4c98d2acb9b8aef17b881e8ad0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0ec287c_476bc211",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
         "patchSetId": 6
@@ -403,6 +547,30 @@
       "writtenOn": "2014-09-30T18:50:07Z",
       "side": 1,
       "message": ".recompile.nocache.js",
+      "range": {
+        "startLine": 26,
+        "startChar": 65,
+        "endLine": 26,
+        "endChar": 81
+      },
+      "revId": "0e89a9744fc89c4c98d2acb9b8aef17b881e8ad0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103080e8_ab45a90d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-09-30T21:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0ec287c_476bc211",
       "range": {
         "startLine": 26,
         "startChar": 65,

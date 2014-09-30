@@ -41,13 +41,16 @@ import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.resource.impl.ZipFileClassPathEntry;
 import com.google.gwt.dev.util.log.CompositeTreeLogger;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.thirdparty.guava.common.base.Charsets;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.io.Files;
+import com.google.gwt.thirdparty.guava.common.io.Resources;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.net.URL;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
@@ -230,13 +233,14 @@ class Recompiler {
           compileLogger.log(Type.ERROR, "cannot create directory: " + parent);
           throw new UnableToCompleteException();
         }
-        Files.copy(publicResources.getResourceAsStream(pathName), file.toPath());
+        Files.asByteSink(file).writeFrom(publicResources.getResourceAsStream(pathName));
       }
 
       // Create a "module_name.nocache.js" that calculates the permutation and forces a recompile.
       String stubJs = generateStub(module, compileLogger);
-      PageUtil.writeFile(outputDir.getCanonicalPath() + "/" + outputModuleName + ".nocache.js",
-          stubJs);
+      Files.write(stubJs,
+          new File(outputDir.getCanonicalPath() + "/" + outputModuleName + ".nocache.js"),
+          Charsets.UTF_8);
 
     } catch (IOException e) {
       compileLogger.log(Type.ERROR, "Error creating stub compile directory.", e);
@@ -254,7 +258,8 @@ class Recompiler {
 
     String outputModuleName = module.getName();
 
-    String stub = PageUtil.loadResource(Recompiler.class, "nomodule.nocache.js");
+    URL resource = Resources.getResource(Recompiler.class, "nomodule.nocache.js");
+    String stub = Resources.toString(resource, Charsets.UTF_8);
 
     return "(function() {\n"
         + " var moduleName = '" + outputModuleName  + "';\n"

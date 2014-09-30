@@ -62,6 +62,13 @@ public class JsFunctionClusterer extends JsAbstractTextTransformer {
   private static final int SEARCH_LIMIT = 10;
 
   /**
+   * Returns true is the line is empty.
+   */
+  private static boolean isEmptyLine(String code) {
+    return code.equals("\n");
+  }
+
+  /**
    * Tells whether a statement is a function declaration or not.
    */
   private static boolean isFunctionDeclaration(String code) {
@@ -96,7 +103,9 @@ public class JsFunctionClusterer extends JsAbstractTextTransformer {
     // gather up all of the indices of function decl statements
     for (int i = 0; i < statementRanges.numStatements(); i++) {
       String code = getJsForRange(i);
-      if (isFunctionDeclaration(code)) {
+      // Empty lines are also moved to the top. It is required that the first line is
+      // empty.
+      if (isFunctionDeclaration(code) || isEmptyLine(code)) {
         functionIndices.add(i);
       }
     }
@@ -164,7 +173,9 @@ public class JsFunctionClusterer extends JsAbstractTextTransformer {
     // Then output everything else that is not a function.
     for (int i = 0; i < statementRanges.numStatements(); i++) {
       String code = getJsForRange(i);
-      if (!isFunctionDeclaration(code)) {
+      // Empty lines are also moved to the top. It is required that the first line is
+      // empty.
+      if (!isFunctionDeclaration(code) && !isEmptyLine(code)) {
         addStatement(j, code, newJs, starts, ends);
         reorderedIndices[j] = i;
         j++;

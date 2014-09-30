@@ -16,6 +16,98 @@
       "revId": "8f444fbeae0107cd673c41ddec2eda4b457cd442",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9092b010_9f4fb3fd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsFunctionClusterer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-30T23:26:38Z",
+      "side": 1,
+      "message": "s/is/if",
+      "range": {
+        "startLine": 65,
+        "startChar": 18,
+        "endLine": 65,
+        "endChar": 20
+      },
+      "revId": "8f444fbeae0107cd673c41ddec2eda4b457cd442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9092b010_7fae6f2c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsFunctionClusterer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-30T23:26:38Z",
+      "side": 1,
+      "message": "please mention why it\u0027s required",
+      "range": {
+        "startLine": 106,
+        "startChar": 9,
+        "endLine": 107,
+        "endChar": 15
+      },
+      "revId": "8f444fbeae0107cd673c41ddec2eda4b457cd442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9092b010_c22ec4ac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsFunctionClusterer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-30T23:26:38Z",
+      "side": 1,
+      "message": "// Output any statements that were not previously selected for reordering.\n\nalso considering wrapping up this combined isFunctionDeclaration or isEmptyLine check as a self documenting \"isReorderableStatement\" check. doing so would pretty much eliminate the need for a comment here",
+      "range": {
+        "startLine": 176,
+        "startChar": 9,
+        "endLine": 177,
+        "endChar": 15
+      },
+      "revId": "8f444fbeae0107cd673c41ddec2eda4b457cd442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9092b010_ff2efffd",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsSourceGenerationVisitor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-09-30T23:26:38Z",
+      "side": 1,
+      "message": "should this addition be in JsToStringGenerationVisitor instead?",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 22
+      },
+      "revId": "8f444fbeae0107cd673c41ddec2eda4b457cd442",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -45,7 +45,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
   public void testConditionalOptimizations() throws Exception {
     optimize("int", "return true ? 3 : 4;").into("return 3;");
     optimize("int", "return false ? 3 : 4;").into("return 4;");
-
+                                                                              Js
     optimize("boolean", "return b ? true : b1;").into("return b || b1;");
     optimize("boolean", "return b ? false : b1;").into("return !b && b1;");
     optimize("boolean", "return b ? b1 : true;").into("return !b || b1;");

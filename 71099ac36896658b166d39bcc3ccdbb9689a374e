@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "103080e8_5195d4c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Java is allow to use more precision for each operation than the one specified in IEEE754. I am not sure if I understand your comment but precision in this setting means basically more significant bits preserved.",
+      "parentUuid": "101b206c_16473a99",
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "101b206c_d93e93b0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JFloatLiteral.java",
         "patchSetId": 9
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "103080e8_d190a458",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JFloatLiteral.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Let\u0027s leave it this way for now as there is code that differenciates between these two via instanceof checks.",
+      "parentUuid": "101b206c_d93e93b0",
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "101b206c_b9d2b70c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JFloatLiteral.java",
         "patchSetId": 9
@@ -47,6 +83,30 @@
       "writtenOn": "2014-09-30T17:21:59Z",
       "side": 1,
       "message": "Double.intBitsToDouble",
+      "range": {
+        "startLine": 26,
+        "startChar": 83,
+        "endLine": 26,
+        "endChar": 88
+      },
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103080e8_b18d183f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JFloatLiteral.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "101b206c_b9d2b70c",
       "range": {
         "startLine": 26,
         "startChar": 83,
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "103080e8_b124f8a4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JFloatLiteral.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "This is essentially interning ZERO, no real reason for it.",
+      "parentUuid": "101b206c_39dfc71d",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 31
+      },
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "101b206c_590163db",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JFloatLiteral.java",
         "patchSetId": 9
@@ -93,6 +177,30 @@
       "writtenOn": "2014-09-30T17:21:59Z",
       "side": 1,
       "message": "why empty block?",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 5
+      },
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103080e8_71d570fb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JFloatLiteral.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Because JFloatLiteral does not have components to be visited. It is written this way probably to use the same pattern as for nodes with components.",
+      "parentUuid": "101b206c_590163db",
       "range": {
         "startLine": 64,
         "startChar": 0,
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "103080e8_91cfbc64",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "101b206c_59a8436d",
+      "range": {
+        "startLine": 1229,
+        "startChar": 6,
+        "endLine": 1235,
+        "endChar": 19
+      },
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "101b206c_5976037d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 9
@@ -139,6 +271,30 @@
       "writtenOn": "2014-09-30T17:21:59Z",
       "side": 1,
       "message": "perhaps rename to isTypeFloatingPoint? (similar to isTypeIntegral)",
+      "range": {
+        "startLine": 1274,
+        "startChar": 20,
+        "endLine": 1274,
+        "endChar": 39
+      },
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103080e8_51a8346d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "101b206c_5976037d",
       "range": {
         "startLine": 1274,
         "startChar": 20,
@@ -174,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "103080e8_b1dcf8f3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Removed this from this patch.",
+      "parentUuid": "d0c347c9_90bb6aa7",
+      "range": {
+        "startLine": 869,
+        "startChar": 18,
+        "endLine": 869,
+        "endChar": 43
+      },
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0c347c9_f0c8de39",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 9
@@ -185,6 +365,30 @@
       "writtenOn": "2014-09-30T17:21:59Z",
       "side": 1,
       "message": "floatValue (as discussed)",
+      "range": {
+        "startLine": 872,
+        "startChar": 29,
+        "endLine": 872,
+        "endChar": 40
+      },
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103080e8_91d9fc03",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0c347c9_f0c8de39",
       "range": {
         "startLine": 872,
         "startChar": 29,
@@ -220,6 +424,30 @@
     },
     {
       "key": {
+        "uuid": "103080e8_91757c3b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 3497,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Yes. Removed this to a follow up patch.",
+      "parentUuid": "d0c347c9_b0be6696",
+      "range": {
+        "startLine": 3497,
+        "startChar": 30,
+        "endLine": 3497,
+        "endChar": 56
+      },
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0c347c9_70e6aebe",
         "filename": "dev/core/src/com/google/gwt/dev/util/Ieee754_64_Arithmetic.java",
         "patchSetId": 9
@@ -231,6 +459,30 @@
       "writtenOn": "2014-09-30T17:21:59Z",
       "side": 1,
       "message": "Rename to StrictfpArithmetic?",
+      "range": {
+        "startLine": 21,
+        "startChar": 22,
+        "endLine": 21,
+        "endChar": 43
+      },
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103080e8_d1b304de",
+        "filename": "dev/core/src/com/google/gwt/dev/util/Ieee754_64_Arithmetic.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "I think it is more explicit to say Ieeeblahbla as this is what we desire.",
+      "parentUuid": "d0c347c9_70e6aebe",
       "range": {
         "startLine": 21,
         "startChar": 22,
@@ -266,6 +518,30 @@
     },
     {
       "key": {
+        "uuid": "103080e8_f19de041",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsStaticEvalTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Nope. I have been adding lots of missing corner cases.",
+      "parentUuid": "d0c347c9_b0f0266e",
+      "range": {
+        "startLine": 48,
+        "startChar": 32,
+        "endLine": 48,
+        "endChar": 36
+      },
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0c347c9_f01a9e05",
         "filename": "user/test/com/google/gwt/i18n/client/I18NTest.java",
         "patchSetId": 9
@@ -283,6 +559,24 @@
     },
     {
       "key": {
+        "uuid": "103080e8_d19ae447",
+        "filename": "user/test/com/google/gwt/i18n/client/I18NTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Removed this from this patch.",
+      "parentUuid": "d0c347c9_f01a9e05",
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0c347c9_d01fa2f3",
         "filename": "user/test/com/google/gwt/validation/rebind/GwtSpecificValidatorCreatorTest.java",
         "patchSetId": 9
@@ -294,6 +588,24 @@
       "writtenOn": "2014-09-30T17:21:59Z",
       "side": 1,
       "message": "??",
+      "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103080e8_71bfb08a",
+        "filename": "user/test/com/google/gwt/validation/rebind/GwtSpecificValidatorCreatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-09-30T22:50:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0c347c9_d01fa2f3",
       "revId": "71099ac36896658b166d39bcc3ccdbb9689a374e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

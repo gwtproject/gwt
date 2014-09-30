@@ -160,7 +160,7 @@ public class JsDuplicateCaseFolder {
 
   // Needed for OptimizerTestBase
   public static boolean exec(JsProgram program) {
-    return new JsDuplicateCaseFolder().execImpl(program.getFragmentBlock(0));
+    return new JsDuplicateCaseFolder().execImpl(program.getFragment(0).getGlobalBlock());
   }
 
   public JsDuplicateCaseFolder() {

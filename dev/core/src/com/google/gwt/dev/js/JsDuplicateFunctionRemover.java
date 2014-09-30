@@ -239,7 +239,7 @@ public class JsDuplicateFunctionRemover {
   private boolean execImpl() {
     boolean changed = false;
     for (int i = 0; i < program.getFragmentCount(); i++) {
-      JsBlock fragment = program.getFragmentBlock(i);
+      JsBlock fragment = program.getFragment(i).getGlobalBlock();
 
       DuplicateFunctionBodyRecorder dfbr = new DuplicateFunctionBodyRecorder();
       dfbr.accept(fragment);

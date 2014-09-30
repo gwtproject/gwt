@@ -1827,6 +1827,7 @@ public class GenerateJavaScriptAST {
 
       List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();
 
+
       Set<JDeclaredType> preambleTypes = generatePreamble(x, globalStmts);
 
       if (compilePerFile) {

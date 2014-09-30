@@ -589,6 +589,9 @@ public class CrossSiteIframeLinker extends SelectionScriptLinker {
     }
 
     replaceAll(buffer, "__MODULE_NAME__", context.getModuleName());
+
+    // Add an empty line at the beginning for the linker to add the prefix.
+    buffer.insert(0, "\n");
     String script =
         generatePrimaryFragmentString(logger, context, result, buffer.toString(), 1, artifacts);
 

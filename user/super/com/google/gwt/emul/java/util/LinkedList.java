@@ -27,13 +27,13 @@ import java.io.Serializable;
 public class LinkedList<E> extends AbstractSequentialList<E> implements
     Cloneable, List<E>, Deque<E>, Serializable {
   /*
-   * This implementation uses a doubly-linked circular list with a header node.
+   * This implementation uses a doubly-linked list with a header/tail node.
    * 
    * TODO(jat): add more efficient subList implementation.
    */
 
   private final class DescendingIteratorImpl implements Iterator<E> {
-    private final ListIterator<E> itr = new ListIteratorImpl(size, header);
+    private final ListIterator<E> itr = new ListIteratorImpl(size, tail);
 
     @Override
     public boolean hasNext() {
@@ -81,20 +81,24 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
       currentIndex = index;
     }
 
+    @Override
     public void add(E o) {
-      addBefore(o, currentNode);
+      addNode(o, currentNode.prev, currentNode);
       ++currentIndex;
       lastNode = null;
     }
 
+    @Override
     public boolean hasNext() {
-      return currentNode != header;
+      return currentNode != tail;
     }
 
+    @Override
     public boolean hasPrevious() {
       return currentNode.prev != header;
     }
 
+    @Override
     public E next() {
       if (!hasNext()) {
         throw new NoSuchElementException();
@@ -105,10 +109,12 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
       return lastNode.value;
     }
 
+    @Override
     public int nextIndex() {
       return currentIndex;
     }
 
+    @Override
     public E previous() {
       if (!hasPrevious()) {
         throw new NoSuchElementException();
@@ -118,24 +124,27 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
       return lastNode.value;
     }
 
+    @Override
     public int previousIndex() {
       return currentIndex - 1;
     }
 
+    @Override
     public void remove() {
       verifyCurrentElement();
+      Node<E> nextNode = lastNode.next;
+      removeNode(lastNode);
       if (currentNode == lastNode) {
         // We just did a previous().
-        currentNode = lastNode.next;
+        currentNode = nextNode;
       } else {
         // We just did a next().
         --currentIndex;
       }
-      lastNode.remove();
       lastNode = null;
-      --size;
     }
 
+    @Override
     public void set(E o) {
       verifyCurrentElement();
       lastNode.value = o;
@@ -157,38 +166,6 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     public Node<E> next;
     public Node<E> prev;
     public E value;
-
-    public Node() {
-      next = prev = this;
-    }
-
-    public Node(E value) {
-      this.value = value;
-    }
-
-    /**
-     * Construct a node containing a value and add it before the specified node.
-     * 
-     * @param value
-     * @param nextNode
-     */
-    public Node(E value, Node<E> nextNode) {
-      this(value);
-      this.next = nextNode;
-      this.prev = nextNode.prev;
-      nextNode.prev.next = this;
-      nextNode.prev = this;
-    }
-
-    /**
-     * Remove this node from any list it is in, leaving it with circular
-     * references to itself.
-     */
-    public void remove() {
-      this.next.prev = this.prev;
-      this.prev.next = this.next;
-      this.next = this.prev = this;
-    }
   }
 
   /**
@@ -199,11 +176,14 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
   private E exposeElement;
 
   /**
-   * Header node - header.next is the first element of the list, and header.prev
-   * is the last element of the list. If the list is empty, the header node will
-   * point to itself.
+   * Header node - header.next is the first element of the list.
    */
   private Node<E> header;
+
+  /**
+   * Tail not - tail.prev is the last element of the list.
+   */
+  private Node<E> tail;
 
   /**
    * Number of nodes currently present in the list.
@@ -211,11 +191,11 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
   private int size;
 
   public LinkedList() {
-    clear();
+    reset();
   }
 
   public LinkedList(Collection<? extends E> c) {
-    this();
+    reset();
     addAll(c);
   }
 
@@ -225,19 +205,26 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     return true;
   }
 
+  @Override
   public void addFirst(E o) {
-    new Node<E>(o, header.next);
-    ++size;
+    addNode(o, header, header.next);
   }
 
+  @Override
   public void addLast(E o) {
-    new Node<E>(o, header);
-    ++size;
+    addNode(o, tail.prev, tail);
   }
 
   @Override
   public void clear() {
+    reset();
+  }
+
+  private void reset() {
     header = new Node<E>();
+    tail = new Node<E>();
+    header.next = tail;
+    tail.prev = header;
     size = 0;
   }
 
@@ -250,18 +237,21 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     return new DescendingIteratorImpl();
   }
 
+  @Override
   public E element() {
     return getFirst();
   }
 
+  @Override
   public E getFirst() {
     throwEmptyException();
     return header.next.value;
   }
 
+  @Override
   public E getLast() {
     throwEmptyException();
-    return header.prev.value;
+    return tail.prev.value;
   }
 
   @Override
@@ -273,7 +263,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     Node<E> node;
     // start from the nearest end of the list
     if (index >= size >> 1) {
-      node = header;
+      node = tail;
       for (int i = size; i > index; --i) {
         node = node.prev;
       }
@@ -287,6 +277,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     return new ListIteratorImpl(index, node);
   }
 
+  @Override
   public boolean offer(E o) {
     return offerLast(o);
   }
@@ -303,48 +294,34 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     return true;
   }
 
+  @Override
   public E peek() {
     return peekFirst();
   }
 
   @Override
   public E peekFirst() {
-    if (size == 0) {
-      return null;
-    } else {
-      return getFirst();
-    }
+    return size == 0 ? null : getFirst();
   }
 
   @Override
   public E peekLast() {
-    if (size == 0) {
-      return null;
-    } else {
-      return getLast();
-    }
+    return size == 0 ? null : getLast();
   }
 
+  @Override
   public E poll() {
     return pollFirst();
   }
 
   @Override
   public E pollFirst() {
-    if (size == 0) {
-      return null;
-    } else {
-      return removeFirst();
-    }
+    return size == 0 ? null : removeFirst();
   }
 
   @Override
   public E pollLast() {
-    if (size == 0) {
-      return null;
-    } else {
-      return removeLast();
-    }
+    return size == 0 ? null : removeLast();
   }
 
   @Override
@@ -357,13 +334,15 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     addFirst(e);
   }
 
+  @Override
   public E remove() {
     return removeFirst();
   }
 
+  @Override
   public E removeFirst() {
-    Node<E> node = removeNode(header.next);
-    return node.value;
+    throwEmptyException();
+    return removeNode(header.next);
   }
 
   @Override
@@ -371,14 +350,15 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     return remove(o);
   }
 
+  @Override
   public E removeLast() {
-    Node<E> node = removeNode(header.prev);
-    return node.value;
+    throwEmptyException();
+    return removeNode(tail.prev);
   }
 
   @Override
   public boolean removeLastOccurrence(Object o) {
-    for (Node<E> e = header.prev; e != header; e = e.prev) {
+    for (Node<E> e = tail.prev; e != header; e = e.prev) {
       if (Objects.equals(e.value, o)) {
         removeNode(e);
         return true;
@@ -392,16 +372,23 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     return size;
   }
 
-  private void addBefore(E o, Node<E> target) {
-    new Node<E>(o, target);
+  private void addNode(E o, Node<E> prev, Node<E> next) {
+    Node<E> node = new Node<E>();
+    node.value = o;
+    node.prev = prev;
+    node.next = next;
+    next.prev = prev.next = node;
     ++size;
   }
 
-  private Node<E> removeNode(Node<E> node) {
-    throwEmptyException();
+  private E removeNode(Node<E> node) {
+    E oldValue = node.value;
+    node.next.prev = node.prev;
+    node.prev.next = node.next;
+    node.next = node.prev = null;
+    node.value = null;
     --size;
-    node.remove();
-    return node;
+    return oldValue;
   }
 
   /**

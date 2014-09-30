@@ -56,6 +56,14 @@ java_library(
 )
 
 java_test(
+    name = "tests",
+    test_class = "com.google.gwt.dev.codeserver.SourceHandlerTest",
+    runtime_deps = [
+        ":testlib",
+    ],
+)
+
+java_test(
     name = "source-handler-test",
     test_class = "com.google.gwt.dev.codeserver.SourceHandlerTest",
     runtime_deps = [

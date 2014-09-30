@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "101b206c_2251d024",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-09-30T19:09:59Z",
+      "side": 1,
+      "message": "Yes, this method doesn\u0027t need to be called twice.\n\nI think we actually do want these two files to be the same. Since we haven\u0027t done a compile yet, we want nocache.js to automatically do a recompile, and this is the same thing that the other file does.",
+      "parentUuid": "d0ec287c_877aeae7",
+      "range": {
+        "startLine": 240,
+        "startChar": 6,
+        "endLine": 240,
+        "endChar": 61
+      },
+      "revId": "0e89a9744fc89c4c98d2acb9b8aef17b881e8ad0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0ec287c_4774e2f9",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
         "patchSetId": 6

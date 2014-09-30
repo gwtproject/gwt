@@ -977,7 +977,10 @@ public class LocaleData {
       }
       String draft = attr.get("draft");
       if ("symbol".equalsIgnoreCase(field)) {
-        currency.setSymbol(value);
+        // Don't overwrite symbol with narrow dollar value
+        if (currency.getSymbol() == null || !value.equals("$")) {
+          currency.setSymbol(value);
+        }
       } else if ("displayName".equalsIgnoreCase(field)) {
         if (attr.get("count") != null) {
           // We don't care about currency "count" names

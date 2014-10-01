@@ -1,6 +1,7 @@
 <project name="codeserver" default="build" basedir=".">
   <property name="gwt.root" location="../.." />
   <property name="project.tail" value="dev/codeserver" />
+<property name="user.out" value="dev/codeserver/user-out" />
   <import file="${gwt.root}/common.ant.xml" />
 
   <property.ensure name="gwt.dev.jar" location="${gwt.build.lib}/gwt-dev.jar" />
@@ -14,18 +15,44 @@
     </gwt.javac>
   </target>
 
-  <target name="compile.tests" depends="compile"
-          description="Compile tests java source">
-    <mkdir dir="${javac.junit.out}" />
-    <javac destdir="${javac.junit.out}">
-      <src path="java" />
-      <src path="javatests" />
+  <target name="compile.user">
+	<mkdir dir="${user.out}" />
+	<gwt.javac srcdir="${gwt.root}/user/src" destdir="${user.out}"
+               excludes="**/super/**">
       <classpath>
         <pathelement location="${javac.out}"/>
         <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
+        <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
+        <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
+        <pathelement location="${gwt.tools.lib}/w3c/flute/flute-1.3-gg2.jar"/>
+        <pathelement
+            location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final.jar"/>
+        <pathelement
+            location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar"/>
+        <pathelement
+            location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
+        <pathelement location="${gwt.build.lib}/gwt-dev-${build.host.platform}.jar"/>
+        <pathelement location="${alldeps.jar}"/>
+      </classpath>
+    </gwt.javac>
+
+  </target>
+
+  <target name="compile.tests" depends="compile, compile.user"
+          description="Compile tests java source">
+    <mkdir dir="${javac.junit.out}" />
+    <gwt.javac srcdir="javatests" destdir="${javac.junit.out}">
+      <src path="java" />
+      <src path="javatests" />
+      <classpath>
+        <pathelement location="${user.out}"/>
+        <pathelement location="${javac.out}"/>
+        <pathelement location="${javac.junit.out}"/>
+        <pathelement location="${gwt.dev.jar}" />
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar" />
       </classpath>
-    </javac>
+    </gwt.javac>
   </target>
 
   <target name="build" depends="compile" description="builds gwt-codeserver.jar">
@@ -57,11 +84,15 @@
         test.out="${junit.out}/codeserver"
         test.cases="tests">
       <extraclasspaths>
+        <pathelement location="${user.out}"/>
         <pathelement location="${project.lib}"/>
         <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${javac.junit.out}"/>
         <!-- Pull in gwt-user sources -->
         <pathelement location="${gwt.root}/user/src/"/>
         <pathelement location="${gwt.root}/user/super/"/>
+        <pathelement location="java/" />
+        <pathelement location="javatests/" />
       </extraclasspaths>
     </gwt.junit>
   </target>

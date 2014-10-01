@@ -256,12 +256,16 @@ class Recompiler {
 
     String outputModuleName = module.getName();
     try {
-      String stub = PageUtil.loadResource(Recompiler.class, "recompile.nocache.js");
-      return "(function() {\n"
-      + " var moduleName = '" + outputModuleName  + "';\n"
-      + PropertiesUtil.generatePropertiesSnippet(module, compileLogger)
-      + stub
-      + "})();\n";
+      String templateJs = PageUtil.loadResource(Recompiler.class, "lib.js");
+      String propertyProviders = PropertiesUtil.generatePropertiesSnippet(module, compileLogger);
+      String libJs = PageUtil.loadResource(Recompiler.class, "lib.js");
+      String recompileJs = PageUtil.loadResource(Recompiler.class, "recompile.nocache.js");
+      templateJs = templateJs.replace("__MODULE_NAME__", outputModuleName);
+      templateJs = templateJs.replace("__PROPERTY_PROVIDERS__", propertyProviders);
+      templateJs = templateJs.replace("__LIB_JS__", libJs);
+      templateJs = templateJs.replace("__MAIN__", recompileJs);
+
+      return templateJs;
     } catch (IOException e) {
       compileLogger.log(Type.ERROR, "Can not generate + " + outputModuleName
           + " + .recompile.nocache.js", e);

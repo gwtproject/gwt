@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "304d84af_7c7579bd",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Pages.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-01T22:42:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a8245b_64334aec",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "3c78d882f0ce046ef0052d0f542d73053490ea57",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a8245b_242d5284",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Response.java",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "304d84af_3c52d12c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Response.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-01T22:42:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a8245b_242d5284",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 38
+      },
+      "revId": "3c78d882f0ce046ef0052d0f542d73053490ea57",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a8245b_44fc0e85",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2014-10-01T21:13:46Z",
       "side": 1,
       "message": "seems like this sourcemap connection logic shouldn\u0027t be hard coded in the page writing code. consider moving it to a utility function",
+      "range": {
+        "startLine": 236,
+        "startChar": 8,
+        "endLine": 248,
+        "endChar": 19
+      },
+      "revId": "3c78d882f0ce046ef0052d0f542d73053490ea57",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "304d84af_fcb6a9fd",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SourceHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-01T22:42:20Z",
+      "side": 1,
+      "message": "I agree but this change is big enough so I\u0027m going to defer it.",
+      "parentUuid": "30a8245b_44fc0e85",
       "range": {
         "startLine": 236,
         "startChar": 8,

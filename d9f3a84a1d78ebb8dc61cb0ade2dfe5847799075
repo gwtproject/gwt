@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d06348f0_ac2b8bec",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/DeadCodeEliminationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-01T01:09:55Z",
+      "side": 1,
+      "message": "[error] Got an exception - expecting EOF, found \u0027optimize\u0027",
+      "revId": "d9f3a84a1d78ebb8dc61cb0ade2dfe5847799075",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

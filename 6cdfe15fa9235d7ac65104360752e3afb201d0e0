@@ -81,6 +81,30 @@
       "revId": "6cdfe15fa9235d7ac65104360752e3afb201d0e0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "504f587e_88d67778",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-01T19:39:54Z",
+      "side": 0,
+      "message": "It breaks the getModuleBaseURL like indicated in line #74, I\u0027ve not tested yet, but I\u0027m sure it breaks RPC entry points being requested to the  codeserver instead of the dev server",
+      "parentUuid": "d06348f0_12e4f2ed",
+      "range": {
+        "startLine": 80,
+        "startChar": 26,
+        "endLine": 80,
+        "endChar": 36
+      },
+      "revId": "6cdfe15fa9235d7ac65104360752e3afb201d0e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

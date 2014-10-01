@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70529c24_09160d3e",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-01T15:54:48Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be the max value? 2147483647",
+      "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f083ecc2_8570c4cf",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-01T15:54:48Z",
+      "side": 1,
+      "message": "Why don\u0027t use classnames  and insert an style tag, so as it\u0027s easier to css the dialog and its components, and we allow people or vendors to customize this?",
+      "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70529c24_8921dd94",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-01T15:54:48Z",
+      "side": 1,
+      "message": "IE8 tends to cache URLs, I would add a timestamp at the end",
+      "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70529c24_e9417132",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-01T15:54:48Z",
+      "side": 1,
+      "message": "Why so many operations instead of simply using url.match(//) or url.contains",
+      "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70529c24_8938bdc2",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-01T15:54:48Z",
+      "side": 1,
+      "message": "$doc.querySelector(\"script[src*\u003d\u0027/\" + moduleName + \".nocache.js\u0027]\") is faster and more readable, if you use the javascript way, you can remove the method above.",
+      "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "504f587e_287b0365",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-01T15:54:48Z",
+      "side": 1,
+      "message": "You are using this same check twice, I see better to define $head  at the top where you define $wnd and $doc",
+      "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70529c24_e9c85160",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-01T15:54:48Z",
+      "side": 1,
+      "message": "I\u0027m wondering if is it a good idea to behave different in IE8? I don\u0027t mind but someone else could complain.",
+      "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

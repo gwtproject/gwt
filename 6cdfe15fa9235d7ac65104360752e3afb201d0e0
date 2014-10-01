@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70529c24_099f2d6c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/nomodule.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-01T15:54:48Z",
+      "side": 0,
+      "message": "Shouldn\u0027t we remove dev_mode_on.js at the same time, and the draggable bookmarklets in the main page of codeserver?",
+      "revId": "6cdfe15fa9235d7ac65104360752e3afb201d0e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "504f587e_485d1feb",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-01T15:54:48Z",
+      "side": 0,
+      "message": "It seems you are not considering this in the recompile.nocache.js.",
+      "range": {
+        "startLine": 80,
+        "startChar": 26,
+        "endLine": 80,
+        "endChar": 36
+      },
+      "revId": "6cdfe15fa9235d7ac65104360752e3afb201d0e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

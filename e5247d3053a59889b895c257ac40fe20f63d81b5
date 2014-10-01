@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30a8245b_2743146d",
+        "filename": "user/src/com/google/gwt/core/client/JsonUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-01T22:58:52Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "e5247d3053a59889b895c257ac40fe20f63d81b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

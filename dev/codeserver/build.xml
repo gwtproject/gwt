@@ -4,6 +4,7 @@
   <import file="${gwt.root}/common.ant.xml" />
 
   <property.ensure name="gwt.dev.jar" location="${gwt.build.lib}/gwt-dev.jar" />
+  <property.ensure name="gwt.user.jar" location="${gwt.build.lib}/gwt-user.jar" />
 
   <target name="compile">
     <mkdir dir="${javac.out}" />
@@ -17,15 +18,16 @@
   <target name="compile.tests" depends="compile"
           description="Compile tests java source">
     <mkdir dir="${javac.junit.out}" />
-    <javac destdir="${javac.junit.out}">
+    <gwt.javac srcdir="javatests">
       <src path="java" />
       <src path="javatests" />
       <classpath>
         <pathelement location="${javac.out}"/>
         <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${gwt.user.jar}" />
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar" />
       </classpath>
-    </javac>
+    </gwt.javac>
   </target>
 
   <target name="build" depends="compile" description="builds gwt-codeserver.jar">
@@ -59,9 +61,12 @@
       <extraclasspaths>
         <pathelement location="${project.lib}"/>
         <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${gwt.user.jar}" />
         <!-- Pull in gwt-user sources -->
         <pathelement location="${gwt.root}/user/src/"/>
         <pathelement location="${gwt.root}/user/super/"/>
+        <pathelement location="java/" />
+        <pathelement location="javatests/" />
       </extraclasspaths>
     </gwt.junit>
   </target>

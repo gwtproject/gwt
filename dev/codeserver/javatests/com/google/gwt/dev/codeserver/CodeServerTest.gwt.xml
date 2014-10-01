@@ -1,0 +1,4 @@
+<module>
+  <inherits name='com.google.gwt.dev.codeserver.CodeServer'/>
+  <source path="" includes="CodeServerGwtTest.java,CodeServerSuite.java,*.js"/>
+</module>

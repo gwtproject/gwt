@@ -17,15 +17,35 @@
   <target name="compile.tests" depends="compile"
           description="Compile tests java source">
     <mkdir dir="${javac.junit.out}" />
-    <javac destdir="${javac.junit.out}">
+	<gwt.javac srcdir="${gwt.root}/user/src" destdir="${javac.junit.out}"
+               excludes="**/super/**">
+      <classpath>
+        <pathelement location="${javac.out}"/>
+        <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar"/>
+        <pathelement location="${gwt.tools.lib}/selenium/selenium-java-client-driver.jar"/>
+        <pathelement location="${gwt.tools.lib}/w3c/sac/sac-1.3.jar"/>
+        <pathelement location="${gwt.tools.lib}/w3c/flute/flute-1.3-gg2.jar"/>
+        <pathelement
+            location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final.jar"/>
+        <pathelement
+            location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar"/>
+        <pathelement
+            location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
+        <pathelement location="${gwt.build.lib}/gwt-dev-${build.host.platform}.jar"/>
+        <pathelement location="${alldeps.jar}"/>
+      </classpath>
+    </gwt.javac>
+    <gwt.javac srcdir="javatests">
       <src path="java" />
       <src path="javatests" />
       <classpath>
         <pathelement location="${javac.out}"/>
+        <pathelement location="${javac.junit.out}"/>
         <pathelement location="${gwt.dev.jar}" />
         <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar" />
       </classpath>
-    </javac>
+    </gwt.javac>
   </target>
 
   <target name="build" depends="compile" description="builds gwt-codeserver.jar">
@@ -59,9 +79,12 @@
       <extraclasspaths>
         <pathelement location="${project.lib}"/>
         <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${javac.junit.out}"/>
         <!-- Pull in gwt-user sources -->
         <pathelement location="${gwt.root}/user/src/"/>
         <pathelement location="${gwt.root}/user/super/"/>
+        <pathelement location="java/" />
+        <pathelement location="javatests/" />
       </extraclasspaths>
     </gwt.junit>
   </target>

@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "d06348f0_122d1284",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-01T18:46:42Z",
+      "side": 1,
+      "message": "My original idea was override any CSS already in the page so that this dialog always works.\n\nI suppose we could pick a style name that\u0027s not already used and use high specificity. However, I\u0027m not sure if we want to support this unless there\u0027s a real need. Anyway, that seems like a change for a different patch.",
+      "parentUuid": "f083ecc2_8570c4cf",
+      "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70529c24_8921dd94",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
         "patchSetId": 9
@@ -47,6 +65,24 @@
       "writtenOn": "2014-10-01T15:54:48Z",
       "side": 1,
       "message": "IE8 tends to cache URLs, I would add a timestamp at the end",
+      "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06348f0_d23e5ab0",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-01T18:46:42Z",
+      "side": 1,
+      "message": "Yes. The easiest fix is probably just to initialize the counter to the current time instead of 0.",
+      "parentUuid": "70529c24_8921dd94",
       "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -115,6 +151,24 @@
       "writtenOn": "2014-10-01T15:54:48Z",
       "side": 1,
       "message": "I\u0027m wondering if is it a good idea to behave different in IE8? I don\u0027t mind but someone else could complain.",
+      "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06348f0_9238e2c2",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-01T18:46:42Z",
+      "side": 1,
+      "message": "We don\u0027t have another way to detect that the script failed to load.",
+      "parentUuid": "70529c24_e9c85160",
       "revId": "9805439fc2b9eac86b8e16d048d235adabe2069f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

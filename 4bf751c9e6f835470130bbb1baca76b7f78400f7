@@ -19,6 +19,52 @@
     },
     {
       "key": {
+        "uuid": "30666437_baef09c3",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/lib.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-02T23:15:13Z",
+      "side": 1,
+      "message": "I still think it\u0027s confusing for $namespace to be an alias for $wnd.\n\nHow about:\n\nIn the template:\n$wnd.__gwt_sdm \u003d $wnd.__gwt_sdm || {};\n$namespace \u003d $wnd.__gwt_sdm;\n\nAlso, I would prefer $globals to $namespace.",
+      "range": {
+        "startLine": 18,
+        "startChar": 24,
+        "endLine": 18,
+        "endChar": 33
+      },
+      "revId": "4bf751c9e6f835470130bbb1baca76b7f78400f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30666437_fae981bd",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/lib.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-02T23:15:13Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need to do this. We only need globals for jsonp.\nSimilarly below.",
+      "range": {
+        "startLine": 73,
+        "startChar": 1,
+        "endLine": 73,
+        "endChar": 10
+      },
+      "revId": "4bf751c9e6f835470130bbb1baca76b7f78400f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_7a3e11e5",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
         "patchSetId": 7

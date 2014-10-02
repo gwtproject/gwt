@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0bfc88a_69bec5de",
+        "filename": "user/src/com/google/gwt/user/client/ui/OptGroupListBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T08:25:23Z",
+      "side": 1,
+      "message": "You must use the same header than in the rest of the project, and maintain the same format.\n\nCopyright 2014 Google Inc. ....",
+      "revId": "f74fdc3834401a8d858cd01f28f6f2d18a0595a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_09c38965",
+        "filename": "user/src/com/google/gwt/user/client/ui/OptGroupListBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T08:25:23Z",
+      "side": 1,
+      "message": "We don\u0027t maintain author names, since we have signed a CLA",
+      "revId": "f74fdc3834401a8d858cd01f28f6f2d18a0595a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_c9ac91b1",
+        "filename": "user/src/com/google/gwt/user/client/ui/OptGroupListBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T08:25:23Z",
+      "side": 1,
+      "message": "Sort methods in alphabetical order. There is a formatting conventions document in the eclipse folder.",
+      "revId": "f74fdc3834401a8d858cd01f28f6f2d18a0595a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50c2f81e_6dbed5de",
+        "filename": "user/src/com/google/gwt/user/client/ui/OptGroupListBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T08:25:23Z",
+      "side": 1,
+      "message": "It\u0027s ok to remove @param tags if you don\u0027t say anything about them, but you have to write the explanation for the public method.",
+      "revId": "f74fdc3834401a8d858cd01f28f6f2d18a0595a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_e9a9559e",
+        "filename": "user/src/com/google/gwt/user/client/ui/OptGroupListBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T08:25:23Z",
+      "side": 1,
+      "message": "we always use curly brackets",
+      "revId": "f74fdc3834401a8d858cd01f28f6f2d18a0595a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_875f662f",
+        "filename": "user/src/com/google/gwt/user/client/ui/OptGroupListBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T08:25:23Z",
+      "side": 1,
+      "message": "wrap long lines",
+      "revId": "f74fdc3834401a8d858cd01f28f6f2d18a0595a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

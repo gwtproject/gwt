@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "d05d0861_adb51555",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CodeServer.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T19:35:44Z",
+      "side": 1,
+      "message": "Including this test specific stuff on non-test code is bad idea and will be confusing.\n\nWe are far away from killing this and we have tons of code already relying on this behavior. If we ever kill it, at that point we will probably have a better story to refer the files in a different places so we can replace this with that solution.",
+      "parentUuid": "d05d0861_9f6b1b5e",
+      "revId": "1112c8a950aa9c980f1d4afb8874af5ad539fa56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d05d0861_fc97c51c",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CodeServer.gwt.xml",
         "patchSetId": 5
@@ -253,6 +271,24 @@
       "side": 1,
       "message": "Since they are not unambigious it makes the code very anreadable\n\nthis.@CodeServerGwtTest::assertEquals(Ljava/lang/String;Ljava/lang/String)(\u0027foo\u0027, bar);\n\nI prefer it this way and the stacktrace that is coming out looks okay as well. If you feel strongly I am okay changing it, but I think its okay.",
       "parentUuid": "d05d0861_dccf6163",
+      "revId": "1112c8a950aa9c980f1d4afb8874af5ad539fa56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d05d0861_2d4d85ba",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/CodeServerGwtTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T19:35:44Z",
+      "side": 1,
+      "message": "This is already done in other places in the SDK. You just need to create a shortcut in the beginning of test method:\n\nvar assertEquals \u003d @Assert::assertEquals(Ljava/lang/String;Ljava/lang/String);",
+      "parentUuid": "d05d0861_0d2521a0",
       "revId": "1112c8a950aa9c980f1d4afb8874af5ad539fa56",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

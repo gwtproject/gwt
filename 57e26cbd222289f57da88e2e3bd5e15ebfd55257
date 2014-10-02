@@ -101,6 +101,23 @@
     },
     {
       "key": {
+        "uuid": "50abd856_2b43dd6c",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/engine/PathImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-02T01:46:59Z",
+      "side": 1,
+      "message": "I let these lines commented to remain faithful to the original source ( https://github.com/hibernate/hibernate-validator/blob/4.3/engine/src/main/java/org/hibernate/validator/internal/engine/PathImpl.java )",
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50abd856_88b0d752",
         "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/engine/PathImpl.java",
         "patchSetId": 3

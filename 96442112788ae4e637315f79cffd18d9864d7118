@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "50c2f81e_93b6c4fd",
+        "filename": "dev/codeserver/build.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T20:53:04Z",
+      "side": 1,
+      "message": "I see, so you have two options:\n1.- remove this compile.user task, and add this path element to \u0027compile.tests\u0027 and \u0027test\u0027 tasks\n\n  \u003cpathelement location\u003d\"${gwt.root}/build/out/user/bin\"/\u003e\n\n2.- make depend the \u0027compile.tests\u0027 in user/build.xml on the \u0027build\u0027 task\n\nI\u0027d rather #1 if it works because presubmit tasks should run faster",
+      "parentUuid": "30a8245b_b38ae222",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0bfc88a_ef3e35b0",
         "filename": "dev/codeserver/build.xml",
         "patchSetId": 6

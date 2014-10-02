@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90b9d0ac_cdac9db1",
+        "filename": "dev/codeserver/build.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T19:27:32Z",
+      "side": 1,
+      "message": "I would trust that user.jar was previously compiled and simply verify that it is in place like we do with dev.jar, add this line to the beginning:\n\n  \u003cproperty.ensure name\u003d\"gwt.user.jar\" location\u003d\"${gwt.build.lib}/gwt-user.jar\" /\u003e",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_ef3e35b0",
+        "filename": "dev/codeserver/build.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T19:27:32Z",
+      "side": 1,
+      "message": "depending here on ${gwt.user.jar} should be enough",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_8f3bf9be",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CodeServer.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T19:27:32Z",
+      "side": 1,
+      "message": "Do we need this module file? shouldn\u0027t be enough with the CodeServerTest.gwt.xml since they share the same namespace?",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_efc5d545",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/lib.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T19:27:32Z",
+      "side": 1,
+      "message": "I guess this counter should be scoped to window, so as multimodule does not use the same callback. Also we should add a timestamp",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_eda9619e",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/lib.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T19:27:32Z",
+      "side": 1,
+      "message": "I continue thinking that querySelector would be faster and simplify the code, it could be done in a separated patch though.",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50c2f81e_f37b88ae",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile.nocache.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T19:27:32Z",
+      "side": 1,
+      "message": "Related with the multimodule issue, I think we should reuse the dialog if already exists. It seems that recompile.nocache is executed in parallel when we have more than one module, so sharing the same UI we could add more lines per module, like dev_mode_on and stub.nocache used to do.",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_8fd2190d",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/CodeServerTest.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T19:27:32Z",
+      "side": 1,
+      "message": "adding source path to \u0027.\u0027 here I think we could get rid of the other module.gwt.xml",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

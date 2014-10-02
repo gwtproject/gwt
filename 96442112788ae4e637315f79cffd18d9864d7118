@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "50c2f81e_f362a8f8",
+        "filename": "dev/codeserver/build.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-02T20:03:37Z",
+      "side": 1,
+      "message": "How do you run the failed build? everything indicates that user.jar should be available before compiling codeserver based on the parent build.xml.\n\nWe can do either, wait until I have a while tomorrow to play with your first  patch, or commit this and I could play later to figure out a solution and commit a patch.  Having this code here is like something difficult to maintain.",
+      "parentUuid": "d05d0861_681c8b0e",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0bfc88a_ef3e35b0",
         "filename": "dev/codeserver/build.xml",
         "patchSetId": 6

@@ -2,6 +2,172 @@
   "comments": [
     {
       "key": {
+        "uuid": "30a8245b_b8a3a13a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-02T19:30:34Z",
+      "side": 1,
+      "message": "make a function\n \nnameForSyntheticArgument(SAB arg) {\n  return intern(new String(arg.name) + \"_\" + arg.resolvedPosition);\n}\n\nand use it here and the other place we are computing a name from a synthetic argument.",
+      "range": {
+        "startLine": 1126,
+        "startChar": 7,
+        "endLine": 1126,
+        "endChar": 81
+      },
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_188af5a9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-02T19:30:34Z",
+      "side": 1,
+      "message": "We probably want to suffix _n these ones too to make sure there are no conflicts (no matter how unlikely) with the synthetic ones.",
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_388fb1ba",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-02T19:30:34Z",
+      "side": 1,
+      "message": "add \"_0\" to both the outer field and the outer parameter.",
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_d883fd90",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-02T19:30:34Z",
+      "side": 1,
+      "message": "// adds ctor(..., param_n, ...) { ...this.param_n \u003d param_n }\n\nMake sure that the code below uses the parameter position in the name to avoid conflicts here too.",
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_f8803986",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1328,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-02T19:30:34Z",
+      "side": 1,
+      "message": "Let\u0027s make a constant for this one and $init and use it everywhere.",
+      "range": {
+        "startLine": 1328,
+        "startChar": 35,
+        "endLine": 1328,
+        "endChar": 42
+      },
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_987d850d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-02T19:30:34Z",
+      "side": 1,
+      "message": "you can remove this assert now.",
+      "range": {
+        "startLine": 407,
+        "startChar": 10,
+        "endLine": 407,
+        "endChar": 69
+      },
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_d8df7d90",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReferenceMapper.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-02T19:30:34Z",
+      "side": 1,
+      "message": "Why is this change in behaviour needed? Previously if it was called more than once that last one was recorded. Was this only called once and now is called more than once?\n\nShouldn\u0027t field be the same if called multiple times?\n\nditto for the next two methods.",
+      "range": {
+        "startLine": 188,
+        "startChar": 1,
+        "endLine": 191,
+        "endChar": 1
+      },
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_58938dc0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1574,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-02T19:30:34Z",
+      "side": 1,
+      "message": "Let\u0027s split this patch into two (or three). One for lambdas and the other for defender methods.\n\nIt is getting too big....",
+      "range": {
+        "startLine": 1468,
+        "startChar": 0,
+        "endLine": 1574,
+        "endChar": 5
+      },
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a8245b_984fc5fd",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 9

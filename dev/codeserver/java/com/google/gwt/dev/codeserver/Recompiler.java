@@ -276,6 +276,12 @@ class Recompiler {
     compilerContext = compilerContextBuilder.options(loadOptions).build();
 
     ModuleDef module = loadModule(compileLogger);
+    // Unrestrict permutations so we can properly generate property providers
+    for (Map.Entry<String, String> entry : job.getBindingProperties().entrySet()) {
+      BindingProperty bindingProp = module.getProperties().findBindingProp(entry.getKey());
+      bindingProp.setRootGeneratedValues(bindingProp.getDefinedValues());
+    }
+
     // We need to generate the stub before restricting permutations
     String recompileJs = generateModuleRecompileJs(module, compileLogger);
 

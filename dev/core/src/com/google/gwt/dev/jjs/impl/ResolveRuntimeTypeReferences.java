@@ -34,6 +34,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multiset;
 import com.google.gwt.thirdparty.guava.common.collect.Multisets;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,7 @@ public abstract class ResolveRuntimeTypeReferences {
   /**
    * Sequentially creates int type ids for types.
    */
-  public static class IntTypeIdGenerator {
+  public static class IntTypeIdGenerator implements Serializable {
 
     private final Map<String, Integer> typeIdByTypeName = Maps.newHashMap();
     private int nextAvailableId =  0;

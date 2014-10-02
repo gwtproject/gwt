@@ -105,6 +105,21 @@ if (window.addEventListener) {
 else if (window.attachEvent) {
   window.attachEvent("onload", onPageLoad);
 }
+
+function clearCaches(config) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "clearCaches/" + config.moduleNames[0], true);
+  xhr.onload = function (e) {
+    if (xhr.readyState === 4) {
+      debugger;
+      window.alert(xhr.responseText);
+    }
+  };
+  xhr.onerror = function (e) {
+    window.alert("Cache clearing failed: " + xhr.statusText);
+  };
+  xhr.send(null);
+}
   </script>
 
   <style>
@@ -137,6 +152,22 @@ else if (window.attachEvent) {
       padding: 3pt;
       margin: 8pt;
     }
+
+    #clearCaches {
+      background-color: #eee;
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    #clearCaches * {
+      color: #444;
+      font-size: 10pt;
+      font-family: arial;
+    }
+
+    #clearCaches button {
+      margin: 8px 0px 0px 0px;
+    }
   </style>
 </head>
 <body>
@@ -157,5 +188,14 @@ else if (window.attachEvent) {
 <li>Click "Dev Mode On" to start development mode.</li>
 
 </ol>
+
+<br />
+<div id="clearCaches">
+  <div>
+  Precompiled objects are reused for long periods of time and across process
+  launches. In the unlikely event that one has become corrupt you can clear disk caches.
+  </div>
+  <button onclick="clearCaches(config)">Clear disk caches</button>
+</div>
 
 </body></html>

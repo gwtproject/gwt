@@ -18,12 +18,13 @@ package com.google.gwt.dev.jjs;
 import com.google.gwt.core.ext.linker.impl.JsSourceMapExtractor;
 import com.google.gwt.core.ext.soyc.Range;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * An unmodifiable container of Ranges that map from JavaScript to the Java it came from.
  */
-public class JsSourceMap {
+public class JsSourceMap implements Serializable {
 
   private final int bytes;
   private final int lines;

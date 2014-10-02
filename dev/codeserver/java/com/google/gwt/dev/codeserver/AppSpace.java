@@ -43,10 +43,6 @@ class AppSpace {
     return new File(root, "speedtracer.html");
   }
 
-  File getUnitCacheDir() {
-    return new File(root, "gwt-unitcache");
-  }
-
   File getCompileDir(int compileId) {
     return new File(root, COMPILE_DIR_PREFIX + compileId);
   }

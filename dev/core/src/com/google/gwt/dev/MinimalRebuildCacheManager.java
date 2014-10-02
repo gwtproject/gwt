@@ -1,0 +1,251 @@
+/*
+ * Copyright 2014 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package com.google.gwt.dev;
+
+import com.google.gwt.dev.util.DiskCachingUtil;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.util.concurrent.ThreadFactoryBuilder;
+import com.google.gwt.util.tools.shared.Md5Utils;
+import com.google.gwt.util.tools.shared.StringUtils;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
+/**
+ * Reads and writes MinimalRebuildCache instances.
+ */
+public class MinimalRebuildCacheManager {
+
+  private static final String REBUILD_CACHE_PREFIX = "gwt-rebuildCache";
+  private static Map<String, MinimalRebuildCache> minimalRebuildCachesByName = Maps.newHashMap();
+  private static ScheduledExecutorService writeScheduler =
+      Executors.newScheduledThreadPool(1, new ThreadFactoryBuilder().setDaemon(true).build());
+
+  /**
+   * Delete all in memory caches and all on disk associated with the given module.
+   */
+  public static synchronized void deleteCaches(String moduleName) throws IOException {
+    minimalRebuildCachesByName.clear();
+
+    File minimalRebuildCacheFolder = computeMinimalRebuildCacheFolder(moduleName);
+    if (!minimalRebuildCacheFolder.exists()) {
+      return;
+    }
+
+    Files.walkFileTree(minimalRebuildCacheFolder.toPath(), new SimpleFileVisitor<Path>() {
+      @Override
+      public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+        Files.delete(dir);
+        return FileVisitResult.CONTINUE;
+      }
+
+      @Override
+      public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        Files.delete(file);
+        return FileVisitResult.CONTINUE;
+      }
+    });
+  }
+
+  /**
+   * Return the MinimalRebuildCache specific to the given module and binding properties.
+   * <p>
+   * If no such cache is found then it can be optionally loaded off disk.
+   * <p>
+   * Barring that a cache instance will be created in memory.
+   */
+  public static MinimalRebuildCache getCache(String moduleName,
+      Map<String, String> bindingProperties) {
+    String cacheName = computeMinimalRebuildCacheName(moduleName, bindingProperties);
+
+    MinimalRebuildCache minimalRebuildCache = minimalRebuildCachesByName.get(cacheName);
+
+    // If there's no cache already in memory, try to load a cache from disk.
+    if (minimalRebuildCache == null) {
+      // Might return null.
+      minimalRebuildCache = readCache(moduleName, bindingProperties);
+      minimalRebuildCachesByName.put(cacheName, minimalRebuildCache);
+    }
+
+    // If there's still no cache loaded, just create a blank one.
+    if (minimalRebuildCache == null) {
+      minimalRebuildCache = new MinimalRebuildCache();
+      minimalRebuildCachesByName.put(cacheName, minimalRebuildCache);
+      return minimalRebuildCache;
+    }
+
+    // Return a copy.
+    MinimalRebuildCache mutableMinimalRebuildCache = new MinimalRebuildCache();
+    mutableMinimalRebuildCache.copyFrom(minimalRebuildCache);
+    return mutableMinimalRebuildCache;
+  }
+
+  /**
+   * Stores a MinimalRebuildCache specific to the given module and binding properties.
+   * <p>
+   * A copy of the cache will be lazily persisted to disk as well.
+   */
+  public static void setCache(String moduleName,
+      Map<String, String> bindingProperties, MinimalRebuildCache knownGoodMinimalRebuildCache) {
+    String cacheName = computeMinimalRebuildCacheName(moduleName, bindingProperties);
+
+    minimalRebuildCachesByName.put(cacheName, knownGoodMinimalRebuildCache);
+
+    // Lazily write the cache to disk so that compiles can be fast the next time the Java process is
+    // restarted.
+    writeCacheAsync(moduleName, bindingProperties, knownGoodMinimalRebuildCache);
+  }
+
+  private static File computeMinimalRebuildCacheFile(String moduleName,
+      Map<String, String> bindingProperties) {
+    return new File(computeMinimalRebuildCacheFolder(moduleName),
+        computeMinimalRebuildCacheName(moduleName, bindingProperties));
+  }
+
+  private static File computeMinimalRebuildCacheFolder(String moduleName) {
+    return new File(DiskCachingUtil.computePreferredCacheDir(moduleName), REBUILD_CACHE_PREFIX);
+  }
+
+  private static String computeMinimalRebuildCacheName(String moduleName,
+      Map<String, String> bindingProperties) {
+    String currentWorkingDirectory = System.getProperty("user.dir");
+    String compilerVersionHash = DiskCachingUtil.getCompilerVersionHash();
+    String bindingPropertiesString = bindingProperties.toString();
+
+    String consistentHash = StringUtils.toHexString(Md5Utils.getMd5Digest((
+        compilerVersionHash + moduleName + currentWorkingDirectory + bindingPropertiesString)
+        .getBytes()));
+    return REBUILD_CACHE_PREFIX + "-" + consistentHash;
+  }
+
+  /**
+   * Find, read and return the MinimalRebuildCache unique to this module, binding properties and
+   * working directory.
+   */
+  private static synchronized MinimalRebuildCache readCache(String moduleName,
+      Map<String, String> bindingProperties) {
+    MinimalRebuildCache minimalRebuildCache = null;
+
+    // Find the cache file unique to this module, binding properties and working directory.
+    File minimalRebuildCacheFile = computeMinimalRebuildCacheFile(moduleName, bindingProperties);
+
+    // If the file exists.
+    if (minimalRebuildCacheFile.exists()) {
+      ObjectInputStream objectInputStream = null;
+      // Try to read it.
+      try {
+        objectInputStream = new ObjectInputStream(
+            new BufferedInputStream(new FileInputStream(minimalRebuildCacheFile)));
+        minimalRebuildCache = (MinimalRebuildCache) objectInputStream.readObject();
+      } catch (IOException e) {
+        System.err.println("Unable to read to rebuild cache from disk.");
+        minimalRebuildCacheFile.delete();
+      } catch (ClassNotFoundException e) {
+        System.err.println("Unable to read to rebuild cache from disk.");
+        minimalRebuildCacheFile.delete();
+      } finally {
+        try {
+          if (objectInputStream != null) {
+            objectInputStream.close();
+          }
+        } catch (IOException e) {
+          // Can't do anything about that.
+        }
+      }
+    }
+    return minimalRebuildCache;
+  }
+
+  /**
+   * Writes the provided MinimalRebuildCache to disk.
+   * <p>
+   * Persisted caches are uniquely named based on the compiler version, current module name, binding
+   * properties and the location where the JVM was launched.
+   * <p>
+   * Care is taken to completely and successfully write a new cache (to a different location on
+   * disk) before replacing the old cache (at the regular location on disk).
+   * <p>
+   * Write requests will occur in the order requested and will queue up if requests are made faster
+   * than they can be completed.
+   */
+  private static synchronized void writeCache(final String moduleName,
+      final Map<String, String> bindingProperties, final MinimalRebuildCache minimalRebuildCache) {
+    File oldMinimalRebuildCacheFile = computeMinimalRebuildCacheFile(moduleName, bindingProperties);
+    File newMinimalRebuildCacheFile =
+        new File(oldMinimalRebuildCacheFile.getAbsoluteFile() + ".new");
+
+    // Ensure the cache folder exists.
+    oldMinimalRebuildCacheFile.getParentFile().mkdirs();
+
+    // Write write the new cache to disk.
+    ObjectOutputStream objectOutputStream = null;
+    try {
+      objectOutputStream = new ObjectOutputStream(
+          new BufferedOutputStream(new FileOutputStream(newMinimalRebuildCacheFile)));
+      objectOutputStream.writeObject(minimalRebuildCache);
+      objectOutputStream.close();
+
+      // Replace the old cache file with the new one.
+      oldMinimalRebuildCacheFile.delete();
+      newMinimalRebuildCacheFile.renameTo(oldMinimalRebuildCacheFile);
+    } catch (IOException e) {
+      System.err.println("Unable to save the rebuild cache to disk.");
+      newMinimalRebuildCacheFile.delete();
+    } finally {
+      try {
+        if (objectOutputStream != null) {
+          objectOutputStream.close();
+        }
+      } catch (IOException e) {
+        // Can't do anything about that.
+      }
+    }
+  }
+
+  /**
+   * Asynchronously writes the provided MinimalRebuildCache to disk.
+   * <p>
+   * Persisted caches are uniquely named based on the compiler version, current module name, binding
+   * properties and the location where the JVM was launched.
+   * <p>
+   * Care is taken to completely and successfully write a new cache (to a different location on
+   * disk) before replacing the old cache (at the regular location on disk).
+   * <p>
+   * Write requests will occur in the order requested and will queue up if requests are made faster
+   * than they can be completed.
+   */
+  private static void writeCacheAsync(final String moduleName,
+      final Map<String, String> bindingProperties, final MinimalRebuildCache minimalRebuildCache) {
+    writeScheduler.submit(new Runnable() {
+        @Override
+      public void run() {
+        writeCache(moduleName, bindingProperties, minimalRebuildCache);
+      }
+    });
+  }
+}

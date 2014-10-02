@@ -21,12 +21,13 @@ package com.google.gwt.core.ext.soyc;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
  * Represents a contiguous region of characters in the compiler output.
  */
-public final class Range {
+public final class Range implements Serializable {
 
   /**
    * Sorts Ranges so that a Range will be preceded by any Ranges that enclose

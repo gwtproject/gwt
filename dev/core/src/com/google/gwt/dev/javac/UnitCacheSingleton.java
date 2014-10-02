@@ -37,6 +37,16 @@ public class UnitCacheSingleton {
   private static UnitCache instance = null;
 
   /**
+   * If a cache exists, asks it to clear its contents.
+   */
+  public static synchronized void clearCache() throws UnableToCompleteException {
+    if (instance == null) {
+      return;
+    }
+    instance.clear();
+  }
+
+  /**
    * If the cache is enabled, instantiates the cache and begins loading units
    * into memory in a background thread. If the cache is not enabled, it clears
    * out any old cached files.

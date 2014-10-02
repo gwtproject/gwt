@@ -214,4 +214,22 @@ public class Responses {
       }
     };
   }
+
+  /**
+   * Sends a text string.
+   */
+  public static Response newTextResponse(final String text) {
+    return new Response() {
+      @Override
+      public void send(HttpServletRequest request, HttpServletResponse response, TreeLogger logger)
+          throws IOException {
+        response.setContentType("text/plain");
+        ServletOutputStream outBytes = response.getOutputStream();
+        Writer out = new OutputStreamWriter(outBytes, "UTF-8");
+        out.append(text);
+        out.flush();
+        outBytes.close();
+      }
+    };
+  }
 }

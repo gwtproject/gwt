@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "50abd856_0bf061f4",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-02T01:32:53Z",
+      "side": 1,
+      "message": "I didn\u0027t realize that. \u0027ll fix it.",
+      "parentUuid": "104a4099_de42c102",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 3
+      },
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "104a4099_9e6159af",
         "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
         "patchSetId": 3
@@ -36,6 +60,160 @@
       "writtenOn": "2014-10-02T01:00:41Z",
       "side": 1,
       "message": "Do you know why 4.3.2 started having PropertyDescriptors with null names? Is this due to a change in the specs?",
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_8b03f12f",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-02T01:32:53Z",
+      "side": 1,
+      "message": "Don\u0027t know. I\u0027ve done many checks to understand this behavior. What I could figure out is that there is always one ghost property when getting the properties from beanHelper.getBeanDescriptor().getConstrainedProperties().\n\nIn contrast, beanInfo.getPropertyDescriptors() always return the correct properties.\n\nThat\u0027s why I\u0027ve created this method and used it in every possible way to avoid this NPE.",
+      "parentUuid": "104a4099_9e6159af",
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_6b2235cf",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-02T01:32:53Z",
+      "side": 1,
+      "message": "Ooops! ERROR!",
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_88b0d752",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/engine/PathImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-02T01:32:53Z",
+      "side": 1,
+      "message": "I let these two methods commented to remain faithful to the original code ( https://github.com/hibernate/hibernate-validator/blob/4.3/engine/src/main/java/org/hibernate/validator/internal/engine/PathImpl.java )",
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_487adfea",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/engine/PathImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-02T01:32:53Z",
+      "side": 1,
+      "message": "I created a private Character class to provided the required methods by original class. It contains some big comparisions which were created by iterating over all oracles\u0027s jvm chars under some circustances.\n\nI decided to create comparisons making the most of ranges, because, besides being faster than an item to item array comparison, saved many lines of code. (in the case of letters, there were more than one hundred thousand codes)",
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_e88aab75",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/engine/PathImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-02T01:32:53Z",
+      "side": 1,
+      "message": "Only characters included in the following condition: \nCharacter.isJavaIdentifierStart(i) \u0026\u0026 Character.isLetter(i)",
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_8887776c",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/engine/PathImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-02T01:32:53Z",
+      "side": 1,
+      "message": "Only characters included in the following condition: \nCharacter.isJavaIdentifierStart(i) \u0026\u0026 !Character.isLetter(i)",
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_6866bb4b",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/engine/PathImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-02T01:32:53Z",
+      "side": 1,
+      "message": "Character.isJavaIdentifierPart(i) \u0026\u0026 !Character.isLetter(i) \u0026\u0026 Character.isDigit(i)",
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_2870c3fb",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/engine/PathImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-02T01:32:53Z",
+      "side": 1,
+      "message": "Character.isJavaIdentifierPart(i) \u0026\u0026 Character.isLetter(i) \u0026\u0026 !Character.isDigit(i)",
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_885e976a",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/engine/PathImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-02T01:32:53Z",
+      "side": 1,
+      "message": "Character.isJavaIdentifierPart(i) \u0026\u0026 !Character.isLetter(i) \u0026\u0026 !Character.isDigit(i)",
       "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

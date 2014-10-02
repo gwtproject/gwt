@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "104a4099_de42c102",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-02T01:00:41Z",
+      "side": 1,
+      "message": "Can you configure your IDE so that it does not insert blanks at the end?",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 3
+      },
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104a4099_9e6159af",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-02T01:00:41Z",
+      "side": 1,
+      "message": "Do you know why 4.3.2 started having PropertyDescriptors with null names? Is this due to a change in the specs?",
+      "revId": "57e26cbd222289f57da88e2e3bd5e15ebfd55257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

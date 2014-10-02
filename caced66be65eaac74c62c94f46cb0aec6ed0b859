@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "30a8245b_2da2150c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CodeServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-02T18:20:20Z",
+      "side": 0,
+      "message": "Yes, this dates back to when everyone was using the bookmarklets.",
+      "parentUuid": "90b9d0ac_2751da24",
+      "revId": "caced66be65eaac74c62c94f46cb0aec6ed0b859",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0bfc88a_49b981f3",
         "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
         "patchSetId": 1

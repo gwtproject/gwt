@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_0f75c9bd",
+        "filename": "tools/api-checker/config/gwt26_27userApi.conf",
+        "patchSetId": 8
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-02T18:21:23Z",
+      "side": 1,
+      "message": "Yep, you\u0027re right. I wasn\u0027t accurate reading JDK\u0027s AbstractList source.",
+      "parentUuid": "103080e8_3117e8ec",
+      "revId": "70673a365643223ded91869b30872843835ba864",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9092b010_7f498f8c",
         "filename": "user/super/com/google/gwt/emul/java/util/AbstractCollection.java",
         "patchSetId": 8
@@ -47,6 +65,24 @@
       "writtenOn": "2014-09-30T22:45:10Z",
       "side": 1,
       "message": "I think I like the earlier one better and probably optimizes better but I\u0027m in between.",
+      "revId": "70673a365643223ded91869b30872843835ba864",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_cf7ed1a1",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractCollection.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-02T18:21:23Z",
+      "side": 1,
+      "message": "- It reduces code. But I think I should rename this method for better readability. Is \u0027containsAndMaybeRemove\u0027 ok?\n\n- Now it looks similar to AbstractMap.implFindEntry\n\n\nI prefer this method but the name should changed though",
+      "parentUuid": "9092b010_7f498f8c",
       "revId": "70673a365643223ded91869b30872843835ba864",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_8f88d945",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractMap.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-02T18:21:23Z",
+      "side": 1,
+      "message": "Yes, I\u0027m aware of that. That\u0027s why I used !(...) construct.\nBut I might be wrong that it\u0027s readable.",
+      "parentUuid": "103080e8_6ee6afc4",
+      "revId": "70673a365643223ded91869b30872843835ba864",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "103080e8_4e4773ea",
         "filename": "user/super/com/google/gwt/emul/java/util/AbstractMap.java",
         "patchSetId": 8
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_af859d2c",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractMap.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-02T18:21:23Z",
+      "side": 1,
+      "message": "Yes, I know.\nI made this method look the same as AbstractCollection.toString.\nShould I remove StringBuilder usage here and there?",
+      "parentUuid": "103080e8_4e4773ea",
+      "revId": "70673a365643223ded91869b30872843835ba864",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "103080e8_4e23f319",
         "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
         "patchSetId": 8
@@ -98,6 +170,30 @@
       "writtenOn": "2014-09-30T22:45:10Z",
       "side": 1,
       "message": "This is a recursive function; better to avoid doing this check repeatedly.",
+      "range": {
+        "startLine": 1388,
+        "startChar": 0,
+        "endLine": 1390,
+        "endChar": 5
+      },
+      "revId": "70673a365643223ded91869b30872843835ba864",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_6f57a51c",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1390,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-02T18:21:23Z",
+      "side": 1,
+      "message": "Good catch. I should\u0027ve added to the preceding mergeSort method.",
+      "parentUuid": "103080e8_4e23f319",
       "range": {
         "startLine": 1388,
         "startChar": 0,
@@ -133,6 +229,30 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_0f4ce98b",
+        "filename": "user/super/com/google/gwt/emul/java/util/EnumSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-02T18:21:23Z",
+      "side": 1,
+      "message": "Thanks! It turns out that reusing iterator makes code look even better than it does now.",
+      "parentUuid": "103080e8_91857c2d",
+      "range": {
+        "startLine": 198,
+        "startChar": 14,
+        "endLine": 198,
+        "endChar": 15
+      },
+      "revId": "70673a365643223ded91869b30872843835ba864",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "103080e8_b1d2b80c",
         "filename": "user/super/com/google/gwt/emul/java/util/EnumSet.java",
         "patchSetId": 8
@@ -150,6 +270,24 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_2f51ad24",
+        "filename": "user/super/com/google/gwt/emul/java/util/EnumSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-02T18:21:23Z",
+      "side": 1,
+      "message": "I love it :)",
+      "parentUuid": "103080e8_b1d2b80c",
+      "revId": "70673a365643223ded91869b30872843835ba864",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "103080e8_f164c0bf",
         "filename": "user/super/com/google/gwt/emul/java/util/PriorityQueue.java",
         "patchSetId": 8
@@ -161,6 +299,24 @@
       "writtenOn": "2014-09-30T22:45:10Z",
       "side": 1,
       "message": "you are changing the semantics here (collection is not empty and but only contains existing elements). The new behavior might be correct one but can you add a test?",
+      "revId": "70673a365643223ded91869b30872843835ba864",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_ef62b5f8",
+        "filename": "user/super/com/google/gwt/emul/java/util/PriorityQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-02T18:21:23Z",
+      "side": 1,
+      "message": "heap is ArrayList so this change is legit. But I don\u0027t mind new tests.\nI\u0027ll add tests in the following changeset.",
+      "parentUuid": "103080e8_f164c0bf",
       "revId": "70673a365643223ded91869b30872843835ba864",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

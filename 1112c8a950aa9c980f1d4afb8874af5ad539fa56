@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d05d0861_dc94811b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CodeServer.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T16:44:32Z",
+      "side": 1,
+      "message": "why do we have a gwt.xml here? I think we should avoid this.",
+      "revId": "1112c8a950aa9c980f1d4afb8874af5ad539fa56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d05d0861_fc97c51c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CodeServer.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T16:44:32Z",
+      "side": 1,
+      "message": "missing copyright",
+      "revId": "1112c8a950aa9c980f1d4afb8874af5ad539fa56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d05d0861_7c7bb563",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CodeServer.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T16:44:32Z",
+      "side": 1,
+      "message": "why inherit user?",
+      "revId": "1112c8a950aa9c980f1d4afb8874af5ad539fa56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d05d0861_3ca3fd93",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/CodeServerGwtTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T16:44:32Z",
+      "side": 1,
+      "message": "nit: move to ensureJsInjected",
+      "range": {
+        "startLine": 35,
+        "startChar": 13,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "1112c8a950aa9c980f1d4afb8874af5ad539fa56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d05d0861_3cfc9d84",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/CodeServerGwtTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T16:44:32Z",
+      "side": 1,
+      "message": "nit: it sounds weird to refer real mgwt properties, properly better to use names more specific to testing that can help to document the test.",
+      "revId": "1112c8a950aa9c980f1d4afb8874af5ad539fa56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d05d0861_dccf6163",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/CodeServerGwtTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T16:44:32Z",
+      "side": 1,
+      "message": "use proper junit asserts",
+      "revId": "1112c8a950aa9c980f1d4afb8874af5ad539fa56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d05d0861_9c3e89af",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/CodeServerTest.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T16:44:32Z",
+      "side": 1,
+      "message": "copyright",
+      "revId": "1112c8a950aa9c980f1d4afb8874af5ad539fa56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d05d0861_3cd5bdfc",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/CodeServerTest.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T16:44:32Z",
+      "side": 1,
+      "message": "what about moving the test into client package and getting rid of this line?\nAlso you shouldn\u0027t need test Suite and js etc. in your source path.",
+      "revId": "1112c8a950aa9c980f1d4afb8874af5ad539fa56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

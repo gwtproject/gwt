@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "d05d0861_1c98b9da",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T17:05:29Z",
+      "side": 1,
+      "message": "No don\u0027t do that. It has been a while since we dropped that. Authors should follow a logical order.\nSee https://gwt-review.googlesource.com/#/c/1051/\nand https://groups.google.com/d/topic/gwt-maintainers/dq6PdGE5GGc/discussion\n\nIf you saw alphabetical order recommendation in any place, we should fix that.",
+      "parentUuid": "50c2f81e_0d4cf18b",
+      "revId": "0cad6b00a2831a802f2cb5aa88b45c06b372916a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b9d0ac_8788c645",
         "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2014-10-02T07:55:25Z",
       "side": 1,
       "message": "These lines are too long, wrap them",
+      "revId": "0cad6b00a2831a802f2cb5aa88b45c06b372916a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d05d0861_bca6ed1c",
+        "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T17:05:29Z",
+      "side": 1,
+      "message": "\u003c100 lines is ok (see the gerrit\u0027s red dotted line)",
+      "parentUuid": "90b9d0ac_8788c645",
       "revId": "0cad6b00a2831a802f2cb5aa88b45c06b372916a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

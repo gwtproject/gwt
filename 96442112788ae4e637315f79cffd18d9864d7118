@@ -104,6 +104,46 @@
     },
     {
       "key": {
+        "uuid": "d05d0861_0804ef36",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/CodeServerTest.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T19:34:47Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 5
+      },
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d05d0861_edad4df9",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/CodeServerTest.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-02T19:34:47Z",
+      "side": 1,
+      "message": "Do you really need this?",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0bfc88a_8fd2190d",
         "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/CodeServerTest.gwt.xml",
         "patchSetId": 6

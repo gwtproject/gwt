@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d05d0861_681c8b0e",
+        "filename": "dev/codeserver/build.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-02T19:48:41Z",
+      "side": 1,
+      "message": "I tried that and it failed the build see earlier patches",
+      "parentUuid": "90b9d0ac_cdac9db1",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0bfc88a_ef3e35b0",
         "filename": "dev/codeserver/build.xml",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-02T19:27:32Z",
       "side": 1,
       "message": "depending here on ${gwt.user.jar} should be enough",
+      "revId": "96442112788ae4e637315f79cffd18d9864d7118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d05d0861_88175fea",
+        "filename": "dev/codeserver/build.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-02T19:48:41Z",
+      "side": 1,
+      "message": "I tried that and it failed the build see earlier patches",
+      "parentUuid": "d0bfc88a_ef3e35b0",
       "revId": "96442112788ae4e637315f79cffd18d9864d7118",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

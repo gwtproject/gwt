@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "50abd856_3a33259b",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Responses.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_54416cd1",
+      "range": {
+        "startLine": 226,
+        "startChar": 33,
+        "endLine": 226,
+        "endChar": 37
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_d4845c69",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-10-02T22:53:06Z",
       "side": 1,
       "message": "How about:\n\n/clean/mymodulename",
+      "range": {
+        "startLine": 232,
+        "startChar": 27,
+        "endLine": 232,
+        "endChar": 40
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_da553191",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_d4845c69",
       "range": {
         "startLine": 232,
         "startChar": 27,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "30666437_a824e34d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "as we talked about offline, since the PersistentUnitCache is shared across all modules it doesn\u0027t make sense to try to clear cache for an individual module.\n\n\nbut i have routed the request through Recompiler and ensured that no cache clears occur at the same time as any compile.",
+      "parentUuid": "30666437_f42b58eb",
+      "range": {
+        "startLine": 235,
+        "startChar": 35,
+        "endLine": 235,
+        "endChar": 47
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_9451445d",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2014-10-02T22:53:06Z",
       "side": 1,
       "message": "Could we make this a JSON response? Then we could add a button to the bookmarklet API later if needed. Maybe something like:\n\n{\"status\": \"ok\"}",
+      "range": {
+        "startLine": 237,
+        "startChar": 25,
+        "endLine": 237,
+        "endChar": 40
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30666437_5d418fd1",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_9451445d",
       "range": {
         "startLine": 237,
         "startChar": 25,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "30666437_dd4c7f0a",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_749d88ca",
+      "range": {
+        "startLine": 239,
+        "startChar": 25,
+        "endLine": 239,
+        "endChar": 40
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_b7656204",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/frontpage.html",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2014-10-02T22:53:06Z",
       "side": 1,
       "message": "remove \"debugger\". We also should check the status of the JSON message returned.",
+      "range": {
+        "startLine": 114,
+        "startChar": 6,
+        "endLine": 114,
+        "endChar": 14
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_7aae7d2c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/frontpage.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_b7656204",
       "range": {
         "startLine": 114,
         "startChar": 6,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "50abd856_5af70139",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/frontpage.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "that was my intention",
+      "parentUuid": "30666437_f75fda2d",
+      "range": {
+        "startLine": 119,
+        "startChar": 11,
+        "endLine": 119,
+        "endChar": 16
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_b741e233",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/frontpage.html",
         "patchSetId": 1
@@ -174,6 +342,30 @@
       "writtenOn": "2014-10-02T22:53:06Z",
       "side": 1,
       "message": "How about we move this button to the module page? It doesn\u0027t seem like something people would use often.",
+      "range": {
+        "startLine": 193,
+        "startChar": 9,
+        "endLine": 193,
+        "endChar": 20
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_5a1e21d3",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/frontpage.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_b741e233",
       "range": {
         "startLine": 193,
         "startChar": 9,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "50abd856_1a18a9e1",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/frontpage.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_97178637",
+      "range": {
+        "startLine": 195,
+        "startChar": 2,
+        "endLine": 196,
+        "endChar": 88
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_170c162d",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/frontpage.html",
         "patchSetId": 1
@@ -220,6 +436,30 @@
       "writtenOn": "2014-10-02T22:53:06Z",
       "side": 1,
       "message": "How about calling this \"Clean\"",
+      "range": {
+        "startLine": 198,
+        "startChar": 41,
+        "endLine": 198,
+        "endChar": 57
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50abd856_3a1d65d2",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/frontpage.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_170c162d",
       "range": {
         "startLine": 198,
         "startChar": 41,
@@ -255,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "30666437_48f6eff5",
+        "filename": "dev/core/src/com/google/gwt/core/ext/soyc/Range.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_1739b67b",
+      "range": {
+        "startLine": 30,
+        "startChar": 19,
+        "endLine": 30,
+        "endChar": 24
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_773c6a5b",
         "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
         "patchSetId": 1
@@ -266,6 +530,30 @@
       "writtenOn": "2014-10-02T22:53:06Z",
       "side": 1,
       "message": "This isn\u0027t Java 6 compatible, so if you want to do it this way we should wait until after GWT 2.7.",
+      "range": {
+        "startLine": 32,
+        "startChar": 21,
+        "endLine": 32,
+        "endChar": 25
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30666437_8875a7c0",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_773c6a5b",
       "range": {
         "startLine": 32,
         "startChar": 21,
@@ -324,6 +612,30 @@
     },
     {
       "key": {
+        "uuid": "30666437_68164b3f",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCachingUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "the CacheDir class itself would only be a wrapper around a File object, and since this function already returns a File object it seems the same to me.\n\nthis function could already be customized to support calculating a different preferred dir for different modules, so the future is still open for refactoring.\n\nso, i don\u0027t want to make this change.",
+      "parentUuid": "30666437_34bf908b",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_74df481c",
         "filename": "dev/core/src/com/google/gwt/dev/util/DiskCachingUtil.java",
         "patchSetId": 1
@@ -347,6 +659,30 @@
     },
     {
       "key": {
+        "uuid": "30666437_a8f6a36d",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCachingUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "i changed UnitCacheSingleton.get() to have both a specified and a fallback cache dir parameter, so now if the user supplies a -Dgwt.persistentunitcachedir property they can override the unit cache dir",
+      "parentUuid": "30666437_74df481c",
+      "range": {
+        "startLine": 47,
+        "startChar": 28,
+        "endLine": 47,
+        "endChar": 39
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_d4945c1b",
         "filename": "dev/core/src/com/google/gwt/dev/util/DiskCachingUtil.java",
         "patchSetId": 1
@@ -358,6 +694,30 @@
       "writtenOn": "2014-10-02T22:53:06Z",
       "side": 1,
       "message": "This method seems unrelated. Separate class? How about:\n\nCompilerVersion.getHash()",
+      "range": {
+        "startLine": 60,
+        "startChar": 36,
+        "endLine": 60,
+        "endChar": 58
+      },
+      "revId": "5363fbc36f48e2d84a5f684113948bd9d320c01f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30666437_c8acbfb1",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCachingUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-03T16:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_d4945c1b",
       "range": {
         "startLine": 60,
         "startChar": 36,

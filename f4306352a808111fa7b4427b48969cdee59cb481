@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "30666437_287f33da",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-03T02:00:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_681dabd1",
+      "range": {
+        "startLine": 165,
+        "startChar": 3,
+        "endLine": 165,
+        "endChar": 6
+      },
+      "revId": "f4306352a808111fa7b4427b48969cdee59cb481",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_c89cbfff",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_main.js",
         "patchSetId": 10
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "30666437_2866134a",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_main.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-03T02:00:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_c89cbfff",
+      "range": {
+        "startLine": 17,
+        "startChar": 24,
+        "endLine": 17,
+        "endChar": 33
+      },
+      "revId": "f4306352a808111fa7b4427b48969cdee59cb481",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_e8753b3a",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/template.js",
         "patchSetId": 10
@@ -59,6 +107,30 @@
       "writtenOn": "2014-10-03T01:51:32Z",
       "side": 1,
       "message": "Still need to rename (or remove) this.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "f4306352a808111fa7b4427b48969cdee59cb481",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30666437_e85b7b78",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/template.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-03T02:00:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_e8753b3a",
       "range": {
         "startLine": 1,
         "startChar": 0,

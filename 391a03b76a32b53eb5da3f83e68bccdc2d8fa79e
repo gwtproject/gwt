@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0bfc88a_8f97791e",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-03T08:06:31Z",
+      "side": 1,
+      "message": "Browser supporting the \u0027addEventListener\u0027 method supports the DOMContentLoaded event and you should use it instead of listening on the load event.",
+      "revId": "391a03b76a32b53eb5da3f83e68bccdc2d8fa79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

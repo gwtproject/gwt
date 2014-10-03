@@ -115,6 +115,13 @@ class Outbox {
   }
 
   /**
+   * Asks the recompiler to clean caches.
+   */
+  void clean() throws IOException, UnableToCompleteException {
+    recompiler.clean();
+  }
+
+  /**
    * Compiles the module again, possibly changing the output directory.
    * After returning, the result of the compile can be found via {@link Job#waitForResult}
    */

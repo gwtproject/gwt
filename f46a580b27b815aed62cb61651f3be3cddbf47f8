@@ -2,6 +2,138 @@
   "comments": [
     {
       "key": {
+        "uuid": "30666437_2f2c5204",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-03T21:24:31Z",
+      "side": 1,
+      "message": "remmove. Can you document what exactly does the ignoreMethodBodies do? and what does produceMethodParamters do?",
+      "range": {
+        "startLine": 613,
+        "startChar": 0,
+        "endLine": 613,
+        "endChar": 45
+      },
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f1bca1_77f642a4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-03T21:24:31Z",
+      "side": 1,
+      "message": "Make sure that if source 1.6 or 1.7 is selected we still produce valid class files. We should add a test for that in dev.CompilerTest.",
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0268cf7_0a399b7b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-03T21:24:31Z",
+      "side": 1,
+      "message": "this body of this method probably needs to be split into several. At least into one that handles the creation of the inner class and the other that handles the \"call\" site. Probably there are more oportunities in there as well, like spliting of the constructor creation, etc.",
+      "range": {
+        "startLine": 1147,
+        "startChar": 16,
+        "endLine": 1147,
+        "endChar": 24
+      },
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0268cf7_6a52d7db",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-03T21:24:31Z",
+      "side": 1,
+      "message": "Make it a constant and use here and elsewhere.",
+      "range": {
+        "startLine": 1189,
+        "startChar": 65,
+        "endLine": 1189,
+        "endChar": 74
+      },
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0268cf7_6ae017a4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1207,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-03T21:24:31Z",
+      "side": 1,
+      "message": "There is already some logic that does this for regular inner classes. They could probably be refactored into one and reused.\nLook at createSyntheticField (btw, that one handles adding the resolvedposition to the name so that can also be refactored.)",
+      "range": {
+        "startLine": 1204,
+        "startChar": 0,
+        "endLine": 1207,
+        "endChar": 119
+      },
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0268cf7_6a3c975b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1723,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-03T21:24:31Z",
+      "side": 1,
+      "message": "Boxing/unboxing should be a separate methods.",
+      "range": {
+        "startLine": 1710,
+        "startChar": 3,
+        "endLine": 1723,
+        "endChar": 11
+      },
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a8245b_f9611bad",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 10

@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "f0268cf7_8a990b0e",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-03T21:21:11Z",
+      "side": 1,
+      "message": "We talked offline: maybe add an alias to -war since Eclipse already has this build in.",
+      "parentUuid": "f0268cf7_4a5713ca",
+      "range": {
+        "startLine": 63,
+        "startChar": 15,
+        "endLine": 63,
+        "endChar": 26
+      },
+      "revId": "9a94cd44c834172e68dd272ad0c7b3e7fb31fcf4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a8245b_6e9000dc",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
         "patchSetId": 1

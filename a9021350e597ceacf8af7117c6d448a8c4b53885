@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0bfc88a_aff03d71",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-03T09:26:24Z",
+      "side": 1,
+      "message": "Typo \u003c/artifactId\u003e. \nIt\u0027s nice that gerrit highlights it",
+      "revId": "a9021350e597ceacf8af7117c6d448a8c4b53885",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

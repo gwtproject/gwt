@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "30666437_ae7b4baf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-03T06:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a8245b_b8a3a13a",
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a8245b_188af5a9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 9
@@ -36,6 +54,24 @@
       "writtenOn": "2014-10-02T19:30:34Z",
       "side": 1,
       "message": "We probably want to suffix _n these ones too to make sure there are no conflicts (no matter how unlikely) with the synthetic ones.",
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30666437_0e899f48",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-03T06:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a8245b_188af5a9",
       "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -59,6 +95,24 @@
     },
     {
       "key": {
+        "uuid": "30666437_4e52772d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-03T06:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a8245b_388fb1ba",
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a8245b_d883fd90",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 9
@@ -70,6 +124,24 @@
       "writtenOn": "2014-10-02T19:30:34Z",
       "side": 1,
       "message": "// adds ctor(..., param_n, ...) { ...this.param_n \u003d param_n }\n\nMake sure that the code below uses the parameter position in the name to avoid conflicts here too.",
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30666437_ee85432c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-03T06:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a8245b_d883fd90",
       "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -99,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "30666437_2e573b1d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1328,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-03T06:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a8245b_f8803986",
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a8245b_987d850d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
         "patchSetId": 9
@@ -122,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "30666437_ae622bf7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-03T06:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a8245b_987d850d",
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a8245b_d8df7d90",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReferenceMapper.java",
         "patchSetId": 9
@@ -139,6 +247,24 @@
         "endLine": 191,
         "endChar": 1
       },
+      "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30666437_0e607fee",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReferenceMapper.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-03T06:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a8245b_d8df7d90",
       "revId": "4bf985072fcac9a659fb3f21a77860eab5df1571",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

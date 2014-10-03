@@ -26,6 +26,7 @@ import com.google.gwt.core.ext.linker.EmittedArtifact;
 import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.Shardable;
 import com.google.gwt.core.ext.linker.StatementRanges;
+import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import junit.framework.TestCase;
@@ -126,6 +127,101 @@ public class SelectionScriptLinkerUnitTest extends TestCase {
     } catch (UnsupportedEncodingException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public void testOneLinePrefix_blockCommentWithDoubleSlash() {
+    String snippet = Joiner.on('\n').join(
+        "var a = {};",
+        "var b = {};",
+        "function someF() { /* some // comment */ return /s/;}"
+        );
+
+    assertOneLinerCorrect(snippet, snippet);
+  }
+
+  public void testOneLinePrefix_lineCommentWithDoubleSlash() {
+    String snippet =
+        "var a = {}; // this is the end and an extra //  sss";
+
+    String expected =
+        "var a = {}; ";
+
+    assertOneLinerCorrect(expected, snippet);
+  }
+
+  public void testOneLinePrefix_lineCommentBlockCommentStart() {
+    String snippet = Joiner.on('\n').join(
+        "var a = {}; // this is the end and an extra /*",
+        "",
+        " return; //  */");
+
+    String expected = Joiner.on(' ').join(
+        "var a = {}; ",
+        "",
+        " return; ");
+
+    assertOneLinerCorrect(expected, snippet);
+  }
+
+  public void testOneLinePrefix_stringWithDoubleSlash() {
+    String snippet = Joiner.on('\n').join(
+        "var a = {};",
+        "var b = {};",
+        "function someF() { return \" some // string \";}"
+    );
+
+    assertOneLinerCorrect(snippet, snippet);
+  }
+
+  public void testOneLinePrefix_stringWithEscapedQuote() {
+    String snippet = Joiner.on('\n').join(
+        "var a = {};",
+        "var b = {};",
+        "function someF() { return \" some string \\\" \";}"
+    );
+
+    assertOneLinerCorrect(snippet, snippet);
+  }
+
+  public void testOneLinePrefix_commentsStripped() {
+    String snippet = Joiner.on('\n').join(
+        "var a = {}; // this is var a",
+        " // this is a comment line",
+        "var b = {}; // and this is var b and some \"quotes\"",
+        "function someF() { /* some comment",
+        " this is still in the comment",
+        "  */ return \"//\"; // and finally some // in a string",
+        "}"
+    );
+
+    String expected = Joiner.on(' ').join(
+        "var a = {}; ",
+        " ",
+        "var b = {}; ",
+        "function someF() { ",
+        " return \"//\"; ",
+        "}"
+    );
+
+    assertOneLinerCorrect(expected, snippet);
+  }
+
+  public void testOneLinePrefix_doubleSlashInMultilineComments() {
+    String snippet = Joiner.on('\n').join(
+        "/* this is a comment line",
+        "// */ var a = {};"
+    );
+
+    String expected = " var a = {};";
+
+    assertOneLinerCorrect(expected, snippet);
+  }
+
+  private void assertOneLinerCorrect(String expected, String actual) {
+    String oneLineSnippet = SelectionScriptLinker.condenseIntoOneLine(actual);
+    assertTrue("Last character not a blank",
+        oneLineSnippet.charAt(oneLineSnippet.length()-1) == ' ');
+    assertEquals(expected.replace('\n', ' ').trim(), oneLineSnippet.trim());
   }
 
   /**

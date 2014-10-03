@@ -43,6 +43,8 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A base class for Linkers that use an external script to boostrap the GWT module. This
@@ -151,6 +153,72 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
       bytesInCurrentChunk += length;
     }
     return sb.toString();
+  }
+
+  // Regular expression that maches a JS string.
+  private static final String stringPattern = "(\"([^\\\\]|\\\")*\")";
+
+  // Regular expression that maches a C-style a comment of the form /* .... */.
+  private static final String blockComment = "(/\\*([^\\*]|\\*)*\\*/)";
+
+  // A regular expression that matches the part of a JS program line that is not part of
+  // either a line comment (//) or an unfinished block comment (/*)
+  private static final String regularText = "("
+      +   "[^\"/]|(/[^/*])|"          // any sequence of that does not contain ", // or /*
+      +   blockComment + "|"
+      +   stringPattern
+      + ")*";                        // any sequence of the former.
+
+  // A regular expression that matches a single line comment
+  private static final String trailingSingleLineComment = "//.*";
+
+  // A regular expression that matches a single line comment
+  private static final String openTrailingBlockComment = "/\\*([^*]|\\*[^/])*";
+
+  /**
+   * Pattern that matches lines that end up with a single line comment (// ....), while making sure
+   * that // can appear inside strings. DOES NOT HANDLE // inside multiline comments.
+   * <p>
+   * Group 7 will contain the whole single line comment if matched.
+   *
+   */
+  private static final Pattern matchCommentToEndOfLine = Pattern.compile(regularText +
+      "(?<trailing>" +
+      "(?<single>" + trailingSingleLineComment + ")" + "|" +
+      "(?<block>"+ openTrailingBlockComment + "))");
+
+  /**
+   * Transforms a multiline JS snippet into the equivalent single line program. This is
+   * necessary to prepend to the output JS without affecting the (already computed) sourcemap.
+   */
+  protected static String condenseIntoOneLine(String snippet) {
+    StringBuilder oneLinerBuilder = new StringBuilder();
+    boolean inMultiline = false;
+    for (String line : snippet.split("\n")) {
+      if (inMultiline) {
+        // strip up to */ if any
+        int endBlockCommentPosition = line.indexOf("*/");
+        if (endBlockCommentPosition == -1) {
+          // still in multiline
+          continue;
+        }
+        line = line.substring(endBlockCommentPosition + 2);
+        inMultiline = false;
+      }
+      Matcher matcher = matchCommentToEndOfLine.matcher(line);
+      if (matcher.matches()) {
+        assert matcher.group("trailing") != null;
+        oneLinerBuilder.append(
+            line.substring(0, line.length() - matcher.group("trailing").length()));
+        inMultiline = matcher.group("block") != null;
+      } else {
+        oneLinerBuilder.append(line);
+      }
+      oneLinerBuilder.append(" ");
+    }
+
+    // Remove all characters that can be interpreted by the browser as a line break.
+    return oneLinerBuilder.toString().replaceAll("[\\v\\r\\n]", " ");
   }
 
   protected static void replaceAll(StringBuffer buf, String search,
@@ -346,9 +414,8 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     StringBuilder b = new StringBuilder();
     String strongName = result == null ? "" : result.getStrongName();
     String prefix = getDeferredFragmentPrefix(logger, context, fragment);
-    // Remove all newlines so that it fits as the first program line.
-    prefix = prefix.replaceAll("[\\v\\r\\n]", " ");
-    assert !prefix.contains("\n") && !prefix.contains("\r");
+    // Transform the prefix into a one liner snippet.
+    prefix = condenseIntoOneLine(prefix);
     b.append(prefix);
     assert js.charAt(0) == '\n';
     b.append(js);
@@ -390,9 +457,8 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     String strongName = result == null ? "" : result.getStrongName();
 
     String modulePrefix = getModulePrefix(logger, context, strongName, length);
-    // Remove all newlines so that it fits as the first program line.
-    modulePrefix = modulePrefix.replaceAll("[\\v\\r\\n]", " ");
-    assert !modulePrefix.contains("\n") && !modulePrefix.contains("\r");
+    // Transform the prefix into a one liner snippet
+    modulePrefix = condenseIntoOneLine(modulePrefix);
     b.append(modulePrefix);
     if (js.charAt(0) != '\n') {
       // Add a line break at the end of the prefix if there is no empty line at the beginning of the

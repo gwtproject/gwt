@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30a8245b_c1bf8531",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T22:37:14Z",
+      "side": 1,
+      "message": "Bug: issue 8924",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 6
+      },
+      "revId": "831ed8666ae8cd535b118a451cb93b7d06f4220c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_c128e5f1",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T22:37:14Z",
+      "side": 1,
+      "message": "We should explain the difference between this and getCodeServerBaseUrl() so we don\u0027t mix them up.\n\nThis is the base URL of the launcher script (in the war directory) and the other one is the base URL for static files on the code server.",
+      "range": {
+        "startLine": 345,
+        "startChar": 26,
+        "endLine": 345,
+        "endChar": 36
+      },
+      "revId": "831ed8666ae8cd535b118a451cb93b7d06f4220c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

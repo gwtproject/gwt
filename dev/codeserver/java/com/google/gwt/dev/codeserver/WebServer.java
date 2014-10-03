@@ -227,6 +227,34 @@ public class WebServer {
       return Responses.newJsonResponse(json);
     }
 
+    if (target.startsWith("/clean/")) {
+      String moduleName = target.substring("/clean/".length());
+      JsonObject json = new JsonObject();
+
+      Outbox box = outboxes.findByOutputModuleName(moduleName);
+      if (box == null) {
+        json.put("status", "No such module: " + moduleName);
+      } else {
+        try {
+          runner.clean(moduleName);
+          json.put("status", "Done.");
+          logger.log(TreeLogger.INFO, "Cleaned disk caches.");
+        } catch (IOException e) {
+          json.put("status", "Clean failed.");
+          logger.log(TreeLogger.WARN, "Failed to clean disk caches.");
+        } catch (UnableToCompleteException e) {
+          json.put("status", "Clean failed.");
+          logger.log(TreeLogger.WARN, "Failed to clean disk caches.");
+        } catch (InterruptedException e) {
+          json.put("status", "Shutdown was requested while waiting for clean to complete.");
+          logger.log(TreeLogger.WARN,
+              "Shutdown was requested while waiting for clean to complete.");
+        }
+      }
+
+      return Responses.newJsonResponse(json);
+    }
+
     if (target.startsWith("/log/")) {
       String moduleName = target.substring("/log/".length());
       Outbox box = outboxes.findByOutputModuleName(moduleName);
@@ -295,7 +323,7 @@ public class WebServer {
   /**
    * Returns a file that the compiler wrote to its war directory.
    */
-  private Response makeCompilerOutputPage(String target) throws IOException {
+  private Response makeCompilerOutputPage(String target) {
 
     int secondSlash = target.indexOf('/', 1);
     String moduleName = target.substring(1, secondSlash);
@@ -357,7 +385,7 @@ public class WebServer {
     };
   }
 
-  private Response makeModulePage(String moduleName) throws IOException {
+  private Response makeModulePage(String moduleName) {
     Outbox box = outboxes.findByOutputModuleName(moduleName);
     if (box == null) {
       return new ErrorPage("No such module: " + moduleName);
@@ -432,7 +460,7 @@ public class WebServer {
     };
   }
 
-  private Response makePolicyFilePage(String target) throws IOException {
+  private Response makePolicyFilePage(String target) {
 
     int secondSlash = target.indexOf('/', 1);
     if (secondSlash < 1) {
@@ -455,8 +483,7 @@ public class WebServer {
   /**
    * Sends the log file as html with errors highlighted in red.
    */
-  private Response makeLogPage(final Outbox box)
-       throws IOException {
+  private Response makeLogPage(final Outbox box) {
     final File file = box.getCompileLog();
     if (!file.isFile()) {
       return new ErrorPage("log file not found");

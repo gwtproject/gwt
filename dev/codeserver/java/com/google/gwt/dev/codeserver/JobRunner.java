@@ -16,7 +16,11 @@
 package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger.Type;
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.MinimalRebuildCacheManager;
+import com.google.gwt.dev.javac.UnitCacheSingleton;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -29,6 +33,29 @@ import java.util.concurrent.Executors;
  * <p>JobRunners are thread-safe.
  */
 public class JobRunner {
+
+  private class CleanerRunnable implements Runnable {
+
+    private final String moduleName;
+    private Exception exception;
+
+    public CleanerRunnable(String moduleName) {
+      this.moduleName = moduleName;
+    }
+
+    @Override
+    public void run() {
+      try {
+        MinimalRebuildCacheManager.deleteCaches(moduleName);
+        UnitCacheSingleton.clearCache();
+      } catch (IOException e) {
+        exception = e;
+      } catch (UnableToCompleteException e) {
+        exception = e;
+      }
+    }
+  }
+
   private final JobEventTable table;
   private final OutboxTable outboxes;
   private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -36,6 +63,23 @@ public class JobRunner {
   JobRunner(JobEventTable table, OutboxTable outboxes) {
     this.table = table;
     this.outboxes = outboxes;
+  }
+
+  /**
+   * Schedules a cleaner job and then waits.
+   */
+  void clean(final String moduleName) throws IOException, UnableToCompleteException,
+      InterruptedException {
+    CleanerRunnable cleanerRunnable = new CleanerRunnable(moduleName);
+
+    // Will clean after all scheduled work is completed. Relies on executor single-threadedness.
+    executor.submit(cleanerRunnable).wait();
+
+    if (cleanerRunnable.exception instanceof IOException) {
+      throw new IOException(cleanerRunnable.exception);
+    } else if (cleanerRunnable.exception instanceof UnableToCompleteException) {
+      throw new UnableToCompleteException();
+    }
   }
 
   /**

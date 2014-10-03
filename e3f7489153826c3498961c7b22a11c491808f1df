@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30666437_f18a3f23",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T18:19:01Z",
+      "side": 1,
+      "message": "Sorry, I made a bad suggestion since I wasn\u0027t thinking that clearing the cache affects all modules. Instead of the semaphore, I thought of a better way to do this:\n\nJobRunner has a single threaded executor. We\u0027re using this to make sure we don\u0027t execute more than one job at a time.\n\nSo, maybe we should have a JobRunner.clean() method which submits a task to the task queue and blocks until it finishes? (It can just submit a Callable.)\n\nSorry about that, but I\u0027d rather not have two different ways to do mutual exclusion.",
+      "range": {
+        "startLine": 68,
+        "startChar": 27,
+        "endLine": 68,
+        "endChar": 46
+      },
+      "revId": "e3f7489153826c3498961c7b22a11c491808f1df",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0268cf7_6dd95186",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T22:15:07Z",
+      "side": 1,
+      "message": "private static?",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 9
+      },
+      "revId": "c4c80b37087fa13ee2b3ba624f0f8d1a5c75b820",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0268cf7_0a235b1a",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T22:15:07Z",
+      "side": 1,
+      "message": "nit: I\u0027m putting nested classes at the bottom in Super Dev Mode.",
+      "range": {
+        "startLine": 37,
+        "startChar": 16,
+        "endLine": 37,
+        "endChar": 31
+      },
+      "revId": "c4c80b37087fa13ee2b3ba624f0f8d1a5c75b820",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0268cf7_2d1d998d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T22:15:07Z",
+      "side": 1,
+      "message": "The exception-juggling in the callers isn\u0027t doing a whole lot. How about logging the exception immediately and returning an object that maps directly to JSON?\n\nprivate static class CleanResult {\n  final boolean succeeded;\n  final String message;\n  ...\n}",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 17
+      },
+      "revId": "c4c80b37087fa13ee2b3ba624f0f8d1a5c75b820",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_a1784933",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T22:15:07Z",
+      "side": 1,
+      "message": "As we discussed, we should create UnitCacheSingleton at startup and pass it to Recompiler and JobRunner.",
+      "range": {
+        "startLine": 155,
+        "startChar": 10,
+        "endLine": 155,
+        "endChar": 28
+      },
+      "revId": "c4c80b37087fa13ee2b3ba624f0f8d1a5c75b820",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_615b31d2",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T22:15:07Z",
+      "side": 1,
+      "message": "Actually this can just be \"/clean\" since we don\u0027t depend on the module name at all.",
+      "range": {
+        "startLine": 230,
+        "startChar": 28,
+        "endLine": 230,
+        "endChar": 33
+      },
+      "revId": "c4c80b37087fa13ee2b3ba624f0f8d1a5c75b820",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0268cf7_6d4cb18d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T22:15:07Z",
+      "side": 1,
+      "message": "I\u0027ve been using \"status\" for a status code (which is a string in JSON but is meant to be treated as an enum) and \"message\" for the error message. Also, by convention I\u0027m constructing JSON objects in JsonExporter. How about:\n\nJsonObject json;\n\njson \u003d jsonExporter.exportError(\"No such module...\");\n\nThis constructs:\n\n{\n  \u0027status\u0027: \u0027error\u0027,\n  \u0027message\u0027: message\n}\n\nFor success, \u0027status\u0027 should be set to \u0027ok\u0027:\n\njson \u003d jsonExporter.exportOk(\"some message\");",
+      "range": {
+        "startLine": 236,
+        "startChar": 18,
+        "endLine": 236,
+        "endChar": 24
+      },
+      "revId": "c4c80b37087fa13ee2b3ba624f0f8d1a5c75b820",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0268cf7_2a7a9fe9",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/WebServer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T22:15:07Z",
+      "side": 1,
+      "message": "not logging the exception. (But this will go away if we move it to JobRunner.)",
+      "range": {
+        "startLine": 244,
+        "startChar": 66,
+        "endLine": 244,
+        "endChar": 70
+      },
+      "revId": "c4c80b37087fa13ee2b3ba624f0f8d1a5c75b820",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_21c9b934",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/UnitCacheSingleton.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T22:15:07Z",
+      "side": 1,
+      "message": "Maybe we should we log an error and skip if this isn\u0027t a directory?",
+      "range": {
+        "startLine": 88,
+        "startChar": 27,
+        "endLine": 88,
+        "endChar": 43
+      },
+      "revId": "c4c80b37087fa13ee2b3ba624f0f8d1a5c75b820",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0268cf7_cd383dc4",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCachingUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T22:15:07Z",
+      "side": 1,
+      "message": "Could you put a prefix here so people have some idea what\u0027s generating this directory? Maybe:\n\ngwt-cache-{hashcode}",
+      "range": {
+        "startLine": 45,
+        "startChar": 42,
+        "endLine": 45,
+        "endChar": 63
+      },
+      "revId": "c4c80b37087fa13ee2b3ba624f0f8d1a5c75b820",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

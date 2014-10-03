@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30a8245b_c4d9d302",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-03T23:50:54Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "a0927bdb41045cea736b9a020600a221936a4389",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_64e6dfc4",
+        "filename": "user/test/com/google/gwt/core/ext/linker/impl/SelectionScriptLinkerUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-03T23:50:54Z",
+      "side": 1,
+      "message": "[error] \u0027-\u0027 is not preceded with whitespace.",
+      "revId": "a0927bdb41045cea736b9a020600a221936a4389",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_84ebdb89",
+        "filename": "user/test/com/google/gwt/core/ext/linker/impl/SelectionScriptLinkerUnitTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-03T23:50:54Z",
+      "side": 1,
+      "message": "[error] \u0027-\u0027 is not followed by whitespace.",
+      "revId": "a0927bdb41045cea736b9a020600a221936a4389",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

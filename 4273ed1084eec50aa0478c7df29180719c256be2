@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0bfc88a_52936ac0",
+        "filename": "user/src/com/google/gwt/core/shared/impl/GwtPreconditions.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-03T16:31:44Z",
+      "side": 1,
+      "message": "I wonder if we need these two new methods? \nOr we can throw just IndexOutOfBounds in GWT?",
+      "revId": "4273ed1084eec50aa0478c7df29180719c256be2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 <project name="GWT" default="dist" basedir=".">
   <property name="gwt.root" location="."/>
   <property name="project.tail" value=""/>
+
   <import file="${gwt.root}/common.ant.xml"/>
 
   <!-- "build" is the default when subprojects are directly targetted  -->

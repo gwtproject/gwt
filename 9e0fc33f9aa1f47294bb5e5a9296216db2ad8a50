@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30666437_71ebcf38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T18:59:32Z",
+      "side": 1,
+      "message": "Let\u0027s explain the bug fixed from the user\u0027s point of view:\n\n\"Fix locale provider when using devmode with -superDevMode\n\n\"Some property providers expect that __gwt_getMetaProperty is in scope when they run.\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "9e0fc33f9aa1f47294bb5e5a9296216db2ad8a50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30666437_d409f153",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T18:59:32Z",
+      "side": 1,
+      "message": "It looks like processMeta.js in the regular linker is also looking for meta properties that are scoped to the module, such as:\n\n  \u003cmeta name\u003d\"mymodule::gwt:property\" content\u003d\"...\"\u003e\n\nHere\u0027s the relevant code:\n\n      name \u003d name.replace(\u0027__MODULE_NAME__::\u0027, \u0027\u0027);\n      if (name.indexOf(\u0027::\u0027) \u003e\u003d 0) {\n        // It\u0027s for a different module\n        continue;\n      }",
+      "range": {
+        "startLine": 301,
+        "startChar": 8,
+        "endLine": 301,
+        "endChar": 12
+      },
+      "revId": "9e0fc33f9aa1f47294bb5e5a9296216db2ad8a50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30666437_d13bc30f",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-03T18:59:32Z",
+      "side": 1,
+      "message": "nit: split into two lines seems less confusing.",
+      "range": {
+        "startLine": 302,
+        "startChar": 15,
+        "endLine": 302,
+        "endChar": 16
+      },
+      "revId": "9e0fc33f9aa1f47294bb5e5a9296216db2ad8a50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

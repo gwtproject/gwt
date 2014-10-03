@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "30a8245b_6ed560fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-03T19:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_71ebcf38",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "9e0fc33f9aa1f47294bb5e5a9296216db2ad8a50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_d409f153",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "30a8245b_0e3f0cae",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-03T19:20:16Z",
+      "side": 1,
+      "message": "Good catch, updated the parser to accept a module, and added tests.",
+      "parentUuid": "30666437_d409f153",
+      "range": {
+        "startLine": 301,
+        "startChar": 8,
+        "endLine": 301,
+        "endChar": 12
+      },
+      "revId": "9e0fc33f9aa1f47294bb5e5a9296216db2ad8a50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30666437_d13bc30f",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2014-10-03T18:59:32Z",
       "side": 1,
       "message": "nit: split into two lines seems less confusing.",
+      "range": {
+        "startLine": 302,
+        "startChar": 15,
+        "endLine": 302,
+        "endChar": 16
+      },
+      "revId": "9e0fc33f9aa1f47294bb5e5a9296216db2ad8a50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_ae3b58be",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-03T19:20:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30666437_d13bc30f",
       "range": {
         "startLine": 302,
         "startChar": 15,

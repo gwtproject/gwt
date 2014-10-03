@@ -280,3 +280,46 @@ Recompiler.prototype.getLogUrl = function() {
 
 //Export Recompiler to namespace
 $namespace.lib.Recompiler = Recompiler;
+
+function MetaTagParser() {
+  this.__parsed = false;
+  this.__metaProperties = null;
+}
+
+MetaTagParser.prototype.__getMetaTags = function() {
+  return $doc.getElementsByTagName('meta');
+};
+
+MetaTagParser.prototype.__parse = function() {
+  var metaProps = {};
+  var metas = this.__getMetaTags();
+
+  for (var i = 0, n = metas.length; i < n; ++i) {
+    var meta = metas[i];
+    var name = meta.getAttribute('name');
+    var content = meta.getAttribute('content');
+    if (name == 'gwt:property' && content) {
+      var value, eq = content.indexOf('=');
+      if (eq >= 0) {
+        name = content.substring(0, eq);
+        value = content.substring(eq+1);
+      } else {
+        name = content;
+        value = '';
+      }
+      metaProps[name] = value;
+    }
+  }
+  return metaProps;
+};
+
+MetaTagParser.prototype.get = function() {
+  if (!this.__parsed) {
+    this.__metaProperties = this.__parse();
+    this.__parsed = true;
+  }
+  return this.__metaProperties;
+};
+
+//Export MetaTagParser to namespace
+$namespace.lib.MetaTagParser = MetaTagParser;

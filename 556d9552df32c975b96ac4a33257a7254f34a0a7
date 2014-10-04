@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0bfc88a_bdb3970c",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/client/CodeServerGwtTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-04T09:00:13Z",
+      "side": 1,
+      "message": "length\u003d\u003d2 should have been the second argument.\n\nIt causes a:\n\n java.lang.IllegalArgumentException: invoke arguments: JS value of type boolean, expected java.lang.String\n\nsee http://build.gwtproject.org/job/gwt/209/testReport/com.google.gwt.dev.codeserver.client/CodeServerGwtTest/testPropertyHelper_withProperInput/",
+      "revId": "556d9552df32c975b96ac4a33257a7254f34a0a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50c2f81e_612ede85",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/client/CodeServerGwtTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-04T09:00:13Z",
+      "side": 1,
+      "message": "Same mistake here: http://build.gwtproject.org/job/gwt/209/testReport/com.google.gwt.dev.codeserver.client/CodeServerGwtTest/testRecompiler/",
+      "revId": "556d9552df32c975b96ac4a33257a7254f34a0a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

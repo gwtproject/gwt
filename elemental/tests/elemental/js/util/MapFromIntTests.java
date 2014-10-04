@@ -17,11 +17,14 @@ package elemental.js.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
-import static elemental.js.util.TestUtils.assertSamelitude;
-
+import elemental.util.ArrayOf;
+import elemental.util.ArrayOfInt;
+import elemental.util.ArrayOfString;
 import elemental.util.Collections;
 import elemental.util.MapFromIntTo;
 import elemental.util.MapFromIntToString;
+
+import java.util.HashMap;
 
 /**
  * Tests {@link MapFromIntTo} and {@link MapFromIntToString}.
@@ -71,8 +74,7 @@ public class MapFromIntTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertMapSamelitude(keys, newVals, map);
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
@@ -118,12 +120,43 @@ public class MapFromIntTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertMapSamelitude(keys, newVals, map);
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
     assertNull(map.get(keys[0]));
     assertFalse(map.hasKey(keys[0]));
+  }
+
+  static void assertMapSamelitude(int[] keys, Object[] values, MapFromIntTo map) {
+    HashMap<Integer, Object> expected = new HashMap<Integer, Object>();
+    for (int i = 0; i < keys.length; i++) {
+      expected.put(keys[i], values[i]);
+    }
+    HashMap<Integer, Object> actual = new HashMap<Integer, Object>();
+    ArrayOfInt mapKeys = map.keys();
+    ArrayOf mapValues = map.values();
+    for (int i = 0; i < mapKeys.length(); i++) {
+      actual.put(mapKeys.get(i), mapValues.get(i));
+    }
+    assertEquals(keys.length, mapKeys.length());
+    assertEquals(values.length, mapValues.length());
+    assertTrue(expected.equals(actual));
+  }
+
+  static void assertMapSamelitude(int[] keys, String[] values, MapFromIntToString map) {
+    HashMap<Integer, String> expected = new HashMap<Integer, String>();
+    for (int i = 0; i < keys.length; i++) {
+      expected.put(keys[i], values[i]);
+    }
+    HashMap<Integer, String> actual = new HashMap<Integer, String>();
+    ArrayOfInt mapKeys = map.keys();
+    ArrayOfString mapValues = map.values();
+    for (int i = 0; i < mapKeys.length(); i++) {
+      actual.put(mapKeys.get(i), mapValues.get(i));
+    }
+    assertEquals(keys.length, mapKeys.length());
+    assertEquals(values.length, mapValues.length());
+    assertTrue(expected.equals(actual));
   }
 }

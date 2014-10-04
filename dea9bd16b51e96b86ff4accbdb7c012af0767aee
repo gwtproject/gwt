@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0bfc88a_dd41ab32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-04T13:05:21Z",
+      "side": 1,
+      "message": "nit: \"issue 8383\" so it becomes a link",
+      "range": {
+        "startLine": 21,
+        "startChar": 17,
+        "endLine": 21,
+        "endChar": 21
+      },
+      "revId": "dea9bd16b51e96b86ff4accbdb7c012af0767aee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_fdc58f45",
+        "filename": "user/src/com/google/gwt/core/client/impl/Coercions.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-04T16:02:57Z",
+      "side": 1,
+      "message": "Done.\n\nIt turns out that compiler optimizes out your suggested casts \u0027(int) (double)\u0027",
+      "parentUuid": "3033c4f6_6fcfcdbc",
+      "revId": "2ae17b8ce82b8e9da75e492cd17cb3b6075c08c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "103080e8_ab4fe9fc",
         "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
         "patchSetId": 23
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_7d0c3f2e",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-04T16:02:57Z",
+      "side": 1,
+      "message": "JDK 8 introduced Boolean.hashCode(boolean) method.\nCan I add emulation of that method instead?",
+      "parentUuid": "103080e8_ab4fe9fc",
+      "range": {
+        "startLine": 868,
+        "startChar": 33,
+        "endLine": 868,
+        "endChar": 64
+      },
+      "revId": "2ae17b8ce82b8e9da75e492cd17cb3b6075c08c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "103080e8_cbf6b56f",
         "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
         "patchSetId": 23
@@ -53,6 +95,24 @@
       "writtenOn": "2014-09-30T21:20:55Z",
       "side": 1,
       "message": "I think it should be fine to always use 31, doesn\u0027t need to be parametric.",
+      "revId": "2ae17b8ce82b8e9da75e492cd17cb3b6075c08c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_1d118345",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-04T16:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "103080e8_cbf6b56f",
       "revId": "2ae17b8ce82b8e9da75e492cd17cb3b6075c08c2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

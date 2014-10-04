@@ -17,6 +17,8 @@ package com.google.gwt.user.client.ui;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.NodeList;
+import com.google.gwt.dom.client.OptGroupElement;
 import com.google.gwt.dom.client.OptionElement;
 import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -93,6 +95,9 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   private static final String BIDI_ATTR_NAME = "bidiwrapped";
   
   private static final int INSERT_AT_END = -1;
+  
+  private static final String OPT_GROUP = "OPTGROUP";
+
 
   /**
    * Creates a ListBox widget that wraps an existing &lt;select&gt; element.
@@ -161,6 +166,50 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   public void addChangeListener(ChangeListener listener) {
     ListenerWrapper.WrappedChangeListener.add(this, listener);
    }
+  
+  /**
+   * Adds a new group.
+   * 
+   * @param items of the group.
+   * @param disabled <code>true</code> if disabled, <code>false</code> otherwise.
+   * @param items items of the group.
+   */
+  public void addGroup(String label, boolean disabled, String... items) {
+    insertGroup(label, items, items, null, -1, disabled);
+  }
+
+  /**
+   * Adds a new group.
+   * 
+   * @param label group name.
+   * @param items items of the group.
+   */
+  public void addGroup(String label, String... items) {
+    addGroup(label, items, items);
+  }
+
+  /**
+   * Adds a new group.
+   * 
+   * @param label group name.
+   * @param items of the group.
+   * @param dir the item's direction
+   */
+  public void addGroup(String label, String[] items, Direction dir) {
+    insertGroup(label, items, items, dir, -1, false);
+  }
+
+  /**
+   * Adds a new group.
+   * 
+   * @param label group name.
+   * @param items items of the group.
+   * @param value the item's value, to be submitted if it is part of a
+   *          {@link FormPanel}; cannot be <code>null</code>
+   */
+  public void addGroup(String label, String[] items, String[] values) {
+    insertGroup(label, items, values, null, -1, false);
+  }
 
   /**
    * Adds an item to the list box. This method has the same effect as
@@ -219,10 +268,31 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    */
   public void clear() {
     getSelectElement().clear();
+    NodeList<Element> nodeList = getSelectElement().getElementsByTagName(OPT_GROUP);
+    for (int i = nodeList.getLength() - 1; i > -1; i--)
+      nodeList.getItem(i).removeFromParent();
   }
 
   public DirectionEstimator getDirectionEstimator() {
     return estimator;
+  }
+  
+  /**
+   * @return the number of groups
+   */
+  public int getGroupCount() {
+    return getSelectElement().getElementsByTagName(OPT_GROUP).getLength();
+  }
+
+  /**
+   * Gets group label.
+   * 
+   * @param index of the group
+   * @return group label
+   */
+  public String getGroupLabel(int index) {
+    checkGroupIndex(index);
+    return getOptgroupLabel((OptGroupElement) getSelectElement().getChild(index));
   }
 
   /**
@@ -303,6 +373,114 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    */
   public int getVisibleItemCount() {
     return getSelectElement().getSize();
+  }
+  
+  /**
+   * Inserts a group into the list box.
+   * 
+   * @param label group name
+   * @param items of the group
+   */
+  public void insertGroup(String label, String... items) {
+    insertGroup(label, items, items, null, -1, false);
+  }
+
+  /**
+   * Inserts a group into the list box.
+   * 
+   * @param label group name
+   * @param items of the group
+   * @param index the index at which to insert it
+   */
+  public void insertGroup(String label, String[] items, int index) {
+    insertGroup(label, items, items, null, index, false);
+  }
+
+  /**
+   * Inserts a group into the list box.
+   * 
+   * @param label group name
+   * @param items of the group
+   * @param disable <code>true</code> if group is disable, false otherwise.
+   */
+  public void insertGroup(String label, String[] items, boolean disable) {
+    insertGroup(label, items, items, null, -1, disable);
+  }
+
+  /**
+   * Inserts a group into the list box.
+   * 
+   * @param label group name
+   * @param items of the group
+   */
+  public void insertGroup(String label, String[] items, String[] values) {
+    insertGroup(label, items, values, null, -1, false);
+  }
+  
+  /**
+   * Inserts a group into the list box.
+   * 
+   * @param label group name
+   * @param items of the group
+   * @param values of the items
+   * @param dir the item's direction
+   */
+  public void insertGroup(String label, String[] items, 
+      String[] values, Direction dir) {
+    insertGroup(label, items, values, dir, -1, false);
+  }
+
+  /**
+   * Inserts a group into the list box.
+   * 
+   * @param label group name
+   * @param items of the group
+   * @param values of the items
+   * @param disable <code>true</code> if group is disable, <code>false</code> otherwise.
+   */
+  public void insertGroup(String label, String[] items, 
+      String[] values, boolean disable) {
+    insertGroup(label, items, values, null, -1, disable);
+  }
+
+  /**
+   * Inserts a group into the list box.
+   * 
+   * @param label group name
+   * @param items of the group
+   * @param values of the items
+   * @param dir the item's direction
+   * @param index the index at which to insert it
+   * @param disabled <code>true</code> if group is disable, <code>false</code> otherwise.
+   */
+  public void insertGroup(String label, String[] items, 
+      String[] values, Direction dir, int index,
+      boolean disabled) {
+    assert items != null : new NullPointerException("items can not be null");
+    values = values == null ? items : values;
+    checkLabel(label);
+    OptGroupElement optGroupElement = getOptgroupElementFromLabel(label);
+    if (optGroupElement == null) {
+      optGroupElement = Document.get().createOptGroupElement();
+      setOptgroupLabel(optGroupElement, label, dir);
+    }
+    optGroupElement.setDisabled(disabled);
+    for (int i = 0; i < items.length && 
+        items.length <= values.length; i++) {
+      OptionElement optionElement = Document.get().createOptionElement();
+      setOptionText(optionElement, items[i], dir);
+      optionElement.setValue(values[i]);
+      optGroupElement.appendChild(optionElement);
+    }
+    SelectElement selectElement = getElement().cast();
+    index = index < 0 || index > getGroupCount() ? 
+        index = getGroupCount() : index;
+    if (index == getGroupCount()) {
+      selectElement.insertAfter(optGroupElement, null);
+    } else {
+      OptGroupElement before = selectElement.getChild(index).cast();
+      selectElement.insertBefore(optGroupElement, before);
+    }
   }
 
   /**
@@ -385,6 +563,16 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   }
 
   /**
+   * @param index of the group
+   * @return <code>true</code> if disable, <code>false</code> otherwise.
+   */
+  public boolean isDisabledGroup(int index) {
+    checkGroupIndex(index);
+    OptGroupElement optgroup = (OptGroupElement) getSelectElement().getChild(index);
+    return optgroup.isDisabled();
+  }
+  
+  /**
    * Determines whether an individual list item is selected.
    * 
    * @param index the index of the item to be tested
@@ -415,6 +603,34 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   }
 
   /**
+   * Removes a group in a specific position.
+   * 
+   * @param index group position.
+   */
+  public void removeGroup(int index) {
+    checkGroupIndex(index);
+    getSelectElement().getChild(index).removeFromParent();
+  }
+
+  /**
+   * Removes a group from the name.
+   * 
+   * @param label name of the group to be removed.
+   */
+  public void removeGroup(String label) {
+    checkLabel(label);
+    NodeList<Element> nodeList = getSelectElement().getElementsByTagName(OPT_GROUP);
+    for (int i = nodeList.getLength() - 1; i >= 0; i--) {
+      OptGroupElement optGroupElement = (OptGroupElement) nodeList.getItem(i);
+      // let's remove extra space...
+      if (label.trim().equalsIgnoreCase(getOptgroupLabel(optGroupElement).trim())) {
+        nodeList.getItem(i).removeFromParent();
+        return;
+      }
+    }
+  }
+  
+  /**
    * Removes the item at the specified index.
    *
    * @param index the index of the item to be removed
@@ -440,6 +656,50 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    */
   public void setDirectionEstimator(DirectionEstimator directionEstimator) {
     estimator = directionEstimator;
+  }
+  
+  /**
+   * Disables group.
+   * 
+   * @param index of the group
+   * @param disabled <code>true</code> to disable, <code>false</code> otherwise.
+   */
+  public void setDisabledGroup(int index, boolean disabled) {
+    checkIndex(index);
+    OptGroupElement optgroup = (OptGroupElement) getSelectElement().getChild(index);
+    optgroup.setDisabled(disabled);
+  }
+  
+  /**
+   * Sets name of the group in a specific position.
+   * 
+   * @param index of the group
+   * @param newLabel new group name.
+   */
+  public void setGroup(int index, String newLabel) {
+    checkGroupIndex(index);
+    checkLabel(newLabel);
+    OptGroupElement optgroup = ((OptGroupElement) getSelectElement().getChild(index));
+    setOptgroupLabel(optgroup, newLabel, null);
+  }
+
+  /**
+   * Sets new group name from the old name.
+   * 
+   * @param oldLabel old group name
+   * @param newLabel new group name
+   */
+  public void setGroup(String oldLabel, String newLabel) {
+    checkLabel(oldLabel);
+    checkLabel(newLabel);
+    NodeList<Element> nodeList = getSelectElement().getElementsByTagName(OPT_GROUP);
+    for (int i = 0; i < nodeList.getLength(); i++) {
+      OptGroupElement optgroup = (OptGroupElement) nodeList.getItem(i);
+      String label = getOptgroupLabel(optgroup);
+      if (label.trim().equalsIgnoreCase(oldLabel.trim())) {
+        setOptgroupLabel(optgroup, newLabel, null);
+      }
+    }
   }
 
   /**
@@ -543,6 +803,16 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
   }
 
   /**
+   * Retrieves the label of an optgroup element.
+   * 
+   * @param optgroup an optgroup element
+   * @return Returns optgroup label
+   */
+  protected String getOptgroupLabel(OptGroupElement optgroup) {
+    return getOptionTextOrOptgroupLabel(optgroup);
+  }
+  
+  /**
    * Retrieves the text of an option element. If the text was set by
    * {@link #setOptionText} and was wrapped with Unicode bidi formatting
    * characters, also removes those additional formatting characters.
@@ -551,11 +821,7 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    * @return the element's text
    */
   protected String getOptionText(OptionElement option) {
-    String text = option.getText();
-    if (option.hasAttribute(BIDI_ATTR_NAME) && text.length() > 1) {
-      text = text.substring(1, text.length() - 1);
-    }
-    return text;
+    return getOptionTextOrOptgroupLabel(option);
   }
 
   /**
@@ -591,32 +857,82 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    */
   protected void setOptionText(OptionElement option, String text,
       Direction dir) {
-    if (dir == null && estimator != null) {
-      dir = estimator.estimateDirection(text);
-    }
-    if (dir == null) {
-      option.setText(text);
-      option.removeAttribute(BIDI_ATTR_NAME);
-    } else {
-      String formattedText =
-          BidiFormatter.getInstanceForCurrentLocale().unicodeWrapWithKnownDir(
-          dir, text, false /* isHtml */, false /* dirReset */);
-      option.setText(formattedText);
-      if (formattedText.length() > text.length()) {
-        option.setAttribute(BIDI_ATTR_NAME, "");
-      } else {
-        option.removeAttribute(BIDI_ATTR_NAME);
-      }
-    }
+    setOptionTextOrOptgroupLabel(option, text, dir);
   }
 
+  /**
+   * Sets the label of an optgroup element.
+   * 
+   * @param optgroup an optgroup element.
+   * @param label to be set to the optgroup element.
+   * @param dir the text's direction. If {@code null} and direction estimation
+   *          is turned off, direction is ignored.
+   */
+  protected void setOptgroupLabel(OptGroupElement optgroup, String label, Direction dir) {
+    setOptionTextOrOptgroupLabel(optgroup, label, dir);
+  }
+
+  private final void checkGroupIndex(int index) {
+    assert index > -1 && index < getSelectElement().getChildCount() : new IndexOutOfBoundsException();
+  }
+  
   private void checkIndex(int index) {
     if (index < 0 || index >= getItemCount()) {
       throw new IndexOutOfBoundsException();
     }
   }
+  
+  private final void checkLabel(String label) {
+    assert label != null && !label.isEmpty() : new Exception("label is mandatory");
+  }
+  
+  private OptGroupElement getOptgroupElementFromLabel(String label) {
+    NodeList<Element> nodeList = getSelectElement().getElementsByTagName(OPT_GROUP);
+    for (int i = 0; i < nodeList.getLength(); i++) {
+      OptGroupElement optgroup = (OptGroupElement) nodeList.getItem(i);
+      if (getOptgroupLabel(optgroup).trim().equalsIgnoreCase(label)) {
+        return optgroup;
+      }
+    }
+    return null;
+  }
+  
+  private String getOptionTextOrOptgroupLabel(Element el) {
+    String text = el instanceof OptionElement ? 
+        ((OptionElement) el).getText() : 
+          ((OptGroupElement) el).getLabel();
+    if (el.hasAttribute(BIDI_ATTR_NAME) && text.length() > 1) {
+      text = text.substring(1, text.length() - 1);
+    }
+    return text;
+  }
 
   private SelectElement getSelectElement() {
     return getElement().cast();
+  }
+  
+  private void setOptionTextOrOptgroupLabel(Element el, String text, Direction dir) {
+    boolean option = el instanceof OptionElement;
+    if (dir == null && estimator != null) {
+      dir = estimator.estimateDirection(text);
+    }
+    if (dir == null) {
+      el.removeAttribute(BIDI_ATTR_NAME);
+    } else {
+      String formattedText =
+          BidiFormatter.getInstanceForCurrentLocale().unicodeWrapWithKnownDir(dir, text,
+              false /* isHtml */, false /* dirReset */);
+      if (formattedText.length() > text.length()) {
+        el.setAttribute(BIDI_ATTR_NAME, "");
+      } else {
+        el.removeAttribute(BIDI_ATTR_NAME);
+      }
+      text = formattedText;
+    }
+    if (option) {
+      ((OptionElement) el).setText(text);
+    } else {
+      ((OptGroupElement) el).setLabel(text);
+    }
   }
 }

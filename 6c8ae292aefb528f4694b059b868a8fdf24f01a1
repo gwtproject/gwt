@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0bfc88a_ddac4bb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-04T07:53:49Z",
+      "side": 1,
+      "message": "As I understand, your changeset depends on your previous abandoned changesets. \nWhat you need is to rebase this changeset on top of master:\n- Checkout current master\n- Do cherry pick: git fetch https://gwt.googlesource.com/gwt refs/changes/81/9481/1 \u0026\u0026 git cherry-pick FETCH_HEAD\n- Commit with your change-id: I7c0b12d2688f39df17474a1dac45488445ffb390\n- Then push it",
+      "revId": "6c8ae292aefb528f4694b059b868a8fdf24f01a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_7dbe7fde",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-04T07:53:49Z",
+      "side": 1,
+      "message": "Please dont list here modified files.\nInstead write here why you introduced this change.",
+      "revId": "6c8ae292aefb528f4694b059b868a8fdf24f01a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_1dc3c365",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-04T07:53:49Z",
+      "side": 1,
+      "message": "Please don\u0027t use autoformat (in Eclipse or Intellij).",
+      "revId": "6c8ae292aefb528f4694b059b868a8fdf24f01a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

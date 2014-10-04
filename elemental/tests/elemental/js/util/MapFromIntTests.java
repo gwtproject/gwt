@@ -15,9 +15,9 @@
  */
 package elemental.js.util;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import static elemental.js.util.TestUtils.assertSamelitudeNoOrder;
 
-import static elemental.js.util.TestUtils.assertSamelitude;
+import com.google.gwt.junit.client.GWTTestCase;
 
 import elemental.util.Collections;
 import elemental.util.MapFromIntTo;
@@ -71,8 +71,8 @@ public class MapFromIntTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertSamelitudeNoOrder(keys, map.keys());
+    assertSamelitudeNoOrder(newVals, map.values());
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
@@ -118,8 +118,8 @@ public class MapFromIntTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertSamelitudeNoOrder(keys, map.keys());
+    assertSamelitudeNoOrder(newVals, map.values());
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);

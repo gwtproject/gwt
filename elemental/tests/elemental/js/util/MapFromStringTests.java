@@ -15,7 +15,7 @@
  */
 package elemental.js.util;
 
-import static elemental.js.util.TestUtils.assertSamelitude;
+import static elemental.js.util.TestUtils.assertSamelitudeNoOrder;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -76,8 +76,8 @@ public class MapFromStringTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertSamelitudeNoOrder(keys, map.keys());
+    assertSamelitudeNoOrder(newVals, map.values());
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
@@ -123,8 +123,8 @@ public class MapFromStringTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertSamelitudeNoOrder(keys, map.keys());
+    assertSamelitudeNoOrder(newVals, map.values());
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
@@ -169,8 +169,8 @@ public class MapFromStringTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertSamelitudeNoOrder(keys, map.keys());
+    assertSamelitudeNoOrder(newVals, map.values());
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
@@ -215,8 +215,8 @@ public class MapFromStringTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertSamelitudeNoOrder(keys, map.keys());
+    assertSamelitudeNoOrder(newVals, map.values());
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
@@ -262,8 +262,8 @@ public class MapFromStringTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertSamelitudeNoOrder(keys, map.keys());
+    assertSamelitudeNoOrder(newVals, map.values());
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);

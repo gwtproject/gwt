@@ -23,18 +23,14 @@ import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
 import com.google.gwt.dev.DevMode.HostedModeOptions;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.util.arg.JsInteropMode;
-import com.google.gwt.util.tools.Utility;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Starts a superdev-mode codeserver.
@@ -85,6 +81,8 @@ public class SuperDevListener implements CodeServerListener {
       args.add("-workDir");
       args.add(String.valueOf(options.getWorkDir()));
     }
+    args.add("-launcherDir");
+    args.add(options.getModuleBaseDir().getAbsolutePath());
     if (options.getLogLevel() != null) {
       args.add("-logLevel");
       args.add(String.valueOf(options.getLogLevel()));
@@ -150,31 +148,7 @@ public class SuperDevListener implements CodeServerListener {
   @Override
   public void writeCompilerOutput(StandardLinkerContext linkerStack, ArtifactSet artifacts,
       ModuleDef module, boolean isRelink) throws UnableToCompleteException {
-    try {
-      String computeScriptBase =
-          Utility.getFileFromClassPath("com/google/gwt/dev/codeserver/computeScriptBase.js");
-      String contents =
-          Utility.getFileFromClassPath("com/google/gwt/dev/codeserver/stub.nocache.js");
-
-      File file =
-          new File(options.getModuleBaseDir() + "/" + module.getName() + "/" + module.getName()
-              + ".nocache.js");
-
-      file.deleteOnExit();
-
-      file.getParentFile().mkdirs();
-
-      Map<String, String> replacements = new HashMap<String, String>();
-      replacements.put("__COMPUTE_SCRIPT_BASE__", computeScriptBase);
-      // must go after script base
-      replacements.put("__MODULE_NAME__", module.getName());
-      replacements.put("__SUPERDEV_PORT__", "" + codeServerPort);
-
-      Utility.writeTemplateFile(file, contents, replacements);
-    } catch (IOException e) {
-      logger.log(TreeLogger.ERROR, "Unable to create nocache script ", e);
-      throw new UnableToCompleteException();
-    }
+    // The code server will do this.
   }
 
   @Override

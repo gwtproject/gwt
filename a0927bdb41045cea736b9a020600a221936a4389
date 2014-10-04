@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "30a8245b_24e6a771",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-10-04T00:42:39Z",
+      "side": 1,
+      "message": "Feel free to ignore since I\u0027m just lurking through commits, but there is enough new code here but perhaps you could extract it into a CodeCondenser utility class, and let SelectionScriptLinker call it\u0027s static condenseIntoOneLine method.",
+      "range": {
+        "startLine": 159,
+        "startChar": 1,
+        "endLine": 159,
+        "endChar": 22
+      },
+      "revId": "a0927bdb41045cea736b9a020600a221936a4389",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a8245b_c4d9d302",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
         "patchSetId": 1

@@ -78,6 +78,24 @@
     },
     {
       "key": {
+        "uuid": "30a8245b_e4df2f90",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-04T00:46:54Z",
+      "side": 1,
+      "message": "the last line reads \n\noptions.targetJDK \u003d jdtSourceLevel (not java8SourceLevel)\n\nI thought that you meant to let source be 1.8 and target be 1.6.\n\nI am OK with supporting only 1.8 and ripping all the stuff to make it back compatible.",
+      "parentUuid": "f0268cf7_b0df2091",
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0268cf7_0a399b7b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 10
@@ -195,6 +213,24 @@
       "side": 1,
       "message": "This does more than create just a field, it also creates a constructor parameter, and adds an assignment statement to the body, it also makes assumptions that the synthetic field is a synthetic field that JDT itself has constructed, which is not always true, we are creating fields which have no entry in the typeMap for example. I\u0027m not really sure there\u0027d be a big gain from making another method that has to take alot of conditions to flexibly cover both use cases.",
       "parentUuid": "f0268cf7_6ae017a4",
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_44a2c30c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1207,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-04T00:46:54Z",
+      "side": 1,
+      "message": "For now, let\u0027s also use nameForSyntheticArgument in createSyntheticField.\n\nWhat I was thinking is that the process of creating lambdas and inner classes has lots of commonalities that might be abstracted away. It would imply thoughtful refactoring in both places as the code for inner classes is a bit messy. Let\u0027s leave the refactoring for a latter cl.",
+      "parentUuid": "f0268cf7_53806ece",
       "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

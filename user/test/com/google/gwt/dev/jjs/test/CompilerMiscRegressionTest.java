@@ -260,6 +260,31 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
        regExp1.test(str), regExp2.test(str));
   }-*/;
 
+  private static final double MINUTES_IN_DAY = 24 * 60;
+
+  private static double getPercentOfDay(int hour, int minute) {
+    return (hour * 60 + minute) / MINUTES_IN_DAY * 100;
+  }
+
+
+  public void assertStaticEvaluationRegression(int hour, int minute) {
+    double val = hour* 60 + minute;
+    val /= MINUTES_IN_DAY;
+    val *= 100;
+    assertEquals(val , getPercentOfDay(hour, minute));
+  }
+
+  public void testStaticEvaluationRegression() {
+    int val = (Math.random() < 0) ? 10 : 20;
+    assertEquals(val ,  val / two() * two() );
+    assertStaticEvaluationRegression(10, 20);
+    assertStaticEvaluationRegression(20, 10);
+  }
+
+  private static native int two() /*-{
+    return 2;
+   }-*/;
+
   /**
    * Test for issue 8909.
    * <p>

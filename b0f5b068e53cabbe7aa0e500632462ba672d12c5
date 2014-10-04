@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30a8245b_5f9fec6a",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-04T02:28:36Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b0f5b068e53cabbe7aa0e500632462ba672d12c5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_ff933862",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-04T02:28:36Z",
+      "side": 1,
+      "message": "[error] \u0027*\u0027 is not preceded with whitespace.",
+      "revId": "b0f5b068e53cabbe7aa0e500632462ba672d12c5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_1f91745a",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-04T02:28:36Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "b0f5b068e53cabbe7aa0e500632462ba672d12c5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

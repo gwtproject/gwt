@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "f0268cf7_70012873",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-04T00:19:10Z",
+      "side": 1,
+      "message": "I\u0027ll revert this. I think I was forcing this off to try and debug why Defender method bodies weren\u0027t being parsed, but it was a bug in JDT. This flag defaults to false AFAIK.\n\nProduce method parameters I believe encodes method parameter names into the bytecode. This is a new Java8 feature so reflection can find out the names of parameters. This would eventually allow us to replace generators with bytecode utilities or annotation processing, because the param names need to be accessible (to make I18N generators work for example)",
+      "parentUuid": "30666437_2f2c5204",
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70f1bca1_77f642a4",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
         "patchSetId": 10
@@ -36,6 +54,24 @@
       "writtenOn": "2014-10-03T21:24:31Z",
       "side": 1,
       "message": "Make sure that if source 1.6 or 1.7 is selected we still produce valid class files. We should add a test for that in dev.CompilerTest.",
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0268cf7_b0df2091",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-04T00:19:10Z",
+      "side": 1,
+      "message": "This code prevents running at any level other than 1.8. It ignores the -sourceLevel parameter. I guess what you\u0027re saying is, we should support target 1.6/1.7, even if we handle source 1.8.\n\nI\u0027m not sure this is going to work if gwt-user-emul code has Java8-isms in it. Source 1.8 requires Target 1.8. Since we don\u0027t use the JVM classloader to load these classes, but instead process them with ASM5, it should work. Regular DevMode will be completely broken by this, I\u0027m not sure if the Force15Version ASM visitor can actually make code that works (actually, just read it\u0027s impossible, the bytecode verifier on java6/7 VMs can\u0027t deal with interface methods that have bodies)  We may have to make it deadstrip any methods with Java8 code.\n\nWe can\u0027t force everyone onto Web mode tests yet, so I think this means we have to go the separate JAR approach, providing java8 user code separately or filtered out by some utility.\n\nI will revert this part so that -sourceLevel can be provided again.",
+      "parentUuid": "70f1bca1_77f642a4",
       "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -65,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "30a8245b_c47a3312",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-04T00:19:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0268cf7_0a399b7b",
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0268cf7_6a52d7db",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 10
@@ -82,6 +136,24 @@
         "endLine": 1189,
         "endChar": 74
       },
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0268cf7_b3ef2ac3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-04T00:19:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0268cf7_6a52d7db",
       "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -111,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "f0268cf7_53806ece",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1207,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-04T00:19:10Z",
+      "side": 1,
+      "message": "This does more than create just a field, it also creates a constructor parameter, and adds an assignment statement to the body, it also makes assumptions that the synthetic field is a synthetic field that JDT itself has constructed, which is not always true, we are creating fields which have no entry in the typeMap for example. I\u0027m not really sure there\u0027d be a big gain from making another method that has to take alot of conditions to flexibly cover both use cases.",
+      "parentUuid": "f0268cf7_6ae017a4",
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0268cf7_6a3c975b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 10
@@ -128,6 +218,24 @@
         "endLine": 1723,
         "endChar": 11
       },
+      "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a8245b_64f7bf39",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1723,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-04T00:19:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0268cf7_6a3c975b",
       "revId": "f46a580b27b815aed62cb61651f3be3cddbf47f8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

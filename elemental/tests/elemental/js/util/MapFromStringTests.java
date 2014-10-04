@@ -15,16 +15,21 @@
  */
 package elemental.js.util;
 
-import static elemental.js.util.TestUtils.assertSamelitude;
-
 import com.google.gwt.junit.client.GWTTestCase;
 
+import elemental.util.ArrayOf;
+import elemental.util.ArrayOfBoolean;
+import elemental.util.ArrayOfInt;
+import elemental.util.ArrayOfNumber;
+import elemental.util.ArrayOfString;
 import elemental.util.Collections;
 import elemental.util.MapFromStringTo;
 import elemental.util.MapFromStringToBoolean;
 import elemental.util.MapFromStringToInt;
 import elemental.util.MapFromStringToNumber;
 import elemental.util.MapFromStringToString;
+
+import java.util.HashMap;
 
 /**
  * Tests {@link MapFromStringTo}, {@link MapFromStringToBoolean},
@@ -76,8 +81,7 @@ public class MapFromStringTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertMapSimilitude(keys, newVals, map);
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
@@ -123,8 +127,7 @@ public class MapFromStringTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertMapSimilitude(keys, newVals, map);
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
@@ -169,8 +172,7 @@ public class MapFromStringTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertMapSimilitude(keys, newVals, map);
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
@@ -215,8 +217,7 @@ public class MapFromStringTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertMapSimilitude(keys, newVals, map);
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
@@ -262,11 +263,90 @@ public class MapFromStringTests extends GWTTestCase {
       assertEquals(newVals[i], map.get(keys[i]));
     }
 
-    assertSamelitude(keys, map.keys());
-    assertSamelitude(newVals, map.values());
+    assertMapSimilitude(keys, newVals, map);
 
     // Let's remove a key, did it go away?
     map.remove(keys[0]);
     assertFalse(map.hasKey(keys[0]));
+  }
+
+  static void assertMapSimilitude(String[] keys, Object[] values, MapFromStringTo map) {
+    HashMap<String, Object> expected = new HashMap<String, Object>();
+    for (int i = 0; i < keys.length; i++) {
+      expected.put(keys[i], values[i]);
+    }
+    HashMap<String, Object> actual = new HashMap<String, Object>();
+    ArrayOfString mapKeys = map.keys();
+    ArrayOf mapValues = map.values();
+    for (int i = 0; i < mapKeys.length(); i++) {
+      actual.put(mapKeys.get(i), mapValues.get(i));
+    }
+    assertEquals(keys.length, mapKeys.length());
+    assertEquals(values.length, mapValues.length());
+    assertTrue(expected.equals(actual));
+  }
+
+  static void assertMapSimilitude(String[] keys, double[] values, MapFromStringToNumber map) {
+    HashMap<String, Double> expected = new HashMap<String, Double>();
+    for (int i = 0; i < keys.length; i++) {
+      expected.put(keys[i], values[i]);
+    }
+    HashMap<String, Double> actual = new HashMap<String, Double>();
+    ArrayOfString mapKeys = map.keys();
+    ArrayOfNumber mapValues = map.values();
+    for (int i = 0; i < mapKeys.length(); i++) {
+      actual.put(mapKeys.get(i), mapValues.get(i));
+    }
+    assertEquals(keys.length, mapKeys.length());
+    assertEquals(values.length, mapValues.length());
+    assertTrue(expected.equals(actual));
+  }
+
+  static void assertMapSimilitude(String[] keys, int[] values, MapFromStringToInt map) {
+    HashMap<String, Integer> expected = new HashMap<String, Integer>();
+    for (int i = 0; i < keys.length; i++) {
+      expected.put(keys[i], values[i]);
+    }
+    HashMap<String, Integer> actual = new HashMap<String, Integer>();
+    ArrayOfString mapKeys = map.keys();
+    ArrayOfInt mapValues = map.values();
+    for (int i = 0; i < mapKeys.length(); i++) {
+      actual.put(mapKeys.get(i), mapValues.get(i));
+    }
+    assertEquals(keys.length, mapKeys.length());
+    assertEquals(values.length, mapValues.length());
+    assertTrue(expected.equals(actual));
+  }
+
+  static void assertMapSimilitude(String[] keys, String[] values, MapFromStringToString map) {
+    HashMap<String, String> expected = new HashMap<String, String>();
+    for (int i = 0; i < keys.length; i++) {
+      expected.put(keys[i], values[i]);
+    }
+    HashMap<String, String> actual = new HashMap<String, String>();
+    ArrayOfString mapKeys = map.keys();
+    ArrayOfString mapValues = map.values();
+    for (int i = 0; i < mapKeys.length(); i++) {
+      actual.put(mapKeys.get(i), mapValues.get(i));
+    }
+    assertEquals(keys.length, mapKeys.length());
+    assertEquals(values.length, mapValues.length());
+    assertTrue(expected.equals(actual));
+  }
+
+  static void assertMapSimilitude(String[] keys, boolean[] values, MapFromStringToBoolean map) {
+    HashMap<String, Boolean> expected = new HashMap<String, Boolean>();
+    for (int i = 0; i < keys.length; i++) {
+      expected.put(keys[i], values[i]);
+    }
+    HashMap<String, Boolean> actual = new HashMap<String, Boolean>();
+    ArrayOfString mapKeys = map.keys();
+    ArrayOfBoolean mapValues = map.values();
+    for (int i = 0; i < mapKeys.length(); i++) {
+      actual.put(mapKeys.get(i), mapValues.get(i));
+    }
+    assertEquals(keys.length, mapKeys.length());
+    assertEquals(values.length, mapValues.length());
+    assertTrue(expected.equals(actual));
   }
 }

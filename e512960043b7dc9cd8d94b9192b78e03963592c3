@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10f88089_145d3aec",
+        "filename": "user/test/org/hibernate/jsr303/tck/tests/validation/ValidateCompileTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-04T03:28:50Z",
+      "side": 1,
+      "message": "It is no longer necessary since this exception throw was removed here: https://github.com/hibernate/hibernate-validator/commit/3d1487284cd6fc4baaaead22e3330eec593d481e#diff-97cfba2b882ade338ad5e451a7a45771L75",
+      "revId": "e512960043b7dc9cd8d94b9192b78e03963592c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

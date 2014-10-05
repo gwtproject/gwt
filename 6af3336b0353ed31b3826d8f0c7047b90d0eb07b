@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "d0bfc88a_bd1e37f9",
+        "filename": "samples/hello/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-05T23:56:12Z",
+      "side": 1,
+      "message": "I like it that we copy before launching DevMode; it makes it a bit harder to edit the files in the WAR but it doesn\u0027t really matter here (it\u0027s not even the file included in the SDK distribution).",
+      "revId": "6af3336b0353ed31b3826d8f0c7047b90d0eb07b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50c2f81e_e183ae90",
+        "filename": "samples/hello/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-05T23:56:12Z",
+      "side": 1,
+      "message": "Modern JVMs have decent rules for choosing a default max heap size, and dev machines tend to have quite a bit of memory these days (with 1Gb of RAM, Oracle JDK or OpenJDK would choose -Xmx256m as a default, with more RAM you get a bigger default -Xmx), so I\u0027d remove this, unless we want to limit it to no more than 256m (as opposed to bumping it from the old default of 64m)",
+      "revId": "6af3336b0353ed31b3826d8f0c7047b90d0eb07b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b9d0ac_9b881b46",
         "filename": "samples/hello/build.xml",
         "patchSetId": 1

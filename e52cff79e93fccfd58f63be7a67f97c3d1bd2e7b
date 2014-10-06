@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_c321ca93",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-06T15:49:08Z",
+      "side": 1,
+      "message": "Could someone explain what is the added value of this checkstyle rule ?",
+      "parentUuid": "10116099_e6e9e0bd",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_c6e664eb",
         "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
         "patchSetId": 3

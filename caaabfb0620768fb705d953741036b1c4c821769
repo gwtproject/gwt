@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50c2f81e_dc10d971",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-06T10:20:05Z",
+      "side": 1,
+      "message": "nit: do you mind remove all training spaces you have introduced",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 2
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

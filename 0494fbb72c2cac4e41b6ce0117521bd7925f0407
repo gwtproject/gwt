@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10116099_32e68ec3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T23:32:34Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "0494fbb72c2cac4e41b6ce0117521bd7925f0407",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_12eb928b",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T23:32:34Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "0494fbb72c2cac4e41b6ce0117521bd7925f0407",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

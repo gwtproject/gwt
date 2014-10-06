@@ -1,0 +1,1704 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10116099_230daadb",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.compiler.ast.CssAtRuleNode.Type\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_03122efb",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.resources.gss.ast.CssJavaExpressionNode\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_6317a2eb",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_431c260e",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.core.ext.Generator\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a3007a9e",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_83fd7e46",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.compiler.ast.CssValueNode\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e30a72bc",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.resources.gss.ast.CssJavaExpressionNode\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c30776b2",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_23348a83",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_03398e7b",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.compiler.ast.CssAtRuleNode.Type\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_632e8233",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.resources.gss.ast.CssRuntimeConditionalRuleNode\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_43338699",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a327da51",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_83245e4e",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] \u0027-\u0027 is not preceded with whitespace.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e321d23c",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] \u0027-\u0027 is not followed by whitespace.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c31e56fa",
+        "filename": "user/src/com/google/gwt/resources/gss/GwtGssFunctionMapProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_235bead2",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.SourceCodeLocation\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_03606e7b",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.core.ext.typeinfo.JClassType\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_6365e28b",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_436a665d",
+        "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.compiler.ast.CssBooleanExpressionNode\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a36eba6d",
+        "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_836bbe5d",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.compiler.ast.CssCompilerPass\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e378b234",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c375b63a",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_2342cada",
+        "filename": "user/src/com/google/gwt/resources/gss/ResourceUrlFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.SourceCodeLocation\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_0347ceea",
+        "filename": "user/src/com/google/gwt/resources/gss/ResourceUrlFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.core.ext.typeinfo.JClassType\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_633cc25b",
+        "filename": "user/src/com/google/gwt/resources/gss/ResourceUrlFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_4341c6d1",
+        "filename": "user/src/com/google/gwt/resources/gss/RuntimeConditionalNodeCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.resources.gss.ast.CssRuntimeConditionalRuleNode\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a3551a92",
+        "filename": "user/src/com/google/gwt/resources/gss/RuntimeConditionalNodeCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_83529ea5",
+        "filename": "user/src/com/google/gwt/resources/gss/RuntimeConditionalNodeCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e34f12fc",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c34c960a",
+        "filename": "user/src/com/google/gwt/resources/gss/ValueFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.compiler.ast.CssValueNode\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_23a92a23",
+        "filename": "user/src/com/google/gwt/resources/gss/ValueFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.resources.gss.ast.CssDotPathNode\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_03aeae2a",
+        "filename": "user/src/com/google/gwt/resources/gss/ValueFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_63b32293",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssDotPathNode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.SourceCodeLocation\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_43b8a66d",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssDotPathNode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.core.ext.Generator\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a39cfafd",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssDotPathNode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_8399fe0d",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssJavaExpressionNode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e3a6f24b",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssRuntimeConditionalRuleNode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.compiler.ast.CssConditionalRuleNode\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c3a3f639",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssRuntimeConditionalRuleNode.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_23900adb",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.MinimalSubstitutionMap\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_03950ecb",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.core.ext.BadPropertyValueException\u0027 import.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_638a02ab",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] \u0027org.apache.commons.io.IOUtils\u0027 should be separated from previous imports.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_438f06b9",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a3835a91",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_8380de85",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e37d520c",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c37ad611",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_23f76a3a",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_03fcee1a",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_63016273",
+        "filename": "user/test/com/google/gwt/resources/ResourcesGwtSuite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] \u0027junit.framework.Test\u0027 should be separated from previous imports.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_4306e68c",
+        "filename": "user/test/com/google/gwt/resources/ResourcesJreSuite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] \u0027junit.framework.Test\u0027 should be separated from previous imports.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a30a3a8d",
+        "filename": "user/test/com/google/gwt/resources/client/gss/AutoConversionBundle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_83073e85",
+        "filename": "user/test/com/google/gwt/resources/client/gss/AutoConversionBundle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e31432b4",
+        "filename": "user/test/com/google/gwt/resources/client/gss/AutoConversionBundle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c31136c2",
+        "filename": "user/test/com/google/gwt/resources/client/gss/AutoConversionBundle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_231e4ad2",
+        "filename": "user/test/com/google/gwt/resources/client/gss/AutoConversionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_03234e1a",
+        "filename": "user/test/com/google/gwt/resources/client/gss/BooleanEval.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_631842e3",
+        "filename": "user/test/com/google/gwt/resources/client/gss/Constants.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_431d46d1",
+        "filename": "user/test/com/google/gwt/resources/client/gss/DebugObfuscationStyleTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a3319a61",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_832e1efd",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e32b92eb",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c32816f2",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_23c5aaca",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_03ca2eda",
+        "filename": "user/test/com/google/gwt/resources/client/gss/ImportResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_63cfa2ea",
+        "filename": "user/test/com/google/gwt/resources/client/gss/ImportResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_43d4267d",
+        "filename": "user/test/com/google/gwt/resources/client/gss/ImportResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a3b87a4d",
+        "filename": "user/test/com/google/gwt/resources/client/gss/PrettyObfuscationStyleTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_83b57e55",
+        "filename": "user/test/com/google/gwt/resources/client/gss/ScopeResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e3c272bb",
+        "filename": "user/test/com/google/gwt/resources/client/gss/ScopeResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c3bf7631",
+        "filename": "user/test/com/google/gwt/resources/client/gss/ScopeResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_23ec8a52",
+        "filename": "user/test/com/google/gwt/resources/client/gss/ScopeResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_03f18e2a",
+        "filename": "user/test/com/google/gwt/resources/client/gss/ScopeResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_63e68272",
+        "filename": "user/test/com/google/gwt/resources/client/gss/ScopeResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_43eb8638",
+        "filename": "user/test/com/google/gwt/resources/client/gss/ScopeResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a3dfda90",
+        "filename": "user/test/com/google/gwt/resources/client/gss/ScopeResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_83dc5e9d",
+        "filename": "user/test/com/google/gwt/resources/client/gss/StableNoTypeObfuscationStyleTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e3d9d2ab",
+        "filename": "user/test/com/google/gwt/resources/client/gss/StableObfuscationStyleTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c3d65679",
+        "filename": "user/test/com/google/gwt/resources/client/gss/StableShortTypeObfuscationStyleTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_2393eac1",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_03986eda",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_639de2ca",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_43a2660c",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a3a6ba1c",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_83a3be0c",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e3b0b253",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c3adb6f9",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_237acae9",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_037fced9",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_6374c2fa",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_4379c6f0",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_a38d1a91",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_838a9e74",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e387126b",
+        "filename": "user/test/com/google/gwt/resources/gss/ExternalClassesCollectorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] \u0027junit.framework.TestCase\u0027 should be separated from previous imports.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c3849669",
+        "filename": "user/test/com/google/gwt/resources/gss/ExternalClassesCollectorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_23612a32",
+        "filename": "user/test/com/google/gwt/resources/gss/RenamingSubstitutionMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] \u0027junit.framework.TestCase\u0027 should be separated from previous imports.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_0366ae49",
+        "filename": "user/test/com/google/gwt/resources/gss/RenamingSubstitutionMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_636b2212",
+        "filename": "user/test/com/google/gwt/resources/gss/RenamingSubstitutionMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_4370a6fc",
+        "filename": "user/test/com/google/gwt/resources/gss/RenamingSubstitutionMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-06T12:20:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "42f6dcac8309c8f2673821dddb90aa7ae8940efc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

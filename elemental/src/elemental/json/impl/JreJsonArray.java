@@ -19,11 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import elemental.json.JsonArray;
-import elemental.json.JsonBoolean;
+import elemental.json.JsonException;
 import elemental.json.JsonFactory;
-import elemental.json.JsonNumber;
 import elemental.json.JsonObject;
-import elemental.json.JsonString;
 import elemental.json.JsonType;
 import elemental.json.JsonValue;
 
@@ -38,6 +36,11 @@ public class JreJsonArray extends JreJsonValue implements JsonArray {
 
   public JreJsonArray(JsonFactory factory) {
     this.factory = factory;
+  }
+
+  @Override
+  public JsonArray asArray() {
+    return this;
   }
 
   @Override
@@ -58,6 +61,11 @@ public class JreJsonArray extends JreJsonValue implements JsonArray {
   }
 
   @Override
+  public JsonObject asObject() {
+    throw new JsonException("Can't convert JreJsonArray to JsonObject");
+  }
+
+  @Override
   public String asString() {
     StringBuilder toReturn = new StringBuilder();
     for (int i = 0; i < length(); i++) {
@@ -74,20 +82,19 @@ public class JreJsonArray extends JreJsonValue implements JsonArray {
   }
 
   public JsonArray getArray(int index) {
-    return (JsonArray) get(index);
+    return get(index).asArray();
   }
 
-
   public boolean getBoolean(int index) {
-    return ((JsonBoolean) get(index)).getBoolean();
+    return get(index).asBoolean();
   }
 
   public double getNumber(int index) {
-    return ((JsonNumber) get(index)).getNumber();
+    return get(index).asNumber();
   }
 
   public JsonObject getObject(int index) {
-    return (JsonObject) get(index);
+    return get(index).asObject();
   }
 
   public Object getObject() {
@@ -99,7 +106,7 @@ public class JreJsonArray extends JreJsonValue implements JsonArray {
   }
 
   public String getString(int index) {
-    return ((JsonString) get(index)).getString();
+    return get(index).asString();
   }
 
   public JsonType getType() {

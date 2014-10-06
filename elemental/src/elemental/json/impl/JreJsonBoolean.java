@@ -15,7 +15,10 @@
  */
 package elemental.json.impl;
 
+import elemental.json.JsonArray;
 import elemental.json.JsonBoolean;
+import elemental.json.JsonException;
+import elemental.json.JsonObject;
 import elemental.json.JsonType;
 import elemental.json.JsonValue;
 
@@ -30,6 +33,11 @@ public class JreJsonBoolean extends JreJsonValue implements JsonBoolean {
   }
 
   @Override
+  public JsonArray asArray() {
+    throw new JsonException("Can't convert JreJsonBoolean to JsonArray");
+  }
+
+  @Override
   public boolean asBoolean() {
     return getBoolean();
   }
@@ -37,6 +45,11 @@ public class JreJsonBoolean extends JreJsonValue implements JsonBoolean {
   @Override
   public double asNumber() {
     return getBoolean() ? 1 : 0;
+  }
+
+  @Override
+  public JsonObject asObject() {
+    throw new JsonException("Can't convert JreJsonBoolean to JsonObject");
   }
 
   @Override

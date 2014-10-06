@@ -21,6 +21,11 @@ package elemental.json;
 public interface JsonValue {
 
   /**
+   * Coerces the underlying value to a JsonArray according to the rules of JavaScript coercion.
+   */
+  JsonArray asArray();
+
+  /**
    * Coerces underlying value to boolean according to the rules of Javascript coercion.
    */
   boolean asBoolean();
@@ -29,6 +34,11 @@ public interface JsonValue {
    * Coerces the underlying value to a number according to the rules of Javascript coercion.
    */
   double asNumber();
+
+  /**
+   * Coerces the underlying value to a JsonObject according to the rules of JavaScript coercion.
+   */
+  JsonObject asObject();
 
   /**
    * Coerces the underlying value to a String according to the rules of JavaScript coercion.

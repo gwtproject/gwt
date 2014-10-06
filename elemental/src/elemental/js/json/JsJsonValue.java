@@ -17,6 +17,9 @@ package elemental.js.json;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+import elemental.json.JsonArray;
+import elemental.json.JsonException;
+import elemental.json.JsonObject;
 import elemental.json.JsonType;
 import elemental.json.JsonValue;
 
@@ -53,6 +56,16 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
   }
 
   @Override
+  final public JsonArray asArray() {
+    if (getType() == JsonType.ARRAY) {
+      return (JsonArray) this;
+    } else {
+      throw new JsonException("Can't convert JsonValue with type " + getType().name()
+          + " to JsonArray");
+    }
+  }
+
+  @Override
   final public native boolean asBoolean() /*-{
      return @com.google.gwt.core.client.GWT::isScript()() || this == null ?
         !!@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this) :
@@ -68,6 +81,16 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
         +@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this) :
         (+@elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this)).valueOf();
   }-*/;
+
+  @Override
+  final public JsonObject asObject() {
+    if (getType() == JsonType.OBJECT) {
+      return (JsonObject) this;
+    } else {
+      throw new JsonException("Can't convert JsonValue with type " + getType().name()
+          + " to JsonObject");
+    }
+  }
 
   @Override
   // avoid casts, as compiler will throw CCE trying to cast a raw JS String to an interface

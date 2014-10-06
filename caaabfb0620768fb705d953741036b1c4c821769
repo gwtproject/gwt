@@ -22,6 +22,374 @@
       "revId": "caaabfb0620768fb705d953741036b1c4c821769",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_5e44d175",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "This method seems pretty useless. The reason is that it returns the amount of groups however all other group related methods that take an index are expecting an absolute index. As a \u003cselect\u003e element can have options and groups mixed together, knowing the group count isn\u0027t really useful. For example \n\n  for(int groupIdx \u003d 0; groupIdx \u003c listbox.getGroupCount(); groupIdx++) {\n    listbox.getGroupLabel(groupIdx);\n  }\n\ncurrently won\u0027t work. So we either need to adjust group related methods to expect a group related index (except insertGroup) or we need a ListBox.isGroup(index) method.",
+      "range": {
+        "startLine": 283,
+        "startChar": 2,
+        "endLine": 283,
+        "endChar": 28
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_03392217",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "In HTML it is allowed to have multiple \u003coptgroup\u003e with the same label. In that case this method will act totally wrong: It will append all items/values to the first optgroup found with the same label and then moves that optgroup the a new position based on the index.",
+      "range": {
+        "startLine": 456,
+        "startChar": 2,
+        "endLine": 458,
+        "endChar": 23
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_7e49958c",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "I think the caller should do this, so that this method does not accept null for items/values",
+      "range": {
+        "startLine": 460,
+        "startChar": 4,
+        "endLine": 460,
+        "endChar": 45
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_834752e9",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "isGroupDisabled(int index)",
+      "range": {
+        "startLine": 569,
+        "startChar": 17,
+        "endLine": 569,
+        "endChar": 32
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_c3a30a3a",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "I think we should not trim()",
+      "range": {
+        "startLine": 626,
+        "startChar": 10,
+        "endLine": 626,
+        "endChar": 81
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_c37a2a12",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "setGroupDisabled",
+      "range": {
+        "startLine": 667,
+        "startChar": 14,
+        "endLine": 667,
+        "endChar": 30
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_43063a8d",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "setGroupLabel",
+      "range": {
+        "startLine": 679,
+        "startChar": 14,
+        "endLine": 679,
+        "endChar": 22
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_631eded3",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "setGroupLabel(). However I am not sure if we need that method for now. Also the JavaDoc should indicate that this method will update all groups with the same oldLabel.",
+      "range": {
+        "startLine": 692,
+        "startChar": 14,
+        "endLine": 692,
+        "endChar": 22
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_8323d218",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "I think we should not trim()",
+      "range": {
+        "startLine": 699,
+        "startChar": 10,
+        "endLine": 699,
+        "endChar": 56
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_dee20132",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "...OptGroup...",
+      "range": {
+        "startLine": 811,
+        "startChar": 19,
+        "endLine": 811,
+        "endChar": 35
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_3edebd6f",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "...OptGroup...",
+      "range": {
+        "startLine": 871,
+        "startChar": 17,
+        "endLine": 871,
+        "endChar": 33
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_1ef099f4",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "just the string will be enough.",
+      "range": {
+        "startLine": 886,
+        "startChar": 47,
+        "endLine": 886,
+        "endChar": 82
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_1ed97986",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "...OptGroup...\n\nAlso this method only returns the first element found, however it is allowed to have more than one \u003coptgroup\u003e with the same label. As this method is only used in insertGroup() and insertGroup() itself is broken in case of multiple \u003coptgroup\u003e with same label you might not need that method anymore once insertGroup() works as expected.",
+      "range": {
+        "startLine": 889,
+        "startChar": 26,
+        "endLine": 889,
+        "endChar": 53
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_be006d23",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "I think we should not trim()",
+      "range": {
+        "startLine": 893,
+        "startChar": 10,
+        "endLine": 893,
+        "endChar": 67
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_e3540e4e",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "...OptGroup..",
+      "range": {
+        "startLine": 900,
+        "startChar": 17,
+        "endLine": 900,
+        "endChar": 45
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_a35e166a",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-06T20:04:39Z",
+      "side": 1,
+      "message": "...OptGroup...",
+      "range": {
+        "startLine": 914,
+        "startChar": 15,
+        "endLine": 914,
+        "endChar": 43
+      },
+      "revId": "caaabfb0620768fb705d953741036b1c4c821769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

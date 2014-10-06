@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f0268cf7_aa9a0446",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-06T17:45:07Z",
+      "side": 1,
+      "message": "Maybe it\u0027s a way not to flee the Java logging standard, in which the exception messages follow the skeleton [exception-class-name][colon][whitespace][message], as in \"java.io.IOException: Cannot find specified path\".\n\nAlso, when assigning variables in log messages, it\u0027s common to use the equals sign, instead of the colon. At least, in my experience through some libraries this is the pattern I\u0027ve observed. \nHere\u0027s an example: \"java.io.IOException: Cannot run program \"dot\": CreateProcess error\u003d2, O sistema não pode encontrar o arquivo especificado\". \n(the message is adapted to pt-br)\n\nPlease, consider reading the best practices for logging linked below. They all apply the above comments. (although they\u0027re not from Java)\nhttp://dev.splunk.com/view/logging-best-practices/SP-CAAADP6\nhttp://sourceforge.net/adobe/cairngorm/wiki/BestPracticesforLogging/",
+      "parentUuid": "d0bfc88a_c321ca93",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_c6e664eb",
         "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
         "patchSetId": 3

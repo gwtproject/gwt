@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70dffc23_1e48cda9",
+        "filename": "user/src/com/google/gwt/typedarrays/client/NativeImplEmulDataView.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-06T19:57:24Z",
+      "side": 1,
+      "message": "I think this class was incorrectly kept public and should be fine to remove.",
+      "revId": "318bc3fe7c137e2da555c41eba33dc62152747c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

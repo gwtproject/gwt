@@ -1,0 +1,58 @@
+.foo {
+    width: 100%;
+}
+
+/* will be evaluated to false) */
+@if (is("user.agent", "ie8")) {
+    .foo {
+        color: black;
+    }
+}
+@elseif (eval("com.google.gwt.resources.client.gss.BooleanEval.FIRST")) {
+    /* will be evaluated to false) */
+    @if (is("user.agent", "ie8")) {
+        .foo {
+            color: orange;
+        }
+    }
+    @else {
+        .foo {
+            color: purple;
+        }
+    }
+}
+@elseif (eval("com.google.gwt.resources.client.gss.BooleanEval.SECOND")) {
+    @if (eval("com.google.gwt.resources.client.gss.BooleanEval.THIRD")) {
+        .foo {
+            color: black;
+        }
+    } @else {
+        .foo {
+            color: khaki;
+        }
+    }
+}
+@else {
+    .foo {
+        color: gray;
+    }
+}
+
+/* will be evaluated to false) */
+@if (is("user.agent", "ie8")) {
+    .foo {
+        padding: 5px;
+    }
+}
+/* will be evaluated to true) */
+@elseif (is("user.agent", "gecko_1_8")) {
+    .foo {
+        padding: 10px;
+    }
+}
+/* will be never evaluated */
+@elseif (eval("com.google.gwt.resources.client.gss.BooleanEval.FIRST")) {
+    .foo {
+        padding: 20px;
+    }
+}

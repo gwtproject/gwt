@@ -121,6 +121,9 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
     return serializationPolicy;
   }
 
+  private static final String CODE_SERVER_DEFAULT_HOST = "localhost";
+  private static final int CODE_SERVER_NO_PORT = 0;
+
   private static final SerializationPolicyClient CODE_SERVER_CLIENT =
       new SerializationPolicyClient(5000, 5000);
 
@@ -136,11 +139,18 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   private final Object delegate;
 
   /**
-   * The HTTP port of a Super Dev Mode code server running on localhost where this servlet will
-   * download serialization policies. (If set to zero, this feature is disabled and no download
-   * will be attempted.)
+   * The host of a Super Dev Mode code server where this servlet will download
+   * serialization policies.
    */
-  private int codeServerPort = 0;
+  private String codeServerHost = CODE_SERVER_DEFAULT_HOST;
+
+  /**
+   * The HTTP port of a Super Dev Mode code server running on {@link #codeServerHost} 
+   * where this servlet will download serialization policies.
+   * (If set to {@link #CODE_SERVER_NO_PORT}, this feature is disabled and no 
+   * download will be attempted.)
+   */
+  private int codeServerPort = CODE_SERVER_NO_PORT;
 
   /**
    * The default constructor used by service implementations that
@@ -166,18 +176,51 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
   @Override
   public void init(ServletConfig config) throws ServletException {
     super.init(config);
+    codeServerHost = getCodeServerHost();
     codeServerPort = getCodeServerPort();
   }
 
   /**
-   * Returns the value of the gwt.codeserver.port system property, or zero if not defined.
+   * Returns the value of {@code gwt.codeserver.host} system property or 
+   * {@link #CODE_SERVER_DEFAULT_HOST} if not defined.
+   *
+   * @return the code server host
+   * @throws ServletException if the system property contains a host:port combination
+   */
+  private String getCodeServerHost() throws ServletException {
+    String host = System.getProperty("gwt.codeserver.host");
+    if(host == null) {
+      return CODE_SERVER_DEFAULT_HOST;
+    }
+    int colonPos = host.indexOf(':');
+    if (colonPos == -1) {
+      // 0 colons. Bare hostname or IPv4 literal without port.
+      return host;
+    } else if (host.indexOf(':', colonPos + 1) > -1) {
+      // 2+ colons
+      if (!host.startsWith("[")) {
+        // IPv6 literal
+        return host;
+      } else if (host.endsWith("]")) {
+        // IPv6 with bracket notation but without port. Strip brackets.
+        return host.substring(1, host.length() - 1);
+      }
+      // assume host is [IPv6]:port or generally broken
+    }
+    throw new ServletException("Invalid value for gwt.codeserver.host system property;"
+        + " please specify port through gwt.codeserver.port system property");
+  }
+
+  /**
+   * Returns the value of the {@code gwt.codeserver.port} system property,
+   * or {@link #CODE_SERVER_NO_PORT} if not defined.
    *
    * @throws ServletException if the system property has an invalid value.
    */
   private int getCodeServerPort() throws ServletException {
     String value = System.getProperty("gwt.codeserver.port");
     if (value == null) {
-      return 0;
+      return CODE_SERVER_NO_PORT;
     }
 
     try {
@@ -426,19 +469,26 @@ public class RemoteServiceServlet extends AbstractRemoteServiceServlet
    * <p>By default, returns null. If the {@code gwt.codeserver.port} system property is set,
    * returns a URL under {@code http://localhost:{port}}.
    *
-   * <p>To use a server not on localhost, you must override this method. If you do so,
-   * consider the security implications: the policy server and network transport must be
-   * trusted or this could be used as a way to disable security checks for some
-   * GWT-RPC requests, allowing access to arbitrary Java classes.
+   * <p>To use a server not on {@code localhost}, the system property
+   * {@code gwt.codeserver.host} can be set.
+   *
+   * <p>Alternatively this method can be overridden to provide a custom URL.
+   *
+   * <p>If you change network transport and/or server host, consider the
+   * security implications:
+   * the policy server and network transport must be trusted or this could be
+   * used as a way to disable security checks for some GWT-RPC requests,
+   * allowing access to arbitrary Java classes.
    *
    * @param strongName the strong name from the GWT-RPC request (already validated).
    * @return the URL to use or {@code null} if no request should be made.
    */
   protected String getCodeServerPolicyUrl(String strongName) {
-    if (codeServerPort <= 0) {
+    if (codeServerPort <= CODE_SERVER_NO_PORT) {
       return null;
     }
-    return "http://localhost:" + codeServerPort + "/policies/" + strongName + ".gwt.rpc";
+    return "http://" + codeServerHost + ":" + codeServerPort + "/policies/"
+        + strongName + ".gwt.rpc";
   }
 
   /**

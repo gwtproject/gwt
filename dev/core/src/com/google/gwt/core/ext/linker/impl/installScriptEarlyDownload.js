@@ -59,5 +59,10 @@ function installScript(filename) {
   sendStats('moduleStartup', 'moduleRequested');
   var script = $doc.createElement('script');
   script.src = filename;
+  script.onerror = function() {
+    if (__MODULE_FUNC__.__errFn) {
+      __MODULE_FUNC__.__errFn('__MODULE_FUNC__', new Error("Failed to load " + code));
+    }
+  }
   $doc.getElementsByTagName('head')[0].appendChild(script);
 }

@@ -10,6 +10,11 @@ function installScript(filename) {
     var script = doc.createElement('script');
     script.language='javascript';
     script.src = code;
+    script.onerror = function() {
+      if (__MODULE_FUNC__.__errFn) {
+        __MODULE_FUNC__.__errFn('__MODULE_FUNC__', new Error("Failed to load " + code));
+      }
+    }
     docbody.appendChild(script);
     sendStats('moduleStartup', 'scriptTagAdded');
   }

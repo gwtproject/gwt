@@ -196,7 +196,7 @@ class Recompiler {
     // needing to know the binding properties.)
     module.getCompilationState(compileLogger, compilerContext);
 
-    setUpCompileDir(compileDir, module, compileLogger);
+    setUpCompileDir(compileDir, module, compileLogger, options);
     writeLauncherFiles(module, compileLogger);
 
     outputModuleName.set(module.getName());
@@ -213,7 +213,7 @@ class Recompiler {
    * It will include all "public" resources and a nocache.js file that invokes the compiler.
    */
   private static void setUpCompileDir(CompileDir compileDir, ModuleDef module,
-      TreeLogger compileLogger) throws UnableToCompleteException {
+      TreeLogger compileLogger, Options options) throws UnableToCompleteException {
     try {
       String outputModuleName = module.getName();
 
@@ -227,11 +227,14 @@ class Recompiler {
       }
       writePublicResources(outputDir, module, compileLogger);
 
-      // Create a "module_name.nocache.js" that calculates the permutation and forces a recompile.
+      // write no cache that will inject recompile.nocache.js
+      String stub = generateStubNocacheJs(module.getName(), options);
+      final File noCacheJs = new File(outputDir.getCanonicalPath(), module.getName() + ".nocache.js");
+      Files.write(stub, noCacheJs, Charsets.UTF_8);
+
+      // Create a "module_name.recompile.nocache.js" that calculates the permutation
+      // and forces a recompile.
       String nocacheJs = generateModuleRecompileJs(module, compileLogger);
-      Files.write(nocacheJs,
-          new File(outputDir.getCanonicalPath() + "/" + outputModuleName + ".nocache.js"),
-          Charsets.UTF_8);
       writeRecompileNoCacheJs(outputDir, outputModuleName, nocacheJs, compileLogger);
     } catch (IOException e) {
       compileLogger.log(Type.ERROR, "Error creating stub compile directory.", e);
@@ -380,7 +383,7 @@ class Recompiler {
     }
 
     try {
-      String stub = generateStubNocacheJs(module.getName());
+      String stub = generateStubNocacheJs(module.getName(), options);
 
       final File noCacheJs = new File(moduleDir, module.getName() + ".nocache.js");
       Files.write(stub, noCacheJs, Charsets.UTF_8);
@@ -407,7 +410,8 @@ class Recompiler {
    * Returns the contents of a nocache.js file that will compile and then run a GWT application
    * using Super Dev Mode.
    */
-  private String generateStubNocacheJs(String outputModuleName) throws IOException {
+  private static String generateStubNocacheJs(String outputModuleName, Options options)
+      throws IOException {
     URL url = Resources.getResource(Recompiler.class, "stub.nocache.js");
     final String template = Resources.toString(url, Charsets.UTF_8);
     return template

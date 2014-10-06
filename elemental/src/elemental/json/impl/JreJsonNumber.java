@@ -15,7 +15,10 @@
  */
 package elemental.json.impl;
 
+import elemental.json.JsonArray;
+import elemental.json.JsonException;
 import elemental.json.JsonNumber;
+import elemental.json.JsonObject;
 import elemental.json.JsonType;
 import elemental.json.JsonValue;
 
@@ -43,6 +46,16 @@ public class JreJsonNumber extends JreJsonValue implements JsonNumber {
   @Override
   public String asString() {
     return toJson();
+  }
+
+  @Override
+  public JsonObject asObject() {
+    throw new JsonException("Can't convert JreJsonNumber to JsonObject");
+  }
+
+  @Override
+  public JsonArray asArray() {
+    throw new JsonException("Can't convert JreJsonNumber to JsonArray");
   }
 
   public double getNumber() {

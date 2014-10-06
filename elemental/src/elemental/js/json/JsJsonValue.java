@@ -17,6 +17,9 @@ package elemental.js.json;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+import elemental.json.JsonArray;
+import elemental.json.JsonException;
+import elemental.json.JsonObject;
 import elemental.json.JsonType;
 import elemental.json.JsonValue;
 
@@ -75,6 +78,26 @@ public class JsJsonValue extends JavaScriptObject implements JsonValue {
     return this == null ? null :
         ("" + @elemental.js.json.JsJsonValue::debox(Lelemental/json/JsonValue;)(this));
   }-*/;
+
+  @Override
+  final public JsonObject asObject() {
+    if (getType() == JsonType.OBJECT) {
+      return (JsonObject) this;
+    } else {
+      throw new JsonException("Can't convert JsonValue with type " + getType().name()
+          + " to JsonObject");
+    }
+  }
+
+  @Override
+  final public JsonArray asArray() {
+    if (getType() == JsonType.ARRAY) {
+      return (JsonArray) this;
+    } else {
+      throw new JsonException("Can't convert JsonValue with type " + getType().name()
+          + " to JsonArray");
+    }
+  }
 
   final public JsonType getType() {
     if (isNull(this)) {

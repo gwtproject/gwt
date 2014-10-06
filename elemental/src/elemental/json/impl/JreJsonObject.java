@@ -23,11 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 import elemental.json.JsonArray;
-import elemental.json.JsonBoolean;
+import elemental.json.JsonException;
 import elemental.json.JsonFactory;
-import elemental.json.JsonNumber;
 import elemental.json.JsonObject;
-import elemental.json.JsonString;
 import elemental.json.JsonType;
 import elemental.json.JsonValue;
 
@@ -73,25 +71,34 @@ public class JreJsonObject extends JreJsonValue implements JsonObject {
     return "[object Object]";
   }
 
+  @Override
+  public JsonObject asObject() {
+    return this;
+  }
+
+  @Override
+  public JsonArray asArray() {
+    throw new JsonException("Can't convert JreJsonObject to JsonArray");
+  }
+
   public JsonValue get(String key) {
     return map.get(key);
   }
 
   public JsonArray getArray(String key) {
-    return (JsonArray) get(key);
+    return get(key).asArray();
   }
 
-
   public boolean getBoolean(String key) {
-    return ((JsonBoolean) get(key)).getBoolean();
+    return get(key).asBoolean();
   }
 
   public double getNumber(String key) {
-    return ((JsonNumber) get(key)).getNumber();
+    return get(key).asNumber();
   }
 
   public JsonObject getObject(String key) {
-    return (JsonObject) get(key);
+    return get(key).asObject();
   }
 
   public Object getObject() {
@@ -104,7 +111,7 @@ public class JreJsonObject extends JreJsonValue implements JsonObject {
 
 
   public String getString(String key) {
-    return ((JsonString) get(key)).getString();
+    return get(key).asString();
   }
 
   public JsonType getType() {

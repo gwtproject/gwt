@@ -15,7 +15,10 @@
  */
 package elemental.json.impl;
 
+import elemental.json.JsonArray;
+import elemental.json.JsonException;
 import elemental.json.JsonNull;
+import elemental.json.JsonObject;
 import elemental.json.JsonType;
 import elemental.json.JsonValue;
 
@@ -39,6 +42,16 @@ public class JreJsonNull extends JreJsonValue implements JsonNull {
   @Override
   public String asString() {
     return "null";
+  }
+
+  @Override
+  public JsonObject asObject() {
+    throw new JsonException("Can't convert JreJsonNull to JsonObject");
+  }
+
+  @Override
+  public JsonArray asArray() {
+    throw new JsonException("Can't convert JreJsonNull to JsonArray");
   }
 
   public Object getObject() {

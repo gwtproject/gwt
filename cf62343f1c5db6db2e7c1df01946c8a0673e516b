@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50dcb82f_a0d254de",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-06T23:49:05Z",
+      "side": 1,
+      "message": "The callers aren\u0027t static so I think we can remove \"static\" and then we don\u0027t have to pass along the options as an argument.",
+      "range": {
+        "startLine": 215,
+        "startChar": 10,
+        "endLine": 215,
+        "endChar": 16
+      },
+      "revId": "cf62343f1c5db6db2e7c1df01946c8a0673e516b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50dcb82f_e078dc34",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-06T23:49:05Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think we need this.",
+      "range": {
+        "startLine": 232,
+        "startChar": 6,
+        "endLine": 232,
+        "endChar": 11
+      },
+      "revId": "cf62343f1c5db6db2e7c1df01946c8a0673e516b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50dcb82f_a000949e",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-06T23:49:05Z",
+      "side": 1,
+      "message": "Let\u0027s rename to recompileJs to avoid confusion.",
+      "range": {
+        "startLine": 237,
+        "startChar": 13,
+        "endLine": 237,
+        "endChar": 22
+      },
+      "revId": "cf62343f1c5db6db2e7c1df01946c8a0673e516b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

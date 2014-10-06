@@ -1,0 +1,8 @@
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0//EN"
+        "http://google-web-toolkit.googlecode.com/svn/releases/2.0/distro-source/core/src/gwt-module.dtd">
+<module>
+  <inherits name="com.google.gwt.resources.GssResourceTest" />
+
+  <!-- Define two other non standards at-rules -->
+  <set-configuration-property name="CssResource.style" value="stable-notype" />
+</module>

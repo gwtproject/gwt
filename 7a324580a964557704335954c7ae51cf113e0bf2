@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5017588b_2ee62bc3",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStaticEval.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-06T18:33:43Z",
+      "side": 1,
+      "message": "to make it even more clear, maybe add a comment saying that this set does not include operators that are only left-associative or only right-associative or which are not associative for floating point numbers",
+      "range": {
+        "startLine": 596,
+        "startChar": 2,
+        "endLine": 598,
+        "endChar": 5
+      },
+      "revId": "7a324580a964557704335954c7ae51cf113e0bf2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_83f1922c",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsStaticEvalTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-06T18:33:43Z",
+      "side": 1,
+      "message": "stale",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 16
+      },
+      "revId": "7a324580a964557704335954c7ae51cf113e0bf2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50c2f81e_c15b1279",
+        "filename": "elemental/src/elemental/Elemental.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-06T08:40:04Z",
+      "side": 0,
+      "message": "That line is actually needed, as elemental.Collections doesn\u0027t include all of element.util (specifically excludes elemental.util.Timer). Restored.",
+      "revId": "e06aa32a771485370c0b942316d6f322017bf711",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

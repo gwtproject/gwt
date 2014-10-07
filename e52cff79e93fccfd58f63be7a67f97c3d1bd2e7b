@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_12072d3f",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-07T21:50:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_bd8d2f91",
+      "range": {
+        "startLine": 62,
+        "startChar": 15,
+        "endLine": 62,
+        "endChar": 23
+      },
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_fd87a76a",
         "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2014-10-07T05:10:45Z",
       "side": 1,
       "message": "return; - no need to keep going, right?",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_b203c12f",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-07T21:50:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_fd87a76a",
       "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_d200b524",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-07T21:50:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_9d8af374",
+      "range": {
+        "startLine": 96,
+        "startChar": 28,
+        "endLine": 96,
+        "endChar": 48
+      },
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_3d613f32",
         "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
         "patchSetId": 3
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_d22e75ac",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-07T21:50:18Z",
+      "side": 1,
+      "message": "@external externalClass \"dateBox*\";\n\nexternalClass will be mapped to a CssLiteralNode and \"dateBox*\" to a CssStringNode.\n\nThe last else is to handle the CssLiteralNode.\n\nNow, you\u0027re right, I could be more defensive and test if the value is a CssLiteralNode and throw an exception if it\u0027s not the case to warn the user that something is wrong with the external at rule . Moreover, after some tests, you can use constant (that is replaced before to call this visitor) and pass everything in the at-rule via a constant (like a function, a java expression and so on).",
+      "parentUuid": "10116099_3d613f32",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_bd540f4d",
         "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
         "patchSetId": 3
@@ -93,6 +177,24 @@
       "writtenOn": "2014-10-07T05:10:45Z",
       "side": 1,
       "message": "Very likely too little too late... but why not as a mixin? Could set a precedent for a few that are built-in that GWT/GSS solves for us, maybe look something like\n\n    @mixin sprite(\u0027someImageResource\u0027);",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_0835bafa",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-07T21:50:18Z",
+      "side": 1,
+      "message": "This is not possible to do that with a mixin. We need to access annotations (@ImageOptions and @RepeatStyle) defined for the method that returns the instance of the ImageResource.",
+      "parentUuid": "10116099_bd540f4d",
       "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -169,6 +271,24 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_686b16e4",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-07T21:50:18Z",
+      "side": 1,
+      "message": "Good point... We cannot mix both because we have the risk (even if the probability is very low) to have a conflict in the style class names...",
+      "parentUuid": "10116099_9d51535d",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_c6e664eb",
         "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
         "patchSetId": 3
@@ -197,6 +317,54 @@
       "writtenOn": "2014-10-07T03:58:17Z",
       "side": 1,
       "message": "If I am reading this right (and runtimeConditional.gss as well), then we are *assuming* here that user.agent can *never* equal ie8 or gecko_1_8 (or gecko1_8 if that was what you really meant instead). That means that if unit tests are run via htmlunit as IE8 (see http://mojo.codehaus.org/gwt-maven-plugin/test-mojo.html#htmlunit) or using selenium/rmi in IE8, this will rather mysteriously fail. \n\nIf nothing else the comment in the .gss file needs a cleanup, but you probably also want to either check/force user.agent\u0027s value, or better yet, change the .gwt.xml for this test to support a custom property, and have two methods that each check one case?",
+      "range": {
+        "startLine": 136,
+        "startChar": 46,
+        "endLine": 136,
+        "endChar": 52
+      },
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_88576a1b",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-07T21:50:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_7d7457fa",
+      "range": {
+        "startLine": 136,
+        "startChar": 46,
+        "endLine": 136,
+        "endChar": 52
+      },
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_c885622c",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-07T21:50:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_7d7457fa",
       "range": {
         "startLine": 136,
         "startChar": 46,
@@ -254,6 +422,24 @@
       "writtenOn": "2014-10-07T03:58:17Z",
       "side": 1,
       "message": "...Shouldn\u0027t this be gecko1_8? Either that, or the comment is wrong, this \u0027will be evaluated to false\u0027 since gecko_1_8 isn\u0027t a real value for user.agent.",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_6852362e",
+        "filename": "user/test/com/google/gwt/resources/client/gss/runtimeConditional.gss",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-07T21:50:18Z",
+      "side": 1,
+      "message": "replaced by a custom property",
+      "parentUuid": "10116099_3d7adfe9",
       "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

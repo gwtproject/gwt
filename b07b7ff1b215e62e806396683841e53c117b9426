@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10116099_f824d5a5",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/Person.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T13:00:39Z",
+      "side": 1,
+      "message": "[error] \u0027javax.validation.Valid\u0027 should be separated from previous imports.",
+      "revId": "b07b7ff1b215e62e806396683841e53c117b9426",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

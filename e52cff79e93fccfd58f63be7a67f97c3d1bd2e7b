@@ -2,6 +2,103 @@
   "comments": [
     {
       "key": {
+        "uuid": "10116099_bd8d2f91",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-07T05:10:45Z",
+      "side": 1,
+      "message": "Perhaps just visitConditionalRule or some other adverb, manually makes it sound like we\u0027re going to kick this back to the user and ask them to sort it out...",
+      "range": {
+        "startLine": 62,
+        "startChar": 15,
+        "endLine": 62,
+        "endChar": 23
+      },
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_fd87a76a",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-07T05:10:45Z",
+      "side": 1,
+      "message": "return; - no need to keep going, right?",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_9d8af374",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-07T05:10:45Z",
+      "side": 1,
+      "message": "If we\u0027re testing with endsWith, it should be called STAR_SUFFIX - prefix would imply startsWith.\n\nBut externalClassPrefixes makes sense, since we ignore the suffix (star) and use the remainder (the prefix).",
+      "range": {
+        "startLine": 96,
+        "startChar": 28,
+        "endLine": 96,
+        "endChar": 48
+      },
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_3d613f32",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-07T05:10:45Z",
+      "side": 1,
+      "message": "Just double checking here, but this can\u0027t be *\u0027d since it is already a css rule? Should that be asserted or otherwise checked? Is it possible someone passed in something stupid like a comment, @-rule, or A_DEF_EXPRESSION of some kind?",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_bd540f4d",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-07T05:10:45Z",
+      "side": 1,
+      "message": "Very likely too little too late... but why not as a mixin? Could set a precedent for a few that are built-in that GWT/GSS solves for us, maybe look something like\n\n    @mixin sprite(\u0027someImageResource\u0027);",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_e6e9e0bd",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 3
@@ -49,6 +146,23 @@
       "side": 1,
       "message": "Maybe it\u0027s a way not to flee the Java logging standard, in which the exception messages follow the skeleton [exception-class-name][colon][whitespace][message], as in \"java.io.IOException: Cannot find specified path\".\n\nAlso, when assigning variables in log messages, it\u0027s common to use the equals sign, instead of the colon. At least, in my experience through some libraries this is the pattern I\u0027ve observed. \nHere\u0027s an example: \"java.io.IOException: Cannot run program \"dot\": CreateProcess error\u003d2, O sistema não pode encontrar o arquivo especificado\". \n(the message is adapted to pt-br)\n\nPlease, consider reading the best practices for logging linked below. They all apply the above comments. (although they\u0027re not from Java)\nhttp://dev.splunk.com/view/logging-best-practices/SP-CAAADP6\nhttp://sourceforge.net/adobe/cairngorm/wiki/BestPracticesforLogging/",
       "parentUuid": "d0bfc88a_c321ca93",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_9d51535d",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-07T05:10:45Z",
+      "side": 1,
+      "message": "What about mixing and matching GssResource and CssResource?",
       "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

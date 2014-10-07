@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10116099_587089fc",
+        "filename": "user/src/com/google/gwt/storage/client/StorageMap.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T16:49:04Z",
+      "side": 1,
+      "message": "Other parts rely on non-null values, perhaps this should be critical.\nAnyway, let\u0027s not expand preconditions beyond JRE for now and submit the patchset that I already +2\u0027d.",
+      "range": {
+        "startLine": 255,
+        "startChar": 4,
+        "endLine": 255,
+        "endChar": 16
+      },
+      "revId": "14a799d2aeb7ce5e1a17f458b3ccbd11201807af",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

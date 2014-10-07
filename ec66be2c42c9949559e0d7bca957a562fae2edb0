@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0bfc88a_72f6a9f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-07T08:54:22Z",
+      "side": 1,
+      "message": "Could you move the \"issue 8856\" to a \"Bug\" footer line?\n\n Bug: issue 8856",
+      "revId": "ec66be2c42c9949559e0d7bca957a562fae2edb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

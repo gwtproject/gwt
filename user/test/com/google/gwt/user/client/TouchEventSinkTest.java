@@ -16,6 +16,7 @@
 
 package com.google.gwt.user.client;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.HasAllTouchHandlers;
 import com.google.gwt.event.dom.client.TouchCancelEvent;
 import com.google.gwt.event.dom.client.TouchCancelHandler;

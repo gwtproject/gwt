@@ -555,9 +555,9 @@ public abstract class UIObject implements HasVisibility {
    * 
    * @return the object's browser element
    */
-  public com.google.gwt.user.client.Element getElement() {
+  public Element getElement() {
     assert (element != null) : MISSING_ELEMENT_ERROR;
-    return DOM.asOld(element);
+    return element;
   }
 
   /**
@@ -835,7 +835,7 @@ public abstract class UIObject implements HasVisibility {
    * 
    * @return the element to which style names will be applied
    */
-  protected com.google.gwt.user.client.Element getStyleElement() {
+  protected Element getStyleElement() {
     return getElement();
   }
 
@@ -874,7 +874,7 @@ public abstract class UIObject implements HasVisibility {
    * The receiver must:
    * <ul>
    * <li> create a real {@link Element} to replace its {@link PotentialElement}
-   * <li> call {@link #setElement()} with the new Element
+   * <li> call {@link #setElement(Element)} with the new Element
    * <li> and return the new Element
    * </ul>
    * <p>

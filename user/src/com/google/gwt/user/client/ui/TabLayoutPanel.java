@@ -152,8 +152,8 @@ public class TabLayoutPanel extends ResizeComposite implements HasWidgets,
     }
 
     @Override
-    protected com.google.gwt.user.client.Element getContainerElement() {
-      return inner.cast();
+    protected Element getContainerElement() {
+      return inner;
     }
   }
 

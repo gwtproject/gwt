@@ -289,6 +289,24 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_68b9d6f3",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-07T22:16:32Z",
+      "side": 1,
+      "message": "In fact we can solve that easily.\n\nFor the time being, the pattern used by GssResource for renaming a style class is: [a-zA-Z][a-zA-Z0-9]*-[a-zA-Z][a-zA-Z0-9]*\n\nFor CssResource the pattern is [A-Y][-A-Y0-5]*\n\nIf I replace the hypen in the GssResource pattern by an underscore, we will avoid conflict between GssResource and CssResource because the underscore is not used byt CssResource.\n\nWhat do you think ?",
+      "parentUuid": "d0bfc88a_686b16e4",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_c6e664eb",
         "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
         "patchSetId": 3

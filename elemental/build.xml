@@ -53,13 +53,13 @@
     </gwt.jar>
   </target>
 
-  <target name="test" if="generated" depends="compile.tests" description="Run tests">
-    <mkdir dir="${junit.out}/elemental" />
+  <target name="run-all-tests" if="generated" depends="compile.tests" description="Run tests">
+    <mkdir dir="${junit.out}/elemental${prod}" />
     <fileset id="tests" dir="${javac.junit.out}" includes="**/AllTests.class" />
     <gwt.junit test.name="test"
-        test.args="${test.args}"
+        test.args="${test.args} ${prod}"
         test.jvmargs="${test.jvmargs}"
-        test.out="${junit.out}/codeserver"
+        test.out="${junit.out}/elemental${prod}"
         test.cases="tests">
       <extraclasspaths>
         <pathelement location="${gwt.root}/elemental/src" />
@@ -69,6 +69,15 @@
         <pathelement location="${gwt.user.jar}" />
       </extraclasspaths>
     </gwt.junit>
+  </target>
+
+  <target name="test" >
+    <antcall target="run-all-tests">
+      <param name="prod" value="" />
+    </antcall>
+    <antcall target="run-all-tests">
+      <param name="prod" value="-prod"/>
+    </antcall>
   </target>
 
     <macrodef name="compileModule">

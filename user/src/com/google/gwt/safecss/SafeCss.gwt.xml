@@ -24,7 +24,6 @@
   <replace-with class="com.google.gwt.safecss.shared.SafeStylesUtils.ImplIE6To8">
     <when-type-is class="com.google.gwt.safecss.shared.SafeStylesUtils.Impl" />
     <any>
-      <when-property-is name="user.agent" value="ie6" />
       <when-property-is name="user.agent" value="ie8" />
     </any>
   </replace-with>

@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10116099_05798936",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T23:20:05Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.thirdparty.common.css.compiler.ast.CssLiteralNode\u0027 import.",
+      "revId": "6b0d278ea27d0f7c8b4c42bd49b543f8d7ab252b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_454261db",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T23:20:05Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "6b0d278ea27d0f7c8b4c42bd49b543f8d7ab252b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_e5754d3a",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T23:20:05Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "6b0d278ea27d0f7c8b4c42bd49b543f8d7ab252b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_254765eb",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T23:20:05Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "6b0d278ea27d0f7c8b4c42bd49b543f8d7ab252b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_853c595c",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T23:20:05Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "6b0d278ea27d0f7c8b4c42bd49b543f8d7ab252b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_65415dd2",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T23:20:05Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "6b0d278ea27d0f7c8b4c42bd49b543f8d7ab252b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

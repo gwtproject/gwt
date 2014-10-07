@@ -55,6 +55,8 @@ public class JsArrayLikeIterableAdapter<T> implements Iterable<T> {
       public T next() {
         return instance.at(i++);
       }
+
+      public void remove() { throw new UnsupportedOperationException("Can't remove"); }
     };
   }
 }

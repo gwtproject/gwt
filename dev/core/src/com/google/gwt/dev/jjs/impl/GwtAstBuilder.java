@@ -1312,7 +1312,8 @@ public class GwtAstBuilder {
 
     private JMethodCall synthesizeJsMagicMethod(MessageSend x, SourceInfo info, JMethod method,
         List<JExpression> arguments, String javaScript) throws IOException, JsParserException {
-      JMethodCall call;JType returnType = method.getType();
+      JMethodCall call;
+      JType returnType = method.getType();
 
       // synthesize a native JSNI method called __jsni$<n>
       JMethod jsniMethod = new JMethod(info, "__jsni$" + curClass.gwtJsniCount++,

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50c2f81e_227454f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-07T08:28:48Z",
+      "side": 1,
+      "message": "I don\u0027t think the \"\u003dtrue\" part is even needed.\n\n(and I wouldn\u0027t have updated the commit message just for the line-length warning; I find it more readable on one line)",
+      "revId": "cba57690c371940cdddd4cdfc0b5eec17b57a0ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

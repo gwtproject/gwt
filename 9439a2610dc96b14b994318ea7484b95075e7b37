@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10f88089_5aa2490c",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T00:33:12Z",
+      "side": 1,
+      "message": "You can use \n\n  Predicates.in(lastReachableTypeNames)\n\nand then the initializer block would also be not needed.",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 6
+      },
+      "revId": "9439a2610dc96b14b994318ea7484b95075e7b37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

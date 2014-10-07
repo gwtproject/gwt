@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10116099_b81a5d5f",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/Person.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T12:55:34Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.Map\u0027 import.",
+      "revId": "7bd7d18da7451f4b39c47c546867d05e683284eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -72,6 +72,29 @@
     },
     {
       "key": {
+        "uuid": "10116099_7d7457fa",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-07T03:58:17Z",
+      "side": 1,
+      "message": "If I am reading this right (and runtimeConditional.gss as well), then we are *assuming* here that user.agent can *never* equal ie8 or gecko_1_8 (or gecko1_8 if that was what you really meant instead). That means that if unit tests are run via htmlunit as IE8 (see http://mojo.codehaus.org/gwt-maven-plugin/test-mojo.html#htmlunit) or using selenium/rmi in IE8, this will rather mysteriously fail. \n\nIf nothing else the comment in the .gss file needs a cleanup, but you probably also want to either check/force user.agent\u0027s value, or better yet, change the .gwt.xml for this test to support a custom property, and have two methods that each check one case?",
+      "range": {
+        "startLine": 136,
+        "startChar": 46,
+        "endLine": 136,
+        "endChar": 52
+      },
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_26a3f893",
         "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
         "patchSetId": 3
@@ -100,6 +123,23 @@
       "writtenOn": "2014-10-06T15:36:29Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_3d7adfe9",
+        "filename": "user/test/com/google/gwt/resources/client/gss/runtimeConditional.gss",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-07T03:58:17Z",
+      "side": 1,
+      "message": "...Shouldn\u0027t this be gecko1_8? Either that, or the comment is wrong, this \u0027will be evaluated to false\u0027 since gecko_1_8 isn\u0027t a real value for user.agent.",
       "revId": "e52cff79e93fccfd58f63be7a67f97c3d1bd2e7b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

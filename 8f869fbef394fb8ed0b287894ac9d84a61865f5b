@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10116099_058ea939",
+        "filename": "user/src/com/google/gwt/user/client/ui/impl/PopupImplIE6.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 0,
+      "message": "Remove any extension points in the base class that is not needed anymore.",
+      "revId": "8f869fbef394fb8ed0b287894ac9d84a61865f5b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10116099_65f5dde4",
+        "filename": "user/src/com/google/gwt/event/dom/DragEvent.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 8
+      },
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_0504e936",
+        "filename": "user/src/com/google/gwt/event/dom/TouchEvent.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 1,
+      "message": "there is bunch of cleanup as there is no longer \"no\" state.",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_2549258e",
+        "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 1,
+      "message": "nit: you can probably get rid of all",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_05898948",
+        "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 1,
+      "message": "Any this was earlier matched by ie8 as well?",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_853e19e2",
+        "filename": "user/src/com/google/gwt/safecss/SafeCss.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 1,
+      "message": "rename the class.",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_c5377103",
+        "filename": "user/src/com/google/gwt/user/DOM.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 1,
+      "message": "remove the related class and hide the extension points in the base class that are provided just for that class.",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_2557651d",
+        "filename": "user/src/com/google/gwt/user/Popup.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 1,
+      "message": "remove the related class and any extension points in the base class provided for it.",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_854c598e",
+        "filename": "user/src/com/google/gwt/user/ResizeLayoutPanel.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 1,
+      "message": "remove the related class and any extension points in the base class provided for it.",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_85c3b963",
+        "filename": "user/src/com/google/gwt/user/RichText.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 1,
+      "message": "rename",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_45b9c1f3",
+        "filename": "user/src/com/google/gwt/user/SplitPanel.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 1,
+      "message": "Rename the class (others below as well).",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_056069ee",
+        "filename": "user/src/com/google/gwt/user/TextBox.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T22:44:37Z",
+      "side": 1,
+      "message": "Rename the class",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

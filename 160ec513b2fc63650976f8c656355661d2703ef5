@@ -2,6 +2,224 @@
   "comments": [
     {
       "key": {
+        "uuid": "10116099_786bc511",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T18:30:58Z",
+      "side": 1,
+      "message": "Can you resolve this TODO?",
+      "range": {
+        "startLine": 69,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 53
+      },
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_b83b7d10",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T18:30:58Z",
+      "side": 1,
+      "message": "This could be rewritten as\n\n  Collection\u003cJMethod\u003e abstrectMethods \u003d Collections2.filter(type.getMethods(), new Predicate\u003cJMethod\u003e() {\n  @Override\n  public boolean apply(JMethod method) {\n      return method.isAbstract();\n  }\n\n  if (abstractMethods.size() \u003d\u003d 1) {\n    return abstractMethod.iterator().next();\n  }\n\n\nI think this whole method would look more clean if you first collect all abstract methods that are not implemented or overriden from supertypes and interfaces and then check if the list is of size 1.\n\nThis is going to look so much nicer one we start using Java8 in the compiler.",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 7
+      },
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0b988d9_a8108370",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1094,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T18:30:58Z",
+      "side": 1,
+      "message": "What happens if you have a lambda that explicitely uses the outer this?\n\nclass A {\n  int a \u003d 10;\n  int m() {return 20;};\n  \n  ...  (v1,v2) -\u003e a + m() + v1 +v2 ....\n\ndoes this appear as a SyntheticArg? \n\nAdd a test for this scenario.",
+      "range": {
+        "startLine": 1094,
+        "startChar": 6,
+        "endLine": 1094,
+        "endChar": 98
+      },
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0b988d9_c86217f9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T18:30:58Z",
+      "side": 1,
+      "message": "Extract into its own method.\n\nMaybe we should collect all these functions and move them to LambdaExpressionsCreationHelper or so.",
+      "range": {
+        "startLine": 1090,
+        "startChar": 0,
+        "endLine": 1099,
+        "endChar": 39
+      },
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0b988d9_a837a303",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T18:30:58Z",
+      "side": 1,
+      "message": "formatting.",
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0b988d9_0886cf37",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1207,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T18:30:58Z",
+      "side": 1,
+      "message": "Extract into its own method.",
+      "range": {
+        "startLine": 1150,
+        "startChar": 1,
+        "endLine": 1207,
+        "endChar": 30
+      },
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_2cbe32dd",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T18:30:58Z",
+      "side": 1,
+      "message": "Maybe you could extract this into\n\n  assertLambdaWellFormed(JClassType lambdaClass, JType[] captured types, JType[] methodPars, String constructorCode, String methodCode)",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 44
+      },
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_2c0c722d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T18:30:58Z",
+      "side": 1,
+      "message": "Move these to the superclass JJSTestBase (let the other(s) test(s) use that.",
+      "range": {
+        "startLine": 433,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 3
+      },
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0b988d9_2da3a593",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T18:30:58Z",
+      "side": 1,
+      "message": "I think we should probably add more test cases.\n\nSay cases like an abstract inner class with a SAM method and lambda constructions from inside the class from its parent and from outside.\n\nAll the tests here are with primitive types as returns we should have also with objects and also test that boxing/unboxing of parameters results works as expected.\n\nJDT has tons of unit tests for lambda in\n\nhttp://git.eclipse.org/c/jdt/eclipse.jdt.core.git/tree/org.eclipse.jdt.core.tests.compiler/src/org/eclipse/jdt/core/tests/compiler/regression/LambdaExpressionsTest.java?h\u003dR4_4_maintenance\n\nI guess there are some worth adding.",
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10f88089_744119d2",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T18:30:58Z",
+      "side": 1,
+      "message": "Rename to \n  SomeClass",
+      "range": {
+        "startLine": 35,
+        "startChar": 24,
+        "endLine": 35,
+        "endChar": 31
+      },
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_bdac0fb0",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 12
@@ -13,6 +231,24 @@
       "writtenOn": "2014-10-07T00:42:22Z",
       "side": 1,
       "message": "[error] Got an exception - expecting EOF, found \u0027}\u0027",
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10f88089_943c855c",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T18:30:58Z",
+      "side": 1,
+      "message": "I guess that \n\n  // CHECKSTYLE:OFF\n\nat the top does not solve the issue right?",
+      "parentUuid": "10116099_bdac0fb0",
       "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

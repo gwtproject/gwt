@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0bfc88a_323cb15a",
+        "filename": "elemental/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-07T13:10:23Z",
+      "side": 1,
+      "message": "This should be moved to the new \"test\" target.",
+      "range": {
+        "startLine": 56,
+        "startChar": 70,
+        "endLine": 56,
+        "endChar": 93
+      },
+      "revId": "ab4290e51655aba127e2ac8855445bf3da1f37d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50c2f81e_190e6e53",
+        "filename": "elemental/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-07T13:10:23Z",
+      "side": 1,
+      "message": "For consistency with other build files, I\u0027d rather define two targets test.dev.htmlunit and test.prod (using a macro to share the common config) and call them here.\n\nThe macro could define the output dir used in the mkdir and test.out (or a suffix for that dir) and test args to pass as test.args to gwt.junit (thus targets would use \"${test.args}\" and \"${test.args} -prod\" respectively).",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 14
+      },
+      "revId": "ab4290e51655aba127e2ac8855445bf3da1f37d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

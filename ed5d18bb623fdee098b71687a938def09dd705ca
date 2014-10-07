@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50c2f81e_c2323031",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-07T09:18:43Z",
+      "side": 1,
+      "message": "nit: Elemental",
+      "revId": "ed5d18bb623fdee098b71687a938def09dd705ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_92223dcc",
+        "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-07T09:18:43Z",
+      "side": 1,
+      "message": "I\u0027m not good at English but shouldn\u0027t this be Similitude ?",
+      "revId": "ed5d18bb623fdee098b71687a938def09dd705ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50c2f81e_a235a41b",
+        "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-07T09:18:43Z",
+      "side": 1,
+      "message": "I see so much code that seems duplicated.\n\nMaybe we should maintain just a generic method to check similitude receiving a MapFromStringTo, and specific methods to pass from say MapFromStringToNumber to MapFromStringTo\u003cObject\u003e.  But I don\u0027t know if we would save enough code.",
+      "revId": "ed5d18bb623fdee098b71687a938def09dd705ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -39,6 +39,30 @@
       "revId": "2b579023cacfc193b2a20cddcc8c532f345d8ed0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0b988d9_e280d786",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-07T21:56:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0b988d9_42718382",
+      "range": {
+        "startLine": 222,
+        "startChar": 21,
+        "endLine": 222,
+        "endChar": 43
+      },
+      "revId": "2b579023cacfc193b2a20cddcc8c532f345d8ed0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -104,6 +104,24 @@
       "revId": "ed5d18bb623fdee098b71687a938def09dd705ca",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_5c4299db",
+        "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-07T09:55:39Z",
+      "side": 1,
+      "message": "I know they don\u0027t share interfaces, what I meant is that maybe it\u0027s easier to maintain methods to convert from MapFromStringToXxx  to MapFromStringTo\u003cObject\u003e and share the loop to check the similitude",
+      "parentUuid": "d0bfc88a_12aacd92",
+      "revId": "ed5d18bb623fdee098b71687a938def09dd705ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

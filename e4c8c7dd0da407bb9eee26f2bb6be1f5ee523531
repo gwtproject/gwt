@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50dcb82f_f12430a6",
+        "filename": "user/src/com/google/gwt/user/client/rpc/core/java/util/LinkedHashSet_CustomFieldSerializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-07T02:03:14Z",
+      "side": 1,
+      "message": "nit: 3 trailing spaces",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 3
+      },
+      "revId": "e4c8c7dd0da407bb9eee26f2bb6be1f5ee523531",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10f88089_606af85d",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-07T14:20:06Z",
+      "side": 1,
+      "message": "This logic was added to fix the issue 8856.",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

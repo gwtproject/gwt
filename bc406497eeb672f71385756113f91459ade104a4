@@ -16,6 +16,24 @@
       "revId": "bc406497eeb672f71385756113f91459ade104a4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_2ca592bd",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigInteger.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-07T17:23:07Z",
+      "side": 1,
+      "message": "Yes, it looks like rounding casting to double clamps the value to signed integer but here we really want narrowing and work as unsigned integer.",
+      "parentUuid": "d0bfc88a_95c4671e",
+      "revId": "bc406497eeb672f71385756113f91459ade104a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

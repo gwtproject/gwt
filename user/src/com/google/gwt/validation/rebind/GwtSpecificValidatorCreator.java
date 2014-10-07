@@ -1090,7 +1090,7 @@ public final class GwtSpecificValidatorCreator extends AbstractCreator {
       writePropertyDescriptor(sw, p);
       if (p.isCascaded()) {
         beansToValidate.add(isIterableOrMap(p.getElementClass())
-            ? createBeanHelper(beanHelper.getAssociationType(p, true))
+            ? createBeanHelper(beanHelper.getAssociationType(p, beanHelper.hasField(p) ? true : false))
             : createBeanHelper(p.getElementClass()));
       }
     }

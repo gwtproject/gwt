@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10116099_d88ab923",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T12:32:19Z",
+      "side": 1,
+      "message": "[warning] Footer lines should form a single paragraph (i.e. must not be separated by blank lines.)",
+      "revId": "c2b217967be325ade353ad33b6dab5102f55ed4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_f88df53d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T12:32:19Z",
+      "side": 1,
+      "message": "[warning] Footer lines should form a single paragraph (i.e. must not be separated by blank lines.)",
+      "revId": "c2b217967be325ade353ad33b6dab5102f55ed4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_38078d0c",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/AddressImpl.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T12:32:19Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "c2b217967be325ade353ad33b6dab5102f55ed4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_180c512d",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/Person.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T12:32:19Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.Map\u0027 import.",
+      "revId": "c2b217967be325ade353ad33b6dab5102f55ed4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_78110545",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/Person.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-07T12:32:19Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "c2b217967be325ade353ad33b6dab5102f55ed4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

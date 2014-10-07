@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "10116099_a5b51555",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsSourceUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T23:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_a507d584",
+      "revId": "5a2a6d8324de3064b1667b45724ab1582128470d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_02a7bf49",
         "filename": "dev/core/test/com/google/gwt/dev/js/JsSourceUtilsTest.java",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "please fix",
       "parentUuid": "10116099_02a7bf49",
+      "revId": "5a2a6d8324de3064b1667b45724ab1582128470d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_05c349c1",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsSourceUtilsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-07T23:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_c50ad18e",
       "revId": "5a2a6d8324de3064b1667b45724ab1582128470d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -166,13 +166,9 @@ public class SimplePanel extends Panel implements HasOneWidget {
    * be the container for the panel's child widget. This can be useful when you
    * want to create a simple panel that decorates its contents.
    *
-   * Note that this method continues to return the
-   * {@link com.google.gwt.user.client.Element} class defined in the
-   * <code>User</code> module to maintain backwards compatibility.
-   *
    * @return the element to be used as the panel's container
    */
-  protected com.google.gwt.user.client.Element getContainerElement() {
+  protected Element getContainerElement() {
     return getElement();
   }
 }

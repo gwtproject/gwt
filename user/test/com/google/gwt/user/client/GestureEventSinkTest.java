@@ -16,6 +16,7 @@
 
 package com.google.gwt.user.client;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.GestureChangeEvent;
 import com.google.gwt.event.dom.client.GestureChangeHandler;
 import com.google.gwt.event.dom.client.GestureEndEvent;

@@ -1032,8 +1032,8 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
   }
 
   @Override
-  protected com.google.gwt.user.client.Element getContainerElement() {
-    return impl.getContainerElement(getPopupImplElement()).cast();
+  protected Element getContainerElement() {
+    return impl.getContainerElement(getPopupImplElement());
   }
 
   /**

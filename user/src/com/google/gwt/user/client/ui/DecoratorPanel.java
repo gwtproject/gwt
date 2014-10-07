@@ -196,7 +196,7 @@ public class DecoratorPanel extends SimplePanel {
   }
 
   @Override
-  protected com.google.gwt.user.client.Element getContainerElement() {
-    return DOM.asOld(containerElem);
+  protected Element getContainerElement() {
+    return containerElem;
   }
 }

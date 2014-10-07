@@ -51,11 +51,6 @@
       <!-- Again, it's necessary to specify which types the generator runs on -->
       <when-type-assignable
         class="com.google.gwt.resources.client.ClientBundle" />
-
-      <!-- Ancient browsers support RFC 2397 data: URLs -->
-      <none>
-        <when-property-is name="user.agent" value="ie6" />
-      </none>
     </all>
   </generate-with>
 

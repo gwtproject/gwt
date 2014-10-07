@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0b988d9_1942abda",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-07T07:03:12Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "6615c88f6c383e8c81cecdc9dfe2551fa3b1c448",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0b988d9_39476feb",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-07T07:03:12Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "6615c88f6c383e8c81cecdc9dfe2551fa3b1c448",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0b988d9_593c235b",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-07T07:03:12Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "6615c88f6c383e8c81cecdc9dfe2551fa3b1c448",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0b988d9_7941e7d1",
+        "filename": "user/src/com/google/gwt/user/client/Timer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-07T07:03:12Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "6615c88f6c383e8c81cecdc9dfe2551fa3b1c448",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

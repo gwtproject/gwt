@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_52c8457f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-07T09:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50c2f81e_c2323031",
+      "revId": "ed5d18bb623fdee098b71687a938def09dd705ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0bfc88a_92223dcc",
         "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "d0bfc88a_f2acd9b0",
+        "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-07T09:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0bfc88a_92223dcc",
+      "revId": "ed5d18bb623fdee098b71687a938def09dd705ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50c2f81e_a235a41b",
         "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2014-10-07T09:18:43Z",
       "side": 1,
       "message": "I see so much code that seems duplicated.\n\nMaybe we should maintain just a generic method to check similitude receiving a MapFromStringTo, and specific methods to pass from say MapFromStringToNumber to MapFromStringTo\u003cObject\u003e.  But I don\u0027t know if we would save enough code.",
+      "revId": "ed5d18bb623fdee098b71687a938def09dd705ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_12aacd92",
+        "filename": "elemental/tests/elemental/js/util/MapFromStringTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-07T09:50:49Z",
+      "side": 1,
+      "message": "Unfortunately all these MapFrom* classes don\u0027t have common interfaces...",
+      "parentUuid": "50c2f81e_a235a41b",
       "revId": "ed5d18bb623fdee098b71687a938def09dd705ca",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

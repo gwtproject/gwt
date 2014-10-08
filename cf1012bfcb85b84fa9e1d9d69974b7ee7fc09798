@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "10116099_db346901",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-08T23:04:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10bfa0c3_67113a45",
+      "range": {
+        "startLine": 612,
+        "startChar": 23,
+        "endLine": 612,
+        "endChar": 69
+      },
+      "revId": "cf1012bfcb85b84fa9e1d9d69974b7ee7fc09798",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10bfa0c3_8716563c",
         "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2014-10-08T23:01:06Z",
       "side": 1,
       "message": "how about\n\ns/constantDefinitionRemovedFromUse/transitivelyFoldableConstant",
+      "range": {
+        "startLine": 836,
+        "startChar": 39,
+        "endLine": 836,
+        "endChar": 71
+      },
+      "revId": "cf1012bfcb85b84fa9e1d9d69974b7ee7fc09798",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_3b32dd12",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-08T23:04:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10bfa0c3_8716563c",
       "range": {
         "startLine": 836,
         "startChar": 39,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "10116099_7b6bb5e3",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-08T23:04:40Z",
+      "side": 1,
+      "message": "Thx.",
+      "parentUuid": "10bfa0c3_2707420c",
+      "range": {
+        "startLine": 1185,
+        "startChar": 2,
+        "endLine": 1185,
+        "endChar": 22
+      },
+      "revId": "cf1012bfcb85b84fa9e1d9d69974b7ee7fc09798",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10bfa0c3_470c3e2e",
         "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2014-10-08T23:01:06Z",
       "side": 1,
       "message": "thanks for making this nicer",
+      "range": {
+        "startLine": 1233,
+        "startChar": 8,
+        "endLine": 1233,
+        "endChar": 36
+      },
+      "revId": "cf1012bfcb85b84fa9e1d9d69974b7ee7fc09798",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_1b860138",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-08T23:04:40Z",
+      "side": 1,
+      "message": "I was getting annoyed by this :)",
+      "parentUuid": "10bfa0c3_470c3e2e",
       "range": {
         "startLine": 1233,
         "startChar": 8,

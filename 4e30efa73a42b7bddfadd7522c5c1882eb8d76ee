@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "90b9d0ac_a645c30d",
+        "filename": "requestfactory/build.xml",
+        "patchSetId": 11
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T13:17:04Z",
+      "side": 1,
+      "message": "So someone with access to svn should commit it.",
+      "parentUuid": "10bfa0c3_f6e6deea",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b9d0ac_53336799",
         "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/AddressImpl.java",
         "patchSetId": 11
@@ -210,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "90b9d0ac_46ce473e",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T13:17:04Z",
+      "side": 1,
+      "message": "I think it\u0027s better that you get the original file from gwt git master, and just add the few changes you added.",
+      "parentUuid": "10bfa0c3_d6e9e2bd",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10f88089_606af85d",
         "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
         "patchSetId": 11
@@ -221,6 +257,24 @@
       "writtenOn": "2014-10-07T14:20:06Z",
       "side": 1,
       "message": "This logic was added to fix the issue 8856.",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50c2f81e_2f1758ec",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T13:17:04Z",
+      "side": 1,
+      "message": "Maybe you could add in the code a comment with the reference to the issue",
+      "parentUuid": "10f88089_606af85d",
       "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

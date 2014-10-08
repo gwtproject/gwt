@@ -298,6 +298,36 @@ public class StackPanel extends ComplexPanel implements InsertPanel.ForIsWidget 
     return headerElem;
   }
 
+  /**
+   * Adds the {@code className} on the {@code <tr>} for the header specified by {@code index}.
+   *
+   * @param index the index of the header row to apply to the style to
+   * @param className the name of the class to add
+   */
+  public void addHeaderRowClassName(int index, String className) {
+    if ((index >= getWidgetCount()) || (index < 0)) {
+      return;
+    }
+
+    Element tr = DOM.getChild(body, index * 2);
+    setStyleName(tr, className, true /* add */);
+  }
+
+  /**
+   * Removes the {@code className} off the {@code <tr>} for the header specified by {@code index}.
+   *
+   * @param index the index of the header row to remove the style from
+   * @param className the name of the class to remove
+   */
+  public void removeHeaderRowClassName(int index, String className) {
+    if ((index >= getWidgetCount()) || (index < 0)) {
+      return;
+    }
+
+    Element tr = DOM.getChild(body, index * 2);
+    setStyleName(tr, className, false /* remove */);
+  }
+
   private int findDividerIndex(Element elem) {
     while (elem != null && elem != getElement()) {
       String expando = elem.getPropertyString("__index");

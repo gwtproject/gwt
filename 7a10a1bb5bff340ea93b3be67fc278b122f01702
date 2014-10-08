@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50c2f81e_4c8f52b9",
+        "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T09:45:50Z",
+      "side": 1,
+      "message": "Isn\u0027t ClientBundle.enableInlining \u003d true by default?, so I whould move this check to above block checking the condition ClientBundle.enableInlining\u003dfalse. It makes clearer why the Static generator is maintained.",
+      "range": {
+        "startLine": 49,
+        "startChar": 30,
+        "endLine": 49,
+        "endChar": 57
+      },
+      "revId": "7a10a1bb5bff340ea93b3be67fc278b122f01702",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_f3dffb8f",
+        "filename": "user/src/com/google/gwt/user/Focus.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T09:45:50Z",
+      "side": 1,
+      "message": "IE8",
+      "range": {
+        "startLine": 41,
+        "startChar": 47,
+        "endLine": 41,
+        "endChar": 50
+      },
+      "revId": "7a10a1bb5bff340ea93b3be67fc278b122f01702",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_13ddef97",
+        "filename": "user/src/com/google/gwt/user/Focus.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T09:45:50Z",
+      "side": 1,
+      "message": "non-IE8",
+      "range": {
+        "startLine": 43,
+        "startChar": 28,
+        "endLine": 43,
+        "endChar": 35
+      },
+      "revId": "7a10a1bb5bff340ea93b3be67fc278b122f01702",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50c2f81e_ec839e90",
+        "filename": "user/src/com/google/gwt/user/Form.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T09:45:50Z",
+      "side": 1,
+      "message": "remove any",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 30,
+        "endChar": 8
+      },
+      "revId": "7a10a1bb5bff340ea93b3be67fc278b122f01702",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_b3d983ac",
+        "filename": "user/src/com/google/gwt/user/Tree.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T09:45:50Z",
+      "side": 1,
+      "message": "Rename to IE8ToIE10",
+      "range": {
+        "startLine": 21,
+        "startChar": 62,
+        "endLine": 21,
+        "endChar": 77
+      },
+      "revId": "7a10a1bb5bff340ea93b3be67fc278b122f01702",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

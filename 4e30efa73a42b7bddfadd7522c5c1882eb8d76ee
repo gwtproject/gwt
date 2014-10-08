@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "10bfa0c3_f6e6deea",
+        "filename": "requestfactory/build.xml",
+        "patchSetId": 11
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-08T12:42:19Z",
+      "side": 1,
+      "message": "According to the pom https://github.com/hibernate/hibernate-validator/blob/4.3/pom.xml#L160 it depends on jboss logging 3.1.0.CR2",
+      "parentUuid": "90b9d0ac_9339df7d",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b9d0ac_53336799",
         "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/AddressImpl.java",
         "patchSetId": 11
@@ -105,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "10bfa0c3_16a35a93",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/ServerConstraint.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-08T12:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0bfc88a_88a8ca6e",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b9d0ac_b321833d",
         "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
         "patchSetId": 11
@@ -150,6 +186,24 @@
       "writtenOn": "2014-10-08T07:29:41Z",
       "side": 1,
       "message": "The same here, maybe you have configured your IDE to format all the file on save or something. \nIt\u0027s very dificult to review this big file, could you send a patch removing all formatting changes unspecific to your changes? then I will go with an exhaustive review.",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10bfa0c3_d6e9e2bd",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-10-08T12:42:19Z",
+      "side": 1,
+      "message": "I already got the file reformatted. (I didn\u0027t start the patch)\n\nMy mainly contribution here is the isPropertyValid method which I defined to avoid NPEs in new \"ghost\" properties that emerged with the new hibernate-validator version.\n\nAlso, L1086 has a bug fix.\n\nBased on that, restoring the license header only satisfies the needs?",
+      "parentUuid": "50c2f81e_acf3567d",
       "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

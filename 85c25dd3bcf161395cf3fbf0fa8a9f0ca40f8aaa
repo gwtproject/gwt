@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0bfc88a_abd2680c",
+        "filename": "README.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-08T11:44:28Z",
+      "side": 1,
+      "message": "specify",
+      "range": {
+        "startLine": 51,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 24
+      },
+      "revId": "85c25dd3bcf161395cf3fbf0fa8a9f0ca40f8aaa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_cbcf9c63",
+        "filename": "README.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-08T11:44:28Z",
+      "side": 1,
+      "message": "into",
+      "range": {
+        "startLine": 53,
+        "startChar": 28,
+        "endLine": 53,
+        "endChar": 30
+      },
+      "revId": "85c25dd3bcf161395cf3fbf0fa8a9f0ca40f8aaa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_2bf678a3",
+        "filename": "README.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-08T11:44:28Z",
+      "side": 1,
+      "message": "is this comma necessary?",
+      "range": {
+        "startLine": 144,
+        "startChar": 49,
+        "endLine": 144,
+        "endChar": 50
+      },
+      "revId": "85c25dd3bcf161395cf3fbf0fa8a9f0ca40f8aaa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_abe908be",
+        "filename": "README.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-08T11:44:28Z",
+      "side": 1,
+      "message": "longer",
+      "range": {
+        "startLine": 149,
+        "startChar": 51,
+        "endLine": 149,
+        "endChar": 55
+      },
+      "revId": "85c25dd3bcf161395cf3fbf0fa8a9f0ca40f8aaa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

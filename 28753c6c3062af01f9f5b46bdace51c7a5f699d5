@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "10116099_8043a76a",
+        "filename": "user/src/com/google/gwt/event/dom/DragEvent.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-08T00:32:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_65f5dde4",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 8
+      },
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_0504e936",
         "filename": "user/src/com/google/gwt/event/dom/TouchEvent.gwt.xml",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2014-10-07T22:44:37Z",
       "side": 1,
       "message": "there is bunch of cleanup as there is no longer \"no\" state.",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_6044ab76",
+        "filename": "user/src/com/google/gwt/event/dom/TouchEvent.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-08T00:32:13Z",
+      "side": 1,
+      "message": "Hmm. The docs for this are next to useless - I *think* we should actually re-add the block I removed, but stick IE8, IE9, IE10 in it, but for some reason the original author of the touchEventSupport block thought that IE8-10 might someday support touch events?\n\nOr am I misinterpreting the purpose of the touchEventSupport property?",
+      "parentUuid": "10116099_0504e936",
       "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "10116099_a07503c0",
+        "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-08T00:32:13Z",
+      "side": 1,
+      "message": "I suspect we want to keep the ClientBundle.enabledInlining setting to allow teams to turn it off globally... for whatever reason. Or deprecate it, and add a warning to the resource generator to indicate that it will not exist in future releases.",
+      "parentUuid": "10116099_2549258e",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_05898948",
         "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
         "patchSetId": 1
@@ -70,6 +130,24 @@
       "writtenOn": "2014-10-07T22:44:37Z",
       "side": 1,
       "message": "Any this was earlier matched by ie8 as well?",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_807a87ac",
+        "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-08T00:32:13Z",
+      "side": 1,
+      "message": "Not sure what you are asking, but in case you want to know if user.agent ie6 could ever mean ie8, no, IE8 should be good with the inlined images.\n\n...Unless we decide that GWT supports IE8 when pretending to be IE6. I *strongly* encourage against this, since IE8-pretending-to-be-IE6 behaves wrongly in ways that are unlike either IE6 *or* IE8.",
+      "parentUuid": "10116099_05898948",
       "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "10116099_e07edba0",
+        "filename": "user/src/com/google/gwt/safecss/SafeCss.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-08T00:32:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_853e19e2",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_c5377103",
         "filename": "user/src/com/google/gwt/user/DOM.gwt.xml",
         "patchSetId": 1
@@ -104,6 +200,24 @@
       "writtenOn": "2014-10-07T22:44:37Z",
       "side": 1,
       "message": "remove the related class and hide the extension points in the base class that are provided just for that class.",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_6052eb2d",
+        "filename": "user/src/com/google/gwt/user/DOM.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-08T00:32:13Z",
+      "side": 1,
+      "message": "DOMImplIE6 is already removed in this patch, and it extends DOMImplTrident which is still extends by DOMImplIE8 (which overrides nothing, like DOMImplIE6 did) and DOMImplIE9 (which only overrides sinkBitlessEventImpl).\n\nSee https://gwt-review.googlesource.com/#/c/9513/1/user/src/com/google/gwt/user/client/impl/DOMImplIE6.java",
+      "parentUuid": "10116099_c5377103",
       "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "10116099_40becfdd",
+        "filename": "user/src/com/google/gwt/user/Popup.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-08T00:32:13Z",
+      "side": 1,
+      "message": "Related class removed in this patch, next update has extension points in base class removed as well.",
+      "parentUuid": "10116099_2557651d",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_854c598e",
         "filename": "user/src/com/google/gwt/user/ResizeLayoutPanel.gwt.xml",
         "patchSetId": 1
@@ -138,6 +270,24 @@
       "writtenOn": "2014-10-07T22:44:37Z",
       "side": 1,
       "message": "remove the related class and any extension points in the base class provided for it.",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_20b753fc",
+        "filename": "user/src/com/google/gwt/user/ResizeLayoutPanel.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-08T00:32:13Z",
+      "side": 1,
+      "message": "ImplIE6 is already removed in this patch, all extension points used by ImplIE6 are still used by other implementations.",
+      "parentUuid": "10116099_854c598e",
       "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -161,6 +311,24 @@
     },
     {
       "key": {
+        "uuid": "10116099_00b4d7f3",
+        "filename": "user/src/com/google/gwt/user/RichText.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-08T00:32:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_85c3b963",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_45b9c1f3",
         "filename": "user/src/com/google/gwt/user/SplitPanel.gwt.xml",
         "patchSetId": 1
@@ -178,6 +346,24 @@
     },
     {
       "key": {
+        "uuid": "10116099_a09a2379",
+        "filename": "user/src/com/google/gwt/user/SplitPanel.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-08T00:32:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_45b9c1f3",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_056069ee",
         "filename": "user/src/com/google/gwt/user/TextBox.gwt.xml",
         "patchSetId": 1
@@ -189,6 +375,24 @@
       "writtenOn": "2014-10-07T22:44:37Z",
       "side": 1,
       "message": "Rename the class",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_008b3729",
+        "filename": "user/src/com/google/gwt/user/TextBox.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-08T00:32:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_056069ee",
       "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

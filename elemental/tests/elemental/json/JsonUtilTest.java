@@ -210,7 +210,7 @@ public class JsonUtilTest extends GWTTestCase {
         JsonUtil.parse(json)));
   }
 
-  private native JsonObject nativeMethod(Object o) /*-{
+  protected native JsonObject nativeMethod(Object o) /*-{
     o.y = o.x + 1;
     return o;
   }-*/;

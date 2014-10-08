@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "708d3c44_77b8226e",
+        "filename": "user/src/com/google/gwt/user/client/ui/StackPanel.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-08T18:52:58Z",
+      "side": 1,
+      "message": "The other code in this class is using UIObject.setStyleName(Element,String,boolean) to add and remove item styles. It looks like it\u0027s basically the same thing with a bit of error checking. Maybe we should use it for consistency?",
+      "range": {
+        "startLine": 313,
+        "startChar": 4,
+        "endLine": 313,
+        "endChar": 31
+      },
+      "revId": "bdeea7dd0b11edcec2a8b1632d10bdfc235d3dcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

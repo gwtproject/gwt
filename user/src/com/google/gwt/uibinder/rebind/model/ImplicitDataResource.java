@@ -20,11 +20,13 @@ package com.google.gwt.uibinder.rebind.model;
  */
 public class ImplicitDataResource {
   private final String name;
+  private final String mimeType;
   private final String source;
 
-  ImplicitDataResource(String name, String source) {
+  ImplicitDataResource(String name, String source, String mimeType) {
     this.name = name;
     this.source = source;
+    this.mimeType = mimeType;
   }
 
   public String getName() {
@@ -33,5 +35,9 @@ public class ImplicitDataResource {
 
   public String getSource() {
     return source;
+  }
+
+  public String getMimeType() {
+    return mimeType;
   }
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "708d3c44_1d937fc1",
+        "filename": "user/src/com/google/gwt/user/client/ui/StackPanel.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-08T19:56:41Z",
+      "side": 1,
+      "message": "Nitpicky naming issue: it looks like in the widget hierarchy, we are using \"StyleName\" to refer to a CSS class name.\n\nSo how about \"addHeaderStyleName\" and \"removeHeaderStyleName\" for consistency (and it\u0027s slightly shorter).",
+      "range": {
+        "startLine": 307,
+        "startChar": 14,
+        "endLine": 307,
+        "endChar": 35
+      },
+      "revId": "0459edbbbef11e573383daa7efd9933d39b6f769",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

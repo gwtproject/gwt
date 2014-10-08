@@ -2,6 +2,160 @@
   "comments": [
     {
       "key": {
+        "uuid": "90b9d0ac_9339df7d",
+        "filename": "requestfactory/build.xml",
+        "patchSetId": 11
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "It seems this is not in gwt_tools yet, Is this dependency required in hibernate-validator or is it optional?",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_53336799",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/AddressImpl.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "2014",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_f327fb50",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/Group.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "2014",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_1325ef48",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/PersonImpl.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "2014",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_88a8ca6e",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/shared/ServerConstraint.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "It seems this line is longer than 100 chars.",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_b321833d",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "Don\u0027t re-format the license header",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_d31e77fa",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "You should avoid reformatting lines that you have not modified because it introduces noise in the review",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50c2f81e_acf3567d",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "The same here, maybe you have configured your IDE to format all the file on save or something. \nIt\u0027s very dificult to review this big file, could you send a patch removing all formatting changes unspecific to your changes? then I will go with an exhaustive review.",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10f88089_606af85d",
         "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
         "patchSetId": 11
@@ -13,6 +167,108 @@
       "writtenOn": "2014-10-07T14:20:06Z",
       "side": 1,
       "message": "This logic was added to fix the issue 8856.",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_3365938c",
+        "filename": "user/src/org/hibernate/validator/internal/engine/PathImpl_CustomFieldSerializer.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "leave this file with original formatting as well.",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_73422bdc",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/engine/PathImpl.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "Although this file has been taken from hibernate, I think we should replace this header by gwt one.",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b9d0ac_93479fe9",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/engine/PathImpl.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "I would put here some explanation about the original source of this file and the reason we have to maintain our own version. \n\nIf you link with the original one I would remove author info since we use not to have this info in gwt",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_e864e6bf",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/util/Contracts.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "GWT license?",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_08629ab1",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/util/Contracts.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "put Link to original, and remove authors",
+      "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0bfc88a_488092ce",
+        "filename": "user/src/org/hibernate/validator/super/org/hibernate/validator/internal/util/logging/Log.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-08T07:29:41Z",
+      "side": 1,
+      "message": "Normally GWT license is formatted to 80 chars although our convention in file is 100, so copy and paste from other file and dont reformat it.",
       "revId": "4e30efa73a42b7bddfadd7522c5c1882eb8d76ee",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

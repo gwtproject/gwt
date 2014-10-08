@@ -25,6 +25,52 @@
     },
     {
       "key": {
+        "uuid": "10bfa0c3_36a8566d",
+        "filename": "user/src/com/google/gwt/safecss/shared/SafeStylesUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5696
+      },
+      "writtenOn": "2014-10-08T12:37:17Z",
+      "side": 1,
+      "message": "IE8",
+      "range": {
+        "startLine": 78,
+        "startChar": 5,
+        "endLine": 78,
+        "endChar": 12
+      },
+      "revId": "7a10a1bb5bff340ea93b3be67fc278b122f01702",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10bfa0c3_56add27b",
+        "filename": "user/src/com/google/gwt/safecss/shared/SafeStylesUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5696
+      },
+      "writtenOn": "2014-10-08T12:37:17Z",
+      "side": 1,
+      "message": "IE8",
+      "range": {
+        "startLine": 83,
+        "startChar": 9,
+        "endLine": 83,
+        "endChar": 16
+      },
+      "revId": "7a10a1bb5bff340ea93b3be67fc278b122f01702",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b9d0ac_f3dffb8f",
         "filename": "user/src/com/google/gwt/user/Focus.gwt.xml",
         "patchSetId": 2

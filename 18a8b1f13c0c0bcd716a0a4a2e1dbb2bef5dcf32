@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "10116099_802c47c1",
+        "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-08T02:15:36Z",
+      "side": 1,
+      "message": "It doesn\u0027t seem all that necessary to expose it since they can access the System properties directly and copy the code if needed.",
+      "parentUuid": "d0bfc88a_12088d94",
+      "range": {
+        "startLine": 210,
+        "startChar": 4,
+        "endLine": 210,
+        "endChar": 9
+      },
+      "revId": "18a8b1f13c0c0bcd716a0a4a2e1dbb2bef5dcf32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50dcb82f_232e4e84",
         "filename": "user/src/com/google/gwt/user/server/rpc/RemoteServiceServlet.java",
         "patchSetId": 2

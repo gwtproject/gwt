@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "708d3c44_8e41fb33",
+        "filename": "README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2014-10-08T16:23:37Z",
+      "side": 1,
+      "message": "I would suggest, \"Java and Ant are required.\"",
+      "parentUuid": "50c2f81e_2f7bd864",
+      "range": {
+        "startLine": 3,
+        "startChar": 39,
+        "endLine": 3,
+        "endChar": 41
+      },
+      "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b9d0ac_e6ef3bc2",
         "filename": "README.txt",
         "patchSetId": 4
@@ -237,6 +261,24 @@
       "writtenOn": "2014-10-08T14:14:58Z",
       "side": 1,
       "message": "Maybe we could use some kind of table?\n\n Module         | Task        | Property to skip\n -------------- | ----------- | ----------------\n dev/core       | test        | test.dev.disable\n dev/codeserver | test        | test.codeserver.disable\n user           | test        | test.user.disable\n user           | test.nongwt | test.nongwt.disable\n …\n\n(or split between properties to disable \"modules\" and properties to disable parts of gwt-user tests)\n\nnote: using https://help.github.com/articles/github-flavored-markdown/#tables syntax",
+      "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "708d3c44_2edac72c",
+        "filename": "README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2014-10-08T16:23:37Z",
+      "side": 1,
+      "message": "I would suggest renaming README.txt to README.md and changing format to markdown and then once its synced to github, it would autoformat. Interestingly, the sync looks out of date on github here https://github.com/gwtproject/gwt.",
+      "parentUuid": "50c2f81e_6f1ec0d3",
       "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

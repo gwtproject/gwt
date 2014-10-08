@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30974456_af24f54d",
+        "filename": "user/src/com/google/gwt/user/client/ui/StackPanel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-08T22:11:28Z",
+      "side": 1,
+      "message": "I think this will hide bugs. We should let it fail instead (which will if you don\u0027t do any checks).",
+      "range": {
+        "startLine": 308,
+        "startChar": 40,
+        "endLine": 308,
+        "endChar": 49
+      },
+      "revId": "5f9ed676a8ca687fcb85a80fdbb0bc1bc9ad35f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30974456_cff3017d",
+        "filename": "user/src/com/google/gwt/user/client/ui/StackPanel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-08T22:11:28Z",
+      "side": 1,
+      "message": "tr.addClassName(styleName)",
+      "revId": "5f9ed676a8ca687fcb85a80fdbb0bc1bc9ad35f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30974456_4fe0f1a3",
+        "filename": "user/src/com/google/gwt/user/client/ui/StackPanel.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-08T22:11:28Z",
+      "side": 1,
+      "message": "tr.removeClassName(styleName)",
+      "range": {
+        "startLine": 328,
+        "startChar": 4,
+        "endLine": 328,
+        "endChar": 16
+      },
+      "revId": "5f9ed676a8ca687fcb85a80fdbb0bc1bc9ad35f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

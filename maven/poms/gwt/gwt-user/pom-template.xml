@@ -23,8 +23,8 @@
             <classifier>sources</classifier>
         </dependency>
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
+            <groupId>com.vaadin.external.google</groupId>
+            <artifactId>android-json</artifactId>
         </dependency>
     </dependencies>
 </project>

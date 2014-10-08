@@ -28,9 +28,9 @@
                 <version>1.0.0.GA</version>
             </dependency>
             <dependency>
-                <groupId>org.json</groupId>
-                <artifactId>json</artifactId>
-                <version>20090211</version>
+                <groupId>com.vaadin.external.google</groupId>
+                <artifactId>android-json</artifactId>
+                <version>0.0.20131108.vaadin1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -2,6 +2,183 @@
   "comments": [
     {
       "key": {
+        "uuid": "d087c827_09a0a9ac",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-09T06:54:29Z",
+      "side": 1,
+      "message": "Should we add a unit test for this class?",
+      "revId": "7ed1aca3a0bd908a1bcb31ed97c8373100a8057e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d087c827_e9b3550b",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-09T06:54:29Z",
+      "side": 1,
+      "message": "Should we add a unit test for this class?",
+      "revId": "7ed1aca3a0bd908a1bcb31ed97c8373100a8057e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d087c827_a9a95d9f",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-09T06:54:29Z",
+      "side": 1,
+      "message": "I don\u0027t understand why we need this.",
+      "range": {
+        "startLine": 85,
+        "startChar": 41,
+        "endLine": 85,
+        "endChar": 75
+      },
+      "revId": "7ed1aca3a0bd908a1bcb31ed97c8373100a8057e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d087c827_09b989f4",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-09T06:54:29Z",
+      "side": 1,
+      "message": "Move up, make private \u0026 final?",
+      "revId": "7ed1aca3a0bd908a1bcb31ed97c8373100a8057e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d087c827_29a56dbd",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-09T06:54:29Z",
+      "side": 1,
+      "message": "Why are these long chains a problem? Don\u0027t JavaScript VM like these big strings?",
+      "revId": "7ed1aca3a0bd908a1bcb31ed97c8373100a8057e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d087c827_c9885147",
+        "filename": "user/src/com/google/gwt/resources/rg/CssResourceGenerator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-09T06:54:29Z",
+      "side": 1,
+      "message": "If we call the method check, we should not be setting the value inside of the method. I would prefer that we just return the value and let the init method take care.",
+      "range": {
+        "startLine": 1209,
+        "startChar": 18,
+        "endLine": 1209,
+        "endChar": 35
+      },
+      "revId": "7ed1aca3a0bd908a1bcb31ed97c8373100a8057e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d087c827_a97b1daf",
+        "filename": "user/src/com/google/gwt/resources/rg/CssResourceGenerator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1210,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-09T06:54:29Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 1210,
+        "startChar": 4,
+        "endLine": 1210,
+        "endChar": 14
+      },
+      "revId": "7ed1aca3a0bd908a1bcb31ed97c8373100a8057e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d087c827_897e59a0",
+        "filename": "user/src/com/google/gwt/resources/rg/CssResourceGenerator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1218,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-09T06:54:29Z",
+      "side": 1,
+      "message": "change to \"true\".equals(enableGss);",
+      "range": {
+        "startLine": 1218,
+        "startChar": 19,
+        "endLine": 1218,
+        "endChar": 44
+      },
+      "revId": "7ed1aca3a0bd908a1bcb31ed97c8373100a8057e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d087c827_697a05b0",
+        "filename": "user/src/com/google/gwt/resources/rg/CssResourceGenerator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1221,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-09T06:54:29Z",
+      "side": 1,
+      "message": "we should quit here, since something is really wrong if we can not see our own gwt.xml",
+      "revId": "7ed1aca3a0bd908a1bcb31ed97c8373100a8057e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_d1df2f90",
         "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
         "patchSetId": 5

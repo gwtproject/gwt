@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "d087c827_ac616bae",
+        "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5890
+      },
+      "writtenOn": "2014-10-09T13:37:17Z",
+      "side": 1,
+      "message": "I checked every remaining function if it can be replaced with the standard implementation. The remaining produced had red tests.",
+      "parentUuid": "b6a40b88_23422a25",
+      "range": {
+        "startLine": 55,
+        "startChar": 13,
+        "endLine": 55,
+        "endChar": 24
+      },
+      "revId": "a3000b6ba72212a657812d66e51319061af01242",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9932d8d1_505004ea",
         "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImplIE8.java",
         "patchSetId": 1

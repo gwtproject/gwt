@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5073d823_4b9d39ca",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTree.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-09T23:21:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_2a0ba5c2",
+      "revId": "ccddbb0cc290003b2141c3bc96964077026fb4ec",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_8a33b998",
         "filename": "user/test/com/google/gwt/user/cellview/client/CellTreeTest.java",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2014-10-09T04:00:32Z",
       "side": 1,
       "message": "nit: keyboardNavigationPath -\u003e expectedNavigationPath",
+      "range": {
+        "startLine": 357,
+        "startChar": 17,
+        "endLine": 357,
+        "endChar": 39
+      },
+      "revId": "ccddbb0cc290003b2141c3bc96964077026fb4ec",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5073d823_8ba6511d",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTreeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-09T23:21:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_8a33b998",
       "range": {
         "startLine": 357,
         "startChar": 17,

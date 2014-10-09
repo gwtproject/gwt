@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d09ee86b_5a4c298d",
+        "filename": "elemental/build.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-09T20:46:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure that macro is needed/useful.\n\nI\u0027d rather follow the same pattern as in user (if only for the sake of consistency): define a \u003cpath id\u003d\"test.extraclasspath\"\u003e and just have the \u003cfileset\u003e and \u003cgwt.junit\u003e tasks in the 2 test.*.htmlunit targets.",
+      "revId": "8683459def12d9ed11ccabf91050493e2b2e9340",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d09ee86b_1a52a12c",
+        "filename": "elemental/build.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-09T20:46:03Z",
+      "side": 1,
+      "message": "user/build.xml never mkdirs the test.out dirs",
+      "revId": "8683459def12d9ed11ccabf91050493e2b2e9340",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d09ee86b_7a51ed23",
+        "filename": "elemental/build.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-09T20:46:03Z",
+      "side": 1,
+      "message": "How about an if\u003d\"generated\" here too?",
+      "revId": "8683459def12d9ed11ccabf91050493e2b2e9340",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d087c827_af615dae",
+        "filename": "elemental/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-09T20:40:54Z",
+      "side": 1,
+      "message": "use test.nongwt like in user?",
+      "range": {
+        "startLine": 89,
+        "startChar": 21,
+        "endLine": 89,
+        "endChar": 24
+      },
+      "revId": "348d42c48f4fc1780cf7910139f862b168e6cd07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d09ee86b_fa85dd2b",
+        "filename": "elemental/tests/elemental/json/JsonUtilJreTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-09T20:40:54Z",
+      "side": 1,
+      "message": "Too many parentheses here.",
+      "range": {
+        "startLine": 30,
+        "startChar": 20,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "348d42c48f4fc1780cf7910139f862b168e6cd07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d087c827_4f52a1db",
+        "filename": "elemental/tests/elemental/json/JsonUtilTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-09T20:40:54Z",
+      "side": 1,
+      "message": "Rename the method. It\u0027s really not clear what its meant to do when seeing it in the subclass. Maybe \u0027setYtoXPlusOne\u0027?\n\nOr maybe reverse the test inheritance? I.e. have JsonUtilTest extend JsonUtilJreTest with the added \u0027testNative\u0027 (and \u0027nativeMethod\u0027).",
+      "range": {
+        "startLine": 213,
+        "startChar": 30,
+        "endLine": 213,
+        "endChar": 42
+      },
+      "revId": "348d42c48f4fc1780cf7910139f862b168e6cd07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

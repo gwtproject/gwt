@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "d087c827_6f5765ca",
+        "filename": "elemental/src/elemental/js/json/JsJsonObject.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-09T20:41:23Z",
+      "side": 1,
+      "message": "Although it seems cleaner than it was, this change kills compiler inlining of js object property access and adds unnecessary coercing when (mostly clients have notion of what types properties really are) it\u0027s not needed.",
+      "revId": "4da1cdfffeb87755f41a81699c8dd21327c8a9a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30974456_00aeb6f4",
         "filename": "elemental/src/elemental/js/json/JsJsonValue.java",
         "patchSetId": 3

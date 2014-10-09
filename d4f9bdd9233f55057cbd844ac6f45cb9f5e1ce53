@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10116099_3e5c8671",
+        "filename": "user/src/com/google/gwt/event/dom/DragEvent.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T08:31:26Z",
+      "side": 1,
+      "message": "Should we have an explicit IE9 here which include or excludes?",
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_9e481aac",
+        "filename": "user/src/com/google/gwt/safecss/SafeCss.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T08:31:26Z",
+      "side": 1,
+      "message": "remove any?",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 9
+      },
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_7eca7edb",
+        "filename": "user/src/com/google/gwt/user/Focus.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T08:31:26Z",
+      "side": 1,
+      "message": "Class rename (suggestion: FocusImplIELegacy so that we don\u0027t need to change it again)",
+      "range": {
+        "startLine": 37,
+        "startChar": 58,
+        "endLine": 37,
+        "endChar": 70
+      },
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_5e36a227",
+        "filename": "user/src/com/google/gwt/user/Form.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T08:31:26Z",
+      "side": 1,
+      "message": "I guess this is not needed",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 17
+      },
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_bed4f67d",
+        "filename": "user/src/com/google/gwt/user/Form.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T08:31:26Z",
+      "side": 1,
+      "message": "Rename",
+      "range": {
+        "startLine": 28,
+        "startChar": 58,
+        "endLine": 28,
+        "endChar": 74
+      },
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_1e3c2a08",
+        "filename": "user/src/com/google/gwt/user/Form.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T08:31:26Z",
+      "side": 1,
+      "message": "Again, ie9 fallback?\nI\u0027m curious if \"any\" is affecting the fallback behavior. We should have been getting a warning here.",
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_feb5ce53",
+        "filename": "user/src/com/google/gwt/user/RichText.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T08:31:26Z",
+      "side": 1,
+      "message": "nit: if you end the name with IELegacy, we will not need to change it again.",
+      "range": {
+        "startLine": 23,
+        "startChar": 46,
+        "endLine": 23,
+        "endChar": 71
+      },
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_41ea4709",
+        "filename": "user/src/com/google/gwt/user/SplitPanel.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T08:31:26Z",
+      "side": 1,
+      "message": "IE9 not giving a warning here?",
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_5ec342c0",
+        "filename": "user/src/com/google/gwt/user/Tree.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T08:31:26Z",
+      "side": 1,
+      "message": "nit: if you end the name with IELegacy, we will not need to change it again.",
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

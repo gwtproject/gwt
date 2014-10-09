@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "10116099_de6bb20f",
+        "filename": "user/src/com/google/gwt/event/dom/TouchEvent.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T07:59:00Z",
+      "side": 1,
+      "message": "I think you are interpreting it correctly. The property is an optimization based on the fact that for some browsers doesn\u0027t even need a runtime check so we can prune the code.\nIt looks like other permutations were just falling back to this rule. We should probably put all IEs here.",
+      "parentUuid": "10116099_6044ab76",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_2549258e",
         "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
         "patchSetId": 1
@@ -119,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "10116099_de18d2e4",
+        "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T07:59:00Z",
+      "side": 1,
+      "message": "Sorry I forgot the quotes: I just meant  \"all\" tag is not necessary :)",
+      "parentUuid": "10116099_a07503c0",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_05898948",
         "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
         "patchSetId": 1
@@ -148,6 +184,24 @@
       "side": 1,
       "message": "Not sure what you are asking, but in case you want to know if user.agent ie6 could ever mean ie8, no, IE8 should be good with the inlined images.\n\n...Unless we decide that GWT supports IE8 when pretending to be IE6. I *strongly* encourage against this, since IE8-pretending-to-be-IE6 behaves wrongly in ways that are unlike either IE6 *or* IE8.",
       "parentUuid": "10116099_05898948",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10116099_1e326a64",
+        "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T07:59:00Z",
+      "side": 1,
+      "message": "Opps, I messed up while typing what I was thinking.\n\nI meant:\n\"Is there any chance this was earlier matched by IE8 as well?\"\n\nThe reason I\u0027m asking is because if there is no IE8 specific rule the deferred binding selector falls back to IE6 rule. In this case there is no IE8 rule hence I wonder if we are falling back to IE6 rule which says inlining shouldn\u0027t be used.",
+      "parentUuid": "10116099_807a87ac",
       "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

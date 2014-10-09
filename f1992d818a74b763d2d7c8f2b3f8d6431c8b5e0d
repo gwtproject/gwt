@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "10116099_8ab8d96e",
+        "filename": "user/test/com/google/gwt/user/client/ui/ValuePickerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-09T04:10:53Z",
+      "side": 1,
+      "message": "Can you keep using User? Using a module different from the rest will cause an extra unnecessary compilation and an extra module to switch for testing.",
+      "revId": "f1992d818a74b763d2d7c8f2b3f8d6431c8b5e0d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_09399bc5",
         "filename": "user/test/com/google/gwt/user/client/ui/ValuePickerTest.java",
         "patchSetId": 2

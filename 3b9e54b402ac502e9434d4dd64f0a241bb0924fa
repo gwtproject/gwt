@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10116099_aac95536",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-10-09T03:36:44Z",
+      "side": 1,
+      "message": "writePublicResources being LauncherDir makes me think that the public resources are being copied to the app\u0027s -war dir, e.g. src/main/webapp or target/war.\n\nBut AFAICT outputDir will be compileDir\u0027s (which changes per compile) warDir, which will be /tmp/whatever.\n\nSo maybe LauncherDir isn\u0027t the best place for writePublicResources?\n\n(Unless the public resources really are going to the devmode -war dir, and I\u0027m just reading this wrong.)",
+      "range": {
+        "startLine": 231,
+        "startChar": 7,
+        "endLine": 231,
+        "endChar": 38
+      },
+      "revId": "3b9e54b402ac502e9434d4dd64f0a241bb0924fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

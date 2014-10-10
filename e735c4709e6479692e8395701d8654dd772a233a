@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "104ec00c_24d4d34d",
+        "filename": "user/test/com/google/gwt/user/client/ui/StackPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-10T23:03:51Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dom.client.NodeList.",
+      "revId": "e735c4709e6479692e8395701d8654dd772a233a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

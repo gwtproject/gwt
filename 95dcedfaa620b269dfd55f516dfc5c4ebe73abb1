@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "70d45c2e_5639b416",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderParser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-10T12:47:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90bf10de_77283023",
+      "range": {
+        "startLine": 95,
+        "startChar": 50,
+        "endLine": 95,
+        "endChar": 58
+      },
+      "revId": "95dcedfaa620b269dfd55f516dfc5c4ebe73abb1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0ba54ec_1876c545",
         "filename": "user/src/com/google/gwt/uibinder/rebind/model/ImplicitCssResource.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2014-10-10T12:36:09Z",
       "side": 1,
       "message": "Boolean.TRUE.equals(useGss)",
+      "range": {
+        "startLine": 85,
+        "startChar": 18,
+        "endLine": 85,
+        "endChar": 42
+      },
+      "revId": "95dcedfaa620b269dfd55f516dfc5c4ebe73abb1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70d45c2e_36363827",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/model/ImplicitCssResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-10T12:47:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0ba54ec_1876c545",
       "range": {
         "startLine": 85,
         "startChar": 18,

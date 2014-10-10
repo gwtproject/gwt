@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "10b24012_1b1fdbf7",
+        "filename": "user/src/com/google/gwt/event/dom/DragEvent.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-10T05:05:28Z",
+      "side": 1,
+      "message": "As in the FormPanelImpl bindings, I *think* we get away with it since we unambiguously set this to \u0027maybe\u0027. \n\nThere is no implicit binding mechanism for properties (which is probably as it should be) - it can\u0027t fall back like GWT.create() can to the passed in class literal. Arguably a design flaw or at least ambiguity, but here we are ;).",
+      "parentUuid": "10116099_3e5c8671",
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_9e481aac",
         "filename": "user/src/com/google/gwt/safecss/SafeCss.gwt.xml",
         "patchSetId": 4
@@ -30,6 +48,30 @@
       "writtenOn": "2014-10-09T08:31:26Z",
       "side": 1,
       "message": "remove any?",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 9
+      },
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b24012_1bda3bf7",
+        "filename": "user/src/com/google/gwt/safecss/SafeCss.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-10T05:05:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_9e481aac",
       "range": {
         "startLine": 26,
         "startChar": 4,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "10b24012_3bc17728",
+        "filename": "user/src/com/google/gwt/user/Focus.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-10T05:05:28Z",
+      "side": 1,
+      "message": "My vote against \u0027legacy\u0027 is that we drag that legacy with us if it isn\u0027t clear when it stops. I\u0027m not certain how to rename this one - Daniel believes that IE9 can use a more modern implementation, but I can\u0027t tell from here. \n\nFor now I\u0027ll call it 8 and 9, if we learn later that it is merely 8 then we\u0027ll know it is possible to delete the 8-only impl. This was the naming policy in use prior to this patch, as long as we do more than \u0027latest\u0027 vs \u0027legacy\u0027 I think we should keep it that way.",
+      "parentUuid": "10116099_7eca7edb",
+      "range": {
+        "startLine": 37,
+        "startChar": 58,
+        "endLine": 37,
+        "endChar": 70
+      },
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_5e36a227",
         "filename": "user/src/com/google/gwt/user/Form.gwt.xml",
         "patchSetId": 4
@@ -76,6 +142,30 @@
       "writtenOn": "2014-10-09T08:31:26Z",
       "side": 1,
       "message": "I guess this is not needed",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 17
+      },
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b24012_5b256347",
+        "filename": "user/src/com/google/gwt/user/Form.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-10T05:05:28Z",
+      "side": 1,
+      "message": "This is needed. Evidently without it, the rebind mechanism notices that there is no explicit binding, so tries to rebind to the IE8 (renamed) impl below. The fallback bit apparently doesn\u0027t bite unless there is no explicit binding (which in retrospect probably shouldn\u0027t surprise me, but now I know).",
+      "parentUuid": "10116099_5e36a227",
       "range": {
         "startLine": 23,
         "startChar": 1,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "10b24012_3b6f379b",
+        "filename": "user/src/com/google/gwt/user/Form.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-10T05:05:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_bed4f67d",
+      "range": {
+        "startLine": 28,
+        "startChar": 58,
+        "endLine": 28,
+        "endChar": 74
+      },
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_1e3c2a08",
         "filename": "user/src/com/google/gwt/user/Form.gwt.xml",
         "patchSetId": 4
@@ -122,6 +236,24 @@
       "writtenOn": "2014-10-09T08:31:26Z",
       "side": 1,
       "message": "Again, ie9 fallback?\nI\u0027m curious if \"any\" is affecting the fallback behavior. We should have been getting a warning here.",
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b24012_3b229741",
+        "filename": "user/src/com/google/gwt/user/Form.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-10T05:05:28Z",
+      "side": 1,
+      "message": "And indeed we do, but only if I remove the rule above. This is *likely* what Daniel meant when he originally made the Focus and Layout impl changes.",
+      "parentUuid": "10116099_1e3c2a08",
       "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -162,6 +294,24 @@
       "writtenOn": "2014-10-09T08:31:26Z",
       "side": 1,
       "message": "IE9 not giving a warning here?",
+      "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b24012_fb70af81",
+        "filename": "user/src/com/google/gwt/user/SplitPanel.gwt.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-10T05:05:28Z",
+      "side": 1,
+      "message": "If it is, it has been giving a warning since the ie9 (with ie8 fallback) was added. Creating one and compiling doesn\u0027t seem to emit an error or warning.",
+      "parentUuid": "10116099_41ea4709",
       "revId": "d4f9bdd9233f55057cbd844ac6f45cb9f5e1ce53",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10b24012_be8335e4",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/gss/UiBinderWithGssTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-10T12:05:54Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "619562cf5632c9eb383a19bbd45a33cd23d66446",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b24012_9e887901",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/gss/WidgetUsingCss.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-10T12:05:54Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "619562cf5632c9eb383a19bbd45a33cd23d66446",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b24012_7e9ecd3e",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/gss/WidgetUsingCss.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-10T12:05:54Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "619562cf5632c9eb383a19bbd45a33cd23d66446",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b24012_5e9b114d",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/gss/WidgetUsingGss.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-10T12:05:54Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "619562cf5632c9eb383a19bbd45a33cd23d66446",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b24012_3e98454e",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/gss/WidgetUsingGss.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-10T12:05:54Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "619562cf5632c9eb383a19bbd45a33cd23d66446",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

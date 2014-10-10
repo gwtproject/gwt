@@ -34,6 +34,24 @@
       "revId": "f93671cd47106135358f96540b8033fda09bc32e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70d45c2e_366078ef",
+        "filename": "elemental/tests/elemental/js/util/MapFromIntTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-10T08:11:42Z",
+      "side": 1,
+      "message": "Yep, I came to this conclusion too :)",
+      "parentUuid": "90bf10de_570e4c53",
+      "revId": "f93671cd47106135358f96540b8033fda09bc32e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

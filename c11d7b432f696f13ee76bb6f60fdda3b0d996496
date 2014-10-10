@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "104ec00c_f006a60d",
+        "filename": "user/src/com/google/gwt/i18n/client/AutoDirectionHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-10T22:26:24Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "c11d7b432f696f13ee76bb6f60fdda3b0d996496",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

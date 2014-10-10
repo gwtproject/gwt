@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5073d823_19c55bca",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeReferences.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-10T01:25:01Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "bf6c0afee7d54bd2cc23bd21c97a0116f6d65371",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

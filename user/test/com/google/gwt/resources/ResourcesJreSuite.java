@@ -25,6 +25,7 @@ import com.google.gwt.resources.css.CssRtlTest;
 import com.google.gwt.resources.css.ExtractClassNamesVisitorTest;
 import com.google.gwt.resources.css.UnknownAtRuleTest;
 import com.google.gwt.resources.ext.ResourceGeneratorUtilTest;
+import com.google.gwt.resources.gss.ClassNamesCollectorTest;
 import com.google.gwt.resources.gss.ExternalClassesCollectorTest;
 import com.google.gwt.resources.gss.RenamingSubstitutionMapTest;
 import com.google.gwt.resources.rg.CssClassNamesTestCase;
@@ -52,6 +53,7 @@ public class ResourcesJreSuite {
     // GSS tests
     suite.addTestSuite(ExternalClassesCollectorTest.class);
     suite.addTestSuite(RenamingSubstitutionMapTest.class);
+    suite.addTestSuite(ClassNamesCollectorTest.class);
 
     // CSS to GSS converter tests
     suite.addTestSuite(Css2GssTest.class);

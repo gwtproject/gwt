@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0ba54ec_587c3da7",
+        "filename": "elemental/build.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-10T08:22:41Z",
+      "side": 1,
+      "message": "Should we use \"nongwt\" here too, for consistency?",
+      "range": {
+        "startLine": 90,
+        "startChar": 36,
+        "endLine": 90,
+        "endChar": 39
+      },
+      "revId": "a7d0d892a64f9b86dc286f60a99f5bedebb8751f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

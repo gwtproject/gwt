@@ -102,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "10b24012_9b408bd0",
+        "filename": "user/src/com/google/gwt/event/dom/TouchEvent.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-10T05:14:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_de6bb20f",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_2549258e",
         "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
         "patchSetId": 1
@@ -155,6 +173,24 @@
     },
     {
       "key": {
+        "uuid": "10b24012_fba8af20",
+        "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-10T05:14:11Z",
+      "side": 1,
+      "message": "Oh, right, that should have been clear from context, not sure what I was thinking. Done in latest patch as part of a different comment.",
+      "parentUuid": "10116099_de18d2e4",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_05898948",
         "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
         "patchSetId": 1
@@ -202,6 +238,24 @@
       "side": 1,
       "message": "Opps, I messed up while typing what I was thinking.\n\nI meant:\n\"Is there any chance this was earlier matched by IE8 as well?\"\n\nThe reason I\u0027m asking is because if there is no IE8 specific rule the deferred binding selector falls back to IE6 rule. In this case there is no IE8 rule hence I wonder if we are falling back to IE6 rule which says inlining shouldn\u0027t be used.",
       "parentUuid": "10116099_807a87ac",
+      "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b24012_1ba47b41",
+        "filename": "user/src/com/google/gwt/resources/Resources.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2014-10-10T05:14:11Z",
+      "side": 1,
+      "message": "\"The reason I\u0027m asking is because if there is no IE8 specific rule the deferred binding selector falls back to IE6 rule. In this case there is no IE8 rule hence I wonder if we are falling back to IE6 rule which says inlining shouldn\u0027t be used.\"\n\nI think you might be mistaken - the ie8 value does not fall back to ie6, at least not according to UserAgent.gwt.xml (for example, https://gwt.googlesource.com/gwt/+/2.5.0/user/src/com/google/gwt/useragent/UserAgent.gwt.xml, which still has ie6, but no fallback attr in the ie8 rule).\n\nSo no, the `\u003cnone\u003e` block containing ie6 should not have activated for ie8, so the inline generator should have run for ie8.",
+      "parentUuid": "10116099_1e326a64",
       "revId": "28753c6c3062af01f9f5b46bdace51c7a5f699d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70d45c2e_96dd0c74",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/OutboxDir.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-10T04:17:34Z",
+      "side": 1,
+      "message": "Do we always want to print?  I think we should only do it on an error (and use the normal logger)",
+      "revId": "d6d0f13b766a3235ec6f9d3827e27f04ba9b0720",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70d45c2e_76e39037",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/OutboxDir.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-10T04:17:34Z",
+      "side": 1,
+      "message": "I think we should only be okay with not deleting directories on windows, for all other OS this should still be an error, since it seems to be working fine for macs and linux systems.",
+      "revId": "d6d0f13b766a3235ec6f9d3827e27f04ba9b0720",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "revId": "f93671cd47106135358f96540b8033fda09bc32e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90bf10de_570e4c53",
+        "filename": "elemental/tests/elemental/js/util/MapFromIntTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-10T08:10:34Z",
+      "side": 1,
+      "message": "Silly me: just sort the arrays before comparing them!\n\n // Note: keys are already sorted!\n ArrayOfInt mapKeys \u003d map.keys();\n mapKeys.sort();\n assertSamelitude(keys, mapKeys);\n\n // Note: newVals are already sorted!\n ArrayOf\u003cTestItem\u003e mapVals \u003d map.values();\n mapVals.sort(new CanCompare\u003cTestItem\u003e() {\n   @Override\n   int compare(TestItem a, TestItem b) {\n     return Integer.compare(a.id(), b.id());\n   }\n });\n assertSamelitude(newVals, mapVals);",
+      "parentUuid": "90bf10de_97dd0474",
+      "revId": "f93671cd47106135358f96540b8033fda09bc32e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

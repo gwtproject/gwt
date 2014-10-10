@@ -16,6 +16,9 @@
 
 package com.google.gwt.dev.codeserver;
 
+import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
+import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.Util;
 
 import java.io.File;
@@ -27,15 +30,17 @@ import java.io.IOException;
  * In addition, there are some files that are shared between recompiles, such as
  * the unit cache.
  */
-class AppSpace {
+class OutboxDir {
+  private static final String COMPILE_DIR_PREFIX = "compile-";
+  private static final int MAX_CREATE_DIRECTORY_RETRIES = 50;
 
-  static final String COMPILE_DIR_PREFIX = "compile-";
   private final File root;
+  private int nextCompileId = 1;
 
   /**
    * @see #create
    */
-  private AppSpace(File root) {
+  private OutboxDir(File root) {
     this.root = root;
   }
 
@@ -47,21 +52,38 @@ class AppSpace {
     return new File(root, "gwt-unitcache");
   }
 
-  File getCompileDir(int compileId) {
-    return new File(root, COMPILE_DIR_PREFIX + compileId);
+  /**
+   * Creates a fresh, empty compile directory.
+   */
+  CompileDir makeCompileDir(TreeLogger logger)
+      throws UnableToCompleteException {
+
+    for (int i = 0; i < MAX_CREATE_DIRECTORY_RETRIES; i++) {
+      int candidateId = nextCompileId++;
+      File candidate = new File(root, COMPILE_DIR_PREFIX + candidateId);
+      try {
+        return CompileDir.create(candidate, logger);
+      } catch (UnableToCompleteException e) {
+        // try again
+      }
+    }
+
+    logger.log(Type.ERROR, "Gave up trying to create a compile directory.");
+    throw new UnableToCompleteException();
   }
 
   /**
-   * Creates an app directory, doing any cleanup needed.
+   * Creates an outbox directory, doing any cleanup needed.
    * @param dir the directory to use. It need not exist, but
    * the parent dir should exist.
    */
-  static AppSpace create(File dir) throws IOException {
+  static OutboxDir create(File dir) throws IOException {
     if (!dir.exists() && !dir.mkdir()) {
       throw new IOException("can't create app directory: " + dir);
     }
 
-    // clean up existing subdirectories
+    // Try to clean up existing subdirectories
+    // (This is not guaranteed to delete all directories on Windows if a directory is locked.)
     for (File candidate : dir.listFiles()) {
       if (candidate.getName().startsWith(COMPILE_DIR_PREFIX)) {
         System.err.println("deleting: " + candidate);
@@ -69,6 +91,6 @@ class AppSpace {
       }
     }
 
-    return new AppSpace(dir);
+    return new OutboxDir(dir);
   }
 }

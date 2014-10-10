@@ -104,6 +104,24 @@
       "revId": "8683459def12d9ed11ccabf91050493e2b2e9340",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0ba54ec_3804e936",
+        "filename": "elemental/build.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-10T06:59:26Z",
+      "side": 1,
+      "message": "if\u003dgenerated needs depends\u003dcompile.tests which computes the generated flag. Since both attributes would be redundant I prefer not to have them here.",
+      "parentUuid": "d09ee86b_9aacd1b0",
+      "revId": "8683459def12d9ed11ccabf91050493e2b2e9340",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

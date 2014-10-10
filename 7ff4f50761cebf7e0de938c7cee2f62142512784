@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10b24012_3e228541",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-10T14:49:46Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b24012_1e1fc9f7",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-10T14:49:46Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b24012_fe5addcc",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-10T14:49:46Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

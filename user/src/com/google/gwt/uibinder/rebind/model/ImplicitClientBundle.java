@@ -63,14 +63,15 @@ public class ImplicitClientBundle {
    * @param body the inline css text
    * @param importTypes for the {@literal @}Import annotation, if any. LinkedHashSet
    *          to enforce deterministic order across recompiles
+   * @param useGss indicates that GSS is used or not
    * @param resourceOracle from which to load resources
    * @return the newly-created CssResource
    */
   public ImplicitCssResource createCssResource(String name, String[] source,
       JClassType extendedInterface, String body, LinkedHashSet<JClassType> importTypes,
-      ResourceOracle resourceOracle) {
+      Boolean useGss, ResourceOracle resourceOracle) {
     ImplicitCssResource css = new ImplicitCssResource(packageName, cssBaseName + name, name, source,
-        extendedInterface, body, logger, importTypes, resourceOracle);
+        extendedInterface, body, logger, importTypes, useGss, resourceOracle);
     cssMethods.add(css);
     return css;
   }

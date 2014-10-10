@@ -16,6 +16,24 @@
       "revId": "bf6c0afee7d54bd2cc23bd21c97a0116f6d65371",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5073d823_39f1372b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeReferences.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-10T01:27:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5073d823_19c55bca",
+      "revId": "bf6c0afee7d54bd2cc23bd21c97a0116f6d65371",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

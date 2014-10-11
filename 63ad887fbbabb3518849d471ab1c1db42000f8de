@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9042b0da_c2fac486",
+        "filename": "user/src/com/google/gwt/user/tools/templates/ant/build.xmlsrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-11T08:16:49Z",
+      "side": 1,
+      "message": "With this change we remove definitively that the user can run classic mode unless he edits the generated ant build file.\nAm we ok with this?",
+      "range": {
+        "startLine": 55,
+        "startChar": 16,
+        "endLine": 55,
+        "endChar": 23
+      },
+      "revId": "63ad887fbbabb3518849d471ab1c1db42000f8de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

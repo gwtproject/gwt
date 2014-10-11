@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7047fcec_619e503f",
+        "filename": "maven/lib-maven-deploy.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-11T13:34:26Z",
+      "side": 1,
+      "message": "There\u0027s no repositoryId for install:install-file:\n\nhttps://maven.apache.org/plugins/maven-install-plugin/install-file-mojo.html",
+      "revId": "5ea9c2b437a7264863a0c22ded0b8af6a1a06a8b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

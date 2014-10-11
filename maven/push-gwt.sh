@@ -63,6 +63,10 @@ case $repoUrl in
     ;;
 esac
 
+# setting the repoUrl to 'install' will instruct to maven-gwt to
+# execute the install goal instead of the deploy one.
+[ "$repoUrl" = "$localRepoUrl" ] && repoUrl=install
+
 read -p"GPG passphrase for jar signing (may skip for local deployment): " gpgPassphrase
 
 maven-gwt "$gwtVersion" \

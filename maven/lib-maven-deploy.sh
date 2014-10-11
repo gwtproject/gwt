@@ -46,7 +46,16 @@ function maven-deploy-file() {
   fi
 
   local cmd="";
-  if [[ "$gpgPassphrase" != "" ]]; then
+  if [ "$mavenRepoUrl" = "install" ]; then
+    echo "Installing $curFile in local maven repository cache"
+    cmd="$MAVEN_BIN \
+           install:install-file
+            -Dfile=$curFile \
+            -DrepositoryId=$mavenRepoId \
+            -DpomFile=$pomFile \
+            -q"
+  elif [[ "$gpgPassphrase" != "" ]]; then
+    echo "Signing and Deploying $curFile to $mavenRepoUrl"
     cmd="$MAVEN_BIN \
            org.apache.maven.plugins:maven-gpg-plugin:1.4:sign-and-deploy-file \
             -Dfile=$curFile \

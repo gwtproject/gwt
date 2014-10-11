@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d038a85e_96ddda99",
+        "filename": "user/test/com/google/gwt/user/client/ui/StackPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-11T08:14:00Z",
+      "side": 1,
+      "message": "hasClassName",
+      "range": {
+        "startLine": 209,
+        "startChar": 16,
+        "endLine": 209,
+        "endChar": 28
+      },
+      "revId": "5686f7707f9ac0091e0a67b80ad4d22d21e0e118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

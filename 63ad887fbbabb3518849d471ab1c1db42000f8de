@@ -22,6 +22,30 @@
       "revId": "63ad887fbbabb3518849d471ab1c1db42000f8de",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9042b0da_62f098a4",
+        "filename": "user/src/com/google/gwt/user/tools/templates/ant/build.xmlsrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-11T08:50:35Z",
+      "side": 1,
+      "message": "Actually you can run\n\n ant devmode -Dgwt.args\u003d\"-nosuperDevMode\"\n\nif you want \"classic\" DevMode back.",
+      "parentUuid": "9042b0da_c2fac486",
+      "range": {
+        "startLine": 55,
+        "startChar": 16,
+        "endLine": 55,
+        "endChar": 23
+      },
+      "revId": "63ad887fbbabb3518849d471ab1c1db42000f8de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -33,6 +33,24 @@
       "revId": "801cb14ff636b093ded6a575391d22bce6adcfb1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b03df44e_63fadc57",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-12T17:11:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b03df44e_e3e58cb6",
+      "revId": "801cb14ff636b093ded6a575391d22bce6adcfb1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

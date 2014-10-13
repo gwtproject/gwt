@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b03df44e_a64b1275",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-13T12:26:42Z",
+      "side": 1,
+      "message": "It\u0027s used directly in the code so it\u0027s clearner to have it explicitly. Should I add the \"for the servlet filter\" back?",
+      "parentUuid": "7047fcec_e4702e82",
+      "revId": "c9c5b5d87440ef652bbc8d51475c0d34ed3d391b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b03df44e_261b8295",
         "filename": "samples/dynatablerf/pom.xml",
         "patchSetId": 1
@@ -30,6 +48,41 @@
       "writtenOn": "2014-10-13T11:43:54Z",
       "side": 1,
       "message": "Doesn\u0027t this version come from gwt.pom?",
+      "revId": "c9c5b5d87440ef652bbc8d51475c0d34ed3d391b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9042b0da_85c60650",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-13T12:26:42Z",
+      "side": 1,
+      "message": "Ah right!\n\nThe sources should be brought transitively by gwt-user though, so maybe we could remove the declaration altogether (or remove the classifier\u003dsources, as javax.validation is used directly in the code)",
+      "parentUuid": "b03df44e_261b8295",
+      "revId": "c9c5b5d87440ef652bbc8d51475c0d34ed3d391b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9042b0da_25d37a14",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-13T12:26:42Z",
+      "side": 1,
+      "message": "Oh, that makes me think we have that sentence in the WebAppCreator template.",
       "revId": "c9c5b5d87440ef652bbc8d51475c0d34ed3d391b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

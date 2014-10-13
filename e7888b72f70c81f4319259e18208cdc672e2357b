@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "502d9828_d50cbce0",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:59:58Z",
+      "side": 1,
+      "message": "do not move methods because of public/ static changes.",
+      "range": {
+        "startLine": 246,
+        "startChar": 2,
+        "endLine": 257,
+        "endChar": 3
+      },
+      "revId": "e7888b72f70c81f4319259e18208cdc672e2357b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_951644ed",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:59:58Z",
+      "side": 1,
+      "message": "boolean?",
+      "range": {
+        "startLine": 449,
+        "startChar": 5,
+        "endLine": 449,
+        "endChar": 15
+      },
+      "revId": "e7888b72f70c81f4319259e18208cdc672e2357b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_f511b8f7",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/model/ImplicitClientBundle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:59:58Z",
+      "side": 1,
+      "message": "boolean?",
+      "range": {
+        "startLine": 72,
+        "startChar": 6,
+        "endLine": 72,
+        "endChar": 17
+      },
+      "revId": "e7888b72f70c81f4319259e18208cdc672e2357b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_b51b4016",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/model/ImplicitCssResource.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:59:58Z",
+      "side": 1,
+      "message": "boolean?",
+      "range": {
+        "startLine": 75,
+        "startChar": 56,
+        "endLine": 75,
+        "endChar": 63
+      },
+      "revId": "e7888b72f70c81f4319259e18208cdc672e2357b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "502d9828_953ba463",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-13T15:07:52Z",
+      "side": 1,
+      "message": "Cached artifacts in Maven 3 are linked to their repo of origin, so it might be some kind of issue because of this. IIRC, I was working with a sample project yesterday that lacked the \u003crepository\u003e stance, so it was failing resolving the snapshots, and adding --offline on the command line fixed it. IIRC.",
+      "parentUuid": "9042b0da_252cda03",
+      "revId": "1e0d7a49e35bad9a474f2a1f69e01ba47321b49a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9042b0da_c5e3aee6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4

@@ -2,6 +2,721 @@
   "comments": [
     {
       "key": {
+        "uuid": "104ec00c_7dfa6a57",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "\"Visitor that handles conditional nodes with conditions that need to be evaluated at runtime.\"",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 92
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104ec00c_9df7366b",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "s/w/W/",
+      "range": {
+        "startLine": 48,
+        "startChar": 7,
+        "endLine": 48,
+        "endChar": 8
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104ec00c_5df1ae73",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "In which case can a conditional be null?",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104ec00c_3df4e264",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "s/u/U/",
+      "range": {
+        "startLine": 76,
+        "startChar": 11,
+        "endLine": 76,
+        "endChar": 12
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104ec00c_fd0c3ae0",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "s/a/A/",
+      "range": {
+        "startLine": 171,
+        "startChar": 7,
+        "endLine": 171,
+        "endChar": 8
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104ec00c_bd16b2ec",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "nit: missing newline",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104ec00c_dd1b7e15",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Just asking: We are not giving any source code location here, does this mean we are going to have problems with error messages going forward?",
+      "range": {
+        "startLine": 41,
+        "startChar": 35,
+        "endLine": 41,
+        "endChar": 88
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7047fcec_849b6a4c",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Please add a test for this pass",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104ec00c_7d010aa1",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "\"This compiler pass does not deal with conditional nodes that need to be evaluated at runtime\"",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 40,
+        "endChar": 11
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104ec00c_9dfe563f",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Make final and initialize in place",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104ec00c_3d0b82c3",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "alreadyTreatedNode.clear();",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104ec00c_5d08cec3",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "If this contains a whole lot of nodes we might want to clear the set after running the pass, but I am not sure if the pass actually gets dropped as well.",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7047fcec_a47a265e",
+        "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Please add test for this pass",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7047fcec_446c82a3",
+        "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "I am not a 100% sure on this class. If this class finds a permutation property that is not defined in a gwt xml file, it will not error out. But we will fail later and at that point we can no longer tell people why a certain property was added.\n\nCan we somehow track back source locations to the place where we add the permutations to the context of the generator?",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7047fcec_c47f324d",
+        "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Are we sure that we want to treat user agent that special? Maybe we should treat it like any other variable and people need to write is(\"user.agent\", \"ie8\")",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 9
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7047fcec_6465feb8",
+        "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Do we want to fail here?",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7047fcec_a451c6d7",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Needs unit test",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7047fcec_045d1aeb",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Misses javadoc",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7047fcec_a4c8e631",
+        "filename": "user/src/com/google/gwt/resources/gss/RenamingSubstitutionMap.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "This class does not raise any errors",
+      "range": {
+        "startLine": 30,
+        "startChar": 77,
+        "endLine": 31,
+        "endChar": 25
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_35189095",
+        "filename": "user/src/com/google/gwt/resources/gss/ResourceUrlFunction.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Please add a unit test",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7047fcec_84d04ad8",
+        "filename": "user/src/com/google/gwt/resources/gss/ResourceUrlFunction.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "needed?",
+      "range": {
+        "startLine": 41,
+        "startChar": 32,
+        "endLine": 41,
+        "endChar": 37
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7047fcec_64d3bee5",
+        "filename": "user/src/com/google/gwt/resources/gss/ResourceUrlFunction.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "move up",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 3
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_952644df",
+        "filename": "user/src/com/google/gwt/resources/gss/ResourceUrlFunction.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "nit:format",
+      "range": {
+        "startLine": 95,
+        "startChar": 43,
+        "endLine": 95,
+        "endChar": 68
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_d5435c6d",
+        "filename": "user/src/com/google/gwt/resources/gss/RuntimeConditionalNodeCollector.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Please add unit test",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_b5426066",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Please add unit test",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_f548d88b",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "maybe we should say: \"In the next version of GWT?\"",
+      "range": {
+        "startLine": 56,
+        "startChar": 12,
+        "endLine": 56,
+        "endChar": 21
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_953de4e8",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "see above",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 21
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_5538acf4",
+        "filename": "user/src/com/google/gwt/resources/gss/ValueFunction.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Unit test?",
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_b57900bc",
+        "filename": "user/test/com/google/gwt/resources/GssDebugStyle.gwt.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Wrong comment",
+      "range": {
+        "startLine": 6,
+        "startChar": 2,
+        "endLine": 6,
+        "endChar": 50
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_557f4c9d",
+        "filename": "user/test/com/google/gwt/resources/GssPrettyStyle.gwt.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Wrong comment",
+      "range": {
+        "startLine": 6,
+        "startChar": 2,
+        "endLine": 6,
+        "endChar": 50
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_f56f78ec",
+        "filename": "user/test/com/google/gwt/resources/GssResourceTest.gwt.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "comment does not match code",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_957404c3",
+        "filename": "user/test/com/google/gwt/resources/GssStableNoTypeStyle.gwt.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "comment does not match code",
+      "range": {
+        "startLine": 6,
+        "startChar": 2,
+        "endLine": 6,
+        "endChar": 50
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_757cc8a7",
+        "filename": "user/test/com/google/gwt/resources/GssStableShortTypeStyle.gwt.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Wrong comment",
+      "range": {
+        "startLine": 6,
+        "startChar": 2,
+        "endLine": 6,
+        "endChar": 50
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_1589d448",
+        "filename": "user/test/com/google/gwt/resources/GssStableStyle.gwt.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Wrong comment",
+      "range": {
+        "startLine": 6,
+        "startChar": 2,
+        "endLine": 6,
+        "endChar": 50
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_55666c0f",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T13:27:53Z",
+      "side": 1,
+      "message": "Do we want to keep the issue reference?",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 86,
+        "endChar": 5
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10b24012_3e228541",
         "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
         "patchSetId": 9

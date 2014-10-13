@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "104ec00c_adf0bfa4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-13T20:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "104ec00c_894cd83b",
+      "range": {
+        "startLine": 1045,
+        "startChar": 56,
+        "endLine": 1045,
+        "endChar": 68
+      },
+      "revId": "d1869ccff0e8da320d0d3b4096e76207118fe0a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "104ec00c_89d378e4",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "104ec00c_edf56796",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-13T20:51:56Z",
+      "side": 1,
+      "message": "You are right. I missed it when I remade the patch in my ws.",
+      "parentUuid": "104ec00c_89d378e4",
+      "range": {
+        "startLine": 1054,
+        "startChar": 64,
+        "endLine": 1054,
+        "endChar": 86
+      },
+      "revId": "d1869ccff0e8da320d0d3b4096e76207118fe0a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "104ec00c_4998104f",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
         "patchSetId": 5
@@ -59,6 +107,30 @@
       "writtenOn": "2014-10-13T19:57:39Z",
       "side": 1,
       "message": "should document why we\u0027re ignoring these catches (a 1 liner comment in each block)",
+      "range": {
+        "startLine": 1055,
+        "startChar": 4,
+        "endLine": 1057,
+        "endChar": 5
+      },
+      "revId": "d1869ccff0e8da320d0d3b4096e76207118fe0a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104ec00c_6dd39713",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-13T20:51:56Z",
+      "side": 1,
+      "message": "The comment is the one below really.\n\nin Java 7 I would have written\n\n  catch (URI... | Illegal... e) {\n     // Some exception ....\n     // .. \n     return true;\n  }\n\nand it would have been clearer to read. I added a line to each catch with a comment but maybe is clearer if we catch Exception and return from the catchblock instead.",
+      "parentUuid": "104ec00c_4998104f",
       "range": {
         "startLine": 1055,
         "startChar": 4,

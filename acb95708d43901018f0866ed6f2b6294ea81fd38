@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9042b0da_a5e54a65",
+        "filename": "maven/lib-maven-deploy.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-13T15:11:26Z",
+      "side": 1,
+      "message": "The script uses \u003d\u003d in other ifs (e.g. line #43)",
+      "range": {
+        "startLine": 49,
+        "startChar": 24,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "acb95708d43901018f0866ed6f2b6294ea81fd38",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_354df003",
+        "filename": "maven/push-gwt.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-13T15:11:26Z",
+      "side": 1,
+      "message": "I don\u0027t think we use that syntax anywhere else in the scripts; we seem to always use \"if then fi\".\nAlso, \u003d\u003d.",
+      "revId": "acb95708d43901018f0866ed6f2b6294ea81fd38",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

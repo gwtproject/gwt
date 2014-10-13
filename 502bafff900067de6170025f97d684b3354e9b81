@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7047fcec_24ddb6ee",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-13T12:30:27Z",
+      "side": 1,
+      "message": "Removing this breaks the build since objectify 3.0 is not central repos\n\nhttp://repo1.maven.org/maven2/com/googlecode/objectify/objectify/",
+      "revId": "502bafff900067de6170025f97d684b3354e9b81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

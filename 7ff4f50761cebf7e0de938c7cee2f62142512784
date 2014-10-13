@@ -556,6 +556,236 @@
     },
     {
       "key": {
+        "uuid": "502d9828_153c74b5",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:28:56Z",
+      "side": 1,
+      "message": "/s/ans/and/",
+      "range": {
+        "startLine": 138,
+        "startChar": 65,
+        "endLine": 138,
+        "endChar": 68
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_353970c6",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:28:56Z",
+      "side": 1,
+      "message": "s/O/o/",
+      "range": {
+        "startLine": 225,
+        "startChar": 6,
+        "endLine": 225,
+        "endChar": 7
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_d5d4bc01",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:28:56Z",
+      "side": 1,
+      "message": "In incremental mode we want a stable name that never changes across different compiles",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 100
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_75c60853",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:28:56Z",
+      "side": 1,
+      "message": "I think this might be different from CssResource. In CssResource when setting the value to empty I was getting \"empty-someclass\" as output. Can you double check?",
+      "range": {
+        "startLine": 412,
+        "startChar": 8,
+        "endLine": 412,
+        "endChar": 15
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_35d09004",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:28:56Z",
+      "side": 1,
+      "message": "This will become a problem in incremental compilation. See: https://gwt-review.googlesource.com/#/c/9180/",
+      "range": {
+        "startLine": 431,
+        "startChar": 2,
+        "endLine": 443,
+        "endChar": 3
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_f500d8da",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:28:56Z",
+      "side": 1,
+      "message": "This kind of query to the oracle will hurt performance in incremental compilation a lot. We should come up with a better way.",
+      "range": {
+        "startLine": 451,
+        "startChar": 4,
+        "endLine": 451,
+        "endChar": 67
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_75b4c8c6",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:28:56Z",
+      "side": 1,
+      "message": "This does not look right",
+      "range": {
+        "startLine": 728,
+        "startChar": 10,
+        "endLine": 728,
+        "endChar": 31
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_15c1d427",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:28:56Z",
+      "side": 1,
+      "message": "I think we need to change this to \"the next version of GWT\"",
+      "range": {
+        "startLine": 753,
+        "startChar": 53,
+        "endLine": 753,
+        "endChar": 63
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_35be50a7",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:28:56Z",
+      "side": 1,
+      "message": "Not sure what we are supposed to do here, how does the old css resource handle this?",
+      "range": {
+        "startLine": 773,
+        "startChar": 10,
+        "endLine": 773,
+        "endChar": 55
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_3595f014",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-13T14:28:56Z",
+      "side": 1,
+      "message": "Here we should also make sure that UTF-8 is okayu. I think so we can just document the fact that everything needs to be UTF-8, but lets double check",
+      "range": {
+        "startLine": 846,
+        "startChar": 77,
+        "endLine": 846,
+        "endChar": 91
+      },
+      "revId": "7ff4f50761cebf7e0de938c7cee2f62142512784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "502d9828_b57900bc",
         "filename": "user/test/com/google/gwt/resources/GssDebugStyle.gwt.xml",
         "patchSetId": 9

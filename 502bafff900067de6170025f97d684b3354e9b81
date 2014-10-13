@@ -16,6 +16,24 @@
       "revId": "502bafff900067de6170025f97d684b3354e9b81",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b03df44e_86aa8e91",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-13T12:43:38Z",
+      "side": 1,
+      "message": "Yes, it\u0027s only been moved from the beginning of the file to the end.\n\nI think ideally we\u0027d update to a newer version but I don\u0027t know Objectify and whether 3.x is compatible with 4.x or 5.x.\nGAE 1.7.1 is a bit old too.",
+      "parentUuid": "7047fcec_24ddb6ee",
+      "revId": "502bafff900067de6170025f97d684b3354e9b81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -73,9 +73,11 @@ import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory;
 import org.eclipse.jdt.internal.compiler.problem.ProblemReporter;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.JarURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -520,15 +522,16 @@ public class JdtCompiler {
         openStream = resource.openStream();
         ClassFileReader classFileReader =
             ClassFileReader.read(openStream, resource.toExternalForm(), true);
-        return new NameEnvironmentAnswer(classFileReader, null);
+        // In case insensitive file systems we might have found a resource that whose name
+        // has difference in case but its internal name does not match.
+        return classFileReader.getName().equals(internalName)  ?
+            new NameEnvironmentAnswer(classFileReader, null) : null;
       } catch (IOException e) {
         return null;
       } catch (ClassFormatException e) {
         return null;
       } finally {
-        if (openStream != null) {
-          Utility.close(openStream);
-        }
+        Utility.close(openStream);
       }
     }
 
@@ -537,10 +540,6 @@ public class JdtCompiler {
       char[] pathChars = CharOperation.concatWith(parentPkg, pkg, '/');
       String packageName = String.valueOf(pathChars);
       return isPackage(packageName);
-    }
-
-    private ClassLoader getClassLoader() {
-      return Thread.currentThread().getContextClassLoader();
     }
 
     private boolean isPackage(String slashedPackageName) {
@@ -580,6 +579,31 @@ public class JdtCompiler {
         return false;
       }
     }
+  }
+
+  private static boolean caseSensitivePathExists(String resourceName) {
+    URL resourceURL = getClassLoader().getResource(resourceName + '/');
+    if (resourceURL == null) {
+      return false;
+    }
+
+    try {
+      File resourceFile = new File(resourceURL.toURI());
+
+      return Arrays.asList(resourceFile.getParentFile().list()).contains(resourceName);
+    } catch (URISyntaxException e) {
+    } catch (IllegalArgumentException e) {
+    }
+
+    // Some exception ocurred while trying to make sure the name fo the resource on disk is exactly
+    // the same as the one requested including case. If an exception is throw in the process we
+    // assume that the URI does not refer to a resource in the filesystem and that the resource
+    // obtained from the classloader is the one requested.
+    return true;
+  }
+
+  private static ClassLoader getClassLoader() {
+    return Thread.currentThread().getContextClassLoader();
   }
 
   /**

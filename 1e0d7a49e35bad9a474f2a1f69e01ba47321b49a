@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9042b0da_252cda03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-13T15:00:58Z",
+      "side": 1,
+      "message": "Actually I think metadata seems ok, but for some reason maven does not use that metadata when using the cache repo. It\u0027s like does not consider cache repo as a conventional maven repo.",
+      "parentUuid": "7047fcec_44432208",
+      "revId": "1e0d7a49e35bad9a474f2a1f69e01ba47321b49a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9042b0da_c5e3aee6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-13T12:14:53Z",
       "side": 1,
       "message": "Note: -i is support in Bash on Linux, just not in Bash on OSX (AFAICT), so you might want to reword this slightly.",
+      "revId": "1e0d7a49e35bad9a474f2a1f69e01ba47321b49a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b03df44e_26f4e264",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-13T15:00:58Z",
+      "side": 1,
+      "message": "you are right, linux bash has this option. But anyway we should remove it to avoid problems in other systems.",
+      "parentUuid": "9042b0da_c5e3aee6",
       "revId": "1e0d7a49e35bad9a474f2a1f69e01ba47321b49a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -82,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "9042b0da_85b6065e",
+        "filename": "maven/lib-maven-deploy.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-13T15:00:58Z",
+      "side": 1,
+      "message": "I try not to use modern syntax in my shell scripts, but anyway this shell requires bash and double brackets are used profusely here, so it\u0027s more coherent to use the same.",
+      "parentUuid": "9042b0da_a54b0a75",
+      "range": {
+        "startLine": 49,
+        "startChar": 5,
+        "endLine": 49,
+        "endChar": 6
+      },
+      "revId": "1e0d7a49e35bad9a474f2a1f69e01ba47321b49a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9042b0da_c5508e23",
         "filename": "maven/lib-maven-deploy.sh",
         "patchSetId": 4
@@ -93,6 +153,30 @@
       "writtenOn": "2014-10-13T12:14:53Z",
       "side": 1,
       "message": "If this is not actually supported (and I\u0027ve read it\u0027s not in Maven 3.x), maybe we should remove that line? (same in maven-deploy-plugin below).",
+      "range": {
+        "startLine": 64,
+        "startChar": 12,
+        "endLine": 64,
+        "endChar": 33
+      },
+      "revId": "1e0d7a49e35bad9a474f2a1f69e01ba47321b49a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b03df44e_e60cbae0",
+        "filename": "maven/lib-maven-deploy.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-13T15:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9042b0da_c5508e23",
       "range": {
         "startLine": 64,
         "startChar": 12,

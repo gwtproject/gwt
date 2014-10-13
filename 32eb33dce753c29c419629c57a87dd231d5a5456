@@ -52,6 +52,24 @@
       "revId": "32eb33dce753c29c419629c57a87dd231d5a5456",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10f960d6_acf54797",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-13T22:46:49Z",
+      "side": 0,
+      "message": "That wouldn\u0027t work because the code server checks if the module base directory exists at startup, so it needs to be created first. By the time this method is called, the directory will already exist.",
+      "parentUuid": "9042b0da_c242c467",
+      "revId": "32eb33dce753c29c419629c57a87dd231d5a5456",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

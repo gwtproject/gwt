@@ -52,6 +52,24 @@
       "revId": "502bafff900067de6170025f97d684b3354e9b81",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_f521b8c9",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-13T13:01:14Z",
+      "side": 1,
+      "message": "Ok, I see it is just moved. When I did the merge of the other patch I din\u0027t realise that it was depending on this, and these lines went out and the project didn\u0027t compile",
+      "parentUuid": "b03df44e_86aa8e91",
+      "revId": "502bafff900067de6170025f97d684b3354e9b81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "d086e864_51fa1457",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-14T15:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b03df44e_46224699",
+      "revId": "c9c5b5d87440ef652bbc8d51475c0d34ed3d391b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b03df44e_261b8295",
         "filename": "samples/dynatablerf/pom.xml",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "writtenOn": "2014-10-13T12:26:42Z",
       "side": 1,
       "message": "Oh, that makes me think we have that sentence in the WebAppCreator template.",
+      "revId": "c9c5b5d87440ef652bbc8d51475c0d34ed3d391b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d086e864_b1326094",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-14T15:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9042b0da_25d37a14",
       "revId": "c9c5b5d87440ef652bbc8d51475c0d34ed3d391b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

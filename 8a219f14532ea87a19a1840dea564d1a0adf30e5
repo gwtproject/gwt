@@ -40,6 +40,24 @@
       "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d038a85e_78a592bb",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-14T23:00:14Z",
+      "side": 1,
+      "message": "\u003e This method is only called on raw JS objects, never Java objects\n\nI don\u0027t think this is correct. This method is called for any object including java objects - this is basically the implementation of System.identityHashCode. If you use bracket notation to access a field will GWT preserve the name? If not it can use the name somewhere else which will break things.\n\nPerhaps closure compiler should be instructed to not touch \"$H\" instead?",
+      "parentUuid": "d038a85e_24fcc683",
+      "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

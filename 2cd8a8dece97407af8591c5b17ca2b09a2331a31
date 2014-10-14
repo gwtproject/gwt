@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "502d9828_dbc4ebcf",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-14T13:50:02Z",
+      "side": 1,
+      "message": "Should we use the variant that doesn\u0027t fire events? (even though we just removed the event handler; but just to be extra sure)",
+      "revId": "2cd8a8dece97407af8591c5b17ca2b09a2331a31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "b08b346f_93839ee4",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T16:19:32Z",
+      "side": 1,
+      "message": "yes that it was I meant.\nYou have answered already my question and I understand now the advantages of running via gwt:test",
+      "parentUuid": "b08b346f_b37902bc",
+      "revId": "582387bbce00548a2833b807b698ebfaf147ec2e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "502d9828_3e862d38",
         "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
         "patchSetId": 9
@@ -100,6 +118,24 @@
       "writtenOn": "2014-10-14T16:07:53Z",
       "side": 1,
       "message": "Note: I just changed gwt-maven-plugin to make it the default (for some reason it was \"manual\", which you\u0027d rather set temporarily, when working on your code and tests)",
+      "revId": "582387bbce00548a2833b807b698ebfaf147ec2e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d086e864_f1f0e828",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 9
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T16:19:32Z",
+      "side": 1,
+      "message": "Agree, htmlunit should be the default",
+      "parentUuid": "502d9828_3e862d38",
       "revId": "582387bbce00548a2833b807b698ebfaf147ec2e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

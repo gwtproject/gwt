@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b03df44e_e99fad6b",
+        "filename": "README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T08:40:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90b9d0ac_46fba78a",
+      "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50c2f81e_2f7bd864",
         "filename": "README.txt",
         "patchSetId": 4
@@ -66,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "9042b0da_e8bec78c",
+        "filename": "README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T08:40:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "708d3c44_8e41fb33",
+      "range": {
+        "startLine": 3,
+        "startChar": 39,
+        "endLine": 3,
+        "endChar": 41
+      },
+      "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b9d0ac_e6ef3bc2",
         "filename": "README.txt",
         "patchSetId": 4
@@ -77,6 +119,30 @@
       "writtenOn": "2014-10-08T14:14:58Z",
       "side": 1,
       "message": "\"checked out\" ?\n\nShould we rather point to the SVN?\n\n You need https://google-web-tookit.googlecode.com/svn/tools/\n checked out and up-to-date, and the build will look it up\n by default at \u0027../tools\u0027. You can override that default\n location using the GWT_TOOLS environment variable.\n\n(note: technically, you can also pass -Dgwt.tools\u003d… to Ant IIRC; and that also means you need \u0027svn\u0027 installed on your machine)",
+      "range": {
+        "startLine": 8,
+        "startChar": 28,
+        "endLine": 8,
+        "endChar": 38
+      },
+      "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_58fa2157",
+        "filename": "README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T08:40:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90b9d0ac_e6ef3bc2",
       "range": {
         "startLine": 8,
         "startChar": 28,
@@ -135,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "b03df44e_a999a588",
+        "filename": "README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T08:40:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0bfc88a_0bf7f46c",
+      "range": {
+        "startLine": 14,
+        "startChar": 13,
+        "endLine": 14,
+        "endChar": 17
+      },
+      "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50c2f81e_8f5d2cee",
         "filename": "README.txt",
         "patchSetId": 4
@@ -158,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "9042b0da_a82d1f36",
+        "filename": "README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T08:40:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50c2f81e_8f5d2cee",
+      "range": {
+        "startLine": 21,
+        "startChar": 3,
+        "endLine": 21,
+        "endChar": 29
+      },
+      "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b9d0ac_86a8bf6e",
         "filename": "README.txt",
         "patchSetId": 4
@@ -169,6 +283,30 @@
       "writtenOn": "2014-10-08T14:14:58Z",
       "side": 1,
       "message": "Windows\n\n(with upper-case W; maybe we should even add a ™)",
+      "range": {
+        "startLine": 23,
+        "startChar": 32,
+        "endLine": 23,
+        "endChar": 39
+      },
+      "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_d8a87121",
+        "filename": "README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T08:40:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90b9d0ac_86a8bf6e",
       "range": {
         "startLine": 23,
         "startChar": 32,
@@ -250,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "502d9828_f8ad2d2e",
+        "filename": "README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T08:40:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50c2f81e_0f085c94",
+      "range": {
+        "startLine": 50,
+        "startChar": 59,
+        "endLine": 50,
+        "endChar": 65
+      },
+      "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50c2f81e_6f1ec0d3",
         "filename": "README.txt",
         "patchSetId": 4
@@ -278,6 +440,24 @@
       "writtenOn": "2014-10-08T16:23:37Z",
       "side": 1,
       "message": "I would suggest renaming README.txt to README.md and changing format to markdown and then once its synced to github, it would autoformat. Interestingly, the sync looks out of date on github here https://github.com/gwtproject/gwt.",
+      "parentUuid": "50c2f81e_6f1ec0d3",
+      "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_98b2f98d",
+        "filename": "README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T08:40:14Z",
+      "side": 1,
+      "message": "Converted to tables. Note that tables is an advanced feature in github. Our md processor put them in a \u003ccode\u003e block, so I tried to maintain the aspect in ascii using long lines.\nGithub formats * inside tables, so I had to escape them, didn\u0027t found a good document to escape, so I tested in github editor.",
       "parentUuid": "50c2f81e_6f1ec0d3",
       "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
@@ -319,6 +499,30 @@
       "writtenOn": "2014-10-08T14:14:58Z",
       "side": 1,
       "message": "I think we should document the special \"dev\", \"user\", etc. tasks and their -Dtarget\u003d property somewhere before the examples. AFAICT it\u0027s just an alternative to\n\n pushd dev \u0026\u0026 ant test; popd",
+      "range": {
+        "startLine": 119,
+        "startChar": 6,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "0b0170ef56a16a0923e5951afdabfa870ef5728f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_b88ed5ba",
+        "filename": "README.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T08:40:14Z",
+      "side": 1,
+      "message": "explained it just before the table with an example. Note that pushd popd does not work in windows, using parenthesis and cd instead",
+      "parentUuid": "50c2f81e_af2b48ec",
       "range": {
         "startLine": 119,
         "startChar": 6,

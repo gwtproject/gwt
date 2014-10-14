@@ -22,6 +22,30 @@
       "revId": "9793c20f13723a29660ea40c58a50221dcd4988d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_7ed025d7",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-14T17:26:00Z",
+      "side": 1,
+      "message": "If we do this please use the proper javascript variables and not the template stuff.",
+      "parentUuid": "d01348da_de2141ca",
+      "range": {
+        "startLine": 37,
+        "startChar": 41,
+        "endLine": 37,
+        "endChar": 52
+      },
+      "revId": "9793c20f13723a29660ea40c58a50221dcd4988d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

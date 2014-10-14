@@ -68,6 +68,41 @@
       "revId": "582387bbce00548a2833b807b698ebfaf147ec2e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b08b346f_b37902bc",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-14T16:07:53Z",
+      "side": 1,
+      "message": "You mean gwt:test vs. surefire? Well, as said in the comment above, this allows reusing the plugin configuration (jsInteropMode, draft, persistentunitcachedir, etc.)",
+      "parentUuid": "b03df44e_a67472c2",
+      "revId": "582387bbce00548a2833b807b698ebfaf147ec2e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_3e862d38",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 9
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-14T16:07:53Z",
+      "side": 1,
+      "message": "Note: I just changed gwt-maven-plugin to make it the default (for some reason it was \"manual\", which you\u0027d rather set temporarily, when working on your code and tests)",
+      "revId": "582387bbce00548a2833b807b698ebfaf147ec2e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

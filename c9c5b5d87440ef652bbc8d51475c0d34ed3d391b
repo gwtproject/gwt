@@ -104,6 +104,46 @@
       "revId": "c9c5b5d87440ef652bbc8d51475c0d34ed3d391b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d038a85e_95762644",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2014-10-14T14:18:39Z",
+      "side": 1,
+      "message": "1.9.13 is the latest, want to change this?",
+      "revId": "c9c5b5d87440ef652bbc8d51475c0d34ed3d391b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d038a85e_1541b6d2",
+        "filename": "samples/validation/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2014-10-14T14:18:39Z",
+      "side": 1,
+      "message": "Hm, this will have to get changed on ga release, wondering if there is a way to make this a build var.",
+      "range": {
+        "startLine": 14,
+        "startChar": 16,
+        "endLine": 14,
+        "endChar": 30
+      },
+      "revId": "c9c5b5d87440ef652bbc8d51475c0d34ed3d391b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

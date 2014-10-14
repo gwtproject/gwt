@@ -130,6 +130,24 @@
       "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d038a85e_d8013ea3",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-14T23:22:35Z",
+      "side": 1,
+      "message": "\u003e This change doesn\u0027t change anything. o.$H and o[\u0027$H\u0027] have the same semantics\n\nI know that GWT compiler will not use $H if there is o.$H but not sure it will do the same for o[\u0027$H\u0027] which means o.myMethod() might end up being renamed to o.$H. That\u0027s my point.",
+      "parentUuid": "5072f858_2de7ede8",
+      "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

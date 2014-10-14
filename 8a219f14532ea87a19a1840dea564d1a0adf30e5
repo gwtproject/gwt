@@ -94,6 +94,24 @@
       "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5072f858_8df5c197",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-14T23:13:34Z",
+      "side": 1,
+      "message": "It is used in many places, Object.hashcode, System.identityHashcode, IdentityHashMap, etc.\n\nWe would also need to add it to the list of reserved js names in JsProtectedNames if we remove .$h so that the namer does not use this name.\n\nThis might also be a performance regression as hashcode is probably a very hot method.",
+      "parentUuid": "d038a85e_78a592bb",
+      "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -34,6 +34,24 @@
       "revId": "2cd8a8dece97407af8591c5b17ca2b09a2331a31",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_7e3fc5ac",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-14T16:19:00Z",
+      "side": 1,
+      "message": "Can you add a comment explaining (like you did above) why we added this and that its only relevant for html unit?",
+      "parentUuid": "502d9828_bbea4f33",
+      "revId": "2cd8a8dece97407af8591c5b17ca2b09a2331a31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

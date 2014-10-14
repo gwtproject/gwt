@@ -34,8 +34,11 @@
   if (devModeScript.addEventListener) {
     var callback = function() {
       if (!$wnd.__gwt_sdm__recompiler || !$wnd.__gwt_sdm__recompiler.loaded) {
-        $wnd.alert("Could not load application from super dev mode. " +
-            "Make sure your super dev mode server is running and hit reload.");
+        if ($wnd.confirm("Could not load application from super dev mode.\n" +
+            "Make sure your super dev mode server is running and ready.\n" +
+            "Do you want to reload the application again?\n") {
+          $wnd.location.reload();
+        }
       }
     };
     devModeScript.addEventListener("error", callback, true);

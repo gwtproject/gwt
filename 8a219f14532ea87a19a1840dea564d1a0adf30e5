@@ -76,6 +76,24 @@
       "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d038a85e_38b2aade",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-14T23:12:16Z",
+      "side": 1,
+      "message": "GWT will not obfuscate unknown properties (that don\u0027t map via JSNI field refs) in JSNI methods. Otherwise, JSNI code which calls external third party JS libraries wouldn\u0027t work. (e.g. jQuery.blah would cause \u0027blah\u0027 to be obfuscated)\n\nThis change doesn\u0027t change anything. o.$H and o[\u0027$H\u0027] have the same semantics as far as JSNI is concerned. \n\nI talked to John Lenz about making Closure not touch $H, but it is problematic. It requires turning off a JS compiler optimization pass which will increase code size.",
+      "parentUuid": "d038a85e_78a592bb",
+      "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

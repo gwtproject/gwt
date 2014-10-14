@@ -16,6 +16,24 @@
       "revId": "31ebe4103040ee824a9ee013a879746542a308c3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502d9828_5e4c493a",
+        "filename": "user/super/com/google/gwt/emul/java/util/TreeMap.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-14T17:08:47Z",
+      "side": 1,
+      "message": "JDK removes with its internal private method",
+      "parentUuid": "d038a85e_63b728fb",
+      "revId": "31ebe4103040ee824a9ee013a879746542a308c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

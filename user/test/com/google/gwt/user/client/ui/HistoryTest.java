@@ -56,14 +56,6 @@ public class HistoryTest extends GWTTestCase {
     return "com.google.gwt.user.User";
   }
 
-  @Override
-  protected void gwtSetUp() throws Exception {
-    if (this.handlerRegistration != null) {
-      this.handlerRegistration.removeHandler();
-      this.handlerRegistration = null;
-    }
-  }
-
   // TODO(dankurka): Fix up HTML unit hash change handling
   @DoNotRunWith(Platform.HtmlUnitUnknown)
   public void testClickLink() {
@@ -501,6 +493,9 @@ public class HistoryTest extends GWTTestCase {
       timer.cancel();
       timer = null;
     }
+
+    // Reset the hash fragment.
+    History.newItem("");
   }
 
   private void addHistoryListenerImpl(ValueChangeHandler<String> handler) {

@@ -22,6 +22,24 @@
       "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d038a85e_24fcc683",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-14T21:58:39Z",
+      "side": 1,
+      "message": "No, should be fine. The namer won\u0027t touch a raw JS property name anyway, that is, it won\u0027t rename \u0027o.$H\u0027. It only renames stuff that can provably be renamed (Java fields/funcs, and globals)\n\nThis method is only called on raw JS objects, never Java objects.  Even if another bit of Java code ended up with $H as a property name, it would be fine, since most of the code that tries to filter $H fields makes the implicit assumption that the underlying object is a JSO.\n\nIdeally once IE8 is pruned, we will change this to Object.defineProperty(o, \"$H\", { enumerable: false, writable: false, value: getNextHashId() })",
+      "parentUuid": "d038a85e_a41bf664",
+      "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d086e864_f15f88ba",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/stub.nocache.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-14T14:41:06Z",
+      "side": 1,
+      "message": "Sorry, a silly syntax error. This happens when quick editing with vi instead to opening the IDE.",
+      "range": {
+        "startLine": 39,
+        "startChar": 60,
+        "endLine": 39,
+        "endChar": 61
+      },
+      "revId": "cabbea2bcf3d4103119776f752a97f6232f561f8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

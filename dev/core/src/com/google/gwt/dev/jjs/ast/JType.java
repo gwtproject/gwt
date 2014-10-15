@@ -76,6 +76,12 @@ public abstract class JType extends JNode implements HasName, CanBeFinal {
   }
 
   /**
+   * Returns the compound name.
+   */
+  public String[] getCompoundName() {
+    return new String[] { shortName };
+  }
+  /**
    * If this type is a non-null type, returns the underlying (original) type.
    */
   public JType getUnderlyingType() {

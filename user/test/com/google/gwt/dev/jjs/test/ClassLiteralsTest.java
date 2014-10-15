@@ -60,11 +60,12 @@ public class ClassLiteralsTest extends GWTTestCase {
     assertEquals(Foo[].class, o.getClass());
     if (expectClassMetadata()) {
       assertEquals(Object.class, o.getClass().getSuperclass());
-      assertEquals("[L"+ Foo.class.getName() + ";", o.getClass().getName());
-      assertEquals( Foo.class.getCanonicalName() + "[]", o.getClass().getCanonicalName());
-      assertEquals( Foo.class.getSimpleName() + "[]", o.getClass().getSimpleName());
-      assertEquals("class [L"+ Foo.class.getName() + ";", o.getClass().toString());
     }
+
+    assertEquals("[L"+ Foo.class.getName() + ";", o.getClass().getName());
+    assertEquals( Foo.class.getCanonicalName() + "[]", o.getClass().getCanonicalName());
+    assertEquals( Foo.class.getSimpleName() + "[]", o.getClass().getSimpleName());
+    assertEquals("class [L"+ Foo.class.getName() + ";", o.getClass().toString());
 
     assertTrue(o.getClass().isArray());
     assertFalse(o.getClass().isEnum());

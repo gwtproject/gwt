@@ -53,27 +53,22 @@ public final class Class<T> implements Type {
 
   private <T> Class<T> createClassLiteralForArray(int dimensions) {
     Class<T> clazz = new Class<T>();
-    if (clazz.isClassMetadataEnabled()) {
-      if (this.isPrimitive()) {
-        // Primitives have an additional prepended space.
-        clazz.typeName = this.simpleName.substring(1);
-        clazz.canonicalName = clazz.typeName;
-      } else {
-        clazz.typeName = "L" + this.typeName;
-        clazz.canonicalName = this.canonicalName;
-      }
-      clazz.simpleName = this.simpleName;
-      for (int i = 0; i < dimensions; i++) {
-        clazz.typeName = "[" + clazz.typeName;
-        clazz.canonicalName += "[]";
-        clazz.simpleName += "[]";
-      }
-      if (!this.isPrimitive()) {
-        clazz.typeName += ";";
-      }
+    if (this.isPrimitive()) {
+      // Primitives have an additional prepended space.
+      clazz.typeName = this.simpleName.substring(1);
+      clazz.canonicalName = clazz.typeName;
     } else {
-      // TODO(rluble): add meaninful ids to arrays when there is no metadata.
-      synthesizeClassNamesFromTypeId(clazz, null);
+      clazz.typeName = "L" + this.typeName;
+      clazz.canonicalName = this.canonicalName;
+    }
+    clazz.simpleName = this.simpleName;
+    for (int i = 0; i < dimensions; i++) {
+      clazz.typeName = "[" + clazz.typeName;
+      clazz.canonicalName += "[]";
+      clazz.simpleName += "[]";
+    }
+    if (!this.isPrimitive()) {
+      clazz.typeName += ";";
     }
     clazz.modifiers = ARRAY;
     clazz.superclass = Object.class;

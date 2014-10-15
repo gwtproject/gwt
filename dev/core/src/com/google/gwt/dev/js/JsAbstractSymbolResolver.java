@@ -15,12 +15,15 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.js.ast.JsArrayAccess;
 import com.google.gwt.dev.js.ast.JsCatch;
 import com.google.gwt.dev.js.ast.JsContext;
+import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsScope;
+import com.google.gwt.dev.js.ast.JsStringLiteral;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.collect.Stack;
 
@@ -30,6 +33,17 @@ import com.google.gwt.dev.util.collect.Stack;
 public abstract class JsAbstractSymbolResolver extends JsVisitor {
 
   private final Stack<JsScope> scopeStack = new Stack<JsScope>();
+
+  @Override
+  public void endVisit(JsArrayAccess x, JsContext ctx) {
+    JsExpression indexExpr = x.getIndexExpr();
+    if (indexExpr instanceof JsStringLiteral) {
+      JsNameRef ref = new JsNameRef(indexExpr.getSourceInfo(),
+          ((JsStringLiteral) indexExpr).getValue());
+      ref.setQualifier(x.getArrayExpr());
+      resolve(ref);
+    }
+  }
 
   @Override
   public void endVisit(JsCatch x, JsContext ctx) {

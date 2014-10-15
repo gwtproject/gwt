@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "505bd8e0_2e2feba9",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/SerializableTypeOracleBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-15T21:50:30Z",
+      "side": 1,
+      "message": "I don\u0027t see why this check is needed since we immediately call hasGwtTransientAnnotation?",
+      "range": {
+        "startLine": 573,
+        "startChar": 34,
+        "endLine": 573,
+        "endChar": 46
+      },
+      "revId": "6d6947f1e5cdfd05e94c8c42b7b1e5697f0fc824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_2e8b6b2a",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-15T21:50:30Z",
+      "side": 1,
+      "message": "Maybe it would be clearer to make this isFinal(field) and negate all the callers? That way we don\u0027t need to write !isNotFinal(field) to mean that the field is final.\n\nOr maybe even inline it since it doesn\u0027t do much.",
+      "range": {
+        "startLine": 495,
+        "startChar": 17,
+        "endLine": 495,
+        "endChar": 27
+      },
+      "revId": "6d6947f1e5cdfd05e94c8c42b7b1e5697f0fc824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_ee3233e7",
+        "filename": "user/test/com/google/gwt/user/client/rpc/FinalFieldsFalseTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-15T21:50:30Z",
+      "side": 1,
+      "message": "Add \"X\"",
+      "range": {
+        "startLine": 23,
+        "startChar": 37,
+        "endLine": 23,
+        "endChar": 57
+      },
+      "revId": "6d6947f1e5cdfd05e94c8c42b7b1e5697f0fc824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

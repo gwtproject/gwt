@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -30,7 +30,7 @@ package com.google.gwt.core.client;
  * determined, {@link #fillInStackTrace()} can be called in the associated catch
  * block to create a stack trace corresponding to the location where the
  * JavaScriptException object was created.
- * 
+ *
  * <pre>
  * try {
  *   nativeMethod();
@@ -110,7 +110,8 @@ public final class JavaScriptException extends RuntimeException {
   public JavaScriptException(Object e, String description) {
     // Stack trace is writeable for outside just for classic devmode but otherwise it is not and we
     // don't want unnecessary fillInStackTrace calls from super constructor as well.
-    super(null, null, true, !GWT.isScript());
+    // TODO(dankurka) what do we do here?
+    super(null, null/*, true, !GWT.isScript()*/);
     this.e = e;
     this.description = description;
   }

@@ -102,7 +102,9 @@ public class TypeSimplifier extends SimpleTypeVisitor6<TypeMirror, State> {
 
   @Override
   public TypeMirror visitWildcard(WildcardType x, State state) {
-    return state.types.erasure(x).accept(this, state);
+    return x.getExtendsBound() != null
+        ? x.getExtendsBound().accept(this, state)
+        : state.findType(Object.class);
   }
 
   @Override

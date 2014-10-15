@@ -1,0 +1,327 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "505bd8e0_8bacd181",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_abb18dda",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_4bb7b9cc",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_6bb4f5c6",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_0bc1c127",
+        "filename": "user/test/com/google/gwt/resources/gss/BaseGssTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_2bbefda6",
+        "filename": "user/test/com/google/gwt/resources/gss/BaseGssTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_cb896908",
+        "filename": "user/test/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodesTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_eb8ea50d",
+        "filename": "user/test/com/google/gwt/resources/gss/ImageSpriteCreatorTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_8b8371e4",
+        "filename": "user/test/com/google/gwt/resources/gss/ImageSpriteCreatorTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_ab88ad00",
+        "filename": "user/test/com/google/gwt/resources/gss/ImageSpriteCreatorTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_4b9ed93e",
+        "filename": "user/test/com/google/gwt/resources/gss/ImageSpriteCreatorTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_6b9b954d",
+        "filename": "user/test/com/google/gwt/resources/gss/PermutationsCollectorTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_0b98e14d",
+        "filename": "user/test/com/google/gwt/resources/gss/RecordingBidiFlipperTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_2b959d14",
+        "filename": "user/test/com/google/gwt/resources/gss/ResourceUrlFunctionTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_cb708982",
+        "filename": "user/test/com/google/gwt/resources/gss/RuntimeConditionalBlockCollectorTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_eb75456f",
+        "filename": "user/test/com/google/gwt/resources/gss/ValidateRuntimeConditionalNodeTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_8b7a915e",
+        "filename": "user/test/com/google/gwt/resources/gss/ValidateRuntimeConditionalNodeTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_ab7f4d4d",
+        "filename": "user/test/com/google/gwt/resources/gss/ValidateRuntimeConditionalNodeTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_4b6579b8",
+        "filename": "user/test/com/google/gwt/resources/gss/ValueFunctionTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T20:16:53Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "686b2f5264863cbe6bb30de1968dd84e9f019f2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

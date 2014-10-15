@@ -148,6 +148,42 @@
       "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5072f858_ed224515",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-15T00:26:12Z",
+      "side": 1,
+      "message": "You\u0027re right, JsSymbolResolver will reserve the property, but not the array access.  I\u0027ll add a CL to resolve $H.\n\nHowever, I also think JsSymbolResolver should treat a[\"stringLiteral\"] as a property access because it is perfectly legitimate for JSNI methods to access JS fields in this manner.\n\nI don\u0027t think there\u0027ll be much performance difference between js.foo and js[\u0027foo\u0027]  This shows them virtually identical: http://jsperf.com/dot-operator-vs-array-notation\n\nIn reality, we shouldn\u0027t rely on JsSymbolResolver for this non-obfuscation. Rather, we should put a transient field on java/lang/Object like WeakMapping does, and use JSNI references to stash values on it. This would allow the field to be obfuscated globally controlled/safely referenced by client code and renamed by just tweaking the hardcoded obfuscation map.",
+      "parentUuid": "5072f858_8df5c197",
+      "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5072f858_ad1c3dd6",
+        "filename": "user/src/com/google/gwt/core/client/impl/Impl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-15T00:26:12Z",
+      "side": 1,
+      "message": "You\u0027re right, JsSymbolResolver doesn\u0027t handle o[\"$H\"], I thought it did (because Closure understands this as effectively a property reference)",
+      "parentUuid": "d038a85e_d8013ea3",
+      "revId": "8a219f14532ea87a19a1840dea564d1a0adf30e5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

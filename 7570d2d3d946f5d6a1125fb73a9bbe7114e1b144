@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "505bd8e0_8e893fb7",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/ClassLiteralsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T23:11:55Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "7570d2d3d946f5d6a1125fb73a9bbe7114e1b144",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_ae8e7bba",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/ClassLiteralsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T23:11:55Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "7570d2d3d946f5d6a1125fb73a9bbe7114e1b144",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_4e84a799",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/ClassLiteralsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T23:11:55Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "7570d2d3d946f5d6a1125fb73a9bbe7114e1b144",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_6e816388",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/ClassLiteralsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-15T23:11:55Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "7570d2d3d946f5d6a1125fb73a9bbe7114e1b144",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

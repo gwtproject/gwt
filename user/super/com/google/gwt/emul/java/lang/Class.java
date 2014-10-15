@@ -60,7 +60,7 @@ public final class Class<T> implements Type {
         clazz.canonicalName = clazz.typeName;
       } else {
         clazz.typeName = "L" + this.typeName;
-        clazz.canonicalName = this.typeName.replace('$', '.');
+        clazz.canonicalName = this.canonicalName;
       }
       clazz.simpleName = this.simpleName;
       for (int i = 0; i < dimensions; i++) {
@@ -87,11 +87,11 @@ public final class Class<T> implements Type {
    * @skip
    */
   @DoNotInline
-  static <T> Class<T> createForClass(String packageName, String className,
+  static <T> Class<T> createForClass(String packageName, JavaScriptObject compoundClassName,
       JavaScriptObject typeId, Class<? super T> superclass) {
     Class<T> clazz = new Class<T>();
     if (clazz.isClassMetadataEnabled()) {
-      initializeNames(clazz, packageName, className);
+      initializeNames(clazz, packageName, compoundClassName);
     } else {
       synthesizeClassNamesFromTypeId(clazz, typeId);
     }
@@ -106,12 +106,12 @@ public final class Class<T> implements Type {
    * @skip
    */
   @DoNotInline
-  static <T> Class<T> createForEnum(String packageName, String className,
+  static <T> Class<T> createForEnum(String packageName, JavaScriptObject compoundClassName,
       JavaScriptObject typeId, Class<? super T> superclass,
       JavaScriptObject enumConstantsFunc, JavaScriptObject enumValueOfFunc) {
     Class<T> clazz = new Class<T>();
     if (clazz.isClassMetadataEnabled()) {
-      initializeNames(clazz, packageName, className);
+      initializeNames(clazz, packageName, compoundClassName);
     } else {
       synthesizeClassNamesFromTypeId(clazz, typeId);
     }
@@ -129,10 +129,10 @@ public final class Class<T> implements Type {
    * @skip
    */
   @DoNotInline
-  static <T> Class<T> createForInterface(String packageName, String className) {
+  static <T> Class<T> createForInterface(String packageName, JavaScriptObject compoundClassName) {
     Class<T> clazz = new Class<T>();
     if (clazz.isClassMetadataEnabled()) {
-      initializeNames(clazz, packageName, className);
+      initializeNames(clazz, packageName, compoundClassName);
     } else {
       synthesizeClassNamesFromTypeId(clazz, null);
     }
@@ -226,14 +226,29 @@ public final class Class<T> implements Type {
    * Written in JSNI to minimize dependencies (on (String)+).
    */
   private static native void initializeNames(Class<?> clazz, String packageName,
-      String className) /*-{
-    clazz.@java.lang.Class::typeName = packageName + className;
-    if (className.indexOf("$") == -1) {
+      JavaScriptObject compoundClassName) /*-{
+    if (typeof compoundClassName == "string") {
+      clazz.@java.lang.Class::typeName = packageName + compoundClassName;
       clazz.@java.lang.Class::canonicalName = clazz.@java.lang.Class::typeName;
+      clazz.@java.lang.Class::simpleName = compoundClassName;
     } else {
-      clazz.@java.lang.Class::canonicalName = packageName + className.replace("$", ".");
+      clazz.@java.lang.Class::typeName =
+          packageName + @java.lang.Class::join(*)("$", compoundClassName);
+      clazz.@java.lang.Class::canonicalName =
+          packageName + @java.lang.Class::join(*)(".", compoundClassName);
+      clazz.@java.lang.Class::simpleName = compoundClassName[compoundClassName.length - 1];
     }
-    clazz.@java.lang.Class::simpleName = className;
+  }-*/;
+
+  /**
+   * Joins an array of strings with the speciefied separator.
+   */
+  private static native String join(String separator, JavaScriptObject compoundClassName) /*-{
+    var result = compoundClassName[0];
+    for (var i = 1; i < compoundClassName.length; i++) {
+      result += separator + compoundClassName[i];
+    }
+    return result;
   }-*/;
 
   /**

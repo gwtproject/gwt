@@ -25,6 +25,52 @@
     },
     {
       "key": {
+        "uuid": "505bd8e0_cebe578d",
+        "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-10-16T04:02:00Z",
+      "side": 1,
+      "message": "Missing the X prefix.",
+      "range": {
+        "startLine": 61,
+        "startChar": 61,
+        "endLine": 61,
+        "endChar": 81
+      },
+      "revId": "6d6947f1e5cdfd05e94c8c42b7b1e5697f0fc824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_79a4cf14",
+        "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-10-16T04:02:00Z",
+      "side": 1,
+      "message": "So, I\u0027m thinking about our app, and how, during deploys, we have a small window where the server will fall back to the legacy serialization policy.\n\nIs it excessive to also have a server-side system property, like gwt.rpc.XserializeFinalFields that the LegacySerializationPolicy could use?\n\nThen, given liberal use of IsSerializable, and no type name elision, and assuming no breaking API changes in the RPC types, then the legacy serialization policy could still parse input from older/newer clients.\n\nI could follow up with a separate patch if that seems palatable.",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 16
+      },
+      "revId": "6d6947f1e5cdfd05e94c8c42b7b1e5697f0fc824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "505bd8e0_2e8b6b2a",
         "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
         "patchSetId": 1

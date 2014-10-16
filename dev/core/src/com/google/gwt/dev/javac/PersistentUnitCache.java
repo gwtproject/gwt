@@ -24,6 +24,7 @@ import com.google.gwt.dev.util.StringInterningObjectInputStream;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.hash.Hashing;
 import com.google.gwt.thirdparty.guava.common.io.Files;
 import com.google.gwt.util.tools.Utility;
@@ -164,11 +165,9 @@ class PersistentUnitCache extends MemoryUnitCache {
     return new File[0];
   }
 
-  /**
-   * There is no significance in the return value, we just want to be able
-   * to tell if the purgeOldCacheFilesTask has completed.
-   */
-  private Future<Boolean> purgeTaskStatus;
+  private Future<?> unitMapLoadStatus;
+  private Future<?> purgeTaskStatus;
+  private Future<?> addUnitStatus;
   private AtomicBoolean purgeInProgress = new AtomicBoolean(false);
 
   private final Runnable purgeOldCacheFilesTask = new Runnable() {
@@ -219,11 +218,6 @@ class PersistentUnitCache extends MemoryUnitCache {
       backgroundService.shutdownNow();
     }
   };
-
-  /**
-   * Saved to be able to wait for UNIT_MAP_LOAD_TASK to complete.
-   */
-  private Future<Boolean> unitMapLoadStatus;
 
   private final Runnable unitMapLoadTask = new Runnable() {
     @Override
@@ -317,7 +311,7 @@ class PersistentUnitCache extends MemoryUnitCache {
      * {@link #add(CompilationUnit)} and {@link #find(String)} methods block if
      * invoked before this thread finishes.
      */
-    unitMapLoadStatus = backgroundService.submit(unitMapLoadTask, Boolean.TRUE);
+    unitMapLoadStatus = backgroundService.submit(unitMapLoadTask);
 
     FileOutputStream fstream = null;
     BufferedOutputStream bstream = null;
@@ -393,13 +387,16 @@ class PersistentUnitCache extends MemoryUnitCache {
        */
       synchronized (unitMap) {
         for (UnitCacheEntry unitCacheEntry : unitMap.values()) {
-          if (unitCacheEntry.getOrigin() == UnitOrigin.PERSISTENT) {
-            addImpl(unitCacheEntry);
+          if (unitCacheEntry.getOrigin() == UnitOrigin.ARCHIVE) {
+            // Units from GWTAR archives should not be kept in the persistent unit cache on disk
+            // because they are already being kept in their original GWTAR file location.
+            continue;
           }
+          addImpl(unitCacheEntry);
         }
       }
 
-      purgeTaskStatus = backgroundService.submit(purgeOldCacheFilesTask, Boolean.TRUE);
+      purgeTaskStatus = backgroundService.submit(purgeOldCacheFilesTask);
 
     } catch (ExecutionException ex) {
       throw new InternalCompilerException("Error purging cache", ex);
@@ -446,12 +443,7 @@ class PersistentUnitCache extends MemoryUnitCache {
     }
   }
 
-  /**
-   * For Unit testing - shutdown the persistent cache.
-   *
-   * @throws ExecutionException
-   * @throws InterruptedException
-   */
+  @VisibleForTesting
   void shutdown() throws InterruptedException, ExecutionException {
     try {
       Future<Runnable> future = backgroundService.submit(shutdownThreadTask, shutdownThreadTask);
@@ -460,6 +452,18 @@ class PersistentUnitCache extends MemoryUnitCache {
     } catch (RejectedExecutionException ex) {
       // background thread is not running - ignore
     }
+  }
+
+  @VisibleForTesting
+  synchronized void awaitAddUnitFinish() {
+    addUnitStatus = awaitFuture(addUnitStatus, "Interrupted waiting for unit addition finish.",
+        "Failure in unit add.");
+  }
+
+  @VisibleForTesting
+  synchronized void awaitUnitCacheMapLoad() {
+    unitMapLoadStatus = awaitFuture(unitMapLoadStatus,
+        "Interrupted waiting for unit cache map to load.", "Failure in unit cache map load.");
   }
 
   private static String computePersistentCacheFilenamePrefix() {
@@ -483,7 +487,7 @@ class PersistentUnitCache extends MemoryUnitCache {
 
   private void addImpl(final UnitCacheEntry entry) {
     try {
-      backgroundService.execute(new Runnable() {
+      addUnitStatus = backgroundService.submit(new Runnable() {
         @Override
         public void run() {
           try {
@@ -506,21 +510,25 @@ class PersistentUnitCache extends MemoryUnitCache {
     }
   }
 
-  private synchronized void awaitUnitCacheMapLoad() {
-    // wait on initial load of unit map to complete.
+  /**
+   * Waits for a future to finish.
+   * <p>
+   * Will use provided error messages as well as return a new value for the future that reflects
+   * it's completion status.
+   */
+  private Future<?> awaitFuture(Future<?> future, String interruptedMessage, String errorMessage) {
     try {
-      if (unitMapLoadStatus != null) {
-        unitMapLoadStatus.get();
-        // no need to check any more.
-        unitMapLoadStatus = null;
+      if (future != null) {
+        future.get();
+        return null;
       }
     } catch (InterruptedException e) {
-      throw new InternalCompilerException("Interrupted waiting for unit cache map to load.", e);
+      throw new InternalCompilerException(interruptedMessage, e);
     } catch (ExecutionException e) {
-      logger.log(TreeLogger.ERROR, "Failure in unit cache map load.", e);
-      // keep going
-      unitMapLoadStatus = null;
+      logger.log(TreeLogger.ERROR, errorMessage, e);
+      return null;
     }
+    return future;
   }
 
   private void closeCurrentCacheFile(File openFile, ObjectOutputStream stream) {

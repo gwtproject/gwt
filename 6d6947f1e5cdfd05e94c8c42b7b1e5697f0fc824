@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "505bd8e0_0e222f41",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/SerializableTypeOracleBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-16T05:47:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "505bd8e0_2e2feba9",
+      "range": {
+        "startLine": 573,
+        "startChar": 34,
+        "endLine": 573,
+        "endChar": 46
+      },
+      "revId": "6d6947f1e5cdfd05e94c8c42b7b1e5697f0fc824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "505bd8e0_cebe578d",
         "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicy.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2014-10-16T04:02:00Z",
       "side": 1,
       "message": "Missing the X prefix.",
+      "range": {
+        "startLine": 61,
+        "startChar": 61,
+        "endLine": 61,
+        "endChar": 81
+      },
+      "revId": "6d6947f1e5cdfd05e94c8c42b7b1e5697f0fc824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0e42853_6701e626",
+        "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-16T05:47:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "505bd8e0_cebe578d",
       "range": {
         "startLine": 61,
         "startChar": 61,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d0e42853_a7212ecb",
+        "filename": "user/src/com/google/gwt/user/server/rpc/SerializationPolicy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-16T05:47:19Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with LegacySerializationPolicy but regardless let\u0027s discuss this separately.",
+      "parentUuid": "505bd8e0_79a4cf14",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 16
+      },
+      "revId": "6d6947f1e5cdfd05e94c8c42b7b1e5697f0fc824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "505bd8e0_2e8b6b2a",
         "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "5072f858_07fc4a1a",
+        "filename": "user/src/com/google/gwt/user/server/rpc/impl/SerializabilityUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-16T05:47:19Z",
+      "side": 1,
+      "message": "Every calls were negating isFinal call so it was making harder to read for me. I negated here so I thought it\u0027ll read better e.g.\n\n  isNotStaticOrTransient(field) \u0026\u0026 isNotFinal(field)\n\nI forget saving one of the files that is why there was a double negation.\n\nIf you prefer the other way (i.e. all callers do !isFinal()), I can revert back to that.",
+      "parentUuid": "505bd8e0_2e8b6b2a",
+      "range": {
+        "startLine": 495,
+        "startChar": 17,
+        "endLine": 495,
+        "endChar": 27
+      },
+      "revId": "6d6947f1e5cdfd05e94c8c42b7b1e5697f0fc824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "505bd8e0_ee3233e7",
         "filename": "user/test/com/google/gwt/user/client/rpc/FinalFieldsFalseTest.java",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2014-10-15T21:50:30Z",
       "side": 1,
       "message": "Add \"X\"",
+      "range": {
+        "startLine": 23,
+        "startChar": 37,
+        "endLine": 23,
+        "endChar": 57
+      },
+      "revId": "6d6947f1e5cdfd05e94c8c42b7b1e5697f0fc824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5072f858_07f1aa2a",
+        "filename": "user/test/com/google/gwt/user/client/rpc/FinalFieldsFalseTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-16T05:47:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "505bd8e0_ee3233e7",
       "range": {
         "startLine": 23,
         "startChar": 37,

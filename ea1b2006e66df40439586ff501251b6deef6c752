@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_f0fbf622",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "@if(eval(\"com.foo.BAR\")) {\n\n}\n@elseif(eval(\"com.foo.bar()\")) {\n\n}",
+      "parentUuid": "9069d076_6dd091d7",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_4dfa6d57",
         "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "This pattern matches expressions with unbalanced quotes: eval(\"foo\u0027)\n\nI think you really want:\n\n\"^eval\\\\(([\\\"\u0027])([^\\\"\u0027]*)\\\\1\\\\)$\"\n\nand then to grab capture group 2 in line 86 below. In fact, I\u0027d make the capture group that holds the expression a constant and put it up here with this pattern so that the two are clearly tied together.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_b0057e80",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "I assume that at this point the quotes are balanced because otherwise the parser would have thrown an error and this code wouldn\u0027t have been called. \nIt\u0027s the same with spaces, user can use spaces when he writes the gss (@if ( eval ( \"com.foo.bar\"  ) ) {) but the parser strip them out.\n\nBut your comment makes me think that the user could use double quote inside a simple quoted string if he wants to pass string parameters to the static function:\n\n  @if (eval(\u0027com.foo.bar(\"myString\")\u0027)) {\n\nand it\u0027s not supported by the current regex",
+      "parentUuid": "9069d076_4dfa6d57",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_50320266",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "The main reason was to get the parent (CssConditionalBlockNode) of the conditionalRule. But now you make me think that we can use the getParent() method to get it.\n\nI will change the code and test.",
+      "parentUuid": "d06fc874_0cc317c2",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_0df47564",
         "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
         "patchSetId": 12
@@ -64,6 +118,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "This is unfortunate. I\u0027m going to publish a newer version of the code soon, so maybe we can fix it at the source and delete this.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_102c8a03",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "It would be really nice !! Once done, I will adpat this code to use the visitor in order to replace the node.\n\nI did several tricks like this in my implementation because I assumed that we cannot change anything in closure-stylesheet",
+      "parentUuid": "9069d076_0df47564",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_90e5da65",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "Does the documentation below sound better for you ? \n\nVisitor that converts the ast in a String chain. This string will contain the needed java code that will be used to build the final css at runtime.",
+      "parentUuid": "d06fc874_acea0b33",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06a0c65_b0f4a0e9",
         "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
         "patchSetId": 12
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_f0c9b6e6",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "ok I will fix that, use constant erverywhere in order to be consistant and rename BRACKET to PARENTHESIS",
+      "parentUuid": "f06a0c65_b0f4a0e9",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d06fc874_0cda37a0",
         "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
         "patchSetId": 12
@@ -115,6 +223,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "Can you add some documentation saying why this is necessary? I found the reason in the GssResource guide but it would be nice to have it in the code, too.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_90ce3aec",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "In fact I\u0027m wondering If it\u0027s not better to write a pass that will remove the external at-rules once when don\u0027t need them anymore or doing that when we collect them.",
+      "parentUuid": "d06fc874_0cda37a0",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -184,6 +310,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_30ae6ef5",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "Good to know. It something to keep in mind for the future so I will add your comment in the code.\n\nFor the time being I think we are safe (but I will double check). We flush the \"internal\" string builder each time we have to insert java code :\n- when we meet a conditional node and I\u0027m right these kind of nodes can only contains entire css blocks\n- when we evaluate some special CssValueNode",
+      "parentUuid": "9069d076_0d0b15c3",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d06fc874_4ca7cf1a",
         "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
         "patchSetId": 12
@@ -230,6 +374,23 @@
     },
     {
       "key": {
+        "uuid": "9069d076_508e828c",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "@flan Could you explain me the role of this method ? \n\nIt\u0027s only for test purpose ? If so, I don\u0027t have to implement it in our case because it\u0027s difficult to share code between this method and getCallResultNodes. Could you confirm that I\u0027m not missing something ?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06a0c65_7035c8f9",
         "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
         "patchSetId": 12
@@ -241,6 +402,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "Why do you need to go two levels up to get the source code location? Are we not copying the location appropriately to the intermediate nodes?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_f04c56bf",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "I wanted to go back to the CssCustomFunctionNode\n\nfunctionToEval.getParent() returns a CssFunctionArgumentsNode and the sourceCodeLocation on this object is null.\n\nBut maybe take the source code location of the argument is enough",
+      "parentUuid": "f06a0c65_7035c8f9",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -281,6 +460,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "When you say \"does not deal\", you mean \"does not eliminate\", right?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_b046de99",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "yes you\u0027re right",
+      "parentUuid": "f06a0c65_302f50aa",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -333,6 +530,30 @@
     },
     {
       "key": {
+        "uuid": "9069d076_503c4208",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "GWT is still Java 6 compatible even if people that will enable GSS will have to use Java 7 as closure-stylesheet needs java 7.\n\nWill change that by using Guava",
+      "parentUuid": "f06a0c65_9074fcc2",
+      "range": {
+        "startLine": 49,
+        "startChar": 18,
+        "endLine": 49,
+        "endChar": 41
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_cd417dd7",
         "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
         "patchSetId": 12
@@ -344,6 +565,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "What\u0027s the condition that this is protecting against? I can\u0027t quite figure it out.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_5b422338",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "When we replace a CssConditionalBlockNode by another (line 121) we ask to the visitor to visit this new node in order to visit its children that can contains other CssConditionalBlockNode. But we don\u0027t need to visit the new node again, only the children should be visited.",
+      "parentUuid": "9069d076_cd417dd7",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -367,6 +606,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_fb32f7e6",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "Honestly, I don\u0027t remember why I choose composition instead of inheritance here... I will change the code to use inheritance but I think that even if we use inheritance and that the EliminateConditionalNodes pass visits more nodes in the future, we will probably have to adapt this class too.",
+      "parentUuid": "f06a0c65_507f649d",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_ad40c9cf",
         "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
         "patchSetId": 12
@@ -384,6 +641,24 @@
     },
     {
       "key": {
+        "uuid": "f06a0c65_93f5e697",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "a node that can be evaluated at compile time is removed if it is evaluated to false. If it is evaluated to true, the following elseif and/or else nodes are removed no matters if these node need to be evaluated at runtime or not.\n\nThey are some examples in the tests (ExtendedEliminateConditionalNodesTest)",
+      "parentUuid": "9069d076_ad40c9cf",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_2d4db903",
         "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
         "patchSetId": 12
@@ -395,6 +670,30 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "I\u0027m not sure why this is a constructor parameter. It seems that you\u0027d want to use it more as a parameter to getExternalClassNames() which would then take a set and return the subset that are external. I think this would be a cleaner design.",
+      "range": {
+        "startLine": 53,
+        "startChar": 18,
+        "endLine": 53,
+        "endChar": 30
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_7b3fe7ac",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "Good point !",
+      "parentUuid": "9069d076_2d4db903",
       "range": {
         "startLine": 53,
         "startChar": 18,
@@ -470,6 +769,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_1b3cabb5",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "Good point I will adapt the javadoc",
+      "parentUuid": "f06a0c65_d0b834f3",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_6d817188",
         "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
         "patchSetId": 12
@@ -504,6 +821,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_9bde5b1e",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "asserts are used in other class of the sdk. I know @gotkug has introduced GwtPreconditions class that I think it\u0027s better to use. But I think this check is useless and can be simply remove",
+      "parentUuid": "9069d076_0d7eb507",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d06fc874_8c414786",
         "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
         "patchSetId": 12
@@ -515,6 +850,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "It appears that the imageUrl will be evaluated at runtime. Is that right?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_bbe31fe7",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "yes you\u0027re right. The image and its properties will be accessible via a java method at runtime.",
+      "parentUuid": "d06fc874_8c414786",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -538,6 +891,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_5bc9c361",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "will do that",
+      "parentUuid": "f06a0c65_7091485a",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06a0c65_90107c43",
         "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
         "patchSetId": 12
@@ -549,6 +920,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "Here you are doing things a bit differently than \"standard\" GSS. I\u0027m not sure that it makes much difference, but I think it\u0027s worth discussing.\n\nIn \"standard\" GSS, we first define all of the permutations that we want _then_ we generate GSS output for each. When we generate the output, we make certain conditions true, like: IS_IE6, IS_IE8, IS_IE7_OR_HIGHER, and RTL_LANG. We *don\u0027t* allow different stylesheets for different languages, just different script directions.\n\nHere you are inspecting the GSS to decide which permutations you need. What happens if the GSS permutations don\u0027t match the Java permutations?\n\nI\u0027m not saying that this is a bad approach, but it\u0027s not the one we\u0027ve taken up to now, so I\u0027d like some more rationale on why this is the best path for GWT.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_dbfb738c",
+        "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "It\u0027s the same process, GWT compiles each permutation separately and will run the generator for each permutations. The goal of this visitor is to collect the different permutations used in the css and give this information to the generator. So that the generator rerun all the logic for each values of each permutation axis because it might produce a different output.\n\nFor example, if we discover that the developer tests on the user.agent permutation in his css file, the generator will regenerate the css for each user.agent it needs to support.\nIf the user doesn\u0027t test on any permutation axis, the generator will generate the css only one time.",
+      "parentUuid": "f06a0c65_90107c43",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -572,6 +961,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_3be72fe9",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "This visitor does the same that the BiDiFlipper of closure-stylesheet. Except that it records if at least one node was flipped. So I know that the css is locale sensis\n\nWhy ? At the end of this process, the compiled css will be wrapped in a Java method (generated by the GssResourceGenerator) that GWT will use in order to get the css to inject into the dom. This visitor will tell me if the css is locale sensitive or not and depending of this information the implementation of the Java method will be different. This logic is in the GssResourceGenerator line 530",
+      "parentUuid": "d06fc874_8fd85984",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06a0c65_10256c9f",
         "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
         "patchSetId": 12
@@ -583,6 +990,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "Why static?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_9bf5fb97",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "oopps, it should not be static. Good catch",
+      "parentUuid": "f06a0c65_10256c9f",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -606,6 +1031,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_bbfa3f85",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "will change that using inheritance",
+      "parentUuid": "9069d076_2d2939f4",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_4db90d50",
         "filename": "user/src/com/google/gwt/resources/gss/RenamingSubstitutionMap.java",
         "patchSetId": 12
@@ -623,6 +1066,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_bbb1dfda",
+        "filename": "user/src/com/google/gwt/resources/gss/RenamingSubstitutionMap.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "I will try to explain that clearly. In GWT, every css file is linked to a Java interface that contains the methods that allow the developer to access to the final obfuscated (or not) style class names programmatically.\n\n   .foo {...}\n   .bar{...}\n\n   interface MyStyle extends CssResource {\n     String foo();\n     String bar();\n   }\n \nThe goal of the GssResourceGenerator is to compile the GSS file and to create the implementation of this interface.\nNow you have to know that if two different css files (linked to two different interfaces) define the same style class, the obfuscated name will be different (each css file has its own obfuscation scope). But sometimes, you want to create css selectors in your css file that use style classes from another css file. And for doing that you have to prefix these style classes with a prefix.\n\nEx:\nfoo.css\n   .selected{...}\nFoo.java\n    interface Foo extends CssResource {\n       String selected();\n    }\n\nstyle.css\n   .myDiv { ...}\n   .Foo-selected .myDiv {...}\nStyle.java\n    @Import(Foo.class)\n    interface Style extends CssResource {\n       String myDiv();\n    }\n\nYou can find documentation of this old feature there: http://www.gwtproject.org/doc/latest/DevGuideClientBundle.html#Imported_scopes",
+      "parentUuid": "9069d076_4db90d50",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06a0c65_50420438",
         "filename": "user/src/com/google/gwt/resources/gss/RenamingSubstitutionMap.java",
         "patchSetId": 12
@@ -634,6 +1095,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "What does this mean? Where is it listing anything?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_1bc10b28",
+        "filename": "user/src/com/google/gwt/resources/gss/RenamingSubstitutionMap.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "Style classes are renamed if they are somehow linked to a Java method in a CssResource interface. If not it is because either it\u0027s an external style class or the developer forgot to define the java method associated to the style class. This last case is not permitted and the GssResourceGenerator will throw an exception afterwards but for that it has to know which style classes weren\u0027t renamed.",
+      "parentUuid": "f06a0c65_50420438",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -674,6 +1153,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_fb8e770d",
+        "filename": "user/src/com/google/gwt/resources/gss/ResourceUrlFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "In GWT you can access  at runtime via a Java interface to data of your images (or any other resources) bundled in your application. \n\nThe goal of this function is to be able to use in your GSS file the URL by which a resource can be accessed at runtime.\n\n   interface ResourceBundle extends ClientBundle {\n      ImageResource backgroundImage();\n   }\n\n .gss file:\n   body { \n     background: black resourceUrl(backgroundImage\u0027) no-repeat fixed center; \n   }",
+      "parentUuid": "9069d076_cdebbd3a",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d06fc874_4f0a6149",
         "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
         "patchSetId": 12
@@ -708,6 +1205,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_9b83bbe4",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "For a smooth transition, I\u0027ve implemented a converter that will convert the old gwt-css file to a valid GSS file that the generator can compile. This conversion is done in-memory during the compilation (if the generator find a .css file, it tries to convert it first). The problem is that the old css parser and compiler were more lenient that what we are implementing now. So if the user is not able to fix his css files (third party library  for instance), we\u0027ve introduced a lenient mode that will try to resolve some errors instead of throwing an exception.\n\nThis converter and thisleninent will be removed in one of the next release of GWT.",
+      "parentUuid": "d06fc874_6f07253e",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_8de5c565",
         "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
         "patchSetId": 12
@@ -719,6 +1234,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "How will this even work in this version of GWT?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_7b9b674d",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "The def node will be treated as if it was defined outside the conditional node.",
+      "parentUuid": "9069d076_8de5c565",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -742,6 +1275,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_db705382",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "idem",
+      "parentUuid": "d06fc874_0f046936",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06a0c65_d0d4b401",
         "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
         "patchSetId": 12
@@ -753,6 +1304,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "This pushes a new node for all conditional rules, not just runtime rules. You might want to change that as:\n\n@if (SOME_CONDITION) {\n  @def COLOR red;\n}\n@else {\n  @def COLOR blue;\n}\n\nis totally acceptable.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_bb88ff00",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "Yes it is but when this pass is executed, the compile time conditional nodes have already been evaluated and removed from the ast.",
+      "parentUuid": "f06a0c65_d0d4b401",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -787,6 +1356,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "Is this supposed to be evaluated at runtime? Or is this a compile-time only thing?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_fb75176f",
+        "filename": "user/src/com/google/gwt/resources/gss/ValueFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "runtime.",
+      "parentUuid": "9069d076_0dda35a0",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -873,6 +1460,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_9b7adb5e",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssRuntimeConditionalRuleNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "Good catch... I think I\u0027ve just followed what is done in CssConditionalRuleNode",
+      "parentUuid": "9069d076_2dd7f976",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_ada1a908",
         "filename": "user/src/com/google/gwt/resources/gss/ast/CssRuntimeConditionalRuleNode.java",
         "patchSetId": 12
@@ -884,6 +1489,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "Isn\u0027t this obvious? Are there better docs for this method?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_bb7f9f4d",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssRuntimeConditionalRuleNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "Same here this javadoc comes from the CssConditionalRuleNode class",
+      "parentUuid": "9069d076_ada1a908",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -907,6 +1530,24 @@
     },
     {
       "key": {
+        "uuid": "9069d076_5b6543b8",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssRuntimeConditionalRuleNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "idem. I will change that",
+      "parentUuid": "d06fc874_8f3db9e8",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d06fc874_af799dbb",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 12
@@ -918,6 +1559,24 @@
       "writtenOn": "2014-10-16T10:42:00Z",
       "side": 1,
       "message": "Why BASE32? CSS class names can be mixed case just fine.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_7b6287b3",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-16T21:04:17Z",
+      "side": 1,
+      "message": "This is old code I take from the old CssResourceGenerator. I will have to change that because we can have some problem with the new incremental compilation.\n\nBut indeed, you right !",
+      "parentUuid": "d06fc874_af799dbb",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -2,6 +2,928 @@
   "comments": [
     {
       "key": {
+        "uuid": "9069d076_6dd091d7",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "What does the corresponding GSS look like?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_4dfa6d57",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "This pattern matches expressions with unbalanced quotes: eval(\"foo\u0027)\n\nI think you really want:\n\n\"^eval\\\\(([\\\"\u0027])([^\\\"\u0027]*)\\\\1\\\\)$\"\n\nand then to grab capture group 2 in line 86 below. In fact, I\u0027d make the capture group that holds the expression a constant and put it up here with this pattern so that the two are clearly tied together.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_0cc317c2",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Why can\u0027t you use enterConditionalRule and leaveConditionalRule?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_0df47564",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "This is unfortunate. I\u0027m going to publish a newer version of the code soon, so maybe we can fix it at the source and delete this.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_acea0b33",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "I would like some more documentation that says what the format of the string is. To me (not being familiar with GWT), it\u0027s unclear that the string is meant to be evaluated from this description.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_b0f4a0e9",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "You have constants for LEFT_BRACKET and RIGHT_BRACKET, but you don\u0027t use them everywhere. (See line 76, for example.) I don\u0027t care one way or the other, but you should at least be consistent. Likewise for other strings in this class. Again, if you want to inline them all, I\u0027d be OK with that.\n\nAlso, to be pedantic, these are \"parentheses\" in US English:\n\nhttp://www.oxforddictionaries.com/us/words/parentheses-and-brackets-american",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_0cda37a0",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Can you add some documentation saying why this is necessary? I found the reason in the GssResource guide but it would be nice to have it in the code, too.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_101b2c95",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Why does this not have a constant?",
+      "range": {
+        "startLine": 129,
+        "startChar": 33,
+        "endLine": 129,
+        "endChar": 40
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_3018b095",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Ditto.",
+      "range": {
+        "startLine": 143,
+        "startChar": 33,
+        "endLine": 143,
+        "endChar": 38
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_0d0b15c3",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Note that you have to be careful where you do this. Internally, the compact printer sometimes deletes characters from the end of the stringBuilder to save space. I believe that you\u0027ll be safe because, if there\u0027s nothing in the buffer, there is nothing to delete, but you may have some unnecessary characters in the output. You may want to call that out explicitly in the code.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_4ca7cf1a",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "creates",
+      "range": {
+        "startLine": 29,
+        "startChar": 21,
+        "endLine": 29,
+        "endChar": 27
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_ed5fa1ba",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Java",
+      "range": {
+        "startLine": 30,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 30
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_7035c8f9",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Why do you need to go two levels up to get the source code location? Are we not copying the location appropriately to the intermediate nodes?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_0cb1d755",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "I don\u0027t know about GWT style, but for the Google style guide we do:\n\nSome first paragraph.\n\n\u003cp\u003eSome second paragraph.",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 6
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_302f50aa",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "When you say \"does not deal\", you mean \"does not eliminate\", right?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_d06a74df",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "I prefer to put \"implements\" and \"extends\" on the same same line as the class name extended or implemented. (Makes it easy to search for \"implements Foo\".)",
+      "range": {
+        "startLine": 41,
+        "startChar": 74,
+        "endLine": 41,
+        "endChar": 84
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_9074fcc2",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Can you use Java7 fanciness and just do HashSet\u003c\u003e? Or Guava\u0027s Sets.newHashSet()?",
+      "range": {
+        "startLine": 49,
+        "startChar": 18,
+        "endLine": 49,
+        "endChar": 41
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_cd417dd7",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "What\u0027s the condition that this is protecting against? I can\u0027t quite figure it out.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_507f649d",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "You may want to mention in the code that this is slightly fragile. If the EliminateConditionalNodes pass ever changes to require visiting more nodes, this class will have to change as well.\n\nHave you considered extending EliminateConditionalNodes instead?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_ad40c9cf",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "How does this work with a chain of @ifs where some can be evaluated at compile time and some need to be evaluated at runtime? Can you give an example somewhere in this class?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_2d4db903",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "I\u0027m not sure why this is a constructor parameter. It seems that you\u0027d want to use it more as a parameter to getExternalClassNames() which would then take a set and return the subset that are external. I think this would be a cleaner design.",
+      "range": {
+        "startLine": 53,
+        "startChar": 18,
+        "endLine": 53,
+        "endChar": 30
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_ac6f6b1b",
+        "filename": "user/src/com/google/gwt/resources/gss/GwtGssFunctionMapProvider.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "gssFunctionMap",
+      "range": {
+        "startLine": 37,
+        "startChar": 29,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_10600cef",
+        "filename": "user/src/com/google/gwt/resources/gss/GwtGssFunctionMapProvider.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "gwt-specific functions",
+      "range": {
+        "startLine": 40,
+        "startChar": 36,
+        "endLine": 40,
+        "endChar": 57
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_d0b834f3",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "This is some pretty deep magic that could benefit from a better class description. I think, at the very least, a before and after example would help. I think that it would also be good to explain whether order matters, what happens if you override one of the inserted properties, etc. etc. Perhaps this is obvious to GWT users, but it\u0027s not obvious to me.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_6d817188",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "We usually stick this at the bottom.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_0d7eb507",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Does GWT allow asserts in the codebase?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_8c414786",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "It appears that the imageUrl will be evaluated at runtime. Is that right?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_7091485a",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Personally, I prefer classes like this to be organized as:\n\ntopLevelMethod\nfirstLevelMethod\nsecondLevelMethod1\nsecondLevelMethod2\n\netc. Here you\u0027ve got createSprite, which is arguably the most important method here, buried in the middle of other methods. Please consider reorganizing things.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_90107c43",
+        "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Here you are doing things a bit differently than \"standard\" GSS. I\u0027m not sure that it makes much difference, but I think it\u0027s worth discussing.\n\nIn \"standard\" GSS, we first define all of the permutations that we want _then_ we generate GSS output for each. When we generate the output, we make certain conditions true, like: IS_IE6, IS_IE8, IS_IE7_OR_HIGHER, and RTL_LANG. We *don\u0027t* allow different stylesheets for different languages, just different script directions.\n\nHere you are inspecting the GSS to decide which permutations you need. What happens if the GSS permutations don\u0027t match the Java permutations?\n\nI\u0027m not saying that this is a bad approach, but it\u0027s not the one we\u0027ve taken up to now, so I\u0027d like some more rationale on why this is the best path for GWT.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_8fd85984",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the purpose of this pass is. Can you explain?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_10256c9f",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Why static?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_2d2939f4",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Again, this is fragile because you\u0027re only calling the delegate sometimes.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_4db90d50",
+        "filename": "user/src/com/google/gwt/resources/gss/RenamingSubstitutionMap.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "What does \"eventual prefix\" mean?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_50420438",
+        "filename": "user/src/com/google/gwt/resources/gss/RenamingSubstitutionMap.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "What does this mean? Where is it listing anything?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_b02ca088",
+        "filename": "user/src/com/google/gwt/resources/gss/RenamingSubstitutionMap.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Documentation would be helpful.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_cdebbd3a",
+        "filename": "user/src/com/google/gwt/resources/gss/ResourceUrlFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Can you give an example?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_4f0a6149",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "This is great. I\u0027m glad you thought of doing the validation. :-)",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_6f07253e",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Documentation. What does lenient mean?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_8de5c565",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "How will this even work in this version of GWT?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_0f046936",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Again, how does this even work?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_d0d4b401",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "This pushes a new node for all conditional rules, not just runtime rules. You might want to change that as:\n\n@if (SOME_CONDITION) {\n  @def COLOR red;\n}\n@else {\n  @def COLOR blue;\n}\n\nis totally acceptable.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_4de02d52",
+        "filename": "user/src/com/google/gwt/resources/gss/ValidateRuntimeConditionalNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "You really don\u0027t need a stack. A counter would be fine.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_0dda35a0",
+        "filename": "user/src/com/google/gwt/resources/gss/ValueFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Is this supposed to be evaluated at runtime? Or is this a compile-time only thing?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_4f110173",
+        "filename": "user/src/com/google/gwt/resources/gss/ValueFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "takes",
+      "range": {
+        "startLine": 40,
+        "startChar": 60,
+        "endLine": 40,
+        "endChar": 64
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06a0c65_f0d9b838",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssRuntimeConditionalRuleNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Represents",
+      "range": {
+        "startLine": 26,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 12
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_8d9ce5cf",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssRuntimeConditionalRuleNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Docs?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_2dd7f976",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssRuntimeConditionalRuleNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Why is it OK for the condition to be null?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9069d076_ada1a908",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssRuntimeConditionalRuleNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Isn\u0027t this obvious? Are there better docs for this method?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_8f3db9e8",
+        "filename": "user/src/com/google/gwt/resources/gss/ast/CssRuntimeConditionalRuleNode.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Why is this package-private? Should it be plain private? Or should it be public?",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_af799dbb",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-16T10:42:00Z",
+      "side": 1,
+      "message": "Why BASE32? CSS class names can be mixed case just fine.",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "505bd8e0_eb11c5f7",
         "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
         "patchSetId": 12

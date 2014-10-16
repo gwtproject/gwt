@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d0e42853_64d0c405",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6945
+      },
+      "writtenOn": "2014-10-16T03:40:02Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "f06a0c65_4d84ad99",
+      "revId": "45d2305664434f8175ffbb21a96e6adca604b019",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06a0c65_ed65613d",
         "filename": "user/src/com/google/web/bindery/requestfactory/apt/TypeSimplifier.java",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2014-10-16T03:21:31Z",
       "side": 1,
       "message": "Can you add a comment with a link to the JDK bug?",
+      "revId": "45d2305664434f8175ffbb21a96e6adca604b019",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0e42853_e4e334e6",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/TypeSimplifier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 6945
+      },
+      "writtenOn": "2014-10-16T03:40:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f06a0c65_ed65613d",
       "revId": "45d2305664434f8175ffbb21a96e6adca604b019",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

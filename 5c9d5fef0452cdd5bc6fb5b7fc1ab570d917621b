@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b064149b_7d635bfe",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractNavigableMap.java",
+        "patchSetId": 30
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-16T00:06:13Z",
+      "side": 1,
+      "message": "This will cause a cast exception. I look at the JRE and it looks like this shouldn\u0027t happen unless K is not comparable. Please update the tests so that this issue is covered.",
+      "revId": "5c9d5fef0452cdd5bc6fb5b7fc1ab570d917621b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b064149b_bdb1d3da",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 30
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-16T00:06:13Z",
+      "side": 1,
+      "message": "What do you think about replacing whole this block with following?\n\n _assertEquals(expected.values(), actual.values());\n\n // TODO: equals is broken for collection returned by values() for submaps of TreeMap\n // assertEquals(expected.values(), actual.values());",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 54
+      },
+      "revId": "5c9d5fef0452cdd5bc6fb5b7fc1ab570d917621b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_4e6fc76b",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 30
+      },
+      "lineNbr": 2666,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-16T00:06:13Z",
+      "side": 1,
+      "message": "Can you replace the comment with:\n\n  // JDK \u003c 7 does not conform to the specification if the map is empty",
+      "range": {
+        "startLine": 2665,
+        "startChar": 0,
+        "endLine": 2666,
+        "endChar": 38
+      },
+      "revId": "5c9d5fef0452cdd5bc6fb5b7fc1ab570d917621b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "505bd8e0_2e760b46",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 30
+      },
+      "lineNbr": 2758,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-16T00:06:13Z",
+      "side": 1,
+      "message": "Pls rename to testSize_??? (and for similar others below)",
+      "range": {
+        "startLine": 2758,
+        "startChar": 14,
+        "endLine": 2758,
+        "endChar": 23
+      },
+      "revId": "5c9d5fef0452cdd5bc6fb5b7fc1ab570d917621b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -557,7 +557,7 @@ public class JdtCompiler {
        * CSB.doBuildFrom -> CompileMoreLater.addValidUnit
        *    -> JdtCompiler.addCompiledUnit
        *    -> addPackages()
-       */
+F       */
       if (packages.contains(slashedPackageName)) {
         return true;
       }

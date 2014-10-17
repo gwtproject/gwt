@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "70ca9cdf_46867238",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-17T13:11:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "505bd8e0_341f3ef8",
+      "range": {
+        "startLine": 117,
+        "startChar": 1,
+        "endLine": 121,
+        "endChar": 42
+      },
+      "revId": "c576ba2568dcb50ae83b3009eb6bc80f11af5d44",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "505bd8e0_141562ad",
         "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
         "patchSetId": 32
@@ -72,6 +96,24 @@
       "side": 1,
       "message": "Here is an example:\n\n    class Buffer implements Comparator\u003cCharSequence\u003e { ... }\n\n    Map\u003cString, V\u003e stringMap \u003d createMap(nullComparator);\n    stringMap.put(\"something\", \"here\");\n\n    // I think following doesn\u0027t throw exception in JRE\n    stringMap.containsKey(new Buffer());",
       "parentUuid": "9069d076_9b109b43",
+      "revId": "c576ba2568dcb50ae83b3009eb6bc80f11af5d44",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70ca9cdf_662c4e05",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-17T13:11:45Z",
+      "side": 1,
+      "message": "Good catch. Spotted a bug in the original implementation.",
+      "parentUuid": "505bd8e0_141562ad",
       "revId": "c576ba2568dcb50ae83b3009eb6bc80f11af5d44",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

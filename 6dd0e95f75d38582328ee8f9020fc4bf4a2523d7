@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "708ffcad_f2991088",
+        "filename": "user/src/com/google/gwt/logging/server/RemoteLoggingServiceUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-17T19:27:01Z",
+      "side": 1,
+      "message": "Let\u0027s keep catching the exception so that we will not leak any exception other than RemoteLoggingException.",
+      "revId": "6dd0e95f75d38582328ee8f9020fc4bf4a2523d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f06a0c65_90d87c84",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/TypeSimplifier.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-17T22:40:11Z",
+      "side": 1,
+      "message": "Looks like your keyboard eat a couple consonants here ;-)",
+      "range": {
+        "startLine": 106,
+        "startChar": 40,
+        "endLine": 106,
+        "endChar": 46
+      },
+      "revId": "f49a5995af5ebe5572b1d16240fd9f0bd01c020f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

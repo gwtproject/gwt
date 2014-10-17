@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "70ca9cdf_a91c5991",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-17T14:44:52Z",
+      "side": 1,
+      "message": "The idea was to be consistent with the way we handle boolean attribute in this class (like with the flipRtl attribute).\n\nI don\u0027t think that is the role of this class to decide what is the default value if the attribute is not set. I think it\u0027s the role of ImplicitCssResource to do that.",
+      "parentUuid": "f0adacfd_55f1fe73",
+      "range": {
+        "startLine": 449,
+        "startChar": 5,
+        "endLine": 449,
+        "endChar": 15
+      },
+      "revId": "e7888b72f70c81f4319259e18208cdc672e2357b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "502d9828_f511b8f7",
         "filename": "user/src/com/google/gwt/uibinder/rebind/model/ImplicitClientBundle.java",
         "patchSetId": 3

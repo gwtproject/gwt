@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "505bd8e0_f1d45301",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-17T03:06:18Z",
+      "side": 1,
+      "message": "I meant to use Guava\u0027s version in\ncom.google.common.base.Objects",
+      "parentUuid": "5072f858_209847db",
+      "revId": "147cff050155d4a03a3b18da26b6d280045b24e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_4a7fb39d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
         "patchSetId": 1

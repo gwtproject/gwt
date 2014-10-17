@@ -22,6 +22,30 @@
       "revId": "f49a5995af5ebe5572b1d16240fd9f0bd01c020f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06988a3_ff46379a",
+        "filename": "user/src/com/google/web/bindery/requestfactory/apt/TypeSimplifier.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 6945
+      },
+      "writtenOn": "2014-10-17T22:52:01Z",
+      "side": 1,
+      "message": "Oops, fixed.",
+      "parentUuid": "f06a0c65_90d87c84",
+      "range": {
+        "startLine": 106,
+        "startChar": 40,
+        "endLine": 106,
+        "endChar": 46
+      },
+      "revId": "f49a5995af5ebe5572b1d16240fd9f0bd01c020f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

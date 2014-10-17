@@ -57,6 +57,24 @@
       "revId": "c576ba2568dcb50ae83b3009eb6bc80f11af5d44",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5072f858_406f9399",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-17T00:13:51Z",
+      "side": 1,
+      "message": "Here is an example:\n\n    class Buffer implements Comparator\u003cCharSequence\u003e { ... }\n\n    Map\u003cString, V\u003e stringMap \u003d createMap(nullComparator);\n    stringMap.put(\"something\", \"here\");\n\n    // I think following doesn\u0027t throw exception in JRE\n    stringMap.containsKey(new Buffer());",
+      "parentUuid": "9069d076_9b109b43",
+      "revId": "c576ba2568dcb50ae83b3009eb6bc80f11af5d44",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

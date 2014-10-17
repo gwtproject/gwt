@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f0adacfd_d5b16eda",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-17T14:02:20Z",
+      "side": 1,
+      "message": "changed to guava",
+      "parentUuid": "505bd8e0_f1d45301",
+      "revId": "147cff050155d4a03a3b18da26b6d280045b24e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_4a7fb39d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
         "patchSetId": 1
@@ -123,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "f0adacfd_55be1ea7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumOrdinalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-17T14:02:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5072f858_a08bd779",
+      "revId": "147cff050155d4a03a3b18da26b6d280045b24e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5072f858_4088f37c",
         "filename": "user/src/com/google/gwt/core/client/JavaScriptException.java",
         "patchSetId": 1
@@ -134,6 +170,24 @@
       "writtenOn": "2014-10-17T01:46:34Z",
       "side": 1,
       "message": "I\u0027m sending patch for proper fix.",
+      "revId": "147cff050155d4a03a3b18da26b6d280045b24e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0adacfd_958ec60c",
+        "filename": "user/src/com/google/gwt/core/client/JavaScriptException.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-17T14:02:20Z",
+      "side": 1,
+      "message": "reverted",
+      "parentUuid": "5072f858_4088f37c",
       "revId": "147cff050155d4a03a3b18da26b6d280045b24e8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "f0adacfd_55f1fe73",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-17T14:35:32Z",
+      "side": 1,
+      "message": "then lets change this to be:\n\nBoolean gssValue \u003d elem.consumeBooleanConstantAttribute(GSS_ATTRIBUTE);\nboolean gss \u003d gssValue \u003d\u003d null: false : gssValue.booleanValue();\n\nThis way we can treat it as a boolean throughout the whole thing.",
+      "parentUuid": "9069d076_ade3e9e6",
+      "range": {
+        "startLine": 449,
+        "startChar": 5,
+        "endLine": 449,
+        "endChar": 15
+      },
+      "revId": "e7888b72f70c81f4319259e18208cdc672e2357b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "502d9828_f511b8f7",
         "filename": "user/src/com/google/gwt/uibinder/rebind/model/ImplicitClientBundle.java",
         "patchSetId": 3

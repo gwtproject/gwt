@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "505bd8e0_6e287e23",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-17T00:18:09Z",
+      "side": 1,
+      "message": "Actually we don\u0027t need this if add() returns a Future.",
+      "parentUuid": "505bd8e0_df06030e",
+      "range": {
+        "startLine": 458,
+        "startChar": 20,
+        "endLine": 458,
+        "endChar": 38
+      },
+      "revId": "78f579bd145a816cd1c911f3b333d86f90d4a4d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "505bd8e0_1f257b9f",
         "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
         "patchSetId": 2

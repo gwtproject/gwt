@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9069d076_5b01c3a0",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/JsonSplittable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-17T08:16:49Z",
+      "side": 1,
+      "message": "Because we no longer rely on the org.json provided by the Android platform (when using Autobean/RequestFactory in an Android app), we can remove this method and just use JSONObject.getNames() from our rebased org.json.",
+      "revId": "9e6a3cfb4e2d63693ec828e63b714fbef09e110b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

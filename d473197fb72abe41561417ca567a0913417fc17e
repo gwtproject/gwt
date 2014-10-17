@@ -2,6 +2,184 @@
   "comments": [
     {
       "key": {
+        "uuid": "b0d09489_089ac700",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-17T20:13:23Z",
+      "side": 1,
+      "message": "Why change to FNCT? FUNCTION is easier to understand.",
+      "range": {
+        "startLine": 38,
+        "startChar": 31,
+        "endLine": 38,
+        "endChar": 40
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70ca9cdf_665f2e68",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-17T20:13:23Z",
+      "side": 1,
+      "message": "Node -\u003e Nodes",
+      "range": {
+        "startLine": 53,
+        "startChar": 14,
+        "endLine": 53,
+        "endChar": 37
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90d5507b_a75acacb",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-17T20:13:23Z",
+      "side": 1,
+      "message": "others -\u003e other",
+      "range": {
+        "startLine": 53,
+        "startChar": 7,
+        "endLine": 53,
+        "endChar": 13
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90d5507b_875fc6bb",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-17T20:13:23Z",
+      "side": 1,
+      "message": "What do you mean by \"chain\"? It\u0027s really one big string in the end, right?",
+      "range": {
+        "startLine": 34,
+        "startChar": 45,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70ca9cdf_263c1608",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-17T20:13:23Z",
+      "side": 1,
+      "message": "in -\u003e to",
+      "range": {
+        "startLine": 34,
+        "startChar": 33,
+        "endLine": 34,
+        "endChar": 35
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d09489_68a70349",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-17T20:13:23Z",
+      "side": 1,
+      "message": "{@code String}",
+      "range": {
+        "startLine": 34,
+        "startChar": 38,
+        "endLine": 34,
+        "endChar": 44
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d09489_48a4bf42",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-17T20:13:23Z",
+      "side": 1,
+      "message": "I\u0027m a bit leery of lots of String math. Are you sure you really want to do all of this and not just have simple, easy to read constants?",
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_9ca2a58d",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-17T20:13:23Z",
+      "side": 1,
+      "message": "Do you really need all of these /* @alternate */ comments? It means the declaration will be included even if there is another width: below.",
+      "range": {
+        "startLine": 67,
+        "startChar": 11,
+        "endLine": 67,
+        "endChar": 20
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0d68c81_6a8ed73a",
         "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
         "patchSetId": 13

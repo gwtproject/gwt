@@ -16,6 +16,24 @@
       "revId": "9e6a3cfb4e2d63693ec828e63b714fbef09e110b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06fc874_1d326313",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/JsonSplittable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-17T09:43:47Z",
+      "side": 1,
+      "message": "Actually, that method is not available in our version of org.json (which I thought came from a more recent Android version which could have had the method)",
+      "parentUuid": "9069d076_5b01c3a0",
+      "revId": "9e6a3cfb4e2d63693ec828e63b714fbef09e110b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

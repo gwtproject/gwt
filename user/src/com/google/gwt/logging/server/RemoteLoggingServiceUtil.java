@@ -77,9 +77,7 @@ public class RemoteLoggingServiceUtil {
     try {
       LogRecord lr = JsonLogRecordServerUtil.logRecordFromJson(serializedLogRecordJson);
       logOnServer(lr, strongName, deobfuscator, loggerNameOverride);
-    } catch (Exception e) {
-      // We don't want to import the JsonException, which will require the json
-      // jar when this class loads, so we just catch all exceptions here
+    } catch (InvalidJsonLogRecordFormatException e) {
       throw new RemoteLoggingException("Failed to deserialize JSON", e);
     }
   }

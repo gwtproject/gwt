@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0492c4e_a643be6d",
+        "filename": "user/test/com/google/gwt/resources/ResourcesJreSuite.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-18T09:17:43Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.resources.gss.ClassNamesCollectorTest\u0027 import.",
+      "revId": "2b7621397889b17807651965f875dd2f21c4de65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

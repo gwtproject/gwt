@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_ba1131f9",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-18T09:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0d09489_089ac700",
+      "range": {
+        "startLine": 38,
+        "startChar": 31,
+        "endLine": 38,
+        "endChar": 40
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70ca9cdf_665f2e68",
         "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
         "patchSetId": 13
@@ -59,6 +83,30 @@
       "writtenOn": "2014-10-17T20:13:23Z",
       "side": 1,
       "message": "others -\u003e other",
+      "range": {
+        "startLine": 53,
+        "startChar": 7,
+        "endLine": 53,
+        "endChar": 13
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_3b6277b2",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-18T09:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90d5507b_a75acacb",
       "range": {
         "startLine": 53,
         "startChar": 7,
@@ -140,6 +188,78 @@
     },
     {
       "key": {
+        "uuid": "309904fa_9c33859c",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-18T09:00:52Z",
+      "side": 1,
+      "message": "\"chain\" is maybe not the right term, what I mean is that the result is a suite of (Java) concatenation of String wrapped in a String. This string will be used to generate the java code that will build the css at runtime. \n\n   @if(eval(\"com.foo.bar()\")) {\n     .foo {\n        padding: 5px;\n     }\n   }\n   @else {\n      .foo {\n         padding: 15px;\n       }\n    }\n    .bar {\n       width:10px;\n    }\n\nwill be converted to something like:\n   \n\"(com.foo.bar() ? (\\\".foo{padding:5px}\\\") : (\\\".foo{padding:15px}\\\")) + (\\\".bar{width:10px}\\\")\"",
+      "parentUuid": "90d5507b_875fc6bb",
+      "range": {
+        "startLine": 34,
+        "startChar": 45,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_fa1ba914",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-18T09:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70ca9cdf_263c1608",
+      "range": {
+        "startLine": 34,
+        "startChar": 33,
+        "endLine": 34,
+        "endChar": 35
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_da16e5ed",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-18T09:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0d09489_68a70349",
+      "range": {
+        "startLine": 34,
+        "startChar": 38,
+        "endLine": 34,
+        "endChar": 44
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0d09489_48a4bf42",
         "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
         "patchSetId": 13
@@ -157,6 +277,24 @@
     },
     {
       "key": {
+        "uuid": "309904fa_7c0879c4",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-18T09:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0d09489_48a4bf42",
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "309904fa_9ca2a58d",
         "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
         "patchSetId": 13
@@ -168,6 +306,30 @@
       "writtenOn": "2014-10-17T20:13:23Z",
       "side": 1,
       "message": "Do you really need all of these /* @alternate */ comments? It means the declaration will be included even if there is another width: below.",
+      "range": {
+        "startLine": 67,
+        "startChar": 11,
+        "endLine": 67,
+        "endChar": 20
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_1a013da2",
+        "filename": "user/src/com/google/gwt/resources/gss/ImageSpriteCreator.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-18T09:00:52Z",
+      "side": 1,
+      "message": "Yep, otherwise we will have an \" Detected multiple identical, non-alternate declarations in the same ruleset.\" error if there is another width defined by the user.\n\nBut you\u0027re right, we should be able to improve that by reading the rules before. I will not do that for GWT 2.7 and I\u0027ve added an entry in my todo list for that.",
+      "parentUuid": "309904fa_9ca2a58d",
       "range": {
         "startLine": 67,
         "startChar": 11,

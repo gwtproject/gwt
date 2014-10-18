@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "708ffcad_14c3c165",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2014-10-18T16:05:38Z",
+      "side": 1,
+      "message": "If someone is playing around with this, I wonder if this is possible to bring up?\nhttp://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.google.appengine%22%20AND%20a%3A%22appengine%22",
+      "revId": "9b08df97e00098b8d4d8be67f1d535f3f5a2572c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

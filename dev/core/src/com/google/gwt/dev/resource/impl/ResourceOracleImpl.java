@@ -16,7 +16,6 @@
 package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.impl.ResourceLocatorImpl;
 import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.dev.cfg.ResourceLoaders;
 import com.google.gwt.dev.resource.Resource;
@@ -54,7 +53,7 @@ import java.util.Set;
 /**
  * The normal implementation of {@link ResourceOracle}.
  */
-public class ResourceOracleImpl implements ResourceOracle {
+public class ResourceOracleImpl extends AbstractResourceOracle {
 
   private static class Messages {
     static final Message1String EXAMINING_PATH_ROOT = new Message1String(TreeLogger.DEBUG,
@@ -469,16 +468,6 @@ public class ResourceOracleImpl implements ResourceOracle {
   @Override
   public Map<String, Resource> getResourceMap() {
     return exposedResourceMap;
-  }
-
-  @Override
-  public Resource getResource(String pathName) {
-    return getResourceMap().get(pathName);
-  }
-
-  @Override
-  public InputStream getResourceAsStream(String pathName) {
-    return ResourceLocatorImpl.toStreamOrNull(getResource(pathName));
   }
 
   @Override

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0492c4e_06e48aed",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupBuildResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-18T18:56:56Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.resource.ResourceOracle.",
+      "revId": "557ca02ef237fe5fd5111beaad0952f84ada5adc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0492c4e_26c98e63",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/LibraryGroupPublicResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-18T18:56:56Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.resource.ResourceOracle.",
+      "revId": "557ca02ef237fe5fd5111beaad0952f84ada5adc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

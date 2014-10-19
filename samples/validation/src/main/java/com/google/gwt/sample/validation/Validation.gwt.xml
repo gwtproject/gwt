@@ -40,4 +40,6 @@
     <when-type-is
       class="com.google.gwt.validation.client.UserValidationMessagesResolver" />
   </replace-with>
+
+  <set-configuration-property name="CssResource.enableGss" value="false" />
 </module>

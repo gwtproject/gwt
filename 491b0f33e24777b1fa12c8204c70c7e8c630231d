@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "708ffcad_6f918e5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-19T10:44:59Z",
+      "side": 1,
+      "message": "Can you elaborate more?",
+      "revId": "491b0f33e24777b1fa12c8204c70c7e8c630231d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "708ffcad_4f94d24b",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/Validation.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-19T10:44:59Z",
+      "side": 1,
+      "message": "The default is already false. There shouldn\u0027t be any place enabling it?",
+      "revId": "491b0f33e24777b1fa12c8204c70c7e8c630231d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

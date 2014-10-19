@@ -29,12 +29,30 @@
       <zipfileset src="${gwt.tools.lib}/json/android-sdk-19.1/json-android-rebased.jar" />
       <zipfileset src="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar" />
       <zipfileset src="${gwt.tools.lib}/protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar" />
+      <fileset dir="${gwt.root}/dev/core/src">
+        <include name="com/google/gwt/dev/asm/**" />
+        <include name="com/google/gwt/dev/util/Name*.java" />
+        <include name="com/google/gwt/dev/util/StringKey.java" />
+        <include name="com/google/gwt/util/tools/shared/**" />
+        <include name="com/google/gwt/core/shared/**" />
+      </fileset>
       <fileset dir="${gwt.dev.bin}">
         <include name="com/google/gwt/dev/asm/**" />
         <include name="com/google/gwt/dev/util/Name*.class" />
         <include name="com/google/gwt/dev/util/StringKey.class" />
         <include name="com/google/gwt/util/tools/shared/**" />
         <include name="com/google/gwt/core/shared/**" />
+      </fileset>
+      <fileset dir="${gwt.root}/user/src">
+        <exclude name="**/rebind/**" />
+        <exclude name="**/tools/**" />
+        <exclude name="**/super/**" />
+        <exclude name="com/google/gwt/json/**" />
+        <exclude name="com/google/gwt/junit/*" />
+        <exclude name="com/google/gwt/junit/client/GWTTestCase.*" />
+        <exclude name="com/google/gwt/junit/remote/**" />
+        <exclude name="com/google/gwt/junit/server/**" />
+        <exclude name="com/google/gwt/benchmarks/*" />
       </fileset>
       <fileset dir="${gwt.user.bin}">
         <exclude name="**/rebind/**" />

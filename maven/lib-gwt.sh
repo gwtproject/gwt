@@ -119,11 +119,11 @@ function maven-gwt() {
     # If there are no java files create one entry
     # This is really hacky and needs to be resolved,
     # but sonatype now requires a source jar.
-    if [ ! -s javafilelist ]; then
-      echo "No sources" > nosources
-      echo "nosources" > javafilelist
+    if [ -s javafilelist ]; then
+      jar cf $SOURCES_FILE @javafilelist
+    else
+      echo "WARNING: there isn't any source file to add to $SOURCES_FILE"
     fi
-    jar cf $SOURCES_FILE @javafilelist
     popd > /dev/null
   done
    

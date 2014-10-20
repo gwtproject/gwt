@@ -46,6 +46,30 @@
       "revId": "2d05c576b8ed87bd6e08a1d1fa5c7701bbc8247f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06988a3_6e60b3f0",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-20T17:24:58Z",
+      "side": 1,
+      "message": "It\u0027s unfortunate but this is how the GWT linker templates work; they don\u0027t have proper modules but instead just declare and use variables in current scope. It\u0027s horrible and we should clean that up but it\u0027s a separate patch and not needed for 2.7.\n\nIn other code we are passing \"values\" as a function parameter for clarity but it doesn\u0027t seem worth doing here. Maybe add a comment that \"values\" is a magic variable provided by __PROPERTY_PROVIDERS__?",
+      "parentUuid": "309904fa_ff2c7b89",
+      "range": {
+        "startLine": 34,
+        "startChar": 26,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "2d05c576b8ed87bd6e08a1d1fa5c7701bbc8247f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1000,10 +1000,11 @@ public final class String implements Comparable<String>, CharSequence,
     return this;
   }
 
-  public native String trim() /*-{
-    if (this.length == 0 || (this[0] > '\u0020' && this[this.length - 1] > '\u0020')) {
-      return this;
-    }
-    return this.replace(/^[\u0000-\u0020]*|[\u0000-\u0020]*$/g, '');
-  }-*/;
+  public String trim() {
+    int length = length();
+    int start, end;
+    for (start = 0; start < length && charAt(start) <= ' '; start++) { }
+    for (end = length; end > start && charAt(end - 1) <= ' '; end--) { }
+    return start > 0 || end < length ? substring(start, end) : this;
+  }
 }

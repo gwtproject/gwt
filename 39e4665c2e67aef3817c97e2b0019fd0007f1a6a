@@ -2,6 +2,262 @@
   "comments": [
     {
       "key": {
+        "uuid": "309904fa_1fb92751",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "I would prefer documentation something like:\n\nCompiler pass that collects external styles declared with the {@code @external} at-rule. This pass also removes the {@code @external} nodes from the AST.",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_002c6abe",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "Documentation.\n\nQuestion: You always return a copy of the input set even when matchAll is set. Yes, this is the most safe, but should we be returning an ImmutableSet instead? There is no \"right\" answer here as I believe that we\u0027re inconsistent in the CSS parser, too.",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_4207563d",
+        "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "From the docs on https://code.google.com/p/closure-stylesheets/, we are currently encouraging people to use conditions like BROWSER_IE6 because then you can define it on the command line when compiling. Your magical pseudo-function \"is\" is similar enough, yet different enough to cause confusion.\n\nIf something already exists in GWT that uses \"is\", then I can probably live with it. But if there isn\u0027t, then I would strongly encourage you to support the BROWSER_IE6, BROWSER_IE7_OR_HIGHER, etc. system and list the conditions that you support. This class doesn\u0027t have to change that much to support this since \"is\" seems to be completely processed at compile-time.",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_a0b81ef2",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "Again, I\u0027m not sure what the organizational intent is of this class. Methods seem to have no particular order. Could you take a look and see if you can come up with a better order?",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_ffeabb33",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "Consider \"CssResult\" or \"CssTreeResult\" as it matches the other classes above and better describes the class.",
+      "range": {
+        "startLine": 207,
+        "startChar": 23,
+        "endLine": 207,
+        "endChar": 38
+      },
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_3fdd0398",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "I don\u0027t know what the GWT convention is, but internally this would not be CONSTANT_CASE since it\u0027s not a constant—it\u0027s just a mutable class member.\n\nAlso, I find class-based caches like this are generally the result of something else that\u0027s missing. In this case, I think that you\u0027re missing some object that holds the result of multiple compilations in memory and invalidates them when the underlying source changes. But doing that through a static field on this class is really just a hack around not having a real home for it.\n\nAlso, \"TreeCache\" could be confusing because there is a TreeHash, etc. Maybe \"compiledGssTreeCache\"?",
+      "range": {
+        "startLine": 220,
+        "startChar": 57,
+        "endLine": 220,
+        "endChar": 67
+      },
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_de16e1ed",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "GssResources",
+      "range": {
+        "startLine": 225,
+        "startChar": 86,
+        "endLine": 225,
+        "endChar": 97
+      },
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_fe1b9d14",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "What is the separator between the prefix and the class name? If there isn\u0027t one, then this isn\u0027t going to work. If resource 1 gets the prefix \u0027a\u0027 and its has a class \u0027aa\u0027 then when resource 27 comes around and it has a class \u0027a\u0027, you won\u0027t be able to tell them apart. Because it appears that you just use this concatenated name as a basis for another run through a minimal substitution map, you should be able to use a separator without incurring any cost.",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_5f880f7d",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "This method isn\u0027t very symmetric in the sense of having all parts operate at the same granularity. You have an initialization block, two try blocks, and a call to some sub-init function. It looks to me like this should be several functions.\n\nHere\u0027s more about symmetry:\n\nhttp://books.google.com/books?id\u003dxLyXPCxBhQUC\u0026pg\u003dPT41\u0026dq\u003dimplementation+patterns+symmetry\u0026hl\u003den\u0026sa\u003dX\u0026ei\u003dkhFFVIjjFMntara9gbgB\u0026redir_esc\u003dy#v\u003donepage\u0026q\u003dimplementation%20patterns%20symmetry\u0026f\u003dfalse\n\n(I hope the link works at least mostly.)",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_c0bd12e1",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "I don\u0027t know what kind of threading guarantees the GWT compiler framework gives you, but could you have a race between two different compilations happening at the same time? Or are you guaranteed that they are serialized?\n\nHere\u0027s the order I\u0027m thinking of:\n\nCompile 1 calls maybeInvalidateCacheFor(...) and nothing has changed.\nCompile 2 calls maybeInvalidateCacheFor(...) and finds a change.\nCompile 1 now calls TREE_CACHE.get() and gets the new tree, not the one that existed when maybeInvalidateCacheFor(...) was called.\n\nMaybe this isn\u0027t really a problem.",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_9e5a99cc",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "I don\u0027t understand why this has to make a complete copy of the tree. Yes, for safety (because trees are mutable) this makes sense, but if your (documented) contract is to never modify a tree in the cache, it seems like this is unnecessary.",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_1e284922",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "This should be a method on CssTree. I\u0027ve put it on my list.",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_5e50119e",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "I thought that this wasn\u0027t allowed, according to your other comments.",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_3e9a6501",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-20T14:27:30Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the order of optimize() and finalizeTree() is. Also, why finalizeTree and not optimizeTree?",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0492c4e_260a6e48",
         "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
         "patchSetId": 15

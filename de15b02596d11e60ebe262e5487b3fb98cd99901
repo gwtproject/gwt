@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30202482_67438c08",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-20T23:00:26Z",
+      "side": 1,
+      "message": "PropertyHelper -\u003e PropertySource.\n\n(Or delete comment; it doesn\u0027t seem necessary.)",
+      "range": {
+        "startLine": 108,
+        "startChar": 10,
+        "endLine": 108,
+        "endChar": 24
+      },
+      "revId": "de15b02596d11e60ebe262e5487b3fb98cd99901",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30202482_c717e0b0",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/client/CodeServerGwtTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-20T23:00:26Z",
+      "side": 1,
+      "message": "PropertySource",
+      "range": {
+        "startLine": 83,
+        "startChar": 21,
+        "endLine": 83,
+        "endChar": 51
+      },
+      "revId": "de15b02596d11e60ebe262e5487b3fb98cd99901",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

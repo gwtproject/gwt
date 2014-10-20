@@ -31,14 +31,40 @@ $namespace.lib.StringHelper = StringHelper;
  *
  * @constructor
  * @param {string} moduleName - the name of the gwt module
- * @param {Object} propertyProviders - A map of all property providers
- * @param {Object} propertyValues - A map of all possible property values
+ * @param {Function} propertyProvidersHolder - a function returning property providers and
+ *                       their values when invoked.
+ * @param {MetaTagParser} metaTagParser - an instance of {@link MetaTagParser}
  */
-function PropertyHelper(moduleName, propertyProviders, propertyValues) {
-  this.moduleName = moduleName;
-  this.propertyProviders = propertyProviders;
-  this.propertyValues = propertyValues;
+function PropertyHelper(moduleName, propertyProvidersHolder, metaTagParser) {
+  this.__moduleName = moduleName;
+  this.__metaTagParser = metaTagParser;
+  var props = this.__getProvidersAndValues(propertyProvidersHolder);
+  this.__propertyProviders = props.providers;
+  this.__propertyValues = props.values;
 }
+
+/**
+ * Setup the environment that property providers need to run.
+ *
+ * @returns an object containing the environment
+ */
+PropertyHelper.prototype.__getProvidersAndValues = function(propertyProvidersHolder) {
+  // Setup scope for property providers
+  var that = this;
+
+  //Used by LocalePropertyGenerator
+  var __gwt_getMetaProperty = function(name) {
+    return that.__metaTagParser.get()[name];
+  };
+
+  // Used by LocalePropertyGenerator
+  var __gwt_isKnownPropertyValue = function(propName, propValue) {
+    return propValue in that.__propertyValues[propName];
+  };
+
+  // The parameters being passed here need to be kept in sync with recompile_template.js
+  return propertyProvidersHolder(__gwt_getMetaProperty, __gwt_isKnownPropertyValue);
+};
 
 /**
  * Compute the binding property value for a given property name.
@@ -47,9 +73,9 @@ function PropertyHelper(moduleName, propertyProviders, propertyValues) {
  * @returns {string} the computed value of the binding property
  */
 PropertyHelper.prototype.__computePropValue = function(propName) {
-  var val = this.propertyProviders[propName]();
+  var val = this.__propertyProviders[propName]();
   // sanity check
-  var allowedValuesMap = this.propertyValues[propName];
+  var allowedValuesMap = this.__propertyValues[propName];
   if (val in allowedValuesMap) {
     return val;
   } else {
@@ -69,8 +95,8 @@ PropertyHelper.prototype.__computePropValue = function(propName) {
  */
 PropertyHelper.prototype.computeBindingProperties = function() {
   var result = {};
-  for (var key in this.propertyValues) {
-    if (this.propertyValues.hasOwnProperty(key)) {
+  for (var key in this.__propertyValues) {
+    if (this.__propertyValues.hasOwnProperty(key)) {
       result[key] = this.__computePropValue(key);
     }
   }

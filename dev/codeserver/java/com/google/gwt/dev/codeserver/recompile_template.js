@@ -19,17 +19,19 @@
   var $namespace = {};
   var moduleName = __MODULE_NAME__;
 
-  var executeMain = function(){
-    __LIB_JS__
+  __LIB_JS__
 
-    var metaTagParser = new $namespace.lib.MetaTagParser(moduleName);
-
-    //Property providers need a certain environment to run
-    var __gwt_getMetaProperty = function(name) {
-      return metaTagParser.get()[name];
-    };
-
+  // Because GWT linker architecture allows property providers to use global variables
+  // we need to make sure that these are defined in the scope of property providers.
+  // The parameters of the propertyProvidersHolder needs to be kept in sync with the
+  // parameters being passed in PropertyHelper.__getProvidersAndValues.
+  // TODO(dankurka): refactor linkers and templates to not use global symbols anymore.
+  var propertyProvidersHolder = function(__gwt_getMetaProperty, __gwt_isKnownPropertyValue){
     __PROPERTY_PROVIDERS__
+    return {values: values, providers: providers};
+  };
+
+  var executeMain = function() {
     __MAIN__
   };
 

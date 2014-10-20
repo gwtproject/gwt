@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_237fb89e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-20T22:11:32Z",
+      "side": 1,
+      "message": "Changed description, but kept the reference to the bug fix (I don\u0027t want to rebase on Manuels change).",
+      "parentUuid": "f0320cd2_9fb8c7f2",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "d5101445ccf296357a24b82df6967145af9d09e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0320cd2_1fb93751",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2014-10-20T21:36:23Z",
       "side": 1,
       "message": "rename to PropertySource?\n\n\"A PropertySource computes the binding properties to use for calling the GWT compiler.\"",
+      "range": {
+        "startLine": 38,
+        "startChar": 9,
+        "endLine": 38,
+        "endChar": 23
+      },
+      "revId": "d5101445ccf296357a24b82df6967145af9d09e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_43358cf9",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-20T22:11:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0320cd2_1fb93751",
       "range": {
         "startLine": 38,
         "startChar": 9,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_037ab4ae",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-20T22:11:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0320cd2_ff32a394",
+      "range": {
+        "startLine": 65,
+        "startChar": 5,
+        "endLine": 65,
+        "endChar": 8
+      },
+      "revId": "d5101445ccf296357a24b82df6967145af9d09e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0320cd2_3f18bb67",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2014-10-20T21:36:23Z",
       "side": 1,
       "message": "Add comment:\n\n\"Variables declared in this scope will be seen by both recompile_lib and the property providers.\"",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 9
+      },
+      "revId": "d5101445ccf296357a24b82df6967145af9d09e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_e374e0c3",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-20T22:11:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0320cd2_3f18bb67",
       "range": {
         "startLine": 16,
         "startChar": 1,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_c36fdcec",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-20T22:11:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0320cd2_ff2b83a6",
+      "range": {
+        "startLine": 19,
+        "startChar": 7,
+        "endLine": 19,
+        "endChar": 16
+      },
+      "revId": "d5101445ccf296357a24b82df6967145af9d09e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0320cd2_5f048f37",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
         "patchSetId": 2
@@ -128,6 +248,30 @@
       "writtenOn": "2014-10-20T21:36:23Z",
       "side": 1,
       "message": "Move inside executeMain? This shouldn\u0027t be in scope for the property providers.",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 12
+      },
+      "revId": "d5101445ccf296357a24b82df6967145af9d09e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_a36ae8dd",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-20T22:11:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0320cd2_5f048f37",
       "range": {
         "startLine": 22,
         "startChar": 2,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_832fa4a7",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-20T22:11:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0320cd2_bf8e6b0c",
+      "range": {
+        "startLine": 26,
+        "startChar": 5,
+        "endLine": 26,
+        "endChar": 8
+      },
+      "revId": "d5101445ccf296357a24b82df6967145af9d09e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0320cd2_ffdd4372",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
         "patchSetId": 2
@@ -174,6 +342,30 @@
       "writtenOn": "2014-10-20T21:36:23Z",
       "side": 1,
       "message": "rename to: initPropertyProviders? (and also in recompile_lib.)",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 29,
+        "endChar": 29
+      },
+      "revId": "d5101445ccf296357a24b82df6967145af9d09e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_63329014",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-20T22:11:32Z",
+      "side": 1,
+      "message": "renamed to __initPropertyProviders in this scope to indicate that we consider it private in this scope otherwise initPropertyProviders",
+      "parentUuid": "f0320cd2_ffdd4372",
       "range": {
         "startLine": 29,
         "startChar": 6,

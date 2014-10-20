@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30202482_a77e64da",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Class.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-10-20T23:18:16Z",
+      "side": 1,
+      "message": "Why encode this as an array? This interferes with Closure string obfuscation passes, leaking strings into the public binaries.\n\nWhy not instead just encode it as a string with an illegal separator like \u0027/\u0027",
+      "revId": "b8f47a4e80c61566b8af5ef86c770667621d8b5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

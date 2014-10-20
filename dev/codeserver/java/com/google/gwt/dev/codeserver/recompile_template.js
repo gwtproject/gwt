@@ -29,6 +29,11 @@
       return metaTagParser.get()[name];
     };
 
+    //Used by LocalePropertyGenerator
+    function __gwt_isKnownPropertyValue(propName, propValue) {
+      return propValue in values[propName];
+    }
+
     __PROPERTY_PROVIDERS__
     __MAIN__
   };

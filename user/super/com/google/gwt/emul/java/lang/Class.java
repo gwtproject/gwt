@@ -72,7 +72,7 @@ public final class Class<T> implements Type {
   static <T> Class<T> createForClass(String packageName, String compoundClassName,
       JavaScriptObject typeId, Class<? super T> superclass) {
     Class<T> clazz = new Class<T>();
-    if (clazz.isClassMetadataEnabled()) {
+    if (isClassMetadataEnabled()) {
       clazz.packageName = packageName;
       clazz.compoundName = compoundClassName;
     } else {
@@ -93,7 +93,7 @@ public final class Class<T> implements Type {
       JavaScriptObject typeId, Class<? super T> superclass,
       JavaScriptObject enumConstantsFunc, JavaScriptObject enumValueOfFunc) {
     Class<T> clazz = new Class<T>();
-    if (clazz.isClassMetadataEnabled()) {
+    if (isClassMetadataEnabled()) {
       clazz.packageName = packageName;
       clazz.compoundName = compoundClassName;
     } else {
@@ -115,7 +115,7 @@ public final class Class<T> implements Type {
   @DoNotInline
   static <T> Class<T> createForInterface(String packageName, String compoundClassName) {
     Class<T> clazz = new Class<T>();
-    if (clazz.isClassMetadataEnabled()) {
+    if (isClassMetadataEnabled()) {
       clazz.packageName = packageName;
       clazz.compoundName = compoundClassName;
     } else {
@@ -133,7 +133,7 @@ public final class Class<T> implements Type {
   @DoNotInline
   static Class<?> createForPrimitive(String className, JavaScriptObject primitiveTypeId) {
     Class<?> clazz = new Class<Object>();
-    if (clazz.isClassMetadataEnabled()) {
+    if (isClassMetadataEnabled()) {
       clazz.packageName = "";
       clazz.compoundName = className;
       clazz.typeId = primitiveTypeId;

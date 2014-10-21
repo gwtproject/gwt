@@ -20,9 +20,11 @@ import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.JJSOptionsImpl;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.js.JsNamespaceOption;
+import com.google.gwt.dev.util.arg.DisplayNameMode;
 import com.google.gwt.dev.util.arg.JsInteropMode;
 import com.google.gwt.dev.util.arg.SourceLevel;
 
+import java.awt.DisplayMode;
 import java.io.File;
 
 /**
@@ -41,6 +43,7 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   private boolean validateOnly;
   private boolean warnOverlappingSource;
   private boolean warnMissingDeps;
+  private DisplayNameMode displayNameMode;
 
   public PrecompileTaskOptionsImpl() {
   }
@@ -76,6 +79,7 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
     setMissingDepsFile(other.getMissingDepsFile());
     setValidateOnly(other.isValidateOnly());
     setEnabledGeneratingOnShards(other.isEnabledGeneratingOnShards());
+    setDisplayNameMode(other.getDisplayNameMode());
   }
 
   @Override
@@ -485,5 +489,15 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
 
   @Override public void setJsInteropMode(JsInteropMode mode) {
     jjsOptions.setJsInteropMode(mode);
+  }
+
+  @Override
+  public DisplayNameMode getDisplayNameMode() {
+    return displayNameMode;
+  }
+
+  @Override
+  public void setDisplayNameMode(DisplayNameMode displayNameMode) {
+    this.displayNameMode = displayNameMode;
   }
 }

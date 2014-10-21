@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5103e40_1db197d9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-21T19:42:05Z",
+      "side": 1,
+      "message": "maybe name it jmethodByJsFunction",
+      "range": {
+        "startLine": 1225,
+        "startChar": 6,
+        "endLine": 1225,
+        "endChar": 18
+      },
+      "revId": "4c2d064699d802b2c1a6e128108f068a991ce12e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

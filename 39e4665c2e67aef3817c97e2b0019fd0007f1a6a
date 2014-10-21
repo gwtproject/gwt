@@ -236,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_0ece5b3c",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T13:01:33Z",
+      "side": 1,
+      "message": "Pass a cache to the GssResourceGenerator constructor. That way the cache is controlled externally and can have whatever implementation is appropriate.",
+      "parentUuid": "309904fa_8595e816",
+      "range": {
+        "startLine": 220,
+        "startChar": 57,
+        "endLine": 220,
+        "endChar": 67
+      },
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1096c0c9_de16e1ed",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 15

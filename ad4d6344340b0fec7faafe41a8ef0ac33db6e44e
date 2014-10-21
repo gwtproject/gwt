@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5633af0_c925914b",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/DirectoryClassPathEntry.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-21T22:59:01Z",
+      "side": 1,
+      "message": "child.isHidden() seems to include directories starting with . in Unix as per Java docs.",
+      "range": {
+        "startLine": 110,
+        "startChar": 12,
+        "endLine": 110,
+        "endChar": 63
+      },
+      "revId": "ad4d6344340b0fec7faafe41a8ef0ac33db6e44e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1096c0c9_24e09851",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T13:17:40Z",
+      "side": 1,
+      "message": "\u003cp\u003eThe corresponding...",
+      "revId": "1bcd377422b89faf9f561a52f645216d5176f30e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_04eb9c39",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T13:17:40Z",
+      "side": 1,
+      "message": "looks",
+      "range": {
+        "startLine": 37,
+        "startChar": 46,
+        "endLine": 37,
+        "endChar": 50
+      },
+      "revId": "1bcd377422b89faf9f561a52f645216d5176f30e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_30ad30ab",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T13:17:40Z",
+      "side": 1,
+      "message": "AST",
+      "range": {
+        "startLine": 34,
+        "startChar": 29,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "1bcd377422b89faf9f561a52f645216d5176f30e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_f0c2e85f",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T13:17:40Z",
+      "side": 1,
+      "message": "Blank above if you\u0027re starting with \u003cp\u003e.",
+      "revId": "1bcd377422b89faf9f561a52f645216d5176f30e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_64daa0a1",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T13:17:40Z",
+      "side": 1,
+      "message": "\u003cp\u003eThis pass",
+      "revId": "1bcd377422b89faf9f561a52f645216d5176f30e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_a492e8ba",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T13:17:40Z",
+      "side": 1,
+      "message": "Common wisdom is to accept \"Collection\" but return \"ImmutableCollection\":\n\npublic ImmutableSet\u003cString\u003e getExternalClassNames(\n      Set\u003cString\u003e styleClassesSet) {\n\nThat still allows the idiom:\n\nSet\u003cString\u003e external \u003d getExternalClassNames(allClasses);\n\nto work, but it documents that the return type is really immutable.\n\nAlso, documentation:\n\n/**\n * Returns an immutable set of external class names that should not be renamed.\n * The returned set contains all complete class names defined with\n * {@code @external} as well as all of the class names from\n * {@code styleClassesSet} that match prefixes defined with {@code @external}.\n *\n * @param styleClassesSet a set of class names that should be filtered to\n *     return those matching external prefixes. Note that the passed-in set is not\n *     modified.\n * @return an immutable set of class names. Note that the returned names are\n *     not prefixed with \".\"; they are the raw name.\n */",
+      "range": {
+        "startLine": 79,
+        "startChar": 9,
+        "endLine": 79,
+        "endChar": 12
+      },
+      "revId": "1bcd377422b89faf9f561a52f645216d5176f30e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

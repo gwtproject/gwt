@@ -284,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_a360282f",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:20:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "309904fa_9c33859c",
+      "range": {
+        "startLine": 34,
+        "startChar": 45,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0d09489_48a4bf42",
         "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
         "patchSetId": 13

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30202482_6da44d43",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/StandardGeneratorContext.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-21T00:12:06Z",
+      "side": 1,
+      "message": "glad that turned out simpler than I expected",
+      "range": {
+        "startLine": 95,
+        "startChar": 17,
+        "endLine": 95,
+        "endChar": 46
+      },
+      "revId": "1e237141d5b3fdbdae0890a392574aa7842a131f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30202482_8da8a920",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/AbstractResourceOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-10-21T00:12:06Z",
+      "side": 1,
+      "message": "nice redundancy removal",
+      "range": {
+        "startLine": 28,
+        "startChar": 22,
+        "endLine": 28,
+        "endChar": 44
+      },
+      "revId": "1e237141d5b3fdbdae0890a392574aa7842a131f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

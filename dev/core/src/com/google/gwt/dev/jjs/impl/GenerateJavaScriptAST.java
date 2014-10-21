@@ -903,6 +903,14 @@ public class GenerateJavaScriptAST {
         // don't add polymorphic JsFuncs, inline decl into vtable assignment
         if (func != null && !polymorphicJsFunctions.contains(func)) {
           globalStmts.add(func.makeStmt());
+
+          if (!optimize) {
+            // get the original method for this function
+            JMethod originalMethod = reverseNames.get(func);
+            JsExprStmt displayNameAssignment =
+                outputDisplayName(func.getName().makeRef(func.getSourceInfo()), originalMethod);
+            globalStmts.add(displayNameAssignment);
+          }
         }
       }
 
@@ -1213,6 +1221,8 @@ public class GenerateJavaScriptAST {
       }
 
       JsFunction jsFunc = pop(); // body
+
+      reverseNames.put(jsFunc, x);
 
       if (!program.isInliningAllowed(x)) {
         jsProgram.disallowInlining(jsFunc);
@@ -2605,6 +2615,20 @@ public class GenerateJavaScriptAST {
       JsExprStmt polyAssignment = createAssignment(lhs, rhs).makeStmt();
       globalStmts.add(polyAssignment);
       vtableInitForMethodMap.put(polyAssignment, method);
+
+      if (!optimize) {
+        JsExprStmt displayNameAssignment = outputDisplayName(lhs, method);
+        globalStmts.add(displayNameAssignment);
+        vtableInitForMethodMap.put(displayNameAssignment, method);
+      }
+    }
+
+    private JsExprStmt outputDisplayName(JsNameRef function, JMethod method) {
+      JsNameRef displayName = new JsNameRef(function.getSourceInfo(), "displayName");
+      displayName.setQualifier(function);
+      String displayStringName = method.getEnclosingType().getShortName() + "." + method.getName();
+      JsStringLiteral displayMethodName = new JsStringLiteral(function.getSourceInfo(), displayStringName);
+      return createAssignment(displayName, displayMethodName).makeStmt();
     }
 
     /**
@@ -3248,6 +3272,7 @@ public class GenerateJavaScriptAST {
 
   private final Map<JAbstractMethodBody, JsFunction> methodBodyMap = Maps.newIdentityHashMap();
   private final Map<HasName, JsName> names = Maps.newIdentityHashMap();
+  private final Map<JsFunction, JMethod> reverseNames = Maps.newIdentityHashMap();
 
   /**
    * Contains JsNames for the Object instance methods, such as equals, hashCode,

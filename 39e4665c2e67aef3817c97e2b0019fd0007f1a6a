@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1096c0c9_a1f65a3a",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "309904fa_1fb92751",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f064ccc9_002c6abe",
         "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-20T14:27:30Z",
       "side": 1,
       "message": "Documentation.\n\nQuestion: You always return a copy of the input set even when matchAll is set. Yes, this is the most safe, but should we be returning an ImmutableSet instead? There is no \"right\" answer here as I believe that we\u0027re inconsistent in the CSS parser, too.",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_c27e06dc",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "you right. Anyway we don\u0027t have to sort the Set if matchAll is true.",
+      "parentUuid": "f064ccc9_002c6abe",
       "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_0343946c",
+        "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "The problem is that developers can define its own condition/permatution axis (by defining its own deferred binding properties). So we don\u0027t know in advance all the conditions that we have to support",
+      "parentUuid": "309904fa_4207563d",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f064ccc9_a0b81ef2",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 15
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "1096c0c9_a42d8888",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "you right I will try to find time after GWT 2.7 to reorganize the class",
+      "parentUuid": "f064ccc9_a0b81ef2",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "309904fa_ffeabb33",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 15
@@ -81,6 +153,30 @@
       "writtenOn": "2014-10-20T14:27:30Z",
       "side": 1,
       "message": "Consider \"CssResult\" or \"CssTreeResult\" as it matches the other classes above and better describes the class.",
+      "range": {
+        "startLine": 207,
+        "startChar": 23,
+        "endLine": 207,
+        "endChar": 38
+      },
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_a38f48ba",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "309904fa_ffeabb33",
       "range": {
         "startLine": 207,
         "startChar": 23,
@@ -116,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "309904fa_8595e816",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "The role of this cache is mainly to avoid to recalculate things that doesn\u0027t change between two permutations. How do you do that ?",
+      "parentUuid": "309904fa_3fdd0398",
+      "range": {
+        "startLine": 220,
+        "startChar": 57,
+        "endLine": 220,
+        "endChar": 67
+      },
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1096c0c9_de16e1ed",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 15
@@ -127,6 +247,30 @@
       "writtenOn": "2014-10-20T14:27:30Z",
       "side": 1,
       "message": "GssResources",
+      "range": {
+        "startLine": 225,
+        "startChar": 86,
+        "endLine": 225,
+        "endChar": 97
+      },
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_e1006272",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1096c0c9_de16e1ed",
       "range": {
         "startLine": 225,
         "startChar": 86,
@@ -156,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "309904fa_0279cef1",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "we use \u0027-\u0027 to separate the prefix and the class name (line 1122)",
+      "parentUuid": "1096c0c9_fe1b9d14",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "309904fa_5f880f7d",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 15
@@ -167,6 +329,24 @@
       "writtenOn": "2014-10-20T14:27:30Z",
       "side": 1,
       "message": "This method isn\u0027t very symmetric in the sense of having all parts operate at the same granularity. You have an initialization block, two try blocks, and a call to some sub-init function. It looks to me like this should be several functions.\n\nHere\u0027s more about symmetry:\n\nhttp://books.google.com/books?id\u003dxLyXPCxBhQUC\u0026pg\u003dPT41\u0026dq\u003dimplementation+patterns+symmetry\u0026hl\u003den\u0026sa\u003dX\u0026ei\u003dkhFFVIjjFMntara9gbgB\u0026redir_esc\u003dy#v\u003donepage\u0026q\u003dimplementation%20patterns%20symmetry\u0026f\u003dfalse\n\n(I hope the link works at least mostly.)",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_a5d4a400",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "Yes maybe, the problem is that I think that this class contains already a lot of methods. But it\u0027s maybe not an valid argument :)\n\nDefinitely, I should try to refactor this class in order to make it more readable but I think I will delay that after GWT 2.7.",
+      "parentUuid": "309904fa_5f880f7d",
       "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -190,6 +370,24 @@
     },
     {
       "key": {
+        "uuid": "1096c0c9_04c8fc7e",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "As far as I know I don\u0027t think that we can have several compilation at the same time. I\u0027ve tested with superdevmode by triggering several compilations via different browser tabs and the compilation request are queued.\n\nMaybe @stalcup or @rluble can confirm that.",
+      "parentUuid": "f064ccc9_c0bd12e1",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1096c0c9_9e5a99cc",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 15
@@ -201,6 +399,24 @@
       "writtenOn": "2014-10-20T14:27:30Z",
       "side": 1,
       "message": "I don\u0027t understand why this has to make a complete copy of the tree. Yes, for safety (because trees are mutable) this makes sense, but if your (documented) contract is to never modify a tree in the cache, it seems like this is unnecessary.",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_259ed43d",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "because it will be modified by the optimizeTree() method. The generator will be called for every permutations the GWT compiler has to compile (if the css is depending on these permutations via conditional nodes). The goal of this cache is to cache the part of the process (parsing of the css, creation of the specific nodes) that doesn\u0027t change between compilation (I mean that doesn\u0027t depend on permutation being compiled)",
+      "parentUuid": "1096c0c9_9e5a99cc",
       "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -224,6 +440,24 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_63229042",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "thanks ! Let me know when it\u0027s done",
+      "parentUuid": "1096c0c9_1e284922",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1096c0c9_5e50119e",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 15
@@ -241,6 +475,24 @@
     },
     {
       "key": {
+        "uuid": "1096c0c9_c448d48c",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "It\u0027s allowed to put external at-rule inside conditional node that are evaluated at *compile* time.",
+      "parentUuid": "1096c0c9_5e50119e",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1096c0c9_3e9a6501",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 15
@@ -252,6 +504,24 @@
       "writtenOn": "2014-10-20T14:27:30Z",
       "side": 1,
       "message": "I\u0027m not sure what the order of optimize() and finalizeTree() is. Also, why finalizeTree and not optimizeTree?",
+      "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_4463e4fd",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T10:25:09Z",
+      "side": 1,
+      "message": "it\u0027s first finalizeTree() and then optimize(). I agree I should rename that to optimizeTree().\n\nThe idea of finalizeTree() is to get a tree where all the different types of nodes are created. The optimizeTree() will process the tree to replace mixin, evaluate conditional nodes, replace constant, optimize the css etc. The result of optimizeTree depends of the values of permutations we are building.",
+      "parentUuid": "1096c0c9_3e9a6501",
       "revId": "39e4665c2e67aef3817c97e2b0019fd0007f1a6a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

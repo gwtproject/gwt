@@ -37,6 +37,7 @@ import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.cfg.RuleGenerateWith;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
+import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.dev.util.collect.IdentityHashMap;
@@ -45,7 +46,6 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.util.tools.Utility;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -126,10 +126,14 @@ public class StandardGeneratorContext implements GeneratorContext {
    * This generated unit acts as a normal generated unit as well as a buffer
    * into which generators can write their source. A controller should ensure
    * that source isn't requested until the generator has finished writing it.
+   * This version is backed by {@link StandardGeneratorContext#diskCache}.
    */
   public static class GeneratedUnitImpl implements Generated {
 
-    protected String source = null;
+    /**
+     * A token to retrieve this object's bytes from the disk cache.
+     */
+    protected long sourceToken = -1;
 
     private long creationTime;
 
@@ -154,8 +158,9 @@ public class StandardGeneratorContext implements GeneratorContext {
      */
     @Override
     public void commit(TreeLogger logger) {
-      this.source = sw.toString();
+      String source = sw.toString();
       strongHash = Util.computeStrongName(Util.getBytes(source));
+      sourceToken = diskCache.writeString(source);
       sw = null;
       creationTime = System.currentTimeMillis();
     }
@@ -170,12 +175,20 @@ public class StandardGeneratorContext implements GeneratorContext {
       if (sw != null) {
         throw new IllegalStateException("source not committed");
       }
-      return source;
+      return diskCache.readString(sourceToken);
     }
 
     @Override
     public String getSourceMapPath() {
       return "gen/" + getTypeName().replace('.', '/') + ".java";
+    }
+
+    @Override
+    public long getSourceToken() {
+      if (sw != null) {
+        throw new IllegalStateException("source not committed");
+      }
+      return sourceToken;
     }
 
     @Override
@@ -211,10 +224,10 @@ public class StandardGeneratorContext implements GeneratorContext {
     @Override
     public void commit(TreeLogger logger) {
       super.commit(logger);
-      BufferedOutputStream fos = null;
+      FileOutputStream fos = null;
       try {
-        fos = new BufferedOutputStream(new FileOutputStream(file));
-        fos.write(Util.getBytes(source));
+        fos = new FileOutputStream(file);
+        diskCache.transferToStream(sourceToken, fos);
       } catch (IOException e) {
         logger.log(TreeLogger.WARN, "Error writing out generated unit at '"
             + file.getAbsolutePath() + "': " + e);
@@ -281,6 +294,8 @@ public class StandardGeneratorContext implements GeneratorContext {
   }
 
   private static final String GENERATOR_VERSION_ID_KEY = "generator-version-id";
+
+  private static DiskCache diskCache = DiskCache.INSTANCE;
 
   private static final Map<String, CompilerEventType> eventsByGeneratorType =
       new HashMap<String, CompilerEventType>();
@@ -453,7 +468,7 @@ public class StandardGeneratorContext implements GeneratorContext {
     }
 
     GeneratedResource debuggerSource =
-        new StandardGeneratedResource(gcup.getSourceMapPath(), Util.getBytes(gcup.getSource()));
+        new StandardGeneratedResource(gcup.getSourceMapPath(), gcup.getSourceToken());
     debuggerSource.setVisibility(Visibility.Source);
     commitArtifact(logger, debuggerSource);
   }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_e94be173",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-21T17:00:48Z",
+      "side": 1,
+      "message": "I am not sure what you mean by this? The instance of PropertySource?\n\nOr do you mean passing this by call.\n\npropertyProvidersHolder.call(scope);\n\n(this would actually not work since this does not define the functions in scope.",
+      "parentUuid": "309904fa_05de386e",
+      "revId": "de15b02596d11e60ebe262e5487b3fb98cd99901",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30202482_67438c08",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2014-10-20T23:00:26Z",
       "side": 1,
       "message": "PropertyHelper -\u003e PropertySource.\n\n(Or delete comment; it doesn\u0027t seem necessary.)",
+      "range": {
+        "startLine": 108,
+        "startChar": 10,
+        "endLine": 108,
+        "endChar": 24
+      },
+      "revId": "de15b02596d11e60ebe262e5487b3fb98cd99901",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_a951e929",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-21T17:00:48Z",
+      "side": 1,
+      "message": "deleted the comment",
+      "parentUuid": "30202482_67438c08",
       "range": {
         "startLine": 108,
         "startChar": 10,
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_0951f524",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-21T17:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "309904fa_e5d86c85",
+      "revId": "de15b02596d11e60ebe262e5487b3fb98cd99901",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f064ccc9_a39f486c",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
         "patchSetId": 3
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_895d0538",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-21T17:00:48Z",
+      "side": 1,
+      "message": "I think this is basically the same thing, since now you would be adding a comment to not rename the variables and to put the correct objetions into propSrc.\n\nI think what we really want is to refactor linkers to share the same lib and have a scope object for property providers through which they access symbols. I\u0027ll look into that after 2.7.",
+      "parentUuid": "f064ccc9_a39f486c",
+      "revId": "de15b02596d11e60ebe262e5487b3fb98cd99901",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30202482_c717e0b0",
         "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/client/CodeServerGwtTest.java",
         "patchSetId": 3
@@ -87,6 +165,30 @@
       "writtenOn": "2014-10-20T23:00:26Z",
       "side": 1,
       "message": "PropertySource",
+      "range": {
+        "startLine": 83,
+        "startChar": 21,
+        "endLine": 83,
+        "endChar": 51
+      },
+      "revId": "de15b02596d11e60ebe262e5487b3fb98cd99901",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_a9b809f2",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/client/CodeServerGwtTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-21T17:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30202482_c717e0b0",
       "range": {
         "startLine": 83,
         "startChar": 21,

@@ -51,6 +51,10 @@ class LoggerConfiguratorConsole implements LoggerConfigurator {
       } else {
         log(record.getMessage());
       }
+      Throwable e = record.getThrown();
+      if (e != null) {
+        logException(e);
+      }
     }
 
     private native boolean isSupported() /*-{
@@ -71,6 +75,13 @@ class LoggerConfiguratorConsole implements LoggerConfigurator {
 
     private native void log(String message) /*-{
       console.log(message);
+    }-*/;
+
+    private native void logException(Throwable t) /*-{
+      console.groupCollapsed(t.toString());
+      var backingError = t.__gwt$backingJsError;
+      console.log(backingError && backingError.stack);
+      console.groupEnd();
     }-*/;
 
     @Override

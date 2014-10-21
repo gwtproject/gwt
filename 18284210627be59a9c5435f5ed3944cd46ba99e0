@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "309904fa_90be04a5",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderParser.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-21T14:35:04Z",
+      "side": 1,
+      "message": "goktug@ dankurka@ Shouldn\u0027t we update UiBinder.xsd to add this attribute ? Idem for this change: Ie10be09bf9248de10c28c700db170dc56887b461",
+      "revId": "18284210627be59a9c5435f5ed3944cd46ba99e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

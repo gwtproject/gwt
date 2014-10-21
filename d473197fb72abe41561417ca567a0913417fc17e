@@ -260,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "309904fa_9fc457cf",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T09:27:07Z",
+      "side": 1,
+      "message": "How about:\n\nVisitor that converts the ast to a {@code String} that can be evaluated as a Java expression. For example: (then add your example) You may also want to have an example with value() since it also should cause a runtime split in the string.",
+      "parentUuid": "309904fa_9c33859c",
+      "range": {
+        "startLine": 34,
+        "startChar": 45,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "d473197fb72abe41561417ca567a0913417fc17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0d09489_48a4bf42",
         "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
         "patchSetId": 13

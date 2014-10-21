@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_a306680c",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-21T06:31:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1096c0c9_c1d9a639",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 45
+      },
+      "revId": "158c2b79f9e41f91a96a89829e7ea71ebfe548b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f064ccc9_40810288",
         "filename": "maven/lib-gwt.sh",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_c30b5c15",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-21T06:31:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f064ccc9_40810288",
+      "range": {
+        "startLine": 125,
+        "startChar": 60,
+        "endLine": 125,
+        "endChar": 89
+      },
+      "revId": "158c2b79f9e41f91a96a89829e7ea71ebfe548b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1096c0c9_81d07e06",
         "filename": "servlet/build.xml",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2014-10-20T16:43:31Z",
       "side": 1,
       "message": "This is equivalent to ${gwt.user.root}. I think we should define ${gwt.dev.root} pointing to ${gwt.root}/dev/core",
+      "range": {
+        "startLine": 46,
+        "startChar": 20,
+        "endLine": 46,
+        "endChar": 36
+      },
+      "revId": "158c2b79f9e41f91a96a89829e7ea71ebfe548b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_45e04029",
+        "filename": "servlet/build.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-21T06:31:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1096c0c9_81d07e06",
       "range": {
         "startLine": 46,
         "startChar": 20,

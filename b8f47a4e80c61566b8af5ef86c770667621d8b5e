@@ -16,6 +16,24 @@
       "revId": "b8f47a4e80c61566b8af5ef86c770667621d8b5e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30202482_4d795136",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Class.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-21T00:12:01Z",
+      "side": 1,
+      "message": "Because I had no idea that it would make a difference to closure string obfuscation :). Wouldn\u0027t closure obfuscate each string in the array?  If that is the case we will just be leaking a bit of info (i.e. that the class is an innerclass of some class).\n\nI prefer the array as it is a bit cleaner but we can change it to \"/\" if it really makes a difference.",
+      "parentUuid": "30202482_a77e64da",
+      "revId": "b8f47a4e80c61566b8af5ef86c770667621d8b5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

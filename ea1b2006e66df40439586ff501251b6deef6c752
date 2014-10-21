@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "70ca9cdf_c66f021b",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T09:26:52Z",
+      "side": 1,
+      "message": "It\u0027d be great to have that in the class docs. Same for a lot of your explanations.",
+      "parentUuid": "9069d076_f0fbf622",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_4dfa6d57",
         "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
         "patchSetId": 12
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "9069d076_b0057e80",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d09489_e8b2d38d",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T09:26:52Z",
+      "side": 1,
+      "message": "I suppose a terrible user could even do: eval(\u0027foo(\")\\\u0027)\")\u0027)\n\nand that would totally break this, too. Let\u0027s think about it, but not worry too much. You may want to add a TODO, though.",
+      "parentUuid": "9069d076_db4133d7",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -143,6 +179,24 @@
     },
     {
       "key": {
+        "uuid": "70ca9cdf_a6476699",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T09:26:52Z",
+      "side": 1,
+      "message": "OK. I just finished the push to GitHub, so now what\u0027s out there is current.",
+      "parentUuid": "9069d076_1b7eeb07",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_0df47564",
         "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
         "patchSetId": 12
@@ -172,6 +226,24 @@
       "side": 1,
       "message": "It would be really nice !! Once done, I will adpat this code to use the visitor in order to replace the node.\n\nI did several tricks like this in my implementation because I assumed that we cannot change anything in closure-stylesheet",
       "parentUuid": "9069d076_0df47564",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70ca9cdf_e6415e85",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T09:26:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9069d076_102c8a03",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -466,6 +538,24 @@
     },
     {
       "key": {
+        "uuid": "b0d09489_8894f7cf",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T09:26:52Z",
+      "side": 1,
+      "message": "It may be good to make a test for it.",
+      "parentUuid": "9069d076_30ae6ef5",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d06fc874_4ca7cf1a",
         "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
         "patchSetId": 12
@@ -577,6 +667,24 @@
     },
     {
       "key": {
+        "uuid": "70ca9cdf_89fa3dd7",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T09:26:52Z",
+      "side": 1,
+      "message": "It\u0027s for historical reasons. It used to be that GssFunctions just took strings and returned strings. We found that limiting, so now they take nodes and return nodes. I should probably work on deleting it, but that will be a huge effort.",
+      "parentUuid": "9069d076_508e828c",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06a0c65_7035c8f9",
         "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
         "patchSetId": 12
@@ -606,6 +714,24 @@
       "side": 1,
       "message": "I wanted to go back to the CssCustomFunctionNode\n\nfunctionToEval.getParent() returns a CssFunctionArgumentsNode and the sourceCodeLocation on this object is null.\n\nBut maybe take the source code location of the argument is enough",
       "parentUuid": "f06a0c65_7035c8f9",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d09489_28322b65",
+        "filename": "user/src/com/google/gwt/resources/gss/EvalFunction.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T09:26:52Z",
+      "side": 1,
+      "message": "If the CssFunctionsArgumentsNode has a null sourceCodeLocation, then that\u0027s a bug. I\u0027ll investigate.",
+      "parentUuid": "9069d076_f04c56bf",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -905,6 +1031,24 @@
       "side": 1,
       "message": "a node that can be evaluated at compile time is removed if it is evaluated to false. If it is evaluated to true, the following elseif and/or else nodes are removed no matters if these node need to be evaluated at runtime or not.\n\nThey are some examples in the tests (ExtendedEliminateConditionalNodesTest)",
       "parentUuid": "9069d076_ad40c9cf",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_7ce799e7",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T09:26:52Z",
+      "side": 1,
+      "message": "OK—I think that it would be helpful to spell that out in a comment in the code, too. I found it pretty hard to figure out just by reading it.",
+      "parentUuid": "f06a0c65_93f5e697",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -1340,6 +1484,24 @@
     },
     {
       "key": {
+        "uuid": "1096c0c9_5bc10327",
+        "filename": "user/src/com/google/gwt/resources/gss/PermutationsCollector.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T09:26:52Z",
+      "side": 1,
+      "message": "From the docs on https://code.google.com/p/closure-stylesheets/, we are currently encouraging people to use conditions like BROWSER_IE6 because then you can define it on the command line when compiling. Your magical pseudo-function \"is\" is similar enough, yet different enough to cause confusion.\n\nIf something already exists in GWT that uses \"is\", then I can probably live with it. But if there isn\u0027t, then I would strongly encourage you to support the BROWSER_IE6, BROWSER_IE7_OR_HIGHER, etc. system and list the conditions that you support. This class doesn\u0027t have to change that much to support this since \"is\" seems to be completely processed at compile-time.",
+      "parentUuid": "9069d076_dbfb738c",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d06fc874_8fd85984",
         "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
         "patchSetId": 12
@@ -1369,6 +1531,24 @@
       "side": 1,
       "message": "This visitor does the same that the BiDiFlipper of closure-stylesheet. Except that it records if at least one node was flipped. So I know that the css is locale sensis\n\nWhy ? At the end of this process, the compiled css will be wrapped in a Java method (generated by the GssResourceGenerator) that GWT will use in order to get the css to inject into the dom. This visitor will tell me if the css is locale sensitive or not and depending of this information the implementation of the Java method will be different. This logic is in the GssResourceGenerator line 530",
       "parentUuid": "d06fc874_8fd85984",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_7a6cf9a3",
+        "filename": "user/src/com/google/gwt/resources/gss/RecordingBidiFlipper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T09:26:52Z",
+      "side": 1,
+      "message": "It might be easier to just add this functionality to the BiDiFlipper. Also, you should see how fast it is to just do both ways and compare the output.",
+      "parentUuid": "9069d076_3be72fe9",
       "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

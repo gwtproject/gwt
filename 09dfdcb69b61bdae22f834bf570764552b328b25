@@ -2,6 +2,103 @@
   "comments": [
     {
       "key": {
+        "uuid": "f064ccc9_a3474899",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-21T10:42:09Z",
+      "side": 1,
+      "message": "It\u0027s \u0027flan\u0027.\n\nAlso, I think Google has an habit of using \u0027flan@\u0027 (standing for \u0027flan@google.com\u0027) rather than \u0027@flan\u0027 (as on Twitter) that we may want to perpetuate.\n\nFinally, can you just say here that it\u0027s about GSS? E.g. \"Address flan@\u0027s comments on GSS\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "09dfdcb69b61bdae22f834bf570764552b328b25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_25289422",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-21T10:42:09Z",
+      "side": 1,
+      "message": "Same here (just in case, so you don\u0027t miss it ;-) )",
+      "range": {
+        "startLine": 10,
+        "startChar": 7,
+        "endLine": 10,
+        "endChar": 13
+      },
+      "revId": "09dfdcb69b61bdae22f834bf570764552b328b25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_0480fccd",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-21T10:42:09Z",
+      "side": 1,
+      "message": "There should be a \u0027\u003cp\u003e\u0027 here",
+      "revId": "09dfdcb69b61bdae22f834bf570764552b328b25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_e45150d7",
+        "filename": "user/src/com/google/gwt/resources/gss/CreateRuntimeConditionalNodes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-21T10:42:09Z",
+      "side": 1,
+      "message": "I think you need to use \u0027\u003cpre\u003e\u0027 to preserve the formatting.",
+      "revId": "09dfdcb69b61bdae22f834bf570764552b328b25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_456cc075",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-21T10:42:09Z",
+      "side": 1,
+      "message": "\u003cpre\u003e",
+      "revId": "09dfdcb69b61bdae22f834bf570764552b328b25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0492c4e_dc65f23d",
         "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
         "patchSetId": 1
@@ -13,6 +110,98 @@
       "writtenOn": "2014-10-21T10:24:36Z",
       "side": 1,
       "message": "[error] Unknown tag \u0027else\u0027.",
+      "revId": "09dfdcb69b61bdae22f834bf570764552b328b25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_6579bc36",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-21T10:42:09Z",
+      "side": 1,
+      "message": "Go home Leeroy, you\u0027re drunk!\n\n;-)",
+      "parentUuid": "f0492c4e_dc65f23d",
+      "revId": "09dfdcb69b61bdae22f834bf570764552b328b25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_8576c843",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-21T10:42:09Z",
+      "side": 1,
+      "message": "Do we really want this formatting?",
+      "revId": "09dfdcb69b61bdae22f834bf570764552b328b25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1096c0c9_84432c07",
+        "filename": "user/src/com/google/gwt/resources/gss/CssPrinter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-21T10:42:09Z",
+      "side": 1,
+      "message": "flan\n\nI don\u0027t think we used such rules for comments though. Maybe NOTE(flan) or XXX(flan) ?",
+      "range": {
+        "startLine": 203,
+        "startChar": 7,
+        "endLine": 203,
+        "endChar": 12
+      },
+      "revId": "09dfdcb69b61bdae22f834bf570764552b328b25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_c54610ed",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-21T10:42:09Z",
+      "side": 1,
+      "message": "Maybe add a \u003cp\u003e here?",
+      "revId": "09dfdcb69b61bdae22f834bf570764552b328b25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_2ee31f38",
+        "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-21T10:42:09Z",
+      "side": 1,
+      "message": "Are you sure about modifying externalClassNames here?",
       "revId": "09dfdcb69b61bdae22f834bf570764552b328b25",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

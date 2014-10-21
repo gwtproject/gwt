@@ -2,6 +2,109 @@
   "comments": [
     {
       "key": {
+        "uuid": "30202482_be4ca9be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-21T08:23:27Z",
+      "side": 1,
+      "message": "pls update the commit msg.",
+      "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30202482_fe6f011a",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-21T08:23:27Z",
+      "side": 1,
+      "message": "Not sure what you meant here.",
+      "range": {
+        "startLine": 89,
+        "startChar": 81,
+        "endLine": 90,
+        "endChar": 23
+      },
+      "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30202482_1e55bd47",
+        "filename": "user/test/com/google/gwt/user/HistoryTestNoopTokenEncoder.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-21T08:23:27Z",
+      "side": 1,
+      "message": "tabs",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 1
+      },
+      "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30202482_3e527960",
+        "filename": "user/test/com/google/gwt/user/HistoryTestNoopTokenEncoder.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-21T08:23:27Z",
+      "side": 1,
+      "message": "Pls use @Property functionality instead",
+      "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30202482_5e5f3567",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTestNoopTokenEncoder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-21T08:23:27Z",
+      "side": 1,
+      "message": "date",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6041f04_190f5c54",
         "filename": "user/test/com/google/gwt/user/client/ui/HistoryTestNoopTokenEncoder.java",
         "patchSetId": 5
@@ -13,6 +116,23 @@
       "writtenOn": "2014-07-29T21:59:17Z",
       "side": 1,
       "message": "[error] Missing a Javadoc comment.",
+      "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30202482_9e47ed99",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTestNoopTokenEncoder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-21T08:23:27Z",
+      "side": 1,
+      "message": "nit: I think introducing and overriding the method to change the behavior is better:\n\n @Override\n protected isDoubleEncodingEnabled {\n   return false;\n }",
       "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

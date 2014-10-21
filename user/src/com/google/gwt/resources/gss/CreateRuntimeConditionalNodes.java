@@ -33,8 +33,17 @@ import java.util.regex.Pattern;
 
 /**
  * Visitor that handles conditional nodes with conditions that need to be evaluated at runtime.
+ *
+ * The corresponding GSS handled by this pass look like:
+ * {@code
+ *   @if(eval("com.foo.BAR")) {
+ *   }
+ *   @elseif(eval("com.foo.bar()")) {
+ *   }
+ * }
  */
 public class CreateRuntimeConditionalNodes extends DefaultTreeVisitor implements CssCompilerPass {
+  // TODO(jdr): valid input like eval('foo(")\')")') will break this regex
   private static final Pattern EVAL_FUNCTION = Pattern.compile("^eval\\(([\"'])(((?!\\1).)*)\\1\\)$");
 
   private final MutatingVisitController visitController;

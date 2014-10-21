@@ -1163,6 +1163,47 @@
     },
     {
       "key": {
+        "uuid": "f064ccc9_2e4cff39",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T12:56:36Z",
+      "side": 1,
+      "message": "Maybe I\u0027m dense, but they weren\u0027t for me. I think it\u0027s because there\u0027s a mix of code and comments that tells the whole story. For me, I find it helpful to have one big chunk of text that describes everything, then the code, but I can understand both ways.\n\nHere are the important points (in order from the for loop):\n\n1) Runtime conditions need to be kept for evaluation.\n2) The first true-valued condition wins.\n3) The for loop evaluates all of the conditions in the block one at a time.\n4) If there is a runtime condition, then it is added to newChildren.\n5) If there is a compile-time condition that is true, then it is added to newChildren and we exit the loop.\n6) If there is a compile-time condition that is false, it can be removed.\n7) If there is an else condition, it is added to newChildren and we exit the loop.\n\nAfter the loop in done, we replace the current CssConditionalBlockNode with a new one that contains newChildren.\n\nI don\u0027t really mind how you convey this information, but I think it all needs to be spelled out.\n\nAlso note that the comment on line 107 is not true.",
+      "parentUuid": "f064ccc9_a37908f7",
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_8e434b07",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedEliminateConditionalNodes.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 7760
+      },
+      "writtenOn": "2014-10-21T12:56:36Z",
+      "side": 1,
+      "message": "I prefer to document null (and other non-self-documenting parameter values) by adding a comment:\n\nfoo(null /* abstractPorkPieFactoryProviderImpl */)",
+      "range": {
+        "startLine": 109,
+        "startChar": 42,
+        "endLine": 109,
+        "endChar": 46
+      },
+      "revId": "ea1b2006e66df40439586ff501251b6deef6c752",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9069d076_2d4db903",
         "filename": "user/src/com/google/gwt/resources/gss/ExternalClassesCollector.java",
         "patchSetId": 12

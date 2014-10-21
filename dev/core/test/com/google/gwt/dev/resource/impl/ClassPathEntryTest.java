@@ -16,15 +16,48 @@
 package com.google.gwt.dev.resource.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.io.Files;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
- * Resource realted tests.
+ * Resource related tests.
  */
 public class ClassPathEntryTest extends AbstractResourceOrientedTestBase {
+
+  public void testIgnoresHiddenDirectories() throws IOException {
+    // Setup a /tmp/.svn/ShouldNotBeFound.java folder structure.
+    File tempDir = Files.createTempDir();
+    File nestedHiddenDir = new File(tempDir, ".svn");
+    nestedHiddenDir.mkdir();
+    File javaFile = new File(nestedHiddenDir, "ShouldNotBeFound.java");
+    javaFile.createNewFile();
+
+    // Prepare a filter that will match all examined files.
+    PathPrefixSet pathPrefixes = new PathPrefixSet();
+    pathPrefixes.add(PathPrefix.ALL);
+
+    // Prepare a place to record findings.
+    List<Map<AbstractResource, ResourceResolution>> foundFiles =
+        Lists.<Map<AbstractResource, ResourceResolution>> newArrayList();
+    foundFiles.add(Maps.<AbstractResource, ResourceResolution> newHashMap());
+
+    // Perform a class path directory inspection.
+    DirectoryClassPathEntry cpe = new DirectoryClassPathEntry(tempDir);
+    cpe.descendToFindResources(TreeLogger.NULL, Lists.newArrayList(pathPrefixes), foundFiles,
+        tempDir, "");
+
+    // Verify that even though we're using an ALL filter, we still didn't find any files inside the
+    // .svn dir, because we never even enumerate it's contents.
+    assertTrue(foundFiles.get(0).isEmpty());
+  }
 
   public void testAllCpe1FilesFound() throws URISyntaxException, IOException {
     testAllCpe1FilesFound(getClassPathEntry1AsJar());

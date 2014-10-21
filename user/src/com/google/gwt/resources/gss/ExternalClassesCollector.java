@@ -26,6 +26,7 @@ import com.google.gwt.thirdparty.common.css.compiler.ast.DefaultTreeVisitor;
 import com.google.gwt.thirdparty.common.css.compiler.ast.ErrorManager;
 import com.google.gwt.thirdparty.common.css.compiler.ast.GssError;
 import com.google.gwt.thirdparty.common.css.compiler.ast.MutatingVisitController;
+import com.google.inject.internal.ImmutableSet;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,7 +36,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * Visitor that collect style classes flagged as external.
+ * Compiler pass that collects external styles declared with the {@code @external} at-rule.
+ * This pass also removes the {@code @external} nodes from the AST.
  */
 public class ExternalClassesCollector extends DefaultTreeVisitor implements CssCompilerPass {
   public static final String EXTERNAL_AT_RULE = "external";
@@ -73,10 +75,11 @@ public class ExternalClassesCollector extends DefaultTreeVisitor implements CssC
   }
 
   public Set<String> getExternalClassNames(Set<String> styleClassesSet) {
-    SortedSet<String> classNames = new TreeSet<String>(styleClassesSet);
     if (matchAll) {
-      return classNames;
+      return ImmutableSet.copyOf(styleClassesSet);
     }
+
+    SortedSet<String> classNames = new TreeSet<String>(styleClassesSet);
 
     for (String prefix : externalClassPrefixes) {
       for (String styleClass : classNames.tailSet(prefix)) {
@@ -87,7 +90,7 @@ public class ExternalClassesCollector extends DefaultTreeVisitor implements CssC
         }
       }
     }
-    return externalClassNames;
+    return ImmutableSet.copyOf(externalClassNames);
   }
 
   private void processParameters(List<CssValueNode> values, SourceCodeLocation sourceCodeLocation) {

@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "309904fa_05de386e",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-21T06:20:06Z",
+      "side": 1,
+      "message": "Maybe pass \u0027this\u0027 instead of a couple of of functions",
+      "revId": "de15b02596d11e60ebe262e5487b3fb98cd99901",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30202482_67438c08",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
         "patchSetId": 3
@@ -19,6 +36,40 @@
         "endLine": 108,
         "endChar": 24
       },
+      "revId": "de15b02596d11e60ebe262e5487b3fb98cd99901",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309904fa_e5d86c85",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-21T06:20:06Z",
+      "side": 1,
+      "message": "I would mark this as private, otherwise someone could use it elsewhere",
+      "revId": "de15b02596d11e60ebe262e5487b3fb98cd99901",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f064ccc9_a39f486c",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_template.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-21T06:20:06Z",
+      "side": 1,
+      "message": "To me is a bit risky to force not to change these param names based in a comment, it could be redundant, but maybe something like this is clearer\n\n var __initPropertyProviders \u003d function(propSrc) \n  // Used in prop providers\n  var __gwt_getMetaProperty \u003d propSrc.whatever_name_fnc1;\n  var __gwt_isKnownPropertyValue \u003d propSrc.whatever_name_fnc2;\n\neven we could pass an object instead of a couple of functions",
       "revId": "de15b02596d11e60ebe262e5487b3fb98cd99901",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

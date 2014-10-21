@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f5103e40_a0acbefb",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Exceptions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-21T20:52:33Z",
+      "side": 1,
+      "message": "add @DoNotInline here.",
+      "revId": "549b7f2a4ca9e1be86c774fbba99953313637c7e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f064ccc9_bd6f6bed",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Exceptions.java",
         "patchSetId": 1

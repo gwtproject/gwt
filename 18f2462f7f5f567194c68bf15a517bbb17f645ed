@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "354c968a_98a24537",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-22T21:22:58Z",
+      "side": 1,
+      "message": "Maybe performance counters should provide a set() and an increment(). And here it would be clearer if set() is used.",
+      "range": {
+        "startLine": 876,
+        "startChar": 50,
+        "endLine": 876,
+        "endChar": 59
+      },
+      "revId": "18f2462f7f5f567194c68bf15a517bbb17f645ed",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55210a94_9e16c169",
         "filename": "dev/core/src/com/google/gwt/dev/util/log/CompositeTreeLogger.java",
         "patchSetId": 1

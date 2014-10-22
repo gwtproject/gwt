@@ -17,13 +17,19 @@ package com.google.gwt.dev.util.log;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 
 import java.util.HashSet;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Abstract base class for TreeLoggers.
  */
-public abstract class AbstractTreeLogger extends TreeLogger {
+public abstract class AbstractTreeLogger extends CountingTreeLogger {
 
   private static class UncommittedBranchData {
 
@@ -101,9 +107,18 @@ public abstract class AbstractTreeLogger extends TreeLogger {
   private UncommittedBranchData uncommitted;
 
   /**
+   * Contains an entry for each counter for which {@link PerformanceCounter#increment}
+   * has been called. Descendant tree loggers share the same counters by default,
+   * but this can be overridden with {@link #clearPerformanceCounters()}.
+   */
+  private final AtomicReference<ConcurrentMap<PerformanceCounter, AtomicLong>> performanceCounter =
+      new AtomicReference<ConcurrentMap<PerformanceCounter, AtomicLong>>();
+
+  /**
    * The constructor used when creating a top-level logger.
    */
   protected AbstractTreeLogger() {
+    clearPerformanceCounters();
   }
 
   /**
@@ -146,6 +161,9 @@ public abstract class AbstractTreeLogger extends TreeLogger {
     childLogger.uncommitted = new UncommittedBranchData(type, msg, caught,
         helpInfo);
 
+    // Inherit the parent's compiler counters by default.
+    childLogger.performanceCounter.set(performanceCounter.get());
+
     // This logic is intertwined with log(). If a log message is associated
     // with a special error condition, then we turn it into a branch,
     // so this method can be called directly from log(). It is of course
@@ -170,8 +188,30 @@ public abstract class AbstractTreeLogger extends TreeLogger {
     return childLogger;
   }
 
+  /**
+   * Converts this branch to use a separate set of compiler counters.
+   */
+  public void clearPerformanceCounters() {
+    performanceCounter.set(new ConcurrentHashMap<PerformanceCounter, AtomicLong>());
+  }
+
   public final int getBranchedIndex() {
     return indexWithinMyParent;
+  }
+
+  /**
+   * Returns a snapshot of all the counters that have been incremented at least once.
+   *
+   * <p>If counters are incremented while this method is running, the snapshot is
+   * not guaranteed to be consistent between different counters.
+   */
+  public ImmutableMap<String, Long> getPerformanceCounts() {
+    ImmutableMap.Builder<String, Long> builder = ImmutableMap.builder();
+    Map<PerformanceCounter, AtomicLong> counters = this.performanceCounter.get();
+    for (PerformanceCounter counter : counters.keySet()) {
+      builder.put(counter.key, counters.get(counter).longValue());
+    }
+    return builder.build();
   }
 
   public final synchronized TreeLogger.Type getMaxDetail() {
@@ -313,6 +353,12 @@ public abstract class AbstractTreeLogger extends TreeLogger {
    */
   protected abstract void doLog(int indexOfLogEntryWithinParentLogger,
       TreeLogger.Type type, String msg, Throwable caught, HelpInfo helpInfo);
+
+  void incrementCounter(PerformanceCounter key, long amountToAdd) {
+    ConcurrentMap<PerformanceCounter, AtomicLong> counters = performanceCounter.get();
+    counters.putIfAbsent(key, new AtomicLong(0));
+    counters.get(key).addAndGet(amountToAdd);
+  }
 
   /**
    * Scans <code>t</code> and its causes for {@link OutOfMemoryError} or

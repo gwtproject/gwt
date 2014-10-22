@@ -83,6 +83,7 @@ import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.IdentityHashSet;
 import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.dev.util.log.PerformanceCounter;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -870,9 +871,13 @@ public class UnifyAst {
     mainLoop();
 
     if (incrementalCompile) {
+      int declaredTypesInModule = program.getModuleDeclaredTypes().size();
+
+      PerformanceCounter.DECLARED_TYPES_IN_MODULE.increment(logger, declaredTypesInModule);
+
       logger.log(TreeLogger.INFO, "Unification traversed " + liveFieldsAndMethods.size()
           + " fields and methods and " + program.getDeclaredTypes().size() + " types. "
-          + program.getModuleDeclaredTypes().size()
+          + declaredTypesInModule
           + " are considered part of the current module and " + fullFlowTypes.size()
           + " had all of their fields and methods traversed.");
 

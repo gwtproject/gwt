@@ -21,7 +21,7 @@ import com.google.gwt.core.ext.TreeLogger;
  * Forks logging over two child loggers. This provides the graphics + file
  * logging of DevModeBase's -logfile option.
  */
-public class CompositeTreeLogger extends TreeLogger {
+public class CompositeTreeLogger extends CountingTreeLogger {
 
   private TreeLogger[] loggers;
 
@@ -53,6 +53,15 @@ public class CompositeTreeLogger extends TreeLogger {
   public void log(Type type, String msg, Throwable caught, HelpInfo helpInfo) {
     for (TreeLogger logger : loggers) {
       logger.log(type, msg, caught, helpInfo);
+    }
+  }
+
+  @Override
+  void incrementCounter(PerformanceCounter key, long amountToAdd) {
+    for (TreeLogger logger : loggers) {
+      if (logger instanceof CountingTreeLogger) {
+        ((CountingTreeLogger)logger).incrementCounter(key, amountToAdd);
+      }
     }
   }
 }

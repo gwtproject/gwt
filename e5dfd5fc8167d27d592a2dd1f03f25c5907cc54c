@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7529ae84_48108342",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-22T22:52:50Z",
+      "side": 1,
+      "message": "this is not okay, since we want a different default for SDM started through dev mode than normal compiles",
+      "revId": "e5dfd5fc8167d27d592a2dd1f03f25c5907cc54c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55210a94_8a8b17fe",
         "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionMethodNameDisplayMode.java",
         "patchSetId": 1

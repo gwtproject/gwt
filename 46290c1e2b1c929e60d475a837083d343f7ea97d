@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "351e565a_97b22609",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-22T15:06:44Z",
+      "side": 1,
+      "message": "Here we should test additionally if   $i \u003d  servlet otherwise we could attach user sources to other modules.",
+      "revId": "46290c1e2b1c929e60d475a837083d343f7ea97d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

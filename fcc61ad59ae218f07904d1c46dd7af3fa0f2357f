@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55210a94_1ea19107",
+        "filename": "dev/core/src/com/google/gwt/dev/PrecompileTaskOptionsImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-22T16:34:01Z",
+      "side": 1,
+      "message": "[error] Unused import - java.awt.DisplayMode.",
+      "revId": "fcc61ad59ae218f07904d1c46dd7af3fa0f2357f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55210a94_fea5b513",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-22T16:34:01Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.core.ext.UnableToCompleteException.",
+      "revId": "fcc61ad59ae218f07904d1c46dd7af3fa0f2357f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55210a94_dea2f909",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-22T16:34:01Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "fcc61ad59ae218f07904d1c46dd7af3fa0f2357f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55210a94_beaf3df0",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerDisplayNameLevel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-22T16:34:01Z",
+      "side": 1,
+      "message": "[error] File contains tab characters (this is the first instance).",
+      "revId": "fcc61ad59ae218f07904d1c46dd7af3fa0f2357f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

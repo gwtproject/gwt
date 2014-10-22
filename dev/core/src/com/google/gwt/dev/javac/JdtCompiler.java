@@ -346,8 +346,9 @@ public class JdtCompiler {
       } catch (AbortCompilation e) {
         abortCount++;
         String filename = new String(cud.getFileName());
-        logger.log(TreeLogger.Type.ERROR,
-            "JDT aborted: " + filename + ": " + e.problem.getMessage());
+        TreeLogger.Type logLevel =
+            abortCount >= ABORT_COUNT_MAX ? TreeLogger.ERROR : TreeLogger.WARN;
+        logger.log(logLevel, "JDT aborted: " + filename + ": " + e.problem.getMessage());
         if (abortCount >= ABORT_COUNT_MAX) {
           throw e;
         }
@@ -355,8 +356,9 @@ public class JdtCompiler {
       } catch (RuntimeException e) {
         abortCount++;
         String filename = new String(cud.getFileName());
-        logger.log(TreeLogger.Type.ERROR,
-            "JDT threw an exception: " + filename + ": " + e);
+        TreeLogger.Type logLevel =
+            abortCount >= ABORT_COUNT_MAX ? TreeLogger.ERROR : TreeLogger.WARN;
+        logger.log(logLevel, "JDT threw an exception: " + filename + ": " + e);
         if (abortCount >= ABORT_COUNT_MAX) {
           throw new AbortCompilation(cud.compilationResult, e);
         }

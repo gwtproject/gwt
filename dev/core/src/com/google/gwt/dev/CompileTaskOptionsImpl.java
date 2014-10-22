@@ -17,7 +17,6 @@ package com.google.gwt.dev;
 
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.dev.cfg.Properties;
-import com.google.gwt.dev.util.arg.JsInteropMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
   private final List<String> moduleNames = new ArrayList<String>();
   private String outputLibraryPath;
   private File workDir;
-  private JsInteropMode jsInteropMode;
+  private Mode jsInteropMode;
 
   public CompileTaskOptionsImpl() {
   }
@@ -135,11 +134,11 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
     return link;
   }
 
-  @Override public JsInteropMode getJsInteropMode() {
+  @Override public Mode getJsInteropMode() {
     return jsInteropMode;
   }
 
-  @Override public void setJsInteropMode(JsInteropMode mode) {
+  @Override public void setJsInteropMode(Mode mode) {
     jsInteropMode = mode;
   }
 }

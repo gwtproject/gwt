@@ -19,11 +19,12 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 
 import java.util.HashSet;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Abstract base class for TreeLoggers.
  */
-public abstract class AbstractTreeLogger extends TreeLogger {
+public abstract class AbstractTreeLogger extends TreeLogger implements CanUpdateMetrics {
 
   private static class UncommittedBranchData {
 
@@ -101,6 +102,13 @@ public abstract class AbstractTreeLogger extends TreeLogger {
   private UncommittedBranchData uncommitted;
 
   /**
+   * Descendant tree loggers share the same MetricMap by default,
+   * but this can be overridden with {@link #resetMetricMap()}.
+   */
+  private final AtomicReference<MetricMap> metricMap =
+      new AtomicReference<MetricMap>(new MetricMap());
+
+  /**
    * The constructor used when creating a top-level logger.
    */
   protected AbstractTreeLogger() {
@@ -146,6 +154,9 @@ public abstract class AbstractTreeLogger extends TreeLogger {
     childLogger.uncommitted = new UncommittedBranchData(type, msg, caught,
         helpInfo);
 
+    // Inherit the parent's compiler counters by default.
+    childLogger.metricMap.set(metricMap.get());
+
     // This logic is intertwined with log(). If a log message is associated
     // with a special error condition, then we turn it into a branch,
     // so this method can be called directly from log(). It is of course
@@ -170,8 +181,24 @@ public abstract class AbstractTreeLogger extends TreeLogger {
     return childLogger;
   }
 
+  /**
+   * Clears this logger's MetricMap. If the map was shared with the
+   * parent logger, the parent's map will be unchanged and the new map will
+   * be independent of its parent.
+   */
+  public void resetMetricMap() {
+    metricMap.set(new MetricMap());
+  }
+
   public final int getBranchedIndex() {
     return indexWithinMyParent;
+  }
+
+  /**
+   * Returns the MetricMap currently associated with this TreeLogger.
+   */
+  public MetricMap getMetricMap() {
+    return metricMap.get();
   }
 
   public final synchronized TreeLogger.Type getMaxDetail() {
@@ -313,6 +340,10 @@ public abstract class AbstractTreeLogger extends TreeLogger {
    */
   protected abstract void doLog(int indexOfLogEntryWithinParentLogger,
       TreeLogger.Type type, String msg, Throwable caught, HelpInfo helpInfo);
+
+  public void setAmount(MetricName name, long amount) {
+    metricMap.get().setAmount(name, amount);
+  }
 
   /**
    * Scans <code>t</code> and its causes for {@link OutOfMemoryError} or

@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "7529ae84_2bc76e72",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/AbstractTreeLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-23T19:34:42Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to be generally true in Google code. I did a search on usages of AtomicReference and found many that are only using get() and set(). But I will switch to volatile since it doesn\u0027t affect functionality.",
+      "parentUuid": "f583dec2_5d004c70",
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f583dec2_7ca2f990",
         "filename": "dev/core/src/com/google/gwt/dev/util/log/MetricMap.java",
         "patchSetId": 3

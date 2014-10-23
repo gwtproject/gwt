@@ -16,17 +16,16 @@
 package com.google.gwt.dev.util.arg;
 
 import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode.Mode;
-import com.google.gwt.thirdparty.guava.common.base.Joiner;
-import com.google.gwt.util.tools.ArgHandlerString;
 
 /**
  * Argument handler set setting the display name setting in the compiler.
  */
-public class ArgHandlerMethodNameDisplayMode extends ArgHandlerString {
+public class ArgHandlerMethodNameDisplayMode extends ArgHandlerEnum<Mode> {
 
   private final OptionMethodNameDisplayMode option;
 
   public ArgHandlerMethodNameDisplayMode(OptionMethodNameDisplayMode option) {
+    super(Mode.class);
     this.option = option;
   }
 
@@ -47,19 +46,8 @@ public class ArgHandlerMethodNameDisplayMode extends ArgHandlerString {
   }
 
   @Override
-  public boolean setString(String value) {
-    Mode methodNameDisplayMode =
-        Mode.valueOf(value.toUpperCase());
-    if (methodNameDisplayMode == null) {
-      return false;
-    }
-    option.setMethodNameDisplayMode(methodNameDisplayMode);
-    return true;
-  }
-
-  @Override
-  public String[] getTagArgs() {
-    return new String[] {Joiner.on(" | ").join(
-        Mode.values())};
+  public void setValue(Mode value) {
+    option.setMethodNameDisplayMode(value);
+    option.setMethodNameDisplayMode(value);
   }
 }

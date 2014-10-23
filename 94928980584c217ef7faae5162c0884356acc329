@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7529ae84_6897bfad",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerEnum.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-23T00:48:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55210a94_9ee7dcbf",
+      "revId": "94928980584c217ef7faae5162c0884356acc329",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55210a94_7eec00a1",
         "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerEnum.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-23T00:44:45Z",
       "side": 1,
       "message": "[error] \u0027public\u0027 modifier out of order with the JLS suggestions.",
+      "revId": "94928980584c217ef7faae5162c0884356acc329",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7529ae84_489c03ce",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerEnum.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-23T00:48:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55210a94_7eec00a1",
       "revId": "94928980584c217ef7faae5162c0884356acc329",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

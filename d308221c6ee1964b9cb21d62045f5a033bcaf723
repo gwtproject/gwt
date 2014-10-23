@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7597ee02_e438aef5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-23T20:19:11Z",
+      "side": 1,
+      "message": "handlers",
+      "range": {
+        "startLine": 12,
+        "startChar": 26,
+        "endLine": 12,
+        "endChar": 34
+      },
+      "revId": "d308221c6ee1964b9cb21d62045f5a033bcaf723",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "351e565a_c83c7fb8",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-23T20:19:11Z",
+      "side": 1,
+      "message": "nit: variable does not need to be initialized.",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "d308221c6ee1964b9cb21d62045f5a033bcaf723",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

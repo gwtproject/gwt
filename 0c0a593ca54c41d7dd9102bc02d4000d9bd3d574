@@ -128,6 +128,29 @@
     },
     {
       "key": {
+        "uuid": "351e565a_1d7f574f",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-23T14:27:34Z",
+      "side": 1,
+      "message": "Wrong parameter name. should be: -XmethodNameDisplayMode",
+      "range": {
+        "startLine": 182,
+        "startChar": 4,
+        "endLine": 182,
+        "endChar": 34
+      },
+      "revId": "0c0a593ca54c41d7dd9102bc02d4000d9bd3d574",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f583dec2_d1952e17",
         "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerMethodNameDisplayMode.java",
         "patchSetId": 1

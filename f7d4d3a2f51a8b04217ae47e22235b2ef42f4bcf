@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f583dec2_718b02ff",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-23T00:58:16Z",
+      "side": 1,
+      "message": "indentation. Also unused cstr \u0026 field",
+      "revId": "f7d4d3a2f51a8b04217ae47e22235b2ef42f4bcf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

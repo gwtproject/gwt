@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "7597ee02_9e77bd43",
+        "filename": "user/src/com/google/gwt/user/History.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-23T12:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30202482_fe46219a",
+      "range": {
+        "startLine": 22,
+        "startChar": 25,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30202482_fe6f011a",
         "filename": "user/src/com/google/gwt/user/client/History.java",
         "patchSetId": 5
@@ -65,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "7597ee02_be74f93e",
+        "filename": "user/src/com/google/gwt/user/client/History.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-23T12:33:56Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "30202482_fe6f011a",
+      "range": {
+        "startLine": 89,
+        "startChar": 81,
+        "endLine": 90,
+        "endChar": 23
+      },
+      "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30202482_1e55bd47",
         "filename": "user/test/com/google/gwt/user/HistoryTestNoopTokenEncoder.gwt.xml",
         "patchSetId": 5
@@ -76,6 +124,30 @@
       "writtenOn": "2014-10-21T08:23:27Z",
       "side": 1,
       "message": "tabs",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 1
+      },
+      "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7597ee02_5e4375df",
+        "filename": "user/test/com/google/gwt/user/HistoryTestNoopTokenEncoder.gwt.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-23T12:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30202482_1e55bd47",
       "range": {
         "startLine": 16,
         "startChar": 0,
@@ -128,6 +200,30 @@
     },
     {
       "key": {
+        "uuid": "7597ee02_1e3ded55",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTestNoopTokenEncoder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-23T12:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30202482_5e5f3567",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6041f04_190f5c54",
         "filename": "user/test/com/google/gwt/user/client/ui/HistoryTestNoopTokenEncoder.java",
         "patchSetId": 5
@@ -156,6 +252,24 @@
       "writtenOn": "2014-10-21T08:23:27Z",
       "side": 1,
       "message": "nit: I think introducing and overriding the method to change the behavior is better:\n\n @Override\n protected isDoubleEncodingEnabled {\n   return false;\n }",
+      "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7597ee02_3e4229d9",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTestNoopTokenEncoder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-23T12:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30202482_9e47ed99",
       "revId": "f133c4a75bfc57423cfa7873210970946e1cec90",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

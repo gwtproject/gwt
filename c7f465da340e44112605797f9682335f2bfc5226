@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55210a94_bef17877",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-23T00:47:46Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cT\u003e tag.",
+      "revId": "c7f465da340e44112605797f9682335f2bfc5226",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55210a94_9e0c7cdf",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-23T00:47:46Z",
+      "side": 1,
+      "message": "[error] \u0027public\u0027 modifier out of order with the JLS suggestions.",
+      "revId": "c7f465da340e44112605797f9682335f2bfc5226",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

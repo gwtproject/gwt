@@ -88,6 +88,23 @@
     },
     {
       "key": {
+        "uuid": "f583dec2_7ca199b1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2646,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-23T01:44:36Z",
+      "side": 1,
+      "message": "add a default clause that throws AssertionError and remove below.\n\n default:\n   throw new AssertionError(\"Unknown mode: \" + ...);",
+      "revId": "0c0a593ca54c41d7dd9102bc02d4000d9bd3d574",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f583dec2_31857ae9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 1

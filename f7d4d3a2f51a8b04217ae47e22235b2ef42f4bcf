@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "351e565a_da9b254a",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-23T09:03:04Z",
+      "side": 1,
+      "message": "2014",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "f7d4d3a2f51a8b04217ae47e22235b2ef42f4bcf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d53a5ac4_97d8ccfd",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-23T09:03:04Z",
+      "side": 1,
+      "message": "Maybe we could extend ArgHandler directly and have a better error message in case the argument value is missing? (all other \"typed\" ArgHandlerXxx extend ArgHandler directly)",
+      "range": {
+        "startLine": 25,
+        "startChar": 65,
+        "endLine": 25,
+        "endChar": 81
+      },
+      "revId": "f7d4d3a2f51a8b04217ae47e22235b2ef42f4bcf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f583dec2_718b02ff",
         "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
         "patchSetId": 3
@@ -13,6 +59,87 @@
       "writtenOn": "2014-10-23T00:58:16Z",
       "side": 1,
       "message": "indentation. Also unused cstr \u0026 field",
+      "revId": "f7d4d3a2f51a8b04217ae47e22235b2ef42f4bcf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5359ed2_5875f56e",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-23T09:03:04Z",
+      "side": 1,
+      "message": "I supposed defaultEnumIndex was meant to be used by getDefaultArgs.\n\nI\u0027d prefer that a \u0027T\u0027 value be passed, and used in getDefaultArgs if it\u0027s non-null; and the one-arg ctor would call the 2-args ctor with \u0027null\u0027.",
+      "parentUuid": "f583dec2_718b02ff",
+      "revId": "f7d4d3a2f51a8b04217ae47e22235b2ef42f4bcf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "351e565a_1a8abdf7",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-23T09:03:04Z",
+      "side": 1,
+      "message": "Correct me if I\u0027m wrong but this is using toString() rather than name() on the enum values. They\u0027re generally the same but it\u0027s not guaranteed.\n\nIt wouldn\u0027t be much less readable to build the string ourselves using a StringBuilder and for loop.",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 38
+      },
+      "revId": "f7d4d3a2f51a8b04217ae47e22235b2ef42f4bcf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d53a5ac4_97432c08",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-23T09:03:04Z",
+      "side": 1,
+      "message": "Can we take that opportunity to fix this to toUpperCase(Locale.ENGLISH) ?",
+      "range": {
+        "startLine": 48,
+        "startChar": 39,
+        "endLine": 48,
+        "endChar": 65
+      },
+      "revId": "f7d4d3a2f51a8b04217ae47e22235b2ef42f4bcf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "351e565a_fa9ee13b",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-23T09:03:04Z",
+      "side": 1,
+      "message": "Try to reuse the same code as in getTagArgs?",
       "revId": "f7d4d3a2f51a8b04217ae47e22235b2ef42f4bcf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

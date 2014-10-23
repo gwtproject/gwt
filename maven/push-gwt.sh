@@ -24,23 +24,33 @@ repoUrlDefault=${GWT_MAVEN_REPO_URL:=$localRepoUrl}
 # repo id is ignored by local repo
 repoId=${GWT_MAVEN_REPO_ID:=none}
 
-# prompt for info
-read -e -p"GWT version for Maven (ex: 2.4.0): " gwtVersion
-case $gwtVersion in
-  *.*.* )
-    ;;
-  *.*.*-* )
-    ;;
-  * )
-    echo "Please enter a version of the form x.y.z or x.y.z-abc" 
-    exit 1;;
-esac
-
 gwtTrunk=$(dirname $(pwd))
-if [ -f ${gwtTrunk}/build/dist/gwt-*.zip ]; then
-  gwtPathDefault=$(ls ${gwtTrunk}/build/dist/gwt-*.zip | head -n1)
-  gwtPathPrompt=" ($gwtPathDefault)"
+gwtPathDefault=$(ls -r1 ${gwtTrunk}/build/dist/gwt-*.zip 2>/dev/null | head -1)
+if [[ -f "$gwtPathDefault" ]]; then
+  gwtPathPrompt="($gwtPathDefault)"
+  gwtVersionDefault=$(echo $gwtPathDefault | sed -e 's/.*gwt-\(.*\).zip/\1/')
+  gwtVersionPrompt="$gwtVersionDefault"
+else
+  gwtVersionPrompt="ex: 2.8.0-SNAPSHOT"
 fi
+
+# prompt for info
+read -e -p"GWT version for Maven ($gwtVersionPrompt): " gwtVersion
+case $gwtVersion in
+  "")
+    gwtVersion=$gwtVersionDefault
+    ;;
+  *.*.*|*.*.*-*)
+    ;;
+  *)
+    gwtVersion=""
+    ;;
+esac
+if [[ -z "$gwtVersion" ]]; then
+  echo "Please enter a version of the form x.y.z or x.y.z-abc"
+  exit 1
+fi
+
 read -e -p"Path to GWT distro zip $gwtPathPrompt: " gwtPath
 case $gwtPath in
   "" )

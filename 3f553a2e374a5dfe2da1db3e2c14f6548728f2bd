@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7597ee02_44440274",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2636,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-23T20:07:46Z",
+      "side": 1,
+      "message": "full qualified",
+      "range": {
+        "startLine": 2636,
+        "startChar": 38,
+        "endLine": 2636,
+        "endChar": 65
+      },
+      "revId": "3f553a2e374a5dfe2da1db3e2c14f6548728f2bd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "351e565a_48298f76",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2648,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-10-23T20:07:46Z",
+      "side": 1,
+      "message": "-s",
+      "range": {
+        "startLine": 2648,
+        "startChar": 47,
+        "endLine": 2648,
+        "endChar": 54
+      },
+      "revId": "3f553a2e374a5dfe2da1db3e2c14f6548728f2bd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

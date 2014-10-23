@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f583dec2_7df670f4",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/AbstractTreeLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-23T18:38:07Z",
+      "side": 1,
+      "message": "While it makes it obvious that there is a thread safety concern, unfortunately it is surprising and time consuming for the developer to go and look around to see it is not really used like an AtomicReference.\nLet\u0027s use just volatile instead.\n\nAlso on the side not, it looks like a good idea to be consistent with similar variables in the class. For example, either use volatile in other similar fields (e.g. loglevel) or keep protecting all fields with a synchronized keyword.",
+      "parentUuid": "55210a94_1e8f4c88",
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f583dec2_7ca2f990",
         "filename": "dev/core/src/com/google/gwt/dev/util/log/MetricMap.java",
         "patchSetId": 3
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "I switched from ConcurrentHashMap to synchronized methods because it makes the getSnapshot() API a bit simpler to understand. (It\u0027s simpler to guarantee that the snapshot is always consistent than to document that it might not be.)\n\nBut actually, it doesn\u0027t matter much. Most of the time only one thread will be accessing this object at a time, and then synchronization is almost a no-op. I\u0027m only making it thread-safe because we do run the compiler on multiple threads sometimes.",
       "parentUuid": "f583dec2_7ca2f990",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 21
+      },
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f583dec2_bd34f8d4",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/MetricMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-23T18:38:07Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "55210a94_9e491cb0",
       "range": {
         "startLine": 36,
         "startChar": 9,

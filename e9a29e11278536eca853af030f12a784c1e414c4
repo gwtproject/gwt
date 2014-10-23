@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7529ae84_08339b6a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-23T00:26:58Z",
+      "side": 1,
+      "message": "Maybe split this into two:\n\n  logger.log(TreeLogger.WARN, \"JDT aborted: \" + filename + \": \" + e.problem.getMessage());\n  if (abortCount \u003e\u003d ABORT_COUNT_MAX) {\n    logger.log(TreeLogger.ERROR, \"JDT aborted too many times\");\n    throw e;\n  }  \n\nand the same in the following one.",
+      "range": {
+        "startLine": 351,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 89
+      },
+      "revId": "e9a29e11278536eca853af030f12a784c1e414c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

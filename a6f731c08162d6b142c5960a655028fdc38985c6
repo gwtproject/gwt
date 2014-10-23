@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "f583dec2_5d004c70",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/AbstractTreeLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-23T18:55:28Z",
+      "side": 1,
+      "message": "\u003e How would you expect an AtomicReference to be used?\n\nAtomic reference is for \u0027CAS\u0027 operations like compareAndSet, getAndSet and other similar specialized methods benefit from CAS. \n\nRegular \u0027set\u0027 and \u0027get\u0027 are just simple field accessors for a volatile field.",
+      "parentUuid": "7529ae84_d850c2a0",
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f583dec2_7ca2f990",
         "filename": "dev/core/src/com/google/gwt/dev/util/log/MetricMap.java",
         "patchSetId": 3

@@ -82,10 +82,12 @@ public class ImplicitClientBundle {
    *
    * @param name the method name and the ui:field name
    * @param source path to the resource
+   * @param mimeType type of the resource
+   *
    * @return the newly-created DataResource
    */
-  public ImplicitDataResource createDataResource(String name, String source) {
-    ImplicitDataResource data = new ImplicitDataResource(name, source);
+  public ImplicitDataResource createDataResource(String name, String source, String mimeType) {
+    ImplicitDataResource data = new ImplicitDataResource(name, source, mimeType);
     dataMethods.add(data);
     return data;
   }

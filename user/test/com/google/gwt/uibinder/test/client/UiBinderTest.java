@@ -666,6 +666,10 @@ public class UiBinderTest extends GWTTestCase {
     assertEquals("P", widgetUi.flowPanelWithTag.getElement().getTagName());
   }
 
+  public void testSvgMimeType() {
+    assertTrue(widgetUi.svgData.getSafeUri().asString().contains("image/svg+xml"));
+  }
+
   /**
    * Assert that the expect strings are found in body, and in the order given.
    * WARNING: both body and expected are normalized to lower case, to get around

@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f583dec2_3cdeb11f",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/AbstractTreeLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-23T02:05:34Z",
+      "side": 1,
+      "message": "What is the point of AtomicReference if you are only using set and get methods? Perhaps you just need volatile instead?",
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f583dec2_7ca2f990",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/MetricMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-23T02:05:34Z",
+      "side": 1,
+      "message": "Instead of synchronized use ConcurrentHashMap instead? or better  ConcurrentHashMultiset and setCount instead of map.",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 21
+      },
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

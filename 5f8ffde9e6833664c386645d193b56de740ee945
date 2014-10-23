@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55210a94_e1f4f168",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTestNoopTokenEncoder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-23T12:34:10Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "5f8ffde9e6833664c386645d193b56de740ee945",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "7529ae84_d850c2a0",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/AbstractTreeLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-23T18:41:46Z",
+      "side": 1,
+      "message": "I don\u0027t know what you mean by \"not really used like an AtomicReference\" since this seems like standard usage to me. How would you expect an AtomicReference to be used?",
+      "parentUuid": "f583dec2_7df670f4",
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f583dec2_7ca2f990",
         "filename": "dev/core/src/com/google/gwt/dev/util/log/MetricMap.java",
         "patchSetId": 3

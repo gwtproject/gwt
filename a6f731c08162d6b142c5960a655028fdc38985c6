@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "55210a94_1e8f4c88",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/AbstractTreeLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-23T02:39:39Z",
+      "side": 1,
+      "message": "As far as I know, there is no difference. I use AtomicReference for this sort of thing just because it\u0027s more obvious that we are thinking about thread safety for this variable.",
+      "parentUuid": "f583dec2_3cdeb11f",
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f583dec2_7ca2f990",
         "filename": "dev/core/src/com/google/gwt/dev/util/log/MetricMap.java",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2014-10-23T02:05:34Z",
       "side": 1,
       "message": "Instead of synchronized use ConcurrentHashMap instead? or better  ConcurrentHashMultiset and setCount instead of map.",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 21
+      },
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55210a94_9e491cb0",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/MetricMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-10-23T02:39:39Z",
+      "side": 1,
+      "message": "I switched from ConcurrentHashMap to synchronized methods because it makes the getSnapshot() API a bit simpler to understand. (It\u0027s simpler to guarantee that the snapshot is always consistent than to document that it might not be.)\n\nBut actually, it doesn\u0027t matter much. Most of the time only one thread will be accessing this object at a time, and then synchronization is almost a no-op. I\u0027m only making it thread-safe because we do run the compiler on multiple threads sometimes.",
+      "parentUuid": "f583dec2_7ca2f990",
       "range": {
         "startLine": 36,
         "startChar": 9,

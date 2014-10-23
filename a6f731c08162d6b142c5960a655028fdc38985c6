@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "35a1f65e_5f8b6ffe",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/AbstractTreeLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-23T21:50:58Z",
+      "side": 1,
+      "message": "I guess there are other people thinking in similar way.\n\nI\u0027ll leave you and John to decide which one you guys think more readable/helpful but please make sure it is consistent in the class (i.e. choose one (synchronized vs. atomicreference vs. volatile) and use it in all similar fields).",
+      "parentUuid": "7529ae84_2bc76e72",
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f583dec2_7ca2f990",
         "filename": "dev/core/src/com/google/gwt/dev/util/log/MetricMap.java",
         "patchSetId": 3

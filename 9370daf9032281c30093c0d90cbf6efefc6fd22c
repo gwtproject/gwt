@@ -16,6 +16,24 @@
       "revId": "9370daf9032281c30093c0d90cbf6efefc6fd22c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "557d8a9e_15d87480",
+        "filename": "dev/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-24T18:17:25Z",
+      "side": 0,
+      "message": "Blaze is now smarter about that.",
+      "parentUuid": "351e565a_c877df42",
+      "revId": "9370daf9032281c30093c0d90cbf6efefc6fd22c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

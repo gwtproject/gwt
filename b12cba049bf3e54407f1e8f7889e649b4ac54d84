@@ -16,6 +16,24 @@
       "revId": "b12cba049bf3e54407f1e8f7889e649b4ac54d84",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "351e565a_038ff887",
+        "filename": "maven/push-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-24T19:41:30Z",
+      "side": 1,
+      "message": "Using GWT_VERSION and GWT_DIST_FILE as default values if they exist.\n\nUsing expr and default var assign instead of \u0027sed\u0027 and \u0027case\u0027",
+      "parentUuid": "7597ee02_64b81ef0",
+      "revId": "b12cba049bf3e54407f1e8f7889e649b4ac54d84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7597ee02_64b81ef0",
+        "filename": "maven/push-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-24T02:41:05Z",
+      "side": 1,
+      "message": "What if gwtVersionDefault doesn\u0027t match the x.y.z or x.y.z-abc pattern? Shouldn\u0027t we check it? Maybe adapting the \u0027sed\u0027 expression?\n\n gwtVersionDefault\u003d$(echo $gwtPathDefault | sed -e \u0027s/.*gwt-\\(.*\\\\..*\\\\..*\\(-.*\\)?\\)\\.zip/\\1/\u0027\n if [[ \"$gwtVersionDefault\" \u003d\u003d \"$gwtPathDefault\" ]]; then\n   gwtVersionDefault\u003d\"\"\n fi\n\nor using a \u0027case\u0027 expression to \"sanitized\" the extracted gwtVersionDefault:\n\n case $gwtVersionDefault in\n   *.*.*|*.*.*-*)\n     ;;\n   *)\n     gwtVersionDefault\u003d\"\"\n esac\n\n(in any case, that means changing where and how gwtVersionPrompt is computed)",
+      "revId": "b12cba049bf3e54407f1e8f7889e649b4ac54d84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55210a94_8d968cd7",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerNamespace.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-24T00:10:22Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should be on the previous line.",
+      "revId": "6c30646f76cc88c5d7bcdcb5ecff3a28f5d13061",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55210a94_6d8b30ad",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerScriptStyle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-24T00:10:22Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "6c30646f76cc88c5d7bcdcb5ecff3a28f5d13061",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

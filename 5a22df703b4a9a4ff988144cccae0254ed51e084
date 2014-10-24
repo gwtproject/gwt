@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5359ed2_c646a219",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerLogLevel.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-24T02:17:31Z",
+      "side": 1,
+      "message": "That code is now unused.\n\n(BTW, this is how I\u0027d have done ArgHandlerEnum\u0027s getFormattedOptionNames, more or less)",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 3
+      },
+      "revId": "5a22df703b4a9a4ff988144cccae0254ed51e084",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5359ed2_a6439e07",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-24T02:17:31Z",
+      "side": 1,
+      "message": "I believe this is a breaking change; actually, I believe forcing a default value here is a breaking change.\n\nArg handlers with a non-null getDefaultArgs have those getDefaultArgs processed if the arg hasn\u0027t been explicitly passed, therefore overwriting any default you could have put in your \"options\". For example, if you don\u0027t pass -Xnamespace, handle() will be called with NONE and this will overwrite the PACKAGE you could have put as a default value in your options (or put in your options as a result of some other argument being passed; e.g. -draft)\n\nI\u0027d rather go with a nullable defaultValue.",
+      "revId": "5a22df703b4a9a4ff988144cccae0254ed51e084",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "351e565a_a8cee365",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-24T02:17:31Z",
+      "side": 1,
+      "message": "…or you could have removed the brackets from getFormattedOptionNames so you could call it here, and add them in getTagArgs() (they\u0027re not necessary in the error messages in handle())",
+      "revId": "5a22df703b4a9a4ff988144cccae0254ed51e084",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "351e565a_88fd6782",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-24T02:17:31Z",
+      "side": 1,
+      "message": "I fear this could cause some issues, particularly when several enum constants share the same prefix.\n\nGiven that it\u0027s only used in ArgHandlerScriptStyle (where we know that\u0027s not the case), I\u0027d rather have a hook so some special handling can be put in that subclass, and only add the \"legacy\" behavior of OBF → OBFUSCATED.",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 54
+      },
+      "revId": "5a22df703b4a9a4ff988144cccae0254ed51e084",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

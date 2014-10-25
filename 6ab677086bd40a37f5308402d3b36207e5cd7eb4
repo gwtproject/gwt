@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "f5359ed2_cc224341",
+        "filename": "maven/push-gwt.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-25T14:46:06Z",
+      "side": 1,
+      "message": "well \u0027ls\u0027 by default is already sort by ctime -c, when specifying -t means sort by mtime. Not sure what is better here if creation time or modification, maybe -t makes more sense.",
+      "parentUuid": "7597ee02_32101842",
+      "range": {
+        "startLine": 29,
+        "startChar": 37,
+        "endLine": 29,
+        "endChar": 40
+      },
+      "revId": "6ab677086bd40a37f5308402d3b36207e5cd7eb4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5359ed2_0c004b9d",
         "filename": "maven/push-gwt.sh",
         "patchSetId": 3
@@ -167,6 +191,30 @@
       "side": 1,
       "message": "My \"info coreutils\" tells me \\? \\+ and \\| are supported, and POSIX allows both behavior, so if it\u0027s supported on OS X I think we could use it.",
       "parentUuid": "f5359ed2_cc0923c9",
+      "range": {
+        "startLine": 34,
+        "startChar": 52,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "6ab677086bd40a37f5308402d3b36207e5cd7eb4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "351e565a_2edd3b71",
+        "filename": "maven/push-gwt.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-25T14:46:06Z",
+      "side": 1,
+      "message": "expr \"a\" : \"a.+\" or expr \"a\" : \"a.\\+\" don\u0027t work on linux nor mac.\nI already have consider the reduced set of regexp when programming shell scripts, maybe things have improved in some unixes, but I think it\u0027s safer not try to use extended syntax here.",
+      "parentUuid": "f5359ed2_ec25074b",
       "range": {
         "startLine": 34,
         "startChar": 52,

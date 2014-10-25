@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "351e565a_8ef7aff1",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderParser.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-25T16:47:56Z",
+      "side": 1,
+      "message": "use elem.consumeRawAttribute(MIME_TYPE_ATTRIBUTE) \nThis method returns null if the attribute is not set (even if the javadoc is confusing)",
+      "revId": "912b8ccf6c42b0752ea507df64792db27102d431",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

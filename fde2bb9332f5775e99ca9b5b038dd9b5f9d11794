@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7597ee02_7206a011",
+        "filename": "maven/push-gwt.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-25T13:59:45Z",
+      "side": 1,
+      "message": "Added this so as we could use this script to automatically deploy with all options set in env vars just passing \u0027\\n\u0027 to all \u0027read\u0027,  for instance:\n\nyes \u0027\u0027 | GWT_DIST_FILE\u003d... GWT_GPG_PASS\u003dfoo maven/push-gwt.sh",
+      "revId": "fde2bb9332f5775e99ca9b5b038dd9b5f9d11794",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

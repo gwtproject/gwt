@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "956b82dc_8648d4f9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-26T00:20:00Z",
+      "side": 1,
+      "message": "[warning] \u0027for\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "389438202f36e8cbc0efe5684c5cd874bf971c94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

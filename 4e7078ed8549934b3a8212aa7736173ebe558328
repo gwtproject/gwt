@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35cf3649_923c7cb7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-27T17:41:49Z",
+      "side": 1,
+      "message": "I would have a separate abstraction for the call graph (as well as for other types of dependencies). \nThere are several choices to make here:\n (1) whether it is precise or not; \n (2) does it get updated incrementally or recomputed; does it need to be updated by optimizations (some/all). \n\nIf the graph is not precise edges might not need to be removed in the optimizations.\n\nThe other piece of data that needs to be kept track of is modifications and here there is also some options:\n(1) granularity: what are the elements whose modifications we track. (probably tracking modifications to methods, classes and fields).\n(2) Does each optimization need to keep track of items of interest or can we use a global scheme (timestamps)",
+      "revId": "4e7078ed8549934b3a8212aa7736173ebe558328",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

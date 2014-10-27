@@ -136,7 +136,7 @@ div {
 }
 
 div-with-literal {
-  top: literal("expression(document.compatMode==\"CSS1Compat\" ? documentElement.scrollTop:document.body.scrollTop \\ 2)");
+  top: literal("linear-gradient(to bottom, #000 20%, #fff 80%)");
 }
 
 ns\:tag {

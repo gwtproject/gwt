@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75ae0e67_a92fd9a6",
+        "filename": "user/src/com/google/gwt/core/client/impl/Coercions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-10-27T22:31:06Z",
+      "side": 1,
+      "message": "What about Cast.narrow_int?",
+      "range": {
+        "startLine": 27,
+        "startChar": 11,
+        "endLine": 27,
+        "endChar": 46
+      },
+      "revId": "0a9df12b6ba13eafd0d380da3aaba3b382ae6a88",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

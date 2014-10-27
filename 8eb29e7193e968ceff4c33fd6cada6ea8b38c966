@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f52f5eb3_82c29a5f",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerScriptStyle.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-27T22:13:56Z",
+      "side": 1,
+      "message": "Some option interface implementors are unmodifiable and throw exceptions if set is called. I don\u0027t think set will be called for those but there are many implementors and entry points. Defensive programming.",
+      "parentUuid": "956b82dc_60a1e306",
+      "revId": "8eb29e7193e968ceff4c33fd6cada6ea8b38c966",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "956b82dc_00a6e71f",
         "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
         "patchSetId": 10
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f52f5eb3_a2a87e99",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-27T22:13:56Z",
+      "side": 1,
+      "message": "Now with tests :)",
+      "parentUuid": "956b82dc_00a6e71f",
+      "revId": "8eb29e7193e968ceff4c33fd6cada6ea8b38c966",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "956b82dc_006ee76e",
         "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
         "patchSetId": 10
@@ -47,6 +83,24 @@
       "writtenOn": "2014-10-27T19:16:04Z",
       "side": 1,
       "message": "I\u0027m not sure if I like this as it introduces a new breakage mode for scripts (i.e. adding a new option that has the same prefix).",
+      "revId": "8eb29e7193e968ceff4c33fd6cada6ea8b38c966",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f52f5eb3_e220c691",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-27T22:13:56Z",
+      "side": 1,
+      "message": "Yes. I would argue that if your write a script you should use the full option.\n\nWould it be better to support explicitly OBF and DET in the handler for -style? Or maybe force partial prefixes to be at least of length 3.",
+      "parentUuid": "956b82dc_006ee76e",
       "revId": "8eb29e7193e968ceff4c33fd6cada6ea8b38c966",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

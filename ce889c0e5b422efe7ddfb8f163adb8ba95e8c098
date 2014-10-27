@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55abca56_25f6aef3",
+        "filename": "samples/common.ant.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-27T16:42:32Z",
+      "side": 0,
+      "message": "User depends on Editor which uses javax.validation, so I think you need those.\n\nAnd you\u0027d also have to add them to the \"devmode\" target.",
+      "revId": "ce889c0e5b422efe7ddfb8f163adb8ba95e8c098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -22,6 +22,30 @@
       "revId": "65f567ce0a1188c0ee8a70a935bb367395cbeab9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15ccf252_ab858965",
+        "filename": "user/src/com/google/gwt/resources/converter/GssGenerationVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-10-27T13:47:37Z",
+      "side": 1,
+      "message": "I remove the comment. The reason is just that String css value (surrounded by quotes) should not be unescaped.",
+      "parentUuid": "b5db2605_73f23a32",
+      "range": {
+        "startLine": 601,
+        "startChar": 8,
+        "endLine": 601,
+        "endChar": 38
+      },
+      "revId": "65f567ce0a1188c0ee8a70a935bb367395cbeab9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

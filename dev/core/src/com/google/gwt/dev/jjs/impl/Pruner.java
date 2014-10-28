@@ -498,6 +498,14 @@ public class Pruner {
 
   private static final String NAME = Pruner.class.getSimpleName();
 
+  public static OptimizerStats exec(JProgram program, boolean noSpecialTypes,
+      OptimizerDependencies optDependencies) {
+    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+    OptimizerStats stats = new Pruner(program, noSpecialTypes, optDependencies).execImpl();
+    optimizeEvent.end("didChange", "" + stats.didChange());
+    return stats;
+  }
+
   public static OptimizerStats exec(JProgram program, boolean noSpecialTypes) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
     OptimizerStats stats = new Pruner(program, noSpecialTypes).execImpl();
@@ -607,13 +615,38 @@ public class Pruner {
 
   private final boolean saveCodeGenTypes;
 
+  private final OptimizerDependencies optDependencies;
+
   private Pruner(JProgram program, boolean saveCodeGenTypes) {
     this.program = program;
     this.saveCodeGenTypes = saveCodeGenTypes;
+    this.optDependencies = new OptimizerDependencies();
+  }
+
+  private Pruner(JProgram program, boolean saveCodeGenTypes, OptimizerDependencies optDependencies) {
+    this.program = program;
+    this.saveCodeGenTypes = saveCodeGenTypes;
+    this.optDependencies = optDependencies;
   }
 
   private OptimizerStats execImpl() {
     OptimizerStats stats = new OptimizerStats(NAME);
+
+    /*
+     * To be implemented, now just mark all fields and methods as modified.
+     */
+    for (JDeclaredType type : program.getDeclaredTypes()) {
+      if (program.isReferenceOnly(type)) {
+        continue;
+      }
+      for (JField f : type.getFields()) {
+        optDependencies.addModifiedField(f, OptimizerDependencies.PRUNER_IDX);
+      }
+      for (JMethod m : type.getMethods()) {
+        optDependencies.addModifiedMethod(m, OptimizerDependencies.PRUNER_IDX);
+      }
+    }
+    optDependencies.getCallGraph().reset();
 
     ControlFlowAnalyzer livenessAnalyzer = new ControlFlowAnalyzer(program);
     // Don't prune JSOs, JsTypes that were considered instantiated before removing

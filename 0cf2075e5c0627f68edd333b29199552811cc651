@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "d55dfa60_7f29e776",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-28T20:54:39Z",
+      "side": 1,
+      "message": "I thought it read better this way. But ifyou think otherwise I\u0027ll revert.",
+      "parentUuid": "d55dfa60_597a43e6",
+      "range": {
+        "startLine": 769,
+        "startChar": 54,
+        "endLine": 769,
+        "endChar": 56
+      },
+      "revId": "0cf2075e5c0627f68edd333b29199552811cc651",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d55dfa60_19656b3e",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
         "patchSetId": 2
@@ -53,6 +77,30 @@
       "writtenOn": "2014-10-28T19:40:31Z",
       "side": 1,
       "message": "I\u0027m lost here. Not sure what is the effect of changing this line?",
+      "range": {
+        "startLine": 847,
+        "startChar": 13,
+        "endLine": 847,
+        "endChar": 22
+      },
+      "revId": "0cf2075e5c0627f68edd333b29199552811cc651",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d55dfa60_5f2ea380",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-28T20:54:39Z",
+      "side": 1,
+      "message": "This should be instead of lines 752-755 (I thought I had removed those). It accomplishes the same but is more efficient as it does not need to examine the body of the function at all.",
+      "parentUuid": "d55dfa60_19656b3e",
       "range": {
         "startLine": 847,
         "startChar": 13,

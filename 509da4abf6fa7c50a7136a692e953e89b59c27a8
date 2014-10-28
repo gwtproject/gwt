@@ -16,6 +16,24 @@
       "revId": "509da4abf6fa7c50a7136a692e953e89b59c27a8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d55dfa60_9f167b3b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 3098,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-28T20:54:39Z",
+      "side": 0,
+      "message": "The remotion does not seem to have a negative performance impact, but I have to yet to benchmark it more accurately.",
+      "parentUuid": "d55dfa60_f95d176f",
+      "revId": "509da4abf6fa7c50a7136a692e953e89b59c27a8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

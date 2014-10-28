@@ -766,7 +766,7 @@ public class JsInliner {
         return;
       }
 
-      if (!program.isInliningAllowed(invokedFunction)) {
+      if (!program.isInliningAllowed(invokedFunction) || blacklist.contains(invokedFunction)) {
         return;
       }
 
@@ -775,11 +775,6 @@ public class JsInliner {
        * engines will blow up.
        */
       if (invokedFunction.getBody().getStatements().size() > MAX_INLINE_FN_SIZE) {
-        return;
-      }
-
-      // Don't inline blacklisted functions
-      if (blacklist.contains(invokedFunction)) {
         return;
       }
 
@@ -849,7 +844,7 @@ public class JsInliner {
     public boolean visit(JsFunction x, JsContext ctx) {
       functionStack.push(x);
       newLocalVariableStack.push(new ArrayList<JsName>());
-      return true;
+      return whitelist.contains(x);
     }
 
     /**

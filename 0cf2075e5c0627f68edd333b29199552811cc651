@@ -16,6 +16,52 @@
       "revId": "0cf2075e5c0627f68edd333b29199552811cc651",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d55dfa60_597a43e6",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-28T19:40:31Z",
+      "side": 1,
+      "message": "Earlier all conditions was consistently in their own if block. Is there any particular reason to merge this one?",
+      "range": {
+        "startLine": 769,
+        "startChar": 54,
+        "endLine": 769,
+        "endChar": 56
+      },
+      "revId": "0cf2075e5c0627f68edd333b29199552811cc651",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d55dfa60_19656b3e",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-28T19:40:31Z",
+      "side": 1,
+      "message": "I\u0027m lost here. Not sure what is the effect of changing this line?",
+      "range": {
+        "startLine": 847,
+        "startChar": 13,
+        "endLine": 847,
+        "endChar": 22
+      },
+      "revId": "0cf2075e5c0627f68edd333b29199552811cc651",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

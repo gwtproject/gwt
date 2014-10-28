@@ -1,0 +1,4 @@
+
+.foo {
+  background-image: url(data:image/svg+xml;base64,PD94basdfasdfasdf);
+}

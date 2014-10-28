@@ -93,6 +93,11 @@ public class Css2GssTest extends TestCase {
     assertFileContentEqualsAfterConversion("escape.css", "escape.gss", true);
   }
 
+  public void testRegressionInConstantsDetection() throws IOException, UnableToCompleteException {
+    assertFileContentEqualsAfterConversion(
+        "constant-detection-regression.css", "constant-detection-regression.gss", true);
+  }
+
   private void assertFileContentEqualsAfterConversion(String inputCssFile, String expectedGssFile)
       throws IOException, UnableToCompleteException {
     assertFileContentEqualsAfterConversion(inputCssFile, expectedGssFile, false);

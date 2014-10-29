@@ -30,45 +30,25 @@ public final class Integer extends Number implements Comparable<Integer> {
    */
   private static class BoxedValues {
     // Box values according to JLS - between -128 and 127
-    private static Integer[] boxedValues = new Integer[256];
+    private static final Integer[] boxedValues = new Integer[256];
   }
 
-  /**
-   * Use nested class to avoid clinit on outer.
-   */
-  private static class ReverseNibbles {
-    /**
-     * A fast-lookup of the reversed bits of all the nibbles 0-15. Used to
-     * implement {@link #reverse(int)}.
-     */
-    private static int[] reverseNibbles = {
-        0x0, 0x8, 0x4, 0xc, 0x2, 0xa, 0x6, 0xe, 0x1, 0x9, 0x5, 0xd, 0x3, 0xb,
-        0x7, 0xf};
-  }
-
-  public static int bitCount(int x) {
-    // Courtesy the University of Kentucky
-    // http://aggregate.org/MAGIC/#Population%20Count%20(Ones%20Count)
-    x -= ((x >> 1) & 0x55555555);
-    x = (((x >> 2) & 0x33333333) + (x & 0x33333333));
-    x = (((x >> 4) + x) & 0x0f0f0f0f);
-    x += (x >> 8);
-    x += (x >> 16);
-    return x & 0x0000003f;
+  public static int bitCount(int i) {
+    // Based on Henry S. Warren "Hacker's Delight", 2nd edition, Figure 5-1.
+    i = i - ((i >> 1) & 0x55555555);
+    i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+    i = (i + (i >> 4)) & 0x0f0f0f0f;
+    i = i + (i >> 8);
+    i = i + (i >> 16);
+    return i & 0x0000003f;
   }
 
   public static int compare(int x, int y) {
-    if (x < y) {
-      return -1;
-    } else if (x > y) {
-      return 1;
-    } else {
-      return 0;
-    }
+    return x < y ? -1 : (x == y ? 0 : 1);
   }
 
   public static Integer decode(String s) throws NumberFormatException {
-    return Integer.valueOf(__decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
+    return valueOf(__decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
   }
 
   /**
@@ -81,68 +61,87 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static int highestOneBit(int i) {
-    if (i < 0) {
-      return MIN_VALUE;
-    } else if (i == 0) {
-      return 0;
-    } else {
-      int rtn;
-      for (rtn = 0x40000000; (rtn & i) == 0; rtn >>= 1) {
-        // loop down until matched
-      }
-      return rtn;
-    }
+    // Based on Henry S. Warren "Hacker's Delight", 2nd edition, Figure 3-1.
+    i |= (i >>  1);
+    i |= (i >>  2);
+    i |= (i >>  4);
+    i |= (i >>  8);
+    i |= (i >> 16);
+    return i - (i >>> 1);
   }
 
   public static int lowestOneBit(int i) {
+    // Based on Henry S. Warren "Hacker's Delight", 2nd edition, Section 2-1.
     return i & -i;
   }
 
   public static int numberOfLeadingZeros(int i) {
-    // Based on Henry S. Warren, Jr: "Hacker's Delight", p. 80.
+    // Based on Henry S. Warren "Hacker's Delight", 2nd edition, Figure 5-12.
     if (i < 0) {
       return 0;
-    } else if (i == 0) {
-      return SIZE;
-    } else {
-      int y, m, n;
-
-      y = -(i >> 16);
-      m = (y >> 16) & 16;
-      n = 16 - m;
-      i = i >> m;
-
-      y = i - 0x100;
-      m = (y >> 16) & 8;
-      n += m;
-      i <<= m;
-
-      y = i - 0x1000;
-      m = (y >> 16) & 4;
-      n += m;
-      i <<= m;
-
-      y = i - 0x4000;
-      m = (y >> 16) & 2;
-      n += m; 
-      i <<= m;
-
-      y = i >> 14;
-      m = y & ~(y >> 1);
-      return n + 2 - m;
     }
+
+    if (i == 0) {
+      return SIZE;
+    }
+
+    int y, m, n;
+
+    y = -(i >> 16);
+    m = (y >> 16) & 16;
+    n = 16 - m;
+    i = i >> m;
+
+    y = i - 0x100;
+    m = (y >> 16) & 8;
+    n += m;
+    i <<= m;
+
+    y = i - 0x1000;
+    m = (y >> 16) & 4;
+    n += m;
+    i <<= m;
+
+    y = i - 0x4000;
+    m = (y >> 16) & 2;
+    n += m;
+    i <<= m;
+
+    y = i >> 14;
+    m = y & ~(y >> 1);
+    return n + 2 - m;
   }
 
   public static int numberOfTrailingZeros(int i) {
+    // Based on Henry S. Warren "Hacker's Delight", 2nd edition, Figure 5-18.
     if (i == 0) {
       return SIZE;
-    } else {
-      int rtn = 0;
-      for (int r = 1; (r & i) == 0; r <<= 1) {
-        rtn++;
-      }
-      return rtn;
     }
+
+    int n, y;
+
+    n = 31;
+    y = i << 16;
+    if (y != 0) {
+      n = n - 16;
+      i = y;
+    }
+    y = i << 8;
+    if (y != 0) {
+      n = n - 8;
+      i = y;
+    }
+    y = i << 4;
+    if (y != 0) {
+      n = n - 4;
+      i = y;
+    }
+    y = i << 2;
+    if (y != 0) {
+      n = n - 2;
+      i = y;
+    }
+    return n - ((i << 1) >>> 31);
   }
 
   public static int parseInt(String s) throws NumberFormatException {
@@ -154,11 +153,13 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static int reverse(int i) {
-    int[] nibbles = ReverseNibbles.reverseNibbles;
-    return (nibbles[i >>> 28]) | (nibbles[(i >> 24) & 0xf] << 4)
-        | (nibbles[(i >> 20) & 0xf] << 8) | (nibbles[(i >> 16) & 0xf] << 12)
-        | (nibbles[(i >> 12) & 0xf] << 16) | (nibbles[(i >> 8) & 0xf] << 20)
-        | (nibbles[(i >> 4) & 0xf] << 24) | (nibbles[i & 0xf] << 28);
+    // Based on Henry S. Warren "Hacker's Delight", 2nd edition, Figure 7-1.
+    i = (i & 0x55555555) << 1 | (i >>> 1) & 0x55555555;
+    i = (i & 0x33333333) << 2 | (i >>> 2) & 0x33333333;
+    i = (i & 0x0f0f0f0f) << 4 | (i >>> 4) & 0x0f0f0f0f;
+    i = (i << 24) | ((i & 0xff00) << 8) |
+        ((i >>> 8) & 0xff00) | (i >>> 24);
+    return i;
   }
 
   public static int reverseBytes(int i) {
@@ -167,34 +168,18 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static int rotateLeft(int i, int distance) {
-    while (distance-- > 0) {
-      i = i << 1 | ((i < 0) ? 1 : 0);
-    }
-    return i;
+    // Based on Henry S. Warren "Hacker's Delight", 2nd edition, Section 2-15.
+    return (i << distance) | (i >>> -distance);
   }
 
   public static int rotateRight(int i, int distance) {
-    int ui = i & MAX_VALUE; // avoid sign extension
-    int carry = (i < 0) ? 0x40000000 : 0; // MIN_VALUE rightshifted 1
-    while (distance-- > 0) {
-      int nextcarry = ui & 1;
-      ui = carry | (ui >> 1);
-      carry = (nextcarry == 0) ? 0 : 0x40000000;
-    }
-    if (carry != 0) {
-      ui = ui | MIN_VALUE;
-    }
-    return ui;
+    // Based on Henry S. Warren "Hacker's Delight", 2nd edition, Section 2-15.
+    return (i >>> distance) | (i << -distance);
   }
 
   public static int signum(int i) {
-    if (i == 0) {
-      return 0;
-    } else if (i < 0) {
-      return -1;
-    } else {
-      return 1;
-    }
+    // Based on Henry S. Warren "Hacker's Delight", 2nd edition, Section 2-8.
+    return (i >> 31) | (-i >>> 31);
   }
 
   public static String toBinaryString(int value) {
@@ -236,9 +221,8 @@ public final class Integer extends Number implements Comparable<Integer> {
     return valueOf(s, 10);
   }
 
-  public static Integer valueOf(String s, int radix)
-      throws NumberFormatException {
-    return Integer.valueOf(Integer.parseInt(s, radix));
+  public static Integer valueOf(String s, int radix) throws NumberFormatException {
+    return valueOf(parseInt(s, radix));
   }
 
   private static native String toRadixString(int value, int radix) /*-{

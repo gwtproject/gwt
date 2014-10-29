@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55abca56_ae6a7b85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-29T10:38:06Z",
+      "side": 1,
+      "message": "Modern JVMs (since 1.5, so it\u0027s not recent) no longer have a default -Xmx (at least OpenJDK and Oracle JDK [1,2]), so it\u0027s not really about \"increasing\" the memory, but rather \"constraining\" it.\n\nThat said, on my machine with 8Mb of RAM, **not** specifying the Xmx actually took all resources, making the machine unusable for a few minutes. Setting the Xmx back [1] fixed the issue (I meant to add it back to the samples and webappcreator but totally forgot about it, sorry)\n\n[1] http://docs.oracle.com/javase/7/docs/technotes/tools/windows/java.html\n[2] http://docs.oracle.com/javase/7/docs/technotes/guides/vm/gc-ergonomics.html\n[3] https://github.com/gwt-maven-plugin/gwt-maven-plugin/commit/da5140bb73cdcc1dde497b7a339e54db5aa4e6c6",
+      "revId": "efd7c4dc90542f0b8d8138f4d9b05520212a9ff5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "354d76af_9f81578c",
+        "filename": "user/src/com/google/gwt/user/tools/templates/ant/build.xmlsrc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-29T10:38:06Z",
+      "side": 1,
+      "message": "Note: gwt-maven-plugin (historically) defaults to 512m",
+      "revId": "efd7c4dc90542f0b8d8138f4d9b05520212a9ff5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "354d76af_df7bdf13",
+        "filename": "user/src/com/google/gwt/user/tools/templates/ant/build.xmlsrc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-29T10:38:06Z",
+      "side": 1,
+      "message": "Not sure we need to set that one (but I must say I haven\u0027t actually tried without a Xmx)",
+      "revId": "efd7c4dc90542f0b8d8138f4d9b05520212a9ff5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

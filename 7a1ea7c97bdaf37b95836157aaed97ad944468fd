@@ -1,0 +1,245 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35665637_9d504759",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-29T18:53:03Z",
+      "side": 1,
+      "message": "We try to use as convention for maps names like\n\n  calledMethodsByCallerMethod\n\nin that way it is easy to see how the information is stored. Of course our older code does not follow that convention yet.",
+      "range": {
+        "startLine": 29,
+        "startChar": 37,
+        "endLine": 29,
+        "endChar": 45
+      },
+      "revId": "7a1ea7c97bdaf37b95836157aaed97ad944468fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35665637_ddac7ffd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-29T18:53:03Z",
+      "side": 1,
+      "message": "You might want to use Guavas Multimap\u003cJMethod, JMethod\u003e\n\nYou can see examples of that usage in JTypeOracle.",
+      "range": {
+        "startLine": 29,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 35
+      },
+      "revId": "7a1ea7c97bdaf37b95836157aaed97ad944468fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35665637_3d4933ae",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-29T18:53:03Z",
+      "side": 1,
+      "message": "Please java doc public methods.",
+      "revId": "7a1ea7c97bdaf37b95836157aaed97ad944468fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35665637_ddd75f75",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-29T18:53:03Z",
+      "side": 1,
+      "message": "This can be replaced by \n\n  result.addAll(callSite.get(m));",
+      "range": {
+        "startLine": 90,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 9
+      },
+      "revId": "7a1ea7c97bdaf37b95836157aaed97ad944468fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35665637_a80ce359",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-29T18:53:03Z",
+      "side": 1,
+      "message": "Use Guava Maps (Sets, Lists) to avoid having to write generics code here e.g.\n\n  removeCallers \u003d Maps.newHashMap();",
+      "range": {
+        "startLine": 94,
+        "startChar": 63,
+        "endLine": 94,
+        "endChar": 100
+      },
+      "revId": "7a1ea7c97bdaf37b95836157aaed97ad944468fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35665637_c80aff45",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-29T18:53:03Z",
+      "side": 1,
+      "message": "Probably better to use a multimap here.",
+      "range": {
+        "startLine": 94,
+        "startChar": 19,
+        "endLine": 94,
+        "endChar": 46
+      },
+      "revId": "7a1ea7c97bdaf37b95836157aaed97ad944468fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35665637_a8a86399",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-29T18:53:03Z",
+      "side": 1,
+      "message": "remove.",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 84
+      },
+      "revId": "7a1ea7c97bdaf37b95836157aaed97ad944468fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35665637_c8ab1f95",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-29T18:53:03Z",
+      "side": 1,
+      "message": "I don\u0027t think this needs to change. The black list is an instance variable of InliningVisitor and gets reset each loop iteration, so after deadcode elimination it will be again initially empty.",
+      "range": {
+        "startLine": 172,
+        "startChar": 5,
+        "endLine": 174,
+        "endChar": 45
+      },
+      "revId": "7a1ea7c97bdaf37b95836157aaed97ad944468fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35665637_68a00bac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-29T18:53:03Z",
+      "side": 1,
+      "message": "Construction of the call graph should be done outside the optimization passes, I think, and should be passed as a parameter.",
+      "range": {
+        "startLine": 562,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 3
+      },
+      "revId": "7a1ea7c97bdaf37b95836157aaed97ad944468fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35665637_dd291ff4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-29T18:53:03Z",
+      "side": 1,
+      "message": "This can be replaced by\n\n  map.values().removeAll(Collections.singleton(step));",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 5
+      },
+      "revId": "7a1ea7c97bdaf37b95836157aaed97ad944468fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35665637_e839bbc5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-10-29T18:53:03Z",
+      "side": 1,
+      "message": "Probably modification tracking logic should be implemented in JModVisitor so that is shared by all passes.",
+      "revId": "7a1ea7c97bdaf37b95836157aaed97ad944468fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

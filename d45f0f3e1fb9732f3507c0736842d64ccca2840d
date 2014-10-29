@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "956b82dc_1e1ab760",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-10-29T20:53:51Z",
+      "side": 1,
+      "message": "[error] Name \u0027ABBREVIATION_MIN_SIZE\u0027 must match pattern \u0027^([a-eg-z]|(f[a-z0-9]))[a-zA-Z0-9]*$\u0027.",
+      "revId": "d45f0f3e1fb9732f3507c0736842d64ccca2840d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

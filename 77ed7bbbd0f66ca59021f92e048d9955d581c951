@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35e9f6cf_dcb58df4",
+        "filename": "distro-source/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-10-30T10:21:52Z",
+      "side": 1,
+      "message": "Uh, that\u0027s ugly!",
+      "revId": "77ed7bbbd0f66ca59021f92e048d9955d581c951",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

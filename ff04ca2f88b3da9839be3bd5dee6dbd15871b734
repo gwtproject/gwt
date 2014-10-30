@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15bf92c3_76dd6e70",
+        "filename": "user/src/com/google/gwt/user/client/ui/SuggestBox.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-10-30T19:44:50Z",
+      "side": 1,
+      "message": "Add a check if popupPanel is showing or not?",
+      "revId": "ff04ca2f88b3da9839be3bd5dee6dbd15871b734",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

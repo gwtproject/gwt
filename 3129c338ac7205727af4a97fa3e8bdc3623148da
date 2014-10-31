@@ -16,6 +16,24 @@
       "revId": "3129c338ac7205727af4a97fa3e8bdc3623148da",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d59c1a86_21302e09",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-31T10:20:11Z",
+      "side": 0,
+      "message": "So I think we could remove the trailing QS in the SringHelper.endsWith, renaming the method to something like StringHelper.endsWithIgnoringHashQuery",
+      "parentUuid": "b5a166bc_2085ca2b",
+      "revId": "3129c338ac7205727af4a97fa3e8bdc3623148da",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

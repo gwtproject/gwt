@@ -16,6 +16,24 @@
       "revId": "0d745d655228ba1f4f8b9e7916712df5531fc269",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b5a166bc_6064f205",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/client/CodeServerGwtTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-10-31T10:20:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5a166bc_607bd2b0",
+      "revId": "0d745d655228ba1f4f8b9e7916712df5531fc269",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

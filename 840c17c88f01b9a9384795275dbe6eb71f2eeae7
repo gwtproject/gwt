@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5a166bc_a0b0bad6",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/recompile_lib.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-10-31T11:24:14Z",
+      "side": 1,
+      "message": "I would rather do:\n\nStringHelper.removeQueryString(str) {\n ...\n return cleanStr;\n}\n\nAnd change callers to do String.endsWith(StringHelper.removeQS(url), \"foo\")",
+      "revId": "840c17c88f01b9a9384795275dbe6eb71f2eeae7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

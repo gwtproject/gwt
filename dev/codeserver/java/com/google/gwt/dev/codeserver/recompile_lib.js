@@ -272,28 +272,17 @@ Recompiler.prototype.__getBaseUrl = function(url) {
 };
 
 /**
- * Determine wheter the given url is the recompile.nochache.js
- * @param {string} url
- * @returns {boolean}
- */
-Recompiler.prototype.__isRecompileNoCacheJs = function(url) {
-  // Remove trailing query string and/or fragment
-  url = url.split("?")[0].split("#")[0];
-  var suffix = '/' + this.__moduleName + '.recompile.nocache.js';
-  var startPos =  url.length - suffix.length;
-  return url.indexOf(suffix, startPos) == startPos;
-};
-
-/**
  * Get the base url of the code server.
  * @returns {string} the url of the code server
  */
 Recompiler.prototype.getCodeServerBaseUrl = function() {
   var scriptTagsToSearch = $doc.getElementsByTagName('script');
+  // Created in stub.nocache.js, it doesn't any QS or hash fragment
+  var expectedSuffix ='/' + this.__moduleName + '.recompile.nocache.js';
   for (var i = 0; i < scriptTagsToSearch.length; i++) {
-    var tag = scriptTagsToSearch[i];
-    if (this.__isRecompileNoCacheJs(tag.src)) {
-      return this.__getBaseUrl(tag.src);
+    var candidate = scriptTagsToSearch[i].src;
+    if (StringHelper.endsWith(candidate, expectedSuffix)) {
+      return this.__getBaseUrl(candidate);
     }
   }
   throw "unable to find the script tag that includes " + moduleName + ".recompile.nocache.js";
@@ -433,8 +422,9 @@ BaseUrlProvider.prototype.getBaseUrl = function() {
   var expectedSuffix = this.__moduleName + '.nocache.js';
   var scriptTags = this.__getScriptTags();
   for (var i = 0; i < scriptTags.length; i++) {
-    var tag = scriptTags[i];
-    var candidate = tag.src;
+    var src = scriptTags[i].src;
+    // Remove trailing query string and/or fragment issue #8973
+    var candidate = src.split("#")[0].split("?")[0];
     if (StringHelper.endsWith(candidate, expectedSuffix)) {
       var stripedUrl = this.__stripHashQueryAndFileName(candidate);
       return this.__maybeConvertToAbsoluteUrl(stripedUrl);

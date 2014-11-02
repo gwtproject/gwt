@@ -370,7 +370,11 @@ public class TypeTightener {
    *
    * Also optimize dynamic casts and instanceof operations where possible.
    */
-  public class TightenTypesVisitor extends JModVisitor {
+  public class TightenTypesVisitor extends OptimizerVisitor {
+
+    public TightenTypesVisitor() {
+      super(OptimizerDependencies.TYPETIGHTENER_IDX, TypeTightener.this.optDependencies);
+    }
 
     /**
      * Tries to determine a specific concrete type for the cast, then either
@@ -447,6 +451,7 @@ public class TypeTightener {
       if (!x.isVolatile()) {
         tighten(x);
       }
+      currentField = null;
     }
 
     @Override
@@ -525,11 +530,13 @@ public class TypeTightener {
     @Override
     public void endVisit(JMethod x, Context ctx) {
       if (!(x.getType() instanceof JReferenceType)) {
+        currentMethod = null;
         return;
       }
       JReferenceType refType = (JReferenceType) x.getType();
 
       if (refType == typeNull) {
+        currentMethod = null;
         return;
       }
 
@@ -537,6 +544,7 @@ public class TypeTightener {
       if (!program.typeOracle.isInstantiatedType(refType)) {
         x.setType(typeNull);
         madeChanges();
+        currentMethod = null;
         return;
       }
 
@@ -551,6 +559,7 @@ public class TypeTightener {
        * are declared to return a leaf type.
        */
       if (x.isNative() || program.typeOracle.isJsTypeMethod(x)) {
+        currentMethod = null;
         return;
       }
 
@@ -582,6 +591,7 @@ public class TypeTightener {
         x.setType(resultType);
         madeChanges();
       }
+      currentMethod = null;
     }
 
     /**
@@ -655,6 +665,7 @@ public class TypeTightener {
        * Explicitly NOT visiting native methods since we can't infer further
        * type information.
        */
+      currentMethod = x;
       return !x.isNative() || program.typeOracle.isJsTypeMethod(x) ||
           program.typeOracle.isExportedMethod(x);
     }
@@ -781,9 +792,16 @@ public class TypeTightener {
 
   private static final String NAME = TypeTightener.class.getSimpleName();
 
+  public static OptimizerStats exec(JProgram program, OptimizerDependencies optDep) {
+    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+    OptimizerStats stats = new TypeTightener(program, optDep).execImpl();
+    optimizeEvent.end("didChange", "" + stats.didChange());
+    return stats;
+  }
+
   public static OptimizerStats exec(JProgram program) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new TypeTightener(program).execImpl();
+    OptimizerStats stats = new TypeTightener(program, new OptimizerDependencies()).execImpl();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
@@ -858,10 +876,12 @@ public class TypeTightener {
 
   private final JProgram program;
   private final JNullType typeNull;
+  private final OptimizerDependencies optDependencies;
 
-  private TypeTightener(JProgram program) {
+  private TypeTightener(JProgram program, OptimizerDependencies optDep) {
     this.program = program;
     typeNull = program.getTypeNull();
+    optDependencies = optDep;
   }
 
   private OptimizerStats execImpl() {
@@ -878,10 +898,12 @@ public class TypeTightener {
      * than completion if we compile with an option for less than 100% optimized
      * output.
      */
+    optDependencies.removeModificationsByLastPass(OptimizerDependencies.TYPETIGHTENER_IDX);
     while (true) {
       TightenTypesVisitor tightener = new TightenTypesVisitor();
       tightener.accept(program);
       stats.recordModified(tightener.getNumMods());
+      optDependencies.getCallGraph().addCallers(tightener.newCallSite);
       if (!tightener.didChange()) {
         break;
       }

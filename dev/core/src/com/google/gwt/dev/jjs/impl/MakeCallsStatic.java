@@ -48,6 +48,8 @@ import com.google.gwt.dev.js.ast.JsThisRef;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -130,9 +132,11 @@ public class MakeCallsStatic {
     }
 
     private final JProgram program;
+    private Multimap<JMethod, JMethod> callGraphOfNewStaticMethods;
 
     CreateStaticImplsVisitor(JProgram program) {
       this.program = program;
+      callGraphOfNewStaticMethods = HashMultimap.create();
     }
 
     @Override
@@ -224,6 +228,8 @@ public class MakeCallsStatic {
       // Add the new method as a static impl of the old method
       program.putStaticImpl(x, newMethod);
       enclosingType.getMethods().add(myIndexInClass + 1, newMethod);
+      callGraphOfNewStaticMethods.putAll(
+          CallerMethodsOfCalledMethod.getCallees(newMethod, newMethod.getBody()));
       return false;
     }
   }
@@ -299,9 +305,14 @@ public class MakeCallsStatic {
    * CreateStaticMethodVisitor, go and rewrite the call sites to call the static
    * method instead.
    */
-  private class RewriteCallSites extends JModVisitor {
+  private class RewriteCallSites extends OptimizerVisitor {
+
     private boolean currentMethodIsInitiallyLive;
     private ControlFlowAnalyzer initiallyLive;
+
+    public RewriteCallSites() {
+      super(OptimizerDependencies.MAKECALLSSTATIC_IDX, MakeCallsStatic.this.optDependencies);
+    }
 
     /**
      * In cases where callers are directly referencing (effectively) final
@@ -334,6 +345,7 @@ public class MakeCallsStatic {
     @Override
     public boolean visit(JMethod x, Context ctx) {
       currentMethodIsInitiallyLive = initiallyLive.getLiveFieldsAndMethods().contains(x);
+      currentMethod = x;
       return true;
     }
 
@@ -420,23 +432,32 @@ public class MakeCallsStatic {
 
   private static final String NAME = MakeCallsStatic.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program, boolean addRuntimeChecks) {
+  public static OptimizerStats exec(JProgram program, boolean addRuntimeChecks,
+      OptimizerDependencies optDep) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MakeCallsStatic(program, addRuntimeChecks).execImpl();
+    OptimizerStats stats = new MakeCallsStatic(program, addRuntimeChecks, optDep).execImpl();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
 
-
+  public static OptimizerStats exec(JProgram program, boolean addRuntimeChecks) {
+    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+    OptimizerStats stats =
+        new MakeCallsStatic(program, addRuntimeChecks, new OptimizerDependencies()).execImpl();
+    optimizeEvent.end("didChange", "" + stats.didChange());
+    return stats;
+  }
 
   protected Set<JMethod> toBeMadeStatic = new HashSet<JMethod>();
 
   private final JProgram program;
   private final StaticCallConverter converter;
+  private final OptimizerDependencies optDependencies;
 
-  private MakeCallsStatic(JProgram program, boolean addRuntimeChecks) {
+  private MakeCallsStatic(JProgram program, boolean addRuntimeChecks, OptimizerDependencies optDep) {
     this.program = program;
     this.converter = new StaticCallConverter(program, addRuntimeChecks);
+    optDependencies = optDep;
   }
 
   private OptimizerStats execImpl() {
@@ -468,9 +489,12 @@ public class MakeCallsStatic {
      * optimizations can unlock devirtualizations even if no more static impls
      * are created.
      */
+    optDependencies.removeModificationsByLastPass(OptimizerDependencies.MAKECALLSSTATIC_IDX);
     RewriteCallSites rewriter = new RewriteCallSites();
     rewriter.accept(program);
     stats.recordModified(rewriter.getNumMods());
+    optDependencies.getCallGraph().addCallers(creator.callGraphOfNewStaticMethods);
+    optDependencies.getCallGraph().addCallers(rewriter.newCallSite);
     assert (rewriter.didChange() || toBeMadeStatic.isEmpty());
     return stats;
   }

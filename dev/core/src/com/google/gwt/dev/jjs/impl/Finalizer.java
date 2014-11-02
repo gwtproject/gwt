@@ -27,7 +27,6 @@ import com.google.gwt.dev.jjs.ast.JFieldRef;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
@@ -59,7 +58,11 @@ public class Finalizer {
    * program. But if it wasn't implemented, then the enclosing class should have
    * come up as not instantiated and been culled. So I think it's not possible.
    */
-  private class FinalizeVisitor extends JModVisitor {
+  private class FinalizeVisitor extends OptimizerVisitor {
+
+    public FinalizeVisitor() {
+      super(OptimizerDependencies.FINALIZER_IDX, Finalizer.this.optDependencies);
+    }
 
     @Override
     public void endVisit(JClassType x, Context ctx) {
@@ -78,6 +81,7 @@ public class Finalizer {
       if (!x.isVolatile()) {
         maybeFinalize(x);
       }
+      currentField = null;
     }
 
     @Override
@@ -90,6 +94,7 @@ public class Finalizer {
       if (!x.isFinal() && !isOverridden.contains(x)) {
         setFinal(x);
       }
+      currentMethod = null;
     }
 
     @Override
@@ -208,9 +213,18 @@ public class Finalizer {
 
   private static final String NAME = Finalizer.class.getSimpleName();
 
+  private final OptimizerDependencies optDependencies;
+
   public static OptimizerStats exec(JProgram program) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new Finalizer().execImpl(program);
+    OptimizerStats stats = new Finalizer(new OptimizerDependencies()).execImpl(program);
+    optimizeEvent.end("didChange", "" + stats.didChange());
+    return stats;
+  }
+
+  public static OptimizerStats exec(JProgram program, OptimizerDependencies optDep) {
+    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+    OptimizerStats stats = new Finalizer(optDep).execImpl(program);
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
@@ -221,15 +235,18 @@ public class Finalizer {
 
   private final Set<JClassType> isSubclassed = new HashSet<JClassType>();
 
-  private Finalizer() {
+  private Finalizer(OptimizerDependencies optDependencies) {
+    this.optDependencies = optDependencies;
   }
 
   private OptimizerStats execImpl(JProgram program) {
     MarkVisitor marker = new MarkVisitor();
     marker.accept(program);
 
+    optDependencies.removeModificationsByLastPass(OptimizerDependencies.FINALIZER_IDX);
     FinalizeVisitor finalizer = new FinalizeVisitor();
     finalizer.accept(program);
+    optDependencies.getCallGraph().addCallers(finalizer.newCallSite);
 
     return new OptimizerStats(NAME).recordModified(finalizer.getNumMods());
   }

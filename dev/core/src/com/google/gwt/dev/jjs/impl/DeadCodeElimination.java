@@ -47,7 +47,6 @@ import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JLongLiteral;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
@@ -110,8 +109,11 @@ public class DeadCodeElimination {
    * {@link #cast(JExpression, SourceInfo, JType, JExpression) simplifyCast}, so
    * that more simplifications can be made on a single pass through a tree.
    */
-  public class DeadCodeVisitor extends JModVisitor {
-    private JMethod currentMethod = null;
+  public class DeadCodeVisitor extends OptimizerVisitor {
+
+    public DeadCodeVisitor() {
+      super(OptimizerDependencies.DEADCODEELIMINATION_IDX, DeadCodeElimination.this.optDependencies);
+    }
 
     /**
      * Expressions whose result does not matter. A parent node should add any
@@ -1978,19 +1980,29 @@ public class DeadCodeElimination {
   public static final String NAME = DeadCodeElimination.class.getSimpleName();
 
   public static OptimizerStats exec(JProgram program) {
-    return new DeadCodeElimination(program).execImpl(program);
+    return new DeadCodeElimination(program, new OptimizerDependencies()).execImpl(program);
   }
 
   public static OptimizerStats exec(JProgram program, JNode node) {
-    return new DeadCodeElimination(program).execImpl(node);
+    return new DeadCodeElimination(program, new OptimizerDependencies()).execImpl(node);
+  }
+
+  public static OptimizerStats exec(JProgram program, OptimizerDependencies optDep) {
+    return new DeadCodeElimination(program, optDep).execImpl(program);
+  }
+
+  public static OptimizerStats exec(JProgram program, JNode node, OptimizerDependencies optDep) {
+    return new DeadCodeElimination(program, optDep).execImpl(node);
   }
 
   private final JProgram program;
+  private final OptimizerDependencies optDependencies;
 
   private final Map<JType, Class<?>> typeClassMap = new IdentityHashMap<JType, Class<?>>();
 
-  public DeadCodeElimination(JProgram program) {
+  public DeadCodeElimination(JProgram program, OptimizerDependencies optDependencies) {
     this.program = program;
+    this.optDependencies = optDependencies;
     typeClassMap.put(program.getTypeJavaLangObject(), Object.class);
     typeClassMap.put(program.getTypeJavaLangString(), String.class);
     typeClassMap.put(program.getTypePrimitiveBoolean(), boolean.class);
@@ -2007,10 +2019,12 @@ public class DeadCodeElimination {
     OptimizerStats stats = new OptimizerStats(NAME);
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
 
+    optDependencies.removeModificationsByLastPass(OptimizerDependencies.DEADCODEELIMINATION_IDX);
     DeadCodeVisitor deadCodeVisitor = new DeadCodeVisitor();
     deadCodeVisitor.accept(node);
     stats.recordModified(deadCodeVisitor.getNumMods());
     optimizeEvent.end("didChange", "" + stats.didChange());
+    optDependencies.getCallGraph().addCallers(deadCodeVisitor.newCallSite);
     return stats;
   }
 

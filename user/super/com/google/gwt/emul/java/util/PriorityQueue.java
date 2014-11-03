@@ -15,10 +15,13 @@
  */
 package java.util;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+
 /**
  * An unbounded priority queue based on a priority heap. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/PriorityQueue.html">[Sun
  * docs]</a>
+ * A priority queue does not permit {@code null} elements.
  * 
  * @param <E> element type.
  */
@@ -73,19 +76,20 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
   @SuppressWarnings("unchecked")
   public PriorityQueue(PriorityQueue<? extends E> c) {
     // TODO(jat): better solution
-    this(c.size(), (Comparator<? super E>) c.comparator());
+    this(checkNotNull(c).size(), (Comparator<? super E>) c.comparator());
     addAll(c);
   }
 
   @SuppressWarnings("unchecked")
   public PriorityQueue(SortedSet<? extends E> c) {
     // TODO(jat): better solution
-    this(c.size(), (Comparator<? super E>) c.comparator());
+    this(checkNotNull(c).size(), (Comparator<? super E>) c.comparator());
     addAll(c);
   }
 
   @Override
   public boolean addAll(Collection<? extends E> c) {
+    // TODO: if collection contains null elements, NPE should be thrown.
     if (heap.addAll(c)) {
       makeHeap(0);
       return true;
@@ -104,7 +108,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public boolean contains(Object o) {
-    return heap.contains(o);
+    return o != null && heap.contains(o);
   }
 
   @Override
@@ -125,6 +129,8 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public boolean offer(E e) {
+    checkNotNull(e);
+
     int node = heap.size();
     heap.add(e);
     while (node > 0) {
@@ -144,24 +150,24 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public E peek() {
-    if (heap.size() == 0) {
-      return null;
-    }
-    return heap.get(0);
+    return heap.isEmpty() ? null : heap.get(0);
   }
 
   @Override
   public E poll() {
-    if (heap.size() == 0) {
-      return null;
+    E value = peek();
+    if (value != null) {
+      removeAtIndex(0);
     }
-    E value = heap.get(0);
-    removeAtIndex(0);
     return value;
   }
 
   @Override
   public boolean remove(Object o) {
+    if (o == null) {
+      return false;
+    }
+
     int index = heap.indexOf(o);
     if (index < 0) {
       return false;

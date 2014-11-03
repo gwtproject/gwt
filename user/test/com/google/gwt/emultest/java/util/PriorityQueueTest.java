@@ -136,7 +136,17 @@ public class PriorityQueueTest extends GWTTestCase {
     assertEquals(13, pq.remove().intValue());
     assertTrue(pq.isEmpty());
   }
-  
+
+  public void testOffer() {
+    PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+    try {
+      pq.offer(null);
+      fail();
+    } catch (NullPointerException expected) {
+    }
+    assertTrue(pq.isEmpty());
+  }
+
   public void testPollRemove() {
     PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
     try {

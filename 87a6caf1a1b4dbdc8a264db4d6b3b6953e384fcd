@@ -1,0 +1,487 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5c5fa79_e5692119",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "This probably needs to happen in between specific optimizations also.\n\nEach specific optimization needs to keep track the pass where it was invocated so that next time it can ask for all modifications after such pass.",
+      "range": {
+        "startLine": 1474,
+        "startChar": 4,
+        "endLine": 1474,
+        "endChar": 44
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_85b5c555",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JModVisitor.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "We really need to think about the distribution of responsibilities. It seems that some updates to the callgraph are done automatically by JModVisitor while others are delegated to the specific subclasses.\n\nI think it should be either all handled transparently or all delegated to the specific subclass.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 28
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_939f5438",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallerMethodsOfCalledMethod.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "This should probably be named CallGraph and it is the field callSite that needs a more explicit name.",
+      "range": {
+        "startLine": 32,
+        "startChar": 13,
+        "endLine": 32,
+        "endChar": 40
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_ee96a3af",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallerMethodsOfCalledMethod.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "You might need to add handling of JsniMethodRef (which is a call from JSNI to Java).\n\nEven though it is not used in MethodInliner it seems to be part of the call graph (and it might be needed for other optimizations).\n\nMaybe just add a\n// TODO(leafwang): decide whether JsniMethodRefs are part of the callgraph.",
+      "range": {
+        "startLine": 37,
+        "startChar": 15,
+        "endLine": 37,
+        "endChar": 34
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_0ec437cd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallerMethodsOfCalledMethod.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "this one should be called callerMethodsByCalleeMethod or just callersByCallee (or some other descriptive name)",
+      "range": {
+        "startLine": 41,
+        "startChar": 39,
+        "endLine": 41,
+        "endChar": 46
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_6ea3b30f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallerMethodsOfCalledMethod.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "Is this really needed, I think wherever we have a callgraph we should assume it is usable.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 3
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_f347b0e8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallerMethodsOfCalledMethod.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "rename to removeCalleeCallerPairs",
+      "range": {
+        "startLine": 106,
+        "startChar": 14,
+        "endLine": 106,
+        "endChar": 27
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_939cf4fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallerMethodsOfCalledMethod.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "There is no need to prematurely optimize; this all if can probably go away.\n\nAlso we can probably assume that removeCallers is never null (an can add an assertion for that)",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 5
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_f39570cc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallerMethodsOfCalledMethod.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "maybe rename to addCalleeCallerPairs.",
+      "range": {
+        "startLine": 116,
+        "startChar": 14,
+        "endLine": 116,
+        "endChar": 24
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_13f6a43d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallerMethodsOfCalledMethod.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "Same here add a more descriptive name as the others.",
+      "range": {
+        "startLine": 126,
+        "startChar": 14,
+        "endLine": 126,
+        "endChar": 23
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_2eadbbf6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallerMethodsOfCalledMethod.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "WE probably should assume here that callees are never null.",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 26
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_8e8f2786",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallerMethodsOfCalledMethod.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "Multimaps never return null on get they will return an empty collection.\n\nIt is safe to remove the whole if statement.",
+      "range": {
+        "startLine": 137,
+        "startChar": 12,
+        "endLine": 137,
+        "endChar": 35
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_0e60b72d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "Java doc comments start with uppercase.",
+      "range": {
+        "startLine": 65,
+        "startChar": 5,
+        "endLine": 65,
+        "endChar": 11
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_4e5eaf6b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "probably we want an API here that does not take the step and just uses the current step. (here and in the previous one).",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 73
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_42e9e311",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "Probably here we want an API of the form\n\ngetModifiedMethods(int stepSince)\n\nthat returns all the modified methods that where modified since stepSince.",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 53
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_65ebd1b5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "I don\u0027t think there is need to remove, where does this need arise?",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 3
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_45968d23",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "Not needed, I think.",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 5
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_456b2d8c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "Probably this code is more approriate in the appropriate pass.",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 3
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_e58a41a8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerVisitor.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "This pattern is going to be tricky as JVisitor derived classes normally override these methods without calling super.\n\nMaybe tracking the current method and current fields needs to happen in a non overrideable place in JVisitor or JModVisitor.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 8
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_6523d146",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerVisitor.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "I think either all the modification are propagated \"live\" or they are all buffered, having a mix of both seems to be a gate for inconsistency.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 3
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c5fa79_45ad6df5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-03T22:07:14Z",
+      "side": 1,
+      "message": "This should be hidden by the superclass somehow.",
+      "range": {
+        "startLine": 160,
+        "startChar": 1,
+        "endLine": 160,
+        "endChar": 27
+      },
+      "revId": "87a6caf1a1b4dbdc8a264db4d6b3b6953e384fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

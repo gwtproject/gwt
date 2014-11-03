@@ -18,7 +18,9 @@ package com.google.gwt.emultest.java.util;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
@@ -32,6 +34,25 @@ public class PriorityQueueTest extends GWTTestCase {
   @Override
   public String getModuleName() {
     return "com.google.gwt.emultest.EmulSuite";
+  }
+
+  public void testAddAll() {
+    PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+    Collection<Integer> emptyCollection = Collections.emptyList();
+    assertFalse(pq.addAll(emptyCollection));
+    assertTrue(pq.isEmpty());
+
+    Collection<Integer> collectionWithNulls = Arrays.asList(1, 2, null, 3);
+    try {
+      pq.addAll(collectionWithNulls);
+    } catch (NullPointerException expected) {
+    }
+
+    pq = new PriorityQueue<Integer>();
+    try {
+      pq.addAll(pq);
+    } catch (IllegalArgumentException expected) {
+    }
   }
 
   public void testBasic() {
@@ -136,7 +157,17 @@ public class PriorityQueueTest extends GWTTestCase {
     assertEquals(13, pq.remove().intValue());
     assertTrue(pq.isEmpty());
   }
-  
+
+  public void testOffer() {
+    PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+    try {
+      pq.offer(null);
+      fail();
+    } catch (NullPointerException expected) {
+    }
+    assertTrue(pq.isEmpty());
+  }
+
   public void testPollRemove() {
     PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
     try {

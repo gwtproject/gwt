@@ -15,10 +15,14 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 /**
- * An unbounded priority queue based on a priority heap. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/PriorityQueue.html">[Sun
- * docs]</a>
+ * An unbounded priority queue based on a priority heap.
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html">
+ * the official Java API doc</a> for details.
+ * A priority queue does not permit {@code null} elements.
  * 
  * @param <E> element type.
  */
@@ -86,6 +90,9 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public boolean addAll(Collection<? extends E> c) {
+    checkNotNull(c);
+    checkArgument(c != this);
+
     if (heap.addAll(c)) {
       makeHeap(0);
       return true;
@@ -104,7 +111,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public boolean contains(Object o) {
-    return heap.contains(o);
+    return indexOf(o) < 0;
   }
 
   @Override
@@ -144,15 +151,12 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public E peek() {
-    if (heap.size() == 0) {
-      return null;
-    }
-    return heap.get(0);
+    return heap.isEmpty() ? null : heap.get(0);
   }
 
   @Override
   public E poll() {
-    if (heap.size() == 0) {
+    if (heap.isEmpty()) {
       return null;
     }
     E value = heap.get(0);
@@ -162,7 +166,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public boolean remove(Object o) {
-    int index = heap.indexOf(o);
+    int index = indexOf(o);
     if (index < 0) {
       return false;
     }
@@ -261,6 +265,10 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
       smallestChild = rightChild;
     }
     return smallestChild;
+  }
+
+  private int indexOf(Object o) {
+    return o == null ? -1 : heap.indexOf(o);
   }
 
   private boolean isLeaf(int node) {

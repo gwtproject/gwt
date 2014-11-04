@@ -51,6 +51,24 @@
       "revId": "469a124a0e6a34c48f97cdca35f82fc5aecaf7ed",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5ea5aee_770ba84b",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-04T17:43:41Z",
+      "side": 1,
+      "message": "Starting the code server takes time (since it is loading all the modules), so we should do it as early as possible and do everything else in parallel so the user doesn\u0027t have to wait as long.\n\nInstead of adding waitUntilReady(), I could alternately change start() to return a Future\u003cVoid\u003e. This requires the Future to be stored somewhere but maybe it\u0027s more understandable. Would you like that better?\n\nJust checking if the socket is open would work, but I thought that also doing a JSON request to the progress API would provide better error checking if something goes wrong at startup. The error-checking is tedious but that\u0027s Java for you.\n\nAn alternate approach would be to add another method in CodeServer to call instead of main() that both starts the server and blocks until it\u0027s ready. This would allow CodeServer to throw an exception if something goes wrong and we could display it on the DevMode console.",
+      "parentUuid": "f5975e5c_161c4c8e",
+      "revId": "469a124a0e6a34c48f97cdca35f82fc5aecaf7ed",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

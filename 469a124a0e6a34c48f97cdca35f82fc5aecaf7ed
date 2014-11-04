@@ -33,6 +33,24 @@
       "revId": "469a124a0e6a34c48f97cdca35f82fc5aecaf7ed",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5975e5c_166a0cdf",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-11-04T13:56:43Z",
+      "side": 1,
+      "message": "127.0.0.1 should be options.getConnectAddress()",
+      "parentUuid": "f5975e5c_161c4c8e",
+      "revId": "469a124a0e6a34c48f97cdca35f82fc5aecaf7ed",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

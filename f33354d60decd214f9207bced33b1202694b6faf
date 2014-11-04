@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5e59e1c_41b69c00",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/CodeServerListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-04T03:02:55Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "f33354d60decd214f9207bced33b1202694b6faf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

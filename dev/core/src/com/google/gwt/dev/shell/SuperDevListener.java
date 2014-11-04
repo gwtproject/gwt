@@ -22,12 +22,21 @@ import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
 import com.google.gwt.dev.DevMode.HostedModeOptions;
 import com.google.gwt.dev.cfg.ModuleDef;
+import com.google.gwt.dev.json.JsonException;
+import com.google.gwt.dev.json.JsonObject;
+import com.google.gwt.dev.json.JsonString;
 import com.google.gwt.dev.util.arg.OptionJsInteropMode;
 import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
+import com.google.gwt.thirdparty.guava.common.base.Charsets;
+import com.google.gwt.thirdparty.guava.common.io.ByteStreams;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
 import java.lang.reflect.Method;
+import java.net.ConnectException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.URL;
@@ -117,6 +126,94 @@ public class SuperDevListener implements CodeServerListener {
   @Override
   public void start() {
     listenThread.start();
+  }
+
+  @Override
+  public void waitUntilReady() throws UnableToCompleteException {
+    logger.log(Type.INFO, "Waiting for CodeServer to start.");
+    while (!isReady()) {
+      try {
+        Thread.sleep(500);
+      } catch (InterruptedException e) {
+        logger.log(Type.ERROR, "thread interrupted");
+        throw new UnableToCompleteException();
+      }
+    }
+    logger.log(Type.INFO, "CodeServer is ready.");
+  }
+
+  /**
+   * Returns true if the code server is running and idle.
+   * Returns false to wait and try again.
+   * @throws UnableToCompleteException if there's no point in retrying.
+   */
+  private boolean isReady() throws UnableToCompleteException {
+    String urlString = "http://" + options.getBindAddress() + ":" + codeServerPort + "/progress";
+
+    URL url;
+    try {
+      url = new URL(urlString);
+    } catch (MalformedURLException e) {
+      logger.log(Type.ERROR, "bad URL: " + urlString, e);
+      throw new UnableToCompleteException();
+    }
+
+    HttpURLConnection c;
+    try {
+      c = ((HttpURLConnection) url.openConnection());
+    } catch (IOException e) {
+      logger.log(Type.ERROR, "openConnection() failed for URL: " + urlString, e);
+      return false;
+    }
+
+    byte[] bytes;
+    try {
+      int status = c.getResponseCode();
+      if (status != 200) {
+        logger.log(Type.ERROR, "unexpected response to GET " + urlString + " : " + status);
+        return false;
+      }
+
+      InputStream in = c.getInputStream();
+      try {
+        bytes = ByteStreams.toByteArray(in);
+      } finally {
+        in.close();
+      }
+    } catch (ConnectException e) {
+      // This is the normal when the port hasn't been opened yet. (Don't log it.)
+      return false;
+    } catch (IOException e) {
+      logger.log(Type.ERROR, "can't read response to GET " + urlString, e);
+      return false;
+    } finally {
+      c.disconnect();
+    }
+
+    JsonObject json;
+    try {
+      String input = new String(bytes, Charsets.UTF_8);
+      json = JsonObject.parse(new StringReader(input));
+    } catch (JsonException e) {
+      logger.log(Type.ERROR, "/progress response is not JSON", e);
+      return false;
+    } catch (IOException e) {
+      logger.log(Type.ERROR, "/progress response is not JSON", e);
+      return false;
+    }
+
+    if (!json.isObject()) {
+      logger.log(Type.ERROR, "/progress response is not a JSON object");
+      return false;
+    }
+
+    JsonString value = json.get("status").asString();
+    if (value == null) {
+      logger.log(Type.ERROR, "can't read status from /progress response");
+      return false;
+    }
+
+    return value.getString().equals("idle");
   }
 
   private static int chooseCodeServerPort(TreeLogger logger, HostedModeOptions options) {

@@ -32,8 +32,17 @@ public interface CodeServerListener {
 
   /**
    * Start the listener thread.
+   * (In the case of Super Dev Mode, this launches the server.)
    */
   void start();
+
+
+  /**
+   * Blocks until ready to handle requests.
+   * (When this method returns, the UI will be enabled.)
+   * @throws UnableToCompleteException if unable to start.
+   */
+  void waitUntilReady() throws UnableToCompleteException;
 
   /**
    * Returns the URL to use in the browser for using this codeserver.

@@ -214,4 +214,10 @@ public class BrowserListener implements CodeServerListener {
       listenThread.start();
     }
   }
+
+  @Override
+  public void waitUntilReady() throws UnableToCompleteException {
+    // Nothing to do. Instead, the linker calls writeCompileOutput()
+    // after the modules are loaded.
+  }
 }

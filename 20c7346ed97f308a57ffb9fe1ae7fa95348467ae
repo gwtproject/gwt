@@ -1,0 +1,302 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15e07212_23bef58c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1513,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "Probably needs to be build at the very beginning before even calling optimizeJavaOneTime.",
+      "range": {
+        "startLine": 1511,
+        "startChar": 0,
+        "endLine": 1513,
+        "endChar": 5
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15e07212_a3fb0558",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "This is looking very good.",
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15e07212_03ec199f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "2014",
+      "range": {
+        "startLine": 2,
+        "startChar": 15,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58b266f_900f1420",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "add private",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 2
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58b266f_30218894",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "Before assignment\n\n  assert currentMethod \u003d\u003d x;",
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58b266f_303ae8ba",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "assert currentMethod !\u003d null;",
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58b266f_103d64b1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "Before assignment\n\n  assert currentMethod \u003d\u003d null;",
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15e07212_43758138",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1993,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "Probably this entry point will dissapear; I think it is only used by MethodInliner to explicitely optimize methods modified by it. Now with probably we just want to run DeadCodeEliminination normally (where it would query what are the modified methods since last execution and run).",
+      "range": {
+        "startLine": 1985,
+        "startChar": 0,
+        "endLine": 1993,
+        "endChar": 3
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3551f6a8_e244a278",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Finalizer.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "s/optDependencies/optimizerDependencies/",
+      "range": {
+        "startLine": 214,
+        "startChar": 38,
+        "endLine": 214,
+        "endChar": 53
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15e07212_632d1dff",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "Maybe we should call this OptimizerContext.\n\n@stalcup what do you think?",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 34
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58b266f_10d24410",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerVisitor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "2014",
+      "range": {
+        "startLine": 2,
+        "startChar": 15,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15e07212_23f6f53d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerVisitor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "s/optDep/optimizerDependencies/",
+      "range": {
+        "startLine": 29,
+        "startChar": 40,
+        "endLine": 29,
+        "endChar": 46
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58b266f_5039acf6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerVisitor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "Isnt super.*Visit empty? If so replace the bodies by empty or return true;",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 3
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b58b266f_10eb24b6",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/MethodInlinerTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:58:00Z",
+      "side": 1,
+      "message": "2014",
+      "range": {
+        "startLine": 2,
+        "startChar": 15,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

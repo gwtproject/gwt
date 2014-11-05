@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "357f3623_bbdc7375",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-05T22:15:43Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.thirdparty.guava.common.util.concurrent.SettableFuture.",
+      "revId": "5ded07fd0737a067bfc3042af275d7ecd1792162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_5be22f35",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-05T22:15:43Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.concurrent.Future.",
+      "revId": "5ded07fd0737a067bfc3042af275d7ecd1792162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_7bdfeb67",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/CodeServerListener.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-05T22:15:43Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.concurrent.Future.",
+      "revId": "5ded07fd0737a067bfc3042af275d7ecd1792162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

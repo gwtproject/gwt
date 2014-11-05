@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "d56fba74_0988e942",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-11-05T20:48:05Z",
+      "side": 1,
+      "message": "Cool, that was my only concern, that as a user this might fail and I\u0027d have no idea why/what I should fix. Thanks!",
+      "parentUuid": "357f3623_9284fced",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 19
+      },
+      "revId": "56f9b36b99b4b3103ecce479e8b03aa9f672515a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15e07212_03a7799f",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
         "patchSetId": 2

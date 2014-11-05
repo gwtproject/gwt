@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15e07212_947e059f",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T00:59:43Z",
+      "side": 1,
+      "message": "It seems that a possible event in an overflow (which means that not all the events where recorded)\n\n        // This key is registered only\n        // for ...BLAHBLAH... events,\n        // but an OVERFLOW event can\n        // occur regardless if events\n        // are lost or discarded.\n        if (event.kind() \u003d\u003d OVERFLOW) {\n           .... do a full scan maybe? ...\n        }\n\nHere is the doc where I found this.\n\nhttp://docs.oracle.com/javase/tutorial/essential/io/notification.html",
+      "revId": "9e7ad4f47cec7c14915b5a0ee1733e7148186672",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15e07212_940ba54a",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T00:59:43Z",
+      "side": 1,
+      "message": "I think this is missing here\n\n    // Reset the key -- this step is critical if you want to\n    // receive further watch events.  If the key is no longer valid,\n    // the directory is inaccessible so exit the loop.\n    boolean valid \u003d key.reset();\n    if (!valid) {\n        // Directory in no longer valid\n        .... whatever needs to be done when something gets deleted\n    }\n\n\nYou should first add a test for this (touch a file, retrieve the changes and repeat).",
+      "revId": "9e7ad4f47cec7c14915b5a0ee1733e7148186672",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

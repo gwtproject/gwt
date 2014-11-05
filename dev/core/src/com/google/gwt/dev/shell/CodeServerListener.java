@@ -19,6 +19,7 @@ import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
 import com.google.gwt.dev.cfg.ModuleDef;
 
 import java.net.URL;
+import java.util.concurrent.Future;
 
 /**
  * Common interface for code server listeners.
@@ -31,9 +32,14 @@ public interface CodeServerListener {
   int getSocketPort();
 
   /**
-   * Start the listener thread.
+   * Starts the code server. (It won't be ready until the {@link #ready future completes.)
    */
   void start();
+
+  /**
+   * Returns a future that completes when the code server is ready.
+   */
+  Future<Void> ready();
 
   /**
    * Returns the URL to use in the browser for using this codeserver.

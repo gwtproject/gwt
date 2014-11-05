@@ -26,6 +26,7 @@ import com.google.gwt.dev.shell.BrowserChannelServer.SessionHandlerServer;
 import com.google.gwt.dev.util.NullOutputFileSet;
 import com.google.gwt.dev.util.OutputFileSet;
 import com.google.gwt.dev.util.OutputFileSetOnDirectory;
+import com.google.gwt.thirdparty.guava.common.util.concurrent.SettableFuture;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +38,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
+import java.util.concurrent.Future;
 
 /**
  * Listens for connections from OOPHM clients.
@@ -58,6 +60,8 @@ public class BrowserListener implements CodeServerListener {
 
   private Thread listenThread;
 
+  private final SettableFuture<Void> codeServerReady = SettableFuture.create();
+
   private boolean ignoreRemoteDeath = false;
 
   private HostedModeOptions options;
@@ -66,10 +70,6 @@ public class BrowserListener implements CodeServerListener {
 
   /**
    * Listens for new connections from browsers.
-   *
-   * @param logger
-   * @param port
-   * @param handler
    */
   public BrowserListener(TreeLogger treeLogger, HostedModeOptions options,
       final SessionHandlerServer handler) {
@@ -88,6 +88,8 @@ public class BrowserListener implements CodeServerListener {
       listenThread = new Thread() {
         @Override
         public void run() {
+          // We are ready immediately when the thread is running.
+          codeServerReady.set(null);
           while (true) {
             try {
               Socket sock = listenSocket.accept();
@@ -213,5 +215,10 @@ public class BrowserListener implements CodeServerListener {
     if (listenThread != null) {
       listenThread.start();
     }
+  }
+
+  @Override
+  public Future<Void> ready() {
+    return codeServerReady;
   }
 }

@@ -18,6 +18,7 @@ package com.google.gwt.dev;
 import com.google.gwt.core.ext.ServletContainer;
 import com.google.gwt.core.ext.ServletContainerLauncher;
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
@@ -58,6 +59,7 @@ import java.net.BindException;
 import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 /**
@@ -502,12 +504,39 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
                 + module.getCanonicalName() + "'");
         link(loadLogger, module);
       }
+
     } catch (UnableToCompleteException e) {
       // Already logged.
       return false;
     } finally {
       slowStartupEvent.end();
     }
+
+    // When this methods exits, the buttons will be enabled in the Swing UI.
+    // We shouldn't do that until the code server is ready, or the user might
+    // see a blank page.
+    return waitForCodeServer();
+  }
+
+  private boolean waitForCodeServer() {
+    // When in GWTTestCase and not using DevMode, the listener will be null.
+    if (listener == null) {
+      return true;
+    }
+
+    long startTime = System.currentTimeMillis();
+    try {
+      listener.ready().get();
+    } catch (InterruptedException e) {
+      getTopLogger().log(Type.ERROR, "thread interrupted while waiting for code server");
+      return false;
+    } catch (ExecutionException e) {
+      getTopLogger().log(Type.ERROR, "unable to launch code server", e);
+      return false;
+    }
+    long elapsedTime = System.currentTimeMillis() - startTime;
+    getTopLogger().log(Type.INFO, "waited " + elapsedTime + " ms for code server to finish");
+
     return true;
   }
 

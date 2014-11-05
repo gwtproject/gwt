@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "357f3623_121a4c8f",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-05T20:35:21Z",
+      "side": 1,
+      "message": "the exception isn\u0027t really being suppressed.\n\n\nsince the exception occurs in a separate thread from the caller that is going to the collected data i\u0027m setting a status that can be externally checked and which will cause the getAndClearModifiedFiles() function to return an exception.\n\n\nthe idea is that whoever is using this class will have to handle the failure by checking isFailed() or catching the error that occurs when they call getAndClearModifiedFiles()\n\n\nas for whether or not the failure should be logged, i would lean toward no since the failure could only be the result of some sort of hardware problem or ulimit setting. but if i were to log it i think it\u0027s fine to log it at the caller when the caller sees that the ChangedFileAccumulator is in a failed state.\n\n\nbut i could be wrong. i\u0027m open to suggestions",
+      "parentUuid": "15e07212_6a6172ad",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 19
+      },
+      "revId": "56f9b36b99b4b3103ecce479e8b03aa9f672515a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15e07212_03a7799f",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "15e07212_a3a6651d",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-05T20:35:21Z",
+      "side": 1,
+      "message": "the implementation does return the same watchKey for the same path, but i guess you\u0027re saying that since it does not *promise* to do so that feature should not be relied upon.\n\ni\u0027ll make the change",
+      "parentUuid": "15e07212_03a7799f",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 54
+      },
+      "revId": "56f9b36b99b4b3103ecce479e8b03aa9f672515a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15e07212_2306f50f",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2014-11-05T18:06:31Z",
       "side": 1,
       "message": "Ha, this got you too :) remove qualification.",
+      "range": {
+        "startLine": 181,
+        "startChar": 41,
+        "endLine": 181,
+        "endChar": 60
+      },
+      "revId": "56f9b36b99b4b3103ecce479e8b03aa9f672515a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15e07212_c37971f2",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-05T20:35:21Z",
+      "side": 1,
+      "message": "i thought i was already using the guava Files class in the same file. but i guess that was only true in the test file.\n\ndone",
+      "parentUuid": "15e07212_2306f50f",
       "range": {
         "startLine": 181,
         "startChar": 41,

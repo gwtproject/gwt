@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15e07212_6a6172ad",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-11-05T03:22:53Z",
+      "side": 1,
+      "message": "Apologies if this is obviously just a prototype/spike, but it seems a little dangerous to suppress these exceptions.\n\nI guess, right, there isn\u0027t a TreeLogger around, and System.out/.err would be ugly. But maybe better than nothing if this is rarely expected.",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 19
+      },
+      "revId": "56f9b36b99b4b3103ecce479e8b03aa9f672515a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

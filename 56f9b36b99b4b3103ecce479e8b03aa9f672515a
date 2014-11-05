@@ -22,6 +22,69 @@
       "revId": "56f9b36b99b4b3103ecce479e8b03aa9f672515a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15e07212_03a7799f",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:06:31Z",
+      "side": 1,
+      "message": "This assumes that registering to watch the same path returns the same watchKey. I did not find this guarantee in the docs. Maybe is better to keep track of their cannonical paths?",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 54
+      },
+      "revId": "56f9b36b99b4b3103ecce479e8b03aa9f672515a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15e07212_2306f50f",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:06:31Z",
+      "side": 1,
+      "message": "Ha, this got you too :) remove qualification.",
+      "range": {
+        "startLine": 181,
+        "startChar": 41,
+        "endLine": 181,
+        "endChar": 60
+      },
+      "revId": "56f9b36b99b4b3103ecce479e8b03aa9f672515a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15e07212_4396a123",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ChangedFileAccumulatorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-05T18:06:31Z",
+      "side": 1,
+      "message": "Nice.",
+      "revId": "56f9b36b99b4b3103ecce479e8b03aa9f672515a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

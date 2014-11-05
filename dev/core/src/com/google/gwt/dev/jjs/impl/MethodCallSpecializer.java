@@ -18,7 +18,6 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
@@ -36,7 +35,11 @@ import java.util.List;
  */
 public class MethodCallSpecializer {
 
-  private class MethodCallSpecializingVisitor extends JModVisitor {
+  private class MethodCallSpecializingVisitor extends OptimizerVisitor {
+
+    public MethodCallSpecializingVisitor() {
+      super(MethodCallSpecializer.this.optDependencies);
+    }
 
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
@@ -85,20 +88,29 @@ public class MethodCallSpecializer {
 
   public static OptimizerStats exec(JProgram program) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MethodCallSpecializer(program).execImpl();
+    OptimizerStats stats = new MethodCallSpecializer(program, new OptimizerDependencies()).execImpl();
+    optimizeEvent.end("didChange", "" + stats.didChange());
+    return stats;
+  }
+
+  public static OptimizerStats exec(JProgram program, OptimizerDependencies optDep) {
+    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+    OptimizerStats stats = new MethodCallSpecializer(program, optDep).execImpl();
+    optDep.incOptimizationStep();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
 
   private final JProgram program;
+  private final OptimizerDependencies optDependencies;
 
-  private MethodCallSpecializer(JProgram program) {
+  private MethodCallSpecializer(JProgram program, OptimizerDependencies optDep) {
     this.program = program;
+    this.optDependencies = optDep;
   }
 
   private OptimizerStats execImpl() {
-    MethodCallSpecializingVisitor specializer =
-        new MethodCallSpecializingVisitor();
+    MethodCallSpecializingVisitor specializer = new MethodCallSpecializingVisitor();
     specializer.accept(program);
     return new OptimizerStats(NAME).recordModified(specializer.getNumMods());
   }

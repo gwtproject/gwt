@@ -130,6 +130,12 @@ public class MakeCallsStatic {
     }
 
     private final JProgram program;
+    private OptimizerDependencies optDep;
+
+    CreateStaticImplsVisitor(JProgram program, OptimizerDependencies optDep) {
+      this.program = program;
+      this.optDep = optDep;
+    }
 
     CreateStaticImplsVisitor(JProgram program) {
       this.program = program;
@@ -224,6 +230,10 @@ public class MakeCallsStatic {
       // Add the new method as a static impl of the old method
       program.putStaticImpl(x, newMethod);
       enclosingType.getMethods().add(myIndexInClass + 1, newMethod);
+
+      if (optDep != null) {
+        optDep.getCallGraph().updateCallGraphOfMethod(newMethod);
+      }
       return false;
     }
   }
@@ -299,9 +309,14 @@ public class MakeCallsStatic {
    * CreateStaticMethodVisitor, go and rewrite the call sites to call the static
    * method instead.
    */
-  private class RewriteCallSites extends JModVisitor {
+  private class RewriteCallSites extends OptimizerVisitor {
+
     private boolean currentMethodIsInitiallyLive;
     private ControlFlowAnalyzer initiallyLive;
+
+    public RewriteCallSites() {
+      super(MakeCallsStatic.this.optDependencies);
+    }
 
     /**
      * In cases where callers are directly referencing (effectively) final
@@ -332,7 +347,7 @@ public class MakeCallsStatic {
     }
 
     @Override
-    public boolean visit(JMethod x, Context ctx) {
+    public boolean enterMethod(JMethod x, Context ctx) {
       currentMethodIsInitiallyLive = initiallyLive.getLiveFieldsAndMethods().contains(x);
       return true;
     }
@@ -420,23 +435,33 @@ public class MakeCallsStatic {
 
   private static final String NAME = MakeCallsStatic.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program, boolean addRuntimeChecks) {
+  public static OptimizerStats exec(JProgram program, boolean addRuntimeChecks,
+      OptimizerDependencies optDep) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MakeCallsStatic(program, addRuntimeChecks).execImpl();
+    OptimizerStats stats = new MakeCallsStatic(program, addRuntimeChecks, optDep).execImpl();
+    optDep.incOptimizationStep();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
 
-
+  public static OptimizerStats exec(JProgram program, boolean addRuntimeChecks) {
+    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+    OptimizerStats stats =
+        new MakeCallsStatic(program, addRuntimeChecks, new OptimizerDependencies()).execImpl();
+    optimizeEvent.end("didChange", "" + stats.didChange());
+    return stats;
+  }
 
   protected Set<JMethod> toBeMadeStatic = new HashSet<JMethod>();
 
   private final JProgram program;
   private final StaticCallConverter converter;
+  private final OptimizerDependencies optDependencies;
 
-  private MakeCallsStatic(JProgram program, boolean addRuntimeChecks) {
+  private MakeCallsStatic(JProgram program, boolean addRuntimeChecks, OptimizerDependencies optDep) {
     this.program = program;
     this.converter = new StaticCallConverter(program, addRuntimeChecks);
+    optDependencies = optDep;
   }
 
   private OptimizerStats execImpl() {
@@ -444,7 +469,7 @@ public class MakeCallsStatic {
     FindStaticDispatchSitesVisitor finder = new FindStaticDispatchSitesVisitor();
     finder.accept(program);
 
-    CreateStaticImplsVisitor creator = new CreateStaticImplsVisitor(program);
+    CreateStaticImplsVisitor creator = new CreateStaticImplsVisitor(program, optDependencies);
     for (JMethod method : toBeMadeStatic) {
       creator.accept(method);
     }

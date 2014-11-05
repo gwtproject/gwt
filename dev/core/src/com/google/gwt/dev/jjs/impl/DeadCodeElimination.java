@@ -47,7 +47,6 @@ import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JLongLiteral;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
@@ -110,8 +109,11 @@ public class DeadCodeElimination {
    * {@link #cast(JExpression, SourceInfo, JType, JExpression) simplifyCast}, so
    * that more simplifications can be made on a single pass through a tree.
    */
-  public class DeadCodeVisitor extends JModVisitor {
-    private JMethod currentMethod = null;
+  public class DeadCodeVisitor extends OptimizerVisitor {
+
+    public DeadCodeVisitor() {
+      super(DeadCodeElimination.this.optDependencies);
+    }
 
     /**
      * Expressions whose result does not matter. A parent node should add any
@@ -441,11 +443,6 @@ public class DeadCodeElimination {
       }
     }
 
-    @Override
-    public void endVisit(JMethod x, Context ctx) {
-      currentMethod = null;
-    }
-
     /**
      * Resolve method calls that can be computed statically.
      */
@@ -749,12 +746,6 @@ public class DeadCodeElimination {
     @Override
     public boolean visit(JExpressionStatement x, Context ctx) {
       ignoringExpressionOutput.add(x.getExpr());
-      return true;
-    }
-
-    @Override
-    public boolean visit(JMethod x, Context ctx) {
-      currentMethod = x;
       return true;
     }
 
@@ -1978,19 +1969,37 @@ public class DeadCodeElimination {
   public static final String NAME = DeadCodeElimination.class.getSimpleName();
 
   public static OptimizerStats exec(JProgram program) {
-    return new DeadCodeElimination(program).execImpl(program);
+    return new DeadCodeElimination(program, new OptimizerDependencies()).execImpl(program);
   }
 
   public static OptimizerStats exec(JProgram program, JNode node) {
-    return new DeadCodeElimination(program).execImpl(node);
+    return new DeadCodeElimination(program, new OptimizerDependencies()).execImpl(node);
+  }
+
+  public static OptimizerStats exec(JProgram program, OptimizerDependencies optDep) {
+    OptimizerStats stats = new DeadCodeElimination(program, optDep).execImpl(program);
+    optDep.incOptimizationStep();
+    return stats;
+  }
+
+  public static OptimizerStats exec(JProgram program, Set<JMethod> nodes, OptimizerDependencies optDep) {
+    OptimizerStats stats = new OptimizerStats(NAME);
+    for (JMethod node : nodes) {
+      OptimizerStats innerStats = new DeadCodeElimination(program, optDep).execImpl(node);
+      stats.recordModified(innerStats.getNumMods());
+    }
+    optDep.incOptimizationStep();
+    return stats;
   }
 
   private final JProgram program;
+  private final OptimizerDependencies optDependencies;
 
   private final Map<JType, Class<?>> typeClassMap = new IdentityHashMap<JType, Class<?>>();
 
-  public DeadCodeElimination(JProgram program) {
+  public DeadCodeElimination(JProgram program, OptimizerDependencies optDependencies) {
     this.program = program;
+    this.optDependencies = optDependencies;
     typeClassMap.put(program.getTypeJavaLangObject(), Object.class);
     typeClassMap.put(program.getTypeJavaLangString(), String.class);
     typeClassMap.put(program.getTypePrimitiveBoolean(), boolean.class);

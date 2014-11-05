@@ -19,7 +19,6 @@ import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
@@ -52,7 +51,11 @@ public class MethodCallTightener {
    * Updates polymorphic method calls to tighter bindings based on the type of
    * the qualifier.
    */
-  public class MethodCallTighteningVisitor extends JModVisitor {
+  public class MethodCallTighteningVisitor extends OptimizerVisitor {
+
+    public MethodCallTighteningVisitor() {
+      super(MethodCallTightener.this.optDependencies);
+    }
 
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
@@ -116,15 +119,25 @@ public class MethodCallTightener {
 
   public static OptimizerStats exec(JProgram program) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MethodCallTightener(program).execImpl();
+    OptimizerStats stats = new MethodCallTightener(program, new OptimizerDependencies()).execImpl();
+    optimizeEvent.end("didChange", "" + stats.didChange());
+    return stats;
+  }
+
+  public static OptimizerStats exec(JProgram program, OptimizerDependencies optDep) {
+    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+    OptimizerStats stats = new MethodCallTightener(program, optDep).execImpl();
+    optDep.incOptimizationStep();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
 
   private final JProgram program;
+  private final OptimizerDependencies optDependencies;
 
-  private MethodCallTightener(JProgram program) {
+  private MethodCallTightener(JProgram program, OptimizerDependencies optDep) {
     this.program = program;
+    this.optDependencies = optDep;
   }
 
   private OptimizerStats execImpl() {

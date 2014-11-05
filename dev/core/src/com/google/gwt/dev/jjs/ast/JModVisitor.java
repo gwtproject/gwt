@@ -53,14 +53,14 @@ public class JModVisitor extends JVisitor {
     public void insertAfter(JNode node) {
       checkRemoved();
       list.add(index + 1, (T) node);
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
     public void insertBefore(JNode node) {
       checkRemoved();
       list.add(index++, (T) node);
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
@@ -71,9 +71,10 @@ public class JModVisitor extends JVisitor {
     @Override
     public void removeMe() {
       checkState();
+      recordRemoves(list.get(index));
       list.remove(index--);
       removed = true;
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
@@ -82,7 +83,7 @@ public class JModVisitor extends JVisitor {
       checkReplacement(list.get(index), node);
       list.set(index, (T) node);
       replaced = true;
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     /**
@@ -141,14 +142,14 @@ public class JModVisitor extends JVisitor {
     public void insertAfter(JNode node) {
       checkRemoved();
       list = Lists.add(list, index + 1, (T) node);
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
     public void insertBefore(JNode node) {
       checkRemoved();
       list = Lists.add(list, index++, (T) node);
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
@@ -159,9 +160,10 @@ public class JModVisitor extends JVisitor {
     @Override
     public void removeMe() {
       checkState();
+      recordRemoves(list.get(index));
       list = Lists.remove(list, index--);
       removed = true;
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
@@ -170,7 +172,7 @@ public class JModVisitor extends JVisitor {
       checkReplacement(list.get(index), node);
       list = Lists.set(list, index, (T) node);
       replaced = true;
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     /**
@@ -252,9 +254,9 @@ public class JModVisitor extends JVisitor {
       if (!canRemove) {
         throw new UnsupportedOperationException("Can't remove " + node);
       }
-
+      recordRemoves(this.node);
       this.node = null;
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
@@ -265,7 +267,7 @@ public class JModVisitor extends JVisitor {
       checkReplacement(this.node, node);
       this.node = node;
       replaced = true;
-      ++numVisitorChanges;
+      madeChanges();
     }
   }
 
@@ -375,9 +377,18 @@ public class JModVisitor extends JVisitor {
    */
   protected void madeChanges() {
     ++numVisitorChanges;
+    recordModifications();
   }
 
   protected void traverse(JNode node, Context context) {
     node.traverse(this, context);
+  }
+
+  protected void recordModifications() {
+    return;
+  }
+
+  protected void recordRemoves(JNode x) {
+    return;
   }
 }

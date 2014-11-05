@@ -81,6 +81,7 @@ import com.google.gwt.dev.jjs.impl.MakeCallsStatic;
 import com.google.gwt.dev.jjs.impl.MethodCallSpecializer;
 import com.google.gwt.dev.jjs.impl.MethodCallTightener;
 import com.google.gwt.dev.jjs.impl.MethodInliner;
+import com.google.gwt.dev.jjs.impl.OptimizerDependencies;
 import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.jjs.impl.Pruner;
 import com.google.gwt.dev.jjs.impl.RecordRebinds;
@@ -357,7 +358,6 @@ public abstract class JavaToJavaScriptCompiler {
         addSyntheticArtifacts(unifiedAst, permutation, startTimeMs, permutationId, jjsmap,
             dependenciesAndRecorder, internedLiteralByVariableName, isSourceMapsEnabled, jsFragments,
             sizeBreakdowns, sourceInfoMaps, permutationResult);
-
         return permutationResult;
       } catch (Throwable e) {
         throw CompilationProblemReporter.logAndTranslateException(logger, e);
@@ -1449,6 +1449,7 @@ public abstract class JavaToJavaScriptCompiler {
     boolean atMaxLevel = options.getOptimizationLevel() == OptionOptimize.OPTIMIZE_LEVEL_MAX;
     int passLimit = atMaxLevel ? MAX_PASSES : options.getOptimizationLevel();
     float minChangeRate = atMaxLevel ? FIXED_POINT_CHANGE_RATE : EFFICIENT_CHANGE_RATE;
+    OptimizerDependencies optDependencies = new OptimizerDependencies();
     while (true) {
       passCount++;
       if (passCount > passLimit) {
@@ -1459,7 +1460,7 @@ public abstract class JavaToJavaScriptCompiler {
         throw new InterruptedException();
       }
       AstDumper.maybeDumpAST(jprogram);
-      OptimizerStats stats = optimizeJavaOneTime("Pass " + passCount, nodeCount);
+      OptimizerStats stats = optimizeJavaOneTime("Pass " + passCount, passCount, nodeCount, optDependencies);
       allOptimizerStats.add(stats);
       lastNodeCount = nodeCount;
       nodeCount = jprogram.getNodeCount();
@@ -1492,21 +1493,25 @@ public abstract class JavaToJavaScriptCompiler {
     }
   }
 
-  private OptimizerStats optimizeJavaOneTime(String passName, int numNodes) {
+  private OptimizerStats optimizeJavaOneTime(String passName, int passCount, int numNodes,
+      OptimizerDependencies optDependencies) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "phase", "loop");
     // Clinits might have become empty become empty.
     jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
     OptimizerStats stats = new OptimizerStats(passName);
-    stats.add(Pruner.exec(jprogram, true).recordVisits(numNodes));
-    stats.add(Finalizer.exec(jprogram).recordVisits(numNodes));
-    stats.add(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks())
+    stats.add(Pruner.exec(jprogram, true, optDependencies).recordVisits(numNodes));
+    stats.add(Finalizer.exec(jprogram, optDependencies).recordVisits(numNodes));
+    stats.add(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks(), optDependencies)
         .recordVisits(numNodes));
-    stats.add(TypeTightener.exec(jprogram).recordVisits(numNodes));
-    stats.add(MethodCallTightener.exec(jprogram).recordVisits(numNodes));
+    stats.add(TypeTightener.exec(jprogram, optDependencies).recordVisits(numNodes));
+    stats.add(MethodCallTightener.exec(jprogram, optDependencies).recordVisits(numNodes));
     // Note: Specialization should be done before inlining.
-    stats.add(MethodCallSpecializer.exec(jprogram).recordVisits(numNodes));
-    stats.add(DeadCodeElimination.exec(jprogram).recordVisits(numNodes));
-    stats.add(MethodInliner.exec(jprogram).recordVisits(numNodes));
+    stats.add(MethodCallSpecializer.exec(jprogram, optDependencies).recordVisits(numNodes));
+    stats.add(DeadCodeElimination.exec(jprogram, optDependencies).recordVisits(numNodes));
+    if (passCount == 1) {
+      optDependencies.getCallGraph().buildCallGraph(jprogram);
+    }
+    stats.add(MethodInliner.exec(jprogram, optDependencies, passCount).recordVisits(numNodes));
     if (options.shouldInlineLiteralParameters()) {
       stats.add(SameParameterValueOptimizer.exec(jprogram).recordVisits(numNodes));
     }
@@ -1515,6 +1520,10 @@ public abstract class JavaToJavaScriptCompiler {
     }
     optimizeEvent.end();
     return stats;
+  }
+
+  private OptimizerStats optimizeJavaOneTime(String passName, int numNodes) {
+    return optimizeJavaOneTime(passName, 1, numNodes, new OptimizerDependencies());
   }
 
   private void printJavaOptimizeTrace(List<OptimizerStats> allOptimizerStats) {

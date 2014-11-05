@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "357f3623_c0338e99",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-11-05T22:03:11Z",
+      "side": 1,
+      "message": "RuntimeException is pretty generic and message alone might not be helpful (e.g. NullPointerException). What about passing and storing the exception instead of just the message?",
+      "revId": "3dc340f85032bb7e106ee450c0ba64addcaa47b4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

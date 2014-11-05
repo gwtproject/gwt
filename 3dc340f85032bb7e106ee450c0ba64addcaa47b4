@@ -16,6 +16,24 @@
       "revId": "3dc340f85032bb7e106ee450c0ba64addcaa47b4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_dbf61ff5",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-05T22:17:48Z",
+      "side": 1,
+      "message": "about it catching RuntimeException, it has to generic. if i was catching checked exceptions i would already know what to catch. but it\u0027s not a checked exception. and it has to be caught so that the ChangedFileAccumulator instance can be marked failed.\n\nabout what message to pass along, we talked offline and though i don\u0027t see this as being particularly good (the practice of taking an exception from some other thread and rethrowing it in another thread as the cause field in some newly created exception), apparently it is standard practice (of which i was unaware)\n\nmaking the change",
+      "parentUuid": "357f3623_c0338e99",
+      "revId": "3dc340f85032bb7e106ee450c0ba64addcaa47b4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "7530ce7e_167f9c03",
+        "filename": "user/super/com/google/gwt/emul/java/util/LinkedList.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-11-05T13:33:40Z",
+      "side": 1,
+      "message": "I agree with you. I\u0027ve already fixed that in the latest patchset.",
+      "parentUuid": "d5c5fa79_93acf4ae",
+      "revId": "4faae2afebc8deef5180115c7f82756dd77e1562",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5c5fa79_b343786c",
         "filename": "user/test/com/google/gwt/emultest/java/util/ArrayDequeTest.java",
         "patchSetId": 8
@@ -53,6 +71,24 @@
       "writtenOn": "2014-11-04T23:05:29Z",
       "side": 1,
       "message": "Not sure how this work; null is not supported in ArrayDeque.",
+      "revId": "4faae2afebc8deef5180115c7f82756dd77e1562",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7530ce7e_d6f5a431",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArrayDequeTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-11-05T13:33:40Z",
+      "side": 1,
+      "message": "I overrided getFullElements to return getFullNonNullElements (above). I could have used here getFullNonElements but it seems that getFullElements() can be used explicitly in some test methods (need to verify that).",
+      "parentUuid": "d5c5fa79_b343786c",
       "revId": "4faae2afebc8deef5180115c7f82756dd77e1562",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +123,24 @@
       "writtenOn": "2014-11-04T23:05:29Z",
       "side": 1,
       "message": "Can you copy the tests from jakarta if you haven\u0027t already?",
+      "revId": "4faae2afebc8deef5180115c7f82756dd77e1562",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7530ce7e_f6fa201f",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArrayDequeTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-11-05T13:33:40Z",
+      "side": 1,
+      "message": "Sure, I\u0027ll add more tests.",
+      "parentUuid": "d5c5fa79_13534433",
       "revId": "4faae2afebc8deef5180115c7f82756dd77e1562",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

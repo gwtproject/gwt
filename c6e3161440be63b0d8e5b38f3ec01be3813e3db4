@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "357f3623_5210d470",
+        "filename": "user/test/com/google/web/bindery/autobean/gwt/client/AutoBeanTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-05T20:30:38Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "c6e3161440be63b0d8e5b38f3ec01be3813e3db4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

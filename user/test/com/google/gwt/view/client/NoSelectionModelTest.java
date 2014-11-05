@@ -15,7 +15,8 @@
  */
 package com.google.gwt.view.client;
 
-import com.google.gwt.core.shared.impl.StringCase;
+
+import java.util.Locale;
 
 /**
  * Tests for {@link NoSelectionModel}.
@@ -62,7 +63,7 @@ public class NoSelectionModelTest extends AbstractSelectionModelTest {
     ProvidesKey<String> keyProvider = new ProvidesKey<String>() {
       @Override
       public Object getKey(String item) {
-        return StringCase.toUpper(item);
+        return item.toUpperCase(Locale.ROOT);
       }
     };
     NoSelectionModel<String> model = createSelectionModel(keyProvider);

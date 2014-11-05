@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b516c6da_fbebeb87",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-11-05T20:12:13Z",
+      "side": 1,
+      "message": "I would move the .get() method to the ready() implementation, so ready() could be void, the classic implementation would return immediately, and the only which knows about futures and exceptions is the superdevMode listener.",
+      "revId": "f2573e6e02a3bf140842e857210499516ac6cce4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7530ce7e_39f2cb7b",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/BrowserListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-11-05T20:12:13Z",
+      "side": 1,
+      "message": "As I say in my comment in DevMode, this method implementation should return void, and this should be just an empty block",
+      "revId": "f2573e6e02a3bf140842e857210499516ac6cce4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7530ce7e_d90b97c5",
+        "filename": "dev/core/src/com/google/gwt/dev/shell/SuperDevListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-11-05T20:12:13Z",
+      "side": 1,
+      "message": "I would deal here with futures, and let DevMode agnostic to how the ready implementation works",
+      "revId": "f2573e6e02a3bf140842e857210499516ac6cce4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15e07212_0a8b0e00",
+        "filename": "user/test/com/google/gwt/view/client/NoSelectionModelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-05T03:13:45Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "a11a5b2f932e909a6bbaf57ed747822ab2fd5ac0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15e07212_ea8fa207",
+        "filename": "user/test/com/google/gwt/view/client/SingleSelectionModelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-05T03:13:45Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "a11a5b2f932e909a6bbaf57ed747822ab2fd5ac0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

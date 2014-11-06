@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "f5083edb_3a954149",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JModVisitor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-06T01:35:55Z",
+      "side": 1,
+      "message": "I guess that removes can also be treated as modifications and there might not be a need to record them separately. \n\nAFAIK only pruner removes JMethod and JField nodes and those are handled outside the JModVisitor anyway.\n\nMost modifications can be tracked automatically via ctx.removeMe, ctx.replaceMe. Only a few are done outside this scheme, and for those I believe madeChanges is already been called explicitely (and should be).",
+      "parentUuid": "357f3623_c1fb9088",
+      "range": {
+        "startLine": 387,
+        "startChar": 17,
+        "endLine": 387,
+        "endChar": 36
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "357f3623_a1f0c4f7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JModVisitor.java",
         "patchSetId": 8
@@ -1141,6 +1165,30 @@
       "writtenOn": "2014-11-06T01:15:31Z",
       "side": 1,
       "message": "this function name sounds to me like it is checking to see if modifications occurred, and if so, recording them.\n\nbut it actually takes the current field or method and *always* marks it as modified.\n\nso a more accurate name for this function would be \"markCurrentMemberModified\"",
+      "range": {
+        "startLine": 88,
+        "startChar": 17,
+        "endLine": 88,
+        "endChar": 36
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5083edb_9a33adec",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerVisitor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-06T01:35:55Z",
+      "side": 1,
+      "message": "Maybe here just reuse madeChanges() by overriding it calling super an doing the extra handling.",
+      "parentUuid": "357f3623_a6ff7a0d",
       "range": {
         "startLine": 88,
         "startChar": 17,

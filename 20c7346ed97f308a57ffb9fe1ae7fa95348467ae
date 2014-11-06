@@ -25,6 +25,99 @@
     },
     {
       "key": {
+        "uuid": "357f3623_c6140638",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1513,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "agreed",
+      "parentUuid": "15e07212_23bef58c",
+      "range": {
+        "startLine": 1511,
+        "startChar": 0,
+        "endLine": 1513,
+        "endChar": 5
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_463a56bb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "since is private and only ever called in this file it might be better to avoid creating another method definition to avoid needing to do pass \"new OptimizerDependencies()\" at the call site",
+      "range": {
+        "startLine": 1525,
+        "startChar": 24,
+        "endLine": 1525,
+        "endChar": 44
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_c1fb9088",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JModVisitor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "i\u0027m a little unhappy with this part of the API.\n\nit seems that optimizer implementations just have to know that they don\u0027t have to record their removes (it will be automatically handled) but that they do need to record their modifications.\n\ni think these two functions should either both be automatic (which i don\u0027t think is an option since modifications aren\u0027t routed through a central place like removes are) or should both be explicit.\n\nalso if one of them is going to take a JNode parameter, they both should",
+      "range": {
+        "startLine": 387,
+        "startChar": 17,
+        "endLine": 387,
+        "endChar": 36
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_a1f0c4f7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JModVisitor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "why is this function plural? it\u0027s only recording 1 removal\n\nhow about \"markRemoved\" instead?",
+      "range": {
+        "startLine": 391,
+        "startChar": 17,
+        "endLine": 391,
+        "endChar": 30
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15e07212_a3fb0558",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
         "patchSetId": 8
@@ -58,6 +151,29 @@
         "startChar": 15,
         "endLine": 2,
         "endChar": 17
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_166f99ee",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "nice and clean implementation",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 22
       },
       "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
@@ -105,6 +221,29 @@
     },
     {
       "key": {
+        "uuid": "357f3623_c1ccf044",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/method/calleeMethod",
+      "range": {
+        "startLine": 48,
+        "startChar": 14,
+        "endLine": 48,
+        "endChar": 20
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b58b266f_303ae8ba",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
         "patchSetId": 8
@@ -133,6 +272,144 @@
       "writtenOn": "2014-11-05T18:58:00Z",
       "side": 1,
       "message": "Before assignment\n\n  assert currentMethod \u003d\u003d null;",
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_416b208c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "unnecessary word",
+      "range": {
+        "startLine": 88,
+        "startChar": 35,
+        "endLine": 88,
+        "endChar": 39
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_e10b2cc5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/m/calleeMethod",
+      "range": {
+        "startLine": 92,
+        "startChar": 17,
+        "endLine": 92,
+        "endChar": 18
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_81fd8844",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/callees/calleeMethods",
+      "range": {
+        "startLine": 101,
+        "startChar": 46,
+        "endLine": 101,
+        "endChar": 53
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_e1348c86",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/result/callerMethods",
+      "range": {
+        "startLine": 102,
+        "startChar": 17,
+        "endLine": 102,
+        "endChar": 23
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_c1339099",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "put the assertion as the first line in the method",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 29
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_a163e488",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/m/calleeMethod",
+      "range": {
+        "startLine": 105,
+        "startChar": 17,
+        "endLine": 105,
+        "endChar": 18
+      },
       "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -185,6 +462,282 @@
     },
     {
       "key": {
+        "uuid": "357f3623_8151085e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Finalizer.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "i imagine that eventually all calls to Finalizer.exec() will have an OptimizerDependencies instance to pass if that is not already the case.\n\nplease add a TODO to remove this entry point when it is no longer needed, ditto for similar situations in other files",
+      "range": {
+        "startLine": 216,
+        "startChar": 31,
+        "endLine": 216,
+        "endChar": 36
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_2137f424",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "should be final, ditto for similar situations in other files",
+      "range": {
+        "startLine": 133,
+        "startChar": 12,
+        "endLine": 133,
+        "endChar": 41
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_93df1b67",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "this \".getCallGraph().updateCallGraphOfMethod(\" pattern seems pretty common, maybe OptimizerDependencies should proxy the \"updateCallGraphOfMethod()\" function",
+      "range": {
+        "startLine": 235,
+        "startChar": 8,
+        "endLine": 235,
+        "endChar": 54
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_730b8f4b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "roberto has already commented on this but i just want to point out that it\u0027s preferable to use the long form of this name and to be consistent about using it everywhere",
+      "range": {
+        "startLine": 464,
+        "startChar": 22,
+        "endLine": 464,
+        "endChar": 28
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b564069b_6b4abd1f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "it seems like this right here is the core of how updated OptimizerVisitor implementations are going to iterate on just modified fields/methods.\n\nwe probably don\u0027t want to explicitly implement this loop in each Visitor.\n\nplease add a TODO documenting that we want to generalize this part of the process",
+      "range": {
+        "startLine": 567,
+        "startChar": 0,
+        "endLine": 573,
+        "endChar": 7
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b564069b_2b44c50e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "\"Returns the set of methods affected (because they are callers of) by the modifications to the given set functions.\"",
+      "range": {
+        "startLine": 593,
+        "startChar": 5,
+        "endLine": 594,
+        "endChar": 81
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b564069b_eb5d4deb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "what is the meaning of \"preModifications\"?\n\ns/computeAffectedPaths/affectedMethods",
+      "range": {
+        "startLine": 596,
+        "startChar": 57,
+        "endLine": 596,
+        "endChar": 73
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b564069b_0b478116",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/result/affectedMethods",
+      "range": {
+        "startLine": 597,
+        "startChar": 17,
+        "endLine": 597,
+        "endChar": 23
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b564069b_4b0a5990",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "we talked offline about this a little bit and it seems to me that adding the list of previously modified functions to the list of functions that need to be reanalyzed is overly broad.\n\n\nyou mentioned that if function A was modified and it happened to be a caller of function B which was also modified, then it would be necessary to reanalyze A.\n\n\nthat\u0027s true but if function B was not modified then it is not necessary to reanalyze A.\n\n\nso i think you could return a smaller but still accurate set of methods to analyze by doing this instead:\n\n\nSet\u003cJMethod\u003e immediateCallers \u003d optDependencies.getCallGraph().getCallers(preModifications);\nSet\u003cJMethod\u003e secondaryCallers \u003d optDependencies.getCallGraph().getCallers(preModifications);\nresult.addAll(Sets.intersection(preModifications, \noptDependencies.getCallGraph().getCallers(secondaryCallers)));",
+      "range": {
+        "startLine": 601,
+        "startChar": 18,
+        "endLine": 601,
+        "endChar": 34
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_f35f7f6a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "2014\n\ndouble check this in all of the new files in this CL",
+      "range": {
+        "startLine": 2,
+        "startChar": 15,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_13656b3d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "no initial blank line",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 2
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_5334531d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "Maintains dependence and modification information for AST optimizers.\n\u003cp\u003e\nIs updated incrementally.",
+      "range": {
+        "startLine": 28,
+        "startChar": 3,
+        "endLine": 28,
+        "endChar": 81
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15e07212_632d1dff",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
         "patchSetId": 8
@@ -201,6 +754,260 @@
         "startChar": 13,
         "endLine": 30,
         "endChar": 34
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_53177366",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "sounds better to me",
+      "parentUuid": "15e07212_632d1dff",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 34
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_d37843b7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "should be more like:\n\n/**\n * A mapping from methods to the numbers of the most recent step in which they were modified.\n */",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 65
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_5385332a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/modifiedMethods/modificationStepByMethod",
+      "range": {
+        "startLine": 39,
+        "startChar": 32,
+        "endLine": 39,
+        "endChar": 47
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_53b3f30e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/modifiedMethodsInEachStep/methodsByModificationStep",
+      "range": {
+        "startLine": 42,
+        "startChar": 29,
+        "endLine": 42,
+        "endChar": 54
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_7395cf47",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/modifiedFields/modificationStepByField",
+      "range": {
+        "startLine": 45,
+        "startChar": 31,
+        "endLine": 45,
+        "endChar": 45
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_9392bb5f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/modifiedFieldsInEachStep/modificationStepByField",
+      "range": {
+        "startLine": 48,
+        "startChar": 28,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_93171b38",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "there are a lot of references to steps in this file. some of them are past and some are current.\n\ni think probably this one is the current step number? if so i think that should be explicit in at least the description",
+      "range": {
+        "startLine": 57,
+        "startChar": 13,
+        "endLine": 57,
+        "endChar": 32
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_d31da3d1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/m/modifiedMethod",
+      "range": {
+        "startLine": 73,
+        "startChar": 40,
+        "endLine": 73,
+        "endChar": 41
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_13f24b31",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "we generally do \"Sets.newLinkedHashSet()\" instead of \"new LinkedHashSet\u003cJMethod\u003e()\", please update throughout",
+      "range": {
+        "startLine": 85,
+        "startChar": 26,
+        "endLine": 85,
+        "endChar": 52
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_73338f6a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/result/modifiedMethods",
+      "range": {
+        "startLine": 85,
+        "startChar": 17,
+        "endLine": 85,
+        "endChar": 23
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_13800b59",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "we try not to use 1 letter variable or parameter names, even in short functions.\n\ni think the only place where the compiler code allows it is the \"x\" for the current node in Visitor implementations\n\ns/f/modifiedField\n\nplease update throughout!",
+      "range": {
+        "startLine": 103,
+        "startChar": 38,
+        "endLine": 103,
+        "endChar": 39
       },
       "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
@@ -231,6 +1038,29 @@
     },
     {
       "key": {
+        "uuid": "357f3623_a6c77a20",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerVisitor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "don\u0027t need to mention \"\u003d null;\" it\u0027s implied",
+      "range": {
+        "startLine": 27,
+        "startChar": 33,
+        "endLine": 27,
+        "endChar": 40
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15e07212_23f6f53d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerVisitor.java",
         "patchSetId": 8
@@ -247,6 +1077,29 @@
         "startChar": 40,
         "endLine": 29,
         "endChar": 46
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_c6e5e6b4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerVisitor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "remove blank line between this field group and the one above, also make sure fields and methods are sorted (see http://www.gwtproject.org/makinggwtbetter.html#codestyle)",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 41
       },
       "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
@@ -277,6 +1130,29 @@
     },
     {
       "key": {
+        "uuid": "357f3623_a6ff7a0d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerVisitor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "this function name sounds to me like it is checking to see if modifications occurred, and if so, recording them.\n\nbut it actually takes the current field or method and *always* marks it as modified.\n\nso a more accurate name for this function would be \"markCurrentMemberModified\"",
+      "range": {
+        "startLine": 88,
+        "startChar": 17,
+        "endLine": 88,
+        "endChar": 36
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b58b266f_10eb24b6",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/MethodInlinerTest.java",
         "patchSetId": 8
@@ -293,6 +1169,75 @@
         "startChar": 15,
         "endLine": 2,
         "endChar": 17
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_36889543",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/MethodInlinerTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "nice tests",
+      "range": {
+        "startLine": 22,
+        "startChar": 13,
+        "endLine": 22,
+        "endChar": 30
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_9608694e",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/MethodInlinerTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/testDeadCodeElimination1/testDeadCodeElimination_notInlinable",
+      "range": {
+        "startLine": 90,
+        "startChar": 14,
+        "endLine": 90,
+        "endChar": 38
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "357f3623_1621d9c9",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/MethodInlinerTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-06T01:15:31Z",
+      "side": 1,
+      "message": "s/testDeadCodeElimination2/testDeadCodeElimination_delayedInline",
+      "range": {
+        "startLine": 105,
+        "startChar": 14,
+        "endLine": 105,
+        "endChar": 38
       },
       "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

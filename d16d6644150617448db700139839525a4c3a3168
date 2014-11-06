@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "950702cb_f7f000f9",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GwtCssResourceTestWithGss.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-11-06T07:20:31Z",
+      "side": 1,
+      "message": "I would rather this test extending the CSSResourceTest, and overriding the getModuleName, and a couple of methods to make the test pass, like a textContains aware of consider those few differences. Otherwise new tests of fixes need to update both tests.\n\nAlso the test name could be CSSResourceTestWithGss or simply GSSResourceTest",
+      "revId": "d16d6644150617448db700139839525a4c3a3168",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b55326fc_13004e9e",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/DirectoryClassPathEntry.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-07T01:27:05Z",
+      "side": 1,
+      "message": "Can you add a comment here detailing the conditions where this happens? Is this only the first time or also when new directories are created?",
+      "revId": "cfaa33c15aec750c1f5ca16159c923770c197dd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b55326fc_7396fa23",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/FileResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-07T01:27:05Z",
+      "side": 1,
+      "message": "assert !\u003d null ?",
+      "revId": "cfaa33c15aec750c1f5ca16159c923770c197dd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b55326fc_53dc96f1",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ClassPathEntryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-07T01:27:05Z",
+      "side": 1,
+      "message": "Maybe add System.gc() to make sure that listeners are not dropped prematurely or a separate test.",
+      "revId": "cfaa33c15aec750c1f5ca16159c923770c197dd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

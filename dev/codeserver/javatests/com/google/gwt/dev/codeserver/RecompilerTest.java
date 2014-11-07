@@ -18,6 +18,7 @@ package com.google.gwt.dev.codeserver;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.codeserver.Job.Result;
+import com.google.gwt.dev.javac.UnitCache;
 import com.google.gwt.dev.javac.UnitCacheSingleton;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
@@ -113,13 +114,14 @@ public class RecompilerTest extends TestCase {
         fooResource);
     writeResourcesTo(originalResources, sourcePath);
 
-    Recompiler recompiler =
-        new Recompiler(OutboxDir.create(Files.createTempDir(), logger), null,
-            "com.foo.SimpleModule", options);
+    File baseCacheDir = Files.createTempDir();
+    UnitCache unitCache = UnitCacheSingleton.get(logger, null, baseCacheDir);
+    Recompiler recompiler = new Recompiler(OutboxDir.create(Files.createTempDir(), logger), null,
+        baseCacheDir, "com.foo.SimpleModule", options, unitCache);
     Outbox outbox = new Outbox("Transactional Cache", recompiler, options, logger);
     OutboxTable outboxes = new OutboxTable();
     outboxes.addOutbox(outbox);
-    JobRunner runner = new JobRunner(new JobEventTable(), outboxes);
+    JobRunner runner = new JobRunner(new JobEventTable(), outboxes, baseCacheDir);
 
     // Perform a first compile. This should pass since all resources are valid.
     Result result =

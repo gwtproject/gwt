@@ -20,6 +20,7 @@ import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.util.arg.OptionJsInteropMode;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Function;
+import com.google.gwt.thirdparty.guava.common.base.Objects;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
@@ -88,9 +89,29 @@ public class JTypeOracle implements Serializable {
       this.immediateSuperInterfacesByInterface.putAll(that.immediateSuperInterfacesByInterface);
     }
 
+    @Override
+    public boolean equals(Object object) {
+      if (object instanceof ImmediateTypeRelations) {
+        ImmediateTypeRelations that = (ImmediateTypeRelations) object;
+
+        return Objects.equal(this.immediateImplementedInterfacesByClass,
+            that.immediateImplementedInterfacesByClass)
+            && Objects.equal(this.immediateSuperclassesByClass, that.immediateSuperclassesByClass)
+            && Objects.equal(this.immediateSuperInterfacesByInterface,
+                that.immediateSuperInterfacesByInterface);
+      }
+      return false;
+    }
+
     @VisibleForTesting
     public Map<String, String> getImmediateSuperclassesByClass() {
       return immediateSuperclassesByClass;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(immediateImplementedInterfacesByClass, immediateSuperclassesByClass,
+          immediateSuperInterfacesByInterface);
     }
 
     public boolean isEmpty() {

@@ -19,6 +19,9 @@ package com.google.gwt.dev.codeserver;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.javac.UnitCache;
+import com.google.gwt.dev.javac.UnitCacheSingleton;
+import com.google.gwt.dev.util.DiskCachingUtil;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.util.tools.Utility;
 
@@ -35,6 +38,9 @@ import java.io.IOException;
  * via HTTP. It is only safe to run on localhost (the default).</p>
  */
 public class CodeServer {
+
+  private static File baseCacheDir;
+  private static UnitCache unitCache;
 
   /**
    * Starts the code server. Shuts down the JVM if startup fails.
@@ -61,6 +67,7 @@ public class CodeServer {
       OutboxTable outboxes;
 
       try {
+        setupCaches(options, logger);
         outboxes = makeOutboxes(options, logger);
       } catch (Throwable t) {
         t.printStackTrace();
@@ -115,10 +122,11 @@ public class CodeServer {
     topLogger.setMaxDetail(options.getLogLevel());
 
     TreeLogger startupLogger = topLogger.branch(Type.INFO, "Super Dev Mode starting up");
+    setupCaches(options, startupLogger);
     OutboxTable outboxes = makeOutboxes(options, startupLogger);
 
     JobEventTable eventTable = new JobEventTable();
-    JobRunner runner = new JobRunner(eventTable, outboxes);
+    JobRunner runner = new JobRunner(eventTable, outboxes, baseCacheDir);
 
     JsonExporter exporter = new JsonExporter(options, outboxes);
 
@@ -146,7 +154,8 @@ public class CodeServer {
     for (String moduleName : options.getModuleNames()) {
       OutboxDir outboxDir = OutboxDir.create(new File(workDir, moduleName), logger);
 
-      Recompiler recompiler = new Recompiler(outboxDir, launcherDir, moduleName, options);
+      Recompiler recompiler =
+          new Recompiler(outboxDir, launcherDir, baseCacheDir, moduleName, options, unitCache);
 
       // The id should be treated as an opaque string since we will change it again.
       // TODO: change outbox id to include binding properties.
@@ -156,6 +165,14 @@ public class CodeServer {
       outboxes.addOutbox(new Outbox(outboxId, recompiler, options, logger));
     }
     return outboxes;
+  }
+
+  /**
+   * Sets up consistent a caching dir and unit cache instance for all subsequent compiles.
+   */
+  private static void setupCaches(Options options, TreeLogger startupLogger) {
+    baseCacheDir = DiskCachingUtil.computePreferredCacheDir(options.getModuleNames());
+    unitCache = UnitCacheSingleton.get(startupLogger, null, baseCacheDir);
   }
 
   /**

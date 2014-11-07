@@ -18,15 +18,13 @@ package com.google.gwt.dev.javac;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.InternalCompilerException;
-import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
+import com.google.gwt.dev.util.CompilerVersion;
 import com.google.gwt.dev.util.StringInterningObjectInputStream;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
-import com.google.gwt.thirdparty.guava.common.hash.Hashing;
-import com.google.gwt.thirdparty.guava.common.io.Files;
 import com.google.gwt.util.tools.Utility;
 
 import java.io.BufferedInputStream;
@@ -38,8 +36,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.JarURLConnection;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -98,7 +94,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * <li>Unless ant builds are made aware of the cache directory, the cache will
  * persist if a user does an ant clean.</li>
  * </ul>
- *
  */
 class PersistentUnitCache extends MemoryUnitCache {
 
@@ -113,7 +108,8 @@ class PersistentUnitCache extends MemoryUnitCache {
    */
   static final String UNIT_CACHE_PREFIX = "gwt-unitCache";
   static final String CACHE_FILE_PREFIX = UNIT_CACHE_PREFIX + "-";
-  static final String CURRENT_VERSION_CACHE_FILE_PREFIX = computePersistentCacheFilenamePrefix();
+  static final String CURRENT_VERSION_CACHE_FILE_PREFIX =
+      CACHE_FILE_PREFIX + CompilerVersion.getHash() + "-";
 
   /**
    * Creates a new file with a name based on the current system time.
@@ -236,7 +232,7 @@ class PersistentUnitCache extends MemoryUnitCache {
   /**
    * Used to execute the above Runnables in a background thread.
    */
-  private final ExecutorService backgroundService;
+  private ExecutorService backgroundService;
 
   private int unitsWritten = 0;
 
@@ -246,7 +242,7 @@ class PersistentUnitCache extends MemoryUnitCache {
    * A directory to store the cache files that should persist between
    * invocations.
    */
-  private final File cacheDirectory;
+  private File cacheDirectory;
 
   /**
    * Current file and stream being written to.
@@ -260,6 +256,12 @@ class PersistentUnitCache extends MemoryUnitCache {
     assert cacheDir != null;
     this.logger = logger;
 
+    System.out.println("starting PUC at " + cacheDir);
+
+    start(logger, cacheDir);
+  }
+
+  private void start(final TreeLogger logger, File cacheDir) throws UnableToCompleteException {
     /*
      * We must canonicalize the path here, otherwise we might set cacheDirectory
      * to something like "/path/to/x/../gwt-unitCache". If this were to happen,
@@ -350,6 +352,15 @@ class PersistentUnitCache extends MemoryUnitCache {
     addedSinceLastCleanup++;
     super.add(newUnit);
     return addImpl(unitMap.get(newUnit.getResourcePath()));
+  }
+
+  @Override
+  public void clear() throws UnableToCompleteException {
+    super.clear();
+
+    shutdownThreadTask.run();
+    purgeOldCacheFilesTask.run();
+    start(logger, cacheDirectory.getParentFile());
   }
 
   /**
@@ -474,25 +485,6 @@ class PersistentUnitCache extends MemoryUnitCache {
     } catch (RejectedExecutionException ex) {
       // background thread is not running - ignore
     }
-  }
-
-  private static String computePersistentCacheFilenamePrefix() {
-    try {
-      URLConnection urlConnection =
-          JNode.class.getResource("JNode.class").openConnection();
-      if (urlConnection instanceof JarURLConnection) {
-        String gwtdevJar = ((JarURLConnection) urlConnection).getJarFile().getName();
-        return CACHE_FILE_PREFIX +
-            Files.hash(new File(gwtdevJar), Hashing.sha1()).toString() + "-";
-      }
-      System.err.println("Could not find the GWT compiler jarfile. "
-          + "Serialization errors might occur when accessing the persistent unit cache.");
-    } catch (IOException e) {
-      System.err.println("Could not compute the hash for the GWT compiler jarfile."
-          + "Serialization errors might occur when accessing the persistent unit cache.");
-      e.printStackTrace();
-    }
-    return CACHE_FILE_PREFIX;
   }
 
   private Future<Void> addImpl(final UnitCacheEntry entry) {

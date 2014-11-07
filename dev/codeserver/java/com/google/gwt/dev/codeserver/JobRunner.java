@@ -15,8 +15,16 @@
  */
 package com.google.gwt.dev.codeserver;
 
+import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.MinimalRebuildCacheManager;
+import com.google.gwt.dev.javac.UnitCacheSingleton;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -29,13 +37,41 @@ import java.util.concurrent.Executors;
  * <p>JobRunners are thread-safe.
  */
 public class JobRunner {
+
   private final JobEventTable table;
   private final OutboxTable outboxes;
+  private final File baseCacheDir;
   private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-  JobRunner(JobEventTable table, OutboxTable outboxes) {
+  JobRunner(JobEventTable table, OutboxTable outboxes, File baseCacheDir) {
     this.table = table;
     this.outboxes = outboxes;
+    this.baseCacheDir = baseCacheDir;
+  }
+
+  /**
+   * Schedules a cleaner job and then waits.
+   */
+  void clean(TreeLogger logger) throws CleanFailedException {
+    // Will clean after all scheduled work is completed. Relies on executor single-threadedness.
+    try {
+      executor.submit(new CleanerJob()).get();
+      logger.log(TreeLogger.INFO, "Cleaned disk caches.");
+    } catch (ExecutionException e) {
+      Throwable cause = e.getCause();
+      String failureMessage = null;
+
+      if (cause instanceof IOException || cause instanceof UnableToCompleteException) {
+        failureMessage = "Failed to clean disk caches.";
+      }
+
+      logger.log(TreeLogger.WARN, failureMessage);
+      throw new CleanFailedException(failureMessage, cause);
+    } catch (InterruptedException e) {
+      logger.log(TreeLogger.WARN, "Shutdown was requested while waiting for clean to complete.");
+      throw new CleanFailedException("Shutdown was requested while waiting for clean to complete.",
+          e);
+    }
   }
 
   /**
@@ -58,5 +94,29 @@ public class JobRunner {
   private static void recompile(Job job, OutboxTable outboxes) {
     job.getLogger().log(Type.INFO, "starting job: " + job.getId());
     job.getOutbox().recompile(job);
+  }
+
+  /**
+   * An exception that indicates cache cleaning failure.
+   */
+  public static class CleanFailedException extends Exception {
+    public CleanFailedException(String message, Throwable throwable) {
+      super(message, throwable);
+    }
+  }
+
+  /**
+   * A runnable for clearing both unit and minimalRebuild caches.
+   * <p>
+   * By packaging it as a runnable as running it in the ExecutorService any danger of clearing
+   * caches at the same time as an active compile job is avoided.
+   */
+  private class CleanerJob implements Callable<Void> {
+    @Override
+    public Void call() throws Exception {
+      MinimalRebuildCacheManager.deleteCaches(baseCacheDir);
+      UnitCacheSingleton.clearCache();
+      return null;
+    }
   }
 }

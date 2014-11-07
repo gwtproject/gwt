@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "9531c2d3_adc2c910",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/AbstractTreeLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-07T23:05:49Z",
+      "side": 1,
+      "message": "personally i\u0027m not a fan of the AtomicReference route either, but i\u0027ve generally chosen to accept the idiom when i see it in SDM code.\n\ni don\u0027t prefer it but i\u0027m OK with it and it is consistent within SDM code.",
+      "parentUuid": "35a1f65e_5f8b6ffe",
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f583dec2_7ca2f990",
         "filename": "dev/core/src/com/google/gwt/dev/util/log/MetricMap.java",
         "patchSetId": 3

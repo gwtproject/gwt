@@ -50,6 +50,23 @@
       "revId": "cfaa33c15aec750c1f5ca16159c923770c197dd0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b55326fc_b657701b",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ClassPathEntryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-11-07T02:05:15Z",
+      "side": 1,
+      "message": "This is not enough. Please use GcFinalization from guava instead.",
+      "revId": "cfaa33c15aec750c1f5ca16159c923770c197dd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

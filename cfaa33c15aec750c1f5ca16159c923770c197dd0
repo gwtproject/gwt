@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b55326fc_9390bede",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/DirectoryClassPathEntry.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-07T02:24:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b55326fc_13004e9e",
+      "revId": "cfaa33c15aec750c1f5ca16159c923770c197dd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b55326fc_7396fa23",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/FileResource.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-07T01:27:05Z",
       "side": 1,
       "message": "assert !\u003d null ?",
+      "revId": "cfaa33c15aec750c1f5ca16159c923770c197dd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b55326fc_d60f941e",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/FileResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-07T02:24:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b55326fc_7396fa23",
       "revId": "cfaa33c15aec750c1f5ca16159c923770c197dd0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "b55326fc_161afc60",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ClassPathEntryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-07T02:24:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b55326fc_53dc96f1",
+      "revId": "cfaa33c15aec750c1f5ca16159c923770c197dd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b55326fc_b657701b",
         "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ClassPathEntryTest.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-07T02:05:15Z",
       "side": 1,
       "message": "This is not enough. Please use GcFinalization from guava instead.",
+      "revId": "cfaa33c15aec750c1f5ca16159c923770c197dd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "753d2e9e_aebc77e3",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ClassPathEntryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-07T02:24:56Z",
+      "side": 1,
+      "message": "hmmmm, yes that tool does look interesting.\n\nbut we don\u0027t have a dependency on guava-testlib already, argh",
+      "parentUuid": "b55326fc_b657701b",
       "revId": "cfaa33c15aec750c1f5ca16159c923770c197dd0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

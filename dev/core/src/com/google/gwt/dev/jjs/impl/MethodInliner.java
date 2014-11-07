@@ -44,7 +44,6 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -78,8 +77,11 @@ public class MethodInliner {
   /**
    * Method inlining visitor.
    */
-  private class InliningVisitor extends JModVisitor {
-    protected final Set<JMethod> modifiedMethods = new LinkedHashSet<JMethod>();
+  private class InliningVisitor extends OptimizerVisitor {
+
+    public InliningVisitor() {
+      super(MethodInliner.this.optimizerCtx);
+    }
 
     /**
      * Resets with each new visitor, which is good since things that couldn't be
@@ -91,11 +93,6 @@ public class MethodInliner {
     @Override
     public void endVisit(JExpressionStatement x, Context ctx) {
       expressionsWhoseValuesAreIgnored.pop();
-    }
-
-    @Override
-    public void endVisit(JMethod x, Context ctx) {
-      currentMethod = null;
     }
 
     @Override
@@ -180,8 +177,7 @@ public class MethodInliner {
     }
 
     @Override
-    public boolean visit(JMethod x, Context ctx) {
-      currentMethod = x;
+    public boolean enterMethod(JMethod x, Context ctx) {
       if (program.getStaticImpl(x) != null) {
         /*
          * Never inline a static impl into the calling instance method. We used
@@ -295,15 +291,6 @@ public class MethodInliner {
     }
 
     /**
-     * Replace the current expression with a given replacement and mark the
-     * method as modified.
-     */
-    private void replaceMeAndRecordModification(Context ctx, JExpression replacement) {
-      ctx.replaceMe(replacement);
-      modifiedMethods.add(currentMethod);
-    }
-
-    /**
      * Inline a call to an expression. Returns {@code InlineResult.BLACKLIST} if the method is
      * deemed not inlineable regardless of call site; {@code InlineResult.DO_NOT_BLACKLIST}
      * otherwise.
@@ -368,8 +355,7 @@ public class MethodInliner {
       if (orderVisitor.checkResults() == SideEffectCheck.NO_REFERENCES) {
         List<JExpression> expressions = expressionsIncludingArgs(x);
         expressions.addAll(bodyAsExpressionList);
-        replaceMeAndRecordModification(ctx,
-            JjsUtils.createOptimizedMultiExpression(ignoringReturn, expressions));
+        ctx.replaceMe(JjsUtils.createOptimizedMultiExpression(ignoringReturn, expressions));
         return InlineResult.DO_NOT_BLACKLIST;
       }
 
@@ -403,7 +389,7 @@ public class MethodInliner {
       replacer.accept(bodyAsExpressionList);
       bodyAsExpressionList.add(0, x.getInstance());
       bodyAsExpressionList.add(1, createClinitCall(x));
-      replaceMeAndRecordModification(ctx, JjsUtils.createOptimizedMultiExpression(ignoringReturn,
+      ctx.replaceMe(JjsUtils.createOptimizedMultiExpression(ignoringReturn,
           bodyAsExpressionList));
       return InlineResult.DO_NOT_BLACKLIST;
     }
@@ -543,38 +529,79 @@ public class MethodInliner {
 
   public static String NAME = MethodInliner.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program) {
+  public static int lastModifiedStep = 0;
+
+  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx, int pass) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MethodInliner(program).execImpl();
+    OptimizerStats stats = new MethodInliner(program, optimizerCtx).execImpl(pass);
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
 
-  private JMethod currentMethod;
-
-  private final JProgram program;
-
-  private MethodInliner(JProgram program) {
-    this.program = program;
+  // TODO(leafwang): remove this entry point when it is no longer needed.
+  public static OptimizerStats exec(JProgram program) {
+    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+    OptimizerStats stats = new MethodInliner(program, new OptimizerContext()).execImpl(1);
+    optimizeEvent.end("didChange", "" + stats.didChange());
+    return stats;
   }
 
-  private OptimizerStats execImpl() {
+  private final JProgram program;
+  private final OptimizerContext optimizerCtx;
+
+  private MethodInliner(JProgram program, OptimizerContext optimizerCtx) {
+    this.program = program;
+    this.optimizerCtx = optimizerCtx;
+  }
+
+  private OptimizerStats execImpl(int pass) {
     OptimizerStats stats = new OptimizerStats(NAME);
+    int iter = 0;
+    int lastStep = lastModifiedStep;
     while (true) {
       InliningVisitor inliner = new InliningVisitor();
-      inliner.accept(program);
+      if (pass == 1 && iter == 0) {
+        inliner.accept(program);
+      } else {
+        // TODO(leafwang): generalize this part to avoid explicitly implementing this loop in each
+        // Visitor.
+        Set<JMethod> modifiedMethods = optimizerCtx.getModifiedMethodsSince(lastStep);
+        Set<JMethod> affectedMethods = affectedMethods(modifiedMethods);
+        for (JMethod method : affectedMethods) {
+          inliner.accept(method);
+        }
+      }
+
       stats.recordModified(inliner.getNumMods());
+      lastStep = optimizerCtx.getOptimizationStep();
+      optimizerCtx.incOptimizationStep();
+
       if (!inliner.didChange()) {
         break;
       }
 
       // Run a cleanup on the methods we just modified
-      for (JMethod method : inliner.modifiedMethods) {
-        OptimizerStats innerStats = DeadCodeElimination.exec(program, method);
-        stats.recordModified(innerStats.getNumMods());
-      }
+      OptimizerStats dceStats = DeadCodeElimination.exec(program,
+          optimizerCtx.getModifiedMethodsAt(lastStep), optimizerCtx);
+      stats.recordModified(dceStats.getNumMods());
+      iter++;
     }
+    lastModifiedStep = optimizerCtx.getOptimizationStep();
     return stats;
+  }
+
+  /**
+   * Return the set of methods affected (because they are or callers of) by the modifications to the
+   * given set functions.
+   */
+  private Set<JMethod> affectedMethods(Set<JMethod> modifiedMethods) {
+    Set<JMethod> affectedMethods = Sets.newLinkedHashSet();
+    if (modifiedMethods == null || modifiedMethods.size() == 0) {
+      return affectedMethods;
+    }
+    affectedMethods.addAll(modifiedMethods);
+    affectedMethods.addAll(optimizerCtx.getCallers(modifiedMethods));
+    return affectedMethods;
   }
 
   /**

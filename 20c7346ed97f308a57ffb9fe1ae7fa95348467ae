@@ -693,6 +693,30 @@
     },
     {
       "key": {
+        "uuid": "753d2e9e_3d643b05",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-07T18:54:08Z",
+      "side": 1,
+      "message": "we talked more offline and your way is best when you take into account that there will be other optimizations running which may have modified methods in unpredicables ways.\n\ni take back my suggestion",
+      "parentUuid": "b564069b_4b0a5990",
+      "range": {
+        "startLine": 601,
+        "startChar": 18,
+        "endLine": 601,
+        "endChar": 34
+      },
+      "revId": "20c7346ed97f308a57ffb9fe1ae7fa95348467ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "357f3623_f35f7f6a",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerDependencies.java",
         "patchSetId": 8

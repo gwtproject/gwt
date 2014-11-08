@@ -2,6 +2,63 @@
   "comments": [
     {
       "key": {
+        "uuid": "3a0563fe_3c29f1b2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-11-08T16:59:53Z",
+      "side": 1,
+      "message": "nit: whitespaces",
+      "revId": "236e4af8de8be2217cd335149515a2b84f1898fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a0563fe_1c2e35bb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-11-08T16:59:53Z",
+      "side": 1,
+      "message": "Why move this in a separate method?",
+      "revId": "236e4af8de8be2217cd335149515a2b84f1898fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a0563fe_5c24bdda",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-11-08T16:59:53Z",
+      "side": 1,
+      "message": "Comment does not make sense anymore",
+      "range": {
+        "startLine": 25,
+        "startChar": 3,
+        "endLine": 25,
+        "endChar": 25
+      },
+      "revId": "236e4af8de8be2217cd335149515a2b84f1898fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a1b3f6c_790f7fd6",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 15
@@ -13,6 +70,23 @@
       "writtenOn": "2014-11-08T10:52:20Z",
       "side": 1,
       "message": "[error] Got an exception - expecting EOF, found \u0027}\u0027",
+      "revId": "236e4af8de8be2217cd335149515a2b84f1898fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a0563fe_fc126975",
+        "filename": "user/test/com/google/gwt/dev/jjs/CompilerSuite.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-11-08T16:59:53Z",
+      "side": 1,
+      "message": "Whats going on here?",
       "revId": "236e4af8de8be2217cd335149515a2b84f1898fa",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

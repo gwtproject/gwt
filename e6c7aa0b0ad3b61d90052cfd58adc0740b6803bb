@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a1b3f6c_d669c268",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-11-08T03:20:33Z",
+      "side": 0,
+      "message": "Looks like OutboxDir.getUnitCacheDir can be removed?",
+      "range": {
+        "startLine": 154,
+        "startChar": 50,
+        "endLine": 154,
+        "endChar": 77
+      },
+      "revId": "e6c7aa0b0ad3b61d90052cfd58adc0740b6803bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

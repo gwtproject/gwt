@@ -2,6 +2,437 @@
   "comments": [
     {
       "key": {
+        "uuid": "9531c2d3_0da6751f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "Strings.isNullOrEmpty()",
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a0f2f24_974a24ed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "it looks like this function isn\u0027t actually used?",
+      "range": {
+        "startLine": 65,
+        "startChar": 17,
+        "endLine": 65,
+        "endChar": 54
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a0f2f24_b7852868",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 3496,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "this function is only ever called in GwtAstBuilder. why is it implemented here in GenerateJavaScriptAST?",
+      "range": {
+        "startLine": 3496,
+        "startChar": 16,
+        "endLine": 3496,
+        "endChar": 43
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a0f2f24_1ab079d1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "i\u0027m speaking out of a lot of ignorance here about JDT + Java8, but i don\u0027t understand why we\u0027re synthesizing this lambda method body.\n\nshouldn\u0027t either the body already exist or else JDT should have synthesized it?",
+      "range": {
+        "startLine": 1093,
+        "startChar": 8,
+        "endLine": 1093,
+        "endChar": 44
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a0f2f24_9a20093a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1216,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "formatting is wrong, going over the character limit",
+      "range": {
+        "startLine": 1215,
+        "startChar": 6,
+        "endLine": 1216,
+        "endChar": 6
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_1d2bd373",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "i have to say that breaking out the construction into lots of little methods helps make it understandable. i expected this to be a lot harder to read",
+      "range": {
+        "startLine": 1284,
+        "startChar": 4,
+        "endLine": 1284,
+        "endChar": 42
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_5d315bdf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1350,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "eclipse is telling me this cast is unnecessary",
+      "range": {
+        "startLine": 1350,
+        "startChar": 46,
+        "endLine": 1350,
+        "endChar": 58
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_3d268fab",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1383,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "no need for this stutter step",
+      "range": {
+        "startLine": 1382,
+        "startChar": 6,
+        "endLine": 1383,
+        "endChar": 98
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_dd3c4bb8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1390,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "formatting",
+      "range": {
+        "startLine": 1389,
+        "startChar": 1,
+        "endLine": 1390,
+        "endChar": 28
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_bd397fc6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1697,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "unused variable",
+      "range": {
+        "startLine": 1697,
+        "startChar": 8,
+        "endLine": 1697,
+        "endChar": 30
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a0f2f24_7abd358e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 3951,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "i think this is leftover debugging code",
+      "range": {
+        "startLine": 3951,
+        "startChar": 4,
+        "endLine": 3951,
+        "endChar": 48
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_fdca6758",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "private",
+      "range": {
+        "startLine": 230,
+        "startChar": 2,
+        "endLine": 230,
+        "endChar": 8
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_7dfe577d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "it looks like this is a change from assuming that there isn\u0027t any static impl mapping for any of the functions in an interface to instead making sure there aren\u0027t any.\n\ndoes this danger actually exist? if it does then i think correcting it in the Pruner would be bad since we don\u0027t run the Pruner in draft compiles anymore",
+      "range": {
+        "startLine": 406,
+        "startChar": 10,
+        "endLine": 406,
+        "endChar": 50
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_5d039be7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReferenceMapper.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "why you no lint",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 44
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_7da1b78a",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "2014",
+      "range": {
+        "startLine": 2,
+        "startChar": 15,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_5da6fba4",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "why you no format",
+      "range": {
+        "startLine": 200,
+        "startChar": 1,
+        "endLine": 207,
+        "endChar": 36
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_1dfd137c",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "unused method",
+      "range": {
+        "startLine": 411,
+        "startChar": 15,
+        "endLine": 411,
+        "endChar": 36
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_fdf147a6",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "is not thrown",
+      "range": {
+        "startLine": 446,
+        "startChar": 66,
+        "endLine": 446,
+        "endChar": 91
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_bdebbfb6",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "is not thrown",
+      "range": {
+        "startLine": 450,
+        "startChar": 71,
+        "endLine": 450,
+        "endChar": 96
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "753d2e9e_c2a512bf",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 14
@@ -13,6 +444,52 @@
       "writtenOn": "2014-11-07T18:15:20Z",
       "side": 1,
       "message": "[error] Got an exception - expecting EOF, found \u0027}\u0027",
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_3dab2f6d",
+        "filename": "user/test/com/google/gwt/dev/jjs/CompilerSuite.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "undo debugging only changes",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 44
+      },
+      "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af85738_fdb4a7c7",
+        "filename": "user/test/com/google/gwt/dev/jjs/Java8Test.gwt.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-08T00:57:32Z",
+      "side": 1,
+      "message": "2014 as well as in other files",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 19
+      },
       "revId": "b6fbd07c1b62ccb076dc13396e0503c78efd47f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

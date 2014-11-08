@@ -1,0 +1,441 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a0f2f24_fa5385a8",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CodeServer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "So far I\u0027ve avoided having any static variables in this class and I\u0027d rather not start now.\n\nA few possibilities:\n\nInline setupCaches() and pass these two objects as parameters.\n\nCreate a static inner class (perhaps named Caches), do setup in the constructor, and pass Caches as a parameter.\n\nPass in a MinimalRebuildCacheManager (see later comment).",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 42,
+        "endChar": 34
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a0f2f24_faa4a519",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "Pass in a child logger to the CleanerJob?",
+      "range": {
+        "startLine": 58,
+        "startChar": 36,
+        "endLine": 58,
+        "endChar": 40
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a0f2f24_ba298df8",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "Any idea how long this takes? Log elapsed time?",
+      "range": {
+        "startLine": 119,
+        "startChar": 6,
+        "endLine": 119,
+        "endChar": 12
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_339c8874",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "I\u0027m not seeing where this is used other than the test. If it\u0027s just for a test, let\u0027s not do it this way; the error message will be bad since it doesn\u0027t say anything about what\u0027s different, and equals() might get used in production by mistake.\n\nInstead it could be a method like this:\n\n/**\n * Returns text describing the difference between two caches,\n * or the empty string if there are none.\n */\n@VisibleForTesting\nString findDifferences(MinimalRebuildCache other) {\n\n}",
+      "range": {
+        "startLine": 447,
+        "startChar": 17,
+        "endLine": 447,
+        "endChar": 23
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a0f2f24_bdf18775",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "I think we should avoid static fields here.\n\nInstead, how about making this class a singleton constructed at startup that contains baseCacheDir as another field. Then you can pass a reference to any class that needs to use it (instead of baseCacheDir).\n\nThis puts us in a better position if we ever want to run two instances of the compiler at once.\n\n(Also, maybe rename it to MinimalRebuildCacheStorage?)\n\nFor testing we might want a stub version of this class.",
+      "range": {
+        "startLine": 39,
+        "startChar": 13,
+        "endLine": 39,
+        "endChar": 39
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_33f8088c",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "Maybe we want a limit on how many of these to cache in memory so we don\u0027t run out? How about an LRU cache? Guava has a CacheBuilder class that you could use.",
+      "range": {
+        "startLine": 41,
+        "startChar": 50,
+        "endLine": 41,
+        "endChar": 76
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_b333f813",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "This could cause locking issues on Windows. Maybe rename the directory and delete it in the background? And if it fails, just log it.",
+      "range": {
+        "startLine": 60,
+        "startChar": 18,
+        "endLine": 60,
+        "endChar": 29
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_f39bb049",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "Could you use java.util.logging.Logger in this class so we log the class name and timestamp?",
+      "range": {
+        "startLine": 230,
+        "startChar": 24,
+        "endLine": 230,
+        "endChar": 26
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_9320fc39",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "Maybe we should start using Preconditions.checkNotNull() for this sort of thing?\n\nAfter spending a day tracking down a bug that could have been caught if assertions were on, I think we should always do the error-checking unless there\u0027s a performance issue.",
+      "range": {
+        "startLine": 538,
+        "startChar": 4,
+        "endLine": 538,
+        "endChar": 10
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_93735c53",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "We could use Guava\u0027s ByteStreams.copy() for this.",
+      "range": {
+        "startLine": 626,
+        "startChar": 11,
+        "endLine": 626,
+        "endChar": 15
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_33e8083e",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "I don\u0027t see any reason for clear() to recalculate this so maybe just move it to the constructor and put \"final\" back again?",
+      "range": {
+        "startLine": 245,
+        "startChar": 15,
+        "endLine": 245,
+        "endChar": 29
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_930fdc9e",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "Why not use the TreeLogger?",
+      "range": {
+        "startLine": 259,
+        "startChar": 15,
+        "endLine": 259,
+        "endChar": 22
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_13774cfd",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "Each time we call clear() it will add another shutdown hook. When the JVM shuts down, a bunch of shutdownThreadTasks will all start executing at the same time (since they are separate ExecutorServices).\n\nIf we don\u0027t want that to happen then we should disable the previous shutdown hook in clear() somehow.",
+      "range": {
+        "startLine": 297,
+        "startChar": 25,
+        "endLine": 297,
+        "endChar": 40
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_734a00a7",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "There is a concurrency issue here if background tasks are still running. Stale tasks from before clear() was called can conflict with new tasks.\n\nI see two possible fixes:\n\n- call backgroundService.shutdown() first so we wait for the tasks to finish (and make sure no new tasks will be scheduled).\n\n- just use a single backgroundService to single-thread all tasks. That is, make the variable final again and move it back to the constructor, and schedule tasks instead of calling run() directly here.",
+      "range": {
+        "startLine": 361,
+        "startChar": 23,
+        "endLine": 361,
+        "endChar": 26
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_56c0125a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "Same as before, if this is just for the test, write a findDifferences() method instead.",
+      "range": {
+        "startLine": 93,
+        "startChar": 19,
+        "endLine": 93,
+        "endChar": 25
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_f63f1eaa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeReferences.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "Also findDifferences()",
+      "range": {
+        "startLine": 87,
+        "startChar": 19,
+        "endLine": 87,
+        "endChar": 25
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_d63c22b8",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsPersistentPrettyNamer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "also findDifferences()",
+      "range": {
+        "startLine": 57,
+        "startChar": 19,
+        "endLine": 57,
+        "endChar": 25
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_f6ca7e58",
+        "filename": "dev/core/src/com/google/gwt/dev/util/DiskCachingUtil.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "If this ever gets called with a different list of modules then the same File will be returned anyway.\n\nIf that\u0027s never supposed to happen, maybe just put in a sanity check so we remember to implement it properly if it\u0027s ever needed: save the list of modules and throw an exception if it\u0027s different than the first time.",
+      "range": {
+        "startLine": 37,
+        "startChar": 34,
+        "endLine": 37,
+        "endChar": 58
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1b3f6c_d315542e",
+        "filename": "dev/core/test/com/google/gwt/dev/MinimalRebuildCacheManagerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-08T02:38:08Z",
+      "side": 1,
+      "message": "Should call a findDifferences() method here instead of equals().",
+      "range": {
+        "startLine": 52,
+        "startChar": 26,
+        "endLine": 52,
+        "endChar": 32
+      },
+      "revId": "fed561f1ac6984efc54cbf7544dc6d1d45e9017f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

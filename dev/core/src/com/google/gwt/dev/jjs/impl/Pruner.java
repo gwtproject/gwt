@@ -35,7 +35,6 @@ import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNameOf;
 import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JNode;
@@ -89,7 +88,7 @@ public class Pruner {
    * references to pruned variables and methods by references to the null field
    * and null method, and drop assignments to pruned variables.
    */
-  private class CleanupRefsVisitor extends JModVisitor {
+  private class CleanupRefsVisitor extends OptimizerVisitor {
     private final Stack<JExpression> lValues = new Stack<JExpression>();
     private final Map<JMethod, ArrayList<JParameter>> methodToOriginalParamsMap;
     private final Set<? extends JNode> referencedNonTypes;
@@ -100,6 +99,7 @@ public class Pruner {
 
     public CleanupRefsVisitor(Set<? extends JNode> referencedNodes,
         Map<JMethod, ArrayList<JParameter>> methodToOriginalParamsMap) {
+      super(Pruner.this.optimizerCtx);
       this.referencedNonTypes = referencedNodes;
       this.methodToOriginalParamsMap = methodToOriginalParamsMap;
     }
@@ -151,7 +151,7 @@ public class Pruner {
     }
 
     @Override
-    public void endVisit(JMethod x, Context ctx) {
+    public void exitMethod(JMethod x, Context ctx) {
       JType type = x.getType();
       if (type instanceof JReferenceType &&
           !program.typeOracle.isInstantiatedType((JReferenceType) type)) {
@@ -336,7 +336,7 @@ public class Pruner {
    * Remove any unreferenced classes and interfaces from JProgram. Remove any
    * unreferenced methods and fields from their containing classes.
    */
-  private class PruneVisitor extends JModVisitor {
+  private class PruneVisitor extends OptimizerVisitor {
     private final Map<JMethod, ArrayList<JParameter>> methodToOriginalParamsMap =
         new HashMap<JMethod, ArrayList<JParameter>>();
     private final Set<? extends JNode> referencedNonTypes;
@@ -344,6 +344,7 @@ public class Pruner {
 
     public PruneVisitor(Set<? extends JReferenceType> referencedTypes,
         Set<? extends JNode> referencedNodes) {
+      super(Pruner.this.optimizerCtx);
       this.referencedTypes = referencedTypes;
       this.referencedNonTypes = referencedNodes;
     }
@@ -358,6 +359,7 @@ public class Pruner {
       for (int i = 0; i < type.getFields().size(); ++i) {
         JField field = type.getFields().get(i);
         if (!referencedNonTypes.contains(field)) {
+          optimizerCtx.removeField(field);
           type.removeField(i);
           madeChanges();
           --i;
@@ -369,6 +371,7 @@ public class Pruner {
         if (!referencedNonTypes.contains(method)) {
           // Never prune clinit directly out of the class.
           if (i > 0) {
+            optimizerCtx.removeMethod(method);
             type.removeMethod(i);
             program.removeStaticImplMapping(method);
             madeChanges();
@@ -391,6 +394,7 @@ public class Pruner {
         JField field = type.getFields().get(i);
         // all interface fields are static and final
         if (!isReferenced || !referencedNonTypes.contains(field)) {
+          optimizerCtx.removeField(field);
           type.removeField(i);
           madeChanges();
           --i;
@@ -402,6 +406,7 @@ public class Pruner {
         JMethod method = type.getMethods().get(i);
         // all other interface methods are instance and abstract
         if (!isInstantiated || !referencedNonTypes.contains(method)) {
+          optimizerCtx.removeMethod(method);
           type.removeMethod(i);
           assert program.instanceMethodForStaticImpl(method) == null;
           madeChanges();
@@ -413,7 +418,7 @@ public class Pruner {
     }
 
     @Override
-    public boolean visit(JMethod x, Context ctx) {
+    public boolean enterMethod(JMethod x, Context ctx) {
       if (!x.canBePolymorphic()) {
         /*
          * Don't prune parameters on unreferenced methods. The methods might not
@@ -498,9 +503,19 @@ public class Pruner {
 
   private static final String NAME = Pruner.class.getSimpleName();
 
+  public static OptimizerStats exec(JProgram program, boolean noSpecialTypes,
+      OptimizerContext optimizerCtx) {
+    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+    OptimizerStats stats = new Pruner(program, noSpecialTypes, optimizerCtx).execImpl();
+    optimizerCtx.incOptimizationStep();
+    optimizeEvent.end("didChange", "" + stats.didChange());
+    return stats;
+  }
+
+  // TODO(leafwang): remove this entry point when it is no longer needed.
   public static OptimizerStats exec(JProgram program, boolean noSpecialTypes) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new Pruner(program, noSpecialTypes).execImpl();
+    OptimizerStats stats = new Pruner(program, noSpecialTypes, new OptimizerContext()).execImpl();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
@@ -607,9 +622,12 @@ public class Pruner {
 
   private final boolean saveCodeGenTypes;
 
-  private Pruner(JProgram program, boolean saveCodeGenTypes) {
+  private final OptimizerContext optimizerCtx;
+
+  private Pruner(JProgram program, boolean saveCodeGenTypes, OptimizerContext optimizerCtx) {
     this.program = program;
     this.saveCodeGenTypes = saveCodeGenTypes;
+    this.optimizerCtx = optimizerCtx;
   }
 
   private OptimizerStats execImpl() {
@@ -643,6 +661,7 @@ public class Pruner {
             .getLiveFieldsAndMethods());
     pruner.accept(program);
     stats.recordModified(pruner.getNumMods());
+
     if (!pruner.didChange()) {
       return stats;
     }

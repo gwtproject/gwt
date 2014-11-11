@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa83cbc2_a2da9ef3",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-11-11T10:31:39Z",
+      "side": 1,
+      "message": "https://developer.mozilla.org/en-US/docs/Web/API/document.createEvent#Notes says this is Gecko-specific.\n\nhttp://msdn.microsoft.com/en-us/library/ie/ff974342(v\u003dvs.85).aspx only talks about initKeyboardEvent, which Gecko will never support (see notes in https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#Browser_compatibility)\n\nAnd https://github.com/termi/DOM-Keyboard-Event-Level-3-polyfill/blob/427a40a5411672b29677e375d7c7110c1794738b/DOMEventsLevel3.shim.js#L871-L879 tends to confirm this: calling initKeyEvent if it exists, initKeyboardEvent otherwise (but it doesn\u0027t look like it\u0027s been tested in IE11)\n\nAnd in an IE11 in a Win7 VM, this code alerts \"undefined\":\n\n var e \u003d document.createEvent(\"KeyboardEvent\");\n alert(typeof e.initKeyEvent);\n\nwhile this one alerts \"function\":\n\n var e \u003d document.createEvent(\"KeyboardEvent\");\n alert(typeof e.initKeyboardEvent);\n\nIt looks like we\u0027d need some browser-specific code; or maybe use \"new KeyboardEvent\"? (I don\u0027t know which versions of Firefox support it though)",
+      "range": {
+        "startLine": 228,
+        "startChar": 8,
+        "endLine": 228,
+        "endChar": 20
+      },
+      "revId": "7d7304e1e4f162a53b89b45ba519cdcdcaaa7155",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

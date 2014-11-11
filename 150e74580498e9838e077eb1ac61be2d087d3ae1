@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a7db79e_a9d4c5f8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-11T19:22:11Z",
+      "side": 1,
+      "message": "Lets not keep track of the pass and iteration here. \n\nAll the information should be obtained by consulting the modified methods since last execution.\n\nThe way you can do the first round is initializing the optimizerCtx 0 step with all methods.",
+      "range": {
+        "startLine": 561,
+        "startChar": 6,
+        "endLine": 561,
+        "endChar": 35
+      },
+      "revId": "150e74580498e9838e077eb1ac61be2d087d3ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

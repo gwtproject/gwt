@@ -113,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "dabfe78a_891c598a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerVisitor.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-11-11T18:20:32Z",
+      "side": 1,
+      "message": "The other four fields other than optimzierCtx cannot be final since they are modified throughout the traverse process.\nAll the accesses are inside the OptimizerVisitor class or its subclasses. I don\u0027t think we need getters.",
+      "parentUuid": "5a7db79e_ded0d9d7",
+      "revId": "87263758a728acd53381efaf69bb8af80f5b960a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c838a_414a9574",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
         "patchSetId": 10

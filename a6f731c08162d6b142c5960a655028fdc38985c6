@@ -145,6 +145,24 @@
     },
     {
       "key": {
+        "uuid": "1a1b3f6c_b6952616",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/AbstractTreeLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-11T22:55:35Z",
+      "side": 1,
+      "message": "Already changed to volatile. (Also, this isn\u0027t Super Dev Mode code, so I\u0027m going to leave it.)",
+      "parentUuid": "9531c2d3_adc2c910",
+      "revId": "a6f731c08162d6b142c5960a655028fdc38985c6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f583dec2_7ca2f990",
         "filename": "dev/core/src/com/google/gwt/dev/util/log/MetricMap.java",
         "patchSetId": 3

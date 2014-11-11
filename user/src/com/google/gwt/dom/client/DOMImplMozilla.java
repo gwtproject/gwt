@@ -224,7 +224,7 @@ class DOMImplMozilla extends DOMImplStandard {
   private native NativeEvent createKeyEventImpl(Document doc, String type,
       boolean canBubble, boolean cancelable, boolean ctrlKey, boolean altKey,
       boolean shiftKey, boolean metaKey, int keyCode, int charCode) /*-{
-    var evt = doc.createEvent('KeyEvents');
+    var evt = doc.createEvent('KeyboardEvent');
     evt.initKeyEvent(type, canBubble, cancelable, null, ctrlKey, altKey,
       shiftKey, metaKey, keyCode, charCode);
     return evt;

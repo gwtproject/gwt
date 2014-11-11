@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1acc1f53_8bea0d0a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 2767,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-11T08:58:17Z",
+      "side": 1,
+      "message": "[error] Empty statement.",
+      "revId": "24d82b37bd478ca174a0ee4521cf26278efe31ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1acc1f53_abe7c940",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-11T08:58:17Z",
+      "side": 1,
+      "message": "[error] Got an exception - expecting EOF, found \u0027}\u0027",
+      "revId": "24d82b37bd478ca174a0ee4521cf26278efe31ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

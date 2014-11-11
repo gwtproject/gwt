@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.codeserver.CompileDir.PolicyFile;
+import com.google.gwt.dev.codeserver.JobRunner.CleanFailedException;
 import com.google.gwt.dev.codeserver.Pages.ErrorPage;
 import com.google.gwt.dev.json.JsonObject;
 
@@ -227,6 +228,17 @@ public class WebServer {
       return Responses.newJsonResponse(json);
     }
 
+    if (target.startsWith("/clean")) {
+      JsonObject json = null;
+      try {
+        runner.clean(logger);
+        json = jsonExporter.exportOk("Cleaned disk caches.");
+      } catch (CleanFailedException e) {
+        json = jsonExporter.exportError(e.getMessage());
+      }
+      return Responses.newJsonResponse(json);
+    }
+
     if (target.startsWith("/log/")) {
       String moduleName = target.substring("/log/".length());
       Outbox box = outboxes.findByOutputModuleName(moduleName);
@@ -295,7 +307,7 @@ public class WebServer {
   /**
    * Returns a file that the compiler wrote to its war directory.
    */
-  private Response makeCompilerOutputPage(String target) throws IOException {
+  private Response makeCompilerOutputPage(String target) {
 
     int secondSlash = target.indexOf('/', 1);
     String moduleName = target.substring(1, secondSlash);
@@ -357,7 +369,7 @@ public class WebServer {
     };
   }
 
-  private Response makeModulePage(String moduleName) throws IOException {
+  private Response makeModulePage(String moduleName) {
     Outbox box = outboxes.findByOutputModuleName(moduleName);
     if (box == null) {
       return new ErrorPage("No such module: " + moduleName);
@@ -424,7 +436,7 @@ public class WebServer {
     };
   }
 
-  private Response makePolicyFilePage(String target) throws IOException {
+  private Response makePolicyFilePage(String target) {
 
     int secondSlash = target.indexOf('/', 1);
     if (secondSlash < 1) {
@@ -447,8 +459,7 @@ public class WebServer {
   /**
    * Sends the log file as html with errors highlighted in red.
    */
-  private Response makeLogPage(final Outbox box)
-       throws IOException {
+  private Response makeLogPage(final Outbox box) {
     final File file = box.getCompileLog();
     if (!file.isFile()) {
       return new ErrorPage("log file not found");

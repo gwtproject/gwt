@@ -26,6 +26,7 @@ import com.google.gwt.dev.Compiler;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.CompilerOptions;
 import com.google.gwt.dev.MinimalRebuildCache;
+import com.google.gwt.dev.MinimalRebuildCacheManager;
 import com.google.gwt.dev.NullRebuildCache;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ConfigProps;
@@ -36,7 +37,7 @@ import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.dev.cfg.ResourceLoaders;
 import com.google.gwt.dev.codeserver.Job.Result;
 import com.google.gwt.dev.codeserver.JobEvent.CompileStrategy;
-import com.google.gwt.dev.javac.UnitCacheSingleton;
+import com.google.gwt.dev.javac.UnitCache;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.resource.impl.ZipFileClassPathEntry;
 import com.google.gwt.dev.util.log.CompositeTreeLogger;
@@ -59,16 +60,15 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * Recompiles a GWT module on demand.
  */
-class Recompiler {
+public class Recompiler {
 
   private final OutboxDir outboxDir;
   private final LauncherDir launcherDir;
+  private final MinimalRebuildCacheManager minimalRebuildCacheManager;
   private final String inputModuleName;
 
   private String serverPrefix;
   private int compilesDone = 0;
-  private Map<Map<String, String>, MinimalRebuildCache> minimalRebuildCacheForProperties =
-      Maps.newHashMap();
 
   // after renaming
   private AtomicReference<String> outputModuleName = new AtomicReference<String>(null);
@@ -83,12 +83,17 @@ class Recompiler {
   private final CompilerContext.Builder compilerContextBuilder = new CompilerContext.Builder();
   private CompilerContext compilerContext;
   private final Options options;
+  private final UnitCache unitCache;
 
-  Recompiler(OutboxDir outboxDir, LauncherDir launcherDir, String inputModuleName, Options options) {
+  Recompiler(OutboxDir outboxDir, LauncherDir launcherDir,
+      MinimalRebuildCacheManager minimalRebuildCacheManager, String inputModuleName,
+      Options options, UnitCache unitCache) {
     this.outboxDir = outboxDir;
     this.launcherDir = launcherDir;
+    this.minimalRebuildCacheManager = minimalRebuildCacheManager;
     this.inputModuleName = inputModuleName;
     this.options = options;
+    this.unitCache = unitCache;
     this.serverPrefix = options.getPreferredHost() + ":" + options.getPort();
     compilerContext = compilerContextBuilder.build();
   }
@@ -150,8 +155,8 @@ class Recompiler {
         System.setProperty("gwt.speedtracerlog",
             outboxDir.getSpeedTracerLogFile().getAbsolutePath());
       }
-      compilerContext = compilerContextBuilder.unitCache(
-          UnitCacheSingleton.get(job.getLogger(), outboxDir.getUnitCacheDir())).build();
+      // Aim for a consistent cache dir so it can be used across relaunches.
+      compilerContext = compilerContextBuilder.unitCache(unitCache).build();
     }
 
     long startTime = System.currentTimeMillis();
@@ -193,8 +198,9 @@ class Recompiler {
 
       logger.log(TreeLogger.INFO, "Loading Java files in " + inputModuleName + ".");
       CompilerOptions loadOptions = new CompilerOptionsImpl(compileDir, inputModuleName, options);
-      compilerContext = compilerContextBuilder.options(loadOptions).unitCache(
-          Compiler.getOrCreateUnitCache(logger, loadOptions)).build();
+
+      // Aim for a consistent cache dir so it can be used across relaunches.
+      compilerContext = compilerContextBuilder.options(loadOptions).unitCache(unitCache).build();
 
       // Loads and parses all the Java files in the GWT application using the JDT.
       // (This is warmup to make compiling faster later; we stop at this point to avoid
@@ -319,21 +325,17 @@ class Recompiler {
     CompilerOptions runOptions = new CompilerOptionsImpl(compileDir, newModuleName, options);
     compilerContext = compilerContextBuilder.options(runOptions).build();
 
-    // Looks up the matching rebuild cache using the final set of overridden binding properties.
-    MinimalRebuildCache knownGoodMinimalRebuildCache =
-        getKnownGoodMinimalRebuildCache(bindingProperties);
-    job.setCompileStrategy(knownGoodMinimalRebuildCache.isPopulated() ? CompileStrategy.INCREMENTAL
+    MinimalRebuildCache minimalRebuildCache = getMinimalRebuildCache(bindingProperties);
+    job.setCompileStrategy(minimalRebuildCache.isPopulated() ? CompileStrategy.INCREMENTAL
         : CompileStrategy.FULL);
 
     // Takes care to transactionally replace the saved cache only after a successful compile.
-    MinimalRebuildCache mutableMinimalRebuildCache = new MinimalRebuildCache();
-    mutableMinimalRebuildCache.copyFrom(knownGoodMinimalRebuildCache);
     boolean success =
-        new Compiler(runOptions, mutableMinimalRebuildCache).run(compileLogger, module);
+        new Compiler(runOptions, minimalRebuildCache).run(compileLogger, module);
     if (success) {
       publishedCompileDir = compileDir;
       lastBuildInput = input;
-      saveKnownGoodMinimalRebuildCache(bindingProperties, mutableMinimalRebuildCache);
+      setMinimalRebuildCache(bindingProperties, minimalRebuildCache);
       String moduleName = outputModuleName.get();
       writeRecompileNoCacheJs(new File(publishedCompileDir.getWarDir(), moduleName), moduleName,
           recompileJs, compileLogger);
@@ -395,34 +397,27 @@ class Recompiler {
     }
   }
 
-  private MinimalRebuildCache getKnownGoodMinimalRebuildCache(
-      Map<String, String> bindingProperties) {
-    if (!options.isIncrementalCompileEnabled()) {
-      return new NullRebuildCache();
-    }
-
-    MinimalRebuildCache minimalRebuildCache =
-        minimalRebuildCacheForProperties.get(bindingProperties);
-    if (minimalRebuildCache == null) {
-      minimalRebuildCache = new MinimalRebuildCache();
-      minimalRebuildCacheForProperties.put(bindingProperties, minimalRebuildCache);
-    }
-    return minimalRebuildCache;
-  }
-
-  private void saveKnownGoodMinimalRebuildCache(Map<String, String> bindingProperties,
-      MinimalRebuildCache knownGoodMinimalRebuildCache) {
+  private void setMinimalRebuildCache(Map<String, String> bindingProperties,
+      MinimalRebuildCache minimalRebuildCache) {
     if (!options.isIncrementalCompileEnabled()) {
       return;
     }
+    minimalRebuildCacheManager.setCache(inputModuleName, bindingProperties,
+        minimalRebuildCache);
+  }
 
-    minimalRebuildCacheForProperties.put(bindingProperties, knownGoodMinimalRebuildCache);
+  private MinimalRebuildCache getMinimalRebuildCache(Map<String, String> bindingProperties) {
+    if (!options.isIncrementalCompileEnabled()) {
+      return new NullRebuildCache();
+    }
+    return minimalRebuildCacheManager.getCache(inputModuleName, bindingProperties);
   }
 
   /**
    * Loads the module and configures it for SuperDevMode. (Does not restrict permutations.)
    */
-  private ModuleDef loadModule(Set<String> propertyNames, TreeLogger logger) throws UnableToCompleteException {
+  private ModuleDef loadModule(Set<String> propertyNames, TreeLogger logger)
+      throws UnableToCompleteException {
 
     // make sure we get the latest version of any modified jar
     ZipFileClassPathEntry.clearCache();

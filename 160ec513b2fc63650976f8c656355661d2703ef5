@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "baf15352_e3b1acd5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-11T09:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_786bc511",
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_b83b7d10",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 12
@@ -42,6 +60,24 @@
         "endLine": 95,
         "endChar": 7
       },
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baf15352_c3bea8a5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-11T09:21:27Z",
+      "side": 1,
+      "message": "I removed it for now since it is only used by the SAM-\u003eJS function converter which isn\u0027t in this patch, will put back later.",
+      "parentUuid": "10116099_b83b7d10",
       "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "baf15352_438298e3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1094,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-11T09:21:27Z",
+      "side": 1,
+      "message": "There\u0027s a test for this already, see testLambdaCaptureLocalAndField()",
+      "parentUuid": "d0b988d9_a8108370",
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0b988d9_c86217f9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 12
@@ -94,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "baf15352_238794f3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-11T09:21:27Z",
+      "side": 1,
+      "message": "? Extract which into it\u0027s own method? Doesn\u0027t seem worth it to move these three or 4 lines into a method only used by this callsite.",
+      "parentUuid": "d0b988d9_c86217f9",
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0b988d9_a837a303",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 12
@@ -105,6 +177,24 @@
       "writtenOn": "2014-10-07T18:30:58Z",
       "side": 1,
       "message": "formatting.",
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baf15352_039c9041",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-11T09:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0b988d9_a837a303",
       "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -134,6 +224,24 @@
     },
     {
       "key": {
+        "uuid": "baf15352_e3988c4f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1207,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-11T09:21:27Z",
+      "side": 1,
+      "message": "Which lines?",
+      "parentUuid": "d0b988d9_0886cf37",
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10116099_2cbe32dd",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
         "patchSetId": 12
@@ -151,6 +259,24 @@
         "endLine": 185,
         "endChar": 44
       },
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7db79e_b8d895a4",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-11T09:21:27Z",
+      "side": 1,
+      "message": "I tried, but there\u0027s too many edge cases to handle, the method ends up needing too many overloads, or too many parameters, it turned out to make the tests less readable.",
+      "parentUuid": "10116099_2cbe32dd",
       "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -180,6 +306,24 @@
     },
     {
       "key": {
+        "uuid": "5a7db79e_78967daf",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-11T09:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10116099_2c0c722d",
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0b988d9_2da3a593",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 12
@@ -191,6 +335,24 @@
       "writtenOn": "2014-10-07T18:30:58Z",
       "side": 1,
       "message": "I think we should probably add more test cases.\n\nSay cases like an abstract inner class with a SAM method and lambda constructions from inside the class from its parent and from outside.\n\nAll the tests here are with primitive types as returns we should have also with objects and also test that boxing/unboxing of parameters results works as expected.\n\nJDT has tons of unit tests for lambda in\n\nhttp://git.eclipse.org/c/jdt/eclipse.jdt.core.git/tree/org.eclipse.jdt.core.tests.compiler/src/org/eclipse/jdt/core/tests/compiler/regression/LambdaExpressionsTest.java?h\u003dR4_4_maintenance\n\nI guess there are some worth adding.",
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baf15352_8388a005",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-11T09:21:27Z",
+      "side": 1,
+      "message": "I moved some over. A bunch of them test bytecode generation bugs and are not applicable, but I cherry picked some ones.",
+      "parentUuid": "d0b988d9_2da3a593",
       "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -214,6 +376,24 @@
         "endLine": 35,
         "endChar": 31
       },
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baf15352_638d9c13",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-11T09:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10f88089_744119d2",
       "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -249,6 +429,24 @@
       "side": 1,
       "message": "I guess that \n\n  // CHECKSTYLE:OFF\n\nat the top does not solve the issue right?",
       "parentUuid": "10116099_bdac0fb0",
+      "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baf15352_a3bba4b3",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-11T09:21:27Z",
+      "side": 1,
+      "message": "Nope :(",
+      "parentUuid": "10f88089_943c855c",
       "revId": "160ec513b2fc63650976f8c656355661d2703ef5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dabfe78a_e9ab9596",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-11T21:17:21Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s a big deal but it looks like there\u0027s a possibility of a race condition:\n\nthread 1 calls getCache()\nthread 1 calls readCache() (takes lock)\nthread 2 calls deleteCaches() (blocks)\nthread 1 returns from read cache()\nthread 2 enters deleteCaches(), calls invalidateAll()\nthread 1 calls put()\n\nThe result is that a cache entry that deleteCaches() tried to delete gets preserved by the other thread.\n\nThis could be fixed by moving the put() call to the end of readCache(), so if you read a cache from disk then it\u0027s atomically added to the in-memory cache.",
+      "range": {
+        "startLine": 60,
+        "startChar": 27,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "73c94dfde09b074392b43fe3ae17f432a2d08339",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabfe78a_29b0cdd1",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-11T21:17:21Z",
+      "side": 1,
+      "message": "\"Returns an empty cache if no cache is found in memory or on disk.\"",
+      "range": {
+        "startLine": 82,
+        "startChar": 18,
+        "endLine": 82,
+        "endChar": 19
+      },
+      "revId": "73c94dfde09b074392b43fe3ae17f432a2d08339",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabfe78a_2991adda",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-11T21:17:21Z",
+      "side": 1,
+      "message": "There is a race condition between deleteCaches() and setCache() due to the internal executor:\n\nthread 1 calls setCache(), queues async write\nthread 2 calls deleteCache(), deletes in memory and on disk\nwriteCache is called by the background thread and writes a cache that should have been deleted.\n\nThe consequence would be that if the writeCache queue gets backed up, the clear cache button doesn\u0027t work and you have to hit it again after the backlog clears.\n\nWe could fix it so that clearing the cache also clears the backlog:\n\nHave an atomic counter keeping track of the \"version\" of the cache manager.\n- Whenever deleteCache() is called, bump the version.\n- setCache() passes the current version to writeCache().\n- if the version is not current when writeCache actually runs, it means a deleteCache() happened, so return without doing anything since this job is obsolete.",
+      "range": {
+        "startLine": 213,
+        "startChar": 28,
+        "endLine": 213,
+        "endChar": 38
+      },
+      "revId": "73c94dfde09b074392b43fe3ae17f432a2d08339",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabfe78a_3d35677b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-11T21:17:21Z",
+      "side": 1,
+      "message": "There is a race condition with the shutdown task.\n\n- a thread calls clear().\n- This schedules the shutdown task.\n- clear() calls start(), which reinitializes lots of variables, including currentCacheFile and currentCacheFileStream \n- The shutdown task runs. It uses the new values of these fields, so it shuts down the \"next version\".\n\nThis might happen for other tasks too. A few possible ways to fix this (in general):\n\n- Make all the tasks static inner classes and pass all the fields they need to their constructors. That way they will always have the version active at the time they were created.\n\n- Introduce a \"State\" inner class that holds all the variables that get reinitialized. Make sure each task has a pointer to the right State to use.\n\n- Don\u0027t try to reuse PersistentUnitCache instances. Instead UnitCacheSingleton should completely shut down the old cache (and wait for it to stop) and then create a new one.\n\n- keep a version counter and make sure tasks automatically disable themselves when they were created by a previous version.\n\n- Maybe make clear() itself a background task and return a Future so that caller knows when it\u0027s done?\n\nThere might also be issues with the disk too where an old task continues changing the disk.\n\nPutting UnitCacheSingleton in charge of restarting is probably the simplest. Instead of clear(), we could have shutdown() which returns when the old cache is completely shut down.",
+      "range": {
+        "startLine": 293,
+        "startChar": 4,
+        "endLine": 293,
+        "endChar": 21
+      },
+      "revId": "73c94dfde09b074392b43fe3ae17f432a2d08339",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabfe78a_7d975fd2",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/UnitCacheSingleton.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-11T21:17:21Z",
+      "side": 1,
+      "message": "Should we block here until the UnitCache is completely cleared? (All tasks are run.)",
+      "range": {
+        "startLine": 47,
+        "startChar": 13,
+        "endLine": 47,
+        "endChar": 18
+      },
+      "revId": "73c94dfde09b074392b43fe3ae17f432a2d08339",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

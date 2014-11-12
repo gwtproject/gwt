@@ -227,6 +227,23 @@ public class WebServer {
       return Responses.newJsonResponse(json);
     }
 
+    // GET the Js that knows how to request the specific permutation recompile.
+    if (target.startsWith("/recompile-requester/")) {
+      String moduleName = target.substring("/recompile-requester/".length());
+      Outbox box = outboxes.findByOutputModuleName(moduleName);
+      if (box == null) {
+        return new ErrorPage("No such module: " + moduleName);
+      }
+
+      try {
+        String recompileJs = box.getRecompileJs(logger);
+        return Responses.newJavascriptResponse(recompileJs);
+      } catch (UnableToCompleteException e) {
+        // Already logged.
+        return new ErrorPage("Failed to generate the Js recompile requester.");
+      }
+    }
+
     if (target.startsWith("/log/")) {
       String moduleName = target.substring("/log/".length());
       Outbox box = outboxes.findByOutputModuleName(moduleName);
@@ -295,7 +312,7 @@ public class WebServer {
   /**
    * Returns a file that the compiler wrote to its war directory.
    */
-  private Response makeCompilerOutputPage(String target) throws IOException {
+  private Response makeCompilerOutputPage(String target) {
 
     int secondSlash = target.indexOf('/', 1);
     String moduleName = target.substring(1, secondSlash);
@@ -357,7 +374,7 @@ public class WebServer {
     };
   }
 
-  private Response makeModulePage(String moduleName) throws IOException {
+  private Response makeModulePage(String moduleName) {
     Outbox box = outboxes.findByOutputModuleName(moduleName);
     if (box == null) {
       return new ErrorPage("No such module: " + moduleName);

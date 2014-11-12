@@ -43,6 +43,10 @@ public class Java8Test extends GWTTestCase {
     boolean run(String a, String b);
   }
 
+  interface Lambda3<String> {
+    boolean run(String a);
+  }
+
   class AcceptsLambda<T> {
     public T accept(Lambda<T> foo) {
       return foo.run(10, 20);
@@ -50,6 +54,7 @@ public class Java8Test extends GWTTestCase {
     public boolean accept2(Lambda2<String> foo) {
       return foo.run("a", "b");
     }
+    public boolean accept3(Lambda3<String> foo) { return foo.run("hello"); }
   }
 
   class Pojo {
@@ -64,6 +69,54 @@ public class Java8Test extends GWTTestCase {
     public int fooInstance(int a, int b) {
       return a + b + x + y;
     }
+  }
+
+  interface DefaultInterface {
+    void method1();
+    // CHECKSTYLE_OFF
+    default int method2() { return 42; }
+    default int redeclaredAsAbstract() {
+        return 88;
+    }
+    default Integer addInts(int x, int y) { return x + y; }
+    // CHECKSTYLE_ON
+  }
+
+  interface DefaultInterface2 {
+    void method3();
+    // CHECKSTYLE_OFF
+    default int method4() { return 23; }
+    default int redeclaredAsAbstract() {
+      return 77;
+    }
+    // CHECKSTYLE_ON
+  }
+
+  interface DefaultInterfaceSubType extends DefaultInterface {
+    // CHECKSTYLE_OFF
+    default int method2() { return 43; }
+    // CHECKSTYLE_ON
+  }
+
+  static abstract class DualImplementorSuper implements DefaultInterface {
+    public void method1() {
+    }
+
+    public abstract int redeclaredAsAbstract();
+  }
+
+  static class DualImplementor extends DualImplementorSuper implements DefaultInterface2 {
+    public void method3() {
+    }
+
+    public int redeclaredAsAbstract() {
+      return DefaultInterface2.super.redeclaredAsAbstract();
+    }
+  }
+
+  // this doesn't implement DefaultInterface, but will provide implementation in subclasses
+  static class VirtualUpRef {
+    public int method2() { return 99; }
   }
 
   class Inner {
@@ -88,6 +141,22 @@ public class Java8Test extends GWTTestCase {
 
     public static Integer staticMethod(int x, int y) {
       return null;
+    }
+  }
+
+  static class DefaultInterfaceImpl implements DefaultInterface {
+    public void method1() {
+    }
+  }
+
+  static class DefaultInterfaceImplVirtualUpRef extends VirtualUpRef implements DefaultInterface {
+    public void method1() {
+    }
+  }
+
+  static class DefaultInterfaceImplVirtualUpRefTwoInterfaces extends VirtualUpRef
+      implements DefaultInterfaceSubType {
+    public void method1() {
     }
   }
 
@@ -140,6 +209,7 @@ public class Java8Test extends GWTTestCase {
 
   public void testImplicitQualifierReferenceBinding() throws Exception {
     assertFalse(new AcceptsLambda<String>().accept2(String::equalsIgnoreCase));
+    assertTrue(new AcceptsLambda<String>().accept3("hello world"::contains));
   }
 
   public void testConstructorReferenceBinding() {
@@ -298,5 +368,24 @@ public class Java8Test extends GWTTestCase {
 
   public void testPrivateConstructorReference() {
     new X2().foo();
+  }
+
+  public void testDefaultInterfaceMethod() {
+    assertEquals(42, new DefaultInterfaceImpl().method2());
+  }
+
+  public void testDefaultInterfaceMethodVirtualUpRef() {
+    assertEquals(99, new DefaultInterfaceImplVirtualUpRef().method2());
+    assertEquals(99, new DefaultInterfaceImplVirtualUpRefTwoInterfaces().method2());
+  }
+
+  public void testDefaultInterfaceMethodMultiple() {
+    assertEquals(42, new DualImplementor().method2());
+    assertEquals(23, new DualImplementor().method4());
+    assertEquals(77, new DualImplementor().redeclaredAsAbstract());
+  }
+  public void testDefaultMethodReference() {
+    DefaultInterfaceImplVirtualUpRef x = new DefaultInterfaceImplVirtualUpRef();
+    assertEquals(30, (int) new AcceptsLambda<Integer>().accept(x::addInts));
   }
 }

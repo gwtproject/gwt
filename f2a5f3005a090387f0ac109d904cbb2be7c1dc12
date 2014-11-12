@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aa5ff82_e315f22d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Recompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-12T02:01:33Z",
+      "side": 1,
+      "message": "remove public. Might as well add synchronized for consistency.",
+      "range": {
+        "startLine": 283,
+        "startChar": 2,
+        "endLine": 283,
+        "endChar": 8
+      },
+      "revId": "f2a5f3005a090387f0ac109d904cbb2be7c1dc12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

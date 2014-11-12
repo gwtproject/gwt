@@ -88,6 +88,7 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.collect.Sets.SetView;
 
@@ -1084,25 +1085,31 @@ public class UnifyAst {
     }
   }
 
-  private void collectUpRefs(JDeclaredType type, Map<String, Set<JMethod>> collected) {
+  private void collectUpRefs(JDeclaredType type, Map<String, Set<JMethod>> collected,
+      boolean collectAll) {
     if (type == null) {
       return;
     }
     for (JMethod method : type.getMethods()) {
       if (method.canBePolymorphic()) {
         Set<JMethod> set = collected.get(method.getSignature());
+        if (collectAll && set == null) {
+          set = Sets.newHashSet();
+          collected.put(method.getSignature(), set);
+        }
         if (set != null) {
           set.add(method);
         }
       }
     }
-    collectUpRefsInSupers(type, collected);
+    collectUpRefsInSupers(type, collected, collectAll);
   }
 
-  private void collectUpRefsInSupers(JDeclaredType type, Map<String, Set<JMethod>> collected) {
-    collectUpRefs(type.getSuperClass(), collected);
+  private void collectUpRefsInSupers(JDeclaredType type, Map<String, Set<JMethod>> collected,
+      boolean collectAll) {
+    collectUpRefs(type.getSuperClass(), collected, collectAll);
     for (JInterfaceType intfType : type.getImplements()) {
-      collectUpRefs(intfType, collected);
+      collectUpRefs(intfType, collected, collectAll);
     }
   }
 
@@ -1117,7 +1124,7 @@ public class UnifyAst {
           collected.put(method.getSignature(), new LinkedHashSet<JMethod>());
         }
       }
-      collectUpRefsInSupers(type, collected);
+      collectUpRefsInSupers(type, collected, false);
       for (JMethod method : type.getMethods()) {
         if (method.canBePolymorphic()) {
           for (JMethod upref : collected.get(method.getSignature())) {
@@ -1416,6 +1423,11 @@ public class UnifyAst {
       staticInitialize(type);
       boolean isJsType = isJsType(type);
 
+      if (!type.isAbstract()) {
+        // this is a concrete type, add delegation methods for any unimplemented defender methods
+        maybeImplementDefenderMethods(type);
+      }
+
       // Flow into any reachable virtual methods.
       for (JMethod method : type.getMethods()) {
         if (method.canBePolymorphic()) {
@@ -1448,6 +1460,44 @@ public class UnifyAst {
         if (field.isStatic() && program.typeOracle.isExportedField(field)) {
           flowInto(field);
         }
+      }
+    }
+  }
+
+  private void maybeImplementDefenderMethods(JDeclaredType cType) {
+    if (cType.isAbstract()) {
+      return;
+    }
+
+    Map<String, Set<JMethod>> upRefs = Maps.newHashMap();
+    // find all methods implemented in super type hierarchy
+    collectUpRefsInSupers(cType, upRefs, true);
+
+    // remove entries for all methods we override
+    for (JMethod method : cType.getMethods()) {
+      upRefs.remove(method.getSignature());
+    }
+
+    // what's left are inherited abstract or concrete virtual methods
+    // find methods which have no concrete versions
+    nextRef:
+    for (Map.Entry<String, Set<JMethod>> notOverriden : upRefs.entrySet()) {
+      JMethod defenderMethod = null;
+      for (JMethod method : notOverriden.getValue()) {
+        if (!method.isAbstract()) {
+          // concrete implementor found, so no defender needed
+          continue nextRef;
+        }
+        if (method.isDefaultMethod()) {
+          assert defenderMethod == null; // should be only 1
+          defenderMethod = method;
+        }
+      }
+
+      if (defenderMethod != null) {
+        // found unimplemented defender method, create delegate to I.super.defenderMethod()
+        // delegate method(args) { return Interface.super.method(args); }
+        JjsUtils.createDelegateMethod(cType, defenderMethod);
       }
     }
   }
@@ -1554,6 +1604,12 @@ public class UnifyAst {
     }
     JDeclaredType pkgInfo = findPackageInfo(type);
     type.resolve(resolvedInterfaces, pkgInfo != null ? pkgInfo.getJsNamespace() : null);
+
+    // make static methods for all defenders once
+    // These will be pruned if unused in monolithic compile
+    if (!(type instanceof JInterfaceType) || !program.isReferenceOnly(type)) {
+      return;
+    }
   }
 
   private JDeclaredType findPackageInfo(JDeclaredType type) {
@@ -1579,9 +1635,7 @@ public class UnifyAst {
     return type;
   }
 
-  private JDeclaredType internalFindType(String typeName,
-      NameBasedTypeLocator nameBasedTypeLocator, boolean reportErrors) {
-
+  private JDeclaredType internalFindType(String typeName, NameBasedTypeLocator nameBasedTypeLocator, boolean reportErrors) {
     if (nameBasedTypeLocator.resolvedTypeIsAvailable(typeName)) {
       // The type was already resolved.
       return nameBasedTypeLocator.getResolvedType(typeName);

@@ -19,7 +19,9 @@ import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.util.arg.SourceLevel;
@@ -70,6 +72,21 @@ public class Java8AstTest extends JJSTestBase {
         "public class Pojo {",
         "  public Pojo(int x, int y) {",
         "  }",
+        "}"
+    ));
+
+    addAll(JavaResourceBase.createMockJavaResource("test.DefaultInterface",
+        "package test;",
+        "public interface DefaultInterface {",
+        "  void method1();",
+        "  default int method2() { return 42; }",
+        "}"
+    ));
+
+    addAll(JavaResourceBase.createMockJavaResource("test.DefaultInterfaceImpl",
+        "package test;",
+        "public class DefaultInterfaceImpl implements DefaultInterface {",
+        "  public void method1() {}",
         "}"
     ));
   }
@@ -421,4 +438,16 @@ public class Java8AstTest extends JJSTestBase {
           "package java.lang.invoke;",
           "public class LambdaMetafactory {",
           "}");
+  
+  public void testDefaultInterfaceMethod() throws Exception {
+    JProgram program = compileSnippet("void", "new DefaultInterfaceImpl();", false);
+
+    // created by GwtAstBuilder
+    JInterfaceType intf = (JInterfaceType) getType(program, "test.DefaultInterface");
+    // should have an actual method with body on it
+    JMethod defaultMethod = findMethod(intf, "method2");
+    assertNotNull(defaultMethod);
+    assertNotNull(defaultMethod.getBody());
+    assertEquals(1, ((JMethodBody) defaultMethod.getBody()).getBlock().getStatements().size());
+  }
 }

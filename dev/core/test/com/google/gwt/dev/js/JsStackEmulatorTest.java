@@ -231,7 +231,7 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
         "try{throw $location[stackIndex]='EntryPoint.java:'+'5',new RuntimeException" +
         "}catch($e0){$e0=wrap($e0);" +
         "$stackDepth=($location[stackIndex]='EntryPoint.java:'+'6',stackIndex);" +
-        "if(instanceOf($e0,4)){" +
+        "if(instanceOf($e0,5)){" +
         "e=$e0;s=($location[stackIndex]='EntryPoint.java:'+'7',e).getMessage()}" +
         "else throw unwrap(($location[stackIndex]='EntryPoint.java:'+'6',$e0))}" +
         "$stackDepth=stackIndex-1" +

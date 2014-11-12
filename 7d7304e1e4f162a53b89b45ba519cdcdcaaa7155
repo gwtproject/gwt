@@ -22,6 +22,30 @@
       "revId": "7d7304e1e4f162a53b89b45ba519cdcdcaaa7155",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa5ff82_26ba3865",
+        "filename": "user/src/com/google/gwt/dom/client/DOMImplMozilla.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-11-12T04:11:26Z",
+      "side": 1,
+      "message": "I looked into this but I\u0027m having trouble finding a code snippet that will work in IE11. Does the old IE style work with IE11?",
+      "parentUuid": "fa83cbc2_a2da9ef3",
+      "range": {
+        "startLine": 228,
+        "startChar": 8,
+        "endLine": 228,
+        "endChar": 20
+      },
+      "revId": "7d7304e1e4f162a53b89b45ba519cdcdcaaa7155",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

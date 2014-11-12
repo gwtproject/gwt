@@ -31,6 +31,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.HasName;
+import com.google.gwt.dev.jjs.ast.JAbstractMethodBody;
 import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBlock;
@@ -60,6 +61,8 @@ import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JNonNullType;
 import com.google.gwt.dev.jjs.ast.JNullLiteral;
+import com.google.gwt.dev.jjs.ast.JParameter;
+import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
@@ -87,6 +90,7 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.collect.Sets.SetView;
 
@@ -726,6 +730,7 @@ public class UnifyAst {
     this.compiledClassesByInternalName = compilationState.getClassFileMap();
     this.compiledClassesBySourceName = compilationState.getClassFileMapBySource();
     initializeNameBasedLocators();
+    staticImplsVisitor = new MakeCallsStatic.CreateStaticImplsVisitor(program);
     this.minimalRebuildCache = compilerContext.getMinimalRebuildCache();
     if (incrementalCompile) {
       this.staleTypeNames =
@@ -1079,25 +1084,31 @@ public class UnifyAst {
     }
   }
 
-  private void collectUpRefs(JDeclaredType type, Map<String, Set<JMethod>> collected) {
+  private void collectUpRefs(JDeclaredType type, Map<String, Set<JMethod>> collected,
+      boolean collectAll) {
     if (type == null) {
       return;
     }
     for (JMethod method : type.getMethods()) {
       if (method.canBePolymorphic()) {
         Set<JMethod> set = collected.get(method.getSignature());
+        if (collectAll && set == null) {
+          set = Sets.newHashSet();
+          collected.put(method.getSignature(), set);
+        }
         if (set != null) {
           set.add(method);
         }
       }
     }
-    collectUpRefsInSupers(type, collected);
+    collectUpRefsInSupers(type, collected, collectAll);
   }
 
-  private void collectUpRefsInSupers(JDeclaredType type, Map<String, Set<JMethod>> collected) {
-    collectUpRefs(type.getSuperClass(), collected);
+  private void collectUpRefsInSupers(JDeclaredType type, Map<String, Set<JMethod>> collected,
+      boolean collectAll) {
+    collectUpRefs(type.getSuperClass(), collected, collectAll);
     for (JInterfaceType intfType : type.getImplements()) {
-      collectUpRefs(intfType, collected);
+      collectUpRefs(intfType, collected, collectAll);
     }
   }
 
@@ -1112,7 +1123,7 @@ public class UnifyAst {
           collected.put(method.getSignature(), new LinkedHashSet<JMethod>());
         }
       }
-      collectUpRefsInSupers(type, collected);
+      collectUpRefsInSupers(type, collected, false);
       for (JMethod method : type.getMethods()) {
         if (method.canBePolymorphic()) {
           for (JMethod upref : collected.get(method.getSignature())) {
@@ -1411,6 +1422,11 @@ public class UnifyAst {
       staticInitialize(type);
       boolean isJsType = isJsType(type);
 
+      if (!type.isAbstract()) {
+        // this is a concrete type, add delegation methods for any unimplemented defender methods
+        maybeImplementDefenderMethods(type);
+      }
+
       // Flow into any reachable virtual methods.
       for (JMethod method : type.getMethods()) {
         if (method.canBePolymorphic()) {
@@ -1445,6 +1461,101 @@ public class UnifyAst {
         }
       }
     }
+  }
+
+  MakeCallsStatic.CreateStaticImplsVisitor staticImplsVisitor;
+
+  private void maybeImplementDefenderMethods(JDeclaredType cType) {
+    if (cType.isAbstract()) {
+      return;
+    }
+
+    Map<String, Set<JMethod>> upRefs = Maps.newHashMap();
+    // find all methods implemented in super type hierarchy
+    collectUpRefsInSupers(cType, upRefs, true);
+
+    // remove entries for all methods we override
+    for (JMethod meth : cType.getMethods()) {
+      upRefs.remove(meth.getSignature());
+    }
+
+    // what's left are inherited abstract or concrete virtual methods
+    // find methods which have no concrete versions
+    nextRef:
+    for (Map.Entry<String, Set<JMethod>> notOverriden : upRefs.entrySet()) {
+      JMethod defenderMethod = null;
+      for (JMethod meth : notOverriden.getValue()) {
+        if (!meth.isAbstract()) {
+          // concrete implementor found, so no defender needed
+          continue nextRef;
+        }
+        if (isDefender(meth)) {
+          assert defenderMethod == null; // should be only 1
+          defenderMethod = meth;
+        }
+      }
+
+      if (defenderMethod != null) {
+        // found unimplemented defender method, look for static implementation
+        JMethod staticDefender = null;
+        for (JMethod maybeStatic : defenderMethod.getEnclosingType().getMethods()) {
+          String staticName = MakeCallsStatic.getStaticMethodName(defenderMethod);
+          // find a staticMethod version, it should have one extra this arg in first position
+          if (maybeStatic.isStatic() && maybeStatic.getName().equals(staticName)) {
+            List<JType> params = new ArrayList<JType>(maybeStatic.getOriginalParamTypes());
+            List<JType> defenderParams = defenderMethod.getOriginalParamTypes();
+            // first arg is 'this$static' and rest of args are equal
+            if (params.size() == defenderParams.size() + 1
+                && params.get(0).getUnderlyingType() == maybeStatic.getEnclosingType()) {
+              params.remove(0);
+              if (params.equals(defenderParams)) {
+                staticDefender = maybeStatic;
+              }
+            }
+          }
+        }
+        // it should exist, having been created when the interface type is resolved
+        assert staticDefender != null;
+        // delegate method(args) { return Interface.$method(this, args); }
+        JMethod clone = new JMethod(defenderMethod.getSourceInfo(), defenderMethod.getName(),
+            cType, defenderMethod.getType(), false, false, false,
+            defenderMethod.getAccess());
+        clone.addThrownExceptions(defenderMethod.getThrownExceptions());
+        // copy params
+        for (JParameter p : defenderMethod.getParams()) {
+          clone.addParam(
+              new JParameter(p.getSourceInfo(), p.getName(), p.getType(), p.isFinal(),
+                  p.isThis(), clone));
+        }
+        JMethodBody body = new JMethodBody(defenderMethod.getSourceInfo());
+        // invoke static defender version
+        JMethodCall delegate = new JMethodCall(defenderMethod.getSourceInfo(),
+            null, staticDefender);
+        // add this as first param
+        delegate.addArg(new JThisRef(defenderMethod.getSourceInfo(), cType));
+        // copy remaining params
+        for (JParameter p : clone.getParams()) {
+          delegate.addArg(new JParameterRef(p.getSourceInfo(), p));
+        }
+        // return statement if not void return type
+        body.getBlock().addStmt(clone.getType() == JPrimitiveType.VOID ?
+            delegate.makeStatement() :
+            new JReturnStatement(defenderMethod.getSourceInfo(), delegate));
+        clone.setBody(body);
+        clone.freezeParamTypes();
+        // we are adding this before instantiate() flows into the methods, so this will get processes
+        cType.addMethod(clone);
+      }
+    }
+  }
+
+  private static boolean isDefender(JMethod x) {
+    JAbstractMethodBody body = x.getBody();
+    if (!(x.getEnclosingType() instanceof JInterfaceType) || JProgram.isClinit(x) || x.isStatic()) {
+      return false;
+    }
+    return (body instanceof JMethodBody && !((JMethodBody) body).getStatements().isEmpty()
+        || body != null && body.isNative() && ((JsniMethodBody) body).getFunc() != null);
   }
 
   private boolean requiresDevirtualization(JDeclaredType type) {
@@ -1549,6 +1660,22 @@ public class UnifyAst {
     }
     JDeclaredType pkgInfo = findPackageInfo(type);
     type.resolve(resolvedInterfaces, pkgInfo != null ? pkgInfo.getJsNamespace() : null);
+
+    // make static methods for all defenders once
+    // These will be pruned if unused in monolithic compile
+    if (!(type instanceof JInterfaceType) || !program.isReferenceOnly(type)) {
+      return;
+    }
+
+    for (JMethod maybeDefenderMethod : Lists.create(type.getMethods())) {
+      if (isDefender(maybeDefenderMethod)) {
+        if (program.getStaticImpl(maybeDefenderMethod) == null) {
+          staticImplsVisitor.accept(maybeDefenderMethod);
+          maybeDefenderMethod.setAbstract(true);
+          flowInto(program.getStaticImpl(maybeDefenderMethod));
+        }
+      }
+    }
   }
 
   private JDeclaredType findPackageInfo(JDeclaredType type) {
@@ -1574,9 +1701,7 @@ public class UnifyAst {
     return type;
   }
 
-  private JDeclaredType internalFindType(String typeName,
-      NameBasedTypeLocator nameBasedTypeLocator, boolean reportErrors) {
-
+  private JDeclaredType internalFindType(String typeName, NameBasedTypeLocator nameBasedTypeLocator, boolean reportErrors) {
     if (nameBasedTypeLocator.resolvedTypeIsAvailable(typeName)) {
       // The type was already resolved.
       return nameBasedTypeLocator.getResolvedType(typeName);

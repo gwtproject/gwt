@@ -66,6 +66,47 @@ public class Java8Test extends GWTTestCase {
     }
   }
 
+  interface DefaultInterface {
+    void method1();
+    // CHECKSTYLE_OFF
+    default int method2() { return 42; }
+    default int redeclaredAsAbstract() {
+        return 88;
+    }
+    // CHECKSTYLE_ON
+  }
+
+  interface DefaultInterface2 {
+    void method3();
+    // CHECKSTYLE_OFF
+    default int method4() { return 23; }
+    default int redeclaredAsAbstract() {
+      return 77;
+    }
+    // CHECKSTYLE_ON
+  }
+
+  static abstract class DualImplementorSuper implements DefaultInterface {
+    public void method1() {
+    }
+
+    public abstract int redeclaredAsAbstract();
+  }
+
+  static class DualImplementor extends DualImplementorSuper implements DefaultInterface2 {
+    public void method3() {
+    }
+
+    public int redeclaredAsAbstract() {
+      return DefaultInterface2.super.redeclaredAsAbstract();
+    }
+  }
+
+  // this doesn't implement DefaultInterface, but will provide implementation in subclasses
+  static class VirtualUpRef {
+    public int method2() { return 99; }
+  }
+
   class Inner {
     int local = 22;
     public void run() {
@@ -88,6 +129,16 @@ public class Java8Test extends GWTTestCase {
 
     public static Integer staticMethod(int x, int y) {
       return null;
+    }
+  }
+
+  static class DefaultInterfaceImpl implements DefaultInterface {
+    public void method1() {
+    }
+  }
+
+  static class DefaultInterfaceImplVirtualUpRef extends VirtualUpRef implements DefaultInterface {
+    public void method1() {
     }
   }
 
@@ -298,5 +349,19 @@ public class Java8Test extends GWTTestCase {
 
   public void testPrivateConstructorReference() {
     new X2().foo();
+  }
+
+  public void testDefaultInterfaceMethod() {
+    assertEquals(42, new DefaultInterfaceImpl().method2());
+  }
+
+  public void testDefaultInterfaceMethodVirtualUpRef() {
+    assertEquals(99, new DefaultInterfaceImplVirtualUpRef().method2());
+  }
+
+  public void testDefaultInterfaceMethodMultiple() {
+    assertEquals(42, new DualImplementor().method2());
+    assertEquals(23, new DualImplementor().method4());
+    assertEquals(77, new DualImplementor().redeclaredAsAbstract());
   }
 }

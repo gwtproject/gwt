@@ -241,7 +241,7 @@ public class MakeCallsStatic {
     }
   }
 
-  private static String getStaticMethodName(JMethod x) {
+  static String getStaticMethodName(JMethod x) {
     return "$" + x.getName();
   }
 

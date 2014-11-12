@@ -105,4 +105,13 @@ public class Java8Test extends GWTTestCase {
 
   public void testPrivateConstructorReference() {
   }
+
+  public void testDefaultInterfaceMethod() {
+  }
+
+  public void testDefaultInterfaceMethodVirtualUpRef() {
+  }
+
+  public void testDefaultInterfaceMethodMultiple() {
+  }
 }

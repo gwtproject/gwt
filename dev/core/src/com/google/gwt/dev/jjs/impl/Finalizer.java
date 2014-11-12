@@ -27,7 +27,6 @@ import com.google.gwt.dev.jjs.ast.JFieldRef;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
@@ -59,7 +58,11 @@ public class Finalizer {
    * program. But if it wasn't implemented, then the enclosing class should have
    * come up as not instantiated and been culled. So I think it's not possible.
    */
-  private class FinalizeVisitor extends JModVisitor {
+  private class FinalizeVisitor extends JChangeTrackingVisitor {
+
+    public FinalizeVisitor() {
+      super(Finalizer.this.optimizerCtx);
+    }
 
     @Override
     public void endVisit(JClassType x, Context ctx) {
@@ -74,7 +77,7 @@ public class Finalizer {
     }
 
     @Override
-    public void endVisit(JField x, Context ctx) {
+    public void exitField(JField x, Context ctx) {
       if (!x.isVolatile()) {
         maybeFinalize(x);
       }
@@ -86,7 +89,7 @@ public class Finalizer {
     }
 
     @Override
-    public void endVisit(JMethod x, Context ctx) {
+    public void exitMethod(JMethod x, Context ctx) {
       if (!x.isFinal() && !isOverridden.contains(x)) {
         setFinal(x);
       }
@@ -207,10 +210,20 @@ public class Finalizer {
   }
 
   private static final String NAME = Finalizer.class.getSimpleName();
+  private final OptimizerContext optimizerCtx;
 
+  // TODO(leafwang): remove this entry point when it is no longer needed.
   public static OptimizerStats exec(JProgram program) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new Finalizer().execImpl(program);
+    OptimizerStats stats = new Finalizer(new OptimizerContext(program)).execImpl(program);
+    optimizeEvent.end("didChange", "" + stats.didChange());
+    return stats;
+  }
+
+  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
+    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
+    OptimizerStats stats = new Finalizer(optimizerCtx).execImpl(program);
+    optimizerCtx.incOptimizationStep();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
@@ -221,7 +234,8 @@ public class Finalizer {
 
   private final Set<JClassType> isSubclassed = new HashSet<JClassType>();
 
-  private Finalizer() {
+  private Finalizer(OptimizerContext optimizerCtx) {
+    this.optimizerCtx = optimizerCtx;
   }
 
   private OptimizerStats execImpl(JProgram program) {

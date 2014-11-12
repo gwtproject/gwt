@@ -87,7 +87,10 @@ import com.google.gwt.dev.util.log.MetricName;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+import com.google.gwt.thirdparty.guava.common.collect.LinkedHashMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.collect.Sets.SetView;
 
@@ -1084,25 +1087,21 @@ public class UnifyAst {
     }
   }
 
-  private void collectUpRefs(JDeclaredType type, Map<String, Set<JMethod>> collected) {
+  private void collectSelfAndSuperMethods(JDeclaredType type, Predicate<JMethod> shouldCollect,
+      Multimap<String, JMethod> collected) {
     if (type == null) {
       return;
     }
+
     for (JMethod method : type.getMethods()) {
-      if (method.canBePolymorphic()) {
-        Set<JMethod> set = collected.get(method.getSignature());
-        if (set != null) {
-          set.add(method);
-        }
+      if (shouldCollect.apply(method)) {
+        collected.put(method.getSignature(), method);
       }
     }
-    collectUpRefsInSupers(type, collected);
-  }
 
-  private void collectUpRefsInSupers(JDeclaredType type, Map<String, Set<JMethod>> collected) {
-    collectUpRefs(type.getSuperClass(), collected);
+    collectSelfAndSuperMethods(type.getSuperClass(), shouldCollect, collected);
     for (JInterfaceType intfType : type.getImplements()) {
-      collectUpRefs(intfType, collected);
+      collectSelfAndSuperMethods(intfType, shouldCollect, collected);
     }
   }
 
@@ -1110,19 +1109,16 @@ public class UnifyAst {
    * Compute all overrides.
    */
   private void computeOverrides() {
-    for (JDeclaredType type : program.getDeclaredTypes()) {
-      Map<String, Set<JMethod>> collected = new HashMap<String, Set<JMethod>>();
+    for (final JDeclaredType type : program.getDeclaredTypes()) {
+      Multimap<String, JMethod> collected = LinkedHashMultimap.create();
+      collectSelfAndSuperPolymorphicMethods(type, collected);
       for (JMethod method : type.getMethods()) {
         if (method.canBePolymorphic()) {
-          collected.put(method.getSignature(), new LinkedHashSet<JMethod>());
-        }
-      }
-      collectUpRefsInSupers(type, collected);
-      for (JMethod method : type.getMethods()) {
-        if (method.canBePolymorphic()) {
-          for (JMethod upref : collected.get(method.getSignature())) {
-            if (canAccessSuperMethod(type, upref)) {
-              method.addOverriddenMethod(upref);
+          for (JMethod overridingMethod : collected.get(method.getSignature())) {
+            if (canAccessSuperMethod(type, overridingMethod)) {
+              if (method != overridingMethod) {
+                method.addOverriddenMethod(overridingMethod);
+              }
             }
           }
         }
@@ -1416,6 +1412,11 @@ public class UnifyAst {
       staticInitialize(type);
       boolean isJsType = isJsType(type);
 
+      if (!type.isAbstract()) {
+        // this is a concrete type, add delegation methods for any unimplemented defender methods
+        maybeImplementDefenderMethods(type);
+      }
+
       // Flow into any reachable virtual methods.
       for (JMethod method : type.getMethods()) {
         if (method.canBePolymorphic()) {
@@ -1450,6 +1451,54 @@ public class UnifyAst {
         }
       }
     }
+  }
+
+  private void maybeImplementDefenderMethods(JDeclaredType type) {
+    if (type.isAbstract()) {
+      return;
+    }
+
+    // find all methods implemented in super type hierarchy
+    Multimap<String, JMethod> overridingMethodsBySignature = LinkedHashMultimap.create();
+    collectSelfAndSuperPolymorphicMethods(type, overridingMethodsBySignature);
+
+    // remove entries for all methods we override
+    for (JMethod method : type.getMethods()) {
+      overridingMethodsBySignature.removeAll(method.getSignature());
+    }
+
+    // what's left are inherited abstract or concrete virtual methods
+    // find methods which have no concrete versions
+    nextRef:
+    for (Collection<JMethod> notOverriden : overridingMethodsBySignature.asMap().values()) {
+      JMethod defenderMethod = null;
+      for (JMethod method : notOverriden) {
+        if (!method.isAbstract()) {
+          // concrete implementor found, so no defender needed
+          continue nextRef;
+        }
+        if (method.isDefaultMethod()) {
+          assert defenderMethod == null; // should be only 1
+          defenderMethod = method;
+        }
+      }
+
+      if (defenderMethod != null) {
+        // found unimplemented defender method, create forward method to I.super.defenderMethod()
+        // forwardmethod(args) { return Interface.super.method(args); }
+        JjsUtils.createForwardingMethod(type, defenderMethod);
+      }
+    }
+  }
+
+  private void collectSelfAndSuperPolymorphicMethods(JDeclaredType type,
+      Multimap<String, JMethod> overridingMethodBySignature) {
+    collectSelfAndSuperMethods(type, new Predicate<JMethod>() {
+      @Override
+      public boolean apply(JMethod method) {
+        return method.canBePolymorphic();
+      }
+    }, overridingMethodBySignature);
   }
 
   private boolean requiresDevirtualization(JDeclaredType type) {
@@ -1579,9 +1628,8 @@ public class UnifyAst {
     return type;
   }
 
-  private JDeclaredType internalFindType(String typeName,
-      NameBasedTypeLocator nameBasedTypeLocator, boolean reportErrors) {
-
+  private JDeclaredType internalFindType(String typeName, NameBasedTypeLocator nameBasedTypeLocator,
+      boolean reportErrors) {
     if (nameBasedTypeLocator.resolvedTypeIsAvailable(typeName)) {
       // The type was already resolved.
       return nameBasedTypeLocator.getResolvedType(typeName);

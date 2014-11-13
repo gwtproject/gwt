@@ -125,6 +125,23 @@
       "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_3ee90d94",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-11-13T19:22:13Z",
+      "side": 1,
+      "message": "Test clinit scenarios:\ne.g. \n1 What if the SAM needs clinit?\n2 Static method reference and clinit\n3.others?",
+      "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -2,6 +2,115 @@
   "comments": [
     {
       "key": {
+        "uuid": "5ac5b75b_3814c5e4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/JavaResourceBase.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:32:10Z",
+      "side": 1,
+      "message": "Maybe add it to getStandardResources.",
+      "range": {
+        "startLine": 179,
+        "startChar": 39,
+        "endLine": 179,
+        "endChar": 58
+      },
+      "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_385e85bf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:32:10Z",
+      "side": 1,
+      "message": "whitespace.",
+      "range": {
+        "startLine": 1228,
+        "startChar": 0,
+        "endLine": 1228,
+        "endChar": 1
+      },
+      "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_78babd65",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 1281,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:32:10Z",
+      "side": 1,
+      "message": "Are these functions static? Maybe we should move all LambdaRelated static functions to a LambdaAstBuilderHelper class?",
+      "range": {
+        "startLine": 1244,
+        "startChar": 0,
+        "endLine": 1281,
+        "endChar": 5
+      },
+      "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_f826cd24",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:32:10Z",
+      "side": 1,
+      "message": "Either create a JavaAstTestBase (super for all AstTEsts like Java7AstTest, etc) or move to JJSTestBase.",
+      "range": {
+        "startLine": 404,
+        "startChar": 1,
+        "endLine": 437,
+        "endChar": 3
+      },
+      "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_18f5492e",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:32:10Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa5ff82_6931e1df",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 18

@@ -13,13 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package java.lang.annotation;
+package java.util.function;
 
 /**
- * Used to declare interfaces which must have a single abstract method.
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/ToDoubleFunction.html">
+ * the official Java API doc</a> for details.
+ *
+ * @param <T> type of the argument
  */
-@Documented
-@Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = ElementType.TYPE)
-public @interface FunctionalInterface {
+@FunctionalInterface
+public interface ToDoubleFunction<T> {
+
+  double applyAsDouble(T value);
+
 }

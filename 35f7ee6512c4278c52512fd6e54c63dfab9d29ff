@@ -119,6 +119,23 @@
     },
     {
       "key": {
+        "uuid": "fa990b84_f2b508f0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T21:40:51Z",
+      "side": 1,
+      "message": "Make this constructor private.",
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ac5b75b_1563543d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
         "patchSetId": 14
@@ -148,6 +165,24 @@
       "side": 1,
       "message": "CreateStaticImplsVisitor extended JVisitor, not JModVisitor, so I did not change it to exteding JChangTrackingVisitor. Do you think we should change it to JChangTrackingVisitor?\nOptimizerCtx is a field of CreateStaticImplsVisitor, so we can access optimizerCtx here anyway.",
       "parentUuid": "5ac5b75b_1563543d",
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa990b84_527334d8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T21:40:51Z",
+      "side": 1,
+      "message": "I see. That is fine.",
+      "parentUuid": "5ac5b75b_0421603c",
       "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -306,6 +341,30 @@
     },
     {
       "key": {
+        "uuid": "fa990b84_5226d4ab",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerContext.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T21:40:51Z",
+      "side": 1,
+      "message": "It is because it is simpler and reads better. Efficiency of both approaches should be similar\n\nWhen optimizations are run the ast is full with no reference only types. If that was a concern you could use here getModuleTypes() instead.",
+      "parentUuid": "5ac5b75b_cf36a105",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 45
+      },
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ac5b75b_98079940",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
         "patchSetId": 14
@@ -341,6 +400,30 @@
       "side": 1,
       "message": "How about keeping removeField/removeMethod in OptimizerContext and adding proxies (fieldWasRemoved/methodWasRemoved) in JChangeTrackingVisitor?",
       "parentUuid": "5ac5b75b_98079940",
+      "range": {
+        "startLine": 362,
+        "startChar": 23,
+        "endLine": 362,
+        "endChar": 34
+      },
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa990b84_32a6b0a4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T21:40:51Z",
+      "side": 1,
+      "message": "That is fine too.",
+      "parentUuid": "5ac5b75b_c405a880",
       "range": {
         "startLine": 362,
         "startChar": 23,

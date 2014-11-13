@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ac5b75b_7591e8d9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:03:03Z",
+      "side": 1,
+      "message": "Change this to: \n\n// TODO(leafwang): This call graph is does not take into account overloads nor calls that happen in JSNI methods.",
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_75048885",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:03:03Z",
+      "side": 1,
+      "message": "I really dislike this pattern.\n\nIt seems that DeadCodeElimination only needs the optimizerCtx to pass it to the DeadCodeVisitor in construction; I would:\n\n1) Make the DeadCodeVisitor contructor take the context as a parameter.\n\n2) Make execImpl receive the context\n\n3) Remove the optimizerCtx field in DeadCodeElimination.\n\n4) Instead of passing it as a parameter of the constructor of DeadCodeElimination, pass it directly to execimpl.",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 51
+      },
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_559b0cd5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Finalizer.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:03:03Z",
+      "side": 1,
+      "message": "Same as DeadCodeElimination",
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_1563543d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:03:03Z",
+      "side": 1,
+      "message": "Add markModifiedModifiedMethod/Field to JChangeTrackingVisitor and call them here (the check for optimizerContext also moves there).",
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_95568451",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:03:03Z",
+      "side": 1,
+      "message": "AFter addressing the previous comment you should do the same as the suggestion for DeadCodeElimination.",
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_b5538060",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallSpecializer.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:03:03Z",
+      "side": 1,
+      "message": "Same as DeadCodeElimination.",
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_d560fc2b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:03:03Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac5b75b_98079940",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-13T18:03:03Z",
+      "side": 1,
+      "message": "Lets move removeField and removeMethod to JChangeTrackingVisitor and rename them as fieldWasRemoved/methodWasRemoved.",
+      "range": {
+        "startLine": 362,
+        "startChar": 23,
+        "endLine": 362,
+        "endChar": 34
+      },
+      "revId": "35f7ee6512c4278c52512fd6e54c63dfab9d29ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

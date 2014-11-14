@@ -171,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "da9c4786_e15ec6e5",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-14T23:58:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa82eb17_1050cc20",
+      "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ac5b75b_f826cd24",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
         "patchSetId": 18
@@ -347,6 +365,24 @@
       "side": 1,
       "message": "I think the scenario is when you have a class with clinit and you pass static method reference as a Lambda. In this case clinit is called when the method reference is actually executed, but I think it would be nice to have tests that lock down that behaviour (i.e. taking a method reference does not trigger clinits).",
       "parentUuid": "7a1a7bb5_209636ae",
+      "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1a7bb5_ed5d366d",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-14T23:58:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the JLS says about whether or not a MethodHandle invokes the clinit(), I can\u0027t find any docs on it, but I would guess the semantics would be similar to reflection, in the sense that merely holding a reference doesn\u0027t eagerly invoke the clinit.\n\nI can probably make a test where the static initializer calls fail() if that happens, but it seems brittle, because an unexecuted lambda might get pruned.\n\n(Added test for it)",
+      "parentUuid": "fa82eb17_90391cf9",
       "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

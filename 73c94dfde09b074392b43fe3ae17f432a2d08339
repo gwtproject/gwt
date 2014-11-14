@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "baa313b2_c4de7e92",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-14T01:54:42Z",
+      "side": 1,
+      "message": "no longer applicable",
+      "parentUuid": "dabfe78a_e9ab9596",
+      "range": {
+        "startLine": 60,
+        "startChar": 27,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "73c94dfde09b074392b43fe3ae17f432a2d08339",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabfe78a_29b0cdd1",
         "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "baa313b2_a49edaf1",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-14T01:54:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dabfe78a_29b0cdd1",
+      "range": {
+        "startLine": 82,
+        "startChar": 18,
+        "endLine": 82,
+        "endChar": 19
+      },
+      "revId": "73c94dfde09b074392b43fe3ae17f432a2d08339",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabfe78a_2991adda",
         "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
         "patchSetId": 5
@@ -59,6 +107,30 @@
       "writtenOn": "2014-11-11T21:17:21Z",
       "side": 1,
       "message": "There is a race condition between deleteCaches() and setCache() due to the internal executor:\n\nthread 1 calls setCache(), queues async write\nthread 2 calls deleteCache(), deletes in memory and on disk\nwriteCache is called by the background thread and writes a cache that should have been deleted.\n\nThe consequence would be that if the writeCache queue gets backed up, the clear cache button doesn\u0027t work and you have to hit it again after the backlog clears.\n\nWe could fix it so that clearing the cache also clears the backlog:\n\nHave an atomic counter keeping track of the \"version\" of the cache manager.\n- Whenever deleteCache() is called, bump the version.\n- setCache() passes the current version to writeCache().\n- if the version is not current when writeCache actually runs, it means a deleteCache() happened, so return without doing anything since this job is obsolete.",
+      "range": {
+        "startLine": 213,
+        "startChar": 28,
+        "endLine": 213,
+        "endChar": 38
+      },
+      "revId": "73c94dfde09b074392b43fe3ae17f432a2d08339",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa313b2_44f36e31",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-14T01:54:42Z",
+      "side": 1,
+      "message": "reading and writing caches on disk are rare and fast procedures.\n\nit\u0027s best to synchronously delete caches (after waiting for other queued processes) and not introduce backlog clearing or any sort of version scheme.",
+      "parentUuid": "dabfe78a_2991adda",
       "range": {
         "startLine": 213,
         "startChar": 28,

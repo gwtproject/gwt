@@ -22,6 +22,30 @@
       "revId": "7ad76e811c22f9f48d586486b30a4345c4980a4c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa82eb17_30b07084",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/DirectoryClassPathEntry.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-14T20:21:55Z",
+      "side": 1,
+      "message": "agree.",
+      "parentUuid": "dab9a7d9_68190b1c",
+      "range": {
+        "startLine": 39,
+        "startChar": 2,
+        "endLine": 39,
+        "endChar": 10
+      },
+      "revId": "7ad76e811c22f9f48d586486b30a4345c4980a4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

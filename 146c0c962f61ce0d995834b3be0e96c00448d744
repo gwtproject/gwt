@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1a7bb5_e07c1e0e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-14T05:04:37Z",
+      "side": 1,
+      "message": "It might be useful to store this as a tri-state:\n\nSideEffects.NO,\nSideEffects.YES,\nSideEffects.UNKNOWN\n\nhasSideEffects() \u003d\u003e sideEffects !\u003d NO\n\nEventually we want a compiler pass that can start out SideEffects.UNKNOWN, and gradually reduce these to YES or NO. \n\nWe can do this in a later patch, but I\u0027m thinking out loud.",
+      "revId": "146c0c962f61ce0d995834b3be0e96c00448d744",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1a7bb5_00133ac9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-14T05:04:37Z",
+      "side": 1,
+      "message": "Seems to me that if JMethodCall.setMethodHasSideEffects(false) and jmethod.getTarget().hasSideEffects() \u003d\u003d true, you have an error that should be reported.\n\nIdeally, JMethodCall.hasSideEffects() would be clinit.hasSideEffects() || args.hasSideEffects() || target.hasSideEffects()  It seems weird to propagate the state downwards instead of upwards.  \n\nI get why you did it, because @HasNoSideEffects would be viral, and if you put it on one method, you\u0027d likely have to put it everywhere else that method calls. But it seems like propagating that kind of knowledge would be better isolated in a separate compiler pass that does side effects analysis.",
+      "revId": "146c0c962f61ce0d995834b3be0e96c00448d744",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

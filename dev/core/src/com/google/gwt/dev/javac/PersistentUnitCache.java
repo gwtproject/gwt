@@ -16,6 +16,7 @@
 package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.ast.JNode;
@@ -30,14 +31,11 @@ import com.google.gwt.thirdparty.guava.common.io.Files;
 import com.google.gwt.util.tools.Utility;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.JarURLConnection;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -54,7 +52,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * A class that manages a persistent cache of {@link CompilationUnit} instances.
- * Writes out {@CompilationUnit} instances to a cache in a
+ * Writes out {@link CompilationUnit} instances to a cache in a
  * background thread.
  * <p>
  * The persistent cache is implemented as a directory of log files with a date
@@ -115,32 +113,6 @@ class PersistentUnitCache extends MemoryUnitCache {
   static final String CACHE_FILE_PREFIX = UNIT_CACHE_PREFIX + "-";
   static final String CURRENT_VERSION_CACHE_FILE_PREFIX = computePersistentCacheFilenamePrefix();
 
-  /**
-   * Creates a new file with a name based on the current system time.
-   */
-  private static File createCacheFile(TreeLogger logger, File cacheDirectory)
-      throws UnableToCompleteException {
-    File newFile = null;
-    long timestamp = System.currentTimeMillis();
-    try {
-      do {
-        newFile = new File(cacheDirectory, CURRENT_VERSION_CACHE_FILE_PREFIX +
-            String.format("%016X", timestamp++));
-      } while (!newFile.createNewFile());
-    } catch (IOException ex) {
-      logger.log(TreeLogger.WARN, "Unable to create new cache log file "
-          + (newFile == null ? "<not created>" : newFile.getAbsolutePath()) + ".", ex);
-      throw new UnableToCompleteException();
-    }
-
-    if (!newFile.canWrite()) {
-      logger.log(TreeLogger.WARN, "Unable to write to new cache log file "
-          + newFile.getAbsolutePath() + ".");
-      throw new UnableToCompleteException();
-    }
-
-    return newFile;
-  }
 
   /**
    * Finds all files matching a pattern in the cache directory.
@@ -182,15 +154,11 @@ class PersistentUnitCache extends MemoryUnitCache {
         File[] filesToDelete = getCacheFiles(cacheDirectory, false);
         logger.log(TreeLogger.TRACE, "Purging cache files from " + cacheDirectory);
         for (File toDelete : filesToDelete) {
-          if (!currentCacheFile.equals(toDelete)) {
-            if (!toDelete.delete()) {
-              logger.log(TreeLogger.WARN, "Couldn't delete file: " + toDelete);
-            }
-          }
+          currentCacheFile.deleteUnlessOpen(logger, toDelete);
         }
         deleteEvent.end();
 
-        rotateCurrentCacheFile();
+        currentCacheFile.rotate(logger, cacheDirectory);
       } catch (UnableToCompleteException e) {
         backgroundService.shutdownNow();
       } finally {
@@ -199,23 +167,11 @@ class PersistentUnitCache extends MemoryUnitCache {
     }
   };
 
-  private final Runnable rotateCacheFilesTask = new Runnable() {
-    @Override
-    public void run() {
-      try {
-        rotateCurrentCacheFile();
-      } catch (UnableToCompleteException e) {
-        backgroundService.shutdownNow();
-      }
-      assert (currentCacheFile != null);
-    }
-  };
-
   private final Runnable shutdownThreadTask = new Runnable() {
     @Override
     public void run() {
-      assert (currentCacheFile != null);
-      closeCurrentCacheFile(currentCacheFile, currentCacheFileStream);
+      logger.log(Type.TRACE, "Shutdown hook called for persistent unit cache");
+      currentCacheFile.close(logger);
       logger.log(TreeLogger.TRACE, "Shutting down PersistentUnitCache thread");
       backgroundService.shutdownNow();
     }
@@ -226,19 +182,10 @@ class PersistentUnitCache extends MemoryUnitCache {
    */
   private Future<Boolean> unitMapLoadStatus;
 
-  private final Runnable unitMapLoadTask = new Runnable() {
-    @Override
-    public void run() {
-      loadUnitMap(logger, currentCacheFile);
-    }
-  };
-
   /**
    * Used to execute the above Runnables in a background thread.
    */
   private final ExecutorService backgroundService;
-
-  private int unitsWritten = 0;
 
   private int addedSinceLastCleanup = 0;
 
@@ -247,13 +194,7 @@ class PersistentUnitCache extends MemoryUnitCache {
    * invocations.
    */
   private final File cacheDirectory;
-
-  /**
-   * Current file and stream being written to.
-   */
-  private File currentCacheFile;
-  private ObjectOutputStream currentCacheFileStream;
-
+  private final OpenPersistentUnitCacheFile currentCacheFile = new OpenPersistentUnitCacheFile();
   private final TreeLogger logger;
 
   PersistentUnitCache(final TreeLogger logger, File cacheDir) throws UnableToCompleteException {
@@ -289,7 +230,7 @@ class PersistentUnitCache extends MemoryUnitCache {
       throw new UnableToCompleteException();
     }
 
-    currentCacheFile = createCacheFile(logger, cacheDirectory);
+    currentCacheFile.open(logger, cacheDirectory);
 
     backgroundService = Executors.newSingleThreadExecutor();
     Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -318,22 +259,12 @@ class PersistentUnitCache extends MemoryUnitCache {
      * {@link #add(CompilationUnit)} and {@link #find(String)} methods block if
      * invoked before this thread finishes.
      */
-    unitMapLoadStatus = backgroundService.submit(unitMapLoadTask, Boolean.TRUE);
-
-    FileOutputStream fstream = null;
-    BufferedOutputStream bstream = null;
-
-    try {
-      fstream = new FileOutputStream(currentCacheFile);
-      bstream = new BufferedOutputStream(fstream);
-      currentCacheFileStream = new ObjectOutputStream(bstream);
-    } catch (IOException ex) {
-      closeCurrentCacheFile(currentCacheFile, currentCacheFileStream);
-      logger.log(TreeLogger.ERROR, "Error creating cache " + currentCacheFile
-          + ". Disabling cache.", ex);
-      backgroundService.shutdownNow();
-      throw new UnableToCompleteException();
-    }
+    unitMapLoadStatus = backgroundService.submit(new Runnable() {
+      @Override
+      public void run() {
+        loadUnitMap();
+      }
+    }, Boolean.TRUE);
   }
 
   /**
@@ -365,6 +296,7 @@ class PersistentUnitCache extends MemoryUnitCache {
     awaitUnitCacheMapLoad();
 
     if (backgroundService.isShutdown()) {
+      logger.log(TreeLogger.TRACE, "Skipped cleanup");
       return;
     }
     boolean shouldRotate = addedSinceLastCleanup > 0;
@@ -419,7 +351,16 @@ class PersistentUnitCache extends MemoryUnitCache {
 
   @VisibleForTesting
   Future<Void> startRotating() {
-    return backgroundService.submit(rotateCacheFilesTask, null);
+    return backgroundService.submit(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          currentCacheFile.rotate(logger, cacheDirectory);
+        } catch (UnableToCompleteException e) {
+          backgroundService.shutdownNow();
+        }
+      }
+    }, null);
   }
 
   @Override
@@ -432,32 +373,6 @@ class PersistentUnitCache extends MemoryUnitCache {
   public CompilationUnit find(String resourcePath) {
     awaitUnitCacheMapLoad();
     return super.find(resourcePath);
-  }
-
-  private void rotateCurrentCacheFile() throws UnableToCompleteException {
-    if (logger.isLoggable(TreeLogger.TRACE)) {
-      logger.log(TreeLogger.TRACE, "Wrote " + unitsWritten + " units to persistent cache.");
-    }
-
-    // Close and re-open a new log file to drop object references kept
-    // alive in the existing file by Java serialization.
-    closeCurrentCacheFile(currentCacheFile, currentCacheFileStream);
-    unitsWritten = 0;
-    currentCacheFile = createCacheFile(logger, cacheDirectory);
-    FileOutputStream fstream = null;
-    BufferedOutputStream bstream = null;
-    try {
-      fstream = new FileOutputStream(currentCacheFile);
-      bstream = new BufferedOutputStream(fstream);
-      currentCacheFileStream = new ObjectOutputStream(bstream);
-    } catch (IOException ex) {
-      // Close all 3 streams, not sure where the exception occurred.
-      Utility.close(bstream);
-      Utility.close(fstream);
-      closeCurrentCacheFile(currentCacheFile, currentCacheFileStream);
-      logger.log(TreeLogger.ERROR, "Error rotating file.  Shutting down cache thread.", ex);
-      throw new UnableToCompleteException();
-    }
   }
 
   /**
@@ -501,11 +416,7 @@ class PersistentUnitCache extends MemoryUnitCache {
         @Override
         public void run() {
           try {
-            assert entry.getOrigin() != UnitOrigin.ARCHIVE;
-            CompilationUnit unit = entry.getUnit();
-            assert unit != null;
-            currentCacheFileStream.writeObject(unit);
-            unitsWritten++;
+            currentCacheFile.writeObject(logger, entry);
           } catch (IOException ex) {
             backgroundService.shutdownNow();
             if (logger.isLoggable(TreeLogger.TRACE)) {
@@ -538,18 +449,10 @@ class PersistentUnitCache extends MemoryUnitCache {
     }
   }
 
-  private void closeCurrentCacheFile(File openFile, ObjectOutputStream stream) {
-    Utility.close(stream);
-    if (unitsWritten == 0) {
-      // Remove useless empty file.
-      openFile.delete();
-    }
-  }
-
   /**
    * Load everything cached on disk into memory.
    */
-  private void loadUnitMap(TreeLogger logger, File currentCacheFile) {
+  private void loadUnitMap() {
     Event loadPersistentUnitEvent =
         SpeedTracerLogger.start(DevModeEventType.LOAD_PERSISTENT_UNIT_CACHE);
     if (logger.isLoggable(TreeLogger.TRACE)) {
@@ -563,7 +466,7 @@ class PersistentUnitCache extends MemoryUnitCache {
           FileInputStream fis = null;
           BufferedInputStream bis = null;
           ObjectInputStream inputStream = null;
-          if (cacheFile.equals(currentCacheFile)) {
+          if (currentCacheFile.isOpen(cacheFile)) {
             continue;
           }
           boolean deleteCacheFile = false;
@@ -623,6 +526,7 @@ class PersistentUnitCache extends MemoryUnitCache {
             Utility.close(fis);
           }
           if (deleteCacheFile) {
+            logger.log(Type.TRACE, "deleting " + cacheFile + " due to an exception");
             cacheFile.delete();
           } else {
             if (logger.isLoggable(TreeLogger.TRACE)) {

@@ -16,6 +16,7 @@
 package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.util.concurrent.Futures;
@@ -51,7 +52,15 @@ public class PersistentUnitCacheTest extends TestCase {
     }
   }
 
-  File lastCacheDir = null;
+  private TreeLogger logger;
+  private File lastCacheDir = null;
+
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    logger = TreeLogger.NULL; // Change to PrintWriterTreeLogger to debug tests
+    logger.log(Type.INFO, "\n\n*** Running " + getName());
+  }
 
   @Override
   public void tearDown() {
@@ -75,7 +84,6 @@ public class PersistentUnitCacheTest extends TestCase {
    * in.
    */
   public void testFileInTheWay() throws IOException {
-    TreeLogger logger = TreeLogger.NULL;
     File fileInTheWay = File.createTempFile("PersistentUnitTest-inTheWay", "");
     assertNotNull(fileInTheWay);
     assertTrue(fileInTheWay.exists());
@@ -101,7 +109,6 @@ public class PersistentUnitCacheTest extends TestCase {
    * The cache should recursively create the directories it needs.
    */
   public void testNewDir() throws IOException, UnableToCompleteException {
-    TreeLogger logger = TreeLogger.NULL;
     File baseDir = File.createTempFile("PersistentUnitTest-newDir", "");
     assertNotNull(baseDir);
     assertTrue(baseDir.exists());
@@ -113,7 +120,6 @@ public class PersistentUnitCacheTest extends TestCase {
 
   public void testPersistentCache() throws IOException, InterruptedException,
       UnableToCompleteException, ExecutionException {
-    TreeLogger logger = TreeLogger.NULL;
 
     File cacheDir = lastCacheDir = File.createTempFile("persistentCacheTest", "");
     File unitCacheDir = mkCacheDir(cacheDir);
@@ -259,7 +265,7 @@ public class PersistentUnitCacheTest extends TestCase {
   }
 
   private PersistentUnitCache makeUnitCache(File cacheDir) throws UnableToCompleteException {
-    return new PersistentUnitCache(TreeLogger.NULL, cacheDir) {
+    return new PersistentUnitCache(logger, cacheDir) {
       @Override
       Future<Void> startRotating() {
         // wait for rotation to finish to avoid flakiness
@@ -288,7 +294,6 @@ public class PersistentUnitCacheTest extends TestCase {
 
   private void checkInvalidObjectInCache(Object toSerialize) throws IOException,
       FileNotFoundException, UnableToCompleteException, InterruptedException, ExecutionException {
-    TreeLogger logger = TreeLogger.NULL;
     File cacheDir = lastCacheDir = File.createTempFile("PersistentUnitTest-CNF", "");
     File unitCacheDir = mkCacheDir(cacheDir);
 

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fa82eb17_334b1a8a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-14T20:43:09Z",
+      "side": 1,
+      "message": "I think we can defer that to when the analysis is actually implemented.",
+      "parentUuid": "7a1a7bb5_e07c1e0e",
+      "revId": "146c0c962f61ce0d995834b3be0e96c00448d744",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1a7bb5_00133ac9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
         "patchSetId": 2
@@ -30,6 +48,47 @@
       "writtenOn": "2014-11-14T05:04:37Z",
       "side": 1,
       "message": "Seems to me that if JMethodCall.setMethodHasSideEffects(false) and jmethod.getTarget().hasSideEffects() \u003d\u003d true, you have an error that should be reported.\n\nIdeally, JMethodCall.hasSideEffects() would be clinit.hasSideEffects() || args.hasSideEffects() || target.hasSideEffects()  It seems weird to propagate the state downwards instead of upwards.  \n\nI get why you did it, because @HasNoSideEffects would be viral, and if you put it on one method, you\u0027d likely have to put it everywhere else that method calls. But it seems like propagating that kind of knowledge would be better isolated in a separate compiler pass that does side effects analysis.",
+      "revId": "146c0c962f61ce0d995834b3be0e96c00448d744",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa82eb17_7072e804",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-14T20:43:09Z",
+      "side": 1,
+      "message": "I agree this is rather hacky. \n\nI agree with you in that we should have an analysis to determine if a method has side effects but we currently don\u0027t (unless you are thinking of the one in MethodInliner that is only used locally).\n\nI see @HasNoSideEffects as an annotation that the compiler trusts, you if add it the compiler will assume it is the case. Marking a method as @HasNoSideEffects does not really imply that all the methods it calls are really side effect free, but rather that they are side effect free when called through this method, so I would not propagate the annotation down except when inlining.\n\nIf we implement a separate analysis for side effects then probably the annotation will definitely be required for JSNI methods, and maybe we can restrict it to that.",
+      "parentUuid": "7a1a7bb5_00133ac9",
+      "revId": "146c0c962f61ce0d995834b3be0e96c00448d744",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa82eb17_73dcb274",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/HasNoSideEffecstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-14T20:43:09Z",
+      "side": 1,
+      "message": "I think that type of test if easier to do as an AST unit test (look at deadcodeelimination test).\n\nI would keep this test just to verify that the optimization is happening and the how and details in the unit test.",
+      "range": {
+        "startLine": 51,
+        "startChar": 1,
+        "endLine": 54,
+        "endChar": 28
+      },
       "revId": "146c0c962f61ce0d995834b3be0e96c00448d744",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

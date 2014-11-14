@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "dab9a7d9_335a28f4",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-14T03:12:44Z",
+      "side": 1,
+      "message": "If awaitTermination returns false, maybe fail the test? (It can\u0027t shut down for some reason.)",
+      "range": {
+        "startLine": 246,
+        "startChar": 20,
+        "endLine": 246,
+        "endChar": 36
+      },
+      "revId": "912eaee2db0cd5a4503585940ccce06ad0f3549f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baa313b2_dfeba7b5",
         "filename": "dev/core/src/com/google/gwt/dev/util/CompilerVersion.java",
         "patchSetId": 1

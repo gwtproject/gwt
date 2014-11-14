@@ -22,6 +22,99 @@
       "revId": "196c898c55a28d1a22bd3318ba3bf0fc052613ba",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ab25f12_bb39076b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/OpenPersistentUnitCacheFile.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-14T23:51:17Z",
+      "side": 1,
+      "message": "since sometimes the managed file here is open and sometimes it\u0027s not i think it would be most accurate to call it a \"CurrentPersistentUnitCacheFile\". that will also match better the field name in PersistentUnitCache (field name is currentCacheFile)",
+      "parentUuid": "dab9a7d9_25849930",
+      "range": {
+        "startLine": 34,
+        "startChar": 6,
+        "endLine": 34,
+        "endChar": 33
+      },
+      "revId": "196c898c55a28d1a22bd3318ba3bf0fc052613ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ab25f12_bb2fc72e",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-14T23:51:17Z",
+      "side": 1,
+      "message": "i know you\u0027re doing another round of refactoring on this file so let me make a request:\n\nplease change all of these futures to Future\u003cVoid\u003e unless their return value is actually being used (this one isn\u0027t being used)",
+      "range": {
+        "startLine": 262,
+        "startChar": 4,
+        "endLine": 262,
+        "endChar": 21
+      },
+      "revId": "196c898c55a28d1a22bd3318ba3bf0fc052613ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ab25f12_3bdbb7fb",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-14T23:51:17Z",
+      "side": 1,
+      "message": "now that i\u0027ve played with these things a little bit i think it\u0027s nicer to pass a Callable\u003cVoid\u003e and return null at the end of the nested function. it seems less arbitrary than this \"pass null as a the last parameter\" thing.",
+      "range": {
+        "startLine": 354,
+        "startChar": 40,
+        "endLine": 354,
+        "endChar": 48
+      },
+      "revId": "196c898c55a28d1a22bd3318ba3bf0fc052613ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ab25f12_bbb46778",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-14T23:51:17Z",
+      "side": 1,
+      "message": "seems like deletion as a result of an exception should be rare? maybe WARN instead of TRACE?",
+      "range": {
+        "startLine": 529,
+        "startChar": 28,
+        "endLine": 529,
+        "endChar": 33
+      },
+      "revId": "196c898c55a28d1a22bd3318ba3bf0fc052613ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

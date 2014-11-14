@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ab25f12_7be25f5e",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-14T23:58:05Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JBlock.",
+      "revId": "6d00b0b639e2d31646e0d40ab572343ef52666b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ab25f12_5bdfa38e",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-14T23:58:05Z",
+      "side": 1,
+      "message": "[error] Got an exception - expecting EOF, found \u0027Lambda\u0027",
+      "revId": "6d00b0b639e2d31646e0d40ab572343ef52666b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

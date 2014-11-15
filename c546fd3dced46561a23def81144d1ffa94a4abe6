@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ab25f12_3b861773",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-15T00:02:07Z",
+      "side": 1,
+      "message": "[error] Got an exception - expecting EOF, found \u0027Lambda\u0027",
+      "revId": "c546fd3dced46561a23def81144d1ffa94a4abe6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

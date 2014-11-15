@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "1ab25f12_7e136d7b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-15T00:07:27Z",
+      "side": 1,
+      "message": "ExecutorService also has submit(Runnable) [1] that returns a Future\u003c?\u003e that contains null. I don\u0027t know why we weren\u0027t using it all along. Maybe we should use that?\n\n[1] https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html#submit(java.lang.Runnable)",
+      "parentUuid": "1ab25f12_3bdbb7fb",
+      "range": {
+        "startLine": 354,
+        "startChar": 40,
+        "endLine": 354,
+        "endChar": 48
+      },
+      "revId": "196c898c55a28d1a22bd3318ba3bf0fc052613ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ab25f12_bbb46778",
         "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
         "patchSetId": 2

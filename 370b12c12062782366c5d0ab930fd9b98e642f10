@@ -386,6 +386,24 @@
       "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ab25f12_9ef2b9fa",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-15T00:07:14Z",
+      "side": 1,
+      "message": "The semantics are specified in 12.4 and basically ends with \"A class or interface will not be initialized under any other circumstance.\" \n\nSo I interpret it like you. Taking a reference does not trigger clinits.",
+      "parentUuid": "7a1a7bb5_ed5d366d",
+      "revId": "370b12c12062782366c5d0ab930fd9b98e642f10",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

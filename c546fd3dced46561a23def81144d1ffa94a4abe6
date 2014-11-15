@@ -16,6 +16,24 @@
       "revId": "c546fd3dced46561a23def81144d1ffa94a4abe6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ab25f12_1effc9c1",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-15T00:07:05Z",
+      "side": 1,
+      "message": "It seems that checkstyle 6.0  is not completely Java 8, ah?",
+      "parentUuid": "1ab25f12_3b861773",
+      "revId": "c546fd3dced46561a23def81144d1ffa94a4abe6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

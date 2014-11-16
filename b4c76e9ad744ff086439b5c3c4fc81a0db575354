@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9aa64fd2_1f8d833d",
+        "filename": "user/test/com/google/gwt/resources/client/gss/charset.gss",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-11-16T21:34:25Z",
+      "side": 1,
+      "message": "They are 3 Chinese characters.",
+      "revId": "b4c76e9ad744ff086439b5c3c4fc81a0db575354",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

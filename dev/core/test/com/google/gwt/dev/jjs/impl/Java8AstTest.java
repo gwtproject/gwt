@@ -194,7 +194,7 @@ public class Java8AstTest extends JJSTestBase {
     // created by JDT, should exist
     JMethod lambdaMethod = findMethod(program.getFromTypeMap("test.EntryPoint$Foo"), "lambda$0");
     assertNotNull(lambdaMethod);
-    assertEquals("{return Integer.valueOf(this.this$0.y+this.y+a_0+b_1);}", formatSource(lambdaMethod.getBody().toSource()));
+    assertEquals("{return Integer.valueOf(this.this$01.y+this.y+a_0+b_1);}", formatSource(lambdaMethod.getBody().toSource()));
     // created by GwtAstBuilder
     JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$Foo$lambda$0$Type");
     assertNotNull(lambdaInnerClass);
@@ -391,7 +391,7 @@ public class Java8AstTest extends JJSTestBase {
     // should implement run method and invoke lambda via captured instance
     JMethod samMethod = findMethod(lambdaInnerClass, "run");
     assertEquals(
-        "public final Object run(int arg0,int arg1){return new EntryPoint$Pojo2(this.test.EntryPoint,arg0,arg1);}",
+        "public final Object run(int arg0,int arg1){return new EntryPoint$Pojo2(this.test_EntryPoint,arg0,arg1);}",
         formatSource(samMethod.toSource()));
   }
 

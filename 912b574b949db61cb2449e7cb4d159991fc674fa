@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa0e6bb4_9efced80",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-17T19:14:37Z",
+      "side": 1,
+      "message": "Change here.",
+      "range": {
+        "startLine": 205,
+        "startChar": 48,
+        "endLine": 205,
+        "endChar": 55
+      },
+      "revId": "912b574b949db61cb2449e7cb4d159991fc674fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa0e6bb4_dea5c597",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-17T19:14:37Z",
+      "side": 1,
+      "message": "Change here.",
+      "range": {
+        "startLine": 415,
+        "startChar": 51,
+        "endLine": 415,
+        "endChar": 54
+      },
+      "revId": "912b574b949db61cb2449e7cb4d159991fc674fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

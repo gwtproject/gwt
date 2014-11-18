@@ -2214,18 +2214,32 @@ public class GenerateJavaScriptAST {
       return false;
     }
 
-    private JsObjectLiteral buildJsCastMapLiteral(List<JsExpression> runtimeTypeIdLiterals,
+    private JsExpression buildJsCastMapLiteral(
+        List<JsExpression> runtimeTypeIdLiterals,
         SourceInfo sourceInfo) {
-      JsObjectLiteral objLit = new JsObjectLiteral(sourceInfo);
-      objLit.setInternable();
-      List<JsPropertyInitializer> propInitializers = objLit.getPropertyInitializers();
-      JsNumberLiteral one = new JsNumberLiteral(sourceInfo, 1);
-      for (JsExpression runtimeTypeIdLiteral : runtimeTypeIdLiterals) {
-        JsPropertyInitializer propInitializer = new JsPropertyInitializer(sourceInfo,
-            runtimeTypeIdLiteral, one);
-        propInitializers.add(propInitializer);
+      if (JjsUtils.closureStyleLiteralsNeeded(compilePerFile, jsInteropMode,
+          props.getConfigProps())) {
+        JsArrayLiteral castExprs = new JsArrayLiteral(sourceInfo);
+        for (JsExpression expr : runtimeTypeIdLiterals) {
+          castExprs.getExpressions().add(expr);
+        }
+        return new JsInvocation(sourceInfo,
+            indexedFunctions.get("JavaClassHierarchySetupUtil.makeCastMapFromArray"),
+            castExprs);
+      } else {
+        JsObjectLiteral objLit = new JsObjectLiteral(sourceInfo);
+        objLit.setInternable();
+        List<JsPropertyInitializer> propInitializers =
+            objLit.getPropertyInitializers();
+        JsNumberLiteral one = new JsNumberLiteral(sourceInfo, 1);
+        for (JsExpression runtimeTypeIdLiteral : runtimeTypeIdLiterals) {
+          JsPropertyInitializer propInitializer =
+              new JsPropertyInitializer(sourceInfo,
+                  runtimeTypeIdLiteral, one);
+          propInitializers.add(propInitializer);
+        }
+        return objLit;
       }
-      return objLit;
     }
 
     private void checkForDupMethods(JDeclaredType x) {
@@ -2513,7 +2527,7 @@ public class GenerateJavaScriptAST {
       }
     }
 
-    private JsLiteral convertJavaLiteral(JLiteral javaLiteral) {
+    private JsExpression convertJavaLiteral(JLiteral javaLiteral) {
       return JjsUtils.translateLiteral(javaLiteral);
     }
 

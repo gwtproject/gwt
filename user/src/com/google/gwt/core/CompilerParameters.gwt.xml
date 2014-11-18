@@ -131,6 +131,15 @@
                                 value="false" />
 
   <!--
+    Specifies that when -XjsInteropMode CLOSURE is used, runtime type references
+    are constructed by delegating to the function jsinterop.closure.getUniqueId by
+    passing in the fully qualified Java type name as a string. This function
+    must be predefined in the page, or bootstrap linker.
+  -->
+  <define-configuration-property name="js.export.closurestyle.runtimetypeliteral"
+                                 is-multi-valued="false"/>
+
+  <!--
     Specifies that a binding property should be included in the $gwt.permProps variable
     in the generated JavaScript. This will allow Super Dev Mode to pick it up
     regardless of how many permutations are generated.

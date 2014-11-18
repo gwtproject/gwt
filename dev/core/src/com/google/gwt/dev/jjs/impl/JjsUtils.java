@@ -15,10 +15,13 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.dev.PrecompileTaskOptions;
+import com.google.gwt.dev.cfg.ConfigProps;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.JBooleanLiteral;
 import com.google.gwt.dev.jjs.ast.JCharLiteral;
+import com.google.gwt.dev.jjs.ast.JClosureUniqueIdLiteral;
 import com.google.gwt.dev.jjs.ast.JDoubleLiteral;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JFloatLiteral;
@@ -32,10 +35,12 @@ import com.google.gwt.dev.js.ast.JsBooleanLiteral;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsLiteral;
 import com.google.gwt.dev.js.ast.JsName;
+import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsNullLiteral;
 import com.google.gwt.dev.js.ast.JsNumberLiteral;
 import com.google.gwt.dev.js.ast.JsObjectLiteral;
 import com.google.gwt.dev.js.ast.JsStringLiteral;
+import com.google.gwt.dev.util.arg.OptionJsInteropMode.Mode;
 import com.google.gwt.lang.LongLib;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
@@ -103,13 +108,44 @@ public class JjsUtils {
   /**
    * Translates a Java literal into a JavaScript literal.
    */
-  public static JsLiteral translateLiteral(JLiteral literal) {
+  public static JsExpression translateLiteral(JLiteral literal) {
     return translatorByLiteralClass.get(literal.getClass()).translate(literal);
+  }
+
+  public static boolean closureStyleLiteralsNeeded(PrecompileTaskOptions options, ConfigProps props) {
+    return closureStyleLiteralsNeeded(options.isIncrementalCompileEnabled(),
+        options.getJsInteropMode(), props);
+  }
+
+  public static boolean closureStyleLiteralsNeeded(boolean incremental, Mode jsInteropMode,
+      ConfigProps configProps) {
+    return !incremental && jsInteropMode == Mode.CLOSURE &&
+        !configProps.getStrings("js.export.closurestyle.runtimetypeliteral").isEmpty();
+  }
+
+  private static JsNameRef closureGetUniqueIdFunc = null;
+
+  private static JsInvocation makeClosureRuntimeTypeLiteralExpression(JStringLiteral typeName) {
+    SourceInfo info = typeName.getSourceInfo();
+    if (closureGetUniqueIdFunc == null) {
+      // refer to jsinterop.closure.getUniqueId
+      JsNameRef getUniqueId = new JsNameRef(info, "getUniqueId");
+      JsNameRef closure = new JsNameRef(info, "closure");
+      getUniqueId.setQualifier(closure);
+      JsNameRef jsinterop = new JsNameRef(info, "jsinterop");
+      closure.setQualifier(jsinterop);
+      closureGetUniqueIdFunc = getUniqueId;
+    }
+    return new JsInvocation(info, closureGetUniqueIdFunc,
+        new JsStringLiteral(info, typeName.getValue()));
   }
 
   private static Map<Class<? extends JLiteral>, LiteralTranslators> translatorByLiteralClass =
       new ImmutableMap.Builder()
-          .put(JBooleanLiteral.class, LiteralTranslators.BOOLEAN_LITERAL_TRANSLATOR)
+          .put(JClosureUniqueIdLiteral.class,
+              LiteralTranslators.CLOSURE_UNIQUEID_LITERAL_TRANSLATOR)
+          .put(JBooleanLiteral.class,
+              LiteralTranslators.BOOLEAN_LITERAL_TRANSLATOR)
           .put(JCharLiteral.class, LiteralTranslators.CHAR_LITERAL_TRANSLATOR)
           .put(JFloatLiteral.class, LiteralTranslators.FLOAT_LITERAL_TRANSLATOR)
           .put(JDoubleLiteral.class, LiteralTranslators.DOUBLE_LITERAL_TRANSLATOR)
@@ -119,40 +155,36 @@ public class JjsUtils {
           .put(JStringLiteral.class, LiteralTranslators.STRING_LITERAL_TRANSLATOR)
           .build();
 
+
+
   private enum LiteralTranslators {
     BOOLEAN_LITERAL_TRANSLATOR() {
-      @Override
-      JsLiteral translate(JExpression literal) {
+      @Override JsExpression translate(JExpression literal) {
         return JsBooleanLiteral.get(((JBooleanLiteral) literal).getValue());
       }
     },
     CHAR_LITERAL_TRANSLATOR() {
-      @Override
-      JsLiteral translate(JExpression literal) {
+      @Override JsExpression translate(JExpression literal) {
         return new JsNumberLiteral(literal.getSourceInfo(), ((JCharLiteral) literal).getValue());
       }
     },
     FLOAT_LITERAL_TRANSLATOR() {
-      @Override
-      JsLiteral translate(JExpression literal) {
+      @Override JsExpression translate(JExpression literal) {
         return new JsNumberLiteral(literal.getSourceInfo(), ((JFloatLiteral) literal).getValue());
       }
     },
     DOUBLE_LITERAL_TRANSLATOR() {
-      @Override
-      JsLiteral translate(JExpression literal) {
+      @Override JsExpression translate(JExpression literal) {
         return new JsNumberLiteral(literal.getSourceInfo(), ((JDoubleLiteral) literal).getValue());
       }
     },
     INT_LITERAL_TRANSLATOR() {
-      @Override
-      JsLiteral translate(JExpression literal) {
+      @Override JsExpression translate(JExpression literal) {
         return new JsNumberLiteral(literal.getSourceInfo(), ((JIntLiteral) literal).getValue());
       }
     },
     LONG_LITERAL_TRANSLATOR() {
-      @Override
-      JsLiteral translate(JExpression literal) {
+      @Override JsExpression translate(JExpression literal) {
         SourceInfo sourceInfo = literal.getSourceInfo();
         int[] values = LongLib.getAsIntArray(((JLongLiteral) literal).getValue());
         JsObjectLiteral objectLiteral = new JsObjectLiteral(sourceInfo);
@@ -166,15 +198,18 @@ public class JjsUtils {
       }
     },
     STRING_LITERAL_TRANSLATOR() {
-      @Override
-      JsLiteral translate(JExpression literal) {
+      @Override JsExpression translate(JExpression literal) {
         return new JsStringLiteral(literal.getSourceInfo(), ((JStringLiteral) literal).getValue());
       }
     },
     NULL_LITERAL_TRANSLATOR() {
-      @Override
-      JsLiteral translate(JExpression literal) {
+      @Override JsExpression translate(JExpression literal) {
         return JsNullLiteral.INSTANCE;
+      }
+    },
+    CLOSURE_UNIQUEID_LITERAL_TRANSLATOR {
+      @Override JsExpression translate(JExpression literal) {
+        return makeClosureRuntimeTypeLiteralExpression(((JStringLiteral) literal));
       }
     };
 
@@ -193,7 +228,7 @@ public class JjsUtils {
       }
     }
 
-    abstract JsLiteral translate(JExpression literal);
+    abstract JsExpression translate(JExpression literal);
   }
 
   private static void addPropertyToObject(SourceInfo sourceInfo, JsName propertyName,

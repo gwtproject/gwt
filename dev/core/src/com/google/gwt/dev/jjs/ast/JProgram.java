@@ -779,7 +779,12 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     if (value instanceof Integer) {
       return getLiteralInt((Integer) value);
     }
-    throw new IllegalArgumentException("Argument must be a String or an Integer but was " + value);
+    if (value instanceof JClosureUniqueIdLiteral) {
+      return (JClosureUniqueIdLiteral) value;
+    }
+
+    throw new IllegalArgumentException("Argument must be a String, Integer, "
+        + "or JClosureUniqueIdLiteral but was " + value);
   }
 
   public JBooleanLiteral getLiteralBoolean(boolean value) {
@@ -808,6 +813,11 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   public JNullLiteral getLiteralNull() {
     return JNullLiteral.INSTANCE;
+  }
+
+  public JClosureUniqueIdLiteral getClosureUniqueIdLiteral(SourceInfo sourceInfo, String s) {
+    sourceInfo.addCorrelation(sourceInfo.getCorrelator().by(Literal.STRING));
+    return new JClosureUniqueIdLiteral(sourceInfo, s, typeString);
   }
 
   public JStringLiteral getStringLiteral(SourceInfo sourceInfo, String s) {

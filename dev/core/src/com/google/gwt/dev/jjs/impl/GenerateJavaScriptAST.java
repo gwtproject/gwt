@@ -1170,16 +1170,6 @@ public class GenerateJavaScriptAST {
         globalStmts.add(clinitFunc.makeStmt());
       }
 
-      assert jsFuncs.get(0).getName().getShortIdent().startsWith(GwtAstBuilder.CLINIT_NAME + "_");
-      jsFuncs.remove(0);
-
-      // declare all static methods (Java8) into the global scope
-      for (JsFunction func : jsFuncs) {
-        if (!polymorphicJsFunctions.contains(func)) {
-          globalStmts.add(func.makeStmt());
-        }
-      }
-
       // setup fields
       JsVars vars = new JsVars(x.getSourceInfo());
       for (int i = 0; i < jsFields.size(); ++i) {
@@ -1437,7 +1427,7 @@ public class GenerateJavaScriptAST {
         } else {
           // insert trampoline (_ = instance, trampoline(_, _.jsBridgeMethRef,
           // _.javaMethRef)).bind(_)(args)
-          if (typeOracle.needsJsInteropBridgeMethod(method)) {
+          if (false && typeOracle.needsJsInteropBridgeMethod(method)) {
             maybeDispatchViaTrampolineToBridgeMethod(x, method, jsInvocation,
                 unnecessaryQualifier, result, polyName);
 
@@ -2214,18 +2204,32 @@ public class GenerateJavaScriptAST {
       return false;
     }
 
-    private JsObjectLiteral buildJsCastMapLiteral(List<JsExpression> runtimeTypeIdLiterals,
+    private JsExpression buildJsCastMapLiteral(
+        List<JsExpression> runtimeTypeIdLiterals,
         SourceInfo sourceInfo) {
-      JsObjectLiteral objLit = new JsObjectLiteral(sourceInfo);
-      objLit.setInternable();
-      List<JsPropertyInitializer> propInitializers = objLit.getPropertyInitializers();
-      JsNumberLiteral one = new JsNumberLiteral(sourceInfo, 1);
-      for (JsExpression runtimeTypeIdLiteral : runtimeTypeIdLiterals) {
-        JsPropertyInitializer propInitializer = new JsPropertyInitializer(sourceInfo,
-            runtimeTypeIdLiteral, one);
-        propInitializers.add(propInitializer);
+      if (JjsUtils.closureStyleLiteralsNeeded(compilePerFile, jsInteropMode,
+          props.getConfigProps())) {
+        JsArrayLiteral castExprs = new JsArrayLiteral(sourceInfo);
+        for (JsExpression expr : runtimeTypeIdLiterals) {
+          castExprs.getExpressions().add(expr);
+        }
+        return new JsInvocation(sourceInfo,
+            indexedFunctions.get("JavaClassHierarchySetupUtil.makeCastMapFromArray"),
+            castExprs);
+      } else {
+        JsObjectLiteral objLit = new JsObjectLiteral(sourceInfo);
+        objLit.setInternable();
+        List<JsPropertyInitializer> propInitializers =
+            objLit.getPropertyInitializers();
+        JsNumberLiteral one = new JsNumberLiteral(sourceInfo, 1);
+        for (JsExpression runtimeTypeIdLiteral : runtimeTypeIdLiterals) {
+          JsPropertyInitializer propInitializer =
+              new JsPropertyInitializer(sourceInfo,
+                  runtimeTypeIdLiteral, one);
+          propInitializers.add(propInitializer);
+        }
+        return objLit;
       }
-      return objLit;
     }
 
     private void checkForDupMethods(JDeclaredType x) {
@@ -2513,7 +2517,7 @@ public class GenerateJavaScriptAST {
       }
     }
 
-    private JsLiteral convertJavaLiteral(JLiteral javaLiteral) {
+    private JsExpression convertJavaLiteral(JLiteral javaLiteral) {
       return JjsUtils.translateLiteral(javaLiteral);
     }
 
@@ -3440,7 +3444,7 @@ public class GenerateJavaScriptAST {
     }
   }
 
-  static String getNameString(HasName hasName) {
+  String getNameString(HasName hasName) {
     String s = hasName.getName().replaceAll("_", "_1").replace('.', '_');
     return s;
   }
@@ -3488,26 +3492,6 @@ public class GenerateJavaScriptAST {
     return StringInterner.get().intern(sb.toString());
   }
 
-  /**
-   * Java8 Method References such as String::equalsIgnoreCase should produce inner class names
-   * that are a function of the samInterface (e.g. Runnable), the method being referred to,
-   * and the qualifying disposition (this::foo vs Class::foo if foo is an instance method)
-   */
-  static String classNameForMethodReference(JInterfaceType samInterface, JMethod referredMethod,
-      boolean haveReceiver) {
-    StringBuilder sb = new StringBuilder();
-    sb.append(samInterface.getPackageName());
-    sb.append('.');
-    sb.append(samInterface.getShortName());
-    sb.append("$");
-    if (!haveReceiver) {
-      sb.append("$");
-    }
-    sb.append(getNameString(referredMethod));
-    constructManglingSignature(referredMethod, sb);
-    return StringInterner.get().intern(sb.toString());
-  }
-
   String mangleNameForPoly(JMethod x) {
     assert !x.isPrivate() && !x.isStatic();
     StringBuilder sb = new StringBuilder();
@@ -3532,7 +3516,7 @@ public class GenerateJavaScriptAST {
     return StringInterner.get().intern(sb.toString());
   }
 
-  private static void constructManglingSignature(JMethod x, StringBuilder partialSignature) {
+  private void constructManglingSignature(JMethod x, StringBuilder partialSignature) {
     partialSignature.append("__");
     for (int i = 0; i < x.getOriginalParamTypes().size(); ++i) {
       JType type = x.getOriginalParamTypes().get(i);

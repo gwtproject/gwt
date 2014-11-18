@@ -18,6 +18,8 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JCastMap;
+import com.google.gwt.dev.jjs.ast.JClosureUniqueIdLiteral;
+import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
@@ -128,6 +130,37 @@ public class ResolveRuntimeTypeReferences {
     @Override
     public String get(JType type) {
       return type.getName();
+    }
+  }
+
+  /**
+   * Predictably creates String type id literals for castable and instantiable types
+   * by using closure uniqueid generation in JsInterop CLOSURE mode.
+   */
+  public static class ClosureUniqueIdTypeMapper implements TypeMapper<JClosureUniqueIdLiteral> {
+
+    private JProgram program;
+
+    public ClosureUniqueIdTypeMapper(JProgram program) {
+      this.program = program;
+    }
+
+    @Override
+    public void copyFrom(TypeMapper<JClosureUniqueIdLiteral> that) {
+      if (!(that instanceof ClosureUniqueIdTypeMapper)) {
+        throw new IllegalArgumentException("Can only copy from ClosureUniqueIdTypeMapper");
+      }
+    }
+
+    @Override
+    public JClosureUniqueIdLiteral getOrCreateTypeId(JType type) {
+      return get(type);
+    }
+
+    @Override
+    public JClosureUniqueIdLiteral get(JType type) {
+      return program.getClosureUniqueIdLiteral(type.getSourceInfo(),
+              type.getName());
     }
   }
 

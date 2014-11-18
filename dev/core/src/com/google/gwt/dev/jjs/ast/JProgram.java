@@ -20,7 +20,6 @@ import com.google.gwt.dev.jjs.Correlation.Literal;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
-import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
 import com.google.gwt.dev.jjs.impl.codesplitter.FragmentPartitioningResult;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
@@ -242,7 +241,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     public static boolean isClinit(JMethod method) {
     JDeclaredType enclosingType = method.getEnclosingType();
     if ((enclosingType != null) && (method == enclosingType.getClinitMethod())) {
-      assert (method.getName().equals(GwtAstBuilder.CLINIT_NAME));
+      assert (method.getName().equals("$clinit"));
       return true;
     } else {
       return false;
@@ -779,7 +778,12 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     if (value instanceof Integer) {
       return getLiteralInt((Integer) value);
     }
-    throw new IllegalArgumentException("Argument must be a String or an Integer but was " + value);
+    if (value instanceof JClosureUniqueIdLiteral) {
+      return (JClosureUniqueIdLiteral) value;
+    }
+
+    throw new IllegalArgumentException("Argument must be a String, Integer, "
+        + "or JClosureUniqueIdLiteral but was " + value);
   }
 
   public JBooleanLiteral getLiteralBoolean(boolean value) {
@@ -808,6 +812,11 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   public JNullLiteral getLiteralNull() {
     return JNullLiteral.INSTANCE;
+  }
+
+  public JClosureUniqueIdLiteral getClosureUniqueIdLiteral(SourceInfo sourceInfo, String s) {
+    sourceInfo.addCorrelation(sourceInfo.getCorrelator().by(Literal.STRING));
+    return new JClosureUniqueIdLiteral(sourceInfo, s, typeString);
   }
 
   public JStringLiteral getStringLiteral(SourceInfo sourceInfo, String s) {

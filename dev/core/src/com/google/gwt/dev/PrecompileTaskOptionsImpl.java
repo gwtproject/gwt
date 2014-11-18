@@ -497,4 +497,14 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override public void setJsInteropMode(OptionJsInteropMode.Mode mode) {
     jjsOptions.setJsInteropMode(mode);
   }
+
+  @Override
+  public boolean isClosureCompilerFormatEnabled() {
+    return jjsOptions.isClosureCompilerFormatEnabled();
+  }
+
+  @Override
+  public void setClosureCompilerFormatEnabled(boolean enabled) {
+    jjsOptions.setClosureCompilerFormatEnabled(enabled);
+  }
 }

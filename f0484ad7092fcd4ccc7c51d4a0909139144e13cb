@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a1baf06_fda67fca",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-11-18T05:03:10Z",
+      "side": 1,
+      "message": "Seems like TreeLogger output usually capitalizes the message? (Sorry, just thinking of consistency in the output.)",
+      "range": {
+        "startLine": 129,
+        "startChar": 28,
+        "endLine": 129,
+        "endChar": 36
+      },
+      "revId": "f0484ad7092fcd4ccc7c51d4a0909139144e13cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a1baf06_7d934f62",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2014-11-18T05:03:10Z",
+      "side": 1,
+      "message": "Instead of this CurrentFile being mutable (e.g. File/unitsWritten are reset), I was expecting the rotation to make a new instance of this CurrentFile class, with a new \"final\" file field, and discard the old one.\n\nIf you wanted to be cute, you could also have a NoopFile or something that was the initial value of the PersistentUnitCacheDir\u0027s currentFile to handle the \"not yet open\" check in writeObject. E.g. NoopFile.writeObject would always warn, and then CurrentFile.writeObject would also be for an open/dedicated file.\n\nGranted, you\u0027d need a new file interface/etc., so np if you don\u0027t think it\u0027s worth it.",
+      "range": {
+        "startLine": 265,
+        "startChar": 2,
+        "endLine": 265,
+        "endChar": 34
+      },
+      "revId": "f0484ad7092fcd4ccc7c51d4a0909139144e13cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

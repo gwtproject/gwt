@@ -127,6 +127,14 @@ public class JavaClassHierarchySetupUtil {
         portableObjCreate(Lcom/google/gwt/core/client/JavaScriptObject;)(prototypesByTypeId[superTypeId]);
   }-*/;
 
+  public static native JavaScriptObject makeCastMapFromArray(JavaScriptObject array) /*-{
+    var castMap = {};
+    for (var i = 0; i < array.length; i++) {
+        castMap[array[i]] = 1;
+    }
+    return castMap;
+  }-*/;
+
   /**
    * Retrieves the class literal if stored in a place holder, {@code null} otherwise.
    */

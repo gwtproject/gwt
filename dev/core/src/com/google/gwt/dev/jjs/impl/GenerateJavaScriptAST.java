@@ -125,7 +125,6 @@ import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsIf;
 import com.google.gwt.dev.js.ast.JsInvocation;
 import com.google.gwt.dev.js.ast.JsLabel;
-import com.google.gwt.dev.js.ast.JsLiteral;
 import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameOf;
@@ -1387,7 +1386,8 @@ public class GenerateJavaScriptAST {
 
         JsInvocation getPrototypeCall = constructInvocation(x.getSourceInfo(),
             "JavaClassHierarchySetupUtil.getClassPrototype",
-            JjsUtils.translateLiteral(program.getLiteral(typeMapper.get(superMethodTargetType))));
+            convertJavaLiteral(
+                (JExpression) typeMapper.get(superMethodTargetType)));
 
         JsNameRef methodNameRef = polymorphicNames.get(method).makeRef(x.getSourceInfo());
         methodNameRef.setQualifier(getPrototypeCall);
@@ -2214,18 +2214,33 @@ public class GenerateJavaScriptAST {
       return false;
     }
 
-    private JsObjectLiteral buildJsCastMapLiteral(List<JsExpression> runtimeTypeIdLiterals,
+    private JsExpression buildJsCastMapLiteral(
+        List<JsExpression> runtimeTypeIdLiterals,
         SourceInfo sourceInfo) {
-      JsObjectLiteral objLit = new JsObjectLiteral(sourceInfo);
-      objLit.setInternable();
-      List<JsPropertyInitializer> propInitializers = objLit.getPropertyInitializers();
-      JsNumberLiteral one = new JsNumberLiteral(sourceInfo, 1);
-      for (JsExpression runtimeTypeIdLiteral : runtimeTypeIdLiterals) {
-        JsPropertyInitializer propInitializer = new JsPropertyInitializer(sourceInfo,
-            runtimeTypeIdLiteral, one);
-        propInitializers.add(propInitializer);
+      if (JjsUtils.closureStyleLiteralsNeeded(compilePerFile, jsInteropMode,
+          props.getConfigProps())) {
+        JsArrayLiteral castExprs = new JsArrayLiteral(sourceInfo);
+        for (JsExpression expr : runtimeTypeIdLiterals) {
+          castExprs.getExpressions().add(expr);
+        }
+        castExprs.setInternable();
+        return new JsInvocation(sourceInfo,
+            indexedFunctions.get("JavaClassHierarchySetupUtil.makeCastMapFromArray"),
+            castExprs);
+      } else {
+        JsObjectLiteral objLit = new JsObjectLiteral(sourceInfo);
+        objLit.setInternable();
+        List<JsPropertyInitializer> propInitializers =
+            objLit.getPropertyInitializers();
+        JsNumberLiteral one = new JsNumberLiteral(sourceInfo, 1);
+        for (JsExpression runtimeTypeIdLiteral : runtimeTypeIdLiterals) {
+          JsPropertyInitializer propInitializer =
+              new JsPropertyInitializer(sourceInfo,
+                  runtimeTypeIdLiteral, one);
+          propInitializers.add(propInitializer);
+        }
+        return objLit;
       }
-      return objLit;
     }
 
     private void checkForDupMethods(JDeclaredType x) {
@@ -2513,17 +2528,22 @@ public class GenerateJavaScriptAST {
       }
     }
 
-    private JsLiteral convertJavaLiteral(JLiteral javaLiteral) {
-      return JjsUtils.translateLiteral(javaLiteral);
+    private JsExpression convertJavaLiteral(JExpression javaLiteral) {
+      if (javaLiteral instanceof JLiteral) {
+        return JjsUtils.translateLiteral((JLiteral) javaLiteral);
+      } else {
+        accept(javaLiteral);
+        return (JsExpression) pop();
+      }
     }
 
     private void generateClassDefinition(JClassType x, List<JsStatement> globalStmts) {
       SourceInfo sourceInfo = x.getSourceInfo();
       assert x != program.getTypeJavaLangString();
 
-      JLiteral typeId = getRuntimeTypeReference(x);
+      JExpression typeId = getRuntimeTypeReference(x);
       JClassType superClass = x.getSuperClass();
-      JLiteral superTypeId = (superClass == null) ? JNullLiteral.INSTANCE :
+      JExpression superTypeId = (superClass == null) ? JNullLiteral.INSTANCE :
           getRuntimeTypeReference(x.getSuperClass());
       // check if there's an overriding prototype
       JInterfaceType jsPrototypeIntf = JProgram.maybeGetJsTypeFromPrototype(superClass);
@@ -3448,10 +3468,13 @@ public class GenerateJavaScriptAST {
   /**
    * Retrieves the runtime typeId for {@code type}.
    */
-  JLiteral getRuntimeTypeReference(JReferenceType type) {
+  JExpression getRuntimeTypeReference(JReferenceType type) {
     Object typeId = typeMapper.get(type);
     if (typeId == null) {
       return null;
+    }
+    if (typeId instanceof JMethodCall) {
+      return (JMethodCall) typeId;
     }
     return program.getLiteral(typeId);
   }

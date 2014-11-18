@@ -19,11 +19,13 @@ package com.google.gwt.dev.codeserver;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.ArgProcessorBase;
 import com.google.gwt.dev.cfg.ModuleDef;
+import com.google.gwt.dev.util.arg.ArgHandlerClosureFormattedOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerIncrementalCompile;
 import com.google.gwt.dev.util.arg.ArgHandlerJsInteropMode;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
 import com.google.gwt.dev.util.arg.ArgHandlerMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
+import com.google.gwt.dev.util.arg.OptionClosureFormattedOutput;
 import com.google.gwt.dev.util.arg.OptionIncrementalCompile;
 import com.google.gwt.dev.util.arg.OptionJsInteropMode;
 import com.google.gwt.dev.util.arg.OptionLogLevel;
@@ -81,6 +83,7 @@ public class Options {
   private OptionJsInteropMode.Mode jsInteropMode = OptionJsInteropMode.Mode.NONE;
   private OptionMethodNameDisplayMode.Mode methodNameDisplayMode =
       OptionMethodNameDisplayMode.Mode.NONE;
+  private boolean closureFormattedOutput = false;
 
   /**
    * Sets each option to the appropriate value, based on command-line arguments.
@@ -299,6 +302,10 @@ public class Options {
     return jsInteropMode;
   }
 
+  public boolean isClosureFormattedOutput() {
+    return closureFormattedOutput;
+  }
+
   private class ArgProcessor extends ArgProcessorBase {
 
     public ArgProcessor() {
@@ -369,6 +376,17 @@ public class Options {
         }
       }) {
       });
+      registerHandler(new ArgHandlerClosureFormattedOutput(new OptionClosureFormattedOutput() {
+        @Override
+        public boolean isClosureCompilerFormatEnabled() {
+          return Options.this.closureFormattedOutput;
+        }
+
+        @Override
+        public void setClosureCompilerFormatEnabled(boolean enabled) {
+          Options.this.closureFormattedOutput = enabled;
+        }
+      }));
     }
 
     @Override

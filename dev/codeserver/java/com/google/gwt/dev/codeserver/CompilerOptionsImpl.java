@@ -45,6 +45,7 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   private final boolean strictSourceResources;
   private final OptionJsInteropMode.Mode jsInteropMode;
   private final OptionMethodNameDisplayMode.Mode methodNameDisplayMode;
+  private final boolean closureFormattedOutput;
 
   CompilerOptionsImpl(CompileDir compileDir, String moduleName, Options options) {
     this.compileDir = compileDir;
@@ -57,6 +58,7 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
     this.logLevel = options.getLogLevel();
     this.jsInteropMode = options.getJsInteropMode();
     this.methodNameDisplayMode = options.getMethodNameDisplayMode();
+    this.closureFormattedOutput = options.isClosureFormattedOutput();
   }
 
   @Override
@@ -332,5 +334,10 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   @Override
   public boolean warnMissingDeps() {
     return false;
+  }
+
+  @Override
+  public boolean isClosureCompilerFormatEnabled() {
+    return closureFormattedOutput;
   }
 }

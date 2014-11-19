@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
+
 import java.io.Serializable;
 
 import javaemul.internal.JsDate;
@@ -38,9 +40,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
 
   public static long parse(String s) {
     double parsed = JsDate.parse(s);
-    if (Double.isNaN(parsed)) {
-      throw new IllegalArgumentException();
-    }
+    checkCriticalArgument(!Double.isNaN(parsed));
     return (long) parsed;
   }
 

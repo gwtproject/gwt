@@ -1262,34 +1262,30 @@ public class Collections {
     swapImpl(list, i, j);
   }
 
-  public static <T> Collection<T> unmodifiableCollection(
-      final Collection<? extends T> coll) {
-    return new UnmodifiableCollection<T>(coll);
+  public static <T> Collection<T> unmodifiableCollection(Collection<? extends T> c) {
+    return new UnmodifiableCollection<T>(checkNotNull(c));
   }
 
   public static <T> List<T> unmodifiableList(List<? extends T> list) {
+    checkNotNull(list);
     return (list instanceof RandomAccess)
-        ? new UnmodifiableRandomAccessList<T>(list) : new UnmodifiableList<T>(
-            list);
+        ? new UnmodifiableRandomAccessList<T>(list) : new UnmodifiableList<T>(list);
   }
 
-  public static <K, V> Map<K, V> unmodifiableMap(
-      final Map<? extends K, ? extends V> map) {
-    return new UnmodifiableMap<K, V>(map);
+  public static <K, V> Map<K, V> unmodifiableMap(Map<? extends K, ? extends V> map) {
+    return new UnmodifiableMap<K, V>(checkNotNull(map));
   }
 
   public static <T> Set<T> unmodifiableSet(Set<? extends T> set) {
-    return new UnmodifiableSet<T>(set);
+    return new UnmodifiableSet<T>(checkNotNull(set));
   }
 
-  public static <K, V> SortedMap<K, V> unmodifiableSortedMap(
-      SortedMap<K, ? extends V> map) {
-    return new UnmodifiableSortedMap<K, V>(map);
+  public static <K, V> SortedMap<K, V> unmodifiableSortedMap(SortedMap<K, ? extends V> map) {
+    return new UnmodifiableSortedMap<K, V>(checkNotNull(map));
   }
 
-  public static <T> SortedSet<T> unmodifiableSortedSet(
-      SortedSet<? extends T> set) {
-    return new UnmodifiableSortedSet<T>(set);
+  public static <T> SortedSet<T> unmodifiableSortedSet(SortedSet<? extends T> set) {
+    return new UnmodifiableSortedSet<T>(checkNotNull(set));
   }
 
   /**

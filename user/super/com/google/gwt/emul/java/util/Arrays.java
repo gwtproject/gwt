@@ -20,6 +20,7 @@ import static javaemul.internal.Coercions.ensureInt;
 import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkArraySize;
 import static javaemul.internal.InternalPreconditions.checkElementIndex;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkPositionIndexes;
 
 import java.io.Serializable;
@@ -43,7 +44,6 @@ public class Arrays {
     private E[] array;
 
     ArrayList(E[] array) {
-      assert (array != null);
       this.array = array;
     }
 
@@ -99,7 +99,7 @@ public class Arrays {
   }
 
   public static <T> List<T> asList(T... array) {
-    return new ArrayList<T>(array);
+    return new ArrayList<T>(checkNotNull(array));
   }
 
   /**

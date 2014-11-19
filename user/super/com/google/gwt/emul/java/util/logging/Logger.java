@@ -15,6 +15,8 @@
  */
 package java.util.logging;
 
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ import java.util.List;
  */
 public class Logger {
 
-public static final String GLOBAL_LOGGER_NAME = "global";
+  public static final String GLOBAL_LOGGER_NAME = "global";
 
   private static final boolean SUPER_DEV_MODE =
       System.getProperty("superdevmode", "off").equals("on");
@@ -46,6 +48,8 @@ public static final String GLOBAL_LOGGER_NAME = "global";
   }
 
   public static Logger getLogger(String name) {
+    checkNotNull(name);
+
     // Use shortcut if logging is disabled to avoid parent logger creations in LogManager
     if (LOGGING_FALSE) {
       return new Logger(name, "");

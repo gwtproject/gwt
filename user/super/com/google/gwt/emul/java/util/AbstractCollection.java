@@ -124,6 +124,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
 
   @Override
   public <T> T[] toArray(T[] a) {
+    checkNotNull(a);
     int size = size();
     if (a.length < size) {
       a = Array.createFrom(a, size);

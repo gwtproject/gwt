@@ -17,6 +17,7 @@ package java.util;
 
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElementIndex;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndex;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndexes;
 
@@ -197,6 +198,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   @SuppressWarnings("unchecked")
   @Override
   public <T> T[] toArray(T[] out) {
+    checkNotNull(out);
     int size = array.length;
     if (out.length < size) {
       out = Array.createFrom(out, size);

@@ -26,6 +26,9 @@ import java.util.logging.Level;
 public class LevelImplRegular implements LevelImpl {
   @Override
   public Level parse(String name) {
+    if (name == null) {
+      throw new NullPointerException();
+    }
     name = StringCase.toUpper(name);
     if (name.equals("ALL")) {
       return Level.ALL;

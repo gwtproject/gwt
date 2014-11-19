@@ -15,6 +15,8 @@
  */
 package java.util.logging;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.logging.impl.LoggerImpl;
 import com.google.gwt.logging.impl.LoggerImplNull;
@@ -33,6 +35,8 @@ public class Logger {
   }
 
   public static Logger getLogger(String name) {
+    checkNotNull(name);
+
     // Use shortcut if logging is disabled to avoid parent logger creations in LogManager
     if (GWT.create(LoggerImplNull.class) instanceof LoggerImplNull) {
       return new Logger(name, "");

@@ -56,6 +56,24 @@
       "revId": "5bc8628cf97e0ab46f8b2a129b9028943ba69a7f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_1c3e99ff",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2228,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-19T21:44:37Z",
+      "side": 1,
+      "message": "? a function call cannot appear as a key in an object literal, and the old makeCastMapFromArray method was deleted, moved, or renamed to someplace I don\u0027t recognize?",
+      "parentUuid": "7aca7bdf_06375a02",
+      "revId": "5bc8628cf97e0ab46f8b2a129b9028943ba69a7f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

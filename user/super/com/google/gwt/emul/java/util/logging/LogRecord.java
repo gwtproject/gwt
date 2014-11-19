@@ -16,6 +16,8 @@
 
 package java.util.logging;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+
 import java.io.Serializable;
 
 /**
@@ -25,14 +27,15 @@ import java.io.Serializable;
  */
 public class LogRecord implements Serializable {
   private Level level;
-  private String loggerName = "";
+  private String loggerName;
   private String msg;
-  private Throwable thrown = null;
+  private Throwable thrown;
   private long millis;
   
   public LogRecord(Level level, String msg) {
-    this.level = level;
+    this.level = checkNotNull(level);
     this.msg = msg;
+    loggerName = "";
     millis = System.currentTimeMillis();
   }
   

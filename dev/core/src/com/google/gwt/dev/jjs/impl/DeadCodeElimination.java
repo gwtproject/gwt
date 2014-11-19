@@ -2026,6 +2026,7 @@ public class DeadCodeElimination {
     DeadCodeVisitor deadCodeVisitor = new DeadCodeVisitor(optimizerCtx);
     deadCodeVisitor.accept(node);
     stats.recordModified(deadCodeVisitor.getNumMods());
+    Verifier.assertProgramIsConsistent(program);
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }

@@ -214,6 +214,37 @@ public class PrunerTest extends OptimizerTestBase {
     EqualityNormalizer.exec(result.getOptimizedProgram());
   }
 
+
+/*  public void testNoUnreachableCode() throws Exception {
+    runDeadCodeElimination = false;
+    addSnippetClassDecl("static int foo(int i) { return i; }");
+    addSnippetClassDecl(
+        "static class UnReachableClass { ",
+        "  UnReachableClass() { }",
+        "}");
+
+    addSnippetClassDecl(
+        "static class UninstantiatedClass { ",
+        "   {  new UnReachableClass(); }",
+        "   {  new UnReachableClass(); }",
+
+    addSnippetClassDecl("static UninstantiatedClass uninstantiatedField;");
+    Result result;
+    (result = optimize("int",
+        "int i = 0;",
+        "if (uninstantiatedField.field[i] == 0) { i = 2; }",
+        "return i;"
+    )).intoString(
+        "int i = 0;",
+        "if (null.nullField[i] == 0) {",
+        "  i = 2;",
+        "}",
+        "return i;"
+    );
+
+    EqualityNormalizer.exec(result.getOptimizedProgram());
+  }
+  */
   @Override
   protected boolean optimizeMethod(JProgram program, JMethod method) {
     program.addEntryMethod(findMainMethod(program));

@@ -92,6 +92,7 @@ import com.google.gwt.dev.jjs.impl.TypeRefDepsChecker;
 import com.google.gwt.dev.jjs.impl.TypeReferencesRecorder;
 import com.google.gwt.dev.jjs.impl.TypeTightener;
 import com.google.gwt.dev.jjs.impl.UnifyAst;
+import com.google.gwt.dev.jjs.impl.Verifier;
 import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitters;
 import com.google.gwt.dev.jjs.impl.codesplitter.MultipleDependencyGraphRecorder;
 import com.google.gwt.dev.jjs.impl.codesplitter.ReplaceRunAsyncs;
@@ -1501,6 +1502,7 @@ public abstract class JavaToJavaScriptCompiler {
     // Clinits might have become empty become empty.
     jprogram.typeOracle.recomputeAfterOptimizations(jprogram.getDeclaredTypes());
     OptimizerStats stats = new OptimizerStats(passName);
+    Verifier.assertProgramIsConsistent(jprogram);
     stats.add(Pruner.exec(jprogram, true, optimizerCtx).recordVisits(numNodes));
     stats.add(Finalizer.exec(jprogram, optimizerCtx).recordVisits(numNodes));
     stats.add(MakeCallsStatic.exec(jprogram, options.shouldAddRuntimeChecks(), optimizerCtx)

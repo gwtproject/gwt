@@ -578,6 +578,7 @@ public class MethodInliner {
       stats.recordModified(dceStats.getNumMods());
     }
     optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
+    Verifier.assertProgramIsConsistent(program);
     return stats;
   }
 
@@ -585,7 +586,8 @@ public class MethodInliner {
    * Return the set of methods affected (because they are or callers of) by the modifications to the
    * given set functions.
    */
-  private Set<JMethod> affectedMethods(Set<JMethod> modifiedMethods, OptimizerContext optimizerCtx) {
+  private Set<JMethod> affectedMethods(Set<JMethod> modifiedMethods,
+      OptimizerContext optimizerCtx) {
     Set<JMethod> affectedMethods = Sets.newLinkedHashSet();
     if (modifiedMethods == null || modifiedMethods.size() == 0) {
       return affectedMethods;

@@ -502,6 +502,7 @@ public class MakeCallsStatic {
     rewriter.accept(program);
     stats.recordModified(rewriter.getNumMods());
     assert (rewriter.didChange() || toBeMadeStatic.isEmpty());
+    Verifier.assertProgramIsConsistent(program);
     return stats;
   }
 }

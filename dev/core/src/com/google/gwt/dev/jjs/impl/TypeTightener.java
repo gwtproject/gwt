@@ -906,6 +906,7 @@ public class TypeTightener {
     if (stats.didChange()) {
       FixDanglingRefsVisitor fixer = new FixDanglingRefsVisitor(optimizerCtx);
       fixer.accept(program);
+      Verifier.assertProgramIsConsistent(program);
     }
 
     return stats;

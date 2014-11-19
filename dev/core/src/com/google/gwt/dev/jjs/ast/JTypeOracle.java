@@ -294,7 +294,7 @@ public class JTypeOracle implements Serializable {
      * because we explicitly visit all AST structures that might contain
      * non-clinit-calling code.
      *
-     * @see #mightBeDeadCode(JExpression)
+     * @see #mightContainOnlyClinitCalls(JExpression)
      * @see #mightBeDeadCode(JStatement)
      */
     private boolean hasLiveCode = false;
@@ -324,8 +324,9 @@ public class JTypeOracle implements Serializable {
       JVariable target = x.getVariableRef().getTarget();
       if (target instanceof JField) {
         JField field = (JField) target;
-        if (field.getLiteralInitializer() != null) {
-          // Top level initializations generate no code.
+        if (field.getConstInitializer() != null) {
+          // Const initializer, even though they appear in the clinit they are not considered
+          // part of it; instead they are normally considered part of the fields they initialize.
           return false;
         }
       }
@@ -336,7 +337,7 @@ public class JTypeOracle implements Serializable {
     @Override
     public boolean visit(JExpressionStatement x, Context ctx) {
       JExpression expr = x.getExpr();
-      if (mightBeDeadCode(expr)) {
+      if (mightContainOnlyClinitCalls(expr)) {
         accept(expr);
       } else {
         hasLiveCode = true;
@@ -359,7 +360,7 @@ public class JTypeOracle implements Serializable {
     public boolean visit(JMultiExpression x, Context ctx) {
       for (JExpression expr : x.getExpressions()) {
         // Only a JMultiExpression or JMethodCall can contain clinit calls.
-        if (mightBeDeadCode(expr)) {
+        if (mightContainOnlyClinitCalls(expr)) {
           accept(expr);
         } else {
           hasLiveCode = true;
@@ -368,24 +369,14 @@ public class JTypeOracle implements Serializable {
       return false;
     }
 
-    @Override
-    public boolean visit(JNewInstance x, Context ctx) {
-      if (x.hasSideEffects()) {
-        hasLiveCode = true;
-      }
-      return false;
-    }
-
-    private boolean mightBeDeadCode(JExpression expr) {
+    private boolean mightContainOnlyClinitCalls(JExpression expr) {
       // Must have a visit method for every subtype that answers yes!
-      return expr instanceof JMultiExpression || expr instanceof JMethodCall
-          || expr instanceof JNewInstance;
+      return expr instanceof JMultiExpression || expr instanceof JMethodCall;
     }
 
     private boolean mightBeDeadCode(JStatement stmt) {
       // Must have a visit method for every subtype that answers yes!
-      return stmt instanceof JBlock || stmt instanceof JExpressionStatement
-          || stmt instanceof JDeclarationStatement;
+      return stmt instanceof JBlock || stmt instanceof JExpressionStatement;
     }
   }
 

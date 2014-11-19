@@ -243,6 +243,7 @@ public class SameParameterValueOptimizer {
         stats.recordModified(substituteParameterVisitor.getNumMods());
       }
     }
+    Verifier.assertProgramIsConsistent(program);
     return stats;
   }
 }

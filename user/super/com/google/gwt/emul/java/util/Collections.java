@@ -19,6 +19,7 @@ import static com.google.gwt.core.client.impl.Coercions.ensureInt;
 
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElementIndex;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 
@@ -793,6 +794,8 @@ public class Collections {
   public static final Set EMPTY_SET = new EmptySet();
 
   public static <T> boolean addAll(Collection<? super T> c, T... a) {
+    checkNotNull(c);
+    checkNotNull(a);
     boolean result = false;
     for (T e : a) {
       result |= c.add(e);
@@ -893,6 +896,7 @@ public class Collections {
      * in the JDK docs for non-RandomAccess Lists. Until GWT provides a
      * LinkedList, this shouldn't be an issue.
      */
+    checkNotNull(sortedList);
     if (comparator == null) {
       comparator = Comparators.natural();
     }
@@ -918,13 +922,17 @@ public class Collections {
   }
 
   public static <T> void copy(List<? super T> dest, List<? extends T> src) {
+    if (checkNotNull(src).size() > checkNotNull(dest).size()) {
+      throw new IndexOutOfBoundsException("src does not fit in dest");
+    }
+
     // TODO(jat): optimize
     dest.addAll(src);
   }
 
   public static boolean disjoint(Collection<?> c1, Collection<?> c2) {
-    Collection<?> iterating = c1;
-    Collection<?> testing = c2;
+    Collection<?> iterating = checkNotNull(c1);
+    Collection<?> testing = checkNotNull(c2);
 
     // See if one of these objects possibly implements a fast contains.
     if ((c1 instanceof Set) && !(c2 instanceof Set)) {
@@ -966,13 +974,16 @@ public class Collections {
     return (Set<T>) EMPTY_SET;
   }
 
-  public static <T> Enumeration<T> enumeration(Collection<T> c) {
-    final Iterator<T> it = c.iterator();
+  public static <T> Enumeration<T> enumeration(final Collection<T> c) {
     return new Enumeration<T>() {
+      final Iterator<T> it = checkNotNull(c).iterator();
+
+      @Override
       public boolean hasMoreElements() {
         return it.hasNext();
       }
 
+      @Override
       public T nextElement() {
         return it.next();
       }
@@ -980,7 +991,7 @@ public class Collections {
   }
 
   public static <T> void fill(List<? super T> list, T obj) {
-    for (ListIterator<? super T> it = list.listIterator(); it.hasNext();) {
+    for (ListIterator<? super T> it = checkNotNull(list).listIterator(); it.hasNext();) {
       it.next();
       it.set(obj);
     }
@@ -988,7 +999,7 @@ public class Collections {
 
   public static int frequency(Collection<?> c, Object o) {
     int count = 0;
-    for (Object e : c) {
+    for (Object e : checkNotNull(c)) {
       if (Objects.equals(o, e)) {
         ++count;
       }
@@ -997,6 +1008,7 @@ public class Collections {
   }
 
   public static <T> ArrayList<T> list(Enumeration<T> e) {
+    checkNotNull(e);
     ArrayList<T> arrayList = new ArrayList<T>();
     while (e.hasMoreElements()) {
       arrayList.add(e.nextElement());
@@ -1011,6 +1023,7 @@ public class Collections {
 
   public static <T> T max(Collection<? extends T> coll,
       Comparator<? super T> comp) {
+    checkNotNull(coll);
 
     if (comp == null) {
       comp = Comparators.natural();
@@ -1056,7 +1069,7 @@ public class Collections {
 
   public static <T> boolean replaceAll(List<T> list, T oldVal, T newVal) {
     boolean modified = false;
-    for (ListIterator<T> it = list.listIterator(); it.hasNext();) {
+    for (ListIterator<T> it = checkNotNull(list).listIterator(); it.hasNext();) {
       T t = it.next();
       if (Objects.equals(t, oldVal)) {
         it.set(newVal);
@@ -1067,6 +1080,7 @@ public class Collections {
   }
 
   public static <T> void reverse(List<T> l) {
+    checkNotNull(l);
     if (l instanceof RandomAccess) {
       for (int iFront = 0, iBack = l.size() - 1; iFront < iBack; ++iFront, --iBack) {
         Collections.swap(l, iFront, iBack);
@@ -1124,43 +1138,39 @@ public class Collections {
 
   @SuppressWarnings("unchecked")
   public static <T> void sort(List<T> target, Comparator<? super T> c) {
-    Object[] x = target.toArray();
+    Object[] x = checkNotNull(target).toArray();
     Arrays.sort(x, (Comparator<Object>) c);
     replaceContents(target, x);
   }
 
   public static void swap(List<?> list, int i, int j) {
-    swapImpl(list, i, j);
+    swapImpl(checkNotNull(list), i, j);
   }
 
-  public static <T> Collection<T> unmodifiableCollection(
-      final Collection<? extends T> coll) {
-    return new UnmodifiableCollection<T>(coll);
+  public static <T> Collection<T> unmodifiableCollection(Collection<? extends T> c) {
+    return new UnmodifiableCollection<T>(checkNotNull(c));
   }
 
   public static <T> List<T> unmodifiableList(List<? extends T> list) {
+    checkNotNull(list);
     return (list instanceof RandomAccess)
-        ? new UnmodifiableRandomAccessList<T>(list) : new UnmodifiableList<T>(
-            list);
+        ? new UnmodifiableRandomAccessList<T>(list) : new UnmodifiableList<T>(list);
   }
 
-  public static <K, V> Map<K, V> unmodifiableMap(
-      final Map<? extends K, ? extends V> map) {
-    return new UnmodifiableMap<K, V>(map);
+  public static <K, V> Map<K, V> unmodifiableMap(Map<? extends K, ? extends V> map) {
+    return new UnmodifiableMap<K, V>(checkNotNull(map));
   }
 
   public static <T> Set<T> unmodifiableSet(Set<? extends T> set) {
-    return new UnmodifiableSet<T>(set);
+    return new UnmodifiableSet<T>(checkNotNull(set));
   }
 
-  public static <K, V> SortedMap<K, V> unmodifiableSortedMap(
-      SortedMap<K, ? extends V> map) {
-    return new UnmodifiableSortedMap<K, V>(map);
+  public static <K, V> SortedMap<K, V> unmodifiableSortedMap(SortedMap<K, ? extends V> map) {
+    return new UnmodifiableSortedMap<K, V>(checkNotNull(map));
   }
 
-  public static <T> SortedSet<T> unmodifiableSortedSet(
-      SortedSet<? extends T> set) {
-    return new UnmodifiableSortedSet<T>(set);
+  public static <T> SortedSet<T> unmodifiableSortedSet(SortedSet<? extends T> set) {
+    return new UnmodifiableSortedSet<T>(checkNotNull(set));
   }
 
   /**

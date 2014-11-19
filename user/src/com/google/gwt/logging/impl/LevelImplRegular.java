@@ -16,7 +16,6 @@
 
 package com.google.gwt.logging.impl;
 
-
 import java.util.Locale;
 import java.util.logging.Level;
 

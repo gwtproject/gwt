@@ -33,6 +33,29 @@
       "revId": "5bc8628cf97e0ab46f8b2a129b9028943ba69a7f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aca7bdf_06375a02",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2228,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-19T17:43:34Z",
+      "side": 1,
+      "message": "I fail to see how this is different from before, is this just to avoid the interning?",
+      "range": {
+        "startLine": 2220,
+        "startChar": 1,
+        "endLine": 2228,
+        "endChar": 23
+      },
+      "revId": "5bc8628cf97e0ab46f8b2a129b9028943ba69a7f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -16,6 +16,7 @@
 
 package com.google.gwt.logging.impl;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
 
 import java.util.Locale;
 import java.util.logging.Level;
@@ -26,6 +27,7 @@ import java.util.logging.Level;
 public class LevelImplRegular implements LevelImpl {
   @Override
   public Level parse(String name) {
+    checkNotNull(name);
     name = name.toUpperCase(Locale.ROOT);
     if (name.equals("ALL")) {
       return Level.ALL;

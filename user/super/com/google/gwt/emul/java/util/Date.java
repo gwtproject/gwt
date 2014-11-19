@@ -15,6 +15,9 @@
  */
 package java.util;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalArgument;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+
 import com.google.gwt.core.client.JsDate;
 
 import java.io.Serializable;
@@ -38,9 +41,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
 
   public static long parse(String s) {
     double parsed = JsDate.parse(s);
-    if (Double.isNaN(parsed)) {
-      throw new IllegalArgumentException();
-    }
+    checkCriticalArgument(!Double.isNaN(parsed));
     return (long) parsed;
   }
 
@@ -113,10 +114,12 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   }
 
   public boolean after(Date when) {
+    checkNotNull(when);
     return getTime() > when.getTime();
   }
 
   public boolean before(Date when) {
+    checkNotNull(when);
     return getTime() < when.getTime();
   }
 
@@ -124,7 +127,9 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
     return new Date(getTime());
   }
 
+  @Override
   public int compareTo(Date other) {
+    checkNotNull(other);
     return Long.compare(getTime(), other.getTime());
   }
 

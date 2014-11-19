@@ -126,6 +126,24 @@
       "revId": "01264f9046eab5a2d879ac101f531b92b926de29",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_08ed6f4d",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-19T23:50:44Z",
+      "side": 1,
+      "message": "I meant Interface.super.method() (tests your changes to gwtastbuilder)",
+      "parentUuid": "da69a7a3_cdd1c95e",
+      "revId": "01264f9046eab5a2d879ac101f531b92b926de29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

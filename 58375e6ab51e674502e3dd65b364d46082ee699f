@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da69a7a3_2df245ab",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-19T23:38:48Z",
+      "side": 1,
+      "message": "s/Boolean/?",
+      "range": {
+        "startLine": 106,
+        "startChar": 17,
+        "endLine": 106,
+        "endChar": 24
+      },
+      "revId": "58375e6ab51e674502e3dd65b364d46082ee699f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_8d4b51f2",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-19T23:38:48Z",
+      "side": 1,
+      "message": "I think we should make it very clear that this is an asynchronous process:\n\n\"Enqueues a clean up of old cache files...\"",
+      "range": {
+        "startLine": 194,
+        "startChar": 5,
+        "endLine": 194,
+        "endChar": 11
+      },
+      "revId": "58375e6ab51e674502e3dd65b364d46082ee699f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_2db5e5c1",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-19T23:38:48Z",
+      "side": 1,
+      "message": "capitalize",
+      "range": {
+        "startLine": 203,
+        "startChar": 27,
+        "endLine": 203,
+        "endChar": 28
+      },
+      "revId": "58375e6ab51e674502e3dd65b364d46082ee699f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_ed8bedad",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-19T23:38:48Z",
+      "side": 1,
+      "message": "capitalize",
+      "range": {
+        "startLine": 425,
+        "startChar": 33,
+        "endLine": 425,
+        "endChar": 34
+      },
+      "revId": "58375e6ab51e674502e3dd65b364d46082ee699f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_ed15ada8",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-19T23:38:48Z",
+      "side": 1,
+      "message": "deleteClosedCacheFiles",
+      "range": {
+        "startLine": 110,
+        "startChar": 20,
+        "endLine": 110,
+        "endChar": 46
+      },
+      "revId": "58375e6ab51e674502e3dd65b364d46082ee699f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_2da5e513",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-19T23:38:48Z",
+      "side": 1,
+      "message": "capitalize, etc",
+      "range": {
+        "startLine": 153,
+        "startChar": 28,
+        "endLine": 153,
+        "endChar": 29
+      },
+      "revId": "58375e6ab51e674502e3dd65b364d46082ee699f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_885b3f40",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-19T23:38:48Z",
+      "side": 1,
+      "message": "s/out/closedFiles",
+      "range": {
+        "startLine": 220,
+        "startChar": 15,
+        "endLine": 220,
+        "endChar": 18
+      },
+      "revId": "58375e6ab51e674502e3dd65b364d46082ee699f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_c830d7df",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-19T23:38:48Z",
+      "side": 1,
+      "message": "Utility.close()",
+      "range": {
+        "startLine": 327,
+        "startChar": 6,
+        "endLine": 331,
+        "endChar": 7
+      },
+      "revId": "58375e6ab51e674502e3dd65b364d46082ee699f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_c8db772d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-19T23:38:48Z",
+      "side": 1,
+      "message": "Utility.close()",
+      "range": {
+        "startLine": 352,
+        "startChar": 8,
+        "endLine": 358,
+        "endChar": 9
+      },
+      "revId": "58375e6ab51e674502e3dd65b364d46082ee699f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_8d20b192",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/PersistentUnitCacheTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-19T23:38:48Z",
+      "side": 1,
+      "message": "i think it\u0027s more obviously about waiting if you change it to:\nFutures.getUnchecked(cache.internalAdd(lastUnit));",
+      "range": {
+        "startLine": 250,
+        "startChar": 4,
+        "endLine": 250,
+        "endChar": 38
+      },
+      "revId": "58375e6ab51e674502e3dd65b364d46082ee699f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

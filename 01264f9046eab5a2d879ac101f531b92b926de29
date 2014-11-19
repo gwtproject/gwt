@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "da69a7a3_edd68d53",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2902,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-19T22:59:01Z",
+      "side": 1,
+      "message": "Yep :(",
+      "parentUuid": "da69a7a3_3f9c2ff9",
+      "revId": "01264f9046eab5a2d879ac101f531b92b926de29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da69a7a3_df9a53d1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 3
@@ -87,6 +105,24 @@
       "writtenOn": "2014-11-19T22:44:50Z",
       "side": 1,
       "message": "Add a test for Interface.this.defaultMethod()",
+      "revId": "01264f9046eab5a2d879ac101f531b92b926de29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da69a7a3_cdd1c95e",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-19T22:59:01Z",
+      "side": 1,
+      "message": "I\u0027m not sure Interface.this.method() is legal Java8 syntax.",
+      "parentUuid": "da69a7a3_7f5ea769",
       "revId": "01264f9046eab5a2d879ac101f531b92b926de29",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

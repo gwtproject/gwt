@@ -21,6 +21,7 @@ import static com.google.gwt.core.client.impl.Coercions.ensureInt;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArraySize;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElementIndex;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndexes;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -46,7 +47,6 @@ public class Arrays {
     private E[] array;
 
     ArrayList(E[] array) {
-      assert (array != null);
       this.array = array;
     }
 
@@ -102,7 +102,7 @@ public class Arrays {
   }
 
   public static <T> List<T> asList(T... array) {
-    return new ArrayList<T>(array);
+    return new ArrayList<T>(checkNotNull(array));
   }
 
   /**

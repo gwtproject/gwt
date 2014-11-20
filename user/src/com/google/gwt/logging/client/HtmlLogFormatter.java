@@ -41,6 +41,7 @@ public class HtmlLogFormatter extends FormatterImpl {
     html.append(getRecordInfo(event, " "));
     html.append(getEscaped(event.getMessage()));
     if (showStackTraces && event.getThrown() != null) {
+      html.append(" ");
       event.getThrown().printStackTrace(new StackTracePrintStream(html) {
         @Override
         public void append(String str) {

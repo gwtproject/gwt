@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba2cf37b_c82fef2d",
+        "filename": "user/src/com/google/gwt/user/client/ui/HeaderPanel.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5060
+      },
+      "writtenOn": "2014-11-20T15:03:45Z",
+      "side": 1,
+      "message": "Any reason w.removeFromParent() can\u0027t also be done in here?",
+      "range": {
+        "startLine": 276,
+        "startChar": 19,
+        "endLine": 276,
+        "endChar": 20
+      },
+      "revId": "d361a8c99a58516086dfb0c70fb4411b53b83b1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

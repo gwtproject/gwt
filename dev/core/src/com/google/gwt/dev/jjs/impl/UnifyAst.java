@@ -708,11 +708,14 @@ public class UnifyAst {
   private MinimalRebuildCache minimalRebuildCache;
   private boolean incrementalCompile;
   private boolean isLibraryCompile;
+  private boolean enableJsInterop;
+  private final List<String> rootTypeSourceNames = new ArrayList<String>();
 
   public UnifyAst(TreeLogger logger, CompilerContext compilerContext, JProgram program,
       JsProgram jsProgram, RebindPermutationOracle rpo) {
     this.incrementalCompile = compilerContext.getOptions().isIncrementalCompileEnabled();
     this.isLibraryCompile = !compilerContext.shouldCompileMonolithic();
+    this.enableJsInterop = program.typeOracle.isInteropEnabled();
 
     this.logger = logger;
     this.compilerContext = compilerContext;
@@ -731,28 +734,9 @@ public class UnifyAst {
     }
   }
 
-  public void addRootTypes(Collection<String> sourceTypeNames) throws UnableToCompleteException {
-    List<String> binaryTypeNames = new ArrayList<String>();
-    for (String sourceTypeName : sourceTypeNames) {
-      JDeclaredType type =
-          internalFindType(sourceTypeName, sourceNameBasedTypeLocator, true);
-      binaryTypeNames.add(type.getName());
-      if (type != null && program.typeOracle.isInteropEnabled() &&
-          (isJsType(type) || hasAnyExports(type))) {
-        instantiate(type);
-        for (JField field : type.getFields()) {
-          flowInto(field);
-        }
-        for (JMethod method : type.getMethods()) {
-          flowInto(method);
-        }
-      }
-    }
-    minimalRebuildCache.setRootTypeNames(binaryTypeNames);
-    if (errorsFound) {
-      // Already logged.
-      throw new UnableToCompleteException();
-    }
+  public void addRootTypes(Collection<String> rootTypeSourceNames) {
+    assert this.rootTypeSourceNames.isEmpty();
+    this.rootTypeSourceNames.addAll(rootTypeSourceNames);
   }
 
   /**
@@ -797,6 +781,22 @@ public class UnifyAst {
     for (JMethod entryMethod : program.getEntryMethods()) {
       flowInto(entryMethod);
     }
+
+    // Ensure that root types are loaded and possibly (depending on mode) traversed.
+    List<String> rootTypeBinaryNames = new ArrayList<String>();
+    for (String rootTypeSourceName : rootTypeSourceNames) {
+      JDeclaredType rootType =
+          internalFindType(rootTypeSourceName, sourceNameBasedTypeLocator, true);
+      if (rootType == null) {
+        continue;
+      }
+
+      rootTypeBinaryNames.add(rootType.getName());
+      if (enableJsInterop && (isJsType(rootType) || hasAnyExports(rootType))) {
+        fullFlowIntoType(rootType);
+      }
+    }
+    minimalRebuildCache.setRootTypeNames(rootTypeBinaryNames);
 
     // Some fields and methods in codegen types might only become referenced as the result of
     // visitor execution after unification. Since we don't want those fields are methods to be
@@ -1041,7 +1041,7 @@ public class UnifyAst {
   }
 
   private boolean hasAnyExports(JDeclaredType t) {
-    if (!program.typeOracle.isInteropEnabled()) {
+    if (!enableJsInterop) {
       return false;
     }
 
@@ -1484,7 +1484,7 @@ public class UnifyAst {
   }
 
   private boolean isJsType(JDeclaredType intf) {
-    if (!program.typeOracle.isInteropEnabled()) {
+    if (!enableJsInterop) {
       return false;
     }
 

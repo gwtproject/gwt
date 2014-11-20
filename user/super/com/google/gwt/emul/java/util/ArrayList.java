@@ -20,6 +20,7 @@ import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndex;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndexes;
 
+import com.google.gwt.core.client.impl.IterateAsArray;
 import com.google.gwt.lang.Array;
 
 import java.io.Serializable;
@@ -42,6 +43,7 @@ import java.io.Serializable;
  *
  * @param <E> the element type.
  */
+@IterateAsArray(getter = "get", length = "size")
 public class ArrayList<E> extends AbstractList<E> implements List<E>,
     Cloneable, RandomAccess, Serializable {
 

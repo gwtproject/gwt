@@ -19,6 +19,7 @@ import com.google.gwt.core.client.impl.DoNotInline;
 import com.google.gwt.core.client.impl.HasNoSideEffects;
 import com.google.gwt.core.client.impl.SpecializeMethod;
 import com.google.gwt.dev.CompilerContext;
+import com.google.gwt.dev.javac.GWTProblem;
 import com.google.gwt.dev.javac.JSORestrictionsChecker;
 import com.google.gwt.dev.javac.JdtUtil;
 import com.google.gwt.dev.javac.JsInteropUtil;
@@ -102,6 +103,7 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.js.JsAbstractSymbolResolver;
 import com.google.gwt.dev.js.ast.JsContext;
+import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsModVisitor;
@@ -109,6 +111,9 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsParameter;
+import com.google.gwt.dev.js.ast.JsReturn;
+import com.google.gwt.dev.js.ast.JsRootScope;
+import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.thirdparty.guava.common.base.Function;
@@ -221,9 +226,12 @@ import org.eclipse.jdt.internal.compiler.lookup.TypeIds;
 import org.eclipse.jdt.internal.compiler.lookup.VariableBinding;
 import org.eclipse.jdt.internal.compiler.util.Util;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -242,6 +250,11 @@ public class GwtAstBuilder {
   public static final String INIT_NAME = "$init";
   public static final String STATIC_INIT_NAME =  "$" + INIT_NAME;
   public static final String OUTER_LAMBDA_PARAM_NAME = "$$outer_0";
+
+  public static final String JS_CLASS = "com.google.gwt.core.client.js.Js";
+  public static final TypeBinding[] INT_TYPE = new TypeBinding[] {TypeBinding.INT};
+  public static final String ITERATEASARRAY_CLASS =
+      "com.google.gwt.core.client.impl.IterateAsArray";
 
   /**
    * Visit the JDT AST and produce our own AST. By the end of this pass, the
@@ -894,14 +907,14 @@ public class GwtAstBuilder {
         if (x.collectionVariable != null) {
           /**
            * <pre>
-         * for (final T[] i$array = collection,
-         *          int i$index = 0,
-         *          final int i$max = i$array.length;
-         *      i$index < i$max; ++i$index) {
-         *   T elementVar = i$array[i$index];
-         *   // user action
-         * }
-         * </pre>
+           * for (final T[] i$array = collection,
+           *          int i$index = 0,
+           *          final int i$max = i$array.length;
+           *      i$index < i$max; ++i$index) {
+           *   T elementVar = i$array[i$index];
+           *   // user action
+           * }
+           * </pre>
            */
           JLocal arrayVar =
               JProgram.createLocal(info, elementVarName + "$array", collection.getType(), true,
@@ -938,50 +951,117 @@ public class GwtAstBuilder {
 
           result = new JForStatement(info, initializers, condition, increments, body);
         } else {
-          /**
-           * <pre>
-           * for (Iterator&lt;T&gt; i$iterator = collection.iterator(); i$iterator.hasNext();) {
-           *   T elementVar = i$iterator.next();
-           *   // user action
-           * }
-           * </pre>
-           */
+
           CompilationUnitScope cudScope = scope.compilationUnitScope();
           ReferenceBinding javaUtilIterator = scope.getJavaUtilIterator();
           ReferenceBinding javaLangIterable = scope.getJavaLangIterable();
           MethodBinding iterator = javaLangIterable.getExactMethod(ITERATOR, NO_TYPES, cudScope);
           MethodBinding hasNext = javaUtilIterator.getExactMethod(HAS_NEXT, NO_TYPES, cudScope);
           MethodBinding next = javaUtilIterator.getExactMethod(NEXT, NO_TYPES, cudScope);
-          JLocal iteratorVar =
-              JProgram.createLocal(info, (elementVarName + "$iterator"), typeMap
-                  .get(javaUtilIterator), false, curMethod.body);
+          ReferenceBinding iterateAsArrayType = findBindingWithIterateAsArray(
+              (ReferenceBinding) x.collection.resolvedType);
+          MethodBinding iterateAsArrayGetter = null;
+          MethodBinding iterateAsArrayLength = null;
 
-          List<JStatement> initializers = Lists.newArrayListWithCapacity(1);
-          // Iterator<T> i$iterator = collection.iterator()
-          initializers.add(makeDeclaration(info, iteratorVar, new JMethodCall(info, collection,
-              typeMap.get(iterator))));
-
-          // i$iterator.hasNext()
-          JExpression condition =
-              new JMethodCall(info, new JLocalRef(info, iteratorVar), typeMap.get(hasNext));
-
-          // T elementVar = (T) i$iterator.next();
-          elementDecl.initializer =
-              new JMethodCall(info, new JLocalRef(info, iteratorVar), typeMap.get(next));
-
-          // Perform any implicit reference type casts (due to generics).
-          // Note this occurs before potential unboxing.
-          if (elementVar.getType() != javaLangObject) {
-            TypeBinding collectionElementType = (TypeBinding) collectionElementTypeField.get(x);
-            JType toType = typeMap.get(collectionElementType);
-            assert (toType instanceof JReferenceType);
-            elementDecl.initializer = maybeCast(toType, elementDecl.initializer);
+          if (iterateAsArrayType != null) {
+            AnnotationBinding ab = JdtUtil.getAnnotation(iterateAsArrayType, ITERATEASARRAY_CLASS);
+            if (ab != null) {
+              iterateAsArrayGetter = getIterateAsArrayMethodBinding(cudScope, iterateAsArrayType,
+                  ab, "getter", INT_TYPE);
+              iterateAsArrayLength = getIterateAsArrayMethodBinding(cudScope, iterateAsArrayType,
+                  ab, "length", NO_TYPES);
+            }
           }
+          if (iterateAsArrayGetter != null && iterateAsArrayLength != null) {
+            /**
+             * <pre>
+             * for (final T[] i$array = collection,
+             *          int i$index = 0,
+             *          final int i$max = i$array.length();
+             *      i$index < i$max; ++i$index) {
+             *   T elementVar = i$array.at(i$index);
+             *   // user action
+             * }
+             * </pre>
+             */
+            JLocal arrayVar =
+                JProgram.createLocal(info, elementVarName + "$array", collection.getType(), true,
+                    curMethod.body);
+            JLocal indexVar =
+                JProgram.createLocal(info, elementVarName + "$index", JPrimitiveType.INT, false,
+                    curMethod.body);
+            JLocal maxVar =
+                JProgram.createLocal(info, elementVarName + "$max", JPrimitiveType.INT, true,
+                    curMethod.body);
 
-          body.addStmt(0, elementDecl);
+            JMethod lengthMethod = typeMap.get(iterateAsArrayLength);
+            JMethod getterMethod = typeMap.get(iterateAsArrayGetter);
 
-          result = new JForStatement(info, initializers, condition,
-              null, body);
+            List<JStatement> initializers = Lists.newArrayListWithCapacity(3);
+            // T[] i$array = arr
+            initializers.add(makeDeclaration(info, arrayVar, collection));
+            // int i$index = 0
+            initializers.add(makeDeclaration(info, indexVar, JIntLiteral.get(0)));
+            // int i$max = i$array.length()
+            initializers.add(makeDeclaration(info, maxVar, new JMethodCall(info, new JLocalRef(info,
+                arrayVar), lengthMethod)));
+
+            // i$index < i$max
+            JExpression condition =
+                new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.LT, new JLocalRef(
+                    info, indexVar), new JLocalRef(info, maxVar));
+
+            // ++i$index
+            JExpression increments = new JPrefixOperation(info, JUnaryOperator.INC,
+                new JLocalRef(info, indexVar));
+
+            // T elementVar = i$array.at(i$index);
+            elementDecl.initializer =
+                new JMethodCall(info, new JLocalRef(info, arrayVar), getterMethod,
+                    new JLocalRef(info, indexVar));
+            body.addStmt(0, elementDecl);
+
+            result = new JForStatement(info, initializers, condition, increments, body);
+          } else {
+            /**
+             * <pre>
+             * for (Iterator&lt;T&gt; i$iterator = collection.iterator(); i$iterator.hasNext();) {
+             *   T elementVar = i$iterator.next();
+             *   // user action
+             * }
+             * </pre>
+             */
+            JLocal iteratorVar =
+                JProgram.createLocal(info, (elementVarName + "$iterator"), typeMap
+                    .get(javaUtilIterator), false, curMethod.body);
+
+            List<JStatement> initializers = Lists.newArrayListWithCapacity(1);
+            // Iterator<T> i$iterator = collection.iterator()
+            initializers.add(makeDeclaration(info, iteratorVar, new JMethodCall(info, collection,
+                typeMap.get(iterator))));
+
+            // i$iterator.hasNext()
+            JExpression condition =
+                new JMethodCall(info, new JLocalRef(info, iteratorVar), typeMap.get(hasNext));
+
+            // T elementVar = (T) i$iterator.next();
+            elementDecl.initializer =
+                new JMethodCall(info, new JLocalRef(info, iteratorVar), typeMap.get(next));
+
+            // Perform any implicit reference type casts (due to generics).
+            // Note this occurs before potential unboxing.
+            if (elementVar.getType() != javaLangObject) {
+              TypeBinding collectionElementType = (TypeBinding) collectionElementTypeField.get(x);
+              JType toType = typeMap.get(collectionElementType);
+              assert (toType instanceof JReferenceType);
+              elementDecl.initializer = maybeCast(toType, elementDecl.initializer);
+            }
+
+            body.addStmt(0, elementDecl);
+
+            result = new JForStatement(info, initializers, condition,
+                null, body);
+          }
         }
 
         // May need to box or unbox the element assignment.
@@ -991,6 +1071,49 @@ public class GwtAstBuilder {
       } catch (Throwable e) {
         throw translateException(x, e);
       }
+    }
+
+    private MethodBinding getIterateAsArrayMethodBinding(CompilationUnitScope cudScope,
+        ReferenceBinding iterateAsArrayType, AnnotationBinding ab, String paramName,
+        TypeBinding[] paramTypes) {
+      String methodName = JdtUtil.getAnnotationParameterString(ab, paramName);
+      if (methodName != null) {
+        return iterateAsArrayType.getExactMethod(methodName.toCharArray(),
+            paramTypes, cudScope);
+      } else {
+        // TODO (cromwellian): report warning?
+      }
+      return null;
+    }
+
+    Map<ReferenceBinding, ReferenceBinding> iterateAsArrayCache =
+        new HashMap<ReferenceBinding, ReferenceBinding>();
+
+    private ReferenceBinding findBindingWithIterateAsArray(ReferenceBinding refBinding) {
+      ReferenceBinding itAsArray = iterateAsArrayCache.get(refBinding);
+      if (itAsArray == null) {
+        AnnotationBinding ab = JdtUtil.getAnnotation(refBinding.erasure(),
+            ITERATEASARRAY_CLASS);
+        if (ab != null) {
+          itAsArray = refBinding;
+        }
+        if (itAsArray == null && refBinding.superclass() != null) {
+          itAsArray = findBindingWithIterateAsArray(refBinding.superclass());
+        }
+        if (itAsArray == null) {
+          for (ReferenceBinding sup : refBinding.superInterfaces()) {
+            itAsArray = findBindingWithIterateAsArray(sup);
+            if (itAsArray != null) {
+              break;
+            }
+          }
+        }
+        if (itAsArray != null) {
+          itAsArray = (ReferenceBinding) itAsArray.erasure();
+          iterateAsArrayCache.put(refBinding, itAsArray);
+        }
+      }
+      return itAsArray;
     }
 
     @Override

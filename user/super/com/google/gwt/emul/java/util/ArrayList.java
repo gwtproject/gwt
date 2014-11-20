@@ -20,6 +20,7 @@ import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndex;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndexes;
 
+import com.google.gwt.core.client.impl.IterateAsArray;
 import com.google.gwt.lang.Array;
 
 import java.io.Serializable;

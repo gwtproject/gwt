@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfec397c_81f53ae9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T10:05:32Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.javac.GWTProblem.",
+      "revId": "46aeef083a48cd7ba28f7bc9e22a2d443e3cd59d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfec397c_61fa36d7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T10:05:32Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsExprStmt.",
+      "revId": "46aeef083a48cd7ba28f7bc9e22a2d443e3cd59d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfec397c_41ef3217",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T10:05:32Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsReturn.",
+      "revId": "46aeef083a48cd7ba28f7bc9e22a2d443e3cd59d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfec397c_21f42ee7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T10:05:32Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsRootScope.",
+      "revId": "46aeef083a48cd7ba28f7bc9e22a2d443e3cd59d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfec397c_01092a53",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T10:05:32Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsStatement.",
+      "revId": "46aeef083a48cd7ba28f7bc9e22a2d443e3cd59d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfec397c_e1052639",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T10:05:32Z",
+      "side": 1,
+      "message": "[error] Unused import - java.io.IOException.",
+      "revId": "46aeef083a48cd7ba28f7bc9e22a2d443e3cd59d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfec397c_c102222f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T10:05:32Z",
+      "side": 1,
+      "message": "[error] Unused import - java.io.StringReader.",
+      "revId": "46aeef083a48cd7ba28f7bc9e22a2d443e3cd59d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

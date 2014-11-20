@@ -16,6 +16,23 @@
       "revId": "6e290f65359678e5592741c0d4f25c7d2d8309c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfec397c_612356d5",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T10:15:33Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "6e290f65359678e5592741c0d4f25c7d2d8309c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

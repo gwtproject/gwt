@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f0251f8_2192eae0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Verifier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T23:44:36Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "f1c3ae99496f3e25e72f7db4ef3b0ded67df3627",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f0251f8_0187eea2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Verifier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T23:44:36Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "f1c3ae99496f3e25e72f7db4ef3b0ded67df3627",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f0251f8_e183e292",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Verifier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T23:44:36Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "f1c3ae99496f3e25e72f7db4ef3b0ded67df3627",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f0251f8_c180e688",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/PrunerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-20T23:44:36Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "f1c3ae99496f3e25e72f7db4ef3b0ded67df3627",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

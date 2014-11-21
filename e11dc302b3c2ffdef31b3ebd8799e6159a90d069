@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f97cd02_6d2d6187",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-21T23:07:32Z",
+      "side": 1,
+      "message": "Could you also order the public methods alphabetically. We don\u0027t enforce that thoroughly, but I think it is worth doing in this case.",
+      "revId": "e11dc302b3c2ffdef31b3ebd8799e6159a90d069",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f97cd02_cdffd5be",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-21T23:07:32Z",
+      "side": 1,
+      "message": "Maybe to follow the previous conventions (visit, endVisit) we should name enter*() just enter(), e.g.\n\n  public boolean enter(JConstructor x, Context ctx) {\n    return enter((JMethod) x, Context ctx);\n  }\n\nDo this for exit as well.",
+      "revId": "e11dc302b3c2ffdef31b3ebd8799e6159a90d069",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f97cd02_ed64110b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-21T23:07:32Z",
+      "side": 1,
+      "message": "Add this as a comment to the beginning of JChangeTrackingVisitor\n\n  Subclasses of JChangeTrackingVisitor should override enter/exit instead of visit/endVisit for JMethod, JConstructor and JField",
+      "revId": "e11dc302b3c2ffdef31b3ebd8799e6159a90d069",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f97cd02_8d09cd20",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-21T23:07:32Z",
+      "side": 1,
+      "message": "Shouldn\u0027t madeChanges be final protected.",
+      "revId": "e11dc302b3c2ffdef31b3ebd8799e6159a90d069",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f97cd02_2dc4396e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-21T23:07:32Z",
+      "side": 1,
+      "message": "also change the names here of\n \ns/fieldWasRemoved/wasRemoved/\ns/methodWasRemoved/wasRemoved/\n\nalso make them final",
+      "revId": "e11dc302b3c2ffdef31b3ebd8799e6159a90d069",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f97cd02_d831d50c",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-21T23:07:32Z",
+      "side": 1,
+      "message": "Can you also add tests that verify the modification tracking part.\n\nYou run a couple of visitor, incrementing counter and you assert the expected values for optimizerContext.getModified*Since() etc.",
+      "revId": "e11dc302b3c2ffdef31b3ebd8799e6159a90d069",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

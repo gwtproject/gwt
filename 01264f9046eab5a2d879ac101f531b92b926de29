@@ -78,6 +78,24 @@
     },
     {
       "key": {
+        "uuid": "7f97cd02_72ff8077",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1687,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-21T22:09:48Z",
+      "side": 1,
+      "message": "It seems to me that we expect that static impl does not exist, hence it is better to write the assert documenting the expectation than an defensive if. \n\ns/maybeDefenderMethod/method/",
+      "parentUuid": "3a72c391_d4dddce9",
+      "revId": "01264f9046eab5a2d879ac101f531b92b926de29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da69a7a3_5f864373",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
         "patchSetId": 3
@@ -177,6 +195,24 @@
       "side": 1,
       "message": "The redeclareAsAbstract() concrete method above does that (as well as showing abstract redeclarations on intervening interfaces or classes do not interfere with proper resolution)",
       "parentUuid": "da69a7a3_08ed6f4d",
+      "revId": "01264f9046eab5a2d879ac101f531b92b926de29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f97cd02_327c9857",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-21T22:09:48Z",
+      "side": 1,
+      "message": "Sorry I missed that. Could you add a similar one for the Java8AstTest",
+      "parentUuid": "3a72c391_f4e2d8ac",
       "revId": "01264f9046eab5a2d879ac101f531b92b926de29",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

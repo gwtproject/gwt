@@ -19,14 +19,12 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.javac.MemoryUnitCache.UnitCacheEntry;
-import com.google.gwt.dev.jjs.ast.JNode;
+import com.google.gwt.dev.util.CompilerVersion;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
-import com.google.gwt.thirdparty.guava.common.hash.Hashing;
-import com.google.gwt.thirdparty.guava.common.io.Files;
 import com.google.gwt.util.tools.Utility;
 
 import java.io.BufferedOutputStream;
@@ -34,8 +32,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.net.JarURLConnection;
-import java.net.URLConnection;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,7 +45,7 @@ class PersistentUnitCacheDir {
   private static final String CACHE_FILE_PREFIX = "gwt-unitCache-";
 
   static final String CURRENT_VERSION_CACHE_FILE_PREFIX =
-      CACHE_FILE_PREFIX + compilerVersion() + "-";
+      CACHE_FILE_PREFIX + CompilerVersion.getHash() + "-";
 
   private final TreeLogger logger;
   private final File dir;
@@ -252,27 +248,6 @@ class PersistentUnitCacheDir {
     }
 
     return newFile;
-  }
-
-  // TODO: use CompilerVersion class after it's committed.
-  private static String compilerVersion() {
-    String hash = "unknown";
-    try {
-      URLConnection urlConnection =
-          JNode.class.getResource("JNode.class").openConnection();
-      if (urlConnection instanceof JarURLConnection) {
-        String gwtdevJar = ((JarURLConnection) urlConnection).getJarFile().getName();
-        hash = Files.hash(new File(gwtdevJar), Hashing.sha1()).toString();
-      } else {
-        System.err.println("Couldn't find the GWT compiler jar file. "
-            + "Serialization errors might occur when accessing the persistent unit cache.");
-      }
-    } catch (IOException e) {
-      System.err.println("Couldn't compute the hash for the GWT compiler jar file."
-          + "Serialization errors might occur when accessing the persistent unit cache.");
-      e.printStackTrace();
-    }
-    return hash;
   }
 
   /**

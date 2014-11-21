@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f97cd02_a4486626",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-21T23:24:26Z",
+      "side": 1,
+      "message": "s/background/backgroundService",
+      "range": {
+        "startLine": 94,
+        "startChar": 34,
+        "endLine": 94,
+        "endChar": 44
+      },
+      "revId": "fe194d1c0ae0a7010843dbd9c5b7360c33591145",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f97cd02_4d4ae5a2",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-21T23:24:26Z",
+      "side": 1,
+      "message": "i see that you\u0027re taking care to make sure that all access to unitMap and unitMapByContentId are within synchronized PersistentUnitCache functions, but they are fields of the MemoryUnitCache parent class, and it accesses them in the get(), remove() and find() functions in an unsynchronized manner.\n\nyou probably need to override and synchronize those functions here\n\n\nwithout such synchronization, i think for example a remove() and a cleanup() would step on eachother",
+      "range": {
+        "startLine": 217,
+        "startChar": 6,
+        "endLine": 217,
+        "endChar": 18
+      },
+      "revId": "fe194d1c0ae0a7010843dbd9c5b7360c33591145",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f1e355a_08083796",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-21T23:24:26Z",
+      "side": 1,
+      "message": "status",
+      "range": {
+        "startLine": 400,
+        "startChar": 16,
+        "endLine": 400,
+        "endChar": 20
+      },
+      "revId": "fe194d1c0ae0a7010843dbd9c5b7360c33591145",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

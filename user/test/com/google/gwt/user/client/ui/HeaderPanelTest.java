@@ -20,6 +20,7 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.UIObject;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -213,6 +214,12 @@ public class HeaderPanelTest extends PanelTestBase<HeaderPanel> {
     Label widget = new Label("hello world");
     panel.setContentWidget(widget);
     assertEquals(widget, panel.getContentWidget());
+
+    // Test for issue 7037
+    widget = new Label("hello world 2");
+    panel.setContentWidget(widget);
+    assertTrue("Issue 7037", UIObject.isVisible(
+	    panel.getContentWidget().getElement().getParentElement()));
 
     panel.remove(widget);
     assertNull(panel.getContentWidget());

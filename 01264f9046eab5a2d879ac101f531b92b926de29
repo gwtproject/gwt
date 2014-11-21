@@ -60,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "3a72c391_d4dddce9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1687,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-21T10:12:05Z",
+      "side": 1,
+      "message": "Done. Not sure if resolveType is called more than once, but it would probably throw an assertion error here if it was.",
+      "parentUuid": "da69a7a3_df9a53d1",
+      "revId": "01264f9046eab5a2d879ac101f531b92b926de29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da69a7a3_5f864373",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
         "patchSetId": 3
@@ -141,6 +159,24 @@
       "side": 1,
       "message": "I meant Interface.super.method() (tests your changes to gwtastbuilder)",
       "parentUuid": "da69a7a3_cdd1c95e",
+      "revId": "01264f9046eab5a2d879ac101f531b92b926de29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a72c391_f4e2d8ac",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-21T10:12:05Z",
+      "side": 1,
+      "message": "The redeclareAsAbstract() concrete method above does that (as well as showing abstract redeclarations on intervening interfaces or classes do not interfere with proper resolution)",
+      "parentUuid": "da69a7a3_08ed6f4d",
       "revId": "01264f9046eab5a2d879ac101f531b92b926de29",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

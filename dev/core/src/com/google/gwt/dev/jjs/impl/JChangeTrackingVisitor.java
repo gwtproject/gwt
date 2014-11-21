@@ -14,6 +14,7 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
@@ -33,7 +34,11 @@ public abstract class JChangeTrackingVisitor extends JModVisitor {
     this.optimizerCtx = optimizerCtx;
   }
 
-  public boolean enterField(JField f, Context ctx) {
+  public boolean enterConstructor(JConstructor x, Context ctx) {
+    return enterMethod(x, ctx);
+  }
+
+  public boolean enterField(JField x, Context ctx) {
     return true;
   }
 
@@ -49,12 +54,25 @@ public abstract class JChangeTrackingVisitor extends JModVisitor {
     return currentMethod;
   }
 
+  public void exitConstructor(JConstructor x, Context ctx) {
+    exitMethod(x, ctx);
+  }
+
   public void exitField(JField f, Context ctx) {
     return;
   }
 
   public void exitMethod(JMethod x, Context ctx) {
     return;
+  }
+
+  @Override
+  public final void endVisit(JConstructor x, Context ctx) {
+    exitConstructor(x, ctx);
+    if (methodModified) {
+      optimizerCtx.markModifiedMethod(x);
+    }
+    currentMethod = null;
   }
 
   @Override
@@ -73,6 +91,13 @@ public abstract class JChangeTrackingVisitor extends JModVisitor {
       optimizerCtx.markModifiedMethod(x);
     }
     currentMethod = null;
+  }
+
+  @Override
+  public final boolean visit(JConstructor x, Context ctx) {
+    currentMethod = x;
+    methodModified = false;
+    return enterConstructor(x, ctx);
   }
 
   @Override

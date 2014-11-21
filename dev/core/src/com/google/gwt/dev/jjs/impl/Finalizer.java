@@ -72,7 +72,7 @@ public class Finalizer {
     }
 
     @Override
-    public void endVisit(JConstructor x, Context ctx) {
+    public void exitConstructor(JConstructor x, Context ctx) {
       // Not applicable.
     }
 

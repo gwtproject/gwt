@@ -25,6 +25,7 @@ import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
+import com.google.gwt.thirdparty.guava.common.util.concurrent.Futures;
 import com.google.gwt.util.tools.Utility;
 
 import java.io.BufferedInputStream;
@@ -124,7 +125,7 @@ class PersistentUnitCache extends MemoryUnitCache {
   /**
    * Used to execute the above Runnables in a background thread.
    */
-  private final ExecutorService backgroundService;
+  private ExecutorService backgroundService;
 
   private int addedSinceLastCleanup = 0;
 
@@ -139,6 +140,10 @@ class PersistentUnitCache extends MemoryUnitCache {
     this.logger = logger;
     cacheDir = new PersistentUnitCacheDir(logger, parentDir);
 
+    start();
+  }
+
+  private void start() {
     backgroundService = Executors.newSingleThreadExecutor();
     Runtime.getRuntime().addShutdownHook(new Thread() {
       @Override
@@ -188,6 +193,20 @@ class PersistentUnitCache extends MemoryUnitCache {
     addedSinceLastCleanup++;
     super.add(newUnit);
     return addImpl(unitMap.get(newUnit.getResourcePath()));
+  }
+
+  @Override
+  public void clear() throws UnableToCompleteException {
+    super.clear();
+
+    backgroundService.submit(new Runnable() {
+      @Override
+      public void run() {
+        cacheDir.deleteClosedCacheFiles();
+      }
+    }, Boolean.TRUE);
+    Futures.getUnchecked(backgroundService.submit(shutdownThreadTask));
+    start();
   }
 
   /**

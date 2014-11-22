@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "bf0a2512_d238a411",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-22T09:04:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f97cd02_be839961",
+      "revId": "15c9bce85d01bfe1dd89038b62daad6c793937f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f97cd02_1efe4d11",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 5
@@ -47,6 +65,24 @@
       "writtenOn": "2014-11-21T19:43:23Z",
       "side": 1,
       "message": "Can you add two more tests:\n\nFirst one shows if the same method is inherited from both a concrete class and interface with default, the one from the concrete is used?\n\nSecond one shows if the same method is inherited from both a concrete class and two interfaces with defaults, the concrete one is used.",
+      "revId": "15c9bce85d01bfe1dd89038b62daad6c793937f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_b235301a",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-22T09:04:14Z",
+      "side": 1,
+      "message": "The former is handeld by the existing DefaultInterfaceImplVirtualUpRef which inherits a concrete method from VirtualUpRef as well as a default method.\n\nI added the second, which I take to mean one default interface X subtyping another default interface Y overriding the same method and having C implement X,, because there\u0027s already test of C implementing X,Y. You\u0027re not allowed multiple inheritance of defenders that conflict without writing a concrete override anyway, and there\u0027s already a test for that.",
+      "parentUuid": "7f97cd02_1efe4d11",
       "revId": "15c9bce85d01bfe1dd89038b62daad6c793937f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

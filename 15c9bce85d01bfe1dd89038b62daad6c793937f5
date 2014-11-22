@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "bf0a2512_2d50a51e",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-11-22T18:33:42Z",
+      "side": 1,
+      "message": "I might be wrong but in your tests I can\u0027t see a case where B doesn\u0027t implement A1. That\u0027s the point of this test.",
+      "parentUuid": "bf0a2512_cd1b698f",
+      "revId": "15c9bce85d01bfe1dd89038b62daad6c793937f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f97cd02_fe836192",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 5

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ff6c9df2_9a24ad50",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-22T00:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f97cd02_a4486626",
+      "range": {
+        "startLine": 94,
+        "startChar": 34,
+        "endLine": 94,
+        "endChar": 44
+      },
+      "revId": "fe194d1c0ae0a7010843dbd9c5b7360c33591145",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f97cd02_4d4ae5a2",
         "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ff6c9df2_ba21713f",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-22T00:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f97cd02_4d4ae5a2",
+      "range": {
+        "startLine": 217,
+        "startChar": 6,
+        "endLine": 217,
+        "endChar": 18
+      },
+      "revId": "fe194d1c0ae0a7010843dbd9c5b7360c33591145",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f1e355a_08083796",
         "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2014-11-21T23:24:26Z",
       "side": 1,
       "message": "status",
+      "range": {
+        "startLine": 400,
+        "startChar": 16,
+        "endLine": 400,
+        "endChar": 20
+      },
+      "revId": "fe194d1c0ae0a7010843dbd9c5b7360c33591145",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff6c9df2_3a67a198",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-11-22T00:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f1e355a_08083796",
       "range": {
         "startLine": 400,
         "startChar": 16,

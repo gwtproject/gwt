@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "bf0a2512_cd900957",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-22T19:35:50Z",
+      "side": 1,
+      "message": "Testcase Scenario 1 is the testVirtualUpRef case.\n\nI added Case 2, but it covers the same pathway as Case 1. UnifyAst is just going to visit B, mark \u0027methodA\u0027 as implemented, and when it visits A1/A2 it won\u0027t do anything.\n\nThe underlying algorithm doesn\u0027t care about the Javaisms here, it only sees a graph C2 -\u003e {B,A1,A2}, it does a depth first search looking for nodes that don\u0027t have a concrete version earlier in the graph.",
+      "parentUuid": "bf0a2512_2d50a51e",
+      "revId": "15c9bce85d01bfe1dd89038b62daad6c793937f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f97cd02_fe836192",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 5

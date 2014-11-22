@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "bf0a2512_cd1b698f",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-22T10:36:19Z",
+      "side": 1,
+      "message": "Done. Although Scenario 2 is really just Scenario 1, because B provides the method implementation as far as JDT/UnifyAst are concerned.",
+      "parentUuid": "ff6c9df2_ae804f87",
+      "revId": "15c9bce85d01bfe1dd89038b62daad6c793937f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f97cd02_fe836192",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 5

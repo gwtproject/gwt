@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ff6c9df2_ae804f87",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-11-22T10:01:42Z",
+      "side": 1,
+      "message": "Actually you can in this scenario, that is why I wanted a test.\n\n  interface A1 {\n    default int methodA() { return 10; }\n  }\n\n  interface A2 {\n    default int methodA() { return 10; }\n  }\n\n  static class B {\n    public int methodA() { return 42; }\n  }\n  \n  // Test Scenario 1\n  static class C1 extends B implements A1 {}\n\n\n  // Test Scenario 2\n  static class C2 extends B implements A1, A2 {}",
+      "parentUuid": "bf0a2512_b235301a",
+      "revId": "15c9bce85d01bfe1dd89038b62daad6c793937f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f97cd02_fe836192",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 5

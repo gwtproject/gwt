@@ -334,7 +334,7 @@ public abstract class JavaToJavaScriptCompiler {
             splitJsIntoFragments(props, permutationId, jjsmap);
 
         // TODO(stalcup): move to optimize.
-        Map<JsName, JsLiteral> internedLiteralByVariableName = renameJsSymbols(props);
+        Map<JsName, JsLiteral> internedLiteralByVariableName = renameJsSymbols(props, jjsmap);
 
         // TODO(stalcup): move to normalization
         JsBreakUpLargeVarStatements.exec(jsProgram, props.getConfigProps());
@@ -387,8 +387,8 @@ public abstract class JavaToJavaScriptCompiler {
 
     protected abstract void postNormalizationOptimizeJava();
 
-    protected abstract Map<JsName, JsLiteral> runDetailedNamer(ConfigProps config)
-        throws IllegalNameException;
+    protected abstract Map<JsName, JsLiteral> runDetailedNamer(ConfigProps config,
+        JavaToJavaScriptMap jjsmap) throws IllegalNameException;
 
     protected abstract Pair<SyntheticArtifact, MultipleDependencyGraphRecorder> splitJsIntoFragments(
         PermProps props, int permutationId, JavaToJavaScriptMap jjsmap);
@@ -825,19 +825,19 @@ public abstract class JavaToJavaScriptCompiler {
       }
     }
 
-    private Map<JsName, JsLiteral> renameJsSymbols(PermProps props)
+    private Map<JsName, JsLiteral> renameJsSymbols(PermProps props, JavaToJavaScriptMap jjsmap)
         throws UnableToCompleteException {
       Map<JsName, JsLiteral> internedLiteralByVariableName;
       try {
         switch (options.getOutput()) {
           case OBFUSCATED:
-            internedLiteralByVariableName = runObfuscateNamer(props);
+            internedLiteralByVariableName = runObfuscateNamer(props, jjsmap);
             break;
           case PRETTY:
-            internedLiteralByVariableName = runPrettyNamer(props.getConfigProps());
+            internedLiteralByVariableName = runPrettyNamer(props.getConfigProps(), jjsmap);
             break;
           case DETAILED:
-            internedLiteralByVariableName = runDetailedNamer(props.getConfigProps());
+            internedLiteralByVariableName = runDetailedNamer(props.getConfigProps(), jjsmap);
             break;
           default:
             throw new InternalCompilerException("Unknown output mode");
@@ -850,13 +850,14 @@ public abstract class JavaToJavaScriptCompiler {
           ImmutableMap.<JsName, JsLiteral>of() : internedLiteralByVariableName;
     }
 
-    private Map<JsName, JsLiteral> runObfuscateNamer(PermProps props) throws IllegalNameException {
+    private Map<JsName, JsLiteral> runObfuscateNamer(PermProps props, JavaToJavaScriptMap jjsmap)
+        throws IllegalNameException {
       Map<JsName, JsLiteral> internedLiteralByVariableName =
           JsLiteralInterner.exec(jprogram, jsProgram, (byte) (JsLiteralInterner.INTERN_ALL
               & (byte) (jprogram.typeOracle.isJsInteropEnabled()
               ? ~JsLiteralInterner.INTERN_STRINGS : ~0)));
       FreshNameGenerator freshNameGenerator = JsObfuscateNamer.exec(jsProgram,
-          props.getConfigProps());
+          props.getConfigProps(), jjsmap);
       if (options.shouldRemoveDuplicateFunctions()
           && JsStackEmulator.getStackMode(props) == JsStackEmulator.StackMode.STRIP) {
         JsDuplicateFunctionRemover.exec(jsProgram, freshNameGenerator);
@@ -864,10 +865,11 @@ public abstract class JavaToJavaScriptCompiler {
       return internedLiteralByVariableName;
     }
 
-    private Map<JsName, JsLiteral> runPrettyNamer(ConfigProps config) throws IllegalNameException {
+    private Map<JsName, JsLiteral> runPrettyNamer(ConfigProps config, JavaToJavaScriptMap jjsmap)
+        throws IllegalNameException {
       if (compilerContext.getOptions().isIncrementalCompileEnabled()) {
         JsPersistentPrettyNamer.exec(jsProgram, config,
-            compilerContext.getMinimalRebuildCache().getPersistentPrettyNamerState());
+            compilerContext.getMinimalRebuildCache().getPersistentPrettyNamerState(), jjsmap);
         return null;
       }
 
@@ -876,7 +878,7 @@ public abstract class JavaToJavaScriptCompiler {
           jprogram, jsProgram,
           (byte) (JsLiteralInterner.INTERN_ALL & ~JsLiteralInterner.INTERN_STRINGS));
 
-      JsPrettyNamer.exec(jsProgram, config);
+      JsPrettyNamer.exec(jsProgram, config, jjsmap);
       return internedLiteralByVariableName;
     }
   }

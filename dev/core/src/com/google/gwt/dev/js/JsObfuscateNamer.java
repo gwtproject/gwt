@@ -16,6 +16,7 @@
 package com.google.gwt.dev.js;
 
 import com.google.gwt.dev.cfg.ConfigProps;
+import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsScope;
@@ -37,12 +38,12 @@ public class JsObfuscateNamer extends JsNamer implements FreshNameGenerator {
       '2', '3', '4', '5', '6', '7', '8', '9'};
 
   public static FreshNameGenerator exec(JsProgram program) throws IllegalNameException {
-    return exec(program, null);
+    return exec(program, null, null);
   }
 
-  public static FreshNameGenerator exec(JsProgram program, ConfigProps config)
-      throws IllegalNameException {
-    JsObfuscateNamer namer = new JsObfuscateNamer(program, config);
+  public static FreshNameGenerator exec(JsProgram program, ConfigProps config,
+      JavaToJavaScriptMap jjsmap) throws IllegalNameException {
+    JsObfuscateNamer namer = new JsObfuscateNamer(program, config, jjsmap);
     namer.execImpl();
     return namer;
   }
@@ -74,13 +75,14 @@ public class JsObfuscateNamer extends JsNamer implements FreshNameGenerator {
    * running the global renaming again.
    */
   private int maxId = -1;
+
   /**
    * A temp buffer big enough to hold at least 32 bits worth of base-64 chars.
    */
-  private final char[] sIdentBuf = new char[6];
+  private static final char[] sIdentBuf = new char[6];
 
-  public JsObfuscateNamer(JsProgram program, ConfigProps config) {
-    super(program, config);
+  public JsObfuscateNamer(JsProgram program, ConfigProps config, JavaToJavaScriptMap jjsmap) {
+    super(program, config, jjsmap);
   }
 
   @Override
@@ -146,7 +148,7 @@ public class JsObfuscateNamer extends JsNamer implements FreshNameGenerator {
     return (scope.findExistingUnobfuscatableName(newIdent) == null);
   }
 
-  private String makeObfuscatedIdent(int id) {
+  public static String makeObfuscatedIdent(int id) {
     // Use base-54 for the first character of the identifier,
     // so that we don't use any numbers (which are illegal at
     // the beginning of an identifier).

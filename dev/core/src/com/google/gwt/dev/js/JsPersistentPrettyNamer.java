@@ -14,6 +14,7 @@
 package com.google.gwt.dev.js;
 
 import com.google.gwt.dev.cfg.ConfigProps;
+import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsScope;
@@ -39,41 +40,44 @@ public class JsPersistentPrettyNamer extends JsNamer {
    */
   public static class PersistentPrettyNamerState implements Serializable {
 
+    private int nextObfuscatedId = -1;
+    private Map<String, String> renamedIdentByOriginalIdent = Maps.newHashMap();
     private Multiset<String> shortIdentCollisionCounts = HashMultiset.create();
-    private Map<String, String> prettyIdentByOriginalIdent = Maps.newHashMap();
-    private Set<String> usedPrettyIdents = Sets.newHashSet();
+    private Set<String> usedIdents = Sets.newHashSet();
 
     public void copyFrom(PersistentPrettyNamerState that) {
       this.shortIdentCollisionCounts.clear();
-      this.prettyIdentByOriginalIdent.clear();
-      this.usedPrettyIdents.clear();
+      this.renamedIdentByOriginalIdent.clear();
+      this.usedIdents.clear();
 
       this.shortIdentCollisionCounts.addAll(that.shortIdentCollisionCounts);
-      this.prettyIdentByOriginalIdent.putAll(that.prettyIdentByOriginalIdent);
-      this.usedPrettyIdents.addAll(that.usedPrettyIdents);
+      this.renamedIdentByOriginalIdent.putAll(that.renamedIdentByOriginalIdent);
+      this.usedIdents.addAll(that.usedIdents);
+      this.nextObfuscatedId = that.nextObfuscatedId;
     }
 
     @VisibleForTesting
     public boolean hasSameContent(PersistentPrettyNamerState that) {
       return Objects.equal(this.shortIdentCollisionCounts, that.shortIdentCollisionCounts)
-          && Objects.equal(this.prettyIdentByOriginalIdent, that.prettyIdentByOriginalIdent)
-          && Objects.equal(this.usedPrettyIdents, that.usedPrettyIdents);
+          && Objects.equal(this.renamedIdentByOriginalIdent, that.renamedIdentByOriginalIdent)
+          && Objects.equal(this.usedIdents, that.usedIdents)
+          && Objects.equal(this.nextObfuscatedId, that.nextObfuscatedId);
     }
   }
 
   @VisibleForTesting
   public static final String RESERVED_IDENT_SUFFIX = "_g$";
 
-  public static void exec(JsProgram program, ConfigProps config, PersistentPrettyNamerState state)
-      throws IllegalNameException {
-    new JsPersistentPrettyNamer(program, config, state).execImpl();
+  public static void exec(JsProgram program, ConfigProps config, PersistentPrettyNamerState state,
+      JavaToJavaScriptMap jjsmap) throws IllegalNameException {
+    new JsPersistentPrettyNamer(program, config, state, jjsmap).execImpl();
   }
 
   private final PersistentPrettyNamerState state;
 
   public JsPersistentPrettyNamer(JsProgram program, ConfigProps config,
-      PersistentPrettyNamerState state) {
-    super(program, config);
+      PersistentPrettyNamerState state, JavaToJavaScriptMap jjsmap) {
+    super(program, config, jjsmap);
     this.state = state;
   }
 
@@ -93,35 +97,55 @@ public class JsPersistentPrettyNamer extends JsNamer {
     for (JsName name : scope.getAllNames()) {
       if (!name.isObfuscatable()) {
         // Unobfuscatable names become themselves.
-        String prettyIdent = name.getIdent();
-        if (prettyIdent.endsWith(RESERVED_IDENT_SUFFIX)) {
-          throw new IllegalNameException("Identifier " + prettyIdent + " ends with "
+        String ident = name.getIdent();
+        if (ident.endsWith(RESERVED_IDENT_SUFFIX)) {
+          throw new IllegalNameException("Identifier " + ident + " ends with "
               + RESERVED_IDENT_SUFFIX
               + ". This is not allowed since that suffix is used to separate obfuscatable and "
               + "nonobfuscatable names in per-file compiles.");
         }
-        name.setShortIdent(prettyIdent);
+        name.setShortIdent(ident);
         continue;
       }
 
-      name.setShortIdent(getOrCreatePrettyIdent(name));
+      name.setShortIdent(getOrCreateIdent(name));
     }
   }
 
-  private String getOrCreatePrettyIdent(JsName name) {
+  private String getOrCreateIdent(JsName name) {
     String originalIdent = name.getIdent();
     String shortIdent = name.getShortIdent();
 
     // Reuse previous names.
-    if (state.prettyIdentByOriginalIdent.containsKey(originalIdent)) {
-      return state.prettyIdentByOriginalIdent.get(originalIdent);
+    if (state.renamedIdentByOriginalIdent.containsKey(originalIdent)) {
+      return state.renamedIdentByOriginalIdent.get(originalIdent);
+    }
+
+    // If the name is for a method.
+    if (jjsmap != null && jjsmap.nameToMethod(name) != null) {
+      // Come up with an obfuscated name (since OptionDisplayName will show it properly) and cache
+      // it for reuse.
+      String obfuscatedIdent = makeObfuscatedIdent();
+      state.usedIdents.add(obfuscatedIdent);
+      state.renamedIdentByOriginalIdent.put(originalIdent, obfuscatedIdent);
+      return obfuscatedIdent;
     }
 
     // Otherwise come up with a new pretty name and cache it for reuse.
     String prettyIdent = makePrettyName(shortIdent);
-    state.usedPrettyIdents.add(prettyIdent);
-    state.prettyIdentByOriginalIdent.put(originalIdent, prettyIdent);
+    state.usedIdents.add(prettyIdent);
+    state.renamedIdentByOriginalIdent.put(originalIdent, prettyIdent);
     return prettyIdent;
+  }
+
+  private String makeObfuscatedIdent() {
+    while (true) {
+      String obfuscatedIdent =
+          JsObfuscateNamer.makeObfuscatedIdent(++state.nextObfuscatedId) + RESERVED_IDENT_SUFFIX;
+      if (reserved.isAvailable(obfuscatedIdent) && !state.usedIdents.contains(obfuscatedIdent)) {
+        return obfuscatedIdent;
+      }
+    }
   }
 
   private String makePrettyName(String shortIdent) {
@@ -129,7 +153,7 @@ public class JsPersistentPrettyNamer extends JsNamer {
       String prettyIdent = shortIdent + "_" + state.shortIdentCollisionCounts.count(shortIdent)
           + RESERVED_IDENT_SUFFIX;
       state.shortIdentCollisionCounts.add(shortIdent);
-      if (reserved.isAvailable(prettyIdent) && !state.usedPrettyIdents.contains(prettyIdent)) {
+      if (reserved.isAvailable(prettyIdent) && !state.usedIdents.contains(prettyIdent)) {
         return prettyIdent;
       }
     }

@@ -174,16 +174,16 @@ public class JsNamerTest extends TestCase {
     switch (outputOption) {
       case PRETTY:
         if (persistent) {
-          JsPersistentPrettyNamer.exec(program, config, persistentPrettyNamerState);
+          JsPersistentPrettyNamer.exec(program, config, persistentPrettyNamerState, null);
         } else {
-          JsPrettyNamer.exec(program, config);
+          JsPrettyNamer.exec(program, config, null);
         }
         break;
       case OBFUSCATED:
-        JsObfuscateNamer.exec(program, config);
+        JsObfuscateNamer.exec(program, config, null);
         break;
       case DETAILED:
-        JsVerboseNamer.exec(program, config);
+        JsVerboseNamer.exec(program, config, null);
         break;
     }
     TextOutput text = new DefaultTextOutput(true);

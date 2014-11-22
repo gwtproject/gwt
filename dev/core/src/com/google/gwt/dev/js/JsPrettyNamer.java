@@ -16,6 +16,7 @@
 package com.google.gwt.dev.js;
 
 import com.google.gwt.dev.cfg.ConfigProps;
+import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsScope;
@@ -29,12 +30,13 @@ import java.util.Set;
  */
 public class JsPrettyNamer extends JsNamer {
 
-  public static void exec(JsProgram program, ConfigProps config) throws IllegalNameException {
-    new JsPrettyNamer(program, config).execImpl();
+  public static void exec(JsProgram program, ConfigProps config, JavaToJavaScriptMap jjsmap)
+      throws IllegalNameException {
+    new JsPrettyNamer(program, config, jjsmap).execImpl();
   }
 
-  public JsPrettyNamer(JsProgram program, ConfigProps config) {
-    super(program, config);
+  public JsPrettyNamer(JsProgram program, ConfigProps config, JavaToJavaScriptMap jjsmap) {
+    super(program, config, jjsmap);
   }
 
   @Override

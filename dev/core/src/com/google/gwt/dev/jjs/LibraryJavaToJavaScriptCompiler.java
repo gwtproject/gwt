@@ -128,9 +128,9 @@ public class LibraryJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler {
     }
 
     @Override
-    protected Map<JsName, JsLiteral> runDetailedNamer(ConfigProps config)
-        throws IllegalNameException {
-      JsVerboseNamer.exec(jsProgram, config);
+    protected Map<JsName, JsLiteral> runDetailedNamer(ConfigProps config,
+        JavaToJavaScriptMap jjsmap) throws IllegalNameException {
+      JsVerboseNamer.exec(jsProgram, config, jjsmap);
       return null;
     }
 

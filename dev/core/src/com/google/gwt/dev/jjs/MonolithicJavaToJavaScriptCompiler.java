@@ -155,8 +155,8 @@ public class MonolithicJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler
     }
 
     @Override
-    protected Map<JsName, JsLiteral> runDetailedNamer(ConfigProps config)
-        throws IllegalNameException {
+    protected Map<JsName, JsLiteral> runDetailedNamer(ConfigProps config,
+        JavaToJavaScriptMap jjsmap) throws IllegalNameException {
       Map<JsName, JsLiteral> internedTextByVariableName = null;
       if (shouldOptimize()) {
         // Only perform the interning optimization when optimizations are enabled.
@@ -165,7 +165,7 @@ public class MonolithicJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler
                 & (byte) (jprogram.typeOracle.isJsInteropEnabled()
                 ? ~JsLiteralInterner.INTERN_STRINGS : ~0)));
       }
-      JsVerboseNamer.exec(jsProgram, config);
+      JsVerboseNamer.exec(jsProgram, config, jjsmap);
       return internedTextByVariableName;
     }
 

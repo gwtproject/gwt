@@ -16,6 +16,7 @@
 package com.google.gwt.dev.js;
 
 import com.google.gwt.dev.cfg.ConfigProps;
+import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsForIn;
 import com.google.gwt.dev.js.ast.JsFunction;
@@ -100,10 +101,13 @@ public abstract class JsNamer {
 
   protected final ReservedNames reserved;
 
-  public JsNamer(JsProgram program, ConfigProps config) {
+  protected final JavaToJavaScriptMap jjsmap;
+
+  public JsNamer(JsProgram program, ConfigProps config, JavaToJavaScriptMap jjsmap) {
     this.program = program;
     referenced = collectReferencedNames(program);
     reserved = new ReservedNames(config);
+    this.jjsmap = jjsmap;
   }
 
   protected final void execImpl() throws IllegalNameException {

@@ -39,6 +39,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.ArgHandlerSaveSourceOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
+import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
@@ -180,6 +181,7 @@ public class Compiler {
         if (options.getOutput() == JsOutputOption.OBFUSCATED) {
           options.setOutput(JsOutputOption.PRETTY);
         }
+        options.setMethodNameDisplayMode(OptionMethodNameDisplayMode.Mode.ONLY_METHOD_NAME);
 
         // Disable options that disrupt reference consistency across multiple compiles.
         // TODO(stalcup): preserve Namespace state in MinimalRebuildCache across compiles.

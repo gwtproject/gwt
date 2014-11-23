@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff6c9df2_09b7f55b",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-23T21:46:20Z",
+      "side": 1,
+      "message": "[error] \u0027org.apache.commons.io.IOUtils\u0027 should be separated from previous imports.",
+      "revId": "b0ee8098aee320ea826cc4d7a35f76d7b2f7a5e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff6c9df2_a9c369c2",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-23T21:46:20Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "b0ee8098aee320ea826cc4d7a35f76d7b2f7a5e1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

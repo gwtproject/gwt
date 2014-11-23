@@ -23,6 +23,7 @@ import com.google.gwt.core.ext.SelectionProperty;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
@@ -114,9 +115,12 @@ import com.google.gwt.user.rebind.StringSourceWriter;
 
 import org.apache.commons.io.IOUtils;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -309,6 +313,8 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
 
     sw.outdent();
     sw.println("}");
+
+    outputCsvArtifact(logger, context, method, renamingResult.mapping);
 
     return sw.toString();
   }
@@ -1111,6 +1117,66 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
 
     if (shared != null) {
       replacementsForSharedMethods.put(method, obfuscatedClassName);
+    }
+  }
+
+  /**
+   * Builds a CSV file mapping obfuscated CSS style class names to their qualified source name and
+   * outputs it as a private build artifact.
+   */
+  private void outputCsvArtifact(TreeLogger logger, ResourceContext context, JMethod method,
+      Map<String, String> replacements) {
+    String qualifiedMethodName =  method.getEnclosingType().getQualifiedSourceName() + "." + method.getName();
+
+    String mappingFileName = "gssResource/" + qualifiedMethodName + ".cssmap";
+
+    OutputStream os;
+    try {
+      os = context.getGeneratorContext().tryCreateResource(logger, mappingFileName);
+    } catch (UnableToCompleteException e) {
+      logger.log(TreeLogger.WARN, "Could not create resource: " + mappingFileName);
+      return;
+    }
+
+    // file already exist ?
+    if (os == null) {
+      return;
+    }
+
+    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os));
+    JClassType gssResource = method.getReturnType().isInterface();
+
+    try {
+      for (JMethod styleClassMethod : gssResource.getOverridableMethods()) {
+        String obfuscatedName = replacements.get(getClassName(styleClassMethod));
+
+        if (obfuscatedName == null) {
+          // method to access a constant
+          continue;
+        }
+
+        String qualifiedName = styleClassMethod.getEnclosingType().getQualifiedSourceName();
+        String baseName = styleClassMethod.getName();
+        writer.write(qualifiedName.replaceAll("[.$]", "-") + "-" + baseName);
+        writer.write(",");
+        writer.write(obfuscatedName);
+        writer.newLine();
+      }
+      writer.flush();
+    } catch (IOException e) {
+      logger.log(TreeLogger.WARN, "Error writing artifact: " + mappingFileName);
+    } finally {
+      try {
+        writer.close();
+      } catch (IOException e) {
+        logger.log(TreeLogger.WARN, "Error closing artifact: " + mappingFileName);
+      }
+    }
+
+    try {
+      context.getGeneratorContext().commitResource(logger, os).setVisibility(Visibility.Private);
+    } catch (UnableToCompleteException e) {
+      logger.log(TreeLogger.WARN, "Error trying to commit artifact: " + mappingFileName);
     }
   }
 }

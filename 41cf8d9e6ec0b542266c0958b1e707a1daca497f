@@ -16,6 +16,24 @@
       "revId": "41cf8d9e6ec0b542266c0958b1e707a1daca497f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fcf1549_b55c0270",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-11-24T22:10:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fcf1549_6cafbb28",
+      "revId": "41cf8d9e6ec0b542266c0958b1e707a1daca497f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

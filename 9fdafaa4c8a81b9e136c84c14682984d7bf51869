@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fcf1549_6047ba7e",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T22:11:59Z",
+      "side": 1,
+      "message": "Normally you should split the test methods and name accordingly to what they are testing. \n\nAnd ideally they should cover all the codepaths (I think they do now).\n\nIf you have common setup code you can use override the setup method.",
+      "revId": "9fdafaa4c8a81b9e136c84c14682984d7bf51869",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

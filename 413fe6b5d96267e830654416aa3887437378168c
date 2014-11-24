@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fe001b1_75af8028",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T19:11:23Z",
+      "side": 1,
+      "message": "This should be refactored to suit the new purpose rather than forking the flow here.\n\nInstead of calling this function collectUpRefs it should be something like\n\n  collectSelfAndSuperMethods(JDeclaredType, Predicate\u003cJMethod\u003e, Multimap\u003cString, JMethod\u003e)\n\nAnd then it can be called in computeOverride and maybeImplementDefenderMethods with the appropriate predicates.",
+      "range": {
+        "startLine": 1100,
+        "startChar": 0,
+        "endLine": 1103,
+        "endChar": 9
+      },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fe001b1_78fa15d7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1485,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T19:11:23Z",
+      "side": 1,
+      "message": "This should be a condition in the predicate.",
+      "range": {
+        "startLine": 1482,
+        "startChar": 2,
+        "endLine": 1485,
+        "endChar": 5
+      },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fe001b1_784c559f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T19:11:23Z",
+      "side": 1,
+      "message": "You could use values() here  as the key in the entry is not referenced below.",
+      "range": {
+        "startLine": 1490,
+        "startChar": 63,
+        "endLine": 1490,
+        "endChar": 71
+      },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f77b1c2_b60e66a0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1509,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T19:11:23Z",
+      "side": 1,
+      "message": "I really don\u0027t like using the static name as an hidden contract with MakeCallsStatic.",
+      "range": {
+        "startLine": 1509,
+        "startChar": 6,
+        "endLine": 1509,
+        "endChar": 83
+      },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fe001b1_38132d4e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T19:11:23Z",
+      "side": 1,
+      "message": "Can you explain this case? Aren\u0027t defender methods always instance methods?",
+      "range": {
+        "startLine": 1503,
+        "startChar": 0,
+        "endLine": 1521,
+        "endChar": 9
+      },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fe001b1_3881edd5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1552,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T19:11:23Z",
+      "side": 1,
+      "message": "This should be split into its own function cloneMethod, maybe moved to JjsUtils.",
+      "range": {
+        "startLine": 1523,
+        "startChar": 0,
+        "endLine": 1552,
+        "endChar": 31
+      },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fe001b1_982a59e9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1563,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T19:11:23Z",
+      "side": 1,
+      "message": "This is ugly.\n\nFirst move this method to JMethod, and second add add a field in JMethod to mark it as defender and set its value from GwtAstBuilder.\n\nIf memory ends up being a concern, we could could refactor boolean fields into a bit oriented flags field.",
+      "range": {
+        "startLine": 1562,
+        "startChar": 0,
+        "endLine": 1563,
+        "endChar": 89
+      },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fe001b1_189ae9d0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1682,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T19:11:23Z",
+      "side": 1,
+      "message": "This is only to support \n  \n  Interface.super.defenderMethod()\n\nright?\n\nI think that should be a separate post pass.\n\nGwtAstBuilder should leave them as instance methods and the post pass (maybe part of MakeCallsStatic) should devirtualize them.",
+      "range": {
+        "startLine": 1669,
+        "startChar": 1,
+        "endLine": 1682,
+        "endChar": 1
+      },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fe001b1_550efcd9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1708,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T19:11:23Z",
+      "side": 1,
+      "message": "I think this exceeds 100 chars. Fix.",
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

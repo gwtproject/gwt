@@ -117,6 +117,53 @@
     },
     {
       "key": {
+        "uuid": "3fcf1549_95ad46fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T22:08:19Z",
+      "side": 1,
+      "message": "I took a second look and now I see: You create the static methods in resolveType and here you look them up by name to add the forwarding.\n\nI still think this should be done as a separate pass after unify.",
+      "parentUuid": "9fe001b1_38132d4e",
+      "range": {
+        "startLine": 1503,
+        "startChar": 0,
+        "endLine": 1521,
+        "endChar": 9
+      },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fcf1549_60cc9ac8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T22:08:19Z",
+      "side": 1,
+      "message": "s/clone/forwardingMethod/",
+      "range": {
+        "startLine": 1525,
+        "startChar": 16,
+        "endLine": 1525,
+        "endChar": 21
+      },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9fe001b1_3881edd5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 9

@@ -141,6 +141,30 @@
     },
     {
       "key": {
+        "uuid": "3fcf1549_9bec97cf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-24T22:56:42Z",
+      "side": 1,
+      "message": "Actually you just need to forward to \n\n  Interface.super.defenderMethod().\n\nThen MakeCallsStatic will work on it eventually.",
+      "parentUuid": "3fcf1549_95ad46fc",
+      "range": {
+        "startLine": 1503,
+        "startChar": 0,
+        "endLine": 1521,
+        "endChar": 9
+      },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fcf1549_60cc9ac8",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 9

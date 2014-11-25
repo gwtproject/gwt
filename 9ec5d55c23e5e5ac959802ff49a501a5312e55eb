@@ -22,6 +22,30 @@
       "revId": "9ec5d55c23e5e5ac959802ff49a501a5312e55eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffbadd9a_d911bf73",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitorTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-11-25T17:17:29Z",
+      "side": 1,
+      "message": "The formatter still doesn\u0027t work. Fix it manually.",
+      "parentUuid": "ffbadd9a_ad4b69f0",
+      "range": {
+        "startLine": 43,
+        "startChar": 10,
+        "endLine": 43,
+        "endChar": 28
+      },
+      "revId": "9ec5d55c23e5e5ac959802ff49a501a5312e55eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

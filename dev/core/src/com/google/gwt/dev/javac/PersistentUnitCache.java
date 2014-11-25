@@ -120,6 +120,17 @@ class PersistentUnitCache extends MemoryUnitCache {
     return backgroundService.asyncWriteUnit(newUnit);
   }
 
+  @Override
+  public void clear() throws UnableToCompleteException {
+    synchronized (this) {
+      super.clear();
+    }
+
+    backgroundService.asyncClearCache();
+    backgroundService.finishAndShutdown();
+    backgroundService.start();
+  }
+
   /**
    * Rotates to a new file and/or starts garbage collection if needed after a compile is finished.
    *
@@ -254,7 +265,8 @@ class PersistentUnitCache extends MemoryUnitCache {
 
     private final TreeLogger logger;
     private final PersistentUnitCacheDir cacheDir;
-    private final ExecutorService service;
+    private ExecutorService service;
+    private PersistentUnitCache cacheToLoad;
 
     /**
      * Non-null while the unit cache is loading.
@@ -268,7 +280,29 @@ class PersistentUnitCache extends MemoryUnitCache {
         throws UnableToCompleteException {
       this.logger = logger;
       this.cacheDir = new PersistentUnitCacheDir(logger, parentDir);
+      this.cacheToLoad = cacheToLoad;
 
+      start();
+    }
+
+    /**
+     * Blocks addition of any further tasks and waits for current tasks to finish.
+     */
+    public void finishAndShutdown() throws UnableToCompleteException {
+      service.shutdown();
+      try {
+        if (!service.awaitTermination(30, TimeUnit.SECONDS)) {
+          logger.log(TreeLogger.WARN,
+              "Persistent Unit Cache shutdown tasks took longer than 30 seconds to complete.");
+          throw new UnableToCompleteException();
+        }
+      } catch (InterruptedException e) {
+        // JVM is shutting down, ignore it.
+      }
+    }
+
+    private void start() {
+      assert service == null || service.isTerminated();
       service = Executors.newSingleThreadExecutor();
       Runtime.getRuntime().addShutdownHook(new Thread() {
         @Override
@@ -390,6 +424,18 @@ class PersistentUnitCache extends MemoryUnitCache {
           }
         }
       });
+    }
+
+    Future<?> asyncClearCache() {
+      Future<?> status = service.submit(new Runnable() {
+        @Override
+        public void run() {
+          cacheDir.closeCurrentFile();
+          cacheDir.deleteClosedCacheFiles();
+        }
+      });
+      service.shutdown(); // Don't allow more tasks to be scheduled.
+      return status;
     }
 
     Future<?> asyncWriteUnit(final CompilationUnit unit) {

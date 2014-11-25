@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ffd1fde2_b8d961a8",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-25T00:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff6c9df2_7d4c339f",
+      "range": {
+        "startLine": 104,
+        "startChar": 7,
+        "endLine": 104,
+        "endChar": 15
+      },
+      "revId": "5ad126ceb88b10bdff73a9689a56369c3bece15c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff6c9df2_3da23bb7",
         "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ffd1fde2_789539a1",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-25T00:21:51Z",
+      "side": 1,
+      "message": "yeah this was for debugging, i forgot to undo it. good catch",
+      "parentUuid": "ff6c9df2_3da23bb7",
+      "range": {
+        "startLine": 588,
+        "startChar": 8,
+        "endLine": 588,
+        "endChar": 14
+      },
+      "revId": "5ad126ceb88b10bdff73a9689a56369c3bece15c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff6c9df2_fdb043d3",
         "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
         "patchSetId": 7
@@ -59,6 +107,30 @@
       "writtenOn": "2014-11-22T00:58:01Z",
       "side": 1,
       "message": "After the other CL lands, I think it might be best to put a clearTasks() method on the BackgroundService. It needs to either wait for existing tasks to complete or abort them before returning.",
+      "range": {
+        "startLine": 146,
+        "startChar": 15,
+        "endLine": 146,
+        "endChar": 20
+      },
+      "revId": "5ad126ceb88b10bdff73a9689a56369c3bece15c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fcf1549_3b032380",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCache.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-25T00:21:51Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "ff6c9df2_fdb043d3",
       "range": {
         "startLine": 146,
         "startChar": 15,

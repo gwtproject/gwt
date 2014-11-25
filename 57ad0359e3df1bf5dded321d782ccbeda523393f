@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf0a2512_caba25e6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1429,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T21:31:45Z",
+      "side": 1,
+      "message": "fix comment.",
+      "range": {
+        "startLine": 1429,
+        "startChar": 63,
+        "endLine": 1429,
+        "endChar": 66
+      },
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_aabff1d4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T21:31:45Z",
+      "side": 1,
+      "message": "public",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_2aabe198",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T21:31:45Z",
+      "side": 1,
+      "message": "revert this file.",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_8a9d4d72",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReplaceDefenderMethodReferences.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T21:31:45Z",
+      "side": 1,
+      "message": "I am surprised that I.super.defender() worked before implementing this pass? Did you find out why, was the test not really testing the scenario?",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_0a225d9b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T21:31:45Z",
+      "side": 1,
+      "message": "remove, this should be part of the predicate if desired (and it is already there.",
+      "range": {
+        "startLine": 1097,
+        "startChar": 5,
+        "endLine": 1097,
+        "endChar": 37
+      },
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_2ab1a1d5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T21:31:45Z",
+      "side": 1,
+      "message": "This condition (method.getEnclosingType() !\u003d type) does not seem the be present in the old code;  The filtering in the old code was to only collect method whose signature is one of the signatures in the type.methods and those would have included all polymorphic methods of the type. Methods whose signature are not in any method of the type are effectively filtered in the second loop anyway (so no problem here). Removing the method itself from the list of overrides should not have any effect either but it might so I would take the second part of the condition out.\n\nNIt: the formatting here is off.",
+      "range": {
+        "startLine": 1119,
+        "startChar": 43,
+        "endLine": 1119,
+        "endChar": 79
+      },
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_ead609d0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T21:31:45Z",
+      "side": 1,
+      "message": "I presonally don\u0027t like the term upRefs, AFAIK it is only used in GWT to describe two different this 1) overriding method chains (for supers) and 2) casting to a super type).\n\nI would s/upRefs/overridingMethodBySignature/",
+      "range": {
+        "startLine": 1472,
+        "startChar": 7,
+        "endLine": 1472,
+        "endChar": 13
+      },
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_0a97fd1e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T21:31:45Z",
+      "side": 1,
+      "message": "formatting.\n\nThe predicates are awfully similar, I guess they can be abstracted away (the extra condition in the other does not really have any effect).\n\nMaybe simplify into \n\n  collectSelfAndSuperPolymorphicMethods()",
+      "range": {
+        "startLine": 1468,
+        "startChar": 0,
+        "endLine": 1472,
+        "endChar": 15
+      },
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_4a4f3531",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1475,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T21:31:45Z",
+      "side": 1,
+      "message": "s/cType/type/",
+      "range": {
+        "startLine": 1475,
+        "startChar": 26,
+        "endLine": 1475,
+        "endChar": 31
+      },
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_cabc6594",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1610,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T21:31:45Z",
+      "side": 1,
+      "message": "remove.",
+      "range": {
+        "startLine": 1605,
+        "startChar": 0,
+        "endLine": 1610,
+        "endChar": 5
+      },
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

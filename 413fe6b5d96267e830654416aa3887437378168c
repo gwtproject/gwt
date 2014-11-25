@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "bf0a2512_93ea2b86",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fe001b1_75af8028",
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9fe001b1_78fa15d7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 9
@@ -42,6 +60,24 @@
         "endLine": 1485,
         "endChar": 5
       },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_f31167c1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1485,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fe001b1_78fa15d7",
       "revId": "413fe6b5d96267e830654416aa3887437378168c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "bf0a2512_d30e63a1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fe001b1_784c559f",
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f77b1c2_b60e66a0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 9
@@ -88,6 +142,42 @@
         "endLine": 1509,
         "endChar": 83
       },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_13c73b52",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1509,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "1f77b1c2_b60e66a0",
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_f3f28778",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1509,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f77b1c2_b60e66a0",
       "revId": "413fe6b5d96267e830654416aa3887437378168c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -165,6 +255,24 @@
     },
     {
       "key": {
+        "uuid": "bf0a2512_d31e634f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fcf1549_9bec97cf",
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fcf1549_60cc9ac8",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 9
@@ -182,6 +290,42 @@
         "endLine": 1525,
         "endChar": 21
       },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_73e0b7de",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fcf1549_60cc9ac8",
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_13f61b6f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fcf1549_60cc9ac8",
       "revId": "413fe6b5d96267e830654416aa3887437378168c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -211,6 +355,24 @@
     },
     {
       "key": {
+        "uuid": "bf0a2512_33f91f5e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1552,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fe001b1_3881edd5",
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9fe001b1_982a59e9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 9
@@ -228,6 +390,24 @@
         "endLine": 1563,
         "endChar": 89
       },
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_62dfc7e1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1563,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "Memory is a concern. Every time we add another field to JMethod, another 2-4 bytes are added to every node, plus serialization does more work. \n\nA defender method is implied by a non-static interface method that has a body. It may be \"ugly\", but it\u0027s efficient, seems kind of bad to trade of O(4 * # methods) space and other work to make code little slightly prettier.",
+      "parentUuid": "9fe001b1_982a59e9",
       "revId": "413fe6b5d96267e830654416aa3887437378168c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -257,6 +437,24 @@
     },
     {
       "key": {
+        "uuid": "bf0a2512_e275173a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1682,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "It was to support both forwarding methods and super refs.",
+      "parentUuid": "9fe001b1_189ae9d0",
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9fe001b1_550efcd9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 9
@@ -268,6 +466,24 @@
       "writtenOn": "2014-11-24T19:11:23Z",
       "side": 1,
       "message": "I think this exceeds 100 chars. Fix.",
+      "revId": "413fe6b5d96267e830654416aa3887437378168c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0a2512_b3d64f06",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1708,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-25T03:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fe001b1_550efcd9",
       "revId": "413fe6b5d96267e830654416aa3887437378168c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffbadd9a_ad4b69f0",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitorTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-11-25T01:25:52Z",
+      "side": 1,
+      "message": "it looks like your formatter is messed up. it shouldn\u0027t be doing this",
+      "range": {
+        "startLine": 43,
+        "startChar": 10,
+        "endLine": 43,
+        "endChar": 28
+      },
+      "revId": "9ec5d55c23e5e5ac959802ff49a501a5312e55eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

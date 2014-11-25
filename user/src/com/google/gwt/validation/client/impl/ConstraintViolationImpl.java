@@ -150,14 +150,19 @@ public final class ConstraintViolationImpl<T> implements ConstraintViolation<T>,
       return false;
     }
     ConstraintViolationImpl<?> other = (ConstraintViolationImpl<?>) o;
-    return (message == null ? other.message == null : message.equals(other.message)
-        && propertyPath == null ? other.propertyPath == null :
-          propertyPath.equals(other.propertyPath)
-        && rootBean == null ? other.rootBean == null : rootBean.equals(other.rootBean)
-        && leafBean == null ? other.leafBean == null : leafBean.equals(other.leafBean)
-        && elementType == null ? other.elementType == null : elementType.equals(other.elementType)
-        && invalidValue == null ? other.invalidValue == null :
-          invalidValue.equals(other.invalidValue));
+    if(!(message == null ? other.message == null : message.equals(other.message)))
+      return false;
+    if(!(propertyPath == null ? other.propertyPath == null : propertyPath.equals(other.propertyPath)))
+      return false;
+    if(!(rootBean == null ? other.rootBean == null : rootBean.equals(other.rootBean)))
+      return false;
+    if(!(leafBean == null ? other.leafBean == null : leafBean.equals(other.leafBean)))
+      return false;
+    if(!(elementType == null ? other.elementType == null : elementType.equals(other.elementType)))
+      return false;
+    if(!(invalidValue == null ? other.invalidValue == null : invalidValue.equals(other.invalidValue)))
+      return false;
+    return true;
   }
 
   @Override

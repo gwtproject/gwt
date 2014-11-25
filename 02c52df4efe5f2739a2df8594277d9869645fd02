@@ -1,0 +1,198 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffbadd9a_33e59aee",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T03:20:35Z",
+      "side": 1,
+      "message": "public, move to top and add javadoc.",
+      "revId": "02c52df4efe5f2739a2df8594277d9869645fd02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffbadd9a_738eb211",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T03:20:35Z",
+      "side": 1,
+      "message": "update comment to \n// invoke methodToDelegate",
+      "range": {
+        "startLine": 146,
+        "startChar": 4,
+        "endLine": 146,
+        "endChar": 30
+      },
+      "revId": "02c52df4efe5f2739a2df8594277d9869645fd02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffbadd9a_b393ca2f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T03:20:35Z",
+      "side": 1,
+      "message": "remove this comment as it may not be accurate for future callers to this method.",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 97
+      },
+      "revId": "02c52df4efe5f2739a2df8594277d9869645fd02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffbadd9a_d3c99e64",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T03:20:35Z",
+      "side": 1,
+      "message": "revert.",
+      "revId": "02c52df4efe5f2739a2df8594277d9869645fd02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffbadd9a_130e5627",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T03:20:35Z",
+      "side": 1,
+      "message": "Marking this as not addressed to keep track from comments to patch 9:\n\nThis should be refactored to suit the new purpose rather than forking the flow here.\nInstead of calling this function collectUpRefs it should be something like\n  collectSelfAndSuperMethods(JDeclaredType, Predicate\u003cJMethod\u003e, Multimap\u003cString, JMethod\u003e)\nAnd then it can be called in computeOverride and maybeImplementDefenderMethods with the appropriate predicates.",
+      "revId": "02c52df4efe5f2739a2df8594277d9869645fd02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffbadd9a_132736a9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1467,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T03:20:35Z",
+      "side": 1,
+      "message": "s/sType/type/",
+      "range": {
+        "startLine": 1467,
+        "startChar": 59,
+        "endLine": 1467,
+        "endChar": 64
+      },
+      "revId": "02c52df4efe5f2739a2df8594277d9869645fd02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffbadd9a_332cba88",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T03:20:35Z",
+      "side": 1,
+      "message": "s/upRefs/selfAndSuperMethodsBySignature/\n\nor allTypeMethodsBySignature",
+      "range": {
+        "startLine": 1472,
+        "startChar": 30,
+        "endLine": 1472,
+        "endChar": 36
+      },
+      "revId": "02c52df4efe5f2739a2df8594277d9869645fd02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffbadd9a_b31e6a4e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T03:20:35Z",
+      "side": 1,
+      "message": "from patch 9: This should be a condition in the predicate.",
+      "revId": "02c52df4efe5f2739a2df8594277d9869645fd02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffbadd9a_733232e8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T03:20:35Z",
+      "side": 1,
+      "message": "from patch 9: You should use values() here  as the key in the entry is not referenced below.",
+      "revId": "02c52df4efe5f2739a2df8594277d9869645fd02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffbadd9a_f33dc2b1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1638,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-25T03:20:35Z",
+      "side": 1,
+      "message": "from patch 9: I think this exceeds 100 chars. Fix.",
+      "revId": "02c52df4efe5f2739a2df8594277d9869645fd02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

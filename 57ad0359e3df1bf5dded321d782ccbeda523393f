@@ -427,6 +427,23 @@
       "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df5d1961_22eab487",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-26T07:51:46Z",
+      "side": 1,
+      "message": "Can you add tests that test the following scenarios:\n\n  public class package1.A {\n      (default visibility)  int m() {return 1;}\n  }\n \n  public interface pacakge2.B {\n    default int m() { return 2; }\n  }\n\n  public class package3.C extends package1.A implements package2.B {\n  }\n\nIt is expected that C.m() returns 2 (gets the implementation from the interface not through inheritance)\n\n  public class package1.D extends package1.A implements package2.B {}\n\nThis one should get the implementation from the superclass not the interface (the interface just upgrades the visibility of the method, so also make sure that a caller m() from an different package is routed correctly).\n\n \nCan super be used to invoke a default method without the qualifier when it is not ambiguous? If so that also needs to be tested.",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

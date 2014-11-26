@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "df5d1961_59d52377",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1429,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-26T00:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf0a2512_caba25e6",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf0a2512_aabff1d4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
         "patchSetId": 13
@@ -36,6 +54,24 @@
       "writtenOn": "2014-11-25T21:31:45Z",
       "side": 1,
       "message": "public",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df5d1961_99b69b5d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-26T00:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf0a2512_aabff1d4",
       "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -59,6 +95,24 @@
     },
     {
       "key": {
+        "uuid": "df5d1961_f9c357c1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-26T00:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf0a2512_2aabe198",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf0a2512_8a9d4d72",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReplaceDefenderMethodReferences.java",
         "patchSetId": 13
@@ -70,6 +124,24 @@
       "writtenOn": "2014-11-25T21:31:45Z",
       "side": 1,
       "message": "I am surprised that I.super.defender() worked before implementing this pass? Did you find out why, was the test not really testing the scenario?",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df5d1961_d9c013b8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReplaceDefenderMethodReferences.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-26T00:44:15Z",
+      "side": 1,
+      "message": "I think it was a caching problem, for some reason the test wasn\u0027t being picked up, but I wasn\u0027t noticing it since I only look for non-green. I did a clean rebuild and it started failing.",
+      "parentUuid": "bf0a2512_8a9d4d72",
       "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -99,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "df5d1961_b9e27f5b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-26T00:44:15Z",
+      "side": 1,
+      "message": "But the name of this method implies it excludes static methods, and it would force repetition at both callsites. I\u0027ll make the change cause I don\u0027t want to drag the review out, but if we\u0027re going to allow static methods, it should be called something else.  If someone forgets to add the polymorphic check, they\u0027ll end up with static methods mixed in with non-static of the same signature.",
+      "parentUuid": "bf0a2512_0a225d9b",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf0a2512_2ab1a1d5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 13
@@ -116,6 +206,24 @@
         "endLine": 1119,
         "endChar": 79
       },
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df5d1961_b9a39f10",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-26T00:44:15Z",
+      "side": 1,
+      "message": "In the old code, the methods of the \u0027type\u0027 variable here were not added to the set, they were just used as a flag for what to collect, so this code is just reproducing the logic that existed before. But I\u0027ll remove it.",
+      "parentUuid": "bf0a2512_2ab1a1d5",
       "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -168,6 +276,42 @@
     },
     {
       "key": {
+        "uuid": "df5d1961_b9555f49",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-26T00:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf0a2512_0a97fd1e",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df5d1961_99521b5d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-26T00:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf0a2512_ead609d0",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf0a2512_4a4f3531",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 13
@@ -191,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "df5d1961_79458792",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1475,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-26T00:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf0a2512_4a4f3531",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf0a2512_cabc6594",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 13
@@ -208,6 +370,24 @@
         "endLine": 1610,
         "endChar": 5
       },
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df5d1961_993b3b0d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1610,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2014-11-26T00:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf0a2512_cabc6594",
       "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

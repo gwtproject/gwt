@@ -16,6 +16,23 @@
       "revId": "50d185d5e07030eaa82f1e2a8ab89475b37d008a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf52254f_1e138dff",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/Processor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5100
+      },
+      "writtenOn": "2014-11-26T08:06:16Z",
+      "side": 1,
+      "message": "I think it is important to be able to tell what version of CLDR the data was extracted from.  If you don\u0027t want the comments of the files to contain it, how about writing a single file that contains the version information?",
+      "revId": "50d185d5e07030eaa82f1e2a8ab89475b37d008a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

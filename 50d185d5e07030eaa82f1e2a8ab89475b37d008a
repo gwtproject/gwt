@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f404975_3d680fe7",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/Processor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-11-26T07:25:56Z",
+      "side": 1,
+      "message": "Jenkins is complaining about unused imports",
+      "revId": "50d185d5e07030eaa82f1e2a8ab89475b37d008a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

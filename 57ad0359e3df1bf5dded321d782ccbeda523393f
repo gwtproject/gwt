@@ -189,6 +189,24 @@
     },
     {
       "key": {
+        "uuid": "df5d1961_82c62026",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-26T07:33:18Z",
+      "side": 1,
+      "message": "then rename it to collectSelfAndSuperInstanceMethods, keep the method.canBePolymorphic there and remove it from the predicate.",
+      "parentUuid": "df5d1961_b9e27f5b",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf0a2512_2ab1a1d5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 13
@@ -224,6 +242,24 @@
       "side": 1,
       "message": "In the old code, the methods of the \u0027type\u0027 variable here were not added to the set, they were just used as a flag for what to collect, so this code is just reproducing the logic that existed before. But I\u0027ll remove it.",
       "parentUuid": "bf0a2512_2ab1a1d5",
+      "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df5d1961_62cb0c2e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-26T07:33:18Z",
+      "side": 1,
+      "message": "You are right don\u0027t remove it, I misread the old code.",
+      "parentUuid": "df5d1961_b9a39f10",
       "revId": "57ad0359e3df1bf5dded321d782ccbeda523393f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

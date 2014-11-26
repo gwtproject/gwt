@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df5d1961_02da10f4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-11-26T07:54:34Z",
+      "side": 1,
+      "message": "Can you make sure you address all the old comments. There is a comment in a previous patch that says remove this comment as it might not be true if this method is called from a different context in the future.",
+      "revId": "55e3dd4817df6337b2fbac9cd855a5c011d44cb5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

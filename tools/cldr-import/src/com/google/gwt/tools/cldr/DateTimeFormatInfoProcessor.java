@@ -455,11 +455,6 @@ public class DateTimeFormatInfoProcessor extends Processor {
     pw.println(";");
     pw.println();
     pw.println("// DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA");
-    pw.println("//  cldrVersion=" + CLDRFile.GEN_VERSION);
-    Map<String, String> map = localeData.getEntries("version", locale);
-    for (Map.Entry<String, String> entry : map.entrySet()) {
-      pw.println("//  " + entry.getKey() + "=" + entry.getValue());
-    }
     pw.println();
     if (locale.isDefault()) {
       pw.println("/**");

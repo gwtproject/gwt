@@ -227,7 +227,7 @@ public abstract class Processor {
   }
 
   protected void printJavaHeader(PrintWriter pw) {
-    int year = Calendar.getInstance().get(Calendar.YEAR);
+    int year = 2012;
     pw.println("/*");
     pw.println(" * Copyright " + year + " Google Inc.");
     pw.println(" * ");
@@ -250,7 +250,7 @@ public abstract class Processor {
   }
 
   protected void printPropertiesHeader(PrintWriter pw) {
-    int year = Calendar.getInstance().get(Calendar.YEAR);
+    int year = 2012;
     pw.println("# Copyright " + year + " Google Inc.");
     pw.println("# ");
     pw.println("# Licensed under the Apache License, Version 2.0 (the "
@@ -271,12 +271,7 @@ public abstract class Processor {
   }
 
   protected void printVersion(PrintWriter pw, GwtLocale locale, String prefix) {
-    pw.println(prefix + "DO NOT EDIT - GENERATED FROM CLDR DATA:");
-    pw.println(prefix + " cldrVersion=" + CLDRFile.GEN_VERSION);
-    Map<String, String> map = localeData.getEntries("version", locale);
-    for (Map.Entry<String, String> entry : map.entrySet()) {
-      pw.println(prefix + " " + entry.getKey() + "=" + entry.getValue());
-    }
+    pw.println(prefix + "DO NOT EDIT - GENERATED FROM CLDR DATA");
   }
 
   /**

@@ -114,4 +114,70 @@ public class DataTransfer extends JavaScriptObject {
       this.setDragImage(element, x, y);
     }
   }-*/;
+  
+  /**
+   * Specify the drop effect to use on dragenter or dragover events.
+   * 
+   * @param dropEffect the drop effect to display.
+   */
+  public final void setDropEffect(DropEffect dropEffect)
+  {
+    this.setDropEffect(dropEffect.getEffect());
+  }
+  
+  /**
+   * Specify the drop effect to use on dragenter or dragover events.
+   * 
+   * @param dropEffect the drop effect to display.
+   */
+  private final native void setDropEffect(String dropEffect) /*-{
+    if (this.dropEffect) {
+      this.dropEffect = dropEffect;
+    }
+  }-*/;
+  
+  /**
+   * Used to specify the drop effect to use on dragenter or dragover events.
+   * 
+   * For dragstart, drag, and dragleave events, the dropEffect is initialized to "none". 
+   * Any value assigned to the dropEffect will be set, but the value isn't used for anything. 
+   *  
+   * @author Fabien PÉRIÉ
+   */
+  public enum DropEffect
+  {
+    /** a copy of the source item is made at the new location. */
+    COPY("copy"),
+    
+    /** an item is moved to a new location. */
+    MOVE("move"),
+    
+    /** a link is established to the source at the new location. */
+    LINK("link"),
+    
+    /** the item may not be dropped. */
+    NONE("none");
+    
+    /** the effect to insert in dataTransfer object. */
+    private final String effect;
+    
+    /**
+     * Build a new DropEffect enum.
+     * 
+     * @param effect effect to insert in dataTransfer object.
+     */
+    DropEffect(String effect)
+    {
+        this.effect = effect;
+    }
+
+    /**
+     * Return the effect to insert in dataTransfer object. 
+     * 
+     * @return the effect to insert in dataTransfer object.
+     */
+    public String getEffect() {
+      return effect;
+    }
+  }
 }

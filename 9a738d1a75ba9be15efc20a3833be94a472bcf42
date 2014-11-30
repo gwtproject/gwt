@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fdac131_bf043785",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-11-30T13:12:11Z",
+      "side": 1,
+      "message": "[warning] Please use \u0027Bug: issue NNNN\u0027 and place it just above the Change-Id line.",
+      "revId": "9a738d1a75ba9be15efc20a3833be94a472bcf42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

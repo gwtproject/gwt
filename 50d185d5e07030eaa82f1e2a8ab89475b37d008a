@@ -33,6 +33,24 @@
       "revId": "50d185d5e07030eaa82f1e2a8ab89475b37d008a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff973d5c_255cb835",
+        "filename": "tools/cldr-import/src/com/google/gwt/tools/cldr/Processor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-12-01T19:53:54Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "bf52254f_1e138dff",
+      "revId": "50d185d5e07030eaa82f1e2a8ab89475b37d008a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

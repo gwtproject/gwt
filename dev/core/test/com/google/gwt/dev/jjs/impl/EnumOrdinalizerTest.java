@@ -993,13 +993,15 @@ public class EnumOrdinalizerTest extends OptimizerTestBase {
     Result result = optimize("void", "Enum myEnum = returnAsEnum(0);",
         // do a second one, to prevent inlining
         "Enum myOtherEnum = returnAsEnum(1);",
-        "int ord = Fruit.APPLE.ordinal() + Vegetable.CARROT.ordinal();");
+        // The upcast in myOtherEnum gets eliminated by Pruner because myOtherEnum is not
+        // referenced.
+        "int ord = myEnum.ordinal();");
 
     EnumOrdinalizer.Tracker tracker = EnumOrdinalizer.getTracker();
     assertTrue(tracker.isVisited("test.EntryPoint$Fruit"));
     assertFalse(tracker.isOrdinalized("test.EntryPoint$Fruit"));
     assertTrue(tracker.isVisited("test.EntryPoint$Vegetable"));
-    assertFalse(tracker.isOrdinalized("test.EntryPoint$Vegetable"));
+    assertTrue(tracker.isOrdinalized("test.EntryPoint$Vegetable"));
     assertAllEnumOrdinalizedReferencesReplaced(result.getOptimizedProgram(), tracker);
   }
 
@@ -1024,7 +1026,7 @@ public class EnumOrdinalizerTest extends OptimizerTestBase {
 
   private void setupFruitEnumWithStaticField() {
     addSnippetClassDecl("public enum Fruit {APPLE, ORANGE;",
-        "  public static final String staticField = \"STATIC\";",
+        "  public static String staticField = \"STATIC\";",
         "}");
     setupNotInlineable("Fruit");
   }
@@ -1110,23 +1112,24 @@ public class EnumOrdinalizerTest extends OptimizerTestBase {
     boolean didChange = false;
     program.addEntryMethod(findMainMethod(program));
 
+    OptimizerContext optimizerContext = new FullOptimizerContext(program);
     if (runMakeCallsStatic) {
-      didChange = MakeCallsStatic.exec(program, false).didChange() || didChange;
+      didChange = MakeCallsStatic.exec(program, false, optimizerContext).didChange() || didChange;
     }
     if (runTypeTightener) {
-      didChange = TypeTightener.exec(program).didChange() || didChange;
+      didChange = TypeTightener.exec(program, optimizerContext).didChange() || didChange;
     }
     if (runMethodCallTightener) {
-      didChange = MethodCallTightener.exec(program).didChange() || didChange;
+      didChange = MethodCallTightener.exec(program, optimizerContext).didChange() || didChange;
     }
     if (runMethodInliner) {
-      didChange = MethodInliner.exec(program).didChange() || didChange;
+      didChange = MethodInliner.exec(program, optimizerContext).didChange() || didChange;
     }
     if (runPruner) {
-      didChange = Pruner.exec(program, true).didChange() || didChange;
+      didChange = Pruner.exec(program, true, optimizerContext).didChange() || didChange;
     }
 
-    didChange = EnumOrdinalizer.exec(program).didChange() || didChange;
+    didChange = EnumOrdinalizer.exec(program, optimizerContext).didChange() || didChange;
 
     /*
      * Run these normalizers to sanity check the AST.  If there are any

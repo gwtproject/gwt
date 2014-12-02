@@ -225,6 +225,7 @@ public class JUnitShell extends DevMode {
       registerHandler(new ArgHandlerLogDir(options));
       registerHandler(new ArgHandlerLogLevel(options));
       registerHandler(new ArgHandlerGenDir(options));
+      registerHandler(new ArgHandlerDisableOptimizeDataflow(options));
       // DISABLE: ArgHandlerBindAddress.
       registerHandler(new ArgHandlerCodeServerPort(options) {
         @Override

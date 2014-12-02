@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "bfba25ec_1836c524",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1994,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-02T17:09:34Z",
+      "side": 1,
+      "message": "It seems that the getModifiedMethodsAt is not used. And the visitor traverses the whole program. There should be a function that traverses the modified methods only, which can be called in MehtodInliner.",
+      "range": {
+        "startLine": 1993,
+        "startChar": 4,
+        "endLine": 1994,
+        "endChar": 92
+      },
+      "revId": "f3522bb01a492e1f7d7608ced2c4ca4ed1fabb20",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfba25ec_7b093b53",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-02T17:09:34Z",
+      "side": 1,
+      "message": "Better to traverse the modified methods only.",
+      "range": {
+        "startLine": 579,
+        "startChar": 6,
+        "endLine": 579,
+        "endChar": 80
+      },
+      "revId": "f3522bb01a492e1f7d7608ced2c4ca4ed1fabb20",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fb555f8_a5ed644e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerContext.java",
         "patchSetId": 3

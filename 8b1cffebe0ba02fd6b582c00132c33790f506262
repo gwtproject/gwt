@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fce35a4_fa78a1ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerContext.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-02T20:55:18Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027final\u0027 modifier.",
+      "revId": "8b1cffebe0ba02fd6b582c00132c33790f506262",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

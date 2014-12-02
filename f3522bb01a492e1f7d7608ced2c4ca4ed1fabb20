@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bfba25ec_5b3e77ae",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1994,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-02T20:54:28Z",
+      "side": 1,
+      "message": "Good catch! I didn\u0027t realize I left it unfinished.",
+      "parentUuid": "bfba25ec_1836c524",
+      "range": {
+        "startLine": 1993,
+        "startChar": 4,
+        "endLine": 1994,
+        "endChar": 92
+      },
+      "revId": "f3522bb01a492e1f7d7608ced2c4ca4ed1fabb20",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfba25ec_7b093b53",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3fce35a4_7a9ed1f3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-02T20:54:28Z",
+      "side": 1,
+      "message": "That is being done now in DeadCodeElimination.exec",
+      "parentUuid": "bfba25ec_7b093b53",
+      "range": {
+        "startLine": 579,
+        "startChar": 6,
+        "endLine": 579,
+        "endChar": 80
+      },
+      "revId": "f3522bb01a492e1f7d7608ced2c4ca4ed1fabb20",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fb555f8_a5ed644e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerContext.java",
         "patchSetId": 3
@@ -59,6 +107,24 @@
       "writtenOn": "2014-12-02T02:04:14Z",
       "side": 1,
       "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "f3522bb01a492e1f7d7608ced2c4ca4ed1fabb20",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fce35a4_3aa85919",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerContext.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-02T20:54:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fb555f8_a5ed644e",
       "revId": "f3522bb01a492e1f7d7608ced2c4ca4ed1fabb20",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

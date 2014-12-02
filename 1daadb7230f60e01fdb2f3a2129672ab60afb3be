@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff82dd17_90111c75",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-12-02T11:32:34Z",
+      "side": 1,
+      "message": "should we maybe put the generation behind a coniguration property (not many people actually need this file)",
+      "revId": "1daadb7230f60e01fdb2f3a2129672ab60afb3be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

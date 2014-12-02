@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fb555f8_05c658d9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/OptimizerContext.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-02T02:03:08Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "98e9d795b7904f3e87221039b380cec751c7b78e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

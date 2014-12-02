@@ -44,7 +44,7 @@ public abstract class JChangeTrackingVisitor extends JModVisitor {
   public final void endVisit(JConstructor x, Context ctx) {
     exit(x, ctx);
     if (methodModified) {
-      optimizerCtx.markModifiedMethod(x);
+      optimizerCtx.markModified(x);
     }
     currentMethod = null;
   }
@@ -53,7 +53,7 @@ public abstract class JChangeTrackingVisitor extends JModVisitor {
   public final void endVisit(JField x, Context ctx) {
     exit(x, ctx);
     if (fieldModified) {
-      optimizerCtx.markModifiedField(x);
+      optimizerCtx.markModified(x);
     }
     currentField = null;
   }
@@ -62,7 +62,7 @@ public abstract class JChangeTrackingVisitor extends JModVisitor {
   public final void endVisit(JMethod x, Context ctx) {
     exit(x, ctx);
     if (methodModified) {
-      optimizerCtx.markModifiedMethod(x);
+      optimizerCtx.markModified(x);
     }
     currentMethod = null;
   }
@@ -139,11 +139,11 @@ public abstract class JChangeTrackingVisitor extends JModVisitor {
   }
 
   public final void wasRemoved(JField field) {
-    optimizerCtx.removeField(field);
+    optimizerCtx.remove(field);
   }
 
   public final void wasRemoved(JMethod method) {
-    optimizerCtx.removeMethod(method);
+    optimizerCtx.remove(method);
   }
 
   public final void methodsWereRemoved(Collection<JMethod> methods) {

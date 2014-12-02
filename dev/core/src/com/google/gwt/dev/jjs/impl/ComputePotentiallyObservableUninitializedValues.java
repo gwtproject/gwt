@@ -193,6 +193,7 @@ public class ComputePotentiallyObservableUninitializedValues {
       if (isDevirtualizedInitMethod(x) && x.getParams().size() > 0
           && x.getParams().get(0).getType() == currentClass) {
         devirtualizedThis = x.getParams().get(0);
+        return true;
       }
       // Do not explore the method body if it is not a constructor or the instance initializer.
       return false;

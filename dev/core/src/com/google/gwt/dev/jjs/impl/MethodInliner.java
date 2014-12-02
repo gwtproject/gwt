@@ -544,12 +544,8 @@ public class MethodInliner {
     return stats;
   }
 
-  // TODO(leafwang): remove this entry point when it is no longer needed.
   public static OptimizerStats exec(JProgram program) {
-    Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MethodInliner(program).execImpl(new OptimizerContext(program));
-    optimizeEvent.end("didChange", "" + stats.didChange());
-    return stats;
+    return exec(program, new FullOptimizerContext(program));
   }
 
   private final JProgram program;
@@ -573,7 +569,6 @@ public class MethodInliner {
       }
 
       stats.recordModified(inliner.getNumMods());
-      lastStep = optimizerCtx.getOptimizationStep();
       optimizerCtx.incOptimizationStep();
 
       if (!inliner.didChange()) {
@@ -581,8 +576,7 @@ public class MethodInliner {
       }
 
       // Run a cleanup on the methods we just modified
-      OptimizerStats dceStats = DeadCodeElimination.exec(program,
-          optimizerCtx.getModifiedMethodsAt(lastStep), optimizerCtx);
+      OptimizerStats dceStats = DeadCodeElimination.exec(program, optimizerCtx);
       stats.recordModified(dceStats.getNumMods());
     }
     optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fce35a4_5a8af578",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-02T20:56:24Z",
+      "side": 1,
+      "message": "You could also do  \n\n  String ss \u003d generateSelectionScript(logger, context, artifacts);\n  return emitString(logger, ss, context.getModuleName()\n        + \".nocache.js);\n\nwhich has the same behaviour although there is probably some value making it explicit here given the history.",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 39
+      },
+      "revId": "f1770ff9fc837735a611a4f05271e77e49c99b17",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

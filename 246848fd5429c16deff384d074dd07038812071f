@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffe57d1c_f5fe7279",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1996,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-02T22:07:29Z",
+      "side": 1,
+      "message": "I think it should be optimizerCtx.getLastStepFor(NAME)+1, since the methods which are last modified by DeadCodeElimination are deadcode-free.\n\nAnother concern is that when it is called by MethodInliner, actually we want to traverse the methods that modified by MethodInliner, not all the modified methods since last DeadCodeElimination. The result would be the same, but it may do unnecessary work in MethodInliner.",
+      "range": {
+        "startLine": 1996,
+        "startChar": 45,
+        "endLine": 1996,
+        "endChar": 78
+      },
+      "revId": "246848fd5429c16deff384d074dd07038812071f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

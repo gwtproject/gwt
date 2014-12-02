@@ -933,6 +933,7 @@ public class LocaleData {
   private void addCurrencyEntries(String category, GwtLocale locale, Factory cldrFactory,
       Map<String, Integer> currencyFractions, int defaultCurrencyFraction, Set<String> stillInUse,
       Map<String, Integer> rounding) {
+    System.out.println("addCurrencyExtras for " + locale);
     Map<String, String> outputMap = getMap(category, locale);
     Map<String, String> defaultMap = null;
     if (!locale.isDefault()) {
@@ -977,9 +978,17 @@ public class LocaleData {
       }
       String draft = attr.get("draft");
       if ("symbol".equalsIgnoreCase(field)) {
+        if ("TRY".equals(currencyCode)) {
+          System.out.println("For path: " + fullPath);
+          System.out.println("Got symbol '" + value + "' for " + currencyCode);
+        }
         // Don't overwrite symbol with narrow dollar value
         if (currency.getSymbol() == null || !"narrow".equals(parts.getAttributeValue(4, "alt"))) {
           currency.setSymbol(value);
+        } else {
+          if ("TRY".equals(currencyCode)) {
+            System.out.println("ignored symbol");
+          }
         }
       } else if ("displayName".equalsIgnoreCase(field)) {
         if (attr.get("count") != null) {

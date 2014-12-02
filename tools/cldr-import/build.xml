@@ -119,7 +119,7 @@
     <mkdir dir="${tmpdir}"/>
     <java classname="com.google.gwt.tools.cldr.GenerateGwtCldrData"
       fork="true" maxmemory="2048m" failonerror="true">
-      <arg line="--sourcedir ${cldr.data} --outdir ${tmpdir} ${cldr.locales}"/>
+      <arg line="--sourcedir ${cldr.data} --outdir ${tmpdir} ${cldr.locales} -p CurrencyDataProcessor"/>
       <sysproperty key="CLDR_DIR" value="${cldr.root}"/>
       <classpath>
         <pathelement location="${javac.out}"/>

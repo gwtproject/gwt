@@ -22,6 +22,30 @@
       "revId": "246848fd5429c16deff384d074dd07038812071f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffe57d1c_185c8d35",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1996,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-03T00:29:28Z",
+      "side": 1,
+      "message": "Good points.\n\nIt is not completely true that DeadCodeElimination guarantees dead-code freeness, but you have a point in most cases it will.\n\nW.r.t to MethodInliner doing extra work, that would mostly be on the first iteration, and probably the same would have happened on the next iteration of the outer loop.\n\nI prefer the simplicity of doing always the same, but I agree that we should measure the timing.",
+      "parentUuid": "ffe57d1c_f5fe7279",
+      "range": {
+        "startLine": 1996,
+        "startChar": 45,
+        "endLine": 1996,
+        "endChar": 78
+      },
+      "revId": "246848fd5429c16deff384d074dd07038812071f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

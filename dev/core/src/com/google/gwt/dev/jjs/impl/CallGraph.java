@@ -22,6 +22,7 @@ import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -102,12 +103,24 @@ public class CallGraph {
   /**
    * Return all the callers of a set of callee methods.
    */
-  public Set<JMethod> getCallers(Set<JMethod> calleeMethods) {
+  public Set<JMethod> getCallers(Collection<JMethod> calleeMethods) {
     assert (calleeMethods != null);
     Set<JMethod> callerMethods = Sets.newLinkedHashSet();
     for (JMethod calleeMethod : calleeMethods) {
       callerMethods.addAll(calleeCallersPairs.get(calleeMethod));
     }
     return callerMethods;
+  }
+
+  /**
+   * Return all the callees of a set of caller methods.
+   */
+  public Set<JMethod> getCallees(Collection<JMethod> callerMethods) {
+    assert (callerMethods != null);
+    Set<JMethod> calleeMethods = Sets.newLinkedHashSet();
+    for (JMethod callerMethod : callerMethods) {
+      calleeMethods.addAll(callerCalleesPairs.get(callerMethod));
+    }
+    return calleeMethods;
   }
 }

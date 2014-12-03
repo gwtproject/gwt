@@ -23,6 +23,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Multiset;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +37,21 @@ public class FullOptimizerContext implements OptimizerContext {
   private int optimizationStep = -1;
 
   private CallGraph callGraph = new CallGraph();
+  private FieldReferencesGraph fieldReferencesGraph = new FieldReferencesGraph();
+
+  /**
+   * Removed callee methods.
+   * <p>
+   * When a method call is removed from the caller method (the caller method body is changed and the
+   * method call is eliminated or replaced, or the caller method itself is pruned), record the callee
+   * method in {@code removedCalleeMethods}.
+   * <P>
+   * It is used in TypeTightener. When a method is called, we record the {arg<->param} pairs in
+   * {@code assignments}, and the type of the parameter is analyzed according to {@code assignments}
+   * . If a method call is removed, there is an opportunity that the type of the callee method's
+   * parameter can be tightened since it may have less assignments.
+   */
+  private Set<JMethod> removedCalleeMethods = Sets.newLinkedHashSet();
 
   // TODO(leafwang): add other dependencies here
 
@@ -68,6 +84,7 @@ public class FullOptimizerContext implements OptimizerContext {
     incOptimizationStep();
     initializeModifications(program);
     buildCallGraph(program);
+    buildFieldReferencesGraph(program);
     incOptimizationStep();
   }
 
@@ -77,7 +94,6 @@ public class FullOptimizerContext implements OptimizerContext {
         modifiedField);
     fieldsByModificationStep.get(optimizationStep).add(modifiedField);
     modificationStepByField.setCount(modifiedField, optimizationStep);
-
     // TODO(leafwang): update related dependence information here.
   }
 
@@ -87,11 +103,22 @@ public class FullOptimizerContext implements OptimizerContext {
         modifiedMethod);
     methodsByModificationStep.get(optimizationStep).add(modifiedMethod);
     modificationStepByMethod.setCount(modifiedMethod, optimizationStep);
+
+    Set<JMethod> originalCalleeMethods = callGraph.getCallees(Collections.singleton(modifiedMethod));
     callGraph.updateCallGraphOfMethod(modifiedMethod);
+    removedCalleeMethods.addAll(
+        Sets.difference(originalCalleeMethods, callGraph.getCallees(Collections.singleton(modifiedMethod))));
+
+    fieldReferencesGraph.updateFieldRefencesOfMethod(modifiedMethod);
   }
 
   @Override
-  public Set<JMethod> getCallers(Set<JMethod> calleeMethods) {
+  public Set<JMethod> getCallees(Collection<JMethod> callerMethods) {
+    return callGraph.getCallees(callerMethods);
+  }
+
+  @Override
+  public Set<JMethod> getCallers(Collection<JMethod> calleeMethods) {
     return callGraph.getCallers(calleeMethods);
   }
 
@@ -101,18 +128,17 @@ public class FullOptimizerContext implements OptimizerContext {
   }
 
   @Override
+  public Set<JMethod> getMethodsByReferencedFields(Collection<JField> fields) {
+    return fieldReferencesGraph.getMethodsByReferencedFields(fields);
+  }
+
+  @Override
   public Set<JField> getModifiedFieldsSince(int stepSince) {
     Set<JField> result = Sets.newLinkedHashSet();
     for (int i = stepSince; i < optimizationStep; i++) {
       result.addAll(fieldsByModificationStep.get(i));
     }
     return result;
-  }
-
-  @Override
-  public Set<JMethod> getModifiedMethodsAt(int step) {
-    assert (step >= 0 && step < optimizationStep);
-    return Sets.newLinkedHashSet(methodsByModificationStep.get(step));
   }
 
   @Override
@@ -130,6 +156,16 @@ public class FullOptimizerContext implements OptimizerContext {
   }
 
   @Override
+  public Set<JField> getReferencedFieldsByMethods(Collection<JMethod> methods) {
+    return fieldReferencesGraph.getReferencedFieldsByMethods(methods);
+  }
+
+  @Override
+  public Set<JMethod> getRemovedCalleeMethods() {
+    return removedCalleeMethods;
+  }
+
+  @Override
   public void incOptimizationStep() {
     methodsByModificationStep.add(new LinkedHashSet<JMethod>());
     fieldsByModificationStep.add(new LinkedHashSet<JField>());
@@ -140,6 +176,7 @@ public class FullOptimizerContext implements OptimizerContext {
   public void remove(JField field) {
     fieldsByModificationStep.get(modificationStepByField.count(field)).remove(field);
     modificationStepByField.remove(field);
+    fieldReferencesGraph.removeField(field);
   }
 
   @Override
@@ -154,6 +191,7 @@ public class FullOptimizerContext implements OptimizerContext {
     methodsByModificationStep.get(modificationStepByMethod.count(method)).remove(method);
     modificationStepByMethod.remove(method);
     callGraph.removeMethod(method);
+    fieldReferencesGraph.removeMethod(method);
   }
 
   @Override
@@ -168,8 +206,27 @@ public class FullOptimizerContext implements OptimizerContext {
     lastStepForOptimizer.setCount(optimizerName, step);
   }
 
+  @Override
+  public void addRemovedCallees(Collection<JMethod> calleeMethods) {
+    removedCalleeMethods.addAll(calleeMethods);
+  }
+
+  @Override
+  public void clearRemovedCallees() {
+    removedCalleeMethods.clear();
+  }
+
+  @Override
+  public void syncRemovedCallees(Collection<JMethod> prunedMethods) {
+    removedCalleeMethods.removeAll(prunedMethods);
+  }
+
   private void buildCallGraph(JProgram program) {
     callGraph.buildCallGraph(program);
+  }
+
+  private void buildFieldReferencesGraph(JProgram program) {
+    fieldReferencesGraph.buildFieldReferencesGraph(program);
   }
 
   private void initializeModifications(JProgram program) {

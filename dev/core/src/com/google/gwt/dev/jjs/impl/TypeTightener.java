@@ -58,7 +58,11 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
+import com.google.gwt.thirdparty.guava.common.collect.Collections2;
+import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -67,6 +71,8 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 /**
  * The purpose of this pass is to record "type flow" information and then use
@@ -204,6 +210,18 @@ public class TypeTightener {
     private JMethod currentMethod;
     private Predicate<JField> canUninitializedValueBeObserved;
 
+    /**
+     * The call trace invoked by arguments in a method call. It is used to record
+     * {@code callersByFieldRefArg} and {@code callersByMethodCallArg}.
+     * For example, fun1(fun2(fun3(), fun4()), fun5()); The stack would be ...
+     * fun1 -> fun2 -> fun3; (pop fun3, push fun4)
+     * fun1 -> fun2 -> fun4; (pop fun4)
+     * fun1 -> fun2; (pop fun2, push fun5)
+     * fun1 -> fun5; (pop fun5)
+     * fun1;
+     */
+    private Stack<JMethod> callTraceByArgs = new Stack<JMethod>();
+
     @Override
     public void endVisit(JBinaryOperation x, Context ctx) {
       if (x.isAssignment() && (x.getType() instanceof JReferenceType)) {
@@ -246,6 +264,13 @@ public class TypeTightener {
     }
 
     @Override
+    public void endVisit(JFieldRef x, Context ctx) {
+      if (!callTraceByArgs.empty()) {
+        callersByFieldRefArg.put(x.getField(), callTraceByArgs.peek());
+      }
+    }
+
+    @Override
     public void endVisit(JMethod x, Context ctx) {
       if (program.typeOracle.isInstantiatedType(x.getEnclosingType())) {
         for (JMethod method : program.typeOracle.getAllOverriddenMethods(x)) {
@@ -266,6 +291,10 @@ public class TypeTightener {
         if (param.getType() instanceof JReferenceType) {
           addAssignment(param, arg);
         }
+      }
+      callTraceByArgs.pop();
+      if (!callTraceByArgs.empty()) {
+        callersByMethodCallArg.put(x.getTarget(), callTraceByArgs.peek());
       }
     }
 
@@ -334,6 +363,12 @@ public class TypeTightener {
           }
         }
       }
+      return true;
+    }
+
+    @Override
+    public boolean visit(JMethodCall x, Context ctx) {
+      callTraceByArgs.push(x.getTarget());
       return true;
     }
 
@@ -452,6 +487,9 @@ public class TypeTightener {
 
     @Override
     public void exit(JField x, Context ctx) {
+      if (program.codeGenTypes.contains(x.getEnclosingType())) {
+        return;
+      }
       if (!x.isVolatile()) {
         tighten(x);
       }
@@ -532,6 +570,9 @@ public class TypeTightener {
      */
     @Override
     public void exit(JMethod x, Context ctx) {
+      if (program.codeGenTypes.contains(x.getEnclosingType())) {
+        return;
+      }
       if (!(x.getType() instanceof JReferenceType)) {
         return;
       }
@@ -663,8 +704,8 @@ public class TypeTightener {
        * Explicitly NOT visiting native methods since we can't infer further
        * type information.
        */
-      return !x.isNative() || program.typeOracle.isJsTypeMethod(x) ||
-          program.typeOracle.isExportedMethod(x);
+      return !program.codeGenTypes.contains(x.getEnclosingType()) && !x.isNative()
+          || program.typeOracle.isJsTypeMethod(x) || program.typeOracle.isExportedMethod(x);
     }
 
     /**
@@ -799,7 +840,7 @@ public class TypeTightener {
 
   @VisibleForTesting
   static OptimizerStats exec(JProgram program) {
-    return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
+    return exec(program, new FullOptimizerContext(program));
   }
 
   private static <T, V> void add(T target, V value, Map<T, Collection<V>> map) {
@@ -870,6 +911,14 @@ public class TypeTightener {
   private final Map<JMethod, Collection<JExpression>> returns =
       new IdentityHashMap<JMethod, Collection<JExpression>>();
 
+  /**
+   * For each method call, record the method calls and field references in its arguments.
+   * When the callee methods or the referenced fields in the arguments are modified,
+   * it would be possible for the target method to be type tightened.
+   */
+  private final Multimap<JMethod, JMethod> callersByMethodCallArg = HashMultimap.create();
+  private final Multimap<JField, JMethod> callersByFieldRefArg = HashMultimap.create();
+
   private final JProgram program;
   private final JNullType typeNull;
 
@@ -892,22 +941,143 @@ public class TypeTightener {
      * than completion if we compile with an option for less than 100% optimized
      * output.
      */
+    int iter = 0;
+    int lastStep = optimizerCtx.getLastStepFor(NAME);
+    int first = lastStep;
     while (true) {
       TightenTypesVisitor tightener = new TightenTypesVisitor(optimizerCtx);
-      tightener.accept(program);
+      Set<JMethod> modifiedMethods = optimizerCtx.getModifiedMethodsSince(lastStep);
+      Set<JField> modifiedFields = optimizerCtx.getModifiedFieldsSince(lastStep);
+      Set<JMethod> affectedMethods =
+          affectedMethods(modifiedMethods, modifiedFields, iter == 0, optimizerCtx);
+      Set<JField> affectedFields =
+          affectedFields(modifiedMethods, modifiedFields, iter == 0, optimizerCtx);
+      for (JMethod method : affectedMethods) {
+        tightener.accept(method);
+      }
+      for (JField field : affectedFields) {
+        tightener.accept(field);
+      }
       stats.recordModified(tightener.getNumMods());
+      lastStep = optimizerCtx.getOptimizationStep();
+      if (iter == 0) {
+        first = lastStep;
+      }
       if (!tightener.didChange()) {
         break;
       }
+      optimizerCtx.incOptimizationStep();
+      iter++;
     }
 
     if (stats.didChange()) {
       FixDanglingRefsVisitor fixer = new FixDanglingRefsVisitor(optimizerCtx);
       fixer.accept(program);
+      optimizerCtx.incOptimizationStep();
       JavaAstVerifier.assertProgramIsConsistent(program);
     }
-
+    /*
+     * Set the last step to the step at which TypeTightener does the first iteration. Since the
+     * RecordVisitor is run only once, the information in {@code assignments} etc. is not updated.
+     * So it is still possible for the type tightened methods/fields to be type tightened for the
+     * next time.
+     */
+    optimizerCtx.setLastStepFor(NAME, first);
     return stats;
+  }
+
+  private Set<JMethod> affectedMethods(Set<JMethod> modifiedMethods, Set<JField> modifiedFields,
+      boolean firstIteration, OptimizerContext optimizerCtx) {
+    assert (modifiedMethods != null && modifiedFields != null);
+    Set<JMethod> affectedMethods = Sets.newLinkedHashSet();
+
+    Set<JMethod> returnChangedMethods = Sets.filter(modifiedMethods, new Predicate<JMethod>() {
+        @Override
+      public boolean apply(JMethod method) {
+        return !method.getType().equals(method.getOriginalReturnType());
+      }
+    });
+    Set<JMethod> paramsChangedMethods = Sets.filter(modifiedMethods, new Predicate<JMethod>() {
+        @Override
+      public boolean apply(JMethod method) {
+        List<JParameter> params = method.getParams();
+        List<JType> originalParamTypes = method.getOriginalParamTypes();
+        if (params.size() != originalParamTypes.size()) {
+          return true;
+        }
+        for (int i = 0; i < params.size(); i++) {
+          if (!params.get(i).getType().equals(originalParamTypes.get(i))) {
+            return true;
+          }
+        }
+        return false;
+      }
+    });
+    Set<JMethod> returnOrParamsChangedMethods =
+        Sets.union(returnChangedMethods, paramsChangedMethods);
+    Predicate<JMethod> inAST = new Predicate<JMethod>() {
+        @Override
+      public boolean apply(JMethod method) {
+        JDeclaredType enclosingType = method.getEnclosingType();
+        return (enclosingType != null && program.getDeclaredTypes().contains(enclosingType)
+            && !program.isReferenceOnly(enclosingType)
+            && enclosingType.getMethods().contains(method));
+      }
+    };
+
+    // If the return type or parameters' types of a method are changed, its caller methods should be
+    // reanalyzed.
+    affectedMethods.addAll(optimizerCtx.getCallers(returnOrParamsChangedMethods));
+
+    // If a method is modified, its callee should be reanalyzed.
+    affectedMethods.addAll(optimizerCtx.getCallees(modifiedMethods));
+
+    // The removed callee methods (one or more method calls to it are removed) should be reanalyzed.
+    affectedMethods.addAll(optimizerCtx.getRemovedCalleeMethods());
+    optimizerCtx.clearRemovedCallees();
+
+    // If a method's return type is changed, the callers which call it through argument should be
+    // reanalyzed.
+    for (JMethod method : returnChangedMethods) {
+      affectedMethods.addAll(callersByMethodCallArg.get(method));
+    }
+
+    // If a method's return type or parameters' types are changed, its overriders and overridden
+    // methods should be reanalyzed. The overriden methods and overriders from typeOracle may have
+    // been pruned, so we have to check if they are in the AST.
+    for (JMethod method : returnOrParamsChangedMethods) {
+      affectedMethods.addAll(
+          Sets.filter(program.typeOracle.getAllOverriddenMethods(method), inAST));
+      if (overriders.containsKey(method)) {
+        affectedMethods.addAll(Collections2.filter(overriders.get(method), inAST));
+      }
+    }
+
+    // If a field is changed, the methods that reference to it should be reanalyzed.
+    affectedMethods.addAll(optimizerCtx.getMethodsByReferencedFields(modifiedFields));
+
+    // If a field is changed, the caller methods which call it through argument should be
+    // reanalyzed.
+    for (JField field : modifiedFields) {
+      affectedMethods.addAll(callersByFieldRefArg.get(field));
+    }
+
+    // All the methods that are modified by other optimizer should be reanalyzed.
+    if (firstIteration) {
+      affectedMethods.addAll(modifiedMethods);
+    }
+    return affectedMethods;
+  }
+
+  private Set<JField> affectedFields(Set<JMethod> affectedMethods, Set<JField> modifiedFields,
+      boolean firstIteration, OptimizerContext optimizerCtx) {
+    assert (modifiedFields != null && affectedMethods != null);
+    Set<JField> affectedFields = Sets.newLinkedHashSet();
+    if (firstIteration) {
+      affectedFields.addAll(modifiedFields);
+    }
+    affectedFields.addAll(optimizerCtx.getReferencedFieldsByMethods(affectedMethods));
+    return affectedFields;
   }
 
   private enum AnalysisResult { TRUE, FALSE, UNKNOWN };

@@ -184,4 +184,8 @@ public abstract class JChangeTrackingVisitor extends JModVisitor {
       fieldModified = true;
     }
   }
+
+  public void addRemovedCalleesBy(Collection<JMethod> methods) {
+    optimizerCtx.addRemovedCallees(optimizerCtx.getCallees(methods));
+  }
 }

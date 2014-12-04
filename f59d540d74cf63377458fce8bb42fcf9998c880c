@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5f44c9e8_12a8fa95",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/CallGraph.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-04T17:04:05Z",
+      "side": 1,
+      "message": "This would be incomplete for use in TypeTightener because a call should include all possible overrides, e.g. in the following code\n\n  class A {\n    m()\n  }\n\n  class B extends A {\n    m()\n  }\n\n\n  f(A a) {\n    a.m()   \u003c-- this call that in the AST shows as A:m() can also be B:m().\n  }",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 5
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f44c9e8_12955aa1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
         "patchSetId": 1
@@ -156,6 +179,29 @@
         "startChar": 23,
         "endLine": 54,
         "endChar": 43
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_26229719",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-04T17:04:05Z",
+      "side": 1,
+      "message": "Also I think we should abstract this, basically you want to now if the callsites for a method has changed, not only removed and we should keep track of that then.\n\nIn general it seems that we need to keep track whether some aspect of a method is modified, whether it is its body, callsites, or other aspect, and we should probably abstract that and implement it uniformly.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 70
       },
       "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
@@ -370,6 +416,29 @@
     },
     {
       "key": {
+        "uuid": "5f2da928_75f60870",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-04T17:04:05Z",
+      "side": 1,
+      "message": "I don\u0027t like special casing by iteration, we should be doing the same as in MethodInliner.",
+      "range": {
+        "startLine": 952,
+        "startChar": 58,
+        "endLine": 952,
+        "endChar": 68
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff1c9dfc_9ade6de3",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 1
@@ -409,6 +478,98 @@
         "startChar": 23,
         "endLine": 1018,
         "endChar": 28
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2da928_d557dca1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-04T17:04:05Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to be so granular here. If a method changed  (no matter whether it is its parameters or body) assume that everything as changed and include in the affected methods the callers, the callees etc.",
+      "range": {
+        "startLine": 1028,
+        "startChar": 0,
+        "endLine": 1043,
+        "endChar": 5
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2da928_f55c58c6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-04T17:04:05Z",
+      "side": 1,
+      "message": "I see that we are handling the overrides here instead of representing them in the call graph; you can probably ignore the comment I left there.",
+      "range": {
+        "startLine": 1045,
+        "startChar": 0,
+        "endLine": 1054,
+        "endChar": 5
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2da928_95616485",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-04T17:04:05Z",
+      "side": 1,
+      "message": "You can add the modified methods always and not keep track of the iteration number.",
+      "range": {
+        "startLine": 1066,
+        "startChar": 0,
+        "endLine": 1067,
+        "endChar": 46
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2da928_3522d043",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-04T17:04:05Z",
+      "side": 1,
+      "message": "I see that you are trying to do actually the minimal recomputation but sometimes it is better to have simpler (albeit less efficient) code and that is what is generally preferred unless the gains are significant.",
+      "range": {
+        "startLine": 1028,
+        "startChar": 2,
+        "endLine": 1069,
+        "endChar": 8
       },
       "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

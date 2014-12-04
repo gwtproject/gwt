@@ -209,6 +209,30 @@
     },
     {
       "key": {
+        "uuid": "5f2da928_e47824f0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-04T21:27:18Z",
+      "side": 1,
+      "message": "How about we keep track of the modifications of the dependent context (CallGraph, FieldReferencesGraph) at each step? Then we can get the information we need. Currently the dependent context is kept updated so we lost its modification information between steps.",
+      "parentUuid": "5f44c9e8_26229719",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 70
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f44c9e8_4691e357",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
         "patchSetId": 1
@@ -324,6 +348,30 @@
     },
     {
       "key": {
+        "uuid": "5f2da928_0450c050",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-04T21:27:18Z",
+      "side": 1,
+      "message": "What I what to do here is to add the callee methods of the pruned methods (type.getMethods()) to removedCalleeMethods.",
+      "parentUuid": "5f44c9e8_a6b78759",
+      "range": {
+        "startLine": 466,
+        "startChar": 10,
+        "endLine": 466,
+        "endChar": 49
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff1c9dfc_9a718dd3",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 1
@@ -358,6 +406,30 @@
       "writtenOn": "2014-12-04T00:54:03Z",
       "side": 1,
       "message": "i think this name is wrong, isn\u0027t it really \"calledMethodsByMethodCallArg\" ?",
+      "range": {
+        "startLine": 919,
+        "startChar": 43,
+        "endLine": 919,
+        "endChar": 65
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2da928_6f094d53",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-04T21:27:18Z",
+      "side": 1,
+      "message": "Maybe that\u0027s not what I mean. What I mean is that, for example, if there is a call\nfun1(fun2());\nI want to put {fun2, fun1} into the map.\nThen if fun2 is modified, we can get fun1.",
+      "parentUuid": "ff1c9dfc_7a9a7947",
       "range": {
         "startLine": 919,
         "startChar": 43,
@@ -611,6 +683,30 @@
       "writtenOn": "2014-12-04T00:54:03Z",
       "side": 1,
       "message": "how about you pull this test file out of this patch into it\u0027s own separate patch, and get it reviewed and committed first.\n\nthat way the test can help prove that there is no change in behavior before and after your changes to TypeTightener",
+      "range": {
+        "startLine": 22,
+        "startChar": 13,
+        "endLine": 22,
+        "endChar": 30
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2da928_ef1d5d8a",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/TypeTightenerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-04T21:27:18Z",
+      "side": 1,
+      "message": "will do.",
+      "parentUuid": "5f44c9e8_267e17da",
       "range": {
         "startLine": 22,
         "startChar": 13,

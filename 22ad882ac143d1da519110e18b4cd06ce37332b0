@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5f8a0930_c7684265",
+        "filename": "user/src/com/google/gwt/dom/client/DataTransfer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-04T19:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f44c9e8_71414034",
+      "revId": "22ad882ac143d1da519110e18b4cd06ce37332b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f44c9e8_11a55c97",
         "filename": "user/src/com/google/gwt/dom/client/DataTransfer.java",
         "patchSetId": 4

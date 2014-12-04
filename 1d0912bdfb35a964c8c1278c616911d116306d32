@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f30ad7e_b635887d",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-12-04T16:31:43Z",
+      "side": 1,
+      "message": "two spaces before t the \u0027\u003d\u0027",
+      "revId": "1d0912bdfb35a964c8c1278c616911d116306d32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ffc75c4_eaf443ec",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-12-04T16:31:43Z",
+      "side": 1,
+      "message": "Could be done with Guava in one line of code and without try catch:\n\n  Files.asCharSink(file, Charsets.UTF_8).write(gss);",
+      "revId": "1d0912bdfb35a964c8c1278c616911d116306d32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ffc75c4_8a2cafc1",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-12-04T16:31:43Z",
+      "side": 1,
+      "message": "Do you plan to add a \"-lenient\" option ? Otherwise, this private method is always called with lenient\u003dfalse",
+      "range": {
+        "startLine": 150,
+        "startChar": 68,
+        "endLine": 150,
+        "endChar": 75
+      },
+      "revId": "1d0912bdfb35a964c8c1278c616911d116306d32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f30ad7e_96308c8e",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-12-04T16:31:43Z",
+      "side": 1,
+      "message": "recursively",
+      "revId": "1d0912bdfb35a964c8c1278c616911d116306d32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

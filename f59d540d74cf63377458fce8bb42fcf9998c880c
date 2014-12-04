@@ -1,0 +1,487 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f44c9e8_12955aa1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 30,
+        "endChar": 8
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_923c0a06",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "isn\u0027t this the same as buildFieldUsesVisitor.accept(method);",
+      "range": {
+        "startLine": 78,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 51
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_e62cafc2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "maybe nicer like:\n\nCollection\u003cJField\u003e referencedFields \u003d referencedFieldsByMethod.removeAll(method);\nfor (JField referencedField : referencedFields) {\n  methodsByReferencedField.remove(referencedField, method);\n}",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 47
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_2656171f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "s/getMethodsByReferencedFields/getReferencingMethodsForFields",
+      "range": {
+        "startLine": 115,
+        "startChar": 22,
+        "endLine": 115,
+        "endChar": 50
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_e64fcf7f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "s/result/referencingMethods",
+      "range": {
+        "startLine": 117,
+        "startChar": 17,
+        "endLine": 117,
+        "endChar": 23
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_c6c3b366",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "line too long",
+      "range": {
+        "startLine": 46,
+        "startChar": 96,
+        "endLine": 46,
+        "endChar": 101
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_862b6b20",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "the other collections here all seem to keep track of on which step their fields or methods were modified.\n\nwhy is it that removedCalleeMethods doesn\u0027t have a similar need?",
+      "range": {
+        "startLine": 54,
+        "startChar": 23,
+        "endLine": 54,
+        "endChar": 43
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_4691e357",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "line too long",
+      "range": {
+        "startLine": 110,
+        "startChar": 92,
+        "endLine": 110,
+        "endChar": 109
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_2609371f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "spelling",
+      "range": {
+        "startLine": 112,
+        "startChar": 36,
+        "endLine": 112,
+        "endChar": 44
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_66a5ff40",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "i suspect that there wouldn\u0027t be a need for this method if removedCalleeMethods kept track of on which step it\u0027s modifications occurred, like the other collections here do",
+      "range": {
+        "startLine": 215,
+        "startChar": 14,
+        "endLine": 215,
+        "endChar": 35
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_c6fdf314",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "sort method within file",
+      "range": {
+        "startLine": 188,
+        "startChar": 13,
+        "endLine": 188,
+        "endChar": 22
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_a6b78759",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "this line is hard for me to read, please make it clearer",
+      "range": {
+        "startLine": 466,
+        "startChar": 10,
+        "endLine": 466,
+        "endChar": 49
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff1c9dfc_9a718dd3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "this name sounds like a Map, but it\u0027s not.\n\nshould be something like \"callTraceInArgs\" or \"nestedCallTrace\"",
+      "range": {
+        "startLine": 223,
+        "startChar": 27,
+        "endLine": 223,
+        "endChar": 42
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff1c9dfc_7a9a7947",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "i think this name is wrong, isn\u0027t it really \"calledMethodsByMethodCallArg\" ?",
+      "range": {
+        "startLine": 919,
+        "startChar": 43,
+        "endLine": 919,
+        "endChar": 65
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff1c9dfc_7acd993d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "s/first/firstStep",
+      "range": {
+        "startLine": 946,
+        "startChar": 8,
+        "endLine": 946,
+        "endChar": 13
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff1c9dfc_9ab3cd91",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "the body of this while loop looks kind of messy now.\n\ncan you make it looks a little more organized? some combination of add whitespace/comments/pull out functions",
+      "range": {
+        "startLine": 949,
+        "startChar": 0,
+        "endLine": 949,
+        "endChar": 2
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff1c9dfc_9ade6de3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "s/affectedMethods/computeAffectedMethods",
+      "range": {
+        "startLine": 989,
+        "startChar": 23,
+        "endLine": 989,
+        "endChar": 38
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff1c9dfc_7a84b99b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1018,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "make this a field of the TypeTightener class so it does\u0027nt have to be written here and can be reused multiple times.\n\nactually, please do so for all 3 of these predicate definitions.",
+      "range": {
+        "startLine": 1018,
+        "startChar": 23,
+        "endLine": 1018,
+        "endChar": 28
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff1c9dfc_daee254c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1072,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "s/affectedFields/computeAffectedFields",
+      "range": {
+        "startLine": 1072,
+        "startChar": 22,
+        "endLine": 1072,
+        "endChar": 36
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f44c9e8_267e17da",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/TypeTightenerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "how about you pull this test file out of this patch into it\u0027s own separate patch, and get it reviewed and committed first.\n\nthat way the test can help prove that there is no change in behavior before and after your changes to TypeTightener",
+      "range": {
+        "startLine": 22,
+        "startChar": 13,
+        "endLine": 22,
+        "endChar": 30
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f4ed10c_fe4f5db1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/TypeTightenerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-04T00:54:03Z",
+      "side": 1,
+      "message": "nice tests.",
+      "range": {
+        "startLine": 39,
+        "startChar": 14,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "5f2da928_0f98d9ff",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f44c9e8_12955aa1",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 30,
+        "endChar": 8
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f44c9e8_923c0a06",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
         "patchSetId": 1
@@ -59,6 +83,30 @@
       "writtenOn": "2014-12-04T00:54:03Z",
       "side": 1,
       "message": "isn\u0027t this the same as buildFieldUsesVisitor.accept(method);",
+      "range": {
+        "startLine": 78,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 51
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2da928_2f81158b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Yes. Changed.",
+      "parentUuid": "5f44c9e8_923c0a06",
       "range": {
         "startLine": 78,
         "startChar": 1,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "5f2da928_efc55dcd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f44c9e8_e62cafc2",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 47
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f44c9e8_2656171f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
         "patchSetId": 1
@@ -105,6 +177,30 @@
       "writtenOn": "2014-12-04T00:54:03Z",
       "side": 1,
       "message": "s/getMethodsByReferencedFields/getReferencingMethodsForFields",
+      "range": {
+        "startLine": 115,
+        "startChar": 22,
+        "endLine": 115,
+        "endChar": 50
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2da928_0ff45918",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f44c9e8_2656171f",
       "range": {
         "startLine": 115,
         "startChar": 22,
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "5f2da928_8fe06955",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FieldReferencesGraph.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f44c9e8_e64fcf7f",
+      "range": {
+        "startLine": 117,
+        "startChar": 17,
+        "endLine": 117,
+        "endChar": 23
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f44c9e8_c6c3b366",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
         "patchSetId": 1
@@ -151,6 +271,30 @@
       "writtenOn": "2014-12-04T00:54:03Z",
       "side": 1,
       "message": "line too long",
+      "range": {
+        "startLine": 46,
+        "startChar": 96,
+        "endLine": 46,
+        "endChar": 101
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f7c112d_e51c9ad7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f44c9e8_c6c3b366",
       "range": {
         "startLine": 46,
         "startChar": 96,
@@ -256,6 +400,30 @@
     },
     {
       "key": {
+        "uuid": "1f55f1ac_63b7425b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f44c9e8_4691e357",
+      "range": {
+        "startLine": 110,
+        "startChar": 92,
+        "endLine": 110,
+        "endChar": 109
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f44c9e8_2609371f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
         "patchSetId": 1
@@ -267,6 +435,30 @@
       "writtenOn": "2014-12-04T00:54:03Z",
       "side": 1,
       "message": "spelling",
+      "range": {
+        "startLine": 112,
+        "startChar": 36,
+        "endLine": 112,
+        "endChar": 44
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f55f1ac_e3f33231",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f44c9e8_2609371f",
       "range": {
         "startLine": 112,
         "startChar": 36,
@@ -407,6 +599,30 @@
       "writtenOn": "2014-12-04T00:54:03Z",
       "side": 1,
       "message": "this name sounds like a Map, but it\u0027s not.\n\nshould be something like \"callTraceInArgs\" or \"nestedCallTrace\"",
+      "range": {
+        "startLine": 223,
+        "startChar": 27,
+        "endLine": 223,
+        "endChar": 42
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f55f1ac_43a48618",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "change it to \"nestedCallTrace\".",
+      "parentUuid": "ff1c9dfc_9a718dd3",
       "range": {
         "startLine": 223,
         "startChar": 27,
@@ -582,6 +798,30 @@
     },
     {
       "key": {
+        "uuid": "1f55f1ac_638ae279",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff1c9dfc_9ade6de3",
+      "range": {
+        "startLine": 989,
+        "startChar": 23,
+        "endLine": 989,
+        "endChar": 38
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff1c9dfc_7a84b99b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 1
@@ -605,6 +845,30 @@
     },
     {
       "key": {
+        "uuid": "a43f7ab4_b981838d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1018,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff1c9dfc_7a84b99b",
+      "range": {
+        "startLine": 1018,
+        "startChar": 23,
+        "endLine": 1018,
+        "endChar": 28
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f2da928_d557dca1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 1
@@ -616,6 +880,30 @@
       "writtenOn": "2014-12-04T17:04:05Z",
       "side": 1,
       "message": "I don\u0027t think we need to be so granular here. If a method changed  (no matter whether it is its parameters or body) assume that everything as changed and include in the affected methods the callers, the callees etc.",
+      "range": {
+        "startLine": 1028,
+        "startChar": 0,
+        "endLine": 1043,
+        "endChar": 5
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a43f7ab4_79f31b49",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f2da928_d557dca1",
       "range": {
         "startLine": 1028,
         "startChar": 0,
@@ -674,6 +962,30 @@
     },
     {
       "key": {
+        "uuid": "a43f7ab4_39fd9313",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f2da928_95616485",
+      "range": {
+        "startLine": 1066,
+        "startChar": 0,
+        "endLine": 1067,
+        "endChar": 46
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f2da928_3522d043",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 1
@@ -708,6 +1020,30 @@
       "writtenOn": "2014-12-04T00:54:03Z",
       "side": 1,
       "message": "s/affectedFields/computeAffectedFields",
+      "range": {
+        "startLine": 1072,
+        "startChar": 22,
+        "endLine": 1072,
+        "endChar": 36
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f55f1ac_4356c654",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1072,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-05T23:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff1c9dfc_daee254c",
       "range": {
         "startLine": 1072,
         "startChar": 22,

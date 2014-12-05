@@ -19,6 +19,52 @@
     },
     {
       "key": {
+        "uuid": "bf0225b9_1e94ad48",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/MonolithicJavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-05T00:33:02Z",
+      "side": 1,
+      "message": "can you move this into getTypeMapper() and getTypeOrder().",
+      "range": {
+        "startLine": 121,
+        "startChar": 5,
+        "endLine": 121,
+        "endChar": 74
+      },
+      "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0225b9_fea9f972",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2229,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-05T00:33:02Z",
+      "side": 1,
+      "message": "Comment from revision 4. \n\nLet\u0027s use the the closureStyle (cast maps in an array) for all codepaths. (I don\u0027t think it will contribute noticeable overhead).",
+      "range": {
+        "startLine": 2220,
+        "startChar": 0,
+        "endLine": 2229,
+        "endChar": 13
+      },
+      "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf0225b9_1bf03fa1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeReferences.java",
         "patchSetId": 5
@@ -30,6 +76,46 @@
       "writtenOn": "2014-12-04T23:42:32Z",
       "side": 1,
       "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JLiteral.",
+      "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0225b9_1e9aed45",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-05T00:33:02Z",
+      "side": 1,
+      "message": "remove.",
+      "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0225b9_fec5791b",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-05T00:33:02Z",
+      "side": 1,
+      "message": "Ha, there was already a top level function....\n\nI assumed that the visitor was accepting the global statements directly... \n\ngreat.",
+      "range": {
+        "startLine": 836,
+        "startChar": 0,
+        "endLine": 844,
+        "endChar": 14
+      },
       "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

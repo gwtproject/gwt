@@ -19,6 +19,52 @@
     },
     {
       "key": {
+        "uuid": "bf0225b9_8c70977a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-05T02:12:01Z",
+      "side": 1,
+      "message": "update.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 45
+      },
+      "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0225b9_2c634bba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-05T02:12:01Z",
+      "side": 1,
+      "message": "No longer true.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 32
+      },
+      "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf0225b9_1e94ad48",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/MonolithicJavaToJavaScriptCompiler.java",
         "patchSetId": 5

@@ -372,6 +372,30 @@
     },
     {
       "key": {
+        "uuid": "bf0225b9_5ee74542",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-05T00:12:11Z",
+      "side": 1,
+      "message": "since you\u0027ve got several functions that start with \"addRemovedCallees\" so i won\u0027t ask you to make a dramatic name change, but i think \"addRemovedCalleesOf\" makes more sense than \"addRemovedCalleesBy\"\n\nalso addRemovedCallees(getCalleesOf(type.getMethods()) would be even clearer",
+      "parentUuid": "5f2da928_0450c050",
+      "range": {
+        "startLine": 466,
+        "startChar": 10,
+        "endLine": 466,
+        "endChar": 49
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff1c9dfc_9a718dd3",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 1

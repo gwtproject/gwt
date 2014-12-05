@@ -442,6 +442,30 @@
     },
     {
       "key": {
+        "uuid": "bf0225b9_db49a7ae",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-05T00:08:51Z",
+      "side": 1,
+      "message": "yes i know that\u0027s what you mean, but i\u0027m objecting to the name.\n\nhere\u0027s an example and how the name makes me want to interpret it:\n\nvoid fun3() {\n  fun1(fun2());\n}\n\n\nhere, fun2 is the arg, fun1 is a method being called, and fun3 is the caller.\n\n\nso when you name this map as \"callersByMethodCallArg\" i intepret \"caller\" to be fun3, when you really intend it to be fun2.\n\n\nthe name i\u0027ve suggested makes more sense to me. but granted, it\u0027s hard to pick a name that captures these fine-grained distinctions",
+      "parentUuid": "5f2da928_6f094d53",
+      "range": {
+        "startLine": 919,
+        "startChar": 43,
+        "endLine": 919,
+        "endChar": 65
+      },
+      "revId": "f59d540d74cf63377458fce8bb42fcf9998c880c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff1c9dfc_7acd993d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 1

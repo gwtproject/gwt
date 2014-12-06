@@ -83,6 +83,24 @@
     },
     {
       "key": {
+        "uuid": "a43f7ab4_1f3f4fdc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-06T00:45:08Z",
+      "side": 1,
+      "message": "I see you still need to provide a function with the annotation. My bad.",
+      "parentUuid": "a43f7ab4_44d50e4d",
+      "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf0225b9_1e94ad48",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/MonolithicJavaToJavaScriptCompiler.java",
         "patchSetId": 5
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "Done. But since those methods don\u0027t have access to the permutation variable, I pass it as a param.",
       "parentUuid": "bf0225b9_1e94ad48",
+      "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a43f7ab4_5fd0375e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/MonolithicJavaToJavaScriptCompiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-06T00:45:08Z",
+      "side": 1,
+      "message": "Just move the methods to MonolithicPermutationCompiler.",
+      "parentUuid": "a43f7ab4_19e08fd5",
       "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -165,6 +201,24 @@
     },
     {
       "key": {
+        "uuid": "a43f7ab4_7fbd3bdc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2229,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-06T00:45:08Z",
+      "side": 1,
+      "message": "Can you abstract each branch into its own method?",
+      "parentUuid": "a43f7ab4_b9e503de",
+      "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf0225b9_0cf92790",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
         "patchSetId": 5
@@ -200,6 +254,24 @@
       "side": 1,
       "message": "That\u0027s likely to break some of the other internal users if I remove Mode.Closure from the enum.  However, I could change the config property to be a flag. \n\nQ1\u002715 I plan to be working on \u0027Bachification\u0027 of the output, outputing Closure friendly JsDoc\u0027ed code, and once that\u0027s done, we could turn on Closure post-processing as default for optimize, disabling optimizeJs() passes.",
       "parentUuid": "bf0225b9_0cf92790",
+      "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a43f7ab4_5fa95794",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-06T00:45:08Z",
+      "side": 1,
+      "message": "AFAIK only bigtop is using -XjsInteropMode Closure so it is safe to change.",
+      "parentUuid": "a43f7ab4_3946b3a1",
       "revId": "92e6a92416de91708050a13fe98d454e415a69d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

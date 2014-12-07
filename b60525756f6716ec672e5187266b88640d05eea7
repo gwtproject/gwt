@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64974203_befcf9ca",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/UnitCacheSingleton.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-07T02:02:19Z",
+      "side": 1,
+      "message": "This is a breaking change: Compiler and DevMode (and JUnitShell) pass a non-null specifiedCacheDir in most case (at least outside Google, people generally point \"-war\" to a directory, not a JAR or ZIP), which means the gwt.persistentunitcachedir is ignored.\n\nSee https://github.com/gwt-maven-plugin/gwt-maven-plugin/issues/109\n\nEither this should read\n\n get(logger, null, specifiedCacheDir)\n\n(but maybe we\u0027d prefer not, for SDM Recompiler), or Compiler and DevModeBase should actually use\n\n UnitCacheSingleton.get(logger, null, persistentCacheDir)",
+      "revId": "b60525756f6716ec672e5187266b88640d05eea7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

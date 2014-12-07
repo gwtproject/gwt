@@ -16,6 +16,24 @@
       "revId": "b60525756f6716ec672e5187266b88640d05eea7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84927610_3f7ea79f",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/UnitCacheSingleton.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-07T14:43:45Z",
+      "side": 1,
+      "message": "Applied second option in https://gwt-review.googlesource.com/10640",
+      "parentUuid": "64974203_befcf9ca",
+      "revId": "b60525756f6716ec672e5187266b88640d05eea7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

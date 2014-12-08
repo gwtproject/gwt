@@ -136,6 +136,10 @@ public class Css2Gss {
     name = name.substring(0, name.length() - ".css".length()) + ".gss";
 
     File gssFile = new File(cssFile.getParentFile(), name);
+    if (gssFile.exists()) {
+      throw new IOException("Output file does already exists, aborting write, file: "
+          + gssFile.getAbsolutePath());
+    }
     Files.asCharSink(gssFile, Charsets.UTF_8).write(gss);
   }
 
@@ -159,7 +163,7 @@ public class Css2Gss {
 
   private static void printUsage() {
     System.err.println("Usage :");
-    System.err.println("java " + Css2Gss.class.getName() + " [file or directory]");
+    System.err.println("java " + Css2Gss.class.getName() + " [Options] [file or directory]");
     System.err.println("Options:");
     System.err.println("  -r -> Recursively convert all css files on the given directory"
         + "(leaves .css files in place)");
@@ -188,10 +192,12 @@ public class Css2Gss {
         System.exit(-1);
       }
 
-      String fileName = args[0];
-      if (args[0].trim().equals("-r")) {
-        fileName = args[1];
+      if (!args[0].trim().equals("-r")) {
+        printUsage();
+        System.exit(-1);
       }
+
+      String fileName = args[1];
       options.recurse = true;
       options.resource = new File(fileName);
       verifyResourceExists(options.resource);

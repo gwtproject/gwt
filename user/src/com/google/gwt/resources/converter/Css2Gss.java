@@ -24,15 +24,15 @@ import com.google.gwt.resources.css.ast.CssStylesheet;
 import com.google.gwt.thirdparty.guava.common.io.Files;
 
 import org.apache.commons.io.Charsets;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -117,7 +117,8 @@ public class Css2Gss {
       }
     }
 
-    List<File> filesToConvert = getAllCssFiles(options.resource, options.recurse);
+    Collection<File> filesToConvert =
+        FileUtils.listFiles(options.resource, new String[] {"css"}, options.recurse);
 
     for (File cssFile : filesToConvert) {
       try {
@@ -136,20 +137,11 @@ public class Css2Gss {
     name = name.substring(0, name.length() - ".css".length()) + ".gss";
 
     File gssFile = new File(cssFile.getParentFile(), name);
-    Files.asCharSink(gssFile, Charsets.UTF_8).write(gss);
-  }
-
-  private static List<File> getAllCssFiles(File currentDir, boolean recurse) {
-    File[] currentFiles = currentDir.listFiles();
-    List<File> files = new ArrayList<File>();
-    for (File file : currentFiles) {
-        if (file.isFile() && file.getName().endsWith(".css")) {
-            files.add(file);
-        } else if (recurse && file.isDirectory()) {
-          files.addAll(getAllCssFiles(file, recurse));
-        }
+    if (gssFile.exists()) {
+      throw new IOException("Output file does already exists, aborting write, file: "
+          + gssFile.getAbsolutePath());
     }
-    return files;
+    Files.asCharSink(gssFile, Charsets.UTF_8).write(gss);
   }
 
   private static String convertFile(File resource) throws MalformedURLException,
@@ -159,7 +151,7 @@ public class Css2Gss {
 
   private static void printUsage() {
     System.err.println("Usage :");
-    System.err.println("java " + Css2Gss.class.getName() + " [file or directory]");
+    System.err.println("java " + Css2Gss.class.getName() + " [Options] [file or directory]");
     System.err.println("Options:");
     System.err.println("  -r -> Recursively convert all css files on the given directory"
         + "(leaves .css files in place)");
@@ -188,10 +180,12 @@ public class Css2Gss {
         System.exit(-1);
       }
 
-      String fileName = args[0];
-      if (args[0].trim().equals("-r")) {
-        fileName = args[1];
+      if (!args[0].trim().equals("-r")) {
+        printUsage();
+        System.exit(-1);
       }
+
+      String fileName = args[1];
       options.recurse = true;
       options.resource = new File(fileName);
       verifyResourceExists(options.resource);

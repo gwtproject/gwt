@@ -24,8 +24,10 @@ import com.google.gwt.dev.util.arg.OptionJsInteropMode;
 import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 
 import java.io.File;
 import java.util.List;
@@ -332,5 +334,10 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   @Override
   public boolean warnMissingDeps() {
     return false;
+  }
+
+  @Override
+  public Multimap<String, String> getRestrictedProperties() {
+    return HashMultimap.create();
   }
 }

@@ -23,6 +23,8 @@ import com.google.gwt.dev.js.JsNamespaceOption;
 import com.google.gwt.dev.util.arg.OptionJsInteropMode;
 import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 
 import java.io.File;
 
@@ -42,6 +44,7 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   private boolean validateOnly;
   private boolean warnOverlappingSource;
   private boolean warnMissingDeps;
+  private final Multimap<String, String> restrictedProperties = HashMultimap.create();
 
   public PrecompileTaskOptionsImpl() {
   }
@@ -77,6 +80,7 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
     setMissingDepsFile(other.getMissingDepsFile());
     setValidateOnly(other.isValidateOnly());
     setEnabledGeneratingOnShards(other.isEnabledGeneratingOnShards());
+    restrictedProperties.putAll(other.getRestrictedProperties());
   }
 
   @Override
@@ -496,5 +500,15 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
 
   @Override public void setJsInteropMode(OptionJsInteropMode.Mode mode) {
     jjsOptions.setJsInteropMode(mode);
+  }
+
+  @Override
+  public void addRestrictedProperty(String name, String value) {
+    restrictedProperties.put(name, value);
+  }
+
+  @Override
+  public Multimap<String, String> getRestrictedProperties() {
+    return restrictedProperties;
   }
 }

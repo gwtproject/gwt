@@ -19,6 +19,8 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.dev.CompileTaskRunner.CompileTask;
+import com.google.gwt.dev.cfg.BindingProperty;
+import com.google.gwt.dev.cfg.ConfigurationProperty;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.javac.UnitCache;
@@ -36,6 +38,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
 import com.google.gwt.dev.util.arg.ArgHandlerIncrementalCompile;
 import com.google.gwt.dev.util.arg.ArgHandlerLocalWorkers;
 import com.google.gwt.dev.util.arg.ArgHandlerMethodNameDisplayMode;
+import com.google.gwt.dev.util.arg.ArgHandlerRestrictProperties;
 import com.google.gwt.dev.util.arg.ArgHandlerSaveSourceOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
@@ -43,11 +46,13 @@ import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.FutureTask;
 
@@ -71,6 +76,7 @@ public class Compiler {
       registerHandler(new ArgHandlerExtraDir(options));
       registerHandler(new ArgHandlerSaveSourceOutput(options));
       registerHandler(new ArgHandlerMethodNameDisplayMode(options));
+      registerHandler(new ArgHandlerRestrictProperties(options));
     }
 
     @Override
@@ -201,6 +207,24 @@ public class Compiler {
           TreeLogger branch = logger.branch(TreeLogger.INFO,
               "Compiling module " + moduleName);
 
+          Multimap<String, String> restrictedProperties = options.getRestrictedProperties();
+          for (String name : restrictedProperties.keySet()) {
+            Collection<String> values = restrictedProperties.get(name);
+            BindingProperty bindingProp = module.getProperties().findBindingProp(name);
+            ConfigurationProperty configProp = module.getProperties().findConfigProp(name);
+            if (bindingProp != null) {
+              bindingProp.setRootGeneratedValues(values.toArray(new String[values.size()]));
+            } else if (configProp != null) {
+              if (values.size() > 1) {
+                logger.log(TreeLogger.ERROR, name + " does not allow multiple values");
+                return false;
+              }
+              configProp.setValue(values.iterator().next());
+            } else {
+              logger.log(TreeLogger.ERROR, "Unknown property: " + name);
+              return false;
+            }
+          }
           // Optimize early since permutation compiles will run in process.
           options.setOptimizePrecompile(true);
           Precompilation precompilation = Precompile.precompile(branch, compilerContext);

@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "a48dbaf4_03211038",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-12-08T22:50:16Z",
+      "side": 1,
+      "message": "Now I get it you did not mean common.io.Files from guava, you meant common.io.FileUtil from apache. Updated now.",
+      "parentUuid": "648022c5_96becc32",
+      "revId": "2a9dbf92c138ca5d7320d86d0c3c8e8410801705",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "648022c5_16563cd3",
         "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
         "patchSetId": 4
@@ -190,6 +208,24 @@
       "side": 1,
       "message": "You have a good point.\nMy concern is if somebody already tested their app with lenient mode and verified everything is working, then isn\u0027t this going to be an unnecessary extra work? (maybe not)",
       "parentUuid": "a48dbaf4_a3ef048d",
+      "revId": "2a9dbf92c138ca5d7320d86d0c3c8e8410801705",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a48dbaf4_e323cc40",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-12-08T22:50:16Z",
+      "side": 1,
+      "message": "Internally I made it clear that people need to get their app compiling in strict mode first before moving ahead with any migration (and I already fixed many problems). So we can be in strict mode soon.",
+      "parentUuid": "648022c5_56e8343a",
       "revId": "2a9dbf92c138ca5d7320d86d0c3c8e8410801705",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

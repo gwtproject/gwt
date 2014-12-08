@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "648022c5_b698a852",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-08T21:16:55Z",
+      "side": 1,
+      "message": "in singleFile mode, the extension is not guaranteed to be \"css\". You should probably enforce that in argument parsing.",
+      "revId": "2a9dbf92c138ca5d7320d86d0c3c8e8410801705",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "648022c5_96724c7d",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-08T21:16:55Z",
+      "side": 1,
+      "message": "What if somebody already have the gss file? I think we should log that and not do the auto-conversion.",
+      "revId": "2a9dbf92c138ca5d7320d86d0c3c8e8410801705",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "648022c5_f69e2040",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-08T21:16:55Z",
+      "side": 1,
+      "message": "Normally you can do something like:\n\n  Files.iterateFiles(directory, {\"css\"}, recurse)\n\nThis is both simpler and will avoid traversal of whole tree ahead of time.",
+      "revId": "2a9dbf92c138ca5d7320d86d0c3c8e8410801705",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "648022c5_16563cd3",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-08T21:16:55Z",
+      "side": 1,
+      "message": "I think we should run in lenient mode or have the option to run in lenient mode. Given that their are app already worked with auto conversion, we should require no additional manual fixes.",
+      "revId": "2a9dbf92c138ca5d7320d86d0c3c8e8410801705",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "648022c5_f6e860b7",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-08T21:16:55Z",
+      "side": 1,
+      "message": "The logic here seems broken. If the first argument is \"-r\", we threat the second argument as fileName. In the other case we thread the first argument as file name regardless of the second parameter (e.g. \u003cfilename\u003e -someGarbageHere works).\nFor simplicity I would just require the first argument to be -r if the arg.length is equal to 2.",
+      "revId": "2a9dbf92c138ca5d7320d86d0c3c8e8410801705",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

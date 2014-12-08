@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "648022c5_19b18fd5",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-08T23:14:37Z",
+      "side": 1,
+      "message": "This shows up like an error with a stacktrace. I think we should handle this more gracefully and also ideally even avoid performing conversion in the first place (e.g. one might avoid fixing the css and puts a replacement gss; we don\u0027t want to print all the errors in the css).\nThis should be easy to do by moving convertFile call into this method.\nWhat do you think?",
+      "revId": "2e82a0b3b395b360791f16fe6fca6a6136fe15bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

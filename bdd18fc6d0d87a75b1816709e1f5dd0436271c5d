@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "444f9e7e_ee05f33a",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-08T13:57:30Z",
+      "side": 1,
+      "message": "[error] Unused import - org.apache.commons.io.IOUtils.",
+      "revId": "bdd18fc6d0d87a75b1816709e1f5dd0436271c5d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "444f9e7e_ce023731",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-08T13:57:30Z",
+      "side": 1,
+      "message": "[error] Unused import - java.io.FileOutputStream.",
+      "revId": "bdd18fc6d0d87a75b1816709e1f5dd0436271c5d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

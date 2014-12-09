@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "84b996ac_4a65f338",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5010
+      },
+      "writtenOn": "2014-12-09T19:28:49Z",
+      "side": 1,
+      "message": "nit: this is better written as \"property values\" or just \"properties\".",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "885a9e05f136bb1876f9473382577e1d29359bdd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4d172e3_75fd427b",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CompilerOptionsImpl.java",
         "patchSetId": 2

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24a8ea5a_84b44643",
+        "filename": "user/src/com/google/gwt/logging/client/HtmlLogFormatter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-09T21:02:09Z",
+      "side": 1,
+      "message": "should this be a \u003cbr\u003e instead?",
+      "range": {
+        "startLine": 44,
+        "startChar": 19,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "308178dec7df56382cc7c649bcaef7511492f294",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -25,24 +25,31 @@ import com.google.gwt.dev.jjs.JsSourceMap;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.dev.jjs.ast.JTypeOracle.ImmediateTypeRelations;
+import com.google.gwt.dev.jjs.impl.RapidTypeAnalyzer;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.IntTypeMapper;
 import com.google.gwt.dev.js.JsIncrementalNamer.JsIncrementalNamerState;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.Name.InternalName;
+import com.google.gwt.dev.util.collect.IntHashMultimap;
+import com.google.gwt.dev.util.collect.IntMultimap;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Objects;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Multimaps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
+import cern.colt.list.IntArrayList;
+import cern.colt.map.OpenIntIntHashMap;
+
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -80,8 +87,27 @@ public class MinimalRebuildCache implements Serializable {
     toCollection.addAll(fromCollection);
   }
 
+  private static void copyCollection(IntArrayList fromCollection, IntArrayList toCollection) {
+    toCollection.clear();
+    toCollection.addAllOf(fromCollection);
+  }
+
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static void copyMap(Map fromMap, Map toMap) {
+    toMap.clear();
+    toMap.putAll(fromMap);
+  }
+
+  private static void copyMap(OpenIntIntHashMap fromMap, OpenIntIntHashMap toMap) {
+    IntArrayList keys = fromMap.keys();
+    for (int i = 0; i < keys.size(); i++) {
+      int key = keys.get(i);
+      int value = fromMap.get(key);
+      toMap.put(key, value);
+    }
+  }
+
+  private static void copyMultimap(IntMultimap fromMap, IntMultimap toMap) {
     toMap.clear();
     toMap.putAll(fromMap);
   }
@@ -153,29 +179,38 @@ public class MinimalRebuildCache implements Serializable {
    * Update copyFrom() whenever adding more fields.
    */
   protected final ImmediateTypeRelations immediateTypeRelations = new ImmediateTypeRelations();
+  private final IntMultimap calleeMethodIdsByCallerMethodId = new IntMultimap();
   private final Map<String, String> compilationUnitTypeNameByNestedTypeName = Maps.newHashMap();
+  private final IntHashMultimap containedMethodIdsByTypeId = new IntHashMultimap();
   private final Map<String, String> contentHashByGeneratedTypeName = Maps.newHashMap();
   private final Set<String> deletedCompilationUnitNames = Sets.newHashSet();
   private final Set<String> deletedDiskSourcePaths = Sets.newHashSet();
   private final Set<String> deletedResourcePaths = Sets.newHashSet();
   private final Set<String> dualJsoImplInterfaceNames = Sets.newHashSet();
+  private final OpenIntIntHashMap enclosingTypeIdByMethodId = new OpenIntIntHashMap();
+  private final IntArrayList entryMethodIds = new IntArrayList();
+  private final IntMultimap exportedMethodIdsByTypeId = new IntMultimap();
   private final ArtifactSet generatedArtifacts = new ArtifactSet();
   private final Multimap<String, String> generatedCompilationUnitNamesByReboundTypeNames =
       HashMultimap.create();
+  private final IntMultimap instantiatedTypeIdsByMethodId = new IntMultimap();
   private final IntTypeMapper intTypeMapper = new IntTypeMapper();
   private final Map<String, String> jsByTypeName = Maps.newHashMap();
+  private final JsIncrementalNamerState jsIncrementalNamerState = new JsIncrementalNamerState();
   private final Set<String> jsoStatusChangedTypeNames = Sets.newHashSet();
   private final Set<String> jsoTypeNames = Sets.newHashSet();
   private Integer lastLinkedJsBytes;
   private final Map<String, Long> lastModifiedByDiskSourcePath = Maps.newHashMap();
   private final Map<String, Long> lastModifiedByResourcePath = Maps.newHashMap();
   private final Set<String> lastReachableTypeNames = Sets.newHashSet();
+  private final Map<String, Integer> methodIdsByName = Maps.newHashMap();
+  private final List<String> methodNamesById = Lists.newArrayList();
   private final Set<String> modifiedCompilationUnitNames = Sets.newHashSet();
   private final Set<String> modifiedDiskSourcePaths = Sets.newHashSet();
   private final Set<String> modifiedResourcePaths = Sets.newHashSet();
   private final Multimap<String, String> nestedTypeNamesByUnitTypeName = HashMultimap.create();
-  private final JsIncrementalNamerState jsIncrementalNamerState =
-      new JsIncrementalNamerState();
+  private final IntMultimap overidingMethodIdsByOverriddenMethodId = new IntMultimap();
+  private final IntHashMultimap overriddenMethodIdsByOverridingMethodId = new IntHashMultimap();
   private final Set<String> preambleTypeNames = Sets.newHashSet();
   private transient ImmutableSet<String> processedStaleTypeNames = ImmutableSet.<String> of();
   private final Multimap<String, String> rebinderTypeNamesByReboundTypeName = HashMultimap.create();
@@ -189,6 +224,10 @@ public class MinimalRebuildCache implements Serializable {
   private final Map<String, JsSourceMap> sourceMapsByTypeName = Maps.newHashMap();
   private final Set<String> staleTypeNames = Sets.newHashSet();
   private final Map<String, StatementRanges> statementRangesByTypeName = Maps.newHashMap();
+  private final IntHashMultimap staticallyReferencedTypeIdsByMethodId = new IntHashMultimap();
+  private final Map<String, Integer> typeIdsByName = Maps.newHashMap();
+  private final OpenIntIntHashMap typeIdsWithExportedStaticReferences = new OpenIntIntHashMap();
+  private final List<String> typeNamesById = Lists.newArrayList();
   private final Multimap<String, String> typeNamesByReferencingTypeName = HashMultimap.create();
 
   /**
@@ -362,33 +401,77 @@ public class MinimalRebuildCache implements Serializable {
   }
 
   /**
-   * Computes and returns the names of the set of types that are transitively referenceable starting
-   * from the set of root types.
+   * Computes and returns the names of the set of types that are referenceable within the method
+   * level control flow starting from the entry methods, immortal codegen types and exported
+   * JsInterop methods.
    * <p>
    * Should only be called once per compile, so that the "lastReachableTypeNames" list accurately
    * reflects the reachable types of the immediately previous compile.
    */
   public Set<String> computeReachableTypeNames() {
-    Set<String> openTypeNames = Sets.newHashSet(rootTypeNames);
-    Set<String> reachableTypeNames = Sets.newHashSet();
+    MinimalRebuildCacheTypeEnvironmentAdapter typeEnvironment =
+        new MinimalRebuildCacheTypeEnvironmentAdapter(this);
+    RapidTypeAnalyzer rapidTypeAnalyzer = new RapidTypeAnalyzer(typeEnvironment);
 
-    while (!openTypeNames.isEmpty()) {
-      Iterator<String> iterator = openTypeNames.iterator();
-      String toProcessTypeName = iterator.next();
-      iterator.remove();
+    // Avoid accidentally making all classes live.
+    rapidTypeAnalyzer.markMethodIdBanned(
+        getMethodIdByName("com.google.gwt.lang.ClassLiteralHolder::$clinit()"));
 
-      reachableTypeNames.add(toProcessTypeName);
+    // Artificially reach and traverse immortal codegen types since references to these may have
+    // been synthesized in JS generation. These will not be pruned.
+    for (String immortalCodegenTypeName : JProgram.IMMORTAL_CODEGEN_TYPES_SET) {
+      int immortalCodegenTypeId = getTypeIdByName(immortalCodegenTypeName);
+      rapidTypeAnalyzer.markTypeIdReachable(immortalCodegenTypeId);
+      rapidTypeAnalyzer.markContainedMethodIdsReachable(immortalCodegenTypeId);
+    }
 
-      Collection<String> referencedTypes = referencedTypeNamesByTypeName.get(toProcessTypeName);
-      for (String referencedType : referencedTypes) {
-        if (reachableTypeNames.contains(referencedType)) {
-          continue;
-        }
-        openTypeNames.add(referencedType);
+    // Artificially reach @JsExport and @JsType methods. Since the containing types are
+    // not being marked instantiated or reachable there's still a chance that they will be pruned
+    // if no instantiations or static references are found.
+    IntArrayList exportedTypeIdKeys = exportedMethodIdsByTypeId.keys();
+    for (int i = 0; i < exportedTypeIdKeys.size(); i++) {
+      int exportedTypeId = exportedTypeIdKeys.get(i);
+      IntArrayList exportedMethodIds = exportedMethodIdsByTypeId.get(exportedTypeId);
+      if (exportedMethodIds == null) {
+        continue;
+      }
+
+      for (int j = 0; j < exportedMethodIds.size(); j++) {
+        int exportedMethodId = exportedMethodIds.get(j);
+        rapidTypeAnalyzer.markMethodIdReachable(exportedMethodId, false);
       }
     }
-    copyCollection(reachableTypeNames, lastReachableTypeNames);
-    return reachableTypeNames;
+
+    // Artificially reach types with @JsExport'ed or @JsType'ed static fields or methods (including
+    // Constructors). These types will not be pruned.
+    IntArrayList typeIdsWithExportedStaticReferencesKeys =
+        typeIdsWithExportedStaticReferences.keys();
+    for (int i = 0; i < typeIdsWithExportedStaticReferencesKeys.size(); i++) {
+      int typeId = typeIdsWithExportedStaticReferencesKeys.get(i);
+      rapidTypeAnalyzer.markTypeIdReachable(typeId);
+    }
+
+    // Reach and traverse entry method types. This is just the EntryMethodHolder
+    // class and its init() function. It will not be pruned. This is the conceptual "root" of the
+    // application execution.
+    for (int i = 0; i < entryMethodIds.size(); i++) {
+      int entryMethodId = entryMethodIds.get(i);
+      int typeId = getEnclosingTypeId(entryMethodId);
+      rapidTypeAnalyzer.markTypeIdReachable(typeId);
+      rapidTypeAnalyzer.markContainedMethodIdsReachable(typeId);
+    }
+
+    // Perform rapid type analysis.
+    IntArrayList reachableTypeIds = rapidTypeAnalyzer.computeReachableTypeIds();
+
+    // Translate ids back to strings and keep the results around for the next compile.
+    lastReachableTypeNames.clear();
+    for (int i = 0; i < reachableTypeIds.size(); i++) {
+      int reachableTypeId = reachableTypeIds.get(i);
+      lastReachableTypeNames.add(getTypeNameById(reachableTypeId));
+    }
+
+    return lastReachableTypeNames;
   }
 
   /**
@@ -409,30 +492,46 @@ public class MinimalRebuildCache implements Serializable {
     copyMap(that.compilationUnitTypeNameByNestedTypeName,
         this.compilationUnitTypeNameByNestedTypeName);
     copyMap(that.contentHashByGeneratedTypeName, this.contentHashByGeneratedTypeName);
+    copyMap(that.enclosingTypeIdByMethodId, this.enclosingTypeIdByMethodId);
     copyMap(that.jsByTypeName, this.jsByTypeName);
     copyMap(that.lastModifiedByDiskSourcePath, this.lastModifiedByDiskSourcePath);
     copyMap(that.lastModifiedByResourcePath, this.lastModifiedByResourcePath);
+    copyMap(that.methodIdsByName, this.methodIdsByName);
     copyMap(that.sourceMapsByTypeName, this.sourceMapsByTypeName);
     copyMap(that.statementRangesByTypeName, this.statementRangesByTypeName);
+    copyMap(that.typeIdsByName, this.typeIdsByName);
+    copyMap(that.typeIdsWithExportedStaticReferences, this.typeIdsWithExportedStaticReferences);
 
+    copyMultimap(that.calleeMethodIdsByCallerMethodId, this.calleeMethodIdsByCallerMethodId);
+    copyMultimap(that.containedMethodIdsByTypeId, this.containedMethodIdsByTypeId);
+    copyMultimap(that.exportedMethodIdsByTypeId, this.exportedMethodIdsByTypeId);
     copyMultimap(that.generatedCompilationUnitNamesByReboundTypeNames,
         this.generatedCompilationUnitNamesByReboundTypeNames);
+    copyMultimap(that.instantiatedTypeIdsByMethodId, this.instantiatedTypeIdsByMethodId);
     copyMultimap(that.nestedTypeNamesByUnitTypeName, this.nestedTypeNamesByUnitTypeName);
+    copyMultimap(that.overidingMethodIdsByOverriddenMethodId,
+        this.overidingMethodIdsByOverriddenMethodId);
+    copyMultimap(that.overriddenMethodIdsByOverridingMethodId,
+        this.overriddenMethodIdsByOverridingMethodId);
     copyMultimap(that.rebinderTypeNamesByReboundTypeName, this.rebinderTypeNamesByReboundTypeName);
     copyMultimap(that.reboundTypeNamesByGeneratedCompilationUnitNames,
         this.reboundTypeNamesByGeneratedCompilationUnitNames);
     copyMultimap(that.reboundTypeNamesByInputResource, this.reboundTypeNamesByInputResource);
     copyMultimap(that.referencedTypeNamesByTypeName, this.referencedTypeNamesByTypeName);
+    copyMultimap(that.staticallyReferencedTypeIdsByMethodId,
+        this.staticallyReferencedTypeIdsByMethodId);
     copyMultimap(that.typeNamesByReferencingTypeName, this.typeNamesByReferencingTypeName);
 
     copyCollection(that.deletedCompilationUnitNames, this.deletedCompilationUnitNames);
     copyCollection(that.deletedDiskSourcePaths, this.deletedDiskSourcePaths);
     copyCollection(that.deletedResourcePaths, this.deletedResourcePaths);
     copyCollection(that.dualJsoImplInterfaceNames, this.dualJsoImplInterfaceNames);
+    copyCollection(that.entryMethodIds, this.entryMethodIds);
     copyCollection(that.generatedArtifacts, this.generatedArtifacts);
     copyCollection(that.jsoStatusChangedTypeNames, this.jsoStatusChangedTypeNames);
     copyCollection(that.jsoTypeNames, this.jsoTypeNames);
     copyCollection(that.lastReachableTypeNames, this.lastReachableTypeNames);
+    copyCollection(that.methodNamesById, this.methodNamesById);
     copyCollection(that.modifiedCompilationUnitNames, this.modifiedCompilationUnitNames);
     copyCollection(that.modifiedDiskSourcePaths, this.modifiedDiskSourcePaths);
     copyCollection(that.modifiedResourcePaths, this.modifiedResourcePaths);
@@ -441,50 +540,7 @@ public class MinimalRebuildCache implements Serializable {
     copyCollection(that.singleJsoImplInterfaceNames, this.singleJsoImplInterfaceNames);
     copyCollection(that.sourceCompilationUnitNames, this.sourceCompilationUnitNames);
     copyCollection(that.staleTypeNames, this.staleTypeNames);
-  }
-
-  @VisibleForTesting
-  boolean hasSameContent(MinimalRebuildCache that) {
-    // Ignoring processedStaleTypeNames since it is transient.
-    return
-        this.immediateTypeRelations.hasSameContent(that.immediateTypeRelations) && Objects.equal(
-            this.compilationUnitTypeNameByNestedTypeName,
-            that.compilationUnitTypeNameByNestedTypeName)
-        && Objects.equal(this.contentHashByGeneratedTypeName, that.contentHashByGeneratedTypeName)
-        && Objects.equal(this.deletedCompilationUnitNames, that.deletedCompilationUnitNames)
-        && Objects.equal(this.deletedDiskSourcePaths, that.deletedDiskSourcePaths)
-        && Objects.equal(this.deletedResourcePaths, that.deletedResourcePaths)
-        && Objects.equal(this.dualJsoImplInterfaceNames, that.dualJsoImplInterfaceNames)
-        && Objects.equal(this.generatedArtifacts, that.generatedArtifacts) && Objects.equal(
-            this.generatedCompilationUnitNamesByReboundTypeNames,
-            that.generatedCompilationUnitNamesByReboundTypeNames)
-        && this.intTypeMapper.hasSameContent(that.intTypeMapper)
-        && Objects.equal(this.jsByTypeName, that.jsByTypeName)
-        && Objects.equal(this.jsoStatusChangedTypeNames, that.jsoStatusChangedTypeNames)
-        && Objects.equal(this.jsoTypeNames, that.jsoTypeNames)
-        && Objects.equal(this.lastLinkedJsBytes, that.lastLinkedJsBytes)
-        && Objects.equal(this.lastModifiedByDiskSourcePath, that.lastModifiedByDiskSourcePath)
-        && Objects.equal(this.lastModifiedByResourcePath, that.lastModifiedByResourcePath)
-        && Objects.equal(this.lastReachableTypeNames, that.lastReachableTypeNames)
-        && Objects.equal(this.modifiedCompilationUnitNames, that.modifiedCompilationUnitNames)
-        && Objects.equal(this.modifiedDiskSourcePaths, that.modifiedDiskSourcePaths)
-        && Objects.equal(this.modifiedResourcePaths, that.modifiedResourcePaths)
-        && Objects.equal(this.nestedTypeNamesByUnitTypeName, that.nestedTypeNamesByUnitTypeName)
-        && this.jsIncrementalNamerState.hasSameContent(that.jsIncrementalNamerState)
-        && Objects.equal(this.preambleTypeNames, that.preambleTypeNames) && Objects.equal(
-            this.rebinderTypeNamesByReboundTypeName, that.rebinderTypeNamesByReboundTypeName)
-        && Objects.equal(this.reboundTypeNamesByGeneratedCompilationUnitNames,
-            that.reboundTypeNamesByGeneratedCompilationUnitNames) && Objects.equal(
-            this.reboundTypeNamesByInputResource, that.reboundTypeNamesByInputResource)
-        && Objects.equal(this.referencedTypeNamesByTypeName, that.referencedTypeNamesByTypeName)
-        && Objects.equal(this.rootTypeNames, that.rootTypeNames)
-        && Objects.equal(this.singleJsoImplInterfaceNames, that.singleJsoImplInterfaceNames)
-        && Objects.equal(this.sourceCompilationUnitNames, that.sourceCompilationUnitNames)
-        && Objects.equal(this.sourceMapsByTypeName, that.sourceMapsByTypeName)
-        && Objects.equal(this.staleTypeNames, that.staleTypeNames)
-        && Objects.equal(this.statementRangesByTypeName, that.statementRangesByTypeName)
-        && Objects.equal(this.typeNamesByReferencingTypeName,
-            that.typeNamesByReferencingTypeName);
+    copyCollection(that.typeNamesById, this.typeNamesById);
   }
 
   /**
@@ -492,6 +548,14 @@ public class MinimalRebuildCache implements Serializable {
    */
   public Set<String> filterUnreachableTypeNames(Set<String> typeNames) {
     return Sets.newHashSet(Sets.filter(typeNames, Predicates.in(lastReachableTypeNames)));
+  }
+
+  public IntArrayList getContainedMethodIdsIn(int enclosingTypeName) {
+    return containedMethodIdsByTypeId.get(enclosingTypeName);
+  }
+
+  public int getEnclosingTypeId(int containedMethodId) {
+    return enclosingTypeIdByMethodId.get(containedMethodId);
   }
 
   public ArtifactSet getGeneratedArtifacts() {
@@ -510,9 +574,35 @@ public class MinimalRebuildCache implements Serializable {
     return lastLinkedJsBytes;
   }
 
+  public int getMethodIdByName(String methodName) {
+    if (methodIdsByName.containsKey(methodName)) {
+      return methodIdsByName.get(methodName);
+    }
+    int methodId = methodNamesById.size();
+    methodIdsByName.put(methodName, methodId);
+    methodNamesById.add(methodName);
+    return methodId;
+  }
+
+  public IntArrayList getMethodIdsCalledBy(int callerMethodId) {
+    return calleeMethodIdsByCallerMethodId.get(callerMethodId);
+  }
+
+  public String getMethodNameById(int methodId) {
+    return methodNamesById.get(methodId);
+  }
+
   @VisibleForTesting
   public Set<String> getModifiedCompilationUnitNames() {
     return modifiedCompilationUnitNames;
+  }
+
+  public IntArrayList getOverriddenMethodIds(int overridingMethodId) {
+    return overriddenMethodIdsByOverridingMethodId.get(overridingMethodId);
+  }
+
+  public IntArrayList getOverridingMethodIds(int overriddenMethodId) {
+    return overidingMethodIdsByOverriddenMethodId.get(overriddenMethodId);
   }
 
   public JsIncrementalNamerState getPersistentPrettyNamerState() {
@@ -545,8 +635,30 @@ public class MinimalRebuildCache implements Serializable {
     return statementRangesByTypeName.get(typeName);
   }
 
+  public IntArrayList getStaticallyReferencedTypeIdsIn(int reachableMethodId) {
+    return staticallyReferencedTypeIdsByMethodId.get(reachableMethodId);
+  }
+
+  public int getTypeIdByName(String typeName) {
+    if (typeIdsByName.containsKey(typeName)) {
+      return typeIdsByName.get(typeName);
+    }
+    int typeId = typeNamesById.size();
+    typeIdsByName.put(typeName, typeId);
+    typeNamesById.add(typeName);
+    return typeId;
+  }
+
+  public IntArrayList getTypeIdsInstantiatedIn(int inMethodId) {
+    return instantiatedTypeIdsByMethodId.get(inMethodId);
+  }
+
   public IntTypeMapper getTypeMapper() {
     return intTypeMapper;
+  }
+
+  public String getTypeNameById(int typeId) {
+    return typeNamesById.get(typeId);
   }
 
   public boolean hasJs(String typeName) {
@@ -617,6 +729,17 @@ public class MinimalRebuildCache implements Serializable {
     recordDiskSourceResources(currentModifiedByDiskSourcePath);
   }
 
+  public void recordExportedMethodInType(String methodName, String typeName) {
+    int typeId = getTypeIdByName(typeName);
+    int methodId = getMethodIdByName(methodName);
+    exportedMethodIdsByTypeId.put(typeId, methodId);
+  }
+
+  public void recordExportedStaticReferenceInType(String typeName) {
+    int typeId = getTypeIdByName(typeName);
+    typeIdsWithExportedStaticReferences.put(typeId, typeId);
+  }
+
   /**
    * Records the paths and content ids of generated source resources in the current compile and
    * updates a list of known modified paths by comparing the paths and content ids of generated
@@ -635,6 +758,23 @@ public class MinimalRebuildCache implements Serializable {
         modifiedCompilationUnitNames.add(generatedUnit.getTypeName());
       }
     }
+  }
+
+  public void recordMethodCallsMethod(String callerMethodName, String calleeMethodName) {
+    calleeMethodIdsByCallerMethodId.put(getMethodIdByName(callerMethodName),
+        getMethodIdByName(calleeMethodName));
+  }
+
+  public void recordMethodInstantiatesType(String methodName, String instantiatedTypeName) {
+    instantiatedTypeIdsByMethodId.put(getMethodIdByName(methodName),
+        getTypeIdByName(instantiatedTypeName));
+  }
+
+  public void recordMethodOverridesMethod(String overriderMethodName, String overriddenMethodName) {
+    int overriderMethodId = getMethodIdByName(overriderMethodName);
+    int overriddenMethodId = getMethodIdByName(overriddenMethodName);
+    overriddenMethodIdsByOverridingMethodId.put(overriderMethodId, overriddenMethodId);
+    overidingMethodIdsByOverriddenMethodId.put(overriddenMethodId, overriderMethodId);
   }
 
   @VisibleForTesting
@@ -661,12 +801,62 @@ public class MinimalRebuildCache implements Serializable {
     rebinderTypeNamesByReboundTypeName.put(reboundTypeName, rebinderType);
   }
 
+  public void recordStaticReferenceInMethod(String typeName, String methodName) {
+    staticallyReferencedTypeIdsByMethodId.put(getMethodIdByName(methodName),
+        getTypeIdByName(typeName));
+  }
+
+  public void recordTypeContainsMethod(String enclosingTypeName, String nestedMethodName) {
+    int enclosingTypeId = getTypeIdByName(enclosingTypeName);
+    int nestedMethodId = getMethodIdByName(nestedMethodName);
+    containedMethodIdsByTypeId.put(enclosingTypeId, nestedMethodId);
+    enclosingTypeIdByMethodId.put(nestedMethodId, enclosingTypeId);
+  }
+
+  /**
+   * Remove control flow index entries that are created by the processing of the given type.
+   */
+  public void removeControlFlowIndexesFor(String typeName) {
+    int typeId = getTypeIdByName(typeName);
+    exportedMethodIdsByTypeId.remove(typeId);
+    typeIdsWithExportedStaticReferences.removeKey(typeId);
+
+    IntArrayList containedMethodIds = containedMethodIdsByTypeId.get(typeId);
+    if (containedMethodIds == null) {
+      return;
+    }
+    containedMethodIdsByTypeId.remove(typeId);
+    for (int i = 0; i < containedMethodIds.size(); i++) {
+      int containedMethodId = containedMethodIds.get(i);
+      enclosingTypeIdByMethodId.removeKey(containedMethodId);
+      calleeMethodIdsByCallerMethodId.remove(containedMethodId);
+      instantiatedTypeIdsByMethodId.remove(containedMethodId);
+
+      IntArrayList overriddenMethodIds =
+          overriddenMethodIdsByOverridingMethodId.remove(containedMethodId);
+      if (overriddenMethodIds != null) {
+        for (int j = 0; j < overriddenMethodIds.size(); j++) {
+          int overriddenMethodId = overriddenMethodIds.get(j);
+          overidingMethodIdsByOverriddenMethodId.remove(containedMethodId, overriddenMethodId);
+        }
+      }
+      staticallyReferencedTypeIdsByMethodId.remove(containedMethodId);
+    }
+  }
+
   public void removeReferencesFrom(String fromTypeName) {
     Collection<String> toTypeNames = referencedTypeNamesByTypeName.get(fromTypeName);
     for (String toTypeName : toTypeNames) {
       typeNamesByReferencingTypeName.remove(toTypeName, fromTypeName);
     }
     referencedTypeNamesByTypeName.removeAll(fromTypeName);
+  }
+
+  public void setEntryMethodNames(List<String> entryMethodNames) {
+    this.entryMethodIds.clear();
+    for (String entryMethodName : entryMethodNames) {
+      this.entryMethodIds.add(getMethodIdByName(entryMethodName));
+    }
   }
 
   public void setJsForType(TreeLogger logger, String typeName, String typeJs) {
@@ -727,6 +917,60 @@ public class MinimalRebuildCache implements Serializable {
 
   public void setStatementRangesForType(String typeName, StatementRanges statementRanges) {
     statementRangesByTypeName.put(typeName, statementRanges);
+  }
+
+  @VisibleForTesting
+  boolean hasSameContent(MinimalRebuildCache that) {
+    // Ignoring processedStaleTypeNames since it is transient.
+    boolean asdf =
+        Objects.equal(this.calleeMethodIdsByCallerMethodId, that.calleeMethodIdsByCallerMethodId);
+    return this.immediateTypeRelations.hasSameContent(that.immediateTypeRelations) && Objects.equal(
+        this.compilationUnitTypeNameByNestedTypeName, that.compilationUnitTypeNameByNestedTypeName)
+        && Objects.equal(this.contentHashByGeneratedTypeName, that.contentHashByGeneratedTypeName)
+        && Objects.equal(this.deletedCompilationUnitNames, that.deletedCompilationUnitNames)
+        && Objects.equal(this.deletedDiskSourcePaths, that.deletedDiskSourcePaths)
+        && Objects.equal(this.deletedResourcePaths, that.deletedResourcePaths)
+        && Objects.equal(this.dualJsoImplInterfaceNames, that.dualJsoImplInterfaceNames)
+        && Objects.equal(this.generatedArtifacts, that.generatedArtifacts) && Objects.equal(
+            this.generatedCompilationUnitNamesByReboundTypeNames,
+            that.generatedCompilationUnitNamesByReboundTypeNames)
+        && this.intTypeMapper.hasSameContent(that.intTypeMapper)
+        && Objects.equal(this.jsByTypeName, that.jsByTypeName)
+        && Objects.equal(this.jsoStatusChangedTypeNames, that.jsoStatusChangedTypeNames)
+        && Objects.equal(this.jsoTypeNames, that.jsoTypeNames)
+        && Objects.equal(this.lastLinkedJsBytes, that.lastLinkedJsBytes)
+        && Objects.equal(this.lastModifiedByDiskSourcePath, that.lastModifiedByDiskSourcePath)
+        && Objects.equal(this.lastModifiedByResourcePath, that.lastModifiedByResourcePath)
+        && Objects.equal(this.lastReachableTypeNames, that.lastReachableTypeNames)
+        && Objects.equal(this.modifiedCompilationUnitNames, that.modifiedCompilationUnitNames)
+        && Objects.equal(this.modifiedDiskSourcePaths, that.modifiedDiskSourcePaths)
+        && Objects.equal(this.modifiedResourcePaths, that.modifiedResourcePaths)
+        && Objects.equal(this.nestedTypeNamesByUnitTypeName, that.nestedTypeNamesByUnitTypeName)
+        && this.jsIncrementalNamerState.hasSameContent(that.jsIncrementalNamerState)
+        && Objects.equal(this.preambleTypeNames, that.preambleTypeNames) && Objects.equal(
+            this.rebinderTypeNamesByReboundTypeName, that.rebinderTypeNamesByReboundTypeName)
+        && Objects.equal(this.reboundTypeNamesByGeneratedCompilationUnitNames,
+            that.reboundTypeNamesByGeneratedCompilationUnitNames)
+        && Objects.equal(this.reboundTypeNamesByInputResource, that.reboundTypeNamesByInputResource)
+        && Objects.equal(this.referencedTypeNamesByTypeName, that.referencedTypeNamesByTypeName)
+        && Objects.equal(this.rootTypeNames, that.rootTypeNames)
+        && Objects.equal(this.singleJsoImplInterfaceNames, that.singleJsoImplInterfaceNames)
+        && Objects.equal(this.sourceCompilationUnitNames, that.sourceCompilationUnitNames)
+        && Objects.equal(this.sourceMapsByTypeName, that.sourceMapsByTypeName)
+        && Objects.equal(this.staleTypeNames, that.staleTypeNames)
+        && Objects.equal(this.statementRangesByTypeName, that.statementRangesByTypeName)
+        && Objects.equal(this.typeNamesByReferencingTypeName, that.typeNamesByReferencingTypeName)
+        && asdf && Objects.equal(this.containedMethodIdsByTypeId, that.containedMethodIdsByTypeId)
+        && Objects.equal(this.entryMethodIds, that.entryMethodIds)
+        && Objects.equal(this.instantiatedTypeIdsByMethodId, that.instantiatedTypeIdsByMethodId)
+        && Objects.equal(this.overidingMethodIdsByOverriddenMethodId,
+            that.overidingMethodIdsByOverriddenMethodId) && Objects.equal(
+            this.overriddenMethodIdsByOverridingMethodId,
+            that.overriddenMethodIdsByOverridingMethodId) && Objects.equal(
+            this.staticallyReferencedTypeIdsByMethodId, that.staticallyReferencedTypeIdsByMethodId)
+        && Objects.equal(this.enclosingTypeIdByMethodId, that.enclosingTypeIdByMethodId) && Objects
+            .equal(this.exportedMethodIdsByTypeId, that.exportedMethodIdsByTypeId) && Objects.equal(
+            this.typeIdsWithExportedStaticReferences, that.typeIdsWithExportedStaticReferences);
   }
 
   private void appendReferencingTypes(Set<String> accumulatedTypeNames,

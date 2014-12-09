@@ -37,6 +37,42 @@
     },
     {
       "key": {
+        "uuid": "a48dbaf4_2624629b",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayList.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-12-09T13:34:38Z",
+      "side": 1,
+      "message": "@Andrey, Well, the gwt Object.equals implementation eventually does an equal comparison which will be implemented in JS in the same way I\u0027m doing\n\n  public boolean equals(Object other) {\n    return this \u003d\u003d other;\n  }",
+      "parentUuid": "a48dbaf4_a6bab2dd",
+      "revId": "a12758d8f513c7b60b8cc2daa1a2f2b55e82ded0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04ccc652_8b720d7d",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayList.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-12-09T13:34:38Z",
+      "side": 1,
+      "message": "@Julien, maybe I don\u0027t follow what are we breaking here, if our array contains a \u0027null\u0027 and object is \u0027null\u0027 in both cases I\u0027m returning the first occurrence  of the null. Could you elaborate a bit more what is broken?",
+      "parentUuid": "24a1ca5e_45a3a0b3",
+      "revId": "a12758d8f513c7b60b8cc2daa1a2f2b55e82ded0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a48dbaf4_8351a05c",
         "filename": "user/super/com/google/gwt/emul/java/util/ArrayList.java",
         "patchSetId": 3

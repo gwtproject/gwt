@@ -45,6 +45,30 @@ import java.io.Serializable;
 public class ArrayList<E> extends AbstractList<E> implements List<E>,
     Cloneable, RandomAccess, Serializable {
 
+  private static native int indexOf(Object[] array, Object value, int index) /*-{
+    if (Array.prototype.indexOf) {
+      return array.indexOf(value, index);
+    } else {
+      // IE8 does not implement indexOf
+      for (; index < array.length; ++index) {
+         if (array[index] === value) return index;
+      }
+      return -1;
+    }
+  }-*/;
+
+  private static native int lastIndexOf(Object[] array, Object value, int index) /*-{
+    if (Array.prototype.lastIndexOf) {
+      return array.lastIndexOf(value, index);
+    } else {
+      // IE8 does not implement lastIndexOf
+      for (; index >= 0; --index) {
+         if (array[index] === value) return index;
+      }
+      return -1;
+    }
+  }-*/;
+
   private static native void splice(Object[] array, int index, int deleteCount) /*-{
     array.splice(index, deleteCount);
   }-*/;
@@ -225,24 +249,14 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
    * Used by Vector.
    */
   int indexOf(Object o, int index) {
-    for (; index < array.length; ++index) {
-      if (Objects.equals(o, array[index])) {
-        return index;
-      }
-    }
-    return -1;
+    return indexOf(array, o, index);
   }
 
   /**
    * Used by Vector.
    */
   int lastIndexOf(Object o, int index) {
-    for (; index >= 0; --index) {
-      if (Objects.equals(o, array[index])) {
-        return index;
-      }
-    }
-    return -1;
+    return lastIndexOf(array, o, index);
   }
 
   native void setSize(int newSize) /*-{

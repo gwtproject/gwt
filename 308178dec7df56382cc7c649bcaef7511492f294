@@ -22,6 +22,30 @@
       "revId": "308178dec7df56382cc7c649bcaef7511492f294",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a48dbaf4_e93dedb1",
+        "filename": "user/src/com/google/gwt/logging/client/HtmlLogFormatter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-12-09T22:08:15Z",
+      "side": 1,
+      "message": "I\u0027m not really sure. At the line 41 record info is separated with space that\u0027s why I used space here as well.",
+      "parentUuid": "24a8ea5a_84b44643",
+      "range": {
+        "startLine": 44,
+        "startChar": 19,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "308178dec7df56382cc7c649bcaef7511492f294",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

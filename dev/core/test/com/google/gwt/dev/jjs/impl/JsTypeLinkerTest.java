@@ -73,22 +73,53 @@ public class JsTypeLinkerTest extends TestCase {
     // Create type inheritance.
     Map<String, String> superClassesByClass =
         minimalRebuildCache.getImmediateTypeRelations().getImmediateSuperclassesByClass();
+    minimalRebuildCache.recordTypeContainsMethod("java.lang.Object", "java.lang.Object::$clinit()");
     superClassesByClass.put("java.lang.Class", "java.lang.Object");
+    minimalRebuildCache.recordTypeContainsMethod("java.lang.Class", "java.lang.Class::$clinit()");
     superClassesByClass.put("com.some.app.SomeAModel", "java.lang.Object");
+    minimalRebuildCache.recordTypeContainsMethod("com.some.app.SomeAModel",
+        "com.some.app.SomeAModel::$clinit()");
     superClassesByClass.put("com.some.app.SomeBModel", "java.lang.Object");
+    minimalRebuildCache.recordTypeContainsMethod("com.some.app.SomeBModel",
+        "com.some.app.SomeBModel::$clinit()");
     superClassesByClass.put("com.some.app.SomeController", "java.lang.Object");
+    minimalRebuildCache.recordTypeContainsMethod("com.some.app.SomeController",
+        "com.some.app.SomeController::$clinit()");
     superClassesByClass.put("com.some.app.EntryPoint", "java.lang.Object");
+    minimalRebuildCache.recordTypeContainsMethod("com.some.app.EntryPoint",
+        "com.some.app.EntryPoint::$clinit()");
 
     // Record root types.
     minimalRebuildCache.setRootTypeNames(Lists.newArrayList("com.some.app.EntryPoint"));
+    minimalRebuildCache.setEntryMethodNames(
+        Lists.newArrayList("com.some.app.EntryPoint::onModuleLoad()"));
+    minimalRebuildCache.recordTypeContainsMethod("com.some.app.EntryPoint",
+        "com.some.app.EntryPoint::onModuleLoad()");
 
     // Record type references.
-    minimalRebuildCache.addTypeReference("com.some.app.EntryPoint",
+    minimalRebuildCache.addTypeReference("com.some.app.EntryPoint", "com.some.app.SomeController");
+    minimalRebuildCache.recordMethodInstantiatesType("com.some.app.EntryPoint::onModuleLoad()",
         "com.some.app.SomeController");
-    minimalRebuildCache.addTypeReference("com.some.app.SomeController",
+    minimalRebuildCache.recordMethodCallsMethod("com.some.app.EntryPoint::onModuleLoad()",
+        "com.some.app.SomeController::createData()");
+    minimalRebuildCache.recordTypeContainsMethod("com.some.app.SomeController",
+        "com.some.app.SomeController::createData()");
+
+    minimalRebuildCache.addTypeReference("com.some.app.SomeController", "com.some.app.SomeBModel");
+    minimalRebuildCache.recordMethodInstantiatesType("com.some.app.SomeController::createData()",
         "com.some.app.SomeBModel");
-    minimalRebuildCache.addTypeReference("com.some.app.SomeController",
+    minimalRebuildCache.recordMethodCallsMethod("com.some.app.SomeController::createData()",
+        "com.some.app.SomeBModel::SomeBModel()");
+    minimalRebuildCache.recordTypeContainsMethod("com.some.app.SomeBModel",
+        "com.some.app.SomeBModel::SomeBModel()");
+
+    minimalRebuildCache.addTypeReference("com.some.app.SomeController", "com.some.app.SomeAModel");
+    minimalRebuildCache.recordMethodInstantiatesType("com.some.app.SomeController::createData()",
         "com.some.app.SomeAModel");
+    minimalRebuildCache.recordMethodCallsMethod("com.some.app.SomeController::createData()",
+        "com.some.app.SomeAModel::SomeAModel()");
+    minimalRebuildCache.recordTypeContainsMethod("com.some.app.SomeAModel",
+        "com.some.app.SomeAModel::SomeAModel()");
 
     JsTypeLinker jsTypeLinker = new JsTypeLinker(TreeLogger.NULL,
         new JsNoopTransformer(originalJs, srb.build(), smb.build()), classRanges, programRange,
@@ -127,8 +158,18 @@ public class JsTypeLinkerTest extends TestCase {
     // Stop referring to SomeModelA from the Controller and verify that SomeModelA is not in the
     // output.
     minimalRebuildCache.removeReferencesFrom("com.some.app.SomeController");
-    minimalRebuildCache.addTypeReference("com.some.app.SomeController",
+    minimalRebuildCache.addTypeReference("com.some.app.SomeController", "com.some.app.SomeBModel");
+
+    minimalRebuildCache.removeControlFlowIndexesFor("com.some.app.SomeController");
+    minimalRebuildCache.recordTypeContainsMethod("com.some.app.SomeController",
+        "com.some.app.SomeController::createData()");
+    minimalRebuildCache.recordTypeContainsMethod("com.some.app.SomeController",
+        "com.some.app.SomeController::$clinit()");
+    minimalRebuildCache.recordMethodInstantiatesType("com.some.app.SomeController::createData()",
         "com.some.app.SomeBModel");
+    minimalRebuildCache.recordMethodCallsMethod("com.some.app.SomeController::createData()",
+        "com.some.app.SomeBModel::SomeBModel()");
+
     jsTypeLinker = new JsTypeLinker(TreeLogger.NULL,
         new JsNoopTransformer(originalJs, srb.build(), smb.build()), classRanges, programRange,
         minimalRebuildCache, new JTypeOracle(null, minimalRebuildCache, true));

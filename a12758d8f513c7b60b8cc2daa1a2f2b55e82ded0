@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "a48dbaf4_a6bab2dd",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayList.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-12-09T13:07:09Z",
+      "side": 1,
+      "message": "I\u0027m concernted that ArrayList uses Object.equals to find value but you\u0027ve changed it to find by reference.",
+      "revId": "a12758d8f513c7b60b8cc2daa1a2f2b55e82ded0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a48dbaf4_8351a05c",
         "filename": "user/super/com/google/gwt/emul/java/util/ArrayList.java",
         "patchSetId": 3

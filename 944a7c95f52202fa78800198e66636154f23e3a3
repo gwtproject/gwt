@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24a8ea5a_e7097c4e",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-09T21:05:13Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.Serializable\u0027 import.",
+      "revId": "944a7c95f52202fa78800198e66636154f23e3a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24a8ea5a_8716886d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-09T21:05:13Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.BitSet\u0027 import.",
+      "revId": "944a7c95f52202fa78800198e66636154f23e3a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24a8ea5a_a713847c",
+        "filename": "dev/core/src/com/google/gwt/dev/util/collect/IntMultimap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-09T21:05:13Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.Serializable\u0027 import.",
+      "revId": "944a7c95f52202fa78800198e66636154f23e3a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24a8ea5a_47409065",
+        "filename": "dev/core/src/com/google/gwt/dev/util/collect/IntMultimap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-09T21:05:13Z",
+      "side": 1,
+      "message": "[warning] Definition of \u0027equals()\u0027 without corresponding definition of \u0027hashCode()\u0027.",
+      "revId": "944a7c95f52202fa78800198e66636154f23e3a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24a8ea5a_67458c74",
+        "filename": "dev/core/src/com/google/gwt/dev/util/collect/IntStack.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-09T21:05:13Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.Serializable\u0027 import.",
+      "revId": "944a7c95f52202fa78800198e66636154f23e3a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24a8ea5a_27e0f4d5",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-09T21:11:14Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.Serializable\u0027 import.",
+      "revId": "531b1ac1d26a69d28bf74b836996a5a484b6ae0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24a8ea5a_c7c48050",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-09T21:11:14Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.BitSet\u0027 import.",
+      "revId": "531b1ac1d26a69d28bf74b836996a5a484b6ae0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24a8ea5a_e7c17c3d",
+        "filename": "dev/core/src/com/google/gwt/dev/util/collect/IntMultimap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-09T21:11:14Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.Serializable\u0027 import.",
+      "revId": "531b1ac1d26a69d28bf74b836996a5a484b6ae0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24a8ea5a_87ce886c",
+        "filename": "dev/core/src/com/google/gwt/dev/util/collect/IntStack.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-09T21:11:14Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.Serializable\u0027 import.",
+      "revId": "531b1ac1d26a69d28bf74b836996a5a484b6ae0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

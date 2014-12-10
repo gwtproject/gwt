@@ -30,8 +30,11 @@ import com.google.gwt.dev.util.arg.OptionLogLevel;
 import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.OptionSourceLevel;
 import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.thirdparty.guava.common.base.Splitter;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+import com.google.gwt.thirdparty.guava.common.collect.LinkedListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 import com.google.gwt.util.tools.ArgHandler;
 import com.google.gwt.util.tools.ArgHandlerDir;
 import com.google.gwt.util.tools.ArgHandlerExtra;
@@ -81,6 +84,8 @@ public class Options {
   private OptionJsInteropMode.Mode jsInteropMode = OptionJsInteropMode.Mode.NONE;
   private OptionMethodNameDisplayMode.Mode methodNameDisplayMode =
       OptionMethodNameDisplayMode.Mode.NONE;
+
+  private final ListMultimap<String, String> restrictedProperties = LinkedListMultimap.create();
 
   /**
    * Sets each option to the appropriate value, based on command-line arguments.
@@ -299,6 +304,10 @@ public class Options {
     return jsInteropMode;
   }
 
+  ListMultimap<String, String> getRestrictedProperties() {
+    return restrictedProperties;
+  }
+
   private class ArgProcessor extends ArgProcessorBase {
 
     public ArgProcessor() {
@@ -314,6 +323,7 @@ public class Options {
       registerHandler(new StrictResourcesFlag());
       registerHandler(new WorkDirFlag());
       registerHandler(new LauncherDir());
+      registerHandler(new RestrictPropertyValuesArgument());
       registerHandler(new ArgHandlerIncrementalCompile(new OptionIncrementalCompile() {
         @Override
         public boolean isIncrementalCompileEnabled() {
@@ -713,6 +723,39 @@ public class Options {
       }
       moduleNames.add(arg);
       return true;
+    }
+  }
+
+  private class RestrictPropertyValuesArgument extends ArgHandlerString {
+
+    @Override
+    public boolean setString(String str) {
+      assert (str != null);
+      List<String> nameValuePair =
+          Splitter.on("=").trimResults().omitEmptyStrings().splitToList(str);
+      if (nameValuePair.size() != 2) {
+        return false;
+      }
+      String name = nameValuePair.get(0);
+      String valuesList = nameValuePair.get(1);
+      Iterable<String> values = Splitter.on(",").trimResults().omitEmptyStrings().split(valuesList);
+      restrictedProperties.replaceValues(name, values);
+      return true;
+    }
+
+    @Override
+    public String getPurpose() {
+      return "Restrict properties.";
+    }
+
+    @Override
+    public String getTag() {
+      return "-setProperty";
+    }
+
+    @Override
+    public String[] getTagArgs() {
+      return new String[] {"name=value,value..."};
     }
   }
 

@@ -55,6 +55,23 @@
     },
     {
       "key": {
+        "uuid": "44eebec7_0df7f1ec",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-12-10T06:00:23Z",
+      "side": 1,
+      "message": "shouldn\u0027t use isPropertyValid to be coherent with other parts of the code?",
+      "revId": "680f8166ed496e41fb67be98af233f686c3cc273",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c838a_6b2452db",
         "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
         "patchSetId": 16
@@ -84,6 +101,41 @@
       "side": 1,
       "message": "No, but it does smell like something is wrong.",
       "parentUuid": "3a4c838a_6b2452db",
+      "revId": "680f8166ed496e41fb67be98af233f686c3cc273",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44eebec7_6decb51d",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-12-10T06:00:23Z",
+      "side": 1,
+      "message": "Do we have an use case when this happens and put in a test?",
+      "parentUuid": "dfc5197a_a22b1f20",
+      "revId": "680f8166ed496e41fb67be98af233f686c3cc273",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4fdf273_f2e8880e",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2014-12-10T06:00:23Z",
+      "side": 1,
+      "message": "use isPropertyValid()",
       "revId": "680f8166ed496e41fb67be98af233f686c3cc273",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

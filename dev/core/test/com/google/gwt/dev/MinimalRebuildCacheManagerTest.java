@@ -75,6 +75,13 @@ public class MinimalRebuildCacheManagerTest extends TestCase {
         "Foo.java", 9999L).put("Bar.java", 0L).put("Baz.java", 0L).build();
     startingCache.recordDiskSourceResources(laterModifiedBySourcePath);
     startingCache.setRootTypeNames(Sets.newHashSet("Foo", "Bar", "Baz"));
+    startingCache.recordTypeContainsMethod("Foo", "Foo::$clinit()");
+    startingCache.recordTypeContainsMethod("Bar", "Bar::$clinit()");
+    startingCache.recordTypeContainsMethod("Baz", "Baz::$clinit()");
+    startingCache.recordMethodInstantiatesType("Foo::start()", "Bar");
+    startingCache.recordMethodCallsMethod("Foo::start()", "Bar::run()");
+    startingCache.recordMethodInstantiatesType("Bar::start()", "Baz");
+    startingCache.recordMethodCallsMethod("Bar::run()", "Baz::run()");
     startingCache.computeReachableTypeNames();
     startingCache.computeAndClearStaleTypesCache(TreeLogger.NULL,
         new JTypeOracle(null, startingCache, true));

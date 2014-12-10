@@ -39,6 +39,23 @@
       "revId": "9986af4d0e0e58065d033138a4efbd960a96d9ea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24c2aa57_777e4aa0",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerRestrictProperties.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-10T23:37:18Z",
+      "side": 1,
+      "message": "Opps. I just missed this one. This part is user facing so we should provide a better more detailed documentation.",
+      "revId": "9986af4d0e0e58065d033138a4efbd960a96d9ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

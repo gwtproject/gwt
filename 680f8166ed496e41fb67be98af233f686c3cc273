@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "646ca215_19f8cf22",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-12-10T12:48:08Z",
+      "side": 1,
+      "message": "I first thought about using #isPropertyValid but then I realized that the method #asGetter aims to provide the getter name of a field. By analyzing this view I found most coherent make a treatment in terms of \"field\" than in terms of \"property\". Imagine if the #isPropertyValid method further increases the amount of logic?\n\nBut that\u0027s only my viewpoint. I need other opinions to be sure about that.",
+      "parentUuid": "44eebec7_0df7f1ec",
+      "revId": "680f8166ed496e41fb67be98af233f686c3cc273",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c838a_6b2452db",
         "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
         "patchSetId": 16
@@ -125,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "646ca215_b906fb8c",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-12-10T12:48:08Z",
+      "side": 1,
+      "message": "EVERY bean is providing one ghost property. I found it while debugging many times. There\u0027s no test written for it though.",
+      "parentUuid": "44eebec7_6decb51d",
+      "revId": "680f8166ed496e41fb67be98af233f686c3cc273",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4fdf273_f2e8880e",
         "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
         "patchSetId": 16
@@ -136,6 +172,24 @@
       "writtenOn": "2014-12-10T06:00:23Z",
       "side": 1,
       "message": "use isPropertyValid()",
+      "revId": "680f8166ed496e41fb67be98af233f686c3cc273",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "646ca215_99033f7d",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2014-12-10T12:48:08Z",
+      "side": 1,
+      "message": "Sure! Thanks!",
+      "parentUuid": "e4fdf273_f2e8880e",
       "revId": "680f8166ed496e41fb67be98af233f686c3cc273",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

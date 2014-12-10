@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8457d640_9a13294f",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-10T00:06:19Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027cern.colt.list.IntArrayList\u0027 import.",
+      "revId": "626407e9cfd152495e40f8d2dccb091dab2e15ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8457d640_fa20658d",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheTypeEnvironmentAdapter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-10T00:06:19Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027cern.colt.list.IntArrayList\u0027 import.",
+      "revId": "626407e9cfd152495e40f8d2dccb091dab2e15ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8457d640_da1da15b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-10T00:06:19Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027cern.colt.list.IntArrayList\u0027 import.",
+      "revId": "626407e9cfd152495e40f8d2dccb091dab2e15ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -23,6 +23,8 @@ import com.google.gwt.dev.js.JsNamespaceOption;
 import com.google.gwt.dev.util.arg.OptionJsInteropMode;
 import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.thirdparty.guava.common.collect.LinkedListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 
 import java.io.File;
 
@@ -42,6 +44,7 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   private boolean validateOnly;
   private boolean warnOverlappingSource;
   private boolean warnMissingDeps;
+  private final ListMultimap<String, String> restrictedProperties = LinkedListMultimap.create();
 
   public PrecompileTaskOptionsImpl() {
   }
@@ -77,6 +80,7 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
     setMissingDepsFile(other.getMissingDepsFile());
     setValidateOnly(other.isValidateOnly());
     setEnabledGeneratingOnShards(other.isEnabledGeneratingOnShards());
+    restrictedProperties.putAll(other.getRestrictedProperties());
   }
 
   @Override
@@ -102,6 +106,10 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public File getGenDir() {
     return genDir;
+  }
+
+  @Override public OptionJsInteropMode.Mode getJsInteropMode() {
+    return jjsOptions.getJsInteropMode();
   }
 
   @Override
@@ -132,6 +140,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public JsOutputOption getOutput() {
     return jjsOptions.getOutput();
+  }
+
+  @Override
+  public ListMultimap<String, String> getRestrictedProperties() {
+    return restrictedProperties;
   }
 
   @Override
@@ -177,6 +190,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public boolean isEnabledGeneratingOnShards() {
     return enableGeneratingOnShards;
+  }
+
+  @Override
+  public boolean isIncrementalCompileEnabled() {
+    return jjsOptions.isIncrementalCompileEnabled();
   }
 
   @Override
@@ -250,11 +268,6 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
-  public void setIncrementalCompileEnabled(boolean enabled) {
-    jjsOptions.setIncrementalCompileEnabled(enabled);
-  }
-
-  @Override
   public void setCompilerMetricsEnabled(boolean enabled) {
     jjsOptions.setCompilerMetricsEnabled(enabled);
   }
@@ -300,8 +313,17 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
+  public void setIncrementalCompileEnabled(boolean enabled) {
+    jjsOptions.setIncrementalCompileEnabled(enabled);
+  }
+
+  @Override
   public void setInlineLiteralParameters(boolean enabled) {
     jjsOptions.setInlineLiteralParameters(enabled);
+  }
+
+  @Override public void setJsInteropMode(OptionJsInteropMode.Mode mode) {
+    jjsOptions.setJsInteropMode(mode);
   }
 
   @Override
@@ -360,6 +382,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
+  public void setRestrictedPropertyValues(String name, Iterable<String> values) {
+    restrictedProperties.replaceValues(name, values);
+  }
+
+  @Override
   public void setRunAsyncEnabled(boolean enabled) {
     jjsOptions.setRunAsyncEnabled(enabled);
   }
@@ -410,13 +437,13 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
-  public void setWarnOverlappingSource(boolean warnOverlappingSource) {
-    this.warnOverlappingSource = warnOverlappingSource;
+  public void setWarnMissingDeps(boolean showMissingDepsWarnings) {
+    this.warnMissingDeps = showMissingDepsWarnings;
   }
 
   @Override
-  public void setWarnMissingDeps(boolean showMissingDepsWarnings) {
-    this.warnMissingDeps = showMissingDepsWarnings;
+  public void setWarnOverlappingSource(boolean warnOverlappingSource) {
+    this.warnOverlappingSource = warnOverlappingSource;
   }
 
   @Override
@@ -427,11 +454,6 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public boolean shouldClusterSimilarFunctions() {
     return jjsOptions.shouldClusterSimilarFunctions();
-  }
-
-  @Override
-  public boolean isIncrementalCompileEnabled() {
-    return jjsOptions.isIncrementalCompileEnabled();
   }
 
   @Override
@@ -448,7 +470,6 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   public boolean shouldOptimizeDataflow() {
     return jjsOptions.shouldOptimizeDataflow();
   }
-
   @Override
   public boolean shouldOrdinalizeEnums() {
     return jjsOptions.shouldOrdinalizeEnums();
@@ -468,21 +489,14 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   public boolean useDetailedTypeIds() {
     return jjsOptions.useDetailedTypeIds();
   }
-  @Override
-  public boolean warnOverlappingSource() {
-    return warnOverlappingSource;
-  }
 
   @Override
   public boolean warnMissingDeps() {
     return warnMissingDeps;
   }
 
-  @Override public OptionJsInteropMode.Mode getJsInteropMode() {
-    return jjsOptions.getJsInteropMode();
-  }
-
-  @Override public void setJsInteropMode(OptionJsInteropMode.Mode mode) {
-    jjsOptions.setJsInteropMode(mode);
+  @Override
+  public boolean warnOverlappingSource() {
+    return warnOverlappingSource;
   }
 }

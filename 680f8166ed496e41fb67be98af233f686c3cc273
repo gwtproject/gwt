@@ -161,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "44179e8b_45e1caa1",
+        "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-10T16:47:00Z",
+      "side": 1,
+      "message": "Is there any documentation regarding these \"ghost\" properties?",
+      "parentUuid": "646ca215_b906fb8c",
+      "revId": "680f8166ed496e41fb67be98af233f686c3cc273",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4fdf273_f2e8880e",
         "filename": "user/src/com/google/gwt/validation/rebind/GwtSpecificValidatorCreator.java",
         "patchSetId": 16

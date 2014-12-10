@@ -16,6 +16,29 @@
       "revId": "649f64bdfb680f6e2a5ef40631ce2637192d2795",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44179e8b_e82d2bae",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-10T17:29:36Z",
+      "side": 1,
+      "message": "Holly hack !!! Nice trick. \n\n(In my array cast refactoring cl I\u0027ll move the castmap interning to the array class literal, which seems an appropriate place for an array cast map.)",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 135,
+        "endChar": 2
+      },
+      "revId": "649f64bdfb680f6e2a5ef40631ce2637192d2795",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

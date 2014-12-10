@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4d5ba01_40998e0a",
+        "filename": "user/src/com/google/gwt/dom/client/DataTransfer.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-10T18:46:42Z",
+      "side": 1,
+      "message": "[error] \u0027java.util.Locale\u0027 should be separated from previous imports.",
+      "revId": "ba65fcbd7901a42768772cc457f2ad2958201a19",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4d5ba01_608e92c3",
+        "filename": "user/src/com/google/gwt/dom/client/DataTransfer.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-10T18:46:42Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "ba65fcbd7901a42768772cc457f2ad2958201a19",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

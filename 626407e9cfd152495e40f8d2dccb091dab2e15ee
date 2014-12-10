@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "a4d5ba01_e32d4cae",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-10T19:29:51Z",
+      "side": 1,
+      "message": "maybe computeReachableTypesNames should be void and the callers should use lastReachableTypeNames explicitly. \n\nPreviously the returned set and that lastRTN set where two different sets but not anymore.",
+      "range": {
+        "startLine": 474,
+        "startChar": 11,
+        "endLine": 474,
+        "endChar": 33
+      },
+      "revId": "626407e9cfd152495e40f8d2dccb091dab2e15ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8457d640_fa20658d",
         "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheTypeEnvironmentAdapter.java",
         "patchSetId": 3
@@ -36,6 +59,92 @@
     },
     {
       "key": {
+        "uuid": "646ca215_3c4c99c2",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheTypeEnvironmentAdapter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-10T19:29:51Z",
+      "side": 1,
+      "message": "AT some point we need to get rid all of the special handling for clinit....",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 3
+      },
+      "revId": "626407e9cfd152495e40f8d2dccb091dab2e15ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "646ca215_1fd0af5d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowRecorder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-10T19:29:51Z",
+      "side": 1,
+      "message": "Maybe we should follow the convention used everywhere and not explicitly call super.endVisit or super.visit",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 27
+      },
+      "revId": "626407e9cfd152495e40f8d2dccb091dab2e15ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "646ca215_9c55ed4d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2480,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-10T19:29:51Z",
+      "side": 1,
+      "message": "I wonder if we shouldn\u0027t be marking f as static when the JField is constructed; although looking at line 3735 it seems that that should already be happening. Maybe it is some JDT quirk introduced with Java 8?",
+      "range": {
+        "startLine": 2477,
+        "startChar": 6,
+        "endLine": 2480,
+        "endChar": 9
+      },
+      "revId": "626407e9cfd152495e40f8d2dccb091dab2e15ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44179e8b_085b674d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-10T19:29:51Z",
+      "side": 1,
+      "message": "Really, really nice!.",
+      "revId": "626407e9cfd152495e40f8d2dccb091dab2e15ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8457d640_da1da15b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
         "patchSetId": 3
@@ -47,6 +156,52 @@
       "writtenOn": "2014-12-10T00:06:19Z",
       "side": 1,
       "message": "[error] Wrong order for \u0027cern.colt.list.IntArrayList\u0027 import.",
+      "revId": "626407e9cfd152495e40f8d2dccb091dab2e15ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44179e8b_a86973dc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-10T19:29:51Z",
+      "side": 1,
+      "message": "maybe extract method markOverridingReachable (or a better name).",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 5
+      },
+      "revId": "626407e9cfd152495e40f8d2dccb091dab2e15ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "646ca215_9c84cd9e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-10T19:29:51Z",
+      "side": 1,
+      "message": "Maybe getMemberMethodIds?",
+      "range": {
+        "startLine": 251,
+        "startChar": 66,
+        "endLine": 251,
+        "endChar": 89
+      },
       "revId": "626407e9cfd152495e40f8d2dccb091dab2e15ee",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

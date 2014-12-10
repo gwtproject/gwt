@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24c2aa57_57d5ce4c",
+        "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-10T23:35:35Z",
+      "side": 1,
+      "message": "I think either should be an error or we should set the value to whole string.",
+      "revId": "9986af4d0e0e58065d033138a4efbd960a96d9ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24c2aa57_3745b275",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerRestrictProperties.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-10T23:35:35Z",
+      "side": 1,
+      "message": "nit: Although it wasn\u0027t strictly followed in existing code, a good practice to write good class javadoc is to start with a noun. e.g. \n\"An argument handler to parse the ....\"",
+      "range": {
+        "startLine": 22,
+        "startChar": 3,
+        "endLine": 22,
+        "endChar": 8
+      },
+      "revId": "9986af4d0e0e58065d033138a4efbd960a96d9ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

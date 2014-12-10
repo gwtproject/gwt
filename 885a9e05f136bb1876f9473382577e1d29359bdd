@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a4d5ba01_60ecd21d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-10T18:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84b996ac_4a65f338",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "885a9e05f136bb1876f9473382577e1d29359bdd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4d172e3_75fd427b",
         "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CompilerOptionsImpl.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2014-12-08T23:51:43Z",
       "side": 1,
       "message": "sort",
+      "range": {
+        "startLine": 340,
+        "startChar": 34,
+        "endLine": 340,
+        "endChar": 57
+      },
+      "revId": "885a9e05f136bb1876f9473382577e1d29359bdd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "646ca215_fc9b414d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/CompilerOptionsImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-10T18:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d172e3_75fd427b",
       "range": {
         "startLine": 340,
         "startChar": 34,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "646ca215_3c75b96c",
+        "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-10T18:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d172e3_d568ae90",
+      "revId": "885a9e05f136bb1876f9473382577e1d29359bdd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4d172e3_15b156d5",
         "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
         "patchSetId": 2
@@ -76,6 +142,30 @@
       "writtenOn": "2014-12-08T23:51:43Z",
       "side": 1,
       "message": "s/name/propertyName",
+      "range": {
+        "startLine": 211,
+        "startChar": 22,
+        "endLine": 211,
+        "endChar": 26
+      },
+      "revId": "885a9e05f136bb1876f9473382577e1d29359bdd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "646ca215_1c7a7d5c",
+        "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-10T18:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d172e3_15b156d5",
       "range": {
         "startLine": 211,
         "startChar": 22,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "646ca215_3cbbf99a",
+        "filename": "dev/core/src/com/google/gwt/dev/Compiler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-10T18:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d172e3_95e546de",
+      "range": {
+        "startLine": 211,
+        "startChar": 10,
+        "endLine": 212,
+        "endChar": 71
+      },
+      "revId": "885a9e05f136bb1876f9473382577e1d29359bdd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4d172e3_9549c62e",
         "filename": "dev/core/src/com/google/gwt/dev/PrecompileTaskOptionsImpl.java",
         "patchSetId": 2
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "646ca215_7cdc51f3",
+        "filename": "dev/core/src/com/google/gwt/dev/PrecompileTaskOptionsImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-10T18:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d172e3_9549c62e",
+      "range": {
+        "startLine": 506,
+        "startChar": 14,
+        "endLine": 506,
+        "endChar": 35
+      },
+      "revId": "885a9e05f136bb1876f9473382577e1d29359bdd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4d172e3_b5d5eaca",
         "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionRestrictProperties.java",
         "patchSetId": 2
@@ -145,6 +283,30 @@
       "writtenOn": "2014-12-08T23:51:43Z",
       "side": 1,
       "message": "add comment on both function signatures",
+      "range": {
+        "startLine": 23,
+        "startChar": 7,
+        "endLine": 23,
+        "endChar": 28
+      },
+      "revId": "885a9e05f136bb1876f9473382577e1d29359bdd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44179e8b_8555824d",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionRestrictProperties.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-10T18:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d172e3_b5d5eaca",
       "range": {
         "startLine": 23,
         "startChar": 7,

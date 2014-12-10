@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4d5ba01_20464af3",
+        "filename": "user/src/com/google/gwt/dom/client/DataTransfer.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-10T18:44:40Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.core.client.JavaScriptObject\u0027 import.",
+      "revId": "e8b46f7333ed4dff18aab6ca236de538b0ba9f59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

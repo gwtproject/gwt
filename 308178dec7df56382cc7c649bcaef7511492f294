@@ -118,6 +118,30 @@
       "revId": "308178dec7df56382cc7c649bcaef7511492f294",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44eebec7_0d64118c",
+        "filename": "user/src/com/google/gwt/logging/client/HtmlLogFormatter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2014-12-10T13:43:32Z",
+      "side": 1,
+      "message": "You\u0027re right :)\nNow the output looks the same in console and popup.",
+      "parentUuid": "8457d640_17c0940b",
+      "range": {
+        "startLine": 44,
+        "startChar": 19,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "308178dec7df56382cc7c649bcaef7511492f294",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

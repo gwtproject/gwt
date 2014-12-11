@@ -168,5 +168,22 @@ public abstract class TextBoxBaseTestBase extends GWTTestCase {
     assertEquals("baker", h.received);
   }
 
+  /**
+   * Tests that the methods to get and to set
+   * the placeholder.
+   */
+  public void testPlaceholder() {
+    final TextBoxBase tb = createTextBoxBase();
+    RootPanel.get().add(tb);
+    assertNull(tb.getPlaceholder());
+
+    String placeholder = "hello the world !";
+    tb.setPlaceholder(placeholder);
+    assertEquals(placeholder, tb.getPlaceholder());
+
+    placeholder = "";
+    assertNull(tb.getPlaceholder());
+  }
+
   protected abstract TextBoxBase createTextBoxBase();
 }

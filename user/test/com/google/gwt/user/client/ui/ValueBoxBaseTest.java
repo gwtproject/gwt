@@ -152,6 +152,29 @@ public class ValueBoxBaseTest extends GWTTestCase {
     valueBoxBase.setValue("", true);
   }
 
+  /**
+   * Test the placeholder property.
+   */
+  public void testPlaceholder() {
+    final ValueBoxBase<String> valueBoxBase = createValueBoxBase("");
+    RootPanel.get().add(valueBoxBase);
+    
+    // placeholder is not defined, the getter of placeholder must return a null value.
+    assertNull(valueBoxBase.getPlaceholder());
+
+    String placeholder = "hello the world !";
+    valueBoxBase.setPlaceholder(placeholder);
+    assertEquals(placeholder, valueBoxBase.getPlaceholder());
+
+    // if you define the placeholder even with null or empty value,
+    // the getter of placeholder must return a non-null value.
+    valueBoxBase.setPlaceholder(null);
+    assertEquals("", valueBoxBase.getPlaceholder());
+
+    valueBoxBase.setPlaceholder("");
+    assertEquals("", valueBoxBase.getPlaceholder());
+  }
+
   private static ValueBoxBase<String> createValueBoxBase(String text) {
     Element elm = Document.get().createTextInputElement();
     Renderer<String> renderer = PassthroughRenderer.instance();

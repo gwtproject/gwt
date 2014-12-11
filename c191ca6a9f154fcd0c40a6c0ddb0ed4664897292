@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c4870e28_cfbe9133",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-11T17:30:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04cbe695_53cc2445",
+      "range": {
+        "startLine": 536,
+        "startChar": 41,
+        "endLine": 536,
+        "endChar": 61
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04cbe695_7373a055",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c4870e28_0fe8a939",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-11T17:30:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04cbe695_7373a055",
+      "range": {
+        "startLine": 816,
+        "startChar": 29,
+        "endLine": 816,
+        "endChar": 41
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04cbe695_73fde03f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2014-12-11T01:56:02Z",
       "side": 1,
       "message": "maybe updateOverridingMethodInfo?",
+      "range": {
+        "startLine": 892,
+        "startChar": 14,
+        "endLine": 892,
+        "endChar": 27
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4870e28_6fa6851d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-11T17:30:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04cbe695_73fde03f",
       "range": {
         "startLine": 892,
         "startChar": 14,
@@ -117,6 +189,54 @@
     },
     {
       "key": {
+        "uuid": "c4870e28_afa79d14",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-11T17:30:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04cbe695_330768ba",
+      "range": {
+        "startLine": 1159,
+        "startChar": 17,
+        "endLine": 1159,
+        "endChar": 19
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4870e28_d2e8fa0e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-11T17:30:13Z",
+      "side": 1,
+      "message": "I would like to keep it. We need the return from computeAllOverriddenMethods in computeAllOverrides() to compute all overrides information for a list of JDeclaredType. If we make computeAllOverriddenMethods return void, we have to update the two overridden\u003c-\u003eoverriding maps in this function for a given method. But I want to make the overridden\u003c-\u003eoverriding information updated globally, not for a specific method.",
+      "parentUuid": "04cbe695_7324c049",
+      "range": {
+        "startLine": 1159,
+        "startChar": 22,
+        "endLine": 1159,
+        "endChar": 49
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04cbe695_33abe813",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 4
@@ -128,6 +248,30 @@
       "writtenOn": "2014-12-11T01:56:02Z",
       "side": 1,
       "message": "I think there is no need to copy the multimap now, right?\n\nYou could remove this method and either do\nmethodsThatOverrideMe \u003d program.typeOracle.getOverriders() \n\ninstead.\n\nalso rename methodsThatOverrideMe",
+      "range": {
+        "startLine": 1124,
+        "startChar": 15,
+        "endLine": 1124,
+        "endChar": 37
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4870e28_6f74c5ed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-11T17:30:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04cbe695_33abe813",
       "range": {
         "startLine": 1124,
         "startChar": 15,

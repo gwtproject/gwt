@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04cbe695_53cc2445",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-11T01:56:02Z",
+      "side": 1,
+      "message": "Lets keep the naming convention\n\none of this is\noverridenMethodsByOverridingMethod and the other is\noverridingMethodsByOverridenMethod (I think).",
+      "range": {
+        "startLine": 536,
+        "startChar": 41,
+        "endLine": 536,
+        "endChar": 61
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04cbe695_7373a055",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-11T01:56:02Z",
+      "side": 1,
+      "message": "Use a LinkedHashMultimap so that we get consistent iteration order.",
+      "range": {
+        "startLine": 816,
+        "startChar": 29,
+        "endLine": 816,
+        "endChar": 41
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04cbe695_73fde03f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-11T01:56:02Z",
+      "side": 1,
+      "message": "maybe updateOverridingMethodInfo?",
+      "range": {
+        "startLine": 892,
+        "startChar": 14,
+        "endLine": 892,
+        "endChar": 27
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04cbe695_7324c049",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-11T01:56:02Z",
+      "side": 1,
+      "message": "I would make computeAllOverridenMethods return void\nand change this into\ncomputeAllOverridenMethods(x);\nfor (JMEthod overridenMEthod: getAllOverridenMethod(x))..",
+      "range": {
+        "startLine": 1159,
+        "startChar": 22,
+        "endLine": 1159,
+        "endChar": 49
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04cbe695_330768ba",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-11T01:56:02Z",
+      "side": 1,
+      "message": "s/om/overridenMethod/",
+      "range": {
+        "startLine": 1159,
+        "startChar": 17,
+        "endLine": 1159,
+        "endChar": 19
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04cbe695_33abe813",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2014-12-11T01:56:02Z",
+      "side": 1,
+      "message": "I think there is no need to copy the multimap now, right?\n\nYou could remove this method and either do\nmethodsThatOverrideMe \u003d program.typeOracle.getOverriders() \n\ninstead.\n\nalso rename methodsThatOverrideMe",
+      "range": {
+        "startLine": 1124,
+        "startChar": 15,
+        "endLine": 1124,
+        "endChar": 37
+      },
+      "revId": "c191ca6a9f154fcd0c40a6c0ddb0ed4664897292",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

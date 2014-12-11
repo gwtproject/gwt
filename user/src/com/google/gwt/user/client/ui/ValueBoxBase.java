@@ -398,6 +398,25 @@ public class ValueBoxBase<T> extends FocusWidget implements
     }
   }
 
+  /**
+   * Returns the placeholder defined in this value box base (textbox, textarea, integerbox, etc).
+   *
+   * @return empty string if the placeholder value is not defined else the placeholder value.
+   */
+  public String getPlaceholder() {
+    return getElement().getPropertyString("placeholder");
+  }
+
+  /**
+   * The placeholder specifies a short hint that describes the expected value
+   * of an input field (textbox or textarea).
+   *
+   * @param placeholder placeholder to display in the textbox or textarea.
+   */
+  public void setPlaceholder(final String placeholder) {
+    getElement().setPropertyString("placeholder", placeholder == null ? "" : placeholder);
+  }
+
   protected TextBoxImpl getImpl() {
     return impl;
   }

@@ -88,7 +88,7 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
 
     checkOnModuleLoad(program, "function onModuleLoad(){" +
         "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
-        "$location[stackIndex]='EntryPoint.java:'+'3',$clinit_EntryPoint();" +
+        "$location[stackIndex]='EntryPoint.java:3',$clinit_EntryPoint();" +
         "$stackDepth=stackIndex-1}");
   }
 
@@ -107,8 +107,8 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
 
     checkOnModuleLoad(program, "function onModuleLoad(){" +
         "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
-        "$location[stackIndex]='EntryPoint.java:'+'4',$clinit_EntryPoint();" +
-        "$location[stackIndex]='EntryPoint.java:'+'5',foo();" +
+        "$location[stackIndex]='EntryPoint.java:4',$clinit_EntryPoint();" +
+        "$location[stackIndex]='EntryPoint.java:5',foo();" +
         "$stackDepth=stackIndex-1}");
   }
 
@@ -126,9 +126,9 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
         "}");
 
     checkOnModuleLoad(program, "function onModuleLoad(){" +
-        "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
-        "$location[stackIndex]='EntryPoint.java:'+'4',$clinit_EntryPoint();" +
-        "foo(($tmp=123,$location[stackIndex]='EntryPoint.java:'+'5',$tmp));" +
+        "var tmp,stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
+        "$location[stackIndex]='EntryPoint.java:4',$clinit_EntryPoint();" +
+        "foo((tmp=123,$location[stackIndex]='EntryPoint.java:5',tmp));" +
         "$stackDepth=stackIndex-1}");
   }
 
@@ -147,8 +147,8 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
     // Note: it's up to the catch block to fix $stackDepth.
     checkOnModuleLoad(program, "function onModuleLoad(){" +
         "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
-        "$location[stackIndex]='EntryPoint.java:'+'3',$clinit_EntryPoint();" +
-        "throw $location[stackIndex]='EntryPoint.java:'+'4',new RuntimeException" +
+        "$location[stackIndex]='EntryPoint.java:3',$clinit_EntryPoint();" +
+        "throw $location[stackIndex]='EntryPoint.java:4',new RuntimeException" +
         "}");
   }
 
@@ -170,11 +170,11 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
 
     // Line 7 should be current when the RuntimeException constructor is called.
     checkOnModuleLoad(program, "function onModuleLoad(){" +
-        "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
-        "$location[stackIndex]='EntryPoint.java:'+'6',$clinit_EntryPoint();" +
+        "var tmp,stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
+        "$location[stackIndex]='EntryPoint.java:6',$clinit_EntryPoint();" +
         "throw new RuntimeException(" +
-        "($tmp=($location[stackIndex]='EntryPoint.java:'+'4',thing).toString$()," +
-        "$location[stackIndex]='EntryPoint.java:'+'7',$tmp))" +
+        "(tmp=($location[stackIndex]='EntryPoint.java:4',thing).toString$()," +
+        "$location[stackIndex]='EntryPoint.java:7',tmp))" +
         "}");
   }
 
@@ -201,10 +201,10 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
         "}");
 
     checkOnModuleLoad(program, "function onModuleLoad(){" +
-        "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
-        "$location[stackIndex]='EntryPoint.java:'+'7',$clinit_EntryPoint();" +
-        "throw unwrap(($tmp=($location[stackIndex]='EntryPoint.java:'+'5',factory)," +
-        "$location[stackIndex]='EntryPoint.java:'+'8',$tmp).makeException())" +
+        "var tmp,stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
+        "$location[stackIndex]='EntryPoint.java:7',$clinit_EntryPoint();" +
+        "throw unwrap((tmp=($location[stackIndex]='EntryPoint.java:5',factory)," +
+        "$location[stackIndex]='EntryPoint.java:8',tmp).makeException())" +
         "}");
   }
 
@@ -227,13 +227,13 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
     // Note: it's up to the catch block to fix $stackDepth.
     checkOnModuleLoad(program, "function onModuleLoad(){" +
         "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
-        "$location[stackIndex]='EntryPoint.java:'+'3',$clinit_EntryPoint();var e,s;" +
-        "try{throw $location[stackIndex]='EntryPoint.java:'+'5',new RuntimeException" +
+        "$location[stackIndex]='EntryPoint.java:3',$clinit_EntryPoint();var e,s;" +
+        "try{throw $location[stackIndex]='EntryPoint.java:5',new RuntimeException" +
         "}catch($e0){$e0=wrap($e0);" +
-        "$stackDepth=($location[stackIndex]='EntryPoint.java:'+'6',stackIndex);" +
+        "$stackDepth=($location[stackIndex]='EntryPoint.java:6',stackIndex);" +
         "if(instanceOf($e0,'java.lang.RuntimeException')){" +
-        "e=$e0;s=($location[stackIndex]='EntryPoint.java:'+'7',e).getMessage()}" +
-        "else throw unwrap(($location[stackIndex]='EntryPoint.java:'+'6',$e0))}" +
+        "e=$e0;s=($location[stackIndex]='EntryPoint.java:7',e).getMessage()}" +
+        "else throw unwrap(($location[stackIndex]='EntryPoint.java:6',$e0))}" +
         "$stackDepth=stackIndex-1" +
         "}");
   }

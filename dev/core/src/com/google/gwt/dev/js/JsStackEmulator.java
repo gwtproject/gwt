@@ -246,6 +246,11 @@ public class JsStackEmulator {
     private JsName returnTemp;
 
     /**
+     * Used as a temporary variable to wrap an expression.
+     */
+    private JsName tmp;
+
+    /**
      * Final cleanup for any new local variables that need to be created.
      */
     private List<JsVar> varsToAdd = Lists.create();
@@ -561,6 +566,17 @@ public class JsStackEmulator {
         varsToAdd = Lists.add(varsToAdd, var);
       }
       return returnTemp.makeRef(info);
+    }
+
+    protected JsNameRef tmpRef(SourceInfo info) {
+      if (tmp == null) {
+        tmp = currentFunction.getScope().declareName(
+            "JsStackEmulator_tmp", "tmp");
+
+        JsVar var = new JsVar(info, tmp);
+        varsToAdd = Lists.add(varsToAdd, var);
+      }
+      return tmp.makeRef(info);
     }
   }
 
@@ -878,13 +894,13 @@ public class JsStackEmulator {
      * (Requires a temporary variable.)
      */
     private JsExpression recordAfter(JsExpression x, SourceInfo locationToRecord) {
-      // ($tmp = x, $locations[stackIndex] = "{fileName}:" + "{lineNumber}", $tmp)
+      // ($tmp = x, $locations[stackIndex] = "{fileName}:{lineNumber}", $tmp)
       SourceInfo info = x.getSourceInfo();
-      JsExpression setTmp = new JsBinaryOperation(info, JsBinaryOperator.ASG, tmp.makeRef(info), x);
+      JsExpression setTmp = new JsBinaryOperation(info, JsBinaryOperator.ASG, tmpRef(info), x);
       return new JsBinaryOperation(info, JsBinaryOperator.COMMA,
           new JsBinaryOperation(info, JsBinaryOperator.COMMA, setTmp,
               assignLocation(locationToRecord)),
-          tmp.makeRef(info));
+          tmpRef(info));
     }
 
     /**
@@ -892,15 +908,17 @@ public class JsStackEmulator {
      */
     private JsExpression assignLocation(SourceInfo info) {
       // If filenames are on:
-      //   $locations[stackIndex] = "{fileName}:" + "{lineNumber}";
+      //   $locations[stackIndex] = "{fileName}:{lineNumber}";
       // Otherwise:
       //   $locations[stackIndex] = "{lineNumber}";
 
-      JsExpression location = new JsStringLiteral(info, String.valueOf(info.getStartLine()));
+      JsExpression location;
+      String startLine = String.valueOf(info.getStartLine());
       if (recordFileNames) {
-        // 'fileName:' + lineNumber
-        JsStringLiteral stringLit = new JsStringLiteral(info, baseName(info.getFileName()) + ":");
-        location = new JsBinaryOperation(info, JsBinaryOperator.ADD, stringLit, location);
+        // fileName + ':' + lineNumber
+        location = new JsStringLiteral(info, baseName(info.getFileName()) + ":" + startLine);
+      } else {
+        location = new JsStringLiteral(info, startLine);
       }
 
       JsArrayAccess access = new JsArrayAccess(info, lineNumbers.makeRef(info),
@@ -974,7 +992,6 @@ public class JsStackEmulator {
   private final boolean recordLineNumbers;
   private JsName stack;
   private JsName stackDepth;
-  private JsName tmp;
   private JDeclaredType exceptionsClass;
 
   private JsStackEmulator(JProgram jprogram, JsProgram jsProgram,
@@ -1021,7 +1038,6 @@ public class JsStackEmulator {
         "$stackDepth");
     lineNumbers = jsProgram.getScope().declareName("$JsStackEmulator_location",
         "$location");
-    tmp = jsProgram.getScope().declareName("$JsStackEmulator_tmp", "$tmp");
   }
 
   private void makeVars() {

@@ -1123,12 +1123,7 @@ public class ControlFlowAnalyzer {
 
   private void buildMethodsOverriding() {
     methodsThatOverrideMe = ArrayListMultimap.create();
-    for (JDeclaredType type : program.getDeclaredTypes()) {
-      for (JMethod method : type.getMethods()) {
-        for (JMethod overridden : program.typeOracle.getAllOverriddenMethods(method)) {
-          methodsThatOverrideMe.put(overridden, method);
-        }
-      }
-    }
+    program.typeOracle.computeOverrides(program.getDeclaredTypes());
+    methodsThatOverrideMe.putAll(program.typeOracle.getOverriders());
   }
 }

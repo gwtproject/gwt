@@ -232,7 +232,7 @@ public class JTypeOracle implements Serializable {
     }
 
     if (x.needsVtable() && isJsTypeMethod(x)) {
-      for (JMethod override : getAllOverriddenMethods(x)) {
+      for (JMethod override : computeAllOverriddenMethods(x)) {
         if (!isJsTypeMethod(override)) {
           return true;
         }
@@ -533,6 +533,9 @@ public class JTypeOracle implements Serializable {
   private final Map<JMethod, Multimap<JClassType, JMethod>> virtualUpRefMap =
       Maps.newIdentityHashMap();
 
+  private HashMultimap<JMethod, JMethod> allOverriddenMethods;
+  private HashMultimap<JMethod, JMethod> overriders;
+
   /**
    * An index of all polymorphic methods for each class.
    */
@@ -804,6 +807,24 @@ public class JTypeOracle implements Serializable {
         computeVirtualUpRefs((JClassType) type);
       }
     }
+
+    computeOverrides(declaredTypes);
+  }
+
+  public void computeOverrides(Collection<JDeclaredType> declaredTypes) {
+    if (allOverriddenMethods == null || overriders == null) {
+      allOverriddenMethods = HashMultimap.create();
+      overriders = HashMultimap.create();
+      for (JDeclaredType type : declaredTypes) {
+        for (JMethod method : type.getMethods()) {
+          Set<JMethod> overriddens = computeAllOverriddenMethods(method);
+          allOverriddenMethods.putAll(method, overriddens);
+          for (JMethod overridden : overriddens) {
+            overriders.put(overridden, method);
+          }
+        }
+      }
+    }
   }
 
   private static Collection<String> getNamesOf(Collection<JDeclaredType> types) {
@@ -841,11 +862,45 @@ public class JTypeOracle implements Serializable {
    * In this case, <code>Unrelated.foo()</code> virtually implements
    * <code>IFoo.foo()</code> in subclass <code>Foo</code>.
    */
-  public Set<JMethod> getAllOverriddenMethods(JMethod method) {
+  private Set<JMethod> computeAllOverriddenMethods(JMethod method) {
     Set<JMethod> results = Sets.newIdentityHashSet();
     results.addAll(method.getOverriddenMethods());
     getAllVirtualOverriddenMethods(method, results);
     return results;
+  }
+
+  public Set<JMethod> getAllOverriddenMethodsOf(JMethod method) {
+    assert (allOverriddenMethods != null);
+    return allOverriddenMethods.get(method);
+  }
+
+  public Set<JMethod> getOverridersOf(JMethod method) {
+    assert (overriders != null);
+    return overriders.get(method);
+  }
+
+  public HashMultimap<JMethod, JMethod> getAllOverriddenMethods() {
+    assert (allOverriddenMethods != null);
+    return allOverriddenMethods;
+  }
+
+  public HashMultimap<JMethod, JMethod> getOverriders() {
+    assert (overriders != null);
+    return overriders;
+  }
+
+  public void syncOverrides(Set<JMethod> prunedMethods) {
+    assert (allOverriddenMethods != null && overriders != null);
+    for (JMethod prunedMethod : prunedMethods) {
+      Set<JMethod> overriddenMethods = allOverriddenMethods.removeAll(prunedMethod);
+      for (JMethod overriddenMethod : overriddenMethods) {
+        overriders.remove(overriddenMethod, prunedMethod);
+      }
+      Set<JMethod> overriderMethods = overriders.removeAll(prunedMethod);
+      for (JMethod overriderMethod : overriderMethods) {
+        allOverriddenMethods.remove(overriderMethod, prunedMethod);
+      }
+    }
   }
 
   /**
@@ -1101,7 +1156,7 @@ public class JTypeOracle implements Serializable {
     if (!x.isNoExport() && isJsType(x.getEnclosingType())) {
       return true;
     }
-    for (JMethod om : getAllOverriddenMethods(x)) {
+    for (JMethod om : computeAllOverriddenMethods(x)) {
       if (!om.isNoExport() && isJsType(om.getEnclosingType())) {
         return true;
       }

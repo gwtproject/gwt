@@ -115,4 +115,28 @@ public class TextBoxBase extends ValueBoxBase<String> implements
   public void setTextAlignment(TextAlignConstant align) {
     setAlignment(align.value);
   }
+  
+  /**
+   * The placeholder specifies a short hint that describes the expected value
+   * of an input field (textbox or textarea).
+   *
+   * @param placeholder placeholder to display in the textbox or textarea.
+   */
+  public void setPlaceholder(final String placeholder) {
+    final String value = (placeholder == null) ? "" : placeholder;
+    if(value.isEmpty()) {
+      getElement().removeAttribute("placeholder");
+    } else {
+      getElement().setPropertyString("placeholder", value);
+    }
+  }
+
+  /**
+   * Returns the placeholder defined in this text box base (textbox or textarea).
+   *
+   * @return <code>null</code> if the placeholder value is not set else the placeholder value.
+   */
+  public String getPlaceholder() {
+    return getElement().getPropertyString("placeholder");
+  }
 }

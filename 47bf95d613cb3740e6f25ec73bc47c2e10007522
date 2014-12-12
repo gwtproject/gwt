@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9abf2fde_9a13e94b",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-12T01:50:31Z",
+      "side": 1,
+      "message": "A {@link Deque} based on circular buffer that is implemented with an array and head/tail pointers.",
+      "revId": "47bf95d613cb3740e6f25ec73bc47c2e10007522",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

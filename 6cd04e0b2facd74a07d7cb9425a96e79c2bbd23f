@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4021ab9_bbbcb3e1",
+        "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-12T20:08:02Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "6cd04e0b2facd74a07d7cb9425a96e79c2bbd23f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

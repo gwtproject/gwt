@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24162a01_d4f69c9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-14T15:35:17Z",
+      "side": 1,
+      "message": "I would reword this whole commit message to just:\n\n Add placeholder property to TextBoxBase",
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "641ca21f_76923064",
+        "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-14T15:35:17Z",
+      "side": 1,
+      "message": "Just use\n\n if (placeholder \u003d\u003d null || placeholder.isEmpty()) {\n\n?\n\n(if needed, see below)",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 26
+      },
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4adf2fd_12e94cba",
+        "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-14T15:35:17Z",
+      "side": 1,
+      "message": "I don\u0027t like it using attribute and property interchangeably; they are different concepts (tightly linked together, but still).\nIMO, we should just use properties.\n\nI don\u0027t get why we special-case the empty-string here. If there\u0027s a real need, then it should be documented in a comment. If the goal is just to make sure the DOM doesn\u0027t contain a placeholder attribute with the empty-string as the value, then it\u0027s a non-issue IMO.\n\nIn pure JS, would you do\n\n elt.removeAttribute(\u0027placeholder\u0027);\n\nor just\n\n elt.placeholder \u003d \"\";\n\n?\nI\u0027d bet the latter.\n\nSo I would just simplify this whole setter as:\n\n getElement().setPropertyString(\"placeholder\", value \u003d\u003d null ? \"\" : value);",
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4adf2fd_f2b008d4",
+        "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-14T15:35:17Z",
+      "side": 1,
+      "message": "The HTML Living Standard (haven\u0027t checked HTML5) defines that the empty string should be returned; and that\u0027s indeed the case in Chrome at least.\n\nHow about just documenting that this gets and sets the placeholder property, with a link to the spec?\n\nhttps://html.spec.whatwg.org/multipage/forms.html#attr-input-placeholder and/or https://html.spec.whatwg.org/multipage/forms.html#attr-textarea-placeholder",
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4adf2fd_92ab7c66",
+        "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-14T15:35:17Z",
+      "side": 1,
+      "message": "Move getter before setter",
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

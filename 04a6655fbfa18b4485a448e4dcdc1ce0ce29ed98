@@ -90,6 +90,69 @@
       "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4adf2fd_d2b504c2",
+        "filename": "user/test/com/google/gwt/user/client/ui/TextBoxBaseTestBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-14T15:37:45Z",
+      "side": 1,
+      "message": "Rework to a proper sentence, or just remove the javadoc.",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 21
+      },
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24162a01_14e934ba",
+        "filename": "user/test/com/google/gwt/user/client/ui/TextBoxBaseTestBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-14T15:37:45Z",
+      "side": 1,
+      "message": "I\u0027d bet it fails (in Chrome at least)",
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24162a01_34ec30ca",
+        "filename": "user/test/com/google/gwt/user/client/ui/TextBoxBaseTestBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-14T15:37:45Z",
+      "side": 1,
+      "message": "Is this really supposed to pass?!",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 36
+      },
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

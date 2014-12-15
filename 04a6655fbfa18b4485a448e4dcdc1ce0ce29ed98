@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "641ca21f_794a2323",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-15T18:21:44Z",
+      "side": 1,
+      "message": "Done, Thanks.",
+      "parentUuid": "24162a01_d4f69c9c",
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "641ca21f_76923064",
         "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
         "patchSetId": 5
@@ -42,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "641ca21f_39cf0b3d",
+        "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-15T18:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "641ca21f_76923064",
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4adf2fd_12e94cba",
         "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
         "patchSetId": 5
@@ -53,6 +89,24 @@
       "writtenOn": "2014-12-14T15:35:17Z",
       "side": 1,
       "message": "I don\u0027t like it using attribute and property interchangeably; they are different concepts (tightly linked together, but still).\nIMO, we should just use properties.\n\nI don\u0027t get why we special-case the empty-string here. If there\u0027s a real need, then it should be documented in a comment. If the goal is just to make sure the DOM doesn\u0027t contain a placeholder attribute with the empty-string as the value, then it\u0027s a non-issue IMO.\n\nIn pure JS, would you do\n\n elt.removeAttribute(\u0027placeholder\u0027);\n\nor just\n\n elt.placeholder \u003d \"\";\n\n?\nI\u0027d bet the latter.\n\nSo I would just simplify this whole setter as:\n\n getElement().setPropertyString(\"placeholder\", value \u003d\u003d null ? \"\" : value);",
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "641ca21f_d9c9b739",
+        "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-15T18:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4adf2fd_12e94cba",
       "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -76,6 +130,24 @@
     },
     {
       "key": {
+        "uuid": "e4adf2fd_75824292",
+        "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-15T18:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4adf2fd_f2b008d4",
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4adf2fd_92ab7c66",
         "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
         "patchSetId": 5
@@ -87,6 +159,24 @@
       "writtenOn": "2014-12-14T15:35:17Z",
       "side": 1,
       "message": "Move getter before setter",
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24162a01_3707128c",
+        "filename": "user/src/com/google/gwt/user/client/ui/TextBoxBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-15T18:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4adf2fd_92ab7c66",
       "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -110,6 +200,24 @@
         "endLine": 173,
         "endChar": 21
       },
+      "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4adf2fd_557f3efe",
+        "filename": "user/test/com/google/gwt/user/client/ui/TextBoxBaseTestBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-15T18:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4adf2fd_d2b504c2",
       "revId": "04a6655fbfa18b4485a448e4dcdc1ce0ce29ed98",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

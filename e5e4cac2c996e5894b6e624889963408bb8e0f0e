@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1154030_fc0b8544",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowRecorder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-16T00:35:13Z",
+      "side": 1,
+      "message": "It is removed in patch 9bc226d. It should be getOverriddenMethodsOf(x).",
+      "range": {
+        "startLine": 123,
+        "startChar": 55,
+        "endLine": 123,
+        "endChar": 78
+      },
+      "revId": "e5e4cac2c996e5894b6e624889963408bb8e0f0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

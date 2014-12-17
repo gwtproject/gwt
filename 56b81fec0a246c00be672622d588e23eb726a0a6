@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1cb2464_659f806f",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/model/ImplicitCssResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-17T17:24:26Z",
+      "side": 1,
+      "message": "Should we inline it?",
+      "revId": "56b81fec0a246c00be672622d588e23eb726a0a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

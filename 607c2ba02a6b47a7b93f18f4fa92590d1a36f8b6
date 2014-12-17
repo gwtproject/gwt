@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6143b481_de2be595",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ResourceOracleImplTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-17T04:10:36Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "607c2ba02a6b47a7b93f18f4fa92590d1a36f8b6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

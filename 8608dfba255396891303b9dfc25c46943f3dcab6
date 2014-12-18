@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1a3ecb1_0489664a",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/AbstractResource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-18T20:29:43Z",
+      "side": 0,
+      "message": "i\u0027ve tried to remove this twice previously, i\u0027m glad you found a way to stop needing it in ResourceOracleImplTest",
+      "range": {
+        "startLine": 28,
+        "startChar": 33,
+        "endLine": 28,
+        "endChar": 50
+      },
+      "revId": "8608dfba255396891303b9dfc25c46943f3dcab6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

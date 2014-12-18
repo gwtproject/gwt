@@ -32,12 +32,18 @@ import elemental.json.JsonValue;
  */
 public class JreJsonArray extends JreJsonValue implements JsonArray {
 
-  private ArrayList<JsonValue> arrayValues = new ArrayList<JsonValue>();
+  private final ArrayList<JsonValue> arrayValues;
 
   private JsonFactory factory;
 
   public JreJsonArray(JsonFactory factory) {
     this.factory = factory;
+    this.arrayValues = new ArrayList<JsonValue>();
+  }
+
+  public JreJsonArray(JsonFactory factory, int initialCapacity) {
+    this.factory = factory;
+    this.arrayValues = new ArrayList<JsonValue>(initialCapacity);
   }
 
   @Override
@@ -91,7 +97,7 @@ public class JreJsonArray extends JreJsonValue implements JsonArray {
   }
 
   public Object getObject() {
-    List<Object> objs = new ArrayList<Object>();
+    List<Object> objs = new ArrayList<Object>(arrayValues.size());
     for (JsonValue val : arrayValues) {
       objs.add(((JreJsonValue) val).getObject());
     }

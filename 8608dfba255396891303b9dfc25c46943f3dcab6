@@ -52,6 +52,24 @@
       "revId": "8608dfba255396891303b9dfc25c46943f3dcab6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1ae8c91_9e2e9df9",
+        "filename": "dev/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-18T20:22:01Z",
+      "side": 0,
+      "message": "Thanks for the info.",
+      "parentUuid": "41731024_2573ced9",
+      "revId": "8608dfba255396891303b9dfc25c46943f3dcab6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

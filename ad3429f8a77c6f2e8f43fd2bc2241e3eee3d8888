@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "21ce1ca4_f4f2f8fc",
+        "filename": "elemental/src/elemental/json/JsonFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 6775
+      },
+      "writtenOn": "2014-12-18T21:23:01Z",
+      "side": 1,
+      "message": "I suppose it could be changed to something more descriptive (although the variable name is itself pretty self-explanatory). The \"A Java XXX\" parameters in the other methods are input to be converted; this is different as it\u0027s a configuration parameter, so merits a more elaborate documentation.",
+      "parentUuid": "21ce1ca4_b4d3606b",
+      "revId": "ad3429f8a77c6f2e8f43fd2bc2241e3eee3d8888",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41731024_08c0a7bd",
         "filename": "elemental/src/elemental/super/elemental/json/Json.java",
         "patchSetId": 1

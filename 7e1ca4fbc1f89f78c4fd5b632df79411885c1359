@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1a3ecb1_19646f3e",
+        "filename": "user/src/com/google/gwt/resources/css/ast/CssExternalSelectors.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-18T20:16:43Z",
+      "side": 0,
+      "message": "This bug might change the styling behavior, right?\nCan you add a test that reproduces this problem consistently?",
+      "revId": "7e1ca4fbc1f89f78c4fd5b632df79411885c1359",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

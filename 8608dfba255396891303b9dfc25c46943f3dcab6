@@ -34,6 +34,24 @@
       "revId": "8608dfba255396891303b9dfc25c46943f3dcab6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41731024_2573ced9",
+        "filename": "dev/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-12-18T11:29:32Z",
+      "side": 0,
+      "message": "I looked it up. Android 4.4 supports all of Java7, older version support all of Java7 EXCEPT try with resources.\n\nSo we can even use diamond operator, switch on strings and the other stuff in requestfactory.\n\nSee: http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Using-sourceCompatibility-1.7",
+      "parentUuid": "c12b80c1_92cae227",
+      "revId": "8608dfba255396891303b9dfc25c46943f3dcab6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

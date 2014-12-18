@@ -48,6 +48,10 @@ public class JreJsonFactory implements JsonFactory {
     return new JreJsonArray(this);
   }
 
+  public JsonArray createArray(int initialCapacity) {
+    return new JreJsonArray(this, initialCapacity);
+  }
+
   public JsonNull createNull() {
     return JreJsonNull.NULL_INSTANCE;
   }

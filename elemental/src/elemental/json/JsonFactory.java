@@ -52,6 +52,14 @@ public interface JsonFactory {
   elemental.json.JsonArray createArray();
 
   /**
+   * Create an empty JsonArray optimized for a specified amount of elements.
+   *
+   * @param initialCapacity amount of elements for which the array is optimized during creation.
+   * @return a new JsonArray
+   */
+  elemental.json.JsonArray createArray(int initialCapacity);
+
+  /**
    * Create a JsonNull.
    *
    * @return a JsonNull instance

@@ -16,6 +16,24 @@
       "revId": "8608dfba255396891303b9dfc25c46943f3dcab6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c12b80c1_92cae227",
+        "filename": "dev/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-18T03:44:44Z",
+      "side": 0,
+      "message": "We should be careful about RequestFactory only and its target is already protected with \u0027android\u0027 constraint that enforces java6. I\u0027m not aware of anything else that needs Android compatibility.",
+      "parentUuid": "a1204cdf_2b1bc5e5",
+      "revId": "8608dfba255396891303b9dfc25c46943f3dcab6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

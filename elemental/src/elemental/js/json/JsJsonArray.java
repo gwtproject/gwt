@@ -35,6 +35,10 @@ final public class JsJsonArray extends JsJsonValue
     return (JsJsonArray) JavaScriptObject.createArray();
   }
 
+  public static JsonArray create(int initialCapacity) {
+    return (JsJsonArray) JavaScriptObject.createArray(initialCapacity);
+  }
+
   protected JsJsonArray() {
   }
 

@@ -37,6 +37,10 @@ public class Json {
   public static JsonArray createArray() {
     return instance().createArray();
   }
+  
+  public static JsonArray createArray(int initialCapacity) {
+    return instance().createArray(initialCapacity);
+  }
 
   public static JsonNull createNull() {
     return instance().createNull();

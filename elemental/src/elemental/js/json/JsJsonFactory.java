@@ -51,6 +51,10 @@ public class JsJsonFactory implements JsonFactory {
     return JsJsonArray.create();
   }
 
+  public elemental.json.JsonArray createArray(int initialCapacity) {
+    return JsJsonArray.create(initialCapacity);
+  }
+
   public JsonNull createNull() {
     return JsJsonNull.create();
   }

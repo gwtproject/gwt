@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41731024_28c563ce",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-18T20:13:11Z",
+      "side": 1,
+      "message": "Move the issue reference to a \"Bug:\" footer line.",
+      "revId": "ad3429f8a77c6f2e8f43fd2bc2241e3eee3d8888",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41731024_c8284fee",
+        "filename": "elemental/src/elemental/json/JsonFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-18T20:13:11Z",
+      "side": 1,
+      "message": "Useless, better leave it out.",
+      "revId": "ad3429f8a77c6f2e8f43fd2bc2241e3eee3d8888",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41731024_08c0a7bd",
+        "filename": "elemental/src/elemental/super/elemental/json/Json.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-18T20:13:11Z",
+      "side": 1,
+      "message": "Whitespace",
+      "revId": "ad3429f8a77c6f2e8f43fd2bc2241e3eee3d8888",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

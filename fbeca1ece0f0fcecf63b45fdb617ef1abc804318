@@ -46,6 +46,75 @@
       "revId": "fbeca1ece0f0fcecf63b45fdb617ef1abc804318",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c11380da_292f0da6",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-19T01:11:06Z",
+      "side": 1,
+      "message": "Remove.",
+      "range": {
+        "startLine": 352,
+        "startChar": 30,
+        "endLine": 352,
+        "endChar": 38
+      },
+      "revId": "fbeca1ece0f0fcecf63b45fdb617ef1abc804318",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c11380da_29aa6d0d",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/CombinedResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-19T01:11:06Z",
+      "side": 1,
+      "message": "I see in the previous implementation of \ngetResource(String pathName) in AbstractResourceOracle, it processes the pathName by Files.simplifyPath(pathName), and then check in the map. Should we do the same here?\nSame question to other subclasses of AbstractResourceOracle.",
+      "range": {
+        "startLine": 73,
+        "startChar": 37,
+        "endLine": 73,
+        "endChar": 45
+      },
+      "revId": "fbeca1ece0f0fcecf63b45fdb617ef1abc804318",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c11380da_a9f2dda9",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/CombinedResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-19T01:11:06Z",
+      "side": 1,
+      "message": "There is at most one Resource for a given path name in the multiple resource oracles, right?",
+      "range": {
+        "startLine": 73,
+        "startChar": 18,
+        "endLine": 73,
+        "endChar": 29
+      },
+      "revId": "fbeca1ece0f0fcecf63b45fdb617ef1abc804318",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

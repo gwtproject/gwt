@@ -49,6 +49,24 @@
     },
     {
       "key": {
+        "uuid": "a13dac4e_6335fcf7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-19T18:17:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "614734ed_be6c7973",
+      "revId": "1eccd5b715d7d83d0f8fa85e8eed700d450d8034",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "614734ed_3e52a9ab",
         "filename": "user/src/com/google/gwt/user/client/ui/ValueBoxBase.java",
         "patchSetId": 7
@@ -66,6 +84,24 @@
         "endLine": 405,
         "endChar": 5
       },
+      "revId": "1eccd5b715d7d83d0f8fa85e8eed700d450d8034",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "614734ed_61997087",
+        "filename": "user/src/com/google/gwt/user/client/ui/ValueBoxBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-19T18:17:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "614734ed_3e52a9ab",
       "revId": "1eccd5b715d7d83d0f8fa85e8eed700d450d8034",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -95,6 +131,24 @@
     },
     {
       "key": {
+        "uuid": "4144f0e8_8009184f",
+        "filename": "user/src/com/google/gwt/user/client/ui/ValueBoxBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-19T18:17:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "614734ed_7e86f1a7",
+      "revId": "1eccd5b715d7d83d0f8fa85e8eed700d450d8034",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4144f0e8_3d138f80",
         "filename": "user/test/com/google/gwt/user/client/ui/ValueBoxBaseTest.java",
         "patchSetId": 7
@@ -106,6 +160,24 @@
       "writtenOn": "2014-12-19T09:30:37Z",
       "side": 1,
       "message": "nit: whitespace\n\n(I\u0027m surprised Checkstyle didn\u0027t flag it)",
+      "revId": "1eccd5b715d7d83d0f8fa85e8eed700d450d8034",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a13dac4e_c37c08a7",
+        "filename": "user/test/com/google/gwt/user/client/ui/ValueBoxBaseTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-19T18:17:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4144f0e8_3d138f80",
       "revId": "1eccd5b715d7d83d0f8fa85e8eed700d450d8034",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c11380da_c99ab1d7",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-19T01:17:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c11380da_292f0da6",
+      "range": {
+        "startLine": 352,
+        "startChar": 30,
+        "endLine": 352,
+        "endChar": 38
+      },
+      "revId": "fbeca1ece0f0fcecf63b45fdb617ef1abc804318",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c11380da_29aa6d0d",
         "filename": "dev/core/src/com/google/gwt/dev/cfg/CombinedResourceOracle.java",
         "patchSetId": 1
@@ -111,6 +135,54 @@
         "startChar": 18,
         "endLine": 73,
         "endChar": 29
+      },
+      "revId": "fbeca1ece0f0fcecf63b45fdb617ef1abc804318",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c11380da_09bb2943",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/CombinedResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-19T01:17:01Z",
+      "side": 1,
+      "message": "right",
+      "parentUuid": "c11380da_a9f2dda9",
+      "range": {
+        "startLine": 73,
+        "startChar": 18,
+        "endLine": 73,
+        "endChar": 29
+      },
+      "revId": "fbeca1ece0f0fcecf63b45fdb617ef1abc804318",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c11380da_69b4e554",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/CombinedResourceOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2014-12-19T01:17:01Z",
+      "side": 1,
+      "message": "yes that should probably be preserved",
+      "parentUuid": "c11380da_29aa6d0d",
+      "range": {
+        "startLine": 73,
+        "startChar": 37,
+        "endLine": 73,
+        "endChar": 45
       },
       "revId": "fbeca1ece0f0fcecf63b45fdb617ef1abc804318",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4144f0e8_1d16d36f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-19T09:30:37Z",
+      "side": 1,
+      "message": "not really useful IMO.\n\nIf you think \"Add placeholder property to ValueBoxBase\" is not clear enough, maybe use \"HTML5 placeholder property\" instead of just \"placeholder property\".",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 9
+      },
+      "revId": "1eccd5b715d7d83d0f8fa85e8eed700d450d8034",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4144f0e8_3d138f80",
+        "filename": "user/test/com/google/gwt/user/client/ui/ValueBoxBaseTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2014-12-19T09:30:37Z",
+      "side": 1,
+      "message": "nit: whitespace\n\n(I\u0027m surprised Checkstyle didn\u0027t flag it)",
+      "revId": "1eccd5b715d7d83d0f8fa85e8eed700d450d8034",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

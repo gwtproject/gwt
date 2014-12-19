@@ -16,6 +16,24 @@
       "revId": "5275b6adf5b116846756894a3ec53f71c4d34d60",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a13dac4e_e3a4acc0",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasRequired.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-19T20:04:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a18bec6e_168d5c8f",
+      "revId": "5275b6adf5b116846756894a3ec53f71c4d34d60",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

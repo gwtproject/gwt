@@ -360,6 +360,15 @@ public class ListBoxTest extends GWTTestCase {
     }
   }
 
+  public void testHtml5RequiredValue() throws Exception {
+    final HasRequired box = new ListBox();
+    assertFalse(box.isRequired());
+    box.setRequired(true);
+    assertTrue(box.isRequired());
+    box.setRequired(false);
+    assertFalse(box.isRequired());
+  }
+
   private void assertOptionText(String expected, ListBox listBox, int index) {
     SelectElement select = listBox.getElement().cast();
     assertEquals(expected, select.getOptions().getItem(index).getText());

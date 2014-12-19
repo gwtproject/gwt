@@ -25,6 +25,76 @@
     },
     {
       "key": {
+        "uuid": "614734ed_be6c7973",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-12-19T14:52:32Z",
+      "side": 1,
+      "message": "Yeah something like \"Add HTML5 placeholder support in ValueBoxBase\" is enough.",
+      "parentUuid": "4144f0e8_1d16d36f",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 9
+      },
+      "revId": "1eccd5b715d7d83d0f8fa85e8eed700d450d8034",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "614734ed_3e52a9ab",
+        "filename": "user/src/com/google/gwt/user/client/ui/ValueBoxBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-12-19T14:52:32Z",
+      "side": 1,
+      "message": "Returns the HTML5 placeholder value.\n\n\n@return the placeholder value or an empty string if none has been defined",
+      "range": {
+        "startLine": 401,
+        "startChar": 0,
+        "endLine": 405,
+        "endChar": 5
+      },
+      "revId": "1eccd5b715d7d83d0f8fa85e8eed700d450d8034",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "614734ed_7e86f1a7",
+        "filename": "user/src/com/google/gwt/user/client/ui/ValueBoxBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-12-19T14:52:32Z",
+      "side": 1,
+      "message": "Sets the HTML5 placeholder value. The placeholder will be displayed if this value box is empty and should describe the expected input for this value box. \n\n\n\u003cp\u003eThe exact behavior of the placeholder might differ between browsers.\u003c/p\u003e\n\n\n@param placeholder the text to display or {@code null}",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 415,
+        "endChar": 5
+      },
+      "revId": "1eccd5b715d7d83d0f8fa85e8eed700d450d8034",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4144f0e8_3d138f80",
         "filename": "user/test/com/google/gwt/user/client/ui/ValueBoxBaseTest.java",
         "patchSetId": 7

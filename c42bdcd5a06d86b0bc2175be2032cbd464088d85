@@ -46,6 +46,29 @@
       "revId": "c42bdcd5a06d86b0bc2175be2032cbd464088d85",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6175743d_11e80e0b",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2014-12-19T22:43:00Z",
+      "side": 1,
+      "message": "Should we do it before setting the \u0027user.agent\u0027 property or after? I\u0027m not sure which should finally count.",
+      "range": {
+        "startLine": 1084,
+        "startChar": 4,
+        "endLine": 1086,
+        "endChar": 5
+      },
+      "revId": "c42bdcd5a06d86b0bc2175be2032cbd464088d85",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

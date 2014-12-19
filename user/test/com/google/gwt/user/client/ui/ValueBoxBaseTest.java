@@ -152,6 +152,16 @@ public class ValueBoxBaseTest extends GWTTestCase {
     valueBoxBase.setValue("", true);
   }
 
+  public void testHtml5RequiredValue() throws Exception
+  {
+    final HasRequired valueBoxBase = createValueBoxBase("");
+    assertFalse(valueBoxBase.isRequired());
+    valueBoxBase.setRequired(true);
+    assertTrue(valueBoxBase.isRequired());
+    valueBoxBase.setRequired(false);
+    assertFalse(valueBoxBase.isRequired());
+  }
+
   private static ValueBoxBase<String> createValueBoxBase(String text) {
     Element elm = Document.get().createTextInputElement();
     Renderer<String> renderer = PassthroughRenderer.instance();

@@ -22,6 +22,30 @@
       "revId": "c42bdcd5a06d86b0bc2175be2032cbd464088d85",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8190a89a_af4519e5",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2014-12-19T20:00:38Z",
+      "side": 1,
+      "message": "The reason is already logged inside the method.",
+      "parentUuid": "614734ed_5e069590",
+      "range": {
+        "startLine": 1085,
+        "startChar": 12,
+        "endLine": 1085,
+        "endChar": 43
+      },
+      "revId": "c42bdcd5a06d86b0bc2175be2032cbd464088d85",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

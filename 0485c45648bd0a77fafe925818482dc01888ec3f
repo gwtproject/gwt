@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a18bec6e_f61f78cd",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasRequired.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-19T19:57:02Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "0485c45648bd0a77fafe925818482dc01888ec3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a18bec6e_9614ecb3",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasRequired.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-19T19:57:02Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "0485c45648bd0a77fafe925818482dc01888ec3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a18bec6e_b619f0ea",
+        "filename": "user/test/com/google/gwt/user/client/ui/ListBoxTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-19T19:57:02Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should be on the previous line.",
+      "revId": "0485c45648bd0a77fafe925818482dc01888ec3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a18bec6e_562f64f6",
+        "filename": "user/test/com/google/gwt/user/client/ui/ValueBoxBaseTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-19T19:57:02Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should be on the previous line.",
+      "revId": "0485c45648bd0a77fafe925818482dc01888ec3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

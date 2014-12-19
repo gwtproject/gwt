@@ -85,7 +85,7 @@ import com.google.gwt.i18n.shared.WordCountDirectionEstimator;
  */
 @SuppressWarnings("deprecation")
 public class ListBox extends FocusWidget implements SourcesChangeEvents,
-    HasChangeHandlers, HasName, HasDirectionEstimator {
+    HasChangeHandlers, HasName, HasDirectionEstimator, HasRequired {
 
   public static final DirectionEstimator DEFAULT_DIRECTION_ESTIMATOR =
     WordCountDirectionEstimator.get();
@@ -540,6 +540,38 @@ public class ListBox extends FocusWidget implements SourcesChangeEvents,
    */
   public void setVisibleItemCount(int visibleItems) {
     getSelectElement().setSize(visibleItems);
+  }
+
+  /**
+   * Determines whether or not this object is required.
+   *
+   * <p>
+   * This option will make it mandatory filling a field and block form validation
+   * if one of the fields (concerned by this attribute) has not been informed.
+   *
+   * @return <code>true</code> if the object is required.
+   */
+  public boolean isRequired() {
+    return getElement().getPropertyString(REQUIRED_PROPERTY_NAME) != null;
+  }
+
+  /**
+   * Sets the HTML5 required value.
+   *
+   * <p>
+   * When present, it specifies that an input field must be filled out before submitting the form.
+   *
+   * <p>
+   * Note: The required attribute works with the following input types: text, search, url, tel, email,
+   * password, date pickers, number, checkbox, radio, and file.
+   *
+   * <p>
+   * <strong>The exact behavior of the placeholder might differ between browsers.</strong>
+   *
+   * @param required <code>true</code> if the listBox or text field must be filled.
+   */
+  public void setRequired(final boolean required) {
+    getElement().setPropertyString(REQUIRED_PROPERTY_NAME, (required) ? "" : null);
   }
 
   /**

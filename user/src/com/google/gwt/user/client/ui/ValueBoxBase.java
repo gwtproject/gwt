@@ -47,7 +47,8 @@ import java.text.ParseException;
  */
 public class ValueBoxBase<T> extends FocusWidget implements
     HasChangeHandlers, HasName, HasDirectionEstimator,
-    HasValue<T>, HasText, AutoDirectionHandler.Target, IsEditor<ValueBoxEditor<T>> {
+    HasValue<T>, HasText, HasRequired,
+    AutoDirectionHandler.Target, IsEditor<ValueBoxEditor<T>> {
 
   /**
    * Alignment values for {@link ValueBoxBase#setAlignment}.
@@ -419,6 +420,34 @@ public class ValueBoxBase<T> extends FocusWidget implements
    */
   public void setPlaceholder(final String placeholder) {
     getElement().setPropertyString("placeholder", placeholder == null ? "" : placeholder);
+  }
+  
+  /**
+   * Determines whether or not this object is required.
+   *
+   * <p>This option will make it mandatory filling a field and block form validation
+   * if one of the fields (concerned by this attribute) has not been informed.</p>
+   *
+   * @return <code>true</code> if the object is required.
+   */
+  public boolean isRequired() {
+    return getElement().getPropertyString(REQUIRED_PROPERTY_NAME) != null;
+  }
+
+  /**
+   * Sets the HTML5 required value.
+   *
+   * <p>When present, it specifies that an input field must be filled out before submitting the form.</p>
+   *
+   * <p>Note: The required attribute works with the following input types: text, search, url, tel, email,
+   * password, date pickers, number, checkbox, radio, and file.</p>
+   *
+   * <p><strong>The exact behavior of the placeholder might differ between browsers.</strong></p>
+   *
+   * @param required <code>true</code> if the listBox or text field must be filled.
+   */
+  public void setRequired(final boolean required) {
+    getElement().setPropertyString(REQUIRED_PROPERTY_NAME, (required) ? "" : null);
   }
 
   protected TextBoxImpl getImpl() {

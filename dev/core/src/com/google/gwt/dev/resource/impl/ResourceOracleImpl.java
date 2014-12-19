@@ -458,12 +458,6 @@ public class ResourceOracleImpl extends AbstractResourceOracle {
     return pathPrefixSet;
   }
 
-  @Deprecated
-  @Override
-  public Map<String, Resource> getResourceMap() {
-    return exposedResourceMap;
-  }
-
   @Override
   public Set<Resource> getResources() {
     return exposedResources;
@@ -476,5 +470,10 @@ public class ResourceOracleImpl extends AbstractResourceOracle {
   // @VisibleForTesting
   List<ClassPathEntry> getClassPathEntries() {
     return classPathEntries;
+  }
+
+  @Override
+  public Resource getResource(String pathName) {
+    return exposedResourceMap.get(pathName);
   }
 }

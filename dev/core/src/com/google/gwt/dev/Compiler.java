@@ -163,9 +163,6 @@ public class Compiler {
       ModuleDef module =
           ModuleDefLoader.loadFromClassPath(logger, compilerContext, moduleName, true);
       modules[i++] = module;
-      if (!maybeRestrictProperties(logger, module, options.getProperties())) {
-        return false;
-      }
     }
     return run(logger, modules);
   }
@@ -202,6 +199,9 @@ public class Compiler {
           compilerContextBuilder.unitCache(getOrCreateUnitCache(logger, options)).build();
 
       for (ModuleDef module : modules) {
+        if (!maybeRestrictProperties(logger, module, options.getProperties())) {
+          return false;
+        }
         compilerContext = compilerContextBuilder.module(module).build();
         String moduleName = module.getCanonicalName();
         if (options.isValidateOnly()) {
@@ -277,7 +277,7 @@ public class Compiler {
     return true;
   }
 
-  public static boolean maybeRestrictProperties(TreeLogger logger, ModuleDef module,
+  private static boolean maybeRestrictProperties(TreeLogger logger, ModuleDef module,
       ListMultimap<String, String> properties) {
     try {
       for (Entry<String, Collection<String>> property : properties.asMap().entrySet()) {

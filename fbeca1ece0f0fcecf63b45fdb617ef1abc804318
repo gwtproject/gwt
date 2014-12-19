@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21ce1ca4_d45b7c4a",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2014-12-19T01:05:47Z",
+      "side": 1,
+      "message": "delete",
+      "range": {
+        "startLine": 352,
+        "startChar": 30,
+        "endLine": 352,
+        "endChar": 38
+      },
+      "revId": "fbeca1ece0f0fcecf63b45fdb617ef1abc804318",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

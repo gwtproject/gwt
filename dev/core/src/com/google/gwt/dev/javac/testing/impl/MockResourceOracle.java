@@ -69,12 +69,11 @@ public class MockResourceOracle extends ResourceOracleImpl {
     return exportedMap.keySet();
   }
 
-  @Deprecated
   @Override
-  public Map<String, Resource> getResourceMap() {
-    return exportedMap;
+  public Resource getResource(String pathName) {
+    return exportedMap.get(pathName);
   }
-
+  
   @Override
   public Set<Resource> getResources() {
     return exportedValues;

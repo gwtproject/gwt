@@ -208,7 +208,7 @@ public class PathPrefixSet {
     TrieNode parentNode = rootTrieNode;
     String[] parts = dirPath.split("/");
     for (String part : parts) {
-      assert (!"".equals(part));
+      assert (!"".equals(part)) : dirPath;
       TrieNode childNode = parentNode.findChild(part);
       if (childNode != null) {
         if (childNode.hasPrefixes) {
@@ -324,9 +324,7 @@ public class PathPrefixSet {
 
   private void assertValidAbstractDirectoryPathName(String name) {
     assert (name != null);
-    // assert ("".equals(name) || (!name.startsWith("/") &&
-    // name.endsWith("/")));
-    assert (!name.startsWith("/") && name.endsWith("/"));
+    assert (!name.startsWith("/"));
   }
 
   private void assertValidAbstractResourcePathName(String name) {

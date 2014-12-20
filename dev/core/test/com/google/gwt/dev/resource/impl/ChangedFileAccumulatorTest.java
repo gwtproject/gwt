@@ -13,67 +13,69 @@
  */
 package com.google.gwt.dev.resource.impl;
 
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.io.Files;
 
 import junit.framework.TestCase;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystemException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
- * Tests for ChangedFileAccumulator.
+ * Tests for resourceAccumulator.
  */
 public class ChangedFileAccumulatorTest extends TestCase {
 
-  public void testAddFile() throws IOException, InterruptedException, ExecutionException {
+  public void testAddFile() throws Exception {
     File rootDirectory = Files.createTempDir();
     File subDirectory = createDirectoryIn("subdir", rootDirectory);
 
-    ChangedFileAccumulator changedFileAccumulator =
-        new ChangedFileAccumulator(rootDirectory.toPath());
+    ResourceAccumulator resourceAccumulator =
+        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
 
-    assertTrue(changedFileAccumulator.getAndClearChangedFiles().isEmpty());
+    assertTrue(getResources(resourceAccumulator).isEmpty());
 
     createFileIn("New.java", subDirectory);
     waitForFileEvents();
 
-    List<File> modifiedFiles = changedFileAccumulator.getAndClearChangedFiles();
-    assertEquals(1, modifiedFiles.size());
-    assertTrue(modifiedFiles.get(0).getPath().endsWith("New.java"));
+    List<AbstractResource> resources = getResources(resourceAccumulator);
+    assertEquals(1, resources.size());
+    assertTrue(resources.get(0).getPath().endsWith("New.java"));
 
-    changedFileAccumulator.shutdown();
+    resourceAccumulator.shutdown();
   }
 
-  public void testDeleteFile() throws IOException, InterruptedException, ExecutionException {
+  public void testDeleteFile() throws Exception {
     File rootDirectory = Files.createTempDir();
     File subDirectory = createDirectoryIn("subdir", rootDirectory);
     File originalFile = createFileIn("SomeFile.java", subDirectory);
 
-    ChangedFileAccumulator changedFileAccumulator =
-        new ChangedFileAccumulator(rootDirectory.toPath());
+    ResourceAccumulator resourceAccumulator =
+        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
 
-    assertTrue(changedFileAccumulator.getAndClearChangedFiles().isEmpty());
+    List<AbstractResource> resources = getResources(resourceAccumulator);
+    assertEquals(1, resources.size());
+    assertTrue(resources.get(0).getPath().endsWith("SomeFile.java"));
 
     originalFile.delete();
     waitForFileEvents();
 
-    List<File> modifiedFiles = changedFileAccumulator.getAndClearChangedFiles();
-    assertEquals(1, modifiedFiles.size());
-    assertTrue(modifiedFiles.get(0).getPath().endsWith("SomeFile.java"));
+    assertTrue(getResources(resourceAccumulator).isEmpty());
 
-    changedFileAccumulator.shutdown();
+    resourceAccumulator.shutdown();
   }
 
-  public void testListensInNewDirectories() throws IOException, InterruptedException,
-      ExecutionException {
+  public void testListensInNewDirectories() throws Exception {
     File rootDirectory = Files.createTempDir();
 
-    ChangedFileAccumulator changedFileAccumulator =
-        new ChangedFileAccumulator(rootDirectory.toPath());
+    ResourceAccumulator resourceAccumulator =
+        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
 
-    assertTrue(changedFileAccumulator.getAndClearChangedFiles().isEmpty());
+    assertTrue(getResources(resourceAccumulator).isEmpty());
 
     // Create a new directory and contained file AFTER the root directory has started being listened
     // to.
@@ -81,92 +83,124 @@ public class ChangedFileAccumulatorTest extends TestCase {
     createFileIn("New.java", subDirectory);
     waitForFileEvents();
 
-    List<File> modifiedFiles = changedFileAccumulator.getAndClearChangedFiles();
-    assertEquals(2, modifiedFiles.size());
-    assertTrue(modifiedFiles.get(0).getPath().endsWith("subdir"));
-    assertTrue(modifiedFiles.get(1).getPath().endsWith("New.java"));
+    List<AbstractResource> resources = getResources(resourceAccumulator);
+    assertEquals(1, resources.size());
+    assertTrue(resources.get(0).getPath().endsWith("New.java"));
 
-    changedFileAccumulator.shutdown();
+    resourceAccumulator.shutdown();
   }
 
-  public void testModifyRepeatedly() throws IOException, InterruptedException, ExecutionException {
-    File rootDirectory = Files.createTempDir();
-    File fooFile = createFileIn("Foo.java", rootDirectory);
-
-    ChangedFileAccumulator changedFileAccumulator =
-        new ChangedFileAccumulator(rootDirectory.toPath());
-
-    assertTrue(changedFileAccumulator.getAndClearChangedFiles().isEmpty());
-
-    for (int i = 0; i < 5; i++) {
-      fooFile.setLastModified(i * 1000);
-      waitForFileEvents();
-      List<File> modifiedFiles = changedFileAccumulator.getAndClearChangedFiles();
-      assertEquals(1, modifiedFiles.size());
-      assertTrue(modifiedFiles.get(0).getPath().endsWith("Foo.java"));
-    }
-
-    changedFileAccumulator.shutdown();
-  }
-
-  public void testMultipleListeners() throws IOException, InterruptedException, ExecutionException {
+  public void testMultipleListeners() throws Exception {
     File rootDirectory = Files.createTempDir();
     File subDirectory = createDirectoryIn("subdir", rootDirectory);
 
-    ChangedFileAccumulator changedFileAccumulator1 =
-        new ChangedFileAccumulator(rootDirectory.toPath());
-    ChangedFileAccumulator changedFileAccumulator2 =
-        new ChangedFileAccumulator(rootDirectory.toPath());
+    ResourceAccumulator resourceAccumulator1 =
+        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+    ResourceAccumulator resourceAccumulator2 =
+        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
 
-    assertTrue(changedFileAccumulator1.getAndClearChangedFiles().isEmpty());
-    assertTrue(changedFileAccumulator2.getAndClearChangedFiles().isEmpty());
+    assertTrue(getResources(resourceAccumulator1).isEmpty());
+    assertTrue(getResources(resourceAccumulator2).isEmpty());
 
     createFileIn("New.java", subDirectory);
     waitForFileEvents();
 
-    List<File> modifiedFiles1 = changedFileAccumulator1.getAndClearChangedFiles();
-    assertEquals(1, modifiedFiles1.size());
-    assertTrue(modifiedFiles1.get(0).getPath().endsWith("New.java"));
+    List<AbstractResource> resources1 = getResources(resourceAccumulator1);
+    assertEquals(1, resources1.size());
+    assertTrue(resources1.get(0).getPath().endsWith("New.java"));
 
-    List<File> modifiedFiles2 = changedFileAccumulator2.getAndClearChangedFiles();
-    assertEquals(1, modifiedFiles2.size());
-    assertTrue(modifiedFiles2.get(0).getPath().endsWith("New.java"));
+    List<AbstractResource> resources2 = getResources(resourceAccumulator2);
+    assertEquals(1, resources2.size());
+    assertTrue(resources2.get(0).getPath().endsWith("New.java"));
 
-    changedFileAccumulator1.shutdown();
-    changedFileAccumulator2.shutdown();
+    resourceAccumulator1.shutdown();
+    resourceAccumulator2.shutdown();
   }
 
-  public void testRenameFile() throws IOException, InterruptedException, ExecutionException {
+  public void testRenameFile() throws Exception {
     File rootDirectory = Files.createTempDir();
     File subDirectory = createDirectoryIn("subdir", rootDirectory);
     File originalFile = createFileIn("OriginalName.java", subDirectory);
     File renamedFile = new File(subDirectory, "Renamed.java");
 
-    ChangedFileAccumulator changedFileAccumulator =
-        new ChangedFileAccumulator(rootDirectory.toPath());
+    ResourceAccumulator resourceAccumulator =
+        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
 
-    assertTrue(changedFileAccumulator.getAndClearChangedFiles().isEmpty());
+    List<AbstractResource> resources = getResources(resourceAccumulator);
+    assertEquals(1, resources.size());
+    assertTrue(resources.get(0).getPath().endsWith("OriginalName.java"));
 
     originalFile.renameTo(renamedFile);
     waitForFileEvents();
 
-    List<File> modifiedFiles = changedFileAccumulator.getAndClearChangedFiles();
-    assertEquals(2, modifiedFiles.size());
-    assertTrue(modifiedFiles.get(0).getPath().endsWith("OriginalName.java"));
-    assertTrue(modifiedFiles.get(1).getPath().endsWith("Renamed.java"));
+    resources = getResources(resourceAccumulator);
+    assertEquals(1, resources.size());
+    assertTrue(resources.get(0).getPath().endsWith("Renamed.java"));
 
-    changedFileAccumulator.shutdown();
+    resourceAccumulator.shutdown();
   }
 
-  public void testSymlinkInfiniteLoop() throws IOException, InterruptedException,
-      ExecutionException {
+  public void testRenameDirectory() throws Exception {
+    File rootDirectory = Files.createTempDir();
+    File subDirectory = createDirectoryIn("original_dir", rootDirectory);
+    createFileIn("Name1.java", subDirectory);
+    createFileIn("Name2.java", subDirectory);
+    File renamedSubDirectory = new File(rootDirectory, "new_dir");
+
+    ResourceAccumulator resourceAccumulator =
+        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+
+    List<AbstractResource> resources = getResources(resourceAccumulator);
+    assertEquals(2, resources.size());
+    assertTrue(resources.get(0).getPath().endsWith("original_dir/Name1.java"));
+    assertTrue(resources.get(1).getPath().endsWith("original_dir/Name2.java"));
+
+    subDirectory.renameTo(renamedSubDirectory);
+    waitForFileEvents();
+
+    resources = getResources(resourceAccumulator);
+    assertEquals(2, resources.size());
+    assertTrue(resources.get(0).getPath().endsWith("new_dir/Name1.java"));
+    assertTrue(resources.get(1).getPath().endsWith("new_dir/Name2.java"));
+
+    resourceAccumulator.shutdown();
+  }
+
+  public void testRenameParentDirectory() throws Exception {
+    File rootDirectory = Files.createTempDir();
+    File parentDirectory = createDirectoryIn("original_dir", rootDirectory);
+    File subDirectory = createDirectoryIn("subdir", parentDirectory);
+    createFileIn("Name1.java", subDirectory);
+    createFileIn("Name2.java", subDirectory);
+    File renamedParentDirectory = new File(rootDirectory, "new_dir");
+
+    ResourceAccumulator resourceAccumulator =
+        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
+
+    List<AbstractResource> resources = getResources(resourceAccumulator);
+    assertEquals(2, resources.size());
+    assertTrue(resources.get(0).getPath().endsWith("original_dir/subdir/Name1.java"));
+    assertTrue(resources.get(1).getPath().endsWith("original_dir/subdir/Name2.java"));
+
+    parentDirectory.renameTo(renamedParentDirectory);
+    waitForFileEvents();
+
+    resources = getResources(resourceAccumulator);
+    assertEquals(2, resources.size());
+    assertTrue(resources.get(0).getPath().endsWith("new_dir/subdir/Name1.java"));
+    assertTrue(resources.get(1).getPath().endsWith("new_dir/subdir/Name2.java"));
+
+    resourceAccumulator.shutdown();
+  }
+
+  public void testSymlinkInfiniteLoop() throws Exception {
     File rootDirectory = Files.createTempDir();
     File subDirectory = Files.createTempDir();
 
-    ChangedFileAccumulator changedFileAccumulator =
-        new ChangedFileAccumulator(rootDirectory.toPath());
+    ResourceAccumulator resourceAccumulator =
+        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
 
-    assertTrue(changedFileAccumulator.getAndClearChangedFiles().isEmpty());
+    assertTrue(getResources(resourceAccumulator).isEmpty());
 
     // Symlink in a loop
     java.nio.file.Files.createSymbolicLink(new File(rootDirectory, "sublink").toPath(),
@@ -176,25 +210,27 @@ public class ChangedFileAccumulatorTest extends TestCase {
     createFileIn("New.java", subDirectory);
     waitForFileEvents();
 
-    // Will throw an error if ChangedFileAccumulator got stuck in an infinite directory scan loop.
-    List<File> modifiedFiles = changedFileAccumulator.getAndClearChangedFiles();
-    assertEquals(2, modifiedFiles.size());
-    assertTrue(modifiedFiles.get(0).getPath().endsWith("sublink"));
-    assertTrue(modifiedFiles.get(1).getPath().endsWith("New.java"));
+    try {
+      // Should throw an error if resourceAccumulator got stuck in an infinite directory scan loop.
+      getResources(resourceAccumulator);
+      fail();
+    } catch (FileSystemException expected) {
+      // Expected
+    }
 
-    changedFileAccumulator.shutdown();
+    resourceAccumulator.shutdown();
   }
 
-  public void testSymlinks() throws IOException, InterruptedException, ExecutionException {
+  public void testSymlinks() throws Exception {
     File scratchDirectory = Files.createTempDir();
     File newFile = createFileIn("New.java", scratchDirectory);
     File rootDirectory = Files.createTempDir();
     File subDirectory = Files.createTempDir();
 
-    ChangedFileAccumulator changedFileAccumulator =
-        new ChangedFileAccumulator(rootDirectory.toPath());
+    ResourceAccumulator resourceAccumulator =
+        new ResourceAccumulator(rootDirectory.toPath(), createInclusivePathPrefixSet());
 
-    assertTrue(changedFileAccumulator.getAndClearChangedFiles().isEmpty());
+    assertTrue(getResources(resourceAccumulator).isEmpty());
 
     // Symlink in a subdirectory and then symlink in a contained file.
     java.nio.file.Files.createSymbolicLink(new File(rootDirectory, "sublink").toPath(),
@@ -203,24 +239,42 @@ public class ChangedFileAccumulatorTest extends TestCase {
         newFile.toPath()).toFile();
     waitForFileEvents();
 
-    List<File> modifiedFiles = changedFileAccumulator.getAndClearChangedFiles();
-    assertEquals(2, modifiedFiles.size());
-    assertTrue(modifiedFiles.get(0).getPath().endsWith("New.java"));
-    assertTrue(modifiedFiles.get(1).getPath().endsWith("sublink"));
 
-    changedFileAccumulator.shutdown();
+    List<AbstractResource> resources = getResources(resourceAccumulator);
+    assertEquals(1, resources.size());
+    assertTrue(resources.get(0).getPath().endsWith("sublink/New.java"));
+
+    resourceAccumulator.shutdown();
   }
 
-  private File createDirectoryIn(String fileName, File inDirectory) {
+  private static File createDirectoryIn(String fileName, File inDirectory) {
     File newDirectory = new File(inDirectory, fileName);
     newDirectory.mkdir();
     return newDirectory;
   }
 
-  private File createFileIn(String fileName, File inDirectory) throws IOException {
+  private static File createFileIn(String fileName, File inDirectory) throws IOException {
     File newFile = new File(inDirectory, fileName);
     newFile.createNewFile();
     return newFile;
+  }
+
+  private List<AbstractResource> getResources(ResourceAccumulator resourceAccumulator)
+      throws IOException {
+    List<AbstractResource> list = Lists.newArrayList(resourceAccumulator.getResources().keySet());
+    Collections.sort(list, new Comparator<AbstractResource>() {
+      @Override
+      public int compare(AbstractResource a, AbstractResource b) {
+        return a.getLocation().compareTo(b.getLocation());
+      }
+    });
+    return list;
+  }
+
+  private static PathPrefixSet createInclusivePathPrefixSet() {
+    PathPrefixSet pathPrefixes = new PathPrefixSet();
+    pathPrefixes.add(new PathPrefix("", null));
+    return pathPrefixes;
   }
 
   private void waitForFileEvents() throws InterruptedException {

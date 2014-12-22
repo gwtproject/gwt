@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "21c45cd1_24ded270",
+        "filename": "user/src/com/google/gwt/resources/css/GenerateCssAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2014-12-22T21:41:08Z",
+      "side": 1,
+      "message": "If the charset definition is invalid, it throws an exception.",
+      "parentUuid": "4119502f_d5a33cb3",
+      "range": {
+        "startLine": 308,
+        "startChar": 44,
+        "endLine": 308,
+        "endChar": 64
+      },
+      "revId": "1c93c03d10fe5d9948040f8cb69b2bd4f123a12e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4119502f_55b72cf6",
         "filename": "user/src/com/google/gwt/resources/css/ast/CssCharset.java",
         "patchSetId": 1

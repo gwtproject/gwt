@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41c790d5_68653bfc",
+        "filename": "user/src/com/google/gwt/resources/css/ast/CssCharset.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-22T21:40:20Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "d247c1c3dc5446c0300bb62d7d3b5b07145ce534",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

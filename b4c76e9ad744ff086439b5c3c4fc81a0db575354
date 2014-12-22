@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "21c45cd1_c4f1bef7",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-12-22T21:54:19Z",
+      "side": 1,
+      "message": "Why is that exactly failing?",
+      "range": {
+        "startLine": 778,
+        "startChar": 10,
+        "endLine": 779,
+        "endChar": 32
+      },
+      "revId": "b4c76e9ad744ff086439b5c3c4fc81a0db575354",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9abf2fde_809c9c43",
         "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
         "patchSetId": 2

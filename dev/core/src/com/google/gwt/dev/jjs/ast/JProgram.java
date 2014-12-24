@@ -1137,6 +1137,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
     if (type1 instanceof JNonNullType != type2 instanceof JNonNullType) {
       // If either is non-nullable, the result should be non-nullable.
+      // TODO not sure if this correct?
       return strongerType(type1.getNonNull(), type2.getNonNull());
     }
 

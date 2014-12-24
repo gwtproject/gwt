@@ -26,6 +26,7 @@ import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConditional;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
+import com.google.gwt.dev.jjs.ast.JExactType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
@@ -273,6 +274,7 @@ public class TypeTightener {
     public void endVisit(JMethod x, Context ctx) {
       currentMethod = null;
     }
+
 
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
@@ -613,10 +615,10 @@ public class TypeTightener {
       if (typeList.isEmpty()) {
         // The method returns nothing
         resultType = typeNull;
+        resultType = program.strongerType(refType, resultType);
       } else {
-        resultType = program.generalizeTypes(typeList);
+        resultType  = strengthenType(refType, typeList);
       }
-      resultType = program.strongerType(refType, resultType);
       if (refType != resultType) {
         x.setType(resultType);
         madeChanges();
@@ -648,23 +650,27 @@ public class TypeTightener {
        */
       if (x.canBePolymorphic() && !target.isAbstract()) {
         JExpression instance = x.getInstance();
-        assert (instance != null);
         JReferenceType instanceType = (JReferenceType) instance.getType();
-        Collection<JMethod> myOverriders = program.typeOracle.getOverridingMethodsOf(target);
-        if (myOverriders != null) {
-          for (JMethod override : myOverriders) {
-            JReferenceType overrideType = override.getEnclosingType();
-            if (program.typeOracle.canTheoreticallyCast(instanceType, overrideType)) {
-              // This call is truly polymorphic.
-              // TODO: composite types! :)
-              return;
-            }
-          }
-          // The instance type is incompatible with all overrides.
+        if (instanceType.canBeASubclass() && hasPotentialOverride(instanceType, target)) {
+          return;
         }
         x.setCannotBePolymorphic();
         madeChanges();
       }
+    }
+
+    private boolean hasPotentialOverride(JReferenceType instanceType, JMethod target) {
+      Collection<JMethod> myOverriders = program.typeOracle.getOverridingMethodsOf(target);
+      if (myOverriders != null) {
+        for (JMethod override : myOverriders) {
+          JReferenceType overrideType = override.getEnclosingType();
+          if (program.typeOracle.canTheoreticallyCast(instanceType, overrideType)) {
+            // This call is truly polymorphic.
+            return true;
+          }
+        }
+      }
+      return false;
     }
 
     @Override
@@ -767,6 +773,12 @@ public class TypeTightener {
         return;
       }
 
+      // Move little bit up
+      if (refType instanceof JExactType) {
+        // TODO: Is this shortcut needed? What about other places where we can take shortcut?
+        return;
+      }
+
       // tighten based on assignment
       List<JReferenceType> typeList = Lists.newArrayList();
       Collection<JExpression> myAssignments = assignments.get(x);
@@ -791,8 +803,7 @@ public class TypeTightener {
 
       JReferenceType resultType;
       if (!typeList.isEmpty()) {
-        resultType = program.generalizeTypes(typeList);
-        resultType = program.strongerType(refType, resultType);
+        resultType = strengthenType(refType, typeList);
       } else {
         if (x instanceof JParameter) {
           /*
@@ -910,7 +921,8 @@ public class TypeTightener {
 
   private TypeTightener(JProgram program) {
     this.program = program;
-    typeNull = program.getTypeNull();
+    // TODO look all usages of typeList
+    this.typeNull = program.getTypeNull();
   }
 
   private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
@@ -1017,7 +1029,29 @@ public class TypeTightener {
     return affectedFields;
   }
 
-  private enum AnalysisResult { TRUE, FALSE, UNKNOWN };
+  private JReferenceType strengthenType(JReferenceType refType, List<JReferenceType> typeList) {
+    JReferenceType resultType = resolveToSingleExactType(typeList);
+    if (resultType == null) {
+      resultType = program.generalizeTypes(typeList);
+      resultType = program.strongerType(refType, resultType);
+    }
+    return resultType;
+  }
+
+  private JReferenceType resolveToSingleExactType(List<JReferenceType> typeList) {
+    JReferenceType referenceType = typeList.get(0);
+    if (referenceType.canBeASubclass()) {
+      return null;
+    }
+    for (JReferenceType type : typeList) {
+      if (type != referenceType) {
+        return null;
+      }
+    }
+    return referenceType;
+  }
+
+  private enum AnalysisResult { TRUE, FALSE, UNKNOWN }
 
   /**
    * Tries to statically evaluate the instanceof operation. Returning TRUE if it can be determined

@@ -15,8 +15,11 @@
  */
 package com.google.gwt.dev.jjs;
 
+import com.google.gwt.dev.jjs.optimized.ArrayStoreOptimizationTest;
+import com.google.gwt.dev.jjs.optimized.CastOptimizationTest;
+import com.google.gwt.dev.jjs.optimized.EmulOptimizationTest;
+import com.google.gwt.dev.jjs.optimized.SpecializationTest;
 import com.google.gwt.dev.jjs.test.HasNoSideEffecstTest;
-import com.google.gwt.dev.jjs.test.SpecializationTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
 
 import junit.framework.Test;
@@ -30,8 +33,11 @@ public class OptimizedOnlyCompilerSuite {
     GWTTestSuite suite = new GWTTestSuite("Test for com.google.gwt.dev.jjs");
 
     // $JUnit-BEGIN$
+    suite.addTestSuite(ArrayStoreOptimizationTest.class);
+    suite.addTestSuite(CastOptimizationTest.class);
     suite.addTestSuite(SpecializationTest.class);
     suite.addTestSuite(HasNoSideEffecstTest.class);
+    suite.addTestSuite(EmulOptimizationTest.class);
     // $JUnit-END$
 
     return suite;

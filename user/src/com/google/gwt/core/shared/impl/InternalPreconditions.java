@@ -20,13 +20,47 @@ import java.util.NoSuchElementException;
 /**
  * A utility class that provides utility functions to do precondition checks inside GWT-SDK.
  */
-public class InternalPreconditions {
+public final class InternalPreconditions {
   // Some parts adapted from Guava
 
-  /**
-   * Ensures the truth of an expression that verifies type.
-   */
+  /*
+    TODO: WAITING FOR ABILITY TO READ PROPERTIES VIA GWT.GETPROPERTY CALL.
+    WHEN IT LANDS, I WILL REPLACE GETPROPERTY CALLS WITH THE NEW ONE.
+  */
+
+  private static boolean isCheckedMode() {
+    return System.getProperty("superdevmode", "off").equals("on");
+  }
+
+  private static boolean isJsniCheckEnabled() {
+    return System.getProperty("preconditions.check.jsni", "ENABLED").equals("ENABLED");
+  }
+
+  private static boolean isBoundCheckEnabled() {
+    return System.getProperty("preconditions.check.bounds", "ENABLED").equals("ENABLED");
+  }
+
+  private static boolean isApiCheckEnabled() {
+    return System.getProperty("preconditions.check.api", "ENABLED").equals("ENABLED");
+  }
+
+  private static boolean isTypeCheckEnabled() {
+    return System.getProperty("preconditions.check.type", "ENABLED").equals("ENABLED");
+  }
+
   public static void checkType(boolean expression) {
+    if (isTypeCheckEnabled()) {
+      checkCriticalType(expression);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalType(expression);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  public static void checkCriticalType(boolean expression) {
     if (!expression) {
       throw new ClassCastException();
     }
@@ -36,6 +70,18 @@ public class InternalPreconditions {
    * Ensures the truth of an expression that verifies array type.
    */
   public static void checkArrayType(boolean expression) {
+    if (isTypeCheckEnabled()) {
+      checkCriticalArrayType(expression);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalArrayType(expression);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  public static void checkCriticalArrayType(boolean expression) {
     if (!expression) {
       throw new ArrayStoreException();
     }
@@ -45,6 +91,18 @@ public class InternalPreconditions {
    * Ensures the truth of an expression that verifies array type.
    */
   public static void checkArrayType(boolean expression, Object errorMessage) {
+    if (isTypeCheckEnabled()) {
+      checkCriticalArrayType(expression, errorMessage);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalArrayType(expression, errorMessage);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  public static void checkCriticalArrayType(boolean expression, Object errorMessage) {
     if (!expression) {
       throw new ArrayStoreException(String.valueOf(errorMessage));
     }
@@ -54,15 +112,14 @@ public class InternalPreconditions {
    * Ensures the truth of an expression involving existence of an element.
    */
   public static void checkElement(boolean expression) {
-    checkCriticalElement(expression);
-  }
-
-  /**
-   * Ensures the truth of an expression involving existence of an element.
-   */
-  public static void checkElement(boolean expression, Object errorMessage) {
-    if (!expression) {
-      throw new NoSuchElementException(String.valueOf(errorMessage));
+    if (isApiCheckEnabled()) {
+      checkCriticalElement(expression);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalElement(expression);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
     }
   }
 
@@ -79,25 +136,45 @@ public class InternalPreconditions {
   }
 
   /**
+   * Ensures the truth of an expression involving existence of an element.
+   */
+  public static void checkElement(boolean expression, Object errorMessage) {
+    if (isApiCheckEnabled()) {
+      checkCriticalElement(expression, errorMessage);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalElement(expression, errorMessage);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  /**
+   * Ensures the truth of an expression involving existence of an element.
+   * <p>
+   * For cases where failing fast is pretty important and not failing early could cause bugs that
+   * are much harder to debug.
+   */
+  public static void checkCriticalElement(boolean expression, Object errorMessage) {
+    if (!expression) {
+      throw new NoSuchElementException(String.valueOf(errorMessage));
+    }
+  }
+
+  /**
    * Ensures the truth of an expression involving one or more parameters to the calling method.
    */
   public static void checkArgument(boolean expression) {
-    checkCriticalArgument(expression);
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   */
-  public static void checkArgument(boolean expression, Object errorMessage) {
-    checkCriticalArgument(expression, errorMessage);
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   */
-  public static void checkArgument(boolean expression, String errorMessageTemplate,
-      Object... errorMessageArgs) {
-    checkCriticalArgument(expression, errorMessageTemplate, errorMessageArgs);
+    if (isApiCheckEnabled()) {
+      checkCriticalArgument(expression);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalArgument(expression);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
   }
 
   /**
@@ -114,6 +191,21 @@ public class InternalPreconditions {
 
   /**
    * Ensures the truth of an expression involving one or more parameters to the calling method.
+   */
+  public static void checkArgument(boolean expression, Object errorMessage) {
+    if (isApiCheckEnabled()) {
+      checkCriticalArgument(expression, errorMessage);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalArgument(expression, errorMessage);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  /**
+   * Ensures the truth of an expression involving one or more parameters to the calling method.
    * <p>
    * For cases where failing fast is pretty important and not failing early could cause bugs that
    * are much harder to debug.
@@ -121,6 +213,22 @@ public class InternalPreconditions {
   public static void checkCriticalArgument(boolean expression, Object errorMessage) {
     if (!expression) {
       throw new IllegalArgumentException(String.valueOf(errorMessage));
+    }
+  }
+
+  /**
+   * Ensures the truth of an expression involving one or more parameters to the calling method.
+   */
+  public static void checkArgument(boolean expression, String errorMessageTemplate,
+      Object... errorMessageArgs) {
+    if (isApiCheckEnabled()) {
+      checkCriticalArgument(expression, errorMessageTemplate, errorMessageArgs);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalArgument(expression, errorMessageTemplate, errorMessageArgs);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
     }
   }
 
@@ -145,6 +253,25 @@ public class InternalPreconditions {
    * @throws IllegalStateException if {@code expression} is false
    */
   public static void checkState(boolean expression) {
+    if (isApiCheckEnabled()) {
+      checkCritcalState(expression);
+    } else if (isCheckedMode()) {
+      try {
+        checkCritcalState(expression);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  /**
+   * Ensures the truth of an expression involving the state of the calling instance, but not
+   * involving any parameters to the calling method.
+   * <p>
+   * For cases where failing fast is pretty important and not failing early could cause bugs that
+   * are much harder to debug.
+   */
+  public static void checkCritcalState(boolean expression) {
     if (!expression) {
       throw new IllegalStateException();
     }
@@ -155,6 +282,22 @@ public class InternalPreconditions {
    * involving any parameters to the calling method.
    */
   public static void checkState(boolean expression, Object errorMessage) {
+    if (isApiCheckEnabled()) {
+      checkCriticalState(expression, errorMessage);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalState(expression, errorMessage);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  /**
+   * Ensures the truth of an expression involving the state of the calling instance, but not
+   * involving any parameters to the calling method.
+   */
+  public static void checkCriticalState(boolean expression, Object errorMessage) {
     if (!expression) {
       throw new IllegalStateException(String.valueOf(errorMessage));
     }
@@ -164,6 +307,20 @@ public class InternalPreconditions {
    * Ensures that an object reference passed as a parameter to the calling method is not null.
    */
   public static <T> T checkNotNull(T reference) {
+    if (isApiCheckEnabled()) {
+      checkCriticalNotNull(reference);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalNotNull(reference);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+
+    return reference;
+  }
+
+  public static <T> T checkCriticalNotNull(T reference) {
     if (reference == null) {
       throw new NullPointerException();
     }
@@ -174,6 +331,18 @@ public class InternalPreconditions {
    * Ensures that an object reference passed as a parameter to the calling method is not null.
    */
   public static void checkNotNull(Object reference, Object errorMessage) {
+    if (isApiCheckEnabled()) {
+      checkCriticalNotNull(reference, errorMessage);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalNotNull(reference, errorMessage);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  public static void checkCriticalNotNull(Object reference, Object errorMessage) {
     if (reference == null) {
       throw new NullPointerException(String.valueOf(errorMessage));
     }
@@ -183,6 +352,18 @@ public class InternalPreconditions {
    * Ensures that {@code size} specifies a valid array size (i.e. non-negative).
    */
   public static void checkArraySize(int size) {
+    if (isApiCheckEnabled()) {
+      checkCriticalArraySize(size);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalArraySize(size);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  public static void checkCriticalArraySize(int size) {
     if (size < 0) {
       throw new NegativeArraySizeException("Negative array size: " + size);
     }
@@ -193,6 +374,18 @@ public class InternalPreconditions {
    * {@code size}. An element index may range from zero, inclusive, to {@code size}, exclusive.
    */
   public static void checkElementIndex(int index, int size) {
+    if (isBoundCheckEnabled()) {
+      checkCriticalElementIndex(index, size);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalElementIndex(index, size);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  public static void checkCriticalElementIndex(int index, int size) {
     if (index < 0 || index >= size) {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     }
@@ -203,6 +396,18 @@ public class InternalPreconditions {
    * size {@code size}. A position index may range from zero to {@code size}, inclusive.
    */
   public static void checkPositionIndex(int index, int size) {
+    if (isBoundCheckEnabled()) {
+      checkCriticalPositionIndex(index, size);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalPositionIndex(index, size);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  public static void checkCriticalPositionIndex(int index, int size) {
     if (index < 0 || index > size) {
       throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
     }
@@ -214,7 +419,15 @@ public class InternalPreconditions {
    * {@code size}, inclusive.
    */
   public static void checkPositionIndexes(int start, int end, int size) {
-    checkCriticalPositionIndexes(start, end, size);
+    if (isBoundCheckEnabled()) {
+      checkCriticalPositionIndexes(start, end, size);
+    } else if (isCheckedMode()) {
+      try {
+        checkCriticalPositionIndexes(start, end, size);
+      } catch (Exception e) {
+        throw new AssertionError(e);
+      }
+    }
   }
 
   /**

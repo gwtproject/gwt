@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0144b839_cb3a95ea",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasRequired.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-12-28T10:20:41Z",
+      "side": 1,
+      "message": "I don\u0027t think we want this constant on the interface. And just inline the string inside of the functions.",
+      "range": {
+        "startLine": 26,
+        "startChar": 35,
+        "endLine": 26,
+        "endChar": 43
+      },
+      "revId": "6d3e7a3562dd5979cb92ec4f25234e23be4049d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0144b839_8b408d68",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasRequired.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-12-28T10:20:41Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "revId": "6d3e7a3562dd5979cb92ec4f25234e23be4049d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0144b839_eb3f51d7",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-12-28T10:20:41Z",
+      "side": 1,
+      "message": "No need to close p tags in javadoc:\nJust write:\n\u003cp\u003e\nThis option....",
+      "range": {
+        "startLine": 548,
+        "startChar": 5,
+        "endLine": 550,
+        "endChar": 4
+      },
+      "revId": "6d3e7a3562dd5979cb92ec4f25234e23be4049d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0144b839_0b357df8",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2014-12-28T10:20:41Z",
+      "side": 1,
+      "message": "I think we need to remove the whole attribute don\u0027t we?",
+      "revId": "6d3e7a3562dd5979cb92ec4f25234e23be4049d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

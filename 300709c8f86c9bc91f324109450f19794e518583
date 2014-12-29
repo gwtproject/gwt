@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e13244d2_8a5debc9",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasRequired.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2014-12-29T09:26:43Z",
+      "side": 1,
+      "message": "[error] File contains tab characters (this is the first instance).",
+      "revId": "300709c8f86c9bc91f324109450f19794e518583",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

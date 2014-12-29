@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "0144b839_0ba01d2e",
+        "filename": "user/src/com/google/gwt/user/client/ui/HasRequired.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-29T09:31:47Z",
+      "side": 1,
+      "message": "Hmm, I like my solution because the property name is used in two classes: ValueBoxBase and ListBox.\nWith java8, the default implementation of the two methods can be placed directly in the interface.",
+      "parentUuid": "0144b839_cb3a95ea",
+      "revId": "6d3e7a3562dd5979cb92ec4f25234e23be4049d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0144b839_8b408d68",
         "filename": "user/src/com/google/gwt/user/client/ui/HasRequired.java",
         "patchSetId": 6

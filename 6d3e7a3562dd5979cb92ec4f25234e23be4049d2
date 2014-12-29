@@ -151,6 +151,24 @@
       "revId": "6d3e7a3562dd5979cb92ec4f25234e23be4049d2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c180e07b_e7507629",
+        "filename": "user/src/com/google/gwt/user/client/ui/ListBox.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 7795
+      },
+      "writtenOn": "2014-12-29T09:41:45Z",
+      "side": 1,
+      "message": "@Thomas prefers to use the properties rather than attributes ... (cf. https://gwt-review.googlesource.com/#/c/10753/5/user/src/com/google/gwt/user/client/ui/TextBoxBase.java)",
+      "parentUuid": "0144b839_0b357df8",
+      "revId": "6d3e7a3562dd5979cb92ec4f25234e23be4049d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

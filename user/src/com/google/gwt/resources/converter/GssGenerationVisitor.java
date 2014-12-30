@@ -39,6 +39,7 @@ import com.google.gwt.resources.css.ast.CssUrl;
 import com.google.gwt.thirdparty.common.css.SourceCode;
 import com.google.gwt.thirdparty.common.css.compiler.ast.GssParser;
 import com.google.gwt.thirdparty.common.css.compiler.ast.GssParserException;
+import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.base.Splitter;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
 
@@ -80,6 +81,7 @@ public class GssGenerationVisitor extends ExtendedCssVisitor {
   private final TextOutput out;
   private final boolean lenient;
   private final TreeLogger treeLogger;
+  private final Predicate<String> simpleBooleanConditionPredicate;
   // list of external at-rules defined inside a media at-rule.
   // In lenient mode, these nodes will be extracted and print outside the media at-rule.
   private final List<CssExternalSelectors> wrongExternalNodes = new
@@ -96,11 +98,12 @@ public class GssGenerationVisitor extends ExtendedCssVisitor {
   private boolean insideMediaAtRule;
 
   public GssGenerationVisitor(TextOutput out, Map<String, String> cssToGssConstantMapping,
-      boolean lenient, TreeLogger treeLogger) {
+      boolean lenient, TreeLogger treeLogger, Predicate<String> simpleBooleanConditionPredicate) {
     this.cssToGssConstantMapping = cssToGssConstantMapping;
     this.out = out;
     this.lenient = lenient;
     this.treeLogger = treeLogger;
+    this.simpleBooleanConditionPredicate = simpleBooleanConditionPredicate;
   }
 
   public String getContent() {
@@ -444,7 +447,11 @@ public class GssGenerationVisitor extends ExtendedCssVisitor {
     String runtimeCondition = extractExpression(ifOrElif);
 
     if (runtimeCondition != null) {
-      condition = String.format(EVAL, runtimeCondition);
+      if (simpleBooleanConditionPredicate.apply(runtimeCondition)) {
+        condition = runtimeCondition;
+      } else {
+        condition = String.format(EVAL, runtimeCondition);
+      }
     } else {
       condition = printConditionnalExpression(ifOrElif);
     }

@@ -112,3 +112,14 @@
     color: black;
   }
 }
+
+@if (CONSTANT_DEFINED_ON_INTERFACE) {
+  .blop {
+    color: red;
+  }
+}
+@elif  CONSTANT_DEFINED_ON_INTERFACE2 {
+  .blop {
+    color: blue;
+  }
+}

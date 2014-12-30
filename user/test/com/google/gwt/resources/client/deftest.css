@@ -43,3 +43,9 @@
  .overrideInt {
    width: 10px;
  }
+
+@if (TEST) {
+ div {
+  test: test;
+ }
+}

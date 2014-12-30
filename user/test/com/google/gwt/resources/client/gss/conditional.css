@@ -8,3 +8,15 @@
     color: white;
   }
 }
+
+@if (!DISABLE_KENNEDY) {
+  .foo {
+    font-family: kennedy;
+  }
+}
+
+@if (TRUE_PROPERTY) {
+  .foo {
+    top: 5px;
+  }
+}

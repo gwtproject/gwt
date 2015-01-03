@@ -108,7 +108,20 @@ public class JreJsonArray extends JreJsonValue implements JsonArray {
 
   @Override
   public boolean jsEquals(JsonValue value) {
-    return getObject().equals(((JreJsonValue) value).getObject());
+    if (!(value instanceof JreJsonArray)) {
+      return false;
+    }
+    JreJsonArray other = (JreJsonArray) value;
+    int length = this.length();
+    if (length != other.length()) {
+      return false;
+    }
+    for (int i = 0; i < length; i++) {
+      if (!this.get(i).jsEquals(other.get(i))) {
+        return false;
+      }
+    }
+    return true;
   }
 
   public int length() {

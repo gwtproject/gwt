@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ceec8d7c_e16766be",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2015-01-04T06:59:03Z",
+      "side": 1,
+      "message": "Might be nice to rename this to avoid ambiguity; perhaps isDefaultProtected()?",
+      "revId": "55e3dd4817df6337b2fbac9cd855a5c011d44cb5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df5d1961_02da10f4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
         "patchSetId": 15
@@ -13,6 +30,40 @@
       "writtenOn": "2014-11-26T07:54:34Z",
       "side": 1,
       "message": "Can you make sure you address all the old comments. There is a comment in a previous patch that says remove this comment as it might not be true if this method is called from a different context in the future.",
+      "revId": "55e3dd4817df6337b2fbac9cd855a5c011d44cb5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0225f8_fe513dd6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReplaceDefenderMethodReferences.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2015-01-04T06:59:03Z",
+      "side": 1,
+      "message": "I ran into scoping problems in more complex scenarios.  When assigning one instance to a variable of a JsType, then invoking a defender method (which in turn called another defender method), the this reference was mistakenly pointing to the outer scope.  I fixed this by checking x.getInstance() and only using a JThisRef when it was unqualified (JNullLiteral).\n\nI\u0027m pretty sure the cause was that I was assigning to an instance and then referencing that; when the invocation is attached to a constructor invocation, the JThisRef points to the correct place, but when it\u0027s a regular variable reference, it points to the containing scope.\n\nI also added support for rewriting jsni references to defender methods so I could effectively write a web component builder that would let me define JsType interfaces with default methods that can be automatically bound to a new prototype. :D\n\nHere\u0027s a commit with my work in gwt-core.\n\nhttps://github.com/WeTheInternet/gwt-sandbox/compare/gwtproject:beada220792bcb281d81452beec903bcd4b3ae3e...defender-methods",
+      "revId": "55e3dd4817df6337b2fbac9cd855a5c011d44cb5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e0225f8_1e5d09ec",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5140
+      },
+      "writtenOn": "2015-01-04T06:59:03Z",
+      "side": 1,
+      "message": "I ran into issues when assigning instances to local variables of interface types and invoking defender methods that called other defender methods.  The this reference was pointing to the this of the outer scope, rather than of the instance I was referencing.  We\u0027ll probably want to add more complex test scenarios.",
       "revId": "55e3dd4817df6337b2fbac9cd855a5c011d44cb5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

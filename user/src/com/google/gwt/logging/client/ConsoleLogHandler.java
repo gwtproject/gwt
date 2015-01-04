@@ -16,6 +16,8 @@
 
 package com.google.gwt.logging.client;
 
+import com.google.web.bindery.event.shared.UmbrellaException;
+
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -29,10 +31,10 @@ import java.util.logging.LogRecord;
 public class ConsoleLogHandler extends Handler {
 
   public ConsoleLogHandler() {
-    setFormatter(new TextLogFormatter(true));
+    setFormatter(new TextLogFormatter(false));
     setLevel(Level.ALL);
   }
-  
+
   @Override
   public void close() {
     // No action needed
@@ -59,6 +61,28 @@ public class ConsoleLogHandler extends Handler {
     } else {
       log(msg);
     }
+    Throwable e = record.getThrown();
+    if (e != null) {
+      logException(e, false);
+    }
+  }
+
+  private void logException(Throwable t, boolean isCause) {
+    String msg = t.toString();
+    if (isCause) {
+      msg = "caused by: " + msg;
+    }
+    groupStart(msg);
+    log(t);
+    if (t instanceof UmbrellaException) {
+      UmbrellaException umbrella = (UmbrellaException) t;
+      for (Throwable cause : umbrella.getCauses()) {
+        logException(cause, true);
+      }
+    } else if (t.getCause() != null) {
+      logException(t.getCause(), true);
+    }
+    groupEnd();
   }
 
   private native boolean isSupported() /*-{
@@ -79,5 +103,22 @@ public class ConsoleLogHandler extends Handler {
 
   private native void log(String message) /*-{
     window.console.log(message);
+  }-*/;
+
+  private native void log(Throwable t) /*-{
+    var logError = console.error || console.log;
+    var backingError = t.__gwt$backingJsError;
+    logError.call(console, backingError && backingError.stack);
+  }-*/;
+
+  private native void groupStart(String msg) /*-{
+    var groupStart = console.groupCollapsed || console.group || console.error
+        || console.log;
+    groupStart.call(console, msg);
+  }-*/;
+
+  private native void groupEnd() /*-{
+    var groupEnd = console.groupEnd || function() {};
+    groupEnd.call(console);
   }-*/;
 }

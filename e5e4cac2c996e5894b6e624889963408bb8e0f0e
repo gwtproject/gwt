@@ -22,6 +22,30 @@
       "revId": "e5e4cac2c996e5894b6e624889963408bb8e0f0e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1e095a_74bf88d4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowRecorder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-01-05T19:24:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1154030_fc0b8544",
+      "range": {
+        "startLine": 123,
+        "startChar": 55,
+        "endLine": 123,
+        "endChar": 78
+      },
+      "revId": "e5e4cac2c996e5894b6e624889963408bb8e0f0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

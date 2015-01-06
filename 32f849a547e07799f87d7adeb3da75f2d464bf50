@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4c498a_4a499702",
+        "filename": "user/super/com/google/gwt/emul/java/util/PriorityQueue.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-06T20:59:26Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalNotNull.",
+      "revId": "32f849a547e07799f87d7adeb3da75f2d464bf50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

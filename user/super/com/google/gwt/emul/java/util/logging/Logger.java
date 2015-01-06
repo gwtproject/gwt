@@ -46,9 +46,13 @@ public static final String GLOBAL_LOGGER_NAME = "global";
   }
 
   public static Logger getLogger(String name) {
+    return getLogger(name, null);
+  }
+
+  public static Logger getLogger(String name, String resourceName) {
     // Use shortcut if logging is disabled to avoid parent logger creations in LogManager
     if (LOGGING_FALSE) {
-      return new Logger(name, "");
+      return new Logger(name, resourceName);
     }
     return LogManager.getLogManager().ensureLogger(name);
   }

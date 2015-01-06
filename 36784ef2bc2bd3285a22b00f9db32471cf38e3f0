@@ -70,6 +70,29 @@
     },
     {
       "key": {
+        "uuid": "0144b839_3f6fcf66",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-06T19:25:38Z",
+      "side": 1,
+      "message": "Replace with a for loop since we are actually iterating with an index?",
+      "range": {
+        "startLine": 237,
+        "startChar": 6,
+        "endLine": 237,
+        "endChar": 38
+      },
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e3065e8_659b6a03",
         "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
         "patchSetId": 4
@@ -81,6 +104,29 @@
       "writtenOn": "2015-01-06T18:09:33Z",
       "side": 1,
       "message": "[error] \u0027-\u0027 is not followed by whitespace.",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0144b839_1f721352",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-06T19:25:38Z",
+      "side": 1,
+      "message": "Do we really need this?\n\nWe already looked at the index in the while condition",
+      "range": {
+        "startLine": 239,
+        "startChar": 25,
+        "endLine": 239,
+        "endChar": 47
+      },
       "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -104,6 +150,24 @@
     },
     {
       "key": {
+        "uuid": "0144b839_ff6c6774",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-06T19:25:38Z",
+      "side": 1,
+      "message": "please fix",
+      "parentUuid": "0e3065e8_45906edb",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e3065e8_259562cb",
         "filename": "user/src/com/google/gwt/resources/gss/BooleanConditionCollector.java",
         "patchSetId": 4
@@ -115,6 +179,57 @@
       "writtenOn": "2015-01-06T18:09:33Z",
       "side": 1,
       "message": "[error] Unknown tag \u0027if\u0027.",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c180e07b_fbaf2f6e",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-06T19:25:38Z",
+      "side": 1,
+      "message": "We also need to handle the case where someone does: !!!!!MY_CONDITION.",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c180e07b_1bb5b3c1",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-06T19:25:38Z",
+      "side": 1,
+      "message": "Lets actually read the property and make sure its value is \"true\".",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d3534_27157ae4",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-06T19:25:38Z",
+      "side": 1,
+      "message": "I think we should also force the configuration property to not be multi valued.",
       "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

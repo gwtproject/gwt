@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e9ea522_de3b01ba",
+        "filename": "user/src/com/google/gwt/logging/impl/LevelImplRegular.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-06T23:00:11Z",
+      "side": 1,
+      "message": "nit: you can make the case inline to save some lines:\n\n    switch (name) {\n      case \"ALL\": return Level.ALL;\n      case \"CONFIG\": return Level.CONFIG;\n      case \"FINE\": return Level.FINE;\n      case \"FINER\": return Level.FINER;\n      case \"FINEST\": return Level.FINEST;",
+      "revId": "57e782efeedf027be76a24df484b8b64b9ac0c8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e9ea522_3ee225e2",
+        "filename": "user/src/com/google/gwt/logging/impl/LevelImplRegular.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-06T23:00:11Z",
+      "side": 1,
+      "message": "I don\u0027t think \u0027switch\u0027 statically evaluates. That will be a problem. @rluble?",
+      "revId": "57e782efeedf027be76a24df484b8b64b9ac0c8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

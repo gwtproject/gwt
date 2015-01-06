@@ -303,6 +303,24 @@
     },
     {
       "key": {
+        "uuid": "0144b839_5f101bc3",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-06T23:05:44Z",
+      "side": 1,
+      "message": "Lets make it very restrctive up front and we can make it relax it later on if we need to.",
+      "parentUuid": "0144b839_1f5bf3c9",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0144b839_5f557b91",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 4

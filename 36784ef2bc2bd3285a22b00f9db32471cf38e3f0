@@ -93,6 +93,30 @@
     },
     {
       "key": {
+        "uuid": "0144b839_bf4bbff8",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-06T19:55:08Z",
+      "side": 1,
+      "message": "In this case I prefer a while loop as I manipulate the index in the loop and outside the loop",
+      "parentUuid": "0144b839_3f6fcf66",
+      "range": {
+        "startLine": 237,
+        "startChar": 6,
+        "endLine": 237,
+        "endChar": 38
+      },
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e3065e8_659b6a03",
         "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
         "patchSetId": 4
@@ -121,6 +145,30 @@
       "writtenOn": "2015-01-06T19:25:38Z",
       "side": 1,
       "message": "Do we really need this?\n\nWe already looked at the index in the while condition",
+      "range": {
+        "startLine": 239,
+        "startChar": 25,
+        "endLine": 239,
+        "endChar": 47
+      },
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0144b839_df408bd7",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-06T19:55:08Z",
+      "side": 1,
+      "message": "I increment the index in the line above. So I check if there is a next argument that is not the file/directory path (last argument).",
+      "parentUuid": "0144b839_1f721352",
       "range": {
         "startLine": 239,
         "startChar": 25,
@@ -162,6 +210,24 @@
       "side": 1,
       "message": "please fix",
       "parentUuid": "0e3065e8_45906edb",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0144b839_ff4547e4",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-06T19:55:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0144b839_ff6c6774",
       "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -219,6 +285,41 @@
     },
     {
       "key": {
+        "uuid": "0144b839_1f5bf3c9",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-06T19:55:08Z",
+      "side": 1,
+      "message": "That one of my questions, do we have to check that the value of the configuration property must be \"true\" or \"false\" ?",
+      "parentUuid": "c180e07b_1bb5b3c1",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0144b839_5f557b91",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-06T19:55:08Z",
+      "side": 1,
+      "message": "@goktug @dankurka Do you agree on that ? Only check configuration properties and not selection properties ?",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e5d3534_27157ae4",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 4
@@ -230,6 +331,24 @@
       "writtenOn": "2015-01-06T19:25:38Z",
       "side": 1,
       "message": "I think we should also force the configuration property to not be multi valued.",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0144b839_3f58afca",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-06T19:55:08Z",
+      "side": 1,
+      "message": "Ok and do I have to emit a error if the value of the configuration property is not true or false ?",
+      "parentUuid": "8e5d3534_27157ae4",
       "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

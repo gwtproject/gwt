@@ -33,9 +33,13 @@ public class Logger {
   }
 
   public static Logger getLogger(String name) {
+    return getLogger(name, null);
+  }
+
+  public static Logger getLogger(String name, String resourceName) {
     // Use shortcut if logging is disabled to avoid parent logger creations in LogManager
     if (GWT.create(LoggerImplNull.class) instanceof LoggerImplNull) {
-      return new Logger(name, "");
+      return new Logger(name, resourceName);
     }
     return LogManager.getLogManager().ensureLogger(name);
   }

@@ -16,7 +16,6 @@
 
 package com.google.gwt.logging.impl;
 
-
 import java.util.Locale;
 import java.util.logging.Level;
 
@@ -25,26 +24,38 @@ import java.util.logging.Level;
  */
 public class LevelImplRegular implements LevelImpl {
   @Override
-  public Level parse(String name) {
-    name = name.toUpperCase(Locale.ROOT);
-    if (name.equals("ALL")) {
-      return Level.ALL;
-    } else if (name.equals("CONFIG")) {
-      return Level.CONFIG;
-    } else if (name.equals("FINE")) {
-      return Level.FINE;
-    } else if (name.equals("FINER")) {
-      return Level.FINER;
-    } else if (name.equals("FINEST")) {
-      return Level.FINEST;
-    } else if (name.equals("INFO")) {
-      return Level.INFO;
-    } else if (name.equals("OFF")) {
-      return Level.OFF;
-    } else if (name.equals("SEVERE")) {
-      return Level.SEVERE;
-    } else if (name.equals("WARNING")) {
-      return Level.WARNING;
+  public Level parse(String value) {
+    String name = value.toUpperCase(Locale.ROOT);
+    switch (name) {
+      case "ALL":
+        return Level.ALL;
+
+      case "CONFIG":
+        return Level.CONFIG;
+
+      case "FINE":
+        return Level.FINE;
+
+      case "FINER":
+        return Level.FINER;
+
+      case "FINEST":
+        return Level.FINEST;
+
+      case "INFO":
+        return Level.INFO;
+
+      case "OFF":
+        return Level.OFF;
+
+      case "SEVERE":
+        return Level.SEVERE;
+
+      case "WARNING":
+        return Level.WARNING;
+
+      default:
+        throw new IllegalArgumentException("Invalid level \"" + value + "\"");
     }
-    throw new IllegalArgumentException("Invalid level \"" + name + "\"");  }
+  }
 }

@@ -23,6 +23,10 @@ import com.google.gwt.junit.client.GWTTestCase;
  */
 public class EnumsTest extends GWTTestCase {
 
+  enum BarelyReferenced {
+    A, B, C
+  }
+
   enum Basic {
     A, B, C
   }
@@ -222,6 +226,10 @@ public class EnumsTest extends GWTTestCase {
       default:
         break;
     }
+  }
+
+  public void testBarelyReferencedValueOf() {
+    assertNotNull(Enum.valueOf(BarelyReferenced.class, "A"));
   }
 
   @SuppressWarnings("unchecked")

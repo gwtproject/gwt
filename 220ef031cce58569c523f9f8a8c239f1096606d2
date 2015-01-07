@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2efb6987_cf87a138",
+        "filename": "user/src/com/google/gwt/resources/gss/BooleanConditionCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-07T18:24:14Z",
+      "side": 1,
+      "message": "\u003cp\u003e",
+      "revId": "220ef031cce58569c523f9f8a8c239f1096606d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2efb6987_ef61bdf2",
+        "filename": "user/src/com/google/gwt/resources/gss/BooleanConditionCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-07T18:24:14Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "220ef031cce58569c523f9f8a8c239f1096606d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2efb6987_6f4e6d8d",
+        "filename": "user/src/com/google/gwt/resources/gss/BooleanConditionCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-07T18:24:14Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "220ef031cce58569c523f9f8a8c239f1096606d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2efb6987_8f647904",
+        "filename": "user/src/com/google/gwt/resources/gss/BooleanConditionCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-07T18:24:14Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 47,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 7
+      },
+      "revId": "220ef031cce58569c523f9f8a8c239f1096606d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2efb6987_8faf59a0",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedConditionalNodeVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-07T18:24:14Z",
+      "side": 1,
+      "message": "unused",
+      "range": {
+        "startLine": 35,
+        "startChar": 56,
+        "endLine": 35,
+        "endChar": 64
+      },
+      "revId": "220ef031cce58569c523f9f8a8c239f1096606d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2efb6987_4fa571b8",
+        "filename": "user/src/com/google/gwt/resources/gss/ExtendedConditionalNodeVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-07T18:24:14Z",
+      "side": 1,
+      "message": "Assuming it is an override add @Override and document empty block. Remove otherwise.",
+      "revId": "220ef031cce58569c523f9f8a8c239f1096606d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

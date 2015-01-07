@@ -268,6 +268,24 @@
     },
     {
       "key": {
+        "uuid": "ce02cd41_91965c54",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-07T11:14:13Z",
+      "side": 1,
+      "message": "Done in GssGenerationVisitor\n\nGSS doesn\u0027t accept several !, so I sanitize the condition before to call this code",
+      "parentUuid": "c180e07b_fbaf2f6e",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c180e07b_1bb5b3c1",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 4
@@ -321,6 +339,24 @@
     },
     {
       "key": {
+        "uuid": "ce02cd41_f1936862",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-07T11:14:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0144b839_5f101bc3",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0144b839_5f557b91",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 4
@@ -367,6 +403,24 @@
       "side": 1,
       "message": "Ok and do I have to emit a error if the value of the configuration property is not true or false ?",
       "parentUuid": "8e5d3534_27157ae4",
+      "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce02cd41_d190e458",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-07T11:14:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0144b839_3f58afca",
       "revId": "36784ef2bc2bd3285a22b00f9db32471cf38e3f0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

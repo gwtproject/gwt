@@ -33,6 +33,24 @@
       "revId": "57e782efeedf027be76a24df484b8b64b9ac0c8f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2efb6987_b29f183b",
+        "filename": "user/src/com/google/gwt/logging/impl/LevelImplRegular.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-07T19:13:44Z",
+      "side": 1,
+      "message": "Actually this is handled by DeadCodeElimination so it should work.",
+      "parentUuid": "0e9ea522_3ee225e2",
+      "revId": "57e782efeedf027be76a24df484b8b64b9ac0c8f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

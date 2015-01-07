@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eefdd173_7212d8c5",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/CharacterTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-07T17:11:02Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "9195f17ae65aad9d213d128f0e473deae692f0fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eefdd173_5217d4b3",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/CharacterTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-07T17:11:02Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "9195f17ae65aad9d213d128f0e473deae692f0fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eefdd173_b22ba0ec",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/CharacterTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-07T17:11:02Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "9195f17ae65aad9d213d128f0e473deae692f0fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eefdd173_92281cf1",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/CharacterTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-07T17:11:02Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "9195f17ae65aad9d213d128f0e473deae692f0fa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

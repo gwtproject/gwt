@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eefdd173_32f1703e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Character.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-07T17:09:00Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "dbd89627abdff9e2490e35fc7164088a7b6b042d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eefdd173_12f6ec35",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/CharacterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-07T17:09:00Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "dbd89627abdff9e2490e35fc7164088a7b6b042d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eefdd173_72fbf81d",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/CharacterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-07T17:09:00Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "dbd89627abdff9e2490e35fc7164088a7b6b042d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eefdd173_52007474",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/CharacterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-07T17:09:00Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "dbd89627abdff9e2490e35fc7164088a7b6b042d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eefdd173_b2044089",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/CharacterTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-07T17:09:00Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "dbd89627abdff9e2490e35fc7164088a7b6b042d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

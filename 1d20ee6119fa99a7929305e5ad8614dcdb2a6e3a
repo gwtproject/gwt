@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae52f94e_f83511c5",
+        "filename": "elemental/tests/elemental/json/impl/JreJsonArrayTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-01-07T11:35:23Z",
+      "side": 1,
+      "message": "Those tests should be run for both JsonFactory implementations to make sure they\u0027re on par.",
+      "revId": "1d20ee6119fa99a7929305e5ad8614dcdb2a6e3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

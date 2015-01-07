@@ -40,9 +40,9 @@ import java.util.regex.Matcher;
  * <p>will be evaluated to true if and only if a configuration property with the same name is set
  * to the value "true":
  * <p/>
- * <code>
+ * {@code
  * <set-configuration-property name="MY_PROPERTY" value="true" />
- * </code>
+ * }
  * <p/>
  * <p/>
  */

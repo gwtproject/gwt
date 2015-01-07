@@ -29,11 +29,10 @@ import java.util.Stack;
  * is to implement this behavior.
  */
 public class ExtendedConditionalNodeVisitor  extends DefaultTreeVisitor {
-  private final VisitController delegate;
+
   private final Stack<CssBooleanExpressionNode> childrenStack;
 
   public ExtendedConditionalNodeVisitor(VisitController delegate) {
-    this.delegate = delegate;
     childrenStack = new Stack<CssBooleanExpressionNode>();
   }
 

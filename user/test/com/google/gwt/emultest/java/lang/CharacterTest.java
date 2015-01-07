@@ -326,6 +326,77 @@ public class CharacterTest extends GWTTestCase {
     assertEquals(-1, Character.digit('A', 10));
   }
 
+  @SuppressWarnings("deprecation")
+  public void testIsSpace() {
+    assertFalse(Character.isSpace('a'));
+    assertFalse(Character.isSpace('_'));
+
+    assertTrue(Character.isSpace(' '));
+    assertTrue(Character.isSpace('\n'));
+  }
+
+  public void testIsWhitepace() {
+    // List of unicode white space separator characters was taken from
+    // {@see http://www.fileformat.info/info/unicode/category/Zs/list.htm}.
+
+    char[] separators = {
+        '\u0020', // SPACE.
+        '\u1680', // OGHAM SPACE MARK.
+        '\u2000', // EN QUAD.
+        '\u2001', // EM QUAD.
+        '\u2002', // EN SPACE.
+        '\u2003', // EM SPACE.
+        '\u2004', // THREE-PER-EM SPACE.
+        '\u2005', // FOUR-PER-EM SPACE.
+        '\u2006', // SIX-PER-EM SPACE.
+        '\u2008', // PUNCTUATION SPACE.
+        '\u2009', // THIN SPACE.
+        '\u200A', // HAIR SPACE.
+        '\u2028', // LINE SEPARATOR.
+        '\u2029', // PARAGRAPH SEPARATOR.
+        '\u205F', // MEDIUM MATHEMATICAL SPACE.
+        '\u3000' // IDEOGRAPHIC SPACE.
+    };
+    char[] nonBreakingSpaceSeparators = {
+        '\u00A0', // NO-BREAK SPACE.
+        '\u2007', // FIGURE SPACE.
+        '\u202F' // NARROW NO-BREAK SPACE.
+    };
+
+    char[] specialCases = {
+      '\t', // HORIZONTAL TABULATION.
+      '\n', // LINE FEED.
+      '\u000B', // VERTICAL TABULATION.
+      '\f', // FORM FEED.
+      '\r', // CARRIAGE RETURN.
+      '\u001C', // FILE SEPARATOR.
+      '\u001D', // GROUP SEPARATOR.
+      '\u001E', // RECORD SEPARATOR.
+      '\u001F' // UNIT SEPARATOR.
+    };
+
+    // Must match unicode space separator characters.
+    for (char c : separators) {
+      assertTrue(Character.isWhitespace(c));
+    }
+
+    // But NOT the non-breaking spaces.
+    for (char c : nonBreakingSpaceSeparators) {
+      assertFalse(Character.isWhitespace(c));
+    }
+
+    // Also must handle the ASCII legacy cases.
+    for (char c : specialCases) {
+      assertTrue(Character.isWhitespace(c));
+    }
+
+    // And behave appropriately on other characters.
+    assertFalse(Character.isWhitespace('a')); // LATIN SMALL LETTER A.
+    assertFalse(Character.isWhitespace('B')); // LATIN CAPITAL LETTER B.
+    assertFalse(Character.isWhitespace('_')); // LOW LINE.
+    assertFalse(Character.isWhitespace('\u2500')); // BOX DRAWINGS LIGHT HORIZONTAL.
+  }
+
   public void testToString() {
     assertEquals(" ", new Character((char) 32).toString());
   }

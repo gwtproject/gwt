@@ -45,7 +45,7 @@ import java.io.Serializable;
  *  - isTitleCase(char)
  *  - isUnicodeIdentifierPart(char)
  *  - isUnicodeIdentifierStart(char)
- *  - isWhitespace(char)
+ *  - isWhitespace(int)
  *  - getDirectionality(*)
  *  - getNumericValue(*)
  *  - getType(*)
@@ -278,6 +278,14 @@ public final class Character implements Comparable<Character>, Serializable {
         return false;
     }
   }
+
+  // The regex would just be /\s/, but browsers handle non-breaking spaces inconsistently. Also,
+  // the Java definition includes separators.
+  public static native boolean isWhitespace(char c) /*-{
+    return (null !== String.fromCharCode(c).match(
+        /[\t-\r \u1680\u180E\u2000-\u2006\u2008-\u200A\u2028\u2029\u205F\u3000\uFEFF]|[\x1C-\x1F]/
+    ));
+  }-*/;
 
   public static boolean isSupplementaryCodePoint(int codePoint) {
     return codePoint >= MIN_SUPPLEMENTARY_CODE_POINT && codePoint <= MAX_CODE_POINT;

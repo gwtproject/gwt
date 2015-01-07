@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2efb6987_ef189d9a",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Character.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-07T18:17:51Z",
+      "side": 1,
+      "message": "Perhaps we should do a /\\s/ check and then test for the non-breaking change which is I guess a smaller list?",
+      "revId": "a71bab307a024edc63be23d37a9eace1bf54209c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

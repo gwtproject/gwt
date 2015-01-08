@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e8d6144_31beaa87",
+        "filename": "user/src/com/google/gwt/user/theme/chrome/public/gwt/chrome/chrome.gss",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-08T19:37:52Z",
+      "side": 1,
+      "message": "The css files doesn\u0027t have to be converted as they are not used by any CssResource. It\u0027s part of the \"old\" GWT theme",
+      "revId": "0adb89ee0e128678a6c82fb9885caba85594ed18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

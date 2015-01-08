@@ -163,6 +163,15 @@ public class Pruner {
           !program.typeOracle.isInstantiatedType((JReferenceType) type)) {
         x.setType(program.getTypeNull());
       }
+      Predicate<JMethod> isPruned = new Predicate<JMethod>() {
+        @Override
+        public boolean apply(JMethod method) {
+          return isPruned(method);
+        }
+      };
+
+      Iterables.removeIf(x.getOverriddenMethods(), isPruned);
+      Iterables.removeIf(x.getOverriddingMethods(), isPruned);
     }
 
     @Override
@@ -702,7 +711,6 @@ public class Pruner {
     optimizerCtx.incOptimizationStep();
     optimizerCtx.syncDeletedSubCallGraphsSince(optimizerCtx.getLastStepFor(NAME) + 1,
         prunedMethods);
-    program.typeOracle.updateOverridesInfo(prunedMethods);
     JavaAstVerifier.assertProgramIsConsistent(program);
     return stats;
   }

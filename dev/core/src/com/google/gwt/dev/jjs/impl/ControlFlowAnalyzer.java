@@ -58,7 +58,6 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
-import com.google.gwt.thirdparty.guava.common.collect.LinkedHashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
@@ -885,7 +884,7 @@ public class ControlFlowAnalyzer {
         return;
       }
 
-      Iterable<JMethod> overriders = overriddingMethodsByOverriddenMethod.get(method);
+      Iterable<JMethod> overriders = method.getOverriddingMethods();
       if (overriders == null) {
         return;
       }
@@ -934,12 +933,6 @@ public class ControlFlowAnalyzer {
    */
   private Set<JNode> membersToRescueIfTypeIsInstantiated = Sets.newHashSet();
 
-  /**
-   * A precomputed map of all instance methods onto a set of methods that
-   * override each key method.
-   */
-  private LinkedHashMultimap<JMethod, JMethod> overriddingMethodsByOverriddenMethod;
-
   private final JField getClassField;
   private final JMethod getClassMethod;
   private final JProgram program;
@@ -964,7 +957,6 @@ public class ControlFlowAnalyzer {
       argsToRescueIfParameterRead =
           ArrayListMultimap.create(cfa.argsToRescueIfParameterRead);
     }
-    overriddingMethodsByOverriddenMethod = cfa.overriddingMethodsByOverriddenMethod;
     getClassField = program.getIndexedField("Object.___clazz");
     getClassMethod = program.getIndexedMethod("Object.getClass");
     rescuer = new RescueVisitor();
@@ -976,8 +968,6 @@ public class ControlFlowAnalyzer {
     runAsyncOnsuccess = program.getIndexedMethod("RunAsyncCallback.onSuccess");
     getClassField = program.getIndexedField("Object.___clazz");
     getClassMethod = program.getIndexedMethod("Object.getClass");
-    program.typeOracle.computeOverrides(program.getDeclaredTypes());
-    overriddingMethodsByOverriddenMethod = program.typeOracle.getAllOverridings();
     rescuer = new RescueVisitor();
   }
 

@@ -204,7 +204,7 @@ public class PrunerTest extends OptimizerTestBase {
     addSnippetClassDecl("static boolean fun(A a) { return a == null; }");
     Result result = optimize("void", "fun(null);");
     assertNull(result.findClass("EntryPoint$A"));
-    assertEquals("static boolean fun(null a);\n", result.findMethod("fun").toString());
+    assertParameterTypes(result, "fun", "null");
   }
 
   /**

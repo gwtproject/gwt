@@ -70,6 +70,41 @@
       "revId": "0adb89ee0e128678a6c82fb9885caba85594ed18",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e733d24_ebd345e1",
+        "filename": "user/src/com/google/gwt/user/theme/chrome/public/gwt/chrome/chrome.gss",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-08T22:38:25Z",
+      "side": 1,
+      "message": "These are a bunch of regular css files. I don\u0027t think they should be provided as gss.",
+      "parentUuid": "6e8d6144_31494a04",
+      "revId": "0adb89ee0e128678a6c82fb9885caba85594ed18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e733d24_abfb0d49",
+        "filename": "user/src/com/google/gwt/user/theme/chrome/public/gwt/chrome/chrome.gss",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-08T22:38:25Z",
+      "side": 1,
+      "message": "it would be nice to update the converter so extra empty line on the top and trailing-spaces at ends are removed.",
+      "revId": "0adb89ee0e128678a6c82fb9885caba85594ed18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

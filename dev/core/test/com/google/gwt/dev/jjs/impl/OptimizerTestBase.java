@@ -31,17 +31,26 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
+import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStatement;
+import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
+import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import javax.annotation.Nullable;
 
 /**
  * Test case for testing Jjs optimizers. Adds a convenient Result class.
@@ -50,7 +59,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
   protected boolean runDeadCodeElimination = false;
 
   /**
-   * Holds the result of optimization to compare agains expected results.
+   * Holds the result of optimization to compare against expected results.
    */
   protected final class Result {
     private final String returnType;
@@ -76,7 +85,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
         actualMethodSnippets.add(method.toString().trim());
       }
 
-      assertTrue(actualMethodSnippets.containsAll(expectedMethodSnippets));
+      assertContainsAll(expectedMethodSnippets, actualMethodSnippets);
     }
 
     /**
@@ -137,6 +146,79 @@ public abstract class OptimizerTestBase extends JJSTestBase {
     public JProgram getOptimizedProgram() {
       return optimizedProgram;
     }
+  }
+
+  protected static void assertOverrides(
+      Result result, String fullMethodSignature, String... overridenMethodSignatures) {
+    assertEquals(ImmutableSet.copyOf(overridenMethodSignatures),
+        findOverrides(result, fullMethodSignature));
+  }
+
+  protected static void assertParameterTypes(
+      final Result result, String methodName,  String... parameterTypeNames) {
+    JMethod method = findMethod(result, methodName);
+    assertNotNull("Did not find method " + methodName, method);
+    assertEquals(parameterTypeNames.length, method.getParams().size());
+    JType[] parameterTypes = FluentIterable.from(Arrays.asList(parameterTypeNames))
+        .transform(new Function<String, JType>() {
+          @Nullable
+          @Override
+          public JType apply(String typeName) {
+            return findType(result, typeName);
+          }
+        })
+        .toArray(JType.class);
+    assertParameterTypes(method, parameterTypes);
+  }
+
+  protected static void assertReturnType(
+      Result result, String methodName, String resultTypeName) {
+    JMethod method = findMethod(result, methodName);
+    assertNotNull("Did not find method " + methodName, method);
+    JDeclaredType resultType = result.findClass(resultTypeName);
+    assertNotNull("Did not find class " + resultTypeName, resultType);
+    assertEquals(resultType, method.getType().getUnderlyingType());
+  }
+
+  protected static JMethod findMethod(Result result, String methodName) {
+    int lastDot = methodName.lastIndexOf(".");
+    JMethod method = null;
+    if (lastDot != -1) {
+      String className = methodName.substring(0, lastDot);
+      JDeclaredType clazz = result.findClass(className);
+      assertNotNull("Did not find class " + className, clazz);
+      method = clazz.findMethod(methodName.substring(lastDot + 1), true);
+    } else {
+      method = result.findMethod(methodName);
+    }
+    return method;
+  }
+
+  protected static ImmutableSet<String> findOverrides(Result result, String fullMethodSignature) {
+    final Function<JMethod, String> METHOD_TO_STRING =
+        new Function<JMethod, String>() {
+          @Nullable
+          @Override
+          public String apply(JMethod method) {
+            return method.toString();
+          }
+        };
+    JMethod method = findMethod(result, fullMethodSignature);
+    assertNotNull("Method " + fullMethodSignature + " not found", method);
+    return FluentIterable
+        .from(method.getOverriddenMethods())
+        .transform(METHOD_TO_STRING)
+        .toSet();
+  }
+
+  private static JReferenceType findType(Result result, String parameterTypeName) {
+    JReferenceType parameterType;
+    if (parameterTypeName.equals("null")) {
+      parameterType = JNullType.INSTANCE;
+    } else {
+      parameterType = result.findClass(parameterTypeName);
+    }
+    return parameterType;
   }
 
   /**

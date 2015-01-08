@@ -163,6 +163,12 @@ public class Pruner {
           !program.typeOracle.isInstantiatedType((JReferenceType) type)) {
         x.setType(program.getTypeNull());
       }
+      Iterables.removeIf(x.getOverriddenMethods(), new Predicate<JMethod>() {
+        @Override
+        public boolean apply(JMethod method) {
+          return isPruned(method);
+        }
+      });
     }
 
     @Override

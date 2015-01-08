@@ -21,6 +21,7 @@ import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -229,11 +230,11 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   private JType originalReturnType;
 
   /**
-   * References to any methods which this method overrides. This should be an
+   * References to any methods which this method overrides. This is an
    * EXHAUSTIVE list, that is, if C overrides B overrides A, then C's overrides
    * list will contain both A and B.
    */
-  private List<JMethod> overriddenMethods = Collections.emptyList();
+  private Set<JMethod> overriddenMethods = Sets.newLinkedHashSet();
 
   private List<JParameter> params = Collections.emptyList();
   private JType returnType;
@@ -289,9 +290,9 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   /**
    * Add a method that this method overrides.
    */
-  public void addOverriddenMethod(JMethod toAdd) {
+  public void addOverriddenMethod(JMethod overridenMethod) {
     assert canBePolymorphic();
-    overriddenMethods = Lists.add(overriddenMethods, toAdd);
+    overriddenMethods.add(overridenMethod);
   }
 
   /**
@@ -377,7 +378,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   /**
    * Returns the transitive closure of all the methods this method overrides.
    */
-  public List<JMethod> getOverriddenMethods() {
+  public Set<JMethod> getOverriddenMethods() {
     return overriddenMethods;
   }
 

@@ -88,6 +88,8 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+import com.google.gwt.thirdparty.guava.common.collect.LinkedHashMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.collect.Sets.SetView;
 
@@ -1063,9 +1065,40 @@ public class UnifyAst {
       // Check package access.
       String typePackage = Shared.getPackageName(type.getName());
       String methodPackage = Shared.getPackageName(method.getEnclosingType().getName());
-      return typePackage.equals(methodPackage);
+      if (typePackage.equals(methodPackage)) {
+        // If on the same package then it is visible.
+        return true;
+      }
+      // Check if it is made public by an interface.
+      return getAllInterfaceMethodSignatures((JClassType) type).contains(method.getSignature());
     }
     return true;
+  }
+
+  private Set<String> getAllInterfaceMethodSignatures(JClassType type) {
+    Set<String> interfaceMethodSignatures = Sets.newHashSet();
+    JClassType currentType = type;
+    do {
+      for (JInterfaceType interfaceType : currentType.getImplements()) {
+        for (JMethod method : interfaceType.getMethods()) {
+          interfaceMethodSignatures.add(method.getSignature());
+        }
+        getAllImplementedInterfaces(interfaceType, interfaceMethodSignatures);
+      }
+      currentType = currentType.getSuperClass();
+    } while (currentType != null);
+
+    return interfaceMethodSignatures;
+  }
+
+  private void getAllImplementedInterfaces(
+    JInterfaceType interfaceType, Set<String> interfaceMethodSignatures) {
+    for (JInterfaceType superInterfaceType : interfaceType.getImplements()) {
+      for (JMethod method : superInterfaceType.getMethods()) {
+        interfaceMethodSignatures.add(method.getSignature());
+      }
+      getAllImplementedInterfaces(superInterfaceType, interfaceMethodSignatures);
+    }
   }
 
   /**
@@ -1087,46 +1120,35 @@ public class UnifyAst {
     }
   }
 
-  private void collectUpRefs(JDeclaredType type, Map<String, Set<JMethod>> collected) {
+  private void collectPotentialOverrides(JDeclaredType type, Multimap<String, JMethod> collected) {
     if (type == null) {
       return;
     }
     for (JMethod method : type.getMethods()) {
       if (method.canBePolymorphic()) {
-        Set<JMethod> set = collected.get(method.getSignature());
-        if (set != null) {
-          set.add(method);
-        }
+        collected.put(method.getSignature(), method);
       }
     }
-    collectUpRefsInSupers(type, collected);
-  }
-
-  private void collectUpRefsInSupers(JDeclaredType type, Map<String, Set<JMethod>> collected) {
-    collectUpRefs(type.getSuperClass(), collected);
+    collectPotentialOverrides(type.getSuperClass(), collected);
     for (JInterfaceType intfType : type.getImplements()) {
-      collectUpRefs(intfType, collected);
+      collectPotentialOverrides(intfType, collected);
     }
   }
-
   /**
    * Compute all overrides.
    */
   private void computeOverrides() {
     for (JDeclaredType type : program.getDeclaredTypes()) {
-      Map<String, Set<JMethod>> collected = new HashMap<String, Set<JMethod>>();
-      for (JMethod method : type.getMethods()) {
-        if (method.canBePolymorphic()) {
-          collected.put(method.getSignature(), new LinkedHashSet<JMethod>());
+      Multimap<String, JMethod> methodsBySignature = LinkedHashMultimap.create();
+      collectPotentialOverrides(type, methodsBySignature);
+      for (String signature : methodsBySignature.keySet()) {
+        JMethod method = methodsBySignature.get(signature).iterator().next();
+        if (!method.canBePolymorphic() || !canAccessSuperMethod(type, method)) {
+          continue;
         }
-      }
-      collectUpRefsInSupers(type, collected);
-      for (JMethod method : type.getMethods()) {
-        if (method.canBePolymorphic()) {
-          for (JMethod upref : collected.get(method.getSignature())) {
-            if (canAccessSuperMethod(type, upref)) {
-              method.addOverriddenMethod(upref);
-            }
+        for (JMethod overridenMethod : methodsBySignature.get(method.getSignature())) {
+          if (overridenMethod != method && canAccessSuperMethod(type, overridenMethod)) {
+            method.addOverriddenMethod(overridenMethod);
           }
         }
       }

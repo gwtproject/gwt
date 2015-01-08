@@ -16,6 +16,24 @@
       "revId": "0adb89ee0e128678a6c82fb9885caba85594ed18",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e8d6144_91259e4a",
+        "filename": "user/src/com/google/gwt/user/theme/chrome/public/gwt/chrome/chrome.gss",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-08T19:46:09Z",
+      "side": 1,
+      "message": "People might use them in a non strict resource.",
+      "parentUuid": "6e8d6144_31beaa87",
+      "revId": "0adb89ee0e128678a6c82fb9885caba85594ed18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

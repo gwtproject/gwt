@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e733d24_ba96f553",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-09T03:42:09Z",
+      "side": 1,
+      "message": "I forgot to add a test case that reproduces this problem.",
+      "revId": "bd2eefcbe314fe13ba8cf84e8f335aff3dd204c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

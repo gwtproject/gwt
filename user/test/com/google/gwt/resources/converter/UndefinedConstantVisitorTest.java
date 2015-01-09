@@ -62,7 +62,7 @@ public class UndefinedConstantVisitorTest extends TestCase {
 
     // when
     UndefinedConstantVisitor undefinedConstantVisitor = new UndefinedConstantVisitor(
-        Sets.<String>newHashSet(), false, treeLogger);
+        Sets.<String>newHashSet(), false, false, treeLogger);
     undefinedConstantVisitor.visit(cssRule, null);
 
     // then
@@ -80,7 +80,7 @@ public class UndefinedConstantVisitorTest extends TestCase {
 
     // when
     UndefinedConstantVisitor undefinedConstantVisitor = new UndefinedConstantVisitor(
-        Sets.<String>newHashSet(), false, treeLogger);
+        Sets.<String>newHashSet(), false, false, treeLogger);
 
     try {
       undefinedConstantVisitor.visit(cssRule, null);
@@ -100,7 +100,7 @@ public class UndefinedConstantVisitorTest extends TestCase {
 
     // when
     UndefinedConstantVisitor undefinedConstantVisitor = new UndefinedConstantVisitor(
-        Sets.<String>newHashSet(), true, treeLogger);
+        Sets.<String>newHashSet(), true, false, treeLogger);
     undefinedConstantVisitor.visit(cssRule, null);
 
     // then
@@ -116,7 +116,7 @@ public class UndefinedConstantVisitorTest extends TestCase {
 
     // when
     UndefinedConstantVisitor undefinedConstantVisitor = new UndefinedConstantVisitor(
-        Sets.newHashSet("UPPERCASE"), false, treeLogger);
+        Sets.newHashSet("UPPERCASE"), false, false, treeLogger);
     undefinedConstantVisitor.visit(cssRule, null);
 
     // then
@@ -142,7 +142,7 @@ public class UndefinedConstantVisitorTest extends TestCase {
 
     // when
     UndefinedConstantVisitor undefinedConstantVisitor = new UndefinedConstantVisitor(
-        Sets.newHashSet("ARGUMENT1", "ARGUMENT3"), true, treeLogger);
+        Sets.newHashSet("ARGUMENT1", "ARGUMENT3"), true, false, treeLogger);
     undefinedConstantVisitor.visit(cssRule, null);
 
     // then

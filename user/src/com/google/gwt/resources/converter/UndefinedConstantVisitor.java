@@ -47,11 +47,13 @@ public class UndefinedConstantVisitor extends CssVisitor {
       Sets.newHashSet("filter", "-ms-filter", "font-family");
   private final boolean lenient;
   private final TreeLogger treeLogger;
+  private boolean allowUndefinedVariables;
 
   public UndefinedConstantVisitor(Set<String> gssContantNames, boolean lenient,
-      TreeLogger treeLogger) {
+      boolean allowUndefinedVariables, TreeLogger treeLogger) {
     this.gssContantNames = gssContantNames;
     this.lenient = lenient;
+    this.allowUndefinedVariables = allowUndefinedVariables;
     this.treeLogger = treeLogger;
   }
 
@@ -109,8 +111,15 @@ public class UndefinedConstantVisitor extends CssVisitor {
     if (matcher.matches()) {
       String upperCaseString = matcher.group();
       if (!gssContantNames.contains(upperCaseString)) {
+        // This is only used in command line mode when its okay to leave in undefined
+        // variables
+        if (allowUndefinedVariables) {
+          return identValue;
+        }
+
         treeLogger.log(Type.WARN, "Property '" + cssPropertyName + "' from rule '"
             + selector + "' uses an undefined constant: " + upperCaseString);
+
         if (lenient) {
           treeLogger.log(Type.WARN, "turning '" + upperCaseString +
               "' to lower case. This is probably not what you wanted here in the " +

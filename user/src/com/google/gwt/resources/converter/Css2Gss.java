@@ -48,6 +48,7 @@ public class Css2Gss {
   private final URL cssFile;
   private final TreeLogger treeLogger;
   private final boolean lenient;
+  private final boolean allowUndefinedVariables;
 
   private PrintWriter printWriter;
   private Map<String, String> defNameMapping;
@@ -58,24 +59,26 @@ public class Css2Gss {
   }
 
   public Css2Gss(URL resource, boolean lenient) {
-    this(resource, lenient, Predicates.<String>alwaysFalse());
+    this(resource, lenient, Predicates.<String>alwaysFalse(), false);
   }
 
   public Css2Gss(URL resource, boolean lenient,
-      Predicate<String> simpleBooleanConditionPredicate) {
+      Predicate<String> simpleBooleanConditionPredicate, boolean allowUndefinedVariables) {
     cssFile = resource;
     printWriter = new PrintWriter(System.err);
     this.treeLogger = new PrintWriterTreeLogger(printWriter);
     this.lenient = lenient;
     this.simpleBooleanConditionPredicate = simpleBooleanConditionPredicate;
+    this.allowUndefinedVariables = allowUndefinedVariables;
   }
 
   public Css2Gss(URL fileUrl, TreeLogger treeLogger, boolean lenient,
-      Predicate<String> simpleBooleanConditionPredicate) {
+      Predicate<String> simpleBooleanConditionPredicate, boolean allowUndefinedVariables) {
     cssFile = fileUrl;
     this.treeLogger = treeLogger;
     this.lenient = lenient;
     this.simpleBooleanConditionPredicate = simpleBooleanConditionPredicate;
+    this.allowUndefinedVariables = allowUndefinedVariables;
   }
 
   public String toGss() throws UnableToCompleteException {
@@ -87,7 +90,7 @@ public class Css2Gss {
         defNameMapping = defCollectorVisitor.getDefMapping();
 
         new UndefinedConstantVisitor(new HashSet<String>(defNameMapping.values()),
-            lenient, treeLogger).accept(sheet);
+            lenient, allowUndefinedVariables, treeLogger).accept(sheet);
 
         new ElseNodeCreator().accept(sheet);
 
@@ -121,7 +124,8 @@ public class Css2Gss {
 
     if (options.singleFile) {
       try {
-        System.out.println(convertFile(options.resource, options.simpleBooleanConditions));
+        System.out.println(convertFile(options.resource, options.simpleBooleanConditions,
+            options.allowUndefinedVariables));
         System.exit(0);
       } catch (Exception e) {
         e.printStackTrace();
@@ -139,7 +143,8 @@ public class Css2Gss {
               "GSS file already exists - will not convert, file: " + cssFile.getAbsolutePath());
           continue;
         }
-        String gss = convertFile(cssFile, options.simpleBooleanConditions);
+        String gss = convertFile(cssFile, options.simpleBooleanConditions,
+            options.allowUndefinedVariables);
         writeGss(gss, cssFile);
         System.out.println("Converted " + cssFile.getAbsolutePath());
       } catch (Exception e) {
@@ -167,8 +172,8 @@ public class Css2Gss {
     Files.asCharSink(gssFile, Charsets.UTF_8).write(gss);
   }
 
-  private static String convertFile(File resource, Set<String> simpleBooleanConditions)
-      throws MalformedURLException, UnableToCompleteException {
+  private static String convertFile(File resource, Set<String> simpleBooleanConditions,
+      boolean allowUndefinedVariables) throws MalformedURLException, UnableToCompleteException {
     Predicate<String> simpleConditionPredicate;
 
     if (simpleBooleanConditions != null) {
@@ -177,7 +182,8 @@ public class Css2Gss {
       simpleConditionPredicate = Predicates.alwaysFalse();
     }
 
-    return new Css2Gss(resource.toURI().toURL(), false, simpleConditionPredicate).toGss();
+    return new Css2Gss(resource.toURI().toURL(), false, simpleConditionPredicate,
+        allowUndefinedVariables).toGss();
   }
 
   private static void printUsage() {
@@ -218,8 +224,17 @@ public class Css2Gss {
           return true;
         }
       });
+
+      argumentConsumers.put("-allowUndefinedVariables", new ArgumentConsumer() {
+        @Override
+        public boolean consume(Options option, String nextArg) {
+          option.allowUndefinedVariables = true;
+          return false;
+        }
+      });
     }
 
+    boolean allowUndefinedVariables;
     boolean recurse;
     boolean singleFile;
     File resource;

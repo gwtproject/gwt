@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef455d2_72b3b60b",
+        "filename": "user/src/com/google/gwt/resources/converter/UndefinedConstantVisitor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-09T17:31:39Z",
+      "side": 1,
+      "message": "revert",
+      "revId": "b3d3611737a2365e42b858e6b419ae17707fcf84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef455d2_d2aa628c",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-09T17:31:39Z",
+      "side": 1,
+      "message": "nit: provide an override for the constructor so you don\u0027t need this here and other places.",
+      "revId": "b3d3611737a2365e42b858e6b419ae17707fcf84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef455d2_b2c8fe87",
+        "filename": "user/test/com/google/gwt/resources/converter/Css2GssTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-09T17:31:39Z",
+      "side": 1,
+      "message": "remove qualifier",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 128,
+        "endChar": 10
+      },
+      "revId": "b3d3611737a2365e42b858e6b419ae17707fcf84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

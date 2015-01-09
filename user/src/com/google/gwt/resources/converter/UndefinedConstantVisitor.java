@@ -111,6 +111,7 @@ public class UndefinedConstantVisitor extends CssVisitor {
       if (!gssContantNames.contains(upperCaseString)) {
         treeLogger.log(Type.WARN, "Property '" + cssPropertyName + "' from rule '"
             + selector + "' uses an undefined constant: " + upperCaseString);
+
         if (lenient) {
           treeLogger.log(Type.WARN, "turning '" + upperCaseString +
               "' to lower case. This is probably not what you wanted here in the " +

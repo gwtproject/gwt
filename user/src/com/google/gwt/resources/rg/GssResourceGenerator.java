@@ -941,7 +941,7 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
           new ConfigurationPropertyMatcher(context, logger);
 
       Css2Gss converter = new Css2Gss(tempFile.toURI().toURL(), logger, isLenientConversion(),
-          configurationPropertyMatcher);
+          configurationPropertyMatcher, new HashSet<URL>());
 
       String gss = converter.toGss();
 

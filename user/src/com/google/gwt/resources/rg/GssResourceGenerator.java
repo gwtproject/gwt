@@ -148,6 +148,28 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
 
   private enum AutoConversionMode { STRICT, LENIENT, OFF }
 
+  public static Set<String> allAtDefs = new HashSet<>();
+
+  private static boolean shouldEmitVariables() {
+    return System.getProperty("emitVariables") != null;
+  }
+
+  static {
+    if (shouldEmitVariables()) {
+      Runnable runnable = new Runnable() {
+
+        @Override
+        public void run() {
+          for (String atDef : allAtDefs) {
+            System.out.println("@def " + atDef + " 1px");
+          }
+        }
+      };
+
+      Runtime.getRuntime().addShutdownHook(new Thread(runnable));
+    }
+  }
+
   /**
    * {@link ErrorManager} used to log the errors and warning messages produced by the different
    * {@link com.google.gwt.thirdparty.common.css.compiler.ast.CssCompilerPass}.
@@ -839,6 +861,10 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
       String concatenatedCss = concatCssFiles(resources, logger);
 
       ConversionResult result = convertToGss(concatenatedCss, context, logger);
+
+      if (shouldEmitVariables()) {
+        allAtDefs.addAll(result.defNameMapping.keySet());
+      }
 
       String gss = result.gss;
       String name = "[auto-converted gss files from : " + resources + "]";

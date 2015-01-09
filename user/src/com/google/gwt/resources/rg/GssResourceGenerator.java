@@ -148,6 +148,34 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
 
   private enum AutoConversionMode { STRICT, LENIENT, OFF }
 
+  /*
+   * TODO(dankurka): This is a nasty hack to get the compiler to output all @def's
+   * it has seen in a compile. Once GSS migration is done this needs to be removed.
+   */
+  private static Set<String> allAtDefs = new HashSet<>();
+
+  private static boolean shouldEmitVariables() {
+    return "true".equals(System.getProperty("emitAtDefs"));
+  }
+
+  static {
+    if (shouldEmitVariables()) {
+      Runnable runnable = new Runnable() {
+
+        @Override
+        public void run() {
+          System.out.println("================== @defs found in this compile");
+          for (String atDef : allAtDefs) {
+            System.out.println("@def " + atDef + " 1px");
+          }
+          System.out.println("==============================================");
+        }
+      };
+
+      Runtime.getRuntime().addShutdownHook(new Thread(runnable));
+    }
+  }
+
   /**
    * {@link ErrorManager} used to log the errors and warning messages produced by the different
    * {@link com.google.gwt.thirdparty.common.css.compiler.ast.CssCompilerPass}.
@@ -839,6 +867,10 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
       String concatenatedCss = concatCssFiles(resources, logger);
 
       ConversionResult result = convertToGss(concatenatedCss, context, logger);
+
+      if (shouldEmitVariables()) {
+        allAtDefs.addAll(result.defNameMapping.keySet());
+      }
 
       String gss = result.gss;
       String name = "[auto-converted gss files from : " + resources + "]";

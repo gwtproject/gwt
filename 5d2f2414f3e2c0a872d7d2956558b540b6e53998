@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "eec0716a_ba8fd1be",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-09T16:01:36Z",
+      "side": 1,
+      "message": "Since this can fail (MalformedURLException) and ArgumenConsumer does not have an api for failing.",
+      "parentUuid": "eec0716a_da616580",
+      "revId": "5d2f2414f3e2c0a872d7d2956558b540b6e53998",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eec0716a_1a4fdd03",
         "filename": "user/test/com/google/gwt/resources/converter/variable_defined_in_another_file.css",
         "patchSetId": 3

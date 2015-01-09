@@ -24,6 +24,7 @@ import com.google.gwt.thirdparty.common.css.compiler.ast.GssParser;
 import com.google.gwt.thirdparty.common.css.compiler.ast.GssParserException;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import junit.framework.TestCase;
 
@@ -33,6 +34,8 @@ import org.junit.Assert;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Integration tests for Css2Gss.
@@ -115,6 +118,17 @@ public class Css2GssTest extends TestCase {
     assertFileContentEqualsAfterConversionAndIsGssCompatible("escape.css", "escape.gss", true);
   }
 
+  public void testConvertingWithVariablesDefinedInAnotherFile()
+      throws UnableToCompleteException, IOException {
+    URL resource = Css2GssTest.class.getResource("variable_defined_in_another_file.css");
+    InputStream stream = Css2GssTest.class.getResourceAsStream("variable_defined_in_another_file.gss");
+    Set<URL> set = new HashSet<>();
+    set.add(Css2GssTest.class.getResource("variable_defined_in_file.css"));
+    String convertedGss = new Css2Gss(resource, false, Predicates.<String>alwaysFalse(), set).toGss();
+    String gss = IOUtils.toString(stream, "UTF-8");
+    Assert.assertEquals(gss, convertedGss);
+  }
+
   private void assertFileContentEqualsAfterConversion(String inputCssFile, String expectedGssFile)
       throws IOException, UnableToCompleteException {
     assertFileContentEqualsAfterConversionAndIsGssCompatible(inputCssFile, expectedGssFile, false);
@@ -131,7 +145,8 @@ public class Css2GssTest extends TestCase {
       throws IOException, UnableToCompleteException {
     URL resource = Css2GssTest.class.getResource(inputCssFile);
     InputStream stream = Css2GssTest.class.getResourceAsStream(expectedGssFile);
-    String convertedGss = new Css2Gss(resource, lenient, simpleBooleanConditionPredicate).toGss();
+    String convertedGss =
+        new Css2Gss(resource, lenient, simpleBooleanConditionPredicate, new HashSet<URL>()).toGss();
     String gss = IOUtils.toString(stream, "UTF-8");
     Assert.assertEquals(gss, convertedGss);
 

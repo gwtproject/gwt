@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "eec0716a_ba70f1f8",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-09T17:33:27Z",
+      "side": 1,
+      "message": "you can use the quiEarly() method in the ArgumentConsumer. I do it for the \"-condition\" option",
+      "parentUuid": "eec0716a_ba8fd1be",
+      "revId": "5d2f2414f3e2c0a872d7d2956558b540b6e53998",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eec0716a_1a4fdd03",
         "filename": "user/test/com/google/gwt/resources/converter/variable_defined_in_another_file.css",
         "patchSetId": 3
@@ -107,6 +125,30 @@
       "side": 1,
       "message": "I wanted to cover both cases.",
       "parentUuid": "eec0716a_1a4fdd03",
+      "range": {
+        "startLine": 2,
+        "startChar": 9,
+        "endLine": 2,
+        "endChar": 49
+      },
+      "revId": "5d2f2414f3e2c0a872d7d2956558b540b6e53998",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eec0716a_9a752de9",
+        "filename": "user/test/com/google/gwt/resources/converter/variable_defined_in_another_file.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-09T17:33:27Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t see the \"background-color: lower_case_variable;\"",
+      "parentUuid": "eec0716a_7a05b982",
       "range": {
         "startLine": 2,
         "startChar": 9,

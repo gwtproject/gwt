@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2efc49c4_d9903f2f",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-10T00:49:19Z",
+      "side": 1,
+      "message": "Can you add comments to document the significance of different overrides in these mock resources?",
+      "revId": "753f388c02a189b3cd45264221f16217f8d9c9ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

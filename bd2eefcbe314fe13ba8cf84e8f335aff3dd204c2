@@ -87,6 +87,24 @@
       "revId": "bd2eefcbe314fe13ba8cf84e8f335aff3dd204c2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce380d5f_2a7b432b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-10T03:00:02Z",
+      "side": 1,
+      "message": "I thought you were referring type-tightening of return types based on return statement.\n\nWe consider any JsType as instantiated (isInstantiatedType returns true).",
+      "parentUuid": "6eaba19e_d25714cb",
+      "revId": "bd2eefcbe314fe13ba8cf84e8f335aff3dd204c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

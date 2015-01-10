@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce380d5f_4781e28b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-10T01:20:04Z",
+      "side": 1,
+      "message": "I\u0027m not gonna bother adding a test here as exporting fields is already broken pretty bad.",
+      "parentUuid": "4e733d24_ba96f553",
+      "revId": "bd2eefcbe314fe13ba8cf84e8f335aff3dd204c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaba19e_1201fcfb",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 1

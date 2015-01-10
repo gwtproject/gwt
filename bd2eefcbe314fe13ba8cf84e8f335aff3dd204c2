@@ -69,6 +69,24 @@
       "revId": "bd2eefcbe314fe13ba8cf84e8f335aff3dd204c2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaba19e_d25714cb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-01-10T01:36:35Z",
+      "side": 1,
+      "message": "I don\u0027t believe that\u0027s true, because it will still tighten a type to null based on instantiability.  There\u0027s a call like if(!program.typeOracle.isInstantiatedType(refType)) which will tighten to null if the return type isn\u0027t instantiable.\n\nSo if refType is a pure @JsType interface, and there\u0027s no Java implementor, then this method will be marked as returning null.",
+      "parentUuid": "ce380d5f_27d13e0c",
+      "revId": "bd2eefcbe314fe13ba8cf84e8f335aff3dd204c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -33,6 +33,24 @@
       "revId": "bd2eefcbe314fe13ba8cf84e8f335aff3dd204c2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce380d5f_27d13e0c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-10T01:14:16Z",
+      "side": 1,
+      "message": "We can type tighten return type because we know the body unlike the parameters where we don\u0027t know all callers.",
+      "parentUuid": "6eaba19e_1201fcfb",
+      "revId": "bd2eefcbe314fe13ba8cf84e8f335aff3dd204c2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

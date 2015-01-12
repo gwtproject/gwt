@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "0e130513_d6306289",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-12T17:42:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eec0716a_ba70f1f8",
+      "revId": "5d2f2414f3e2c0a872d7d2956558b540b6e53998",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eec0716a_1a4fdd03",
         "filename": "user/test/com/google/gwt/resources/converter/variable_defined_in_another_file.css",
         "patchSetId": 3

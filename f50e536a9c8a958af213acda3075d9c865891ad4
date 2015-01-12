@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e130513_f30ad016",
+        "filename": "user/src/com/google/gwt/core/shared/impl/InternalPreconditions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-12T01:18:22Z",
+      "side": 1,
+      "message": "Why is using GWT.getProperty better than System.getProperty?",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 4
+      },
+      "revId": "f50e536a9c8a958af213acda3075d9c865891ad4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

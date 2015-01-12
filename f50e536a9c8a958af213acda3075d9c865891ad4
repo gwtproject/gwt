@@ -22,6 +22,30 @@
       "revId": "f50e536a9c8a958af213acda3075d9c865891ad4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee48d53_4a3ca7b2",
+        "filename": "user/src/com/google/gwt/core/shared/impl/InternalPreconditions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-12T18:50:16Z",
+      "side": 1,
+      "message": "Ideally we should have both and let one delegate to other when we have @Literal. So the question is; which one should we do first and let the other one delegate.\n\nGwt.getProperty is more discoverable and also inline with other magic methods so it makes sense to start with that one; on the other hand, System.getPropery is more useful to get rid of GWT class and we don\u0027t need to wait for @Literal.\n\nAnyway, I haven\u0027t full reached to a conclusion yet :)",
+      "parentUuid": "0e130513_f30ad016",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 4
+      },
+      "revId": "f50e536a9c8a958af213acda3075d9c865891ad4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

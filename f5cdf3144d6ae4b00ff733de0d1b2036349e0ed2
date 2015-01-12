@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efa25f3_b01f9e85",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerEnum.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-12T22:30:39Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "f5cdf3144d6ae4b00ff733de0d1b2036349e0ed2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efa25f3_1025b2d1",
+        "filename": "dev/core/test/com/google/gwt/util/tools/ArgHandlerEnumTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-12T22:30:39Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "f5cdf3144d6ae4b00ff733de0d1b2036349e0ed2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efa25f3_f02926af",
+        "filename": "dev/core/test/com/google/gwt/util/tools/ArgHandlerEnumTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-12T22:30:39Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "f5cdf3144d6ae4b00ff733de0d1b2036349e0ed2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efa25f3_500f3a55",
+        "filename": "dev/core/test/com/google/gwt/util/tools/ArgHandlerEnumTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-12T22:30:39Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "f5cdf3144d6ae4b00ff733de0d1b2036349e0ed2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efa25f3_300c2e5f",
+        "filename": "dev/core/test/com/google/gwt/util/tools/ArgHandlerEnumTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-12T22:30:39Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "f5cdf3144d6ae4b00ff733de0d1b2036349e0ed2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

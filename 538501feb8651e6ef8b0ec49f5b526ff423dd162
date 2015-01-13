@@ -93,6 +93,30 @@
       "revId": "538501feb8651e6ef8b0ec49f5b526ff423dd162",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce800d7c_04b478c1",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-01-13T20:47:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e75fd75_a9e9e542",
+      "range": {
+        "startLine": 163,
+        "startChar": 60,
+        "endLine": 163,
+        "endChar": 70
+      },
+      "revId": "538501feb8651e6ef8b0ec49f5b526ff423dd162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -22,6 +22,30 @@
       "revId": "5838a58b3df60bdb12e95dd45617d5d9bf24ce89",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e75fd75_69198d9c",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/ModuleDef.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-01-13T19:52:30Z",
+      "side": 1,
+      "message": "yes i think i will remove any handling of them and remove any usage of them in our .gwt.xml files, but will leave it as legal module file syntax so as not to break compatibility.\n\nthere are more changes to follow after this patch.",
+      "parentUuid": "4e75fd75_e9e91d10",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 11
+      },
+      "revId": "5838a58b3df60bdb12e95dd45617d5d9bf24ce89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

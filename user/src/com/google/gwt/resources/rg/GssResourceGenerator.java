@@ -160,22 +160,18 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
   private static boolean shouldEmitVariables;
 
   static {
-    shouldEmitVariables = "true".equals(System.getProperty("emitAtDefs"));
-    if (shouldEmitVariables) {
-      Runnable runnable = new Runnable() {
+    shouldEmitVariables = "true".equals(System.getProperty("gwt.css2gss.emitAtDefs"));
+  }
 
-        @Override
-        public void run() {
-          System.out.println("================== @defs found in this compile");
-          for (String atDef : allAtDefs) {
-            System.out.println("@def " + atDef + " 1px");
-          }
-          System.out.println("==============================================");
-        }
-      };
-
-      Runtime.getRuntime().addShutdownHook(new Thread(runnable));
+  public static synchronized void emitVariables() {
+    if (!shouldEmitVariables) {
+      return;
     }
+    System.out.println("================== @defs found in this compile");
+    for (String atDef : allAtDefs) {
+      System.out.println("@def " + atDef + " 1px;");
+    }
+    System.out.println("==============================================");
   }
 
   /**

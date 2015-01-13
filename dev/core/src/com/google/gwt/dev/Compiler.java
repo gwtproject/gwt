@@ -52,6 +52,7 @@ import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
@@ -132,6 +133,7 @@ public class Compiler {
         }
       };
       if (CompileTaskRunner.runWithAppropriateLogger(options, task)) {
+        maybeEmitAtDefs();
         // Exit w/ success code.
         System.exit(0);
       }
@@ -314,5 +316,18 @@ public class Compiler {
       return false;
     }
     return true;
+  }
+
+  /*
+   * TODO(dankurka): This is a nasty hack to get the compiler to output all @def's
+   * it has seen in a compile. Once GSS migration is done this needs to be removed.
+   */
+  static void maybeEmitAtDefs() {
+    try {
+      Class<?> clazz = Class.forName("com.google.gwt.resources.rg.GssResourceGenerator");
+      Method method = clazz.getMethod("emitVariables");
+      method.invoke(null);
+    } catch (Exception e) {
+    }
   }
 }

@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.util.log;
 
+import com.google.gwt.core.ext.TreeLogger;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -47,11 +49,13 @@ public final class PrintWriterTreeLogger extends AbstractTreeLogger {
     if (existing) {
       out.println();  // blank line to mark relaunch
     }
+    logLevel = TreeLogger.WARN;
   }
 
   protected PrintWriterTreeLogger(PrintWriter out, String indent) {
     this.out = out;
     this.indent = indent;
+    logLevel = TreeLogger.WARN;
   }
 
   @Override

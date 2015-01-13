@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e8f21ae_44ebe2b4",
+        "filename": "user/test/com/google/gwt/resources/ResourcesTest.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-13T19:48:50Z",
+      "side": 1,
+      "message": "really ?",
+      "revId": "9c208c8117f3771b5103aeda7a636bb5b50db893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce800d7c_64d1c40b",
+        "filename": "user/test/com/google/gwt/resources/client/CSSResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-13T19:48:50Z",
+      "side": 1,
+      "message": "to remove",
+      "revId": "9c208c8117f3771b5103aeda7a636bb5b50db893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce800d7c_84cec86c",
+        "filename": "user/test/com/google/gwt/resources/client/CSSResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-13T19:48:50Z",
+      "side": 1,
+      "message": "To remove",
+      "revId": "9c208c8117f3771b5103aeda7a636bb5b50db893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce800d7c_c4fe1076",
+        "filename": "user/test/com/google/gwt/resources/client/CSSResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-13T19:48:50Z",
+      "side": 1,
+      "message": "What is the strategy ? Do we want to change the tests to be runnable with the old CssResource and GSS ?\nI guess we will change these tests once GSS will be turn default. So we don\u0027t have to manage both cases (test run with the old cssresource and gss)",
+      "revId": "9c208c8117f3771b5103aeda7a636bb5b50db893",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

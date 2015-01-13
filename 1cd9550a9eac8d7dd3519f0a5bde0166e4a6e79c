@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee48d53_7097de1f",
+        "filename": "user/test/com/google/gwt/user/client/ui/HistoryTestNoopTokenEncoder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-13T05:48:09Z",
+      "side": 1,
+      "message": "you already only run with not encoded tokens in Firefox so I don\u0027t understand why this is skipped.",
+      "revId": "1cd9550a9eac8d7dd3519f0a5bde0166e4a6e79c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

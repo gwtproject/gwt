@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e75fd75_de1179c1",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-13T19:35:30Z",
+      "side": 1,
+      "message": "Why only on permId \u003d\u003d 0?\n\nAlso there are more entry points to the compiler, the one eventually called depends on the options to blaze.",
+      "revId": "538501feb8651e6ef8b0ec49f5b526ff423dd162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

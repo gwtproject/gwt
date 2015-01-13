@@ -34,6 +34,24 @@
       "revId": "538501feb8651e6ef8b0ec49f5b526ff423dd162",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e75fd75_0953b930",
+        "filename": "dev/core/src/com/google/gwt/dev/CompilePerms.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-13T19:56:45Z",
+      "side": 1,
+      "message": "look at the scripts compile_monolithic.sh, etc.\n\nI feel this hack should not be in the compiler code, maybe it should be in the scripts?",
+      "parentUuid": "ce800d7c_24c7bc55",
+      "revId": "538501feb8651e6ef8b0ec49f5b526ff423dd162",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

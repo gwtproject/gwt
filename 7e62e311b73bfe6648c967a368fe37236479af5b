@@ -16,6 +16,23 @@
       "revId": "7e62e311b73bfe6648c967a368fe37236479af5b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e47e93f_350c525f",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-13T23:50:46Z",
+      "side": 1,
+      "message": "nit: just call writtenAtDefs.add and if return true, then you can println.",
+      "revId": "7e62e311b73bfe6648c967a368fe37236479af5b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

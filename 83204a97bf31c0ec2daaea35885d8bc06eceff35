@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e47e93f_b57122cf",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-13T23:52:33Z",
+      "side": 1,
+      "message": "you don\u0027t need this line.",
+      "revId": "83204a97bf31c0ec2daaea35885d8bc06eceff35",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

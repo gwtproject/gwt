@@ -368,7 +368,11 @@ public class CompilePerms {
 
     logger = logger.branch(TreeLogger.INFO, "Compiling " + perms.length
         + " permutation" + (perms.length > 1 ? "s" : ""));
+    boolean emit = false;
     for (int permId : perms) {
+      if (permId == 0) {
+        emit = true;
+      }
       /*
        * TODO(spoon,scottb): move Precompile out of the loop to run only once
        * per shard. Then figure out a way to avoid copying the generated
@@ -396,6 +400,10 @@ public class CompilePerms {
       Link.linkOnePermutationToJar(logger, compilerContext.getModule(),
           compilerContext.getPublicResourceOracle(), precompilation.getGeneratedArtifacts(),
           permResult, makePermFilename(compilerWorkDir, permId), compilerContext.getOptions());
+    }
+
+    if (emit) {
+      Compiler.maybeEmitAtDefs();
     }
 
     logger.log(TreeLogger.INFO, "Compile of permutations succeeded");

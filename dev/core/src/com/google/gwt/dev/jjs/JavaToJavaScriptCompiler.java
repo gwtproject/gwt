@@ -39,7 +39,6 @@ import com.google.gwt.dev.Permutation;
 import com.google.gwt.dev.PrecompileTaskOptions;
 import com.google.gwt.dev.cfg.ConfigProps;
 import com.google.gwt.dev.cfg.EntryMethodHolderGenerator;
-import com.google.gwt.dev.cfg.LibraryGroup.CollidingCompilationUnitException;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.PermProps;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
@@ -91,7 +90,6 @@ import com.google.gwt.dev.jjs.impl.ResolveRebinds;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeMapper;
 import com.google.gwt.dev.jjs.impl.SameParameterValueOptimizer;
 import com.google.gwt.dev.jjs.impl.SourceInfoCorrelator;
-import com.google.gwt.dev.jjs.impl.TypeRefDepsChecker;
 import com.google.gwt.dev.jjs.impl.TypeReferencesRecorder;
 import com.google.gwt.dev.jjs.impl.TypeTightener;
 import com.google.gwt.dev.jjs.impl.UnifyAst;
@@ -251,9 +249,7 @@ public abstract class JavaToJavaScriptCompiler {
             new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
 
         // TODO(stalcup): hide metrics gathering in a callback or subclass
-        if (compilerContext.shouldCompileMonolithic() && logger.isLoggable(TreeLogger.INFO)) {
-          logger.log(TreeLogger.INFO, "Compiling permutation " + permutationId + "...");
-        }
+        logger.log(TreeLogger.INFO, "Compiling permutation " + permutationId + "...");
         printPermutationTrace(permutation);
 
         // (2) Transform unresolved Java AST to resolved Java AST
@@ -963,8 +959,6 @@ public abstract class JavaToJavaScriptCompiler {
 
         // TODO(stalcup): hide metrics gathering in a callback or subclass
         JsniRestrictionChecker.exec(logger, jprogram);
-        TypeRefDepsChecker.exec(logger, jprogram, module, options.warnMissingDeps(),
-            options.getMissingDepsFile());
         logTypeOracleMetrics(precompilationMetrics, compilationState);
         Memory.maybeDumpMemory("AstOnly");
         AstDumper.maybeDumpAST(jprogram);
@@ -1289,13 +1283,7 @@ public abstract class JavaToJavaScriptCompiler {
 
       Event event = SpeedTracerLogger.start(CompilerEventType.UNIFY_AST);
 
-      UnifyAst unifyAst;
-      try {
-        unifyAst = new UnifyAst(logger, compilerContext, jprogram, jsProgram, rpo);
-      } catch (CollidingCompilationUnitException e) {
-        logger.log(TreeLogger.ERROR, e.getMessage());
-        throw new UnableToCompleteException();
-      }
+      UnifyAst unifyAst = new UnifyAst(logger, compilerContext, jprogram, jsProgram, rpo);
       // Makes JProgram aware of these types so they can be accessed via index.
       unifyAst.addRootTypes(allRootTypes);
       // Must synthesize entryPoint.onModuleLoad() calls because some EntryPoint classes are

@@ -500,7 +500,6 @@ public class ModuleDefSchema extends Schema {
     @SuppressWarnings("unused") // called reflectively
     protected Schema __inherits_begin(String name)
         throws UnableToCompleteException {
-      moduleDef.addDirectDependency(moduleName, name);
       loader.nestedLoad(logger, name, moduleDef);
       return null;
     }

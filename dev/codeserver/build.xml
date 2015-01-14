@@ -10,6 +10,7 @@
     <gwt.javac srcdir="java">
       <classpath>
         <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${gwt.tools.lib}/json/android-sdk-19.1/json-android.jar"/>
       </classpath>
     </gwt.javac>
   </target>

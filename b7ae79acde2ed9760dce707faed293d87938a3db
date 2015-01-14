@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ce800d7c_27a97eed",
+        "filename": "dev/build.xml",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2015-01-14T21:43:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae2cb97b_9c761575",
+      "range": {
+        "startLine": 83,
+        "startChar": 25,
+        "endLine": 83,
+        "endChar": 65
+      },
+      "revId": "b7ae79acde2ed9760dce707faed293d87938a3db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae2cb97b_dc808dd8",
         "filename": "dev/build.xml",
         "patchSetId": 15
@@ -107,6 +131,30 @@
       "writtenOn": "2015-01-14T21:41:04Z",
       "side": 1,
       "message": "Bad rebase here too.",
+      "range": {
+        "startLine": 133,
+        "startChar": 10,
+        "endLine": 134,
+        "endChar": 84
+      },
+      "revId": "b7ae79acde2ed9760dce707faed293d87938a3db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce800d7c_47a6821c",
+        "filename": "dev/build.xml",
+        "patchSetId": 15
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2015-01-14T21:43:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce800d7c_c799b2e3",
       "range": {
         "startLine": 133,
         "startChar": 10,

@@ -256,7 +256,7 @@ public class JTypeOracle implements Serializable {
   }
 
   public boolean isExportedField(JField field) {
-    return isJsInteropEnabled() && field.getExportName() != null;
+    return isJsInteropEnabled() && field.getExportName() != null && !field.isNoExport();
   }
 
   public boolean isExportedMethod(JMethod method) {

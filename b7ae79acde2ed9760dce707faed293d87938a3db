@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae2cb97b_9c761575",
+        "filename": "dev/build.xml",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2015-01-14T21:21:08Z",
+      "side": 1,
+      "message": "Looks like these snuck in? I assume given line 70/71 that they aren\u0027t needed.",
+      "range": {
+        "startLine": 83,
+        "startChar": 25,
+        "endLine": 83,
+        "endChar": 65
+      },
+      "revId": "b7ae79acde2ed9760dce707faed293d87938a3db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae2cb97b_dc808dd8",
+        "filename": "dev/build.xml",
+        "patchSetId": 15
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2015-01-14T21:21:08Z",
+      "side": 1,
+      "message": "I don\u0027t suppose htmlunit is planning a release soon? I guess I\u0027m not sure if depending on a snapshot version matters or not.",
+      "range": {
+        "startLine": 103,
+        "startChar": 34,
+        "endLine": 103,
+        "endChar": 56
+      },
+      "revId": "b7ae79acde2ed9760dce707faed293d87938a3db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae2cb97b_1c6b058f",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2015-01-14T21:21:08Z",
+      "side": 1,
+      "message": "Are these changes related to the Jetty change? Maybe put them in a different patch?",
+      "range": {
+        "startLine": 200,
+        "startChar": 15,
+        "endLine": 200,
+        "endChar": 39
+      },
+      "revId": "b7ae79acde2ed9760dce707faed293d87938a3db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -561,14 +561,10 @@ public class MethodInliner {
     while (true) {
       InliningVisitor inliner = new InliningVisitor(optimizerCtx);
 
-      // TODO(leafwang): generalize this part to avoid explicitly implementing this loop in each
-      // Visitor.
       Set<JMethod> modifiedMethods =
           optimizerCtx.getModifiedMethodsSince(optimizerCtx.getLastStepFor(NAME));
       Set<JMethod> affectedMethods = affectedMethods(modifiedMethods, optimizerCtx);
-      for (JMethod method : affectedMethods) {
-        inliner.accept(method);
-      }
+      optimizerCtx.traverseAffectedNodes(inliner, null, affectedMethods);
 
       stats.recordModified(inliner.getNumMods());
       optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());

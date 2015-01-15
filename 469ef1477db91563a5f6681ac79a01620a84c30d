@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb88ffe4_95d79406",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-01-15T22:12:07Z",
+      "side": 0,
+      "message": "Why do you think these checks are wrong? If you remove this code, you will break any @JsType that currently uses this to avoid method overloading. There are lots of codes of two methods named foo() with different arguments, and one of them is @JsNoExport. \n\nAs this is, I think removing these will break Inbox.",
+      "revId": "469ef1477db91563a5f6681ac79a01620a84c30d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

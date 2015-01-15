@@ -33,6 +33,40 @@
       "revId": "3d778ab37a342c4239cfcccf01cf4b4c88bb237e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb88ffe4_010b4a48",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-15T19:04:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we check the same for JsNoExport (only static ctors and static fields?)",
+      "revId": "3d778ab37a342c4239cfcccf01cf4b4c88bb237e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb88ffe4_8148ba8f",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-15T19:04:09Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "3d778ab37a342c4239cfcccf01cf4b4c88bb237e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

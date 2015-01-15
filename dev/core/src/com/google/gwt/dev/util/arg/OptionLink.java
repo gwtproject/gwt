@@ -19,6 +19,7 @@ package com.google.gwt.dev.util.arg;
  *
  * Normally the separate compiler does not link and instead outputs just a precompiled library.
  */
+@Deprecated
 public interface OptionLink {
 
   /**

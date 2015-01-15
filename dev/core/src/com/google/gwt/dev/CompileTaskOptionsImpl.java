@@ -29,11 +29,9 @@ import java.util.List;
 class CompileTaskOptionsImpl implements CompileTaskOptions {
 
   private Properties finalProperties;
-  private List<String> libraryPaths = new ArrayList<String>();
   private boolean link;
   private Type logLevel;
   private final List<String> moduleNames = new ArrayList<String>();
-  private String outputLibraryPath;
   private File workDir;
   private Mode jsInteropMode;
 
@@ -49,10 +47,7 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
     setLogLevel(other.getLogLevel());
     setModuleNames(other.getModuleNames());
     setWorkDir(other.getWorkDir());
-    setLibraryPaths(other.getLibraryPaths());
-    setOutputLibraryPath(other.getOutputLibraryPath());
     setFinalProperties(other.getFinalProperties());
-    setLink(other.shouldLink());
   }
 
   public File getCompilerWorkDir(String moduleName) {
@@ -69,8 +64,9 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
   }
 
   @Override
+  @Deprecated
   public List<String> getLibraryPaths() {
-    return libraryPaths;
+    return null;
   }
 
   @Override
@@ -84,8 +80,9 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
   }
 
   @Override
+  @Deprecated
   public String getOutputLibraryPath() {
-    return outputLibraryPath;
+    return null;
   }
 
   @Override
@@ -103,14 +100,13 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
   }
 
   @Override
+  @Deprecated
   public void setLibraryPaths(List<String> libraryPaths) {
-    this.libraryPaths.clear();
-    this.libraryPaths.addAll(libraryPaths);
   }
 
   @Override
+  @Deprecated
   public void setLink(boolean link) {
-    this.link = link;
   }
 
   @Override
@@ -125,8 +121,8 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
   }
 
   @Override
+  @Deprecated
   public void setOutputLibraryPath(String outputLibraryPath) {
-    this.outputLibraryPath = outputLibraryPath;
   }
 
   @Override
@@ -135,6 +131,7 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
   }
 
   @Override
+  @Deprecated
   public boolean shouldLink() {
     return link;
   }

@@ -16,6 +16,24 @@
       "revId": "469ef1477db91563a5f6681ac79a01620a84c30d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb88ffe4_1556249f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-15T22:29:03Z",
+      "side": 0,
+      "message": "I called it wrong mostly because it is not part of the spec.\nExport doesn\u0027t conceptually apply to instance methods, it only applies to statics and constructors.\n\nAlso the very reason to have a method in a @JsType interface is to mark it as part of a javascript contract. So the method shouldn\u0027t be there in the first place. If the interface is used for dual purpose (both as JsType abstraction and some other abstraction), then it should probably be modeled differently; for example;\n\n interface MyJsInterface {\n   void methodA();\n   void methodB();\n }\n\n interface MyInterface extends MyJsInterface {\n   void methodC();\n }\n\nI hope it makes sense.",
+      "parentUuid": "cb88ffe4_95d79406",
+      "revId": "469ef1477db91563a5f6681ac79a01620a84c30d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

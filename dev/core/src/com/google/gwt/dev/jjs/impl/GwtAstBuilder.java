@@ -2474,7 +2474,7 @@ public class GwtAstBuilder {
           if (f.getExportName() != null) {
             continue;
           }
-          if (f.isStatic() || type instanceof JInterfaceType) {
+          if (f.isFinal() && f.isStatic()) {
             f.setExportName("");
           }
         }

@@ -73,9 +73,26 @@ public class JsTypeTest extends GWTTestCase {
           && $wnd.woo.StaticInitializerStaticField.STATIC;
   }-*/;
 
+  private native Object getExportedFieldOnInterface() /*-{
+    return $wnd && $wnd.woo && $wnd.woo.StaticInitializerStaticField
+        && $wnd.woo.StaticInitializerStaticField.InterfaceWithField
+        && $wnd.woo.StaticInitializerStaticField.InterfaceWithField.STATIC;
+  }-*/;
+
   private native Object getStaticInitializerStaticMethod() /*-{
       return $wnd && $wnd.woo && $wnd.woo.StaticInitializerStaticMethod
           && $wnd.woo.StaticInitializerStaticMethod.getInstance();
+  }-*/;
+
+  private native Object getNotExportedFields() /*-{
+    return $wnd.woo.StaticInitializerStaticField.NOT_EXPORTED_1
+        || $wnd.woo.StaticInitializerStaticField.NOT_EXPORTED_2
+        || $wnd.woo.StaticInitializerStaticField.NOT_EXPORTED_3;
+  }-*/;
+
+  private native Object getNotExportedMethods() /*-{
+    return $wnd.woo.StaticInitializerStaticMethod.notExported_1
+        || $wnd.woo.StaticInitializerStaticMethod.notExported_2;
   }-*/;
 
   private native Object getStaticInitializerVirtualMethod() /*-{
@@ -96,6 +113,7 @@ public class JsTypeTest extends GWTTestCase {
 
   public void testStaticInitializerStaticField() {
     assertNotNull(getStaticInitializerStaticField());
+    assertNotNull(getExportedFieldOnInterface());
   }
 
   public void testStaticInitializerStaticMethod() {
@@ -104,6 +122,11 @@ public class JsTypeTest extends GWTTestCase {
 
   public void testStaticInitializerVirtualMethod() {
     assertNotNull(getStaticInitializerVirtualMethod());
+  }
+
+  public void testNotExport() {
+    assertNull(getNotExportedMethods());
+    assertNull(getNotExportedFields());
   }
 
   public void testVirtualUpRefs() {

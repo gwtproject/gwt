@@ -137,12 +137,10 @@ public class JConstructor extends JMethod {
 
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
-    String before = traceBefore(visitor);
     if (visitor.visit(this, ctx)) {
       visitChildren(visitor);
     }
     visitor.endVisit(this, ctx);
-    traceAfter(visitor, before);
   }
 
   @Override

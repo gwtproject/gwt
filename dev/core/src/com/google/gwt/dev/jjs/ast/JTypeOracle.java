@@ -1156,11 +1156,11 @@ public class JTypeOracle implements Serializable {
       return false;
     }
 
-    if (!x.isNoExport() && isJsType(x.getEnclosingType())) {
+    if (isJsType(x.getEnclosingType())) {
       return true;
     }
     for (JMethod overriddenMethod : getOverriddenMethodsOf(x)) {
-      if (!overriddenMethod.isNoExport() && isJsType(overriddenMethod.getEnclosingType())) {
+      if (isJsType(overriddenMethod.getEnclosingType())) {
         return true;
       }
     }

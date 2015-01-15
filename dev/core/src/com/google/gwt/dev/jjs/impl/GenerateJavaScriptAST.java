@@ -569,8 +569,7 @@ public class GenerateJavaScriptAST {
             polyName = interfaceScope.declareName(mangleNameSpecialObfuscate(x));
             polyName.setObfuscatable(false);
             // if a JsType and we can set set the interface method to non-obfuscatable
-          } else if (!x.isNoExport() && typeOracle.isJsTypeMethod(x) &&
-              !typeOracle.needsJsInteropBridgeMethod(x)) {
+          } else if (typeOracle.isJsTypeMethod(x) && !typeOracle.needsJsInteropBridgeMethod(x)) {
               polyName = interfaceScope.declareName(name, name);
               polyName.setObfuscatable(false);
           } else {
@@ -2710,8 +2709,7 @@ public class GenerateJavaScriptAST {
           JsExpression rhs = getJsFunctionFor(method);
           JsName polyJsName = polymorphicNames.get(method);
           generateVTableAssignment(globalStmts, method, polyJsName, rhs);
-          if (!method.isNoExport()
-              && typeOracle.needsJsInteropBridgeMethod(method)) {
+          if (typeOracle.needsJsInteropBridgeMethod(method)) {
             JsName exportedName = polyJsName.getEnclosing().declareName(
                 method.getName(), method.getName());
             // _.exportedName = makeBridgeMethod(_.polyName)

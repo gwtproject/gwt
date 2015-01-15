@@ -21,6 +21,7 @@ import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -208,13 +209,6 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     NULL_METHOD.freezeParamTypes();
   }
 
-  private static void trace(String title, String code) {
-    System.out.println("---------------------------");
-    System.out.println(title + ":");
-    System.out.println("---------------------------");
-    System.out.println(code);
-  }
-
   protected transient String signature;
 
   /**
@@ -241,15 +235,11 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    * EXHAUSTIVE list, that is, if C overrides B overrides A, then C's overrides
    * list will contain both A and B.
    */
-  private List<JMethod> overriddenMethods = Collections.emptyList();
+  private Set<JMethod> overriddenMethods = Sets.newLinkedHashSet();
 
   private List<JParameter> params = Collections.emptyList();
   private JType returnType;
   private List<JClassType> thrownExceptions = Collections.emptyList();
-
-  private boolean trace = false;
-
-  private boolean traceFirst = true;
 
   /**
    * These are only supposed to be constructed by JProgram.
@@ -295,8 +285,8 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    * Add a method that this method overrides.
    */
   public void addOverriddenMethod(JMethod toAdd) {
-    assert canBePolymorphic();
-    overriddenMethods = Lists.add(overriddenMethods, toAdd);
+    assert canBePolymorphic() : this + " is not polymorphic";
+    overriddenMethods.add(toAdd);
   }
 
   /**
@@ -382,7 +372,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   /**
    * Returns the transitive closure of all the methods this method overrides.
    */
-  public List<JMethod> getOverriddenMethods() {
+  public Set<JMethod> getOverriddenMethods() {
     return overriddenMethods;
   }
 
@@ -492,10 +482,6 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     return isSynthetic;
   }
 
-  public boolean isTrace() {
-    return trace;
-  }
-
   /**
    * Returns <code>true</code> if this method can participate in instance
    * dispatch.
@@ -553,30 +539,10 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     }
     originalReturnType = returnType;
     originalParamTypes = Lists.normalize(paramTypes);
-
-    // Determine if we should trace this method.
-    if (enclosingType != null) {
-      String jsniSignature = getJsniSignature(false, true);
-      trace = shouldTraceMethod(enclosingType.getShortName(), jsniSignature) ||
-          shouldTraceMethod(enclosingType.getName(), jsniSignature);
-    }
-  }
-
-  private boolean shouldTraceMethod(String className, String jsniSignature) {
-    Set<String> set = JProgram.traceMethods.get(className);
-    if (set == null) {
-      return false;
-    }
-
-    return set.contains(name) || set.contains(jsniSignature) || set.contains(TRACE_METHOD_WILDCARD);
   }
 
   public void setSynthetic() {
     isSynthetic = true;
-  }
-
-  public void setTrace() {
-    this.trace = true;
   }
 
   public void setType(JType newType) {
@@ -585,35 +551,15 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
-    String before = null;
-    before = traceBefore(visitor);
     if (visitor.visit(this, ctx)) {
       visitChildren(visitor);
     }
     visitor.endVisit(this, ctx);
-    traceAfter(visitor, before);
   }
 
-  protected void traceAfter(JVisitor visitor, String before) {
-    if (trace && visitor instanceof JModVisitor) {
-      String after = this.toSource();
-      if (!after.equals(before)) {
-        String title = visitor.getClass().getSimpleName();
-        trace(title, after);
-      }
-    }
-  }
-
-  protected String traceBefore(JVisitor visitor) {
-    if (trace && visitor instanceof JModVisitor) {
-      String source = this.toSource();
-      if (traceFirst) {
-        traceFirst = false;
-        trace("JAVA INITIAL", source);
-      }
-      return source;
-    }
-    return null;
+  @Override
+  public String toString() {
+    return getEnclosingType().getName() + "." + getSignature();
   }
 
   protected void visitChildren(JVisitor visitor) {

@@ -1262,10 +1262,6 @@ public class GenerateJavaScriptAST {
         jsFunc.getBody().getStatements().add(0, jsInvocation.makeStmt());
       }
 
-      if (x.isTrace()) {
-        jsFunc.setTrace();
-      }
-
       if (!pendingLocals.isEmpty()) {
         jsFunc.getBody().getStatements().add(0, pendingLocals);
       }

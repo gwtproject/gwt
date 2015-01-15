@@ -22,6 +22,30 @@
       "revId": "580ff7d91f4092771b72310a410b224bb1ad5525",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb88ffe4_e103c67f",
+        "filename": "dev/core/src/com/google/gwt/dev/CompileTaskOptionsImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-01-15T18:46:06Z",
+      "side": 1,
+      "message": "yeah i should remove this field.\n\nas we discusssed offline, i\u0027ll replace the deprecated arg handlers with the official deprecated one and i\u0027ll go ahead and delete the unused option classes",
+      "parentUuid": "cb88ffe4_81051a0a",
+      "range": {
+        "startLine": 32,
+        "startChar": 18,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "580ff7d91f4092771b72310a410b224bb1ad5525",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

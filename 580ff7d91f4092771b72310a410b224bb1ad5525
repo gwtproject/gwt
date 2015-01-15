@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb88ffe4_81051a0a",
+        "filename": "dev/core/src/com/google/gwt/dev/CompileTaskOptionsImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-01-15T18:24:40Z",
+      "side": 1,
+      "message": "Why not remove this field, and also the OptionLink.java?",
+      "range": {
+        "startLine": 32,
+        "startChar": 18,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "580ff7d91f4092771b72310a410b224bb1ad5525",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

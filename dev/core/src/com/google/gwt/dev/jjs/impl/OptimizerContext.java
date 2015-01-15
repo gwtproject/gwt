@@ -15,6 +15,7 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JVisitor;
 
 import java.util.Collection;
 import java.util.Set;
@@ -109,6 +110,12 @@ public interface OptimizerContext {
     public Set<JMethod> getRemovedCalleeMethodsSince(int stepSince) {
       return null;
     }
+
+    @Override
+    public void traverseAffectedNodes(JVisitor visitor, Set<JField> affectedFields,
+        Set<JMethod> affectedMethods) {
+      throw new UnsupportedOperationException();
+    }
   };
 
   /**
@@ -200,4 +207,10 @@ public interface OptimizerContext {
    * Get the removed callee methods since a given step.
    */
   Set<JMethod> getRemovedCalleeMethodsSince(int stepSince);
+
+  /**
+   * Traverse the affected methods and fields.
+   */
+  void traverseAffectedNodes(JVisitor visitor, Set<JField> affectedFields,
+      Set<JMethod> affectedMethods);
 }

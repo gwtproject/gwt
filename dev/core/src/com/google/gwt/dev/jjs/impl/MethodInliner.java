@@ -500,6 +500,9 @@ public class MethodInliner {
       int paramIndex = methodCall.getTarget().getParams().indexOf(x.getParameter());
       assert paramIndex != -1;
 
+      if (paramIndex == -1) {
+        System.out.println("");
+      }
       // Replace with a cloned call argument.
       CloneExpressionVisitor cloner = new CloneExpressionVisitor();
       JExpression arg = methodCall.getArgs().get(paramIndex);
@@ -561,14 +564,10 @@ public class MethodInliner {
     while (true) {
       InliningVisitor inliner = new InliningVisitor(optimizerCtx);
 
-      // TODO(leafwang): generalize this part to avoid explicitly implementing this loop in each
-      // Visitor.
       Set<JMethod> modifiedMethods =
           optimizerCtx.getModifiedMethodsSince(optimizerCtx.getLastStepFor(NAME));
       Set<JMethod> affectedMethods = affectedMethods(modifiedMethods, optimizerCtx);
-      for (JMethod method : affectedMethods) {
-        inliner.accept(method);
-      }
+      optimizerCtx.traverseAffectedNodes(inliner, null, affectedMethods);
 
       stats.recordModified(inliner.getNumMods());
       optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());

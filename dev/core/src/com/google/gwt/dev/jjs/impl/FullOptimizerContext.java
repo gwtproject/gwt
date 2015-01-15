@@ -17,6 +17,7 @@ import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultiset;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Multiset;
@@ -211,6 +212,21 @@ public class FullOptimizerContext implements OptimizerContext {
       for (JMethod prunedMethod : prunedMethods) {
         deletedSubCallGraphs.get(i).removeCallerMethod(prunedMethod);
         deletedSubCallGraphs.get(i).removeCalleeMethod(prunedMethod);
+      }
+    }
+  }
+
+  @Override
+  public void traverseAffectedNodes(JVisitor visitor, Set<JField> affectedFields,
+      Set<JMethod> affectedMethods) {
+    if (affectedFields != null) {
+      for (JField field : affectedFields) {
+        visitor.accept(field);
+      }
+    }
+    if (affectedMethods != null) {
+      for (JMethod method : affectedMethods) {
+        visitor.accept(method);
       }
     }
   }

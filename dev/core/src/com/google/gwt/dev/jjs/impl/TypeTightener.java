@@ -914,12 +914,7 @@ public class TypeTightener {
           computeAffectedMethods(optimizerCtx, lastStep);
       Set<JField> affectedFields =
           computeAffectedFields(optimizerCtx, lastStep);
-      for (JField field : affectedFields) {
-        tightener.accept(field);
-      }
-      for (JMethod method : affectedMethods) {
-        tightener.accept(method);
-      }
+      optimizerCtx.traverseAffectedNodes(tightener, affectedFields, affectedMethods);
       stats.recordModified(tightener.getNumMods());
       lastStep = optimizerCtx.getOptimizationStep();
       optimizerCtx.incOptimizationStep();

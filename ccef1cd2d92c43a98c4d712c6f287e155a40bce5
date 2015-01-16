@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ba8bb5a_4733b097",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-16T19:36:52Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "ccef1cd2d92c43a98c4d712c6f287e155a40bce5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ba8bb5a_67382c71",
+        "filename": "user/src/com/google/gwt/user/client/rpc/impl/AbstractSerializationStream.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-16T19:36:52Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "ccef1cd2d92c43a98c4d712c6f287e155a40bce5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

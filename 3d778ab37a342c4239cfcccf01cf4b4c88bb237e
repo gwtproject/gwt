@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "2ba8bb5a_e465fa00",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-16T18:38:24Z",
+      "side": 1,
+      "message": "not yet, see https://gwt-review.googlesource.com/#/c/11182/",
+      "parentUuid": "cb88ffe4_010b4a48",
+      "revId": "3d778ab37a342c4239cfcccf01cf4b4c88bb237e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cb88ffe4_8148ba8f",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
         "patchSetId": 2
@@ -81,6 +99,24 @@
       "writtenOn": "2015-01-15T22:23:34Z",
       "side": 1,
       "message": "I haven\u0027t evaluated this in the debugger with JDT, but if a field is declared on an interface, it is \u0027static and final by default\u0027 according to the JLS.\n\n The question is, is this reflected in the JField class created from GwtAstBuilder? Hopefully it is, but I don\u0027t know. That\u0027s why the check for interface type was there previously.",
+      "revId": "3d778ab37a342c4239cfcccf01cf4b4c88bb237e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ba8bb5a_8430c605",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2477,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-16T18:38:24Z",
+      "side": 1,
+      "message": "Yes, it is included in the new test cases (See StaticInitializerStaticField.java)",
+      "parentUuid": "6b971303_3eea2932",
       "revId": "3d778ab37a342c4239cfcccf01cf4b4c88bb237e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

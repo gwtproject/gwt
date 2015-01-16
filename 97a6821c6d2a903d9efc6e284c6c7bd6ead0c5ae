@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "6b971303_72bea0d8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-01-16T19:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abdbcb04_bf49432e",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 3
+      },
+      "revId": "97a6821c6d2a903d9efc6e284c6c7bd6ead0c5ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "abdbcb04_df69a794",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
         "patchSetId": 2
@@ -59,6 +83,30 @@
       "writtenOn": "2015-01-16T17:28:52Z",
       "side": 1,
       "message": "Is affectedMethods ever called with modifiedMethods \u003d\u003d null?\n\nSince we control the callers we can guarantee that does not happen. This is called here with the result of getModifiedMethods which is already guaranteed not to be null.\n\nI think you can remove this block, it reads better and I doubt there is a measurable difference in performance.\n\nIn general I prefer documenting preconditions with assertions than adding defensive code.",
+      "range": {
+        "startLine": 518,
+        "startChar": 1,
+        "endLine": 520,
+        "endChar": 5
+      },
+      "revId": "97a6821c6d2a903d9efc6e284c6c7bd6ead0c5ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b971303_32eb3808",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-01-16T19:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abdbcb04_df69a794",
       "range": {
         "startLine": 518,
         "startChar": 1,

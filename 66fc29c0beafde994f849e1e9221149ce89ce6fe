@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abdbcb04_8482f666",
+        "filename": "user/src/com/google/gwt/resources/converter/Css2Gss.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-16T14:48:55Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "66fc29c0beafde994f849e1e9221149ce89ce6fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

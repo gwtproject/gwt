@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abdbcb04_3f323391",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-16T17:28:52Z",
+      "side": 1,
+      "message": "Conceptually Finalizer could work on a portion of the AST.\n\n1) Finalizing locals and parameters:\n  only changed method bodies affect the locals.\n\n2) Finalizing methods:\n  only methods where the set of overriding methods has changed need to be explored.\nand\n\n3) Finalizing fields.\n  only fields whose assignments have changed need to be considered.\n\nHowever the code is structured in a way that needs to look at the whole AST and it is still pretty fast so I don\u0027t think it is worth rewriting.",
+      "range": {
+        "startLine": 22,
+        "startChar": 53,
+        "endLine": 22,
+        "endChar": 62
+      },
+      "revId": "97a6821c6d2a903d9efc6e284c6c7bd6ead0c5ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "abdbcb04_bf49432e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-16T17:28:52Z",
+      "side": 1,
+      "message": "This could be a bit simpler, e.g.\n\n  public void traverseNodes(JVisitor visitor, Set\u003cJNode\u003e nodes) {\n    for (JNode node : nodes) {\n      visitor.accept(node);\n    }\n  }\n\n\nThen the callSites become\n\n  context.traverseNodes(visitor, affectedFieds)  \n  context.traverseNodes(visitor, affectedMethods)\n\nThere is no need to check for null then and you could add\n\n  assert nodes !\u003d null\n\nto document the precondition.",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 3
+      },
+      "revId": "97a6821c6d2a903d9efc6e284c6c7bd6ead0c5ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "abdbcb04_df69a794",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MakeCallsStatic.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-16T17:28:52Z",
+      "side": 1,
+      "message": "Is affectedMethods ever called with modifiedMethods \u003d\u003d null?\n\nSince we control the callers we can guarantee that does not happen. This is called here with the result of getModifiedMethods which is already guaranteed not to be null.\n\nI think you can remove this block, it reads better and I doubt there is a measurable difference in performance.\n\nIn general I prefer documenting preconditions with assertions than adding defensive code.",
+      "range": {
+        "startLine": 518,
+        "startChar": 1,
+        "endLine": 520,
+        "endChar": 5
+      },
+      "revId": "97a6821c6d2a903d9efc6e284c6c7bd6ead0c5ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

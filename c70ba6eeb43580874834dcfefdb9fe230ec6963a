@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ba5b782_23d78a56",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/FullOptimizerContext.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-16T20:13:29Z",
+      "side": 1,
+      "message": "Maybe we should move it to JVisitor and call it \n\npublic void accept(Iterable\u003c? extends JNode\u003e nodes) {\n  ...\n}\n\nOtherwise rename it here to just traverse()",
+      "range": {
+        "startLine": 221,
+        "startChar": 14,
+        "endLine": 221,
+        "endChar": 35
+      },
+      "revId": "c70ba6eeb43580874834dcfefdb9fe230ec6963a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

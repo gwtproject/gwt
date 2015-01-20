@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab202bdf_2be105a9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RedundantCastRemover.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-20T22:21:43Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "b87963c1aaebb8b05277f58709450900ce224e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

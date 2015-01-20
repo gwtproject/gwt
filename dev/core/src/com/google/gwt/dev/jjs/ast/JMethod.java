@@ -228,6 +228,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    * list will contain both A and B.
    */
   private Set<JMethod> overriddenMethods = Sets.newLinkedHashSet();
+  private Set<JMethod> overridingMethods = Sets.newLinkedHashSet();
 
   private List<JParameter> params = Collections.emptyList();
   private JType returnType;
@@ -279,11 +280,18 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   /**
    * Add a method that this method overrides.
    */
-  public void addOverriddenMethod(JMethod toAdd) {
+  public void addOverriddenMethod(JMethod overridenMethod) {
     assert canBePolymorphic() : this + " is not polymorphic";
-    overriddenMethods.add(toAdd);
+    overriddenMethods.add(overridenMethod);
   }
 
+  /**
+   * Add a method that overrides this method.
+   */
+  public void addOverridingMethod(JMethod overridingMethod) {
+    assert canBePolymorphic() : this + " is not polymorphic";
+    overridingMethods.add(overridingMethod);
+  }
   /**
    * Adds a parameter to this method.
    */
@@ -369,6 +377,14 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    */
   public Set<JMethod> getOverriddenMethods() {
     return overriddenMethods;
+  }
+
+  /**
+   * Returns the transitive closure of all the methods that override this method; caveat this
+   * list is only complete in monolithic compiles and should not be used in incremental compiles..
+   */
+  public Set<JMethod> getOverridingMethods() {
+    return overridingMethods;
   }
 
   /**

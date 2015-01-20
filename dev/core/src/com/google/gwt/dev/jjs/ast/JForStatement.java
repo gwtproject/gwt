@@ -71,6 +71,22 @@ public class JForStatement extends JStatement {
     return condition;
   }
 
+  public void setBody(JStatement body) {
+    this.body = body;
+  }
+
+  public void setIncrements(JExpression increments) {
+    this.increments = increments;
+  }
+
+  public void setInitializers(List<JStatement> initializers) {
+    this.initializers = initializers;
+  }
+
+  public void setCondition(JExpression condition) {
+    this.condition = condition;
+  }
+
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {

@@ -45,6 +45,18 @@ public class JIfStatement extends JStatement {
     return thenStmt;
   }
 
+  public void setElseStmt(JStatement elseStmt) {
+    this.elseStmt = elseStmt;
+  }
+
+  public void setIfExpr(JExpression ifExpr) {
+    this.ifExpr = ifExpr;
+  }
+
+  public void setThenStmt(JStatement thenStmt) {
+    this.thenStmt = thenStmt;
+  }
+
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {

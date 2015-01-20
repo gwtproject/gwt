@@ -86,6 +86,7 @@ import com.google.gwt.dev.jjs.impl.OptimizerContext;
 import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.jjs.impl.Pruner;
 import com.google.gwt.dev.jjs.impl.RecordRebinds;
+import com.google.gwt.dev.jjs.impl.RedundantCastRemover;
 import com.google.gwt.dev.jjs.impl.ResolveRebinds;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeMapper;
 import com.google.gwt.dev.jjs.impl.SameParameterValueOptimizer;
@@ -1450,6 +1451,9 @@ public abstract class JavaToJavaScriptCompiler {
       }
     }
 
+    if (options.getOptimizationLevel() > OptionOptimize.OPTIMIZE_LEVEL_DRAFT) {
+      allOptimizerStats.add(RedundantCastRemover.exec(jprogram));
+    }
     if (options.shouldOptimizeDataflow()) {
       // Just run it once, because it is very time consuming
       allOptimizerStats.add(DataflowOptimizer.exec(jprogram));

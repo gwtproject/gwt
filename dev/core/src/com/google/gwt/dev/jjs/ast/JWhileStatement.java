@@ -39,6 +39,14 @@ public class JWhileStatement extends JStatement {
     return testExpr;
   }
 
+  public void setBody(JStatement body) {
+    this.body = body;
+  }
+
+  public void setTestExpr(JExpression testExpr) {
+    this.testExpr = testExpr;
+  }
+
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
     if (visitor.visit(this, ctx)) {

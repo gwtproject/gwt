@@ -72,4 +72,16 @@ public class JConditional extends JExpression {
     visitor.endVisit(this, ctx);
   }
 
+  public void setIfTest(JExpression ifTest) {
+    this.ifTest = ifTest;
+  }
+
+  public void setThenExpr(JExpression thenExpr) {
+    this.thenExpr = thenExpr;
+  }
+
+  public void setElseExpr(JExpression elseExpr) {
+    this.elseExpr = elseExpr;
+  }
+
 }

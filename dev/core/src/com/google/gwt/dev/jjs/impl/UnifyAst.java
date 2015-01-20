@@ -24,7 +24,6 @@ import com.google.gwt.dev.javac.CompilationProblemReporter;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationUnit;
 import com.google.gwt.dev.javac.CompiledClass;
-import com.google.gwt.dev.javac.Shared;
 import com.google.gwt.dev.jdt.RebindPermutationOracle;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
@@ -843,7 +842,6 @@ public class UnifyAst {
     // child class method might not look like an override.
     computeOverrides();
 
-    // Post-stitching clean-ups.
     pruneDeadFieldsAndMethods();
     if (errorsFound) {
       // Already logged.
@@ -902,6 +900,8 @@ public class UnifyAst {
           // It is not safe to prune dead methods from the override list, as this list is
           // cached reused for linktime prunning in incremental.
           Iterables.removeIf(method.getOverriddenMethods(),
+              Predicates.not(Predicates.in(liveFieldsAndMethods)));
+          Iterables.removeIf(method.getOverridingMethods(),
               Predicates.not(Predicates.in(liveFieldsAndMethods)));
         }
         if (!liveFieldsAndMethods.contains(method)) {
@@ -986,19 +986,6 @@ public class UnifyAst {
     return false;
   }
 
-  private boolean canAccessSuperMethod(JDeclaredType type, JMethod method) {
-    if (method.isPrivate()) {
-      return false;
-    }
-    if (method.isDefault()) {
-      // Check package access.
-      String typePackage = Shared.getPackageName(type.getName());
-      String methodPackage = Shared.getPackageName(method.getEnclosingType().getName());
-      return typePackage.equals(methodPackage);
-    }
-    return true;
-  }
-
   /**
    * Ensure that if any preamble types have become stale then adequate steps are taken to ensure the
    * recreation of the entire preamble chunk.
@@ -1018,47 +1005,170 @@ public class UnifyAst {
     }
   }
 
-  private void collectUpRefs(JDeclaredType type, Map<String, Set<JMethod>> collected) {
-    if (type == null) {
-      return;
+
+ private void computeAllImplementedInterfaces(
+      JDeclaredType type,  Map<JType, Set<JInterfaceType>> interfacesByType) {
+    if (type == null || interfacesByType.containsKey(type)) {
+       return;
+     }
+
+    JClassType superClass = type.getSuperClass();
+    computeAllImplementedInterfaces(superClass, interfacesByType);
+    for (JInterfaceType interfaceType : type.getImplements()) {
+      computeAllImplementedInterfaces(interfaceType, interfacesByType);
     }
-    for (JMethod method : type.getMethods()) {
-      if (method.canBePolymorphic()) {
-        Set<JMethod> set = collected.get(method.getSignature());
-        if (set != null) {
-          set.add(method);
-        }
+
+    Set<JInterfaceType> implementedInterfaces = Sets.newLinkedHashSet();
+
+    if (superClass != null) {
+      Set<JInterfaceType> superInterfaces = interfacesByType.get(superClass);
+      for (JInterfaceType interfaceType : superInterfaces) {
+        implementedInterfaces.add(interfaceType);
       }
     }
-    collectUpRefsInSupers(type, collected);
-  }
 
-  private void collectUpRefsInSupers(JDeclaredType type, Map<String, Set<JMethod>> collected) {
-    collectUpRefs(type.getSuperClass(), collected);
-    for (JInterfaceType intfType : type.getImplements()) {
-      collectUpRefs(intfType, collected);
+    for (JInterfaceType interfaceType : type.getImplements()) {
+      implementedInterfaces.add(interfaceType);
+      for (JInterfaceType transitiveInterface : interfacesByType.get(interfaceType)) {
+        implementedInterfaces.add(transitiveInterface);
+      }
     }
+
+    interfacesByType.put(type, implementedInterfaces);
   }
 
   /**
-   * Compute all overrides.
+   * Compute all overrides for classes.
+   * <p>
+   * Every method that is dispatchable at type {@code type} will be recorded in
+   * {@code polymorphicMethodsBySignatureByType}. Package private method will have the package
+   * prepended to the signature.
    */
-  private void computeOverrides() {
+  private void computeOverridesForClasses(
+      JClassType type, Map<JType, Map<String, JMethod>> polymorphicMethodsBySignatureByType) {
+    if (type == null || polymorphicMethodsBySignatureByType.containsKey(type)) {
+      return;
+    }
+
+    // Compute overrides of all superclasses recursively.
+    JClassType superClass = type.getSuperClass();
+    computeOverridesForClasses(superClass, polymorphicMethodsBySignatureByType);
+
+    // collect all polymorphic methods at this type by signature.
+    Map<String, JMethod> polymorphicMethodsBySignature = Maps.newLinkedHashMap();
+     for (JMethod method : type.getMethods()) {
+      String dispatchSignature = getDispatchSignature(method);
+      if (dispatchSignature != null) {
+        polymorphicMethodsBySignature.put(dispatchSignature, method);
+      }
+    }
+
+    polymorphicMethodsBySignatureByType.put(type, polymorphicMethodsBySignature);
+
+    if (superClass == null) {
+      return;
+    }
+
+    // Look at super methods and mark as override if present, otherwise add them.
+    Map<String, JMethod> superPolymorphicMethodsByDispatchSignature =
+        polymorphicMethodsBySignatureByType.get(superClass);
+    for (String methodDispatchSignature : superPolymorphicMethodsByDispatchSignature.keySet()) {
+      JMethod overriddenMethod =
+          superPolymorphicMethodsByDispatchSignature.get(methodDispatchSignature);
+      JMethod overridingMethod = polymorphicMethodsBySignature.get(methodDispatchSignature);
+      if (overridingMethod == null &&
+          overriddenMethod.isDefault() &&
+          type.getPackageName().equals(overriddenMethod.getEnclosingType().getPackageName())) {
+        // public method overriding package private method
+        overridingMethod = polymorphicMethodsBySignature.get(overriddenMethod.getSignature());
+      }
+
+      if (overridingMethod == null) {
+        if (!polymorphicMethodsBySignature.containsKey(overriddenMethod.getSignature())) {
+          // If there is no override and the method is not hidden add it.
+          polymorphicMethodsBySignature.put(methodDispatchSignature, overriddenMethod);
+         }
+        continue;
+       }
+
+      // This is an override.
+      addOverride(overriddenMethod, overridingMethod);
+     }
+   }
+
+  private void addOverride(JMethod overriddenMethod, JMethod overridingMethod) {
+    overridingMethod.addOverriddenMethod(overriddenMethod);
+    overriddenMethod.addOverridingMethod(overridingMethod);
+    for (JMethod transitivelyOverriddenMethod : overriddenMethod.getOverriddenMethods()) {
+      overridingMethod.addOverriddenMethod(transitivelyOverriddenMethod);
+      transitivelyOverriddenMethod.addOverridingMethod(overridingMethod);
+     }
+   }
+
+  private String getDispatchSignature(JMethod method) {
+    if (!method.canBePolymorphic()) {
+      return null;
+    }
+    if (method.isDefault()) {
+      String packageName = method.getEnclosingType().getPackageName();
+      return StringInterner.get().intern(packageName + "." + method.getSignature());
+    }
+    return method.getSignature();
+  }
+   /**
+    * Compute all overrides.
+    */
+   private void computeOverrides() {
+    Map<JType, Map<String, JMethod>> polymorphicMethodsBySignatureByType = Maps.newLinkedHashMap();
+    Map<JType, Set<JInterfaceType>> interfacesByType = Maps.newLinkedHashMap();
+     for (JDeclaredType type : program.getDeclaredTypes()) {
+      computeAllImplementedInterfaces(type, interfacesByType);
+
+      if (!(type instanceof JClassType)) {
+        continue;
+       }
+      computeOverridesForClasses((JClassType) type, polymorphicMethodsBySignatureByType);
+    }
+
+    // Compute overrides involving interfaces.
     for (JDeclaredType type : program.getDeclaredTypes()) {
-      Map<String, Set<JMethod>> collected = Maps.newHashMap();
+      computeOverridesInvolvingInterfaces(
+          type, interfacesByType, polymorphicMethodsBySignatureByType);
+    }
+   }
+
+  private void computeOverridesInvolvingInterfaces(JDeclaredType type,
+      Map<JType, Set<JInterfaceType>> interfacesByType,
+      Map<JType, Map<String, JMethod>> polymorphicMethodsBySignatureByType) {
+
+    if (type == null) {
+      return;
+    }
+
+    if (!polymorphicMethodsBySignatureByType.containsKey(type)) {
+      assert type instanceof JInterfaceType;
+      Map<String, JMethod> methodsBySignature = Maps.newLinkedHashMap();
       for (JMethod method : type.getMethods()) {
         if (method.canBePolymorphic()) {
-          collected.put(method.getSignature(), Sets.<JMethod>newLinkedHashSet());
+          methodsBySignature.put(method.getSignature(), method);
         }
       }
-      collectUpRefsInSupers(type, collected);
-      for (JMethod method : type.getMethods()) {
-        if (method.canBePolymorphic()) {
-          for (JMethod upref : collected.get(method.getSignature())) {
-            if (canAccessSuperMethod(type, upref)) {
-              method.addOverriddenMethod(upref);
-            }
-          }
+      polymorphicMethodsBySignatureByType.put(type, methodsBySignature);
+    }
+
+    computeOverridesInvolvingInterfaces(
+        type.getSuperClass(), interfacesByType, polymorphicMethodsBySignatureByType);
+    for (JInterfaceType interfaceType : type.getImplements()) {
+      computeOverridesInvolvingInterfaces(
+          interfaceType, interfacesByType, polymorphicMethodsBySignatureByType);
+    }
+
+    for (JInterfaceType interfaceType : interfacesByType.get(type)) {
+      for (JMethod overriddenMethod : interfaceType.getMethods()) {
+        JMethod overridingMethod =
+            polymorphicMethodsBySignatureByType.get(type).get(overriddenMethod.getSignature());
+        if (overriddenMethod.canBePolymorphic() && overridingMethod != null) {
+          addOverride(overriddenMethod, overridingMethod);
         }
       }
     }

@@ -1926,6 +1926,23 @@ public class GenerateJavaScriptAST {
       SortedSet<JDeclaredType> reachableClasses =
           computeReachableTypes(METHODS_PROVIDED_BY_PREAMBLE);
 
+//      SortedSet<JDeclaredType> reachableClasses = ImmutableSortedSet.of(
+//          program.getFromTypeMap("com.google.gwt.core.client.JavaScriptObject"),
+//          program.getFromTypeMap("com.google.gwt.lang.Cast"),
+//          program.getFromTypeMap("com.google.gwt.lang.ClassLiteralHolder"),
+//          program.getFromTypeMap("com.google.gwt.lang.JavaClassHierarchySetupUtil"),
+//          program.getFromTypeMap("com.google.gwt.lang.Util"),
+//          program.getFromTypeMap("java.io.Serializable"),
+//          program.getFromTypeMap("java.lang.CharSequence"),
+//          program.getFromTypeMap("java.lang.Class"),
+//          program.getFromTypeMap("java.lang.Comparable"),
+//          program.getFromTypeMap("java.lang.Object"),
+//          program.getFromTypeMap("java.lang.String"),
+//          program.getFromTypeMap("java.lang.String$1"),
+//          program.getFromTypeMap("java.lang.reflect.Type"),
+//          program.getFromTypeMap("java.util.Comparator")
+//      )
+
       assert !compilePerFile || checkCoreModulePreambleComplete(program,
           program.getTypeClassLiteralHolder().getClinitMethod());
 

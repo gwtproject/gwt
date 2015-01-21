@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bc27b57_d4b1dc51",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/RedundantCastRemoverTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-21T17:52:56Z",
+      "side": 1,
+      "message": "Nice tests !",
+      "revId": "52f77cf573c3fe7396566691725fd750621cf923",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b70bb17_edd27ddf",
+        "filename": "dev/core/test/com/google/gwt/dev/MinimalRebuildCacheTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-22T04:25:25Z",
+      "side": 1,
+      "message": "Add return type to signature",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 66
+      },
+      "revId": "9386a5324dbd203489ec1e702b6447f1b9573fb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b70bb17_adc88533",
+        "filename": "dev/core/test/com/google/gwt/dev/MinimalRebuildCacheTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-22T04:25:25Z",
+      "side": 1,
+      "message": "Add return type to signature",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 66
+      },
+      "revId": "9386a5324dbd203489ec1e702b6447f1b9573fb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b70bb17_4dc2b118",
+        "filename": "dev/core/test/com/google/gwt/dev/MinimalRebuildCacheTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-22T04:25:25Z",
+      "side": 1,
+      "message": "Is this passing?\n\nShouldn\u0027t all method references be with the return signature?",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 77
+      },
+      "revId": "9386a5324dbd203489ec1e702b6447f1b9573fb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b70bb17_8dcbc92f",
+        "filename": "dev/core/test/com/google/gwt/dev/MinimalRebuildCacheTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-22T04:25:25Z",
+      "side": 1,
+      "message": "Here too",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 89,
+        "endChar": 80
+      },
+      "revId": "9386a5324dbd203489ec1e702b6447f1b9573fb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

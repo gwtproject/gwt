@@ -76,9 +76,9 @@ public class MinimalRebuildCacheManagerTest extends TestCase {
     startingCache.recordDiskSourceResources(laterModifiedBySourcePath);
     startingCache.setRootTypeNames(Sets.newHashSet("Foo", "Bar", "Baz"));
     StringAnalyzableTypeEnvironment typeEnvironment = startingCache.getTypeEnvironment();
-    typeEnvironment.recordTypeEnclosesMethod("Foo", "Foo::$clinit()");
-    typeEnvironment.recordTypeEnclosesMethod("Bar", "Bar::$clinit()");
-    typeEnvironment.recordTypeEnclosesMethod("Baz", "Baz::$clinit()");
+    typeEnvironment.recordTypeEnclosesMethod("Foo", "Foo::$clinit()V");
+    typeEnvironment.recordTypeEnclosesMethod("Bar", "Bar::$clinit()V");
+    typeEnvironment.recordTypeEnclosesMethod("Baz", "Baz::$clinit()V");
     typeEnvironment.recordMethodInstantiatesType("Foo::start()", "Bar");
     typeEnvironment.recordMethodCallsMethod("Foo::start()", "Bar::run()");
     typeEnvironment.recordMethodInstantiatesType("Bar::start()", "Baz");

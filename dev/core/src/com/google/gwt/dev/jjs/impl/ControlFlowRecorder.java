@@ -46,7 +46,7 @@ public class ControlFlowRecorder extends JVisitor {
   }
 
   private static String computeName(JMethod method) {
-    return method.getJsniSignature(true, false);
+    return method.getJsniSignature(true, true);
   }
 
   private final Set<String> bannedMethodNames = Sets.newHashSet();
@@ -163,7 +163,7 @@ public class ControlFlowRecorder extends JVisitor {
   }
 
   private void maybeRecordClinitCall(String typeName) {
-    String typeClinitMethod = typeName + "::$clinit()";
+    String typeClinitMethod = typeName + "::$clinit()V";
     if (!typeClinitMethod.equals(currentMethodName)) {
       stringAnalyzableTypeEnvironment.recordMethodCallsMethod(currentMethodName, typeClinitMethod);
     }

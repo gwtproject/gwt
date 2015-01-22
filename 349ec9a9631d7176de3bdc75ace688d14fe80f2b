@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb97835c_e8c22768",
+        "filename": "dev/core/test/com/google/gwt/dev/MinimalRebuildCacheManagerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-22T00:07:35Z",
+      "side": 1,
+      "message": "Update signatures.",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 72
+      },
+      "revId": "349ec9a9631d7176de3bdc75ace688d14fe80f2b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

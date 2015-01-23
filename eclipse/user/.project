@@ -16,7 +16,7 @@
 			</arguments>
 		</buildCommand>
 	</buildSpec>
-	<natures>
+	</natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
 	</natures>

@@ -21,11 +21,11 @@
 		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
 	</natures>
 	<linkedResources>
-		<link>
-			<name>user</name>
-			<type>2</type>
-			<location>GWT_ROOT/user</location>
-		</link>
+                <link>
+                        <name>user</name>
+                        <type>2</type>
+                        <location>GWT_ROOT/user</location>
+                </link>
 		<link>
 			<name>dev</name>
 			<type>2</type>

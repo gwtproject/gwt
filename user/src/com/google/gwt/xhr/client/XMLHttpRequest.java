@@ -290,7 +290,7 @@ public class XMLHttpRequest extends JavaScriptObject {
    * no-argument <code>send()</code> method is unavailable on Firefox.
    */
   public final void send() {
-    send(null);
+    send((String)null);
   }
 
   /**
@@ -302,6 +302,18 @@ public class XMLHttpRequest extends JavaScriptObject {
    * @param requestData the data to be sent with the request
    */
   public final native void send(String requestData) /*-{
+    this.send(requestData);
+  }-*/;
+  
+  /**
+   * Initiates a request with data.  If there is no data, specify null.
+   * <p>
+   * See <a href="http://www.w3.org/TR/XMLHttpRequest/#the-send()-method"
+   * >http://www.w3.org/TR/XMLHttpRequest/#the-send()-method</a>.
+   * 
+   * @param requestData the data to be sent with the request
+   */
+  public final native void send(JavaScriptObject requestData) /*-{
     this.send(requestData);
   }-*/;
 

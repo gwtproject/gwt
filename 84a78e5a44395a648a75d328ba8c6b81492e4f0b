@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b1c731f_363d58ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-23T23:09:03Z",
+      "side": 1,
+      "message": "please add \n\nbug: issue 6874",
+      "revId": "84a78e5a44395a648a75d328ba8c6b81492e4f0b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b1c731f_7637d0cd",
+        "filename": "eclipse/doc/.project",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-23T23:09:03Z",
+      "side": 1,
+      "message": "Please revert this",
+      "revId": "84a78e5a44395a648a75d328ba8c6b81492e4f0b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b1c731f_563454c7",
+        "filename": "eclipse/lang/.project",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-23T23:09:03Z",
+      "side": 1,
+      "message": "Please revert this change",
+      "revId": "84a78e5a44395a648a75d328ba8c6b81492e4f0b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b1c731f_b6d16815",
+        "filename": "eclipse/servlet/.project",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-23T23:09:03Z",
+      "side": 1,
+      "message": "please revert this change",
+      "revId": "84a78e5a44395a648a75d328ba8c6b81492e4f0b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b1c731f_d6e064dc",
+        "filename": "eclipse/user/.project",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-23T23:09:03Z",
+      "side": 1,
+      "message": "Please revert",
+      "revId": "84a78e5a44395a648a75d328ba8c6b81492e4f0b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b1c731f_36c6f859",
+        "filename": "testing.gerrit.jonl.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-01-23T23:09:03Z",
+      "side": 1,
+      "message": "Remove this file from your changes set",
+      "revId": "84a78e5a44395a648a75d328ba8c6b81492e4f0b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b58bbe4_44efaec0",
+        "filename": "dev/core/src/com/google/gwt/dev/StringAnalyzableTypeEnvironment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-23T18:48:29Z",
+      "side": 1,
+      "message": "[error] \u0027while\u0027 is not followed by whitespace.",
+      "revId": "161698c42728e3ca6c02555b770a53b704fe6a6b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

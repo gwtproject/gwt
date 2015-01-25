@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bab5bf1_0cb5b7bd",
+        "filename": "user/src/com/google/gwt/dom/client/TableCellElement.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-01-25T16:15:06Z",
+      "side": 1,
+      "message": "nit: you could have also removed that line.",
+      "revId": "2a6f5414d61c6a308d17b147056257d3399ca334",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

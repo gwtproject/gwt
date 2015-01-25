@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bab5bf1_aca3c390",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-01-25T16:12:22Z",
+      "side": 1,
+      "message": "That\u0027s not true, the argument has to be one of ArrayBufferView, Blob, Document, DOMString or FormData.\n\nSee http://www.w3.org/TR/XMLHttpRequest/#interface-xmlhttprequest where it\u0027s made clearer.",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "8c6423366e966e9030b3c1ba70bce48945f7c332",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2bab5bf1_ecadcb7a",
+        "filename": "user/src/com/google/gwt/xhr/client/XMLHttpRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-01-25T16:12:22Z",
+      "side": 1,
+      "message": "Adding a send() overload is a breaking change, as demonstrated here; so should we rather add sendArrayBufferView(ArrayBufferView) and sendDocument(Document) methods?",
+      "revId": "8c6423366e966e9030b3c1ba70bce48945f7c332",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

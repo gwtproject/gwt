@@ -16,6 +16,92 @@
       "revId": "0cae9bbb7d0f0887262079b241bd2361c41f0967",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb69dfa3_1fdf6b93",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3449,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-27T07:38:18Z",
+      "side": 1,
+      "message": "buildCastOperation (or newCastOperation or createCastOperation) is probably a better name for these two functions.",
+      "range": {
+        "startLine": 3449,
+        "startChar": 27,
+        "endLine": 3449,
+        "endChar": 45
+      },
+      "revId": "0cae9bbb7d0f0887262079b241bd2361c41f0967",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb69dfa3_5fd9e3aa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3462,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-27T07:38:18Z",
+      "side": 1,
+      "message": "maybe intersectingTypeBinding here.",
+      "range": {
+        "startLine": 3462,
+        "startChar": 28,
+        "endLine": 3462,
+        "endChar": 44
+      },
+      "revId": "0cae9bbb7d0f0887262079b241bd2361c41f0967",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb69dfa3_7fd6a77d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3463,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-27T07:38:18Z",
+      "side": 1,
+      "message": "and intersectingType here.",
+      "range": {
+        "startLine": 3463,
+        "startChar": 14,
+        "endLine": 3463,
+        "endChar": 37
+      },
+      "revId": "0cae9bbb7d0f0887262079b241bd2361c41f0967",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb69dfa3_9f937bc3",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-27T07:38:18Z",
+      "side": 1,
+      "message": "We probably need also some integration tests. Interesting cases are those in which the AST does not correspond to a valid Java program like\n\n  I2 i2 \u003d (I1 \u0026 I2) i1i2expression;\n\nwhich gets translated into \n\n  I2 i2 \u003d (I1) (I2) i1i2expression;\n\nEven though this is not a valid Java program, it is probably still OK but we need to make sure our passes (like TypeTightener and ImplementCastsAndTypeChecks) treat this correctly.",
+      "revId": "0cae9bbb7d0f0887262079b241bd2361c41f0967",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

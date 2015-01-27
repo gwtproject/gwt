@@ -183,11 +183,6 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
-  public boolean isCastCheckingDisabled() {
-    return false;
-  }
-
-  @Override
   public boolean isClassMetadataDisabled() {
     return false;
   }

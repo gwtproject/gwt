@@ -102,14 +102,12 @@ public class MonolithicJavaToJavaScriptCompiler extends JavaToJavaScriptCompiler
           ComputeExhaustiveCastabilityInformation.exec(jprogram);
         } else {
           // If trivial casts are pruned then one can use smaller runtime castmaps.
-          ComputeCastabilityInformation.exec(jprogram, options.isCastCheckingDisabled(),
-              !shouldOptimize() /* recordTrivialCasts */);
+          ComputeCastabilityInformation.exec(jprogram, !shouldOptimize() /* recordTrivialCasts */);
         }
 
         ComputeInstantiatedJsoInterfaces.exec(jprogram);
-        ImplementCastsAndTypeChecks.exec(jprogram, options.isCastCheckingDisabled(),
-            shouldOptimize() /* pruneTrivialCasts */);
-        ArrayNormalizer.exec(jprogram, options.isCastCheckingDisabled());
+        ImplementCastsAndTypeChecks.exec(jprogram, shouldOptimize() /* pruneTrivialCasts */);
+        ArrayNormalizer.exec(jprogram);
         EqualityNormalizer.exec(jprogram);
 
         TypeMapper<?> typeMapper = getTypeMapper();

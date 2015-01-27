@@ -283,7 +283,7 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
     ComputeCastabilityInformation.exec(jProgram, false);
     ComputeInstantiatedJsoInterfaces.exec(jProgram);
     ImplementCastsAndTypeChecks.exec(jProgram, false);
-    ArrayNormalizer.exec(jProgram, false);
+    ArrayNormalizer.exec(jProgram);
 
     TypeMapper<String> typeMapper = new StringTypeMapper();
     ResolveRuntimeTypeReferences.exec(jProgram, typeMapper, TypeOrder.FREQUENCY);

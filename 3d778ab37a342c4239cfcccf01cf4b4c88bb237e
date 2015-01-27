@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "171ebf59_d7d77e46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-27T22:46:25Z",
+      "side": 1,
+      "message": "Done. Thanks for pointing it.",
+      "parentUuid": "4bc24f1f_7000eedf",
+      "revId": "3d778ab37a342c4239cfcccf01cf4b4c88bb237e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b0217f8_4f3f5d49",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2

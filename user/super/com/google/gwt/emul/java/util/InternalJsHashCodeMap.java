@@ -17,10 +17,12 @@ package java.util;
 
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
-
-import com.google.gwt.core.client.JavaScriptObject;
+import static java.util.ConcurrentModificationDetector.structureChanged;
 
 import java.util.AbstractMap.SimpleEntry;
+import java.util.ES6MapFactory.ES6Iterator;
+import java.util.ES6MapFactory.ES6IteratorEntry;
+import java.util.ES6MapFactory.ES6Map;
 import java.util.Map.Entry;
 
 /**
@@ -33,108 +35,52 @@ import java.util.Map.Entry;
  * have the same hash, each value in hashCodeMap is actually an array containing all entries whose
  * keys share the same hash.
  */
-class InternalJsHashCodeMap<K, V> {
+class InternalJsHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
 
-  static class InternalJsHashCodeMapLegacy<K, V> extends InternalJsHashCodeMap<K, V> {
+  private AbstractHashMap<K, V> host;
+  private final ES6Map<Object> backingMap;
+  private int size;
 
-    @Override
-    native JavaScriptObject createMap() /*-{
-      return {};
-    }-*/;
-
-    @Override
-    public native boolean containsValue(Object value) /*-{
-      var map = this.@InternalJsHashCodeMap::backingMap;
-      for (var hashCode in map) {
-        // sanity check that it's really an integer
-        if (hashCode == parseInt(hashCode, 10)) {
-          var array = map[hashCode];
-          for ( var i = 0, c = array.length; i < c; ++i) {
-            var entry = array[i];
-            var entryValue = entry.@Map.Entry::getValue()();
-            if (this.@InternalJsHashCodeMapLegacy::equalsBridge(*)(value, entryValue)) {
-              return true;
-            }
-          }
-        }
-      }
-      return false;
-    }-*/;
-
-    @Override
-    public native Iterator<Entry<K, V>> entries() /*-{
-      var list = this.@InternalJsHashCodeMapLegacy::newEntryList()();
-      var map = this.@InternalJsHashCodeMap::backingMap;
-      for (var hashCode in map) {
-        // sanity check that it's really an integer
-        if (hashCode == parseInt(hashCode, 10)) {
-          var array = map[hashCode];
-          for ( var i = 0, c = array.length; i < c; ++i) {
-            list.@ArrayList::add(Ljava/lang/Object;)(array[i]);
-          }
-        }
-      }
-      return list.@ArrayList::iterator()();
-    }-*/;
-
-    /**
-     * Returns a custom ArrayList so that we could intercept removal to forward into our map.
-     */
-    private ArrayList<Entry<K, V>> newEntryList() {
-      return new ArrayList<Entry<K, V>>() {
-        @Override
-        public Entry<K, V> remove(int index) {
-          Entry<K, V> removed = super.remove(index);
-          InternalJsHashCodeMapLegacy.this.remove(removed.getKey());
-          return removed;
-        }
-      };
-    }
-
-    /**
-     * Bridge method from JSNI that keeps us from having to make polymorphic calls in JSNI. By
-     * putting the polymorphism in Java code, the compiler can do a better job of optimizing in most
-     * cases.
-     */
-    private boolean equalsBridge(Object value1, Object value2) {
-      return host.equals(value1, value2);
-    }
+  public InternalJsHashCodeMap(ES6Map<Object> backingMap, AbstractHashMap<K, V> host) {
+    this.backingMap = backingMap;
+    this.host = host;
   }
 
-  private final JavaScriptObject backingMap = createMap();
-  AbstractHashMap<K, V> host;
-
-  native JavaScriptObject createMap() /*-{
-    return Object.create(null);
-  }-*/;
-
   public V put(K key, V value) {
-    Entry<K, V>[] chain = ensureChain(hash(key));
-    for (Entry<K, V> entry : chain) {
-      if (host.equals(key, entry.getKey())) {
-        // Found an exact match, just update the existing entry
+    int hashCode = hash(key);
+    Entry<K, V>[] chain = getChainOrEmpty(hashCode);
+
+    if (chain.length == 0) {
+      // This is a new chain, put it to the map.
+      backingMap.set(hashCode, chain);
+    } else {
+      // Chain already exists, perhaps key also exists.
+      Entry<K, V> entry = findEntryInChain(key, chain);
+      if (entry != null) {
         return entry.setValue(value);
       }
     }
     chain[chain.length] = new SimpleEntry<K, V>(key, value);
-    host.elementAdded();
+    size++;
+    structureChanged(host);
     return null;
   }
 
   public V remove(Object key) {
-    String hashCode = hash(key);
+    int hashCode = hash(key);
     Entry<K, V>[] chain = getChainOrEmpty(hashCode);
     for (int i = 0; i < chain.length; i++) {
       Entry<K, V> entry = chain[i];
       if (host.equals(key, entry.getKey())) {
         if (chain.length == 1) {
           // remove the whole array
-          removeChain(hashCode);
+          backingMap.delete(hashCode);
         } else {
           // splice out the entry we're removing
           splice(chain, i);
         }
-        host.elementRemoved();
+        size--;
+        structureChanged(host);
         return entry.getValue();
       }
     }
@@ -142,7 +88,11 @@ class InternalJsHashCodeMap<K, V> {
   }
 
   public Map.Entry<K, V> getEntry(Object key) {
-    for (Entry<K, V> entry : getChainOrEmpty(hash(key))) {
+    return findEntryInChain(key, getChainOrEmpty(hash(key)));
+  }
+
+  private Map.Entry<K, V> findEntryInChain(Object key, Entry<K, V>[] chain) {
+    for (Entry<K, V> entry : chain) {
       if (host.equals(key, entry.getKey())) {
         return entry;
       }
@@ -150,21 +100,15 @@ class InternalJsHashCodeMap<K, V> {
     return null;
   }
 
-  public boolean containsValue(Object value) {
-    for (String hashCode : keys()) {
-      for (Entry<K, V> entry : getChain(hashCode)) {
-        if (host.equals(value, entry.getValue())) {
-          return true;
-        }
-      }
-    }
-    return false;
+  public int size() {
+    return size;
   }
 
-  public Iterator<Entry<K, V>> entries() {
+  @Override
+  public Iterator<Entry<K, V>> iterator() {
     return new Iterator<Map.Entry<K,V>>() {
-      final String[] keys = keys();
-      int chainIndex = -1, itemIndex = 0;
+      final ES6Iterator<Object> chains = backingMap.entries();
+      int itemIndex = 0;
       Entry<K, V>[] chain = new Entry[0];
       Entry<K, V>[] lastChain = null;
       Entry<K, V> lastEntry = null;
@@ -174,9 +118,10 @@ class InternalJsHashCodeMap<K, V> {
         if (itemIndex < chain.length) {
           return true;
         }
-        if (chainIndex < keys.length - 1) {
+        ES6IteratorEntry<Object> current = chains.next();
+        if (!current.done()) {
           // Move to the beginning of next chain
-          chain = getChain(keys[++chainIndex]);
+          chain = unsafeCastToArray(current.getValue());
           itemIndex = 0;
           return true;
         }
@@ -211,33 +156,20 @@ class InternalJsHashCodeMap<K, V> {
     };
   }
 
-  private native String[] keys() /*-{
-    return Object.getOwnPropertyNames(this.@InternalJsHashCodeMap::backingMap);
+  private native Entry<K, V>[] getChainOrEmpty(int hashCode) /*-{
+    return this.@InternalJsHashCodeMap::backingMap.get(hashCode) || [];
   }-*/;
 
-  private native Entry<K, V>[] getChain(String hashCode) /*-{
-    return this.@InternalJsHashCodeMap::backingMap[hashCode];
-  }-*/;
-
-  private native Entry<K, V>[] getChainOrEmpty(String hashCode) /*-{
-    return this.@InternalJsHashCodeMap::backingMap[hashCode] || [];
-  }-*/;
-
-  private native Entry<K, V>[] ensureChain(String hashCode) /*-{
-    var map = this.@InternalJsHashCodeMap::backingMap;
-    return map[hashCode] || (map[hashCode] = []);
-  }-*/;
-
-  private native void removeChain(String hashCode) /*-{
-    delete this.@InternalJsHashCodeMap::backingMap[hashCode];
+  private native Entry<K, V>[] unsafeCastToArray(Object arr) /*-{
+    return arr;
   }-*/;
 
   /**
    * Returns hash code of the key as calculated by {@link AbstractMap#getHashCode(Object)} but also
    * handles null keys as well.
    */
-  private String hash(Object key) {
-    return key == null ? "0" : String.valueOf(host.getHashCode(key));
+  private int hash(Object key) {
+    return key == null ? 0 : host.getHashCode(key);
   }
 
   private static native void splice(Object arr, int index) /*-{

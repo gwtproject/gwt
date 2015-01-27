@@ -23,7 +23,6 @@ import static java.util.ConcurrentModificationDetector.checkStructuralChange;
 import static java.util.ConcurrentModificationDetector.recordLastKnownStructure;
 import static java.util.ConcurrentModificationDetector.structureChanged;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.impl.SpecializeMethod;
 
 /**
@@ -76,7 +75,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    * Iterator for <code>EntrySet</code>.
    */
   private final class EntrySetIterator implements Iterator<Entry<K, V>> {
-    private Iterator<Entry<K, V>> stringMapEntries = stringMap.entries();
+    private Iterator<Entry<K, V>> stringMapEntries = stringMap.iterator();
     private Iterator<Entry<K, V>> current = stringMapEntries;
     private Iterator<Entry<K, V>> last;
 
@@ -92,7 +91,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
       if (current != stringMapEntries) {
         return false;
       }
-      current = hashCodeMap.entries();
+      current = hashCodeMap.iterator();
       return current.hasNext();
     }
 
@@ -126,8 +125,6 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    */
   private transient InternalJsStringMap<K, V> stringMap;
 
-  private int size;
-
   public AbstractHashMap() {
     reset();
   }
@@ -156,12 +153,9 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   }
 
   private void reset() {
-    InternalJsMapFactory factory = GWT.create(InternalJsMapFactory.class);
-    hashCodeMap = factory.createJsHashCodeMap();
-    hashCodeMap.host = this;
-    stringMap = factory.createJsStringMap();
-    stringMap.host = this;
-    size = 0;
+    ES6MapFactory factory = new ES6MapFactory();
+    hashCodeMap = new InternalJsHashCodeMap<K, V>(factory.newJsMap(), this);
+    stringMap = new InternalJsStringMap<K, V>(factory.<V>newJsMap(), this);
     structureChanged(this);
   }
 
@@ -173,7 +167,16 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
 
   @Override
   public boolean containsValue(Object value) {
-    return stringMap.containsValue(value) || hashCodeMap.containsValue(value);
+    return containsValue(value, stringMap) || containsValue(value, hashCodeMap);
+  }
+
+  private boolean containsValue(Object value, Iterable<Entry<K, V>> entries) {
+    for (Entry<K, V> entry : entries) {
+      if (equals(value, entry.getValue())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
@@ -201,17 +204,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
 
   @Override
   public int size() {
-    return size;
-  }
-
-  void elementRemoved() {
-    size--;
-    structureChanged(this);
-  }
-
-  void elementAdded() {
-    size++;
-    structureChanged(this);
+    return hashCodeMap.size() + stringMap.size();
   }
 
   /**

@@ -16,6 +16,23 @@
       "revId": "d4ac52c8136081315c0ca92fcfdb33b0620bbd4c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b232f8e_8b4ed1ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-27T19:10:14Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "d4ac52c8136081315c0ca92fcfdb33b0620bbd4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

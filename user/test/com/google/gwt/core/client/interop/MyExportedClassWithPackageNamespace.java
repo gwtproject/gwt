@@ -13,24 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core;
+package com.google.gwt.core.client.interop;
 
-import com.google.gwt.core.client.interop.JsExportTest;
-import com.google.gwt.core.client.interop.JsTypeTest;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.google.gwt.core.client.js.JsExport;
 
 /**
- * All core tests that require js interop.
+ * An exported class.
  */
-public class CoreJsInteropSuite {
-  public static Test suite() {
-    TestSuite suite = new TestSuite("All core js interop tests");
-
-    suite.addTestSuite(JsTypeTest.class);
-    suite.addTestSuite(JsExportTest.class);
-
-    return suite;
-  }
+@JsExport // Uses the namespace from the package
+public class MyExportedClassWithPackageNamespace {
+  /**
+   * Exported field.
+   */
+  public static int WOO = 1001;
 }

@@ -21,8 +21,8 @@ import com.google.gwt.core.client.js.JsNamespace;
 /**
  * Test namespace inherited from outer class.
  */
-@JsNamespace("$wnd.foo")
-public class OuternamespaceTester {
+@JsNamespace("foo")
+public class MyClassWithNamespaceNested {
   /**
    * Exported field.
    */

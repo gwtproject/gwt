@@ -16,18 +16,16 @@
 package com.google.gwt.core.client.interop;
 
 import com.google.gwt.core.client.js.JsExport;
+import com.google.gwt.core.client.js.JsType;
 
-class MyClassImpl2 {
-  public static boolean calledFromJsHostPageWindow = false;
-  public static boolean calledFromJsModuleWindow = false;
+class MyClassWithNestedEnum {
+  @JsType
+  @JsExport
+  public enum NestedEnum {
+    FOO, BAR;
 
-  @JsExport("$wnd.exportedFromJava")
-  public static void callMe() {
-        calledFromJsHostPageWindow = true;
+    public String name2() {
+      return name();
     }
-
-  @JsExport("exportedFromJava2")
-  public static void callMe2() {
-        calledFromJsModuleWindow = true;
-    }
+  }
 }

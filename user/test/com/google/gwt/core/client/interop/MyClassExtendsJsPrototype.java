@@ -15,17 +15,14 @@
  */
 package com.google.gwt.core.client.interop;
 
-import com.google.gwt.core.client.js.JsExport;
-import com.google.gwt.core.client.js.JsType;
+class MyClassExtendsJsPrototype extends MyJsInterface.Prototype {
 
-@JsType class NestedTest {
-  @JsType
-  @JsExport
-  public enum NestedEnum {
-    FOO, BAR;
+  MyClassExtendsJsPrototype() {
+    x(42).setY(7);
+  }
 
-    public String name2() {
-      return name();
-    }
+  @Override
+  public int sum(int bias) {
+    return super.sum(bias) + 100;
   }
 }

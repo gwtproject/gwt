@@ -17,6 +17,7 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
+import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JMethod;
@@ -414,6 +415,107 @@ public class Java8AstTest extends JJSTestBase {
         "public final Object run(int arg0,int arg1){"
             + "return new EntryPoint$Pojo2(this.test_EntryPoint,arg0,arg1);}",
         formatSource(samMethod.toSource()));
+  }
+
+  public void testIntersectionCast() throws Exception {
+    addSnippetClassDecl("static class A {void print() {} }");
+    addSnippetClassDecl("interface I1 {}");
+    addSnippetClassDecl("interface I2 {}");
+    addSnippetClassDecl("interface I3 {}");
+    addSnippetClassDecl("static class B extends A implements I1 {}");
+    addSnippetClassDecl("static class C extends A implements I1, I2, I3 {}");
+    String cast1 = "B b = new B(); ((A & I1) b).print();";
+    assertEqualBlock("EntryPoint$B b=new EntryPoint$B();((EntryPoint$A)(EntryPoint$I1)b).print();",
+        cast1);
+    String cast2 = "C c = new C(); ((A & I1 & I2 & I3)c).print();";
+    assertEqualBlock("EntryPoint$C c=new EntryPoint$C();"
+        + "((EntryPoint$A)(EntryPoint$I1)(EntryPoint$I2)(EntryPoint$I3)c).print();", cast2);
+  }
+
+  public void testIntersectionCastOfLambda() throws Exception {
+    addSnippetClassDecl("interface I1 { public void foo(); }");
+    addSnippetClassDecl("interface I2 { }");
+    String lambda = "Object o = (I2 & I1) () -> {};";
+    assertEqualBlock("Object o=(EntryPoint$I2)(EntryPoint$I1)new EntryPoint$lambda$0$Type();",
+        lambda);
+
+    JProgram program = compileSnippet("void", lambda, false);
+    // created by JDT, should exist
+    assertNotNull(getMethod(program, "lambda$0"));
+
+    // created by GwtAstBuilder
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$lambda$0$Type");
+    assertNotNull(lambdaInnerClass);
+
+    // no fields
+    assertEquals(0, lambdaInnerClass.getFields().size());
+
+    // should have constructor taking no args
+    JMethod ctor = findMethod(lambdaInnerClass, "EntryPoint$lambda$0$Type");
+    assertTrue(ctor instanceof JConstructor);
+    assertEquals(0, ctor.getParams().size());
+
+    // should implements I1 and I2
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I1")));
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I2")));
+    // should implement foo method
+    JMethod samMethod = findMethod(lambdaInnerClass, "foo");
+    assertEquals("public final void foo(){EntryPoint.lambda$0();}",
+        formatSource(samMethod.toSource()));
+  }
+
+  public void testMultipleIntersectionCastOfLambda() throws Exception {
+    addSnippetClassDecl("interface I1 { public void foo(); }");
+    addSnippetClassDecl("interface I2 { }");
+    addSnippetClassDecl("interface I3 { }");
+    String lambda = "I2 o = (I3 & I2 & I1) () -> {};";
+    assertEqualBlock(
+        "EntryPoint$I2 o=(EntryPoint$I3)(EntryPoint$I2)(EntryPoint$I1)new EntryPoint$lambda$0$Type();",
+        lambda);
+
+    JProgram program = compileSnippet("void", lambda, false);
+    // created by JDT, should exist
+    assertNotNull(getMethod(program, "lambda$0"));
+
+    // created by GwtAstBuilder
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$lambda$0$Type");
+    assertNotNull(lambdaInnerClass);
+
+    // no fields
+    assertEquals(0, lambdaInnerClass.getFields().size());
+
+    // should have constructor taking no args
+    JMethod ctor = findMethod(lambdaInnerClass, "EntryPoint$lambda$0$Type");
+    assertTrue(ctor instanceof JConstructor);
+    assertEquals(0, ctor.getParams().size());
+
+    // should implements I1 and I2
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I1")));
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I2")));
+    assertTrue(
+        lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.EntryPoint$I3")));
+    // should implement foo method
+    JMethod samMethod = findMethod(lambdaInnerClass, "foo");
+    assertEquals("public final void foo(){EntryPoint.lambda$0();}",
+        formatSource(samMethod.toSource()));
+  }
+
+  public void testWrongIntersectionCastOfLambda() throws Exception {
+    addSnippetClassDecl("interface I1 { public void foo(); }");
+    addSnippetClassDecl("class A { }");
+    String lambda = "Object o = (A & I1) () -> {};";
+
+    try {
+      compileSnippet("void", lambda, false);
+      fail("Should have thrown an InternalCompilerException");
+    } catch (InternalCompilerException e) {
+      assertEquals("incompatible types: bad type target for lambda expression.\n"
+          + " component type test.EntryPoint$A is not an interface.", e.getMessage());
+    }
   }
 
   private static final MockJavaResource LAMBDA_METAFACTORY =

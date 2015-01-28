@@ -2902,6 +2902,11 @@ public class GwtAstBuilder {
     private JExpression makeThisReference(SourceInfo info, ReferenceBinding targetType,
         boolean exactMatch, BlockScope scope) {
       targetType = (ReferenceBinding) targetType.erasure();
+      if (targetType.isInterface()) {
+        // Java8 super reference to default method from subtype, X.super.someDefaultMethod
+        return makeThisRef(info);
+      }
+
       Object[] path = scope.getEmulationPath(targetType, exactMatch, false);
       if (path == null) {
         throw new InternalCompilerException("No emulation path.");
@@ -3891,6 +3896,11 @@ public class GwtAstBuilder {
     if (b.isSynthetic()) {
       method.setSynthetic();
     }
+
+    if (b.isDefaultMethod()) {
+      method.setDefaultMethod();
+    }
+
     enclosingType.addMethod(method);
     JsInteropUtil.maybeSetJsinteropMethodProperties(x, method);
     processAnnotations(x, method);

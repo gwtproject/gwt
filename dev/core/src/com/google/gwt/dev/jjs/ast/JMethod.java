@@ -50,6 +50,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   private boolean noExport = false;
   private boolean inliningAllowed = true;
   private boolean hasSideEffects = true;
+  private boolean defaultMethod = false;
 
   public boolean isNoExport() {
     return noExport;
@@ -116,6 +117,14 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   public void setHasSideEffects(boolean hasSideEffects) {
     this.hasSideEffects = hasSideEffects;
+  }
+
+  public void setDefaultMethod() {
+    this.defaultMethod = true;
+  }
+
+  public boolean isDefaultMethod() {
+    return defaultMethod;
   }
 
   /**

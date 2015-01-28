@@ -208,6 +208,7 @@ import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
 import org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope;
 import org.eclipse.jdt.internal.compiler.lookup.FieldBinding;
+import org.eclipse.jdt.internal.compiler.lookup.IntersectionCastTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.LocalTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.LocalVariableBinding;
 import org.eclipse.jdt.internal.compiler.lookup.MethodBinding;
@@ -540,11 +541,16 @@ public class GwtAstBuilder {
 
     @Override
     public void endVisit(CastExpression x, BlockScope scope) {
+      /**
+       * Our output of a ((A & I1 & I2) a) looks like this:
+       *
+       * ((A)(I1)(I2)a).
+       */
       try {
         SourceInfo info = makeSourceInfo(x);
-        JType type = typeMap.get(x.resolvedType);
+        JType[] type = processCastType(x.resolvedType);
         JExpression expression = pop(x.expression);
-        push(new JCastOperation(info, type, expression));
+        push(buildCastOperation(info, type, expression));
       } catch (Throwable e) {
         throw translateException(x, e);
       }
@@ -1205,13 +1211,15 @@ public class GwtAstBuilder {
       // Lookup the JMethod version
       JMethod interfaceMethod = typeMap.get(samBinding);
       // And its JInterface container we must implement
-      JInterfaceType funcType = (JInterfaceType) typeMap.get(binding);
+      // There may be more than more JInterface containers to be implemented
+      // if the lambda expression is cast to a IntersectionCastType.
+      JType[] funcType = processCastType(binding);
       SourceInfo info = makeSourceInfo(x);
 
       // Create an inner class to implement the interface and SAM method.
       // class lambda$0$Type implements T {}
       JClassType innerLambdaClass = createInnerClass(JdtUtil.asDottedString(x.binding.declaringClass.compoundName) +
-          "$" + new String(x.binding.selector), x, funcType, info);
+          "$" + new String(x.binding.selector), x, info, funcType);
       JConstructor ctor = new JConstructor(info, innerLambdaClass);
 
       // locals captured by the lambda and saved as fields on the anonymous inner class
@@ -1400,11 +1408,21 @@ public class GwtAstBuilder {
       return outerParam;
     }
 
-    private JClassType createInnerClass(String name, FunctionalExpression x,
-        JInterfaceType funcType, SourceInfo info) {
+    private JClassType createInnerClass(String name, FunctionalExpression x, SourceInfo info,
+        JType... funcType) {
       JClassType innerLambdaClass = new JClassType(info, name + "$Type", false, true);
       innerLambdaClass.setEnclosingType((JDeclaredType) typeMap.get(x.binding.declaringClass));
-      innerLambdaClass.addImplements(funcType);
+      for (JType type : funcType) {
+        // JDT compiler does not catch the compiler error when the program
+        // tries to intersection cast a lambda expression to a non-interface type.
+        if (!(type instanceof JInterfaceType)) {
+          throw new InternalCompilerException(
+              "incompatible types: bad type target for lambda expression.\n component type "
+              + type.getName() + " is not an interface.");
+        }
+        assert (type instanceof JInterfaceType);
+        innerLambdaClass.addImplements((JInterfaceType) type);
+      }
       innerLambdaClass.setSuperClass(javaLangObject);
 
       createSyntheticMethod(info, CLINIT_NAME, innerLambdaClass, JPrimitiveType.VOID, false, true,
@@ -1711,8 +1729,9 @@ public class GwtAstBuilder {
       List<JExpression> enclosingThisRefs = new ArrayList<JExpression>();
 
       if (innerLambdaClass == null) {
-        innerLambdaClass = createInnerClass(lambdaName, x, funcType, info);
+        innerLambdaClass = createInnerClass(lambdaName, x, info, funcType);
         lambdaNameToInnerLambdaType.put(lambdaName, innerLambdaClass);
+        newTypes.add(innerLambdaClass);
 
         JConstructor ctor = new JConstructor(info, innerLambdaClass);
 
@@ -1876,7 +1895,6 @@ public class GwtAstBuilder {
       }
 
       push(allocLambda);
-      newTypes.add(innerLambdaClass);
     }
 
     private JExpression boxOrUnboxExpression(JExpression expr, TypeBinding fromType,
@@ -3428,6 +3446,39 @@ public class GwtAstBuilder {
         JMethodCall call = new JMethodCall(info, null, typeMap.get(valueOfBinding));
         call.addArgs(mapRef, nameRef);
         implementMethod(method, call);
+      }
+    }
+
+    private JCastOperation buildCastOperation(SourceInfo info, JType[] castTypes, JExpression expression) {
+      return buildCastOperation(info, castTypes, expression, 0);
+    }
+
+    private JCastOperation buildCastOperation(SourceInfo info, JType[] castTypes, JExpression expression,
+        int idx) {
+      if (idx == castTypes.length - 1) {
+        return new JCastOperation(info, castTypes[idx], expression);
+      } else {
+        return new JCastOperation(info, castTypes[idx],
+            buildCastOperation(info, castTypes, expression, idx + 1));
+      }
+    }
+
+    private JReferenceType[] processIntersectionCastType(IntersectionCastTypeBinding type) {
+      JReferenceType[] castTypes = new JReferenceType[type.intersectingTypes.length];
+      int i = 0;
+      for (ReferenceBinding intersectingTypeBinding : type.intersectingTypes) {
+        JType intersectingType = typeMap.get(intersectingTypeBinding);
+        assert (intersectingType instanceof JReferenceType);
+        castTypes[i++] = ((JReferenceType) intersectingType);
+      }
+      return castTypes;
+    }
+
+    private JType[] processCastType(TypeBinding type) {
+      if (type instanceof IntersectionCastTypeBinding) {
+        return processIntersectionCastType((IntersectionCastTypeBinding) type);
+      } else {
+        return new JType[] {typeMap.get(type)};
       }
     }
   }

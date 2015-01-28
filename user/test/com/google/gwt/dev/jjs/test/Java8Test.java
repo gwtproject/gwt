@@ -111,4 +111,13 @@ public class Java8Test extends GWTTestCase {
 
   public void testPrivateConstructorReference() {
   }
+
+  public void testBaseIntersectionCast() {
+  }
+
+  public void testIntersectionCastWithLambdaExpr() {
+  }
+
+  public void testIntersectionCastPolymorphism() {
+  }
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d72fc7b3_3cd2d18b",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-01-29T02:39:16Z",
+      "side": 1,
+      "message": "It runs fine as written in this way. but \nnew com.google.gwt.dev.jjs.test.package3.SimpleC().m() triggers an internal compiler error.",
+      "range": {
+        "startLine": 419,
+        "startChar": 20,
+        "endLine": 419,
+        "endChar": 27
+      },
+      "revId": "90f6b58dcef594fd89ba5c18eb307133210abbc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -250,11 +250,15 @@ public abstract class AbstractLocalizableInterfaceCreator {
               + resourceFile
               + "' cannot be used to generate message classes, as it has no key/value pairs defined.");
     }
+    generateMethods(p,keys);
+    composer.commit(new PrintWriterTreeLogger());
+  }
+  
+  void generateMethods(LocalizedProperties properties, String[] keys) {
     for (String key : keys) {
-      String value = p.getProperty(key);
+      String value = properties.getProperty(key);
       genSimpleMethodDecl(key, value);
     }
-    composer.commit(new PrintWriterTreeLogger());
   }
 
   private void addFormatters() {
@@ -265,7 +269,7 @@ public abstract class AbstractLocalizableInterfaceCreator {
     formatters.add(new RenameDuplicates());
   }
 
-  private String formatKey(String key) {
+  protected String formatKey(String key) {
     for (ResourceKeyFormatter formatter : formatters) {
       key = formatter.format(key);
     }
@@ -286,7 +290,7 @@ public abstract class AbstractLocalizableInterfaceCreator {
     genMethodArgs(defaultValue);
     composer.print(");\n");
   }
-
+  
   private void setup(String packageName, String className, File resourceBundle,
       File targetLocation, Class<? extends Localizable> interfaceClass)
       throws IOException {

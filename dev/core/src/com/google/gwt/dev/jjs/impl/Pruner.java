@@ -416,14 +416,13 @@ public class Pruner {
     public boolean visit(JInterfaceType type, Context ctx) {
       Predicate<JNode> notReferenced = Predicates.not(Predicates.in(referencedNonTypes));
       boolean typeReferenced = referencedTypes.contains(type);
-      boolean typeInstantiated = program.typeOracle.isInstantiatedType(type);
 
       Predicate<JNode> notReferencedField =
           typeReferenced ? notReferenced : Predicates.<JNode>alwaysTrue();
-      Predicate<JNode> notReferencedMethod =
-          typeInstantiated ? notReferenced : Predicates.<JNode>alwaysTrue();
       removeFields(notReferencedField, type);
-      removeMethods(notReferencedMethod, type);
+      // methods may be invoked by instance (i.foo()) or
+      // type reference (Interface.foo()) when foo() is a defender method
+      removeMethods(notReferenced, type);
 
       return false;
     }

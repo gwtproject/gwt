@@ -15,7 +15,6 @@
  */
 package com.google.gwt.i18n.rebind;
 
-import com.google.gwt.i18n.client.Localizable;
 import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.i18n.server.MessageFormatUtils;
 import com.google.gwt.i18n.server.MessageFormatUtils.ArgumentChunk;
@@ -47,8 +46,8 @@ public class MessagesInterfaceCreator extends
   private static Map<Integer,ArgumentChunk> getMessageArgs(String template) throws ParseException {
 	  HashMap<Integer,ArgumentChunk> args = new HashMap<>();
 	  for (TemplateChunk chunk : MessageFormatUtils.MessageStyle.MESSAGE_FORMAT.parse(template)) {
-		  if(chunk instanceof ArgumentChunk) {
-			  args.put(((ArgumentChunk)chunk).getArgumentNumber(),(ArgumentChunk)chunk);
+		  if (chunk instanceof ArgumentChunk) {
+			  args.put(((ArgumentChunk) chunk).getArgumentNumber(),(ArgumentChunk) chunk);
 		  }
 	  }
 	  return args;
@@ -75,7 +74,7 @@ public class MessagesInterfaceCreator extends
       String key = keys[i];
       String value = properties.getProperty(key);
       Map<String,String> plurals = new HashMap<>();
-      while(i+1 < keys.length && keys[i+1].matches(".*\\[.*\\]$") && keys[i+1].startsWith(key)) {
+      while (i + 1 < keys.length && isNextPlural(key,keys[i + 1])) {
         i++;
         plurals.put(keys[i],properties.getProperty(keys[i]));
       }
@@ -87,18 +86,21 @@ public class MessagesInterfaceCreator extends
   protected void genMethodArgs(String defaultValue) {
   }
   
+  private boolean isNextPlural(String key, String nextKey) {
+    return nextKey.matches(".*\\[.*\\]$") && nextKey.startsWith(key);
+  }
   private void genMethodArgs(Map<Integer,ArgumentChunk> args) {
     for (int i = 0; i <= Collections.max(args.keySet()); i++) {
       if (i > 0) {
         composer.print(",  ");
       }
-      if(!args.containsKey(i)) {
+      if (!args.containsKey(i)) {
         composer.print("@Optional String arg"+ i);
         continue;
       }
       String format = (format = args.get(i).getFormat())  != null ? format : "string";
       String subFormat = (subFormat = args.get(i).getSubFormat()) != null ? subFormat : "";
-      if(args.get(i).isList()) {
+      if (args.get(i).isList()) {
         composer.print("java.util.List<");
       }
       switch(format) {
@@ -119,7 +121,7 @@ public class MessagesInterfaceCreator extends
       if(args.get(i).isList()) {
         composer.print(">");
       }
-      composer.print(" arg"+ i);
+      composer.print(" arg" + i);
     }
   }
   
@@ -147,8 +149,8 @@ public class MessagesInterfaceCreator extends
   }
   
   private String determineReturnType(Map<Integer,ArgumentChunk> args) {
-    for(ArgumentChunk arg : args.values()) {  
-      if("safehtml".equals(arg.getFormat()))
+    for (ArgumentChunk arg : args.values()) {  
+      if ("safehtml".equals(arg.getFormat()))
         return "com.google.gwt.safehtml.shared.SafeHtml";
     }
     return "String";
@@ -157,19 +159,19 @@ public class MessagesInterfaceCreator extends
   private void genPluralsAnnotation(Map<String,String> plurals) { 
     composer.print("@AlternateMessage({");
     String[] keys = plurals.keySet().toArray(new String[]{});
-    if(keys.length > 1) {
+    if (keys.length > 1) {
       composer.println("");
       composer.indent();
     }
-    for(int i = 0; i < keys.length; i++) {
+    for (int i = 0; i < keys.length; i++) {
       String key = keys[i];
-      if(i > 0) {
+      if (i > 0) {
         composer.println(",");
       }
-      composer.print("\""+key.substring(key.indexOf('[')+1, key.length()-1)+"\", ");
-      composer.print("\""+plurals.get(key)+"\"");
+      composer.print("\"" + key.substring(key.indexOf('[') + 1, key.length() - 1) + "\", ");
+      composer.print("\"" + plurals.get(key) + "\"");
     }
-    if(keys.length > 1) {
+    if (keys.length > 1) {
       composer.println("");
       composer.outdent();
     }
@@ -181,19 +183,22 @@ public class MessagesInterfaceCreator extends
       Map<Integer,ArgumentChunk> args = getMessageArgs(defaultValue);
       genMethodJavaDoc(defaultValue,args);
       genValueAnnotation(defaultValue);
-      if(!plurals.isEmpty())
+      if (!plurals.isEmpty()) {
         genPluralsAnnotation(plurals);
+      }
       composer.println("@Key(" + makeJavaString(key) + ")");
       String methodName = formatKey(key);
       String type = determineReturnType(args);
       composer.print(type + " " + methodName);
       composer.print("(");
-      if(!plurals.isEmpty())
+      if (!plurals.isEmpty()) {
         composer.print("@PluralCount ");
-      if(!args.isEmpty())
+      }
+      if (!args.isEmpty()) {
         genMethodArgs(args);
+      }
       composer.print(");\n");
-    }catch(ParseException e) {
+    } catch (ParseException e) {
       throw new RuntimeException(defaultValue
           + " could not be parsed as a MessageFormat string.", e);
     }
@@ -203,13 +208,14 @@ public class MessagesInterfaceCreator extends
     composer.beginJavaDocComment();
     String escaped = makeJavaString(defaultValue);
     composer.println("Translated " + escaped + ".\n");
-    if(!args.isEmpty()) {
-      for(int i = 0; i <= Collections.max(args.keySet()); i++) {
-        composer.print("@param arg"+i);
-        if(args.containsKey(i))
-          composer.println(" "+makeJavaString(args.get(i).getAsMessageFormatString()));
-        else
+    if (!args.isEmpty()) {
+      for (int i = 0; i <= Collections.max(args.keySet()); i++) {
+        composer.print("@param arg" + i);
+        if (args.containsKey(i)) {
+          composer.println(" " + makeJavaString(args.get(i).getAsMessageFormatString()));
+        } else {
           composer.println(" optional");
+        }
       }
     }
     composer.println("@return translated " + escaped);

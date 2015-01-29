@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "174ddfae_9c696590",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/package1/SimpleA.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T01:24:13Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "6deeaa00706aa5fb25092c020bf16820ff40d5f6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "174ddfae_fc76a96d",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/package2/SimpleB.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T01:24:13Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "6deeaa00706aa5fb25092c020bf16820ff40d5f6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "174ddfae_dc73ed7b",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/package3/SimpleC.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T01:24:13Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "6deeaa00706aa5fb25092c020bf16820ff40d5f6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

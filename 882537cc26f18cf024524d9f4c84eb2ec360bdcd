@@ -1,0 +1,973 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37ee63c7_5097d259",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_b08b9632",
+        "filename": "user/src/com/google/gwt/i18n/rebind/AbstractLocalizableInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Collections.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_90881a37",
+        "filename": "user/src/com/google/gwt/i18n/rebind/AbstractLocalizableInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.HashMap.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_f0851e1d",
+        "filename": "user/src/com/google/gwt/i18n/rebind/AbstractLocalizableInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Map.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_d082a212",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.i18n.client.Localizable.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_300fa62d",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] File contains tab characters (this is the first instance).",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_10142a3e",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_501eb25f",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_70192e76",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_70300ee6",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_f02cfe96",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_103b8acd",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_b02276a0",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027while\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_901f7a58",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_d0290285",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_303686e5",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_503512d4",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_b049d654",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_90465a40",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_f0435e2e",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_d040e224",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_30dde61d",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027for\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_10e26add",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_70e76eed",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_50ecf2cf",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_b0d0b600",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027for\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_90cdba68",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_b0f71694",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_f0da3e1e",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_1009ca0d",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_90f49a90",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_70fe4e75",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027-\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_500352eb",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027-\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_3004c6f5",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_d0d742f4",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_f0f19e9e",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_30ab2675",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_10b0aadd",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_d0ee22bc",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_70b5aecd",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_b0bef6af",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_50ba32bf",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_f0c87e46",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_90bbfabf",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_d0c5822c",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_3092063d",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_10970a2d",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027catch\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_708c8e1d",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027catch\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_50919233",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_b0a55694",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027for\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_f09fde3d",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_90a2da87",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_d09c624c",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_30796665",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027if\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_7083eee4",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_107eea4c",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee63c7_508872ff",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-01-29T18:14:07Z",
+      "side": 1,
+      "message": "[warning] \u0027else\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "882537cc26f18cf024524d9f4c84eb2ec360bdcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

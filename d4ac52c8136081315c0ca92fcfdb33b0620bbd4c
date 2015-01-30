@@ -33,6 +33,29 @@
       "revId": "d4ac52c8136081315c0ca92fcfdb33b0620bbd4c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7268b4e_1c2a59a2",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-01-30T23:21:42Z",
+      "side": 1,
+      "message": "This patch does more than remove support for cross-iframe instanceof, it absolutely forces $wnd with no ability to override. \n\nI\u0027m still not convinced we should remove this functionality from the basic web platform. Dart doesn\u0027t have this limitation, it\u0027s \u0027instanceof\u0027 works with cross-frame native objects. It does it in a different way (with wrappers + Object.define, which I think sacrifices performance compared to this) \n\nThis is slow only for cases where the destination is a JsType with prototype. Maybe there\u0027s a more efficient way to do it, but we shouldn\u0027t give up on making it work, Dart didn\u0027t, and their implementation is even more hacky and slow.\n\nIt seems to the main justification for removing this capability is old IE and HtmlUnit. Not supporting it imposes a weird, surprising, non-orthogonal behavior on the programming model.",
+      "range": {
+        "startLine": 152,
+        "startChar": 21,
+        "endLine": 152,
+        "endChar": 22
+      },
+      "revId": "d4ac52c8136081315c0ca92fcfdb33b0620bbd4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

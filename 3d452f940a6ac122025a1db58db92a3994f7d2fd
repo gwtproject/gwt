@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "973d4f4f_2294aea1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RedundantCastRemover.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-30T21:22:53Z",
+      "side": 1,
+      "message": "My suggestion to do this was a mistake, if an instanceof check succeeds it is also non null. You can remove this check here.\n\nAdd a handling for instanceof to replace it by true when appropriate.",
+      "range": {
+        "startLine": 354,
+        "startChar": 0,
+        "endLine": 354,
+        "endChar": 50
+      },
+      "revId": "3d452f940a6ac122025a1db58db92a3994f7d2fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

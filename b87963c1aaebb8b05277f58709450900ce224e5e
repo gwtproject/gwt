@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f7268b4e_7374e0b6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-30T21:22:12Z",
+      "side": 1,
+      "message": "I think this should probably be more effective as part of the optimization loop (but then we might need to make sure this pass does not mess with typetightener.",
+      "range": {
+        "startLine": 1454,
+        "startChar": 0,
+        "endLine": 1456,
+        "endChar": 5
+      },
+      "revId": "b87963c1aaebb8b05277f58709450900ce224e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2bfb5b87_b29a7878",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JConditional.java",
         "patchSetId": 1
@@ -172,6 +195,24 @@
       "side": 1,
       "message": "If it is not JNonNull, I think just keeping it unchanged is the best choice. Do you have any better ideas?",
       "parentUuid": "2bc27b57_34f05021",
+      "revId": "b87963c1aaebb8b05277f58709450900ce224e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "973d4f4f_1c2eb1b6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RedundantCastRemover.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-30T21:22:12Z",
+      "side": 1,
+      "message": "Actually  if the variable is in indicatedTypes... then it is already known to be non null, hence we can replace instanceof by true (and maybe run DeadCodeElimination later to remove the code) in that scenario.",
+      "parentUuid": "f7f76b97_ab7b2910",
       "revId": "b87963c1aaebb8b05277f58709450900ce224e5e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

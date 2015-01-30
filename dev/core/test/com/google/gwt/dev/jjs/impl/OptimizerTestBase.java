@@ -48,6 +48,7 @@ import java.util.regex.Pattern;
  */
 public abstract class OptimizerTestBase extends JJSTestBase {
   protected boolean runDeadCodeElimination = false;
+  protected boolean runTypeTightener = false;
 
   /**
    * Holds the result of optimization to compare agains expected results.
@@ -295,6 +296,9 @@ public abstract class OptimizerTestBase extends JJSTestBase {
     String snippet = Joiner.on("\n").join(mainMethodSnippet);
     JProgram program = compileSnippet(mainMethodReturnType, snippet, true);
     JMethod method = findMethod(program, methodName);
+    if (runTypeTightener) {
+      TypeTightener.exec(program);
+    }
     boolean madeChanges = optimizeMethod(program, method);
     if (madeChanges && runDeadCodeElimination) {
       DeadCodeElimination.exec(program);

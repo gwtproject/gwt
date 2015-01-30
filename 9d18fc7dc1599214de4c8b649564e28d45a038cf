@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7268b4e_36641632",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-01-30T22:26:40Z",
+      "side": 1,
+      "message": "A lambda expression can be cast into a abstract class also I think (you can check it against javac).\n\nAdd a test for that case if it can be casted.",
+      "range": {
+        "startLine": 1416,
+        "startChar": 2,
+        "endLine": 1422,
+        "endChar": 9
+      },
+      "revId": "9d18fc7dc1599214de4c8b649564e28d45a038cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

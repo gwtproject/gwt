@@ -56,6 +56,30 @@
       "revId": "d4ac52c8136081315c0ca92fcfdb33b0620bbd4c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7268b4e_5c5d3167",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-01-31T00:09:16Z",
+      "side": 1,
+      "message": "Ray, earlier we discussed and agreed in following:\n\nDropping $wnd support in instanceof:\n -Talk to Chrome guys\n    - Ask for a performant instanceof utility that works with multiple frames\n    - Ask for a way to get the window for the object\n -Look for alternatives:\n    - Use Object.prototype.toString(obj)\n    - Check both window.HtmlElement and $wnd.HtmlElement\n    -Provide js.instanceof that works cross frame for people who needs it\n    -Generate is(..) functions for Elemental\n\nI also talked with other guys in the team earlier to double check the new behaviors and they all agreed this is more reasonable way to move forward. This is simpler, performant and easy to describe. Closure doesn\u0027t do anything special as well.\nI think we can keep the option to enhance but let\u0027s postpone it for later versions and after developers starts hitting practical issues about it.\n\n\u003e This patch does more than remove support for cross-iframe instanceof, it absolutely forces $wnd with no ability to override. \n\nThere wasn\u0027t any way to override other than \u0027window\u0027. $wnd is basically the context of the window that application runs so it makes sense to have exporting/instanceof work in that window. The issue of $wnd !\u003d window is just a side effect of some linkers from developer perspective.\n\nIn the commit message, I explained an easy way to export to any frame (same applies to instanceof) if somebody really needs it.",
+      "parentUuid": "f7268b4e_1c2a59a2",
+      "range": {
+        "startLine": 152,
+        "startChar": 21,
+        "endLine": 152,
+        "endChar": 22
+      },
+      "revId": "d4ac52c8136081315c0ca92fcfdb33b0620bbd4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

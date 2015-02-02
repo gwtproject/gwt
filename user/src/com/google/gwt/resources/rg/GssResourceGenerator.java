@@ -1291,7 +1291,7 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
           replacements.put(styleClass, replacementsForSharedMethods.get(method));
         } else {
           String obfuscatedClassName = prefixingSubstitutionMap.get(styleClass);
-          String replacement = obfuscationStyle.getPrettyName(styleClass, cssResource,
+          String replacement = obfuscationStyle.getPrettyName(styleClass, method.getEnclosingType(),
               obfuscatedClassName);
 
           replacements.put(styleClass, replacement);

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97e9cf2d_a640125a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-02-02T16:20:46Z",
+      "side": 1,
+      "message": "Could you be more specific in your description : \"Add une tests for testing @noflip conversion\"",
+      "revId": "eff53d0c1efefc34fb3c333c4d9f9bb2d81fa767",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

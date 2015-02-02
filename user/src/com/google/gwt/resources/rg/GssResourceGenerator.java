@@ -1294,8 +1294,13 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
           String replacement = obfuscationStyle.getPrettyName(styleClass, cssResource,
               obfuscatedClassName);
 
+          if (hasSharedAnnotation(method)) {
+            // We always use the base type for obfuscation if this is a shared method
+            replacement = obfuscationStyle.getPrettyName(styleClass, method.getEnclosingType(),
+                obfuscatedClassName);
+            replacementsForSharedMethods.put(method, replacement);
+          }
           replacements.put(styleClass, replacement);
-          maybeHandleSharedMethod(method, replacement);
         }
       }
     }
@@ -1303,12 +1308,9 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     return replacements;
   }
 
-  private void maybeHandleSharedMethod(JMethod method, String obfuscatedClassName) {
+  private boolean hasSharedAnnotation(JMethod method) {
     JClassType enclosingType = method.getEnclosingType();
     Shared shared = enclosingType.getAnnotation(Shared.class);
-
-    if (shared != null) {
-      replacementsForSharedMethods.put(method, obfuscatedClassName);
-    }
+    return shared != null;
   }
 }

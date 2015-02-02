@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f7268b4e_fc967d2e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-02T16:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7268b4e_d6392276",
+      "range": {
+        "startLine": 460,
+        "startChar": 17,
+        "endLine": 460,
+        "endChar": 35
+      },
+      "revId": "e5cea3b808c04f7e2c59c6dfa129f66b3360b322",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7268b4e_36d2d6d6",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
         "patchSetId": 19
@@ -36,6 +60,30 @@
       "writtenOn": "2015-01-30T22:22:17Z",
       "side": 1,
       "message": "will this make the interface referenced?\n\nIf that is true it would read better this way:\n\n \nPredicate\u003cJNode\u003e notReferenced \u003d referencedTypes.contains(type) ?\n  Predicates.not(Predicates.in(referencedNonTypes)) : Predicates.\u003cJNode\u003ealwaysTrue();\n\nremoveFields(notReferenced, type);\nremoveMethods(notReferenced, type);",
+      "range": {
+        "startLine": 424,
+        "startChar": 25,
+        "endLine": 424,
+        "endChar": 41
+      },
+      "revId": "e5cea3b808c04f7e2c59c6dfa129f66b3360b322",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7268b4e_dcaaa16f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-02T16:57:26Z",
+      "side": 1,
+      "message": "Yes. It makes the interface referenced. But some interfaces are marked as instantiated but not referenced. Changed it to\n\n      Predicate\u003cJNode\u003e notReferenced \u003d referencedTypes.contains(type)\n          || program.typeOracle.isInstantiatedType(type) ? Predicates.not(\n          Predicates.in(referencedNonTypes)) : Predicates.\u003cJNode\u003e alwaysTrue();",
+      "parentUuid": "f7268b4e_36d2d6d6",
       "range": {
         "startLine": 424,
         "startChar": 25,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b738935d_ea68fb10",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReplaceDefenderMethodReferences.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-02T16:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7268b4e_5613d2d4",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 7
+      },
+      "revId": "e5cea3b808c04f7e2c59c6dfa129f66b3360b322",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7268b4e_36317665",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 19
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "b738935d_0a6e7f1a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-02T16:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7268b4e_36317665",
+      "range": {
+        "startLine": 1049,
+        "startChar": 0,
+        "endLine": 1056,
+        "endChar": 13
+      },
+      "revId": "e5cea3b808c04f7e2c59c6dfa129f66b3360b322",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7268b4e_16b9da46",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 19
@@ -105,6 +201,30 @@
       "writtenOn": "2015-01-30T22:22:17Z",
       "side": 1,
       "message": "Can you add a test that this works as intended (it looks like a premature optimization to me)\n\nThe setup would be something like this: an abstract class that implements an interface with default methods (but does not implement them); and two subclasses, one that does not implement the default method and one that does a calls super.method().",
+      "range": {
+        "startLine": 1331,
+        "startChar": 0,
+        "endLine": 1335,
+        "endChar": 7
+      },
+      "revId": "e5cea3b808c04f7e2c59c6dfa129f66b3360b322",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97e9cf2d_c0c6de9d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 1335,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-02T16:57:26Z",
+      "side": 1,
+      "message": "an abstract class that implements an interface with default methods (but does not implement them)\n\n\u003e\u003e does it mean the abstract class makes the default methods abstract? Then its subclasses have to implement the inherited abstract methods. This optimization does not take place in the setup you suggest.",
+      "parentUuid": "f7268b4e_16b9da46",
       "range": {
         "startLine": 1331,
         "startChar": 0,

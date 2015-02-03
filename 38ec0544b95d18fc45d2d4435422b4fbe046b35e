@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c24dca3_56881488",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-03T22:08:08Z",
+      "side": 1,
+      "message": "I think this is not correct still. Before default methods, interface methods were implicitly abstract, with no body so there was no need to even traverse. I think know this should be more like visit(JClassType), i.e.\n\nI would replace visit(JClassType,..) and visit(JInterfaceType, ...) by\n    \n  @Override\n  public boolean visit(JDeclaredType type, Context ctx) {\n    assert (referencedTypes.contains(type) || type instanceof JInterfaceType);\n      \n    Predicate\u003cJNode\u003e notReferenced \u003d Predicates.not(Predicates.in(referencedNonTypes));\n    removeFields(notReferenced, type);\n    removeMethods(notReferenced, type);\n\n    for (JMethod method : type.getMethods()) {\n      accept(method);\n    }\n\n    return false;\n  }\n\n\nI think the current implementation will prune methods that are _ONLY_ called from a default method body. Can you add a test for that and verify?",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 427,
+        "endChar": 46
+      },
+      "revId": "38ec0544b95d18fc45d2d4435422b4fbe046b35e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

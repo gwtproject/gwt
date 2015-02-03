@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c444057_2f82e9e1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/OptimizerTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-03T23:26:15Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b56432c002f03395a080f2d8a32301f2e06b40cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

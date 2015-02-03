@@ -22,6 +22,30 @@
       "revId": "38ec0544b95d18fc45d2d4435422b4fbe046b35e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c24dca3_79dc2320",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-02-03T22:22:34Z",
+      "side": 1,
+      "message": "Not just defender methods, but Java8 can have static methods on interfaces now with bodies.",
+      "parentUuid": "5c24dca3_56881488",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 427,
+        "endChar": 46
+      },
+      "revId": "38ec0544b95d18fc45d2d4435422b4fbe046b35e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

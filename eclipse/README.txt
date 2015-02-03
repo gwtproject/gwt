@@ -167,13 +167,17 @@ Description can be left blank.
   Then press the Finish button.
 
 2) If you are using the Google Plugin for Eclipse 
-  (http://code.google.com/eclipse), enable it for 'gwt-user'
+  (https://developers.google.com/eclipse/), enable it for 'gwt-user'
 
   Right click the 'gwt-user' project and go to properties. Select 
   Google->Web Toolkit, and check the box for 'Use Google Web Toolkit'.
 
   Then, select Google->Web Application, and uncheck 'This project has a WAR
   directory'. Then press the "Apply" button.
+
+  Sometimes the Google Plugin does not handle all GWT language features
+  correctly. But you can show these errors as warnings, therefor go to
+  Window->Preferences->Google->Error/Warnings to adjust them.
 
 3) Dismiss the welcome tab if you are setting up an Eclipse workspace
   for the first time.

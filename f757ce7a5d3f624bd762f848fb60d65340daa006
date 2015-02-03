@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "378ca3b9_d19fb4ca",
+        "filename": "user/test/com/google/gwt/resources/client/CSSResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-03T19:04:10Z",
+      "side": 1,
+      "message": "You can extend the class and override getModuleName to return the module name that enables gss and then override the testCss method.",
+      "revId": "f757ce7a5d3f624bd762f848fb60d65340daa006",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

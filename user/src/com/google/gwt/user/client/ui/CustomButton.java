@@ -659,7 +659,7 @@ public abstract class CustomButton extends ButtonBase {
         if (isCapturing) {
           isCapturing = false;
           DOM.releaseCapture(getElement());
-          if (isHovering() && event.getButton() == Event.BUTTON_LEFT) {
+          if (event.getButton() == Event.BUTTON_LEFT) {
             onClick();
           }
         }

@@ -246,4 +246,40 @@ public class CustomButtonTest extends GWTTestCase {
     tb.setValue(true, true);
     assertTrue(h.received);
   }
+
+  public void testClickButtonAfterEnabled() {
+    ToggleButton b = new ToggleButton();
+    final ArrayList<String> events = new ArrayList<String>();
+
+    Handler h = new Handler();
+    b.addValueChangeHandler(h);
+
+    b.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(ClickEvent event) {
+        events.add(event.getNativeEvent().getType());
+      }
+    });
+
+    RootPanel.get().add(b);
+
+    b.setEnabled(false);
+
+    b.getElement().dispatchEvent(
+        Document.get().createMouseOverEvent(1, 0, 0, 0, 0, false, false, false,
+            false, Event.BUTTON_LEFT, null));
+
+    b.setEnabled(true);
+
+    b.getElement().dispatchEvent(
+        Document.get().createMouseDownEvent(1, 0, 0, 0, 0, false, false, false,
+            false, Event.BUTTON_LEFT));
+    b.getElement().dispatchEvent(
+        Document.get().createMouseUpEvent(1, 0, 0, 0, 0, false, false, false,
+            false, Event.BUTTON_LEFT));
+
+    assertEquals("Expecting one click event", 1, events.size());
+    assertEquals("Expecting one click event", "click", events.get(0));
+    assertNotNull("Expecting a value change event", h.received);
+  }
 }

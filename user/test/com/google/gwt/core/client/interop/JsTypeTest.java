@@ -23,8 +23,9 @@ import com.google.gwt.junit.client.GWTTestCase;
 import java.util.Iterator;
 
 /**
- * Tests JsType and JsExport.
+ * Tests JsType functionality.
  */
+// TODO(cromwellian): Add test cases for property overriding of @JsProperty methods in java object
 public class JsTypeTest extends GWTTestCase {
 
   @Override
@@ -49,41 +50,46 @@ public class JsTypeTest extends GWTTestCase {
   }-*/;
 
   public void testVirtualUpRefs() {
-    ListImpl l2 = new ListImpl();
-    FooImpl f2 = new FooImpl(); // both inherit .add(), but this one shouldn't be exported
-    // prevent type tightening, force c to be Collection holding l2
-    Collection c = alwaysTrue() ? l2 : f2;
+    ListImpl listWithExport = new ListImpl(); // Exports .add().
+    FooImpl listNoExport = new FooImpl(); // Does not export .add().
 
-    // should invoke obfuscated method
-    c.add("Hello");
-    assertEquals("HelloListImpl", l2.x);
-    // force ListImpl to be assigned to collection without tightening
-    Collection c2 = alwaysTrue() ? f2 : l2;
-    c2.add("World");
-    assertEquals("WorldCollectionBaseFooImpl", f2.x);
+    // Use a loose type reference to force polymorphic dispatch.
+    Collection collectionWithExport = alwaysTrue() ? listWithExport : listNoExport;
+    collectionWithExport.add("Loose");
+    assertEquals("LooseListImpl", listWithExport.x);
 
-    // should call not through bridge
-    f2.add("One");
-    assertEquals("OneCollectionBaseFooImpl", f2.x);
+    // Use a loose type reference to force polymorphic dispatch.
+    Collection collectionNoExport = alwaysTrue() ? listNoExport : listWithExport;
+    collectionNoExport.add("Loose");
+    assertEquals("LooseCollectionBaseFooImpl", listNoExport.x);
+
+    // Calls directly.
+    listNoExport.add("Tight");
+    assertEquals("TightCollectionBaseFooImpl", listNoExport.x);
 
     // TODO: fix me
     if (isIE8()) {
       return;
     }
 
-    // call through bridge
-    l2.add("Two");
-    assertEquals("TwoListImpl", l2.x);
+    // Calls through a bridge method.
+    listWithExport.add("Tight");
+    assertEquals("TightListImpl", listWithExport.x);
   }
 
-  public void testJsTypeCallableFromJs() {
-    MyJsTypeClass jsType = new MyJsTypeClass();
-    assertEquals(1138, callShouldBeAvailable(jsType));
-  }
+  public void testConcreteJsTypeAccess() {
+    ConcreteJsType concreteJsType = new ConcreteJsType();
 
-  private static native int callShouldBeAvailable(Object ref) /*-{
-    return ref.shouldBeAvailable();
-  }-*/;
+    assertTrue(hasField(concreteJsType, "publicMethod"));
+    assertTrue(hasField(concreteJsType, "publicField"));
+
+    assertFalse(hasField(concreteJsType, "privateMethod"));
+    assertFalse(hasField(concreteJsType, "protectedMethod"));
+    assertFalse(hasField(concreteJsType, "packageMethod"));
+    assertFalse(hasField(concreteJsType, "privateField"));
+    assertFalse(hasField(concreteJsType, "protectedField"));
+    assertFalse(hasField(concreteJsType, "packageField"));
+  }
 
   public void testSubClassWithSuperCalls() {
     MyClassExtendsJsPrototype mc = new MyClassExtendsJsPrototype();
@@ -92,10 +98,9 @@ public class JsTypeTest extends GWTTestCase {
 
   public void testJsProperties() {
     MyClassExtendsJsPrototype mc = new MyClassExtendsJsPrototype();
-    // test both fluent and non-fluent accessors
+    // Tests both fluent and non-fluent accessors.
     mc.x(-mc.x()).setY(0);
     assertEquals(58, mc.sum(0));
-    // TODO(cromwellian): Add test cases for property overriding of @JsProperty methods in java object
   }
 
   public void testCasts() {
@@ -187,6 +192,10 @@ public class JsTypeTest extends GWTTestCase {
     return new $wnd['testfoo.bar.MyJsInterface']();
   }-*/;
 
+  private static native boolean hasField(Object object, String fieldName) /*-{
+    return object[fieldName] != undefined;
+  }-*/;
+
   private static native boolean isIE8() /*-{
     return $wnd.navigator.userAgent.toLowerCase().indexOf('msie') != -1 && $doc.documentMode == 8;
   }-*/;
@@ -194,19 +203,4 @@ public class JsTypeTest extends GWTTestCase {
   private static native boolean isFirefox40OrEarlier() /*-{
     return @com.google.gwt.dom.client.DOMImplMozilla::isGecko2OrBefore()();
   }-*/;
-
-  /*
-   * TODO (cromwellian): Add test case for following:
-   * interface ANonJsType {
-   *  void methodA()
-   * }
-   * interface AJsType {
-   * void methodA()
-   * }
-   * class MyJsInterface implements ANonJsType, AJsType {
-   *   void methodA() { ... }
-   * }
-   * verify methodA() is dispatched properly from both interfaces.
-   * Add similar test case with methodA implemented in parent JS class.
-   */
 }

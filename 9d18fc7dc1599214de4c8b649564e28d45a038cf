@@ -46,6 +46,30 @@
       "revId": "9d18fc7dc1599214de4c8b649564e28d45a038cf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c24dca3_19888fb5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-03T23:00:22Z",
+      "side": 1,
+      "message": "We should not throw exceptions for errors that can be caused by user input. ICE should be only used when a precondition in the compiler is not met due to a bug in the compiler code.\n\nI would just let the code fail at runtime. OTOH casting to (Object \u0026 I) should work fine (javac does not compile it but eclipse does).\n\nEclipse and Javac throw errors on different situations\n\ninterface I { m(); }\ninterface J { m(); }\ninterface K extends I { m(); }\n\n1. (Object \u0026 I) () -\u003e { }   javac: error, eclipse: ok.\n2. (I \u0026 J) () -\u003e { }   javac: ok, eclipse: error.\n3. (I \u0026 K) () -\u003e { }   javac: ok, eclipse: ok.\n\nI think here what we need to do is:\n1) determine which functional interface we are implementing with the lambda.  \n    Take the first (functional) interface and implement all the interfaces that are equivalent (functional with the same method signature), otherwise our AST will be malformed, i.e. we have a concrete class that declares that it implements 2 different interface, but only implements the method for one of those).\n2)  Perform the cast unfolding as before. If interfaces are not compatible and JDT does to error out then there will sure be a ClassCastException at runtime in the worst case\n\n\nAnd add the proper test case :)",
+      "parentUuid": "b738935d_2a9023ad",
+      "range": {
+        "startLine": 1416,
+        "startChar": 2,
+        "endLine": 1422,
+        "endChar": 9
+      },
+      "revId": "9d18fc7dc1599214de4c8b649564e28d45a038cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

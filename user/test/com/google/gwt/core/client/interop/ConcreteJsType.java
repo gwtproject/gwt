@@ -18,12 +18,20 @@ package com.google.gwt.core.client.interop;
 import com.google.gwt.core.client.js.JsType;
 
 @JsType
-class MyJsTypeClass {
-  public int shouldBeAvailable() {
-    return 1138;
-  }
+class ConcreteJsType {
+  public void publicMethod() {}
 
-  private int shouldNotBeAvailable() {
-    return 0;
-  }
+  private void privateMethod() {}
+
+  protected void protectedMethod() {}
+
+  void packageMethod() {}
+
+  public int publicField = 10;
+
+  private int privateField = 10;
+
+  protected int protectedField = 10;
+
+  int packageField = 10;
 }

@@ -474,6 +474,10 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     return access == AccessModifier.PRIVATE.ordinal();
   }
 
+  public boolean isPublic() {
+    return access == AccessModifier.PUBLIC.ordinal();
+  }
+
   @Override
   public boolean isStatic() {
     return isStatic;

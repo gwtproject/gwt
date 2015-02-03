@@ -106,6 +106,24 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
   private boolean isVolatile;
   private transient String signature;
 
+  /**
+   * The access modifier; stored as an int to reduce memory / serialization
+   * footprint.
+   */
+  private final int access;
+
+  public JField(SourceInfo info, String name, JDeclaredType enclosingType, JType type,
+      boolean isStatic, Disposition disposition, AccessModifier access) {
+    super(info, name, type, disposition.isFinal());
+    this.enclosingType = enclosingType;
+    this.isStatic = isStatic;
+    this.isCompileTimeConstant = disposition.isCompileTimeConstant();
+    this.isVolatile = disposition.isVolatile();
+    this.isThisRef = disposition.isThisRef();
+    this.access = access.ordinal();
+    // Disposition is not cached because we can be set final later.
+  }
+
   public JField(SourceInfo info, String name, JDeclaredType enclosingType, JType type,
       boolean isStatic, Disposition disposition) {
     super(info, name, type, disposition.isFinal());
@@ -114,6 +132,7 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
     this.isCompileTimeConstant = disposition.isCompileTimeConstant();
     this.isVolatile = disposition.isVolatile();
     this.isThisRef = disposition.isThisRef();
+    this.access = AccessModifier.PUBLIC.ordinal();
     // Disposition is not cached because we can be set final later.
   }
 
@@ -159,6 +178,10 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
 
   public boolean isExternal() {
     return getEnclosingType() != null && getEnclosingType().isExternal();
+  }
+
+  public boolean isPublic() {
+    return access == AccessModifier.PUBLIC.ordinal();
   }
 
   @Override

@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "3c7d68a0_f51e185b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-04T18:19:19Z",
+      "side": 1,
+      "message": "It would be cleaner to decouple the checking for the classification (and would only need the type stack).\n\nBut I know the code was already there...",
+      "range": {
+        "startLine": 523,
+        "startChar": 2,
+        "endLine": 523,
+        "endChar": 44
+      },
+      "revId": "71908d13a5a0344586e2fa691c537aea9b531b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c4f2880_e54e36fa",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
         "patchSetId": 3

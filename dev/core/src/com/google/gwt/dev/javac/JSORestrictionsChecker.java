@@ -63,7 +63,8 @@ public class JSORestrictionsChecker {
   public static final String ERR_JSTYPE_OVERLOADS_NOT_ALLOWED =
       "JsType methods cannot overload another method.";
   public static final String ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS =
-      "@JsExport may only be applied to constructors and static methods and static final fields.";
+      "@JsExport may only be applied to public constructors and static methods and public "
+      + "static final fields in public classes.";
   public static final String ERR_EITHER_JSEXPORT_JSNOEXPORT =
       "@JsExport and @JsNoExport is not allowed at the same time.";
   public static final String ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING =
@@ -137,7 +138,7 @@ public class JSORestrictionsChecker {
   private class JSORestrictionsVisitor extends SafeASTVisitor implements
       ClassFileConstants {
 
-    private final Stack<ClassState> classStateStack = new Stack<ClassState>();
+    private final Stack<TypeDeclaration> typeDeclarationStack = new Stack<TypeDeclaration>();
 
     @Override
     public void endVisit(AllocationExpression exp, BlockScope scope) {
@@ -226,19 +227,19 @@ public class JSORestrictionsChecker {
 
     @Override
     public boolean visit(TypeDeclaration type, ClassScope scope) {
-      pushState(checkType(type));
+      pushState(type);
       return true;
     }
 
     @Override
     public boolean visit(TypeDeclaration type, CompilationUnitScope scope) {
-      pushState(checkType(type));
+      pushState(type);
       return true;
     }
 
     @Override
     public boolean visitValid(TypeDeclaration type, BlockScope scope) {
-      pushState(checkType(type));
+      pushState(type);
       return true;
     }
 
@@ -263,7 +264,8 @@ public class JSORestrictionsChecker {
 
     private void checkJsExport(MethodBinding mb) {
       if (JdtUtil.getAnnotation(mb, JsInteropUtil.JSEXPORT_CLASS) != null) {
-        if (!mb.isConstructor() && !mb.isStatic()) {
+        boolean isStatic = mb.isConstructor() || mb.isStatic();
+        if (!isEffectivelyPublic() || !isStatic || !mb.isPublic()) {
           errorOn(mb, ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
         }
         if (JdtUtil.getAnnotation(mb, JsInteropUtil.JSNOEXPORT_CLASS) != null) {
@@ -274,7 +276,7 @@ public class JSORestrictionsChecker {
 
     private void checkJsExport(FieldBinding fb) {
       if (JdtUtil.getAnnotation(fb, JsInteropUtil.JSEXPORT_CLASS) != null) {
-        if (!fb.isStatic() || !fb.isFinal()) {
+        if (!isEffectivelyPublic() || !fb.isStatic() || !fb.isFinal() || !fb.isPublic()) {
           errorOn(fb, ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
         }
         if (JdtUtil.getAnnotation(fb, JsInteropUtil.JSNOEXPORT_CLASS) != null) {
@@ -368,7 +370,7 @@ public class JSORestrictionsChecker {
       }
     }
 
-    private ClassState checkType(TypeDeclaration type) {
+    private ClassState computeClassState(TypeDeclaration type) {
       SourceTypeBinding binding = type.binding;
 
       if (isJsType(type.binding)) {
@@ -498,19 +500,27 @@ public class JSORestrictionsChecker {
       return null;
     }
 
+    private boolean isEffectivelyPublic() {
+      for (TypeDeclaration typeDeclaration : typeDeclarationStack) {
+        if (!typeDeclaration.binding.isPublic()) {
+          return false;
+        }
+      }
+      return true;
+    }
+
     private boolean isJso() {
-      return classStateStack.peek() == ClassState.JSO;
+      return computeClassState(typeDeclarationStack.peek()) == ClassState.JSO;
     }
 
     private void popState() {
-      classStateStack.pop();
+      typeDeclarationStack.pop();
     }
 
-    private void pushState(ClassState cstate) {
-      classStateStack.push(cstate);
+    private void pushState(TypeDeclaration type) {
+      typeDeclarationStack.push(type);
     }
   }
-
 
   /**
    * Checks an entire

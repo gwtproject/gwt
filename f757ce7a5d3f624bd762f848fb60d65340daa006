@@ -34,6 +34,24 @@
       "revId": "f757ce7a5d3f624bd762f848fb60d65340daa006",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c9488fe_800998d6",
+        "filename": "user/test/com/google/gwt/resources/client/CSSResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-04T20:24:20Z",
+      "side": 1,
+      "message": "If you have CssResourceTest with module name \"Resources\"\nand GssResourceTest exteds CssResource test with module name \"ResourcesTest\" and then if you override testCss in GssResourceTest, it should works fine as the original method will not be executed in GssResourceTest.\n\nWhen you change the default to enable gss then you can change \"ResourcesTest\" to disable gss and switch the module names so GssResourceTest will keep tests gss behaviour and the other one will test css behavior.",
+      "parentUuid": "3c2648b6_6d835570",
+      "revId": "f757ce7a5d3f624bd762f848fb60d65340daa006",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -46,6 +46,30 @@
       "revId": "38ec0544b95d18fc45d2d4435422b4fbe046b35e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc6318f1_89b4394f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-04T01:05:00Z",
+      "side": 1,
+      "message": "The change will not affect the case you want to verify. It is processed by the ControlFlowAnalyzer. I added some test cases in PrunerTest to test it.\n\nPruner prunes parameters and locals in a method when it traverses the method. Also added some test cases.",
+      "parentUuid": "5c24dca3_56881488",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 427,
+        "endChar": 46
+      },
+      "revId": "38ec0544b95d18fc45d2d4435422b4fbe046b35e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

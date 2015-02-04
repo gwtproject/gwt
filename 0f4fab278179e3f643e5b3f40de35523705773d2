@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c7d68a0_f5f4d859",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 2908,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-04T18:46:04Z",
+      "side": 1,
+      "message": "I don\u0027t think the comment is accurate, this code is also executed for\ninterface I {\n  void m();\n  default void n() { m(); }\n}\nwhen synthesizing the \"this\" reference for m().\nWhat is the emulation path returned in this scenario?",
+      "range": {
+        "startLine": 2905,
+        "startChar": 1,
+        "endLine": 2908,
+        "endChar": 7
+      },
+      "revId": "0f4fab278179e3f643e5b3f40de35523705773d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

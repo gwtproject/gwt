@@ -52,6 +52,24 @@
       "revId": "f757ce7a5d3f624bd762f848fb60d65340daa006",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc6c4cf3_40b942c7",
+        "filename": "user/test/com/google/gwt/resources/client/CSSResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-04T21:09:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c9488fe_800998d6",
+      "revId": "f757ce7a5d3f624bd762f848fb60d65340daa006",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c4f2880_c5ffbaba",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-04T02:13:25Z",
+      "side": 1,
+      "message": "nit: unnecessary wrap",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c5d2031_0aaf1b2d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-04T02:13:25Z",
+      "side": 1,
+      "message": "Delegate to other constructor?\nthis(......., AccessModifier.PUBLIC)",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c4f2880_e57516b6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-04T02:13:25Z",
+      "side": 1,
+      "message": "This is probably not true for all callers of this method. If somebody uses isPublic method for any other reason than we do now, they will get incorrect data.",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c4f2880_c568da8a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-04T02:13:25Z",
+      "side": 1,
+      "message": "vtable check was missing before. I wonder if there was a bug. If there was, can we add a test for it?",
+      "range": {
+        "startLine": 1180,
+        "startChar": 71,
+        "endLine": 1180,
+        "endChar": 82
+      },
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c4f2880_05983287",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-04T02:13:25Z",
+      "side": 1,
+      "message": "what if the class is not JsType but parent is? Can we add a test for this scenario?",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c4f2880_c5a0dabb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-04T02:13:25Z",
+      "side": 1,
+      "message": "nit: remove",
+      "range": {
+        "startLine": 726,
+        "startChar": 1,
+        "endLine": 728,
+        "endChar": 7
+      },
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c4f2880_05c5d20f",
+        "filename": "user/test/com/google/gwt/core/client/interop/ConcreteJsType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-04T02:13:25Z",
+      "side": 1,
+      "message": "Can we add a test that overrides work (NonJsType extends JsType and overrides)?\nOr add a todo in the doc if you want to have separate pass for overrides in different scenarios.",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

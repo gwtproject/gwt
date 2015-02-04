@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "3c4f2880_e5207644",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-04T02:21:43Z",
+      "side": 1,
+      "message": "hmmm, was being consistent with JMethod.java\n\ni guess i\u0027ll modify both",
+      "parentUuid": "7c5d2031_0aaf1b2d",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c4f2880_e57516b6",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2015-02-04T02:13:25Z",
       "side": 1,
       "message": "This is probably not true for all callers of this method. If somebody uses isPublic method for any other reason than we do now, they will get incorrect data.",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c4f2880_856c226c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-04T02:21:43Z",
+      "side": 1,
+      "message": "all other callers are synthetic and have no real access level anyway also this field is brand new and so this value can not possibly break any existing functionality.\n\nthis is the best default",
+      "parentUuid": "3c4f2880_e57516b6",
       "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -127,6 +163,24 @@
       "writtenOn": "2015-02-04T02:13:25Z",
       "side": 1,
       "message": "Can we add a test that overrides work (NonJsType extends JsType and overrides)?\nOr add a todo in the doc if you want to have separate pass for overrides in different scenarios.",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c4f2880_65a0063f",
+        "filename": "user/test/com/google/gwt/core/client/interop/ConcreteJsType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-04T02:21:43Z",
+      "side": 1,
+      "message": "i already consider that work to be a separate CL. will add a note in the doc",
+      "parentUuid": "3c4f2880_05c5d20f",
       "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

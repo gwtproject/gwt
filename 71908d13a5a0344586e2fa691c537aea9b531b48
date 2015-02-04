@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1ccfc448_6cf49be4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-04T19:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c7d68a0_f51e185b",
+      "range": {
+        "startLine": 523,
+        "startChar": 2,
+        "endLine": 523,
+        "endChar": 44
+      },
+      "revId": "71908d13a5a0344586e2fa691c537aea9b531b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c4f2880_e54e36fa",
         "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
         "patchSetId": 3
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "1ccfc448_8c7f8792",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-04T19:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c4f2880_e54e36fa",
+      "revId": "71908d13a5a0344586e2fa691c537aea9b531b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c4f2880_25d9eef5",
         "filename": "user/test/com/google/gwt/core/client/interop/MyClassExportsMethod.java",
         "patchSetId": 3
@@ -53,6 +95,24 @@
       "writtenOn": "2015-02-04T02:13:54Z",
       "side": 1,
       "message": "[error] Missing a Javadoc comment.",
+      "revId": "71908d13a5a0344586e2fa691c537aea9b531b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ccfc448_cca34fc6",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyClassExportsMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-04T19:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c4f2880_25d9eef5",
       "revId": "71908d13a5a0344586e2fa691c537aea9b531b48",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

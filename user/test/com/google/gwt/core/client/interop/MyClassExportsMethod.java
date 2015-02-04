@@ -17,7 +17,7 @@ package com.google.gwt.core.client.interop;
 
 import com.google.gwt.core.client.js.JsExport;
 
-class MyClassExportsMethod {
+public class MyClassExportsMethod {
   public static boolean calledFromJs = false;
 
   @JsExport("exportedFromJava")
@@ -56,7 +56,7 @@ class MyClassExportsMethod {
   }
 
   @JsExport("newA")
-  private static A newA() {
+  public static A newA() {
     return new A();
   }
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcbf988b_a9735d35",
+        "filename": "user/test/com/google/gwt/resources/client/CSSResourceTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-04T23:18:52Z",
+      "side": 1,
+      "message": "remove the method",
+      "revId": "88a30a2c5f0bd9c68c12874c778f68ee404ac9a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

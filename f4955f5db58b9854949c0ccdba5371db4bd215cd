@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "3c9488fe_60524caf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-04T20:40:26Z",
+      "side": 1,
+      "message": "I understand that it will not break existing functionality.\nWhat I meant is for future usages (e.g. let\u0027s later one chooses to keep public field on the prototype but private fields in a hidden scope while generating javascript and relies on what is return from isPublic). If a synthesized field appears to be public where it shouldn\u0027t be, then it will lead to bugs. However, if you already looked at callers and strongly believe all those synthesized fields should really be public, then of course it is not a problem. My intuition was at least some should be private but I might be incorrect.",
+      "parentUuid": "3c4f2880_856c226c",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c4f2880_c568da8a",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 2

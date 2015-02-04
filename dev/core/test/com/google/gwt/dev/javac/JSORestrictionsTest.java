@@ -412,6 +412,43 @@ public class JSORestrictionsTest extends TestCase {
     shouldGenerateNoError(goodCode);
   }
 
+  public void testJsExportNotOnNonPublicClass() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("  private static class PrivateNested {\n");
+    buggyCode.append("    public static class PublicNested {\n");
+    buggyCode.append("      @JsExport public static Object foo() {return null;}\n");
+    buggyCode.append("    }\n");
+    buggyCode.append("  }\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 5: "
+        + JSORestrictionsChecker.ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
+  }
+
+  public void testJsExportNotOnNonPublicField() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsExport final static String foo = null;\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 3: "
+        + JSORestrictionsChecker.ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
+  }
+
+  public void testJsExportNotOnNonPublicMethod() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsExport Object foo() {return null;}\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 3: "
+        + JSORestrictionsChecker.ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
+  }
+
   public void testJsExportNotOnObjectMethod() {
     StringBuilder buggyCode = new StringBuilder();
     buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");

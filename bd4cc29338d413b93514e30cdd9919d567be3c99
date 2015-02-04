@@ -22,6 +22,30 @@
       "revId": "bd4cc29338d413b93514e30cdd9919d567be3c99",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fca4b088_c330f616",
+        "filename": "user/test/com/google/gwt/resources/client/CSSResourceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-04T22:38:45Z",
+      "side": 1,
+      "message": "Removed since we do not need it anymore after running it with different tests.",
+      "parentUuid": "1ca8a45a_64502a1c",
+      "range": {
+        "startLine": 275,
+        "startChar": 4,
+        "endLine": 275,
+        "endChar": 14
+      },
+      "revId": "bd4cc29338d413b93514e30cdd9919d567be3c99",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

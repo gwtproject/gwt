@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ccfc448_8ce22750",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-04T20:20:14Z",
+      "side": 1,
+      "message": "Maybe rename to areAllEnclosingClassesPublic()",
+      "range": {
+        "startLine": 280,
+        "startChar": 13,
+        "endLine": 280,
+        "endChar": 32
+      },
+      "revId": "85c3a4577eb793d0aba010490747fc7070f4633a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

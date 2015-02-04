@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "773e1bec_9f59537e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-04T17:25:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceec8d7c_e16766be",
+      "revId": "55e3dd4817df6337b2fbac9cd855a5c011d44cb5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df5d1961_02da10f4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
         "patchSetId": 15
@@ -64,6 +82,24 @@
       "writtenOn": "2015-01-04T06:59:03Z",
       "side": 1,
       "message": "I ran into issues when assigning instances to local variables of interface types and invoking defender methods that called other defender methods.  The this reference was pointing to the this of the outer scope, rather than of the instance I was referencing.  We\u0027ll probably want to add more complex test scenarios.",
+      "revId": "55e3dd4817df6337b2fbac9cd855a5c011d44cb5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c6b60dd_d7f8bc85",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-04T17:25:44Z",
+      "side": 1,
+      "message": "I think the issue is fixed. And test cases are added.",
+      "parentUuid": "0e0225f8_1e5d09ec",
       "revId": "55e3dd4817df6337b2fbac9cd855a5c011d44cb5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

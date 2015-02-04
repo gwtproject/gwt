@@ -70,6 +70,30 @@
       "revId": "9d18fc7dc1599214de4c8b649564e28d45a038cf",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc7158c9_f95b7739",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-04T16:08:57Z",
+      "side": 1,
+      "message": "I think these are the errors in eclipse. javac does the right thing but eclipse is wrong.\n\n1. (ClassA \u0026 I) ()-\u003e{}. lambda expression is functional interface, so casting it to a class (not Object) will always throw cast exception. Compiler should catch it as a compiler error. But anyway, jdt does not catch it, we can still perform the cast unfolding and leave it to run time error.\n\n2. (I \u0026 J) ()-\u003e{}. It should be OK but JDT does not compile. Then GWT cannot compile either.\n\n3. (I \u0026 K) ()-\u003e{}. They both compile. JDT resolves (I \u0026 K) to K.\n\n4. Here is another case where JDT does wrong.\n\nInterface I {m();}\n\nInterface J {n(); g();}\n\n((I \u0026 J) ()-\u003e{}).m();// compiles and runs well\n\n((I \u0026 J) () \u003e{}).n();// compiles, but run time error:AbstractMethodError\n\n((I \u0026 J) ()-\u003e{}).g();// compiles, but run time error.\n\nJDT returns the single abstract method of (I\u0026J) as m(), but actually it should not be. How should we deal with this case? It should be an early error not until run time I think.",
+      "parentUuid": "5c24dca3_19888fb5",
+      "range": {
+        "startLine": 1416,
+        "startChar": 2,
+        "endLine": 1422,
+        "endChar": 9
+      },
+      "revId": "9d18fc7dc1599214de4c8b649564e28d45a038cf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

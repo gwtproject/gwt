@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c4f2880_25d9eef5",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyClassExportsMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-04T02:13:54Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "71908d13a5a0344586e2fa691c537aea9b531b48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

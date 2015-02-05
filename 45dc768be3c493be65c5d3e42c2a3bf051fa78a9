@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc58cc71_5a77d5ee",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-02-05T04:02:00Z",
+      "side": 1,
+      "message": "You cannot do that here. The constants values are not entirely resolved at this point. Users can use conditionals or functions in their constant definitions.",
+      "revId": "45dc768be3c493be65c5d3e42c2a3bf051fa78a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3caba858_6866bbbc",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-02-05T04:02:00Z",
+      "side": 1,
+      "message": "You have to collect the real values of the constants here. Everything has been replaced and the compile-time conditionnals have been resolved.\n\nThe problem is that the ReplaceConstantReferences removes the Constant definitions, so you have to turn the second parameter of its constructor to false in order to avoid that. (and maybe add a visitors that remove these constant definition nodes afterwards).\n\nAlso I\u0027m wondering if we cannot move the call to the ResolveCustomFunctionNodes visitor before the call to the ReplaceConstantReferences visitor. So that if a constant use a function as value, we resolve the function only once (for the time being we replace the constant by the call to the function and resolve the function several times)\n\n\nSo to summarize:\n- Call to ImageSpriteCreator\n- Call to ResolveCustomFunctionNodes\n- Call to CollectConstantDefinitions\n- Call to ReplaceConstantReferences with the parameter removeDefs set to false\n- A second call to CollectConstantDefinitions to retrieve the real value of the constant. These values have to be used to generate the methods of the CssResource interface.\n- Call to a new visitor that deletes all CssDefinitionNode",
+      "revId": "45dc768be3c493be65c5d3e42c2a3bf051fa78a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c073452_f011a07b",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-02-05T04:02:00Z",
+      "side": 1,
+      "message": "you can use camelCase for the function names",
+      "revId": "45dc768be3c493be65c5d3e42c2a3bf051fa78a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c073452_d00e1c57",
+        "filename": "user/test/com/google/gwt/resources/client/gss/constants.gss",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-02-05T04:02:00Z",
+      "side": 1,
+      "message": "Could you add these tests:\n\n  @if (is(\"custom.one\", \"bar\")) {\n    @def COLOR1 #012345;\n  }\n  @else {\n    @def COLOR1 #012346;\n  }\n\n  @def MYCOLOR COLOR1;\n  @def MYCOLOR1 MYCOLOR;\n\n  @def PADDING add(5px, 5px);\n  @def PADDING_2 PADDING;",
+      "revId": "45dc768be3c493be65c5d3e42c2a3bf051fa78a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

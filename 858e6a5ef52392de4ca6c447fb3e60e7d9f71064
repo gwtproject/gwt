@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c8dbc43_8e449b8c",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-05T22:46:46Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "858e6a5ef52392de4ca6c447fb3e60e7d9f71064",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

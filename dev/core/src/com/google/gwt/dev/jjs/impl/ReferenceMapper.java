@@ -351,7 +351,7 @@ public class ReferenceMapper {
     }
   }
 
-  private String signature(FieldBinding binding) {
+  public static String signature(FieldBinding binding) {
     StringBuilder sb = new StringBuilder();
     sb.append(binding.declaringClass.constantPoolName());
     sb.append('.');
@@ -361,7 +361,7 @@ public class ReferenceMapper {
     return sb.toString();
   }
 
-  private String signature(MethodBinding binding) {
+  public static String signature(MethodBinding binding) {
     StringBuilder sb = new StringBuilder();
     sb.append(binding.declaringClass.constantPoolName());
     sb.append('.');
@@ -375,7 +375,7 @@ public class ReferenceMapper {
     return sb.toString();
   }
 
-  private String signature(TypeBinding binding) {
+  public static String signature(TypeBinding binding) {
     if (binding.isBaseType()) {
       return String.valueOf(binding.sourceName());
     } else {

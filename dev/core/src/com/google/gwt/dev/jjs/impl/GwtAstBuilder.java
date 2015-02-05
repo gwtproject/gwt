@@ -2466,8 +2466,7 @@ public class GwtAstBuilder {
           if (m.getExportName() != null) {
             continue;
           }
-          if (m.getAccess() == AccessModifier.PUBLIC
-              && (m.isStatic() || (m instanceof JConstructor))) {
+          if (m.isPublic() && (m.isStatic() || (m instanceof JConstructor))) {
             m.setExportName("");
           }
         }
@@ -3734,7 +3733,7 @@ public class GwtAstBuilder {
     } else {
       field =
           new JField(info, intern(binding.name), enclosingType, type, binding.isStatic(),
-              getFieldDisposition(binding));
+              getFieldDisposition(binding), AccessModifier.fromFieldBinding(binding));
     }
     enclosingType.addField(field);
     JsInteropUtil.maybeSetExportedField(x, field);

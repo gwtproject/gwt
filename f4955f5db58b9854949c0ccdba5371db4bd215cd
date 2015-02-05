@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5c8dbc43_2e42c762",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-05T23:55:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c4f2880_c5ffbaba",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c5d2031_0aaf1b2d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
         "patchSetId": 2
@@ -48,6 +66,42 @@
       "side": 1,
       "message": "hmmm, was being consistent with JMethod.java\n\ni guess i\u0027ll modify both",
       "parentUuid": "7c5d2031_0aaf1b2d",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ca3b4b2_908cb44b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-05T23:55:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c5d2031_0aaf1b2d",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c8dbc43_4e371310",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-05T23:55:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c4f2880_e5207644",
       "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -130,6 +184,30 @@
     },
     {
       "key": {
+        "uuid": "5c8dbc43_4ebab3ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-05T23:55:01Z",
+      "side": 1,
+      "message": "i\u0027ve added a test for this.\n\nalso your comment led me to re-examine this point for fields. i\u0027ve added the same isStatic() guard for fields here and added a test",
+      "parentUuid": "3c4f2880_c568da8a",
+      "range": {
+        "startLine": 1180,
+        "startChar": 71,
+        "endLine": 1180,
+        "endChar": 82
+      },
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c4f2880_05983287",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 2
@@ -147,6 +225,24 @@
     },
     {
       "key": {
+        "uuid": "5c8dbc43_14b0bc0f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-05T23:55:01Z",
+      "side": 1,
+      "message": "i\u0027ve added a test.\n\nand am also adding a comment explaining why the logic here is correct even though it doesn\u0027t appear correct",
+      "parentUuid": "3c4f2880_05983287",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c4f2880_c5a0dabb",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 2
@@ -158,6 +254,30 @@
       "writtenOn": "2015-02-04T02:13:25Z",
       "side": 1,
       "message": "nit: remove",
+      "range": {
+        "startLine": 726,
+        "startChar": 1,
+        "endLine": 728,
+        "endChar": 7
+      },
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c8dbc43_8ecf3b5e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-05T23:55:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c4f2880_c5a0dabb",
       "range": {
         "startLine": 726,
         "startChar": 1,
@@ -199,6 +319,24 @@
       "side": 1,
       "message": "i already consider that work to be a separate CL. will add a note in the doc",
       "parentUuid": "3c4f2880_05c5d20f",
+      "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c8dbc43_741d8060",
+        "filename": "user/test/com/google/gwt/core/client/interop/ConcreteJsType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-05T23:55:01Z",
+      "side": 1,
+      "message": "i went ahead and added this in this CL",
+      "parentUuid": "3c4f2880_65a0063f",
       "revId": "f4955f5db58b9854949c0ccdba5371db4bd215cd",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -34,6 +34,24 @@
       "revId": "cc4ce54a578f39140a381e1ade59a7a0c78b6c5c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c1a1cb5_29b629be",
+        "filename": "eclipse/samples/Hello/.classpath",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 8288
+      },
+      "writtenOn": "2015-02-05T18:20:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2014e0_c8830f17",
+      "revId": "cc4ce54a578f39140a381e1ade59a7a0c78b6c5c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

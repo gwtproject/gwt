@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c8dbc43_b4a0c8ba",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-05T23:47:47Z",
+      "side": 1,
+      "message": "[error] \u0027return\u0027 is not preceded with whitespace.",
+      "revId": "ad9ecc38ebde88a4519916b58ee083bb541543cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c8dbc43_d4ad54b1",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-05T23:47:47Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "ad9ecc38ebde88a4519916b58ee083bb541543cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c8dbc43_f4aa5096",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-05T23:47:47Z",
+      "side": 1,
+      "message": "[error] \u0027return\u0027 is not preceded with whitespace.",
+      "revId": "ad9ecc38ebde88a4519916b58ee083bb541543cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c8dbc43_14999c8f",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-05T23:47:47Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "ad9ecc38ebde88a4519916b58ee083bb541543cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c8dbc43_5493246f",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-05T23:47:47Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "ad9ecc38ebde88a4519916b58ee083bb541543cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c8dbc43_349e9878",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-05T23:47:47Z",
+      "side": 1,
+      "message": "[error] \u0027return\u0027 is not preceded with whitespace.",
+      "revId": "ad9ecc38ebde88a4519916b58ee083bb541543cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

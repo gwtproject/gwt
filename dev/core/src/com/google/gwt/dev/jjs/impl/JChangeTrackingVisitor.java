@@ -132,6 +132,10 @@ public abstract class JChangeTrackingVisitor extends JModVisitor {
     return currentMethod;
   }
 
+  public OptimizerContext getOptimizerContext() {
+    return optimizerCtx;
+  }
+
   @Override
   public final boolean visit(JConstructor x, Context ctx) {
     currentMethod = x;

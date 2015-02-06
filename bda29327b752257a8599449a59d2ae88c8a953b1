@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c81a016_cd113d7c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-06T05:34:39Z",
+      "side": 1,
+      "message": "Not sure how does this work but probably not but just want to double check if visibility should be something that requires to be put into account here.",
+      "revId": "bda29327b752257a8599449a59d2ae88c8a953b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c81a016_6d3cd1f1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-06T05:34:39Z",
+      "side": 1,
+      "message": "I actually checked this, most usage seems like creating private fields.",
+      "range": {
+        "startLine": 128,
+        "startChar": 80,
+        "endLine": 128,
+        "endChar": 86
+      },
+      "revId": "bda29327b752257a8599449a59d2ae88c8a953b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c81a016_cd869d29",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-06T05:34:39Z",
+      "side": 1,
+      "message": "Thanks, very useful.",
+      "revId": "bda29327b752257a8599449a59d2ae88c8a953b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c81a016_6dbf71de",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-06T05:34:39Z",
+      "side": 1,
+      "message": "Nice tests!",
+      "revId": "bda29327b752257a8599449a59d2ae88c8a953b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c81a016_2d9e5978",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-06T05:34:39Z",
+      "side": 1,
+      "message": "I would be more paranoid and have preferred to explicitly and independently check the return values.",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 68
+      },
+      "revId": "bda29327b752257a8599449a59d2ae88c8a953b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

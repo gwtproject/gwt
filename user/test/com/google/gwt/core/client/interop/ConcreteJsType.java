@@ -17,13 +17,34 @@ package com.google.gwt.core.client.interop;
 
 import com.google.gwt.core.client.js.JsType;
 
+/**
+ * This concrete test class is *directly* annotated as a @JsType.
+ */
 @JsType
-class MyJsTypeClass {
-  public int shouldBeAvailable() {
-    return 1138;
+class ConcreteJsType {
+  public int publicMethod() {
+    return 10;
   }
 
-  private int shouldNotBeAvailable() {
-    return 0;
+  public static void publicStaticMethod() {
   }
+
+  private void privateMethod() {
+  }
+
+  protected void protectedMethod() {
+  }
+
+  void packageMethod() {
+  }
+
+  public int publicField = 10;
+
+  public static int publicStaticField = 10;
+
+  private int privateField = 10;
+
+  protected int protectedField = 10;
+
+  int packageField = 10;
 }

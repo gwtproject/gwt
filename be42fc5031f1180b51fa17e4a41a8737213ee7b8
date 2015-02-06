@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c47c43f_4ca15f84",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-06T23:30:05Z",
+      "side": 1,
+      "message": "Should AccessModifier.DEFAULT be more reasonable than PUBLIC as a default?\n\nOr can we remove this constructor, and pass the accessModifier explicitly?",
+      "range": {
+        "startLine": 128,
+        "startChar": 65,
+        "endLine": 128,
+        "endChar": 86
+      },
+      "revId": "be42fc5031f1180b51fa17e4a41a8737213ee7b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c3dbc9d_2ed7a749",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-06T23:30:05Z",
+      "side": 1,
+      "message": "what if n() overrides m(), m() overrides h(), n() and m() are not immediateJsTypeMethod, h() is immediateJsTypeMethod, would be n() jsTypeMethod? If yes, should this be isJsTypeMethod?\n\nMaybe the result will be the same if getOverriddenMethodsOf() returns all the direct and indirect overridden methods. But it will depend on the computation of overridden methods.",
+      "range": {
+        "startLine": 1166,
+        "startChar": 10,
+        "endLine": 1166,
+        "endChar": 33
+      },
+      "revId": "be42fc5031f1180b51fa17e4a41a8737213ee7b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

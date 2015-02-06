@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "1c70a417_e44b7a15",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-06T00:55:24Z",
+      "side": 1,
+      "message": "It is more consistent having the pass in the optimization loop. So moved it there.\n\nI still prefer to having this optimizer remove the cast check rather than just change the type. Since typetightener runs before redundantcastremover, the concern about typetightener may not be a big problem.",
+      "parentUuid": "97e9cf2d_69553d04",
+      "range": {
+        "startLine": 1454,
+        "startChar": 0,
+        "endLine": 1456,
+        "endChar": 5
+      },
+      "revId": "b87963c1aaebb8b05277f58709450900ce224e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2bfb5b87_b29a7878",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JConditional.java",
         "patchSetId": 1

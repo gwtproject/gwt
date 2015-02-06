@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5ca13c0b_2e8d0746",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-06T19:25:02Z",
+      "side": 1,
+      "message": "double checked, i think no.\n\nExternalSerializedForm is sort of a fake reference to a field on an unresolved stub type reference. it will be replaced during UnifyAst and not be used during compilation",
+      "parentUuid": "7c81a016_cd113d7c",
+      "revId": "bda29327b752257a8599449a59d2ae88c8a953b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c81a016_6d3cd1f1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2015-02-06T05:34:39Z",
       "side": 1,
       "message": "I actually checked this, most usage seems like creating private fields.",
+      "range": {
+        "startLine": 128,
+        "startChar": 80,
+        "endLine": 128,
+        "endChar": 86
+      },
+      "revId": "bda29327b752257a8599449a59d2ae88c8a953b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cab44f1_ac6103fd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-06T19:25:02Z",
+      "side": 1,
+      "message": "audited all the places",
+      "parentUuid": "7c81a016_6d3cd1f1",
       "range": {
         "startLine": 128,
         "startChar": 80,

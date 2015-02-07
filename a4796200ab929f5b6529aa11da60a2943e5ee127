@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1c9984f9_7c32396c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1427,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-07T00:57:24Z",
+      "side": 1,
+      "message": "it\u0027s from processIntersectionTypeForLambda(), the size of the returning array is set to the number of the intersecting types, but only the types which should be implemented as super interfaces are inserted in the returning array, and the leftover items are set to be null.",
+      "parentUuid": "7c31a0d0_870406f8",
+      "range": {
+        "startLine": 1425,
+        "startChar": 0,
+        "endLine": 1427,
+        "endChar": 9
+      },
+      "revId": "a4796200ab929f5b6529aa11da60a2943e5ee127",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc1cb053_43fda6c0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReferenceMapper.java",
         "patchSetId": 6

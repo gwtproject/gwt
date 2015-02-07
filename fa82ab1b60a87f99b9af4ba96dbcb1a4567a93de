@@ -46,6 +46,30 @@
       "revId": "fa82ab1b60a87f99b9af4ba96dbcb1a4567a93de",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc1cb053_432cc693",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 1632,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-07T00:59:55Z",
+      "side": 1,
+      "message": "I am blind.",
+      "parentUuid": "1c9984f9_1c1215d2",
+      "range": {
+        "startLine": 1632,
+        "startChar": 8,
+        "endLine": 1632,
+        "endChar": 44
+      },
+      "revId": "fa82ab1b60a87f99b9af4ba96dbcb1a4567a93de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5124c7a3_36cfd8b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-07T03:46:50Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "97714d59e0a8fa928832f5b4723917d78e75e61c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5124c7a3_16d4dc41",
+        "filename": "user/src/com/google/gwt/resources/rg/ImageBundleBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-07T03:46:50Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.IOException\u0027 import.",
+      "revId": "97714d59e0a8fa928832f5b4723917d78e75e61c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -49,6 +49,53 @@
     },
     {
       "key": {
+        "uuid": "7c31a0d0_870326b7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1427,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-07T01:08:58Z",
+      "side": 1,
+      "message": "I think it is cleaner then to use List\u003cJInterfaceType\u003e rather than JInterfaceType[]. Or you could implement processIntersectionTypeForLambda to return the array of the right size, comments bellow.",
+      "parentUuid": "1c9984f9_7c32396c",
+      "range": {
+        "startLine": 1425,
+        "startChar": 0,
+        "endLine": 1427,
+        "endChar": 9
+      },
+      "revId": "a4796200ab929f5b6529aa11da60a2943e5ee127",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91f1df52_a0115a78",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 3504,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-07T01:08:58Z",
+      "side": 1,
+      "message": "Java semantics makes this unnecessary, uninitialized values are always null.\n\nBut anyway this would read much better like this:\n\n    List\u003cJInterfaceType\u003e interfaces \u003d Lists.newArrayList();\n      for (ReferenceBinding intersectingTypeBinding : type.intersectingTypes) {\n        if (shouldImplements(intersectingTypeBinding, scope, samSignature)) {\n          JType intersectingType \u003d typeMap.get(intersectingTypeBinding);\n          assert (intersectingType instanceof JInterfaceType);\n          interfaces.add(((JInterfaceType) intersectingType));\n        }\n      }\n      return Iterables.toArray(interfaces, JInterfaceType.class);\n\nor using List directly instead of arrays for returning.",
+      "range": {
+        "startLine": 3502,
+        "startChar": 1,
+        "endLine": 3504,
+        "endChar": 7
+      },
+      "revId": "a4796200ab929f5b6529aa11da60a2943e5ee127",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc1cb053_43fda6c0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReferenceMapper.java",
         "patchSetId": 6

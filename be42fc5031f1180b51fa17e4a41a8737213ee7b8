@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "91f1df52_208f8a14",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-07T01:48:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c47c43f_4ca15f84",
+      "range": {
+        "startLine": 128,
+        "startChar": 65,
+        "endLine": 128,
+        "endChar": 86
+      },
+      "revId": "be42fc5031f1180b51fa17e4a41a8737213ee7b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c3dbc9d_2ed7a749",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 4
@@ -59,6 +83,30 @@
       "writtenOn": "2015-02-07T01:13:10Z",
       "side": 1,
       "message": "Override list has the complete list of overrides (at least after Roberto fixes the bug :)).",
+      "parentUuid": "5c3dbc9d_2ed7a749",
+      "range": {
+        "startLine": 1166,
+        "startChar": 10,
+        "endLine": 1166,
+        "endChar": 33
+      },
+      "revId": "be42fc5031f1180b51fa17e4a41a8737213ee7b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91f1df52_60959220",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-07T01:48:32Z",
+      "side": 1,
+      "message": "hmmmm, that is an interesting point.\n\nyou\u0027re right. but we\u0027re not quite in a position to support this missing functionality since no bridge methods are yet being generated for revealed overrides.\n\nroberto is adding support for this behavior soon. i\u0027ll add a test and keep it commented out for now",
       "parentUuid": "5c3dbc9d_2ed7a749",
       "range": {
         "startLine": 1166,

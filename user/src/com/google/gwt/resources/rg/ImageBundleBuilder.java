@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
+import com.google.gwt.util.tools.Utility;
 
 import org.w3c.dom.Node;
 
@@ -30,6 +31,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
@@ -693,17 +695,19 @@ class ImageBundleBuilder {
     // Be safe by default and assume that the incoming image is lossy
     boolean lossy = true;
     // Load the image
+    InputStream is = null;
+    MemoryCacheImageInputStream imageInputStream = null;
     try {
       /*
        * ImageIO uses an SPI pattern API. We don't care about the particulars of
        * the implementation, so just choose the first ImageReader.
        */
-      MemoryCacheImageInputStream input = new MemoryCacheImageInputStream(
-          imageUrl.openStream());
-      Iterator<ImageReader> it = ImageIO.getImageReaders(input);
+      is = imageUrl.openStream();
+      imageInputStream = new MemoryCacheImageInputStream(is);
+      Iterator<ImageReader> it = ImageIO.getImageReaders(imageInputStream);
       readers : while (it.hasNext()) {
         ImageReader reader = it.next();
-        reader.setInput(input);
+        reader.setInput(imageInputStream);
 
         int numImages = reader.getNumImages(true);
         if (numImages == 0) {
@@ -778,6 +782,9 @@ class ImageBundleBuilder {
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to read image resource", e);
       throw new UnableToCompleteException();
+    } finally {
+      Utility.close(imageInputStream);
+      Utility.close(is);
     }
 
     if (image == null) {

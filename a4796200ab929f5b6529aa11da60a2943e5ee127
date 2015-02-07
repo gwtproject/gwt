@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "51292784_8e52fb19",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 3504,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-07T18:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91f1df52_a0115a78",
+      "range": {
+        "startLine": 3502,
+        "startChar": 1,
+        "endLine": 3504,
+        "endChar": 7
+      },
+      "revId": "a4796200ab929f5b6529aa11da60a2943e5ee127",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc1cb053_43fda6c0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReferenceMapper.java",
         "patchSetId": 6
@@ -107,6 +131,30 @@
       "writtenOn": "2015-02-07T00:51:22Z",
       "side": 1,
       "message": "Move this to JdtUtil",
+      "range": {
+        "startLine": 354,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 3
+      },
+      "revId": "a4796200ab929f5b6529aa11da60a2943e5ee127",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51292784_6eb34f1b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReferenceMapper.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-07T18:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc1cb053_43fda6c0",
       "range": {
         "startLine": 354,
         "startChar": 0,

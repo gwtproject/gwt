@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b188a3e3_411cf263",
+        "filename": "user/src/com/google/gwt/resources/rg/ImageBundleBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-08T04:10:04Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.util.tools.Utility.",
+      "revId": "b1d20a62c05ad1ef3d80b0bbafdb7ea2d9c14fcd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

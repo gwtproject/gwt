@@ -19,6 +19,7 @@ import com.google.gwt.core.client.Duration;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayNumber;
 import com.google.gwt.core.client.Scheduler;
 
 /**
@@ -32,7 +33,7 @@ public class SchedulerImpl extends Scheduler {
    */
   static final class Task extends JavaScriptObject {
     public static native Task create(RepeatingCommand cmd) /*-{
-      return [cmd, true];
+      return [cmd, true, []];
     }-*/;
 
     public static native Task create(ScheduledCommand cmd) /*-{
@@ -40,6 +41,55 @@ public class SchedulerImpl extends Scheduler {
     }-*/;
 
     protected Task() {
+    }
+    
+    /**
+     * Tries to run the repeating task until it returns false,
+     * or goalElapsedTime exceeds duration.elapsedMillis().
+     */
+    public boolean executeRepeating(Duration duration, double goalElapsedTime) {
+      boolean repeat = executeRepeating();
+      if (repeat) {
+        double runCount = 1;
+        JsArrayNumber avgTimeStack = getRepeatingAvgTimeStack();
+        int elapsedMilli;
+        int guessCount = 0;
+        if (avgTimeStack.length() > 0) {
+          // get the slowest averageTime from the last 3 runs.
+          double slowestAvg = avgTimeStack.get(0);
+          for (int i = 1; i < avgTimeStack.length(); i++) {
+            slowestAvg = Math.max(slowestAvg, avgTimeStack.get(i));
+          }
+          // the number of times we estimate that the task
+          // can be run before goalElapsedTime is reached
+          guessCount = (int) (goalElapsedTime / slowestAvg);
+        }
+        while (repeat && guessCount-- > 0) {
+          repeat = executeRepeating();
+          runCount += 1;
+        }
+        if (repeat) {
+          elapsedMilli = duration.elapsedMillis();
+          while (repeat && elapsedMilli < goalElapsedTime) {
+            repeat = executeRepeating();
+            elapsedMilli = duration.elapsedMillis();
+            runCount += 1;
+          }
+          if (repeat) {
+            if (runCount > 4) {
+              avgTimeStack.push(elapsedMilli / runCount);
+              if (avgTimeStack.length() > 3) {
+                avgTimeStack.shift();
+              }
+            } else {
+              // will cause guess count to be 0 for
+              // next 3 runs.
+              avgTimeStack.push(100);
+            }
+          }
+        }
+      }
+      return repeat;
     }
 
     public boolean executeRepeating() {
@@ -66,6 +116,10 @@ public class SchedulerImpl extends Scheduler {
 
     public native boolean isRepeating() /*-{
       return this[1];
+    }-*/;
+    
+    private native JsArrayNumber getRepeatingAvgTimeStack() /*-{
+      return this[2];
     }-*/;
   }
 
@@ -122,10 +176,10 @@ public class SchedulerImpl extends Scheduler {
   /**
    * The amount of time that we're willing to spend executing
    * IncrementalCommands.
-   * 16ms allows control to be returned to the browser 60 times a second
+   * Testing shows that 13ms allows control to be returned to the browser 60 times a second
    * making it possible to keep the frame rate at 60fps.
    */
-  private static final double TIME_SLICE = 16;
+  private static final double TIME_SLICE = 13;
 
   /**
    * Extract boilerplate code.
@@ -388,27 +442,43 @@ public class SchedulerImpl extends Scheduler {
     boolean canceledSomeTasks = false;
 
     Duration duration = createDuration();
-    while (duration.elapsedMillis() < TIME_SLICE) {
-      boolean executedSomeTask = false;
+    if (length < 8) {
+      double goalDuration = TIME_SLICE / length;
+
       for (int i = 0; i < length; i++) {
-        assert tasks.length() == length : "Working array length changed " + tasks.length() + " != "
-            + length;
+        assert tasks.length() == length : "Working array length changed " + tasks.length() + " != " + length;
         Task t = tasks.get(i);
-        if (t == null) {
-          continue;
-        }
-        executedSomeTask = true;
 
         assert t.isRepeating() : "Found a non-repeating Task";
 
-        if (!t.executeRepeating()) {
-          tasks.set(i, null);
-          canceledSomeTasks = true;
+        if (!t.executeRepeating(duration, goalDuration * (i + 1))) {
+            tasks.set(i, null);
+            canceledSomeTasks = true;
         }
       }
-      if (!executedSomeTask) {
-        // no work left to do, break to avoid busy waiting until TIME_SLICE is reached
-        break;
+    } else {
+      while (duration.elapsedMillis() < TIME_SLICE) {
+        boolean executedSomeTask = false;
+        for (int i = 0; i < length; i++) {
+          assert tasks.length() == length : "Working array length changed " + tasks.length() + " != "
+              + length;
+          Task t = tasks.get(i);
+          if (t == null) {
+            continue;
+          }
+          executedSomeTask = true;
+
+          assert t.isRepeating() : "Found a non-repeating Task";
+
+          if (!t.executeRepeating()) {
+            tasks.set(i, null);
+            canceledSomeTasks = true;
+          }
+        }
+        if (!executedSomeTask) {
+          // no work left to do, break to avoid busy waiting until TIME_SLICE is reached
+          break;
+        }
       }
     }
 

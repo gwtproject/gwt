@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91b47fb1_689fa373",
+        "filename": "user/src/com/google/gwt/resources/rg/ImageBundleBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-09T08:57:40Z",
+      "side": 1,
+      "message": "newline?",
+      "range": {
+        "startLine": 697,
+        "startChar": 0,
+        "endLine": 697,
+        "endChar": 134
+      },
+      "revId": "d607094bd1f9a8555ecf639ff72c63ad916cfe6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

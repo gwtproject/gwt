@@ -16,6 +16,103 @@
       "revId": "2c175b03f366e7d365e07be125606669272bdf31",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "713e2bec_7fcf2fb4",
+        "filename": "user/src/com/google/gwt/i18n/rebind/AbstractLocalizableInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-09T10:34:32Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 2
+      },
+      "revId": "2c175b03f366e7d365e07be125606669272bdf31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "713e2bec_5fd4eb42",
+        "filename": "user/src/com/google/gwt/i18n/rebind/AbstractLocalizableInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-09T10:34:32Z",
+      "side": 1,
+      "message": "Do not move methods just for changing their visibility",
+      "revId": "2c175b03f366e7d365e07be125606669272bdf31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5143e780_bed89977",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-09T10:34:32Z",
+      "side": 1,
+      "message": "please revert format changes in this file first. Its hard to tell what has actually changed.",
+      "revId": "2c175b03f366e7d365e07be125606669272bdf31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9139df03_60d4b243",
+        "filename": "user/test/com/google/gwt/i18n/client/gen/TestMessagesArgTypes.properties",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-09T10:34:32Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "range": {
+        "startLine": 14,
+        "startChar": 34,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "2c175b03f366e7d365e07be125606669272bdf31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5143e780_7ecf31b4",
+        "filename": "user/test/com/google/gwt/i18n/tools/I18NSyncTest_.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-09T10:34:32Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "2c175b03f366e7d365e07be125606669272bdf31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

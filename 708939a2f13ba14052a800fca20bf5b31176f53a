@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "b65df961_f91cf709",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 6450
+      },
+      "writtenOn": "2015-02-11T17:57:42Z",
+      "side": 1,
+      "message": "Yes you are correct and that is much cleaner",
+      "parentUuid": "167a45aa_d473dccd",
+      "revId": "708939a2f13ba14052a800fca20bf5b31176f53a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "167a45aa_947d649a",
         "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
         "patchSetId": 4

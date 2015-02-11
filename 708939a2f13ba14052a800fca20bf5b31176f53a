@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6d6d9d9_51493476",
+        "filename": "user/src/com/google/gwt/i18n/rebind/AbstractLocalizableInterfaceCreator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-02-11T17:45:40Z",
+      "side": 1,
+      "message": "It looks better if after comma you put an space. The same below",
+      "revId": "708939a2f13ba14052a800fca20bf5b31176f53a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "167a45aa_346fb0e7",
+        "filename": "user/src/com/google/gwt/i18n/rebind/AbstractLocalizableInterfaceCreator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-02-11T17:45:40Z",
+      "side": 1,
+      "message": "nit: could you remove these spaces?",
+      "revId": "708939a2f13ba14052a800fca20bf5b31176f53a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "167a45aa_d473dccd",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-02-11T17:45:40Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be the same than:\n\n  return nextKey.matches(key + \".*\\\\[.*\\\\]\")\n  or also \n  return nextKey.matches(key + \"\\\\[.*\\\\]\")\n\nnote that ^ and $ is not needed in String.matches",
+      "revId": "708939a2f13ba14052a800fca20bf5b31176f53a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "167a45aa_947d649a",
+        "filename": "user/src/com/google/gwt/i18n/rebind/MessagesInterfaceCreator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-02-11T17:45:40Z",
+      "side": 1,
+      "message": "nit: remove spaces",
+      "revId": "708939a2f13ba14052a800fca20bf5b31176f53a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

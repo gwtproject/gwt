@@ -16,6 +16,24 @@
       "revId": "1ba8887c52e84ff1ac9e613138b7c67a2cfedc85",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56ae7d66_e6d41e44",
+        "filename": "user/src/com/google/gwt/i18n/rebind/AbstractLocalizableInterfaceCreator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 6450
+      },
+      "writtenOn": "2015-02-11T15:47:29Z",
+      "side": 0,
+      "message": "genSimpleMethodDecl() can be removed, I could not find anywhere it was called.  genMethodDecl is used when creating Constants interfaces.",
+      "parentUuid": "313af3a9_4d887937",
+      "revId": "1ba8887c52e84ff1ac9e613138b7c67a2cfedc85",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

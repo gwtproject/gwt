@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "313af3a9_4d887937",
+        "filename": "user/src/com/google/gwt/i18n/rebind/AbstractLocalizableInterfaceCreator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-02-11T14:33:31Z",
+      "side": 0,
+      "message": "It seems genSimpleMethodDecl is not used anymore, although it is public I think it could be removed as well as genMethodDecl, could you take a look?",
+      "revId": "1ba8887c52e84ff1ac9e613138b7c67a2cfedc85",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

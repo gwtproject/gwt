@@ -16,6 +16,41 @@
       "revId": "464d6fdadb119a092b30d69cd76af80f68ceaf9a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "313af3a9_8d3341f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-02-11T14:33:31Z",
+      "side": 1,
+      "message": "Please make jenkins happy and wrap this line",
+      "parentUuid": "511a07b5_86fc6ac7",
+      "revId": "464d6fdadb119a092b30d69cd76af80f68ceaf9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "313af3a9_0d483150",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-02-11T14:33:31Z",
+      "side": 1,
+      "message": "The convention is that you add this:\nBug: issue 9114 issue 8943",
+      "revId": "464d6fdadb119a092b30d69cd76af80f68ceaf9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

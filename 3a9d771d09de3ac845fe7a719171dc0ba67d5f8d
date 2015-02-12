@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "965395fc_f06e60e8",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-12T19:30:17Z",
+      "side": 1,
+      "message": "[error] Redundant import from the java.lang package - java.lang.RuntimeException.",
+      "revId": "3a9d771d09de3ac845fe7a719171dc0ba67d5f8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "965395fc_1074c4b5",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-12T19:30:17Z",
+      "side": 1,
+      "message": "[error] Unused import - java.lang.RuntimeException.",
+      "revId": "3a9d771d09de3ac845fe7a719171dc0ba67d5f8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

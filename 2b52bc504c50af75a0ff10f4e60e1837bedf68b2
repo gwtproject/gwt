@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4bfb3434_a486062a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3673,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-12T22:55:40Z",
+      "side": 1,
+      "message": "nit: I think you are missing two spaces here.",
+      "range": {
+        "startLine": 3673,
+        "startChar": 7,
+        "endLine": 3673,
+        "endChar": 8
+      },
+      "revId": "2b52bc504c50af75a0ff10f4e60e1837bedf68b2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

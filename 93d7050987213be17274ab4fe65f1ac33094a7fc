@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbe72493_e2f08698",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassLiteral.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-12T21:19:50Z",
+      "side": 1,
+      "message": "When is this a problem? \n\nGet type on a class literal should return java.lang.Class, is this ever called before ImplementClassLiteralsAsFields? \n\nIs this only to prevent the test failing? If so just add the endVisit(JClassLiteral...) in the verifier to ignore the type if there if it is null and add a comment \n// class literals only return a meaningful type after ImplementClassLiteralsAsFields has been run.\n\n\nAlso add assert field !\u003d null to getType here instead.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 3
+      },
+      "revId": "93d7050987213be17274ab4fe65f1ac33094a7fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cbe72493_a2c95e4d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 3774,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-12T21:19:50Z",
+      "side": 1,
+      "message": "maybe add cud as a field to CudInfo so that is not passed twice?\nand just do curCud.cud here.",
+      "range": {
+        "startLine": 3774,
+        "startChar": 42,
+        "endLine": 3774,
+        "endChar": 71
+      },
+      "revId": "93d7050987213be17274ab4fe65f1ac33094a7fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cbe72493_827d3a4f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JavaAstExternalVerifier.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-12T21:19:50Z",
+      "side": 1,
+      "message": "rename to CompilationUnitJavaAstVerifier and make it a static inner class in the test rather than a stand alone class (it is only used in the test right?)",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "93d7050987213be17274ab4fe65f1ac33094a7fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cbe72493_e25406c1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GwtAstBuilderTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-12T21:19:50Z",
+      "side": 1,
+      "message": "Add a TODO(..): Write tests for all other features.",
+      "revId": "93d7050987213be17274ab4fe65f1ac33094a7fc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

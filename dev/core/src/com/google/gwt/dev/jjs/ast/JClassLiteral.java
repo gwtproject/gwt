@@ -54,6 +54,9 @@ public class JClassLiteral extends JLiteral {
 
   @Override
   public JType getType() {
+    if (field == null) {
+      return JNullType.INSTANCE;
+    }
     return field.getType();
   }
 

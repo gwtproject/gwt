@@ -43,8 +43,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Creates stub adapters for GWT reflection using EasyMock.
@@ -193,6 +195,43 @@ public class JClassTypeAdapter {
         }
 
         return adaptJavaClass(superclass);
+      }
+    });
+    when(type.getImplementedInterfaces()).thenAnswer(new Answer<JClassType[]>() {
+      @Override
+      public JClassType[] answer(InvocationOnMock invocation) throws Throwable {
+        Class<?>[] interfaces = clazz.getInterfaces();
+        if ((interfaces == null) || (interfaces.length == 0)) {
+          return null;
+        }
+
+        JClassType[] adaptedInterfaces = new JClassType[interfaces.length];
+        for (int i = 0; i < interfaces.length; i++) {
+          adaptedInterfaces[i] = adaptJavaClass(interfaces[i]);
+        }
+        return adaptedInterfaces;
+      }
+    });
+    when(type.getFlattenedSupertypeHierarchy()).thenAnswer(new Answer<Set<JClassType>>() {
+      @Override
+      public Set<JClassType> answer(InvocationOnMock invocation) throws Throwable {
+        return flatten(clazz);
+      }
+      
+      private Set<JClassType> flatten(Class<?> clazz) {
+        Set<JClassType> flattened = new LinkedHashSet<JClassType>();
+        flattened.add(adaptJavaClass(clazz));
+        
+        for (Class<?> intf : clazz.getInterfaces()) {
+          flattened.addAll(flatten(intf));
+        }
+
+        Class<?> superClass = clazz.getSuperclass();
+        if (superClass != null) {
+          flattened.addAll(flatten(superClass));
+        }
+        
+        return flattened;
       }
     });
 

@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -69,7 +70,7 @@ public class OwnerFieldClass {
     tmpTypeRank.put("java.lang.Short", 3);
     TYPE_RANK = Collections.unmodifiableMap(tmpTypeRank);
   }
-  
+
   /**
    * Gets or creates the descriptor for the given field class.
    *
@@ -229,35 +230,31 @@ public class OwnerFieldClass {
    * @return a multimap of property name to the setter methods
    */
   private Map<String, Collection<JMethod>> findAllSetters(JClassType fieldType) {
-    Map<String, Collection<JMethod>> allSetters;
+    Map<String, Collection<JMethod>> allSetters = new HashMap<String, Collection<JMethod>>();
+    List<JClassType> classesInterfaces = new ArrayList<>();
+    classesInterfaces.add(fieldType);
+    classesInterfaces.addAll(fieldType.getFlattenedSupertypeHierarchy());
 
-    // First, get all setters from the parent class, recursively.
-    JClassType superClass = fieldType.getSuperclass();
-    if (superClass != null) {
-      allSetters = findAllSetters(superClass);
-    } else {
-      // Stop recursion - deepest level creates return value
-      allSetters = new HashMap<String, Collection<JMethod>>();
-    }
+    for (JClassType currentFieldType : classesInterfaces) {
+      JMethod[] methods = currentFieldType.getMethods();
+      for (JMethod method : methods) {
+        if (!isSetterMethod(method)) {
+          continue;
+        }
 
-    JMethod[] methods = fieldType.getMethods();
-    for (JMethod method : methods) {
-      if (!isSetterMethod(method)) {
-        continue;
-      }
+        // Take out "set"
+        String propertyName = method.getName().substring(3);
 
-      // Take out "set"
-      String propertyName = method.getName().substring(3);
+        // turn "PropertyName" into "propertyName"
+        String beanPropertyName = Introspector.decapitalize(propertyName);
+        addSetter(allSetters, beanPropertyName, method);
 
-      // turn "PropertyName" into "propertyName"
-      String beanPropertyName = Introspector.decapitalize(propertyName);
-      addSetter(allSetters, beanPropertyName, method);
-
-      // keep backwards compatibility (i.e. hTML instead of HTML for setHTML)
-      String legacyPropertyName = propertyName.substring(0, 1).toLowerCase(Locale.ROOT)
-          + propertyName.substring(1);
-      if (!legacyPropertyName.equals(beanPropertyName)) {
-        addSetter(allSetters, legacyPropertyName, method);
+        // keep backwards compatibility (i.e. hTML instead of HTML for setHTML)
+        String legacyPropertyName = propertyName.substring(0, 1).toLowerCase(Locale.ROOT)
+            + propertyName.substring(1);
+        if (!legacyPropertyName.equals(beanPropertyName)) {
+          addSetter(allSetters, legacyPropertyName, method);
+        }
       }
     }
 

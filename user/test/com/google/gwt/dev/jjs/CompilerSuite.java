@@ -15,47 +15,8 @@
  */
 package com.google.gwt.dev.jjs;
 
-import com.google.gwt.core.client.impl.StackTraceLineNumbersTest;
-import com.google.gwt.dev.jjs.scriptonly.ScriptOnlyTest;
-import com.google.gwt.dev.jjs.test.AnnotationsTest;
-import com.google.gwt.dev.jjs.test.AutoboxTest;
-import com.google.gwt.dev.jjs.test.BlankInterfaceTest;
-import com.google.gwt.dev.jjs.test.ClassCastTest;
-import com.google.gwt.dev.jjs.test.ClassLiteralsTest;
-import com.google.gwt.dev.jjs.test.CodeSplitterCollapsedPropertiesTest;
-import com.google.gwt.dev.jjs.test.CompilerMiscRegressionTest;
-import com.google.gwt.dev.jjs.test.CompilerTest;
-import com.google.gwt.dev.jjs.test.CoverageTest;
-import com.google.gwt.dev.jjs.test.EnhancedForLoopTest;
-import com.google.gwt.dev.jjs.test.EnumsTest;
-import com.google.gwt.dev.jjs.test.EnumsWithNameObfuscationTest;
-import com.google.gwt.dev.jjs.test.FieldInitializationOrderTest;
-import com.google.gwt.dev.jjs.test.GenericCastTest;
-import com.google.gwt.dev.jjs.test.GwtIncompatibleTest;
-import com.google.gwt.dev.jjs.test.HostedTest;
-import com.google.gwt.dev.jjs.test.InitialLoadSequenceTest;
-import com.google.gwt.dev.jjs.test.InnerClassTest;
 import com.google.gwt.dev.jjs.test.InnerOuterSuperTest;
-import com.google.gwt.dev.jjs.test.JStaticEvalTest;
-import com.google.gwt.dev.jjs.test.Java7Test;
 import com.google.gwt.dev.jjs.test.Java8Test;
-import com.google.gwt.dev.jjs.test.JavaAccessFromJavaScriptTest;
-import com.google.gwt.dev.jjs.test.JsStaticEvalTest;
-import com.google.gwt.dev.jjs.test.JsniConstructorTest;
-import com.google.gwt.dev.jjs.test.JsniDispatchTest;
-import com.google.gwt.dev.jjs.test.JsoTest;
-import com.google.gwt.dev.jjs.test.MemberShadowingTest;
-import com.google.gwt.dev.jjs.test.MethodBindTest;
-import com.google.gwt.dev.jjs.test.MethodCallTest;
-import com.google.gwt.dev.jjs.test.MethodInterfaceTest;
-import com.google.gwt.dev.jjs.test.MiscellaneousTest;
-import com.google.gwt.dev.jjs.test.NativeLongTest;
-import com.google.gwt.dev.jjs.test.ObjectIdentityTest;
-import com.google.gwt.dev.jjs.test.SingleJsoImplTest;
-import com.google.gwt.dev.jjs.test.UnstableGeneratorTest;
-import com.google.gwt.dev.jjs.test.UnusedImportsTest;
-import com.google.gwt.dev.jjs.test.VarargsTest;
-import com.google.gwt.dev.jjs.test.singlejso.TypeHierarchyTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
 
 import junit.framework.Test;
@@ -69,7 +30,7 @@ public class CompilerSuite {
     GWTTestSuite suite = new GWTTestSuite("Test for com.google.gwt.dev.jjs");
 
     // $JUnit-BEGIN$
-    suite.addTestSuite(AnnotationsTest.class);
+    /*suite.addTestSuite(AnnotationsTest.class);
     suite.addTestSuite(AutoboxTest.class);
     suite.addTestSuite(BlankInterfaceTest.class);
     suite.addTestSuite(ClassCastTest.class);
@@ -87,12 +48,12 @@ public class CompilerSuite {
     suite.addTestSuite(HostedTest.class);
     suite.addTestSuite(InitialLoadSequenceTest.class);
     suite.addTestSuite(InnerClassTest.class);
-    suite.addTestSuite(InnerOuterSuperTest.class);
+*/    suite.addTestSuite(InnerOuterSuperTest.class);
     // Java7Test cannot be the first one in a suite. It uses a hack
     // to avoid executing if not in a Java 7+ environment.
-    suite.addTestSuite(Java7Test.class);
+//    suite.addTestSuite(Java7Test.class);
     suite.addTestSuite(Java8Test.class);
-    suite.addTestSuite(JavaAccessFromJavaScriptTest.class);
+/*    suite.addTestSuite(JavaAccessFromJavaScriptTest.class);
     suite.addTestSuite(JsniConstructorTest.class);
     suite.addTestSuite(JsniDispatchTest.class);
     suite.addTestSuite(JsoTest.class);
@@ -112,7 +73,7 @@ public class CompilerSuite {
     suite.addTestSuite(UnusedImportsTest.class);
     suite.addTestSuite(UnstableGeneratorTest.class);
     suite.addTestSuite(VarargsTest.class);
-    // $JUnit-END$
+*/    // $JUnit-END$
 
     return suite;
   }

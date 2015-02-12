@@ -18,6 +18,8 @@ package com.google.gwt.dev.jjs.test;
 import com.google.gwt.core.client.GwtScriptOnly;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import java.lang.RuntimeException;
+
 /**
  * Tests Java 8 features. It is super sourced so that gwt can be compiles under Java 6.
  *
@@ -507,7 +509,7 @@ public class Java8Test extends GWTTestCase {
     assertEquals("interface1.foo", c.foo());
   }
 
-  class AbstractClass implements InterfaceWithTwoDefenderMethods {
+  abstract class AbstractClass implements InterfaceWithTwoDefenderMethods {
   }
 
   class Child1 extends AbstractClass {

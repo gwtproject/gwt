@@ -3767,11 +3767,6 @@ public class GwtAstBuilder {
   static JMethod SAFE_CLOSE_METHOD = JMethod.getExternalizedMethod("com.google.gwt.lang.Exceptions",
       "safeClose(Ljava/lang/AutoCloseable;Ljava/lang/Throwable;)Ljava/lang/Throwable;", true);
 
-  /**
-   * Builds all the GWT AST nodes that correspond to one Java source file.
-   *
-   * @return All the types seen in this source file.
-   */
   private List<JDeclaredType> processImpl() {
     CompilationUnitDeclaration cud = curCud.cud;
     if (cud.types == null) {
@@ -3803,7 +3798,7 @@ public class GwtAstBuilder {
     return newTypes;
   }
 
-  public GwtAstBuilder(CompilationUnitDeclaration cud, String sourceMapPath,
+  private GwtAstBuilder(CompilationUnitDeclaration cud, String sourceMapPath,
       Map<MethodDeclaration, JsniMethod> jsniMethods, Map<String, Binding> jsniRefs,
       CompilerContext compilerContext) {
     this.sourceMapPath = sourceMapPath;
@@ -3814,6 +3809,11 @@ public class GwtAstBuilder {
     curCud = new CudInfo(cud);
   }
 
+  /**
+   * Builds all the GWT AST nodes that correspond to one Java source file.
+   *
+   * @return All the types seen in this source file.
+   */
   public static List<JDeclaredType> process(CompilationUnitDeclaration cud, String sourceMapPath,
       Map<MethodDeclaration, JsniMethod> jsniMethods, Map<String, Binding> jsniRefs,
       CompilerContext compilerContext) {

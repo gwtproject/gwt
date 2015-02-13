@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b7d20a0_b5af40a4",
+        "filename": "dev/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-02-13T14:46:50Z",
+      "side": 0,
+      "message": "sourcemap-rebased.jar was extracted from closure-compiler as it\u0027s used by the StackTraceDeobfuscator and thus included in gwt-servlet.jar.\n\nHow would you do that now? Make closure-compiler a dependency of gwt-servlet? (bundled in gwt-servlet-deps.jar for SDK users, or referenced as a transitive dependencies for those using Maven Central)",
+      "revId": "d19f1f533ba998ae01a09170daf2ca0b3ee382d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

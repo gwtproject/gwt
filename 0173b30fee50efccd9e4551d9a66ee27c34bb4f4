@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b7a1caa_d48f5c42",
+        "filename": "dev/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-02-13T14:46:50Z",
+      "side": 1,
+      "message": "Do you think you could have that version published to Maven Central? Latest (and only!) published version is 20140426: http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.google.closure-stylesheets%22%20a%3A%22closure-stylesheets%22",
+      "revId": "0173b30fee50efccd9e4551d9a66ee27c34bb4f4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56267d9d_c68442a9",
+        "filename": "dev/build.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-02-13T14:46:50Z",
+      "side": 1,
+      "message": "Similarly here, there\u0027s no matching version in Maven Central: http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.google.javascript%22%20a%3A%22closure-compiler%22\n\nDo you think we could update to the v20140407? (or the latest version?)",
+      "revId": "0173b30fee50efccd9e4551d9a66ee27c34bb4f4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

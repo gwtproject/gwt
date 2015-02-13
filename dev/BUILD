@@ -133,8 +133,23 @@ java_library(
     ),
     deps = [
         ":compiler.standalone.super",
+        "//java/com/google/common/annotations",
+        "//java/com/google/common/base",
+        "//java/com/google/common/cache",
+        "//java/com/google/common/collect",
+        "//java/com/google/common/hash",
+        "//java/com/google/common/io",
+        "//java/com/google/common/primitives",
+        "//java/com/google/common/util/concurrent",
+        "//java/com/google/javascript/jscomp",
+        "//java/com/google/protobuf",
+        "//java/com/google/protobuf:protobuf_lite",
+        "//third_party/java/rhino_ast/java/com/google/javascript/rhino",
+        "//third_party/java_src/gwt/svn/tools:compiler_deps",
         "//third_party/java_src/gwt/svn/tools:dev_deps",
         "//third_party/java_src/gwt/svn/tools:servlet_api_3",
+        "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:common",
+        "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:shared",
     ],
 )
 
@@ -203,7 +218,19 @@ java_library(
     ),
     deps = [
         ":compiler.standalone.super",
+        "//java/com/google/common/annotations",
+        "//java/com/google/common/base",
+        "//java/com/google/common/cache",
+        "//java/com/google/common/collect",
+        "//java/com/google/common/hash",
+        "//java/com/google/common/io",
+        "//java/com/google/common/primitives",
+        "//java/com/google/common/util/concurrent",
+        "//java/com/google/javascript/jscomp",
+        "//third_party/java/rhino_ast/java/com/google/javascript/rhino",
         "//third_party/java_src/gwt/svn/tools:compiler_deps",
+        "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:common",
+        "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:shared",
     ],
 )
 
@@ -298,8 +325,16 @@ java_library(
     deps = [
         ":compiler.standalone.super",
         ":gwt-dev-bare",
+        "//java/com/google/common/base",
+        "//java/com/google/common/collect",
+        "//java/com/google/common/io",
+        "//java/com/google/common/primitives",
+        "//java/com/google/common/util/concurrent",
+        "//third_party/java/gson",
         "//third_party/java/junit",
         "//third_party/java_src/gwt/svn/tools:dev_deps",
+        "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:common",
+        "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:shared",
     ],
 )
 

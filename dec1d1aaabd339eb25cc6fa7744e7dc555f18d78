@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b9440fe_fd8cc74f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-13T10:14:31Z",
+      "side": 1,
+      "message": "[warning] Footer fields should be in Title-Case.",
+      "revId": "dec1d1aaabd339eb25cc6fa7744e7dc555f18d78",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

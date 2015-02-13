@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8bb44cb1_488c1fd3",
+        "filename": "dev/BUILD",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-13T20:49:52Z",
+      "side": 1,
+      "message": "Who needs this one?\n\nWe have a modified copy inside that can not replace (would break JSNI), so I am guessing it is not a direct dependency so it should be removed.",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 147,
+        "endChar": 72
+      },
+      "revId": "740c413df3517fee40f31282bd99ebf3ac2a9376",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bb44cb1_48fbbf19",
+        "filename": "dev/BUILD",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-13T20:49:52Z",
+      "side": 1,
+      "message": "cam we put this dependencies in a variable so that they don\u0027t have to be repeated.",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 83
+      },
+      "revId": "740c413df3517fee40f31282bd99ebf3ac2a9376",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bb44cb1_0805c78b",
+        "filename": "dev/BUILD",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-13T20:49:52Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 328,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 83
+      },
+      "revId": "740c413df3517fee40f31282bd99ebf3ac2a9376",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bb44cb1_48f09f1b",
+        "filename": "dev/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-13T20:49:52Z",
+      "side": 1,
+      "message": "did you end up rebasing it? Or is it just to Zap guava/gson out of it?",
+      "range": {
+        "startLine": 72,
+        "startChar": 40,
+        "endLine": 72,
+        "endChar": 61
+      },
+      "revId": "740c413df3517fee40f31282bd99ebf3ac2a9376",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

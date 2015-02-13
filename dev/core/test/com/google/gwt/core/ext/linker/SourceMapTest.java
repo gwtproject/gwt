@@ -15,6 +15,12 @@
  */
 package com.google.gwt.core.ext.linker;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.google.common.primitives.Ints;
+import com.google.debugging.sourcemap.FilePosition;
+import com.google.debugging.sourcemap.SourceMapConsumerV3;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.soyc.coderef.ClassDescriptor;
 import com.google.gwt.core.ext.soyc.coderef.EntityDescriptor;
@@ -25,12 +31,6 @@ import com.google.gwt.core.ext.soyc.coderef.MethodDescriptor;
 import com.google.gwt.dev.CompilerOptionsImpl;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
-import com.google.gwt.thirdparty.debugging.sourcemap.FilePosition;
-import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapConsumerV3;
-import com.google.gwt.thirdparty.guava.common.collect.Lists;
-import com.google.gwt.thirdparty.guava.common.collect.Maps;
-import com.google.gwt.thirdparty.guava.common.collect.Sets;
-import com.google.gwt.thirdparty.guava.common.primitives.Ints;
 import com.google.gwt.thirdparty.json.JSONArray;
 import com.google.gwt.thirdparty.json.JSONException;
 import com.google.gwt.thirdparty.json.JSONObject;

@@ -45,6 +45,7 @@ public class CachedCompilationUnit extends CompilationUnit {
   private final boolean isError;
   private final boolean isGenerated;
   private final boolean isSuperSource;
+  private final boolean isRoot;
   private transient List<JsniMethod> jsniMethods;
   private final long lastModified;
   private final MethodArgNamesLookup methodArgNamesLookup;
@@ -52,6 +53,7 @@ public class CachedCompilationUnit extends CompilationUnit {
   private final String resourceLocation;
   private final String resourcePath;
   private final String typeName;
+
 
   /**
    * Shallow copy of a CachedCompiliationUnit, replacing some parameters in the new copy.
@@ -64,6 +66,7 @@ public class CachedCompilationUnit extends CompilationUnit {
       String resourceLocation) {
     assert unit != null;
     this.compiledClasses = CompiledClass.copyForUnit(unit.getCompiledClasses(), this);
+    this.isRoot = unit.isRoot;
     this.contentId = unit.getContentId();
     this.dependencies = unit.getDependencies();
     this.resourcePath = unit.getResourcePath();
@@ -94,6 +97,7 @@ public class CachedCompilationUnit extends CompilationUnit {
   CachedCompilationUnit(CompilationUnit unit, long astToken) {
     assert unit != null;
     this.compiledClasses = CompiledClass.copyForUnit(unit.getCompiledClasses(), this);
+    this.isRoot = unit.isRoot();
     this.contentId = unit.getContentId();
     this.dependencies = unit.getDependencies();
     this.resourcePath = unit.getResourcePath();
@@ -178,6 +182,11 @@ public class CachedCompilationUnit extends CompilationUnit {
   @Deprecated
   public boolean isSuperSource() {
     return isSuperSource;
+  }
+
+  @Override
+  boolean isRoot() {
+    return isRoot;
   }
 
   @Override

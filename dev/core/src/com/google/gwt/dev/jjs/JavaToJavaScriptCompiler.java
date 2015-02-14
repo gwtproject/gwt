@@ -148,6 +148,7 @@ import com.google.gwt.soyc.SoycDashboard;
 import com.google.gwt.soyc.io.ArtifactsOutputDirectory;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
@@ -158,7 +159,6 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.annotation.Annotation;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -891,8 +891,6 @@ public abstract class JavaToJavaScriptCompiler {
 
     protected RebindPermutationOracle rpo;
     protected String[] entryPointTypeNames;
-    private static final String JS_EXPORT_ANN = "com.google.gwt.core.client.js.JsExport";
-    private static final String JS_TYPE_ANN = "com.google.gwt.core.client.js.JsType";
 
     public Precompiler(RebindPermutationOracle rpo, String[] entryPointTypeNames) {
       this.rpo = rpo;
@@ -1034,6 +1032,9 @@ public abstract class JavaToJavaScriptCompiler {
         throws UnableToCompleteException {
       Set<String> allRootTypes = new TreeSet<String>();
       CompilationState compilationState = rpo.getCompilationState();
+      if (jprogram.typeOracle.isJsInteropEnabled()) {
+        Iterables.addAll(allRootTypes, compilationState.getQualifiedRootTypesNames());
+      }
       Memory.maybeDumpMemory("CompStateBuilt");
       recordJsoTypes(compilationState.getTypeOracle());
       populateRootTypes(allRootTypes, additionalRootTypes, compilationState.getTypeOracle());
@@ -1145,45 +1146,6 @@ public abstract class JavaToJavaScriptCompiler {
           typeOracle.getSingleJsoImplInterfaces()) {
         allRootTypes.add(typeOracle.getSingleJsoImpl(singleJsoIntf).getQualifiedSourceName());
       }
-
-      if (jprogram.typeOracle.isJsInteropEnabled()) {
-        // find any types with @JsExport could be entry points as well
-        nextType:
-        for (com.google.gwt.dev.javac.typemodel.JClassType type :
-            typeOracle.getTypes()) {
-          for (Annotation ann : type.getAnnotations()) {
-            // If the type immediately exports symbols to JS.
-            if (ann.annotationType().getName().equals(JS_EXPORT_ANN)) {
-              allRootTypes.add(type.getQualifiedSourceName());
-              continue nextType;
-            }
-          }
-          if (isJsType(type)) {
-            // If the type or any transitive interface is a JS type.
-            allRootTypes.add(type.getQualifiedSourceName());
-          }
-        }
-      }
-    }
-
-    /**
-     * Returns true if the type, or any super-interface has a JsType
-     * annotation.
-     */
-    private boolean isJsType(com.google.gwt.dev.javac.typemodel.JClassType type) {
-      for (Annotation ann : type.getAnnotations()) {
-        if (ann.annotationType().getName().equals(JS_TYPE_ANN)) {
-          return true;
-        }
-      }
-
-      for (com.google.gwt.dev.javac.typemodel.JClassType intf : type
-          .getImplementedInterfaces()) {
-         if (isJsType(intf)) {
-           return true;
-         }
-      }
-      return false;
     }
 
     private void recordJsoTypes(TypeOracle typeOracle) {

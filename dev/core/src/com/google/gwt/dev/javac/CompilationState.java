@@ -24,6 +24,9 @@ import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
+import com.google.gwt.thirdparty.guava.common.base.Function;
+import com.google.gwt.thirdparty.guava.common.base.Predicates;
+import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -234,5 +237,18 @@ public class CompilationState {
     CompilationUnitInvalidator.retainValidUnits(logger, units, compileMoreLater.getValidClasses(),
         compilerContext.getCompilationErrorsIndex());
     typeOracleUpdater.addNewUnits(logger, units);
+  }
+
+  // Move to better location
+  public Iterable<String> getQualifiedRootTypesNames() {
+    Function<CompilationUnit, String> toRootTypeName = new Function<CompilationUnit, String>() {
+      @Override public String apply(CompilationUnit state) {
+        return state.isRoot() ? state.getTypeName() : null;
+      }
+    };
+    return FluentIterable
+        .from(unitMap.values())
+        .transform(toRootTypeName)
+        .filter(Predicates.notNull());
   }
 }

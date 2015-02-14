@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b69a006_b5f44055",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CachedCompilationUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-14T06:42:50Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

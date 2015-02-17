@@ -526,6 +526,7 @@ public abstract class JDeclaredType extends JReferenceType {
         constructors.add(method);
       }
     }
+
     return constructors;
   }
 

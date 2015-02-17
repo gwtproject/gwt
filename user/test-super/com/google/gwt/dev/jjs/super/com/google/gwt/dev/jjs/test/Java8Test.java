@@ -18,6 +18,10 @@ package com.google.gwt.dev.jjs.test;
 import com.google.gwt.core.client.GwtScriptOnly;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import java.lang.Object;
+import java.lang.Override;
+import java.lang.String;
+
 /**
  * Tests Java 8 features. It is super sourced so that gwt can be compiles under Java 6.
  *
@@ -885,5 +889,120 @@ public class Java8Test extends GWTTestCase {
     TestMF_B b = new TestMF_B();
     assertEquals(1, g(a::getIdx));
     assertEquals(2, g(b::getIdx));
+  }
+
+  // Test particular scenarios involving multiple path to inherit defaults.
+  interface ITop {
+    default String m() { return "ITop.m()"; }
+  }
+
+  interface IRight extends ITop {
+    default String m() { return "IRight.m()"; }
+  }
+
+  interface ILeft extends ITop { }
+
+  public void testMultipleDefaults_fromInterfaces_left() {
+    class A implements ILeft, IRight { }
+
+    assertEquals("IRight.m()", new A().m());
+  }
+
+  public void testMultipleDefaults_fromInterfaces_right() {
+    class A implements IRight, ILeft { }
+
+    assertEquals("IRight.m()", new A().m());
+  }
+
+  public void testMultipleDefaults_superclass_left() {
+    class A implements ITop { }
+    class B extends A implements ILeft, IRight { }
+
+    assertEquals("IRight.m()", new B().m());
+  }
+
+  public void testMultipleDefaults_superclass_right() {
+    class A implements ITop { }
+    class B extends A implements IRight, ILeft { }
+
+    assertEquals("IRight.m()", new B().m());
+  }
+
+  interface InterafceWithThisReference {
+    default String n() {
+      return "default n";
+    }
+    default String callNUnqualified() {
+      class Super implements InterafceWithThisReference {
+        public String n() {
+          return "super n";
+        }
+      }
+      return new Super() {
+        public String callNUnqualified() {
+          return "Object " + n();
+        }
+      }.callNUnqualified();
+    }
+    default String callNWithThis() {
+      class Super implements InterafceWithThisReference {
+        public String n() {
+          return "super n";
+        }
+      }
+      return new Super() {
+        public String callNWithThis() {
+          return "Object " + this.n();
+        }
+      }.callNWithThis();
+    }
+    default String callNWithInterfaceThis() {
+      class Super implements InterafceWithThisReference {
+        public String n() {
+          return "super n";
+        }
+      }
+      return new Super() {
+        public String callNWithInterfaceThis() {
+          // In this method this has interface Test as its type, but it refers to outer n();
+          return "Object " + InterafceWithThisReference.this.n();
+        }
+      }.callNWithInterfaceThis();
+    }
+    default String callNWithSuper() {
+      class Super implements InterafceWithThisReference {
+        public String n() {
+          return "super n";
+        }
+      }
+      return new Super() {
+        public String callNWithSuper() {
+          // In this method this has interface Test as its type.
+          return "Object " + super.n();
+        }
+      }.callNWithSuper();
+    }
+    default String callNWithInterfaceSuper() {
+      return new InterafceWithThisReference() {
+        public String n() {
+          return "this n";
+        }
+        public String callNWithInterfaceSuper() {
+          // In this method this has interface Test as its type and refers to default n();
+          return "Object " + InterafceWithThisReference.super.n();
+        }
+      }.callNWithInterfaceSuper();
+    }
+  }
+
+  public void testInterfaceThis() {
+    class A implements InterafceWithThisReference {
+      public String n() { return "n";}
+    }
+    assertEquals("Object super n", new A().callNUnqualified());
+    assertEquals("Object super n", new A().callNWithThis());
+    assertEquals("Object n", new A().callNWithInterfaceThis());
+    assertEquals("Object super n", new A().callNWithSuper());
+    assertEquals("Object default n", new A().callNWithInterfaceSuper());
   }
 }

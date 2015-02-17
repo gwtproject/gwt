@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "8ba36cb2_905754c4",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ClosureJsRunner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-17T09:40:57Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "8bb44cb1_4b9f39d2",
+      "range": {
+        "startLine": 377,
+        "startChar": 12,
+        "endLine": 377,
+        "endChar": 41
+      },
+      "revId": "d19f1f533ba998ae01a09170daf2ca0b3ee382d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b7a1caa_54fb4c19",
         "filename": "dev/core/src/com/google/gwt/dev/js/ClosureJsRunner.java",
         "patchSetId": 3
@@ -113,6 +137,30 @@
     },
     {
       "key": {
+        "uuid": "8ba36cb2_b05458c0",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ClosureJsRunner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-17T09:40:57Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "8bb44cb1_2b852573",
+      "range": {
+        "startLine": 415,
+        "startChar": 12,
+        "endLine": 415,
+        "endChar": 35
+      },
+      "revId": "d19f1f533ba998ae01a09170daf2ca0b3ee382d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b7a1caa_b4766020",
         "filename": "dev/core/src/com/google/gwt/dev/js/ClosureJsRunner.java",
         "patchSetId": 3
@@ -148,6 +196,30 @@
       "side": 0,
       "message": "This one you can safely remove, the pass has been deleted.",
       "parentUuid": "0b7a1caa_b4766020",
+      "range": {
+        "startLine": 428,
+        "startChar": 12,
+        "endLine": 428,
+        "endChar": 28
+      },
+      "revId": "d19f1f533ba998ae01a09170daf2ca0b3ee382d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ba36cb2_d051dcce",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ClosureJsRunner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-17T09:40:57Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "8bb44cb1_8b41b17d",
       "range": {
         "startLine": 428,
         "startChar": 12,

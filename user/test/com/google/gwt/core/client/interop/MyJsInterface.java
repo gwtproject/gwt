@@ -25,7 +25,8 @@ interface MyJsInterface {
   @JsProperty
   int x();
 
-  @JsProperty MyJsInterface x(int a);
+  @JsProperty
+  MyJsInterface x(int a);
 
   @JsProperty
   int getY();
@@ -40,25 +41,30 @@ interface MyJsInterface {
 
     @Override
     public int x() {
+      // Replaced by native JS implementation.
       return 0;
     }
 
     @Override
     public MyJsInterface x(int a) {
+      // Replaced by native JS implementation.
       return this;
     }
 
     @Override
     public int getY() {
+      // Replaced by native JS implementation.
       return 0;
     }
 
     @Override
     public void setY(int a) {
+      // Replaced by native JS implementation.
     }
 
     @Override
     public int sum(int bias) {
+      // Replaced by native JS implementation.
       return 0;
     }
   }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b736025_0b3261ec",
+        "filename": "user/src/com/google/gwt/logging/impl/LoggerConfiguratorConsole.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2015-02-17T21:07:23Z",
+      "side": 1,
+      "message": "Makes sense; perhaps I\u0027m being premature, e.g. if you\u0027re already planning on getting to it next, but also note that ConsoleLogHandler (for when users do have logging enabled) needs the same sort of update.\n\nPerhaps this SimpleLogConsoleHandler and the real LogConsoleHandler should be combined?",
+      "range": {
+        "startLine": 80,
+        "startChar": 17,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "496c21a6ac55adfe08eb794eda7bcaa8ab717d0d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -186,7 +186,7 @@ public class JjsUtils {
 
   private static JMethod createEmptyMethod(
       JDeclaredType type, JMethod superTypeMethod, boolean isAbstract) {
-    JMethod emptyMethod = new JMethod(type.getSourceInfo(), superTypeMethod.getName(),
+    JMethod emptyMethod = new JMethod(superTypeMethod.getSourceInfo(), superTypeMethod.getName(),
         type, superTypeMethod.getType(), isAbstract, false, false,
         superTypeMethod.getAccess());
     emptyMethod.addThrownExceptions(superTypeMethod.getThrownExceptions());

@@ -16,6 +16,213 @@
       "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bba8cec_3830695d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-17T19:18:05Z",
+      "side": 1,
+      "message": "why is the formatting in this function all weird",
+      "range": {
+        "startLine": 242,
+        "startChar": 3,
+        "endLine": 242,
+        "endChar": 28
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bba8cec_b8e239d7",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-17T19:18:05Z",
+      "side": 1,
+      "message": "s/state/compilationUnit",
+      "range": {
+        "startLine": 245,
+        "startChar": 52,
+        "endLine": 245,
+        "endChar": 57
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bba8cec_98fe556d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-17T19:18:05Z",
+      "side": 1,
+      "message": "this needs a lot more explanation",
+      "range": {
+        "startLine": 449,
+        "startChar": 5,
+        "endLine": 449,
+        "endChar": 58
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bba8cec_98653581",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-17T19:18:05Z",
+      "side": 1,
+      "message": "i think this is named improperly.\n\na Type *is* a root type but a CompilationUnit *contains* a root type.\n\nit\u0027s an important distinction because without it you might accidentally believe that a CompilationUnit that has been marked \"isRoot\" implies that all of it\u0027s contained types are root types, but that would be wrong.",
+      "range": {
+        "startLine": 42,
+        "startChar": 24,
+        "endLine": 42,
+        "endChar": 30
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bba8cec_b88599a5",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-17T19:18:05Z",
+      "side": 1,
+      "message": "so \"isRoot\" would be false if none of the contained types are being JsInterop exported?\n\nthere are more than just JsInterop types in the root types list for UnifyAst (what about entry points and JSOs?). this calculation does not reflect all of them and so should not be claiming to.",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 15
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bba8cec_d89a8d58",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-17T19:18:05Z",
+      "side": 1,
+      "message": "maybe this block should be in the populateRootTypes() function?",
+      "range": {
+        "startLine": 1035,
+        "startChar": 6,
+        "endLine": 1035,
+        "endChar": 53
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bba8cec_18cec534",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-17T19:18:05Z",
+      "side": 1,
+      "message": "does this cover both @JsExport and @JsType exports or just @JsExport ones?\n\ni ask because since @JsType exports cascade and since this function is used to statically calculate whether a CompilationUnit isRoot there is a possibility that some CompilationUnits could end up with a stale and out of date isRoot marking after a cascaded @JsType change",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 31
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bba8cec_58e1dd47",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1340,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-17T19:18:05Z",
+      "side": 1,
+      "message": "seems like these two static checks are redundant if typeOracle.isExportedMethod() already covers that",
+      "range": {
+        "startLine": 1340,
+        "startChar": 14,
+        "endLine": 1340,
+        "endChar": 57
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bba8cec_78714173",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyClassExportsMethodWithoutReference.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-17T19:18:05Z",
+      "side": 1,
+      "message": "s/GWT/Java",
+      "range": {
+        "startLine": 21,
+        "startChar": 63,
+        "endLine": 21,
+        "endChar": 66
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -399,6 +399,28 @@ public class JSORestrictionsTest extends TestCase {
     shouldGenerateNoError(goodCode);
   }
 
+  public void testJsExportBad_publicMethod() {
+    StringBuilder badCode = new StringBuilder();
+    badCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    badCode.append("public class Buggy {\n");
+    badCode.append("  @JsExport public void method() {}\n");
+    badCode.append("}\n");
+
+    shouldGenerateError(badCode, "Line 3: "
+        + JSORestrictionsChecker.ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
+  }
+
+  public void testJsExportBad_staticMethod() {
+    StringBuilder badCode = new StringBuilder();
+    badCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    badCode.append("public class Buggy {\n");
+    badCode.append("  @JsExport static void method() {}\n");
+    badCode.append("}\n");
+
+    shouldGenerateError(badCode, "Line 3: "
+        + JSORestrictionsChecker.ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
+  }
+
   public void testJsExportOnClass() {
     StringBuilder goodCode = new StringBuilder();
     goodCode.append("import com.google.gwt.core.client.js.JsExport;\n");

@@ -214,6 +214,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
         };
     JMethod method = findMethod(result, fullMethodSignature);
     assertNotNull("Method " + fullMethodSignature + " not found", method);
+    assertEquals(fullMethodSignature, method.toString());
     return FluentIterable
         .from(method.getOverriddenMethods())
         .transform(METHOD_TO_STRING)

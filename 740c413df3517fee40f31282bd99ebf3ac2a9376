@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "ebb1480e_fbc2ef8d",
+        "filename": "dev/BUILD",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-17T16:55:54Z",
+      "side": 1,
+      "message": "I think its still in there and not zaped I will double check.",
+      "parentUuid": "2b736025_e52536a4",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 147,
+        "endChar": 72
+      },
+      "revId": "740c413df3517fee40f31282bd99ebf3ac2a9376",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bb44cb1_48fbbf19",
         "filename": "dev/BUILD",
         "patchSetId": 3
@@ -226,6 +250,30 @@
       "side": 1,
       "message": "maybe rename it to compiler-stripped.jar then.",
       "parentUuid": "8ba36cb2_7063d0a3",
+      "range": {
+        "startLine": 72,
+        "startChar": 40,
+        "endLine": 72,
+        "endChar": 61
+      },
+      "revId": "740c413df3517fee40f31282bd99ebf3ac2a9376",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebb1480e_dbc7339c",
+        "filename": "dev/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-17T16:55:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b736025_25374edd",
       "range": {
         "startLine": 72,
         "startChar": 40,

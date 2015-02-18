@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "4b8fb4ad_1ec76d1b",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-18T21:00:30Z",
+      "side": 1,
+      "message": "nit: for consistency with the rest you can just call it testEnum (as this class only tests JsExport)",
+      "revId": "f1d6c7dc4512747b339cbee75663820219e70662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b8fb4ad_3ec42914",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-18T21:00:30Z",
+      "side": 1,
+      "message": "nit: for consistency with the rest you can just call it testEnum (as this class only tests JsExport)",
+      "revId": "f1d6c7dc4512747b339cbee75663820219e70662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb95c8bd_fee71de5",
         "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
         "patchSetId": 2
@@ -71,6 +105,40 @@
     },
     {
       "key": {
+        "uuid": "4b8fb4ad_7eceb135",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-18T21:00:30Z",
+      "side": 1,
+      "message": "static?",
+      "revId": "f1d6c7dc4512747b339cbee75663820219e70662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b8fb4ad_9ed9bdff",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-18T21:00:30Z",
+      "side": 1,
+      "message": "Use testJsTypeAccess as well?",
+      "revId": "f1d6c7dc4512747b339cbee75663820219e70662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb95c8bd_9efff96c",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 2
@@ -106,6 +174,30 @@
       "side": 1,
       "message": "pls don\u0027t sort alphabetically. Use logical ordering. You can put this one next to other tests and keep the static utilities in the bottom. (The other test actually has better consistent ordering but this one is messy)",
       "parentUuid": "eb95c8bd_9efff96c",
+      "range": {
+        "startLine": 260,
+        "startChar": 14,
+        "endLine": 260,
+        "endChar": 31
+      },
+      "revId": "f1d6c7dc4512747b339cbee75663820219e70662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b8fb4ad_5ed1f5d4",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-18T21:00:30Z",
+      "side": 1,
+      "message": "Also to be consistent with the ones above, you can separate the \u0027access\u0027 related part and call the test as \u0027testEnumJsTypeAccess\u0027",
+      "parentUuid": "4b8fb4ad_beb759b2",
       "range": {
         "startLine": 260,
         "startChar": 14,

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4b26d49d_295fa92d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-18T23:48:02Z",
+      "side": 1,
+      "message": "i didn\u0027t drop it, i moved the check inside of isGetter",
+      "parentUuid": "4b26d49d_466bf201",
+      "range": {
+        "startLine": 297,
+        "startChar": 66,
+        "endLine": 297,
+        "endChar": 67
+      },
+      "revId": "c443adc7feebd4f341a540b3cb3c3e99dce6e93b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b26d49d_06b3ba65",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "4b26d49d_e9c3d15d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-18T23:48:02Z",
+      "side": 1,
+      "message": "actually the spec allows you to omit the \"get\" || \"is\", seems crazy to me as well :-/",
+      "parentUuid": "4b26d49d_06b3ba65",
+      "range": {
+        "startLine": 438,
+        "startChar": 13,
+        "endLine": 438,
+        "endChar": 17
+      },
+      "revId": "c443adc7feebd4f341a540b3cb3c3e99dce6e93b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b26d49d_8685ea77",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2015-02-18T23:45:40Z",
       "side": 1,
       "message": "same here, check if startsWithCamelCase(methodName, \"set\")",
+      "range": {
+        "startLine": 457,
+        "startChar": 13,
+        "endLine": 457,
+        "endChar": 17
+      },
+      "revId": "c443adc7feebd4f341a540b3cb3c3e99dce6e93b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b26d49d_09a90da3",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-18T23:48:02Z",
+      "side": 1,
+      "message": "actually the spec allows you to omit the \"set\", seems crazy to me as well :-/",
+      "parentUuid": "4b26d49d_8685ea77",
       "range": {
         "startLine": 457,
         "startChar": 13,

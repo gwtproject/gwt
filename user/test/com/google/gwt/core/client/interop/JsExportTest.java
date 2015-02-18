@@ -135,4 +135,46 @@ public class JsExportTest extends GWTTestCase {
   private static native String getEnumNameViaJs(MyClassWithNestedEnum.NestedEnum ref) /*-{
     return ref.name2();
   }-*/;
+
+  public void testJsExportOnEnum() {
+    assertNotNull(getEnumerationWithExportNameInJsExport());
+    assertNotNull(getEnumerationWithoutExportNameInJsExport());
+    assertNotNull(getPublicStaticMethodInEnum());
+    assertEquals(1, getPublicStaticFinalFieldInEnum());
+    assertEquals(2, getPublicStaticFieldInEnum());
+    assertNull(getNotExportedFieldsInEnum());
+    assertNull(getNotExportedMethodsInEnum());
+  }
+
+  private static native Object getPublicStaticMethodInEnum() /*-{
+    return $wnd.woo.MyEnumWithJsExport.publicStaticMethod();
+  }-*/;
+
+  private static native int getPublicStaticFinalFieldInEnum() /*-{
+    return $wnd.woo.MyEnumWithJsExport.publicStaticFinalField;
+  }-*/;
+
+  private static native int getPublicStaticFieldInEnum() /*-{
+    return $wnd.woo.MyEnumWithJsExport.publicStaticField;
+  }-*/;
+
+  private static native Object getEnumerationWithExportNameInJsExport() /*-{
+    return $wnd.myEnumWithJsExportTest1;
+  }-*/;
+
+  private static native Object getEnumerationWithoutExportNameInJsExport() /*-{
+    return $wnd.woo.MyEnumWithJsExport.TEST2;
+  }-*/;
+
+  private native Object getNotExportedFieldsInEnum() /*-{
+    return $wnd.woo.MyEnumWithJsExport.publicFinalField
+        || $wnd.woo.MyEnumWithJsExport.privateStaticFinalField
+        || $wnd.woo.MyEnumWithJsExport.protectedStaticFinalField;
+  }-*/;
+
+  private native Object getNotExportedMethodsInEnum() /*-{
+    return $wnd.woo.MyEnumWithJsExport.publicMethod
+        || $wnd.woo.MyEnumWithJsExport.protectedStaticMethod
+        || $wnd.woo.MyEnumWithJsExport.privateStaticMethod;
+  }-*/;
 }

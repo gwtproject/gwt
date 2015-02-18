@@ -80,17 +80,21 @@ public class JsTypeTest extends GWTTestCase {
   public void testConcreteJsTypeAccess() {
     ConcreteJsType concreteJsType = new ConcreteJsType();
 
-    assertTrue(hasField(concreteJsType, "publicMethod"));
-    assertTrue(hasField(concreteJsType, "publicField"));
+    testJsTypeAccess(concreteJsType);
+  }
 
-    assertFalse(hasField(concreteJsType, "publicStaticMethod"));
-    assertFalse(hasField(concreteJsType, "privateMethod"));
-    assertFalse(hasField(concreteJsType, "protectedMethod"));
-    assertFalse(hasField(concreteJsType, "packageMethod"));
-    assertFalse(hasField(concreteJsType, "publicStaticField"));
-    assertFalse(hasField(concreteJsType, "privateField"));
-    assertFalse(hasField(concreteJsType, "protectedField"));
-    assertFalse(hasField(concreteJsType, "packageField"));
+  private void testJsTypeAccess(Object obj) {
+    assertTrue(hasField(obj, "publicMethod"));
+    assertTrue(hasField(obj, "publicField"));
+
+    assertFalse(hasField(obj, "publicStaticMethod"));
+    assertFalse(hasField(obj, "privateMethod"));
+    assertFalse(hasField(obj, "protectedMethod"));
+    assertFalse(hasField(obj, "packageMethod"));
+    assertFalse(hasField(obj, "publicStaticField"));
+    assertFalse(hasField(obj, "privateField"));
+    assertFalse(hasField(obj, "protectedField"));
+    assertFalse(hasField(obj, "packageField"));
   }
 
   public void testConcreteJsTypeSubclassAccess() {
@@ -251,5 +255,20 @@ public class JsTypeTest extends GWTTestCase {
 
   private static native boolean isFirefox40OrEarlier() /*-{
     return @com.google.gwt.dom.client.DOMImplMozilla::isGecko2OrBefore()();
+  }-*/;
+
+  public void testJsTypeOnEnum() {
+    assertNotNull(getEnumerationWithExportNameInJsType());
+    assertEquals(2, callPublicMethodFromEnumerationWithExportName());
+
+    testJsTypeAccess(MyEnumWithJsType.TEST2);
+  }
+
+  private static native Object getEnumerationWithExportNameInJsType() /*-{
+    return $wnd.myEnumWithJsTypeTest1;
+  }-*/;
+
+  private static native int callPublicMethodFromEnumerationWithExportName() /*-{
+    return $wnd.myEnumWithJsTypeTest1.idxAddOne();
   }-*/;
 }

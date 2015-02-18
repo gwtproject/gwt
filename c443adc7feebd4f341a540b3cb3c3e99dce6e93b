@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "4b26d49d_a93639dd",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-18T23:59:50Z",
+      "side": 1,
+      "message": "I see.",
+      "parentUuid": "4b26d49d_e9c3d15d",
+      "range": {
+        "startLine": 438,
+        "startChar": 13,
+        "endLine": 438,
+        "endChar": 17
+      },
+      "revId": "c443adc7feebd4f341a540b3cb3c3e99dce6e93b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b26d49d_8685ea77",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
         "patchSetId": 2

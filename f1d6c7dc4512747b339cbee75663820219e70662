@@ -329,6 +329,30 @@
     },
     {
       "key": {
+        "uuid": "a8ecb67a_c1dfc261",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyEnumWithJsExport.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-18T23:10:08Z",
+      "side": 1,
+      "message": "\u003e Do you mean \u0027instance\u0027 instead of \u0027subclass\u0027?\n\nI mean \u0027subclass\u0027. i.e. MyEnumWithJsExport.class \u003d\u003d MyEnumWithJsExport.TEST1.getClass() is not necessarily true while MyEnumWithJsExport.class \u003d\u003d MyEnumWithJsExport.TEST1.getDeclaringClass() is always true.\n\n\u003e I want to make sure I understand the reason correctly\n\nThis is mostly because of too much magic around enums. They look like simple static constants but not always (see the getClass example above).  In the case of the subclass, what it means to export it, is it exporting the subclass?\nMaybe I\u0027m making it too complicated but Instead of trying to define that and thinking about all implications, it sounded simpler to me to just forbid JsExport on individual enumarations.\nBut as I said, perhaps it is more natural to keep the feature due the way it is implemented; then we can keep it.\n\nBTW, we should probably add a test for the subclass scenarion (i.e. when the enumaration causes subclass generation)",
+      "parentUuid": "ab4e7054_713d18b5",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "f1d6c7dc4512747b339cbee75663820219e70662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b8fb4ad_5e52d5d3",
         "filename": "user/test/com/google/gwt/core/client/interop/MyEnumWithJsExport.java",
         "patchSetId": 2

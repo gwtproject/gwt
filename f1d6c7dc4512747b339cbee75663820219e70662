@@ -281,6 +281,30 @@
     },
     {
       "key": {
+        "uuid": "4b8fb4ad_3eb0a956",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyEnumWithJsExport.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-18T21:46:38Z",
+      "side": 1,
+      "message": "Technically an enumeration is not a just field but also a subclass right? To me it is not easy to reason about it and what I should expect from this (e.g. what happens if MyEnumWithJsExport doesn\u0027t have JsExport but one of the enumarations has?). I don\u0027t really expect people will need this feature.\n\nIf somebody is just looking for renaming the symbol, then they could use @JsName to just rename the symbol - this is not spec\u0027d yet but I\u0027ll do it pretty soon.\n\nSo in summary, I prefer to start with not supporting this and add it later if we need to. However, if you guys think that it is much easier to support this than not supporting it from the compiler perspective, we can talk about it.",
+      "parentUuid": "eb95c8bd_01d2ae5d",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "f1d6c7dc4512747b339cbee75663820219e70662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b8fb4ad_5e52d5d3",
         "filename": "user/test/com/google/gwt/core/client/interop/MyEnumWithJsExport.java",
         "patchSetId": 2

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eba78821_4b596545",
+        "filename": "user/build.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-02-18T20:11:52Z",
+      "side": 1,
+      "message": "Do we still need",
+      "revId": "2d858d83f4423e92aebbd2406a5663d0ba85fd41",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

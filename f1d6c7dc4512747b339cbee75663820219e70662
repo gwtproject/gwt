@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb95c8bd_fee71de5",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-18T20:34:12Z",
+      "side": 1,
+      "message": "this isn\u0027t a requirement but it would be nice if you separated these assertions across a bunch of different 1-line test functions",
+      "range": {
+        "startLine": 139,
+        "startChar": 14,
+        "endLine": 139,
+        "endChar": 33
+      },
+      "revId": "f1d6c7dc4512747b339cbee75663820219e70662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb95c8bd_7e878d27",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-18T20:34:12Z",
+      "side": 1,
+      "message": "this is the one that is the weird edge-case in the spec about \"explicitly marked @JsExport fields must be final but ones that are in a @JsExported class don\u0027t need to be final\", right?\n\nif so please add a comment along those lines here. i\u0027d like to avoid this being a surprise when reading the tests and also it\u0027s good to document surprising things in multiple places.",
+      "range": {
+        "startLine": 144,
+        "startChar": 20,
+        "endLine": 144,
+        "endChar": 46
+      },
+      "revId": "f1d6c7dc4512747b339cbee75663820219e70662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb95c8bd_1e05a939",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-18T20:34:12Z",
+      "side": 1,
+      "message": "is TEST1 still accessible as well or does the act of export-naming it get rid of it\u0027s old name as well?",
+      "range": {
+        "startLine": 166,
+        "startChar": 39,
+        "endLine": 166,
+        "endChar": 44
+      },
+      "revId": "f1d6c7dc4512747b339cbee75663820219e70662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb95c8bd_9efff96c",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-18T20:34:12Z",
+      "side": 1,
+      "message": "the static methods should be at the bottom of the file and the test functions should be alphabetical at the top.\n\nalso don\u0027t forget to update the spreadsheet with the details of the tests you\u0027ve added",
+      "range": {
+        "startLine": 260,
+        "startChar": 14,
+        "endLine": 260,
+        "endChar": 31
+      },
+      "revId": "f1d6c7dc4512747b339cbee75663820219e70662",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -143,6 +143,36 @@ public class JsTypeTest extends GWTTestCase {
     assertEquals(58, mc.sum(0));
   }
 
+  public void testJsPropertyIsX() {
+    JsPoint point = (JsPoint) createNativeMap();
+
+    assertFalse(point.isX());
+    point.setX(10);
+    assertTrue(point.isX());
+    point.setX(0);
+    assertFalse(point.isX());
+  }
+
+  public void testJsPropertyHasX() {
+    JsPoint point = (JsPoint) createNativeMap();
+
+    assertFalse(point.hasX());
+    point.setX(10);
+    assertTrue(point.hasX());
+    point.setX(0);
+    assertTrue(point.hasX());
+  }
+
+  public void testJsPropertyGetX() {
+    JsPoint point = (JsPoint) createNativeMap();
+
+    assertEquals(getJsUndefined(), point.getX());
+    point.setX(10);
+    assertEquals(10, point.getX());
+    point.setX(0);
+    assertEquals(0, point.getX());
+  }
+
   public void testCasts() {
     MyJsInterface myClass;
     assertNotNull(myClass = (MyJsInterface) createMyJsInterface());
@@ -221,6 +251,10 @@ public class JsTypeTest extends GWTTestCase {
     return object[functionName]();
   }-*/;
 
+  private static native Object createNativeMap() /*-{
+    return {};
+  }-*/;
+
   private static native Object createNativeButton() /*-{
     return $doc.createElement("button");
   }-*/;
@@ -239,6 +273,10 @@ public class JsTypeTest extends GWTTestCase {
   private static native Object createMyWrongNamespacedJsInterface() /*-{
     $wnd["testfoo.bar.MyJsInterface"] = function(){};
     return new $wnd['testfoo.bar.MyJsInterface']();
+  }-*/;
+
+  private static native Object getJsUndefined() /*-{
+    return undefined;
   }-*/;
 
   private static native boolean hasField(Object object, String fieldName) /*-{

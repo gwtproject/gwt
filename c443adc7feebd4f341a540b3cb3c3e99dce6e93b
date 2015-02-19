@@ -164,6 +164,46 @@
       "revId": "c443adc7feebd4f341a540b3cb3c3e99dce6e93b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0805c2fd_7c39b9fe",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T00:01:37Z",
+      "side": 1,
+      "message": "Can we add a test for correct usages of hasXXX?",
+      "revId": "c443adc7feebd4f341a540b3cb3c3e99dce6e93b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0805c2fd_bc0d0162",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T00:01:37Z",
+      "side": 1,
+      "message": "\u0027has\u0027 also should always return boolean. Can you add a test case for that as well?",
+      "range": {
+        "startLine": 702,
+        "startChar": 14,
+        "endLine": 702,
+        "endChar": 56
+      },
+      "revId": "c443adc7feebd4f341a540b3cb3c3e99dce6e93b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

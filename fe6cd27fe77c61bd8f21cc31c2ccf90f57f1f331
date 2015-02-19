@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08cf8248_ecd2cb5b",
+        "filename": "user/src/com/google/gwt/cell/client/CompositeCell.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:58:47Z",
+      "side": 1,
+      "message": "you can remove @return as it is not adding any value here.",
+      "revId": "fe6cd27fe77c61bd8f21cc31c2ccf90f57f1f331",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

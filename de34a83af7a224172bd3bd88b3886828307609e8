@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8d676d9_d4ee728a",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:55:42Z",
+      "side": 1,
+      "message": "Can you add a test \u0027testJsExportOnEnum\u0027 for the good case?",
+      "range": {
+        "startLine": 410,
+        "startChar": 2,
+        "endLine": 410,
+        "endChar": 43
+      },
+      "revId": "de34a83af7a224172bd3bd88b3886828307609e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8d676d9_745b06cc",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:55:42Z",
+      "side": 1,
+      "message": "nit: subClass -\u003e subclass (and below)",
+      "range": {
+        "startLine": 162,
+        "startChar": 23,
+        "endLine": 162,
+        "endChar": 31
+      },
+      "revId": "de34a83af7a224172bd3bd88b3886828307609e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8d676d9_545602a7",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:55:42Z",
+      "side": 1,
+      "message": "You can group static helpers next to corresponding test methods to be consistent with the rest of the class.",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 7
+      },
+      "revId": "de34a83af7a224172bd3bd88b3886828307609e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8d676d9_34657e80",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:55:42Z",
+      "side": 1,
+      "message": "nice job!",
+      "revId": "de34a83af7a224172bd3bd88b3886828307609e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88db7205_b02df804",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:55:42Z",
+      "side": 1,
+      "message": "I know this is not your fault but this class is using camel case method while the other class is using underscore :( This generally inconsistent in the SDK (due to earlier difference in google style vs gwt style). Anyway, to keep at least consistency within the class can you use camel case here or convert all to underscore. I should probably have done that myself when I extracted JsExportTest from this class.",
+      "range": {
+        "startLine": 202,
+        "startChar": 14,
+        "endLine": 202,
+        "endChar": 35
+      },
+      "revId": "de34a83af7a224172bd3bd88b3886828307609e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8d676d9_94730a4b",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:55:42Z",
+      "side": 1,
+      "message": "nit: subClass -\u003e subclass",
+      "range": {
+        "startLine": 209,
+        "startChar": 23,
+        "endLine": 209,
+        "endChar": 31
+      },
+      "revId": "de34a83af7a224172bd3bd88b3886828307609e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8d676d9_74ff8604",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:55:42Z",
+      "side": 1,
+      "message": "When a test case fails, to understand which field has failed can you include the field name in the assertion message?",
+      "revId": "de34a83af7a224172bd3bd88b3886828307609e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

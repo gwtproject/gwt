@@ -46,6 +46,29 @@
       "revId": "496c21a6ac55adfe08eb794eda7bcaa8ab717d0d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48fb3a34_61a230bc",
+        "filename": "user/src/com/google/gwt/logging/impl/LoggerConfiguratorConsole.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-02-19T16:50:16Z",
+      "side": 1,
+      "message": "Generally fine but what do you think about the following \"annoyance\":\n\nIf I call Logger.log(Level.WARN, \"my msg\", ex) then \"my msg\" will be printed using console.warn. If my console does not support grouping then the exception message and the stack trace are logged using console.log().\n\nNow if I use log filtering in DevTools to filter WARN messages on the console I only see half the information (exception is filtered out). If my console supports grouping then I would see the exception message as groups are always shown regardless of filter settings, however the stack trace would still be missing.\n\nIMHO we should always use the correct console.error/warn/info/log method depending on the given log level, not just for the LogRecord message, to make log filtering in DevTools correct.",
+      "range": {
+        "startLine": 80,
+        "startChar": 17,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "496c21a6ac55adfe08eb794eda7bcaa8ab717d0d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

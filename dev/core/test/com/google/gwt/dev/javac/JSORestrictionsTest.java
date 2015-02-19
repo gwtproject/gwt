@@ -407,6 +407,16 @@ public class JSORestrictionsTest extends TestCase {
     shouldGenerateNoError(goodCode);
   }
 
+  public void testJsExportOnEnumeration() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("public enum Buggy {\n");
+    buggyCode.append(" @JsExport TEST1, TEST2;\n;");
+    buggyCode.append("}");
+
+    shouldGenerateError(buggyCode, "Line 3: " + JSORestrictionsChecker.ERR_JSEXPORT_ON_ENUMERATION);
+  }
+
   public void testJsExportOnInterface() {
     StringBuilder goodCode = new StringBuilder();
     goodCode.append("import com.google.gwt.core.client.js.JsExport;\n");

@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8d676d9_d1bbe44a",
+        "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:27:13Z",
+      "side": 1,
+      "message": "I think we should make this addition with the context (e.g. in case of JsType interface with JsProperties implemented by java classes ...)",
+      "range": {
+        "startLine": 27,
+        "startChar": 76,
+        "endLine": 28,
+        "endChar": 57
+      },
+      "revId": "f0fd4c9e5163d123bb17c8f232cb8c88cb43a277",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8d676d9_71f6b81a",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:27:13Z",
+      "side": 1,
+      "message": "nit: JavaScriptObject.create()",
+      "range": {
+        "startLine": 147,
+        "startChar": 30,
+        "endLine": 147,
+        "endChar": 45
+      },
+      "revId": "f0fd4c9e5163d123bb17c8f232cb8c88cb43a277",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8d676d9_91debc8d",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:27:13Z",
+      "side": 1,
+      "message": "This is not correct. This is same as having a \u0027native\u0027 method that has a return type \u0027int\u0027 but not returning int.\nIn this particular case, JDT will create auto-boxing code to be able to call assertEquals(Object,Object) returning the expected behavior. so it will look like this:\n\n assertEquals(null, Integer.valueOf(point.getX()))\n\nand the answer for that comparison is false.\n\nThe problem here is more general to GWT; using native function (or JsInterop), you can leak incorrect types that can break GWT\u0027s type system. For example following code my print \"Result: null\":\n\n int x \u003d getSomeInt();\n Window.alert(\"Result: \" + x);\n\nOr similarly \n\n  // Displays \"3.14159265359\"\n  Window.alert(\"\" + someNativeMethodReturnsInt()); \n  // haven\u0027t tried but expect \"31\" instead of 30\n  Window.alert(\"\" + someNativeMethodReturnsInt() * 10);\n\nBecause of that reason, I earlier suggested[1] instrumenting all int returning functions with int coercion (i.e. x|0) but that was rejected due performance/size reasons.\n\nI think in the long run we should have a check in checked-mode that should detect incorrect type leaks into GWT.\n\n[1] https://groups.google.com/a/google.com/d/topic/gwt-team/BpMMWcNBDRA/discussion",
+      "range": {
+        "startLine": 169,
+        "startChar": 17,
+        "endLine": 169,
+        "endChar": 31
+      },
+      "revId": "f0fd4c9e5163d123bb17c8f232cb8c88cb43a277",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08a1425e_7c8c39a1",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-19T20:27:13Z",
+      "side": 1,
+      "message": "I think the rest is all the expected behavior per spec (except what we discussed about not having two different getter JsProperty methods that are pointing to same property).",
+      "revId": "f0fd4c9e5163d123bb17c8f232cb8c88cb43a277",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

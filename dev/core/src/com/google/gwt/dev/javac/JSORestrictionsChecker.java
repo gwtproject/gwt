@@ -67,6 +67,8 @@ public class JSORestrictionsChecker {
       + "static final fields in public classes.";
   public static final String ERR_EITHER_JSEXPORT_JSNOEXPORT =
       "@JsExport and @JsNoExport is not allowed at the same time.";
+  public static final String ERR_EXPLICIT_JSEXPORT_WITH_SYMBOL_OR_JSNOEXPORT_ON_CONSTRUCTORS =
+      "@JsExport (with symbol) or @JsNoExport should be set on constructors if a class is @JsExported and has more than one non private constructors";
   public static final String ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING =
       "@JsProperty is only allowed on JavaBean-style or fluent-style named methods";
   public static final String ERR_JSEXPORT_ON_ENUMERATION =
@@ -246,6 +248,14 @@ public class JSORestrictionsChecker {
       return true;
     }
 
+    private int countNonPrivateConstructors(ReferenceBinding rb) {
+      int count = 0;
+      for (MethodBinding mb : rb.methods()) {
+        count += mb.isConstructor() && !mb.isPrivate() ? 1 : 0;
+      }
+      return count;
+    }
+
     private void checkJsType(TypeDeclaration type, TypeBinding typeBinding) {
       ReferenceBinding binding = (ReferenceBinding) typeBinding;
       if (binding.isClass()) {
@@ -262,6 +272,33 @@ public class JSORestrictionsChecker {
       checkJsTypeMethodsForOverloads(methodSignatures, noExports, binding);
       for (MethodBinding mb : binding.methods()) {
         checkJsProperty(mb, true);
+      }
+    }
+
+    private void checkJsExport(ReferenceBinding rb) {
+      if (JdtUtil.getAnnotation(rb, JsInteropUtil.JSEXPORT_CLASS) == null) {
+        return;
+      }
+      int countConstructors = countNonPrivateConstructors(rb);
+      if (countConstructors > 1) {
+        for (MethodBinding mb : rb.methods()) {
+          if (!mb.isConstructor() || mb.isPrivate()) {
+            continue;
+          }
+          AnnotationBinding jsexportAnnotation =
+              JdtUtil.getAnnotation(mb, JsInteropUtil.JSEXPORT_CLASS);
+          AnnotationBinding jsnoexportAnnotation =
+              JdtUtil.getAnnotation(mb, JsInteropUtil.JSNOEXPORT_CLASS);
+          if (jsexportAnnotation == null && jsnoexportAnnotation == null) {
+            errorOn(mb, ERR_EXPLICIT_JSEXPORT_WITH_SYMBOL_OR_JSNOEXPORT_ON_CONSTRUCTORS);
+          }
+          if (jsexportAnnotation != null) {
+            String jsExport = JdtUtil.getAnnotationParameterString(jsexportAnnotation, "value");
+            if (jsExport == null || "".equals(jsExport)) {
+              errorOn(mb, ERR_EXPLICIT_JSEXPORT_WITH_SYMBOL_OR_JSNOEXPORT_ON_CONSTRUCTORS);
+            }
+          }
+        }
       }
     }
 
@@ -349,7 +386,7 @@ public class JSORestrictionsChecker {
 
     private ClassState checkType(TypeDeclaration type) {
       SourceTypeBinding binding = type.binding;
-
+      checkJsExport(binding);
       if (isJsType(type.binding)) {
         checkJsType(type, type.binding);
         return ClassState.JSTYPE;

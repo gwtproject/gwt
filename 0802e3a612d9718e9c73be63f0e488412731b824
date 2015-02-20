@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "48d97a6e_eeb33f18",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-20T19:55:24Z",
+      "side": 1,
+      "message": "Yes, I noticed it is not implemented yet. I agree. I also prefer to update the spec first on that before we work on it.",
+      "parentUuid": "c8e56a1d_52e2f44f",
+      "range": {
+        "startLine": 1423,
+        "startChar": 0,
+        "endLine": 1438,
+        "endChar": 11
+      },
+      "revId": "0802e3a612d9718e9c73be63f0e488412731b824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68a8fe90_ef2441aa",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2

@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8c5967a_020090ad",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1528,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-20T19:55:47Z",
+      "side": 1,
+      "message": "formatting looks weird. Is this the new formatter?",
+      "range": {
+        "startLine": 1524,
+        "startChar": 0,
+        "endLine": 1528,
+        "endChar": 48
+      },
+      "revId": "5b525dab0b6470db14aca48ea2f600a9afcbe2db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48d97a6e_eec1ff8b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1549,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-20T19:55:47Z",
+      "side": 1,
+      "message": "same here.",
+      "range": {
+        "startLine": 1547,
+        "startChar": 0,
+        "endLine": 1549,
+        "endChar": 48
+      },
+      "revId": "5b525dab0b6470db14aca48ea2f600a9afcbe2db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48d97a6e_2ef947d2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1667,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-20T19:55:47Z",
+      "side": 1,
+      "message": "I think you forgot to remove these.",
+      "range": {
+        "startLine": 1589,
+        "startChar": 1,
+        "endLine": 1667,
+        "endChar": 5
+      },
+      "revId": "5b525dab0b6470db14aca48ea2f600a9afcbe2db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48d97a6e_8e74bbb6",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-20T19:55:47Z",
+      "side": 1,
+      "message": "nit: you probably want \u0027\u003d\u003d\u003d\u0027; \u003d\u003d will return true in other cases, e.g. null",
+      "range": {
+        "startLine": 290,
+        "startChar": 17,
+        "endLine": 290,
+        "endChar": 19
+      },
+      "revId": "5b525dab0b6470db14aca48ea2f600a9afcbe2db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1408,32 +1408,24 @@ public class GenerateJavaScriptAST {
       } else {
         JsName polyName = polymorphicNames.get(method);
         // potentially replace method call with property access
-        JMethod target = x.getTarget();
-        for (JMethod overrideMethod : target.getOverriddenMethods()) {
+        JMethod targetMethod = x.getTarget();
+        for (JMethod overrideMethod : targetMethod.getOverriddenMethods()) {
           if (overrideMethod.isJsProperty()) {
             isJsProperty = true;
             break;
           }
         }
-        if (isJsProperty || target.isJsProperty()) {
-          String getter = isGetter(target);
-          String setter = isSetter(target);
-          String has = isHas(target);
-
-          // if fluent
-          JType type = target.getType();
-
-          boolean isFluent = type instanceof JReferenceType
-              && type != program.getTypeJavaLangObject() && typeOracle.canTriviallyCast(
-                  x.getTarget().getEnclosingType(), type.getUnderlyingType());
+        if (isJsProperty || targetMethod.isJsProperty()) {
           JsExpression qualExpr = pop();
-
-          if (getter != null) {
-            result = dispatchAsGetter(x, unnecessaryQualifier, getter, qualExpr);
-          } else if (setter != null) {
-            result = dispatchAsSetter(x, jsInvocation, setter, isFluent, qualExpr);
-          } else if (has != null) {
-            result = dispatchAsHas(x, has, qualExpr);
+          String methodName = targetMethod.getName();
+          if (targetMethod.getParams().size() == 0) {
+            if (startsWithCamelCase(methodName, "has")) {
+              result = createHasDispatch(x, methodName, qualExpr);
+            } else {
+              result = createGetterDispatch(x, unnecessaryQualifier, methodName, qualExpr);
+            }
+          } else if (targetMethod.getParams().size() == 1) {
+            result = createSetterDispatch(x, jsInvocation, targetMethod, qualExpr);
           } else {
             throw new InternalCompilerException("JsProperty not a setter, getter, or has.");
           }
@@ -1441,8 +1433,8 @@ public class GenerateJavaScriptAST {
           // insert trampoline (_ = instance, trampoline(_, _.jsBridgeMethRef,
           // _.javaMethRef)).bind(_)(args)
           if (typeOracle.needsJsInteropBridgeMethod(method)) {
-            maybeDispatchViaTrampolineToBridgeMethod(x, method, jsInvocation,
-                unnecessaryQualifier, result, polyName);
+            maybeDispatchViaTrampolineToBridgeMethod(x, method, jsInvocation, unnecessaryQualifier,
+                result, polyName);
 
             return;
           } else {
@@ -1517,35 +1509,47 @@ public class GenerateJavaScriptAST {
       return tmpName;
     }
 
-    private JsExpression dispatchAsHas(JMethodCall x, String has, JsExpression qualExpr) {
-      JsExpression result;JsNameRef property = new JsNameRef(x.getSourceInfo(), has);
-      result = new JsBinaryOperation(x.getSourceInfo(), JsBinaryOperator.INOP,
-          property, qualExpr);
-      return result;
+    private JsExpression createHasDispatch(JMethodCall x, String methodName,
+        JsExpression qualExpr) {
+      String propertyName = toCamelCase(methodName.substring(3));
+      JsStringLiteral propertyNameLiteral = new JsStringLiteral(x.getSourceInfo(), propertyName);
+      return new JsBinaryOperation(x.getSourceInfo(), JsBinaryOperator.INOP, propertyNameLiteral,
+          qualExpr);
     }
 
-    private JsExpression dispatchAsSetter(JMethodCall x, JsInvocation jsInvocation, String setter, boolean isFluent, JsExpression qualExpr) {
-      JsExpression result;JsNameRef property = new JsNameRef(x.getSourceInfo(), setter);
+    private JsExpression createSetterDispatch(JMethodCall x, JsInvocation jsInvocation,
+        JMethod targetMethod, JsExpression qualExpr) {
+      String methodName = targetMethod.getName();
+      JType returnType = targetMethod.getType();
+      boolean fluent = returnType instanceof JReferenceType
+          && returnType != program.getTypeJavaLangObject() && typeOracle.canTriviallyCast(
+              x.getTarget().getEnclosingType(), returnType.getUnderlyingType());
+      String propertyName = startsWithCamelCase(methodName, "set") ? toCamelCase(
+          methodName.substring(3)) : methodName;
+
+      JsExpression result;
+      JsNameRef propertyReference = new JsNameRef(x.getSourceInfo(), propertyName);
       // either qualExpr.prop or _.prop depending on fluent or not
-      property.setQualifier(isFluent ? globalTemp.makeRef(x.getSourceInfo()) : qualExpr);
+      propertyReference.setQualifier(fluent ? globalTemp.makeRef(x.getSourceInfo()) : qualExpr);
       // propExpr = arg
-      result = createAssignment(property, jsInvocation.getArguments().get(0));
-      if (isFluent) {
+      result = createAssignment(propertyReference, jsInvocation.getArguments().get(0));
+      if (fluent) {
         // (_ = qualExpr, _.prop = arg, _)
         result = createCommaExpression(
             createAssignment(globalTemp.makeRef(x.getSourceInfo()), qualExpr),
-            createCommaExpression(result,
-              globalTemp.makeRef(x.getSourceInfo())));
+            createCommaExpression(result, globalTemp.makeRef(x.getSourceInfo())));
       }
       return result;
     }
 
-    private JsExpression dispatchAsGetter(JMethodCall x, JsExpression unnecessaryQualifier, String getter, JsExpression qualExpr) {
-      JsExpression result;// replace with qualExpr.property
-      JsNameRef property = new JsNameRef(x.getSourceInfo(), getter);
-      property.setQualifier(qualExpr);
-      result = createCommaExpression(unnecessaryQualifier, property);
-      return result;
+    private JsExpression createGetterDispatch(JMethodCall x, JsExpression unnecessaryQualifier,
+        String methodName, JsExpression qualExpr) {
+      String propertyName = startsWithCamelCase(methodName, "is") ? toCamelCase(
+          methodName.substring(2)) : startsWithCamelCase(methodName, "get") ? toCamelCase(
+          methodName.substring(3)) : methodName;
+      JsNameRef propertyReference = new JsNameRef(x.getSourceInfo(), propertyName);
+      propertyReference.setQualifier(qualExpr);
+      return createCommaExpression(unnecessaryQualifier, propertyReference);
     }
 
     /**
@@ -1582,44 +1586,84 @@ public class GenerateJavaScriptAST {
       return JsNullLiteral.INSTANCE;
     }
 
-    private String isGetter(JMethod method) {
-      String name = method.getName();
-      // zero arg non-void getX()
-      if (name.length() > 3 && name.startsWith("get") && Character.isUpperCase(name.charAt(3)) &&
-          method.getType() != JPrimitiveType.VOID && method.getParams().size() == 0) {
-        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
-        return propName;
-      } else  if (name.length() > 3 && name.startsWith("is")
-          && Character.isUpperCase(name.charAt(2)) && method.getType() == JPrimitiveType.BOOLEAN
-          && method.getParams().size() == 0) {
-        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
-        return propName;
-      } else if (method.getParams().size() == 0 && method.getType() != JPrimitiveType.VOID) {
-        return name;
+    private String computeGetterPropertyName(JMethod method) {
+      String methodName = method.getName();
+      // Anything that takes parameters or doesn't return a value can't be a "get".
+      if (method.getParams().size() > 0 || method.getType() == JPrimitiveType.VOID) {
+        return null;
       }
-      return null;
+      // If it sounds like a "set" then it can't be a "get".
+      if (startsWithCamelCase(methodName, "set")) {
+        return null;
+      }
+      // If it sounds like a "has" then it can't be a "get".
+      if (startsWithCamelCase(methodName, "has")) {
+        return null;
+      }
+      // If it sounds like an "is" getter but doesn't return a boolean it can't be a
+      // getter.
+      if ((startsWithCamelCase(methodName, "is")) && method.getType() != JPrimitiveType.BOOLEAN) {
+        return null;
+      }
+
+      // Everything else is a getter.
+      if (startsWithCamelCase(methodName, "is")) {
+        return toCamelCase(methodName.substring(2));
+      } else if (startsWithCamelCase(methodName, "get")) {
+        return toCamelCase(methodName.substring(3));
+      }
+      return toCamelCase(methodName);
     }
 
-    private String isSetter(JMethod method) {
-      String name = method.getName();
-      if (name.length() > 3 && name.startsWith("set") && Character.isUpperCase(name.charAt(3))
-          && method.getParams().size() == 1) {
-        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
-        return propName;
-      } else if (method.getParams().size() == 1) {
-        return name;
+    private String computeSetterPropertyName(JMethod method, boolean fluent) {
+      String methodName = method.getName();
+      // Anything that doesn't take exactly 1 parameter can't be a "set".
+      if (method.getParams().size() != 1) {
+        return null;
       }
-      return null;
+      // If it sounds like a "get" or a "has" then it can't be a setter.
+      if (startsWithCamelCase(methodName, "get") || startsWithCamelCase(methodName, "is")
+          || startsWithCamelCase(methodName, "has")) {
+        return null;
+      }
+      // If it doesn't return void and isn't fluent then it isn't a setter.
+      if (method.getType() != JPrimitiveType.VOID && !fluent) {
+        return null;
+      }
+
+      // Everything else is a setter.
+      if (startsWithCamelCase(methodName, "set")) {
+        return toCamelCase(methodName.substring(3));
+      }
+      return toCamelCase(methodName);
     }
 
-    private String isHas(JMethod method) {
-      String name = method.getName();
-      if (name.length() > 3 && name.startsWith("has") && Character.isUpperCase(name.charAt(3))
-          && method.getParams().size() == 0 && method.getType() == JPrimitiveType.BOOLEAN) {
-        String propName = Character.toLowerCase(name.charAt(3)) + name.substring(4);
-        return propName;
+    private String computeHasPropertyName(JMethod method) {
+      String methodName = method.getName();
+      // Anything that takes parameters or doesn't return a value can't be a "has".
+      if (method.getParams().size() > 0 || method.getType() == JPrimitiveType.VOID) {
+        return null;
       }
-      return null;
+      // If it sounds like a "set" then it can't be a "has".
+      if (startsWithCamelCase(methodName, "set")) {
+        return null;
+      }
+      // If it sounds like a "get" then it can't be a "has".
+      if (startsWithCamelCase(methodName, "is") || startsWithCamelCase(methodName, "get")) {
+        return null;
+      }
+      // If it sounds like an "has" but doesn't return a boolean it can't be a
+      // "get".
+      if ((startsWithCamelCase(methodName, "has")) && method.getType() != JPrimitiveType.BOOLEAN) {
+        return null;
+      }
+      // If it doesn't sounds like a "has" then it can't be a "has".
+      if (!startsWithCamelCase(methodName, "has")) {
+        return null;
+      }
+
+      // Everything else is a getter.
+      return toCamelCase(methodName.substring(3));
     }
 
     @Override
@@ -3636,6 +3680,20 @@ public class GenerateJavaScriptAST {
       assert !classLiteralDeclarationsByType.containsKey(type);
       classLiteralDeclarationsByType.put(type, classLiteralDeclaration);
     }
+  }
+
+  private static boolean startsWithCamelCase(String string, String prefix) {
+    return string.length() > prefix.length() && string.startsWith(prefix)
+        && Character.isUpperCase(string.charAt(prefix.length()));
+  }
+
+  private static String toCamelCase(String string) {
+    if (string.length() == 0) {
+      return string;
+    } else if (string.length() == 1) {
+      return String.valueOf(Character.toLowerCase(string.charAt(0)));
+    }
+    return Character.toLowerCase(string.charAt(0)) + string.substring(1);
   }
 
   private Pair<JavaToJavaScriptMap, Set<JsNode>> execImpl() {

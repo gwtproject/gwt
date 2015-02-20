@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "88ba92ec_7bcc9b6d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1437,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-20T19:36:58Z",
+      "side": 1,
+      "message": "yes i believe so.",
+      "parentUuid": "68a8fe90_0f0a651e",
+      "revId": "0802e3a612d9718e9c73be63f0e488412731b824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68a8fe90_6f285127",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2015-02-20T02:43:01Z",
       "side": 1,
       "message": "Currently implementation requires a lot of duplication in rules. I think we can identify setter/getter based on method signature instead, method name should only be significant for choosing between has vs getter:\n\n \n if (parameter.length \u003d\u003d 0) {\n   if (startsWithCamelCase(\"has\")) {\n     result \u003d createHasDispatch(...)\n   } else {\n     result \u003d createGetterDispatch(...)\n   }\n } else if (parameter.length \u003d\u003d 1) {\n   result \u003d createSetterDispatch(...)\n } else {\n   throw new ICE....\n }\n\nThen the createXXXDispatch method can extract the property name by first trying to extract it from the \u0027name\u0027 attribute in JsProperty, if not available extract from the method name.\n\nWDYT?",
+      "range": {
+        "startLine": 1423,
+        "startChar": 0,
+        "endLine": 1438,
+        "endChar": 11
+      },
+      "revId": "0802e3a612d9718e9c73be63f0e488412731b824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8e56a1d_52e2f44f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-20T19:36:58Z",
+      "side": 1,
+      "message": "i\u0027ve restructured along the lines you suggest.\n\ni don\u0027t know anything about a \"name attribute\" in JsProperty and I don\u0027t see that it is being already used or accessed here.\n\nif it is new behavior that needs to be added i\u0027d rather handle it in a separate CL.",
+      "parentUuid": "68a8fe90_6f285127",
       "range": {
         "startLine": 1423,
         "startChar": 0,
@@ -76,6 +118,30 @@
       "writtenOn": "2015-02-20T02:43:01Z",
       "side": 1,
       "message": "What about:\n\n\".. as method calls in JS, they will be replaced with dotted property lookups.\n\u003cp\u003e In case of JsType with JsProperties implemented by Java classes, the property access still trigger the execution of the matching getter or setter methods as they will be translated into custom property setter and getter in JavaScript.\"",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 49
+      },
+      "revId": "0802e3a612d9718e9c73be63f0e488412731b824",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88ba92ec_1b259fa3",
+        "filename": "user/src/com/google/gwt/core/client/js/JsProperty.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-20T19:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68a8fe90_4f870dae",
       "range": {
         "startLine": 27,
         "startChar": 0,

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8867663_f14308d9",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-20T23:30:39Z",
+      "side": 1,
+      "message": "this name seems like a mistake, did you intend this to be the name of a function?",
+      "range": {
+        "startLine": 447,
+        "startChar": 27,
+        "endLine": 447,
+        "endChar": 54
+      },
+      "revId": "b168a6befaca999fc91b31551de73548676ae91b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

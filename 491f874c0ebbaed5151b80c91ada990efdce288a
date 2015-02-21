@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8864529b_8bd4d1c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T02:28:18Z",
+      "side": 1,
+      "message": "We need to do manual wrapping for external patches. Do you mind fixing it?",
+      "parentUuid": "4bfb3434_a4dde66b",
+      "revId": "491f874c0ebbaed5151b80c91ada990efdce288a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bfb3434_c4e0f21d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -30,6 +48,120 @@
       "writtenOn": "2015-02-12T22:47:57Z",
       "side": 1,
       "message": "[warning] Subject line and body should be separated by a blank line.",
+      "revId": "491f874c0ebbaed5151b80c91ada990efdce288a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28f0c60e_bdc13f8d",
+        "filename": "user/src/com/google/gwt/uibinder/elementparsers/BeanParser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T02:28:18Z",
+      "side": 1,
+      "message": "Can you add test scenarios to UiBinderTest?",
+      "revId": "491f874c0ebbaed5151b80c91ada990efdce288a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8864529b_4bf49954",
+        "filename": "user/src/com/google/gwt/uibinder/elementparsers/BeanParser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T02:28:18Z",
+      "side": 1,
+      "message": "nit: can you remove extra spaces?",
+      "revId": "491f874c0ebbaed5151b80c91ada990efdce288a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28f0c60e_fd32a71a",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/model/OwnerFieldClass.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T02:28:18Z",
+      "side": 1,
+      "message": "This is potentially a breaking change because of this part. Can you run global presubmit to see the impact?",
+      "revId": "491f874c0ebbaed5151b80c91ada990efdce288a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28f0c60e_bd65bf04",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/model/OwnerFieldClass.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T02:28:18Z",
+      "side": 1,
+      "message": "This is unnecessary when we use getInheritableMethods.",
+      "range": {
+        "startLine": 208,
+        "startChar": 10,
+        "endLine": 208,
+        "endChar": 54
+      },
+      "revId": "491f874c0ebbaed5151b80c91ada990efdce288a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28f0c60e_3d7a4fa1",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/model/OwnerFieldClass.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T02:28:18Z",
+      "side": 1,
+      "message": "nit: we can use Guava multimap instead.",
+      "revId": "491f874c0ebbaed5151b80c91ada990efdce288a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68ee3e36_3fab6764",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/model/OwnerFieldClass.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T02:28:18Z",
+      "side": 1,
+      "message": "Just using fieldType.getInheritableMethods should do the job.",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 38
+      },
       "revId": "491f874c0ebbaed5151b80c91ada990efdce288a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,302 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28728658_ad4d1d84",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "nit: can you move this just below the method where is used if you don\u0027t have a specific reason to keep it here?",
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28728658_2dafeda4",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "It might be better to have a method called getPublicConstructors and return a list of public constructors so that you don\u0027t need repeat the logic in two different places.",
+      "range": {
+        "startLine": 254,
+        "startChar": 17,
+        "endLine": 254,
+        "endChar": 55
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28728658_0d84713b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be mb.isPublic?",
+      "range": {
+        "startLine": 285,
+        "startChar": 40,
+        "endLine": 285,
+        "endChar": 49
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28728658_4d04b93e",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "I think we should not enforce \u0027value\u0027 to be provided thought there should be a separate check we should add later for uniqueness of the exported names. So, for example, one can write:\n\n@JsExport\nclass A {\n  @JsExport public A() {}\n  @JsNoExport public A(int x) {}\n}",
+      "range": {
+        "startLine": 295,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 11
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28728658_6d1bb570",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2780,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "Do we still need this check as we are enforcing it in JsoRestricitonChecker? I mean, if it is isExportedMethd then it should be either constructor or static.",
+      "range": {
+        "startLine": 2780,
+        "startChar": 13,
+        "endLine": 2780,
+        "endChar": 72
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28728658_eddc8524",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "can you add package visible and protected as well?",
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28728658_cd966935",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "nit: perhaps move this to testJsExportOnClassWithDefaultConstructor as this the only one without JsExport on class while the rest is more similar.",
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28728658_edb245e4",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "testJsExportOnClassWithMultipleConstructors",
+      "range": {
+        "startLine": 479,
+        "startChar": 14,
+        "endLine": 479,
+        "endChar": 69
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28728658_0d28f17a",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "Isn\u0027t it supported now?",
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8864529b_280b6b4d",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "implicitConstructor?",
+      "range": {
+        "startLine": 97,
+        "startChar": 30,
+        "endLine": 97,
+        "endChar": 37
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8864529b_482d7fb4",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "nit: createMyExportedClassWithImplictConstructor()",
+      "range": {
+        "startLine": 101,
+        "startChar": 24,
+        "endLine": 101,
+        "endChar": 58
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4875fa3c_0e5d4b31",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "nit: createMyExportExportedClassWithMultipleConstructors1? (and below)",
+      "range": {
+        "startLine": 125,
+        "startChar": 24,
+        "endLine": 125,
+        "endChar": 39
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e87b0e35_cb4e5582",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "nit: NotExported (to be consistent with others)",
+      "range": {
+        "startLine": 143,
+        "startChar": 27,
+        "endLine": 143,
+        "endChar": 30
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8864529b_a8d0bb56",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyClassExportsConstructors.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T00:50:31Z",
+      "side": 1,
+      "message": "nit: extra space",
+      "range": {
+        "startLine": 28,
+        "startChar": 11,
+        "endLine": 28,
+        "endChar": 13
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

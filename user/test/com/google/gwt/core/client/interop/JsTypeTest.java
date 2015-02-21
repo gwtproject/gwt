@@ -170,6 +170,21 @@ public class JsTypeTest extends GWTTestCase {
     assertEquals(0, point.x());
   }
 
+  public void testProtectedNames() {
+    MyJsInterfaceWithProtectedNames obj = createMyJsInterfaceWithProtectedNames();
+    assertEquals("var", obj.var());
+    assertEquals("import", obj.getImport());
+    obj.setImport("import2");
+    assertEquals("import2", obj.getImport());
+  }
+
+  private static native MyJsInterfaceWithProtectedNames createMyJsInterfaceWithProtectedNames() /*-{
+    var a = {};
+    a["import"] = "import";
+    a["var"] = function() { return "var"; };
+    return a;
+  }-*/;
+
   public void testCasts() {
     MyJsInterface myClass;
     assertNotNull(myClass = (MyJsInterface) createMyJsInterface());

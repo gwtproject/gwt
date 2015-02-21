@@ -81,8 +81,14 @@ public abstract class JsScope implements Serializable {
    *           name does not match the existing short name.
    */
   public final JsName declareName(String ident, String shortIdent) {
-    ident = maybeMangleKeyword(ident);
-    shortIdent = maybeMangleKeyword(shortIdent);
+    return declareName(ident, shortIdent, false);
+  }
+
+  public final JsName declareName(String ident, String shortIdent, boolean forcedName) {
+    if (!forcedName) {
+      ident = maybeMangleKeyword(ident);
+      shortIdent = maybeMangleKeyword(shortIdent);
+    }
     JsName name = findExistingNameNoRecurse(ident);
     if (name != null) {
       if (!name.getShortIdent().equals(shortIdent)) {

@@ -24,6 +24,7 @@ public final class JsNameRef extends JsExpression implements CanBooleanEval, Has
   private String ident;
   private JsName name;
   private JsExpression qualifier;
+  private boolean isForcedName;
 
   public JsNameRef(SourceInfo sourceInfo, JsName name) {
     super(sourceInfo);
@@ -33,6 +34,12 @@ public final class JsNameRef extends JsExpression implements CanBooleanEval, Has
   public JsNameRef(SourceInfo sourceInfo, String ident) {
     super(sourceInfo);
     this.ident = StringInterner.get().intern(ident);
+  }
+
+  public void enforceName() {
+    assert qualifier != null : "Only qualified references can enforce a name";
+    assert name == null : "Only unresolved references can enforce a name";
+    this.isForcedName = true;
   }
 
   public String getIdent() {
@@ -90,6 +97,10 @@ public final class JsNameRef extends JsExpression implements CanBooleanEval, Has
     return name == JsRootScope.INSTANCE.getUndefined();
   }
 
+  public boolean isForcedName() {
+    return isForcedName;
+  }
+
   public boolean isJsniReference() {
     return getIdent().charAt(0) == '@';
   }
@@ -113,6 +124,7 @@ public final class JsNameRef extends JsExpression implements CanBooleanEval, Has
   }
 
   public void setQualifier(JsExpression qualifier) {
+    assert !isForcedName;
     this.qualifier = qualifier;
   }
 

@@ -44,7 +44,7 @@ public class JsSymbolResolver {
         name = program.getObjectScope().findExistingName(ident);
         if (name == null) {
           // No clue what this is; create a new unobfuscatable name
-          name = program.getObjectScope().declareName(ident);
+          name = program.getObjectScope().declareName(ident, ident, x.isForcedName());
           name.setObfuscatable(false);
         }
       }

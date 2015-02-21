@@ -573,7 +573,7 @@ public class GenerateJavaScriptAST {
             polyName.setObfuscatable(false);
             // if a JsType and we can set set the interface method to non-obfuscatable
           } else if (typeOracle.isJsTypeMethod(x) && !typeOracle.needsJsInteropBridgeMethod(x)) {
-            polyName = interfaceScope.declareName(name, name);
+            polyName = interfaceScope.declareName(name, name, true);
             polyName.setObfuscatable(false);
           } else {
             polyName = interfaceScope.declareName(mangleNameForPoly(x), name);
@@ -1531,6 +1531,7 @@ public class GenerateJavaScriptAST {
       JsNameRef propertyReference = new JsNameRef(x.getSourceInfo(), propertyName);
       // either qualExpr.prop or _.prop depending on fluent or not
       propertyReference.setQualifier(fluent ? globalTemp.makeRef(x.getSourceInfo()) : qualExpr);
+      propertyReference.enforceName();
       // propExpr = arg
       result = createAssignment(propertyReference, jsInvocation.getArguments().get(0));
       if (fluent) {
@@ -1549,6 +1550,7 @@ public class GenerateJavaScriptAST {
           methodName.substring(3)) : methodName;
       JsNameRef propertyReference = new JsNameRef(x.getSourceInfo(), propertyName);
       propertyReference.setQualifier(qualExpr);
+      propertyReference.enforceName();
       return createCommaExpression(unnecessaryQualifier, propertyReference);
     }
 

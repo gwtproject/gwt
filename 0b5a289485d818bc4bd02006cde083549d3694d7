@@ -89,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "8864529b_6b8e3d47",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T01:49:12Z",
+      "side": 1,
+      "message": "JsExport is only applicable to public visibility. So we should count all public constructors.",
+      "parentUuid": "8864529b_c89defd8",
+      "range": {
+        "startLine": 285,
+        "startChar": 40,
+        "endLine": 285,
+        "endChar": 49
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28728658_4d04b93e",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
         "patchSetId": 2
@@ -221,6 +245,24 @@
       "side": 1,
       "message": "I ran the unit test and an error occurred saying \"JsNoExport\" cannot be resolved. Also in test \"testjsExportAndJsNotExportNotOnFiled\" and \"testJsExportAndJsNotExportNotOnMethod\", do you know why?",
       "parentUuid": "28728658_0d28f17a",
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8864529b_cb32c9ed",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T01:49:12Z",
+      "side": 1,
+      "message": "You need to add mock for JsNoExport. See JavaResourceBase.getStandardResources.",
+      "parentUuid": "8864529b_e88b1388",
       "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

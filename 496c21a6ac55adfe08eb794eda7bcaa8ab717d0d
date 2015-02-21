@@ -69,6 +69,30 @@
       "revId": "496c21a6ac55adfe08eb794eda7bcaa8ab717d0d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28f0c60e_3d708f70",
+        "filename": "user/src/com/google/gwt/logging/impl/LoggerConfiguratorConsole.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-21T02:59:22Z",
+      "side": 1,
+      "message": "I need to play with the idea and other alternatives.\nThis is mostly keeping the existing behavior, just adds missing parts. Let\u0027s move forward in this one and I\u0027ll looking into changing the behavior in another patch.",
+      "parentUuid": "48fb3a34_61a230bc",
+      "range": {
+        "startLine": 80,
+        "startChar": 17,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "496c21a6ac55adfe08eb794eda7bcaa8ab717d0d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

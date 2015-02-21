@@ -46,6 +46,30 @@
       "revId": "b168a6befaca999fc91b31551de73548676ae91b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a86f5675_49f4a154",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-21T00:42:33Z",
+      "side": 1,
+      "message": "sure that sounds fine, but don\u0027t forget to update both of these Resource names",
+      "parentUuid": "a8867663_546a0250",
+      "range": {
+        "startLine": 447,
+        "startChar": 27,
+        "endLine": 447,
+        "endChar": 54
+      },
+      "revId": "b168a6befaca999fc91b31551de73548676ae91b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

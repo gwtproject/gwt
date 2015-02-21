@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "8864529b_c89defd8",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-21T01:29:14Z",
+      "side": 1,
+      "message": "Here we want to catch non-private constructors and skip all others. \n\nQuestion, should we count all public constructors, or all non-private constructors?",
+      "parentUuid": "28728658_0d84713b",
+      "range": {
+        "startLine": 285,
+        "startChar": 40,
+        "endLine": 285,
+        "endChar": 49
+      },
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28728658_4d04b93e",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
         "patchSetId": 2
@@ -179,6 +203,24 @@
       "writtenOn": "2015-02-21T00:50:31Z",
       "side": 1,
       "message": "Isn\u0027t it supported now?",
+      "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8864529b_e88b1388",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-21T01:29:14Z",
+      "side": 1,
+      "message": "I ran the unit test and an error occurred saying \"JsNoExport\" cannot be resolved. Also in test \"testjsExportAndJsNotExportNotOnFiled\" and \"testJsExportAndJsNotExportNotOnMethod\", do you know why?",
+      "parentUuid": "28728658_0d28f17a",
       "revId": "0b5a289485d818bc4bd02006cde083549d3694d7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

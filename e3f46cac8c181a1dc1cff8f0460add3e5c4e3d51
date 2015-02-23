@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "28f0c60e_bddadfee",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-23T22:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bba8cec_3830695d",
+      "range": {
+        "startLine": 242,
+        "startChar": 3,
+        "endLine": 242,
+        "endChar": 28
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bba8cec_b8e239d7",
         "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationState.java",
         "patchSetId": 1
@@ -53,6 +77,30 @@
       "writtenOn": "2015-02-17T19:18:05Z",
       "side": 1,
       "message": "s/state/compilationUnit",
+      "range": {
+        "startLine": 245,
+        "startChar": 52,
+        "endLine": 245,
+        "endChar": 57
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28f0c60e_9ddf23df",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-23T22:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bba8cec_b8e239d7",
       "range": {
         "startLine": 245,
         "startChar": 52,
@@ -88,6 +136,30 @@
     },
     {
       "key": {
+        "uuid": "28f0c60e_5db91b40",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnit.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-23T22:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bba8cec_98fe556d",
+      "range": {
+        "startLine": 449,
+        "startChar": 5,
+        "endLine": 449,
+        "endChar": 58
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bba8cec_98653581",
         "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitImpl.java",
         "patchSetId": 1
@@ -99,6 +171,30 @@
       "writtenOn": "2015-02-17T19:18:05Z",
       "side": 1,
       "message": "i think this is named improperly.\n\na Type *is* a root type but a CompilationUnit *contains* a root type.\n\nit\u0027s an important distinction because without it you might accidentally believe that a CompilationUnit that has been marked \"isRoot\" implies that all of it\u0027s contained types are root types, but that would be wrong.",
+      "range": {
+        "startLine": 42,
+        "startChar": 24,
+        "endLine": 42,
+        "endChar": 30
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28f0c60e_3d81af97",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-23T22:57:53Z",
+      "side": 1,
+      "message": "Good point. Renamed. Also I\u0027m not very fond of this implementation so let me know if you have better suggestions.",
+      "parentUuid": "8bba8cec_98653581",
       "range": {
         "startLine": 42,
         "startChar": 24,
@@ -134,6 +230,30 @@
     },
     {
       "key": {
+        "uuid": "28f0c60e_7dbcd731",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-23T22:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bba8cec_b88599a5",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 15
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bba8cec_d89a8d58",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
         "patchSetId": 1
@@ -145,6 +265,30 @@
       "writtenOn": "2015-02-17T19:18:05Z",
       "side": 1,
       "message": "maybe this block should be in the populateRootTypes() function?",
+      "range": {
+        "startLine": 1035,
+        "startChar": 6,
+        "endLine": 1035,
+        "endChar": 53
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28f0c60e_fdad8730",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-23T22:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bba8cec_d89a8d58",
       "range": {
         "startLine": 1035,
         "startChar": 6,
@@ -180,6 +324,30 @@
     },
     {
       "key": {
+        "uuid": "28f0c60e_ddb24b92",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-23T22:57:53Z",
+      "side": 1,
+      "message": "This is real \u0027export\u0027.",
+      "parentUuid": "8bba8cec_18cec534",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 31
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bba8cec_58e1dd47",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 1
@@ -203,6 +371,30 @@
     },
     {
       "key": {
+        "uuid": "28f0c60e_9d91e3ee",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1340,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-23T22:57:53Z",
+      "side": 1,
+      "message": "I actually didn\u0027t change this part, just removed the surrounding if but gerrit doesn\u0027t show it properly.\nAs you pointed, this looks redundant like many others but I want to remove redundant checks in a separate patches to aid in association of regressions with patches.",
+      "parentUuid": "8bba8cec_58e1dd47",
+      "range": {
+        "startLine": 1340,
+        "startChar": 14,
+        "endLine": 1340,
+        "endChar": 57
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bba8cec_78714173",
         "filename": "user/test/com/google/gwt/core/client/interop/MyClassExportsMethodWithoutReference.java",
         "patchSetId": 1
@@ -214,6 +406,30 @@
       "writtenOn": "2015-02-17T19:18:05Z",
       "side": 1,
       "message": "s/GWT/Java",
+      "range": {
+        "startLine": 21,
+        "startChar": 63,
+        "endLine": 21,
+        "endChar": 66
+      },
+      "revId": "e3f46cac8c181a1dc1cff8f0460add3e5c4e3d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28f0c60e_dd8b6bb6",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyClassExportsMethodWithoutReference.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-23T22:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bba8cec_78714173",
       "range": {
         "startLine": 21,
         "startChar": 63,

@@ -16,6 +16,24 @@
       "revId": "07ecba2275d788c0d2f5c83efdd11b4ad5b1fe37",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c832cad2_ed3121e7",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyExportedClass.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-02-23T20:54:30Z",
+      "side": 1,
+      "message": "I just want to make sure reference to EXPORTED_2 in the static method bar(int a, int b) is remained there, but not replaced by a constant.",
+      "parentUuid": "c832cad2_aab8eff3",
+      "revId": "07ecba2275d788c0d2f5c83efdd11b4ad5b1fe37",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

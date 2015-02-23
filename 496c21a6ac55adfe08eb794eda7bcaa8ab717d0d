@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "48a17a0b_3181ea97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-23T19:06:11Z",
+      "side": 1,
+      "message": "It actually fixes the logging, at least for Chrome.",
+      "parentUuid": "4897ba02_fefb61c9",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 18
+      },
+      "revId": "496c21a6ac55adfe08eb794eda7bcaa8ab717d0d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b736025_0b3261ec",
         "filename": "user/src/com/google/gwt/logging/impl/LoggerConfiguratorConsole.java",
         "patchSetId": 1

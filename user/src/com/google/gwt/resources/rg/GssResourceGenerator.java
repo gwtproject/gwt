@@ -23,6 +23,7 @@ import com.google.gwt.core.ext.SelectionProperty;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
@@ -57,7 +58,6 @@ import com.google.gwt.resources.gss.RecordingBidiFlipper;
 import com.google.gwt.resources.gss.RenamingSubstitutionMap;
 import com.google.gwt.resources.gss.RuntimeConditionalBlockCollector;
 import com.google.gwt.resources.gss.ValidateRuntimeConditionalNode;
-import com.google.gwt.resources.rg.CssResourceGenerator.JClassOrderComparator;
 import com.google.gwt.thirdparty.common.css.MinimalSubstitutionMap;
 import com.google.gwt.thirdparty.common.css.PrefixingSubstitutionMap;
 import com.google.gwt.thirdparty.common.css.SourceCode;
@@ -103,6 +103,7 @@ import com.google.gwt.thirdparty.common.css.compiler.passes.ResolveCustomFunctio
 import com.google.gwt.thirdparty.common.css.compiler.passes.SplitRulesetNodes;
 import com.google.gwt.thirdparty.guava.common.base.CaseFormat;
 import com.google.gwt.thirdparty.guava.common.base.Charsets;
+import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
@@ -112,6 +113,7 @@ import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet.Builder;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Ordering;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.ByteSource;
 import com.google.gwt.thirdparty.guava.common.io.Resources;
@@ -119,9 +121,12 @@ import com.google.gwt.user.rebind.SourceWriter;
 import com.google.gwt.user.rebind.StringSourceWriter;
 import org.apache.commons.io.IOUtils;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -377,6 +382,57 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     return true;
   }
 
+  /**
+   * Builds a CSV file mapping obfuscated CSS class names to their qualified source name and
+   * outputs it as a private build artifact.
+   */
+  protected static void outputCssMapArtifact(TreeLogger logger, ResourceContext context, JMethod method,
+      Map<JMethod, String> actualReplacements) {
+    // There may be several css resources that have the same css resource subtype (e.g. CssResource)
+    // so the qualified accessor method name is used for the unique output file name.
+    JClassType bundleType = method.getEnclosingType();
+
+    String qualifiedMethodName = bundleType.getQualifiedSourceName() + "." + method.getName();
+
+    String mappingFileName = "cssResource/" + qualifiedMethodName + ".cssmap";
+
+    OutputStream os;
+    try {
+      os = context.getGeneratorContext().tryCreateResource(logger, mappingFileName);
+    } catch (UnableToCompleteException e) {
+      logger.log(TreeLogger.WARN, "Could not create resource: " + mappingFileName);
+      return;
+    }
+
+    if (os == null) {
+      // If the returned OutputStream is null, that typically means the resource already exists.
+      // No need to write it out again.
+      return;
+    }
+
+    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os));
+    try {
+      for (Map.Entry<JMethod, String> replacement : actualReplacements.entrySet()) {
+        String qualifiedName = replacement.getKey().getEnclosingType().getQualifiedSourceName();
+        String baseName = replacement.getKey().getName();
+        writer.write(qualifiedName.replaceAll("[.$]", "-") + "-" + baseName);
+        writer.write(",");
+        writer.write(replacement.getValue());
+        writer.newLine();
+      }
+      writer.flush();
+      writer.close();
+    } catch (IOException e) {
+      logger.log(TreeLogger.WARN, "Error writing artifact: " + mappingFileName);
+    }
+
+    try {
+      context.getGeneratorContext().commitResource(logger, os).setVisibility(Visibility.Private);
+    } catch (UnableToCompleteException e) {
+      logger.log(TreeLogger.WARN, "Error trying to commit artifact: " + mappingFileName);
+    }
+  }
+
   private Map<JMethod, CssParsingResult> cssParsingResultMap;
   private Set<String> allowedNonStandardFunctions;
   private LoggerErrorManager errorManager;
@@ -422,7 +478,7 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     sw.outdent();
     sw.println("}");
 
-    CssResourceGenerator.outputCssMapArtifact(logger, context, method, actualReplacements);
+    outputCssMapArtifact(logger, context, method, actualReplacements);
 
     return sw.toString();
   }
@@ -560,11 +616,19 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     return encode(seed) + "-";
   }
 
+
+
   private SortedSet<JClassType> computeOperableTypes(ResourceContext context) {
     TypeOracle typeOracle = context.getGeneratorContext().getTypeOracle();
     JClassType baseInterface = typeOracle.findType(CssResource.class.getCanonicalName());
 
-    SortedSet<JClassType> toReturn = new TreeSet<JClassType>(new JClassOrderComparator());
+    Ordering<JClassType> jClassOrdering = Ordering.natural().onResultOf(
+        new Function<JClassType, Comparable>() {
+          public Comparable apply(JClassType jClassType) {
+            return jClassType.getQualifiedSourceName();
+          }
+        });
+    SortedSet<JClassType> toReturn = new TreeSet<JClassType>(jClassOrdering);
 
     JClassType[] cssResourceSubtypes = baseInterface.getSubtypes();
     for (JClassType type : cssResourceSubtypes) {
@@ -865,12 +929,11 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     boolean css = ensureEitherCssOrGss(resources, logger);
 
     if (css && conversionMode == AutoConversionMode.OFF) {
-      // TODO(dankurka): add link explaining the situation in detail.
       logger.log(Type.ERROR,
           "Your ClientBundle is referencing css files instead of gss. "
               + "You will need to either convert these files to gss using the "
-              + "converter tool or turn on auto convertion in your gwt.xml file. "
-              + "Note: Autoconversion will be removed in the next version of GWT, "
+              + "converter tool or turn on auto conversion in your gwt.xml file. "
+              + "Note: Auto-conversion will be removed in the next version of GWT, "
               + "you will need to move to gss."
               + "Add this line to your gwt.xml file to temporary avoid this:"
               + "<set-configuration-property name=\"CssResource.conversionMode\""

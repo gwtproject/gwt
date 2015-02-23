@@ -3,7 +3,8 @@
 <module>
   <inherits name="com.google.gwt.resources.Resources" />
 
-  <!-- Disable GSS -->
-  <set-configuration-property name="CssResource.conversionMode" value="off" />
-  <set-configuration-property name="CssResource.enableGss" value="false" />
+  <!-- Enable auto-conversion -->
+  <set-configuration-property name="CssResource.conversionMode" value="strict" />
+  <extend-configuration-property name="CssResource.allowedAtRules" value="dontIgnoreThis" />
+  <extend-configuration-property name="CssResource.allowedAtRules" value="dontIgnoreThisToo" />
 </module>

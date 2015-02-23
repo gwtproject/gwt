@@ -36,7 +36,7 @@ public class ExternalTextResourceTest extends GWTTestCase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.resources.ResourcesTest";
+    return "com.google.gwt.resources.ResourcesCssTest";
   }
 
   public void testExternal() throws ResourceException {

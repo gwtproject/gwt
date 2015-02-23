@@ -20,12 +20,6 @@ import com.google.gwt.resources.converter.Css2GssTest;
 import com.google.gwt.resources.converter.DefCollectorVisitorTest;
 import com.google.gwt.resources.converter.ElseNodeCreatorTest;
 import com.google.gwt.resources.converter.UndefinedConstantVisitorTest;
-import com.google.gwt.resources.css.CssExternalTest;
-import com.google.gwt.resources.css.CssNodeClonerTest;
-import com.google.gwt.resources.css.CssReorderTest;
-import com.google.gwt.resources.css.CssRtlTest;
-import com.google.gwt.resources.css.ExtractClassNamesVisitorTest;
-import com.google.gwt.resources.css.UnknownAtRuleTest;
 import com.google.gwt.resources.ext.ResourceGeneratorUtilTest;
 import com.google.gwt.resources.gss.BooleanConditionCollectorTest;
 import com.google.gwt.resources.gss.ClassNamesCollectorTest;
@@ -40,9 +34,7 @@ import com.google.gwt.resources.gss.ResourceUrlFunctionTest;
 import com.google.gwt.resources.gss.RuntimeConditionalBlockCollectorTest;
 import com.google.gwt.resources.gss.ValidateRuntimeConditionalNodeTest;
 import com.google.gwt.resources.gss.ValueFunctionTest;
-import com.google.gwt.resources.rg.CssClassNamesTestCase;
 import com.google.gwt.resources.rg.CssOutputTestCase;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -53,14 +45,7 @@ public class ResourcesJreSuite {
   public static Test suite() {
 
     TestSuite suite = new TestSuite("JRE test for com.google.gwt.resources");
-    suite.addTestSuite(CssClassNamesTestCase.class);
-    suite.addTestSuite(CssExternalTest.class);
-    suite.addTestSuite(CssNodeClonerTest.class);
-    suite.addTestSuite(CssReorderTest.class);
-    suite.addTestSuite(CssRtlTest.class);
-    suite.addTestSuite(ExtractClassNamesVisitorTest.class);
     suite.addTestSuite(ResourceGeneratorUtilTest.class);
-    suite.addTestSuite(UnknownAtRuleTest.class);
 
     // GSS tests
     suite.addTestSuite(ExternalClassesCollectorTest.class);

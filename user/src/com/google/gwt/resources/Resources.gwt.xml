@@ -77,10 +77,6 @@
   <define-configuration-property name="ExternalTextResource.useJsonp" is-multi-valued="false" />
   <set-configuration-property name="ExternalTextResource.useJsonp" value="false" />
 
-  <!-- Enable GSS with CssResource -->
-  <define-configuration-property name="CssResource.enableGss" is-multi-valued="false" />
-  <set-configuration-property name="CssResource.enableGss" value="false" />
-
   <!-- A multi-valued configuration property that defines the list of allowed non standard -->
   <!-- at-rules in the css files -->
   <define-configuration-property name="CssResource.allowedAtRules" is-multi-valued="true" />

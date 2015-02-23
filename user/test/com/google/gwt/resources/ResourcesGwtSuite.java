@@ -17,7 +17,6 @@ package com.google.gwt.resources;
 
 import com.google.gwt.junit.tools.GWTTestSuite;
 import com.google.gwt.resources.client.CSSResourceTest;
-import com.google.gwt.resources.client.CSSResourceWithGSSTest;
 import com.google.gwt.resources.client.DataResourceDoNotEmbedTest;
 import com.google.gwt.resources.client.DataResourceMimeTypeTest;
 import com.google.gwt.resources.client.ExternalTextResourceJsonpTest;
@@ -33,7 +32,6 @@ import com.google.gwt.resources.client.gss.PrettyObfuscationStyleTest;
 import com.google.gwt.resources.client.gss.StableNoTypeObfuscationStyleTest;
 import com.google.gwt.resources.client.gss.StableObfuscationStyleTest;
 import com.google.gwt.resources.client.gss.StableShortTypeObfuscationStyleTest;
-
 import junit.framework.Test;
 
 /**
@@ -52,7 +50,6 @@ public class ResourcesGwtSuite {
     suite.addTestSuite(NestedBundleTest.class);
     suite.addTestSuite(TextResourceTest.class);
     suite.addTestSuite(CSSResourceTest.class);
-    suite.addTestSuite(CSSResourceWithGSSTest.class);
 
     // GSS
     suite.addTestSuite(AutoConversionTest.class);

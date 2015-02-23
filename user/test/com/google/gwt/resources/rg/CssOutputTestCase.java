@@ -15,6 +15,11 @@
  */
 package com.google.gwt.resources.rg;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.GeneratedResource;
@@ -22,13 +27,7 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.dev.util.UnitTestTreeLogger;
 import com.google.gwt.resources.ext.ResourceContext;
-
 import junit.framework.TestCase;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -61,13 +60,13 @@ public class CssOutputTestCase extends TestCase {
     when(bundleType.getQualifiedSourceName()).thenReturn("com.test.Bundle");
     when(method.getName()).thenReturn("cssMethod");
 
-    CssResourceGenerator crg = new CssResourceGenerator();
     // Test the method
-    crg.outputCssMapArtifact(testLogger, mockResourceContext, method, testMap);
+    GssResourceGenerator.outputCssMapArtifact(testLogger, mockResourceContext, method, testMap);
 
     testLogger.assertCorrectLogEntries();
 
-    verify(mockGeneratorContext).tryCreateResource(testLogger, "cssResource/com.test.Bundle.cssMethod.cssmap");
+    verify(mockGeneratorContext)
+        .tryCreateResource(testLogger, "cssResource/com.test.Bundle.cssMethod.cssmap");
     verify(mockGeneratorContext).commitResource(testLogger, mockOutputStream);
     verifyNoMoreInteractions(mockGeneratorContext);
   }
@@ -76,7 +75,7 @@ public class CssOutputTestCase extends TestCase {
     UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
     builder.expectWarn(
         "Could not create resource: cssResource/com.test.Bundle.cssMethod.cssmap", null);
-    UnitTestTreeLogger testLogger =  builder.createLogger();
+    UnitTestTreeLogger testLogger = builder.createLogger();
     ResourceContext mockResourceContext = mock(ResourceContext.class);
     Map<JMethod, String> testMap = new HashMap<JMethod, String>();
     GeneratorContext mockGeneratorContext = mock(GeneratorContext.class);
@@ -91,12 +90,12 @@ public class CssOutputTestCase extends TestCase {
     when(bundleType.getQualifiedSourceName()).thenReturn("com.test.Bundle");
     when(method.getName()).thenReturn("cssMethod");
 
-    CssResourceGenerator crg = new CssResourceGenerator();
-    crg.outputCssMapArtifact(testLogger, mockResourceContext, method, testMap);
+    GssResourceGenerator.outputCssMapArtifact(testLogger, mockResourceContext, method, testMap);
 
     testLogger.assertCorrectLogEntries();
 
-    verify(mockGeneratorContext).tryCreateResource(testLogger, "cssResource/com.test.Bundle.cssMethod.cssmap");
+    verify(mockGeneratorContext)
+        .tryCreateResource(testLogger, "cssResource/com.test.Bundle.cssMethod.cssmap");
     verifyNoMoreInteractions(mockGeneratorContext);
   }
 
@@ -116,8 +115,7 @@ public class CssOutputTestCase extends TestCase {
     when(bundleType.getQualifiedSourceName()).thenReturn("com.test.Bundle");
     when(method.getName()).thenReturn("cssMethod");
 
-    CssResourceGenerator crg = new CssResourceGenerator();
-    crg.outputCssMapArtifact(testLogger, mockResourceContext, method, testMap);
+    GssResourceGenerator.outputCssMapArtifact(testLogger, mockResourceContext, method, testMap);
 
     testLogger.assertCorrectLogEntries();
 
@@ -130,7 +128,7 @@ public class CssOutputTestCase extends TestCase {
     UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
     builder.expectWarn(
         "Error trying to commit artifact: cssResource/com.test.Bundle.cssMethod.cssmap", null);
-    UnitTestTreeLogger testLogger =  builder.createLogger();
+    UnitTestTreeLogger testLogger = builder.createLogger();
     ResourceContext mockResourceContext = mock(ResourceContext.class);
     Map<JMethod, String> testMap = new HashMap<JMethod, String>();
     OutputStream mockOutputStream = mock(OutputStream.class);
@@ -148,12 +146,12 @@ public class CssOutputTestCase extends TestCase {
     when(bundleType.getQualifiedSourceName()).thenReturn("com.test.Bundle");
     when(method.getName()).thenReturn("cssMethod");
 
-    CssResourceGenerator crg = new CssResourceGenerator();
-    crg.outputCssMapArtifact(testLogger, mockResourceContext, method, testMap);
+    GssResourceGenerator.outputCssMapArtifact(testLogger, mockResourceContext, method, testMap);
 
     testLogger.assertCorrectLogEntries();
 
-    verify(mockGeneratorContext).tryCreateResource(testLogger, "cssResource/com.test.Bundle.cssMethod.cssmap");
+    verify(mockGeneratorContext)
+        .tryCreateResource(testLogger, "cssResource/com.test.Bundle.cssMethod.cssmap");
     verify(mockGeneratorContext).commitResource(testLogger, mockOutputStream);
   }
 
@@ -195,8 +193,7 @@ public class CssOutputTestCase extends TestCase {
     when(bundleType.getQualifiedSourceName()).thenReturn("com.test.Bundle");
     when(method.getName()).thenReturn("cssMethod");
 
-    CssResourceGenerator crg = new CssResourceGenerator();
-    crg.outputCssMapArtifact(testLogger, mockResourceContext, method, testMap);
+    GssResourceGenerator.outputCssMapArtifact(testLogger, mockResourceContext, method, testMap);
     String expectedOutput = "test-class-type-1-basename1,TESTCSSNAME1\n" +
         "test-class-type-2-basename2,TESTCSSNAME2\n" +
         "test-class-type-3-basename3,TESTCSSNAME3\n";
@@ -204,7 +201,8 @@ public class CssOutputTestCase extends TestCase {
 
     testLogger.assertCorrectLogEntries();
 
-    verify(mockGeneratorContext).tryCreateResource(testLogger, "cssResource/com.test.Bundle.cssMethod.cssmap");
+    verify(mockGeneratorContext)
+        .tryCreateResource(testLogger, "cssResource/com.test.Bundle.cssMethod.cssmap");
     verify(mockGeneratorContext).commitResource(testLogger, testOutputStream);
   }
 }

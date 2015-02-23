@@ -29,7 +29,7 @@
 @def NESTEDSPRITEWIDTH value("nested.spriteMethod.getWidth", "px");
 
 /*
- * We'll use the token FAIL to indicate text that should never be seen in the output.
+ * We'll use the token fail to indicate text that should never be seen in the output.
  */
 
 /* Test @sprite expansion */
@@ -84,29 +84,29 @@ div[foo="bar"] {
 /* Test structural modifications */
 @if (false) {
   div {
-    runtime: FAIL;
+    runtime: fail;
   }
 } @elif (true) {
   div {
-    runtime: PASSED;
+    runtime: passed;
   }
 } @else {
   div {
-    runtime: FAIL;
+    runtime: fail;
   }
 }
 
 @if CssResource.style obf OBF {
   div {
-    static: PASSED;
+    static: passed;
   }
 } @elif CssResource.style pretty PRETTY {
   div {
-    static: PASSED;
+    static: passed;
   }
 } @else {
   div {
-    static: FAIL;
+    static: fail;
   }
 }
 
@@ -136,7 +136,7 @@ div {
 }
 
 div-with-literal {
-  top: literal("expression(document.compatMode==\"CSS1Compat\" ? documentElement.scrollTop:document.body.scrollTop \\ 2)");
+  filter: literal("progid:DXImageTransform.Microsoft.Shadow(color='#888888', Direction=135, Strength=3)");
 }
 
 ns\:tag {

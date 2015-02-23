@@ -16,12 +16,12 @@
 package com.google.gwt.resources.css;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.resources.client.CssResource.ImportedWithPrefix;
 import com.google.gwt.resources.css.ast.Context;
 import com.google.gwt.resources.css.ast.CssExternalSelectors;
 import com.google.gwt.resources.css.ast.CssSelector;
 import com.google.gwt.resources.css.ast.CssStylesheet;
 import com.google.gwt.resources.css.ast.CssVisitor;
-import com.google.gwt.resources.rg.CssResourceGenerator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -48,13 +48,26 @@ public class ExtractClassNamesVisitor extends CssVisitor {
     SortedSet<String> ignoredPrefixes = new TreeSet<String>();
 
     for (JClassType clazz : imports) {
-      String prefix = CssResourceGenerator.getImportPrefix(clazz);
+      String prefix = getImportPrefix(clazz);
       ignoredPrefixes.add(prefix);
     }
 
     ExtractClassNamesVisitor v = new ExtractClassNamesVisitor(ignoredPrefixes);
     v.accept(sheet);
     return v.found;
+  }
+
+  /**
+   * Returns the import prefix for a type, including the trailing hyphen.
+   */
+  private static String getImportPrefix(JClassType importType) {
+    String prefix = importType.getSimpleSourceName();
+    ImportedWithPrefix exp = importType.getAnnotation(ImportedWithPrefix.class);
+    if (exp != null) {
+      prefix = exp.value();
+    }
+
+    return prefix + "-";
   }
 
   private final Set<String> found = new HashSet<String>();

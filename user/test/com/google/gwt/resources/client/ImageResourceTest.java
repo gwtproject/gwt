@@ -108,7 +108,7 @@ public class ImageResourceTest extends GWTTestCase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.resources.ResourcesTest";
+    return "com.google.gwt.resources.ResourcesCssTest";
   }
 
   public void testAnimated() {

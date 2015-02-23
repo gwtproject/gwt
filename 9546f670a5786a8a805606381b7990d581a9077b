@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08c4e2d0_247a52a1",
+        "filename": "user/src/com/google/gwt/resources/css/ExtractClassNamesVisitor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-02-23T12:09:06Z",
+      "side": 1,
+      "message": "This class is still used by InterfaceGenerator (used to generated a CssResource interface based on a CSS file). We will be able to remove this class once InterfaceGenerator will be migrated to GSS",
+      "revId": "9546f670a5786a8a805606381b7990d581a9077b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

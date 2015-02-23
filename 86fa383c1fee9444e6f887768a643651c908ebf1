@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48ca5adf_46715241",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-23T11:59:56Z",
+      "side": 1,
+      "message": "[error] \u0027org.apache.commons.io.IOUtils\u0027 should be separated from previous imports.",
+      "revId": "86fa383c1fee9444e6f887768a643651c908ebf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48ca5adf_a63e4656",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-23T11:59:56Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "86fa383c1fee9444e6f887768a643651c908ebf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

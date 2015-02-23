@@ -16,6 +16,75 @@
       "revId": "1e1c33746dac19dedbb2c1132d8167ec4c1101c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a86916a4_1f592bf8",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsNameRef.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-23T19:16:52Z",
+      "side": 1,
+      "message": "s/isForcedName/forceName\n\nalso please add a comment explaining what it means for a name to be forced",
+      "range": {
+        "startLine": 27,
+        "startChar": 18,
+        "endLine": 27,
+        "endChar": 30
+      },
+      "revId": "1e1c33746dac19dedbb2c1132d8167ec4c1101c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c849ea4e_720b584c",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsNameRef.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-23T19:16:52Z",
+      "side": 1,
+      "message": "this is really minor but i think it\u0027s more accurate to say it \"hasForcedName\"",
+      "range": {
+        "startLine": 100,
+        "startChar": 17,
+        "endLine": 100,
+        "endChar": 29
+      },
+      "revId": "1e1c33746dac19dedbb2c1132d8167ec4c1101c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "885372fc_b0dcd823",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-23T19:16:52Z",
+      "side": 1,
+      "message": "so this test will fail in IE8? have you already done something to turn off this test in IE8?",
+      "range": {
+        "startLine": 173,
+        "startChar": 14,
+        "endLine": 173,
+        "endChar": 32
+      },
+      "revId": "1e1c33746dac19dedbb2c1132d8167ec4c1101c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

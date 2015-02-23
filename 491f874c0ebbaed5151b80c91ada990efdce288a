@@ -54,6 +54,29 @@
     },
     {
       "key": {
+        "uuid": "e8c06ec1_23c24a2c",
+        "filename": "user/src/com/google/gwt/uibinder/elementparsers/BeanParser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-02-23T13:53:50Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "range": {
+        "startLine": 47,
+        "startChar": 72,
+        "endLine": 47,
+        "endChar": 73
+      },
+      "revId": "491f874c0ebbaed5151b80c91ada990efdce288a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28f0c60e_bdc13f8d",
         "filename": "user/src/com/google/gwt/uibinder/elementparsers/BeanParser.java",
         "patchSetId": 2

@@ -219,6 +219,7 @@ public class WidgetBasedUi extends Composite {
   @UiField Element myElementWithTagName;
   @UiField DataResource embeddedSvgData;
   @UiField DataResource linkedSvgData;
+  @UiField(provided = true) FooIsWidget fooIsWidget;
 
   ValueChangeEvent<Double> doubleValueChangeEvent;
 
@@ -278,6 +279,7 @@ public class WidgetBasedUi extends Composite {
 
   protected void init() {
     external.style().ensureInjected();
+    fooIsWidget = new FooIsWidgetImpl();
     initWidget(binder.createAndBindUi(this));
   }
 

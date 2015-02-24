@@ -36,6 +36,7 @@ public class UiBinderJsInteropTest extends GWTTestCase {
     @Override
     protected void init() {
       Binder binder = GWT.create(Binder.class);
+      fooIsWidget = new FooIsWidgetImpl();
       initWidget(binder.createAndBindUi(this));
     }
   }

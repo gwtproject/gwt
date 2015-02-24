@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c597155d_027f6a44",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-24T19:39:36Z",
+      "side": 1,
+      "message": "[error] \u0027~\u0027 is followed by whitespace.",
+      "revId": "3f2017f697f9a9615504ed6aa384f58b6338bdde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c597155d_e28366ea",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JFlags.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-24T19:39:36Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "3f2017f697f9a9615504ed6aa384f58b6338bdde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c597155d_c2886209",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-24T19:39:36Z",
+      "side": 1,
+      "message": "[error] \u0027~\u0027 is followed by whitespace.",
+      "revId": "3f2017f697f9a9615504ed6aa384f58b6338bdde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c597155d_a28d5e17",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-24T19:39:36Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "3f2017f697f9a9615504ed6aa384f58b6338bdde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c597155d_82737a7a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JVariable.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-24T19:39:36Z",
+      "side": 1,
+      "message": "[error] \u0027~\u0027 is followed by whitespace.",
+      "revId": "3f2017f697f9a9615504ed6aa384f58b6338bdde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

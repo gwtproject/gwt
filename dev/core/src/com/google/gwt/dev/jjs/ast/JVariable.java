@@ -25,7 +25,7 @@ public abstract class JVariable extends JNode implements CanBeSetFinal, CanHaveI
     HasName, HasType {
 
   protected JDeclarationStatement declStmt = null;
-  private boolean isFinal;
+  private int flags;
   private String name;
   private JType type;
 
@@ -34,7 +34,9 @@ public abstract class JVariable extends JNode implements CanBeSetFinal, CanHaveI
     assert type != null;
     this.name = StringInterner.get().intern(name);
     this.type = type;
-    this.isFinal = isFinal;
+    if (isFinal) {
+      setFinal();
+    }
   }
 
   @Override
@@ -74,12 +76,12 @@ public abstract class JVariable extends JNode implements CanBeSetFinal, CanHaveI
 
   @Override
   public boolean isFinal() {
-    return isFinal;
+    return isFlagSet(JFlags.FINAL);
   }
 
   @Override
   public void setFinal() {
-    isFinal = true;
+    setFlag(JFlags.FINAL);
   }
 
   public void setName(String name) {
@@ -89,6 +91,22 @@ public abstract class JVariable extends JNode implements CanBeSetFinal, CanHaveI
   public void setType(JType newType) {
     assert newType != null;
     type = newType;
+  }
+
+  protected void setFlag(int flag, boolean value) {
+    this.flags = value ? this.flags | flag : this.flags & ~ flag;
+  }
+
+  protected void setFlag(int flag) {
+    this.flags |= flag;
+  }
+
+  protected void clearFlag(int flag) {
+    this.flags &= ~flag;
+  }
+
+  protected boolean isFlagSet(int flag) {
+    return (this.flags & flag) != 0;
   }
 
 }

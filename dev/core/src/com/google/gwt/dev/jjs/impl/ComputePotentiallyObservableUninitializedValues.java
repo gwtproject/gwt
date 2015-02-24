@@ -24,7 +24,6 @@ import com.google.gwt.dev.jjs.ast.JFieldRef;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JThisRef;
@@ -115,7 +114,6 @@ public class ComputePotentiallyObservableUninitializedValues {
 
   private class CanObserveSubclassUninitializedFieldsVisitor extends JVisitor {
     private JClassType currentClass;
-    private JParameter devirtualizedThis;
     private Set<JType> classesThatCanPotentiallyObserveUninitializedSubclassFields =
         Sets.newHashSet();
 
@@ -128,13 +126,11 @@ public class ComputePotentiallyObservableUninitializedValues {
     @Override
     public void endVisit(JConstructor x, Context ctx) {
       assert currentClass == x.getEnclosingType();
-      assert devirtualizedThis == null;
     }
 
     @Override
     public void endVisit(JMethod x, Context ctx) {
       assert currentClass == x.getEnclosingType();
-      devirtualizedThis = null;
     }
 
     @Override
@@ -145,7 +141,7 @@ public class ComputePotentiallyObservableUninitializedValues {
     }
 
     public void endVisit(JParameterRef x, Context ctx) {
-      if (x.getParameter() == devirtualizedThis) {
+      if (x.getParameter().isThis()) {
         // Seen a reference to devirtualized "this" that can potentially escape or be used as
         // instance in a method call.
         classesThatCanPotentiallyObserveUninitializedSubclassFields.add(currentClass);
@@ -190,10 +186,6 @@ public class ComputePotentiallyObservableUninitializedValues {
         return true;
       }
 
-      if (isDevirtualizedInitMethod(x) && x.getParams().size() > 0
-          && x.getParams().get(0).getType() == currentClass) {
-        devirtualizedThis = x.getParams().get(0);
-      }
       // Do not explore the method body if it is not a constructor or the instance initializer.
       return false;
     }
@@ -243,7 +235,7 @@ public class ComputePotentiallyObservableUninitializedValues {
 
     private boolean isFieldReferenceThroughThis(JFieldRef x) {
       return x.getInstance() instanceof JThisRef || x.getInstance() instanceof JParameterRef &&
-          ((JParameterRef) x.getInstance()).getParameter() == devirtualizedThis;
+          ((JParameterRef) x.getInstance()).getParameter().isThis();
     }
 
     private boolean isFieldDeclaredInCurrentClassOrSuper(JFieldRef x) {

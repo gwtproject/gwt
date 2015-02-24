@@ -50,14 +50,13 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
   }
 
   private String exportName;
-  private boolean noExport = false;
 
   public boolean isNoExport() {
-    return noExport;
+    return isFlagSet(JFlags.NO_EXPORT);
   }
 
   public void setNoExport(boolean noExport) {
-    this.noExport = noExport;
+    setFlag(JFlags.NO_EXPORT, noExport);
   }
 
   public void setExportName(String exportName) {
@@ -100,10 +99,6 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
       JNullType.INSTANCE, false, Disposition.FINAL);
 
   private final JDeclaredType enclosingType;
-  private final boolean isCompileTimeConstant;
-  private final boolean isStatic;
-  private final boolean isThisRef;
-  private boolean isVolatile;
   private transient String signature;
 
   /**
@@ -115,10 +110,10 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
       boolean isStatic, Disposition disposition, AccessModifier access) {
     super(info, name, type, disposition.isFinal());
     this.enclosingType = enclosingType;
-    this.isStatic = isStatic;
-    this.isCompileTimeConstant = disposition.isCompileTimeConstant();
-    this.isVolatile = disposition.isVolatile();
-    this.isThisRef = disposition.isThisRef();
+    setFlag(JFlags.STATIC, isStatic);
+    setFlag(JFlags.COMPILE_TIME_CONSTANT, disposition.isCompileTimeConstant());
+    setFlag(JFlags.VOLATILE, disposition.isVolatile());
+    setFlag(JFlags.THIS_REF, disposition.isThisRef());
     this.access = access.ordinal();
     // Disposition is not cached because we can be set final later.
   }
@@ -165,7 +160,7 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
   }
 
   public boolean isCompileTimeConstant() {
-    return isCompileTimeConstant;
+    return isFlagSet(JFlags.COMPILE_TIME_CONSTANT);
   }
 
   public boolean isExternal() {
@@ -178,15 +173,15 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
 
   @Override
   public boolean isStatic() {
-    return isStatic;
+    return isFlagSet(JFlags.STATIC);
   }
 
   public boolean isThisRef() {
-    return isThisRef;
+    return isFlagSet(JFlags.THIS_REF);
   }
 
   public boolean isVolatile() {
-    return isVolatile;
+    return isFlagSet(JFlags.VOLATILE);
   }
 
   @Override

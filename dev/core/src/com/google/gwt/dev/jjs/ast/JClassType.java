@@ -28,8 +28,8 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
   public JClassType(SourceInfo info, String name, boolean isAbstract, boolean isFinal,
       JsInteropType interopType) {
     super(info, name, interopType);
-    this.isAbstract = isAbstract;
-    this.isFinal = isFinal;
+    setFlag(JFlags.ABSTRACT, isAbstract);
+    setFlag(JFlags.FINAL, isFinal);
   }
 
   private static class ExternalSerializedForm implements Serializable {
@@ -44,10 +44,7 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
     }
   }
 
-  private final boolean isAbstract;
-  private boolean isFinal;
   private JClassType superClass;
-  private boolean isJsPrototype = false;
 
   public JClassType(SourceInfo info, String name, boolean isAbstract, boolean isFinal) {
     this(info, name, isAbstract, isFinal, JsInteropType.NONE);
@@ -58,7 +55,6 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
    */
   JClassType(String name) {
     super(SourceOrigin.UNKNOWN, name, JsInteropType.NONE);
-    isAbstract = false;
     setExternal(true);
   }
 
@@ -69,7 +65,7 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
 
   @Override
   public boolean isAbstract() {
-    return isAbstract;
+    return isFlagSet(JFlags.ABSTRACT);
   }
 
   @Override
@@ -82,12 +78,12 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
 
   @Override
   public boolean isFinal() {
-    return isFinal;
+    return isFlagSet(JFlags.FINAL);
   }
 
   @Override
   public void setFinal() {
-    isFinal = true;
+    setFlag(JFlags.FINAL);
   }
 
   /**
@@ -98,11 +94,11 @@ public class JClassType extends JDeclaredType implements CanBeSetFinal {
   }
 
   public boolean isJsPrototypeStub() {
-    return isJsPrototype;
+    return isFlagSet(JFlags.JS_PROTOTYPE);
   }
 
   public void setJsPrototypeStub(boolean isJsPrototype) {
-    this.isJsPrototype = isJsPrototype;
+    setFlag(JFlags.JS_PROTOTYPE, isJsPrototype);
   }
 
   @Override

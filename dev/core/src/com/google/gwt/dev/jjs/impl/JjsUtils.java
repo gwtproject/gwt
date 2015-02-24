@@ -176,7 +176,7 @@ public class JjsUtils {
    * Creates a synthetic abstract stub in {@code type} with the same signature as
    * {@code superTypeMethod}.
    */
-  public static JMethod createSyntheticAbstractSub(JDeclaredType type, JMethod superTypeMethod) {
+  public static JMethod createSyntheticAbstractStub(JDeclaredType type, JMethod superTypeMethod) {
     assert type.isAbstract();
     assert superTypeMethod.isAbstract();
     return createEmptyMethod(type, superTypeMethod, true);

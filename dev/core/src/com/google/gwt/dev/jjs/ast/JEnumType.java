@@ -29,7 +29,6 @@ public class JEnumType extends JClassType {
    */
 
   private List<JEnumField> enumList = Lists.create();
-  private boolean isOrdinalized = false;
 
   public JEnumType(SourceInfo info, String name, boolean isAbstract) {
     super(info, name, isAbstract, false);
@@ -65,10 +64,10 @@ public class JEnumType extends JClassType {
   }
 
   public boolean isOrdinalized() {
-    return isOrdinalized;
+    return isFlagSet(JFlags.ORDINALIZED);
   }
 
   public void setOrdinalized() {
-    isOrdinalized = true;
+    setFlag(JFlags.ORDINALIZED);
   }
 }

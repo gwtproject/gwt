@@ -46,19 +46,32 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     }
   };
   private String exportName;
-  private boolean jsProperty;
   private Specialization specialization;
-  private boolean noExport = false;
-  private boolean inliningAllowed = true;
-  private boolean hasSideEffects = true;
-  private boolean defaultMethod = false;
+
+  private int flags = JFlags.INLINING_ALLOWED | JFlags.SIDE_EFFECTS;
 
   public boolean isNoExport() {
-    return noExport;
+    return isFlagSet(JFlags.NO_EXPORT);
   }
 
   public void setNoExport(boolean noExport) {
-    this.noExport = noExport;
+    setFlag(JFlags.NO_EXPORT, noExport);
+  }
+  private boolean isFlagSet(int flag) {
+    return (this.flags & flag) != 0;
+  }
+
+  private void setFlag(int flag, boolean value) {
+    this.flags = value ? this.flags | flag : this.flags & ~ flag;
+  }
+
+  private void setFlag(int flag) {
+    this.flags |= flag;
+  }
+
+
+  private void clearFlag(int flag) {
+    this.flags &= ~flag;
   }
 
   public void setExportName(String exportName) {
@@ -70,11 +83,11 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   }
 
   public void setJsProperty(boolean jsProperty) {
-    this.jsProperty = jsProperty;
+    setFlag(JFlags.JS_PROPERTY, jsProperty);
   }
 
   public boolean isJsProperty() {
-    return jsProperty;
+    return isFlagSet(JFlags.JS_PROPERTY);
   }
 
   public void setSpecialization(List<JType> paramTypes, JType returnsType, String targetMethod) {
@@ -105,27 +118,27 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   }
 
   public boolean isInliningAllowed() {
-    return inliningAllowed;
+    return isFlagSet(JFlags.INLINING_ALLOWED);
   }
 
   public void setInliningAllowed(boolean inliningAllowed) {
-    this.inliningAllowed = inliningAllowed;
+    setFlag(JFlags.INLINING_ALLOWED, inliningAllowed);
   }
 
   public boolean hasSideEffects() {
-    return hasSideEffects;
+    return isFlagSet(JFlags.SIDE_EFFECTS);
   }
 
   public void setHasSideEffects(boolean hasSideEffects) {
-    this.hasSideEffects = hasSideEffects;
+    setFlag(JFlags.SIDE_EFFECTS, hasSideEffects);
   }
 
   public void setDefaultMethod() {
-    this.defaultMethod = true;
+    setFlag(JFlags.DEFAULT_METHOD);
   }
 
   public boolean isDefaultMethod() {
-    return defaultMethod;
+    return isFlagSet(JFlags.DEFAULT_METHOD);
   }
 
   /**
@@ -220,11 +233,8 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    * Special serialization treatment.
    */
   private transient JAbstractMethodBody body = null;
+
   private final JDeclaredType enclosingType;
-  private boolean isAbstract;
-  private boolean isFinal;
-  private final boolean isStatic;
-  private boolean isSynthetic = false;
   private final String name;
 
   private List<JType> originalParamTypes;
@@ -250,9 +260,9 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     this.name = StringInterner.get().intern(name);
     this.enclosingType = enclosingType;
     this.returnType = returnType;
-    this.isAbstract = isAbstract;
-    this.isStatic = isStatic;
-    this.isFinal = isFinal;
+    setAbstract(isAbstract);
+    setFlag(JFlags.STATIC, isStatic);
+    setFinal(isFinal);
     this.access = access.ordinal();
   }
 
@@ -436,7 +446,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   @Override
   public boolean isAbstract() {
-    return isAbstract;
+    return isFlagSet(JFlags.ABSTRACT);
   }
 
   public boolean isConstructor() {
@@ -453,7 +463,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   @Override
   public boolean isFinal() {
-    return isFinal;
+    return isFlagSet(JFlags.FINAL);
   }
 
   @Override
@@ -475,11 +485,11 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   @Override
   public boolean isStatic() {
-    return isStatic;
+    return isFlagSet(JFlags.STATIC);
   }
 
   public boolean isSynthetic() {
-    return isSynthetic;
+    return isFlagSet(JFlags.SYNTHETIC);
   }
 
   /**
@@ -518,7 +528,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   }
 
   public void setAbstract(boolean isAbstract) {
-    this.isAbstract = isAbstract;
+    setFlag(JFlags.ABSTRACT, isAbstract);
   }
 
   public void setBody(JAbstractMethodBody body) {
@@ -530,7 +540,11 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   @Override
   public void setFinal() {
-    isFinal = true;
+    setFinal(true);
+  }
+
+  public void setFinal(boolean isFinal) {
+    setFlag(JFlags.FINAL, isFinal);
   }
 
   public void setOriginalTypes(JType returnType, List<JType> paramTypes) {
@@ -542,7 +556,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   }
 
   public void setSynthetic() {
-    isSynthetic = true;
+    setFlag(JFlags.SYNTHETIC);
   }
 
   public void setType(JType newType) {

@@ -84,13 +84,7 @@ public abstract class JDeclaredType extends JReferenceType {
    */
   private JDeclaredType enclosingType;
 
-  /**
-   * True if this class is provided externally to the program by the program's
-   * host execution environment. For example, while compiling for the JVM, JRE
-   * types are external types. External types definitions are provided by class
-   * files which are considered opaque by the GWT compiler.
-   */
-  private boolean isExternal;
+  private int flags;
 
   /**
    * This type's implemented interfaces.
@@ -332,7 +326,7 @@ public abstract class JDeclaredType extends JReferenceType {
 
   @Override
   public boolean isExternal() {
-    return isExternal;
+    return isFlagSet(JFlags.EXTERNAL);
   }
 
   /**
@@ -388,7 +382,7 @@ public abstract class JDeclaredType extends JReferenceType {
   }
 
   public void setExternal(boolean isExternal) {
-    this.isExternal = isExternal;
+    setFlag(JFlags.EXTERNAL, isExternal);
   }
 
   /**
@@ -521,5 +515,21 @@ public abstract class JDeclaredType extends JReferenceType {
     String fqName = getName();
     return getEnclosingType() == null ? fqName.substring(fqName.lastIndexOf('.') + 1) :
         fqName.substring(getEnclosingType().getName().length() + 1);
+  }
+
+  protected void setFlag(int flag, boolean value) {
+    this.flags = value ? this.flags | flag : this.flags & ~ flag;
+  }
+
+  protected void setFlag(int flag) {
+    this.flags |= flag;
+  }
+
+  protected void clearFlag(int flag) {
+    this.flags &= ~flag;
+  }
+
+  protected boolean isFlagSet(int flag) {
+    return (this.flags & flag) != 0;
   }
 }

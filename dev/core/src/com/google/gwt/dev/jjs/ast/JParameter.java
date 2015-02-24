@@ -35,13 +35,12 @@ public class JParameter extends JVariable implements HasEnclosingMethod {
   }
 
   private final JMethod enclosingMethod;
-  private final boolean isThis;
 
   public JParameter(SourceInfo info, String name, JType type, boolean isFinal, boolean isThis,
       JMethod enclosingMethod) {
     super(info, name, type, isFinal);
     this.enclosingMethod = enclosingMethod;
-    this.isThis = isThis;
+    setFlag(JFlags.THIS_PARAMETER, isThis);
   }
 
   @Override
@@ -54,7 +53,7 @@ public class JParameter extends JVariable implements HasEnclosingMethod {
    * static impl method.
    */
   public boolean isThis() {
-    return isThis;
+    return isFlagSet(JFlags.THIS_PARAMETER);
   }
 
   @Override

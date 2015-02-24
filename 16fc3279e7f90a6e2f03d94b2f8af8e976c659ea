@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "25d63140_4d1a596c",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-24T22:13:02Z",
+      "side": 1,
+      "message": "good point, done",
+      "parentUuid": "25d1d13f_b57800da",
+      "range": {
+        "startLine": 167,
+        "startChar": 41,
+        "endLine": 167,
+        "endChar": 70
+      },
+      "revId": "16fc3279e7f90a6e2f03d94b2f8af8e976c659ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25d63140_ad12dd52",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-24T22:13:02Z",
+      "side": 1,
+      "message": "in a normal monolithic compile this wouldn\u0027t be needed because JsInteropRestrictionChecker would examine see all types and so could see any possible collision.\n\nbut in incremental compiles only the changed types are processed, so the MinimalRebuildCache is being used to give the checker a global view even when processing just changed types.",
+      "parentUuid": "25d1d13f_78c5bd12",
+      "range": {
+        "startLine": 165,
+        "startChar": 1,
+        "endLine": 167,
+        "endChar": 95
+      },
+      "revId": "16fc3279e7f90a6e2f03d94b2f8af8e976c659ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25d1d13f_b51920f3",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "05e3ed1f_4cf93fd1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-24T22:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25d1d13f_b51920f3",
+      "revId": "16fc3279e7f90a6e2f03d94b2f8af8e976c659ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25d1d13f_d86a917c",
         "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
         "patchSetId": 1
@@ -76,6 +142,30 @@
       "writtenOn": "2015-02-24T21:30:58Z",
       "side": 1,
       "message": "remove.",
+      "range": {
+        "startLine": 1693,
+        "startChar": 4,
+        "endLine": 1693,
+        "endChar": 40
+      },
+      "revId": "16fc3279e7f90a6e2f03d94b2f8af8e976c659ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25d63140_0d2451a7",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1693,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-02-24T22:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25d1d13f_d86a917c",
       "range": {
         "startLine": 1693,
         "startChar": 4,

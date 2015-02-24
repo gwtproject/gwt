@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 Google Inc.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -162,6 +162,9 @@ public class MinimalRebuildCache implements Serializable {
   private final Set<String> deletedDiskSourcePaths = Sets.newHashSet();
   private final Set<String> deletedResourcePaths = Sets.newHashSet();
   private final Set<String> dualJsoImplInterfaceNames = Sets.newHashSet();
+  private final Set<String> exportedGlobalNames = Sets.newHashSet();
+  private final Multimap<String, String> exportedGlobalNamesByTypeName = HashMultimap.create();
+  private final Multimap<String, String> exportedMemberNamesByTypeName = HashMultimap.create();
   private final ArtifactSet generatedArtifacts = new ArtifactSet();
   private final Multimap<String, String> generatedCompilationUnitNamesByReboundTypeNames =
       HashMultimap.create();
@@ -194,6 +197,15 @@ public class MinimalRebuildCache implements Serializable {
   private StringAnalyzableTypeEnvironment typeEnvironment =
       new StringAnalyzableTypeEnvironment(this);
   private final Multimap<String, String> typeNamesByReferencingTypeName = HashMultimap.create();
+
+  public boolean addExportedGlobalName(String exportedGlobalName, String inTypeName) {
+    exportedGlobalNamesByTypeName.put(inTypeName, exportedGlobalName);
+    return exportedGlobalNames.add(exportedGlobalName);
+  }
+
+  public boolean addExportedMemberName(String exportedMemberName, String inTypeName) {
+    return exportedMemberNamesByTypeName.put(inTypeName, exportedMemberName);
+  }
 
   /**
    * Accumulates generated artifacts so that they can be output on recompiles even if no generators
@@ -466,6 +478,8 @@ public class MinimalRebuildCache implements Serializable {
     copyMap(that.sourceMapsByTypeName, this.sourceMapsByTypeName);
     copyMap(that.statementRangesByTypeName, this.statementRangesByTypeName);
 
+    copyMultimap(that.exportedGlobalNamesByTypeName, this.exportedGlobalNamesByTypeName);
+    copyMultimap(that.exportedMemberNamesByTypeName, this.exportedMemberNamesByTypeName);
     copyMultimap(that.generatedCompilationUnitNamesByReboundTypeNames,
         this.generatedCompilationUnitNamesByReboundTypeNames);
     copyMultimap(that.nestedTypeNamesByUnitTypeName, this.nestedTypeNamesByUnitTypeName);
@@ -480,6 +494,7 @@ public class MinimalRebuildCache implements Serializable {
     copyCollection(that.deletedDiskSourcePaths, this.deletedDiskSourcePaths);
     copyCollection(that.deletedResourcePaths, this.deletedResourcePaths);
     copyCollection(that.dualJsoImplInterfaceNames, this.dualJsoImplInterfaceNames);
+    copyCollection(that.exportedGlobalNames, this.exportedGlobalNames);
     copyCollection(that.generatedArtifacts, this.generatedArtifacts);
     copyCollection(that.jsoStatusChangedTypeNames, this.jsoStatusChangedTypeNames);
     copyCollection(that.jsoTypeNames, this.jsoTypeNames);
@@ -672,6 +687,13 @@ public class MinimalRebuildCache implements Serializable {
     rebinderTypeNamesByReboundTypeName.put(reboundTypeName, rebinderType);
   }
 
+  public void removeExportedNames(String inTypeName) {
+    exportedMemberNamesByTypeName.removeAll(inTypeName);
+    Collection<String> exportedGlobalNamesForType =
+        exportedGlobalNamesByTypeName.removeAll(inTypeName);
+    exportedGlobalNames.removeAll(exportedGlobalNamesForType);
+  }
+
   public void removeReferencesFrom(String fromTypeName) {
     Collection<String> toTypeNames = referencedTypeNamesByTypeName.get(fromTypeName);
     for (String toTypeName : toTypeNames) {
@@ -754,8 +776,11 @@ public class MinimalRebuildCache implements Serializable {
         && Objects.equal(this.deletedDiskSourcePaths, that.deletedDiskSourcePaths)
         && Objects.equal(this.deletedResourcePaths, that.deletedResourcePaths)
         && Objects.equal(this.dualJsoImplInterfaceNames, that.dualJsoImplInterfaceNames)
-        && Objects.equal(this.generatedArtifacts, that.generatedArtifacts) && Objects.equal(
-            this.generatedCompilationUnitNamesByReboundTypeNames,
+        && Objects.equal(this.generatedArtifacts, that.generatedArtifacts)
+        && Objects.equal(this.exportedGlobalNames, that.exportedGlobalNames)
+        && Objects.equal(this.exportedGlobalNamesByTypeName, that.exportedGlobalNamesByTypeName)
+        && Objects.equal(this.exportedMemberNamesByTypeName, that.exportedMemberNamesByTypeName)
+        && Objects.equal(this.generatedCompilationUnitNamesByReboundTypeNames,
             that.generatedCompilationUnitNamesByReboundTypeNames)
         && this.intTypeMapper.hasSameContent(that.intTypeMapper)
         && Objects.equal(this.jsByTypeName, that.jsByTypeName)

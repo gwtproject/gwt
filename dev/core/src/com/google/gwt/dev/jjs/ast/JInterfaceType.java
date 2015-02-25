@@ -25,10 +25,6 @@ import java.io.Serializable;
  */
 public class JInterfaceType extends JDeclaredType {
 
-  public JInterfaceType(SourceInfo info, String name, JsInteropType interopType, String jsPrototype) {
-    super(info, name, interopType, jsPrototype);
-  }
-
   private static class ExternalSerializedForm implements Serializable {
     private final String name;
 
@@ -41,15 +37,19 @@ public class JInterfaceType extends JDeclaredType {
     }
   }
 
+  public JInterfaceType(SourceInfo info, String name, boolean isJsType, String jsPrototype) {
+    super(info, name, isJsType, jsPrototype);
+  }
+
   public JInterfaceType(SourceInfo info, String name) {
-    this(info, name, JsInteropType.NONE, null);
+    this(info, name, false, null);
   }
 
   /**
    * Construct a bare-bones deserialized external interface.
    */
   private JInterfaceType(String name) {
-    this(SourceOrigin.UNKNOWN, name, JsInteropType.NONE, null);
+    this(SourceOrigin.UNKNOWN, name, false, null);
     setExternal(true);
   }
 

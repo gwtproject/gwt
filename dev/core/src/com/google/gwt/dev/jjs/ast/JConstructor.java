@@ -51,6 +51,12 @@ public class JConstructor extends JMethod {
 
   private boolean defaultConstructor;
 
+  public JConstructor(SourceInfo info, JClassType enclosingType) {
+    // Access only matters for virtual methods, just use public.
+    super(info, enclosingType.getShortName(), enclosingType, JPrimitiveType.VOID, false, false,
+        true, AccessModifier.PUBLIC);
+  }
+
   public void setDefaultConstructor() {
     defaultConstructor = true;
   }
@@ -60,12 +66,6 @@ public class JConstructor extends JMethod {
    */
   public boolean isDefaultConstructor() {
     return defaultConstructor;
-  }
-
-  public JConstructor(SourceInfo info, JClassType enclosingType) {
-    // Access only matters for virtual methods, just use public.
-    super(info, enclosingType.getShortName(), enclosingType, JPrimitiveType.VOID, false, false,
-        true, AccessModifier.PUBLIC);
   }
 
   @Override

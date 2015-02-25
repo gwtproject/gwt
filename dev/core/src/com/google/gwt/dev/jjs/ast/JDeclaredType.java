@@ -49,15 +49,8 @@ import java.util.List;
  */
 public abstract class JDeclaredType extends JReferenceType {
 
-  /**
-   * The type of the class for JsInterop purposes.
-   */
-  public enum JsInteropType {
-    NONE, NO_PROTOTYPE, JS_PROTOTYPE,
-  }
-
   private final String jsPrototype;
-  private final JsInteropType jsInteropType;
+  private final boolean isJsType;
   private String jsNamespace = "";
 
   /**
@@ -97,15 +90,14 @@ public abstract class JDeclaredType extends JReferenceType {
    */
   private List<JInterfaceType> superInterfaces = Lists.create();
 
-  public JDeclaredType(SourceInfo info, String name, JsInteropType interopType,
-      String jsPrototype) {
+  public JDeclaredType(SourceInfo info, String name, boolean isJsType, String jsPrototype) {
     super(info, name);
-    this.jsInteropType = interopType;
+    this.isJsType = isJsType;
     this.jsPrototype = jsPrototype;
   }
 
-  public JDeclaredType(SourceInfo info, String name, JsInteropType interopType) {
-    this(info, name, interopType, null);
+  public JDeclaredType(SourceInfo info, String name, boolean isJsType) {
+    this(info, name, isJsType, null);
   }
 
   /**
@@ -306,7 +298,7 @@ public abstract class JDeclaredType extends JReferenceType {
   }
 
   public boolean isJsType() {
-    return jsInteropType != JsInteropType.NONE;
+    return isJsType;
   }
 
   public boolean isOrExtendsJsType() {
@@ -323,22 +315,18 @@ public abstract class JDeclaredType extends JReferenceType {
 
   public boolean hasAnyExports() {
     for (JMethod method : getMethods()) {
-      if (method.isExported()) {
+      if (method.getExportName() != null) {
         return true;
       }
     }
 
     for (JField field : getFields()) {
-      if (field.isExported()) {
+      if (field.getExportName() != null) {
         return true;
       }
     }
 
     return false;
-  }
-
-  public JsInteropType getJsInteropType() {
-    return jsInteropType;
   }
 
   public String getJsPrototype() {

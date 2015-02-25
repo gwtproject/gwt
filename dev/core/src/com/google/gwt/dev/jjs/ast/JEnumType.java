@@ -35,8 +35,8 @@ public class JEnumType extends JClassType {
     super(info, name, isAbstract, false);
   }
 
-  public JEnumType(SourceInfo info, String name, boolean isAbstract, JsInteropType interopType) {
-    super(info, name, isAbstract, false, interopType);
+  public JEnumType(SourceInfo info, String name, boolean isAbstract, boolean isJsType) {
+    super(info, name, isAbstract, false, isJsType);
   }
 
   @Override

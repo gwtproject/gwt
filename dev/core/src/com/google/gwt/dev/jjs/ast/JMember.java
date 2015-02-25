@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Google Inc.
+ * Copyright 2015 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,16 +15,14 @@
  */
 package com.google.gwt.dev.jjs.ast;
 
-/**
- * Abstracts the idea that a class can be traversed.
- */
-public interface JVisitable {
+import com.google.gwt.dev.jjs.HasSourceInfo;
 
-  /**
-   * Causes this object to have the visitor visit itself and its children.
-   *
-   * @param visitor the visitor that should traverse this node
-   * @param ctx the context of an existing traversal
-   */
-  void traverse(JVisitor visitor, Context ctx);
+/**
+ * Abstracts class members (i.e. fields and methods).
+ */
+public interface JMember extends HasEnclosingType, HasName, HasJsInfo, HasType, HasSourceInfo,
+    CanBeSetFinal, CanBeStatic {
+  boolean isPublic();
+
+  boolean needsVtable();
 }

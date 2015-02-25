@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02cf6348_4cc0bf88",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-25T23:22:10Z",
+      "side": 1,
+      "message": "This parameter is probably not needed should be\n\nboolean isJsType \u003d method.getEnclosingType().isJsType()",
+      "range": {
+        "startLine": 45,
+        "startChar": 33,
+        "endLine": 45,
+        "endChar": 49
+      },
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42807bc4_f6186072",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-25T23:22:10Z",
+      "side": 1,
+      "message": "can\u0027t you use method.isExported() here?",
+      "range": {
+        "startLine": 318,
+        "startChar": 9,
+        "endLine": 318,
+        "endChar": 39
+      },
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42807bc4_b622e89c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-25T23:22:10Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e276cfc4_1335ec00",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-25T23:22:10Z",
+      "side": 1,
+      "message": "exportName (and maybe exportNameSpace and jsTypeName) use null to denote not exported I think. I dislike that pattern.\n\nAdd comments here to document that and maybe don\u0027t expose that fact in the API.\n\ngetExportedName() should assert exportedName !\u003d null and there should be an isExported().",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 33
+      },
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8266f310_5895bd25",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-25T23:22:10Z",
+      "side": 1,
+      "message": "Add a comment clarifying namespace of constructor.",
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8266f310_d8d30d5e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-25T23:22:10Z",
+      "side": 1,
+      "message": "Maybe move this to JConstructor instead.",
+      "range": {
+        "startLine": 69,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 74
+      },
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8266f310_1899858f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-25T23:22:10Z",
+      "side": 1,
+      "message": "Extract (private) method\n\nisJsTypeMethod() or isExplicitlyMarkedJsTypeMethod() or a better name that you like.",
+      "range": {
+        "startLine": 100,
+        "startChar": 10,
+        "endLine": 100,
+        "endChar": 50
+      },
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e276cfc4_9371fc42",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3913,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-25T23:22:10Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it read better:\n  JField field \u003d createField;\n  JsInteropUtil.maybeSetExportedField(x, field, isClassWideExport);",
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e276cfc4_b34758e2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3919,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-02-25T23:22:10Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

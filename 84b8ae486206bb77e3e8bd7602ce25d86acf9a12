@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "623e5fec_9f1b1315",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-26T02:48:13Z",
+      "side": 1,
+      "message": "I did it this way to keep consistent with the other flag which is not kept as a state in the declared type. Let me know if you still prefer to remove this one.",
+      "parentUuid": "02cf6348_4cc0bf88",
+      "range": {
+        "startLine": 45,
+        "startChar": 33,
+        "endLine": 45,
+        "endChar": 49
+      },
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42807bc4_f6186072",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2015-02-25T23:22:10Z",
       "side": 1,
       "message": "can\u0027t you use method.isExported() here?",
+      "range": {
+        "startLine": 318,
+        "startChar": 9,
+        "endLine": 318,
+        "endChar": 39
+      },
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8252734f_3895c927",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-26T02:48:13Z",
+      "side": 1,
+      "message": "I removed isExported but now bringing it back per your comment.",
+      "parentUuid": "42807bc4_f6186072",
       "range": {
         "startLine": 318,
         "startChar": 9,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "8252734f_189a8555",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-26T02:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42807bc4_b622e89c",
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e276cfc4_1335ec00",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
         "patchSetId": 1
@@ -76,6 +142,30 @@
       "writtenOn": "2015-02-25T23:22:10Z",
       "side": 1,
       "message": "exportName (and maybe exportNameSpace and jsTypeName) use null to denote not exported I think. I dislike that pattern.\n\nAdd comments here to document that and maybe don\u0027t expose that fact in the API.\n\ngetExportedName() should assert exportedName !\u003d null and there should be an isExported().",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 33
+      },
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8252734f_b8a8b968",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JField.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-26T02:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e276cfc4_1335ec00",
       "range": {
         "startLine": 84,
         "startChar": 0,
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "8252734f_98185572",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-26T02:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8266f310_5895bd25",
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8266f310_d8d30d5e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
         "patchSetId": 1
@@ -122,6 +230,47 @@
         "endLine": 70,
         "endChar": 74
       },
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "623e5fec_3f6767b7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-26T02:48:13Z",
+      "side": 1,
+      "message": "I thought about that but that requires exposing the exportNamespace field which I don\u0027t like.",
+      "parentUuid": "8266f310_d8d30d5e",
+      "range": {
+        "startLine": 69,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 74
+      },
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2021740_51cfd4b5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-26T02:48:13Z",
+      "side": 1,
+      "message": "Actually I should have removed this; forgot that step in the refactoring.",
       "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -151,6 +300,30 @@
     },
     {
       "key": {
+        "uuid": "8252734f_78e461e7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-26T02:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8266f310_1899858f",
+      "range": {
+        "startLine": 100,
+        "startChar": 10,
+        "endLine": 100,
+        "endChar": 50
+      },
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e276cfc4_9371fc42",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 1
@@ -168,6 +341,24 @@
     },
     {
       "key": {
+        "uuid": "a2021740_b12e00b3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3913,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-26T02:48:13Z",
+      "side": 1,
+      "message": "I just tried that but there are early exists so I need return null and do null checking. Let me know if you want to proceed with that.",
+      "parentUuid": "e276cfc4_9371fc42",
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e276cfc4_b34758e2",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 1
@@ -179,6 +370,24 @@
       "writtenOn": "2015-02-25T23:22:10Z",
       "side": 1,
       "message": "ditto.",
+      "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2021740_912bfca2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3919,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-02-26T02:48:13Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "e276cfc4_b34758e2",
       "revId": "84b8ae486206bb77e3e8bd7602ce25d86acf9a12",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

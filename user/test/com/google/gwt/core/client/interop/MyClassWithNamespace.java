@@ -16,16 +16,10 @@
 package com.google.gwt.core.client.interop;
 
 import com.google.gwt.core.client.js.JsExport;
-import com.google.gwt.core.client.js.JsType;
+import com.google.gwt.core.client.js.JsNamespace;
 
-class MyClassWithNestedEnum {
-  @JsType
+@JsNamespace("foobaz")
+public class MyClassWithNamespace {
   @JsExport
-  public enum NestedEnum {
-    FOO, BAR;
-
-    public String name2() {
-      return name();
-    }
-  }
+  public static final int BAZ = 99;
 }

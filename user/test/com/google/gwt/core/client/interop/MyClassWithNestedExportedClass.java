@@ -16,18 +16,10 @@
 package com.google.gwt.core.client.interop;
 
 import com.google.gwt.core.client.js.JsExport;
-import com.google.gwt.core.client.js.JsNamespace;
 
-/**
- * Test namespace inherited from outer class.
- */
-@JsNamespace("foo")
-public class MyClassWithNamespaceNested {
-  /**
-   * Exported field.
-   */
+public class MyClassWithNestedExportedClass {
   @JsExport
   public static class Inner {
-    public static final int BAZ = 99;
+    public static final int WOO = 99;
   }
 }

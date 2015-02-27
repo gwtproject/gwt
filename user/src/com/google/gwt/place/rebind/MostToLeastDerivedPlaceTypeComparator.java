@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -29,10 +29,10 @@ public class MostToLeastDerivedPlaceTypeComparator implements
     if (o1.equals(o2)) {
       return 0;
     }
-    if (o1.isAssignableFrom(o2)) {
+    if (o1.getFlattenedSupertypeHierarchy().size() < o2.getFlattenedSupertypeHierarchy().size()) {
       return 1;
     }
-    if (o1.isAssignableTo(o2)) {
+    if (o1.getFlattenedSupertypeHierarchy().size() > o2.getFlattenedSupertypeHierarchy().size()) {
       return -1;
     }
     return o1.getQualifiedSourceName().compareTo(o2.getQualifiedSourceName());

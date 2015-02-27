@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -42,6 +42,11 @@ public class PlaceHistoryMapperGeneratorTest extends GWTTestCase {
       Place1.Tokenizer.class, Tokenizer2.class, Tokenizer3.class,
       Tokenizer4.class, Place6.Tokenizer.class})
   interface LocalNoFactory extends PlaceHistoryMapper {
+  };
+
+  @WithTokenizers({Tokenizer2.class, Place1.Tokenizer.class, Tokenizer3.class,
+      Tokenizer4.class, Place6.Tokenizer.class})
+  interface LocalTokenizersInUnexpectedOrder extends PlaceHistoryMapper {
   };
 
   @WithTokenizers({Tokenizer4.class, Place6.Tokenizer.class})
@@ -96,6 +101,12 @@ public class PlaceHistoryMapperGeneratorTest extends GWTTestCase {
     doTest(subject, null);
   }
 
+  public void testTokenizersInUnexpectedOrder() {
+    AbstractPlaceHistoryMapper<?> subject = GWT.create(LocalTokenizersInUnexpectedOrder.class);
+
+    doTest(subject, null);
+  }
+
   public void testNestedWithFactory() {
     AbstractPlaceHistoryMapper<TokenizerFactory> subject = GWT.create(LocalWithFactory.class);
     TokenizerFactory factory = new TokenizerFactory();
@@ -107,7 +118,7 @@ public class PlaceHistoryMapperGeneratorTest extends GWTTestCase {
   /**
    * When asked to GWT.create a concrete implementation of PlaceHistoryMapper,
    * the generator politely instantiates it. This is to make life easier
-   * for GIN users. See 
+   * for GIN users. See
    * http://code.google.com/p/google-web-toolkit/issues/detail?id=5563
    */
   public void testNotAnInterface() {
@@ -152,7 +163,7 @@ public class PlaceHistoryMapperGeneratorTest extends GWTTestCase {
       assertTrue(subject.getTokenizer("Place3") instanceof Tokenizer3);
     }
     assertTrue(subject.getTokenizer("Place4") instanceof Tokenizer4);
-    
+
     // Empty prefix
     String history6 = subject.getPrefixAndToken(place6).toString();
     assertEquals(place6.content, history6);

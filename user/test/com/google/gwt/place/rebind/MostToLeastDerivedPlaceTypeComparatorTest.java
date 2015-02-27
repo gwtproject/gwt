@@ -32,6 +32,7 @@ import com.google.gwt.place.testplaces.Place2;
 import com.google.gwt.place.testplaces.Place3;
 import com.google.gwt.place.testplaces.Place4;
 import com.google.gwt.place.testplaces.Place5;
+import com.google.gwt.place.testplaces.Place6;
 
 import junit.framework.TestCase;
 
@@ -40,6 +41,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Test case for {@link MostToLeastDerivedPlaceTypeComparator} that uses mock
@@ -64,6 +67,7 @@ public class MostToLeastDerivedPlaceTypeComparatorTest extends TestCase {
   private JClassType place3;
   private JClassType place4;
   private JClassType place5;
+  private JClassType place6;
 
   @Override
   protected void setUp() throws Exception {
@@ -74,18 +78,20 @@ public class MostToLeastDerivedPlaceTypeComparatorTest extends TestCase {
         CompilationStateBuilder.buildFrom(logger, new CompilerContext(), getJavaResources());
     typeOracle = state.getTypeOracle();
 
-    place = typeOracle.getType("com.google.gwt.app.place.shared.Place");
+    place = typeOracle.getType("com.google.gwt.place.shared.Place");
     assertNotNull(place);
-    place1 = typeOracle.getType("com.google.gwt.app.place.shared.testplaces.Place1");
+    place1 = typeOracle.getType("com.google.gwt.place.testplaces.Place1");
     assertNotNull(place1);
-    place2 = typeOracle.getType("com.google.gwt.app.place.shared.testplaces.Place2");
+    place2 = typeOracle.getType("com.google.gwt.place.testplaces.Place2");
     assertNotNull(place2);
-    place3 = typeOracle.getType("com.google.gwt.app.place.shared.testplaces.Place3");
+    place3 = typeOracle.getType("com.google.gwt.place.testplaces.Place3");
     assertNotNull(place3);
-    place4 = typeOracle.getType("com.google.gwt.app.place.shared.testplaces.Place4");
+    place4 = typeOracle.getType("com.google.gwt.place.testplaces.Place4");
     assertNotNull(place4);
-    place5 = typeOracle.getType("com.google.gwt.app.place.shared.testplaces.Place5");
+    place5 = typeOracle.getType("com.google.gwt.place.testplaces.Place5");
     assertNotNull(place5);
+    place6 = typeOracle.getType("com.google.gwt.place.testplaces.Place6");
+    assertNotNull(place6);
   }
 
   private Set<Resource> getJavaResources() {
@@ -101,6 +107,8 @@ public class MostToLeastDerivedPlaceTypeComparatorTest extends TestCase {
     rtn.add(new RealJavaResource(Place3.class));
     rtn.add(new RealJavaResource(Place4.class));
     rtn.add(new RealJavaResource(Place5.class));
+    rtn.add(new RealJavaResource(Place6.class));
+
     return rtn;
   }
 
@@ -138,9 +146,8 @@ public class MostToLeastDerivedPlaceTypeComparatorTest extends TestCase {
   }
 
   public void testFallbackToClassName() {
-    // Array sorted from least derived to most derived. In each pair of adjacent
-    // values, neither place extends the other.
-    JClassType[] places = {place1, place2, place3, place4, place5};
+    // Array sorted from most derived to least derived.
+    JClassType[] places = {place5, place3, place4, place1, place2, place6};
     for (int i = 0; i < places.length - 1; i++) {
       assertEquals(-1, (int) Math.signum(comparator.compare(places[i],
           places[i + 1])));

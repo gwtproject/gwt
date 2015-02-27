@@ -19,22 +19,13 @@ import com.google.gwt.core.client.js.JsExport;
 import com.google.gwt.core.client.js.JsNamespace;
 
 /**
- * Class with a nested exported class.
+ * Class with empty namespace.
  */
-public class MyClassWithNestedExportedClass {
-  /**
-   * Exported nested class.
-   */
+@JsNamespace("")
+public class MyClassWithEmptyNamespace {
   @JsExport
-  public static class Inner {
-    public static final int WOO = 99;
-  }
+  public static final int DAN = 82;
 
-  /**
-   * Exported nested class with namespace.
-   */
-  @JsNamespace("zoo") @JsExport
-  public static class InnerWithNamespace {
-    public static final int WOOZ = 999;
-  }
+  @JsExport
+  public MyClassWithEmptyNamespace() { }
 }

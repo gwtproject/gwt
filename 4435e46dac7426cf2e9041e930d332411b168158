@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c208ebdb_7a3fb9ac",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-02-27T01:12:45Z",
+      "side": 0,
+      "message": "I have no idea what it\u0027s for either, might be a bad cut/paste or merge during development.",
+      "range": {
+        "startLine": 126,
+        "startChar": 13,
+        "endLine": 126,
+        "endChar": 14
+      },
+      "revId": "4435e46dac7426cf2e9041e930d332411b168158",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

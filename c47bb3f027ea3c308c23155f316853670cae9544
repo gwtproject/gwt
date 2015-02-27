@@ -16,6 +16,24 @@
       "revId": "c47bb3f027ea3c308c23155f316853670cae9544",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4226bb9d_86016ab7",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/UiBinderJsInteropTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 6825
+      },
+      "writtenOn": "2015-02-27T20:23:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6231ffd0_27fa7ac6",
+      "revId": "c47bb3f027ea3c308c23155f316853670cae9544",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

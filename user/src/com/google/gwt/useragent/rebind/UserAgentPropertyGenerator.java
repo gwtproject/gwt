@@ -41,7 +41,7 @@ public class UserAgentPropertyGenerator implements PropertyProviderGenerator {
    * ensures we never choose them for IE11 (we know that they will not work for IE11).
    */
   private enum UserAgent {
-    safari("return (ua.indexOf('webkit') != -1);"),
+    safari("return (ua.indexOf('webkit') != -1 && ua.indexOf('trident') == -1);"),
     ie10("return (ua.indexOf('msie') != -1 && (docMode >= 10 && docMode < 11));"),
     ie9("return (ua.indexOf('msie') != -1 && (docMode >= 9 && docMode < 11));"),
     ie8("return (ua.indexOf('msie') != -1 && (docMode >= 8 && docMode < 11));"),

@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "325f5a29_0a471b29",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionInterfaceImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-28T03:13:16Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "20d7ad8bac3cde531228f59b5781376dec26c907",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "325f5a29_ea3ba79f",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionInterfaceSubImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-28T03:13:16Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "20d7ad8bac3cde531228f59b5781376dec26c907",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "325f5a29_ca38e3a5",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionMultipleInheritance.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-28T03:13:16Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "20d7ad8bac3cde531228f59b5781376dec26c907",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "325f5a29_aa35afab",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionSubInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-02-28T03:13:16Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "20d7ad8bac3cde531228f59b5781376dec26c907",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

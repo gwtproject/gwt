@@ -137,6 +137,24 @@ public class JTypeOracle implements Serializable {
     private String nullType;
   }
 
+  public boolean isDirectJsFunctionInterface(JDeclaredType type) {
+    return type instanceof JInterfaceType && ((JInterfaceType) type).isJsFunction();
+  }
+
+  public JMethod getSingleAbstractMethodInJsFunction(JClassType type) {
+    for (JMethod method : type.getMethods()) {
+      for (JMethod overridden : method.getOverriddenMethods()) {
+        JDeclaredType enclosingType = overridden.getEnclosingType();
+        if (enclosingType != null && isDirectJsFunctionInterface(enclosingType)) {
+          // find one overriding method that overrides the SAM function from a JsFunction interface
+          return method;
+        }
+      }
+    }
+    return (type.getSuperClass() != null) ? getSingleAbstractMethodInJsFunction(
+        type.getSuperClass()) : null;
+  }
+
   private Set<JMethod> exportedMethods = Sets.newLinkedHashSet();
   private Set<JField> exportedFields = Sets.newLinkedHashSet();
 

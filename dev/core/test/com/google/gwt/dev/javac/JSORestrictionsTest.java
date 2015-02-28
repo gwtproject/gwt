@@ -825,6 +825,61 @@ public class JSORestrictionsTest extends TestCase {
         "Line 4: " + JSORestrictionsChecker.ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
   }
 
+  public void testJsFunctionOnFunctionalInterface() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    goodCode.append("@JsFunction public interface Buggy {\n");
+    goodCode.append("int foo(int x);\n");
+    goodCode.append("}\n");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  public void testJsFunctionNotOnClass() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    buggyCode.append("@JsFunction public class Buggy {\n");
+    buggyCode.append("int foo(int x) {return 0;} \n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 2: " + JSORestrictionsChecker.ERR_JS_FUNCTION_ONLY_ALLOWED_ON_FUNCTIONAL_INTERFACE);
+  }
+
+  public void testJsFunctionNotOnNonFunctionalInterface1() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    buggyCode.append("@JsFunction public interface Buggy {\n");
+    buggyCode.append("int foo(int x);\n");
+    buggyCode.append("int bar(int x);\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 2: " + JSORestrictionsChecker.ERR_JS_FUNCTION_ONLY_ALLOWED_ON_FUNCTIONAL_INTERFACE);
+  }
+
+  public void testJsFunctionNotOnNonFunctionalInterface2() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    buggyCode.append("@JsFunction public interface Buggy {\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 2: " + JSORestrictionsChecker.ERR_JS_FUNCTION_ONLY_ALLOWED_ON_FUNCTIONAL_INTERFACE);
+  }
+
+  public void testJsFunctionNotOnInterfaceWithSuperInterfaces() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    buggyCode.append("import java.io.Serializable;\n");
+    buggyCode.append("@JsFunction public interface Buggy extends Serializable {\n");
+    buggyCode.append("int foo(int x);\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 3: " + JSORestrictionsChecker.ERR_JS_FUNCTION_INTERFACE_CANNOT_EXTEND_ANY_INTERFACE);
+  }
+
   /**
    * Test that when compiling buggyCode, the TypeOracleUpdater emits
    * expectedError somewhere in its output. The code should define a class named

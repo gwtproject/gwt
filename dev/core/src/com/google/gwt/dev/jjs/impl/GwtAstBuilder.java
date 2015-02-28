@@ -4160,6 +4160,7 @@ public class GwtAstBuilder {
         JsInteropUtil.maybeSetJsPrototypeFlag(x, (JClassType) type);
       } else if (binding.isInterface() || binding.isAnnotationType()) {
         type = new JInterfaceType(info, name, interopType, jsPrototype);
+        JsInteropUtil.maybeSetJsFunctionFlag(x, (JInterfaceType) type);
       } else if (binding.isEnum()) {
         if (binding.isAnonymousType()) {
           // Don't model an enum subclass as a JEnumType.

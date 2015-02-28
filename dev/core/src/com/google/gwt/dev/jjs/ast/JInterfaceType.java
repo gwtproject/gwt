@@ -25,6 +25,8 @@ import java.io.Serializable;
  */
 public class JInterfaceType extends JDeclaredType {
 
+  private boolean jsFunction;
+
   public JInterfaceType(SourceInfo info, String name, JsInteropType interopType, String jsPrototype) {
     super(info, name, interopType, jsPrototype);
   }
@@ -51,6 +53,14 @@ public class JInterfaceType extends JDeclaredType {
   private JInterfaceType(String name) {
     this(SourceOrigin.UNKNOWN, name, JsInteropType.NONE, null);
     setExternal(true);
+  }
+
+  public void setJsFunction(boolean jsFunction) {
+    this.jsFunction = jsFunction;
+  }
+
+  public boolean isJsFunction() {
+    return jsFunction;
   }
 
   @Override

@@ -230,6 +230,15 @@ public abstract class JJSTestBase extends TestCase {
   }
 
   /**
+   * Adds an mock resource, usually a separate class file.
+   */
+  protected void addMockResources(Resource... resources) {
+    for (Resource resource : resources) {
+      sourceOracle.addOrReplace(resource);
+    }
+  }
+
+  /**
    * Returns the program that results from compiling the specified code snippet
    * as the body of an entry point method.
    *  @param returnType the return type of the method to compile; use "void" if

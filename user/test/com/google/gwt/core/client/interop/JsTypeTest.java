@@ -38,7 +38,8 @@ public class JsTypeTest extends GWTTestCase {
   protected void gwtSetUp() throws Exception {
     ScriptInjector.fromString("function MyJsInterface() {}\n"
         + "MyJsInterface.prototype.sum = function sum(bias) { return this.x + this.y + bias; }\n"
-        + "MyJsInterface.prototype.go = function(cb) { cb('Hello'); }")
+        + "MyJsInterface.prototype.go = function(cb) { cb('Hello'); }\n"
+        + "MyJsInterface.prototype.callBack = function(f) { return f(500); }")
         .setWindow(TOP_WINDOW).inject();
     patchPrototype(MyClassExtendsJsPrototype.class);
   }
@@ -272,6 +273,76 @@ public class JsTypeTest extends GWTTestCase {
     assertEquals(1, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.C));
   }
 
+  public void testJsFunctionBasic() {
+    MyJsFunctionInterface jsFunctionInterface = new MyJsFunctionInterface() {
+      @Override
+      public int foo(int a) {
+        return a + 2;
+      }
+    };
+    assertEquals(12, jsFunctionInterface.foo(10));
+    assertEquals(12, callAsFunction(jsFunctionInterface, 10));
+    assertEquals(12, callAsCallBackFunction(jsFunctionInterface, 10));
+  }
+
+  public void testJsFunctionSubInterface() {
+    MyJsFunctionSubInterface jsFunctionSubInterface = new MyJsFunctionSubInterface() {
+        @Override
+      public int foo(int a) {
+        return a + 3;
+      }
+    };
+    assertEquals(13, jsFunctionSubInterface.foo(10));
+    assertEquals(13, callAsFunction(jsFunctionSubInterface, 10));
+    assertEquals(13, callAsCallBackFunction(jsFunctionSubInterface, 10));
+  }
+
+  public void testJsFunctionSubImpl() {
+    MyJsFunctionInterfaceSubImpl jsFunctionInterfaceSubImpl = new MyJsFunctionInterfaceSubImpl();
+    assertEquals(21, jsFunctionInterfaceSubImpl.foo(10));
+    assertEquals(21, callAsFunction(jsFunctionInterfaceSubImpl, 10));
+    assertEquals(21, callAsCallBackFunction(jsFunctionInterfaceSubImpl, 10));
+  }
+
+  public void testJsFunctionMultipleInheritance() {
+    MyJsFunctionMultipleInheritance jsFunctionMultipleInheritance =
+        new MyJsFunctionMultipleInheritance();
+    assertEquals(21, jsFunctionMultipleInheritance.foo(10));
+    assertEquals(21, callAsFunction(jsFunctionMultipleInheritance, 10));
+    assertEquals(21, callAsCallBackFunction(jsFunctionMultipleInheritance, 10));
+  }
+
+  public void testJsFunctionObjInJavaFuncInJS() {
+    MyJsInterface mc = (MyJsInterface) createMyJsInterface();
+    assertEquals(500, mc.callBack(new MyJsFunctionInterface() {
+      @Override
+      public int foo(int a) {
+        return a;
+      }
+    }));
+  }
+
+  public void testJsFunctionInteraction() {
+    MyJsFunctionInterfaceImpl jsFunctionInterfaceImpl = new MyJsFunctionInterfaceImpl();
+    // public JsType method works fine at Java side.
+    assertEquals(5, jsFunctionInterfaceImpl.bar());
+    // public JsType method works fine at JS side.
+    assertEquals(5, callIntFunction(jsFunctionInterfaceImpl, "bar"));
+
+    // SAM works fine at Java side.
+    assertEquals(11, jsFunctionInterfaceImpl.foo(10));
+    // SAM can be called as a function at JS side.
+    assertEquals(11, callAsFunction(jsFunctionInterfaceImpl, 10));
+    assertEquals(11, callAsCallBackFunction(jsFunctionInterfaceImpl, 10));
+
+    // public JsType fields works fine both at Java and JS side.
+    assertEquals(10, jsFunctionInterfaceImpl.publicField);
+    assertEquals(10, getField(jsFunctionInterfaceImpl, "publicField"));
+    setField(jsFunctionInterfaceImpl, "publicField", 100);
+    assertEquals(100, jsFunctionInterfaceImpl.publicField);
+    assertEquals(100, getField(jsFunctionInterfaceImpl, "publicField"));
+  }
+
   private static native boolean alwaysTrue() /*-{
     return !!$wnd;
   }-*/;
@@ -313,6 +384,14 @@ public class JsTypeTest extends GWTTestCase {
     return object[fieldName] != undefined;
   }-*/;
 
+  private static native void setField(Object object, String fieldName, int value) /*-{
+    object[fieldName] = value;
+  }-*/;
+
+  private static native int getField(Object object, String fieldName) /*-{
+    return object[fieldName];
+  }-*/;
+
   private static native int callPublicMethodFromEnumeration(MyEnumWithJsType enumeration) /*-{
     return enumeration.idxAddOne();
   }-*/;
@@ -320,6 +399,15 @@ public class JsTypeTest extends GWTTestCase {
   private static native int callPublicMethodFromEnumerationSubclass(
       MyEnumWithSubclassGen enumeration) /*-{
     return enumeration.foo();
+  }-*/;
+
+  private static native int callAsFunction(Object obj, int arg) /*-{
+    return obj(arg);
+  }-*/;
+
+  private static native int callAsCallBackFunction(Object obj, int arg) /*-{
+    var onCall = function(f, arg) { return f(arg); };
+    return onCall(obj, arg);
   }-*/;
 
   private static void assertJsTypeHasFields(Object obj, String... fields) {

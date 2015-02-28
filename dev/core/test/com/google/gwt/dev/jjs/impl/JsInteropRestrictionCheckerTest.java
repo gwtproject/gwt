@@ -18,6 +18,7 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.MinimalRebuildCache;
+import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 
@@ -157,6 +158,154 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertCompileSucceeds();
   }
+
+  public void testSingleInterfaceSucceeds() throws Exception {
+    addMockResources(jsFunctionInterface1);
+    addSnippetClassDecl(
+        "public static class Buggy implements MyJsFunctionInterface1 {\n",
+        "public int foo(int x) { return 0; }\n",
+        "}\n");
+    assertCompileSucceeds();
+  }
+
+  public void testOneJsFunctionAndOneNonJsFunctionSucceeds() throws Exception {
+    addMockResources(jsFunctionInterface1, plainInterface);
+    addSnippetClassDecl(
+        "public static class Buggy implements MyJsFunctionInterface1, MyPlainInterface {\n",
+        "public int foo(int x) { return 0; }\n",
+        "}\n");
+    assertCompileSucceeds();
+  }
+
+  public void testSameJsFunctionInBothSuperClassAndSuperInterfaceSucceeds() throws Exception {
+    addMockResources(jsFunctionInterface1, plainInterface, jsFunctionInterfaceImpl);
+    addSnippetClassDecl(
+        "public static class Buggy extends MyJsFunctionInterfaceImpl "
+        + "implements MyJsFunctionInterface1, MyPlainInterface {\n",
+        "public int foo(int x) { return 0; }\n",
+        "}\n");
+    assertCompileSucceeds();
+  }
+
+  public void testMultipleInterfacesFails() throws Exception {
+    addMockResources(jsFunctionInterface1, jsFunctionInterface2);
+    addSnippetClassDecl(
+        "public static class Buggy implements MyJsFunctionInterface1, MyJsFunctionInterface2 {\n",
+        "public int foo(int x) { return 0; }\n",
+        "public int bar(int x) { return 0; }\n",
+        "}\n");
+    assertCompileFails();
+  }
+
+  public void testMultipleInterfacesWithSameMethodSignatureFails() throws Exception {
+    addMockResources(jsFunctionInterface1, jsFunctionInterface3);
+    addSnippetClassDecl(
+        "public static class Buggy implements MyJsFunctionInterface1, MyJsFunctionInterface3 {\n",
+        "public int foo(int x) { return 0; }\n",
+        "}\n");
+    assertCompileFails();
+  }
+
+  public void testMultipleInterfacesFromSuperClassAndSuperInterfaceFails() throws Exception {
+    addMockResources(jsFunctionInterface1, jsFunctionInterface3, jsFunctionInterfaceImpl);
+    addSnippetClassDecl(
+        "public static class Buggy extends MyJsFunctionInterfaceImpl "
+        + "implements MyJsFunctionInterface3 {\n",
+        "public int foo(int x) { return 0; }\n",
+        "}\n");
+    assertCompileFails();
+  }
+
+  public void testMultipleInterfacesFromSuperClassAndSuperSuperInterfaceFails() throws Exception {
+    addMockResources(jsFunctionSubInterface, jsFunctionInterface1, jsFunctionInterfaceImpl,
+        jsFunctionInterface3);
+    addSnippetClassDecl(
+        "public static class Buggy extends MyJsFunctionInterfaceImpl "
+        + "implements MyJsFunctionSubInterface {\n",
+        "public int foo(int x) { return 0; }\n",
+        "}\n");
+    assertCompileFails();
+  }
+
+  MockJavaResource jsFunctionInterface1 = new MockJavaResource(
+      "test.MyJsFunctionInterface1") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package test;\n");
+      code.append("import com.google.gwt.core.client.js.JsFunction;\n");
+      code.append("@JsFunction public interface MyJsFunctionInterface1 {\n");
+      code.append("int foo(int x);\n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
+  MockJavaResource jsFunctionInterface2 = new MockJavaResource(
+      "test.MyJsFunctionInterface2") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package test;\n");
+      code.append("import com.google.gwt.core.client.js.JsFunction;\n");
+      code.append("@JsFunction public interface MyJsFunctionInterface2 {\n");
+      code.append("int bar(int x);\n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
+  MockJavaResource jsFunctionInterface3 = new MockJavaResource(
+      "test.MyJsFunctionInterface3") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package test;\n");
+      code.append("import com.google.gwt.core.client.js.JsFunction;\n");
+      code.append("@JsFunction public interface MyJsFunctionInterface3 {\n");
+      code.append("int foo(int x);\n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
+  MockJavaResource plainInterface = new MockJavaResource(
+      "test.MyPlainInterface") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package test;\n");
+      code.append("public interface MyPlainInterface {\n");
+      code.append("int foo(int x);\n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
+  MockJavaResource jsFunctionSubInterface = new MockJavaResource(
+      "test.MyJsFunctionSubInterface") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package test;\n");
+      code.append("public interface MyJsFunctionSubInterface extends MyJsFunctionInterface3 {\n");
+      code.append("}\n");
+      return code;
+    }
+  };
+
+  MockJavaResource jsFunctionInterfaceImpl = new MockJavaResource(
+      "test.MyJsFunctionInterfaceImpl") {
+    @Override
+    public CharSequence getContent() {
+      StringBuilder code = new StringBuilder();
+      code.append("package test;\n");
+      code.append("public class MyJsFunctionInterfaceImpl implements MyJsFunctionInterface1 {\n");
+      code.append("public int foo(int x) { return 1; }\n");
+      code.append("}\n");
+      return code;
+    }
+  };
 
   @Override
   protected boolean optimizeMethod(JProgram program, JMethod method) {

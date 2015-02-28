@@ -18,8 +18,10 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JVisitor;
@@ -29,6 +31,7 @@ import java.util.Set;
 
 /**
  * Checks and throws errors for invalid JsInterop constructs.
+ * Checks and throws errors for multiple JsFunction interfaces in inheritance.
  */
 // TODO: prevent the existence of more than 1 (x/is/get/has) getter for the same property name.
 // TODO: handle custom JsType field/method names when that feature exists.
@@ -75,6 +78,11 @@ public class JsInteropRestrictionChecker extends JVisitor {
     minimalRebuildCache.removeJsInteropNames(x.getName());
     currentType = x;
 
+    if (hasMultipleInheritatedJsFunctions(x)) {
+      logger.log(TreeLogger.ERROR,
+          x.getName() + " has more than one JsFunction interfaces in its inheritance chain.");
+      throw new UnsupportedOperationException();
+    }
     return true;
   }
 
@@ -160,5 +168,25 @@ public class JsInteropRestrictionChecker extends JVisitor {
       }
     }
     return false;
+  }
+
+  private Set<JInterfaceType> getJsFunctionsInheritated(JDeclaredType type) {
+    Set<JInterfaceType> superJsFunctions = Sets.newHashSet();
+    JClassType superclass = type.getSuperClass();
+    if (superclass != null) {
+      superJsFunctions.addAll(getJsFunctionsInheritated(superclass));
+    }
+    for (JInterfaceType superinterface : type.getImplements()) {
+      if (superinterface.isJsFunction()) {
+        superJsFunctions.add(superinterface);
+      } else {
+        superJsFunctions.addAll(getJsFunctionsInheritated(superinterface));
+      }
+    }
+    return superJsFunctions;
+  }
+
+  private boolean hasMultipleInheritatedJsFunctions(JDeclaredType type) {
+    return getJsFunctionsInheritated(type).size() > 1;
   }
 }

@@ -36,6 +36,8 @@ interface MyJsInterface {
 
   int sum(int bias);
 
+  int callBack(MyJsFunctionInterface jsFunctionInterface);
+
   @PrototypeOfJsType
   static class Prototype implements MyJsInterface {
 
@@ -60,6 +62,11 @@ interface MyJsInterface {
 
     @Override
     public int sum(int bias) {
+      return 0;
+    }
+
+    @Override
+    public int callBack(MyJsFunctionInterface jsFunctionInterface) {
       return 0;
     }
   }

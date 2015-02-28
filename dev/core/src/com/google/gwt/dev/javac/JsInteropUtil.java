@@ -20,6 +20,7 @@ import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType.JsInteropType;
 import com.google.gwt.dev.jjs.ast.JField;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.js.ast.JsNameRef;
 
@@ -34,6 +35,7 @@ import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
 public final class JsInteropUtil {
 
   public static final String JSEXPORT_CLASS = "com.google.gwt.core.client.js.JsExport";
+  public static final String JSFUNCTION_CLASS = "com.google.gwt.core.client.js.JsFunction";
   public static final String JSNAMESPACE_CLASS = "com.google.gwt.core.client.js.JsNamespace";
   public static final String JSNOEXPORT_CLASS = "com.google.gwt.core.client.js.JsNoExport";
   public static final String JSPROPERTY_CLASS = "com.google.gwt.core.client.js.JsProperty";
@@ -54,6 +56,13 @@ public final class JsInteropUtil {
       if (JdtUtil.getAnnotation(x.binding, JSNOEXPORT_CLASS) != null) {
         field.setNoExport(true);
       }
+    }
+  }
+
+  public static void maybeSetJsFunctionFlag(TypeDeclaration x, JInterfaceType type) {
+    if (x.annotations != null) {
+      AnnotationBinding jsFunction = JdtUtil.getAnnotation(x.binding, JSFUNCTION_CLASS);
+      type.setJsFunction(jsFunction != null);
     }
   }
 

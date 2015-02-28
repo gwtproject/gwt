@@ -1627,7 +1627,22 @@ public class GenerateJavaScriptAST {
       JsNameRef nameRef = names.get(x.getTarget()).makeRef(x.getSourceInfo());
       JsNew newOp = new JsNew(x.getSourceInfo(), nameRef);
       popList(newOp.getArguments(), x.getArgs().size()); // args
-      push(newOp);
+      JsExpression newExpr = newOp;
+      if (typeOracle.isJsInteropEnabled()) {
+        JMethod sam = typeOracle.getSingleAbstractMethodInJsFunction(x.getClassType());
+        if (sam != null) {
+          JsFunction makeLambdaFunc =
+              indexedFunctions.get("JavaClassHierarchySetupUtil.makeLambdaFunction");
+          JsNameRef samFuncNameRef = polymorphicNames.get(sam).makeRef(x.getSourceInfo());
+          JsNameRef protoRef = prototype.makeRef(x.getSourceInfo());
+          samFuncNameRef.setQualifier(protoRef);
+          JsNameRef ctorRef = nameRef.getName().makeRef(x.getSourceInfo());
+          protoRef.setQualifier(ctorRef);
+          // makeLambdaFunction(Foo.prototype.samMethod, new Foo(...))
+          newExpr = new JsInvocation(x.getSourceInfo(), makeLambdaFunc, samFuncNameRef, newOp);
+        }
+      }
+      push(newExpr);
     }
 
     @Override

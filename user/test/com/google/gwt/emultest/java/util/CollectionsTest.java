@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Vector;
 import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
@@ -274,6 +276,58 @@ public class CollectionsTest extends EmulTestBase {
     Collections.reverse(b);
     Collections.reverse(b);
     assertEquals(b, createRandomList());
+  }
+
+  /**
+   * Copied from
+   * http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/9b8c96f96a0f/test/java/util/Collections
+   * /Rotate.java
+   * 
+   * @throws Exception
+   */
+  public void testRotate() throws Exception {
+    int SIZE = 120;
+    Random rnd = new Random();
+    List a[] = {new ArrayList(), new LinkedList(), new Vector()};
+
+    for (int i = 0; i < a.length; i++) {
+      List lst = a[i];
+      for (int j = 0; j < SIZE; j++)
+        lst.add(new Integer(j));
+      int totalDist = 0;
+
+      for (int j = 0; j < 10000; j++) {
+        int dist = rnd.nextInt(200) - 100;
+        Collections.rotate(lst, dist);
+
+        // Check that things are as they should be
+        totalDist = (totalDist + dist) % SIZE;
+        if (totalDist < 0)
+          totalDist += SIZE;
+        int index = 0;
+        for (int k = totalDist; k < SIZE; k++, index++) {
+          if (((Integer) lst.get(k)).intValue() != index) {
+            throw new Exception("j: " + j + ", lst[" + k + "]=" + lst.get(k) + ", should be "
+                + index);
+          }
+        }
+        for (int k = 0; k < totalDist; k++, index++) {
+          if (((Integer) lst.get(k)).intValue() != index) {
+            throw new Exception("j: " + j + ", lst[" + k + "]=" + lst.get(k) + ", should be "
+                + index);
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Copied from http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/9b8c96f96a0f/test/java/util/Collections/RotateEmpty.java
+   * @throws Exception
+   */
+  public void testRotateEmpty() throws Exception {
+    List l = new ArrayList();
+    Collections.rotate(l, 1);
   }
 
   public void testSort() {

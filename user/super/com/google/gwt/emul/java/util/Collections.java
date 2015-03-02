@@ -791,6 +791,8 @@ public class Collections {
 
   @SuppressWarnings("unchecked")
   public static final Set EMPTY_SET = new EmptySet();
+  
+  private static final int ROTATE_THRESHOLD = 100;
 
   public static <T> boolean addAll(Collection<? super T> c, T... a) {
     boolean result = false;
@@ -1105,6 +1107,13 @@ public class Collections {
       }
     };
   }
+  
+  public static void rotate(List<?> list, int distance) {
+    if (list instanceof RandomAccess || list.size() < ROTATE_THRESHOLD)
+      rotate1(list, distance);
+    else
+      rotate2(list, distance);
+  }
 
   public static <T> Set<T> singleton(T o) {
     HashSet<T> set = new HashSet<T>(1);
@@ -1208,6 +1217,48 @@ public class Collections {
     for (int i = 0; i < size; i++) {
       target.set(i, (T) x[i]);
     }
+  }
+  
+  private static <T> void rotate1(List<T> list, int distance) {
+    int size = list.size();
+    if (size == 0){
+      return;
+    }
+    distance = distance % size;
+    if (distance < 0){
+      distance += size;
+    }
+    if (distance == 0){
+      return;
+    }
+    for (int cycleStart = 0, nMoved = 0; nMoved != size; cycleStart++) {
+      T displaced = list.get(cycleStart);
+      int i = cycleStart;
+      do {
+        i += distance;
+        if (i >= size)
+          i -= size;
+        displaced = list.set(i, displaced);
+        nMoved++;
+      } while (i != cycleStart);
+    }
+  }
+
+  private static void rotate2(List<?> list, int distance) {
+    int size = list.size();
+    if (size == 0){
+      return;
+    }
+    int mid = -distance % size;
+    if (mid < 0){
+      mid += size;
+    }
+    if (mid == 0){
+      return;
+    }
+    reverse(list.subList(0, mid));
+    reverse(list.subList(mid, size));
+    reverse(list);
   }
 
   private static <T> void swapImpl(List<T> list, int i, int j) {

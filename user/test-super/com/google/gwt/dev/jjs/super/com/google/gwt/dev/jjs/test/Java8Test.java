@@ -774,4 +774,26 @@ public class Java8Test extends GWTTestCase {
     SimpleI ii = (SimpleC & SimpleI) cc;
     assertEquals(33, ii.fun());
   }
+
+  static class TestMF_A {
+    public static String getId() {
+      return "A";
+    }
+  }
+  static class TestMF_B {
+    public static String getId() {
+      return "B";
+    }
+  }
+  interface Function<T> {
+    T apply();
+  }
+  private String f(Function<String> arg) {
+    return arg.apply();
+  }
+
+  public void testMethodRefWithSameName() {
+    assertEquals("A", f(TestMF_A::getId));
+    assertEquals("B", f(TestMF_B::getId));
+  }
 }

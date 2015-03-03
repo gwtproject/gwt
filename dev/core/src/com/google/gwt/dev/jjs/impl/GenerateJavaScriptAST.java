@@ -3506,6 +3506,10 @@ public class GenerateJavaScriptAST {
     if (!haveReceiver) {
       sb.append("$");
     }
+    if (referredMethod.isStatic()) {
+      sb.append(referredMethod.getEnclosingType().getName().replace('.', '$'));
+      sb.append("$");
+    }
     sb.append(getNameString(referredMethod));
     constructManglingSignature(referredMethod, sb);
     return StringInterner.get().intern(sb.toString());

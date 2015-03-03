@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "722ab215_b4dd80e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-03-03T22:07:31Z",
+      "side": 1,
+      "message": "add \n\nBug: issue 9040.\n\n\nbefore change-id (no empty line after the bug line)",
+      "revId": "2e1b50c5c3303521526859cec0b910aecf0128b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "722ab215_54e3cca6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3499,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-03-03T22:07:31Z",
+      "side": 1,
+      "message": "who calls this method? It does not seem to be called here. Maybe it should be moved to the right class?",
+      "range": {
+        "startLine": 3499,
+        "startChar": 16,
+        "endLine": 3499,
+        "endChar": 43
+      },
+      "revId": "2e1b50c5c3303521526859cec0b910aecf0128b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

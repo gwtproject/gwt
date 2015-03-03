@@ -48,16 +48,9 @@ import java.util.List;
  */
 public abstract class JDeclaredType extends JReferenceType {
 
-  /**
-   * The type of the class for JsInterop purposes.
-   */
-  public enum JsInteropType {
-    NONE, NO_PROTOTYPE, JS_PROTOTYPE,
-  }
-
   private final String jsPrototype;
-  private final JsInteropType jsInteropType;
-  private String jsNamespace;
+  private final boolean isJsType;
+  private String jsNamespace = null;
 
   /**
    * This type's fields. Special serialization treatment.
@@ -96,15 +89,14 @@ public abstract class JDeclaredType extends JReferenceType {
    */
   private List<JInterfaceType> superInterfaces = Lists.create();
 
-  public JDeclaredType(SourceInfo info, String name, JsInteropType interopType,
-      String jsPrototype) {
+  public JDeclaredType(SourceInfo info, String name, boolean isJsType, String jsPrototype) {
     super(info, name);
-    this.jsInteropType = interopType;
+    this.isJsType = isJsType;
     this.jsPrototype = jsPrototype;
   }
 
-  public JDeclaredType(SourceInfo info, String name, JsInteropType interopType) {
-    this(info, name, interopType, null);
+  public JDeclaredType(SourceInfo info, String name, boolean isJsType) {
+    this(info, name, isJsType, null);
   }
 
   /**
@@ -314,7 +306,7 @@ public abstract class JDeclaredType extends JReferenceType {
   }
 
   public boolean isJsType() {
-    return jsInteropType != JsInteropType.NONE;
+    return isJsType;
   }
 
   public boolean isOrExtendsJsType() {
@@ -343,10 +335,6 @@ public abstract class JDeclaredType extends JReferenceType {
     }
 
     return false;
-  }
-
-  public JsInteropType getJsInteropType() {
-    return jsInteropType;
   }
 
   public String getJsPrototype() {
@@ -406,11 +394,11 @@ public abstract class JDeclaredType extends JReferenceType {
   /**
    * Resolves external references during AST stitching.
    */
-  public void resolve(List<JInterfaceType> resolvedInterfaces, String jsNamespace) {
+  public void resolve(List<JInterfaceType> resolvedInterfaces, JDeclaredType pkgInfo) {
     assert JType.replaces(resolvedInterfaces, superInterfaces);
     superInterfaces = Lists.normalize(resolvedInterfaces);
-    if (this.jsNamespace == null && enclosingType == null) {
-      this.jsNamespace = jsNamespace;
+    if (pkgInfo != null && jsNamespace == null && enclosingType == null) {
+      jsNamespace = pkgInfo.jsNamespace;
     }
   }
 
@@ -535,16 +523,20 @@ public abstract class JDeclaredType extends JReferenceType {
     return null;
   }
 
-  public String getQualifiedExportName() {
-    if (enclosingType == null && jsNamespace == null) {
-      return getName();
+  public String getExportNamespace() {
+    if (jsNamespace == null) {
+      jsNamespace = computeExportNamespace();
     }
-    String namespace = jsNamespace == null ? enclosingType.getQualifiedExportName() : jsNamespace;
-    return namespace.isEmpty() ? getSimpleName() : namespace + "." + getSimpleName();
+    return jsNamespace;
   }
 
-  public String getJsNamespace() {
-    return jsNamespace;
+  private String computeExportNamespace() {
+    return enclosingType != null ? enclosingType.getQualifiedExportName() : getPackageName();
+  }
+
+  public String getQualifiedExportName() {
+    String namespace = getExportNamespace();
+    return namespace.isEmpty() ? getSimpleName() : namespace + "." + getSimpleName();
   }
 
   public void setJsNamespace(String jsNamespace) {

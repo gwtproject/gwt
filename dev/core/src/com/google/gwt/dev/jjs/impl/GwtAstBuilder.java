@@ -48,7 +48,6 @@ import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JContinueStatement;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
-import com.google.gwt.dev.jjs.ast.JDeclaredType.JsInteropType;
 import com.google.gwt.dev.jjs.ast.JDoStatement;
 import com.google.gwt.dev.jjs.ast.JDoubleLiteral;
 import com.google.gwt.dev.jjs.ast.JEnumField;
@@ -2488,25 +2487,6 @@ public class GwtAstBuilder {
         addBridgeMethods(x.binding);
       }
 
-      if (JsInteropUtil.isClassWideJsExport(x)) {
-        for (JMethod m : type.getMethods()) {
-          if (m.getExportName() != null) {
-            continue;
-          }
-          if (m.isPublic() && (m.isStatic() || (m instanceof JConstructor))) {
-            m.setExportName("");
-          }
-        }
-        for (JField f : type.getFields()) {
-          if (f.getExportName() != null) {
-            continue;
-          }
-          if (f.isPublic() && f.isStatic()) {
-            f.setExportName("");
-          }
-        }
-      }
-      JsInteropUtil.maybeSetJsNamespace(type, x);
       curClass = classStack.pop();
     }
 
@@ -3857,7 +3837,7 @@ public class GwtAstBuilder {
     return ice;
   }
 
-  private void createField(FieldDeclaration x) {
+  private void createField(FieldDeclaration x, boolean isClassWideExport) {
     if (x instanceof Initializer) {
       return;
     }
@@ -3877,7 +3857,8 @@ public class GwtAstBuilder {
               getFieldDisposition(binding), AccessModifier.fromFieldBinding(binding));
     }
     enclosingType.addField(field);
-    JsInteropUtil.maybeSetExportedField(x, field);
+    JsInteropUtil.maybeSetExportedField(x, field, isClassWideExport, enclosingType.isJsType());
+
     typeMap.setField(binding, field);
   }
 
@@ -3885,6 +3866,7 @@ public class GwtAstBuilder {
     SourceTypeBinding binding = x.binding;
     JDeclaredType type = (JDeclaredType) typeMap.get(binding);
     SourceInfo info = type.getSourceInfo();
+    boolean isClassWideExport = JsInteropUtil.isClassWideJsExport(x);
     try {
       /**
        * We emulate static initializers and instance initializers as methods. As
@@ -3928,13 +3910,13 @@ public class GwtAstBuilder {
 
       if (x.fields != null) {
         for (FieldDeclaration field : x.fields) {
-          createField(field);
+          createField(field, isClassWideExport);
         }
       }
 
       if (x.methods != null) {
         for (AbstractMethodDeclaration method : x.methods) {
-          createMethod(method);
+          createMethod(method, isClassWideExport);
         }
       }
 
@@ -3959,7 +3941,7 @@ public class GwtAstBuilder {
         !JSORestrictionsChecker.isJsoSubclass(typeDeclaration.binding);
   }
 
-  private void createMethod(AbstractMethodDeclaration x) {
+  private void createMethod(AbstractMethodDeclaration x, boolean isClassWideExport) {
     if (x instanceof Clinit) {
       return;
     }
@@ -4038,7 +4020,8 @@ public class GwtAstBuilder {
     }
 
     enclosingType.addMethod(method);
-    JsInteropUtil.maybeSetJsinteropMethodProperties(x, method);
+    JsInteropUtil.maybeSetJsinteropMethodProperties(x, method, isClassWideExport,
+        enclosingType.isJsType());
     processAnnotations(x, method);
     typeMap.setMethod(b, method);
   }
@@ -4153,23 +4136,25 @@ public class GwtAstBuilder {
       name = intern(name);
       JDeclaredType type;
       String jsPrototype = JsInteropUtil.maybeGetJsTypePrototype(x);
-      JsInteropType interopType = JsInteropUtil.maybeGetJsInteropType(x, jsPrototype);
+      boolean isJsType = JsInteropUtil.isJsType(x);
 
       if (binding.isClass()) {
-        type = new JClassType(info, name, binding.isAbstract(), binding.isFinal(), interopType);
-        JsInteropUtil.maybeSetJsPrototypeFlag(x, (JClassType) type);
+        type = new JClassType(info, name, binding.isAbstract(), binding.isFinal(), isJsType);
+        ((JClassType) type).setJsPrototypeStub(JsInteropUtil.isJsPrototypeFlag(x));
       } else if (binding.isInterface() || binding.isAnnotationType()) {
-        type = new JInterfaceType(info, name, interopType, jsPrototype);
+        type = new JInterfaceType(info, name, isJsType, jsPrototype);
       } else if (binding.isEnum()) {
         if (binding.isAnonymousType()) {
           // Don't model an enum subclass as a JEnumType.
-          type = new JClassType(info, name, false, true, interopType);
+          type = new JClassType(info, name, false, true, isJsType);
         } else {
-          type = new JEnumType(info, name, binding.isAbstract(), interopType);
+          type = new JEnumType(info, name, binding.isAbstract(), isJsType);
         }
       } else {
         throw new InternalCompilerException("ReferenceBinding is not a class, interface, or enum.");
       }
+      type.setJsNamespace(JsInteropUtil.maybeGetJsNamespace(x));
+
       typeMap.setSourceType(binding, type);
       newTypes.add(type);
       if (x.memberTypes != null) {

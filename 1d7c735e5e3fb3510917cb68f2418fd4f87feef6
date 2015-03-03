@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2d98a71_8e1b9ba6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-03T17:38:20Z",
+      "side": 1,
+      "message": "typo.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 6
+      },
+      "revId": "1d7c735e5e3fb3510917cb68f2418fd4f87feef6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2d98a71_2e0b8753",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/C.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-03T17:38:20Z",
+      "side": 1,
+      "message": "N0? NUMBER_OF_COPIES? just COPIES?",
+      "range": {
+        "startLine": 41,
+        "startChar": 27,
+        "endLine": 41,
+        "endChar": 39
+      },
+      "revId": "1d7c735e5e3fb3510917cb68f2418fd4f87feef6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

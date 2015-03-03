@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2d98a71_ee0c5f70",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-03T17:34:38Z",
+      "side": 1,
+      "message": "can we do a setExportInfoToDefault(member);\n\nand isExportInfoDefault() to query so that the encoding \"\" means default does not percolate everywhere?",
+      "range": {
+        "startLine": 74,
+        "startChar": 6,
+        "endLine": 74,
+        "endChar": 32
+      },
+      "revId": "649a19bf5460496b3936c2f4b6f58dcd9485f784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f27ee5_0ff1e5e4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JConstructor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-03T17:34:38Z",
+      "side": 1,
+      "message": "remove comment here and maybe add one in readResolve to the effect that access does not matter in stubs?",
+      "range": {
+        "startLine": 56,
+        "startChar": 5,
+        "endLine": 56,
+        "endChar": 64
+      },
+      "revId": "649a19bf5460496b3936c2f4b6f58dcd9485f784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2d98a71_8ecddbb1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-03T17:34:38Z",
+      "side": 1,
+      "message": "This is confusing. jsNameSpace is where the namespace is cached, if getExportNameSpace() is call this value might not be null. \n\nshould getExportNameSpace be called before or not?\n\nShouldn\u0027t getPackageName() be the one returning the packageNamespace or maybe we need a getPackageNameSpace method?",
+      "range": {
+        "startLine": 400,
+        "startChar": 27,
+        "endLine": 400,
+        "endChar": 46
+      },
+      "revId": "649a19bf5460496b3936c2f4b6f58dcd9485f784",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

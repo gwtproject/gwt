@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1268969d_5922e3d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-04T19:47:14Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "1d83421d72a0c150217f0270f868b6f59f3fb254",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1268969d_791fa786",
+        "filename": "user/src/com/google/gwt/logging/impl/SimpleConsoleLogHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-04T19:47:14Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "1d83421d72a0c150217f0270f868b6f59f3fb254",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1268969d_995abb5c",
+        "filename": "user/src/com/google/gwt/logging/impl/SimpleConsoleLogHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-04T19:47:14Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.core.client.impl.ConsoleLogger\u0027 import.",
+      "revId": "1d83421d72a0c150217f0270f868b6f59f3fb254",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

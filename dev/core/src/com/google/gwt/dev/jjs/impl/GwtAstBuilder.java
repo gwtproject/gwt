@@ -1374,10 +1374,29 @@ public class GwtAstBuilder {
         allocLambda.addArg(new JThisRef(info, innerLambdaClass.getEnclosingType()));
       }
       for (SyntheticArgumentBinding sa : synthArgs) {
-        allocLambda.addArg(makeLocalRef(info, sa.actualOuterLocalVariable, methodStack.peek()));
+        MethodInfo method = methodStack.peek();
+
+        // find the corresponding variable binding in current method
+        LocalVariableBinding bindingInMethod = getBindingOfActualOuterLocalVariable(
+            sa.actualOuterLocalVariable, method.locals.keySet());
+        assert (bindingInMethod != null);
+        allocLambda.addArg(makeLocalRef(info, bindingInMethod, method));
       }
       // put the result on the stack, and pop out synthetic method from the scope
       push(allocLambda);
+    }
+
+    private LocalVariableBinding getBindingOfActualOuterLocalVariable(
+        LocalVariableBinding actualVariable, Set<LocalVariableBinding> variableBindings) {
+      for (LocalVariableBinding variableBinding : variableBindings) {
+        LocalVariableBinding actualBinding = (variableBinding instanceof SyntheticArgumentBinding)
+            ? ((SyntheticArgumentBinding) variableBinding).actualOuterLocalVariable
+            : variableBinding;
+        if (actualBinding.equals(actualVariable)) {
+          return variableBinding;
+        }
+      }
+      return null;
     }
 
     private JField createAndBindCapturedLambdaParameter(SourceInfo info,
@@ -3312,7 +3331,9 @@ public class GwtAstBuilder {
       JExpression result = null;
       if (binding instanceof LocalVariableBinding) {
         LocalVariableBinding b = (LocalVariableBinding) binding;
-        if ((x.bits & ASTNode.DepthMASK) != 0 || scope.isLambdaScope()) {
+        MethodScope nearestMethodScope =
+            scope instanceof MethodScope ? (MethodScope) scope : scope.enclosingMethodScope();
+        if ((x.bits & ASTNode.DepthMASK) != 0 || nearestMethodScope.isLambdaScope()) {
           VariableBinding[] path = scope.getEmulationPath(b);
           if (path == null) {
             /*

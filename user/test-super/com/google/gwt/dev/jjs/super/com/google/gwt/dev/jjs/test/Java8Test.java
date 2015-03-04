@@ -774,4 +774,43 @@ public class Java8Test extends GWTTestCase {
     SimpleI ii = (SimpleC & SimpleI) cc;
     assertEquals(33, ii.fun());
   }
+
+  interface ClickHandler {
+    int onClick(int a);
+  }
+  private int addClickHandler(ClickHandler clickHandler) {
+    return clickHandler.onClick(1);
+  }
+  private int addClickHandler(int a) {
+    return addClickHandler(x -> { int temp = a; return temp; });
+  }
+  public void testLambdaCaptureParameter() {
+    assertEquals(2, addClickHandler(2));
+  }
+
+  interface TestLambda_Inner {
+    void f();
+  }
+  interface TestLambda_Outer {
+    void accept(TestLambda_Inner t);
+  }
+  public void testLambda_call(TestLambda_Outer a) {
+    a.accept(() -> { });
+  }
+  public void testLambdaNestingCaptureLocal() {
+    boolean[] success = new boolean[] {false};
+    testLambda_call(sam1 -> { testLambda_call(sam2 -> { success[0] = true; }); });
+    assertTrue(success[0]);
+  }
+
+  static class TestLambda_Class {
+    public boolean[] s = new boolean[] {false};
+    public void call(TestLambda_Outer a) {
+      a.accept(() -> { });
+    }
+  }
+  public void testLambdaNestingCaptureField() {
+    TestLambda_Class a = new TestLambda_Class();
+    a.call(sam1 -> { a.call(sam2 -> { a.s[0] = true; }); });
+  }
 }

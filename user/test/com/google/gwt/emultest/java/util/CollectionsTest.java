@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
@@ -274,6 +275,59 @@ public class CollectionsTest extends EmulTestBase {
     Collections.reverse(b);
     Collections.reverse(b);
     assertEquals(b, createRandomList());
+  }
+
+  public void testRotate() throws Exception {
+    // NPE
+    try {
+      Collections.rotate(null, 1);
+      fail("Expect an NPE");
+    } catch (Exception e) {
+
+    }
+    /* TEST Basic examples */
+    // [t, a, n, k, s]
+    List<Character> base = Arrays.asList('t', 'a', 'n', 'k', 's');
+    // [s, t, a, n, k]
+    List<Character> afterRotation = Arrays.asList('s', 't', 'a', 'n', 'k');
+    List<Character> lst = new ArrayList<>(base);
+    Collections.rotate(lst, 1);
+    assertEquals(lst, afterRotation);
+    // using distance = -4
+    lst = new ArrayList<>(base);
+    Collections.rotate(lst, -4);
+    assertEquals(lst, afterRotation);
+
+    /* TEST Empty list. */
+    List l = new ArrayList();
+    Collections.rotate(l, 1);
+
+    /* TEST reverse algorithm using random size */
+    /*
+     * Rotates the elements in the specified list by the specified distance. After calling this
+     * method, the element at index i will be the element previously at index (i - distance) mod
+     * list.size(), for all values of i between 0 and list.size()-1, inclusive. (This method has no
+     * effect on the size of the list.)
+     */
+    // Generic list using revert algorithm. If list's size is greater than 100 elements
+    // Collections.rotate uses reverse algorithm.
+    Random random = new Random();
+    final int SIZE = random.nextInt(200) + 100;
+    List<Integer> list = new ArrayList<>(200); // We can use other implementation.
+    for (int i = 0; i < SIZE; i++) {
+      list.add(i); // populate with data.
+    }
+    List<Integer> copy = new ArrayList<>(list);
+    final int distance = random.nextInt(SIZE);
+    Collections.rotate(list, distance);
+    int position;
+    for (int i = 0; i < SIZE; i++) {
+      position = (i - distance) % SIZE;
+      if (position < 0) {
+        position += SIZE;
+      }
+      assertEquals(list.get(i), copy.get(position));
+    }
   }
 
   public void testSort() {

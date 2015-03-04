@@ -791,7 +791,7 @@ public class Collections {
 
   @SuppressWarnings("unchecked")
   public static final Set EMPTY_SET = new EmptySet();
-
+  
   public static <T> boolean addAll(Collection<? super T> c, T... a) {
     boolean result = false;
     for (T e : a) {
@@ -1105,6 +1105,14 @@ public class Collections {
       }
     };
   }
+  
+  public static void rotate(List<?> list, int distance) {
+    if (list instanceof RandomAccess || list.size() < 100) {
+      rotateWithoutReverse(list, distance);
+    }else{
+      rotateUsingReverse(list, distance);
+    }
+  }  
 
   public static <T> Set<T> singleton(T o) {
     HashSet<T> set = new HashSet<T>(1);
@@ -1207,6 +1215,52 @@ public class Collections {
     assert (x.length == size);
     for (int i = 0; i < size; i++) {
       target.set(i, (T) x[i]);
+    }
+  }
+  
+  private static <T> void rotateUsingReverse(List<T> list, int distance) {
+    final int size = list.size();
+    if (size < 2 || distance == 0) {
+      return;
+    }
+    int firstDistanceElements = -distance % size;
+    if (firstDistanceElements < 0) {
+      firstDistanceElements += size;
+    }
+    if (firstDistanceElements == 0) {
+      return;
+    }
+    reverse(list.subList(0, firstDistanceElements));
+    reverse(list.subList(firstDistanceElements, size));
+    reverse(list);
+  }
+
+  private static <T> void rotateWithoutReverse(List<T> list, int distance) {
+    final int size = list.size();
+    distance = distance % size;
+    if (distance < 0) {
+      distance += size;
+    }
+    if (distance == 0) {
+      return;
+    }
+    boolean allElementsMoved = size < 2;
+    int elementsMoved = 0;
+    int firstElementPickedInIteration = 0;
+    int source;
+    while (!allElementsMoved) {
+      T t = list.get(firstElementPickedInIteration);
+      source = firstElementPickedInIteration;
+      do {
+        source = source + distance;
+        if (source >= size) {
+          source = source - size;
+        }
+        t = list.set(source, t);
+        elementsMoved++;
+        allElementsMoved = size == elementsMoved;
+      } while (source != firstElementPickedInIteration);
+      firstElementPickedInIteration++;
     }
   }
 

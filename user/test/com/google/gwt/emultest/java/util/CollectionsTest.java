@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Vector;
 
 /**
  * Test various collections.
@@ -274,6 +276,73 @@ public class CollectionsTest extends EmulTestBase {
     Collections.reverse(b);
     Collections.reverse(b);
     assertEquals(b, createRandomList());
+  }
+
+  public void testRotate() throws Exception {
+    // NPE
+    try {
+      Collections.rotate(null, 1);
+      fail("Expect an NPE");
+    } catch (Exception e) {
+      
+    }
+    /* TEST Basic examples */
+    // [t, a, n, k, s]
+    List<Character> base = Arrays.asList('t', 'a', 'n', 'k', 's');
+    // [s, t, a, n, k]
+    List<Character> afterRotation = Arrays.asList('s', 't', 'a', 'n', 'k');
+    List<Character> lst = new ArrayList<>(base);
+    Collections.rotate(lst, 1);
+    assertEquals(lst, afterRotation);
+    // using distance = -4
+    lst = new ArrayList<>(base);
+    Collections.rotate(lst, -4);
+    assertEquals(lst, afterRotation);
+
+    /* TEST Empty list. */
+    List l = new ArrayList();
+    Collections.rotate(l, 1);
+
+    /*
+     * Rotates the elements in the specified list by the specified distance. After calling this
+     * method, the element at index i will be the element previously at index (i - distance) mod
+     * list.size(), for all values of i between 0 and list.size()-1, inclusive. (This method has no
+     * effect on the size of the list.)
+     */
+    int[] size = {0, 1, 50, 99, 100, 200, 300};
+    int[] distances = {10, 558, 30, 70, 10, 26, 299};
+    for (int j = 0; j < size.length; j++) {
+      Set<List<Integer>> lists = new HashSet<>();
+      lists.add(new ArrayList<Integer>());
+      lists.add(new LinkedList<Integer>());
+      lists.add(new Vector<Integer>());
+      int listSize = size[j];
+      for (List<Integer> list : lists) {
+        ArrayList<Integer> original = new ArrayList<>(listSize);
+        for (int i = 0; i < listSize; i++) {
+          list.add(i); // populate with data.
+          original.add(i);
+        }
+        testRotatedList(list, original, /* distance */0);
+        assertEquals(list, original);
+        testRotatedList(list, original, /* distance */listSize);
+        assertEquals(list, original);
+        testRotatedList(list, original, /* distance */distances[j]);
+      }
+    }
+  }
+
+  private void testRotatedList(List<Integer> list, List<Integer> original, int distance) {
+    int size = list.size();
+    Collections.rotate(list, distance);
+    int position;
+    for (int i = 0; i < size; i++) {
+      position = (i - distance) % size;
+      if (position < 0) {
+        position += size;
+      }
+      assertEquals(list.get(i), original.get(position));
+    }
   }
 
   public void testSort() {

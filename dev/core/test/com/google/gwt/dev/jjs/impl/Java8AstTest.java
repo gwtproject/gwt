@@ -172,6 +172,45 @@ public class Java8AstTest extends JJSTestBase {
         formatSource(samMethod.toSource()));
   }
 
+  public void testCompileLambdaCaptureLocalWithBlockInLambda() throws Exception {
+    String lambda =
+        "int x = 42; "
+        + "new AcceptsLambda<Integer>().accept((a,b) -> { int temp = x; return temp + a + b; });";
+    assertEqualBlock(
+        "int x=42;(new AcceptsLambda()).accept(new EntryPoint$lambda$0$Type(x));",
+        lambda
+    );
+    JProgram program = compileSnippet("void", lambda, false);
+    // created by JDT, should exist
+    assertNotNull(getMethod(program, "lambda$0"));
+
+    // created by GwtAstBuilder
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$lambda$0$Type");
+    assertNotNull(lambdaInnerClass);
+
+    // should have constructor taking x
+    JMethod ctor = findMethod(lambdaInnerClass, "EntryPoint$lambda$0$Type");
+    assertTrue(ctor instanceof JConstructor);
+    assertEquals(1, ctor.getParams().size());
+    assertEquals(JPrimitiveType.INT, ctor.getOriginalParamTypes().get(0));
+
+    // should have 1 field to store the local
+    assertEquals(1, lambdaInnerClass.getFields().size());
+    assertEquals(JPrimitiveType.INT, lambdaInnerClass.getFields().get(0).getType());
+
+    // should contain assignment statement of ctor param to field
+    assertEquals("{this.x_0=x_0;}", formatSource(ctor.getBody().toSource()));
+    // should extends test.Lambda
+    assertTrue(lambdaInnerClass.getImplements().contains(program.getFromTypeMap("test.Lambda")));
+
+    // should implement run method and invoke lambda as static function
+    JMethod samMethod = findMethod(lambdaInnerClass, "run");
+    assertEquals(
+        "public final Object run(int arg0,int arg1){" +
+            "return EntryPoint.lambda$0(this.x_0,arg0,arg1);}",
+        formatSource(samMethod.toSource()));
+  }
+
   // test whether local capture and outer scope capture work together
   public void testCompileLambdaCaptureLocalAndField() throws Exception {
     addSnippetClassDecl("private int y = 22;");
@@ -258,6 +297,42 @@ public class Java8AstTest extends JJSTestBase {
     JMethod samMethod = findMethod(lambdaInnerClass, "run");
     assertEquals(
         "public final Object run(int arg0,int arg1){return this.$$outer_0.lambda$0(arg0,arg1);}",
+        formatSource(samMethod.toSource()));
+  }
+
+  public void testLambdaCaptureParameter() throws Exception {
+    addSnippetClassDecl("interface ClickHandler {\n" +
+        "    int onClick(int a);\n" +
+        "  }\n" +
+        "  private int addClickHandler(ClickHandler clickHandler) {\n" +
+        "    return clickHandler.onClick(1);\n" +
+        "  }\n" +
+        "  private int addClickHandler(int a) {\n" +
+        "    return addClickHandler(x->{int temp = a; return temp;});\n" +
+        "  }\n");
+    JProgram program = compileSnippet("int", "return addClickHandler(2);", false);
+    JClassType lambdaInnerClass = (JClassType) getType(program, "test.EntryPoint$lambda$0$Type");
+    assertNotNull(lambdaInnerClass);
+
+    // should have constructor taking the outer variable from parameter
+    JMethod ctor = findMethod(lambdaInnerClass, "EntryPoint$lambda$0$Type");
+    assertTrue(ctor instanceof JConstructor);
+    assertEquals(1, ctor.getParams().size());
+    assertEquals(JPrimitiveType.INT, ctor.getOriginalParamTypes().get(0));
+
+    // should have 1 field to store the outer
+    assertEquals(1, lambdaInnerClass.getFields().size());
+    assertEquals(JPrimitiveType.INT,
+        lambdaInnerClass.getFields().get(0).getType());
+
+    // should contain assignment statement of ctor params to field
+    assertEquals("{this.a_0=a_0;}", formatSource(ctor.getBody().toSource()));
+    // should extends test.Lambda
+    assertTrue(lambdaInnerClass.getImplements().contains(
+        program.getFromTypeMap("test.EntryPoint$ClickHandler")));
+
+    JMethod samMethod = findMethod(lambdaInnerClass, "onClick");
+    assertEquals("public final int onClick(int a){return EntryPoint.lambda$0(this.a_0,a);}",
         formatSource(samMethod.toSource()));
   }
 

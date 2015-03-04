@@ -774,4 +774,17 @@ public class Java8Test extends GWTTestCase {
     SimpleI ii = (SimpleC & SimpleI) cc;
     assertEquals(33, ii.fun());
   }
+
+  interface ClickHandler {
+    int onClick(int a);
+  }
+  private int addClickHandler(ClickHandler clickHandler) {
+    return clickHandler.onClick(1);
+  }
+  private int addClickHandler(int a) {
+    return addClickHandler(x -> { int temp = a; return temp; });
+  }
+  public void testLambdaCaptureParameter() {
+    assertEquals(2, addClickHandler(2));
+  }
 }

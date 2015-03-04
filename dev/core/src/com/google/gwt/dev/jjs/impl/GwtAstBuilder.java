@@ -3312,7 +3312,9 @@ public class GwtAstBuilder {
       JExpression result = null;
       if (binding instanceof LocalVariableBinding) {
         LocalVariableBinding b = (LocalVariableBinding) binding;
-        if ((x.bits & ASTNode.DepthMASK) != 0 || scope.isLambdaScope()) {
+        MethodScope nearestMethodScope =
+            scope instanceof MethodScope ? (MethodScope) scope : scope.enclosingMethodScope();
+        if ((x.bits & ASTNode.DepthMASK) != 0 || nearestMethodScope.isLambdaScope()) {
           VariableBinding[] path = scope.getEmulationPath(b);
           if (path == null) {
             /*

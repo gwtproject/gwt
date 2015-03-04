@@ -228,6 +228,7 @@ import org.eclipse.jdt.internal.compiler.util.Util;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
@@ -1373,8 +1374,18 @@ public class GwtAstBuilder {
       if (x.shouldCaptureInstance) {
         allocLambda.addArg(new JThisRef(info, innerLambdaClass.getEnclosingType()));
       }
-      for (SyntheticArgumentBinding sa : synthArgs) {
-        allocLambda.addArg(makeLocalRef(info, sa.actualOuterLocalVariable, methodStack.peek()));
+      for (final SyntheticArgumentBinding sa : synthArgs) {
+        final MethodInfo method = methodStack.peek();
+        LocalVariableBinding var = sa.actualOuterLocalVariable;
+        if (!method.locals.containsKey(var)) {
+          for (final LocalVariableBinding local : method.locals.keySet()) {
+            if (Arrays.equals(local.name, sa.name)) {
+              var = local;
+              break;
+            }
+          }
+        }
+        allocLambda.addArg(makeLocalRef(info, var, method));
       }
       // put the result on the stack, and pop out synthetic method from the scope
       push(allocLambda);

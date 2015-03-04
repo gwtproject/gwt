@@ -65,6 +65,9 @@ public class Java8Test extends GWTTestCase {
   public void testCompileLambdaCaptureOuterInnerField() throws Exception {
   }
 
+  public void testCompileLambdaCaptureNestedVariableReference() throws Exception {
+  }
+
   public void testStaticReferenceBinding() throws Exception {
   }
 

@@ -235,6 +235,17 @@ public class Java8Test extends GWTTestCase {
     new Inner().run();
   }
 
+  public void testCompileLambdaCaptureNestedVariableReference() throws Exception {
+    boolean success = true;
+    AcceptsLambda<Boolean> acceptor = new AcceptsLambda<Boolean>();
+    boolean result = acceptor.accept((a, b)->
+      acceptor.accept((c, d) ->
+        success
+      )
+    );
+    assertTrue(result);
+  }
+
   public void testStaticReferenceBinding() throws Exception {
     assertEquals(129, new AcceptsLambda<Integer>().accept(Static::staticMethod).intValue());
     // if this next line runs a clinit, it fails

@@ -153,4 +153,7 @@ public class Java8Test extends GWTTestCase {
 
   public void testIntersectionCastPolymorphism() {
   }
+
+  public void testLambdaCaptureParameter() {
+  }
 }

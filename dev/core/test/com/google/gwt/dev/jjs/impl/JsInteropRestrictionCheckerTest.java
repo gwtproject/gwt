@@ -96,7 +96,22 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertCompileFails();
   }
 
-  public void testCollidingMethodToMethodJsTypeFails() throws Exception {
+  public void testCollidingSubclassFieldToFieldJsTypeFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static class ParentBuggy {",
+        "  public int foo = 55;",
+        "}",
+        "@JsType",
+        "public static class Buggy extends ParentBuggy {",
+        "  public int foo = 110;",
+        "}");
+
+    assertCompileFails();
+  }
+
+  public void testCollidingSubclassMethodToMethodInterfaceJsTypeFails() throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsType");
     addSnippetClassDecl(
         "@JsType",
@@ -112,8 +127,33 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}",
         "public static class Buggy2 extends Buggy implements IBuggy2 {",
         "  public void show(boolean b) {}",
+        "}");
+
+    assertCompileFails();
+  }
+
+  public void testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType",
+        "public interface IParentBuggy1 {",
+        "  void show();",
         "}",
-        "public static class Buggy {}");
+        "public interface IBuggy1 extends {",
+        "}",
+        "@JsType",
+        "public interface IParentBuggy2 {",
+        "  void show(boolean b);",
+        "}",
+        "public interface IBuggy2 extends IParentBuggy2 {",
+        "  void show(boolean b);",
+        "}",
+        "public static class Buggy implements IBuggy1 {",
+        "  public void show() {}",
+        "}",
+        "public static class Buggy2 extends Buggy implements IBuggy2 {",
+        "  public void show(boolean b) {}",
+        "}");
 
     assertCompileFails();
   }
@@ -132,6 +172,24 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "public static class Buggy {}");
 
     assertCompileSucceeds();
+  }
+
+  public void testCollidingTwoLayerSubclassFieldToFieldJsTypeFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static class ParentParentBuggy {",
+        "  public int foo = 55;",
+        "}",
+        "public static class ParentBuggy extends ParentParentBuggy {",
+        "  public int foo = 55;",
+        "}",
+        "@JsType",
+        "public static class Buggy extends ParentBuggy {",
+        "  public int foo = 110;",
+        "}");
+
+    assertCompileFails();
   }
 
   public void testMultiplePrivateConstructorsExportSucceeds() throws Exception {

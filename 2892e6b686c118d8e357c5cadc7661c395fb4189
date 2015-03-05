@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37e82c65_4543bc1d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1383,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-05T00:04:31Z",
+      "side": 1,
+      "message": "Maybe replace this code with\n\n        \n        MethodInfo method \u003d methodStack.peek();\n        // Find the local variable in the current method context that is referred by the inner\n        // lambda.\n        LocalVariableBinding argument \u003d FluentIterable.from(method.locals.keySet()).firstMatch(\n            new Predicate\u003cLocalVariableBinding\u003e() {\n              @Override\n              public boolean apply(LocalVariableBinding enclosingLocal) {\n                // Either the inner lambda refers direcly to the enclosing scope variable, or\n                // it is a capture from an enclosing scope, in which case both synthetic arguments\n                // point to the same outer local variable.\n                return enclosingLocal \u003d\u003d sa.actualOuterLocalVariable ||\n                    (enclosingLocal instanceof SyntheticArgumentBinding) \u0026\u0026\n                        ((SyntheticArgumentBinding) enclosingLocal)\n                            .actualOuterLocalVariable \u003d\u003d sa.actualOuterLocalVariable;\n              }\n            }).get();\n        allocLambda.addArg(makeLocalRef(info, argument, methodStack.peek()))",
+      "range": {
+        "startLine": 1377,
+        "startChar": 4,
+        "endLine": 1383,
+        "endChar": 72
+      },
+      "revId": "2892e6b686c118d8e357c5cadc7661c395fb4189",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -20,10 +20,13 @@ import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyType;
 
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
+
+import java.beans.Introspector;
 
 /**
  * Utility functions to interact with JDT classes for JsInterop.
@@ -40,7 +43,11 @@ public final class JsInteropUtil {
 
   public static void maybeSetJsInteropProperties(JMethod method, Annotation... annotations) {
     setJsInteropProperties(method, annotations);
-    method.setJsProperty(JdtUtil.getAnnotation(annotations, JSPROPERTY_CLASS) != null);
+    if (JdtUtil.getAnnotation(annotations, JSPROPERTY_CLASS) != null) {
+      method.setJsPropertyType(method.getParams().isEmpty() ? (startsWithCamelCase(method.getName(),
+          "has") ? JsPropertyType.HAS : JsPropertyType.GET) : JsPropertyType.SET);
+      setJsPropertyName(method);
+    }
   }
 
   public static void maybeSetJsInteropProperties(JField field, Annotation... annotations) {
@@ -64,7 +71,6 @@ public final class JsInteropUtil {
     JDeclaredType enclosingType = member.getEnclosingType();
 
     if (enclosingType.isJsType() && member.needsVtable()) {
-      // TODO(goktug): correctly calculate member names for JsProperties.
       member.setJsMemberName(member.getName());
     }
 
@@ -115,5 +121,22 @@ public final class JsInteropUtil {
   public static String maybeGetJsTypePrototype(TypeDeclaration x) {
     AnnotationBinding jsType = JdtUtil.getAnnotation(x.annotations, JSTYPE_CLASS);
     return JdtUtil.getAnnotationParameterString(jsType, "prototype");
+  }
+
+  private static void setJsPropertyName(JMethod method) {
+    String methodName = method.getName();
+    if (startsWithCamelCase(methodName, "is")) {
+      method.setJsMemberName(Introspector.decapitalize(methodName.substring(2)));
+    } else if (startsWithCamelCase(methodName, "has") || startsWithCamelCase(methodName, "get")
+        || startsWithCamelCase(methodName, "set")) {
+      method.setJsMemberName(Introspector.decapitalize(methodName.substring(3)));
+    } else {
+      method.setJsMemberName(methodName);
+    }
+  }
+
+  private static boolean startsWithCamelCase(String string, String prefix) {
+    return string.length() > prefix.length() && string.startsWith(prefix)
+        && Character.isUpperCase(string.charAt(prefix.length()));
   }
 }

@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "579cc029_fb25afda",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-05T23:24:05Z",
+      "side": 1,
+      "message": "nit: if we extract a method here \u0027getJsProperyType\u0027, this would be more readable.",
+      "range": {
+        "startLine": 47,
+        "startChar": 31,
+        "endLine": 48,
+        "endChar": 80
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "579cc029_5ba8638d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-05T23:24:05Z",
+      "side": 1,
+      "message": "nit: Similarly, if you apply previous comment, you may consider having method.setJsPropertyName(computeJsPropertyName(method));",
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "579cc029_3bd31708",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-05T23:24:05Z",
+      "side": 1,
+      "message": "I think we should extract the name based one JsPropertyType otherwise it would be incorrect. For example isXYZ(boolean isXYZ) is a setter and we correctly identified it earlier by looking at the parameter types. BTW, this partly-ambiguous situation is what I hate most about supporting both styles.\n\nI think it would be nice to pin down our behavior with a test case, so we will discover any unintended behavior change here in the future.",
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "579cc029_9e7ed995",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-05T23:24:05Z",
+      "side": 1,
+      "message": "TODO: Check setter and getter for the same property has compatible types.",
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "579cc029_7efc2d43",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-05T23:24:05Z",
+      "side": 1,
+      "message": "Instead of clearing above you can just assign to new instance and get rid of asserts.\nAs a nice side effect, speculatively, this will perform better in practice as you defer to GC to the cleanup.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 46
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "579cc029_9e87b9a5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-05T23:24:05Z",
+      "side": 1,
+      "message": "Actually this should be x.getEnclosingType().isJsType as we don\u0027t want somebody to extend a JsType and add a JsProperty afterwards.\nCan we add a test for this scenario?",
+      "range": {
+        "startLine": 105,
+        "startChar": 11,
+        "endLine": 105,
+        "endChar": 78
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "579cc029_3e1545c2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-05T23:24:05Z",
+      "side": 1,
+      "message": "It would be nice if you can put this together with the setter version; it is kind of difficult go up down and to remember to go in which direction in the class to follow the code.",
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "579cc029_5ed4d170",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-05T23:24:05Z",
+      "side": 1,
+      "message": "This call seems redundant together with getImmediateOrTransitiveJsPropertyType.",
+      "range": {
+        "startLine": 154,
+        "startChar": 15,
+        "endLine": 154,
+        "endChar": 47
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7def0f5_126aca9c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-05T23:24:05Z",
+      "side": 1,
+      "message": "we probably want qualified name show up otherwise it would be difficult to identify the culprit",
+      "range": {
+        "startLine": 190,
+        "startChar": 22,
+        "endLine": 190,
+        "endChar": 30
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7def0f5_32f6ee63",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeGetProperty.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-05T23:24:05Z",
+      "side": 1,
+      "message": "I think it could be better to test fluent APIs independently. Also it might better to separate the test in other direction (ie. test setter/getter/has together for a specific style).\n\nSo:\n\n\ninterface MyClassWithJsProperties {\n  void x(int)\n  int x();\n  boolean hasX();\n}\n\ntestJsProperty() { .... }\n\ninterface MyClassWithBeanStyleJsProperties {\n  void setX(int)\n  int getX();\n  boolean hasX();\n  void setY(boolean)\n  boolean isY()\n}\n\ntestJsProperty_beanStyle() { .... }\n\nand another one for fluent API.\n\nOther advantage is, if we force consistently style per class, that will work better.\n\nWDTY?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 29
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

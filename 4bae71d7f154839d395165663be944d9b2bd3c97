@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "32275af6_4aeb93a8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-05T23:03:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2b4e2b1_6857a3ac",
+      "range": {
+        "startLine": 140,
+        "startChar": 17,
+        "endLine": 140,
+        "endChar": 44
+      },
+      "revId": "4bae71d7f154839d395165663be944d9b2bd3c97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2b4e2b1_48b97f63",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2015-03-02T17:54:07Z",
       "side": 1,
       "message": "s/getSingleAbstractMethodInJsFunction/getJsFunctionMethod/",
+      "range": {
+        "startLine": 144,
+        "startChar": 17,
+        "endLine": 144,
+        "endChar": 52
+      },
+      "revId": "4bae71d7f154839d395165663be944d9b2bd3c97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32275af6_aadfaf00",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-05T23:03:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2b4e2b1_48b97f63",
       "range": {
         "startLine": 144,
         "startChar": 17,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "32275af6_8adc6b0d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-05T23:03:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2b4e2b1_2851abb4",
+      "range": {
+        "startLine": 148,
+        "startChar": 12,
+        "endLine": 148,
+        "endChar": 33
+      },
+      "revId": "4bae71d7f154839d395165663be944d9b2bd3c97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2b4e2b1_aba355aa",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2015-03-02T17:54:07Z",
       "side": 1,
       "message": "It should read better the following way:\n\n  JsName ctorName \u003d names.get(x.getTarget());\n\n  ...\n\n  JsNew ....  ctorName.makeRef(x.getSourceInfo));\n\n  ...\n\n  protoRef.setQualifier(ctorName.makeRef(x.getSourceInfo);",
+      "range": {
+        "startLine": 1627,
+        "startChar": 16,
+        "endLine": 1627,
+        "endChar": 23
+      },
+      "revId": "4bae71d7f154839d395165663be944d9b2bd3c97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7669411_d8a54d84",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1627,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-05T23:03:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2b4e2b1_aba355aa",
       "range": {
         "startLine": 1627,
         "startChar": 16,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "d7def0f5_2f1be9a6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1631,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-05T23:03:50Z",
+      "side": 1,
+      "message": "Removed. It is safe without the check anyway since there is a guard in getJsFunctionMethod().",
+      "parentUuid": "f2b4e2b1_c8ac8f21",
+      "range": {
+        "startLine": 1631,
+        "startChar": 0,
+        "endLine": 1631,
+        "endChar": 44
+      },
+      "revId": "4bae71d7f154839d395165663be944d9b2bd3c97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2b4e2b1_6801e36b",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 2
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "d2235eea_0795163b",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-05T23:03:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2b4e2b1_6801e36b",
+      "range": {
+        "startLine": 272,
+        "startChar": 1,
+        "endLine": 276,
+        "endChar": 1
+      },
+      "revId": "4bae71d7f154839d395165663be944d9b2bd3c97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2b4e2b1_2880cb3d",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JJSTestBase.java",
         "patchSetId": 2
@@ -151,6 +295,30 @@
       "writtenOn": "2015-03-02T17:54:07Z",
       "side": 1,
       "message": "There is already a method addAll that does this here.",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 3
+      },
+      "revId": "4bae71d7f154839d395165663be944d9b2bd3c97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32275af6_2a61ffc1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JJSTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-05T23:03:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2b4e2b1_2880cb3d",
       "range": {
         "startLine": 233,
         "startChar": 0,

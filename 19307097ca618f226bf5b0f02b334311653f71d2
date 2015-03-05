@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7def0f5_0f0065ff",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionIdentityInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-05T22:19:49Z",
+      "side": 1,
+      "message": "[error] Missing a header - not enough lines in file.",
+      "revId": "19307097ca618f226bf5b0f02b334311653f71d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7def0f5_2f052910",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionIdentityInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-05T22:19:49Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.core.client.js.JsType.",
+      "revId": "19307097ca618f226bf5b0f02b334311653f71d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7def0f5_cf09fd2a",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-05T22:19:49Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.core.client.js.JsType.",
+      "revId": "19307097ca618f226bf5b0f02b334311653f71d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

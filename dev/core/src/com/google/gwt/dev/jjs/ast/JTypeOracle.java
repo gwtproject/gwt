@@ -914,6 +914,18 @@ public class JTypeOracle implements Serializable {
     return null;
   }
 
+  /**
+   * Get the JsFunction method of <code>type</code>.
+   */
+  public JMethod getJsFunctionMethod(JClassType type) {
+    for (JMethod method : type.getMethods()) {
+      if (isJsFunctionMethod(method)) {
+        return method;
+      }
+    }
+    return (type.getSuperClass() != null) ? getJsFunctionMethod(type.getSuperClass()) : null;
+  }
+
   public JMethod getInstanceMethodBySignature(JClassType type, String signature) {
     return getOrCreateInstanceMethodsBySignatureForType(type).get(signature);
   }
@@ -1084,7 +1096,7 @@ public class JTypeOracle implements Serializable {
   public boolean isInstantiatedType(JReferenceType type) {
     type = type.getUnderlyingType();
     // any type that can be JS or exported to JS is considered instantiated
-    if (isJsType(type) || hasAnyExports(type)) {
+    if (isJsType(type) || hasAnyExports(type) || isJsFunction(type)) {
       return true;
     }
     if (instantiatedTypes == null || instantiatedTypes.contains(type)) {
@@ -1152,6 +1164,17 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
+   * Returns whether the given method may be implicitly called by a instance of a class that
+   * is exported by an @JsFunction annotation.
+   * <p>
+   * A method is a JsFunction method if it is or overrides a SAM function of a @JsFunction annotated
+   * functional interface.
+   */
+  public boolean isJsFunctionMethod(JMethod x) {
+    return isJsInteropEnabled() && x.isOrOverridesJsFunctionMethod();
+  }
+
+  /**
    * Whether the type is a JS interface (does not check supertypes).
    */
   public boolean isJsType(JType type) {
@@ -1170,6 +1193,14 @@ public class JTypeOracle implements Serializable {
     } else {
       return false;
     }
+  }
+
+  /**
+   * Whether the type is a JsFunction interface.
+   */
+  public boolean isJsFunction(JType type) {
+    return isJsInteropEnabled()
+        && (type instanceof JInterfaceType && ((JInterfaceType) type).isJsFunction());
   }
 
   /**

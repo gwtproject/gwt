@@ -98,6 +98,10 @@ public class JSORestrictionsChecker {
   public static final String JSO_CLASS = "com/google/gwt/core/client/JavaScriptObject";
   public static final String ERR_FORGOT_TO_MAKE_PROTOTYPE_IMPL_JSTYPE = "@JsType subtype extends magic _Prototype class, but _Prototype class doesn't implement JsType";
   public static final String ERR_JS_TYPE_WITH_PROTOTYPE_SET_NOT_ALLOWED_ON_CLASS_TYPES = "@JsType with prototype set not allowed on class types";
+  public static final String ERR_JS_FUNCTION_ONLY_ALLOWED_ON_FUNCTIONAL_INTERFACE =
+      "@JsFunction is only allowed on functional interface";
+  public static final String ERR_JS_FUNCTION_INTERFACE_CANNOT_EXTEND_ANY_INTERFACE =
+      "Interface annotated as @JsFunction cannot extend any other interfaces";
   static boolean LINT_MODE = false;
 
   private enum ClassState {
@@ -250,6 +254,34 @@ public class JSORestrictionsChecker {
       return true;
     }
 
+    private void checkJsFunction(TypeDeclaration type, TypeBinding typeBinding) {
+      ReferenceBinding binding = (ReferenceBinding) typeBinding;
+      if (JdtUtil.getAnnotation(binding, JsInteropUtil.JSFUNCTION_CLASS) == null) {
+        return;
+      }
+      if (!binding.isInterface()) {
+        errorOn(type, ERR_JS_FUNCTION_ONLY_ALLOWED_ON_FUNCTIONAL_INTERFACE);
+        return;
+      }
+      if (binding.superInterfaces().length > 0) {
+        errorOn(type, ERR_JS_FUNCTION_INTERFACE_CANNOT_EXTEND_ANY_INTERFACE);
+      }
+      boolean findOneAbstract = false;
+      for (MethodBinding method : binding.methods()) {
+        if (method.isAbstract()) {
+          if (findOneAbstract) {
+            errorOn(type, ERR_JS_FUNCTION_ONLY_ALLOWED_ON_FUNCTIONAL_INTERFACE);
+            return;
+          } else {
+            findOneAbstract = true;
+          }
+        }
+      }
+      if (!findOneAbstract) {
+        errorOn(type, ERR_JS_FUNCTION_ONLY_ALLOWED_ON_FUNCTIONAL_INTERFACE);
+      }
+    }
+
     private void checkJsType(TypeDeclaration type, TypeBinding typeBinding) {
       ReferenceBinding binding = (ReferenceBinding) typeBinding;
       if (binding.isClass()) {
@@ -382,6 +414,7 @@ public class JSORestrictionsChecker {
 
     private ClassState checkType(TypeDeclaration type) {
       SourceTypeBinding binding = type.binding;
+      checkJsFunction(type, binding);
       checkJsExport(binding);
       if (isJsType(type.binding)) {
         checkJsType(type, type.binding);

@@ -17,8 +17,10 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -74,6 +76,7 @@ public class JsInteropRestrictionChecker extends JVisitor {
     minimalRebuildCache.removeJsInteropNames(x.getName());
     currentType = x;
 
+    checkJsFunctionInheritance(x);
     return true;
   }
 
@@ -141,6 +144,28 @@ public class JsInteropRestrictionChecker extends JVisitor {
       logError("'%s' can't be exported because the member name '%s' is already taken.",
           x.getQualifiedName(), memberName);
     }
+  }
+
+  private void checkJsFunctionInheritance(JDeclaredType type) {
+    if (getJsFunctionsInheritated(type).size() > 1) {
+      logError("'%s' implements more than one JsFunction interfaces.", type.getName());
+    }
+  }
+
+  private Set<JInterfaceType> getJsFunctionsInheritated(JDeclaredType type) {
+    Set<JInterfaceType> superJsFunctions = Sets.newHashSet();
+    JClassType superClass = type.getSuperClass();
+    if (superClass != null) {
+      superJsFunctions.addAll(getJsFunctionsInheritated(superClass));
+    }
+    for (JInterfaceType superInterface : type.getImplements()) {
+      if (superInterface.isJsFunction()) {
+        superJsFunctions.add(superInterface);
+      } else {
+        superJsFunctions.addAll(getJsFunctionsInheritated(superInterface));
+      }
+    }
+    return superJsFunctions;
   }
 
   private void logError(String format, Object... args) {

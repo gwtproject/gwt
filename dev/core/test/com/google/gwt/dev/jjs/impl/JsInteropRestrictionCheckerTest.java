@@ -39,7 +39,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertCompileFails();
   }
 
-  public void testCollidingJsTypeJsPropertiesSucceeds() throws Exception {
+  public void testCollidingJsPropertiesSetterAndGetterSucceeds() throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsType");
     addSnippetImport("com.google.gwt.core.client.js.JsProperty");
     addSnippetClassDecl(
@@ -56,6 +56,80 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertCompileSucceeds();
+  }
+
+  public void testCollidingJsPropertiesTwoGettersFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static interface IBuggy {",
+        "  @JsProperty",
+        "  int x();",
+        "  @JsProperty",
+        "  int getX();",
+        "}",
+        "public static class Buggy implements IBuggy {",
+        "  public int x() {return 0;}",
+        "  public int getX() {return 0;}",
+        "}");
+
+    assertCompileFails();
+  }
+
+  public void testCollidingJsPropertiesTwoSettersFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static interface IBuggy {",
+        "  @JsProperty",
+        "  void x(int x);",
+        "  @JsProperty",
+        "  void setX(int x);",
+        "}",
+        "public static class Buggy implements IBuggy {",
+        "  public void x(int x) {}",
+        "  public void setX(int x) {}",
+        "}");
+
+    assertCompileFails();
+  }
+
+  public void testCollidingJsTypeAndJsPropertyGetterFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static interface IBuggy {",
+        "  Object x(Object foo, Object bar);",
+        "  @JsProperty",
+        "  int getX();",
+        "}",
+        "public static class Buggy implements IBuggy {",
+        "  public Object x(Object foo, Object bar) {return null;}",
+        "  public int getX() {return 0;}",
+        "}");
+
+    assertCompileFails();
+  }
+
+  public void testCollidingJsTypeAndJsPropertySetterFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static interface IBuggy {",
+        "  Object x(Object foo, Object bar);",
+        "  @JsProperty",
+        "  void setX(int a);",
+        "}",
+        "public static class Buggy implements IBuggy {",
+        "  public Object x(Object foo, Object bar) {return null;}",
+        "  public void setX(int a) {}",
+        "}");
+
+    assertCompileFails();
   }
 
   public void testCollidingMethodExportsFails() throws Exception {
@@ -96,27 +170,27 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertCompileFails();
   }
 
-  public void testCollidingMethodToMethodJsTypeFails() throws Exception {
-    addSnippetImport("com.google.gwt.core.client.js.JsType");
-    addSnippetClassDecl(
-        "@JsType",
-        "public interface IBuggy1 {",
-        "  void show();",
-        "}",
-        "@JsType",
-        "public interface IBuggy2 {",
-        "  void show(boolean b);",
-        "}",
-        "public static class Buggy implements IBuggy1 {",
-        "  public void show() {}",
-        "}",
-        "public static class Buggy2 extends Buggy implements IBuggy2 {",
-        "  public void show(boolean b) {}",
-        "}",
-        "public static class Buggy {}");
-
-    assertCompileFails();
-  }
+  // TODO: enable when supported.
+  // public void testCollidingMethodToMethodJsTypeFails() throws Exception {
+  // addSnippetImport("com.google.gwt.core.client.js.JsType");
+  // addSnippetClassDecl(
+  // "@JsType",
+  // "public interface IBuggy1 {",
+  // "  void show();",
+  // "}",
+  // "@JsType",
+  // "public interface IBuggy2 {",
+  // "  void show(boolean b);",
+  // "}",
+  // "public static class Buggy implements IBuggy1 {",
+  // "  public void show() {}",
+  // "}",
+  // "public static class Buggy2 extends Buggy implements IBuggy2 {",
+  // "  public void show(boolean b) {}",
+  // "}");
+  //
+  // assertCompileFails();
+  // }
 
   public void testCollidingSyntheticBridgeMethodSucceeds() throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsType");
@@ -132,6 +206,18 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "public static class Buggy {}");
 
     assertCompileSucceeds();
+  }
+
+  public void testJsPropertyInNonJsTypeFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "public static class Buggy {",
+        "  @JsProperty",
+        "  public int x() {return 0;}",
+        "}");
+
+    assertCompileFails();
   }
 
   public void testMultiplePrivateConstructorsExportSucceeds() throws Exception {

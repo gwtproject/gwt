@@ -20,6 +20,7 @@ import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyType;
 
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
@@ -39,8 +40,15 @@ public final class JsInteropUtil {
       "com.google.gwt.core.client.js.impl.PrototypeOfJsType";
 
   public static void maybeSetJsInteropProperties(JMethod method, Annotation... annotations) {
+    boolean jsType = method.getEnclosingType().isJsType();
     setJsInteropProperties(method, annotations);
-    method.setJsProperty(JdtUtil.getAnnotation(annotations, JSPROPERTY_CLASS) != null);
+    if (JdtUtil.getAnnotation(annotations, JSPROPERTY_CLASS) != null) {
+      method.setJsPropertyType(
+          method.getParams().isEmpty() ? JsPropertyType.GETTER : JsPropertyType.SETTER);
+    }
+    if (jsType && method.isJsProperty()) {
+      setJsPropertyName(method);
+    }
   }
 
   public static void maybeSetJsInteropProperties(JField field, Annotation... annotations) {
@@ -115,5 +123,31 @@ public final class JsInteropUtil {
   public static String maybeGetJsTypePrototype(TypeDeclaration x) {
     AnnotationBinding jsType = JdtUtil.getAnnotation(x.annotations, JSTYPE_CLASS);
     return JdtUtil.getAnnotationParameterString(jsType, "prototype");
+  }
+
+  private static void setJsPropertyName(JMethod method) {
+    String methodName = method.getName();
+    if (startsWithCamelCase(methodName, "is")) {
+      method.setJsMemberName(toCamelCase(methodName.substring(2)));
+    } else if (startsWithCamelCase(methodName, "has") || startsWithCamelCase(methodName, "get")
+        || startsWithCamelCase(methodName, "set")) {
+      method.setJsMemberName(toCamelCase(methodName.substring(3)));
+    } else {
+      method.setJsMemberName(methodName);
+    }
+  }
+
+  private static boolean startsWithCamelCase(String string, String prefix) {
+    return string.length() > prefix.length() && string.startsWith(prefix)
+        && Character.isUpperCase(string.charAt(prefix.length()));
+  }
+
+  private static String toCamelCase(String string) {
+    if (string.length() == 0) {
+      return string;
+    } else if (string.length() == 1) {
+      return String.valueOf(Character.toLowerCase(string.charAt(0)));
+    }
+    return Character.toLowerCase(string.charAt(0)) + string.substring(1);
   }
 }

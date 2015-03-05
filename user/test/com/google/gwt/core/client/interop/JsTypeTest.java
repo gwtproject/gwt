@@ -127,43 +127,43 @@ public class JsTypeTest extends GWTTestCase {
   }
 
   public void testJsPropertyIsX() {
-    JsPoint point = (JsPoint) JavaScriptObject.createObject();
+    JsTypeIsProperty object = (JsTypeIsProperty) JavaScriptObject.createObject();
 
-    assertFalse(point.isX());
-    point.setX(10);
-    assertTrue(point.isX());
-    point.y(999).x(0);
-    assertFalse(point.isX());
+    assertFalse(object.isX());
+    object.setX(10);
+    assertTrue(object.isX());
+    object.setY(999).setX(0);
+    assertFalse(object.isX());
   }
 
   public void testJsPropertyHasX() {
-    JsPoint point = (JsPoint) JavaScriptObject.createObject();
+    JsTypeHasProperty object = (JsTypeHasProperty) JavaScriptObject.createObject();
 
-    assertFalse(point.hasX());
-    point.setX(10);
-    assertTrue(point.hasX());
-    point.y(999).x(0);
-    assertTrue(point.hasX());
+    assertFalse(object.hasX());
+    object.setX(10);
+    assertTrue(object.hasX());
+    object.setY(999).setX(0);
+    assertTrue(object.hasX());
   }
 
   public void testJsPropertyGetX() {
-    JsPoint point = (JsPoint) JavaScriptObject.createObject();
+    JsTypeGetProperty object = (JsTypeGetProperty) JavaScriptObject.createObject();
 
-    assertTrue(isUndefined(point.getX()));
-    point.setX(10);
-    assertEquals(10, point.getX());
-    point.y(999).x(0);
-    assertEquals(0, point.getX());
+    assertTrue(isUndefined(object.getX()));
+    object.x(10);
+    assertEquals(10, object.getX());
+    object.y(999).x(0);
+    assertEquals(0, object.getX());
   }
 
   public void testJsPropertyX() {
-    JsPoint point = (JsPoint) JavaScriptObject.createObject();
+    JsTypeRawGetProperty object = (JsTypeRawGetProperty) JavaScriptObject.createObject();
 
-    assertTrue(isUndefined(point.x()));
-    point.setX(10);
-    assertEquals(10, point.x());
-    point.y(999).x(0);
-    assertEquals(0, point.x());
+    assertTrue(isUndefined(object.x()));
+    object.x(10);
+    assertEquals(10, object.x());
+    object.y(999).x(0);
+    assertEquals(0, object.x());
   }
 
   public void testCasts() {

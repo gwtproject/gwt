@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "176248ee_8e0b2d54",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 3527,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-05T17:14:18Z",
+      "side": 1,
+      "message": "Normally we would want that utility code that is shared between different Jjs passes is in JjsUtil.\n\nOTOH this is a mangling function that seems to be specific to GenerateJavaScriptAST. Maybe it is better not to call this funciton and instead use directly   \n\n    referredMethod.getJsniSignature()\n\nand I think it is better to have a name there that IS not a valid Java name (that will avoid conflicts).",
+      "range": {
+        "startLine": 3527,
+        "startChar": 1,
+        "endLine": 3527,
+        "endChar": 90
+      },
+      "revId": "9c4073c1755015c7a3ac97d25a3cece8c939ac1e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

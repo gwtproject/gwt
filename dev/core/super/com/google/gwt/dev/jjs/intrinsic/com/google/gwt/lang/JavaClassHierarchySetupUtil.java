@@ -266,4 +266,11 @@ public class JavaClassHierarchySetupUtil {
   static native JavaScriptObject uniqueId(String id) /*-{
     return jsinterop.closure.getUniqueId(id);
   }-*/;
+
+  public static native JavaScriptObject makeLambdaFunction(JavaScriptObject samMethod,
+      JavaScriptObject instance) /*-{
+    var lambda = function() { return samMethod.apply(lambda, arguments); }
+    lambda.__proto__ = instance;
+    return lambda;
+  }-*/;
 }

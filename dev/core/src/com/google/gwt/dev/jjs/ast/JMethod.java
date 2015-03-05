@@ -114,6 +114,22 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
     return false;
   }
 
+  public boolean isJsFunctionMethod() {
+    return enclosingType != null && enclosingType.isJsFunction();
+  }
+
+  public boolean isOrOverridesJsFunctionMethod() {
+    if (isJsFunctionMethod()) {
+      return true;
+    }
+    for (JMethod overriddenMethod : getOverriddenMethods()) {
+      if (overriddenMethod.isJsFunctionMethod()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public void setJsProperty(boolean jsProperty) {
     this.jsProperty = jsProperty;
   }

@@ -914,6 +914,55 @@ public class JTypeOracle implements Serializable {
     return null;
   }
 
+  /**
+   * Get JsFunction interface in the inheritance chain of <code>type</code>.
+   * (including <code>type</code> itself.)
+   */
+  public JDeclaredType getJsFunction(JType type) {
+    if (!isJsInteropEnabled()) {
+      return null;
+    }
+
+    type = type.getUnderlyingType();
+
+    if (!(type instanceof JDeclaredType)) {
+      return null;
+    }
+
+    JDeclaredType dtype = (JDeclaredType) type;
+    if (isJsFunction(type)) {
+      return dtype;
+    }
+
+    if (dtype.getSuperClass() != null) {
+      JDeclaredType jsFuncFromSuperClass = getJsFunction(dtype.getSuperClass());
+      if (jsFuncFromSuperClass != null) {
+        return jsFuncFromSuperClass;
+      }
+    }
+
+    for (JInterfaceType superIntf : dtype.getImplements()) {
+      JDeclaredType jsFuncFromSuperInterface = getJsFunction(superIntf);
+      if (jsFuncFromSuperInterface != null) {
+        return jsFuncFromSuperInterface;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Get the JsFunction method of <code>type</code>.
+   */
+  public JMethod getJsFunctionMethod(JClassType type) {
+    for (JMethod method : type.getMethods()) {
+      if (isJsFunctionMethod(method)) {
+        return method;
+      }
+    }
+    return (type.getSuperClass() != null) ? getJsFunctionMethod(type.getSuperClass()) : null;
+  }
+
   public JMethod getInstanceMethodBySignature(JClassType type, String signature) {
     return getOrCreateInstanceMethodsBySignatureForType(type).get(signature);
   }
@@ -1084,7 +1133,7 @@ public class JTypeOracle implements Serializable {
   public boolean isInstantiatedType(JReferenceType type) {
     type = type.getUnderlyingType();
     // any type that can be JS or exported to JS is considered instantiated
-    if (isJsType(type) || hasAnyExports(type)) {
+    if (isJsType(type) || hasAnyExports(type) || isJsFunction(type)) {
       return true;
     }
     if (instantiatedTypes == null || instantiatedTypes.contains(type)) {
@@ -1152,6 +1201,17 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
+   * Returns whether the given method may be implicitly called by a instance of a class that
+   * is exported by an @JsFunction annotation.
+   * <p>
+   * A method is a JsFunction method if it is or overrides a SAM function of a @JsFunction annotated
+   * functional interface.
+   */
+  public boolean isJsFunctionMethod(JMethod x) {
+    return isJsInteropEnabled() && x.isOrOverridesJsFunctionMethod();
+  }
+
+  /**
    * Whether the type is a JS interface (does not check supertypes).
    */
   public boolean isJsType(JType type) {
@@ -1167,6 +1227,26 @@ public class JTypeOracle implements Serializable {
     if (isJsInteropEnabled()) {
       JDeclaredType dtype = getNearestJsType(type, mustHavePrototype);
       return dtype != null;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Whether the type is a JsFunction interface.
+   */
+  public boolean isJsFunction(JType type) {
+    return isJsInteropEnabled()
+        && (type instanceof JInterfaceType && ((JInterfaceType) type).isJsFunction());
+  }
+
+  /**
+   * Whether the type or any super types is a JsFunction.
+   */
+  public boolean isOrExtendsJsFunction(JType type) {
+    if (isJsInteropEnabled()) {
+      JDeclaredType jsFunc = getJsFunction(type);
+      return jsFunc != null;
     } else {
       return false;
     }

@@ -3491,26 +3491,6 @@ public class GenerateJavaScriptAST {
     return StringInterner.get().intern(sb.toString());
   }
 
-  /**
-   * Java8 Method References such as String::equalsIgnoreCase should produce inner class names
-   * that are a function of the samInterface (e.g. Runnable), the method being referred to,
-   * and the qualifying disposition (this::foo vs Class::foo if foo is an instance method)
-   */
-  static String classNameForMethodReference(JInterfaceType samInterface, JMethod referredMethod,
-      boolean haveReceiver) {
-    StringBuilder sb = new StringBuilder();
-    sb.append(samInterface.getPackageName());
-    sb.append('.');
-    sb.append(samInterface.getShortName());
-    sb.append("$");
-    if (!haveReceiver) {
-      sb.append("$");
-    }
-    sb.append(getNameString(referredMethod));
-    constructManglingSignature(referredMethod, sb);
-    return StringInterner.get().intern(sb.toString());
-  }
-
   String mangleNameForPoly(JMethod x) {
     assert !x.isPrivate() && !x.isStatic();
     StringBuilder sb = new StringBuilder();
@@ -3544,7 +3524,7 @@ public class GenerateJavaScriptAST {
     return StringInterner.get().intern(sb.toString());
   }
 
-  private static void constructManglingSignature(JMethod x, StringBuilder partialSignature) {
+  public static void constructManglingSignature(JMethod x, StringBuilder partialSignature) {
     partialSignature.append("__");
     for (int i = 0; i < x.getOriginalParamTypes().size(); ++i) {
       JType type = x.getOriginalParamTypes().get(i);

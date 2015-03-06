@@ -119,6 +119,41 @@
     },
     {
       "key": {
+        "uuid": "97dab833_ddebcb7a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-06T19:47:49Z",
+      "side": 1,
+      "message": "discussed offline.",
+      "parentUuid": "57a3e07f_83c19e2a",
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97dab833_bd06ff18",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 3568,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-06T19:47:49Z",
+      "side": 1,
+      "message": "unused?",
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "579cc029_9e7ed995",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 2
@@ -201,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "97dab833_7db717ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-06T19:47:49Z",
+      "side": 1,
+      "message": "Yes, I forgot to put nit; the main idea was to get rid of the assertions.",
+      "parentUuid": "57a3e07f_c3e0f6c4",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 46
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "579cc029_9e87b9a5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 2
@@ -236,6 +295,30 @@
       "side": 1,
       "message": "i was working under the assumption that @JsType on a concrete class had transitive impact.\n\n\nbut after our conversation at the end of today I know that is not the case.\n\n\ni\u0027ll add the extra test case you are requesting",
       "parentUuid": "579cc029_9e87b9a5",
+      "range": {
+        "startLine": 105,
+        "startChar": 11,
+        "endLine": 105,
+        "endChar": 78
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97dab833_fdd8876e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-06T19:47:49Z",
+      "side": 1,
+      "message": "It looks like this is still using isOrExtends.",
+      "parentUuid": "57a3e07f_a3205a20",
       "range": {
         "startLine": 105,
         "startChar": 11,
@@ -318,6 +401,30 @@
       "side": 1,
       "message": "we already have a method.isJsProperty() and method.getJsPropertyType() pair, and i\u0027m being consistent with that pattern for the transitive case.\n\nshould i remove the \"is\" version for both?",
       "parentUuid": "579cc029_5ed4d170",
+      "range": {
+        "startLine": 154,
+        "startChar": 15,
+        "endLine": 154,
+        "endChar": 47
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97dab833_ddf4abd9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-06T19:47:49Z",
+      "side": 1,
+      "message": "No, what I meant is you can just call getImmediateOrTransitiveJsPropertyType and act on the result without calling method.isOrOverridesJsProperty.",
+      "parentUuid": "57a3e07f_8388beec",
       "range": {
         "startLine": 154,
         "startChar": 15,

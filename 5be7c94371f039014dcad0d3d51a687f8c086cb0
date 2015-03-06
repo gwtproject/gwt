@@ -22,6 +22,30 @@
       "revId": "5be7c94371f039014dcad0d3d51a687f8c086cb0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77662438_f4bfd810",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-06T16:24:41Z",
+      "side": 1,
+      "message": "Now I think you are right, I\u0027m wrong, the above case should be an error.\n\nCould you add more tests to better illustrate the possible collisions from super class? (Inherited exported fields/methods \u003c-\u003e local exported fields/methods, and inherited non-exported or local non-exported not a collision.)",
+      "parentUuid": "b7433c80_1e48ad87",
+      "range": {
+        "startLine": 99,
+        "startChar": 14,
+        "endLine": 99,
+        "endChar": 60
+      },
+      "revId": "5be7c94371f039014dcad0d3d51a687f8c086cb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

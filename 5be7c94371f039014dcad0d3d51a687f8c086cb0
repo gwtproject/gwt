@@ -46,6 +46,30 @@
       "revId": "5be7c94371f039014dcad0d3d51a687f8c086cb0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17cfa873_e17e2696",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-06T19:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77662438_f4bfd810",
+      "range": {
+        "startLine": 99,
+        "startChar": 14,
+        "endLine": 99,
+        "endChar": 60
+      },
+      "revId": "5be7c94371f039014dcad0d3d51a687f8c086cb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

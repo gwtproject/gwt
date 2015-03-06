@@ -21,19 +21,20 @@ import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JVisitor;
-import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
-import java.util.Set;
+import java.util.Map;
 
 /**
  * Checks and throws errors for invalid JsInterop constructs.
  */
-// TODO: prevent the existence of more than 1 (x/is/get/has) getter for the same property name.
 // TODO: handle custom JsType field/method names when that feature exists.
-// TODO: prevent regular Java JsType (not JsProperty) method names like ".x()" colliding with raw JS
-// property names like ".x".
+// TODO: move JsInterop checks from JSORestrictionsChecker to here.
+// TODO: check collisions with members in parent JsType classes.
+// TODO: check setter and getter for the same property has compatible types.
 public class JsInteropRestrictionChecker extends JVisitor {
 
   public static void exec(TreeLogger logger, JProgram jprogram,
@@ -46,12 +47,14 @@ public class JsInteropRestrictionChecker extends JVisitor {
     }
   }
 
-  private final Set<String> currentJsTypeMemberNames = Sets.newHashSet();
+  private Map<String, String> currentJsTypeMethodNameByGetterNames;
+  private Map<String, String> currentJsTypeMethodNameByMemberNames;
+  private Map<String, String> currentJsTypeMethodNameBySetterNames;
   private JDeclaredType currentType;
+  private boolean hasErrors;
   private final JProgram jprogram;
   private final TreeLogger logger;
   private final MinimalRebuildCache minimalRebuildCache;
-  private boolean hasErrors;
 
   public JsInteropRestrictionChecker(TreeLogger logger, JProgram jprogram,
       MinimalRebuildCache minimalRebuildCache) {
@@ -64,13 +67,14 @@ public class JsInteropRestrictionChecker extends JVisitor {
   public void endVisit(JDeclaredType x, Context ctx) {
     assert currentType == x;
     currentType = null;
-    currentJsTypeMemberNames.clear();
+    currentJsTypeMethodNameByMemberNames = Maps.newHashMap();
+    currentJsTypeMethodNameByGetterNames = Maps.newHashMap();
+    currentJsTypeMethodNameBySetterNames = Maps.newHashMap();
   }
 
   @Override
   public boolean visit(JDeclaredType x, Context ctx) {
     assert currentType == null;
-    assert currentJsTypeMemberNames.isEmpty();
     minimalRebuildCache.removeJsInteropNames(x.getName());
     currentType = x;
 
@@ -82,7 +86,7 @@ public class JsInteropRestrictionChecker extends JVisitor {
     if (jprogram.typeOracle.isExportedField(x)) {
       checkExportName(x);
     } else if (jprogram.typeOracle.isJsTypeField(x)) {
-      checkJsTypeMemberName(x, x.getJsMemberName());
+      checkJsTypeFieldName(x, x.getJsMemberName());
     }
 
     return false;
@@ -93,17 +97,13 @@ public class JsInteropRestrictionChecker extends JVisitor {
     if (jprogram.typeOracle.isExportedMethod(x)) {
       checkExportName(x);
     } else if (jprogram.typeOracle.isJsTypeMethod(x)) {
-      if (x.isOrOverridesJsProperty()) {
-        // JsProperty methods are mangled and obfuscated and so do not consume an unobfuscated
-        // collidable name slot.
-      } else if (x.isSynthetic()) {
-        // A name slot taken up by a synthetic method, such as a bridge method for a generic method,
-        // is not the fault of the user and so should not be reported as an error. JS generation
-        // should take responsibility for ensuring that only the correct method version (in this
-        // particular set of colliding method names) is exported.
-      } else {
-        checkJsTypeMethod(x);
-      }
+      checkJsTypeMethod(x);
+    }
+
+    if (jprogram.typeOracle.isJsPropertyMethod(x)
+        && !jprogram.typeOracle.isOrExtendsJsType(x.getEnclosingType(), false)) {
+      logError("Method '%s' can't be a JsProperty since enclosing type '%s' is not a JsType.",
+          x.getName(), x.getEnclosingType().getName());
     }
 
     return false;
@@ -118,28 +118,80 @@ public class JsInteropRestrictionChecker extends JVisitor {
     }
   }
 
-  private void checkJsTypeMethod(JMethod x) {
-    String name = x.getJsMemberName();
-    for (JMethod override : x.getOverriddenMethods()) {
-      String overrideName = override.getJsMemberName();
-      if (overrideName == null) {
-        continue;
-      }
-      if (name != null && !name.equals(overrideName)) {
-        logError("'%s' can't be exported because the method overloads multiple methods with "
-            + "different names: %s and %s.", x.getQualifiedName(), name, overrideName);
-      }
-      name = overrideName;
-    }
-    assert name != null;
-    checkJsTypeMemberName(x, name);
-  }
-
-  private void checkJsTypeMemberName(JMember x, String memberName) {
-    boolean success = currentJsTypeMemberNames.add(memberName);
+  private void checkJsTypeFieldName(JField field, String memberName) {
+    boolean success =
+        currentJsTypeMethodNameByMemberNames.put(memberName, field.getQualifiedName()) == null;
     if (!success) {
       logError("'%s' can't be exported because the member name '%s' is already taken.",
-          x.getQualifiedName(), memberName);
+          field.getQualifiedName(), memberName);
+    }
+  }
+
+  private void checkJsTypeMethod(JMethod method) {
+    if (method.isSynthetic()) {
+      // A name slot taken up by a synthetic method, such as a bridge method for a generic method,
+      // is not the fault of the user and so should not be reported as an error. JS generation
+      // should take responsibility for ensuring that only the correct method version (in this
+      // particular set of colliding method names) is exported.
+      return;
+    }
+
+    String jsMemberName = method.getImmediateOrTransitiveJsMemberName();
+    String qualifiedMethodName = method.getQualifiedName();
+    String typeName = method.getEnclosingType().getName();
+
+    if (jsMemberName == null) {
+      logError("'%s' can't be exported because the method overloads multiple methods with "
+          + "different names.", qualifiedMethodName);
+    } else if (method.isOrOverridesJsProperty()) {
+      // If it's a JsProperty.
+      JsPropertyType jsPropertyType = method.getImmediateOrTransitiveJsPropertyType();
+      if (jsPropertyType == JsPropertyType.GET) {
+        // If it's a getter.
+        if (currentJsTypeMethodNameByGetterNames.put(jsMemberName, qualifiedMethodName) != null) {
+          // Don't allow multiple getters for the same property name.
+          logError("There can't be more than one getter for JS property '%s' in type '%s'.",
+              jsMemberName, typeName);
+        }
+        checkNameCollisionForGetterAndRegular(jsMemberName, typeName);
+      } else if (jsPropertyType == JsPropertyType.SET) {
+        // If it's a setter.
+        if (currentJsTypeMethodNameBySetterNames.put(jsMemberName, qualifiedMethodName) != null) {
+          // Don't allow multiple setters for the same property name.
+          logError("There can't be more than one setter for JS property '%s' in type '%s'.",
+              jsMemberName, typeName);
+        }
+        checkNameCollisionForSetterAndRegular(jsMemberName, typeName);
+      }
+    } else {
+      // If it's just an regular JsType method.
+      if (currentJsTypeMethodNameByMemberNames.put(jsMemberName, qualifiedMethodName) != null) {
+        logError("'%s' can't be exported because the member name '%s' is already taken.",
+            qualifiedMethodName, jsMemberName);
+      }
+      checkNameCollisionForGetterAndRegular(jsMemberName, typeName);
+      checkNameCollisionForSetterAndRegular(jsMemberName, typeName);
+    }
+  }
+
+  private void checkNameCollisionForGetterAndRegular(String getterName, String typeName) {
+    if (currentJsTypeMethodNameByGetterNames.containsKey(getterName)
+        && currentJsTypeMethodNameByMemberNames.containsKey(getterName)) {
+      logError(
+          "A JsType method and JsProperty property name can't both be named '%s' in type '%s'.",
+          getterName, typeName);
+      logError("The JsType member '%s' and JsProperty property '%s' name can't both be named "
+          + "'%s' in type '%s'.", currentJsTypeMethodNameByMemberNames.get(getterName),
+          currentJsTypeMethodNameByGetterNames.get(getterName), getterName, typeName);
+    }
+  }
+
+  private void checkNameCollisionForSetterAndRegular(String setterName, String typeName) {
+    if (currentJsTypeMethodNameBySetterNames.containsKey(setterName)
+        && currentJsTypeMethodNameByMemberNames.containsKey(setterName)) {
+      logError("The JsType member '%s' and JsProperty property '%s' name can't both be named "
+          + "'%s' in type '%s'.", currentJsTypeMethodNameByMemberNames.get(setterName),
+          currentJsTypeMethodNameBySetterNames.get(setterName), setterName, typeName);
     }
   }
 

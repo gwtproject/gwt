@@ -63,6 +63,24 @@
       "revId": "bee2e84d4d7b68bcadc8c2cbfe43addeb2b5adc5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7b190f2_976da404",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-06T20:06:32Z",
+      "side": 1,
+      "message": "just to clarify, you\u0027re requesting a TODO: check for name collisions between regular members and accidental-override methods.",
+      "parentUuid": "d7b190f2_97ff64ac",
+      "revId": "bee2e84d4d7b68bcadc8c2cbfe43addeb2b5adc5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

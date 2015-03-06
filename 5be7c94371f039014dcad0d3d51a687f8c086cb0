@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7433c80_1e48ad87",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-06T01:40:28Z",
+      "side": 1,
+      "message": "It should not be error, at least not very obvious.\n\nAnother case, @JsType Parent {public int foo;}\n\n@JsType Child extends Parent {public int foo();}\n\nChild inherits public field \u0027foo\u0027 from Parent, but it is not exported by Child, right? so it is not a collision actually.",
+      "range": {
+        "startLine": 99,
+        "startChar": 14,
+        "endLine": 99,
+        "endChar": 60
+      },
+      "revId": "5be7c94371f039014dcad0d3d51a687f8c086cb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

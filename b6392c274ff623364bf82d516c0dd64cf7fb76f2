@@ -137,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "d7b190f2_77dd70e0",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-07T01:04:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97dab833_ddebcb7a",
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97dab833_bd06ff18",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -148,6 +166,24 @@
       "writtenOn": "2015-03-06T19:47:49Z",
       "side": 1,
       "message": "unused?",
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7b190f2_97a5a485",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 3568,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-07T01:04:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97dab833_bd06ff18",
       "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -260,6 +296,30 @@
     },
     {
       "key": {
+        "uuid": "d7b190f2_b739c8a8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-07T01:04:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97dab833_7db717ef",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 46
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "579cc029_9e87b9a5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 2
@@ -319,6 +379,30 @@
       "side": 1,
       "message": "It looks like this is still using isOrExtends.",
       "parentUuid": "57a3e07f_a3205a20",
+      "range": {
+        "startLine": 105,
+        "startChar": 11,
+        "endLine": 105,
+        "endChar": 78
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7b190f2_973cc499",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-07T01:04:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97dab833_fdd8876e",
       "range": {
         "startLine": 105,
         "startChar": 11,
@@ -425,6 +509,30 @@
       "side": 1,
       "message": "No, what I meant is you can just call getImmediateOrTransitiveJsPropertyType and act on the result without calling method.isOrOverridesJsProperty.",
       "parentUuid": "57a3e07f_8388beec",
+      "range": {
+        "startLine": 154,
+        "startChar": 15,
+        "endLine": 154,
+        "endChar": 47
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7b190f2_d75d5cff",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-07T01:04:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97dab833_ddf4abd9",
       "range": {
         "startLine": 154,
         "startChar": 15,

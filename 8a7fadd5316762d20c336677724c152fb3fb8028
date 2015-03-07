@@ -1,0 +1,398 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b78dfc46_b1f7fadb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "inheritate -\u003e inherit ?",
+      "range": {
+        "startLine": 20,
+        "startChar": 15,
+        "endLine": 20,
+        "endChar": 25
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b78dfc46_d122c6d0",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "My guess is, this will not give an error for following:\n\n@JsFunction\ninterface A {\n  default void a() {..};\n  void b();\n}\n\nI think it should because otherwise if the instance is passed from javascript the default method will fail to execute with current semantics.",
+      "range": {
+        "startLine": 271,
+        "startChar": 12,
+        "endLine": 271,
+        "endChar": 31
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57920067_8b848d0c",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "As we discussed, we could simplify it as following:\n\nif(!typBinding.isFunctionalInterface()) {\n  errorOn(type, ERR_JS_FUNCTION_ONLY_ALLOWED_ON_FUNCTIONAL_INTERFACE);\n}\n// If afunctional interface has more than one method, it means it has default methods\nif(binding.methods().size() \u003e 1) {\n  errorOn(type, ERR_JS_FUNCTION_CANNOT_HAVE_DEFAULT_METHODS);\n}",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 7
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "179b288e_8185ba08",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "The interface shouldn\u0027t be marked with JsType or is it ok? Either way, please add a test for both restriction checker and the expected behavior (if we allow).",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f77cd4f2_283acbff",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "We can call type oracle to get all interfaces for the type and then check if there is more than one JSFunction (instead of traversing ourselves).",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771d81d_051fb25d",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "nit: I think it is better to keep the method next to makeBridgeMethod.",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771d81d_25f2eea0",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "Let\u0027s also add a test with default methods.",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771d81d_656f86ac",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "Can we make fields private static final?",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771d81d_65486637",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/PrunerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "pls remove or complete comment",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771d81d_85e1e2a0",
+        "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "Pls add \u003cp\u003e for new paragraphs.",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 2
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771d81d_e52ff635",
+        "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "What about replacing with following:\n\nHowever there are some additional limitations are imposed to make this practical and efficient:\n\u003cli\u003e A class may not implement more than one @JsFunction type. This restriction allows the compiler to construct a one-to-one mapping to the Javascript function generated and the SAM to be invoked in Java and to preserve referential equality.\n\u003cli\u003e A JsFunction interface cannot extend any other interfaces.\n\u003cli\u003e A JsFunction interface cannot have defender methods.",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 33,
+        "endChar": 85
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771d81d_25fcae42",
+        "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "pls remove extra line",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771d81d_454d2a17",
+        "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "Can we add following as well:\n\nAs a best practice, we recommend marking @JsFunction interfaces also with @FunctionalInterface to get improved checking in IDEs.",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771d81d_45de0a90",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "nit: extra space",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 9
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7770e418_e4337ac4",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "It would be nice if the class name can tell me the different without looking at the implementation. For example, I don\u0027t know the different between MyJsFunctionInterfaceImpl and MyJsFunctionInterfaceSubImpl",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771d81d_250bcea6",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "I cannot see the difference from obj(arg). If there isn\u0027t any we can remove this.",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 7
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771d81d_05d41270",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "There are no tests covering a regular javascript function passed from javascript to java as JsFunction.\n\nAlso we need tests that shows referential integrity in javascript to java direction.",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "179b288e_616bd6ee",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "We probably need tests covering accidental overrides. i.e. Base class has the method; and the subclass implements a JsFunction so inherits the method without re-declaring. This might have been broken so you can comment the tests if it is failing.",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "179b288e_e147e678",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "this is not true :)",
+      "range": {
+        "startLine": 21,
+        "startChar": 50,
+        "endLine": 21,
+        "endChar": 60
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "179b288e_01a88a8c",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionInterfaceSubImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T00:59:39Z",
+      "side": 1,
+      "message": "remove jstype?",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

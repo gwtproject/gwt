@@ -592,6 +592,30 @@
     },
     {
       "key": {
+        "uuid": "17c4087c_f9b7976f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-07T02:51:53Z",
+      "side": 1,
+      "message": "I actually misguided you here. typeName was already fully qualified and looks enough to figure out what the message was saying and find culprits. (for some reason I thought this was the member name and not qualified).\nAnyway sorry about that.\nYou may consider reverting the related change to keep it consistent and make the code slightly simpler by getting rid of maps.\nAnyway I will leave it up to you how to proceed.",
+      "parentUuid": "57a3e07f_8332fea1",
+      "range": {
+        "startLine": 190,
+        "startChar": 22,
+        "endLine": 190,
+        "endChar": 30
+      },
+      "revId": "b6392c274ff623364bf82d516c0dd64cf7fb76f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7def0f5_32f6ee63",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeGetProperty.java",
         "patchSetId": 2

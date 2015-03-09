@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "777f0422_ac41a365",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionJsTypeInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-09T15:36:22Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "11737514e2f13b47a2991d5200f96554cc931f83",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

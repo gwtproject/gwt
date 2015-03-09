@@ -418,6 +418,55 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertCompileFails();
   }
 
+  public void testConsistentPropertyTypeSucceeds() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static interface IBuggy {",
+        "  @JsProperty",
+        "  public int getFoo();",
+        "  @JsProperty",
+        "  public void setFoo(int value);",
+        "}",
+        "public static class Buggy implements IBuggy {",
+        "  public int getFoo() {return 0;}",
+        "  public void setFoo(int value) {}",
+        "}");
+
+    assertCompileSucceeds();
+  }
+
+  public void testInconsistentInterfaceExtensionFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "public static interface IBuggyParent {}",
+        "@JsType",
+        "public static interface IBuggy extends IBuggyParent {}",
+        "public static class Buggy implements IBuggy {}");
+
+    assertCompileFails();
+  }
+
+  public void testInconsistentPropertyTypeFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static interface IBuggy {",
+        "  @JsProperty",
+        "  public int getFoo();",
+        "  @JsProperty",
+        "  public void setFoo(Integer value);",
+        "}",
+        "public static class Buggy implements IBuggy {",
+        "  public int getFoo() {return 0;}",
+        "  public void setFoo(Integer value) {}",
+        "}");
+
+    assertCompileFails();
+  }
+
   public void testJsPropertyInNonJsTypeFails() throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsProperty");
     addSnippetClassDecl(

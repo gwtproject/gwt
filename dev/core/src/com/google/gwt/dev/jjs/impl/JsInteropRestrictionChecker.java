@@ -19,11 +19,16 @@ import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyType;
+import com.google.gwt.dev.jjs.ast.JNullType;
+import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -35,9 +40,7 @@ import java.util.Set;
  */
 // TODO: handle custom JsType field/method names when that feature exists.
 // TODO: move JsInterop checks from JSORestrictionsChecker to here.
-// TODO: check setter and getter for the same property has compatible types.
 // TODO: check for name collisions between regular members and accidental-override methods.
-// TODO: a JsType interface can only extend another JsType interface.
 public class JsInteropRestrictionChecker extends JVisitor {
 
   public static void exec(TreeLogger logger, JProgram jprogram,
@@ -50,10 +53,11 @@ public class JsInteropRestrictionChecker extends JVisitor {
     }
   }
 
-  private Set<JMethod> currentJsTypeProcessedMethods;
   private Map<String, String> currentJsTypeMethodNameByGetterNames;
   private Map<String, String> currentJsTypeMethodNameByMemberNames;
   private Map<String, String> currentJsTypeMethodNameBySetterNames;
+  private Set<JMethod> currentJsTypeProcessedMethods;
+  private Map<String, JType> currentJsTypePropertyTypeByName;
   private JDeclaredType currentType;
   private boolean hasErrors;
   private final JProgram jprogram;
@@ -77,11 +81,16 @@ public class JsInteropRestrictionChecker extends JVisitor {
   public boolean visit(JDeclaredType x, Context ctx) {
     assert currentType == null;
     currentJsTypeProcessedMethods = Sets.newHashSet();
+    currentJsTypePropertyTypeByName = Maps.newHashMap();
     currentJsTypeMethodNameByMemberNames = Maps.newHashMap();
     currentJsTypeMethodNameByGetterNames = Maps.newHashMap();
     currentJsTypeMethodNameBySetterNames = Maps.newHashMap();
     minimalRebuildCache.removeJsInteropNames(x.getName());
     currentType = x;
+
+    if (currentType instanceof JInterfaceType) {
+      checkInterfaceExtends((JInterfaceType) currentType);
+    }
 
     // Perform custom class traversal to examine fields and methods of this class and all
     // superclasses so that name collisions between local and inherited members can be found.
@@ -139,6 +148,34 @@ public class JsInteropRestrictionChecker extends JVisitor {
     }
   }
 
+  private void checkInconsistentPropertyType(String propertyName, String enclosingTypeName,
+      JType parameterType) {
+    if (currentJsTypePropertyTypeByName.containsKey(propertyName)) {
+      // There was a previously recorded type for this property.
+      if (parameterType != currentJsTypePropertyTypeByName.get(propertyName)) {
+        // The previously recorded type does not match the one provided this time.
+        logError(
+            "The JsProperty '%s' in type '%s' must be a consistent type in both getter and setter.",
+            propertyName, enclosingTypeName);
+      }
+    } else {
+      // No previously recorded type exists for this property, so record this one.
+      currentJsTypePropertyTypeByName.put(propertyName, parameterType);
+    }
+  }
+
+  private void checkInterfaceExtends(JInterfaceType interfaceType) {
+    if (jprogram.typeOracle.isJsType(currentType)) {
+      for (JDeclaredType superInterface : interfaceType.getImplements()) {
+        if (!jprogram.typeOracle.isJsType(superInterface)) {
+          logError("The super-interface '%s' is missing the @JsType annotation required to be "
+              + "consistent with its sub-interface '%s'.", superInterface.getName(),
+              interfaceType.getName());
+        }
+      }
+    }
+  }
+
   private void checkJsTypeFieldName(JField field, String memberName) {
     boolean success =
         currentJsTypeMethodNameByMemberNames.put(memberName, field.getQualifiedName()) == null;
@@ -176,6 +213,10 @@ public class JsInteropRestrictionChecker extends JVisitor {
             jsMemberName, typeName);
       }
       checkNameCollisionForGetterAndRegular(jsMemberName, typeName);
+      if (!startsWithCamelCase(method.getName(), "is")) {
+        // Only non-"is" getters make a claim about property type.
+        checkInconsistentPropertyType(jsMemberName, typeName, method.getOriginalReturnType());
+      }
     } else if (jsPropertyType == JsPropertyType.SET) {
       // If it's a setter.
       if (currentJsTypeMethodNameBySetterNames.put(jsMemberName, qualifiedMethodName) != null) {
@@ -184,6 +225,9 @@ public class JsInteropRestrictionChecker extends JVisitor {
             jsMemberName, typeName);
       }
       checkNameCollisionForSetterAndRegular(jsMemberName, typeName);
+      JParameter firstParameter = Iterables.getFirst(method.getParams(), null);
+      checkInconsistentPropertyType(jsMemberName,
+          typeName, firstParameter == null ? JNullType.INSTANCE : firstParameter.getType());
     } else {
       // If it's just an regular JsType method.
       if (currentJsTypeMethodNameByMemberNames.put(jsMemberName, qualifiedMethodName) != null) {
@@ -216,5 +260,10 @@ public class JsInteropRestrictionChecker extends JVisitor {
   private void logError(String format, Object... args) {
     logger.log(TreeLogger.ERROR, String.format(format, args));
     hasErrors = true;
+  }
+
+  private static boolean startsWithCamelCase(String string, String prefix) {
+    return string.length() > prefix.length() && string.startsWith(prefix)
+        && Character.isUpperCase(string.charAt(prefix.length()));
   }
 }

@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "17c4087c_5f30a3eb",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57920067_8b848d0c",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 7
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "179b288e_8185ba08",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
         "patchSetId": 4
@@ -82,6 +106,24 @@
       "writtenOn": "2015-03-07T00:59:39Z",
       "side": 1,
       "message": "The interface shouldn\u0027t be marked with JsType or is it ok? Either way, please add a test for both restriction checker and the expected behavior (if we allow).",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d70b50a7_e7348216",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "It is ok to have both JsFunction and JsType. Tests added.",
+      "parentUuid": "179b288e_8185ba08",
       "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -105,6 +147,24 @@
     },
     {
       "key": {
+        "uuid": "17c4087c_df96f31f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f77cd4f2_283acbff",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9771d81d_051fb25d",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 4
@@ -116,6 +176,24 @@
       "writtenOn": "2015-03-07T00:59:39Z",
       "side": 1,
       "message": "nit: I think it is better to keep the method next to makeBridgeMethod.",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17c4087c_5fa3037f",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9771d81d_051fb25d",
       "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -139,6 +217,24 @@
     },
     {
       "key": {
+        "uuid": "17c4087c_1f2a2b78",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9771d81d_25f2eea0",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9771d81d_656f86ac",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 4
@@ -150,6 +246,24 @@
       "writtenOn": "2015-03-07T00:59:39Z",
       "side": 1,
       "message": "Can we make fields private static final?",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17c4087c_bf9b3f46",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9771d81d_656f86ac",
       "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -173,6 +287,24 @@
     },
     {
       "key": {
+        "uuid": "17c4087c_3fb04fc2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/PrunerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9771d81d_65486637",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9771d81d_85e1e2a0",
         "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
         "patchSetId": 4
@@ -184,6 +316,30 @@
       "writtenOn": "2015-03-07T00:59:39Z",
       "side": 1,
       "message": "Pls add \u003cp\u003e for new paragraphs.",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 2
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17c4087c_df7f1366",
+        "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9771d81d_85e1e2a0",
       "range": {
         "startLine": 27,
         "startChar": 1,
@@ -219,6 +375,30 @@
     },
     {
       "key": {
+        "uuid": "17c4087c_1fad8b66",
+        "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9771d81d_e52ff635",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 33,
+        "endChar": 85
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9771d81d_25fcae42",
         "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
         "patchSetId": 4
@@ -230,6 +410,24 @@
       "writtenOn": "2015-03-07T00:59:39Z",
       "side": 1,
       "message": "pls remove extra line",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17c4087c_ff7ad777",
+        "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9771d81d_25fcae42",
       "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -253,6 +451,24 @@
     },
     {
       "key": {
+        "uuid": "17c4087c_9f799b83",
+        "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9771d81d_454d2a17",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9771d81d_45de0a90",
         "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
         "patchSetId": 4
@@ -264,6 +480,30 @@
       "writtenOn": "2015-03-07T00:59:39Z",
       "side": 1,
       "message": "nit: extra space",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 9
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17c4087c_3f896ff0",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9771d81d_45de0a90",
       "range": {
         "startLine": 44,
         "startChar": 6,
@@ -299,6 +539,30 @@
     },
     {
       "key": {
+        "uuid": "17c4087c_bf69ffa9",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7770e418_e4337ac4",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9771d81d_250bcea6",
         "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
         "patchSetId": 4
@@ -322,6 +586,30 @@
     },
     {
       "key": {
+        "uuid": "17c4087c_df64b3d3",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9771d81d_250bcea6",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 7
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9771d81d_05d41270",
         "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
         "patchSetId": 4
@@ -333,6 +621,24 @@
       "writtenOn": "2015-03-07T00:59:39Z",
       "side": 1,
       "message": "There are no tests covering a regular javascript function passed from javascript to java as JsFunction.\n\nAlso we need tests that shows referential integrity in javascript to java direction.",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d70b50a7_4726aee7",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "I would like to do it in a follow up patch. Current patch is a working version that only supports Java to JavaScript direction.",
+      "parentUuid": "9771d81d_05d41270",
       "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -379,6 +685,30 @@
     },
     {
       "key": {
+        "uuid": "17c4087c_7f8fe7f6",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "179b288e_e147e678",
+      "range": {
+        "startLine": 21,
+        "startChar": 50,
+        "endLine": 21,
+        "endChar": 60
+      },
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "179b288e_01a88a8c",
         "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionInterfaceSubImpl.java",
         "patchSetId": 4
@@ -390,6 +720,24 @@
       "writtenOn": "2015-03-07T00:59:39Z",
       "side": 1,
       "message": "remove jstype?",
+      "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17c4087c_5f8c2300",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionInterfaceSubImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-09T15:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "179b288e_01a88a8c",
       "revId": "8a7fadd5316762d20c336677724c152fb3fb8028",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

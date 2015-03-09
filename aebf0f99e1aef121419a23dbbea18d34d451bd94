@@ -2,6 +2,184 @@
   "comments": [
     {
       "key": {
+        "uuid": "b78fbcac_fee2c153",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-09T21:40:58Z",
+      "side": 1,
+      "message": "this prints the same message for each extra interface. Either print once and return or fix the message to contain more info.\nA good way to contain more info could be something like following:\n\njsFunctions \u003d Collections2.filter(implementedInterface, (x) -\u003e x.isJsFunction());\nif(jsFunction.size() \u003e 1) {\n  logError(\"\u0027%s\u0027 implements more than one JsFunction interfaces: %s\", type.getName(), jsFunctions);\n}",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 9
+      },
+      "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1768889d_59dca361",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/TypeOracleTestingUtils.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-09T21:40:58Z",
+      "side": 1,
+      "message": "I don\u0027t like the idea of using var args as a way to implement \u0027optional\u0027 argument. I think we should have two methods here. I will leave rluble@ to decide how to proceed.\n(BTW, I think we can always run the test with source level 8 at this stage so we can always set to sourceLevel 8)",
+      "range": {
+        "startLine": 99,
+        "startChar": 65,
+        "endLine": 99,
+        "endChar": 92
+      },
+      "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7789c70_362618e7",
+        "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-09T21:40:58Z",
+      "side": 1,
+      "message": "Sorry, the extra \u0027are\u0027 from my suggestion looks grammatically incorrect. I think either \u0027are\u0027 should be removed, or it should be written as \u0027limitation that are imposed\u0027. Can you double check this with John?",
+      "range": {
+        "startLine": 30,
+        "startChar": 49,
+        "endLine": 30,
+        "endChar": 52
+      },
+      "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d740b0d5_e590324f",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-09T21:40:58Z",
+      "side": 1,
+      "message": "Is there any particular reason you did this? It is fine but it is kind of a trade of. I guess this will miss the opportunity to see any bugs that might be caused due to inlining while catching the ones related to code removal (depending on how optimizations are implemented). If that is the case, I would prefer to reduce the test count by merging them. @rluble: WDYT?",
+      "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "576da0b2_33362899",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-09T21:40:58Z",
+      "side": 1,
+      "message": "I\u0027m not sure but it looks like lines goes beyond 100?\n\nAs a fix, as the variables are insignificant in these tests, I would just name all of them shorter; something like impl.",
+      "range": {
+        "startLine": 72,
+        "startChar": 40,
+        "endLine": 72,
+        "endChar": 66
+      },
+      "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "576da0b2_3351c8ec",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-09T21:40:58Z",
+      "side": 1,
+      "message": "_java and _js needs to be lower case per coding guidelines (test\u003cMethodUnderTest\u003e_\u003cstate\u003e)",
+      "range": {
+        "startLine": 87,
+        "startChar": 48,
+        "endLine": 87,
+        "endChar": 52
+      },
+      "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ce81165_e250862e",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-09T21:40:58Z",
+      "side": 1,
+      "message": "Do you mean JsFunction-JsType interation? If it is, can you name it accordingly?",
+      "range": {
+        "startLine": 113,
+        "startChar": 14,
+        "endLine": 113,
+        "endChar": 39
+      },
+      "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ce81165_2291ce4a",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-09T21:40:58Z",
+      "side": 1,
+      "message": "Perhaps MyJsTypeImplementsJsFunction or something else?",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 114,
+        "endChar": 29
+      },
+      "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17b16857_512ab478",
         "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
         "patchSetId": 6
@@ -13,6 +191,29 @@
       "writtenOn": "2015-03-09T18:24:16Z",
       "side": 1,
       "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ce81165_221e6e95",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionAccidentalOverridesParent.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-09T21:40:58Z",
+      "side": 1,
+      "message": "nit: MyJsFunctionAccidentalOverrideParent",
+      "range": {
+        "startLine": 22,
+        "startChar": 12,
+        "endLine": 22,
+        "endChar": 25
+      },
       "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

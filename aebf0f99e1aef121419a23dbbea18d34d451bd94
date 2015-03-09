@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "b726dc9a_a60ae69f",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/TypeOracleTestingUtils.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-09T22:14:46Z",
+      "side": 1,
+      "message": "I agree with goktug, but you would use null to imply default.\n\n  builtTypeOracle(.....) {\n    return buildTypeOracle(.....,SourceLevel.DEFAULT_SOURCE_LEVEL); \n  }\n\n  buildTypeOracle(...., SourceLevel sourceLevel) {\n    ...\n    compilerContext.getOptions().setSourceLevel(sourceLevel);\n    ...\n  }",
+      "parentUuid": "1768889d_59dca361",
+      "range": {
+        "startLine": 99,
+        "startChar": 65,
+        "endLine": 99,
+        "endChar": 92
+      },
+      "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7789c70_362618e7",
         "filename": "user/src/com/google/gwt/core/client/js/JsFunction.java",
         "patchSetId": 6
@@ -82,6 +106,24 @@
       "writtenOn": "2015-03-09T21:40:58Z",
       "side": 1,
       "message": "Is there any particular reason you did this? It is fine but it is kind of a trade of. I guess this will miss the opportunity to see any bugs that might be caused due to inlining while catching the ones related to code removal (depending on how optimizations are implemented). If that is the case, I would prefer to reduce the test count by merging them. @rluble: WDYT?",
+      "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c0529fd_3c169145",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-09T22:14:46Z",
+      "side": 1,
+      "message": "Let\u0027 s keep it this way.",
+      "parentUuid": "d740b0d5_e590324f",
       "revId": "aebf0f99e1aef121419a23dbbea18d34d451bd94",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

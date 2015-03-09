@@ -16,6 +16,7 @@
 package com.google.gwt.core;
 
 import com.google.gwt.core.client.interop.JsExportTest;
+// import com.google.gwt.core.client.interop.JsFunctionTest;
 import com.google.gwt.core.client.interop.JsTypeTest;
 
 import junit.framework.Test;
@@ -30,6 +31,8 @@ public class CoreJsInteropSuite {
 
     suite.addTestSuite(JsTypeTest.class);
     suite.addTestSuite(JsExportTest.class);
+    // JsFunctionTest does not pass on IE10.
+    // suite.addTestSuite(JsFunctionTest.class);
 
     return suite;
   }

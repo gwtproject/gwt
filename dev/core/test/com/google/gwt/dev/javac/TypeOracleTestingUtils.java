@@ -21,6 +21,7 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.resource.Resource;
+import com.google.gwt.dev.util.arg.SourceLevel;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -83,9 +84,9 @@ public class TypeOracleTestingUtils {
   }
 
   public static TypeOracle buildStandardTypeOracleWith(TreeLogger logger,
-      Set<Resource> resources, Set<GeneratedUnit> generatedUnits) {
+      Set<Resource> resources, Set<GeneratedUnit> generatedUnits, SourceLevel... sourceLevel) {
     return buildTypeOracle(logger, standardBuildersPlus(resources),
-        generatedUnits);
+        generatedUnits, sourceLevel);
   }
 
   public static TypeOracle buildTypeOracle(TreeLogger logger,
@@ -95,9 +96,12 @@ public class TypeOracleTestingUtils {
   }
 
   public static TypeOracle buildTypeOracle(TreeLogger logger,
-      Set<Resource> resources, Set<GeneratedUnit> generatedUnits) {
+      Set<Resource> resources, Set<GeneratedUnit> generatedUnits, SourceLevel... sourceLevel) {
     try {
       CompilerContext compilerContext = new CompilerContext();
+      if (sourceLevel.length > 0) {
+        compilerContext.getOptions().setSourceLevel(sourceLevel[0]);
+      }
       compilerContext.getOptions().setStrict(true);
       CompilationState state =
           CompilationStateBuilder.buildFrom(logger, compilerContext, resources);

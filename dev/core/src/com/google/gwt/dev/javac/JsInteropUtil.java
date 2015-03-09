@@ -31,6 +31,7 @@ import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
 public final class JsInteropUtil {
 
   public static final String JSEXPORT_CLASS = "com.google.gwt.core.client.js.JsExport";
+  public static final String JSFUNCTION_CLASS = "com.google.gwt.core.client.js.JsFunction";
   public static final String JSNAMESPACE_CLASS = "com.google.gwt.core.client.js.JsNamespace";
   public static final String JSNOEXPORT_CLASS = "com.google.gwt.core.client.js.JsNoExport";
   public static final String JSPROPERTY_CLASS = "com.google.gwt.core.client.js.JsProperty";
@@ -115,5 +116,9 @@ public final class JsInteropUtil {
   public static String maybeGetJsTypePrototype(TypeDeclaration x) {
     AnnotationBinding jsType = JdtUtil.getAnnotation(x.annotations, JSTYPE_CLASS);
     return JdtUtil.getAnnotationParameterString(jsType, "prototype");
+  }
+
+  public static boolean isJsFunction(TypeDeclaration x) {
+    return JdtUtil.getAnnotation(x.annotations, JSFUNCTION_CLASS) != null;
   }
 }

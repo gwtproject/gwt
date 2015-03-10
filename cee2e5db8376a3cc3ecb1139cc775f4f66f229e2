@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ccf3d9e_b52fe0be",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1188,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "need a space or something at the end of this string before the type",
+      "range": {
+        "startLine": 1188,
+        "startChar": 40,
+        "endLine": 1188,
+        "endChar": 71
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ccf3d9e_f5aaf888",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplicitUpcastAnalyzer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "previously this code would process the first one, and now since this is a set it will process a random one.\n\nare we sure this isn\u0027t going to be a change in behavior?",
+      "range": {
+        "startLine": 113,
+        "startChar": 42,
+        "endLine": 113,
+        "endChar": 62
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cdea55b_0b10bd49",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "doesn\u0027t seem to be used in this patch",
+      "range": {
+        "startLine": 181,
+        "startChar": 24,
+        "endLine": 181,
+        "endChar": 51
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cdea55b_6b3061ea",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "s/createEmptyMethod/createMethodWithSignature",
+      "range": {
+        "startLine": 187,
+        "startChar": 25,
+        "endLine": 187,
+        "endChar": 42
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cdea55b_6ba50183",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "s/type/inType",
+      "range": {
+        "startLine": 188,
+        "startChar": 20,
+        "endLine": 188,
+        "endChar": 24
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cdea55b_4bdfe5fe",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "s/superTypeMethod/exampleSignatureMethod",
+      "range": {
+        "startLine": 188,
+        "startChar": 34,
+        "endLine": 188,
+        "endChar": 49
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c98118f_a2db1eec",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ToStringGenerationVisitor.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "i guess previously the Java source visualizer just didn\u0027t handle this situation?",
+      "range": {
+        "startLine": 662,
+        "startChar": 0,
+        "endLine": 665,
+        "endChar": 7
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ce65129_7254d821",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "\"Pruning dead methods from the override list can only be done accurately in non-incremental compiles because of differences in which types are loaded and thus which methods are considered live.\"",
+      "range": {
+        "startLine": 904,
+        "startChar": 0,
+        "endLine": 905,
+        "endChar": 64
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cc1f16c_9a9f6d30",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1036,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "there\u0027s a change in behavior here.\n\npreviously this for loop would only ever be allowed to operate on methods that could be polymorphic but now it will process all methods.\n\nis this intended?",
+      "range": {
+        "startLine": 1032,
+        "startChar": 0,
+        "endLine": 1036,
+        "endChar": 9
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcef59fd_b018f8a9",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JJSTestBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "i could see this being surprising behavior when writing a test.\n\ni\u0027d ask it to find a method \"getFoo\" and it would return me a method named \"getFooBar\"",
+      "range": {
+        "startLine": 118,
+        "startChar": 6,
+        "endLine": 118,
+        "endChar": 57
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cdea55b_ebe33123",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/PrunerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "this seems like a contradiction.\n\nthe \"fun\" method toString\u0027s itself with a parameter of type test.EntryPoint$A but when you get a reference to the type of that parameter object it\u0027s an instance of JNullType ?",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 91
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cdea55b_2b0db966",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/TypeTightenerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:17:04Z",
+      "side": 1,
+      "message": "these new assertion methods read nicer",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 4
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -117,6 +117,30 @@
     },
     {
       "key": {
+        "uuid": "3c301112_0224cadc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T02:14:33Z",
+      "side": 1,
+      "message": "no i don\u0027t think so. an \"is\" getter is of JsPropertyType.GET so you\u0027d end up throwing an error because \"public boolean isFoo()\" and \"public void setFoo(Object blah)\" don\u0027t operate on the same type",
+      "parentUuid": "7c7a89ab_94aec466",
+      "range": {
+        "startLine": 217,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 66
+      },
+      "revId": "39e56418e4e1f14bb855d74133af48fc6fa39c05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c7a89ab_541fcc13",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1

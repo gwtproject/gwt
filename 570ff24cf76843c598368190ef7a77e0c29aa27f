@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3c301112_22458e73",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Finalizer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-10T02:20:39Z",
+      "side": 1,
+      "message": "Still needed to look at assignments (for sure) and live subclasses (I don\u0027t think we update the subclass info in JTypeOracle)",
+      "parentUuid": "ce380d5f_64a3c43d",
+      "revId": "570ff24cf76843c598368190ef7a77e0c29aa27f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce380d5f_07599a51",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "3c301112_823a9aeb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-10T02:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce380d5f_07599a51",
+      "revId": "570ff24cf76843c598368190ef7a77e0c29aa27f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce380d5f_a7d22e63",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2015-01-10T00:51:43Z",
       "side": 1,
       "message": "comment the significance of first method",
+      "revId": "570ff24cf76843c598368190ef7a77e0c29aa27f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c301112_a2507e2d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1150,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-10T02:20:39Z",
+      "side": 1,
+      "message": "The algorithm changes and is now in ComputeOverridesAndImlementDefaultMethods where I think it is better explained.",
+      "parentUuid": "ce380d5f_a7d22e63",
       "revId": "570ff24cf76843c598368190ef7a77e0c29aa27f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

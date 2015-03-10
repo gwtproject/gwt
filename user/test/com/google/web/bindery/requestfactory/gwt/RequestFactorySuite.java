@@ -49,7 +49,6 @@ public class RequestFactorySuite {
     suite.addTestSuite(RequestBatcherTest.class);
     suite.addTestSuite(BoxesAndPrimitivesTest.class);
     suite.addTestSuite(ComplexKeysTest.class);
-    suite.addTestSuite(EditorTest.class);
     suite.addTestSuite(FanoutReceiverTest.class);
     suite.addTestSuite(FindServiceTest.class);
     suite.addTestSuite(JsonRpcRequestFactoryTest.class);

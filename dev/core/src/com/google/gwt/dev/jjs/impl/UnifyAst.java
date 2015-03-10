@@ -1480,7 +1480,12 @@ public class UnifyAst {
 
   private JDeclaredType findPackageInfo(JDeclaredType type) {
     String pkg = type.getName();
-    pkg = pkg.substring(0, pkg.lastIndexOf('.'));
+    int dotPosition = pkg.lastIndexOf('.');
+    if (dotPosition == -1) {
+      return null;
+    }
+
+    pkg = pkg.substring(0, dotPosition);
     JDeclaredType pkgInfo = internalFindType(StringInterner.get().intern(pkg + ".package-info"),
         binaryNameBasedTypeLocator, false);
     // package-info classes are loaded only for their package level annotations' possible effect on

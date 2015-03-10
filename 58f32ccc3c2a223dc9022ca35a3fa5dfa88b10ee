@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c09f1dd_bac67146",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ImplicitUpcastAnalyzerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T22:26:43Z",
+      "side": 1,
+      "message": "too vague",
+      "range": {
+        "startLine": 30,
+        "startChar": 19,
+        "endLine": 30,
+        "endChar": 55
+      },
+      "revId": "58f32ccc3c2a223dc9022ca35a3fa5dfa88b10ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c09f1dd_7ac5f934",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ImplicitUpcastAnalyzerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T22:26:43Z",
+      "side": 1,
+      "message": "since setUp isn\u0027t doing anything custom i think this redeclaration is redundant",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 3
+      },
+      "revId": "58f32ccc3c2a223dc9022ca35a3fa5dfa88b10ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

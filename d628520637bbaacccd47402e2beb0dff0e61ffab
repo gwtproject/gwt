@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fcb7594a_302a88ae",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-10T23:04:57Z",
+      "side": 1,
+      "message": "The reason for being at the top is that isPackage also does a class path resolution, however that would happen only once as the results are cached (maybe I should unify all the caching logic :)",
+      "parentUuid": "5cdea55b_2bb9395d",
+      "range": {
+        "startLine": 442,
+        "startChar": 1,
+        "endLine": 442,
+        "endChar": 6
+      },
+      "revId": "d628520637bbaacccd47402e2beb0dff0e61ffab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc0b75a7_c73a9efe",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "7cab69f0_ccb9efe1",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-10T23:04:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc0b75a7_c73a9efe",
+      "range": {
+        "startLine": 561,
+        "startChar": 15,
+        "endLine": 561,
+        "endChar": 25
+      },
+      "revId": "d628520637bbaacccd47402e2beb0dff0e61ffab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cdea55b_eb457104",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2015-03-10T19:27:42Z",
       "side": 1,
       "message": "s/classPathByteCodeCache/cachedClassPathAnswerByInternalName",
+      "range": {
+        "startLine": 761,
+        "startChar": 51,
+        "endLine": 761,
+        "endChar": 73
+      },
+      "revId": "d628520637bbaacccd47402e2beb0dff0e61ffab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cab69f0_4cffbf30",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-10T23:04:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cdea55b_eb457104",
       "range": {
         "startLine": 761,
         "startChar": 51,

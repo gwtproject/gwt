@@ -22,6 +22,30 @@
       "revId": "9386a5324dbd203489ec1e702b6447f1b9573fb7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cab69f0_8cafe797",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-10T23:04:57Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "5cdea55b_8bdb8dec",
+      "range": {
+        "startLine": 481,
+        "startChar": 19,
+        "endLine": 481,
+        "endChar": 36
+      },
+      "revId": "9386a5324dbd203489ec1e702b6447f1b9573fb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

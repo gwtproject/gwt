@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c92dd12_bd739fe2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputateOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:13:51Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "79747aaf915e05d289126c98d81c3111be595b4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c92dd12_5d405b63",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputateOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:13:51Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "79747aaf915e05d289126c98d81c3111be595b4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c92dd12_7d451772",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputateOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:13:51Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "79747aaf915e05d289126c98d81c3111be595b4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c92dd12_1d3ad3ed",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:13:51Z",
+      "side": 1,
+      "message": "[error] Redundant import from the java.lang package - java.lang.Object.",
+      "revId": "79747aaf915e05d289126c98d81c3111be595b4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c92dd12_3d3f8fde",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:13:51Z",
+      "side": 1,
+      "message": "[error] Redundant import from the java.lang package - java.lang.Override.",
+      "revId": "79747aaf915e05d289126c98d81c3111be595b4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c92dd12_dd530b39",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:13:51Z",
+      "side": 1,
+      "message": "[error] Redundant import from the java.lang package - java.lang.String.",
+      "revId": "79747aaf915e05d289126c98d81c3111be595b4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c92dd12_fd50472e",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:13:51Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "79747aaf915e05d289126c98d81c3111be595b4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c92dd12_9d4d8399",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:13:51Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "79747aaf915e05d289126c98d81c3111be595b4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c92dd12_bd4abf7c",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:13:51Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "79747aaf915e05d289126c98d81c3111be595b4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

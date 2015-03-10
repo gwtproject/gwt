@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "dcec553e_7fdb2f6a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T21:52:26Z",
+      "side": 1,
+      "message": "no it\u0027s fine, just wanted to double check",
+      "parentUuid": "9cfd7dc2_65d1a649",
+      "range": {
+        "startLine": 181,
+        "startChar": 24,
+        "endLine": 181,
+        "endChar": 51
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cdea55b_6b3061ea",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
         "patchSetId": 7
@@ -178,6 +202,30 @@
       "side": 1,
       "message": "createEmptyMethodFromExample? Is not only the signature (unless by signature you also mean to include visibility)",
       "parentUuid": "5cdea55b_6b3061ea",
+      "range": {
+        "startLine": 187,
+        "startChar": 25,
+        "endLine": 187,
+        "endChar": 42
+      },
+      "revId": "cee2e5db8376a3cc3ecb1139cc775f4f66f229e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcec553e_ffdd7f59",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T21:52:26Z",
+      "side": 1,
+      "message": "yeah \"createEmptyMethodFromExample\" is good",
+      "parentUuid": "9cfd7dc2_e50eb668",
       "range": {
         "startLine": 187,
         "startChar": 25,

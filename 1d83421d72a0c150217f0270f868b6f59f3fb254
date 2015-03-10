@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "bcd4012f_f6456004",
+        "filename": "user/src/com/google/gwt/core/client/impl/SuperDevModeLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T21:11:55Z",
+      "side": 1,
+      "message": "I was thinking the same when this class was first introduced. The one issue here is removal of GWT.log is always bound with dev vs production while logger can be configured orthogonality. This would be an issue if we started from scratch but if I remove it now and somebody disables logging, GWT.log will silently stop working.",
+      "parentUuid": "375f4c29_6afd77ef",
+      "range": {
+        "startLine": 23,
+        "startChar": 13,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "1d83421d72a0c150217f0270f868b6f59f3fb254",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92c566cf_25424ec7",
         "filename": "user/src/com/google/gwt/core/client/impl/SuperDevModeLogger.java",
         "patchSetId": 1
@@ -65,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "1268969d_f9d3b703",
+        "filename": "user/src/com/google/gwt/core/client/impl/SuperDevModeLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T21:11:55Z",
+      "side": 1,
+      "message": "I was following a common pattern in the SDK. Indeed, this is very cheap and I preferred instead of \u003cclinit\u003e that would required to be instrumented to every access.",
+      "parentUuid": "92c566cf_25424ec7",
+      "range": {
+        "startLine": 27,
+        "startChar": 42,
+        "endLine": 27,
+        "endChar": 59
+      },
+      "revId": "1d83421d72a0c150217f0270f868b6f59f3fb254",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92c566cf_45d02a75",
         "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
         "patchSetId": 1
@@ -76,6 +124,30 @@
       "writtenOn": "2015-03-04T20:05:44Z",
       "side": 1,
       "message": "Just thinking, if I did a production compile, I\u0027d probably still want the improved logging?",
+      "range": {
+        "startLine": 81,
+        "startChar": 6,
+        "endLine": 81,
+        "endChar": 56
+      },
+      "revId": "1d83421d72a0c150217f0270f868b6f59f3fb254",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcd4012f_56377491",
+        "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T21:11:55Z",
+      "side": 1,
+      "message": "I think I was playing too safe here. We can probably just bound it to stackMode \u003d\u003d native regardless of SDM.",
+      "parentUuid": "92c566cf_45d02a75",
       "range": {
         "startLine": 81,
         "startChar": 6,
@@ -133,6 +205,30 @@
       "writtenOn": "2015-03-04T20:05:44Z",
       "side": 1,
       "message": "Maybe consider using \"new TextFormatter(false)\" to format the message?\n\nJust thinking if people are logging via j.u.logging, that would make their output more like canonical/expected j.u.logging output.",
+      "range": {
+        "startLine": 22,
+        "startChar": 23,
+        "endLine": 22,
+        "endChar": 42
+      },
+      "revId": "1d83421d72a0c150217f0270f868b6f59f3fb254",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c7a2534_8b392dfb",
+        "filename": "user/src/com/google/gwt/logging/impl/SimpleConsoleLogHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T21:11:55Z",
+      "side": 1,
+      "message": "I looked at that before. There are two issues:\n\n- TextLogFormatter is from client package that we don\u0027t want the core of SDK to depend on.\n- TextLogFormatter (per java logging contract) merges the exception with message that breaks console\u0027s detection of stack traces.",
+      "parentUuid": "92c566cf_8500626a",
       "range": {
         "startLine": 22,
         "startChar": 23,

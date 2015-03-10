@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cdea55b_2bb9395d",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:27:42Z",
+      "side": 1,
+      "message": "i think it\u0027s extremely unlikely to matter, but i think there\u0027s a small chance that putting this class path specific cache checking logic up here at the front could change resolution behavior (in very unusual circumstances).\n\nit would be safest to do this cache check down a couple of lines right before or as a wrapper around the findTypeInClassPath() call",
+      "range": {
+        "startLine": 442,
+        "startChar": 1,
+        "endLine": 442,
+        "endChar": 6
+      },
+      "revId": "d628520637bbaacccd47402e2beb0dff0e61ffab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc0b75a7_c73a9efe",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:27:42Z",
+      "side": 1,
+      "message": "misspelled synthetic (i know you\u0027re just moving this code)",
+      "range": {
+        "startLine": 561,
+        "startChar": 15,
+        "endLine": 561,
+        "endChar": 25
+      },
+      "revId": "d628520637bbaacccd47402e2beb0dff0e61ffab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cdea55b_eb457104",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-10T19:27:42Z",
+      "side": 1,
+      "message": "s/classPathByteCodeCache/cachedClassPathAnswerByInternalName",
+      "range": {
+        "startLine": 761,
+        "startChar": 51,
+        "endLine": 761,
+        "endChar": 73
+      },
+      "revId": "d628520637bbaacccd47402e2beb0dff0e61ffab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

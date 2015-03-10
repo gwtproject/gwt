@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cd50dcf_f15388ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T01:48:10Z",
+      "side": 1,
+      "message": "nit: earlier we used \u0027JS property\u0027 and JsProperty. It would be good to be consistent in all.\n\nnit: I\u0027m not sure but perhaps following reads better:\nThe setter and getter for property \u0027%s\u0027 in type \u0027%s\u0027 must have consistent types.",
+      "range": {
+        "startLine": 158,
+        "startChar": 17,
+        "endLine": 158,
+        "endChar": 27
+      },
+      "revId": "39e56418e4e1f14bb855d74133af48fc6fa39c05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc5e125_8e0c5b6c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T01:48:10Z",
+      "side": 1,
+      "message": "nit: maybe re-write as:\n\n JType recordedType \u003d currentJsTypePropertyTypeByName.put(propertyName, parameterType);\n\n if ( recordedType !\u003d null \u0026\u0026 recordedType !\u003d parameterType) {\n   logError(\"The JsProperty \u0027%s\u0027 in type \u0027%s\u0027 must be a consistent type in both getter and setter.\",\n            propertyName, enclosingTypeName);\n }",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 5
+      },
+      "revId": "39e56418e4e1f14bb855d74133af48fc6fa39c05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c92dd12_bde71fb1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T01:48:10Z",
+      "side": 1,
+      "message": "checkJsTypeHierarchy?",
+      "range": {
+        "startLine": 167,
+        "startChar": 15,
+        "endLine": 167,
+        "endChar": 36
+      },
+      "revId": "39e56418e4e1f14bb855d74133af48fc6fa39c05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c87cdd2_a1ea9e79",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T01:48:10Z",
+      "side": 1,
+      "message": "When we say \u0027missing\u0027, someone not much informed might get this as a suggestion for adding a missing @JsType annotation to parent which is not always a good solution, perhaps it shouldn\u0027t extend it in the first place. Let\u0027s re-word this as:\n\n\"JsType interface %s cannot extend \u0027$s\u0027 which is not a JsType interface.\"",
+      "range": {
+        "startLine": 171,
+        "startChar": 19,
+        "endLine": 172,
+        "endChar": 57
+      },
+      "revId": "39e56418e4e1f14bb855d74133af48fc6fa39c05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c7a89ab_94aec466",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T01:48:10Z",
+      "side": 1,
+      "message": "Do we need to special case for this? We can still go through same code path even it is a \u0027is\u0027 getter.",
+      "range": {
+        "startLine": 217,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 66
+      },
+      "revId": "39e56418e4e1f14bb855d74133af48fc6fa39c05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c7a89ab_541fcc13",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T01:48:10Z",
+      "side": 1,
+      "message": "By definition a setter has a parameter (that is how set detect setters). So there should always be a parameter so null in getFirst seems unnecessary.",
+      "range": {
+        "startLine": 228,
+        "startChar": 71,
+        "endLine": 228,
+        "endChar": 77
+      },
+      "revId": "39e56418e4e1f14bb855d74133af48fc6fa39c05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cbeed90_693b2503",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T01:48:10Z",
+      "side": 1,
+      "message": "testJsTypeInterfaceExtendsNonJsTypeFails",
+      "range": {
+        "startLine": 440,
+        "startChar": 18,
+        "endLine": 440,
+        "endChar": 39
+      },
+      "revId": "39e56418e4e1f14bb855d74133af48fc6fa39c05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cbeed90_69456572",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T01:48:10Z",
+      "side": 1,
+      "message": "This should fail regardless of being implemented by a concrete type so I think it is better to remove the concrete type for more precise testing.",
+      "revId": "39e56418e4e1f14bb855d74133af48fc6fa39c05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ca9fd60_05c7f293",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T01:48:10Z",
+      "side": 1,
+      "message": "Perhaps the new check started making other tests to fail due to different reasons than the original intended reason and if that happened, we are not seeing it.\nI know we already discussed this and we don\u0027t need to do it in this patch but we really to move towards more specific assertions. Otherwise we can easily miss the regressions introduced by the new patches.",
+      "revId": "39e56418e4e1f14bb855d74133af48fc6fa39c05",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

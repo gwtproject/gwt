@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc69b5e5_b773c8e2",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:19:54Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "d81d148b49bbaadcd7ab3955b5e3b3a7a78f0a3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc69b5e5_57402c63",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:19:54Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "d81d148b49bbaadcd7ab3955b5e3b3a7a78f0a3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc69b5e5_77453072",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T00:19:54Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "d81d148b49bbaadcd7ab3955b5e3b3a7a78f0a3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

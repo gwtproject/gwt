@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "3c09f1dd_3a03813e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-10T22:34:03Z",
+      "side": 1,
+      "message": "nit:tightened",
+      "range": {
+        "startLine": 14,
+        "startChar": 52,
+        "endLine": 14,
+        "endChar": 62
+      },
+      "revId": "58f32ccc3c2a223dc9022ca35a3fa5dfa88b10ee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c09f1dd_bac67146",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ImplicitUpcastAnalyzerTest.java",
         "patchSetId": 1

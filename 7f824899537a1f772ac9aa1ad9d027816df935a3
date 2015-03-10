@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5cdea55b_8b482d3b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-10T21:11:11Z",
+      "side": 0,
+      "message": "Yes, they were an eyesore.",
+      "parentUuid": "9ccf3d9e_55ce4cad",
+      "range": {
+        "startLine": 1470,
+        "startChar": 15,
+        "endLine": 1470,
+        "endChar": 37
+      },
+      "revId": "7f824899537a1f772ac9aa1ad9d027816df935a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ccf3d9e_d5137c8c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2015-03-10T19:17:04Z",
       "side": 0,
       "message": "there\u0027s one other reference to this string that should probably be removed as well",
+      "range": {
+        "startLine": 152,
+        "startChar": 41,
+        "endLine": 152,
+        "endChar": 61
+      },
+      "revId": "7f824899537a1f772ac9aa1ad9d027816df935a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cdea55b_4b3b659f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-10T21:11:11Z",
+      "side": 0,
+      "message": "didnt notice. done.",
+      "parentUuid": "9ccf3d9e_d5137c8c",
       "range": {
         "startLine": 152,
         "startChar": 41,

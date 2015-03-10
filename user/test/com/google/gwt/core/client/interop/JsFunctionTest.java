@@ -120,6 +120,42 @@ public class JsFunctionTest extends GWTTestCase {
     JsTypeTest.assertJsTypeDoesntHaveFields(intf, "publicField");
   }
 
+  public void testJsFunctionCallSAMWithoutInstance() {
+    MyJsFunctionInterfaceImpl impl = new MyJsFunctionInterfaceImpl();
+    assertEquals(16, impl.bar(10));
+  }
+
+  public void testJsFunctionJS2Java() {
+    MyJsFunctionInterface intf = createMyFunction();
+    assertEquals(10, intf.foo(10));
+  }
+
+  public void testJsFunctionSuccessiveCalls() {
+    assertEquals(12, new MyJsFunctionInterface() {
+      @Override
+      public int foo(int a) {
+        return a + 2;
+      }
+    }.foo(10));
+    assertEquals(10, createMyFunction().foo(10));
+  }
+
+  public void testJsFunctionAsArgument() {
+    MyClassAcceptsJsFunction c = new MyClassAcceptsJsFunction();
+    assertEquals(10, c.callBackByArg(createMyFunction(), 10));
+  }
+
+  public void testJsFunctionAsField() {
+    MyClassAcceptsJsFunction c = new MyClassAcceptsJsFunction(createMyFunction());
+    assertEquals(20, c.callBackByField(20));
+    assertEquals(30, c.callBackByGetter(30));
+  }
+
+  public void testJsFunctionReferentialIntegrity() {
+    MyJsFunctionIdentityInterface intf = createReferentialFunction();
+    assertEquals(intf, intf.identity());
+  }
+
   // uncomment when Java8 is supported.
 //  public void testJsFunctionLambda_JS() {
 //    MyJsFunctionInterface jsFunctionInterface = a -> { return a + 2; };
@@ -130,6 +166,14 @@ public class JsFunctionTest extends GWTTestCase {
 //  public void testJsFunctionLambda_Java() {
 //    MyJsFunctionInterface jsFunctionInterface = a -> { return a + 2; };
 //    assertEquals(12, jsFunctionInterface.foo(10));
+//  }
+//
+//  public void testJsFunctionDefaultMethod() {
+//    MyJsFunctionSubInterfaceWithDefaultMethod impl =
+//        new MyJsFunctionSubInterfaceWithDefaultMethod() {
+//        };
+//    assertEquals(10, impl.foo(10));
+//    assertEquals(10, callAsFunction(impl, 10));
 //  }
 
   // uncomment when accidental overrides are correctly computed.
@@ -160,5 +204,15 @@ public class JsFunctionTest extends GWTTestCase {
 
   private static native int callIntFunction(Object object, String functionName) /*-{
     return object[functionName]();
+  }-*/;
+
+  private static native MyJsFunctionInterface createMyFunction() /*-{
+    var myFunction = function(a) { return a; };
+    return myFunction;
+  }-*/;
+
+  private static native MyJsFunctionIdentityInterface createReferentialFunction() /*-{
+    function myFunction() { return myFunction; }
+    return myFunction;
   }-*/;
 }

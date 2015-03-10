@@ -118,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "7c7fe921_2cd8536b",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-10T21:06:03Z",
+      "side": 1,
+      "message": "SGTM. If that is the case perhaps you might consider doing it like following if you want to make it closer to common pattern:\n\n  c.setCallBack(createMyFunction());\n  assertEquals(.., c.triggerCallback());\n\nalso you can probably call it testJsFunctionCallbackPattern.\nAnyway this is just a nit, feel free to go either way.",
+      "parentUuid": "1c37cd6c_e1bca604",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 3
+      },
+      "revId": "defaa9908c001bb547167fa904d5c97d6b69866c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cdea55b_cbaf5597",
         "filename": "user/test/com/google/gwt/core/client/interop/MyJsFunctionInterfaceImpl.java",
         "patchSetId": 1

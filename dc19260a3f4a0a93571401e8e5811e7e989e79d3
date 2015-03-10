@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c6b0531_43b526e3",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T17:56:41Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "dc19260a3f4a0a93571401e8e5811e7e989e79d3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6b0531_63ba22d6",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T17:56:41Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "dc19260a3f4a0a93571401e8e5811e7e989e79d3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6b0531_839e3e62",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T17:56:41Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "dc19260a3f4a0a93571401e8e5811e7e989e79d3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6b0531_a39b3a71",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-10T17:56:41Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "dc19260a3f4a0a93571401e8e5811e7e989e79d3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

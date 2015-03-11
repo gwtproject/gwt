@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e02c18e_c67bc25d",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/PathPrefixSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-11T03:36:56Z",
+      "side": 1,
+      "message": "It was a debugging code that I missed. Reverted.",
+      "parentUuid": "2e4c498a_e4b2ba05",
+      "range": {
+        "startLine": 211,
+        "startChar": 34,
+        "endLine": 211,
+        "endChar": 41
+      },
+      "revId": "d397ac811b8da3bf091eb9dcd41ce3f84c146a16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4c498a_e49f5a3a",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "bc8fa1ac_be6d9989",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-11T03:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4c498a_e49f5a3a",
+      "range": {
+        "startLine": 44,
+        "startChar": 31,
+        "endLine": 44,
+        "endChar": 42
+      },
+      "revId": "d397ac811b8da3bf091eb9dcd41ce3f84c146a16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4c498a_44d86e35",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2015-01-06T19:44:37Z",
       "side": 1,
       "message": "shouldn\u0027t this function be synchronized?",
+      "range": {
+        "startLine": 57,
+        "startChar": 51,
+        "endLine": 57,
+        "endChar": 63
+      },
+      "revId": "d397ac811b8da3bf091eb9dcd41ce3f84c146a16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc53d9fa_50380ca1",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-11T03:36:56Z",
+      "side": 1,
+      "message": "I took a look at this.\n\nMaking this class thread-safe is more involved than that and costlier as it returns a map. The only caller is DirectoryClassPathEntry#findAppplicableResources which I can mark as synchronized to make it safe.\n\nIs there any other source of threads that could require this to be thread-safe (other than the SDM thread that we removed earlier)?",
+      "parentUuid": "2e4c498a_44d86e35",
       "range": {
         "startLine": 57,
         "startChar": 51,
@@ -117,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "bc8fa1ac_de53456b",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-11T03:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4c498a_24a0d2a8",
+      "range": {
+        "startLine": 67,
+        "startChar": 61,
+        "endLine": 67,
+        "endChar": 63
+      },
+      "revId": "d397ac811b8da3bf091eb9dcd41ce3f84c146a16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4c498a_c438debf",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
         "patchSetId": 2
@@ -128,6 +224,30 @@
       "writtenOn": "2015-01-06T19:44:37Z",
       "side": 1,
       "message": "you\u0027re mixing public and private methods, i think you need to sort",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 9
+      },
+      "revId": "d397ac811b8da3bf091eb9dcd41ce3f84c146a16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e02c18e_86deeae6",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-11T03:36:56Z",
+      "side": 1,
+      "message": "We discussed this offline recently. They are grouped next to their callees for easier read (instead of jumping up and down in the class) but probably keeping to public API together here will help so moving shutdown next to the other public API.",
+      "parentUuid": "2e4c498a_c438debf",
       "range": {
         "startLine": 81,
         "startChar": 2,
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "6e02c18e_e6959ece",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-11T03:36:56Z",
+      "side": 1,
+      "message": "Actually I came across this a lot esp. JRE but I\u0027m fine both ways; converting.",
+      "parentUuid": "2e4c498a_64280a75",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 14
+      },
+      "revId": "d397ac811b8da3bf091eb9dcd41ce3f84c146a16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4c498a_a4e722e6",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
         "patchSetId": 2
@@ -174,6 +318,30 @@
       "writtenOn": "2015-01-06T19:44:37Z",
       "side": 1,
       "message": "this basically serves as a logging warning? might be better to pass in a TreeLogger instance and do it that way, just for consistency",
+      "range": {
+        "startLine": 114,
+        "startChar": 6,
+        "endLine": 114,
+        "endChar": 26
+      },
+      "revId": "d397ac811b8da3bf091eb9dcd41ce3f84c146a16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc53d9fa_b0f8584f",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-11T03:36:56Z",
+      "side": 1,
+      "message": "Now thrown so will be logged properly.",
+      "parentUuid": "2e4c498a_a4e722e6",
       "range": {
         "startLine": 114,
         "startChar": 6,
@@ -209,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "dc61b5bc_f7e2e01c",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-11T03:36:56Z",
+      "side": 1,
+      "message": "Actually this should never be null as the life of the class is bound by the PathPrefixSet. Added an assertion with the explanation below.",
+      "parentUuid": "2e4c498a_a44ba226",
+      "range": {
+        "startLine": 157,
+        "startChar": 44,
+        "endLine": 157,
+        "endChar": 99
+      },
+      "revId": "d397ac811b8da3bf091eb9dcd41ce3f84c146a16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4c498a_c4545e97",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulatorManager.java",
         "patchSetId": 2
@@ -232,6 +424,30 @@
     },
     {
       "key": {
+        "uuid": "fc53d9fa_1013e40b",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulatorManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-11T03:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4c498a_c4545e97",
+      "range": {
+        "startLine": 32,
+        "startChar": 70,
+        "endLine": 32,
+        "endChar": 89
+      },
+      "revId": "d397ac811b8da3bf091eb9dcd41ce3f84c146a16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4c498a_671b6c9c",
         "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ChangedFileAccumulatorTest.java",
         "patchSetId": 2
@@ -243,6 +459,30 @@
       "writtenOn": "2015-01-06T19:44:37Z",
       "side": 1,
       "message": "R",
+      "range": {
+        "startLine": 29,
+        "startChar": 13,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "d397ac811b8da3bf091eb9dcd41ce3f84c146a16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc53d9fa_505e4cc2",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ChangedFileAccumulatorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-11T03:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4c498a_671b6c9c",
       "range": {
         "startLine": 29,
         "startChar": 13,

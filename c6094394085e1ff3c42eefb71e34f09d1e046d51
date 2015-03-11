@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a13e9aea_fd0b4750",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cfd7dc2_c5c17a80",
+      "range": {
+        "startLine": 387,
+        "startChar": 42,
+        "endLine": 387,
+        "endChar": 57
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cbf8532_a3359a0f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -36,6 +60,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "please also mention that it builds the overriding/overridden method lists inside the JMethod instances",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 43,
+        "endChar": 24
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21870ad3_21fe8e81",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cbf8532_a3359a0f",
       "range": {
         "startLine": 42,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "2139cad0_71cc5838",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cbf8532_637722d1",
+      "range": {
+        "startLine": 55,
+        "startChar": 28,
+        "endLine": 55,
+        "endChar": 48
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cbf8532_e3b4b2e9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -82,6 +154,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "somewhere else you called them forwarding methods.\n\nalso, i\u0027d just make this a class field and avoid passing it around as a parameter",
+      "range": {
+        "startLine": 58,
+        "startChar": 18,
+        "endLine": 58,
+        "endChar": 36
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2139cad0_11dbccec",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cbf8532_e3b4b2e9",
       "range": {
         "startLine": 58,
         "startChar": 18,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "2139cad0_d10e64e3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c7c9156_02dc6ae2",
+      "range": {
+        "startLine": 102,
+        "startChar": 7,
+        "endLine": 102,
+        "endChar": 61
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c7c9156_620d3666",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -128,6 +248,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "this is not how you spell overridden. please search and replace this across the CL",
+      "range": {
+        "startLine": 106,
+        "startChar": 16,
+        "endLine": 106,
+        "endChar": 24
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0167660f_d86b0def",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done. You\u0027d be surprised how may occurrences of this there are, including quite a few in JDT.",
+      "parentUuid": "3c7c9156_620d3666",
       "range": {
         "startLine": 106,
         "startChar": 16,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "0167660f_f8513132",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "thanks.",
+      "parentUuid": "01592645_a82a5b78",
+      "range": {
+        "startLine": 109,
+        "startChar": 15,
+        "endLine": 109,
+        "endChar": 43
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c7fcd4d_c1960245",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -174,6 +342,24 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "why is there a blank line",
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0167660f_d89d4d67",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c7fcd4d_c1960245",
       "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -214,6 +400,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "what is this blank line for?",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 0
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01b5a6ab_c8a32f80",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c7c9156_422d9292",
       "range": {
         "startLine": 182,
         "startChar": 0,
@@ -272,6 +482,54 @@
     },
     {
       "key": {
+        "uuid": "a13e9aea_5de4fb29",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc8fa1ac_3edfc9ff",
+      "range": {
+        "startLine": 196,
+        "startChar": 2,
+        "endLine": 196,
+        "endChar": 9
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a13e9aea_7d18d7a7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc8fa1ac_feec81c3",
+      "range": {
+        "startLine": 196,
+        "startChar": 17,
+        "endLine": 196,
+        "endChar": 37
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc8fa1ac_5eaf3563",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -283,6 +541,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "that\u0027s not how you spell synthetic",
+      "range": {
+        "startLine": 227,
+        "startChar": 26,
+        "endLine": 227,
+        "endChar": 34
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1ae2e65_06dffa51",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc8fa1ac_5eaf3563",
       "range": {
         "startLine": 227,
         "startChar": 26,
@@ -318,6 +600,30 @@
     },
     {
       "key": {
+        "uuid": "81cfd646_8c80e7f7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc8fa1ac_fe76418e",
+      "range": {
+        "startLine": 228,
+        "startChar": 34,
+        "endLine": 228,
+        "endChar": 56
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc61b5bc_57a9cc8d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -329,6 +635,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "\" and it will be the only one.\"",
+      "range": {
+        "startLine": 230,
+        "startChar": 60,
+        "endLine": 230,
+        "endChar": 61
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81a8b65c_e4f5fad2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc61b5bc_57a9cc8d",
       "range": {
         "startLine": 230,
         "startChar": 60,
@@ -381,6 +711,24 @@
     },
     {
       "key": {
+        "uuid": "c1ae2e65_460e526a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc61b5bc_b7e86801",
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc61b5bc_77efb002",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -398,6 +746,24 @@
     },
     {
       "key": {
+        "uuid": "c1ae2e65_261d5697",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc61b5bc_77efb002",
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2139cad0_11d50ce8",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -409,6 +775,30 @@
       "writtenOn": "2015-03-11T16:53:26Z",
       "side": 1,
       "message": "complete or remove?",
+      "range": {
+        "startLine": 294,
+        "startChar": 36,
+        "endLine": 294,
+        "endChar": 38
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61a3c280_03312e20",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2139cad0_11d50ce8",
       "range": {
         "startLine": 294,
         "startChar": 36,
@@ -444,6 +834,30 @@
     },
     {
       "key": {
+        "uuid": "61a3c280_635d8250",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "collectMostSpecificInterfaceMethodsBySignature?",
+      "parentUuid": "dc61b5bc_b73a28fd",
+      "range": {
+        "startLine": 301,
+        "startChar": 36,
+        "endLine": 301,
+        "endChar": 79
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc88d5a6_df397bfa",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -455,6 +869,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "why the blank line?\n\nalso, i think you can make this method static",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 0
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81a8b65c_645d8a50",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Can\u0027t be static as it calls collectAllSuperInterfaceMethodsBySignature which in turn need to access one of the maps in the class.",
+      "parentUuid": "dc88d5a6_df397bfa",
       "range": {
         "startLine": 303,
         "startChar": 0,
@@ -490,6 +928,30 @@
     },
     {
       "key": {
+        "uuid": "81a8b65c_44416e67",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Good catch.",
+      "parentUuid": "4184fecb_02f6eade",
+      "range": {
+        "startLine": 338,
+        "startChar": 12,
+        "endLine": 338,
+        "endChar": 37
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4184fecb_c2d6c240",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -501,6 +963,30 @@
       "writtenOn": "2015-03-11T16:53:26Z",
       "side": 1,
       "message": "This method is only used in collectAllSuperInterfaceMethodsBySignature, and there only super interfaces are needed. Why not just return the super interfaces only and the check (if !(superType instanceof JInterfaceType)) in collectAllSuperInterfaceMethodsBySignature can be removed .",
+      "range": {
+        "startLine": 345,
+        "startChar": 34,
+        "endLine": 345,
+        "endChar": 55
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "013a06f6_c0549e25",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "I think you caught a bug. The caller actually needs the transitive superinterfaces. I\u0027ll add a test case to verify and fix if necessary.",
+      "parentUuid": "4184fecb_c2d6c240",
       "range": {
         "startLine": 345,
         "startChar": 34,
@@ -536,6 +1022,30 @@
     },
     {
       "key": {
+        "uuid": "013a06f6_20af4a99",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Yes. there is (the function used to return a fluentIterable but now it is only an iterable).",
+      "parentUuid": "7c728992_b413008d",
+      "range": {
+        "startLine": 347,
+        "startChar": 6,
+        "endLine": 347,
+        "endChar": 73
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c728992_540d4c65",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -547,6 +1057,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "formatting",
+      "range": {
+        "startLine": 349,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 38
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a13e9aea_1dea73f7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Can you clarify? I don\u0027t see anything wrong with the formatting.",
+      "parentUuid": "7c728992_540d4c65",
       "range": {
         "startLine": 349,
         "startChar": 0,
@@ -582,6 +1116,30 @@
     },
     {
       "key": {
+        "uuid": "a13e9aea_5d407b61",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ToStringGenerationVisitor.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cfd7dc2_05ef9203",
+      "range": {
+        "startLine": 660,
+        "startChar": 8,
+        "endLine": 660,
+        "endChar": 49
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c37cd6c_410a3250",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 16
@@ -593,6 +1151,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "i don\u0027t know the TypeTightener very well but aren\u0027t there times when a target method is also the single most concrete version of that method?",
+      "range": {
+        "startLine": 632,
+        "startChar": 6,
+        "endLine": 632,
+        "endChar": 38
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41307e12_e22726b1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Semantically you are right. \nI added the assertion to document the fact that the code that immediately follows was r assuming that target !\u003d concreteMethod (otherwise the tightener loop would never end).\n\nRenamed getSingleConcreateMethod a more appropriate getSingleConcreteMethodOverride",
+      "parentUuid": "1c37cd6c_410a3250",
       "range": {
         "startLine": 632,
         "startChar": 6,
@@ -628,6 +1210,30 @@
     },
     {
       "key": {
+        "uuid": "814d16b1_bcf8a1ca",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c68ad9d_3900cf2e",
+      "range": {
+        "startLine": 843,
+        "startChar": 18,
+        "endLine": 843,
+        "endChar": 35
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc67f59d_67de72dc",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 16
@@ -639,6 +1245,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "pruned",
+      "range": {
+        "startLine": 846,
+        "startChar": 7,
+        "endLine": 846,
+        "endChar": 14
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "814d16b1_1c13958f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done here. I\u0027ll make a separate cl to fix this type globally.",
+      "parentUuid": "dc67f59d_67de72dc",
       "range": {
         "startLine": 846,
         "startChar": 7,
@@ -674,6 +1304,30 @@
     },
     {
       "key": {
+        "uuid": "814d16b1_9c6845f4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c728992_9458c464",
+      "range": {
+        "startLine": 979,
+        "startChar": 2,
+        "endLine": 979,
+        "endChar": 50
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c728992_1454b420",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 16
@@ -685,6 +1339,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "this is already done 8 lines previous",
+      "range": {
+        "startLine": 1283,
+        "startChar": 4,
+        "endLine": 1285,
+        "endChar": 5
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "814d16b1_bc542124",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c728992_1454b420",
       "range": {
         "startLine": 1283,
         "startChar": 4,
@@ -720,6 +1398,30 @@
     },
     {
       "key": {
+        "uuid": "814d16b1_fc4ea991",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 1401,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "In this one the recompile when the file\u0027s contents did not change would create a different output before this patch.\n\nI looked at the output code when I wrote the test and I don\u0027 t remember whether the resulting program would actually run or error due not finding a method.",
+      "parentUuid": "7c728992_941e0416",
+      "range": {
+        "startLine": 1401,
+        "startChar": 43,
+        "endLine": 1401,
+        "endChar": 60
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cfc49c5_a4c68294",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzerTest.java",
         "patchSetId": 16
@@ -731,6 +1433,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "i don\u0027t see any dispatches to getFoo() and it\u0027s not an exported method. what is keeping it alive?",
+      "range": {
+        "startLine": 223,
+        "startChar": 56,
+        "endLine": 223,
+        "endChar": 75
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "814d16b1_9c04c515",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzerTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Well they are in the snippet \"VirtualUpRef.create().getFoo()\" \n\nNote that this is before devirtualizing.\n\nThat snippent used to dispatch to NonImplementor.getFoo() and now dipatches to VirtualUpRef.getFoo which is one of the new stubs that forwards to NonImplementor.getFoo() making it also live.",
+      "parentUuid": "7cfc49c5_a4c68294",
       "range": {
         "startLine": 223,
         "startChar": 56,
@@ -766,6 +1492,30 @@
     },
     {
       "key": {
+        "uuid": "8170b619_642dca4c",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "010be618_18e5255e",
+      "range": {
+        "startLine": 121,
+        "startChar": 9,
+        "endLine": 121,
+        "endChar": 10
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c16c6e17_b69d6868",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
         "patchSetId": 16
@@ -777,6 +1527,24 @@
       "writtenOn": "2015-03-11T19:53:35Z",
       "side": 1,
       "message": "We are missing test cases with both accidental overrides and default methods together (inherits methods from super class and the methods override default methods from super interface accidentally).",
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "219b8a8e_010e4a68",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Thanks. Will add\n\nclass A {\n  public void m() {}\n}\n\ninterface I {\n  default void m() {};\n}\n\nclass B extends A implements I {}\n\nIs this the scenario you expect? if not clarify.",
+      "parentUuid": "c16c6e17_b69d6868",
       "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -806,6 +1574,30 @@
     },
     {
       "key": {
+        "uuid": "c1ab8e9c_be27b96e",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc8e1580_4f082de1",
+      "range": {
+        "startLine": 931,
+        "startChar": 17,
+        "endLine": 931,
+        "endChar": 21
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc64b99b_a8ec3bc2",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 16
@@ -817,6 +1609,30 @@
       "writtenOn": "2015-03-11T01:19:37Z",
       "side": 1,
       "message": "this one kind of surprised me but after playing with an example offline i can see how this makes sense.",
+      "range": {
+        "startLine": 1006,
+        "startChar": 4,
+        "endLine": 1006,
+        "endChar": 63
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1d46e30_76f950cd",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-11T23:58:15Z",
+      "side": 1,
+      "message": "Yes, I constructed these scenarios by looking at the way we represent explicit (static dispatch) default method calls and the confusions that can arise. In particular we don\u0027t diferenciate between this, super and A.this explicitly as the three are represented as JThisRef.\n\nIn this case InterafceWithThisReference.this is basically a this reference to an outer class in this scenario, where if you do InterfaceWithThisReference.super.n() is a static reference to the interface method n().It is confusing as hell.",
+      "parentUuid": "fc64b99b_a8ec3bc2",
       "range": {
         "startLine": 1006,
         "startChar": 4,

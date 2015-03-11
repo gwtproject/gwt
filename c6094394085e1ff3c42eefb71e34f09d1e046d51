@@ -341,6 +341,29 @@
     },
     {
       "key": {
+        "uuid": "0167660f_3867a928",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-11T19:53:35Z",
+      "side": 1,
+      "message": "extract into a function.",
+      "range": {
+        "startLine": 237,
+        "startChar": 8,
+        "endLine": 241,
+        "endChar": 92
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc61b5bc_b7e86801",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -737,6 +760,23 @@
         "endLine": 121,
         "endChar": 10
       },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c16c6e17_b69d6868",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/UnifyAstTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-11T19:53:35Z",
+      "side": 1,
+      "message": "We are missing test cases with both accidental overrides and default methods together (inherits methods from super class and the methods override default methods from super interface accidentally).",
       "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

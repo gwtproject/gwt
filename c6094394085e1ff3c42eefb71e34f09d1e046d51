@@ -140,6 +140,29 @@
     },
     {
       "key": {
+        "uuid": "01592645_a82a5b78",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-11T16:53:26Z",
+      "side": 1,
+      "message": "redundant check.",
+      "range": {
+        "startLine": 109,
+        "startChar": 15,
+        "endLine": 109,
+        "endChar": 43
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c7fcd4d_c1960245",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -352,6 +375,29 @@
     },
     {
       "key": {
+        "uuid": "2139cad0_11d50ce8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-11T16:53:26Z",
+      "side": 1,
+      "message": "complete or remove?",
+      "range": {
+        "startLine": 294,
+        "startChar": 36,
+        "endLine": 294,
+        "endChar": 38
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc61b5bc_b73a28fd",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
         "patchSetId": 16
@@ -391,6 +437,52 @@
         "startChar": 0,
         "endLine": 303,
         "endChar": 0
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4184fecb_02f6eade",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-11T16:53:26Z",
+      "side": 1,
+      "message": "Would it always be true?",
+      "range": {
+        "startLine": 338,
+        "startChar": 12,
+        "endLine": 338,
+        "endChar": 37
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4184fecb_c2d6c240",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-03-11T16:53:26Z",
+      "side": 1,
+      "message": "This method is only used in collectAllSuperInterfaceMethodsBySignature, and there only super interfaces are needed. Why not just return the super interfaces only and the check (if !(superType instanceof JInterfaceType)) in collectAllSuperInterfaceMethodsBySignature can be removed .",
+      "range": {
+        "startLine": 345,
+        "startChar": 34,
+        "endLine": 345,
+        "endChar": 55
       },
       "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

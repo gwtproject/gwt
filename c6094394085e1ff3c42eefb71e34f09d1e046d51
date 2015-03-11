@@ -1,0 +1,676 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cfd7dc2_c5c17a80",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "s/overriden/overridden",
+      "range": {
+        "startLine": 387,
+        "startChar": 42,
+        "endLine": 387,
+        "endChar": 57
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf8532_a3359a0f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "please also mention that it builds the overriding/overridden method lists inside the JMethod instances",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 43,
+        "endChar": 24
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf8532_637722d1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "would be nice to have some central location define the meaning of \"accidental override\". maybe the top of this class is the right place.",
+      "range": {
+        "startLine": 55,
+        "startChar": 28,
+        "endLine": 55,
+        "endChar": 48
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cbf8532_e3b4b2e9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "somewhere else you called them forwarding methods.\n\nalso, i\u0027d just make this a class field and avoid passing it around as a parameter",
+      "range": {
+        "startLine": 58,
+        "startChar": 18,
+        "endLine": 58,
+        "endChar": 36
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c7c9156_02dc6ae2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "\"Compute the override relationships among just the methods defined in classes\"",
+      "range": {
+        "startLine": 102,
+        "startChar": 7,
+        "endLine": 102,
+        "endChar": 61
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c7c9156_620d3666",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "this is not how you spell overridden. please search and replace this across the CL",
+      "range": {
+        "startLine": 106,
+        "startChar": 16,
+        "endLine": 106,
+        "endChar": 24
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c7fcd4d_c1960245",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "why is there a blank line",
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c7fcd4d_247dfc32",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "need a comment here explaining this 1 case in which it is ok for maybeAddSyntheticOverride() to have failed to create anything",
+      "range": {
+        "startLine": 135,
+        "startChar": 8,
+        "endLine": 135,
+        "endChar": 41
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c7c9156_422d9292",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "what is this blank line for?",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 0
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc8fa1ac_feec81c3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "s/getExtendedSignature/computeExtendedSignature\n\nalso a couple other \"get\" methods here are really compute methods",
+      "range": {
+        "startLine": 196,
+        "startChar": 17,
+        "endLine": 196,
+        "endChar": 37
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc8fa1ac_3edfc9ff",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "static, also a couple other methods here could be static",
+      "range": {
+        "startLine": 196,
+        "startChar": 2,
+        "endLine": 196,
+        "endChar": 9
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc8fa1ac_5eaf3563",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "that\u0027s not how you spell synthetic",
+      "range": {
+        "startLine": 227,
+        "startChar": 26,
+        "endLine": 227,
+        "endChar": 34
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc8fa1ac_fe76418e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "in the context of this method i don\u0027t think we think of this method as a \"baseImplementingMethod\" anymore. at this point it\u0027s just \"method\" or \"implementingMethod\"",
+      "range": {
+        "startLine": 228,
+        "startChar": 34,
+        "endLine": 228,
+        "endChar": 56
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc61b5bc_57a9cc8d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "\" and it will be the only one.\"",
+      "range": {
+        "startLine": 230,
+        "startChar": 60,
+        "endLine": 230,
+        "endChar": 61
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc61b5bc_b7e86801",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "// Creates a forwarding method to the correct default method.",
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc61b5bc_77efb002",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "// Creates a forwarding method to act as the place holder for this accidental override.",
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc61b5bc_b73a28fd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "name is a little misleading to me since the \"leaf\" most methods are not ncessarily the version of the method that is kept after processing overrides",
+      "range": {
+        "startLine": 301,
+        "startChar": 36,
+        "endLine": 301,
+        "endChar": 79
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc88d5a6_df397bfa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "why the blank line?\n\nalso, i think you can make this method static",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 0
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c728992_b413008d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "there\u0027s gotta be a shorter way than this",
+      "range": {
+        "startLine": 347,
+        "startChar": 6,
+        "endLine": 347,
+        "endChar": 73
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c728992_540d4c65",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "formatting",
+      "range": {
+        "startLine": 349,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 38
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cfd7dc2_05ef9203",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ToStringGenerationVisitor.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "maybe add a comment saying that this is for the defender method dispatch",
+      "range": {
+        "startLine": 660,
+        "startChar": 8,
+        "endLine": 660,
+        "endChar": 49
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c37cd6c_410a3250",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "i don\u0027t know the TypeTightener very well but aren\u0027t there times when a target method is also the single most concrete version of that method?",
+      "range": {
+        "startLine": 632,
+        "startChar": 6,
+        "endLine": 632,
+        "endChar": 38
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c68ad9d_3900cf2e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "please rename, these aren\u0027t just forwarding methods",
+      "range": {
+        "startLine": 843,
+        "startChar": 18,
+        "endLine": 843,
+        "endChar": 35
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc67f59d_67de72dc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "pruned",
+      "range": {
+        "startLine": 846,
+        "startChar": 7,
+        "endLine": 846,
+        "endChar": 14
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c728992_9458c464",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "this method seems dead now",
+      "range": {
+        "startLine": 979,
+        "startChar": 2,
+        "endLine": 979,
+        "endChar": 50
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c728992_1454b420",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "this is already done 8 lines previous",
+      "range": {
+        "startLine": 1283,
+        "startChar": 4,
+        "endLine": 1285,
+        "endChar": 5
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c728992_941e0416",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 1401,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "so before this patch, this m() method dispatch would have come out wrong in an incremental recompile?",
+      "range": {
+        "startLine": 1401,
+        "startChar": 43,
+        "endLine": 1401,
+        "endChar": 60
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cfc49c5_a4c68294",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzerTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "i don\u0027t see any dispatches to getFoo() and it\u0027s not an exported method. what is keeping it alive?",
+      "range": {
+        "startLine": 223,
+        "startChar": 56,
+        "endLine": 223,
+        "endChar": 75
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc8e1580_4f082de1",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "spelling",
+      "range": {
+        "startLine": 931,
+        "startChar": 17,
+        "endLine": 931,
+        "endChar": 21
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc64b99b_a8ec3bc2",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-11T01:19:37Z",
+      "side": 1,
+      "message": "this one kind of surprised me but after playing with an example offline i can see how this makes sense.",
+      "range": {
+        "startLine": 1006,
+        "startChar": 4,
+        "endLine": 1006,
+        "endChar": 63
+      },
+      "revId": "c6094394085e1ff3c42eefb71e34f09d1e046d51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

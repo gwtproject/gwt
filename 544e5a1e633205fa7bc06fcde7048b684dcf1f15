@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc53d9fa_101924fb",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ResourceAccumulatorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-11T03:41:48Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "544e5a1e633205fa7bc06fcde7048b684dcf1f15",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -23,8 +23,12 @@ import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyType;
+import com.google.gwt.dev.jjs.ast.JNullType;
+import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -37,9 +41,7 @@ import java.util.Set;
  */
 // TODO: handle custom JsType field/method names when that feature exists.
 // TODO: move JsInterop checks from JSORestrictionsChecker to here.
-// TODO: check setter and getter for the same property has compatible types.
 // TODO: check for name collisions between regular members and accidental-override methods.
-// TODO: a JsType interface can only extend another JsType interface.
 public class JsInteropRestrictionChecker extends JVisitor {
 
   public static void exec(TreeLogger logger, JProgram jprogram,
@@ -52,10 +54,11 @@ public class JsInteropRestrictionChecker extends JVisitor {
     }
   }
 
-  private Set<JMethod> currentJsTypeProcessedMethods;
   private Map<String, String> currentJsTypeMethodNameByGetterNames;
   private Map<String, String> currentJsTypeMethodNameByMemberNames;
   private Map<String, String> currentJsTypeMethodNameBySetterNames;
+  private Set<JMethod> currentJsTypeProcessedMethods;
+  private Map<String, JType> currentJsTypePropertyTypeByName;
   private JDeclaredType currentType;
   private boolean hasErrors;
   private final JProgram jprogram;
@@ -79,13 +82,19 @@ public class JsInteropRestrictionChecker extends JVisitor {
   public boolean visit(JDeclaredType x, Context ctx) {
     assert currentType == null;
     currentJsTypeProcessedMethods = Sets.newHashSet();
+    currentJsTypePropertyTypeByName = Maps.newHashMap();
     currentJsTypeMethodNameByMemberNames = Maps.newHashMap();
     currentJsTypeMethodNameByGetterNames = Maps.newHashMap();
     currentJsTypeMethodNameBySetterNames = Maps.newHashMap();
     minimalRebuildCache.removeJsInteropNames(x.getName());
     currentType = x;
+
     checkJsFunctionInheritance(x);
     checkJsFunctionJsTypeCollision(x);
+    if (currentType instanceof JInterfaceType) {
+      checkJsTypeHierarchy((JInterfaceType) currentType);
+    }
+
     // Perform custom class traversal to examine fields and methods of this class and all
     // superclasses so that name collisions between local and inherited members can be found.
     do {
@@ -122,12 +131,16 @@ public class JsInteropRestrictionChecker extends JVisitor {
       checkJsTypeMethod(x);
     }
 
-    if (jprogram.typeOracle.isJsPropertyMethod(x)
-        && !jprogram.typeOracle.isJsType(x.getEnclosingType())) {
-      logError("Method '%s' can't be explicitly annotated @JsProperty since enclosing type '%s' "
-          + "is not explicitly annotated @JsType. If the method is already overriding "
-          + "a JsProperty method then there is no need to restate the annotation.", x.getName(),
-          x.getEnclosingType().getName());
+    if (currentType == x.getEnclosingType()) {
+      if (jprogram.typeOracle.isJsPropertyMethod(x) && !jprogram.typeOracle.isJsType(currentType)) {
+        if (currentType instanceof JInterfaceType) {
+          logError("Method '%s' can't be a JsProperty since interface '%s' is not a JsType.",
+              x.getName(), x.getEnclosingType().getName());
+        } else {
+          logError("Method '%s' can't be a JsProperty since '%s' "
+              + "is not an interface.", x.getName(), x.getEnclosingType().getName());
+        }
+      }
     }
 
     return false;
@@ -137,8 +150,28 @@ public class JsInteropRestrictionChecker extends JVisitor {
     boolean success = minimalRebuildCache.addExportedGlobalName(x.getQualifiedExportName(),
         currentType.getName());
     if (!success) {
-      logError("'%s' can't be exported because the global name '%s' is already taken.",
+      logError("Member '%s' can't be exported because the global name '%s' is already taken.",
           x.getQualifiedName(), x.getQualifiedExportName());
+    }
+  }
+
+  private void checkInconsistentPropertyType(String propertyName, String enclosingTypeName,
+      JType parameterType) {
+    JType recordedType = currentJsTypePropertyTypeByName.put(propertyName, parameterType);
+    if (recordedType != null && recordedType != parameterType) {
+      logError("The setter and getter for property '%s' in type '%s' must have consistent types.",
+          propertyName, enclosingTypeName);
+    }
+  }
+
+  private void checkJsTypeHierarchy(JInterfaceType interfaceType) {
+    if (jprogram.typeOracle.isJsType(currentType)) {
+      for (JDeclaredType superInterface : interfaceType.getImplements()) {
+        if (!jprogram.typeOracle.isJsType(superInterface)) {
+          logError("JsType interface '%s' cannot extend '%s' which is not a JsType interface.",
+              interfaceType.getName(), superInterface.getName());
+        }
+      }
     }
   }
 
@@ -146,8 +179,8 @@ public class JsInteropRestrictionChecker extends JVisitor {
     boolean success =
         currentJsTypeMethodNameByMemberNames.put(memberName, field.getQualifiedName()) == null;
     if (!success) {
-      logError("'%s' can't be exported because the member name '%s' is already taken.",
-          field.getQualifiedName(), memberName);
+      logError("Field '%s' can't be exported in type '%s' because the member name "
+          + "'%s' is already taken.", field.getQualifiedName(), currentType.getName(), memberName);
     }
   }
 
@@ -175,23 +208,27 @@ public class JsInteropRestrictionChecker extends JVisitor {
       // If it's a getter.
       if (currentJsTypeMethodNameByGetterNames.put(jsMemberName, qualifiedMethodName) != null) {
         // Don't allow multiple getters for the same property name.
-        logError("There can't be more than one getter for JS property '%s' in type '%s'.",
+        logError("There can't be more than one getter for JsProperty '%s' in type '%s'.",
             jsMemberName, typeName);
       }
       checkNameCollisionForGetterAndRegular(jsMemberName, typeName);
+      checkInconsistentPropertyType(jsMemberName, typeName, method.getOriginalReturnType());
     } else if (jsPropertyType == JsPropertyType.SET) {
       // If it's a setter.
       if (currentJsTypeMethodNameBySetterNames.put(jsMemberName, qualifiedMethodName) != null) {
         // Don't allow multiple setters for the same property name.
-        logError("There can't be more than one setter for JS property '%s' in type '%s'.",
+        logError("There can't be more than one setter for JsProperty '%s' in type '%s'.",
             jsMemberName, typeName);
       }
       checkNameCollisionForSetterAndRegular(jsMemberName, typeName);
+      JParameter firstParameter = Iterables.getFirst(method.getParams(), null);
+      checkInconsistentPropertyType(jsMemberName,
+          typeName, firstParameter == null ? JNullType.INSTANCE : firstParameter.getType());
     } else {
       // If it's just an regular JsType method.
       if (currentJsTypeMethodNameByMemberNames.put(jsMemberName, qualifiedMethodName) != null) {
-        logError("'%s' can't be exported because the member name '%s' is already taken.",
-            qualifiedMethodName, jsMemberName);
+        logError("Method '%s' can't be exported in type '%s' because the member name "
+            + "'%s' is already taken.", qualifiedMethodName, currentType.getName(), jsMemberName);
       }
       checkNameCollisionForGetterAndRegular(jsMemberName, typeName);
       checkNameCollisionForSetterAndRegular(jsMemberName, typeName);
@@ -201,7 +238,7 @@ public class JsInteropRestrictionChecker extends JVisitor {
   private void checkNameCollisionForGetterAndRegular(String getterName, String typeName) {
     if (currentJsTypeMethodNameByGetterNames.containsKey(getterName)
         && currentJsTypeMethodNameByMemberNames.containsKey(getterName)) {
-      logError("The JsType member '%s' and JsProperty property '%s' name can't both be named "
+      logError("The JsType member '%s' and JsProperty '%s' can't both be named "
           + "'%s' in type '%s'.", currentJsTypeMethodNameByMemberNames.get(getterName),
           currentJsTypeMethodNameByGetterNames.get(getterName), getterName, typeName);
     }
@@ -210,7 +247,7 @@ public class JsInteropRestrictionChecker extends JVisitor {
   private void checkNameCollisionForSetterAndRegular(String setterName, String typeName) {
     if (currentJsTypeMethodNameBySetterNames.containsKey(setterName)
         && currentJsTypeMethodNameByMemberNames.containsKey(setterName)) {
-      logError("The JsType member '%s' and JsProperty property '%s' name can't both be named "
+      logError("The JsType member '%s' and JsProperty '%s' can't both be named "
           + "'%s' in type '%s'.", currentJsTypeMethodNameByMemberNames.get(setterName),
           currentJsTypeMethodNameBySetterNames.get(setterName), setterName, typeName);
     }
@@ -237,5 +274,10 @@ public class JsInteropRestrictionChecker extends JVisitor {
   private void logError(String format, Object... args) {
     logger.log(TreeLogger.ERROR, String.format(format, args));
     hasErrors = true;
+  }
+
+  private static boolean startsWithCamelCase(String string, String prefix) {
+    return string.length() > prefix.length() && string.startsWith(prefix)
+        && Character.isUpperCase(string.charAt(prefix.length()));
   }
 }

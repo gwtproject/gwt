@@ -20,12 +20,14 @@ import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.dev.util.UnitTestTreeLogger;
 
 /**
  * Tests for the JsInteropRestrictionChecker.
  */
 public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
+
+  private TreeLogger errorLogger;
 
   public void testCollidingFieldExportsFails() throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsExport");
@@ -37,7 +39,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public static final int display = 0;",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("Member 'test.EntryPoint$Buggy.display' can't be exported because the "
+        + "global name 'show' is already taken.");
   }
 
   public void testCollidingJsPropertiesHasAndGetterSucceeds() throws Exception {
@@ -113,7 +116,10 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public int getX() {return 0;}",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("There can't be more than one getter for JsProperty 'x' "
+        + "in type 'test.EntryPoint$IBuggy'.",
+        "There can't be more than one getter for JsProperty 'x' "
+        + "in type 'test.EntryPoint$Buggy'.");
   }
 
   public void testCollidingJsPropertiesTwoSettersFails() throws Exception {
@@ -132,7 +138,10 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public void setX(int x) {}",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("There can't be more than one setter for JsProperty 'x' in type "
+        + "'test.EntryPoint$IBuggy'.",
+        "There can't be more than one setter for JsProperty 'x' in type "
+        + "'test.EntryPoint$Buggy'.");
   }
 
   // TODO: duplicate this check with two @JsType interfaces.
@@ -142,16 +151,21 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetClassDecl(
         "@JsType",
         "public static interface IBuggy {",
-        "  Object x(Object foo, Object bar);",
+        "  boolean x(boolean foo);",
         "  @JsProperty",
         "  int getX();",
         "}",
         "public static class Buggy implements IBuggy {",
-        "  public Object x(Object foo, Object bar) {return null;}",
+        "  public boolean x(boolean foo) {return false;}",
         "  public int getX() {return 0;}",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("The JsType member 'test.EntryPoint$IBuggy.x(Z)Z' and JsProperty "
+        + "'test.EntryPoint$IBuggy.getX()I' can't both be named 'x' in "
+        + "type 'test.EntryPoint$IBuggy'.",
+        "The JsType member 'test.EntryPoint$Buggy.x(Z)Z' and JsProperty "
+        + "'test.EntryPoint$Buggy.getX()I' can't both be named 'x' in "
+        + "type 'test.EntryPoint$Buggy'.");
   }
 
   public void testCollidingJsTypeAndJsPropertySetterFails() throws Exception {
@@ -160,16 +174,21 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetClassDecl(
         "@JsType",
         "public static interface IBuggy {",
-        "  Object x(Object foo, Object bar);",
+        "  boolean x(boolean foo);",
         "  @JsProperty",
         "  void setX(int a);",
         "}",
         "public static class Buggy implements IBuggy {",
-        "  public Object x(Object foo, Object bar) {return null;}",
+        "  public boolean x(boolean foo) {return false;}",
         "  public void setX(int a) {}",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("The JsType member 'test.EntryPoint$IBuggy.x(Z)Z' and JsProperty "
+        + "'test.EntryPoint$IBuggy.setX(I)V' can't both be named 'x' in "
+        + "type 'test.EntryPoint$IBuggy'.",
+        "The JsType member 'test.EntryPoint$Buggy.x(Z)Z' and JsProperty "
+        + "'test.EntryPoint$Buggy.setX(I)V' can't both be named 'x' in "
+        + "type 'test.EntryPoint$Buggy'.");
   }
 
   public void testCollidingMethodExportsFails() throws Exception {
@@ -182,7 +201,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public static void display() {}",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("Member 'test.EntryPoint$Buggy.display()V' can't be exported "
+        + "because the global name 'show' is already taken.");
   }
 
   public void testCollidingMethodToFieldExportsFails() throws Exception {
@@ -195,7 +215,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public static final int display = 0;",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("Member 'test.EntryPoint$Buggy.show()V' can't be exported because the "
+        + "global name 'show' is already taken.");
   }
 
   public void testCollidingMethodToFieldJsTypeFails() throws Exception {
@@ -207,7 +228,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public final int show = 0;",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("Method 'test.EntryPoint$Buggy.show()V' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the member name 'show' is already taken.");
   }
 
   public void testCollidingSubclassExportedFieldToFieldJsTypeSucceeds() throws Exception {
@@ -292,7 +314,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public int foo = 110;",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("Field 'test.EntryPoint$ParentBuggy.foo' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
   }
 
   public void testCollidingSubclassFieldToMethodJsTypeFails() throws Exception {
@@ -307,7 +330,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public void foo(int a) {}",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("Field 'test.EntryPoint$ParentBuggy.foo' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
   }
 
   public void testCollidingSubclassMethodToExportedMethodJsTypeSucceeds() throws Exception {
@@ -342,7 +366,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public void show(boolean b) {}",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("Method 'test.EntryPoint$Buggy.show()V' can't be exported in type "
+        + "'test.EntryPoint$Buggy2' because the member name 'show' is already taken.");
   }
 
   public void testCollidingSubclassMethodToMethodJsTypeFails() throws Exception {
@@ -357,7 +382,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public void foo(int a) {}",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("Method 'test.EntryPoint$ParentBuggy.foo()V' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
   }
 
   public void testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails() throws Exception {
@@ -382,7 +408,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public void show(boolean b) {}",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("Method 'test.EntryPoint$Buggy.show()V' can't be exported in type "
+        + "'test.EntryPoint$Buggy2' because the member name 'show' is already taken.");
   }
 
   public void testCollidingSyntheticBridgeMethodSucceeds() throws Exception {
@@ -416,8 +443,74 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public int foo = 110;",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("Field 'test.EntryPoint$ParentParentBuggy.foo' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
   }
+
+  public void testConsistentPropertyTypeSucceeds() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static interface IBuggy {",
+        "  @JsProperty",
+        "  public int getFoo();",
+        "  @JsProperty",
+        "  public void setFoo(int value);",
+        "}",
+        "public static class Buggy implements IBuggy {",
+        "  public int getFoo() {return 0;}",
+        "  public void setFoo(int value) {}",
+        "}");
+
+    assertCompileSucceeds();
+  }
+
+  public void testInconsistentGetSetPropertyTypeFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static interface IBuggy {",
+        "  @JsProperty",
+        "  public int getFoo();",
+        "  @JsProperty",
+        "  public void setFoo(Integer value);",
+        "}",
+        "public static class Buggy implements IBuggy {",
+        "  public int getFoo() {return 0;}",
+        "  public void setFoo(Integer value) {}",
+        "}");
+
+    assertCompileFails(
+        "The setter and getter for property 'foo' in type 'test.EntryPoint$IBuggy' "
+        + "must have consistent types.",
+        "The setter and getter for property 'foo' in type 'test.EntryPoint$Buggy' "
+        + "must have consistent types.");
+  }
+
+//  public void testInconsistentIsSetPropertyTypeFails() throws Exception {
+//    addSnippetImport("com.google.gwt.core.client.js.JsType");
+//    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+//    addSnippetClassDecl(
+//        "@JsType",
+//        "public static interface IBuggy {",
+//        "  @JsProperty",
+//        "  public boolean isFoo();",
+//        "  @JsProperty",
+//        "  public void setFoo(Object value);",
+//        "}",
+//        "public static class Buggy implements IBuggy {",
+//        "  public boolean isFoo() {return 0;}",
+//        "  public void setFoo(Object value) {}",
+//        "}");
+//
+//    assertCompileFails(
+//        "The setter and getter for property 'foo' in type 'test.EntryPoint$IBuggy' "
+//        + "must have consistent types.",
+//        "The setter and getter for property 'foo' in type 'test.EntryPoint$Buggy' "
+//        + "must have consistent types.");
+//  }
 
   public void testJsPropertyInNonJsTypeFails() throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsProperty");
@@ -427,7 +520,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public int x() {return 0;}",
         "}");
 
-    assertCompileFails();
+    assertCompileFails(
+        "Method 'x' can't be a JsProperty since 'test.EntryPoint$Buggy' " + "is not an interface.");
   }
 
   public void testJsPropertyInTransitiveNonJsTypeFails() throws Exception {
@@ -435,14 +529,28 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("com.google.gwt.core.client.js.JsProperty");
     addSnippetClassDecl(
         "@JsType",
-        "public static class ParentBuggy {",
+        "public static interface ParentExported {",
         "}",
-        "public static class Buggy extends ParentBuggy {",
+        "public static interface Exported extends ParentExported {",
         "  @JsProperty",
-        "  public int x() {return 0;}",
-        "}");
+        "  public int x();",
+        "}",
+        "public static class Buggy {} // Unrelated class");
 
-    assertCompileFails();
+    assertCompileFails("Method 'x' can't be a JsProperty since interface "
+        + "'test.EntryPoint$Exported' is not a JsType.");
+  }
+
+  public void testJsTypeInterfaceExtendsNonJsTypeFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "public static interface IBuggyParent {}",
+        "@JsType",
+        "public static interface IBuggy extends IBuggyParent {}",
+        "public static class Buggy {} // Unrelated class");
+
+    assertCompileFails("JsType interface 'test.EntryPoint$IBuggy' cannot extend "
+        + "'test.EntryPoint$IBuggyParent' which is not a JsType interface.");
   }
 
   public void testMultiplePrivateConstructorsExportSucceeds() throws Exception {
@@ -466,7 +574,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public Buggy(int a) {}",
         "}");
 
-    assertCompileFails();
+    assertCompileFails("Member 'test.EntryPoint$Buggy.EntryPoint$Buggy(I) <init>' can't be "
+        + "exported because the global name 'test.EntryPoint.Buggy' is already taken.");
   }
 
   public void testSingleExportSucceeds() throws Exception {
@@ -762,15 +871,22 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
   @Override
   protected boolean optimizeMethod(JProgram program, JMethod method) {
     try {
-      JsInteropRestrictionChecker.exec(new PrintWriterTreeLogger(), program,
-          new MinimalRebuildCache());
+      JsInteropRestrictionChecker.exec(errorLogger, program, new MinimalRebuildCache());
     } catch (UnableToCompleteException e) {
       throw new RuntimeException(e);
     }
     return false;
   }
 
-  private void assertCompileFails() {
+  private void assertCompileFails(String... expectedErrors) {
+    assert expectedErrors != null : "Failed compiles must specify error messages.";
+    UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
+    builder.setLowestLogLevel(TreeLogger.ERROR);
+    for (String e : expectedErrors) {
+      builder.expectError(e, null);
+    }
+    errorLogger = builder.createLogger();
+
     try {
       optimize("void", "new Buggy();");
       fail("JsInteropRestrictionCheckerTest should have caught the invalid JsInterop constructs.");
@@ -778,9 +894,11 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
       assertTrue(e.getCause() instanceof UnableToCompleteException
           || e instanceof UnableToCompleteException);
     }
+    ((UnitTestTreeLogger) errorLogger).assertCorrectLogEntries();
   }
 
   private void assertCompileSucceeds() throws UnableToCompleteException {
+    errorLogger = TreeLogger.NULL;
     optimize("void", "new Buggy();");
   }
 }

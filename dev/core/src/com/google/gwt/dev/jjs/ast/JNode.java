@@ -63,7 +63,8 @@ public abstract class JNode implements HasSourceInfo, Serializable {
 
   // Causes source generation to delegate to the one visitor
   @Override
-  public String toString() {
+  public final String toString() {
+    // toString should be customized in ToStringGenerationVisitor, do not remove final.
     DefaultTextOutput out = new DefaultTextOutput(false);
     ToStringGenerationVisitor v = new ToStringGenerationVisitor(out);
     v.accept(this);

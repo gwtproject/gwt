@@ -436,6 +436,28 @@ public class DeadCodeElimination {
       if (ignoringExpressionOutput.contains(x)) {
         ctx.replaceMe(x.getExpr());
         ignoringExpressionOutput.remove(x);
+        return;
+      }
+
+      if (!(x.getExpr().getType() instanceof JReferenceType)) {
+        return;
+      }
+
+      AnalysisResult analysisResult =
+          staticallyEvaluateInstanceOf((JReferenceType) x.getExpr().getType(), x.getTestType());
+      switch (analysisResult) {
+        case TRUE:
+          // replace with a simple null test:  (expr != null).
+          ctx.replaceMe(
+              JjsUtils.createOptimizedNotNullComparison(program, x.getSourceInfo(), x.getExpr()));
+          break;
+        case FALSE:
+          // replace with a false literal
+          ctx.replaceMe(JjsUtils.createOptimizedMultiExpression(x.getExpr(),
+              program.getLiteralBoolean(false)));
+          break;
+        case UNKNOWN:
+        default:
       }
     }
 
@@ -1564,6 +1586,26 @@ public class DeadCodeElimination {
       }
       if (lhs.getType() == program.getTypeNull() && !rhs.getType().canBeNull() ||
           rhs.getType() == program.getTypeNull() && !lhs.getType().canBeNull()) {
+        return AnalysisResult.FALSE;
+      }
+      return AnalysisResult.UNKNOWN;
+    }
+
+    /**
+     * Tries to statically evaluate the instanceof operation. Returning TRUE if it can be determined
+     * statically that it is true when not null, FALSE if it can be determined that is false and
+     * UNKNOWN if the* result can not be determined statically.
+     */
+    private AnalysisResult staticallyEvaluateInstanceOf(JReferenceType fromType,
+        JReferenceType toType) {
+      if (fromType == program.getTypeNull()) {
+        // null is never instanceof anything
+        return AnalysisResult.FALSE;
+      } else if (program.typeOracle.castSucceedsTrivially(fromType, toType)) {
+        return AnalysisResult.TRUE;
+      } else if (!program.typeOracle.isInstantiatedType(toType)) {
+        return AnalysisResult.FALSE;
+      } else if (program.typeOracle.castFailsTrivially(fromType, toType)) {
         return AnalysisResult.FALSE;
       }
       return AnalysisResult.UNKNOWN;

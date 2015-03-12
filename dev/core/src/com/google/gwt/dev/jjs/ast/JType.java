@@ -58,9 +58,16 @@ public abstract class JType extends JNode implements HasName, CanBeFinal {
    * Returns <code>true</code> if it's possible for this type to be
    * <code>null</code>.
    *
-   * @see JNonNullType
+   * @see JAnalysisDecoratedType
    */
   public abstract boolean canBeNull();
+
+  /**
+   * Returns {@code true} if this is {@link JReferenceType.JNullType.INSTANCE}.
+   */
+  public boolean isNullType() {
+    return false;
+  }
 
   public abstract JLiteral getDefaultValue();
 
@@ -136,7 +143,7 @@ public abstract class JType extends JNode implements HasName, CanBeFinal {
   /**
    * Checks type replacement from an external type to a resolved canonical type.
    */
-  boolean replaces(JType originalType) {
+  public boolean replaces(JType originalType) {
     if (this == originalType) {
       return true;
     }

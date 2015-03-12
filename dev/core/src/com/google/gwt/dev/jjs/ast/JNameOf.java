@@ -57,7 +57,7 @@ public class JNameOf extends JExpression {
   }
 
   @Override
-  public JNonNullType getType() {
+  public JAnalysisType getType() {
     return stringType.getNonNull();
   }
 

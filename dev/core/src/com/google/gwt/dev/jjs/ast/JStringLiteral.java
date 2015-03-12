@@ -33,7 +33,7 @@ public class JStringLiteral extends JValueLiteral {
   }
 
   @Override
-  public JNonNullType getType() {
+  public JAnalysisType getType() {
     return stringType.getNonNull();
   }
 

@@ -61,7 +61,7 @@ public class JNullType extends JReferenceType {
   }
 
   @Override
-  public JNonNullType getNonNull() {
+  public JAnalysisType getNonNull() {
     throw new UnsupportedOperationException();
   }
 }

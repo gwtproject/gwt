@@ -16,25 +16,30 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.ast.JAnalysisType.AnalysisTypeSingletonsForType;
 
 /**
  * Base class for any reference type.
  */
 public abstract class JReferenceType extends JType implements CanBeAbstract {
 
-  private transient JNonNullType nonNullType;
+  private transient AnalysisTypeSingletonsForType analysisTypeSet = null;
 
   public JReferenceType(SourceInfo info, String name) {
     super(info, name);
   }
 
-  /**
-   * Returns <code>true</code> if it's possible for this type to be
-   * <code>null</code>.
-   *
-   * @see JNonNullType
-   */
+  JReferenceType(SourceInfo info, String name, AnalysisTypeSingletonsForType analysisTypeSet) {
+    super(info, name);
+    this.analysisTypeSet =  analysisTypeSet;
+  }
+  @Override
   public boolean canBeNull() {
+    return true;
+  }
+
+  @Override
+  public boolean canBeASubclass() {
     return true;
   }
 
@@ -53,11 +58,12 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
     return "L" + name.replace('.', '/') + ';';
   }
 
-  public JNonNullType getNonNull() {
-    if (nonNullType == null) {
-      nonNullType = new JNonNullType(this);
-    }
-    return nonNullType;
+  public JAnalysisType getNonNull() {
+    return getAnalysisTypeSet().getNonNull(this);
+  }
+
+  public JAnalysisType getExact() {
+    return getAnalysisTypeSet().getExact(this);
   }
 
   /**
@@ -71,5 +77,12 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
   public boolean replaces(JType originalType) {
     return super.replaces(originalType)
         && canBeNull() == ((JReferenceType) originalType).canBeNull();
+  }
+
+  protected AnalysisTypeSingletonsForType getAnalysisTypeSet() {
+    if (analysisTypeSet == null) {
+      analysisTypeSet = new AnalysisTypeSingletonsForType();
+    }
+    return analysisTypeSet;
   }
 }

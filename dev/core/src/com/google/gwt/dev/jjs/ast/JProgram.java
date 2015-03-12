@@ -419,8 +419,26 @@ public class JProgram extends JNode implements ArrayTypeCreator {
       // Not assigned, it can only be null.
       return getTypeNull();
     } else {
-      return strongerType(refType, generalizeTypes(assignedTypes));
+      JReferenceType resultType = resolveToSingleExactType(assignedTypes);
+      // TODO: what if the type is exact and not stronger??
+      if (resultType == null) {
+        resultType = strongerType(refType, generalizeTypes(assignedTypes));
+      }
+      return resultType;
     }
+  }
+
+  private JReferenceType resolveToSingleExactType(List<JReferenceType> typeList) {
+    JReferenceType referenceType = typeList.get(0);
+    if (referenceType.canBeASubclass()) {
+      return null;
+    }
+    for (JReferenceType type : typeList) {
+      if (type != referenceType) {
+        return null;
+      }
+    }
+    return referenceType;
   }
 
   /**
@@ -470,20 +488,20 @@ public class JProgram extends JNode implements ArrayTypeCreator {
       return type1;
     }
 
-    if (type1 instanceof JNonNullType && type2 instanceof JNonNullType) {
+    if (type1 instanceof JAnalysisType && type2 instanceof JAnalysisType) {
       // Neither can be null.
       type1 = type1.getUnderlyingType();
       type2 = type2.getUnderlyingType();
       return generalizeTypes(type1, type2).getNonNull();
-    } else if (type1 instanceof JNonNullType) {
+    } else if (type1 instanceof JAnalysisType) {
       // type2 can be null, so the result can be null
       type1 = type1.getUnderlyingType();
-    } else if (type2 instanceof JNonNullType) {
+    } else if (type2 instanceof JAnalysisType) {
       // type1 can be null, so the result can be null
       type2 = type2.getUnderlyingType();
     }
-    assert !(type1 instanceof JNonNullType);
-    assert !(type2 instanceof JNonNullType);
+    assert !(type1 instanceof JAnalysisType);
+    assert !(type2 instanceof JAnalysisType);
 
     int classify1 = classifyType(type1);
     int classify2 = classifyType(type2);
@@ -553,7 +571,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
           JReferenceType leafRefType2 = (JReferenceType) leafType2;
 
           /**
-           * Never generalize arrays to arrays of {@link JNonNullType} as null array initialization
+           * Never generalize arrays to arrays of {@link JAnalysisType} as null array initialization
            * is not accounted for in {@link TypeTightener}.
            */
           JReferenceType leafGeneralization =
@@ -1113,8 +1131,9 @@ public class JProgram extends JNode implements ArrayTypeCreator {
       return JNullType.INSTANCE;
     }
 
-    if (type1 instanceof JNonNullType != type2 instanceof JNonNullType) {
+    if (type1 instanceof JAnalysisType != type2 instanceof JAnalysisType) {
       // If either is non-nullable, the result should be non-nullable.
+      // TODO not sure if this correct?
       return strongerType(type1.getNonNull(), type2.getNonNull());
     }
 
@@ -1175,7 +1194,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
   }
 
   private int classifyType(JReferenceType type) {
-    assert !(type instanceof JNonNullType);
+    assert !(type instanceof JAnalysisType);
     if (type instanceof JNullType) {
       return IS_NULL;
     } else if (type instanceof JInterfaceType) {

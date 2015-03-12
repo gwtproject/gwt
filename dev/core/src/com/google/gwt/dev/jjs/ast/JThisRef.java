@@ -34,7 +34,7 @@ public class JThisRef extends JExpression {
   }
 
   @Override
-  public JNonNullType getType() {
+  public JAnalysisType getType() {
     return type.getNonNull();
   }
 

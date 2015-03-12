@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "819996fb_dc726d9d",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-12T19:21:39Z",
+      "side": 1,
+      "message": "Rename to testCast_fromJavaScript.\n\nAdd testCast_crossCast\n\nObject o \u003d (MyJsFunctionInterface1) ( () -\u003e { } )\nMyJsFunctionInterface2 f2 \u003d (MyJsFunctionInterface2) o; // \nthese two interfaces are unrelated\n\nassert something about f2() \n\n\nAlso test that if you create Java Jsfunction that is also some other interface make sure you can cast back from the JsFunction interface to the Java interface and call some method.\n\n\nI know that instanceOf and canCast are basically the same implementation so the instanceOf tests bellow somehow cover the cases. But I think for each scenario bellow there should be a testCast.",
+      "range": {
+        "startLine": 154,
+        "startChar": 14,
+        "endLine": 154,
+        "endChar": 22
+      },
+      "revId": "5d8521b8eccffe4dfd00c63628ff7e3940c5e65d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

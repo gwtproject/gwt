@@ -21,7 +21,6 @@ import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
-import com.google.gwt.dev.jjs.ast.JNonNullType;
 import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
@@ -68,8 +67,8 @@ public class JjsTypeTest extends TestCase {
   private JClassType classArrayList;
   private JClassType classB;
   private JClassType classBase;
-  private JNonNullType classBaseNn;
-  private JNonNullType classBnn;
+  private JReferenceType classBaseNn;
+  private JReferenceType classBnn;
   private JClassType classBSub;
   private JClassType classC;
   private JClassType classJso;
@@ -303,7 +302,7 @@ public class JjsTypeTest extends TestCase {
   public void testJavahSignatures() {
     for (JReferenceType type : severalTypes()) {
       if (!(type instanceof JNullType)) {
-        assertEquals(type.getJavahSignatureName(), type.getNonNull().getJavahSignatureName());
+        assertEquals(type.getJavahSignatureName(), type.strengthenToNonNull().getJavahSignatureName());
       }
     }
   }
@@ -311,7 +310,7 @@ public class JjsTypeTest extends TestCase {
   public void testJsniSignatures() {
     for (JReferenceType type : severalTypes()) {
       if (!(type instanceof JNullType)) {
-        assertEquals(type.getJsniSignatureName(), type.getNonNull().getJsniSignatureName());
+        assertEquals(type.getJsniSignatureName(), type.strengthenToNonNull().getJsniSignatureName());
       }
     }
   }
@@ -525,8 +524,8 @@ public class JjsTypeTest extends TestCase {
     classArrayList = createClass("java.util.ArrayList", classObject, false, false);
     classArrayList.addImplements(intfList);
 
-    classBnn = classB.getNonNull();
-    classBaseNn = classBase.getNonNull();
+    classBnn = classB.strengthenToNonNull();
+    classBaseNn = classBase.strengthenToNonNull();
 
     // 1 dimensional
     arrayOfObject = program.getTypeArray(classObject);
@@ -562,11 +561,12 @@ public class JjsTypeTest extends TestCase {
   }
 
   private JReferenceType strongerType(JReferenceType type1, JReferenceType type2) {
-    return program.strengthenType(type1, Arrays.asList(type2));
+    return program.strengthenAssignment(type1, Arrays.asList(type2));
   }
 
   private JReferenceType generalizeTypes(JReferenceType type1, JReferenceType type2) {
-    return program.strengthenType(program.getTypeJavaLangObject(), Arrays.asList(type1, type2));
+    return program.strengthenAssignment(program.getTypeJavaLangObject(),
+        Arrays.asList(type1, type2));
   }
 
   /**

@@ -865,6 +865,29 @@ public class JTypeOracle implements Serializable {
     return getOrCreateInstanceMethodsBySignatureForType(type).get(signature);
   }
 
+  public JMethod findMostSpecificOverride(JClassType type, JMethod baseMethod) {
+    JMethod foundMethod = getInstanceMethodBySignature(type, baseMethod.getSignature());
+    if (foundMethod == baseMethod) {
+      return foundMethod;
+    }
+
+    // A method with the same signature as the target method might NOT override if the original
+    // method is package private and found method is defined in a different package.
+    if (foundMethod != null && foundMethod.getOverriddenMethods().contains(baseMethod)) {
+      return foundMethod;
+    }
+
+    // In the case that a method is found but is not an override (package private case), traverse
+    // up in the hierarchy looking for the right override.
+    if (foundMethod != null && baseMethod.isPackagePrivate() &&
+        type.getSuperClass() != null) {
+      return findMostSpecificOverride(type.getSuperClass(), baseMethod);
+    }
+
+    assert baseMethod.isAbstract();
+    return baseMethod;
+  }
+
   public JClassType getSingleJsoImpl(JReferenceType maybeSingleJsoIntf) {
     String className = jsoByInterface.get(maybeSingleJsoIntf.getName());
     if (className == null) {

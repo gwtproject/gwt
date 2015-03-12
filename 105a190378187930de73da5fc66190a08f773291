@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "01f046db_70129009",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-12T00:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1ab8e9c_de2165a5",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 30
+      },
+      "revId": "105a190378187930de73da5fc66190a08f773291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1cf7a9d_55ff6ca9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2015-03-12T00:09:54Z",
       "side": 1,
       "message": "\u0027is not a JsType interface\u0027?\n\nactually if you do that you may join the error logging here with the one above.",
+      "range": {
+        "startLine": 141,
+        "startChar": 17,
+        "endLine": 141,
+        "endChar": 36
+      },
+      "revId": "105a190378187930de73da5fc66190a08f773291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01f046db_d06c9c8c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-12T00:41:10Z",
+      "side": 1,
+      "message": "no, this is a separate check specifically to block classes from ever directly using @JsProperty. this was moved over from JSORestrictionChecker",
+      "parentUuid": "a1cf7a9d_55ff6ca9",
       "range": {
         "startLine": 141,
         "startChar": 17,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "01f046db_707cd035",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-12T00:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01f046db_90e3b422",
+      "range": {
+        "startLine": 162,
+        "startChar": 42,
+        "endLine": 162,
+        "endChar": 50
+      },
+      "revId": "105a190378187930de73da5fc66190a08f773291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "01f046db_b0cfd859",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 4
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "01f046db_5079cc43",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-12T00:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01f046db_b0cfd859",
+      "revId": "105a190378187930de73da5fc66190a08f773291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "01f046db_f00d606c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 4
@@ -99,6 +189,24 @@
       "writtenOn": "2015-03-12T00:09:54Z",
       "side": 1,
       "message": "looks unused.",
+      "revId": "105a190378187930de73da5fc66190a08f773291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01f046db_1083449c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-12T00:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01f046db_f00d606c",
       "revId": "105a190378187930de73da5fc66190a08f773291",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

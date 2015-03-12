@@ -33,7 +33,6 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JNewArray;
 import com.google.gwt.dev.jjs.ast.JNode;
-import com.google.gwt.dev.jjs.ast.JNonNullType;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -669,7 +668,6 @@ public class EnumOrdinalizer {
         return JPrimitiveType.INT;
       }
 
-      boolean nonNull = type instanceof JNonNullType;
       JType uType = type.getUnderlyingType();
       if (!(uType instanceof JArrayType)) {
         return null;
@@ -679,7 +677,7 @@ public class EnumOrdinalizer {
       JType leafType = aType.getLeafType();
       if (canBeOrdinal(leafType)) {
         JArrayType newAType = program.getOrCreateArrayType(JPrimitiveType.INT, aType.getDims());
-        return nonNull ? newAType.getNonNull() : newAType;
+        return !type.canBeNull() ? newAType.strengthenToNonNull() : newAType;
       }
 
       return null;

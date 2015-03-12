@@ -57,7 +57,6 @@ import com.google.gwt.dev.jjs.ast.JNameOf;
 import com.google.gwt.dev.jjs.ast.JNewArray;
 import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JNode;
-import com.google.gwt.dev.jjs.ast.JNonNullType;
 import com.google.gwt.dev.jjs.ast.JNullLiteral;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -1532,22 +1531,26 @@ public class UnifyAst {
   }
 
   private JReferenceType translate(JReferenceType type) {
-    if (type instanceof JNonNullType) {
-      return translate(type.getUnderlyingType()).getNonNull();
-    }
+    JReferenceType result = type.getUnderlyingType();
 
     if (type instanceof JArrayType) {
       JArrayType arrayType = (JArrayType) type;
-      return program.getTypeArray(translate(arrayType.getElementType()));
-    }
-
-    if (type.isExternal()) {
+      result = program.getTypeArray(translate(arrayType.getElementType()));
+    } else  if (type.isExternal()) {
       assert type instanceof JDeclaredType : "Unknown external type" + type.getName();
-      type = translate((JDeclaredType) type);
-      assert !type.isExternal();
+      result = translate((JDeclaredType) type);
+    }
+    assert !result.isExternal();
+
+    if (!type.canBeNull()) {
+      result = result.strengthenToNonNull();
     }
 
-    return type;
+    if (!type.canBeSubclass()) {
+      result = result.stengthenToExact();
+    }
+
+    return result;
   }
 
   private JType translate(JType type) {

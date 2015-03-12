@@ -462,7 +462,7 @@ public class TypeTightener {
     public void endVisit(JConditional x, Context ctx) {
       if (x.getType() instanceof JReferenceType) {
         JReferenceType refType = (JReferenceType) x.getType();
-        JReferenceType resultType = program.strengthenType(refType, Arrays.asList(
+        JReferenceType resultType = program.strengthenAssignment(refType, Arrays.asList(
             (JReferenceType) x.getThenExpr().getType(),
             (JReferenceType) x.getElseExpr().getType()));
         if (refType != resultType) {
@@ -494,7 +494,7 @@ public class TypeTightener {
       }
 
       JReferenceType refType = (JReferenceType) x.getType();
-      JReferenceType resultType = program.strengthenType(refType, typeList);
+      JReferenceType resultType = program.strengthenAssignment(refType, typeList);
       if (refType != resultType) {
         x.setType(resultType);
         madeChanges();
@@ -609,7 +609,7 @@ public class TypeTightener {
         typeList.add((JReferenceType) method.getType());
       }
 
-      JReferenceType resultType = program.strengthenType(refType, typeList);
+      JReferenceType resultType = program.strengthenAssignment(refType, typeList);
       if (refType != resultType) {
         x.setType(resultType);
         madeChanges();
@@ -633,34 +633,7 @@ public class TypeTightener {
         JMethodCall newCall = new JMethodCall(x.getSourceInfo(), x.getInstance(), concreteMethod);
         newCall.addArgs(x.getArgs());
         ctx.replaceMe(newCall);
-        target = concreteMethod;
-        x = newCall;
       }
-
-      /*
-       * Mark a call as non-polymorphic if the targeted method is the only
-       * possible dispatch, given the qualifying instance type.
-       */
-      if (target.isAbstract()) {
-        return;
-      }
-
-      JExpression instance = x.getInstance();
-      assert (instance != null);
-      JReferenceType instanceType = (JReferenceType) instance.getType();
-      for (JMethod overridingMethod : target.getOverridingMethods()) {
-        // Look for overriding methods from a type compatible with the instance type, if none is
-        // found, this call can be marked as static dispatch.
-        JReferenceType overridingMethodEnclosingType = overridingMethod.getEnclosingType();
-        if (program.typeOracle.canTheoreticallyCast(
-            instanceType, overridingMethodEnclosingType)) {
-          // This call is truly polymorphic.
-          return;
-        }
-      }
-      assert !x.isStaticDispatchOnly();
-      x.setCannotBePolymorphic();
-      madeChanges();
     }
 
     @Override
@@ -732,7 +705,7 @@ public class TypeTightener {
           if (singleConcrete == null) {
             return null;
           }
-          return refType.canBeNull() ? singleConcrete : singleConcrete.getNonNull();
+          return refType.canBeNull() ? singleConcrete : singleConcrete.strengthenToNonNull();
         }
       }
       return null;
@@ -766,6 +739,12 @@ public class TypeTightener {
         return;
       }
 
+      // TODO Move little bit up
+      if (!refType.canBeSubclass() && !refType.canBeNull()) {
+        // TODO: Is this shortcut needed? What about other places where we can take shortcut?
+        return;
+      }
+
       // tighten based on assignment
       List<JReferenceType> typeList = Lists.newArrayList();
       Collection<JExpression> myAssignments = assignments.get(x);
@@ -788,7 +767,7 @@ public class TypeTightener {
         }
       }
 
-      JReferenceType resultType = program.strengthenType(refType, typeList);
+      JReferenceType resultType = program.strengthenAssignment(refType, typeList);
       if (refType != resultType) {
         x.setType(resultType);
         madeChanges();
@@ -887,6 +866,7 @@ public class TypeTightener {
 
   private TypeTightener(JProgram program) {
     this.program = program;
+    // TODO look all usages of typeList
   }
 
   private OptimizerStats execImpl(OptimizerContext optimizerCtx) {

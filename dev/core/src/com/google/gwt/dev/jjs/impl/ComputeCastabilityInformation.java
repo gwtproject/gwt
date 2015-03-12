@@ -124,8 +124,9 @@ public class ComputeCastabilityInformation {
           return;
         }
 
-        // element type being final means the assignment is statically correct
-        if (elementType.isFinal()) {
+        // The array class is exact, i.e this array reference always refers to an array
+        // of the declared class, not a subclass.
+        if (!lhsArrayRef.getInstance().getType().canBeSubclass()) {
           return;
         }
 

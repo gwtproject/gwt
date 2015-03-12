@@ -56,16 +56,19 @@ public class ArrayNormalizer {
       }
       JArrayRef arrayRef = (JArrayRef) x.getLhs();
       JType elementType = arrayRef.getType();
+      boolean canBeSubtype = arrayRef.getInstance().getType().canBeSubclass() &&
+          elementType.canBeSubclass();
       if (elementType instanceof JNullType) {
         // JNullType will generate a null pointer exception instead,
         return;
       } else if (!(elementType instanceof JReferenceType)) {
         // Primitive array types are statically correct, no need to set check.
         return;
-      } else if (elementType.isFinal() &&
+      } else if (!canBeSubtype &&
           program.typeOracle.canTriviallyCast((JReferenceType) x.getRhs().getType(),
               (JReferenceType) elementType)) {
-        // Effectively final element types are statically correct.
+        // The array is of the exact class (not a subclass), so assignments can be checked
+        // statically.
         return;
       }
 

@@ -16,26 +16,32 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.ast.JAnalysisDecoratedType.AnalysisDecoratedTypeSingletons;
 
 /**
  * Base class for any reference type.
  */
 public abstract class JReferenceType extends JType implements CanBeAbstract {
 
-  private transient JNonNullType nonNullType;
+  private transient AnalysisDecoratedTypeSingletons analysisDecoratedTypeSingletons = null;
 
   public JReferenceType(SourceInfo info, String name) {
     super(info, name);
   }
 
-  /**
-   * Returns <code>true</code> if it's possible for this type to be
-   * <code>null</code>.
-   *
-   * @see JNonNullType
-   */
+  JReferenceType(SourceInfo info, String name,
+      AnalysisDecoratedTypeSingletons analysisDecoratedTypeSingletons) {
+    super(info, name);
+    this.analysisDecoratedTypeSingletons = analysisDecoratedTypeSingletons;
+  }
+  @Override
   public boolean canBeNull() {
     return true;
+  }
+
+  @Override
+  public boolean canBeSubclass() {
+    return !isFinal();
   }
 
   @Override
@@ -53,11 +59,20 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
     return "L" + name.replace('.', '/') + ';';
   }
 
-  public JNonNullType getNonNull() {
-    if (nonNullType == null) {
-      nonNullType = new JNonNullType(this);
-    }
-    return nonNullType;
+  public JReferenceType weakenToNullable() {
+    return JAnalysisDecoratedType.weakenToNullable(this);
+  }
+
+  public JReferenceType weakenToNonExact() {
+    return JAnalysisDecoratedType.weakenToNonExact(this);
+  }
+
+  public JReferenceType strengthenToNonNull() {
+    return JAnalysisDecoratedType.strengthenToNonNull(this);
+  }
+
+  public JReferenceType stengthenToExact() {
+    return JAnalysisDecoratedType.stengthenToExact(this);
   }
 
   /**
@@ -71,5 +86,12 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
   public boolean replaces(JType originalType) {
     return super.replaces(originalType)
         && canBeNull() == ((JReferenceType) originalType).canBeNull();
+  }
+
+  protected AnalysisDecoratedTypeSingletons getAnalysisDecoratedTypeSingletons() {
+    if (analysisDecoratedTypeSingletons == null) {
+      analysisDecoratedTypeSingletons = new AnalysisDecoratedTypeSingletons();
+    }
+    return analysisDecoratedTypeSingletons;
   }
 }

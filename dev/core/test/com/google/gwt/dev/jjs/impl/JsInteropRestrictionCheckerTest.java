@@ -746,7 +746,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertCompileFails("'test.EntryPoint$Buggy' implements more than one JsFunction interfaces: "
-        + "[interface MyJsFunctionInterface1 , interface MyJsFunctionInterface2 ]");
+        + "[test.MyJsFunctionInterface1, test.MyJsFunctionInterface2]");
   }
 
   public void testJsFunctionMultipleInterfacesWithSameSignatureFails() throws Exception {
@@ -757,7 +757,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertCompileFails("'test.EntryPoint$Buggy' implements more than one JsFunction interfaces: "
-        + "[interface MyJsFunctionInterface1 , interface MyJsFunctionInterface3 ]");
+        + "[test.MyJsFunctionInterface1, test.MyJsFunctionInterface3]");
   }
 
   public void testJsFunctionFromSuperClassAndSuperInterfaceFails() throws Exception {
@@ -769,7 +769,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertCompileFails("'test.EntryPoint$Buggy' implements more than one JsFunction interfaces: "
-        + "[interface MyJsFunctionInterface1 , interface MyJsFunctionInterface3 ]");
+        + "[test.MyJsFunctionInterface1, test.MyJsFunctionInterface3]");
   }
 
   public void testJsFunctionFromSuperClassAndSuperSuperInterfaceFails() throws Exception {
@@ -782,7 +782,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertCompileFails("'test.EntryPoint$Buggy' implements more than one JsFunction interfaces: "
-        + "[interface MyJsFunctionInterface1 , interface MyJsFunctionInterface3 ]");
+        + "[test.MyJsFunctionInterface1, test.MyJsFunctionInterface3]");
   }
 
   public void testJsFunctionFromSuperInterfaceAndSuperSuperSuperInterfaceFails() throws Exception {
@@ -795,7 +795,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertCompileFails("'test.EntryPoint$Buggy' implements more than one JsFunction interfaces: "
-        + "[interface MyJsFunctionInterface1 , interface MyJsFunctionInterface3 ]");
+        + "[test.MyJsFunctionInterface1, test.MyJsFunctionInterface3]");
   }
 
   public void testJsFunctionBuggyInterfaceFails() throws Exception {
@@ -803,7 +803,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetClassDecl("public static class Buggy {}");
 
     assertCompileFails("'test.MyBuggyInterface' implements more than one JsFunction interfaces: "
-        + "[interface MyJsFunctionInterface1 , interface MyJsFunctionInterface2 ]");
+        + "[test.MyJsFunctionInterface1, test.MyJsFunctionInterface2]");
   }
 
   public void testJsFunctionJsTypeCollisionFails1() throws Exception {

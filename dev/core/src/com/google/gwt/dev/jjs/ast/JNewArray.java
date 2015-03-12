@@ -77,7 +77,7 @@ public class JNewArray extends JExpression {
   }
 
   @Override
-  public JNonNullType getType() {
+  public JAnalysisType getType() {
     return type.getNonNull();
   }
 

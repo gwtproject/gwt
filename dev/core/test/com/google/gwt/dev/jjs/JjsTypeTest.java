@@ -17,11 +17,11 @@
 package com.google.gwt.dev.jjs;
 
 import com.google.gwt.dev.MinimalRebuildCache;
+import com.google.gwt.dev.jjs.ast.JAnalysisType;
 import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
-import com.google.gwt.dev.jjs.ast.JNonNullType;
 import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
@@ -68,8 +68,8 @@ public class JjsTypeTest extends TestCase {
   private JClassType classArrayList;
   private JClassType classB;
   private JClassType classBase;
-  private JNonNullType classBaseNn;
-  private JNonNullType classBnn;
+  private JAnalysisType classBaseNn;
+  private JAnalysisType classBnn;
   private JClassType classBSub;
   private JClassType classC;
   private JClassType classJso;

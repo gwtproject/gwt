@@ -633,34 +633,7 @@ public class TypeTightener {
         JMethodCall newCall = new JMethodCall(x.getSourceInfo(), x.getInstance(), concreteMethod);
         newCall.addArgs(x.getArgs());
         ctx.replaceMe(newCall);
-        target = concreteMethod;
-        x = newCall;
       }
-
-      /*
-       * Mark a call as non-polymorphic if the targeted method is the only
-       * possible dispatch, given the qualifying instance type.
-       */
-      if (target.isAbstract()) {
-        return;
-      }
-
-      JExpression instance = x.getInstance();
-      assert (instance != null);
-      JReferenceType instanceType = (JReferenceType) instance.getType();
-      for (JMethod overridingMethod : target.getOverridingMethods()) {
-        // Look for overriding methods from a type compatible with the instance type, if none is
-        // found, this call can be marked as static dispatch.
-        JReferenceType overridingMethodEnclosingType = overridingMethod.getEnclosingType();
-        if (program.typeOracle.canTheoreticallyCast(
-            instanceType, overridingMethodEnclosingType)) {
-          // This call is truly polymorphic.
-          return;
-        }
-      }
-      assert !x.isStaticDispatchOnly();
-      x.setCannotBePolymorphic();
-      madeChanges();
     }
 
     @Override
@@ -763,6 +736,12 @@ public class TypeTightener {
       if (leafType != null) {
         x.setType(leafType);
         madeChanges();
+        return;
+      }
+
+      // TODO Move little bit up
+      if (!refType.canBeASubclass()) {
+        // TODO: Is this shortcut needed? What about other places where we can take shortcut?
         return;
       }
 
@@ -887,6 +866,7 @@ public class TypeTightener {
 
   private TypeTightener(JProgram program) {
     this.program = program;
+    // TODO look all usages of typeList
   }
 
   private OptimizerStats execImpl(OptimizerContext optimizerCtx) {

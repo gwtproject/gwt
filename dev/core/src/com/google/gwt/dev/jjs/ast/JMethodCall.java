@@ -223,6 +223,7 @@ public class JMethodCall extends JExpression {
    */
   public void setCannotBePolymorphic() {
     assert polymorphism == Polymorphism.NORMAL;
+    assert !method.isAbstract() : getInstance().getType() + " " + method;
     polymorphism = Polymorphism.CANNOT_BE_POLYMORPHIC;
   }
 

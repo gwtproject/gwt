@@ -126,7 +126,7 @@ public class JsFunctionTest extends GWTTestCase {
   }
 
   public void testJsFunctionJs2Java() {
-    MyJsFunctionInterface intf = createMyFunction();
+    MyJsFunctionInterface intf = createMyJsFunction();
     assertEquals(10, intf.foo(10));
   }
 
@@ -137,18 +137,56 @@ public class JsFunctionTest extends GWTTestCase {
         return a + 2;
       }
     }.foo(10));
-    assertEquals(10, createMyFunction().foo(10));
+    assertEquals(10, createMyJsFunction().foo(10));
   }
 
   public void testJsFunctionCallbackPattern() {
     MyClassAcceptsJsFunctionAsCallBack c = new MyClassAcceptsJsFunctionAsCallBack();
-    c.setCallBack(createMyFunction());
+    c.setCallBack(createMyJsFunction());
     assertEquals(10, c.triggerCallBack(10));
   }
 
   public void testJsFunctionReferentialIntegrity() {
     MyJsFunctionIdentityInterface intf = createReferentialFunction();
     assertEquals(intf, intf.identity());
+  }
+
+  public void testCast() {
+    MyJsFunctionInterface c1 = (MyJsFunctionInterface) createFunction();
+    assertNotNull(c1);
+    MyJsFunctionIdentityInterface c2 = (MyJsFunctionIdentityInterface) createFunction();
+    assertNotNull(c2);
+    try {
+      assertNotNull(c1 = (MyJsFunctionInterface) createObject());
+      fail("ClassCastException should be caught.");
+    } catch (ClassCastException cce) {
+      // Expected.
+    }
+  }
+
+  public void testInstanceOf_jsFunction() {
+    Object object = createFunction();
+    assertTrue(object instanceof MyJsFunctionInterface);
+    assertTrue(object instanceof MyJsFunctionIdentityInterface);
+    assertFalse(object instanceof MyJsFunctionInterfaceImpl);
+    assertTrue(object instanceof ElementLikeJsInterface);
+  }
+
+  public void testInstanceOf_jsObject() {
+    Object object = createObject();
+    assertFalse(object instanceof MyJsFunctionInterface);
+    assertFalse(object instanceof MyJsFunctionIdentityInterface);
+    assertFalse(object instanceof MyJsFunctionInterfaceImpl);
+    assertTrue(object instanceof ElementLikeJsInterface);
+  }
+
+  public void testInstanceOf_javaInstance() {
+    Object object = new MyJsFunctionInterfaceImpl();
+    assertTrue(object instanceof MyJsFunctionInterface);
+    assertTrue(object instanceof MyJsFunctionInterfaceImpl);
+    assertFalse(object instanceof MyJsFunctionIdentityInterface);
+    assertFalse(object instanceof MyJsInterface);
+    assertFalse(object instanceof ElementLikeJsInterface);
   }
 
   // uncomment when Java8 is supported.
@@ -201,7 +239,7 @@ public class JsFunctionTest extends GWTTestCase {
     return object[functionName]();
   }-*/;
 
-  private static native MyJsFunctionInterface createMyFunction() /*-{
+  private static native MyJsFunctionInterface createMyJsFunction() /*-{
     var myFunction = function(a) { return a; };
     return myFunction;
   }-*/;
@@ -209,5 +247,15 @@ public class JsFunctionTest extends GWTTestCase {
   private static native MyJsFunctionIdentityInterface createReferentialFunction() /*-{
     function myFunction() { return myFunction; }
     return myFunction;
+  }-*/;
+
+  private static native Object createFunction() /*-{
+    var fun = function(a) { return a; };
+    return fun;
+  }-*/;
+
+  private static native Object createObject() /*-{
+    var a = {};
+    return a;
   }-*/;
 }

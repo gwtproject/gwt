@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1177afa_3855451f",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-12T19:34:55Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "0b8ac603d6c7833ceb1a34c283a53b5eabea1431",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1177afa_18520937",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-12T19:34:55Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "0b8ac603d6c7833ceb1a34c283a53b5eabea1431",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

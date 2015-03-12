@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2112aad8_c95cf156",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-12T00:49:39Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JNullType.",
+      "revId": "fe531b5f48f0d63d9681f0c05ba9ebb312526f66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2112aad8_a961bd14",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-12T00:49:39Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JParameter.",
+      "revId": "fe531b5f48f0d63d9681f0c05ba9ebb312526f66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

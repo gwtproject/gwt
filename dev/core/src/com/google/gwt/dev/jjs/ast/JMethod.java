@@ -291,7 +291,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
   }
 
   public static final JMethod NULL_METHOD = new JMethod(SourceOrigin.UNKNOWN, "nullMethod", null,
-      JNullType.INSTANCE, false, false, true, AccessModifier.PUBLIC);
+      JReferenceType.NULL_TYPE, false, false, true, AccessModifier.PUBLIC);
 
   static {
     NULL_METHOD.setSynthetic();

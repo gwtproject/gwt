@@ -419,8 +419,26 @@ public class JProgram extends JNode implements ArrayTypeCreator {
       // Not assigned, it can only be null.
       return getTypeNull();
     } else {
-      return strongerType(refType, generalizeTypes(assignedTypes));
+      JReferenceType resultType = resolveToSingleExactType(assignedTypes);
+      // TODO: what if the type is exact and not stronger??
+      if (resultType == null) {
+        resultType = strongerType(refType, generalizeTypes(assignedTypes));
+      }
+      return resultType;
     }
+  }
+
+  private JReferenceType resolveToSingleExactType(List<JReferenceType> typeList) {
+    JReferenceType referenceType = typeList.get(0);
+    if (referenceType.canBeASubclass()) {
+      return null;
+    }
+    for (JReferenceType type : typeList) {
+      if (type != referenceType) {
+        return null;
+      }
+    }
+    return referenceType;
   }
 
   /**
@@ -1115,6 +1133,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
     if (type1 instanceof JNonNullType != type2 instanceof JNonNullType) {
       // If either is non-nullable, the result should be non-nullable.
+      // TODO not sure if this correct?
       return strongerType(type1.getNonNull(), type2.getNonNull());
     }
 

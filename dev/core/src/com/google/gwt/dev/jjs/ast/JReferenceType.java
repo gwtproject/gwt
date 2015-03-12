@@ -23,18 +23,19 @@ import com.google.gwt.dev.jjs.SourceInfo;
 public abstract class JReferenceType extends JType implements CanBeAbstract {
 
   private transient JNonNullType nonNullType;
+  private transient JExactType knownType;
 
   public JReferenceType(SourceInfo info, String name) {
     super(info, name);
   }
 
-  /**
-   * Returns <code>true</code> if it's possible for this type to be
-   * <code>null</code>.
-   *
-   * @see JNonNullType
-   */
+  @Override
   public boolean canBeNull() {
+    return true;
+  }
+
+  @Override
+  public boolean canBeASubclass() {
     return true;
   }
 
@@ -58,6 +59,13 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
       nonNullType = new JNonNullType(this);
     }
     return nonNullType;
+  }
+
+  public JExactType getExact() {
+    if (knownType == null) {
+      knownType = new JExactType(this);
+    }
+    return knownType;
   }
 
   /**

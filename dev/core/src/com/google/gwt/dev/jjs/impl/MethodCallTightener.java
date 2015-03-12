@@ -21,6 +21,7 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
@@ -77,31 +78,63 @@ public class MethodCallTightener {
         return;
       }
 
-      JMethod foundMethod = program.typeOracle.getInstanceMethodBySignature(
-          (JClassType) instanceType, method.getSignature());
-      if (foundMethod == null || !foundMethod.canBePolymorphic()) {
-        // The declared instance type is abstract and doesn't have the method.
-        return;
-      }
-      if (foundMethod == method) {
-        // The instance type doesn't override the method.
-        return;
-      }
-      if (!foundMethod.getOverriddenMethods().contains(method)) {
-        // The found method has the same signature as the target method of the call being tightened
-        // but does NOT override it. this situation occurs for example when the target method is
-        // package private and the found method is a method with the same name and signature as the
-        // target method in a subclass declared in a different package).
-        return;
+      JMethodCall newCall = maybeUpgradeToNonPolymorphicCall(x);
+
+      // If the call is still polymorphic, try tightening the method.
+      if (newCall.canBePolymorphic()) {
+        newCall = maybeTightenMethodCall(newCall);
       }
 
-      /*
-       * Replace the call to the original method with a call to the same method
-       * on the tighter type.
-       */
-      JMethodCall call = new JMethodCall(x.getSourceInfo(), x.getInstance(), foundMethod);
-      call.addArgs(x.getArgs());
-      ctx.replaceMe(call);
+      if (newCall != x) {
+        ctx.replaceMe(newCall);
+      }
+    }
+
+    private JMethodCall maybeUpgradeToNonPolymorphicCall(JMethodCall x) {
+      JReferenceType instanceType = (JReferenceType) x.getInstance().getType();
+
+      if (!instanceType.canBeASubclass()) {
+        // Mark a call as non-polymorphic if the targeted type is guaranteed to be not a subclass.
+        x = maybeTightenMethodCall(x);
+        x.setCannotBePolymorphic();
+        System.out.println(x);
+        madeChanges();
+      } else if (!hasPotentialOverride(instanceType, x.getTarget())) {
+        // Mark a call as non-polymorphic if the targeted method is the only possible dispatch.
+        x.setCannotBePolymorphic();
+        madeChanges();
+       }
+
+      return x;
+    }
+
+    private boolean hasPotentialOverride(JReferenceType instanceType, JMethod target) {
+      if (target.isAbstract()) {
+        return true;
+      }
+
+      for (JMethod override : program.typeOracle.getOverridingMethodsOf(target)) {
+        JReferenceType overrideType = override.getEnclosingType();
+        if (program.typeOracle.canTheoreticallyCast(instanceType, overrideType)) {
+          // This call is truly polymorphic.
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    private JMethodCall maybeTightenMethodCall(JMethodCall x) {
+      JMethod original = x.getTarget();
+      JClassType underlyingType = (JClassType) x.getInstance().getType().getUnderlyingType();
+
+      JMethod foundMethod = program.typeOracle.findMostSpecificOverride(underlyingType, original);
+      if (foundMethod != original) {
+        JMethodCall newCall = new JMethodCall(x.getSourceInfo(), x.getInstance(), foundMethod);
+        newCall.addArgs(x.getArgs());
+        x = newCall;
+      }
+      return x;
     }
 
     @Override

@@ -964,6 +964,40 @@ public class JTypeOracle implements Serializable {
     return getOrCreateInstanceMethodsBySignatureForType(type).get(signature);
   }
 
+  public JMethod findMostSpecificOverride(JClassType type, JMethod baseMethod) {
+    JMethod foundMethod = getInstanceMethodBySignature(type, baseMethod.getSignature());
+    System.out.println(type + " " + baseMethod + " " + baseMethod.getEnclosingType() + " Found:"
+        + foundMethod.getEnclosingType());
+    if (foundMethod == baseMethod) {
+      System.out.println("Found same");
+      return foundMethod;
+    }
+    // A method with the same signature as the target method might NOT override if the original
+    // method is package private and found method is defined in a different package.
+    if (foundMethod != null) {
+      List<JMethod> overriddenMethods = foundMethod.getOverriddenMethods();
+      if (overriddenMethods.contains(baseMethod)) {
+        System.out.println("Found good");
+        return foundMethod;
+      } else {
+        // !!!!!!!! it doesn't include because overriden methods doesn't list interface methods
+        for (JMethod method : overriddenMethods) {
+          System.out.println("Overriden: " + method.getEnclosingType());
+        }
+      }
+    }
+
+    // Let's look parent if we can find one there.
+    if (type.getSuperClass() != null) {
+      System.out.println("Looking super");
+      return findMostSpecificOverride(type.getSuperClass(), baseMethod);
+    }
+
+    System.out.println("Couldn't find");
+    assert baseMethod.isAbstract() : baseMethod.toString();
+    return baseMethod;
+  }
+
   public JClassType getSingleJsoImpl(JReferenceType maybeSingleJsoIntf) {
     String className = jsoByInterface.get(maybeSingleJsoIntf.getName());
     if (className == null) {

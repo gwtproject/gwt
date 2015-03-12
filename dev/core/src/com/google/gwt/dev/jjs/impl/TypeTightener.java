@@ -27,6 +27,7 @@ import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConditional;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
+import com.google.gwt.dev.jjs.ast.JExactType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
@@ -635,30 +636,6 @@ public class TypeTightener {
         target = concreteMethod;
         x = newCall;
       }
-
-      /*
-       * Mark a call as non-polymorphic if the targeted method is the only
-       * possible dispatch, given the qualifying instance type.
-       */
-      if (x.canBePolymorphic() && !target.isAbstract()) {
-        JExpression instance = x.getInstance();
-        assert (instance != null);
-        JReferenceType instanceType = (JReferenceType) instance.getType();
-        Collection<JMethod> myOverriders = program.typeOracle.getOverridingMethodsOf(target);
-        if (myOverriders != null) {
-          for (JMethod override : myOverriders) {
-            JReferenceType overrideType = override.getEnclosingType();
-            if (program.typeOracle.canTheoreticallyCast(instanceType, overrideType)) {
-              // This call is truly polymorphic.
-              // TODO: composite types! :)
-              return;
-            }
-          }
-          // The instance type is incompatible with all overrides.
-        }
-        x.setCannotBePolymorphic();
-        madeChanges();
-      }
     }
 
     @Override
@@ -761,6 +738,12 @@ public class TypeTightener {
       if (leafType != null) {
         x.setType(leafType);
         madeChanges();
+        return;
+      }
+
+      // TODO Move little bit up
+      if (refType instanceof JExactType) {
+        // TODO: Is this shortcut needed? What about other places where we can take shortcut?
         return;
       }
 
@@ -885,6 +868,7 @@ public class TypeTightener {
 
   private TypeTightener(JProgram program) {
     this.program = program;
+    // TODO look all usages of typeList
   }
 
   private OptimizerStats execImpl(OptimizerContext optimizerCtx) {

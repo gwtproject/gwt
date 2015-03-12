@@ -55,6 +55,11 @@ public class JNonNullType extends JReferenceType {
   }
 
   @Override
+  public JExactType getExact() {
+    return ref.getExact();
+  }
+
+  @Override
   public JReferenceType getUnderlyingType() {
     return ref;
   }

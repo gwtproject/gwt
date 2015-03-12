@@ -62,6 +62,14 @@ public abstract class JType extends JNode implements HasName, CanBeFinal {
    */
   public abstract boolean canBeNull();
 
+  /**
+   * Returns <code>true</code> if it's possible for this type to be
+   * a subclass of the type denoted with this type.
+   *
+   * @see JExactType
+   */
+  public abstract boolean canBeASubclass();
+
   public abstract JLiteral getDefaultValue();
 
   public abstract String getJavahSignatureName();

@@ -28,7 +28,7 @@ public class JArrayType extends JReferenceType {
 
   public JArrayType(JType elementType) {
     super(elementType.getSourceInfo().makeChild(SourceOrigin.UNKNOWN), elementType.getName() + "[]");
-    assert !(elementType instanceof JNonNullType);
+    assert elementType == elementType.getUnderlyingType();
     this.elementType = elementType;
   }
 

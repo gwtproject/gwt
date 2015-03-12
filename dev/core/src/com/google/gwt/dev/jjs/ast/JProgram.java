@@ -123,11 +123,9 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   private static final int IS_ARRAY = 2;
 
-  private static final int IS_CLASS = 3;
+  private static final int IS_CLASS = 1;
 
-  private static final int IS_INTERFACE = 1;
-
-  private static final int IS_NULL = 0;
+  private static final int IS_INTERFACE = 0;
 
   private static final Map<String, JPrimitiveType> primitiveTypes = Maps.newHashMap();
 
@@ -413,14 +411,52 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   /**
    * Tries the strengthen the reference type based on the assigned types in the program.
+   * <p>
+   * Computes result = refType ^ (V assignedTypes)
    */
-  public JReferenceType strengthenType(JReferenceType refType, List<JReferenceType> assignedTypes) {
-    if (assignedTypes.isEmpty()) {
-      // Not assigned, it can only be null.
-      return getTypeNull();
-    } else {
-      return strongerType(refType, generalizeTypes(assignedTypes));
+  public JReferenceType strengthenAssignment(JReferenceType refType,
+      List<JReferenceType> assignedTypes) {
+    return strongerType(refType, generalizeTypes(assignedTypes));
+  }
+
+  /**
+   * Return the greatest lower bound of two types. That is, return the largest
+   * type that is a subtype of both inputs. If none exists return {@code thisType}.
+   */
+  private JReferenceType strongerType(JReferenceType thisType, JReferenceType thatType) {
+    if (thisType == thatType) {
+      return thisType;
     }
+
+    if (thisType == getTypeNull() || thatType == getTypeNull()) {
+      return JNullType.INSTANCE;
+    }
+
+    if (thisType.canBeNull()  != thatType.canBeNull()) {
+      // If either is non-nullable, the result should be non-nullable.
+      return strongerType(thisType.strengthenToNonNull(), thatType.strengthenToNonNull());
+    }
+
+    if (!thatType.canBeSubclass() && thisType.canBeSubclass() &&
+        typeOracle.canTriviallyCast(thatType, thisType)) {
+      // prefer that type if is exact and thisType is not exact.
+      return thatType;
+    }
+
+    if (typeOracle.canTriviallyCast(thisType, thatType)) {
+      return thisType;
+    }
+
+    if (typeOracle.canTriviallyCast(thatType, thisType)) {
+      return thatType;
+    }
+
+    // This types are incompatible; ideally this code should not be reached, but there are two
+    // situations where this happens:
+    //   1 - unrelated interfaces;
+    //   2 - unsafe code.
+    // The original type is preserved in this case.
+    return thisType;
   }
 
   /**
@@ -449,7 +485,9 @@ public class JProgram extends JNode implements ArrayTypeCreator {
    */
   private JReferenceType generalizeTypes(Collection<? extends JReferenceType> types) {
     assert (types != null);
-    assert (!types.isEmpty());
+    if (types.isEmpty()) {
+      return getTypeNull();
+    }
     Iterator<? extends JReferenceType> it = types.iterator();
     JReferenceType curType = it.next();
     while (it.hasNext()) {
@@ -462,51 +500,73 @@ public class JProgram extends JNode implements ArrayTypeCreator {
   }
 
   /**
-   * Return the least upper bound of two types. That is, the smallest type that
-   * is a supertype of both types.
+   * Return the least upper bound of two types. That is, the "smallest" type that
+   * is a supertype of both types. In this lattice there the smallest element might no exist, there
+   * might be multiple minimal elements neither of which is smaller than the others. E.g.
+   *
+   *                 I      J
+   *                | \    /|
+   *                |  \  / |
+   *                |   x   |
+   *                |  / \  |
+   *                | /   \ |
+   *                 A     B
+   *
+   * where I and J are interfaces, A and B are classes and both A and B implement I and J. In this
+   * case both I and J are generalizing the types A and B.
    */
-  private JReferenceType generalizeTypes(JReferenceType type1, JReferenceType type2) {
-    if (type1 == type2) {
-      return type1;
+  private JReferenceType generalizeTypes(JReferenceType thisType, JReferenceType thatType) {
+
+    if (!thisType.canBeNull() && !thatType.canBeNull()) {
+      // Nullability is an orthogonal property, so generalize the nullable versions and if both are
+      // not nullable then strengthen the result to non nullable.
+      JReferenceType nulllableGeneralizer =
+          generalizeTypes(thisType.weakenToNullable(), thatType.weakenToNullable());
+      return nulllableGeneralizer.strengthenToNonNull();
+    }
+    thisType = thisType.weakenToNullable();
+    thatType = thatType.weakenToNullable();
+
+    if (thatType  == getTypeNull()) {
+      return thisType;
     }
 
-    if (type1 instanceof JNonNullType && type2 instanceof JNonNullType) {
-      // Neither can be null.
-      type1 = type1.getUnderlyingType();
-      type2 = type2.getUnderlyingType();
-      return generalizeTypes(type1, type2).getNonNull();
-    } else if (type1 instanceof JNonNullType) {
-      // type2 can be null, so the result can be null
-      type1 = type1.getUnderlyingType();
-    } else if (type2 instanceof JNonNullType) {
-      // type1 can be null, so the result can be null
-      type2 = type2.getUnderlyingType();
-    }
-    assert !(type1 instanceof JNonNullType);
-    assert !(type2 instanceof JNonNullType);
-
-    int classify1 = classifyType(type1);
-    int classify2 = classifyType(type2);
-
-    if (classify1 == IS_NULL) {
-      return type2;
+    if (thisType  == getTypeNull()) {
+      return thatType;
     }
 
-    if (classify2 == IS_NULL) {
-      return type1;
+    if (thisType == thatType) {
+      // Handle exact types which can only generalize to an exact type if there are both the same (
+      // modulo nullability).
+      return thisType;
     }
+
+    return generalizeUnderlyingTypes(thisType.weakenToNonExact(), thatType.weakenToNonExact());
+  }
+
+  private JReferenceType generalizeUnderlyingTypes(
+      JReferenceType thisType, JReferenceType thatType) {
+
+    assert thisType == thisType.getUnderlyingType() && thatType == thatType.getUnderlyingType();
+
+    if (thisType == thatType) {
+      return thisType;
+    }
+
+    int classify1 = classifyType(thisType);
+    int classify2 = classifyType(thatType);
 
     if (classify1 == classify2) {
 
       // same basic kind of type
       if (classify1 == IS_INTERFACE) {
 
-        if (typeOracle.canTriviallyCast(type1, type2)) {
-          return type2;
+        if (typeOracle.canTriviallyCast(thisType, thatType)) {
+          return thatType;
         }
 
-        if (typeOracle.canTriviallyCast(type2, type1)) {
-          return type1;
+        if (typeOracle.canTriviallyCast(thatType, thisType)) {
+          return thisType;
         }
 
         // unrelated
@@ -514,8 +574,8 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
       } else if (classify1 == IS_ARRAY) {
 
-        JArrayType aType1 = (JArrayType) type1;
-        JArrayType aType2 = (JArrayType) type2;
+        JArrayType aType1 = (JArrayType) thisType;
+        JArrayType aType2 = (JArrayType) thatType;
         int dims1 = aType1.getDims();
         int dims2 = aType2.getDims();
 
@@ -553,7 +613,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
           JReferenceType leafRefType2 = (JReferenceType) leafType2;
 
           /**
-           * Never generalize arrays to arrays of {@link JNonNullType} as null array initialization
+           * Never generalize arrays to arrays of {@link JAnalysisDecoratedType} as null array initialization
            * is not accounted for in {@link TypeTightener}.
            */
           JReferenceType leafGeneralization =
@@ -577,8 +637,8 @@ public class JProgram extends JNode implements ArrayTypeCreator {
       } else {
 
         assert (classify1 == IS_CLASS);
-        JClassType class1 = (JClassType) type1;
-        JClassType class2 = (JClassType) type2;
+        JClassType class1 = (JClassType) thisType;
+        JClassType class2 = (JClassType) thatType;
 
         /*
          * see how far each type is from object; walk the one who's farther up
@@ -608,8 +668,8 @@ public class JProgram extends JNode implements ArrayTypeCreator {
       int lesser = Math.min(classify1, classify2);
       int greater = Math.max(classify1, classify2);
 
-      JReferenceType tLesser = classify1 < classify2 ? type1 : type2;
-      JReferenceType tGreater = classify1 > classify2 ? type1 : type2;
+      JReferenceType tLesser = classify1 < classify2 ? thisType : thatType;
+      JReferenceType tGreater = classify1 > classify2 ? thisType : thatType;
 
       if (lesser == IS_INTERFACE && greater == IS_CLASS) {
 
@@ -983,7 +1043,8 @@ public class JProgram extends JNode implements ArrayTypeCreator {
   }
 
   public boolean isJavaLangString(JType type) {
-    return type == typeString || type == typeString.getNonNull();
+    assert type != null;
+    return type.getUnderlyingType() == typeString;
   }
 
   public boolean isReferenceOnly(JDeclaredType type) {
@@ -1083,11 +1144,6 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     this.initialAsyncSequence = initialAsyncSequence;
   }
 
-  public void setPropertyProviderRegistratorTypeSourceName(
-      String propertyProviderRegistratorTypeSourceName) {
-    this.propertyProviderRegistratorTypeSourceName = propertyProviderRegistratorTypeSourceName;
-  }
-
   public void setRuntimeRebindRegistratorTypeName(String runtimeRebindRegistratorTypeName) {
     this.runtimeRebindRegistratorTypeName = runtimeRebindRegistratorTypeName;
   }
@@ -1098,37 +1154,6 @@ public class JProgram extends JNode implements ArrayTypeCreator {
    */
   public JMethod instanceMethodForStaticImpl(JMethod method) {
     return staticToInstanceMap.get(method);
-  }
-
-  /**
-   * Return the greatest lower bound of two types. That is, return the largest
-   * type that is a subtype of both inputs.
-   */
-  private JReferenceType strongerType(JReferenceType type1, JReferenceType type2) {
-    if (type1 == type2) {
-      return type1;
-    }
-
-    if (type1 instanceof JNullType || type2 instanceof JNullType) {
-      return JNullType.INSTANCE;
-    }
-
-    if (type1 instanceof JNonNullType != type2 instanceof JNonNullType) {
-      // If either is non-nullable, the result should be non-nullable.
-      return strongerType(type1.getNonNull(), type2.getNonNull());
-    }
-
-    if (typeOracle.canTriviallyCast(type1, type2)) {
-      return type1;
-    }
-
-    if (typeOracle.canTriviallyCast(type2, type1)) {
-      return type2;
-    }
-
-    // cannot determine a strong type, just return the first one (this makes two
-    // "unrelated" interfaces work correctly in TypeTightener
-    return type1;
   }
 
   @Override
@@ -1175,10 +1200,8 @@ public class JProgram extends JNode implements ArrayTypeCreator {
   }
 
   private int classifyType(JReferenceType type) {
-    assert !(type instanceof JNonNullType);
-    if (type instanceof JNullType) {
-      return IS_NULL;
-    } else if (type instanceof JInterfaceType) {
+    assert type == type.getUnderlyingType();
+    if (type instanceof JInterfaceType) {
       return IS_INTERFACE;
     } else if (type instanceof JArrayType) {
       return IS_ARRAY;

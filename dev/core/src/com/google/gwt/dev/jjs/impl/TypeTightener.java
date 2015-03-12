@@ -59,13 +59,13 @@ import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -431,11 +431,11 @@ public class TypeTightener {
       boolean triviallyFalse = false;
 
       JTypeOracle typeOracle = program.typeOracle;
-      if (typeOracle.canTriviallyCast(fromType, toType)) {
+      if (typeOracle.castSucceedsTrivially(fromType, toType)) {
         triviallyTrue = true;
       } else if (!typeOracle.isInstantiatedType(toType)) {
         triviallyFalse = true;
-      } else if (!typeOracle.canTheoreticallyCast(fromType, toType)) {
+      } else if (typeOracle.castFailsTrivially(fromType, toType)) {
         triviallyFalse = true;
       }
 
@@ -462,7 +462,7 @@ public class TypeTightener {
     public void endVisit(JConditional x, Context ctx) {
       if (x.getType() instanceof JReferenceType) {
         JReferenceType refType = (JReferenceType) x.getType();
-        JReferenceType resultType = program.strengthenType(refType, Arrays.asList(
+        JReferenceType resultType = program.strengthenAssignment(refType, Arrays.asList(
             (JReferenceType) x.getThenExpr().getType(),
             (JReferenceType) x.getElseExpr().getType()));
         if (refType != resultType) {
@@ -494,7 +494,7 @@ public class TypeTightener {
       }
 
       JReferenceType refType = (JReferenceType) x.getType();
-      JReferenceType resultType = program.strengthenType(refType, typeList);
+      JReferenceType resultType = program.strengthenAssignment(refType, typeList);
       if (refType != resultType) {
         x.setType(resultType);
         madeChanges();
@@ -521,7 +521,7 @@ public class TypeTightener {
       AnalysisResult analysisResult = staticallyEvaluateInstanceOf(fromType, toType);
 
       switch (analysisResult) {
-        case TRUE:
+        case TRUE_WHEN_NOT_NULL:
           if (x.getExpr().getType().canBeNull()) {
           // replace with a simple null test
             JBinaryOperation neq =
@@ -536,8 +536,8 @@ public class TypeTightener {
           break;
         case FALSE:
         // replace with a false literal
-          ctx.replaceMe(
-              JjsUtils.createOptimizedMultiExpression(x.getExpr(), program.getLiteralBoolean(false)));
+          ctx.replaceMe(JjsUtils.createOptimizedMultiExpression(x.getExpr(),
+              program.getLiteralBoolean(false)));
           break;
         case UNKNOWN:
         default:
@@ -596,7 +596,7 @@ public class TypeTightener {
       }
 
       // tighten based on both returned types and possible overrides
-      List<JReferenceType> typeList = new ArrayList<JReferenceType>();
+      List<JReferenceType> typeList = Lists.newArrayList();
 
       Collection<JExpression> myReturns = returns.get(x);
       if (myReturns != null) {
@@ -609,7 +609,7 @@ public class TypeTightener {
         typeList.add((JReferenceType) method.getType());
       }
 
-      JReferenceType resultType = program.strengthenType(refType, typeList);
+      JReferenceType resultType = program.strengthenAssignment(refType, typeList);
       if (refType != resultType) {
         x.setType(resultType);
         madeChanges();
@@ -633,34 +633,7 @@ public class TypeTightener {
         JMethodCall newCall = new JMethodCall(x.getSourceInfo(), x.getInstance(), concreteMethod);
         newCall.addArgs(x.getArgs());
         ctx.replaceMe(newCall);
-        target = concreteMethod;
-        x = newCall;
       }
-
-      /*
-       * Mark a call as non-polymorphic if the targeted method is the only
-       * possible dispatch, given the qualifying instance type.
-       */
-      if (target.isAbstract()) {
-        return;
-      }
-
-      JExpression instance = x.getInstance();
-      assert (instance != null);
-      JReferenceType instanceType = (JReferenceType) instance.getType();
-      for (JMethod overridingMethod : target.getOverridingMethods()) {
-        // Look for overriding methods from a type compatible with the instance type, if none is
-        // found, this call can be marked as static dispatch.
-        JReferenceType overridingMethodEnclosingType = overridingMethod.getEnclosingType();
-        if (program.typeOracle.canTheoreticallyCast(
-            instanceType, overridingMethodEnclosingType)) {
-          // This call is truly polymorphic.
-          return;
-        }
-      }
-      assert !x.isStaticDispatchOnly();
-      x.setCannotBePolymorphic();
-      madeChanges();
     }
 
     @Override
@@ -709,14 +682,13 @@ public class TypeTightener {
      * return <code>null</code> no matter what.
      */
     private JMethod getSingleConcreteMethodOverride(JMethod method) {
-      if (!method.canBePolymorphic()) {
-        return null;
-      }
+      assert method.canBePolymorphic();
+
       if (getSingleConcreteType(method.getEnclosingType()) != null) {
         return getSingleConcrete(method, ImmutableMap.of(method, method.getOverridingMethods()));
-      } else {
-        return null;
       }
+
+      return null;
     }
 
     /**
@@ -732,7 +704,7 @@ public class TypeTightener {
           if (singleConcrete == null) {
             return null;
           }
-          return refType.canBeNull() ? singleConcrete : singleConcrete.getNonNull();
+          return refType.canBeNull() ? singleConcrete : singleConcrete.strengthenToNonNull();
         }
       }
       return null;
@@ -745,21 +717,26 @@ public class TypeTightener {
       if (!(x.getType() instanceof JReferenceType)) {
         return;
       }
-      JReferenceType refType = (JReferenceType) x.getType();
+      JReferenceType varType = (JReferenceType) x.getType();
 
-      if (refType == program.getTypeNull()) {
+      if (varType == program.getTypeNull()) {
+        return;
+      }
+
+      if (!varType.canBeSubclass() && !varType.canBeNull()) {
+        // There is no more tightening to do here.
         return;
       }
 
       // tighten based on non-instantiability
-      if (!program.typeOracle.isInstantiatedType(refType)) {
+      if (!program.typeOracle.isInstantiatedType(varType)) {
         x.setType(program.getTypeNull());
         madeChanges();
         return;
       }
 
       // tighten based on leaf types
-      JReferenceType leafType = getSingleConcreteType(refType);
+      JReferenceType leafType = getSingleConcreteType(varType);
       if (leafType != null) {
         x.setType(leafType);
         madeChanges();
@@ -788,8 +765,8 @@ public class TypeTightener {
         }
       }
 
-      JReferenceType resultType = program.strengthenType(refType, typeList);
-      if (refType != resultType) {
+      JReferenceType resultType = program.strengthenAssignment(varType, typeList);
+      if (varType != resultType) {
         x.setType(resultType);
         madeChanges();
       }
@@ -855,25 +832,21 @@ public class TypeTightener {
    * of expressions that are assigned to them. Assignments include parameter instantiations.
    *
    */
-  private final Map<JVariable, Collection<JExpression>> assignments =
-      new IdentityHashMap<JVariable, Collection<JExpression>>();
+  private final Map<JVariable, Collection<JExpression>> assignments = Maps.newIdentityHashMap();
   /**
    * For each type tracks all classes the extend or implement it.
    */
   private final Map<JReferenceType, Collection<JClassType>> implementors =
-      new IdentityHashMap<JReferenceType, Collection<JClassType>>();
-
+      Maps.newIdentityHashMap();
   /**
    * For each parameter P (in method M) tracks the set of parameters that share its position in all
    * the methods that are overridden by M.
    */
-  private final Map<JParameter, Collection<JParameter>> paramUpRefs =
-      new IdentityHashMap<JParameter, Collection<JParameter>>();
+  private final Map<JParameter, Collection<JParameter>> paramUpRefs = Maps.newIdentityHashMap();
   /**
    * For each method tracks the set of all expressions that are returned.
    */
-  private final Map<JMethod, Collection<JExpression>> returns =
-      new IdentityHashMap<JMethod, Collection<JExpression>>();
+  private final Map<JMethod, Collection<JExpression>> returns = Maps.newIdentityHashMap();
 
   /**
    * For each method call, record the method calls and field references in its arguments.
@@ -914,10 +887,8 @@ public class TypeTightener {
     while (true) {
       TightenTypesVisitor tightener = new TightenTypesVisitor(optimizerCtx);
 
-      Set<JMethod> affectedMethods =
-          computeAffectedMethods(optimizerCtx, lastStep);
-      Set<JField> affectedFields =
-          computeAffectedFields(optimizerCtx, lastStep);
+      Set<JMethod> affectedMethods = computeAffectedMethods(optimizerCtx, lastStep);
+      Set<JField> affectedFields = computeAffectedFields(optimizerCtx, lastStep);
       optimizerCtx.traverse(tightener, affectedFields);
       optimizerCtx.traverse(tightener, affectedMethods);
       stats.recordModified(tightener.getNumMods());
@@ -993,23 +964,23 @@ public class TypeTightener {
     return !member.isStatic() && instance.getType() == program.getTypeNull();
   }
 
-  private enum AnalysisResult { TRUE, FALSE, UNKNOWN }
+  private enum AnalysisResult {TRUE_WHEN_NOT_NULL, FALSE, UNKNOWN }
 
   /**
-   * Tries to statically evaluate the instanceof operation. Returning TRUE if it can be determined
-   * statically that it is true, FALSE if it can be determined that is FALSE and UNKNOWN if the
-   * result can not be determined statically.
+   * Tries to statically evaluate the instanceof operation. Returning TRUE_WHEN_NOT_NULL if it can
+   * be determined statically that it is true when not null, FALSE if it can be determined that is
+   * false and UNKNOWN if the* result can not be determined statically.
    */
   private AnalysisResult staticallyEvaluateInstanceOf(JReferenceType fromType,
       JReferenceType toType) {
     if (fromType == program.getTypeNull()) {
       // null is never instanceof anything
       return AnalysisResult.FALSE;
-    } else if (program.typeOracle.canTriviallyCast(fromType, toType)) {
-      return AnalysisResult.TRUE;
+    } else if (program.typeOracle.castSucceedsTrivially(fromType, toType)) {
+      return AnalysisResult.TRUE_WHEN_NOT_NULL;
     } else if (!program.typeOracle.isInstantiatedType(toType)) {
       return AnalysisResult.FALSE;
-    } else if (!program.typeOracle.canTheoreticallyCast(fromType, toType)) {
+    } else if (program.typeOracle.castFailsTrivially(fromType, toType)) {
       return AnalysisResult.FALSE;
     }
     return AnalysisResult.UNKNOWN;

@@ -588,53 +588,52 @@ public class JTypeOracle implements Serializable {
     return canBeJavaScriptObject(type) || isOrExtendsJsType(type, false) || isJsFunction(type);
   }
 
-  public boolean canTheoreticallyCast(JReferenceType type, JReferenceType qType) {
-    if (!type.canBeNull() && qType.getName().equals(standardTypes.nullType)) {
+  public boolean castFailsTrivially(JReferenceType fromType, JReferenceType toType) {
+    if (!fromType.canBeNull() && toType.getName().equals(standardTypes.nullType)) {
       // Cannot cast non-nullable to null
-      return false;
+      return true;
     }
 
     // Compare the underlying types.
-    type = type.getUnderlyingType();
-    qType = qType.getUnderlyingType();
+    fromType = fromType.getUnderlyingType();
+    toType = toType.getUnderlyingType();
 
-    if (type == qType || type.getName().equals(standardTypes.javaLangObject)) {
-      return true;
+    if (fromType == toType || fromType.getName().equals(standardTypes.javaLangObject)) {
+      return false;
     }
 
     /**
      * Cross-cast allowed in theory, prevents TypeTightener from turning
      * cross-casts into null-casts.
      */
-    if (canCrossCastLikeJso(type) && canCrossCastLikeJso(qType)) {
-      return true;
+    if (canCrossCastLikeJso(fromType) && canCrossCastLikeJso(toType)) {
+      return false;
     }
 
     // TODO (cromwellian): handle case where types S and T have identical Js Prototypes
-    if (canTriviallyCast(type, qType)) {
-      return true;
+    if (castSucceedsTrivially(fromType, toType)) {
+      return false;
     }
 
-    if (type instanceof JArrayType) {
+    if (fromType instanceof JArrayType) {
 
-      JArrayType aType = (JArrayType) type;
-      if (qType instanceof JArrayType) {
-        JArrayType qaType = (JArrayType) qType;
-        JType leafType = aType.getLeafType();
-        JType qLeafType = qaType.getLeafType();
-        int dims = aType.getDims();
-        int qDims = qaType.getDims();
+      JArrayType fromArrayType = (JArrayType) fromType;
+      if (toType instanceof JArrayType) {
+        JArrayType toArrayType = (JArrayType) toType;
+        JType fromLeafType = fromArrayType.getLeafType();
+        JType toLeafType = toArrayType.getLeafType();
+        int fromDims = fromArrayType.getDims();
+        int toDims = toArrayType.getDims();
 
         // null[] or Object[] -> int[][] might work, other combinations won't
-        if (dims < qDims && !leafType.getName().equals(standardTypes.javaLangObject)
-            && !(leafType instanceof JNullType)) {
-          return false;
+        if (fromDims < toDims && !fromLeafType.getName().equals(standardTypes.javaLangObject)
+            && !(fromLeafType instanceof JNullType)) {
+          return true;
         }
 
-        if (dims == qDims) {
-          if (leafType instanceof JReferenceType && qLeafType instanceof JReferenceType) {
-            return canTheoreticallyCast((JReferenceType) leafType, (JReferenceType) qLeafType);
-          }
+        if (fromDims == toDims &&
+          fromLeafType instanceof JReferenceType && toLeafType instanceof JReferenceType) {
+          return castFailsTrivially((JReferenceType) fromLeafType, (JReferenceType) toLeafType);
         }
       }
 
@@ -644,99 +643,113 @@ public class JTypeOracle implements Serializable {
        * Serializable and Cloneable succeeds. Currently all casts of an array to
        * an interface return true, which is overly conservative but is safe.
        */
-    } else if (type instanceof JClassType) {
+    } else if (fromType instanceof JClassType) {
 
-      JClassType cType = (JClassType) type;
-      if (qType instanceof JClassType) {
-        return isSubClass(cType, (JClassType) qType);
-      } else if (qType instanceof JInterfaceType) {
-        return potentialInterfaceByClass.containsEntry(cType.getName(), qType.getName());
+      JClassType cType = (JClassType) fromType;
+      if (toType instanceof JClassType) {
+        return !isSubClass(cType, (JClassType) toType);
+      } else if (toType instanceof JInterfaceType) {
+        return !potentialInterfaceByClass.containsEntry(cType.getName(), toType.getName());
       }
-    } else if (type instanceof JInterfaceType) {
+    } else if (fromType instanceof JInterfaceType) {
 
-      JInterfaceType iType = (JInterfaceType) type;
-      if (qType instanceof JClassType) {
-        return potentialInterfaceByClass.containsEntry(qType.getName(), iType.getName());
+      JInterfaceType fromInterfaceType = (JInterfaceType) fromType;
+      if (toType instanceof JClassType) {
+        return !potentialInterfaceByClass.containsEntry(
+            toType.getName(), fromInterfaceType.getName());
       }
-    } else if (type instanceof JNullType) {
     }
 
-    return true;
+    return false;
   }
 
-  public boolean canTriviallyCast(JReferenceType type, JReferenceType qType) {
-    if (type.canBeNull() && !qType.canBeNull()) {
-      // Cannot reliably cast nullable to non-nullable
+  public boolean castSucceedsTrivially(JReferenceType fromType, JReferenceType toType) {
+    if (fromType.canBeNull() && !toType.canBeNull()) {
+      // Cannot cast nullable to non-nullable
       return false;
     }
 
     // Compare the underlying types.
-    type = type.getUnderlyingType();
-    qType = qType.getUnderlyingType();
+    fromType = fromType.getUnderlyingType();
+    toType = toType.getUnderlyingType();
 
-    if (type == qType || qType.getName().equals(standardTypes.javaLangObject)) {
+    if (fromType == toType || toType.getName().equals(standardTypes.javaLangObject)) {
       return true;
     }
 
-    if (type instanceof JArrayType) {
+    if (fromType instanceof JArrayType) {
+      return castSucceedsTrivially((JArrayType) fromType, toType);
+    }
 
-      JArrayType aType = (JArrayType) type;
-      if (qType instanceof JArrayType) {
-        JArrayType qaType = (JArrayType) qType;
-        JType leafType = aType.getLeafType();
-        JType qLeafType = qaType.getLeafType();
-        int dims = aType.getDims();
-        int qDims = qaType.getDims();
+    if (fromType instanceof JClassType) {
+      return castSucceedsTrivially((JClassType) fromType, toType);
+    }
 
-        // int[][] -> Object[], Serializable[], Clonable[] or null[] trivially true
-        if (dims > qDims
-            && (qLeafType.getName().equals(standardTypes.javaLangObject)
-                || qLeafType.getName().equals(standardTypes.javaIoSerializable)
-                || qLeafType.getName().equals(standardTypes.javaLangCloneable)
-                || qLeafType instanceof JNullType)) {
-          return true;
-        }
+    if (fromType instanceof JInterfaceType && toType instanceof JInterfaceType) {
+       return extendsInterface((JInterfaceType) fromType, (JInterfaceType) toType);
+    }
 
-        if (dims == qDims) {
-          if (leafType instanceof JReferenceType && qLeafType instanceof JReferenceType) {
-            return canTriviallyCast((JReferenceType) leafType, (JReferenceType) qLeafType);
-          }
-        }
-      }
-
-      if (qType.getName().equals(standardTypes.javaIoSerializable)
-          || qType.getName().equals(standardTypes.javaLangCloneable)) {
-        return true;
-      }
-    } else if (type instanceof JClassType) {
-
-      JClassType cType = (JClassType) type;
-      if (qType instanceof JClassType) {
-        JClassType qcType = (JClassType) qType;
-        if (isSuperClass(cType, qcType)) {
-          return true;
-        }
-      } else if (qType instanceof JInterfaceType) {
-        return implementsInterface(cType, (JInterfaceType) qType);
-      }
-    } else if (type instanceof JInterfaceType) {
-
-      JInterfaceType iType = (JInterfaceType) type;
-      if (qType instanceof JInterfaceType) {
-        return extendsInterface(iType, (JInterfaceType) qType);
-      }
-    } else if (type instanceof JNullType) {
+    if (fromType instanceof JNullType) {
       return true;
     }
 
     return false;
   }
 
-  public boolean canTriviallyCast(JType type, JType qType) {
-    if (type instanceof JPrimitiveType && qType instanceof JPrimitiveType) {
-      return type == qType;
-    } else if (type instanceof JReferenceType && qType instanceof JReferenceType) {
-      return canTriviallyCast((JReferenceType) type, (JReferenceType) qType);
+  private boolean castSucceedsTrivially(JClassType fromType, JReferenceType toType) {
+    if (toType instanceof JClassType) {
+      return isSuperClass(fromType, (JClassType) toType);
+    }
+    if (toType instanceof JInterfaceType) {
+      return implementsInterface(fromType, (JInterfaceType) toType);
+    }
+    return false;
+  }
+
+  private boolean castSucceedsTrivially(JArrayType fromArrayType, JReferenceType toType) {
+    if (toType.getName().equals(standardTypes.javaIoSerializable)
+        || toType.getName().equals(standardTypes.javaLangCloneable)) {
+      // Arrays can only be cast to object, serializable, clonable or some array type.
+      return true;
+    }
+
+    if (!(toType instanceof JArrayType)) {
+      return false;
+    }
+
+    JArrayType toArrayType = (JArrayType) toType;
+    JType fromLeafType = fromArrayType.getLeafType();
+    JType toLeafType = toArrayType.getLeafType();
+    int fromDims = fromArrayType.getDims();
+    int toDims = toArrayType.getDims();
+
+    // int[][] -> Object[], Serializable[], Clonable[] or null[] trivially true
+    if (fromDims > toDims
+        && (toLeafType.getName().equals(standardTypes.javaLangObject)
+        || toLeafType.getName().equals(standardTypes.javaIoSerializable)
+        || toLeafType.getName().equals(standardTypes.javaLangCloneable)
+        || toLeafType instanceof JNullType)) {
+      return true;
+    }
+
+    if (fromDims != toDims) {
+      return false;
+    }
+
+    // fromDims == toDims.
+    if (fromLeafType instanceof JReferenceType && toLeafType instanceof JReferenceType) {
+      return castSucceedsTrivially((JReferenceType) fromLeafType, (JReferenceType) toLeafType);
+    }
+
+    return false;
+  }
+
+  public boolean castSucceedsTrivially(JType fromType, JType toType) {
+    if (fromType instanceof JPrimitiveType && toType instanceof JPrimitiveType) {
+      return fromType == toType;
+    }
+    if (fromType instanceof JReferenceType && toType instanceof JReferenceType) {
+      return castSucceedsTrivially((JReferenceType) fromType, (JReferenceType) toType);
     }
     return false;
   }
@@ -863,6 +876,29 @@ public class JTypeOracle implements Serializable {
 
   public JMethod getInstanceMethodBySignature(JClassType type, String signature) {
     return getOrCreateInstanceMethodsBySignatureForType(type).get(signature);
+  }
+
+  public JMethod findMostSpecificOverride(JClassType type, JMethod baseMethod) {
+    JMethod foundMethod = getInstanceMethodBySignature(type, baseMethod.getSignature());
+    if (foundMethod == baseMethod) {
+      return foundMethod;
+    }
+
+    // A method with the same signature as the target method might NOT override if the original
+    // method is package private and found method is defined in a different package.
+    if (foundMethod != null && foundMethod.getOverriddenMethods().contains(baseMethod)) {
+      return foundMethod;
+    }
+
+    // In the case that a method is found but is not an override (package private case), traverse
+    // up in the hierarchy looking for the right override.
+    if (foundMethod != null && baseMethod.isPackagePrivate() &&
+        type.getSuperClass() != null) {
+      return findMostSpecificOverride(type.getSuperClass(), baseMethod);
+    }
+
+    assert baseMethod.isAbstract();
+    return baseMethod;
   }
 
   public JClassType getSingleJsoImpl(JReferenceType maybeSingleJsoIntf) {
@@ -1473,15 +1509,6 @@ public class JTypeOracle implements Serializable {
             return referenceType;
           }
         });
-  }
-
-  private <K, K2, V> Multimap<K2, V> getOrCreateMultimap(Map<K, Multimap<K2, V>> map, K key) {
-    Multimap<K2, V> multimap = map.get(key);
-    if (multimap == null) {
-      multimap = HashMultimap.create();
-      map.put(key, multimap);
-    }
-    return multimap;
   }
 
   private Map<String, JMethod> getOrCreateInstanceMethodsBySignatureForType(JClassType type) {

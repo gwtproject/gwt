@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1ab8e9c_de2165a5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-12T00:09:54Z",
+      "side": 1,
+      "message": "You didn\u0027t add this but you might want to make this consistent with new function you have added; perhaps checkJsFunctionHierarchy?",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 30
+      },
+      "revId": "105a190378187930de73da5fc66190a08f773291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1cf7a9d_55ff6ca9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-12T00:09:54Z",
+      "side": 1,
+      "message": "\u0027is not a JsType interface\u0027?\n\nactually if you do that you may join the error logging here with the one above.",
+      "range": {
+        "startLine": 141,
+        "startChar": 17,
+        "endLine": 141,
+        "endChar": 36
+      },
+      "revId": "105a190378187930de73da5fc66190a08f773291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01f046db_90e3b422",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-12T00:09:54Z",
+      "side": 1,
+      "message": "JsProperty",
+      "range": {
+        "startLine": 162,
+        "startChar": 42,
+        "endLine": 162,
+        "endChar": 50
+      },
+      "revId": "105a190378187930de73da5fc66190a08f773291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01f046db_b0cfd859",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-12T00:09:54Z",
+      "side": 1,
+      "message": "Iterables.getOnlyElement",
+      "revId": "105a190378187930de73da5fc66190a08f773291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01f046db_f00d606c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-12T00:09:54Z",
+      "side": 1,
+      "message": "looks unused.",
+      "revId": "105a190378187930de73da5fc66190a08f773291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01f046db_d0213ca5",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-12T00:09:54Z",
+      "side": 1,
+      "message": "Nice! Thanks for fixing all of these.",
+      "revId": "105a190378187930de73da5fc66190a08f773291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

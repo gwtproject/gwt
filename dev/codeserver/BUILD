@@ -52,6 +52,7 @@ java_library(
         "//third_party/java_src/gwt:gwt-testing",
         "//third_party/java_src/gwt/svn/tools:dev_deps",
         "//third_party/java_src/gwt/svn/trunk/dev:gwt-dev-only",
+        "//third_party/java_src/gwt/svn/trunk/user:gwt-testing",
         "//third_party/java_src/gwt/svn/trunk/user:user-test-code",
     ],
 )

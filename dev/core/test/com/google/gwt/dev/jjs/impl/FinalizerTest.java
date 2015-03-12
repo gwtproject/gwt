@@ -30,10 +30,10 @@ public class FinalizerTest extends OptimizerTestBase {
     runDeadCodeElimination = true;
   }
 
-  public void testFinalizeClass() throws Exception {
+  public void testDontFinalizeClass() throws Exception {
     addSnippetClassDecl("static class Foo { }");
     Result result = optimize("void", "");
-    assertFinal(result.findClass("EntryPoint$Foo"));
+    assertNotFinal(result.findClass("EntryPoint$Foo"));
   }
 
   public void testFinalizeLocal() throws Exception {

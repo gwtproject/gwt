@@ -30,6 +30,11 @@ public class JNullType extends JReferenceType {
   }
 
   @Override
+  public boolean canBeSubclass() {
+    return false;
+  }
+
+  @Override
   public String getJavahSignatureName() {
     return "N";
   }
@@ -61,7 +66,7 @@ public class JNullType extends JReferenceType {
   }
 
   @Override
-  public JNonNullType getNonNull() {
+  public JReferenceType strengthenToNonNull() {
     throw new UnsupportedOperationException();
   }
 }

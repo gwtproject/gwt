@@ -536,26 +536,25 @@ public class JdtCompiler {
 
     private NameEnvironmentAnswer doFindTypeInClassPath(String internalName) {
       URL resource = getClassLoader().getResource(internalName + ".class");
-      if (resource == null) {
-        return null;
-      }
+      if (resource != null) {
 
-      InputStream openStream = null;
-      try {
-        openStream = resource.openStream();
-        ClassFileReader classFileReader =
-            ClassFileReader.read(openStream, resource.toExternalForm(), true);
-        // In case insensitive file systems we might have found a resource  whose name is different
-        // in case and should not be returned as an answer.
-        if (internalName.equals(CharOperation.charToString(classFileReader.getName()))) {
-          return new NameEnvironmentAnswer(classFileReader, null);
+        InputStream openStream = null;
+        try {
+          openStream = resource.openStream();
+          ClassFileReader classFileReader =
+              ClassFileReader.read(openStream, resource.toExternalForm(), true);
+          // In case insensitive file systems we might have found a resource  whose name is different
+          // in case and should not be returned as an answer.
+          if (internalName.equals(CharOperation.charToString(classFileReader.getName()))) {
+            return new NameEnvironmentAnswer(classFileReader, null);
+          }
+        } catch (IOException e) {
+          // returns null indicating a failure.
+        } catch (ClassFormatException e) {
+          // returns null indicating a failure.
+        } finally {
+          Utility.close(openStream);
         }
-      } catch (IOException e) {
-        // returns null indicating a failure.
-      } catch (ClassFormatException e) {
-        // returns null indicating a failure.
-      } finally {
-        Utility.close(openStream);
       }
       // LambdaMetafactory is byte-code side artifact of JDT compile and actually not referenced by
       // our AST. However, this class is only available in JDK8+ so JdtCompiler fails to validate

@@ -24,7 +24,7 @@ import java.util.List;
  * finalized. Replaced with the entry call for the appropriate rebind result in
  * that permutation.
  */
-public class JGwtCreate extends JExpression {
+public class JGwtCreate extends JExpression implements CanSetType {
 
   public static JExpression createInstantiationExpression(SourceInfo info, JClassType classType) {
     /*
@@ -97,6 +97,7 @@ public class JGwtCreate extends JExpression {
     return false;
   }
 
+  @Override
   public void setType(JType newType) {
     type = newType;
   }

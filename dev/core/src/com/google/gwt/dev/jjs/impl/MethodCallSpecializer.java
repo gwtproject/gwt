@@ -68,7 +68,7 @@ public class MethodCallSpecializer {
           // specialization pattern
           JType qType = params.get(i).getUnderlyingType();
 
-          if (!program.typeOracle.canTriviallyCast(argType, qType)) {
+          if (!program.typeOracle.castSucceedsTrivially(argType, qType)) {
             // params don't match
             return;
           }

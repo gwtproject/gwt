@@ -56,22 +56,24 @@ public class ArrayNormalizer {
       }
       JArrayRef arrayRef = (JArrayRef) x.getLhs();
       JType elementType = arrayRef.getType();
+      JExpression arrayInstance = arrayRef.getInstance();
       if (elementType instanceof JNullType) {
         // JNullType will generate a null pointer exception instead,
         return;
       } else if (!(elementType instanceof JReferenceType)) {
         // Primitive array types are statically correct, no need to set check.
         return;
-      } else if (elementType.isFinal() &&
-          program.typeOracle.canTriviallyCast((JReferenceType) x.getRhs().getType(),
+      } else if (!arrayInstance.getType().canBeSubclass() &&
+          program.typeOracle.castSucceedsTrivially((JReferenceType) x.getRhs().getType(),
               (JReferenceType) elementType)) {
-        // Effectively final element types are statically correct.
+        // There is no need to check as the static check already performed by the compiler is
+        // guaranteed to be correct.
         return;
       }
 
       // replace this assignment with a call to setCheck()
       JMethodCall call = new JMethodCall(x.getSourceInfo(), null, setCheckMethod);
-      call.addArgs(arrayRef.getInstance(), arrayRef.getIndexExpr(), x.getRhs());
+      call.addArgs(arrayInstance, arrayRef.getIndexExpr(), x.getRhs());
       ctx.replaceMe(call);
     }
 

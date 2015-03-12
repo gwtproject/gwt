@@ -22,7 +22,7 @@ import com.google.gwt.dev.util.StringInterner;
  * Base class for any storage location.
  */
 public abstract class JVariable extends JNode implements CanBeSetFinal, CanHaveInitializer,
-    HasName, HasType {
+    HasName, HasType, CanSetType {
 
   protected JDeclarationStatement declStmt = null;
   private boolean isFinal;
@@ -86,6 +86,7 @@ public abstract class JVariable extends JNode implements CanBeSetFinal, CanHaveI
     this.name = name;
   }
 
+  @Override
   public void setType(JType newType) {
     assert newType != null;
     type = newType;

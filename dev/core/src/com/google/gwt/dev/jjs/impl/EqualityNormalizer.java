@@ -143,12 +143,12 @@ public class EqualityNormalizer {
       JClassType stringType = program.getTypeJavaLangString();
       if (type == program.getTypeNull()) {
         return StringStatus.NULL;
-      } else if (program.typeOracle.canTriviallyCast(type, stringType)) {
+      } else if (program.typeOracle.castSucceedsTrivially(type, stringType)) {
         return StringStatus.STRING;
-      } else if (program.typeOracle.canTheoreticallyCast(type, stringType)) {
-        return StringStatus.UNKNOWN;
-      } else {
+      } else if (program.typeOracle.castFailsTrivially(type, stringType)) {
         return StringStatus.NOTSTRING;
+      } else {
+        return StringStatus.UNKNOWN;
       }
     }
 

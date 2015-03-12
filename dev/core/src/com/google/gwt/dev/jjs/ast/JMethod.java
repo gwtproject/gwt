@@ -37,7 +37,7 @@ import java.util.Set;
 /**
  * A Java method implementation.
  */
-public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNative {
+public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNative, CanSetType {
 
   /**
    * Indicates whether a JsProperty method is a getter or setter. Getters come with names like x(),
@@ -655,6 +655,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
     isSynthetic = true;
   }
 
+  @Override
   public void setType(JType newType) {
     returnType = newType;
   }

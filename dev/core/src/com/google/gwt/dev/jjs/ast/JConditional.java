@@ -20,7 +20,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 /**
  * Conditional expression.
  */
-public class JConditional extends JExpression {
+public class JConditional extends JExpression implements CanSetType {
 
   private JExpression elseExpr;
   private JExpression ifTest;
@@ -57,7 +57,7 @@ public class JConditional extends JExpression {
   public boolean hasSideEffects() {
     return ifTest.hasSideEffects() || thenExpr.hasSideEffects() || elseExpr.hasSideEffects();
   }
-
+  @Override
   public void setType(JType newType) {
     type = newType;
   }

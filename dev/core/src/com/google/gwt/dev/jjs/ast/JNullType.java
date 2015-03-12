@@ -30,6 +30,11 @@ public class JNullType extends JReferenceType {
   }
 
   @Override
+  AnalysisResult getAnalysisResult() {
+    return AnalysisResult.NULLABLE_EXACT;
+  }
+
+  @Override
   public String getJavahSignatureName() {
     return "N";
   }
@@ -61,7 +66,7 @@ public class JNullType extends JReferenceType {
   }
 
   @Override
-  public JNonNullType getNonNull() {
+  public JReferenceType strengthenToNonNull() {
     throw new UnsupportedOperationException();
   }
 }

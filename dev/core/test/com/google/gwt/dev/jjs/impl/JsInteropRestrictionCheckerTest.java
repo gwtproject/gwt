@@ -29,6 +29,12 @@ import com.google.gwt.dev.util.UnitTestTreeLogger;
 public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
   private UnitTestTreeLogger errorLogger;
+  private boolean closureMode;
+
+  public void setUp() throws Exception {
+    super.setUp();
+    closureMode = false;
+  }
 
   public void testCollidingFieldExportsFails() throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsExport");
@@ -738,6 +744,21 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         + "@JsFunction and a @JsType at the same time.");
   }
 
+  public void testMoreThanOneConstructorExportInClosureModeFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsExport");
+    addSnippetClassDecl(
+        "public static class Buggy {",
+        "  @JsExport",
+        "  public Buggy() {}",
+        "  @JsExport(\"Buggy2\")",
+        "  public Buggy(String foo) {}",
+        "}");
+
+    closureMode  = true;
+    assertCompileFails(
+        "'test.EntryPoint$Buggy' has more than one constructor exported in Closure Format mode.");
+  }
+
   // uncomment after isOrExtendsJsType() is fixed.
 //  public void testJsFunctionJsTypeCollisionFails3() throws Exception {
 //    addAll(jsTypeClass, jsFunctionInterface1);
@@ -885,7 +906,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
   @Override
   protected boolean optimizeMethod(JProgram program, JMethod method) {
     try {
-      JsInteropRestrictionChecker.exec(errorLogger, program, new MinimalRebuildCache());
+      JsInteropRestrictionChecker.exec(errorLogger, program, new MinimalRebuildCache(),
+          closureMode);
     } catch (UnableToCompleteException e) {
       throw new RuntimeException(e);
     }

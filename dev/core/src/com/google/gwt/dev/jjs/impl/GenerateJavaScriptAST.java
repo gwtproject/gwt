@@ -744,9 +744,9 @@ public class GenerateJavaScriptAST {
 
     public static final String LOCAL_TEMP_PREFIX = "$tmp$";
 
-    private JMethod currentMethod = null;
+    private final JsInteropExportsGenerator jsInteropExportsGenerator;
 
-    private String lastExportedNamespace = null;
+    private JMethod currentMethod = null;
 
     private final JsName globalTemp = topScope.declareName("_");
 
@@ -773,6 +773,11 @@ public class GenerateJavaScriptAST {
      * Counter for assigning locals.
      */
     int tmpNumber = 0;
+
+    public GenerateJavaScriptVisitor() {
+      jsInteropExportsGenerator = new JsInteropExportsGenerator(closureCompilerFormatEnabled,
+              jsProgram, globalTemp, exportStmts, indexedFunctions, names);
+    }
 
     @Override
     public void endVisit(JAbsentArrayDimension x, Context ctx) {
@@ -1064,7 +1069,7 @@ public class GenerateJavaScriptAST {
         // for non-statics, only setup an assignment if needed
         if (rhs != null) {
           JsNameRef fieldRef = name.makeRef(x.getSourceInfo());
-          fieldRef.setQualifier(globalTemp.makeRef(x.getSourceInfo()));
+          fieldRef.setQualifier(getJsPrototypeOrQualifierOf(x));
           JsExpression asg = createAssignment(fieldRef, rhs);
           push(new JsExprStmt(x.getSourceInfo(), asg));
         } else {
@@ -1171,6 +1176,11 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JInterfaceType x, Context ctx) {
+
+      if (closureCompilerFormatEnabled) {
+        names.put(x, topScope.declareName(JjsUtils.getNameString(x)));
+      }
+
       List<JsFunction> jsFuncs = popList(x.getMethods().size()); // methods
       List<JsVar> jsFields = popList(x.getFields().size()); // fields
       List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();
@@ -1587,7 +1597,8 @@ public class GenerateJavaScriptAST {
         JsNameRef protoRef = prototype.makeRef(x.getSourceInfo());
         methodRef = new JsNameRef(methodRef.getSourceInfo(), method.getName());
         // add qualifier so we have jsPrototype.prototype.methodName.call(this, args)
-        protoRef.setQualifier(createQualifier(jsPrototype, x.getSourceInfo(), true));
+        protoRef.setQualifier(jsInteropExportsGenerator.createQualifier(jsPrototype,
+                x.getSourceInfo(), true));
         methodRef.setQualifier(protoRef);
         qualifier.setQualifier(methodRef);
         return jsInvocation;
@@ -1913,9 +1924,8 @@ public class GenerateJavaScriptAST {
       if (program.isReferenceOnly(program.getIndexedType("Class"))) {
         return Collections.emptyList();
       }
-
-      // These are the classes included in the preamble, i.e.
-      // all classes that are reachable for Class.createForClass, Class.createForInterface
+      // Include in the preamble all classes that are reachable for Class.createForClass,
+      // Class.createForInterface
       SortedSet<JDeclaredType> reachableClasses =
           computeReachableTypes(METHODS_PROVIDED_BY_PREAMBLE);
 
@@ -2548,6 +2558,28 @@ public class GenerateJavaScriptAST {
       }
     }
 
+    /*
+     * Java class definition regularly looks like this:
+     *
+     * defineClass(id, superId, castableTypeMap, ctor1, ctor2, ctor3);
+     * _.method1 = function() { ... }
+     * _.method2 = function() { ... }
+     *
+     * In closure formatted mode, it is altered slightly to better assist closure compiler
+     * optimizations:
+     *
+     * var ClassName = defineClass(jsinterop.getUniqueId('FQTypeName'),
+     * jsinterop.getUniqueId('FQSuperTypeName'), ctm);
+     * ClassName.prototype.method1 = function() { ... }
+     * ClassName.prototype.method2 = function() { ... }
+     * ctor1.prototype = ClassName.prototype
+     * ctor2.prototype = ClassName.prototype
+     * ctor3.prototype = ClassName.prototype
+     *
+     * The primary changes are to stop hiding the constructor changing in the defineClass helper
+     * method, and to directly expose the root JS class constructor for prototype assignment to help
+     * the compiler disambiguate which methods belong to which type.
+     */
     private void generateClassDefinition(JClassType x, List<JsStatement> globalStmts) {
       SourceInfo sourceInfo = x.getSourceInfo();
       assert x != program.getTypeJavaLangString();
@@ -2562,13 +2594,18 @@ public class GenerateJavaScriptAST {
 
       List<JsExpression> defineClassArguments = Lists.newArrayList();
 
+      if (closureCompilerFormatEnabled) {
+        names.put(x, topScope.declareName(JjsUtils.getNameString(x)));
+      }
+
       defineClassArguments.add(convertJavaLiteral(typeId));
       // setup superclass normally
       if (jsPrototype == null) {
         defineClassArguments.add(convertJavaLiteral(superTypeId));
       } else {
         // setup extension of native JS object
-        JsNameRef jsProtoClassRef = createQualifier(jsPrototype, x.getSourceInfo(), true);
+        JsNameRef jsProtoClassRef = jsInteropExportsGenerator.createQualifier(jsPrototype,
+                x.getSourceInfo(), true);
         JsNameRef jsProtoFieldRef = new JsNameRef(x.getSourceInfo(), "prototype");
 
         jsProtoFieldRef.setQualifier(jsProtoClassRef);
@@ -2577,23 +2614,45 @@ public class GenerateJavaScriptAST {
       JsExpression castMap = generateCastableTypeMap(x);
       defineClassArguments.add(castMap);
 
+      // choose appropriate setup function
+      // JavaClassHierarchySetupUtil.defineClass(typeId, superTypeId, castableMap, constructors)
+      JsExpression defineClassCall = constructInvocation(sourceInfo,
+          jsPrototype == null ? "JavaClassHierarchySetupUtil.defineClass" :
+              "JavaClassHierarchySetupUtil.defineClassWithPrototype",
+          defineClassArguments);
+
+      JsStatement defineClassStatement = null;
+      if (closureCompilerFormatEnabled) {
+        // var ClassName = defineClass(...)
+        JsVar var = new JsVar(x.getSourceInfo(), names.get(x));
+        var.setInitExpr(defineClassCall);
+        defineClassStatement = new JsVars(x.getSourceInfo(), var);
+      } else {
+        defineClassStatement = defineClassCall.makeStmt();
+      }
+      globalStmts.add(defineClassStatement);
+      typeForStatMap.put(defineClassStatement, x);
+
       // Chain assign the same prototype to every live constructor.
       for (JMethod method : x.getMethods()) {
         if (!isMethodPotentiallyALiveConstructor(method)) {
           // Some constructors are never newed hence don't need to be registered with defineClass.
           continue;
         }
-        defineClassArguments.add(names.get(method).makeRef(sourceInfo));
+        if (closureCompilerFormatEnabled) {
+          JsNameRef protoRef = prototype.makeRef(method.getSourceInfo());
+          protoRef.setQualifier(names.get(method).makeRef(method.getSourceInfo()));
+          JsNameRef rhsProtoRef = getJsPrototypeOrQualifierOf(x, x.getSourceInfo());
+          // Ctor2.prototype = ClassCtor.prototype
+          JsExprStmt stmt = createAssignment(protoRef, rhsProtoRef).makeStmt();
+          globalStmts.add(stmt);
+          typeForStatMap.put(stmt, x);
+        } else {
+          // add constructors as varargs in non-closure format
+          ((JsInvocation) defineClassCall).getArguments().add(names.get(method)
+            .makeRef(sourceInfo));
+        }
       }
-
-      // choose appropriate setup function
-      // JavaClassHierarchySetupUtil.defineClass(typeId, superTypeId, castableMap, constructors)
-      JsStatement defineClassStatement = constructInvocation(sourceInfo,
-          jsPrototype == null ? "JavaClassHierarchySetupUtil.defineClass" :
-              "JavaClassHierarchySetupUtil.defineClassWithPrototype",
-          defineClassArguments).makeStmt();
-      globalStmts.add(defineClassStatement);
-      typeForStatMap.put(defineClassStatement, x);
     }
 
     /*
@@ -2620,7 +2679,7 @@ public class GenerateJavaScriptAST {
         // _.toString = function(){return this.java_lang_Object_toString();}
 
         // lhs
-        JsNameRef lhs = createNativeToStringRef(globalTemp.makeRef(sourceInfo));
+        JsNameRef lhs = createNativeToStringRef(getJsPrototypeOrQualifierOf(x, x.getSourceInfo()));
 
         // rhs
         JsNameRef toStringRef = new JsNameRef(sourceInfo, polymorphicNames.get(toStringMeth));
@@ -2648,7 +2707,7 @@ public class GenerateJavaScriptAST {
         JsName lhsName, JsExpression rhs) {
       SourceInfo sourceInfo = method.getSourceInfo();
       JsNameRef lhs = lhsName.makeRef(sourceInfo);
-      lhs.setQualifier(globalTemp.makeRef(sourceInfo));
+      lhs.setQualifier(getJsPrototypeOrQualifierOf(method));
       JsExprStmt polyAssignment = createAssignment(lhs, rhs).makeStmt();
       globalStmts.add(polyAssignment);
       vtableInitForMethodMap.put(polyAssignment, method);
@@ -2708,9 +2767,11 @@ public class GenerateJavaScriptAST {
             // _.exportedName = makeBridgeMethod(_.polyName)
             exportedName.setObfuscatable(false);
             JsNameRef polyRef = polyJsName.makeRef(sourceInfo);
-            polyRef.setQualifier(globalTemp.makeRef(sourceInfo));
-            generateVTableAssignment(globalStmts, method, exportedName,
-                createJsInteropBridgeMethod(method, polyRef));
+            polyRef.setQualifier(getJsPrototypeOrQualifierOf(method));
+            generateVTableAssignment(globalStmts, method,
+                exportedName,
+                createJsInteropBridgeMethod(method,
+                    polyRef));
           }
           if (method.exposesOverriddenPackagePrivateMethod() &&
               getPackagePrivateName(method) != null) {
@@ -2742,8 +2803,7 @@ public class GenerateJavaScriptAST {
             // and hence this assignment will be present in the vtable setup for all subclasses.
 
             JsNameRef polyname = polyJsName.makeRef(sourceInfo);
-            polyname.setQualifier(globalTemp.makeRef(sourceInfo));
-
+            polyname.setQualifier(getJsPrototypeOrQualifierOf(method));
             generateVTableAssignment(globalStmts, method,
                 getPackagePrivateName(method),
                 polyname);
@@ -2752,15 +2812,75 @@ public class GenerateJavaScriptAST {
       }
     }
 
+    // These functions return either _ or ClassCtor.prototype
+    private JsNameRef getJsPrototypeOrQualifierOf(JMember f) {
+      return getJsPrototypeOrQualifierOf(f.getEnclosingType(), f.getSourceInfo());
+    }
+
+    private JsNameRef getJsPrototypeOrQualifierOf(JDeclaredType type, SourceInfo info) {
+      if (closureCompilerFormatEnabled) {
+        JsNameRef protoRef = prototype.makeRef(info);
+        protoRef.setQualifier(names.get(type).makeRef(info));
+        return protoRef;
+      } else {
+        return globalTemp.makeRef(info);
+      }
+    }
+
+    /*
+     * Generally, export of global namespaced members looks like this
+     * _ = provide('dotted.namespace')
+     * _.memberName = original
+     *
+     * Essentially members are aliased into a global namespace. Keep in mind that there are no
+     * restrictions on the order in which this can occur because of the way the provide() method
+     * works.
+     *
+     * In closure formatted mode, there are additional restrictions due to the way goog.provide()
+     * works:
+     *
+     * 1) you can't goog.provide something more than once
+     * 2) enclosing namespaces must be setup and handled before enclosed namespaces
+     * 3) if the exported namespace is a @JsType with methods, than the namespace will need to have
+     * a function assigned to it, instead of an object literal.
+     *
+     * In general, this implies code like the following:
+     *
+     * goog.provide('dotted.parent.namespace')
+     * dotted.parent.namespace = function() {} or constructor (if one is exported)
+     * dotted.parent.namespace.member = blah;
+     * goog.provide('dotted.parent.namespace.enclosed')
+     * dotted.parent.namespace.enclosed = function() {} or constructor
+     * dotted.parent.namespace.enclosed.member = blah;
+     *
+     * Any exported constructors will show up twice, because the code is simplified, but it is
+     * optimized away, e.g.
+     * dotted.parent.namespace.enclosed = ctor1
+     * dotted.parent.namespace.enclosed.JsExportNameOfCtor = ctor1
+     *
+     * Renaming exported constructors just shows up as these unused names which are pruned, because
+     * in closure mode, there's only one constructor, and it has the same name as the namespace
+     * (the Class name)
+     *
+     * The first exported ctor is always picked per class, for Closure code there should be only
+     * one, but we emit a warning, not an error for this.
+     */
     private void generateExports(JDeclaredType x) {
       TreeLogger branch = logger.branch(TreeLogger.Type.INFO, "Exporting " + x.getName());
 
       boolean createdClinit = false;
 
+      if (x.isJsType() && !x.hasAnyExports() && closureCompilerFormatEnabled) {
+        // in Closure code, even if a class doesn't have exports,
+        // it still needs a goog.provide for type declarations later
+        jsInteropExportsGenerator.ensureProvideCall(x, x.getQualifiedExportName(), branch);
+        return;
+      }
+
       for (JMethod m : x.getMethods()) {
         if (typeOracle.isExportedMethod(m)) {
           createdClinit = maybeHoistClinit(createdClinit, maybeCreateClinitCall(m));
-          exportMember(x, m);
+          jsInteropExportsGenerator.exportMember(x, m, branch);
         }
       }
 
@@ -2772,7 +2892,7 @@ public class GenerateJavaScriptAST {
                 + " will not be reflected across Java&JavaScript border.");
           }
           createdClinit = maybeHoistClinit(createdClinit, maybeCreateClinitCall(f, true));
-          exportMember(x, f);
+          jsInteropExportsGenerator.exportMember(x, f, branch);
         }
       }
     }
@@ -2809,74 +2929,6 @@ public class GenerateJavaScriptAST {
         createdClinit = true;
       }
       return createdClinit;
-    }
-
-    private void exportMember(JDeclaredType x, JMember member) {
-      JsExpression exportRhs = names.get(member).makeRef(member.getSourceInfo());
-      if (closureCompilerFormatEnabled) {
-        exportMemberClosure(x, member, exportRhs);
-      } else {
-        exportMemberJs(x, member, exportRhs);
-      }
-    }
-
-    private void exportMemberJs(JDeclaredType x, JMember member, JsExpression exportRhs) {
-      SourceInfo sourceInfo = x.getSourceInfo();
-      String namespace = member.getExportNamespace();
-      if (!namespace.equals(lastExportedNamespace)) {
-        lastExportedNamespace = namespace;
-
-        JsName provideFunc = indexedFunctions.get("JavaClassHierarchySetupUtil.provide").getName();
-        JsNameRef provideFuncRef = provideFunc.makeRef(sourceInfo);
-        JsInvocation provideCall = new JsInvocation(sourceInfo);
-        provideCall.setQualifier(provideFuncRef);
-        provideCall.getArguments().add(new JsStringLiteral(sourceInfo, namespace));
-
-        // _ = JCHSU.provide('foo.bar')
-        exportStmts.add(createAssignment(globalTemp.makeRef(sourceInfo), provideCall).makeStmt());
-      }
-      JsNameRef leaf = new JsNameRef(sourceInfo, member.getExportName());
-      leaf.setQualifier(globalTemp.makeRef(sourceInfo));
-      JsExprStmt astStat = new JsExprStmt(sourceInfo, createAssignment(leaf, exportRhs));
-      exportStmts.add(astStat);
-    }
-
-    private void exportMemberClosure(JDeclaredType x, JMember member, JsExpression exportRhs) {
-      String namespace = member.getExportNamespace();
-      if (!namespace.equals(lastExportedNamespace)) {
-        lastExportedNamespace = namespace;
-        // goog.provide statements prepended by linker, so namespace already exists
-        // but enclosing constructor exports may have overwritten them
-        // so write foo.bar.Baz = foo.bar.Baz || {}
-        if (x.getEnclosingType() != null) {
-          JsNameRef lhs = createQualifier(x.getQualifiedExportName(), x.getSourceInfo(), false);
-          JsNameRef rhsRef = createQualifier(x.getQualifiedExportName(), x.getSourceInfo(), false);
-          exportStmts.add(createAssignment(lhs, new JsBinaryOperation(x.getSourceInfo(),
-              JsBinaryOperator.OR, rhsRef, new JsObjectLiteral(x.getSourceInfo()))).makeStmt());
-        }
-      }
-      SourceInfo sourceInfo = x.getSourceInfo();
-      JsNameRef leaf = new JsNameRef(sourceInfo, member.getExportName());
-      leaf.setQualifier(createQualifier(namespace, sourceInfo, false));
-      JsExprStmt astStat = new JsExprStmt(sourceInfo, createAssignment(leaf, exportRhs));
-      exportStmts.add(astStat);
-    }
-
-    private JsNameRef createQualifier(String namespace, SourceInfo sourceInfo,
-        boolean qualifyWithWnd) {
-      JsNameRef ref = null;
-      if (namespace.isEmpty() || qualifyWithWnd) {
-        ref = new JsNameRef(sourceInfo, "$wnd");
-      }
-
-      for (String part : namespace.split("\\.")) {
-        JsNameRef newRef = new JsNameRef(sourceInfo, part);
-        if (ref != null) {
-          newRef.setQualifier(ref);
-        }
-        ref = newRef;
-      }
-      return ref;
     }
 
     /**

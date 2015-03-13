@@ -15,9 +15,12 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.HasName;
+import com.google.gwt.dev.jjs.ast.JClassType;
+import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
@@ -27,6 +30,8 @@ import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.thirdparty.guava.common.base.Predicate;
+import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
@@ -44,10 +49,14 @@ import java.util.Set;
 // TODO: move JsInterop checks from JSORestrictionsChecker to here.
 public class JsInteropRestrictionChecker extends JVisitor {
 
+  private boolean closureCompilerFormatEnabled;
+
   public static void exec(TreeLogger logger, JProgram jprogram,
-      MinimalRebuildCache minimalRebuildCache) throws UnableToCompleteException {
+      MinimalRebuildCache minimalRebuildCache, CompilerContext compilerContext)
+      throws UnableToCompleteException {
     JsInteropRestrictionChecker jsInteropRestrictionChecker =
-        new JsInteropRestrictionChecker(logger, jprogram, minimalRebuildCache);
+        new JsInteropRestrictionChecker(logger, jprogram, minimalRebuildCache,
+            compilerContext.getOptions().isClosureCompilerFormatEnabled());
     jsInteropRestrictionChecker.accept(jprogram);
     if (jsInteropRestrictionChecker.hasErrors) {
       throw new UnableToCompleteException();
@@ -66,10 +75,11 @@ public class JsInteropRestrictionChecker extends JVisitor {
   private final MinimalRebuildCache minimalRebuildCache;
 
   public JsInteropRestrictionChecker(TreeLogger logger, JProgram jprogram,
-      MinimalRebuildCache minimalRebuildCache) {
+      MinimalRebuildCache minimalRebuildCache, boolean closureCompilerFormatEnabled) {
     this.logger = logger;
     this.jprogram = jprogram;
     this.minimalRebuildCache = minimalRebuildCache;
+    this.closureCompilerFormatEnabled = closureCompilerFormatEnabled;
   }
 
   @Override
@@ -95,6 +105,9 @@ public class JsInteropRestrictionChecker extends JVisitor {
       checkJsTypeHierarchy((JInterfaceType) currentType);
     }
 
+    if (closureCompilerFormatEnabled && x instanceof JClassType) {
+      checkOnlyOneConstructorExported(x);
+    }
     // Perform custom class traversal to examine fields and methods of this class and all
     // superclasses so that name collisions between local and inherited members can be found.
     do {
@@ -272,6 +285,19 @@ public class JsInteropRestrictionChecker extends JVisitor {
     if (type.isOrExtendsJsType() && type.isOrExtendsJsFunction()) {
       logError("'%s' cannot be annotated as (or extend) both a @JsFunction and a @JsType at the "
           + "same time.", type.getName());
+    }
+  }
+
+  private void checkOnlyOneConstructorExported(JDeclaredType x) {
+    FluentIterable<JMethod> ctors = FluentIterable.from(x.getMethods()).filter(
+        new Predicate<JMethod>() {
+          @Override
+          public boolean apply(JMethod jMethod) {
+            return jMethod instanceof JConstructor && jMethod.isExported();
+          }
+        });
+    if (ctors.size() > 1) {
+      logWarning("'%s' has more than one constructor exported in Closure Format mode.", x.getName());
     }
   }
 

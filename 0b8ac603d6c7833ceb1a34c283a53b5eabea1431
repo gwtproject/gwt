@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "414a3e43_3284700b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-13T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4165dec2_fa1c899c",
+      "range": {
+        "startLine": 542,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 9
+      },
+      "revId": "0b8ac603d6c7833ceb1a34c283a53b5eabea1431",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2168ea9d_b945bf75",
         "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2015-03-12T19:45:35Z",
       "side": 1,
       "message": "fix the doc",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 3
+      },
+      "revId": "0b8ac603d6c7833ceb1a34c283a53b5eabea1431",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "414a3e43_5281f4f9",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-13T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2168ea9d_b945bf75",
       "range": {
         "startLine": 24,
         "startChar": 2,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "414a3e43_727ef894",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-13T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1177afa_3855451f",
+      "revId": "0b8ac603d6c7833ceb1a34c283a53b5eabea1431",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1177afa_18520937",
         "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
         "patchSetId": 3
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "414a3e43_92f35cbb",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-13T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1177afa_18520937",
+      "revId": "0b8ac603d6c7833ceb1a34c283a53b5eabea1431",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1caaedd_29ba29b3",
         "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
         "patchSetId": 3
@@ -93,6 +177,30 @@
       "writtenOn": "2015-03-12T19:45:35Z",
       "side": 1,
       "message": "check if you can enable.",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 32
+      },
+      "revId": "0b8ac603d6c7833ceb1a34c283a53b5eabea1431",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "414a3e43_f202e809",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-13T16:46:52Z",
+      "side": 1,
+      "message": "Enabled.",
+      "parentUuid": "c1caaedd_29ba29b3",
       "range": {
         "startLine": 330,
         "startChar": 0,

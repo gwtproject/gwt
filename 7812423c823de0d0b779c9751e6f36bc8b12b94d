@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "414a3e43_67d47069",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-13T02:11:33Z",
+      "side": 1,
+      "message": "this looks incorrect. Is this passing right now?",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 5
+      },
+      "revId": "7812423c823de0d0b779c9751e6f36bc8b12b94d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "414a3e43_c1942c18",
         "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
         "patchSetId": 2
@@ -13,6 +36,47 @@
       "writtenOn": "2015-03-13T01:48:13Z",
       "side": 1,
       "message": "It would be more interesting somethining like\n\n@JsFunction\ninterface I1 { \n   int m();\n }\n\n@JsFunction\ninterface I2 {\n  int n();\n }\n\n\nclass A implements I1 {\n  public int m() { return 1; }\n}\n\nprivate int callfn(JavaScriptObject fn) /*-{\n  return fn();\n\n}-*/\n\nvoid testCast_crossCastJavaObject() {\n Object o \u003d new A();\n A a \u003d (A) o;\n assertEquals(a.m(), callfn(a));\n I1 i1 \u003d (I1) o;\n assertEquals(a.m(), i1.m());\n I2 i2 \u003d (I2) o;\n // this is the surprising bit, but should work as this is how it is defined in the spec.\n assertEquals(a.m(), i2.n());",
+      "revId": "7812423c823de0d0b779c9751e6f36bc8b12b94d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "414a3e43_c7da7c99",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-13T02:11:33Z",
+      "side": 1,
+      "message": "We talked with Roberto and actually the following is what we want to test:\n\nvoid testCast_crossCastJavaInstance() {\n  Object o \u003d new A();\n  assertEquals(1, ((I2) o).n());\n  assertSame((I1)o, (I2)o);\n}",
+      "parentUuid": "414a3e43_c1942c18",
+      "revId": "7812423c823de0d0b779c9751e6f36bc8b12b94d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "414a3e43_a7fe58e8",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-13T02:11:33Z",
+      "side": 1,
+      "message": "This also looks incorrect.",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 58
+      },
       "revId": "7812423c823de0d0b779c9751e6f36bc8b12b94d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

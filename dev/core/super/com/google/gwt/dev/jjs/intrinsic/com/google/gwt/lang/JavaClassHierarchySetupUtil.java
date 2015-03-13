@@ -75,6 +75,10 @@ public class JavaClassHierarchySetupUtil {
     if (clazz) {
       _.@java.lang.Object::___clazz = clazz;
     }
+
+    function F(){};
+    F.prototype = _;
+    return F;
   }-*/;
 
   /**
@@ -108,6 +112,10 @@ public class JavaClassHierarchySetupUtil {
       if (clazz) {
           _.@java.lang.Object::___clazz = clazz;
       }
+
+     function F(){};
+     F.prototype = _;
+     return F;
   }-*/;
 
   private static native JavaScriptObject portableObjCreate(JavaScriptObject obj) /*-{

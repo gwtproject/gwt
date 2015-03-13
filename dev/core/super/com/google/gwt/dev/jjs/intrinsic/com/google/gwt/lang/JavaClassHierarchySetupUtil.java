@@ -39,8 +39,11 @@ public class JavaClassHierarchySetupUtil {
    * code-split fragments. In that case Class.createFor* methods will have created a placeholder and
    * stored in {@code prototypesByTypeId} the class literal.<p></p>
    *
-   * As a prerequisite if superSeed is not null, it is assumed that defineClass for the supertype
+   * As a prerequisite if superTypeId is not null, it is assumed that defineClass for the supertype
    * has already been called.
+   *
+   * This method has the effect of assigning the newly created prototype to the global temp variable
+   * '_', as well as returning a no-op Javascript function with the prototype assigned to it.
    */
   public static native JavaScriptObject defineClass(JavaScriptObject typeId,
       JavaScriptObject superTypeId, JavaScriptObject castableTypeMap) /*-{
@@ -75,6 +78,10 @@ public class JavaClassHierarchySetupUtil {
     if (clazz) {
       _.@java.lang.Object::___clazz = clazz;
     }
+
+    function F(){};
+    F.prototype = _;
+    return F;
   }-*/;
 
   /**
@@ -108,6 +115,10 @@ public class JavaClassHierarchySetupUtil {
       if (clazz) {
           _.@java.lang.Object::___clazz = clazz;
       }
+
+      function F(){};
+      F.prototype = _;
+      return F;
   }-*/;
 
   private static native JavaScriptObject portableObjCreate(JavaScriptObject obj) /*-{

@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsInvocation;
@@ -81,5 +82,26 @@ public class JsUtils {
 
   private static final String CALL_STRING = StringInterner.get().intern("call");
   private JsUtils() {
+  }
+
+  /**
+   * Given a string namespace qualifier such as 'foo.bar.Baz', creates a chain of JsNameRef's
+   * representing this namespace, optionally prefixed by '$wnd' qualifier.
+   */
+  public static JsNameRef createQualifier(String namespace, SourceInfo sourceInfo,
+      boolean qualifyWithWnd) {
+    JsNameRef ref = null;
+    if (namespace.isEmpty() || qualifyWithWnd) {
+      ref = new JsNameRef(sourceInfo, "$wnd");
+    }
+
+    for (String part : namespace.split("\\.")) {
+      JsNameRef newRef = new JsNameRef(sourceInfo, part);
+      if (ref != null) {
+        newRef.setQualifier(ref);
+      }
+      ref = newRef;
+    }
+    return ref;
   }
 }

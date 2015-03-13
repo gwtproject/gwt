@@ -936,7 +936,8 @@ public abstract class JavaToJavaScriptCompiler {
 
         // TODO(stalcup): hide metrics gathering in a callback or subclass
         JsniRestrictionChecker.exec(logger, jprogram);
-        JsInteropRestrictionChecker.exec(logger, jprogram, getMinimalRebuildCache());
+        JsInteropRestrictionChecker.exec(logger, jprogram, getMinimalRebuildCache(),
+            compilerContext);
         logTypeOracleMetrics(precompilationMetrics, compilationState);
         Memory.maybeDumpMemory("AstOnly");
         AstDumper.maybeDumpAST(jprogram);

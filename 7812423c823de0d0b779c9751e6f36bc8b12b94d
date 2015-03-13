@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "012da676_428af6e8",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-13T20:36:33Z",
+      "side": 1,
+      "message": "I guess a better way to state this is that a Javascript function (hand written in JS) can do double duty:\n\n1) it can cast as JSO to any SingleJso interface, JSO overlay type, or JsType without prototype, because, after all, it\u0027s just a JS obj without a type marker.\n\n2) it can cast check as a SAM interface\n\nSince our SAM Java implementations are effectively JS function objects, they should behave the same way.\n\nThe only weird caveat is that it intuitively seems like you should have to put an @JsType on the @JsFunction interface in addition.\n\nWhy? Because we don\u0027t allow these semantics for the old JSO Single Jso System.\n\ninterface Function { ... }\nclass JsFunction implements Function extends JSO {\n  ...\n}\n\nclass JavaFunction implements Function { ... }\n\n\n(HTMLElement) (jsFunction) \u003d\u003e true\n(HTMLElement) (javaFunction) \u003d\u003e CCE",
+      "parentUuid": "012da676_37f622df",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 5
+      },
+      "revId": "7812423c823de0d0b779c9751e6f36bc8b12b94d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "414a3e43_c1942c18",
         "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
         "patchSetId": 2

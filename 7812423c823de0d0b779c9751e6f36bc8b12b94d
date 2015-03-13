@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "012da676_37f622df",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-13T19:04:50Z",
+      "side": 1,
+      "message": "As we discussed offline, I updated the the spec to make the clarification. The issue is JsType are loose contracts that it would be surprising to enforce java semantics just because the object is happen to be declared in java.\nA good way to illustrate this issue is WebComponents. If enforce such rules, then if the component is implemented by a third party polymer or x-tag GWT wrapper will cause runtime error when we traverse children; just because they are developed in java.",
+      "parentUuid": "012da676_ce6b77a1",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 5
+      },
+      "revId": "7812423c823de0d0b779c9751e6f36bc8b12b94d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "414a3e43_c1942c18",
         "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
         "patchSetId": 2

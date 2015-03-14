@@ -1,0 +1,303 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "012da676_fde46b63",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "this name generation doesn\u0027t seem to take into account JsNamespace changes and explicit name overrides. shouldn\u0027t x.getQualifiedExportName() be used here somewhere?",
+      "range": {
+        "startLine": 1180,
+        "startChar": 8,
+        "endLine": 1180,
+        "endChar": 70
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "012da676_fd3f0bd9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2559,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "nice explanation",
+      "range": {
+        "startLine": 2559,
+        "startChar": 4,
+        "endLine": 2559,
+        "endChar": 6
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "012da676_5d2577d9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2575,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "shouldn\u0027t be ignoring the line length limit",
+      "range": {
+        "startLine": 2575,
+        "startChar": 96,
+        "endLine": 2575,
+        "endChar": 105
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2639e0d0_d1db04ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2594,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "same question here as above. why doesn\u0027t this take into account x.getQualifiedExportName()",
+      "range": {
+        "startLine": 2594,
+        "startChar": 8,
+        "endLine": 2594,
+        "endChar": 70
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "012da676_fd70eb8d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2817,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "you should be able to collapse these 2 into 1 that operates on a JMember",
+      "range": {
+        "startLine": 2811,
+        "startChar": 0,
+        "endLine": 2817,
+        "endChar": 5
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2639e0d0_5a0e096c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2933,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "this exporting logic and provide generation logic seems to split into closure and non-closure modes.\n\nwould be nice to inject a JsInteropExportsGenerator instance instead, and there could be closure and non-closure versions of the class.\n\ndoing so would also help prevent this already gigantic class from accreting another 200 lines",
+      "range": {
+        "startLine": 2933,
+        "startChar": 4,
+        "endLine": 2933,
+        "endChar": 29
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2639e0d0_34ec7e8c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2939,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "why isn\u0027t this lastExportedNamespace check managed silently inside of generateProvideCall() ? though at that point it might be better named as \"ensureProvideCallExists\" or \"ensureProvided\"",
+      "range": {
+        "startLine": 2938,
+        "startChar": 0,
+        "endLine": 2939,
+        "endChar": 42
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2639e0d0_346fdeab",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2940,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 2940,
+        "startChar": 8,
+        "endLine": 2940,
+        "endChar": 28
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2639e0d0_f40cb6f0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2945,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "s/leaf/exportedMemberRef",
+      "range": {
+        "startLine": 2945,
+        "startChar": 16,
+        "endLine": 2945,
+        "endChar": 20
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2639e0d0_d7653446",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3059,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "this check should probably be in JsInteropRestrictionChecker (guarded by the same closureCompile option)",
+      "range": {
+        "startLine": 3056,
+        "startChar": 6,
+        "endLine": 3059,
+        "endChar": 7
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2639e0d0_d74c14d0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3060,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "could use Iterables.getFirst(list, fallback) here",
+      "range": {
+        "startLine": 3060,
+        "startChar": 13,
+        "endLine": 3060,
+        "endChar": 70
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2639e0d0_3a2a25aa",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "function description should explain the return value",
+      "range": {
+        "startLine": 79,
+        "startChar": 13,
+        "endLine": 79,
+        "endChar": 14
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2639e0d0_fa237dd0",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-14T00:07:27Z",
+      "side": 1,
+      "message": "indentation is wrong",
+      "range": {
+        "startLine": 116,
+        "startChar": 3,
+        "endLine": 118,
+        "endChar": 14
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

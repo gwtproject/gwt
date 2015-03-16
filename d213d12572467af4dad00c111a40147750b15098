@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "660f5879_052ea939",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T23:58:44Z",
+      "side": 1,
+      "message": "This is how the exports look though, you\u0027ll see code like\n\nsome.other.package.Foo \u003d com_another_pkg_Bar\n\nUltimately, for much of the exports we won\u0027t need to generate aliases like this, but rather GenJsAst should output namespace scoped class definitions. However, that\u0027s a long way off.",
+      "parentUuid": "660f5879_5db6bb3e",
+      "range": {
+        "startLine": 1180,
+        "startChar": 8,
+        "endLine": 1180,
+        "endChar": 70
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "012da676_fd3f0bd9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -155,6 +179,54 @@
       "side": 1,
       "message": "not done",
       "parentUuid": "660f5879_49b6053f",
+      "range": {
+        "startLine": 2575,
+        "startChar": 96,
+        "endLine": 2575,
+        "endChar": 105
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_ec1d3aeb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2575,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T23:58:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "660f5879_49b6053f",
+      "range": {
+        "startLine": 2575,
+        "startChar": 96,
+        "endLine": 2575,
+        "endChar": 105
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_ac3a2246",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2575,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T23:58:44Z",
+      "side": 1,
+      "message": "Redone!",
+      "parentUuid": "660f5879_bd06cf1c",
       "range": {
         "startLine": 2575,
         "startChar": 96,
@@ -472,6 +544,30 @@
     },
     {
       "key": {
+        "uuid": "660f5879_2574854e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3059,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T23:58:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2639e0d0_d7653446",
+      "range": {
+        "startLine": 3056,
+        "startChar": 6,
+        "endLine": 3059,
+        "endChar": 7
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2639e0d0_d74c14d0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -531,6 +627,30 @@
       "side": 1,
       "message": "return names.get(Iterables.getFirst(ctors, x));",
       "parentUuid": "660f5879_ecaa5f7c",
+      "range": {
+        "startLine": 3060,
+        "startChar": 13,
+        "endLine": 3060,
+        "endChar": 70
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_ccbafe20",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3060,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T23:58:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "660f5879_bd97efc3",
       "range": {
         "startLine": 3060,
         "startChar": 13,

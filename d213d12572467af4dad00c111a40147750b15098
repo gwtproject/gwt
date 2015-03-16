@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "660f5879_893abd46",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T21:51:57Z",
+      "side": 1,
+      "message": "This name doesn\u0027t have any relation to JsInterop, it\u0027s just a random unique variable name for Closure to see the method prototypes hanging off of. Basically, we\u0027re just versioning \u0027_\u0027 in a way, giving it a unique name for every class.",
+      "parentUuid": "012da676_fde46b63",
+      "range": {
+        "startLine": 1180,
+        "startChar": 8,
+        "endLine": 1180,
+        "endChar": 70
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "012da676_fd3f0bd9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "660f5879_49b6053f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2575,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T21:51:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "012da676_5d2577d9",
+      "range": {
+        "startLine": 2575,
+        "startChar": 96,
+        "endLine": 2575,
+        "endChar": 105
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2639e0d0_d1db04ef",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -82,6 +130,30 @@
       "writtenOn": "2015-03-14T00:07:27Z",
       "side": 1,
       "message": "same question here as above. why doesn\u0027t this take into account x.getQualifiedExportName()",
+      "range": {
+        "startLine": 2594,
+        "startChar": 8,
+        "endLine": 2594,
+        "endChar": 70
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_a9ba191f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2594,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T21:51:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2639e0d0_d1db04ef",
       "range": {
         "startLine": 2594,
         "startChar": 8,
@@ -117,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "660f5879_697f81dc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2817,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T21:51:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "012da676_fd70eb8d",
+      "range": {
+        "startLine": 2811,
+        "startChar": 0,
+        "endLine": 2817,
+        "endChar": 5
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2639e0d0_5a0e096c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -128,6 +224,30 @@
       "writtenOn": "2015-03-14T00:07:27Z",
       "side": 1,
       "message": "this exporting logic and provide generation logic seems to split into closure and non-closure modes.\n\nwould be nice to inject a JsInteropExportsGenerator instance instead, and there could be closure and non-closure versions of the class.\n\ndoing so would also help prevent this already gigantic class from accreting another 200 lines",
+      "range": {
+        "startLine": 2933,
+        "startChar": 4,
+        "endLine": 2933,
+        "endChar": 29
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_37096063",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2933,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T21:51:57Z",
+      "side": 1,
+      "message": "Done, although I wouldn\u0027t call it an \u0027injection\u0027. I moved all the methods to a separate class manually \u0027inject\u0027 the dependent state and manually inject the instance. :)",
+      "parentUuid": "2639e0d0_5a0e096c",
       "range": {
         "startLine": 2933,
         "startChar": 4,
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "660f5879_ecb41fb4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2939,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T21:51:57Z",
+      "side": 1,
+      "message": "See earlier comment.",
+      "parentUuid": "2639e0d0_34ec7e8c",
+      "range": {
+        "startLine": 2938,
+        "startChar": 0,
+        "endLine": 2939,
+        "endChar": 42
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2639e0d0_346fdeab",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -186,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "660f5879_2c091763",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2940,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T21:51:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2639e0d0_346fdeab",
+      "range": {
+        "startLine": 2940,
+        "startChar": 8,
+        "endLine": 2940,
+        "endChar": 28
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2639e0d0_f40cb6f0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -197,6 +365,30 @@
       "writtenOn": "2015-03-14T00:07:27Z",
       "side": 1,
       "message": "s/leaf/exportedMemberRef",
+      "range": {
+        "startLine": 2945,
+        "startChar": 16,
+        "endLine": 2945,
+        "endChar": 20
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_4ce1f311",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2945,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T21:51:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2639e0d0_f40cb6f0",
       "range": {
         "startLine": 2945,
         "startChar": 16,
@@ -255,6 +447,30 @@
     },
     {
       "key": {
+        "uuid": "660f5879_ecaa5f7c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3060,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T21:51:57Z",
+      "side": 1,
+      "message": "Not exactly, it\u0027ll need a transformer, since the ctors returns a JMethod, but the fallback has no method representation in the AST (it only exists as a JsName associated with the anonymous function returned by defineSeed)",
+      "parentUuid": "2639e0d0_d74c14d0",
+      "range": {
+        "startLine": 3060,
+        "startChar": 13,
+        "endLine": 3060,
+        "endChar": 70
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2639e0d0_3a2a25aa",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
         "patchSetId": 3
@@ -266,6 +482,30 @@
       "writtenOn": "2015-03-14T00:07:27Z",
       "side": 1,
       "message": "function description should explain the return value",
+      "range": {
+        "startLine": 79,
+        "startChar": 13,
+        "endLine": 79,
+        "endChar": 14
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_c98835f2",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-16T21:51:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2639e0d0_3a2a25aa",
       "range": {
         "startLine": 79,
         "startChar": 13,

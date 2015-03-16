@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "660f5879_6555dda4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-16T23:57:22Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "64637f8ffa2e39281a29cb1ca0f73a6de1d4547a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

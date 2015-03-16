@@ -624,13 +624,14 @@ public class TypeTightener {
      */
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
-      if (x.isVolatile()) {
+      if (!x.canBePolymorphic() || x.isVolatile()) {
         return;
       }
       JMethod target = x.getTarget();
       JMethod concreteMethod = getSingleConcreteMethodOverride(target);
       assert concreteMethod != target;
       if (concreteMethod != null) {
+        assert !x.isStaticDispatchOnly();
         JMethodCall newCall = new JMethodCall(x.getSourceInfo(), x.getInstance(), concreteMethod);
         newCall.addArgs(x.getArgs());
         ctx.replaceMe(newCall);
@@ -658,6 +659,7 @@ public class TypeTightener {
           }
           // The instance type is incompatible with all overrides.
         }
+        assert !x.isStaticDispatchOnly();
         x.setCannotBePolymorphic();
         madeChanges();
       }

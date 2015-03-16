@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "660f5879_b8053dcc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-16T22:27:52Z",
+      "side": 1,
+      "message": "nice. i\u0027m liking this a lot better now that this logic is pulled into a separate class.\n\n\nnow time for some tests!\n\n\nhere\u0027s another round of testing method suggestions:\n\n\n* directly text JsInteropExportsGenerator, but synthesizing the input will be painful\n\n* com/google/gwt/dev/CompilerTest.java has a bunch of test that start with MockJavaResource instances and end with assertions about output JS. you could add some that make assertions about the created closure style export statements. see compileToJs() and checkRecompiledModifiedApp() for reference\n\n\nor if you think of a better way to test, that\u0027ll work too",
+      "range": {
+        "startLine": 47,
+        "startChar": 13,
+        "endLine": 47,
+        "endChar": 38
+      },
+      "revId": "8a707fbbdb76788c993721d1079b6a6a2e799355",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_58e7e9d7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-16T22:27:52Z",
+      "side": 1,
+      "message": "why are you indenting 4 characters. i\u0027m seeing multiple format inconsistencies just within this file.",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 8
+      },
+      "revId": "8a707fbbdb76788c993721d1079b6a6a2e799355",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_d8ec790a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-16T22:27:52Z",
+      "side": 1,
+      "message": "short description comment please (since this is called from outside this class)",
+      "range": {
+        "startLine": 188,
+        "startChar": 14,
+        "endLine": 188,
+        "endChar": 29
+      },
+      "revId": "8a707fbbdb76788c993721d1079b6a6a2e799355",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

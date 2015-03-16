@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "660f5879_5db6bb3e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-16T22:28:02Z",
+      "side": 1,
+      "message": "agreed that it just needs to be unique. though if you read the output code it\u0027s going to be unnecessarily strange to have the class be stored into path A but then exported to path B.\n\nbut yes, this isn\u0027t a correctness issue and isn\u0027t a big deal.",
+      "parentUuid": "660f5879_893abd46",
+      "range": {
+        "startLine": 1180,
+        "startChar": 8,
+        "endLine": 1180,
+        "endChar": 70
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "012da676_fd3f0bd9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 3
@@ -107,6 +131,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "012da676_5d2577d9",
+      "range": {
+        "startLine": 2575,
+        "startChar": 96,
+        "endLine": 2575,
+        "endChar": 105
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_bd06cf1c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2575,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-16T22:28:02Z",
+      "side": 1,
+      "message": "not done",
+      "parentUuid": "660f5879_49b6053f",
       "range": {
         "startLine": 2575,
         "startChar": 96,
@@ -459,6 +507,30 @@
       "side": 1,
       "message": "Not exactly, it\u0027ll need a transformer, since the ctors returns a JMethod, but the fallback has no method representation in the AST (it only exists as a JsName associated with the anonymous function returned by defineSeed)",
       "parentUuid": "2639e0d0_d74c14d0",
+      "range": {
+        "startLine": 3060,
+        "startChar": 13,
+        "endLine": 3060,
+        "endChar": 70
+      },
+      "revId": "d213d12572467af4dad00c111a40147750b15098",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "660f5879_bd97efc3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3060,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-16T22:28:02Z",
+      "side": 1,
+      "message": "return names.get(Iterables.getFirst(ctors, x));",
+      "parentUuid": "660f5879_ecaa5f7c",
       "range": {
         "startLine": 3060,
         "startChar": 13,

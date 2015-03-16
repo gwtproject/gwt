@@ -242,6 +242,24 @@
     },
     {
       "key": {
+        "uuid": "97fd58c2_c5bcda54",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-03-16T13:02:42Z",
+      "side": 1,
+      "message": "NullPointerException does not occur in production mode. So the test will be fail. I cannot use NPE here.",
+      "parentUuid": "3782ec51_726b98ee",
+      "revId": "1f17c3a530ceebe9d2198c362d183bbec0564b6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3782ec51_92e07c16",
         "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
         "patchSetId": 1

@@ -36,7 +36,7 @@ import java.util.Set;
 /**
  * A Java method implementation.
  */
-public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNative {
+public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNative, CanBeOpaque {
 
   /**
    * Indicates whether a JsProperty method is a getter or setter. Getters come with names like x(),
@@ -61,6 +61,17 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
   private boolean inliningAllowed = true;
   private boolean hasSideEffects = true;
   private boolean defaultMethod = false;
+  private boolean isOpaque = false;
+
+  @Override
+  public boolean isOpaque() {
+    return isOpaque;
+  }
+
+  @Override
+  public void setOpaque(boolean isOpaque) {
+    this.isOpaque = isOpaque;
+  }
 
   @Override
   public void setExportInfo(String namespace, String name) {

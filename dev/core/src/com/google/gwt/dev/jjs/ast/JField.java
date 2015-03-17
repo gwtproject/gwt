@@ -24,7 +24,7 @@ import java.io.Serializable;
 /**
  * Java field definition.
  */
-public class JField extends JVariable implements JMember {
+public class JField extends JVariable implements JMember, CanBeOpaque {
 
   /**
    * Determines whether the variable is final, volatile, or neither.
@@ -89,6 +89,7 @@ public class JField extends JVariable implements JMember {
   private final boolean isThisRef;
   private boolean isVolatile;
   private transient String signature;
+  private boolean isOpaque;
 
   /**
    * The access modifier; stored as an int to reduce memory / serialization footprint.
@@ -110,6 +111,16 @@ public class JField extends JVariable implements JMember {
   public JField(SourceInfo info, String name, JDeclaredType enclosingType, JType type,
       boolean isStatic, Disposition disposition) {
     this(info, name, enclosingType, type, isStatic, disposition, AccessModifier.DEFAULT);
+  }
+
+  @Override
+  public boolean isOpaque() {
+    return isOpaque;
+  }
+
+  @Override
+  public void setOpaque(boolean isOpaque) {
+    this.isOpaque = isOpaque;
   }
 
   public String getQualifiedName() {

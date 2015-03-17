@@ -37,6 +37,7 @@ public final class JsInteropUtil {
   public static final String JSFUNCTION_CLASS = "com.google.gwt.core.client.js.JsFunction";
   public static final String JSNAMESPACE_CLASS = "com.google.gwt.core.client.js.JsNamespace";
   public static final String JSNOEXPORT_CLASS = "com.google.gwt.core.client.js.JsNoExport";
+  public static final String JSOPAQUE_CLASS = "com.google.gwt.core.client.js.JsOpaque";
   public static final String JSPROPERTY_CLASS = "com.google.gwt.core.client.js.JsProperty";
   public static final String JSTYPE_CLASS = "com.google.gwt.core.client.js.JsType";
   public static final String JSTYPEPROTOTYPE_CLASS =
@@ -153,6 +154,10 @@ public final class JsInteropUtil {
 
   public static boolean isJsFunction(TypeDeclaration x) {
     return JdtUtil.getAnnotation(x.annotations, JSFUNCTION_CLASS) != null;
+  }
+
+  public static boolean isOpaque(Annotation... annotations) {
+    return JdtUtil.getAnnotation(annotations, JSOPAQUE_CLASS) != null;
   }
 
   private static boolean startsWithCamelCase(String string, String prefix) {

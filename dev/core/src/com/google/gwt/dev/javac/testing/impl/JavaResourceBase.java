@@ -394,6 +394,18 @@ public class JavaResourceBase {
           "public @interface JsFunction {\n",
           "}");
 
+  public static final MockJavaResource JSOPAQUE =
+      createMockJavaResource("com.google.gwt.core.client.js.JsOpaque",
+          "package com.google.gwt.core.client.js;",
+          "public @interface JsOpaque {\n",
+          "}");
+
+  public static final MockJavaResource JSNOEXPORT =
+      createMockJavaResource("com.google.gwt.core.client.js.JsNoExport",
+          "package com.google.gwt.core.client.js;",
+          "public @interface JsNoExport {\n",
+          "}");
+
   public static MockJavaResource[] getStandardResources() {
     return new MockJavaResource[] {
         AUTOCLOSEABLE, ANNOTATION, ARRAY_LIST, BYTE, BOOLEAN, CHARACTER, CHAR_SEQUENCE, CLASS,
@@ -401,7 +413,8 @@ public class JavaResourceBase {
         ERROR, FUNCTIONALINTERFACE, FLOAT, INTEGER, IS_SERIALIZABLE, JAVASCRIPTEXCEPTION,
         JAVASCRIPTOBJECT, LIST, LONG, MAP, NO_CLASS_DEF_FOUND_ERROR, NUMBER, OBJECT,
         RUNTIME_EXCEPTION, SERIALIZABLE, SHORT, STRING, STRING_BUILDER, SUPPRESS_WARNINGS,
-        THROWABLE, SPECIALIZE_METHOD, JSTYPE, JSTYPEPROTOTYPE, JSEXPORT, JSPROPERTY, JSFUNCTION};
+        THROWABLE, SPECIALIZE_METHOD, JSTYPE, JSTYPEPROTOTYPE, JSEXPORT, JSPROPERTY, JSFUNCTION,
+        JSOPAQUE, JSNOEXPORT};
   }
 
   /**

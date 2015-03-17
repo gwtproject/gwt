@@ -16,14 +16,18 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.MinimalRebuildCache;
+import com.google.gwt.dev.jjs.ast.CanBeOpaque;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.HasName;
+import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyType;
+import com.google.gwt.dev.jjs.ast.JParameter;
+import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
@@ -112,8 +116,10 @@ public class JsInteropRestrictionChecker extends JVisitor {
   public boolean visit(JField x, Context ctx) {
     if (currentType == x.getEnclosingType() && jprogram.typeOracle.isExportedField(x)) {
       checkExportName(x);
+      checkOpaqueMember(x);
     } else if (jprogram.typeOracle.isJsTypeField(x)) {
       checkJsTypeFieldName(x, x.getJsMemberName());
+      checkOpaqueMember(x);
     }
 
     return false;
@@ -128,8 +134,10 @@ public class JsInteropRestrictionChecker extends JVisitor {
 
     if (currentType == x.getEnclosingType() && jprogram.typeOracle.isExportedMethod(x)) {
       checkExportName(x);
+      checkOpaqueMemberInMethod(x);
     } else if (jprogram.typeOracle.isJsTypeMethod(x)) {
       checkJsTypeMethod(x);
+      checkOpaqueMemberInMethod(x);
     }
 
     if (currentType == x.getEnclosingType()) {
@@ -271,6 +279,34 @@ public class JsInteropRestrictionChecker extends JVisitor {
       logError("'%s' cannot be annotated as (or extend) both a @JsFunction and a @JsType at the "
           + "same time.", type.getName());
     }
+  }
+
+  private void checkOpaqueMemberInMethod(JMethod method) {
+    for (JParameter parameter : method.getParams()) {
+      checkOpaqueMember(parameter);
+    }
+    checkOpaqueMember(method);
+  }
+
+  private void checkOpaqueMember(CanBeOpaque x) {
+    if (!(isValidTypeEscapingToJS(x.getType()) || x.isOpaque())) {
+      // TODO: restrict it to a compiler error.
+      logWarning("[%s:%d]: '%s' should be Opaque.", x.getSourceInfo().getFileName(),
+          x.getSourceInfo().getStartLine(), x.getName());
+    }
+  }
+
+  private boolean isValidTypeEscapingToJS(JType type) {
+    if (type instanceof JArrayType) {
+      return isValidTypeEscapingToJS(((JArrayType) type).getLeafType());
+    }
+    return (type instanceof JPrimitiveType && type != JPrimitiveType.LONG)
+        || jprogram.typeOracle.isOrExtendsJsType(type, false)
+        || jprogram.typeOracle.isOrExtendsJsType(type, true)
+        || jprogram.typeOracle.isJsFunction(type)
+        || jprogram.typeOracle.isJavaScriptObject(type)
+        || type == jprogram.getTypeJavaLangObject()
+        || type == jprogram.getTypeJavaLangString();
   }
 
   private void logError(String format, Object... args) {

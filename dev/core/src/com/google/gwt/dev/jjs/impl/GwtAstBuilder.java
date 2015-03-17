@@ -3899,6 +3899,7 @@ public class GwtAstBuilder {
     }
     enclosingType.addField(field);
     JsInteropUtil.maybeSetJsInteropProperties(field, x.annotations);
+    field.setOpaque(JsInteropUtil.isOpaque(x.annotations));
     typeMap.setField(binding, field);
   }
 
@@ -4015,7 +4016,7 @@ public class GwtAstBuilder {
             if (alreadyNamedVariables.contains(argName)) {
               argName += "_" + i;
             }
-            createParameter(info, arg, argName, method);
+            createParameter(info, arg, argName, method, false);
             alreadyNamedVariables.add(argName);
           }
         }
@@ -4041,7 +4042,7 @@ public class GwtAstBuilder {
             if (alreadyNamedVariables.contains(argName)) {
               argName += "_" + i;
             }
-            createParameter(info, arg, argName, method);
+            createParameter(info, arg, argName, method, false);
             alreadyNamedVariables.add(argName);
           }
         }
@@ -4069,6 +4070,7 @@ public class GwtAstBuilder {
     maybeSetDoNotInline(x, method);
     maybeSetHasNoSideEffects(x, method);
     JsInteropUtil.maybeSetJsInteropProperties(method, x.annotations);
+    method.setOpaque(JsInteropUtil.isOpaque(x.annotations));
   }
 
   private void maybeSetDoNotInline(AbstractMethodDeclaration x,
@@ -4113,14 +4115,16 @@ public class GwtAstBuilder {
     method.setSpecialization(paramTypes, returnsType, targetMethod);
   }
 
-  private void createParameter(SourceInfo info, LocalVariableBinding binding, JMethod method) {
-    createParameter(info, binding, intern(binding.name), method);
+  private void createParameter(SourceInfo info, LocalVariableBinding binding, JMethod method,
+      boolean isOpaque) {
+    createParameter(info, binding, intern(binding.name), method, isOpaque);
   }
 
   private void createParameter(SourceInfo info, LocalVariableBinding binding, String name,
-      JMethod method) {
+      JMethod method, boolean isOpaque) {
     JParameter param =
         new JParameter(info, name, typeMap.get(binding.type), binding.isFinal(), false, method);
+    param.setOpaque(isOpaque);
     method.addParam(param);
   }
 
@@ -4129,7 +4133,7 @@ public class GwtAstBuilder {
       for (Argument argument : x.arguments) {
         SourceInfo info = makeSourceInfo(argument);
         LocalVariableBinding binding = argument.binding;
-        createParameter(info, binding, method);
+        createParameter(info, binding, method, JsInteropUtil.isOpaque(argument.annotations));
       }
     }
     method.freezeParamTypes();

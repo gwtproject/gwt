@@ -748,6 +748,70 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 //    assertCompileFails();
 //  }
 
+  public void testJsOpaqueSucceeds() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsFunction");
+    addSnippetImport("com.google.gwt.core.client.JavaScriptObject");
+    addSnippetClassDecl("@JsType public static class A {}");
+    addSnippetClassDecl("@JsType public static interface I {}");
+    addSnippetClassDecl("public static class B implements I {}");
+    addSnippetClassDecl("@JsFunction public static interface FI {void foo();}");
+    addSnippetClassDecl("public static class C extends JavaScriptObject {protected C(){}}");
+    addSnippetClassDecl("@JsType public static class Buggy {");
+    addSnippetClassDecl("public void f1(boolean a) {}"); // primitive types work fine.
+    addSnippetClassDecl("public void f2(A a) {}"); // JsType works fine.
+    addSnippetClassDecl("public void f3(B a) {}"); // Concrete class implements JsType works fine.
+    addSnippetClassDecl("public void f4(FI a) {}"); // JsFunction works fine.
+    addSnippetClassDecl("public void f5(C a) {}"); // JavaScriptObject works fine.
+    addSnippetClassDecl("public void f6(Object a) {}"); // Java Object works fine.
+    addSnippetClassDecl("public void f7(String a) {}"); // String works fine.
+    addSnippetClassDecl("public void f8(boolean[] a) {}"); // array of primitive types work fine.
+    addSnippetClassDecl("public void f9(A[] a) {}"); // array of JsType works fine.
+    addSnippetClassDecl("public void f10(B[] a) {}"); // array of JsType implementor works fine.
+    addSnippetClassDecl("public void f11(FI[] a) {}"); // array of JsFunction works fine.
+    addSnippetClassDecl("public void f12(C[][] a) {}"); // array of JavaScriptObject works fine.
+    addSnippetClassDecl("public void f13(Object[][] a) {}"); // array of Java Object works fine.
+    addSnippetClassDecl("public void f14(String[][] a) {}"); // array of String works fine.
+    addSnippetClassDecl("}");
+    assertCompileSucceeds();
+  }
+
+  public void testJsOpaqueFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsExport");
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl("public static class A {}");
+    addSnippetClassDecl("@JsType @JsExport public static class Buggy {");
+    addSnippetClassDecl("public A field1;"); // JsType field
+    addSnippetClassDecl("public static A field2"); // JsExport field
+    addSnippetClassDecl("public void f1(A[] a){}"); // parameter in JsType method
+    addSnippetClassDecl("public A f2() { return null; }"); // return in JsType method
+    addSnippetClassDecl("public static void f3(A[][] a){}"); // parameter in JsExport method
+    addSnippetClassDecl("public static A f4() { return null; }"); // return in JsExport method
+    addSnippetClassDecl("}");
+    assertCompileSucceeds("[test/EntryPoint.java:7]: 'field1' should be Opaque.",
+        "[test/EntryPoint.java:8]: 'field2' should be Opaque.",
+        "[test/EntryPoint.java:9]: 'a' should be Opaque.",
+        "[test/EntryPoint.java:10]: 'f2' should be Opaque.",
+        "[test/EntryPoint.java:11]: 'a' should be Opaque.",
+        "[test/EntryPoint.java:12]: 'f4' should be Opaque.");
+  }
+
+  public void testJsOpaqueSucceeds_opaque() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsExport");
+    addSnippetImport("com.google.gwt.core.client.js.JsOpaque");
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl("public static class A {}");
+    addSnippetClassDecl("@JsType @JsExport public static class Buggy {");
+    addSnippetClassDecl("@JsOpaque public A field1;"); // JsType field
+    addSnippetClassDecl("@JsOpaque public static A field2"); // JsExport field
+    addSnippetClassDecl("public void f1(@JsOpaque A[] a){}"); // parameter in JsType method
+    addSnippetClassDecl("@JsOpaque public A f2() { return null; }"); // return in JsType method
+    addSnippetClassDecl("public static void f3(@JsOpaque A[][] a){}"); // parameter in JsExport method
+    addSnippetClassDecl("@JsOpaque public static A f4() { return null; }"); // return in JsExport method
+    addSnippetClassDecl("}");
+    assertCompileSucceeds();
+  }
+
   private static final MockJavaResource jsFunctionInterface1 = new MockJavaResource(
       "test.MyJsFunctionInterface1") {
     @Override

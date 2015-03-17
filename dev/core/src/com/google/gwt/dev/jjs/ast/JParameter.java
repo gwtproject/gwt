@@ -20,7 +20,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 /**
  * Java method parameter definition.
  */
-public class JParameter extends JVariable implements HasEnclosingMethod {
+public class JParameter extends JVariable implements HasEnclosingMethod, CanBeOpaque {
 
   public static JParameter create(SourceInfo info, String name, JType type, boolean isFinal,
       boolean isThis, JMethod enclosingMethod) {
@@ -36,12 +36,23 @@ public class JParameter extends JVariable implements HasEnclosingMethod {
 
   private final JMethod enclosingMethod;
   private final boolean isThis;
+  private boolean isOpaque;
 
   public JParameter(SourceInfo info, String name, JType type, boolean isFinal, boolean isThis,
       JMethod enclosingMethod) {
     super(info, name, type, isFinal);
     this.enclosingMethod = enclosingMethod;
     this.isThis = isThis;
+  }
+
+  @Override
+  public boolean isOpaque() {
+    return isOpaque;
+  }
+
+  @Override
+  public void setOpaque(boolean isOpaque) {
+    this.isOpaque = isOpaque;
   }
 
   @Override

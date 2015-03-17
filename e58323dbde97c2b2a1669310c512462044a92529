@@ -2,6 +2,115 @@
   "comments": [
     {
       "key": {
+        "uuid": "469a5479_fad052fe",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 2774,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-17T20:19:49Z",
+      "side": 1,
+      "message": "the formatting for the new code needs fixing around the class.",
+      "range": {
+        "startLine": 2771,
+        "startChar": 0,
+        "endLine": 2774,
+        "endChar": 30
+      },
+      "revId": "e58323dbde97c2b2a1669310c512462044a92529",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "469a5479_7aa8e283",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 2867,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-17T20:19:49Z",
+      "side": 1,
+      "message": "can you move the comments to related classes.",
+      "range": {
+        "startLine": 2830,
+        "startChar": 0,
+        "endLine": 2867,
+        "endChar": 7
+      },
+      "revId": "e58323dbde97c2b2a1669310c512462044a92529",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "469a5479_9acbc622",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-17T20:19:49Z",
+      "side": 1,
+      "message": "private?\n\nCan you also fix visibilities in other places of the class?",
+      "range": {
+        "startLine": 50,
+        "startChar": 1,
+        "endLine": 55,
+        "endChar": 11
+      },
+      "revId": "e58323dbde97c2b2a1669310c512462044a92529",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "469a5479_7ae622b1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-17T20:19:49Z",
+      "side": 1,
+      "message": "formatting",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 3
+      },
+      "revId": "e58323dbde97c2b2a1669310c512462044a92529",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "469a5479_7ab8e255",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-17T20:19:49Z",
+      "side": 1,
+      "message": "To keep it readable and help in maintenance, I would just keep to implementations separate (instead of extending). Difficulty of switching contexts again and again while looking at the code flow for closure formatted output was one of the actual reasons I did the earlier refactoring for the exports. The also helps evolving closure code path independently without keeping track of implication on the regular js code path.",
+      "revId": "e58323dbde97c2b2a1669310c512462044a92529",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "469a5479_2bd9b21f",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 8

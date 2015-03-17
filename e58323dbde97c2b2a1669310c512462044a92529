@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "469a5479_2bd9b21f",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-17T18:57:46Z",
+      "side": 1,
+      "message": "why double space",
+      "range": {
+        "startLine": 757,
+        "startChar": 15,
+        "endLine": 757,
+        "endChar": 17
+      },
+      "revId": "e58323dbde97c2b2a1669310c512462044a92529",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "469a5479_0b830e9f",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-17T18:57:46Z",
+      "side": 1,
+      "message": "we\u0027ve been following a pattern of passing the compilerContext to passes and letting the pass pull out the options it needs setup snippet for the test.\n\n    CompilerOptions compilerOptions \u003d new CompilerOptionsImpl();\n    compilerOptions.setClosureCompilerEnabled(true);\n    CompilerContext compilerContext \u003d\n        new CompilerContext.Builder().options(compilerOptions).build();",
+      "revId": "e58323dbde97c2b2a1669310c512462044a92529",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "469a5479_ebf7aa07",
+        "filename": "user/src/com/google/gwt/junit/linker/ClosureHelpersLinker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-17T18:57:46Z",
+      "side": 1,
+      "message": "2015",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "e58323dbde97c2b2a1669310c512462044a92529",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "469a5479_8ead4c9d",
+        "filename": "user/src/com/google/gwt/junit/public/junit.html",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-17T18:57:46Z",
+      "side": 1,
+      "message": "we really shouldn\u0027t be adding this for all test runs. this is only needed for a vanishingly small % of test runs and only for users that have opted in.\n\ngoktug can you suggest a better way?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 41
+      },
+      "revId": "e58323dbde97c2b2a1669310c512462044a92529",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

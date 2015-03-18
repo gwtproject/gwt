@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "e67fc8e4_168e0284",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-18T03:39:35Z",
+      "side": 1,
+      "message": "It gets deadstripped, it also allows multiple ctors to work even though no one consuming JS in Closure land will reference them like that.\n\nThe workaround requires more code than simply letting them get stripped.",
+      "parentUuid": "e67fc8e4_d6baaa4e",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 19
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_b6db76ef",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -93,6 +117,24 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "Looks like we are silently ignoring an error here?",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_d69b8abd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-18T03:39:35Z",
+      "side": 1,
+      "message": "Well, technically, you could @JsExport namespace 1, then namespace2, and then namespace 1 again. We don\u0027t provide any sorting on how we loop over exportMember() .\n\nThe non-closure mode just silently assumes you can switch back and forth between namespaces like that.  Without this check, there\u0027s code in Inbox that actually triggers the issue.",
+      "parentUuid": "e67fc8e4_9682f298",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -150,6 +192,24 @@
     },
     {
       "key": {
+        "uuid": "e67fc8e4_167522fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-18T03:39:35Z",
+      "side": 1,
+      "message": "? don\u0027t understand what you mean. \n\nWe only need to call ensureProvide is there\u0027s a reason that a namespace will be needed. This is the case for anything marked @JsType. However, if the class has exports already, then ensureProvideCall will be invoked anyway.\n\nI will have to run a test on Inbox, but it may be that the providedNamespace check was added after this code and that it may only need to check x.isJsType()\n\n(if you do this for non-jstypes, you\u0027ll end with one goog.provide() per every live type in the whole program which is not what we want)",
+      "parentUuid": "e67fc8e4_1619a234",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_76281e38",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -173,6 +233,30 @@
     },
     {
       "key": {
+        "uuid": "e67fc8e4_96683220",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-18T03:39:35Z",
+      "side": 1,
+      "message": "Yep, if someone exports something with no methods, x.getMethods() will return null and you\u0027ll get an exception in Guava code.",
+      "parentUuid": "e67fc8e4_76281e38",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 5
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_b6ad3618",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -184,6 +268,24 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "I didn\u0027t fully understand what is going on here. I think it would be useful to see a test that illustrates how this behaves. You have some assumptions and behavior changes to how jsinterop works together with closure compiler without any tests and I am trying to reverse engineer them from code :)",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_36614635",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-18T03:39:35Z",
+      "side": 1,
+      "message": "when defineClass() is called, it is assigned to a variable JsName that mapped to the DeclaredType, e.g.\n\nvar someVar \u003d defineClass(....);\n\nLater, when the export happens, you get this\n\ngoog.provide(\u0027namespace.Class\u0027);\nnamespace.Class \u003d someVar;\n\nBy default, Closure goog.provide() assigns an object literal to the namespace, but later when you start declaring @JsDoc for that namespace, you must have a function with a prototype there, e.g.\n\n/** @constructor */\nnamespace.Class;\n\n/** @returns {string} */\nnamespace.Class.prototype.myMethod;\n\n\nThus, namespace.Class points to the function returned by defineClass(), so that the Closure Compiler can recognize all the prototype methods hanging off namespace.Class as simply aliases for the ones hanging off someVar.prototype\n\nSo in short, we either use the ctor for this, if it exists and is exported, or, we use the (private) function returned by defineClass()",
+      "parentUuid": "e67fc8e4_b6ad3618",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -218,6 +320,30 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "can you remove unused variables?",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 52,
+        "endChar": 45
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_765bbe8a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-03-18T03:39:35Z",
+      "side": 1,
+      "message": "Why do you think these are unused? They need to be marked final, but they are most definitely used.",
+      "parentUuid": "e67fc8e4_505082b5",
       "range": {
         "startLine": 47,
         "startChar": 1,

@@ -2,6 +2,103 @@
   "comments": [
     {
       "key": {
+        "uuid": "e67fc8e4_76dadeef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "This part seems unrelated to this class",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 9
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_d6baaa4e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "this seems like an incorrect use that we silently ignore?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 19
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_b6db76ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "nit: separate paragraphs by \u003cp\u003e",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_563a3a7c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "You should not need to track this by return, lastExportedNamespace is a member of the class.",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_9682f298",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "Looks like we are silently ignoring an error here?",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_702f46b9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -19,6 +116,343 @@
     },
     {
       "key": {
+        "uuid": "e67fc8e4_f6608e7c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "nit: extra space",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_1619a234",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "Why don\u0027t you always call ensureProvideCall return void here?",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_76281e38",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "Is this needed?",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 5
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_b6ad3618",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "I didn\u0027t fully understand what is going on here. I think it would be useful to see a test that illustrates how this behaves. You have some assumptions and behavior changes to how jsinterop works together with closure compiler without any tests and I am trying to reverse engineer them from code :)",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_b6b1b6d4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "inline?",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_505082b5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "can you remove unused variables?",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 52,
+        "endChar": 45
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_b0553edd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem correct.",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_5046c231",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "nit: move to where it is initialized",
+      "range": {
+        "startLine": 87,
+        "startChar": 17,
+        "endLine": 87,
+        "endChar": 28
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_f08976bc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "nit: don\u0027t need to qualify (in other places as well)",
+      "range": {
+        "startLine": 98,
+        "startChar": 20,
+        "endLine": 98,
+        "endChar": 46
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_50d5e2bc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "shouldn\u0027t need to return anything.",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_b02a9e74",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "inline?",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_f0bb36b0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "inline?",
+      "range": {
+        "startLine": 119,
+        "startChar": 19,
+        "endLine": 119,
+        "endChar": 38
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_b0d8de1c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "inline?",
+      "range": {
+        "startLine": 126,
+        "startChar": 25,
+        "endLine": 126,
+        "endChar": 46
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_f65faef8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "From the original code, the whole class should look like this:\n\n    public void exportMember(JDeclaredType x, JMember member, JsExpression exportRhs) {\n      SourceInfo sourceInfo \u003d x.getSourceInfo();\n      String namespace \u003d member.getExportNamespace();\n      if (!namespace.equals(lastExportedNamespace)) {\n        lastExportedNamespace \u003d namespace;\n\n        JsName provideFunc \u003d indexedFunctions.get(\"JavaClassHierarchySetupUtil.provide\").getName();\n        JsNameRef provideFuncRef \u003d provideFunc.makeRef(sourceInfo);\n        JsInvocation provideCall \u003d new JsInvocation(sourceInfo);\n        provideCall.setQualifier(provideFuncRef);\n        provideCall.getArguments().add(new JsStringLiteral(sourceInfo, namespace));\n\n        // _ \u003d JCHSU.provide(\u0027foo.bar\u0027)\n        exportStmts.add(createAssignment(globalTemp.makeRef(sourceInfo), provideCall).makeStmt());\n      }\n      JsNameRef leaf \u003d new JsNameRef(sourceInfo, member.getExportName());\n      leaf.setQualifier(globalTemp.makeRef(sourceInfo));\n      JsExprStmt astStat \u003d new JsExprStmt(sourceInfo, createAssignment(leaf, exportRhs));\n      exportStmts.add(astStat);\n    }",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_d0bab24e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "nit:formatting",
+      "range": {
+        "startLine": 778,
+        "startChar": 1,
+        "endLine": 779,
+        "endChar": 75
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_30086ead",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1601,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "nit:formatting",
+      "range": {
+        "startLine": 1600,
+        "startChar": 2,
+        "endLine": 1601,
+        "endChar": 42
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_bb6fdff5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2607,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "nit:formatting",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_9023dad1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
         "patchSetId": 9
@@ -30,6 +464,23 @@
       "writtenOn": "2015-03-18T00:53:57Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_fb60777c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-18T03:07:49Z",
+      "side": 1,
+      "message": "Talked w/ rluble. He recommended moving this to JsUtils.",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

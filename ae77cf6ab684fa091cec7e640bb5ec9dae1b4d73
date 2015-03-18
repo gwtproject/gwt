@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e67fc8e4_d072b20d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-18T01:19:04Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "ae77cf6ab684fa091cec7e640bb5ec9dae1b4d73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -43,6 +43,7 @@ public class DocumentTest extends GWTTestCase {
     assertEquals("br", doc.createBRElement().getTagName().toLowerCase(Locale.ROOT));
     assertEquals("caption",
         doc.createCaptionElement().getTagName().toLowerCase(Locale.ROOT));
+    assertEquals("code", doc.createCodeElement().getTagName().toLowerCase(Locale.ROOT));
     assertEquals("col", doc.createColElement().getTagName().toLowerCase(Locale.ROOT));
     assertEquals("colgroup",
         doc.createColGroupElement().getTagName().toLowerCase(Locale.ROOT));

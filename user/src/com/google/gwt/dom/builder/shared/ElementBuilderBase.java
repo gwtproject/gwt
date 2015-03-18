@@ -399,6 +399,14 @@ public interface ElementBuilderBase<T extends ElementBuilderBase<?>> {
    * @throws IllegalStateException if the current element has the wrong tag
    * @see #end()
    */
+  void endCode();
+
+  /**
+   * End the current element.
+   * 
+   * @throws IllegalStateException if the current element has the wrong tag
+   * @see #end()
+   */
   void endPre();
 
   /**
@@ -897,6 +905,13 @@ public interface ElementBuilderBase<T extends ElementBuilderBase<?>> {
    * @return the builder for the new element
    */
   InputBuilder startPasswordInput();
+
+  /**
+   * Append a code element.
+   * 
+   * @return the builder for the new element
+   */
+  CodeBuilder startCode();
 
   /**
    * Append a pre element.

@@ -72,6 +72,7 @@ class DomBuilderImpl extends ElementBuilderImpl {
   private DomOptGroupBuilder optGroupBuilder;
   private DomParagraphBuilder paragraphBuilder;
   private DomParamBuilder paramBuilder;
+  private DomCodeBuilder codeBuilder;
   private DomPreBuilder preBuilder;
   private DomQuoteBuilder quoteBuilder;
   private DomScriptBuilder scriptBuilder;
@@ -391,6 +392,14 @@ class DomBuilderImpl extends ElementBuilderImpl {
 
   public InputBuilder startPasswordInput() {
     return startInput(Document.get().createPasswordInputElement());
+  }
+
+  public DomCodeBuilder startCode() {
+    if (codeBuilder == null) {
+      codeBuilder = new DomCodeBuilder(this);
+    }
+    start(Document.get().createCodeElement(), codeBuilder);
+    return codeBuilder;
   }
 
   public DomPreBuilder startPre() {

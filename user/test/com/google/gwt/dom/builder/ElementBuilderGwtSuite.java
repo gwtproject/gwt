@@ -23,6 +23,7 @@ import com.google.gwt.dom.builder.client.GwtBaseBuilderTest;
 import com.google.gwt.dom.builder.client.GwtBodyBuilderTest;
 import com.google.gwt.dom.builder.client.GwtButtonBuilderTest;
 import com.google.gwt.dom.builder.client.GwtCanvasBuilderTest;
+import com.google.gwt.dom.builder.client.GwtCodeBuilderTest;
 import com.google.gwt.dom.builder.client.GwtDListBuilderTest;
 import com.google.gwt.dom.builder.client.GwtDivBuilderTest;
 import com.google.gwt.dom.builder.client.GwtDomBuilderImplTest;
@@ -119,6 +120,7 @@ public class ElementBuilderGwtSuite {
     suite.addTestSuite(GwtOptionBuilderTest.class);
     suite.addTestSuite(GwtParagraphBuilderTest.class);
     suite.addTestSuite(GwtParamBuilderTest.class);
+    suite.addTestSuite(GwtCodeBuilderTest.class);
     suite.addTestSuite(GwtPreBuilderTest.class);
     suite.addTestSuite(GwtQuoteBuilderTest.class);
     suite.addTestSuite(GwtScriptBuilderTest.class);

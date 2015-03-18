@@ -328,6 +328,11 @@ public class HtmlElementBuilderBase<R extends ElementBuilderBase<?>> extends
   }
 
   @Override
+  public CodeBuilder startCode() {
+    return delegate.startCode();
+  }
+
+  @Override
   public PreBuilder startPre() {
     return delegate.startPre();
   }

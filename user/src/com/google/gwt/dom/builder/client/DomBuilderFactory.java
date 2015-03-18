@@ -268,6 +268,11 @@ public class DomBuilderFactory extends ElementBuilderFactory {
   }
 
   @Override
+  public DomCodeBuilder createCodeBuilder() {
+    return impl().startCode();
+  }
+
+  @Override
   public DomPreBuilder createPreBuilder() {
     return impl().startPre();
   }

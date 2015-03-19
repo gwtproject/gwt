@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "86fc4cc6_d85a7dd8",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/PrunerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-19T16:22:36Z",
+      "side": 1,
+      "message": "rename to testJsFunction_pruneUnusedJsFunction",
+      "range": {
+        "startLine": 300,
+        "startChar": 14,
+        "endLine": 300,
+        "endChar": 29
+      },
+      "revId": "40593cf091db9dc43422167174fc5c81c00ff875",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2612c0d8_8334928c",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/PrunerTest.java",
         "patchSetId": 3
@@ -13,6 +36,24 @@
       "writtenOn": "2015-03-19T02:59:52Z",
       "side": 1,
       "message": "@rluble: can you take a look at this?",
+      "revId": "40593cf091db9dc43422167174fc5c81c00ff875",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86fc4cc6_d8739d66",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/PrunerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-19T16:22:36Z",
+      "side": 1,
+      "message": "This looks fine. Anything in particular?\n\nrename to testJsFunction_unrelatedJsFunctionCast",
+      "parentUuid": "2612c0d8_8334928c",
       "revId": "40593cf091db9dc43422167174fc5c81c00ff875",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

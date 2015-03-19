@@ -30,6 +30,54 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
   private UnitTestTreeLogger errorLogger;
 
+  // TODO: eventually test this for default methods in Java 8.
+  public void testCollidingAccidentalOverrideConcreteMethodFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static interface Foo {",
+        "  void doIt(Foo foo);",
+        "}",
+        "@JsType",
+        "public static interface Bar {",
+        "  void doIt(Bar bar);",
+        "}",
+        "public static class ParentBuggy {",
+        "  public void doIt(Foo foo) {}",
+        "  public void doIt(Bar bar) {}",
+        "}",
+        "public static class Buggy extends ParentBuggy implements Foo, Bar {",
+        "}");
+
+    assertCompileFails(
+        "Method 'test.EntryPoint$Buggy.doIt(Ltest/EntryPoint$Bar;)V' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the member name 'doIt' is already taken.");
+  }
+
+  public void testCollidingAccidentalOverrideAbstractMethodFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static interface Foo {",
+        "  void doIt(Foo foo);",
+        "}",
+        "@JsType",
+        "public static interface Bar {",
+        "  void doIt(Bar bar);",
+        "}",
+        "public static abstract class Baz implements Foo, Bar {",
+        "  public abstract void doIt(Foo foo);",
+        "  public abstract void doIt(Bar bar);",
+        "}",
+        "public static class Buggy {}  // Unrelated class");
+
+    assertCompileFails(
+        "Method 'test.EntryPoint$Baz.doIt(Ltest/EntryPoint$Bar;)V' can't be exported in type "
+        + "'test.EntryPoint$Baz' because the member name 'doIt' is already taken.");
+  }
+
   public void testCollidingFieldExportsFails() throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsExport");
     addSnippetClassDecl(

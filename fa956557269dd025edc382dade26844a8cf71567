@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86fc4cc6_583b2d4d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-19T16:36:20Z",
+      "side": 1,
+      "message": "What about adding the following tests:\n1) a test where you remove @JsType from Bar (should be no error)\n2) \n  public  interface Foo {,\n    void doIt(Foo foo);\n  }\n      \n  @JsType\n  public  interface Bar {\n     void doIt(Bar bar);\n  }\n\n  public  class ParentParent {\n    public void doIt(Bar x) {}\n  }\n\n  @JsType\n  public  class Parent extends ParentParent {\n    public void doIt(Foo x) {}\n  }\n\n  \n  public  class Buggy extends Parent implements Bar {}\n\n3) same but instead of Buggy\n  public  class GoodChild extends Parent implements Foo {}",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 3
+      },
+      "revId": "fa956557269dd025edc382dade26844a8cf71567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

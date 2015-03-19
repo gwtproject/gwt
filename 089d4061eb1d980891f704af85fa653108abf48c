@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86fc4cc6_d8795df9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RedundantCastRemover.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-19T16:37:53Z",
+      "side": 1,
+      "message": "remove trailing spaces all through this file.",
+      "range": {
+        "startLine": 67,
+        "startChar": 75,
+        "endLine": 67,
+        "endChar": 76
+      },
+      "revId": "089d4061eb1d980891f704af85fa653108abf48c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

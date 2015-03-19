@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "2612c0d8_a3bb16d6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "\u0027instead of an object literal that is returned by goog.provide()\u0027",
+      "range": {
+        "startLine": 60,
+        "startChar": 30,
+        "endLine": 60,
+        "endChar": 58
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_d6baaa4e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -72,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "2612c0d8_237f2690",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "I think for closure-mode to work correctly, there should be a single constructor without any export name (we should enforce that). When that happens, it already uses the same fully qualified name as the class so the above scenario should never happen; unless there is a bug.",
+      "parentUuid": "e67fc8e4_168e0284",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 19
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_b6db76ef",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -89,6 +136,80 @@
     },
     {
       "key": {
+        "uuid": "2612c0d8_78ecad3a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "unused?",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_52e9ca28",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "pls move next to other fields",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_7db13f73",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "This needs updating.",
+      "range": {
+        "startLine": 105,
+        "startChar": 1,
+        "endLine": 107,
+        "endChar": 53
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_d8fcb9f1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "This ignores the qualified export names from members?",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_563a3a7c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -100,6 +221,46 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "You should not need to track this by return, lastExportedNamespace is a member of the class.",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_dd926ba7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "I can\u0027t fully understand what happens indifferent scenarios; like what happens when we have fully qualified name with both constructor and the class itself.",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_63b2bed9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "seems unnecessary. Also pls make sure you remove the field as well.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 5
+      },
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -135,6 +296,173 @@
       "side": 1,
       "message": "Well, technically, you could @JsExport namespace 1, then namespace2, and then namespace 1 again. We don\u0027t provide any sorting on how we loop over exportMember() .\n\nThe non-closure mode just silently assumes you can switch back and forth between namespaces like that.  Without this check, there\u0027s code in Inbox that actually triggers the issue.",
       "parentUuid": "e67fc8e4_9682f298",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66c9189c_9cc9a9aa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "I see but I think it is still not doing the right thing in general.\n\nYou can have following:\n\n @JsExport(\"a.c.D\") class MyClass1 {}\n\n @JsExport(\"a.c.D.E\") class MyClass2 {}\n\nand you can get MyClass2 first while iterating. So it seems like you need to sort at the end.",
+      "parentUuid": "e67fc8e4_d69b8abd",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_ef93355b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 141,
+        "startChar": 47,
+        "endLine": 141,
+        "endChar": 61
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_035f8252",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "IIUC, this comment doesn\u0027t relate to next line but seemed like so to me at first. This is little bit misleading. I think we should move it.",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_cfecf1bf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "this doesn\u0027t seem to be a problem specific to enclosing types. This could happen if the compiler exports a subpackage first.",
+      "range": {
+        "startLine": 159,
+        "startChar": 6,
+        "endLine": 160,
+        "endChar": 74
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_23bcc6a8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "createQaulifier(\"goog.provode\")",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 61
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_5280aa90",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "I didn\u0027t understand this part.",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 174,
+        "endChar": 87
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_e95b358c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "Seems like shouldn\u0027t happen.",
+      "range": {
+        "startLine": 175,
+        "startChar": 30,
+        "endLine": 175,
+        "endChar": 42
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_0c8fb7a9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "Can you move this below provideCall.setQualifier?",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -210,6 +538,47 @@
     },
     {
       "key": {
+        "uuid": "66c9189c_dcc161d2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "Yeah, maybe this is added this before providedNamespace thing.\nTo put this another way, I think you can do following to simplify the code flow and should have the same result:\n\n void exportType() {\n   if (x.isJsType()) {\n     // in Closure code, even if a class doesn\u0027t have exports,\n     // it still needs a goog.provide for type declarations later\n     ensureProvideCall(x, x.getQualifiedExportName(), branch);\n    \n    }\n }\n\n // GenerateJavascriptAst:\n\n exportType(type);\n\n foreach method in exportedMethods\n   exportMember(method)",
+      "parentUuid": "e67fc8e4_167522fc",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66c9189c_1ce35949",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "I kind of understand this w.r.t. closure needs but this is a non-spec behavior that I need to get my head around. Can you give some examples of this and why we don\u0027t need this for class extending other jstypes?",
+      "range": {
+        "startLine": 199,
+        "startChar": 8,
+        "endLine": 199,
+        "endChar": 20
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_76281e38",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -257,6 +626,30 @@
     },
     {
       "key": {
+        "uuid": "66c9189c_1c47d9a8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "x.getMethods should never return null, otherwise we would have plenty of NPEs earlier.",
+      "parentUuid": "e67fc8e4_96683220",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 5
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_b6ad3618",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -286,6 +679,24 @@
       "side": 1,
       "message": "when defineClass() is called, it is assigned to a variable JsName that mapped to the DeclaredType, e.g.\n\nvar someVar \u003d defineClass(....);\n\nLater, when the export happens, you get this\n\ngoog.provide(\u0027namespace.Class\u0027);\nnamespace.Class \u003d someVar;\n\nBy default, Closure goog.provide() assigns an object literal to the namespace, but later when you start declaring @JsDoc for that namespace, you must have a function with a prototype there, e.g.\n\n/** @constructor */\nnamespace.Class;\n\n/** @returns {string} */\nnamespace.Class.prototype.myMethod;\n\n\nThus, namespace.Class points to the function returned by defineClass(), so that the Closure Compiler can recognize all the prototype methods hanging off namespace.Class as simply aliases for the ones hanging off someVar.prototype\n\nSo in short, we either use the ctor for this, if it exists and is exported, or, we use the (private) function returned by defineClass()",
       "parentUuid": "e67fc8e4_b6ad3618",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_58f329ec",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "Why is this not always what is returned from defineClass?",
+      "parentUuid": "e67fc8e4_36614635",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -344,6 +755,30 @@
       "side": 1,
       "message": "Why do you think these are unused? They need to be marked final, but they are most definitely used.",
       "parentUuid": "e67fc8e4_505082b5",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 52,
+        "endChar": 45
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2612c0d8_a318b676",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-19T02:46:47Z",
+      "side": 1,
+      "message": "Sometimes find function in gerrit fools me so I though it was more than one though it still looks like jsprogram is not used?",
+      "parentUuid": "e67fc8e4_765bbe8a",
       "range": {
         "startLine": 47,
         "startChar": 1,

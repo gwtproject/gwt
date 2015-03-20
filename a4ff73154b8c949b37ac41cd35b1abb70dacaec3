@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "068cdc85_1c97ab21",
+        "filename": "user/src/com/google/gwt/user/client/ui/SuggestBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-20T22:19:42Z",
+      "side": 1,
+      "message": "You can remove @deprecated as the method now applies to all displays.",
+      "revId": "a4ff73154b8c949b37ac41cd35b1abb70dacaec3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

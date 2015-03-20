@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_0d1ea61c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "e67fc8e4_76dadeef",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 9
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2612c0d8_a3bb16d6",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -36,6 +60,30 @@
       "writtenOn": "2015-03-19T02:46:47Z",
       "side": 1,
       "message": "\u0027instead of an object literal that is returned by goog.provide()\u0027",
+      "range": {
+        "startLine": 60,
+        "startChar": 30,
+        "endLine": 60,
+        "endChar": 58
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_cd273e66",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2612c0d8_a3bb16d6",
       "range": {
         "startLine": 60,
         "startChar": 30,
@@ -119,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_8d0a96d1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "I will strengthen the warning JsInteropChecker emits when this happens. i agree, the natural expectation in closure code is that \"new foo.bar.Bar()\" invokes the class ctor and that there\u0027s only one. General practice in Inbox is that when you need overloads, you use static utility methods. Multiple ctor\u0027s could be supported, but the calling syntax will be different, like\n\n\"new foo.bar.Bar.BarCtor2(a,b)\", that is, they live under the primary ctor namespace (the one with @JsExport and no-rename) just like static methods.\n\nSG?",
+      "parentUuid": "2612c0d8_237f2690",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 19
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_b6db76ef",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -130,6 +202,24 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "nit: separate paragraphs by \u003cp\u003e",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_4d14aef4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_b6db76ef",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -153,6 +243,24 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_ed3fa26b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2612c0d8_78ecad3a",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2612c0d8_52e9ca28",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -164,6 +272,24 @@
       "writtenOn": "2015-03-19T02:46:47Z",
       "side": 1,
       "message": "pls move next to other fields",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_85610681",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2612c0d8_52e9ca28",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -193,6 +319,30 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_ad399a88",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2612c0d8_7db13f73",
+      "range": {
+        "startLine": 105,
+        "startChar": 1,
+        "endLine": 107,
+        "endChar": 53
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2612c0d8_d8fcb9f1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -204,6 +354,24 @@
       "writtenOn": "2015-03-19T02:46:47Z",
       "side": 1,
       "message": "This ignores the qualified export names from members?",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_6d34128c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Changed. Will handle the primary ctor specially elsewhere in exportType() method. Everything else mostly works the same as the non-Closure case, and all of the test cases now pass.",
+      "parentUuid": "2612c0d8_d8fcb9f1",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -227,6 +395,24 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_8d31369d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_563a3a7c",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2612c0d8_dd926ba7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -244,6 +430,24 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_0d74664d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "I think the logic should be this:\ngoog.provide(\"classNamespace.ClassSimpleName\");\nclassNamespace.ClassSimpleName \u003d primaryExportedCtor (if exists, otherwise the value returned by defineClass());\n\nAll other fields, methods, and ctors can live in whatever namespace they want (usually underneath this ctor), just as they do with the non-closureformat today. If they do not overrride @JsExport with a custom name, then they will live under the ClassSimpleName (which is the primary ctor). If they do, then they\u0027ll be placed wherever the author specified.",
+      "parentUuid": "2612c0d8_dd926ba7",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2612c0d8_63b2bed9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -255,6 +459,30 @@
       "writtenOn": "2015-03-19T02:46:47Z",
       "side": 1,
       "message": "seems unnecessary. Also pls make sure you remove the field as well.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 5
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_e59d72e7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Removed as not needed, since everything is fully qualified, there\u0027s no need to track this if the namespace changes.",
+      "parentUuid": "2612c0d8_63b2bed9",
       "range": {
         "startLine": 129,
         "startChar": 0,
@@ -320,6 +548,24 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_452f9e0a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "This never occurs in Inbox code AFAIK, I\u0027ll look at adding a topological sort after you do another pass on this CL and I push it and pull it in to run TAP.",
+      "parentUuid": "66c9189c_9cc9a9aa",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2612c0d8_ef93355b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -331,6 +577,30 @@
       "writtenOn": "2015-03-19T02:46:47Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 141,
+        "startChar": 47,
+        "endLine": 141,
+        "endChar": 61
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_05299603",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2612c0d8_ef93355b",
       "range": {
         "startLine": 141,
         "startChar": 47,
@@ -371,6 +641,30 @@
       "writtenOn": "2015-03-19T02:46:47Z",
       "side": 1,
       "message": "this doesn\u0027t seem to be a problem specific to enclosing types. This could happen if the compiler exports a subpackage first.",
+      "range": {
+        "startLine": 159,
+        "startChar": 6,
+        "endLine": 160,
+        "endChar": 74
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_05e0b645",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "For classes that are instantiated (e.g. have @JsExports), I believe GenJsAst always visits the parents first. The issue is enclosing classes that aren\u0027t exports, but mere JsTypes, regular classes, or Java interfaces.",
+      "parentUuid": "2612c0d8_cfecf1bf",
       "range": {
         "startLine": 159,
         "startChar": 6,
@@ -429,6 +723,30 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_058d1683",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "@JsType\ninterface Foo {\n  void method();\n  @JsExport\n  enum Bar {}\n}\n\nor \n\nclass Foo extends JSO {\n  @JsExport\n  enum Bar {}\n}\n\nNeither of these are instantiable or have constructors, so their namespaces are get an empty function literal instead.",
+      "parentUuid": "2612c0d8_5280aa90",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 174,
+        "endChar": 87
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2612c0d8_e95b358c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -452,6 +770,30 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_e57ed2de",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Will happen in the case of Interface types, which never have defineClass() called.\n\nJsDoc is still generated for this, so there needs to be a function literal with a prototype, so the linker can append\n\n/** @interface */\nFoo {};\n/** @return {number} */\nFoo.prototype.method;",
+      "parentUuid": "2612c0d8_e95b358c",
+      "range": {
+        "startLine": 175,
+        "startChar": 30,
+        "endLine": 175,
+        "endChar": 42
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2612c0d8_0c8fb7a9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -463,6 +805,24 @@
       "writtenOn": "2015-03-19T02:46:47Z",
       "side": 1,
       "message": "Can you move this below provideCall.setQualifier?",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_6573c213",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2612c0d8_0c8fb7a9",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -497,6 +857,24 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "nit: extra space",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_255cda83",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_f6608e7c",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -556,6 +934,24 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_a550ca64",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66c9189c_dcc161d2",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66c9189c_1ce35949",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -567,6 +963,30 @@
       "writtenOn": "2015-03-19T02:46:47Z",
       "side": 1,
       "message": "I kind of understand this w.r.t. closure needs but this is a non-spec behavior that I need to get my head around. Can you give some examples of this and why we don\u0027t need this for class extending other jstypes?",
+      "range": {
+        "startLine": 199,
+        "startChar": 8,
+        "endLine": 199,
+        "endChar": 20
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_c8f3a5ea",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "I changed it, but need to verify it doesn\u0027t break something. JsDoc is appended for all @JsType classes by the linker. If a class has @JsExport, ensureProvideCall will be called anyone in exportMember. I think this code was there to prevent duplicate provides before providedNamespaces was added.",
+      "parentUuid": "66c9189c_1ce35949",
       "range": {
         "startLine": 199,
         "startChar": 8,
@@ -650,6 +1070,30 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_480ed56b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Im leaving this here for now since there was a definite NPE. I\u0027ll remove it when I can track down why.",
+      "parentUuid": "66c9189c_1c47d9a8",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 5
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_b6ad3618",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -703,6 +1147,24 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_e829c9b5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Because people want to write \"new foo.bar.Ctor()\" where Ctor is the main default or only exported ctor of the class. The result result of defineClass is not a ctor, it\u0027s an empty function.\n\nYou cannot override this assignment later, it causes deoptimization. E.g.\n\nfoo.bar.Ctor \u003d defineClassFunc;\n\n// later\nfoo.bar.Ctor \u003d js_exported_ctor;\n\nYou\u0027ve now assigned twice to the namespace, Closure will mark it as non-const, and a bunch of optimizations are disabled.",
+      "parentUuid": "2612c0d8_58f329ec",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_b6b1b6d4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -714,6 +1176,24 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "inline?",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_681e3991",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_b6b1b6d4",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -791,6 +1271,30 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_a5068ad4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2612c0d8_a318b676",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 52,
+        "endChar": 45
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_b0553edd",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -808,6 +1312,24 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_6500a2b8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_b0553edd",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_5046c231",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -819,6 +1341,30 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "nit: move to where it is initialized",
+      "range": {
+        "startLine": 87,
+        "startChar": 17,
+        "endLine": 87,
+        "endChar": 28
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_85fd8637",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_5046c231",
       "range": {
         "startLine": 87,
         "startChar": 17,
@@ -854,6 +1400,30 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_451ebe1d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_f08976bc",
+      "range": {
+        "startLine": 98,
+        "startChar": 20,
+        "endLine": 98,
+        "endChar": 46
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_50d5e2bc",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -865,6 +1435,24 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "shouldn\u0027t need to return anything.",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_e5225258",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_50d5e2bc",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -888,6 +1476,24 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_45455e03",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_b02a9e74",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_f0bb36b0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -899,6 +1505,30 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "inline?",
+      "range": {
+        "startLine": 119,
+        "startChar": 19,
+        "endLine": 119,
+        "endChar": 38
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_e539f287",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_f0bb36b0",
       "range": {
         "startLine": 119,
         "startChar": 19,
@@ -934,6 +1564,30 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_a5344a8c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_b0d8de1c",
+      "range": {
+        "startLine": 126,
+        "startChar": 25,
+        "endLine": 126,
+        "endChar": 46
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_f65faef8",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
         "patchSetId": 9
@@ -951,6 +1605,24 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_65642290",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGeneratorImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "It looks essentially like that now except the namespace provide part has been extracted into a method",
+      "parentUuid": "e67fc8e4_f65faef8",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_d0bab24e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 9
@@ -962,6 +1634,30 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "nit:formatting",
+      "range": {
+        "startLine": 778,
+        "startChar": 1,
+        "endLine": 779,
+        "endChar": 75
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_653ae299",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_d0bab24e",
       "range": {
         "startLine": 778,
         "startChar": 1,
@@ -997,6 +1693,30 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_8537c6ac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1601,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_30086ead",
+      "range": {
+        "startLine": 1600,
+        "startChar": 2,
+        "endLine": 1601,
+        "endChar": 42
+      },
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_bb6fdff5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 9
@@ -1008,6 +1728,24 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "nit:formatting",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_45d0fece",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2607,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_bb6fdff5",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -1031,6 +1769,24 @@
     },
     {
       "key": {
+        "uuid": "068cdc85_c5dceee9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_9023dad1",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_fb60777c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
         "patchSetId": 9
@@ -1042,6 +1798,24 @@
       "writtenOn": "2015-03-18T03:07:49Z",
       "side": 1,
       "message": "Talked w/ rluble. He recommended moving this to JsUtils.",
+      "revId": "aff278c76b30f64836bab8c5048678eba285f261",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068cdc85_65e98280",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-03-20T19:36:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67fc8e4_fb60777c",
       "revId": "aff278c76b30f64836bab8c5048678eba285f261",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

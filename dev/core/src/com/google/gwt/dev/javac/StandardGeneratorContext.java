@@ -98,6 +98,12 @@ public class StandardGeneratorContext implements GeneratorContext {
       return wrappedResourceOracle.getResource(pathName);
     }
 
+    @Deprecated
+    @Override
+    public Map<String, Resource> getResourceMap() {
+      return wrappedResourceOracle.getResourceMap();
+    }
+
     @Override
     public Set<Resource> getResources() {
       return wrappedResourceOracle.getResources();

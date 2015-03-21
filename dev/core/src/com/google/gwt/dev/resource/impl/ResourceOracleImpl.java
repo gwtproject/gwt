@@ -28,7 +28,6 @@ import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
 import com.google.gwt.thirdparty.guava.common.collect.SetMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
-import com.google.gwt.thirdparty.guava.common.io.Files;
 
 import java.io.File;
 import java.io.IOException;
@@ -419,6 +418,12 @@ public class ResourceOracleImpl extends AbstractResourceOracle {
 
   public PathPrefixSet getPathPrefixes() {
     return pathPrefixSet;
+  }
+
+  @Deprecated
+  @Override
+  public Map<String, Resource> getResourceMap() {
+    return exposedResourceMap;
   }
 
   @Override

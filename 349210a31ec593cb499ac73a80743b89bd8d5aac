@@ -22,6 +22,30 @@
       "revId": "349210a31ec593cb499ac73a80743b89bd8d5aac",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "260c80ed_b9d03f81",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1377,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-21T02:07:05Z",
+      "side": 0,
+      "message": "Yes. I did a mistake while creating the patch.",
+      "parentUuid": "a69cf0d8_134dd4c9",
+      "range": {
+        "startLine": 1377,
+        "startChar": 2,
+        "endLine": 1377,
+        "endChar": 54
+      },
+      "revId": "349210a31ec593cb499ac73a80743b89bd8d5aac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -16,6 +16,24 @@
       "revId": "a4ff73154b8c949b37ac41cd35b1abb70dacaec3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "260c80ed_793a2799",
+        "filename": "user/src/com/google/gwt/user/client/ui/SuggestBox.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 8450
+      },
+      "writtenOn": "2015-03-21T00:31:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "068cdc85_1c97ab21",
+      "revId": "a4ff73154b8c949b37ac41cd35b1abb70dacaec3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

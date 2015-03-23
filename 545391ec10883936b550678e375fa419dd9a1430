@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a69cf0d8_3b3b7a4e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplicitUpcastAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-23T17:52:19Z",
+      "side": 1,
+      "message": "maybe add a comment:\n// Ignore nullability when determining type inequality.",
+      "range": {
+        "startLine": 203,
+        "startChar": 4,
+        "endLine": 203,
+        "endChar": 44
+      },
+      "revId": "545391ec10883936b550678e375fa419dd9a1430",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

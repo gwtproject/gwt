@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a69cf0d8_fb73b293",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JAnalysisDecoratedType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-23T17:44:29Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "07d73b674efc110fdc810cbc558dbb1f75125a2e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a69cf0d8_5b592618",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JAnalysisDecoratedType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-23T17:44:29Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "07d73b674efc110fdc810cbc558dbb1f75125a2e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a69cf0d8_3b56dae7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-23T17:44:29Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "07d73b674efc110fdc810cbc558dbb1f75125a2e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

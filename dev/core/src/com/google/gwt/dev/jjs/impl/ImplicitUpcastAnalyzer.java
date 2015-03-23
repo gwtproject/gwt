@@ -200,6 +200,8 @@ public class ImplicitUpcastAnalyzer extends JVisitor {
   }
 
   private void processIfTypesNotEqual(JType fromType, JType destType, SourceInfo info) {
+    fromType = fromType.getUnderlyingType();
+    destType = destType.getUnderlyingType();
     if (fromType != destType) {
       processImplicitUpcast(fromType, destType, info);
     }

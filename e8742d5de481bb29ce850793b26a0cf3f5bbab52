@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3f6a249_e002bc09",
+        "filename": "dev/core/test/com/google/gwt/dev/util/UnitTestTreeLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-24T17:36:33Z",
+      "side": 1,
+      "message": "in the case where there is more than 1 item in both the unmatchedExpectedEntries set and in the unmatchedActualEntries set is the output really gonna be very readable?\n\nshould we do something better (maybe sort the entries before comparing?)? or is this sort of standard behavior when comparing sets",
+      "range": {
+        "startLine": 271,
+        "startChar": 4,
+        "endLine": 271,
+        "endChar": 74
+      },
+      "revId": "e8742d5de481bb29ce850793b26a0cf3f5bbab52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

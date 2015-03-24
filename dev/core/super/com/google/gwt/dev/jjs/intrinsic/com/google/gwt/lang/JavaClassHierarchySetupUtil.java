@@ -37,12 +37,15 @@ public class JavaClassHierarchySetupUtil {
    * Finally adds the class literal if it was created before the call to {@code defineClass}.
    * Class literals might be created before the call to {@code defineClass} if they are in separate
    * code-split fragments. In that case Class.createFor* methods will have created a placeholder and
-   * stored in {@code prototypesByTypeId} the class literal.<p></p>
-   *
-   * As a prerequisite if superSeed is not null, it is assumed that defineClass for the supertype
+   * stored in {@code prototypesByTypeId} the class literal.
+   * <p>
+   * As a prerequisite if superTypeId is not null, it is assumed that defineClass for the supertype
    * has already been called.
+   * <p>
+   * This method has the effect of assigning the newly created prototype to the global temp variable
+   * '_'.
    */
-  public static native JavaScriptObject defineClass(JavaScriptObject typeId,
+  public static native void defineClass(JavaScriptObject typeId,
       JavaScriptObject superTypeId, JavaScriptObject castableTypeMap) /*-{
     // Setup aliases for (horribly long) JSNI references.
     var prototypesByTypeId = @com.google.gwt.lang.JavaClassHierarchySetupUtil::prototypesByTypeId;

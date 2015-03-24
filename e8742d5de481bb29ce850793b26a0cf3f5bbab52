@@ -22,6 +22,30 @@
       "revId": "e8742d5de481bb29ce850793b26a0cf3f5bbab52",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_a3ba7eab",
+        "filename": "dev/core/test/com/google/gwt/dev/util/UnitTestTreeLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-24T18:16:52Z",
+      "side": 1,
+      "message": "It shows \n\nexpected: [expected1_toString, expected2_toString]\nactual: [actual1_toString, actual2_toString]\n\nWhich I think is enough for tests. (most tests only expect 0 or 1 errors and there are a few tests that expect more. I am not sure if there is any test that expects more than 2.\n\nI don\u0027t think it adds much value (to implement we only need to implement a comparator for log entries and replace the sets by SortedSet), let me know if you want me to do that, of not.",
+      "parentUuid": "a3f6a249_e002bc09",
+      "range": {
+        "startLine": 271,
+        "startChar": 4,
+        "endLine": 271,
+        "endChar": 74
+      },
+      "revId": "e8742d5de481bb29ce850793b26a0cf3f5bbab52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

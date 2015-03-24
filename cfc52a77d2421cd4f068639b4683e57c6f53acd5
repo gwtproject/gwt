@@ -1,0 +1,278 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3f6a249_11c4dcbd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JAnalysisDecoratedType.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "I actually I didn\u0027t like this part much. Let\u0027s talk about alternatives.",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_6c62233c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JAnalysisDecoratedType.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "let\u0027s document this more.",
+      "range": {
+        "startLine": 147,
+        "startChar": 32,
+        "endLine": 147,
+        "endChar": 73
+      },
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_71ab20d6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JAnalysisDecoratedType.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "These are like constructor functions; perhaps move to top?",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 3
+      },
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_f22bae77",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JAnalysisDecoratedType.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "what about making the methods as member method for JReferenceType and hide this class.",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_e98ce005",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "re-word?",
+      "range": {
+        "startLine": 467,
+        "startChar": 38,
+        "endLine": 467,
+        "endChar": 61
+      },
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_2941a816",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "I didn\u0027t understand. I think it needs an explanation. Perhaps you should add examples to each step?",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_e96180b9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "formatting in general seems problematic in the patch",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_290c08ed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "assert instead?",
+      "range": {
+        "startLine": 996,
+        "startChar": 11,
+        "endLine": 996,
+        "endChar": 22
+      },
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_89731c68",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "Perhaps keep this next to strengthenType",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_7cb1b0f6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "should we get right of instanceof and use \u003d\u003d instead?",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_1c062c20",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1127,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "Is this true?",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_bcba98ab",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "what about the other direction?",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_5c5154b9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "Is the reverse possible somehow (found method is package visible)? Or are they any other weird cases that would require us to search parent?\n\nProbably not due to visibility rules but I\u0027m too tired and lazy to think deeply about it.",
+      "range": {
+        "startLine": 882,
+        "startChar": 1,
+        "endLine": 883,
+        "endChar": 39
+      },
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_3ca4482b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-24T23:34:46Z",
+      "side": 1,
+      "message": "the comment reads like there is somewhere else that will do the static check which is not true.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 21
+      },
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

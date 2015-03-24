@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3f6a249_6c07c39f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 2684,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-24T20:28:42Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "151c9682680f7cdc36f18d0d52b9ca9ab5d6a6a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

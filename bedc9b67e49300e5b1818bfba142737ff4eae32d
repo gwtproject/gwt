@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "666d98b3_48e92b29",
+        "filename": "dev/core/test/com/google/gwt/dev/util/UnitTestTreeLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-24T15:53:48Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "bedc9b67e49300e5b1818bfba142737ff4eae32d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "666d98b3_68e6e759",
+        "filename": "dev/core/test/com/google/gwt/dev/util/UnitTestTreeLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-24T15:53:48Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "bedc9b67e49300e5b1818bfba142737ff4eae32d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

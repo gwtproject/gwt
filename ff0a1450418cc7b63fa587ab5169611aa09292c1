@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "666d98b3_7c1eade7",
+        "filename": "user/test/com/google/gwt/dev/jjs/CompilerSuite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-24T01:00:56Z",
+      "side": 1,
+      "message": "jenkins is pointing out this unused import",
+      "range": {
+        "startLine": 25,
+        "startChar": 35,
+        "endLine": 25,
+        "endChar": 70
+      },
+      "revId": "ff0a1450418cc7b63fa587ab5169611aa09292c1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

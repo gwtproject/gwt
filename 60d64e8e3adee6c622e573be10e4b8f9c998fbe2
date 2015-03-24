@@ -22,6 +22,30 @@
       "revId": "60d64e8e3adee6c622e573be10e4b8f9c998fbe2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8620cc83_845b268d",
+        "filename": "dev/core/test/com/google/gwt/dev/util/UnitTestTreeLogger.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-24T16:58:24Z",
+      "side": 1,
+      "message": "Thx. Done.",
+      "parentUuid": "8620cc83_846ec67d",
+      "range": {
+        "startLine": 174,
+        "startChar": 13,
+        "endLine": 174,
+        "endChar": 14
+      },
+      "revId": "60d64e8e3adee6c622e573be10e4b8f9c998fbe2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

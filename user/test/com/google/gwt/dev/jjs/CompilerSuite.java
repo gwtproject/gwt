@@ -74,7 +74,6 @@ public class CompilerSuite {
     suite.addTestSuite(BlankInterfaceTest.class);
     suite.addTestSuite(ClassCastTest.class);
     suite.addTestSuite(ClassLiteralsTest.class);
-    suite.addTestSuite(CodeSplitterCollapsedPropertiesTest.class);
     suite.addTestSuite(CompilerTest.class);
     suite.addTestSuite(CompilerMiscRegressionTest.class);
     suite.addTestSuite(CoverageTest.class);

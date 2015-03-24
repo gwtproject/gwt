@@ -2,6 +2,98 @@
   "comments": [
     {
       "key": {
+        "uuid": "a3f6a249_49e2b419",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-24T22:49:07Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 86,
+        "startChar": 25,
+        "endLine": 86,
+        "endChar": 32
+      },
+      "revId": "151c9682680f7cdc36f18d0d52b9ca9ab5d6a6a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_d7e784ac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 2046,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-24T22:49:07Z",
+      "side": 1,
+      "message": "our Map variable naming pattern is more like:\n\ns/exportedMembers/exportedMembersByExportName",
+      "range": {
+        "startLine": 2046,
+        "startChar": 10,
+        "endLine": 2046,
+        "endChar": 25
+      },
+      "revId": "151c9682680f7cdc36f18d0d52b9ca9ab5d6a6a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_5747f42d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 2058,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-24T22:49:07Z",
+      "side": 1,
+      "message": "Sets.newHashSet();",
+      "range": {
+        "startLine": 2058,
+        "startChar": 44,
+        "endLine": 2058,
+        "endChar": 73
+      },
+      "revId": "151c9682680f7cdc36f18d0d52b9ca9ab5d6a6a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_57edb486",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 2060,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-24T22:49:07Z",
+      "side": 1,
+      "message": "s/exportEntity/exportedEntity",
+      "range": {
+        "startLine": 2060,
+        "startChar": 18,
+        "endLine": 2060,
+        "endChar": 30
+      },
+      "revId": "151c9682680f7cdc36f18d0d52b9ca9ab5d6a6a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3f6a249_6c07c39f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 18
@@ -13,6 +105,121 @@
       "writtenOn": "2015-03-24T20:28:42Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "151c9682680f7cdc36f18d0d52b9ca9ab5d6a6a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_262f9788",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 2704,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-24T22:49:07Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 2704,
+        "startChar": 56,
+        "endLine": 2704,
+        "endChar": 69
+      },
+      "revId": "151c9682680f7cdc36f18d0d52b9ca9ab5d6a6a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_09326ca0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropExportsGenerator.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-24T22:49:07Z",
+      "side": 1,
+      "message": "these should have descriptions",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 36
+      },
+      "revId": "151c9682680f7cdc36f18d0d52b9ca9ab5d6a6a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_669fdfdf",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-24T22:49:07Z",
+      "side": 1,
+      "message": "\"is\"",
+      "range": {
+        "startLine": 32,
+        "startChar": 16,
+        "endLine": 32,
+        "endChar": 17
+      },
+      "revId": "151c9682680f7cdc36f18d0d52b9ca9ab5d6a6a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_46a4e32b",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-24T22:49:07Z",
+      "side": 1,
+      "message": "\"is\"",
+      "range": {
+        "startLine": 32,
+        "startChar": 84,
+        "endLine": 32,
+        "endChar": 85
+      },
+      "revId": "151c9682680f7cdc36f18d0d52b9ca9ab5d6a6a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f6a249_e61f6fe1",
+        "filename": "user/src/com/google/gwt/junit/linker/ClosureHelpersLinker.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-03-24T22:49:07Z",
+      "side": 1,
+      "message": "2015",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
       "revId": "151c9682680f7cdc36f18d0d52b9ca9ab5d6a6a1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -581,6 +581,24 @@
     },
     {
       "key": {
+        "uuid": "2362b2ee_7ad417c3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2339d2d0_858f727e",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_97ca071d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 9
@@ -592,6 +610,24 @@
       "writtenOn": "2015-03-25T22:11:30Z",
       "side": 1,
       "message": "Do we still need a special case for this?",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_3a0c5fed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "I think we do not but I would like to test it independently before removing.",
+      "parentUuid": "2362b2ee_97ca071d",
       "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -621,6 +657,30 @@
     },
     {
       "key": {
+        "uuid": "2362b2ee_3a357f89",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2362b2ee_57792f7c",
+      "range": {
+        "startLine": 685,
+        "startChar": 0,
+        "endLine": 687,
+        "endChar": 7
+      },
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_77aaf3fa",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 9
@@ -632,6 +692,24 @@
       "writtenOn": "2015-03-25T22:11:30Z",
       "side": 1,
       "message": "Perhaps, we can add some tests for the new stuff in TypeTightenerTest?",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_da2b0326",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "Yes. Let me add test case coverage for the new stuff and the method we want to remove.",
+      "parentUuid": "2362b2ee_77aaf3fa",
       "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -661,6 +739,30 @@
     },
     {
       "key": {
+        "uuid": "2362b2ee_ba028f8d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2362b2ee_170737d5",
+      "range": {
+        "startLine": 742,
+        "startChar": 1,
+        "endLine": 746,
+        "endChar": 7
+      },
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_375b5a5a",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 9
@@ -672,6 +774,24 @@
       "writtenOn": "2015-03-25T22:11:30Z",
       "side": 1,
       "message": "I\u0027m not sure about this TODO I added. Perhaps it was to verify all created and passed typelist are sensible?",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_c0955242",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2362b2ee_375b5a5a",
       "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -695,6 +815,24 @@
     },
     {
       "key": {
+        "uuid": "2362b2ee_80799a7f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2362b2ee_77b672f1",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_1790561a",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ArrayNormalizerTest.java",
         "patchSetId": 9
@@ -706,6 +844,24 @@
       "writtenOn": "2015-03-25T22:11:30Z",
       "side": 1,
       "message": "Can you add a tighten case?",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_e08976f3",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ArrayNormalizerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2362b2ee_1790561a",
       "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -735,6 +891,30 @@
     },
     {
       "key": {
+        "uuid": "2362b2ee_c06432d1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ArrayNormalizerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2362b2ee_7747922e",
+      "range": {
+        "startLine": 68,
+        "startChar": 65,
+        "endLine": 68,
+        "endChar": 72
+      },
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_971d6621",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FinalizerTest.java",
         "patchSetId": 9
@@ -746,6 +926,24 @@
       "writtenOn": "2015-03-25T22:11:30Z",
       "side": 1,
       "message": "Class is not mutable any more wrt to finalization so I think you can just remove the test.",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_a0693ea6",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FinalizerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "2362b2ee_971d6621",
       "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -769,6 +967,24 @@
     },
     {
       "key": {
+        "uuid": "2362b2ee_80ed1a8a",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecksTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "I\u0027ll add those for next round.",
+      "parentUuid": "2362b2ee_b7418afc",
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_d7887eb8",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecksTest.java",
         "patchSetId": 9
@@ -780,6 +996,30 @@
       "writtenOn": "2015-03-25T22:11:30Z",
       "side": 1,
       "message": "remove final? (and below)",
+      "range": {
+        "startLine": 27,
+        "startChar": 25,
+        "endLine": 27,
+        "endChar": 30
+      },
+      "revId": "cfc52a77d2421cd4f068639b4683e57c6f53acd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_c0caf21d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecksTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-25T23:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2362b2ee_d7887eb8",
       "range": {
         "startLine": 27,
         "startChar": 25,

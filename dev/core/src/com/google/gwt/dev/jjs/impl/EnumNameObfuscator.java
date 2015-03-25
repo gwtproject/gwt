@@ -16,6 +16,8 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
+import com.google.gwt.dev.CompilerOptions;
 import com.google.gwt.dev.cfg.ConfigProps;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JClassType;
@@ -207,14 +209,20 @@ public class EnumNameObfuscator {
     return blacklistedEnums.contains(cType.getName().replace('$', '.'));
   }
 
-  public static void exec(JProgram jprogram, TreeLogger logger, ConfigProps configProps) {
-    String enumObfucationProperty = configProps.getString(
+  public static void exec(
+      JProgram jprogram, TreeLogger logger, ConfigProps configProps, CompilerOptions options) {
+    String enumObfucationPropertyValue = configProps.getString(
         EnumNameObfuscator.ENUM_NAME_OBFUSCATION_PROPERTY, "false");
     // TODO(rluble): Replace configuration property by the command line option.
-    boolean closureMode = enumObfucationProperty.equals("closure");
-    if (enumObfucationProperty.equals("false")) {
+    boolean closureMode = options.isClosureCompilerEnabled();
+    if (!enumObfucationPropertyValue.equals("true")) {
+      if (!enumObfucationPropertyValue.equals("false")) {
+        logger.log(Type.WARN, "Unrecognized property value " + enumObfucationPropertyValue +
+            " for property " + ENUM_NAME_OBFUSCATION_PROPERTY + ". Assuming \"false\".");
+      }
       return;
     }
+
     List<String> blacklistedEnums = configProps.getCommaSeparatedStrings(
         EnumNameObfuscator.ENUM_NAME_OBFUSCATION_BLACKLIST_PROPERTY);
     new EnumNameCallChecker(jprogram, logger, blacklistedEnums).accept(jprogram);

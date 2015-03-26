@@ -736,7 +736,7 @@ public class GenerateJavaScriptAST {
 
   private class GenerateJavaScriptVisitor extends JVisitor {
 
-    private final Set<JClassType> alreadyRan = Sets.newLinkedHashSet();
+    private final Set<JDeclaredType> alreadyRan = Sets.newLinkedHashSet();
 
     private final Map<String, Object> exportedMembersByExportName = new TreeMap<String, Object>();
 
@@ -876,14 +876,16 @@ public class GenerateJavaScriptAST {
         return;
       }
 
-      if (program.isJsTypePrototype(x)) {
-        // Don't generate JS for magic @PrototypeOfJsType stubs classes, strip them from output
-        return;
-      }
-
       if (alreadyRan.contains(x)) {
         return;
       }
+
+      if (program.isJsTypePrototype(x)) {
+        // Don't generate JS for magic @PrototypeOfJsType stubs classes, strip them from output
+        alreadyRan.add(x);
+        return;
+      }
+
       assert program.getTypeClassLiteralHolder() != x;
       assert !program.immortalCodeGenTypes.contains(x);
       // Super classes should be emitted before the actual class.
@@ -1170,6 +1172,12 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JInterfaceType x, Context ctx) {
+
+      if (alreadyRan.contains(x)) {
+        return;
+      }
+
+      alreadyRan.add(x);
       List<JsFunction> jsFuncs = popList(x.getMethods().size()); // methods
       List<JsVar> jsFields = popList(x.getFields().size()); // fields
       List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();

@@ -1032,6 +1032,7 @@ public class JsStackEmulator {
     stackDepthVar.setInitExpr(new JsNumberLiteral(info, (-1)));
     JsVar lineNumbersVar = new JsVar(info, lineNumbers);
     lineNumbersVar.setInitExpr(new JsArrayLiteral(info));
+    JsVar tmpVar = new JsVar(info,tmp);
 
     JsVars vars;
     JsStatement first = jsProgram.getGlobalBlock().getStatements().get(0);
@@ -1044,5 +1045,6 @@ public class JsStackEmulator {
     vars.add(stackVar);
     vars.add(stackDepthVar);
     vars.add(lineNumbersVar);
+    vars.add(tmpVar);
   }
 }

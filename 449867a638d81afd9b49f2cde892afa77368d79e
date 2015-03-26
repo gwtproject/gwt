@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "639caa2a_e1ec223c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 967,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-03-26T18:10:42Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "449867a638d81afd9b49f2cde892afa77368d79e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3971601_3e1a296e",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsStackEmulator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-03-26T07:37:32Z",
+      "side": 1,
+      "message": "This is done on purpose so that the literal corresponding for the fileName gets interned. (same for the previous one)\n\nNot what is the need to minimize output while leaving stack emulation enabled though.",
+      "range": {
+        "startLine": 916,
+        "startChar": 5,
+        "endLine": 922,
+        "endChar": 4
+      },
+      "revId": "d72d3545481e6bb751b205ce1a587053406b0ab0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

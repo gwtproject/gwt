@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3971601_be7f198d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-03-26T07:30:25Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed, classes need it due to the recursive call to have supers before the class.\n\nReplace by\n \n  assert !alreadyRan.contains(x);",
+      "range": {
+        "startLine": 1175,
+        "startChar": 3,
+        "endLine": 1177,
+        "endChar": 7
+      },
+      "revId": "0dedb5080be8c5c7e4b18ee2e35818e372812c18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3971601_de054514",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-03-26T07:30:25Z",
+      "side": 1,
+      "message": "add here:\n\n  assert Sets.difference(classLiteralDeclarationsByType.keySet(), alreadyRan) || !incremental;\n\n\nSo that the comment is checked (and if not update the comment).",
+      "revId": "0dedb5080be8c5c7e4b18ee2e35818e372812c18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

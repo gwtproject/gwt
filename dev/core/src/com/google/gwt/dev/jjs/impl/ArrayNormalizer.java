@@ -30,7 +30,6 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNewArray;
-import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
@@ -57,7 +56,7 @@ public class ArrayNormalizer {
       JArrayRef arrayRef = (JArrayRef) x.getLhs();
       JType elementType = arrayRef.getType();
       JExpression arrayInstance = arrayRef.getInstance();
-      if (elementType instanceof JNullType) {
+      if (elementType.isNull()) {
         // JNullType will generate a null pointer exception instead,
         return;
       } else if (!(elementType instanceof JReferenceType)) {
@@ -105,7 +104,7 @@ public class ArrayNormalizer {
       JType elementType = arrayType.getElementType();
       if (!(elementType instanceof JReferenceType)) {
         // elementType is a primitive type, store check will be performed statically.
-        elementType = JNullType.INSTANCE;
+        elementType = JReferenceType.NULL_TYPE;
       }
 
       if (program.typeOracle.willCrossCastLikeJso(elementType)) {

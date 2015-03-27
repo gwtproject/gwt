@@ -21,12 +21,12 @@ import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
-import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.dev.jjs.ast.JTypeOracle.ImmediateTypeRelations;
 import com.google.gwt.dev.jjs.ast.JTypeOracle.StandardTypes;
+import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
@@ -301,17 +301,25 @@ public class JjsTypeTest extends TestCase {
 
   public void testJavahSignatures() {
     for (JReferenceType type : severalTypes()) {
-      if (!(type instanceof JNullType)) {
-        assertEquals(type.getJavahSignatureName(), type.strengthenToNonNull().getJavahSignatureName());
-      }
+      assertSignaturesMatch(type,
+          new Function<JReferenceType, String>() {
+            @Override
+            public String apply(JReferenceType type) {
+              return type.getJavahSignatureName();
+            }
+          });
     }
   }
 
   public void testJsniSignatures() {
     for (JReferenceType type : severalTypes()) {
-      if (!(type instanceof JNullType)) {
-        assertEquals(type.getJsniSignatureName(), type.strengthenToNonNull().getJsniSignatureName());
-      }
+      assertSignaturesMatch(type,
+          new Function<JReferenceType, String>() {
+            @Override
+            public String apply(JReferenceType type) {
+              return type.getJsniSignatureName();
+            }
+          });
     }
   }
 
@@ -569,6 +577,16 @@ public class JjsTypeTest extends TestCase {
         Arrays.asList(type1, type2));
   }
 
+  private void assertSignaturesMatch(
+      JReferenceType type, Function<JReferenceType, String> signatureForType) {
+    if (type.isNull()) {
+      return;
+    }
+    assertEquals(signatureForType.apply(type), signatureForType.apply(type.strengthenToExact()));
+    assertEquals(signatureForType.apply(type), signatureForType.apply(type.strengthenToNonNull()));
+    assertEquals(signatureForType.apply(type), signatureForType.apply(type.weakenToNonExact()));
+    assertEquals(signatureForType.apply(type), signatureForType.apply(type.weakenToNullable()));
+  }
   /**
    * Return several types, for exhaustively testing basic properties.
    */

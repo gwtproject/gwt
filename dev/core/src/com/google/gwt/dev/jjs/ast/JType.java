@@ -63,6 +63,11 @@ public abstract class JType extends JNode implements HasName, CanBeFinal {
   public abstract boolean canBeNull();
 
   /**
+   * Returns {@code true} if this is {@link JReferenceType.JNullType.INSTANCE}.
+   */
+  public boolean isNull() { return false; }
+
+  /**
    * Returns <code>true</code> if it's possible for this type to be
    * a subclass of the type denoted with this type.
    *

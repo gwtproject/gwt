@@ -66,7 +66,6 @@ import com.google.gwt.dev.jjs.ast.JNewArray;
 import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JNullLiteral;
-import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JPostfixOperation;
@@ -297,8 +296,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   @Override
   public boolean visit(JClassType x, Context ctx) {
     printAbstractFlag(x);
-    printFinalFlag(x);
-    print(CHARS_CLASS);
+    printFinalFlag(x); print(CHARS_CLASS);
     printTypeName(x);
     space();
     if (x.getSuperClass() != null) {
@@ -741,12 +739,6 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   @Override
   public boolean visit(JNullLiteral x, Context ctx) {
     print(CHARS_NULL);
-    return false;
-  }
-
-  @Override
-  public boolean visit(JNullType x, Context ctx) {
-    printTypeName(x);
     return false;
   }
 

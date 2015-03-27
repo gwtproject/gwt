@@ -26,7 +26,6 @@ import com.google.gwt.dev.jjs.ast.JCastOperation;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JInstanceOf;
-import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JType;
@@ -116,7 +115,7 @@ public class ComputeCastabilityInformation {
       // the lhs could be
       JArrayRef lhsArrayRef = (JArrayRef) x.getLhs();
       JType elementType = lhsArrayRef.getType();
-      if (elementType instanceof JNullType) {
+      if (elementType.isNull()) {
         // will generate a null pointer exception instead
         return;
       }

@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.ast.JReferenceType.*;
 import com.google.gwt.dev.util.StringInterner;
 
 import java.util.List;
@@ -61,6 +62,11 @@ public abstract class JType extends JNode implements HasName, CanBeFinal {
    * @see JAnalysisDecoratedType
    */
   public abstract boolean canBeNull();
+
+  /**
+   * Returns {@code true} if this is {@link JReferenceType.JNullType.INSTANCE}.
+   */
+  public boolean isNull() { return false; }
 
   /**
    * Returns <code>true</code> if it's possible for this type to be

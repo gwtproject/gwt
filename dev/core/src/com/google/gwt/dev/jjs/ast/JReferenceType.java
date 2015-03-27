@@ -16,12 +16,61 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.SourceOrigin;
 
 /**
  * Base class for any reference type.
  */
 public abstract class JReferenceType extends JType implements CanBeAbstract {
 
+  public static final JReferenceType NULL_TYPE =
+      new JReferenceType(SourceOrigin.UNKNOWN, "null") {
+        @Override
+        AnalysisResult getAnalysisResult() {
+          return AnalysisResult.NULLABLE_EXACT;
+        }
+
+        @Override
+        public String getJavahSignatureName() {
+          return "N";
+        }
+
+        @Override
+        public String getJsniSignatureName() {
+          return "N";
+        }
+
+        @Override
+        public boolean isAbstract() {
+          return false;
+        }
+
+        @Override
+        public boolean isFinal() {
+          return true;
+        }
+
+        @Override
+        public boolean isNull() {
+          return true;
+        }
+
+        @Override
+        public void traverse(JVisitor visitor, Context ctx) {
+          if (visitor.visit(this, ctx)) {
+          }
+          visitor.endVisit(this, ctx);
+        }
+
+        private Object readResolve() {
+          return NULL_TYPE;
+        }
+
+        @Override
+        public JReferenceType strengthenToNonNull() {
+          throw new UnsupportedOperationException();
+        }
+      };
 
   private transient AnalysisDecoratedTypePool analysisDecoratedTypePool = null;
 
@@ -46,7 +95,7 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
       assert ref.getUnderlyingType().getAnalysisResult() != analysisResult :
           "An analysis type for " + ref +
           " should not have been constructed as it is equivalent to the original type";
-      assert !(ref instanceof JNullType);
+      assert !ref.isNull();
       assert !(ref instanceof JAnalysisDecoratedType);
       this.ref = ref;
     }
@@ -95,6 +144,7 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
     public boolean isFinal() {
       return ref.isFinal();
     }
+
 
     @Override
     public void traverse(JVisitor visitor, Context ctx) {

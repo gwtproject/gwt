@@ -124,7 +124,6 @@ public class JTypeOracle implements Serializable {
       JDeclaredType javaLangConeableType = program.getFromTypeMap(Cloneable.class.getName());
       requiredTypes.javaLangCloneable =
           javaLangConeableType == null ? null : javaLangConeableType.getName();
-      requiredTypes.nullType = program.getTypeNull().getName();
       return requiredTypes;
     }
 
@@ -134,7 +133,6 @@ public class JTypeOracle implements Serializable {
 
     private String javaLangObject;
 
-    private String nullType;
   }
 
   private Set<JMethod> exportedMethods = Sets.newLinkedHashSet();
@@ -589,7 +587,7 @@ public class JTypeOracle implements Serializable {
   }
 
   public boolean castFailsTrivially(JReferenceType fromType, JReferenceType toType) {
-    if (!fromType.canBeNull() && toType.getName().equals(standardTypes.nullType)) {
+    if (!fromType.canBeNull() && toType.isNull()) {
       // Cannot cast non-nullable to null
       return true;
     }
@@ -627,7 +625,7 @@ public class JTypeOracle implements Serializable {
 
         // null[] or Object[] -> int[][] might work, other combinations won't
         if (fromDims < toDims && !fromLeafType.getName().equals(standardTypes.javaLangObject)
-            && !(fromLeafType instanceof JNullType)) {
+            && !fromLeafType.isNull()) {
           return true;
         }
 
@@ -689,7 +687,7 @@ public class JTypeOracle implements Serializable {
        return extendsInterface((JInterfaceType) fromType, (JInterfaceType) toType);
     }
 
-    if (fromType instanceof JNullType) {
+    if (fromType.isNull()) {
       return true;
     }
 
@@ -728,7 +726,7 @@ public class JTypeOracle implements Serializable {
         && (toLeafType.getName().equals(standardTypes.javaLangObject)
         || toLeafType.getName().equals(standardTypes.javaIoSerializable)
         || toLeafType.getName().equals(standardTypes.javaLangCloneable)
-        || toLeafType instanceof JNullType)) {
+        || toLeafType.isNull())) {
       return true;
     }
 
@@ -1037,7 +1035,7 @@ public class JTypeOracle implements Serializable {
 
     // TODO(dankurka): Null should not be recognized as a possible JSO.
     // Take a look on how to refactor this inside of the compiler
-    if (type instanceof JNullType) {
+    if (type.isNull()) {
       return true;
     }
     return isJavaScriptObject(type.getName());
@@ -1067,11 +1065,6 @@ public class JTypeOracle implements Serializable {
   public boolean isInstantiatedType(JReferenceType type) {
     type = type.getUnderlyingType();
 
-    // any type that can be JS or exported to JS is considered instantiated
-    if (isJsType(type) || hasAnyExports(type) || isJsFunction(type)) {
-      return true;
-    }
-
     if (instantiatedTypes == null || instantiatedTypes.contains(type)) {
       return true;
     }
@@ -1088,15 +1081,17 @@ public class JTypeOracle implements Serializable {
       return true;
     }
 
-    if (type instanceof JNullType) {
+    if (type.isNull()) {
       return true;
     } else if (type instanceof JArrayType) {
       JArrayType arrayType = (JArrayType) type;
-      if (arrayType.getLeafType() instanceof JNullType) {
+      if (arrayType.getLeafType().isNull()) {
         return true;
       }
     }
 
+    // any type that can be JS or exported to JS is considered instantiated
+    assert !isJsType(type) && !hasAnyExports(type) && !isJsFunction(type);
 
     return false;
   }

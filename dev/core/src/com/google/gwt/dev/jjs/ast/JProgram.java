@@ -422,7 +422,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     }
 
     if (thisType == getTypeNull() || thatType == getTypeNull()) {
-      return JNullType.INSTANCE;
+      return JReferenceType.NULL_TYPE;
     }
 
     if (thisType.canBeNull()  != thatType.canBeNull()) {
@@ -986,8 +986,8 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     return typeNamesToIndex;
   }
 
-  public JNullType getTypeNull() {
-    return JNullType.INSTANCE;
+  public JReferenceType getTypeNull() {
+    return JReferenceType.NULL_TYPE;
   }
 
   public JPrimitiveType getTypePrimitiveBoolean() {

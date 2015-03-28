@@ -46,6 +46,10 @@ import com.google.gwt.emultest.java.security.MessageDigestTest;
 import com.google.gwt.emultest.java.sql.SqlDateTest;
 import com.google.gwt.emultest.java.sql.SqlTimeTest;
 import com.google.gwt.emultest.java.sql.SqlTimestampTest;
+import com.google.gwt.emultest.java.util.OptionalDoubleTest;
+import com.google.gwt.emultest.java.util.OptionalIntTest;
+import com.google.gwt.emultest.java.util.OptionalLongTest;
+import com.google.gwt.emultest.java.util.OptionalTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
 
 import junit.framework.Test;
@@ -104,6 +108,12 @@ public class EmulSuite {
     suite.addTestSuite(SqlDateTest.class);
     suite.addTestSuite(SqlTimeTest.class);
     suite.addTestSuite(SqlTimestampTest.class);
+
+    //-- java.util
+    suite.addTestSuite(OptionalTest.class);
+    suite.addTestSuite(OptionalIntTest.class);
+    suite.addTestSuite(OptionalLongTest.class);
+    suite.addTestSuite(OptionalDoubleTest.class);
     // $JUnit-END$
 
     return suite;

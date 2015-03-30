@@ -95,7 +95,7 @@ public class TypeTightenerTest extends OptimizerTestBase {
     assertParameterTypes(result, "fun", "EntryPoint$B");
   }
 
-  public void testTightenParameterBasedOnOverriddens() throws Exception {
+  public void testTightenParameterBasedOnOverriddenMethods() throws Exception {
     addSnippetClassDecl("static class A {}");
     addSnippetClassDecl("static class B extends A {}");
     addSnippetClassDecl("static class Test1 { public void fun(A a) {} }");
@@ -168,6 +168,28 @@ public class TypeTightenerTest extends OptimizerTestBase {
 
     assertForwardsTo(result.findMethod("test.EntryPoint$B.m()V"),
         result.findMethod("test.EntryPoint$A.m()V"));
+  }
+
+  public void testTightenInstanceOf_singleConcrete() throws Exception {
+    addSnippetClassDecl("abstract static class A { public void m() {} }");
+    addSnippetClassDecl("static class B extends A { public void m() { super.m(); }}");
+
+    optimize("void"," A a= new B(); if (a instanceof B) { a.m(); }").intoString(
+        "EntryPoint$B a = new EntryPoint$B();",
+        "if (a != null) {",
+        "  a.m();",
+        "}");
+  }
+
+  public void testTightenInstanceOf_exactType() throws Exception {
+    addSnippetClassDecl("static class A { public void m() {} }");
+    addSnippetClassDecl("static class B extends A { public void m() { super.m(); }}");
+
+    optimize("void"," A a= new B(); if (a instanceof B) { a.m(); }").intoString(
+        "EntryPoint$B a = new EntryPoint$B();",
+        "if (true) {",
+        "  a.m();",
+        "}");
   }
 
   @Override

@@ -1581,11 +1581,18 @@ public class DeadCodeElimination {
     }
 
     private AnalysisResult staticallyEvaluateEq(JExpression lhs, JExpression rhs) {
-      if (lhs.getType() == program.getTypeNull() && rhs.getType() == program.getTypeNull()) {
+      JType lhsType = lhs.getType();
+      JType rhsType = rhs.getType();
+      if (lhsType == program.getTypeNull() && rhsType == program.getTypeNull()) {
         return AnalysisResult.TRUE;
       }
-      if (lhs.getType() == program.getTypeNull() && !rhs.getType().canBeNull() ||
-          rhs.getType() == program.getTypeNull() && !lhs.getType().canBeNull()) {
+      if (lhsType == program.getTypeNull() && !rhsType.canBeNull() ||
+          rhsType == program.getTypeNull() && !lhsType.canBeNull()) {
+        return AnalysisResult.FALSE;
+      }
+      if (!lhsType.canBeSubclass() && !rhsType.canBeSubclass() &&
+          !lhsType.canBeNull() && !rhsType.canBeNull() && lhsType instanceof JReferenceType &&
+          lhsType.getUnderlyingType() != rhsType.getUnderlyingType()) {
         return AnalysisResult.FALSE;
       }
       return AnalysisResult.UNKNOWN;

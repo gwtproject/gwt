@@ -126,7 +126,7 @@ public class ComputeCastabilityInformation {
       }
 
       // This array reference always refers to an array of the declared class, not a subclass.
-      if (lhsArrayRef.getInstance().getType().isFinal()) {
+      if (!lhsArrayRef.getInstance().getType().canBeSubclass()) {
         return;
       }
 

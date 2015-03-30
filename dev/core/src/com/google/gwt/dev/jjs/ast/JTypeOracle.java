@@ -591,6 +591,11 @@ public class JTypeOracle implements Serializable {
       return true;
     }
 
+    if (!fromType.canBeSubclass() && toType instanceof JClassType &&
+        isSuperClass(toType, fromType)) {
+      return true;
+    }
+
     // Compare the underlying types.
     fromType = fromType.getUnderlyingType();
     toType = toType.getUnderlyingType();
@@ -663,6 +668,10 @@ public class JTypeOracle implements Serializable {
   public boolean castSucceedsTrivially(JReferenceType fromType, JReferenceType toType) {
     if (fromType.canBeNull() && !toType.canBeNull()) {
       // Cannot cast nullable to non-nullable
+      return false;
+    }
+
+    if (fromType.canBeSubclass() && !toType.canBeSubclass()) {
       return false;
     }
 
@@ -1202,7 +1211,7 @@ public class JTypeOracle implements Serializable {
   /**
    * Returns true if possibleSuperClass is a superclass of type, directly or indirectly.
    */
-  public boolean isSuperClass(JClassType type, JClassType possibleSuperClass) {
+  public boolean isSuperClass(JReferenceType type, JReferenceType possibleSuperClass) {
     return isSuperClass(type.getName(), possibleSuperClass.getName());
   }
 

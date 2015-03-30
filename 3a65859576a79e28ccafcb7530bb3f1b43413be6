@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43308612_917e66dd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-30T16:16:42Z",
+      "side": 1,
+      "message": "Would the following also work?\n\n  possibleTargetTypes |\u003d (byte) (STRING | HAS_JAVA_VIRTUAL_DISPATCH)\n\nIf so I think it reads better; if not then I think line 427 has to be changed also.",
+      "revId": "3a65859576a79e28ccafcb7530bb3f1b43413be6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_3162fa3a",
+        "filename": "dev/core/test/com/google/gwt/dev/util/DiskCacheTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-30T16:16:42Z",
+      "side": 1,
+      "message": "is the following OK?\n\n  c[i] \u0026\u003d (char) 0x7FFF;\n\nif so I think it reads better.",
+      "revId": "3a65859576a79e28ccafcb7530bb3f1b43413be6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

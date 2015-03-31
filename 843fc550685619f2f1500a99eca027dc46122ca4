@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "83143e89_abacca19",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3d89a3c_9fa213ee",
+      "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d89a3c_df9c9bb8",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
         "patchSetId": 15
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "83143e89_0b935ed8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3d89a3c_df9c9bb8",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 58
+      },
+      "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83143e89_0d79b9f6",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 15
@@ -53,6 +95,24 @@
       "writtenOn": "2015-03-31T00:50:48Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83143e89_8b0c6ec1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 1592,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83143e89_0d79b9f6",
       "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -99,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "83143e89_8b258e2b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83143e89_6d7e6de0",
+      "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83143e89_4d83b150",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 15
@@ -116,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "83143e89_6b2ad2f8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83143e89_4d83b150",
+      "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d89a3c_5f7ecbdf",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FinalizerTest.java",
         "patchSetId": 15
@@ -127,6 +223,24 @@
       "writtenOn": "2015-03-31T05:19:20Z",
       "side": 1,
       "message": "Restore this file in this patch.",
+      "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83143e89_ab3b2a4a",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FinalizerTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3d89a3c_5f7ecbdf",
       "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

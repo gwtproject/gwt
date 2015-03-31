@@ -16,6 +16,24 @@
       "revId": "4386ff63babfc7760199cc577ead4444bc25afb5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83143e89_ebb6c269",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:55Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "e3d89a3c_df381b50",
+      "revId": "4386ff63babfc7760199cc577ead4444bc25afb5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

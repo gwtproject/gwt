@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "e3d89a3c_9fa213ee",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-03-31T05:19:20Z",
+      "side": 1,
+      "message": "This computation is already performed in castSucceedsTrivially so\nit should be equivalent to \n\n  if (castSucceedsTrivially(thisArrayType, thatArrayType)) {\n    return thatArrayType;\n  }\n\n  if (castSucceedsTrivially(thatArrayType, thisArrayType)) {\n    return thisArrayType;\n  }",
+      "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3d89a3c_df9c9bb8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-03-31T05:19:20Z",
+      "side": 1,
+      "message": "Rollback this change here.",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 58
+      },
+      "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83143e89_0d79b9f6",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 15
@@ -13,6 +53,29 @@
       "writtenOn": "2015-03-31T00:50:48Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3d89a3c_9f3e933b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Finalizer.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-03-31T05:19:20Z",
+      "side": 1,
+      "message": "Move finalizer changes to exact type patch.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 6
+      },
       "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -47,6 +110,23 @@
       "writtenOn": "2015-03-31T00:50:48Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3d89a3c_5f7ecbdf",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/FinalizerTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-03-31T05:19:20Z",
+      "side": 1,
+      "message": "Restore this file in this patch.",
       "revId": "843fc550685619f2f1500a99eca027dc46122ca4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

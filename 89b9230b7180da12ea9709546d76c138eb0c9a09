@@ -22,6 +22,30 @@
       "revId": "89b9230b7180da12ea9709546d76c138eb0c9a09",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3d89a3c_f3e7d8ab",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EnumNameObfuscator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-03-31T23:32:44Z",
+      "side": 1,
+      "message": "Yes, the intention was isClosureCompilerFormatEnabled. Sorry for not catching that.",
+      "parentUuid": "63bd8ac9_b985370c",
+      "range": {
+        "startLine": 217,
+        "startChar": 4,
+        "endLine": 217,
+        "endChar": 67
+      },
+      "revId": "89b9230b7180da12ea9709546d76c138eb0c9a09",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

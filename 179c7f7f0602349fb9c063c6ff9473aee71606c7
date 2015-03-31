@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_bcb0a1d0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/CanSetType.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_e5de8758",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_85277bde",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JArrayType.java",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "pls add a comment that describes the check here to help the reader.",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_1cd70ded",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JArrayType.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_85277bde",
       "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_fc37c9ac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "I fixed this going through castTriviallySucceeds.",
+      "parentUuid": "43d246e8_238567dd",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_c339fb85",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 14
@@ -64,6 +118,24 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "inline as we discussed offline.",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_7cdf398e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_c339fb85",
       "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_1cceeddc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done in the follow up, and it was actually a correctness issue for cast succeedsTrivially.",
+      "parentUuid": "43d246e8_83a533f8",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_5eff24a5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 14
@@ -98,6 +188,24 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "remove",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_3cfe51e8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_5eff24a5",
       "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -127,6 +235,30 @@
     },
     {
       "key": {
+        "uuid": "43308612_dc67654e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_9e7fcc26",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 519,
+        "endChar": 52
+      },
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_7e43081f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 14
@@ -144,6 +276,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_1c726d0f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_7e43081f",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_7e8468a6",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 14
@@ -155,6 +305,24 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "A v A \u003d A",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_5c5d157f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_7e8468a6",
       "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -201,6 +369,30 @@
     },
     {
       "key": {
+        "uuid": "43308612_972bf6ab",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_3ee5804c",
+      "range": {
+        "startLine": 593,
+        "startChar": 15,
+        "endLine": 593,
+        "endChar": 45
+      },
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_19377615",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 14
@@ -218,6 +410,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_5747ae7f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "That is what the comment (which was previously there) is trying to say I believe. Let me rephrase it.",
+      "parentUuid": "43d246e8_19377615",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_7927a2df",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 14
@@ -229,6 +439,30 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "isn\u0027t redundant?",
+      "range": {
+        "startLine": 638,
+        "startChar": 0,
+        "endLine": 642,
+        "endChar": 5
+      },
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_1729a67f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "No. The previous \"line\" generalizes the leaf type (which is the non array type) not the element type. Before here we are only considering arrays with same dimensions.\n\nThis block generalized arrays of different dimensions, which could be handled generically by generalizeType,\n\nMaybe the first this should be if one is trivially castable to the other, then we can do more precise generalization if not.",
+      "parentUuid": "43d246e8_7927a2df",
       "range": {
         "startLine": 638,
         "startChar": 0,
@@ -264,6 +498,30 @@
     },
     {
       "key": {
+        "uuid": "43308612_f75ec2fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "This is not handled precisely. The main reason is that the interface \"hierarchy\" is actually a graph (a DAG) not a tree, and there might more than one single general type. Object is always a valid answer.\n\nLet\u0027s discuss this issue and maybe do it in a follow up.",
+      "parentUuid": "43d246e8_f9f4f2a1",
+      "range": {
+        "startLine": 648,
+        "startChar": 0,
+        "endLine": 660,
+        "endChar": 3
+      },
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_199c5641",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
         "patchSetId": 14
@@ -275,6 +533,30 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "underlyingType",
+      "range": {
+        "startLine": 135,
+        "startChar": 39,
+        "endLine": 135,
+        "endChar": 63
+      },
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_f7e36246",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_199c5641",
       "range": {
         "startLine": 135,
         "startChar": 39,
@@ -304,6 +586,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_b7ac3a1a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_39391aa1",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_99db66ee",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
         "patchSetId": 14
@@ -315,6 +615,30 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "I\u0027m not sure where this is used but I guess shouldn\u0027t be effected by analysis types?",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 3
+      },
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_d73e1e3c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "For some reason in the AST stored after GwtAstBuilder there might be analysis types. This code seems to guarantee they they are stitched correctly and non nullness in preserved.",
+      "parentUuid": "43d246e8_99db66ee",
       "range": {
         "startLine": 248,
         "startChar": 0,
@@ -344,6 +668,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_77f8f2f8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "It is overridden by the null type instance.",
+      "parentUuid": "43d246e8_19ef76b2",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_990926de",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 14
@@ -361,6 +703,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_37794af7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Yes in JjsTypeTest, not sure about the coverage though.",
+      "parentUuid": "43d246e8_990926de",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_d9232e5a",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 14
@@ -372,6 +732,24 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "Perhaps I\u0027m wrong but isn\u0027t this simplified by doing this recursive and removing one array dim at a time?",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_977e56dd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Well, I don\u0027t think it will be simplified that much as you would have to account for arrays of primitive types anyway.",
+      "parentUuid": "43d246e8_d9232e5a",
       "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -401,6 +779,30 @@
     },
     {
       "key": {
+        "uuid": "43308612_09d50a3a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Yes. The null type is not really an analysis type in some sense. If a type is pruned, references to it will become references to the null type. \n\nAlthough the assertion that int[][] -\u003e null[] should be true is dubious.",
+      "parentUuid": "43d246e8_59fade3d",
+      "range": {
+        "startLine": 731,
+        "startChar": 11,
+        "endLine": 731,
+        "endChar": 42
+      },
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_720fbfdf",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 14
@@ -412,6 +814,24 @@
       "writtenOn": "2015-03-27T22:10:52Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_c9b042d2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_720fbfdf",
       "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -435,6 +855,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_09d4eae4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_b9766a55",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_19c216d6",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
         "patchSetId": 14
@@ -446,6 +884,30 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "is it?",
+      "range": {
+        "startLine": 245,
+        "startChar": 36,
+        "endLine": 245,
+        "endChar": 82
+      },
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_29b44eb2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Ahh, outdated comment.",
+      "parentUuid": "43d246e8_19c216d6",
       "range": {
         "startLine": 245,
         "startChar": 36,
@@ -492,6 +954,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_49739268",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Yep. It is actually done in DeadCodeElimination. I\u0027ll do a small patch that removes this.",
+      "parentUuid": "43d246e8_f9d2b287",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_12443309",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 14
@@ -509,6 +989,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_e981c697",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_12443309",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_197a16eb",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 14
@@ -520,6 +1018,24 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "Seem like cannot be null",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_29ba8e4e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Actually the whole point of getAssigmentsIfValid is to return null when there are incompatibilities (e.g. assigning a primitive type without the cast).",
+      "parentUuid": "43d246e8_197a16eb",
       "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -549,6 +1065,30 @@
     },
     {
       "key": {
+        "uuid": "43308612_49aa72fa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_796a4217",
+      "range": {
+        "startLine": 738,
+        "startChar": 52,
+        "endLine": 738,
+        "endChar": 71
+      },
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d246e8_994e06c4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
         "patchSetId": 14
@@ -560,6 +1100,24 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "update doc",
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_4907129f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d246e8_994e06c4",
       "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -594,6 +1152,30 @@
       "writtenOn": "2015-03-28T02:09:40Z",
       "side": 1,
       "message": "Is this possible?",
+      "range": {
+        "startLine": 801,
+        "startChar": 0,
+        "endLine": 803,
+        "endChar": 5
+      },
+      "revId": "179c7f7f0602349fb9c063c6ff9473aee71606c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_692bf6fe",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-03-31T18:20:47Z",
+      "side": 1,
+      "message": "In general, yes. And I think from the callers it might be.",
+      "parentUuid": "43d246e8_59441ea3",
       "range": {
         "startLine": 801,
         "startChar": 0,

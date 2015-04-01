@@ -1,0 +1,24 @@
+# We use the "ignore all, except" strategy because IntelliJ has plenty of
+# project files and we only want to check in the most important ones.
+# In addition the build output of IntelliJ is also mapped into this folder
+# and GWTTestCases produce additional folders like gwt-unitCache, war, ...
+# which we all want to ignore.
+
+# ignore everything
+*
+
+# except
+!.gitignore
+!README.txt
+!*.iml
+!.idea/
+!.idea/.name
+!.idea/ant.xml
+!.idea/codeStyleSettings.xml
+!.idea/compiler.xml
+!.idea/copyright/
+!.idea/copyright/Google.xml
+!.idea/copyright/profiles_settings.xml
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/vcs.xml

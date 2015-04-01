@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AntConfiguration">
+    <buildFile url="file://$GWT_ROOT$/build.xml">
+      <properties>
+        <property name="env.TZ" value="America/Los_Angeles" />
+        <property name="env.ANT_OPTS" value="-Dfile.encoding=UTF-8" />
+      </properties>
+    </buildFile>
+  </component>
+</project>

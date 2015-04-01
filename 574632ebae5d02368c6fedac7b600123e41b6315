@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e3d89a3c_4e07fb9e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-01T04:19:19Z",
+      "side": 1,
+      "message": "Also this improves the TypeTightener to do a better tightened method matching (earlier logic was doing a very poor job).",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d89a3c_c8b063d2",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JNode.java",
         "patchSetId": 17
@@ -178,6 +195,24 @@
       "writtenOn": "2015-03-31T23:28:32Z",
       "side": 1,
       "message": "This should have failed without the exact type shouldn\u0027t it?",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3d89a3c_ce95cbbd",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/SpecializationTest.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-01T04:19:19Z",
+      "side": 1,
+      "message": "pls ignore.",
+      "parentUuid": "e3d89a3c_285d4f80",
       "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

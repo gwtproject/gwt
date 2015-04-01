@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$GWT_ROOT$/dev/codeserver">
+      <sourceFolder url="file://$GWT_ROOT$/dev/codeserver/java" isTestSource="false" />
+      <sourceFolder url="file://$GWT_ROOT$/dev/codeserver/javatests" isTestSource="true" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$GWT_TOOLS$/lib/jetty/jetty-8.1.12.v20130726/jetty-8.1.12.v20130726.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$GWT_TOOLS$/lib/guava/guava-18.0/guava-18.0-rebased.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$GWT_TOOLS$/lib/jscomp/20131118.json.rebased/sourcemap-rebased.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$GWT_TOOLS$/lib/jscomp/20131118.json.rebased/compiler-rebased.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$GWT_TOOLS$/lib/jetty/jetty-8.1.12.v20130726/servlet-api-3.0-NoMetaInf.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$GWT_TOOLS$/lib/junit/junit-4.8.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$GWT_TOOLS$/lib/junit/junit-4.8.2-src.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module" module-name="gwt-dev" />
+    <orderEntry type="module" module-name="gwt-user" />
+  </component>
+</module>

@@ -1,0 +1,20 @@
+# NOTICE: This file only allows the minimum set of required files
+# in order to import this project in IntelliJ.
+
+# ignore everything
+*
+
+# except these files
+!.gitignore
+!*.iml
+!.idea/
+!.idea/.name
+!.idea/ant.xml
+!.idea/codeStyleSettings.xml
+!.idea/compiler.xml
+!.idea/copyright/
+!.idea/copyright/Google.xml
+!.idea/copyright/profiles_settings.xml
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/vcs.xml

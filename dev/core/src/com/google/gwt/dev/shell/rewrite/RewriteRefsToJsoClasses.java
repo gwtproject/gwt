@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,17 +15,18 @@
  */
 package com.google.gwt.dev.shell.rewrite;
 
-import com.google.gwt.dev.asm.ClassVisitor;
-import com.google.gwt.dev.asm.MethodVisitor;
-import com.google.gwt.dev.asm.Opcodes;
-import com.google.gwt.dev.asm.commons.Remapper;
 import com.google.gwt.dev.shell.rewrite.HostedModeClassRewriter.InstanceMethodOracle;
+
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.commons.Remapper;
 
 import java.util.Set;
 
 /**
  * Rewrites references to modified JSO subtypes.
- * 
+ *
  * <ol>
  * <li>Changes the owner type for instructions that reference items in a JSO
  * class to the implementation class.</li>
@@ -53,7 +54,7 @@ class RewriteRefsToJsoClasses extends ClassVisitor {
     };
 
     public MyMethodAdapter(MethodVisitor mv) {
-      super(Opcodes.ASM4, mv);
+      super(Opcodes.ASM5, mv);
     }
 
     @Override
@@ -74,7 +75,7 @@ class RewriteRefsToJsoClasses extends ClassVisitor {
 
     @Override
     public void visitMethodInsn(int opcode, String owner, String name,
-        String desc) {
+        String desc, boolean dintf) {
       if (jsoDescriptors.contains(owner)) {
         // Find the class that actually declared the method.
         if (opcode == Opcodes.INVOKEVIRTUAL) {
@@ -92,7 +93,7 @@ class RewriteRefsToJsoClasses extends ClassVisitor {
           owner += "$";
         }
       }
-      super.visitMethodInsn(opcode, owner, name, desc);
+      super.visitMethodInsn(opcode, owner, name, desc, dintf);
     }
 
     @Override
@@ -123,7 +124,7 @@ class RewriteRefsToJsoClasses extends ClassVisitor {
 
   /**
    * Construct a new rewriter instance.
-   * 
+   *
    * @param cv the visitor to chain to
    * @param jsoDescriptors an unmodifiable set of descriptors containing
    *          <code>JavaScriptObject</code> and all subclasses
@@ -131,7 +132,7 @@ class RewriteRefsToJsoClasses extends ClassVisitor {
    */
   public RewriteRefsToJsoClasses(ClassVisitor cv, Set<String> jsoDescriptors,
       InstanceMethodOracle mapper) {
-    super(Opcodes.ASM4, cv);
+    super(Opcodes.ASM5, cv);
     this.jsoDescriptors = jsoDescriptors;
     this.mapper = mapper;
   }

@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "nl_BE" locale.
@@ -62,7 +57,6 @@ public class LocalizedNamesImpl_nl_BE extends LocalizedNamesImpl_nl {
         "BA",
         "BW",
         "BV",
-        "BQ",
         "BR",
         "IO",
         "VG",
@@ -73,6 +67,7 @@ public class LocalizedNamesImpl_nl_BE extends LocalizedNamesImpl_nl {
         "KH",
         "CA",
         "IC",
+        "BQ",
         "KY",
         "CF",
         "EA",
@@ -103,7 +98,6 @@ public class LocalizedNamesImpl_nl_BE extends LocalizedNamesImpl_nl {
         "ER",
         "EE",
         "ET",
-        "FX",
         "EU",
         "FO",
         "FK",
@@ -157,6 +151,7 @@ public class LocalizedNamesImpl_nl_BE extends LocalizedNamesImpl_nl {
         "KI",
         "UM",
         "KW",
+        "XK",
         "HR",
         "LA",
         "LS",
@@ -231,6 +226,7 @@ public class LocalizedNamesImpl_nl_BE extends LocalizedNamesImpl_nl {
         "BL",
         "KN",
         "LC",
+        "MF",
         "PM",
         "VC",
         "SB",
@@ -240,22 +236,19 @@ public class LocalizedNamesImpl_nl_BE extends LocalizedNamesImpl_nl {
         "ST",
         "SN",
         "RS",
-        "CS",
         "SC",
         "SL",
         "SG",
         "SH",
         "SX",
-        "MF",
         "SI",
         "SK",
         "SD",
         "SO",
         "ES",
-        "LK",
-        "SS",
-        "SR",
         "SJ",
+        "LK",
+        "SR",
         "SZ",
         "SY",
         "TJ",
@@ -290,6 +283,7 @@ public class LocalizedNamesImpl_nl_BE extends LocalizedNamesImpl_nl {
         "ZA",
         "GS",
         "KR",
+        "SS",
         "SE",
         "CH",
     };

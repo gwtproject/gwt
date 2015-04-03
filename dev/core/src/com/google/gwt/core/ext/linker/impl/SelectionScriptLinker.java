@@ -29,8 +29,6 @@ import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.SoftPermutation;
 import com.google.gwt.core.ext.linker.StatementRanges;
 import com.google.gwt.core.linker.SymbolMapsLinker;
-import com.google.gwt.dev.util.DefaultTextOutput;
-import com.google.gwt.dev.util.TextOutput;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.util.tools.Utility;
 
@@ -127,7 +125,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
       return js;
     }
 
-    StringBuilder sb = new StringBuilder();
+    StringBuilder sb = new StringBuilder((int) (js.length() * 1.05));
     int bytesInCurrentChunk = 0;
 
     for (int i = 0; i < ranges.numStatements(); i++) {
@@ -223,7 +221,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
 
   @Override
   public boolean supportsDevModeInJunit(LinkerContext context) {
-    return (getHostedFilename() != "");
+    return !"".equals(getHostedFilename());
   }
 
   /**
@@ -250,19 +248,18 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
       LinkerContext context, CompilationResult result, ArtifactSet artifacts)
       throws UnableToCompleteException {
     String[] js = result.getJavaScript();
-    byte[][] bytes = new byte[js.length][];
-    bytes[0] = generatePrimaryFragment(logger, context, result, js, artifacts);
-
-    for (int i = 1; i < js.length; i++) {
-      bytes[i] = Util.getBytes(generateDeferredFragment(logger, context, i, js[i], artifacts,
-          result));
-    }
 
     Collection<Artifact<?>> toReturn = new ArrayList<Artifact<?>>();
-    toReturn.add(emitBytes(logger, bytes[0], result.getStrongName()
+
+    byte[] primary = generatePrimaryFragment(logger, context, result, js, artifacts);
+    toReturn.add(emitBytes(logger, primary, result.getStrongName()
         + getCompilationExtension(logger, context)));
+    primary = null;
+
     for (int i = 1; i < js.length; i++) {
-      toReturn.add(emitBytes(logger, bytes[i], FRAGMENT_SUBDIR + File.separator
+      byte[] bytes = Util.getBytes(generateDeferredFragment(logger, context, i, js[i], artifacts,
+          result));
+      toReturn.add(emitBytes(logger, bytes, FRAGMENT_SUBDIR + File.separator
           + result.getStrongName() + File.separator + i + FRAGMENT_EXTENSION));
     }
 
@@ -298,18 +295,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
   protected EmittedArtifact emitSelectionScript(TreeLogger logger,
       LinkerContext context, ArtifactSet artifacts)
       throws UnableToCompleteException {
-    /*
-     * Last modified is important to keep Development Mode refreses from
-     * clobbering Production Mode compiles. We set the timestamp on the
-     * Development Mode selection script to the same mod time as the module (to
-     * allow updates). For Production Mode, we just set it to now.
-     */
-    long lastModified;
-    if (permutationsUtil.getPermutationsMap().isEmpty()) {
-      lastModified = context.getModuleLastModified();
-    } else {
-      lastModified = System.currentTimeMillis();
-    }
+    long lastModified = context.getModuleLastModified();
     String ss = generateSelectionScript(logger, context, artifacts);
     return emitString(logger, ss, context.getModuleName()
         + ".nocache.js", lastModified);
@@ -361,14 +347,11 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     String prefix = getDeferredFragmentPrefix(logger, context, fragment);
     b.append(prefix);
     b.append(js);
-    String suffix = getDeferredFragmentSuffix(logger, context, fragment);
+    String suffix = getDeferredFragmentSuffix2(logger, context, fragment, strongName);
     if (suffix == null) {
-      suffix = getDeferredFragmentSuffix2(logger, context, fragment, strongName);
-      if (suffix == null) {
-        logger.log(Type.ERROR, "Neither getDeferredFragmentSuffix nor getDeferredFragmentSuffix2 "
-            + "were overridden in linker: " + getClass().getName());
-        throw new UnableToCompleteException();
-      }
+      logger.log(Type.ERROR, "getDeferredFragmentSuffix2 "
+          + "was not overridden in linker: " + getClass().getName());
+      throw new UnableToCompleteException();
     }
     b.append(suffix);
     SymbolMapsLinker.ScriptFragmentEditsArtifact editsArtifact
@@ -381,24 +364,23 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
   /**
    * Generate the primary fragment. The default implementation is based on {@link
    * #getModulePrefix(TreeLogger, LinkerContext, String, int)} and {@link
-   * #getModuleSuffix(TreeLogger, LinkerContext)}.
+   * #getModuleSuffix2(TreeLogger, LinkerContext, String)}.
    */
   protected byte[] generatePrimaryFragment(TreeLogger logger,
       LinkerContext context, CompilationResult result, String[] js,
       ArtifactSet artifacts) throws UnableToCompleteException {
-    TextOutput to = new DefaultTextOutput(context.isOutputCompact());
     String temp = splitPrimaryJavaScript(result.getStatementRanges()[0], js[0],
         charsPerChunk(context, logger), getScriptChunkSeparator(logger, context), context);
-    to.print(generatePrimaryFragmentString(
-        logger, context, result, temp, js.length, artifacts));
-    return Util.getBytes(to.toString());
+    String primaryFragmentString =
+        generatePrimaryFragmentString(logger, context, result, temp, js.length, artifacts);
+    return Util.getBytes(primaryFragmentString);
   }
 
   protected String generatePrimaryFragmentString(TreeLogger logger,
       LinkerContext context, CompilationResult result, String js, int length,
       ArtifactSet artifacts)
       throws UnableToCompleteException {
-    StringBuffer b = new StringBuffer();
+    StringBuilder b = new StringBuilder();
     String strongName = result == null ? "" : result.getStrongName();
 
     String modulePrefix = getModulePrefix(logger, context, strongName, length);
@@ -408,14 +390,11 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
     artifacts.add(editsArtifact);
     b.append(modulePrefix);
     b.append(js);
-    String suffix = getModuleSuffix(logger, context);
+    String suffix = getModuleSuffix2(logger, context, strongName);
     if (suffix == null) {
-      suffix = getModuleSuffix2(logger, context, strongName);
-      if (suffix == null) {
-        logger.log(Type.ERROR, "Neither getModuleSuffix nor getModuleSuffix2 were overridden in "
-            + "linker: " + getClass().getName());
-        throw new UnableToCompleteException();
-      }
+      logger.log(Type.ERROR, "getModuleSuffix2 was not overridden in "
+          + "linker: " + getClass().getName());
+      throw new UnableToCompleteException();
     }
     b.append(suffix);
     return wrapPrimaryFragment(logger, context, b.toString(), artifacts, result);
@@ -448,22 +427,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
   }
 
   /**
-   * Returns the suffix at the end of a JavaScript fragment other than the initial fragment
-   * (deprecated version). The default version returns null, which will cause
-   * {@link #getDeferredFragmentSuffix2} to be called instead. Subclasses should switch to
-   * extending getDeferredFragmentSuffix2.
-   */
-  @Deprecated
-  protected String getDeferredFragmentSuffix(TreeLogger logger, LinkerContext context,
-      int fragment) {
-    return null;
-  }
-
-  /**
-   * Returns the suffix at the end of a JavaScript fragment other than the initial fragment
-   * (new version). This method won't be called if {@link #getDeferredFragmentSuffix} is overridden
-   * to return non-null. Subclasses should stop implementing getDeferredFramgnentSuffix and
-   * implement getDeferredFragmentSuffix2 instead.
+   * Returns the suffix at the end of a JavaScript fragment other than the initial fragment.
    */
   protected String getDeferredFragmentSuffix2(TreeLogger logger, LinkerContext context,
       int fragment, String strongName) {
@@ -518,20 +482,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
   }
 
   /**
-   * Returns the suffix for the initial JavaScript fragment (deprecated version).
-   * The default returns null, which will cause {@link #getModuleSuffix2} to be called instead.
-   * Subclasses should switch to extending getModuleSuffix2.
-   */
-  @Deprecated
-  protected String getModuleSuffix(TreeLogger logger,
-      LinkerContext context) throws UnableToCompleteException {
-    return null;
-  }
-
-  /**
-   * Returns the suffix for the initial JavaScript fragment (new version). This version
-   * will not be called if {@link #getModuleSuffix} is overridden so that it doesn't return null.
-   * Subclasses should stop implementing getModuleSuffix and implmenet getModuleSuffix2 instead.
+   * Returns the suffix for the initial JavaScript fragment.
    */
   protected String getModuleSuffix2(TreeLogger logger,
       LinkerContext context, String strongName) throws UnableToCompleteException {

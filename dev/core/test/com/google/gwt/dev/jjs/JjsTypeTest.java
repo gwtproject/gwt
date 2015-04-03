@@ -16,20 +16,29 @@
 
 package com.google.gwt.dev.jjs;
 
+import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JClassType;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JNonNullType;
 import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JTypeOracle;
+import com.google.gwt.dev.jjs.ast.JTypeOracle.ImmediateTypeRelations;
+import com.google.gwt.dev.jjs.ast.JTypeOracle.StandardTypes;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import junit.framework.TestCase;
 
+import org.junit.Assert;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -43,7 +52,14 @@ public class JjsTypeTest extends TestCase {
   private JArrayType arrayOfB;
   private JArrayType arrayOfBase;
   private JArrayType arrayOfBSub;
+  private JArrayType arrayOfJso1;
+  private JArrayType arrayOfJso2;
+  private JArrayType arrayOfIntfJ;
+  private JArrayType arrayOfIntfK;
+  private JArrayType arrayOfJso;
   private JArrayType arrayOfC;
+  private JArrayType arrayOfIntfSerializable;
+  private JArrayType arrayOfIntfClonable;
   private JReferenceType arrayOfInt;
   private JArrayType arrayOfIntfI;
   private JArrayType arrayOfIntfIBase;
@@ -78,6 +94,8 @@ public class JjsTypeTest extends TestCase {
   private JArrayType arrayOfArrayOfObject;
   private JArrayType arrayOfArrayOfIntfI;
   private JArrayType arrayOfArrayOfIntfIBase;
+
+  private static final Collection<String> EMPTY_LIST = Collections.<String>emptySet();
 
   public void testCanTheoreticallyCast() {
     assertFalse(typeOracle.canTheoreticallyCast(classBnn, typeNull));
@@ -216,33 +234,70 @@ public class JjsTypeTest extends TestCase {
     }
   }
 
-  public void testGetSuperHierarchy() {
-    assertSuperHierarchy(classObject, classObject);
-    assertSuperHierarchy(classString, classString, classObject);
-    assertSuperHierarchy(classJso, classJso, classObject);
-    assertSuperHierarchy(intfSerializable, intfSerializable);
-    assertSuperHierarchy(intfCloneable, intfCloneable);
-    assertSuperHierarchy(intfIBase, intfIBase);
-    assertSuperHierarchy(intfI, intfI, intfIBase);
-    assertSuperHierarchy(intfJ, intfJ);
-    assertSuperHierarchy(intfK, intfK);
-    assertSuperHierarchy(classBase, classBase, classObject);
-    assertSuperHierarchy(classA, classA, classObject, classBase);
-    assertSuperHierarchy(classB, classB, classObject, classBase, intfIBase, intfI);
-    assertSuperHierarchy(classC, classC, classObject, intfIBase, intfI);
-    assertSuperHierarchy(classBSub, classBSub, classObject, classBase, classB, intfIBase, intfI);
-    assertSuperHierarchy(classJso1, classJso1, classObject, classJso, intfJ);
-    assertSuperHierarchy(classJso2, classJso2, classObject, classJso, intfK);
-    assertSuperHierarchy(intfIterable, intfIterable);
-    assertSuperHierarchy(intfCollection, intfCollection, intfIterable);
-    assertSuperHierarchy(intfList, intfList, intfIterable, intfCollection);
-    assertSuperHierarchy(classArrayList, classArrayList, intfList, classObject, intfIterable,
+  public void testCastableDestinationTypes() {
+    assertCastableDestinationTypes(classObject, classObject);
+    assertCastableDestinationTypes(classString, classString, classObject);
+    assertCastableDestinationTypes(classJso, classJso, classObject);
+    assertCastableDestinationTypes(intfSerializable, intfSerializable, classObject);
+    assertCastableDestinationTypes(intfCloneable, intfCloneable, classObject);
+    assertCastableDestinationTypes(intfIBase, intfIBase, classObject);
+    assertCastableDestinationTypes(intfI, intfI, intfIBase, classObject);
+    assertCastableDestinationTypes(intfJ, intfJ, classJso, classObject);
+    assertCastableDestinationTypes(intfK, intfK, classJso, classObject);
+    assertCastableDestinationTypes(classBase, classBase, classObject);
+    assertCastableDestinationTypes(classA, classA, classObject, classBase);
+    assertCastableDestinationTypes(classB, classB, classObject, classBase, intfIBase, intfI);
+    assertCastableDestinationTypes(classC, classC, classObject, intfIBase, intfI);
+    assertCastableDestinationTypes(classBSub, classBSub, classObject, classBase, classB, intfIBase,
+        intfI);
+    assertCastableDestinationTypes(classJso1, classObject, classJso, intfJ);
+    assertCastableDestinationTypes(classJso2, classObject, classJso, intfK);
+    assertCastableDestinationTypes(arrayOfJso, classObject, intfCloneable, intfSerializable,
+        arrayOfJso, arrayOfObject);
+    assertCastableDestinationTypes(arrayOfJso1, classObject, intfCloneable, intfSerializable,
+        arrayOfJso, arrayOfObject, arrayOfIntfJ);
+    assertCastableDestinationTypes(arrayOfJso2, classObject, intfCloneable, intfSerializable,
+        arrayOfJso, arrayOfObject, arrayOfIntfK);
+
+    assertCastableDestinationTypes(intfIterable, intfIterable, classObject);
+    assertCastableDestinationTypes(intfCollection, intfCollection, intfIterable, classObject);
+    assertCastableDestinationTypes(intfList, intfList, intfIterable, intfCollection, classObject);
+    assertCastableDestinationTypes(classArrayList, classArrayList, intfList, classObject,
+        intfIterable,
         intfCollection);
-    assertSuperHierarchy(arrayOfB, arrayOfB, arrayOfBase, arrayOfObject, arrayOfIntfI,
-        arrayOfIntfIBase, classObject);
-    assertSuperHierarchy(arrayOfArrayOfB, arrayOfArrayOfB, arrayOfArrayOfBase, arrayOfArrayOfObject,
-        arrayOfArrayOfIntfI, arrayOfArrayOfIntfIBase, classObject);
-    assertSuperHierarchy(arrayOfInt, arrayOfInt, classObject);
+    assertCastableDestinationTypes(arrayOfB, arrayOfB, arrayOfBase, arrayOfObject, arrayOfIntfI,
+        arrayOfIntfIBase, classObject, arrayOfObject, intfCloneable, intfSerializable);
+    assertCastableDestinationTypes(arrayOfArrayOfB, arrayOfArrayOfB, arrayOfArrayOfBase,
+        arrayOfArrayOfObject, arrayOfArrayOfIntfI, arrayOfArrayOfIntfIBase, classObject,
+        arrayOfObject, intfCloneable, arrayOfIntfClonable, intfSerializable,
+        arrayOfIntfSerializable);
+    assertCastableDestinationTypes(arrayOfInt, arrayOfInt, classObject, intfCloneable,
+        intfSerializable);
+
+    intfCollection = createInterface("java.util.Collection");
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(),
+        Sets.<JDeclaredType> newHashSet(classArrayList, intfList, intfCollection, classObject),
+        Lists.newArrayList(intfIterable.getName()));
+
+    assertCastableDestinationTypes(intfCollection, intfCollection, classObject);
+    assertCastableDestinationTypes(intfList, intfList, intfCollection, classObject);
+    assertCastableDestinationTypes(classArrayList, classArrayList, intfList, classObject,
+        intfCollection);
+
+    classA = createClass("A", classObject, false, false);
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(),
+        Sets.<JDeclaredType> newHashSet(classA, classObject),
+        Lists.newArrayList(classBase.getName()));
+    assertCastableDestinationTypes(classA, classA, classObject);
+
+    JClassType classASub = createClass("ASub", classA, false, false);
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(),
+        Sets.<JDeclaredType> newHashSet(classASub, classA, classObject),
+        EMPTY_LIST);
+    assertCastableDestinationTypes(classASub, classASub, classA, classObject);
   }
 
   public void testJavahSignatures() {
@@ -262,23 +317,150 @@ public class JjsTypeTest extends TestCase {
   }
 
   public void testStrongerType() {
-    assertSame(classA, program.strongerType(classA, classA));
-    assertSame(classBnn, program.strongerType(classB, classBnn));
-    assertSame(classB, program.strongerType(classB, classBase));
-    assertSame(classB, program.strongerType(classBase, classB));
-    assertSame(intfI, program.strongerType(intfI, intfJ));
-    assertSame(arrayOfA, program.strongerType(intfSerializable, arrayOfA));
-    assertSame(arrayOfA, program.strongerType(intfCloneable, arrayOfA));
+    assertSame(classA, strongerType(classA, classA));
+    assertSame(classBnn, strongerType(classB, classBnn));
+    assertSame(classB, strongerType(classB, classBase));
+    assertSame(classB, strongerType(classBase, classB));
+    assertSame(intfI, strongerType(intfI, intfJ));
+    assertSame(arrayOfA, strongerType(intfSerializable, arrayOfA));
+    assertSame(arrayOfA, strongerType(intfCloneable, arrayOfA));
+  }
+
+  public void testUpdateTypeInformation_isJavaScriptObject() {
+    List<String> emptyList = Lists.<String> newArrayList();
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), program.getModuleDeclaredTypes(), emptyList);
+
+    JClassType jso = createClass("SomeJSO", classJso, false, false);
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(jso), emptyList);
+    Assert.assertTrue(program.typeOracle.isJavaScriptObject(jso));
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Collections.<JDeclaredType> emptySet(),
+        Lists.newArrayList(jso.getName()));
+    Assert.assertFalse(program.typeOracle.isJavaScriptObject(jso));
+
+    jso = createClass("SomeJSO", classJso, false, false);
+    JClassType jsoChild = createClass("SomeJSOChild", jso, false, false);
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(jso, jsoChild), emptyList);
+    Assert.assertTrue(program.typeOracle.isJavaScriptObject(jsoChild));
+    jsoChild = createClass("SomeJSOChild", classObject, false, false);
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(jsoChild), emptyList);
+    Assert.assertFalse(program.typeOracle.isJavaScriptObject(jsoChild));
+
+    jso = createClass("SomeJSO", classJso, false, false);
+    jsoChild = createClass("SomeJSOChild", jso, false, false);
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(jsoChild), emptyList);
+    Assert.assertTrue(program.typeOracle.isJavaScriptObject(jsoChild));
+    Assert.assertTrue(program.typeOracle.isJavaScriptObject(jso));
+    jso = createClass("SomeJSO", classObject, false, false);
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(jso), emptyList);
+    Assert.assertFalse(program.typeOracle.isJavaScriptObject(jsoChild));
+    Assert.assertFalse(program.typeOracle.isJavaScriptObject(jso));
+  }
+
+  public void testUpdateTypeInformation_JSODualImpl() {
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), program.getModuleDeclaredTypes(), EMPTY_LIST);
+
+    Assert.assertFalse(program.typeOracle.isDualJsoInterface(intfJ));
+
+    JClassType javaIntfImplementor = createClass("JavaImplementor", classObject, false, false);
+    javaIntfImplementor.addImplements(intfJ);
+
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(javaIntfImplementor),
+        EMPTY_LIST);
+    Assert.assertTrue(program.typeOracle.isDualJsoInterface(intfJ));
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Collections.<JDeclaredType> emptySet(),
+        Lists.newArrayList(javaIntfImplementor.getName()));
+    Assert.assertFalse(program.typeOracle.isDualJsoInterface(intfJ));
+  }
+
+  public void testUpdateTypeInformation_SubClasses() {
+    JClassType baseAll = createClass("IncrementalBaseAll", classObject, false, false);
+    JClassType sub1 = createClass("IncrementalSub1", baseAll, false, false);
+    JClassType sub2 = createClass("IncrementalSub2", baseAll, false, false);
+    JClassType sub1_2 = createClass("IncrementalSub1_2", sub1, false, false);
+
+    Assert.assertFalse(program.typeOracle.isSubClass(baseAll, sub1));
+
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(baseAll, sub1, sub2, sub1_2),
+        EMPTY_LIST);
+
+    Assert.assertTrue(program.typeOracle.isSubClass(baseAll, sub1));
+    Assert.assertTrue(program.typeOracle.isSubClass(baseAll, sub2));
+    Assert.assertTrue(program.typeOracle.isSubClass(baseAll, sub1_2));
+    Assert.assertTrue(program.typeOracle.isSubClass(sub1, sub1_2));
+
+    sub1_2 = createClass("IncrementalSub1_2", baseAll, false, false);
+
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), Sets.<JDeclaredType> newHashSet(baseAll, sub2, sub1_2),
+        Lists.newArrayList(sub1.getName()));
+
+    Assert.assertFalse(program.typeOracle.isSubClass(baseAll, sub1));
+    Assert.assertTrue(program.typeOracle.isSubClass(baseAll, sub2));
+    Assert.assertTrue(program.typeOracle.isSubClass(baseAll, sub1_2));
+  }
+
+  public void testUpdateTypeInformation_SuperClasses() {
+    JClassType baseAll = createClass("IncrementalBaseAll", classObject, false, false);
+    JClassType sub1 = createClass("IncrementalSub1", baseAll, false, false);
+    JClassType sub2 = createClass("IncrementalSub2", baseAll, false, false);
+    JClassType sub1_2 = createClass("IncrementalSub1_2", sub1, false, false);
+
+    Assert.assertFalse(program.typeOracle.isSuperClass(sub1, baseAll));
+
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(),
+        Sets.<JDeclaredType>newHashSet(baseAll, sub1, sub2, sub1_2),
+        EMPTY_LIST);
+
+    Assert.assertTrue(program.typeOracle.isSuperClass(sub1, baseAll));
+    Assert.assertTrue(program.typeOracle.isSuperClass(sub2, baseAll));
+    Assert.assertTrue(program.typeOracle.isSuperClass(sub1_2, baseAll));
+    Assert.assertTrue(program.typeOracle.isSuperClass(sub1_2, sub1));
+
+    sub1_2 = createClass("IncrementalSub1_2", baseAll, false, false);
+
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(),
+        Sets.<JDeclaredType>newHashSet(baseAll, sub2, sub1_2),
+        Lists.newArrayList(sub1.getName()));
+
+    Assert.assertFalse(program.typeOracle.isSuperClass(sub1, baseAll));
+    Assert.assertTrue(program.typeOracle.isSuperClass(sub2, baseAll));
+    Assert.assertFalse(program.typeOracle.isSuperClass(sub1_2, sub1));
+    Assert.assertTrue(program.typeOracle.isSuperClass(sub1_2, baseAll));
+  }
+
+  public void testTypeRelationsBeforeRecompute() {
+    // Construct a JTypeOracle with some previously cached type relations, but do not recompute();
+    MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
+    ImmediateTypeRelations immediateTypeRelations = minimalRebuildCache.getImmediateTypeRelations();
+    immediateTypeRelations.getImmediateSuperclassesByClass().put("Foo", "java.lang.Object");
+    JTypeOracle typeOracle = new JTypeOracle(null, minimalRebuildCache, true);
+
+    // Show that the typeOracle can already answer basic type relation questions.
+    assertEquals("java.lang.Object", typeOracle.getSuperTypeName("Foo"));
   }
 
   @Override
   protected void setUp() {
-    createSampleProgram();
+    createSampleProgram(new MinimalRebuildCache());
   }
 
-  private void assertSuperHierarchy(JReferenceType type, JReferenceType... superHierarchyTypes) {
-    assertEquals(typeOracle.getSuperHierarchyTypes(type),
-        Sets.<JReferenceType> newHashSet(superHierarchyTypes));
+  private void assertCastableDestinationTypes(JReferenceType type,
+      JReferenceType... superHierarchyTypes) {
+    assertEquals(Sets.<JReferenceType> newHashSet(superHierarchyTypes),
+        typeOracle.getCastableDestinationTypes(type));
   }
 
   private JClassType createClass(String className, JClassType superClass, boolean isAbstract,
@@ -295,9 +477,9 @@ public class JjsTypeTest extends TestCase {
     return x;
   }
 
-  private void createSampleProgram() {
+  private void createSampleProgram(MinimalRebuildCache minimalRebuildCache) {
     // Make the program itself
-    program = new JProgram();
+    program = new JProgram(minimalRebuildCache);
     typeOracle = program.typeOracle;
     synthSource = SourceOrigin.UNKNOWN;
 
@@ -356,26 +538,35 @@ public class JjsTypeTest extends TestCase {
     arrayOfIntfI = program.getTypeArray(intfI);
     arrayOfC = program.getTypeArray(classC);
     arrayOfInt = program.getTypeArray(program.getTypePrimitiveInt());
+    arrayOfJso = program.getTypeArray(classJso);
+    arrayOfJso1 = program.getTypeArray(classJso1);
+    arrayOfJso2 = program.getTypeArray(classJso2);
+    arrayOfIntfJ = program.getTypeArray(intfJ);
+    arrayOfIntfK = program.getTypeArray(intfK);
+    arrayOfIntfClonable = program.getTypeArray(intfCloneable);
+    arrayOfIntfSerializable = program.getTypeArray(intfSerializable);
 
     // 2 dimensional
-    arrayOfArrayOfBase = program.getTypeArray(classBase, 2);
-    arrayOfArrayOfObject = program.getTypeArray(classObject, 2);
-    arrayOfArrayOfIntfI = program.getTypeArray(intfI, 2);
-    arrayOfArrayOfIntfIBase = program.getTypeArray(intfIBase, 2);
-    arrayOfArrayOfInt = program.getTypeArray(program.getTypePrimitiveInt(), 2);
-    arrayOfArrayOfB = program.getTypeArray(classB, 2);
+    arrayOfArrayOfBase = program.getOrCreateArrayType(classBase, 2);
+    arrayOfArrayOfObject = program.getOrCreateArrayType(classObject, 2);
+    arrayOfArrayOfIntfI = program.getOrCreateArrayType(intfI, 2);
+    arrayOfArrayOfIntfIBase = program.getOrCreateArrayType(intfIBase, 2);
+    arrayOfArrayOfInt = program.getOrCreateArrayType(program.getTypePrimitiveInt(), 2);
+    arrayOfArrayOfB = program.getOrCreateArrayType(classB, 2);
 
-    program.typeOracle.computeBeforeAST();
+    program.typeOracle.computeBeforeAST(StandardTypes.createFrom(program),
+        program.getDeclaredTypes(), program.getModuleDeclaredTypes(), EMPTY_LIST);
 
     // Save off some miscellaneous types to test against
     typeNull = program.getTypeNull();
   }
 
+  private JReferenceType strongerType(JReferenceType type1, JReferenceType type2) {
+    return program.strengthenType(type1, Arrays.asList(type2));
+  }
+
   private JReferenceType generalizeTypes(JReferenceType type1, JReferenceType type2) {
-    List<JReferenceType> types = new ArrayList<JReferenceType>(2);
-    types.add(type1);
-    types.add(type2);
-    return program.generalizeTypes(types);
+    return program.strengthenType(program.getTypeJavaLangObject(), Arrays.asList(type1, type2));
   }
 
   /**

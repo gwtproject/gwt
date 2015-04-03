@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -31,8 +31,6 @@ public class JEnumType extends JClassType {
   private List<JEnumField> enumList = Lists.create();
   private boolean isOrdinalized = false;
 
-  public static final String VALUES_ARRAY_NAME = "$VALUES";
-
   public JEnumType(SourceInfo info, String name, boolean isAbstract) {
     super(info, name, isAbstract, false);
   }
@@ -50,11 +48,6 @@ public class JEnumType extends JClassType {
     super.addField(field);
   }
 
-  @Override
-  public String getClassLiteralFactoryMethod() {
-    return "Class.createForEnum";
-  }
-
   /**
    * Returns the list of enum fields in this enum.
    */
@@ -66,11 +59,11 @@ public class JEnumType extends JClassType {
   public JEnumType isEnumOrSubclass() {
     return this;
   }
-  
+
   public boolean isOrdinalized() {
     return isOrdinalized;
   }
-  
+
   public void setOrdinalized() {
     isOrdinalized = true;
   }

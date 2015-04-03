@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "ksb" locale.
@@ -224,7 +219,6 @@ public class LocalizedNamesImpl_ksb extends LocalizedNamesImpl {
         "VC",
         "ST",
         "SA",
-        "CS",
         "SN",
         "SC",
         "SL",
@@ -287,6 +281,7 @@ public class LocalizedNamesImpl_ksb extends LocalizedNamesImpl {
         "VI",
         "VG",
         "WF",
+        "XK",
         "YE",
         "JO",
         "ZM",
@@ -333,7 +328,6 @@ public class LocalizedNamesImpl_ksb extends LocalizedNamesImpl {
     namesMap.put("CM", "Kameluni");
     namesMap.put("CO", "Kolombia");
     namesMap.put("CR", "Kostalika");
-    namesMap.put("CS", "Selbia na Monteneglo");
     namesMap.put("CU", "Kuba");
     namesMap.put("CV", "Kepuvede");
     namesMap.put("CY", "Kuplosi");
@@ -524,7 +518,6 @@ public class LocalizedNamesImpl_ksb extends LocalizedNamesImpl {
         "CM": "Kameluni",
         "CO": "Kolombia",
         "CR": "Kostalika",
-        "CS": "Selbia na Monteneglo",
         "CU": "Kuba",
         "CV": "Kepuvede",
         "CY": "Kuplosi",

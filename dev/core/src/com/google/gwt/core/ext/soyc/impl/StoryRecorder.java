@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,16 +21,18 @@ import com.google.gwt.core.ext.soyc.Member;
 import com.google.gwt.core.ext.soyc.Range;
 import com.google.gwt.dev.jjs.Correlation;
 import com.google.gwt.dev.jjs.Correlation.Axis;
+import com.google.gwt.dev.jjs.JsSourceMap;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.util.Util;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.util.tools.Utility;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -67,7 +69,7 @@ public class StoryRecorder {
    * Used to record dependencies of a program.
    */
   public static void recordStories(TreeLogger logger, OutputStream out,
-      List<Map<Range, SourceInfo>> sourceInfoMaps, String[] js) {
+      List<JsSourceMap> sourceInfoMaps, String[] js) {
     new StoryRecorder().recordStoriesImpl(logger, out, sourceInfoMaps, js);
   }
 
@@ -102,7 +104,7 @@ public class StoryRecorder {
   }
 
   protected void recordStoriesImpl(TreeLogger logger, OutputStream out,
-      List<Map<Range, SourceInfo>> sourceInfoMaps, String[] js) {
+      List<JsSourceMap> sourceInfoMaps, String[] js) {
 
     logger = logger.branch(TreeLogger.INFO, "Creating Stories file for the compile report");
 
@@ -125,7 +127,7 @@ public class StoryRecorder {
       builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soyc>\n<stories>\n");
 
       int fragment = 0;
-      for (Map<Range, SourceInfo> sourceInfoMap : sourceInfoMaps) {
+      for (JsSourceMap sourceInfoMap : sourceInfoMaps) {
         lastEnd = 0;
         analyzeFragment(memberFactory, classesMutable, sourceInfoMap, sourceInfoSeen, fragment++);
 
@@ -152,18 +154,18 @@ public class StoryRecorder {
   }
 
   private void analyzeFragment(MemberFactory memberFactory, TreeSet<ClassMember> classesMutable,
-      Map<Range, SourceInfo> sourceInfoMap, Set<SourceInfo> sourceInfoSeen, int fragment)
+      JsSourceMap sourceInfoMap, Set<SourceInfo> sourceInfoSeen, int fragment)
       throws IOException {
     /*
      * We want to iterate over the Ranges so that enclosing Ranges come before
      * their enclosed Ranges...
      */
-    Range[] dependencyOrder = sourceInfoMap.keySet().toArray(new Range[sourceInfoMap.size()]);
-    Arrays.sort(dependencyOrder, Range.DEPENDENCY_ORDER_COMPARATOR);
+    List<Range> dependencyOrder = Lists.newArrayList(sourceInfoMap.getRanges());
+    Collections.sort(dependencyOrder, Range.DEPENDENCY_ORDER_COMPARATOR);
 
     Stack<RangeInfo> dependencyScope = new Stack<RangeInfo>();
     for (Range range : dependencyOrder) {
-      SourceInfo info = sourceInfoMap.get(range);
+      SourceInfo info = range.getSourceInfo();
       assert info != null;
 
       // Infer dependency information
@@ -232,7 +234,7 @@ public class StoryRecorder {
      * this assert passes, we know that we've correctly generated a sequence of
      * non-overlapping Ranges that encompass the whole program.
      */
-    assert dependencyOrder[0].getEnd() == lastEnd;
+    assert dependencyOrder.get(0).getEnd() == lastEnd;
   }
 
   private void emitStory(StoryImpl story, Range range) throws IOException {

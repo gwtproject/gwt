@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -20,7 +20,6 @@ import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 
 import java.io.Serializable;
-import java.util.Comparator;
 
 /**
  * Each SourceInfo may define one or more axes by which it can be correlated
@@ -31,7 +30,7 @@ public final class Correlation implements Serializable {
    * NB: The Correlation type uses AST nodes in its factory methods to make it
    * easier to extract whatever information we want to include in the Compile
    * Reports without having to update call sites with additional parameters.
-   * 
+   *
    * In the general case, references to AST nodes should not be exposed to any
    * public-API consumers of the Correlation.
    */
@@ -64,7 +63,7 @@ public final class Correlation implements Serializable {
     /**
      * A Java method.
      */
-    METHOD;
+    METHOD
   }
 
   /**
@@ -83,24 +82,6 @@ public final class Correlation implements Serializable {
       return description;
     }
   }
-
-  /**
-   * Compares Correlations based on axis and idents. Note that due to inherent
-   * limitations of mapping AST nodes into Strings, this Comparator may not
-   * always agree with {@link Correlation#equals(Object)}.
-   */
-  public static final Comparator<Correlation> AXIS_IDENT_COMPARATOR =
-      new Comparator<Correlation>() {
-        @Override
-        public int compare(Correlation a, Correlation b) {
-          int r = a.axis.compareTo(b.axis);
-          if (r != 0) {
-            return r;
-          }
-
-          return a.ident.compareTo(b.ident);
-        }
-      };
 
   /**
    * This may contain a reference to either a Java or Js AST node.

@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -30,15 +30,15 @@ import com.google.gwt.dev.util.TextOutput;
  * relatively short toString() results, for easy viewing in a debugger. This
  * subclass delves into the bodies of classes, interfaces, and methods to
  * produce the whole source tree.
- * 
+ *
  * The goal is not to generate the input source tree. Rather, the goal is to
  * produce a set of classes that can be pasted into an enclosing class and
  * compiled with a standard Java compiler. In practice, there are cases that
- * require hand-editting to actually get a full compilation, due to Java's
+ * require hand-editing to actually get a full compilation, due to Java's
  * built-in reliance on particular built-in types.
- * 
+ *
  * Known to be broken: Our generated String, Class, and Throwable are not
- * compatable with the real ones, which breaks string literals, class literals,
+ * compatible with the real ones, which breaks string literals, class literals,
  * try/catch/throw, and overrides of Object methods.
  */
 public class SourceGenerationVisitor extends ToStringGenerationVisitor {
@@ -53,20 +53,20 @@ public class SourceGenerationVisitor extends ToStringGenerationVisitor {
 
     openBlock();
 
-    for (JField it : x.getFields()) {
-      accept(it);
+    for (JField field : x.getFields()) {
+      accept(field);
       newline();
       newline();
     }
-    for (JMethod it : x.getMethods()) {
-      if (JProgram.isClinit(it)) {
+    for (JMethod method : x.getMethods()) {
+      if (JProgram.isClinit(method)) {
         // Suppress empty clinit.
-        JMethodBody body = (JMethodBody) it.getBody();
+        JMethodBody body = (JMethodBody) method.getBody();
         if (body.getBlock().getStatements().isEmpty()) {
           continue;
         }
       }
-      accept(it);
+      accept(method);
       newline();
       newline();
     }
@@ -87,6 +87,13 @@ public class SourceGenerationVisitor extends ToStringGenerationVisitor {
       newline();
     }
     for (JMethod method : x.getMethods()) {
+      if (JProgram.isClinit(method)) {
+        // Suppress empty clinit.
+        JMethodBody body = (JMethodBody) method.getBody();
+        if (body.getBlock().getStatements().isEmpty()) {
+          continue;
+        }
+      }
       accept(method);
       newline();
       newline();

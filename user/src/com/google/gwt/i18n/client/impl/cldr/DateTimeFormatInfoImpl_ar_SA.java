@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "ar_SA" locale.
@@ -28,16 +23,16 @@ public class DateTimeFormatInfoImpl_ar_SA extends DateTimeFormatInfoImpl_ar_001 
 
   @Override
   public int firstDayOfTheWeek() {
-    return 6;
+    return 0;
   }
 
   @Override
   public int weekendEnd() {
-    return 5;
+    return 6;
   }
 
   @Override
   public int weekendStart() {
-    return 4;
+    return 5;
   }
 }

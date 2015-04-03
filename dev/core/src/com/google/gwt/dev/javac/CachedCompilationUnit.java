@@ -45,6 +45,7 @@ public class CachedCompilationUnit extends CompilationUnit {
   private final boolean isError;
   private final boolean isGenerated;
   private final boolean isSuperSource;
+  private final boolean hasJsInteropRootType;
   private transient List<JsniMethod> jsniMethods;
   private final long lastModified;
   private final MethodArgNamesLookup methodArgNamesLookup;
@@ -64,6 +65,7 @@ public class CachedCompilationUnit extends CompilationUnit {
       String resourceLocation) {
     assert unit != null;
     this.compiledClasses = CompiledClass.copyForUnit(unit.getCompiledClasses(), this);
+    this.hasJsInteropRootType = unit.hasJsInteropRootType;
     this.contentId = unit.getContentId();
     this.dependencies = unit.getDependencies();
     this.resourcePath = unit.getResourcePath();
@@ -94,6 +96,7 @@ public class CachedCompilationUnit extends CompilationUnit {
   CachedCompilationUnit(CompilationUnit unit, long astToken) {
     assert unit != null;
     this.compiledClasses = CompiledClass.copyForUnit(unit.getCompiledClasses(), this);
+    this.hasJsInteropRootType = unit.hasJsInteropRootType();
     this.contentId = unit.getContentId();
     this.dependencies = unit.getDependencies();
     this.resourcePath = unit.getResourcePath();
@@ -117,7 +120,7 @@ public class CachedCompilationUnit extends CompilationUnit {
     this.astToken = new DiskCacheToken(astToken);
     this.astVersion = GwtAstBuilder.getSerializationVersion();
   }
-  
+
   @Override
   public CachedCompilationUnit asCachedCompilationUnit() {
     return this;
@@ -181,6 +184,11 @@ public class CachedCompilationUnit extends CompilationUnit {
   }
 
   @Override
+  boolean hasJsInteropRootType() {
+    return hasJsInteropRootType;
+  }
+
+  @Override
   ContentId getContentId() {
     return contentId;
   }
@@ -217,7 +225,7 @@ public class CachedCompilationUnit extends CompilationUnit {
     Collections.sort(copy, comparator);
     return copy;
   }
-  
+
   private void writeObject(ObjectOutputStream oos) throws IOException {
     oos.defaultWriteObject();
     oos.writeObject(sort(this.compiledClasses, new Comparator<CompiledClass>() {

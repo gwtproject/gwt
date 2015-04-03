@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -120,7 +120,7 @@ public class ExpressionAnalyzerTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.Foo") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("public class Foo {\n");
         code.append("  static final boolean value = trueMethod();");
@@ -136,7 +136,7 @@ public class ExpressionAnalyzerTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.Foo") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("import com.google.gwt.core.client.JavaScriptObject;\n");
         code.append("public class Foo {\n");
@@ -174,7 +174,7 @@ public class ExpressionAnalyzerTest extends JJSTestBase {
 
   private Result analyzeExpression(String type, String expression)
       throws UnableToCompleteException {
-    JProgram program = compileSnippet(type, "return " + expression + ";");
+    JProgram program = compileSnippet(type, "return " + expression + ";", true);
     ExpressionAnalyzer ea = new ExpressionAnalyzer();
     JMethod mainMethod = findMainMethod(program);
     JMethodBody body = (JMethodBody) mainMethod.getBody();

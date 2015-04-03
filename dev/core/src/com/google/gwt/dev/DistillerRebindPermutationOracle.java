@@ -19,11 +19,11 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.dev.cfg.BindingProperty;
-import com.google.gwt.dev.cfg.ConfigurationProperty;
+import com.google.gwt.dev.cfg.BindingProps;
+import com.google.gwt.dev.cfg.ConfigProps;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.PropertyPermutations;
-import com.google.gwt.dev.cfg.Rules;
-import com.google.gwt.dev.cfg.StaticPropertyOracle;
+import com.google.gwt.dev.cfg.Rule;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.jdt.RebindOracle;
@@ -35,8 +35,8 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
+import java.util.Deque;
 import java.util.Set;
-import java.util.SortedSet;
 
 /**
  * Implementation of RebindPermutationOracle used by Precompile.
@@ -45,7 +45,6 @@ class DistillerRebindPermutationOracle implements RebindPermutationOracle {
   private CompilationState compilationState;
   private StandardGeneratorContext generatorContext;
   private final Permutation[] permutations;
-  private final StaticPropertyOracle[] propertyOracles;
   private final RebindOracle[] rebindOracles;
 
   public DistillerRebindPermutationOracle(CompilerContext compilerContext,
@@ -54,21 +53,17 @@ class DistillerRebindPermutationOracle implements RebindPermutationOracle {
     ModuleDef module = compilerContext.getModule();
     this.compilationState = compilationState;
     permutations = new Permutation[perms.size()];
-    propertyOracles = new StaticPropertyOracle[perms.size()];
     rebindOracles = new RebindOracle[perms.size()];
     generatorContext = new StandardGeneratorContext(
         compilerContext, compilationState, generatorArtifacts, true);
     BindingProperty[] orderedProps = perms.getOrderedProperties();
-    SortedSet<ConfigurationProperty> configPropSet = module.getProperties().getConfigurationProperties();
-    ConfigurationProperty[] configProps = configPropSet.toArray(new ConfigurationProperty[configPropSet.size()]);
-    Rules rules = module.getRules();
+    ConfigProps config = new ConfigProps(module);
+    Deque<Rule> rules = module.getRules();
     for (int i = 0; i < rebindOracles.length; ++i) {
-      String[] orderedPropValues = perms.getOrderedPropertyValues(i);
-      propertyOracles[i] = new StaticPropertyOracle(orderedProps,
-          orderedPropValues, configProps);
-      rebindOracles[i] = new StandardRebindOracle(propertyOracles[i], rules,
+      BindingProps props = new BindingProps(orderedProps, perms.getOrderedPropertyValues(i), config);
+      rebindOracles[i] = new StandardRebindOracle(props.toPropertyOracle(), rules,
           generatorContext);
-      permutations[i] = new Permutation(i, propertyOracles[i]);
+      permutations[i] = new Permutation(i, props);
     }
   }
 
@@ -116,13 +111,5 @@ class DistillerRebindPermutationOracle implements RebindPermutationOracle {
 
   public Permutation[] getPermutations() {
     return permutations;
-  }
-
-  public StaticPropertyOracle getPropertyOracle(int permNumber) {
-    return propertyOracles[permNumber];
-  }
-
-  public RebindOracle getRebindOracle(int permNumber) {
-    return rebindOracles[permNumber];
   }
 }

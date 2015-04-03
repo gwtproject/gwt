@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5953 $
-//  type=IN
-//  date=$Date: 2011-07-04 19:22:55 -0400 (Mon, 04 Jul 2011) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "bn_IN" locale.

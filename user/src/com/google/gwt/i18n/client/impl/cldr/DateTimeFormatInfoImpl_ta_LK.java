@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5798 $
-//  type=LK
-//  date=$Date: 2011-05-02 02:05:34 -0400 (Mon, 02 May 2011) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "ta_LK" locale.

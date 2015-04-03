@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,14 +15,11 @@
  */
 package com.google.gwt.dev.js;
 
-import com.google.gwt.core.ext.BadPropertyValueException;
-import com.google.gwt.core.ext.ConfigurationProperty;
-import com.google.gwt.core.ext.DefaultConfigurationProperty;
-import com.google.gwt.core.ext.PropertyOracle;
-import com.google.gwt.core.ext.SelectionProperty;
-import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.dev.cfg.ConfigProps;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.js.JsIncrementalNamer.JsIncrementalNamerState;
+import com.google.gwt.dev.js.JsNamer.IllegalNameException;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsFunction;
@@ -35,6 +32,7 @@ import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.TextOutput;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import junit.framework.TestCase;
 
@@ -42,6 +40,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Tests the JsStaticEval optimizer.
@@ -49,6 +48,7 @@ import java.util.List;
 public class JsNamerTest extends TestCase {
 
   private BlacklistProps props;
+  private JsIncrementalNamerState jsIncrementalNamerState;
 
   @Override
   protected void setUp() throws Exception {
@@ -56,6 +56,7 @@ public class JsNamerTest extends TestCase {
     props = new BlacklistProps();
     props.blacklist = Arrays.asList("foo, bar", "baz");
     props.blacklistSuffixes = Arrays.asList("logger");
+    jsIncrementalNamerState = new JsIncrementalNamerState();
   }
 
   public void testBannedIdent() throws Exception {
@@ -120,20 +121,38 @@ public class JsNamerTest extends TestCase {
     // Function declaration statement.
     JsName name = scope.declareName("package-info", "package-info");
     List<JsStatement> statements = jsProgram.getFragment(0).getGlobalBlock().getStatements();
-    JsFunction function = new JsFunction(SourceOrigin.UNKNOWN, scope, name);
-    function.setBody(new JsBlock(SourceOrigin.UNKNOWN));
-    statements.add(new JsExprStmt(SourceOrigin.UNKNOWN, function));
+    final SourceOrigin sourceInfo = SourceOrigin.UNKNOWN;
+    JsFunction function = new JsFunction(sourceInfo, scope, name);
+    function.setBody(new JsBlock(sourceInfo));
+    statements.add(new JsExprStmt(sourceInfo, function));
 
     // Function invocation statement.
-    JsInvocation invocation = new JsInvocation(SourceOrigin.UNKNOWN);
-    invocation.setQualifier(new JsNameRef(SourceOrigin.UNKNOWN, name));
-    statements.add(new JsExprStmt(SourceOrigin.UNKNOWN, invocation));
+    statements.add(new JsInvocation(sourceInfo, new JsNameRef(sourceInfo, name)).makeStmt());
 
     // Verify that the illegal "-" character is translated.
-    assertEquals(
-        "function package_info(){}\npackage_info();", rename(jsProgram, JsOutputOption.PRETTY));
-    assertEquals(
-        "function package_info(){}\npackage_info();", rename(jsProgram, JsOutputOption.DETAILED));
+    assertEquals("function package_info(){}\npackage_info();",
+        rename(jsProgram, JsOutputOption.PRETTY, false));
+    assertEquals("function package_info(){}\npackage_info();",
+        rename(jsProgram, JsOutputOption.DETAILED, false));
+  }
+
+  public void testRejectsReservedSuffix() throws Exception {
+    // Regular renaming runs fine.
+    assertEquals("function foo_0_g$(){return 42}\n",
+        rename(parseJs("function foo() { return 42; }"), JsOutputOption.PRETTY, true));
+
+    // Renaming with the reserved suffix is rejected.
+    try {
+      String functionName = "foo" + JsIncrementalNamer.RESERVED_IDENT_SUFFIX;
+      JsProgram jsProgram = parseJs(
+          "function " + functionName + "() { return 42; }");
+      jsProgram.getScope().findExistingName(functionName).setObfuscatable(false);
+      rename(jsProgram, JsOutputOption.PRETTY, true);
+      fail("Naming an unobfuscatable identifier containing the reserved suffix should have "
+          + "thrown an exception in JsIncrementalNamer.");
+    } catch (IllegalNameException e) {
+      // Expected path.
+    }
   }
 
   private JsProgram parseJs(String js) throws IOException, JsParserException {
@@ -144,21 +163,27 @@ public class JsNamerTest extends TestCase {
     return program;
   }
 
-  private String rename(JsProgram program) {
-    return rename(program, JsOutputOption.PRETTY);
+  private String rename(JsProgram program) throws IllegalNameException {
+    return rename(program, JsOutputOption.PRETTY, false);
   }
 
-  private String rename(JsProgram program, JsOutputOption outputOption) {
+  private String rename(JsProgram program, JsOutputOption outputOption, boolean persistent)
+      throws IllegalNameException {
     JsSymbolResolver.exec(program);
+    ConfigProps config = props.makeConfig();
     switch (outputOption) {
       case PRETTY:
-        JsPrettyNamer.exec(program, new PropertyOracle[] {props});
+        if (persistent) {
+          JsIncrementalNamer.exec(program, config, jsIncrementalNamerState, null);
+        } else {
+          JsPrettyNamer.exec(program, config);
+        }
         break;
       case OBFUSCATED:
-        JsObfuscateNamer.exec(program, new PropertyOracle[] {props});
+        JsObfuscateNamer.exec(program, config);
         break;
       case DETAILED:
-        JsVerboseNamer.exec(program, new PropertyOracle[] {props});
+        JsVerboseNamer.exec(program, config);
         break;
     }
     TextOutput text = new DefaultTextOutput(true);
@@ -171,29 +196,19 @@ public class JsNamerTest extends TestCase {
     return rename(parseJs(js));
   }
 
-  private static class BlacklistProps implements PropertyOracle {
-
+  private static class BlacklistProps {
     List<String> blacklist;
     List<String> blacklistSuffixes;
 
-    @Override
-    public ConfigurationProperty getConfigurationProperty(String propertyName)
-        throws BadPropertyValueException {
-
-      if (ReservedNames.BLACKLIST.equals(propertyName) && blacklist != null) {
-        return new DefaultConfigurationProperty(ReservedNames.BLACKLIST, blacklist);
+    private ConfigProps makeConfig() {
+      Map<String, List<String>> props = Maps.newHashMap();
+      if (blacklist != null) {
+        props.put(ReservedNames.BLACKLIST, blacklist);
       }
-      if (ReservedNames.BLACKLIST_SUFFIXES.equals(propertyName) && blacklistSuffixes != null) {
-        return new DefaultConfigurationProperty(ReservedNames.BLACKLIST_SUFFIXES,
-            blacklistSuffixes);
+      if (blacklistSuffixes != null) {
+        props.put(ReservedNames.BLACKLIST_SUFFIXES, blacklistSuffixes);
       }
-      throw new BadPropertyValueException("No property value for " + propertyName);
-    }
-
-    @Override
-    public SelectionProperty getSelectionProperty(TreeLogger logger,
-        String propertyName) throws BadPropertyValueException {
-      return null;
+      return new ConfigProps(props);
     }
   }
 }

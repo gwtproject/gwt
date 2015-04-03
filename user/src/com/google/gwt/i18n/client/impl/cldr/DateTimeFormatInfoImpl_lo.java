@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "lo" locale.
@@ -30,13 +25,13 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
   public String[] ampms() {
     return new String[] {
         "ກ່ອນທ່ຽງ",
-        "ຫລັງທ່ຽງ"
+        "ຫຼັງທ່ຽງ"
     };
   }
 
   @Override
   public String dateFormatFull() {
-    return "EEEEທີ d MMMM G y";
+    return "EEEE ທີ d MMMM G y";
   }
 
   @Override
@@ -51,7 +46,7 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d/M/yyyy";
+    return "d/M/y";
   }
 
   @Override
@@ -77,7 +72,7 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasFull() {
     return new String[] {
-        "ປີກ່ອນຄິດສະການທີ່",
+        "ກ່ອນ ຄ.ສ.",
         "ຄ.ສ."
     };
   }
@@ -85,7 +80,7 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "ປີກ່ອນຄິດສະການທີ່",
+        "ກ່ອນ ຄ.ສ.",
         "ຄ.ສ."
     };
   }
@@ -96,13 +91,33 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatHour24Minute() {
+    return "H:mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "H:mm:ss";
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, MMMM d";
+    return "EEEE d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M/d";
+    return "d/M";
   }
 
   @Override
@@ -112,7 +127,7 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
+    return "d MMM y";
   }
 
   @Override
@@ -122,7 +137,7 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "MMMM d, y";
+    return "d MMMM y";
   }
 
   @Override
@@ -132,12 +147,12 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "M/d/y";
+    return "d/M/y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
+    return "EEE, d MMM y";
   }
 
   @Override
@@ -191,8 +206,8 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
     return new String[] {
         "ມ.ກ.",
         "ກ.ພ.",
-        "ມີ.ນ.",
-        "ມ.ສ..",
+        "ມ.ນ.",
+        "ມ.ສ.",
         "ພ.ພ.",
         "ມິ.ຖ.",
         "ກ.ລ.",
@@ -207,21 +222,31 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "Q3",
-        "Q4"
+        "ໄຕຣມາດ 1",
+        "ໄຕຣມາດ 2",
+        "ໄຕຣມາດ 3",
+        "ໄຕຣມາດ 4"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "ຕມ1",
+        "ຕມ2",
+        "ຕມ3",
+        "ຕມ4"
     };
   }
 
   @Override
   public String timeFormatFull() {
-    return "Hໂມງ mນາທີ ss ວິນາທີzzzz";
+    return "H ໂມງ m ນາທີ ss ວິນາທີ zzzz";
   }
 
   @Override
   public String timeFormatLong() {
-    return "H ໂມງ mນາທີss z";
+    return "H ໂມງ m ນາທີ ss ວິນາທີ z";
   }
 
   @Override
@@ -261,15 +286,28 @@ public class DateTimeFormatInfoImpl_lo extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] weekdaysNarrowStandalone() {
+    return new String[] {
+        "ທ",
+        "ຈ",
+        "ຄ",
+        "​ພຸ",
+        "ພ",
+        "​ສຸ",
+        "ສ"
+    };
+  }
+
+  @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "ອາ.",
-        "ຈ.",
-        "ອ.",
-        "ພ.",
-        "ພຫ.",
-        "ສກ.",
-        "ສ."
+        "ວັນອາທິດ",
+        "ວັນຈັນ",
+        "ວັນອັງຄານ",
+        "ວັນພຸດ",
+        "ວັນພະຫັດ",
+        "ວັນສຸກ",
+        "ວັນເສົາ"
     };
   }
 }

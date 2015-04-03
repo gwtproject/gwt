@@ -27,11 +27,7 @@ import com.google.gwt.i18n.shared.DateTimeFormatInfo;
 import com.google.gwt.i18n.shared.GwtLocale;
 import com.google.gwt.i18n.shared.impl.cldr.DateTimeFormatInfoImpl;
 
-import org.unicode.cldr.util.CLDRFile;
-import org.unicode.cldr.util.Factory;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -113,7 +109,8 @@ public class DateTimeFormatInfoProcessor extends Processor {
 
   private final RegionLanguageData regionLanguageData;
 
-  public DateTimeFormatInfoProcessor(File outputDir, Factory cldrFactory, LocaleData localeData) {
+  public DateTimeFormatInfoProcessor(File outputDir, InputFactory cldrFactory,
+      LocaleData localeData) {
     super(outputDir, cldrFactory, localeData);
     regionLanguageData = new RegionLanguageData(cldrFactory);
   }
@@ -192,6 +189,10 @@ public class DateTimeFormatInfoProcessor extends Processor {
       String key, String method, final String... args) {
     String value = localeData.getEntry(category, locale, key);
     if (value != null) {
+      // cldr data escapes literals with single quote, but we need two single quotes when
+      // parsing message formats.
+      value = value.replace("'", "''");
+
       pw.println();
       if (getOverrides()) {
         pw.println("  @Override");
@@ -414,48 +415,18 @@ public class DateTimeFormatInfoProcessor extends Processor {
     loadFormatPatterns();
   }
 
-  /**
-   * Write an output file.
-   * 
-   * @param locale
-   * @param clientShared "client" or "shared", determines the package names
-   *     being written to
-   * @throws IOException
-   * @throws FileNotFoundException
-   */
-  protected void writeOneOutputFile(GwtLocale locale, String clientShared) throws IOException,
-      FileNotFoundException {
+  protected void writeOneJavaFile(String path, String packageName, String className,
+      GwtLocale locale) throws IOException {
     // TODO(jat): make uz_UZ inherit from uz_Cyrl rather than uz, for example
-    String myClass;
-    String pathSuffix;
-    if (locale.isDefault()) {
-      if ("client".equals(clientShared)) {
-        // The client default is hand-written code that extends the shared one.
-        return;
-      }
-      myClass = "DefaultDateTimeFormatInfo";
-      pathSuffix = "/";
-    } else {
-      myClass = "DateTimeFormatInfoImpl" + localeSuffix(locale);
-      pathSuffix = "/impl/cldr/";
-    }
+
     GwtLocale parent = localeData.inheritsFrom(locale);
-    PrintWriter pw = createOutputFile(clientShared + pathSuffix + myClass + ".java");
+    PrintWriter pw = createOutputFile(path);
     printHeader(pw);
-    pw.print("package com.google.gwt.i18n." + clientShared);
+    pw.print("package " + packageName + ";");
     // GWT now requires JDK 1.6, so we always generate @Overrides
     setOverrides(true);
-    if (!locale.isDefault()) {
-      pw.print(".impl.cldr");
-    }
-    pw.println(";");
     pw.println();
     pw.println("// DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA");
-    pw.println("//  cldrVersion=" + CLDRFile.GEN_VERSION);
-    Map<String, String> map = localeData.getEntries("version", locale);
-    for (Map.Entry<String, String> entry : map.entrySet()) {
-      pw.println("//  " + entry.getKey() + "=" + entry.getValue());
-    }
     pw.println();
     if (locale.isDefault()) {
       pw.println("/**");
@@ -474,7 +445,7 @@ public class DateTimeFormatInfoProcessor extends Processor {
       pw.println(" * Implementation of DateTimeFormatInfo for the \"" + locale + "\" locale.");
       pw.println(" */");
     }
-    pw.print("public class " + myClass);
+    pw.print("public class " + className);
     if (locale.isDefault()) {
       pw.print(" implements " + DateTimeFormatInfo.class.getSimpleName());
     } else {
@@ -542,24 +513,6 @@ public class DateTimeFormatInfoProcessor extends Processor {
     generateDayNumber(pw, locale, "weekendEnd", "weekendEnd");
     generateDayNumber(pw, locale, "weekendStart", "weekendStart");
 
-    if (locale.isDefault()) {
-      pw.println();
-      pw.println("  @Override");
-      pw.println("  public String dateFormat() {");
-      pw.println("    return dateFormatMedium();");
-      pw.println("  }");
-      pw.println();
-      pw.println("  @Override");
-      pw.println("  public String dateTime(String timePattern, String datePattern) {");
-      pw.println("    return datePattern + \" \" + timePattern;");
-      pw.println("  }");
-      pw.println();
-      pw.println("  @Override");
-      pw.println("  public String timeFormat() {");
-      pw.println("    return timeFormatMedium();");
-      pw.println("  }");
-    }
-
     pw.println("}");
     pw.close();
   }
@@ -567,10 +520,42 @@ public class DateTimeFormatInfoProcessor extends Processor {
   @Override
   protected void writeOutputFiles() throws IOException {
     System.out.println("Writing output for date/time formats");
-    for (GwtLocale locale : localeData.getNonEmptyLocales()) {
-      // TODO(jat): remove client when we no longer need it
-      writeOneOutputFile(locale, "client");
-      writeOneOutputFile(locale, "shared");
+    // TODO(jat): remove client when we no longer need it
+    writeOutputFilesFor("client");
+    writeOutputFilesFor("shared");
+  }
+
+  private void writeOutputFilesFor(String clientShared) throws IOException {
+    Set<GwtLocale> localesToPrint = localeData.getNonEmptyLocales();
+
+    writeVersionFile(clientShared + "/impl/cldr/DateTimeFormatInfo.versions.txt", localesToPrint);
+
+    for (GwtLocale locale : localesToPrint) {
+
+      if (locale.isDefault() && "client".equals(clientShared)) {
+        // The client default is hand-written code that extends the shared one.
+        continue;
+      }
+
+      String packageName = "com.google.gwt.i18n." + clientShared;
+      if (!locale.isDefault()) {
+        packageName += ".impl.cldr";
+      }
+
+      String className;
+      if (locale.isDefault()) {
+        className = "DefaultDateTimeFormatInfo";
+      } else {
+        className = "DateTimeFormatInfoImpl" + localeSuffix(locale);
+      }
+
+      String path = clientShared + "/";
+      if (!locale.isDefault()) {
+        path += "impl/cldr/";
+      }
+      path += className + ".java";
+
+      writeOneJavaFile(path, packageName, className, locale);
     }
   }
 

@@ -15,6 +15,10 @@
  */
 package java.lang;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalArgument;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
+
 import com.google.gwt.core.client.impl.StackTraceCreator;
 
 import java.io.PrintStream;
@@ -74,24 +78,20 @@ public class Throwable implements Serializable {
    */
   protected Throwable(String message, Throwable cause, boolean enableSuppression,
       boolean writetableStackTrace) {
-    if (writetableStackTrace) {
-      fillInStackTrace();
-    }
     this.cause = cause;
     this.detailMessage = message;
     this.disableSuppression = !enableSuppression;
+    if (writetableStackTrace) {
+      fillInStackTrace();
+    }
   }
 
   /**
    * Call to add an exception that was suppressed. Used by try-with-resources.
    */
   public final void addSuppressed(Throwable exception) {
-    if (exception == null) {
-      throw new NullPointerException("Cannot suppress a null exception.");
-    }
-    if (exception == this) {
-      throw new IllegalArgumentException("Exception can not suppress itself.");
-    }
+    checkNotNull(exception, "Cannot suppress a null exception.");
+    checkCriticalArgument(exception != this, "Exception can not suppress itself.");
 
     if (disableSuppression) {
       return;
@@ -112,7 +112,8 @@ public class Throwable implements Serializable {
    * @return this
    */
   public Throwable fillInStackTrace() {
-    StackTraceCreator.fillInStackTrace(this);
+    stackTrace = null; // Invalidate the cached trace
+    StackTraceCreator.captureStackTrace(this, detailMessage);
     return this;
   }
 
@@ -135,7 +136,7 @@ public class Throwable implements Serializable {
    */
   public StackTraceElement[] getStackTrace() {
     if (stackTrace == null) {
-      return new StackTraceElement[0];
+      stackTrace = StackTraceCreator.constructJavaStackTrace(this);
     }
     return stackTrace;
   }
@@ -152,12 +153,8 @@ public class Throwable implements Serializable {
   }
 
   public Throwable initCause(Throwable cause) {
-    if (this.cause != null) {
-      throw new IllegalStateException("Can't overwrite cause");
-    }
-    if (cause == this) {
-      throw new IllegalArgumentException("Self-causation not permitted");
-    }
+    checkState(this.cause == null, "Can't overwrite cause");
+    checkCriticalArgument(cause != this, "Self-causation not permitted");
     this.cause = cause;
     return this;
   }
@@ -179,12 +176,10 @@ public class Throwable implements Serializable {
   }
 
   public void setStackTrace(StackTraceElement[] stackTrace) {
-    StackTraceElement[] copy = new StackTraceElement[stackTrace.length];
-    for (int i = 0, c = stackTrace.length; i < c; ++i) {
-      if (stackTrace[i] == null) {
-        throw new NullPointerException();
-      }
-      copy[i] = stackTrace[i];
+    int length = stackTrace.length;
+    StackTraceElement[] copy = new StackTraceElement[length];
+    for (int i = 0; i < length; ++i) {
+      copy[i] = checkNotNull(stackTrace[i]);
     }
     this.stackTrace = copy;
   }

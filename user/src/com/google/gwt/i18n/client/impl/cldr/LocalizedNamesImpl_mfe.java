@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6450 $
-//  type=mfe
-//  date=$Date: 2012-01-25 19:20:54 -0500 (Wed, 25 Jan 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "mfe" locale.
@@ -233,7 +228,6 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
         "AS",
         "ST",
         "SN",
-        "CS",
         "SC",
         "CL",
         "ZA",
@@ -274,6 +268,7 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "YE",
         "JM",
         "ZM",
@@ -332,7 +327,6 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
     namesMap.put("CM", "Kamerounn");
     namesMap.put("CN", "Lasinn");
     namesMap.put("CO", "Kolonbi");
-    namesMap.put("CS", "Serbi-ek-Montenegro");
     namesMap.put("CV", "Kap-Ver");
     namesMap.put("CZ", "Repiblik Chek");
     namesMap.put("DE", "Almagn");
@@ -511,7 +505,6 @@ public class LocalizedNamesImpl_mfe extends LocalizedNamesImpl {
         "CM": "Kamerounn",
         "CN": "Lasinn",
         "CO": "Kolonbi",
-        "CS": "Serbi-ek-Montenegro",
         "CV": "Kap-Ver",
         "CZ": "Repiblik Chek",
         "DE": "Almagn",

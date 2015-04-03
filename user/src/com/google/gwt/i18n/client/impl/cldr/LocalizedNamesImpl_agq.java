@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "agq" locale.
@@ -251,7 +246,6 @@ public class LocalizedNamesImpl_agq extends LocalizedNamesImpl {
         "CF",
         "VC",
         "SN",
-        "CS",
         "ES",
         "LK",
         "SK",
@@ -281,6 +275,7 @@ public class LocalizedNamesImpl_agq extends LocalizedNamesImpl {
         "VN",
         "VE",
         "WF",
+        "XK",
         "UG",
         "UA",
         "UY",
@@ -342,7 +337,6 @@ public class LocalizedNamesImpl_agq extends LocalizedNamesImpl {
     namesMap.put("CN", "Chaenà");
     namesMap.put("CO", "Kòlombìa");
     namesMap.put("CR", "Kòsɨ̀tà Lekà");
-    namesMap.put("CS", "Sɛɛbìa à Mùŋtànegùlù");
     namesMap.put("CU", "Kuuwbà");
     namesMap.put("CV", "Chwɨla ŋ̀ Kɛ̀b Vɛ̂ɛ");
     namesMap.put("CY", "Saekpùlù");
@@ -577,7 +571,6 @@ public class LocalizedNamesImpl_agq extends LocalizedNamesImpl {
         "CN": "Chaenà",
         "CO": "Kòlombìa",
         "CR": "Kòsɨ̀tà Lekà",
-        "CS": "Sɛɛbìa à Mùŋtànegùlù",
         "CU": "Kuuwbà",
         "CV": "Chwɨla ŋ̀ Kɛ̀b Vɛ̂ɛ",
         "CY": "Saekpùlù",

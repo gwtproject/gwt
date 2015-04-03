@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5798 $
-//  date=$Date: 2011-05-02 02:05:34 -0400 (Mon, 02 May 2011) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "pt_MZ" locale.
@@ -35,33 +30,28 @@ public class DateTimeFormatInfoImpl_pt_MZ extends DateTimeFormatInfoImpl_pt {
   }
 
   @Override
-  public String formatHour24Minute() {
-    return "HH:mm";
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'às' " + timePattern;
   }
 
   @Override
-  public String formatHour24MinuteSecond() {
-    return "HH:mm:ss";
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'às' " + timePattern;
   }
 
   @Override
-  public String formatMinuteSecond() {
-    return "mm:ss";
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + ", " + timePattern;
   }
 
   @Override
   public String formatMonthAbbrevDay() {
     return "d/MM";
-  }
-
-  @Override
-  public String formatMonthFullDay() {
-    return "d/MM";
-  }
-
-  @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE, d/MM";
   }
 
   @Override
@@ -75,23 +65,18 @@ public class DateTimeFormatInfoImpl_pt_MZ extends DateTimeFormatInfoImpl_pt {
   }
 
   @Override
-  public String formatYearMonthFull() {
-    return "MM/y";
-  }
-
-  @Override
   public String formatYearMonthWeekdayDay() {
     return "EEE, d/MM/y";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQ 'de' yyyy";
+    return "QQQQ 'de' y";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "QQQ 'de' yyyy";
+    return "Q 'de' y";
   }
 
   @Override
@@ -137,29 +122,6 @@ public class DateTimeFormatInfoImpl_pt_MZ extends DateTimeFormatInfoImpl_pt {
         "2.º trimestre",
         "3.º trimestre",
         "4.º trimestre"
-    };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "H:mm:ss zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "H:mm:ss z";
-  }
-
-  @Override
-  public String[] weekdaysFull() {
-    return new String[] {
-        "Domingo",
-        "Segunda-feira",
-        "Terça-feira",
-        "Quarta-feira",
-        "Quinta-feira",
-        "Sexta-feira",
-        "Sábado"
     };
   }
 }

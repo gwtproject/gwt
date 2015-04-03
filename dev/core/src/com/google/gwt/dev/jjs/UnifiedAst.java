@@ -15,12 +15,10 @@
  */
 package com.google.gwt.dev.jjs;
 
-import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ModuleMetricsArtifact;
 import com.google.gwt.core.ext.linker.PrecompilationMetricsArtifact;
-import com.google.gwt.dev.CompilerContext;
-import com.google.gwt.dev.Permutation;
+import com.google.gwt.dev.PrecompileTaskOptions;
+import com.google.gwt.dev.PrecompileTaskOptionsImpl;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.util.DiskCache;
@@ -84,7 +82,7 @@ public class UnifiedAst implements Serializable {
   /**
    * The compilation options.
    */
-  private final JJSOptions options;
+  private final PrecompileTaskOptions options;
 
   /**
    * Metrics for the precompilation phase. Stored here so they can be written
@@ -102,43 +100,12 @@ public class UnifiedAst implements Serializable {
    */
   private transient long serializedAstToken;
 
-  public UnifiedAst(JJSOptions options, AST initialAst, boolean singlePermutation,
+  public UnifiedAst(PrecompileTaskOptions options, AST initialAst, boolean singlePermutation,
       Set<String> rebindRequests) {
-    this.options = new JJSOptionsImpl(options);
+    this.options = new PrecompileTaskOptionsImpl(options);
     this.initialAst = initialAst;
     this.rebindRequests = Collections.unmodifiableSortedSet(new TreeSet<String>(rebindRequests));
     this.serializedAstToken = singlePermutation ? -1 : diskCache.writeObject(initialAst);
-  }
-
-  /**
-   * Copy constructor, invalidates the original.
-   */
-  UnifiedAst(UnifiedAst other) {
-    this.options = other.options;
-    this.initialAst = other.initialAst;
-    other.initialAst = null; // steal its copy
-    this.rebindRequests = other.rebindRequests;
-    this.serializedAstToken = other.serializedAstToken;
-  }
-
-  /**
-   * Compiles a particular permutation.
-   *
-   * @param logger the logger to use
-   * @param compilerContext shared read only compiler state
-   * @param permutation the permutation to compile
-   * @return the permutation result
-   * @throws UnableToCompleteException if an error other than
-   *           {@link OutOfMemoryError} occurs
-   */
-  public PermutationResult compilePermutation(
-      TreeLogger logger, CompilerContext compilerContext, Permutation permutation)
-      throws UnableToCompleteException {
-    boolean compileMonolithic = compilerContext.shouldCompileMonolithic();
-    JavaToJavaScriptCompiler javaToJavaScriptCompiler = compileMonolithic
-        ? new MonolithicJavaToJavaScriptCompiler(logger, compilerContext)
-        : new LibraryJavaToJavaScriptCompiler(logger, compilerContext);
-    return javaToJavaScriptCompiler.compilePermutation(this, permutation);
   }
 
   /**
@@ -173,8 +140,8 @@ public class UnifiedAst implements Serializable {
   /**
    * Returns the active set of JJS options associated with this compile.
    */
-  public JJSOptions getOptions() {
-    return new JJSOptionsImpl(options);
+  public PrecompileTaskOptions getOptions() {
+    return new PrecompileTaskOptionsImpl(options);
   }
 
   /**

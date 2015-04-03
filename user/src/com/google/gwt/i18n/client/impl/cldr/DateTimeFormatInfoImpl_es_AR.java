@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6144 $
-//  date=$Date: 2011-09-15 15:34:45 -0400 (Thu, 15 Sep 2011) $
-//  type=es
 
 /**
  * Implementation of DateTimeFormatInfo for the "es_AR" locale.
@@ -33,16 +28,11 @@ public class DateTimeFormatInfoImpl_es_AR extends DateTimeFormatInfoImpl_es_419 
 
   @Override
   public String formatYearMonthNum() {
-    return "M-yyyy";
+    return "M-y";
   }
 
   @Override
   public String timeFormatFull() {
     return "HH'h'''mm:ss zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "H:mm:ss z";
   }
 }

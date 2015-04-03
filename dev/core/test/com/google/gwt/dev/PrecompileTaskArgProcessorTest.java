@@ -1,12 +1,12 @@
 /*
  * Copyright 2013 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -72,18 +72,6 @@ public class PrecompileTaskArgProcessorTest extends TestCase {
     assertNotEquals(defaultOptions.isStrict(), handledOptions.isStrict());
   }
 
-  @SuppressWarnings("deprecation")
-  public void testFlagBackwardCompatibility_aggressiveOptimizations() {
-    // Set aggressiveOptimizations using the old-style tag.
-    precompileTaskArgProcessor.processArgs(
-        "-workDir", "/tmp", "-XdisableAggressiveOptimization", "com.google.gwt.dev.DevModule");
-
-    // Show that the flags were recognized and ended up modifying options.
-    assertNotEquals(
-        defaultOptions.isAggressivelyOptimize(), handledOptions.isAggressivelyOptimize());
-  }
-
-  @SuppressWarnings("deprecation")
   public void testFlagBackwardCompatibility_draftCompile() {
     // Set draftCompile using the old-style tag.
     precompileTaskArgProcessor.processArgs(
@@ -91,7 +79,5 @@ public class PrecompileTaskArgProcessorTest extends TestCase {
 
     // Show that the flags were recognized and ended up modifying options.
     assertTrue(defaultOptions.getOptimizationLevel() != handledOptions.getOptimizationLevel());
-    assertNotEquals(
-        defaultOptions.isAggressivelyOptimize(), handledOptions.isAggressivelyOptimize());
   }
 }

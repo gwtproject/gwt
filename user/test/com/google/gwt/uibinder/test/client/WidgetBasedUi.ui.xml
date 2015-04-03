@@ -142,6 +142,7 @@
     cursor:cursor,pointer;
   }
 </ui:style>
+
 <ui:data field='heartCursorResource' src='heart.cur'/>
 
 <ui:style field='mySpritelyStyle'>
@@ -164,10 +165,14 @@
       font-size: 1.5em;
     }
 </ui:style>
+
 <ui:image field='prettyImage' />
 <ui:image field='prettyTilingImage' src='prettyImage.png' flipRtl='true' repeatStyle='Both'/>
 <ui:image field='right'/>
 <ui:image field='down'/>
+
+<ui:data field="embeddedSvgData" src="background.svg" mimeType="image/svg+xml" />
+<ui:data field="linkedSvgData" src="background.svg" doNotEmbed="true" />
 
 <gwt:DockPanel ui:field="root" width="100%" verticalAlignment="ALIGN_TOP">
   <gwt:Dock direction='NORTH'>
@@ -186,7 +191,7 @@
   <gwt:Dock direction='WEST'>
     <gwt:HTML ui:field='sideBarWidget' pixelSize="100, 150">
       <div ui:field="sideBar"
-      style='border: 4px solid gray; padding: 4px; margin: 4px;'
+          style='border: 4px solid gray; padding: 4px; margin: 4px;'
       >This could<br/>
         be a<br/>
         side bar<br/>
@@ -196,9 +201,9 @@
   </gwt:Dock>
   <gwt:Dock direction='CENTER'>
     <gwt:HTMLPanel>
-      <p ui:field='bracedParagraph' fnord='blah di blah {{foo: "bar"} di blah'
-        foo='{CONST_FOO}' bar='{CONST_BAR} {CONST_BAZ}'
-        enum='{ENUM_1.name} {ENUM_2.name}' ><ui:msg>This is a
+      <p ui:field='bracedParagraph' fnord='blah di blah \{foo: "bar"} di blah'
+        foo='{CONST_FOO}' bar='{CONST_BAR} {CONST_BAZ}' enum='{ENUM_1.name} {ENUM_2.name}'
+        doubleMustache="{{blah in blah}}" > <ui:msg>This is a
       demonstration and test bed of GWT's shiny UiBinder
       package. At the moment it works mainly as described in
       <a href="http://code.google.com/p/google-web-toolkit-incubator/wiki/DeclarativeUi"
@@ -700,11 +705,14 @@
   <demo:ExtendsValueChangeWidget ui:field='myValueChangeWidget_extends' />
 
   <img src="{values.aUrl}" ui:field='myImage'/>
-  
+
   <gwt:HTML ui:field='htmlWithComputedSafeHtml'><ui:safehtml from="{constants.getSafeHtml}" /></gwt:HTML>
   <gwt:HTML ui:field='htmlWithComputedText'><ui:text from="{constants.getText}" /></gwt:HTML>
   <gwt:Label ui:field='labelWithComputedText'><ui:text from="{constants.getText}"/></gwt:Label>
 
+     <element-with-tagname ui:field='myElementWithTagName'/>
+     <js-element-type ui:field='myJsElementType'/>
+     <demo:FooIsWidget ui:field='fooIsWidget' addStyleNames="{myStyle.menuBar}" visible="false" />
    </gwt:HTMLPanel>
   </gwt:Dock>
 </gwt:DockPanel>

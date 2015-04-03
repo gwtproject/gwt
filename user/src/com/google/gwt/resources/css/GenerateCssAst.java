@@ -17,7 +17,7 @@ package com.google.gwt.resources.css;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.shared.impl.StringCase;
+import com.google.gwt.resources.css.ast.CssCharset;
 import com.google.gwt.resources.css.ast.CssDef;
 import com.google.gwt.resources.css.ast.CssEval;
 import com.google.gwt.resources.css.ast.CssExternalSelectors;
@@ -85,6 +85,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Stack;
 import java.util.regex.Matcher;
@@ -250,7 +251,7 @@ public class GenerateCssAst {
       }
       String ruleName = atRule.substring(1, idx);
       String methodName = "parse" + (Character.toUpperCase(ruleName.charAt(0)))
-          + StringCase.toLower(ruleName.substring(1));
+          + ruleName.substring(1).toLowerCase(Locale.ROOT);
       try {
         Method parseMethod = getClass().getDeclaredMethod(methodName,
             String.class);
@@ -298,6 +299,15 @@ public class GenerateCssAst {
     }
 
     public void startDocument(InputSource source) throws CSSException {
+      // Unfortunately flute doesn't call parseCharset() method when it reaches a charset
+      // declaration. The only place to get the charset is in this method. Flute use ASCII by
+      // default to read the file except if it detects a valid charset definition.
+
+      if (source.getEncoding() != null && !"ASCII".equals(source.getEncoding())) {
+        // valid charset at-rule is defined in this file.
+        CssCharset charset = new CssCharset(source.getEncoding());
+        addNode(charset);
+      }
     }
 
     public void startFontFace() throws CSSException {

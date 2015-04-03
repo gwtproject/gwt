@@ -14,17 +14,20 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "kk" locale.
  */
 public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
+
+  @Override
+  public String[] ampms() {
+    return new String[] {
+        "түске дейін",
+        "түстен кейін"
+    };
+  }
 
   @Override
   public String dateFormatFull() {
@@ -38,28 +41,63 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "dd.MM.yyyy";
+    return "dd.MM.y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "dd.MM.yy";
+    return "dd/MM/yy";
   }
 
   @Override
   public String[] erasFull() {
     return new String[] {
-        "BCE",
-        "CE"
+        "б.з.д.",
+        "б.з."
     };
   }
 
   @Override
   public String[] erasShort() {
     return new String[] {
-        "BCE",
-        "CE"
+        "б.з.д.",
+        "б.з."
     };
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE, d MMMM";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "dd-MM";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d MMM y";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "MMMM y";
   }
 
   @Override
@@ -68,28 +106,25 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatYearMonthNum() {
+    return "MM-y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "dd-MM-y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, d MMM y";
+  }
+
+  @Override
   public String[] monthsFull() {
     return new String[] {
         "қаңтар",
         "ақпан",
-        "наурыз",
-        "сәуір",
-        "мамыр",
-        "маусым",
-        "шілде",
-        "тамыз",
-        "қыркүйек",
-        "қазан",
-        "қараша",
-        "желтоқсан"
-    };
-  }
-
-  @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "қаңтар",
-        "Ақпан",
         "наурыз",
         "сәуір",
         "мамыр",
@@ -142,8 +177,8 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersFull() {
     return new String[] {
-        "Q1",
-        "Q2",
+        "1-інші тоқсан",
+        "2-інші тоқсан",
         "3-інші тоқсан",
         "4-інші тоқсан"
     };
@@ -152,28 +187,15 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "Q1",
-        "Q2",
-        "3-інші тоқсан",
-        "4-інші тоқсан"
+        "1-тоқсан",
+        "2-тоқсан",
+        "3-тоқсан",
+        "4-тоқсан"
     };
   }
 
   @Override
   public String[] weekdaysFull() {
-    return new String[] {
-        "жексені",
-        "дуйсенбі",
-        "сейсенбі",
-        "сәренбі",
-        "бейсенбі",
-        "жұма",
-        "сенбі"
-    };
-  }
-
-  @Override
-  public String[] weekdaysFullStandalone() {
     return new String[] {
         "жексенбі",
         "дүйсенбі",
@@ -188,13 +210,13 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "Ж",
+        "Д",
+        "С",
+        "С",
+        "Б",
+        "Ж",
+        "С"
     };
   }
 
@@ -207,20 +229,7 @@ public class DateTimeFormatInfoImpl_kk extends DateTimeFormatInfoImpl {
         "ср.",
         "бс.",
         "жм.",
-        "сһ."
-    };
-  }
-
-  @Override
-  public String[] weekdaysShortStandalone() {
-    return new String[] {
-        "жс.",
-        "дс.",
-        "сс.",
-        "ср.",
-        "бс.",
-        "жм.",
-        "сн."
+        "сб."
     };
   }
 }

@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "ksf" locale.
@@ -240,7 +235,6 @@ public class LocalizedNamesImpl_ksf extends LocalizedNamesImpl {
         "SH",
         "VC",
         "SN",
-        "CS",
         "TA",
         "TJ",
         "TZ",
@@ -266,6 +260,7 @@ public class LocalizedNamesImpl_ksf extends LocalizedNamesImpl {
         "VA",
         "VN",
         "VE",
+        "XK",
         "YE",
         "ZM",
         "ZW",
@@ -342,7 +337,6 @@ public class LocalizedNamesImpl_ksf extends LocalizedNamesImpl {
     namesMap.put("CN", "cín");
     namesMap.put("CO", "kolɔmbí");
     namesMap.put("CR", "kɔstaríka");
-    namesMap.put("CS", "sɛrbí ri mɔntǝnɛgro");
     namesMap.put("CU", "kuba");
     namesMap.put("CV", "kapvɛr");
     namesMap.put("CY", "cíprɛ");
@@ -577,7 +571,6 @@ public class LocalizedNamesImpl_ksf extends LocalizedNamesImpl {
         "CN": "cín",
         "CO": "kolɔmbí",
         "CR": "kɔstaríka",
-        "CS": "sɛrbí ri mɔntǝnɛgro",
         "CU": "kuba",
         "CV": "kapvɛr",
         "CY": "cíprɛ",

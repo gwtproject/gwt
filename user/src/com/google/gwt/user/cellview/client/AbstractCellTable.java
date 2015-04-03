@@ -22,7 +22,6 @@ import com.google.gwt.cell.client.HasCell;
 import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.dom.builder.shared.HtmlTableSectionBuilder;
 import com.google.gwt.dom.builder.shared.TableSectionBuilder;
 import com.google.gwt.dom.client.BrowserEvents;
@@ -44,6 +43,7 @@ import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
@@ -58,6 +58,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -473,7 +474,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
        * generate the entire table. We do the same for all browsers to avoid any
        * future bugs, since setting innerHTML on a table section seems brittle.
        */
-      sectionTag = StringCase.toLower(sectionTag);
+      sectionTag = sectionTag.toLowerCase(Locale.ROOT);
       if ("tbody".equals(sectionTag)) {
         tmpElem.setInnerSafeHtml(template.tbody(rowHtml));
       } else if ("thead".equals(sectionTag)) {
@@ -740,7 +741,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
      */
     private void replaceTableSection(AbstractCellTable<?> table, TableSectionElement section,
         SafeHtml html) {
-      String sectionName = StringCase.toLower(section.getTagName());
+      String sectionName = section.getTagName().toLowerCase(Locale.ROOT);
       TableSectionElement newSection = convertToSectionElement(table, sectionName, html);
       TableElement tableElement = table.getElement().cast();
       tableElement.replaceChild(newSection, section);
@@ -1537,6 +1538,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
    * 
    * @param widget the empty table widget, or null to disable
    */
+  @UiChild(tagname = "emptyTableWidget", limit = 1)
   public void setEmptyTableWidget(Widget widget) {
     this.emptyTableWidget = widget;
   }
@@ -1623,6 +1625,7 @@ public abstract class AbstractCellTable<T> extends AbstractHasData<T> {
    * 
    * @param widget the loading indicator, or null to disable
    */
+  @UiChild(tagname = "loadingIndicator", limit = 1)
   public void setLoadingIndicator(Widget widget) {
     loadingIndicator = widget;
   }

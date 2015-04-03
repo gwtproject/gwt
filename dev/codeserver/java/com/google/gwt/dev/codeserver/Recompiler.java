@@ -17,162 +17,374 @@ package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.linker.impl.PropertiesUtil;
 import com.google.gwt.core.linker.CrossSiteIframeLinker;
 import com.google.gwt.core.linker.IFrameLinker;
 import com.google.gwt.dev.Compiler;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.CompilerOptions;
+import com.google.gwt.dev.MinimalRebuildCache;
+import com.google.gwt.dev.MinimalRebuildCacheManager;
+import com.google.gwt.dev.NullRebuildCache;
 import com.google.gwt.dev.cfg.BindingProperty;
+import com.google.gwt.dev.cfg.ConfigProps;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
-import com.google.gwt.dev.cfg.Property;
+import com.google.gwt.dev.cfg.PropertyPermutations;
+import com.google.gwt.dev.cfg.PropertyPermutations.PermutationDescription;
 import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.dev.cfg.ResourceLoaders;
-import com.google.gwt.dev.javac.UnitCacheSingleton;
+import com.google.gwt.dev.codeserver.Job.Result;
+import com.google.gwt.dev.codeserver.JobEvent.CompileStrategy;
+import com.google.gwt.dev.javac.UnitCache;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.resource.impl.ZipFileClassPathEntry;
 import com.google.gwt.dev.util.log.CompositeTreeLogger;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
+import com.google.gwt.thirdparty.guava.common.base.Charsets;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
-import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.base.Objects;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.io.Files;
+import com.google.gwt.thirdparty.guava.common.io.Resources;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Recompiles a GWT module on demand.
  */
-class Recompiler {
-  private final AppSpace appSpace;
-  private final String originalModuleName;
-  private final TreeLogger logger;
+public class Recompiler {
+
+  private final OutboxDir outboxDir;
+  private final LauncherDir launcherDir;
+  private final MinimalRebuildCacheManager minimalRebuildCacheManager;
+  private final String inputModuleName;
+
   private String serverPrefix;
   private int compilesDone = 0;
 
   // after renaming
-  private AtomicReference<String> moduleName = new AtomicReference<String>(null);
+  private AtomicReference<String> outputModuleName = new AtomicReference<String>(null);
 
   private final AtomicReference<CompileDir> lastBuild = new AtomicReference<CompileDir>();
+
+  private InputSummary previousInputSummary;
+
+  private CompileDir publishedCompileDir;
   private final AtomicReference<ResourceLoader> resourceLoader =
       new AtomicReference<ResourceLoader>();
   private final CompilerContext.Builder compilerContextBuilder = new CompilerContext.Builder();
   private CompilerContext compilerContext;
-  private Options options;
+  private final Options options;
+  private final UnitCache unitCache;
 
-  Recompiler(AppSpace appSpace, String moduleName, Options options, TreeLogger logger) {
-    this.appSpace = appSpace;
-    this.originalModuleName = moduleName;
+  Recompiler(OutboxDir outboxDir, LauncherDir launcherDir,
+      String inputModuleName, Options options,
+      UnitCache unitCache, MinimalRebuildCacheManager minimalRebuildCacheManager) {
+    this.outboxDir = outboxDir;
+    this.launcherDir = launcherDir;
+    this.inputModuleName = inputModuleName;
     this.options = options;
-    this.logger = logger;
+    this.unitCache = unitCache;
+    this.minimalRebuildCacheManager = minimalRebuildCacheManager;
     this.serverPrefix = options.getPreferredHost() + ":" + options.getPort();
     compilerContext = compilerContextBuilder.build();
   }
 
-  synchronized CompileDir compile(Map<String, String> bindingProperties)
-      throws UnableToCompleteException {
+  /**
+   * Compiles the first time, while Super Dev Mode is starting up.
+   * Either this method or {@link #initWithoutPrecompile} should be called first.
+   */
+  synchronized Job.Result precompile(Job job) throws UnableToCompleteException {
+    Result result = compile(job);
+    job.onFinished(result);
+    assert result.isOk();
+    return result;
+  }
+
+  /**
+   * Recompiles the module.
+   *
+   * <p>Prerequisite: either {@link #precompile} or {@link #initWithoutPrecompile} should have been
+   * called first.
+   *
+   * <p>Sets the job's result and returns normally whether the compile succeeds or not.
+   *
+   * @param job should already be in the "in progress" state.
+   */
+  synchronized Job.Result recompile(Job job) {
+
+    Job.Result result;
+    try {
+      result = compile(job);
+    } catch (UnableToCompleteException e) {
+      // No point in logging a stack trace for this exception
+      job.getLogger().log(TreeLogger.Type.WARN, "recompile failed");
+      result = new Result(null, null, e);
+    } catch (Throwable error) {
+      job.getLogger().log(TreeLogger.Type.WARN, "recompile failed", error);
+      result = new Result(null, null, error);
+    }
+
+    job.onFinished(result);
+    return result;
+  }
+
+  /**
+   * Calls the GWT compiler with the appropriate settings.
+   * Side-effect: a MinimalRebuildCache for the current binding properties will be found or created.
+   *
+   * @param job used for reporting progress. (Its result will not be set.)
+   * @return a non-error Job.Result if successful.
+   * @throws UnableToCompleteException for compile failures.
+   */
+  private Job.Result compile(Job job) throws UnableToCompleteException {
+
+    assert job.wasSubmitted();
+
     if (compilesDone == 0) {
       System.setProperty("java.awt.headless", "true");
       if (System.getProperty("gwt.speedtracerlog") == null) {
         System.setProperty("gwt.speedtracerlog",
-            appSpace.getSpeedTracerLogFile().getAbsolutePath());
+            outboxDir.getSpeedTracerLogFile().getAbsolutePath());
       }
-      compilerContext = compilerContextBuilder.unitCache(
-          UnitCacheSingleton.get(logger, appSpace.getUnitCacheDir())).build();
+      compilerContext = compilerContextBuilder.unitCache(unitCache).build();
     }
 
     long startTime = System.currentTimeMillis();
     int compileId = ++compilesDone;
-    CompileDir compileDir = makeCompileDir(compileId);
-    TreeLogger compileLogger = makeCompileLogger(compileDir);
-
-    boolean listenerFailed = false;
+    CompileDir compileDir = outboxDir.makeCompileDir(job.getLogger());
+    TreeLogger compileLogger = makeCompileLogger(compileDir, job.getLogger());
     try {
-      options.getRecompileListener().startedCompile(originalModuleName, compileId, compileDir);
-    } catch (Exception e) {
-      compileLogger.log(TreeLogger.Type.WARN, "listener threw exception", e);
-      listenerFailed = true;
-    }
-
-    boolean success = false;
-    try {
-      CompilerOptions compilerOptions = new CompilerOptionsImpl(
-          compileDir, options.getModuleNames(), options.getSourceLevel(),
-          options.enforceStrictResources(), options.getLogLevel());
-      compilerContext = compilerContextBuilder.options(compilerOptions).build();
-      ModuleDef module = loadModule(compileLogger, bindingProperties);
-
-      // Propagates module rename.
-      String newModuleName = module.getName();
-      moduleName.set(newModuleName);
-      compilerOptions = new CompilerOptionsImpl(
-          compileDir, Lists.newArrayList(newModuleName), options.getSourceLevel(),
-          options.enforceStrictResources(), options.getLogLevel());
-      compilerContext = compilerContextBuilder.options(compilerOptions).build();
-
-      success = new Compiler(compilerOptions).run(compileLogger, module);
-      lastBuild.set(compileDir); // makes compile log available over HTTP
-    } finally {
-      try {
-        options.getRecompileListener().finishedCompile(originalModuleName, compileId, success);
-      } catch (Exception e) {
-        compileLogger.log(TreeLogger.Type.WARN, "listener threw exception", e);
-        listenerFailed = true;
+      job.onStarted(compileId, compileDir);
+      boolean success = doCompile(compileLogger, compileDir, job);
+      if (!success) {
+        compileLogger.log(TreeLogger.Type.ERROR, "Compiler returned false");
+        throw new UnableToCompleteException();
       }
-    }
-
-    if (!success) {
-      compileLogger.log(TreeLogger.Type.ERROR, "Compiler returned " + success);
-      throw new UnableToCompleteException();
+    } finally {
+      // Make the error log available no matter what happens
+      lastBuild.set(compileDir);
     }
 
     long elapsedTime = System.currentTimeMillis() - startTime;
-    compileLogger.log(TreeLogger.Type.INFO, "Compile completed in " + elapsedTime + " ms");
+    compileLogger.log(TreeLogger.Type.INFO,
+        String.format("%.3fs total -- Compile completed", elapsedTime / 1000d));
 
-    if (options.isCompileTest() && listenerFailed) {
-      throw new UnableToCompleteException();
-    }
-
-    return compileDir;
+    return new Result(publishedCompileDir, outputModuleName.get(), null);
   }
 
-  synchronized CompileDir noCompile() throws UnableToCompleteException {
+  /**
+   * Creates a dummy output directory without compiling the module.
+   * Either this method or {@link #precompile} should be called first.
+   */
+  synchronized Job.Result initWithoutPrecompile(TreeLogger logger)
+      throws UnableToCompleteException {
+
     long startTime = System.currentTimeMillis();
-    CompileDir compileDir = makeCompileDir(++compilesDone);
-    TreeLogger compileLogger = makeCompileLogger(compileDir);
-
-    ModuleDef module = loadModule(compileLogger, new HashMap<String, String>());
-    String newModuleName = module.getName();  // includes any rename.
-    moduleName.set(newModuleName);
-
-    lastBuild.set(compileDir);
-
+    CompileDir compileDir = outboxDir.makeCompileDir(logger);
+    TreeLogger compileLogger = makeCompileLogger(compileDir, logger);
+    ModuleDef module;
     try {
-      // Prepare directory.
-      File outputDir = new File(
-          compileDir.getWarDir().getCanonicalPath() + "/" + getModuleName());
-      if (!outputDir.exists()) {
-        if (!outputDir.mkdir()) {
-          compileLogger.log(TreeLogger.Type.WARN, "cannot create directory: " + outputDir);
-        }
+      module = loadModule(compileLogger);
+
+      logger.log(TreeLogger.INFO, "Loading Java files in " + inputModuleName + ".");
+      CompilerOptions loadOptions = new CompilerOptionsImpl(compileDir, inputModuleName, options);
+      compilerContext = compilerContextBuilder.options(loadOptions).unitCache(unitCache).build();
+
+      // Loads and parses all the Java files in the GWT application using the JDT.
+      // (This is warmup to make compiling faster later; we stop at this point to avoid
+      // needing to know the binding properties.)
+      module.getCompilationState(compileLogger, compilerContext);
+
+      setUpCompileDir(compileDir, module, compileLogger);
+      if (launcherDir != null) {
+        launcherDir.update(module, compileDir, compileLogger);
       }
 
-      // Creates a "module_name.nocache.js" that just forces a recompile.
-      String moduleScript = PageUtil.loadResource(Recompiler.class, "nomodule.nocache.js");
-      moduleScript = moduleScript.replace("__MODULE_NAME__", getModuleName());
-      PageUtil.writeFile(outputDir.getCanonicalPath() + "/" + getModuleName() + ".nocache.js",
-          moduleScript);
-
-    } catch (IOException e) {
-      compileLogger.log(TreeLogger.Type.ERROR, "Error creating uncompiled module.", e);
+      outputModuleName.set(module.getName());
+    } finally {
+      // Make the compile log available no matter what happens.
+      lastBuild.set(compileDir);
     }
+
     long elapsedTime = System.currentTimeMillis() - startTime;
     compileLogger.log(TreeLogger.Type.INFO, "Module setup completed in " + elapsedTime + " ms");
-    return compileDir;
+
+    return new Result(compileDir, module.getName(), null);
+  }
+
+  /**
+   * Prepares a stub compile directory.
+   * It will include all "public" resources and a nocache.js file that invokes the compiler.
+   */
+  private void setUpCompileDir(CompileDir compileDir, ModuleDef module,
+      TreeLogger compileLogger) throws UnableToCompleteException {
+    try {
+      String currentModuleName = module.getName();
+
+      // Create the directory.
+      File outputDir = new File(
+          compileDir.getWarDir().getCanonicalPath() + "/" + currentModuleName);
+      if (!outputDir.exists()) {
+        if (!outputDir.mkdir()) {
+          compileLogger.log(Type.WARN, "cannot create directory: " + outputDir);
+        }
+      }
+      LauncherDir.writePublicResources(outputDir, module, compileLogger);
+
+      // write no cache that will inject recompile.nocache.js
+      String stub = LauncherDir.generateStubNocacheJs(module.getName(), options);
+      File noCacheJs = new File(outputDir.getCanonicalPath(), module.getName() + ".nocache.js");
+      Files.write(stub, noCacheJs, Charsets.UTF_8);
+
+      // Create a "module_name.recompile.nocache.js" that calculates the permutation
+      // and forces a recompile.
+      String recompileNoCache = generateModuleRecompileJs(module, compileLogger);
+      writeRecompileNoCacheJs(outputDir, currentModuleName, recompileNoCache, compileLogger);
+    } catch (IOException e) {
+      compileLogger.log(Type.ERROR, "Error creating stub compile directory.", e);
+      UnableToCompleteException wrapped = new UnableToCompleteException();
+      wrapped.initCause(e);
+      throw wrapped;
+    }
+  }
+
+  /**
+   * Generates the nocache.js file to use when precompile is not on.
+   */
+  private static String generateModuleRecompileJs(ModuleDef module, TreeLogger compileLogger)
+      throws UnableToCompleteException {
+
+    String outputModuleName = module.getName();
+    try {
+      String templateJs = Resources.toString(
+          Resources.getResource(Recompiler.class, "recompile_template.js"), Charsets.UTF_8);
+      String propertyProviders = PropertiesUtil.generatePropertiesSnippet(module, compileLogger);
+      String libJs = Resources.toString(
+          Resources.getResource(Recompiler.class, "recompile_lib.js"), Charsets.UTF_8);
+      String recompileJs = Resources.toString(
+          Resources.getResource(Recompiler.class, "recompile_main.js"), Charsets.UTF_8);
+      templateJs = templateJs.replace("__MODULE_NAME__", "'" + outputModuleName + "'");
+      templateJs = templateJs.replace("__PROPERTY_PROVIDERS__", propertyProviders);
+      templateJs = templateJs.replace("__LIB_JS__", libJs);
+      templateJs = templateJs.replace("__MAIN__", recompileJs);
+
+      return templateJs;
+
+    } catch (IOException e) {
+      compileLogger.log(Type.ERROR, "Can not generate + " + outputModuleName + " recompile js", e);
+      throw new UnableToCompleteException();
+    }
+  }
+
+  synchronized String getRecompileJs(TreeLogger logger) throws UnableToCompleteException {
+    ModuleDef loadModule = loadModule(logger);
+    return generateModuleRecompileJs(loadModule, logger);
+  }
+
+  private boolean doCompile(TreeLogger compileLogger, CompileDir compileDir, Job job)
+      throws UnableToCompleteException {
+
+    job.onProgress("Loading modules");
+
+    CompilerOptions loadOptions = new CompilerOptionsImpl(compileDir, inputModuleName, options);
+    compilerContext = compilerContextBuilder.options(loadOptions).build();
+
+    ModuleDef module = loadModule(compileLogger);
+    if (!Compiler.maybeRestrictProperties(compileLogger, module,
+        loadOptions.getProperties())) {
+      return false;
+    }
+
+    // We need to generate the stub before restricting permutations
+    String recompileJs = generateModuleRecompileJs(module, compileLogger);
+
+    Map<String, String> bindingProperties =
+        restrictPermutations(compileLogger, module, job.getBindingProperties());
+
+    // Propagates module rename.
+    String newModuleName = module.getName();
+    outputModuleName.set(newModuleName);
+
+    // Check if the module definition + job specific binding property restrictions expanded to more
+    // than permutation.
+    PropertyPermutations propertyPermutations =
+        new PropertyPermutations(module.getProperties(), module.getActiveLinkerNames());
+    List<PropertyPermutations> permutationPropertySets = propertyPermutations.collapseProperties();
+    if (options.isIncrementalCompileEnabled() && permutationPropertySets.size() > 1) {
+      compileLogger.log(Type.INFO,
+          "Current binding properties are expanding to more than one permutation "
+          + "but incremental compilation requires that each compile operate on only "
+          + "one permutation.");
+      job.setCompileStrategy(CompileStrategy.SKIPPED);
+      return true;
+    }
+    PropertyPermutations permutationPropertySet = permutationPropertySets.get(0);
+    PermutationDescription permutationDescription =
+        permutationPropertySet.getPermutationDescription(0);
+
+    // Check if we can skip the compile altogether.
+    InputSummary inputSummary = new InputSummary(bindingProperties, module);
+    if (inputSummary.equals(previousInputSummary)) {
+      compileLogger.log(Type.INFO, "skipped compile because no input files have changed");
+      job.setCompileStrategy(CompileStrategy.SKIPPED);
+      return true;
+    }
+    // Force a recompile if we don't succeed.
+    previousInputSummary = null;
+
+    job.onProgress("Compiling");
+
+    CompilerOptions runOptions = new CompilerOptionsImpl(compileDir, newModuleName, options);
+    compilerContext = compilerContextBuilder.options(runOptions).build();
+
+    MinimalRebuildCache minimalRebuildCache = new NullRebuildCache();
+    if (options.isIncrementalCompileEnabled()) {
+      // Returns a copy of the intended cache, which is safe to modify in this compile.
+      minimalRebuildCache =
+          minimalRebuildCacheManager.getCache(inputModuleName, permutationDescription);
+    }
+    job.setCompileStrategy(minimalRebuildCache.isPopulated() ? CompileStrategy.INCREMENTAL
+        : CompileStrategy.FULL);
+
+    boolean success = new Compiler(runOptions, minimalRebuildCache).run(compileLogger, module);
+    if (success) {
+      publishedCompileDir = compileDir;
+      previousInputSummary = inputSummary;
+      if (options.isIncrementalCompileEnabled()) {
+        minimalRebuildCacheManager.putCache(inputModuleName, permutationDescription,
+            minimalRebuildCache);
+      }
+      String moduleName = outputModuleName.get();
+      writeRecompileNoCacheJs(new File(publishedCompileDir.getWarDir(), moduleName), moduleName,
+          recompileJs, compileLogger);
+      if (launcherDir != null) {
+        launcherDir.update(module, compileDir, compileLogger);
+      }
+    }
+
+    return success;
+  }
+
+  private static void writeRecompileNoCacheJs(File outputDir, String moduleName, String content,
+      TreeLogger compileLogger) throws UnableToCompleteException {
+    try {
+      Files.write(content,
+          new File(outputDir.getCanonicalPath() + "/" + moduleName + ".recompile.nocache.js"),
+          Charsets.UTF_8);
+    } catch (IOException e) {
+      compileLogger.log(Type.ERROR, "Can not write recompile.nocache.js", e);
+      throw new UnableToCompleteException();
+    }
   }
 
   /**
@@ -182,42 +394,62 @@ class Recompiler {
     return lastBuild.get().getLogFile();
   }
 
-  String getModuleName() {
-    return moduleName.get();
+  /**
+   * The module name that the recompiler passes as input to the GWT compiler (before renaming).
+   */
+  public String getInputModuleName() {
+    return inputModuleName;
+  }
+
+  /**
+   * The module name that the GWT compiler uses in compiled output (after renaming).
+   */
+  String getOutputModuleName() {
+    return outputModuleName.get();
   }
 
   ResourceLoader getResourceLoader() {
     return resourceLoader.get();
   }
 
-  private TreeLogger makeCompileLogger(CompileDir compileDir)
+  private TreeLogger makeCompileLogger(CompileDir compileDir, TreeLogger parent)
       throws UnableToCompleteException {
     try {
       PrintWriterTreeLogger fileLogger =
           new PrintWriterTreeLogger(compileDir.getLogFile());
-      fileLogger.setMaxDetail(TreeLogger.Type.INFO);
-      return new CompositeTreeLogger(logger, fileLogger);
+      fileLogger.setMaxDetail(options.getLogLevel());
+      return new CompositeTreeLogger(parent, fileLogger);
     } catch (IOException e) {
-      logger.log(TreeLogger.ERROR, "unable to open log file: " + compileDir.getLogFile(), e);
+      parent.log(TreeLogger.ERROR, "unable to open log file: " + compileDir.getLogFile(), e);
       throw new UnableToCompleteException();
     }
   }
 
-  private ModuleDef loadModule(TreeLogger logger, Map<String, String> bindingProperties)
-      throws UnableToCompleteException {
+  /**
+   * Loads the module and configures it for SuperDevMode. (Does not restrict permutations.)
+   */
+  private ModuleDef loadModule(TreeLogger logger) throws UnableToCompleteException {
 
     // make sure we get the latest version of any modified jar
     ZipFileClassPathEntry.clearCache();
     ResourceOracleImpl.clearCache();
-    ModuleDefLoader.clearModuleCache();
 
     ResourceLoader resources = ResourceLoaders.forClassLoader(Thread.currentThread());
     resources = ResourceLoaders.forPathAndFallback(options.getSourcePath(), resources);
     this.resourceLoader.set(resources);
 
+    // ModuleDefLoader.loadFromResources() checks for modified .gwt.xml files.
     ModuleDef moduleDef = ModuleDefLoader.loadFromResources(
-        logger, compilerContext, originalModuleName, resources, true);
+        logger, compilerContext, inputModuleName, resources, true);
     compilerContext = compilerContextBuilder.module(moduleDef).build();
+
+    // Undo all permutation restriction customizations from previous compiles.
+    for (BindingProperty bindingProperty : moduleDef.getProperties().getBindingProperties()) {
+      bindingProperty.resetGeneratedValues();
+    }
+
+    // A snapshot of the module's configuration before we modified it.
+    ConfigProps config = new ConfigProps(moduleDef);
 
     // We need a cross-site linker. Automatically replace the default linker.
     if (IFrameLinker.class.isAssignableFrom(moduleDef.getActivePrimaryLinker())) {
@@ -232,8 +464,13 @@ class Recompiler {
       throw new UnableToCompleteException();
     }
 
+    // Deactivate precompress linker.
+    if (moduleDef.deactivateLinker("precompress")) {
+      logger.log(TreeLogger.WARN, "Deactivated PrecompressLinker");
+    }
+
     // Print a nice error if the superdevmode hook isn't present
-    if (moduleDef.getProperties().find("devModeRedirectEnabled") == null) {
+    if (config.getStrings("devModeRedirectEnabled").isEmpty()) {
       throw new RuntimeException("devModeRedirectEnabled isn't set for module: " +
           moduleDef.getName());
     }
@@ -244,7 +481,7 @@ class Recompiler {
 
     // Turn off "installCode" if it's on because it makes debugging harder.
     // (If it's already off, don't change anything.)
-    if (getBooleanConfig(moduleDef, "installCode", true)) {
+    if (config.getBoolean("installCode", true)) {
       overrideConfig(moduleDef, "installCode", "false");
       // Make sure installScriptJs is set to the default for compiling without installCode.
       overrideConfig(moduleDef, "installScriptJs",
@@ -257,7 +494,7 @@ class Recompiler {
     // Fix bug with SDM and Chrome 24+ where //@ sourceURL directives cause X-SourceMap header to be ignored
     // Frustratingly, Chrome won't canonicalize a relative URL
     overrideConfig(moduleDef, "includeSourceMapUrl", "http://" + serverPrefix +
-        WebServer.sourceMapLocationForModule(moduleDef.getName()));
+        SourceHandler.sourceMapLocationTemplate(moduleDef.getName()));
 
     // If present, set some config properties back to defaults.
     // (Needed for Google's server-side linker.)
@@ -267,34 +504,62 @@ class Recompiler {
     maybeOverrideConfig(moduleDef, "propertiesJs",
         "com/google/gwt/core/ext/linker/impl/properties.js");
 
-    for (Map.Entry<String, String> entry : bindingProperties.entrySet()) {
-      String propName = entry.getKey();
-      String propValue = entry.getValue();
-      maybeSetBinding(logger, moduleDef, propName, propValue);
+    if (options.isIncrementalCompileEnabled()) {
+      // CSSResourceGenerator needs to produce stable, unique naming for its input.
+      // Currently on default settings CssResourceGenerator's obfuscation depends on
+      // whole world knowledge and thus will produce collision in obfuscated mode, since in
+      // incremental compiles that information is not available.
+      //
+      // TODO(dankurka): Once we do proper stable hashing of classes in CssResourceGenerator, we
+      // can probably replace / remove this.
+      maybeOverrideConfig(moduleDef, "CssResource.style", "stable");
     }
 
     overrideBinding(moduleDef, "compiler.useSourceMaps", "true");
+    overrideBinding(moduleDef, "compiler.useSymbolMaps", "false");
     overrideBinding(moduleDef, "superdevmode", "on");
+
     return moduleDef;
+  }
+
+  /**
+   * Restricts the compiled permutations by applying the given binding properties, if possible.
+   * In some cases, a different binding may be chosen instead.
+   */
+  private Map<String, String> restrictPermutations(TreeLogger logger, ModuleDef moduleDef,
+      Map<String, String> bindingProperties) {
+
+    Map<String, String> chosenProps = Maps.newHashMap();
+
+    for (Map.Entry<String, String> entry : bindingProperties.entrySet()) {
+      String propName = entry.getKey();
+      String propValue = entry.getValue();
+      String actual = maybeSetBinding(logger, moduleDef, propName, propValue);
+      if (actual != null) {
+        chosenProps.put(propName, actual);
+      }
+    }
+
+    return chosenProps;
   }
 
   /**
    * Attempts to set a binding property to the given value.
    * If the value is not allowed, see if we can find a value that will work.
    * There is a special case for "locale".
+   * @return the value actually set, or null if unable to set the property
    */
-  private static void maybeSetBinding(TreeLogger logger, ModuleDef module, String propName,
+  private static String maybeSetBinding(TreeLogger logger, ModuleDef module, String propName,
       String newValue) {
 
     logger = logger.branch(TreeLogger.Type.INFO, "binding: " + propName + "=" + newValue);
 
-    Property prop = module.getProperties().find(propName);
-    if (!(prop instanceof BindingProperty)) {
+    BindingProperty binding = module.getProperties().findBindingProp(propName);
+    if (binding == null) {
       logger.log(TreeLogger.Type.WARN, "undefined property: '" + propName + "'");
-      return;
+      return null;
     }
 
-    BindingProperty binding = (BindingProperty) prop;
     if (!binding.isAllowedValue(newValue)) {
 
       String[] allowedValues = binding.getAllowedValues(binding.getRootCondition());
@@ -315,13 +580,14 @@ class Recompiler {
         // There is more than one. Continue and possibly compile multiple permutations.
         logger.log(TreeLogger.Type.INFO, "continuing without " + propName +
             ". Sourcemaps may not work.");
-        return;
+        return null;
       }
 
       logger.log(TreeLogger.Type.INFO, "recovered with " + propName + "=" + newValue);
     }
 
-    binding.setAllowedValues(binding.getRootCondition(), newValue);
+    binding.setRootGeneratedValues(newValue);
+    return newValue;
   }
 
   private static String chooseDefault(BindingProperty property, String... candidates) {
@@ -330,44 +596,26 @@ class Recompiler {
         return candidate;
       }
     }
-    return property.getFirstLegalValue();
+    return property.getFirstAllowedValue();
   }
 
   /**
    * Sets a binding even if it's set to a different value in the GWT application.
    */
   private static void overrideBinding(ModuleDef module, String propName, String newValue) {
-    Property prop = module.getProperties().find(propName);
-    if (prop instanceof BindingProperty) {
-      BindingProperty binding = (BindingProperty) prop;
-      binding.setAllowedValues(binding.getRootCondition(), newValue);
+    BindingProperty binding = module.getProperties().findBindingProp(propName);
+    if (binding != null) {
+      // This sets both allowed and generated values, which is needed since the module
+      // might have explicitly disallowed the value.
+      // It persists over multiple compiles but that's okay since we set it the same way
+      // every time.
+      binding.setValues(binding.getRootCondition(), newValue);
     }
-  }
-
-  /**
-   * Returns a boolean configuration property. If not defined, returns the default.
-   */
-  private static boolean getBooleanConfig(ModuleDef module, String propName,
-      boolean defaultValue) {
-    Property prop = module.getProperties().find(propName);
-    if (prop instanceof ConfigurationProperty) {
-      ConfigurationProperty config = (ConfigurationProperty) prop;
-      String value = config.getValue();
-      if (value != null) {
-        if (value.equalsIgnoreCase("true")) {
-          return true;
-        } else if (value.equalsIgnoreCase("false")) {
-          return false;
-        }
-      }
-    }
-    return defaultValue;
   }
 
   private static boolean maybeOverrideConfig(ModuleDef module, String propName, String newValue) {
-    Property prop = module.getProperties().find(propName);
-    if (prop instanceof ConfigurationProperty) {
-      ConfigurationProperty config = (ConfigurationProperty) prop;
+    ConfigurationProperty config = module.getProperties().findConfigProp(propName);
+    if (config != null) {
       config.setValue(newValue);
       return true;
     }
@@ -380,8 +628,39 @@ class Recompiler {
     }
   }
 
-  private CompileDir makeCompileDir(int compileId)
-      throws UnableToCompleteException {
-    return CompileDir.create(appSpace.getCompileDir(compileId), logger);
+  /**
+   * Summarizes the inputs to a GWT compile. (Immutable.)
+   * Two summaries should be equal if the compiler's inputs are equal (with high probability).
+   */
+  private static class InputSummary {
+    private final ImmutableMap<String, String> bindingProperties;
+    private final long moduleLastModified;
+    private final long resourcesLastModified;
+    private final long filenameHash;
+
+    InputSummary(Map<String, String> bindingProperties, ModuleDef module) {
+      this.bindingProperties = ImmutableMap.copyOf(bindingProperties);
+      this.moduleLastModified = module.lastModified();
+      this.resourcesLastModified = module.getResourceLastModified();
+      this.filenameHash = module.getInputFilenameHash();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (obj instanceof InputSummary) {
+        InputSummary other = (InputSummary) obj;
+        return bindingProperties.equals(other.bindingProperties) &&
+            moduleLastModified == other.moduleLastModified &&
+            resourcesLastModified == other.resourcesLastModified &&
+            filenameHash == other.filenameHash;
+      }
+      return false;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(bindingProperties, moduleLastModified, resourcesLastModified,
+          filenameHash);
+    }
   }
 }

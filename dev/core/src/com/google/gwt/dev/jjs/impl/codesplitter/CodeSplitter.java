@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,7 +17,6 @@ package com.google.gwt.dev.jjs.impl.codesplitter;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.jjs.ast.JClassType;
-import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
@@ -156,31 +155,9 @@ public class CodeSplitter {
     ControlFlowAnalyzer cfa = new ControlFlowAnalyzer(jprogram);
     cfa.setDependencyRecorder(dependencyRecorder);
     cfa.traverseEntryMethods();
-    computeLivenessFromArrayType(jprogram, cfa);
     computeLivenessFromCodeGenTypes(jprogram, cfa);
     dependencyRecorder.endDependencyGraph();
     return cfa;
-  }
-
-  /**
-   * Any instance method in the magic Array class must be in the initial
-   * download. The methods of that class are copied to a separate object the
-   * first time class Array is touched, and any methods added later won't be
-   * part of the copy.
-   */
-  private static void computeLivenessFromArrayType(JProgram jprogram, ControlFlowAnalyzer cfa) {
-    JDeclaredType arrayType = jprogram.getFromTypeMap("com.google.gwt.lang.Array");
-    if (arrayType == null) {
-      // It was pruned; nothing to do
-      return;
-    }
-
-    cfa.traverseFromInstantiationOf(arrayType);
-    for (JMethod method : arrayType.getMethods()) {
-      if (method.needsVtable()) {
-        cfa.traverseFrom(method);
-      }
-    }
   }
 
   /**
@@ -515,9 +492,9 @@ public class CodeSplitter {
     // now install the new statements in the program fragments
     jsprogram.setFragmentCount(fragments.size());
     for (int i = 0; i < fragments.size(); i++) {
-      JsBlock fragBlock = jsprogram.getFragmentBlock(i);
-      fragBlock.getStatements().clear();
-      fragBlock.getStatements().addAll(fragments.get(i).getStatements());
+      JsBlock fragmentBlock = jsprogram.getFragmentBlock(i);
+      fragmentBlock.getStatements().clear();
+      fragmentBlock.getStatements().addAll(fragments.get(i).getStatements());
     }
 
     // Pass the fragment partitioning information to JProgram.

@@ -152,7 +152,8 @@ public class GwtIncompatiblePreprocessor {
     tyDecl.methods = new AbstractMethodDeclaration[0];
     tyDecl.memberTypes = new TypeDeclaration[0];
     tyDecl.fields = new FieldDeclaration[0];
-    if (TypeDeclaration.kind(tyDecl.modifiers) != TypeDeclaration.INTERFACE_DECL) {
+    if (TypeDeclaration.kind(tyDecl.modifiers) != TypeDeclaration.INTERFACE_DECL &&
+        TypeDeclaration.kind(tyDecl.modifiers) != TypeDeclaration.ENUM_DECL) {
       // Create a default constructor so that the class is proper.
       ConstructorDeclaration constructor = tyDecl.createDefaultConstructor(true, true);
       // Mark only constructor as private so that it can not be instantiated.
@@ -162,6 +163,7 @@ public class GwtIncompatiblePreprocessor {
       constructor.bits &= ~ASTNode.IsDefaultConstructor;
       // Mark the class as final so that it can not be extended.
       tyDecl.modifiers |= ClassFileConstants.AccFinal;
+      tyDecl.modifiers &= ~ClassFileConstants.AccAbstract;
     }
   }
 

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -114,39 +114,6 @@ public class Sets {
         HashSet<T> result = new HashSet<T>();
         result.addAll(set);
         return result;
-    }
-  }
-
-  public static <T> Set<T> normalizeUnmodifiable(Set<T> set) {
-    if (set.size() < 2) {
-      return normalize(set);
-    } else {
-      // TODO: implement an UnmodifiableHashSet?
-      return Collections.unmodifiableSet(normalize(set));
-    }
-  }
-
-  public static <T> Set<T> remove(Set<T> set, T toRemove) {
-    switch (set.size()) {
-      case 0:
-        // Empty
-        return set;
-      case 1:
-        // Singleton -> Empty
-        if (set.contains(toRemove)) {
-          return create();
-        }
-        return set;
-      case 2:
-        // HashSet -> Singleton
-        if (set.remove(toRemove)) {
-          return create(set.iterator().next());
-        }
-        return set;
-      default:
-        // HashSet
-        set.remove(toRemove);
-        return set;
     }
   }
 }

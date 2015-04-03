@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5884 $
-//  date=$Date: 2011-05-10 16:58:32 -0400 (Tue, 10 May 2011) $
-//  type=es
 
 /**
  * Implementation of DateTimeFormatInfo for the "es_CO" locale.
@@ -28,7 +23,7 @@ public class DateTimeFormatInfoImpl_es_CO extends DateTimeFormatInfoImpl_es_419 
 
   @Override
   public String dateFormatMedium() {
-    return "d/MM/yyyy";
+    return "d/MM/y";
   }
 
   @Override
@@ -42,27 +37,22 @@ public class DateTimeFormatInfoImpl_es_CO extends DateTimeFormatInfoImpl_es_419 
   }
 
   @Override
-  public String formatHour24Minute() {
-    return "H:mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "H:mm:ss";
+  public String timeFormatFull() {
+    return "h:mm:ss a (zzzz)";
   }
 
   @Override
   public String timeFormatLong() {
-    return "H:mm:ss z";
+    return "h:mm:ss a z";
   }
 
   @Override
   public String timeFormatMedium() {
-    return "H:mm:ss";
+    return "h:mm:ss a";
   }
 
   @Override
   public String timeFormatShort() {
-    return "H:mm";
+    return "h:mm a";
   }
 }

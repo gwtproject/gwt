@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5798 $
-//  type=root
-//  date=$Date: 2011-05-02 02:05:34 -0400 (Mon, 02 May 2011) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "shi_Latn" locale.
@@ -27,8 +22,132 @@ package com.google.gwt.i18n.shared.impl.cldr;
 public class DateTimeFormatInfoImpl_shi_Latn extends DateTimeFormatInfoImpl_shi {
 
   @Override
+  public String[] ampms() {
+    return new String[] {
+        "tifawt",
+        "tadggʷat"
+    };
+  }
+
+  @Override
+  public String[] erasFull() {
+    return new String[] {
+        "dat n ɛisa",
+        "dffir n ɛisa"
+    };
+  }
+
+  @Override
+  public String[] erasShort() {
+    return new String[] {
+        "daɛ",
+        "dfɛ"
+    };
+  }
+
+  @Override
   public int firstDayOfTheWeek() {
     return 6;
+  }
+
+  @Override
+  public String[] monthsFull() {
+    return new String[] {
+        "innayr",
+        "bṛayṛ",
+        "maṛṣ",
+        "ibrir",
+        "mayyu",
+        "yunyu",
+        "yulyuz",
+        "ɣuct",
+        "cutanbir",
+        "ktubr",
+        "nuwanbir",
+        "dujanbir"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrow() {
+    return new String[] {
+        "i",
+        "b",
+        "m",
+        "i",
+        "m",
+        "y",
+        "y",
+        "ɣ",
+        "c",
+        "k",
+        "n",
+        "d"
+    };
+  }
+
+  @Override
+  public String[] monthsShort() {
+    return new String[] {
+        "inn",
+        "bṛa",
+        "maṛ",
+        "ibr",
+        "may",
+        "yun",
+        "yul",
+        "ɣuc",
+        "cut",
+        "ktu",
+        "nuw",
+        "duj"
+    };
+  }
+
+  @Override
+  public String[] quartersFull() {
+    return new String[] {
+        "akṛaḍyur 1",
+        "akṛaḍyur 2",
+        "akṛaḍyur 3",
+        "akṛaḍyur 4"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "ak 1",
+        "ak 2",
+        "ak 3",
+        "ak 4"
+    };
+  }
+
+  @Override
+  public String[] weekdaysFull() {
+    return new String[] {
+        "asamas",
+        "aynas",
+        "asinas",
+        "akṛas",
+        "akwas",
+        "asimwas",
+        "asiḍyas"
+    };
+  }
+
+  @Override
+  public String[] weekdaysShort() {
+    return new String[] {
+        "asa",
+        "ayn",
+        "asi",
+        "akṛ",
+        "akw",
+        "asim",
+        "asiḍ"
+    };
   }
 
   @Override

@@ -15,6 +15,9 @@
  */
 package java.util;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
+
 import com.google.gwt.lang.Array;
 
 /**
@@ -37,12 +40,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
     @Override
     public boolean contains(Object o) {
       if (o instanceof Map.Entry) {
-        Map.Entry<?, ?> entry = (Map.Entry<?, ?>) o;
-        Object key = entry.getKey();
-        if (EnumMap.this.containsKey(key)) {
-          Object value = EnumMap.this.get(key);
-          return Objects.equals(entry.getValue(), value);
-        }
+        return containsEntry((Map.Entry<?, ?>) o);
       }
       return false;
     }
@@ -81,9 +79,8 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
     }
 
     public void remove() {
-      if (key == null) {
-        throw new IllegalStateException();
-      }
+      checkState(key != null);
+
       EnumMap.this.remove(key);
       key = null;
     }
@@ -106,9 +103,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
     }
 
     public V setValue(V value) {
-      V old = getValue();
-      values[key.ordinal()] = value;
-      return old;
+      return set(key.ordinal(), value);
     }
   }
 
@@ -128,9 +123,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
     if (m instanceof EnumMap) {
       init((EnumMap<K, ? extends V>) m);
     } else {
-      if (m.isEmpty()) {
-        throw new IllegalArgumentException("Specified map is empty");
-      }
+      checkArgument(!m.isEmpty(), "Specified map is empty");
       init(m.keySet().iterator().next().getDeclaringClass());
       putAll(m);
     }

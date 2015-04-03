@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -75,6 +75,22 @@ class SignatureDumper {
     }
   }
 
+  private static void addFields(JField[] fields, StringBuilder result, Filter filter) {
+    for (JField currentField : fields) {
+      if (!filter.shouldPrint(currentField)) {
+        continue;
+      }
+      result.append(" field ");
+      if (currentField.isStatic()) {
+        result.append("static ");
+      }
+      result.append(currentField.getName());
+      result.append(' ');
+      result.append(currentField.getType().getJNISignature());
+      result.append('\n');
+    }
+  }
+
   /**
    * Dumps the signatures within this typeOracle. Singatures may appear multiple
    * times.
@@ -91,9 +107,10 @@ class SignatureDumper {
         result.append("class ");
       }
       result.append(current.getJNISignature());
-      if (current.getSuperclass() != null) {
+      JClassType superclass = current.getSuperclass();
+      if (superclass != null) {
         result.append(" extends ");
-        result.append(current.getSuperclass().getJNISignature());
+        result.append(superclass.getJNISignature());
       }
       for (JClassType currentInterface : current.getImplementedInterfaces()) {
         result.append(" implements ");
@@ -109,18 +126,14 @@ class SignatureDumper {
         addMethods(constructors, result, filter);
       }
       addMethods(current.getMethods(), result, filter);
-      for (JField currentField : current.getFields()) {
-        if (!filter.shouldPrint(currentField)) {
-          continue;
-        }
-        result.append(" field ");
-        if (currentField.isStatic()) {
-          result.append("static ");
-        }
-        result.append(currentField.getName());
-        result.append(' ');
-        result.append(currentField.getType().getJNISignature());
-        result.append('\n');
+
+      addFields(current.getFields(), result, filter);
+
+      // If the parent class was filtered out, we might be missing some public API in the output
+      // as they will be inherited by the current class. So let's add those as well:
+      for (JClassType c = superclass; c != null && !filter.shouldPrint(c); c = c.getSuperclass()) {
+        addMethods(c.getMethods(), result, filter);
+        addFields(c.getFields(), result, filter);
       }
     }
     return result.toString();

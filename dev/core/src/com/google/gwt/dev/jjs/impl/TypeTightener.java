@@ -17,9 +17,9 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.CanBeAbstract;
+import com.google.gwt.dev.jjs.ast.CanBeStatic;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JArrayRef;
-import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JCastOperation;
@@ -36,10 +36,7 @@ import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNewInstance;
-import com.google.gwt.dev.jjs.ast.JNullLiteral;
-import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -57,14 +54,24 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
+import com.google.gwt.thirdparty.guava.common.base.Predicate;
+import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 /**
  * The purpose of this pass is to record "type flow" information and then use
@@ -123,22 +130,26 @@ public class TypeTightener {
   /**
    * Replaces dangling null references with dummy calls.
    */
-  public class FixDanglingRefsVisitor extends JModVisitor {
+  public class FixDanglingRefsVisitor extends JChangeTrackingVisitor {
+
+    public FixDanglingRefsVisitor(OptimizerContext optimizerCtx) {
+      super(optimizerCtx);
+    }
 
     @Override
     public void endVisit(JFieldRef x, Context ctx) {
       JExpression instance = x.getInstance();
-      boolean isStatic = x.getField().isStatic();
-      if (isStatic && instance != null) {
+      JField field = x.getField();
+      if (field.isStatic() && instance != null) {
         // this doesn't really belong here, but while we're here let's remove
         // non-side-effect qualifiers to statics
         if (!instance.hasSideEffects()) {
           JFieldRef fieldRef =
-              new JFieldRef(x.getSourceInfo(), null, x.getField(), x.getEnclosingType());
+              new JFieldRef(x.getSourceInfo(), null, field, x.getEnclosingType());
           ctx.replaceMe(fieldRef);
         }
-      } else if (!isStatic && instance.getType() == typeNull
-          && x.getField() != program.getNullField()) {
+      } else if (isNullReference(field, instance)
+          && field != program.getNullField()) {
         // Change any dereference of null to use the null field
         ctx.replaceMe(Pruner.transformToNullFieldRef(x, program));
       }
@@ -148,9 +159,8 @@ public class TypeTightener {
     public void endVisit(JMethodCall x, Context ctx) {
       JExpression instance = x.getInstance();
       JMethod method = x.getTarget();
-      boolean isStatic = method.isStatic();
       boolean isStaticImpl = program.isStaticImpl(method);
-      if (isStatic && !isStaticImpl && instance != null) {
+      if (method.isStatic() && !isStaticImpl && instance != null) {
         // TODO: move to DeadCodeElimination.
         // this doesn't really belong here, but while we're here let's remove
         // non-side-effect qualifiers to statics
@@ -159,11 +169,11 @@ public class TypeTightener {
           newCall.addArgs(x.getArgs());
           ctx.replaceMe(newCall);
         }
-      } else if (!isStatic && instance.getType() == typeNull) {
+      } else if (isNullReference(method, instance)) {
         ctx.replaceMe(Pruner.transformToNullMethodCall(x, program));
       } else if (isStaticImpl && method.getParams().size() > 0
           && method.getParams().get(0).isThis() && x.getArgs().size() > 0
-          && x.getArgs().get(0).getType() == typeNull) {
+          && x.getArgs().get(0).getType() == program.getTypeNull()) {
         // bind null instance calls to the null method for static impls
         ctx.replaceMe(Pruner.transformToNullMethodCall(x, program));
       }
@@ -194,8 +204,21 @@ public class TypeTightener {
    * nodes onto sets of JReferenceType directly, which meant I had to rerun this
    * visitor each time.
    */
-  public class RecordVisitor extends JVisitor {
+  private class RecordVisitor extends JVisitor {
     private JMethod currentMethod;
+    private Predicate<JField> canUninitializedValueBeObserved;
+
+    /**
+     * The call trace invoked by arguments in a method call. It is used to record
+     * {@code callersByFieldRefArg} and {@code callersByMethodCallArg}.
+     * For example, fun1(fun2(fun3(), fun4()), fun5()); The stack would be ...
+     * fun1 -> fun2 -> fun3; (pop fun3, push fun4)
+     * fun1 -> fun2 -> fun4; (pop fun4)
+     * fun1 -> fun2; (pop fun2, push fun5)
+     * fun1 -> fun5; (pop fun5)
+     * fun1;
+     */
+    private Stack<JMethod> nestedCallTrace = new Stack<JMethod>();
 
     @Override
     public void endVisit(JBinaryOperation x, Context ctx) {
@@ -229,20 +252,21 @@ public class TypeTightener {
 
     @Override
     public void endVisit(JField x, Context ctx) {
-      if (x.getLiteralInitializer() != null) {
-        // TODO: do I still need this?
-        addAssignment(x, x.getLiteralInitializer());
+      if (!x.hasInitializer() || canUninitializedValueBeObserved.apply(x)) {
+        addAssignment(x, x.getType().getDefaultValue());
       }
       currentMethod = null;
     }
 
     @Override
-    public void endVisit(JMethod x, Context ctx) {
-      if (program.typeOracle.isInstantiatedType(x.getEnclosingType())) {
-        for (JMethod method : program.typeOracle.getAllOverrides(x)) {
-          addOverrider(method, x);
-        }
+    public void endVisit(JFieldRef x, Context ctx) {
+      if (!nestedCallTrace.empty()) {
+        calledMethodsByFieldRefArg.put(x.getField(), nestedCallTrace.peek());
       }
+    }
+
+    @Override
+    public void endVisit(JMethod x, Context ctx) {
       currentMethod = null;
     }
 
@@ -252,12 +276,15 @@ public class TypeTightener {
       // the arguments from the caller
       Iterator<JExpression> argIt = x.getArgs().iterator();
       List<JParameter> params = x.getTarget().getParams();
-      for (int i = 0; i < params.size(); ++i) {
-        JParameter param = params.get(i);
+      for (JParameter param : params) {
         JExpression arg = argIt.next();
         if (param.getType() instanceof JReferenceType) {
           addAssignment(param, arg);
         }
+      }
+      nestedCallTrace.pop();
+      if (!nestedCallTrace.empty()) {
+        calledMethodsByMethodCallArg.put(x.getTarget(), nestedCallTrace.peek());
       }
     }
 
@@ -309,8 +336,8 @@ public class TypeTightener {
          * Add an assignment to each parameter from that same parameter in every
          * method this method overrides.
          */
-        Collection<JMethod> overrides = program.typeOracle.getAllOverrides(x);
-        if (overrides.isEmpty()) {
+        Collection<JMethod> overriddenMethods = x.getOverriddenMethods();
+        if (overriddenMethods.isEmpty()) {
           return true;
         }
         for (int j = 0, c = x.getParams().size(); j < c; ++j) {
@@ -320,13 +347,25 @@ public class TypeTightener {
             set = new LinkedHashSet<JParameter>();
             paramUpRefs.put(param, set);
           }
-          for (JMethod baseMethod : overrides) {
+          for (JMethod baseMethod : overriddenMethods) {
             JParameter baseParam = baseMethod.getParams().get(j);
             set.add(baseParam);
           }
         }
       }
       return true;
+    }
+
+    @Override
+    public boolean visit(JMethodCall x, Context ctx) {
+      nestedCallTrace.push(x.getTarget());
+      return true;
+    }
+
+    public void record(JProgram program) {
+      canUninitializedValueBeObserved = ComputePotentiallyObservableUninitializedValues
+          .analyze(program);
+      accept(program);
     }
 
     private void addAssignment(JVariable target, JExpression rhs) {
@@ -344,10 +383,6 @@ public class TypeTightener {
       }
     }
 
-    private void addOverrider(JMethod target, JMethod overrider) {
-      add(target, overrider, overriders);
-    }
-
     private void addReturn(JMethod target, JExpression expr) {
       add(target, expr, returns);
     }
@@ -360,7 +395,11 @@ public class TypeTightener {
    *
    * Also optimize dynamic casts and instanceof operations where possible.
    */
-  public class TightenTypesVisitor extends JModVisitor {
+  public class TightenTypesVisitor extends JChangeTrackingVisitor {
+
+    public TightenTypesVisitor(OptimizerContext optimizerCtx) {
+      super(optimizerCtx);
+    }
 
     /**
      * Tries to determine a specific concrete type for the cast, then either
@@ -422,18 +461,25 @@ public class TypeTightener {
     @Override
     public void endVisit(JConditional x, Context ctx) {
       if (x.getType() instanceof JReferenceType) {
-        JReferenceType newType =
-            program.generalizeTypes((JReferenceType) x.getThenExpr().getType(), (JReferenceType) x
-                .getElseExpr().getType());
-        if (newType != x.getType()) {
-          x.setType(newType);
+        JReferenceType refType = (JReferenceType) x.getType();
+        JReferenceType resultType = program.strengthenType(refType, Arrays.asList(
+            (JReferenceType) x.getThenExpr().getType(),
+            (JReferenceType) x.getElseExpr().getType()));
+        if (refType != resultType) {
+          x.setType(resultType);
           madeChanges();
         }
       }
     }
 
     @Override
-    public void endVisit(JField x, Context ctx) {
+    public void exit(JField x, Context ctx) {
+      // TODO: we should also skip @JsType fields when we implement them.
+      if (program.codeGenTypes.contains(x.getEnclosingType())
+          || program.typeOracle.isExportedField(x)) {
+        // We cannot tighten this field as we don't know all callers.
+        return;
+      }
       if (!x.isVolatile()) {
         tighten(x);
       }
@@ -447,8 +493,9 @@ public class TypeTightener {
         typeList.add(type);
       }
 
-      JReferenceType resultType = program.generalizeTypes(typeList);
-      if (x.getType() != resultType) {
+      JReferenceType refType = (JReferenceType) x.getType();
+      JReferenceType resultType = program.strengthenType(refType, typeList);
+      if (refType != resultType) {
         x.setType(resultType);
         madeChanges();
       }
@@ -471,38 +518,36 @@ public class TypeTightener {
         fromType = (JReferenceType) argType;
       }
 
-      boolean triviallyTrue = false;
-      boolean triviallyFalse = false;
+      AnalysisResult analysisResult = staticallyEvaluateInstanceOf(fromType, toType);
 
-      JTypeOracle typeOracle = program.typeOracle;
-      if (fromType == program.getTypeNull()) {
-        // null is never instanceof anything
-        triviallyFalse = true;
-      } else if (typeOracle.canTriviallyCast(fromType, toType)) {
-        triviallyTrue = true;
-      } else if (!typeOracle.isInstantiatedType(toType)) {
-        triviallyFalse = true;
-      } else if (!typeOracle.canTheoreticallyCast(fromType, toType)) {
-        triviallyFalse = true;
-      }
-
-      if (triviallyTrue) {
-        // replace with a simple null test
-        JNullLiteral nullLit = program.getLiteralNull();
-        JBinaryOperation neq =
-            new JBinaryOperation(x.getSourceInfo(), program.getTypePrimitiveBoolean(),
-                JBinaryOperator.NEQ, x.getExpr(), nullLit);
-        ctx.replaceMe(neq);
-      } else if (triviallyFalse) {
+      switch (analysisResult) {
+        case TRUE:
+          if (x.getExpr().getType().canBeNull()) {
+          // replace with a simple null test
+            JBinaryOperation neq =
+                new JBinaryOperation(x.getSourceInfo(), program.getTypePrimitiveBoolean(),
+                    JBinaryOperator.NEQ, x.getExpr(), program.getLiteralNull());
+            ctx.replaceMe(neq);
+          } else {
+            ctx.replaceMe(
+                JjsUtils.createOptimizedMultiExpression(x.getExpr(),
+                    program.getLiteralBoolean(true)));
+          }
+          break;
+        case FALSE:
         // replace with a false literal
-        ctx.replaceMe(program.getLiteralBoolean(false));
-      } else {
-        // If possible, try to use a narrower cast
-        JReferenceType concreteType = getSingleConcreteType(toType);
-        if (concreteType != null) {
-          JInstanceOf newOp = new JInstanceOf(x.getSourceInfo(), concreteType, x.getExpr());
-          ctx.replaceMe(newOp);
-        }
+          ctx.replaceMe(
+              JjsUtils.createOptimizedMultiExpression(x.getExpr(), program.getLiteralBoolean(false)));
+          break;
+        case UNKNOWN:
+        default:
+          // If possible, try to use a narrower cast
+          JReferenceType concreteType = getSingleConcreteType(toType);
+          if (concreteType != null) {
+            JInstanceOf newOp = new JInstanceOf(x.getSourceInfo(), concreteType, x.getExpr());
+            ctx.replaceMe(newOp);
+          }
+          break;
       }
     }
 
@@ -515,19 +560,22 @@ public class TypeTightener {
      * Tighten based on return types and overrides.
      */
     @Override
-    public void endVisit(JMethod x, Context ctx) {
+    public void exit(JMethod x, Context ctx) {
+      if (program.codeGenTypes.contains(x.getEnclosingType())) {
+        return;
+      }
       if (!(x.getType() instanceof JReferenceType)) {
         return;
       }
       JReferenceType refType = (JReferenceType) x.getType();
 
-      if (refType == typeNull) {
+      if (refType == program.getTypeNull()) {
         return;
       }
 
       // tighten based on non-instantiability
       if (!program.typeOracle.isInstantiatedType(refType)) {
-        x.setType(typeNull);
+        x.setType(program.getTypeNull());
         madeChanges();
         return;
       }
@@ -542,7 +590,8 @@ public class TypeTightener {
        * The only information that we can infer about native methods is if they
        * are declared to return a leaf type.
        */
-      if (x.isNative()) {
+      if (x.isNative() || program.typeOracle.isJsTypeMethod(x)
+          || program.typeOracle.isJsFunctionMethod(x)) {
         return;
       }
 
@@ -555,21 +604,12 @@ public class TypeTightener {
           typeList.add((JReferenceType) expr.getType());
         }
       }
-      Collection<JMethod> myOverriders = overriders.get(x);
-      if (myOverriders != null) {
-        for (JMethod method : myOverriders) {
-          typeList.add((JReferenceType) method.getType());
-        }
+
+      for (JMethod method : x.getOverridingMethods()) {
+        typeList.add((JReferenceType) method.getType());
       }
 
-      JReferenceType resultType;
-      if (typeList.isEmpty()) {
-        // The method returns nothing
-        resultType = typeNull;
-      } else {
-        resultType = program.generalizeTypes(typeList);
-      }
-      resultType = program.strongerType(refType, resultType);
+      JReferenceType resultType = program.strengthenType(refType, typeList);
       if (refType != resultType) {
         x.setType(resultType);
         madeChanges();
@@ -582,12 +622,14 @@ public class TypeTightener {
      */
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
-      if (x.isVolatile()) {
+      if (!x.canBePolymorphic() || x.isVolatile()) {
         return;
       }
       JMethod target = x.getTarget();
-      JMethod concreteMethod = getSingleConcreteMethod(target);
+      JMethod concreteMethod = getSingleConcreteMethodOverride(target);
+      assert concreteMethod != target;
       if (concreteMethod != null) {
+        assert !x.isStaticDispatchOnly();
         JMethodCall newCall = new JMethodCall(x.getSourceInfo(), x.getInstance(), concreteMethod);
         newCall.addArgs(x.getArgs());
         ctx.replaceMe(newCall);
@@ -599,29 +641,38 @@ public class TypeTightener {
        * Mark a call as non-polymorphic if the targeted method is the only
        * possible dispatch, given the qualifying instance type.
        */
-      if (x.canBePolymorphic() && !target.isAbstract()) {
-        JExpression instance = x.getInstance();
-        assert (instance != null);
-        JReferenceType instanceType = (JReferenceType) instance.getType();
-        Collection<JMethod> myOverriders = overriders.get(target);
-        if (myOverriders != null) {
-          for (JMethod override : myOverriders) {
-            JReferenceType overrideType = override.getEnclosingType();
-            if (program.typeOracle.canTheoreticallyCast(instanceType, overrideType)) {
-              // This call is truly polymorphic.
-              // TODO: composite types! :)
-              return;
-            }
-          }
-          // The instance type is incompatible with all overrides.
-        }
-        x.setCannotBePolymorphic();
-        madeChanges();
+      if (target.isAbstract()) {
+        return;
       }
+
+      JExpression instance = x.getInstance();
+      assert (instance != null);
+      JReferenceType instanceType = (JReferenceType) instance.getType();
+      for (JMethod overridingMethod : target.getOverridingMethods()) {
+        // Look for overriding methods from a type compatible with the instance type, if none is
+        // found, this call can be marked as static dispatch.
+        JReferenceType overridingMethodEnclosingType = overridingMethod.getEnclosingType();
+        if (program.typeOracle.canTheoreticallyCast(
+            instanceType, overridingMethodEnclosingType)) {
+          // This call is truly polymorphic.
+          return;
+        }
+      }
+      assert !x.isStaticDispatchOnly();
+      x.setCannotBePolymorphic();
+      madeChanges();
     }
 
     @Override
     public void endVisit(JParameter x, Context ctx) {
+      JMethod currentMethod = getCurrentMethod();
+      if (program.codeGenTypes.contains(currentMethod.getEnclosingType())
+          || program.typeOracle.isExportedMethod(currentMethod)
+          || program.typeOracle.isJsFunctionMethod(currentMethod)
+          || program.typeOracle.isJsTypeMethod(currentMethod)) {
+        // We cannot tighten this parameter as we don't know all callers.
+        return;
+      }
       tighten(x);
     }
 
@@ -642,7 +693,7 @@ public class TypeTightener {
     }
 
     @Override
-    public boolean visit(JMethod x, Context ctx) {
+    public boolean enter(JMethod x, Context ctx) {
       /*
        * Explicitly NOT visiting native methods since we can't infer further
        * type information.
@@ -657,12 +708,12 @@ public class TypeTightener {
      * from the leaf concrete type will be returned. If the method is static,
      * return <code>null</code> no matter what.
      */
-    private JMethod getSingleConcreteMethod(JMethod method) {
+    private JMethod getSingleConcreteMethodOverride(JMethod method) {
       if (!method.canBePolymorphic()) {
         return null;
       }
       if (getSingleConcreteType(method.getEnclosingType()) != null) {
-        return getSingleConcrete(method, overriders);
+        return getSingleConcrete(method, ImmutableMap.of(method, method.getOverridingMethods()));
       } else {
         return null;
       }
@@ -687,20 +738,6 @@ public class TypeTightener {
       return null;
     }
 
-    private JArrayType nullifyArrayType(JArrayType arrayType) {
-      JType elementType = arrayType.getElementType();
-      if (elementType instanceof JReferenceType) {
-        JReferenceType refType = (JReferenceType) elementType;
-        if (!program.typeOracle.isInstantiatedType(refType)) {
-          return program.getTypeArray(JNullType.INSTANCE);
-        } else if (elementType instanceof JArrayType) {
-          JArrayType newElementType = nullifyArrayType((JArrayType) elementType);
-          return program.getTypeArray(newElementType.getLeafType(), newElementType.getDims() + 1);
-        }
-      }
-      return arrayType;
-    }
-
     /**
      * Tighten based on assignment, and for parameters, callArgs as well.
      */
@@ -710,20 +747,15 @@ public class TypeTightener {
       }
       JReferenceType refType = (JReferenceType) x.getType();
 
-      if (refType == typeNull) {
+      if (refType == program.getTypeNull()) {
         return;
       }
 
       // tighten based on non-instantiability
       if (!program.typeOracle.isInstantiatedType(refType)) {
-        x.setType(typeNull);
+        x.setType(program.getTypeNull());
         madeChanges();
         return;
-      }
-
-      if (refType instanceof JArrayType) {
-        JArrayType arrayType = (JArrayType) refType;
-        refType = nullifyArrayType(arrayType);
       }
 
       // tighten based on leaf types
@@ -735,19 +767,7 @@ public class TypeTightener {
       }
 
       // tighten based on assignment
-      List<JReferenceType> typeList = new ArrayList<JReferenceType>();
-
-      /*
-       * For fields without an initializer, add a null assignment, because the
-       * field might be accessed before initialized. Technically even a field
-       * with an initializer might be accessed before initialization, but
-       * presumably that is not the programmer's intent, so the compiler cheats
-       * and assumes the initial null will not be seen.
-       */
-      if ((x instanceof JField) && !x.hasInitializer()) {
-        typeList.add(typeNull);
-      }
-
+      List<JReferenceType> typeList = Lists.newArrayList();
       Collection<JExpression> myAssignments = assignments.get(x);
       if (myAssignments != null) {
         for (JExpression expr : myAssignments) {
@@ -768,23 +788,8 @@ public class TypeTightener {
         }
       }
 
-      JReferenceType resultType;
-      if (!typeList.isEmpty()) {
-        resultType = program.generalizeTypes(typeList);
-        resultType = program.strongerType(refType, resultType);
-      } else {
-        if (x instanceof JParameter) {
-          /*
-           * There is no need to tighten unused parameters, because they will be
-           * pruned.
-           */
-          resultType = refType;
-        } else {
-          resultType = typeNull;
-        }
-      }
-
-      if (x.getType() != resultType) {
+      JReferenceType resultType = program.strengthenType(refType, typeList);
+      if (refType != resultType) {
         x.setType(resultType);
         madeChanges();
       }
@@ -793,11 +798,17 @@ public class TypeTightener {
 
   private static final String NAME = TypeTightener.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program) {
+  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new TypeTightener(program).execImpl();
+    OptimizerStats stats = new TypeTightener(program).execImpl(optimizerCtx);
+    optimizerCtx.incOptimizationStep();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
+  }
+
+  @VisibleForTesting
+  static OptimizerStats exec(JProgram program) {
+    return exec(program, new FullOptimizerContext(program));
   }
 
   private static <T, V> void add(T target, V value, Map<T, Collection<V>> map) {
@@ -851,11 +862,7 @@ public class TypeTightener {
    */
   private final Map<JReferenceType, Collection<JClassType>> implementors =
       new IdentityHashMap<JReferenceType, Collection<JClassType>>();
-  /**
-   * For each method tracks of all the methods that override it.
-   */
-  private final Map<JMethod, Collection<JMethod>> overriders =
-      new IdentityHashMap<JMethod, Collection<JMethod>>();
+
   /**
    * For each parameter P (in method M) tracks the set of parameters that share its position in all
    * the methods that are overridden by M.
@@ -868,18 +875,24 @@ public class TypeTightener {
   private final Map<JMethod, Collection<JExpression>> returns =
       new IdentityHashMap<JMethod, Collection<JExpression>>();
 
+  /**
+   * For each method call, record the method calls and field references in its arguments.
+   * When the callee methods or the referenced fields in the arguments are modified,
+   * it would be possible for the target method to be type tightened.
+   */
+  private final Multimap<JMethod, JMethod> calledMethodsByMethodCallArg = HashMultimap.create();
+  private final Multimap<JField, JMethod> calledMethodsByFieldRefArg = HashMultimap.create();
+
   private final JProgram program;
-  private final JNullType typeNull;
 
   private TypeTightener(JProgram program) {
     this.program = program;
-    typeNull = program.getTypeNull();
   }
 
-  private OptimizerStats execImpl() {
+  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
     OptimizerStats stats = new OptimizerStats(NAME);
     RecordVisitor recorder = new RecordVisitor();
-    recorder.accept(program);
+    recorder.record(program);
 
     /*
      * We must iterate multiple times because each way point we tighten creates
@@ -890,20 +903,116 @@ public class TypeTightener {
      * than completion if we compile with an option for less than 100% optimized
      * output.
      */
+    int lastStep = optimizerCtx.getLastStepFor(NAME);
+    /*
+     * Set the last step to the step at which TypeTightener does the first iteration. Since the
+     * RecordVisitor is run only once, the information in {@code assignments} etc. is not updated.
+     * So it is still possible for the type tightened methods/fields to be type tightened for the
+     * next time.
+     */
+    optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
     while (true) {
-      TightenTypesVisitor tightener = new TightenTypesVisitor();
-      tightener.accept(program);
+      TightenTypesVisitor tightener = new TightenTypesVisitor(optimizerCtx);
+
+      Set<JMethod> affectedMethods =
+          computeAffectedMethods(optimizerCtx, lastStep);
+      Set<JField> affectedFields =
+          computeAffectedFields(optimizerCtx, lastStep);
+      optimizerCtx.traverse(tightener, affectedFields);
+      optimizerCtx.traverse(tightener, affectedMethods);
       stats.recordModified(tightener.getNumMods());
+      lastStep = optimizerCtx.getOptimizationStep();
+      optimizerCtx.incOptimizationStep();
       if (!tightener.didChange()) {
         break;
       }
     }
 
     if (stats.didChange()) {
-      FixDanglingRefsVisitor fixer = new FixDanglingRefsVisitor();
+      FixDanglingRefsVisitor fixer = new FixDanglingRefsVisitor(optimizerCtx);
       fixer.accept(program);
+      optimizerCtx.incOptimizationStep();
+      JavaAstVerifier.assertProgramIsConsistent(program);
     }
-
     return stats;
   }
+
+  private Set<JMethod> computeAffectedMethods(OptimizerContext optimizerCtx, int lastStep) {
+    Set<JMethod> modifiedMethods = optimizerCtx.getModifiedMethodsSince(lastStep);
+    Set<JField> modifiedFields = optimizerCtx.getModifiedFieldsSince(lastStep);
+    Set<JMethod> affectedMethods = Sets.newLinkedHashSet();
+
+    // If the return type or parameters' types of a method are changed, its caller methods should be
+    // reanalyzed.
+    affectedMethods.addAll(optimizerCtx.getCallers(modifiedMethods));
+
+    // If a method is modified, its callee should be reanalyzed.
+    affectedMethods.addAll(optimizerCtx.getCallees(modifiedMethods));
+
+    // The removed callee methods (one or more method calls to it are removed) should be reanalyzed.
+    affectedMethods.addAll(optimizerCtx.getRemovedCalleeMethodsSince(lastStep));
+
+    // If a method's return type is changed, the called method whose argument calls the method
+    // should be reanalyzed.
+    for (JMethod method : modifiedMethods) {
+      affectedMethods.addAll(calledMethodsByMethodCallArg.get(method));
+    }
+
+    // If a method's return type or parameters' types are changed, its overriders and overridden
+    // methods should be reanalyzed. The overridden methods and overriders from typeOracle may have
+    // been pruned, so we have to check if they are in the AST.
+    for (JMethod method : modifiedMethods) {
+      affectedMethods.addAll(method.getOverriddenMethods());
+      affectedMethods.addAll(method.getOverridingMethods());
+    }
+
+    // If a field is changed, the methods that reference to it should be reanalyzed.
+    affectedMethods.addAll(optimizerCtx.getMethodsByReferencedFields(modifiedFields));
+
+    // If a field is changed, the caller methods which call it through argument should be
+    // reanalyzed.
+    for (JField field : modifiedFields) {
+      affectedMethods.addAll(calledMethodsByFieldRefArg.get(field));
+    }
+
+    // All the methods that are modified by other optimizer should be reanalyzed.
+    affectedMethods.addAll(modifiedMethods);
+    return affectedMethods;
+  }
+
+  private Set<JField> computeAffectedFields(OptimizerContext optimizerCtx, int lastStep) {
+    Set<JMethod> modifiedMethods = optimizerCtx.getModifiedMethodsSince(lastStep);
+    Set<JField> modifiedFields = optimizerCtx.getModifiedFieldsSince(lastStep);
+    Set<JField> affectedFields = Sets.newLinkedHashSet();
+    affectedFields.addAll(modifiedFields);
+    affectedFields.addAll(optimizerCtx.getReferencedFieldsByMethods(modifiedMethods));
+    return affectedFields;
+  }
+
+  private boolean isNullReference(CanBeStatic member, JExpression instance) {
+    return !member.isStatic() && instance.getType() == program.getTypeNull();
+  }
+
+  private enum AnalysisResult { TRUE, FALSE, UNKNOWN }
+
+  /**
+   * Tries to statically evaluate the instanceof operation. Returning TRUE if it can be determined
+   * statically that it is true, FALSE if it can be determined that is FALSE and UNKNOWN if the
+   * result can not be determined statically.
+   */
+  private AnalysisResult staticallyEvaluateInstanceOf(JReferenceType fromType,
+      JReferenceType toType) {
+    if (fromType == program.getTypeNull()) {
+      // null is never instanceof anything
+      return AnalysisResult.FALSE;
+    } else if (program.typeOracle.canTriviallyCast(fromType, toType)) {
+      return AnalysisResult.TRUE;
+    } else if (!program.typeOracle.isInstantiatedType(toType)) {
+      return AnalysisResult.FALSE;
+    } else if (!program.typeOracle.canTheoreticallyCast(fromType, toType)) {
+      return AnalysisResult.FALSE;
+    }
+    return AnalysisResult.UNKNOWN;
+  }
+
 }

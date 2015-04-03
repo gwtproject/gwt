@@ -16,12 +16,9 @@
 package com.google.gwt.dev.cfg;
 
 import com.google.gwt.dev.util.collect.Sets;
-import com.google.gwt.thirdparty.guava.common.base.Joiner;
-import com.google.gwt.thirdparty.guava.common.base.Strings;
-import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.base.Objects;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -30,12 +27,21 @@ import java.util.Set;
  */
 public abstract class CompoundCondition extends Condition {
 
-  private final Conditions conditions = new Conditions();
+  protected final Conditions conditions = new Conditions();
 
   public CompoundCondition(Condition... conditions) {
     for (Condition condition : conditions) {
       this.conditions.add(condition);
     }
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object instanceof CompoundCondition) {
+      CompoundCondition that = (CompoundCondition) object;
+      return Objects.equal(this.conditions, that.conditions);
+    }
+    return false;
   }
 
   public Conditions getConditions() {
@@ -52,25 +58,7 @@ public abstract class CompoundCondition extends Condition {
   }
 
   @Override
-  public String toSource() {
-    List<String> conditionSources = Lists.newArrayList();
-
-    // Translate all the contained conditions.
-    for (Condition condition : getConditions()) {
-      String conditionSource = condition.toSource();
-      if (Strings.isNullOrEmpty(conditionSource)) {
-        continue;
-      }
-      conditionSources.add("(" + conditionSource + ")");
-    }
-
-    // If we still have something then wrap it and return.
-    if (!conditionSources.isEmpty()) {
-      return "(" + Joiner.on(" " + getBinaryOperator() + " ").join(conditionSources) + ")";
-    }
-    // When there are no contained conditions, the whole thing is a NOP.
-    return "";
+  public int hashCode() {
+    return Objects.hashCode(conditions);
   }
-
-  protected abstract String getBinaryOperator();
 }

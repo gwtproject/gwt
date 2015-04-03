@@ -14,85 +14,35 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6450 $
-//  type=root
-//  date=$Date: 2012-01-25 19:20:54 -0500 (Wed, 25 Jan 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "en_CA" locale.
  */
-public class DateTimeFormatInfoImpl_en_CA extends DateTimeFormatInfoImpl_en {
-
-  @Override
-  public String dateFormatFull() {
-    return "EEEE, d MMMM, y";
-  }
-
-  @Override
-  public String dateFormatLong() {
-    return "d MMMM, y";
-  }
-
-  @Override
-  public String dateFormatMedium() {
-    return "yyyy-MM-dd";
-  }
+public class DateTimeFormatInfoImpl_en_CA extends DateTimeFormatInfoImpl_en_001 {
 
   @Override
   public String dateFormatShort() {
-    return "yy-MM-dd";
+    return "y-MM-dd";
   }
 
   @Override
-  public String formatMonthAbbrevDay() {
-    return "d MMM";
-  }
-
-  @Override
-  public String formatMonthFullDay() {
-    return "d MMMM";
-  }
-
-  @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE, d MMMM";
+  public int firstDayOfTheWeek() {
+    return 0;
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M-d";
+    return "MM-dd";
   }
 
   @Override
-  public String formatYearMonthAbbrev() {
-    return "MMM-y";
-  }
-
-  @Override
-  public String formatYearMonthAbbrevDay() {
-    return "d MMM, y";
-  }
-
-  @Override
-  public String formatYearMonthFull() {
-    return "MMMM-y";
-  }
-
-  @Override
-  public String formatYearMonthFullDay() {
-    return "d MMMM, y";
+  public String formatYearMonthNum() {
+    return "y-MM";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "y-M-d";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, d MMM, y";
+    return "y-MM-dd";
   }
 }

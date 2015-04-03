@@ -14,17 +14,17 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5695 $
-//  date=$Date: 2011-04-26 14:39:31 -0400 (Tue, 26 Apr 2011) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "ar_LB" locale.
  */
 public class DateTimeFormatInfoImpl_ar_LB extends DateTimeFormatInfoImpl_ar_001 {
+
+  @Override
+  public String dateFormatMedium() {
+    return "MMM d, y";
+  }
 
   @Override
   public String[] monthsFull() {
@@ -41,6 +41,24 @@ public class DateTimeFormatInfoImpl_ar_LB extends DateTimeFormatInfoImpl_ar_001 
         "تشرين الأول",
         "تشرين الثاني",
         "كانون الأول"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrow() {
+    return new String[] {
+        "ك",
+        "ش",
+        "آ",
+        "ن",
+        "أ",
+        "ح",
+        "ت",
+        "آ",
+        "أ",
+        "ت",
+        "ت",
+        "ك"
     };
   }
 

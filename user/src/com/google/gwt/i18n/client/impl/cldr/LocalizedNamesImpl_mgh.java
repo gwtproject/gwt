@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6450 $
-//  type=root
-//  date=$Date: 2012-01-25 19:20:54 -0500 (Wed, 25 Jan 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "mgh" locale.
@@ -251,7 +246,6 @@ public class LocalizedNamesImpl_mgh extends LocalizedNamesImpl {
         "SN",
         "SC",
         "LI",
-        "CS",
         "SG",
         "SY",
         "LK",
@@ -289,6 +283,7 @@ public class LocalizedNamesImpl_mgh extends LocalizedNamesImpl {
         "VG",
         "VI",
         "IQ",
+        "XK",
         "YT",
     };
   }
@@ -310,7 +305,6 @@ public class LocalizedNamesImpl_mgh extends LocalizedNamesImpl {
     namesMap.put("CL", "Uchile");
     namesMap.put("CN", "Uchina");
     namesMap.put("CO", "Ukolombia");
-    namesMap.put("CS", "Usiera Leoni");
     namesMap.put("CU", "Ukuba");
     namesMap.put("CY", "Ukuprosi");
     namesMap.put("CZ", "Ucheki");
@@ -457,7 +451,6 @@ public class LocalizedNamesImpl_mgh extends LocalizedNamesImpl {
         "CL": "Uchile",
         "CN": "Uchina",
         "CO": "Ukolombia",
-        "CS": "Usiera Leoni",
         "CU": "Ukuba",
         "CY": "Ukuprosi",
         "CZ": "Ucheki",

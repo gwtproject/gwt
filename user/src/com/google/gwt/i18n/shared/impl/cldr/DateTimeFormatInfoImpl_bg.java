@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "bg" locale.
@@ -29,29 +24,29 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "пр. об.",
-        "сл. об."
+        "пр.об.",
+        "сл.об."
     };
   }
 
   @Override
   public String dateFormatFull() {
-    return "dd MMMM y, EEEE";
+    return "EEEE, d MMMM y 'г'.";
   }
 
   @Override
   public String dateFormatLong() {
-    return "dd MMMM y";
+    return "d MMMM y 'г'.";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "dd.MM.yyyy";
+    return "d.MM.y 'г'.";
   }
 
   @Override
   public String dateFormatShort() {
-    return "dd.MM.yy";
+    return "d.MM.yy";
   }
 
   @Override
@@ -85,14 +80,34 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "пр. н. е.",
-        "от н. е."
+        "пр.Хр.",
+        "сл.Хр."
     };
   }
 
   @Override
+  public String formatHour24Minute() {
+    return "H:mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "H:mm:ss";
+  }
+
+  @Override
+  public String formatMinuteSecond() {
+    return "m:ss";
+  }
+
+  @Override
+  public String formatMonthAbbrev() {
+    return "MM";
+  }
+
+  @Override
   public String formatMonthAbbrevDay() {
-    return "d MMM";
+    return "d.MM";
   }
 
   @Override
@@ -102,12 +117,12 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "d MMMM, EEEE";
+    return "EEEE, d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "d.M";
+    return "d.MM";
   }
 
   @Override
@@ -117,12 +132,12 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "MMM y 'г'.";
+    return "MM.y 'г'.";
   }
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "dd MMM y";
+    return "d.MM.y 'г'.";
   }
 
   @Override
@@ -132,7 +147,7 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM y";
+    return "d MMMM y 'г'.";
   }
 
   @Override
@@ -142,12 +157,12 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "dd.MM.yy";
+    return "d.MM.y 'г'.";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, d MMM y 'г'.";
+    return "EEE, d.MM.y 'г'.";
   }
 
   @Override
@@ -227,11 +242,31 @@ public class DateTimeFormatInfoImpl_bg extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "I трим.",
-        "II трим.",
-        "III трим.",
-        "IV трим."
+        "1 трим.",
+        "2 трим.",
+        "3 трим.",
+        "4 трим."
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "H:mm:ss zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "H:mm:ss z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "H:mm:ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "H:mm";
   }
 
   @Override

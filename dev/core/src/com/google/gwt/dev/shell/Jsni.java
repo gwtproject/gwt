@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -42,7 +42,7 @@ public class Jsni {
 
   /**
    * Generate source code, fixing up any JSNI references for hosted mode.
-   * 
+   *
    * <p/>
    * <table>
    * <tr>
@@ -51,32 +51,32 @@ public class Jsni {
    * </tr>
    * <tr>
    * <td><code>obj.@class::method(params)(args)</code></td>
-   * 
+   *
    * <td><code>__gwt_makeJavaInvoke(paramCount)(obj, dispId, args)</code></td>
    * </tr>
    * <tr>
    * <td><code>@class::method(params)(args)</code></td>
-   * 
+   *
    * <td><code>__gwt_makeJavaInvoke(paramCount)(null, dispId, args)</code></td>
    * </tr>
    * <tr>
    * <td><code>obj.@class::method(params)</code></td>
-   * 
+   *
    * <td><code>__gwt_makeTearOff(obj, dispId, paramCount)</code></td>
    * </tr>
    * <tr>
    * <td><code>@class::method(params)</code></td>
-   * 
+   *
    * <td><code>__gwt_makeTearOff(null, dispId, paramCount)</code></td>
    * </tr>
    * <tr>
    * <td><code>obj.@class::field</code></td>
-   * 
+   *
    * <td><code>obj[dispId]</code></td>
    * </tr>
    * <tr>
    * <td><code>@class::field</code></td>
-   * 
+   *
    * <td><code>__static[dispId]</code></td>
    * </tr>
    * </table>
@@ -140,8 +140,7 @@ public class Jsni {
         // Use a clone instead of modifying the original JSNI
         // __gwt_makeTearOff(obj, dispId, paramCount)
         SourceInfo info = x.getSourceInfo();
-        JsInvocation rewritten = new JsInvocation(info);
-        rewritten.setQualifier(new JsNameRef(info, "__gwt_makeTearOff"));
+        JsInvocation rewritten = new JsInvocation(info, new JsNameRef(info, "__gwt_makeTearOff"));
 
         List<JsExpression> arguments = rewritten.getArguments();
         if (q == null) {
@@ -187,7 +186,7 @@ public class Jsni {
            * Make sure the ident is a reference to a method or constructor and
            * not a reference to a field whose contents (e.g. a Function) we
            * intend to immediately invoke.
-           * 
+           *
            * p.C::method()(); versus p.C::field();
            */
           if (member instanceof Method || member instanceof Constructor<?>) {
@@ -202,9 +201,8 @@ public class Jsni {
             }
 
             SourceInfo info = x.getSourceInfo();
-            JsInvocation inner = new JsInvocation(info);
-            inner.setQualifier(new JsNameRef(info, "__gwt_makeJavaInvoke"));
-            inner.getArguments().add(new JsNumberLiteral(info, paramCount));
+            JsInvocation inner = new JsInvocation(info,
+                new JsNameRef(info, "__gwt_makeJavaInvoke"), new JsNumberLiteral(info, paramCount));
 
             JsInvocation outer = new JsInvocation(info);
             outer.setQualifier(inner);
@@ -225,8 +223,6 @@ public class Jsni {
       return super.visit(x, ctx);
     }
   }
-
-  public static final String JAVASCRIPTHOST_NAME = JavaScriptHost.class.getName();
 
   /**
    * Gets the body of a JSNI method, with Java refs escaped for hosted mode

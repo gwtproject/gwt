@@ -18,11 +18,26 @@ package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.ArgProcessorBase;
+import com.google.gwt.dev.cfg.ModuleDef;
+import com.google.gwt.dev.util.arg.ArgHandlerClosureFormattedOutput;
+import com.google.gwt.dev.util.arg.ArgHandlerIncrementalCompile;
+import com.google.gwt.dev.util.arg.ArgHandlerJsInteropMode;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
+import com.google.gwt.dev.util.arg.ArgHandlerMethodNameDisplayMode;
+import com.google.gwt.dev.util.arg.ArgHandlerSetProperties;
 import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
+import com.google.gwt.dev.util.arg.OptionClosureFormattedOutput;
+import com.google.gwt.dev.util.arg.OptionIncrementalCompile;
+import com.google.gwt.dev.util.arg.OptionJsInteropMode;
 import com.google.gwt.dev.util.arg.OptionLogLevel;
+import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
+import com.google.gwt.dev.util.arg.OptionSetProperties;
 import com.google.gwt.dev.util.arg.OptionSourceLevel;
 import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+import com.google.gwt.thirdparty.guava.common.collect.LinkedListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 import com.google.gwt.util.tools.ArgHandler;
 import com.google.gwt.util.tools.ArgHandlerDir;
 import com.google.gwt.util.tools.ArgHandlerExtra;
@@ -34,7 +49,10 @@ import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Defines the command-line options for the {@link CodeServer CodeServer's} main() method.
@@ -42,20 +60,36 @@ import java.util.List;
  * <p>These flags are EXPERIMENTAL and subject to change.</p>
  */
 public class Options {
+  private ImmutableList<String> args;
+  private Set<String> tags = new LinkedHashSet<String>();
+
+  private boolean incremental = true;
   private boolean noPrecompile = false;
   private boolean isCompileTest = false;
   private File workDir;
-  private List<String> moduleNames = new ArrayList<String>();
+  private File launcherDir;
+  private final List<String> moduleNames = new ArrayList<String>();
   private boolean allowMissingSourceDir = false;
   private final List<File> sourcePath = new ArrayList<File>();
   private String bindAddress = "127.0.0.1";
   private String preferredHost = "localhost";
   private int port = 9876;
+
   private RecompileListener recompileListener = RecompileListener.NONE;
-  private TreeLogger.Type logLevel = TreeLogger.Type.WARN;
+  private JobChangeListener jobChangeListener = JobChangeListener.NONE;
+
+  private TreeLogger.Type logLevel = TreeLogger.Type.INFO;
   // Use the same default as the GWT compiler.
   private SourceLevel sourceLevel = SourceLevel.DEFAULT_SOURCE_LEVEL;
+  private boolean failOnError = false;
   private boolean strictResources = false;
+  private int compileTestRecompiles = 0;
+  private OptionJsInteropMode.Mode jsInteropMode = OptionJsInteropMode.Mode.NONE;
+  private OptionMethodNameDisplayMode.Mode methodNameDisplayMode =
+      OptionMethodNameDisplayMode.Mode.NONE;
+  private boolean closureFormattedOutput = false;
+
+  private final ListMultimap<String, String> properties = LinkedListMultimap.create();
 
   /**
    * Sets each option to the appropriate value, based on command-line arguments.
@@ -63,6 +97,11 @@ public class Options {
    * @return true if the arguments were parsed successfully.
    */
   public boolean parseArgs(String[] args) {
+    if (this.args != null) {
+      throw new IllegalStateException("parseArgs may only be called once");
+    }
+    this.args = ImmutableList.copyOf(Arrays.asList(args));
+
     boolean ok = new ArgProcessor().processArgs(args);
     if (!ok) {
       return false;
@@ -78,15 +117,63 @@ public class Options {
       return false;
     }
 
+    if (incremental && !noPrecompile) {
+      System.out.println("Turning off precompile in incremental mode.");
+      noPrecompile = true;
+    }
+
+    // Set some tags automatically for migration tracking.
+    if (isIncrementalCompileEnabled()) {
+      addTags("incremental_on");
+    } else {
+      addTags("incremental_off");
+    }
+
+    if (getNoPrecompile()) {
+      addTags("precompile_off");
+    } else {
+      addTags("precompile_on");
+    }
+
     return true;
+  }
+
+  /**
+   * Adds some user-defined tags that will be passed through to {@link JobEvent#getTags}.
+   *
+   * <p>A tag may not be null, contain whitespace, or be more than 100 characters.
+   * If a tag was already added, it won't be added again.
+   *
+   * <p>This method may be called more than once, but compile jobs that are already running
+   * will not have the new tags.
+   */
+  public synchronized void addTags(String... tags) {
+    this.tags.addAll(JobEvent.checkTags(Arrays.asList(tags)));
+  }
+
+  /**
+   * Returns the arguments passed to {@link #parseArgs}.
+   */
+  ImmutableList<String> getArgs() {
+    return args;
+  }
+
+  /**
+   * Returns the tags passed to {@link #addTags}.
+   */
+  synchronized Set<String> getTags() {
+    return ImmutableSet.copyOf(tags);
   }
 
   /**
    * A Java application that embeds Super Dev Mode can use this hook to find out
    * when compiles start and end.
+   *
+   * @deprecated replaced by {@link #setJobChangeListener}
    */
-  public void setRecompileListener(RecompileListener recompileListener) {
-    this.recompileListener = recompileListener;
+  @Deprecated
+  public void setRecompileListener(RecompileListener listener) {
+    this.recompileListener = listener == null ? RecompileListener.NONE : listener;
   }
 
   RecompileListener getRecompileListener() {
@@ -94,10 +181,33 @@ public class Options {
   }
 
   /**
+   * A Java application that embeds Super Dev Mode can use this hook to find out
+   * when compile jobs change state.
+   *
+   * <p>Replaces {@link #setRecompileListener}
+   */
+  public void setJobChangeListener(JobChangeListener listener) {
+    this.jobChangeListener = listener == null ? JobChangeListener.NONE : listener;
+  }
+
+  JobChangeListener getJobChangeListener() {
+    return jobChangeListener;
+  }
+
+  /**
    * The top level of the directory tree where the code server keeps compiler output.
    */
   File getWorkDir() {
     return workDir;
+  }
+
+  /**
+   * A directory where each module's files for launching Super Dev Mode should be written,
+   * or null if not supplied.
+   * (For example, nocache.js and public resource files will go here.)
+   */
+  File getLauncherDir() {
+    return launcherDir;
   }
 
   /**
@@ -112,6 +222,14 @@ public class Options {
    */
   boolean shouldAllowMissingSourceDir() {
     return allowMissingSourceDir;
+  }
+
+  /**
+   * Compiles faster by creating a JavaScript file per class. Can't be turned on at the same time as
+   * shouldCompileIncremental().
+   */
+  boolean isIncrementalCompileEnabled() {
+    return incremental;
   }
 
   /**
@@ -149,6 +267,10 @@ public class Options {
     return bindAddress;
   }
 
+  int getCompileTestRecompiles() {
+    return compileTestRecompiles;
+  }
+
   /**
    * The hostname to put in a URL pointing to the code server.
    */
@@ -174,18 +296,65 @@ public class Options {
     return sourcePath;
   }
 
+  /**
+   * If true, run the compiler in "strict" mode, which fails the compile if any Java file
+   * cannot be compiled, whether or not it is used.
+   */
+  boolean isFailOnError() {
+    return failOnError;
+  }
+
+  OptionJsInteropMode.Mode getJsInteropMode() {
+    return jsInteropMode;
+  }
+
+  ListMultimap<String, String> getProperties() {
+    return properties;
+  }
+
+  public boolean isClosureFormattedOutput() {
+    return closureFormattedOutput;
+  }
+
   private class ArgProcessor extends ArgProcessorBase {
 
     public ArgProcessor() {
-      registerHandler(new NoPrecompileFlag());
-      registerHandler(new CompileTestFlag());
-      registerHandler(new BindAddressFlag());
-      registerHandler(new PortFlag());
-      registerHandler(new WorkDirFlag());
       registerHandler(new AllowMissingSourceDirFlag());
-      registerHandler(new SourceFlag());
+      registerHandler(new BindAddressFlag());
+      registerHandler(new CompileTestFlag());
+      registerHandler(new CompileTestRecompilesFlag());
+      registerHandler(new FailOnErrorFlag());
       registerHandler(new ModuleNameArgument());
+      registerHandler(new NoPrecompileFlag());
+      registerHandler(new PortFlag());
+      registerHandler(new SourceFlag());
       registerHandler(new StrictResourcesFlag());
+      registerHandler(new WorkDirFlag());
+      registerHandler(new LauncherDir());
+      registerHandler(new ArgHandlerSetProperties(new OptionSetProperties() {
+
+          @Override
+        public void setPropertyValues(String name, Iterable<String> values) {
+          properties.replaceValues(name, values);
+        }
+
+          @Override
+        public ListMultimap<String, String> getProperties() {
+          return properties;
+        }
+
+      }));
+      registerHandler(new ArgHandlerIncrementalCompile(new OptionIncrementalCompile() {
+        @Override
+        public boolean isIncrementalCompileEnabled() {
+          return incremental;
+        }
+
+        @Override
+        public void setIncrementalCompileEnabled(boolean enabled) {
+          incremental = enabled;
+        }
+      }));
       registerHandler(new ArgHandlerSourceLevel(new OptionSourceLevel() {
         @Override
         public SourceLevel getSourceLevel() {
@@ -206,6 +375,39 @@ public class Options {
         @Override
         public void setLogLevel(TreeLogger.Type logLevel) {
           Options.this.logLevel = logLevel;
+        }
+      }));
+      registerHandler(new ArgHandlerJsInteropMode(new OptionJsInteropMode() {
+        @Override
+        public OptionJsInteropMode.Mode getJsInteropMode() {
+          return Options.this.jsInteropMode;
+        }
+
+        @Override
+        public void setJsInteropMode(OptionJsInteropMode.Mode mode) {
+          Options.this.jsInteropMode = mode;
+        }}));
+      registerHandler(new ArgHandlerMethodNameDisplayMode(new OptionMethodNameDisplayMode() {
+        @Override
+        public OptionMethodNameDisplayMode.Mode getMethodNameDisplayMode() {
+          return Options.this.methodNameDisplayMode;
+        }
+
+        @Override
+        public void setMethodNameDisplayMode(Mode mode) {
+          Options.this.methodNameDisplayMode = mode;
+        }
+      }) {
+      });
+      registerHandler(new ArgHandlerClosureFormattedOutput(new OptionClosureFormattedOutput() {
+        @Override
+        public boolean isClosureCompilerFormatEnabled() {
+          return Options.this.closureFormattedOutput;
+        }
+
+        @Override
+        public void setClosureCompilerFormatEnabled(boolean enabled) {
+          Options.this.closureFormattedOutput = enabled;
         }
       }));
     }
@@ -261,6 +463,29 @@ public class Options {
     @Override
     public boolean getDefaultValue() {
       return isCompileTest;
+    }
+  }
+
+  private class CompileTestRecompilesFlag extends ArgHandlerInt {
+
+    @Override
+    public String getTag() {
+      return "-compileTestRecompiles";
+    }
+
+    @Override
+    public String[] getTagArgs() {
+      return new String[] { "count" };
+    }
+
+    @Override
+    public String getPurpose() {
+      return "The number of times to recompile (after the first one) during a compile test.";
+    }
+
+    @Override
+    public void setInt(int value) {
+      compileTestRecompiles = value;
     }
   }
 
@@ -345,6 +570,35 @@ public class Options {
     }
   }
 
+  private class FailOnErrorFlag extends ArgHandlerFlag {
+
+    FailOnErrorFlag() {
+      // Backward compatibility with -strict in the regular compiler.
+      addTagValue("-strict", true);
+    }
+
+    @Override
+    public String getLabel() {
+      return "failOnError";
+    }
+
+    @Override
+    public boolean getDefaultValue() {
+      return false;
+    }
+
+    @Override
+    public String getPurposeSnippet() {
+      return "Stop compiling if a module has a Java file with a compile error, even if unused.";
+    }
+
+    @Override
+    public boolean setFlag(boolean value) {
+      failOnError = value;
+      return true;
+    }
+  }
+
   private class StrictResourcesFlag extends ArgHandlerFlag {
 
     public StrictResourcesFlag() {
@@ -363,8 +617,8 @@ public class Options {
 
     @Override
     public String getPurposeSnippet() {
-      return "Avoid adding implicit dependencies on \"client\" and \"public\" for "
-          + "modules that don't define any dependencies.";
+      return "Don't implicitly depend on \"client\" and \"public\" when "
+          + "a module doesn't define any dependencies.";
     }
 
     @Override
@@ -438,6 +692,48 @@ public class Options {
     }
   }
 
+  private class LauncherDir extends ArgHandler {
+
+    @Override
+    public String getTag() {
+      return "-launcherDir";
+    }
+
+    @Override
+    public String[] getTags() {
+      // add an alias since in DevMode this was "-war"
+      return new String[] {getTag(), "-war"};
+    }
+
+    @Override
+    public String[] getTagArgs() {
+      return new String[0];
+    }
+
+    @Override
+    public String getPurpose() {
+      return "An output directory where files for launching Super Dev Mode will be written. "
+          + "(Optional.)";
+    }
+
+    @Override
+    public int handle(String[] args, int startIndex) {
+      if (startIndex + 1 >= args.length) {
+        System.err.println(getTag() + " should be followed by the name of a directory");
+        return -1;
+      }
+
+      File candidate = new File(args[startIndex + 1]);
+      if (!candidate.isDirectory()) {
+        System.err.println("not a directory: " + candidate);
+        return -1;
+      }
+
+      launcherDir = candidate;
+      return 1;
+    }
+  }
+
   private class ModuleNameArgument extends ArgHandlerExtra {
 
     @Override
@@ -452,8 +748,16 @@ public class Options {
 
     @Override
     public boolean addExtraArg(String arg) {
+      if (!ModuleDef.isValidModuleName(arg)) {
+        System.err.println("Invalid module name: '" + arg + "'");
+        return false;
+      }
       moduleNames.add(arg);
       return true;
     }
+  }
+
+  public OptionMethodNameDisplayMode.Mode getMethodNameDisplayMode() {
+    return methodNameDisplayMode;
   }
 }

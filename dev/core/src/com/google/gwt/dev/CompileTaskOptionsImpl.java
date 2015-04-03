@@ -16,6 +16,8 @@
 package com.google.gwt.dev;
 
 import com.google.gwt.core.ext.TreeLogger.Type;
+import com.google.gwt.dev.cfg.Properties;
+import com.google.gwt.dev.util.arg.OptionJsInteropMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,18 +28,13 @@ import java.util.List;
  */
 class CompileTaskOptionsImpl implements CompileTaskOptions {
 
-  private List<String> libraryPaths = new ArrayList<String>();
-  private boolean link;
+  private Properties finalProperties;
   private Type logLevel;
   private final List<String> moduleNames = new ArrayList<String>();
-  private String outputLibraryPath;
   private File workDir;
+  private Mode jsInteropMode;
 
   public CompileTaskOptionsImpl() {
-  }
-
-  public CompileTaskOptionsImpl(CompileTaskOptions other) {
-    copyFrom(other);
   }
 
   @Override
@@ -49,9 +46,7 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
     setLogLevel(other.getLogLevel());
     setModuleNames(other.getModuleNames());
     setWorkDir(other.getWorkDir());
-    setLibraryPaths(other.getLibraryPaths());
-    setOutputLibraryPath(other.getOutputLibraryPath());
-    setLink(other.shouldLink());
+    setFinalProperties(other.getFinalProperties());
   }
 
   public File getCompilerWorkDir(String moduleName) {
@@ -59,8 +54,12 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
   }
 
   @Override
-  public List<String> getLibraryPaths() {
-    return libraryPaths;
+  public Properties getFinalProperties() {
+    return finalProperties;
+  }
+
+  @Override public OptionJsInteropMode.Mode getJsInteropMode() {
+    return jsInteropMode;
   }
 
   @Override
@@ -74,24 +73,17 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
   }
 
   @Override
-  public String getOutputLibraryPath() {
-    return outputLibraryPath;
-  }
-
-  @Override
   public File getWorkDir() {
     return workDir;
   }
 
   @Override
-  public void setLibraryPaths(List<String> libraryPaths) {
-    this.libraryPaths.clear();
-    this.libraryPaths.addAll(libraryPaths);
+  public void setFinalProperties(Properties finalProperties) {
+    this.finalProperties = finalProperties;
   }
 
-  @Override
-  public void setLink(boolean link) {
-    this.link = link;
+  @Override public void setJsInteropMode(OptionJsInteropMode.Mode mode) {
+    jsInteropMode = mode;
   }
 
   @Override
@@ -106,17 +98,7 @@ class CompileTaskOptionsImpl implements CompileTaskOptions {
   }
 
   @Override
-  public void setOutputLibraryPath(String outputLibraryPath) {
-    this.outputLibraryPath = outputLibraryPath;
-  }
-
-  @Override
   public void setWorkDir(File workDir) {
     this.workDir = workDir;
-  }
-
-  @Override
-  public boolean shouldLink() {
-    return link;
   }
 }

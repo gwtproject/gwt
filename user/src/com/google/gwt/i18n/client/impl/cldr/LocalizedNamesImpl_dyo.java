@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=dyo
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "dyo" locale.
@@ -84,6 +79,7 @@ public class LocalizedNamesImpl_dyo extends LocalizedNamesImpl {
         "DG",
         "DM",
         "EA",
+        "NF",
         "ET",
         "EH",
         "EC",
@@ -226,8 +222,8 @@ public class LocalizedNamesImpl_dyo extends LocalizedNamesImpl {
         "SV",
         "JM",
         "AS",
-        "NF",
         "JP",
+        "LC",
         "SB",
         "SC",
         "SE",
@@ -254,7 +250,6 @@ public class LocalizedNamesImpl_dyo extends LocalizedNamesImpl {
         "SZ",
         "TA",
         "TH",
-        "LC",
         "TC",
         "TF",
         "TJ",
@@ -284,6 +279,7 @@ public class LocalizedNamesImpl_dyo extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XK",
         "YE",
         "YT",
         "ZA",
@@ -371,10 +367,10 @@ public class LocalizedNamesImpl_dyo extends LocalizedNamesImpl {
     namesMap.put("KE", "Keniya");
     namesMap.put("KH", "Kamboj");
     namesMap.put("KM", "Komor");
-    namesMap.put("LC", "Tansani");
+    namesMap.put("LC", "Saŋ Lusia");
     namesMap.put("LK", "Siri Lanka");
     namesMap.put("MG", "Madagaskaar");
-    namesMap.put("NF", "San Marin");
+    namesMap.put("NF", "Ecinkey yati Noorfok");
     namesMap.put("SA", "Abari Saudi");
     namesMap.put("SG", "Singapur");
     namesMap.put("SI", "Sloveni");
@@ -469,10 +465,10 @@ public class LocalizedNamesImpl_dyo extends LocalizedNamesImpl {
         "KE": "Keniya",
         "KH": "Kamboj",
         "KM": "Komor",
-        "LC": "Tansani",
+        "LC": "Saŋ Lusia",
         "LK": "Siri Lanka",
         "MG": "Madagaskaar",
-        "NF": "San Marin",
+        "NF": "Ecinkey yati Noorfok",
         "SA": "Abari Saudi",
         "SG": "Singapur",
         "SI": "Sloveni",

@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6443 $
-//  type=root
-//  date=$Date: 2012-01-25 14:51:07 -0500 (Wed, 25 Jan 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "ii" locale.

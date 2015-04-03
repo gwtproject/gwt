@@ -36,10 +36,15 @@ import java.util.Set;
 public final class SerializationPolicyLoader {
 
   /**
-   * Keyword for listing the serializable fields of an enchanced class that are
+   * Keyword for listing the serializable fields of an enhanced class that are
    * visible to client code.
    */
   public static final String CLIENT_FIELDS_KEYWORD = "@ClientFields";
+
+  /**
+   * Keyword for final field serialization strategy.
+   */
+  public static final String FINAL_FIELDS_KEYWORD = "@FinalFields";
 
   /**
    * Default encoding for serialization policy files.
@@ -114,7 +119,8 @@ public final class SerializationPolicyLoader {
     Map<Class<?>, Boolean> whitelistDeser = new HashMap<Class<?>, Boolean>();
     Map<Class<?>, String> typeIds = new HashMap<Class<?>, String>();
     Map<Class<?>, Set<String>> clientFields = new HashMap<Class<?>, Set<String>>();
-    
+    boolean shouldSerializeFinalFields = false;
+
     ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
 
     InputStreamReader isr = new InputStreamReader(inputStream,
@@ -152,6 +158,8 @@ public final class SerializationPolicyLoader {
               classNotFoundExceptions.add(ex);
             }
           }
+        } else if (components[0].equals(FINAL_FIELDS_KEYWORD)) {
+          shouldSerializeFinalFields = Boolean.valueOf(components[1].trim());
         } else {
           if (components.length != 2 && components.length != 7) {
             throw new ParseException(FORMAT_ERROR_MESSAGE, lineNum);
@@ -217,7 +225,7 @@ public final class SerializationPolicyLoader {
     }
 
     return new StandardSerializationPolicy(whitelistSer, whitelistDeser,
-        typeIds, clientFields);
+        typeIds, clientFields, shouldSerializeFinalFields);
   }
 
   private SerializationPolicyLoader() {

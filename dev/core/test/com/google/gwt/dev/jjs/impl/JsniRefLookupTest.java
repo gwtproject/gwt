@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -53,7 +53,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.Intf") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("public interface Intf {\n");
         code.append("  public int addTwoOverloaded(int x);\n");
@@ -68,7 +68,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.Foo") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("public class Foo implements Intf {\n");
         code.append("  public Foo() { }\n");
@@ -89,7 +89,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.Bar") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("public class Bar extends Foo {\n");
         code.append("  public Bar() { }\n");
@@ -104,7 +104,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.GenericClass") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("public abstract class GenericClass<T> {\n");
         code.append("  abstract void set(T x);\n");
@@ -116,7 +116,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.ClassWithBridge") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("class ClassWithBridge extends GenericClass<String> {\n");
         code.append("  void set(String x) { }\n");
@@ -128,7 +128,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.PrivateSup") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("public class PrivateSup {\n");
         code.append("  private static int field;\n");
@@ -143,7 +143,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.PrivateSub") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("public class PrivateSub extends PrivateSup {\n");
         code.append("  private static float field;\n");
@@ -157,7 +157,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.DiffRetSuper") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("public interface DiffRetSuper {\n");
         code.append("  Object foo();\n");
@@ -169,7 +169,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.DiffRetSub") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("public interface DiffRetSub extends DiffRetSuper {\n");
         code.append("  String foo();\n");
@@ -183,7 +183,7 @@ public class JsniRefLookupTest extends JJSTestBase {
     try {
       // The snippet must reference the classes so they will be compiled in
       program = compileSnippet("void",
-          "new test.Foo(); new test.Bar(); new ClassWithBridge(); new PrivateSub();");
+          "new test.Foo(); new test.Bar(); new ClassWithBridge(); new PrivateSub();", true);
     } catch (UnableToCompleteException e) {
       throw new RuntimeException(e);
     }

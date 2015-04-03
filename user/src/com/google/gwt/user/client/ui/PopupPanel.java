@@ -115,11 +115,11 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
    *
    * <ul>
    * <li>CENTER - Expand from the center of the popup</li>
-   * <li>ONE_WAY_CORNER - Expand from the top left corner, do not animate hiding
-   * </li>
+   * <li>ONE_WAY_CORNER - Expand from the top left corner, do not animate hiding</li>
+   * <li>ROLL_DOWN - Expand from the top to the bottom, do not animate hiding</li>
    * </ul>
    */
-  static enum AnimationType {
+  public static enum AnimationType {
     CENTER, ONE_WAY_CORNER, ROLL_DOWN
   }
 
@@ -219,7 +219,6 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
           }
           impl.setClip(curPanel.getElement(), getRectString(0, 0, 0, 0));
           RootPanel.get().add(curPanel);
-          impl.onShow(curPanel.getElement());
 
           // Wait for the popup panel and iframe to be attached before running
           // the animation. We use a Timer instead of a DeferredCommand so we
@@ -247,7 +246,6 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
         if (!isUnloading) {
           RootPanel.get().remove(curPanel);
         }
-        impl.onHide(curPanel.getElement());
       }
       impl.setClip(curPanel.getElement(), "rect(auto, auto, auto, auto)");
       curPanel.getElement().getStyle().setProperty("overflow", "visible");
@@ -313,7 +311,6 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
       if (showing) {
         if (curPanel.isGlassEnabled) {
           Document.get().getBody().appendChild(curPanel.glass);
-          impl.onShow(curPanel.glass);
 
           resizeRegistration = Window.addResizeHandler(curPanel.glassResizer);
           curPanel.glassResizer.onResize(null);
@@ -322,7 +319,6 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
         }
       } else if (glassShowing) {
         Document.get().getBody().removeChild(curPanel.glass);
-        impl.onHide(curPanel.glass);
 
         resizeRegistration.removeHandler();
         resizeRegistration = null;
@@ -342,12 +338,10 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
           curPanel.setPopupPosition(curPanel.leftPosition, curPanel.topPosition);
         }
         RootPanel.get().add(curPanel);
-        impl.onShow(curPanel.getElement());
       } else {
         if (!isUnloading) {
           RootPanel.get().remove(curPanel);
         }
-        impl.onHide(curPanel.getElement());
       }
       curPanel.getElement().getStyle().setProperty("overflow", "visible");
     }
@@ -394,11 +388,6 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
     }
   };
 
-  /**
-   * If true, animate the opening of this popup from the center. If false,
-   * animate it open from top to bottom, and do not animate closing. Use false
-   * to animate menus.
-   */
   private AnimationType animType = AnimationType.CENTER;
 
   private boolean autoHide, previewAllNativeEvents, modal, showing;
@@ -964,9 +953,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
 
     // If the PopupImpl creates an iframe shim, it's also necessary to hide it
     // as well.
-    impl.setVisible(getElement(), visible);
     if (glass != null) {
-      impl.setVisible(glass, visible);
       glass.getStyle().setProperty("visibility", visible ? "visible" : "hidden");
     }
   }
@@ -1114,12 +1101,23 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
   }
 
   /**
-   * Enable or disable animation of the {@link PopupPanel}.
+   * Set the type of animation to use when opening and closing the popup.
    *
+   * @see AnimationType
    * @param type the type of animation to use
    */
-  void setAnimationType(AnimationType type) {
-    animType = type;
+  public void setAnimationType(AnimationType type) {
+    animType = type != null ? type : AnimationType.CENTER;
+  }
+
+  /**
+   * Get the type of animation to use when opening and closing the popup.
+   *
+   * @see AnimationType
+   * @return the type of animation used
+   */
+  public AnimationType getAnimationType() {
+    return animType;
   }
 
   /**
@@ -1299,7 +1297,7 @@ public class PopupPanel extends SimplePanel implements SourcesPopupEvents,
 
     // If there is not enough space for the popup's height below the text
     // box and there IS enough space for the popup's height above the text
-    // box, then then position the popup above the text box. However, if there
+    // box, then position the popup above the text box. However, if there
     // is not enough space on either side, then stick with displaying the
     // popup below the text box.
     if (distanceToWindowBottom < offsetHeight

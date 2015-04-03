@@ -5,10 +5,16 @@ function installScript(filename) {
   __WAIT_FOR_BODY_LOADED__
   
   function installCode(code) {
-    var docbody = getInstallLocation();
-    var script = getInstallLocationDoc().createElement('script');
+    var doc = getInstallLocationDoc();
+    var docbody = doc.body;
+    var script = doc.createElement('script');
     script.language='javascript';
     script.src = code;
+    if (__MODULE_FUNC__.__errFn) {
+      script.onerror = function() {
+        __MODULE_FUNC__.__errFn('__MODULE_FUNC__', new Error("Failed to load " + code));
+      }
+    }
     docbody.appendChild(script);
     sendStats('moduleStartup', 'scriptTagAdded');
   }

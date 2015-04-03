@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,18 +25,13 @@ import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsBooleanLiteral;
-import com.google.gwt.dev.js.ast.JsCase;
 import com.google.gwt.dev.js.ast.JsCatchScope;
 import com.google.gwt.dev.js.ast.JsConditional;
 import com.google.gwt.dev.js.ast.JsContext;
-import com.google.gwt.dev.js.ast.JsDefault;
 import com.google.gwt.dev.js.ast.JsEmpty;
 import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
-import com.google.gwt.dev.js.ast.JsFor;
-import com.google.gwt.dev.js.ast.JsForIn;
 import com.google.gwt.dev.js.ast.JsFunction;
-import com.google.gwt.dev.js.ast.JsIf;
 import com.google.gwt.dev.js.ast.JsInvocation;
 import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
@@ -50,6 +45,7 @@ import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.js.ast.JsPostfixOperation;
 import com.google.gwt.dev.js.ast.JsPrefixOperation;
 import com.google.gwt.dev.js.ast.JsProgram;
+import com.google.gwt.dev.js.ast.JsPropertyInitializer;
 import com.google.gwt.dev.js.ast.JsRegExp;
 import com.google.gwt.dev.js.ast.JsReturn;
 import com.google.gwt.dev.js.ast.JsRootScope;
@@ -60,27 +56,27 @@ import com.google.gwt.dev.js.ast.JsThisRef;
 import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsVisitor;
-import com.google.gwt.dev.js.ast.JsWhile;
+import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.HashMultiset;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Multiset;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.IdentityHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Perform inlining optimizations on the JavaScript AST.
- * 
+ *
  * TODO(bobv): remove anything that's duplicating work with {@link JsStaticEval}
  * migrate other stuff to that class perhaps.
  */
@@ -155,7 +151,7 @@ public class JsInliner {
    * side-effect-free expressions save for the outer, right-hand expression.
    * This form has a nice side-effect of minimizing the number of generated
    * parentheses.
-   * 
+   *
    * <pre>
    * (X, b) is unchanged
    * (X, (b, c) becomes ((X, b), c); b is guaranteed to have a side-effect
@@ -369,236 +365,6 @@ public class JsInliner {
   }
 
   /**
-   * This is used to clean up duplication invocations of functions that should
-   * only be executed once, such as clinit functions. Whenever there is a
-   * possible branch in program flow, the remover will create a new instance of
-   * itself to handle the possible branches.
-   * 
-   * We don't look at combining branch choices. This will not produce the most
-   * efficient elimination of duplicated calls, but it handles the general case
-   * and is simple to verify.
-   */
-  private static class DuplicateXORemover extends JsModVisitor {
-    /*
-     * TODO: Most of the special casing below can be removed if complex
-     * statements always use blocks, rather than plain statements.
-     */
-
-    /**
-     * Retains the functions that we know have been called.
-     */
-    private final Set<JsFunction> called;
-    private final JsProgram program;
-
-    public DuplicateXORemover(JsProgram program) {
-      this.program = program;
-      called = new HashSet<JsFunction>();
-    }
-
-    public DuplicateXORemover(JsProgram program, Set<JsFunction> alreadyCalled) {
-      this.program = program;
-      called = new HashSet<JsFunction>(alreadyCalled);
-    }
-
-    /**
-     * Look for comma expressions that contain duplicate calls and handle the
-     * conditional-evaluation case of logical and/or operations.
-     */
-    @Override
-    public boolean visit(JsBinaryOperation x, JsContext ctx) {
-      if (x.getOperator() == JsBinaryOperator.COMMA) {
-
-        boolean left = isDuplicateCall(x.getArg1());
-        boolean right = isDuplicateCall(x.getArg2());
-
-        if (left && right) {
-          /*
-           * (clinit(), clinit()) --> delete or null.
-           * 
-           * This construct is very unlikely since the InliningVisitor builds
-           * the comma expressions in a right-nested manner.
-           */
-          if (ctx.canRemove()) {
-            ctx.removeMe();
-            return false;
-          } else {
-            // The return value from an XO function is never used
-            ctx.replaceMe(JsNullLiteral.INSTANCE);
-            return false;
-          }
-
-        } else if (left) {
-          // (clinit(), xyz) --> xyz
-          // This is the common case
-          ctx.replaceMe(accept(x.getArg2()));
-          return false;
-
-        } else if (right) {
-          // (xyz, clinit()) --> xyz
-          // Possible if a clinit() were the last element
-          ctx.replaceMe(accept(x.getArg1()));
-          return false;
-        }
-
-      } else if (x.getOperator().equals(JsBinaryOperator.AND)
-          || x.getOperator().equals(JsBinaryOperator.OR)) {
-        x.setArg1(accept(x.getArg1()));
-        // Possibility of conditional evaluation of second parameter
-        x.setArg2(branch(x.getArg2()));
-        return false;
-      }
-
-      return true;
-    }
-
-    /**
-     * Most of the branching statements (as well as JsFunctions) will visit with
-     * a JsBlock, so we don't need to explicitly enumerate all JsStatement
-     * subtypes.
-     */
-    @Override
-    public boolean visit(JsBlock x, JsContext ctx) {
-      branch(x.getStatements());
-      return false;
-    }
-
-    @Override
-    public boolean visit(JsCase x, JsContext ctx) {
-      x.setCaseExpr(accept(x.getCaseExpr()));
-      branch(x.getStmts());
-      return false;
-    }
-
-    @Override
-    public boolean visit(JsConditional x, JsContext ctx) {
-      x.setTestExpression(accept(x.getTestExpression()));
-      x.setThenExpression(branch(x.getThenExpression()));
-      x.setElseExpression(branch(x.getElseExpression()));
-      return false;
-    }
-
-    @Override
-    public boolean visit(JsDefault x, JsContext ctx) {
-      branch(x.getStmts());
-      return false;
-    }
-
-    @Override
-    public boolean visit(JsExprStmt x, JsContext ctx) {
-      if (isDuplicateCall(x.getExpression())) {
-        if (ctx.canRemove()) {
-          ctx.removeMe();
-        } else {
-          ctx.replaceMe(new JsEmpty(x.getSourceInfo()));
-        }
-        return false;
-
-      } else {
-        return true;
-      }
-    }
-
-    @Override
-    public boolean visit(JsFor x, JsContext ctx) {
-      // The JsFor may have an expression xor a variable declaration.
-      if (x.getInitExpr() != null) {
-        x.setInitExpr(accept(x.getInitExpr()));
-      } else if (x.getInitVars() != null) {
-        x.setInitVars(accept(x.getInitVars()));
-      }
-
-      // The condition is optional
-      if (x.getCondition() != null) {
-        x.setCondition(accept(x.getCondition()));
-      }
-
-      // The increment expression is optional
-      if (x.getIncrExpr() != null) {
-        x.setIncrExpr(branch(x.getIncrExpr()));
-      }
-
-      // The body is not guaranteed to be a JsBlock
-      x.setBody(branch(x.getBody()));
-      return false;
-    }
-
-    @Override
-    public boolean visit(JsForIn x, JsContext ctx) {
-      if (x.getIterExpr() != null) {
-        x.setIterExpr(accept(x.getIterExpr()));
-      }
-
-      x.setObjExpr(accept(x.getObjExpr()));
-
-      // The body is not guaranteed to be a JsBlock
-      x.setBody(branch(x.getBody()));
-      return false;
-    }
-
-    @Override
-    public boolean visit(JsIf x, JsContext ctx) {
-      x.setIfExpr(accept(x.getIfExpr()));
-
-      x.setThenStmt(branch(x.getThenStmt()));
-      if (x.getElseStmt() != null) {
-        x.setElseStmt(branch(x.getElseStmt()));
-      }
-
-      return false;
-    }
-
-    /**
-     * Possibly record that we've seen a call in the current context.
-     */
-    @Override
-    public boolean visit(JsInvocation x, JsContext ctx) {
-      JsFunction func = isExecuteOnce(x);
-      while (func != null) {
-        called.add(func);
-        func = func.getImpliedExecute();
-      }
-      return true;
-    }
-
-    @Override
-    public boolean visit(JsWhile x, JsContext ctx) {
-      x.setCondition(accept(x.getCondition()));
-
-      // The body is not guaranteed to be a JsBlock
-      x.setBody(branch(x.getBody()));
-      return false;
-    }
-
-    private <T extends JsNode> void branch(List<T> x) {
-      DuplicateXORemover dup = new DuplicateXORemover(program, called);
-      dup.acceptWithInsertRemove(x);
-      didChange |= dup.didChange();
-    }
-
-    private <T extends JsNode> T branch(T x) {
-      DuplicateXORemover dup = new DuplicateXORemover(program, called);
-      T toReturn = dup.accept(x);
-
-      if ((toReturn != x) && !dup.didChange()) {
-        throw new InternalCompilerException(
-            "node replacement should imply didChange()");
-      }
-
-      didChange |= dup.didChange();
-      return toReturn;
-    }
-
-    private boolean isDuplicateCall(JsExpression x) {
-      if (!(x instanceof JsInvocation)) {
-        return false;
-      }
-
-      JsFunction func = isExecuteOnce((JsInvocation) x);
-      return (func != null && called.contains(func));
-    }
-  }
-
-  /**
    * Determines that a list of names is guaranteed to be evaluated in a
    * particular order. Also ensures that all names are evaluated before any
    * invocations occur.
@@ -613,11 +379,11 @@ public class JsInliner {
     private boolean maintainsOrder = true;
     private final List<JsName> toEvaluate;
     private final List<JsName> unevaluated;
-    private final Set<JsName> paramsOrLocals = new HashSet<JsName>();
+    private final Set<JsName> paramsOrLocals = Sets.newHashSet();
 
     public EvaluationOrderVisitor(List<JsName> toEvaluate, JsFunction callee) {
       this.toEvaluate = toEvaluate;
-      this.unevaluated = new ArrayList<JsName>(toEvaluate);
+      this.unevaluated = Lists.newArrayList(toEvaluate);
       // collect params and locals from callee function
       new JsVisitor() {
         @Override
@@ -678,7 +444,7 @@ public class JsInliner {
     /**
      * The innermost invocation we see must consume all presently unevaluated
      * parameters to ensure that an exception does not prevent their evaluation.
-     * 
+     *
      * In the case of a nested invocation, such as
      * <code>F(r1, r2, G(r3, r4), f1);</code> the evaluation order is guaranteed
      * to be maintained, provided that no required parameters occur after the
@@ -701,7 +467,7 @@ public class JsInliner {
       /*
        * Unless all arguments have already been evaluated, assume that invoking
        * the new expression might interfere with the evaluation of the argument.
-       * 
+       *
        * It would be possible to allow this if the invoked function either does
        * nothing or does nothing that affects the remaining arguments. However,
        * currently there is no analysis of the invoked function.
@@ -777,9 +543,9 @@ public class JsInliner {
     public HoistedNameVisitor(JsScope toScope, JsScope fromScope) {
       this.toScope = toScope;
       this.fromScope = fromScope;
-      this.hoistedNames = new ArrayList<JsName>();
+      this.hoistedNames = Lists.newArrayList();
     }
-    
+
     public List<JsName> getHoistedNames() {
       return hoistedNames;
     }
@@ -811,7 +577,7 @@ public class JsInliner {
    */
   private static class IdentCollector extends JsVisitor {
     private final boolean collectQualified;
-    private final Set<String> idents = new HashSet<String>();
+    private final Set<String> idents = Sets.newHashSet();
 
     public IdentCollector(boolean collectQualified) {
       this.collectQualified = collectQualified;
@@ -843,7 +609,7 @@ public class JsInliner {
    * statements if the context of the invocation would allow this.
    */
   private static class InliningVisitor extends JsModVisitor {
-    private final Set<JsFunction> blacklist = new HashSet<JsFunction>();
+    private final Set<JsFunction> blacklist = Sets.newHashSet();
     private final Set<JsNode> whitelist;
     /**
      * This reflects the functions that are currently being inlined to prevent
@@ -854,23 +620,40 @@ public class JsInliner {
      * This reflects which function the visitor is currently visiting.
      */
     private final Stack<JsFunction> functionStack = new Stack<JsFunction>();
-    private final InvocationCountingVisitor invocationCountingVisitor = new InvocationCountingVisitor();
-    private final Stack<List<JsName>> newLocalVariableStack = new Stack<List<JsName>>();
+    private final InvocationCountingVisitor invocationCountingVisitor =
+        new InvocationCountingVisitor();
+    private final Stack<List<JsName>> newLocalVariableStack = Stack.create();
 
     /**
      * A map containing the next integer to try as an identifier suffix for a
      * given JsScope.
      */
-    private IdentityHashMap<JsScope, HashMap<String, Integer>> startIdentForScope = new IdentityHashMap<JsScope, HashMap<String, Integer>>();
+    private Map<JsScope, Multiset<String>> startIdentForScope = Maps.newIdentityHashMap();
 
     /**
      * Not a stack because program fragments aren't nested.
      */
     private JsFunction programFunction;
 
+    private JsProgram program;
+
+    private final Set<JsName> safeToInlineAtTopLevel;
+
     public InliningVisitor(JsProgram program, Set<JsNode> whitelist) {
-      invocationCountingVisitor.accept(program);
+      this.program = program;
       this.whitelist = whitelist;
+      invocationCountingVisitor.accept(program);
+      JsName defineClass = getFunctionName(program, "JavaClassHierarchySetupUtil.defineClass");
+      JsName defineClassProto = getFunctionName(program,
+          "JavaClassHierarchySetupUtil.defineClassWithPrototype");
+      // JsInlinerTest doesn't have these functions, but doesn't need them
+      safeToInlineAtTopLevel = defineClass != null ? ImmutableSet.of(
+          defineClass, defineClassProto) : ImmutableSet.<JsName>of();
+    }
+
+    private static JsName getFunctionName(JsProgram program, String name) {
+      JsFunction func = program.getIndexedFunction(name);
+      return func != null ? func.getName() : null;
     }
 
     /**
@@ -895,7 +678,7 @@ public class JsInliner {
         return;
       }
 
-      List<JsExprStmt> statements = new ArrayList<JsExprStmt>();
+      List<JsExprStmt> statements = Lists.newArrayList();
 
       /*
        * Assemble the expressions back into a list of JsExprStmts. We will
@@ -976,15 +759,7 @@ public class JsInliner {
 
     @Override
     public void endVisit(JsInvocation x, JsContext ctx) {
-      if (functionStack.isEmpty()) {
-        return;
-      }
       JsFunction callerFunction = functionStack.peek();
-
-      if (!whitelist.contains(callerFunction)) {
-        // Only look at functions that are in the white list
-        return;
-      }
 
       /*
        * We only want to look at invocations of things that we statically know
@@ -993,8 +768,12 @@ public class JsInliner {
        * when trying operate on references to external functions, or functions
        * as arguments to another function.
        */
-      JsFunction invokedFunction = isFunction(x.getQualifier());
+      JsFunction invokedFunction = JsUtils.isFunction(x.getQualifier());
       if (invokedFunction == null) {
+        return;
+      }
+
+      if (!program.isInliningAllowed(invokedFunction) || blacklist.contains(invokedFunction)) {
         return;
       }
 
@@ -1003,11 +782,6 @@ public class JsInliner {
        * engines will blow up.
        */
       if (invokedFunction.getBody().getStatements().size() > MAX_INLINE_FN_SIZE) {
-        return;
-      }
-
-      // Don't inline blacklisted functions
-      if (blacklist.contains(invokedFunction)) {
         return;
       }
 
@@ -1056,7 +830,8 @@ public class JsInliner {
         throw new InternalCompilerException("Unexpected function popped");
       }
 
-      assert programFunction.getBody().getStatements().size() == 0 : "Should not have moved statements into program";
+      assert programFunction.getBody().getStatements().size() == 0 :
+          "Should not have moved statements into program";
 
       List<JsName> newLocalVariables = newLocalVariableStack.pop();
       assert newLocalVariables.size() == 0 : "Should not have tried to create variables in program";
@@ -1065,9 +840,10 @@ public class JsInliner {
     @Override
     public boolean visit(JsExprStmt x, JsContext ctx) {
       if (functionStack.peek() == programFunction) {
-        /* Don't inline top-level invocations. */
+        /* Don't inline most top-level invocations. */
         if (x.getExpression() instanceof JsInvocation) {
-          return false;
+          return safeToInlineAtTopLevel.contains(
+              JsUtils.maybeGetFunctionName(x.getExpression()));
         }
       }
       return true;
@@ -1076,8 +852,8 @@ public class JsInliner {
     @Override
     public boolean visit(JsFunction x, JsContext ctx) {
       functionStack.push(x);
-      newLocalVariableStack.push(new ArrayList<JsName>());
-      return true;
+      newLocalVariableStack.push(Lists.<JsName>newArrayList());
+      return whitelist.contains(x);
     }
 
     /**
@@ -1089,7 +865,7 @@ public class JsInliner {
       programFunction = new JsFunction(x.getSourceInfo(), x.getScope());
       programFunction.setBody(new JsBlock(x.getSourceInfo()));
       functionStack.push(programFunction);
-      newLocalVariableStack.push(new ArrayList<JsName>());
+      newLocalVariableStack.push(Lists.<JsName>newArrayList());
       return true;
     }
 
@@ -1122,22 +898,20 @@ public class JsInliner {
     }
 
     private boolean isInvokedMoreThanOnce(JsFunction f) {
-      Integer count = invocationCountingVisitor.invocationCount(f);
-      return count == null || count > 1;
+      return invocationCountingVisitor.invocationCount(f) > 1;
     }
 
     /**
      * Determine if <code>invokedFunction</code> can be inlined into
      * <code>callerFunction</code> at callsite <code>x</code>.
-     * 
+     *
      * @return An expression equivalent to <code>x</code>
      */
     private JsExpression process(JsInvocation x, JsFunction callerFunction,
         JsFunction invokedFunction) {
       List<JsStatement> statements;
       if (invokedFunction.getBody() != null) {
-        statements = new ArrayList<JsStatement>(
-            invokedFunction.getBody().getStatements());
+        statements = Lists.newArrayList(invokedFunction.getBody().getStatements());
       } else {
         /*
          * Will see this with certain classes whose clinits are folded into the
@@ -1146,11 +920,11 @@ public class JsInliner {
         statements = Collections.emptyList();
       }
 
-      List<JsExpression> hoisted = new ArrayList<JsExpression>(statements.size());
+      List<JsExpression> hoisted = Lists.newArrayListWithCapacity(statements.size());
       JsExpression thisExpr = ((JsNameRef) x.getQualifier()).getQualifier();
       HoistedNameVisitor hoistedNameVisitor =
           new HoistedNameVisitor(callerFunction.getScope(), invokedFunction.getScope());
-      
+
       boolean sawReturnStatement = false;
 
       for (JsStatement statement : statements) {
@@ -1160,10 +934,10 @@ public class JsInliner {
            * statements. The target is unsafe to inline, so bail. Note: in most
            * cases JsStaticEval will have removed any statements following a
            * return statement.
-           * 
+           *
            * The reason we have to bail is that the return statement's
            * expression MUST be the last thing evaluated.
-           * 
+           *
            * TODO(bobv): maybe it could still be inlined with smart
            * transformation?
            */
@@ -1251,18 +1025,17 @@ public class JsInliner {
         String ident;
         String base = invokedFunction.getName() + "_" + name.getIdent();
         JsScope scope = callerFunction.getScope();
-        HashMap<String, Integer> startIdent = startIdentForScope.get(scope);
+        Multiset<String> startIdent = startIdentForScope.get(scope);
         if (startIdent == null) {
-          startIdent = new HashMap<String, Integer>();
+          startIdent = HashMultiset.create();
           startIdentForScope.put(scope, startIdent);
         }
 
-        Integer s = startIdent.get(base);
-        int suffix = (s == null) ? 0 : s.intValue();
+        int suffix = startIdent.count(base);
         do {
           ident = base + "_" + suffix++;
         } while (scope.findExistingName(ident) != null);
-        startIdent.put(base, suffix);
+        startIdent.setCount(base, suffix);
 
         JsName newName = scope.declareName(ident, name.getShortIdent());
         v.setReplacementName(name, newName);
@@ -1307,7 +1080,7 @@ public class JsInliner {
    */
   private static class InvocationCountingVisitor extends JsVisitor {
     private boolean removingCounts = false;
-    private final Map<JsFunction, Integer> invocationCount = new IdentityHashMap<JsFunction, Integer>();
+    private final Multiset<JsFunction> invocationCount = HashMultiset.create();
 
     @Override
     public void endVisit(JsInvocation x, JsContext ctx) {
@@ -1319,8 +1092,8 @@ public class JsInliner {
       checkFunctionCall(x.getConstructorExpression());
     }
 
-    public Integer invocationCount(JsFunction f) {
-      return invocationCount.get(f);
+    public int invocationCount(JsFunction f) {
+      return invocationCount.count(f);
     }
 
     /**
@@ -1334,20 +1107,14 @@ public class JsInliner {
     }
 
     private void checkFunctionCall(JsExpression qualifier) {
-      JsFunction function = isFunction(qualifier);
-      if (function != null) {
-        Integer count = invocationCount.get(function);
-        if (count == null) {
-          assert (!removingCounts);
-          count = 1;
-        } else {
-          if (removingCounts) {
-            count -= 1;
-          } else {
-            count += 1;
-          }
-        }
-        invocationCount.put(function, count);
+      JsFunction function = JsUtils.isFunction(qualifier);
+      if (function == null) {
+        return;
+      }
+      if (removingCounts) {
+        invocationCount.remove(function);
+      } else {
+        invocationCount.add(function);
       }
     }
   }
@@ -1358,10 +1125,9 @@ public class JsInliner {
   private static class SingleInvocationVisitor extends JsVisitor {
     // Keep track of functions that are invoked once.
     // Invariant: singleInvokations(fn) = null => calls to fn have not been seen
-    //            singleInvokations(fn) = MULTIPLE =>  mutiple callsites to fn have been seen.
+    //            singleInvokations(fn) = MULTIPLE =>  multiple callsites to fn have been seen.
     //            singleInvokations(fn) = caller =>  one callsite has been seen an occurs in caller.
-    private final Map<JsFunction, JsFunction> singleInvocations =
-        new IdentityHashMap<JsFunction, JsFunction>();
+    private final Map<JsFunction, JsFunction> singleInvocations = Maps.newHashMap();
 
     // Indicates multiple invocations were found (only identity is used).
     private static final JsFunction MULTIPLE = JsFunction.createSentinel();
@@ -1376,7 +1142,7 @@ public class JsInliner {
     }
 
     public Collection<JsNode> inliningCandidates() {
-      Collection<JsNode> set = new LinkedHashSet<JsNode>();
+      Collection<JsNode> set = Sets.newLinkedHashSet();
       for (Map.Entry<JsFunction, JsFunction> entry : singleInvocations.entrySet()) {
         if (entry.getValue() != MULTIPLE) {
           set.add(entry.getValue());
@@ -1402,7 +1168,7 @@ public class JsInliner {
     }
 
     private void checkFunctionCall(JsExpression qualifier) {
-      JsFunction function = isFunction(qualifier);
+      JsFunction function = JsUtils.isFunction(qualifier);
       if (function != null && !functionStack.isEmpty()) {
         // Keep track if function is only invoked at a single callsite.
         JsFunction recordedInvoker = singleInvocations.get(function);
@@ -1424,13 +1190,13 @@ public class JsInliner {
     /**
      * Set up a map to record name replacements to perform.
      */
-    final Map<JsName, JsName> nameReplacements = new IdentityHashMap<JsName, JsName>();
+    final Map<JsName, JsName> nameReplacements = Maps.newIdentityHashMap();
 
     /**
      * Set up a map of parameter names back to the expressions that will be
      * passed in from the outer call site.
      */
-    final Map<JsName, JsExpression> paramsToArgsMap = new IdentityHashMap<JsName, JsExpression>();
+    final Map<JsName, JsExpression> paramsToArgsMap = Maps.newIdentityHashMap();
 
     /**
      * A replacement expression for this references.
@@ -1480,7 +1246,7 @@ public class JsInliner {
 
     /**
      * Set a replacement JsName for all references to a JsName.
-     * 
+     *
      * @param name the name to replace
      * @param newName the new name that should be used in place of references to
      *          <code>name</code>
@@ -1585,8 +1351,8 @@ public class JsInliner {
    * eligible for inlining in a subsequent pass.
    */
   private static class RecursionCollector extends JsVisitor {
-    private final Stack<JsFunction> functionStack = new Stack<JsFunction>();
-    private final Set<JsFunction> recursive = new HashSet<JsFunction>();
+    private final Stack<JsFunction> functionStack = Stack.create();
+    private final Set<JsFunction> recursive = Sets.newHashSet();
 
     @Override
     public void endVisit(JsFunction x, JsContext ctx) {
@@ -1600,12 +1366,12 @@ public class JsInliner {
       /*
        * Because functions can encapsulate other functions, we look at the
        * entire stack and not just the top element. This would prevent inlining
-       * 
+       *
        * function a() { function b() { a(); } b(); }
-       * 
+       *
        * in the case that we generally allow nested functions to be inlinable.
        */
-      JsFunction f = isFunction(x.getQualifier());
+      JsFunction f = JsUtils.isFunction(x.getQualifier());
       if (functionStack.contains(f)) {
         recursive.add(f);
       }
@@ -1629,8 +1395,8 @@ public class JsInliner {
    * the lifetime of the program.
    */
   private static class RedefinedFunctionCollector extends JsVisitor {
-    private final Map<JsName, JsFunction> nameMap = new IdentityHashMap<JsName, JsFunction>();
-    private final Set<JsFunction> redefined = new HashSet<JsFunction>();
+    private final Map<JsName, JsFunction> nameMap = Maps.newIdentityHashMap();
+    private final Set<JsFunction> redefined = Sets.newHashSet();
 
     /**
      * Look for assignments to JsNames whose static references are JsFunctions.
@@ -1642,7 +1408,7 @@ public class JsInliner {
         return;
       }
 
-      JsFunction f = isFunction(x.getArg1());
+      JsFunction f = JsUtils.isFunction(x.getArg1());
       if (f != null) {
         redefined.add(f);
       }
@@ -1746,7 +1512,7 @@ public class JsInliner {
       } else if (callerName != null && callerName.equals(calleeName)) {
         // The names are known to us and are the same
 
-      } else if (calleeName.getEnclosing().equals(calleeScope)) {
+      } else if (calleeName != null && calleeName.getEnclosing().equals(calleeScope)) {
         // It's a local variable in the callee
 
       } else {
@@ -1756,6 +1522,15 @@ public class JsInliner {
 
     public boolean isStable() {
       return stable;
+    }
+
+    @Override
+    public boolean visit(JsObjectLiteral x, JsContext ctx) {
+      // Labels are always stable, so only check values.
+      for (JsPropertyInitializer propertyInitializer : x.getPropertyInitializers()) {
+        accept(propertyInitializer.getValueExpr());
+      }
+      return false;
     }
   }
 
@@ -1835,7 +1610,7 @@ public class JsInliner {
     // site as well as those produced by native methods and their callers.
     SingleInvocationVisitor s = new SingleInvocationVisitor();
     s.accept(program);
-    Set<JsNode> candidates = new LinkedHashSet<JsNode>(toInline);
+    Set<JsNode> candidates = Sets.newLinkedHashSet(toInline);
     candidates.addAll(s.inliningCandidates());
 
     RedefinedFunctionCollector d = new RedefinedFunctionCollector();
@@ -1854,12 +1629,6 @@ public class JsInliner {
     v.accept(program);
 
     if (v.didChange()) {
-      stats.recordModified();
-    }
-
-    DuplicateXORemover r = new DuplicateXORemover(program);
-    r.accept(program);
-    if (r.didChange()) {
       stats.recordModified();
     }
     return stats;
@@ -1920,7 +1689,7 @@ public class JsInliner {
    * outer caller. This does not perform any name replacement, but simply
    * constructs a mutable copy of the expression that can be manipulated
    * at-will.
-   * 
+   *
    * @param statement the statement from which to extract the expressions
    * @return a JsExpression representing all expressions that would have been
    *         evaluated by the statement
@@ -1976,42 +1745,6 @@ public class JsInliner {
   }
 
   /**
-   * Given a JsInvocation, determine if it is invoking a JsFunction that is
-   * specified to be executed only once during the program's lifetime.
-   */
-  private static JsFunction isExecuteOnce(JsInvocation invocation) {
-    JsFunction f = isFunction(invocation.getQualifier());
-    if (f != null && f.getExecuteOnce()) {
-      return f;
-    }
-    return null;
-  }
-
-  /**
-   * Given an expression, determine if it is a JsNameRef that refers to a
-   * statically-defined JsFunction.
-   */
-  private static JsFunction isFunction(JsExpression e) {
-    if (e instanceof JsNameRef) {
-      JsNameRef ref = (JsNameRef) e;
-
-      // Unravel foo.call(...).
-      if (!ref.getName().isObfuscatable() && "call".equals(ref.getIdent())) {
-        if (ref.getQualifier() instanceof JsNameRef) {
-          ref = (JsNameRef) ref.getQualifier();
-        }
-      }
-
-      JsNode staticRef = ref.getName().getStaticRef();
-      if (staticRef instanceof JsFunction) {
-        return (JsFunction) staticRef;
-      }
-    }
-
-    return null;
-  }
-
-  /**
    * Determine if a statement can be inlined into a call site.
    */
   private static boolean isInlinable(JsFunction caller, JsFunction callee,
@@ -2028,8 +1761,8 @@ public class JsInliner {
     }
 
     // Build up a list of all parameter names
-    Set<JsName> parameterNames = new HashSet<JsName>();
-    Set<String> parameterIdents = new HashSet<String>();
+    Set<JsName> parameterNames = Sets.newHashSet();
+    Set<String> parameterIdents = Sets.newHashSet();
     for (JsParameter param : callee.getParameters()) {
       parameterNames.add(param.getName());
       parameterIdents.add(param.getName().getIdent());
@@ -2051,7 +1784,7 @@ public class JsInliner {
     /*
      * Ensure that the names referred to by the argument list and the statement
      * are disjoint. This prevents inlining of the following:
-     * 
+     *
      * static int i; public void add(int a) { i += a; }; add(i++);
      */
     if (hasCommonIdents(arguments, toInline, parameterIdents)) {
@@ -2062,7 +1795,7 @@ public class JsInliner {
     if (thisExpr == null) {
       evalArgs = arguments;
     } else {
-      evalArgs = new ArrayList<JsExpression>(1 + arguments.size());
+      evalArgs = Lists.newArrayListWithCapacity(1 + arguments.size());
       evalArgs.add(thisExpr);
       evalArgs.addAll(arguments);
     }
@@ -2078,7 +1811,7 @@ public class JsInliner {
        * will vary between call sites, based on whether or not the invocation's
        * arguments can be repeated without ill effect.
        */
-      List<JsName> requiredOrder = new ArrayList<JsName>();
+      List<JsName> requiredOrder = Lists.newArrayList();
       if (thisExpr != null && isVolatile(thisExpr, callee)) {
         requiredOrder.add(EvaluationOrderVisitor.THIS_NAME);
       }
@@ -2167,10 +1900,9 @@ public class JsInliner {
     JsNameRef newTarget = new JsNameRef(oldTarget.getSourceInfo(),
         oldTarget.getName());
     newTarget.setQualifier(oldArgs.get(0));
-    JsInvocation newCall = new JsInvocation(x.getSourceInfo());
-    newCall.setQualifier(newTarget);
-    // Don't have to clone because the returned invocation is transient.
-    newCall.getArguments().addAll(oldArgs.subList(1, oldArgs.size()));
+    JsInvocation newCall = new JsInvocation(x.getSourceInfo(), newTarget,
+        // Don't need to clone because the returned invocation is transient.
+        oldArgs.subList(1, oldArgs.size()));
     return newCall;
   }
 

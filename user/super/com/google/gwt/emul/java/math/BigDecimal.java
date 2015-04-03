@@ -34,6 +34,8 @@
  */
 package java.math;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+
 import com.google.gwt.core.client.JavaScriptObject;
 
 import java.io.Serializable;
@@ -350,7 +352,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
     if (scaledDivisor.bitLength() < SMALL_VALUE_BITS) {
       long rem = remainder.longValue();
       long divisor = scaledDivisor.longValue();
-      compRem = longCompareTo(Math.abs(rem) << 1, Math.abs(divisor));
+      compRem = Long.compare(Math.abs(rem) << 1, Math.abs(divisor));
       // To look if there is a carry
       compRem = roundingBehavior(quotient.testBit(0) ? 1 : 0, sign
           * (5 + compRem), roundingMode);
@@ -393,10 +395,6 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
   private static double intDivide(double dividend, double divisor) {
     double quotient = dividend / divisor;
     return quotient > 0 ? Math.floor(quotient) : Math.ceil(quotient);
-  }
-
-  private static int longCompareTo(long a, long b) {
-    return Long.signum(a - b);
   }
 
   private static native double parseUnscaled(String str) /*-{
@@ -581,11 +579,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
    * @throws NullPointerException if {@code unscaledVal == null}.
    */
   public BigDecimal(BigInteger unscaledVal, int scale) {
-    if (unscaledVal == null) {
-      throw new NullPointerException();
-    }
-    this.scale = scale;
-    setUnscaledValue(unscaledVal);
+    this(unscaledVal, (double) scale);
   }
 
   /**
@@ -822,11 +816,8 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
   }
 
   private BigDecimal(BigInteger unscaledVal, double scale) {
-    if (unscaledVal == null) {
-      throw new NullPointerException();
-    }
     this.scale = scale;
-    setUnscaledValue(unscaledVal);
+    setUnscaledValue(checkNotNull(unscaledVal));
   }
 
   private BigDecimal(double smallValue, double scale) {
@@ -1157,12 +1148,10 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
    *           RoundingMode.UNNECESSAR}Y and rounding is necessary according to
    *           the given scale and given precision.
    */
-  public BigDecimal divide(BigDecimal divisor, int scale,
-      RoundingMode roundingMode) {
+  public BigDecimal divide(BigDecimal divisor, int scale, RoundingMode roundingMode) {
+    checkNotNull(roundingMode);
+
     // Let be: this = [u1,s1] and divisor = [u2,s2]
-    if (roundingMode == null) {
-      throw new NullPointerException();
-    }
     if (divisor.isZero()) {
       // math.04=Division by zero
       throw new ArithmeticException("Division by zero"); //$NON-NLS-1$
@@ -1952,7 +1941,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
        * - 1) <= intVal < 10 ^(precision())
        */
       decimalDigits += (bitLength - 1) * LOG10_2;
-      // If after division the number isn't zero, exists an aditional digit
+      // If after division the number isn't zero, exists an additional digit
       if (getUnscaledValue().divide(Multiplication.powerOf10(decimalDigits)).signum() != 0) {
         decimalDigits++;
       }
@@ -2115,9 +2104,8 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
    *           and rounding is necessary according to the given scale.
    */
   public BigDecimal setScale(int newScale, RoundingMode roundingMode) {
-    if (roundingMode == null) {
-      throw new NullPointerException();
-    }
+    checkNotNull(roundingMode);
+
     double diffScale = newScale - scale;
     // Let be: 'this' = [u,s]
     if (diffScale == 0) {
@@ -2790,7 +2778,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
     // If the discarded fraction is non-zero perform rounding
     if (fraction != 0) {
       // To check if the discarded fraction >= 0.5
-      compRem = longCompareTo(Math.abs(fraction) << 1, sizeOfFraction);
+      compRem = Long.compare(Math.abs(fraction) << 1, sizeOfFraction);
       // To look if there is a carry
       integer += roundingBehavior(((int) integer) & 1, Long.signum(fraction)
           * (5 + compRem), mc.getRoundingMode());

@@ -15,27 +15,30 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
-import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.SymbolData;
 import com.google.gwt.core.ext.linker.impl.StandardSymbolData;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.cfg.BindingProperty;
+import com.google.gwt.dev.cfg.BindingProps;
+import com.google.gwt.dev.cfg.ConfigProps;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
-import com.google.gwt.dev.cfg.Properties;
-import com.google.gwt.dev.cfg.StaticPropertyOracle;
+import com.google.gwt.dev.cfg.PermProps;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.jjs.JavaAstConstructor;
-import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.IntTypeMapper;
+import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeMapper;
+import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeOrder;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.util.Pair;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -75,46 +78,38 @@ public abstract class FullCompileTestBase extends JJSTestBase {
     CompilationState state =
         CompilationStateBuilder.buildFrom(logger, compilerContext,
             sourceOracle.getResources(), getAdditionalTypeProviderDelegate());
+    ConfigProps config = new ConfigProps(Lists.newArrayList(configProps));
 
-    Properties properties = createPropertiesObject(configProps);
     jProgram =
-        JavaAstConstructor.construct(logger, state, compilerContext.getOptions(), properties,
+        JavaAstConstructor.construct(logger, state, compilerContext.getOptions(), config,
             "test.EntryPoint", "com.google.gwt.lang.Exceptions");
     jProgram.addEntryMethod(findMethod(jProgram, "onModuleLoad"));
 
     optimizeJava();
     ComputeCastabilityInformation.exec(jProgram, false);
+    ComputeInstantiatedJsoInterfaces.exec(jProgram);
     ImplementCastsAndTypeChecks.exec(jProgram, false);
     ArrayNormalizer.exec(jProgram, false);
     TypeTightener.exec(jProgram);
     MethodCallTightener.exec(jProgram);
 
-    Map<JType, JLiteral> typeIdsByType =
-        ResolveRuntimeTypeReferences.IntoIntLiterals.exec(jProgram);
+    TypeMapper<Integer> typeMapper = new IntTypeMapper();
+    ResolveRuntimeTypeReferences.exec(jProgram, typeMapper, TypeOrder.FREQUENCY);
+
     Map<StandardSymbolData, JsName> symbolTable =
         new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
-    return GenerateJavaScriptAST.exec(
-        jProgram, jsProgram, compilerContext, typeIdsByType, symbolTable, new PropertyOracle[]{
-        new StaticPropertyOracle(orderedProps, orderedPropValues, configProps)});
+
+    PermProps props = new PermProps(Arrays.asList(
+        new BindingProps(orderedProps, orderedPropValues, config)
+    ));
+    return GenerateJavaScriptAST.exec(logger, jProgram, jsProgram, compilerContext,
+        typeMapper, symbolTable, props);
   }
 
   abstract protected void optimizeJava();
 
   protected CompilerContext provideCompilerContext() {
     return new CompilerContext.Builder().build();
-  }
-
-  private static Properties createPropertiesObject(ConfigurationProperty[] propertyArray) {
-    Properties properties = new Properties();
-    for (ConfigurationProperty configurationPropertyFromArray : propertyArray) {
-      ConfigurationProperty configurationProperty =
-          properties.createConfiguration(configurationPropertyFromArray.getName(),
-              configurationPropertyFromArray.allowsMultipleValues());
-      for (String value : configurationPropertyFromArray.getValues()) {
-        configurationProperty.addValue(value);
-      }
-    }
-    return properties;
   }
 
   public void setProperties(BindingProperty[] orderedProps, String[] orderedValues,

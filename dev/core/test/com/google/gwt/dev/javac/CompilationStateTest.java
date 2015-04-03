@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.javac;
 
+import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.javac.Dependencies.Ref;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
@@ -51,7 +52,7 @@ public class CompilationStateTest extends CompilationStateTestBase {
       new MockJavaResource("test.Foo") {
         @Override
         public CharSequence getContent() {
-          StringBuffer code = new StringBuffer();
+          StringBuilder code = new StringBuilder();
           code.append("package test;\n");
           code.append("public class Foo {\n");
           code.append("  public String value() { return \"Foo\"; }\n");
@@ -65,7 +66,7 @@ public class CompilationStateTest extends CompilationStateTestBase {
       new MockJavaResource("test.Foo") {
         @Override
         public CharSequence getContent() {
-          StringBuffer code = new StringBuffer();
+          StringBuilder code = new StringBuilder();
           code.append("package test;\n");
           code.append("public class Foo {\n");
           code.append("  public String value() { return \"Foo2\"; }\n");
@@ -84,12 +85,28 @@ public class CompilationStateTest extends CompilationStateTestBase {
     return text.toString();
   }
 
-  public void testAddGeneratedCompilationUnit() {
-    validateCompilationState();
+  public void testAddGeneratedCompilationUnit_incremental() {
+    checkAddGeneratedCompilationUnit(true);
+  }
 
-    // Add a unit and ensure it shows up.
+  public void testAddGeneratedCompilationUnit_regular() {
+    checkAddGeneratedCompilationUnit(false);
+  }
+
+  private void checkAddGeneratedCompilationUnit(boolean incremental) {
+    compilerContext.getOptions().setIncrementalCompileEnabled(incremental);
+
+    MinimalRebuildCache minimalRebuildCache = compilerContext.getMinimalRebuildCache();
+
+    // Compile and ensure that not-yet-generated class Foo is not seen.
+    validateCompilationState();
+    assertFalse(minimalRebuildCache.getModifiedCompilationUnitNames().contains("test.Foo"));
+
+    // Add a generated unit and ensure it shows up as a new modified unit.
     addGeneratedUnits(JavaResourceBase.FOO);
     validateCompilationState(Shared.getTypeName(JavaResourceBase.FOO));
+    assertEquals(incremental,
+        minimalRebuildCache.getModifiedCompilationUnitNames().contains("test.Foo"));
 
     rebuildCompilationState();
     validateCompilationState();
@@ -251,7 +268,7 @@ public class CompilationStateTest extends CompilationStateTestBase {
     MockJavaResource resource = new MockJavaResource("test.MethodArgsTest") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("public abstract class MethodArgsTest {\n");
         code.append("  public abstract void anAbstractMethod(String aArg1);\n");
@@ -302,7 +319,7 @@ public class CompilationStateTest extends CompilationStateTestBase {
     MockJavaResource resource = new MockJavaResource("test.SerializationTest") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("public abstract class SerializationTest {\n");
         code.append("  public static native boolean getTrue() /*-{ return true; }-*/;\n");
@@ -415,12 +432,11 @@ public class CompilationStateTest extends CompilationStateTestBase {
    * <li>Add 'updatedSet' generatedUnits over a refresh cycle</li>
    * <li>Add 'updatedSet' generatedUnits over the second refresh cycle</li>
    * </ol>
-   * 
+   *
    * @param initialSet CompilationUnits that are generated the first time.
    * @param updatedSet CompilationUnits that are generated the next time.
    * @param reusedTypes Main type of the units that can be reused between the
    *          initialSet and updatedSet.
-   * @param numInvalidated Number of types invalidated from graveyardUnits.
    */
   private void testCachingOverMultipleRefreshes(MockJavaResource[] initialSet,
       MockJavaResource[] updatedSet, Set<String> reusedTypes) {
@@ -438,14 +454,15 @@ public class CompilationStateTest extends CompilationStateTestBase {
 
     // Add 'updatedSet' generatedUnits on the second cycle.
     rebuildCompilationState();
-    assertEquals(oracle.getResources().size(),
-        state.getCompilationUnits().size());
+    assertEquals(oracle.getResources().size(), state.getCompilationUnits().size());
     addGeneratedUnits(updatedSet);
     Map<String, CompilationUnit> units2 =
         new HashMap<String, CompilationUnit>(state.getCompilationUnitMap());
-    assertEquals(oracle.getResources().size() + updatedSet.length,
-        units2.size());
+    assertEquals(oracle.getResources().size() + updatedSet.length, units2.size());
     assertUnitsChecked(units2.values());
+    // Can't make assertions about modified compilation unit names here because the
+    // CompilationUnitInvalidator and staleness checking in the MinimalRebuildCache have different
+    // semantics.
 
     // Validate that only 'reusedTypes' are reused.
     for (MockJavaResource resource : updatedSet) {

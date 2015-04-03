@@ -19,14 +19,16 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.dev.cfg.ResourceLoaders;
 import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.dev.util.msg.Message0;
 import com.google.gwt.dev.util.msg.Message1String;
+import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
+import com.google.gwt.thirdparty.guava.common.collect.SetMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.io.Files;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,9 +49,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * The normal implementation of {@link ResourceOracle}.
+ * The normal implementation of {@code ResourceOracle}.
  */
-public class ResourceOracleImpl implements ResourceOracle {
+public class ResourceOracleImpl extends AbstractResourceOracle {
 
   private static class Messages {
     static final Message1String EXAMINING_PATH_ROOT = new Message1String(TreeLogger.DEBUG,
@@ -72,11 +74,6 @@ public class ResourceOracleImpl implements ResourceOracle {
     public RerootedResource(AbstractResource resource, PathPrefix pathPrefix) {
       this.path = pathPrefix.getRerootedPath(resource.getPath());
       this.resource = resource;
-    }
-
-    @Override
-    public ClassPathEntry getClassPathEntry() {
-      return resource.getClassPathEntry();
     }
 
     @Override
@@ -159,6 +156,16 @@ public class ResourceOracleImpl implements ResourceOracle {
   private static final Map<ResourceLoader, List<ClassPathEntry>> classPathCache =
       new MapMaker().weakKeys().makeMap();
 
+  /**
+   * A mapping from resource paths to the name of the module that
+   * created the PathPrefix (usually because of a <source> entry) that made
+   * the resource path live.
+   * <p>
+   * For example com/google/gwt/user/client/DOM.java was made live by the
+   * com.google.gwt.user.User module.
+   */
+  private SetMultimap<String, String> sourceModulesByTypeSourceName = HashMultimap.create();
+
   public static void clearCache() {
     classPathCache.clear();
   }
@@ -167,7 +174,7 @@ public class ResourceOracleImpl implements ResourceOracle {
       throws URISyntaxException, IOException {
     if (url.getProtocol().equals("file")) {
       File f = new File(url.toURI());
-      String lowerCaseFileName = f.getName().toLowerCase(Locale.ENGLISH);
+      String lowerCaseFileName = f.getName().toLowerCase(Locale.ROOT);
       if (f.isDirectory()) {
         return new DirectoryClassPathEntry(f);
       } else if (f.isFile() && lowerCaseFileName.endsWith(".jar")) {
@@ -225,6 +232,17 @@ public class ResourceOracleImpl implements ResourceOracle {
   }
 
   /**
+   * Returns a mapping from resource paths to the set of names of modules that created PathPrefixes
+   * (usually because of a <source> entry) that made the resource path live.
+   * <p>
+   * For example com/google/gwt/user/client/DOM.java was made live by the com.google.gwt.user.User
+   * module.
+   */
+  public SetMultimap<String, String> getSourceModulesByTypeSourceName() {
+    return sourceModulesByTypeSourceName;
+  }
+
+  /**
    * Scans the associated paths to recompute the available resources.
    *
    * @param logger status and error details are written here
@@ -241,13 +259,15 @@ public class ResourceOracleImpl implements ResourceOracle {
       TreeLogger branchForClassPathEntry =
           Messages.EXAMINING_PATH_ROOT.branch(refreshBranch, classPathEntry.getLocation(), null);
 
-      Map<AbstractResource, PathPrefix> prefixesByResource =
+      Map<AbstractResource, ResourceResolution> prefixesByResource =
           classPathEntry.findApplicableResources(branchForClassPathEntry, pathPrefixSet);
-      for (Entry<AbstractResource, PathPrefix> entry : prefixesByResource.entrySet()) {
+      for (Entry<AbstractResource, ResourceResolution> entry : prefixesByResource.entrySet()) {
         AbstractResource resource = entry.getKey();
-        PathPrefix pathPrefix = entry.getValue();
-        ResourceDescription resourceDescription = new ResourceDescription(resource, pathPrefix);
+        ResourceResolution resourceResolution = entry.getValue();
+        ResourceDescription resourceDescription =
+            new ResourceDescription(resource, resourceResolution.getPathPrefix());
         String resourcePath = resourceDescription.resource.getPath();
+        maybeRecordTypeForModule(resourceResolution, resourcePath);
 
         // In case of collision.
         if (resourceDescriptionsByPath.containsKey(resourcePath)) {
@@ -274,6 +294,22 @@ public class ResourceOracleImpl implements ResourceOracle {
     exposedPathNames = Collections.unmodifiableSet(resourcesByPath.keySet());
 
     resourceOracle.end();
+  }
+
+  private void maybeRecordTypeForModule(ResourceResolution resourceResolution,
+      String resourcePath) {
+    // If PathPrefix->Module associations are inaccurate because PathPrefixes have been merged.
+    if (pathPrefixSet.mergePathPrefixes()) {
+      // Then don't record any Type<->Module associations since they won't be accurate;
+      return;
+    }
+
+    sourceModulesByTypeSourceName.putAll(asTypeSourceName(resourcePath),
+        resourceResolution.getSourceModuleNames());
+  }
+
+  private String asTypeSourceName(String resourcePath) {
+    return resourcePath.replace(".java", "").replace("/", ".");
   }
 
   private static void addAllClassPathEntries(TreeLogger logger, ResourceLoader loader,
@@ -370,6 +406,7 @@ public class ResourceOracleImpl implements ResourceOracle {
 
   @Override
   public void clear() {
+    sourceModulesByTypeSourceName.clear();
     exposedPathNames = Collections.emptySet();
     exposedResourceMap = Collections.emptyMap();
     exposedResources = Collections.emptySet();
@@ -385,11 +422,6 @@ public class ResourceOracleImpl implements ResourceOracle {
   }
 
   @Override
-  public Map<String, Resource> getResourceMap() {
-    return exposedResourceMap;
-  }
-
-  @Override
   public Set<Resource> getResources() {
     return exposedResources;
   }
@@ -401,5 +433,11 @@ public class ResourceOracleImpl implements ResourceOracle {
   // @VisibleForTesting
   List<ClassPathEntry> getClassPathEntries() {
     return classPathEntries;
+  }
+
+  @Override
+  public Resource getResource(String pathName) {
+    pathName = Files.simplifyPath(pathName);
+    return exposedResourceMap.get(pathName);
   }
 }

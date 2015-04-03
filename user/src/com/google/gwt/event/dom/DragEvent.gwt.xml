@@ -11,8 +11,7 @@
 <!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
-<module type="fileset">
-  <inherits name="com.google.gwt.user.User" />
+<module>
 
   <!-- Define the support property -->
   <define-property name="dragEventSupport" values="maybe,no" />
@@ -25,10 +24,7 @@
 
   <!-- Older browsers do not support drag events. -->
   <set-property name="dragEventSupport" value="no">
-    <any>
-      <when-property-is name="user.agent" value="ie6" />
-      <when-property-is name="user.agent" value="ie8" />
-    </any>
+    <when-property-is name="user.agent" value="ie8" />
   </set-property>
 
   <replace-with class="com.google.gwt.event.dom.client.DragDropEventBase.DragSupportDetectorNo">

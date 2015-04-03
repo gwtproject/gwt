@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6355 $
-//  type=root
-//  date=$Date: 2012-01-14 00:15:06 -0500 (Sat, 14 Jan 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "rw" locale.
@@ -291,6 +286,7 @@ public class LocalizedNamesImpl_rw extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XK",
         "YE",
         "YT",
         "ZA",

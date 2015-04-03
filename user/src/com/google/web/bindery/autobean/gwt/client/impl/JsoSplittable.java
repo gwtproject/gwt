@@ -58,9 +58,9 @@ public final class JsoSplittable extends JavaScriptObject implements Splittable,
     return [];
   }-*/;
 
-  public static native JsoSplittable nullValue() /*-{
-    return null;
-  }-*/;
+  public static Splittable nullValue() {
+    return NullSplittable.INSTANCE;
+  }
 
   private static native Splittable create0(boolean object) /*-{
     return Boolean(object);
@@ -208,6 +208,13 @@ public final class JsoSplittable extends JavaScriptObject implements Splittable,
 
   public native boolean isUndefined(String key) /*-{
     return this[key] === undefined;
+  }-*/;
+
+  @Override
+  public native void removeReified(String key) /*-{
+    if (this.__reified) {
+      delete this.__reified[':' + key];
+    }
   }-*/;
 
   public native void setReified(String key, Object object) /*-{

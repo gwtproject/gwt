@@ -13,20 +13,12 @@
  */
 package com.google.gwt.dev;
 
-import com.google.gwt.dev.cfg.CombinedResourceOracle;
-import com.google.gwt.dev.cfg.ImmutableLibraryGroup;
-import com.google.gwt.dev.cfg.LibraryGroup;
-import com.google.gwt.dev.cfg.LibraryGroupBuildResourceOracle;
-import com.google.gwt.dev.cfg.LibraryGroupPublicResourceOracle;
-import com.google.gwt.dev.cfg.LibraryWriter;
 import com.google.gwt.dev.cfg.ModuleDef;
-import com.google.gwt.dev.cfg.NullLibraryWriter;
+import com.google.gwt.dev.javac.CompilationErrorsIndex;
+import com.google.gwt.dev.javac.CompilationErrorsIndexImpl;
 import com.google.gwt.dev.javac.MemoryUnitCache;
 import com.google.gwt.dev.javac.UnitCache;
 import com.google.gwt.dev.resource.ResourceOracle;
-import com.google.gwt.thirdparty.guava.common.collect.Multimap;
-
-import java.util.Set;
 
 /**
  * Contains most global read-only compiler state and makes it easily accessible to the far flung
@@ -41,9 +33,8 @@ public class CompilerContext {
   public static class Builder {
 
     private ResourceOracle buildResourceOracle;
-    private boolean compileMonolithic = true;
-    private LibraryGroup libraryGroup = new ImmutableLibraryGroup();
-    private LibraryWriter libraryWriter = new NullLibraryWriter();
+    private CompilationErrorsIndex compilationErrorsIndex;
+    private MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
     private ModuleDef module;
     private PrecompileTaskOptions options = new PrecompileTaskOptionsImpl();
     private ResourceOracle publicResourceOracle;
@@ -52,38 +43,23 @@ public class CompilerContext {
 
     public CompilerContext build() {
       initializeResourceOracles();
+      initializeCompilationErrorIndexes();
 
       CompilerContext compilerContext = new CompilerContext();
       compilerContext.buildResourceOracle = buildResourceOracle;
-      compilerContext.libraryWriter = libraryWriter;
-      compilerContext.libraryGroup = libraryGroup;
+      compilerContext.minimalRebuildCache = minimalRebuildCache;
       compilerContext.module = module;
-      compilerContext.compileMonolithic = compileMonolithic;
       compilerContext.options = options;
       compilerContext.publicResourceOracle = publicResourceOracle;
       compilerContext.sourceResourceOracle = sourceResourceOracle;
+      compilerContext.compilationErrorsIndex = compilationErrorsIndex;
       compilerContext.unitCache = unitCache;
       return compilerContext;
     }
 
-    /**
-     * Sets whether compilation should proceed monolithically or separately.
-     */
-    public Builder compileMonolithic(boolean compileMonolithic) {
-      this.compileMonolithic = compileMonolithic;
-      return this;
-    }
-
-    /**
-     * Sets the libraryGroup and uses it to set resource oracles as well.
-     */
-    public Builder libraryGroup(LibraryGroup libraryGroup) {
-      this.libraryGroup = libraryGroup;
-      return this;
-    }
-
-    public Builder libraryWriter(LibraryWriter libraryWriter) {
-      this.libraryWriter = libraryWriter;
+    public Builder minimalRebuildCache(MinimalRebuildCache minimalRebuildCache) {
+      assert minimalRebuildCache != null;
+      this.minimalRebuildCache = minimalRebuildCache;
       return this;
     }
 
@@ -105,118 +81,54 @@ public class CompilerContext {
       return this;
     }
 
+    private void initializeCompilationErrorIndexes() {
+      compilationErrorsIndex = new CompilationErrorsIndexImpl();
+    }
+
     /**
      * Initialize source, build, and public resource oracles using the most complete currently
-     * available combination of moduleDef and libraryGroup.<br />
+     * available moduleDef.<br />
      *
-     * When executing as part of a monolithic compilation there will likely only be a moduleDef
-     * available. That will result in sourcing resource oracles only from it, which is what
-     * monolithic compilation expects.<br />
-     *
-     * When executing as part of a separate compilation there will likely be both a moduleDef and
-     * libraryGroup available. That will result in sourcing resource oracles from a mixed
-     * combination, which is what separate compilation expects.
+     * There will likely only be a moduleDef available. That will result in sourcing resource
+     * oracles only from it, which is what monolithic compilation expects.
      */
     private void initializeResourceOracles() {
-      if (libraryGroup != null) {
-        if (module != null) {
-          sourceResourceOracle = module.getSourceResourceOracle();
-          buildResourceOracle = new CombinedResourceOracle(
-              module.getBuildResourceOracle(), new LibraryGroupBuildResourceOracle(libraryGroup));
-          publicResourceOracle = new CombinedResourceOracle(
-              module.getPublicResourceOracle(), new LibraryGroupPublicResourceOracle(libraryGroup));
-        } else {
-          sourceResourceOracle = null;
-          buildResourceOracle = new LibraryGroupBuildResourceOracle(libraryGroup);
-          publicResourceOracle = new LibraryGroupPublicResourceOracle(libraryGroup);
-        }
+      if (module != null) {
+        sourceResourceOracle = module.getSourceResourceOracle();
+        buildResourceOracle = module.getBuildResourceOracle();
+        publicResourceOracle = module.getPublicResourceOracle();
       } else {
-        if (module != null) {
-          sourceResourceOracle = module.getSourceResourceOracle();
-          buildResourceOracle = module.getBuildResourceOracle();
-          publicResourceOracle = module.getPublicResourceOracle();
-        } else {
-          sourceResourceOracle = null;
-          buildResourceOracle = null;
-          publicResourceOracle = null;
-        }
+        sourceResourceOracle = null;
+        buildResourceOracle = null;
+        publicResourceOracle = null;
       }
     }
   }
 
   private ResourceOracle buildResourceOracle;
-  /**
-   * Whether compilation should proceed monolithically or separately. It is an example of a
-   * configuration property that is not assignable by command line args. If more of these accumulate
-   * they should be grouped together instead of floating free here.
-   */
-  private boolean compileMonolithic = true;
-  private LibraryGroup libraryGroup = new ImmutableLibraryGroup();
-  private LibraryWriter libraryWriter = new NullLibraryWriter();
-
+  private CompilationErrorsIndex compilationErrorsIndex = new CompilationErrorsIndexImpl();
+  private MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
   private ModuleDef module;
-
   // TODO(stalcup): split this into module parsing, precompilation, compilation, and linking option
   // sets.
   private PrecompileTaskOptions options = new PrecompileTaskOptionsImpl();
+
   private ResourceOracle publicResourceOracle;
   private ResourceOracle sourceResourceOracle;
   private UnitCache unitCache = new MemoryUnitCache();
-
-  /**
-   * Walks the parts of the library dependency graph that have not run the given generator
-   * referenced by name and accumulates and returns a map from binding property name to newly legal
-   * values that were declared in those libraries.<br />
-   *
-   * The resulting map represents the set of binding property changes that have not yet been taken
-   * into account in the output of a particular generator and which may need to trigger the
-   * re-execution of said generator.
-   */
-  public Multimap<String, String> gatherNewBindingPropertyValuesForGenerator(String generatorName) {
-    Multimap<String, String> newBindingPropertyValues =
-        getLibraryGroup().gatherNewBindingPropertyValuesForGenerator(generatorName);
-    newBindingPropertyValues.putAll(libraryWriter.getNewBindingPropertyValuesByName());
-    return newBindingPropertyValues;
-  }
-
-  /**
-   * Walks the parts of the library dependency graph that have not run the given generator
-   * referenced by name and accumulates and returns a map from configuration property name to newly
-   * set values that were declared in those libraries.<br />
-   *
-   * The resulting map represents the set of configuration property value changes that have not yet
-   * been taken into account in the output of a particular generator and which may need to trigger
-   * the re-execution of said generator.
-   */
-  public Multimap<String, String> gatherNewConfigurationPropertyValuesForGenerator(
-      String generatorName) {
-    Multimap<String, String> newConfigurationPropertyValues =
-        getLibraryGroup().gatherNewConfigurationPropertyValuesForGenerator(generatorName);
-    newConfigurationPropertyValues.putAll(libraryWriter.getNewConfigurationPropertyValuesByName());
-    return newConfigurationPropertyValues;
-  }
-
-  public Set<String> gatherNewReboundTypeNamesForGenerator(String generatorName) {
-    Set<String> newReboundTypeNames =
-        getLibraryGroup().gatherNewReboundTypeSourceNamesForGenerator(generatorName);
-    newReboundTypeNames.addAll(libraryWriter.getReboundTypeSourceNames());
-    return newReboundTypeNames;
-  }
-
-  public Set<String> gatherOldReboundTypeNamesForGenerator(String generatorName) {
-    return getLibraryGroup().gatherOldReboundTypeSourceNamesForGenerator(generatorName);
-  }
-
   public ResourceOracle getBuildResourceOracle() {
     return buildResourceOracle;
   }
 
-  public LibraryGroup getLibraryGroup() {
-    return libraryGroup;
+  /**
+   * Returns the mutable index of compilation errors for the current compile.
+   */
+  public CompilationErrorsIndex getCompilationErrorsIndex() {
+    return compilationErrorsIndex;
   }
 
-  public LibraryWriter getLibraryWriter() {
-    return libraryWriter;
+  public MinimalRebuildCache getMinimalRebuildCache() {
+    return minimalRebuildCache;
   }
 
   public ModuleDef getModule() {
@@ -237,9 +149,5 @@ public class CompilerContext {
 
   public UnitCache getUnitCache() {
     return unitCache;
-  }
-
-  public boolean shouldCompileMonolithic() {
-    return compileMonolithic;
   }
 }

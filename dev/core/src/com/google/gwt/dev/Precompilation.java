@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -45,15 +45,10 @@ public class Precompilation implements PrecompilationResult {
   private final Permutation[] permutations;
   private final UnifiedAst unifiedAst;
 
-  public Precompilation(UnifiedAst unifiedAst,
-      Collection<Permutation> permutations, ArtifactSet generatedArtifacts) {
-    this(unifiedAst, permutations, 0, generatedArtifacts);
-  }
-
   /**
    * Constructs a new precompilation. We create new Permutations with a new id
    * so that the ids are consecutive and correspond to the index in the array.
-   * 
+   *
    * @param unifiedAst the unified AST used by
    *          {@link com.google.gwt.dev.jjs.JavaToJavaScriptCompiler}
    * @param permutations the set of permutations that can be run
@@ -93,15 +88,6 @@ public class Precompilation implements PrecompilationResult {
       }
     }
     return generatedArtifacts;
-  }
-
-  public Permutation getPermutation(int id) {
-    for (Permutation perm : permutations) {
-      if (perm.getId() == id) {
-        return perm;
-      }
-    }
-    return null;
   }
 
   /**

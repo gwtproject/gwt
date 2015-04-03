@@ -39,6 +39,7 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     addSnippetClassDecl("static volatile Object o;");
 
     runMethodInliner = false;
+    runSpecializer = false;
   }
 
   public void testConditionalOptimizations() throws Exception {
@@ -49,6 +50,65 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     optimize("boolean", "return b ? false : b1;").into("return !b && b1;");
     optimize("boolean", "return b ? b1 : true;").into("return !b || b1;");
     optimize("boolean", "return b ? b1 : false;").into("return b && b1;");
+  }
+
+  public void testSwitchOverConstant_noMatchingCase() throws Exception {
+    optimize("int", "switch (0) { case 1: return 1; } return 0;")
+        .into("return 0;");
+  }
+
+  public void testSwitchOverConstant_MatchingCase() throws Exception {
+    optimize("int",
+        "switch (1) { case 1: return 1; } return 0;")
+        .into("return 1;");
+
+    // The if isn't really the focus of the optimization, but the `into`
+    // string will not compile if it is invalid Java.  It makes the opt form
+    // valid java.
+    optimize("int",
+        "int j = 1;",
+        "if (b) {",
+        "  switch (1) {",
+        "    case 0:",
+        "    case 1:",
+        "    case 2:",
+        "      j = 5;",
+        "    case 3:",
+        "      return 1;",
+        "    default:",
+        "      return j;",
+        "  }",
+        "}",
+        "return -1;")
+        .into(
+            "int j = 1;",
+            "if (b) {",
+            "  switch (1) {",
+            "    case 1:",  // All of the other cases and the default are gone
+            "      j = 5;", // this is a dead-store but is currently retained
+            "      return 1;",
+            "  }",
+            "}",
+            "return -1;");
+  }
+
+  public void testSwitchOverConstant_NonConstant() throws Exception {
+    // doesn't optimize when there is a non-constant switch expr
+    // (though, in this case, it's easy to imagine that it could)
+    String[] nonConstantSwitch = new String[] {
+      "int j = 1;",
+      "switch (j) {",
+      "  case 0: ",
+      "  case 1: ",
+      "  case 2: ",
+      "    j = 5; ",
+      "  case 3: ",
+      "    return 1; ",
+      "  default: ",
+      "    return j; ",
+      "}"
+    };
+    optimize("int", nonConstantSwitch).into(nonConstantSwitch);
   }
 
   public void testIfOptimizations() throws Exception {
@@ -121,6 +181,76 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         .into("A.f1 = 1; new A();");
   }
 
+  public void testCommuteMultiExpression() throws Exception {
+    runMethodInliner = true;
+    addSnippetClassDecl(
+        "static class A  { "
+            + "static int f1;"
+            + "static A createA() { A.f1 = 1; return new A(); } "
+            + "static boolean booleanWithSideEffects() { createA(); return true;}"
+            + "static boolean booleanWithoutSideEffects() { return true;}"
+            + "static int arithmeticWithSideEffects() { createA(); return 4;}"
+            + "}");
+
+    optimizeExpressions(false, "boolean", "true && A.booleanWithoutSideEffects()")
+        .intoString("return true;");
+
+    optimizeExpressions(false, "boolean", "true && A.booleanWithSideEffects()")
+        .intoString("return (EntryPoint$A.f1 = 1, new EntryPoint$A(), true);");
+
+    optimizeExpressions(false, "boolean", "false && A.booleanWithSideEffects()")
+        .intoString("return false;");
+
+    optimizeExpressions(false, "int", "3 + A.arithmeticWithSideEffects()")
+        .intoString("return (EntryPoint$A.f1 = 1, new EntryPoint$A(), 7);");
+  }
+
+  public void testStringOptimizations() throws Exception {
+    runMethodInliner = true;
+    addSnippetClassDecl(
+        "static class A  { ",
+        "  final static String s1 = \"a\";",
+        "  final static String s2 = \"a\";",
+        "  final static String s3 = \"b\";",
+        "  final static String s4 = null;",
+        "}");
+
+    // TODO(rluble): This test is not 100% meaninful as the JDT performs some optimizations for us.
+    optimizeExpressions(false, "boolean", "\"a\".equals(\"a\")")
+        .into("return true;");
+    optimizeExpressions(false, "boolean", "\"a\" == \"a\"")
+        .into("return true;");
+    optimizeExpressions(false, "boolean", "\"a\" != \"b\"")
+        .into("return true;");
+    optimizeExpressions(false, "boolean", "A.s1.equals(A.s1)")
+        .into("return true;");
+    optimizeExpressions(false, "boolean", "A.s1 == A.s1")
+        .into("return true;");
+    optimizeExpressions(false, "boolean", "A.s1 == \"a\"")
+        .into("return true;");
+    optimizeExpressions(false, "boolean", "\"a\" != null")
+        .into("return true;");
+    optimizeExpressions(false, "boolean", "\"a\".equals(A.s2)")
+        .into("return true;");
+    optimizeExpressions(false, "boolean", "!\"a\".equals(A.s3)")
+        .into("return true;");
+    optimizeExpressions(false, "boolean", "\"a\" == A.s2")
+        .into("return true;");
+    optimizeExpressions(false, "boolean", "\"a\" != A.s3")
+        .into("return true;");
+    optimizeExpressions(false, "boolean", "A.s1.equals(A.s2)")
+        .into("return true;");
+    // Next two are not directly optimizable because of inserted clinits.
+    // optimizeExpressions(false, "boolean", "\"a\" != A.s4")
+    //     .into("return true;");
+    // optimizeExpressions(false, "boolean", "A.s4 == null")
+    //    .into("return true;");
+  }
+
+  public void testStringOptimizations_withSpecializer() throws Exception {
+    runSpecializer = true;
+    testStringOptimizations();
+  }
 
   public void testDoOptimization() throws Exception {
     optimize("void", "do {} while (b);").intoString(
@@ -185,6 +315,12 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     optimize("boolean", "return \"a\".equals(\"b\");").intoString("return false;");
     optimize("boolean", "return s.equals(\"a\");")
         .intoString("return EntryPoint.s.equals(\"a\");");
+
+    // String concat
+    optimize("String", "return \"a\" + \"a\";").intoString("return \"aa\";");
+    optimize("String", "return \"a\" + 1;").intoString("return \"a1\";");
+    optimize("String", "return \"a\" + '1';").intoString("return \"a1\";");
+    optimize("String", "return \"a\" +  1L;").intoString("return \"a1\";");
   }
 
   public void testSubtractFromZero() throws Exception {
@@ -193,9 +329,16 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
     // Verify that float/double subtracts from zero aren't replaced, since they
     // are needed for obscure IEEE754 functionality -- specifically, converting
     // 0.0 - v into -v means the sign of the result is the opposite of the input
-    // rathe than always being positive.
-    optimize("float", "return 0.0F - f;").intoString("return 0.0f - EntryPoint.f;");
+    // rather than always being positive.
+    optimize("float", "return 0.0F - f;").intoString("return 0.0 - EntryPoint.f;");
     optimize("double", "return 0.0 - d;").intoString("return 0.0 - EntryPoint.d;");
+  }
+
+  public void testFloatingPoint() throws Exception {
+    // Internally we represent float literals as double, so here we make sure that 1.1f is
+    // is printed as a double with the right precision.
+    optimize("float", "return 1.1f;").intoString("return " + String.format("%.16g", (double) 1.1f) +
+        ";");
   }
 
   public void testMultiExpression_RedundantClinitRemoval() throws Exception {
@@ -226,12 +369,19 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
   }
 
   private boolean runMethodInliner;
+  private boolean runSpecializer;
 
   @Override
   protected boolean optimizeMethod(JProgram program, JMethod method) {
 
     if (runMethodInliner) {
       MethodInliner.exec(program);
+    }
+    if (runSpecializer) {
+      Finalizer.exec(program); // required so that method is marked final
+      MakeCallsStatic.exec(program, false); // required so that method is static
+      TypeTightener.exec(program); // required so that the parameter types are tightened
+      MethodCallSpecializer.exec(program);
     }
 
     OptimizerStats result = DeadCodeElimination.exec(program, method);

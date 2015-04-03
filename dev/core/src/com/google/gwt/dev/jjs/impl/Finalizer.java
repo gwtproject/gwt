@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,10 +23,10 @@ import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JField;
+import com.google.gwt.dev.jjs.ast.JFieldRef;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
@@ -38,8 +38,9 @@ import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -51,14 +52,18 @@ import java.util.Set;
 public class Finalizer {
   /**
    * Any items that weren't marked during MarkVisitor can be set final.
-   * 
+   *
    * Open question: What does it mean if an interface/abstract method becomes
    * final? Is this possible after Pruning? I guess it means that someone tried
    * to make a call to method that wasn't actually implemented anywhere in the
    * program. But if it wasn't implemented, then the enclosing class should have
    * come up as not instantiated and been culled. So I think it's not possible.
    */
-  private class FinalizeVisitor extends JModVisitor {
+  private class FinalizeVisitor extends JChangeTrackingVisitor {
+
+    public FinalizeVisitor(OptimizerContext optimizerCtx) {
+      super(optimizerCtx);
+    }
 
     @Override
     public void endVisit(JClassType x, Context ctx) {
@@ -68,12 +73,12 @@ public class Finalizer {
     }
 
     @Override
-    public void endVisit(JConstructor x, Context ctx) {
+    public void exit(JConstructor x, Context ctx) {
       // Not applicable.
     }
 
     @Override
-    public void endVisit(JField x, Context ctx) {
+    public void exit(JField x, Context ctx) {
       if (!x.isVolatile()) {
         maybeFinalize(x);
       }
@@ -85,8 +90,8 @@ public class Finalizer {
     }
 
     @Override
-    public void endVisit(JMethod x, Context ctx) {
-      if (!x.isFinal() && !isOverriden.contains(x)) {
+    public void exit(JMethod x, Context ctx) {
+      if (!x.isFinal() && x.getOverridingMethods().isEmpty()) {
         setFinal(x);
       }
     }
@@ -125,10 +130,9 @@ public class Finalizer {
   }
 
   /**
-   * Find all items that ARE overriden/subclassed/reassigned.
+   * Find all items that ARE overridden/subclassed/reassigned.
    */
   private class MarkVisitor extends JVisitor {
-
     @Override
     public void endVisit(JBinaryOperation x, Context ctx) {
       if (x.getOp().isAssignment()) {
@@ -150,14 +154,15 @@ public class Finalizer {
 
     @Override
     public void endVisit(JDeclarationStatement x, Context ctx) {
-      // This is not a reassignment, the target may still be final.
-    }
-
-    @Override
-    public void endVisit(JMethod x, Context ctx) {
-      for (int i = 0; i < x.getOverrides().size(); ++i) {
-        JMethod it = x.getOverrides().get(i);
-        isOverriden.add(it);
+      // This is should only be considered a reassignment if the uninitialized value for this field
+      // is observable.
+      // TODO(rluble): do static analysis to improve this pass.
+      if (x.getVariableRef() instanceof JFieldRef) {
+        JField field = ((JFieldRef) x.getVariableRef()).getField();
+        if (field.getLiteralInitializer() != null &&
+            !field.getLiteralInitializer().equals(field.getType().getDefaultValue())) {
+          recordAssignment(x.getVariableRef());
+        }
       }
     }
 
@@ -199,28 +204,37 @@ public class Finalizer {
 
   private static final String NAME = Finalizer.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program) {
+  private Finalizer(JProgram program) {
+    this.program = program;
+  }
+
+  @VisibleForTesting
+  static OptimizerStats exec(JProgram program) {
+    return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
+  }
+
+  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new Finalizer().execImpl(program);
+    OptimizerStats stats = new Finalizer(program).execImpl(optimizerCtx);
+    optimizerCtx.incOptimizationStep();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
 
-  private final Set<JMethod> isOverriden = new HashSet<JMethod>();
+  private final Set<JVariable> isReassigned = Sets.newHashSet();
 
-  private final Set<JVariable> isReassigned = new HashSet<JVariable>();
+  private final Set<JClassType> isSubclassed = Sets.newHashSet();
 
-  private final Set<JClassType> isSubclassed = new HashSet<JClassType>();
+  private final JProgram program;
 
-  private Finalizer() {
-  }
-
-  private OptimizerStats execImpl(JProgram program) {
+  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
     MarkVisitor marker = new MarkVisitor();
     marker.accept(program);
 
-    FinalizeVisitor finalizer = new FinalizeVisitor();
+    FinalizeVisitor finalizer = new FinalizeVisitor(optimizerCtx);
     finalizer.accept(program);
+
+    JavaAstVerifier.assertProgramIsConsistent(program);
 
     return new OptimizerStats(NAME).recordModified(finalizer.getNumMods());
   }

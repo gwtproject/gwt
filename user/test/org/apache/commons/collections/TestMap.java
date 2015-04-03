@@ -15,7 +15,9 @@
  */
 package org.apache.commons.collections;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -29,7 +31,7 @@ import java.util.Set;
  * operations, simply extend this class, and implement the {@link
  * #makeEmptyMap()} method.
  * <p>
- * On the other hand, if your map implemenation is wierd, you may have to
+ * On the other hand, if your map implemenation is weird, you may have to
  * override one or more of the other protected methods.  They're described
  * below.<P>
  *
@@ -177,6 +179,14 @@ public abstract class TestMap extends TestObject{
     }
 
     /**
+     *  Override if your map allows concurrent modifications.  The default
+     *  implementation returns <code>true</code>.
+     **/
+    protected boolean isFailFastExpected() {
+        return true;
+    }
+
+    /**
      *  Returns the set of keys in the mappings used to test the map.  This
      *  method must return an array with the same length as {@link
      *  #getSampleValues()} and all array elements must be different. The
@@ -309,6 +319,54 @@ public abstract class TestMap extends TestObject{
     public Object makeObject() {
         return makeEmptyMap();
     }
+
+    public void testSpecialKeysValues() {
+      String[] keys = {"toString", "constructor", "__proto__", "", "null"};
+      Object[] values = {new Object(), new Object(), new Object(), new Object(), null};
+
+      Map map = makeEmptyMap();
+
+      assertMap(map, keys, values);
+
+      Object[] undefineds = new Object[values.length];
+      Arrays.fill(undefineds, getUndefined());
+      assertMap(map, keys, undefineds);
+    }
+
+    private void assertMap(Map map, String[] keys, Object[] values) {
+      assertEmptyMap(map, keys, values);
+
+      // Fill the map with special keys/values.
+      for (int i = 0; i < keys.length; i++) {
+        map.put(keys[i], values[i]);
+      }
+
+      // Assert the map with filled in keys/values
+      for (int i = 0; i < keys.length; i++) {
+        assertTrue(keys[i], map.containsKey(keys[i]));
+        assertTrue(keys[i], map.containsValue(values[i]));
+        assertSame(keys[i], values[i], map.get(keys[i]));
+      }
+      assertEquals(map.toString(), keys.length, map.size());
+
+      // Remove the keys and assert the results
+      for (int i = 0; i < keys.length; i++) {
+        assertSame(keys[i], values[i], map.remove(keys[i]));
+      }
+      assertEmptyMap(map, keys, values);
+    }
+
+    private static void assertEmptyMap(Map map, final String[] keys, final Object[] values) {
+      for (int i = 0; i < keys.length; i++) {
+        assertFalse(keys[i], map.containsKey(keys[i]));
+        assertFalse(keys[i], map.containsValue(values[i]));
+        assertNull(keys[i], map.get(keys[i]));
+      }
+    }
+
+    private static native Object getUndefined() /*-{
+      return undefined;
+    }-*/;
 
     /**
      *  Test to ensure the test setup is working properly.  This method checks
@@ -695,6 +753,83 @@ public abstract class TestMap extends TestObject{
       verify();
     }
 
+    public void testFailFastEntrySet() {
+        if (!isAddRemoveModifiable()) {
+            return;
+        }
+        if (!isFailFastExpected()) {
+            return;
+        }
+        resetFull();
+        Iterator<Map.Entry> it = map.entrySet().iterator();
+        final Map.Entry val = it.next();
+        map.remove(val.getKey());
+        try {
+            it.next();
+            fail();
+        } catch (ConcurrentModificationException expected) {}
+
+        resetFull();
+        it = map.entrySet().iterator();
+        it.next();
+        map.clear();
+        try {
+            it.next();
+            fail();
+        } catch (ConcurrentModificationException expected) {}
+    }
+
+    public void testFailFastKeySet() {
+        if (!isAddRemoveModifiable()) {
+            return;
+        }
+        if (!isFailFastExpected()) {
+            return;
+        }
+        resetFull();
+        Iterator it = map.keySet().iterator();
+        final Object val = it.next();
+        map.remove(val);
+        try {
+            it.next();
+            fail();
+        } catch (ConcurrentModificationException expected) {}
+
+        resetFull();
+        it = map.keySet().iterator();
+        it.next();
+        map.clear();
+        try {
+            it.next();
+            fail();
+        } catch (ConcurrentModificationException expected) {}
+    }
+
+    public void testFailFastValues() {
+        if (!isAddRemoveModifiable()) {
+            return;
+        }
+        if (!isFailFastExpected()) {
+            return;
+        }
+        resetFull();
+        Iterator it = map.values().iterator();
+        it.next();
+        map.remove(map.keySet().iterator().next());
+        try {
+            it.next();
+            fail();
+        } catch (ConcurrentModificationException expected) {}
+
+        resetFull();
+        it = map.values().iterator();
+        it.next();
+        map.clear();
+        try {
+            it.next();
+            fail();
+        } catch (ConcurrentModificationException expected) {}
+    }
 
     /**
      *  Utility methods to create an array of Map.Entry objects

@@ -12,9 +12,10 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<module type="fileset">
+<module>
   <inherits name="com.google.gwt.json.JSON"/>
-  <inherits name="com.google.gwt.user.User" />
+  <inherits name="com.google.gwt.user.UI" />
+  <inherits name="com.google.gwt.user.RemoteService" />
   <inherits name="com.google.gwt.logging.LogImpl"/>
   <source path="client" />
   <source path="shared" />
@@ -67,8 +68,21 @@
     <when-type-is class="com.google.gwt.logging.client.DefaultLevel" />
     <when-property-is name="gwt.logging.logLevel" value="SEVERE" />
   </replace-with>
-  
-  
+
+  <!-- Set the default implementation for HasWidgetsLogHandler -->
+  <replace-with class="com.google.gwt.logging.client.PopupLogHandler">
+    <when-type-is class="com.google.gwt.logging.client.HasWidgetsLogHandler" />
+  </replace-with>
+
+  <!-- Replace default consoleHandler for better SuperDevMode logging -->
+  <replace-with class="com.google.gwt.logging.impl.SimpleConsoleLogHandler">
+    <when-type-is class="com.google.gwt.logging.client.ConsoleLogHandler" />
+    <all>
+      <when-property-is name="superdevmode" value="on"/>
+      <when-property-is name="compiler.stackMode" value="native"/>
+    </all>
+  </replace-with>
+
   <!-- Set up and handle the gwt.logging.xxxHandler properties -->
   <define-property name="gwt.logging.consoleHandler" values="ENABLED, DISABLED" />
   <replace-with class="com.google.gwt.logging.client.NullLogHandler">
@@ -84,14 +98,6 @@
     <any>
       <when-property-is name="gwt.logging.enabled" value="FALSE" />
       <when-property-is name="gwt.logging.developmentModeHandler" value="DISABLED" />
-    </any>
-  </replace-with>
-  <define-property name="gwt.logging.firebugHandler" values="ENABLED, DISABLED" />
-  <replace-with class="com.google.gwt.logging.client.NullLogHandler">
-    <when-type-is class="com.google.gwt.logging.client.FirebugLogHandler" />
-    <any>
-      <when-property-is name="gwt.logging.enabled" value="FALSE" />
-      <when-property-is name="gwt.logging.firebugHandler" value="DISABLED" />
     </any>
   </replace-with>
   <define-property name="gwt.logging.systemHandler" values="ENABLED, DISABLED" />
@@ -119,26 +125,18 @@
     </any>
   </replace-with>
 
-
-  <define-property name="gwt.logging.popupHandler" values="ENABLED, DISABLED" />
-  <replace-with class="com.google.gwt.logging.client.NullLoggingPopup">
-    <when-type-is class="com.google.gwt.logging.client.LoggingPopup" />
-    <any>
-      <when-property-is name="gwt.logging.enabled" value="FALSE" />
-      <when-property-is name="gwt.logging.popupHandler" value="DISABLED" />
-    </any>
-  </replace-with>
-
-
   <!-- Default values for all properties -->
   <set-property name="gwt.logging.logLevel" value="INFO"/>
   <set-property name="gwt.logging.consoleHandler" value="ENABLED" />
   <set-property name="gwt.logging.developmentModeHandler" value="ENABLED" />
-  <set-property name="gwt.logging.firebugHandler" value="ENABLED" />
-  <set-property name="gwt.logging.hasWidgetsHandler" value="ENABLED" />
-  <set-property name="gwt.logging.popupHandler" value="ENABLED" />
-  <set-property name="gwt.logging.systemHandler" value="ENABLED" />
+  <set-property name="gwt.logging.hasWidgetsHandler" value="DISABLED" />
+  <set-property name="gwt.logging.systemHandler" value="DISABLED" />
   <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED" />
-  
+
   <entry-point class="com.google.gwt.logging.client.LogConfiguration"/>
+
+  <!-- Disable simple logging as the app already opted into Logging by inheriting this module -->
+  <replace-with class="com.google.gwt.logging.impl.LoggerConfiguratorNull">
+    <when-type-is class="com.google.gwt.logging.impl.LoggerConfigurator"/>
+  </replace-with>
 </module>

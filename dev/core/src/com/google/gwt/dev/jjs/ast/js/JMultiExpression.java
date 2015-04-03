@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -24,6 +24,7 @@ import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,16 +36,17 @@ public class JMultiExpression extends JExpression {
   private List<JExpression> expressions = Lists.newArrayList();
 
   /**
-   * Construct an empty multi expression.
+   * Construct a multi expression containing {@code expressions} if any.
    */
-  public JMultiExpression(SourceInfo info) {
+  public JMultiExpression(SourceInfo info, JExpression... expressions) {
     super(info);
+    addExpressions(expressions);
   }
 
   /**
    * Construct a multi expression containing {@code expressions}.
    */
-  public JMultiExpression(SourceInfo info, List<JExpression> expressions) {
+  public JMultiExpression(SourceInfo info, Collection<JExpression> expressions) {
     super(info);
     this.expressions.addAll(expressions);
   }
@@ -61,6 +63,13 @@ public class JMultiExpression extends JExpression {
    */
   public void addExpressions(List<JExpression> expressions) {
     this.expressions.addAll(expressions);
+  }
+
+  /**
+   * Adds {@code expressions} to the multi expression at position {@code index}.
+   */
+  public void addExpressions(int index, JExpression...expressions) {
+    this.expressions.addAll(index, Arrays.asList(expressions));
   }
 
   /**

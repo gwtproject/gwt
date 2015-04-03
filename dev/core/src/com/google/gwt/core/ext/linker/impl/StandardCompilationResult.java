@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -24,16 +24,13 @@ import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.Lists;
-import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -57,8 +54,8 @@ public class StandardCompilationResult extends CompilationResult {
       Iterator<String> i0 = arg0.values().iterator();
       Iterator<String> i1 = arg1.values().iterator();
 
-      StringBuffer sb0 = new StringBuffer();
-      StringBuffer sb1 = new StringBuffer();
+      StringBuilder sb0 = new StringBuilder();
+      StringBuilder sb1 = new StringBuilder();
 
       while (i0.hasNext()) {
         assert i1.hasNext();
@@ -92,41 +89,16 @@ public class StandardCompilationResult extends CompilationResult {
 
   private final int permutationId;
 
-  private Set<PermutationResult> libraryPermutationResults;
-
   private PermutationResult applicationPermutationResult;
 
-  public StandardCompilationResult(PermutationResult permutationResult) {
-    this(permutationResult, Sets.<PermutationResult>newHashSet());
-  }
-
-  public StandardCompilationResult(PermutationResult applicationPermutationResult,
-      Set<PermutationResult> libraryPermutationResults) {
+  public StandardCompilationResult(PermutationResult applicationPermutationResult) {
     super(StandardLinkerContext.class);
     this.applicationPermutationResult = applicationPermutationResult;
-    this.libraryPermutationResults = libraryPermutationResults;
-    this.strongName = computeStrongName();
+    this.strongName = applicationPermutationResult.getJsStrongName();
     this.applicationStatementRanges = applicationPermutationResult.getStatementRanges();
     this.permutationId = applicationPermutationResult.getPermutation().getId();
     this.symbolToken =
         diskCache.writeByteArray(applicationPermutationResult.getSerializedSymbolMap());
-  }
-
-  private String computeStrongName() {
-    // If there are no library permutations
-    if (libraryPermutationResults.isEmpty()) {
-      // then just reuse the precalculated root application permutation strong name.
-      return applicationPermutationResult.getJsStrongName();
-    }
-
-    // Otherwise stick all the different strong names together
-    StringBuffer strongNames = new StringBuffer();
-    strongNames.append(applicationPermutationResult.getJsStrongName());
-    for (PermutationResult libraryPermutationResult : libraryPermutationResults) {
-      strongNames.append(libraryPermutationResult.getJsStrongName());
-    }
-    // And hash that.
-    return Util.computeStrongName(strongNames.toString().getBytes());
   }
 
   /**
@@ -150,34 +122,11 @@ public class StandardCompilationResult extends CompilationResult {
     byte[][] applicationJs = applicationPermutationResult.getJs();
     int applicationFragmentCount = applicationJs.length;
 
-    // If there are no libraries
-    if (libraryPermutationResults.isEmpty()) {
-      // then return just the application JavaScript.
-      String[] jsStrings = new String[applicationFragmentCount];
-      for (int fragmentIndex = 0; fragmentIndex < applicationFragmentCount; fragmentIndex++) {
-        jsStrings[fragmentIndex] = Util.toString(applicationJs[fragmentIndex]);
-      }
-      return jsStrings;
+    String[] jsStrings = new String[applicationFragmentCount];
+    for (int fragmentIndex = 0; fragmentIndex < applicationFragmentCount; fragmentIndex++) {
+      jsStrings[fragmentIndex] = Util.toString(applicationJs[fragmentIndex]);
     }
-
-    // Otherwise if there are multiple libraries.
-    assert applicationFragmentCount == 1 : "Libraries can only have one fragment.";
-
-    StringBuffer jsBuffer = new StringBuffer();
-
-    // Concatenate the libraries and application JavaScript.
-    for (PermutationResult libraryPermutationResult : libraryPermutationResults) {
-      byte[][] libraryJs = libraryPermutationResult.getJs();
-      int libraryFragmentCount = libraryJs.length;
-
-      assert libraryFragmentCount == 1 : "Libraries can only have one fragment.";
-
-      jsBuffer.append(Util.toString(libraryJs[0]));
-    }
-
-    jsBuffer.append(Util.toString(applicationJs[0]));
-
-    return new String[] {jsBuffer.toString()};
+    return jsStrings;
   }
 
   @Override
@@ -197,34 +146,7 @@ public class StandardCompilationResult extends CompilationResult {
 
   @Override
   public StatementRanges[] getStatementRanges() {
-    byte[][] applicationJs = applicationPermutationResult.getJs();
-    int applicationFragmentCount = applicationJs.length;
-
-    // If there are no libraries
-    if (libraryPermutationResults.isEmpty()) {
-      // then return just the application statement ranges.
-      return applicationStatementRanges;
-    }
-
-    // Otherwise if there are multiple libraries.
-    assert applicationFragmentCount == 1 : "Libraries can only have one fragment.";
-
-    // Concatenate the libraries and application JavaScript.
-    List<StatementRanges> statementRangesList = new ArrayList<StatementRanges>();
-    for (PermutationResult libraryPermutationResult : libraryPermutationResults) {
-      StatementRanges[] libraryStatementRanges = libraryPermutationResult.getStatementRanges();
-      int libraryFragmentCount = libraryStatementRanges.length;
-
-      assert libraryFragmentCount == 1 : "Libraries can only have one fragment.";
-
-      statementRangesList.add(libraryStatementRanges[0]);
-    }
-
-    statementRangesList.add(applicationStatementRanges[0]);
-    // Some library might not have contained any source and thus have a null statementRange.
-    statementRangesList.removeAll(Collections.singleton(null));
-
-    return new StatementRanges[] {StandardStatementRanges.combine(statementRangesList)};
+    return applicationStatementRanges;
   }
 
   @Override

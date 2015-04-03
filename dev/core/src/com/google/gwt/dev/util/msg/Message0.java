@@ -1,12 +1,12 @@
 /*
  * Copyright 2006 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -28,15 +28,10 @@ public final class Message0 extends Message {
   }
 
   public TreeLogger branch(TreeLogger logger, Throwable caught) {
-    // Always branch, even if the branch root is not loggable.
-    // See TreeLogger.branch() for details as to why.
-    //
-    return logger.branch(type, new String(fmtParts[0]), caught);
+    return super.branch(logger, caught);
   }
 
   public void log(TreeLogger logger, Throwable caught) {
-    if (logger.isLoggable(type)) {
-      logger.log(type, new String(fmtParts[0]), caught);
-    }
+    super.log(logger, caught);
   }
 }

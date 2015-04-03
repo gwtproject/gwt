@@ -18,7 +18,7 @@ package com.google.gwt.dev.jjs;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.PrecompileTaskOptions;
-import com.google.gwt.dev.cfg.Properties;
+import com.google.gwt.dev.cfg.ConfigProps;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
@@ -61,13 +61,14 @@ public class JavaAstConstructor {
           "package com.google.gwt.lang;",
           "import com.google.gwt.core.client.JavaScriptObject;",
           "public final class Array {",
-          "  static void setCheck(Array array, int index, Object value) { }",
+          "  static void setCheck(Object array, int index, Object value) { }",
           "  static void initDim(Class arrayClass, JavaScriptObject castableTypeMap,",
-          "      int elementTypeId, int elementTypeClass, int length) { }",
+          "      int elementTypeId, int elementTypeCategory, int length) { }",
           "  static void initDims(Class arrayClasses[], JavaScriptObject[] castableTypeMapExprs,",
-          "      int[] elementTypeIds, int leafElementTypeClass, int[] dimExprs, int count) { }",
+          "      int[] elementTypeIds, int leafElementTypeCategory, int[] dimExprs, int count) { }",
           "  static void initValues(Class arrayClass, JavaScriptObject castableTypeMap,",
-          "      int elementTypeId, int elementTypeClass, Array array) { }",
+          "      int elementTypeId, int elementTypeCategory, Object array) { }",
+          "  static <T> Class<T> getClassLiteralForArray() { return null; }",
           "}"
       );
     }
@@ -83,11 +84,20 @@ public class JavaAstConstructor {
           "  private static JavaScriptObject stringCastMap;",
           "  public static native String charToString(char x) /*-{ }-*/;",
           "  public static Object dynamicCast(Object src, int dstId) { return src;}",
+          "  public static Object dynamicCastAllowJso(Object src, int dstId) { return src;}",
+          "  public static Object dynamicCastJso(Object src) { return src;}",
+          "  public static Object dynamicCastToString(Object src) { return src;}",
+          "  public static Object dynamicCastWithPrototype(Object src, int dstId, String jsType) { return src;}",
+          "  public static Object dynamicCastToJsFunction(Object src) { return src; }",
           "  public static boolean instanceOf(Object src, int dstId) { return false;}",
           "  public static boolean hasJavaObjectVirtualDispatch(Object o) { return true; }",
           "  public static boolean isJavaArray(Object o) { return false; }",
           "  public static boolean isJavaString(Object o) { return true; }",
           "  public static boolean isJavaScriptObject(Object o) { return true; }",
+          "  public static boolean instanceOfOrJso(Object src, int dst) { return false;}",
+          "  public static boolean instanceOfJso(Object src) { return false;}",
+          "  public static boolean instanceOfJsType(Object src, JavaScriptObject dstId, String jsType)  { return false;}",
+          "  public static boolean instanceOfJsFunction(Object src) { return false; }",
           "  public static native boolean isNull(Object a) /*-{ }-*/;",
           "  public static native boolean isNotNull(Object a) /*-{ }-*/;",
           "  public static native boolean jsEquals(Object a, Object b) /*-{ }-*/;",
@@ -115,7 +125,7 @@ public class JavaAstConstructor {
           "      JavaScriptObject enumValueOfFunc) { return new Class<T>(); }",
           "  static <T> Class<T> createForInterface(String packageName, String className) {",
           "    return new Class<T>(); }",
-          "  static <T> Class<T> createForPrimitive(String packageName, String className,",
+          "  static <T> Class<T> createForPrimitive(String className,",
           "      String jni) { return new Class<T>(); }",
           "  static boolean isClassMetadataEnabled() { return true; }",
           "  public boolean desiredAssertionStatus() { return true; }",
@@ -125,7 +135,7 @@ public class JavaAstConstructor {
     }
   };
 
-  public static final MockJavaResource CLASSLITERALHOLDER = new MockJavaResource(
+  public static final MockJavaResource CLASS_LITERAL_HOLDER = new MockJavaResource(
       "com.google.gwt.lang.ClassLiteralHolder") {
     @Override
     public CharSequence getContent() {
@@ -159,14 +169,17 @@ public class JavaAstConstructor {
           "import com.google.gwt.core.client.JavaScriptObject;",
           "public abstract class Enum<E extends Enum<E>> implements Serializable {",
           "  public static native <T extends Enum<T>> T valueOf(Class<T> enumType,",
-          "      String name) /*-{ }-*/;",
+          "      String name) /*-{ return enumType + name; }-*/;",
+          "  public static native <T extends Enum<T>> T valueOf(JavaScriptObject enumType,",
+          "      String name) /*-{ return enumType + name; }-*/;",
           "  protected static native <T extends Enum<T>> JavaScriptObject createValueOfMap(",
           "      T[] enumConstants) /*-{ }-*/;",
-          "  protected static native <T extends Enum<T>> T valueOf(JavaScriptObject map,",
-          "      String name) /*-{ }-*/;",
-          "  protected Enum(String name, int ordinal) { ", "    this.name = name;",
-          "    this.ordinal = ordinal;}", "  private final String name;",
-          "  private final int ordinal;", "  public final String name() { return name; }",
+          "  protected Enum(String name, int ordinal) { ",
+          "    this.name = name;",
+          "    this.ordinal = ordinal;}",
+          "  private final String name;",
+          "  private final int ordinal;",
+          "  public final String name() { return name; }",
           "  public final int ordinal() { return ordinal; }",
           "}"
       );
@@ -181,6 +194,7 @@ public class JavaAstConstructor {
           "package com.google.gwt.lang;",
           "public class Exceptions { ",
           "  static Object wrap(Object e) { return e; }",
+          "  static Object unwrap(Object e) { return e; }",
           "  static RuntimeException makeAssertionError() { return new RuntimeException(); }",
           "  static Throwable safeClose(AutoCloseable resource, Throwable mainException) {",
           "    return mainException;", "  }",
@@ -229,8 +243,10 @@ public class JavaAstConstructor {
         @Override
         public CharSequence getContent() {
           return Joiner.on("\n").join(
-              "package com.google.gwt.core.client.impl; public class Impl {",
-              "public static Object registerEntry(){return null;}",
+              "package com.google.gwt.core.client.impl;",
+              "public class Impl {",
+              "  public static Object registerEntry(){ return null;}",
+              "  public static String getNameOf(String jsniIdent) { return null; }",
               "}"
           );
         }
@@ -246,7 +262,13 @@ public class JavaAstConstructor {
               "  public static Object defineClass(int typeId, int superTypeId, Object map) {",
               "    return null;",
               "  }",
+              " public static Object defineClassWithPrototype(int typeId, "
+                  + "int superTypeId, ",
+              " Object map) {",
+              "    return null;",
+              "  }",
               "  public static void modernizeBrowser() {}",
+              "  public static void emptyMethod() {}",
               "}"
           );
         }
@@ -264,6 +286,24 @@ public class JavaAstConstructor {
       );
     }
   };
+
+  public static final MockJavaResource MODULE_UTILS =
+      new MockJavaResource("com.google.gwt.lang.ModuleUtils") {
+        @Override
+        public CharSequence getContent() {
+          return Joiner.on("\n").join(
+              "package com.google.gwt.lang;",
+              "import com.google.gwt.core.client.impl.Impl;",
+              "public class ModuleUtils {",
+              "  public static void gwtOnLoad() {}",
+              "  public static void addInitFunctions() {}",
+              "  public static void setGwtProperty() {}",
+              "  public static Object registerEntry() { return Impl.registerEntry(); }",
+              "}"
+          );
+        }
+      };
+
   public static final MockJavaResource RUNASYNCCALLBACK = new MockJavaResource(
       "com.google.gwt.core.client.RunAsyncCallback") {
     @Override
@@ -306,11 +346,22 @@ public class JavaAstConstructor {
     }
   };
 
+  public static final MockJavaResource UTIL = new MockJavaResource("com.google.gwt.lang.Util") {
+    @Override
+    public CharSequence getContent() {
+      return Joiner.on("\n").join(
+          "package com.google.gwt.lang;",
+          "public class Util {",
+          "}"
+      );
+    }
+  };
+
   public static JProgram construct(TreeLogger logger, CompilationState state,
-      PrecompileTaskOptions options, Properties properties,
+      PrecompileTaskOptions options, ConfigProps config,
       String... entryPoints) throws UnableToCompleteException {
     options.setEnableAssertions(true);
-    JProgram jprogram = AstConstructor.construct(logger, state, options, properties);
+    JProgram jprogram = AstConstructor.construct(logger, state, options, config);
 
     // Add entry methods for entry points.
     for (String entryPoint : entryPoints) {
@@ -331,9 +382,10 @@ public class JavaAstConstructor {
     // Replace the basic Class and Enum with a compiler-specific one.
     result.remove(JavaResourceBase.CLASS);
     result.remove(JavaResourceBase.ENUM);
-    Collections.addAll(result, ASYNCFRAGMENTLOADER, ARRAY, CAST, CLASS, CLASSLITERALHOLDER,
+    Collections.addAll(result, ASYNCFRAGMENTLOADER, ARRAY, CAST, CLASS, CLASS_LITERAL_HOLDER,
         COLLAPSED_PROPERTY_HOLDER, ENUM, EXCEPTIONS, GWT, GWT_SHARED, IMPL,
-        JAVA_CLASS_HIERARCHY_SETUP_UTIL, LONGLIB, RUNASYNCCALLBACK, RUNASYNCCODE);
+        JAVA_CLASS_HIERARCHY_SETUP_UTIL, LONGLIB, MODULE_UTILS, RUNASYNCCALLBACK, RUNASYNCCODE,
+        UTIL);
     return result.toArray(new MockJavaResource[result.size()]);
   }
 }

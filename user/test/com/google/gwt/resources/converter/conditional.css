@@ -1,0 +1,148 @@
+@if user.agent ie6 opera {
+    .blop {
+        color: wheat;
+    }
+}
+@elif user.agent ie8 {
+    @if local en {
+        .blop {
+            color: black;
+        }
+    }
+    @elif local fr {
+        .blop {
+            color: black;
+        }
+    }
+}
+@else {
+    .blop {
+        color: black;
+    }
+}
+
+@if (com.foo.BAR) {
+    .blop {
+        color: black;
+    }
+
+    @if (com.foo.BAR2) {
+        .blop {
+            color: black;
+        }
+    }
+    @else {
+        .blop {
+            color: black;
+        }
+    }
+}
+@elif (com.foo.foo()) {
+    .blop {
+        color: black;
+    }
+}
+
+@if com.foo.BAR {
+    .blop {
+        color: black;
+    }
+}
+
+@if com.foo.foo() {
+    .blop {
+        color: black;
+    }
+}
+
+@if com.foo.foo("blop") {
+    .blop {
+        color: black;
+    }
+}
+
+@if property1 desktop {
+  .foo3 {
+  }
+
+  @if property2 true {
+    .foo1 {
+    }
+  }
+  @else {
+    .foo2 {
+    }
+  }
+}
+@elif  property1 blop {
+  .foo3 {
+  }
+}
+@elif  property1 blop2 {
+  @if property2 true {
+    .foo4 {
+    }
+  }
+}
+@else {
+  @if property2 true {
+    .foo4 {
+    }
+  }
+  @else {
+    .foo5 {
+    }
+  }
+
+  .foo6 {
+  }
+
+  @if property1 tablet {
+    .foo7 {
+    }
+  }
+  @else {
+    .foo8 {
+    }
+  }
+}
+
+@if !property3 foo bar baz {
+  .foo8 {
+    color: black;
+  }
+}
+
+@if (CONSTANT_DEFINED_ON_INTERFACE) {
+  .foo9 {
+    color: red;
+  }
+}
+@elif CONSTANT_DEFINED_ON_INTERFACE2 {
+  .foo9 {
+    color: blue;
+  }
+}
+
+@if (!WILL_MATCH_A_CONFIGURATION_PROPERTY) {
+  .foo10 {
+    color: red;
+  }
+}
+@elif WILL_MATCH_A_CONFIGURATION_PROPERTY2 {
+  .foo10 {
+    color: blue;
+  }
+}
+
+@if (!!!!!WILL_MATCH_A_CONFIGURATION_PROPERTY) {
+  .foo11 {
+    color: red;
+  }
+}
+
+@if (!!!!WILL_MATCH_A_CONFIGURATION_PROPERTY2) {
+  .foo12 {
+    color: red;
+  }
+}

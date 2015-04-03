@@ -14,19 +14,17 @@
  * the License.
  */
 
-/**
- * Notes: For efficiency we handle String in a specialized way, in fact, a
- * java.lang.String is actually implemented as a native JavaScript String. Then
- * we just load up the prototype of the JavaScript String object with the
- * appropriate instance methods.
- */
 package java.lang;
 
+import static com.google.gwt.core.client.impl.Coercions.ensureInt;
+
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.impl.DoNotInline;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * Intrinsic string class.
@@ -137,17 +135,15 @@ public final class String implements Comparable<String>, CharSequence,
       int nBatch = n - 4;
       int i = 0;
 
-      // Process batches of 4 characters at a time
+      // Process batches of 4 characters at a time and add them to the hash coercing to 32 bits
       while (i < nBatch) {
-        // Add the next 4 characters to the hash.
-        // After every 4 characters, we force the result to fit into 32 bits
-        // by doing a bitwise operation on it.
-        hashCode = (str.charAt(i + 3)
+        hashCode = str.charAt(i + 3)
             + 31 * (str.charAt(i + 2)
             + 31 * (str.charAt(i + 1)
             + 31 * (str.charAt(i)
-            + 31 * hashCode)))) | 0;
+            + 31 * hashCode)));
 
+        hashCode = ensureInt(hashCode); // make sure we don't overflow
         i += 4;
       }
 
@@ -155,10 +151,9 @@ public final class String implements Comparable<String>, CharSequence,
       while (i < n) {
         hashCode = hashCode * 31 + str.charAt(i++);
       }
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
 
-      // TODO: make a JSNI call in case JDT gets smart about removing this
-      // Do a final fitting to 32 bits
-      return hashCode | 0;
+      return hashCode;
     }
 
     static void increment() {
@@ -258,6 +253,10 @@ public final class String implements Comparable<String>, CharSequence,
     return new String[numElements];
   }
 
+  static native String __substr(String str, int beginIndex, int len) /*-{
+    return str.substr(beginIndex, len);
+  }-*/;
+
   /**
    * This method converts Java-escaped dollar signs "\$" into JavaScript-escaped
    * dollar signs "$$", and removes all other lone backslashes, which serve as
@@ -279,11 +278,13 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   static native String __valueOf(char x[], int start, int end) /*-{
-    // Work around function.prototype.apply call stack size limits.
+    // Work around function.prototype.apply call stack size limits:
+    // https://code.google.com/p/v8/issues/detail?id=2896
     // Performance: http://jsperf.com/string-fromcharcode-test/13
+    var batchSize = @com.google.gwt.lang.Array::ARRAY_PROCESS_BATCH_SIZE;
     var s = "";
     for (var batchStart = start; batchStart < end;) { // increment in block
-      var batchEnd = Math.min(batchStart + 10000, end);
+      var batchEnd = Math.min(batchStart + batchSize, end);
       s += String.fromCharCode.apply(null, x.slice(batchStart, batchEnd));
       batchStart = batchEnd;
     }
@@ -381,16 +382,9 @@ public final class String implements Comparable<String>, CharSequence,
     return valueOf(sb);
   }
 
-  private static native boolean __equals(String me, Object other) /*-{
-    // Coerce me to a primitive string to force string comparison
-    return String(me) == other;
-  }-*/;
-
   // CHECKSTYLE_ON
 
   private static native int compareTo(String thisStr, String otherStr) /*-{
-    // Coerce to a primitive string to force string comparison
-    thisStr = String(thisStr);
     if (thisStr == otherStr) {
       return 0;
     }
@@ -440,18 +434,14 @@ public final class String implements Comparable<String>, CharSequence,
     throw new IllegalArgumentException("Character out of range: " + codePoint);
   }
 
-  private static native String fromCharCode(char ch) /*-{
-    return String.fromCharCode(ch);
-  }-*/;
-
   private static String fromCodePoint(int codePoint) {
     if (codePoint >= Character.MIN_SUPPLEMENTARY_CODE_POINT) {
       char hiSurrogate = Character.getHighSurrogate(codePoint);
       char loSurrogate = Character.getLowSurrogate(codePoint);
-      return String.fromCharCode(hiSurrogate)
-          + String.fromCharCode(loSurrogate);
+      return String.valueOf(hiSurrogate)
+          + String.valueOf(loSurrogate);
     } else {
-      return String.fromCharCode((char) codePoint);
+      return String.valueOf((char) codePoint);
     }
   }
 
@@ -500,27 +490,6 @@ public final class String implements Comparable<String>, CharSequence,
     }
     return valueOf(chars);
   }
-
-  private static native boolean regionMatches(String thisStr,
-      boolean ignoreCase, int toffset, String other, int ooffset, int len) /*-{
-    if (toffset < 0 || ooffset < 0 || len <= 0) {
-      return false;
-    }
-
-    if (toffset + len > thisStr.length || ooffset + len > other.length) {
-      return false;
-    }
-
-    var left = thisStr.substr(toffset, len);
-    var right = other.substr(ooffset, len);
-
-    if (ignoreCase) {
-      left = left.toLowerCase();
-      right = right.toLowerCase();
-    }
-
-    return left == right;
-  }-*/;
 
   private static String utf8ToString(byte[] bytes, int ofs, int len) {
     // TODO(jat): consider using decodeURIComponent(escape(bytes)) instead
@@ -677,22 +646,29 @@ public final class String implements Comparable<String>, CharSequence,
     return equals(sb.toString());
   }
 
-  public native boolean endsWith(String suffix) /*-{
-    return (this.lastIndexOf(suffix) != -1) && (this.lastIndexOf(suffix) == (this.length - suffix.length));
-  }-*/;
+  public boolean endsWith(String suffix) {
+    // If IE8 supported negative start index, we could have just used "-suffixlength".
+    int suffixlength = suffix.length();
+    return __substr(this, length() - suffixlength, suffixlength).equals(suffix);
+  }
 
+  // Marked with @DoNotInline because we don't have static eval for "==" yet.
+  @DoNotInline
   @Override
   public boolean equals(Object other) {
-    if (!(other instanceof String)) {
-      return false;
-    }
-    return __equals(this, other);
+    // Java equality is translated into triple equality which is a quick to compare strings for
+    // equality without any instanceOf checks.
+    return this == other;
   }
 
   public native boolean equalsIgnoreCase(String other) /*-{
-    if (other == null)
+    if (other == null) {
       return false;
-    return (this == other) || (this.toLowerCase() == other.toLowerCase());
+    }
+    if (this == other) {
+      return true;
+    }
+    return (this.length == other.length) && (this.toLowerCase() == other.toLowerCase());
   }-*/;
 
   public byte[] getBytes() {
@@ -727,7 +703,7 @@ public final class String implements Comparable<String>, CharSequence,
    * which is initialized in each class prototype to point to the class literal. String is
    * implemented as a plain JavaScript string hence lacking said field.<p>
    *
-   * The devirtualizer {@link JsoDevirtualizer} will insert a trampoline that uses this
+   * The devirtualizer {@code JsoDevirtualizer} will insert a trampoline that uses this
    * implementation.
    */
   @Override
@@ -745,7 +721,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public int indexOf(int codePoint, int startIndex) {
-    return this.indexOf(String.fromCodePoint(codePoint), startIndex);
+    return indexOf(fromCodePoint(codePoint), startIndex);
   }
 
   public native int indexOf(String str) /*-{
@@ -757,7 +733,7 @@ public final class String implements Comparable<String>, CharSequence,
   }-*/;
 
   public native String intern() /*-{
-    return String(this);
+    return this;
   }-*/;
 
   public native boolean isEmpty() /*-{
@@ -807,31 +783,28 @@ public final class String implements Comparable<String>, CharSequence,
     if (other == null) {
       throw new NullPointerException();
     }
-    return regionMatches(this, ignoreCase, toffset, other, ooffset, len);
+    if (toffset < 0 || ooffset < 0 || len <= 0) {
+      return false;
+    }
+    if (toffset + len > this.length() || ooffset + len > other.length()) {
+      return false;
+    }
+
+    String left = __substr(this, toffset, len);
+    String right = __substr(other, ooffset, len);
+    return ignoreCase ? left.equalsIgnoreCase(right) : left.equals(right);
   }
 
   public boolean regionMatches(int toffset, String other, int ooffset, int len) {
-    if (other == null) {
-      throw new NullPointerException();
-    }
-    return regionMatches(this, false, toffset, other, ooffset, len);
+    return regionMatches(false, toffset, other, ooffset, len);
   }
 
   public native String replace(char from, char to) /*-{
-
-    // We previously used \\uXXXX, but Safari 2 doesn't match them properly
-// in RegExp
-    // See http://bugs.webkit.org/show_bug.cgi?id=8043
-    //     http://bugs.webkit.org/show_bug.cgi?id=6257
-    //     http://bugs.webkit.org/show_bug.cgi?id=7253
-    var regex;
-    if (from < 256) {
-      regex = @java.lang.Integer::toHexString(I)(from);
-      regex = '\\x' + "00".substring(regex.length) + regex;
-    } else {
-      // this works because characters above 255 can't be regex special chars
-      regex = String.fromCharCode(from);
-    }
+    // Translate 'from' into unicode escape sequence (\\u and a four-digit hexadecimal number).
+    // Escape sequence replacement is used instead of a string literal replacement
+    // in order to escape regexp special characters (e.g. '.').
+    var hex = @java.lang.Integer::toHexString(I)(from);
+    var regex = "\\u" + "0000".substring(hex.length) + hex;
     return this.replace(RegExp(regex, "g"), String.fromCharCode(to));
   }-*/;
 
@@ -950,28 +923,24 @@ public final class String implements Comparable<String>, CharSequence,
   }-*/;
 
   public boolean startsWith(String prefix) {
-    return indexOf(prefix) == 0;
+    return startsWith(prefix, 0);
   }
 
   public boolean startsWith(String prefix, int toffset) {
-    if (toffset < 0 || toffset >= length()) {
-      return false;
-    } else {
-      return indexOf(prefix, toffset) == toffset;
-    }
+    return toffset >= 0 && __substr(this, toffset, prefix.length()).equals(prefix);
   }
 
   public CharSequence subSequence(int beginIndex, int endIndex) {
     return this.substring(beginIndex, endIndex);
   }
 
-  public native String substring(int beginIndex) /*-{
-    return this.substr(beginIndex, this.length - beginIndex);
-  }-*/;
+  public String substring(int beginIndex) {
+    return __substr(this, beginIndex, this.length() - beginIndex);
+  }
 
-  public native String substring(int beginIndex, int endIndex) /*-{
-    return this.substr(beginIndex, endIndex - beginIndex);
-  }-*/;
+  public String substring(int beginIndex, int endIndex) {
+    return __substr(this, beginIndex, endIndex - beginIndex);
+  }
 
   public char[] toCharArray() {
     int n = this.length();
@@ -980,9 +949,49 @@ public final class String implements Comparable<String>, CharSequence,
     return charArr;
   }
 
+  /**
+   * Transforms the String to lower-case in a locale insensitive way.
+   * <p>
+   * Unlike JRE, we don't do locale specific transformation by default. That is backward compatible
+   * for GWT and in most of the cases that is what the developer actually wants. If you want to make
+   * a transformation based on native locale of the browser, you can do
+   * {@code toLowerCase(Locale.getDefault())} instead.
+   */
   public native String toLowerCase() /*-{
     return this.toLowerCase();
   }-*/;
+
+  /**
+   * Transforms the String to lower-case based on the native locale of the browser.
+   */
+  private native String toLocaleLowerCase() /*-{
+    return this.toLocaleLowerCase();
+  }-*/;
+
+  /**
+   * If provided {@code locale} is {@link Locale#getDefault()}, uses javascript's
+   * {@code toLocaleLowerCase} to do a locale specific transformation. Otherwise, it will fallback
+   * to {@code toLowerCase} which performs the right thing for the limited set of Locale's
+   * predefined in GWT Locale emulation.
+   */
+  public String toLowerCase(Locale locale) {
+    return locale == Locale.getDefault() ? toLocaleLowerCase() : toLowerCase();
+  }
+
+  // See the notes in lowerCase pair.
+  public native String toUpperCase() /*-{
+    return this.toUpperCase();
+  }-*/;
+
+  // See the notes in lowerCase pair.
+  private native String toLocaleUpperCase() /*-{
+    return this.toLocaleUpperCase();
+  }-*/;
+
+  // See the notes in lowerCase pair.
+  public String toUpperCase(Locale locale) {
+    return locale == Locale.getDefault() ? toLocaleUpperCase() : toUpperCase();
+  }
 
   @Override
   public String toString() {
@@ -993,14 +1002,16 @@ public final class String implements Comparable<String>, CharSequence,
     return this;
   }
 
-  public native String toUpperCase() /*-{
-    return this.toUpperCase();
-  }-*/;
-
-  public native String trim() /*-{
-    if (this.length == 0 || (this[0] > '\u0020' && this[this.length - 1] > '\u0020')) {
-      return this;
+  public String trim() {
+    int length = length();
+    int start = 0;
+    while (start < length && charAt(start) <= ' ') {
+      start++;
     }
-    return this.replace(/^[\u0000-\u0020]*|[\u0000-\u0020]*$/g, '');
-  }-*/;
+    int end = length;
+    while (end > start && charAt(end - 1) <= ' ') {
+      end--;
+    }
+    return start > 0 || end < length ? substring(start, end) : this;
+  }
 }

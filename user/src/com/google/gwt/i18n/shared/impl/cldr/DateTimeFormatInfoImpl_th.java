@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "th" locale.
@@ -51,27 +46,7 @@ public class DateTimeFormatInfoImpl_th extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d/M/yyyy";
-  }
-
-  @Override
-  public String dateTimeFull(String timePattern, String datePattern) {
-    return datePattern + ", " + timePattern;
-  }
-
-  @Override
-  public String dateTimeLong(String timePattern, String datePattern) {
-    return datePattern + ", " + timePattern;
-  }
-
-  @Override
-  public String dateTimeMedium(String timePattern, String datePattern) {
-    return datePattern + ", " + timePattern;
-  }
-
-  @Override
-  public String dateTimeShort(String timePattern, String datePattern) {
-    return datePattern + ", " + timePattern;
+    return "d/M/yy";
   }
 
   @Override
@@ -93,16 +68,6 @@ public class DateTimeFormatInfoImpl_th extends DateTimeFormatInfoImpl {
   @Override
   public int firstDayOfTheWeek() {
     return 0;
-  }
-
-  @Override
-  public String formatHour24Minute() {
-    return "H:mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "H:mm:ss";
   }
 
   @Override
@@ -152,12 +117,12 @@ public class DateTimeFormatInfoImpl_th extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M/yyyy";
+    return "M/y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d/M/yyyy";
+    return "d/M/y";
   }
 
   @Override
@@ -167,12 +132,12 @@ public class DateTimeFormatInfoImpl_th extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ yyyy";
+    return "QQQQ y";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q yyyy";
+    return "Q y";
   }
 
   @Override
@@ -195,24 +160,6 @@ public class DateTimeFormatInfoImpl_th extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] monthsNarrow() {
-    return new String[] {
-        "ม.ค.",
-        "ก.พ.",
-        "มี.ค.",
-        "เม.ย.",
-        "พ.ค.",
-        "มิ.ย",
-        "ก.ค.",
-        "ส.ค.",
-        "ก.ย.",
-        "ต.ค.",
-        "พ.ย.",
-        "ธ.ค."
-    };
-  }
-
-  @Override
-  public String[] monthsNarrowStandalone() {
     return new String[] {
         "ม.ค.",
         "ก.พ.",
@@ -258,23 +205,23 @@ public class DateTimeFormatInfoImpl_th extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "ไตรมาส 1",
+        "ไตรมาส 2",
+        "ไตรมาส 3",
+        "ไตรมาส 4"
+    };
+  }
+
+  @Override
   public String timeFormatFull() {
-    return "H นาฬิกา m นาที ss วินาที zzzz";
+    return "H นาฬิกา mm นาที ss วินาที zzzz";
   }
 
   @Override
   public String timeFormatLong() {
-    return "H นาฬิกา m นาที ss วินาที z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "H:mm:ss";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "H:mm";
+    return "H นาฬิกา mm นาที ss วินาที z";
   }
 
   @Override
@@ -293,11 +240,11 @@ public class DateTimeFormatInfoImpl_th extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "อ",
+        "อา",
         "จ",
         "อ",
         "พ",
-        "พ",
+        "พฤ",
         "ศ",
         "ส"
     };

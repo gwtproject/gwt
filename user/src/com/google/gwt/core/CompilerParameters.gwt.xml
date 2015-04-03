@@ -14,7 +14,7 @@
 
 <!-- Compiler parameters that can be overridden .    -->
 <!--                                                                        -->
-<module type="fileset">
+<module>
   <!--
     A user-specified initial load sequence for the runAsync calls. Each entry should specify the
     surrounding method immediately enclosing the call, using a full JSNI reference.
@@ -42,12 +42,19 @@
 
   <!--
     Whether or not the compiler should alter Enum.name() to return
-    ordinal() as a way of obfuscating Enum field identifiers.
+    ordinal() as a way of obfuscating Enum field identifiers. 
+    A value of 'true' returns the ordinal.
   -->
    <define-configuration-property name="compiler.enum.obfuscate.names"
       is-multi-valued='false' />
    <set-configuration-property name="compiler.enum.obfuscate.names"
       value="false" />
+
+  <!--
+    A list of fully qualified Enum class names to exclude from Enum.name() obfuscate.
+  -->
+   <define-configuration-property name="compiler.enum.obfuscate.names.blacklist"
+      is-multi-valued="true" />
     
   <!-- From here down, the properties are unsupported and are only available for test cases -->
 
@@ -109,4 +116,23 @@
    -->
   <define-configuration-property name="js.identifier.blacklist.suffixes"
                                    is-multi-valued="true"/>
+
+  <!--
+    Specifies that @JsExport assignments are fully qualified expressions. This increases code
+    size, but allows closure compiler integration to work better by letting closure rename the
+    namespaces of exports to top level global variables.
+  -->
+  <define-configuration-property name="js.export.closurestyle.fullyqualified"
+                                   is-multi-valued="false"/>
+  <set-configuration-property name="js.export.closurestyle.fullyqualified"
+                                value="false" />
+
+  <!--
+    Specifies that a binding property should be included in the $gwt.permProps variable
+    in the generated JavaScript. This will allow Super Dev Mode to pick it up
+    regardless of how many permutations are generated.
+  -->
+  <define-configuration-property name="js.embedded.properties" is-multi-valued="true"/>
+  <extend-configuration-property name="js.embedded.properties" value="locale"/>
+  <extend-configuration-property name="js.embedded.properties" value="user.agent"/>
 </module>

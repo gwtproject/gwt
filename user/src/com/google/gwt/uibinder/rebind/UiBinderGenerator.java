@@ -17,6 +17,7 @@ package com.google.gwt.uibinder.rebind;
 
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.Generator;
+import com.google.gwt.core.ext.Generator.RunsLocal;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
@@ -27,7 +28,6 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.uibinder.rebind.messages.MessagesWriter;
 import com.google.gwt.uibinder.rebind.model.ImplicitClientBundle;
@@ -38,12 +38,11 @@ import org.xml.sax.SAXParseException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Set;
 
 /**
- * Generator for implementations of
- * {@link com.google.gwt.uibinder.client.UiBinder}.
+ * Generator for implementations of {@link com.google.gwt.uibinder.client.UiBinder}.
  */
+@RunsLocal(requiresProperties = {"UiBinder.useSafeHtmlTemplates", "UiBinder.useLazyWidgetBuilders"})
 public class UiBinderGenerator extends Generator {
 
   private static final String BINDER_URI = "urn:ui:com.google.gwt.uibinder";
@@ -52,7 +51,7 @@ public class UiBinderGenerator extends Generator {
 
   private static boolean gaveSafeHtmlWarning;
   private static final String LAZY_WIDGET_BUILDERS_PROPERTY = "UiBinder.useLazyWidgetBuilders";
-  
+
   private static final String TEMPLATE_SUFFIX = ".ui.xml";
   private static final String XSS_SAFE_CONFIG_PROPERTY = "UiBinder.useSafeHtmlTemplates";
 
@@ -97,16 +96,12 @@ public class UiBinderGenerator extends Generator {
     return s.replace(".", "/").replace("$", ".");
   }
 
-  private static ImmutableSet<String> relevantPropertyNames =
-      ImmutableSet.of("UiBinder.useSafeHtmlTemplates", "UiBinder.useLazyWidgetBuilders");
-
   private final UiBinderContext uiBinderCtx = new UiBinderContext();
 
   @Override
   public String generate(TreeLogger logger, GeneratorContext genCtx,
       String fqInterfaceName) throws UnableToCompleteException {
     TypeOracle oracle = genCtx.getTypeOracle();
-    ResourceOracle resourceOracle = genCtx.getResourcesOracle();
 
     JClassType interfaceType;
     try {
@@ -132,19 +127,9 @@ public class UiBinderGenerator extends Generator {
 
     if (printWriter != null) {
       generateOnce(interfaceType, implName, printWriter, logger, oracle,
-          resourceOracle, genCtx.getPropertyOracle(), writers, designTime);
+          genCtx.getResourcesOracle(), genCtx.getPropertyOracle(), writers, designTime);
     }
     return packageName + "." + implName;
-  }
-
-  @Override
-  public Set<String> getAccessedPropertyNames() {
-    return relevantPropertyNames;
-  }
-
-  @Override
-  public boolean contentDependsOnTypes() {
-    return false;
   }
 
   private Boolean extractConfigProperty(MortalLogger logger,
@@ -170,7 +155,7 @@ public class UiBinderGenerator extends Generator {
   private void generateOnce(JClassType interfaceType, String implName,
       PrintWriter binderPrintWriter, TreeLogger treeLogger, TypeOracle oracle,
       ResourceOracle resourceOracle, PropertyOracle propertyOracle,
-      PrintWriterManager writerManager,  DesignTimeUtils designTime)
+      PrintWriterManager writerManager, DesignTimeUtils designTime)
   throws UnableToCompleteException {
 
     MortalLogger logger = new MortalLogger(treeLogger);
@@ -182,11 +167,18 @@ public class UiBinderGenerator extends Generator {
         useLazyWidgetBuilders(logger, propertyOracle) && !designTime.isDesignTime();
     FieldManager fieldManager = new FieldManager(oracle, logger, useLazyWidgetBuilders);
 
-    UiBinderWriter uiBinderWriter = new UiBinderWriter(interfaceType, implName,
-        templatePath, oracle, logger, fieldManager, messages, designTime, uiBinderCtx,
-        useSafeHtmlTemplates(logger, propertyOracle), useLazyWidgetBuilders, BINDER_URI);
+    UiBinderWriter uiBinderWriter = new UiBinderWriter(interfaceType, implName, templatePath,
+        oracle, logger, fieldManager, messages, designTime, uiBinderCtx,
+        useSafeHtmlTemplates(logger, propertyOracle), useLazyWidgetBuilders, BINDER_URI,
+        resourceOracle);
 
-    Document doc = getW3cDoc(logger, designTime, resourceOracle, templatePath);
+    Resource resource = getTemplateResource(logger, templatePath, resourceOracle);
+
+    // Ensure that generated uibinder source is modified at least as often as synthesized .cssmap
+    // resources, otherwise it would be possible to synthesize a modified .cssmap resource but fail
+    // to retrigger the InlineClientBundleGenerator that processes it.
+    binderPrintWriter.println("// .ui.xml template last modified: " + resource.getLastModified());
+    Document doc = getW3cDoc(logger, designTime, resourceOracle, templatePath, resource);
     designTime.rememberPathForElements(doc);
 
     uiBinderWriter.parseDocument(doc, binderPrintWriter);
@@ -202,13 +194,8 @@ public class UiBinderGenerator extends Generator {
   }
 
   private Document getW3cDoc(MortalLogger logger, DesignTimeUtils designTime,
-      ResourceOracle resourceOracle, String templatePath)
+      ResourceOracle resourceOracle, String templatePath, Resource resource)
       throws UnableToCompleteException {
-
-    Resource resource = resourceOracle.getResourceMap().get(templatePath);
-    if (null == resource) {
-      logger.die("Unable to find resource: " + templatePath);
-    }
 
     Document doc = null;
     try {
@@ -226,6 +213,15 @@ public class UiBinderGenerator extends Generator {
               + e.getMessage(), e);
     }
     return doc;
+  }
+
+  private Resource getTemplateResource(MortalLogger logger, String templatePath,
+      ResourceOracle resourceOracle) throws UnableToCompleteException {
+    Resource resource = resourceOracle.getResource(templatePath);
+    if (null == resource) {
+      logger.die("Unable to find resource: " + templatePath);
+    }
+    return resource;
   }
 
   private Boolean useLazyWidgetBuilders(MortalLogger logger, PropertyOracle propertyOracle) {

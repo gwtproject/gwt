@@ -15,13 +15,13 @@
  */
 package com.google.gwt.uibinder.rebind;
 
+import com.google.gwt.core.client.js.JsType;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.rebind.model.OwnerField;
 import com.google.gwt.user.client.ui.RenderablePanel;
 
@@ -38,16 +38,12 @@ import java.util.Set;
  * {@link FieldWriter#getInstantiableType()}.
  */
 abstract class AbstractFieldWriter implements FieldWriter {
+
+  private static final String DOM_ELEMENT_CLASS = "com.google.gwt.dom.client.Element";
   private static final String NO_DEFAULT_CTOR_ERROR =
       "%1$s has no default (zero args) constructor. To fix this, you can define"
       + " a @UiFactory method on the UiBinder's owner, or annotate a constructor of %2$s with"
       + " @UiConstructor.";
-
-  private static int nextAttachVar;
-
-  public static String getNextAttachVar() {
-    return "attachRecord" + nextAttachVar++;
-  }
 
   private final FieldManager manager;
   private final Set<FieldWriter> needs = new LinkedHashSet<FieldWriter>();
@@ -258,16 +254,12 @@ abstract class AbstractFieldWriter implements FieldWriter {
     }
 
     w.write("// Setup section.");
-    for (String s : statements) {
-      w.write(s);
-    }
-
-    String attachedVar = null;
+    writeStatements(w, statements);
 
     if (attachStatements.size() > 0) {
       w.newline();
-      w.write("// Attach section.");
       if (outputAttachDetachCallbacks) {
+        w.write("// Attach section.");
         // TODO(rdcastro): This is too coupled with RenderablePanel.
         // Make this nicer.
         w.write("%s.wrapInitializationCallback = ", getName());
@@ -278,36 +270,37 @@ abstract class AbstractFieldWriter implements FieldWriter {
         w.outdent();
         w.write("@Override public void execute() {");
         w.indent();
-      } else {
-        attachedVar = getNextAttachVar();
 
-        JClassType elementType = typeOracle.findType(Element.class.getName());
+        writeStatements(w, attachStatements);
 
-        String elementToAttach = getInstantiableType().isAssignableTo(elementType)
-            ? name : name + ".getElement()";
-
-        w.write("UiBinderUtil.TempAttachment %s = UiBinderUtil.attachToDom(%s);",
-                attachedVar, elementToAttach);
-      }
-
-      for (String s : attachStatements) {
-        w.write(s);
-      }
-
-      if (outputAttachDetachCallbacks) {
         w.outdent();
         w.write("}");
         w.outdent();
         w.write("};");
-      }
-    }
+      } else {
+        String attachedVar = "__attachRecord__";
 
-    w.newline();
-    // If we forced an attach, we should always detach, regardless of whether
-    // there are any detach statements.
-    if (attachedVar != null) {
-      w.write("// Detach section.");
-      w.write("%s.detach();", attachedVar);
+        w.write("{");
+        w.indent();
+        w.write("// Attach section.");
+        String elementToAttach = getInstantiableType().isAssignableTo(getDomElement(typeOracle))
+            ? name : name + ".getElement()";
+
+        w.write("UiBinderUtil.TempAttachment %s = UiBinderUtil.attachToDom(%s);",
+                attachedVar, elementToAttach);
+
+        w.newline();
+
+        writeStatements(w, attachStatements);
+
+        w.newline();
+        // If we forced an attach, we should always detach, regardless of whether
+        // there are any detach statements.
+        w.write("// Detach section.");
+        w.write("%s.detach();", attachedVar);
+        w.outdent();
+        w.write("}");
+      }
     }
 
     if (detachStatements.size() > 0) {
@@ -321,9 +314,7 @@ abstract class AbstractFieldWriter implements FieldWriter {
         w.indent();
       }
 
-      for (String s : detachStatements) {
-        w.write(s);
-      }
+      writeStatements(w, detachStatements);
 
       if (outputAttachDetachCallbacks) {
         w.outdent();
@@ -335,7 +326,21 @@ abstract class AbstractFieldWriter implements FieldWriter {
 
     if ((ownerField != null) && !ownerField.isProvided()) {
       w.newline();
-      w.write("this.owner.%1$s = %1$s;", name);
+      // If the type of the field is annotated with JsType, then use a dynamic cast
+      // to convert it from Element. We assume the developer knows what they are doing
+      // and that the JsType represents some form of native DOM element.
+      // For more information, see the design doc here: http://goo.gl/eRjoD9
+      // TODO: When we know better how this is used, we might want to loosen the annotation
+      // constraint (e.g. it might be sufficient for the declared type to extend another
+      // interface that is a JsType).
+      if (!ownerField.getRawType().isAssignableTo(getDomElement(typeOracle))
+          && ownerField.getRawType().getAnnotation(JsType.class) != null) {
+        w.write(
+            "this.owner.%1$s = (%2$s) %1$s;", name,
+            ownerField.getRawType().getQualifiedSourceName());
+      } else {
+        w.write("this.owner.%1$s = %1$s;", name);
+      }
     }
 
     w.newline();
@@ -354,6 +359,15 @@ abstract class AbstractFieldWriter implements FieldWriter {
       }
     }
     return null;
+  }
+
+  /**
+   * Gets a reference to the type object representing {@link com.google.gwt.dom.client.Element}.
+   */
+  private JClassType getDomElement(TypeOracle typeOracle) {
+    JClassType domElement = typeOracle.findType(DOM_ELEMENT_CLASS);
+    assert domElement != null;
+    return domElement;
   }
 
   private JType getReturnType(JType type, List<String> path,
@@ -382,5 +396,11 @@ abstract class AbstractFieldWriter implements FieldWriter {
       type = m.getReturnType();
     }
     return type;
+  }
+
+  private static void writeStatements(IndentedWriter w, Iterable<String> statements) {
+    for (String s : statements) {
+      w.write(s);
+    }
   }
 }

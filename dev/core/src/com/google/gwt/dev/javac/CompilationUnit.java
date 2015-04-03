@@ -16,17 +16,17 @@
 package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.dev.asm.ClassReader;
-import com.google.gwt.dev.asm.MethodVisitor;
-import com.google.gwt.dev.asm.Opcodes;
 import com.google.gwt.dev.javac.asmbridge.EmptyVisitor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.util.DiskCache;
+import com.google.gwt.dev.util.StringInterningObjectInputStream;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashMap;
 
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.Opcodes;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -66,7 +66,7 @@ public abstract class CompilationUnit implements Serializable {
 
       public AnonymousClassVisitor() {
 
-        this.mv = new MethodVisitor(Opcodes.ASM4, this.mv) {
+        this.mv = new org.objectweb.asm.MethodVisitor(Opcodes.ASM5, this.mv) {
           @Override
           public void visitCode() {
             ++sawCode;
@@ -94,8 +94,9 @@ public abstract class CompilationUnit implements Serializable {
       }
 
       @Override
-      public MethodVisitor visitMethod(int access, String name, String desc, String signature,
-                                                              String[] exceptions) {
+      public org.objectweb.asm.MethodVisitor visitMethod(int access, String name, String desc,
+          String signature,
+          String[] exceptions) {
         if ((access & (Opcodes.ACC_ABSTRACT | Opcodes.ACC_NATIVE)) == 0) {
           ++expectCode;
         }
@@ -349,18 +350,6 @@ public abstract class CompilationUnit implements Serializable {
   public abstract String getResourcePath();
 
   /**
-   * Returns the contained type with the given name.
-   */
-  public JDeclaredType getTypeByName(String typeName) {
-    for (JDeclaredType type : getTypes()) {
-      if (type.getName().equals(typeName)) {
-        return type;
-      }
-    }
-    return null;
-  }
-
-  /**
    * Returns the source name of the top level public type.
    */
   public abstract String getTypeName();
@@ -376,7 +365,7 @@ public abstract class CompilationUnit implements Serializable {
   public List<JDeclaredType> getTypes() {
     try {
       byte[] bytes = getTypesSerialized();
-      ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
+      ObjectInputStream ois = new StringInterningObjectInputStream(new ByteArrayInputStream(bytes));
       return JProgram.deserializeTypes(ois);
     } catch (IOException e) {
       throw new RuntimeException("Unexpected IOException on in-memory stream", e);
@@ -455,6 +444,12 @@ public abstract class CompilationUnit implements Serializable {
   abstract Dependencies getDependencies();
 
   abstract CategorizedProblem[] getProblems();
+
+  /**
+   * Returns true if this compilation unit has any JsInterop root types (i.e. type with an export or
+   * a JsType).
+   */
+  abstract boolean hasJsInteropRootType();
 
   private List<String> getJdtClassNames(String topLevelClass) {
     List<String> classNames = new ArrayList<String>();

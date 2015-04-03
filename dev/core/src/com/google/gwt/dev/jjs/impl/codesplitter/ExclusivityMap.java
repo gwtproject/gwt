@@ -76,11 +76,6 @@ class ExclusivityMap {
     }
 
     @Override
-    public boolean isLive(String literal) {
-      return isLiveInFragment(fragment, literal);
-    }
-
-    @Override
     public boolean miscellaneousStatementsAreLive() {
       return true;
     }
@@ -150,13 +145,6 @@ class ExclusivityMap {
    */
   public boolean isLiveInFragment(Fragment fragment, JMethod method) {
     return isLiveInFragment(fragmentForMethod, method, fragment);
-  }
-
-  /**
-   * Determine whether a string is live in a fragment.
-   */
-  public boolean isLiveInFragment(Fragment fragment, String string) {
-    return isLiveInFragment(fragmentForString, string, fragment);
   }
 
   /**

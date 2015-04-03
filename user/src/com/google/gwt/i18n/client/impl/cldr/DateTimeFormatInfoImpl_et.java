@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "et" locale.
@@ -46,7 +41,7 @@ public class DateTimeFormatInfoImpl_et extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "dd.MM.yyyy";
+    return "dd.MM.y";
   }
 
   @Override
@@ -91,8 +86,18 @@ public class DateTimeFormatInfoImpl_et extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthAbbrev() {
+    return "MMMM";
+  }
+
+  @Override
   public String formatMonthAbbrevDay() {
     return "d. MMM";
+  }
+
+  @Override
+  public String formatMonthFull() {
+    return "MMMM";
   }
 
   @Override
@@ -117,7 +122,7 @@ public class DateTimeFormatInfoImpl_et extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d.MMM.y";
+    return "d. MMM y";
   }
 
   @Override
@@ -142,7 +147,7 @@ public class DateTimeFormatInfoImpl_et extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, d. MMM y";
+    return "EEE, d. MMMM y";
   }
 
   @Override

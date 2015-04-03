@@ -16,7 +16,7 @@
 <!--                                                                        -->
 <!-- This module is typically inherited via com.google.gwt.user.User        -->
 <!--                                                                        -->
-<module type="fileset">
+<module>
   <inherits name="com.google.gwt.core.Core"/>
   <inherits name="com.google.gwt.user.UserAgent"/>
 
@@ -27,7 +27,6 @@
    <replace-with class="com.google.gwt.user.client.impl.WindowImplIE">
       <when-type-is class="com.google.gwt.user.client.impl.WindowImpl"/>
       <any>
-        <when-property-is name="user.agent" value="ie6"/>
         <when-property-is name="user.agent" value="ie8"/>
         <when-property-is name="user.agent" value="ie9"/>
         <when-property-is name="user.agent" value="ie10"/>

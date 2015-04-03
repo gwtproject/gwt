@@ -16,6 +16,7 @@
 package com.google.gwt.dev.cfg;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.thirdparty.guava.common.base.Objects;
 
 /**
  * A condition that is true when the active linkers include the one specified.
@@ -29,9 +30,17 @@ public class ConditionWhenLinkerAdded extends Condition {
   }
 
   @Override
-  public String toSource() {
-    throw new UnsupportedOperationException(
-        "Can't perform runtime rebinding with linker presence based conditions");
+  public boolean equals(Object object) {
+    if (object instanceof ConditionWhenLinkerAdded) {
+      ConditionWhenLinkerAdded that = (ConditionWhenLinkerAdded) object;
+      return Objects.equal(this.linkerName, that.linkerName);
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(linkerName);
   }
 
   @Override

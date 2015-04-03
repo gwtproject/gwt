@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "vai" locale.
@@ -66,6 +61,7 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "TF",
         "UM",
         "VA",
+        "XK",
         "ER",
         "BZ",
         "SL",
@@ -286,7 +282,6 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "PF",
         "GF",
         "VN",
-        "CS",
         "CZ",
         "MX",
         "NL",
@@ -342,7 +337,6 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
     namesMap.put("CN", "ꕦꔤꕯ");
     namesMap.put("CO", "ꗛꗏꔭꕩ");
     namesMap.put("CR", "ꖏꔻꕚ ꔸꕪ");
-    namesMap.put("CS", "ꗻꗡꔫꕩ ꗪ ꗞꘋꔳꕇꖶꖄ");
     namesMap.put("CU", "ꕃꖳꕑ");
     namesMap.put("CV", "ꔞꔪ ꗲꔵ ꔳꘋꗣ");
     namesMap.put("CY", "ꕢꗡꖛꗐꔻ");
@@ -576,7 +570,6 @@ public class LocalizedNamesImpl_vai extends LocalizedNamesImpl {
         "CN": "ꕦꔤꕯ",
         "CO": "ꗛꗏꔭꕩ",
         "CR": "ꖏꔻꕚ ꔸꕪ",
-        "CS": "ꗻꗡꔫꕩ ꗪ ꗞꘋꔳꕇꖶꖄ",
         "CU": "ꕃꖳꕑ",
         "CV": "ꔞꔪ ꗲꔵ ꔳꘋꗣ",
         "CY": "ꕢꗡꖛꗐꔻ",

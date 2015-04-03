@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import static com.google.gwt.core.client.impl.Coercions.ensureInt;
+
 import java.io.Serializable;
 
 /**
@@ -57,19 +59,19 @@ public class HashMap<K, V> extends AbstractHashMap<K, V> implements Cloneable,
     super(toBeCopied);
   }
 
-  @Override
   public Object clone() {
     return new HashMap<K, V>(this);
   }
 
   @Override
-  protected boolean equals(Object value1, Object value2) {
+  boolean equals(Object value1, Object value2) {
     return Objects.equals(value1, value2);
   }
 
   @Override
-  protected int getHashCode(Object key) {
+  int getHashCode(Object key) {
+    int hashCode = key.hashCode();
     // Coerce to int -- our classes all do this, but a user-written class might not.
-    return ~~key.hashCode();
+    return ensureInt(hashCode);
   }
 }

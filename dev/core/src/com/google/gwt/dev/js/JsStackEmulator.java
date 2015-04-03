@@ -15,17 +15,16 @@
  */
 package com.google.gwt.dev.js;
 
-import com.google.gwt.core.ext.BadPropertyValueException;
-import com.google.gwt.core.ext.PropertyOracle;
-import com.google.gwt.core.ext.SelectionProperty;
-import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.dev.cfg.ConfigProps;
+import com.google.gwt.dev.cfg.PermProps;
 import com.google.gwt.dev.jjs.HasSourceInfo;
-import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.HasArguments;
+import com.google.gwt.dev.js.ast.HasName;
 import com.google.gwt.dev.js.ast.JsArrayAccess;
 import com.google.gwt.dev.js.ast.JsArrayLiteral;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
@@ -73,14 +72,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Emulates the JS stack in order to provide useful stack traces on browers that
+ * Emulates the JS stack in order to provide useful stack traces on browsers that
  * do not provide useful stack information.
  *
  * @see com.google.gwt.core.client.impl.StackTraceCreator
  */
 public class JsStackEmulator {
-
-  private static final String PROPERTY_NAME = "compiler.stackMode";
 
   /**
    * Resets the global stack depth to the local stack index and top stack frame
@@ -100,31 +97,7 @@ public class JsStackEmulator {
 
     @Override
     public void endVisit(JsExprStmt x, JsContext ctx) {
-      // Looking for e = wrap(e);
-      JsExpression expr = x.getExpression();
-
-      if (!(expr instanceof JsBinaryOperation)) {
-        return;
-      }
-
-      JsBinaryOperation op = (JsBinaryOperation) expr;
-      if (!(op.getArg2() instanceof JsInvocation)) {
-        return;
-      }
-
-      JsInvocation i = (JsInvocation) op.getArg2();
-      JsExpression q = i.getQualifier();
-      if (!(q instanceof JsNameRef)) {
-        return;
-      }
-
-      JsName name = ((JsNameRef) q).getName();
-      if (name == null) {
-        return;
-      }
-
-      // caughtFunction is the JsFunction translated from Exceptions.wrap
-      if (name.getStaticRef() != wrapFunction) {
+      if (!isExceptionWrappingCode(x)) {
         return;
       }
 
@@ -136,6 +109,37 @@ public class JsStackEmulator {
 
       ctx.insertAfter(reset.makeStmt());
     }
+  }
+
+  private boolean isExceptionWrappingCode(JsExprStmt x) {
+    // Looking for e = wrap(e);
+    JsExpression expr = x.getExpression();
+
+    if (!(expr instanceof JsBinaryOperation)) {
+      return false;
+    }
+
+    JsBinaryOperation op = (JsBinaryOperation) expr;
+    if (!(op.getArg2() instanceof JsInvocation)) {
+      return false;
+    }
+
+    JsInvocation i = (JsInvocation) op.getArg2();
+    JsExpression q = i.getQualifier();
+    if (!(q instanceof JsNameRef)) {
+      return false;
+    }
+
+    JsName name = ((JsNameRef) q).getName();
+    if (name == null) {
+      return false;
+    }
+
+    // caughtFunction is the JsFunction translated from Exceptions.wrap
+    if (name.getStaticRef() != wrapFunction) {
+      return false;
+    }
+    return true;
   }
 
   /**
@@ -461,9 +465,8 @@ public class JsStackEmulator {
       JsName paramName = c.getParameter().getName();
 
       // wrap(e)
-      JsInvocation wrapCall = new JsInvocation(info);
-      wrapCall.setQualifier(wrapFunction.getName().makeRef(info));
-      wrapCall.getArguments().add(paramName.makeRef(info));
+      JsInvocation wrapCall = new JsInvocation(info, wrapFunction.getName().makeRef(info),
+          paramName.makeRef(info));
 
       // e = wrap(e)
       JsBinaryOperation asg = new JsBinaryOperation(info, JsBinaryOperator.ASG,
@@ -481,9 +484,6 @@ public class JsStackEmulator {
 
     /**
      * Pops the stack frame.
-     *
-     * @param x the statement that will cause the pop
-     * @param ctx the visitor context
      */
     private void pop(JsStatement x, JsExpression expr, JsContext ctx) {
       // $stackDepth = stackIndex - 1
@@ -571,21 +571,15 @@ public class JsStackEmulator {
 
     @Override
     public void endVisit(JsFunction x, JsContext ctx) {
-      if (!x.getBody().getStatements().isEmpty()) {
-        JsName fnName = x.getName();
-        JMethod method = jjsmap.nameToMethod(fnName);
-        /**
-         * Do not instrumental immortal types because they are potentially
-         * evaluated before anything else has been defined.
-         */
-        if (method != null && jprogram.immortalCodeGenTypes.contains(method.getEnclosingType())) {
-          return;
-        }
-        if (recordLineNumbers) {
-          (new LocationVisitor(x)).accept(x.getBody());
-        } else {
-          (new EntryExitVisitor(x)).accept(x.getBody());
-        }
+      if (x.getBody().getStatements().isEmpty() ||
+          !shouldInstrumentFunction(x)) {
+        return;
+      }
+
+      if (recordLineNumbers) {
+        (new LocationVisitor(x)).accept(x.getBody());
+      } else {
+        (new EntryExitVisitor(x)).accept(x.getBody());
       }
     }
   }
@@ -623,13 +617,6 @@ public class JsStackEmulator {
     }
 
     @Override
-    public boolean visit(JsPropertyInitializer x, JsContext ctx) {
-      // do not instrument left hand side of initializer.
-      x.setValueExpr(accept(x.getValueExpr()));
-      return false;
-    }
-
-    @Override
     public void endVisit(JsArrayAccess x, JsContext ctx) {
       record(x, ctx);
     }
@@ -646,7 +633,6 @@ public class JsStackEmulator {
       nodesInRefContext.remove(x.getQualifier());
 
       // Record the location as close as possible to calling the function.
-
       List<JsExpression> args = x.getArguments();
       if (!args.isEmpty()) {
         recordAfterLastArg(x);
@@ -702,6 +688,14 @@ public class JsStackEmulator {
       nodesInRefContext.remove(x.getArg());
     }
 
+    @Override
+    public boolean visit(JsExprStmt x, JsContext ctx) {
+      if (isExceptionWrappingCode(x)) {
+        // Don't instrument exception wrapping code.
+        return false;
+      }
+      return true;
+    }
     /**
      * This is essentially a hacked-up version of JsFor.traverse to account for
      * flow control differing from visitation order. It resets lastFile and
@@ -749,6 +743,13 @@ public class JsStackEmulator {
         nodesInRefContext.add(x.getArg());
       }
       return true;
+    }
+
+    @Override
+    public boolean visit(JsPropertyInitializer x, JsContext ctx) {
+      // do not instrument left hand side of initializer.
+      x.setValueExpr(accept(x.getValueExpr()));
+      return false;
     }
 
     /**
@@ -915,9 +916,12 @@ public class JsStackEmulator {
    */
   private class ReplaceUnobfuscatableNames extends JsModVisitor {
     // See JsRootScope for the definition of these names
-    private final JsName rootLineNumbers = JsRootScope.INSTANCE.findExistingUnobfuscatableName("$location");
-    private final JsName rootStack = JsRootScope.INSTANCE.findExistingUnobfuscatableName("$stack");
-    private final JsName rootStackDepth = JsRootScope.INSTANCE.findExistingUnobfuscatableName("$stackDepth");
+    private final JsName rootLineNumbers =
+        JsRootScope.INSTANCE.findExistingUnobfuscatableName("$location");
+    private final JsName rootStack =
+        JsRootScope.INSTANCE.findExistingUnobfuscatableName("$stack");
+    private final JsName rootStackDepth =
+        JsRootScope.INSTANCE.findExistingUnobfuscatableName("$stackDepth");
 
     @Override
     public void endVisit(JsNameRef x, JsContext ctx) {
@@ -946,44 +950,19 @@ public class JsStackEmulator {
    * module.
    */
   public enum StackMode {
-    STRIP, NATIVE, EMULATED;
+    STRIP, NATIVE, EMULATED
   }
 
-  public static void exec(JProgram jprogram, JsProgram jsProgram,
-      PropertyOracle[] propertyOracles,
+  public static void exec(JProgram jprogram, JsProgram jsProgram, PermProps props,
       JavaToJavaScriptMap jjsmap) {
-    if (getStackMode(propertyOracles) == StackMode.EMULATED) {
-      (new JsStackEmulator(jprogram, jsProgram, propertyOracles, jjsmap)).execImpl();
+    if (getStackMode(props) == StackMode.EMULATED) {
+      (new JsStackEmulator(jprogram, jsProgram, jjsmap, props.getConfigProps())).execImpl();
     }
   }
 
-  public static StackMode getStackMode(PropertyOracle[] propertyOracles) {
-    SelectionProperty property;
-    try {
-      property = propertyOracles[0].getSelectionProperty(TreeLogger.NULL,
-          PROPERTY_NAME);
-    } catch (BadPropertyValueException e) {
-      // Should be inherited via Core.gwt.xml
-      throw new InternalCompilerException("Expected property " + PROPERTY_NAME
-          + " not defined", e);
-    }
-
-    String value = property.getCurrentValue();
-    assert value != null : property.getName() + " did not have a value";
-    StackMode stackMode = StackMode.valueOf(value.toUpperCase(Locale.ENGLISH));
-    // Check for multiply defined properties
-    if (propertyOracles.length > 1) {
-      for (int i = 1; i < propertyOracles.length; ++i) {
-        try {
-          property = propertyOracles[i].getSelectionProperty(TreeLogger.NULL,
-              PROPERTY_NAME);
-        } catch (BadPropertyValueException e) {
-          // OK!
-        }
-        assert value.equals(property.getCurrentValue()) : "compiler.stackMode property has multiple values.";
-      }
-    }
-    return stackMode;
+  public static StackMode getStackMode(PermProps props) {
+    String value = props.mustGetString("compiler.stackMode");
+    return StackMode.valueOf(value.toUpperCase(Locale.ROOT));
   }
 
   private JsFunction wrapFunction;
@@ -991,33 +970,37 @@ public class JsStackEmulator {
   private JProgram jprogram;
   private final JsProgram jsProgram;
   private JavaToJavaScriptMap jjsmap;
-  private boolean recordFileNames;
-  private boolean recordLineNumbers;
+  private final boolean recordFileNames;
+  private final boolean recordLineNumbers;
   private JsName stack;
   private JsName stackDepth;
   private JsName tmp;
+  private JDeclaredType exceptionsClass;
 
   private JsStackEmulator(JProgram jprogram, JsProgram jsProgram,
-      PropertyOracle[] propertyOracles,
-      JavaToJavaScriptMap jjsmap) {
+      JavaToJavaScriptMap jjsmap, ConfigProps config) {
     this.jprogram = jprogram;
     this.jsProgram = jsProgram;
     this.jjsmap = jjsmap;
+    this.exceptionsClass = jprogram.getFromTypeMap("com.google.gwt.lang.Exceptions");
 
-    assert propertyOracles.length > 0;
-    PropertyOracle oracle = propertyOracles[0];
-    try {
-      List<String> values = oracle.getConfigurationProperty(
-          "compiler.emulatedStack.recordFileNames").getValues();
-      recordFileNames = Boolean.valueOf(values.get(0));
+    recordFileNames = config.getBoolean("compiler.emulatedStack.recordFileNames", false);
+    recordLineNumbers = recordFileNames ||
+        config.getBoolean("compiler.emulatedStack.recordLineNumbers", false);
+  }
 
-      values = oracle.getConfigurationProperty(
-          "compiler.emulatedStack.recordLineNumbers").getValues();
-      recordLineNumbers = recordFileNames || Boolean.valueOf(values.get(0));
-    } catch (BadPropertyValueException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+  private boolean shouldInstrumentFunction(JsExpression functionExpression) {
+    if (!(functionExpression instanceof HasName)) {
+      return true;
     }
+    /**
+     * Do not instrument function in the Exceptions class (those are in involved in the
+     * exception handling machinery) nor immortal codegen types as their code is executed
+     * for setup and the stack emulation variables may have not been defined yet.
+     */
+    JMethod method = jjsmap.nameToMethod(((HasName) functionExpression).getName());
+    return method == null || method.getEnclosingType() != exceptionsClass
+        || jprogram.immortalCodeGenTypes.contains(method.getEnclosingType());
   }
 
   private void execImpl() {

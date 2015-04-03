@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,9 +15,7 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
-import com.google.gwt.core.ext.BadPropertyValueException;
-import com.google.gwt.core.ext.PropertyOracle;
-import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.dev.cfg.PermProps;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBinaryOperator;
@@ -47,6 +45,7 @@ import java.util.Set;
  * initial download to hold its definition.
  */
 public class HandleCrossFragmentReferences {
+
   /**
    * Find out which islands define and use each named function or variable. This
    * visitor is not smart about which definitions and uses matter. It blindly
@@ -153,7 +152,7 @@ public class HandleCrossFragmentReferences {
        * statement to initialize it. If there is no initializer, then don't add
        * anything back; the var will still have undefined as its initial value,
        * just like before.
-       * 
+       *
        * A complication is that the variables that are predefined might be
        * interspersed with variables that are not. That means the general result
        * of this transformation has alternating var lists and assignment
@@ -195,10 +194,8 @@ public class HandleCrossFragmentReferences {
     }
   }
 
-  public static String PROP_PREDECLARE_VARS = "compiler.predeclare.cross.fragment.references";
-
-  public static void exec(TreeLogger logger, JsProgram jsProgram, PropertyOracle[] propertyOracles) {
-    new HandleCrossFragmentReferences(logger, jsProgram, propertyOracles).execImpl();
+  public static void exec(JsProgram jsProgram, PermProps props) {
+    new HandleCrossFragmentReferences(jsProgram, props).execImpl();
   }
 
   private static boolean containsOtherThan(Set<Integer> set, int allowed) {
@@ -212,15 +209,14 @@ public class HandleCrossFragmentReferences {
 
   private JsName jslink;
   private final JsProgram jsProgram;
-  private final TreeLogger logger;
   private final Set<JsName> namesToPredefine = new LinkedHashSet<JsName>();
-  private final PropertyOracle[] propertyOracles;
+  private final boolean shouldPredeclareReferences;
 
-  private HandleCrossFragmentReferences(TreeLogger logger, JsProgram jsProgram,
-      PropertyOracle[] propertyOracles) {
-    this.logger = logger;
+  private HandleCrossFragmentReferences(JsProgram jsProgram, PermProps props) {
     this.jsProgram = jsProgram;
-    this.propertyOracles = propertyOracles;
+    // TODO: should it be a compiler error if soft permutations differ?
+    this.shouldPredeclareReferences = props.isTrueInAnyPermutation(
+        "compiler.predeclare.cross.fragment.references");
   }
 
   private void chooseNamesToPredefine(Map<JsName, Set<Integer>> map,
@@ -269,7 +265,7 @@ public class HandleCrossFragmentReferences {
     if (jsProgram.getFragmentCount() == 1) {
       return;
     }
-    if (!shouldPredeclareReferences()) {
+    if (!shouldPredeclareReferences) {
       return;
     }
     defineJsLink();
@@ -277,25 +273,5 @@ public class HandleCrossFragmentReferences {
     findNameReferences.accept(jsProgram);
     chooseNamesToPredefine(findNameReferences.islandsDefining, findNameReferences.islandsUsing);
     new RewriteDeclsAndRefs().accept(jsProgram);
-  }
-
-  /**
-   * Check the property oracles for whether references should be predeclared or
-   * not. If any of them say yes, then do the rewrite.
-   */
-  private boolean shouldPredeclareReferences() {
-    for (PropertyOracle props : propertyOracles) {
-      try {
-        String propValue =
-            props.getSelectionProperty(logger, PROP_PREDECLARE_VARS).getCurrentValue();
-        if (Boolean.parseBoolean(propValue)) {
-          return true;
-        }
-      } catch (BadPropertyValueException e) {
-        // Property not defined; don't rewrite
-      }
-    }
-
-    return false;
   }
 }

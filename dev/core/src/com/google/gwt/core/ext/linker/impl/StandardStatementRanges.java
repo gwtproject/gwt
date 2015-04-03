@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,7 +16,9 @@
 package com.google.gwt.core.ext.linker.impl;
 
 import com.google.gwt.core.ext.linker.StatementRanges;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.primitives.Ints;
 
 import java.io.Serializable;
 import java.util.List;
@@ -52,22 +54,14 @@ public class StandardStatementRanges implements StatementRanges, Serializable {
     return new StandardStatementRanges(combinedStarts, combinedEnds);
   }
 
-  private static int[] toArray(List<Integer> list) {
-    int[] ary = new int[list.size()];
-    for (int i = 0; i < list.size(); i++) {
-      ary[i] = list.get(i);
-    }
-    return ary;
-  }
-
-  // VisibleForTesting
+  @VisibleForTesting
   final int[] ends;
   final int[] starts;
 
   public StandardStatementRanges(List<Integer> starts, List<Integer> ends) {
     assert starts.size() == ends.size();
-    this.starts = toArray(starts);
-    this.ends = toArray(ends);
+    this.starts = Ints.toArray(starts);
+    this.ends = Ints.toArray(ends);
   }
 
   @Override

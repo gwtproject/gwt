@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5798 $
-//  date=$Date: 2011-05-02 02:05:34 -0400 (Mon, 02 May 2011) $
-//  type=KE
 
 /**
  * Implementation of DateTimeFormatInfo for the "teo_KE" locale.

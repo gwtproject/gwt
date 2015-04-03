@@ -16,9 +16,9 @@
 
 package com.google.gwt.dev;
 
+import com.google.gwt.dev.util.arg.ArgHandlerClosureFormattedOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerCompileReport;
 import com.google.gwt.dev.util.arg.ArgHandlerCompilerMetrics;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableAggressiveOptimization;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableCastChecking;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClassMetadata;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClusterSimilarFunctions;
@@ -37,10 +37,14 @@ import com.google.gwt.dev.util.arg.ArgHandlerEnableClosureCompiler;
 import com.google.gwt.dev.util.arg.ArgHandlerFragmentCount;
 import com.google.gwt.dev.util.arg.ArgHandlerFragmentMerge;
 import com.google.gwt.dev.util.arg.ArgHandlerGenDir;
+import com.google.gwt.dev.util.arg.ArgHandlerIncrementalCompileWarnings;
+import com.google.gwt.dev.util.arg.ArgHandlerJsInteropMode;
 import com.google.gwt.dev.util.arg.ArgHandlerJsonSoyc;
 import com.google.gwt.dev.util.arg.ArgHandlerMaxPermsPerPrecompile;
+import com.google.gwt.dev.util.arg.ArgHandlerMissingDepsFile;
 import com.google.gwt.dev.util.arg.ArgHandlerNamespace;
 import com.google.gwt.dev.util.arg.ArgHandlerOptimize;
+import com.google.gwt.dev.util.arg.ArgHandlerOverlappingSourceWarnings;
 import com.google.gwt.dev.util.arg.ArgHandlerSaveSource;
 import com.google.gwt.dev.util.arg.ArgHandlerScriptStyle;
 import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
@@ -53,9 +57,9 @@ import com.google.gwt.dev.util.arg.ArgHandlerValidateOnlyFlag;
 class PrecompileTaskArgProcessor extends CompileArgProcessor {
   public PrecompileTaskArgProcessor(PrecompileTaskOptions options) {
     super(options);
+    registerHandler(new ArgHandlerClosureFormattedOutput(options));
     registerHandler(new ArgHandlerCompileReport(options));
     registerHandler(new ArgHandlerCompilerMetrics(options));
-    registerHandler(new ArgHandlerDisableAggressiveOptimization(options));
     registerHandler(new ArgHandlerDisableCastChecking(options));
     registerHandler(new ArgHandlerDisableClassMetadata(options));
     registerHandler(new ArgHandlerDisableClusterSimilarFunctions(options));
@@ -74,9 +78,13 @@ class PrecompileTaskArgProcessor extends CompileArgProcessor {
     registerHandler(new ArgHandlerFragmentCount(options));
     registerHandler(new ArgHandlerFragmentMerge(options));
     registerHandler(new ArgHandlerGenDir(options));
+    registerHandler(new ArgHandlerIncrementalCompileWarnings());
+    registerHandler(new ArgHandlerJsInteropMode(options));
     registerHandler(new ArgHandlerMaxPermsPerPrecompile(options));
+    registerHandler(new ArgHandlerMissingDepsFile());
     registerHandler(new ArgHandlerNamespace(options));
     registerHandler(new ArgHandlerOptimize(options));
+    registerHandler(new ArgHandlerOverlappingSourceWarnings());
     registerHandler(new ArgHandlerSaveSource(options));
     registerHandler(new ArgHandlerScriptStyle(options));
     registerHandler(new ArgHandlerSoyc(options));

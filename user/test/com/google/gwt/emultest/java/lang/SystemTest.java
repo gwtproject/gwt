@@ -79,7 +79,7 @@ public class SystemTest extends GWTTestCase {
   public void testArraycopyEnumToInterface() {
     EnumImpl[] src = new EnumImpl[]{ EnumImpl.FOO, null, EnumImpl.BAZ };
     Interfaz[] dest = new Interfaz[5];
-    Arrays.fill(dest, null);  // undefined != null, wierd.
+    Arrays.fill(dest, null);  // undefined != null, weird.
 
     System.arraycopy(src, 0, dest, 1, 3);
     assertEquals(
@@ -90,7 +90,7 @@ public class SystemTest extends GWTTestCase {
   public void testArraycopyEnumToObject() {
     EnumImpl[] src = new EnumImpl[]{ EnumImpl.FOO, null, EnumImpl.BAZ };
     Object[] dest = new Object[5];
-    Arrays.fill(dest, null);  // undefined != null, wierd.
+    Arrays.fill(dest, null);  // undefined != null, weird.
 
     System.arraycopy(src, 0, dest, 1, 3);
     assertEquals(
@@ -159,7 +159,7 @@ public class SystemTest extends GWTTestCase {
     Interfaz[] src = new Interfaz[]{
         new InterfazImpl("foo"), null, new InterfazImpl("bar") };
     Object[] dest = new Object[5];
-    Arrays.fill(dest, null);  // undefined != null, wierd.
+    Arrays.fill(dest, null);  // undefined != null, weird.
 
     System.arraycopy(src, 0, dest, 1, 3);
     assertEquals(Arrays.asList(null, new InterfazImpl("foo"), null,
@@ -274,16 +274,18 @@ public class SystemTest extends GWTTestCase {
     for (int i = 1; i < 6; ++i) {
       assertEquals(src[i + 1], dest[i]);
     }
+  }
 
-    int inputLength = C.LARGE_CHAR_ARRAY_VALUE.length;
-    char[] charDest = new char[inputLength];
-    System.arraycopy(C.LARGE_CHAR_ARRAY_VALUE, 0, charDest, 0, inputLength);
-    for (int i = 0; i < inputLength; ++i) {
-      assertEquals("index " + i, C.LARGE_CHAR_ARRAY_VALUE[i], charDest[i]);
+  public void testArraycopyLargeArray() {
+    char[] largeCharArrayValue = C.getLargeCharArrayValue();
+    char[] charDest = new char[largeCharArrayValue.length];
+    System.arraycopy(largeCharArrayValue, 0, charDest, 0, largeCharArrayValue.length);
+    for (int i = 0; i < largeCharArrayValue.length; ++i) {
+      assertEquals("index " + i, largeCharArrayValue[i], charDest[i]);
     }
-    int offset = inputLength / 2;
+
+    int offset = largeCharArrayValue.length / 2;
     char[] manyNulls = new char[offset / 2];
-    assertTrue(manyNulls.length > 100000);
     System.arraycopy(manyNulls, 0, charDest, offset, manyNulls.length);
     assertEquals('f', charDest[offset - 1]);
     for (int i = offset; i < offset + manyNulls.length; ++i) {

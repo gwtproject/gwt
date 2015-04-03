@@ -42,7 +42,7 @@ import com.google.gwt.thirdparty.guava.common.base.Preconditions;
  */
 public class DataflowOptimizer {
   public static String NAME = DataflowOptimizer.class.getSimpleName();
-  
+
   public static OptimizerStats exec(JProgram jprogram, JNode node) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
     OptimizerStats stats = new DataflowOptimizer(jprogram).execImpl(node);
@@ -61,7 +61,7 @@ public class DataflowOptimizer {
   }
 
   private class DataflowOptimizerVisitor extends JModVisitor {
-    
+
     @Override
     public boolean visit(JMethodBody methodBody, Context ctx) {
       Cfg cfg = CfgBuilder.build(program, methodBody.getBlock());
@@ -102,7 +102,7 @@ public class DataflowOptimizer {
         if (madeChanges) {
           madeChanges();
 
-          DeadCodeElimination.exec(program, methodBody);
+          DeadCodeElimination.exec(program, methodBody.getMethod());
         }
       } catch (Throwable t) {
         throw new RuntimeException("Error optimizing: " + methodName, t);

@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "vun" locale.
@@ -51,7 +46,7 @@ public class DateTimeFormatInfoImpl_vun extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yyyy";
+    return "dd/MM/y";
   }
 
   @Override
@@ -86,6 +81,11 @@ public class DateTimeFormatInfoImpl_vun extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d MMM y";
+  }
+
+  @Override
   public String formatYearMonthFull() {
     return "MMMM y";
   }
@@ -101,18 +101,23 @@ public class DateTimeFormatInfoImpl_vun extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatYearMonthNumDay() {
+    return "d/M/y";
+  }
+
+  @Override
   public String formatYearMonthWeekdayDay() {
     return "EEE, MMM d, y";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "'R'QQQQ y";
+    return "QQQQ y";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "'R'Q y";
+    return "Q y";
   }
 
   @Override

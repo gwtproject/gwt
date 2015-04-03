@@ -20,23 +20,19 @@ import com.google.gwt.i18n.shared.GwtLocaleFactory;
 
 import com.ibm.icu.dev.tool.UOption;
 
-import org.unicode.cldr.util.CldrUtility;
-import org.unicode.cldr.util.Factory;
+import org.unicode.cldr.util.CLDRPaths;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Generate a country list for each locale, taking into account the literate
  * population of each country speaking the language.
  */
-@SuppressWarnings("unchecked")
 public class GenerateGwtCldrData {
 
   private static final GwtLocaleFactory factory = new GwtLocaleFactoryImpl();
@@ -51,7 +47,7 @@ public class GenerateGwtCldrData {
         + "produced by cldr-tools)");
     UOption[] options = {
         UOption.HELP_H(), UOption.HELP_QUESTION_MARK(),
-        UOption.SOURCEDIR().setDefault(CldrUtility.MAIN_DIRECTORY),
+        UOption.SOURCEDIR().setDefault(CLDRPaths.MAIN_DIRECTORY),
         outputDir().setDefault("./"),
         restrictLocales(),
         processors().setDefault(DEFAULT_PROCESSORS),
@@ -80,26 +76,14 @@ public class GenerateGwtCldrData {
         System.err.println("Ignoring " + procName + " (" + thrown + ")");
       }
     }
-    Factory cldrFactory = Factory.make(sourceDir, ".*");
-    Set<String> locales = cldrFactory.getAvailable();
-    if (restrictLocales != null) {
-      Set<String> newLocales = new HashSet<String>();
-      newLocales.add("root");  // always include root or things break
-      for (String locale : restrictLocales.split(",")) {
-        if (!locales.contains(locale)) {
-          System.err.println("Ignoring non-existent locale " + locale);
-          continue;
-        }
-        newLocales.add(locale);
-      }
-      locales = newLocales;
-    }
+    InputFactory cldrFactory = new InputFactory(sourceDir);
+    List<String> locales = cldrFactory.chooseLocales(restrictLocales);
     System.out.println("Processing " + locales.size() + " locales");
     File outputDir = new File(targetDir);
     LocaleData localeData = new LocaleData(factory, locales);
     for (Class<? extends Processor> processorClass : processorClasses) {
       Constructor<? extends Processor> ctor =
-          processorClass.getConstructor(File.class, Factory.class, LocaleData.class);
+          processorClass.getConstructor(File.class, InputFactory.class, LocaleData.class);
       Processor processor = ctor.newInstance(outputDir, cldrFactory, localeData);
       processor.run();
     }

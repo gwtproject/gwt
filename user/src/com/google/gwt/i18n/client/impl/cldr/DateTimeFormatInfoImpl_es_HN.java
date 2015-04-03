@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5884 $
-//  date=$Date: 2011-05-10 16:58:32 -0400 (Tue, 10 May 2011) $
-//  type=es
 
 /**
  * Implementation of DateTimeFormatInfo for the "es_HN" locale.

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -19,14 +19,13 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JAbstractMethodBody;
-import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethod.Specialization;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -44,10 +43,11 @@ import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.js.ast.JsThisRef;
-import com.google.gwt.dev.util.arg.OptionCheckedMode;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -105,12 +105,14 @@ public class MakeCallsStatic {
      * thisRefs must be replaced with paramRefs to the synthetic this param.
      * ParameterRefs also need to be targeted to the params in the new method.
      */
-    private class RewriteMethodBody extends JModVisitor {
+    private class RewriteMethodBody extends JChangeTrackingVisitor {
 
       private final JParameter thisParam;
       private final Map<JParameter, JParameter> varMap;
 
-      public RewriteMethodBody(JParameter thisParam, Map<JParameter, JParameter> varMap) {
+      public RewriteMethodBody(JParameter thisParam, Map<JParameter, JParameter> varMap,
+          OptimizerContext optimizerCtx) {
+        super(optimizerCtx);
         this.thisParam = thisParam;
         this.varMap = varMap;
       }
@@ -130,9 +132,16 @@ public class MakeCallsStatic {
     }
 
     private final JProgram program;
+    private final OptimizerContext optimizerCtx;
+
+    private CreateStaticImplsVisitor(JProgram program, OptimizerContext optimizerCtx) {
+      this.program = program;
+      this.optimizerCtx = optimizerCtx;
+    }
 
     CreateStaticImplsVisitor(JProgram program) {
       this.program = program;
+      this.optimizerCtx = null;
     }
 
     @Override
@@ -143,14 +152,14 @@ public class MakeCallsStatic {
     @Override
     public boolean visit(JMethod x, Context ctx) {
       // Let's do it!
-      JClassType enclosingType = (JClassType) x.getEnclosingType();
+      JDeclaredType enclosingType = (JDeclaredType) x.getEnclosingType();
       JType returnType = x.getType();
       SourceInfo sourceInfo = x.getSourceInfo().makeChild();
       int myIndexInClass = enclosingType.getMethods().indexOf(x);
       assert (myIndexInClass > 0);
 
       // Create the new static method
-      String newName = "$" + x.getName();
+      String newName = getStaticMethodName(x);
 
       /*
        * Don't use the JProgram helper because it auto-adds the new method to
@@ -159,6 +168,8 @@ public class MakeCallsStatic {
       JMethod newMethod =
           new JMethod(sourceInfo, newName, enclosingType, returnType, false, true, true, x
               .getAccess());
+      newMethod.setInliningAllowed(x.isInliningAllowed());
+      newMethod.setHasSideEffects(x.hasSideEffects());
       newMethod.setSynthetic();
       newMethod.addThrownExceptions(x.getThrownExceptions());
 
@@ -216,15 +227,34 @@ public class MakeCallsStatic {
         // Accept the body to avoid the recursion blocker.
         rewriter.accept(jsFunc.getBody());
       } else {
-        RewriteMethodBody rewriter = new RewriteMethodBody(thisParam, varMap);
+        RewriteMethodBody rewriter = new RewriteMethodBody(thisParam, varMap, optimizerCtx);
         rewriter.accept(movedBody);
       }
 
       // Add the new method as a static impl of the old method
       program.putStaticImpl(x, newMethod);
       enclosingType.getMethods().add(myIndexInClass + 1, newMethod);
+
+      if (optimizerCtx != null) {
+        optimizerCtx.markModified(x);
+        optimizerCtx.markModified(newMethod);
+      }
       return false;
     }
+
+    public JMethod getOrCreateStaticImpl(JProgram program, JMethod method) {
+      assert !method.isStatic();
+      JMethod staticImpl = program.getStaticImpl(method);
+      if (staticImpl == null) {
+        accept(method);
+        staticImpl = program.getStaticImpl(method);
+      }
+      return staticImpl;
+    }
+  }
+
+  private static String getStaticMethodName(JMethod x) {
+    return "$" + x.getName();
   }
 
   /**
@@ -236,40 +266,60 @@ public class MakeCallsStatic {
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
 
+      if (shouldBeMadeStatic(x, method)) {
+        // Let's do it!
+        toBeMadeStatic.add(method);
+        if (method.getSpecialization() != null &&
+            shouldBeMadeStatic(x,
+                method.getSpecialization().getTargetMethod())) {
+          toBeMadeStatic.add(method.getSpecialization().getTargetMethod());
+        }
+      }
+    }
+
+    private boolean shouldBeMadeStatic(JMethodCall x, JMethod method) {
       if (method.isExternal()) {
         // Staticifying a method requires modifying the type, which we can't
         // do for external types. Theoretically we could put the static method
         // in some generated code, but what does that really buy us?
-        return;
+        return false;
+      }
+
+      if (!program.isDevitualizationAllowed(method)) {
+        // Method has been specifically excluded from statification.
+        return false;
       }
 
       // Did we already do this one?
       if (program.getStaticImpl(method) != null || toBeMadeStatic.contains(method)) {
-        return;
+        return false;
       }
 
       // Must be instance and final
       if (x.canBePolymorphic()) {
-        return;
+        return false;
       }
       if (!method.needsVtable()) {
-        return;
+        return false;
       }
       if (method.isAbstract()) {
-        return;
+        return false;
       }
       if (method == program.getNullMethod()) {
         // Special case: we don't make calls to this method static.
-        return;
+        return false;
       }
 
       if (!method.getEnclosingType().getMethods().contains(method)) {
         // The target method was already pruned (TypeTightener will fix this).
-        return;
+        return false;
       }
-  
-      // Let's do it!
-      toBeMadeStatic.add(method);
+
+      if (program.typeOracle.isJsTypeMethod(method)) {
+        return false;
+      }
+
+      return true;
     }
   }
 
@@ -278,9 +328,14 @@ public class MakeCallsStatic {
    * CreateStaticMethodVisitor, go and rewrite the call sites to call the static
    * method instead.
    */
-  private class RewriteCallSites extends JModVisitor {
+  private class RewriteCallSites extends JChangeTrackingVisitor {
+
     private boolean currentMethodIsInitiallyLive;
     private ControlFlowAnalyzer initiallyLive;
+
+    public RewriteCallSites(OptimizerContext optimizerCtx) {
+      super(optimizerCtx);
+    }
 
     /**
      * In cases where callers are directly referencing (effectively) final
@@ -291,8 +346,8 @@ public class MakeCallsStatic {
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod oldMethod = x.getTarget();
       JMethod newMethod = program.getStaticImpl(oldMethod);
-      
-      if (newMethod == null || x.canBePolymorphic()) {        
+
+      if (newMethod == null || x.canBePolymorphic()) {
         return;
       }
 
@@ -300,7 +355,7 @@ public class MakeCallsStatic {
           && !initiallyLive.getLiveFieldsAndMethods().contains(x.getTarget())) {
         /*
          * Don't devirtualize calls from initial code to non-initial code.
-         * 
+         *
          * TODO(spoon): similar prevention when the callee is exclusive to some
          * split point and the caller is not.
          */
@@ -311,7 +366,7 @@ public class MakeCallsStatic {
     }
 
     @Override
-    public boolean visit(JMethod x, Context ctx) {
+    public boolean enter(JMethod x, Context ctx) {
       currentMethodIsInitiallyLive = initiallyLive.getLiveFieldsAndMethods().contains(x);
       return true;
     }
@@ -393,39 +448,62 @@ public class MakeCallsStatic {
 
     private boolean isJso(JMethodCall call) {
       JDeclaredType type = call.getTarget().getEnclosingType();
-      return type != null && program.isJavaScriptObject(type);
+      return type != null && program.typeOracle.isJavaScriptObject(type);
     }
   }
 
   private static final String NAME = MakeCallsStatic.class.getSimpleName();
 
-  public static OptimizerStats exec(OptionCheckedMode option, JProgram program) {
+  public static OptimizerStats exec(JProgram program, boolean addRuntimeChecks,
+      OptimizerContext optimizerCtx) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MakeCallsStatic(option, program).execImpl();
+    OptimizerStats stats = new MakeCallsStatic(program, addRuntimeChecks).execImpl(optimizerCtx);
+    optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
+    optimizerCtx.incOptimizationStep();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
 
-
+  @VisibleForTesting
+  static OptimizerStats exec(JProgram program,  boolean addRuntimeChecks) {
+    return exec(program, addRuntimeChecks, new FullOptimizerContext(program));
+  }
 
   protected Set<JMethod> toBeMadeStatic = new HashSet<JMethod>();
 
   private final JProgram program;
   private final StaticCallConverter converter;
 
-  private MakeCallsStatic(OptionCheckedMode option, JProgram program) {
+  private MakeCallsStatic(JProgram program, boolean addRuntimeChecks) {
     this.program = program;
-    this.converter = new StaticCallConverter(program, option.shouldAddRuntimeChecks());
+    this.converter = new StaticCallConverter(program, addRuntimeChecks);
   }
 
-  private OptimizerStats execImpl() {
+  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
     OptimizerStats stats = new OptimizerStats(NAME);
     FindStaticDispatchSitesVisitor finder = new FindStaticDispatchSitesVisitor();
-    finder.accept(program);
+    Set<JMethod> modifiedMethods =
+        optimizerCtx.getModifiedMethodsSince(optimizerCtx.getLastStepFor(NAME));
+    Set<JMethod> affectedMethods = affectedMethods(modifiedMethods, optimizerCtx);
+    optimizerCtx.traverse(finder, affectedMethods);
 
-    CreateStaticImplsVisitor creator = new CreateStaticImplsVisitor(program);
+    CreateStaticImplsVisitor creator = new CreateStaticImplsVisitor(program, optimizerCtx);
     for (JMethod method : toBeMadeStatic) {
       creator.accept(method);
+    }
+    for (JMethod method : toBeMadeStatic) {
+      // if method has specialization, add it to the static method
+      Specialization specialization = method.getSpecialization();
+      if (specialization != null) {
+        JMethod staticMethod = program.getStaticImpl(method);
+        List<JType> params = new ArrayList<JType>(specialization.getParams());
+        params.add(0, staticMethod.getParams().get(0).getType());
+        staticMethod.setSpecialization(params, specialization.getReturns(),
+            staticMethod.getName());
+        staticMethod.getSpecialization().resolve(params,
+            specialization.getReturns(), program.getStaticImpl(specialization
+                .getTargetMethod()));
+      }
     }
 
     /*
@@ -433,10 +511,24 @@ public class MakeCallsStatic {
      * optimizations can unlock devirtualizations even if no more static impls
      * are created.
      */
-    RewriteCallSites rewriter = new RewriteCallSites();
+    RewriteCallSites rewriter = new RewriteCallSites(optimizerCtx);
     rewriter.accept(program);
     stats.recordModified(rewriter.getNumMods());
     assert (rewriter.didChange() || toBeMadeStatic.isEmpty());
+    JavaAstVerifier.assertProgramIsConsistent(program);
     return stats;
+  }
+
+  /**
+   * Return the set of methods affected (because they are or callers of) by the modifications to the
+   * given set functions.
+   */
+  private Set<JMethod> affectedMethods(Set<JMethod> modifiedMethods,
+      OptimizerContext optimizerCtx) {
+    assert (modifiedMethods != null);
+    Set<JMethod> affectedMethods = Sets.newLinkedHashSet();
+    affectedMethods.addAll(modifiedMethods);
+    affectedMethods.addAll(optimizerCtx.getCallers(modifiedMethods));
+    return affectedMethods;
   }
 }

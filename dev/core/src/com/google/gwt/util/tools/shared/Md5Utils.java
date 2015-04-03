@@ -36,8 +36,8 @@ public class Md5Utils {
         } catch (NoSuchAlgorithmException e) {
           throw new RuntimeException("MD5 implementation not found", e);
         }
-      };
-  };
+      }
+    };
 
   /**
    * Generate MD5 digest.
@@ -50,5 +50,12 @@ public class Md5Utils {
     md5.reset();
     md5.update(input);
     return md5.digest();
+  }
+
+  /**
+   * Generate MD5 digest.
+   */
+  public static byte[] getMd5Digest(String string) {
+    return getMd5Digest(string.getBytes());
   }
 }

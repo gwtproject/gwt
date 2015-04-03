@@ -17,19 +17,22 @@ package com.google.gwt.core;
 
 import com.google.gwt.core.client.GWTTest;
 import com.google.gwt.core.client.GwtServletBaseTest;
-import com.google.gwt.core.client.HttpThrowableReporterTest;
 import com.google.gwt.core.client.JavaScriptExceptionTest;
 import com.google.gwt.core.client.JavaScriptObjectTest;
 import com.google.gwt.core.client.JsArrayMixedTest;
 import com.google.gwt.core.client.JsArrayTest;
 import com.google.gwt.core.client.JsIdentityTest;
+import com.google.gwt.core.client.JsonUtilsTest;
 import com.google.gwt.core.client.SchedulerTest;
 import com.google.gwt.core.client.ScriptInjectorTest;
+import com.google.gwt.core.client.impl.CoercionsTest;
+import com.google.gwt.core.client.impl.ImplTest;
 import com.google.gwt.core.client.impl.SchedulerImplTest;
 import com.google.gwt.core.client.impl.StackTraceCreatorCollectorTest;
-import com.google.gwt.core.client.impl.StackTraceCreatorEmulTest;
-import com.google.gwt.core.client.impl.StackTraceCreatorTest;
-import com.google.gwt.core.client.prefetch.RunAsyncCodeTest;
+import com.google.gwt.core.client.impl.StackTraceDevTest;
+import com.google.gwt.core.client.impl.StackTraceEmulTest;
+import com.google.gwt.core.client.impl.StackTraceNativeTest;
+import com.google.gwt.core.client.impl.StackTraceStripTest;
 import com.google.gwt.core.shared.SerializableThrowableTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
 
@@ -42,22 +45,28 @@ public class CoreSuite {
   public static Test suite() {
     GWTTestSuite suite = new GWTTestSuite("All core tests");
 
+    suite.addTestSuite(CoercionsTest.class);
     suite.addTestSuite(GwtServletBaseTest.class);
     suite.addTestSuite(GWTTest.class);
-    suite.addTestSuite(HttpThrowableReporterTest.class);
+    suite.addTestSuite(ImplTest.class);
     suite.addTestSuite(JavaScriptExceptionTest.class);
     suite.addTestSuite(JavaScriptObjectTest.class);
     suite.addTestSuite(JsIdentityTest.class);
     suite.addTestSuite(JsArrayTest.class);
     suite.addTestSuite(JsArrayMixedTest.class);
-    suite.addTestSuite(RunAsyncCodeTest.class);
+    suite.addTestSuite(JsonUtilsTest.class);
     suite.addTestSuite(SchedulerImplTest.class);
     suite.addTestSuite(SchedulerTest.class);
     suite.addTestSuite(ScriptInjectorTest.class);
     suite.addTestSuite(SerializableThrowableTest.class);
     suite.addTestSuite(StackTraceCreatorCollectorTest.class);
-    suite.addTestSuite(StackTraceCreatorEmulTest.class);
-    suite.addTestSuite(StackTraceCreatorTest.class);
+    suite.addTestSuite(StackTraceDevTest.class);
+    suite.addTestSuite(StackTraceEmulTest.class);
+    suite.addTestSuite(StackTraceNativeTest.class);
+    suite.addTestSuite(StackTraceStripTest.class);
+
+    // Uncomment to print native stack traces for different platforms
+    // suite.addTestSuite(com.google.gwt.core.client.impl.StackTraceGenerator.class);
 
     return suite;
   }

@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
+import com.google.gwt.thirdparty.guava.common.base.Objects;
 
 /**
  * A deferred binding condition to determine whether the type being rebound is
@@ -37,16 +38,22 @@ public class ConditionWhenTypeAssignableTo extends Condition {
     this.assignableToTypeName = assignableToTypeName;
   }
 
+  @Override
+  public boolean equals(Object object) {
+    if (object instanceof ConditionWhenTypeAssignableTo) {
+      ConditionWhenTypeAssignableTo that = (ConditionWhenTypeAssignableTo) object;
+      return Objects.equal(this.assignableToTypeName, that.assignableToTypeName);
+    }
+    return false;
+  }
+
   public String getAssignableToTypeName() {
     return assignableToTypeName;
   }
 
   @Override
-  public String toSource() {
-    // Should only be used in non-monolithic (library) compiles. Dynamic cast checks are only safe
-    // when exhaustive cast maps are available as is the case with library compiles.
-    return String.format("@com.google.gwt.lang.Cast::canCastClass(*)(requestTypeClass, @%s::class)",
-        assignableToTypeName);
+  public int hashCode() {
+    return Objects.hashCode(assignableToTypeName);
   }
 
   @Override
@@ -61,8 +68,8 @@ public class ConditionWhenTypeAssignableTo extends Condition {
     String testType = query.getTestType();
     JClassType fromType = typeOracle.findType(testType);
     if (fromType == null) {
-      CompilationProblemReporter.logMissingTypeErrorWithHints(logger, testType,
-          query.getCompilationState());
+      CompilationProblemReporter.logErrorTrace(logger, TreeLogger.ERROR,
+          query.getCompilationState().getCompilerContext(), testType, true);
       throw new UnableToCompleteException();
     }
 

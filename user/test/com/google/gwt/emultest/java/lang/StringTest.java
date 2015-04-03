@@ -17,10 +17,11 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.testing.TestUtils;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 
 /**
  * TODO: COMPILER OPTIMIZATIONS HAVE MADE THIS TEST NOT ACTUALLY TEST ANYTHING!
@@ -264,9 +265,6 @@ public class StringTest extends GWTTestCase {
     assertFalse("c", haystack.endsWith(haystack + "j"));
   }
 
-  /*
-   * TODO: needs rewriting to avoid compiler optimizations.
-   */
   public void testEquals() {
     assertFalse("ABC".equals("abc"));
     assertFalse("abc".equals("ABC"));
@@ -276,6 +274,16 @@ public class StringTest extends GWTTestCase {
     assertFalse("AbC".equals("aBC"));
     assertTrue("".equals(""));
     assertFalse("".equals(null));
+
+    // Randomize the string to avoid static eval.
+    double r = Math.random();
+    assertTrue((r + "").equals(r + ""));
+    assertFalse((r + "ABC").equals(r + "abc"));
+    assertFalse((r + "abc").equals(r + "ABC"));
+    assertTrue((r + "abc").equals(r + "abc"));
+    assertTrue((r + "ABC").equals(r + "ABC"));
+    assertFalse((r + "AbC").equals(r + "aBC"));
+    assertFalse((r + "AbC").equals(r + "aBC"));
   }
 
   /*
@@ -446,9 +454,17 @@ public class StringTest extends GWTTestCase {
    * TODO: needs rewriting to avoid compiler optimizations.
    */
   public void testLowerCase() {
-    assertEquals("abc", StringCase.toLower("AbC"));
-    assertEquals("abc", StringCase.toLower("abc"));
-    assertEquals("", StringCase.toLower(""));
+    assertEquals("abc", "AbC".toLowerCase());
+    assertEquals("abc", "abc".toLowerCase());
+    assertEquals("", "".toLowerCase());
+
+    assertEquals("abc", "AbC".toLowerCase(Locale.US));
+    assertEquals("abc", "abc".toLowerCase(Locale.US));
+    assertEquals("", "".toLowerCase(Locale.US));
+
+    assertEquals("abc", "AbC".toLowerCase(Locale.getDefault()));
+    assertEquals("abc", "abc".toLowerCase(Locale.getDefault()));
+    assertEquals("", "".toLowerCase(Locale.getDefault()));
   }
 
   public void testMatch() {
@@ -500,13 +516,27 @@ public class StringTest extends GWTTestCase {
     assertFalse(test.regionMatches(true, 1, "bCdx", 0, 4));
     assertFalse(test.regionMatches(true, 1, "bCdx", 1, 3));
     assertTrue(test.regionMatches(true, 0, "xaBcd", 1, 4));
-    test = StringCase.toUpper(test);
+    test = test.toUpperCase(Locale.ROOT);
     assertTrue(test.regionMatches(true, 0, "XAbCd", 1, 4));
     assertTrue(test.regionMatches(true, 1, "BcD", 0, 3));
     assertTrue(test.regionMatches(true, 1, "bCdx", 0, 3));
     assertFalse(test.regionMatches(true, 1, "bCdx", 0, 4));
     assertFalse(test.regionMatches(true, 1, "bCdx", 1, 3));
     assertTrue(test.regionMatches(true, 0, "xaBcd", 1, 4));
+
+    try {
+      test.regionMatches(-1, null, -1, -1);
+      fail();
+    } catch (NullPointerException expected) {
+      // NPE must be thrown before any range checks
+    }
+
+    try {
+      test.regionMatches(true, -1, null, -1, -1);
+      fail();
+    } catch (NullPointerException expected) {
+      // NPE must be thrown before any range checks
+    }
   }
 
   public void testReplace() {
@@ -579,9 +609,6 @@ public class StringTest extends GWTTestCase {
   public void testSplit() {
     compareList("fullSplit", new String[] {"abc", "", "", "de", "f"},
         hideFromCompiler("abcxxxdexfxx").split("x"));
-    compareList("emptyRegexSplit", new String[] {
-        "", "a", "b", "c", "x", "x", "d", "e", "x", "f", "x"},
-        hideFromCompiler("abcxxdexfx").split(""));
     String booAndFoo = hideFromCompiler("boo:and:foo");
     compareList("2:", new String[] {"boo", "and:foo"}, booAndFoo.split(":", 2));
     compareList("5:", new String[] {"boo", "and", "foo"}, booAndFoo.split(":",
@@ -605,6 +632,14 @@ public class StringTest extends GWTTestCase {
     assertTrue(s.length == 1);
     assertTrue(s[0] != null);
     assertTrue(s[0].length() == 0);
+  }
+
+  public void testSplit_emptyExpr() {
+    // TODO(rluble):  implement JDK8 string.split semantics and fix test.
+    String[] expected = (!GWT.isScript() && TestUtils.getJdkVersion() > 7) ?
+        new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"} :
+        new String[] {"", "a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
+    compareList("emptyRegexSplit", expected, "abcxxdexfx".split(""));
   }
 
   public void testStartsWith() {
@@ -684,9 +719,17 @@ public class StringTest extends GWTTestCase {
    * TODO: needs rewriting to avoid compiler optimizations.
    */
   public void testUpperCase() {
-    assertEquals("abc", StringCase.toLower("AbC"));
-    assertEquals("abc", StringCase.toLower("abc"));
-    assertEquals("", StringCase.toLower(""));
+    assertEquals("ABC", "AbC".toUpperCase());
+    assertEquals("ABC", "abc".toUpperCase());
+    assertEquals("", "".toUpperCase());
+
+    assertEquals("ABC", "AbC".toUpperCase(Locale.US));
+    assertEquals("ABC", "abc".toUpperCase(Locale.US));
+    assertEquals("", "".toUpperCase(Locale.US));
+
+    assertEquals("ABC", "AbC".toUpperCase(Locale.getDefault()));
+    assertEquals("ABC", "abc".toUpperCase(Locale.getDefault()));
+    assertEquals("", "".toUpperCase(Locale.getDefault()));
   }
 
   /*
@@ -699,11 +742,12 @@ public class StringTest extends GWTTestCase {
     assertTrue(String.valueOf(C.DOUBLE_VALUE).startsWith(C.DOUBLE_STRING));
     assertEquals(C.CHAR_STRING, String.valueOf(C.CHAR_VALUE));
     assertEquals(C.CHAR_ARRAY_STRING, String.valueOf(C.CHAR_ARRAY_VALUE));
-    assertEquals(C.CHAR_ARRAY_STRING_SUB, String.valueOf(C.CHAR_ARRAY_VALUE, 1,
+    assertEquals(
+        C.CHAR_ARRAY_STRING_SUB, String.valueOf(C.CHAR_ARRAY_VALUE, 1,
         4));
     assertEquals(C.FALSE_STRING, String.valueOf(C.FALSE_VALUE));
     assertEquals(C.TRUE_STRING, String.valueOf(C.TRUE_VALUE));
-    assertEquals(C.LARGE_CHAR_ARRAY_STRING, String.valueOf(C.LARGE_CHAR_ARRAY_VALUE));
+    assertEquals(C.getLargeCharArrayString(), String.valueOf(C.getLargeCharArrayValue()));
   }
 
   /**

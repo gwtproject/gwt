@@ -75,10 +75,6 @@ class SourceSaver {
       }
     }
 
-    if (genFiles.isEmpty()) {
-      return; // -saveSource probably wasn't enabled
-    }
-
     if (sourceMaps.isEmpty()) {
       logger.log(Type.WARN, "Not saving source because sourcemaps weren't generated. " +
           "Hint: set compiler.useSourceMaps.");
@@ -214,11 +210,9 @@ class SourceSaver {
       return false;
     }
 
-    OutputStream out = dest.openForWrite(destPrefix + path);
-    try {
-      ByteStreams.copy(Resources.asByteSource(resource), out);
-    } finally {
-      out.close();
+    try (InputStream resourceAsStream = Resources.asByteSource(resource).openStream();
+        OutputStream out = dest.openForWrite(destPrefix + path);) {
+      ByteStreams.copy(resourceAsStream, out);
     }
 
     return true;

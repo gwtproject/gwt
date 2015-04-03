@@ -5,41 +5,35 @@
 
   <property.ensure name="gwt.dev.jar" location="${gwt.build.lib}/gwt-dev.jar" />
 
-  <!-- location of preprocessed source -->
-  <property name="src" value="${project.build}/src" />
-
-  <!--
-    Nasty hack to fix the source code for the open source build.
-    Constraint: the code in the "java/" directory is how we want it inside Google.
-    But outside Google, Jetty is not repackaged, so we need to fix the import statements.
-    (The right way to do this is probably to repackage Jetty.)
-  -->
-  <target name="preprocess">
-    <delete dir="${src}"/>
-    <mkdir dir="${src}"/>
-    <copy todir="${src}">
-      <fileset dir="java">
-        <include name="**/*.java"/>
-      </fileset>
-    </copy>
-    <replace dir="${src}" token="com.google.gwt.thirdparty.org.eclipse.jetty."
-             value="org.eclipse.jetty."/>
-  </target>
-
-  <target name="compile" depends="preprocess">
+  <target name="compile">
     <mkdir dir="${javac.out}" />
-    <gwt.javac srcdir="${src}">
+    <gwt.javac srcdir="java">
       <classpath>
         <pathelement location="${gwt.dev.jar}" />
       </classpath>
     </gwt.javac>
   </target>
 
+  <target name="compile.tests" depends="compile"
+          description="Compile tests java source">
+    <mkdir dir="${javac.junit.out}" />
+    <javac destdir="${javac.junit.out}">
+      <src path="java" />
+      <src path="javatests" />
+      <classpath>
+        <pathelement location="${gwt.root}/build/out/dev/bin-test"/>
+        <pathelement location="${javac.out}"/>
+        <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar" />
+      </classpath>
+    </javac>
+  </target>
+
   <target name="build" depends="compile" description="builds gwt-codeserver.jar">
     <gwt.jar>
-      <fileset dir="${src}" />
       <fileset dir="${javac.out}"/>
       <fileset dir="java">
+        <include name="**/*.java"/>
         <include name="**/*.html"/>
         <include name="**/*.ico"/>
         <include name="**/*.js"/>
@@ -52,6 +46,28 @@
         <attribute name="Main-Class" value="com.google.gwt.dev.codeserver.CodeServer" />
       </manifest>
     </gwt.jar>
+  </target>
+
+  <target name="test" depends="build, compile.tests" description="Run tests">
+    <mkdir dir="${junit.out}/codeserver" />
+    <fileset id="tests" dir="${javac.junit.out}"
+        includes="**/*Test.class" />
+    <gwt.junit test.name="test"
+        test.args=""
+        test.jvmargs="-ea"
+        test.out="${junit.out}/codeserver"
+        test.cases="tests">
+      <extraclasspaths>
+        <pathelement location="${gwt.root}/build/out/dev/bin-test"/>
+        <pathelement location="${project.lib}"/>
+        <pathelement location="${gwt.dev.jar}" />
+        <!-- Pull in gwt-user sources -->
+        <pathelement location="${gwt.root}/user/src/"/>
+        <pathelement location="${gwt.root}/user/super/"/>
+        <pathelement location="java/" />
+        <pathelement location="javatests/" />
+      </extraclasspaths>
+    </gwt.junit>
   </target>
 
   <!-- no-op for now -->

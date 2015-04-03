@@ -217,7 +217,7 @@ public class SpeedTracerLoggerTest extends TestCase {
     JsonObject markTimelineObject = children.get(0).asObject();
     assertEquals(11.0, markTimelineObject.get("type").asNumber().getDecimal(), .001);
     JsonObject dataObject = markTimelineObject.get("data").asObject();
-    assertEquals("json=" + logString, "Test Message", 
+    assertEquals("json=" + logString, "Test Message",
         dataObject.get("message").asString().getString());
   }
 
@@ -248,7 +248,7 @@ public class SpeedTracerLoggerTest extends TestCase {
   private BufferedReader extractJsonFromWriter(Writer writer)
       throws IOException {
     String jsonString = writer.toString();
-    assertTrue(jsonString.substring(0,5).toLowerCase(Locale.ENGLISH).startsWith("<html"));
+    assertTrue(jsonString.substring(0,5).toLowerCase(Locale.ROOT).startsWith("<html"));
     BufferedReader jsonReader = new BufferedReader(new StringReader(jsonString));
     // Skip ahead to start of JSON
     while (true) {

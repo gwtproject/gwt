@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -18,8 +18,11 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
+import com.google.gwt.dev.jjs.impl.JjsUtils;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -27,14 +30,242 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
 /**
  * A Java method implementation.
  */
-public class JMethod extends JNode implements HasEnclosingType, HasName, HasType, CanBeAbstract,
-    CanBeSetFinal, CanBeNative, CanBeStatic {
+public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNative {
+
+  /**
+   * Indicates whether a JsProperty method is a getter or setter. Getters come with names like x(),
+   * isX(), hasX() and getX() while setters have signatures like x(int a) and setX(int a).
+   */
+  public static enum JsPropertyType {
+    HAS, GET, SET
+  }
+
+  public static final Comparator<JMethod> BY_SIGNATURE_COMPARATOR = new Comparator<JMethod>() {
+    @Override
+    public int compare(JMethod m1, JMethod m2) {
+      return m1.getSignature().compareTo(m2.getSignature());
+    }
+  };
+
+  private String jsTypeName;
+  private String exportName;
+  private String exportNamespace;
+  private JsPropertyType jsPropertyType;
+  private Specialization specialization;
+  private boolean inliningAllowed = true;
+  private boolean hasSideEffects = true;
+  private boolean defaultMethod = false;
+
+  @Override
+  public void setExportInfo(String namespace, String name) {
+    this.exportName = name;
+    this.exportNamespace = namespace;
+  }
+
+  @Override
+  public boolean isExported() {
+    return exportName != null;
+  }
+
+  @Override
+  public String getExportName() {
+    assert exportName != null;
+    return exportName;
+  }
+
+  @Override
+  public String getExportNamespace() {
+    if (exportNamespace == null) {
+      exportNamespace = computeExportNamespace();
+    }
+    return exportNamespace;
+  }
+
+  protected String computeExportNamespace() {
+    return enclosingType.getQualifiedExportName();
+  }
+
+  @Override
+  public String getQualifiedExportName() {
+    String namespace = getExportNamespace();
+    return namespace.isEmpty() ? exportName : namespace + "." + exportName;
+  }
+
+  @Override
+  public void setJsMemberName(String jsTypeName) {
+    this.jsTypeName = jsTypeName;
+  }
+
+  @Override
+  public String getJsMemberName() {
+    return jsTypeName;
+  }
+
+  public String getImmediateOrTransitiveJsMemberName() {
+    String jsMemberName = getJsMemberName();
+    for (JMethod override : getOverriddenMethods()) {
+      String jsMemberOverrideName = override.getJsMemberName();
+      if (jsMemberOverrideName == null) {
+        continue;
+      }
+      if (jsMemberName != null && !jsMemberName.equals(jsMemberOverrideName)) {
+        return null;
+      }
+      jsMemberName = jsMemberOverrideName;
+    }
+    return jsMemberName;
+  }
+
+  @Override
+  public boolean isJsTypeMember() {
+    return jsTypeName != null;
+  }
+
+  public boolean isOrOverridesJsTypeMethod() {
+    if (isJsTypeMember()) {
+      return true;
+    }
+    for (JMethod overriddenMethod : getOverriddenMethods()) {
+      if (overriddenMethod.isJsTypeMember()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public void setJsPropertyType(JsPropertyType jsPropertyType) {
+    this.jsPropertyType = jsPropertyType;
+  }
+
+  public JsPropertyType getJsPropertyType() {
+    return jsPropertyType;
+  }
+
+  public JsPropertyType getImmediateOrTransitiveJsPropertyType() {
+    if (isJsProperty()) {
+      return getJsPropertyType();
+    }
+    for (JMethod overriddenMethod : getOverriddenMethods()) {
+      if (overriddenMethod.isJsProperty()) {
+        return overriddenMethod.getJsPropertyType();
+      }
+    }
+    return null;
+  }
+
+  public boolean isJsProperty() {
+    return jsPropertyType != null;
+  }
+
+  public boolean isOrOverridesJsProperty() {
+    if (isJsProperty()) {
+      return true;
+    }
+    for (JMethod overriddenMethod : getOverriddenMethods()) {
+      if (overriddenMethod.isOrOverridesJsProperty()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean isJsFunctionMethod() {
+    return enclosingType != null && enclosingType.isJsFunction();
+  }
+
+  public boolean isOrOverridesJsFunctionMethod() {
+    if (isJsFunctionMethod()) {
+      return true;
+    }
+    for (JMethod overriddenMethod : getOverriddenMethods()) {
+      if (overriddenMethod.isJsFunctionMethod()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public void setSpecialization(List<JType> paramTypes, JType returnsType, String targetMethod) {
+    this.specialization = new Specialization(paramTypes,
+        returnsType == null ? this.getOriginalReturnType() : returnsType, targetMethod);
+  }
+
+  public Specialization getSpecialization() {
+    return specialization;
+  }
+
+  public void removeSpecialization() {
+    specialization = null;
+  }
+
+  public boolean isInliningAllowed() {
+    return inliningAllowed;
+  }
+
+  public void setInliningAllowed(boolean inliningAllowed) {
+    this.inliningAllowed = inliningAllowed;
+  }
+
+  public boolean hasSideEffects() {
+    return hasSideEffects;
+  }
+
+  public void setHasSideEffects(boolean hasSideEffects) {
+    this.hasSideEffects = hasSideEffects;
+  }
+
+  public void setDefaultMethod() {
+    this.defaultMethod = true;
+  }
+
+  public boolean isDefaultMethod() {
+    return defaultMethod;
+  }
+
+  /**
+   * AST representation of @SpecializeMethod.
+   */
+  public static class Specialization implements Serializable {
+    private List<JType> params;
+    private JType returns;
+    private String target;
+    private JMethod targetMethod;
+
+    public Specialization(List<JType> params, JType returns, String target) {
+      this.params = params;
+      this.returns = returns;
+      this.target = target;
+    }
+
+    public List<JType> getParams() {
+      return params;
+    }
+
+    public JType getReturns() {
+      return returns;
+    }
+
+    public String getTarget() {
+      return target;
+    }
+
+    public JMethod getTargetMethod() {
+      return targetMethod;
+    }
+
+    public void resolve(List<JType> resolvedParams, JType resolvedReturn, JMethod targetMethod) {
+      this.params = resolvedParams;
+      this.returns = resolvedReturn;
+      this.targetMethod = targetMethod;
+    }
+  }
 
   private static class ExternalSerializedForm implements Serializable {
 
@@ -62,37 +293,15 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   public static final JMethod NULL_METHOD = new JMethod(SourceOrigin.UNKNOWN, "nullMethod", null,
       JNullType.INSTANCE, false, false, true, AccessModifier.PUBLIC);
 
-  private static final String TRACE_METHOD_WILDCARD = "*";
-
   static {
     NULL_METHOD.setSynthetic();
     NULL_METHOD.freezeParamTypes();
   }
 
-  static boolean replaces(List<? extends JMethod> newMethods, List<? extends JMethod> oldMethods) {
-    if (newMethods.size() != oldMethods.size()) {
-      return false;
-    }
-    for (int i = 0, c = newMethods.size(); i < c; ++i) {
-      if (!newMethods.get(i).replaces(oldMethods.get(i))) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  private static void trace(String title, String code) {
-    System.out.println("---------------------------");
-    System.out.println(title + ":");
-    System.out.println("---------------------------");
-    System.out.println(code);
-  }
-
   protected transient String signature;
 
   /**
-   * The access modifier; stored as an int to reduce memory / serialization
-   * footprint.
+   * The access modifier; stored as an int to reduce memory / serialization footprint.
    */
   private int access;
 
@@ -105,6 +314,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   private boolean isFinal;
   private final boolean isStatic;
   private boolean isSynthetic = false;
+  private boolean isForwarding = false;
   private final String name;
 
   private List<JType> originalParamTypes;
@@ -115,15 +325,12 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    * EXHAUSTIVE list, that is, if C overrides B overrides A, then C's overrides
    * list will contain both A and B.
    */
-  private List<JMethod> overrides = Collections.emptyList();
+  private Set<JMethod> overriddenMethods = Sets.newLinkedHashSet();
+  private Set<JMethod> overridingMethods = Sets.newLinkedHashSet();
 
   private List<JParameter> params = Collections.emptyList();
   private JType returnType;
   private List<JClassType> thrownExceptions = Collections.emptyList();
-
-  private boolean trace = false;
-
-  private boolean traceFirst = true;
 
   /**
    * These are only supposed to be constructed by JProgram.
@@ -159,31 +366,29 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    * Construct a bare-bones deserialized external method.
    */
   private JMethod(String signature, JDeclaredType enclosingType, boolean isStatic) {
-    super(SourceOrigin.UNKNOWN);
-    this.name = signature.substring(0, signature.indexOf('('));
-    this.enclosingType = enclosingType;
+    this(SourceOrigin.UNKNOWN, StringInterner.get().intern(
+        signature.substring(0, signature.indexOf('('))), enclosingType, null, false, isStatic,
+        false, AccessModifier.PUBLIC);
     this.signature = signature;
-    this.isAbstract = false;
-    this.isStatic = isStatic;
-    this.access = AccessModifier.PUBLIC.ordinal();
   }
 
   /**
    * Add a method that this method overrides.
    */
-  public void addOverride(JMethod toAdd) {
-    assert canBePolymorphic();
-    overrides = Lists.add(overrides, toAdd);
+  public void addOverriddenMethod(JMethod overriddenMethod) {
+    assert canBePolymorphic() : this + " is not polymorphic";
+    assert overriddenMethod != this : this + " cannot override itself";
+    overriddenMethods.add(overriddenMethod);
   }
 
   /**
-   * Add methods that this method overrides.
+   * Add a method that overrides this method.
    */
-  public void addOverrides(List<JMethod> toAdd) {
-    assert canBePolymorphic();
-    overrides = Lists.addAll(overrides, toAdd);
+  public void addOverridingMethod(JMethod overridingMethod) {
+    assert canBePolymorphic() : this + " is not polymorphic";
+    assert overridingMethod != this : this + " cannot override itself";
+    overridingMethods.add(overridingMethod);
   }
-
   /**
    * Adds a parameter to this method.
    */
@@ -216,6 +421,27 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     setOriginalTypes(returnType, paramTypes);
   }
 
+  /**
+   * Returns true if this method overrides a package private method and increases its
+   * visibility.
+   */
+  public boolean exposesOverriddenPackagePrivateMethod() {
+    if (isPrivate() || isPackagePrivate()) {
+      return false;
+    }
+
+    for (JMethod overriddenMethod : overriddenMethods) {
+      if (overriddenMethod.getEnclosingType() instanceof JInterfaceType) {
+        continue;
+      }
+      if (overriddenMethod.isPackagePrivate()) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   public AccessModifier getAccess() {
     return AccessModifier.values()[access];
   }
@@ -235,6 +461,10 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     return name;
   }
 
+  public String getQualifiedName() {
+    return enclosingType.getName() + "." + getSignature();
+  }
+
   public List<JType> getOriginalParamTypes() {
     return originalParamTypes;
   }
@@ -246,8 +476,16 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   /**
    * Returns the transitive closure of all the methods this method overrides.
    */
-  public List<JMethod> getOverrides() {
-    return overrides;
+  public Set<JMethod> getOverriddenMethods() {
+    return overriddenMethods;
+  }
+
+  /**
+   * Returns the transitive closure of all the methods that override this method; caveat this
+   * list is only complete in monolithic compiles and should not be used in incremental compiles..
+   */
+  public Set<JMethod> getOverridingMethods() {
+    return overridingMethods;
   }
 
   /**
@@ -259,21 +497,28 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   public String getSignature() {
     if (signature == null) {
-      StringBuilder sb = new StringBuilder();
-      sb.append(getName());
-      sb.append('(');
-      for (JType type : getOriginalParamTypes()) {
-        sb.append(type.getJsniSignatureName());
-      }
-      sb.append(')');
-      if (!isConstructor()) {
-        sb.append(getOriginalReturnType().getJsniSignatureName());
-      } else {
-        sb.append(" <init>");
-      }
-      signature = sb.toString();
+      signature = StringInterner.get().intern(JjsUtils.computeSignature(
+          name, getOriginalParamTypes(), getOriginalReturnType(), isConstructor()));
     }
     return signature;
+  }
+
+  public String getJsniSignature(boolean includeEnclosingClass, boolean includeReturnType) {
+    StringBuilder sb = new StringBuilder();
+    if (includeEnclosingClass) {
+      sb.append(getEnclosingType().getName());
+      sb.append("::");
+    }
+    sb.append(name);
+    sb.append('(');
+    for (JType type : getOriginalParamTypes()) {
+      sb.append(type.getJsniSignatureName());
+    }
+    sb.append(')');
+    if (includeReturnType) {
+      sb.append(originalReturnType.getJsniSignatureName());
+    }
+    return sb.toString();
   }
 
   public List<JClassType> getThrownExceptions() {
@@ -294,7 +539,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     return false;
   }
 
-  public boolean isDefault() {
+  public boolean isPackagePrivate() {
     return access == AccessModifier.DEFAULT.ordinal();
   }
 
@@ -305,6 +550,10 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   @Override
   public boolean isFinal() {
     return isFinal;
+  }
+
+  public boolean isForwarding() {
+    return isForwarding;
   }
 
   @Override
@@ -321,6 +570,11 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   }
 
   @Override
+  public boolean isPublic() {
+    return access == AccessModifier.PUBLIC.ordinal();
+  }
+
+  @Override
   public boolean isStatic() {
     return isStatic;
   }
@@ -329,14 +583,11 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     return isSynthetic;
   }
 
-  public boolean isTrace() {
-    return trace;
-  }
-
   /**
    * Returns <code>true</code> if this method can participate in instance
    * dispatch.
    */
+  @Override
   public boolean needsVtable() {
     return !isStatic();
   }
@@ -346,6 +597,9 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
    */
   public void removeParam(int index) {
     params = Lists.remove(params, index);
+    if (isNative()) {
+      ((JsniMethodBody) getBody()).getFunc().getParameters().remove(index);
+    }
   }
 
   /**
@@ -378,7 +632,15 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   @Override
   public void setFinal() {
-    isFinal = true;
+    setFinal(true);
+  }
+
+  public void setFinal(boolean isFinal) {
+    this.isFinal = isFinal;
+  }
+
+  public void setForwarding() {
+    isForwarding = true;
   }
 
   public void setOriginalTypes(JType returnType, List<JType> paramTypes) {
@@ -387,32 +649,10 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
     }
     originalReturnType = returnType;
     originalParamTypes = Lists.normalize(paramTypes);
-
-    // Determine if we should trace this method.
-    if (enclosingType != null) {
-      String jsniSig = JProgram.getJsniSig(this);
-      Set<String> set = JProgram.traceMethods.get(enclosingType.getName());
-      if (set != null
-          && (set.contains(name) || set.contains(jsniSig) || set.contains(TRACE_METHOD_WILDCARD))) {
-        trace = true;
-      }
-      // Try the short name.
-      if (!trace && enclosingType != null) {
-        set = JProgram.traceMethods.get(enclosingType.getShortName());
-        if (set != null
-            && (set.contains(name) || set.contains(jsniSig) || set.contains(TRACE_METHOD_WILDCARD))) {
-          trace = true;
-        }
-      }
-    }
   }
 
   public void setSynthetic() {
     isSynthetic = true;
-  }
-
-  public void setTrace() {
-    this.trace = true;
   }
 
   public void setType(JType newType) {
@@ -421,35 +661,15 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   @Override
   public void traverse(JVisitor visitor, Context ctx) {
-    String before = null;
-    before = traceBefore(visitor);
     if (visitor.visit(this, ctx)) {
       visitChildren(visitor);
     }
     visitor.endVisit(this, ctx);
-    traceAfter(visitor, before);
   }
 
-  protected void traceAfter(JVisitor visitor, String before) {
-    if (trace && visitor instanceof JModVisitor) {
-      String after = this.toSource();
-      if (!after.equals(before)) {
-        String title = visitor.getClass().getSimpleName();
-        trace(title, after);
-      }
-    }
-  }
-
-  protected String traceBefore(JVisitor visitor) {
-    if (trace && visitor instanceof JModVisitor) {
-      String source = this.toSource();
-      if (traceFirst) {
-        traceFirst = false;
-        trace("JAVA INITIAL", source);
-      }
-      return source;
-    }
-    return null;
+  @Override
+  public String toString() {
+    return getEnclosingType().getName() + "." + getSignature();
   }
 
   protected void visitChildren(JVisitor visitor) {
@@ -471,7 +691,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
 
   /**
    * See {@link #writeBody(ObjectOutputStream)}.
-   * 
+   *
    * @see #writeBody(ObjectOutputStream)
    */
   void readBody(ObjectInputStream stream) throws IOException, ClassNotFoundException {
@@ -489,7 +709,7 @@ public class JMethod extends JNode implements HasEnclosingType, HasName, HasType
   /**
    * After all types, fields, and methods are written to the stream, this method
    * writes method bodies to the stream.
-   * 
+   *
    * @see JProgram#writeObject(ObjectOutputStream)
    */
   void writeBody(ObjectOutputStream stream) throws IOException {

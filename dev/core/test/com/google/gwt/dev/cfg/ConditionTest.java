@@ -48,8 +48,9 @@ public class ConditionTest extends TestCase {
     binding1.addDefinedValue(new ConditionAll(), "true");
     binding1.addDefinedValue(new ConditionAll(), "false");
 
-    propertyOracle = new StaticPropertyOracle(new BindingProperty[] {binding1},
-        new String[] {"true"}, new ConfigurationProperty[] {conf1});
+    ConfigProps config = new ConfigProps(Arrays.asList(conf1));
+    propertyOracle = new BindingProps(new BindingProperty[] {binding1},
+        new String[] {"true"}, config).toPropertyOracle();
 
     compilationState = TypeOracleTestingUtils.buildStandardCompilationStateWith(TreeLogger.NULL);
   }
@@ -102,30 +103,6 @@ public class ConditionTest extends TestCase {
       assertFalse(isTrue(none, "java.lang.Object"));
       assertFalse(isTrue(none, "java.lang.String"));
     }
-  }
-
-  public void testToSource() {
-    // Linker assertions are not supported.
-    try {
-      new ConditionWhenLinkerAdded("com.some.Linker").toSource();
-      fail("expected linker condition source conversion to fail.");
-    } catch (UnsupportedOperationException e) {
-      // Expected behavior.
-    }
-
-    // Compound conditions collapse effectively empty slots.
-    assertEquals("((requestTypeClass == @com.google.gwt.Foo::class))", new ConditionAll(
-        new ConditionAny(), new ConditionWhenTypeIs("com.google.gwt.Foo")).toSource());
-
-    // Exercise it all.
-    String a = new ConditionNone(new ConditionAll(new ConditionWhenTypeIs("com.google.gwt.Foo"),
-        new ConditionWhenPropertyIs("user.agent", "webkit")), new ConditionAll(
-        new ConditionWhenTypeIs("com.google.gwt.HasFocus"),
-        new ConditionWhenPropertyIs("user.agent", "ie9"))).toSource();
-    assertEquals("!(((((requestTypeClass == @com.google.gwt.Foo::class) && (@com.google.gwt.lang."
-        + "RuntimePropertyRegistry::getPropertyValue(*)(\"user.agent\") == \"webkit\"))) || "
-        + "(((requestTypeClass == @com.google.gwt.HasFocus::class) && (@com.google.gwt.lang."
-        + "RuntimePropertyRegistry::getPropertyValue(*)(\"user.agent\") == \"ie9\")))))", a);
   }
 
   private boolean isTrue(Condition cond, String testType)

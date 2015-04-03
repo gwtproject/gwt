@@ -16,12 +16,6 @@ package com.google.gwt.dev.javac;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.JType;
-import com.google.gwt.dev.asm.ClassReader;
-import com.google.gwt.dev.asm.ClassVisitor;
-import com.google.gwt.dev.asm.Opcodes;
-import com.google.gwt.dev.asm.Type;
-import com.google.gwt.dev.asm.signature.SignatureReader;
-import com.google.gwt.dev.asm.util.TraceClassVisitor;
 import com.google.gwt.dev.javac.asm.CollectAnnotationData;
 import com.google.gwt.dev.javac.asm.CollectAnnotationData.AnnotationData;
 import com.google.gwt.dev.javac.asm.CollectClassData;
@@ -50,20 +44,36 @@ import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
+import com.google.gwt.thirdparty.guava.common.base.Function;
+import com.google.gwt.thirdparty.guava.common.collect.Collections2;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Queues;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.util.concurrent.ThreadFactoryBuilder;
+
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.signature.SignatureReader;
+import org.objectweb.asm.util.TraceClassVisitor;
 
 import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Builds or rebuilds a {@link com.google.gwt.core.ext.typeinfo.TypeOracle} from a set of
@@ -166,13 +176,6 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     }
 
     @Override
-    public boolean resolveAnnotation(TreeLogger logger, CollectAnnotationData annotVisitor,
-        Map<Class<? extends Annotation>, Annotation> declaredAnnotations) {
-      return CompilationUnitTypeOracleUpdater.this.resolveAnnotation(
-          logger, annotVisitor, declaredAnnotations);
-    }
-
-    @Override
     public boolean resolveAnnotations(TreeLogger logger, List<CollectAnnotationData> annotations,
         Map<Class<? extends Annotation>, Annotation> declaredAnnotations) {
       return CompilationUnitTypeOracleUpdater.this.resolveAnnotations(
@@ -203,11 +206,9 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
   protected class TypeOracleBuildContext {
     protected final MethodArgNamesLookup allMethodArgs;
 
-    private final Map<String, CollectClassData> classDataByInternalName =
-        new HashMap<String, CollectClassData>();
+    private final Map<String, CollectClassData> classDataByInternalName = Maps.newHashMap();
 
-    private final Map<JRealClassType, CollectClassData> classDataByType =
-        new HashMap<JRealClassType, CollectClassData>();
+    private final Map<JRealClassType, CollectClassData> classDataByType = Maps.newHashMap();
 
     private final Resolver resolver = new CompilationUnitTypeOracleResolver(this);
 
@@ -244,7 +245,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
 
   private static JTypeParameter[] collectTypeParams(String signature) {
     if (signature != null) {
-      List<JTypeParameter> params = new ArrayList<JTypeParameter>();
+      List<JTypeParameter> params = Lists.newArrayList();
       SignatureReader reader = new SignatureReader(signature);
       reader.accept(new CollectTypeParams(params));
       return params.toArray(new JTypeParameter[params.size()]);
@@ -318,8 +319,16 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
   }
 
   private final Set<String> resolvedTypeSourceNames = Sets.newHashSet();
-  private final Map<String, JRealClassType> typesByInternalName =
-      new HashMap<String, JRealClassType>();
+  private final Map<String, JRealClassType> typesByInternalName = Maps.newHashMap();
+  /**
+   * An executor service to parallelize some of the update process.
+   */
+  private static ExecutorService executor =
+      new ThreadPoolExecutor(0, Runtime.getRuntime().availableProcessors(), 60L, TimeUnit.SECONDS,
+          Queues.<Runnable>newLinkedBlockingQueue(),
+          // Make sure this executor lets the whole process terminate correctly even if there
+          // are still live threads.
+          new ThreadFactoryBuilder().setDaemon(true).build());
 
   public CompilationUnitTypeOracleUpdater(TypeOracle typeOracle) {
     super(typeOracle);
@@ -363,7 +372,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     Event identityEvent = SpeedTracerLogger.start(
         CompilerEventType.TYPE_ORACLE_UPDATER, "phase", "Establish Identity");
     // Perform a shallow pass to establish identity for new and old types.
-    Set<JRealClassType> unresolvedTypes = new LinkedHashSet<JRealClassType>();
+    Set<JRealClassType> unresolvedTypes = Sets.newLinkedHashSet();
     for (TypeData typeData : typeDataList) {
       CollectClassData classData = context.classDataByInternalName.get(typeData.internalName);
       if (classData == null) {
@@ -415,6 +424,31 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     typeOracleUpdaterEvent.end();
   }
 
+  private static void prefechTypeData(Collection<TypeData> typeDataList) {
+    // Parse bytecode in parallel by calling {@code TypeData.getCollectClassData()} in parallel.
+    try {
+      executor.<Void>invokeAll(Collections2.transform(typeDataList,
+          new Function<TypeData, Callable<Void>>() {
+            @Override
+            public Callable<Void> apply(final TypeData typeData) {
+              return new Callable<Void>() {
+                @Override
+                public Void call() {
+                  typeData.getCollectClassData();
+                  return null;
+                }
+              };
+            }
+          }));
+    } catch (InterruptedException e) {
+      // InterruptedException can be safely ignored here as the threads interrupted are only
+      // precomputing data in parallel that will otherwise be computed later sequentially if
+      // the threads are aborted.
+      // Anyway restore the thread interrupted state just in case.
+      Thread.currentThread().interrupt();
+    }
+  }
+
   /**
    * Adds new units to an existing TypeOracle and indexes their type hierarchy.
    */
@@ -423,7 +457,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     indexTypes();
   }
 
-  // VisibleForTesting
+  @VisibleForTesting
   void indexTypes() {
     Event finishEvent =
         SpeedTracerLogger.start(CompilerEventType.TYPE_ORACLE_UPDATER, "phase", "Finish");
@@ -433,7 +467,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
 
   protected void addNewTypesDontIndex(TreeLogger logger,
       Collection<CompilationUnit> compilationUnits) {
-    Collection<TypeData> typeDataList = new ArrayList<TypeData>();
+    Collection<TypeData> typeDataList = Lists.newArrayList();
 
     // Create method args data for types to add
     MethodArgNamesLookup argsLookup = new MethodArgNamesLookup();
@@ -442,6 +476,8 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     }
 
     // Create list including byte code for each type to add
+    // TODO(rluble): this process can be done in parallel. Probably best to merge this for
+    // loop with the one in prefetchTypeData.
     for (CompilationUnit compilationUnit : compilationUnits) {
       for (CompiledClass compiledClass : compilationUnit.getCompiledClasses()) {
         TypeData typeData = new TypeData(compiledClass.getPackageName(),
@@ -451,11 +487,13 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
       }
     }
 
+    prefechTypeData(typeDataList);
+
     // Add the new types to the type oracle build in progress.
     addNewTypesDontIndex(logger, typeDataList, argsLookup);
   }
 
-  // VisibleForTesting
+  @VisibleForTesting
   public Resolver getMockResolver() {
     return new CompilationUnitTypeOracleResolver(
         new TypeOracleBuildContext(new MethodArgNamesLookup()));
@@ -465,7 +503,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     return typeOracle;
   }
 
-  // VisibleForTesting
+  @VisibleForTesting
   public Map<String, JRealClassType> getTypesByInternalName() {
     return typesByInternalName;
   }
@@ -483,7 +521,9 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
   private Annotation createAnnotation(TreeLogger logger,
       Class<? extends Annotation> annotationClass, AnnotationData annotationData) {
     // Make a copy before we mutate the collection.
-    Map<String, Object> values = new HashMap<String, Object>(annotationData.getValues());
+    Map<String, Object> values = Maps.newHashMap(annotationData.getValues());
+    logger =
+        logger.branch(TreeLogger.TRACE, "Resolving annotation for " + annotationClass.getName());
     for (Map.Entry<String, Object> entry : values.entrySet()) {
       Method method = null;
       Throwable caught = null;
@@ -497,8 +537,8 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
       }
       if (caught != null) {
         logger.log(TreeLogger.WARN,
-            "Exception resolving " + annotationClass.getCanonicalName() + "." + entry.getKey(),
-            caught);
+            "Exception resolving " + annotationClass.getCanonicalName() + "." + entry.getKey() +
+            " : " + caught.getMessage());
         return null;
       }
     }
@@ -739,17 +779,45 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
         Type valueType = (Type) value;
         // See if we can use a binary only class here
         try {
-          return Class.forName(
-              valueType.getClassName(), false, Thread.currentThread().getContextClassLoader());
+          return forName(valueType.getClassName());
         } catch (ClassNotFoundException e) {
           logger.log(
-              TreeLogger.ERROR, "Annotation error: cannot resolve " + valueType.getClassName(), e);
+              TreeLogger.WARN, "Annotation error: cannot resolve " + valueType.getClassName());
           return null;
         }
       }
       // TODO(jat) asserts about other acceptable types
       return value;
     }
+  }
+
+  private static final Map<String, Class<?>> BUILT_IN_PRIMITIVE_MAP;
+
+  static {
+    ImmutableMap.Builder<String, Class<?>> builder = ImmutableMap.<String, Class<?>>builder()
+        .put("Z",  boolean.class)
+        .put("B", byte.class)
+        .put("C", char.class)
+        .put("S", short.class)
+        .put("I", int.class)
+        .put("F", float.class)
+        .put("D", double.class)
+        .put("J", long.class)
+        .put("V", void.class);
+
+    for (Class c : new Class[] { void.class, boolean.class, byte.class, char.class,
+        short.class, int.class, float.class, double.class, long.class }) {
+      builder.put(c.getName(), c);
+    }
+    BUILT_IN_PRIMITIVE_MAP = builder.build();
+  }
+
+  public static Class forName(String name) throws ClassNotFoundException {
+    Class c = BUILT_IN_PRIMITIVE_MAP.get(name);
+    if (c == null) {
+      c = Class.forName(name, false, Thread.currentThread().getContextClassLoader());
+    }
+    return c;
   }
 
   private JType resolveArray(Type type) {
@@ -762,6 +830,14 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     return resolvedType;
   }
 
+  // TODO(stalcup): refactor this recursive resolveFoo() process. At the moment there is a recursive
+  // tree of resolveFoo() calls. Most of them return a boolean, but some do not. Some of the
+  // booleans are read and acted upon, some are not. Some functions do their own logging and some
+  // return a false to indicate that the caller should log. Sometimes the boolean return value is an
+  // indication of whether logging should occur and other times it's an indication of whether
+  // exploration should continue. It's a mess. Some ideas that would probably make this more sane:
+  // be consistent about SPAM logging throughout and WARN logging only at the tip, and process types
+  // in a queue instead of with recursion.
   private boolean resolveClass(
       TreeLogger logger, JRealClassType unresolvedType, TypeOracleBuildContext context) {
     assert unresolvedType != null;
@@ -797,8 +873,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     }
 
     // Resolve annotations
-    Map<Class<? extends Annotation>, Annotation> declaredAnnotations =
-        new HashMap<Class<? extends Annotation>, Annotation>();
+    Map<Class<? extends Annotation>, Annotation> declaredAnnotations = Maps.newHashMap();
     resolveAnnotations(logger, classData.getAnnotations(), declaredAnnotations);
     addAnnotations(unresolvedType, declaredAnnotations);
 
@@ -859,8 +934,9 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
 
     // Process methods
     for (CollectMethodData method : classData.getMethods()) {
-      if (!resolveMethod(logger, unresolvedType, method, typeParamLookup, context)) {
-        logger.log(TreeLogger.WARN, "Unable to resolve method " + method);
+      TreeLogger branch = logger.branch(TreeLogger.SPAM, "Resolving method " + method.getName());
+      if (!resolveMethod(branch, unresolvedType, method, typeParamLookup, context)) {
+        // Already logged.
         return false;
       }
     }
@@ -869,8 +945,9 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     // Track the next enum ordinal across resolveField calls.
     int[] nextEnumOrdinal = new int[] {0};
     for (CollectFieldData field : classData.getFields()) {
-      if (!resolveField(logger, unresolvedType, field, typeParamLookup, nextEnumOrdinal, context)) {
-        logger.log(TreeLogger.WARN, "Unable to resolve field " + field);
+      TreeLogger branch = logger.branch(TreeLogger.SPAM, "Resolving field " + field.getName());
+      if (!resolveField(branch, unresolvedType, field, typeParamLookup, nextEnumOrdinal, context)) {
+        // Already logged.
         return false;
       }
     }
@@ -962,8 +1039,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
   private boolean resolveField(TreeLogger logger, JRealClassType unresolvedType,
       CollectFieldData field, TypeParameterLookup typeParamLookup, int[] nextEnumOrdinal,
       TypeOracleBuildContext context) {
-    Map<Class<? extends Annotation>, Annotation> declaredAnnotations =
-        new HashMap<Class<? extends Annotation>, Annotation>();
+    Map<Class<? extends Annotation>, Annotation> declaredAnnotations = Maps.newHashMap();
     resolveAnnotations(logger, field.getAnnotations(), declaredAnnotations);
     String name = field.getName();
     JField jfield;
@@ -979,29 +1055,34 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     addModifierBits(jfield, mapBits(ASM_TO_SHARED_MODIFIERS, field.getAccess()));
 
     String signature = field.getSignature();
-    JType fieldType;
+    JType fieldJType;
     if (signature != null) {
       SignatureReader reader = new SignatureReader(signature);
       JType[] fieldTypeRef = new JType[1];
       reader.acceptType(new ResolveTypeSignature(
           context.resolver, logger, fieldTypeRef, typeParamLookup, null));
-      fieldType = fieldTypeRef[0];
-
+      fieldJType = fieldTypeRef[0];
+      if (fieldJType == null) {
+        logger.log(TreeLogger.ERROR, "Unable to resolve type in field signature " + signature);
+        return false;
+      }
     } else {
-      fieldType = resolveType(Type.getType(field.getDesc()));
+      Type fieldType = Type.getType(field.getDesc());
+      fieldJType = resolveType(fieldType);
+      if (fieldJType == null) {
+        logger.log(TreeLogger.ERROR, "Unable to resolve type " + fieldType.getInternalName()
+            + " of field " + field.getName());
+        return false;
+      }
     }
-    if (fieldType == null) {
-      return false;
-    }
-    setFieldType(jfield, fieldType);
+    setFieldType(jfield, fieldJType);
     return true;
   }
 
   private boolean resolveMethod(TreeLogger logger, JRealClassType unresolvedType,
       CollectMethodData methodData, TypeParameterLookup typeParamLookup,
       TypeOracleBuildContext context) {
-    Map<Class<? extends Annotation>, Annotation> declaredAnnotations =
-        new HashMap<Class<? extends Annotation>, Annotation>();
+    Map<Class<? extends Annotation>, Annotation> declaredAnnotations = Maps.newHashMap();
     resolveAnnotations(logger, methodData.getAnnotations(), declaredAnnotations);
     String name = methodData.getName();
 
@@ -1058,6 +1139,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
           methodData.getArgNames(), methodData.hasActualArgNames(), context.allMethodArgs);
       reader.accept(methodResolver);
       if (!methodResolver.finish()) {
+        logger.log(TreeLogger.ERROR, "Failed to resolve.");
         return false;
       }
     } else {
@@ -1065,19 +1147,23 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
         Type returnType = Type.getReturnType(methodData.getDesc());
         JType returnJType = resolveType(returnType);
         if (returnJType == null) {
+          logger.log(TreeLogger.ERROR,
+              "Unable to resolve return type " + returnType.getInternalName());
           return false;
         }
         setReturnType(method, returnJType);
       }
 
       if (!resolveParameters(logger, method, methodData, context)) {
+        // Already logged.
         return false;
       }
     }
     // The signature might not actually include the exceptions if they don't
     // include a type variable, so resolveThrows is always used (it does
     // nothing if there are already exceptions defined)
-    if (!resolveThrows(method, methodData)) {
+    if (!resolveThrows(logger, method, methodData)) {
+      // Already logged.
       return false;
     }
     typeParamLookup.popScope();
@@ -1094,8 +1180,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
 
   private boolean resolvePackage(TreeLogger logger, JRealClassType unresolvedType,
       List<CollectAnnotationData> annotationVisitors) {
-    Map<Class<? extends Annotation>, Annotation> declaredAnnotations =
-        new HashMap<Class<? extends Annotation>, Annotation>();
+    Map<Class<? extends Annotation>, Annotation> declaredAnnotations = Maps.newHashMap();
     resolveAnnotations(logger, annotationVisitors, declaredAnnotations);
     addAnnotations(unresolvedType.getPackage(), declaredAnnotations);
     return true;
@@ -1115,28 +1200,34 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     }
     List<CollectAnnotationData>[] paramAnnot = methodData.getArgAnnotations();
     for (int i = 0; i < argTypes.length; ++i) {
-      JType argType = resolveType(argTypes[i]);
-      if (argType == null) {
+      Type argType = argTypes[i];
+      JType argJType = resolveType(argType);
+      if (argJType == null) {
+        logger.log(TreeLogger.ERROR, "Unable to resolve type " + argType.getInternalName()
+            + " of argument " + methodData.getArgNames()[i]);
         return false;
       }
       // Try to resolve annotations, ignore any that fail.
-      Map<Class<? extends Annotation>, Annotation> declaredAnnotations =
-          new HashMap<Class<? extends Annotation>, Annotation>();
+      Map<Class<? extends Annotation>, Annotation> declaredAnnotations = Maps.newHashMap();
       resolveAnnotations(logger, paramAnnot[i], declaredAnnotations);
 
-      newParameter(method, argType, argNames[i], declaredAnnotations, argNamesAreReal);
+      newParameter(method, argJType, argNames[i], declaredAnnotations, argNamesAreReal);
     }
     return true;
   }
 
-  private boolean resolveThrows(JAbstractMethod method, CollectMethodData methodData) {
+  private boolean resolveThrows(TreeLogger logger, JAbstractMethod method,
+      CollectMethodData methodData) {
     if (method.getThrows().length == 0) {
       for (String exceptionName : methodData.getExceptions()) {
-        JType exceptionType = resolveType(Type.getObjectType(exceptionName));
-        if (exceptionType == null) {
+        Type exceptionType = Type.getObjectType(exceptionName);
+        JType exceptionJType = resolveType(exceptionType);
+        if (exceptionJType == null) {
+          logger.log(TreeLogger.ERROR,
+              "Unable to resolve type " + exceptionType.getInternalName() + " of thrown exception");
           return false;
         }
-        addThrows(method, (JClassType) exceptionType);
+        addThrows(method, (JClassType) exceptionJType);
       }
     }
     return true;

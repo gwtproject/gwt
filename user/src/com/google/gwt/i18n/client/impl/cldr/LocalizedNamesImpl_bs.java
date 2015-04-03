@@ -17,24 +17,12 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6472 Google $
-//  type=root
-//  date=$Date: 2012-01-27 18:53:35 -0500 (Fri, 27 Jan 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "bs" locale.
  */
 public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
-
-  @Override
-  public String[] loadLikelyRegionCodes() {
-    return new String[] {
-        "BA",
-    };
-  }
 
   @Override
   public String[] loadSortedRegionCodes() {
@@ -143,6 +131,7 @@ public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
         "JO",
         "GS",
         "KR",
+        "SS",
         "ZA",
         "KY",
         "KH",
@@ -256,9 +245,7 @@ public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
         "SO",
         "ES",
         "RS",
-        "CS",
         "LK",
-        "SS",
         "SD",
         "SR",
         "BL",
@@ -295,6 +282,7 @@ public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
         "GB",
         "VE",
         "VN",
+        "XK",
         "ZM",
         "EH",
         "ZW",
@@ -377,7 +365,6 @@ public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
     namesMap.put("CO", "Kolumbija");
     namesMap.put("CP", "Ostrvo Kliperton");
     namesMap.put("CR", "Kostarika");
-    namesMap.put("CS", "Srbija i Crna Gora");
     namesMap.put("CU", "Kuba");
     namesMap.put("CV", "Kape Verde");
     namesMap.put("CX", "Božićna Ostrva");
@@ -420,6 +407,7 @@ public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
     namesMap.put("GT", "Gvatemala");
     namesMap.put("GW", "Gvineja-Bisao");
     namesMap.put("GY", "Gvajana");
+    namesMap.put("HK", "Hong Kong (S. A. R. Kina)");
     namesMap.put("HM", "Herd i Mekdonald Ostrva");
     namesMap.put("HR", "Hrvatska");
     namesMap.put("HU", "Mađarska");
@@ -465,7 +453,7 @@ public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
     namesMap.put("MK", "Makedonija");
     namesMap.put("MM", "Mijanmar");
     namesMap.put("MN", "Mongolija");
-    namesMap.put("MO", "Makao");
+    namesMap.put("MO", "Makao (S. A. R. Kina)");
     namesMap.put("MP", "Severna Marijanska Ostrva");
     namesMap.put("MQ", "Martinik");
     namesMap.put("MR", "Mauritanija");
@@ -512,6 +500,7 @@ public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
     namesMap.put("SL", "Sijera Leone");
     namesMap.put("SO", "Somalija");
     namesMap.put("SR", "Surinam");
+    namesMap.put("SS", "Južni Sudan");
     namesMap.put("ST", "Sao Tome i Principe");
     namesMap.put("SV", "Salvador");
     namesMap.put("SY", "Sirija");
@@ -627,7 +616,6 @@ public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
         "CO": "Kolumbija",
         "CP": "Ostrvo Kliperton",
         "CR": "Kostarika",
-        "CS": "Srbija i Crna Gora",
         "CU": "Kuba",
         "CV": "Kape Verde",
         "CX": "Božićna Ostrva",
@@ -670,6 +658,7 @@ public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
         "GT": "Gvatemala",
         "GW": "Gvineja-Bisao",
         "GY": "Gvajana",
+        "HK": "Hong Kong (S. A. R. Kina)",
         "HM": "Herd i Mekdonald Ostrva",
         "HR": "Hrvatska",
         "HU": "Mađarska",
@@ -715,7 +704,7 @@ public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
         "MK": "Makedonija",
         "MM": "Mijanmar",
         "MN": "Mongolija",
-        "MO": "Makao",
+        "MO": "Makao (S. A. R. Kina)",
         "MP": "Severna Marijanska Ostrva",
         "MQ": "Martinik",
         "MR": "Mauritanija",
@@ -762,6 +751,7 @@ public class LocalizedNamesImpl_bs extends LocalizedNamesImpl {
         "SL": "Sijera Leone",
         "SO": "Somalija",
         "SR": "Surinam",
+        "SS": "Južni Sudan",
         "ST": "Sao Tome i Principe",
         "SV": "Salvador",
         "SY": "Sirija",

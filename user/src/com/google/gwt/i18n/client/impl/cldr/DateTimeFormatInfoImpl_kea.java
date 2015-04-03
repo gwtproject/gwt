@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "kea" locale.
@@ -51,7 +46,7 @@ public class DateTimeFormatInfoImpl_kea extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d/M/yyyy";
+    return "d/M/y";
   }
 
   @Override
@@ -87,7 +82,7 @@ public class DateTimeFormatInfoImpl_kea extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthNumDay() {
-    return "d/M";
+    return "dd/MM";
   }
 
   @Override
@@ -97,7 +92,7 @@ public class DateTimeFormatInfoImpl_kea extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d 'di' MMM 'di' y";
+    return "d MMM y";
   }
 
   @Override
@@ -113,6 +108,11 @@ public class DateTimeFormatInfoImpl_kea extends DateTimeFormatInfoImpl {
   @Override
   public String formatYearMonthNum() {
     return "MM/y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "dd/MM/y";
   }
 
   @Override

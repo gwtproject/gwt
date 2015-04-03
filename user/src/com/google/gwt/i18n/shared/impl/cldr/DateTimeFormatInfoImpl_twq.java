@@ -14,17 +14,20 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "twq" locale.
  */
 public class DateTimeFormatInfoImpl_twq extends DateTimeFormatInfoImpl {
+
+  @Override
+  public String[] ampms() {
+    return new String[] {
+        "Subbaahi",
+        "Zaarikay b"
+    };
+  }
 
   @Override
   public String dateFormatFull() {
@@ -43,7 +46,7 @@ public class DateTimeFormatInfoImpl_twq extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d/M/yyyy";
+    return "d/M/y";
   }
 
   @Override

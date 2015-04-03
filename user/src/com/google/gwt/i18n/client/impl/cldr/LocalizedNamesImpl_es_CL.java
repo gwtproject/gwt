@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=es
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "es_CL" locale.
@@ -50,9 +45,9 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "AT",
         "AZ",
         "BS",
-        "BH",
         "BD",
         "BB",
+        "BH",
         "BE",
         "BZ",
         "BJ",
@@ -61,7 +56,6 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "BO",
         "BA",
         "BW",
-        "BQ",
         "BR",
         "BN",
         "BG",
@@ -72,6 +66,8 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "KH",
         "CM",
         "CA",
+        "BQ",
+        "QA",
         "EA",
         "TD",
         "CL",
@@ -80,7 +76,6 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "VA",
         "CO",
         "KM",
-        "CG",
         "KP",
         "KR",
         "CI",
@@ -106,7 +101,6 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "FI",
         "FJ",
         "FR",
-        "FX",
         "GA",
         "GM",
         "GE",
@@ -126,7 +120,6 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "GY",
         "HT",
         "HN",
-        "HK",
         "HU",
         "IN",
         "ID",
@@ -168,6 +161,7 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "KE",
         "KG",
         "KI",
+        "XK",
         "KW",
         "LA",
         "LS",
@@ -178,7 +172,6 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "LI",
         "LT",
         "LU",
-        "MO",
         "MK",
         "MG",
         "MY",
@@ -221,10 +214,12 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "PL",
         "PT",
         "PR",
-        "QA",
+        "HK",
+        "MO",
         "GB",
         "CF",
         "CZ",
+        "CG",
         "CD",
         "DO",
         "RE",
@@ -245,22 +240,21 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "VC",
         "SN",
         "RS",
-        "CS",
         "SC",
         "SL",
         "SG",
+        "SX",
         "SY",
         "SO",
         "LK",
-        "SS",
         "SZ",
         "ZA",
         "SD",
+        "SS",
         "SE",
         "CH",
         "SR",
         "SJ",
-        "SX",
         "TH",
         "TW",
         "TZ",
@@ -301,11 +295,11 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
     namesMap.put("005", "Sudamérica");
     namesMap.put("AN", "Antillas Holandesas");
     namesMap.put("AZ", "Azerbayán");
+    namesMap.put("BD", "Bangladesh");
     namesMap.put("EH", "Sahara Occidental");
     namesMap.put("PS", "Territorio Palestino");
     namesMap.put("RO", "Rumania");
     namesMap.put("SA", "Arabia Saudita");
-    namesMap.put("TZ", "Tanzanía");
   }
 
   @Override
@@ -318,11 +312,11 @@ public class LocalizedNamesImpl_es_CL extends LocalizedNamesImpl_es {
         "005": "Sudamérica",
         "AN": "Antillas Holandesas",
         "AZ": "Azerbayán",
+        "BD": "Bangladesh",
         "EH": "Sahara Occidental",
         "PS": "Territorio Palestino",
         "RO": "Rumania",
-        "SA": "Arabia Saudita",
-        "TZ": "Tanzanía"
+        "SA": "Arabia Saudita"
     };
   }-*/;
 }

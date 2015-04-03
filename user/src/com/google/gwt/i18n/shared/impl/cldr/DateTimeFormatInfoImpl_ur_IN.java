@@ -14,17 +14,38 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=IN
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "ur_IN" locale.
  */
 public class DateTimeFormatInfoImpl_ur_IN extends DateTimeFormatInfoImpl_ur {
+
+  @Override
+  public String[] weekdaysFull() {
+    return new String[] {
+        "اتوار",
+        "پیر",
+        "منگل",
+        "بدھ",
+        "جمعرات",
+        "جمعہ",
+        "ہفتہ"
+    };
+  }
+
+  @Override
+  public String[] weekdaysShort() {
+    return new String[] {
+        "اتوار",
+        "پیر",
+        "منگل",
+        "بدھ",
+        "جمعرات",
+        "جمعہ",
+        "ہفتہ"
+    };
+  }
 
   @Override
   public int weekendStart() {

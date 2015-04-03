@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 5953 $
-//  type=sah
-//  date=$Date: 2011-07-04 19:22:55 -0400 (Mon, 04 Jul 2011) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "sah" locale.
@@ -283,6 +278,7 @@ public class LocalizedNamesImpl_sah extends LocalizedNamesImpl {
         "VU",
         "WF",
         "WS",
+        "XK",
         "YE",
         "YT",
         "ZA",

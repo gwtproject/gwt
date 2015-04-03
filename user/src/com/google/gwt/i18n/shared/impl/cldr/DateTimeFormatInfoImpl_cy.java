@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "cy" locale.
@@ -43,7 +38,17 @@ public class DateTimeFormatInfoImpl_cy extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yyyy";
+    return "dd/MM/y";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " 'am' " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " 'am' " + timePattern;
   }
 
   @Override
@@ -60,6 +65,11 @@ public class DateTimeFormatInfoImpl_cy extends DateTimeFormatInfoImpl {
         "CC",
         "OC"
     };
+  }
+
+  @Override
+  public String formatHour12Minute() {
+    return "h.mm a";
   }
 
   @Override
@@ -118,25 +128,17 @@ public class DateTimeFormatInfoImpl_cy extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsFull() {
-    return new String[] {
-        "Ionawr",
-        "Chwefror",
-        "Mawrth",
-        "Ebrill",
-        "Mai",
-        "Mehefin",
-        "Gorffenaf",
-        "Awst",
-        "Medi",
-        "Hydref",
-        "Tachwedd",
-        "Rhagfyr"
-    };
+  public String formatYearQuarterFull() {
+    return "QQQQ y";
   }
 
   @Override
-  public String[] monthsFullStandalone() {
+  public String formatYearQuarterShort() {
+    return "Q y";
+  }
+
+  @Override
+  public String[] monthsFull() {
     return new String[] {
         "Ionawr",
         "Chwefror",
@@ -157,7 +159,7 @@ public class DateTimeFormatInfoImpl_cy extends DateTimeFormatInfoImpl {
   public String[] monthsNarrow() {
     return new String[] {
         "I",
-        "C",
+        "Ch",
         "M",
         "E",
         "M",
@@ -167,7 +169,7 @@ public class DateTimeFormatInfoImpl_cy extends DateTimeFormatInfoImpl {
         "M",
         "H",
         "T",
-        "R"
+        "Rh"
     };
   }
 
@@ -193,7 +195,7 @@ public class DateTimeFormatInfoImpl_cy extends DateTimeFormatInfoImpl {
   public String[] monthsShortStandalone() {
     return new String[] {
         "Ion",
-        "Chwe",
+        "Chw",
         "Maw",
         "Ebr",
         "Mai",
@@ -244,7 +246,7 @@ public class DateTimeFormatInfoImpl_cy extends DateTimeFormatInfoImpl {
   public String[] weekdaysNarrow() {
     return new String[] {
         "S",
-        "L",
+        "Ll",
         "M",
         "M",
         "I",

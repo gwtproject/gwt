@@ -25,12 +25,21 @@ import junit.framework.TestCase;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Checks the behaviors of ModuleDefLoader and Properties.
  */
 public class PropertyTest extends TestCase {
+
+  private static int computePermutationCount(ModuleDef moduleDef) {
+    PropertyPermutations propertyPermutations =
+        new PropertyPermutations(moduleDef.getProperties(), moduleDef.getActiveLinkerNames());
+    List<PropertyPermutations> collapsePropertySets = propertyPermutations.collapseProperties();
+    int numPermutations = collapsePropertySets.size();
+    return numPermutations;
+  }
 
   private static TreeLogger getRootLogger() {
     PrintWriterTreeLogger logger = new PrintWriterTreeLogger(new PrintWriter(
@@ -55,10 +64,10 @@ public class PropertyTest extends TestCase {
       BindingProperty restricted = (BindingProperty) p.find("restricted");
       assertNotNull(restricted);
       assertEquals(3,
-          restricted.getAllowedValues(restricted.getRootCondition()).length);
+          restricted.getGeneratedValues(restricted.getRootCondition()).length);
       assertEquals(
           Arrays.asList("a", "b", "c"),
-          Arrays.asList(restricted.getAllowedValues(restricted.getRootCondition())));
+          Arrays.asList(restricted.getGeneratedValues(restricted.getRootCondition())));
       assertTrue(restricted.isDefinedValue("d"));
       assertFalse(restricted.isAllowedValue("d"));
     }
@@ -68,9 +77,9 @@ public class PropertyTest extends TestCase {
       assertNotNull(restricted1s);
       assertTrue(restricted1s.isAllowedValue("a"));
       assertEquals(1,
-          restricted1s.getAllowedValues(restricted1s.getRootCondition()).length);
+          restricted1s.getGeneratedValues(restricted1s.getRootCondition()).length);
       assertEquals("a",
-          restricted1s.getAllowedValues(restricted1s.getRootCondition())[0]);
+          restricted1s.getGeneratedValues(restricted1s.getRootCondition())[0]);
     }
 
     {
@@ -86,11 +95,11 @@ public class PropertyTest extends TestCase {
       Iterator<Condition> it = conditional.getConditionalValues().keySet().iterator();
 
       assertEquals(Arrays.asList("a", "b", "c"),
-          Arrays.asList(conditional.getAllowedValues(it.next())));
+          Arrays.asList(conditional.getGeneratedValues(it.next())));
       assertEquals(Arrays.asList("a", "b"),
-          Arrays.asList(conditional.getAllowedValues(it.next())));
+          Arrays.asList(conditional.getGeneratedValues(it.next())));
       assertEquals(Arrays.asList("c"),
-          Arrays.asList(conditional.getAllowedValues(it.next())));
+          Arrays.asList(conditional.getGeneratedValues(it.next())));
     }
 
     {
@@ -166,5 +175,27 @@ public class PropertyTest extends TestCase {
     } catch (IllegalArgumentException e) {
       // OK
     }
+  }
+
+  public void testRestrictAndReleaseProperty() throws UnableToCompleteException {
+    ModuleDef moduleDef = ModuleDefLoader.loadFromClassPath(getRootLogger(), new CompilerContext(),
+        getClass().getCanonicalName() + "2");
+    Properties properties = moduleDef.getProperties();
+
+    // Show that there are initially 7 combinations of form and ratio.
+    assertEquals(7, computePermutationCount(moduleDef));
+
+    // Restrict a simple property that contains no conditions.
+    properties.findBindingProp("form").setRootGeneratedValues("desktop");
+    assertEquals(3, computePermutationCount(moduleDef));
+
+    // Restrict a *complex* property that contains some conditions.
+    properties.findBindingProp("ratio").setRootGeneratedValues("widescreen");
+    assertEquals(1, computePermutationCount(moduleDef));
+
+    // Unrestrict both properties and show that the original permutation count is restored.
+    properties.findBindingProp("form").resetGeneratedValues();
+    properties.findBindingProp("ratio").resetGeneratedValues();
+    assertEquals(7, computePermutationCount(moduleDef));
   }
 }

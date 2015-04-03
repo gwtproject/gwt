@@ -619,7 +619,7 @@ public abstract class TypeOracleUpdaterTestBase extends TestCase {
 
     @Override
     public String getSource() {
-      StringBuffer sb = new StringBuffer();
+      StringBuilder sb = new StringBuilder();
       sb.append("package java.lang;");
       sb.append("public class Object { }");
       return sb.toString();
@@ -664,7 +664,7 @@ public abstract class TypeOracleUpdaterTestBase extends TestCase {
 
         @Override
         public CharSequence getContent() {
-          StringBuffer code = new StringBuffer();
+          StringBuilder code = new StringBuilder();
           code.append("package com.google.gwt.dev.javac.mediatortest;\n");
           code.append("public class Pseudo$Inner {}\n");
           return code;
@@ -718,7 +718,7 @@ public abstract class TypeOracleUpdaterTestBase extends TestCase {
 
     @Override
     public String getSource() {
-      StringBuffer sb = new StringBuffer();
+      StringBuilder sb = new StringBuilder();
       sb.append("package java.lang;");
       sb.append("public class String { }");
       return sb.toString();
@@ -736,7 +736,7 @@ public abstract class TypeOracleUpdaterTestBase extends TestCase {
 
         @Override
         public String getSource() {
-          StringBuffer sb = new StringBuffer();
+          StringBuilder sb = new StringBuilder();
           sb.append("package java.lang;");
           sb.append("public class Throwable { }");
           return sb.toString();
@@ -1017,9 +1017,9 @@ public abstract class TypeOracleUpdaterTestBase extends TestCase {
 
   public void testConstrainedField() throws TypeOracleException {
     addTestResource(CU_Object);
-    addTestResource(CU_Throwable);
     addTestResource(CU_ConstrainedList);
     addTestResource(CU_ConstrainedListAsField);
+    addTestResource(CU_Throwable);
     buildTypeOracle();
 
     // Get the types produced by the TypeOracle

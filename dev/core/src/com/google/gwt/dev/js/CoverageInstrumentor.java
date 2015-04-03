@@ -58,11 +58,10 @@ public class CoverageInstrumentor {
       if (!instrumentableLines.containsEntry(info.getFileName(), info.getStartLine())) {
         return;
       }
-      JsInvocation update = new JsInvocation(info);
-      update.setQualifier(jsProgram.getIndexedFunction("CoverageUtil.cover")
-          .getName().makeRef(info));
-      update.getArguments().add(new JsStringLiteral(info, info.getFileName()));
-      update.getArguments().add(new JsNumberLiteral(info, info.getStartLine()));
+      JsInvocation update = new JsInvocation(info,
+          jsProgram.getIndexedFunction("CoverageUtil.cover"),
+          new JsStringLiteral(info, info.getFileName()),
+          new JsNumberLiteral(info, info.getStartLine()));
       ctx.replaceMe(new JsBinaryOperation(info, JsBinaryOperator.COMMA, update, x));
     }
   }
@@ -75,7 +74,7 @@ public class CoverageInstrumentor {
    * Creates the baseline coverage object, with an entry mapping to 0 for every
    * instrumented line.
    */
-  @VisibleForTesting 
+  @VisibleForTesting
   static JsObjectLiteral baselineCoverage(SourceInfo info,
       Multimap<String, Integer> instrumentableLines) {
     JsObjectLiteral baseline = new JsObjectLiteral(info);

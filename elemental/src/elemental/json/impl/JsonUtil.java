@@ -15,9 +15,6 @@
  */
 package elemental.json.impl;
 
-import com.google.gwt.regexp.shared.MatchResult;
-import com.google.gwt.regexp.shared.RegExp;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,15 +30,6 @@ import elemental.json.impl.JsonContext;
  * Direct port of json2.js at http://www.json.org/json2.js to GWT.
  */
 public class JsonUtil {
-
-  /**
-   * Callback invoked during a RegExp replace for each match. The return value
-   * is used as a substitution into the matched string.
-   */
-  private interface RegExpReplacer {
-
-    String replace(String match);
-  }
 
   private static class StringifyJsonVisitor extends JsonVisitor {
 
@@ -60,11 +48,11 @@ public class JsonUtil {
 
     private final String indent;
 
-    private final StringBuffer sb;
+    private final StringBuilder sb;
 
     private final boolean pretty;
 
-    public StringifyJsonVisitor(String indent, StringBuffer sb,
+    public StringifyJsonVisitor(String indent, StringBuilder sb,
         boolean pretty) {
       this.indent = indent;
       this.sb = sb;
@@ -196,7 +184,7 @@ public class JsonUtil {
    * Convert special control characters into unicode escape format.
    */
   public static String escapeControlChars(String text) {
-    StringBuffer toReturn = new StringBuffer();
+    StringBuilder toReturn = new StringBuilder();
     for (int i = 0; i < text.length(); i++) {
       char c = text.charAt(i);
       if (isControlChar(c)) {
@@ -216,8 +204,7 @@ public class JsonUtil {
    * Safely escape an arbitrary string as a JSON string literal.
    */
   public static String quote(String value) {
-    StringBuffer toReturn = new StringBuffer();
-    toReturn.append("\"");
+    StringBuilder toReturn = new StringBuilder("\"");
     for (int i = 0; i < value.length(); i++) {
       char c = value.charAt(i);
 
@@ -273,7 +260,7 @@ public class JsonUtil {
    * @return json formatted string
    */
   public static String stringify(JsonValue jsonValue, int spaces) {
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     for (int i = 0; i < spaces; i++) {
       sb.append(' ');
     }
@@ -288,7 +275,7 @@ public class JsonUtil {
    * @return json formatted string
    */
   public static String stringify(JsonValue jsonValue, final String indent) {
-    final StringBuffer sb = new StringBuffer();
+    final StringBuilder sb = new StringBuilder();
     final boolean isPretty = indent != null && !"".equals(indent);
 
     new StringifyJsonVisitor(indent, sb, isPretty).accept(jsonValue);
@@ -315,29 +302,5 @@ public class JsonUtil {
         || (c >= '\u2028' && c <= '\u202f')
         || (c >= '\u2060' && c <= '\u206f')
         || (c >= '\ufff0' && c <= '\uffff');
-  }
-
-  /**
-   * Execute a regular expression and invoke a callback for each match
-   * occurance. The return value of the callback is substituted for the match.
-   *
-   * @param expression a compiled regular expression
-   * @param text       a String on which to perform replacement
-   * @param replacer   a callback that maps matched strings into new values
-   */
-  private static String replace(RegExp expression, String text,
-      RegExpReplacer replacer) {
-    expression.setLastIndex(0);
-    MatchResult mresult = expression.exec(text);
-    StringBuffer toReturn = new StringBuffer();
-    int lastIndex = 0;
-    while (mresult != null) {
-      toReturn.append(text.substring(lastIndex, mresult.getIndex()));
-      toReturn.append(replacer.replace(mresult.getGroup(0)));
-      lastIndex = mresult.getIndex() + 1;
-      mresult = expression.exec(text);
-    }
-    toReturn.append(text.substring(lastIndex));
-    return toReturn.toString();
   }
 }

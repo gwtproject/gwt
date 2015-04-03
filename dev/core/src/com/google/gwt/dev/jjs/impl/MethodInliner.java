@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -37,12 +37,13 @@ import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
+import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -50,7 +51,7 @@ import java.util.Set;
  * Inline methods that can be inlined. The current implementation limits the
  * methods that can be inlined to those that are composed of at most two
  * top-level expressions.
- * 
+ *
  * Future improvements will allow more complex methods to be inlined based on
  * the number of call sites, as well as adding support for more complex target
  * method expressions.
@@ -76,26 +77,29 @@ public class MethodInliner {
   /**
    * Method inlining visitor.
    */
-  private class InliningVisitor extends JModVisitor {
-    protected final Set<JMethod> modifiedMethods = new LinkedHashSet<JMethod>();
+  private class InliningVisitor extends JChangeTrackingVisitor {
+
+    public InliningVisitor(OptimizerContext optimizerCtx) {
+      super(optimizerCtx);
+    }
 
     /**
      * Resets with each new visitor, which is good since things that couldn't be
      * inlined before might become inlinable.
      */
-    private final Set<JMethod> cannotInline = new HashSet<JMethod>();
-    private JExpression ignoringReturnValueFor;
+    private final Set<JMethod> cannotInline = Sets.newHashSet();
+    private final Stack<JExpression> expressionsWhoseValuesAreIgnored = Stack.create();
 
     @Override
-    public void endVisit(JMethod x, Context ctx) {
-      currentMethod = null;
+    public void endVisit(JExpressionStatement x, Context ctx) {
+      expressionsWhoseValuesAreIgnored.pop();
     }
 
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
 
-      if (currentMethod == method) {
+      if (getCurrentMethod() == method) {
         // Never try to inline a recursive call!
         return;
       }
@@ -104,32 +108,61 @@ public class MethodInliner {
         return;
       }
 
-      boolean possibleToInline = false;
-
-      if (method.isStatic() && !method.isNative()) {
-        JMethodBody body = (JMethodBody) method.getBody();
-        List<JStatement> stmts = body.getStatements();
-
-        if (method.getEnclosingType() != null
-            && method.getEnclosingType().getClinitMethod() == method && !stmts.isEmpty()) {
-          // clinit() calls cannot be inlined unless they are empty
-          possibleToInline = false;
-        } else if (!body.getLocals().isEmpty()) {
-          // methods with local variables cannot be inlined
-          possibleToInline = false;
-        } else {
-          JMultiExpression multi = createMultiExpressionFromBody(body, ignoringReturnValueFor == x);
-          if (multi != null) {
-            possibleToInline = tryInlineExpression(x, ctx, multi);
-          }
-        }
-      }
-
-      // If it will never be possible to inline the method, add it to a
-      // blacklist
-      if (!possibleToInline) {
+      if (tryInlineMethodCall(x, ctx) == InlineResult.BLACKLIST) {
+        // Do not try to inline this method again
         cannotInline.add(method);
       }
+    }
+
+    @Override
+    public void endVisit(JMultiExpression x, Context ctx) {
+      for (int i = 0; i < x.getExpressions().size() - 1; i++) {
+        expressionsWhoseValuesAreIgnored.pop();
+      }
+    }
+
+    private InlineResult tryInlineMethodCall(JMethodCall x, Context ctx) {
+      JMethod method = x.getTarget();
+      if (program.isJsTypePrototype(method.getEnclosingType())) {
+         /*
+          * Don't inline calls to JsType Prototype methods, since these are merely stubs to
+          * preserve super calls to JS prototype methods.
+          */
+        return InlineResult.BLACKLIST;
+      }
+
+      if (!method.isStatic() || method.isNative()) {
+        // Only inline static methods that are not native.
+        return InlineResult.BLACKLIST;
+      }
+
+      if (!program.isInliningAllowed(method)) {
+        return InlineResult.BLACKLIST;
+      }
+
+      JMethodBody body = (JMethodBody) method.getBody();
+      List<JStatement> stmts = body.getStatements();
+
+      if (method.getEnclosingType() != null
+         && method.getEnclosingType().getClinitMethod() == method && !stmts.isEmpty()) {
+          // clinit() calls cannot be inlined unless they are empty
+        return InlineResult.BLACKLIST;
+      }
+
+      if (!body.getLocals().isEmpty()) {
+          // methods with local variables cannot be inlined
+        return InlineResult.BLACKLIST;
+      }
+
+      // try to inline
+      List<JExpression> expressions = extractExpressionsFromBody(body);
+      if (expressions == null) {
+        // If it will never be possible to inline the method, add it to a
+        // blacklist
+        return InlineResult.BLACKLIST;
+      }
+
+      return tryInlineBody(x, ctx, expressions, expressionsWhoseValuesAreIgnored.contains(x));
     }
 
     @Override
@@ -139,13 +172,12 @@ public class MethodInliner {
 
     @Override
     public boolean visit(JExpressionStatement x, Context ctx) {
-      ignoringReturnValueFor = x.getExpr();
+      expressionsWhoseValuesAreIgnored.push(x.getExpr());
       return true;
     }
 
     @Override
-    public boolean visit(JMethod x, Context ctx) {
-      currentMethod = x;
+    public boolean enter(JMethod x, Context ctx) {
       if (program.getStaticImpl(x) != null) {
         /*
          * Never inline a static impl into the calling instance method. We used
@@ -153,8 +185,8 @@ public class MethodInliner {
          * optimizers to keep the AST sane. This was because it was possible to
          * tighten an instance call to its static impl after the static impl had
          * already been inlined, this meant any "flow" type optimizer would have
-         * to fake artifical flow from the instance method to the static impl.
-         * 
+         * to fake artificial flow from the instance method to the static impl.
+         *
          * TODO: allow the inlining if we are the last remaining call site, and
          * prune the static impl? But it might tend to generate more code.
          */
@@ -163,14 +195,23 @@ public class MethodInliner {
       return true;
     }
 
+    @Override
+    public boolean visit(JMultiExpression x, Context ctx) {
+      for (int i = 0; i < x.getExpressions().size() - 1; i++) {
+        expressionsWhoseValuesAreIgnored.push(x.getExpression(i));
+      }
+      return true;
+    }
+
     private JMethodCall createClinitCall(JMethodCall x) {
       JDeclaredType targetType = x.getTarget().getEnclosingType().getClinitTarget();
-      if (!currentMethod.getEnclosingType().checkClinitTo(targetType)) {
+      if (!getCurrentMethod().getEnclosingType().checkClinitTo(targetType)) {
         // Access from this class to the target class won't trigger a clinit
         return null;
       }
-      if (program.isStaticImpl(x.getTarget())) {
-        // No clinit needed; target is really an instance method.
+      if (program.isStaticImpl(x.getTarget()) &&
+          !program.typeOracle.isJavaScriptObject(x.getTarget().getEnclosingType())) {
+        // No clinit needed; target is really a non-jso instance method.
         return null;
       }
       if (JProgram.isClinit(x.getTarget())) {
@@ -189,39 +230,17 @@ public class MethodInliner {
     }
 
     /**
-     * Creates a multi expression for evaluating a method call instance and
-     * possible clinit. This is a precursor for inlining the remainder of a
-     * method.
-     */
-    private JMultiExpression createMultiExpressionForInstanceAndClinit(JMethodCall x) {
-      JMultiExpression multi = new JMultiExpression(x.getSourceInfo());
-
-      // Any instance expression goes first (this can happen even with statics).
-      if (x.getInstance() != null) {
-        multi.addExpressions(x.getInstance());
-      }
-
-      // If we need a clinit call, add it first
-      JMethodCall clinit = createClinitCall(x);
-      if (clinit != null) {
-        multi.addExpressions(clinit);
-      }
-      return multi;
-    }
-
-    /**
      * Creates a JMultiExpression from a set of JExpressionStatements,
      * optionally terminated by a JReturnStatement. If the method doesn't match
      * this pattern, it returns <code>null</code>.
-     * 
+     *
      * If a method has a non-void return statement and can be represented as a
      * multi-expression, the output of the multi-expression will be the return
      * expression of the method. If the method is void, the output of the
      * multi-expression should be considered undefined.
      */
-    private JMultiExpression createMultiExpressionFromBody(JMethodBody body,
-        boolean ignoringReturnValue) {
-      JMultiExpression multi = new JMultiExpression(body.getSourceInfo());
+    private List<JExpression> extractExpressionsFromBody(JMethodBody body) {
+      List<JExpression> expressions = Lists.newArrayList();
       CloneCalleeExpressionVisitor cloner = new CloneCalleeExpressionVisitor();
 
       for (JStatement stmt : body.getStatements()) {
@@ -229,16 +248,14 @@ public class MethodInliner {
           JExpressionStatement exprStmt = (JExpressionStatement) stmt;
           JExpression expr = exprStmt.getExpr();
           JExpression clone = cloner.cloneExpression(expr);
-          multi.addExpressions(clone);
+          expressions.add(clone);
         } else if (stmt instanceof JReturnStatement) {
           JReturnStatement returnStatement = (JReturnStatement) stmt;
           JExpression expr = returnStatement.getExpr();
           if (expr != null) {
-            if (!ignoringReturnValue || expr.hasSideEffects()) {
-              JExpression clone = cloner.cloneExpression(expr);
-              clone = maybeCast(clone, body.getMethod().getType());
-              multi.addExpressions(clone);
-            }
+            JExpression clone = cloner.cloneExpression(expr);
+            clone = maybeCast(clone, body.getMethod().getType());
+            expressions.add(clone);
           }
           // We hit an unconditional return; no need to evaluate anything else.
           break;
@@ -248,16 +265,18 @@ public class MethodInliner {
         }
       }
 
-      return multi;
+      return expressions;
     }
 
     /**
-     * Creates a multi expression for evaluating a method call instance,
+     * Creates a lists of expression for evaluating a method call instance,
      * possible clinit, and all arguments. This is a precursor for inlining the
      * remainder of a method that does not reference any parameters.
      */
-    private JMultiExpression createMultiExpressionIncludingArgs(JMethodCall x) {
-      JMultiExpression multi = createMultiExpressionForInstanceAndClinit(x);
+    private List<JExpression> expressionsIncludingArgs(JMethodCall x) {
+      List<JExpression> expressions = Lists.newArrayListWithCapacity(x.getArgs().size() + 2);
+      expressions.add(x.getInstance());
+      expressions.add(createClinitCall(x));
 
       for (int i = 0, c = x.getArgs().size(); i < c; ++i) {
         JExpression arg = x.getArgs().get(i);
@@ -265,50 +284,37 @@ public class MethodInliner {
         analyzer.accept(arg);
 
         if (analyzer.hasAssignment() || analyzer.canThrowException()) {
-          multi.addExpressions(arg);
+          expressions.add(arg);
         }
       }
-      return multi;
+      return expressions;
     }
 
     /**
-     * Replace the current expression with a given multi-expression and mark the
-     * method as modified. The dead-code elimination pass will optimize this if
-     * necessary.
+     * Inline a call to an expression. Returns {@code InlineResult.BLACKLIST} if the method is
+     * deemed not inlineable regardless of call site; {@code InlineResult.DO_NOT_BLACKLIST}
+     * otherwise.
      */
-    private void replaceWithMulti(Context ctx, JMultiExpression multi) {
-      ctx.replaceMe(multi);
-      modifiedMethods.add(currentMethod);
-    }
+    private InlineResult tryInlineBody(JMethodCall x, Context ctx,
+        List<JExpression> bodyAsExpressionList, boolean ignoringReturn) {
 
-    /**
-     * Inline a call to an expression.
-     */
-    private boolean tryInlineExpression(JMethodCall x, Context ctx, JMultiExpression targetExpr) {
-      /*
-       * Limit inlined methods to multiexpressions of length 2 for now. This
-       * handles the simple { return JVariableRef; } or { expression; return
-       * something; } cases.
-       * 
-       * TODO: add an expression complexity analyzer.
-       */
-      if (targetExpr.getNumberOfExpressions() > 2) {
-        return false;
+      if (isTooComplexToInline(bodyAsExpressionList, ignoringReturn)) {
+        return InlineResult.BLACKLIST;
       }
 
       // Do not inline anything that modifies one of its params.
       ExpressionAnalyzer targetAnalyzer = new ExpressionAnalyzer();
-      targetAnalyzer.accept(targetExpr);
+      targetAnalyzer.accept(bodyAsExpressionList);
       if (targetAnalyzer.hasAssignmentToParameter()) {
-        return false;
+        return InlineResult.BLACKLIST;
       }
 
       // Make sure the expression we're about to inline doesn't include a call
       // to the target method!
       RecursionCheckVisitor recursionCheckVisitor = new RecursionCheckVisitor(x.getTarget());
-      recursionCheckVisitor.accept(targetExpr);
+      recursionCheckVisitor.accept(bodyAsExpressionList);
       if (recursionCheckVisitor.isRecursive()) {
-        return false;
+        return InlineResult.BLACKLIST;
       }
 
       /*
@@ -320,11 +326,12 @@ public class MethodInliner {
       /*
        * There are a different number of parameters than args - this is likely a
        * result of parameter pruning. Don't consider this call site a candidate.
-       * 
+       *
        * TODO: would this be possible in the trivial delegation case?
        */
       if (x.getTarget().getParams().size() != x.getArgs().size()) {
-        return true;
+        // Could not inline this call but the method might be inlineable at a different call site.
+        return InlineResult.DO_NOT_BLACKLIST;
       }
 
       // Run the order check. This verifies that all the parameters are
@@ -339,17 +346,17 @@ public class MethodInliner {
        * other expressions.
        */
       OrderVisitor orderVisitor = new OrderVisitor(x.getTarget().getParams());
-      orderVisitor.accept(targetExpr);
+      orderVisitor.accept(bodyAsExpressionList);
 
       /*
        * A method that doesn't touch any parameters is trivially inlinable (this
        * covers the empty method case)
        */
       if (orderVisitor.checkResults() == SideEffectCheck.NO_REFERENCES) {
-        JMultiExpression multi = createMultiExpressionIncludingArgs(x);
-        multi.addExpressions(targetExpr);
-        replaceWithMulti(ctx, multi);
-        return true;
+        List<JExpression> expressions = expressionsIncludingArgs(x);
+        expressions.addAll(bodyAsExpressionList);
+        ctx.replaceMe(JjsUtils.createOptimizedMultiExpression(ignoringReturn, expressions));
+        return InlineResult.DO_NOT_BLACKLIST;
       }
 
       /*
@@ -369,29 +376,61 @@ public class MethodInliner {
              * This argument evaluation could affect or be affected by the
              * callee so we cannot inline here.
              */
-            return true;
+            // Could not inline this call but the method is potentially inlineable.
+            return InlineResult.DO_NOT_BLACKLIST;
           }
         }
       }
 
       // We're safe to inline.
-      JMultiExpression multi = createMultiExpressionForInstanceAndClinit(x);
+      boolean hasSideEffects = x.hasSideEffects();
+      if (!hasSideEffects) {
+        new JModVisitor() {
+          @Override
+          public void endVisit(JMethodCall x, Context ctx) {
+            x.markSideEffectFree();
+          }
+
+        }.accept(bodyAsExpressionList);
+      }
 
       // Replace all params in the target expression with the actual arguments.
       ParameterReplacer replacer = new ParameterReplacer(x);
-      replacer.accept(targetExpr);
+      replacer.accept(bodyAsExpressionList);
+      bodyAsExpressionList.add(0, x.getInstance());
+      bodyAsExpressionList.add(1, createClinitCall(x));
+      ctx.replaceMe(JjsUtils.createOptimizedMultiExpression(ignoringReturn,
+          bodyAsExpressionList));
+      return InlineResult.DO_NOT_BLACKLIST;
+    }
+  }
 
-      multi.addExpressions(targetExpr);
-      replaceWithMulti(ctx, multi);
+  private static boolean isTooComplexToInline(List<JExpression> bodyAsExpressionList,
+      boolean ignoringReturn) {
+    /*
+     * Limit inlined methods to multiexpressions of length 2 for now. This
+     * handles the simple { return JVariableRef; } or { expression; return
+     * something; } cases.
+     *
+     * TODO: add an expression complexity analyzer.
+     */
+    if (ignoringReturn) {
+      return bodyAsExpressionList.size() > 2;
+    }
+
+    if (bodyAsExpressionList.size() == 3 && bodyAsExpressionList.get(2).hasSideEffects()) {
       return true;
     }
+
+    // The expression is effectively of size 2, hence not too complex to inline.
+    return false;
   }
 
   /**
    * Verifies that all the parameters are referenced once and only once, not
    * within a conditionally-executing expression, and any before trouble some
    * expressions evaluate. Examples of troublesome expressions include:
-   * 
+   *
    * <ul>
    * <li>assignments to any variable</li>
    * <li>expressions that throw exceptions</li>
@@ -500,14 +539,16 @@ public class MethodInliner {
 
   public static String NAME = MethodInliner.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program) {
+  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new MethodInliner(program).execImpl();
+    OptimizerStats stats = new MethodInliner(program).execImpl(optimizerCtx);
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
 
-  private JMethod currentMethod;
+  public static OptimizerStats exec(JProgram program) {
+    return exec(program, new FullOptimizerContext(program));
+  }
 
   private final JProgram program;
 
@@ -515,23 +556,44 @@ public class MethodInliner {
     this.program = program;
   }
 
-  private OptimizerStats execImpl() {
+  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
     OptimizerStats stats = new OptimizerStats(NAME);
     while (true) {
-      InliningVisitor inliner = new InliningVisitor();
-      inliner.accept(program);
+      InliningVisitor inliner = new InliningVisitor(optimizerCtx);
+
+      Set<JMethod> modifiedMethods =
+          optimizerCtx.getModifiedMethodsSince(optimizerCtx.getLastStepFor(NAME));
+      Set<JMethod> affectedMethods = affectedMethods(modifiedMethods, optimizerCtx);
+      optimizerCtx.traverse(inliner, affectedMethods);
+
       stats.recordModified(inliner.getNumMods());
+      optimizerCtx.setLastStepFor(NAME, optimizerCtx.getOptimizationStep());
+
+      optimizerCtx.incOptimizationStep();
+
       if (!inliner.didChange()) {
         break;
       }
 
       // Run a cleanup on the methods we just modified
-      for (JMethod method : inliner.modifiedMethods) {
-        OptimizerStats innerStats = DeadCodeElimination.exec(program, method);
-        stats.recordModified(innerStats.getNumMods());
-      }
+      OptimizerStats dceStats = DeadCodeElimination.exec(program, optimizerCtx);
+      stats.recordModified(dceStats.getNumMods());
     }
+    JavaAstVerifier.assertProgramIsConsistent(program);
     return stats;
+  }
+
+  /**
+   * Return the set of methods affected (because they are or callers of) by the modifications to the
+   * given set functions.
+   */
+  private Set<JMethod> affectedMethods(Set<JMethod> modifiedMethods,
+      OptimizerContext optimizerCtx) {
+    assert (modifiedMethods != null);
+    Set<JMethod> affectedMethods = Sets.newLinkedHashSet();
+    affectedMethods.addAll(modifiedMethods);
+    affectedMethods.addAll(optimizerCtx.getCallers(modifiedMethods));
+    return affectedMethods;
   }
 
   /**
@@ -551,14 +613,14 @@ public class MethodInliner {
 
   private JReferenceType merge(JReferenceType source, JReferenceType target) {
     JReferenceType result;
-    if (program.typeOracle.canTriviallyCast(source.getUnderlyingType(), target.getUnderlyingType())) {
+    if (program.typeOracle.canTriviallyCast(
+        source.getUnderlyingType(), target.getUnderlyingType())) {
       result = source;
     } else {
       result = target;
     }
-    if ((!target.canBeNull())) {
-      result = result.getNonNull();
-    }
     return result;
   }
+
+  private enum InlineResult { BLACKLIST, DO_NOT_BLACKLIST}
 }

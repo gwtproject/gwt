@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,7 +23,7 @@ import java.util.HashSet;
 /**
  * Abstract base class for TreeLoggers.
  */
-public abstract class AbstractTreeLogger extends TreeLogger {
+public abstract class AbstractTreeLogger extends TreeLogger implements CanUpdateMetrics {
 
   private static class UncommittedBranchData {
 
@@ -101,6 +101,12 @@ public abstract class AbstractTreeLogger extends TreeLogger {
   private UncommittedBranchData uncommitted;
 
   /**
+   * Descendant tree loggers share the same MetricMap by default,
+   * but this can be overridden with {@link #resetMetricMap()}.
+   */
+  private volatile MetricMap metricMap = new MetricMap();
+
+  /**
    * The constructor used when creating a top-level logger.
    */
   protected AbstractTreeLogger() {
@@ -146,6 +152,9 @@ public abstract class AbstractTreeLogger extends TreeLogger {
     childLogger.uncommitted = new UncommittedBranchData(type, msg, caught,
         helpInfo);
 
+    // Inherit the parent's compiler counters by default.
+    childLogger.metricMap = metricMap;
+
     // This logic is intertwined with log(). If a log message is associated
     // with a special error condition, then we turn it into a branch,
     // so this method can be called directly from log(). It is of course
@@ -170,8 +179,24 @@ public abstract class AbstractTreeLogger extends TreeLogger {
     return childLogger;
   }
 
+  /**
+   * Clears this logger's MetricMap. If the map was shared with the
+   * parent logger, the parent's map will be unchanged and the new map will
+   * be independent of its parent.
+   */
+  public void resetMetricMap() {
+    metricMap = new MetricMap();
+  }
+
   public final int getBranchedIndex() {
     return indexWithinMyParent;
+  }
+
+  /**
+   * Returns the MetricMap currently associated with this TreeLogger.
+   */
+  public MetricMap getMetricMap() {
+    return metricMap;
   }
 
   public final synchronized TreeLogger.Type getMaxDetail() {
@@ -269,42 +294,12 @@ public abstract class AbstractTreeLogger extends TreeLogger {
   protected abstract AbstractTreeLogger doBranch();
 
   /**
-   * @deprecated This method has been deprecated; override
-   *             {@link #doCommitBranch(AbstractTreeLogger, com.google.gwt.core.ext.TreeLogger.Type, String, Throwable, com.google.gwt.core.ext.TreeLogger.HelpInfo)}
-   *             instead.
-   * 
-   * @param childBeingCommitted
-   * @param type
-   * @param msg
-   * @param caught
-   */
-  @Deprecated
-  protected final void doCommitBranch(AbstractTreeLogger childBeingCommitted,
-      TreeLogger.Type type, String msg, Throwable caught) {
-  }
-
-  /**
    * Derived classes should override this method to actually commit the
    * specified message associated with this the root of this branch.
    */
   protected abstract void doCommitBranch(
       AbstractTreeLogger childBeingCommitted, TreeLogger.Type type, String msg,
       Throwable caught, HelpInfo helpInfo);
-
-  /**
-   * @deprecated This method has been deprecated; override
-   *             {@link #branch(com.google.gwt.core.ext.TreeLogger.Type, String, Throwable, com.google.gwt.core.ext.TreeLogger.HelpInfo)
-   *             instead.
-   * 
-   * @param indexOfLogEntryWithinParentLogger
-   * @param type
-   * @param msg
-   * @param caught
-   */
-  @Deprecated
-  protected final void doLog(int indexOfLogEntryWithinParentLogger,
-      TreeLogger.Type type, String msg, Throwable caught) {
-  }
 
   /**
    * Derived classes should override this method to actually write a log
@@ -314,10 +309,14 @@ public abstract class AbstractTreeLogger extends TreeLogger {
   protected abstract void doLog(int indexOfLogEntryWithinParentLogger,
       TreeLogger.Type type, String msg, Throwable caught, HelpInfo helpInfo);
 
+  public void setAmount(MetricName name, long amount) {
+    metricMap.setAmount(name, amount);
+  }
+
   /**
    * Scans <code>t</code> and its causes for {@link OutOfMemoryError} or
    * {@link StackOverflowError}.
-   * 
+   *
    * @param t a possibly null {@link Throwable}
    * @return true if {@link OutOfMemoryError} or {@link StackOverflowError}
    *         appears anywhere in the cause list or if <code>t</code> is an

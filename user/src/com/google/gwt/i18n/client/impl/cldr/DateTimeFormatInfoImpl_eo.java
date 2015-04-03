@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5806 $
-//  type=root
-//  date=$Date: 2011-05-02 14:42:02 -0400 (Mon, 02 May 2011) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "eo" locale.
@@ -164,19 +159,6 @@ public class DateTimeFormatInfoImpl_eo extends DateTimeFormatInfoImpl {
         "ĵaŭdo",
         "vendredo",
         "sabato"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrow() {
-    return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
     };
   }
 

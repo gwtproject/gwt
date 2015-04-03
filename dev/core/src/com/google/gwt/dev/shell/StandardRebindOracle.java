@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -25,7 +25,6 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.dev.RebindCache;
 import com.google.gwt.dev.cfg.Rule;
-import com.google.gwt.dev.cfg.Rules;
 import com.google.gwt.dev.javac.CachedGeneratorResultImpl;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.jdt.RebindOracle;
@@ -33,6 +32,7 @@ import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -243,9 +243,9 @@ public class StandardRebindOracle implements RebindOracle {
 
   private RebindCache rebindCache = null;
 
-  private final Rules rules;
+  private final Deque<Rule> rules;
 
-  public StandardRebindOracle(PropertyOracle propOracle, Rules rules,
+  public StandardRebindOracle(PropertyOracle propOracle, Deque<Rule> rules,
       StandardGeneratorContext genCtx) {
     this.propOracle = propOracle;
     this.rules = rules;

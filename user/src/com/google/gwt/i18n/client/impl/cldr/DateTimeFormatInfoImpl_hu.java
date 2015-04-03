@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "hu" locale.
@@ -46,12 +41,12 @@ public class DateTimeFormatInfoImpl_hu extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "yyyy.MM.dd.";
+    return "y. MMM d.";
   }
 
   @Override
   public String dateFormatShort() {
-    return "yyyy.MM.dd.";
+    return "y. MM. dd.";
   }
 
   @Override
@@ -107,7 +102,12 @@ public class DateTimeFormatInfoImpl_hu extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthNumDay() {
-    return "M.d.";
+    return "M. d.";
+  }
+
+  @Override
+  public String formatYear() {
+    return "y.";
   }
 
   @Override
@@ -132,12 +132,12 @@ public class DateTimeFormatInfoImpl_hu extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "y.M.";
+    return "y. M.";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "yyyy.MM.dd.";
+    return "y. MM. dd.";
   }
 
   @Override
@@ -175,24 +175,6 @@ public class DateTimeFormatInfoImpl_hu extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] monthsNarrow() {
-    return new String[] {
-        "J",
-        "F",
-        "M",
-        "Á",
-        "M",
-        "J",
-        "J",
-        "Á",
-        "Sz",
-        "O",
-        "N",
-        "D"
-    };
-  }
-
-  @Override
-  public String[] monthsNarrowStandalone() {
     return new String[] {
         "J",
         "F",

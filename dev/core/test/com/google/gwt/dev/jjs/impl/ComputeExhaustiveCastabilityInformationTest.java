@@ -40,15 +40,16 @@ public class ComputeExhaustiveCastabilityInformationTest extends JJSTestBase {
     registerCompilableResources();
 
     // Compiles and gets a reference to the String[] type.
-    JProgram program = compileSnippet("void", "", "", false);
-    ComputeExhaustiveCastabilityInformation.exec(program, false);
+    JProgram program = compileSnippet("void", "", "", false, true);
+    ComputeExhaustiveCastabilityInformation.exec(program);
     JDeclaredType stringType = program.getIndexedType("String");
     JArrayType stringArrayType = program.getTypeArray(stringType);
 
     // Verifies that String[] casts to the exhaustive list of related array types and Object.
     assertSourceCastsToTargets(program, stringArrayType, Sets.newHashSet("java.lang.String[]",
         "java.lang.CharSequence[]", "java.lang.Comparable[]", "java.lang.Object[]",
-        "java.io.Serializable[]", "java.lang.Object"));
+        "java.io.Serializable[]", "java.lang.Object", "java.io.Serializable",
+        "java.lang.Cloneable"));
   }
 
   public void testRegularClassCastabilityIsExhaustive() throws UnableToCompleteException {
@@ -83,14 +84,15 @@ public class ComputeExhaustiveCastabilityInformationTest extends JJSTestBase {
 
   private void assertSourceCastsToTargets(String sourceTypeName,
       Set<String> expectedTargetTypeNames) throws UnableToCompleteException {
-    JProgram program = compileSnippet("void", "", "", false);
-    ComputeExhaustiveCastabilityInformation.exec(program, false);
+    JProgram program = compileSnippet("void", "", "", false, true);
+    ComputeExhaustiveCastabilityInformation.exec(program);
     JDeclaredType sourceType = program.getIndexedType(sourceTypeName);
     assertSourceCastsToTargets(program, sourceType, expectedTargetTypeNames);
   }
 
   private void registerCompilableResources() {
     sourceOracle.addOrReplace(JavaResourceBase.OBJECT);
+    sourceOracle.addOrReplace(JavaResourceBase.CLONEABLE);
     sourceOracle.addOrReplace(JavaResourceBase.STRING);
     sourceOracle.addOrReplace(JavaResourceBase.COMPARABLE);
     sourceOracle.addOrReplace(JavaResourceBase.CHAR_SEQUENCE);

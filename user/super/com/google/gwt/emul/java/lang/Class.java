@@ -16,12 +16,16 @@
 package java.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.impl.DoNotInline;
 
 import java.lang.reflect.Type;
 
 /**
  * Generally unsupported. This class is provided so that the GWT compiler can
  * choke down class literal references.
+ * <p>
+ * NOTE: The code in this class is very sensitive and should keep its dependencies upon other
+ * classes to a minimum.
  *
  * @param <T> the type of the object
  */
@@ -35,23 +39,27 @@ public final class Class<T> implements Type {
   /**
    * Create a Class object for an array.<p>
    *
-   * Arrays are not registered in the prototype table and get the class literal explicitely at
+   * Arrays are not registered in the prototype table and get the class literal explicitly at
    * construction.<p>
    *
-   * @skip
+   * NOTE: this method is accessed through JSNI (Violator pattern) to avoid changing the public API.
    */
-  static <T> Class<T> createForArray(String packageName, String className,
-      JavaScriptObject typeId, Class<?> componentType) {
-    // Initialize here to avoid method inliner
+  private static native <T> Class<T> getClassLiteralForArray(Class<?> leafClass,
+      int dimensions) /*-{
+    var arrayLiterals = leafClass.@Class::arrayLiterals = leafClass.@Class::arrayLiterals || [];
+    return arrayLiterals[dimensions] || (arrayLiterals[dimensions] =
+            leafClass.@Class::createClassLiteralForArray(I)(dimensions));
+  }-*/;
+
+  private <T> Class<T> createClassLiteralForArray(int dimensions) {
     Class<T> clazz = new Class<T>();
-    if (clazz.isClassMetadataEnabled()) {
-      initializeNames(clazz, packageName, className);
-    } else {
-      synthesizeClassNamesFromTypeId(clazz, typeId);
-    }
     clazz.modifiers = ARRAY;
     clazz.superclass = Object.class;
-    clazz.componentType = componentType;
+    if (dimensions > 1) {
+      clazz.componentType = getClassLiteralForArray(this, dimensions - 1);
+    } else {
+      clazz.componentType = this;
+    }
     return clazz;
   }
 
@@ -60,15 +68,10 @@ public final class Class<T> implements Type {
    *
    * @skip
    */
-  static <T> Class<T> createForClass(String packageName, String className,
+  @DoNotInline
+  static <T> Class<T> createForClass(String packageName, String compoundClassName,
       JavaScriptObject typeId, Class<? super T> superclass) {
-    // Initialize here to avoid method inliner
-    Class<T> clazz = new Class<T>();
-    if (clazz.isClassMetadataEnabled()) {
-      initializeNames(clazz, packageName, className);
-    } else {
-      synthesizeClassNamesFromTypeId(clazz, typeId);
-    }
+    Class<T> clazz = createClassObject(packageName, compoundClassName, typeId);
     maybeSetClassLiteral(typeId, clazz);
     clazz.superclass = superclass;
     return clazz;
@@ -79,16 +82,11 @@ public final class Class<T> implements Type {
    *
    * @skip
    */
-  static <T> Class<T> createForEnum(String packageName, String className,
+  @DoNotInline
+  static <T> Class<T> createForEnum(String packageName, String compoundClassName,
       JavaScriptObject typeId, Class<? super T> superclass,
       JavaScriptObject enumConstantsFunc, JavaScriptObject enumValueOfFunc) {
-    // Initialize here to avoid method inliner
-    Class<T> clazz = new Class<T>();
-    if (clazz.isClassMetadataEnabled()) {
-      initializeNames(clazz, packageName, className);
-    } else {
-      synthesizeClassNamesFromTypeId(clazz, typeId);
-    }
+    Class<T> clazz = createClassObject(packageName, compoundClassName, typeId);
     maybeSetClassLiteral(typeId, clazz);
     clazz.modifiers = (enumConstantsFunc != null) ? ENUM : 0;
     clazz.superclass = clazz.enumSuperclass = superclass;
@@ -102,14 +100,9 @@ public final class Class<T> implements Type {
    *
    * @skip
    */
-  static <T> Class<T> createForInterface(String packageName, String className) {
-    // Initialize here to avoid method inliner
-    Class<T> clazz = new Class<T>();
-    if (clazz.isClassMetadataEnabled()) {
-      initializeNames(clazz, packageName, className);
-    } else {
-      synthesizeClassNamesFromTypeId(clazz, null);
-    }
+  @DoNotInline
+  static <T> Class<T> createForInterface(String packageName, String compoundClassName) {
+    Class<T> clazz = createClassObject(packageName, compoundClassName, null);
     clazz.modifiers = INTERFACE;
     return clazz;
   }
@@ -119,15 +112,10 @@ public final class Class<T> implements Type {
    *
    * @skip
    */
-  static Class<?> createForPrimitive(String packageName, String className,
-      String primitiveTypeId) {
-    // Initialize here to avoid method inliner
-    Class<?> clazz = new Class<Object>();
-    if (clazz.isClassMetadataEnabled()) {
-      initializeNames(clazz, packageName, className);
-    } else {
-      synthesizePrimitiveNamesFromTypeId(clazz, primitiveTypeId);
-    }
+  @DoNotInline
+  static Class<?> createForPrimitive(String className, JavaScriptObject primitiveTypeId) {
+    Class<?> clazz = createClassObject("", className, primitiveTypeId);
+    clazz.typeId = primitiveTypeId;
     clazz.modifiers = PRIMITIVE;
     return clazz;
   }
@@ -135,12 +123,13 @@ public final class Class<T> implements Type {
   /**
     * Used by {@link WebModePayloadSink} to create uninitialized instances.
     */
+   @DoNotInline
    static native JavaScriptObject getPrototypeForClass(Class<?> clazz) /*-{
-     var typeId = clazz.@java.lang.Class::typeId;
+     if (clazz.@Class::isPrimitive()()) {
+       return null;
+     }
+     var typeId = clazz.@Class::typeId;
      var prototype = @com.google.gwt.lang.JavaClassHierarchySetupUtil::prototypesByTypeId[typeId];
-     // TODO(rluble): introduce pragma annotation to indicate that this function should not be
-     // inlined.
-     clazz = null; // HACK: prevent pruning via inlining by using param as lvalue
      return prototype;
    }-*/;
 
@@ -153,10 +142,24 @@ public final class Class<T> implements Type {
    * null implies non-instantiable type, with no entries in
    * {@link JavaClassHierarchySetupUtil::prototypesByTypeId}.
    */
-  static native boolean isInstantiable(JavaScriptObject typeId) /*-{
+  private static native boolean isInstantiable(JavaScriptObject typeId) /*-{
     return !!typeId;
   }-*/;
 
+  /**
+   * Creates the class object for a type and initiliazes its fields.
+   */
+  private static <T> Class<T> createClassObject(String packageName, String compoundClassName,
+      JavaScriptObject typeId) {
+    Class<T> clazz = new Class<T>();
+    if (isClassMetadataEnabled()) {
+      clazz.packageName = packageName;
+      clazz.compoundName = compoundClassName;
+    } else {
+      synthesizeClassNamesFromTypeId(clazz, typeId);
+    }
+    return clazz;
+  }
 
   /**
    * Install class literal into prototype.clazz field (if type is instantiable) such that
@@ -167,16 +170,16 @@ public final class Class<T> implements Type {
    * If the prototype for typeId has not yet been created, then install the literal into a
    * placeholder array to differentiate the two cases.
    */
-  static native void maybeSetClassLiteral(JavaScriptObject typeId, Class<?> clazz) /*-{
+  private static native void maybeSetClassLiteral(JavaScriptObject typeId, Class<?> clazz) /*-{
     var proto;
     if (!typeId) {
       // Type is not instantiable, hence not registered in the metadata table.
       return;
     }
-    clazz.@java.lang.Class::typeId = typeId;
+    clazz.@Class::typeId = typeId;
     // Guarantees virtual method won't be pruned by using a JSNI ref
     // This is required because deRPC needs to call it.
-    var prototype  = @java.lang.Class::getPrototypeForClass(Ljava/lang/Class;)(clazz);
+    var prototype  = @Class::getPrototypeForClass(Ljava/lang/Class;)(clazz);
     // A class literal may be referenced prior to an async-loaded vtable setup
     // For example, class literal lives in inital fragment,
     // but type is instantiated in another fragment
@@ -194,37 +197,82 @@ public final class Class<T> implements Type {
   /**
    * Initiliazes {@code clazz} names from metadata.
    * <p>
-   * Only called if metadata is NOT disabled.
+   * Written in JSNI to minimize dependencies (on String.+).
    */
-  static void initializeNames(Class<?> clazz, String packageName,
-      String className) {
-    clazz.typeName = packageName + className;
-    clazz.simpleName = className;
-  }
+  private static native void initializeNames(Class<?> clazz) /*-{
+    if (clazz.@Class::isArray(*)()) {
+      var componentType = clazz.@Class::componentType;
+      if (componentType.@Class::isPrimitive()()) {
+        clazz.@Class::typeName = "[" + componentType.@Class::typeId;
+      } else  if (!componentType.@Class::isArray()()) {
+        clazz.@Class::typeName = "[L" + componentType.@Class::getName()() + ";";
+      } else {
+        clazz.@Class::typeName = "[" + componentType.@Class::getName()();
+      }
+      clazz.@Class::canonicalName = componentType.@Class::getCanonicalName()() + "[]";
+      clazz.@Class::simpleName = componentType.@Class::getSimpleName()() + "[]";
+      return;
+    }
+
+    var packageName = clazz.@Class::packageName;
+    var compoundName = clazz.@Class::compoundName;
+    compoundName =  compoundName.split("/");
+    clazz.@Class::typeName =
+        @Class::join(*)('.', [packageName , @Class::join(*)("$", compoundName)]);
+    clazz.@Class::canonicalName =
+        @Class::join(*)('.', [packageName , @Class::join(*)(".", compoundName)]);
+    clazz.@Class::simpleName = compoundName[compoundName.length - 1];
+  }-*/;
+
+  /**
+   * Joins an array of strings with the specified separator.
+   * <p>
+   * Written in JSNI to minimize dependencies (on String.+).
+   */
+  private static native String join(String separator, JavaScriptObject strings) /*-{
+    var i = 0;
+    while (!strings[i] || strings[i] == "") {
+      i++;
+    }
+    var result = strings[i++];
+    for (; i < strings.length; i++) {
+      if  (!strings[i] || strings[i] == "") {
+        continue;
+      }
+      result += separator + strings[i];
+    }
+    return result;
+  }-*/;
 
   /**
    * Initiliazes {@code clazz} names from typeIds.
    * <p>
    * Only called if metadata IS disabled.
+   * <p>
+   * Written in JSNI to minimize dependencies (on toString() and String.+).
    */
-  static void synthesizeClassNamesFromTypeId(Class<?> clazz, JavaScriptObject typeId) {
-    /*
-     * The initial "" + in the below code is to prevent clazz.hashCode() from
-     * being autoboxed. The class literal creation code is run very early
-     * during application start up, before class Integer has been initialized.
-     */
-    clazz.typeName = "Class$"
-        + (isInstantiable(typeId) ? "S" + typeId : "" + clazz.hashCode());
-    clazz.simpleName = clazz.typeName;
-  }
+  static native void synthesizeClassNamesFromTypeId(Class<?> clazz, JavaScriptObject typeId) /*-{
+     // The initial "" + in the below code is to prevent clazz.getAnonymousId from
+     // being autoboxed. The class literal creation code is run very early
+     // during application start up, before class Integer has been initialized.
+
+    clazz.@Class::typeName = "Class$" +
+        (!!typeId ? "S" + typeId : "" + clazz.@Class::sequentialId);
+    clazz.@Class::canonicalName = clazz.@Class::typeName;
+    clazz.@Class::simpleName = clazz.@Class::typeName;
+  }-*/;
 
   /**
    * Sets the class object for primitives.
+   * <p>
+   * Written in JSNI to minimize dependencies (on (String)+).
    */
-  static void synthesizePrimitiveNamesFromTypeId(Class<?> clazz, String primitiveTypeId) {
-    clazz.typeName = "Class$" + primitiveTypeId;
-    clazz.simpleName = clazz.typeName;
-  }
+  static native void synthesizePrimitiveNamesFromTypeId(Class<?> clazz,
+      JavaScriptObject primitiveTypeId) /*-{
+    clazz.@Class::typeName = "Class$" + primitiveTypeId;
+    clazz.@Class::canonicalName = clazz.@Class::typeName;
+    clazz.@Class::simpleName = clazz.@Class::typeName;
+  }-*/;
 
   JavaScriptObject enumValueOfFunc;
 
@@ -243,7 +291,21 @@ public final class Class<T> implements Type {
 
   private String typeName;
 
-  private int typeId;
+  private String canonicalName;
+
+  private String packageName;
+
+  private String compoundName;
+
+  private JavaScriptObject typeId;
+
+  private JavaScriptObject arrayLiterals;
+
+  // Assign a sequential id to each class literal to avoid calling hashCode which bring Impl as
+  // a dependency.
+  private int sequentialId = nextSequentialId++;
+
+  private static int nextSequentialId = 1;
 
   /**
    * Not publicly instantiable.
@@ -251,6 +313,14 @@ public final class Class<T> implements Type {
    * @skip
    */
   private Class() {
+    // Initialize in constructor to avoid V8 invalidating hidden classes.
+    typeName = null;
+    simpleName = null;
+    packageName = null;
+    compoundName = null;
+    canonicalName = null;
+    typeId = null;
+    arrayLiterals = null;
   }
 
   public boolean desiredAssertionStatus() {
@@ -259,20 +329,34 @@ public final class Class<T> implements Type {
     return false;
   }
 
+  private void ensureNamesAreInitialized() {
+    if (typeName != null) {
+      return;
+    }
+    initializeNames(this);
+  }
+
+  public String getCanonicalName() {
+    ensureNamesAreInitialized();
+    return canonicalName;
+  }
+
   public Class<?> getComponentType() {
     return componentType;
   }
 
   public native T[] getEnumConstants() /*-{
-    return this.@java.lang.Class::enumConstantsFunc
-        && (this.@java.lang.Class::enumConstantsFunc)();
+    return this.@Class::enumConstantsFunc
+        && (this.@Class::enumConstantsFunc)();
   }-*/;
 
   public String getName() {
+    ensureNamesAreInitialized();
     return typeName;
   }
 
   public String getSimpleName() {
+    ensureNamesAreInitialized();
     return simpleName;
   }
 

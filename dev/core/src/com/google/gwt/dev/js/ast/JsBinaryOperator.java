@@ -1,11 +1,11 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -20,10 +20,10 @@ public enum JsBinaryOperator implements JsOperator {
 
   /*
    * Precedence indices from "JavaScript - The Definitive Guide" 4th Edition (page 57)
-   * 
-   * 
+   *
+   *
    * Precedence 15 is for really important things that have their own AST classes.
-   * 
+   *
    * Precedence 14 is for unary operators.
    */
 
@@ -96,26 +96,6 @@ public enum JsBinaryOperator implements JsOperator {
   @Override
   public boolean isLeftAssociative() {
     return (mask & LEFT) != 0;
-  }
-
-  @Override
-  public boolean isPrecedenceLessThan(JsOperator other) {
-    return precedence < other.getPrecedence();
-  }
-
-  @Override
-  public boolean isValidInfix() {
-    return (mask & INFIX) != 0;
-  }
-
-  @Override
-  public boolean isValidPostfix() {
-    return (mask & POSTFIX) != 0;
-  }
-
-  @Override
-  public boolean isValidPrefix() {
-    return (mask & PREFIX) != 0;
   }
 
   @Override

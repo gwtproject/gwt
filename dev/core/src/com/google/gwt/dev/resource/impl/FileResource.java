@@ -15,30 +15,40 @@
  */
 package com.google.gwt.dev.resource.impl;
 
+import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.ConcurrentMap;
 
 /**
- * Represents a resource contained in directory on a file system.
+ * Represents a resource contained in a directory on a file system.
+ * <p>The class is immutable and automatically interned.
  */
 public class FileResource extends AbstractResource {
+  /*
+   * The #equals and #hashCode is locked to work on identities by the base class Resource.
+   * Without interning, it would be impractical to use this class as a key in a map.
+   */
 
-  private final String abstractPathName;
-  private final DirectoryClassPathEntry classPathEntry;
-  private final File file;
+  private static final ConcurrentMap<String, FileResource> canonicalFileResources =
+      new MapMaker().weakValues().makeMap();
 
-  public FileResource(DirectoryClassPathEntry classPathEntry, String abstractPathName, File file) {
-    assert (file.isFile()) : file + " is not a file.";
-    this.classPathEntry = classPathEntry;
-    this.abstractPathName = abstractPathName;
-    this.file = file;
+  public static FileResource of(String abstractPathName, File file) {
+    String key = abstractPathName + "@" + file.getAbsolutePath();
+    FileResource sample = new FileResource(abstractPathName, file);
+    FileResource canonical = canonicalFileResources.putIfAbsent(key, sample);
+    return (canonical == null) ? sample : canonical;
   }
 
-  @Override
-  public DirectoryClassPathEntry getClassPathEntry() {
-    return classPathEntry;
+  private final String abstractPathName;
+  private final File file;
+
+  private FileResource(String abstractPathName, File file) {
+    this.abstractPathName = abstractPathName;
+    this.file = file;
   }
 
   @Override

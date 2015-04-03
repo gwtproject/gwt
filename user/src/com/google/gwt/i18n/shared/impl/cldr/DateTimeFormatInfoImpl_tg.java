@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5806 $
-//  date=$Date: 2011-05-02 14:42:02 -0400 (Mon, 02 May 2011) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "tg" locale.
@@ -32,6 +27,11 @@ public class DateTimeFormatInfoImpl_tg extends DateTimeFormatInfoImpl {
         "пе. чо.",
         "па. чо."
     };
+  }
+
+  @Override
+  public String dateFormatFull() {
+    return "EEEE, y MMMM dd";
   }
 
   @Override
@@ -184,19 +184,6 @@ public class DateTimeFormatInfoImpl_tg extends DateTimeFormatInfoImpl {
         "Панҷшанбе",
         "Ҷумъа",
         "Шанбе"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrow() {
-    return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
     };
   }
 

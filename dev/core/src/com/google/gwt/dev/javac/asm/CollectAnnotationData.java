@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,10 +15,11 @@
  */
 package com.google.gwt.dev.javac.asm;
 
-import com.google.gwt.dev.asm.AnnotationVisitor;
-import com.google.gwt.dev.asm.Opcodes;
 import com.google.gwt.dev.javac.asm.CollectClassData.AnnotationEnum;
 import com.google.gwt.dev.util.StringInterner;
+
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.Opcodes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,7 +79,7 @@ public class CollectAnnotationData extends AnnotationVisitor {
     private final List<Object> values = new ArrayList<Object>();
 
     public MyAnnotationArrayVisitor(Callback<Object> callback) {
-      super(Opcodes.ASM4);
+      super(Opcodes.ASM5);
       this.callback = callback;
     }
 
@@ -122,14 +123,14 @@ public class CollectAnnotationData extends AnnotationVisitor {
 
   /**
    * Generic callback type taking a parameter.
-   * 
+   *
    * @param <T> type of the argument to the callback
    */
   private interface Callback<T> {
 
     /**
      * Invoke the callback.
-     * 
+     *
      * @param value value to pass to the callback.
      */
     void call(T value);
@@ -140,7 +141,7 @@ public class CollectAnnotationData extends AnnotationVisitor {
 
   /**
    * Construct the collector.
-   * 
+   *
    * @param desc class descriptor of the annotation class
    * @param visible true if the annotation is visible at runtime
    */
@@ -150,14 +151,14 @@ public class CollectAnnotationData extends AnnotationVisitor {
 
   /**
    * Construct the collector.
-   * 
+   *
    * @param desc class descriptor of the annotation class
    * @param visible true if the annotation is visible at runtime
    * @param callback callback to be called when the annotation is finished
    */
   CollectAnnotationData(String desc, boolean visible,
       Callback<CollectAnnotationData.AnnotationData> callback) {
-    super(Opcodes.ASM4);
+    super(Opcodes.ASM5);
     annotation = new AnnotationData(desc, visible);
     this.callback = callback;
   }
@@ -192,7 +193,7 @@ public class CollectAnnotationData extends AnnotationVisitor {
 
       /**
        * Called with an array of values.
-       * 
+       *
        * @param value
        */
       @Override

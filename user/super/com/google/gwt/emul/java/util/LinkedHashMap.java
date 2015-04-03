@@ -15,6 +15,12 @@
  */
 package java.util;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalElement;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
+
+import static java.util.ConcurrentModificationDetector.checkStructuralChange;
+import static java.util.ConcurrentModificationDetector.recordLastKnownStructure;
+
 /**
  * Hash table implementation of the Map interface with predictable iteration
  * order. <a
@@ -38,7 +44,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
    * small modifications. Paying a small storage cost only if you use
    * LinkedHashMap and minimizing code size seemed like a better tradeoff
    */
-  private class ChainEntry extends MapEntryImpl<K, V> {
+  private class ChainEntry extends SimpleEntry<K, V> {
     private transient ChainEntry next;
     private transient ChainEntry prev;
 
@@ -48,7 +54,6 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
 
     public ChainEntry(K key, V value) {
       super(key, value);
-      next = prev = null;
     }
 
     /**
@@ -81,7 +86,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
 
   private final class EntrySet extends AbstractSet<Map.Entry<K, V>> {
 
-    private final class EntryIterator implements Iterator<Entry<K, V>> {
+    private final class EntryIterator implements Iterator<Map.Entry<K, V>> {
       // The last entry that was returned from this iterator.
       private ChainEntry last;
 
@@ -90,6 +95,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
 
       public EntryIterator() {
         next = head.next;
+        recordLastKnownStructure(map, this);
       }
 
       public boolean hasNext() {
@@ -97,20 +103,21 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
       }
 
       public Map.Entry<K, V> next() {
-        if (next == head) {
-          throw new NoSuchElementException();
-        }
+        checkStructuralChange(map, this);
+        checkCriticalElement(hasNext());
+
         last = next;
         next = next.next;
         return last;
       }
 
       public void remove() {
-        if (last == null) {
-          throw new IllegalStateException("No current entry");
-        }
+        checkState(last != null);
+        checkStructuralChange(map, this);
+
         last.remove();
         map.remove(last.getKey());
+        recordLastKnownStructure(map, this);
         last = null;
       }
     }
@@ -122,14 +129,8 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean contains(Object o) {
-      if (!(o instanceof Map.Entry)) {
-        return false;
-      }
-      Map.Entry<?, ?> entry = (Map.Entry<?, ?>) o;
-      Object key = entry.getKey();
-      if (LinkedHashMap.this.containsKey(key)) {
-        Object value = LinkedHashMap.this.get(key);
-        return Objects.equals(entry.getValue(), value);
+      if (o instanceof Map.Entry) {
+        return containsEntry((Map.Entry<?, ?>) o);
       }
       return false;
     }
@@ -140,8 +141,18 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
     }
 
     @Override
+    public boolean remove(Object entry) {
+      if (contains(entry)) {
+        Object key = ((Map.Entry<?, ?>) entry).getKey();
+        LinkedHashMap.this.remove(key);
+        return true;
+      }
+      return false;
+    }
+
+    @Override
     public int size() {
-      return map.size();
+      return LinkedHashMap.this.size();
     }
   }
 
@@ -165,35 +176,37 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
    */
   private final transient HashMap<K, ChainEntry> map = new HashMap<K, ChainEntry>();
 
-  {
-    // Initialize the empty linked list.
-    head.prev = head;
-    head.next = head;
-  }
-
   public LinkedHashMap() {
+    resetChainEntries();
   }
 
   public LinkedHashMap(int ignored) {
-    super(ignored);
+    this(ignored, 0);
   }
 
   public LinkedHashMap(int ignored, float alsoIgnored) {
     super(ignored, alsoIgnored);
+    resetChainEntries();
   }
 
   public LinkedHashMap(int ignored, float alsoIgnored, boolean accessOrder) {
     super(ignored, alsoIgnored);
     this.accessOrder = accessOrder;
+    resetChainEntries();
   }
 
   public LinkedHashMap(Map<? extends K, ? extends V> toBeCopied) {
+    resetChainEntries();
     this.putAll(toBeCopied);
   }
 
   @Override
   public void clear() {
     map.clear();
+    resetChainEntries();
+  }
+
+  private void resetChainEntries() {
     head.prev = head;
     head.next = head;
   }
@@ -249,8 +262,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
       }
       return null;
     } else {
-      V oldValue = old.getValue();
-      old.setValue(value);
+      V oldValue = old.setValue(value);
       recordAccess(old);
       return oldValue;
     }
@@ -272,7 +284,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
   }
 
   @SuppressWarnings("unused")
-  protected boolean removeEldestEntry(Entry<K, V> eldest) {
+  protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
     return false;
   }
 

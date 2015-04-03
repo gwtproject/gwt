@@ -33,6 +33,9 @@ import com.google.gwt.core.ext.linker.SymbolData;
 import com.google.gwt.core.ext.linker.SyntheticArtifact;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashMap;
+import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
+import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
+import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapGeneratorV3;
 import com.google.gwt.thirdparty.debugging.sourcemap.SourceMapGeneratorV3.ExtensionMergeAction;
 
@@ -66,36 +69,22 @@ public class SymbolMapsLinker extends AbstractLinker {
      * Operation type performed on script.
      */
     public enum Edit {
-      PREFIX, INSERT, REMOVE;
+      PREFIX, INSERT, REMOVE
     }
 
     private static class EditOperation {
-
-      public static EditOperation insert(int lineNumber, String data) {
-        return new EditOperation(Edit.INSERT, lineNumber, data);
-      }
 
       public static EditOperation prefix(String data) {
         return new EditOperation(Edit.PREFIX, 0, data);
       }
 
-      public static EditOperation remove(int lineNumber) {
-        return new EditOperation(Edit.REMOVE, lineNumber, null);
-      }
-
       Edit op;
-      int lineNumber;
       int numLines;
 
       public EditOperation(
           Edit op, int lineNumber, String data) {
         this.op = op;
-        this.lineNumber = lineNumber;
         this.numLines = countNewLines(data);
-      }
-
-      public int getLineNumber() {
-        return lineNumber;
       }
 
       public int getNumLines() {
@@ -142,10 +131,6 @@ public class SymbolMapsLinker extends AbstractLinker {
       return (strongName + fragment).hashCode();
     }
 
-    public void insertLinesBefore(int position, String lines) {
-      editOperations.add(EditOperation.insert(position, lines));
-    }
-
     public void prefixLines(String lines) {
       editOperations.add(EditOperation.prefix(lines));
     }
@@ -174,11 +159,14 @@ public class SymbolMapsLinker extends AbstractLinker {
     private int fragment;
     private byte[] js;
 
-    public SourceMapArtifact(int permutationId, int fragment, byte[] js) {
+    private final String sourceRoot;
+
+    public SourceMapArtifact(int permutationId, int fragment, byte[] js, String sourceRoot) {
       super(SymbolMapsLinker.class, permutationId + '/' + sourceMapFilenameForFragment(fragment), js);
       this.permutationId = permutationId;
       this.fragment = fragment;
       this.js = js;
+      this.sourceRoot = sourceRoot;
     }
 
     public int getFragment() {
@@ -187,6 +175,14 @@ public class SymbolMapsLinker extends AbstractLinker {
 
     public int getPermutationId() {
       return permutationId;
+    }
+
+    /**
+     * The base URL for Java filenames in the sourcemap.
+     * (We need to reapply this after edits.)
+     */
+    public String getSourceRoot() {
+      return sourceRoot;
     }
 
     public static String sourceMapFilenameForFragment(int fragment) {
@@ -251,6 +247,8 @@ public class SymbolMapsLinker extends AbstractLinker {
       artifacts = new ArtifactSet(artifacts);
       Map<Integer, String> permMap = new HashMap<Integer, String>();
 
+      Event writeSymbolMapsEvent =
+          SpeedTracerLogger.start(CompilerEventType.WRITE_SYMBOL_MAPS);
       ByteArrayOutputStream out = new ByteArrayOutputStream();
       for (CompilationResult result : artifacts.find(CompilationResult.class)) {
 
@@ -264,9 +262,10 @@ public class SymbolMapsLinker extends AbstractLinker {
           }
         }
 
+        permMap.put(result.getPermutationId(), result.getStrongName());
+
         if (makeSymbolMaps) {
           PrintWriter pw = new PrintWriter(out);
-          permMap.put(result.getPermutationId(), result.getStrongName());
           doWriteSymbolMap(logger, result, pw);
           pw.close();
 
@@ -274,8 +273,10 @@ public class SymbolMapsLinker extends AbstractLinker {
           out.reset();
         }
       }
+      writeSymbolMapsEvent.end();
 
-
+      Event writeSourceMapsEvent =
+          SpeedTracerLogger.start(CompilerEventType.WRITE_SOURCE_MAPS);
       for (SourceMapArtifact se : artifacts.find(SourceMapArtifact.class)) {
         // filename is permutation_id/sourceMap<fragmentNumber>.json
         String sourceMapString = Util.readStreamAsString(se.getContents(logger));
@@ -298,6 +299,12 @@ public class SymbolMapsLinker extends AbstractLinker {
           emArt = emitSourceMapString(logger, sourceMapString, partialPath);
         } else {
           SourceMapGeneratorV3 sourceMapGenerator = new SourceMapGeneratorV3();
+
+          if (se.getSourceRoot() != null) {
+            // Reapply source root since mergeMapSection() will not copy it.
+            sourceMapGenerator.setSourceRoot(se.getSourceRoot());
+          }
+
           try {
             int totalPrefixLines = 0;
             for (ScriptFragmentEditsArtifact.EditOperation op : editArtifact.editOperations) {
@@ -323,6 +330,7 @@ public class SymbolMapsLinker extends AbstractLinker {
         artifacts.add(emArt);
         artifacts.remove(se);
       }
+      writeSourceMapsEvent.end();
     }
     return artifacts;
   }

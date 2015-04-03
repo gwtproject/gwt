@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,7 +21,6 @@ import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
@@ -35,6 +34,7 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
 import java.util.IdentityHashMap;
@@ -65,7 +65,15 @@ public class SameParameterValueOptimizer {
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
 
-      if (x.canBePolymorphic() || rescuedMethods.contains(method)) {
+      if (x.canBePolymorphic() || rescuedMethods.contains(method)
+          /*
+           * Don't optimize calls visible to JS callers, because you don't know what
+           * parameter values they'll supply.
+           */
+          || program.isJsTypePrototype(method.getEnclosingType())
+          || program.typeOracle.isJsTypeMethod(method)
+          || program.typeOracle.isJsFunctionMethod(method)
+          || program.typeOracle.isExportedMethod(method)) {
         return;
       }
 
@@ -126,9 +134,11 @@ public class SameParameterValueOptimizer {
 
     @Override
     public boolean visit(JMethod x, Context ctx) {
-      Set<JMethod> overrides = program.typeOracle.getAllOverrides(x);
-      if (!overrides.isEmpty()) {
-        for (JMethod m : overrides) {
+      Set<JMethod> overriddenMethods = x.getOverriddenMethods();
+      if (!overriddenMethods.isEmpty() || program.typeOracle.isJsTypeMethod(x)
+          || program.typeOracle.isJsFunctionMethod(x)
+          || program.typeOracle.isExportedMethod(x)) {
+        for (JMethod m : overriddenMethods) {
           rescuedMethods.add(m);
         }
         rescuedMethods.add(x);
@@ -155,12 +165,14 @@ public class SameParameterValueOptimizer {
   /**
    * Substitute all parameter references with expression.
    */
-  private class SubstituteParameterVisitor extends JModVisitor {
+  private class SubstituteParameterVisitor extends JChangeTrackingVisitor {
     private final CloneExpressionVisitor cloner;
     private final JExpression expression;
     private final JParameter parameter;
 
-    public SubstituteParameterVisitor(JParameter parameter, JExpression expression) {
+    public SubstituteParameterVisitor(JParameter parameter, JExpression expression,
+        OptimizerContext optimizerCtx) {
+      super(optimizerCtx);
       this.parameter = parameter;
       this.expression = expression;
       cloner = new CloneExpressionVisitor();
@@ -176,16 +188,22 @@ public class SameParameterValueOptimizer {
 
   private static final String NAME = SameParameterValueOptimizer.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program) {
+  @VisibleForTesting
+  static OptimizerStats exec(JProgram program) {
+    return exec(program, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
+  }
+
+  public static OptimizerStats exec(JProgram program, OptimizerContext optimizerCtx) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new SameParameterValueOptimizer(program).execImpl(program);
+    OptimizerStats stats = new SameParameterValueOptimizer(program).execImpl(program, optimizerCtx);
+    optimizerCtx.incOptimizationStep();
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
   }
 
   /**
    * Parameter values.
-   * 
+   *
    * If doesn't contain a parameter, then its value is unknown. If contains
    * parameter, and value is null - the parameter's value is not the same across
    * all calls. If value is not null - the parameter's value is the same across
@@ -198,7 +216,7 @@ public class SameParameterValueOptimizer {
   /**
    * These methods should not be tried to optimized due to their polymorphic
    * nature.
-   * 
+   *
    * TODO: support polymorphic calls properly.
    */
   private final Set<JMethod> rescuedMethods = new HashSet<JMethod>();
@@ -207,7 +225,7 @@ public class SameParameterValueOptimizer {
     this.program = program;
   }
 
-  private OptimizerStats execImpl(JNode node) {
+  private OptimizerStats execImpl(JNode node, OptimizerContext optimizerCtx) {
     OptimizerStats stats = new OptimizerStats(NAME);
     AnalysisVisitor analysisVisitor = new AnalysisVisitor();
     analysisVisitor.accept(node);
@@ -220,11 +238,12 @@ public class SameParameterValueOptimizer {
       if (valueLiteral != null) {
         SubstituteParameterVisitor substituteParameterVisitor =
             new SubstituteParameterVisitor(parameter, Simplifier.cast(parameter.getType(),
-                valueLiteral));
+                valueLiteral), optimizerCtx);
         substituteParameterVisitor.accept(parameter.getEnclosingMethod());
         stats.recordModified(substituteParameterVisitor.getNumMods());
       }
     }
+    JavaAstVerifier.assertProgramIsConsistent(program);
     return stats;
   }
 }

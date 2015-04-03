@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * A base class for tests of {@link DataflowAnalyzer} components.
  */
-public abstract class CfgAnalysisTestBase<A extends Assumption<A>> 
+public abstract class CfgAnalysisTestBase<A extends Assumption<A>>
     extends JJSTestBase {
   protected boolean forward = true;
 
@@ -42,7 +42,8 @@ public abstract class CfgAnalysisTestBase<A extends Assumption<A>>
 
   protected AnalysisResult analyzeWithParams(String returnType, String params,
       String... codeSnippet) throws UnableToCompleteException {
-    JProgram program = compileSnippet(returnType, params, Joiner.on("\n").join(codeSnippet), true);
+    JProgram program = compileSnippet(returnType, params, Joiner.on("\n").join(codeSnippet), true,
+        true);
     JMethodBody body = (JMethodBody) findMainMethod(program).getBody();
     Cfg cfgGraph = CfgBuilder.build(program, body.getBlock());
 

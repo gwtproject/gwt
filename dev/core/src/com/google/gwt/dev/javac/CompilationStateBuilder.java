@@ -16,11 +16,11 @@
 package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.JdtCompiler.AdditionalTypeProviderDelegate;
 import com.google.gwt.dev.javac.JdtCompiler.UnitProcessor;
-import com.google.gwt.dev.javac.typemodel.LibraryTypeOracle;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.jjs.CorrelationFactory.DummyCorrelationFactory;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -28,12 +28,14 @@ import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
 import com.google.gwt.dev.js.ast.JsRootScope;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.EventType;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Interner;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
@@ -43,11 +45,13 @@ import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.ImportReference;
 import org.eclipse.jdt.internal.compiler.ast.MethodDeclaration;
-import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
 import org.eclipse.jdt.internal.compiler.lookup.Binding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -80,110 +84,97 @@ public class CompilationStateBuilder {
           List<CompiledClass> compiledClasses) {
         Event event = SpeedTracerLogger.start(DevModeEventType.CSB_PROCESS);
         try {
+          // Collect parameter method names event when the compilation unit has errors.
+
+          List<JDeclaredType> types = ImmutableList.of();
+          final Set<String> jsniDeps = Sets.newHashSet();
+          final Map<String, Binding> jsniRefs = Maps.newHashMap();
+          Map<MethodDeclaration, JsniMethod> jsniMethods = ImmutableMap.of();
+          List<String> apiRefs = ImmutableList.of();
+          MethodArgNamesLookup methodArgs = new MethodArgNamesLookup();
+
           if (!cud.compilationResult().hasErrors()) {
-            // Only collect jsniMethod, artificial rescues, etc if the compilation unit
-            // does not have errors.
-            Map<MethodDeclaration, JsniMethod> jsniMethods =
-                JsniCollector.collectJsniMethods(cud, builder.getSourceMapPath(),
+            // Only collect jsniMethods, etc if the compilation unit does not have errors.
+            jsniMethods =
+                JsniMethodCollector.collectJsniMethods(cud, builder.getSourceMapPath(),
                     builder.getSource(), JsRootScope.INSTANCE, DummyCorrelationFactory.INSTANCE);
 
             JSORestrictionsChecker.check(jsoState, cud);
 
             // JSNI check + collect dependencies.
-            final Set<String> jsniDeps = Sets.newHashSet();
-            final Map<String, Binding> jsniRefs = Maps.newHashMap();
-            JsniChecker.check(cud, cudOriginaImports, jsoState, jsniMethods, jsniRefs,
-                new JsniChecker.TypeResolver() {
-                  @Override
-                  public ReferenceBinding resolveType(String sourceOrBinaryName) {
-                    ReferenceBinding resolveType = compiler.resolveType(sourceOrBinaryName);
-                    if (resolveType != null) {
-                      jsniDeps.add(String.valueOf(resolveType.qualifiedSourceName()));
-                    }
-                    return resolveType;
-                  }
-                });
+            JsniReferenceResolver
+                .resolve(cud, cudOriginaImports, jsniMethods, jsniRefs,
+                    new JsniReferenceResolver.TypeResolver() {
+                      @Override
+                      public ReferenceBinding resolveType(String sourceOrBinaryName) {
+                        ReferenceBinding resolveType = compiler.resolveType(sourceOrBinaryName);
+                        if (resolveType != null) {
+                          jsniDeps.add(String.valueOf(resolveType.qualifiedSourceName()));
+                        }
+                        return resolveType;
+                      }
+                    });
 
-            final Map<TypeDeclaration, Binding[]> artificialRescues = Maps.newHashMap();
-            ArtificialRescueChecker.check(cud, builder.isGenerated(), artificialRescues);
-            if (compilerContext.shouldCompileMonolithic()) {
-              // GWT drives JDT in a way that allows missing references in the source to be
-              // resolved to precompiled bytecode on disk (see INameEnvironment). This is
-              // done so that annotations can be supplied in bytecode form only. But since no
-              // AST is available for these types it creates the danger that some functional
-              // class (not just an annotation) gets filled in but is missing AST. This would
-              // cause later compiler stages to fail.
-              //
-              // Library compilation needs to ignore this check since it is expected behavior
-              // for the source being compiled in a library to make references to other types
-              // which are only available as bytecode coming out of dependency libraries.
-              //
-              // But if the referenced bytecode did not come from a dependency library but
-              // instead was free floating in the classpath, then there is no guarantee that
-              // AST for it was ever seen and translated to JS anywhere in the dependency tree.
-              // This would be a mistake.
-              //
-              // TODO(stalcup): add a more specific check for library compiles such that binary
-              // types can be referenced but only if they are an Annotation or if the binary
-              // type comes from a dependency library.
-              BinaryTypeReferenceRestrictionsChecker.check(cud);
-            }
+            // GWT drives JDT in a way that allows missing references in the source to be
+            // resolved to precompiled bytecode on disk (see INameEnvironment). This is
+            // done so that annotations can be supplied in bytecode form only. But since no
+            // AST is available for these types it creates the danger that some functional
+            // class (not just an annotation) gets filled in but is missing AST. This would
+            // cause later compiler stages to fail.
+            BinaryTypeReferenceRestrictionsChecker.check(cud);
 
-            MethodArgNamesLookup methodArgs = MethodParamCollector.collect(cud,
-                builder.getSourceMapPath());
-
-            final Interner<String> interner = StringInterner.get();
-            String packageName = interner.intern(Shared.getPackageName(builder.getTypeName()));
-
-            List<String> unresolvedSimple = Lists.newArrayList();
-            for (char[] simpleRef : cud.compilationResult().simpleNameReferences) {
-              unresolvedSimple.add(interner.intern(String.valueOf(simpleRef)));
-            }
-
-            List<String> unresolvedQualified = Lists.newArrayList();
-            for (char[][] qualifiedRef : cud.compilationResult().qualifiedReferences) {
-              unresolvedQualified.add(interner.intern(CharOperation.toString(qualifiedRef)));
-            }
-            for (String jsniDep : jsniDeps) {
-              unresolvedQualified.add(interner.intern(jsniDep));
-            }
-            List<String> apiRefs = compiler.collectApiRefs(cud);
-            for (int i = 0; i < apiRefs.size(); ++i) {
-              apiRefs.set(i, interner.intern(apiRefs.get(i)));
-            }
-
-            Dependencies dependencies =
-                new Dependencies(packageName, unresolvedQualified, unresolvedSimple, apiRefs);
-
-            List<JDeclaredType> types = ImmutableList.of();
             if (!cud.compilationResult().hasErrors()) {
-              // The above checks might have recorded errors.
+              // The above checks might have recorded errors; so we need to check here again.
               // So only construct the GWT AST if no JDT errors and no errors from our checks.
-              types = astBuilder.process(cud, builder.getSourceMapPath(), artificialRescues,
-                  jsniMethods, jsniRefs);
+              types = GwtAstBuilder.process(cud, builder.getSourceMapPath(), jsniMethods, jsniRefs,
+                  compilerContext);
             }
 
-            for (CompiledClass cc : compiledClasses) {
-              allValidClasses.put(cc.getSourceName(), cc);
-            }
-            builder
-                .setTypes(types)
-                .setDependencies(dependencies)
-                .setJsniMethods(jsniMethods.values())
-                .setMethodArgs(methodArgs)
-                .setClasses(compiledClasses)
-                .setProblems(cud.compilationResult().getProblems());
-          } else {
-            // Compilation unit already has errors from JDT, make an empty builder so that the
-            // error state is retained and can be reported later.
-            builder
-                .setTypes(Collections.<JDeclaredType>emptyList())
-                .setDependencies(new Dependencies())
-                .setJsniMethods(Collections.<JsniMethod>emptyList())
-                .setMethodArgs(new MethodArgNamesLookup())
-                .setClasses(compiledClasses)
-                .setProblems(cud.compilationResult().getProblems());
+            // Only run this pass if JDT was able to compile the unit with no errors, otherwise
+            // the JDT AST traversal might throw exceptions.
+            methodArgs = MethodParamCollector.collect(cud, builder.getSourceMapPath());
           }
+          apiRefs = compiler.collectApiRefs(cud);
+
+          final Interner<String> interner = StringInterner.get();
+          String packageName = interner.intern(Shared.getPackageName(builder.getTypeName()));
+
+          List<String> unresolvedSimple = Lists.newArrayList();
+          for (char[] simpleRef : cud.compilationResult().simpleNameReferences) {
+            unresolvedSimple.add(interner.intern(String.valueOf(simpleRef)));
+          }
+
+          List<String> unresolvedQualified = Lists.newArrayList();
+          for (char[][] qualifiedRef : cud.compilationResult().qualifiedReferences) {
+            unresolvedQualified.add(interner.intern(CharOperation.toString(qualifiedRef)));
+          }
+          for (String jsniDep : jsniDeps) {
+            unresolvedQualified.add(interner.intern(jsniDep));
+          }
+          for (int i = 0; i < apiRefs.size(); ++i) {
+            apiRefs.set(i, interner.intern(apiRefs.get(i)));
+          }
+
+          // Dependencies need to be included even when the {@code cud} has errors as the unit might
+          // be saved as a cached unit and its dependencies might be used to further invalidate
+          // other units. See {@link
+          // CompilationStateBuilder#removeInvalidCachedUnitsAndRescheduleCorrespondingBuilders}.
+          Dependencies dependencies =
+              new Dependencies(packageName, unresolvedQualified, unresolvedSimple, apiRefs);
+
+          for (CompiledClass cc : compiledClasses) {
+            allValidClasses.put(cc.getSourceName(), cc);
+          }
+
+          // Even when compilation units have errors, return a consistent builder.
+          builder
+              .setTypes(types)
+              .setDependencies(dependencies)
+              .setJsniMethods(jsniMethods.values())
+              .setMethodArgs(methodArgs)
+              .setClasses(compiledClasses)
+              .setProblems(cud.compilationResult().getProblems());
+
           buildQueue.add(builder);
         } finally {
           event.end();
@@ -197,8 +188,6 @@ public class CompilationStateBuilder {
      * units, to make sure they can be recompiled if necessary.
      */
     private final Map<String, CompiledClass> allValidClasses = Maps.newHashMap();
-
-    private final GwtAstBuilder astBuilder = new GwtAstBuilder();
 
     private transient LinkedBlockingQueue<CompilationUnitBuilder> buildQueue;
 
@@ -232,10 +221,12 @@ public class CompilationStateBuilder {
      * UnableToCompleteException.
      */
     public Collection<CompilationUnit> addGeneratedTypes(TreeLogger logger,
-        Collection<GeneratedUnit> generatedUnits) throws UnableToCompleteException {
+        Collection<GeneratedUnit> generatedUnits, CompilationState compilationState)
+        throws UnableToCompleteException {
       Event event = SpeedTracerLogger.start(DevModeEventType.CSB_ADD_GENERATED_TYPES);
       try {
-        return doBuildGeneratedTypes(logger, compilerContext, generatedUnits, this);
+        return doBuildGeneratedTypes(logger, compilerContext, generatedUnits, compilationState,
+            this);
       } finally {
         event.end();
       }
@@ -361,49 +352,7 @@ public class CompilationStateBuilder {
           unit.getDependencies().resolve(allValidClasses);
         }
 
-        /*
-         * Invalidate any cached units with invalid refs.
-         */
-        Collection<CompilationUnit> invalidatedUnits = Lists.newArrayList();
-        for (Iterator<Entry<CompilationUnitBuilder, CompilationUnit>> it =
-            cachedUnits.entrySet().iterator(); it.hasNext();) {
-          Entry<CompilationUnitBuilder, CompilationUnit> entry = it.next();
-          CompilationUnit unit = entry.getValue();
-          boolean isValid = unit.getDependencies().validate(logger, allValidClasses);
-          if (isValid && unit.isError()) {
-            // See if the unit has classes that can't provide a
-            // NameEnvironmentAnswer
-            for (CompiledClass cc : unit.getCompiledClasses()) {
-              try {
-                cc.getNameEnvironmentAnswer();
-              } catch (ClassFormatException ex) {
-                isValid = false;
-                break;
-              }
-            }
-          }
-          if (!isValid) {
-            if (logger.isLoggable(TreeLogger.TRACE)) {
-              logger.log(TreeLogger.TRACE, "Invalid Unit: " + unit.getTypeName());
-            }
-            invalidatedUnits.add(unit);
-            builders.add(entry.getKey());
-            it.remove();
-          }
-        }
-
-        if (invalidatedUnits.size() > 0) {
-          if (logger.isLoggable(TreeLogger.TRACE)) {
-            logger.log(TreeLogger.TRACE, "Invalid units found: " + invalidatedUnits.size());
-          }
-        }
-
-        // Any units we invalidated must now be removed from the valid classes.
-        for (CompilationUnit unit : invalidatedUnits) {
-          for (CompiledClass cc : unit.getCompiledClasses()) {
-            allValidClasses.remove(cc.getSourceName());
-          }
-        }
+        removeInvalidCachedUnitsAndRescheduleCorrespondingBuilders(logger, builders, cachedUnits);
       } while (builders.size() > 0);
 
       for (CompilationUnit unit : resultUnits) {
@@ -417,46 +366,92 @@ public class CompilationStateBuilder {
       // stale cache files.
       unitCache.cleanup(logger);
 
-      // Sort, then report all errors (re-report for cached units).
-      Collections.sort(resultUnits, CompilationUnit.COMPARATOR);
-      logger = logger.branch(TreeLogger.DEBUG, "Validating units:");
-      int errorCount = 0;
-      for (CompilationUnit unit : resultUnits) {
-        if (CompilationProblemReporter.reportErrors(logger, unit, suppressErrors)) {
-          errorCount++;
-        }
+      // Report warnings.
+      Type logLevelForWarnings = suppressErrors ? TreeLogger.DEBUG : TreeLogger.WARN;
+      int warningCount =
+          CompilationProblemReporter.logWarnings(logger, logLevelForWarnings, resultUnits);
+      if (warningCount > 0 && !logger.isLoggable(logLevelForWarnings)) {
+        logger.log(TreeLogger.INFO, "Ignored " + warningCount + " unit"
+            + (warningCount > 1 ? "s" : "") + " with compilation errors in first pass.\n"
+            + "Compile with -strict or with -logLevel set to DEBUG or WARN to see all errors.");
       }
-      if (suppressErrors && errorCount > 0 && !logger.isLoggable(TreeLogger.TRACE)
+
+      // Index errors so that error chains can be reported.
+      CompilationProblemReporter.indexErrors(compilerContext.getCompilationErrorsIndex(),
+          resultUnits);
+
+      // Report error chains and hints.
+      Type logLevelForErrors = suppressErrors ? TreeLogger.TRACE : TreeLogger.ERROR;
+      int errorCount = CompilationProblemReporter.logErrorTrace(logger, logLevelForErrors,
+          compilerContext, resultUnits, false);
+      if (errorCount > 0 && !logger.isLoggable(logLevelForErrors)
           && logger.isLoggable(TreeLogger.INFO)) {
         logger.log(TreeLogger.INFO, "Ignored " + errorCount + " unit" + (errorCount > 1 ? "s" : "")
             + " with compilation errors in first pass.\n"
             + "Compile with -strict or with -logLevel set to TRACE or DEBUG to see all errors.");
       }
+
+      // Sort units to ensure stable output.
+      Collections.sort(resultUnits, CompilationUnit.COMPARATOR);
+
       return resultUnits;
+    }
+
+    /**
+     * Removes cached units that fail validation with the current set of valid classes; also
+     * add the builder of the invalidated unit back for retry later.
+     */
+    private void removeInvalidCachedUnitsAndRescheduleCorrespondingBuilders(TreeLogger logger,
+        Collection<CompilationUnitBuilder> builders,
+        Map<CompilationUnitBuilder, CompilationUnit> cachedUnits) {
+
+      /*
+       * Invalidate any cached units with invalid refs.
+       */
+      Collection<CompilationUnit> invalidatedUnits = Lists.newArrayList();
+      for (Iterator<Entry<CompilationUnitBuilder, CompilationUnit>> it =
+          cachedUnits.entrySet().iterator(); it.hasNext();) {
+        Entry<CompilationUnitBuilder, CompilationUnit> entry = it.next();
+        CompilationUnit unit = entry.getValue();
+        boolean isValid = unit.getDependencies().validate(logger, allValidClasses);
+        if (isValid && unit.isError()) {
+          // See if the unit has classes that can't provide a
+          // NameEnvironmentAnswer
+          for (CompiledClass cc : unit.getCompiledClasses()) {
+            try {
+              cc.getNameEnvironmentAnswer();
+            } catch (ClassFormatException ex) {
+              isValid = false;
+              break;
+            }
+          }
+        }
+        if (!isValid) {
+          if (logger.isLoggable(TreeLogger.TRACE)) {
+            logger.log(TreeLogger.TRACE, "Invalid Unit: " + unit.getTypeName());
+          }
+          invalidatedUnits.add(unit);
+          builders.add(entry.getKey());
+          it.remove();
+        }
+      }
+
+      if (invalidatedUnits.size() > 0) {
+        if (logger.isLoggable(TreeLogger.TRACE)) {
+          logger.log(TreeLogger.TRACE, "Invalid units found: " + invalidatedUnits.size());
+        }
+      }
+
+      // Any units we invalidated must now be removed from the valid classes.
+      for (CompilationUnit unit : invalidatedUnits) {
+        for (CompiledClass cc : unit.getCompiledClasses()) {
+          allValidClasses.remove(cc.getSourceName());
+        }
+      }
     }
   }
 
   private static final CompilationStateBuilder instance = new CompilationStateBuilder();
-
-  /**
-   * Use previously compiled {@link CompilationUnit}s to pre-populate the unit cache.
-   */
-  public static void addArchive(
-      CompilerContext compilerContext, CompilationUnitArchive compilationUnitArchive) {
-    UnitCache unitCache = compilerContext.getUnitCache();
-    for (CachedCompilationUnit archivedUnit : compilationUnitArchive.getUnits().values()) {
-      if (archivedUnit.getTypesSerializedVersion() != GwtAstBuilder.getSerializationVersion()) {
-        continue;
-      }
-      CompilationUnit cachedCompilationUnit = unitCache.find(archivedUnit.getResourcePath());
-      // A previously cached unit might be from the persistent cache or another
-      // archive.
-      if (cachedCompilationUnit == null
-          || cachedCompilationUnit.getLastModified() < archivedUnit.getLastModified()) {
-        unitCache.addArchivedUnit(archivedUnit);
-      }
-    }
-  }
 
   /**
    * Compiles the given source files and adds them to the CompilationState. See
@@ -487,10 +482,6 @@ public class CompilationStateBuilder {
     }
   }
 
-  public static CompilationStateBuilder get() {
-    return instance;
-  }
-
   /**
    * Build a new compilation state from a source oracle. Allow the caller to
    * specify a compiler delegate that will handle undefined names.
@@ -502,6 +493,7 @@ public class CompilationStateBuilder {
       AdditionalTypeProviderDelegate compilerDelegate)
     throws UnableToCompleteException {
     UnitCache unitCache = compilerContext.getUnitCache();
+    assert unitCache != null : "CompilerContext should always contain a unit cache.";
 
     // Units we definitely want to build.
     List<CompilationUnitBuilder> builders = Lists.newArrayList();
@@ -517,6 +509,11 @@ public class CompilationStateBuilder {
       CompilationUnitBuilder builder = CompilationUnitBuilder.create(resource);
 
       CompilationUnit cachedUnit = unitCache.find(resource.getPathPrefix() + resource.getPath());
+
+      if (cachedUnit != null && cachedUnit.getLastModified() == resource.getLastModified()) {
+        // As verification is costly, this only runs the check when assertions are enabled.
+        assert verifyContentId(logger, resource, cachedUnit);
+      }
 
       // Try to rescue cached units from previous sessions where a jar has been
       // recompiled.
@@ -538,29 +535,57 @@ public class CompilationStateBuilder {
         continue;
       }
       builders.add(builder);
+      compilerContext.getMinimalRebuildCache().addSourceCompilationUnitName(
+          builder.getTypeName());
     }
+    int cachedSourceCount = cachedUnits.size();
+    int sourceCount = resources.size();
     if (logger.isLoggable(TreeLogger.TRACE)) {
-      logger.log(TreeLogger.TRACE, "Found " + cachedUnits.size() + " cached/archived units.  Used "
-          + cachedUnits.size() + " / " + resources.size() + " units from cache.");
+      logger.log(TreeLogger.TRACE, "Found " + cachedSourceCount + " cached/archived units.  Used "
+          + cachedSourceCount + " / " + sourceCount + " units from cache.");
     }
 
     Collection<CompilationUnit> resultUnits = compileMoreLater.compile(
         logger, compilerContext, builders, cachedUnits,
         CompilerEventType.JDT_COMPILER_CSB_FROM_ORACLE);
 
-    boolean compileMonolithic = compilerContext.shouldCompileMonolithic();
-    TypeOracle typeOracle = null;
-    CompilationUnitTypeOracleUpdater typeOracleUpdater = null;
-    if (compileMonolithic) {
-      typeOracle = new TypeOracle();
-      typeOracleUpdater = new CompilationUnitTypeOracleUpdater(typeOracle);
-    } else {
-      typeOracle = new LibraryTypeOracle(compilerContext);
-      typeOracleUpdater = ((LibraryTypeOracle) typeOracle).getTypeOracleUpdater();
-    }
+    TypeOracle typeOracle = new TypeOracle();
+    CompilationUnitTypeOracleUpdater typeOracleUpdater =
+        new CompilationUnitTypeOracleUpdater(typeOracle);
 
-    return new CompilationState(logger, compilerContext, typeOracle, typeOracleUpdater,
-        resultUnits, compileMoreLater);
+    CompilationState compilationState = new CompilationState(logger, compilerContext, typeOracle,
+        typeOracleUpdater, resultUnits, compileMoreLater);
+    compilationState.incrementStaticSourceCount(sourceCount);
+    compilationState.incrementCachedStaticSourceCount(cachedSourceCount);
+    return compilationState;
+  }
+
+  private boolean verifyContentId(TreeLogger logger, Resource resource, CompilationUnit cachedUnit) {
+    if (!cachedUnit.getContentId().equals(getResourceContentId(resource))) {
+      logger.log(TreeLogger.WARN, "Modification date hasn't changed but contentId has changed for "
+          + resource.getLocation());
+    }
+    return true;
+  }
+
+  private ContentId getResourceContentId(Resource resource) {
+    ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
+    try {
+      InputStream in = resource.openContents();
+      /**
+       * In most cases openContents() will throw an exception, however in the case of a
+       * ZipFileResource it might return null causing an NPE in Util.copyNoClose(), see issue 4359.
+       */
+      if (in == null) {
+        throw new RuntimeException("Unexpected error reading resource '" + resource + "'");
+      }
+      // TODO: deprecate com.google.gwt.dev.util.Util and use Guava.
+      Util.copy(in, out);
+    } catch (IOException e) {
+      throw new RuntimeException("Unexpected error reading resource '" + resource + "'", e);
+    }
+    byte[] content = out.toByteArray();
+    return new ContentId(Shared.getTypeName(resource), Util.computeStrongName(content));
   }
 
   public CompilationState doBuildFrom(
@@ -576,12 +601,12 @@ public class CompilationStateBuilder {
    */
   synchronized Collection<CompilationUnit> doBuildGeneratedTypes(TreeLogger logger,
       CompilerContext compilerContext, Collection<GeneratedUnit> generatedUnits,
-      CompileMoreLater compileMoreLater) throws UnableToCompleteException {
+      CompilationState compilationState, CompileMoreLater compileMoreLater)
+      throws UnableToCompleteException {
     UnitCache unitCache = compilerContext.getUnitCache();
 
     // Units we definitely want to build.
     List<CompilationUnitBuilder> builders = Lists.newArrayList();
-
     // Units we don't want to rebuild unless we have to.
     Map<CompilationUnitBuilder, CompilationUnit> cachedUnits = Maps.newIdentityHashMap();
 
@@ -592,6 +617,7 @@ public class CompilationStateBuilder {
 
       // Look for units previously compiled
       CompilationUnit cachedUnit = unitCache.find(builder.getContentId());
+      // Keep track of the names of units that are new or are known to have changed.
       if (cachedUnit != null) {
         // Recompile generated units with errors so source can be dumped.
         if (!cachedUnit.isError()) {
@@ -601,7 +627,14 @@ public class CompilationStateBuilder {
         }
       }
       builders.add(builder);
+      compilerContext.getMinimalRebuildCache().addSourceCompilationUnitName(
+          builder.getTypeName());
     }
+    if (compilerContext.getOptions().isIncrementalCompileEnabled()) {
+      compilerContext.getMinimalRebuildCache().recordGeneratedUnits(generatedUnits);
+    }
+    compilationState.incrementGeneratedSourceCount(builders.size() + cachedUnits.size());
+    compilationState.incrementCachedGeneratedSourceCount(cachedUnits.size());
     return compileMoreLater.compile(logger, compilerContext, builders,
         cachedUnits, CompilerEventType.JDT_COMPILER_CSB_GENERATED);
   }

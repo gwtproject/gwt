@@ -101,7 +101,7 @@ class JsonTokenizer {
   }
 
   String nextString(int startChar) throws JsonException {
-    final StringBuffer buffer = new StringBuffer();
+    final StringBuilder buffer = new StringBuilder();
     int c = next();
     assert c == '"' || (lenient && c == '\'');
     while (true) {
@@ -147,7 +147,7 @@ class JsonTokenizer {
   }
 
   String nextUntilOneOf(String chars)  {
-    final StringBuffer buffer = new StringBuffer();
+    final StringBuilder buffer = new StringBuilder();
     int c = next();
     while (c != INVALID_CHAR) {
       if (Character.isSpace((char) c) || chars.indexOf((char) c) >= 0) {
@@ -187,7 +187,7 @@ class JsonTokenizer {
            return array;
          default:
            back(c);
-           array.set(array.length(), nextValue());
+           array.set(array.length(), (JsonValue)nextValue());
            final int d = nextNonWhitespace();
            switch (d) {
              case ']':
@@ -226,7 +226,7 @@ class JsonTokenizer {
                 "Invalid object: expecting \":\"");
           }
           // TODO(knorton): Make sure this key is not already set.
-          object.put(key, nextValue());
+          object.put(key, (JsonValue)nextValue());
           switch (nextNonWhitespace()) {
             case ',':
               break;
@@ -242,7 +242,7 @@ class JsonTokenizer {
         default:
           if (lenient && (Character.isDigit((char) c) || Character.isLetterOrDigit((char) c)))
         {
-          StringBuffer keyBuffer = new StringBuffer();
+          StringBuilder keyBuffer = new StringBuilder();
           keyBuffer.append(c);
           while (true) {
             c = next();
@@ -258,7 +258,7 @@ class JsonTokenizer {
                 "Invalid object: expecting \":\"");
           }
           // TODO(knorton): Make sure this key is not already set.
-          object.put(keyBuffer.toString(), nextValue());
+          object.put(keyBuffer.toString(), (JsonValue)nextValue());
           switch (nextNonWhitespace()) {
             case ',':
               break;

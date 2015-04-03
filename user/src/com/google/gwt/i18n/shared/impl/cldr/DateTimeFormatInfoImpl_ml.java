@@ -14,25 +14,12 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "ml" locale.
  */
 public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
-
-  @Override
-  public String[] ampms() {
-    return new String[] {
-        "am",
-        "pm"
-    };
-  }
 
   @Override
   public String dateFormatFull() {
@@ -58,7 +45,7 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
   public String[] erasFull() {
     return new String[] {
         "ക്രിസ്തുവിനു് മുമ്പ്‌",
-        "ക്രിസ്തുവിന് പിന്‍പ്"
+        "ക്രിസ്തുവിന് പിൻപ്"
     };
   }
 
@@ -66,7 +53,7 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
   public String[] erasShort() {
     return new String[] {
         "ക്രി.മൂ",
-        "ക്രി.പി."
+        "എഡി"
     };
   }
 
@@ -76,13 +63,8 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthFullWeekdayDay() {
-    return "MMMM d, EEEE";
-  }
-
-  @Override
   public String formatMonthNumDay() {
-    return "d-M";
+    return "d/M";
   }
 
   @Override
@@ -101,35 +83,20 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthWeekdayDay() {
-    return "y MMM d, EEE";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "yyyy QQQQ";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "yyyy Q";
-  }
-
-  @Override
   public String[] monthsFull() {
     return new String[] {
         "ജനുവരി",
         "ഫെബ്രുവരി",
-        "മാര്‍ച്ച്",
-        "ഏപ്രില്‍",
+        "മാർച്ച്",
+        "ഏപ്രിൽ",
         "മേയ്",
-        "ജൂണ്‍",
+        "ജൂൺ",
         "ജൂലൈ",
         "ആഗസ്റ്റ്",
-        "സെപ്റ്റംബര്‍",
-        "ഒക്ടോബര്‍",
-        "നവംബര്‍",
-        "ഡിസംബര്‍"
+        "സെപ്റ്റംബർ",
+        "ഒക്‌ടോബർ",
+        "നവംബർ",
+        "ഡിസംബർ"
     };
   }
 
@@ -156,10 +123,10 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
     return new String[] {
         "ജനു",
         "ഫെബ്രു",
-        "മാര്‍",
+        "മാർ",
         "ഏപ്രി",
         "മേയ്",
-        "ജൂണ്‍",
+        "ജൂൺ",
         "ജൂലൈ",
         "ഓഗ",
         "സെപ്റ്റം",
@@ -171,6 +138,16 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] quartersFull() {
+    return new String[] {
+        "ഒന്നാം പാദം",
+        "രണ്ടാം പാദം",
+        "മൂന്നാം പാദം",
+        "നാലാം പാദം"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
     return new String[] {
         "ഒന്നാം പാദം",
         "രണ്ടാം പാദം",
@@ -202,13 +179,26 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysFull() {
     return new String[] {
-        "ഞായറാഴ്ച",
-        "തിങ്കളാഴ്ച",
+        "ഞായറാഴ്‌ച",
+        "തിങ്കളാഴ്‌ച",
         "ചൊവ്വാഴ്ച",
-        "ബുധനാഴ്ച",
-        "വ്യാഴാഴ്ച",
-        "വെള്ളിയാഴ്ച",
-        "ശനിയാഴ്ച"
+        "ബുധനാഴ്‌ച",
+        "വ്യാഴാഴ്‌ച",
+        "വെള്ളിയാഴ്‌ച",
+        "ശനിയാഴ്‌ച"
+    };
+  }
+
+  @Override
+  public String[] weekdaysFullStandalone() {
+    return new String[] {
+        "ഞായറാഴ്‌ച",
+        "തിങ്കളാഴ്‌ച",
+        "ചൊവ്വാഴ്‌ച",
+        "ബുധനാഴ്‌ച",
+        "വ്യാഴാഴ്‌ച",
+        "വെള്ളിയാഴ്‌ച",
+        "ശനിയാഴ്‌ച"
     };
   }
 
@@ -228,10 +218,10 @@ public class DateTimeFormatInfoImpl_ml extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShort() {
     return new String[] {
-        "ഞായര്‍",
-        "തിങ്കള്‍",
+        "ഞായർ",
+        "തിങ്കൾ",
         "ചൊവ്വ",
-        "ബുധന്‍",
+        "ബുധൻ",
         "വ്യാഴം",
         "വെള്ളി",
         "ശനി"

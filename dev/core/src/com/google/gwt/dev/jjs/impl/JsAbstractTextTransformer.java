@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,11 +17,9 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.core.ext.linker.StatementRanges;
 import com.google.gwt.core.ext.linker.impl.StandardStatementRanges;
-import com.google.gwt.core.ext.soyc.Range;
-import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.JsSourceMap;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Base class for transforming program text.
@@ -29,19 +27,19 @@ import java.util.Map;
 public abstract class JsAbstractTextTransformer {
 
   protected String js;
-  
+
   protected StatementRanges originalStatementRanges;
 
   protected StatementRanges statementRanges;
-  
-  protected Map<Range, SourceInfo> sourceInfoMap;
+
+  protected JsSourceMap sourceInfoMap;
 
   public JsAbstractTextTransformer(JsAbstractTextTransformer xformer) {
     this(xformer.getJs(), xformer.getStatementRanges(), xformer.getSourceInfoMap());
   }
 
-  public JsAbstractTextTransformer(String js, StatementRanges statementRanges, 
-      Map<Range, SourceInfo> sourceInfoMap) {
+  public JsAbstractTextTransformer(String js, StatementRanges statementRanges,
+      JsSourceMap sourceInfoMap) {
     this.js = js;
     this.statementRanges = statementRanges;
     this.originalStatementRanges = statementRanges;
@@ -53,8 +51,8 @@ public abstract class JsAbstractTextTransformer {
   public String getJs() {
     return js;
   }
-  
-  public Map<Range, SourceInfo> getSourceInfoMap() {
+
+  public JsSourceMap getSourceInfoMap() {
     return sourceInfoMap;
   }
 
@@ -76,7 +74,7 @@ public abstract class JsAbstractTextTransformer {
   /**
    * Called if any operations need to be performed before all statements have
    * been processed.
-   * 
+   *
    * @param newJs
    * @param starts
    * @param ends
@@ -92,7 +90,7 @@ public abstract class JsAbstractTextTransformer {
   /**
    * Called if any operations need to be performed after all statements have
    * been processed.
-   * 
+   *
    * @param newJs
    * @param starts
    * @param ends
@@ -124,18 +122,18 @@ public abstract class JsAbstractTextTransformer {
 
     assert starts.size() == ends.size() : "Size mismatch between start and"
         + " end statement ranges.";
-    assert starts.get(0) == 0 && ends.get(ends.size() - 1) == newJs.length() : 
+    assert starts.get(0) == 0 && ends.get(ends.size() - 1) == newJs.length() :
         "statement ranges don't cover entire JS output string.";
 
     js = newJs.toString();
     statementRanges = new StandardStatementRanges(starts, ends);
     updateSourceInfoMap();
   }
-  
+
   /**
-   * Update the expression ranges in the SourceInfo map after the 
+   * Update the expression ranges in the SourceInfo map after the
    * transformer has manipulated the statements.
    */
   protected abstract void updateSourceInfoMap();
-  
+
 }

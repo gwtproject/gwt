@@ -15,12 +15,20 @@
  */
 package com.google.gwt.uibinder.rebind.model;
 
+import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.impl.ResourceLocatorImpl;
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.resources.css.ExtractClassNamesVisitor;
 import com.google.gwt.resources.css.GenerateCssAst;
 import com.google.gwt.resources.css.ast.CssStylesheet;
 import com.google.gwt.resources.ext.ResourceGeneratorUtil;
+import com.google.gwt.resources.gss.ClassNamesCollector;
+import com.google.gwt.thirdparty.common.css.SourceCode;
+import com.google.gwt.thirdparty.common.css.compiler.ast.CssTree;
+import com.google.gwt.thirdparty.common.css.compiler.ast.GssParser;
+import com.google.gwt.thirdparty.common.css.compiler.ast.GssParserException;
 import com.google.gwt.uibinder.attributeparsers.CssNameConverter;
 import com.google.gwt.uibinder.rebind.MortalLogger;
 
@@ -43,6 +51,20 @@ import java.util.Set;
  * Models a method returning a CssResource on a generated ClientBundle.
  */
 public class ImplicitCssResource {
+
+  private static Set<String> getCssClassNames(String fileName, String cssSource,
+      Set<JClassType> imports, TreeLogger logger) throws UnableToCompleteException {
+    SourceCode sourceCode = new SourceCode(fileName, cssSource);
+    CssTree tree;
+    try {
+      tree = new GssParser(sourceCode).parse();
+    } catch (GssParserException e) {
+      logger.log(TreeLogger.ERROR, "Unable to parse CSS", e);
+      throw new UnableToCompleteException();
+    }
+    return new ClassNamesCollector().getClassNames(tree, imports);
+  }
+
   private static final CssNameConverter nameConverter = new CssNameConverter();
   private final String packageName;
   private final String className;
@@ -52,6 +74,8 @@ public class ImplicitCssResource {
   private final String body;
   private final MortalLogger logger;
   private final Set<JClassType> imports;
+  private final ResourceOracle resourceOracle;
+  private final boolean gss;
 
   private File generatedFile;
   private Set<String> cssClassNames;
@@ -62,7 +86,8 @@ public class ImplicitCssResource {
    */
   public ImplicitCssResource(String packageName, String className, String name,
       String[] source, JClassType extendedInterface, String body,
-      MortalLogger logger, Set<JClassType> importTypes) {
+      MortalLogger logger, Set<JClassType> importTypes, Boolean gss,
+      ResourceOracle resourceOracle) {
     this.packageName = packageName;
     this.className = className;
     this.name = name;
@@ -70,6 +95,8 @@ public class ImplicitCssResource {
     this.body = body;
     this.logger = logger;
     this.imports = Collections.unmodifiableSet(importTypes);
+    this.resourceOracle = resourceOracle;
+    this.gss = Boolean.TRUE.equals(gss);
     sources = Arrays.asList(source);
   }
 
@@ -81,9 +108,9 @@ public class ImplicitCssResource {
   }
 
   /**
-   * Returns the set of CSS classnames in the underlying .css files.
+   * Returns the set of CSS classnames in the underlying css or gss files.
    *
-   * @throws UnableToCompleteException if the user has called for a .css file we
+   * @throws UnableToCompleteException if the user has called for a css/gss file we
    *           can't find.
    */
   public Set<String> getCssClassNames() throws UnableToCompleteException {
@@ -99,10 +126,14 @@ public class ImplicitCssResource {
       }
       assert urls.size() > 0;
 
-      CssStylesheet sheet = GenerateCssAst.exec(logger.getTreeLogger(),
-          urls.toArray(new URL[urls.size()]));
-      cssClassNames = ExtractClassNamesVisitor.exec(sheet,
-          imports.toArray(new JClassType[imports.size()]));
+      if (gss) {
+       return getCssClassNames(bodyFile.getName(), body, imports, logger.getTreeLogger());
+      } else {
+        CssStylesheet sheet = GenerateCssAst.exec(logger.getTreeLogger(),
+            urls.toArray(new URL[urls.size()]));
+        cssClassNames = ExtractClassNamesVisitor.exec(sheet,
+            imports.toArray(new JClassType[imports.size()]));
+      }
     }
     return cssClassNames;
   }
@@ -164,7 +195,7 @@ public class ImplicitCssResource {
   }
 
   /**
-   * Returns the name of the .css file(s), separate by white space.
+   * Returns the name of the css or gss file(s), separate by white space.
    */
   public Collection<String> getSource() {
     if (body.length() == 0) {
@@ -177,7 +208,8 @@ public class ImplicitCssResource {
   }
 
   private String getBodyFileName() {
-    String bodyFileName = String.format("uibinder.%s.%s.css", packageName, className);
+    String bodyFileName = String.format("uibinder.%s.%s.%s", packageName, className,
+        getCssFileExtension());
     // To verify that the resulting file can be retrieved out of zip files using a URL reference.
     assert isValidUrl("file:/" + bodyFileName);
     return bodyFileName;
@@ -190,7 +222,6 @@ public class ImplicitCssResource {
      * this package
      */
 
-    ClassLoader classLoader = ImplicitCssResource.class.getClassLoader();
     String path = packageName.replace(".", "/");
 
     List<URL> urls = new ArrayList<URL>();
@@ -198,13 +229,14 @@ public class ImplicitCssResource {
     for (String s : sources) {
       String resourcePath = path + '/' + s;
       // Try to find the resource relative to the package.
-      URL found = classLoader.getResource(resourcePath);
+      URL found = ResourceLocatorImpl.tryFindResourceUrl(logger.getTreeLogger(), resourceOracle,
+          resourcePath);
       /*
        * If we didn't find the resource relative to the package, assume it
        * is absolute.
        */
       if (found == null) {
-        found = classLoader.getResource(s);
+        found = ResourceLocatorImpl.tryFindResourceUrl(logger.getTreeLogger(), resourceOracle, s);
       }
       if (found == null) {
         logger.die("Unable to find resource: " + resourcePath);
@@ -221,8 +253,8 @@ public class ImplicitCssResource {
 
     if (generatedFile == null) {
       try {
-        File f = File.createTempFile(String.format("uiBinder_%s_%s",
-            packageName, className), ".css");
+        File f = File.createTempFile(String.format("uiBinder_%s_%s", packageName, className),
+            "." + getCssFileExtension());
         f.deleteOnExit();
 
         BufferedWriter out = new BufferedWriter(new FileWriter(f));
@@ -246,5 +278,9 @@ public class ImplicitCssResource {
       return false;
     }
     return true;
+  }
+
+  private String getCssFileExtension() {
+    return gss ? "gss" : "css";
   }
 }

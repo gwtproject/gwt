@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "sv" locale.
@@ -36,7 +31,7 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE'en' 'den' d:'e' MMMM y";
+    return "EEEE d MMMM y";
   }
 
   @Override
@@ -72,7 +67,7 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullDay() {
-    return "d:'e' MMMM";
+    return "d MMMM";
   }
 
   @Override
@@ -106,28 +101,8 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYearMonthNum() {
-    return "yyyy-MM";
-  }
-
-  @Override
-  public String formatYearMonthNumDay() {
-    return "yyyy-MM-dd";
-  }
-
-  @Override
   public String formatYearMonthWeekdayDay() {
     return "EEE d MMM y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "yyyy QQQQ";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "yyyy Q";
   }
 
   @Override
@@ -149,6 +124,24 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "Januari",
+        "Februari",
+        "Mars",
+        "April",
+        "Maj",
+        "Juni",
+        "Juli",
+        "Augusti",
+        "September",
+        "Oktober",
+        "November",
+        "December"
+    };
+  }
+
+  @Override
   public String[] monthsShort() {
     return new String[] {
         "jan",
@@ -163,6 +156,24 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
         "okt",
         "nov",
         "dec"
+    };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "Maj",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Okt",
+        "Nov",
+        "Dec"
     };
   }
 
@@ -205,6 +216,19 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] weekdaysFullStandalone() {
+    return new String[] {
+        "Söndag",
+        "Måndag",
+        "Tisdag",
+        "Onsdag",
+        "Torsdag",
+        "Fredag",
+        "Lördag"
+    };
+  }
+
+  @Override
   public String[] weekdaysNarrow() {
     return new String[] {
         "S",
@@ -233,13 +257,13 @@ public class DateTimeFormatInfoImpl_sv extends DateTimeFormatInfoImpl {
   @Override
   public String[] weekdaysShortStandalone() {
     return new String[] {
-        "sön",
-        "mån",
-        "tis",
-        "ons",
-        "tor",
-        "fre",
-        "lör"
+        "Sön",
+        "Mån",
+        "Tis",
+        "Ons",
+        "Tor",
+        "Fre",
+        "Lör"
     };
   }
 }

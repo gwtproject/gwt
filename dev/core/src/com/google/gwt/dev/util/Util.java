@@ -17,7 +17,6 @@ package com.google.gwt.dev.util;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -32,7 +31,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -40,7 +38,6 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -51,40 +48,26 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Serializable;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.lang.reflect.Array;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.JarURLConnection;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 /**
  * A smattering of useful methods. Methods in this class are candidates for
  * being moved to {@link com.google.gwt.util.tools.Utility} if they would be
  * generally useful to tool writers, and don't involve TreeLogger.
  */
+// TODO: remove stream functions and replace with Guava.
 public final class Util {
 
   public static String DEFAULT_ENCODING = "UTF-8";
-
-  public static final File[] EMPTY_ARRAY_FILE = new File[0];
-
-  public static final String[] EMPTY_ARRAY_STRING = new String[0];
 
   private static final String FILE_PROTOCOL = "file";
 
@@ -100,42 +83,6 @@ public final class Util {
    * Stores reusable thread local buffers for efficient data transfer.
    */
   private static final ThreadLocal<byte[]> threadLocalBuf = new ThreadLocal<byte[]>();
-
-  public static byte[] append(byte[] xs, byte x) {
-    int n = xs.length;
-    byte[] t = new byte[n + 1];
-    System.arraycopy(xs, 0, t, 0, n);
-    t[n] = x;
-    return t;
-  }
-
-  @SuppressWarnings("unchecked")
-  public static <T> T[] append(T[] xs, T x) {
-    int n = xs.length;
-    T[] t = (T[]) Array.newInstance(xs.getClass().getComponentType(), n + 1);
-    System.arraycopy(xs, 0, t, 0, n);
-    t[n] = x;
-    return t;
-  }
-
-  @SuppressWarnings("unchecked")
-  public static <T> T[] append(T[] appendToThis, T[] these) {
-    if (appendToThis == null) {
-      throw new NullPointerException("attempt to append to a null array");
-    }
-
-    if (these == null) {
-      throw new NullPointerException("attempt to append a null array");
-    }
-
-    T[] result;
-    int newSize = appendToThis.length + these.length;
-    Class<?> componentType = appendToThis.getClass().getComponentType();
-    result = (T[]) Array.newInstance(componentType, newSize);
-    System.arraycopy(appendToThis, 0, result, 0, appendToThis.length);
-    System.arraycopy(these, 0, result, appendToThis.length, these.length);
-    return result;
-  }
 
   /**
    * Computes the MD5 hash for the specified byte array.
@@ -190,38 +137,6 @@ public final class Util {
     }
   }
 
-  public static boolean copy(TreeLogger logger, File in, File out)
-      throws UnableToCompleteException {
-    try {
-      if (in.lastModified() > out.lastModified()) {
-        copy(logger, new FileInputStream(in), out);
-        return true;
-      } else {
-        return false;
-      }
-    } catch (FileNotFoundException e) {
-      logger.log(TreeLogger.ERROR, "Unable to open file '"
-          + in.getAbsolutePath() + "'", e);
-      throw new UnableToCompleteException();
-    }
-  }
-
-  /**
-   * Copies an input stream out to a file. Closes the input steam.
-   */
-  public static void copy(TreeLogger logger, InputStream is, File out)
-      throws UnableToCompleteException {
-    try {
-      // No need to check mkdirs result because an IOException will occur anyway
-      out.getParentFile().mkdirs();
-      copy(logger, is, new FileOutputStream(out));
-    } catch (FileNotFoundException e) {
-      logger.log(TreeLogger.ERROR, "Unable to create file '"
-          + out.getAbsolutePath() + "'", e);
-      throw new UnableToCompleteException();
-    }
-  }
-
   /**
    * Copies an input stream out to an output stream. Closes the input steam and
    * output stream.
@@ -232,23 +147,6 @@ public final class Util {
       copy(is, os);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Error during copy", e);
-      throw new UnableToCompleteException();
-    }
-  }
-
-  public static boolean copy(TreeLogger logger, URL in, File out)
-      throws UnableToCompleteException {
-    try {
-      URLConnection conn = in.openConnection();
-      if (conn.getLastModified() > out.lastModified()) {
-        copy(logger, in.openStream(), out);
-        return true;
-      } else {
-        return false;
-      }
-    } catch (IOException e) {
-      logger.log(TreeLogger.ERROR, "Unable to open '" + in.toExternalForm()
-          + "'", e);
       throw new UnableToCompleteException();
     }
   }
@@ -277,36 +175,6 @@ public final class Util {
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to open resource: " + url, e);
       throw new UnableToCompleteException();
-    }
-  }
-
-  public static void deleteFilesInDirectory(File dir) {
-    File[] files = dir.listFiles();
-    if (files != null) {
-      for (int i = 0; i < files.length; i++) {
-        File file = files[i];
-        if (file.isFile()) {
-          file.delete();
-        }
-      }
-    }
-  }
-
-  /**
-   * Deletes all files have the same base name as the specified file.
-   */
-  public static void deleteFilesStartingWith(File dir, final String prefix) {
-    File[] toDelete = dir.listFiles(new FilenameFilter() {
-      @Override
-      public boolean accept(File dir, String name) {
-        return name.startsWith(prefix);
-      }
-    });
-
-    if (toDelete != null) {
-      for (int i = 0; i < toDelete.length; i++) {
-        toDelete[i].delete();
-      }
     }
   }
 
@@ -412,26 +280,6 @@ public final class Util {
   }
 
   /**
-   * Returns an array of byte-arrays representing the default encoding for an
-   * array of Strings.
-   */
-  public static byte[][] getBytes(String[] s) {
-    byte[][] bytes = new byte[s.length][];
-    for (int i = 0; i < s.length; i++) {
-      bytes[i] = getBytes(s[i]);
-    }
-    return bytes;
-  }
-
-  /**
-   * @param cls A class whose name you want.
-   * @return The base name for the specified class.
-   */
-  public static String getClassName(Class<?> cls) {
-    return getClassName(cls.getName());
-  }
-
-  /**
    * @param className A fully-qualified class name whose name you want.
    * @return The base name for the specified class.
    */
@@ -505,45 +353,6 @@ public final class Util {
     return lastModified;
   }
 
-  /**
-   * A 4-digit hex result.
-   *
-   * @deprecated use {@link StringUtils#hex4(char, StringBuffer)} instead.
-   */
-  @Deprecated
-  public static void hex4(char c, StringBuffer sb) {
-    StringUtils.hex4(c, sb);
-  }
-
-  /**
-   * This method invokes an inaccessible method in another class.
-   *
-   * @param targetClass the class owning the method
-   * @param methodName the name of the method
-   * @param argumentTypes the types of the parameters to the method call
-   * @param target the receiver of the method call
-   * @param arguments the parameters to the method call
-   */
-  public static void invokeInaccessableMethod(Class<?> targetClass,
-      String methodName, Class<?>[] argumentTypes, TypeOracle target,
-      Object[] arguments) {
-    String failedReflectErrMsg = "The definition of " + targetClass.getName()
-        + "." + methodName + " has changed in an " + "incompatible way.";
-    try {
-      Method m = targetClass.getDeclaredMethod(methodName, argumentTypes);
-      m.setAccessible(true);
-      m.invoke(target, arguments);
-    } catch (NoSuchMethodException e) {
-      throw new RuntimeException(failedReflectErrMsg, e);
-    } catch (IllegalArgumentException e) {
-      throw new RuntimeException(failedReflectErrMsg, e);
-    } catch (IllegalAccessException e) {
-      throw new RuntimeException(failedReflectErrMsg, e);
-    } catch (InvocationTargetException e) {
-      throw new RuntimeException(e.getTargetException());
-    }
-  }
-
   public static boolean isValidJavaIdent(String token) {
     if (token.length() == 0) {
       return false;
@@ -613,29 +422,8 @@ public final class Util {
     return relativeFile;
   }
 
-  // /**
-  // * Reads the file as an array of strings.
-  // */
-  // public static String[] readURLAsStrings(URL url) {
-  // ArrayList lines = new ArrayList();
-  // String contents = readURLAsString(url);
-  // if (contents != null) {
-  // StringReader sr = new StringReader(contents);
-  // BufferedReader br = new BufferedReader(sr);
-  // String line;
-  // while (null != (line = readNextLine(br)))
-  // lines.add(line);
-  // }
-  // return (String[]) lines.toArray(new String[lines.size()]);
-  // }
-
   public static String makeRelativePath(File from, File to) {
     File f = makeRelativeFile(from, to);
-    return (f != null ? f.getPath() : null);
-  }
-
-  public static String makeRelativePath(File from, String to) {
-    File f = makeRelativeFile(from, new File(to));
     return (f != null ? f.getPath() : null);
   }
 
@@ -650,14 +438,6 @@ public final class Util {
     } finally {
       Utility.close(fileInputStream);
     }
-  }
-
-  public static char[] readFileAsChars(File file) {
-    String string = readFileAsString(file);
-    if (string != null) {
-      return string.toCharArray();
-    }
-    return null;
   }
 
   public static <T extends Serializable> T readFileAsObject(File file,
@@ -681,28 +461,6 @@ public final class Util {
   }
 
   /**
-   * Reads the next non-empty line.
-   *
-   * @return a non-empty string that has been trimmed or null if the reader is
-   *         exhausted
-   */
-  public static String readNextLine(BufferedReader br) {
-    try {
-      String line = br.readLine();
-      while (line != null) {
-        line = line.trim();
-        if (line.length() > 0) {
-          break;
-        }
-        line = br.readLine();
-      }
-      return line;
-    } catch (IOException e) {
-      return null;
-    }
-  }
-
-  /**
    * Reads an entire input stream as bytes. Closes the input stream.
    */
   public static byte[] readStreamAsBytes(InputStream in) {
@@ -719,7 +477,7 @@ public final class Util {
       throws ClassNotFoundException, IOException {
     ObjectInputStream objectInputStream = null;
     try {
-      objectInputStream = new ObjectInputStream(inputStream);
+      objectInputStream = new StringInterningObjectInputStream(inputStream);
       return type.cast(objectInputStream.readObject());
     } finally {
       Utility.close(objectInputStream);
@@ -850,85 +608,12 @@ public final class Util {
   }
 
   /**
-   * Recursively lists a directory, returning the partial paths of the child
-   * files.
-   *
-   * @param parent the directory to start from
-   * @param includeDirs whether or not to include directories in the results
-   * @return all partial paths descending from the parent file
-   */
-  public static SortedSet<String> recursiveListPartialPaths(File parent,
-      boolean includeDirs) {
-    assert parent != null;
-    TreeSet<String> toReturn = new TreeSet<String>();
-    int start = parent.getAbsolutePath().length() + 1;
-
-    List<File> q = new LinkedList<File>();
-    q.add(parent);
-
-    while (!q.isEmpty()) {
-      File f = q.remove(0);
-
-      if (f.isDirectory()) {
-        if (includeDirs) {
-          toReturn.add(f.getAbsolutePath().substring(start));
-        }
-        q.addAll(Arrays.asList(f.listFiles()));
-      } else {
-        toReturn.add(f.getAbsolutePath().substring(start));
-      }
-    }
-    return toReturn;
-  }
-
-  /**
    * Release a buffer previously returned from {@link #takeThreadLocalBuf()}.
    * The released buffer may then be reused.
    */
   public static void releaseThreadLocalBuf(byte[] buf) {
     assert buf.length == THREAD_LOCAL_BUF_SIZE;
     threadLocalBuf.set(buf);
-  }
-
-  public static File removeExtension(File file) {
-    String name = file.getName();
-    int lastDot = name.lastIndexOf('.');
-    if (lastDot != -1) {
-      name = name.substring(0, lastDot);
-    }
-    return new File(file.getParentFile(), name);
-  }
-
-  @SuppressWarnings("unchecked")
-  public static <T> T[] removeNulls(T[] a) {
-    int n = a.length;
-    for (int i = 0; i < a.length; i++) {
-      if (a[i] == null) {
-        --n;
-      }
-    }
-
-    Class<?> componentType = a.getClass().getComponentType();
-    T[] t = (T[]) Array.newInstance(componentType, n);
-    int out = 0;
-    for (int in = 0; in < t.length; in++) {
-      if (a[in] != null) {
-        t[out++] = a[in];
-      }
-    }
-    return t;
-  }
-
-  /**
-   * @param path The path to slashify.
-   * @return The path with any directory separators replaced with '/'.
-   */
-  public static String slashify(String path) {
-    path = path.replace(File.separatorChar, '/');
-    if (path.endsWith("/")) {
-      path = path.substring(0, path.length() - 1);
-    }
-    return path;
   }
 
   /**
@@ -981,136 +666,11 @@ public final class Util {
   }
 
   /**
-   * Like {@link #toArray(Class, Collection)}, but the option of having the
-   * array reversed.
-   */
-  @SuppressWarnings("unchecked")
-  public static <T> T[] toArrayReversed(Class<? super T> componentType,
-      Collection<? extends T> coll) {
-    int n = coll.size();
-    T[] a = (T[]) Array.newInstance(componentType, n);
-    int i = n - 1;
-    for (Iterator<? extends T> iter = coll.iterator(); iter.hasNext(); --i) {
-      a[i] = iter.next();
-    }
-    return a;
-  }
-
-  /**
-   * Returns a string representation of the byte array as a series of
-   * hexadecimal characters.
-   *
-   * @param bytes byte array to convert
-   * @return a string representation of the byte array as a series of
-   *         hexadecimal characters
-   * @deprecated use {@link StringUtils#toHexString(byte[])} instead.
-   */
-  @Deprecated
-  public static String toHexString(byte[] bytes) {
-    return StringUtils.toHexString(bytes);
-  }
-
-  /**
    * Returns a String representing the character content of the bytes; the bytes
    * must be encoded using the compiler's default encoding.
    */
   public static String toString(byte[] bytes) {
     return toString(bytes, DEFAULT_ENCODING);
-  }
-
-  /**
-   * Creates a string array from the contents of a collection.
-   */
-  public static String[] toStringArray(Collection<String> coll) {
-    return toArray(String.class, coll);
-  }
-
-  public static String[] toStrings(byte[][] bytes) {
-    String[] strings = new String[bytes.length];
-    for (int i = 0; i < bytes.length; i++) {
-      strings[i] = toString(bytes[i]);
-    }
-    return strings;
-  }
-
-  public static URL toURL(File f) {
-    try {
-      return f.toURI().toURL();
-    } catch (MalformedURLException e) {
-      throw new RuntimeException("Failed to convert a File to a URL", e);
-    }
-  }
-
-  public static String toXml(Document doc) {
-    Throwable caught = null;
-    try {
-      byte[] bytes = toXmlUtf8(doc);
-      return new String(bytes, DEFAULT_ENCODING);
-    } catch (UnsupportedEncodingException e) {
-      caught = e;
-    }
-    throw new RuntimeException("Unable to encode xml string as utf-8", caught);
-  }
-
-  public static byte[] toXmlUtf8(Document doc) {
-    Throwable caught = null;
-    try {
-      StringWriter sw = new StringWriter();
-      PrintWriter pw = new PrintWriter(sw);
-      writeDocument(pw, doc);
-      return sw.toString().getBytes(DEFAULT_ENCODING);
-    } catch (UnsupportedEncodingException e) {
-      caught = e;
-    } catch (IOException e) {
-      caught = e;
-    }
-    throw new RuntimeException(
-        "Unable to encode xml document object as a string", caught);
-
-    // THE COMMENTED-OUT CODE BELOW IS THE WAY I'D LIKE TO GENERATE XML,
-    // BUT IT SEEMS TO BLOW UP WHEN YOU CHANGE JRE VERSIONS AND/OR RUN
-    // IN TOMCAT. INSTEAD, I JUST SLAPPED TOGETHER THE MINIMAL STUFF WE
-    // NEEDED TO WRITE CACHE ENTRIES.
-
-    // Throwable caught = null;
-    // try {
-    // TransformerFactory transformerFactory = TransformerFactory.newInstance();
-    // Transformer transformer = transformerFactory.newTransformer();
-    // transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT,
-    // "yes");
-    // transformer.setOutputProperty(
-    // "{http://xml.apache.org/xslt}indent-amount", "4");
-    // ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    // OutputStreamWriter osw = new OutputStreamWriter(baos, "UTF-8");
-    // StreamResult result = new StreamResult(osw);
-    // DOMSource domSource = new DOMSource(doc);
-    // transformer.transform(domSource, result);
-    // byte[] bytes = baos.toByteArray();
-    // return bytes;
-    // } catch (TransformerConfigurationException e) {
-    // caught = e;
-    // } catch (UnsupportedEncodingException e) {
-    // caught = e;
-    // } catch (TransformerException e) {
-    // caught = e;
-    // }
-    // throw new RuntimeException(
-    // "Unable to encode xml document object as a string", caught);
-  }
-
-  public static File tryCombine(File parentMaybeIgnored, File childMaybeAbsolute) {
-    if (childMaybeAbsolute == null) {
-      return parentMaybeIgnored;
-    } else if (childMaybeAbsolute.isAbsolute()) {
-      return childMaybeAbsolute;
-    } else {
-      return new File(parentMaybeIgnored, childMaybeAbsolute.getPath());
-    }
-  }
-
-  public static File tryCombine(File parentMaybeIgnored,
-      String childMaybeAbsolute) {
-    return tryCombine(parentMaybeIgnored, new File(childMaybeAbsolute));
   }
 
   /**
@@ -1157,29 +717,6 @@ public final class Util {
     String msg = "Unable to write file '" + where + "'";
     logger.log(TreeLogger.ERROR, msg, caught);
     throw new UnableToCompleteException();
-  }
-
-  public static void writeCharsAsFile(TreeLogger logger, File file, char[] chars)
-      throws UnableToCompleteException {
-    FileOutputStream stream = null;
-    OutputStreamWriter writer = null;
-    BufferedWriter buffered = null;
-    try {
-      // No need to check mkdirs result because an IOException will occur anyway
-      file.getParentFile().mkdirs();
-      stream = new FileOutputStream(file);
-      writer = new OutputStreamWriter(stream, DEFAULT_ENCODING);
-      buffered = new BufferedWriter(writer);
-      buffered.write(chars);
-    } catch (IOException e) {
-      logger.log(TreeLogger.ERROR, "Unable to write file: "
-          + file.getAbsolutePath(), e);
-      throw new UnableToCompleteException();
-    } finally {
-      Utility.close(buffered);
-      Utility.close(writer);
-      Utility.close(stream);
-    }
   }
 
   /**
@@ -1261,12 +798,6 @@ public final class Util {
     }
   }
 
-  public static void writeStringToStream(OutputStream stream, String string) throws IOException {
-      Writer writer = new OutputStreamWriter(stream, DEFAULT_ENCODING);
-      writer.write(string);
-      writer.close();
-  }
-
   /**
    * Writes the contents of a StringBuilder to an OutputStream, encoding
    * each character using the UTF-* encoding.  Unicode characters between
@@ -1332,32 +863,6 @@ public final class Util {
       start = end;
     }
   }
-
-  // /**
-  // * Write all of the supplied bytes to the file, in a way that they can be
-  // read
-  // * back by {@link #readFileAndSplit(File).
-  // */
-  // public static boolean writeStringsAsFile(TreeLogger branch,
-  // File makePermFilename, String[] js) {
-  // RandomAccessFile f = null;
-  // try {
-  // makePermFilename.delete();
-  // makePermFilename.getParentFile().mkdirs();
-  // f = new RandomAccessFile(makePermFilename, "rwd");
-  // f.writeInt(js.length);
-  // for (String s : js) {
-  // byte[] b = getBytes(s);
-  // f.writeInt(b.length);
-  // f.write(b);
-  // }
-  // return true;
-  // } catch (IOException e) {
-  // return false;
-  // } finally {
-  // Utility.close(f);
-  // }
-  // }
 
   /**
    * Reads the specified number of bytes from the {@link InputStream}.

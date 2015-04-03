@@ -11,7 +11,7 @@
   </target>
 
   <target name="dynatablerf" description="Build dynatablerf">
-    <gwt.ant dir="dynatablerf" target="source" />
+    <gwt.ant dir="dynatablerf" />
   </target>
 
   <target name="hello" description="Build hello">
@@ -22,16 +22,12 @@
     <gwt.ant dir="json" />
   </target>
 
-  <target name="logexample" description="Build logexample">
-    <gwt.ant dir="logexample" />
-  </target>
-
   <target name="mail" description="Build mail">
     <gwt.ant dir="mail" />
   </target>
 
   <target name="mobilewebapp" description="Build mobile web app">
-    <gwt.ant dir="mobilewebapp" target="source" />
+    <gwt.ant dir="mobilewebapp" />
   </target>
 
   <target name="showcase" description="Build showcase">
@@ -39,7 +35,7 @@
   </target>
 
   <target name="validation" description="Build validation">
-    <gwt.ant dir="validation" target="source" />
+    <gwt.ant dir="validation" />
   </target>
 
   <target name="validationtck" description="Build validation TCK">
@@ -51,7 +47,6 @@
     <antcall target="dynatablerf" />
     <antcall target="hello" />
     <antcall target="json" />
-    <antcall target="logexample" />
     <antcall target="mail" />
     <antcall target="mobilewebapp" />
     <antcall target="showcase" />
@@ -60,11 +55,9 @@
   </target>
 
   <target name="build" description="Builds GWT">
-    <gwt.timer name="all">
-      <antcall target="-do">
-        <param name="target" value="build" />
-      </antcall>
-    </gwt.timer>
+    <antcall target="-do">
+      <param name="target" value="build" />
+    </antcall>
     <length property="gwt.sample.length">
       <fileset dir="${gwt.build.out}/samples" includes="*/war/*/*.cache.html,*/war/*/*.cache.js"/>
     </length>

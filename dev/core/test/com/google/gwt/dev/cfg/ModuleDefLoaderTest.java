@@ -18,19 +18,13 @@ package com.google.gwt.dev.cfg;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.CompilerContext;
-import com.google.gwt.dev.cfg.Libraries.IncompatibleLibraryVersionException;
-import com.google.gwt.dev.javac.testing.impl.MockResource;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.UnitTestTreeLogger;
-import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import junit.framework.TestCase;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.util.Set;
 
 /**
  * Test for the module def loading
@@ -38,13 +32,13 @@ import java.net.URLClassLoader;
 public class ModuleDefLoaderTest extends TestCase {
 
   private CompilerContext compilerContext;
-  private CompilerContext.Builder compilerContextBuilder = new CompilerContext.Builder();
-  private MockLibraryWriter mockLibraryWriter = new MockLibraryWriter();
+  private CompilerContext.Builder compilerContextBuilder;
 
   public void assertHonorsStrictResources(boolean strictResources)
       throws UnableToCompleteException {
     TreeLogger logger = TreeLogger.NULL;
-    compilerContext.getOptions().setEnforceStrictResources(strictResources);
+    compilerContext.getOptions().setEnforceStrictSourceResources(strictResources);
+    compilerContext.getOptions().setEnforceStrictPublicResources(strictResources);
     ModuleDef emptyModule = ModuleDefLoader.loadFromClassPath(
         logger, compilerContext, "com.google.gwt.dev.cfg.testdata.merging.Empty");
     Resource sourceFile =
@@ -66,36 +60,78 @@ public class ModuleDefLoaderTest extends TestCase {
     assertHonorsStrictResources(false);
   }
 
-  public void testLoadFromLibraryGroup() throws UnableToCompleteException, IOException,
-      IncompatibleLibraryVersionException {
-    // Create the library zip file.
-    File zipFile = File.createTempFile("FooLib", ".gwtlib");
-    zipFile.deleteOnExit();
+  public void testErrorReporting_badXml() {
+    assertErrorsWhenLoading("com.google.gwt.dev.cfg.testdata.errors.BadModule",
+        "Line 3, column 1 : Element type \"inherits\" must be followed by either "
+            + "attribute specifications, \">\" or \"/>\".");
+  }
 
-    // Put data in the library and save it.
-    ZipLibraryWriter zipLibraryWriter = new ZipLibraryWriter(zipFile.getPath());
-    zipLibraryWriter.setLibraryName("FooLib");
-    MockResource userXmlResource = new MockResource("com/google/gwt/user/User.gwt.xml") {
-        @Override
-      public CharSequence getContent() {
-        return "<module></module>";
-      }
-    };
-    zipLibraryWriter.addBuildResource(userXmlResource);
-    zipLibraryWriter.write();
+  public void testErrorReporting_badLinker() {
+    assertErrorsWhenLoading("com.google.gwt.dev.cfg.testdata.errors.BadLinker",
+        "Line 2: Invalid linker name 'X'");
+  }
 
-    // Read data back from disk.
-    ZipLibrary zipLibrary = new ZipLibrary(zipFile.getPath());
+  public void testErrorReporting_badProperty() {
+    assertErrorsWhenLoading("com.google.gwt.dev.cfg.testdata.errors.BadProperty",
+        "Line 2: Property 'X' not found");
+  }
 
-    // Prepare the LibraryGroup and ResourceLoader.
-    compilerContext = compilerContextBuilder.libraryGroup(
-        LibraryGroup.fromLibraries(Lists.<Library> newArrayList(zipLibrary), false)).build();
-    ResourceLoader resourceLoader =
-        ResourceLoaders.wrap(new URLClassLoader(new URL[] {zipFile.toURL()}, null));
+  public void testErrorReporting_badPropertyValue() {
+    assertErrorsWhenLoading("com.google.gwt.dev.cfg.testdata.errors.BadPropertyValue",
+        "Line 3: Value 'z' in not a valid value for property 'X'");
+  }
 
-    // Will throw an exception if com.google.gwt.user.User can't be found and parsed.
-    ModuleDefLoader.loadFromResources(TreeLogger.NULL, compilerContext, "com.google.gwt.user.User",
-        resourceLoader, false);
+  public void testErrorReporting_deepError() {
+    UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
+    builder.setLowestLogLevel(TreeLogger.DEBUG);
+    builder.expectDebug(
+        "Loading inherited module 'com.google.gwt.dev.cfg.testdata.errors.DeepInheritsError0'",
+        null);
+    builder.expectDebug(
+        "Loading inherited module 'com.google.gwt.dev.cfg.testdata.errors.DeepInheritsError1'",
+        null);
+    builder.expectDebug(
+        "Loading inherited module 'com.google.gwt.dev.cfg.testdata.errors.BadModule'", null);
+    builder.expectError("Line 3, column 1 : Element type \"inherits\" must be followed by either "
+        + "attribute specifications, \">\" or \"/>\".", null);
+
+    UnitTestTreeLogger logger = builder.createLogger();
+
+    try {
+      ModuleDefLoader.loadFromClassPath(
+          logger, compilerContext, "com.google.gwt.dev.cfg.testdata.errors.DeepInheritsError0");
+      fail("Should have failed to load module.");
+    } catch (UnableToCompleteException e) {
+      // failure is expected.
+    }
+    logger.assertLogEntriesContainExpected();
+  }
+
+  public void testErrorReporting_inheritNotFound() {
+    assertErrorsWhenLoading("com.google.gwt.dev.cfg.testdata.errors.InheritNotFound",
+        "Unable to find 'com/google/gwt/dev/cfg/testdata/NonExistentModule.gwt.xml' on your "
+            + "classpath; could be a typo, or maybe you forgot to include a classpath entry "
+            + "for source?");
+  }
+
+  public void testErrorReporting_invalidName() {
+    assertErrorsWhenLoading("com.google.gwt.dev.cfg.testdata.errors.InvalidName",
+        "Line 2: Invalid property name '123:33'");
+  }
+
+  public void testErrorReporting_multipleErrors() {
+    assertErrorsWhenLoading("com.google.gwt.dev.cfg.testdata.errors.MultipleErrors",
+        "Line 1: Unexpected attribute 'blah' in element 'module'");
+  }
+
+  public void testErrorReporting_unexpectedAttribute() {
+    assertErrorsWhenLoading("com.google.gwt.dev.cfg.testdata.errors.UnexpectedAttribute",
+        "Line 2: Unexpected attribute 'blah' in element 'inherits'");
+  }
+
+  public void testErrorReporting_unexpectedTag() {
+    assertErrorsWhenLoading("com.google.gwt.dev.cfg.testdata.errors.UnexpectedTag",
+        "Line 2: Unexpected element 'inherited'");
   }
 
   /**
@@ -190,80 +226,17 @@ public class ModuleDefLoaderTest extends TestCase {
     ModuleDef one = ModuleDefLoader.loadFromClassPath(logger, compilerContext,
         "com.google.gwt.dev.cfg.testdata.merging.One");
 
-    // Sees the logo.png image but not the java source file.
-    assertEquals(one.getBuildResourceOracle().getPathNames(),
-        Sets.newHashSet("com/google/gwt/dev/cfg/testdata/merging/resources/logo.png"));
-  }
-
-  public void testSeparateLibraryModuleReferences() throws UnableToCompleteException {
-    compilerContext = compilerContextBuilder.compileMonolithic(false).build();
-    ModuleDefLoader.loadFromClassPath(TreeLogger.NULL, compilerContext,
-        "com.google.gwt.dev.cfg.testdata.separate.libraryone.LibraryOne", false);
-
-    // The library writer was given the module and it's direct fileset module xml files as build
-    // resources.
-    assertEquals(Sets.newHashSet(
-        "com/google/gwt/dev/cfg/testdata/separate/filesetone/FileSetOne.gwt.xml",
-        "com/google/gwt/dev/cfg/testdata/separate/libraryone/LibraryOne.gwt.xml"),
-        mockLibraryWriter.getBuildResourcePaths());
-    // The library writer was given LibraryTwo as a dependency library.
-    assertEquals(Sets.newHashSet("com.google.gwt.dev.cfg.testdata.separate.librarytwo.LibraryTwo"),
-        mockLibraryWriter.getDependencyLibraryNames());
-  }
-
-  public void testSeparateLibraryName() throws UnableToCompleteException {
-    compilerContext = compilerContextBuilder.compileMonolithic(false).build();
-    ModuleDefLoader.loadFromClassPath(TreeLogger.NULL, compilerContext,
-        "com.google.gwt.dev.cfg.testdata.separate.libraryone.LibraryOne", false);
-
-    assertEquals("com.google.gwt.dev.cfg.testdata.separate.libraryone.LibraryOne",
-        mockLibraryWriter.getLibraryName());
-  }
-
-  public void testSeparateModuleReferences() throws UnableToCompleteException {
-    compilerContext = compilerContextBuilder.compileMonolithic(false).build();
-    ModuleDef libraryOneModule = ModuleDefLoader.loadFromClassPath(TreeLogger.NULL, compilerContext,
-        "com.google.gwt.dev.cfg.testdata.separate.libraryone.LibraryOne", false);
-
-    // The module sees itself and it's direct fileset module as "target" modules.
-    assertEquals(Sets.newHashSet("com.google.gwt.dev.cfg.testdata.separate.libraryone.LibraryOne",
-        "com.google.gwt.dev.cfg.testdata.separate.filesetone.FileSetOne"),
-        libraryOneModule.getTargetLibraryCanonicalModuleNames());
-    // The module sees the referenced library module as a "library" module.
-    assertEquals(Sets.newHashSet("com.google.gwt.dev.cfg.testdata.separate.librarytwo.LibraryTwo"),
-        libraryOneModule.getExternalLibraryCanonicalModuleNames());
-  }
-
-  public void testSeparateModuleResourcesLibraryOne() throws UnableToCompleteException {
-    compilerContext = compilerContextBuilder.compileMonolithic(false).build();
-    ModuleDef libraryOneModule = ModuleDefLoader.loadFromClassPath(TreeLogger.NULL, compilerContext,
-        "com.google.gwt.dev.cfg.testdata.separate.libraryone.LibraryOne", false);
-
-    // Includes own source.
-    assertNotNull(libraryOneModule.findSourceFile(
-        "com/google/gwt/dev/cfg/testdata/separate/libraryone/client/LibraryOne.java"));
-    // Cascades to include the subtree of fileset sources.
-    assertNotNull(libraryOneModule.findSourceFile(
-        "com/google/gwt/dev/cfg/testdata/separate/filesetone/client/FileSetOne.java"));
-    // Does not include source from referenced libraries.
-    assertNull(libraryOneModule.findSourceFile(
-        "com/google/gwt/dev/cfg/testdata/separate/librarytwo/client/LibraryTwo.java"));
-  }
-
-  public void testSeparateRootFilesetFail() {
-    compilerContext = compilerContextBuilder.compileMonolithic(false).build();
-    TreeLogger logger = TreeLogger.NULL;
-    try {
-      ModuleDefLoader.loadFromClassPath(logger,
-          compilerContext, "com.google.gwt.dev.cfg.testdata.separate.filesetone.FileSetOne", false);
-      fail("Expected a fileset loaded as the root of a module tree to fail, but it didn't.");
-    } catch (UnableToCompleteException e) {
-      // Expected behavior.
-    }
+    Set<String> visibleResourcePaths = one.getBuildResourceOracle().getPathNames();
+    // Sees the logo.png image.
+    assertTrue(visibleResourcePaths.contains(
+        "com/google/gwt/dev/cfg/testdata/merging/resources/logo.png"));
+    // But not the java source file.
+    assertFalse(visibleResourcePaths.contains(
+        "com/google/gwt/dev/cfg/testdata/merging/resources/NotAResource.java"));
   }
 
   public void testWritesTargetLibraryProperties() throws UnableToCompleteException {
-    compilerContext = compilerContextBuilder.compileMonolithic(false).build();
+    compilerContext = compilerContextBuilder.build();
     ModuleDef libraryOneModule = ModuleDefLoader.loadFromClassPath(TreeLogger.NULL, compilerContext,
         "com.google.gwt.dev.cfg.testdata.separate.libraryone.LibraryOne", false);
 
@@ -276,15 +249,7 @@ public class ModuleDefLoaderTest extends TestCase {
       }
       assertEquals(Sets.newHashSet(bindingProperty.getDefinedValues()),
           Sets.newHashSet("yes", "no", "maybe"));
-      assertEquals(Sets.newHashSet(bindingProperty.getTargetLibraryDefinedValues()),
-          Sets.newHashSet("maybe"));
     }
-
-    // Library one added a new defined value of "maybe" for the "libraryTwoProperty" binding
-    // property.
-    assertEquals(Sets.newHashSet(
-        mockLibraryWriter.getNewBindingPropertyValuesByName().get("libraryTwoProperty")),
-        Sets.newHashSet("maybe"));
 
     // Library one sees all defined values for the "libraryTwoConfigProperty" property and knows
     // which one was defined in this target library.
@@ -294,20 +259,33 @@ public class ModuleDefLoaderTest extends TestCase {
         continue;
       }
       assertEquals(Sets.newHashSet(configurationProperty.getValues()), Sets.newHashSet("false"));
-      assertEquals(Sets.newHashSet(configurationProperty.getTargetLibraryValues()),
-          Sets.newHashSet("false"));
     }
+  }
 
-    // Library one added a new defined value of "maybe" for the "libraryTwoConfigProperty"
-    // property.
-    assertEquals(Sets.newHashSet(mockLibraryWriter.getNewConfigurationPropertyValuesByName().get(
-        "libraryTwoConfigProperty")), Sets.newHashSet("false"));
+  private void assertErrorsWhenLoading(String moduleName, String... errorMessages) {
+    UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
+    builder.setLowestLogLevel(TreeLogger.WARN);
+    for (String errorMessage : errorMessages) {
+      builder.expectError(errorMessage, null);
+
+      UnitTestTreeLogger logger = builder.createLogger();
+
+      try {
+        ModuleDefLoader.loadFromClassPath(
+            logger, compilerContext, moduleName);
+        fail("Should have failed to load module.");
+      } catch (UnableToCompleteException e) {
+        // failure is expected.
+      }
+      logger.assertCorrectLogEntries();
+    }
   }
 
   @Override
   protected void setUp() throws Exception {
     super.setUp();
     ModuleDefLoader.getModulesCache().clear();
-    compilerContext = compilerContextBuilder.libraryWriter(mockLibraryWriter).build();
+    compilerContextBuilder = new CompilerContext.Builder();
+    compilerContext = compilerContextBuilder.build();
   }
 }

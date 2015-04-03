@@ -15,7 +15,10 @@
  */
 package com.google.gwt.lang;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkType;
+
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.impl.HasNoSideEffects;
 
 // CHECKSTYLE_NAMING_OFF: Uses legacy conventions of underscore prefixes.
 
@@ -37,12 +40,14 @@ final class Cast {
    */
   private static JavaScriptObject stringCastMap;
 
+  @HasNoSideEffects
   static native boolean canCast(Object src, JavaScriptObject dstId) /*-{
     return @com.google.gwt.lang.Cast::isJavaString(*)(src) &&
         !!@com.google.gwt.lang.Cast::stringCastMap[dstId] ||
         src.@java.lang.Object::castableTypeMap && !!src.@java.lang.Object::castableTypeMap[dstId];
   }-*/;
 
+  @HasNoSideEffects
   static native boolean canCastClass(Class<?> srcClazz, Class<?> dstClass) /*-{
     var srcTypeId = srcClazz.@java.lang.Class::typeId;
     var dstTypeId = dstClass.@java.lang.Class::typeId;
@@ -55,9 +60,12 @@ final class Cast {
   }-*/;
 
   static Object dynamicCast(Object src, JavaScriptObject dstId) {
-    if (src != null && !canCast(src, dstId)) {
-      throw new ClassCastException();
-    }
+    checkType(src == null || canCast(src, dstId));
+    return src;
+  }
+
+  static Object dynamicCastToString(Object src) {
+    checkType(src == null || isJavaString(src));
     return src;
   }
 
@@ -65,9 +73,7 @@ final class Cast {
    * Allow a dynamic cast to an object, always succeeding if it's a JSO.
    */
   static Object dynamicCastAllowJso(Object src, JavaScriptObject dstId) {
-    if (src != null && !isJavaScriptObject(src) && !canCast(src, dstId)) {
-      throw new ClassCastException();
-    }
+    checkType(src == null || isJavaScriptObject(src) || canCast(src, dstId));
     return src;
   }
 
@@ -75,14 +81,32 @@ final class Cast {
    * Allow a cast to JSO only if there's no type ID.
    */
   static Object dynamicCastJso(Object src) {
-    if (src != null && !isJavaScriptObject(src)) {
-      throw new ClassCastException();
-    }
+    checkType(src == null || isJavaScriptObject(src));
+    return src;
+  }
+
+  /**
+   * Allow a dynamic cast to a JsFunction interface only if it is a function.
+   */
+  static Object dynamicCastToJsFunction(Object src) {
+    checkType(src == null || isFunction(src));
+    return src;
+  }
+
+  /**
+   * A dynamic cast that optionally checks for JsType prototypes.
+   */
+  static Object dynamicCastWithPrototype(Object src, JavaScriptObject dstId, String jsType) {
+    checkType(src == null || canCast(src, dstId) || jsInstanceOf(src, jsType));
     return src;
   }
 
   static boolean instanceOf(Object src, JavaScriptObject dstId) {
     return (src != null) && canCast(src, dstId);
+  }
+
+  static boolean instanceOfJsType(Object src, JavaScriptObject dstId, String jsType) {
+    return instanceOf(src, dstId) || jsInstanceOf(src, jsType);
   }
 
   static boolean instanceOfJso(Object src) {
@@ -98,12 +122,24 @@ final class Cast {
         (isJavaScriptObject(src) || canCast(src, dstId));
   }
 
-  static boolean isJavaScriptObject(Object src) {
-    return !isJavaString(src) && !hasTypeMarker(src);
+  /**
+   * Returns true if the object is a function.
+   */
+  static boolean instanceOfJsFunction(Object src) {
+    return (src != null) && isFunction(src);
   }
 
-  static boolean isJavaScriptObjectOrString(Object src) {
-    return !hasTypeMarker(src);
+  /**
+   * Returns whether the Object is a function.
+   */
+  @HasNoSideEffects
+  static native boolean isFunction(Object src) /*-{
+    return typeof(src) === "function";
+  }-*/;
+
+  @HasNoSideEffects
+  static boolean isJavaScriptObject(Object src) {
+    return !isJavaString(src) && !Util.hasTypeMarker(src);
   }
 
   /**
@@ -125,6 +161,22 @@ final class Cast {
 
   static native boolean jsEquals(Object a, Object b) /*-{
     return a == b;
+  }-*/;
+
+  /**
+   * Determine if object is an instanceof jsType regardless of window or frame.
+   */
+  @HasNoSideEffects
+  static native boolean jsInstanceOf(Object obj, String jsTypeStr) /*-{
+    if (!obj) {
+        return false;
+    }
+
+    var jsType = $wnd;
+    for (var i = 0, parts = jsTypeStr.split("."), l = parts.length; i < l ; i++) {
+      jsType = jsType && jsType[parts[i]];
+    }
+    return jsType && obj instanceof jsType;
   }-*/;
 
   static native boolean jsNotEquals(Object a, Object b) /*-{
@@ -153,7 +205,7 @@ final class Cast {
    * See JLS 5.1.3.
    */
   static native int narrow_int(double x) /*-{
-    return ~~x;
+    return x | 0;
   }-*/;
 
   /**
@@ -184,7 +236,7 @@ final class Cast {
    */
   static native int round_int(double x) /*-{
     // TODO: reference java.lang.Integer::MAX_VALUE when we get clinits fixed
-    return ~~Math.max(Math.min(x, 2147483647), -2147483648);
+    return Math.max(Math.min(x, 2147483647), -2147483648) | 0;
   }-*/;
 
   /**
@@ -199,27 +251,19 @@ final class Cast {
    * Check a statically false cast, which can succeed if the argument is null.
    * Called by compiler-generated code based on static type information.
    */
-  static Object throwClassCastExceptionUnlessNull(Object o)
-      throws ClassCastException {
-    if (o != null) {
-      throw new ClassCastException();
-    }
+  static Object throwClassCastExceptionUnlessNull(Object o) throws ClassCastException {
+    checkType(o == null);
     return o;
   }
-
-  public static native JavaScriptObject getNullMethod() /*-{
-    return @null::nullMethod();
-  }-*/;
 
   /**
    * Returns whether the Object is a Java String.
    *
    * Java strings are translated to JavaScript strings.
    */
-  // Visible for getIndexedMethod()
+  @HasNoSideEffects
   static native boolean isJavaString(Object src) /*-{
-    // TODO(rluble): This might need to be specialized by browser.
-    return typeof(src) == "string" || src instanceof String;
+    return typeof(src) === "string";
   }-*/;
 
   /**
@@ -232,25 +276,15 @@ final class Cast {
    * Only regular Java object have dynamic instance dispatch, strings and arrays need compiler
    * generated trampolines to implement instance dispatch.
    */
-  // Visible for getIndexedMethod()
   static boolean hasJavaObjectVirtualDispatch(Object src) {
-    return !instanceofArray(src) && hasTypeMarker(src);
-  }
-
-  /**
-   * Returns true if the object is tagged and can respond to cast queries.
-   *
-   * All regular Java objects and arrays are tagged.
-   */
-  static boolean hasTypeMarker(Object src) {
-    return Util.getTypeMarker(src) == getNullMethod();
+    return !instanceofArray(src) && Util.hasTypeMarker(src);
   }
 
   /**
    * Returns true if {@code src} is a Java array.
    */
   static boolean isJavaArray(Object src) {
-    return instanceofArray(src) && hasTypeMarker(src);
+    return instanceofArray(src) && Util.hasTypeMarker(src);
   }
 
   /**

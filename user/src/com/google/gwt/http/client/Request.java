@@ -15,8 +15,8 @@
  */
 package com.google.gwt.http.client;
 
-import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.xhr.client.XMLHttpRequest;
 
 /**
@@ -50,9 +50,9 @@ public class Request {
   }
 
   /**
-   * Special {@link RequestImpl} for IE6-9 to work around some IE specialities.
+   * Special {@link RequestImpl} for IE8, IE9 to work around some IE specialities.
    */
-  static class RequestImplIE6To9 extends RequestImpl {
+  static class RequestImplIE8And9 extends RequestImpl {
 
     @Override
     Response createResponse(XMLHttpRequest xmlHttpRequest) {
@@ -100,13 +100,7 @@ public class Request {
     return ImplHolder.get().createResponse(xmlHttpRequest);
   }
 
-  private static native int createTimeout(Request request, RequestCallback callback, int timeoutMillis) /*-{
-    return @com.google.gwt.core.client.impl.Impl::setTimeout(Lcom/google/gwt/core/client/JavaScriptObject;I)(
-      $entry(function() {
-        request.@com.google.gwt.http.client.Request::fireOnTimeout(Lcom/google/gwt/http/client/RequestCallback;)(callback);
-      }),
-      timeoutMillis);
-  }-*/;
+  private final RequestCallback callback;
 
   /**
    * The number of milliseconds to wait for this HTTP request to complete.
@@ -114,10 +108,15 @@ public class Request {
   private final int timeoutMillis;
 
   /**
-   * ID of the timer used to force HTTPRequest timeouts. Only meaningful if
-   * timeoutMillis > 0.
+   * Timer used to force HTTPRequest timeouts. If the user has not requested a
+   * timeout then this field is null.
    */
-  private final int timerId;
+  private final Timer timer = new Timer() {
+    @Override
+    public void run() {
+      fireOnTimeout();
+    }
+  };
 
   /**
    * JavaScript XmlHttpRequest object that this Java class wraps. This field is
@@ -131,9 +130,9 @@ public class Request {
    * {@link com.google.gwt.user.client.rpc.impl.FailedRequest}.
    */
   protected Request() {
+    callback = null;
     timeoutMillis = 0;
     xmlHttpRequest = null;
-    timerId = 0;
   }
 
   /**
@@ -146,8 +145,7 @@ public class Request {
    * @throws IllegalArgumentException if timeoutMillis &lt; 0
    * @throws NullPointerException if xmlHttpRequest, or callback are null
    */
-  Request(XMLHttpRequest xmlHttpRequest, int timeoutMillis,
-      final RequestCallback callback) {
+  Request(XMLHttpRequest xmlHttpRequest, int timeoutMillis, RequestCallback callback) {
     if (xmlHttpRequest == null) {
       throw new NullPointerException();
     }
@@ -160,16 +158,12 @@ public class Request {
       throw new IllegalArgumentException();
     }
 
+    this.callback = callback;
     this.timeoutMillis = timeoutMillis;
-
     this.xmlHttpRequest = xmlHttpRequest;
 
     if (timeoutMillis > 0) {
-      // create and schedule a cancel command
-      timerId = createTimeout(this, callback, timeoutMillis);
-    } else {
-      // no Timer required
-      timerId = 0;
+      timer.schedule(timeoutMillis);
     }
   }
 
@@ -178,6 +172,12 @@ public class Request {
    * it has timed out no action is taken.
    */
   public void cancel() {
+    if (xmlHttpRequest == null) {
+      return;
+    }
+
+    timer.cancel();
+
     /*
      * There is a strange race condition that occurs on Mozilla when you cancel
      * a request while the response is coming in. It appears that in some cases
@@ -190,15 +190,11 @@ public class Request {
      * behavior in Mozilla but crashes IE. That is why we have chosen to fixed
      * this in Java by nulling out our reference to the XmlHttpRequest object.
      */
-    if (xmlHttpRequest != null) {
-      XMLHttpRequest xmlHttp = xmlHttpRequest;
-      xmlHttpRequest = null;
+    final XMLHttpRequest xhr = xmlHttpRequest;
+    xmlHttpRequest = null;
 
-      xmlHttp.clearOnReadyStateChange();
-      xmlHttp.abort();
-
-      cancelTimer();
-    }
+    xhr.clearOnReadyStateChange();
+    xhr.abort();
   }
 
   /**
@@ -240,7 +236,7 @@ public class Request {
       return;
     }
 
-    cancelTimer();
+    timer.cancel();
 
     /*
      * We cannot use cancel here because it would clear the contents of the
@@ -250,31 +246,14 @@ public class Request {
     final XMLHttpRequest xhr = xmlHttpRequest;
     xmlHttpRequest = null;
 
-    String errorMsg = getBrowserSpecificFailure(xhr);
-    if (errorMsg != null) {
-      Throwable exception = new RuntimeException(errorMsg);
-      callback.onError(this, exception);
-    } else {
-      Response response = createResponse(xhr);
-      callback.onResponseReceived(this, response);
-    }
-  }
-
-  /*
-   * Stops the current HTTPRequest timer if there is one.
-   */
-  private void cancelTimer() {
-    if (timeoutMillis > 0) {
-      Impl.clearTimeout(timerId);
-    }
+    Response response = createResponse(xhr);
+    callback.onResponseReceived(this, response);
   }
 
   /*
    * Method called when this request times out.
-   * 
-   * NOTE: this method is called from JSNI
    */
-  private void fireOnTimeout(RequestCallback callback) {
+  private void fireOnTimeout() {
     if (xmlHttpRequest == null) {
       // the request has been received at this point
       return;
@@ -284,39 +263,4 @@ public class Request {
 
     callback.onError(this, new RequestTimeoutException(this, timeoutMillis));
   }
-
-  /**
-   * Tests if the JavaScript <code>XmlHttpRequest.status</code> property is
-   * readable. This can return failure in two different known scenarios:
-   * 
-   * <ol>
-   * <li>On Mozilla, after a network error, attempting to read the status code
-   * results in an exception being thrown. See <a
-   * href="https://bugzilla.mozilla.org/show_bug.cgi?id=238559"
-   * >https://bugzilla.mozilla.org/show_bug.cgi?id=238559</a>.</li>
-   * <li>On Safari, if the HTTP response does not include any response text. See
-   * <a
-   * href="http://bugs.webkit.org/show_bug.cgi?id=3810">http://bugs.webkit.org
-   * /show_bug.cgi?id=3810</a>.</li>
-   * </ol>
-   * 
-   * @param xhr the JavaScript <code>XmlHttpRequest</code> object to test
-   * @return a String message containing an error message if the
-   *         <code>XmlHttpRequest.status</code> code is unreadable or null if
-   *         the status code could be successfully read.
-   */
-  private native String getBrowserSpecificFailure(XMLHttpRequest xhr) /*-{
-    try {
-      if (xhr.status === undefined) {
-        return "XmlHttpRequest.status == undefined, please see Safari bug " +
-               "http://bugs.webkit.org/show_bug.cgi?id=3810 for more details";
-      }
-      return null;
-    } catch (e) {
-      return "Unable to read XmlHttpRequest.status; likely causes are a " +
-             "networking error or bad cross-domain request. Please see " +
-             "https://bugzilla.mozilla.org/show_bug.cgi?id=238559 for more " +
-             "details";
-    }
-  }-*/;
 }

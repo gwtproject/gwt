@@ -15,11 +15,12 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
-import com.google.gwt.core.ext.PropertyOracle;
-import com.google.gwt.core.ext.linker.CastableTypeMap;
-import com.google.gwt.core.ext.linker.impl.StandardCastableTypeMap;
+import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.linker.impl.StandardSymbolData;
 import com.google.gwt.dev.CompilerContext;
+import com.google.gwt.dev.MinimalRebuildCache;
+import com.google.gwt.dev.PrecompileTaskOptions;
+import com.google.gwt.dev.cfg.PermProps;
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.JsOutputOption;
@@ -63,7 +64,7 @@ import com.google.gwt.dev.jjs.ast.JLabeledStatement;
 import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
-import com.google.gwt.dev.jjs.ast.JLongLiteral;
+import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
@@ -77,8 +78,8 @@ import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
+import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.ast.JReboundEntryPoint;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStatement;
@@ -90,6 +91,7 @@ import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.dev.jjs.ast.JUnaryOperator;
 import com.google.gwt.dev.jjs.ast.JVariable;
+import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
@@ -99,16 +101,15 @@ import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.jjs.ast.js.JsonArray;
-import com.google.gwt.dev.jjs.ast.js.JsonObject;
-import com.google.gwt.dev.jjs.ast.js.JsonObject.JsonPropInit;
-import com.google.gwt.dev.js.JsInliner;
-import com.google.gwt.dev.js.JsParser;
+import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeMapper;
 import com.google.gwt.dev.js.JsStackEmulator;
+import com.google.gwt.dev.js.JsUtils;
 import com.google.gwt.dev.js.ast.JsArrayAccess;
 import com.google.gwt.dev.js.ast.JsArrayLiteral;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsBlock;
+import com.google.gwt.dev.js.ast.JsBooleanLiteral;
 import com.google.gwt.dev.js.ast.JsBreak;
 import com.google.gwt.dev.js.ast.JsCase;
 import com.google.gwt.dev.js.ast.JsCatch;
@@ -126,7 +127,6 @@ import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsIf;
 import com.google.gwt.dev.js.ast.JsInvocation;
 import com.google.gwt.dev.js.ast.JsLabel;
-import com.google.gwt.dev.js.ast.JsLiteral;
 import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameOf;
@@ -139,6 +139,8 @@ import com.google.gwt.dev.js.ast.JsNumberLiteral;
 import com.google.gwt.dev.js.ast.JsNumericEntry;
 import com.google.gwt.dev.js.ast.JsObjectLiteral;
 import com.google.gwt.dev.js.ast.JsParameter;
+import com.google.gwt.dev.js.ast.JsPositionMarker;
+import com.google.gwt.dev.js.ast.JsPositionMarker.Type;
 import com.google.gwt.dev.js.ast.JsPostfixOperation;
 import com.google.gwt.dev.js.ast.JsPrefixOperation;
 import com.google.gwt.dev.js.ast.JsProgram;
@@ -157,32 +159,47 @@ import com.google.gwt.dev.js.ast.JsUnaryOperation;
 import com.google.gwt.dev.js.ast.JsUnaryOperator;
 import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
+import com.google.gwt.dev.js.ast.JsVisitable;
 import com.google.gwt.dev.js.ast.JsWhile;
 import com.google.gwt.dev.util.Name.SourceName;
 import com.google.gwt.dev.util.Pair;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.dev.util.arg.OptionJsInteropMode;
+import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
+import com.google.gwt.dev.util.arg.OptionOptimize;
+import com.google.gwt.dev.util.collect.Stack;
+import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
+import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
+import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.base.Function;
+import com.google.gwt.thirdparty.guava.common.base.Predicate;
+import com.google.gwt.thirdparty.guava.common.base.Predicates;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSortedSet;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.LinkedHashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.Stack;
+import java.util.SortedSet;
+import java.util.TreeMap;
 
 /**
  * Creates a JavaScript AST from a <code>JProgram</code> node.
  */
 public class GenerateJavaScriptAST {
-
   /**
    * The GWT Java AST might contain different local variables with the same name in the same
    * scope. This fixup pass renames variables in the case they clash in a scope.
@@ -265,8 +282,8 @@ public class GenerateJavaScriptAST {
     }
 
     private Scope currentScope;
-    private Map<JLocal, Scope> scopesByLocal;
-    private Multimap<String, JLocal> localsByName;
+    private Map<JVariable, Scope> scopesByLocal;
+    private Multimap<String, JVariable> localsByName;
 
     @Override
     public boolean visit(JMethodBody x, Context ctx) {
@@ -289,7 +306,7 @@ public class GenerateJavaScriptAST {
     }
 
     @Override
-    public void endVisit(JLocalRef x, Context ctx) {
+    public void endVisit(JVariableRef x, Context ctx) {
       // We use the a block scope as a proxy for a lifetime which is safe to do albeit non optimal.
       //
       // Keep track of the scope that encloses a variable lifetime. E.g. assume the following code.
@@ -306,7 +323,12 @@ public class GenerateJavaScriptAST {
       // }
       // Scope 1.1 is the innermost scope that encloses the lifetime of variable a and
       // scope 1 is the innermost scope that encloses the lifetime of variable b.
-      JLocal local = x.getLocal();
+      if (x instanceof JFieldRef) {
+        // Skip fields as they are always qualified in JavaScript and their name resolution logic
+        // is in {@link CreateNameAndScopesVisitor}.
+        return;
+      }
+      JVariable local = x.getTarget();
       Scope oldVariableScope = scopesByLocal.get(local);
       Scope newVariableScope =  Scope.getInnermostEnclosingScope(oldVariableScope, currentScope);
       newVariableScope.addUsedName(local.getName());
@@ -322,7 +344,7 @@ public class GenerateJavaScriptAST {
       // computed lifetimes are intersecting. By using the scope to model lifetimes two variables
       // clash if their computed scopes are nested.
       for (String name : localsByName.keySet()) {
-        Collection<JLocal> localSet = localsByName.get(name);
+        Collection<JVariable> localSet = localsByName.get(name);
         if (localSet.size() == 1) {
           continue;
         }
@@ -365,6 +387,16 @@ public class GenerateJavaScriptAST {
     }
   }
 
+  /**
+   * Finds the nodes that are targets of JNameOf so that a name is assigned to them.
+   */
+  private class FindNameOfTargets extends JVisitor {
+    @Override
+    public void endVisit(JNameOf x, Context ctx) {
+      nameOfTargets.add(x.getNode());
+    }
+  }
+
   private class CreateNamesAndScopesVisitor extends JVisitor {
 
     /**
@@ -394,7 +426,7 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JClassType x, Context ctx) {
-      pop();
+      scopeStack.pop();
     }
 
     @Override
@@ -408,10 +440,13 @@ public class GenerateJavaScriptAST {
       } else {
         JsName jsName;
         if (specialObfuscatedFields.containsKey(x)) {
-          jsName = peek().declareName(mangleNameSpecialObfuscate(x));
+          jsName = scopeStack.peek().declareName(mangleNameSpecialObfuscate(x));
+          jsName.setObfuscatable(false);
+        } else if (typeOracle.isJsTypeField(x)) {
+          jsName = scopeStack.peek().declareName(name, name);
           jsName.setObfuscatable(false);
         } else {
-          jsName = peek().declareName(mangleName, name);
+          jsName = scopeStack.peek().declareName(mangleName, name);
         }
         names.put(x, jsName);
         recordSymbol(x, jsName);
@@ -420,7 +455,7 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JInterfaceType x, Context ctx) {
-      pop();
+      scopeStack.pop();
     }
 
     @Override
@@ -428,25 +463,25 @@ public class GenerateJavaScriptAST {
       if (names.get(x) != null) {
         return;
       }
-      names.put(x, peek().declareName(x.getName()));
+      names.put(x, scopeStack.peek().declareName(x.getName()));
     }
 
     @Override
     public void endVisit(JLocal x, Context ctx) {
       // locals can conflict, that's okay just reuse the same variable
-      JsScope scope = peek();
+      JsScope scope = scopeStack.peek();
       JsName jsName = scope.declareName(x.getName());
       names.put(x, jsName);
     }
 
     @Override
     public void endVisit(JMethod x, Context ctx) {
-      pop();
+      scopeStack.pop();
     }
 
     @Override
     public void endVisit(JParameter x, Context ctx) {
-      names.put(x, peek().declareName(x.getName()));
+      names.put(x, scopeStack.peek().declareName(x.getName()));
     }
 
     @Override
@@ -460,19 +495,6 @@ public class GenerateJavaScriptAST {
       JField nullField = x.getNullField();
       JsName nullFieldName = objectScope.declareName(nullField.getName());
       names.put(nullField, nullFieldName);
-
-      /*
-       * put nullMethod in the global scope, too; it's the replacer for clinits.
-       */
-      if (!program.isReferenceOnly(program.getIndexedType("Cast"))) {
-        // This is the module that contains the intrinsics, hence define the null function.
-        // TODO(rluble): this should be cleaner. Ideally there is a bootstrap library that
-        // is minimal and has all compiler support code.
-        nullFunctionJsName = createNullFunction(nullMethod.getName());
-      } else {
-        nullFunctionJsName = topScope.declareName(nullMethod.getName());
-      }
-      names.put(nullMethod, nullFunctionJsName);
 
       /*
        * Create names for instantiable array types since JProgram.traverse()
@@ -490,17 +512,17 @@ public class GenerateJavaScriptAST {
       // have I already been visited as a super type?
       JsScope myScope = classScopes.get(x);
       if (myScope != null) {
-        push(myScope);
+        scopeStack.push(myScope);
         return false;
       }
 
       // My seed function name
-      JsName jsName = topScope.declareName(getNameString(x), x.getShortName());
+      JsName jsName = topScope.declareName(JjsUtils.getNameString(x), x.getShortName());
       names.put(x, jsName);
       recordSymbol(x, jsName);
 
       // My class scope
-      if (x.getSuperClass() == null) {
+      if (x.getSuperClass() == null || x.getSuperClass().isJsPrototypeStub()) {
         myScope = objectScope;
       } else {
         JsScope parentScope = classScopes.get(x.getSuperClass());
@@ -522,14 +544,14 @@ public class GenerateJavaScriptAST {
       }
       classScopes.put(x, myScope);
 
-      push(myScope);
+      scopeStack.push(myScope);
       return true;
     }
 
     @Override
     public boolean visit(JInterfaceType x, Context ctx) {
       // interfaces have no name at run time
-      push(interfaceScope);
+      scopeStack.push(interfaceScope);
       return true;
     }
 
@@ -542,9 +564,26 @@ public class GenerateJavaScriptAST {
           JsName polyName;
           if (x.isPrivate()) {
             polyName = interfaceScope.declareName(mangleNameForPrivatePoly(x), name);
+          } else if (x.isPackagePrivate()) {
+            polyName = interfaceScope.declareName(mangleNameForPackagePrivatePoly(x), name);
+            // Also add the mapping from the top of the package private overriding chain, so
+            // so that it can be referred when generating the vtable of a subclass that
+            // increases the visibility of this method.
+            polymorphicNames.put(typeOracle.getTopMostDefinition(x), polyName);
           } else if (specialObfuscatedMethodSigs.containsKey(x.getSignature())) {
             polyName = interfaceScope.declareName(mangleNameSpecialObfuscate(x));
             polyName.setObfuscatable(false);
+            // if a JsType and we can set set the interface method to non-obfuscatable
+          } else if (typeOracle.isJsTypeMethod(x) && !typeOracle.needsJsInteropBridgeMethod(x)) {
+            if (x.isOrOverridesJsProperty()) {
+              // Prevent JsProperty functions like x() from colliding with intended JS native
+              // properties like .x;
+              polyName = interfaceScope.declareName(mangleNameForJsProperty(x), name);
+            } else {
+              // Leave simple JsType dispatches clean and unobfuscated.
+              polyName = interfaceScope.declareName(name, name);
+              polyName.setObfuscatable(false);
+            }
           } else {
             polyName = interfaceScope.declareName(mangleNameForPoly(x), name);
           }
@@ -554,7 +593,7 @@ public class GenerateJavaScriptAST {
 
       if (x.isAbstract()) {
         // just push a dummy scope that we can pop in endVisit
-        push(null);
+        scopeStack.push(null);
         return false;
       }
 
@@ -569,9 +608,10 @@ public class GenerateJavaScriptAST {
 
       /*
        * Only allocate a name for a function if it is native, not polymorphic,
-       * or stack-stripping is disabled.
+       * is a JNameOf target or stack-stripping is disabled.
        */
-      if (!stripStack || !polymorphicNames.containsKey(x) || x.isNative()) {
+      if (!stripStack || !polymorphicNames.containsKey(x) || x.isNative()
+          || nameOfTargets.contains(x)) {
         globalName = topScope.declareName(mangleName, name);
         names.put(x, globalName);
         recordSymbol(x, globalName);
@@ -598,7 +638,7 @@ public class GenerateJavaScriptAST {
         polymorphicJsFunctions.add(jsFunction);
       }
       methodBodyMap.put(x.getBody(), jsFunction);
-      push(jsFunction.getScope());
+      scopeStack.push(jsFunction.getScope());
 
       if (program.getIndexedMethods().contains(x)) {
         indexedFunctions.put(x.getEnclosingType().getShortName() + "." + x.getName(), jsFunction);
@@ -615,15 +655,15 @@ public class GenerateJavaScriptAST {
       for (JTryStatement.CatchClause clause : x.getCatchClauses()) {
         JLocalRef arg = clause.getArg();
         JBlock catchBlock = clause.getBlock();
-        JsCatch jsCatch = new JsCatch(x.getSourceInfo(), peek(), arg.getTarget().getName());
+        JsCatch jsCatch = new JsCatch(x.getSourceInfo(), scopeStack.peek(), arg.getTarget().getName());
         JsParameter jsParam = jsCatch.getParameter();
         names.put(arg.getTarget(), jsParam.getName());
         catchMap.put(catchBlock, jsCatch);
         catchParamIdentifiers.add(jsParam.getName());
 
-        push(jsCatch.getScope());
+        scopeStack.push(jsCatch.getScope());
         accept(catchBlock);
-        pop();
+        scopeStack.pop();
       }
 
       // TODO: normalize this so it's never null?
@@ -631,28 +671,6 @@ public class GenerateJavaScriptAST {
         accept(x.getFinallyBlock());
       }
       return false;
-    }
-
-    private JsName createNullFunction(String name) {
-      return createGlobalJsFunctionFromSource(name, "function " + name + "(){}");
-    }
-
-    private JsName createGlobalJsFunctionFromSource(String functionName, String code) {
-      try {
-        List<JsStatement> stmts =
-            JsParser.parse(SourceOrigin.UNKNOWN, topScope, new StringReader(code));
-        assert stmts.size() == 1;
-        JsExprStmt stmt = (JsExprStmt) stmts.get(0);
-        JsFunction globalFunction =  (JsFunction) stmt.getExpression();
-
-        assert functionName == globalFunction.getName().getIdent();
-
-        List< JsStatement > globalStmts = jsProgram.getGlobalBlock().getStatements();
-        globalStmts.add(0, stmt);
-        return globalFunction.getName();
-      }  catch (Exception e) {
-        throw new InternalCompilerException("Unexpected exception parsing '" + code + "'", e);
-      }
     }
 
     /**
@@ -672,43 +690,15 @@ public class GenerateJavaScriptAST {
       return uriString;
     }
 
-    private JsScope peek() {
-      return scopeStack.peek();
-    }
-
-    private void pop() {
-      scopeStack.pop();
-    }
-
-    private void push(JsScope scope) {
-      scopeStack.push(scope);
-    }
-
     private void recordSymbol(JReferenceType x, JsName jsName) {
-      StringBuilder sb = new StringBuilder();
-      sb.append('{');
-      JCastMap castMap = program.getCastMap(x);
-      if (castMap != null) {
-        boolean isFirst = true;
-        for (JExpression castToType : castMap.getCanCastToTypes()) {
-          if (isFirst) {
-            isFirst = false;
-          } else {
-            sb.append(',');
-          }
-          sb.append(castToType.toSource());
-          sb.append(":1");
-        }
+      if (getRuntimeTypeReference(x) == null || !typeOracle.isInstantiatedType(x)) {
+        return;
       }
-      sb.append('}');
-      CastableTypeMap castableTypeMap = new StandardCastableTypeMap(sb.toString());
 
-
-      String typeId = getRuntimeTypeReference(x) != null ?
-         getRuntimeTypeReference(x).toSource() : null;
+      String typeId = getRuntimeTypeReference(x).toSource();
       StandardSymbolData symbolData =
-          StandardSymbolData.forClass(x.getName(), x.getSourceInfo().getFileName(), x
-              .getSourceInfo().getStartLine(), castableTypeMap, typeId);
+          StandardSymbolData.forClass(x.getName(), x.getSourceInfo().getFileName(),
+              x.getSourceInfo().getStartLine(), typeId);
       assert !symbolTable.containsKey(symbolData);
       symbolTable.put(symbolData, jsName);
     }
@@ -744,28 +734,19 @@ public class GenerateJavaScriptAST {
     }
   }
 
-  private class GenerateJavaScriptVisitor extends GenerateJavaScriptLiterals {
+  private class GenerateJavaScriptVisitor extends JVisitor {
 
-    private final Set<JClassType> alreadyRan = Sets.newHashSet();
+    private final Set<JClassType> alreadyRan = Sets.newLinkedHashSet();
+
+    private final Map<String, Object> exportedMembersByExportName = new TreeMap<String, Object>();
 
     private final JsName arrayLength = objectScope.declareName("length");
 
     private final Map<JClassType, JsFunction> clinitMap = Maps.newHashMap();
 
+    public static final String LOCAL_TEMP_PREFIX = "$tmp$";
+
     private JMethod currentMethod = null;
-
-    /**
-     * The JavaScript functions corresponding to the entry methods of the
-     * program ({@link JProgram#getEntryMethods()}).
-     */
-    private JsFunction[] entryFunctions;
-
-    /**
-     * A reverse index for the entry methods of the program (
-     * {@link JProgram#getEntryMethods()}). Each entry method is mapped to its
-     * integer index.
-     */
-    private Map<JMethod, Integer> entryMethodToIndex;
 
     private final JsName globalTemp = topScope.declareName("_");
 
@@ -781,6 +762,17 @@ public class GenerateJavaScriptAST {
       prototype.setObfuscatable(false);
       arrayLength.setObfuscatable(false);
     }
+
+    /**
+     * Holds any local variable declarations which must be inserted into the current JS function
+     * body under construction.
+     */
+    private JsVars pendingLocals;
+
+    /**
+     * Counter for assigning locals.
+     */
+    int tmpNumber = 0;
 
     @Override
     public void endVisit(JAbsentArrayDimension x, Context ctx) {
@@ -849,7 +841,7 @@ public class GenerateJavaScriptAST {
     public void endVisit(JBreakStatement x, Context ctx) {
       JsNameRef labelRef = null;
       if (x.getLabel() != null) {
-        JsLabel label = (JsLabel) pop(); // label
+        JsLabel label = pop(); // label
         labelRef = label.getName().makeRef(x.getSourceInfo());
       }
       push(new JsBreak(x.getSourceInfo(), labelRef));
@@ -884,19 +876,20 @@ public class GenerateJavaScriptAST {
         return;
       }
 
+      if (program.isJsTypePrototype(x)) {
+        // Don't generate JS for magic @PrototypeOfJsType stubs classes, strip them from output
+        return;
+      }
+
       if (alreadyRan.contains(x)) {
         return;
       }
-
-      if (program.getTypeClassLiteralHolder() == x) {
-        // Handled in generateClassLiterals.
-        return;
-      }
-
-      if (program.immortalCodeGenTypes.contains(x)) {
-        // Handled in generateImmortalTypes
-        return;
-      }
+      assert program.getTypeClassLiteralHolder() != x;
+      assert !program.immortalCodeGenTypes.contains(x);
+      // Super classes should be emitted before the actual class.
+      assert x.getSuperClass() == null || program.isReferenceOnly(x.getSuperClass()) ||
+          program.isJsTypePrototype(x.getSuperClass()) ||
+          alreadyRan.contains(x.getSuperClass());
 
       alreadyRan.add(x);
 
@@ -921,10 +914,18 @@ public class GenerateJavaScriptAST {
         // don't add polymorphic JsFuncs, inline decl into vtable assignment
         if (func != null && !polymorphicJsFunctions.contains(func)) {
           globalStmts.add(func.makeStmt());
+
+          if (shouldEmitDisplayNames()) {
+            // get the original method for this function
+            JMethod originalMethod = javaMethodForJSFunction.get(func);
+            JsExprStmt displayNameAssignment =
+                outputDisplayName(func.getName().makeRef(func.getSourceInfo()), originalMethod);
+            globalStmts.add(displayNameAssignment);
+          }
         }
       }
 
-      if (typeOracle.isInstantiatedType(x) && !program.isJavaScriptObject(x) &&
+      if (typeOracle.isInstantiatedType(x) && !typeOracle.isJavaScriptObject(x) &&
           x !=  program.getTypeJavaLangString()) {
         generateClassSetup(x, globalStmts);
       }
@@ -947,14 +948,10 @@ public class GenerateJavaScriptAST {
         globalStmts.add(vars);
       }
 
-      for (JNode node : x.getArtificialRescues()) {
-        if (node instanceof JMethod) {
-          JsName jsName = names.get(node);
-          if (jsName != null) {
-            JsFunction func = (JsFunction) jsName.getStaticRef();
-            func.setArtificiallyRescued(true);
-          }
-        }
+      if (typeOracle.isJsInteropEnabled() &&
+          typeOracle.isInstantiatedType(x) && !typeOracle.isJavaScriptObject(x) &&
+        x !=  program.getTypeJavaLangString()) {
+        collectExports(x);
       }
 
       // TODO(zundel): Check that each unique method has a unique
@@ -973,7 +970,7 @@ public class GenerateJavaScriptAST {
     public void endVisit(JContinueStatement x, Context ctx) {
       JsNameRef labelRef = null;
       if (x.getLabel() != null) {
-        JsLabel label = (JsLabel) pop(); // label
+        JsLabel label = pop(); // label
         labelRef = label.getName().makeRef(x.getSourceInfo());
       }
       push(new JsContinue(x.getSourceInfo(), labelRef));
@@ -996,8 +993,8 @@ public class GenerateJavaScriptAST {
         return;
       }
 
-      JsExpression initializer = (JsExpression) pop(); // initializer
-      JsNameRef localRef = (JsNameRef) pop(); // localRef
+      JsExpression initializer = pop(); // initializer
+      JsNameRef localRef = pop(); // localRef
 
       JVariable target = x.getVariableRef().getTarget();
       if (target instanceof JField) {
@@ -1029,7 +1026,7 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JExpressionStatement x, Context ctx) {
-      JsExpression expr = (JsExpression) pop(); // expr
+      JsExpression expr = pop(); // expr
       push(expr.makeStmt());
     }
 
@@ -1050,7 +1047,7 @@ public class GenerateJavaScriptAST {
         // setup the default value, see Issue 380
         accept(x.getType().getDefaultValue());
       }
-      JsExpression rhs = (JsExpression) pop();
+      JsExpression rhs = pop();
       JsName name = names.get(x);
 
       if (program.getIndexedFields().contains(x)) {
@@ -1066,7 +1063,7 @@ public class GenerateJavaScriptAST {
         // for non-statics, only setup an assignment if needed
         if (rhs != null) {
           JsNameRef fieldRef = name.makeRef(x.getSourceInfo());
-          fieldRef.setQualifier(globalTemp.makeRef(x.getSourceInfo()));
+          fieldRef.setQualifier(getPrototypeQualifierOf(x));
           JsExpression asg = createAssignment(fieldRef, rhs);
           push(new JsExprStmt(x.getSourceInfo(), asg));
         } else {
@@ -1089,13 +1086,13 @@ public class GenerateJavaScriptAST {
        */
 
       // See if we need a clinit
-      JsInvocation jsInvocation = maybeCreateClinitCall(field);
+      JsInvocation jsInvocation = maybeCreateClinitCall(field, false);
       if (jsInvocation != null) {
         curExpr = createCommaExpression(jsInvocation, curExpr);
       }
 
       if (x.getInstance() != null) {
-        JsExpression qualifier = (JsExpression) pop();
+        JsExpression qualifier = pop();
         if (field.isStatic()) {
           // unnecessary qualifier, create a comma expression
           curExpr = createCommaExpression(qualifier, curExpr);
@@ -1183,13 +1180,38 @@ public class GenerateJavaScriptAST {
         globalStmts.add(clinitFunc.makeStmt());
       }
 
+      assert jsFuncs.get(0).getName().getShortIdent().startsWith(GwtAstBuilder.CLINIT_NAME + "_");
+      jsFuncs.remove(0);
+
+      // declare all static methods (Java8) into the global scope
+      for (JsFunction func : jsFuncs) {
+        if (!polymorphicJsFunctions.contains(func)) {
+          globalStmts.add(func.makeStmt());
+        }
+      }
+
       // setup fields
       JsVars vars = new JsVars(x.getSourceInfo());
       for (int i = 0; i < jsFields.size(); ++i) {
         vars.add(jsFields.get(i));
       }
+
       if (!vars.isEmpty()) {
         globalStmts.add(vars);
+      }
+
+      if (typeOracle.isJsInteropEnabled()) {
+        /*
+         * If a @JsType is exported, but no constructors are, @JsDoc type declarations added by the
+         * linker will fail in uncompiled mode, as they will try to access the 'Foo.prototype' which
+         * is undefined even though the goog.provide('Foo') statement exists. Here we synthesize a
+         * simple constructor to aid the linker.
+         */
+        if (closureCompilerFormatEnabled && x.isJsType()) {
+          declareSynthesizedClosureConstructor(x, globalStmts);
+        }
+
+        collectExports(x);
       }
     }
 
@@ -1200,10 +1222,15 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JLabeledStatement x, Context ctx) {
-      JsStatement body = (JsStatement) pop(); // body
-      JsLabel label = (JsLabel) pop(); // label
+      JsStatement body = pop(); // body
+      JsLabel label = pop(); // label
       label.setStmt(body);
       push(label);
+    }
+
+    @Override
+    public void endVisit(JLiteral x, Context ctx) {
+      push(JjsUtils.translateLiteral(x));
     }
 
     @Override
@@ -1217,25 +1244,6 @@ public class GenerateJavaScriptAST {
     }
 
     @Override
-    public void endVisit(JLongLiteral x, Context ctx) {
-      super.endVisit(x, ctx);
-      JsExpression longLiteralAllocation = pop();
-
-      // My seed function name
-      String nameString = Long.toString(x.getValue(), 16);
-      if (nameString.charAt(0) == '-') {
-        nameString = "N" + nameString.substring(1);
-      } else {
-        nameString = "P" + nameString;
-      }
-      nameString += "_longLit";
-      JsName longLit = topScope.declareName(nameString);
-      longLits.put(x.getValue(), longLit);
-      longObjects.put(longLit, longLiteralAllocation);
-      push(longLit.makeRef(x.getSourceInfo()));
-    }
-
-    @Override
     public void endVisit(JMethod x, Context ctx) {
       if (x.isAbstract()) {
         push(null);
@@ -1243,6 +1251,12 @@ public class GenerateJavaScriptAST {
       }
 
       JsFunction jsFunc = pop(); // body
+
+      javaMethodForJSFunction.put(jsFunc, x);
+
+      if (!program.isInliningAllowed(x)) {
+        jsProgram.disallowInlining(jsFunc);
+      }
 
       // Collect the resulting function to be considered by the JsInliner.
       if (methodsForJsInlining.contains(x)) {
@@ -1267,22 +1281,19 @@ public class GenerateJavaScriptAST {
         jsFunc.getBody().getStatements().add(0, jsInvocation.makeStmt());
       }
 
-      if (x.isTrace()) {
-        jsFunc.setTrace();
+      if (!pendingLocals.isEmpty()) {
+        jsFunc.getBody().getStatements().add(0, pendingLocals);
       }
 
       push(jsFunc);
-      Integer entryIndex = entryMethodToIndex.get(x);
-      if (entryIndex != null) {
-        entryFunctions[entryIndex] = jsFunc;
-      }
       currentMethod = null;
+      pendingLocals = null;
     }
 
     @Override
     public void endVisit(JMethodBody x, Context ctx) {
 
-      JsBlock body = (JsBlock) pop();
+      JsBlock body = pop();
       List<JsNameRef> locals = popList(x.getLocals().size()); // locals
 
       JsFunction jsFunc = methodBodyMap.get(x);
@@ -1324,7 +1335,6 @@ public class GenerateJavaScriptAST {
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
       JsInvocation jsInvocation = new JsInvocation(x.getSourceInfo());
-
       popList(jsInvocation.getArguments(), x.getArgs().size()); // args
 
       if (JProgram.isClinit(method)) {
@@ -1339,7 +1349,7 @@ public class GenerateJavaScriptAST {
          */
         JDeclaredType type = method.getEnclosingType();
         JDeclaredType clinitTarget = type.getClinitTarget();
-        if (clinitTarget == null) {
+        if (clinitTarget == null || program.isJsTypePrototype(clinitTarget)) {
           if (x.getInstance() != null) {
             pop(); // instance
           }
@@ -1352,15 +1362,20 @@ public class GenerateJavaScriptAST {
         }
       }
 
-      JsNameRef qualifier;
+      JsNameRef qualifier = null;
       JsExpression unnecessaryQualifier = null;
+      JsExpression result = null;
+      boolean isJsProperty = false;
+      boolean isSam = false;
+      result = jsInvocation;
+
       if (method.isStatic()) {
         if (x.getInstance() != null) {
-          unnecessaryQualifier = (JsExpression) pop(); // instance
+          unnecessaryQualifier = pop(); // instance
         }
         qualifier = names.get(method).makeRef(x.getSourceInfo());
       } else if (x.isStaticDispatchOnly() && method.isConstructor()) {
-        /*
+         /*
          * Constructor calls through {@code this} and {@code super} are always dispatched statically
          * using the constructor function name (constructors are always defined as top level
          * functions).
@@ -1371,25 +1386,26 @@ public class GenerateJavaScriptAST {
         JsName callName = objectScope.declareName("call");
         callName.setObfuscatable(false);
         qualifier = callName.makeRef(x.getSourceInfo());
-        qualifier.setQualifier(names.get(method).makeRef(x.getSourceInfo()));
+        JsNameRef methodRef = names.get(method).makeRef(x.getSourceInfo());
+        qualifier.setQualifier(methodRef);
         jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
-
-      } else if (x.isStaticDispatchOnly()) {
+        if (program.isJsTypePrototype(method.getEnclosingType())) {
+          result = dispatchToSuperPrototype(x, method, qualifier, methodRef, jsInvocation);
+        }
+      } else if (x.isStaticDispatchOnly() && !method.isConstructor()) {
         // Regular super call. This calls are always static and optimizations normally statify them.
         // They can appear in completely unoptimized code, hence need to be handled here.
-        assert !method.isConstructor();
 
         // Construct JCHSU.getPrototypeFor(type).polyname
         // TODO(rluble): Ideally we would want to construct the inheritance chain the JS way and
         // then we could do Type.prototype.polyname.call(this, ...). Currently prototypes do not
         // have global names instead they are stuck into the prototypesByTypeId array.
-        JsNameRef getClassProtoFunctionRef = indexedFunctions.get(
-            "JavaClassHierarchySetupUtil.getClassPrototype").getName().makeRef(x.getSourceInfo());
-        JsInvocation getPrototypeCall = new JsInvocation(x.getSourceInfo());
-        getPrototypeCall.setQualifier(getClassProtoFunctionRef);
         final JDeclaredType superMethodTargetType = method.getEnclosingType();
-        getPrototypeCall.getArguments()
-            .add(convertJavaLiteral(typeIdsByType.get(superMethodTargetType)));
+
+        JsInvocation getPrototypeCall = constructInvocation(x.getSourceInfo(),
+            "JavaClassHierarchySetupUtil.getClassPrototype",
+            convertJavaLiteral(typeMapper.get(superMethodTargetType)));
+
         JsNameRef methodNameRef = polymorphicNames.get(method).makeRef(x.getSourceInfo());
         methodNameRef.setQualifier(getPrototypeCall);
 
@@ -1399,13 +1415,194 @@ public class GenerateJavaScriptAST {
         qualifier = callName.makeRef(x.getSourceInfo());
         qualifier.setQualifier(methodNameRef);
         jsInvocation.getArguments().add(0, (JsExpression) pop()); // instance
+        // Is this method targeting a Foo_Prototype class?
+        if (program.isJsTypePrototype(method.getEnclosingType())) {
+          result = dispatchToSuperPrototype(x, method, qualifier, methodNameRef, jsInvocation);
+        }
+        // getClassPrototype is a native method call, so we enabling inlining
+        methodsForJsInlining.add(currentMethod);
       } else {
-        // Dispatch polymorphically (normal case).
-        qualifier = polymorphicNames.get(method).makeRef(x.getSourceInfo());
-        qualifier.setQualifier((JsExpression) pop()); // instance
+        JsName polyName = polymorphicNames.get(method);
+        // potentially replace method call with property access
+        isJsProperty = method.isOrOverridesJsProperty();
+        isSam = method.isOrOverridesJsFunctionMethod();
+
+        if (isJsProperty) {
+          JsExpression qualExpr = pop();
+          switch (method.getImmediateOrTransitiveJsPropertyType()) {
+            case HAS:
+              result = createHasDispatch(x, method, qualExpr);
+              break;
+            case GET:
+              result = createGetterDispatch(x, unnecessaryQualifier, method, qualExpr);
+              break;
+            case SET:
+              result = createSetterDispatch(x, jsInvocation, method, qualExpr);
+              break;
+            default:
+              throw new InternalCompilerException("JsProperty not a setter, getter, or has.");
+          }
+        } else if (isSam) {
+          JsExpression qualExpr = pop();
+          result = createSAMcallDispatch(x, jsInvocation, qualExpr);
+        } else {
+          // insert trampoline (_ = instance, trampoline(_, _.jsBridgeMethRef,
+          // _.javaMethRef)).bind(_)(args)
+          if (typeOracle.needsJsInteropBridgeMethod(method)) {
+            maybeDispatchViaTrampolineToBridgeMethod(x, method, jsInvocation, unnecessaryQualifier,
+                result, polyName);
+
+            return;
+          } else {
+            // Dispatch polymorphically (normal case).
+            qualifier = polyName.makeRef(x.getSourceInfo());
+            qualifier.setQualifier((JsExpression) pop()); // instance
+          }
+        }
       }
-      jsInvocation.setQualifier(qualifier);
-      push(createCommaExpression(unnecessaryQualifier, jsInvocation));
+      if (!isJsProperty && !isSam) {
+        jsInvocation.setQualifier(qualifier);
+      }
+      push(createCommaExpression(unnecessaryQualifier, result));
+    }
+
+    private void maybeDispatchViaTrampolineToBridgeMethod(JMethodCall x,
+        JMethod method, JsInvocation jsInvocation,
+        JsExpression unnecessaryQualifier, JsExpression result,
+        JsName polyName) {
+
+      JsName tempLocal = createTmpLocal();
+
+      // tempLocal = instance value
+      JsExpression tmp = createAssignment(tempLocal.makeRef(
+          x.getSourceInfo()), ((JsExpression) pop()));
+      JsName trampMethName = indexedFunctions.get(
+          "JavaClassHierarchySetupUtil.trampolineBridgeMethod").getName();
+
+      // tempLocal.jsBridgeMethRef
+      JsName bridgejsName = polyName.getEnclosing().findExistingName(method.getName());
+      JsNameRef bridgeRef = bridgejsName != null ? bridgejsName.makeRef(x.getSourceInfo())
+          : new JsNameRef(x.getSourceInfo(), method.getName());
+      bridgeRef.setQualifier(tempLocal.makeRef(x.getSourceInfo()));
+
+      // tempLocal.javaMethRef
+      JsNameRef javaMethRef = polyName.makeRef(x.getSourceInfo());
+      javaMethRef.setQualifier(tempLocal.makeRef(x.getSourceInfo()));
+
+      JsInvocation callTramp = new JsInvocation(x.getSourceInfo(),
+          trampMethName.makeRef(x.getSourceInfo()),
+          tempLocal.makeRef(x.getSourceInfo()),
+          bridgeRef,
+          javaMethRef);
+
+      JsNameRef bind = new JsNameRef(x.getSourceInfo(), "bind");
+      JsInvocation callBind = new JsInvocation(x.getSourceInfo());
+      callBind.setQualifier(bind);
+      callBind.getArguments().add(tempLocal.makeRef(x.getSourceInfo()));
+      // (tempLocal = instance, tramp(tempLocal, tempLocal.bridgeRef, tempLocal.javaRef)).bind(tempLocal)
+      bind.setQualifier(callTramp);
+      jsInvocation.setQualifier(callBind);
+      result = createCommaExpression(tmp, jsInvocation);
+      push(createCommaExpression(unnecessaryQualifier, result));
+    }
+
+    private JsName createTmpLocal() {
+      SourceInfo sourceInfo = currentMethod.getSourceInfo();
+      JsFunction func = getJsFunctionFor(currentMethod);
+      JsScope funcScope = func.getScope();
+      JsName tmpName;
+      String tmpIdent = LOCAL_TEMP_PREFIX + tmpNumber;
+
+      while (funcScope.findExistingName(tmpIdent) != null) {
+        tmpNumber++;
+        tmpIdent = LOCAL_TEMP_PREFIX + tmpNumber;
+      }
+
+      tmpName = funcScope.declareName(tmpIdent);
+
+      JsVar var = new JsVar(sourceInfo, tmpName);
+      pendingLocals.add(var);
+      return tmpName;
+    }
+
+    private JsExpression createSAMcallDispatch(JMethodCall x, JsInvocation jsInvocation,
+        JsExpression qualExpr) {
+      JsInvocation result = new JsInvocation(x.getSourceInfo());
+      result.setQualifier(qualExpr);
+      result.getArguments().addAll(jsInvocation.getArguments());
+      return result;
+    }
+
+    private JsExpression createHasDispatch(JMethodCall x, JMethod targetMethod,
+        JsExpression qualExpr) {
+      String propertyName = targetMethod.getImmediateOrTransitiveJsMemberName();
+      JsStringLiteral propertyNameLiteral = new JsStringLiteral(x.getSourceInfo(), propertyName);
+      return new JsBinaryOperation(x.getSourceInfo(), JsBinaryOperator.INOP, propertyNameLiteral,
+          qualExpr);
+    }
+
+    private JsExpression createSetterDispatch(JMethodCall x, JsInvocation jsInvocation,
+        JMethod targetMethod, JsExpression qualExpr) {
+      JType returnType = targetMethod.getType();
+      boolean fluent = returnType instanceof JReferenceType
+          && returnType != program.getTypeJavaLangObject() && typeOracle.canTriviallyCast(
+              x.getTarget().getEnclosingType(), returnType.getUnderlyingType());
+      String propertyName = targetMethod.getImmediateOrTransitiveJsMemberName();
+
+      JsExpression result;
+      JsNameRef propertyReference = new JsNameRef(x.getSourceInfo(), propertyName);
+      // either qualExpr.prop or _.prop depending on fluent or not
+      propertyReference.setQualifier(fluent ? globalTemp.makeRef(x.getSourceInfo()) : qualExpr);
+      // propExpr = arg
+      result = createAssignment(propertyReference, jsInvocation.getArguments().get(0));
+      if (fluent) {
+        // (_ = qualExpr, _.prop = arg, _)
+        result = createCommaExpression(
+            createAssignment(globalTemp.makeRef(x.getSourceInfo()), qualExpr),
+            createCommaExpression(result, globalTemp.makeRef(x.getSourceInfo())));
+      }
+      return result;
+    }
+
+    private JsExpression createGetterDispatch(JMethodCall x, JsExpression unnecessaryQualifier,
+        JMethod targetMethod, JsExpression qualExpr) {
+      String propertyName = targetMethod.getImmediateOrTransitiveJsMemberName();
+      JsNameRef propertyReference = new JsNameRef(x.getSourceInfo(), propertyName);
+      propertyReference.setQualifier(qualExpr);
+      return createCommaExpression(unnecessaryQualifier, propertyReference);
+    }
+
+    /**
+     * Setup qualifier and methodRef to dispatch to super-ctor or super-method.
+     */
+    private JsExpression dispatchToSuperPrototype(JMethodCall x, JMethod method, JsNameRef qualifier,
+                                                  JsNameRef methodRef, JsInvocation jsInvocation) {
+      String jsPrototype = null;
+      // find JsType of Prototype method being invoked.
+      for (JInterfaceType intf : method.getEnclosingType().getImplements()) {
+        JDeclaredType jsIntf = typeOracle.getNearestJsType(intf, true);
+        assert jsIntf instanceof JInterfaceType;
+
+        if (jsIntf != null) {
+          jsPrototype = jsIntf.getJsPrototype();
+          break;
+        }
+      }
+      assert jsPrototype != null : "Unable to find JsType with prototype";
+
+      // in JsType case, super.foo() call requires SuperCtor.prototype.foo.call(this, args)
+      // the method target should be on a class that ends with $Prototype and implements a JsType
+      if (!(method instanceof JConstructor) && typeOracle.isJsTypeMethod(method)) {
+        JsNameRef protoRef = prototype.makeRef(x.getSourceInfo());
+        methodRef = new JsNameRef(methodRef.getSourceInfo(), method.getName());
+        // add qualifier so we have jsPrototype.prototype.methodName.call(this, args)
+        protoRef.setQualifier(createJsQualifier(jsPrototype, x.getSourceInfo()));
+        methodRef.setQualifier(protoRef);
+        qualifier.setQualifier(methodRef);
+        return jsInvocation;
+      }
+
+      return JsNullLiteral.INSTANCE;
     }
 
     @Override
@@ -1426,7 +1623,10 @@ public class GenerateJavaScriptAST {
     @Override
     public void endVisit(JNameOf x, Context ctx) {
       JsName name = names.get(x.getNode());
-      assert name != null : "Missing JsName for " + x.getNode().getName();
+      if (name == null) {
+        push(new JsNameRef(x.getSourceInfo(), JsRootScope.INSTANCE.getUndefined()));
+        return;
+      }
       push(new JsNameOf(x.getSourceInfo(), name));
     }
 
@@ -1437,10 +1637,22 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JNewInstance x, Context ctx) {
-      JsNameRef nameRef = names.get(x.getTarget()).makeRef(x.getSourceInfo());
-      JsNew newOp = new JsNew(x.getSourceInfo(), nameRef);
+      JsName ctorName = names.get(x.getTarget());
+      JsNew newOp = new JsNew(x.getSourceInfo(), ctorName.makeRef(x.getSourceInfo()));
       popList(newOp.getArguments(), x.getArgs().size()); // args
-      push(newOp);
+      JsExpression newExpr = newOp;
+      JMethod sam = typeOracle.getJsFunctionMethod(x.getClassType());
+      if (sam != null) {
+        JsFunction makeLambdaFunc =
+            indexedFunctions.get("JavaClassHierarchySetupUtil.makeLambdaFunction");
+        JsNameRef samFuncNameRef = polymorphicNames.get(sam).makeRef(x.getSourceInfo());
+        JsNameRef protoRef = prototype.makeRef(x.getSourceInfo());
+        samFuncNameRef.setQualifier(protoRef);
+        protoRef.setQualifier(ctorName.makeRef(x.getSourceInfo()));
+        // makeLambdaFunction(Foo.prototype.samMethod, new Foo(...))
+        newExpr = new JsInvocation(x.getSourceInfo(), makeLambdaFunc, samFuncNameRef, newOp);
+      }
+      push(newExpr);
     }
 
     @Override
@@ -1474,48 +1686,31 @@ public class GenerateJavaScriptAST {
       push(op);
     }
 
-    @Override
-    public void endVisit(JProgram x, Context ctx) {
-      List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();
+    /**
+     * Embeds properties into permProps for easy access from JavaScript.
+     */
+    private void embedBindingProperties() {
+      SourceInfo sourceInfo = SourceOrigin.UNKNOWN;
 
-      // Add a few things onto the beginning.
-
-      // Reserve the "_" identifier.
-      JsVars vars = new JsVars(jsProgram.getSourceInfo());
-      vars.add(new JsVar(jsProgram.getSourceInfo(), globalTemp));
-      globalStmts.add(0, vars);
-
-      // Long lits must go at the top, they can be constant field initializers.
-      generateLongLiterals(vars);
-      generateImmortalTypes(vars);
-
-      // Class objects, but only if there are any.
-      if (x.getDeclaredTypes().contains(x.getTypeClassLiteralHolder())) {
-        // TODO: perhaps they could be constant field initializers also?
-        vars = new JsVars(jsProgram.getSourceInfo());
-        generateClassLiterals(vars);
-        if (!vars.isEmpty()) {
-          globalStmts.add(vars);
+      // Generates a list of lists of pairs: [[["key", "value"], ...], ...]
+      // The outermost list is indexed by soft permutation id. Each item represents
+      // a map from binding properties to their values, but is stored as a list of pairs
+      // for easy iteration.
+      JsArrayLiteral permProps = new JsArrayLiteral(sourceInfo);
+      for (ImmutableMap<String, String> propMap : props.findEmbeddedProperties(TreeLogger.NULL)) {
+        JsArrayLiteral entryList = new JsArrayLiteral(sourceInfo);
+        for (Entry<String, String> entry : propMap.entrySet()) {
+          JsArrayLiteral pair = new JsArrayLiteral(sourceInfo,
+              new JsStringLiteral(sourceInfo, entry.getKey()),
+              new JsStringLiteral(sourceInfo, entry.getValue()));
+          entryList.getExpressions().add(pair);
         }
+        permProps.getExpressions().add(entryList);
       }
 
-      // Generate entry methods. Needs to be after class literal insertion since class literal will
-      // be referenced by runtime rebind and property provider bootstrapping.
-      generateGwtOnLoad(entryFunctions, globalStmts);
-
-      if (program.getRunAsyncs().size() > 0) {
-        // Prevent onLoad from being pruned.
-        JMethod onLoadMethod = program.getIndexedMethod("AsyncFragmentLoader.onLoad");
-        JsName name = names.get(onLoadMethod);
-        assert name != null;
-        JsFunction func = (JsFunction) name.getStaticRef();
-        func.setArtificiallyRescued(true);
-      }
-    }
-
-    @Override
-    public void endVisit(JReboundEntryPoint x, Context ctx) {
-      throw new InternalCompilerException("Should not get here.");
+      jsProgram.getGlobalBlock().getStatements().add(
+          constructInvocation(sourceInfo, "ModuleUtils.setGwtProperty",
+              new JsStringLiteral(sourceInfo, "permProps"), permProps).makeStmt());
     }
 
     @Override
@@ -1547,20 +1742,6 @@ public class GenerateJavaScriptAST {
       JsArrayLiteral jsArrayLiteral = new JsArrayLiteral(x.getSourceInfo());
       popList(jsArrayLiteral.getExpressions(), x.getExprs().size());
       push(jsArrayLiteral);
-    }
-
-    @Override
-    public void endVisit(JsonObject x, Context ctx) {
-      JsObjectLiteral jsObjectLiteral = new JsObjectLiteral(x.getSourceInfo());
-      popList(jsObjectLiteral.getPropertyInitializers(), x.propInits.size());
-      push(jsObjectLiteral);
-    }
-
-    @Override
-    public void endVisit(JsonPropInit init, Context ctx) {
-      JsExpression valueExpr = pop();
-      JsExpression labelExpr = pop();
-      push(new JsPropertyInitializer(init.getSourceInfo(), labelExpr, valueExpr));
     }
 
     @Override
@@ -1617,26 +1798,15 @@ public class GenerateJavaScriptAST {
       if (program.isReferenceOnly(x)) {
         return false;
       }
+
+      // Don't generate JS for magic @PrototypeOfJsType classes
+      if (program.isJsTypePrototype(x)) {
+        return false;
+      }
+
       if (alreadyRan.contains(x)) {
         return false;
       }
-
-      if (program.getTypeClassLiteralHolder() == x) {
-        // Handled in generateClassLiterals.
-        return false;
-      }
-
-      if (program.immortalCodeGenTypes.contains(x)) {
-        // Handled in generateImmortalTypes
-        return false;
-      }
-
-      // force super type to generate code first, this is required for prototype
-      // chaining to work properly
-      if (x.getSuperClass() != null && !alreadyRan.contains(x)) {
-        accept(x.getSuperClass());
-      }
-
       return super.visit(x, ctx);
     }
 
@@ -1652,23 +1822,264 @@ public class GenerateJavaScriptAST {
         return false;
       }
       currentMethod = x;
+      pendingLocals = new JsVars(x.getSourceInfo());
       return true;
+    }
+
+    private void insertInTopologicalOrder(JDeclaredType type,
+        Set<JDeclaredType> topologicallySortedSet) {
+      if (type == null || topologicallySortedSet.contains(type) || program.isReferenceOnly(type)) {
+        return;
+      }
+      insertInTopologicalOrder(type.getSuperClass(), topologicallySortedSet);
+      topologicallySortedSet.add(type);
     }
 
     @Override
     public boolean visit(JProgram x, Context ctx) {
-      /*
-       * Arrange for entryFunctions to be filled in as functions are visited.
-       * See their Javadoc comments for more details.
-       */
-      List<JMethod> entryMethods = x.getEntryMethods();
-      entryFunctions = new JsFunction[entryMethods.size()];
-      entryMethodToIndex = Maps.newIdentityHashMap();
-      for (int i = 0; i < entryMethods.size(); i++) {
-        entryMethodToIndex.put(entryMethods.get(i), i);
+      // Handle the visiting here as we need to slightly change the order.
+      // 1.1 (preamble) Immortal code gentypes.
+      // 1.2 (preamble) Classes in the preamble, i.e. all the classes that are needed
+      //                to support creation of class literals (reachable through Class.createFor* ).
+      // 1.3 (preamble) Class literals for classes in the preamble.
+      // 2.  (body)     Normal classes, each with its corresponding class literal (if live).
+      // 3.  (epilogue) Code to start the execution of the program (gwtOnLoad, etc).
+
+      List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();
+
+      Set<JDeclaredType> preambleTypes = generatePreamble(x, globalStmts);
+
+      if (incremental) {
+        // Record the names of preamble types so that it's possible to invalidate caches when the
+        // preamble types are known to have become stale.
+        if (!minimalRebuildCache.hasPreambleTypeNames()) {
+          Set<String> preambleTypeNames =  Sets.newHashSet();
+          for (JDeclaredType preambleType : preambleTypes) {
+            preambleTypeNames.add(preambleType.getName());
+          }
+          minimalRebuildCache.setPreambleTypeNames(logger, preambleTypeNames);
+        }
       }
 
+      // Sort normal types according to superclass relationship.
+      Set<JDeclaredType> topologicallySortedBodyTypes = Sets.newLinkedHashSet();
+      for (JDeclaredType type : x.getModuleDeclaredTypes()) {
+        insertInTopologicalOrder(type, topologicallySortedBodyTypes);
+      }
+      // Remove all preamble types that might have been inserted here.
+      topologicallySortedBodyTypes.removeAll(preambleTypes);
+
+      // Iterate over each type in the right order.
+      markPosition(globalStmts, "Program", Type.PROGRAM_START);
+      for (JDeclaredType type : topologicallySortedBodyTypes) {
+        markPosition(globalStmts, type.getName(), Type.CLASS_START);
+        accept(type);
+        JsVars classLiteralVars = new JsVars(jsProgram.getSourceInfo());
+        maybeGenerateClassLiteral(type, classLiteralVars);
+        if (!classLiteralVars.isEmpty()) {
+          globalStmts.add(classLiteralVars);
+        }
+        markPosition(globalStmts, type.getName(), Type.CLASS_END);
+      }
+      markPosition(globalStmts, "Program", Type.PROGRAM_END);
+
+      generateEpilogue(globalStmts);
+
+      // All done, do not visit children.
+      return false;
+    }
+
+    private Set<JDeclaredType> generatePreamble(JProgram program, List<JsStatement> globalStmts) {
+      // Reserve the "_" identifier.
+      JsVars vars = new JsVars(jsProgram.getSourceInfo());
+      vars.add(new JsVar(jsProgram.getSourceInfo(), globalTemp));
+      globalStmts.add(vars);
+
+      // Generate immortal types in the preamble.
+      generateImmortalTypes(vars);
+
+      Set<JDeclaredType> alreadyProcessed =
+          Sets.<JDeclaredType>newLinkedHashSet(program.immortalCodeGenTypes);
+      alreadyProcessed.add(program.getTypeClassLiteralHolder());
+
+      List<JDeclaredType> classLiteralSupportClasses =
+          computeClassLiteralsSupportClasses(program, alreadyProcessed);
+
+      // Make sure immortal classes are not doubly processed.
+      classLiteralSupportClasses.removeAll(alreadyProcessed);
+      for (JDeclaredType type : classLiteralSupportClasses) {
+        accept(type);
+      }
+      generateClassLiterals(globalStmts, classLiteralSupportClasses);
+
+      Set<JDeclaredType> preambleTypes = Sets.newLinkedHashSet(alreadyProcessed);
+      preambleTypes.addAll(classLiteralSupportClasses);
+      return preambleTypes;
+    }
+
+    private List<JDeclaredType> computeClassLiteralsSupportClasses(JProgram program,
+        Set<JDeclaredType> alreadyProcessedTypes) {
+      if (program.isReferenceOnly(program.getIndexedType("Class"))) {
+        return Collections.emptyList();
+      }
+      // Include in the preamble all classes that are reachable for Class.createForClass,
+      // Class.createForInterface
+      SortedSet<JDeclaredType> reachableClasses =
+          computeReachableTypes(METHODS_PROVIDED_BY_PREAMBLE);
+
+      assert !incremental || checkCoreModulePreambleComplete(program,
+          program.getTypeClassLiteralHolder().getClinitMethod());
+
+      Set<JDeclaredType> orderedPreambleClasses = Sets.newLinkedHashSet();
+      for (JDeclaredType type : reachableClasses) {
+        if (alreadyProcessedTypes.contains(type)) {
+          continue;
+        }
+        insertInTopologicalOrder(type, orderedPreambleClasses);
+      }
+
+      // TODO(rluble): The set of preamble types might be overly large, in particular will include
+      // JSOs that need clinit. This is due to {@link ControlFlowAnalyzer} making all JSOs live if
+      // there is a cast to that type anywhere in the program. See the use of
+      // {@link JTypeOracle.getInstantiatedJsoTypesViaCast} in the constructor.
+      return Lists.newArrayList(orderedPreambleClasses);
+    }
+
+    /**
+     * Check that in modular compiles the preamble is complete.
+     * <p>
+     * In modular compiles the preamble has to include code for creating all 4 types of class
+     * literals.
+     */
+    private boolean checkCoreModulePreambleComplete(JProgram program,
+        JMethod classLiteralInitMethod) {
+      final Set<JMethod> calledMethods = Sets.newHashSet();
+      new JVisitor() {
+        @Override
+        public void endVisit(JMethodCall x, Context ctx) {
+          calledMethods.add(x.getTarget());
+        }
+      }.accept(classLiteralInitMethod);
+
+      for (String createForMethodName : METHODS_PROVIDED_BY_PREAMBLE) {
+        if (!calledMethods.contains(program.getIndexedMethod(createForMethodName))) {
+          return false;
+        }
+      }
       return true;
+    }
+
+    /**
+     * Computes the set of types whose methods or fields are reachable from {@code methods}.
+     */
+    private SortedSet<JDeclaredType> computeReachableTypes(Iterable<String> methodNames) {
+      ControlFlowAnalyzer cfa = new ControlFlowAnalyzer(program);
+      for (String methodName : methodNames) {
+        JMethod method = program.getIndexedMethodOrNull(methodName);
+        // Only traverse it if it has not been pruned.
+        if (method != null) {
+          cfa.traverseFrom(method);
+        }
+      }
+
+      // Get the list of enclosing classes that were not excluded.
+      SortedSet<JDeclaredType> reachableTypes =
+          ImmutableSortedSet.copyOf(HasName.BY_NAME_COMPARATOR,
+         Iterables.filter(
+          Iterables.transform(cfa.getLiveFieldsAndMethods(),
+              new Function<JNode, JDeclaredType>() {
+                @Override
+                public JDeclaredType apply(JNode member) {
+                  if (member instanceof JMethod) {
+                    return ((JMethod) member).getEnclosingType();
+                  } else if (member instanceof JField) {
+                    return ((JField) member).getEnclosingType();
+                  } else {
+                    assert member instanceof JParameter || member instanceof JLocal;
+                    // Discard locals and parameters, only need the enclosing instances of reachable
+                    // fields and methods.
+                    return null;
+                  }
+                }
+              }), Predicates.notNull()));
+      return reachableTypes;
+    }
+
+    private void generateEpilogue(List<JsStatement> globalStmts) {
+      // Emit all the class literals for classes that where pruned.
+      // NOTE: this should not happen in fully unoptimized compiles.
+      generateClassLiterals(globalStmts, Iterables.filter(classLiteralDeclarationsByType.keySet(),
+          Predicates.not(Predicates.<JType>in(alreadyRan))));
+
+      // add all @JsExport assignments
+      generateExports(globalStmts);
+
+      // Generate entry methods. Needs to be after class literal insertion since class literal will
+      // be referenced by runtime rebind and property provider bootstrapping.
+      setupGwtOnLoad(globalStmts);
+
+      embedBindingProperties();
+
+      if (program.getRunAsyncs().size() > 0) {
+        // Prevent onLoad from being pruned.
+        JMethod onLoadMethod = program.getIndexedMethod("AsyncFragmentLoader.onLoad");
+        JsName name = names.get(onLoadMethod);
+        assert name != null;
+        JsFunction func = (JsFunction) name.getStaticRef();
+        func.setArtificiallyRescued(true);
+      }
+    }
+
+    private void generateClassLiterals(List<JsStatement> globalStmts,
+        Iterable<? extends JType> orderedTypes) {
+      JsVars vars = new JsVars(jsProgram.getSourceInfo());
+      for (JType type : orderedTypes) {
+        maybeGenerateClassLiteral(type, vars);
+      }
+      if (!vars.isEmpty()) {
+        globalStmts.add(vars);
+      }
+    }
+
+    private void generateExports(List<JsStatement> globalStmts) {
+      if (exportedMembersByExportName.isEmpty()) {
+        return;
+      }
+
+      JsInteropExportsGenerator exportGenerator;
+      if (closureCompilerFormatEnabled) {
+        exportGenerator = new ClosureJsInteropExportsGenerator(globalStmts, names);
+      } else {
+        exportGenerator = new DefaultJsInteropExportsGenerator(globalStmts, names, globalTemp,
+            indexedFunctions);
+      }
+
+      Set<JDeclaredType> generatedClinits = Sets.newHashSet();
+
+      for (Object exportedEntity : exportedMembersByExportName.values()) {
+        if (exportedEntity instanceof JDeclaredType) {
+          exportGenerator.exportType((JDeclaredType) exportedEntity);
+        } else {
+          JMember member = (JMember) exportedEntity;
+          maybeHoistClinit(globalStmts, generatedClinits, member);
+          exportGenerator.exportMember(member);
+        }
+      }
+    }
+
+    private void maybeHoistClinit(List<JsStatement> globalStmts,
+        Set<JDeclaredType> generatedClinits, JMember member) {
+      JDeclaredType enclosingType = member.getEnclosingType();
+      if (generatedClinits.contains(enclosingType)) {
+        return;
+      }
+
+      JsInvocation clinitCall = member instanceof JMethod ? maybeCreateClinitCall((JMethod) member)
+          : maybeCreateClinitCall((JField) member, true);
+      if (clinitCall != null) {
+        generatedClinits.add(enclosingType);
+        globalStmts.add(clinitCall.makeStmt());
+      }
     }
 
     @Override
@@ -1698,82 +2109,94 @@ public class GenerateJavaScriptAST {
 
         @Override
         public void endVisit(JsInvocation x, JsContext ctx) {
-          // Replace invocation to ctor with a new op.
-          if (x.getQualifier() instanceof JsNameRef) {
-            JsNameRef ref = (JsNameRef) x.getQualifier();
-            String ident = ref.getIdent();
-            if (isJsniIdent(ident)) {
-              JNode node = jsniMap.get(ident);
-              assert node instanceof JConstructor;
-              assert ref.getQualifier() == null;
-              JsName jsName = names.get(node);
-              assert (jsName != null);
-              ref.resolve(jsName);
-              JsNew jsNew = new JsNew(x.getSourceInfo(), ref);
-              jsNew.getArguments().addAll(x.getArguments());
-              ctx.replaceMe(jsNew);
-            }
+          // TODO(rluble): this fixup should be done during the initial JSNI processing in
+          // GwtAstBuilder.JsniReferenceCollector.
+          if (!(x.getQualifier() instanceof JsNameRef)) {
+            // If the invocation does not have a name as a qualifier (it might be an expression).
+            return;
           }
+          JsNameRef ref = (JsNameRef) x.getQualifier();
+          if (!ref.isJsniReference()) {
+            // The invocation is not to a JSNI method.
+            return;
+          }
+          // Only constructors reach this point, all other JSNI references in the method body
+          // would have already been replaced at endVisit(JsNameRef).
+
+          // Replace invocation to ctor with a new op.
+          String ident = ref.getIdent();
+          JNode node = jsniMap.get(ident);
+          assert node instanceof JConstructor;
+          assert ref.getQualifier() == null;
+          JsName jsName = names.get(node);
+          assert (jsName != null);
+          ref.resolve(jsName);
+          JsNew jsNew = new JsNew(x.getSourceInfo(), ref);
+          jsNew.getArguments().addAll(x.getArguments());
+          ctx.replaceMe(jsNew);
         }
 
         @Override
         public void endVisit(JsNameRef x, JsContext ctx) {
+          if (!x.isJsniReference()) {
+            return;
+          }
+
           String ident = x.getIdent();
-          if (isJsniIdent(ident)) {
-            JNode node = jsniMap.get(ident);
-            assert (node != null);
-            if (node instanceof JField) {
-              JField field = (JField) node;
-              JsName jsName = names.get(field);
+          JNode node = jsniMap.get(ident);
+          assert (node != null);
+          if (node instanceof JField) {
+            JField field = (JField) node;
+            JsName jsName = names.get(field);
+            assert (jsName != null);
+            x.resolve(jsName);
+
+            // See if we need to add a clinit call to a static field ref
+            JsInvocation clinitCall = maybeCreateClinitCall(field, false);
+            if (clinitCall != null) {
+              JsExpression commaExpr = createCommaExpression(clinitCall, x);
+              ctx.replaceMe(commaExpr);
+            }
+          } else if (node instanceof JConstructor) {
+            if (x == dontReplaceCtor) {
+              // Do nothing, parent will handle.
+            } else {
+              // Replace with a local closure function.
+              // function(a,b,c){return new Obj(a,b,c);}
+              JConstructor ctor = (JConstructor) node;
+              JsName jsName = names.get(ctor);
               assert (jsName != null);
               x.resolve(jsName);
-
-              // See if we need to add a clinit call to a static field ref
-              JsInvocation clinitCall = maybeCreateClinitCall(field);
-              if (clinitCall != null) {
-                JsExpression commaExpr = createCommaExpression(clinitCall, x);
-                ctx.replaceMe(commaExpr);
+              SourceInfo info = x.getSourceInfo();
+              JsFunction closureFunc = new JsFunction(info, jsFunc.getScope());
+              for (JParameter p : ctor.getParams()) {
+                JsName name = closureFunc.getScope().declareName(p.getName());
+                closureFunc.getParameters().add(new JsParameter(info, name));
               }
-            } else if (node instanceof JConstructor) {
-              if (x == dontReplaceCtor) {
-                // Do nothing, parent will handle.
-              } else {
-                // Replace with a local closure function.
-                // function(a,b,c){return new Obj(a,b,c);}
-                JConstructor ctor = (JConstructor) node;
-                JsName jsName = names.get(ctor);
-                assert (jsName != null);
-                x.resolve(jsName);
-                SourceInfo info = x.getSourceInfo();
-                JsFunction closureFunc = new JsFunction(info, jsFunc.getScope());
-                for (JParameter p : ctor.getParams()) {
-                  JsName name = closureFunc.getScope().declareName(p.getName());
-                  closureFunc.getParameters().add(new JsParameter(info, name));
-                }
-                JsNew jsNew = new JsNew(info, x);
-                for (JsParameter p : closureFunc.getParameters()) {
-                  jsNew.getArguments().add(p.getName().makeRef(info));
-                }
-                JsBlock block = new JsBlock(info);
-                block.getStatements().add(new JsReturn(info, jsNew));
-                closureFunc.setBody(block);
-                ctx.replaceMe(closureFunc);
+              JsNew jsNew = new JsNew(info, x);
+              for (JsParameter p : closureFunc.getParameters()) {
+                jsNew.getArguments().add(p.getName().makeRef(info));
               }
+              JsBlock block = new JsBlock(info);
+              block.getStatements().add(new JsReturn(info, jsNew));
+              closureFunc.setBody(block);
+              ctx.replaceMe(closureFunc);
+            }
+          } else {
+            JMethod method = (JMethod) node;
+            if (x.getQualifier() == null) {
+              JsName jsName = names.get(method);
+              assert (jsName != null);
+              x.resolve(jsName);
             } else {
-              JMethod method = (JMethod) node;
-              if (x.getQualifier() == null) {
-                JsName jsName = names.get(method);
-                assert (jsName != null);
-                x.resolve(jsName);
-              } else {
-                JsName jsName = polymorphicNames.get(method);
-                if (jsName == null) {
-                  // this can occur when JSNI references an instance method on a
-                  // type that was never actually instantiated.
-                  jsName = nullFunctionJsName;
-                }
-                x.resolve(jsName);
+              JsName jsName = polymorphicNames.get(method);
+              if (jsName == null) {
+                // this can occur when JSNI references an instance method on a
+                // type that was never actually instantiated.
+                jsName =
+                    indexedFunctions.get("JavaClassHierarchySetupUtil.emptyMethod").getName();
               }
+              x.resolve(jsName);
             }
           }
         }
@@ -1784,10 +2207,6 @@ public class GenerateJavaScriptAST {
             dontReplaceCtor = (JsNameRef) x.getQualifier();
           }
           return true;
-        }
-
-        private boolean isJsniIdent(String ident) {
-          return ident.charAt(0) == '@';
         }
       }.accept(jsFunc);
 
@@ -1815,13 +2234,13 @@ public class GenerateJavaScriptAST {
           accept(stmt);
           if (stmt instanceof JCaseStatement) {
             // create a new switch member
-            JsSwitchMember switchMember = (JsSwitchMember) pop(); // stmt
+            JsSwitchMember switchMember = pop(); // stmt
             jsSwitch.getCases().add(switchMember);
             curStatements = switchMember.getStmts();
           } else {
             // add to statements for current case
             assert (curStatements != null);
-            JsStatement newStmt = (JsStatement) pop(); // stmt
+            JsStatement newStmt = pop(); // stmt
             if (newStmt != null) {
               // Empty JDeclarationStatement produces a null
               curStatements.add(newStmt);
@@ -1834,18 +2253,52 @@ public class GenerateJavaScriptAST {
       return false;
     }
 
-    private JsObjectLiteral buildJsCastMapLiteral(List<JsExpression> runtimeTypeIdLiterals,
+    private JsExpression buildJsCastMapLiteral(
+        List<JsExpression> runtimeTypeIdLiterals,
         SourceInfo sourceInfo) {
+      if (JjsUtils.closureStyleLiteralsNeeded(incremental, jsInteropMode,
+          closureCompilerFormatEnabled)) {
+        return buildClosureStyleCastMapFromArrayLiteral(runtimeTypeIdLiterals, sourceInfo);
+      } else {
+        return buildCastMapAsObjectLiteral(runtimeTypeIdLiterals, sourceInfo);
+      }
+    }
+
+    private JsExpression buildCastMapAsObjectLiteral(
+        List<JsExpression> runtimeTypeIdLiterals, SourceInfo sourceInfo) {
       JsObjectLiteral objLit = new JsObjectLiteral(sourceInfo);
       objLit.setInternable();
-      List<JsPropertyInitializer> props = objLit.getPropertyInitializers();
+      List<JsPropertyInitializer> propInitializers =
+          objLit.getPropertyInitializers();
       JsNumberLiteral one = new JsNumberLiteral(sourceInfo, 1);
       for (JsExpression runtimeTypeIdLiteral : runtimeTypeIdLiterals) {
-        JsPropertyInitializer prop = new JsPropertyInitializer(sourceInfo,
-            runtimeTypeIdLiteral, one);
-        props.add(prop);
+        JsPropertyInitializer propInitializer =
+            new JsPropertyInitializer(sourceInfo,
+                runtimeTypeIdLiteral, one);
+        propInitializers.add(propInitializer);
       }
       return objLit;
+    }
+
+    private JsExpression buildClosureStyleCastMapFromArrayLiteral(
+            List<JsExpression> runtimeTypeIdLiterals, SourceInfo sourceInfo) {
+      /*
+       * goog.object.createSet('foo', 'bar', 'baz') is optimized by closure compiler into
+       * {'foo': !0, 'bar': !0, baz: !0}
+       */
+      JsNameRef createSet = new JsNameRef(sourceInfo, "createSet");
+      JsNameRef googObject = new JsNameRef(sourceInfo, "object");
+      JsNameRef goog = new JsNameRef(sourceInfo, "goog");
+      createSet.setQualifier(googObject);
+      googObject.setQualifier(goog);
+
+      JsInvocation jsInvocation = new JsInvocation(sourceInfo, createSet);
+
+      for (JsExpression expr : runtimeTypeIdLiterals) {
+        jsInvocation.getArguments().add(expr);
+      }
+
+      return jsInvocation;
     }
 
     private void checkForDupMethods(JDeclaredType x) {
@@ -1899,11 +2352,15 @@ public class GenerateJavaScriptAST {
       return new JsObjectLiteral(SourceOrigin.UNKNOWN);
     }
 
-    private void generateClassLiteral(JDeclarationStatement decl, JsVars vars) {
+    private void maybeGenerateClassLiteral(JType type, JsVars vars) {
+      JDeclarationStatement decl = classLiteralDeclarationsByType.get(type);
+      if (decl == null) {
+        return;
+      }
+
       JField field = (JField) decl.getVariableRef().getTarget();
 
       // TODO(rluble): refactor so that all output related to a class is decided together.
-      JType type = program.getTypeByClassLiteralField(field);
       if (type != null && type instanceof JDeclaredType
           && program.isReferenceOnly((JDeclaredType) type)) {
         // Only generate class literals for classes in the current module.
@@ -1922,20 +2379,6 @@ public class GenerateJavaScriptAST {
       vars.add(var);
     }
 
-    private void generateClassLiterals(JsVars vars) {
-      /*
-       * Must execute in clinit statement order, NOT field order, so that back
-       * refs to super classes are preserved.
-       */
-      JMethodBody clinitBody =
-          (JMethodBody) program.getTypeClassLiteralHolder().getClinitMethod().getBody();
-      for (JStatement stmt : clinitBody.getStatements()) {
-        if (stmt instanceof JDeclarationStatement) {
-          generateClassLiteral((JDeclarationStatement) stmt, vars);
-        }
-      }
-    }
-
     private void generateClassSetup(JClassType x, List<JsStatement> globalStmts) {
       generateClassDefinition(x, globalStmts);
       generateVTables(x, globalStmts);
@@ -1943,238 +2386,117 @@ public class GenerateJavaScriptAST {
       if (x == program.getTypeJavaLangObject()) {
         // special: setup a "toString" alias for java.lang.Object.toString()
         generateToStringAlias(x, globalStmts);
-        // special: setup the identifying typeMarker field
-        generateTypeMarker(globalStmts);
 
         // Set up the artificial castmap for string.
         setupStringCastMap(program.getTypeJavaLangString(), globalStmts);
 
         //  Perform necessary polyfills.
-        JsFunction modernizerFn =
-            indexedFunctions.get("JavaClassHierarchySetupUtil.modernizeBrowser");
-        JsName modernizerFnName = modernizerFn.getName();
-        JsInvocation callModernizerFn = new JsInvocation(x.getSourceInfo());
-        callModernizerFn.setQualifier(modernizerFnName.makeRef(x.getSourceInfo()));
-        globalStmts.add(callModernizerFn.makeStmt());
+        globalStmts.add(constructInvocation(x.getSourceInfo(),
+            "JavaClassHierarchySetupUtil.modernizeBrowser").makeStmt());
       }
     }
 
+    private void markPosition(List<JsStatement> statements, String name, Type type) {
+      statements.add(new JsPositionMarker(SourceOrigin.UNKNOWN, name, type));
+    }
+
     /**
-     * Creates gwtOnLoad bootstrapping code. Unusually, the created code is executed as part of
+     * Sets up gwtOnLoad bootstrapping code. Unusually, the created code is executed as part of
      * source loading and runs in the global scope (not inside of any function scope).
      */
-    // TODO(stalcup): get rid of manually synthesized AST and replace it either with calls to static
-    // functions that vary only in their data arguments or else create source with a Generator.
-    private void generateGwtOnLoad(JsFunction[] entryFuncs,
-        List<JsStatement> globalStmts) {
+    private void setupGwtOnLoad(List<JsStatement> globalStmts) {
       /**
        * <pre>
-       * {MODULE_RuntimeRebindRegistrator}.register();
-       * {MODULE_PropertyProviderRegistrator}.register();
        * var $entry = Impl.registerEntry();
-       * // Stub gwtOnLoad at top level so that HtmlUnit can find it.
-       * // On first execution this will assign a value of null into gwtOnLoad.
-       * // It's value will actually be built inside of the following anonymous
-       * // function and subsequent executions will preserve the existing value.
-       * // Since gwtOnLoad is being varred, this will work in the global scope
-       * // as well as in speculative future scopes in which linkers might
-       * // choose to place the output.
-       * var gwtOnLoad = typeof gwtOnLoad === 'undefined' ? null : gwtOnLoad;
-       * // Create gwtOnLoad in function scope so the previousGwtOnLoad reference is preserved.
-       * (function() {
-       *   var previousGwtOnLoad = gwtOnLoad;
-       *   gwtOnLoad = function(errFn, modName, modBase, softPermutationId) {
-       *     if (previousGwtOnLoad) {
-       *       previousGwtOnLoad(errFn, modName, modBase, softPermutationId);
-       *     }
-       *     $moduleName = modName;
-       *     $moduleBase = modBase;
-       *     CollapsedPropertyHolder.permutationId = softPermutationId;
-       *     if (errFn) {
-       *       try {
-       *         $entry(init)();
-       *       } catch(e) {
-       *         errFn(modName);
-       *       }
-       *     } else {
-       *       $entry(init)();
-       *     }
-       *   }
-       * }());
+       * var gwtOnLoad = ModuleUtils.gwtOnLoad();
+       * ModuleUtils.addInitFunctions(init1, init2,...)
        * </pre>
        */
 
-      SourceInfo sourceInfo = SourceOrigin.UNKNOWN;
+      final SourceInfo sourceInfo = SourceOrigin.UNKNOWN;
 
-      String moduleRuntimeRebindRegistratorSourceName =
-          program.getRuntimeRebindRegistratorTypeSourceName();
-      // Skip if no runtime rebind registry code in this module, probably a monolithic compile.
-      if (moduleRuntimeRebindRegistratorSourceName != null) {
-        // RuntimeRebindRegistrator.register();
-        String runtimeRebindRegistratorTypeShortName =
-            SourceName.getShortClassName(moduleRuntimeRebindRegistratorSourceName);
-        JsFunction registerRuntimeRebindsFunction =
-            indexedFunctions.get(runtimeRebindRegistratorTypeShortName + ".register");
-        JsInvocation registerRuntimeRebindsCall = new JsInvocation(sourceInfo);
-        registerRuntimeRebindsCall.setQualifier(
-            registerRuntimeRebindsFunction.getName().makeRef(sourceInfo));
-        globalStmts.add(registerRuntimeRebindsCall.makeStmt());
-      }
-
-      String modulepropertyProviderRegistratorSourceName =
-          program.getPropertyProviderRegistratorTypeSourceName();
-      // Skip if no runtime property registry code in this module, probably a monolithic compile.
-      if (modulepropertyProviderRegistratorSourceName != null) {
-        // PropertyProviderRegistrator.register();
-        String propertyProviderRegistratorTypeShortName =
-            SourceName.getShortClassName(program.getPropertyProviderRegistratorTypeSourceName());
-        JsFunction registerPropertyProvidersFunction =
-            indexedFunctions.get(propertyProviderRegistratorTypeShortName + ".register");
-        JsInvocation registerPropertyProvidersCall = new JsInvocation(sourceInfo);
-        registerPropertyProvidersCall.setQualifier(
-            registerPropertyProvidersFunction.getName().makeRef(sourceInfo));
-        globalStmts.add(registerPropertyProvidersCall.makeStmt());
-      }
-
-      // var $entry = Impl.registerEntry();
-      JsName entryName = topScope.declareName("$entry");
-      JsVar entryVar = new JsVar(sourceInfo, entryName);
-      JsInvocation registerEntryCall = new JsInvocation(sourceInfo);
-      JsFunction registerEntryFunction = indexedFunctions.get("Impl.registerEntry");
-      registerEntryCall.setQualifier(registerEntryFunction.getName().makeRef(sourceInfo));
-      entryVar.setInitExpr(registerEntryCall);
-      JsVars entryVars = new JsVars(sourceInfo);
-      entryVars.add(entryVar);
+      // var $entry = ModuleUtils.registerEntry();
+      JsStatement entryVars = constructFunctionCallStatement(
+          topScope.declareName("$entry"), "ModuleUtils.registerEntry");
       globalStmts.add(entryVars);
 
-      // Stub gwtOnLoad at top level so that HtmlUnit can find it.
-      // var gwtOnLoad = typeof gwtOnLoad === 'undefined' ? null : gwtOnLoad;
-      JsName gwtOnLoadName = topScope.declareName("gwtOnLoad");
-      gwtOnLoadName.setObfuscatable(false);
-      JsVar gwtOnLoadNameVar = new JsVar(sourceInfo, gwtOnLoadName);
-      gwtOnLoadNameVar.setInitExpr(new JsConditional(sourceInfo, new JsBinaryOperation(sourceInfo,
-          JsBinaryOperator.REF_EQ, new JsPrefixOperation(
-              sourceInfo, JsUnaryOperator.TYPEOF, gwtOnLoadName.makeRef(sourceInfo)),
-          new JsStringLiteral(sourceInfo, "undefined")), JsNullLiteral.INSTANCE,
-          gwtOnLoadName.makeRef(sourceInfo)));
-      JsVars gwtOnLoadNameVars = new JsVars(sourceInfo);
-      gwtOnLoadNameVars.add(gwtOnLoadNameVar);
-      globalStmts.add(gwtOnLoadNameVars);
+      // var gwtOnLoad = ModuleUtils.gwtOnLoad;
+      JsName gwtOnLoad = topScope.findExistingUnobfuscatableName("gwtOnLoad");
+      JsVar varGwtOnLoad = new JsVar(sourceInfo, gwtOnLoad);
+      varGwtOnLoad.setInitExpr(createAssignment(gwtOnLoad.makeRef(sourceInfo),
+          indexedFunctions.get("ModuleUtils.gwtOnLoad").getName().makeRef(sourceInfo)));
+      globalStmts.add(new JsVars(sourceInfo, varGwtOnLoad));
 
-      // Create gwtOnLoad in function scope so the previousGwtOnLoad reference is preserved.
-      // (function() {
-      JsFunction createGwtOnLoadFunction = new JsFunction(sourceInfo, topScope);
-      JsBlock createGwtOnLoadBody = new JsBlock(sourceInfo);
-      createGwtOnLoadFunction.setBody(createGwtOnLoadBody);
-
-      // var previousGwtOnLoad = gwtOnLoad;
-      JsName previousGwtOnLoadName =
-          createGwtOnLoadFunction.getScope().declareName("previousGwtOnLoad");
-      JsVar previousGwtOnLoadNameVar = new JsVar(sourceInfo, previousGwtOnLoadName);
-      previousGwtOnLoadNameVar.setInitExpr(gwtOnLoadName.makeRef(sourceInfo));
-      JsVars previousGwtOnLoadNameVars = new JsVars(sourceInfo);
-      previousGwtOnLoadNameVars.add(previousGwtOnLoadNameVar);
-      createGwtOnLoadBody.getStatements().add(previousGwtOnLoadNameVars);
-
-      // gwtOnLoad = function(errFn, modName, modBase, softPermutationId) {
-      JsFunction gwtOnLoad = new JsFunction(sourceInfo, createGwtOnLoadFunction.getScope());
-      gwtOnLoad.setArtificiallyRescued(true);
-      JsBlock gwtOnLoadFunctionBody = new JsBlock(sourceInfo);
-      gwtOnLoad.setBody(gwtOnLoadFunctionBody);
-      JsExpression gwtOnLoadAssignment =
-          createAssignment(gwtOnLoadName.makeRef(sourceInfo), gwtOnLoad);
-      createGwtOnLoadBody.getStatements().add(gwtOnLoadAssignment.makeStmt());
-      JsScope fnScope = gwtOnLoad.getScope();
-      List<JsParameter> gwtOnLoadParams = gwtOnLoad.getParameters();
-      JsName errFn = fnScope.declareName("errFn");
-      JsName modName = fnScope.declareName("modName");
-      JsName modBase = fnScope.declareName("modBase");
-      JsName softPermutationId = fnScope.declareName("softPermutationId");
-      gwtOnLoadParams.add(new JsParameter(sourceInfo, errFn));
-      gwtOnLoadParams.add(new JsParameter(sourceInfo, modName));
-      gwtOnLoadParams.add(new JsParameter(sourceInfo, modBase));
-      gwtOnLoadParams.add(new JsParameter(sourceInfo, softPermutationId));
-
-      // if (previousGwtOnLoad) {
-      //   previousGwtOnLoad();
-      // }
-      JsIf previousGwtOnLoadIf = new JsIf(sourceInfo);
-      gwtOnLoadFunctionBody.getStatements().add(previousGwtOnLoadIf);
-      previousGwtOnLoadIf.setIfExpr(previousGwtOnLoadName.makeRef(sourceInfo));
-      JsInvocation previousGwtOnLoadCall = new JsInvocation(sourceInfo);
-      previousGwtOnLoadCall.setQualifier(previousGwtOnLoadName.makeRef(sourceInfo));
-      List<JsExpression> previousGwtOnLoadCallArguments = previousGwtOnLoadCall.getArguments();
-      previousGwtOnLoadCallArguments.add(errFn.makeRef(sourceInfo));
-      previousGwtOnLoadCallArguments.add(modName.makeRef(sourceInfo));
-      previousGwtOnLoadCallArguments.add(modBase.makeRef(sourceInfo));
-      previousGwtOnLoadCallArguments.add(softPermutationId.makeRef(sourceInfo));
-      previousGwtOnLoadIf.setThenStmt(previousGwtOnLoadCall.makeStmt());
-
-      // $moduleName = modName;
-      JsExpression moduleNameAssignment =
-          createAssignment(topScope.findExistingUnobfuscatableName("$moduleName").makeRef(
-              sourceInfo), modName.makeRef(sourceInfo));
-      gwtOnLoadFunctionBody.getStatements().add(moduleNameAssignment.makeStmt());
-
-      // $moduleBase = modBase;
-      JsExpression moduleBaseAssignment =
-          createAssignment(topScope.findExistingUnobfuscatableName("$moduleBase").makeRef(
-              sourceInfo), modBase.makeRef(sourceInfo));
-      gwtOnLoadFunctionBody.getStatements().add(moduleBaseAssignment.makeStmt());
-
-      // Assignment to CollapsedPropertyHolder.permutationId only if it's used
-      // CollapsedPropertyHolder.permutationId = softPermutationId;
-      JsName permutationIdFieldName =
-          names.get(program.getIndexedField("CollapsedPropertyHolder.permutationId"));
-      if (permutationIdFieldName != null) {
-        JsExpression permutationIdAssignment =
-            createAssignment(permutationIdFieldName.makeRef(sourceInfo), softPermutationId
-                .makeRef(sourceInfo));
-        gwtOnLoadFunctionBody.getStatements().add(permutationIdAssignment.makeStmt());
+      // ModuleUtils.addInitFunctions(init1, init2,...)
+      List<JsExpression> arguments = Lists.newArrayList();
+      for (JMethod entryPointMethod : program.getEntryMethods()) {
+        JsFunction entryFunction = getJsFunctionFor(entryPointMethod);
+        arguments.add(entryFunction.getName().makeRef(sourceInfo));
       }
 
-      // if (errFn) {
-      //   try {
-      //     $entry(init)();
-      //   } catch(e) {
-      //     errFn(modName);
-      //   }
-      // } else {
-      //   $entry(init)();
-      // }
-      JsIf jsIf = new JsIf(sourceInfo);
-      gwtOnLoadFunctionBody.getStatements().add(jsIf);
-      jsIf.setIfExpr(errFn.makeRef(sourceInfo));
-      JsTry jsTry = new JsTry(sourceInfo);
-      jsIf.setThenStmt(jsTry);
-      JsBlock callBlock = new JsBlock(sourceInfo);
-      jsIf.setElseStmt(callBlock);
-      jsTry.setTryBlock(callBlock);
-      for (JsFunction func : entryFuncs) {
-        if (func == registerEntryFunction) {
-          continue;
-        } else if (func != null) {
-          JsInvocation call = new JsInvocation(sourceInfo);
-          call.setQualifier(entryName.makeRef(sourceInfo));
-          call.getArguments().add(func.getName().makeRef(sourceInfo));
-          JsInvocation entryCall = new JsInvocation(sourceInfo);
-          entryCall.setQualifier(call);
-          callBlock.getStatements().add(entryCall.makeStmt());
-        }
-      }
-      JsCatch jsCatch = new JsCatch(sourceInfo, fnScope, "e");
-      jsTry.getCatches().add(jsCatch);
-      JsBlock catchBlock = new JsBlock(sourceInfo);
-      jsCatch.setBody(catchBlock);
-      JsInvocation errCall = new JsInvocation(sourceInfo);
-      catchBlock.getStatements().add(errCall.makeStmt());
-      errCall.setQualifier(errFn.makeRef(sourceInfo));
-      errCall.getArguments().add(modName.makeRef(sourceInfo));
+      JsStatement createGwtOnLoadFunctionCall =
+          constructInvocation("ModuleUtils.addInitFunctions", arguments).makeStmt();
 
-      // }());
-      JsInvocation createGwtOnLoadCall = new JsInvocation(sourceInfo);
-      createGwtOnLoadCall.setQualifier(createGwtOnLoadFunction);
-      globalStmts.add(createGwtOnLoadCall.makeStmt());
+      globalStmts.add(createGwtOnLoadFunctionCall);
+    }
+
+    private void mayAddProviderRegisterFn(List<String> providerFnNames,
+        String providerTypeSourceName) {
+      // ProviderClass.register();
+      if (providerTypeSourceName == null) {
+        return;
+      }
+      providerFnNames.add(SourceName.getShortClassName(providerTypeSourceName) + ".register");
+    }
+
+    /**
+     * Creates a (var) assignment a statement for a function call to an indexed function.
+     */
+    private JsStatement constructFunctionCallStatement(JsName assignToVariableName,
+        String indexedFunctionName, JsExpression... args) {
+      return constructFunctionCallStatement(assignToVariableName, indexedFunctionName,
+          Arrays.asList(args));
+    }
+
+    /**
+     * Creates a (var) assignment a statement for a function call to an indexed function.
+     */
+    private JsStatement constructFunctionCallStatement(JsName assignToVariableName,
+        String indexedFunctionName, List<JsExpression> args) {
+
+      SourceInfo sourceInfo = SourceOrigin.UNKNOWN;
+      JsInvocation invocation = constructInvocation(indexedFunctionName, args);
+      JsVar var = new JsVar(sourceInfo, assignToVariableName);
+      var.setInitExpr(invocation);
+      JsVars entryVars = new JsVars(sourceInfo);
+      entryVars.add(var);
+      return entryVars;
+    }
+
+    /**
+     * Constructs an invocation for an indexed function.
+     */
+    private JsInvocation constructInvocation(SourceInfo sourceInfo,
+        String indexedFunctionName, JsExpression... args) {
+      return constructInvocation(sourceInfo, indexedFunctionName, Arrays.asList(args));
+    }
+
+    /**
+     * Constructs an invocation for an indexed function.
+     */
+    private JsInvocation constructInvocation(String indexedFunctionName,
+        List<JsExpression> args) {
+      SourceInfo sourceInfo = SourceOrigin.UNKNOWN;
+      return constructInvocation(sourceInfo, indexedFunctionName, args);
+    }
+
+    /**
+     * Constructs an invocation for an indexed function.
+     */
+    private JsInvocation constructInvocation(SourceInfo sourceInfo,
+        String indexedFunctionName, List<JsExpression> args) {
+      JsFunction functionToInvoke = indexedFunctions.get(indexedFunctionName);
+      return new JsInvocation(sourceInfo, functionToInvoke, args);
     }
 
     private void generateImmortalTypes(JsVars globals) {
@@ -2217,7 +2539,7 @@ public class GenerateJavaScriptAST {
             accept(method);
           }
           // add after var declaration, but before everything else
-          JsFunction func = (JsFunction) pop();
+          JsFunction func = pop();
           assert func.getName() != null;
           globalStmts.add(1, func.makeStmt());
         }
@@ -2251,55 +2573,130 @@ public class GenerateJavaScriptAST {
       }
     }
 
-    private void generateLongLiterals(JsVars vars) {
-      for (Entry<Long, JsName> entry : longLits.entrySet()) {
-        JsName jsName = entry.getValue();
-        JsExpression longObjectAlloc = longObjects.get(jsName);
-        JsVar var = new JsVar(vars.getSourceInfo(), jsName);
-        var.setInitExpr(longObjectAlloc);
-        vars.add(var);
+    private JsExpression convertJavaLiteral(Object javaLiteral) {
+      if (javaLiteral instanceof JLiteral) {
+        return JjsUtils.translateLiteral((JLiteral) javaLiteral);
+      } else if (javaLiteral instanceof JExpression) {
+        accept((JExpression) javaLiteral);
+        return (JsExpression) pop();
+      } else {
+        return JjsUtils.translateLiteral(program.getLiteral(javaLiteral));
       }
     }
 
-    private final GenerateJavaScriptLiterals javaToJavaScriptLiteralConverter =
-        new GenerateJavaScriptLiterals();
+    private void generateCallToDefineClass(JClassType x, List<JsStatement> globalStmts,
+        List<JsNameRef> constructorArgs) {
+      JExpression typeId = getRuntimeTypeReference(x);
+      JClassType superClass = x.getSuperClass();
+      JExpression superTypeId = (superClass == null) ? JNullLiteral.INSTANCE :
+          getRuntimeTypeReference(x.getSuperClass());
+      // check if there's an overriding prototype
+      JInterfaceType jsPrototypeIntf = JProgram.maybeGetJsTypeFromPrototype(superClass);
+      String jsPrototype = jsPrototypeIntf != null ? jsPrototypeIntf.getJsPrototype() : null;
 
-    private JsLiteral convertJavaLiteral(JLiteral javaLiteral) {
-      javaToJavaScriptLiteralConverter.accept(javaLiteral);
-      return (JsLiteral) javaToJavaScriptLiteralConverter.pop();
+      List<JsExpression> defineClassArguments = Lists.newArrayList();
+
+      defineClassArguments.add(convertJavaLiteral(typeId));
+      // setup superclass normally
+      if (jsPrototype == null) {
+        defineClassArguments.add(convertJavaLiteral(superTypeId));
+      } else {
+        // setup extension of native JS object
+        defineClassArguments.add(createJsQualifier(jsPrototype, x.getSourceInfo()));
+      }
+      JsExpression castMap = generateCastableTypeMap(x);
+      defineClassArguments.add(castMap);
+
+      defineClassArguments.addAll(constructorArgs);
+
+      // choose appropriate setup function
+      // JavaClassHierarchySetupUtil.defineClass(typeId, superTypeId, castableMap, constructors)
+      JsStatement defineClassStatement = constructInvocation(x.getSourceInfo(),
+          jsPrototype == null ? "JavaClassHierarchySetupUtil.defineClass" :
+              "JavaClassHierarchySetupUtil.defineClassWithPrototype",
+          defineClassArguments).makeStmt();
+      globalStmts.add(defineClassStatement);
+      typeForStatMap.put(defineClassStatement, x);
     }
 
     private void generateClassDefinition(JClassType x, List<JsStatement> globalStmts) {
-      SourceInfo sourceInfo = x.getSourceInfo();
       assert x != program.getTypeJavaLangString();
 
-      JsInvocation defineClass = new JsInvocation(sourceInfo);
-      JsName defineClassRef = indexedFunctions.get(
-          "JavaClassHierarchySetupUtil.defineClass").getName();
-      defineClass.setQualifier(defineClassRef.makeRef(sourceInfo));
-      JLiteral typeId = getRuntimeTypeReference(x);
-      JClassType superClass = x.getSuperClass();
-      JLiteral superTypeId = (superClass == null) ? JNullLiteral.INSTANCE :
-          getRuntimeTypeReference(x.getSuperClass());
-      // JavaClassHierarchySetupUtil.defineClass(typeId, superTypeId, castableMap, constructors)
-      defineClass.getArguments().add(convertJavaLiteral(typeId));
-      defineClass.getArguments().add(convertJavaLiteral(superTypeId));
-      JsExpression castMap = generateCastableTypeMap(x);
-      defineClass.getArguments().add(castMap);
+      if (closureCompilerFormatEnabled) {
+        generateClosureClassDefinition(x, globalStmts);
+      } else {
+        generateJsClassDefinition(x, globalStmts);
+      }
+    }
 
-      // Chain assign the same prototype to every live constructor.
-      for (JMethod method : x.getMethods()) {
-        if (!isMethodPotentiallyALiveConstructor(method)) {
-          // Some constructors are never newed hence don't need to be registered with defineClass.
-          continue;
-        }
-
-        defineClass.getArguments().add(names.get(method).makeRef(sourceInfo));
+    /*
+     * Class definition for regular output looks like:
+     *
+     * defineClass(id, superId, castableTypeMap, ctor1, ctor2, ctor3);
+     * _.method1 = function() { ... }
+     * _.method2 = function() { ... }
+     */
+    private void generateJsClassDefinition(JClassType x, List<JsStatement> globalStmts) {
+      // Add constructors as varargs to define class.
+      List<JsNameRef> constructorArgs = Lists.newArrayList();
+      for (JMethod method : getPotentiallyAliveConstructors(x)) {
+        constructorArgs.add(names.get(method).makeRef(x.getSourceInfo()));
       }
 
-      JsStatement tmpAsgStmt = defineClass.makeStmt();
-      globalStmts.add(tmpAsgStmt);
-      typeForStatMap.put(tmpAsgStmt, x);
+      // defineClass(..., Ctor1, Ctor2, ...)
+      generateCallToDefineClass(x, globalStmts, constructorArgs);
+    }
+
+    /*
+     * Class definition for closure output looks like:
+     *
+     * defineClass(jsinterop.getUniqueId('FQTypeName'),
+     *     jsinterop.getUniqueId('FQSuperTypeName'), ctm);
+     * var ClassName = defineHiddenClosureConstructor();
+     * ClassName.prototype.method1 = function() { ... };
+     * ClassName.prototype.method2 = function() { ... };
+     * ctor1.prototype = ClassName.prototype;
+     * ctor2.prototype = ClassName.prototype;
+     * ctor3.prototype = ClassName.prototype;
+     *
+     * The primary change is to make the prototype assignment look like regular closure code to help
+     * the compiler disambiguate which methods belong to which type.
+     */
+    private void generateClosureClassDefinition(JClassType x, List<JsStatement> globalStmts) {
+      // defineClass(...)
+      generateCallToDefineClass(x, globalStmts, new ArrayList<JsNameRef>());
+
+      // var ClassName = defineHiddenClosureConstructor()
+      declareSynthesizedClosureConstructor(x, globalStmts);
+
+      // Ctor1.prototype = ClassName.prototype
+      // Ctor2.prototype = ClassName.prototype
+      // etc.
+      for (JMethod method : getPotentiallyAliveConstructors(x)) {
+        JsNameRef lhs = prototype.makeRef(method.getSourceInfo());
+        lhs.setQualifier(names.get(method).makeRef(method.getSourceInfo()));
+        JsNameRef rhsProtoRef = getPrototypeQualifierOf(method);
+        JsExprStmt stmt = createAssignment(lhs, rhsProtoRef).makeStmt();
+        globalStmts.add(stmt);
+        typeForStatMap.put(stmt, x);
+      }
+    }
+
+    /*
+     * Declare an empty synthesized constructor that looks like:
+     *  var ClassName = defineHiddenClosureConstructor()
+     *
+     * TODO(goktug): throw Error in the body to prevent instantiation via this constructor.
+     */
+    private void declareSynthesizedClosureConstructor(JDeclaredType x,
+        List<JsStatement> globalStmts) {
+      SourceInfo sourceInfo = x.getSourceInfo();
+      JsName classVar = topScope.declareName(JjsUtils.getNameString(x));
+      JsVar var = new JsVar(sourceInfo, classVar);
+      var.setInitExpr(constructInvocation(sourceInfo,
+          "JavaClassHierarchySetupUtil.defineHiddenClosureConstructor"));
+      globalStmts.add(new JsVars(sourceInfo, var));
+      names.put(x, classVar);
     }
 
     /*
@@ -2312,8 +2709,7 @@ public class GenerateJavaScriptAST {
       JsNameRef ctmRef = castableTypeMapName.makeRef(x.getSourceInfo());
 
       JsExpression castMapLit = generateCastableTypeMap(x);
-      JsExpression ctmAsg = createAssignment(ctmRef,
-          castMapLit);
+      JsExpression ctmAsg = createAssignment(ctmRef, castMapLit);
       JsExprStmt ctmAsgStmt = ctmAsg.makeStmt();
       globalStmts.add(ctmAsgStmt);
       typeForStatMap.put(ctmAsgStmt, x);
@@ -2326,13 +2722,12 @@ public class GenerateJavaScriptAST {
         // _.toString = function(){return this.java_lang_Object_toString();}
 
         // lhs
-        JsNameRef lhs = createNativeToStringRef(globalTemp.makeRef(sourceInfo));
+        JsNameRef lhs = createNativeToStringRef(getPrototypeQualifierOf(x, sourceInfo));
 
         // rhs
-        JsInvocation call = new JsInvocation(sourceInfo);
         JsNameRef toStringRef = new JsNameRef(sourceInfo, polymorphicNames.get(toStringMeth));
         toStringRef.setQualifier(new JsThisRef(sourceInfo));
-        call.setQualifier(toStringRef);
+        JsInvocation call = new JsInvocation(sourceInfo, toStringRef);
         JsReturn jsReturn = new JsReturn(sourceInfo, call);
         JsFunction rhs = new JsFunction(sourceInfo, topScope);
         JsBlock body = new JsBlock(sourceInfo);
@@ -2347,41 +2742,196 @@ public class GenerateJavaScriptAST {
       }
     }
 
-    private void generateTypeMarker(List<JsStatement> globalStmts) {
-      JField typeMarkerField = program.getIndexedField("Object.typeMarker");
-      JsName typeMarkerName = names.get(typeMarkerField);
-      if (typeMarkerName == null) {
-        // Was pruned; this compilation must have no JSO instanceof tests.
-        return;
+    /**
+     * Create a vtable assignment of the form _.polyname = rhs; and register the line as
+     * created for {@code method}.
+     */
+    private void generateVTableAssignment(List<JsStatement> globalStmts, JMethod method,
+        JsName lhsName, JsExpression rhs) {
+      SourceInfo sourceInfo = method.getSourceInfo();
+      JsNameRef lhs = lhsName.makeRef(sourceInfo);
+      lhs.setQualifier(getPrototypeQualifierOf(method));
+      JsExprStmt polyAssignment = createAssignment(lhs, rhs).makeStmt();
+      globalStmts.add(polyAssignment);
+      vtableInitForMethodMap.put(polyAssignment, method);
+
+      if (shouldEmitDisplayNames()) {
+        JsExprStmt displayNameAssignment = outputDisplayName(lhs, method);
+        globalStmts.add(displayNameAssignment);
+        vtableInitForMethodMap.put(displayNameAssignment, method);
       }
-      SourceInfo sourceInfo = jsProgram.createSourceInfoSynthetic(GenerateJavaScriptAST.class);
-      JsNameRef fieldRef = typeMarkerName.makeRef(sourceInfo);
-      fieldRef.setQualifier(globalTemp.makeRef(sourceInfo));
-      JsExpression asg = createAssignment(fieldRef, nullFunctionJsName.makeRef(sourceInfo));
-      JsExprStmt stmt = asg.makeStmt();
-      globalStmts.add(stmt);
-      typeForStatMap.put(stmt, program.getTypeJavaLangObject());
     }
 
+    private JsExprStmt outputDisplayName(JsNameRef function, JMethod method) {
+      JsNameRef displayName = new JsNameRef(function.getSourceInfo(), "displayName");
+      displayName.setQualifier(function);
+      String displayStringName = getDisplayName(method);
+      JsStringLiteral displayMethodName = new JsStringLiteral(function.getSourceInfo(), displayStringName);
+      return createAssignment(displayName, displayMethodName).makeStmt();
+    }
+
+    private boolean shouldEmitDisplayNames() {
+      return methodNameMappingMode != OptionMethodNameDisplayMode.Mode.NONE;
+    }
+
+    private String getDisplayName(JMethod method) {
+      switch (methodNameMappingMode) {
+        case ONLY_METHOD_NAME:
+          return method.getName();
+        case ABBREVIATED:
+          return method.getEnclosingType().getShortName() + "." + method.getName();
+        case FULL:
+          return method.getEnclosingType().getName() + "." + method.getName();
+        default:
+          assert false : "Invalid display mode option " + methodNameMappingMode;
+      }
+      return null;
+    }
+
+    /**
+     * Creates the assignment for all polynames for a certain class, assumes that the global
+     * variable _ points the JavaScript prototype for {@code x}.
+     */
     private void generateVTables(JClassType x, List<JsStatement> globalStmts) {
       assert x != program.getTypeJavaLangString();
       for (JMethod method : x.getMethods()) {
         SourceInfo sourceInfo = method.getSourceInfo();
         if (method.needsVtable() && !method.isAbstract()) {
-          JsNameRef lhs = polymorphicNames.get(method).makeRef(sourceInfo);
-          lhs.setQualifier(globalTemp.makeRef(sourceInfo));
-
           /*
            * Inline JsFunction rather than reference, e.g. _.vtableName =
            * function functionName() { ... }
            */
-          JsExpression rhs = methodBodyMap.get(method.getBody());
-          JsExpression asg = createAssignment(lhs, rhs);
-          JsExprStmt asgStat = new JsExprStmt(x.getSourceInfo(), asg);
-          globalStmts.add(asgStat);
-          vtableInitForMethodMap.put(asgStat, method);
+          JsExpression rhs = getJsFunctionFor(method);
+          JsName polyJsName = polymorphicNames.get(method);
+          generateVTableAssignment(globalStmts, method, polyJsName, rhs);
+          if (typeOracle.needsJsInteropBridgeMethod(method)) {
+            JsName exportedName = polyJsName.getEnclosing().declareName(method.getName(),
+                method.getName());
+            // _.exportedName = makeBridgeMethod(_.polyName)
+            exportedName.setObfuscatable(false);
+            JsNameRef polyRef = polyJsName.makeRef(sourceInfo);
+            polyRef.setQualifier(getPrototypeQualifierOf(method));
+            generateVTableAssignment(globalStmts, method, exportedName,
+                createJsInteropBridgeMethod(method, polyRef));
+          }
+          if (method.exposesOverriddenPackagePrivateMethod() &&
+              getPackagePrivateName(method) != null) {
+            // This method exposes a package private method that is actually live, hence it needs
+            // to make the package private name and the public name to be the same implementation at
+            // runtime. This is done by an assignment of the form.
+            // _.package_private_name = _.exposed_name
+
+            // Here is the situation where this is needed:
+            //
+            // class a.A { m() {} }
+            // class b.B extends a.A { m() {} }
+            // interface I { m(); }
+            // class a.C {
+            //  { A a = new b.B();  a.m() // calls A::m()} }
+            //  { I i = new b.B();  a.m() // calls B::m()} }
+            // }
+            //
+            // Up to this point it is clear that package private names need to be different than
+            // public names.
+            //
+            // Add class a.D extends a.A implements I { public m() }
+            //
+            // a.D collapses A::m and I::m into the same function and it was clear that two
+            // two different names were already needed, hence when creating the vtable for a.D
+            // both names have to point to the same function.
+            //
+            // It should be noted that all subclasses of a.D will have the two methods collapsed,
+            // and hence this assignment will be present in the vtable setup for all subclasses.
+
+            JsNameRef polyname = polyJsName.makeRef(sourceInfo);
+            polyname.setQualifier(getPrototypeQualifierOf(method));
+            generateVTableAssignment(globalStmts, method,
+                getPackagePrivateName(method),
+                polyname);
+          }
         }
       }
+    }
+
+    public JsNameRef createJsQualifier(String qualifier, SourceInfo sourceInfo) {
+      assert !qualifier.isEmpty();
+      return JsUtils.createQualifier("$wnd." + qualifier, sourceInfo);
+    }
+
+    /**
+     * Returns either _ or ClassCtor.prototype depending on output mode.
+     */
+    private JsNameRef getPrototypeQualifierOf(JMember f) {
+      return getPrototypeQualifierOf(f.getEnclosingType(), f.getSourceInfo());
+    }
+
+    /**
+     * Returns either _ or ClassCtor.prototype depending on output mode.
+     */
+    private JsNameRef getPrototypeQualifierOf(JDeclaredType type, SourceInfo info) {
+      if (closureCompilerFormatEnabled) {
+        JsNameRef protoRef = prototype.makeRef(info);
+        protoRef.setQualifier(names.get(type).makeRef(info));
+        return protoRef;
+      } else {
+        return globalTemp.makeRef(info);
+      }
+    }
+
+    private void collectExports(JDeclaredType x) {
+      if (x.isJsType()) {
+        // Note that this initial export may later be overridden by a real exported constructor.
+        exportedMembersByExportName.put(x.getQualifiedExportName(), x);
+      }
+
+      for (JMethod m : x.getMethods()) {
+        if (typeOracle.isExportedMethod(m)) {
+          exportedMembersByExportName.put(m.getQualifiedExportName(), m);
+        }
+      }
+
+      for (JField f : x.getFields()) {
+        if (typeOracle.isExportedField(f)) {
+          if (!f.isFinal()) {
+            logger.log(TreeLogger.Type.WARN, "Exporting effectively non-final field "
+                + f.getQualifiedName() + ". Due to the way exporting works, the value of the"
+                + " exported field will not be reflected across Java/JavaScript border.");
+          }
+          exportedMembersByExportName.put(f.getQualifiedExportName(), f);
+        }
+      }
+    }
+
+    private JsExpression createJsInteropBridgeMethod(JMethod m, JsNameRef methodRef) {
+      if (m.isStatic() || m instanceof JConstructor) {
+        return methodRef;
+      } else {
+        // call JHCSU.makeBridgeMethod(functionRefToBeCalled)
+        JsFunction makeBridgeMethod = indexedFunctions.get("JavaClassHierarchySetupUtil.makeBridgeMethod");
+        JsNameRef makeBridgeMethodRef = makeBridgeMethod.getName().makeRef(methodRef.getSourceInfo());
+        JsInvocation invokeBridge = new JsInvocation(methodRef.getSourceInfo());
+        invokeBridge.setQualifier(makeBridgeMethodRef);
+        invokeBridge.getArguments().add(methodRef);
+        invokeBridge.getArguments().add(m.getType() == JPrimitiveType.LONG ?
+            JsBooleanLiteral.TRUE : JsBooleanLiteral.FALSE);
+        JsArrayLiteral arrayLiteral = new JsArrayLiteral(m.getSourceInfo());
+        for (JParameter p : m.getParams()) {
+          if (p.getType() == JPrimitiveType.LONG) {
+            arrayLiteral.getExpressions().add(JsBooleanLiteral.TRUE);
+          } else {
+            arrayLiteral.getExpressions().add(JsBooleanLiteral.FALSE);
+          }
+        }
+        invokeBridge.getArguments().add(arrayLiteral);
+        return invokeBridge;
+      }
+    }
+
+    /**
+     * Returns the package private JsName for {@code method}.
+     */
+    private JsName getPackagePrivateName(JMethod method) {
+      return polymorphicNames.get(typeOracle.getTopMostDefinition(method));
     }
 
     private void handleClinit(JsFunction clinitFunc, JsFunction superClinit) {
@@ -2389,15 +2939,30 @@ public class GenerateJavaScriptAST {
       clinitFunc.setImpliedExecute(superClinit);
       List<JsStatement> statements = clinitFunc.getBody().getStatements();
       SourceInfo sourceInfo = clinitFunc.getSourceInfo();
-      // self-assign to the null method immediately (to prevent reentrancy)
+      // Self-assign to the global noop method immediately (to prevent reentrancy). In incremental
+      // mode the more costly Object constructor function is used as the noop method since doing so
+      // provides a better debug experience that does not step into already used clinits.
+
+      JsFunction emptyFunctionFn = incremental ? getObjectConstructorFunction()
+          : indexedFunctions.get("JavaClassHierarchySetupUtil.emptyMethod");
       JsExpression asg = createAssignment(clinitFunc.getName().makeRef(sourceInfo),
-              nullFunctionJsName.makeRef(sourceInfo));
+          emptyFunctionFn.getName().makeRef(sourceInfo));
       statements.add(0, asg.makeStmt());
     }
 
     private boolean isMethodPotentiallyCalledAcrossClasses(JMethod method) {
       assert !hasWholeWorldKnowledge || crossClassTargets != null;
-      return crossClassTargets == null || crossClassTargets.contains(method);
+      return crossClassTargets == null || crossClassTargets.contains(method)
+          || typeOracle.isExportedMethod(method) || typeOracle.isJsTypeMethod(method);
+    }
+
+    private Iterable<JMethod> getPotentiallyAliveConstructors(JClassType x) {
+      return Iterables.filter(x.getMethods(), new Predicate<JMethod>() {
+        @Override
+        public boolean apply(JMethod m) {
+          return isMethodPotentiallyALiveConstructor(m);
+        }
+      });
     }
 
     /**
@@ -2412,13 +2977,19 @@ public class GenerateJavaScriptAST {
       return liveCtors == null || liveCtors.contains(method);
     }
 
-    private JsInvocation maybeCreateClinitCall(JField x) {
-      if (!x.isStatic()) {
+    private JsInvocation maybeCreateClinitCall(JField x, boolean isExported) {
+      if (!x.isStatic() || x.isCompileTimeConstant()) {
+        // Access to compile time constants do not trigger class initialization (JLS 12.4.1).
         return null;
       }
 
       JDeclaredType targetType = x.getEnclosingType().getClinitTarget();
-      if (!currentMethod.getEnclosingType().checkClinitTo(targetType)) {
+      if (targetType == null) {
+        return null;
+      }
+
+      if (!isExported &&
+          (currentMethod == null || !currentMethod.getEnclosingType().checkClinitTo(targetType))) {
         return null;
       } else if (targetType.equals(program.getTypeClassLiteralHolder())) {
         return null;
@@ -2426,9 +2997,7 @@ public class GenerateJavaScriptAST {
 
       JMethod clinitMethod = targetType.getClinitMethod();
       SourceInfo sourceInfo = x.getSourceInfo();
-      JsInvocation jsInvocation = new JsInvocation(sourceInfo);
-      jsInvocation.setQualifier(names.get(clinitMethod).makeRef(sourceInfo));
-      return jsInvocation;
+      return new JsInvocation(sourceInfo, names.get(clinitMethod).makeRef(sourceInfo));
     }
 
     private JsInvocation maybeCreateClinitCall(JMethod x) {
@@ -2436,10 +3005,11 @@ public class GenerateJavaScriptAST {
         // Global optimized compile can prune some clinit calls.
         return null;
       }
-      if (x.canBePolymorphic() || program.isStaticImpl(x)) {
+      JDeclaredType enclosingType = x.getEnclosingType();
+      if (x.canBePolymorphic() || (program.isStaticImpl(x) &&
+          !typeOracle.isJavaScriptObject(enclosingType))) {
         return null;
       }
-      JDeclaredType enclosingType = x.getEnclosingType();
       if (enclosingType == null || !enclosingType.hasClinit()) {
         return null;
       }
@@ -2450,9 +3020,7 @@ public class GenerateJavaScriptAST {
 
       JMethod clinitMethod = enclosingType.getClinitTarget().getClinitMethod();
       SourceInfo sourceInfo = x.getSourceInfo();
-      JsInvocation jsInvocation = new JsInvocation(sourceInfo);
-      jsInvocation.setQualifier(names.get(clinitMethod).makeRef(sourceInfo));
-      return jsInvocation;
+      return new JsInvocation(sourceInfo, names.get(clinitMethod).makeRef(sourceInfo));
     }
 
     /**
@@ -2472,20 +3040,36 @@ public class GenerateJavaScriptAST {
       if (x.getLiteralInitializer() == null) {
         return false;
       }
-      if (x.isFinal() || x.isStatic()) {
+      if (x.isFinal() || x.isStatic() || x.isCompileTimeConstant()) {
         // we can definitely initialize at top-scope, as JVM does so as well
         return true;
       }
-      // if the superclass can observe the field, we need to leave the default value
-      JDeclaredType current = x.getEnclosingType().getSuperClass();
-      while (current != null) {
-        if (canObserveSubclassFields.contains(current)) {
-          return false;
-        }
-        current = current.getSuperClass();
-      }
-      // should be safe to initialize at top-scope, as no one can observe the difference
-      return true;
+
+      return !uninitializedValuePotentiallyObservable.apply(x);
+    }
+
+    // Keep track of a translation stack.
+    private final Stack<JsVisitable> nodeStack = new Stack<JsVisitable>();
+
+    @SuppressWarnings("unchecked")
+    private <T extends JsVisitable> T pop() {
+      return (T) nodeStack.pop();
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T extends JsVisitable> List<T> popList(int count) {
+      List<JsVisitable> newArrayList =
+          Lists.newArrayList(Iterables.filter(nodeStack.pop(count), Predicates.notNull()));
+      return (List<T>) newArrayList;
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T extends JsVisitable> void popList(List<T> collection, int count) {
+      collection.addAll((List<T>) popList(count));
+    }
+
+    private <T extends JsVisitable> void push(T node) {
+      nodeStack.push(node);
     }
   }
 
@@ -2546,70 +3130,6 @@ public class GenerateJavaScriptAST {
     }
   }
 
-  /**
-   * Determines which classes can potentially see uninitialized values of their subclasses' fields.
-   *
-   * If a class can not observe subclass uninitialized fields then the initialization of those could
-   * be hoisted to the prototype.
-   */
-  private class CanObserveSubclassUninitializedFieldsVisitor extends JVisitor {
-    private JDeclaredType currentClass;
-
-    @Override
-    public boolean visit(JConstructor x, Context ctx) {
-      // Only look at constructor bodies.
-      assert currentClass == null;
-      currentClass = x.getEnclosingType();
-      return true;
-    }
-
-    @Override
-    public void endVisit(JConstructor x, Context ctx) {
-      currentClass = null;
-    }
-
-    @Override
-    public boolean visit(JMethod x, Context ctx) {
-      if (x.getName().equals("$$init")) {
-        assert currentClass == null;
-        currentClass = x.getEnclosingType();
-        return true;
-      }
-      // Do not traverse the method body if it is not a constructor.
-      return false;
-    }
-
-    @Override
-    public void endVisit(JMethod x, Context ctx) {
-      currentClass = null;
-    }
-
-    @Override
-    public void endVisit(JMethodCall x, Context ctx) {
-      // This is a method call inside a constructor.
-      assert currentClass != null;
-      // Calls to this/super constructors are okay, as they will also get examined
-      if (x.getTarget().isConstructor() && x.getInstance() instanceof JThisRef) {
-        return;
-      }
-      // Calls to the instance initializer are okay, as execution will not escape it
-      if (x.getTarget().getName().equals("$$init")) {
-        return;
-      }
-      // Calls to static methods with no arguments are safe, because they have no
-      // way to trace back into our new instance.
-      if (x.getTarget().isStatic() && x.getTarget().getOriginalParamTypes().size() == 0) {
-        return;
-      }
-      // Technically we could get fancier about trying to track the "this" reference
-      // through other variable assignments, field assignments, and methods calls, to
-      // see if it calls a polymorphic method against ourself (which would let subclasses
-      // observe their fields), but that gets tricky, so we'll use the above heuristics
-      // for now.
-      canObserveSubclassFields.add(currentClass);
-    }
-  }
-
   private class RecordJSInlinableMethods extends JVisitor {
 
     private JMethod currentMethod;
@@ -2617,6 +3137,7 @@ public class GenerateJavaScriptAST {
     @Override
     public void endVisit(JMethod x, Context ctx) {
       if (x.isNative()) {
+        // These are methods that were not considered by the Java method inliner.
         methodsForJsInlining.add(x);
       }
 
@@ -2625,11 +3146,11 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
-      if (x.getTarget().isNative()
-          && ((JsniMethodBody) x.getTarget().getBody()).getFunc().getBody().getStatements().size()
-          <= JsInliner.MAX_INLINE_FN_SIZE) {
-        // currentMethod calls a jsni method, currentMethod
-        // will be consider for JavaScript inlining
+      JMethod target = x.getTarget();
+      if (program.isInliningAllowed(target) && (target.isNative()
+          || program.getIndexedTypes().contains(target.getEnclosingType()))) {
+        // the currentMethod calls a method that was not considered by the Java MethodInliner; these
+        // include JSNI methods and methods whose calls were inserted by normalization passes.
         methodsForJsInlining.add(currentMethod);
       }
     }
@@ -2669,6 +3190,12 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JMethod x, Context ctx) {
+      if (typeOracle.isExportedMethod(x) && x instanceof JConstructor) {
+        // exported ctors always considered live
+        liveCtors.add((JConstructor) x);
+        // could be called from JS, so clinit must be called from body
+        crossClassTargets.add(x);
+      }
       currentMethod = null;
     }
 
@@ -2710,36 +3237,28 @@ public class GenerateJavaScriptAST {
   }
 
   private static class SortVisitor extends JVisitor {
-    private final HasNameSort hasNameSort = new HasNameSort();
-
-    private final Comparator<JMethod> methodSort = new Comparator<JMethod>() {
-      @Override
-      public int compare(JMethod m1, JMethod m2) {
-        return m1.getSignature().compareTo(m2.getSignature());
-      }
-    };
 
     @Override
     public void endVisit(JClassType x, Context ctx) {
-      x.sortFields(hasNameSort);
-      x.sortMethods(methodSort);
+      x.sortFields(HasName.BY_NAME_COMPARATOR);
+      x.sortMethods(JMethod.BY_SIGNATURE_COMPARATOR);
     }
 
     @Override
     public void endVisit(JInterfaceType x, Context ctx) {
-      x.sortFields(hasNameSort);
-      x.sortMethods(methodSort);
+      x.sortFields(HasName.BY_NAME_COMPARATOR);
+      x.sortMethods(JMethod.BY_SIGNATURE_COMPARATOR);
     }
 
     @Override
     public void endVisit(JMethodBody x, Context ctx) {
-      x.sortLocals(hasNameSort);
+      x.sortLocals(HasName.BY_NAME_COMPARATOR);
     }
 
     @Override
     public void endVisit(JProgram x, Context ctx) {
-      Collections.sort(x.getEntryMethods(), methodSort);
-      Collections.sort(x.getDeclaredTypes(), hasNameSort);
+      Collections.sort(x.getEntryMethods(), JMethod.BY_SIGNATURE_COMPARATOR);
+      Collections.sort(x.getDeclaredTypes(), HasName.BY_NAME_COMPARATOR);
     }
 
     @Override
@@ -2754,24 +3273,31 @@ public class GenerateJavaScriptAST {
    * Java AST and constructs a JavaScript AST while collecting other useful information that
    * is used in subsequent passes.
    *
+   * @param logger            a TreeLogger
    * @param program           a Java AST
    * @param jsProgram         an (empty) JavaScript AST
-   * @param outputOption      options that affect this transformation for this transformation
-   *                          e.g. OBFUSCATED, etc.
    * @param symbolTable       an (empty) symbol table that will be populated here
-   * @param propertyOracles   property oracles that correspond to the permutation being compiled.
+   *
    * @return A pair containing a JavaToJavaScriptMap and a Set of JsFunctions that need to be
    *         considered for inlining.
    */
-  public static Pair<JavaToJavaScriptMap, Set<JsNode>> exec(JProgram program,
-      JsProgram jsProgram, CompilerContext compilerContext, Map<JType, JLiteral> typeIdsByType,
-      Map<StandardSymbolData, JsName> symbolTable,
-      PropertyOracle[] propertyOracles) {
-    GenerateJavaScriptAST generateJavaScriptAST =
-        new GenerateJavaScriptAST(program, jsProgram, compilerContext, typeIdsByType,
-            symbolTable, propertyOracles);
-    return generateJavaScriptAST.execImpl();
+  public static Pair<JavaToJavaScriptMap, Set<JsNode>> exec(TreeLogger logger, JProgram program,
+      JsProgram jsProgram, CompilerContext compilerContext, TypeMapper<?> typeMapper,
+      Map<StandardSymbolData, JsName> symbolTable, PermProps props) {
+
+    Event event = SpeedTracerLogger.start(CompilerEventType.GENERATE_JS_AST);
+    try {
+      GenerateJavaScriptAST generateJavaScriptAST = new GenerateJavaScriptAST(logger, program,
+          jsProgram, compilerContext, typeMapper, symbolTable, props);
+      return generateJavaScriptAST.execImpl();
+    } finally {
+      event.end();
+    }
   }
+
+  private static final ImmutableList<String> METHODS_PROVIDED_BY_PREAMBLE = ImmutableList.of(
+      "Class.createForClass", "Class.createForPrimitive", "Class.createForInterface",
+      "Class.createForEnum");
 
   private final Map<JBlock, JsCatch> catchMap = Maps.newIdentityHashMap();
 
@@ -2802,7 +3328,11 @@ public class GenerateJavaScriptAST {
    */
   private final JsScope interfaceScope;
 
+  private final OptionJsInteropMode.Mode jsInteropMode;
+
   private final JsProgram jsProgram;
+
+  private boolean closureCompilerFormatEnabled;
 
   private Set<JConstructor> liveCtors = null;
 
@@ -2810,17 +3340,11 @@ public class GenerateJavaScriptAST {
    * Classes that could potentially see uninitialized values for fields that are initialized in the
    * declaration.
    */
-  private final Set<JDeclaredType> canObserveSubclassFields = Sets.newHashSet();
+  private Predicate<JField> uninitializedValuePotentiallyObservable;
 
-  /**
-   * Sorted to avoid nondeterministic iteration.
-   */
-  private final Map<Long, JsName> longLits = Maps.newTreeMap();
-
-  private final Map<JsName, JsExpression> longObjects = Maps.newIdentityHashMap();
   private final Map<JAbstractMethodBody, JsFunction> methodBodyMap = Maps.newIdentityHashMap();
   private final Map<HasName, JsName> names = Maps.newIdentityHashMap();
-  private JsName nullFunctionJsName;
+  private final Map<JsFunction, JMethod> javaMethodForJSFunction = Maps.newIdentityHashMap();
 
   /**
    * Contains JsNames for the Object instance methods, such as equals, hashCode,
@@ -2831,11 +3355,22 @@ public class GenerateJavaScriptAST {
   private final Map<JMethod, JsName> polymorphicNames = Maps.newIdentityHashMap();
   private final JProgram program;
 
+  /**
+   * SEt of all targets of JNameOf.
+   */
+  private Set<HasName> nameOfTargets = Sets.newHashSet();
+
   private final JsOutputOption output;
   // Whether the AST for the whole program arrived to this pass or just for one module.
   // This is used to do some final optimizations.
   // TODO(rluble) move optimization to a Java AST optimization pass.
   private final boolean hasWholeWorldKnowledge;
+
+  private final boolean optimize;
+
+  private final TreeLogger logger;
+
+  private final boolean incremental;
 
   /**
    * All of the fields in String and Array need special handling for interop.
@@ -2869,24 +3404,42 @@ public class GenerateJavaScriptAST {
 
   private final Map<JsStatement, JMethod> vtableInitForMethodMap = Maps.newHashMap();
 
-  private final Map<JType, JLiteral> typeIdsByType;
+  private final TypeMapper<?> typeMapper;
 
-  private GenerateJavaScriptAST(JProgram program, JsProgram jsProgram,
-      CompilerContext compilerContext, Map<JType, JLiteral> typeIdsByType,
-      Map<StandardSymbolData, JsName> symbolTable, PropertyOracle[] propertyOracles) {
+  private final MinimalRebuildCache minimalRebuildCache;
+
+  private final PermProps props;
+
+  private OptionMethodNameDisplayMode.Mode methodNameMappingMode;
+
+  private JsFunction objectConstructorFunction;
+
+  private GenerateJavaScriptAST(TreeLogger logger, JProgram program, JsProgram jsProgram,
+      CompilerContext compilerContext, TypeMapper<?> typeMapper,
+      Map<StandardSymbolData, JsName> symbolTable, PermProps props) {
+    this.logger = logger;
     this.program = program;
-    typeOracle = program.typeOracle;
+    this.typeOracle = program.typeOracle;
     this.jsProgram = jsProgram;
-    topScope = jsProgram.getScope();
-    objectScope = jsProgram.getObjectScope();
-    interfaceScope = new JsNormalScope(objectScope, "Interfaces");
-    this.output = compilerContext.getOptions().getOutput();
-    this.hasWholeWorldKnowledge = compilerContext.shouldCompileMonolithic();
+    this.topScope = jsProgram.getScope();
+    this.objectScope = jsProgram.getObjectScope();
+    this.interfaceScope = new JsNormalScope(objectScope, "Interfaces");
+    this.minimalRebuildCache = compilerContext.getMinimalRebuildCache();
     this.symbolTable = symbolTable;
-    this.typeIdsByType = typeIdsByType;
+    this.typeMapper = typeMapper;
+    this.props = props;
 
-    this.stripStack =
-        JsStackEmulator.getStackMode(propertyOracles) == JsStackEmulator.StackMode.STRIP;
+    PrecompileTaskOptions options = compilerContext.getOptions();
+    this.output = options.getOutput();
+    this.optimize = options.getOptimizationLevel() > OptionOptimize.OPTIMIZE_LEVEL_DRAFT;
+    this.methodNameMappingMode = options.getMethodNameDisplayMode();
+    assert methodNameMappingMode != null;
+    this.hasWholeWorldKnowledge = !options.isIncrementalCompileEnabled();
+    this.incremental = options.isIncrementalCompileEnabled();
+
+    this.stripStack = JsStackEmulator.getStackMode(props) == JsStackEmulator.StackMode.STRIP;
+    this.jsInteropMode = options.getJsInteropMode();
+    this.closureCompilerFormatEnabled = options.isClosureCompilerFormatEnabled();
 
     /*
      * Because we modify the JavaScript String prototype, all fields and
@@ -2928,65 +3481,84 @@ public class GenerateJavaScriptAST {
     }
   }
 
-  String getNameString(HasName hasName) {
-    String s = hasName.getName().replaceAll("_", "_1").replace('.', '_');
-    return s;
-  }
-
   /**
    * Retrieves the runtime typeId for {@code type}.
    */
-  JLiteral getRuntimeTypeReference(JReferenceType type) {
-    return typeIdsByType.get(type);
+  JExpression getRuntimeTypeReference(JReferenceType type) {
+    Object typeId = typeMapper.get(type);
+    if (typeId == null) {
+      return null;
+    }
+    if (typeId instanceof JMethodCall) {
+      return (JMethodCall) typeId;
+    }
+    return program.getLiteral(typeId);
   }
 
   String mangleName(JField x) {
-    String s = getNameString(x.getEnclosingType()) + '_' + getNameString(x);
+    String s = JjsUtils.getNameString(x.getEnclosingType()) + '_' + JjsUtils.getNameString(x);
     return s;
   }
 
   String mangleNameForGlobal(JMethod x) {
-    String s = getNameString(x.getEnclosingType()) + '_' + getNameString(x) + "__";
+    String s =
+        JjsUtils.getNameString(x.getEnclosingType()) + '_' + JjsUtils.getNameString(x) + "__";
     for (int i = 0; i < x.getOriginalParamTypes().size(); ++i) {
       JType type = x.getOriginalParamTypes().get(i);
       s += type.getJavahSignatureName();
     }
     s += x.getOriginalReturnType().getJavahSignatureName();
-    return s;
+    return StringInterner.get().intern(s);
+  }
+
+  String mangleNameForPackagePrivatePoly(JMethod x) {
+    assert x.isPackagePrivate() && !x.isStatic();
+    StringBuilder sb = new StringBuilder();
+    /*
+     * Package private instance methods in different classes should not override each
+     * other, so they must have distinct polymorphic names. Therefore, add the
+     * class name of where the method is first defined to the mangled name.
+     */
+    sb.append("package_private$");
+    JMethod topDefinition = typeOracle.getTopMostDefinition(x);
+    sb.append(JjsUtils.getNameString(topDefinition.getEnclosingType()));
+    sb.append("$");
+    sb.append(JjsUtils.getNameString(x));
+    JjsUtils.constructManglingSignature(x, sb);
+    return StringInterner.get().intern(sb.toString());
   }
 
   String mangleNameForPoly(JMethod x) {
     assert !x.isPrivate() && !x.isStatic();
-    StringBuffer sb = new StringBuffer();
-    sb.append(getNameString(x));
-    sb.append("__");
-    for (int i = 0; i < x.getOriginalParamTypes().size(); ++i) {
-      JType type = x.getOriginalParamTypes().get(i);
-      sb.append(type.getJavahSignatureName());
-    }
-    sb.append(x.getOriginalReturnType().getJavahSignatureName());
-    return sb.toString();
+    StringBuilder sb = new StringBuilder();
+    sb.append(JjsUtils.getNameString(x));
+    JjsUtils.constructManglingSignature(x, sb);
+    return StringInterner.get().intern(sb.toString());
   }
 
   String mangleNameForPrivatePoly(JMethod x) {
     assert x.isPrivate() && !x.isStatic();
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     /*
      * Private instance methods in different classes should not override each
      * other, so they must have distinct polymorphic names. Therefore, add the
      * class name to the mangled name.
      */
     sb.append("private$");
-    sb.append(getNameString(x.getEnclosingType()));
+    sb.append(JjsUtils.getNameString(x.getEnclosingType()));
     sb.append("$");
-    sb.append(getNameString(x));
-    sb.append("__");
-    for (int i = 0; i < x.getOriginalParamTypes().size(); ++i) {
-      JType type = x.getOriginalParamTypes().get(i);
-      sb.append(type.getJavahSignatureName());
-    }
-    sb.append(x.getOriginalReturnType().getJavahSignatureName());
-    return sb.toString();
+    sb.append(JjsUtils.getNameString(x));
+    JjsUtils.constructManglingSignature(x, sb);
+    return StringInterner.get().intern(sb.toString());
+  }
+
+  String mangleNameForJsProperty(JMethod x) {
+    assert x.isOrOverridesJsProperty();
+    StringBuilder sb = new StringBuilder();
+    sb.append("jsproperty$");
+    sb.append(JjsUtils.getNameString(x));
+    JjsUtils.constructManglingSignature(x, sb);
+    return StringInterner.get().intern(sb.toString());
   }
 
   String mangleNameSpecialObfuscate(JField x) {
@@ -3015,15 +3587,44 @@ public class GenerateJavaScriptAST {
     throw new InternalCompilerException("Unknown output mode");
   }
 
+  private final Map<JType, JDeclarationStatement> classLiteralDeclarationsByType =
+      Maps.newLinkedHashMap();
+
+  private void contructTypeToClassLiteralDeclarationMap() {
+      /*
+       * Must execute in clinit statement order, NOT field order, so that back
+       * refs to super classes are preserved.
+       */
+    JMethodBody clinitBody =
+        (JMethodBody) program.getTypeClassLiteralHolder().getClinitMethod().getBody();
+    for (JStatement stmt : clinitBody.getStatements()) {
+      if (!(stmt instanceof JDeclarationStatement)) {
+        continue;
+      }
+      JDeclarationStatement classLiteralDeclaration = (JDeclarationStatement) stmt;
+
+      JType type = program.getTypeByClassLiteralField(
+          (JField) ((JDeclarationStatement) stmt).getVariableRef().getTarget());
+
+      assert !classLiteralDeclarationsByType.containsKey(type);
+      classLiteralDeclarationsByType.put(type, classLiteralDeclaration);
+    }
+  }
+
   private Pair<JavaToJavaScriptMap, Set<JsNode>> execImpl() {
     new FixNameClashesVisitor().accept(program);
-    new CanObserveSubclassUninitializedFieldsVisitor().accept(program);
+    uninitializedValuePotentiallyObservable = optimize ?
+        ComputePotentiallyObservableUninitializedValues.analyze(program) : Predicates.<JField>alwaysTrue();
+    new FindNameOfTargets().accept(program);
     new SortVisitor().accept(program);
     if (hasWholeWorldKnowledge) {
       // TODO(rluble): pull out this analysis and make it a Java AST optimization pass.
       new RecordCrossClassCallsAndConstructorLiveness().accept(program);
       new RecordJSInlinableMethods().accept(program);
     }
+
+    // Map class literals to their respective types.
+    contructTypeToClassLiteralDeclarationMap();
 
     CreateNamesAndScopesVisitor creator = new CreateNamesAndScopesVisitor();
     creator.accept(program);
@@ -3040,5 +3641,17 @@ public class GenerateJavaScriptAST {
         names, typeForStatMap, vtableInitForMethodMap);
 
     return Pair.create(jjsMap, generator.functionsForJsInlining);
+  }
+
+  private JsFunction getJsFunctionFor(JMethod jMethod) {
+    return methodBodyMap.get(jMethod.getBody());
+  }
+
+  private JsFunction getObjectConstructorFunction() {
+    if (objectConstructorFunction == null) {
+      objectConstructorFunction =
+          new JsFunction(SourceOrigin.UNKNOWN, topScope, topScope.findExistingName("Object"));
+    }
+    return objectConstructorFunction;
   }
 }

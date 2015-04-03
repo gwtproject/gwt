@@ -17,6 +17,7 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JArrayRef;
 import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
@@ -39,7 +40,6 @@ import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,6 +49,8 @@ import java.util.TreeSet;
  * Builds minimal cast maps to cover cast and instanceof operations. Depends
  * on {@link CatchBlockNormalizer}, {@link CompoundAssignmentNormalizer},
  * {@link Devirtualizer}, and {@link LongCastNormalizer} having already run.
+ * <p>
+ * May or may not include trivial casts depending on configuration.
  */
 public class ComputeCastabilityInformation {
   private class AssignTypeCastabilityVisitor extends JVisitor {
@@ -60,7 +62,6 @@ public class ComputeCastabilityInformation {
         HashMultimap.create();
 
     {
-      JTypeOracle typeOracle = program.typeOracle;
       for (JArrayType arrayType : program.getAllArrayTypes()) {
         if (typeOracle.isInstantiatedType(arrayType)) {
           instantiatedArrayTypes.add(arrayType);
@@ -124,7 +125,7 @@ public class ComputeCastabilityInformation {
         }
 
         // element type being final means the assignment is statically correct
-        if (((JReferenceType) elementType).isFinal()) {
+        if (elementType.isFinal()) {
           return;
         }
 
@@ -133,7 +134,6 @@ public class ComputeCastabilityInformation {
          * runtime type of the lhs, we must record a cast from the rhs to the
          * prospective element type of the lhs.
          */
-        JTypeOracle typeOracle = program.typeOracle;
         JType rhsType = x.getRhs().getType();
         assert (rhsType instanceof JReferenceType);
 
@@ -167,20 +167,23 @@ public class ComputeCastabilityInformation {
       type = type.getUnderlyingType();
       qType = qType.getUnderlyingType();
 
+      if (typeOracle.canTriviallyCast(type, qType)) {
+        return true;
+      }
+
       if (type instanceof JArrayType && qType instanceof JArrayType) {
         JArrayType aType = (JArrayType) type;
         JArrayType aqType = (JArrayType) qType;
-        return program.typeOracle.canTriviallyCast(type, qType)
-            || (program.isJavaScriptObject(aType.getLeafType()) && program
-                .isJavaScriptObject(aqType.getLeafType()));
+        return (typeOracle.isJavaScriptObject(aType.getLeafType()) &&
+            typeOracle.isJavaScriptObject(aqType.getLeafType()));
       }
 
-      return program.typeOracle.canTriviallyCast(type, qType)
-          || (program.isJavaScriptObject(type) && program.isJavaScriptObject(qType));
+      return (typeOracle.isJavaScriptObject(type) &&
+          typeOracle.isJavaScriptObject(qType));
     }
 
     /**
-     * Create the mapping from a class to its query types.
+     * Create the mapping from a class to the types it can be cast to.
      */
     private void computeCastMap(JReferenceType type) {
       if (type == null || alreadyRan.contains(type)) {
@@ -195,19 +198,19 @@ public class ComputeCastabilityInformation {
         computeCastMap(((JClassType) type).getSuperClass());
       }
 
-      if (!program.typeOracle.isInstantiatedType(type) || program.isJavaScriptObject(type)) {
+      if (!typeOracle.isInstantiatedType(type) ||
+          typeOracle.isJavaScriptObject(type)) {
         return;
       }
 
       // Find all possible query types which I can satisfy
-      Set<JReferenceType> castableTypes = new TreeSet<JReferenceType>(TYPE_COMPARATOR);
+      Set<JReferenceType> castableTypes = new TreeSet<JReferenceType>(HasName.BY_NAME_COMPARATOR);
 
       /*
        * NOTE: non-deterministic iteration over HashSet and HashMap. Okay
        * because we're sorting the results.
        */
       for (JReferenceType castTargetType : castSourceTypesPerCastTargetType.keySet()) {
-
         if (!canTriviallyCastJsoSemantics(type, castTargetType)) {
           continue;
         }
@@ -220,10 +223,10 @@ public class ComputeCastabilityInformation {
          */
         for (JReferenceType castSourceType : castSourceTypes) {
           if (canTriviallyCastJsoSemantics(type, castSourceType) ||
-              program.isJavaScriptObject(castTargetType)) {
-            if (castTargetType != program.getTypeJavaLangObject() &&
-                castTargetType != program.getJavaScriptObject()) {
-              // ignore java.lang.Object.
+              typeOracle.isJavaScriptObject(castTargetType)) {
+            boolean isTrivialCast = castTargetType == program.getTypeJavaLangObject()
+                || castTargetType == program.getJavaScriptObject();
+            if (recordTrivialCasts || !isTrivialCast) {
               castableTypes.add(castTargetType);
             }
             break;
@@ -249,17 +252,18 @@ public class ComputeCastabilityInformation {
       if (!(targetType instanceof JReferenceType)) {
         return;
       }
-      targetType = ((JReferenceType) targetType).getUnderlyingType();
+      targetType = targetType.getUnderlyingType();
 
       assert rhs.getType() instanceof JReferenceType;
 
-      JReferenceType rhsType = ((JReferenceType) rhs.getType()).getUnderlyingType();
-      if (program.typeOracle.canTriviallyCast(rhsType, (JReferenceType) targetType)) {
+      JReferenceType rhsType = (JReferenceType) rhs.getType().getUnderlyingType();
+      if (!recordTrivialCasts
+          && typeOracle.canTriviallyCast(rhsType, (JReferenceType) targetType)) {
         // don't record a type for trivial casts that won't generate code
         return;
       }
 
-      if (program.isJavaScriptObject(targetType)) {
+      if (!recordTrivialCasts && typeOracle.isJavaScriptObject(targetType)) {
         // If the target type is a JavaScriptObject, don't record an id.
         return;
       }
@@ -270,28 +274,40 @@ public class ComputeCastabilityInformation {
     private void recordCastInternal(JReferenceType toType, JReferenceType rhsType) {
       toType = toType.getUnderlyingType();
       rhsType = rhsType.getUnderlyingType();
+
+      if (toType instanceof JArrayType) {
+        // Arrays of any subclass of JavaScriptObject are considered arrays of JavaScriptObject
+        // for casting and instanceof purposes.
+        toType =  (JReferenceType) program.normalizeJsoType(toType);
+      }
+
       castSourceTypesPerCastTargetType.put(toType, rhsType);
     }
   }
 
-  private static final Comparator<JType> TYPE_COMPARATOR = new Comparator<JType>() {
-    @Override
-    public int compare(JType o1, JType o2) {
-      return o1.getName().compareTo(o2.getName());
-    }
-  };
+  public static void exec(JProgram program, boolean disableCastChecking,
+      boolean recordTrivialCasts) {
+    new ComputeCastabilityInformation(program, disableCastChecking, recordTrivialCasts).execImpl();
+  }
 
   public static void exec(JProgram program, boolean disableCastChecking) {
-    new ComputeCastabilityInformation(program, disableCastChecking).execImpl();
+    new ComputeCastabilityInformation(program, disableCastChecking, false).execImpl();
   }
 
   private final boolean disableCastChecking;
 
+  private final boolean recordTrivialCasts;
+
   private final JProgram program;
 
-  private ComputeCastabilityInformation(JProgram program, boolean disableCastChecking) {
+  private final JTypeOracle typeOracle;
+
+  private ComputeCastabilityInformation(JProgram program, boolean disableCastChecking,
+      boolean recordTrivialCasts) {
     this.program = program;
+    this.typeOracle = program.typeOracle;
     this.disableCastChecking = disableCastChecking;
+    this.recordTrivialCasts = recordTrivialCasts;
   }
 
   private void execImpl() {

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,12 +15,13 @@
  */
 package com.google.gwt.dev.shell.rewrite;
 
-import com.google.gwt.dev.asm.AnnotationVisitor;
-import com.google.gwt.dev.asm.ClassReader;
-import com.google.gwt.dev.asm.ClassVisitor;
-import com.google.gwt.dev.asm.Opcodes;
-import com.google.gwt.dev.asm.Type;
 import com.google.gwt.dev.javac.asmbridge.EmptyVisitor;
+
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 import java.lang.annotation.Annotation;
 
@@ -33,7 +34,7 @@ public class HasAnnotation extends ClassVisitor {
   /**
    * A utility method to determine if the class defined in
    * <code>classBytes</code> has a particular annotation.
-   * 
+   *
    * @param classBytes the class's bytecode
    * @param annotation the type of annotation to look for
    * @return <code>true</code> if the class defined in <code>classBytes</code>
@@ -53,7 +54,7 @@ public class HasAnnotation extends ClassVisitor {
   private final String targetDesc;
 
   public HasAnnotation(ClassVisitor v, Class<? extends Annotation> annotation) {
-    super(Opcodes.ASM4, v);
+    super(Opcodes.ASM5, v);
     targetDesc = Type.getDescriptor(annotation);
   }
 

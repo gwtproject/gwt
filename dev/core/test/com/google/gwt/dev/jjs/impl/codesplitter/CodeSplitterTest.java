@@ -24,8 +24,6 @@ import com.google.gwt.dev.cfg.ConditionNone;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
 import com.google.gwt.dev.jjs.impl.FullCompileTestBase;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.JsBlock;
@@ -36,8 +34,9 @@ import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.Pair;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -59,7 +58,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
         }
 
         @Override
-        public void methodIsLiveBecause(JMethod liveMethod, ArrayList<JMethod> dependencyChain) {
+        public void methodIsLiveBecause(JMethod liveMethod, List<JMethod> dependencyChain) {
         }
 
         @Override
@@ -98,7 +97,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
   }
 
   public void testSimple() throws UnableToCompleteException {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("package test;\n");
     code.append("import com.google.gwt.core.client.GWT;\n");
     code.append("import com.google.gwt.core.client.RunAsyncCallback;\n");
@@ -140,7 +139,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
 
 
   public void testPredefinedAsyncGrouping() throws UnableToCompleteException {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("package test;\n");
     code.append("import com.google.gwt.core.client.GWT;\n");
     code.append("import com.google.gwt.core.client.RunAsyncCallback;\n");
@@ -205,7 +204,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
     initialSequenceProp.addValue("@test.EntryPoint::createInitialCallBack1()");
     initialSequenceProp.addValue("@test.EntryPoint::createInitialCallBack2()");
 
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("package test;\n");
     code.append("import com.google.gwt.core.client.GWT;\n");
     code.append("import com.google.gwt.core.client.RunAsyncCallback;\n");
@@ -265,7 +264,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
   }
 
   public void testOnSuccessCallCast() throws UnableToCompleteException {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("package test;\n");
     code.append("import com.google.gwt.core.client.GWT;\n");
     code.append("import com.google.gwt.core.client.RunAsyncCallback;\n");
@@ -295,7 +294,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
   }
 
   public void testMergeLeftOvers() throws UnableToCompleteException {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("package test;\n");
     code.append("import com.google.gwt.core.client.GWT;\n");
     code.append("import com.google.gwt.core.client.RunAsyncCallback;\n");
@@ -325,17 +324,6 @@ public class CodeSplitterTest extends FullCompileTestBase {
   }
 
   /**
-   * Tests that everything in the magic Array class is considered initially
-   * live.
-   */
-  public void testArrayIsInitial() throws UnableToCompleteException {
-    JProgram program = compileSnippet("void", "");
-    ControlFlowAnalyzer cfa = CodeSplitter.computeInitiallyLive(program);
-
-    assertTrue(cfa.getInstantiatedTypes().contains(findType(program, "com.google.gwt.lang.Array")));
-  }
-
-  /**
    * Test that the conversion from -XfragmentCount expectCount into number of exclusive fragments
    * is correct.
    */
@@ -349,7 +337,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
   }
 
   public void testDontMergeLeftOvers() throws UnableToCompleteException {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("package test;\n");
     code.append("import com.google.gwt.core.client.GWT;\n");
     code.append("import com.google.gwt.core.client.RunAsyncCallback;\n");
@@ -380,7 +368,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
   }
 
   public void testNoMergeMoreThanTwo() throws UnableToCompleteException {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("package test;\n");
     code.append("import com.google.gwt.core.client.GWT;\n");
     code.append("import com.google.gwt.core.client.RunAsyncCallback;\n");
@@ -408,7 +396,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
   }
 
   public void testDoubleMerge() throws UnableToCompleteException {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("package test;\n");
     code.append("import com.google.gwt.core.client.GWT;\n");
     code.append("import com.google.gwt.core.client.RunAsyncCallback;\n");
@@ -442,14 +430,22 @@ public class CodeSplitterTest extends FullCompileTestBase {
     assertEquals(num, jsProgram.getFragmentCount());
   }
 
-  private void assertInFragment(String functionName, int fragmentNum) {
-    JsBlock fragment = jsProgram.getFragmentBlock(fragmentNum);
-    assertTrue(findFunctionIn(functionName, fragment));
+  private void assertInFragment(String functionName, int expectedFragmentNumber) {
+    Set<Integer> fragments = Sets.newHashSet();
+    for (int fragmentNumber = 0; fragmentNumber < jsProgram.getFragmentCount(); fragmentNumber++) {
+      JsBlock fragment = jsProgram.getFragmentBlock(fragmentNumber);
+      if (findFunctionIn(functionName, fragment)) {
+        fragments.add(fragmentNumber);
+      }
+    }
+    assertTrue("function " + functionName + " should be in fragments " + expectedFragmentNumber +
+        " but is in " + fragments, fragments.equals(Sets.newHashSet(expectedFragmentNumber)));
   }
 
   private void assertNotInFragment(String functionName, int fragmentNum) {
     JsBlock fragment = jsProgram.getFragmentBlock(fragmentNum);
-    assertFalse(findFunctionIn(functionName, fragment));
+    assertFalse("function " + functionName + " should not be in fragment " + fragmentNum,
+        findFunctionIn(functionName, fragment));
   }
 
   /**
@@ -492,7 +488,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
   }
 
   private static String createRunAsync(String cast, String body) {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("GWT.runAsync(" + cast + "new " + "RunAsyncCallback() {\n");
     code.append("  public void onFailure(Throwable reason) {}\n");
     code.append("  public void onSuccess() {\n");
@@ -503,7 +499,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
   }
 
   private static String createNamedRunAsyncCallback(String className, String body) {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("private static class " + className + " implements RunAsyncCallback {\n");
     code.append("  public void onFailure(Throwable reason) {}\n");
     code.append("  public void onSuccess() {\n");

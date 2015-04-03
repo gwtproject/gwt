@@ -212,6 +212,9 @@ public class JsVisitor {
   public void endVisit(JsParameter x, JsContext ctx) {
   }
 
+  public void endVisit(JsPositionMarker x, JsContext ctx) {
+  }
+
   public void endVisit(JsPostfixOperation x, JsContext ctx) {
   }
 
@@ -373,6 +376,10 @@ public class JsVisitor {
     return true;
   }
 
+  public boolean visit(JsPositionMarker x, JsContext ctx) {
+    return true;
+  }
+
   public boolean visit(JsPostfixOperation x, JsContext ctx) {
     return true;
   }
@@ -439,8 +446,8 @@ public class JsVisitor {
   }
 
   protected <T extends JsVisitable> void doAcceptList(List<T> collection) {
-    for (Iterator<T> it = collection.iterator(); it.hasNext();) {
-      doTraverse(it.next(), UNMODIFIABLE_CONTEXT);
+    for (T node : collection) {
+      doTraverse(node, UNMODIFIABLE_CONTEXT);
     }
   }
 

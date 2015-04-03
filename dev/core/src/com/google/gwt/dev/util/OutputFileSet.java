@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -37,14 +37,10 @@ public abstract class OutputFileSet {
     this.pathDescription = pathDescription;
   }
 
-  public boolean alreadyContains(String path) {
-    return pathsSeen.contains(path);
-  }
-
   /**
    * No more output will be sent to this OutputFileSet.  It is safe to call
    * {@link #close()} on an already-closed instance.
-   * 
+   *
    * @throws IOException
    */
   public abstract void close() throws IOException;
@@ -68,12 +64,11 @@ public abstract class OutputFileSet {
   }
 
   /**
-   * Opens a file for write. If writing to a zip file and the file already
-   * exists, there will be no effect. If writing to a directory, the file
-   * exists, and the given timestamp is older or equal to the file's
-   * current timestamp, there will be no effect.
-   * @param timeStampMillis last modified time in milliseconds, or
-   * TIMESTAMP_UNAVAILABLE to force an overwrite.
+   * Opens a file for write. If writing to a zip file and the file already exists,
+   * there will be no effect. If writing to a directory already existing files are
+   * overwritten.
+   *
+   * @param timeStampMillis last modified time in milliseconds.
    * @return the output stream to write to, possibly a NullOutputStream
    */
   public OutputStream openForWrite(String path, long timeStampMillis)

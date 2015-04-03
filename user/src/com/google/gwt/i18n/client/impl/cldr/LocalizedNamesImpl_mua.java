@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "mua" locale.
@@ -180,7 +175,6 @@ public class LocalizedNamesImpl_mua extends LocalizedNamesImpl {
         "ST",
         "SN",
         "VG",
-        "CS",
         "CI",
         "SL",
         "SG",
@@ -287,6 +281,7 @@ public class LocalizedNamesImpl_mua extends LocalizedNamesImpl {
         "UZ",
         "VA",
         "WF",
+        "XK",
         "YE",
         "ZM",
         "NZ",
@@ -342,7 +337,6 @@ public class LocalizedNamesImpl_mua extends LocalizedNamesImpl {
     namesMap.put("CN", "syiŋ");
     namesMap.put("CO", "kolombiya");
     namesMap.put("CR", "kosta Rika");
-    namesMap.put("CS", "Serbiya ne Montenegro");
     namesMap.put("CU", "Kuba");
     namesMap.put("CV", "kap ma laŋne");
     namesMap.put("CY", "Syipriya");
@@ -569,7 +563,6 @@ public class LocalizedNamesImpl_mua extends LocalizedNamesImpl {
         "CN": "syiŋ",
         "CO": "kolombiya",
         "CR": "kosta Rika",
-        "CS": "Serbiya ne Montenegro",
         "CU": "Kuba",
         "CV": "kap ma laŋne",
         "CY": "Syipriya",

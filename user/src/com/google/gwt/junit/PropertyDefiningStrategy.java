@@ -65,9 +65,9 @@ public class PropertyDefiningStrategy implements Strategy {
       for (Property property : properties) {
         BindingProperty binding = props.createBinding(property.name());
         if (!binding.isDefinedValue(property.value())) {
-          binding.addTargetLibraryDefinedValue(binding.getRootCondition(), property.value());
+          binding.addDefinedValue(binding.getRootCondition(), property.value());
         }
-        binding.setAllowedValues(
+        binding.setValues(
             binding.getRootCondition(), property.value());
       }
     }

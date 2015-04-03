@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,9 +15,9 @@
  */
 package com.google.gwt.dev.javac.asm;
 
-import com.google.gwt.dev.asm.AnnotationVisitor;
-import com.google.gwt.dev.asm.FieldVisitor;
-import com.google.gwt.dev.asm.Opcodes;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.Opcodes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class CollectFieldData extends FieldVisitor {
 
   public CollectFieldData(int access, String name, String desc,
       String signature, Object value) {
-    super(Opcodes.ASM4);
+    super(Opcodes.ASM5);
     this.access = access;
     this.name = name;
     this.desc = desc;

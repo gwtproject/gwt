@@ -187,7 +187,7 @@ public class IconCellDecorator<C> implements Cell<C> {
     // Get the HTML for the image.
     SafeHtml image;
     if (isPlaceholder) {
-      image = SafeHtmlUtils.fromTrustedString("<div></div>");
+      image = SafeHtmlUtils.fromSafeConstant("<div></div>");
     } else {
       AbstractImagePrototype proto = AbstractImagePrototype.create(res);
       image = SafeHtmlUtils.fromTrustedString(proto.getHTML());

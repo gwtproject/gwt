@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -19,8 +19,11 @@ import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.CollapsedPropertyKey;
+import com.google.gwt.thirdparty.guava.common.base.Objects;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -38,6 +41,40 @@ import java.util.TreeMap;
  * {@link Properties#getBindingProperties()}.
  */
 public class PropertyPermutations implements Iterable<String[]> {
+
+  /**
+   * A bundle of the ordered names of binding and configuration properties and a single set value
+   * for each that together uniquely identify a particular permutation.
+   */
+  public static class PermutationDescription {
+
+    private List<String> bindingPropertyNames = Lists.newArrayList();
+    private List<String> configurationPropertyNames = Lists.newArrayList();
+    private List<String> propertyValues = Lists.newArrayList();
+
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(bindingPropertyNames, configurationPropertyNames, propertyValues);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (obj instanceof PermutationDescription) {
+        PermutationDescription that = (PermutationDescription) obj;
+        return Objects.equal(this.bindingPropertyNames, that.bindingPropertyNames)
+            && Objects.equal(this.configurationPropertyNames, that.configurationPropertyNames)
+            && Objects.equal(this.propertyValues, that.propertyValues);
+      }
+      return false;
+    }
+
+    @Override
+    public String toString() {
+      return String.format(
+          "PermutationDescription [bindingPropertyNames=%s, configurationPropertyNames=%s, "
+          + "propertyValues=%s]", bindingPropertyNames, configurationPropertyNames, propertyValues);
+    }
+  }
 
   /**
    * Returns the list of all permutations. This method must return results in a
@@ -111,13 +148,13 @@ public class PropertyPermutations implements Iterable<String[]> {
     } else {
       BindingProperty[] answerable = new BindingProperty[soFar.length];
       System.arraycopy(properties, 0, answerable, 0, soFar.length);
-      PropertyOracle propertyOracle = new StaticPropertyOracle(answerable,
-          soFar, new ConfigurationProperty[0]);
+      PropertyOracle props = new BindingProps(answerable, soFar, ConfigProps.EMPTY)
+          .toPropertyOracle();
 
       for (Condition cond : prop.getConditionalValues().keySet()) {
         try {
           if (cond.isTrue(TreeLogger.NULL, new DeferredBindingQuery(
-              propertyOracle, activeLinkerNames))) {
+              props, activeLinkerNames))) {
             winner = cond;
           }
         } catch (UnableToCompleteException e) {
@@ -129,7 +166,7 @@ public class PropertyPermutations implements Iterable<String[]> {
 
     assert winner != null;
 
-    String[] options = prop.getAllowedValues(winner);
+    String[] options = prop.getGeneratedValues(winner);
     for (int i = 0; i < options.length; i++) {
       String knownValue = options[i];
 
@@ -158,12 +195,6 @@ public class PropertyPermutations implements Iterable<String[]> {
     this.values = allPermutationsOf(properties, activeLinkerNames);
   }
 
-  public PropertyPermutations(PropertyPermutations allPermutations,
-      int firstPerm, int numPerms) {
-    this.properties = allPermutations.properties;
-    values = allPermutations.values.subList(firstPerm, firstPerm + numPerms);
-  }
-
   /**
    * Copy constructor that allows the list of property values to be reset.
    */
@@ -182,15 +213,15 @@ public class PropertyPermutations implements Iterable<String[]> {
     // Collate property values in this map
     SortedMap<CollapsedPropertyKey, List<String[]>> map = new TreeMap<CollapsedPropertyKey, List<String[]>>();
 
+    BindingProperty[] propertyKeys = getOrderedProperties();
     // Loop over all possible property value permutations
     for (Iterator<String[]> it = iterator(); it.hasNext();) {
       String[] propertyValues = it.next();
-      assert propertyValues.length == getOrderedProperties().length;
+      assert propertyValues.length == propertyKeys.length;
 
-      StaticPropertyOracle oracle = new StaticPropertyOracle(
-          getOrderedProperties(), propertyValues, new ConfigurationProperty[0]);
-      CollapsedPropertyKey key = new CollapsedPropertyKey(
-          oracle);
+      BindingProps props = new BindingProps(propertyKeys, propertyValues,
+          ConfigProps.EMPTY);
+      CollapsedPropertyKey key = new CollapsedPropertyKey(props);
 
       List<String[]> list = map.get(key);
       if (list == null) {
@@ -210,12 +241,35 @@ public class PropertyPermutations implements Iterable<String[]> {
     return toReturn;
   }
 
+  /**
+   * Returns the properties used to generate permutations.
+   * (Parallel to {@link #getOrderedPropertyValues}.)
+   */
   public BindingProperty[] getOrderedProperties() {
     return getOrderedPropertiesOf(properties);
   }
 
+  /**
+   * Returns the value of each property used to generate the given permutation.
+   * (Parallel to {@link #getOrderedProperties()}.)
+   */
   public String[] getOrderedPropertyValues(int permutation) {
     return values.get(permutation);
+  }
+
+  /**
+   * Returns a unique description for the given permutation.
+   */
+  public PermutationDescription getPermutationDescription(int permutationId) {
+    PermutationDescription permutationDescription = new PermutationDescription();
+    for (BindingProperty bindingProperty : properties.getBindingProperties()) {
+      permutationDescription.bindingPropertyNames.add(bindingProperty.getName());
+    }
+    for (ConfigurationProperty configurationProperty : properties.getConfigurationProperties()) {
+      permutationDescription.configurationPropertyNames.add(configurationProperty.getName());
+    }
+    permutationDescription.propertyValues.addAll(Arrays.asList(this.values.get(permutationId)));
+    return permutationDescription;
   }
 
   /**

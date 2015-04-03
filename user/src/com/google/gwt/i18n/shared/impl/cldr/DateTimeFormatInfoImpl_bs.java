@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6472 Google $
-//  type=root
-//  date=$Date: 2012-01-27 18:53:35 -0500 (Fri, 27 Jan 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "bs" locale.
@@ -224,19 +219,6 @@ public class DateTimeFormatInfoImpl_bs extends DateTimeFormatInfoImpl {
         "četvrtak",
         "petak",
         "subota"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrow() {
-    return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
     };
   }
 

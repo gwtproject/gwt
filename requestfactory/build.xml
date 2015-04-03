@@ -30,7 +30,6 @@
             classname="com.google.web.bindery.requestfactory.server.RequestFactoryJarExtractor">
         <classpath>
           <fileset dir="${gwt.build.lib}" includes="gwt-user.jar,gwt-dev.jar" />
-          <fileset dir="${gwt.tools.lib}" includes="json/android-sdk-19.1/json-android.jar" />
           <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar" />
           <pathelement path="${gwt.build.out}/user/bin" />
           <pathelement path="${gwt.build.out}/dev/bin-test" />
@@ -117,11 +116,14 @@
         <fileset dir="${gwt.build.lib}" includes="requestfactory-test.jar" />
       </classpath>
       <arg path="${gwt.build.lib}/requestfactory-test-validated.jar" />
+      <arg value="com.google.web.bindery.requestfactory.gwt.client.ProxyForInterfacesTest.Factory" />
       <arg value="com.google.web.bindery.requestfactory.gwt.client.RequestFactoryChainedContextTest.Factory" />
       <arg value="com.google.web.bindery.requestfactory.gwt.client.RequestFactoryPolymorphicTest.Factory" />
+      <arg value="com.google.web.bindery.requestfactory.gwt.client.RequestFactoryGenericsTest.Factory" />
       <arg value="com.google.web.bindery.requestfactory.shared.BoxesAndPrimitivesTest.Factory" />
       <arg value="com.google.web.bindery.requestfactory.shared.ComplexKeysTest.Factory" />
       <arg value="com.google.web.bindery.requestfactory.shared.LocatorTest.Factory" />
+      <arg value="com.google.web.bindery.requestfactory.shared.MethodProvidedByServiceLayerTest.Factory" />
       <arg value="com.google.web.bindery.requestfactory.shared.MultipleFactoriesTest.Factory1" />
       <arg value="com.google.web.bindery.requestfactory.shared.MultipleFactoriesTest.Factory2" />
       <arg value="com.google.web.bindery.requestfactory.shared.ServiceInheritanceTest$Factory" />

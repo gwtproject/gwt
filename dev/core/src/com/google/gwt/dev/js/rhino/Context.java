@@ -153,7 +153,7 @@ public class Context {
             }
         } else {
             if (cx.enterCount != 0) {
-                // The suplied context must be the context for
+                // The supplied context must be the context for
                 // the current thread if it is already entered
                 if (cx != old) {
                     throw new RuntimeException
@@ -725,10 +725,10 @@ public class Context {
      * file to avoid (synchronized) text parsing.
      */
     // bruce: removed referenced to the initial "java" package name
-    //        that used to be there due to a build artifact 
+    //        that used to be there due to a build artifact
     static final String defaultResource =
       "com.google.gwt.dev.js.rhino.Messages";
-    
+
 
     static String getMessage(String messageId, Object[] arguments) {
         Context cx = getCurrentContext();

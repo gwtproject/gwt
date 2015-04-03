@@ -20,7 +20,6 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.user.client.Window.Location;
-import com.google.gwt.user.client.ui.HasWidgets;
 
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -91,32 +90,6 @@ public class LogConfiguration implements EntryPoint {
       }
     }
 
-    private Level parseLevel(String s) {
-      if (s == null) {
-        return null;
-      }
-      if (s.equals(Level.OFF.getName())) {
-        return Level.OFF;
-      } else if (s.equals(Level.SEVERE.getName())) {
-        return Level.SEVERE;
-      } else if (s.equals(Level.WARNING.getName())) {
-        return Level.WARNING;
-      } else if (s.equals(Level.INFO.getName())) {
-        return Level.INFO;
-      } else if (s.equals(Level.CONFIG.getName())) {
-        return Level.CONFIG;
-      } else if (s.equals(Level.FINE.getName())) {
-        return Level.FINE;
-      } else if (s.equals(Level.FINER.getName())) {
-        return Level.FINER;
-      } else if (s.equals(Level.FINEST.getName())) {
-        return Level.FINEST;
-      } else if (s.equals(Level.ALL.getName())) {
-        return Level.ALL;
-      }
-      return null;
-    }
-
     private void setDefaultHandlers(Logger l) {
       // Add the default handlers. If users want some of these disabled, they
       // will specify that in the gwt.xml file, which will replace the handler
@@ -125,23 +98,20 @@ public class LogConfiguration implements EntryPoint {
       addHandlerIfNotNull(l, console);
       Handler dev = GWT.create(DevelopmentModeLogHandler.class);
       addHandlerIfNotNull(l, dev);
-      Handler firebug = GWT.create(FirebugLogHandler.class);
-      addHandlerIfNotNull(l, firebug);
       Handler system = GWT.create(SystemLogHandler.class);
       addHandlerIfNotNull(l, system);
       Handler remote = GWT.create(SimpleRemoteLogHandler.class);
       addHandlerIfNotNull(l, remote);
-      HasWidgets loggingWidget = GWT.create(LoggingPopup.class);
-      if (!(loggingWidget instanceof NullLoggingPopup)) {
-        addHandlerIfNotNull(l, new HasWidgetsLogHandler(loggingWidget));
-      }
+      Handler loggingWidget = GWT.create(HasWidgetsLogHandler.class);
+      addHandlerIfNotNull(l, loggingWidget);
     }
 
     private void setLevels(Logger l) {
       // try to pull the log level from the query param
-      Level paramLevel = parseLevel(Location.getParameter("logLevel"));
-      if (paramLevel != null) {
-        l.setLevel(paramLevel);
+      String levelParam = Location.getParameter("logLevel");
+      Level level = levelParam == null ? null : Level.parse(levelParam);
+      if (level != null) {
+        l.setLevel(level);
       } else {
         // if it isn't there, then pull it from the gwt.xml file
         DefaultLevel defaultLevel = GWT.create(DefaultLevel.class);

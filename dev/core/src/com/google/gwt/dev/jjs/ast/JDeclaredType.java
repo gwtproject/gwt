@@ -16,6 +16,8 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
+import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 
@@ -43,15 +45,14 @@ import java.util.List;
  * Optimizations may eliminate class initializers (<code>$clinit</code>) if no static variables need
  * initialization, and use the private variable <code>clinitTarget</code>to keep track which
  * initializer in the superclass chain needs to be called.
- *
  */
 public abstract class JDeclaredType extends JReferenceType {
 
-  /**
-   * The other nodes that this node should implicitly rescue. Special
-   * serialization treatment.
-   */
-  protected transient List<JNode> artificialRescues = Lists.create();
+  private String jsPrototype;
+  private boolean isClassWideExport;
+  private boolean isJsType;
+  private String jsNamespace = null;
+  private boolean isJsFunction;
 
   /**
    * This type's fields. Special serialization treatment.
@@ -94,10 +95,6 @@ public abstract class JDeclaredType extends JReferenceType {
     super(info, name);
   }
 
-  public void addArtificialRescue(JNode node) {
-    artificialRescues = Lists.add(artificialRescues, node);
-  }
-
   /**
    * Adds a field to this type.
    */
@@ -116,13 +113,17 @@ public abstract class JDeclaredType extends JReferenceType {
   /**
    * Adds a method to this type.
    */
-  public final void addMethod(JMethod method) {
+  public final void addMethod(int index, JMethod method) {
     assert method.getEnclosingType() == this;
-    assert !method.getName().equals("$clinit") || getMethods().size() == 0 : "Attempted adding "
+    assert !method.getName().equals(GwtAstBuilder.CLINIT_NAME) || getMethods().size() == 0 : "Attempted adding "
         + "$clinit method with index != 0";
-    assert !method.getName().equals("$init") || getMethods().size() == 1 : "Attempted adding $init "
-        + "method with index != 1";
-    methods = Lists.add(methods, method);
+    assert !method.getName().equals(GwtAstBuilder.INIT_NAME) || method.getParams().size() != 0 ||
+        getMethods().size() == 1 : "Attempted adding $init method with index != 1";
+    methods = Lists.add(methods, index, method);
+  }
+
+  public void addMethod(JMethod newMethod) {
+    addMethod(methods.size(), newMethod);
   }
 
   /**
@@ -192,23 +193,19 @@ public abstract class JDeclaredType extends JReferenceType {
     return null;
   }
 
-  public List<JNode> getArtificialRescues() {
-    return artificialRescues;
-  }
-
   /**
    * Returns the class initializer method.
    * Can only be called after making sure the class has a class initializer method.
    *
    * @return The class initializer method.
    */
-   public final JMethod getClinitMethod() {
-     assert getMethods().size() != 0;
-     JMethod clinit = this.getMethods().get(0);
+  public final JMethod getClinitMethod() {
+    assert getMethods().size() != 0;
+    JMethod clinit = this.getMethods().get(0);
 
-     assert clinit != null;
-     assert clinit.getName().equals("$clinit");
-     return clinit;
+    assert clinit != null;
+    assert clinit.getName().equals(GwtAstBuilder.CLINIT_NAME);
+    return clinit;
   }
 
   /**
@@ -217,6 +214,33 @@ public abstract class JDeclaredType extends JReferenceType {
    */
   public final JDeclaredType getClinitTarget() {
     return clinitTarget;
+  }
+
+  @Override
+  public String[] getCompoundName() {
+    // TODO(rluble): refactor the way names are constructed so that the ground data passed from
+    // JDT is stored.
+    if (enclosingType == null) {
+      return new String[] { getShortName() };
+    }
+
+    String className = StringInterner.get().intern(
+        getShortName().substring(enclosingType.getShortName().length() + 1));
+
+    String[] enclosingCompoundName = enclosingType.getCompoundName();
+    String[] compoundName = new String[enclosingCompoundName.length + 1];
+    System.arraycopy(enclosingCompoundName, 0, compoundName, 0, enclosingCompoundName.length);
+    compoundName[compoundName.length - 1] = className;
+    return compoundName;
+  }
+
+  /**
+   * Returns the simple source name for the class.
+   * <p>e.g. if the class is a.b.Foo.Bar it returns Bar as opposed to the short name Foo$Bar.
+   */
+  public String getSimpleName() {
+    String[] compoundName = getCompoundName();
+    return compoundName[compoundName.length - 1];
   }
 
   /**
@@ -255,7 +279,7 @@ public abstract class JDeclaredType extends JReferenceType {
     JMethod init = this.getMethods().get(1);
 
     assert init != null;
-    assert init.getName().equals("$init");
+    assert init.getName().equals(GwtAstBuilder.INIT_NAME);
     return init;
   }
 
@@ -277,10 +301,63 @@ public abstract class JDeclaredType extends JReferenceType {
     return methods;
   }
 
-  @Override
-  public String getShortName() {
-    int dotpos = name.lastIndexOf('.');
-    return name.substring(dotpos + 1);
+  public boolean isJsType() {
+    return isJsType;
+  }
+
+  public boolean isOrExtendsJsType() {
+    if (isJsType()) {
+      return true;
+    }
+    for (JInterfaceType subIntf : getImplements()) {
+      if (subIntf.isJsType()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean isJsFunction() {
+    return isJsFunction;
+  }
+
+  public boolean isOrExtendsJsFunction() {
+    if (isJsFunction()) {
+      return true;
+    }
+    if (getSuperClass() != null && getSuperClass().isOrExtendsJsFunction()) {
+      return true;
+    }
+    for (JInterfaceType subInterface : getImplements()) {
+      if (subInterface.isOrExtendsJsFunction()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean isClassWideExport() {
+    return isClassWideExport;
+  }
+
+  public boolean hasAnyExports() {
+    for (JMethod method : getMethods()) {
+      if (method.isExported()) {
+        return true;
+      }
+    }
+
+    for (JField field : getFields()) {
+      if (field.isExported()) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public String getJsPrototype() {
+    return jsPrototype;
   }
 
   /**
@@ -334,25 +411,21 @@ public abstract class JDeclaredType extends JReferenceType {
   }
 
   /**
-   * Resets the clinitTarget to the current class. Used by optimizations that move initializers from
-   * superclasses down.
-   *
-   * Prerequisite: the $clinit method must exist and be non empty.
-   */
-  public void resetClinitTarget() {
-    assert !((JMethodBody) getClinitMethod().getBody()).getStatements().isEmpty() : "Attempted to "
-        + "reset the clinitTarget to an empty $clinit";
-    this.clinitTarget = this;
-  }
-
-  /**
    * Resolves external references during AST stitching.
    */
-  public void resolve(List<JInterfaceType> resolvedInterfaces, List<JNode> resolvedRescues) {
+  public void resolve(List<JInterfaceType> resolvedInterfaces, JDeclaredType pkgInfo) {
     assert JType.replaces(resolvedInterfaces, superInterfaces);
     superInterfaces = Lists.normalize(resolvedInterfaces);
-    assert JNameOf.replacesNamedElements(resolvedRescues, artificialRescues);
-    artificialRescues = Lists.normalize(resolvedRescues);
+    if (jsNamespace == null) {
+      jsNamespace = computeExportNamespace(pkgInfo);
+    }
+  }
+
+  private String computeExportNamespace(JDeclaredType pkgInfo) {
+    if (enclosingType != null) {
+      return enclosingType.getQualifiedExportName();
+    }
+    return pkgInfo != null && pkgInfo.jsNamespace != null ? pkgInfo.jsNamespace : getPackageName();
   }
 
   /**
@@ -368,6 +441,19 @@ public abstract class JDeclaredType extends JReferenceType {
     this.isExternal = isExternal;
   }
 
+  public void setJsTypeInfo(boolean isJsType, String jsPrototype, String jsNamespace) {
+    this.isJsType = isJsType;
+    this.jsPrototype = jsPrototype;
+    this.jsNamespace = jsNamespace;
+  }
+
+  public void setJsExportInfo(boolean isClassWideJsExport) {
+    this.isClassWideExport = isClassWideJsExport;
+  }
+
+  public void setJsFunctionInfo(boolean isJsFunction) {
+    this.isJsFunction = isJsFunction;
+  }
   /**
    * Sorts this type's fields according to the specified sort.
    */
@@ -392,22 +478,14 @@ public abstract class JDeclaredType extends JReferenceType {
   protected abstract Object writeReplace();
 
   /**
-   * Clears all existing implemented interfaces.
-   */
-  void clearImplements() {
-    superInterfaces = Lists.create();
-  }
-
-  /**
    * See {@link #writeMembers(ObjectOutputStream)}.
    *
    * @see #writeMembers(ObjectOutputStream)
    */
-  @SuppressWarnings("unchecked")
-  void readMembers(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+  @SuppressWarnings("unchecked") void readMembers(ObjectInputStream stream)
+      throws IOException, ClassNotFoundException {
     fields = (List<JField>) stream.readObject();
     methods = (List<JMethod>) stream.readObject();
-    artificialRescues = (List<JNode>) stream.readObject();
   }
 
   /**
@@ -450,7 +528,6 @@ public abstract class JDeclaredType extends JReferenceType {
   void writeMembers(ObjectOutputStream stream) throws IOException {
     stream.writeObject(fields);
     stream.writeObject(methods);
-    stream.writeObject(artificialRescues);
   }
 
   /**
@@ -483,5 +560,14 @@ public abstract class JDeclaredType extends JReferenceType {
       }
     }
     return null;
+  }
+
+  public String getExportNamespace() {
+    return jsNamespace;
+  }
+
+  public String getQualifiedExportName() {
+    String namespace = getExportNamespace();
+    return namespace.isEmpty() ? getSimpleName() : namespace + "." + getSimpleName();
   }
 }

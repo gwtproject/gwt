@@ -1,5 +1,6 @@
 AnalyserNode
 ApplicationCache
+ApplicationCacheErrorEvent
 Array
 ArrayBuffer
 Attr
@@ -37,6 +38,7 @@ CSSValue
 CSSValueList
 CSSVariablesMap
 CSSViewportRule
+CSSUnknownRule
 CanvasGradient
 CanvasPattern
 CanvasRenderingContext2D
@@ -51,6 +53,7 @@ Comment
 CompositionEvent
 ConvolverNode
 Counter
+CryptoKey
 CustomEvent
 DOMException
 DOMImplementation
@@ -83,9 +86,12 @@ FileReader
 Float32Array
 Float64Array
 FocusEvent
+FontFace
 FormData
 Function
 GainNode
+Gamepad
+GamepadEvent
 HTMLAllCollection
 HTMLAnchorElement
 HTMLAppletElement
@@ -100,6 +106,8 @@ HTMLCollection
 HTMLContentElement
 HTMLDListElement
 HTMLDataListElement
+HTMLDetailsElement
+HTMLDialogElement
 HTMLDirectoryElement
 HTMLDivElement
 HTMLDocument
@@ -138,6 +146,7 @@ HTMLOptionsCollection
 HTMLOutputElement
 HTMLParagraphElement
 HTMLParamElement
+HTMLPictureElement
 HTMLPreElement
 HTMLProgressElement
 HTMLQuoteElement
@@ -192,6 +201,7 @@ MediaError
 MediaKeyError
 MediaKeyEvent
 MediaList
+MediaQueryListEvent
 MediaStreamAudioDestinationNode
 MediaStreamAudioSourceNode
 MediaStreamEvent
@@ -222,6 +232,7 @@ Option
 OscillatorNode
 OverflowEvent
 PageTransitionEvent
+Path2D
 Performance
 PerformanceEntry
 PerformanceMark
@@ -239,6 +250,7 @@ Promise
 RGBColor
 RTCIceCandidate
 RTCSessionDescription
+RadioNodeList
 Range
 RangeError
 Rect
@@ -273,6 +285,7 @@ SVGComponentTransferFunctionElement
 SVGCursorElement
 SVGDefsElement
 SVGDescElement
+SVGDiscardElement
 SVGDocument
 SVGElement
 SVGElementInstance
@@ -388,9 +401,15 @@ SVGViewElement
 SVGViewSpec
 SVGZoomEvent
 Screen
+ScreenOrientation
 ScriptProcessorNode
 SecurityPolicy
+SecurityPolicyViolationEvent
 Selection
+ServiceWorker
+ServiceWorkerContainer
+ServiceWorkerRegistration
+ShadowRoot
 SharedWorker
 SpeechInputEvent
 SpeechSynthesisUtterance
@@ -399,6 +418,7 @@ StorageEvent
 String
 StyleSheet
 StyleSheetList
+Symbol
 SyntaxError
 Text
 TextEvent
@@ -425,6 +445,7 @@ Uint8ClampedArray
 VTTCue
 ValidityState
 WaveShaperNode
+WeakSet
 WebGLActiveInfo
 WebGLBuffer
 WebGLContextEvent
@@ -444,6 +465,7 @@ WebKitCSSKeyframesRule
 WebKitCSSMatrix
 WebKitCSSMixFunctionValue
 WebKitCSSTransformValue
+WebKitGamepad
 WebKitMediaSource
 WebKitMutationObserver
 WebKitPoint

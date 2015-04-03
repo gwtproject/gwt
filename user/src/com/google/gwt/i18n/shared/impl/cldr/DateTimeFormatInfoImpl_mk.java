@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "mk" locale.
@@ -36,17 +31,17 @@ public class DateTimeFormatInfoImpl_mk extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, dd MMMM y";
+    return "EEEE, dd MMMM y 'г'.";
   }
 
   @Override
   public String dateFormatLong() {
-    return "dd MMMM y";
+    return "dd MMMM y 'г'.";
   }
 
   @Override
   public String dateFormatMedium() {
-    return "dd.M.yyyy";
+    return "dd.M.y";
   }
 
   @Override
@@ -58,7 +53,7 @@ public class DateTimeFormatInfoImpl_mk extends DateTimeFormatInfoImpl {
   public String[] erasFull() {
     return new String[] {
         "пр.н.е.",
-        "ае."
+        "н.е."
     };
   }
 
@@ -66,13 +61,78 @@ public class DateTimeFormatInfoImpl_mk extends DateTimeFormatInfoImpl {
   public String[] erasShort() {
     return new String[] {
         "пр.н.е.",
-        "ае."
+        "н.е."
     };
   }
 
   @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE d MMMM";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "d.M";
+  }
+
+  @Override
+  public String formatYear() {
+    return "y 'г'.";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM y 'г'.";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d MMM y 'г'.";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "MMMM y 'г'.";
+  }
+
+  @Override
   public String formatYearMonthFullDay() {
-    return "d MMMM y";
+    return "d MMMM y 'г'.";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "M.y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "d.M.y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, d MMM y 'г'.";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "QQQQ y 'г'.";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "Q y 'г'.";
   }
 
   @Override
@@ -125,7 +185,7 @@ public class DateTimeFormatInfoImpl_mk extends DateTimeFormatInfoImpl {
         "септ.",
         "окт.",
         "ноем.",
-        "декем."
+        "дек."
     };
   }
 

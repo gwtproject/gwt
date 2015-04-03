@@ -13,8 +13,8 @@
 <!-- limitations under the License.                                         -->
 
 <!-- ClientBundle supports renaming files with strong names at compile time  -->
-<module type="fileset">
-  <!-- Pull in the necessary base support, including user.agent detection -->
+<module>
+  <!-- Pull in the necessary base support -->
   <inherits name="com.google.gwt.core.Core" />
   <!-- Pull in SafeUri and SafeUriUtils -->
   <inherits name="com.google.gwt.safehtml.SafeHtml" />
@@ -42,21 +42,12 @@
   <!-- Last-matches wins, so this will selectively override the previous rule -->
   <generate-with
     class="com.google.gwt.resources.rebind.context.InlineClientBundleGenerator">
+    <!-- Is inlining enabled? -->
+    <when-property-is name="ClientBundle.enableInlining" value="true" />
 
-    <!-- We have a number of conditions that must be satisfied -->
-    <all>
-      <!-- Is inlining enabled? -->
-      <when-property-is name="ClientBundle.enableInlining" value="true" />
-
-      <!-- Again, it's necessary to specify which types the generator runs on -->
-      <when-type-assignable
-        class="com.google.gwt.resources.client.ClientBundle" />
-
-      <!-- Ancient browsers support RFC 2397 data: URLs -->
-      <none>
-        <when-property-is name="user.agent" value="ie6" />
-      </none>
-    </all>
+    <!-- Again, it's necessary to specify which types the generator runs on -->
+    <when-type-assignable
+      class="com.google.gwt.resources.client.ClientBundle" />
   </generate-with>
 
   <!-- This can be used to disable the use of strongly-named files -->
@@ -85,4 +76,24 @@
   <!-- by setting the value to true. -->
   <define-configuration-property name="ExternalTextResource.useJsonp" is-multi-valued="false" />
   <set-configuration-property name="ExternalTextResource.useJsonp" value="false" />
+
+  <!-- Enable GSS with CssResource -->
+  <define-configuration-property name="CssResource.enableGss" is-multi-valued="false" />
+  <set-configuration-property name="CssResource.enableGss" value="false" />
+
+  <!-- A multi-valued configuration property that defines the list of allowed non standard -->
+  <!-- at-rules in the css files -->
+  <define-configuration-property name="CssResource.allowedAtRules" is-multi-valued="true" />
+  <extend-configuration-property name="CssResource.allowedAtRules" value="-moz-document" />
+  <extend-configuration-property name="CssResource.allowedAtRules" value="supports" />
+
+  <!-- A multi-valued configuration property that defines the list of allowed non standard -->
+  <!-- functions in the css files -->
+  <define-configuration-property name="CssResource.allowedFunctions" is-multi-valued="true" />
+  <extend-configuration-property name="CssResource.allowedFunctions" value="" />
+
+  <!-- Enable the in-memory conversion of css files with .css extension to GSS -->
+  <!-- Can be set to: strict | lenient | off -->
+  <define-configuration-property name="CssResource.conversionMode" is-multi-valued="false" />
+  <set-configuration-property name="CssResource.conversionMode" value="off" />
 </module>

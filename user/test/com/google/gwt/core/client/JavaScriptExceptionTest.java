@@ -18,6 +18,7 @@ package com.google.gwt.core.client;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.useragent.client.UserAgent;
 
 /**
  * Any JavaScript exceptions occurring within JSNI methods are wrapped as this
@@ -109,20 +110,6 @@ public class JavaScriptExceptionTest extends GWTTestCase {
   private static void assertJavaScriptException(Object expected, Throwable exception) {
     assertTrue(exception instanceof JavaScriptException);
     assertEquals(expected, ((JavaScriptException) exception).getThrown());
-  }
-
-  private static void assertJsoProperties() {
-    JavaScriptObject jso = makeJSO();
-    try {
-      throwNative(jso);
-      fail();
-    } catch (JavaScriptException e) {
-      assertEquals("myName", e.getName());
-      assertDescription(e, "myDescription");
-      assertTrue(e.isThrownSet());
-      assertSame(jso, e.getThrown());
-      assertMessage(e);
-    }
   }
 
   /**
@@ -307,9 +294,24 @@ public class JavaScriptExceptionTest extends GWTTestCase {
 
   private static void assertTypeError(JavaScriptException e) {
     assertEquals("TypeError", e.getName());
-    assertTrue(e.getDescription().contains("notExistsWillThrowTypeError"));
-    assertTrue(e.isThrownSet());
+    assertTrue("e.isThrownSet() for a TypeError", e.isThrownSet());
     assertMessage(e);
+
+    if (isIE8()) {
+      return;
+    }
+
+    String description = e.getDescription();
+    // The description depends on the browser.
+    // On Chrome 34, the description is: "undefined is not a function".
+    if (description.isEmpty()) {
+      fail("TypeError description should not be empty");
+    }
+  }
+
+  private static boolean isIE8() {
+    UserAgent userAgent = GWT.create(UserAgent.class);
+    return userAgent.getCompileTimeValue().equals("ie8");
   }
 
   private static void assertDescription(JavaScriptException e, String description) {

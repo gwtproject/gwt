@@ -20,7 +20,11 @@ import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.JJSOptionsImpl;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.js.JsNamespaceOption;
+import com.google.gwt.dev.util.arg.OptionJsInteropMode;
+import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.thirdparty.guava.common.collect.LinkedListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 
 import java.io.File;
 
@@ -35,7 +39,9 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   private final JJSOptionsImpl jjsOptions = new JJSOptionsImpl();
   private int maxPermsPerPrecompile;
   private boolean saveSource;
+  private String sourceMapFilePrefix;
   private boolean validateOnly;
+  private final ListMultimap<String, String> properties = LinkedListMultimap.create();
 
   public PrecompileTaskOptionsImpl() {
   }
@@ -64,14 +70,21 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
     setDisableUpdateCheck(other.isUpdateCheckDisabled());
     setGenDir(other.getGenDir());
     setSaveSource(other.shouldSaveSource());
+    setSourceMapFilePrefix(other.getSourceMapFilePrefix());
     setMaxPermsPerPrecompile(other.getMaxPermsPerPrecompile());
     setValidateOnly(other.isValidateOnly());
     setEnabledGeneratingOnShards(other.isEnabledGeneratingOnShards());
+    properties.putAll(other.getProperties());
   }
 
   @Override
-  public boolean enforceStrictResources() {
-    return jjsOptions.enforceStrictResources();
+  public boolean enforceStrictPublicResources() {
+    return jjsOptions.enforceStrictPublicResources();
+  }
+
+  @Override
+  public boolean enforceStrictSourceResources() {
+    return jjsOptions.enforceStrictSourceResources();
   }
 
   @Override
@@ -89,9 +102,18 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
     return genDir;
   }
 
+  @Override public OptionJsInteropMode.Mode getJsInteropMode() {
+    return jjsOptions.getJsInteropMode();
+  }
+
   @Override
   public int getMaxPermsPerPrecompile() {
     return maxPermsPerPrecompile;
+  }
+
+  @Override
+  public OptionMethodNameDisplayMode.Mode getMethodNameDisplayMode() {
+    return jjsOptions.getMethodNameDisplayMode();
   }
 
   @Override
@@ -110,20 +132,18 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
-  public boolean shouldSaveSource() {
-    return saveSource;
+  public ListMultimap<String, String> getProperties() {
+    return properties;
   }
 
   @Override
-  public SourceLevel getSourceLevel()
-  {
+  public SourceLevel getSourceLevel() {
     return jjsOptions.getSourceLevel();
   }
 
   @Override
-  @Deprecated
-  public boolean isAggressivelyOptimize() {
-    return jjsOptions.isAggressivelyOptimize();
+  public String getSourceMapFilePrefix() {
+    return sourceMapFilePrefix;
   }
 
   @Override
@@ -158,6 +178,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public boolean isEnabledGeneratingOnShards() {
     return enableGeneratingOnShards;
+  }
+
+  @Override
+  public boolean isIncrementalCompileEnabled() {
+    return jjsOptions.isIncrementalCompileEnabled();
   }
 
   @Override
@@ -211,12 +236,6 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
-  @Deprecated
-  public void setAggressivelyOptimize(boolean aggressivelyOptimize) {
-    jjsOptions.setAggressivelyOptimize(aggressivelyOptimize);
-  }
-
-  @Override
   public void setCastCheckingDisabled(boolean disabled) {
     jjsOptions.setCastCheckingDisabled(disabled);
   }
@@ -257,8 +276,13 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
-  public void setEnforceStrictResources(boolean strictResources) {
-    jjsOptions.setEnforceStrictResources(strictResources);
+  public void setEnforceStrictPublicResources(boolean strictPublicResources) {
+    jjsOptions.setEnforceStrictPublicResources(strictPublicResources);
+  }
+
+  @Override
+  public void setEnforceStrictSourceResources(boolean strictSourceResources) {
+    jjsOptions.setEnforceStrictSourceResources(strictSourceResources);
   }
 
   @Override
@@ -277,8 +301,17 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
+  public void setIncrementalCompileEnabled(boolean enabled) {
+    jjsOptions.setIncrementalCompileEnabled(enabled);
+  }
+
+  @Override
   public void setInlineLiteralParameters(boolean enabled) {
     jjsOptions.setInlineLiteralParameters(enabled);
+  }
+
+  @Override public void setJsInteropMode(OptionJsInteropMode.Mode mode) {
+    jjsOptions.setJsInteropMode(mode);
   }
 
   @Override
@@ -289,6 +322,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public void setMaxPermsPerPrecompile(int maxPermsPerPrecompile) {
     this.maxPermsPerPrecompile = maxPermsPerPrecompile;
+  }
+
+  @Override
+  public void setMethodNameDisplayMode(OptionMethodNameDisplayMode.Mode methodNameDisplayMode) {
+    jjsOptions.setMethodNameDisplayMode(methodNameDisplayMode);
   }
 
   @Override
@@ -327,6 +365,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
+  public void setPropertyValues(String name, Iterable<String> values) {
+    properties.replaceValues(name, values);
+  }
+
+  @Override
   public void setRunAsyncEnabled(boolean enabled) {
     jjsOptions.setRunAsyncEnabled(enabled);
   }
@@ -339,6 +382,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public void setSourceLevel(SourceLevel sourceLevel) {
     jjsOptions.setSourceLevel(sourceLevel);
+  }
+
+  @Override
+  public void setSourceMapFilePrefix(String path) {
+    sourceMapFilePrefix = path;
   }
 
   @Override
@@ -362,6 +410,11 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
+  public void setUseDetailedTypeIds(boolean detailed) {
+    jjsOptions.setUseDetailedTypeIds(detailed);
+  }
+
+  @Override
   public void setValidateOnly(boolean validateOnly) {
     this.validateOnly = validateOnly;
   }
@@ -382,10 +435,14 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
+  public boolean shouldJDTInlineCompileTimeConstants() {
+    return jjsOptions.shouldJDTInlineCompileTimeConstants();
+  }
+
+  @Override
   public boolean shouldOptimizeDataflow() {
     return jjsOptions.shouldOptimizeDataflow();
   }
-
   @Override
   public boolean shouldOrdinalizeEnums() {
     return jjsOptions.shouldOrdinalizeEnums();
@@ -394,5 +451,25 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public boolean shouldRemoveDuplicateFunctions() {
     return jjsOptions.shouldRemoveDuplicateFunctions();
+  }
+
+  @Override
+  public boolean shouldSaveSource() {
+    return saveSource;
+  }
+
+  @Override
+  public boolean useDetailedTypeIds() {
+    return jjsOptions.useDetailedTypeIds();
+  }
+
+  @Override
+  public boolean isClosureCompilerFormatEnabled() {
+    return jjsOptions.isClosureCompilerFormatEnabled();
+  }
+
+  @Override
+  public void setClosureCompilerFormatEnabled(boolean enabled) {
+    jjsOptions.setClosureCompilerFormatEnabled(enabled);
   }
 }

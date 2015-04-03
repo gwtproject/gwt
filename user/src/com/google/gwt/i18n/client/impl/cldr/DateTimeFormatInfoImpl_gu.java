@@ -14,25 +14,12 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "gu" locale.
  */
 public class DateTimeFormatInfoImpl_gu extends DateTimeFormatInfoImpl {
-
-  @Override
-  public String[] ampms() {
-    return new String[] {
-        "am",
-        "pm"
-    };
-  }
 
   @Override
   public String dateFormatFull() {
@@ -65,7 +52,7 @@ public class DateTimeFormatInfoImpl_gu extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "ઈલુના જન્મ પહેસાં",
+        "ઈસુના જન્મ પહેલા",
         "ઇસવીસન"
     };
   }
@@ -102,7 +89,7 @@ public class DateTimeFormatInfoImpl_gu extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthNumDay() {
-    return "d-M";
+    return "d/M";
   }
 
   @Override
@@ -112,7 +99,7 @@ public class DateTimeFormatInfoImpl_gu extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d, MMM y";
+    return "d MMM, y";
   }
 
   @Override
@@ -137,17 +124,7 @@ public class DateTimeFormatInfoImpl_gu extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE,d,MMM y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
+    return "EEE, d MMM, y";
   }
 
   @Override
@@ -205,22 +182,30 @@ public class DateTimeFormatInfoImpl_gu extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] quartersFull() {
+  public String[] monthsShortStandalone() {
     return new String[] {
-        "પેહલા હંત 1",
-        "ડૂસઋા હંત 2",
-        "તીસઋા હંત 3",
-        "ચૌતા હંત 4"
+        "જાન્યુ",
+        "ફેબ્રુ",
+        "માર્ચ",
+        "એપ્રિલ",
+        "મે",
+        "જૂન",
+        "જુલાઈ",
+        "ઑગ",
+        "સપ્ટે",
+        "ઑક્ટો",
+        "નવે",
+        "ડિસે"
     };
   }
 
   @Override
-  public String[] quartersShort() {
+  public String[] quartersFull() {
     return new String[] {
-        "પેહલા હંત 1",
-        "Q2",
-        "Q3",
-        "ચૌતા હંત 4"
+        "પહેલો ત્રિમાસ",
+        "બીજો ત્રિમાસ",
+        "ત્રીજો ત્રિમાસ",
+        "ચોથો ત્રિમાસ"
     };
   }
 

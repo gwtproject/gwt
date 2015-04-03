@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -42,16 +42,6 @@ public abstract class ServletContainerLauncher {
   }
 
   /**
-   * @return a path to a 24-pixel high image file (relative to the classpath) to
-   *     be used for this servlet container, or null if none.
-   * @deprecated see {@link #getIconBytes} instead.
-   */
-  @Deprecated
-  public String getIconPath() {
-    return null;
-  }
-
-  /**
    * @return a short human-readable name of this servlet container, or null
    *     if no name should be displayed.
    */
@@ -62,9 +52,9 @@ public abstract class ServletContainerLauncher {
    * Return true if this servlet container launcher is configured for secure
    * operation (ie, HTTPS).  This value is only queried after arguments, if any,
    * have been processed.
-   * 
+   *
    * The default implementation just returns false.
-   * 
+   *
    * @return true if HTTPS is in use
    */
   public boolean isSecure() {
@@ -75,7 +65,7 @@ public abstract class ServletContainerLauncher {
    * Process any supplied arguments.
    * <p>
    * Will be called before {@link #start(TreeLogger, int, File)}, if at all.
-   * 
+   *
    * @param logger logger to use for warnings/errors
    * @param arguments single string containing the arguments for this SCL, the
    *     format to be defined by the SCL
@@ -91,7 +81,7 @@ public abstract class ServletContainerLauncher {
    * <p>
    * Will be called before {@link #start(TreeLogger, int, File)}, if at all.
    * If not called, the SCL should listen on all addresses.
-   * 
+   *
    * @param bindAddress host name or IP address, suitable for use with
    *     {@link java.net.InetAddress#getByName(String)}
    */
@@ -101,10 +91,10 @@ public abstract class ServletContainerLauncher {
      * will bind to all addresses.
      */
   }
-  
+
   /**
    * Start an embedded HTTP servlet container.
-   * 
+   *
    * @param logger the server logger
    * @param port the TCP port to serve on; if 0 is requested, a port should be
    *          automatically selected

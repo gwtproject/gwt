@@ -16,8 +16,8 @@ function installScript(filename) {
       __END_OBFUSCATED_ONLY__
     }
 
-    var docbody = getInstallLocation();
     var doc = getInstallLocationDoc();
+    var docbody = doc.body;
     var script;
     // for sourcemaps, we inject textNodes into the script element on Chrome
     if (navigator.userAgent.indexOf("Chrome") > -1 && window.JSON) {
@@ -59,5 +59,10 @@ function installScript(filename) {
   sendStats('moduleStartup', 'moduleRequested');
   var script = $doc.createElement('script');
   script.src = filename;
+  if (__MODULE_FUNC__.__errFn) {
+    script.onerror = function() {
+      __MODULE_FUNC__.__errFn('__MODULE_FUNC__', new Error("Failed to load " + code));
+    }
+  }
   $doc.getElementsByTagName('head')[0].appendChild(script);
 }

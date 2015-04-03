@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6177 $
-//  date=$Date: 2011-09-27 11:37:06 -0400 (Tue, 27 Sep 2011) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "pa_Arab" locale.
@@ -27,11 +22,18 @@ package com.google.gwt.i18n.client.impl.cldr;
 public class DateTimeFormatInfoImpl_pa_Arab extends DateTimeFormatInfoImpl_pa {
 
   @Override
-  public String[] ampms() {
-    return new String[] {
-        "AM",
-        "PM"
-    };
+  public String dateFormatFull() {
+    return "EEEE, dd MMMM y";
+  }
+
+  @Override
+  public String dateFormatShort() {
+    return "dd/MM/y";
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
   }
 
   @Override
@@ -53,6 +55,31 @@ public class DateTimeFormatInfoImpl_pa_Arab extends DateTimeFormatInfoImpl_pa {
   @Override
   public int firstDayOfTheWeek() {
     return 0;
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "MMM d";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "MMMM d";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "MMMM d, EEEE";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "y-MM";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "y MMM d, EEE";
   }
 
   @Override
@@ -145,13 +172,13 @@ public class DateTimeFormatInfoImpl_pa_Arab extends DateTimeFormatInfoImpl_pa {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "S",
+        "M",
+        "T",
+        "W",
+        "T",
+        "F",
+        "S"
     };
   }
 

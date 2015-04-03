@@ -24,11 +24,11 @@ import com.google.gwt.core.ext.typeinfo.ParseException;
 import com.google.gwt.core.ext.typeinfo.TypeOracleException;
 import com.google.gwt.dev.javac.JavaSourceParser;
 import com.google.gwt.dev.jjs.InternalCompilerException;
-import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.Name;
 import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.dev.util.collect.IdentityHashMap;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -137,7 +137,6 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
   static final JPackage[] NO_JPACKAGES = new JPackage[0];
   static final JParameter[] NO_JPARAMS = new JParameter[0];
   static final JType[] NO_JTYPES = new JType[0];
-  static final String[][] NO_STRING_ARR_ARR = new String[0][];
   static final String[] NO_STRINGS = new String[0];
 
   private static final String JSO_CLASS = "com.google.gwt.core.client.JavaScriptObject";
@@ -153,53 +152,6 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
       public int compare(JClassType type1, JClassType type2) {
         String name1 = type1.getQualifiedSourceName();
         String name2 = type2.getQualifiedSourceName();
-        return name1.compareTo(name2);
-      }
-    });
-  }
-
-  /**
-   * Convenience method to sort constructors in a consistent way. Note that the
-   * order is subject to change and is intended to generate an "aesthetically
-   * pleasing" order rather than a computationally reliable order.
-   */
-  public static void sort(JConstructor[] ctors) {
-    Arrays.sort(ctors, new Comparator<JConstructor>() {
-      @Override
-      public int compare(JConstructor o1, JConstructor o2) {
-        // Nothing for now; could enhance to sort based on parameter list
-        return 0;
-      }
-    });
-  }
-
-  /**
-   * Convenience method to sort fields in a consistent way. Note that the order
-   * is subject to change and is intended to generate an "aesthetically
-   * pleasing" order rather than a computationally reliable order.
-   */
-  public static void sort(JField[] fields) {
-    Arrays.sort(fields, new Comparator<JField>() {
-      @Override
-      public int compare(JField f1, JField f2) {
-        String name1 = f1.getName();
-        String name2 = f2.getName();
-        return name1.compareTo(name2);
-      }
-    });
-  }
-
-  /**
-   * Convenience method to sort methods in a consistent way. Note that the order
-   * is subject to change and is intended to generate an "aesthetically
-   * pleasing" order rather than a computationally reliable order.
-   */
-  public static void sort(JMethod[] methods) {
-    Arrays.sort(methods, new Comparator<JMethod>() {
-      @Override
-      public int compare(JMethod m1, JMethod m2) {
-        String name1 = m1.getName();
-        String name2 = m2.getName();
         return name1.compareTo(name2);
       }
     });
@@ -291,6 +243,11 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
    */
   private JClassType javaLangObject;
 
+  /**
+   * Cached singleton type representing <code>com.google.gwt.core.client.JavaScriptObject</code>.
+   */
+  private JClassType javaScriptObject;
+
   private final JavaSourceParser javaSourceParser = new JavaSourceParser();
 
   /**
@@ -298,6 +255,11 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
    */
   private final Map<JClassType, JClassType> jsoSingleImpls =
       new IdentityHashMap<JClassType, JClassType>();
+
+  /**
+   * Collects DualJsoImpl interfaces.
+   */
+  private final Set<JClassType> jsoDualImpls = Sets.newHashSet();
 
   /**
    * Cached map of all packages thus far encountered.
@@ -325,16 +287,6 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
     // Always create the default package.
     //
     getOrCreatePackage("");
-  }
-
-  /**
-   * Make sure that all possible Types have been read and made available for querying. Some
-   * TypeOracle implementations may choose to load only a part of the world when executing within a
-   * non-global phase of a library compile but may need to be pushed toward having global knowledge
-   * in some circumstances.
-   */
-  public void ensureAllLoaded() {
-    // When the normal TypeOracle is used all Types will have already been loaded.
   }
 
   /**
@@ -411,6 +363,18 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
       assert javaLangObject != null;
     }
     return javaLangObject;
+  }
+
+  /**
+   * Gets a reference to the type object representing
+   * <code>com.google.gwt.core.client.JavaScriptObject</code>.
+   */
+  public JClassType getJavaScriptObject() {
+    if (javaScriptObject == null) {
+      javaScriptObject = findType(JSO_CLASS);
+      assert javaScriptObject != null;
+    }
+    return javaScriptObject;
   }
 
   /**
@@ -547,17 +511,6 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
   }
 
   /**
-   * @deprecated This method will always return 0 because a TypeOracle never
-   *             gets reloaded anymore. Callers should not rely on this value to
-   *             manage static state.
-   */
-  @Deprecated
-  @Override
-  public long getReloadCount() {
-    return 0;
-  }
-
-  /**
    * Returns the single implementation type for an interface returned via
    * {@link #getSingleJsoImplInterfaces()} or <code>null</code> if no JSO
    * implementation is defined.
@@ -575,6 +528,14 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
   @Override
   public Set<? extends com.google.gwt.core.ext.typeinfo.JClassType> getSingleJsoImplInterfaces() {
     return Collections.unmodifiableSet(jsoSingleImpls.keySet());
+  }
+
+  /**
+   * Returns an unmodifiable, live view of all interface types that are
+   * implemented by both a JSO subtype and at least one Object subtype.
+   */
+  public Set<? extends com.google.gwt.core.ext.typeinfo.JClassType> getDualJsoImplInterfaces() {
+    return Collections.unmodifiableSet(jsoDualImpls);
   }
 
   /**
@@ -695,18 +656,12 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
   }
 
   /**
-   * Called to add a source reference for a top-level class type.
-   */
-  void addSourceReference(JRealClassType type, Resource sourceFile) {
-    javaSourceParser.addSourceForType(type, sourceFile);
-  }
-
-  /**
    * Called after a block of new types are added.
    */
   void finish() {
     computeHierarchyRelationships();
     computeSingleJsoImplData();
+    computeDualJsoImplData();
     recentTypes.clear();
   }
 
@@ -759,6 +714,26 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
     // about its subtype.
     for (JClassType recentType : recentTypes) {
       recentType.notifySuperTypes();
+    }
+  }
+
+  private void computeDualJsoImplData() {
+    JClassType jsoType = findType(JSO_CLASS);
+    if (jsoType == null) {
+      return;
+    }
+
+    // Examine all single JSO interfaces.
+    for (JClassType jsoInterface : jsoSingleImpls.keySet()) {
+      // Look at all implementors of the interface.
+      for (JClassType subtype : jsoInterface.getSubtypes()) {
+        // If one of them is not a JSO.
+        if (!jsoType.isAssignableFrom(subtype)) {
+          // Log the interface as a dual jso impl and stop looking at subtypes of this interface.
+          jsoDualImpls.add(jsoInterface);
+          break;
+        }
+      }
     }
   }
 

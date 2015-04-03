@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -235,7 +235,7 @@ public class PropertyPermutationsTest extends TestCase {
       prop.addDefinedValue(prop.getRootCondition(), "false");
       prop.addDefinedValue(prop.getRootCondition(), "true");
       // <set-property name="stackTraces" value="false" />
-      prop.setAllowedValues(prop.getRootCondition(), "false");
+      prop.setValues(prop.getRootCondition(), "false");
 
       /*
        * <set-property name="stackTraces" value="true,false"> <when user.agent
@@ -244,7 +244,7 @@ public class PropertyPermutationsTest extends TestCase {
       ConditionAny cond = new ConditionAny();
       cond.getConditions().add(new ConditionWhenPropertyIs("user.agent", "ie6"));
       cond.getConditions().add(new ConditionWhenPropertyIs("user.agent", "ie8"));
-      prop.setAllowedValues(cond, "true", "false");
+      prop.setValues(cond, "true", "false");
     }
 
     validateTwoDimensionPerm(props, md.getActiveLinkerNames());
@@ -300,53 +300,31 @@ public class PropertyPermutationsTest extends TestCase {
       cond.getConditions().add(
           new ConditionWhenPropertyIs("user.agent", "opera"));
 
-      prop.setAllowedValues(cond, "false");
+      prop.setValues(cond, "false");
     }
 
     validateTwoDimensionPerm(props, md.getActiveLinkerNames());
   }
 
-  private void validateTwoDimensionPerm(Properties props,
-      Set<String> activeLinkerNames) {
-    PropertyPermutations perms = new PropertyPermutations(props,
-        activeLinkerNames);
-
-    assertEquals(6, perms.size());
+  private void validateTwoDimensionPerm(Properties props, Set<String> activeLinkerNames) {
+    PropertyPermutations perms = new PropertyPermutations(props, activeLinkerNames);
 
     // Order is alphabetical in dependency order
-    String[] perm;
     Iterator<String[]> iter = perms.iterator();
-
-    assertTrue(iter.hasNext());
-    perm = iter.next();
-    assertEquals("ie6", perm[0]);
-    assertEquals("false", perm[1]);
-
-    assertTrue(iter.hasNext());
-    perm = iter.next();
-    assertEquals("ie6", perm[0]);
-    assertEquals("true", perm[1]);
-
-    assertTrue(iter.hasNext());
-    perm = iter.next();
-    assertEquals("ie8", perm[0]);
-    assertEquals("false", perm[1]);
-
-    assertTrue(iter.hasNext());
-    perm = iter.next();
-    assertEquals("ie8", perm[0]);
-    assertEquals("true", perm[1]);
-
-    assertTrue(iter.hasNext());
-    perm = iter.next();
-    assertEquals("moz", perm[0]);
-    assertEquals("false", perm[1]);
-
-    assertTrue(iter.hasNext());
-    perm = iter.next();
-    assertEquals("opera", perm[0]);
-    assertEquals("false", perm[1]);
-
+    checkNextPermutation(iter, "ie6", "false");
+    checkNextPermutation(iter, "ie6", "true");
+    checkNextPermutation(iter, "ie8", "false");
+    checkNextPermutation(iter, "ie8", "true");
+    checkNextPermutation(iter, "moz", "false");
+    checkNextPermutation(iter, "opera", "false");
     assertFalse(iter.hasNext());
+  }
+
+  private void checkNextPermutation(Iterator<String[]> iter, String expectedName,
+      String expectedValue) {
+    assertTrue("expected " + expectedName + " but got nothing", iter.hasNext());
+    String[] perm = iter.next();
+    assertEquals(expectedName, perm[0]);
+    assertEquals(expectedValue, perm[1]);
   }
 }

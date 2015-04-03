@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -114,17 +114,15 @@ public class JsValueOOPHM extends JsValue {
   private static class UndefinedValue {
   }
 
-  public static final String JSE_CLASS = "com.google.gwt.core.client.JavaScriptException";
-
   private static final ThreadLocal<Map<Object, DispatchObject>> dispatchObjectCache = new ThreadLocal<Map<Object, DispatchObject>>();
 
   private static final UndefinedValue undefValue = new UndefinedValue();
 
   /**
    * Underlying value.
-   * 
+   *
    * This may be one of:
-   * 
+   *
    * <pre>
    *   - Boolean instance
    *   - Integer instance
@@ -141,25 +139,6 @@ public class JsValueOOPHM extends JsValue {
    */
   public JsValueOOPHM() {
     this.value = undefValue;
-  }
-
-  /**
-   * Create a JsValueOOPHM object wrapping a JS object given the object
-   * reference id.
-   * 
-   * @param jsRefId pointer to underlying JsRootedValue as an integer.
-   */
-  public JsValueOOPHM(int jsRefId) {
-    this.value = new JsObjectRef(jsRefId);
-  }
-
-  /**
-   * Copy constructor.
-   * 
-   * @param other JsValueMoz instance to copy
-   */
-  public JsValueOOPHM(JsValueOOPHM other) {
-    value = other.value;
   }
 
   @Override
@@ -179,7 +158,7 @@ public class JsValueOOPHM extends JsValue {
 
   /**
    * @return the value as a JsObjectRef.
-   * 
+   *
    * Fails if isJavascriptObject() is false.
    */
   public JsObjectRef getJavascriptObject() {
@@ -347,7 +326,7 @@ public class JsValueOOPHM extends JsValue {
 
   /**
    * Wrap a function call to a Java method in this JavaScript value.
-   * 
+   *
    * @param methodName the name of the method to invoke
    * @param dispatchMethod the wrapper object
    */

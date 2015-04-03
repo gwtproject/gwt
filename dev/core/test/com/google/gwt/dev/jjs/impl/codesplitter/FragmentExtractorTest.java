@@ -18,6 +18,7 @@ import com.google.gwt.dev.jjs.Correlation.Axis;
 import com.google.gwt.dev.jjs.CorrelationFactory;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.ast.AccessModifier;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -162,11 +163,6 @@ public class FragmentExtractorTest extends JJSTestBase {
     }
 
     @Override
-    public boolean isLive(String literal) {
-      return false;
-    }
-
-    @Override
     public boolean miscellaneousStatementsAreLive() {
       return false;
     }
@@ -186,7 +182,8 @@ public class FragmentExtractorTest extends JJSTestBase {
       SourceInfo nullSourceInfo = new MockSourceInfo();
       final JClassType barType = new JClassType(nullSourceInfo, "Bar", false, false);
       final JsName barConstructorName = new JsName(null, "Bar", "Bar");
-      final JConstructor barConstructor = new JConstructor(nullSourceInfo, barType);
+      final JConstructor barConstructor =
+          new JConstructor(nullSourceInfo, barType, AccessModifier.PUBLIC);
       Map<String, JsFunction> functionsByName = new HashMap<String, JsFunction>();
       functionsByName.put("JavaClassHierarchySetupUtil.defineClass",
           new JsFunction(nullSourceInfo, new JsRootScope(), DEFINE_CLASS_FUNCTION_NAME));
@@ -244,10 +241,9 @@ public class FragmentExtractorTest extends JJSTestBase {
 
   private JsExprStmt createDefineClassStatement(final JsName barConstructorName) {
     SourceInfo nullSourceInfo = new MockSourceInfo();
-    JsInvocation defineClassInvocation = new JsInvocation(nullSourceInfo);
-    defineClassInvocation.getArguments().add(new JsNameRef(nullSourceInfo, barConstructorName));
-    defineClassInvocation.setQualifier(new JsNameRef(nullSourceInfo, DEFINE_CLASS_FUNCTION_NAME));
-    final JsExprStmt defineClassStatement = new JsExprStmt(nullSourceInfo, defineClassInvocation);
-    return defineClassStatement;
+    JsInvocation defineClassInvocation =
+        new JsInvocation(nullSourceInfo, new JsNameRef(nullSourceInfo, DEFINE_CLASS_FUNCTION_NAME),
+        new JsNameRef(nullSourceInfo, barConstructorName));
+    return defineClassInvocation.makeStmt();
   }
 }

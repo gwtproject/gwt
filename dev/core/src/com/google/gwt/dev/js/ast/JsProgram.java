@@ -1,11 +1,11 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -17,6 +17,7 @@ import com.google.gwt.dev.jjs.CorrelationFactory;
 import com.google.gwt.dev.jjs.CorrelationFactory.DummyCorrelationFactory;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,6 +39,8 @@ public final class JsProgram extends JsNode {
 
   private final Set<JsFunction> indexedFunctionSet = new HashSet<JsFunction>();
 
+  private final Set<JsFunction> preventInliningOf = Sets.newHashSet();
+
   private final JsScope objectScope;
 
   private final JsScope topScope;
@@ -57,10 +60,6 @@ public final class JsProgram extends JsNode {
     topScope = new JsNormalScope(JsRootScope.INSTANCE, "Global");
     objectScope = new JsNormalScope(JsRootScope.INSTANCE, "Object");
     setFragmentCount(1);
-  }
-
-  public SourceInfo createSourceInfo(int startPos, int endPos, int startLine, String fileName) {
-    return correlator.makeSourceInfo(SourceOrigin.create(startPos, endPos, startLine, fileName));
   }
 
   public SourceInfo createSourceInfo(int lineNumber, String location) {
@@ -141,6 +140,14 @@ public final class JsProgram extends JsNode {
     this.indexedFunctions.putAll(indexedFunctions);
     this.indexedFunctionSet.clear();
     this.indexedFunctionSet.addAll(indexedFunctions.values());
+  }
+
+  public void disallowInlining(JsFunction function) {
+    preventInliningOf.add(function);
+  }
+
+  public boolean isInliningAllowed(JsFunction function) {
+    return !preventInliningOf.contains(function);
   }
 
   @Override

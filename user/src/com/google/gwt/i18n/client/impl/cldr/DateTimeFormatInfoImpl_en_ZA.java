@@ -14,17 +14,12 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6450 $
-//  date=$Date: 2012-01-25 19:20:54 -0500 (Wed, 25 Jan 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "en_ZA" locale.
  */
-public class DateTimeFormatInfoImpl_en_ZA extends DateTimeFormatInfoImpl_en {
+public class DateTimeFormatInfoImpl_en_ZA extends DateTimeFormatInfoImpl_en_001 {
 
   @Override
   public String dateFormatFull() {
@@ -43,7 +38,12 @@ public class DateTimeFormatInfoImpl_en_ZA extends DateTimeFormatInfoImpl_en {
 
   @Override
   public String dateFormatShort() {
-    return "yyyy/MM/dd";
+    return "y/MM/dd";
+  }
+
+  @Override
+  public int firstDayOfTheWeek() {
+    return 0;
   }
 
   @Override
@@ -78,7 +78,7 @@ public class DateTimeFormatInfoImpl_en_ZA extends DateTimeFormatInfoImpl_en {
 
   @Override
   public String formatYearMonthNumDay() {
-    return "yyyy/MM/dd";
+    return "y/MM/dd";
   }
 
   @Override

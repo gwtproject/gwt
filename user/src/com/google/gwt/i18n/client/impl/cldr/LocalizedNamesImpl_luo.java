@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "luo" locale.
@@ -246,7 +241,6 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
         "ST",
         "SA",
         "SN",
-        "CS",
         "SC",
         "SL",
         "SG",
@@ -295,6 +289,7 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "YE",
         "ZM",
         "ZW",
@@ -309,7 +304,6 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
     namesMap.put("CD", "Democratic Republic of the Congo");
     namesMap.put("CG", "Congo");
     namesMap.put("CI", "Côte d");
-    namesMap.put("CS", "Serbia gi Montenegro");
     namesMap.put("CV", "Cape Verde Islands");
     namesMap.put("FK", "Chuia mar Falkland");
     namesMap.put("KN", "Saint Kitts gi Nevis");
@@ -344,7 +338,6 @@ public class LocalizedNamesImpl_luo extends LocalizedNamesImpl {
         "CD": "Democratic Republic of the Congo",
         "CG": "Congo",
         "CI": "Côte d",
-        "CS": "Serbia gi Montenegro",
         "CV": "Cape Verde Islands",
         "FK": "Chuia mar Falkland",
         "KN": "Saint Kitts gi Nevis",

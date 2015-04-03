@@ -18,10 +18,9 @@ package com.google.gwt.core.ext.soyc.coderef;
 
 import com.google.gwt.core.ext.soyc.coderef.EntityDescriptor.Fragment;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gwt.thirdparty.json.JSONArray;
+import com.google.gwt.thirdparty.json.JSONException;
+import com.google.gwt.thirdparty.json.JSONObject;
 
 import java.util.Map;
 
@@ -141,7 +140,7 @@ public class EntityDescriptorJsonTranslator {
       fragments.put(frag);
     }
     json.put(EntityRecorder.FRAGMENTS, fragments);
-    json.put(ENTITY_JS, entity.getObfuscatedNames());
+    json.put(ENTITY_JS, new JSONArray(entity.getObfuscatedNames()));
     return json;
   }
 
@@ -170,7 +169,7 @@ public class EntityDescriptorJsonTranslator {
       for (MethodDescriptor methodDescriptor : classDescriptor.getMethods()) {
         JSONObject jsonMethod = writeJsonFromMember(methodDescriptor);
         jsonMethod.put(METHOD_ID, methodDescriptor.getUniqueId());
-        jsonMethod.put(METHOD_DEPENDENTS, methodDescriptor.getDependentPointers());
+        jsonMethod.put(METHOD_DEPENDENTS, new JSONArray(methodDescriptor.getDependentPointers()));
         methods.put(jsonMethod);
       }
       jsonClass.put(METHODS, methods);

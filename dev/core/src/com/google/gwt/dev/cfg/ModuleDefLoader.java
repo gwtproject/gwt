@@ -18,14 +18,14 @@ package com.google.gwt.dev.cfg;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.CompilerContext;
-import com.google.gwt.dev.resource.Resource;
-import com.google.gwt.dev.resource.impl.UrlResource;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.dev.util.xml.ReflectiveParser;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
@@ -42,11 +42,6 @@ public class ModuleDefLoader {
   /*
    * TODO(scottb,tobyr,zundel): synchronization????
    */
-
-  /**
-   * Filename suffix used for Precompiled GWT Module files.
-   */
-  public static final String COMPILATION_UNIT_ARCHIVE_SUFFIX = ".gwtar";
 
   /**
    * Filename suffix used for GWT Module XML files.
@@ -157,38 +152,7 @@ public class ModuleDefLoader {
         return moduleDef;
       }
       ModuleDefLoader loader = new ModuleDefLoader(compilerContext, resources);
-      ModuleDef module = ModuleDefLoader.doLoadModule(
-          loader, logger, moduleName, resources, compilerContext.shouldCompileMonolithic());
-
-      LibraryWriter libraryWriter = compilerContext.getLibraryWriter();
-      libraryWriter.setLibraryName(module.getCanonicalName());
-      libraryWriter.addDependencyLibraryNames(module.getExternalLibraryCanonicalModuleNames());
-
-      // Records binding property defined values that were newly created in this library.
-      for (BindingProperty bindingProperty : module.getProperties().getBindingProperties()) {
-        libraryWriter.addNewBindingPropertyValuesByName(
-            bindingProperty.getName(), bindingProperty.getTargetLibraryDefinedValues());
-      }
-      // Records configuration property value changes that occurred in this library.
-      for (ConfigurationProperty configurationProperty :
-          module.getProperties().getConfigurationProperties()) {
-        libraryWriter.addNewConfigurationPropertyValuesByName(
-            configurationProperty.getName(), configurationProperty.getTargetLibraryValues());
-      }
-      // Saves non java and gwt.xml build resources, like PNG and CSS files.
-      for (Resource buildResource : module.getBuildResourceOracle().getResources()) {
-        if (buildResource.getPath().endsWith(".java")
-            || buildResource.getPath().endsWith(".gwt.xml")) {
-          continue;
-        }
-        libraryWriter.addBuildResource(buildResource);
-      }
-      // Saves public resources.
-      for (Resource publicResource : module.getPublicResourceOracle().getResources()) {
-        libraryWriter.addPublicResource(publicResource);
-      }
-
-      return module;
+      return ModuleDefLoader.doLoadModule(loader, logger, moduleName, resources, true, true);
     } finally {
       moduleDefLoadFromClassPathEvent.end();
     }
@@ -207,7 +171,7 @@ public class ModuleDefLoader {
   private static ModuleDef doLoadModule(ModuleDefLoader loader, TreeLogger logger,
       String moduleName, ResourceLoader resources)
       throws UnableToCompleteException {
-    return doLoadModule(loader, logger, moduleName, resources, true);
+    return doLoadModule(loader, logger, moduleName, resources, true, true);
   }
 
   /**
@@ -218,14 +182,16 @@ public class ModuleDefLoader {
    * @param moduleName the name of the module
    * @param resources where to load source code from
    * @param monolithic whether to encapsulate the entire module tree
+   * @param mergePathPrefixes whether PathPrefixSets should merge colliding PathPrefixes for faster
+   *          resource scanning
    * @return the module returned -- cannot be null
    * @throws UnableToCompleteException if module loading failed
    */
   private static ModuleDef doLoadModule(ModuleDefLoader loader, TreeLogger logger,
-      String moduleName, ResourceLoader resources, boolean monolithic)
+      String moduleName, ResourceLoader resources, boolean monolithic, boolean mergePathPrefixes)
       throws UnableToCompleteException {
 
-    ModuleDef moduleDef = new ModuleDef(moduleName, resources, monolithic);
+    ModuleDef moduleDef = new ModuleDef(moduleName, resources, monolithic, mergePathPrefixes);
     Event moduleLoadEvent = SpeedTracerLogger.start(CompilerEventType.MODULE_DEF,
         "phase", "strategy.load()");
     loader.load(logger, moduleName, moduleDef);
@@ -250,7 +216,7 @@ public class ModuleDefLoader {
     ClassLoader keyClassLoader = Thread.currentThread().getContextClassLoader();
     Map<String, ModuleDef> cache = loadedModulesCaches.get(keyClassLoader);
     if (cache == null) {
-      cache = new MapMaker().softValues().makeMap();
+      cache = Maps.newHashMap();
       loadedModulesCaches.put(keyClassLoader, cache);
     }
     return cache;
@@ -275,8 +241,12 @@ public class ModuleDefLoader {
     this.resourceLoader = loader;
   }
 
-  public boolean enforceStrictResources() {
-    return compilerContext.getOptions().enforceStrictResources();
+  public boolean enforceStrictSourceResources() {
+    return compilerContext.getOptions().enforceStrictSourceResources();
+  }
+
+  public boolean enforceStrictPublicResources() {
+    return compilerContext.getOptions().enforceStrictPublicResources();
   }
 
   /**
@@ -306,8 +276,6 @@ public class ModuleDefLoader {
 
     TreeLogger logger = parentLogger.branch(TreeLogger.DEBUG, "Loading inherited module '"
         + moduleName + "'", null);
-    LibraryWriter libraryWriter = compilerContext.getLibraryWriter();
-    LibraryGroup libraryGroup = compilerContext.getLibraryGroup();
 
     if (!ModuleDef.isValidModuleName(moduleName)) {
       logger.log(TreeLogger.ERROR, "Invalid module name: '" + moduleName + "'",
@@ -321,12 +289,9 @@ public class ModuleDefLoader {
     String slashedModuleName = moduleName.replace('.', '/');
     String resName = slashedModuleName + ModuleDefLoader.GWT_MODULE_XML_SUFFIX;
     URL moduleURL = resourceLoader.getResource(resName);
-    if (moduleURL == null && libraryGroup.containsBuildResource(resName)) {
-      moduleURL = libraryGroup.getBuildResourceByPath(resName).getURL();
-    }
 
-    long lastModified = 0;
     if (moduleURL != null) {
+      moduleDef.recordModuleGwtXmlFile(moduleName, moduleURL.getPath());
       String externalForm = moduleURL.toExternalForm();
       if (logger.isLoggable(TreeLogger.DEBUG)) {
         logger.log(TreeLogger.DEBUG, "Module location: " + externalForm, null);
@@ -336,23 +301,15 @@ public class ModuleDefLoader {
             && (!(externalForm.startsWith("zip:file")))
             && (!(externalForm.startsWith("http://")))
             && (!(externalForm.startsWith("ftp://")))) {
-          File gwtXmlFile = new File(moduleURL.toURI());
-          lastModified = gwtXmlFile.lastModified();
-          moduleDef.addGwtXmlFile(gwtXmlFile);
+          moduleDef.addGwtXmlFile(new File(moduleURL.toURI()));
         }
       } catch (URISyntaxException e) {
         logger.log(TreeLogger.ERROR, "Error parsing URI", e);
         throw new UnableToCompleteException();
       }
-      String compilationUnitArchiveName = slashedModuleName + ModuleDefLoader.COMPILATION_UNIT_ARCHIVE_SUFFIX;
-      URL compiledModuleURL = resourceLoader.getResource(compilationUnitArchiveName);
-      if (compiledModuleURL != null) {
-        moduleDef.addCompilationUnitArchiveURL(compiledModuleURL);
-      }
     }
     if (moduleURL == null) {
-      logger.log(TreeLogger.ERROR,"Unable to find '" + resName + "' on your classpath; "
-          + "could be a typo, or maybe you forgot to include a classpath entry for source?");
+      logger.log(TreeLogger.ERROR, formatUnableToFindModuleMessage(resName));
       throw new UnableToCompleteException();
     }
 
@@ -372,18 +329,20 @@ public class ModuleDefLoader {
       ModuleDefSchema schema =
           new ModuleDefSchema(logger, this, moduleName, moduleURL, moduleDir, moduleDef);
       ReflectiveParser.parse(logger, schema, r);
-
-      // If this module.gwt.xml file is one of the target modules that together make up this
-      // ModuleDef.
-      if (moduleDef.getTargetLibraryCanonicalModuleNames().contains(moduleName)) {
-        // Then save a copy of the xml file in the created library file.
-        libraryWriter.addBuildResource(new UrlResource(moduleURL, resName, lastModified));
-      }
+    } catch (UnableToCompleteException e) {
+      // The error has already been logged.
+      throw  e;
     } catch (Throwable e) {
       logger.log(TreeLogger.ERROR, "Unexpected error while processing XML", e);
       throw new UnableToCompleteException();
     } finally {
       Utility.close(r);
     }
+  }
+
+  @VisibleForTesting
+  public static String formatUnableToFindModuleMessage(String moduleResourcePath) {
+    return "Unable to find '" + moduleResourcePath + "' on your classpath; "
+        + "could be a typo, or maybe you forgot to include a classpath entry for source?";
   }
 }

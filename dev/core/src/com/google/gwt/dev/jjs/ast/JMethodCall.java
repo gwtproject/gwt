@@ -66,6 +66,7 @@ public class JMethodCall extends JExpression {
   private JMethod method;
   private final JType overrideReturnType;
   private Polymorphism polymorphism = Polymorphism.NORMAL;
+  private boolean markedAsSideAffectFree;
 
   /**
    * Initialize a new method call equivalent to another one. A new instance must
@@ -78,16 +79,11 @@ public class JMethodCall extends JExpression {
     this.method = other.method;
     this.overrideReturnType = other.overrideReturnType;
     this.polymorphism = other.polymorphism;
+    this.markedAsSideAffectFree = other.markedAsSideAffectFree;
   }
 
   public JMethodCall(SourceInfo info, JExpression instance, JMethod method, JExpression... args) {
-    super(info);
-    assert (method != null);
-    assert (instance != null || method.isStatic() || this instanceof JNewInstance);
-    this.instance = instance;
-    this.method = method;
-    this.overrideReturnType = null;
-    addArgs(args);
+    this(info, instance, method, null, args);
   }
 
   /**
@@ -105,10 +101,9 @@ public class JMethodCall extends JExpression {
       JType overrideReturnType, JExpression... args) {
     super(info);
     assert (method != null);
-    assert (instance != null || method.isStatic());
+    assert (instance != null || method.isStatic() || this instanceof JNewInstance);
     this.instance = instance;
     this.method = method;
-    assert (overrideReturnType != null);
     this.overrideReturnType = overrideReturnType;
     addArgs(args);
   }
@@ -150,6 +145,13 @@ public class JMethodCall extends JExpression {
   }
 
   /**
+   * Creates a new method call to the same method using the same instance but without parameters.
+   */
+  public JMethodCall cloneWithoutParameters() {
+    return new JMethodCall(this, instance);
+  }
+
+  /**
    * Returns the call arguments.
    */
   public List<JExpression> getArgs() {
@@ -173,10 +175,17 @@ public class JMethodCall extends JExpression {
     }
   }
 
+  public void markSideEffectFree() {
+    markedAsSideAffectFree = true;
+  }
+
   @Override
   public boolean hasSideEffects() {
+    if (markedAsSideAffectFree) {
+      return false;
+    }
     // TODO(later): optimize? Be sure to check for clinit when we do.
-    return true;
+    return isStaticDispatchOnly() || method.isStatic() ? method.hasSideEffects() : true;
   }
 
   /**
@@ -192,13 +201,6 @@ public class JMethodCall extends JExpression {
    */
   public boolean isVolatile() {
     return polymorphism.isVolatile();
-  }
-
-  /**
-   * Removes the argument at the specified index.
-   */
-  public void removeArg(int index) {
-    args = Lists.remove(args, index);
   }
 
   /**

@@ -15,6 +15,12 @@
  */
 package java.util;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
+
+import com.google.gwt.core.client.impl.SpecializeMethod;
 import com.google.gwt.lang.Array;
 
 /**
@@ -46,7 +52,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
 
       int i = -1, last = -1;
 
-      {
+      IteratorImpl() {
         findNext();
       }
 
@@ -55,19 +61,16 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
       }
 
       public E next() {
-        if (!hasNext()) {
-          throw new NoSuchElementException();
-        }
+        checkElement(hasNext());
         last = i;
         findNext();
         return set[last];
       }
 
       public void remove() {
-        if (last < 0) {
-          throw new IllegalStateException();
-        }
+        checkState(last != -1);
         assert (set[last] != null);
+
         set[last] = null;
         --size;
         last = -1;
@@ -99,13 +102,6 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
     private int size;
 
     /**
-     * Constructs an empty set.
-     */
-    public EnumSetImpl(E[] all) {
-      this(all, Array.createFrom(all), 0);
-    }
-
-    /**
      * Constructs a set taking ownership of the specified set. The size must
      * accurately reflect the number of non-null items in set.
      */
@@ -117,9 +113,8 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
 
     @Override
     public boolean add(E e) {
-      if (e == null) {
-        throw new NullPointerException();
-      }
+      checkNotNull(e);
+
       int ordinal = e.ordinal();
       if (set[ordinal] == null) {
         set[ordinal] = e;
@@ -134,14 +129,14 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
       return new EnumSetImpl<E>(all, clonedSet, size);
     }
 
-    @SuppressWarnings("unchecked")
+    @SpecializeMethod(params = Enum.class, target = "containsEnum")
     @Override
     public boolean contains(Object o) {
-      if (o instanceof Enum) {
-        Enum e = (Enum) o;
-        return set[e.ordinal()] == e;
-      }
-      return false;
+      return (o instanceof Enum) && containsEnum((Enum) o);
+    }
+
+    private boolean containsEnum(Enum e) {
+      return e != null && set[e.ordinal()] == e;
     }
 
     @Override
@@ -149,16 +144,17 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
       return new IteratorImpl();
     }
 
-    @SuppressWarnings("unchecked")
+    @SpecializeMethod(params = Enum.class, target = "removeEnum")
     @Override
     public boolean remove(Object o) {
-      if (o instanceof Enum) {
-        Enum e = (Enum) o;
-        if (set[e.ordinal()] == e) {
-          set[e.ordinal()] = null;
-          --size;
-          return true;
-        }
+      return (o instanceof Enum) && removeEnum((Enum) o);
+    }
+
+    private boolean removeEnum(Enum e) {
+      if (e != null && set[e.ordinal()] == e) {
+        set[e.ordinal()] = null;
+        --size;
+        return true;
       }
       return false;
     }
@@ -195,16 +191,17 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
 
   public static <E extends Enum<E>> EnumSet<E> copyOf(Collection<E> c) {
     if (c instanceof EnumSet) {
-      return EnumSet.copyOf((EnumSet<E>) c);
+      return copyOf((EnumSet<E>) c);
     }
 
-    Iterator<E> it = c.iterator();
-    E first = it.next();
-    Class<E> clazz = first.getDeclaringClass();
-    EnumSet<E> set = EnumSet.noneOf(clazz);
-    set.add(first);
-    while (it.hasNext()) {
-      set.add(it.next());
+    checkArgument(!c.isEmpty(), "Collection is empty");
+
+    Iterator<E> iterator = c.iterator();
+    E first = iterator.next();
+    EnumSet<E> set = of(first);
+    while (iterator.hasNext()) {
+      E e = iterator.next();
+      set.add(e);
     }
     return set;
   }
@@ -219,31 +216,20 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
   }
 
   public static <E extends Enum<E>> EnumSet<E> of(E first) {
-    E[] all = first.getDeclaringClass().getEnumConstants();
-    E[] set = Array.createFrom(all);
-    set[first.ordinal()] = first;
-    return new EnumSetImpl<E>(all, set, 1);
+    EnumSet<E> set = noneOf(first.getDeclaringClass());
+    set.add(first);
+    return set;
   }
 
   public static <E extends Enum<E>> EnumSet<E> of(E first, E... rest) {
-    E[] all = first.getDeclaringClass().getEnumConstants();
-    E[] set = Array.createFrom(all);
-    set[first.ordinal()] = first;
-    int size = 1;
-    for (E e : rest) {
-      int ordinal = e.ordinal();
-      if (set[ordinal] == null) {
-        set[ordinal] = e;
-        ++size; // count only new elements
-      }
-    }
-    return new EnumSetImpl<E>(all, set, size);
+    EnumSet<E> set = of(first);
+    Collections.addAll(set, rest);
+    return set;
   }
 
   public static <E extends Enum<E>> EnumSet<E> range(E from, E to) {
-    if (from.compareTo(to) > 0) {
-      throw new IllegalArgumentException(from + " > " + to);
-    }
+    checkArgument(from.compareTo(to) <= 0, "%s > %s", from, to);
+
     E[] all = from.getDeclaringClass().getEnumConstants();
     E[] set = Array.createFrom(all);
 

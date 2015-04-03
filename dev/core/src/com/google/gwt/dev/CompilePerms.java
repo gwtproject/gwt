@@ -21,9 +21,11 @@ import com.google.gwt.dev.CompileTaskRunner.CompileTask;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.cfg.PropertyPermutations;
+import com.google.gwt.dev.jjs.JavaToJavaScriptCompiler;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.jjs.UnifiedAst;
 import com.google.gwt.dev.util.FileBackedObject;
+import com.google.gwt.dev.util.MemoryBackedObject;
 import com.google.gwt.dev.util.PerfCounter;
 import com.google.gwt.dev.util.PersistenceBackedObject;
 import com.google.gwt.dev.util.Util;
@@ -193,7 +195,8 @@ public class CompilePerms {
    */
   public static PermutationResult compile(TreeLogger logger, CompilerContext compilerContext,
       Permutation permutation, UnifiedAst unifiedAst) throws UnableToCompleteException {
-    return unifiedAst.compilePermutation(logger, compilerContext, permutation);
+    return JavaToJavaScriptCompiler.compilePermutation(unifiedAst, logger, compilerContext,
+        permutation);
   }
 
   /**
@@ -236,11 +239,15 @@ public class CompilePerms {
   }
 
   public static List<PersistenceBackedObject<PermutationResult>> makeResultFiles(
-      File compilerWorkDir, Permutation[] perms) {
+      File compilerWorkDir, Permutation[] perms, PrecompileTaskOptions options) {
     List<PersistenceBackedObject<PermutationResult>> toReturn = Lists.newArrayList();
     for (int i = 0; i < perms.length; ++i) {
-      File f = makePermFilename(compilerWorkDir, perms[i].getId());
-      toReturn.add(new FileBackedObject<PermutationResult>(PermutationResult.class, f));
+      if (options.isIncrementalCompileEnabled()) {
+        toReturn.add(new MemoryBackedObject<PermutationResult>(PermutationResult.class));
+      } else {
+        File f = makePermFilename(compilerWorkDir, perms[i].getId());
+        toReturn.add(new FileBackedObject<PermutationResult>(PermutationResult.class, f));
+      }
     }
     return toReturn;
   }
@@ -329,7 +336,7 @@ public class CompilePerms {
             permsToRun, precompilation);
 
         List<PersistenceBackedObject<PermutationResult>> resultFiles = makeResultFiles(
-            compilerWorkDir, subPerms);
+            compilerWorkDir, subPerms, options);
         compile(logger, compilerContext, precompilation, subPerms,
             options.getLocalWorkers(), resultFiles);
       }

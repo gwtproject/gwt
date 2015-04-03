@@ -15,18 +15,19 @@
  */
 package com.google.gwt.dev.js;
 
-import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.SymbolData;
 import com.google.gwt.core.ext.linker.impl.StandardSymbolData;
 import com.google.gwt.dev.CompilerContext;
+import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.PrecompileTaskOptions;
 import com.google.gwt.dev.PrecompileTaskOptionsImpl;
 import com.google.gwt.dev.cfg.BindingProperty;
+import com.google.gwt.dev.cfg.BindingProps;
 import com.google.gwt.dev.cfg.ConditionNone;
+import com.google.gwt.dev.cfg.ConfigProps;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
-import com.google.gwt.dev.cfg.Properties;
-import com.google.gwt.dev.cfg.StaticPropertyOracle;
+import com.google.gwt.dev.cfg.PermProps;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
@@ -34,17 +35,20 @@ import com.google.gwt.dev.javac.testing.impl.MockResourceOracle;
 import com.google.gwt.dev.jjs.AstConstructor;
 import com.google.gwt.dev.jjs.JavaAstConstructor;
 import com.google.gwt.dev.jjs.JsOutputOption;
-import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.impl.ArrayNormalizer;
+import com.google.gwt.dev.jjs.impl.CatchBlockNormalizer;
 import com.google.gwt.dev.jjs.impl.ComputeCastabilityInformation;
+import com.google.gwt.dev.jjs.impl.ComputeInstantiatedJsoInterfaces;
 import com.google.gwt.dev.jjs.impl.FullCompileTestBase;
 import com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST;
 import com.google.gwt.dev.jjs.impl.ImplementCastsAndTypeChecks;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.jjs.impl.MethodInliner;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences;
+import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.StringTypeMapper;
+import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeMapper;
+import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeOrder;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsProgram;
@@ -54,6 +58,7 @@ import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.TextOutput;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -198,8 +203,38 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
     checkOnModuleLoad(program, "function onModuleLoad(){" +
         "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
         "$location[stackIndex]='EntryPoint.java:'+'7',$clinit_EntryPoint();" +
-        "throw ($tmp=($location[stackIndex]='EntryPoint.java:'+'5',factory),"  +
-        "$location[stackIndex]='EntryPoint.java:'+'8',$tmp).makeException()" +
+        "throw unwrap(($tmp=($location[stackIndex]='EntryPoint.java:'+'5',factory)," +
+        "$location[stackIndex]='EntryPoint.java:'+'8',$tmp).makeException())" +
+        "}");
+  }
+
+  public void testTryCatch() throws Exception {
+    recordFileNamesProp.setValue("true");
+    recordLineNumbersProp.setValue("true");
+
+    JsProgram program = compileClass(
+        "package test;",
+        "public class EntryPoint {",
+        "  public static void onModuleLoad() {",
+        "    try {",
+        "      throw new RuntimeException();",
+        "    } catch (RuntimeException e) {" ,
+        "      String s = e.getMessage();",
+        "    }",
+        "  }",
+        "}");
+
+    // Note: it's up to the catch block to fix $stackDepth.
+    checkOnModuleLoad(program, "function onModuleLoad(){" +
+        "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
+        "$location[stackIndex]='EntryPoint.java:'+'3',$clinit_EntryPoint();var e,s;" +
+        "try{throw $location[stackIndex]='EntryPoint.java:'+'5',new RuntimeException" +
+        "}catch($e0){$e0=wrap($e0);" +
+        "$stackDepth=($location[stackIndex]='EntryPoint.java:'+'6',stackIndex);" +
+        "if(instanceOf($e0,'java.lang.RuntimeException')){" +
+        "e=$e0;s=($location[stackIndex]='EntryPoint.java:'+'7',e).getMessage()}" +
+        "else throw unwrap(($location[stackIndex]='EntryPoint.java:'+'6',$e0))}" +
+        "$stackDepth=stackIndex-1" +
         "}");
   }
 
@@ -225,45 +260,50 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
     PrecompileTaskOptions options = new PrecompileTaskOptionsImpl();
     options.setOutput(JsOutputOption.PRETTY);
     options.setRunAsyncEnabled(false);
-    CompilerContext context = new CompilerContext.Builder().options(options).build();
+    CompilerContext context = new CompilerContext.Builder().options(options)
+        .minimalRebuildCache(new MinimalRebuildCache()).build();
+
+    ConfigProps config = new ConfigProps(Arrays.asList(recordFileNamesProp,
+        recordLineNumbersProp));
 
     CompilationState state =
         CompilationStateBuilder.buildFrom(logger, context,
             sourceOracle.getResources(), null);
-    JProgram jProgram = AstConstructor.construct(logger, state, options, new Properties());
+    JProgram jProgram = AstConstructor.construct(logger, state, options, config);
     jProgram.addEntryMethod(findMethod(jProgram, "onModuleLoad"));
 
     if (inline) {
       MethodInliner.exec(jProgram);
     }
 
+    CatchBlockNormalizer.exec(jProgram);
     // Construct the JavaScript AST.
 
     // These passes are needed by GenerateJavaScriptAST.
     ComputeCastabilityInformation.exec(jProgram, false);
+    ComputeInstantiatedJsoInterfaces.exec(jProgram);
     ImplementCastsAndTypeChecks.exec(jProgram, false);
     ArrayNormalizer.exec(jProgram, false);
 
-    Map<JType, JLiteral> typeIdsByType =
-        ResolveRuntimeTypeReferences.IntoIntLiterals.exec(jProgram);
+    TypeMapper<String> typeMapper = new StringTypeMapper();
+    ResolveRuntimeTypeReferences.exec(jProgram, typeMapper, TypeOrder.FREQUENCY);
     Map<StandardSymbolData, JsName> symbolTable =
         new TreeMap<StandardSymbolData, JsName>(new SymbolData.ClassIdentComparator());
 
     BindingProperty stackMode = new BindingProperty("compiler.stackMode");
     stackMode.addDefinedValue(new ConditionNone(), "EMULATED");
 
-    PropertyOracle[] properties = {new StaticPropertyOracle(
-        new BindingProperty[]{stackMode}, new String[]{"EMULATED"},
-        new ConfigurationProperty[]{recordFileNamesProp, recordLineNumbersProp}
-    )};
+    PermProps props = new PermProps(Arrays.asList(
+        new BindingProps(new BindingProperty[]{stackMode}, new String[]{"EMULATED"}, config)
+    ));
 
     JsProgram jsProgram = new JsProgram();
     JavaToJavaScriptMap jjsmap = GenerateJavaScriptAST.exec(
-        jProgram, jsProgram, context, typeIdsByType, symbolTable,
-        properties).getLeft();
+        logger, jProgram, jsProgram, context, typeMapper,
+        symbolTable, props).getLeft();
 
     // Finally, run the pass we care about.
-    JsStackEmulator.exec(jProgram, jsProgram, properties, jjsmap);
+    JsStackEmulator.exec(jProgram, jsProgram, props, jjsmap);
 
     return jsProgram;
   }

@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "vai" locale.
@@ -43,7 +38,7 @@ public class DateTimeFormatInfoImpl_vai extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yyyy";
+    return "dd/MM/y";
   }
 
   @Override
@@ -73,18 +68,18 @@ public class DateTimeFormatInfoImpl_vai extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatYear() {
-    return "yyyy";
+  public String formatYearMonthAbbrev() {
+    return "MMM y";
   }
 
   @Override
-  public String formatYearMonthAbbrev() {
-    return "MMM yyyy";
+  public String formatYearMonthAbbrevDay() {
+    return "d MMM y";
   }
 
   @Override
   public String formatYearMonthFull() {
-    return "MMMM yyyy";
+    return "MMMM y";
   }
 
   @Override
@@ -94,22 +89,27 @@ public class DateTimeFormatInfoImpl_vai extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "M/yyyy";
+    return "M/y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "d/M/y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, yyyy";
+    return "EEE, MMM d, y";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ yyyy";
+    return "QQQQ y";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q yyyy";
+    return "Q y";
   }
 
   @Override
@@ -206,19 +206,6 @@ public class DateTimeFormatInfoImpl_vai extends DateTimeFormatInfoImpl {
         "ꕉꔤꕆꕢ",
         "ꕉꔤꕀꕮ",
         "ꔻꔬꔳ"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrow() {
-    return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
     };
   }
 

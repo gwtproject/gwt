@@ -17,17 +17,19 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "so" locale.
  */
 public class LocalizedNamesImpl_so extends LocalizedNamesImpl {
+
+  @Override
+  public String[] loadLikelyRegionCodes() {
+    return new String[] {
+        "SO",
+    };
+  }
 
   @Override
   public String[] loadSortedRegionCodes() {
@@ -163,6 +165,7 @@ public class LocalizedNamesImpl_so extends LocalizedNamesImpl {
         "KM",
         "CG",
         "ZA",
+        "SS",
         "HR",
         "CR",
         "CU",
@@ -244,7 +247,6 @@ public class LocalizedNamesImpl_so extends LocalizedNamesImpl {
         "AS",
         "SM",
         "ST",
-        "CS",
         "CN",
         "ZW",
         "SG",
@@ -257,7 +259,6 @@ public class LocalizedNamesImpl_so extends LocalizedNamesImpl {
         "SI",
         "SB",
         "SO",
-        "SS",
         "SR",
         "SD",
         "SY",
@@ -290,6 +291,7 @@ public class LocalizedNamesImpl_so extends LocalizedNamesImpl {
         "UZ",
         "VU",
         "WF",
+        "XK",
         "YE",
     };
   }
@@ -338,7 +340,6 @@ public class LocalizedNamesImpl_so extends LocalizedNamesImpl {
     namesMap.put("CN", "Shiinaha");
     namesMap.put("CO", "Kolombiya");
     namesMap.put("CR", "Kosta Riika");
-    namesMap.put("CS", "serbiya iyo Monteneegro");
     namesMap.put("CU", "Kuuba");
     namesMap.put("CV", "Cape Verde Islands");
     namesMap.put("CY", "Qubrus");
@@ -436,6 +437,7 @@ public class LocalizedNamesImpl_so extends LocalizedNamesImpl {
     namesMap.put("SL", "Siraaliyoon");
     namesMap.put("SN", "Sinigaal");
     namesMap.put("SO", "Soomaaliya");
+    namesMap.put("SS", "Koonfur Suudaan");
     namesMap.put("SY", "Suuriya");
     namesMap.put("SZ", "Iswaasilaand");
     namesMap.put("TD", "Jaad");
@@ -452,6 +454,7 @@ public class LocalizedNamesImpl_so extends LocalizedNamesImpl {
     namesMap.put("UY", "Uruguwaay");
     namesMap.put("UZ", "Uusbakistaan");
     namesMap.put("VA", "Faatikaan");
+    namesMap.put("VC", "Saint Vincent and the Grenadines");
     namesMap.put("VE", "Fenisuweela");
     namesMap.put("VN", "Fiyetnaam");
     namesMap.put("YE", "Yaman");
@@ -509,7 +512,6 @@ public class LocalizedNamesImpl_so extends LocalizedNamesImpl {
         "CN": "Shiinaha",
         "CO": "Kolombiya",
         "CR": "Kosta Riika",
-        "CS": "serbiya iyo Monteneegro",
         "CU": "Kuuba",
         "CV": "Cape Verde Islands",
         "CY": "Qubrus",
@@ -607,6 +609,7 @@ public class LocalizedNamesImpl_so extends LocalizedNamesImpl {
         "SL": "Siraaliyoon",
         "SN": "Sinigaal",
         "SO": "Soomaaliya",
+        "SS": "Koonfur Suudaan",
         "SY": "Suuriya",
         "SZ": "Iswaasilaand",
         "TD": "Jaad",
@@ -623,6 +626,7 @@ public class LocalizedNamesImpl_so extends LocalizedNamesImpl {
         "UY": "Uruguwaay",
         "UZ": "Uusbakistaan",
         "VA": "Faatikaan",
+        "VC": "Saint Vincent and the Grenadines",
         "VE": "Fenisuweela",
         "VN": "Fiyetnaam",
         "YE": "Yaman",

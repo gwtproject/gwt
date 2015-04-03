@@ -104,6 +104,11 @@ public class JavaResourceBase {
           "  public Throwable getException() { return null; }",
           "}");
 
+  public static final MockJavaResource CLONEABLE =
+      createMockJavaResource("java.lang.Cloneable",
+          "package java.lang;",
+          "public interface Cloneable {}");
+
   public static final MockJavaResource COLLECTION =
       createMockJavaResource("java.util.Collection",
           "package java.util;",
@@ -171,6 +176,12 @@ public class JavaResourceBase {
           "  public String value() { return \"Foo\"; }",
           "}");
 
+  public static final MockJavaResource FUNCTIONALINTERFACE =
+      createMockJavaResource("java.lang.FunctionalInterface",
+          "package java.lang;",
+          "public @interface FunctionalInterface {",
+          "}");
+
   public static final MockJavaResource INTEGER =
       createMockJavaResource("java.lang.Integer",
           "package java.lang;",
@@ -187,6 +198,12 @@ public class JavaResourceBase {
       createMockJavaResource("com.google.gwt.user.client.rpc.IsSerializable",
           "package com.google.gwt.user.client.rpc;",
           "public interface IsSerializable {",
+          "}");
+
+  public static final MockJavaResource JAVASCRIPTEXCEPTION =
+      createMockJavaResource("com.google.gwt.core.client.JavaScriptException",
+          "package com.google.gwt.core.client;",
+          "public class JavaScriptException extends RuntimeException {",
           "}");
 
   public static final MockJavaResource JAVASCRIPTOBJECT =
@@ -286,6 +303,7 @@ public class JavaResourceBase {
       createMockJavaResource("java.lang.String",
           "package java.lang;",
           "import java.io.Serializable;",
+          "import com.google.gwt.core.client.impl.SpecializeMethod;",
           "public final class String implements Comparable<String>, CharSequence, Serializable {",
           "  public String() { }",
           "  public String(char c) { }",
@@ -295,14 +313,20 @@ public class JavaResourceBase {
           "  public static String _String(String s) { return s; }",
           "  public char charAt(int index) { return 'a'; }",
           "  public int compareTo(String other) { return -1; }",
-          "  public boolean equals(Object obj) { return false; }",
+          "  @SpecializeMethod(params = String.class, target = \"equals\")",
+          "  public boolean equals(Object other) {",
+          "    return (other instanceof String) && equals((String) other);",
+          "  }",
+          "  private native boolean equals(String obj) /*-{ return false; }-*/;",
           "  public boolean equalsIgnoreCase(String str) { return false; }",
+          "  public native boolean isEmpty() /*-{ return true; }-*/;",
           "  public int length() { return 0; }",
           "  public static String valueOf(int i) { return \"\" + i; }",
           "  public static String valueOf(char c) { return \"\" + c; }",
           "  public int hashCode() { return 0; }",
           "  public String replace(char c1, char c2) { return null; }",
           "  public boolean startsWith(String str) { return false; }",
+          "  public native String substring(int start, int len) /*-{ return \"\"; }-*/;",
           "  public String toLowerCase() { return null; }",
           "  public String toString() { return this; }",
           "  public static String valueOf(boolean b) { return null; }",
@@ -330,13 +354,54 @@ public class JavaResourceBase {
           "  public void addSuppressed(Throwable ex) { }",
           "}");
 
+  public static final MockJavaResource SPECIALIZE_METHOD =
+      createMockJavaResource("com.google.gwt.core.client.impl.SpecializeMethod",
+          "package com.google.gwt.core.client.impl;",
+          "public @interface SpecializeMethod {\n",
+          "  Class<?>[] params();\n" +
+          "  String target();\n",
+          "}"
+      );
+
+  // TODO: move JS* annotations to intrinsic mock resource base
+  public static final MockJavaResource JSTYPE =
+      createMockJavaResource("com.google.gwt.core.client.js.JsType",
+          "package com.google.gwt.core.client.js;",
+          "public @interface JsType {\n",
+          "  String prototype() default \"\";\n" +
+          "}"
+      );
+  public static final MockJavaResource JSTYPEPROTOTYPE =
+      createMockJavaResource("com.google.gwt.core.client.js.impl.PrototypeOfJsType",
+          "package com.google.gwt.core.client.js.impl;",
+          "public @interface PrototypeOfJsType {\n",
+          "}");
+  public static final MockJavaResource JSEXPORT =
+      createMockJavaResource("com.google.gwt.core.client.js.JsExport",
+          "package com.google.gwt.core.client.js;",
+          "public @interface JsExport {\n",
+          "  String value() default \"\";\n",
+          "}");
+  public static final MockJavaResource JSPROPERTY =
+      createMockJavaResource("com.google.gwt.core.client.js.JsProperty",
+          "package com.google.gwt.core.client.js;",
+          "public @interface JsProperty {\n",
+          "  String value() default \"\";\n",
+          "}");
+  public static final MockJavaResource JSFUNCTION =
+      createMockJavaResource("com.google.gwt.core.client.js.JsFunction",
+          "package com.google.gwt.core.client.js;",
+          "public @interface JsFunction {\n",
+          "}");
+
   public static MockJavaResource[] getStandardResources() {
-    return new MockJavaResource[]{
+    return new MockJavaResource[] {
         AUTOCLOSEABLE, ANNOTATION, ARRAY_LIST, BYTE, BOOLEAN, CHARACTER, CHAR_SEQUENCE, CLASS,
-        CLASS_NOT_FOUND_EXCEPTION, COLLECTION, COMPARABLE, DOUBLE, ENUM, EXCEPTION, ERROR, FLOAT,
-        INTEGER, IS_SERIALIZABLE, JAVASCRIPTOBJECT, LIST, LONG, MAP, NO_CLASS_DEF_FOUND_ERROR,
-        NUMBER, OBJECT, RUNTIME_EXCEPTION, SERIALIZABLE, SHORT, STRING, STRING_BUILDER,
-        SUPPRESS_WARNINGS, THROWABLE};
+        CLASS_NOT_FOUND_EXCEPTION, CLONEABLE, COLLECTION, COMPARABLE, DOUBLE, ENUM, EXCEPTION,
+        ERROR, FUNCTIONALINTERFACE, FLOAT, INTEGER, IS_SERIALIZABLE, JAVASCRIPTEXCEPTION,
+        JAVASCRIPTOBJECT, LIST, LONG, MAP, NO_CLASS_DEF_FOUND_ERROR, NUMBER, OBJECT,
+        RUNTIME_EXCEPTION, SERIALIZABLE, SHORT, STRING, STRING_BUILDER, SUPPRESS_WARNINGS,
+        THROWABLE, SPECIALIZE_METHOD, JSTYPE, JSTYPEPROTOTYPE, JSEXPORT, JSPROPERTY, JSFUNCTION};
   }
 
   /**
@@ -345,6 +410,23 @@ public class JavaResourceBase {
   public static MockJavaResource createMockJavaResource(String resourceName,
       final String... lines) {
     return new MockJavaResource(resourceName) {
+      @Override
+      public CharSequence getContent() {
+        StringBuilder code = new StringBuilder();
+        for (String line : lines) {
+          code.append(line + "\n");
+        }
+        return code;
+      }
+    };
+  }
+
+  /**
+   * Creates a new MockResource.
+   */
+  public static MockResource createMockResource(String resourceName,
+      final String... lines) {
+    return new MockResource(resourceName) {
       @Override
       public CharSequence getContent() {
         StringBuilder code = new StringBuilder();

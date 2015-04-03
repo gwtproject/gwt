@@ -17,9 +17,6 @@ package com.google.gwt.dev.javac.asm;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.typeinfo.JType;
-import com.google.gwt.dev.asm.Opcodes;
-import com.google.gwt.dev.asm.Type;
-import com.google.gwt.dev.asm.signature.SignatureReader;
 import com.google.gwt.dev.javac.CompilationUnitTypeOracleUpdater;
 import com.google.gwt.dev.javac.MethodArgNamesLookup;
 import com.google.gwt.dev.javac.Resolver;
@@ -35,6 +32,10 @@ import com.google.gwt.dev.javac.typemodel.JRealClassType;
 import com.google.gwt.dev.javac.typemodel.JTypeParameter;
 import com.google.gwt.dev.javac.typemodel.TypeOracle;
 import com.google.gwt.dev.util.Name.BinaryName;
+
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.signature.SignatureReader;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -120,13 +121,6 @@ public class ResolveGenericsTest extends AsmTestCase {
         boolean isIntf) {
       return delegate.newRealClassType(pkg, enclosingTypeName, isLocalType,
           className, isIntf);
-    }
-
-    @Override
-    public boolean resolveAnnotation(TreeLogger logger,
-        CollectAnnotationData annotVisitor,
-        Map<Class<? extends Annotation>, Annotation> declaredAnnotations) {
-      return true;
     }
 
     @Override

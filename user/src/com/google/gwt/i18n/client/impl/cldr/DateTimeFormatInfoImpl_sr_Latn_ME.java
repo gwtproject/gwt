@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5695 $
-//  date=$Date: 2011-04-26 14:39:31 -0400 (Tue, 26 Apr 2011) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "sr_Latn_ME" locale.
@@ -28,6 +23,6 @@ public class DateTimeFormatInfoImpl_sr_Latn_ME extends DateTimeFormatInfoImpl_sr
 
   @Override
   public String dateFormatLong() {
-    return "d.MM.yyyy.";
+    return "d.MM.y.";
   }
 }

@@ -17,13 +17,20 @@
 <!-- Types from this module are visible to and imported into user code.     -->
 <!-- Every module should directly or indirectly inherit this module.        -->
 <!--                                                                        -->
-<module type="fileset">
+<module>
+
+  <!--
+    A property that can be used to see if Super Dev Mode is on.
+    It should only be set by Super Dev Mode and defined on the top so that
+    all modules can use it.
+  -->
+  <define-property name="superdevmode" values="off, on"/>
+  <set-property name="superdevmode" value="off"/>
+
   <inherits name="com.google.gwt.dev.jjs.intrinsic.Intrinsic" />
-  <inherits name="com.google.gwt.emul.Emulation" />
-  <inherits name="com.google.gwt.typedarrays.TypedArrays" />
-  <inherits name="com.google.gwt.xhr.XMLHttpRequest" />
   <inherits name="com.google.gwt.core.CompilerParameters" />
-  <inherits name="com.google.gwt.core.EmulateJsStack" />
+  <inherits name="com.google.gwt.emul.Emulation" />
+  <inherits name="com.google.gwt.core.StackTrace" />
   <inherits name="com.google.gwt.core.AsyncFragmentLoader" />
 
   <source path="client" />
@@ -36,21 +43,9 @@
   <inherits name="com.google.gwt.core.XSLinker" />
   <inherits name="com.google.gwt.core.CrossSiteIframeLinker" />
 
-  <!-- When true, compiles in support for GWT.unloadModule(), otherwise it is a no-op. -->
-  <define-property name="gwt.unloadEnabled" values="false, true"/>
-  <set-property name="gwt.unloadEnabled" value="false"/>
-
-  <replace-with class="com.google.gwt.core.client.impl.UnloadSupportEnabled">
-      <when-property-is name="gwt.unloadEnabled" value="true"/>
-      <when-type-is class="com.google.gwt.core.client.impl.UnloadSupport"/>
-  </replace-with>
-
-  <!--
-    A property that can be used to see if Super Dev Mode is on. It should only be set
-    by Super Dev Mode.
-  -->
-  <define-property name="superdevmode" values="off, on"/>
-  <set-property name="superdevmode" value="off"/>
+  <!-- std and xs linkers are deprecated and will emit a warning, which can be turned off -->
+  <define-configuration-property name="iframe.linker.suppressDeprecationWarning" is-multi-valued="false" />
+  <set-configuration-property name="iframe.linker.suppressDeprecationWarning" value="false" />
 
   <replace-with class="com.google.gwt.core.client.impl.SuperDevModeLogger">
       <when-property-is name="superdevmode" value="on"/>
@@ -64,5 +59,4 @@
 
   <add-linker name="soycReport" />
   <add-linker name="symbolMaps" />
-  
 </module>

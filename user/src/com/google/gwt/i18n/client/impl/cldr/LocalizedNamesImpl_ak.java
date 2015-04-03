@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "ak" locale.
@@ -260,7 +255,6 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
         "SE",
         "CH",
         "SX",
-        "CS",
         "TA",
         "TH",
         "TW",
@@ -287,6 +281,7 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "UY",
         "YE",
         "ZM",
@@ -343,7 +338,6 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
     namesMap.put("CN", "Kyaena");
     namesMap.put("CO", "Kolombia");
     namesMap.put("CR", "Kɔsta Rika");
-    namesMap.put("CS", "Sɛɛbea ne Mɔntenɛgro");
     namesMap.put("CU", "Kuba");
     namesMap.put("CV", "Kepvɛdfo Islands");
     namesMap.put("CY", "Saeprɔs");
@@ -518,7 +512,6 @@ public class LocalizedNamesImpl_ak extends LocalizedNamesImpl {
         "CN": "Kyaena",
         "CO": "Kolombia",
         "CR": "Kɔsta Rika",
-        "CS": "Sɛɛbea ne Mɔntenɛgro",
         "CU": "Kuba",
         "CV": "Kepvɛdfo Islands",
         "CY": "Saeprɔs",

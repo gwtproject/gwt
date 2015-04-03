@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,6 +15,8 @@
  */
 
 package com.google.gwt.dev.jjs.impl;
+
+import com.google.gwt.thirdparty.guava.common.base.Joiner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +108,7 @@ public class OptimizerStats {
 
   /**
    * Increment the number of times the tree was modified.
-   * 
+   *
    * @param numMods the number of changes made to the AST.
    */
   public OptimizerStats recordModified(int numMods) {
@@ -128,6 +130,19 @@ public class OptimizerStats {
   public OptimizerStats recordVisits(int numVisits) {
     this.numVisits += numVisits;
     return this;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("%s (%d/%d)", name, getNumMods(), getNumVisits()));
+    if (children.isEmpty()) {
+      return sb.toString();
+    }
+    sb.append(" [");
+    sb.append(Joiner.on(",").join(children));
+    sb.append("]");
+    return sb.toString();
   }
 
   private void prettyPrint(StringBuilder builder, int level) {

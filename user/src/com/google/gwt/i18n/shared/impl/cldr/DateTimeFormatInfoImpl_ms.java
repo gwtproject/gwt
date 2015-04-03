@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "ms" locale.
@@ -46,7 +41,7 @@ public class DateTimeFormatInfoImpl_ms extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "dd/MM/yyyy";
+    return "d MMM y";
   }
 
   @Override
@@ -68,6 +63,11 @@ public class DateTimeFormatInfoImpl_ms extends DateTimeFormatInfoImpl {
         "S.M.",
         "TM"
     };
+  }
+
+  @Override
+  public String formatHour24Minute() {
+    return "H:mm";
   }
 
   @Override
@@ -181,7 +181,7 @@ public class DateTimeFormatInfoImpl_ms extends DateTimeFormatInfoImpl {
         "Mei",
         "Jun",
         "Jul",
-        "Ogos",
+        "Ogo",
         "Sep",
         "Okt",
         "Nov",
@@ -202,10 +202,10 @@ public class DateTimeFormatInfoImpl_ms extends DateTimeFormatInfoImpl {
   @Override
   public String[] quartersShort() {
     return new String[] {
-        "Suku 1",
-        "Suku Ke-2",
-        "Suku Ke-3",
-        "Suku Ke-4"
+        "S1",
+        "S2",
+        "S3",
+        "S4"
     };
   }
 

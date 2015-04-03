@@ -21,7 +21,6 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JType;
-import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.uibinder.rebind.UiBinderContext;
 import com.google.gwt.uibinder.rebind.UiBinderWriter;
 import com.google.gwt.uibinder.rebind.XMLAttribute;
@@ -32,6 +31,7 @@ import com.google.gwt.uibinder.rebind.model.OwnerFieldClass;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -40,6 +40,17 @@ import java.util.Map.Entry;
  * initialize them.
  */
 public class BeanParser implements ElementParser {
+
+  /**
+   * Mapping between parameters and special UIObject methods. The {@link UIObjectParser} has a few
+   * methods that extend the normal bean naming pattern. So, that implementations of
+   * {@link IsWidget} behave like UIObjects, they have to be translated.
+   */
+  private static final Map<String, String> ADD_PROPERTY_TO_SETTER_MAP =
+      new HashMap<String, String>() { {
+        put("addStyleNames", "addStyleName");
+        put("addStyleDependentNames", "addStyleDependentName");
+      }};
 
   private final UiBinderContext context;
 
@@ -51,7 +62,7 @@ public class BeanParser implements ElementParser {
    * Generates code to initialize all bean attributes on the given element.
    * Includes support for &lt;ui:attribute /&gt; children that will apply to
    * setters
-   * 
+   *
    * @throws UnableToCompleteException
    */
   public void parse(XMLElement elem, String fieldName, JClassType type,
@@ -62,6 +73,7 @@ public class BeanParser implements ElementParser {
     final Map<String, String> setterValues = new HashMap<String, String>();
     final Map<String, String> localizedValues = fetchLocalizedAttributeValues(
         elem, writer);
+    final Map<String, String[]> adderValues = new HashMap<>();
 
     final Map<String, String> requiredValues = new HashMap<String, String>();
     final Map<String, JType> unfilledRequiredParams = new HashMap<String, JType>();
@@ -71,9 +83,8 @@ public class BeanParser implements ElementParser {
 
     /*
      * Handle @UiFactory and @UiConstructor, but only if the user
-     * hasn't provided an instance via @UiField(provided = true) 
+     * hasn't provided an instance via @UiField(provided = true)
      */
-    
     JAbstractMethod creator = null;
     OwnerField uiField = writer.getOwnerClass().getUiField(fieldName);
     if ((uiField == null) || (!uiField.isProvided())) {
@@ -153,18 +164,33 @@ public class BeanParser implements ElementParser {
         unfilledRequiredParams.remove(propertyName);
       } else {
         JMethod setter = ownerFieldClass.getSetter(propertyName);
-        if (setter == null) {
+        if (setter != null) {
+          String n = attribute.getName();
+          String value = elem.consumeAttributeWithDefault(n, null, getParamTypes(setter));
+
+          if (value == null) {
+            writer.die(elem, "Unable to parse %s.", attribute);
+          }
+          setterValues.put(propertyName, value);
+        } else if (ADD_PROPERTY_TO_SETTER_MAP.containsKey(propertyName)) {
+          String addMethod = ADD_PROPERTY_TO_SETTER_MAP.get(propertyName);
+          JType stringType = writer.getOracle().findType(String.class.getName());
+          if (ownerFieldClass.getRawType().findMethod(addMethod, new JType[]{stringType}) != null) {
+            String n = attribute.getName();
+            String[] value = elem.consumeStringArrayAttribute(n);
+
+            if (value == null) {
+              writer.die(elem, "Unable to parse %s.", attribute);
+            }
+            adderValues.put(addMethod, value);
+          } else {
+            writer.die(elem, "Class %s has no appropriate %s() method",
+                elem.getLocalName(), addMethod);
+          }
+        } else {
           writer.die(elem, "Class %s has no appropriate set%s() method",
               elem.getLocalName(), initialCap(propertyName));
         }
-        String n = attribute.getName();
-        String value = elem.consumeAttributeWithDefault(n, null,
-            getParamTypes(setter));
-
-        if (value == null) {
-          writer.die(elem, "Unable to parse %s.", attribute);
-        }
-        setterValues.put(propertyName, value);
       }
     }
 
@@ -203,6 +229,13 @@ public class BeanParser implements ElementParser {
       writer.addStatement("%s.set%s(%s);", fieldName, initialCap(propertyName),
           value);
     }
+
+    for (Map.Entry<String, String[]> entry : adderValues.entrySet()) {
+      String addMethodName = entry.getKey();
+      for (String s : entry.getValue()) {
+        writer.addStatement("%s.%s(%s);", fieldName, addMethodName, s);
+      }
+    }
   }
 
   /**
@@ -235,7 +268,7 @@ public class BeanParser implements ElementParser {
   }
 
   private String initialCap(String propertyName) {
-    return StringCase.toUpper(propertyName.substring(0, 1))
+    return propertyName.substring(0, 1).toUpperCase(Locale.ROOT)
         + propertyName.substring(1);
   }
 

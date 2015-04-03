@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -230,8 +230,8 @@ public class CloneExpressionVisitor extends JVisitor {
     // Only the runAsync call itself needs cloning, the onSuccess can be shared.
     JExpression runAsyncCall = cloneExpression(x.getRunAsyncCall());
     expression =
-        new JRunAsync(x.getSourceInfo(), x.getRunAsyncId(), x.getName(), x.hasExplicitClassLiteral(),
-            runAsyncCall, x.getOnSuccessCall());
+        new JRunAsync(x.getSourceInfo(), x.getRunAsyncId(), x.getName(),
+            x.hasExplicitClassLiteral(), runAsyncCall, x.getOnSuccessCall());
     return false;
   }
 
@@ -252,7 +252,7 @@ public class CloneExpressionVisitor extends JVisitor {
   public boolean visit(JNewArray x, Context ctx) {
     expression =
         new JNewArray(x.getSourceInfo(), x.getArrayType(), cloneExpressions(x.dims),
-            cloneExpressions(x.initializers), x.getClassLiterals());
+            cloneExpressions(x.initializers), cloneExpression(x.getLeafTypeClassLiteral()));
     return false;
   }
 
@@ -269,7 +269,7 @@ public class CloneExpressionVisitor extends JVisitor {
     expression = new JNumericEntry(x.getSourceInfo(), x.getKey(), x.getValue());
     return false;
   }
-  
+
   @Override
   public boolean visit(JNullLiteral x, Context ctx) {
     expression = x;

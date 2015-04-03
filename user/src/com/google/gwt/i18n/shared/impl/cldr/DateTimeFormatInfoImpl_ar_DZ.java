@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6177 $
-//  date=$Date: 2011-09-27 11:37:06 -0400 (Tue, 27 Sep 2011) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "ar_DZ" locale.
@@ -28,12 +23,12 @@ public class DateTimeFormatInfoImpl_ar_DZ extends DateTimeFormatInfoImpl_ar_001 
 
   @Override
   public String dateFormatMedium() {
-    return "yyyy/MM/dd";
+    return "y/MM/dd";
   }
 
   @Override
   public String dateFormatShort() {
-    return "yyyy/M/d";
+    return "y/M/d";
   }
 
   @Override
@@ -48,7 +43,66 @@ public class DateTimeFormatInfoImpl_ar_DZ extends DateTimeFormatInfoImpl_ar_001 
 
   @Override
   public String formatYearMonthNum() {
-    return "yyyy/M";
+    return "y/M";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "y/M/d";
+  }
+
+  @Override
+  public String[] monthsFull() {
+    return new String[] {
+        "جانفي",
+        "فيفري",
+        "مارس",
+        "أفريل",
+        "ماي",
+        "جوان",
+        "جويلية",
+        "أوت",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrow() {
+    return new String[] {
+        "ج",
+        "ف",
+        "م",
+        "أ",
+        "م",
+        "ج",
+        "ج",
+        "أ",
+        "س",
+        "أ",
+        "ن",
+        "د"
+    };
+  }
+
+  @Override
+  public String[] monthsShort() {
+    return new String[] {
+        "جانفي",
+        "فيفري",
+        "مارس",
+        "أفريل",
+        "ماي",
+        "جوان",
+        "جويلية",
+        "أوت",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر"
+    };
   }
 
   @Override

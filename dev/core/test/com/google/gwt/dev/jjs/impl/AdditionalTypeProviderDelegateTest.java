@@ -88,7 +88,7 @@ public class AdditionalTypeProviderDelegateTest extends OptimizerTestBase {
      sourceOracle.addOrReplace(new MockJavaResource("test.A") {
        @Override
        public CharSequence getContent() {
-         StringBuffer code = new StringBuffer();
+         StringBuilder code = new StringBuilder();
          code.append("package test;\n");
          code.append("class A {\n");
          code.append("  void myFunc() {\n");
@@ -104,7 +104,7 @@ public class AdditionalTypeProviderDelegateTest extends OptimizerTestBase {
      sourceOracle.addOrReplace(new MockJavaResource("test.B") {
        @Override
        public CharSequence getContent() {
-         StringBuffer code = new StringBuffer();
+         StringBuilder code = new StringBuilder();
          code.append("package test;\n");
          code.append("import myPackage.InsertedClass;");
          code.append("class B {\n");
@@ -123,7 +123,7 @@ public class AdditionalTypeProviderDelegateTest extends OptimizerTestBase {
      sourceOracle.addOrReplace(new MockJavaResource("test.B1") {
        @Override
        public CharSequence getContent() {
-         StringBuffer code = new StringBuffer();
+         StringBuilder code = new StringBuilder();
          code.append("package test;\n");
          code.append("class B1 {\n");
          code.append("  int func() {\n");
@@ -137,29 +137,29 @@ public class AdditionalTypeProviderDelegateTest extends OptimizerTestBase {
   }
 
   public void testInsertedClass() throws UnableToCompleteException {
-    JProgram program = compileSnippet("void", "new test.B().func();");
+    JProgram program = compileSnippet("void", "new test.B().func();", true);
 
     // Make sure the compiled classes appeared.
-    JDeclaredType bType = findType(program, "test.B");
+    JDeclaredType bType = findDeclaredType(program, "test.B");
     assertNotNull("Unknown type B", bType);
-    JDeclaredType insertedClassType = findType(program, "myPackage.InsertedClass");
+    JDeclaredType insertedClassType = findDeclaredType(program, "myPackage.InsertedClass");
     assertNotNull("Unknown type InsertedClass", insertedClassType);
   }
 
   public void testInsertedClass2() throws UnableToCompleteException {
-    JProgram program = compileSnippet("void", "new test.B1().func();");
+    JProgram program = compileSnippet("void", "new test.B1().func();", true);
 
     // Make sure the compiled classes appeared.
-    JDeclaredType bType = findType(program, "test.B1");
+    JDeclaredType bType = findDeclaredType(program, "test.B1");
     assertNotNull("Unknown type B1", bType);
-    JDeclaredType insertedClassType = findType(program, "myPackage.InsertedClass");
+    JDeclaredType insertedClassType = findDeclaredType(program, "myPackage.InsertedClass");
     assertNotNull("Unknown type InsertedClass", insertedClassType);
   }
 
   // Make sure regular code not using the AdditionalTypeProviderDelegate still works.
   public void testSimpleParse() throws UnableToCompleteException {
-    JProgram program = compileSnippet("void", "new test.A();");
-    JDeclaredType goodClassType = findType(program, "test.A");
+    JProgram program = compileSnippet("void", "new test.A();", true);
+    JDeclaredType goodClassType = findDeclaredType(program, "test.A");
     assertNotNull("Unknown class A", goodClassType);
   }
 
@@ -168,7 +168,7 @@ public class AdditionalTypeProviderDelegateTest extends OptimizerTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.C") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("import myPackage.UnknownClass;");
         code.append("class C {\n");
@@ -181,7 +181,7 @@ public class AdditionalTypeProviderDelegateTest extends OptimizerTestBase {
       }
     });
     try {
-      compileSnippet("void", "new test.C();");
+      compileSnippet("void", "new test.C();", true);
       fail("Shouldn't have compiled");
     } catch (UnableToCompleteException expected) {
     }
@@ -193,7 +193,7 @@ public class AdditionalTypeProviderDelegateTest extends OptimizerTestBase {
     sourceOracle.addOrReplace(new MockJavaResource("test.D") {
       @Override
       public CharSequence getContent() {
-        StringBuffer code = new StringBuffer();
+        StringBuilder code = new StringBuilder();
         code.append("package test;\n");
         code.append("class D {\n");
         code.append("  int func() {\n");
@@ -205,7 +205,7 @@ public class AdditionalTypeProviderDelegateTest extends OptimizerTestBase {
       }
     });
     try {
-      compileSnippet("void", "new test.D();");
+      compileSnippet("void", "new test.D();", true);
       fail("Shouldn't have compiled");
     } catch (UnableToCompleteException expected) {
     }

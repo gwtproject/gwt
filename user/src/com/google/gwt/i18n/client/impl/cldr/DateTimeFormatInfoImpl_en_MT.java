@@ -14,17 +14,12 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6465 $
-//  type=GB
-//  date=$Date: 2012-01-27 12:47:35 -0500 (Fri, 27 Jan 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "en_MT" locale.
  */
-public class DateTimeFormatInfoImpl_en_MT extends DateTimeFormatInfoImpl_en {
+public class DateTimeFormatInfoImpl_en_MT extends DateTimeFormatInfoImpl_en_150 {
 
   @Override
   public String dateFormatFull() {
@@ -37,23 +32,18 @@ public class DateTimeFormatInfoImpl_en_MT extends DateTimeFormatInfoImpl_en {
   }
 
   @Override
-  public String dateFormatMedium() {
-    return "dd MMM y";
+  public String dateFormatShort() {
+    return "dd/MM/y";
   }
 
   @Override
-  public String dateFormatShort() {
-    return "dd/MM/yyyy";
+  public int firstDayOfTheWeek() {
+    return 0;
   }
 
   @Override
   public String formatMonthAbbrevDay() {
     return "dd MMM";
-  }
-
-  @Override
-  public String formatMonthFullDay() {
-    return "dd MMMM";
   }
 
   @Override
@@ -72,13 +62,8 @@ public class DateTimeFormatInfoImpl_en_MT extends DateTimeFormatInfoImpl_en {
   }
 
   @Override
-  public String formatYearMonthFullDay() {
-    return "d MMMM y";
-  }
-
-  @Override
   public String formatYearMonthNumDay() {
-    return "dd/MM/yyyy";
+    return "dd/MM/y";
   }
 
   @Override
@@ -89,20 +74,5 @@ public class DateTimeFormatInfoImpl_en_MT extends DateTimeFormatInfoImpl_en {
   @Override
   public String timeFormatFull() {
     return "HH:mm:ss zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "HH:mm:ss z";
-  }
-
-  @Override
-  public String timeFormatMedium() {
-    return "HH:mm:ss";
-  }
-
-  @Override
-  public String timeFormatShort() {
-    return "HH:mm";
   }
 }

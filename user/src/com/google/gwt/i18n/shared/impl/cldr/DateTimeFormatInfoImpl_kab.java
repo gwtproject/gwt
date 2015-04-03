@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "kab" locale.
@@ -51,7 +46,7 @@ public class DateTimeFormatInfoImpl_kab extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d/M/yyyy";
+    return "d/M/y";
   }
 
   @Override
@@ -117,7 +112,7 @@ public class DateTimeFormatInfoImpl_kab extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "d MMM, y";
+    return "d MMM y";
   }
 
   @Override
@@ -136,18 +131,23 @@ public class DateTimeFormatInfoImpl_kab extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatYearMonthNumDay() {
+    return "d/M/y";
+  }
+
+  @Override
   public String formatYearMonthWeekdayDay() {
     return "EEE d MMM y";
   }
 
   @Override
   public String formatYearQuarterFull() {
-    return "'T'QQQQ y";
+    return "QQQQ y";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "'T'Q y";
+    return "Q y";
   }
 
   @Override

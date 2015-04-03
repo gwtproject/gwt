@@ -72,21 +72,20 @@ public class DevirtualizerTest extends OptimizerTestBase {
     // Constructs an expectation about the resulting devirtualized method calls of a(). The salient
     // point in the results below is that the JSO method used for val1 and val1 has a different name
     // the method used for val2 and val3.
-    StringBuffer expected = new StringBuffer();
+    StringBuilder expected = new StringBuilder();
     expected.append("int result = ");
-    expected.append("EntryPoint$Jso1.a__devirtual$(EntryPoint.val1) + ");
-    expected.append("EntryPoint$Jso1.a__devirtual$(EntryPoint.val2) + ");
-    expected.append("EntryPoint$Jso2.a1__devirtual$(EntryPoint.val3) + ");
-    expected.append("EntryPoint$Jso2.a1__devirtual$(EntryPoint.val4);");
+    expected.append("EntryPoint$Jso1.a__I__devirtual$(EntryPoint.val1) + ");
+    expected.append("EntryPoint$Jso1.a__I__devirtual$(EntryPoint.val2) + ");
+    expected.append("EntryPoint$Jso2.a__I__devirtual$(EntryPoint.val3) + ");
+    expected.append("EntryPoint$Jso2.a__I__devirtual$(EntryPoint.val4);");
 
     Result result = optimize("void", code.toString());
     // Asserts that a() method calls were redirected to the devirtualized version.
     result.intoString(expected.toString());
     // Asserts that a() AND b() method definitions were both duplicated as devirtualized versions
     // even though b() was never called.
-    result.classHasMethodSnippets("EntryPoint$Jso1", Lists.newArrayList("public final int a();",
-        "public final int b();", "public static final int $a(EntryPoint$Jso1 this$static);",
-        "public static final int $b(EntryPoint$Jso1 this$static);"));
+    result.classHasMethods("EntryPoint$Jso1", Lists.newArrayList(
+        "a()I", "b()I", "$a(Ltest/EntryPoint$Jso1;)I", "$b(Ltest/EntryPoint$Jso1;)I"));
   }
 
   public void testDevirtualizeString() throws UnableToCompleteException {
@@ -118,15 +117,16 @@ public class DevirtualizerTest extends OptimizerTestBase {
     // Constructs an expectation about the resulting devirtualized method calls for
     // Comparable.compareTo() and CharSequence.length(). Note that calls to CharSequence.length and
     // String.length are devirtualized separately.
-    StringBuffer expected = new StringBuffer();
+    StringBuilder expected = new StringBuilder();
     expected.append("int result = ");
-    expected.append(
+    expected.append(String.format(
         // Methods in Comparable and CharSequence end up in String even if used by a JSO.
-        "String.compareTo__devirtual$(EntryPoint.javaVal, EntryPoint.javaVal) + " +
-        "String.compareTo__devirtual$(EntryPoint.jsoVal, EntryPoint.jsoVal) + " +
-        "String.compareTo__devirtual$(EntryPoint.stringVal, EntryPoint.stringVal) + " +
-        "String.length__devirtual$(EntryPoint.stringCharSeq) + " +
-        "String.length1__devirtual$(EntryPoint.aString);");
+        "String.compareTo_%s__I__devirtual$(EntryPoint.javaVal, EntryPoint.javaVal) + " +
+        "String.compareTo_%s__I__devirtual$(EntryPoint.jsoVal, EntryPoint.jsoVal) + " +
+        "String.compareTo_%s__I__devirtual$(EntryPoint.stringVal, EntryPoint.stringVal) + " +
+        "String.length__I__devirtual$(EntryPoint.stringCharSeq) + " +
+        "String.length__I__devirtual$(EntryPoint.aString);", "Ljava_lang_Object",
+        "Ljava_lang_Object", "Ljava_lang_Object"));
 
     Result result = optimize("void", code.toString());
     result.intoString(expected.toString());

@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6465 $
-//  type=MO
-//  date=$Date: 2012-01-27 12:47:35 -0500 (Fri, 27 Jan 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "zh_Hans_MO" locale.
@@ -32,13 +27,9 @@ public class LocalizedNamesImpl_zh_Hans_MO extends LocalizedNamesImpl_zh_Hans {
   @Override
   protected void loadNameMapJava() {
     super.loadNameMapJava();
-    namesMap.put("CC", "科科斯（基林）群岛");
     namesMap.put("CP", "克利柏顿岛");
-    namesMap.put("GP", "瓜德罗普");
-    namesMap.put("LA", "老挝");
     namesMap.put("ME", "黑山");
-    namesMap.put("MS", "蒙塞拉特");
-    namesMap.put("SC", "塞舌尔");
+    namesMap.put("PM", "圣皮埃尔和密克隆");
   }
 
   @Override
@@ -48,13 +39,9 @@ public class LocalizedNamesImpl_zh_Hans_MO extends LocalizedNamesImpl_zh_Hans {
 
   private native JavaScriptObject loadMyNameMap() /*-{
     return {
-        "CC": "科科斯（基林）群岛",
         "CP": "克利柏顿岛",
-        "GP": "瓜德罗普",
-        "LA": "老挝",
         "ME": "黑山",
-        "MS": "蒙塞拉特",
-        "SC": "塞舌尔"
+        "PM": "圣皮埃尔和密克隆"
     };
   }-*/;
 }

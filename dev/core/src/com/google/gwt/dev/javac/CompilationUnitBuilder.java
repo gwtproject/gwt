@@ -35,7 +35,7 @@ public abstract class CompilationUnitBuilder {
   static class GeneratedCompilationUnitBuilder extends CompilationUnitBuilder {
     private final GeneratedUnit generatedUnit;
 
-    private GeneratedCompilationUnitBuilder(GeneratedUnit generatedUnit) {
+    public GeneratedCompilationUnitBuilder(GeneratedUnit generatedUnit) {
       this.generatedUnit = generatedUnit;
     }
 
@@ -71,11 +71,6 @@ public abstract class CompilationUnitBuilder {
         CategorizedProblem[] problems) {
       return new GeneratedCompilationUnit(generatedUnit, compiledClasses, types, dependencies,
           jsniMethods, methodArgs, problems);
-    }
-
-    @Override
-    boolean isGenerated() {
-      return true;
     }
   }
 
@@ -242,10 +237,6 @@ public abstract class CompilationUnitBuilder {
     return resource.getPathPrefix() + resource.getPath();
   }
 
-  public static String makeContentId(String typeName, String strongHash) {
-    return typeName + ':' + strongHash;
-  }
-
   static String getLocationFor(GeneratedUnit generatedUnit) {
     String location = generatedUnit.optionalFileLocation();
     if (location != null) {
@@ -315,11 +306,6 @@ public abstract class CompilationUnitBuilder {
     return this;
   }
 
-  public CompilationUnitBuilder setCompiledClasses(List<CompiledClass> compiledClasses) {
-    this.compiledClasses = compiledClasses;
-    return this;
-  }
-
   public CompilationUnitBuilder setDependencies(Dependencies dependencies) {
     this.dependencies = dependencies;
     return this;
@@ -340,11 +326,6 @@ public abstract class CompilationUnitBuilder {
     return this;
   }
 
-  public CompilationUnitBuilder setSource(String source) {
-    this.source = source;
-    return this;
-  }
-
   public CompilationUnitBuilder setTypes(List<JDeclaredType> types) {
     this.types = types;
     return this;
@@ -361,11 +342,4 @@ public abstract class CompilationUnitBuilder {
       List<JDeclaredType> types, Dependencies dependencies,
       Collection<? extends JsniMethod> jsniMethods, MethodArgNamesLookup methodArgs,
       CategorizedProblem[] errors);
-
-  /**
-   * This only matters for {@link ArtificialRescueChecker}.
-   */
-  boolean isGenerated() {
-    return false;
-  }
 }

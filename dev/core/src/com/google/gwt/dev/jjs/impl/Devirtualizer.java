@@ -38,10 +38,8 @@ import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.impl.MakeCallsStatic.CreateStaticImplsVisitor;
 import com.google.gwt.dev.jjs.impl.MakeCallsStatic.StaticCallConverter;
-import com.google.gwt.thirdparty.guava.common.collect.HashMultiset;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
-import com.google.gwt.thirdparty.guava.common.collect.Multiset;
 
 import java.util.List;
 import java.util.Map;
@@ -75,8 +73,6 @@ import java.util.Map;
  * expressions.
  */
 public class Devirtualizer {
-  // TODO(rluble): rename the class as Devirtualizer as it deals with all three instances of
-  // devirtualization (arrays, strings and JSOs).
 
   /**
    * Rewrite any virtual dispatches to Object, Strings or JavaScriptObject such that
@@ -111,7 +107,12 @@ public class Devirtualizer {
       if (!mightNeedDevirtualization(method)) {
         return;
       }
-      JType instanceType = ((JReferenceType) x.getInstance().getType()).getUnderlyingType();
+      JType instanceType = x.getInstance().getType().getUnderlyingType();
+
+      if (instanceType instanceof JInterfaceType && ((JInterfaceType) instanceType).isJsType()) {
+        return;
+      }
+
       // If the instance can't possibly be a JSO, String or an interface implemented by String, do
       // not devirtualize.
       if (instanceType != program.getTypeJavaLangObject()
@@ -124,7 +125,8 @@ public class Devirtualizer {
           && !program.getTypeJavaLangString().getImplements().contains(instanceType)
           // it is a super.m() call and the superclass is not a JSO. (this case is NOT reached if
           // MakeCallsStatic was called).
-          || x.isStaticDispatchOnly() && !program.isJavaScriptObject(method.getEnclosingType())) {
+          || x.isStaticDispatchOnly()
+          && !program.typeOracle.isJavaScriptObject(method.getEnclosingType())) {
         return;
       }
 
@@ -179,14 +181,15 @@ public class Devirtualizer {
             findOverridingMethod(method, program.typeOracle.getSingleJsoImpl(targetType));
         assert overridingMethod != null;
 
-        JMethod jsoStaticImpl = getStaticImpl(overridingMethod);
+        JMethod jsoStaticImpl =
+            staticImplCreator.getOrCreateStaticImpl(program, overridingMethod);
         devirtualMethodByMethod.put(method, jsoStaticImpl);
-      } else if (program.isJavaScriptObject(targetType)) {
+      } else if (program.typeOracle.isJavaScriptObject(targetType)) {
         // A virtual dispatch on a target that is already known to be a JavaScriptObject, this
         // should have been handled by MakeCallsStatic.
         // TODO(rluble): verify that this case can not arise in optimized mode and if so
         // remove as is an unnecessary optimization.
-        JMethod devirtualMethod = getStaticImpl(method);
+        JMethod devirtualMethod = staticImplCreator.getOrCreateStaticImpl(program, method);
         devirtualMethodByMethod.put(method, devirtualMethod);
       } else {
         JMethod devirtualMethod = getOrCreateDevirtualMethod(method);
@@ -200,7 +203,7 @@ public class Devirtualizer {
       if (targetType == null || !method.needsVtable()) {
         return false;
       } else if (devirtualMethodByMethod.containsKey(method)
-          || program.isJavaScriptObject(targetType)
+          || program.typeOracle.isJavaScriptObject(targetType)
           || program.typeOracle.isSingleJsoImpl(targetType)
           || program.typeOracle.isDualJsoInterface(targetType)
           || targetType == program.getTypeJavaLangObject()
@@ -245,11 +248,6 @@ public class Devirtualizer {
    * Contains the Cast.instanceofArray method.
    */
   private final JMethod isJavaArray;
-  /**
-   * Key is the method signature, value is the number of unique instances with
-   * the same signature.
-   */
-  private Multiset<String> jsoMethodInstances = HashMultiset.create();
 
   /**
    * Contains the set of devirtualizing methods that replace polymorphic calls
@@ -269,10 +267,11 @@ public class Devirtualizer {
   private JMethod createDevirtualMethodFor(JMethod method, JDeclaredType inClass) {
     SourceInfo sourceInfo = method.getSourceInfo().makeChild();
 
-    int methodCount = jsoMethodInstances.add(method.getSignature(),1);
-    String  prefix = method.getName() + (methodCount == 0 ? "" : methodCount);
+    String prefix = computeEscapedSignature(method.getSignature());
     JMethod devirtualMethod = new JMethod(sourceInfo, prefix + "__devirtual$",
         inClass, method.getType(), false, true, true, AccessModifier.PUBLIC);
+    // TODO(rluble): DoNotInline should be carried over if 'any' of the targets is marked so.
+    devirtualMethod.setInliningAllowed(method.isInliningAllowed());
     devirtualMethod.setBody(new JMethodBody(sourceInfo));
     devirtualMethod.setSynthetic();
     inClass.addMethod(devirtualMethod);
@@ -289,6 +288,15 @@ public class Devirtualizer {
     sourceInfo.addCorrelation(sourceInfo.getCorrelator().by(devirtualMethod));
 
     return devirtualMethod;
+  }
+
+  /**
+   * A normal method signature contains characters that are not valid in a method name. If you want
+   * to construct a method name based on an existing method signature then those characters need to
+   * be escaped.
+   */
+  private static String computeEscapedSignature(String methodSignature) {
+    return methodSignature.replaceAll("[\\<\\>\\(\\)\\;\\/\\[]", "_");
   }
 
   private Devirtualizer(JProgram program) {
@@ -311,7 +319,6 @@ public class Devirtualizer {
 
     RewriteVirtualDispatches rewriter = new RewriteVirtualDispatches();
     rewriter.accept(program);
-    assert (rewriter.didChange());
   }
 
   /**
@@ -336,7 +343,7 @@ public class Devirtualizer {
    */
   private static JExpression constructMinimalCondition(JMethod checkMethod, JVariableRef target,
       JMethodCall trueDispatch, JExpression falseDispatch) {
-    // TODO(rluble): Maybe we should emit sligthly different code in checked mode, so that if
+    // TODO(rluble): Maybe we should emit slightly different code in checked mode, so that if
     // no condition is met an exception would be thrown rather than cascading.
     if (falseDispatch == null && trueDispatch == null) {
       return null;
@@ -424,7 +431,7 @@ public class Devirtualizer {
       // If it is an interface implemented both by JSOs and regular Java Objects;
       possibleTargetTypes = HAS_JAVA_VIRTUAL_DISPATCH | JSO;
     } else if (program.typeOracle.isSingleJsoImpl(enclosingType) ||
-        program.isJavaScriptObject(enclosingType)) {
+        program.typeOracle.isJavaScriptObject(enclosingType)) {
       // If it is either an interface implemented by JSOs or JavaScriptObject or one of its
       // subclasses.
       possibleTargetTypes = JSO;
@@ -442,8 +449,9 @@ public class Devirtualizer {
     if ((possibleTargetTypes & STRING) != 0) {
       JMethod overridingMethod = findOverridingMethod(method, program.getTypeJavaLangString());
       assert overridingMethod != null : method.getEnclosingType().getName() + "::" +
-          method.getName() + " not overriden by String";
-      dispatchToMethodByTargetType.put(STRING, getStaticImpl(overridingMethod));
+          method.getName() + " not overridden by String";
+      dispatchToMethodByTargetType.put(STRING,
+          staticImplCreator.getOrCreateStaticImpl(program, overridingMethod));
     }
     if ((possibleTargetTypes & JSO) != 0) {
       JMethod overridingMethod = findOverridingMethod(method,
@@ -452,15 +460,17 @@ public class Devirtualizer {
         overridingMethod = findOverridingMethod(method, program.getJavaScriptObject());
       }
       assert overridingMethod != null : method.getEnclosingType().getName() + "::" +
-          method.getName() + " not overriden by JavaScriptObject";
-      dispatchToMethodByTargetType.put(JSO, getStaticImpl(overridingMethod));
+          method.getName() + " not overridden by JavaScriptObject";
+      dispatchToMethodByTargetType.put(JSO,
+          staticImplCreator.getOrCreateStaticImpl(program, overridingMethod));
     }
     if ((possibleTargetTypes & JAVA_ARRAY) != 0) {
       // Arrays only implement Object methods as the Clonable interface is not supported in GWT.
       JMethod overridingMethod = findOverridingMethod(method, program.getTypeJavaLangObject());
       assert overridingMethod != null : method.getEnclosingType().getName() + "::" +
-          method.getName() + " not overriden by Object";
-      dispatchToMethodByTargetType.put(JAVA_ARRAY, getStaticImpl(overridingMethod));
+          method.getName() + " not overridden by Object";
+      dispatchToMethodByTargetType.put(JAVA_ARRAY,
+          staticImplCreator.getOrCreateStaticImpl(program, overridingMethod));
     }
     if ((possibleTargetTypes & HAS_JAVA_VIRTUAL_DISPATCH) != 0) {
       dispatchToMethodByTargetType.put(HAS_JAVA_VIRTUAL_DISPATCH, method);
@@ -489,8 +499,14 @@ public class Devirtualizer {
       // It is an interface implemented by String or arrays, place it in Object.
       devirtualMethodEnclosingClass = program.getTypeJavaLangObject();
     }
-    // The class where the method is being place is in the current compile.
-    assert !program.isReferenceOnly(devirtualMethodEnclosingClass);
+    // Devirtualization of external methods stays external and devirtualization of internal methods
+    // stays internal.
+    assert program.isReferenceOnly(devirtualMethodEnclosingClass)
+        == program.isReferenceOnly(method.getEnclosingType());
+    // TODO(stalcup): devirtualization is modifying both internal and external types. Really
+    // external types should never be modified. Change the point at which types are saved into
+    // libraries to be after normalization has occurred, so that no further modification is
+    // necessary when loading external types.
     JMethod devirtualMethod = createDevirtualMethodFor(method, devirtualMethodEnclosingClass);
 
     /**
@@ -541,15 +557,5 @@ public class Devirtualizer {
     methodByDevirtualMethod.put(method, devirtualMethod);
 
     return devirtualMethod;
-  }
-
-  private JMethod getStaticImpl(JMethod method) {
-    assert !method.isStatic();
-    JMethod staticImpl = program.getStaticImpl(method);
-    if (staticImpl == null) {
-      staticImplCreator.accept(method);
-      staticImpl = program.getStaticImpl(method);
-    }
-    return staticImpl;
   }
 }

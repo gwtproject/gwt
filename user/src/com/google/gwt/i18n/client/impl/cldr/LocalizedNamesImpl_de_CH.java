@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "de_CH" locale.
@@ -67,7 +62,6 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "BA",
         "BW",
         "BV",
-        "BQ",
         "BR",
         "VG",
         "IO",
@@ -122,7 +116,6 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "HT",
         "HM",
         "HN",
-        "HK",
         "IN",
         "ID",
         "IQ",
@@ -143,6 +136,7 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "CA",
         "IC",
         "CV",
+        "BQ",
         "KZ",
         "QA",
         "KE",
@@ -153,6 +147,7 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "KM",
         "CG",
         "CD",
+        "XK",
         "HR",
         "CU",
         "KW",
@@ -165,7 +160,6 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "LI",
         "LT",
         "LU",
-        "MO",
         "MG",
         "MW",
         "MY",
@@ -179,7 +173,6 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "MU",
         "YT",
         "MK",
-        "FX",
         "MX",
         "FM",
         "MC",
@@ -204,7 +197,6 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "NO",
         "OM",
         "AT",
-        "TL",
         "PK",
         "PS",
         "PW",
@@ -233,16 +225,17 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "CH",
         "SN",
         "RS",
-        "CS",
         "SC",
         "SL",
         "SG",
+        "SX",
         "SK",
         "SI",
         "SO",
+        "HK",
+        "MO",
         "ES",
         "LK",
-        "SS",
         "BL",
         "SH",
         "KN",
@@ -253,15 +246,16 @@ public class LocalizedNamesImpl_de_CH extends LocalizedNamesImpl_de {
         "ZA",
         "SD",
         "GS",
+        "SS",
         "SR",
         "SJ",
         "SZ",
-        "SX",
         "SY",
         "TJ",
         "TW",
         "TZ",
         "TH",
+        "TL",
         "TG",
         "TK",
         "TO",

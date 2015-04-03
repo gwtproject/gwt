@@ -15,6 +15,11 @@
  */
 package java.util;
 
+import static com.google.gwt.core.client.impl.Coercions.ensureInt;
+
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElementIndex;
+
 import java.io.Serializable;
 
 /**
@@ -68,7 +73,8 @@ public class Collections {
 
     @Override
     public Object get(int location) {
-      throw new IndexOutOfBoundsException();
+      checkElementIndex(location, 0);
+      return null;
     }
 
     @Override
@@ -253,11 +259,6 @@ public class Collections {
     }
 
     @Override
-    public <T> T[] toArray(T[] a) {
-      return keySet().toArray(a);
-    }
-
-    @Override
     public String toString() {
       return keySet().toString();
     }
@@ -285,11 +286,8 @@ public class Collections {
     }
 
     public E get(int index) {
-      if (index == 0) {
-        return element;
-      } else {
-        throw new IndexOutOfBoundsException();
-      }
+      checkElementIndex(index, 1);
+      return element;
     }
 
     public int size() {
@@ -920,8 +918,15 @@ public class Collections {
   }
 
   public static <T> void copy(List<? super T> dest, List<? extends T> src) {
-    // TODO(jat): optimize
-    dest.addAll(src);
+    if (src.size() > dest.size()) {
+      throw new IndexOutOfBoundsException("src does not fit in dest");
+    }
+
+    ListIterator<? super T> destIt = dest.listIterator();
+    for (T e : src) {
+      destIt.next();
+      destIt.set(e);
+    }
   }
 
   public static boolean disjoint(Collection<?> c1, Collection<?> c2) {
@@ -1044,9 +1049,7 @@ public class Collections {
   }
 
   public static <E> Set<E> newSetFromMap(Map<E, Boolean> map) {
-    if (!map.isEmpty()) {
-      throw new IllegalArgumentException("map is not empty");
-    }
+    checkArgument(map.isEmpty(), "map is not empty");
     return new SetFromMap<E>(map);
   }
 
@@ -1165,6 +1168,30 @@ public class Collections {
   public static <T> SortedSet<T> unmodifiableSortedSet(
       SortedSet<? extends T> set) {
     return new UnmodifiableSortedSet<T>(set);
+  }
+
+  /**
+   * Computes hash code without preserving elements order (e.g. HashSet).
+   */
+  static <T> int hashCode(Iterable<T> collection) {
+    int hashCode = 0;
+    for (T e : collection) {
+      hashCode = hashCode + Objects.hashCode(e);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
+    }
+    return hashCode;
+  }
+
+  /**
+   * Computes hash code preserving collection order (e.g. ArrayList).
+   */
+  static <T> int hashCode(List<T> list) {
+    int hashCode = 1;
+    for (T e : list) {
+      hashCode = 31 * hashCode + Objects.hashCode(e);
+      hashCode = ensureInt(hashCode); // make sure we don't overflow
+    }
+    return hashCode;
   }
 
   /**

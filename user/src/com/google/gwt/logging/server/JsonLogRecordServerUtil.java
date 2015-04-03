@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,35 +16,39 @@
 
 package com.google.gwt.logging.server;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gwt.thirdparty.json.JSONArray;
+import com.google.gwt.thirdparty.json.JSONException;
+import com.google.gwt.thirdparty.json.JSONObject;
 
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
 /**
- * A set of functions to convert standard JSON strings into
- * LogRecords. The corresponding functions to create the JSON
- * strings are in JsonLogRecordClientUtil.java. This class should only be used
- * in server-side code since it imports org.json classes.
+ * A set of functions to convert standard JSON strings into LogRecords. The corresponding functions
+ * to create the JSON strings are in JsonLogRecordClientUtil.java. This class should only be used
+ * in server-side code since it imports c.g.g.thirdparty.json classes.
  * TODO(unnurg) once there is a unified JSON GWT library, combine this with
  * JsonLogRecordClientUtil.
  */
 public class JsonLogRecordServerUtil {
 
-  public static LogRecord logRecordFromJson(String jsonString) throws JSONException {
-    JSONObject lro = new JSONObject(jsonString);
-    String level = lro.getString("level");
-    String loggerName = lro.getString("loggerName");
-    String msg = lro.getString("msg");
-    long timestamp = Long.parseLong(lro.getString("timestamp"));
-    Throwable thrown = JsonLogRecordThrowable.fromJsonString(lro.getString("thrown"));
-    LogRecord lr = new LogRecord(Level.parse(level), msg);
-    lr.setLoggerName(loggerName);
-    lr.setThrown(thrown);
-    lr.setMillis(timestamp);
-    return lr;
+  public static LogRecord logRecordFromJson(String jsonString)
+      throws InvalidJsonLogRecordFormatException {
+    try {
+      JSONObject lro = new JSONObject(jsonString);
+      String level = lro.getString("level");
+      String loggerName = lro.getString("loggerName");
+      String msg = lro.getString("msg");
+      long timestamp = Long.parseLong(lro.getString("timestamp"));
+      Throwable thrown = JsonLogRecordThrowable.fromJsonString(lro.getString("thrown"));
+      LogRecord lr = new LogRecord(Level.parse(level), msg);
+      lr.setLoggerName(loggerName);
+      lr.setThrown(thrown);
+      lr.setMillis(timestamp);
+      return lr;
+    } catch (JSONException e) {
+      throw new InvalidJsonLogRecordFormatException(e);
+    }
   }
 
   private static class JsonLogRecordThrowable extends Throwable {

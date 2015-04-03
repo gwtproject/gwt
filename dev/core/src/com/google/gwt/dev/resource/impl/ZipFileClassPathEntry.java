@@ -22,6 +22,7 @@ import com.google.gwt.dev.util.collect.IdentityMaps;
 import com.google.gwt.dev.util.collect.Sets;
 import com.google.gwt.dev.util.msg.Message1String;
 import com.google.gwt.thirdparty.guava.common.collect.MapMaker;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,11 +58,11 @@ public class ZipFileClassPathEntry extends ClassPathEntry {
   }
 
   private static class ZipFileSnapshot {
-    private final Map<AbstractResource, PathPrefix> cachedAnswers;
+    private final Map<AbstractResource, ResourceResolution> cachedAnswers;
     private final int prefixSetSize;
 
     ZipFileSnapshot(int prefixSetSize,
-        Map<AbstractResource, PathPrefix> cachedAnswers) {
+        Map<AbstractResource, ResourceResolution> cachedAnswers) {
       this.prefixSetSize = prefixSetSize;
       this.cachedAnswers = cachedAnswers;
     }
@@ -72,7 +73,7 @@ public class ZipFileClassPathEntry extends ClassPathEntry {
    * not referenced anywhere else, so we use hard reference, and soft reference on
    * {@link ZipFileClassPathEntry} allows its clearing in response to memory demand.
    */
-  private static final Map<String, ZipFileClassPathEntry> entryCache = new MapMaker().softValues().makeMap();
+  private static final Map<String, ZipFileClassPathEntry> entryCache = Maps.newHashMap();
 
   public static void clearCache() {
     entryCache.clear();
@@ -117,7 +118,7 @@ public class ZipFileClassPathEntry extends ClassPathEntry {
    * Indexes the zip file on-demand, and only once over the life of the process.
    */
   @Override
-  public synchronized Map<AbstractResource, PathPrefix> findApplicableResources(
+  public synchronized Map<AbstractResource, ResourceResolution> findApplicableResources(
       TreeLogger logger, PathPrefixSet pathPrefixSet) {
     index(logger);
     ZipFileSnapshot snapshot = cachedSnapshots.get(pathPrefixSet);
@@ -171,19 +172,21 @@ public class ZipFileClassPathEntry extends ClassPathEntry {
     return Sets.normalize(results);
   }
 
-  private Map<AbstractResource, PathPrefix> computeApplicableResources(
+  private Map<AbstractResource, ResourceResolution> computeApplicableResources(
       TreeLogger logger, PathPrefixSet pathPrefixSet) {
     logger = Messages.FINDING_INCLUDED_RESOURCES.branch(logger,
         zipFile.getName(), null);
 
-    Map<AbstractResource, PathPrefix> results = new IdentityHashMap<AbstractResource, PathPrefix>();
+    Map<AbstractResource, ResourceResolution> results =
+        new IdentityHashMap<AbstractResource, ResourceResolution>();
     for (ZipFileResource r : allZipFileResources) {
       String path = r.getPath();
       String[] pathParts = r.getPathParts();
-      PathPrefix prefix = null;
-      if ((prefix = pathPrefixSet.includesResource(path, pathParts)) != null) {
+      ResourceResolution resourceResolution = null;
+      if ((resourceResolution = pathPrefixSet.includesResource(path, pathParts))
+          != null) {
         Messages.INCLUDING_RESOURCE.log(logger, path, null);
-        results.put(r, prefix);
+        results.put(r, resourceResolution);
       } else {
         Messages.EXCLUDING_RESOURCE.log(logger, path, null);
       }

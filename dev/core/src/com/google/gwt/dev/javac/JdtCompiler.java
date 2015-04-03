@@ -29,7 +29,8 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
-import com.google.gwt.util.tools.Utility;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.io.BaseEncoding;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ClassFile;
@@ -63,6 +64,7 @@ import org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope;
 import org.eclipse.jdt.internal.compiler.lookup.LocalTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment;
 import org.eclipse.jdt.internal.compiler.lookup.MethodScope;
+import org.eclipse.jdt.internal.compiler.lookup.MissingTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.NestedTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
@@ -72,9 +74,11 @@ import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory;
 import org.eclipse.jdt.internal.compiler.problem.ProblemReporter;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.JarURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -271,12 +275,20 @@ public class JdtCompiler {
       this.diet = false;
       CompilationUnitDeclaration decl = super.parse(sourceUnit, compilationResult);
       this.diet = saveDiet;
-      if (removeGwtIncompatible) {
-        // Remove @GwtIncompatible classes and members.
-        GwtIncompatiblePreprocessor.preproccess(decl);
-      }
+      // Remove @GwtIncompatible classes and members.
+      // It is safe to remove @GwtIncompatible types, fields and methods on incomplete ASTs due
+      // to parsing errors.
+      GwtIncompatiblePreprocessor.preproccess(decl);
       if (decl.imports != null) {
         originalImportsByCud.putAll(decl, Arrays.asList(decl.imports));
+      }
+      if (decl.hasErrors()) {
+        // The unit has parsing errors; its JDT AST might not be complete. In this case do not
+        // remove unused imports as it is not safe to do so. UnusedImportsRemover would remove
+        // imports for types only referred from parts of the AST that was not constructed.
+        // Later the error reporting logic would complain about missing types for these references
+        // potentially burying the real error among many spurious errors.
+        return decl;
       }
       if (removeUnusedImports) {
         // Lastly remove any unused imports
@@ -333,18 +345,18 @@ public class JdtCompiler {
       } catch (AbortCompilation e) {
         abortCount++;
         String filename = new String(cud.getFileName());
-        logger.log(TreeLogger.Type.ERROR,
-            "JDT aborted: " + filename + ": " + e.problem.getMessage());
+        logger.log(TreeLogger.WARN, "JDT aborted: " + filename + ": " + e.problem.getMessage());
         if (abortCount >= ABORT_COUNT_MAX) {
+          logger.log(TreeLogger.ERROR, "JDT threw too many exceptions.");
           throw e;
         }
         return; // continue without it; it might be a server-side class.
       } catch (RuntimeException e) {
         abortCount++;
         String filename = new String(cud.getFileName());
-        logger.log(TreeLogger.Type.ERROR,
-            "JDT threw an exception: " + filename + ": " + e);
+        logger.log(TreeLogger.WARN, "JDT threw an exception: " + filename + ": " + e);
         if (abortCount >= ABORT_COUNT_MAX) {
+          logger.log(TreeLogger.ERROR, "JDT threw too many exceptions.");
           throw new AbortCompilation(cud.compilationResult, e);
         }
         return; // continue without it; it might be a server-side class.
@@ -388,6 +400,7 @@ public class JdtCompiler {
       }
       String internalName = CharOperation.charToString(classFile.fileName());
       String sourceName = JdtUtil.getSourceName(classFile.referenceBinding);
+      // TODO(cromwellian) implement Retrolambda on output?
       CompiledClass result = new CompiledClass(classFile.getBytes(), enclosingClass,
           isLocalType(classFile), internalName, sourceName);
       results.put(classFile, result);
@@ -425,7 +438,8 @@ public class JdtCompiler {
       char[] internalNameChars = CharOperation.concatWith(compoundTypeName, '/');
       String internalName = String.valueOf(internalNameChars);
 
-      if (isPackage(internalName)) {
+      // If we already know this is a package, take the shortcut.
+      if (JreIndex.contains(internalName) || packages.contains(internalName)) {
         return null;
       }
 
@@ -439,18 +453,47 @@ public class JdtCompiler {
         return additionalProviderAnswer;
       }
 
-      NameEnvironmentAnswer libraryGroupAnswer = findTypeInLibraryGroup(internalName);
-      if (libraryGroupAnswer != null) {
-        return libraryGroupAnswer;
-      }
-
-      // TODO(stalcup): Add verification that all classpath bytecode is for Annotations.
       NameEnvironmentAnswer classPathAnswer = findTypeInClassPath(internalName);
+
       if (classPathAnswer != null) {
         return classPathAnswer;
       }
-
       return null;
+    }
+
+    /*
+      Generated from:
+
+       public class LambdaMetafactory {
+        public static CallSite metafactory(MethodHandles.Lookup caller, String invokedName,
+            MethodType invokedType, MethodType samMethodType, MethodHandle implMethod,
+            MethodType instantiatedMethodType) {
+          return null;
+        }
+
+        public static CallSite altMetafactory(MethodHandles.Lookup caller, String invokedName,
+            MethodType invokedType, Object... args) {
+          return null;
+        }
+      }
+     */
+    private byte[] getLambdaMetafactoryBytes() {
+      return BaseEncoding.base64().decode(
+          "yv66vgAAADMAFwoAAwARBwASBwATAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJU"
+          + "YWJsZQEAC21ldGFmYWN0b3J5BwAVAQAGTG9va3VwAQAMSW5uZXJDbGFzc2VzAQDMKExqYXZhL2xh"
+          + "bmcvaW52b2tlL01ldGhvZEhhbmRsZXMkTG9va3VwO0xqYXZhL2xhbmcvU3RyaW5nO0xqYXZhL2xh"
+          + "bmcvaW52b2tlL01ldGhvZFR5cGU7TGphdmEvbGFuZy9pbnZva2UvTWV0aG9kVHlwZTtMamF2YS9s"
+          + "YW5nL2ludm9rZS9NZXRob2RIYW5kbGU7TGphdmEvbGFuZy9pbnZva2UvTWV0aG9kVHlwZTspTGph"
+          + "dmEvbGFuZy9pbnZva2UvQ2FsbFNpdGU7AQAOYWx0TWV0YWZhY3RvcnkBAIYoTGphdmEvbGFuZy9p"
+          + "bnZva2UvTWV0aG9kSGFuZGxlcyRMb29rdXA7TGphdmEvbGFuZy9TdHJpbmc7TGphdmEvbGFuZy9p"
+          + "bnZva2UvTWV0aG9kVHlwZTtbTGphdmEvbGFuZy9PYmplY3Q7KUxqYXZhL2xhbmcvaW52b2tlL0Nh"
+          + "bGxTaXRlOwEAClNvdXJjZUZpbGUBABZMYW1iZGFNZXRhZmFjdG9yeS5qYXZhDAAEAAUBACJqYXZh"
+          + "L2xhbmcvaW52b2tlL0xhbWJkYU1ldGFmYWN0b3J5AQAQamF2YS9sYW5nL09iamVjdAcAFgEAJWph"
+          + "dmEvbGFuZy9pbnZva2UvTWV0aG9kSGFuZGxlcyRMb29rdXABAB5qYXZhL2xhbmcvaW52b2tlL01l"
+          + "dGhvZEhhbmRsZXMAIQACAAMAAAAAAAMAAQAEAAUAAQAGAAAAHQABAAEAAAAFKrcAAbEAAAABAAcA"
+          + "AAAGAAEAAAAGAAkACAAMAAEABgAAABoAAQAGAAAAAgGwAAAAAQAHAAAABgABAAAAEACJAA0ADgAB"
+          + "AAYAAAAaAAEABAAAAAIBsAAAAAEABwAAAAYAAQAAABUAAgAPAAAAAgAQAAsAAAAKAAEACQAUAAoA"
+          + "GQ==");
     }
 
     private NameEnvironmentAnswer findTypeInCache(String internalName) {
@@ -478,47 +521,49 @@ public class JdtCompiler {
       return new NameEnvironmentAnswer(new Adapter(CompilationUnitBuilder.create(unit)), null);
     }
 
-    private NameEnvironmentAnswer findTypeInLibraryGroup(String internalName) {
-      InputStream classFileStream =
-          compilerContext.getLibraryGroup().getClassFileStream(internalName);
-      if (classFileStream == null) {
-        return null;
-      }
+    private NameEnvironmentAnswer findTypeInClassPath(String internalName) {
 
-      try {
-        ClassFileReader classFileReader =
-            ClassFileReader.read(classFileStream, internalName + ".class", true);
-        return new NameEnvironmentAnswer(classFileReader, null);
-      } catch (IOException e) {
-        return null;
-      } catch (ClassFormatException e) {
-        return null;
-      } finally {
-        Utility.close(classFileStream);
+      // If the class was previously queried here return the cached result.
+      if (cachedClassPathAnswerByInternalName.containsKey(internalName)) {
+        // The return might be null if the class was not found at all.
+        return cachedClassPathAnswerByInternalName.get(internalName);
       }
+      NameEnvironmentAnswer answer = doFindTypeInClassPath(internalName);
+      // Here we cache the answer even if it is null to denote that it was not found.
+      cachedClassPathAnswerByInternalName.put(internalName, answer);
+      return answer;
     }
 
-    private NameEnvironmentAnswer findTypeInClassPath(String internalName) {
+    private NameEnvironmentAnswer doFindTypeInClassPath(String internalName) {
       URL resource = getClassLoader().getResource(internalName + ".class");
-      if (resource == null) {
-        return null;
-      }
+      if (resource != null) {
+        try (InputStream openStream = resource.openStream()) {
 
-      InputStream openStream = null;
-      try {
-        openStream = resource.openStream();
-        ClassFileReader classFileReader =
-            ClassFileReader.read(openStream, resource.toExternalForm(), true);
-        return new NameEnvironmentAnswer(classFileReader, null);
-      } catch (IOException e) {
-        return null;
-      } catch (ClassFormatException e) {
-        return null;
-      } finally {
-        if (openStream != null) {
-          Utility.close(openStream);
+          ClassFileReader classFileReader =
+              ClassFileReader.read(openStream, resource.toExternalForm(), true);
+          // In case insensitive file systems we might have found a resource  whose name is different
+          // in case and should not be returned as an answer.
+          if (internalName.equals(CharOperation.charToString(classFileReader.getName()))) {
+            return new NameEnvironmentAnswer(classFileReader, null);
+          }
+        } catch (IOException | ClassFormatException e) {
+          // returns null indicating a failure.
         }
       }
+      // LambdaMetafactory is byte-code side artifact of JDT compile and actually not referenced by
+      // our AST. However, this class is only available in JDK8+ so JdtCompiler fails to validate
+      // the classes that are referencing it. We tackle that by providing a stub version if it is
+      // not found in the class path.
+      if (internalName.equals("java/lang/invoke/LambdaMetafactory")) {
+        try {
+          ClassFileReader cfr = new ClassFileReader(getLambdaMetafactoryBytes(),
+              "synthetic:java/lang/invoke/LambdaMetafactory".toCharArray(), true);
+          return new NameEnvironmentAnswer(cfr, null);
+        } catch (ClassFormatException e) {
+          e.printStackTrace();
+        }
+      }
+      return null;
     }
 
     @Override
@@ -526,10 +571,6 @@ public class JdtCompiler {
       char[] pathChars = CharOperation.concatWith(parentPkg, pkg, '/');
       String packageName = String.valueOf(pathChars);
       return isPackage(packageName);
-    }
-
-    private ClassLoader getClassLoader() {
-      return Thread.currentThread().getContextClassLoader();
     }
 
     private boolean isPackage(String slashedPackageName) {
@@ -554,14 +595,13 @@ public class JdtCompiler {
       if (notPackages.contains(slashedPackageName)) {
         return false;
       }
-      String resourceName = slashedPackageName + '/';
       if ((additionalTypeProviderDelegate != null && additionalTypeProviderDelegate
           .doFindAdditionalPackage(slashedPackageName))) {
         addPackages(slashedPackageName);
         return true;
       }
       // Include class loader check for binary-only annotations.
-      if (getClassLoader().getResource(resourceName) != null) {
+      if (caseSensitivePathExists(slashedPackageName)) {
         addPackages(slashedPackageName);
         return true;
       } else {
@@ -598,7 +638,6 @@ public class JdtCompiler {
     };
 
     long jdtSourceLevel = jdtLevelByGwtLevel.get(SourceLevel.DEFAULT_SOURCE_LEVEL);
-
     options.originalSourceLevel = jdtSourceLevel;
     options.complianceLevel = jdtSourceLevel;
     options.sourceLevel = jdtSourceLevel;
@@ -715,6 +754,13 @@ public class JdtCompiler {
   private final Map<String, CompiledClass> internalTypes = new HashMap<String, CompiledClass>();
 
   /**
+   * Remembers types that have been found in the classpath or not found at all to avoid unnecessary
+   * resource scanning.
+   */
+  private final Map<String, NameEnvironmentAnswer> cachedClassPathAnswerByInternalName =
+      Maps.newHashMap();
+
+  /**
    * Only active during a compile.
    */
   private transient CompilerImpl compilerImpl;
@@ -733,11 +779,6 @@ public class JdtCompiler {
   private CompilerContext compilerContext;
 
   /**
-   * Controls whether the compiler strips GwtIncompatible annotations.
-   */
-  private static boolean removeGwtIncompatible = true;
-
-  /**
    * Controls whether the compiler strips unused imports.
    */
   private static boolean removeUnusedImports = true;
@@ -748,8 +789,8 @@ public class JdtCompiler {
    */
   private static final Map<SourceLevel, Long> jdtLevelByGwtLevel =
       ImmutableMap.<SourceLevel, Long>of(
-          SourceLevel.JAVA6, ClassFileConstants.JDK1_6,
-          SourceLevel.JAVA7, ClassFileConstants.JDK1_7);
+          SourceLevel.JAVA7, ClassFileConstants.JDK1_7,
+          SourceLevel.JAVA8, ClassFileConstants.JDK1_8);
 
   public JdtCompiler(CompilerContext compilerContext, UnitProcessor processor) {
     this.compilerContext = compilerContext;
@@ -853,6 +894,12 @@ public class JdtCompiler {
       public boolean visit(TypeDeclaration typeDeclaration, CompilationUnitScope scope) {
         traverse(typeDeclaration);
         return false;
+      }
+
+      @Override
+      protected void onMissingTypeRef(MissingTypeBinding referencedType,
+          CompilationUnitDeclaration unitOfReferrer, Expression expression) {
+        addReference(referencedType);
       }
 
       @Override
@@ -996,13 +1043,6 @@ public class JdtCompiler {
   }
 
   /**
-   * Sets whether the compiler should remove GwtIncompatible annotated classes amd members.
-   */
-  public static void setRemoveGwtIncompatible(boolean remove) {
-    removeGwtIncompatible = remove;
-  }
-
-  /**
    * Sets whether the compiler should remove unused imports.
    */
   public static void setRemoveUnusedImports(boolean remove) {
@@ -1025,5 +1065,31 @@ public class JdtCompiler {
         break;
       }
     }
+  }
+
+  private static boolean caseSensitivePathExists(String resourcePath) {
+    URL resourceURL = getClassLoader().getResource(resourcePath + '/');
+    if (resourceURL == null) {
+      return false;
+    }
+
+    try {
+      File resourceFile = new File(resourceURL.toURI());
+      return Arrays.asList(resourceFile.getParentFile().list()).contains(resourceFile.getName());
+    } catch (URISyntaxException e) {
+      // The URL can not be converted to a URI.
+    } catch (IllegalArgumentException e) {
+      // A file instance can not be constructed from a URI.
+    }
+
+    // Some exception occurred while trying to make sure the name for the resource on disk is
+    // exactly the same as the one requested including case. If an exception is thrown in the
+    // process we assume that the URI does not refer to a resource in the filesystem and that the
+    // resource obtained from the classloader is the one requested.
+    return true;
+  }
+
+  private static ClassLoader getClassLoader() {
+    return Thread.currentThread().getContextClassLoader();
   }
 }

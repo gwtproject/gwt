@@ -31,17 +31,27 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
+import com.google.gwt.dev.jjs.ast.JNullType;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStatement;
+import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
+import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import javax.annotation.Nullable;
 
 /**
  * Test case for testing Jjs optimizers. Adds a convenient Result class.
@@ -50,7 +60,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
   protected boolean runDeadCodeElimination = false;
 
   /**
-   * Holds the result of optimization to compare agains expected results.
+   * Holds the result of optimization to compare against expected results.
    */
   protected final class Result {
     private final String returnType;
@@ -68,15 +78,24 @@ public abstract class OptimizerTestBase extends JJSTestBase {
       this.madeChanges = madeChanges;
     }
 
-    public void classHasMethodSnippets(String className, List<String> expectedMethodSnippets) {
-      JDeclaredType targetClass = findClass(className);
+    public void classHasMethods(String className, List<String> expectedMethodSnippets) {
+      final JDeclaredType targetClass = findClass(className);
 
-      Set<String> actualMethodSnippets = Sets.newHashSet();
+      Set<String> actualMethodSignatures = Sets.newHashSet();
       for (JMethod method : targetClass.getMethods()) {
-        actualMethodSnippets.add(method.toString().trim());
+        actualMethodSignatures.add(method.toString());
       }
 
-      assertTrue(actualMethodSnippets.containsAll(expectedMethodSnippets));
+      ImmutableSet<String> expectedMethodSignatures = FluentIterable.from(expectedMethodSnippets)
+          .transform(new Function<String, String>() {
+            @Nullable
+            @Override
+            public String apply(String unqualifiedMethodSignature) {
+              return targetClass.getName() + "." + unqualifiedMethodSignature;
+            }
+          }).toSet();
+      assertContainsAll(
+          expectedMethodSignatures, actualMethodSignatures);
     }
 
     /**
@@ -92,7 +111,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
     public void into(String... expected) throws UnableToCompleteException {
       // We can't compile expected code into non-main method.
       Preconditions.checkState(methodName.equals(MAIN_METHOD_NAME));
-      JProgram program = compileSnippet(returnType, Joiner.on("\n").join(expected));
+      JProgram program = compileSnippet(returnType, Joiner.on("\n").join(expected), true);
       String expectedSource =
         OptimizerTestBase.findMethod(program, methodName).getBody().toSource();
       String actualSource =
@@ -131,8 +150,107 @@ public abstract class OptimizerTestBase extends JJSTestBase {
     }
 
     public JDeclaredType findClass(String className) {
-      return OptimizerTestBase.findType(optimizedProgram, className);
+      return OptimizerTestBase.findDeclaredType(optimizedProgram, className);
     }
+
+    public JProgram getOptimizedProgram() {
+      return optimizedProgram;
+    }
+  }
+
+  /**
+   * Asserts that there {@code method} calls all and only {@code expectedTargets}.
+   */
+  protected static void assertCallsAndOnlyCalls(JMethod method, JMethod... expectedTargets) {
+    final Set<JMethod> actualTargets = Sets.newHashSet();
+    new JVisitor() {
+      @Override
+      public void endVisit(JMethodCall x, Context ctx) {
+        actualTargets.add(x.getTarget());
+      }
+    }.accept(method);
+    assertEquals(ImmutableSet.copyOf(expectedTargets), actualTargets);
+  }
+
+  /**
+   * Asserts that there {@code method} only calls {@code forwardsToMethod}.
+   */
+  protected static void assertForwardsTo(JMethod method, JMethod forwardsToMethod) {
+    assertCallsAndOnlyCalls(method, forwardsToMethod);
+  }
+
+  protected static void assertOverrides(
+      Result result, String fullMethodSignature, String... overriddenMethodSignatures) {
+    assertEquals(ImmutableSet.copyOf(overriddenMethodSignatures),
+        findOverrides(result, fullMethodSignature));
+  }
+
+  protected static void assertParameterTypes(
+      final Result result, String methodName, String... parameterTypeNames) {
+    JMethod method = findMethod(result, methodName);
+    assertNotNull("Did not find method " + methodName, method);
+    assertEquals(parameterTypeNames.length, method.getParams().size());
+    JType[] parameterTypes = FluentIterable.from(Arrays.asList(parameterTypeNames))
+        .transform(new Function<String, JType>() {
+          @Nullable
+          @Override
+          public JType apply(String typeName) {
+            return findType(result, typeName);
+          }
+        })
+        .toArray(JType.class);
+    assertParameterTypes(method, parameterTypes);
+  }
+
+  protected static void assertReturnType(
+      Result result, String methodName, String resultTypeName) {
+    JMethod method = findMethod(result, methodName);
+    assertNotNull("Did not find method " + methodName, method);
+    JDeclaredType resultType = result.findClass(resultTypeName);
+    assertNotNull("Did not find class " + resultTypeName, resultType);
+    assertEquals(resultType, method.getType().getUnderlyingType());
+  }
+
+  protected static JMethod findMethod(Result result, String methodName) {
+    int lastDot = methodName.lastIndexOf(".");
+    JMethod method = null;
+    if (lastDot != -1) {
+      String className = methodName.substring(0, lastDot);
+      JDeclaredType clazz = result.findClass(className);
+      assertNotNull("Did not find class " + className, clazz);
+      method = clazz.findMethod(methodName.substring(lastDot + 1), true);
+    } else {
+      method = result.findMethod(methodName);
+    }
+    return method;
+  }
+
+  protected static ImmutableSet<String> findOverrides(Result result, String fullMethodSignature) {
+    final Function<JMethod, String> METHOD_TO_STRING =
+        new Function<JMethod, String>() {
+          @Nullable
+          @Override
+          public String apply(JMethod method) {
+            return method.toString();
+          }
+        };
+    JMethod method = findMethod(result, fullMethodSignature);
+    assertNotNull("Method " + fullMethodSignature + " not found", method);
+    assertEquals(fullMethodSignature, method.toString());
+    return FluentIterable
+        .from(method.getOverriddenMethods())
+        .transform(METHOD_TO_STRING)
+        .toSet();
+  }
+
+  private static JReferenceType findType(Result result, String parameterTypeName) {
+    JReferenceType parameterType;
+    if (parameterTypeName.equals("null")) {
+      parameterType = JNullType.INSTANCE;
+    } else {
+      parameterType = result.findClass(parameterTypeName);
+    }
+    return parameterType;
   }
 
   /**
@@ -235,7 +353,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
           "return " + expressionSnippets[expressionSnippets.length - 1];
     }
     String snippet = Joiner.on(";\n").join(expressionSnippets) + ";\n";
-    final JProgram program = compileSnippet(returnType, snippet);
+    final JProgram program = compileSnippet(returnType, snippet, true);
     JMethod method = findMethod(program, MAIN_METHOD_NAME);
     JMethodBody body = (JMethodBody) method.getBody();
     JMultiExpression multi = new JMultiExpression(body.getSourceInfo());
@@ -275,7 +393,6 @@ public abstract class OptimizerTestBase extends JJSTestBase {
       insertImplicitClinitCalls(method);
     }
 
-
     // Finally optimize.
     boolean madeChanges = optimizeMethod(program, method);
     if (madeChanges && runDeadCodeElimination) {
@@ -289,7 +406,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
       final String mainMethodReturnType, final String... mainMethodSnippet)
       throws UnableToCompleteException {
     String snippet = Joiner.on("\n").join(mainMethodSnippet);
-    JProgram program = compileSnippet(mainMethodReturnType, snippet);
+    JProgram program = compileSnippet(mainMethodReturnType, snippet, true);
     JMethod method = findMethod(program, methodName);
     boolean madeChanges = optimizeMethod(program, method);
     if (madeChanges && runDeadCodeElimination) {

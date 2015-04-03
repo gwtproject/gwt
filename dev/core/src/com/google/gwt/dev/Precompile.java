@@ -24,14 +24,12 @@ import com.google.gwt.core.ext.linker.PrecompilationMetricsArtifact;
 import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.dev.CompileTaskRunner.CompileTask;
-import com.google.gwt.dev.cfg.ConfigurationProperty;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.cfg.PropertyPermutations;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationUnit;
-import com.google.gwt.dev.jjs.AbstractCompiler;
-import com.google.gwt.dev.jjs.JavaScriptCompiler;
+import com.google.gwt.dev.jjs.JavaToJavaScriptCompiler;
 import com.google.gwt.dev.jjs.UnifiedAst;
 import com.google.gwt.dev.shell.CheckForUpdates;
 import com.google.gwt.dev.shell.CheckForUpdates.UpdateResult;
@@ -136,6 +134,12 @@ public class Precompile {
     PropertyPermutations allPermutations = new PropertyPermutations(
         compilerContext.getModule().getProperties(),
         compilerContext.getModule().getActiveLinkerNames());
+    if (compilerContext.getOptions().isIncrementalCompileEnabled() && allPermutations.size() > 1) {
+      logger.log(TreeLogger.ERROR,
+          "Current binding properties are expanding to more than one permutation "
+          + "but per-file compilation requires that each compile operate on only one permutation.");
+      throw new UnableToCompleteException();
+    }
     return precompile(logger, compilerContext, 0, allPermutations);
   }
 
@@ -174,7 +178,7 @@ public class Precompile {
       compilationState = null;
       // Never optimize on a validation run.
       jjsOptions.setOptimizePrecompile(false);
-      getCompiler(module).precompile(
+      JavaToJavaScriptCompiler.precompile(
           logger, compilerContext, rpo, declEntryPts, additionalRootTypes, true, null);
       return true;
     } catch (UnableToCompleteException e) {
@@ -196,32 +200,10 @@ public class Precompile {
     return collapsedPermutations;
   }
 
-  static AbstractCompiler getCompiler(ModuleDef module) {
-    ConfigurationProperty compilerClassProp =
-        module.getProperties().createConfiguration("x.compiler.class", false);
-    String compilerClassName = compilerClassProp.getValue();
-    if (compilerClassName == null || compilerClassName.length() == 0) {
-      return new JavaScriptCompiler();
-    }
-    Throwable caught;
-    try {
-      Class<?> compilerClass = Class.forName(compilerClassName);
-      return (AbstractCompiler) compilerClass.newInstance();
-    } catch (ClassNotFoundException e) {
-      caught = e;
-    } catch (InstantiationException e) {
-      caught = e;
-    } catch (IllegalAccessException e) {
-      caught = e;
-    }
-    throw new RuntimeException("Unable to instantiate compiler class '" + compilerClassName + "'",
-        caught);
-  }
-
   static Precompilation precompile(TreeLogger logger, CompilerContext compilerContext,
       int permutationBase, PropertyPermutations allPermutations) {
-    return precompile(logger, compilerContext, permutationBase, allPermutations,
-        ManagementFactory.getRuntimeMXBean().getStartTime());
+    return precompile(logger, compilerContext, permutationBase,
+        allPermutations, ManagementFactory.getRuntimeMXBean().getStartTime());
   }
 
   static Precompilation precompile(TreeLogger logger, CompilerContext compilerContext,
@@ -233,11 +215,13 @@ public class Precompile {
     // doesn't block when the library is accessed for the first time.
     new GraphicsInitThread().start();
 
-    ArchivePreloader.preloadArchives(logger, compilerContext);
-
     try {
       ModuleDef module = compilerContext.getModule();
       PrecompileTaskOptions jjsOptions = compilerContext.getOptions();
+      if (jjsOptions.isIncrementalCompileEnabled()) {
+        compilerContext.getMinimalRebuildCache().recordDiskSourceResources(module);
+        compilerContext.getMinimalRebuildCache().recordBuildResources(module);
+      }
       CompilationState compilationState = module.getCompilationState(logger, compilerContext);
       if (jjsOptions.isStrict() && compilationState.hasErrors()) {
         abortDueToStrictMode(logger);
@@ -255,8 +239,7 @@ public class Precompile {
       long moduleLoadFinished = System.currentTimeMillis();
 
       String[] declEntryPts = module.getEntryPointTypeNames();
-      boolean compileMonolithic = compilerContext.shouldCompileMonolithic();
-      if (compileMonolithic && declEntryPts.length == 0) {
+      if (declEntryPts.length == 0) {
         logger.log(TreeLogger.ERROR, "Module has no entry points defined", null);
         throw new UnableToCompleteException();
       }
@@ -270,7 +253,7 @@ public class Precompile {
           jjsOptions.isCompilerMetricsEnabled()
               ? new PrecompilationMetricsArtifact(permutationBase) : null;
       UnifiedAst unifiedAst =
-          getCompiler(module).precompile(logger, compilerContext, rpo, declEntryPts, null,
+          JavaToJavaScriptCompiler.precompile(logger, compilerContext, rpo, declEntryPts, null,
               rpo.getPermutationCount() == 1, precompilationMetrics);
 
       if (jjsOptions.isCompilerMetricsEnabled()) {
@@ -289,31 +272,26 @@ public class Precompile {
       List<Permutation> permutations =
           new ArrayList<Permutation>(Arrays.asList(rpo.getPermutations()));
 
-      // Monolithic compiles have multiple permutations but library compiles do not (since the
-      // library output contains runtime rebind logic that will find implementations for any
-      // supported browser).
-      if (compileMonolithic) {
-        mergeCollapsedPermutations(permutations);
+      mergeCollapsedPermutations(permutations);
 
-        // Sort the permutations by an ordered key to ensure determinism.
-        SortedMap<RebindAnswersPermutationKey, Permutation> merged =
-            new TreeMap<RebindAnswersPermutationKey, Permutation>();
-        SortedSet<String> liveRebindRequests = unifiedAst.getRebindRequests();
-        for (Permutation permutation : permutations) {
-          // Construct a key for the live rebind answers.
-          RebindAnswersPermutationKey key =
-              new RebindAnswersPermutationKey(permutation, liveRebindRequests);
-          if (merged.containsKey(key)) {
-            Permutation existing = merged.get(key);
-            existing.mergeFrom(permutation, liveRebindRequests);
-          } else {
-            merged.put(key, permutation);
-          }
+      // Sort the permutations by an ordered key to ensure determinism.
+      SortedMap<RebindAnswersPermutationKey, Permutation> merged =
+          new TreeMap<RebindAnswersPermutationKey, Permutation>();
+      SortedSet<String> liveRebindRequests = unifiedAst.getRebindRequests();
+      for (Permutation permutation : permutations) {
+        // Construct a key for the live rebind answers.
+        RebindAnswersPermutationKey key =
+            new RebindAnswersPermutationKey(permutation, liveRebindRequests);
+        if (merged.containsKey(key)) {
+          Permutation existing = merged.get(key);
+          existing.mergeFrom(permutation, liveRebindRequests);
+        } else {
+          merged.put(key, permutation);
         }
-
-        permutations.clear();
-        permutations.addAll(merged.values());
       }
+
+      permutations.clear();
+      permutations.addAll(merged.values());
 
       if (jjsOptions.isCompilerMetricsEnabled()) {
         int[] ids = new int[allPermutations.size()];
@@ -424,7 +402,7 @@ public class Precompile {
       compilerContext = compilerContextBuilder.module(module).build();
 
       StandardLinkerContext linkerContext = new StandardLinkerContext(
-          TreeLogger.NULL, module, compilerContext.getPublicResourceOracle(), options);
+          TreeLogger.NULL, module, compilerContext.getPublicResourceOracle(), options.getOutput());
 
       boolean generateOnShards = true;
 

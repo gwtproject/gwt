@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "ga" locale.
@@ -51,7 +46,7 @@ public class DateTimeFormatInfoImpl_ga extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yyyy";
+    return "dd/MM/y";
   }
 
   @Override
@@ -71,8 +66,63 @@ public class DateTimeFormatInfoImpl_ga extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public int firstDayOfTheWeek() {
+    return 0;
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
+  }
+
+  @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
+  public String formatMonthFullWeekdayDay() {
+    return "EEEE d MMMM";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "dd/MM";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "MMM y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "d MMM y";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "MMMM y";
+  }
+
+  @Override
   public String formatYearMonthFullDay() {
     return "d MMMM y";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "MM/y";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "dd/MM/y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE d MMM y";
   }
 
   @Override

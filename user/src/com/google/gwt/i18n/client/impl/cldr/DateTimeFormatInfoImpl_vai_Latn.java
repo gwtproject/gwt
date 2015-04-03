@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "vai_Latn" locale.
@@ -32,43 +27,13 @@ public class DateTimeFormatInfoImpl_vai_Latn extends DateTimeFormatInfoImpl_vai 
   }
 
   @Override
-  public String formatYear() {
-    return "y";
-  }
-
-  @Override
-  public String formatYearMonthAbbrev() {
-    return "MMM y";
-  }
-
-  @Override
   public String formatYearMonthAbbrevDay() {
     return "MMM d y";
   }
 
   @Override
-  public String formatYearMonthNum() {
-    return "M/y";
-  }
-
-  @Override
   public String formatYearMonthNumDay() {
     return "M/d/y";
-  }
-
-  @Override
-  public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "QQQQ y";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "Q y";
   }
 
   @Override

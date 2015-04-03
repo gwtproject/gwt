@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -72,7 +72,7 @@ public class JsInlinerTest extends OptimizerTestBase {
 
   /**
    * A test for mutually-recursive functions. Setup:
-   * 
+   *
    * <pre>
    * a -> b, c
    * b -> a, c
@@ -92,7 +92,7 @@ public class JsInlinerTest extends OptimizerTestBase {
    * Test that a global array reference breaks argument ordering.
    */
   public void testOrderingArrayGlobal() throws Exception {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
 
     code.append("var array; ");
     code.append("function clinit() { clinit = null; }");
@@ -113,7 +113,7 @@ public class JsInlinerTest extends OptimizerTestBase {
    * Test that a local reference does not break argument ordering.
    */
   public void testOrderingArrayLocal() throws Exception {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
 
     code.append("function clinit() { clinit = null; }");
 
@@ -125,8 +125,8 @@ public class JsInlinerTest extends OptimizerTestBase {
 
     // bootstrap the program
     code.append("caller();");
-    
-    StringBuffer expected = new StringBuffer();
+
+    StringBuilder expected = new StringBuilder();
     expected.append("function clinit() { clinit = null; }");
     expected.append("function caller() { var array; array[0] + (clinit(), 2); }");
     expected.append("caller();");
@@ -138,7 +138,7 @@ public class JsInlinerTest extends OptimizerTestBase {
    * Test that a field reference breaks argument ordering.
    */
   public void testOrderingField() throws Exception {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
 
     code.append("function clinit() {  clinit = null; }");
 
@@ -158,7 +158,7 @@ public class JsInlinerTest extends OptimizerTestBase {
    * Test that a global variable breaks argument ordering.
    */
   public void testOrderingGlobal() throws Exception {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     // A global variable x
     code.append("var x;");
 
@@ -181,7 +181,7 @@ public class JsInlinerTest extends OptimizerTestBase {
    * Test that a local variable does not break argument ordering.
    */
   public void testOrderingLocal() throws Exception {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
 
     code.append("function clinit() { clinit = null; }");
 
@@ -194,7 +194,7 @@ public class JsInlinerTest extends OptimizerTestBase {
     // bootstrap the program
     code.append("caller();");
 
-    StringBuffer expected = new StringBuffer();
+    StringBuilder expected = new StringBuilder();
 
     expected.append("function clinit() { clinit = null; }");
     expected.append("function caller() {var y; return y=2,clinit(),3;}");
@@ -206,7 +206,7 @@ public class JsInlinerTest extends OptimizerTestBase {
    * Test that a new expression breaks argument ordering.
    */
   public void testOrderingNew() throws Exception {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     // A static variable x
     code.append("var x;");
 
@@ -240,8 +240,8 @@ public class JsInlinerTest extends OptimizerTestBase {
    * @see http://code.google.com/p/google-web-toolkit/issues/detail?id=5936
    */
   public void testPreserveNameScopeWithDoubleInliningAndObfuscation() throws Exception {
-    StringBuffer code = new StringBuffer();
-    
+    StringBuilder code = new StringBuilder();
+
     code.append("function getA(){"
                 + "var s;"
                 + "s = getB();"
@@ -259,13 +259,13 @@ public class JsInlinerTest extends OptimizerTestBase {
                 + "getA();"
                 + "if (y != 10) {$wnd.alert('y != 10');}"
                 + "}");
-    
+
     code.append("var x = 10; start(x);");
 
-    StringBuffer expected = new StringBuffer();
+    StringBuilder expected = new StringBuilder();
     expected.append("function c(a){var b;b='t';if(a!=10){$wnd.alert('y != 10')}}");
     expected.append("var d=10;c(d);");
-    
+
     verifyOptimizedObfuscated(expected.toString(), code.toString());
   }
 

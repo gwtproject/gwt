@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "ewo" locale.
@@ -30,7 +25,7 @@ public class DateTimeFormatInfoImpl_ewo extends DateTimeFormatInfoImpl {
   public String[] ampms() {
     return new String[] {
         "kíkíríg",
-        "ngǝgógǝle"
+        "ngəgógəle"
     };
   }
 
@@ -51,7 +46,7 @@ public class DateTimeFormatInfoImpl_ewo extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "d/M/yyyy";
+    return "d/M/y";
   }
 
   @Override
@@ -148,7 +143,7 @@ public class DateTimeFormatInfoImpl_ewo extends DateTimeFormatInfoImpl {
         "ngɔn lála",
         "ngɔn nyina",
         "ngɔn tána",
-        "ngɔn samǝna",
+        "ngɔn saməna",
         "ngɔn zamgbála",
         "ngɔn mwom",
         "ngɔn ebulú",
@@ -219,9 +214,9 @@ public class DateTimeFormatInfoImpl_ewo extends DateTimeFormatInfoImpl {
     return new String[] {
         "sɔ́ndɔ",
         "mɔ́ndi",
-        "sɔ́ndɔ mǝlú mǝ́bɛ̌",
-        "sɔ́ndɔ mǝlú mǝ́lɛ́",
-        "sɔ́ndɔ mǝlú mǝ́nyi",
+        "sɔ́ndɔ məlú mə́bɛ̌",
+        "sɔ́ndɔ məlú mə́lɛ́",
+        "sɔ́ndɔ məlú mə́nyi",
         "fúladé",
         "séradé"
     };

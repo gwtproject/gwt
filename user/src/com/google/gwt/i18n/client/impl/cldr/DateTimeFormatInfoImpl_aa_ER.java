@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5717 $
-//  type=root
-//  date=$Date: 2011-04-27 23:37:06 -0400 (Wed, 27 Apr 2011) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "aa_ER" locale.

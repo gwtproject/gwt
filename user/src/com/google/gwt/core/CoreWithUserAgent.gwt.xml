@@ -13,47 +13,27 @@
 <!-- limitations under the License.                                         -->
 
 <!-- Deferred binding rules for core classes based on user agent. -->
-<module type="fileset">
+<module>
   <inherits name="com.google.gwt.core.Core"/>
-  <inherits name="com.google.gwt.core.CompilerParameters" />
-  <inherits name="com.google.gwt.core.EmulateJsStack" />
-  <inherits name="com.google.gwt.useragent.UserAgent"/>
 
-  <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorMoz">
-    <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
-    <when-property-is name="compiler.stackMode" value="native" />
-    <when-property-is name="user.agent" value="gecko1_8" />
-  </replace-with>
-
-  <replace-with
-      class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorNull">
-    <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
-    <when-property-is name="compiler.stackMode" value="strip" />
+  <!-- Replace JS map factory to support older browsers -->
+  <replace-with class="java.util.InternalJsMapFactory.BackwardCompatibleJsMapFactory">
+    <when-type-is class="java.util.InternalJsMapFactory"/>
   </replace-with>
 
   <!-- Disable source maps for non-Chrome browsers -->
+  <!-- TODO(goktug): enable source maps for non-Chrome browsers -->
   <set-property name="compiler.useSourceMaps" value="false">
     <none> 
       <when-property-is name="user.agent" value="safari"/>
     </none> 
   </set-property>
 
-  <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorChrome">
+  <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorModern">
     <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
     <when-property-is name="compiler.stackMode" value="native" />
-    <!-- For now, only Chrome provides Error.stack support, so we hijack the
-         entire WebKit permutation -->
     <when-property-is name="user.agent" value="safari" />
     <when-property-is name="compiler.useSourceMaps" value="true"/>
-  </replace-with>
-
-  <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorChromeNoSourceMap">
-    <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
-    <when-property-is name="compiler.stackMode" value="native" />
-    <!-- For now, only Chrome provides Error.stack support, so we hijack the
-         entire WebKit permutation -->
-    <when-property-is name="user.agent" value="safari" />
-    <when-property-is name="compiler.useSourceMaps" value="false"/>
   </replace-with>
 
   <!-- Utility class to query if source maps are enabled, mainly for testing -->

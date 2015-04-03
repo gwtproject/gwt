@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -19,6 +19,7 @@ import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.impl.ClassPathEntry;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.io.Files;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -70,10 +71,11 @@ public class MockResourceOracle extends ResourceOracleImpl {
   }
 
   @Override
-  public Map<String, Resource> getResourceMap() {
-    return exportedMap;
+  public Resource getResource(String pathName) {
+    pathName = Files.simplifyPath(pathName);
+    return exportedMap.get(pathName);
   }
-
+  
   @Override
   public Set<Resource> getResources() {
     return exportedValues;

@@ -1,12 +1,12 @@
 /*
  * Copyright 2007 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -59,7 +59,7 @@ public class JsParserException extends Exception {
     if (sourceDetail == null) {
       return msg;
     }
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     sb.append(sourceDetail.getFileName());
     sb.append('(');
     sb.append(sourceDetail.getLine());
@@ -80,10 +80,6 @@ public class JsParserException extends Exception {
 
   private final SourceDetail sourceDetail;
 
-  public JsParserException(String msg) {
-    this(msg, null);
-  }
-
   public JsParserException(String msg, int line, String lineSource,
       int lineOffset, String fileName) {
     this(msg, new SourceDetail(line, lineSource, lineOffset, fileName));
@@ -96,7 +92,7 @@ public class JsParserException extends Exception {
 
   /**
    * Provides additional source detail in some cases.
-   * 
+   *
    * @return additional detail regarding the error, or <code>null</code> if no
    *         additional detail is available
    */

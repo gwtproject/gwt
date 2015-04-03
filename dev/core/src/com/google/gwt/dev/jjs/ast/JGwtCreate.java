@@ -16,11 +16,7 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.util.Name.BinaryName;
-import com.google.gwt.dev.util.collect.Lists;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -30,8 +26,7 @@ import java.util.List;
  */
 public class JGwtCreate extends JExpression {
 
-  public static JExpression createInstantiationExpression(SourceInfo info, JClassType classType,
-      JDeclaredType enclosingType) {
+  public static JExpression createInstantiationExpression(SourceInfo info, JClassType classType) {
     /*
      * Find the appropriate (noArg) constructor. In our AST, constructors are
      * instance methods that should be qualified with a new expression.
@@ -49,29 +44,10 @@ public class JGwtCreate extends JExpression {
       return null;
     }
     // Call it, using a new expression as a qualifier
-    return new JNewInstance(info, noArgCtor, enclosingType);
+    return new JNewInstance(info, noArgCtor);
   }
 
-  static List<String> nameOf(Collection<? extends JType> types) {
-    List<String> result = Lists.create();
-    for (JType type : types) {
-      result = Lists.add(result, BinaryName.toSourceName(type.getName()));
-    }
-    return Lists.normalizeUnmodifiable(result);
-  }
-
-  private static ArrayList<JExpression> createInstantiationExpressions(SourceInfo info,
-      Collection<JClassType> classTypes, JDeclaredType enclosingType) {
-    ArrayList<JExpression> exprs = new ArrayList<JExpression>();
-    for (JClassType classType : classTypes) {
-      JExpression expr = createInstantiationExpression(info, classType, enclosingType);
-      assert expr != null;
-      exprs.add(expr);
-    }
-    return exprs;
-  }
-
-  private final ArrayList<JExpression> instantiationExpressions;
+  private final List<JExpression> instantiationExpressions;
 
   private final List<String> resultTypes;
 
@@ -83,19 +59,10 @@ public class JGwtCreate extends JExpression {
   private JType type;
 
   /**
-   * Public constructor used during AST creation.
-   */
-  public JGwtCreate(SourceInfo info, JReferenceType sourceType, Collection<JClassType> resultTypes,
-      JType type, JDeclaredType enclosingType) {
-    this(info, BinaryName.toSourceName(sourceType.getName()), nameOf(resultTypes), type,
-        createInstantiationExpressions(info, resultTypes, enclosingType));
-  }
-
-  /**
    * Constructor used for cloning an existing node.
    */
   public JGwtCreate(SourceInfo info, String sourceType, List<String> resultTypes, JType type,
-      ArrayList<JExpression> instantiationExpressions) {
+      List<JExpression> instantiationExpressions) {
     super(info);
     this.sourceType = sourceType;
     this.resultTypes = resultTypes;
@@ -103,7 +70,7 @@ public class JGwtCreate extends JExpression {
     this.instantiationExpressions = instantiationExpressions;
   }
 
-  public ArrayList<JExpression> getInstantiationExpressions() {
+  public List<JExpression> getInstantiationExpressions() {
     return instantiationExpressions;
   }
 

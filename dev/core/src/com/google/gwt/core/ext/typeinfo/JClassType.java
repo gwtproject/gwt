@@ -21,8 +21,7 @@ import java.util.Set;
 /**
  * Type used to represent any non-primitive type.
  */
-@SuppressWarnings("deprecation")
-public interface JClassType extends JType, HasAnnotations, HasMetaData {
+public interface JClassType extends JType, HasAnnotations {
 
   JParameterizedType asParameterizationOf(JGenericType type);
 
@@ -210,12 +209,6 @@ public interface JClassType extends JType, HasAnnotations, HasMetaData {
   boolean isFinal();
 
   /**
-   * @deprecated local types are not modeled
-   */
-  @Deprecated
-  boolean isLocalType();
-
-  /**
    * Tests if this type is contained within another type.
    *
    * @return true if this type has an enclosing type, false if this type is a
@@ -228,6 +221,8 @@ public interface JClassType extends JType, HasAnnotations, HasMetaData {
   boolean isProtected();
 
   boolean isPublic();
+
+  boolean isPackageProtected();
 
   boolean isStatic();
 

@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6549 Google $
-//  type=root
-//  date=$Date: 2012-02-08 14:09:21 -0500 (Wed, 08 Feb 2012) $
 
 /**
  * Default implementation of DateTimeFormatInfo interface, using values from
@@ -46,7 +41,7 @@ public class DefaultDateTimeFormatInfo implements DateTimeFormatInfo {
 
   @Override
   public String dateFormatFull() {
-    return "EEEE, y MMMM dd";
+    return "y MMMM d, EEEE";
   }
 
   @Override
@@ -61,7 +56,7 @@ public class DefaultDateTimeFormatInfo implements DateTimeFormatInfo {
 
   @Override
   public String dateFormatShort() {
-    return "yyyy-MM-dd";
+    return "y-MM-dd";
   }
 
   @Override
@@ -162,12 +157,12 @@ public class DefaultDateTimeFormatInfo implements DateTimeFormatInfo {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE MMMM d";
+    return "MMMM d, EEEE";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "M-d";
+    return "MM-dd";
   }
 
   @Override
@@ -197,17 +192,17 @@ public class DefaultDateTimeFormatInfo implements DateTimeFormatInfo {
 
   @Override
   public String formatYearMonthNum() {
-    return "y-M";
+    return "y-MM";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "y-M-d";
+    return "y-MM-dd";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, y MMM d";
+    return "y MMM d, EEE";
   }
 
   @Override

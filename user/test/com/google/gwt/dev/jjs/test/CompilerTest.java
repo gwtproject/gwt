@@ -16,7 +16,6 @@
 package com.google.gwt.dev.jjs.test;
 
 import com.google.gwt.core.client.JavaScriptException;
-import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.dev.jjs.test.compilertests.MethodNamedSameAsClass;
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -24,6 +23,7 @@ import junit.framework.Assert;
 
 import java.util.ArrayList;
 import java.util.EventListener;
+import java.util.Locale;
 
 /**
  * Miscellaneous tests of the Java to JavaScript compiler.
@@ -564,6 +564,45 @@ public class CompilerTest extends GWTTestCase {
       // generated via the TempLocalVisitor.
       assertEquals("initial text", topScope.toString());
     }
+  }
+
+  private int functionWithClashingParameters(int i0) {
+    int c = 0;
+    for (int i = 0; i < 5; i++) {
+      c++;
+    }
+    for (int i = 0; i < 6; i++) {
+      c++;
+    }
+    // Assumes that GenerateJavaScriptAST will rename one of the "i" variables to i0.
+    return i0;
+  }
+
+  /**
+   * Test for issue 8870.
+   *
+   */
+  public void testParameterVariableClash() {
+    assertEquals(1, functionWithClashingParameters(1));
+  }
+
+  /**
+   * Test for issue 8877.
+   */
+  public void testOptimizeInstanceOf() {
+    class A {
+      int counter = 0;
+      Object get() {
+        if (counter >= 0) {
+          counter++;
+        }
+        return "aString";
+      }
+    }
+
+    A anA = new A();
+    assertFalse(anA.get() instanceof Integer);
+    assertEquals(1, anA.counter);
   }
 
   public void testDeadCode() {
@@ -1193,7 +1232,7 @@ public class CompilerTest extends GWTTestCase {
     assertFalse("Hello, AJAX".equals("me"));
     assertTrue("Hello, AJAX".equals("Hello, AJAX"));
     assertTrue("Hello, AJAX".equalsIgnoreCase("HELLO, ajax"));
-    assertEquals("hello, ajax", StringCase.toLower("Hello, AJAX"));
+    assertEquals("hello, ajax", "Hello, AJAX".toLowerCase(Locale.ROOT));
 
     assertEquals("foobar", "foo" + barShouldInline());
     assertEquals("1bar", 1 + barShouldInline());

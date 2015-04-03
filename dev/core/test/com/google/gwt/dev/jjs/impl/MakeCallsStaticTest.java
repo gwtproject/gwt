@@ -17,7 +17,6 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.util.arg.OptionCheckedMode;
 
 /**
  * Verifies that we can convert final methods to static methods,
@@ -40,20 +39,15 @@ public class MakeCallsStaticTest extends OptimizerTestBase {
         .intoString("return EntryPoint.$answer(Exceptions.checkNotNull(new EntryPoint()));");
   }
 
+  public void testUnstatifiableMethod() throws Exception {
+    addSnippetClassDecl("final String answer() { return \"42\"; }");
+    optimize("String",
+        "return com.google.gwt.core.client.impl.Impl.getNameOf(\"@test.EntryPoint::answer()\");")
+        .intoString("return /* JNameOf */\"answer\";");
+  }
+
   @Override
   protected boolean optimizeMethod(JProgram program, JMethod method) {
-    OptionCheckedMode option = new OptionCheckedMode() {
-      @Override
-      public boolean shouldAddRuntimeChecks() {
-        return addNullCheck;
-      }
-
-      @Override
-      public void setAddRuntimeChecks(boolean enabled) {
-        throw new UnsupportedOperationException();
-      }
-    };
-
-    return MakeCallsStatic.exec(option, program).didChange();
+    return MakeCallsStatic.exec(program, addNullCheck).didChange();
   }
 }

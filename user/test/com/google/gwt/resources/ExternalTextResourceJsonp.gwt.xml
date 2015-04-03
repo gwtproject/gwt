@@ -11,8 +11,8 @@
 <!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
-<module type="fileset">
-  <inherits name="com.google.gwt.resources.Resources" />
+<module>
+  <inherits name="com.google.gwt.resources.ResourcesTest" />
   <set-configuration-property name="ExternalTextResource.useJsonp"
                               value="true" />
 </module>

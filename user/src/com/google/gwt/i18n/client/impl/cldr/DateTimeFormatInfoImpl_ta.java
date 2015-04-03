@@ -14,25 +14,12 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "ta" locale.
  */
 public class DateTimeFormatInfoImpl_ta extends DateTimeFormatInfoImpl {
-
-  @Override
-  public String[] ampms() {
-    return new String[] {
-        "am",
-        "pm"
-    };
-  }
 
   @Override
   public String dateFormatFull() {
@@ -76,23 +63,13 @@ public class DateTimeFormatInfoImpl_ta extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String formatMonthAbbrevDay() {
-    return "d MMM";
-  }
-
-  @Override
   public String formatMonthFullDay() {
     return "d MMMM";
   }
 
   @Override
-  public String formatMonthFullWeekdayDay() {
-    return "EEEE, d MMMM";
-  }
-
-  @Override
   public String formatMonthNumDay() {
-    return "d-M";
+    return "d/M";
   }
 
   @Override

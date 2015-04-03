@@ -1,12 +1,12 @@
 /*
  * Copyright 2006 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -27,6 +27,10 @@ public class Messages {
   public static final Message0 HINT_CHECK_CLASSPATH_SOURCE_ENTRIES = new Message0(
       TreeLogger.ERROR,
       "Hint: Check that your classpath includes all required source roots");
+  public static final Message0 HINT_STRICT_SOURCE_ENTRIES = new Message0(TreeLogger.ERROR,
+      "Hint: Strict source inclusion is active and \"client\" directories "
+      + "are not being implicitly included. Check that you don't need to "
+      + "add some <source path=\"client\" /> entries.");
 
   public static final Message0 HINT_CHECK_INHERIT_CORE = new Message0(
       TreeLogger.ERROR,
@@ -43,9 +47,6 @@ public class Messages {
   public static final Message1String HINT_CHECK_TYPENAME = new Message1String(
       TreeLogger.ERROR,
       "Hint: Check that the type name '$0' is really what you meant");
-  public static final Message0 HINT_PRIOR_COMPILER_ERRORS = new Message0(
-      TreeLogger.ERROR,
-      "Hint: Previous compiler errors may have made this type unavailable");
 
   private Messages() {
   }

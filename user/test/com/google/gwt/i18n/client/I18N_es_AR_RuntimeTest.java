@@ -30,6 +30,16 @@ import java.util.Set;
  */
 public class I18N_es_AR_RuntimeTest extends GWTTestCase {
 
+  static {
+    if (GWT.isClient()) {
+      setLocale();
+    }
+  }
+
+  private static native void setLocale() /*-{
+    $wnd['__gwt_Locale'] = 'es_AR';
+  }-*/;
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.i18n.I18NTest_es_AR_runtime";
@@ -48,7 +58,7 @@ public class I18N_es_AR_RuntimeTest extends GWTTestCase {
   }
 
   public void testCurrencyNames() {
-    assertEquals("Peso Argentino", CurrencyList.get().lookupName("ARS"));
+    assertEquals("peso argentino", CurrencyList.get().lookupName("ARS"));
     assertEquals("peso mexicano", CurrencyList.get().lookupName("MXN"));
     assertEquals("dólar estadounidense", CurrencyList.get().lookupName("USD"));
   }
@@ -67,7 +77,7 @@ public class I18N_es_AR_RuntimeTest extends GWTTestCase {
     assertEquals(2, ars.getDefaultFractionDigits());
     CurrencyData data = CurrencyList.get().lookup("MXN");
     assertEquals("MXN", data.getCurrencyCode());
-    assertEquals("MEX$", data.getCurrencySymbol());
+    assertEquals("MX$", data.getCurrencySymbol());
     assertEquals(2, data.getDefaultFractionDigits());
     CurrencyData usd = CurrencyList.get().lookup("USD");
     assertEquals("USD", usd.getCurrencyCode());

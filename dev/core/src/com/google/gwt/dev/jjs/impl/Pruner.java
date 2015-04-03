@@ -21,6 +21,7 @@ import com.google.gwt.dev.jjs.ast.CanBeStatic;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.HasEnclosingType;
 import com.google.gwt.dev.jjs.ast.HasName;
+import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JClassType;
@@ -31,10 +32,11 @@ import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
+import com.google.gwt.dev.jjs.ast.JLocal;
+import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNameOf;
 import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JNode;
@@ -48,20 +50,21 @@ import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
-import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
-import com.google.gwt.dev.js.ast.JsFunction;
+import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.base.Predicate;
+import com.google.gwt.thirdparty.guava.common.base.Predicates;
+import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
+import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Remove globally unreferenced classes, interfaces, methods, parameters, and
@@ -86,11 +89,12 @@ public class Pruner {
    * Remove assignments to pruned fields, locals and params. Nullify the return
    * type of methods declared to return a globally uninstantiable type. Replace
    * references to pruned variables and methods by references to the null field
-   * and null method, and drop assignments to pruned variables.
+   * and null method, assignments to pruned variables, and nullify the type of
+   * variable whose type is a pruned type.
    */
-  private class CleanupRefsVisitor extends JModVisitor {
+  private class CleanupRefsVisitor extends JModVisitorWithTemporaryVariableCreation {
     private final Stack<JExpression> lValues = new Stack<JExpression>();
-    private final Map<JMethod, ArrayList<JParameter>> methodToOriginalParamsMap;
+    private final ListMultimap<JMethod, JParameter> priorParametersByMethod;
     private final Set<? extends JNode> referencedNonTypes;
     {
       // Initialize a sentinel value to avoid having to check for empty stack.
@@ -98,31 +102,37 @@ public class Pruner {
     }
 
     public CleanupRefsVisitor(Set<? extends JNode> referencedNodes,
-        Map<JMethod, ArrayList<JParameter>> methodToOriginalParamsMap) {
+        ListMultimap<JMethod, JParameter> priorParametersByMethod,
+        OptimizerContext optimizerCtx) {
+      super(optimizerCtx);
       this.referencedNonTypes = referencedNodes;
-      this.methodToOriginalParamsMap = methodToOriginalParamsMap;
+      this.priorParametersByMethod = priorParametersByMethod;
     }
 
     @Override
     public void endVisit(JBinaryOperation x, Context ctx) {
+      if (x.getOp() != JBinaryOperator.ASG) {
+        return;
+      }
       // The LHS of assignments may have been pruned.
-      if (x.getOp() == JBinaryOperator.ASG) {
-        lValues.pop();
-        JExpression lhs = x.getLhs();
-        if (lhs instanceof JVariableRef) {
-          JVariableRef variableRef = (JVariableRef) lhs;
-          if (isVariablePruned(variableRef.getTarget())) {
-            // TODO: better null tracking; we might be missing some NPEs here.
-            JExpression replacement =
-                makeReplacementForAssignment(x.getSourceInfo(), variableRef, x.getRhs());
-            ctx.replaceMe(replacement);
-          }
-        }
+      lValues.pop();
+      JExpression lhs = x.getLhs();
+      if (!(lhs instanceof JVariableRef)) {
+        return;
+      }
+
+      JVariableRef variableRef = (JVariableRef) lhs;
+      if (isVariablePruned(variableRef.getTarget())) {
+        // TODO: better null tracking; we might be missing some NPEs here.
+        JExpression replacement =
+            makeReplacementForAssignment(x.getSourceInfo(), variableRef, x.getRhs());
+        ctx.replaceMe(replacement);
       }
     }
 
     @Override
     public void endVisit(JDeclarationStatement x, Context ctx) {
+      super.endVisit(x, ctx);
       lValues.pop();
       // The variable may have been pruned.
       if (isVariablePruned(x.getVariableRef().getTarget())) {
@@ -147,13 +157,20 @@ public class Pruner {
     }
 
     @Override
-    public void endVisit(JMethod x, Context ctx) {
+    public void exit(JMethod x, Context ctx) {
       JType type = x.getType();
-      if (type instanceof JReferenceType) {
-        if (!program.typeOracle.isInstantiatedType((JReferenceType) type)) {
-          x.setType(program.getTypeNull());
-        }
+      if (type instanceof JReferenceType &&
+          !program.typeOracle.isInstantiatedType((JReferenceType) type)) {
+        x.setType(program.getTypeNull());
       }
+      Predicate<JMethod> isPruned = new Predicate<JMethod>() {
+        @Override
+        public boolean apply(JMethod method) {
+          return isPruned(method);
+        }
+      };
+      Iterables.removeIf(x.getOverriddenMethods(), isPruned);
+      Iterables.removeIf(x.getOverridingMethods(), isPruned);
     }
 
     @Override
@@ -170,11 +187,7 @@ public class Pruner {
         return;
       }
 
-      // Did we prune the parameters of the method we're calling?
-      if (methodToOriginalParamsMap.containsKey(method)) {
-        JMethodCall newCall = new JMethodCall(x, x.getInstance());
-        replaceForPrunedParameters(x, newCall, ctx);
-      }
+      maybeReplaceForPrunedParameters(x, ctx);
     }
 
     @Override
@@ -198,11 +211,7 @@ public class Pruner {
 
     @Override
     public void endVisit(JNewInstance x, Context ctx) {
-      // Did we prune the parameters of the method we're calling?
-      if (methodToOriginalParamsMap.containsKey(x.getTarget())) {
-        JMethodCall newCall = new JNewInstance(x);
-        replaceForPrunedParameters(x, newCall, ctx);
-      }
+      maybeReplaceForPrunedParameters(x, ctx);
     }
 
     @Override
@@ -237,6 +246,16 @@ public class Pruner {
     }
 
     @Override
+    public void exit(JVariable x, Context ctx) {
+      JType type = x.getType();
+      if (type instanceof JReferenceType &&
+          !program.typeOracle.isInstantiatedType((JReferenceType) type)) {
+        x.setType(program.getTypeNull());
+        madeChanges();
+      }
+    }
+
+    @Override
     public boolean visit(JBinaryOperation x, Context ctx) {
       if (x.getOp() == JBinaryOperator.ASG) {
         lValues.push(x.getLhs());
@@ -246,6 +265,7 @@ public class Pruner {
 
     @Override
     public boolean visit(JDeclarationStatement x, Context ctx) {
+      super.visit(x, ctx);
       lValues.push(x.getVariableRef());
       return true;
     }
@@ -291,41 +311,77 @@ public class Pruner {
       }
     }
 
-    private void replaceForPrunedParameters(JMethodCall x, JMethodCall newCall, Context ctx) {
+    // Arguments for pruned parameters will be pushed right into a multiexpression that will be
+    // evaluated with the next arg, e.g. m(arg1, (prunnedArg2, prunnedArg3, arg4)).
+    private void maybeReplaceForPrunedParameters(JMethodCall x, Context ctx) {
+      if (!priorParametersByMethod.containsKey(x.getTarget())) {
+        // No parameter was pruned.
+        return;
+      }
+
+      JMethodCall replacementCall = x.cloneWithoutParameters();
+
       assert !x.getTarget().canBePolymorphic();
-      List<JParameter> originalParams = methodToOriginalParamsMap.get(x.getTarget());
-      JMultiExpression currentMulti = null;
-      for (int i = 0, c = x.getArgs().size(); i < c; ++i) {
-        JExpression arg = x.getArgs().get(i);
-        JParameter param = null;
-        if (i < originalParams.size()) {
-          param = originalParams.get(i);
-        }
+      List<JParameter> originalParams = priorParametersByMethod.get(x.getTarget());
 
-        if (param != null && referencedNonTypes.contains(param)) {
-          // If there is an existing multi, terminate it.
-          if (currentMulti != null) {
-            currentMulti.addExpressions(arg);
-            newCall.addArg(currentMulti);
-            currentMulti = null;
-          } else {
-            newCall.addArg(arg);
-          }
+      // The method and the call agree in the number of parameters.
+      assert originalParams.size() == x.getArgs().size();
+
+      // Traverse the call arguments left to right.
+      SourceInfo sourceInfo = x.getSourceInfo();
+      JMultiExpression unevaluatedArgumentsForPrunedParameters =
+          new JMultiExpression(sourceInfo);
+      List<JExpression> args = x.getArgs();
+      for (int currentArgumentIndex = 0; currentArgumentIndex < args.size();
+          ++currentArgumentIndex) {
+        JExpression arg = args.get(currentArgumentIndex);
+
+        // If the parameter was not pruned .
+        if (referencedNonTypes.contains(originalParams.get(currentArgumentIndex))) {
+          // Add the current argument to the list of unevaluated arguments and pass the multi
+          // expression to the call.
+          unevaluatedArgumentsForPrunedParameters.addExpressions(arg);
+          replacementCall.addArg(unevaluatedArgumentsForPrunedParameters);
+          // Reset the accumulating multi expression.
+          unevaluatedArgumentsForPrunedParameters =  new JMultiExpression(sourceInfo);
         } else if (arg.hasSideEffects()) {
-          // The argument is only needed for side effects, add it to a multi.
-          if (currentMulti == null) {
-            currentMulti = new JMultiExpression(x.getSourceInfo());
-          }
-          currentMulti.addExpressions(arg);
+          // If the argument was pruned and has sideffects accumulate it; otherwise discard.
+          unevaluatedArgumentsForPrunedParameters.addExpressions(arg);
         }
       }
 
-      // Add any orphaned parameters on the end. Extra params are OK.
-      if (currentMulti != null) {
-        newCall.addArg(currentMulti);
+      if (unevaluatedArgumentsForPrunedParameters.isEmpty()) {
+        // We are done, all (side effectful) parameters have been evaluated.
+        ctx.replaceMe(replacementCall);
+        return;
       }
 
-      ctx.replaceMe(newCall);
+      // If the last few parameters where pruned, we need to evaluate the (side effectful) arguments
+      // for those parameters.
+      if (replacementCall.getArgs().isEmpty()) {
+        // All parameters have been pruned, replace by (prunedArg1, ..., prunedArgn, m()).
+        unevaluatedArgumentsForPrunedParameters.addExpressions(replacementCall);
+        ctx.replaceMe(unevaluatedArgumentsForPrunedParameters);
+        return;
+      }
+      // Some parameters have been pruned from the end, replace by
+      // m(arg1,..., (lastArg = lastUnprunedArg, remainingArgs, lastArg))
+      JExpression lastArg = Iterables.getLast(replacementCall.getArgs());
+      JLocal tempVar =
+          createTempLocal(sourceInfo, Iterables.getLast(
+              Iterables.filter(originalParams, Predicates.in(referencedNonTypes))).getType());
+      unevaluatedArgumentsForPrunedParameters.addExpressions(0, JProgram.createAssignment(
+          lastArg.getSourceInfo(), new JLocalRef(sourceInfo, tempVar), lastArg));
+      unevaluatedArgumentsForPrunedParameters.addExpressions(new JLocalRef(sourceInfo, tempVar));
+      replacementCall.setArg(replacementCall.getArgs().size() - 1, unevaluatedArgumentsForPrunedParameters);
+      ctx.replaceMe(replacementCall);
+    }
+
+    @Override
+    protected String newTemporaryLocalName(SourceInfo info, JType type, JMethodBody methodBody) {
+      // The name can be reused a later pass will make sure each instance of JLocal in a method
+      // has a different name.
+      return "lastArg";
     }
   }
 
@@ -333,84 +389,39 @@ public class Pruner {
    * Remove any unreferenced classes and interfaces from JProgram. Remove any
    * unreferenced methods and fields from their containing classes.
    */
-  private class PruneVisitor extends JModVisitor {
-    private final Map<JMethod, ArrayList<JParameter>> methodToOriginalParamsMap =
-        new HashMap<JMethod, ArrayList<JParameter>>();
+  private class PruneVisitor extends JChangeTrackingVisitor {
+    private final ListMultimap<JMethod, JParameter> priorParametersByMethod =
+        ArrayListMultimap.create();
     private final Set<? extends JNode> referencedNonTypes;
     private final Set<? extends JReferenceType> referencedTypes;
 
     public PruneVisitor(Set<? extends JReferenceType> referencedTypes,
-        Set<? extends JNode> referencedNodes) {
+        Set<? extends JNode> referencedNodes, OptimizerContext optimizerCtx) {
+      super(optimizerCtx);
       this.referencedTypes = referencedTypes;
       this.referencedNonTypes = referencedNodes;
     }
 
-    public Map<JMethod, ArrayList<JParameter>> getMethodToOriginalParamsMap() {
-      return methodToOriginalParamsMap;
+    public ListMultimap<JMethod, JParameter> getPriorParametersByMethod() {
+      return priorParametersByMethod;
     }
 
     @Override
-    public boolean visit(JClassType type, Context ctx) {
-      assert (referencedTypes.contains(type));
-      for (int i = 0; i < type.getFields().size(); ++i) {
-        JField field = type.getFields().get(i);
-        if (!referencedNonTypes.contains(field)) {
-          type.removeField(i);
-          madeChanges();
-          --i;
-        }
-      }
+    public boolean visit(JDeclaredType type, Context ctx) {
+      assert (referencedTypes.contains(type) || type instanceof JInterfaceType);
+      Predicate<JNode> notReferenced = Predicates.not(Predicates.in(referencedNonTypes));
+      removeFields(notReferenced, type);
+      removeMethods(notReferenced, type);
 
-      for (int i = 0; i < type.getMethods().size(); ++i) {
-        JMethod method = type.getMethods().get(i);
-        if (!referencedNonTypes.contains(method)) {
-          // Never prune clinit directly out of the class.
-          if (i > 0) {
-            type.removeMethod(i);
-            program.removeStaticImplMapping(method);
-            madeChanges();
-            --i;
-          }
-        } else {
-          accept(method);
-        }
+      for (JMethod method : type.getMethods()) {
+        accept(method);
       }
 
       return false;
     }
 
     @Override
-    public boolean visit(JInterfaceType type, Context ctx) {
-      boolean isReferenced = referencedTypes.contains(type);
-      boolean isInstantiated = program.typeOracle.isInstantiatedType(type);
-
-      for (int i = 0; i < type.getFields().size(); ++i) {
-        JField field = type.getFields().get(i);
-        // all interface fields are static and final
-        if (!isReferenced || !referencedNonTypes.contains(field)) {
-          type.removeField(i);
-          madeChanges();
-          --i;
-        }
-      }
-
-      // Start at index 1; never prune clinit directly out of the interface.
-      for (int i = 1; i < type.getMethods().size(); ++i) {
-        JMethod method = type.getMethods().get(i);
-        // all other interface methods are instance and abstract
-        if (!isInstantiated || !referencedNonTypes.contains(method)) {
-          type.removeMethod(i);
-          assert program.instanceMethodForStaticImpl(method) == null;
-          madeChanges();
-          --i;
-        }
-      }
-
-      return false;
-    }
-
-    @Override
-    public boolean visit(JMethod x, Context ctx) {
+    public boolean enter(JMethod x, Context ctx) {
       if (!x.canBePolymorphic()) {
         /*
          * Don't prune parameters on unreferenced methods. The methods might not
@@ -442,21 +453,14 @@ public class Pruner {
           return true;
         }
 
-        JsFunction func = x.isNative() ? ((JsniMethodBody) x.getBody()).getFunc() : null;
-
-        ArrayList<JParameter> originalParams = new ArrayList<JParameter>(x.getParams());
+        priorParametersByMethod.putAll(x, x.getParams());
 
         for (int i = 0; i < x.getParams().size(); ++i) {
           JParameter param = x.getParams().get(i);
           if (!referencedNonTypes.contains(param)) {
             x.removeParam(i);
             madeChanges();
-            // Remove the associated JSNI parameter
-            if (func != null) {
-              func.getParameters().remove(i);
-            }
             --i;
-            methodToOriginalParamsMap.put(x, originalParams);
           }
         }
       }
@@ -485,21 +489,59 @@ public class Pruner {
         if (referencedTypes.contains(type) || program.typeOracle.isInstantiatedType(type)) {
           accept(type);
         } else {
+          prunedMethods.addAll(type.getMethods());
+          methodsWereRemoved(type.getMethods());
+          fieldsWereRemoved(type.getFields());
           it.remove();
           madeChanges();
         }
       }
       return false;
     }
+
+    private void removeFields(Predicate<JNode> shouldRemove, JDeclaredType type) {
+      for (int i = 0; i < type.getFields().size(); ++i) {
+        JField field = type.getFields().get(i);
+        if (!shouldRemove.apply(field)) {
+          continue;
+        }
+        wasRemoved(field);
+        type.removeField(i);
+        madeChanges();
+        --i;
+      }
+    }
+
+    private void removeMethods(Predicate<JNode> shouldRemove, JDeclaredType type) {
+      // Skip method 0 which is clinit and is assumed to exist.
+      assert type.getMethods().get(0) == type.getClinitMethod();
+      for (int i = 1; i < type.getMethods().size(); ++i) {
+        JMethod method = type.getMethods().get(i);
+        if (!shouldRemove.apply(method)) {
+          continue;
+        }
+        prunedMethods.add(method);
+        wasRemoved(method);
+        type.removeMethod(i);
+        program.removeStaticImplMapping(method);
+        madeChanges();
+        --i;
+      }
+    }
   }
 
   private static final String NAME = Pruner.class.getSimpleName();
 
-  public static OptimizerStats exec(JProgram program, boolean noSpecialTypes) {
+  public static OptimizerStats exec(JProgram program, boolean noSpecialTypes,
+      OptimizerContext optimizerCtx) {
     Event optimizeEvent = SpeedTracerLogger.start(CompilerEventType.OPTIMIZE, "optimizer", NAME);
-    OptimizerStats stats = new Pruner(program, noSpecialTypes).execImpl();
+    OptimizerStats stats = new Pruner(program, noSpecialTypes).execImpl(optimizerCtx);
     optimizeEvent.end("didChange", "" + stats.didChange());
     return stats;
+  }
+
+  public static OptimizerStats exec(JProgram program, boolean noSpecialTypes) {
+    return exec(program, noSpecialTypes, OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
   }
 
   /**
@@ -535,7 +577,7 @@ public class Pruner {
 
     JFieldRef fieldRef =
         new JFieldRef(x.getSourceInfo(), instance, program.getNullField(), x.getEnclosingType(),
-            primitiveTypeOrNullType(program, x.getType()));
+            primitiveTypeOrNullTypeOrArray(program, x.getType()));
     return fieldRef;
   }
 
@@ -576,7 +618,7 @@ public class Pruner {
 
     JMethodCall newCall =
         new JMethodCall(x.getSourceInfo(), instance, program.getNullMethod(),
-            primitiveTypeOrNullType(program, x.getType()));
+            primitiveTypeOrNullTypeOrArray(program, x.getType()));
     // Retain the original arguments, they will be evaluated for side effects.
     for (JExpression arg : args) {
       if (arg.hasSideEffects()) {
@@ -589,7 +631,11 @@ public class Pruner {
   /**
    * Return the smallest type that is is a subtype of the argument.
    */
-  static JType primitiveTypeOrNullType(JProgram program, JType type) {
+  static JType primitiveTypeOrNullTypeOrArray(JProgram program, JType type) {
+    if (type instanceof JArrayType) {
+      JType leafType = primitiveTypeOrNullTypeOrArray(program, ((JArrayType) type).getLeafType());
+      return program.getOrCreateArrayType(leafType, ((JArrayType) type).getDims());
+    }
     if (type instanceof JPrimitiveType) {
       return type;
     }
@@ -600,15 +646,22 @@ public class Pruner {
 
   private final boolean saveCodeGenTypes;
 
+  private final Set<JMethod> prunedMethods = Sets.newLinkedHashSet();
+
   private Pruner(JProgram program, boolean saveCodeGenTypes) {
     this.program = program;
     this.saveCodeGenTypes = saveCodeGenTypes;
   }
 
-  private OptimizerStats execImpl() {
+  private OptimizerStats execImpl(OptimizerContext optimizerCtx) {
     OptimizerStats stats = new OptimizerStats(NAME);
 
     ControlFlowAnalyzer livenessAnalyzer = new ControlFlowAnalyzer(program);
+    // Don't prune JSOs, JsTypes that were considered instantiated before removing
+    // casts at {@link ImplementCastsAndTypeChecks}.
+    // TODO(rluble): the AST should have been left in a state that whatever method, attribute, etc
+    // from a JSO, JsType needs to be live, should have been already reachable from the AST.
+    livenessAnalyzer.rescue(program.typeOracle.getInstantiatedJsoTypesViaCast());
     livenessAnalyzer.setForPruning();
 
     // SPECIAL: Immortal codegen types are never pruned
@@ -628,16 +681,21 @@ public class Pruner {
 
     PruneVisitor pruner =
         new PruneVisitor(livenessAnalyzer.getReferencedTypes(), livenessAnalyzer
-            .getLiveFieldsAndMethods());
+            .getLiveFieldsAndMethods(), optimizerCtx);
     pruner.accept(program);
     stats.recordModified(pruner.getNumMods());
+
     if (!pruner.didChange()) {
       return stats;
     }
     CleanupRefsVisitor cleaner =
         new CleanupRefsVisitor(livenessAnalyzer.getLiveFieldsAndMethods(), pruner
-            .getMethodToOriginalParamsMap());
+            .getPriorParametersByMethod(), optimizerCtx);
     cleaner.accept(program.getDeclaredTypes());
+    optimizerCtx.incOptimizationStep();
+    optimizerCtx.syncDeletedSubCallGraphsSince(optimizerCtx.getLastStepFor(NAME) + 1,
+        prunedMethods);
+    JavaAstVerifier.assertProgramIsConsistent(program);
     return stats;
   }
 
@@ -656,5 +714,4 @@ public class Pruner {
       }
     }
   }
-
 }

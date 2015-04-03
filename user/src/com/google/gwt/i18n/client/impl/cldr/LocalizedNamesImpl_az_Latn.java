@@ -15,12 +15,7 @@
  */
 package com.google.gwt.i18n.client.impl.cldr;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 4123 $
-//  date=$Date: 2009-05-05 19:06:42 -0400 (Tue, 05 May 2009) $
-//  type=root
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "az_Latn" locale.

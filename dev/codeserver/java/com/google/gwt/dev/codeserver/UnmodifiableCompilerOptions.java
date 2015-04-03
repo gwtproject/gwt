@@ -18,8 +18,11 @@ package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.CompilerOptions;
+import com.google.gwt.dev.cfg.Properties;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.js.JsNamespaceOption;
+import com.google.gwt.dev.util.arg.OptionJsInteropMode;
+import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.SourceLevel;
 
 import java.io.File;
@@ -43,12 +46,6 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
   }
 
   @Override
-  @Deprecated
-  public final void setAggressivelyOptimize(boolean aggressivelyOptimize) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
   public final void setCastCheckingDisabled(boolean disabled) {
     throw new UnsupportedOperationException();
   }
@@ -65,6 +62,11 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
 
   @Override
   public void setClusterSimilarFunctions(boolean enabled) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public void setIncrementalCompileEnabled(boolean enabled) {
     throw new UnsupportedOperationException();
   }
 
@@ -94,12 +96,22 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
   }
 
   @Override
-  public final void setEnforceStrictResources(boolean strictResources) {
+  public void setEnforceStrictPublicResources(boolean strictPublicResources) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public void setEnforceStrictSourceResources(boolean strictSourceResources) {
     throw new UnsupportedOperationException();
   }
 
   @Override
   public final void setExtraDir(File extraDir) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public final void setFinalProperties(Properties finalProperties) {
     throw new UnsupportedOperationException();
   }
 
@@ -124,17 +136,12 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
   }
 
   @Override
+  public void setJsInteropMode(OptionJsInteropMode.Mode mode) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public void setJsonSoycEnabled(boolean jsonSoycEnabled) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public void setLibraryPaths(List<String> libraryPaths) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public void setLink(boolean link) {
     throw new UnsupportedOperationException();
   }
 
@@ -189,11 +196,6 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
   }
 
   @Override
-  public void setOutputLibraryPath(String outputLibraryPath) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
   public void setRemoveDuplicateFunctions(boolean enabled) {
     throw new UnsupportedOperationException();
   }
@@ -219,6 +221,11 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
   }
 
   @Override
+  public void setSourceMapFilePrefix(String path) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public final void setSoycEnabled(boolean enabled) {
     throw new UnsupportedOperationException();
   }
@@ -239,6 +246,11 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
   }
 
   @Override
+  public void setUseDetailedTypeIds(boolean enabled) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public final void setValidateOnly(boolean validateOnly) {
     throw new UnsupportedOperationException();
   }
@@ -250,6 +262,22 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
 
   @Override
   public final void setWorkDir(File dir) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public void setMethodNameDisplayMode(OptionMethodNameDisplayMode.Mode methodNameDisplayMode) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public void setPropertyValues(String name, Iterable<String> value) {
+    throw new UnsupportedOperationException();
+  }
+
+
+  @Override
+  public void setClosureCompilerFormatEnabled(boolean enabled) {
     throw new UnsupportedOperationException();
   }
 }

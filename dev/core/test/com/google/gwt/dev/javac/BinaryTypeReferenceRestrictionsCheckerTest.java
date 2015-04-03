@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -36,6 +36,7 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryField;
 import org.eclipse.jdt.internal.compiler.env.IBinaryMethod;
 import org.eclipse.jdt.internal.compiler.env.IBinaryNestedType;
 import org.eclipse.jdt.internal.compiler.env.IBinaryType;
+import org.eclipse.jdt.internal.compiler.env.IBinaryTypeAnnotation;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
@@ -47,7 +48,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * 
+ *
  */
 public class BinaryTypeReferenceRestrictionsCheckerTest extends TestCase {
   /**
@@ -63,6 +64,10 @@ public class BinaryTypeReferenceRestrictionsCheckerTest extends TestCase {
     @Override
     public IBinaryAnnotation[] getAnnotations() {
       return null;
+    }
+
+    @Override public IBinaryTypeAnnotation[] getTypeAnnotations() {
+      return new IBinaryTypeAnnotation[0];
     }
 
     @Override
@@ -171,9 +176,8 @@ public class BinaryTypeReferenceRestrictionsCheckerTest extends TestCase {
   }
 
   private static LookupEnvironment createMockLookupEnvironment() {
-    LookupEnvironment lookupEnvironment = new LookupEnvironment(null, null,
+    LookupEnvironment lookupEnvironment = new LookupEnvironment(null, new CompilerOptions(),
         null, null);
-    lookupEnvironment.globalOptions = new CompilerOptions();
     return lookupEnvironment;
   }
 

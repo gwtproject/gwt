@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 4753 $
-//  date=$Date: 2010-02-26 01:32:00 -0500 (Fri, 26 Feb 2010) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "ar_IQ" locale.
@@ -29,6 +24,78 @@ public class DateTimeFormatInfoImpl_ar_IQ extends DateTimeFormatInfoImpl_ar_001 
   @Override
   public int firstDayOfTheWeek() {
     return 6;
+  }
+
+  @Override
+  public String[] monthsFull() {
+    return new String[] {
+        "كانون الثاني",
+        "شباط",
+        "آذار",
+        "نيسان",
+        "أيار",
+        "حزيران",
+        "تموز",
+        "آب",
+        "أيلول",
+        "تشرين الأول",
+        "تشرين الثاني",
+        "كانون الأول"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrow() {
+    return new String[] {
+        "ك",
+        "ش",
+        "آ",
+        "ن",
+        "أ",
+        "ح",
+        "ت",
+        "آ",
+        "أ",
+        "ت",
+        "ت",
+        "ك"
+    };
+  }
+
+  @Override
+  public String[] monthsShort() {
+    return new String[] {
+        "كانون الثاني",
+        "شباط",
+        "آذار",
+        "نيسان",
+        "أيار",
+        "حزيران",
+        "تموز",
+        "آب",
+        "أيلول",
+        "تشرین الأول",
+        "تشرين الثاني",
+        "كانون الأول"
+    };
+  }
+
+  @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "كانون الثاني",
+        "شباط",
+        "آذار",
+        "نيسان",
+        "أيار",
+        "حزيران",
+        "تموز",
+        "آب",
+        "أيلول",
+        "تشرين الأول",
+        "تشرين الثاني",
+        "كانون الأول"
+    };
   }
 
   @Override

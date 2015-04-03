@@ -15,7 +15,16 @@
  */
 package java.util;
 
-import com.google.gwt.core.client.JavaScriptObject;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
+
+import static java.util.ConcurrentModificationDetector.checkStructuralChange;
+import static java.util.ConcurrentModificationDetector.recordLastKnownStructure;
+import static java.util.ConcurrentModificationDetector.structureChanged;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.impl.SpecializeMethod;
 
 /**
  * Implementation of Map interface based on a hash table. <a
@@ -26,19 +35,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * @param <V> value type
  */
 abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
-  /*
-   * Implementation notes:
-   * 
-   * String keys are stored in a separate map from non-String keys. String keys
-   * are mapped to their values via a JS associative map, stringMap. String keys
-   * could collide with intrinsic properties (like watch, constructor) so we
-   * prepend each key with a ':' inside of stringMap.
-   * 
-   * Integer keys are used to index all non-string keys. A key's hashCode is the
-   * index in hashCodeMap which should contain that key. Since several keys may
-   * have the same hash, each value in hashCodeMap is actually an array
-   * containing all entries whose keys share the same hash.
-   */
+
   private final class EntrySet extends AbstractSet<Entry<K, V>> {
 
     @Override
@@ -49,12 +46,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     @Override
     public boolean contains(Object o) {
       if (o instanceof Map.Entry) {
-        Map.Entry<?, ?> entry = (Map.Entry<?, ?>) o;
-        Object key = entry.getKey();
-        if (AbstractHashMap.this.containsKey(key)) {
-          Object value = AbstractHashMap.this.get(key);
-          return AbstractHashMap.this.equals(entry.getValue(), value);
-        }
+        return containsEntry((Map.Entry<?, ?>) o);
       }
       return false;
     }
@@ -81,111 +73,63 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   }
 
   /**
-   * Iterator for <code>EntrySetImpl</code>.
+   * Iterator for <code>EntrySet</code>.
    */
   private final class EntrySetIterator implements Iterator<Entry<K, V>> {
-    private final Iterator<Map.Entry<K, V>> iter;
-    private Map.Entry<K, V> last = null;
+    private Iterator<Entry<K, V>> stringMapEntries = stringMap.entries();
+    private Iterator<Entry<K, V>> current = stringMapEntries;
+    private Iterator<Entry<K, V>> last;
 
-    /**
-     * Constructor for <code>EntrySetIterator</code>.
-     */
     public EntrySetIterator() {
-      List<Map.Entry<K, V>> list = new ArrayList<Map.Entry<K, V>>();
-      if (nullSlotLive) {
-        list.add(new MapEntryNull());
-      }
-      addAllStringEntries(list);
-      addAllHashEntries(list);
-      this.iter = list.iterator();
+      recordLastKnownStructure(AbstractHashMap.this, this);
     }
 
+    @Override
     public boolean hasNext() {
-      return iter.hasNext();
-    }
-
-    public Map.Entry<K, V> next() {
-      return last = iter.next();
-    }
-
-    public void remove() {
-      if (last == null) {
-        throw new IllegalStateException("Must call next() before remove().");
-      } else {
-        iter.remove();
-        AbstractHashMap.this.remove(last.getKey());
-        last = null;
+      if (current.hasNext()) {
+        return true;
       }
-    }
-  }
-
-  private final class MapEntryNull extends AbstractMapEntry<K, V> {
-
-    public K getKey() {
-      return null;
+      if (current != stringMapEntries) {
+        return false;
+      }
+      current = hashCodeMap.entries();
+      return current.hasNext();
     }
 
-    public V getValue() {
-      return nullSlot;
+    @Override
+    public Entry<K, V> next() {
+      checkStructuralChange(AbstractHashMap.this, this);
+      checkElement(hasNext());
+
+      last = current;
+      return current.next();
     }
 
-    public V setValue(V object) {
-      return putNullSlot(object);
-    }
-  }
+    @Override
+    public void remove() {
+      checkState(last != null);
+      checkStructuralChange(AbstractHashMap.this, this);
 
-  // Instantiated from JSNI
-  @SuppressWarnings("unused")
-  private final class MapEntryString extends AbstractMapEntry<K, V> {
-
-    private final String key;
-
-    public MapEntryString(String key) {
-      this.key = key;
-    }
-
-    @SuppressWarnings("unchecked")
-    public K getKey() {
-      return (K) key;
-    }
-
-    public V getValue() {
-      return getStringValue(key);
-    }
-
-    public V setValue(V object) {
-      return putStringValue(key, object);
+      last.remove();
+      last = null;
+      recordLastKnownStructure(AbstractHashMap.this, this);
     }
   }
 
   /**
    * A map of integral hashCodes onto entries.
    */
-  // Used from JSNI.
-  @SuppressWarnings("unused")
-  private transient JavaScriptObject hashCodeMap;
-
-  /**
-   * This is the slot that holds the value associated with the "null" key.
-   */
-  private transient V nullSlot;
-
-  private transient boolean nullSlotLive;
-
-  private int size;
+  private transient InternalJsHashCodeMap<K, V> hashCodeMap;
 
   /**
    * A map of Strings onto values.
    */
-  // Used from JSNI.
-  @SuppressWarnings("unused")
-  private transient JavaScriptObject stringMap;
+  private transient InternalJsStringMap<K, V> stringMap;
 
-  {
-    clearImpl();
-  }
+  private int size;
 
   public AbstractHashMap() {
+    reset();
   }
 
   public AbstractHashMap(int ignored) {
@@ -195,39 +139,41 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
 
   public AbstractHashMap(int ignored, float alsoIgnored) {
     // This implementation of HashMap has no need of load factors or capacities.
-    if (ignored < 0 || alsoIgnored < 0) {
-      throw new IllegalArgumentException(
-          "initial capacity was negative or load factor was non-positive");
-    }
+    checkArgument(ignored >= 0, "Negative initial capacity");
+    checkArgument(alsoIgnored >= 0, "Non-positive load factor");
+
+    reset();
   }
 
   public AbstractHashMap(Map<? extends K, ? extends V> toBeCopied) {
+    reset();
     this.putAll(toBeCopied);
   }
 
   @Override
   public void clear() {
-    clearImpl();
+    reset();
   }
 
-  public abstract Object clone();
+  private void reset() {
+    InternalJsMapFactory factory = GWT.create(InternalJsMapFactory.class);
+    hashCodeMap = factory.createJsHashCodeMap();
+    hashCodeMap.host = this;
+    stringMap = factory.createJsStringMap();
+    stringMap.host = this;
+    size = 0;
+    structureChanged(this);
+  }
 
+  @SpecializeMethod(params = {String.class}, target = "hasStringValue")
   @Override
   public boolean containsKey(Object key) {
-    return (key == null) ? nullSlotLive : (!(key instanceof String)
-        ? hasHashValue(key, getHashCode(key)) : hasStringValue((String) key));
+    return key instanceof String ? hasStringValue(unsafeCast(key)) : hasHashValue(key);
   }
 
   @Override
   public boolean containsValue(Object value) {
-    if (nullSlotLive && equals(nullSlot, value)) {
-      return true;
-    } else if (containsStringValue(value)) {
-      return true;
-    } else if (containsHashValue(value)) {
-      return true;
-    }
-    return false;
+    return stringMap.containsValue(value) || hashCodeMap.containsValue(value);
   }
 
   @Override
@@ -235,24 +181,22 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     return new EntrySet();
   }
 
+  @SpecializeMethod(params = {String.class}, target = "getStringValue")
   @Override
   public V get(Object key) {
-    return (key == null) ? nullSlot : (!(key instanceof String) ? getHashValue(
-        key, getHashCode(key)) : getStringValue((String) key));
+    return key instanceof String ? getStringValue(unsafeCast(key)) : getHashValue(key);
   }
 
+  @SpecializeMethod(params = {String.class, Object.class}, target = "putStringValue")
   @Override
   public V put(K key, V value) {
-    return (key == null) ? putNullSlot(value) : (!(key instanceof String)
-        ? putHashValue(key, value, getHashCode(key)) : putStringValue(
-            (String) key, value));
+    return key instanceof String ? putStringValue(unsafeCast(key), value) : putHashValue(key, value);
   }
 
+  @SpecializeMethod(params = {String.class}, target = "removeStringValue")
   @Override
   public V remove(Object key) {
-    return (key == null) ? removeNullSlot() : (!(key instanceof String)
-        ? removeHashValue(key, getHashCode(key))
-        : removeStringValue((String) key));
+    return key instanceof String ? removeStringValue(unsafeCast(key)) : removeHashValue(key);
   }
 
   @Override
@@ -260,101 +204,27 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     return size;
   }
 
+  void elementRemoved() {
+    size--;
+    structureChanged(this);
+  }
+
+  void elementAdded() {
+    size++;
+    structureChanged(this);
+  }
+
   /**
    * Subclasses must override to return a whether or not two keys or values are
    * equal.
    */
-  protected abstract boolean equals(Object value1, Object value2);
+  abstract boolean equals(Object value1, Object value2);
 
   /**
    * Subclasses must override to return a hash code for a given key. The key is
    * guaranteed to be non-null and not a String.
    */
-  protected abstract int getHashCode(Object key);
-
-  private native void addAllHashEntries(Collection<?> dest) /*-{
-    var hashCodeMap = this.@java.util.AbstractHashMap::hashCodeMap;
-    for ( var hashCode in hashCodeMap) {
-      // sanity check that it's really an integer
-      var hashCodeInt = parseInt(hashCode, 10);
-      if (hashCode == hashCodeInt) {
-        var array = hashCodeMap[hashCodeInt];
-        for ( var i = 0, c = array.length; i < c; ++i) {
-          dest.@java.util.Collection::add(Ljava/lang/Object;)(array[i]);
-        }
-      }
-    }
-  }-*/;
-
-  private native void addAllStringEntries(Collection<?> dest) /*-{
-    var stringMap = this.@java.util.AbstractHashMap::stringMap;
-    for (var key in stringMap) {
-      // only keys that start with a colon ':' count
-      if (key.charCodeAt(0) == 58) {
-        var entry = @java.util.AbstractHashMap$MapEntryString::new(Ljava/util/AbstractHashMap;Ljava/lang/String;)(this, key.substring(1));
-        dest.@java.util.Collection::add(Ljava/lang/Object;)(entry);
-      }
-    }
-  }-*/;
-
-  private void clearImpl() {
-    hashCodeMap = JavaScriptObject.createArray();
-    stringMap = JavaScriptObject.createObject();
-    nullSlotLive = false;
-    nullSlot = null;
-    size = 0;
-  }
-
-  /**
-   * Returns true if hashCodeMap contains any Map.Entry whose value is Object
-   * equal to <code>value</code>.
-   */
-  private native boolean containsHashValue(Object value) /*-{
-    var hashCodeMap = this.@java.util.AbstractHashMap::hashCodeMap;
-    for ( var hashCode in hashCodeMap) {
-      // sanity check that it's really one of ours
-      var hashCodeInt = parseInt(hashCode, 10);
-      if (hashCode == hashCodeInt) {
-        var array = hashCodeMap[hashCodeInt];
-        for ( var i = 0, c = array.length; i < c; ++i) {
-          var entry = array[i];
-          var entryValue = entry.@java.util.Map$Entry::getValue()();
-          if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(value, entryValue)) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }-*/;
-
-  /**
-   * Returns true if stringMap contains any key whose value is Object equal to
-   * <code>value</code>.
-   */
-  private native boolean containsStringValue(Object value) /*-{
-    var stringMap = this.@java.util.AbstractHashMap::stringMap;
-    for ( var key in stringMap) {
-      // only keys that start with a colon ':' count
-      if (key.charCodeAt(0) == 58) {
-        var entryValue = stringMap[key];
-        if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(value, entryValue)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }-*/;
-
-  /**
-   * Bridge method from JSNI that keeps us from having to make polymorphic calls
-   * in JSNI. By putting the polymorphism in Java code, the compiler can do a
-   * better job of optimizing in most cases.
-   */
-  @SuppressWarnings("unused")
-  private boolean equalsBridge(Object value1, Object value2) {
-    return equals(value1, value2);
-  }
+  abstract int getHashCode(Object key);
 
   /**
    * Returns the Map.Entry whose key is Object equal to <code>key</code>,
@@ -362,89 +232,41 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    * or <code>null</code> if no such Map.Entry exists at the specified
    * hashCode.
    */
-  private native V getHashValue(Object key, int hashCode) /*-{
-    var array = this.@java.util.AbstractHashMap::hashCodeMap[hashCode];
-    if (array) {
-      for ( var i = 0, c = array.length; i < c; ++i) {
-        var entry = array[i];
-        var entryKey = entry.@java.util.Map$Entry::getKey()();
-        if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(key, entryKey)) {
-          return entry.@java.util.Map$Entry::getValue()();
-        }
-      }
-    }
-    return null;
-  }-*/;
+  private V getHashValue(Object key) {
+    return getEntryValueOrNull(hashCodeMap.getEntry(key));
+  }
 
   /**
    * Returns the value for the given key in the stringMap. Returns
    * <code>null</code> if the specified key does not exist.
    */
-  private native V getStringValue(String key) /*-{
-    return this.@java.util.AbstractHashMap::stringMap[':' + key];
-  }-*/;
+  private V getStringValue(String key) {
+    return key == null ? getHashValue(null) : stringMap.get(key);
+  }
 
   /**
    * Returns true if the a key exists in the hashCodeMap that is Object equal to
    * <code>key</code>, provided that <code>key</code>'s hash code is
    * <code>hashCode</code>.
    */
-  private native boolean hasHashValue(Object key, int hashCode) /*-{
-    var array = this.@java.util.AbstractHashMap::hashCodeMap[hashCode];
-    if (array) {
-      for ( var i = 0, c = array.length; i < c; ++i) {
-        var entry = array[i];
-        var entryKey = entry.@java.util.Map$Entry::getKey()();
-        if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(key, entryKey)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }-*/;
+  private boolean hasHashValue(Object key) {
+    return hashCodeMap.getEntry(key) != null;
+  }
 
   /**
    * Returns true if the given key exists in the stringMap.
    */
-  private native boolean hasStringValue(String key) /*-{
-    return (':' + key) in this.@java.util.AbstractHashMap::stringMap;
-  }-*/;
+  private boolean hasStringValue(String key) {
+    return key == null ? hasHashValue(null) : stringMap.contains(key);
+  }
 
   /**
    * Sets the specified key to the specified value in the hashCodeMap. Returns
    * the value previously at that key. Returns <code>null</code> if the
    * specified key did not exist.
    */
-  private native V putHashValue(K key, V value, int hashCode) /*-{
-    var array = this.@java.util.AbstractHashMap::hashCodeMap[hashCode];
-    if (array) {
-      for ( var i = 0, c = array.length; i < c; ++i) {
-        var entry = array[i];
-        var entryKey = entry.@java.util.Map$Entry::getKey()();
-        if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(key, entryKey)) {
-          // Found an exact match, just update the existing entry
-          var previous = entry.@java.util.Map$Entry::getValue()();
-          entry.@java.util.Map$Entry::setValue(Ljava/lang/Object;)(value);
-          return previous;
-        }
-      }
-    } else {
-      array = this.@java.util.AbstractHashMap::hashCodeMap[hashCode] = [];
-    }
-    var entry = @java.util.MapEntryImpl::new(Ljava/lang/Object;Ljava/lang/Object;)(key, value);
-    array.push(entry);
-    ++this.@java.util.AbstractHashMap::size;
-    return null;
-  }-*/;
-
-  private V putNullSlot(V value) {
-    V result = nullSlot;
-    nullSlot = value;
-    if (!nullSlotLive) {
-      nullSlotLive = true;
-      ++size;
-    }
-    return result;
+  private V putHashValue(K key, V value) {
+    return hashCodeMap.put(key, value);
   }
 
   /**
@@ -452,17 +274,9 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    * value previously at that key. Returns <code>null</code> if the specified
    * key did not exist.
    */
-  private native V putStringValue(String key, V value) /*-{
-    var result, stringMap = this.@java.util.AbstractHashMap::stringMap;
-    key = ':' + key;
-    if (key in stringMap) {
-      result = stringMap[key];
-    } else {
-      ++this.@java.util.AbstractHashMap::size;
-    }
-    stringMap[key] = value;
-    return result;
-  }-*/;
+  private V putStringValue(String key, V value) {
+    return key == null ? putHashValue(null, value) : stringMap.put(key, value);
+  }
 
   /**
    * Removes the pair whose key is Object equal to <code>key</code> from
@@ -470,36 +284,8 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    * is <code>hashCode</code>. Returns the value that was associated with the
    * removed key, or null if no such key existed.
    */
-  private native V removeHashValue(Object key, int hashCode) /*-{
-    var array = this.@java.util.AbstractHashMap::hashCodeMap[hashCode];
-    if (array) {
-      for ( var i = 0, c = array.length; i < c; ++i) {
-        var entry = array[i];
-        var entryKey = entry.@java.util.Map$Entry::getKey()();
-        if (this.@java.util.AbstractHashMap::equalsBridge(Ljava/lang/Object;Ljava/lang/Object;)(key, entryKey)) {
-          if (array.length == 1) {
-            // remove the whole array
-            delete this.@java.util.AbstractHashMap::hashCodeMap[hashCode];
-          } else {
-            // splice out the entry we're removing
-            array.splice(i, 1);
-          }
-          --this.@java.util.AbstractHashMap::size;
-          return entry.@java.util.Map$Entry::getValue()();
-        }
-      }
-    }
-    return null;
-  }-*/;
-
-  private V removeNullSlot() {
-    V result = nullSlot;
-    nullSlot = null;
-    if (nullSlotLive) {
-      nullSlotLive = false;
-      --size;
-    }
-    return result;
+  private V removeHashValue(Object key) {
+    return hashCodeMap.remove(key);
   }
 
   /**
@@ -507,14 +293,12 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    * previously there. Returns <code>null</code> if the specified key does not
    * exist.
    */
-  private native V removeStringValue(String key) /*-{
-    var result, stringMap = this.@java.util.AbstractHashMap::stringMap;
-    key = ':' + key;
-    if (key in stringMap) {
-      result = stringMap[key];
-      --this.@java.util.AbstractHashMap::size;
-      delete stringMap[key];
-    }
-    return result;
+  private V removeStringValue(String key) {
+    return key == null ? removeHashValue(null) : stringMap.remove(key);
+  }
+
+  // TODO(goktug): replace unsafeCast with a real cast when the compiler can optimize it.
+  private static native String unsafeCast(Object string) /*-{
+    return string;
   }-*/;
 }

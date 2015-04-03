@@ -284,7 +284,7 @@ public class ResizeLayoutPanel extends SimplePanel implements ProvidesResize,
     }
 
     /**
-     * Initalize the onresize listener. This method doesn't create a memory leak
+     * Initialize the onresize listener. This method doesn't create a memory leak
      * because we don't set a back reference to the Impl class until we attach
      * to the DOM.
      */
@@ -304,28 +304,6 @@ public class ResizeLayoutPanel extends SimplePanel implements ProvidesResize,
     private native void setResizeEventListener(Element elem, Impl listener) /*-{
       elem.__resizeImpl = listener;
     }-*/;
-  }
-
-  /**
-   * Implementation of resize event used by IE6.
-   */
-  static class ImplIE6 extends ImplTrident {
-    @Override
-    public void onAttach() {
-      super.onAttach();
-
-      /*
-       * IE6 doesn't render this panel unless you kick it after its been
-       * attached.
-       */
-      Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-        public void execute() {
-          if (isAttached) {
-            parent.getStyle().setProperty("zoom", "1");
-          }
-        }
-      });
-    }
   }
 
   private final Impl impl = GWT.create(Impl.class);

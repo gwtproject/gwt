@@ -16,12 +16,11 @@
 <!--                                                                        -->
 <!-- This module is typically inherited via com.google.gwt.user.User        -->
 <!--                                                                        -->
-<module type="fileset">
+<module>
   <inherits name="com.google.gwt.core.Core"/>
-  <inherits name="com.google.gwt.user.UserAgent"/>
+  <inherits name="com.google.gwt.dom.DOM"/>
+  <inherits name="com.google.gwt.user.Timer"/>
+  <inherits name="com.google.gwt.useragent.UserAgent"/>
 
-  <!-- Include User module to inherit Timer -->
-  <inherits name="com.google.gwt.user.User"/>
   <source path="client" />
-  <public path="public" />
 </module>

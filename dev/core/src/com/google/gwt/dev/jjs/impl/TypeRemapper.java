@@ -1,12 +1,12 @@
 /*
  * Copyright 2010 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -23,7 +23,6 @@ import com.google.gwt.dev.jjs.ast.JConditional;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JGwtCreate;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNewArray;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVariable;
@@ -33,7 +32,10 @@ import com.google.gwt.dev.jjs.ast.JVariable;
  * {@link #remap(JType)} to replace all occurrences of one or more types with
  * different types.
  */
-public abstract class TypeRemapper extends JModVisitor {
+public abstract class TypeRemapper extends JChangeTrackingVisitor {
+  public TypeRemapper(OptimizerContext optimizerCtx) {
+    super(optimizerCtx);
+  }
 
   @Override
   public void endVisit(JBinaryOperation x, Context ctx) {
@@ -60,7 +62,7 @@ public abstract class TypeRemapper extends JModVisitor {
   }
 
   @Override
-  public void endVisit(JConstructor x, Context ctx) {
+  public void exit(JConstructor x, Context ctx) {
     x.setType(modRemap(x.getType()));
   }
 
@@ -70,7 +72,7 @@ public abstract class TypeRemapper extends JModVisitor {
   }
 
   @Override
-  public void endVisit(JMethod x, Context ctx) {
+  public void exit(JMethod x, Context ctx) {
     x.setType(modRemap(x.getType()));
   }
 
@@ -80,13 +82,13 @@ public abstract class TypeRemapper extends JModVisitor {
   }
 
   @Override
-  public void endVisit(JVariable x, Context ctx) {
+  public void exit(JVariable x, Context ctx) {
     x.setType(modRemap(x.getType()));
   }
 
   /**
    * Override to return a possibly-different type.
-   * 
+   *
    * @param type the original type
    * @return a replacement type, which may be the original type
    */

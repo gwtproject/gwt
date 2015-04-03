@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "bez" locale.
@@ -209,7 +204,6 @@ public class LocalizedNamesImpl_bez extends LocalizedNamesImpl {
         "VC",
         "ST",
         "SA",
-        "CS",
         "SN",
         "SC",
         "SL",
@@ -291,6 +285,7 @@ public class LocalizedNamesImpl_bez extends LocalizedNamesImpl {
         "IO",
         "PS",
         "UM",
+        "XK",
     };
   }
 
@@ -342,7 +337,6 @@ public class LocalizedNamesImpl_bez extends LocalizedNamesImpl {
     namesMap.put("CN", "Huchina");
     namesMap.put("CO", "Hukolombia");
     namesMap.put("CR", "Hukostarika");
-    namesMap.put("CS", "Huselbia na Humonteneglo");
     namesMap.put("CU", "Hukuba");
     namesMap.put("CV", "Hukepuvede");
     namesMap.put("CY", "Hukuprosi");
@@ -577,7 +571,6 @@ public class LocalizedNamesImpl_bez extends LocalizedNamesImpl {
         "CN": "Huchina",
         "CO": "Hukolombia",
         "CR": "Hukostarika",
-        "CS": "Huselbia na Humonteneglo",
         "CU": "Hukuba",
         "CV": "Hukepuvede",
         "CY": "Hukuprosi",

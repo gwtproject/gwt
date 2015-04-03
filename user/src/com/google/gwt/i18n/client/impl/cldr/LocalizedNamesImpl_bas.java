@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "bas" locale.
@@ -258,7 +253,6 @@ public class LocalizedNamesImpl_bas extends LocalizedNamesImpl {
         "SZ",
         "SE",
         "SX",
-        "CS",
         "TA",
         "TJ",
         "TZ",
@@ -284,6 +278,7 @@ public class LocalizedNamesImpl_bas extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "YE",
         "JO",
         "ZM",
@@ -340,7 +335,6 @@ public class LocalizedNamesImpl_bas extends LocalizedNamesImpl {
     namesMap.put("CN", "Kinà");
     namesMap.put("CO", "Kɔ̀lɔmbìà");
     namesMap.put("CR", "Kòstà Rikà");
-    namesMap.put("CS", "Sɛ̀rbî nì Mɔ̀ntènegrò");
     namesMap.put("CU", "Kubà");
     namesMap.put("CV", "Kabwɛ᷆r");
     namesMap.put("CY", "Kiprò");
@@ -570,7 +564,6 @@ public class LocalizedNamesImpl_bas extends LocalizedNamesImpl {
         "CN": "Kinà",
         "CO": "Kɔ̀lɔmbìà",
         "CR": "Kòstà Rikà",
-        "CS": "Sɛ̀rbî nì Mɔ̀ntènegrò",
         "CU": "Kubà",
         "CV": "Kabwɛ᷆r",
         "CY": "Kiprò",

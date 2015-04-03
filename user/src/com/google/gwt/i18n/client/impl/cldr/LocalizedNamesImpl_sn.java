@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "sn" locale.
@@ -240,7 +235,6 @@ public class LocalizedNamesImpl_sn extends LocalizedNamesImpl {
         "ST",
         "SA",
         "SN",
-        "CS",
         "SC",
         "SL",
         "SG",
@@ -285,6 +279,7 @@ public class LocalizedNamesImpl_sn extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "YE",
         "ZM",
         "ZW",
@@ -353,6 +348,7 @@ public class LocalizedNamesImpl_sn extends LocalizedNamesImpl {
     namesMap.put("TL", "East Timor");
     namesMap.put("US", "Amerika");
     namesMap.put("VA", "Vatican State");
+    namesMap.put("VC", "Saint Vincent and the Grenadines");
     namesMap.put("VG", "Zvitsuwa zveHingirandi");
     namesMap.put("VI", "Zvitsuwa zveAmerika");
   }
@@ -413,6 +409,7 @@ public class LocalizedNamesImpl_sn extends LocalizedNamesImpl {
         "TL": "East Timor",
         "US": "Amerika",
         "VA": "Vatican State",
+        "VC": "Saint Vincent and the Grenadines",
         "VG": "Zvitsuwa zveHingirandi",
         "VI": "Zvitsuwa zveAmerika"
     };

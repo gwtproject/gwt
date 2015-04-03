@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6450 $
-//  date=$Date: 2012-01-25 19:20:54 -0500 (Wed, 25 Jan 2012) $
-//  type=PR
 
 /**
  * Implementation of DateTimeFormatInfo for the "es_PR" locale.
@@ -28,7 +23,7 @@ public class DateTimeFormatInfoImpl_es_PR extends DateTimeFormatInfoImpl_es_419 
 
   @Override
   public String dateFormatMedium() {
-    return "MM/dd/yyyy";
+    return "MM/dd/y";
   }
 
   @Override
@@ -48,11 +43,31 @@ public class DateTimeFormatInfoImpl_es_PR extends DateTimeFormatInfoImpl_es_419 
 
   @Override
   public String formatYearMonthNum() {
-    return "MM/yy";
+    return "MM/y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "MM/dd/yy";
+    return "MM/dd/y";
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "h:mm:ss a zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "h:mm:ss a z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "h:mm:ss a";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "h:mm a";
   }
 }

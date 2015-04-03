@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,13 +17,15 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.util.StringInterner;
 
 import java.io.Serializable;
 
 /**
  * Java field definition.
  */
-public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
+public class JField extends JVariable implements JMember {
+
   /**
    * Determines whether the variable is final, volatile, or neither.
    */
@@ -58,7 +60,7 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
     }
 
     private Object readResolve() {
-      String name = signature.substring(0, signature.indexOf(':'));
+      String name = StringInterner.get().intern(signature.substring(0, signature.indexOf(':')));
       JField result =
           new JField(SourceOrigin.UNKNOWN, name, enclosingType, JNullType.INSTANCE, false,
               Disposition.NONE);
@@ -78,6 +80,9 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
   public static final JField NULL_FIELD = new JField(SourceOrigin.UNKNOWN, "nullField", null,
       JNullType.INSTANCE, false, Disposition.FINAL);
 
+  private String jsTypeName;
+  private String exportName;
+  private String exportNamespace;
   private final JDeclaredType enclosingType;
   private final boolean isCompileTimeConstant;
   private final boolean isStatic;
@@ -85,18 +90,29 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
   private boolean isVolatile;
   private transient String signature;
 
+  /**
+   * The access modifier; stored as an int to reduce memory / serialization footprint.
+   */
+  private final int access;
+
   public JField(SourceInfo info, String name, JDeclaredType enclosingType, JType type,
-      boolean isStatic, Disposition disposition) {
+      boolean isStatic, Disposition disposition, AccessModifier access) {
     super(info, name, type, disposition.isFinal());
     this.enclosingType = enclosingType;
     this.isStatic = isStatic;
     this.isCompileTimeConstant = disposition.isCompileTimeConstant();
     this.isVolatile = disposition.isVolatile();
     this.isThisRef = disposition.isThisRef();
+    this.access = access.ordinal();
     // Disposition is not cached because we can be set final later.
   }
 
-  public String getFullName() {
+  public JField(SourceInfo info, String name, JDeclaredType enclosingType, JType type,
+      boolean isStatic, Disposition disposition) {
+    this(info, name, enclosingType, type, isStatic, disposition, AccessModifier.DEFAULT);
+  }
+
+  public String getQualifiedName() {
     return getEnclosingType().getName() + "." + getName();
   }
 
@@ -111,6 +127,49 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
       return (JValueLiteral) initializer;
     }
     return null;
+  }
+
+  @Override
+  public void setExportInfo(String namespace, String name) {
+    this.exportName = name;
+    this.exportNamespace = namespace;
+  }
+
+  @Override
+  public boolean isExported() {
+    return exportName != null;
+  }
+
+  @Override
+  public String getExportName() {
+    assert exportName != null;
+    return exportName;
+  }
+
+  @Override
+  public String getExportNamespace() {
+    return exportNamespace == null ? enclosingType.getQualifiedExportName() : exportNamespace;
+  }
+
+  @Override
+  public String getQualifiedExportName() {
+    String namespace = getExportNamespace();
+    return namespace.isEmpty() ? exportName : namespace + "." + exportName;
+  }
+
+  @Override
+  public void setJsMemberName(String jsTypeName) {
+    this.jsTypeName = jsTypeName;
+  }
+
+  @Override
+  public boolean isJsTypeMember() {
+    return jsTypeName != null;
+  }
+
+  @Override
+  public String getJsMemberName() {
+    return jsTypeName;
   }
 
   public String getSignature() {
@@ -130,6 +189,16 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
 
   public boolean isExternal() {
     return getEnclosingType() != null && getEnclosingType().isExternal();
+  }
+
+  @Override
+  public boolean isPublic() {
+    return access == AccessModifier.PUBLIC.ordinal();
+  }
+
+  @Override
+  public boolean needsVtable() {
+    return !isStatic;
   }
 
   @Override
@@ -156,13 +225,6 @@ public class JField extends JVariable implements CanBeStatic, HasEnclosingType {
   @Override
   public void setInitializer(JDeclarationStatement declStmt) {
     this.declStmt = declStmt;
-  }
-
-  public void setVolatile() {
-    if (isFinal()) {
-      throw new IllegalStateException("Final fields cannot be set volatile");
-    }
-    isVolatile = true;
   }
 
   @Override

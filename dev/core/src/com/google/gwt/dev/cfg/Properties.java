@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,7 +16,6 @@
 package com.google.gwt.dev.cfg;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -25,7 +24,7 @@ import java.util.TreeSet;
 /**
  * A typed map of deferred binding properties.
  */
-public class Properties implements Iterable<Property> {
+public class Properties {
 
   private final SortedSet<BindingProperty> bindingProps = new TreeSet<BindingProperty>();
 
@@ -67,6 +66,30 @@ public class Properties implements Iterable<Property> {
   }
 
   /**
+   * Returns the property if (and only if) it's a BindingProperty, otherwise null.
+   */
+  public BindingProperty findBindingProp(String propName) {
+    Property p = map.get(propName);
+    if (p instanceof BindingProperty) {
+      return (BindingProperty) p;
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * Returns the property if (and only if) it's a ConfigurationProperty, otherwise null.
+   */
+  public ConfigurationProperty findConfigProp(String propName) {
+    Property p = map.get(propName);
+    if (p instanceof ConfigurationProperty) {
+      return (ConfigurationProperty) p;
+    } else {
+      return null;
+    }
+  }
+
+  /**
    * Gets all deferred binding properties in sorted order.
    */
   public SortedSet<BindingProperty> getBindingProperties() {
@@ -75,11 +98,6 @@ public class Properties implements Iterable<Property> {
 
   public SortedSet<ConfigurationProperty> getConfigurationProperties() {
     return configProps;
-  }
-
-  @Override
-  public Iterator<Property> iterator() {
-    return map.values().iterator();
   }
 
   private <T extends Property> T create(String name, boolean flag,
@@ -101,7 +119,7 @@ public class Properties implements Iterable<Property> {
       }
     }
 
-    Exception ex = null;
+    Exception ex;
     try {
       T newInstance;
       if (useFlagArgument) {

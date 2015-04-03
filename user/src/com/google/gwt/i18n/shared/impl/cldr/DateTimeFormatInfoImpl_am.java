@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "am" locale.
@@ -29,8 +24,8 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
   @Override
   public String[] ampms() {
     return new String[] {
-        "ጡዋት",
-        "ከሳዓት"
+        "ጥዋት",
+        "ከሰዓት"
     };
   }
 
@@ -51,7 +46,7 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yyyy";
+    return "dd/MM/y";
   }
 
   @Override
@@ -117,7 +112,7 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthWeekdayDay() {
-    return "EEE, MMM d, y";
+    return "EEE፣ MMM d y";
   }
 
   @Override
@@ -136,13 +131,31 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
         "ጃንዩወሪ",
         "ፌብሩወሪ",
         "ማርች",
-        "ኤፕረል",
+        "ኤፕሪል",
         "ሜይ",
         "ጁን",
         "ጁላይ",
         "ኦገስት",
         "ሴፕቴምበር",
         "ኦክተውበር",
+        "ኖቬምበር",
+        "ዲሴምበር"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
+    return new String[] {
+        "ጃንዩወሪ",
+        "ፌብሩወሪ",
+        "ማርች",
+        "ኤፕሪል",
+        "ሜይ",
+        "ጁን",
+        "ጁላይ",
+        "ኦገስት",
+        "ሴፕቴምበር",
+        "ኦክቶበር",
         "ኖቬምበር",
         "ዲሴምበር"
     };
@@ -172,7 +185,7 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
         "ጃንዩ",
         "ፌብሩ",
         "ማርች",
-        "ኤፕረ",
+        "ኤፕሪ",
         "ሜይ",
         "ጁን",
         "ጁላይ",
@@ -185,12 +198,40 @@ public class DateTimeFormatInfoImpl_am extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String[] monthsShortStandalone() {
+    return new String[] {
+        "ጃንዩ",
+        "ፌብሩ",
+        "ማርች",
+        "ኤፕሪ",
+        "ሜይ",
+        "ጁን",
+        "ጁላይ",
+        "ኦገስ",
+        "ሴፕቴ",
+        "ኦክቶ",
+        "ኖቬም",
+        "ዲሴም"
+    };
+  }
+
+  @Override
   public String[] quartersFull() {
     return new String[] {
         "1ኛው ሩብ",
         "ሁለተኛው ሩብ",
         "3ኛው ሩብ",
         "4ኛው ሩብ"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "ሩብ1",
+        "ሩብ2",
+        "ሩብ3",
+        "ሩብ4"
     };
   }
 

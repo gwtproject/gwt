@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "uk" locale.
@@ -87,7 +82,7 @@ public class DateTimeFormatInfoImpl_uk extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthNumDay() {
-    return "d.M";
+    return "dd.MM";
   }
 
   @Override
@@ -112,12 +107,12 @@ public class DateTimeFormatInfoImpl_uk extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "MM.yyyy";
+    return "MM.y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "dd.MM.yy";
+    return "dd.MM.y";
   }
 
   @Override
@@ -127,12 +122,12 @@ public class DateTimeFormatInfoImpl_uk extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ yyyy";
+    return "QQQQ y 'р'.";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q yyyy";
+    return "Q y";
   }
 
   @Override
@@ -247,6 +242,19 @@ public class DateTimeFormatInfoImpl_uk extends DateTimeFormatInfoImpl {
 
   @Override
   public String[] weekdaysFull() {
+    return new String[] {
+        "неділя",
+        "понеділок",
+        "вівторок",
+        "середа",
+        "четвер",
+        "пʼятниця",
+        "субота"
+    };
+  }
+
+  @Override
+  public String[] weekdaysFullStandalone() {
     return new String[] {
         "Неділя",
         "Понеділок",

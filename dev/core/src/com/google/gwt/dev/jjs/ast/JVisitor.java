@@ -18,12 +18,11 @@ package com.google.gwt.dev.jjs.ast;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
+import com.google.gwt.dev.jjs.ast.js.JsniClassLiteral;
 import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.jjs.ast.js.JsonArray;
-import com.google.gwt.dev.jjs.ast.js.JsonObject;
-import com.google.gwt.dev.jjs.ast.js.JsonObject.JsonPropInit;
 
 import java.util.List;
 
@@ -43,11 +42,6 @@ public class JVisitor {
     @Override
     public boolean canRemove() {
       return false;
-    }
-
-    @Override
-    public void insertAfter(JNode node) {
-      throw new UnsupportedOperationException();
     }
 
     @Override
@@ -81,11 +75,6 @@ public class JVisitor {
     @Override
     public boolean canRemove() {
       return false;
-    }
-
-    @Override
-    public void insertAfter(JNode node) {
-      throw new UnsupportedOperationException();
     }
 
     @Override
@@ -422,10 +411,6 @@ public class JVisitor {
     endVisit((JNode) x, ctx);
   }
 
-  public void endVisit(JReboundEntryPoint x, Context ctx) {
-    endVisit((JStatement) x, ctx);
-  }
-
   public void endVisit(JReferenceType x, Context ctx) {
     endVisit((JType) x, ctx);
   }
@@ -446,6 +431,10 @@ public class JVisitor {
     endVisit((JExpression) x, ctx);
   }
 
+  public void endVisit(JsniClassLiteral x, Context ctx) {
+    endVisit((JClassLiteral) x, ctx);
+  }
+
   public void endVisit(JsniFieldRef x, Context ctx) {
     /* NOTE: Skip JFieldRef */
     endVisit((JVariableRef) x, ctx);
@@ -462,14 +451,6 @@ public class JVisitor {
 
   public void endVisit(JsonArray x, Context ctx) {
     endVisit((JExpression) x, ctx);
-  }
-
-  public void endVisit(JsonObject x, Context ctx) {
-    endVisit((JExpression) x, ctx);
-  }
-
-  public void endVisit(JsonPropInit x, Context ctx) {
-    endVisit((JNode) x, ctx);
   }
 
   public void endVisit(JStatement x, Context ctx) {
@@ -754,10 +735,6 @@ public class JVisitor {
     return visit((JNode) x, ctx);
   }
 
-  public boolean visit(JReboundEntryPoint x, Context ctx) {
-    return visit((JStatement) x, ctx);
-  }
-
   public boolean visit(JReferenceType x, Context ctx) {
     return visit((JType) x, ctx);
   }
@@ -778,6 +755,10 @@ public class JVisitor {
     return visit((JExpression) x, ctx);
   }
 
+  public boolean visit(JsniClassLiteral x, Context ctx) {
+    return visit((JClassLiteral) x, ctx);
+  }
+
   public boolean visit(JsniFieldRef x, Context ctx) {
     /* NOTE: Skip JFieldRef */
     return visit((JVariableRef) x, ctx);
@@ -794,14 +775,6 @@ public class JVisitor {
 
   public boolean visit(JsonArray x, Context ctx) {
     return visit((JExpression) x, ctx);
-  }
-
-  public boolean visit(JsonObject x, Context ctx) {
-    return visit((JExpression) x, ctx);
-  }
-
-  public boolean visit(JsonPropInit x, Context ctx) {
-    return visit((JNode) x, ctx);
   }
 
   public boolean visit(JStatement x, Context ctx) {

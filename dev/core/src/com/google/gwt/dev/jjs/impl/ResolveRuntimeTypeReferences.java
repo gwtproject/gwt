@@ -16,96 +16,151 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JCastMap;
-import com.google.gwt.dev.jjs.ast.JIntLiteral;
-import com.google.gwt.dev.jjs.ast.JLiteral;
+import com.google.gwt.dev.jjs.ast.JExpression;
+import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
-import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
-import com.google.gwt.thirdparty.guava.common.collect.HashMultiset;
-import com.google.gwt.thirdparty.guava.common.collect.ImmutableMultiset;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
+import com.google.gwt.thirdparty.guava.common.base.Objects;
+import com.google.gwt.thirdparty.guava.common.collect.LinkedHashMultiset;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multiset;
 import com.google.gwt.thirdparty.guava.common.collect.Multisets;
 
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 /**
  * Assigns and replaces JRuntimeTypeReference nodes with a type id literal.
  */
-public abstract class ResolveRuntimeTypeReferences {
+public class ResolveRuntimeTypeReferences {
 
   /**
-   * Sequentially creates int type ids for castable and instantiable types.
+   * Identifies a way of sorting types when generating ids.
    */
-  public static class IntoIntLiterals extends ResolveRuntimeTypeReferences {
+  public enum TypeOrder {
+    ALPHABETICAL, FREQUENCY, NONE
+  }
 
-    private void assignId(JType type) {
-      if (typeIdLiteralsByType.containsKey(type)) {
-        return;
-      }
-      int id = nextAvailableId++;
-      assert (id != 0 || type == program.getJavaScriptObject());
-      assert (id != 1 || type == program.getTypeJavaLangObject());
-      assert (id != 2 || type == program.getTypeJavaLangString());
+  /**
+   * Maps a type into a type id literal.
+   */
+  public interface TypeMapper<T> {
+    T getOrCreateTypeId(JType type);
 
-      typeIdLiteralsByType.put(type, JIntLiteral.get(id));
-    }
+    void copyFrom(TypeMapper<T> typeMapper);
 
-    public static Map<JType, JLiteral> exec(JProgram program) {
-      return new ResolveRuntimeTypeReferences.IntoIntLiterals(program).execImpl();
-    }
+    T get(JType type);
+  }
 
+  /**
+   * Sequentially creates int type ids for types.
+   */
+  public static class IntTypeMapper implements Serializable, TypeMapper<Integer> {
+
+    // NOTE: DO NOT STORE ANY AST REFERENCE. Objects of this type persist across compiles.
+    private final Map<String, Integer> typeIdByTypeName = Maps.newHashMap();
     private int nextAvailableId =  0;
 
-    private IntoIntLiterals(JProgram program) {
-      super(program);
+    @Override
+    public void copyFrom(TypeMapper<Integer> that) {
+      if (!(that instanceof  IntTypeMapper)) {
+        throw new IllegalArgumentException("Can only copy from IntTypeMapper");
+      }
+
+      IntTypeMapper from = (IntTypeMapper) that;
+      this.nextAvailableId = from.nextAvailableId;
+      this.typeIdByTypeName.clear();
+      this.typeIdByTypeName.putAll(from.typeIdByTypeName);
+    }
+
+    @VisibleForTesting
+    public boolean hasSameContent(IntTypeMapper that) {
+      return Objects.equal(this.typeIdByTypeName, that.typeIdByTypeName)
+          && Objects.equal(this.nextAvailableId, that.nextAvailableId);
     }
 
     @Override
-    protected void assignTypes(Multiset<JReferenceType> typesWithReferenceCounts) {
-      // TODO(rluble): remove the need for special ids
-      assignId(program.getJavaScriptObject());
-      assignId(program.getTypeJavaLangObject());
-      assignId(program.getTypeJavaLangString());
+    public Integer get(JType type) {
+      return typeIdByTypeName.get(type.getName());
+    }
 
-      ImmutableMultiset<JReferenceType> typesOrderedByFrequency =
-          Multisets.copyHighestCountFirst(typesWithReferenceCounts);
-      for (JType type : typesOrderedByFrequency.elementSet()) {
-        assignId(type);
+    @Override
+    public Integer getOrCreateTypeId(JType type) {
+      String typeName = type.getName();
+      if (typeIdByTypeName.containsKey(typeName)) {
+        return typeIdByTypeName.get(typeName);
       }
+
+      int nextId = nextAvailableId++;
+      typeIdByTypeName.put(typeName, nextId);
+      return nextId;
     }
   }
 
   /**
-   * Predictably creates String type ids for castable and instantiable types.
+   * Predictably creates String type id literals for castable and instantiable types.
    */
-  public static class IntoStringLiterals extends ResolveRuntimeTypeReferences {
-
-    private void assignId(JType type) {
-      JStringLiteral stringLiteral = program.getStringLiteral(type.getSourceInfo(), type.getName());
-      typeIdLiteralsByType.put(type, stringLiteral);
-    }
-
-    public static Map<JType, JLiteral> exec(JProgram program) {
-      return new ResolveRuntimeTypeReferences.IntoStringLiterals(program).execImpl();
-    }
+  public static class StringTypeMapper implements TypeMapper<String> {
 
     @Override
-    protected void assignTypes(Multiset<JReferenceType> typesWithReferenceCounts) {
-      for (JType type : typesWithReferenceCounts.elementSet()) {
-        assignId(type);
+    public void copyFrom(TypeMapper<String> that) {
+      if (!(that instanceof  StringTypeMapper)) {
+        throw new IllegalArgumentException("Can only copy from StringTypeMapper");
       }
     }
 
-    private IntoStringLiterals(JProgram program) {
-      super(program);
+    @Override
+    public String getOrCreateTypeId(JType type) {
+      return get(type);
+    }
+
+    @Override
+    public String get(JType type) {
+      return type.getName();
+    }
+  }
+
+  /**
+   * Predictably creates String type id literals for castable and instantiable types
+   * by using closure uniqueid generation in JsInterop CLOSURE mode.
+   */
+  public static class ClosureUniqueIdTypeMapper implements TypeMapper<JMethodCall> {
+
+    private JProgram program;
+
+    public ClosureUniqueIdTypeMapper(JProgram program) {
+      this.program = program;
+    }
+
+    @Override
+    public void copyFrom(TypeMapper<JMethodCall> that) {
+      if (!(that instanceof ClosureUniqueIdTypeMapper)) {
+        throw new IllegalArgumentException("Can only copy from ClosureUniqueIdTypeMapper");
+      }
+    }
+
+    @Override
+    public JMethodCall getOrCreateTypeId(JType type) {
+      return get(type);
+    }
+
+    @Override
+    public JMethodCall get(JType type) {
+      JMethod getUniqueId = program.getIndexedMethod("JavaClassHierarchySetupUtil.uniqueId");
+     return new JMethodCall(type.getSourceInfo(), null,
+          getUniqueId, program.getStringLiteral(type.getSourceInfo(), type.getName()));
     }
   }
 
@@ -115,12 +170,21 @@ public abstract class ResolveRuntimeTypeReferences {
   // TODO(rluble): Maybe this pass should insert the defineClass in Java.
   private class RuntimeTypeCollectorVisitor extends JVisitor {
 
-    private final Multiset<JReferenceType> typesRequiringRuntimeIds = HashMultiset.create();
+    private final Multiset<JReferenceType> typesRequiringRuntimeIds = LinkedHashMultiset.create();
 
     @Override
     public void endVisit(JRuntimeTypeReference x, Context ctx) {
       // Collects types in cast maps.
       typesRequiringRuntimeIds.add(x.getReferredType());
+    }
+
+    @Override
+    public void endVisit(JMethodCall x, Context ctx) {
+      // Calls through super and X.this need a runtime type id.
+      if (!x.isStaticDispatchOnly() || x.getTarget().isStatic()) {
+        return;
+      }
+      typesRequiringRuntimeIds.add(x.getTarget().getEnclosingType());
     }
 
     @Override
@@ -138,21 +202,49 @@ public abstract class ResolveRuntimeTypeReferences {
   private class ReplaceRuntimeTypeReferencesVisitor extends JModVisitor {
     @Override
     public void endVisit(JRuntimeTypeReference x, Context ctx) {
-      ctx.replaceMe(typeIdLiteralsByType.get(x.getReferredType()));
+      ctx.replaceMe(getTypeIdLiteral(x.getReferredType()));
     }
   }
 
-  protected final JProgram program;
+  private final JProgram program;
 
-  protected final Map<JType, JLiteral> typeIdLiteralsByType = Maps.newIdentityHashMap();
+  private TypeMapper<?> typeMapper;
 
-  protected ResolveRuntimeTypeReferences(JProgram program) {
+  private TypeOrder typeOrder;
+
+  private ResolveRuntimeTypeReferences(JProgram program, TypeMapper<?> typeMapper,
+      TypeOrder typeOrder) {
     this.program = program;
+    this.typeMapper = typeMapper;
+    this.typeOrder = typeOrder;
   }
 
-  protected abstract void assignTypes(Multiset<JReferenceType> typesWithReferenceCounts);
+  private void assignTypes(Multiset<JReferenceType> typesWithReferenceCounts) {
+    // TODO(rluble): remove the need for special ids
+    typeMapper.getOrCreateTypeId(program.getJavaScriptObject());
+    typeMapper.getOrCreateTypeId(program.getTypeJavaLangObject());
+    typeMapper.getOrCreateTypeId(program.getTypeJavaLangString());
 
-  protected Map<JType, JLiteral> execImpl() {
+    Iterable<JReferenceType> types = null;
+    switch (typeOrder) {
+      case FREQUENCY:
+        types = Multisets.copyHighestCountFirst(typesWithReferenceCounts).elementSet();
+        break;
+      case ALPHABETICAL:
+        types = Lists.newArrayList(typesWithReferenceCounts.elementSet());
+        Collections.sort((List<JReferenceType>) types, HasName.BY_NAME_COMPARATOR);
+        break;
+      case NONE:
+        types = typesWithReferenceCounts.elementSet();
+        break;
+    }
+
+    for (JType type : types) {
+      typeMapper.getOrCreateTypeId(type);
+    }
+  }
+
+  private void execImpl() {
     RuntimeTypeCollectorVisitor runtimeTypeCollector = new RuntimeTypeCollectorVisitor();
     // Collects runtime type references visible from types in the program that are part of the
     // current compile.
@@ -178,7 +270,15 @@ public abstract class ResolveRuntimeTypeReferences {
       JCastMap castMap = entry.getValue();
       replaceTypeIdsVisitor.accept(castMap);
     }
-
-    return typeIdLiteralsByType;
   }
+
+  private JExpression getTypeIdLiteral(JType type) {
+    Object typeId = typeMapper.getOrCreateTypeId(type);
+    return typeId instanceof JMethodCall ? (JExpression) typeId : program.getLiteral(typeId);
+  }
+
+  public static void exec(JProgram program, TypeMapper<?> typeMapper, TypeOrder typeOrder) {
+    new ResolveRuntimeTypeReferences(program, typeMapper, typeOrder).execImpl();
+  }
+
 }

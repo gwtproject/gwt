@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6450 $
-//  type=lag
-//  date=$Date: 2012-01-25 19:20:54 -0500 (Wed, 25 Jan 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "lag" locale.
@@ -223,7 +218,6 @@ public class LocalizedNamesImpl_lag extends LocalizedNamesImpl {
         "AS",
         "ST",
         "SA",
-        "CS",
         "SN",
         "SL",
         "SC",
@@ -277,6 +271,7 @@ public class LocalizedNamesImpl_lag extends LocalizedNamesImpl {
         "VG",
         "MP",
         "WF",
+        "XK",
         "YE",
         "IO",
         "IR",
@@ -342,7 +337,6 @@ public class LocalizedNamesImpl_lag extends LocalizedNamesImpl {
     namesMap.put("CN", "Chíina");
     namesMap.put("CO", "Kolómbia");
     namesMap.put("CR", "Kósita Rɨ́ɨka");
-    namesMap.put("CS", "Sebíia na Montégiro");
     namesMap.put("CU", "Kyúuba");
     namesMap.put("CV", "Kepuvéede");
     namesMap.put("CY", "Kupuróosi");
@@ -577,7 +571,6 @@ public class LocalizedNamesImpl_lag extends LocalizedNamesImpl {
         "CN": "Chíina",
         "CO": "Kolómbia",
         "CR": "Kósita Rɨ́ɨka",
-        "CS": "Sebíia na Montégiro",
         "CU": "Kyúuba",
         "CV": "Kepuvéede",
         "CY": "Kupuróosi",

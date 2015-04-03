@@ -14,17 +14,16 @@
 
 <!-- Deferred binding rules for browser selection.                          -->
 <!--                                                                        -->
-<module type="fileset">
+<module>
   <inherits name="com.google.gwt.core.Core" />
   <inherits name="com.google.gwt.user.UserAgent" />
 
   <!-- IE-specific implementation -->
   <replace-with
-    class="com.google.gwt.user.client.ui.impl.RichTextAreaImplIE6">
+    class="com.google.gwt.user.client.ui.impl.RichTextAreaImplIE8toIE10">
     <when-type-is
       class="com.google.gwt.user.client.ui.impl.RichTextAreaImpl" />
     <any>
-      <when-property-is name="user.agent" value="ie6" />
       <when-property-is name="user.agent" value="ie8" />
       <when-property-is name="user.agent" value="ie9" />
       <when-property-is name="user.agent" value="ie10" />

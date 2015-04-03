@@ -40,7 +40,6 @@ public class JavaCompilationSuite {
   public static Test suite() {
     TestSuite suite = new TestSuite(JavaCompilationSuite.class.getName());
 
-    suite.addTestSuite(ArtificialRescueCheckerTest.class);
     suite.addTestSuite(BinaryTypeReferenceRestrictionsCheckerTest.class);
     suite.addTestSuite(BytecodeSignatureMakerTest.class);
     suite.addTestSuite(CompilationStateTest.class);
@@ -51,15 +50,14 @@ public class JavaCompilationSuite {
     suite.addTestSuite(JdtBehaviorTest.class);
     suite.addTestSuite(JdtCompilerTest.class);
     suite.addTestSuite(Java7JdtCompilerTest.class);
-    suite.addTestSuite(JsniCheckerTest.class);
-    suite.addTestSuite(JsniCollectorTest.class);
+    suite.addTestSuite(JsniReferenceResolverTest.class);
+    suite.addTestSuite(JsniMethodCollectorTest.class);
     suite.addTestSuite(JSORestrictionsTest.class);
     suite.addTestSuite(MemoryUnitCacheTest.class);
     suite.addTestSuite(PersistentUnitCacheTest.class);
     suite.addTestSuite(CompilationStateBuilderTest.class);
     suite.addTestSuite(CompilationUnitTypeOracleUpdaterFromByteCodeTest.class);
     suite.addTestSuite(CompilationUnitTypeOracleUpdaterFromSourceTest.class);
-    suite.addTestSuite(LibraryCompilationUnitTypeOracleUpdaterFromSourceTest.class);
 
     suite.addTestSuite(CollectClassDataTest.class);
     suite.addTestSuite(CollectReferencesVisitorTest.class);

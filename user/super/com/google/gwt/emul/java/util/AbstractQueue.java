@@ -15,6 +15,11 @@
  */
 package java.util;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
+
 /**
  * Skeletal implementation of the Queue interface. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractQueue.html">[Sun
@@ -22,8 +27,7 @@ package java.util;
  * 
  * @param <E> element type.
  */
-public abstract class AbstractQueue<E> extends AbstractCollection<E> implements
-    Queue<E> {
+public abstract class AbstractQueue<E> extends AbstractCollection<E> implements Queue<E> {
 
   // Should not be instantiated directly.
   protected AbstractQueue() {
@@ -31,22 +35,16 @@ public abstract class AbstractQueue<E> extends AbstractCollection<E> implements
 
   @Override
   public boolean add(E o) {
-    if (offer(o)) {
-      return true;
-    }
-    throw new IllegalStateException("Unable to add element to queue");
+    checkState(offer(o), "Unable to add element to queue");
+    return true;
   }
 
   @Override
   public boolean addAll(Collection<? extends E> c) {
-    if (c == this) {
-      throw new IllegalArgumentException("Can't add a queue to itself");
-    }
-    boolean modified = false;
-    for (E val : c) {
-      modified |= add(val);
-    }
-    return modified;
+    checkNotNull(c);
+    checkArgument(c != this, "Can't add a queue to itself");
+
+    return super.addAll(c);
   }
 
   @Override
@@ -56,25 +54,26 @@ public abstract class AbstractQueue<E> extends AbstractCollection<E> implements
     }
   }
 
+  @Override
   public E element() {
     E e = peek();
-    if (e == null) {
-      throw new NoSuchElementException("Queue is empty");
-    }
+    checkElement(e != null, "Queue is empty");
     return e;
   }
 
+  @Override
   public abstract boolean offer(E o);
 
+  @Override
   public abstract E peek();
 
+  @Override
   public abstract E poll();
 
+  @Override
   public E remove() {
     E e = poll();
-    if (e == null) {
-      throw new NoSuchElementException("Queue is empty");
-    }
+    checkElement(e != null, "Queue is empty");
     return e;
   }
 

@@ -35,10 +35,11 @@ import com.google.gwt.dev.cfg.Property;
 import com.google.gwt.dev.javac.CompilationProblemReporter;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationUnit;
+import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.shell.CheckForUpdates;
 import com.google.gwt.dev.shell.jetty.JettyLauncher;
+import com.google.gwt.dev.util.arg.ArgHandlerClosureFormattedOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
-import com.google.gwt.dev.util.arg.ArgHandlerDisableAggressiveOptimization;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableCastChecking;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClassMetadata;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableClusterSimilarFunctions;
@@ -52,12 +53,15 @@ import com.google.gwt.dev.util.arg.ArgHandlerDraftCompile;
 import com.google.gwt.dev.util.arg.ArgHandlerEnableAssertions;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
 import com.google.gwt.dev.util.arg.ArgHandlerGenDir;
+import com.google.gwt.dev.util.arg.ArgHandlerIncrementalCompile;
+import com.google.gwt.dev.util.arg.ArgHandlerJsInteropMode;
 import com.google.gwt.dev.util.arg.ArgHandlerLocalWorkers;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
 import com.google.gwt.dev.util.arg.ArgHandlerMaxPermsPerPrecompile;
 import com.google.gwt.dev.util.arg.ArgHandlerNamespace;
 import com.google.gwt.dev.util.arg.ArgHandlerOptimize;
 import com.google.gwt.dev.util.arg.ArgHandlerScriptStyle;
+import com.google.gwt.dev.util.arg.ArgHandlerSetProperties;
 import com.google.gwt.dev.util.arg.ArgHandlerSourceLevel;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.ArgHandlerWorkDirOptional;
@@ -203,44 +207,11 @@ public class JUnitShell extends DevMode {
     }
   }
 
-  private static class ArgHandlerRunInStandardsMode extends ArgHandlerFlag {
-
-    private JUnitShell shell;
-
-    public ArgHandlerRunInStandardsMode(JUnitShell shell) {
-      this.shell = shell;
-
-      addTagValue("-standardsMode", true);
-      addTagValue("-quirksMode", false);
-    }
-
-    @Override
-    public String getPurposeSnippet() {
-      return "Run each test using an HTML document in standards mode (rather than quirks mode).";
-    }
-
-    @Override
-    public String getLabel() {
-      return "runStandardsMode";
-    }
-
-    @Override
-    public boolean setFlag(boolean enabled) {
-      shell.setStandardsMode(enabled);
-      return true;
-    }
-
-    @Override
-    public boolean getDefaultValue() {
-      return shell.standardsMode;
-    }
-  }
-
   static class ArgProcessor extends ArgProcessorBase {
 
     @SuppressWarnings("deprecation")
     public ArgProcessor(final JUnitShell shell) {
-      final HostedModeOptionsImpl options = shell.options;
+      final HostedModeOptions options = shell.options;
       /*
        * ----- Options from DevModeBase -------
        */
@@ -252,8 +223,6 @@ public class JUnitShell extends DevMode {
           return new String[]{"-port", "auto"};
         }
       });
-      registerHandler(new ArgHandlerWhitelist());
-      registerHandler(new ArgHandlerBlacklist());
       registerHandler(new ArgHandlerLogDir(options));
       registerHandler(new ArgHandlerLogLevel(options));
       registerHandler(new ArgHandlerGenDir(options));
@@ -305,7 +274,6 @@ public class JUnitShell extends DevMode {
        */
       registerHandler(new ArgHandlerScriptStyle(options));
       registerHandler(new ArgHandlerEnableAssertions(options));
-      registerHandler(new ArgHandlerDisableAggressiveOptimization(options));
       registerHandler(new ArgHandlerDisableCastChecking(options));
       registerHandler(new ArgHandlerDisableClassMetadata(options));
       registerHandler(new ArgHandlerDisableClusterSimilarFunctions(options));
@@ -320,18 +288,17 @@ public class JUnitShell extends DevMode {
       registerHandler(new ArgHandlerLocalWorkers(options));
       registerHandler(new ArgHandlerNamespace(options));
       registerHandler(new ArgHandlerOptimize(options));
+      registerHandler(new ArgHandlerIncrementalCompile(options));
+      registerHandler(new ArgHandlerJsInteropMode(options));
+      registerHandler(new ArgHandlerSetProperties(options));
+      registerHandler(new ArgHandlerClosureFormattedOutput(options));
 
       /*
        * ----- Options specific to JUnitShell -----
        */
 
-      // Override log level to set WARN by default..
-      registerHandler(new ArgHandlerLogLevel(options) {
-        @Override
-        protected Type getDefaultLogLevel() {
-          return TreeLogger.WARN;
-        }
-      });
+      // Override log level to set WARN by default.
+      registerHandler(new ArgHandlerLogLevel(options, TreeLogger.WARN));
 
       registerHandler(new ArgHandlerRunCompiledJavascript(shell));
 
@@ -508,8 +475,6 @@ public class JUnitShell extends DevMode {
         }
       });
 
-      registerHandler(new ArgHandlerRunInStandardsMode(shell));
-
       registerHandler(new ArgHandlerInt() {
 
         @Override
@@ -602,7 +567,6 @@ public class JUnitShell extends DevMode {
      * system classloader to dominate. This makes JUnitHostImpl live in the
      * right classloader (mine).
      */
-    @SuppressWarnings("unchecked")
     @Override
     protected WebAppContext createWebAppContext(TreeLogger logger,
         File appRootDir) {
@@ -762,7 +726,8 @@ public class JUnitShell extends DevMode {
       errMsg = "The test class '" + typeName + "' was not found in module '"
           + moduleName + "'; no compilation unit for that type was seen";
     } else {
-      CompilationProblemReporter.logMissingTypeErrorWithHints(logger, typeName, compilationState);
+      CompilationProblemReporter.logErrorTrace(logger, TreeLogger.ERROR,
+          compilationState.getCompilerContext(), typeName, true);
       errMsg = "The test class '" + typeName
           + "' had compile errors; check log for details";
     }
@@ -904,8 +869,6 @@ public class JUnitShell extends DevMode {
    */
   private String runStyleName = "HtmlUnit";
 
-  private boolean standardsMode = true;
-
   /**
    * Test method timeout as modified by the batching strategy.
    */
@@ -944,8 +907,10 @@ public class JUnitShell extends DevMode {
   }
 
   public String getModuleUrl(String moduleName) {
-    // TODO(jat): consider using DevModeBase.processUrl instead
+    // TODO(manolo): consider using DevModeBase.normalizeURL
+    // and DevModeBase.makeStartupUrl instead.
     String localhost = runStyle.getLocalHostName();
+    int codeServerPort = developmentMode ? listener.getSocketPort() : 0;
     return getModuleUrl(localhost, getPort(), moduleName, codeServerPort);
   }
 
@@ -959,6 +924,14 @@ public class JUnitShell extends DevMode {
   @Override
   protected long checkForUpdatesInterval() {
     return CheckForUpdates.ONE_MINUTE;
+  }
+
+  @Override
+  protected HostedModeOptions createOptions() {
+    HostedModeOptions options = super.createOptions();
+    options.setSuperDevMode(false);
+    options.setIncrementalCompileEnabled(false);
+    return options;
   }
 
   @Override
@@ -1106,19 +1079,32 @@ public class JUnitShell extends DevMode {
       Property userAgent = props.find("user.agent");
       if (userAgent instanceof BindingProperty) {
         BindingProperty bindingProperty = (BindingProperty) userAgent;
-        bindingProperty.setAllowedValues(bindingProperty.getRootCondition(),
-            userAgents.toArray(new String[0]));
+        bindingProperty.setRootGeneratedValues(userAgents.toArray(new String[0]));
       }
     }
-    if (!new Compiler(options).run(getTopLogger(), module)) {
+
+    if (!Compiler.maybeRestrictProperties(getTopLogger(), module, options.getProperties())) {
+      throw new UnableToCompleteException();
+    }
+
+    if (options.isClosureCompilerFormatEnabled()) {
+      module.addLinker("closureHelpers");
+    }
+
+    boolean success = false;
+    try {
+      success = new Compiler(options).run(getTopLogger(), module);
+    } catch (Exception e) {
+      getTopLogger().log(Type.ERROR, "Compiler aborted with an exception ", e);
+    }
+    if (!success) {
       throw new UnableToCompleteException();
     }
     // TODO(scottb): prepopulate currentCompilationState somehow?
   }
 
   String getModuleUrl(String hostName, int port, String moduleName, int codeServerPort) {
-    String url = "http://" + hostName + ":" + port + "/" + moduleName
-        + (standardsMode ? "/junit-standards.html" : "/junit.html");
+    String url = "http://" + hostName + ":" + port + "/" + moduleName + "/junit.html";
     if (developmentMode) {
       url += "?gwt.codesvr=" + hostName + ":" + codeServerPort;
     }
@@ -1152,7 +1138,8 @@ public class JUnitShell extends DevMode {
       try {
         Linker l = module.getActivePrimaryLinker().newInstance();
         StandardLinkerContext context = new StandardLinkerContext(
-            getTopLogger(), module, compilerContext.getPublicResourceOracle(), null);
+            getTopLogger(), module, compilerContext.getPublicResourceOracle(),
+            JsOutputOption.PRETTY);
         if (!l.supportsDevModeInJunit(context)) {
           if (module.getLinker("std") != null) {
             // TODO: unfortunately, this could be race condition between dev/prod
@@ -1166,10 +1153,6 @@ public class JUnitShell extends DevMode {
     } else {
       compileForWebMode(module, userAgents);
     }
-  }
-
-  void setStandardsMode(boolean standardsMode) {
-    this.standardsMode = standardsMode;
   }
 
   private void checkArgs() {
@@ -1332,10 +1315,16 @@ public class JUnitShell extends DevMode {
 
     // Get the module definition for the current test.
     if (!sameTest) {
-      currentModule = compileStrategy.maybeCompileModule(moduleName,
-          syntheticModuleName, strategy, batchingStrategy, getTopLogger());
-      compilerContext = compilerContextBuilder.module(currentModule).build();
-      currentCompilationState = currentModule.getCompilationState(getTopLogger(), compilerContext);
+      try {
+        currentModule = compileStrategy.maybeCompileModule(moduleName,
+            syntheticModuleName, strategy, batchingStrategy, getTopLogger());
+        compilerContext = compilerContextBuilder.module(currentModule).build();
+        currentCompilationState = currentModule.getCompilationState(getTopLogger(),
+            compilerContext);
+      } catch (UnableToCompleteException e) {
+        lastLaunchFailed = true;
+        throw e;
+      }
     }
     assert (currentModule != null);
 

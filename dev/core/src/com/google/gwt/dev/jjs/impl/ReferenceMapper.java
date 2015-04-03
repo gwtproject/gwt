@@ -44,6 +44,7 @@ import org.eclipse.jdt.internal.compiler.lookup.MethodBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SyntheticArgumentBinding;
+import org.eclipse.jdt.internal.compiler.lookup.SyntheticMethodBinding;
 import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
 
@@ -80,7 +81,7 @@ public class ReferenceMapper {
 
   public JField get(FieldBinding binding) {
     binding = binding.original();
-    String key = signature(binding);
+    String key = JdtUtil.signature(binding);
     JField sourceField = sourceFields.get(key);
     if (sourceField != null) {
       assert !sourceField.isExternal();
@@ -97,7 +98,7 @@ public class ReferenceMapper {
 
   public JMethod get(MethodBinding binding) {
     binding = binding.original();
-    String key = signature(binding);
+    String key = JdtUtil.signature(binding);
     JMethod sourceMethod = sourceMethods.get(key);
     if (sourceMethod != null) {
       assert !sourceMethod.isExternal();
@@ -110,7 +111,7 @@ public class ReferenceMapper {
       } else {
         method = createMethod(SourceOrigin.UNKNOWN, binding, null);
       }
-      assert method.isExternal();
+      assert binding instanceof SyntheticMethodBinding || method.isExternal();
       methods.put(key, method);
     }
     return method;
@@ -118,8 +119,9 @@ public class ReferenceMapper {
 
   public JType get(TypeBinding binding) {
     binding = binding.erasure();
-    String key = signature(binding);
+    String key = JdtUtil.signature(binding);
     JReferenceType sourceType = sourceTypes.get(key);
+
     if (sourceType != null) {
       assert !sourceType.isExternal();
       return sourceType;
@@ -170,9 +172,8 @@ public class ReferenceMapper {
          */
       }
       // Emulate clinit method for super clinit calls.
-      JMethod clinit =
-          new JMethod(SourceOrigin.UNKNOWN, "$clinit", declType, JPrimitiveType.VOID, false, true,
-              true, AccessModifier.PRIVATE);
+      JMethod clinit = new JMethod(SourceOrigin.UNKNOWN, GwtAstBuilder.CLINIT_NAME, declType,
+          JPrimitiveType.VOID, false, true, true, AccessModifier.PRIVATE);
       clinit.freezeParamTypes();
       clinit.setSynthetic();
       declType.addMethod(clinit);
@@ -183,23 +184,24 @@ public class ReferenceMapper {
   }
 
   public void setField(FieldBinding binding, JField field) {
-    String key = signature(binding);
+    String key = JdtUtil.signature(binding);
     sourceFields.put(key, field);
   }
 
   public void setMethod(MethodBinding binding, JMethod method) {
-    String key = signature(binding);
+    String key = JdtUtil.signature(binding);
     sourceMethods.put(key, method);
   }
 
   public void setSourceType(SourceTypeBinding binding, JDeclaredType type) {
-    String key = signature(binding);
+    String key = JdtUtil.signature(binding);
     sourceTypes.put(key, type);
   }
 
   JMethod createConstructor(SourceInfo info, MethodBinding b) {
     JDeclaredType enclosingType = (JDeclaredType) get(b.declaringClass);
-    JMethod method = new JConstructor(info, (JClassType) enclosingType);
+    JMethod method =
+        new JConstructor(info, (JClassType) enclosingType, AccessModifier.fromMethodBinding(b));
     enclosingType.addMethod(method);
 
     /*
@@ -258,9 +260,9 @@ public class ReferenceMapper {
 
   private JField createField(FieldBinding binding) {
     JDeclaredType enclosingType = (JDeclaredType) get(binding.declaringClass);
-    JField field =
-        new JField(SourceOrigin.UNKNOWN, intern(binding.name), enclosingType, get(binding.type),
-            binding.isStatic(), GwtAstBuilder.getFieldDisposition(binding));
+    JField field = new JField(SourceOrigin.UNKNOWN, intern(binding.name), enclosingType,
+        get(binding.type), binding.isStatic(), GwtAstBuilder.getFieldDisposition(binding),
+        AccessModifier.fromFieldBinding(binding));
     enclosingType.addField(field);
     return field;
   }
@@ -347,38 +349,6 @@ public class ReferenceMapper {
   private void put(JType... baseTypes) {
     for (JType type : baseTypes) {
       types.put(type.getName(), type);
-    }
-  }
-
-  private String signature(FieldBinding binding) {
-    StringBuilder sb = new StringBuilder();
-    sb.append(binding.declaringClass.constantPoolName());
-    sb.append('.');
-    sb.append(binding.name);
-    sb.append(':');
-    sb.append(binding.type.signature());
-    return sb.toString();
-  }
-
-  private String signature(MethodBinding binding) {
-    StringBuilder sb = new StringBuilder();
-    sb.append(binding.declaringClass.constantPoolName());
-    sb.append('.');
-    sb.append(binding.selector);
-    sb.append('(');
-    for (TypeBinding paramType : binding.parameters) {
-      sb.append(paramType.signature());
-    }
-    sb.append(')');
-    sb.append(binding.returnType.signature());
-    return sb.toString();
-  }
-
-  private String signature(TypeBinding binding) {
-    if (binding.isBaseType()) {
-      return String.valueOf(binding.sourceName());
-    } else {
-      return String.valueOf(binding.constantPoolName());
     }
   }
 }

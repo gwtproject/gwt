@@ -46,6 +46,60 @@ public class JsoTest extends GWTTestCase {
     }
   }
 
+  static final class ClinitStaticFieldFirst extends JavaScriptObject {
+    public static String[] FIELD = new String[]{"a","b","c"};
+    protected ClinitStaticFieldFirst() {
+    }
+    public Object invokeInstanceMethod() {
+      if (FIELD == null) {
+        return null;
+      }
+      return FIELD;
+    }
+    public static Object invokeStaticMethod() {
+      if (FIELD == null) {
+        return null;
+      }
+      return FIELD;
+    }
+  }
+
+  static final class ClinitInstanceMethodFirst extends JavaScriptObject {
+    public static String[] FIELD = new String[]{"a","b","c"};
+    protected ClinitInstanceMethodFirst() {
+    }
+    public Object invokeInstanceMethod() {
+      if (FIELD == null) {
+        return null;
+      }
+      return FIELD;
+    }
+    public static Object invokeStaticMethod() {
+      if (FIELD == null) {
+        return null;
+      }
+      return FIELD;
+    }
+  }
+
+  static final class ClinitStaticMethodFirst extends JavaScriptObject {
+    public static String[] FIELD = new String[]{"a","b","c"};
+    protected ClinitStaticMethodFirst() {
+    }
+    public Object invokeInstanceMethod() {
+      if (FIELD == null) {
+        return null;
+      }
+      return FIELD;
+    }
+    public static Object invokeStaticMethod() {
+      if (FIELD == null) {
+        return null;
+      }
+      return FIELD;
+    }
+  }
+
   static class Foo extends JavaScriptObject {
     public static int field;
 
@@ -296,6 +350,10 @@ public class JsoTest extends GWTTestCase {
     objArray[0] = makeJSO();
     objArray[0] = makeFoo();
     objArray[0] = makeBar();
+
+    Foo[][] foo = new Foo[10][];
+    Object[][] fooAsObject = foo;
+    fooAsObject[0] = new Bar[1];
   }
 
   public void testBasic() {
@@ -411,6 +469,20 @@ public class JsoTest extends GWTTestCase {
       fail("Expected ClassCastException");
     } catch (ClassCastException expected) {
     }
+  }
+
+  public void testClassInitializerRun() {
+    ClinitStaticMethodFirst staticMethodFirst = JavaScriptObject.createObject().cast();
+    assertNotNull("static method", ClinitStaticMethodFirst.invokeStaticMethod());
+    assertNotNull("instance method after static method", staticMethodFirst.invokeInstanceMethod());
+
+    ClinitStaticFieldFirst staticFieldFirst = JavaScriptObject.createObject().cast();
+    assertNotNull("field access", ClinitStaticFieldFirst.FIELD);
+    assertNotNull("instance method after field access", staticFieldFirst.invokeInstanceMethod());
+
+    ClinitInstanceMethodFirst instanceMethodFirst = JavaScriptObject.createObject().cast();
+    assertNotNull("instance method", instanceMethodFirst.invokeInstanceMethod());
+    assertNotNull("static method after instance method", ClinitInstanceMethodFirst.invokeStaticMethod());
   }
 
   public void testClassLiterals() {

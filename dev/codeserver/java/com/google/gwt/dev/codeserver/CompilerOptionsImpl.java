@@ -17,11 +17,15 @@
 package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.dev.cfg.Properties;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.js.JsNamespaceOption;
+import com.google.gwt.dev.util.arg.OptionJsInteropMode;
+import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.arg.SourceLevel;
-import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.LinkedListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.io.File;
@@ -33,25 +37,41 @@ import java.util.List;
  */
 class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   private final CompileDir compileDir;
-  private final List<String> libraryPaths;
+  private final boolean incremental;
+  private final boolean failOnError;
+  private final TreeLogger.Type logLevel;
   private final List<String> moduleNames;
   private final SourceLevel sourceLevel;
-  private final boolean strictResources;
-  private final TreeLogger.Type logLevel;
+  private final boolean strictPublicResources;
+  private final boolean strictSourceResources;
+  private final OptionJsInteropMode.Mode jsInteropMode;
+  private final OptionMethodNameDisplayMode.Mode methodNameDisplayMode;
+  private final ListMultimap<String, String> properties;
+  private final boolean closureFormattedOutput;
 
-  CompilerOptionsImpl(CompileDir compileDir, List<String> moduleNames, SourceLevel sourceLevel,
-      boolean strictResources, TreeLogger.Type logLevel) {
+  CompilerOptionsImpl(CompileDir compileDir, String moduleName, Options options) {
     this.compileDir = compileDir;
-    this.libraryPaths = ImmutableList.<String>of();
-    this.moduleNames = Lists.newArrayList(moduleNames);
-    this.sourceLevel = sourceLevel;
-    this.strictResources = strictResources;
-    this.logLevel = logLevel;
+    this.incremental = options.isIncrementalCompileEnabled();
+    this.moduleNames = Lists.newArrayList(moduleName);
+    this.sourceLevel = options.getSourceLevel();
+    this.failOnError = options.isFailOnError();
+    this.strictSourceResources = options.enforceStrictResources();
+    this.strictPublicResources = options.enforceStrictResources();
+    this.logLevel = options.getLogLevel();
+    this.jsInteropMode = options.getJsInteropMode();
+    this.methodNameDisplayMode = options.getMethodNameDisplayMode();
+    this.properties = LinkedListMultimap.create(options.getProperties());
+    this.closureFormattedOutput = options.isClosureFormattedOutput();
   }
 
   @Override
-  public boolean enforceStrictResources() {
-    return strictResources;
+  public boolean enforceStrictPublicResources() {
+    return strictPublicResources;
+  }
+
+  @Override
+  public boolean enforceStrictSourceResources() {
+    return strictSourceResources;
   }
 
   @Override
@@ -62,6 +82,11 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   @Override
   public File getExtraDir() {
     return compileDir.getExtraDir();
+  }
+
+  @Override
+  public Properties getFinalProperties() {
+    return null; // handling this in a different way
   }
 
   @Override
@@ -80,8 +105,8 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
-  public List<String> getLibraryPaths() {
-    return libraryPaths;
+  public OptionJsInteropMode.Mode getJsInteropMode() {
+    return jsInteropMode;
   }
 
   /**
@@ -103,13 +128,18 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
+  public OptionMethodNameDisplayMode.Mode getMethodNameDisplayMode() {
+    return methodNameDisplayMode;
+  }
+
+  @Override
   public List<String> getModuleNames() {
     return moduleNames;
   }
 
   @Override
   public JsNamespaceOption getNamespace() {
-    return JsNamespaceOption.BY_JAVA_PACKAGE;
+    return JsNamespaceOption.PACKAGE;
   }
 
   @Override
@@ -123,8 +153,8 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
-  public String getOutputLibraryPath() {
-    return null;
+  public ListMultimap<String, String> getProperties() {
+    return properties;
   }
 
   @Override
@@ -138,6 +168,11 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
+  public String getSourceMapFilePrefix() {
+    return SourceHandler.SOURCEROOT_TEMPLATE_VARIABLE;
+  }
+
+  @Override
   public File getWarDir() {
     return compileDir.getWarDir();
   }
@@ -145,12 +180,6 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   @Override
   public File getWorkDir() {
     return compileDir.getWorkDir();
-  }
-
-  @Override
-  @Deprecated
-  public boolean isAggressivelyOptimize() {
-    return false;
   }
 
   @Override
@@ -181,6 +210,11 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   @Override
   public boolean isEnabledGeneratingOnShards() {
     return true;
+  }
+
+  @Override
+  public boolean isIncrementalCompileEnabled() {
+    return incremental;
   }
 
   @Override
@@ -215,7 +249,7 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
 
   @Override
   public boolean isStrict() {
-    return false;
+    return failOnError;
   }
 
   @Override
@@ -230,7 +264,7 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
 
   @Override
   public boolean shouldAddRuntimeChecks() {
-    // TODO set to true in a separate patch
+    // Not needed since no optimizations are on.
     return false;
   }
 
@@ -245,8 +279,8 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
-  public boolean shouldLink() {
-    return false;
+  public boolean shouldJDTInlineCompileTimeConstants() {
+    return !isIncrementalCompileEnabled();
   }
 
   @Override
@@ -267,5 +301,15 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   @Override
   public boolean shouldSaveSource() {
     return false; // handling this a different way
+  }
+
+  @Override
+  public boolean useDetailedTypeIds() {
+    return false;
+  }
+
+  @Override
+  public boolean isClosureCompilerFormatEnabled() {
+    return closureFormattedOutput;
   }
 }

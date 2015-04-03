@@ -26,12 +26,12 @@ import com.google.gwt.emultest.java.lang.LongTest;
 import com.google.gwt.emultest.java.lang.MathTest;
 import com.google.gwt.emultest.java.lang.ObjectTest;
 import com.google.gwt.emultest.java.lang.ShortTest;
-import com.google.gwt.emultest.java.lang.StringBufferDefaultImplTest;
 import com.google.gwt.emultest.java.lang.StringBufferTest;
 import com.google.gwt.emultest.java.lang.StringTest;
 import com.google.gwt.emultest.java.lang.SystemTest;
 import com.google.gwt.emultest.java.lang.ThrowableTest;
 import com.google.gwt.emultest.java.math.MathContextTest;
+import com.google.gwt.emultest.java.math.MathContextWithObfuscatedEnumsTest;
 import com.google.gwt.emultest.java.math.RoundingModeTest;
 import com.google.gwt.emultest.java.security.MessageDigestTest;
 import com.google.gwt.emultest.java.sql.SqlDateTest;
@@ -66,7 +66,6 @@ public class EmulSuite {
     suite.addTestSuite(ObjectTest.class);
     suite.addTestSuite(ShortTest.class);
     suite.addTestSuite(StringBufferTest.class);
-    suite.addTestSuite(StringBufferDefaultImplTest.class);
     suite.addTestSuite(StringTest.class);
     suite.addTestSuite(SystemTest.class);
     suite.addTestSuite(ThrowableTest.class);
@@ -75,6 +74,7 @@ public class EmulSuite {
     // BigInteger is tested in {@link BigIntegerSuite}
     suite.addTestSuite(RoundingModeTest.class);
     suite.addTestSuite(MathContextTest.class);
+    suite.addTestSuite(MathContextWithObfuscatedEnumsTest.class);
 
     //-- java.security
     suite.addTestSuite(MessageDigestTest.class);

@@ -28,25 +28,6 @@ public final class Long extends Number implements Comparable<Long> {
     static Long[] boxedValues = new Long[256];
   }
 
-  static class HexLookup {
-    /**
-     * Super fast char->digit conversion.
-     */
-    static int[] hexLookup = new int[0];
-
-    static {
-      for (char c = '0'; c <= '9'; ++c) {
-        hexLookup[c] = c - '0';
-      }
-      for (char c = 'A'; c <= 'F'; ++c) {
-        hexLookup[c] = c - 'A' + 10;
-      }
-      for (char c = 'a'; c <= 'f'; ++c) {
-        hexLookup[c] = c - 'a' + 10;
-      }
-    }
-  }
-
   public static final long MAX_VALUE = 0x7fffffffffffffffL;
   public static final long MIN_VALUE = 0x8000000000000000L;
   public static final int SIZE = 64;
@@ -70,7 +51,7 @@ public final class Long extends Number implements Comparable<Long> {
 
   public static Long decode(String s) throws NumberFormatException {
     __Decode decode = __decodeNumberString(s);
-    return new Long(parseLong(decode.payload, decode.radix));
+    return valueOf(decode.payload, decode.radix);
   }
 
   /**
@@ -165,15 +146,15 @@ public final class Long extends Number implements Comparable<Long> {
   }
 
   public static String toBinaryString(long value) {
-    return toPowerOfTwoString(value, 1);
+    return toPowerOfTwoUnsignedString(value, 1);
   }
 
   public static String toHexString(long value) {
-    return toPowerOfTwoString(value, 4);
+    return toPowerOfTwoUnsignedString(value, 4);
   }
 
   public static String toOctalString(long value) {
-    return toPowerOfTwoString(value, 3);
+    return toPowerOfTwoUnsignedString(value, 3);
   }
 
   public static String toString(long value) {
@@ -186,24 +167,28 @@ public final class Long extends Number implements Comparable<Long> {
       return String.valueOf(value);
     }
 
+    if (Integer.MIN_VALUE <= value && value <= Integer.MAX_VALUE) {
+      return Integer.toString((int) value, intRadix);
+    }
+
     final int bufSize = 65;
     char[] buf = new char[bufSize];
-    char[] digits = __Digits.digits;
     int pos = bufSize - 1;
     // Cache a converted version for performance (pure long ops are faster).
     long radix = intRadix;
     if (value >= 0) {
       while (value >= radix) {
-        buf[pos--] = digits[(int) (value % radix)];
+        buf[pos--] = Character.forDigit((int) (value % radix));
         value /= radix;
       }
-      buf[pos] = digits[(int) value];
+      buf[pos] = Character.forDigit((int) value);
     } else {
-      while (value <= -radix) {
-        buf[pos--] = digits[(int) -(value % radix)];
+      long negRadix = -radix;
+      while (value <= negRadix) {
+        buf[pos--] = Character.forDigit(-((int) (value % radix)));
         value /= radix;
       }
-      buf[pos--] = digits[(int) -value];
+      buf[pos--] = Character.forDigit(-((int) value));
       buf[pos] = '-';
     }
     return String.__valueOf(buf, pos, bufSize);
@@ -222,54 +207,28 @@ public final class Long extends Number implements Comparable<Long> {
   }
 
   public static Long valueOf(String s) throws NumberFormatException {
-    return new Long(Long.parseLong(s));
+    return valueOf(s, 10);
   }
 
   public static Long valueOf(String s, int radix) throws NumberFormatException {
-    return new Long(Long.parseLong(s, radix));
+    return valueOf(parseLong(s, radix));
   }
 
-  private static native int hexDigit(char c, String s) /*-{
-    var val = @java.lang.Long.HexLookup::hexLookup[c];
-    if (val == null) {
-      throw @java.lang.NumberFormatException::forInputString(Ljava/lang/String;)(s);
+  private static String toPowerOfTwoUnsignedString(long value, int shift) {
+    final int radix = 1 << shift;
+    if (Integer.MIN_VALUE <= value && value <= Integer.MAX_VALUE) {
+      return Integer.toString((int) value, radix);
     }
-    return val;
-  }-*/;
 
-  private static long parseHex(String s) {
-    // TODO: make faster using int math!
-    int len = s.length();
-    if (len > 16) {
-      throw NumberFormatException.forInputString(s);
-    }
-    long result = 0;
-    for (int i = 0; i < len; ++i) {
-      result <<= 4;
-      result += hexDigit(s.charAt(i), s);
-    }
-    return result;
-  }
-
-  private static String toPowerOfTwoString(long value, int shift) {
-    // TODO: make faster using int math!
-    final int bufSize = 64 / shift;
-    long bitMask = (1 << shift) - 1;
+    final int mask = radix - 1;
+    final int bufSize = 64 / shift + 1;
     char[] buf = new char[bufSize];
-    char[] digits = __Digits.digits;
-    int pos = bufSize - 1;
-    if (value >= 0) {
-      while (value > bitMask) {
-        buf[pos--] = digits[(int) (value & bitMask)];
-        value >>= shift;
-      }
-    } else {
-      while (pos > 0) {
-        buf[pos--] = digits[(int) (value & bitMask)];
-        value >>= shift;
-      }
-    }
-    buf[pos] = digits[(int) (value & bitMask)];
+    int pos = bufSize;
+    do {
+      buf[--pos] = Character.forDigit(((int) value) & mask);
+      value >>>= shift;
+    } while (value != 0);
+
     return String.__valueOf(buf, pos, bufSize);
   }
 

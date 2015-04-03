@@ -18,6 +18,7 @@ package com.google.gwt.core.ext.linker.impl;
 import com.google.gwt.core.ext.Linker;
 import com.google.gwt.core.ext.LinkerContext;
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.ConfigurationProperty;
@@ -29,12 +30,12 @@ import com.google.gwt.core.ext.linker.PublicResource;
 import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ModuleDef;
-import com.google.gwt.dev.cfg.Property;
 import com.google.gwt.dev.cfg.Script;
 import com.google.gwt.dev.jjs.InternalCompilerException;
-import com.google.gwt.dev.jjs.JJSOptions;
+import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.js.JsLiteralInterner;
+import com.google.gwt.dev.js.JsNamer.IllegalNameException;
 import com.google.gwt.dev.js.JsObfuscateNamer;
 import com.google.gwt.dev.js.JsParser;
 import com.google.gwt.dev.js.JsParserException;
@@ -52,7 +53,9 @@ import com.google.gwt.dev.js.ast.JsScope;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.OutputFileSet;
+import com.google.gwt.util.tools.Utility;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -115,7 +118,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
 
   private final SortedSet<ConfigurationProperty> configurationProperties;
 
-  private final JJSOptions jjsOptions;
+  private final JsOutputOption outputOption;
 
   private final List<Class<? extends Linker>> linkerClasses;
   private Linker[] linkers;
@@ -131,7 +134,8 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
   private final SortedSet<SelectionProperty> selectionProperties;
 
   public StandardLinkerContext(TreeLogger logger, ModuleDef module,
-      ResourceOracle publicResourceOracle, JJSOptions jjsOptions) throws UnableToCompleteException {
+      ResourceOracle publicResourceOracle, JsOutputOption outputOption)
+      throws UnableToCompleteException {
     logger = logger.branch(TreeLogger.DEBUG,
         "Constructing StandardLinkerContext", null);
 
@@ -139,7 +143,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
     this.moduleName = module.getName();
     this.moduleLastModified = module.lastModified();
     this.publicResourceOracle = publicResourceOracle;
-    this.jjsOptions = jjsOptions;
+    this.outputOption = outputOption;
 
     // Sort the linkers into the order they should actually run.
     linkerClasses = new ArrayList<Class<? extends Linker>>();
@@ -147,7 +151,10 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
     // Get all the pre-linkers first.
     for (Class<? extends Linker> linkerClass : module.getActiveLinkers()) {
       Order order = linkerClass.getAnnotation(LinkerOrder.class).value();
-      assert (order != null);
+      if (order == null) {
+        logger.log(Type.ERROR, linkerClass.getName() + " has no @LinkerOrder annotation");
+        throw new UnableToCompleteException();
+      }
       if (order == Order.PRE) {
         linkerClasses.add(linkerClass);
       }
@@ -196,28 +203,22 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
           CONFIGURATION_PROPERTY_COMPARATOR);
       SortedSet<SelectionProperty> mutableSelectionProperties = new TreeSet<SelectionProperty>(
           SELECTION_PROPERTY_COMPARATOR);
-      for (Property p : module.getProperties()) {
-        // Create a new view
-        if (p instanceof com.google.gwt.dev.cfg.ConfigurationProperty) {
-          StandardConfigurationProperty newProp = new StandardConfigurationProperty(
-              (com.google.gwt.dev.cfg.ConfigurationProperty) p);
-          mutableConfigurationProperties.add(newProp);
-          if (logger.isLoggable(TreeLogger.SPAM)) {
-            logger.log(TreeLogger.SPAM,
-                "Added configuration property " + newProp, null);
-          }
-        } else if (p instanceof BindingProperty) {
-          StandardSelectionProperty newProp = new StandardSelectionProperty(
-              (BindingProperty) p);
-          mutableSelectionProperties.add(newProp);
-          propertiesByName.put(newProp.getName(), newProp);
-          if (logger.isLoggable(TreeLogger.SPAM)) {
-            logger.log(TreeLogger.SPAM, "Added selection property " + newProp,
-                null);
-          }
-        } else {
-          logger.log(TreeLogger.ERROR, "Unknown property type "
-              + p.getClass().getName());
+      for (com.google.gwt.dev.cfg.ConfigurationProperty p : module
+          .getProperties().getConfigurationProperties()) {
+        StandardConfigurationProperty newProp = new StandardConfigurationProperty(p);
+        mutableConfigurationProperties.add(newProp);
+        if (logger.isLoggable(TreeLogger.SPAM)) {
+          logger.log(TreeLogger.SPAM,
+              "Added configuration property " + newProp, null);
+        }
+      }
+      for (BindingProperty p : module.getProperties().getBindingProperties()) {
+        StandardSelectionProperty newProp = new StandardSelectionProperty(p);
+        mutableSelectionProperties.add(newProp);
+        propertiesByName.put(newProp.getName(), newProp);
+        if (logger.isLoggable(TreeLogger.SPAM)) {
+          logger.log(TreeLogger.SPAM, "Added selection property " + newProp,
+              null);
         }
       }
       selectionProperties = Collections.unmodifiableSortedSet(mutableSelectionProperties);
@@ -253,7 +254,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
     for (String path : publicResourceOracle.getPathNames()) {
       String partialPath = path.replace(File.separatorChar, '/');
       PublicResource resource = new StandardPublicResource(partialPath,
-          publicResourceOracle.getResourceMap().get(path));
+          publicResourceOracle.getResource(path));
       artifacts.add(resource);
       if (logger.isLoggable(TreeLogger.SPAM)) {
         logger.log(TreeLogger.SPAM, "Added public resource " + resource, null);
@@ -419,7 +420,7 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
 
   @Override
   public boolean isOutputCompact() {
-    return jjsOptions.getOutput().shouldMinimize();
+    return outputOption.shouldMinimize();
   }
 
   @Override
@@ -452,34 +453,37 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
     JsSymbolResolver.exec(jsProgram);
     JsUnusedFunctionRemover.exec(jsProgram);
 
-    switch (jjsOptions.getOutput()) {
-      case OBFUSCATED:
-        /*
-         * We can't apply the regular JsLiteralInterner to the JsProgram that
-         * we've just created. In the normal case, the JsLiteralInterner adds an
-         * additional statement to the program's global JsBlock, however we
-         * don't know exactly what the form and structure of our JsProgram are,
-         * so we'll limit the scope of the modifications to each top-level
-         * function within the program.
-         */
-        TopFunctionStringInterner.exec(jsProgram);
-        JsObfuscateNamer.exec(jsProgram, null);
-        break;
-      case PRETTY:
-        // We don't intern strings in pretty mode to improve readability
-        JsPrettyNamer.exec(jsProgram, null);
-        break;
-      case DETAILED:
-        // As above with OBFUSCATED
-        TopFunctionStringInterner.exec(jsProgram);
-        JsVerboseNamer.exec(jsProgram, null);
-        break;
-      default:
-        throw new InternalCompilerException("Unknown output mode");
+    try {
+      switch (outputOption) {
+        case OBFUSCATED:
+          /*
+           * We can't apply the regular JsLiteralInterner to the JsProgram that
+           * we've just created. In the normal case, the JsLiteralInterner adds an
+           * additional statement to the program's global JsBlock, however we
+           * don't know exactly what the form and structure of our JsProgram are,
+           * so we'll limit the scope of the modifications to each top-level
+           * function within the program.
+           */
+          TopFunctionStringInterner.exec(jsProgram);
+          JsObfuscateNamer.exec(jsProgram, null);
+          break;
+        case PRETTY:
+          // We don't intern strings in pretty mode to improve readability
+          JsPrettyNamer.exec(jsProgram, null);
+          break;
+        case DETAILED:
+          TopFunctionStringInterner.exec(jsProgram);
+          JsVerboseNamer.exec(jsProgram, null);
+          break;
+        default:
+          throw new InternalCompilerException("Unknown output mode");
+      }
+    } catch (IllegalNameException e) {
+      logger.log(TreeLogger.ERROR, e.getMessage(), e);
+      throw new UnableToCompleteException();
     }
 
-    DefaultTextOutput out = new DefaultTextOutput(
-        jjsOptions.getOutput().shouldMinimize());
+    DefaultTextOutput out = new DefaultTextOutput(outputOption.shouldMinimize());
     JsSourceGenerationVisitor v = new JsSourceGenerationVisitor(out);
     v.accept(jsProgram);
     return out.toString();
@@ -517,15 +521,20 @@ public class StandardLinkerContext extends Linker implements LinkerContext {
           partialPath = partialPath.substring(1);
         }
       }
+      OutputStream artifactStream = null;
       try {
-        OutputStream artifactStream = out.openForWrite(partialPath,
-            artifact.getLastModified());
+        artifactStream = new BufferedOutputStream(out.openForWrite(partialPath,
+            artifact.getLastModified()));
         artifact.writeTo(artifactLogger, artifactStream);
-        artifactStream.close();
       } catch (IOException e) {
         artifactLogger.log(TreeLogger.ERROR,
             "Fatal error emitting artifact: " + artifact.getPartialPath(), e);
-        throw new UnableToCompleteException();
+        // Do not fail for Private artifacts, just log the error
+        if (visibility != Visibility.Private) {
+          throw new UnableToCompleteException();
+        }
+      } finally {
+        Utility.close(artifactStream);
       }
     }
   }

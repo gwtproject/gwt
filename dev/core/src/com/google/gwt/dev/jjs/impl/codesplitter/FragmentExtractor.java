@@ -21,7 +21,6 @@ import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.impl.JavaAndJavaScript;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.JsHoister.Cloner;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
@@ -176,10 +175,6 @@ public class FragmentExtractor {
   private final JavaToJavaScriptMap map;
 
   private StatementLogger statementLogger = new NullStatementLogger();
-
-  public FragmentExtractor(JavaAndJavaScript javaAndJavaScript) {
-    this(javaAndJavaScript.jprogram, javaAndJavaScript.jsprogram, javaAndJavaScript.map);
-  }
 
   public FragmentExtractor(JProgram jprogram, JsProgram jsprogram, JavaToJavaScriptMap map) {
     this.jprogram = jprogram;
@@ -440,7 +435,11 @@ public class FragmentExtractor {
       JsNameRef func = (JsNameRef) call.getQualifier();
       JsFunction defineClassJsFunc =
           jsprogram.getIndexedFunction("JavaClassHierarchySetupUtil.defineClass");
-      if (func.getName() != defineClassJsFunc.getName()) {
+      JsFunction defineClassJsProtoFunc =
+          jsprogram.getIndexedFunction(
+              "JavaClassHierarchySetupUtil.defineClassWithPrototype");
+      if (func.getName() != defineClassJsFunc.getName() && func.getName() !=
+          defineClassJsProtoFunc.getName()) {
         return null;
       }
       return map.typeForStatement(stat);
@@ -496,10 +495,8 @@ public class FragmentExtractor {
    */
   private JsInvocation wrapWithEntry(JsExpression exp) {
     SourceInfo sourceInfo = exp.getSourceInfo();
-    JsInvocation call = new JsInvocation(sourceInfo);
-    JsName entryFunctionName = jsprogram.getScope().findExistingName("$entry");
-    call.setQualifier(entryFunctionName.makeRef(sourceInfo));
-    call.getArguments().add(exp);
+    JsInvocation call = new JsInvocation(sourceInfo,
+        jsprogram.getScope().findExistingName("$entry").makeRef(sourceInfo), exp);
     return call;
   }
 }

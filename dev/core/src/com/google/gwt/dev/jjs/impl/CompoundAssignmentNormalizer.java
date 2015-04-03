@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -48,7 +48,7 @@ import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
  * assignments to replace is made in subclasses; they must override the three
  * <code>shouldBreakUp()</code> methods.
  * </p>
- * 
+ *
  * <p>
  * Note that because AST nodes are mutable, they cannot be reused in different
  * parts of the same tree. Instead, the node must be cloned before each
@@ -60,6 +60,10 @@ public abstract class CompoundAssignmentNormalizer {
    * Breaks apart certain complex assignments.
    */
   private class BreakupAssignOpsVisitor extends JModVisitorWithTemporaryVariableCreation {
+
+    public BreakupAssignOpsVisitor(OptimizerContext optimizerCtx) {
+      super(optimizerCtx);
+    }
 
     /**
      * Replaces side effects in lvalue.
@@ -270,10 +274,10 @@ public abstract class CompoundAssignmentNormalizer {
   private final CloneExpressionVisitor cloner = new CloneExpressionVisitor();
 
   public void accept(JNode node) {
-    BreakupAssignOpsVisitor breaker = new BreakupAssignOpsVisitor();
+    BreakupAssignOpsVisitor breaker =
+        new BreakupAssignOpsVisitor(OptimizerContext.NULL_OPTIMIZATION_CONTEXT);
     breaker.accept(node);
   }
-
 
   // Name to assign to temporaries. All temporaries are created with the same name, which is
   // not a problem as they are referred to by reference.

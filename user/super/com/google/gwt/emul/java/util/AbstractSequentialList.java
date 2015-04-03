@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+
 /**
  * Skeletal implementation of the List interface. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractSequentialList.html">[Sun
@@ -36,11 +38,12 @@ public abstract class AbstractSequentialList<E> extends AbstractList<E> {
 
   @Override
   public boolean addAll(int index, Collection<? extends E> c) {
+    checkNotNull(c);
+
     boolean modified = false;
     ListIterator<E> iter = listIterator(index);
-    Iterator<? extends E> colIter = c.iterator();
-    while (colIter.hasNext()) {
-      iter.add(colIter.next());
+    for (E e : c) {
+      iter.add(e);
       modified = true;
     }
     return modified;
@@ -67,14 +70,13 @@ public abstract class AbstractSequentialList<E> extends AbstractList<E> {
   @Override
   public E remove(int index) {
     ListIterator<E> iter = listIterator(index);
-    E old;
     try {
-      old = iter.next();
+      E old = iter.next();
+      iter.remove();
+      return old;
     } catch (NoSuchElementException e) {
       throw new IndexOutOfBoundsException("Can't remove element " + index);
     }
-    iter.remove();
-    return old;
   }
 
   @Override

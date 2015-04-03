@@ -34,6 +34,9 @@
  */
 package java.math;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalArgument;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+
 import java.io.Serializable;
 
 /**
@@ -72,28 +75,6 @@ public final class MathContext implements Serializable {
    */
   public static final MathContext UNLIMITED = new MathContext(0,
       RoundingMode.HALF_UP);
-
-  /**
-   * An array of {@code char} containing: {@code
-   * 'p','r','e','c','i','s','i','o','n','='}. It's used to improve the methods
-   * related to {@code String} conversion.
-   * 
-   * @see #MathContext(String)
-   * @see #toString()
-   */
-  private static final char[] chPrecision = {
-      'p', 'r', 'e', 'c', 'i', 's', 'i', 'o', 'n', '='};
-
-  /**
-   * An array of {@code char} containing: {@code
-   * 'r','o','u','n','d','i','n','g','M','o','d','e','='}. It's used to improve
-   * the methods related to {@code String} conversion.
-   * 
-   * @see #MathContext(String)
-   * @see #toString()
-   */
-  private static final char[] chRoundingMode = {
-      'r', 'o', 'u', 'n', 'd', 'i', 'n', 'g', 'M', 'o', 'd', 'e', '='};
 
   /**
    * This is the serialVersionUID used by the sun implementation.
@@ -137,14 +118,9 @@ public final class MathContext implements Serializable {
    * @throws NullPointerException if {@code roundingMode} is {@code null}.
    */
   public MathContext(int precision, RoundingMode roundingMode) {
-    if (precision < 0) {
-      // math.0C=Digits < 0
-      throw new IllegalArgumentException("Digits < 0"); //$NON-NLS-1$
-    }
-    if (roundingMode == null) {
-      // math.0D=null RoundingMode
-      throw new NullPointerException("null RoundingMode"); //$NON-NLS-1$
-    }
+    checkCriticalArgument(precision >= 0, "Digits < 0");
+    checkNotNull(roundingMode, "null RoundingMode");
+
     this.precision = precision;
     this.roundingMode = roundingMode;
   }
@@ -162,75 +138,24 @@ public final class MathContext implements Serializable {
    *           or if the precision specified is < 0.
    */
   public MathContext(String val) {
-    if (val == null) {
-      throw new NullPointerException("null string");
-    }
-    char[] charVal = val.toCharArray();
-    int i; // Index of charVal
-    int j; // Index of chRoundingMode
-    int digit; // It will contain the digit parsed
+    checkNotNull(val, "null string");
 
-    if ((charVal.length < 27) || (charVal.length > 45)) {
-      // math.0E=bad string format
-      throw new IllegalArgumentException("bad string format"); //$NON-NLS-1$
-    }
-    // Parsing "precision=" String
-    for (i = 0; (i < chPrecision.length) && (charVal[i] == chPrecision[i]); i++) {
-      // empty
+    try {
+      String[] extractedValues = parseValue(val);
+      this.precision = Integer.parseInt(extractedValues[1]);
+      // Can use RoundingMode.valueOf here because it is blacklisted in enum obfuscation.
+      this.roundingMode = RoundingMode.valueOf(extractedValues[2]);
+    } catch (RuntimeException re) {
+      // Ensure that we only throw IllegalArgumentException for any illegal value.
+      throw new IllegalArgumentException("bad string format");
     }
 
-    if (i < chPrecision.length) {
-      // math.0E=bad string format
-      throw new IllegalArgumentException("bad string format"); //$NON-NLS-1$
-    }
-    // Parsing the value for "precision="...
-    digit = Character.digit(charVal[i], 10);
-    if (digit == -1) {
-      // math.0E=bad string format
-      throw new IllegalArgumentException("bad string format"); //$NON-NLS-1$
-    }
-    this.precision = this.precision * 10 + digit;
-    i++;
-
-    do {
-      digit = Character.digit(charVal[i], 10);
-      if (digit == -1) {
-        if (charVal[i] == ' ') {
-          // It parsed all the digits
-          i++;
-          break;
-        }
-        // It isn't a valid digit, and isn't a white space
-        // math.0E=bad string format
-        throw new IllegalArgumentException("bad string format"); //$NON-NLS-1$
-      }
-      // Accumulating the value parsed
-      this.precision = this.precision * 10 + digit;
-      if (this.precision < 0) {
-        // math.0E=bad string format
-        throw new IllegalArgumentException("bad string format"); //$NON-NLS-1$
-      }
-      i++;
-    } while (true);
-    // Parsing "roundingMode="
-    for (j = 0; (j < chRoundingMode.length)
-        && (charVal[i] == chRoundingMode[j]); i++, j++) {
-      // empty
-    }
-
-    if (j < chRoundingMode.length) {
-      // math.0E=bad string format
-      throw new IllegalArgumentException("bad string format"); //$NON-NLS-1$
-    }
-
-    // Parsing the value for "roundingMode"...
-    /*  
-     * don't use implicit calls to RoundingMode.valueOf here, since it will break
-     * if enum name obfuscation is enabled.
-     */
-    this.roundingMode = RoundingMode.valueOfExplicit(String.valueOf(charVal, i,
-        charVal.length - i));
+    checkCriticalArgument(this.precision >= 0, "Digits < 0");
   }
+
+  private static native String[] parseValue(String val) /*-{
+    return /^precision=(\d+)\ roundingMode=(\w+)$/.exec(val);
+  }-*/;
 
   /* Public Methods */
 
@@ -301,13 +226,6 @@ public final class MathContext implements Serializable {
    */
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder(45);
-
-    sb.append(chPrecision);
-    sb.append(precision);
-    sb.append(' ');
-    sb.append(chRoundingMode);
-    sb.append(roundingMode);
-    return sb.toString();
+    return "precision=" + precision + " roundingMode=" + roundingMode;
   }
 }

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -22,15 +22,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A nifty class that lets you squirrel away data on the file system. Write
  * once, read many times. Instance of this are thread-safe by way of internal
  * synchronization.
- * 
+ *
  * Note that in the current implementation, the backing temp file will get
  * arbitrarily large as you continue adding things to it. There is no internal
  * GC or compaction.
@@ -39,49 +36,27 @@ public class DiskCache {
   /**
    * For future thought: if we used Object tokens instead of longs, we could
    * actually track references and do GC/compaction on the underlying file.
-   * 
+   *
    * I considered using memory mapping, but I didn't see any obvious way to make
    * the map larger after the fact, which kind of defeats the infinite-append
    * design. At any rate, I measured the current performance of this design to
    * be so fast relative to what I'm using it for, I didn't pursue this further.
    */
 
-  private static class Shutdown implements Runnable {
-    @Override
-    public void run() {
-      for (WeakReference<DiskCache> ref : shutdownList) {
-        try {
-          DiskCache diskCache = ref.get();
-          if (diskCache != null) {
-            diskCache.close();
-          }
-        } catch (Throwable e) {
-        }
-      }
-    }
-  }
-
   /**
    * A global shared Disk cache.
    */
   public static DiskCache INSTANCE = new DiskCache();
 
-  private static List<WeakReference<DiskCache>> shutdownList;
-
   private boolean atEnd = true;
   private RandomAccessFile file;
 
-  DiskCache() {
+  private DiskCache() {
     try {
       File temp = File.createTempFile("gwt", "byte-cache");
       temp.deleteOnExit();
       file = new RandomAccessFile(temp, "rw");
       file.setLength(0);
-      if (shutdownList == null) {
-        shutdownList = new ArrayList<WeakReference<DiskCache>>();
-        Runtime.getRuntime().addShutdownHook(new Thread(new Shutdown()));
-      }
-      shutdownList.add(new WeakReference<DiskCache>(this));
     } catch (IOException e) {
       throw new RuntimeException("Unable to initialize byte cache", e);
     }
@@ -89,7 +64,7 @@ public class DiskCache {
 
   /**
    * Retrieve the underlying bytes.
-   * 
+   *
    * @param token a previously returned token
    * @return the bytes that were written
    */
@@ -108,7 +83,7 @@ public class DiskCache {
 
   /**
    * Deserialize the underlying bytes as an object.
-   * 
+   *
    * @param <T> the type of the object to deserialize
    * @param token a previously returned token
    * @param type the type of the object to deserialize
@@ -128,7 +103,7 @@ public class DiskCache {
 
   /**
    * Read the underlying bytes as a String.
-   * 
+   *
    * @param token a previously returned token
    * @return the String that was written
    */
@@ -139,9 +114,9 @@ public class DiskCache {
   /**
    * Write the rest of the data in an input stream to disk. Note: this method
    * does not close the InputStream.
-   * 
+   *
    * @param in open stream containing the data to write to the disk cache.
-   * 
+   *
    * @return a token to retrieve the data later
    */
   public synchronized long transferFromStream(InputStream in) throws IOException {
@@ -174,7 +149,7 @@ public class DiskCache {
 
   /**
    * Writes the underlying bytes into the specified output stream.
-   * 
+   *
    * @param token a previously returned token
    * @param out the stream to write into
    */
@@ -202,7 +177,7 @@ public class DiskCache {
 
   /**
    * Write a byte array to disk.
-   * 
+   *
    * @return a token to retrieve the data later
    */
   public synchronized long writeByteArray(byte[] bytes) {
@@ -218,7 +193,7 @@ public class DiskCache {
 
   /**
    * Serialize an Object to disk.
-   * 
+   *
    * @return a token to retrieve the data later
    */
   public long writeObject(Object object) {
@@ -233,30 +208,17 @@ public class DiskCache {
 
   /**
    * Write a String to disk as bytes.
-   * 
+   *
    * @return a token to retrieve the data later
    */
   public long writeString(String str) {
     return writeByteArray(Util.getBytes(str));
   }
 
-  @Override
-  protected synchronized void finalize() throws Throwable {
-    close();
-  }
-
-  private void close() throws Throwable {
-    if (file != null) {
-      file.setLength(0);
-      file.close();
-      file = null;
-    }
-  }
-
   /**
    * Moves to the end of the file if necessary and returns the offset position.
    * Caller must synchronize.
-   * 
+   *
    * @return the offset position of the end of the file
    * @throws IOException
    */

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,14 +15,15 @@
  */
 package com.google.gwt.dev.shell.rewrite;
 
-import com.google.gwt.dev.asm.ClassVisitor;
-import com.google.gwt.dev.asm.MethodVisitor;
-import com.google.gwt.dev.asm.Opcodes;
-import com.google.gwt.dev.asm.Type;
-import com.google.gwt.dev.asm.commons.GeneratorAdapter;
-import com.google.gwt.dev.asm.commons.Method;
 import com.google.gwt.dev.shell.JavaScriptHost;
 import com.google.gwt.dev.util.Name.InternalName;
+
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.commons.GeneratorAdapter;
+import org.objectweb.asm.commons.Method;
 
 import java.lang.reflect.Modifier;
 import java.util.Locale;
@@ -119,7 +120,7 @@ public class RewriteJsniMethods extends ClassVisitor {
       for (Class<?> c : primitives) {
         Type type = Type.getType(c);
         String typeName = type.getClassName();
-        String firstChar = typeName.substring(0, 1).toUpperCase(Locale.ENGLISH);
+        String firstChar = typeName.substring(0, 1).toUpperCase(Locale.ROOT);
         typeName = firstChar + typeName.substring(1);
         SORT_MAP[type.getSort()] = new JavaScriptHostInfo(type, "invokeNative"
             + typeName);
@@ -205,7 +206,7 @@ public class RewriteJsniMethods extends ClassVisitor {
 
     public MyMethodAdapter(MethodVisitor mv, int access, String name,
         String desc) {
-      super(mv, access, name, desc);
+      super(Opcodes.ASM5, mv, access, name, desc);
       this.descriptor = desc;
       this.name = name;
       isStatic = (access & Opcodes.ACC_STATIC) != 0;
@@ -228,7 +229,7 @@ public class RewriteJsniMethods extends ClassVisitor {
      * Does all of the work necessary to do the dispatch to the appropriate
      * variant of {@link JavaScriptHost#invokeNativeVoid
      * JavaScriptHost.invokeNative*}. And example output:
-     * 
+     *
      * <pre>
      * return JavaScriptHost.invokeNativeInt(
      *     "@com.google.gwt.sample.hello.client.Hello::echo(I)", null,
@@ -254,13 +255,6 @@ public class RewriteJsniMethods extends ClassVisitor {
         visitInsn(Opcodes.ACONST_NULL);
       } else {
         loadThis();
-        // Ensure the instance method is not invoked against null, otherwise
-        // JS's apply will turn it into the window object. See Issue 3069.
-        visitMethodInsn(
-            Opcodes.INVOKESTATIC,
-            "com/google/gwt/dev/shell/JavaScriptHost",
-            "checkNotNull",
-            "(Ljava/lang/Object;)Ljava/lang/Object;");
       }
       // Stack is at 2
 
@@ -292,7 +286,7 @@ public class RewriteJsniMethods extends ClassVisitor {
       /*
        * For speed, we don't ask ASM to COMPUTE_MAXS. We manually calculated a
        * max depth of 8.
-       * 
+       *
        * Also, when tobyr tried getting ASM to compute the correct stack size,
        * ASM seemed to compute the wrong value for reasons we don't understand.
        */
@@ -335,7 +329,7 @@ public class RewriteJsniMethods extends ClassVisitor {
 
   public RewriteJsniMethods(ClassVisitor v,
       Map<String, String> anonymousClassMap) {
-    super(Opcodes.ASM4, v);
+    super(Opcodes.ASM5, v);
     this.anonymousClassMap = anonymousClassMap;
   }
 
@@ -365,7 +359,7 @@ public class RewriteJsniMethods extends ClassVisitor {
 
   /**
    * Returns the JSNI signature describing the method.
-   * 
+   *
    * @param name the name of the method; for example {@code "echo"}
    * @param descriptor the descriptor for the method; for example {@code "(I)I"}
    * @return the JSNI signature for the method; for example, {@code

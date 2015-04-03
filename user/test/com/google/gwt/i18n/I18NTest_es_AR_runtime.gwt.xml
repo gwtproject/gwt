@@ -12,7 +12,7 @@
 <!-- implied. License for the specific language governing permissions and   -->
 <!-- limitations under the License.                                         -->
 
-<module type="fileset">
+<module>
 	<!-- Inherit the JUnit support -->
 	<inherits name='com.google.gwt.junit.JUnit'/>
 	<inherits name = 'com.google.gwt.i18n.I18N'/>
@@ -22,5 +22,4 @@
 	<set-property name = "locale" value = "es_419"/>
 	<extend-configuration-property name="runtime.locales" value="es_AR"/>
 	<extend-configuration-property name="runtime.locales" value="es_MX"/>
-	<public path="public_es_AR"/>
 </module>

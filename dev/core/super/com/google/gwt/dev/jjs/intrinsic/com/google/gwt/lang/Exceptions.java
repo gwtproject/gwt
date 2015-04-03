@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,17 +16,28 @@
 package com.google.gwt.lang;
 
 import com.google.gwt.core.client.JavaScriptException;
+import com.google.gwt.core.client.impl.DoNotInline;
+import com.google.gwt.core.client.impl.StackTraceCreator;
 
 /**
  * This is a magic class the compiler uses to throw and check exceptions.
  */
 final class Exceptions {
 
+  @DoNotInline // This frame can be useful in understanding the native stack
   static Object wrap(Object e) {
     if (e instanceof Throwable) {
       return e;
     }
-    return e == null ? new JavaScriptException(null) : getCachableJavaScriptException(e);
+
+    JavaScriptException jse = getCachedJavaScriptException(e);
+    if (jse == null) {
+      jse = new JavaScriptException(e);
+      StackTraceCreator.captureStackTrace(jse, e);
+      cacheJavaScriptException(e, jse);
+    }
+
+    return jse;
   }
 
   static Object unwrap(Object e) {
@@ -39,18 +50,18 @@ final class Exceptions {
     return e;
   }
 
-  private static native JavaScriptException getCachableJavaScriptException(Object e)/*-{
-    var jse = e.__gwt$exception;
-    if (!jse) {
-      jse = @com.google.gwt.core.client.JavaScriptException::new(Ljava/lang/Object;)(e);
+  private static native JavaScriptException getCachedJavaScriptException(Object e) /*-{
+    return e && e.__gwt$exception;
+  }-*/;
+
+  private static native void cacheJavaScriptException(Object e, JavaScriptException jse) /*-{
+    if (e && typeof e == 'object') {
       try {
-        // See https://code.google.com/p/google-web-toolkit/issues/detail?id=8449
         e.__gwt$exception = jse;
-      } catch (e) {
-        // The exception is not cachable
+      } catch (ignored) {
+        // See https://code.google.com/p/google-web-toolkit/issues/detail?id=8449
       }
     }
-    return jse;
   }-*/;
 
   static AssertionError makeAssertionError() {

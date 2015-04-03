@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "rn" locale.
@@ -240,7 +235,6 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "LC",
         "PM",
         "SN",
-        "CS",
         "VC",
         "CL",
         "SK",
@@ -294,6 +288,7 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "YE",
         "JO",
         "ZM",
@@ -345,7 +340,6 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
     namesMap.put("CN", "Ubushinwa");
     namesMap.put("CO", "Kolombiya");
     namesMap.put("CR", "Kositarika");
-    namesMap.put("CS", "Seribiya na Montenegoro");
     namesMap.put("CU", "Kiba");
     namesMap.put("CV", "Ibirwa bya Kapuveri");
     namesMap.put("CY", "Izinga rya Shipure");
@@ -564,7 +558,6 @@ public class LocalizedNamesImpl_rn extends LocalizedNamesImpl {
         "CN": "Ubushinwa",
         "CO": "Kolombiya",
         "CR": "Kositarika",
-        "CS": "Seribiya na Montenegoro",
         "CU": "Kiba",
         "CV": "Ibirwa bya Kapuveri",
         "CY": "Izinga rya Shipure",

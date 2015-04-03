@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,12 +16,19 @@
 package com.google.gwt.dev.util;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import junit.framework.Assert;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * A {@link TreeLogger} implementation that can be used during JUnit tests to
@@ -49,12 +56,21 @@ public class UnitTestTreeLogger extends TreeLogger {
       expected.add(new LogEntry(type, msg, caught));
     }
 
+    public void expect(TreeLogger.Type type, Pattern msgPattern,
+        Class<? extends Throwable> caught) {
+      expected.add(new LogEntry(type, msgPattern, caught));
+    }
+
     public void expectDebug(String msg, Class<? extends Throwable> caught) {
       expect(TreeLogger.DEBUG, msg, caught);
     }
 
     public void expectError(String msg, Class<? extends Throwable> caught) {
       expect(TreeLogger.ERROR, msg, caught);
+    }
+
+    public void expectError(Pattern msgPattern, Class<? extends Throwable> caught) {
+      expect(TreeLogger.ERROR, msgPattern, caught);
     }
 
     public void expectInfo(String msg, Class<? extends Throwable> caught) {
@@ -98,13 +114,21 @@ public class UnitTestTreeLogger extends TreeLogger {
    */
   private static class LogEntry {
     private final Class<? extends Throwable> caught;
-    private final String msg;
+    private String msg;
+    private Pattern msgPattern;
     private final Type type;
 
     public LogEntry(TreeLogger.Type type, String msg, Class<? extends Throwable> caught) {
       assert (type != null);
       this.type = type;
       this.msg = msg;
+      this.caught = caught;
+    }
+
+    public LogEntry(TreeLogger.Type type, Pattern msgPattern, Class<? extends Throwable> caught) {
+      assert (type != null);
+      this.type = type;
+      this.msgPattern = msgPattern;
       this.caught = caught;
     }
 
@@ -120,6 +144,10 @@ public class UnitTestTreeLogger extends TreeLogger {
       return msg;
     }
 
+    public Pattern getMessagePattern() {
+      return msgPattern;
+    }
+
     public Type getType() {
       return type;
     }
@@ -129,7 +157,11 @@ public class UnitTestTreeLogger extends TreeLogger {
       StringBuilder sb = new StringBuilder();
       sb.append(type.getLabel());
       sb.append(": ");
-      sb.append(getMessage());
+      if (getMessage() != null) {
+        sb.append(getMessage());
+      } else {
+        sb.append("like " + getMessagePattern().pattern());
+      }
       Class<? extends Throwable> t = getCaught();
       if (t != null) {
         sb.append("; ");
@@ -138,12 +170,22 @@ public class UnitTestTreeLogger extends TreeLogger {
       return sb.toString();
     }
 
+    // Test whether this log entry matches {@code other} (not symmetrical, i.e. a matches b does not
+    // imply b matches a)
+    //
+    // NOTE: DO NOT IMPLEMENT EQUAL. The test harness relies on equal() being reference equality.
     private boolean matches(LogEntry other) {
       if (!type.equals(other.type)) {
         return false;
       }
-      if (!msg.equals(other.msg)) {
-        return false;
+      if (msg != null) {
+        if (!msg.equals(other.msg)) {
+          return false;
+        }
+      } else {
+        if (!getMessagePattern().matcher(other.msg).matches()) {
+          return false;
+        }
       }
       if ((caught == null) != (other.caught == null)) {
         return false;
@@ -157,7 +199,13 @@ public class UnitTestTreeLogger extends TreeLogger {
 
   private static void assertCorrectLogEntry(LogEntry expected, LogEntry actual) {
     Assert.assertEquals("Log types do not match", expected.getType(), actual.getType());
-    Assert.assertEquals("Log messages do not match", expected.getMessage(), actual.getMessage());
+    if (expected.getMessage() != null) {
+      Assert.assertEquals("Log messages do not match", expected.getMessage(), actual.getMessage());
+    } else {
+      Assert.assertTrue("Log message '" + actual.getMessage() + "' does not match pattern "
+          + expected.getMessagePattern().pattern(),
+          expected.getMessagePattern().matcher(actual.getMessage()).matches());
+    }
     if (expected.getCaught() == null) {
       Assert.assertNull("Actual log exception type should have been null", actual.getCaught());
     } else {
@@ -195,9 +243,32 @@ public class UnitTestTreeLogger extends TreeLogger {
     if (expectedEntries.size() != actualEntries.size()) {
       Assert.fail("Wrong log count: expected=" + expectedEntries + ", actual=" + actualEntries);
     }
-    for (int i = 0, c = expectedEntries.size(); i < c; ++i) {
-      assertCorrectLogEntry(expectedEntries.get(i), actualEntries.get(i));
+
+    assertMatches(expectedEntries, actualEntries);
+  }
+
+  private void assertMatches(Iterable<LogEntry> expectedEntries, Iterable<LogEntry> actualEntries) {
+    Multimap<LogEntry, LogEntry> matches = HashMultimap.create();
+    for (LogEntry expectedEntry : expectedEntries) {
+      for (LogEntry actualEntry : actualEntries) {
+        if (expectedEntry.matches(actualEntry)) {
+          matches.put(expectedEntry, actualEntry);
+        }
+      }
     }
+
+    // Assure only one match per expected entry.
+    for (Entry<LogEntry, Collection<LogEntry>> entry : matches.asMap().entrySet()) {
+      Assert.assertTrue(entry.getKey() + " matches multiple actual entries " + entry.getValue(),
+          entry.getValue().size() == 1);
+    }
+
+    Set<LogEntry> unmatchedActualEntries =
+        Sets.difference(Sets.newHashSet(actualEntries), Sets.newHashSet(matches.values()));
+    Set<LogEntry> unmatchedExpectedEntries =
+        Sets.difference(Sets.newHashSet(expectedEntries), Sets.newHashSet(matches.keySet()));
+    // This is a HACK to get a nice printout, entries are only equals when they are empty.
+    Assert.assertEquals(unmatchedExpectedEntries, unmatchedActualEntries);
   }
 
   /**

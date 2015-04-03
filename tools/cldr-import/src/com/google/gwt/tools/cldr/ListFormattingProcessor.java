@@ -17,19 +17,17 @@ package com.google.gwt.tools.cldr;
 
 import com.google.gwt.i18n.shared.GwtLocale;
 
-import org.unicode.cldr.util.Factory;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * Extract list formatting information from CLDR data.
  */
 public class ListFormattingProcessor extends Processor {
 
-  public ListFormattingProcessor(File outputDir, Factory cldrFactory, LocaleData localeData) {
+  public ListFormattingProcessor(File outputDir, InputFactory cldrFactory, LocaleData localeData) {
     super(outputDir, cldrFactory, localeData);
   }
 
@@ -42,22 +40,28 @@ public class ListFormattingProcessor extends Processor {
   protected void loadData() throws IOException {
     System.out.println("Loading data for list formatting");
     localeData.addVersions(cldrFactory);
-    localeData.addEntries("list", cldrFactory, "//ldml/listPatterns/listPattern",
+    localeData.addEntries("list", cldrFactory, "//ldml/listPatterns/listPattern/",
         "listPatternPart", "type");
   }
 
   @Override
   protected void writeOutputFiles() throws IOException {
-    for (GwtLocale locale : localeData.getNonEmptyLocales("list")) {
+    Set<GwtLocale> localesToPrint = localeData.getNonEmptyLocales("list");
+    String path = "rebind/cldr/ListPatterns";
+
+    writeVersionFile(path + ".versions.txt", localesToPrint);
+
+    for (GwtLocale locale : localesToPrint) {
       PrintWriter pw = null;
-      for (Map.Entry<String, String> entry : localeData.getEntries("list", locale).entrySet()) {
+
+      for (String key : localeData.getKeys("list", locale)) {
         if (pw == null) {
-          pw = createOutputFile("rebind/cldr/ListPatterns_" + locale.getAsString() + ".properties");
+          pw = createOutputFile(path + "_" + locale.getAsString() + ".properties");
           printPropertiesHeader(pw);
           pw.println();
           printVersion(pw, locale, "# ");
         }
-        pw.println(entry.getKey() + "=" + entry.getValue());
+        pw.println(key + "=" + localeData.getEntry("list", locale, key));
       }
       if (pw != null) {
         pw.close();

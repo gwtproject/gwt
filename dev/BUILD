@@ -22,6 +22,8 @@ package(
     default_visibility = [
         "//third_party/java_src/gwt:__pkg__",
         "//third_party/java_src/gwt/legacy:__pkg__",
+        "//third_party/java_src/gwt/svn/trunk/dev/codeserver:__pkg__",
+        "//third_party/java_src/gwt/svn/trunk/user:__pkg__",
     ],
 )
 
@@ -59,9 +61,6 @@ java_library(
     name = "requestfactory-apt-deps",
     srcs = [
         "core/src/com/google/gwt/core/ext/typeinfo/JniConstants.java",
-        "core/src/com/google/gwt/dev/asm/Opcodes.java",
-        "core/src/com/google/gwt/dev/asm/Type.java",
-        "core/src/com/google/gwt/dev/asm/commons/Method.java",
         "core/src/com/google/gwt/dev/util/Name.java",
         "core/src/com/google/gwt/dev/util/StringKey.java",
     ],
@@ -73,7 +72,6 @@ java_library(
     srcs = glob(
         [
             "core/src/com/google/gwt/**/shared/**/*.java",
-            "core/src/com/google/gwt/dev/asm/**/*.java",
             "core/src/com/google/gwt/dev/util/Name.java",
             "core/src/com/google/gwt/dev/util/StringKey.java",
             "core/src/com/google/gwt/util/tools/Utility.java",
@@ -97,7 +95,7 @@ AugmentedJar(
     name = "gwt-dev-deps",
     srcs = [],
     added_jars = [
-        "//third_party/java_src/gwt/legacy:libdev.jar",
+        "//third_party/java_src/gwt/legacy:libdev-bare.jar",
         "//third_party/java_src/gwt/legacy:dev-resources.jar",
         "//third_party/java_src/gwt/svn/tools:dev_jars",
         "//third_party/java_src/gwt/svn/tools:legacy_dev_jars",
@@ -113,7 +111,7 @@ AugmentedJar(
     name = "gwt-dev-only",
     srcs = [],
     added_jars = [
-        ":libgwt-dev-classes.jar",
+        ":libgwt-dev-bare.jar",
         ":gwt-dev-resources.jar",
         ":libcompiler.standalone.jar",
         ":libcompiler.standalone.super.jar",
@@ -125,27 +123,17 @@ AugmentedJar(
     wrap_javalibrary = 0,
 )
 
-# All the dev classes before jarjaring.
-# This should only be used in code that will itself be jarjar-ed
-# or in internal tests.
-# (Exposed because it helps other targets build faster than
-# if they waited for gwt-dev to be jarjar-ed.)
-# TODO: split up.
+# The gwt-dev classes for GWT internal use only.
+# They must be jarjar-ed and dependencies stripped before exposing to google3.
 java_library(
-    name = "gwt-dev-classes",
+    name = "gwt-dev-bare",
     srcs = glob(
         ["core/src/**/*.java"],
         exclude = ["**/package-info.java"],
     ),
-    # Temporary workaround to ensure Java 6 compatible class files after Java
-    # 7 upgrade.
-    # TODO: only the requestfactory client should be required to be Android
-    # compatible.
-    constraints = ["android"],
     deps = [
         ":compiler.standalone.super",
         "//third_party/java_src/gwt/svn/tools:dev_deps",
-        # Safe to depend on servlet_api_3 because nobody directly depends on gwt-dev-classes
         "//third_party/java_src/gwt/svn/tools:servlet_api_3",
     ],
 )
@@ -187,12 +175,15 @@ java_library(
             "core/src/com/google/gwt/dev/CompilerContext.java",
             "core/src/com/google/gwt/dev/CompileTaskOptions.java",
             "core/src/com/google/gwt/dev/CompileTaskOptionsImpl.java",
+            "core/src/com/google/gwt/dev/GwtCreateMap.java",
             "core/src/com/google/gwt/dev/GwtVersion.java",
+            "core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+            "core/src/com/google/gwt/dev/NullRebuildCache.java",
             "core/src/com/google/gwt/dev/Permutation.java",
             "core/src/com/google/gwt/dev/PrecompileTaskOptions.java",
             "core/src/com/google/gwt/dev/PrecompileTaskOptionsImpl.java",
             "core/src/com/google/gwt/dev/PrecompilationResult.java",
-            "core/src/com/google/gwt/dev/asm/**/*.java",
+            "core/src/com/google/gwt/dev/StringAnalyzableTypeEnvironment.java",
             "core/src/com/google/gwt/dev/cfg/**/*.java",
             "core/src/com/google/gwt/dev/javac/**/*.java",
             "core/src/com/google/gwt/dev/jdt/**/*.java",
@@ -210,11 +201,6 @@ java_library(
             "**/testing/**",
         ],
     ),
-    javacopts = [
-        "-encoding utf8",
-        "-source 5",
-        "-target 5",
-    ],
     deps = [
         ":compiler.standalone.super",
         "//third_party/java_src/gwt/svn/tools:compiler_deps",
@@ -234,11 +220,6 @@ java_library(
         ],
     ),
     constraints = ["android"],
-    javacopts = [
-        "-encoding utf8",
-        "-source 5",
-        "-target 5",
-    ],
 )
 
 # Resource files in core/super (including Java source)
@@ -273,11 +254,6 @@ java_library(
         "public",
     ],
     gwtxml = ":interop-annotations-gwtxml",
-    javacopts = [
-        "-encoding utf8",
-        "-source 5",
-        "-target 5",
-    ],
 )
 
 # (This is a genrule so that it won't be mirrored to svn and git.)
@@ -291,28 +267,39 @@ genrule(
 # TODO: split up.
 AugmentedJar(
     name = "dev-test-code",
-    srcs = glob([
-        "core/test/**/*.java",
-    ]),
+    testonly = 1,
+    srcs = [],
     added_jars = [
+        ":libdev-test-code-bare.jar",
         # for soycTest
         "//third_party/java_src/gwt/svn/trunk/samples:hello-src.jar",
     ],
     added_roots = [
         "core/test",
     ],
-    build_deps = [
-        ":gwt-dev-classes",
-        ":compiler.standalone.super",
-        "//third_party/java_src/gwt/svn/tools:dev_deps",  # for pre-jarjar imports
-    ],
     constraints = [],
     dojarjar = 1,
     export_deps = [
         ":dev",  # for the post-jarjar names
-    ],
-    deps = [
         "//third_party/java/junit",
+    ],
+)
+
+# The gwt-dev tests for GWT internal use only.
+# They must be jarjar-ed and dependencies stripped before exposing to google3.
+# TODO(skybrian): we should have a separate jar for test infrastructure and
+# and remove dependencies on this library in gwt-user and google3.
+java_library(
+    name = "dev-test-code-bare",
+    testonly = 1,
+    srcs = glob([
+        "core/test/**/*.java",
+    ]),
+    deps = [
+        ":compiler.standalone.super",
+        ":gwt-dev-bare",
+        "//third_party/java/junit",
+        "//third_party/java_src/gwt/svn/tools:dev_deps",
     ],
 )
 
@@ -331,9 +318,18 @@ GWT_DEV_TESTS = glob(
     ],
 )
 
+test_suite(
+    name = "alltests",
+    tests = [
+        ":tests",
+        "//third_party/java_src/gwt/svn/trunk/dev/codeserver:tests",
+    ],
+)
+
 GwtTestSuites(
     name = "tests",
     jvm_flags = ["-ea"],
+    sharding = {"dev.CompilerTest": 12},
     srcjars = [":dev-test-code"],
     tests = GWT_DEV_TESTS,
 )

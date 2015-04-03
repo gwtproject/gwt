@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -142,17 +142,6 @@ public class IdentitySets {
     return new IdentitySingletonSet<T>(item);
   }
 
-  public static <T> Set<T> create(T... items) {
-    switch (items.length) {
-      case 0:
-        return create();
-      case 1:
-        return create(items[0]);
-      default:
-        return new IdentityHashSet<T>(items);
-    }
-  }
-
   public static <T> Set<T> normalize(Set<T> set) {
     switch (set.size()) {
       case 0:
@@ -170,15 +159,6 @@ public class IdentitySets {
         IdentityHashSet<T> result = new IdentityHashSet<T>();
         result.addAll(set);
         return result;
-    }
-  }
-
-  public static <T> Set<T> normalizeUnmodifiable(Set<T> set) {
-    if (set.size() < 2) {
-      return normalize(set);
-    } else {
-      // TODO: implement an UnmodifiableIdentityHashSet?
-      return Collections.unmodifiableSet(normalize(set));
     }
   }
 

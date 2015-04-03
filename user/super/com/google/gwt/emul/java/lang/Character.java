@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalArgument;
+
 import java.io.Serializable;
 
 /**
@@ -43,7 +45,6 @@ import java.io.Serializable;
  *  - isTitleCase(char)
  *  - isUnicodeIdentifierPart(char)
  *  - isUnicodeIdentifierStart(char)
- *  - isWhitespace(char)
  *  - getDirectionality(*)
  *  - getNumericValue(*)
  *  - getType(*)
@@ -208,12 +209,7 @@ public final class Character implements Comparable<Character>, Serializable {
       return 0;
     }
 
-    final int baseTenMax = 10;
-    if (digit < baseTenMax) {
-      return (char) ('0' + digit);
-    } else {
-      return (char) ('a' + digit - baseTenMax);
-    }
+    return forDigit(digit);
   }
 
   /**
@@ -282,6 +278,18 @@ public final class Character implements Comparable<Character>, Serializable {
     }
   }
 
+  public static boolean isWhitespace(char ch) {
+    return isWhitespace((int) ch);
+  }
+
+  // The regex would just be /\s/, but browsers handle non-breaking spaces inconsistently. Also,
+  // the Java definition includes separators.
+  public static native boolean isWhitespace(int codePoint) /*-{
+    return (null !== String.fromCharCode(codePoint).match(
+      /[\t-\r \u1680\u180E\u2000-\u2006\u2008-\u200A\u2028\u2029\u205F\u3000\uFEFF]|[\x1C-\x1F]/
+    ));
+  }-*/;
+
   public static boolean isSupplementaryCodePoint(int codePoint) {
     return codePoint >= MIN_SUPPLEMENTARY_CODE_POINT && codePoint <= MAX_CODE_POINT;
   }
@@ -334,9 +342,8 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static char[] toChars(int codePoint) {
-    if (codePoint < 0 || codePoint > MAX_CODE_POINT) {
-      throw new IllegalArgumentException();
-    }
+    checkCriticalArgument(codePoint >= 0 && codePoint <= MAX_CODE_POINT);
+
     if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
       return new char[] {
           getHighSurrogate(codePoint),
@@ -350,9 +357,8 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static int toChars(int codePoint, char[] dst, int dstIndex) {
-    if (codePoint < 0 || codePoint > MAX_CODE_POINT) {
-      throw new IllegalArgumentException();
-    }
+    checkCriticalArgument(codePoint >= 0 && codePoint <= MAX_CODE_POINT);
+
     if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
       dst[dstIndex++] = getHighSurrogate(codePoint);
       dst[dstIndex] = getLowSurrogate(codePoint);
@@ -413,6 +419,16 @@ public final class Character implements Comparable<Character>, Serializable {
       return toCodePoint(highSurrogate, loSurrogate);
     }
     return loSurrogate;
+  }
+
+  /**
+   * Shared implementation with {@link Long#toString}.
+   *
+   * @skip
+   */
+  static char forDigit(int digit) {
+    final int overBaseTen = digit - 10;
+    return (char) (overBaseTen < 0 ? '0' + digit : 'a' + overBaseTen);
   }
 
   /**

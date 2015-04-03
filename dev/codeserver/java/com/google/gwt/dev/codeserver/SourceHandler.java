@@ -17,7 +17,7 @@
 package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
-import com.google.gwt.dev.json.JsonArray;
+import com.google.gwt.dev.codeserver.Pages.ErrorPage;
 import com.google.gwt.dev.json.JsonObject;
 
 import java.io.BufferedReader;
@@ -25,6 +25,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,9 +38,9 @@ import javax.servlet.http.HttpServletResponse;
  * >Source Map Spec</a>, such as Chrome.)
  *
  * <p>The debugger will first fetch the source map from
- * /sourcemaps/\{module name\}/gwtSourceMap.json. This file contains the names of Java
+ * /sourcemaps/[module name]/[strong name]_sourcemap.json. This file contains the names of Java
  * source files to download. Each source file will have a path like
- * "/sourcemaps/\{module name\}/src/{filename}".</p>
+ * "/sourcemaps/[module name]/src/[filename]".</p>
  */
 class SourceHandler {
 
@@ -47,193 +49,210 @@ class SourceHandler {
    */
   static final String SOURCEMAP_PATH = "/sourcemaps/";
 
-  private Modules modules;
+  /**
+   * The suffix that Super Dev Mode uses in source map URL's.
+   */
+  private static final String SOURCEMAP_URL_SUFFIX = "_sourcemap.json";
 
-  private final TreeLogger logger;
+  /**
+   * Matches a valid source map json file request.
+   *
+   * Used to extract the strong name of the permutation:
+   *   StrongName_sourceMap0.json
+   */
+  private static final Pattern SOURCEMAP_FILENAME_PATTERN = Pattern.compile(
+      "^(" + WebServer.STRONG_NAME + ")" + Pattern.quote(SOURCEMAP_URL_SUFFIX) + "$");
 
-  SourceHandler(Modules modules, TreeLogger logger) {
-    this.modules = modules;
-    this.logger = logger;
+  /**
+   * Matches a valid source map request.
+   *
+   * Used to extract the module name:
+   *   /sourcemaps/ModuleName/.....
+   */
+  private static final Pattern SOURCEMAP_MODULE_PATTERN = Pattern.compile(
+      "^" + SOURCEMAP_PATH + "([^/]+)/");
+
+  static final String SOURCEROOT_TEMPLATE_VARIABLE = "$sourceroot_goes_here$";
+
+  private final OutboxTable outboxes;
+  private final JsonExporter exporter;
+
+  SourceHandler(OutboxTable outboxes, JsonExporter exporter) {
+    this.outboxes = outboxes;
+    this.exporter = exporter;
   }
 
-  boolean isSourceMapRequest(String target) {
+  static boolean isSourceMapRequest(String target) {
     return getModuleNameFromRequest(target) != null;
   }
 
-  void handle(String target, HttpServletRequest request, HttpServletResponse response)
+  /**
+   * The template for the sourcemap location to give the compiler.
+   * It contains one template variable, __HASH__ for the strong name.
+   */
+  static String sourceMapLocationTemplate(String moduleName) {
+    return SOURCEMAP_PATH + moduleName + "/__HASH__" + SOURCEMAP_URL_SUFFIX;
+  }
+
+  Response handle(String target, HttpServletRequest request, TreeLogger logger)
       throws IOException {
     String moduleName = getModuleNameFromRequest(target);
     if (moduleName == null) {
       throw new RuntimeException("invalid request (shouldn't happen): " + target);
     }
 
-    String rootDir = SOURCEMAP_PATH + moduleName + "/";
-    if (!target.startsWith(rootDir)) {
-      response.sendError(HttpServletResponse.SC_NOT_FOUND);
-      logger.log(TreeLogger.WARN, "returned not found for request: " + target);
-      return;
+    Outbox box = outboxes.findByOutputModuleName(moduleName);
+    if (box == null) {
+      return new ErrorPage("No such module: " + moduleName);
+    } else if (box.containsStubCompile()) {
+      return new ErrorPage("This module hasn't been compiled yet.");
     }
 
+    String rootDir = SOURCEMAP_PATH + moduleName + "/";
     String rest = target.substring(rootDir.length());
 
     if (rest.isEmpty()) {
-      sendDirectoryListPage(moduleName, response);
-
-    } else if (rest.endsWith("/")) {
-      sendFileListPage(moduleName, rest, response);
-
+      return makeDirectoryListPage(box);
     } else if (rest.equals("gwtSourceMap.json")) {
-      sendSourceMap(moduleName, request, response);
-
+      // This URL is no longer used by debuggers (we use the strong name) but is used for testing.
+      // It's useful not to need the strong name to download the sourcemap.
+      // (But this only works when there is one permutation.)
+      return makeSourceMapPage(moduleName, box.findSourceMapForOnePermutation(), request);
+    } else if (rest.endsWith("/")) {
+      return sendFileListPage(box, rest);
     } else if (rest.endsWith(".java")) {
-      sendSourceFile(moduleName, rest, request.getQueryString(), response);
-
+      return makeSourcePage(box, rest, request.getQueryString(), logger);
     } else {
-      response.sendError(HttpServletResponse.SC_NOT_FOUND);
-      logger.log(TreeLogger.WARN, "returned not found for request: " + target);
-    }
-  }
-
-  private String getModuleNameFromRequest(String target) {
-      if (target.startsWith(SOURCEMAP_PATH)) {
-        int prefixLen = SOURCEMAP_PATH.length();
-        // find next slash (if any) after prefix
-        int endSlash = target.indexOf("/", prefixLen + 1);
-        // case 1: /sourcemaps/modulename
-        // case 2: /sourcemaps/modulename/path
-        return target.substring(prefixLen, endSlash == -1 ? target.length() : endSlash);
+      String strongName = getStrongNameFromSourcemapFilename(rest);
+      if (strongName != null) {
+        File sourceMap = box.findSourceMap(strongName).getAbsoluteFile();
+        return makeSourceMapPage(moduleName, sourceMap, request);
+      } else {
+        return new ErrorPage("page not found");
       }
-      return null;
+    }
   }
 
-  private void sendSourceMap(String moduleName, HttpServletRequest request,
-      HttpServletResponse response) throws IOException {
+  static String getModuleNameFromRequest(String target) {
+    Matcher matcher = SOURCEMAP_MODULE_PATTERN.matcher(target);
+    return matcher.find() ? matcher.group(1) : null;
+  }
 
-    SourceMap map = loadSourceMap(moduleName);
+  static String getStrongNameFromSourcemapFilename(String target) {
+    Matcher matcher = SOURCEMAP_FILENAME_PATTERN.matcher(target);
+    return matcher.matches() ? matcher.group(1) : null;
+  }
 
-    // hack: rewrite the source map so that each filename is a URL
-    String serverPrefix = String.format("http://%s:%d/sourcemaps/%s/", request.getServerName(),
+  private Response makeSourceMapPage(final String moduleName, File sourceMap,
+      HttpServletRequest request) {
+
+    // Stream the file, substituting the sourceroot variable with the filename.
+    // (This is more efficient than parsing the file as JSON.)
+
+    // We need to do this at runtime because we don't know what the hostname will be
+    // until we get a request. (For example, some people run the Code Server behind
+    // a reverse proxy to support https.)
+
+    String sourceRoot = String.format("http://%s:%d/sourcemaps/%s/", request.getServerName(),
         request.getServerPort(), moduleName);
-    map.addPrefixToEachSourceFile(serverPrefix);
 
-    PageUtil.sendString("application/json", map.serialize(), response);
-    logger.log(TreeLogger.WARN, "sent source map for module: " + moduleName);
+    final Response barePage = Responses.newTextTemplateResponse("application/json", sourceMap,
+        "\"" + SOURCEROOT_TEMPLATE_VARIABLE + "\"",
+        "\"" + sourceRoot + "\"");
+
+    // Wrap it in another response to time how long it takes.
+    return Responses.newTimedResponse(barePage, "sent source map for module '" + moduleName + "'");
   }
 
-  private void sendDirectoryListPage(String moduleName, HttpServletResponse response)
-      throws IOException {
-
-    SourceMap map = loadSourceMap(moduleName);
-
-    JsonObject config = new JsonObject();
-    config.put("moduleName", moduleName);
-    JsonArray directories = new JsonArray();
-    for (String name : map.getSourceDirectories()) {
-      JsonObject dir = new JsonObject();
-      dir.put("name", name);
-      dir.put("link", name + "/");
-      directories.add(dir);
-    }
-    config.put("directories", directories);
-    PageUtil.sendJsonAndHtml("config", config, "directorylist.html", response, logger);
+  private Response makeDirectoryListPage(Outbox box) throws IOException {
+    SourceMap map = SourceMap.load(box.findSourceMapForOnePermutation());
+    JsonObject json = exporter.exportSourceMapDirectoryListVars(box, map);
+    return Pages.newHtmlPage("config", json, "directorylist.html");
   }
 
-  private void sendFileListPage(String moduleName, String rest, HttpServletResponse response)
-      throws IOException {
+  private Response sendFileListPage(Outbox box, String rest) throws IOException {
 
-    SourceMap map = loadSourceMap(moduleName);
-
-    JsonObject config = new JsonObject();
-    config.put("moduleName", moduleName);
-    config.put("directory", rest);
-    JsonArray files = new JsonArray();
-    for (String name : map.getSourceFilesInDirectory(rest)) {
-      JsonObject file = new JsonObject();
-      file.put("name", name);
-      file.put("link", name + "?html");
-      files.add(file);
-    }
-    config.put("files", files);
-    PageUtil.sendJsonAndHtml("config", config, "filelist.html", response, logger);
+    SourceMap map = SourceMap.load(box.findSourceMapForOnePermutation());
+    JsonObject json = exporter.exportSourceMapFileListVars(box, map, rest);
+    return Pages.newHtmlPage("config", json, "filelist.html");
   }
 
   /**
-   * Sends an HTTP response containing a Java source. It will be sent as plain text by default,
+   * Returns a page displaying a Java source file. It will be sent as plain text by default,
    * or as HTML if the query string is equal to "html".
    */
-  private void sendSourceFile(String moduleName, String sourcePath, String query,
-      HttpServletResponse response)
+  private Response makeSourcePage(Outbox box, String sourcePath, String query, TreeLogger logger)
       throws IOException {
-    ModuleState moduleState = modules.get(moduleName);
-    InputStream pageBytes = moduleState.openSourceFile(sourcePath);
 
+    InputStream pageBytes = box.openSourceFile(sourcePath);
     if (pageBytes == null) {
-      response.sendError(HttpServletResponse.SC_NOT_FOUND);
-      logger.log(TreeLogger.WARN, "unknown source file: " + sourcePath);
-      return;
+      return new ErrorPage("unknown source file: " + sourcePath);
     }
 
     if (query != null && query.equals("html")) {
-      BufferedReader reader = new BufferedReader(new InputStreamReader(pageBytes));
-      sendSourceFileAsHtml(moduleName, sourcePath, reader, response);
+      return makeHtmlSourcePage(box, sourcePath, pageBytes, logger);
     } else {
-      PageUtil.sendStream("text/plain", pageBytes, response);
+      return Responses.newBinaryStreamResponse("text/plain", pageBytes);
     }
   }
 
   /**
-   * Sends an HTTP response containing Java source rendered as HTML. The lines of source
+   * Returns a page that will send a Java source file as HTML. The lines of source
    * that have corresponding JavaScript will be highlighted (as determined by reading the
    * source map).
    */
-  private void sendSourceFileAsHtml(String moduleName, String sourcePath, BufferedReader lines,
-      HttpServletResponse response) throws IOException {
+  private Response makeHtmlSourcePage(Outbox box, final String sourcePath,
+      final InputStream pageBytes, TreeLogger logger) throws IOException {
 
-    ReverseSourceMap sourceMap = ReverseSourceMap.load(logger, modules.get(moduleName));
+    final ReverseSourceMap sourceMap = ReverseSourceMap.load(logger,
+        box.findSourceMapForOnePermutation());
 
-    File sourceFile = new File(sourcePath);
+    final File sourceFile = new File(sourcePath);
 
-    response.setStatus(HttpServletResponse.SC_OK);
-    response.setContentType("text/html");
+    return new Response() {
+      @Override
+      public void send(HttpServletRequest request, HttpServletResponse response, TreeLogger logger)
+          throws IOException {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("text/html");
 
-    HtmlWriter out = new HtmlWriter(response.getWriter());
-    out.startTag("html").nl();
-    out.startTag("head").nl();
-    out.startTag("title").text(sourceFile.getName() + " (GWT Code Server)").endTag("title").nl();
-    out.startTag("style").nl();
-    out.text(".unused { color: grey; }").nl();
-    out.text(".used { color: black; }").nl();
-    out.text(".title { margin-top: 0; }").nl();
-    out.endTag("style").nl();
-    out.endTag("head").nl();
-    out.startTag("body").nl();
+        HtmlWriter out = new HtmlWriter(response.getWriter());
+        out.startTag("html").nl();
+        out.startTag("head").nl();
+        out.startTag("title").text(sourceFile.getName() + " (GWT Code Server)").endTag("title").nl();
+        out.startTag("style").nl();
+        out.text(".unused { color: grey; }").nl();
+        out.text(".used { color: black; }").nl();
+        out.text(".title { margin-top: 0; }").nl();
+        out.endTag("style").nl();
+        out.endTag("head").nl();
+        out.startTag("body").nl();
 
-    out.startTag("a", "href=", ".").text(sourceFile.getParent()).endTag("a").nl();
-    out.startTag("h1", "class=", "title").text(sourceFile.getName()).endTag("h1").nl();
+        out.startTag("a", "href=", ".").text(sourceFile.getParent()).endTag("a").nl();
+        out.startTag("h1", "class=", "title").text(sourceFile.getName()).endTag("h1").nl();
 
-    out.startTag("pre", "class=", "unused").nl();
-    try {
-      int lineNumber = 1;
-      for (String line = lines.readLine(); line != null; line = lines.readLine()) {
-        if (sourceMap.appearsInJavaScript(sourcePath, lineNumber)) {
-          out.startTag("span", "class=", "used").text(line).endTag("span").nl();
-        } else {
-          out.text(line).nl();
+        out.startTag("pre", "class=", "unused").nl();
+
+        BufferedReader lines = new BufferedReader(new InputStreamReader(pageBytes));
+        try {
+          int lineNumber = 1;
+          for (String line = lines.readLine(); line != null; line = lines.readLine()) {
+            if (sourceMap.appearsInJavaScript(sourcePath, lineNumber)) {
+              out.startTag("span", "class=", "used").text(line).endTag("span").nl();
+            } else {
+              out.text(line).nl();
+            }
+            lineNumber++;
+          }
+
+        } finally {
+          lines.close();
         }
-        lineNumber++;
+        out.endTag("pre").nl();
+
+        out.endTag("body").nl();
+        out.endTag("html").nl();
       }
-
-    } finally {
-      lines.close();
-    }
-    out.endTag("pre").nl();
-
-    out.endTag("body").nl();
-    out.endTag("html").nl();
-  }
-
-  private SourceMap loadSourceMap(String moduleName) {
-    ModuleState moduleState = modules.get(moduleName);
-    return SourceMap.load(moduleState.findSourceMap());
+    };
   }
 }

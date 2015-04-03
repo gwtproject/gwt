@@ -28,7 +28,7 @@ function finishAndCleanup () {
 function die () {
   thereHaveBeenErrors=1
   if [[ "$continueOnErrors" != "y" ]]; then
-    read -e -p"Error while deploying, ignore errors? (y/N): " -i "N" continueOnErrors
+    read -e -p"Error while deploying, ignore errors? (y/N): " continueOnErrors
     if [[ "$continueOnErrors" != "y" ]]; then
       finishAndCleanup
       exit 1
@@ -74,7 +74,7 @@ function maven-gwt() {
 
   JAVADOC_FILE_PATH=$RANDOM_DIR/gwt-javadoc.jar
   jar cf $JAVADOC_FILE_PATH -C $GWT_EXTRACT_DIR/doc/javadoc .
-    
+
   jarExpandDir=/tmp/tmp-jar-expand-dir-$RANDOM
 
   # Generate POMs with correct version
@@ -86,16 +86,9 @@ function maven-gwt() {
     popd > /dev/null
   done
 
-  # Remove bundled org/json classes from Request Factory jars
-  for i in server client
-  do
-    echo "Removing org.json classes from requestfactory-${i}"
-    zip -d $GWT_EXTRACT_DIR/requestfactory-${i}.jar org/json/*
-  done
-
-  # Remove bundled org/json classes from gwt-dev
-  echo "Removing org.json classes from gwt-dev"
-  zip -d $GWT_EXTRACT_DIR/gwt-dev.jar org/json/*
+  # Remove bundled org/objectweb/asm classes from gwt-dev
+  echo "Removing ASM classes from gwt-dev"
+  zip -d $GWT_EXTRACT_DIR/gwt-dev.jar "org/objectweb/asm/*"
 
   # Silently skip Elemental if it doesn't exist
   gwtLibs='dev user servlet codeserver'
@@ -106,7 +99,7 @@ function maven-gwt() {
   for i in $gwtLibs
   do
     CUR_FILE=`ls $GWT_EXTRACT_DIR/gwt-${i}.jar`
-    
+
     # Get rid of the INDEX.LIST file, since it's going to be out of date
     # once we rename the jar files for Maven
     echo "Removing INDEX.LIST from gwt-${i}"
@@ -124,11 +117,11 @@ function maven-gwt() {
     rm -rf javafilelist
     find . -name "*.java" -print  > javafilelist
     if [ -s javafilelist ]; then
-      jar cf $SOURCES_FILE @javafilelist 
+      jar cf $SOURCES_FILE @javafilelist
     fi
     popd > /dev/null
   done
-   
+
   # push parent poms
   maven-deploy-file $mavenRepoUrl $mavenRepoId $pomDir/gwt/pom.xml $pomDir/gwt/pom.xml
 
@@ -138,8 +131,13 @@ function maven-gwt() {
     gwtPomFile=$pomDir/gwt/gwt-$i/pom.xml
     SOURCES_FILE=gwt-${i}-sources.jar
     SOURCES_PATH_FILE=$jarExpandDir-${i}/$SOURCES_FILE
+    # If there are no sources, use gwt-user sources.
+    # This is a bit hacky but Sonatype requires a
+    # source jar for Central, and lack of sources
+    # should only happen for gwt-servlet which is
+    # basically a subset of gwt-user.
     if [ ! -f $SOURCES_PATH_FILE ]; then
-      SOURCES_PATH_FILE=""
+      SOURCES_PATH_FILE=$jarExpandDir-user/gwt-user-sources.jar
     fi
 
     maven-deploy-file $mavenRepoUrl $mavenRepoId "$CUR_FILE" $gwtPomFile "$JAVADOC_FILE_PATH" "$SOURCES_PATH_FILE" || die

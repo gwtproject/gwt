@@ -17,12 +17,15 @@ package com.google.gwt.user.cellview.client;
 
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.TreeViewModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -262,6 +265,122 @@ public class CellTreeTest extends AbstractCellTreeTestBase {
     CellTreeNodeView<?> cViewChildLast = cView.getChildNode(cView.getChildCount() - 1);
     assertEquals("5", cViewChildLast.getElement().getAttribute("aria-posinset"));
     assertEquals("5", cViewChildLast.getElement().getAttribute("aria-setsize"));
+  }
+
+  public void testExplicitKeyboardSelection() {
+    CellTree cellTree = (CellTree) tree;
+    TreeNode root = cellTree.getRootTreeNode();
+
+    final String cellTreeKeyboardSelectedItemStyleName =
+        cellTree.getStyle().cellTreeKeyboardSelectedItem();
+
+    // Navigate through tree to level 4 nodes.
+    TreeNode l1Node = root.setChildOpen(0, true); // a
+    CellTreeNodeView<?> l1View = cellTree.rootNode.getChildNode(0);
+    TreeNode l2Node = l1Node.setChildOpen(0, true); // aa
+    CellTreeNodeView<?> l2View = l1View.getChildNode(0);
+    TreeNode l3Node = l2Node.setChildOpen(0, true); // aaa
+    CellTreeNodeView<?> l3View = l2View.getChildNode(0);
+
+    ((CellTreeNodeView.TreeNodeImpl) l3Node).flush();
+    CellTreeNodeView<?> l4View = l3View.getChildNode(0);
+    // l4Node is leaf, cannot get a reference via setChildOpen except via non-public nodeView
+    TreeNode l4Node = l4View.getTreeNode(); // aaaa
+
+    // Set keyboard selected node to a subtree node, l3Node = first child of l2Node
+    cellTree.setKeyboardSelectedTreeNode(l2Node, 0, true);
+    assertEquals(l3View, cellTree.getKeyboardSelectedNode());
+    assertEquals(l3Node, cellTree.getKeyboardSelectedTreeNode());
+    assertTrue(CellTreeNodeView.getSelectionElement(l3View.getElement()).getClassName()
+        .indexOf(cellTreeKeyboardSelectedItemStyleName) >= 0);
+
+    // Set keyboard selected node to a leaf node.
+    cellTree.setKeyboardSelectedTreeNode(l3Node, 0, true);
+    assertEquals(l4View, cellTree.getKeyboardSelectedNode());
+    assertEquals(l4Node, cellTree.getKeyboardSelectedTreeNode());
+    assertTrue(CellTreeNodeView.getSelectionElement(l4View.getElement()).getClassName()
+        .indexOf(cellTreeKeyboardSelectedItemStyleName) >= 0);
+
+    l1Node.setChildOpen(0, false); // close l2node
+    ((CellTreeNodeView.TreeNodeImpl) l1Node).flush();
+
+    // Try to select a leaf node in closed subtree
+    try {
+      cellTree.setKeyboardSelectedTreeNode(l3Node, 0, true);
+      fail("should have thrown");
+    } catch (IllegalStateException e) {
+      assertEquals(e.getMessage(), "TreeNode no longer exists.");
+    }
+
+    // Try to select a subtree node in closed subtree
+    try {
+      cellTree.setKeyboardSelectedTreeNode(l2Node, 0, true);
+      fail("should have thrown");
+    } catch (IllegalStateException e) {
+      assertEquals(e.getMessage(), "TreeNode no longer exists.");
+    }
+
+    // Still ok to select closed subtree node
+    cellTree.setKeyboardSelectedTreeNode(l1Node, 0, true);
+
+    // Create another tree of same structure
+    CellTree anotherTree = createAbstractCellTree(model, root.getValue());
+    l1Node = anotherTree.getRootTreeNode().setChildOpen(0, true); // a
+    ((CellTreeNodeView.TreeNodeImpl) l1Node).flush();
+
+    // Now l1Node refers to a subtree node in anotherTree
+    // Select in the same cell tree is ok
+    anotherTree.setKeyboardSelectedTreeNode(l1Node, 0, true);
+
+    // Select in a different tree will throw exception.
+    try {
+      cellTree.setKeyboardSelectedTreeNode(l1Node, 0, true);
+      fail("should have thrown");
+    } catch (IllegalArgumentException e) {
+      assertEquals(e.getMessage(), "The tree node does not belong to the tree.");
+    }
+  }
+
+  public void testKeyboardNavigationForUpAndDownKeys() {
+    CellTree cellTree = (CellTree) tree;
+    TreeNode root = cellTree.getRootTreeNode();
+
+    // Open nodes: a and aj
+    TreeNode l1Node = root.setChildOpen(0, true); // a
+    assertEquals(l1Node.getValue(), "a");
+    TreeNode l2Node = l1Node.setChildOpen(9, true); // aj
+    assertEquals(l2Node.getValue(), "aj");
+    // To force tree structure changes (internal flush()).
+    assertEquals(l2Node.getChildCount(), 10);
+
+    // CellTree structure with node 'a' and 'aj' opened.
+    List<String> expectedNavigationPath = Arrays.asList("a",
+        "aa", "ab", "ac", "ad", "ae", "af", "ag", "ah", "ai", "aj",
+        "aja", "ajb", "ajc", "ajd", "aje", "ajf", "ajg", "ajh", "aji", "ajj",
+        "b", "c", "d", "e", "f", "g", "h", "i", "j");
+
+    // Default KeyboardSelected is at "a"
+    assertEquals(cellTree.getKeyboardSelectedTreeNode().getValue(), "a");
+
+    int steps = expectedNavigationPath.size() - 1;
+    assertEquals(expectedNavigationPath, repeatKeyInTree(cellTree, KeyCodes.KEY_DOWN, steps));
+
+    Collections.reverse(expectedNavigationPath);
+    assertEquals(expectedNavigationPath, repeatKeyInTree(cellTree, KeyCodes.KEY_UP, steps));
+  }
+
+  /**
+   * Repeats a keystroke in the CellTree that contains string values.
+   * @return the nodes selected before starting and after each keystroke.
+   */
+  private List<String> repeatKeyInTree(CellTree cellTree, int keyCode, int keyCount) {
+    List<String> values = new ArrayList<String>();
+    values.add((String) cellTree.getKeyboardSelectedTreeNode().getValue());
+    for (int i = 0; i < keyCount; i++) {
+      cellTree.handleKeyNavigation(keyCode);
+      values.add((String) cellTree.getKeyboardSelectedTreeNode().getValue());
+    }
+    return values;
   }
 
   @Override

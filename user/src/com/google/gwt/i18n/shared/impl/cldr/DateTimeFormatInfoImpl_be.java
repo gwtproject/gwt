@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  type=be
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "be" locale.
@@ -46,7 +41,7 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "d.M.yyyy";
+    return "d.M.y";
   }
 
   @Override
@@ -68,11 +63,6 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
         "да н.э.",
         "н.э."
     };
-  }
-
-  @Override
-  public int firstDayOfTheWeek() {
-    return 0;
   }
 
   @Override
@@ -106,13 +96,23 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
   }
 
   @Override
+  public String formatMonthFullDay() {
+    return "d MMMM";
+  }
+
+  @Override
   public String formatMonthFullWeekdayDay() {
-    return "MMMM d, EEEE";
+    return "EEEE, d MMMM";
+  }
+
+  @Override
+  public String formatMonthNumDay() {
+    return "d.M";
   }
 
   @Override
   public String formatYearMonthAbbrev() {
-    return "MMM y";
+    return "LLL y";
   }
 
   @Override
@@ -122,7 +122,7 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthFull() {
-    return "MMMM y";
+    return "LLLL y";
   }
 
   @Override
@@ -132,12 +132,12 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "MM/yyyy";
+    return "M.y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "d.M.yy";
+    return "d.M.y";
   }
 
   @Override
@@ -147,16 +147,34 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ 'кв'. y";
+    return "QQQQ y";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q 'кв'. y";
+    return "Q y";
   }
 
   @Override
   public String[] monthsFull() {
+    return new String[] {
+        "студзеня",
+        "лютага",
+        "сакавіка",
+        "красавіка",
+        "мая",
+        "чэрвеня",
+        "ліпеня",
+        "жніўня",
+        "верасня",
+        "кастрычніка",
+        "лістапада",
+        "снежня"
+    };
+  }
+
+  @Override
+  public String[] monthsFullStandalone() {
     return new String[] {
         "студзень",
         "люты",
@@ -174,43 +192,7 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
   }
 
   @Override
-  public String[] monthsFullStandalone() {
-    return new String[] {
-        "студзень",
-        "люты",
-        "сакавік",
-        "красавік",
-        "травень",
-        "чэрвень",
-        "ліпень",
-        "жнівень",
-        "верасень",
-        "кастрычнік",
-        "лістапад",
-        "снежань"
-    };
-  }
-
-  @Override
   public String[] monthsNarrow() {
-    return new String[] {
-        "с",
-        "л",
-        "с",
-        "к",
-        "т",
-        "ч",
-        "л",
-        "ж",
-        "в",
-        "к",
-        "л",
-        "с"
-    };
-  }
-
-  @Override
-  public String[] monthsNarrowStandalone() {
     return new String[] {
         "с",
         "л",
@@ -234,7 +216,7 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
         "лют",
         "сак",
         "кра",
-        "май",
+        "мая",
         "чэр",
         "ліп",
         "жні",
@@ -252,7 +234,7 @@ public class DateTimeFormatInfoImpl_be extends DateTimeFormatInfoImpl {
         "лют",
         "сак",
         "кра",
-        "тра",
+        "май",
         "чэр",
         "ліп",
         "жні",

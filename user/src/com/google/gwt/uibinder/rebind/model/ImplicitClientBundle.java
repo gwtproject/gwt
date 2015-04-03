@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,6 +16,7 @@
 package com.google.gwt.uibinder.rebind.model;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.resources.client.ImageResource.RepeatStyle;
 import com.google.gwt.uibinder.rebind.MortalLogger;
 
@@ -54,7 +55,7 @@ public class ImplicitClientBundle {
 
   /**
    * Called to declare a new CssResource accessor on this bundle.
-   * 
+   *
    * @param name the method name and the ui:field name
    * @param source path to the .css file resource
    * @param extendedInterface the public interface implemented by this
@@ -62,12 +63,15 @@ public class ImplicitClientBundle {
    * @param body the inline css text
    * @param importTypes for the {@literal @}Import annotation, if any. LinkedHashSet
    *          to enforce deterministic order across recompiles
-   * @return the newly-created CssResource 
+   * @param gss indicates that GSS is used or not
+   * @param resourceOracle from which to load resources
+   * @return the newly-created CssResource
    */
   public ImplicitCssResource createCssResource(String name, String[] source,
-      JClassType extendedInterface, String body, LinkedHashSet<JClassType> importTypes) {
-    ImplicitCssResource css = new ImplicitCssResource(packageName, cssBaseName
-        + name, name, source, extendedInterface, body, logger, importTypes);
+      JClassType extendedInterface, String body, LinkedHashSet<JClassType> importTypes,
+      Boolean gss, ResourceOracle resourceOracle) {
+    ImplicitCssResource css = new ImplicitCssResource(packageName, cssBaseName + name, name, source,
+        extendedInterface, body, logger, importTypes, gss, resourceOracle);
     cssMethods.add(css);
     return css;
   }
@@ -75,20 +79,24 @@ public class ImplicitClientBundle {
   /**
    * Called to declare a new DataResource accessor on this bundle. All params
    * must be non-null
-   * 
+   *
    * @param name the method name and the ui:field name
    * @param source path to the resource
+   * @param mimeType type of the resource
+   * @param doNotEmbed flag to prevent embedding the data resource
+   *
    * @return the newly-created DataResource
    */
-  public ImplicitDataResource createDataResource(String name, String source) {
-    ImplicitDataResource data = new ImplicitDataResource(name, source);
+  public ImplicitDataResource createDataResource(
+      String name, String source, String mimeType, Boolean doNotEmbed) {
+    ImplicitDataResource data = new ImplicitDataResource(name, source, mimeType, doNotEmbed);
     dataMethods.add(data);
     return data;
   }
 
   /**
    * Called to declare a new ImageResource accessor on this bundle.
-   * 
+   *
    * @param name the method name and the ui:field name
    * @param source path to the image resource, or null if none was specified
    * @param flipRtl value for the flipRtl ImageOption, or null if none was

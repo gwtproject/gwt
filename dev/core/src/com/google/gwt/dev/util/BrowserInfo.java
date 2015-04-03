@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -32,12 +32,12 @@ public class BrowserInfo {
   /**
    * Retrieve a short name, suitable for use in a tab or filename, for a given
    * user agent.
-   * 
+   *
    * @param userAgent
    * @return short name of user agent
    */
   public static String getShortName(String userAgent) {
-    String lcAgent = userAgent.toLowerCase(Locale.ENGLISH);
+    String lcAgent = userAgent.toLowerCase(Locale.ROOT);
     if (lcAgent.contains("msie")) {
       return IE;
     } else if (lcAgent.contains("opr")) {

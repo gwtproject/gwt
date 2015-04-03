@@ -24,7 +24,7 @@ public class DebugInfoTest extends GWTTestCase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.user.DebugTest";
+    return "com.google.gwt.debug.Debug";
   }
 
   /**

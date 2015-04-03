@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "ar_SY" locale.
@@ -46,6 +41,24 @@ public class DateTimeFormatInfoImpl_ar_SY extends DateTimeFormatInfoImpl_ar_001 
         "تشرين الأول",
         "تشرين الثاني",
         "كانون الأول"
+    };
+  }
+
+  @Override
+  public String[] monthsNarrow() {
+    return new String[] {
+        "ك",
+        "ش",
+        "آ",
+        "ن",
+        "أ",
+        "ح",
+        "ت",
+        "آ",
+        "أ",
+        "ت",
+        "ت",
+        "ك"
     };
   }
 

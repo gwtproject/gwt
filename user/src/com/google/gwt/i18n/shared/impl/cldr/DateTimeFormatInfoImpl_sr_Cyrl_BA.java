@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 4582 $
-//  date=$Date: 2010-02-05 11:51:25 -0500 (Fri, 05 Feb 2010) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "sr_Cyrl_BA" locale.
@@ -28,7 +23,7 @@ public class DateTimeFormatInfoImpl_sr_Cyrl_BA extends DateTimeFormatInfoImpl_sr
 
   @Override
   public String dateFormatMedium() {
-    return "yyyy-MM-dd";
+    return "y-MM-dd";
   }
 
   @Override

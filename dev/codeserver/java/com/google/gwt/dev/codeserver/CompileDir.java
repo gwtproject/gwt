@@ -18,15 +18,22 @@ package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.thirdparty.guava.common.base.Charsets;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.io.Files;
 
 import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Defines a directory tree used for compiling a GWT app one time. Each time we recompile
  * the app, we will create a new, empty CompileDir. This way, a failed compile doesn't
  * modify the last good compile.
  *
- * <p>The CompileDir gets created within the appropriate {@link AppSpace} for the app
+ * <p>The CompileDir gets created within the appropriate {@link OutboxDir} for the app
  * being compiled.
  */
 public class CompileDir {
@@ -86,12 +93,37 @@ public class CompileDir {
     return new File(dir, "compile.log");
   }
 
-  File findSymbolMapDir(String moduleName) {
+  /**
+   * Given the outputModuleName from the compiler, returns all the sourcemap
+   * files generated, or null if the directory couldn't  be listed.
+   */
+  public List<File> findSourceMapFiles(String outputModuleName) {
+    File symbolMapsDir = findSymbolMapDir(outputModuleName);
+    if (symbolMapsDir == null) {
+      return null;
+    }
+    File mapDir = symbolMapsDir.getAbsoluteFile();
+
+    File[] files = mapDir.listFiles(new FilenameFilter() {
+      @Override
+      public boolean accept(File dir, String name) {
+        return name.endsWith(Outbox.SOURCEMAP_FILE_SUFFIX);
+      }
+    });
+
+    return files == null ? null : ImmutableList.copyOf(files);
+  }
+
+  /**
+   * Given the outputModuleName from the compiler, returns the location of
+   * the symbol maps directory, or null if not available.
+   */
+  File findSymbolMapDir(String outputModuleName) {
     // The JUnit module moves the symbolMaps directory in a post linker.
     // TODO(skybrian) query this information from the compiler somehow?
     File[] candidates = {
-        new File(getExtraDir(), moduleName + "/symbolMaps"),
-        new File(getWarDir(), moduleName + "/.junit_symbolMaps")
+        new File(getExtraDir(), outputModuleName + "/symbolMaps"),
+        new File(getWarDir(), outputModuleName + "/.junit_symbolMaps")
     };
 
     for (File candidate : candidates) {
@@ -101,6 +133,40 @@ public class CompileDir {
     }
 
     return null;
+  }
+
+  /**
+   * Reads a GWT-RPC serialization policy manifest in this directory.
+   * @return a PolicyFile record for each entry in the policy file. If the policy file isn't there,
+   * returns the empty list.
+   * @throws java.io.IOException if the file exists but we can't read it.
+   */
+  List<PolicyFile> readRpcPolicyManifest(String outputModuleName) throws IOException {
+    File manifest = new File(getExtraDir(), outputModuleName + "/rpcPolicyManifest/manifest.txt");
+    if (!manifest.isFile()) {
+      return Lists.newArrayList();
+    }
+    String text = Files.toString(manifest, Charsets.UTF_8);
+
+    List<PolicyFile> result = Lists.newArrayList();
+
+    for (String line : text.split("\n")) {
+      line = line.trim();
+      if (line.isEmpty() || line.startsWith("#")) {
+        continue;
+      }
+      String[] fields = line.split(", ");
+      if (fields.length < 2) {
+        continue;
+      }
+
+      String serviceName = fields[0];
+      String policyFileName = fields[1];
+      PolicyFile policy = new PolicyFile(policyFileName, serviceName, outputModuleName);
+      result.add(policy);
+    }
+
+    return result;
   }
 
   /**
@@ -124,6 +190,59 @@ public class CompileDir {
     if (!dirToCreate.mkdir()) {
       logger.log(TreeLogger.Type.ERROR, "unable to create directory: " + dirToCreate);
       throw new UnableToCompleteException();
+    }
+  }
+
+  /**
+   * A record describing one GWT-RPC serialization policy file.
+   */
+  static class PolicyFile {
+    private final String name;
+    private final String serviceName;
+    private final String outputModuleName;
+
+    /**
+     * Creates a record.
+     * @param name A filename in the format "{strong name}.gwt.rpc".
+     * @param serviceName The name of a Java interface that extends RemoteService.
+     * @param outputModuleName The module that contains the service.
+     */
+    PolicyFile(String name, String serviceName, String outputModuleName) {
+      this.name = name;
+      this.serviceName = serviceName;
+      this.outputModuleName = outputModuleName;
+    }
+
+    /**
+     * Returns the name of the policy file.
+     * This looks like "{strong name}.gwt.rpc".
+     */
+    String getName() {
+      return name;
+    }
+
+    /**
+     * Returns the URL of the policy file itself.
+     * (This is a site-relative URL like "/policies/{strong name}.gwt.rpc".)
+     */
+    String getUrl() {
+      return "/policies/" + name;
+    }
+
+    /**
+     * Returns the name of the Java interface that extends RemoteService.
+     */
+    String getServiceName() {
+      return serviceName;
+    }
+
+    /**
+     * Returns the URL to the Java source code for the Java interface.
+     * (This is a site-relative URL like "/sourcemaps/{module name}/path/to/JavaFile.java".)
+     */
+    String getServiceSourceUrl() {
+      return SourceHandler.SOURCEMAP_PATH + outputModuleName + "/" +
+          serviceName.replace('.', '/') + ".java";
     }
   }
 }

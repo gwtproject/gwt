@@ -99,7 +99,7 @@ public class JRealClassType extends JClassType implements
       nestedSourceName = simpleName;
     } else {
       // Compute my "nested name".
-      nestedSourceName = enclosingSimpleName + "." + simpleName;
+      nestedSourceName = StringInterner.get().intern(enclosingSimpleName + "." + simpleName);
 
       // We will add ourselves to the enclosing class when it is set in
       // setEnclosingType().
@@ -492,8 +492,7 @@ public class JRealClassType extends JClassType implements
     if (superclass != null) {
       superclass.acceptSubtype(me);
     }
-    for (int i = 0, n = interfaces.size(); i < n; ++i) {
-      JClassType intf = interfaces.get(i);
+    for (JClassType intf : interfaces) {
       intf.acceptSubtype(me);
     }
   }
@@ -506,9 +505,7 @@ public class JRealClassType extends JClassType implements
       superclass.removeSubtype(me);
     }
 
-    for (int i = 0, n = interfaces.size(); i < n; ++i) {
-      JClassType intf = interfaces.get(i);
-
+    for (JClassType intf : interfaces) {
       intf.removeSubtype(me);
     }
   }

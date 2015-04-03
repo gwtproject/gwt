@@ -31,15 +31,15 @@
   </macrodef>
 
   <property name="gwt.apicheck.config"
-            location="tools/api-checker/config/gwt26_27userApi.conf"/>
+            location="tools/api-checker/config/gwt27_28userApi.conf"/>
   <property name="gwt.apicheck.referencelibs"
-            value="${gwt.tools}/api-checker-reference/2.6.0/gwt-dev-modified.jar:${gwt.tools}/api-checker-reference/2.6.0/gwt-user-modified.jar"/>
+            value="${gwt.tools}/api-checker-reference/2.7.0/gwt-dev-modified.jar:${gwt.tools}/api-checker-reference/2.7.0/gwt-user-modified.jar"/>
 
   <target name="buildonly"
           description="[action] Minimal one-platform devel build, without distro packaging">
     <call-subproject subproject="dev" subtarget="build"/>
-    <call-subproject subproject="codeserver" subtarget="build"/>
     <call-subproject subproject="user" subtarget="build"/>
+    <call-subproject subproject="codeserver" subtarget="build"/>
     <call-subproject subproject="requestfactory" subtarget="build"/>
     <call-subproject subproject="servlet" subtarget="build"/>
     <call-subproject subproject="jni" subtarget="build"/>
@@ -75,13 +75,6 @@
           description="[subdir] Builds (or runs ${target} if set) only the elemental library">
     <call-subproject subproject="user" subtarget="build"/>
     <gwt.ant dir="elemental"/>
-  </target>
-
-  <target name="soyc"
-          description="[subdir] Builds (or runs ${target} if set) only the soyc library">
-    <call-subproject subproject="dev" subtarget="build"/>
-    <call-subproject subproject="user" subtarget="build"/>
-    <gwt.ant dir="tools/soyc-vis"/>
   </target>
 
   <target name="tools" description="[subdir] Builds (or runs ${target} if set) only the tools">
@@ -123,8 +116,8 @@
   <target name="build"
           description="[action] Builds GWT, including samples, but without distro packaging">
     <call-subproject subproject="dev" subtarget="build"/>
-    <call-subproject subproject="codeserver" subtarget="build"/>
     <call-subproject subproject="user" subtarget="build"/>
+    <call-subproject subproject="codeserver" subtarget="build"/>
     <call-subproject subproject="requestfactory" subtarget="build"/>
     <call-subproject subproject="servlet" subtarget="build"/>
     <call-subproject subproject="tools" subtarget="build"/>
@@ -135,8 +128,8 @@
   <target name="checkstyle" description="[action] Does static analysis of GWT source">
     <call-subproject subproject="buildtools" subtarget="checkstyle"/>
     <call-subproject subproject="dev" subtarget="checkstyle"/>
-    <call-subproject subproject="codeserver" subtarget="checkstyle"/>
     <call-subproject subproject="user" subtarget="checkstyle"/>
+    <call-subproject subproject="codeserver" subtarget="checkstyle"/>
     <call-subproject subproject="requestfactory" subtarget="checkstyle"/>
     <call-subproject subproject="servlet" subtarget="checkstyle"/>
     <!-- servlet needed for tools/benchmark-viewer -->
@@ -145,18 +138,29 @@
     <call-subproject subproject="samples" subtarget="checkstyle"/>
   </target>
 
-  <target name="test" depends="dist-dev,apicheck,checkstyle"
-          description="[action] Runs all the GWT tests, including checkstyle and apicheck">
+  <target name="compile.tests" description="[action] Compile all the GWT tests, without running them">
+    <call-subproject subproject="buildtools" subtarget="compile.tests"/>
+    <call-subproject subproject="dev" subtarget="compile.tests"/>
+    <call-subproject subproject="user" subtarget="compile.tests"/>
+    <call-subproject subproject="codeserver" subtarget="compile.tests"/>
+    <call-subproject subproject="requestfactory" subtarget="compile.tests"/>
+    <call-subproject subproject="servlet" subtarget="compile.tests"/>
+    <call-subproject subproject="tools" subtarget="compile.tests"/>
+  </target>
+
+  <target name="test" depends="buildonly,apicheck,checkstyle"
+          description="[action] Runs all the GWT tests, including checkstyle, apicheck and elemental">
     <call-subproject subproject="buildtools" subtarget="test"/>
     <call-subproject subproject="dev" subtarget="test"/>
-    <call-subproject subproject="codeserver" subtarget="test"/>
     <call-subproject subproject="user" subtarget="test"/>
+    <call-subproject subproject="codeserver" subtarget="test"/>
     <call-subproject subproject="requestfactory" subtarget="test"/>
     <call-subproject subproject="servlet" subtarget="test"/>
     <call-subproject subproject="tools" subtarget="test"/>
+    <call-subproject subproject="elemental" subtarget="test"/>
   </target>
 
-  <target name="testrf" depends="dist-dev"
+  <target name="testrf" depends="buildonly"
           description="[action] Runs the GWT RequestFactory tests">
     <call-subproject subproject="dev" subtarget="compile.tests"/>
     <call-subproject subproject="user" subtarget="compile.tests"/>
@@ -216,6 +220,10 @@
         <fileset dir="${gwt.build.lib}" includes="gwt-user.jar,gwt-dev.jar"/>
         <pathelement path="${java.class.path}"/>
         <pathelement location="${gwt.tools.lib}/apache/ant-1.6.5.jar"/>
+        <pathelement location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA.jar"/>
+        <pathelement
+            location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final.jar"/>
+
       </classpath>
       <arg value="-refJar"/>
       <arg path="${gwt.apicheck.referencelibs}"/>

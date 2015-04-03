@@ -18,8 +18,9 @@ package com.google.gwt.storage.client;
 
 import static java.util.Collections.singleton;
 
-import com.google.gwt.core.client.JavaScriptException;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.testing.TestUtils;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -289,9 +290,8 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     } else {
       try {
         map.containsKey(null);
-      } catch (JavaScriptException optional) {
-      } catch (NullPointerException e) {
-        // Expected in GWT client.
+        fail("Should have thrown NullPointerException");
+      } catch (NullPointerException expected) {
       }
     }
     assertInvariants(map);
@@ -313,9 +313,8 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     } else {
       try {
         map.containsKey(null);
-      } catch (JavaScriptException optional) {
-      } catch (NullPointerException e) {
-        // Expected in GWT client.
+        fail("Should have thrown NullPointerException");
+      } catch (NullPointerException expected) {
       }
     }
     assertInvariants(map);
@@ -616,22 +615,14 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     if (supportsRemove) {
       try {
         entrySet.removeAll(null);
-        fail("Expected JavaScriptException.");
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
-      } catch (NullPointerException e) {
-        // Expected in GWT client.
+        fail("Should have thrown NullPointerException");
+      } catch (NullPointerException expected) {
       }
     } else {
       try {
         entrySet.removeAll(null);
-        fail("Expected UnsupportedOperationException or JavaScriptException.");
-      } catch (UnsupportedOperationException e) {
-        // Expected.
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
-      } catch (NullPointerException e) {
-        // Expected in GWT client.
+        fail("Expected UnsupportedOperationException.");
+      } catch (UnsupportedOperationException expected) {
       }
     }
     assertInvariants(map);
@@ -678,18 +669,14 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     if (supportsRemove) {
       try {
         entrySet.retainAll(null);
-        // Returning successfully is not ideal, but tolerated.
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
+        failForMissingNPE(map);
+      } catch (NullPointerException expected) {
       }
     } else {
       try {
         entrySet.retainAll(null);
-        // We have to tolerate a successful return (Sun bug 4802647)
-      } catch (UnsupportedOperationException e) {
-        // Expected.
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
+        fail("Expected UnsupportedOperationException.");
+      } catch (UnsupportedOperationException expected) {
       }
     }
     assertInvariants(map);
@@ -711,8 +698,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       try {
         entrySet.clear();
         fail("Expected UnsupportedOperationException.");
-      } catch (UnsupportedOperationException e) {
-        // Expected.
+      } catch (UnsupportedOperationException expected) {
       }
     }
     assertInvariants(map);
@@ -730,21 +716,15 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     final Entry<K, V> entryToAdd = mapEntry(null, null);
     try {
       entrySet.add(entryToAdd);
-      fail("Expected UnsupportedOperationException or JavaScriptException.");
-    } catch (UnsupportedOperationException e) {
-      // Expected.
-    } catch (JavaScriptException e) {
-      // Expected in GWT client.
+      fail("Expected UnsupportedOperationException.");
+    } catch (UnsupportedOperationException expected) {
     }
     assertInvariants(map);
 
     try {
       entrySet.addAll(singleton(entryToAdd));
-      fail("Expected UnsupportedOperationException or JavaScriptException.");
-    } catch (UnsupportedOperationException e) {
-      // Expected.
-    } catch (JavaScriptException e) {
-      // Expected in GWT client.
+      fail("Expected UnsupportedOperationException.");
+    } catch (UnsupportedOperationException expected) {
     }
     assertInvariants(map);
   }
@@ -916,15 +896,14 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     }
 
     if (allowsNullKeys) {
-      if (allowsNullValues) {
-        // TODO: decide what to test here.
-      } else {
-        assertEquals(map.containsKey(null), map.get(null) != null);
+      V value = map.get(null);
+      if (!allowsNullValues) {
+        assertEquals(map.containsKey(null), value != null);
       }
     } else {
       try {
         map.get(null);
-      } catch (JavaScriptException optional) {
+      } catch (NullPointerException expected) {
         // in GWT client.
       }
     }
@@ -1078,8 +1057,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       try {
         map.put(keyToPut, null);
         fail("Expected RuntimeException");
-      } catch (RuntimeException e) {
-        // Expected.
+      } catch (RuntimeException expected) {
       }
     }
     assertInvariants(map);
@@ -1110,8 +1088,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       try {
         map.put(keyToPut, null);
         fail("Expected RuntimeException");
-      } catch (RuntimeException e) {
-        // Expected.
+      } catch (RuntimeException expected) {
       }
     }
     assertInvariants(map);
@@ -1144,8 +1121,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       try {
         map.putAll(mapToPut);
         fail("Expected UnsupportedOperationException.");
-      } catch (UnsupportedOperationException e) {
-        // Expected.
+      } catch (UnsupportedOperationException expected) {
       }
     }
     assertInvariants(map);
@@ -1173,8 +1149,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       try {
         map.putAll(mapToPut);
         fail("Expected UnsupportedOperationException.");
-      } catch (UnsupportedOperationException e) {
-        // Expected.
+      } catch (UnsupportedOperationException expected) {
       }
     }
     assertEquals(initialSize, map.size());
@@ -1258,8 +1233,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       try {
         keySet.clear();
         fail("Expected UnsupportedOperationException.");
-      } catch (UnsupportedOperationException e) {
-        // Expected.
+      } catch (UnsupportedOperationException expected) {
       }
     }
     assertInvariants(map);
@@ -1277,22 +1251,14 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     if (supportsRemove) {
       try {
         keySet.removeAll(null);
-        fail("Expected JavaScriptException.");
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
-      } catch (NullPointerException e) {
-        // Expected in GWT client.
+        fail("Should have thrown NullPointerException");
+      } catch (NullPointerException expected) {
       }
     } else {
       try {
         keySet.removeAll(null);
-        fail("Expected UnsupportedOperationException or JavaScriptException.");
-      } catch (UnsupportedOperationException e) {
-        // Expected.
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
-      } catch (NullPointerException e) {
-        // Expected in GWT client.
+        fail("Expected UnsupportedOperationException.");
+      } catch (UnsupportedOperationException expected) {
       }
     }
     assertInvariants(map);
@@ -1310,18 +1276,14 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     if (supportsRemove) {
       try {
         keySet.retainAll(null);
-        // Returning successfully is not ideal, but tolerated.
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
+        failForMissingNPE(map);
+      } catch (NullPointerException expected) {
       }
     } else {
       try {
         keySet.retainAll(null);
-        // We have to tolerate a successful return (Sun bug 4802647)
-      } catch (UnsupportedOperationException e) {
-        // Expected.
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
+        fail("Expected UnsupportedOperationException.");
+      } catch (UnsupportedOperationException expected) {
       }
     }
     assertInvariants(map);
@@ -1460,8 +1422,7 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       try {
         valueCollection.removeAll(valuesToRemove);
         fail("Expected UnsupportedOperationException.");
-      } catch (UnsupportedOperationException e) {
-        // Expected.
+      } catch (UnsupportedOperationException expected) {
       }
     }
     assertInvariants(map);
@@ -1479,18 +1440,14 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     if (supportsRemove) {
       try {
         values.removeAll(null);
-        // Returning successfully is not ideal, but tolerated.
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
+        failForMissingNPE(map);
+      } catch (NullPointerException expected) {
       }
     } else {
       try {
         values.removeAll(null);
-        // We have to tolerate a successful return (Sun bug 4802647)
-      } catch (UnsupportedOperationException e) {
-        // Expected.
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
+        fail("Expected UnsupportedOperationException.");
+      } catch (UnsupportedOperationException expected) {
       }
     }
     assertInvariants(map);
@@ -1537,18 +1494,14 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
     if (supportsRemove) {
       try {
         values.retainAll(null);
-        // Returning successfully is not ideal, but tolerated.
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
+        failForMissingNPE(map);
+      } catch (NullPointerException expected) {
       }
     } else {
       try {
         values.retainAll(null);
-        // We have to tolerate a successful return (Sun bug 4802647)
-      } catch (UnsupportedOperationException e) {
-        // Expected.
-      } catch (JavaScriptException e) {
-        // Expected in GWT client.
+        fail("Expected UnsupportedOperationException.");
+      } catch (UnsupportedOperationException expected) {
       }
     }
     assertInvariants(map);
@@ -1575,6 +1528,14 @@ public abstract class MapInterfaceTest<K, V> extends GWTTestCase {
       }
     }
     assertInvariants(map);
+  }
+
+  private void failForMissingNPE(Map<K, V> map) {
+    if (map.isEmpty() && !GWT.isScript() && TestUtils.getJdkVersion() < 8) {
+      // JDK < 8 does not conform to the specification if the map is empty.
+      return;
+    }
+    fail("Should have thrown NullPointerException");
   }
 
   private static <K, V> Entry<K, V> mapEntry(K key, V value) {

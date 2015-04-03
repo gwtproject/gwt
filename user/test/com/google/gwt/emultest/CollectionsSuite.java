@@ -15,7 +15,6 @@
  */
 package com.google.gwt.emultest;
 
-import com.google.gwt.emultest.java.util.ApacheMapTest;
 import com.google.gwt.emultest.java.util.ArrayListTest;
 import com.google.gwt.emultest.java.util.ArraysTest;
 import com.google.gwt.emultest.java.util.CollectionsTest;
@@ -23,6 +22,7 @@ import com.google.gwt.emultest.java.util.ComparatorTest;
 import com.google.gwt.emultest.java.util.DateTest;
 import com.google.gwt.emultest.java.util.EnumMapTest;
 import com.google.gwt.emultest.java.util.EnumSetTest;
+import com.google.gwt.emultest.java.util.HashMapSmokeTest;
 import com.google.gwt.emultest.java.util.HashMapTest;
 import com.google.gwt.emultest.java.util.HashSetTest;
 import com.google.gwt.emultest.java.util.IdentityHashMapTest;
@@ -33,6 +33,7 @@ import com.google.gwt.emultest.java.util.ObjectsTest;
 import com.google.gwt.emultest.java.util.PriorityQueueTest;
 import com.google.gwt.emultest.java.util.RandomTest;
 import com.google.gwt.emultest.java.util.StackTest;
+import com.google.gwt.emultest.java.util.VectorTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
 
 import junit.framework.Test;
@@ -46,7 +47,6 @@ public class CollectionsSuite {
     GWTTestSuite suite = new GWTTestSuite("Tests for emulation of Java Collections");
 
     // $JUnit-BEGIN$
-    suite.addTestSuite(ApacheMapTest.class);
     suite.addTestSuite(ArrayListTest.class);
     suite.addTestSuite(ArraysTest.class);
     suite.addTestSuite(CollectionsTest.class);
@@ -54,6 +54,7 @@ public class CollectionsSuite {
     suite.addTestSuite(DateTest.class);
     suite.addTestSuite(EnumMapTest.class);
     suite.addTestSuite(EnumSetTest.class);
+    suite.addTestSuite(HashMapSmokeTest.class);
     suite.addTestSuite(HashMapTest.class);
     suite.addTestSuite(HashSetTest.class);
     suite.addTestSuite(IdentityHashMapTest.class);
@@ -64,6 +65,7 @@ public class CollectionsSuite {
     suite.addTestSuite(PriorityQueueTest.class);
     suite.addTestSuite(RandomTest.class);
     suite.addTestSuite(StackTest.class);
+    suite.addTestSuite(VectorTest.class);
     suite.addTest(TreeMapSuiteSub.suite());
     suite.addTest(TreeSetSuiteSub.suite());
     // $JUnit-END$

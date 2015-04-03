@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "sl" locale.
@@ -46,7 +41,7 @@ public class DateTimeFormatInfoImpl_sl extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "d. MMM yyyy";
+    return "d. MMM y";
   }
 
   @Override
@@ -68,6 +63,31 @@ public class DateTimeFormatInfoImpl_sl extends DateTimeFormatInfoImpl {
         "pr. n. št.",
         "po Kr."
     };
+  }
+
+  @Override
+  public String formatHour12Minute() {
+    return "h.mm a";
+  }
+
+  @Override
+  public String formatHour12MinuteSecond() {
+    return "h.mm.ss a";
+  }
+
+  @Override
+  public String formatHour24Minute() {
+    return "HH.mm";
+  }
+
+  @Override
+  public String formatHour24MinuteSecond() {
+    return "HH.mm.ss";
+  }
+
+  @Override
+  public String formatMinuteSecond() {
+    return "mm.ss";
   }
 
   @Override
@@ -97,7 +117,7 @@ public class DateTimeFormatInfoImpl_sl extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthAbbrevDay() {
-    return "MMM d, y";
+    return "d. MMM y";
   }
 
   @Override
@@ -215,6 +235,26 @@ public class DateTimeFormatInfoImpl_sl extends DateTimeFormatInfoImpl {
         "3. četrtletje",
         "4. četrtletje"
     };
+  }
+
+  @Override
+  public String timeFormatFull() {
+    return "HH.mm.ss zzzz";
+  }
+
+  @Override
+  public String timeFormatLong() {
+    return "HH.mm.ss z";
+  }
+
+  @Override
+  public String timeFormatMedium() {
+    return "HH.mm.ss";
+  }
+
+  @Override
+  public String timeFormatShort() {
+    return "HH.mm";
   }
 
   @Override

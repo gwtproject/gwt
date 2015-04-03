@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,8 +15,10 @@
  */
 package com.google.gwt.dev.resource.impl;
 
+import com.google.gwt.dev.resource.impl.PathPrefix.Judgement;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Maps;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +29,8 @@ import java.util.Map;
 /**
  * Combines the information conveyed about a set of path prefixes to quickly
  * answer questions regarding an entire set of path prefixes.
+ * <p>
+ * Is effectively immutable and should not be modified after initial use.
  */
 public class PathPrefixSet {
   /*
@@ -35,12 +39,12 @@ public class PathPrefixSet {
    * are allowed?
    */
 
-  private static class TrieNode {
+  private class TrieNode {
     // TODO(amitmanjhi): Consider the memory-speed tradeoff here
     private Map<String, TrieNode> children = Maps.create();
     private final String part;
-
-    private PathPrefix prefix;
+    private List<PathPrefix> prefixes = Lists.newArrayList();
+    private boolean hasPrefixes = false;
 
     public TrieNode(String part) {
       this.part = StringInterner.get().intern(part);
@@ -54,11 +58,16 @@ public class PathPrefixSet {
       return newChild;
     }
 
-    public void extendPathPrefix(PathPrefix prefix) {
-      if (this.prefix == null) {
-        this.prefix = prefix;
+    public void addPathPrefix(PathPrefix prefix) {
+      hasPrefixes = true;
+      if (mergePathPrefixes) {
+        if (prefixes.isEmpty()) {
+          prefixes.add(prefix);
+        } else {
+          prefixes.get(0).merge(prefix);
+        }
       } else {
-        this.prefix.merge(prefix);
+        prefixes.add(prefix);
       }
     }
 
@@ -66,12 +75,8 @@ public class PathPrefixSet {
       return children.get(part);
     }
 
-    public PathPrefix getPathPrefix() {
-      return prefix;
-    }
-
-    public boolean hasChildren() {
-      return !children.isEmpty();
+    public List<PathPrefix> getPathPrefixes() {
+      return prefixes;
     }
 
     @Override
@@ -95,11 +100,26 @@ public class PathPrefixSet {
   }
 
   /**
+   * Whether or not to merge prefixes that are added. Merged prefixes perform better during resource
+   * scanning but at the cost of not being able to tell which module(s) are responsible for a
+   * particular resource inclusion.
+   */
+  private boolean mergePathPrefixes = true;
+
+  /**
    * List of all path prefixes in priority order.
    */
   private final List<PathPrefix> prefixes = new ArrayList<PathPrefix>();
 
   private final TrieNode rootTrieNode = new TrieNode("/");
+
+  public PathPrefixSet() {
+    this(true);
+  }
+
+  public PathPrefixSet(boolean mergePathPrefixes) {
+    this.mergePathPrefixes = mergePathPrefixes;
+  }
 
   /**
    * @param prefix the prefix to add
@@ -119,7 +139,7 @@ public class PathPrefixSet {
      * prefix to the root so that we can apply the filter.
      */
     if ("".equals(pathPrefix)) {
-      rootTrieNode.extendPathPrefix(prefix);
+      rootTrieNode.addPathPrefix(prefix);
       return false;
     }
 
@@ -139,7 +159,7 @@ public class PathPrefixSet {
       }
     }
     assert (parentNode != null);
-    parentNode.extendPathPrefix(prefix);
+    parentNode.addPathPrefix(prefix);
     return didAdd;
   }
 
@@ -153,7 +173,7 @@ public class PathPrefixSet {
    * {@link ClassPathEntry} subclasses to avoid descending into directory
    * hierarchies that could not possibly contain resources that would be
    * included by {@link #includesResource(String)}
-   * 
+   *
    * @param dirPath must be a valid abstract directory name (must not be an
    *          empty string)
    * @return true if some PathPrefix allows the directory
@@ -163,24 +183,24 @@ public class PathPrefixSet {
 
     /*
      * There are four cases:
-     * 
+     *
      * (1) The empty string was specified as a prefix, which causes everything
      * to be included.
-     * 
+     *
      * (2) As we walk the parts of dirPath, we see a path prefix attached to one
      * of the trie nodes we encounter. This means that there was a specified
      * prefix that this dirPath falls underneath, so it is included.
-     * 
+     *
      * (3) dirPath is longer than the trie, but we never encounter a path prefix
      * as we walk the trie. This indicates that this directory doesn't fall into
      * any of the specified prefixes.
-     * 
+     *
      * (4) dirPath is not longer than the trie and stays on the trie the whole
      * time, which means it is included (since at least some longer prefix
      * includes it).
      */
 
-    if (rootTrieNode.getPathPrefix() != null) {
+    if (rootTrieNode.hasPrefixes) {
       // Case (1).
       return true;
     }
@@ -191,8 +211,7 @@ public class PathPrefixSet {
       assert (!"".equals(part));
       TrieNode childNode = parentNode.findChild(part);
       if (childNode != null) {
-        PathPrefix pathPrefix = childNode.getPathPrefix();
-        if (pathPrefix != null) {
+        if (childNode.hasPrefixes) {
           // Case (2).
           return true;
         }
@@ -212,62 +231,86 @@ public class PathPrefixSet {
   /**
    * Determines whether or not a given resource should be allowed by this path
    * prefix set and the corresponding filters.
-   * 
+   *
    * @param resourceAbstractPathName
    * @return matching <code>PathPrefix</code> if the resource matches some
    *         specified prefix and any associated filters don't exclude it.
    *         Otherwise, returns null. So it returns null if either no prefixes
    *         match or the most specific prefix excludes the resource.
    */
-  public PathPrefix includesResource(String resourceAbstractPathName) {
+  public ResourceResolution includesResource(String resourceAbstractPathName) {
     String[] parts = resourceAbstractPathName.split("/");
     return includesResource(resourceAbstractPathName, parts);
   }
 
   /**
-   * Implementation of {@link #includesDirectory(String)}.
+   * Dives down the package hierarchy looking for the most specific
+   * package that applies to this resource. The filter of the most specific
+   * package is the final determiner of inclusion/exclusion, such that more
+   * specific subpackages can override the filter settings on less specific
+   * superpackages.
    */
-  public PathPrefix includesResource(String resourceAbstractPathName, String[] parts) {
-    /*
-     * Algorithm: dive down the package hierarchy looking for the most specific
-     * package that applies to this resource. The filter of the most specific
-     * package is the final determiner of inclusion/exclusion, such that more
-     * specific subpackages can override the filter settings on less specific
-     * superpackages.
-     */
-
+  public ResourceResolution includesResource(String resourceAbstractPathName,
+      String[] parts) {
     assertValidAbstractResourcePathName(resourceAbstractPathName);
 
+    ResourceResolution resourceResolution = new ResourceResolution();
     TrieNode currentNode = rootTrieNode;
-    PathPrefix mostSpecificPrefix = rootTrieNode.getPathPrefix();
+    List<PathPrefix> mostSpecificPrefixes = rootTrieNode.getPathPrefixes();
 
     // Walk all but the last path part, which is assumed to be a file name.
     for (String part : parts) {
       assert (!"".equals(part));
       TrieNode childNode = currentNode.findChild(part);
-      if (childNode != null) {
-        // We found a more specific node.
-        PathPrefix moreSpecificPrefix = childNode.getPathPrefix();
-        if (moreSpecificPrefix != null) {
-          mostSpecificPrefix = moreSpecificPrefix;
-        }
-        currentNode = childNode;
-      } else {
-        // No valid branch to follow.
+      if (childNode == null) {
         break;
+      }
+
+      // We found a more specific node.
+      if (childNode.hasPrefixes) {
+        List<PathPrefix>  moreSpecificPrefixes = childNode.getPathPrefixes();
+        // If PathPrefix->Module associations are accurate because PathPrefixes haven't been merged.
+        if (!mergePathPrefixes) {
+          // Record the module name of every PathPrefix that would allow this
+          // resource. This enables detailed dependency validity checking.
+          for (PathPrefix candidatePrefix : moreSpecificPrefixes) {
+            if (candidatePrefix.getJudgement(
+                resourceAbstractPathName).isInclude()) {
+              resourceResolution.addSourceModuleName(
+                  candidatePrefix.getModuleName());
+            }
+          }
+        }
+
+        mostSpecificPrefixes = moreSpecificPrefixes;
+      }
+      currentNode = childNode;
+    }
+
+    PathPrefix chiefPrefix = null;
+    Judgement chiefJudgement = null;
+    for (PathPrefix candidatePrefix : mostSpecificPrefixes) {
+      Judgement judgement = candidatePrefix.getJudgement(
+          resourceAbstractPathName);
+
+      // EXCLUSION_EXCLUDE > FILTER_INCLUDE > IMPLICIT_EXCLUDE
+      if (chiefJudgement == null ||
+          judgement.getPriority() > chiefJudgement.getPriority()) {
+        chiefPrefix = candidatePrefix;
+        chiefJudgement = judgement;
       }
     }
 
-    if (mostSpecificPrefix == null
-        || !mostSpecificPrefix.allows(resourceAbstractPathName)) {
-      /*
-       * Didn't match any specified prefix or the filter of the most specific
-       * prefix disallows the resource
-       */
+    if (chiefPrefix == null || !chiefJudgement.isInclude()) {
       return null;
     }
 
-    return mostSpecificPrefix;
+    resourceResolution.setPathPrefix(chiefPrefix);
+    return resourceResolution;
+  }
+
+  public boolean mergePathPrefixes() {
+    return mergePathPrefixes;
   }
 
   @Override

@@ -39,9 +39,9 @@ final public class JsJsonObject extends JsJsonValue
   }
 
   public final native JsonValue get(String key) /*-{
-    return @com.google.gwt.core.client.GWT::isScript()() ?
-            @elemental.js.json.JsJsonValue::box(Lelemental/json/JsonValue;)(this[key]) :
-            this[key] != null ? Object(this[key]) : null;
+    var value = this[key];
+    // box for DevMode, not ProdMode
+    return @com.google.gwt.core.client.GWT::isScript()() || value == null ? value : Object(value);
   }-*/;
 
   public JsonArray getArray(String key) {
@@ -51,7 +51,6 @@ final public class JsJsonObject extends JsJsonValue
   public boolean getBoolean(String key) {
     return ((JsonBoolean) get(key)).getBoolean();
   }
-
 
   public double getNumber(String key) {
     return ((JsonNumber) get(key)).getNumber();
@@ -77,32 +76,36 @@ final public class JsJsonObject extends JsJsonValue
   public native JsArrayString keys0() /*-{
     var keys = [];
     for(var key in this) {
-      if (this.hasOwnProperty(key) && key != '$H') {
+      if (Object.prototype.hasOwnProperty.call(this, key) && key != '$H') {
         keys.push(key);
       }
     }
     return keys;
   }-*/;
 
-  public void put(String key, JsonValue value) {
-    put0(key, value);
+  public native void put(String key, JsonValue value) /*-{
+    this[key] = value;
+  }-*/;
+
+  public void put(String key, String value) {
+    put(key, JsJsonString.create(value));
   }
 
-  public native void put(String key, String value)  /*-{
-    this[key] = value;
-  }-*/;
+  public void put(String key, double value) {
+    put(key, JsJsonNumber.create(value));
+  }
 
-  public native void put(String key, double value) /*-{
-    this[key] = Object(value);
-  }-*/;
+  public void put(String key, boolean value) {
+    put(key, JsJsonBoolean.create(value));
+  }
 
-  public native void put(String key, boolean value) /*-{
-    this[key] = Object(value);
-  }-*/;
-
-  public native void put0(String key, JsonValue value)  /*-{
-    this[key] = value;
-  }-*/;
+  /**
+   * @deprecated use {@link #put(String, elemental.json.JsonValue)} instead.
+   */
+  @Deprecated
+  public void put0(String key, JsonValue value) {
+      put(key, value);
+  }
 
   public native void remove(String key) /*-{
     delete this[key];

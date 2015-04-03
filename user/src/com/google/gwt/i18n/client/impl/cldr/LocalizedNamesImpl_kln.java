@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "kln" locale.
@@ -218,7 +213,6 @@ public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
         "ST",
         "SA",
         "SN",
-        "CS",
         "SC",
         "SL",
         "SG",
@@ -291,6 +285,7 @@ public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
         "TA",
         "TF",
         "UM",
+        "XK",
     };
   }
 
@@ -342,7 +337,6 @@ public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
     namesMap.put("CN", "Emetab China");
     namesMap.put("CO", "Emetab Colombia");
     namesMap.put("CR", "Emetab Costa Rica");
-    namesMap.put("CS", "Emetab Serbia and Montenegro");
     namesMap.put("CU", "Emetab Cuba");
     namesMap.put("CV", "Ikwembeyotab Cape Verde");
     namesMap.put("CY", "Emetab Cyprus");
@@ -577,7 +571,6 @@ public class LocalizedNamesImpl_kln extends LocalizedNamesImpl {
         "CN": "Emetab China",
         "CO": "Emetab Colombia",
         "CR": "Emetab Costa Rica",
-        "CS": "Emetab Serbia and Montenegro",
         "CU": "Emetab Cuba",
         "CV": "Ikwembeyotab Cape Verde",
         "CY": "Emetab Cyprus",

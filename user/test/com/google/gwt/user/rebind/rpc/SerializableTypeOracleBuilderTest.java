@@ -15,6 +15,7 @@
  */
 package com.google.gwt.user.rebind.rpc;
 
+import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.StubGeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -31,10 +32,10 @@ import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.cfg.BindingProperty;
-import com.google.gwt.dev.cfg.ConfigurationProperty;
+import com.google.gwt.dev.cfg.BindingProps;
+import com.google.gwt.dev.cfg.ConfigProps;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
-import com.google.gwt.dev.cfg.StaticPropertyOracle;
 import com.google.gwt.dev.javac.TypeOracleTestingUtils;
 import com.google.gwt.dev.javac.testing.impl.JavaResourceBase;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
@@ -75,14 +76,25 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
    */
   static class MockContext extends StubGeneratorContext {
     private TypeOracle typeOracle;
+    private PropertyOracle propertyOracle;
 
     MockContext(TypeOracle typeOracle) {
       this.typeOracle = typeOracle;
     }
 
+    MockContext(TypeOracle typeOracle, PropertyOracle propertyOracle) {
+      this.typeOracle = typeOracle;
+      this.propertyOracle = propertyOracle;
+    }
+
     @Override
     public TypeOracle getTypeOracle() {
       return typeOracle;
+    }
+
+    @Override
+    public PropertyOracle getPropertyOracle() {
+      return propertyOracle;
     }
 
     @Override
@@ -216,10 +228,9 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
   private static SerializableTypeOracleBuilder createSerializableTypeOracleBuilder(
       TreeLogger logger, TypeOracle to) throws UnableToCompleteException {
     // Make an empty property oracle.
-    StaticPropertyOracle propertyOracle =
-        new StaticPropertyOracle(new BindingProperty[0], new String[0],
-            new ConfigurationProperty[0]);
-    return new SerializableTypeOracleBuilder(logger, propertyOracle, new MockContext(to));
+    PropertyOracle props =
+        new BindingProps(new BindingProperty[0], new String[0], ConfigProps.EMPTY).toPropertyOracle();
+    return new SerializableTypeOracleBuilder(logger, new MockContext(to, props));
   }
 
   private static TypeInfo[] getActualTypeInfo(SerializableTypeOracle sto) {
@@ -1793,7 +1804,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
   }
 
   /**
-   * Tests that a type paramter that occurs within its bounds will not result in
+   * Tests that a type parameter that occurs within its bounds will not result in
    * infinite recursion.
    *
    * @throws UnableToCompleteException

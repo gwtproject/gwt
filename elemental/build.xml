@@ -10,6 +10,12 @@
   <property.ensure name="gwt.dev.jar" location="${gwt.build.lib}/gwt-dev.jar" />
   <property.ensure name="gwt.user.jar" location="${gwt.build.lib}/gwt-user.jar" />
 
+  <target name="check.generated" description="Check whether elemental code has been generated">
+    <condition property="generated">
+      <available file="idl/generated/src" type="dir" />
+    </condition>
+  </target>
+
   <target name="generate" description="Generate Elemental bindings from IDL">
     <exec executable="idl/build" dir="." failonerror="true"/>
   </target>
@@ -24,6 +30,19 @@
     </gwt.javac>
   </target>
 
+  <target name="compile.tests" if="generated" depends="check.generated" description="Compile Tests">
+    <echo message="${javac.junit.out}" />
+    <mkdir dir="${javac.junit.out}" />
+    <gwt.javac srcdir="src:idl/generated/src:tests" destdir="${javac.junit.out}" excludes="**/super/**">
+      <classpath>
+        <pathelement location="${javac.out}"/>
+        <pathelement location="${gwt.dev.jar}" />
+        <pathelement location="${gwt.user.jar}" />
+        <pathelement location="${gwt.tools.lib}/junit/junit-4.8.2.jar" />
+      </classpath>
+    </gwt.javac>
+  </target>
+
   <target name="build" depends="generate, compile"
       description="Creates gwt-elemental.jar">
     <mkdir dir="${gwt.build.lib}" />
@@ -34,34 +53,76 @@
     </gwt.jar>
   </target>
 
-    <macrodef name="compileModule">
-      <element name="module" />
-      <sequential>
-        <gwt.timer name="Pre-compile module">
-          <java classname="com.google.gwt.dev.CompileModule" fork="yes" failonerror="true">
-            <classpath>
-              <pathelement location="${gwt.root}/elemental/src" />
-              <pathelement location="${gwt.root}/elemental/idl/generated/src" />
-              <pathelement location="${gwt.dev.jar}" />
-              <pathelement location="${gwt.user.jar}" />
-            </classpath>
-            <jvmarg value="-Xmx512M" />
-            <module />
-            <arg value="-strict" />
-            <arg value="-sourceLevel" />
-            <arg value="${javac.source}" />
-            <arg value="-out" />
-            <arg value="${project.build}/bin" />
-          </java>
-        </gwt.timer>
-      </sequential>
-    </macrodef>
+  <macrodef name="run-tests">
+    <attribute name="output"/>
+    <attribute name="args"/>
+    <attribute name="classes"/>
+    <sequential>
+      <fileset id="tests" dir="${javac.junit.out}" includes="@{classes}" />
+      <gwt.junit test.name="test"
+          test.args="@{args}"
+          test.jvmargs="${test.jvmargs}"
+          test.out="@{output}"
+          test.cases="tests">
+        <extraclasspaths>
+          <pathelement location="${gwt.root}/elemental/src" />
+          <pathelement location="${gwt.root}/elemental/idl/generated/src" />
+          <pathelement location="${gwt.root}/elemental/tests" />
+          <pathelement location="${gwt.dev.jar}" />
+          <pathelement location="${gwt.user.jar}" />
+        </extraclasspaths>
+      </gwt.junit>
+    </sequential>
+  </macrodef>
+
+  <target name="test.dev.htmlunit" if="generated" depends="compile.tests"
+          description="Run tests with HtmlUnit in dev mode">
+    <run-tests output="${junit.out}/dev" args="${test.args}" classes="**/AllTests.class"/>
+  </target>
+
+  <target name="test.web.htmlunit" if="generated" depends="compile.tests"
+          description="Run tests with HtmlUnit in prod mode">
+    <run-tests output="${junit.out}/web" args="${test.args} -prod" classes="**/AllTests.class"/>
+  </target>
+
+  <target name="test.nongwt" if="generated" depends="compile.tests"
+          description="Run tests in the JVM">
+    <run-tests output="${junit.out}/nongwt" args="" classes="**/*JreTest.class"/>
+  </target>
+
+  <target name="test" description="Run tests">
+    <antcall target="test.nongwt" />
+    <antcall target="test.web.htmlunit" />
+    <antcall target="test.dev.htmlunit" />
+  </target>
+
+  <macrodef name="compileModule">
+    <element name="module" />
+    <sequential>
+      <java classname="com.google.gwt.dev.CompileModule" fork="yes" failonerror="true">
+        <classpath>
+          <pathelement location="${gwt.root}/elemental/src" />
+          <pathelement location="${gwt.root}/elemental/idl/generated/src" />
+          <pathelement location="${gwt.dev.jar}" />
+          <pathelement location="${gwt.user.jar}" />
+        </classpath>
+        <jvmarg value="-Xmx512M" />
+        <module />
+        <arg value="-strict" />
+        <arg value="-sourceLevel" />
+        <arg value="${javac.source}" />
+        <arg value="-out" />
+        <arg value="${project.build}/bin" />
+      </java>
+    </sequential>
+  </macrodef>
 
   <target name="clean"
       description="Cleans this project's intermediate and output files">
     <delete dir="idl/generated" />
     <delete dir="idl/database" />
     <delete dir="${project.build}" />
+    <delete dir="${javac.junit.out}" />
     <delete file="${project.lib}" />
   </target>
 </project>

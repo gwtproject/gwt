@@ -14,17 +14,20 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6465 $
-//  date=$Date: 2012-01-27 12:47:35 -0500 (Fri, 27 Jan 2012) $
-//  type=GB
 
 /**
  * Implementation of DateTimeFormatInfo for the "en_AU" locale.
  */
-public class DateTimeFormatInfoImpl_en_AU extends DateTimeFormatInfoImpl_en {
+public class DateTimeFormatInfoImpl_en_AU extends DateTimeFormatInfoImpl_en_001 {
+
+  @Override
+  public String[] ampms() {
+    return new String[] {
+        "am",
+        "pm"
+    };
+  }
 
   @Override
   public String dateFormatFull() {
@@ -38,12 +41,42 @@ public class DateTimeFormatInfoImpl_en_AU extends DateTimeFormatInfoImpl_en {
 
   @Override
   public String dateFormatMedium() {
-    return "dd/MM/yyyy";
+    return "d MMM y";
   }
 
   @Override
   public String dateFormatShort() {
-    return "d/MM/yy";
+    return "d/MM/y";
+  }
+
+  @Override
+  public String dateTimeFull(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public String dateTimeLong(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public String dateTimeMedium(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public String dateTimeShort(String timePattern, String datePattern) {
+    return datePattern + " " + timePattern;
+  }
+
+  @Override
+  public int firstDayOfTheWeek() {
+    return 0;
+  }
+
+  @Override
+  public String formatMonthAbbrevDay() {
+    return "d MMM";
   }
 
   @Override
@@ -53,12 +86,12 @@ public class DateTimeFormatInfoImpl_en_AU extends DateTimeFormatInfoImpl_en {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "EEEE, d MMMM";
+    return "EEEE d MMMM";
   }
 
   @Override
   public String formatMonthNumDay() {
-    return "d/M";
+    return "dd/MM";
   }
 
   @Override
@@ -72,7 +105,17 @@ public class DateTimeFormatInfoImpl_en_AU extends DateTimeFormatInfoImpl_en {
   }
 
   @Override
+  public String formatYearMonthNum() {
+    return "MM/y";
+  }
+
+  @Override
   public String formatYearMonthNumDay() {
     return "d/M/y";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "EEE, d MMM y";
   }
 }

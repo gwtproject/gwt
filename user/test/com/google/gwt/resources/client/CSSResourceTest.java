@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -190,6 +190,12 @@ public class CSSResourceTest extends GWTTestCase {
     FullTestCss css();
 
     @Source("32x32.png")
+    CustomDataResource customDataMethod();
+
+    @Source("16x16.png")
+    CustomImageResource customSpriteMethod();
+
+    @Source("32x32.png")
     DataResource dataMethod();
 
     // Test default extensions
@@ -235,7 +241,7 @@ public class CSSResourceTest extends GWTTestCase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.resources.Resources";
+    return "com.google.gwt.resources.ResourcesCssTest";
   }
 
   public void report(String s) {
@@ -261,6 +267,7 @@ public class CSSResourceTest extends GWTTestCase {
   public void testCss() {
     FullTestCss css = Resources.INSTANCE.css();
     String text = css.getText();
+
     report(text);
 
     // Check the sprite
@@ -314,13 +321,17 @@ public class CSSResourceTest extends GWTTestCase {
 
     // Check data URL expansion
     assertTrue(text.contains("backgroundTopLevel:url('"
-        + Resources.INSTANCE.dataMethod().getUrl() + "')"));
+        + Resources.INSTANCE.dataMethod().getSafeUri().asString() + "')"));
     assertTrue(text.contains("backgroundNested:url('"
-        + Resources.INSTANCE.nested().dataMethod().getUrl() + "')"));
+        + Resources.INSTANCE.nested().dataMethod().getSafeUri().asString() + "')"));
+    assertTrue(text.contains("backgroundCustom:url('"
+        + Resources.INSTANCE.customDataMethod().getSafeUri().asString() + "')"));
     assertTrue(text.contains("backgroundImage:url('"
-        + Resources.INSTANCE.spriteMethod().getURL() + "')"));
+        + Resources.INSTANCE.spriteMethod().getSafeUri().asString() + "')"));
     assertTrue(text.contains("backgroundImageNested:url('"
-        + Resources.INSTANCE.nested().spriteMethod().getURL() + "')"));
+        + Resources.INSTANCE.nested().spriteMethod().getSafeUri().asString() + "')"));
+    assertTrue(text.contains("backgroundImageCustom:url('"
+        + Resources.INSTANCE.customSpriteMethod().getSafeUri().asString() + "')"));
 
     // Check @eval expansion
     assertTrue(text.contains(red() + ";"));
@@ -381,7 +392,12 @@ public class CSSResourceTest extends GWTTestCase {
     assertFalse("10px".equals(defines.overrideIntClass()));
     assertFalse("10".equals(defines.overrideIntClass()));
 
-    assertEquals("1px solid rgba(0, 0, 0, 0.2)", defines.multiValueBorderDef());
+    assertTrue(
+        // css
+        "1px solid rgba(0, 0, 0, 0.2)".equals(defines.multiValueBorderDef()) ||
+        // gss
+        "1px solid rgba(0,0,0,0.2)".equals(defines.multiValueBorderDef())
+        );
   }
 
   public void testEnsureInjected() {

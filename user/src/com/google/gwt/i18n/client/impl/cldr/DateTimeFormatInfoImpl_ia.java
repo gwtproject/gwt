@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 5798 $
-//  date=$Date: 2011-05-02 02:05:34 -0400 (Mon, 02 May 2011) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "ia" locale.
@@ -32,6 +27,11 @@ public class DateTimeFormatInfoImpl_ia extends DateTimeFormatInfoImpl {
         "a.m.",
         "p.m."
     };
+  }
+
+  @Override
+  public String dateFormatFull() {
+    return "EEEE, y MMMM dd";
   }
 
   @Override
@@ -194,19 +194,6 @@ public class DateTimeFormatInfoImpl_ia extends DateTimeFormatInfoImpl {
         "jovedi",
         "venerdi",
         "sabbato"
-    };
-  }
-
-  @Override
-  public String[] weekdaysNarrow() {
-    return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
     };
   }
 

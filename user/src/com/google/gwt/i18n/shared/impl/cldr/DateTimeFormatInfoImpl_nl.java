@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "nl" locale.
@@ -57,14 +52,14 @@ public class DateTimeFormatInfoImpl_nl extends DateTimeFormatInfoImpl {
   @Override
   public String[] erasShort() {
     return new String[] {
-        "v. Chr.",
-        "n. Chr."
+        "v.Chr.",
+        "n.Chr."
     };
   }
 
   @Override
   public String formatMonthAbbrevDay() {
-    return "d-MMM";
+    return "d MMM";
   }
 
   @Override
@@ -119,12 +114,12 @@ public class DateTimeFormatInfoImpl_nl extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearQuarterFull() {
-    return "QQQQ yyyy";
+    return "QQQQ y";
   }
 
   @Override
   public String formatYearQuarterShort() {
-    return "Q yyyy";
+    return "Q y";
   }
 
   @Override

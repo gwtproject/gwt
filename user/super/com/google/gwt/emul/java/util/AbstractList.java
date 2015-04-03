@@ -15,6 +15,13 @@
  */
 package java.util;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalPositionIndexes;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElementIndex;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndex;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
+
 /**
  * Skeletal implementation of the List interface. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractList.html">[Sun
@@ -39,16 +46,14 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     }
 
     public E next() {
-      if (!hasNext()) {
-        throw new NoSuchElementException();
-      }
+      checkElement(hasNext());
+
       return AbstractList.this.get(last = i++);
     }
 
     public void remove() {
-      if (last < 0) {
-        throw new IllegalStateException();
-      }
+      checkState(last != -1);
+
       AbstractList.this.remove(last);
       i = last;
       last = -1;
@@ -71,10 +76,8 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     }
 
     private ListIteratorImpl(int start) {
-      int size = AbstractList.this.size();
-      if (start < 0 || start > size) {
-        indexOutOfBounds(start, size);
-      }
+      checkPositionIndex(start, AbstractList.this.size());
+
       i = start;
     }
 
@@ -93,9 +96,8 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     }
 
     public E previous() {
-      if (!hasPrevious()) {
-        throw new NoSuchElementException();
-      }
+      checkElement(hasPrevious());
+
       return AbstractList.this.get(last = --i);
     }
 
@@ -104,9 +106,8 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     }
 
     public void set(E o) {
-      if (last == -1) {
-        throw new IllegalStateException();
-      }
+      checkState(last != -1);
+
       AbstractList.this.set(last, o);
     }
   }
@@ -117,39 +118,32 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     private int size;
 
     public SubList(List<E> wrapped, int fromIndex, int toIndex) {
+      checkCriticalPositionIndexes(fromIndex, toIndex, wrapped.size());
+
       this.wrapped = wrapped;
       this.fromIndex = fromIndex;
-      size = getSize(fromIndex, toIndex);
-      if (fromIndex > toIndex) {
-        throw new IllegalArgumentException("fromIndex: " + fromIndex + 
-            " > toIndex: " + toIndex);
-      }
-      if (fromIndex < 0) {
-        throw new IndexOutOfBoundsException("fromIndex: " + fromIndex + 
-            " < 0");
-      }
-      if (toIndex > wrapped.size()) {
-        throw new IndexOutOfBoundsException("toIndex: " + toIndex +
-            " > wrapped.size() " + wrapped.size());
-      }
+      this.size = toIndex - fromIndex;
     }
 
     @Override
     public void add(int index, E element) {
-      checkIndexForAdd(index);
+      checkPositionIndex(index, size);
+
+      wrapped.add(fromIndex + index, element);
       size++;
-      wrapped.add(fromIndex + index, element);   
     }
 
     @Override
     public E get(int index) {
-      checkIndex(index);
+      checkElementIndex(index, size);
+
       return wrapped.get(fromIndex + index);
     }
 
     @Override
     public E remove(int index) {
-      checkIndex(index);
+      checkElementIndex(index, size);
+
       E result = wrapped.remove(fromIndex + index);
       size--;
       return result;
@@ -157,7 +151,8 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
 
     @Override
     public E set(int index, E element) {
-      checkIndex(index);
+      checkElementIndex(index, size);
+
       return wrapped.set(fromIndex + index, element);
     }
 
@@ -165,34 +160,9 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     public int size() {
       return size;
     }
-    
-    private void checkIndex(int index) {
-      checkIndex(index, size);
-    }
-        
-    private void checkIndexForAdd(int index) {
-      checkIndex(index, size + 1);
-    }
-
-    private int getSize(int fromIndex, int toIndex) {
-      return toIndex - fromIndex;
-    }
   }
 
-  protected static void checkIndex(int index, int size) {
-    if (index < 0 || index >= size) {
-      indexOutOfBounds(index, size);
-    }
-  }
-
-  /**
-   * Throws an <code>indexOutOfBoundsException</code>.
-   */
-  protected static void indexOutOfBounds(int index, int size) {
-    throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
-  }
-
-  protected transient int modCount = 0;
+  protected transient int modCount;
 
   protected AbstractList() {
   }
@@ -207,11 +177,13 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     throw new UnsupportedOperationException("Add not supported on this list");
   }
 
+  @Override
   public boolean addAll(int index, Collection<? extends E> c) {
-    Iterator<? extends E> iter = c.iterator();
+    checkNotNull(c);
+
     boolean changed = false;
-    while (iter.hasNext()) {
-      add(index++, iter.next());
+    for (E e : c) {
+      add(index++, e);
       changed = true;
     }
     return changed;
@@ -237,13 +209,9 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
       return false;
     }
 
-    Iterator<E> iter = iterator();
     Iterator<?> iterOther = other.iterator();
-
-    while (iter.hasNext()) {
-      E elem = iter.next();
+    for (E elem : this) {
       Object elemOther = iterOther.next();
-
       if (!Objects.equals(elem, elemOther)) {
         return false;
       }
@@ -256,15 +224,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
 
   @Override
   public int hashCode() {
-    int k = 1;
-    final int coeff = 31;
-    Iterator<E> iter = iterator();
-    while (iter.hasNext()) {
-      E obj = iter.next();
-      k = coeff * k + (obj == null ? 0 : obj.hashCode());
-      k = ~~k;
-    }
-    return k;
+    return Collections.hashCode(this);
   }
 
   public int indexOf(Object toFind) {

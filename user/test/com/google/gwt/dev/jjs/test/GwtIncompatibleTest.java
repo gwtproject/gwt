@@ -17,6 +17,7 @@ package com.google.gwt.dev.jjs.test;
 
 import static com.google.gwt.dev.jjs.test.gwtincompatible.ClassWithGwtIncompatibleMethod.gwtIncompatibleMethod;
 
+import com.google.gwt.dev.jjs.test.gwtincompatible.AbstractGwtIncompatibleClass;
 import com.google.gwt.dev.jjs.test.gwtincompatible.GwtIncompatible;
 import com.google.gwt.dev.jjs.test.gwtincompatible.GwtIncompatibleClass;
 import com.google.gwt.junit.client.GWTTestCase;
@@ -104,6 +105,13 @@ public class GwtIncompatibleTest extends GWTTestCase {
     assertNull(instance);
   }
 
+  public void testAbstractGwtIncompatibleReference() {
+    // Have a reference to a GwtIncompatibleClass
+    AbstractGwtIncompatibleClass instance = (AbstractGwtIncompatibleClass) null;
+
+    assertNull(instance);
+  }
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.CompilerSuite";
@@ -116,5 +124,36 @@ public class GwtIncompatibleTest extends GWTTestCase {
     assertEquals(-1,
         getAnonymousDummyBarWithAnonymousIncompatibleClass().getClassFooNbrConstructors());
     assertEquals(-1, new DifferentPackageAnnotations().getClassFooNbrConstructors());
+  }
+
+  @GwtIncompatible("Incompatible enum")
+  static enum GwtIncompatibleEnum {
+
+    VAL1("Text1"),
+    VAL2("Text2");
+
+    private final String key;
+
+    private GwtIncompatibleEnum(String key) {
+      this.key = key;
+    }
+
+    public String key() {
+      return key;
+    }
+
+    public String value() {
+      return System.getProperty(key);
+    }
+
+    @Override
+    public String toString() {
+      return key() + "=" + value();
+    }
+  }
+
+  public void testIncompatibleEnum()  {
+    GwtIncompatibleEnum gwtIncompatibleEnum = null;
+    assertNull(gwtIncompatibleEnum);
   }
 }

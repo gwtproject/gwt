@@ -17,12 +17,11 @@ package com.google.gwt.core.ext.soyc.coderef;
 
 import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
 import com.google.gwt.core.ext.linker.SyntheticArtifact;
-import com.google.gwt.core.ext.soyc.Range;
-import com.google.gwt.core.ext.soyc.SourceMapRecorderExt;
+import com.google.gwt.core.ext.soyc.SourceMapRecorder;
 import com.google.gwt.core.ext.soyc.coderef.EntityDescriptor.Fragment;
 import com.google.gwt.core.linker.SoycReportLinker;
 import com.google.gwt.dev.jjs.InternalCompilerException;
-import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.jjs.JsSourceMap;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
@@ -36,11 +35,10 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.json.JSONArray;
+import com.google.gwt.thirdparty.json.JSONException;
+import com.google.gwt.thirdparty.json.JSONObject;
 import com.google.gwt.util.tools.Utility;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -64,21 +62,22 @@ public class EntityRecorder {
   public static final String INITIAL_SEQUENCE = "initialSequence";
 
   public static List<SyntheticArtifact> makeSoycArtifacts(int permutationId,
-      List<Map<Range, SourceInfo>> sourceInfoMaps, JavaToJavaScriptMap jjsmap,
+      List<JsSourceMap> sourceInfoMaps, String sourceMapFilePrefix, JavaToJavaScriptMap jjsmap,
       SizeBreakdown[] sizeBreakdowns, DependencyGraphRecorder codeGraph, JProgram jprogram) {
 
-    EntityRecorder recorder = new EntityRecorder(sizeBreakdowns, permutationId);
+    List<SyntheticArtifact> artifacts = Lists.newArrayList();
     try {
+      EntityRecorder recorder = new EntityRecorder(sizeBreakdowns, permutationId);
       recorder.recordCodeReferences(codeGraph, sizeBreakdowns, jjsmap);
       recorder.recordFragments(jprogram);
-      // record source map with named ranges
-      recorder.toReturn.addAll(SourceMapRecorderExt.makeSourceMapArtifacts(
-          permutationId, sourceInfoMaps));
+      artifacts.addAll(recorder.toReturn);
+      artifacts.addAll(SourceMapRecorder.execWithJavaNames(permutationId, sourceInfoMaps,
+          sourceMapFilePrefix));
     } catch (Exception e) {
       throw new InternalCompilerException(e.toString(), e);
     }
 
-    return recorder.toReturn;
+    return artifacts;
   }
 
   private final List<SyntheticArtifact> toReturn = Lists.newArrayList();

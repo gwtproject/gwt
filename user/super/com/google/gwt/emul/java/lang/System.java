@@ -15,8 +15,12 @@
  */
 package java.lang;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArrayType;
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+
 import com.google.gwt.core.client.JsDate;
 import com.google.gwt.core.client.impl.Impl;
+import com.google.gwt.lang.Array;
 
 import java.io.PrintStream;
 
@@ -39,27 +43,22 @@ public final class System {
    */
   public static final PrintStream out = new PrintStream(null);
 
-  public static void arraycopy(Object src, int srcOfs, Object dest,
-      int destOfs, int len) {
-    if (src == null || dest == null) {
-      throw new NullPointerException();
-    }
+  public static void arraycopy(Object src, int srcOfs, Object dest, int destOfs, int len) {
+    checkNotNull(src, "src");
+    checkNotNull(dest, "dest");
 
     Class<?> srcType = src.getClass();
     Class<?> destType = dest.getClass();
-    if (!srcType.isArray() || !destType.isArray()) {
-      throw new ArrayStoreException("Must be array types");
-    }
+    checkArrayType(srcType.isArray(), "srcType is not an array");
+    checkArrayType(destType.isArray(), "destType is not an array");
 
     Class<?> srcComp = srcType.getComponentType();
     Class<?> destComp = destType.getComponentType();
-    if (!arrayTypeMatch(srcComp, destComp)) {
-      throw new ArrayStoreException("Array types must match");
-    }
+    checkArrayType(arrayTypeMatch(srcComp, destComp), "Array types don't match");
+
     int srclen = getArrayLength(src);
     int destlen = getArrayLength(dest);
-    if (srcOfs < 0 || destOfs < 0 || len < 0 || srcOfs + len > srclen
-        || destOfs + len > destlen) {
+    if (srcOfs < 0 || destOfs < 0 || len < 0 || srcOfs + len > srclen || destOfs + len > destlen) {
       throw new IndexOutOfBoundsException();
     }
     /*
@@ -86,7 +85,7 @@ public final class System {
         }
       }
     } else if (len > 0) {
-      nativeArraycopy(src, srcOfs, dest, destOfs, len);
+      Array.nativeArraycopy(src, srcOfs, dest, destOfs, len);
     }
   }
 
@@ -111,8 +110,13 @@ public final class System {
 
   public static int identityHashCode(Object o) {
     return (o == null) ? 0 : (!(o instanceof String)) ? Impl.getHashCode(o)
-        : String.HashCache.getHashCode((String) o);
+        : String.HashCache.getHashCode(unsafeCast(o));
   }
+
+  // TODO(goktug): replace unsafeCast with a real cast when the compiler can optimize it.
+  private static native String unsafeCast(Object string) /*-{
+    return string;
+  }-*/;
 
   public static native void setErr(PrintStream err) /*-{
     @java.lang.System::err = err;
@@ -136,35 +140,4 @@ public final class System {
   private static native int getArrayLength(Object array) /*-{
     return array.length;
   }-*/;
-
-  /**
-   * Copy an array using native Javascript. The destination array must be a real
-   * Java array (ie, already has the GWT type info on it) with enough capacity for the additional
-   * elements. No error checking is performed -- the caller is expected to have verified
-   * everything first.
-   *
-   * @param src source array for copy
-   * @param srcOfs offset into source array
-   * @param dest destination array for copy
-   * @param destOfs offset into destination array
-   * @param len number of elements to copy
-   */
-  private static native void nativeArraycopy(
-      Object src, int srcOfs, Object dest, int destOfs, int len) /*-{
-    // Work around function.prototype.apply call stack size limits.
-    // Performance: http://jsperf.com/java-system-arraycopy/2
-    if (src === dest) {
-      // copying to the same array, make a copy first
-      src = src.slice(srcOfs, srcOfs + len);
-      srcOfs = 0;
-    }
-    for (var batchStart = srcOfs, end = srcOfs + len; batchStart < end;) { // increment in block
-      var batchEnd = Math.min(batchStart + 10000, end);
-      len = batchEnd - batchStart;
-      Array.prototype.splice.apply(dest, [destOfs, len].concat(src.slice(batchStart, batchEnd)));
-      batchStart = batchEnd;
-      destOfs += len;
-    }
-  }-*/;
-
 }

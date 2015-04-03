@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "uz_Arab" locale.
@@ -43,7 +38,7 @@ public class DateTimeFormatInfoImpl_uz_Arab extends DateTimeFormatInfoImpl_uz {
 
   @Override
   public String dateFormatShort() {
-    return "yyyy/M/d";
+    return "y/M/d";
   }
 
   @Override
@@ -65,6 +60,56 @@ public class DateTimeFormatInfoImpl_uz_Arab extends DateTimeFormatInfoImpl_uz {
   @Override
   public int firstDayOfTheWeek() {
     return 6;
+  }
+
+  @Override
+  public String formatYear() {
+    return "G y";
+  }
+
+  @Override
+  public String formatYearMonthAbbrev() {
+    return "G y MMM";
+  }
+
+  @Override
+  public String formatYearMonthAbbrevDay() {
+    return "G y MMM d";
+  }
+
+  @Override
+  public String formatYearMonthFull() {
+    return "G y MMMM";
+  }
+
+  @Override
+  public String formatYearMonthFullDay() {
+    return "G y MMMM d";
+  }
+
+  @Override
+  public String formatYearMonthNum() {
+    return "GGGGG y-MM";
+  }
+
+  @Override
+  public String formatYearMonthNumDay() {
+    return "GGGGG y-MM-dd";
+  }
+
+  @Override
+  public String formatYearMonthWeekdayDay() {
+    return "G y MMM d, EEE";
+  }
+
+  @Override
+  public String formatYearQuarterFull() {
+    return "G y QQQQ";
+  }
+
+  @Override
+  public String formatYearQuarterShort() {
+    return "G y Q";
   }
 
   @Override
@@ -122,6 +167,26 @@ public class DateTimeFormatInfoImpl_uz_Arab extends DateTimeFormatInfoImpl_uz {
   }
 
   @Override
+  public String[] quartersFull() {
+    return new String[] {
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4"
+    };
+  }
+
+  @Override
+  public String[] quartersShort() {
+    return new String[] {
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4"
+    };
+  }
+
+  @Override
   public String timeFormatFull() {
     return "H:mm:ss (zzzz)";
   }
@@ -157,13 +222,13 @@ public class DateTimeFormatInfoImpl_uz_Arab extends DateTimeFormatInfoImpl_uz {
   @Override
   public String[] weekdaysNarrow() {
     return new String[] {
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
+        "S",
+        "M",
+        "T",
+        "W",
+        "T",
+        "F",
+        "S"
     };
   }
 

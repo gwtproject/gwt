@@ -20,6 +20,7 @@ import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.PropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -27,7 +28,6 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.i18n.client.LocaleInfo;
@@ -87,6 +87,7 @@ import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
@@ -141,6 +142,7 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
   private static final String KEY_RESERVED_PREFIXES = "CssResource.reservedClassPrefixes";
   private static final String KEY_SHARED_METHODS = "sharedMethods";
   private static final String KEY_STYLE = "CssResource.style";
+  private static final String KEY_ENABLE_GSS = "CssResource.enableGss";
 
   /**
    * This character must not appear in {@link #BASE32_CHARS}.
@@ -205,12 +207,6 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
     }
 
     return false;
-  }
-
-  public static void main(String[] args) {
-    for (int i = 0; i < 1000; i++) {
-      System.out.println(makeIdent(i));
-    }
   }
 
   /**
@@ -390,7 +386,7 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
      * so we want to append a trailing character to the end of the search in
      * case the obfuscated class name is exactly equal to one of the prefixes.
      */
-    String search = StringCase.toLower(target.toString()) + " ";
+    String search = target.toString().toLowerCase(Locale.ROOT) + " ";
     SortedSet<String> headSet = prefixes.headSet(search);
     if (!headSet.isEmpty()) {
       String prefix = headSet.last();
@@ -432,6 +428,8 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
   protected CssObfuscationStyle obfuscationStyle;
   private Counter classCounter;
   private boolean enableMerge;
+  private boolean gssEnabled;
+  private GssResourceGenerator gssResourceGenerator;
   private List<String> ignoredMethods = new ArrayList<String>();
   private Map<JClassType, Map<JMethod, String>> replacementsByClassAndMethod;
   private Map<JMethod, String> replacementsForSharedMethods;
@@ -440,6 +438,12 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
   @Override
   public String createAssignment(TreeLogger logger, ResourceContext context,
       JMethod method) throws UnableToCompleteException {
+
+    // if Gss is enabled, defer the call to the Gss generator.
+    if (gssEnabled) {
+      return gssResourceGenerator.createAssignment(logger, context, method);
+    }
+
     JClassType cssResourceSubtype = method.getReturnType().isInterface();
     assert cssResourceSubtype != null;
     CssStylesheet stylesheet = stylesheetMap.get(method);
@@ -459,6 +463,17 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
   @Override
   public void init(TreeLogger logger, ResourceContext context)
       throws UnableToCompleteException {
+
+    // if Gss is enabled, defer the call to the Gss generator.
+    if (checkIfGssEnabled(context, logger)) {
+      gssEnabled = true;
+      gssResourceGenerator = new GssResourceGenerator();
+      gssResourceGenerator.init(logger, context);
+      return;
+    }
+
+    gssEnabled = false;
+
     String classPrefix;
     try {
       PropertyOracle propertyOracle =
@@ -507,6 +522,12 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
       ClientBundleRequirements requirements, JMethod method)
       throws UnableToCompleteException {
 
+    // if Gss is enabled, defer the call to the Gss generator.
+    if (gssEnabled) {
+      gssResourceGenerator.prepare(logger, context, requirements, method);
+      return;
+    }
+
     if (method.getReturnType().isInterface() == null) {
       logger.log(TreeLogger.ERROR, "Return type must be an interface");
       throw new UnableToCompleteException();
@@ -518,11 +539,27 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
       throw new UnableToCompleteException();
     }
 
+    // At this point, gss is not enabled so we shouldn't try to compile a gss file.
+    ensureNoGssFile(resources, logger);
+
     // Create the AST and do a quick scan for requirements
     CssStylesheet sheet = GenerateCssAst.exec(logger, resources);
     checkSheet(logger, sheet);
     stylesheetMap.put(method, sheet);
     (new RequirementsCollector(logger, context.getRequirements())).accept(sheet);
+  }
+
+  private void ensureNoGssFile(URL[] resources, TreeLogger logger)
+      throws UnableToCompleteException {
+
+    for (URL stylesheet : resources) {
+      if (stylesheet.getFile().endsWith(".gss")) {
+        logger.log(Type.ERROR, "GSS is not enabled. Add the following line to your gwt.xml file " +
+            "to enable it: " +
+            "<set-configuration-property name=\"CssResource.enableGss\" value=\"true\" />");
+        throw new UnableToCompleteException();
+      }
+    }
   }
 
   protected void checkSheet(TreeLogger logger, CssStylesheet stylesheet)
@@ -595,7 +632,7 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
    * Builds a CSV file mapping obfuscated CSS class names to their qualified source name and
    * outputs it as a private build artifact.
    */
-  protected void outputCssMapArtifact(TreeLogger logger, ResourceContext context, JMethod method,
+  protected static void outputCssMapArtifact(TreeLogger logger, ResourceContext context, JMethod method,
       Map<JMethod, String> actualReplacements) {
     // There may be several css resources that have the same css resource subtype (e.g. CssResource)
     // so the qualified accessor method name is used for the unique output file name.
@@ -915,7 +952,7 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
           if (value.startsWith(".")) {
             value = value.substring(1);
           }
-          reservedPrefixes.add(StringCase.toLower(value));
+          reservedPrefixes.add(value.toLowerCase(Locale.ROOT));
         }
       } catch (BadPropertyValueException e) {
         // Do nothing. Unexpected, but we can live with it.
@@ -1186,5 +1223,23 @@ public class CssResourceGenerator extends AbstractCssResourceGenerator
     }
 
     writeSimpleGetter(toImplement, returnExpr, sw);
+  }
+
+  private boolean checkIfGssEnabled(ResourceContext context, TreeLogger logger)
+      throws UnableToCompleteException {
+    try {
+      PropertyOracle propertyOracle =
+          context.getGeneratorContext().getPropertyOracle();
+
+      ConfigurationProperty enableGssProp =
+          propertyOracle.getConfigurationProperty(KEY_ENABLE_GSS);
+      String enableGss = enableGssProp.getValues().get(0);
+
+      return "true".equals(enableGss);
+
+    } catch (BadPropertyValueException ex) {
+      logger.log(Type.ERROR, "Unable to determine if GSS need to be used");
+      throw new UnableToCompleteException();
+    }
   }
 }

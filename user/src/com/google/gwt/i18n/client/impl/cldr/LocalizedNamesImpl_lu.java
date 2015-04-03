@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=lu
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "lu" locale.
@@ -209,7 +204,6 @@ public class LocalizedNamesImpl_lu extends LocalizedNamesImpl {
         "NG",
         "NI",
         "NO",
-        "CS",
         "ES",
         "VA",
         "NU",
@@ -287,6 +281,7 @@ public class LocalizedNamesImpl_lu extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "YE",
         "ZM",
         "NZ",
@@ -337,7 +332,6 @@ public class LocalizedNamesImpl_lu extends LocalizedNamesImpl {
     namesMap.put("CN", "Shine");
     namesMap.put("CO", "Kolombi");
     namesMap.put("CR", "Kositarika");
-    namesMap.put("CS", "Nsebi ne Montenegro");
     namesMap.put("CU", "Kuba");
     namesMap.put("CV", "Lutanda lua Kapevele");
     namesMap.put("CY", "Shipele");
@@ -549,7 +543,6 @@ public class LocalizedNamesImpl_lu extends LocalizedNamesImpl {
         "CN": "Shine",
         "CO": "Kolombi",
         "CR": "Kositarika",
-        "CS": "Nsebi ne Montenegro",
         "CU": "Kuba",
         "CV": "Lutanda lua Kapevele",
         "CY": "Shipele",

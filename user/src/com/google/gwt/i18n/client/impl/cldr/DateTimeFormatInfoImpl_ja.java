@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.client.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "ja" locale.
@@ -46,12 +41,12 @@ public class DateTimeFormatInfoImpl_ja extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "yyyy/MM/dd";
+    return "y/MM/dd";
   }
 
   @Override
   public String dateFormatShort() {
-    return "yyyy/MM/dd";
+    return "y/MM/dd";
   }
 
   @Override
@@ -122,7 +117,7 @@ public class DateTimeFormatInfoImpl_ja extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatMonthFullWeekdayDay() {
-    return "M月d日(EEEE)";
+    return "M月d日EEEE";
   }
 
   @Override
@@ -172,7 +167,7 @@ public class DateTimeFormatInfoImpl_ja extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearQuarterFull() {
-    return "y/QQQQ";
+    return "yQQQQ";
   }
 
   @Override

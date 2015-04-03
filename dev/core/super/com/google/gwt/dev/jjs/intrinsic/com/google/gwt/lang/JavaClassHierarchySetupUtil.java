@@ -22,10 +22,21 @@ import com.google.gwt.core.client.JavaScriptObject;
  * JavaScript.
  */
 public class JavaClassHierarchySetupUtil {
-  /*
-  * Holds a map from typeIds to prototype objects.
-  */
+  /**
+   * Holds a map from typeIds to prototype objects.
+   */
   private static JavaScriptObject prototypesByTypeId = JavaScriptObject.createObject();
+
+  /**
+   * Defines a hidden constructor for closure using the prototype set to globalTemp (i.e. '_'). The
+   * constructor is intentionally hidden as Closure -for some unknown reason right now- having
+   * trouble dealing with an explicit one and increases code size.
+   */
+  public static native void defineHiddenClosureConstructor()/*-{
+    function F() {};
+    F.prototype = _;
+    return F;
+  }-*/;
 
   /**
    * If not already created it creates the prototype for the class and stores it in
@@ -37,12 +48,15 @@ public class JavaClassHierarchySetupUtil {
    * Finally adds the class literal if it was created before the call to {@code defineClass}.
    * Class literals might be created before the call to {@code defineClass} if they are in separate
    * code-split fragments. In that case Class.createFor* methods will have created a placeholder and
-   * stored in {@code prototypesByTypeId} the class literal.<p></p>
-   *
-   * As a prerequisite if superSeed is not null, it is assumed that defineClass for the supertype
+   * stored in {@code prototypesByTypeId} the class literal.
+   * <p>
+   * As a prerequisite if superTypeId is not null, it is assumed that defineClass for the supertype
    * has already been called.
+   * <p>
+   * This method has the effect of assigning the newly created prototype to the global temp variable
+   * '_'.
    */
-  public static native JavaScriptObject defineClass(JavaScriptObject typeId,
+  public static native void defineClass(JavaScriptObject typeId,
       JavaScriptObject superTypeId, JavaScriptObject castableTypeMap) /*-{
     // Setup aliases for (horribly long) JSNI references.
     var prototypesByTypeId = @com.google.gwt.lang.JavaClassHierarchySetupUtil::prototypesByTypeId;
@@ -60,6 +74,13 @@ public class JavaClassHierarchySetupUtil {
     } else {
       _ = prototypesByTypeId[typeId]  = (!superTypeId) ? {} : createSubclassPrototype(superTypeId);
       _.@java.lang.Object::castableTypeMap = castableTypeMap;
+      _.constructor = _;
+      if (!superTypeId) {
+        // Set the typeMarker on java.lang.Object's prototype, implicitly setting it for all
+        // Java subclasses (String and Arrays have special handling in Cast and Array respectively).
+        _.@java.lang.Object::typeMarker =
+            @JavaClassHierarchySetupUtil::typeMarkerFn(*);
+      }
     }
     for (var i = 3; i < arguments.length; ++i) {
       // Assign the type prototype to each constructor.
@@ -71,17 +92,53 @@ public class JavaClassHierarchySetupUtil {
   }-*/;
 
   /**
+   * Like defineClass() but second parameter is a native JS prototype reference.
+   */
+  public static native void defineClassWithPrototype(int typeId,
+      JavaScriptObject jsSuperClass, JavaScriptObject castableTypeMap) /*-{
+      // Setup aliases for (horribly long) JSNI references.
+      var prototypesByTypeId = @com.google.gwt.lang.JavaClassHierarchySetupUtil::prototypesByTypeId;
+
+      var maybeGetClassLiteralFromPlaceHolder =  @com.google.gwt.lang.JavaClassHierarchySetupUtil::
+          maybeGetClassLiteralFromPlaceHolder(Lcom/google/gwt/core/client/JavaScriptObject;);
+      // end of alias definitions.
+
+      var prototype = prototypesByTypeId[typeId];
+      var clazz = maybeGetClassLiteralFromPlaceHolder(prototype);
+
+      if (prototype && !clazz) {
+          // not a placeholder entry setup by Class.setClassLiteral
+          _ = prototype;
+      } else {
+          var superPrototype = jsSuperClass && jsSuperClass.prototype || {};
+          _ = prototypesByTypeId[typeId] =  @com.google.gwt.lang.JavaClassHierarchySetupUtil::
+              portableObjCreate(Lcom/google/gwt/core/client/JavaScriptObject;)(superPrototype);
+          _.@java.lang.Object::castableTypeMap = castableTypeMap;
+      }
+      for (var i = 3; i < arguments.length; ++i) {
+          // Assign the type prototype to each constructor.
+          arguments[i].prototype = _;
+      }
+      if (clazz) {
+          _.@java.lang.Object::___clazz = clazz;
+      }
+  }-*/;
+
+  private static native JavaScriptObject portableObjCreate(JavaScriptObject obj) /*-{
+    function F() {};
+    F.prototype = obj || {};
+    return new F();
+  }-*/;
+
+  /**
    * Create a subclass prototype.
    */
   public static native JavaScriptObject createSubclassPrototype(JavaScriptObject superTypeId) /*-{
     // Setup aliases for (horribly long) JSNI references.
     var prototypesByTypeId = @com.google.gwt.lang.JavaClassHierarchySetupUtil::prototypesByTypeId;
     // end of alias definitions.
-
-    // Don't name it just constructor as it does not work!
-    var constructorFn = function() {}
-    constructorFn.prototype = prototypesByTypeId[superTypeId];
-    return new constructorFn();
+    return @com.google.gwt.lang.JavaClassHierarchySetupUtil::
+        portableObjCreate(Lcom/google/gwt/core/client/JavaScriptObject;)(prototypesByTypeId[superTypeId]);
   }-*/;
 
   /**
@@ -92,6 +149,109 @@ public class JavaClassHierarchySetupUtil {
     // TODO(rluble): Relies on Class.createFor*() storing the class literal wrapped as an array
     // to distinguish it from an actual prototype.
     return (entry instanceof Array) ? entry[0] : null;
+  }-*/;
+
+  /**
+   * Creates a JS namespace to attach exported classes to.
+   * @param namespace a dotted js namespace string
+   * @return a nested object literal representing the namespace
+   */
+  public static native JavaScriptObject provide(JavaScriptObject namespace) /*-{
+      var cur = $wnd;
+
+      if (namespace === '') {
+          return cur;
+      }
+
+      // borrowed from Closure's base.js
+      var parts = namespace.split('.');
+
+      // Internet Explorer exhibits strange behavior when throwing errors from
+      // methods externed in this manner.  See the testExportSymbolExceptions in
+      // base_test.html for an example.
+      if (!(parts[0] in cur) && cur.execScript) {
+          cur.execScript('var ' + parts[0]);
+      }
+
+      // Certain browsers cannot parse code in the form for((a in b); c;);
+      // This pattern is produced by the JSCompiler when it collapses the
+      // statement above into the conditional loop below. To prevent this from
+      // happening, use a for-loop and reserve the init logic as below.
+
+      // Parentheses added to eliminate strict JS warning in Firefox.
+      for (var part; parts.length && (part = parts.shift());) {
+          if (cur[part]) {
+              cur = cur[part];
+          } else {
+              cur = cur[part] = {};
+          }
+      }
+      return cur;
+  }-*/;
+
+  /**
+   * Create a function that invokes the specified method reference.
+   */
+  public static native JavaScriptObject makeBridgeMethod(
+      JavaScriptObject methodRef, boolean returnsLong, boolean[] longParams) /*-{
+    return function() {
+      var args = [];
+      for (var i = 0; i < arguments.length; i++) {
+        var maybeCoerced = @JavaClassHierarchySetupUtil::maybeCoerceToLong(Ljava/lang/Object;Z)(arguments[i], longParams[i]);
+        args.push(maybeCoerced);
+      }
+      var result = methodRef.apply(this, args);
+      return returnsLong ? @JavaClassHierarchySetupUtil::maybeCoerceFromLong(Ljava/lang/Object;Z)(result, returnsLong) : result;
+    };
+  }-*/;
+
+  /**
+   * Create a function that applies the specified samMethod on itself, and whose __proto__ points to
+   * <code>instance</code>.
+   */
+  public static native JavaScriptObject makeLambdaFunction(JavaScriptObject samMethod,
+      JavaScriptObject instance) /*-{
+    var lambda = function() { return samMethod.apply(lambda, arguments); }
+    lambda.__proto__ = instance;
+    return lambda;
+  }-*/;
+
+  /**
+   * If the parameter o is a Javascript object, return the bridge method reference,
+   * otherwise return the nonbridge reference.
+   * @param o an instance object we want to invoke a method on
+   * @param bridgeRef a reference to an exported, bridgereference or jstype method
+   * @param nonbridgeRef the internal reference to Java obfuscated method
+   * @return
+   */
+  public static native boolean trampolineBridgeMethod(Object o, Object bridgeRef,
+      Object nonbridgeRef) /*-{
+    return @com.google.gwt.lang.Cast::isJavaScriptObject(Ljava/lang/Object;)(o)
+        ? bridgeRef : nonbridgeRef;
+  }-*/;
+
+  /**
+   * Converts an input object (LongEmul) to a double, otherwise return the value.
+   */
+  private static native Object maybeCoerceToLong(Object o, boolean isLong) /*-{
+    if (!isLong) {
+      return o;
+    }
+    if (typeof(o) == 'number') {
+      return @com.google.gwt.lang.LongLib::fromDouble(D)(o);
+    }
+    return o;
+  }-*/;
+
+  /**
+   * Convert a double to a long if a long is expected.
+   */
+  private static native Object maybeCoerceFromLong(Object o, boolean isLong) /*-{
+      if (!isLong) {
+          return o;
+      }
+
+      return @com.google.gwt.lang.LongLib::toDouble(Lcom/google/gwt/lang/LongLibBase$LongEmul;)(o);
   }-*/;
 
   /**
@@ -113,5 +273,22 @@ public class JavaClassHierarchySetupUtil {
     var prototypeForTypeId =
         @com.google.gwt.lang.JavaClassHierarchySetupUtil::prototypesByTypeId[typeId];
     return prototypeForTypeId;
+  }-*/;
+
+  /**
+   * Marker function. All Java Objects (except Strings) have a typeMarker field pointing to
+   * this function.
+   */
+  static native void typeMarkerFn() /*-{
+  }-*/;
+
+  /**
+   * A global noop function. Replaces clinits after execution.
+   */
+  static native void emptyMethod() /*-{
+  }-*/;
+
+  static native JavaScriptObject uniqueId(String id) /*-{
+    return jsinterop.closure.getUniqueId(id);
   }-*/;
 }

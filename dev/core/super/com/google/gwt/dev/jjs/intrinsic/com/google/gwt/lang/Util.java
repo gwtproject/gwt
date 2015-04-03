@@ -16,6 +16,7 @@
 package com.google.gwt.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.impl.DoNotInline;
 
 /**
  * This class is used to access the private, GWT-specific
@@ -27,16 +28,22 @@ final class Util {
     return o.@java.lang.Object::castableTypeMap;
   }-*/;
 
-  static native JavaScriptObject getTypeMarker(Object o) /*-{
-    return o.@java.lang.Object::typeMarker;
+  static native void setTypeMarker(Object o) /*-{
+      o.@java.lang.Object::typeMarker =
+          @com.google.gwt.lang.JavaClassHierarchySetupUtil::typeMarkerFn(*);
   }-*/;
 
-  static native void setTypeMarker(Object o, JavaScriptObject object) /*-{
-      return o.@java.lang.Object::typeMarker = object;
+  static native boolean hasTypeMarker(Object o) /*-{
+    return o.@java.lang.Object::typeMarker ===
+        @com.google.gwt.lang.JavaClassHierarchySetupUtil::typeMarkerFn(*);
   }-*/;
 
   static native void setCastableTypeMap(Object o, JavaScriptObject castableTypeMap) /*-{
     o.@java.lang.Object::castableTypeMap = castableTypeMap;
   }-*/;
 
+  @DoNotInline
+  public static String makeEnumName(String enumName) {
+    return enumName;
+  }
 }

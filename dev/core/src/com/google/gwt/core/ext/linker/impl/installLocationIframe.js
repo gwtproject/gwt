@@ -20,9 +20,10 @@ function getInstallLocationDoc() {
   return frameDoc;
 }
 
+// This function is left for compatibility
+// and may be used by custom linkers
 function getInstallLocation() {
-  setupInstallLocation();
-  return frameDoc.getElementsByTagName('body')[0];
+  return getInstallLocationDoc().body;
 }
 
 function setupInstallLocation() {

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -16,7 +16,6 @@
 package com.google.gwt.uibinder.test.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ParagraphElement;
@@ -46,6 +45,8 @@ import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.ValueLabel;
 import com.google.gwt.user.client.ui.Widget;
 
+import java.util.Locale;
+
 /**
  * Functional test of UiBinder.
  */
@@ -74,8 +75,8 @@ public class UiBinderTest extends GWTTestCase {
    * <p>
    * The fields are {@code final} and we test that they've correctly been
    * modified by the template.
-   * 
-   * @see http://code.google.com/p/google-web-toolkit/issues/detail?id=7740
+   *
+   * @see "http://code.google.com/p/google-web-toolkit/issues/detail?id=7740"
    */
   public void testProvidedWidgetWithCustomInitializer() {
     // Custom parser: should use the provided header, as the one from the
@@ -91,15 +92,15 @@ public class UiBinderTest extends GWTTestCase {
   }
 
   public void testTableWithColumns() {
-    assertEquals("col", StringCase.toLower(domUi.narrowColumn.getTagName()));
-    assertEquals("tr", StringCase.toLower(domUi.tr.getTagName()));
-    assertEquals("th", StringCase.toLower(domUi.th1.getTagName()));
-    assertEquals("th", StringCase.toLower(domUi.th2.getTagName()));
+    assertEquals("col", domUi.narrowColumn.getTagName().toLowerCase(Locale.ROOT));
+    assertEquals("tr", domUi.tr.getTagName().toLowerCase(Locale.ROOT));
+    assertEquals("th", domUi.th1.getTagName().toLowerCase(Locale.ROOT));
+    assertEquals("th", domUi.th2.getTagName().toLowerCase(Locale.ROOT));
   }
 
   public void testTableWithExplicitTbody() {
-    assertEquals("tbody", StringCase.toLower(domUi.tbody.getTagName()));
-    assertEquals("th", StringCase.toLower(domUi.th4.getTagName()));
+    assertEquals("tbody", domUi.tbody.getTagName().toLowerCase(Locale.ROOT));
+    assertEquals("th", domUi.th4.getTagName().toLowerCase(Locale.ROOT));
   }
 
   public void testAutoboxingFieldRef() {
@@ -133,6 +134,11 @@ public class UiBinderTest extends GWTTestCase {
     assertEquals("I", elm.getTagName());
   }
 
+  public void testElementWithTagName() {
+    Element elem = widgetUi.myElementWithTagName;
+    assertEquals("ELEMENT-WITH-TAGNAME", elem.getTagName());
+  }
+
   public void testAddStyleNamesAndDebugId() {
     Label l = widgetUi.lblDebugId;
     assertEquals("gwt-debug-joe", l.getElement().getId());
@@ -159,6 +165,7 @@ public class UiBinderTest extends GWTTestCase {
   public void testBraceEscaping() {
     assertEquals("blah di blah {foo: \"bar\"} di blah",
         widgetUi.bracedParagraph.getAttribute("fnord"));
+    assertEquals("{{blah in blah}}", widgetUi.bracedParagraph.getAttribute("doubleMustache"));
   }
 
   public void testBundle() {
@@ -276,11 +283,11 @@ public class UiBinderTest extends GWTTestCase {
   public void testCustomButtonParser() {
     // .toLowerCase normalization to keep IE happy
     assertEquals("<b>click me</b>",
-        StringCase.toLower(widgetUi.pushButton.getUpFace().getHTML()));
+        widgetUi.pushButton.getUpFace().getHTML().toLowerCase(Locale.ROOT));
     assertTrue(widgetUi.pushButton.getUpHoveringFace().getHTML().contains(
         ">Click ME!<"));
     assertEquals("<b>click me!</b>",
-        StringCase.toLower(widgetUi.pushButton.getUpHoveringFace().getHTML()));
+        widgetUi.pushButton.getUpHoveringFace().getHTML().toLowerCase(Locale.ROOT));
     // Can't test the images at all :-P
   }
 
@@ -298,13 +305,13 @@ public class UiBinderTest extends GWTTestCase {
   public void suppressedForSafari3Fail_testDomTextNoMessageWithFunnyChars() {
     ParagraphElement p = widgetUi.funnyCharsParagraph;
     // WebKit does \n replace thing, so let's do it everywhere
-    String t = StringCase.toLower(p.getInnerHTML().replace("\n", " "));
+    String t = p.getInnerHTML().replace("\n", " ").toLowerCase(Locale.ROOT);
     String expected = "Templates can be marked up for <b>localization</b>, which presents alls "
         + "kinds of exciting opportunities for bugs related to character escaping. "
         + "Consider these funny characters \\ \" \" ' ' &amp; &lt; &gt; &gt; { }, and "
         + "the various places they might make your life miserable, like this "
         + "untranslated paragraph.";
-    expected = StringCase.toLower(expected);
+    expected = expected.toLowerCase(Locale.ROOT);
     assertEquals(expected, t);
   }
 
@@ -475,12 +482,12 @@ public class UiBinderTest extends GWTTestCase {
     // assertEquals("Widget has top", 20, p.getWidgetTop(w));
     // }
   }
-  
+
   public void testNamedFrame() {
     NamedFrame p = widgetUi.myNamedFrame;
     assertNotNull("NamedFrame exists", p);
   }
-  
+
   public void testTree() {
     Tree tree = widgetUi.myTree;
     TreeItem complexItem = widgetUi.myTreeItemC;
@@ -611,7 +618,7 @@ public class UiBinderTest extends GWTTestCase {
   }
 
   public void suppressForIEfail_testBizarrelyElementedWidgets() {
-    assertInOrder(StringCase.toLower(widgetUi.widgetCrazyTable.getInnerHTML()),
+    assertInOrder(widgetUi.widgetCrazyTable.getInnerHTML().toLowerCase(Locale.ROOT),
         "<td>they have been known</td>", "<td>to write widgets</td>",
         "<td>that masquerade</td>", "<td>as table cells,</td>",
         "<td>just like these.</td>", "<td>burma shave</td>");
@@ -635,30 +642,49 @@ public class UiBinderTest extends GWTTestCase {
     assertEquals("middle",
       widgetUi.myHorizontalPanel.getVerticalAlignment().getVerticalAlignString());
 
-    final String innerHtml = 
+    final String innerHtml =
       widgetUi.myHorizontalPanel.getElement().getInnerHTML();
     assertInOrder(innerHtml, "vertical-align: middle",
         "a stackpanel");
-    
+
     final String innerHtml2 = innerHtml.replace("\"", "");
     assertInOrder(innerHtml2, "align=left", "a stackpanel");
   }
-  
+
   public void testUrlResource() {
     assertEquals(new FakeBundle().aUrl(), widgetUi.myImage.getSrc());
   }
 
   public void testUiTextWithSafeHtml() {
     assertEquals("<b>this text should be bold!</b>",
-        StringCase.toLower(widgetUi.htmlWithComputedSafeHtml.getHTML()));
+        widgetUi.htmlWithComputedSafeHtml.getHTML().toLowerCase(Locale.ROOT));
     assertEquals("&lt;b&gt;this text won't be bold!&lt;/b&gt;",
-        StringCase.toLower(widgetUi.htmlWithComputedText.getHTML()).replaceAll(">", "&gt;"));
+        widgetUi.htmlWithComputedText.getHTML().toLowerCase(Locale.ROOT).replaceAll(">", "&gt;"));
     assertEquals("<b>this text won't be bold!</b>",
-        StringCase.toLower(widgetUi.labelWithComputedText.getText()));
+        widgetUi.labelWithComputedText.getText().toLowerCase(Locale.ROOT));
   }
 
   public void testFlowPanelWithTag() {
     assertEquals("P", widgetUi.flowPanelWithTag.getElement().getTagName());
+  }
+
+  public void testEmbeddedSvgMimeType() {
+    String url = widgetUi.embeddedSvgData.getSafeUri().asString();
+    if (url.startsWith("data:")) {
+      assertTrue(url.startsWith("data:image/svg+xml"));
+    }
+  }
+
+  public void testLinkedSvgNotEmbedded() {
+    String url = widgetUi.linkedSvgData.getSafeUri().asString();
+    assertFalse(url.startsWith("data:"));
+    assertTrue(url, url.endsWith(".svg"));
+  }
+
+  public void testIsWidget() {
+    FooIsWidget isWidget = widgetUi.fooIsWidget;
+    assertEquals("gwt-Label " + widgetUi.myStyle.menuBar(), isWidget.asWidget().getStyleName());
+    assertEquals(false, isWidget.isVisible());
   }
 
   /**
@@ -667,12 +693,12 @@ public class UiBinderTest extends GWTTestCase {
    * IE's habit of returning capitalized DOM elements.
    */
   private void assertInOrder(String body, String... expected) {
-    body = StringCase.toLower(body);
+    body = body.toLowerCase(Locale.ROOT);
     int lastIndex = 0;
     String lastExpected = "";
 
     for (String next : expected) {
-      next = StringCase.toLower(next);
+      next = next.toLowerCase(Locale.ROOT);
       int index = body.indexOf(next);
       assertTrue(body + " should contain " + next, index > -1);
       assertTrue("Expect " + next + " after " + lastExpected, index > lastIndex);

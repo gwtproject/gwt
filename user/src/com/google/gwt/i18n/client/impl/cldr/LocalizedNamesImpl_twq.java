@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "twq" locale.
@@ -236,7 +231,6 @@ public class LocalizedNamesImpl_twq extends LocalizedNamesImpl {
         "SL",
         "SC",
         "SN",
-        "CS",
         "SH",
         "KN",
         "LC",
@@ -287,6 +281,7 @@ public class LocalizedNamesImpl_twq extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "YE",
         "ZM",
         "NZ",
@@ -339,7 +334,6 @@ public class LocalizedNamesImpl_twq extends LocalizedNamesImpl {
     namesMap.put("CN", "Šiin");
     namesMap.put("CO", "Kolombi");
     namesMap.put("CR", "Kosta rika");
-    namesMap.put("CS", "Serbi nda Montenegro");
     namesMap.put("CU", "Kuuba");
     namesMap.put("CV", "Kapuver gungey");
     namesMap.put("CY", "Šiipur");
@@ -544,7 +538,6 @@ public class LocalizedNamesImpl_twq extends LocalizedNamesImpl {
         "CN": "Šiin",
         "CO": "Kolombi",
         "CR": "Kosta rika",
-        "CS": "Serbi nda Montenegro",
         "CU": "Kuuba",
         "CV": "Kapuver gungey",
         "CY": "Šiipur",

@@ -1,11 +1,11 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -24,13 +24,6 @@ import java.util.List;
  */
 public final class JsFunction extends JsLiteral implements HasName {
 
-  private static void trace(String title, String code) {
-    System.out.println("---------------------------");
-    System.out.println(title + ":");
-    System.out.println("---------------------------");
-    System.out.println(code);
-  }
-
   protected JsBlock body;
   protected final List<JsParameter> params = new ArrayList<JsParameter>();
   protected final JsScope scope;
@@ -39,8 +32,6 @@ public final class JsFunction extends JsLiteral implements HasName {
   private boolean fromJava;
   private JsFunction impliedExecute;
   private JsName name;
-  private boolean trace = false;
-  private boolean traceFirst = true;
 
   /**
    * Creates an anonymous function.
@@ -183,31 +174,12 @@ public final class JsFunction extends JsLiteral implements HasName {
     }
   }
 
-  public void setTrace() {
-    this.trace = true;
-  }
-
   @Override
   public void traverse(JsVisitor v, JsContext ctx) {
-    String before = null;
-    if (trace && v instanceof JsModVisitor) {
-      before = this.toSource();
-      if (traceFirst) {
-        traceFirst = false;
-        trace("SCRIPT INITIAL", before);
-      }
-    }
     if (v.visit(this, ctx)) {
       v.acceptWithInsertRemove(params);
       body = v.accept(body);
     }
     v.endVisit(this, ctx);
-    if (trace && v instanceof JsModVisitor) {
-      String after = this.toSource();
-      if (!after.equals(before)) {
-        String title = v.getClass().getSimpleName();
-        trace(title, after);
-      }
-    }
   }
 }

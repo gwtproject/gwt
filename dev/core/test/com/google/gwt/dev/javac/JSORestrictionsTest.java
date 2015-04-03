@@ -19,6 +19,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.javac.testing.impl.StaticJavaResource;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.util.UnitTestTreeLogger;
+import com.google.gwt.dev.util.arg.SourceLevel;
 
 import junit.framework.TestCase;
 
@@ -30,7 +31,7 @@ import java.util.Collections;
 public class JSORestrictionsTest extends TestCase {
 
   public void testBaseClassFullyImplements() {
-    StringBuffer goodCode = new StringBuffer();
+    StringBuilder goodCode = new StringBuilder();
     goodCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     goodCode.append("public class Buggy {\n");
     goodCode.append("  static interface IntfA {\n");
@@ -67,7 +68,7 @@ public class JSORestrictionsTest extends TestCase {
     * should be allowed.
     */
    public void testDiamondInheritance() {
-     StringBuffer goodCode = new StringBuffer();
+     StringBuilder goodCode = new StringBuilder();
      goodCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
      goodCode.append("public class Buggy {\n");
      goodCode.append("  public interface Interface {\n");
@@ -87,7 +88,7 @@ public class JSORestrictionsTest extends TestCase {
    }
 
   public void testFinalClass() {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     code.append("final public class Buggy extends JavaScriptObject {\n");
     code.append("  int nonfinal() { return 10; }\n");
@@ -98,7 +99,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testImplementsInterfaces() {
-    StringBuffer goodCode = new StringBuffer();
+    StringBuilder goodCode = new StringBuilder();
     goodCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     goodCode.append("public class Buggy {\n");
     goodCode.append("  static interface Squeaks {\n");
@@ -122,7 +123,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testInstanceField() {
-    StringBuffer buggyCode = new StringBuffer();
+    StringBuilder buggyCode = new StringBuilder();
     buggyCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     buggyCode.append("public class Buggy extends JavaScriptObject {\n");
     buggyCode.append("  protected Buggy() { }\n");
@@ -134,7 +135,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testMultiArgConstructor() {
-    StringBuffer buggyCode = new StringBuffer();
+    StringBuilder buggyCode = new StringBuilder();
     buggyCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     buggyCode.append("public final class Buggy extends JavaScriptObject {\n");
     buggyCode.append("  protected Buggy(int howBuggy) { }\n");
@@ -145,7 +146,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testMultipleImplementations() {
-    StringBuffer buggyCode = new StringBuffer();
+    StringBuilder buggyCode = new StringBuilder();
     buggyCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     buggyCode.append("public class Buggy {\n");
     buggyCode.append("  static interface Squeaks {\n");
@@ -171,7 +172,7 @@ public class JSORestrictionsTest extends TestCase {
    * implementations are in a common base class, that should be allowed.
    */
   public void testMultipleImplementationsOk() {
-    StringBuffer goodCode = new StringBuffer();
+    StringBuilder goodCode = new StringBuilder();
     goodCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     goodCode.append("public class Buggy {\n");
     goodCode.append("  public interface CommonInterface {\n");
@@ -197,7 +198,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testNew() {
-    StringBuffer buggyCode = new StringBuffer();
+    StringBuilder buggyCode = new StringBuilder();
     buggyCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     buggyCode.append("public class Buggy {\n");
     buggyCode.append("  public static class MyJSO extends JavaScriptObject { \n");
@@ -211,7 +212,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testNoAnnotationOnInterfaceSubtype() {
-    StringBuffer goodCode = new StringBuffer();
+    StringBuilder goodCode = new StringBuilder();
     goodCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     goodCode.append("public class Buggy {\n");
     goodCode.append("  static interface Squeaks {\n");
@@ -225,7 +226,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testNoConstructor() {
-    StringBuffer buggyCode = new StringBuffer();
+    StringBuilder buggyCode = new StringBuilder();
     buggyCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     buggyCode.append("public class Buggy extends JavaScriptObject {\n");
     buggyCode.append("}\n");
@@ -236,7 +237,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testNonEmptyConstructor() {
-    StringBuffer buggyCode = new StringBuffer();
+    StringBuilder buggyCode = new StringBuilder();
     buggyCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     buggyCode.append("public class Buggy extends JavaScriptObject {\n");
     buggyCode.append("  protected Buggy() { while(true) { } }\n");
@@ -247,7 +248,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testNonFinalMethod() {
-    StringBuffer buggyCode = new StringBuffer();
+    StringBuilder buggyCode = new StringBuilder();
     buggyCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     buggyCode.append("public class Buggy extends JavaScriptObject {\n");
     buggyCode.append("  int nonfinal() { return 10; }\n");
@@ -259,7 +260,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testNonJsoInterfaceExtension() {
-    StringBuffer goodCode = new StringBuffer();
+    StringBuilder goodCode = new StringBuilder();
     goodCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     goodCode.append("public class Buggy {\n");
     goodCode.append("  static interface Squeaks {\n");
@@ -283,7 +284,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testNonProtectedConstructor() {
-    StringBuffer buggyCode = new StringBuffer();
+    StringBuilder buggyCode = new StringBuilder();
     buggyCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     buggyCode.append("public class Buggy extends JavaScriptObject {\n");
     buggyCode.append("  Buggy() { }\n");
@@ -294,7 +295,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testNonStaticInner() {
-    StringBuffer buggyCode = new StringBuffer();
+    StringBuilder buggyCode = new StringBuilder();
     buggyCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     buggyCode.append("public class Buggy {\n");
     buggyCode.append("  public class MyJSO extends JavaScriptObject {\n");
@@ -307,7 +308,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testNoOverride() {
-    StringBuffer buggyCode = new StringBuffer();
+    StringBuilder buggyCode = new StringBuilder();
     buggyCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     buggyCode.append("public class Buggy extends JavaScriptObject {\n");
     buggyCode.append("  protected Buggy() { }\n");
@@ -319,7 +320,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testPrivateMethod() {
-    StringBuffer code = new StringBuffer();
+    StringBuilder code = new StringBuilder();
     code.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     code.append("public class Buggy extends JavaScriptObject {\n");
     code.append("  private int nonfinal() { return 10; }\n");
@@ -330,7 +331,7 @@ public class JSORestrictionsTest extends TestCase {
   }
 
   public void testTagInterfaces() {
-    StringBuffer goodCode = new StringBuffer();
+    StringBuilder goodCode = new StringBuilder();
     goodCode.append("import com.google.gwt.core.client.JavaScriptObject;\n");
     goodCode.append("public class Buggy {\n");
     goodCode.append("  static interface Tag {}\n");
@@ -355,12 +356,509 @@ public class JSORestrictionsTest extends TestCase {
     shouldGenerateNoError(goodCode);
   }
 
+  public void testJsExport() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    goodCode.append("public class Buggy {\n");
+    goodCode.append("  @JsExport public static final String field = null;\n");
+    goodCode.append("  @JsExport public static void method() {}\n");
+    goodCode.append("  public interface Foo {\n");
+    goodCode.append("    @JsExport String field1 = null;\n");
+    goodCode.append("    interface ImplicitlyPublicInner {\n");
+    goodCode.append("      @JsExport String field2 = null;\n");
+    goodCode.append("    }\n");
+    // TODO: enable after java 8 becomes default
+    // goodCode.append("@JsExport static void method1() {}\n");
+    goodCode.append("  }\n");
+    goodCode.append("}\n");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  public void testJsExportOnClass() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    goodCode.append("@JsExport public class Buggy {}");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  public void testJsExportOnInterface() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    goodCode.append("@JsExport public interface Buggy {}");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  public void testJsExportOnEnum() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    goodCode.append("@JsExport enum Buggy { TEST1, TEST2;}");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  public void testJsExportNotOnEnumeration() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("public enum Buggy {\n");
+    buggyCode.append(" @JsExport TEST1, TEST2;\n;");
+    buggyCode.append("}");
+
+    shouldGenerateError(buggyCode, "Line 3: " + JSORestrictionsChecker.ERR_JSEXPORT_ON_ENUMERATION);
+  }
+
+  public void testJsExportOnConstructors() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    goodCode.append("public class Buggy {\n");
+    // A constructor JsExported without explicit symbol is fine here.
+    // Leave it to NameConflictionChecker.
+    goodCode.append("  @JsExport public Buggy() { }\n");
+    goodCode.append("  @JsExport(\"buggy1\") public Buggy(int a) { }\n");
+    goodCode.append("  public Buggy(int a, int b) { }\n");
+    goodCode.append("}");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  public void testJsExportOnClassWithDefaultConstructor() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    goodCode.append("@JsExport public class Buggy {}");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  public void testJsExportOnClassWithExplicitConstructor() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    goodCode.append("@JsExport public class Buggy {\n");
+    goodCode.append("  public Buggy() { }");
+    goodCode.append("}");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  public void testJsExportOnClassWithOnePublicConstructor() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    goodCode.append("@JsExport public class Buggy {\n");
+    goodCode.append("  public Buggy() { }\n");
+    goodCode.append("  private Buggy(int a) { }\n");
+    goodCode.append("  protected Buggy(int a, int b) { }\n");
+    goodCode.append("  Buggy(int a, int b, int c) { }\n");
+    goodCode.append("}");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  public void testJsExportOnClassWithMultipleConstructors() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    goodCode.append("import com.google.gwt.core.client.js.JsNoExport;\n");
+    goodCode.append("@JsExport public class Buggy {\n");
+    goodCode.append("  @JsExport(\"Buggy1\") public Buggy() { }\n");
+    goodCode.append("  @JsExport(\"Buggy2\") public Buggy(int a) { }\n");
+    goodCode.append("  @JsExport public Buggy(int a, int b) { }\n");
+    goodCode.append("  @JsNoExport public Buggy(int a, int b, int c) { }\n");
+    goodCode.append("}");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  public void testJsExportNotOnNonPublicClass() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("  private static class PrivateNested {\n");
+    buggyCode.append("    public static class PublicNested {\n");
+    buggyCode.append("      @JsExport public static Object foo() {return null;}\n");
+    buggyCode.append("    }\n");
+    buggyCode.append("  }\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 5: "
+        + JSORestrictionsChecker.ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
+  }
+
+  public void testJsExportNotOnNonPublicField() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsExport final static String foo = null;\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 3: "
+        + JSORestrictionsChecker.ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
+  }
+
+  public void testJsExportNotOnNonPublicMethod() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsExport static Object foo() {return null;}\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 3: "
+        + JSORestrictionsChecker.ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
+  }
+
+  public void testJsExportNotOnObjectMethod() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsExport public void foo() {}\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 3: "
+        + JSORestrictionsChecker.ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
+  }
+
+  public void testJsExportNotOnObjectField() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsExport public final String foo = null;\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 3: "
+        + JSORestrictionsChecker.ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
+  }
+
+  public void testJsExportNotOnNonFinalField() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsExport public static String foo = null;\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 3: "
+        + JSORestrictionsChecker.ERR_JSEXPORT_ONLY_CTORS_STATIC_METHODS_AND_STATIC_FINAL_FIELDS);
+  }
+
+  public void testJsExportAndJsNotExportNotOnField() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsNoExport;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsExport @JsNoExport public final static String foo = null;\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 4: "
+        + JSORestrictionsChecker.ERR_EITHER_JSEXPORT_JSNOEXPORT);
+  }
+
+  public void testJsExportAndJsNotExportNotOnMethod() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsExport;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsNoExport;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsExport @JsNoExport public static void method() {}\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 4: "
+        + JSORestrictionsChecker.ERR_EITHER_JSEXPORT_JSNOEXPORT);
+  }
+
+  public void testJsPrototypeNotOnClass() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("@JsType(prototype = \"foo\")\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("void foo() {}\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 3: "
+      + JSORestrictionsChecker.ERR_JS_TYPE_WITH_PROTOTYPE_SET_NOT_ALLOWED_ON_CLASS_TYPES);
+  }
+
+  public void testJsTypePrototypeExtensionNotAllowed() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.impl.PrototypeOfJsType;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsType interface Foo { " +
+        "@PrototypeOfJsType static class Foo_Prototype implements Foo {} }\n");
+    buggyCode.append("static class BuggyFoo extends Foo.Foo_Prototype {\n");
+    buggyCode.append("}\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 5: "
+        + JSORestrictionsChecker.ERR_CLASS_EXTENDS_MAGIC_PROTOTYPE_BUT_NO_PROTOTYPE_ATTRIBUTE);
+  }
+
+  public void testJsTypePrototypeExtensionNoError() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.impl.PrototypeOfJsType;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsType (prototype =\"foo\") interface Foo { " +
+        "@PrototypeOfJsType static class Foo_Prototype implements Foo {} }\n");
+    buggyCode.append("static class BuggyFoo extends Foo.Foo_Prototype {\n");
+    buggyCode.append("}\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateNoError(buggyCode);
+  }
+
+  public void testJsTypePrototypeExtensionNoError2() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.impl.PrototypeOfJsType;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsType (prototype =\"foo\") interface Foo { }\n ");
+    buggyCode.append("@PrototypeOfJsType static class Foo_Prototype implements Foo {}\n");
+    buggyCode.append("static class BuggyFoo extends Foo_Prototype {\n");
+    buggyCode.append("}\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateNoError(buggyCode);
+  }
+
+  public void testJsTypePrototypeExtensionNotAllowed2() {
+    // TODO (cromwellian): add a command-line flag for this later
+    JSORestrictionsChecker.LINT_MODE = true;
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("public class Buggy {\n");
+    buggyCode.append("@JsType (prototype =\"foo\") interface Foo { }\n");
+    buggyCode.append("static class BuggyBar {}\n");
+    buggyCode.append("static class BuggyFoo extends BuggyBar implements Foo {\n");
+    buggyCode.append("}\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode, "Line 5: "
+        + JSORestrictionsChecker.ERR_MUST_EXTEND_MAGIC_PROTOTYPE_CLASS);
+  }
+
+  public void testJsPropertyNoErrors() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsProperty;\n");
+    buggyCode.append("@JsType public interface Buggy {\n");
+
+    buggyCode.append("@JsProperty int foo();\n");
+    buggyCode.append("@JsProperty void foo(int x);\n");
+
+    buggyCode.append("@JsProperty int getFoo();\n");
+    buggyCode.append("@JsProperty void setFoo(int x);\n");
+
+    buggyCode.append("@JsProperty boolean hasFoo();\n");
+    buggyCode.append("@JsProperty boolean isFoo();\n");
+    buggyCode.append("@JsProperty Buggy setFoo(String x);\n");
+
+    buggyCode.append("}\n");
+
+    shouldGenerateNoError(buggyCode);
+  }
+
+  public void testJsPropertyGetterCantTakeParameters() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsProperty;\n");
+    buggyCode.append("@JsType public interface Buggy {\n");
+    buggyCode.append("@JsProperty int getFoo(int a, int b);\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 4: " + JSORestrictionsChecker.ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
+  }
+
+  public void testJsPropertyGetterCantReturnVoid() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsProperty;\n");
+    buggyCode.append("@JsType public interface Buggy {\n");
+    buggyCode.append("@JsProperty void getFoo();\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 4: " + JSORestrictionsChecker.ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
+  }
+
+  public void testJsPropertyGetterCantSoundLikeSetter() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsProperty;\n");
+    buggyCode.append("@JsType public interface Buggy {\n");
+    buggyCode.append("@JsProperty int setFoo();\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 4: " + JSORestrictionsChecker.ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
+  }
+
+  public void testJsPropertyHasGetterMustReturnBoolean() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsProperty;\n");
+    buggyCode.append("@JsType public interface Buggy {\n");
+    buggyCode.append("@JsProperty int hasFoo();\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 4: " + JSORestrictionsChecker.ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
+  }
+
+  public void testJsPropertyIsGetterMustReturnBoolean() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsProperty;\n");
+    buggyCode.append("@JsType public interface Buggy {\n");
+    buggyCode.append("@JsProperty int isFoo();\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 4: " + JSORestrictionsChecker.ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
+  }
+
+  public void testJsPropertySetterCantTakeTwoParameters() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsProperty;\n");
+    buggyCode.append("@JsType public interface Buggy {\n");
+    buggyCode.append("@JsProperty void setFoo(int a, int b);\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 4: " + JSORestrictionsChecker.ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
+  }
+
+  public void testJsPropertySetterCantSoundLikeIsGetter() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsProperty;\n");
+    buggyCode.append("@JsType public interface Buggy {\n");
+    buggyCode.append("@JsProperty void isFoo(int x);\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 4: " + JSORestrictionsChecker.ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
+  }
+
+  public void testJsPropertySetterCantSoundLikeGetGetter() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsProperty;\n");
+    buggyCode.append("@JsType public interface Buggy {\n");
+    buggyCode.append("@JsProperty void getFoo(int x);\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 4: " + JSORestrictionsChecker.ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
+  }
+
+  public void testJsPropertySetterCantSoundLikeHasGetter() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsProperty;\n");
+    buggyCode.append("@JsType public interface Buggy {\n");
+    buggyCode.append("@JsProperty void hasFoo(int x);\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 4: " + JSORestrictionsChecker.ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
+  }
+
+  public void testJsPropertySetterCantReturnInt() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    buggyCode.append("import com.google.gwt.core.client.js.JsProperty;\n");
+    buggyCode.append("@JsType public interface Buggy {\n");
+    buggyCode.append("@JsProperty int foo(int x);\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 4: " + JSORestrictionsChecker.ERR_JSPROPERTY_ONLY_BEAN_OR_FLUENT_STYLE_NAMING);
+  }
+
+  public void testJsFunctionOnFunctionalInterface() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    goodCode.append("@JsFunction public interface Buggy {\n");
+    goodCode.append("int foo(int x);\n");
+    goodCode.append("}\n");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  // it is OK on JSORestrictionChecker but will be disallowed by JsInteropRestrictionChecker.
+  public void testJsFunctionAndJsTypeOnInterface() {
+    StringBuilder goodCode = new StringBuilder();
+    goodCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    goodCode.append("import com.google.gwt.core.client.js.JsType;\n");
+    goodCode.append("@JsFunction @JsType public interface Buggy {\n");
+    goodCode.append("int foo(int x);\n");
+    goodCode.append("}\n");
+
+    shouldGenerateNoError(goodCode);
+  }
+
+  public void testJsFunctionNotOnClass() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    buggyCode.append("@JsFunction public class Buggy {\n");
+    buggyCode.append("int foo(int x) {return 0;} \n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 2: " + JSORestrictionsChecker.ERR_JS_FUNCTION_ONLY_ALLOWED_ON_FUNCTIONAL_INTERFACE);
+  }
+
+  public void testJsFunctionNotOnNonFunctionalInterface1() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    buggyCode.append("@JsFunction public interface Buggy {\n");
+    buggyCode.append("int foo(int x);\n");
+    buggyCode.append("int bar(int x);\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 2: " + JSORestrictionsChecker.ERR_JS_FUNCTION_ONLY_ALLOWED_ON_FUNCTIONAL_INTERFACE);
+  }
+
+  public void testJsFunctionNotOnNonFunctionalInterface2() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    buggyCode.append("@JsFunction public interface Buggy {\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 2: " + JSORestrictionsChecker.ERR_JS_FUNCTION_ONLY_ALLOWED_ON_FUNCTIONAL_INTERFACE);
+  }
+
+  public void testJsFunctionNotOnInterfaceWithSuperInterfaces() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    buggyCode.append("import java.io.Serializable;\n");
+    buggyCode.append("@JsFunction public interface Buggy extends Serializable {\n");
+    buggyCode.append("int foo(int x);\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(buggyCode,
+        "Line 3: " + JSORestrictionsChecker.ERR_JS_FUNCTION_INTERFACE_CANNOT_EXTEND_ANY_INTERFACE);
+  }
+
+  public void testJsFunctionNotOnInterfaceWithDefaultMethod() {
+    StringBuilder buggyCode = new StringBuilder();
+    buggyCode.append("import com.google.gwt.core.client.js.JsFunction;\n");
+    buggyCode.append("@JsFunction public interface Buggy {\n");
+    buggyCode.append("int foo(int x);\n");
+    buggyCode.append("default void bar() { }\n");
+    buggyCode.append("}\n");
+
+    shouldGenerateError(SourceLevel.JAVA8, buggyCode,
+        "Line 2: " + JSORestrictionsChecker.ERR_JS_FUNCTION_CANNOT_HAVE_DEFAULT_METHODS);
+  }
+
   /**
    * Test that when compiling buggyCode, the TypeOracleUpdater emits
    * expectedError somewhere in its output. The code should define a class named
    * Buggy.
    */
-  private void shouldGenerateError(CharSequence buggyCode,
+  private void shouldGenerateError(SourceLevel sourceLevel, CharSequence buggyCode,
       String... expectedErrors) {
     UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
     builder.setLowestLogLevel(TreeLogger.ERROR);
@@ -375,11 +873,16 @@ public class JSORestrictionsTest extends TestCase {
         buggyCode);
     TypeOracleTestingUtils.buildStandardTypeOracleWith(logger,
         Collections.<Resource> emptySet(),
-        CompilationStateTestBase.getGeneratedUnits(buggyResource));
+        CompilationStateTestBase.getGeneratedUnits(buggyResource),
+        sourceLevel);
     logger.assertCorrectLogEntries();
   }
 
-  private void shouldGenerateNoError(StringBuffer buggyCode) {
+  private void shouldGenerateError(CharSequence buggyCode, String... expectedErrors) {
+    shouldGenerateError(SourceLevel.DEFAULT_SOURCE_LEVEL, buggyCode, expectedErrors);
+  }
+
+  private void shouldGenerateNoError(StringBuilder buggyCode) {
     shouldGenerateError(buggyCode, (String[]) null);
   }
 }

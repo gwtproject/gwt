@@ -15,7 +15,7 @@
  */
 package com.google.gwt.dev.cfg;
 
-import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.gwt.thirdparty.guava.common.base.Objects;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,7 +27,6 @@ import java.util.List;
  */
 public class ConfigurationProperty extends Property {
   private final boolean allowMultipleValues;
-  private List<String> targetLibraryValues = new ArrayList<String>();
   private List<String> values = new ArrayList<String>();
 
   public ConfigurationProperty(String name) {
@@ -50,11 +49,6 @@ public class ConfigurationProperty extends Property {
     values.add(value);
   }
 
-  public void addTargetLibraryValue(String value) {
-    addValue(value);
-    targetLibraryValues.add(value);
-  }
-
   public boolean allowsMultipleValues() {
     return allowMultipleValues;
   }
@@ -63,8 +57,15 @@ public class ConfigurationProperty extends Property {
     values.clear();
   }
 
-  public List<String> getTargetLibraryValues() {
-    return ImmutableList.copyOf(targetLibraryValues);
+  @Override
+  public boolean equals(Object object) {
+    if (object instanceof ConfigurationProperty) {
+      ConfigurationProperty that = (ConfigurationProperty) object;
+      return Objects.equal(this.name, that.name)
+          && Objects.equal(this.allowMultipleValues, that.allowMultipleValues)
+          && Objects.equal(this.values, that.values);
+    }
+    return false;
   }
 
   public String getValue() {
@@ -78,21 +79,13 @@ public class ConfigurationProperty extends Property {
     return Collections.unmodifiableList(values);
   }
 
-  public boolean hasTargetLibraryValues() {
-    return !targetLibraryValues.isEmpty();
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(name, allowMultipleValues, values);
   }
 
   public boolean isMultiValued() {
     return values.size() > 1;
-  }
-
-  public void setTargetLibraryValue(String value) {
-    if (targetLibraryValues.size() == 0) {
-      targetLibraryValues.add(value);
-    } else {
-      targetLibraryValues.set(0, value);
-    }
-    setValue(value);
   }
 
   public void setValue(String value) {

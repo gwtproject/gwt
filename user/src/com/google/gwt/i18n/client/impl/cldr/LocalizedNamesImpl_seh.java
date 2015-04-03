@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  type=root
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "seh" locale.
@@ -249,7 +244,6 @@ public class LocalizedNamesImpl_seh extends LocalizedNamesImpl {
         "VC",
         "SN",
         "SL",
-        "CS",
         "SC",
         "SY",
         "SJ",
@@ -289,6 +283,7 @@ public class LocalizedNamesImpl_seh extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "ZM",
         "ZW",
     };
@@ -325,7 +320,6 @@ public class LocalizedNamesImpl_seh extends LocalizedNamesImpl {
     namesMap.put("CK", "Ilhas Cook");
     namesMap.put("CM", "República dos Camarões");
     namesMap.put("CO", "Colômbia");
-    namesMap.put("CS", "Sérvia e Montenegro");
     namesMap.put("CV", "Cabo Verde");
     namesMap.put("CY", "Chipre");
     namesMap.put("CZ", "República Tcheca");
@@ -502,7 +496,6 @@ public class LocalizedNamesImpl_seh extends LocalizedNamesImpl {
         "CK": "Ilhas Cook",
         "CM": "República dos Camarões",
         "CO": "Colômbia",
-        "CS": "Sérvia e Montenegro",
         "CV": "Cabo Verde",
         "CY": "Chipre",
         "CZ": "República Tcheca",

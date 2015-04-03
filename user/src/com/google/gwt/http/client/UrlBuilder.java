@@ -15,7 +15,7 @@
  */
 package com.google.gwt.http.client;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -33,7 +33,7 @@ public class UrlBuilder {
   /**
    * A mapping of query parameters to their values.
    */
-  private Map<String, String[]> listParamMap = new HashMap<String, String[]>();
+  private Map<String, String[]> listParamMap = new LinkedHashMap<String, String[]>();
 
   private String protocol = "http";
   private String host = null;
@@ -64,7 +64,7 @@ public class UrlBuilder {
 
     // http://www.google.com:80/path/to/file.html
     if (path != null && !"".equals(path)) {
-      url.append("/").append(URL.encode(path));
+      url.append("/").append(URL.encode(path).replace("?", "%3F").replace("#", "%23"));
     }
 
     // Generate the query string.

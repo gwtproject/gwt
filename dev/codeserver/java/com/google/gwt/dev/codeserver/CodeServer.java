@@ -17,7 +17,12 @@
 package com.google.gwt.dev.codeserver;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.dev.MinimalRebuildCacheManager;
+import com.google.gwt.dev.javac.UnitCache;
+import com.google.gwt.dev.javac.UnitCacheSingleton;
+import com.google.gwt.dev.util.DiskCachingUtil;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.util.tools.Utility;
 
@@ -55,14 +60,38 @@ public class CodeServer {
   public static void main(Options options) {
     if (options.isCompileTest()) {
       PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
-      logger.setMaxDetail(TreeLogger.Type.INFO);
+      logger.setMaxDetail(options.getLogLevel());
+
+      OutboxTable outboxes;
+
       try {
-        makeModules(options, logger);
+        File baseCacheDir =
+            DiskCachingUtil.computePreferredCacheDir(options.getModuleNames(), logger);
+        UnitCache unitCache = UnitCacheSingleton.get(logger, null, baseCacheDir);
+        MinimalRebuildCacheManager minimalRebuildCacheManager =
+            new MinimalRebuildCacheManager(logger, baseCacheDir);
+        outboxes = makeOutboxes(options, logger, unitCache, minimalRebuildCacheManager);
       } catch (Throwable t) {
         t.printStackTrace();
         System.out.println("FAIL");
         System.exit(1);
+        return;
       }
+
+      int retries = options.getCompileTestRecompiles();
+      for (int i = 0; i < retries; i++) {
+        System.out.println("\n### Recompile " + (i + 1) + "\n");
+        try {
+          // TODO: actually test recompiling here.
+          // (This is just running precompiles repeatedly.)
+          outboxes.defaultCompileAll(logger);
+        } catch (Throwable t) {
+          t.printStackTrace();
+          System.out.println("FAIL");
+          System.exit(1);
+        }
+      }
+
       System.out.println("PASS");
       System.exit(0);
     }
@@ -73,8 +102,10 @@ public class CodeServer {
       String url = "http://" + options.getPreferredHost() + ":" + options.getPort() + "/";
 
       System.out.println();
-      System.out.println("The code server is ready.");
-      System.out.println("Next, visit: " + url);
+      System.out.println("The code server is ready at " + url);
+    } catch (UnableToCompleteException e) {
+      // Already logged.
+      System.exit(1);
     } catch (Throwable t) {
       t.printStackTrace();
       System.exit(1);
@@ -89,16 +120,27 @@ public class CodeServer {
    * a lot of static variables.</p>
    */
   public static WebServer start(Options options) throws IOException, UnableToCompleteException {
-    PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
-    logger.setMaxDetail(TreeLogger.Type.INFO);
+    PrintWriterTreeLogger topLogger = new PrintWriterTreeLogger();
+    topLogger.setMaxDetail(options.getLogLevel());
 
-    Modules modules = makeModules(options, logger);
+    TreeLogger startupLogger = topLogger.branch(Type.INFO, "Super Dev Mode starting up");
+    File baseCacheDir =
+        DiskCachingUtil.computePreferredCacheDir(options.getModuleNames(), startupLogger);
+    UnitCache unitCache = UnitCacheSingleton.get(startupLogger, null, baseCacheDir);
+    MinimalRebuildCacheManager minimalRebuildCacheManager =
+        new MinimalRebuildCacheManager(topLogger, baseCacheDir);
+    OutboxTable outboxes =
+        makeOutboxes(options, startupLogger, unitCache, minimalRebuildCacheManager);
 
-    SourceHandler sourceHandler = new SourceHandler(modules, logger);
+    JobEventTable eventTable = new JobEventTable();
+    JobRunner runner = new JobRunner(eventTable, minimalRebuildCacheManager);
 
-    WebServer webServer = new WebServer(sourceHandler, modules,
-        options.getBindAddress(), options.getPort(), logger);
-    webServer.start();
+    JsonExporter exporter = new JsonExporter(options, outboxes);
+
+    SourceHandler sourceHandler = new SourceHandler(outboxes, exporter);
+    WebServer webServer = new WebServer(sourceHandler, exporter, outboxes,
+        runner, eventTable, options.getBindAddress(), options.getPort());
+    webServer.start(topLogger);
 
     return webServer;
   }
@@ -106,20 +148,31 @@ public class CodeServer {
   /**
    * Configures and compiles all the modules (unless {@link Options#getNoPrecompile} is false).
    */
-  private static Modules makeModules(Options options, PrintWriterTreeLogger logger)
+  private static OutboxTable makeOutboxes(Options options, TreeLogger logger,
+      UnitCache unitCache, MinimalRebuildCacheManager minimalRebuildCacheManager)
       throws IOException, UnableToCompleteException {
 
     File workDir = ensureWorkDir(options);
-    System.out.println("workDir: " + workDir);
+    logger.log(Type.INFO, "workDir: " + workDir);
 
-    Modules modules = new Modules();
+    LauncherDir launcherDir = LauncherDir.maybeCreate(options);
+
+    int nextOutboxId = 1;
+    OutboxTable outboxes = new OutboxTable();
     for (String moduleName : options.getModuleNames()) {
-      AppSpace appSpace = AppSpace.create(new File(workDir, moduleName));
+      OutboxDir outboxDir = OutboxDir.create(new File(workDir, moduleName), logger);
 
-      Recompiler recompiler = new Recompiler(appSpace, moduleName, options, logger);
-      modules.addModuleState(new ModuleState(recompiler, logger, options.getNoPrecompile()));
+      Recompiler recompiler = new Recompiler(outboxDir, launcherDir, moduleName,
+          options, unitCache, minimalRebuildCacheManager);
+
+      // The id should be treated as an opaque string since we will change it again.
+      // TODO: change outbox id to include binding properties.
+      String outboxId = moduleName + "_" + nextOutboxId;
+      nextOutboxId++;
+
+      outboxes.addOutbox(new Outbox(outboxId, recompiler, options, logger));
     }
-    return modules;
+    return outboxes;
   }
 
   /**

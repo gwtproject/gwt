@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -50,17 +50,10 @@ public class JModVisitor extends JVisitor {
     }
 
     @Override
-    public void insertAfter(JNode node) {
-      checkRemoved();
-      list.add(index + 1, (T) node);
-      ++numVisitorChanges;
-    }
-
-    @Override
     public void insertBefore(JNode node) {
       checkRemoved();
       list.add(index++, (T) node);
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
@@ -73,7 +66,7 @@ public class JModVisitor extends JVisitor {
       checkState();
       list.remove(index--);
       removed = true;
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
@@ -82,19 +75,18 @@ public class JModVisitor extends JVisitor {
       checkReplacement(list.get(index), node);
       list.set(index, (T) node);
       replaced = true;
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     /**
      * Cause my list to be traversed by this context.
      */
-    protected List<T> traverse() {
+    protected void traverse() {
       try {
         for (index = 0; index < list.size(); ++index) {
           removed = replaced = false;
           list.get(index).traverse(JModVisitor.this, this);
         }
-        return list;
       } catch (Throwable e) {
         throw translateException(list.get(index), e);
       }
@@ -139,17 +131,10 @@ public class JModVisitor extends JVisitor {
     }
 
     @Override
-    public void insertAfter(JNode node) {
-      checkRemoved();
-      list = Lists.add(list, index + 1, (T) node);
-      ++numVisitorChanges;
-    }
-
-    @Override
     public void insertBefore(JNode node) {
       checkRemoved();
       list = Lists.add(list, index++, (T) node);
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
@@ -162,7 +147,7 @@ public class JModVisitor extends JVisitor {
       checkState();
       list = Lists.remove(list, index--);
       removed = true;
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
@@ -171,7 +156,7 @@ public class JModVisitor extends JVisitor {
       checkReplacement(list.get(index), node);
       list = Lists.set(list, index, (T) node);
       replaced = true;
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     /**
@@ -234,11 +219,6 @@ public class JModVisitor extends JVisitor {
     }
 
     @Override
-    public void insertAfter(JNode node) {
-      throw new UnsupportedOperationException("Can't insert after " + node);
-    }
-
-    @Override
     public void insertBefore(JNode node) {
       throw new UnsupportedOperationException("Can't insert before " + node);
     }
@@ -253,9 +233,8 @@ public class JModVisitor extends JVisitor {
       if (!canRemove) {
         throw new UnsupportedOperationException("Can't remove " + node);
       }
-
       this.node = null;
-      ++numVisitorChanges;
+      madeChanges();
     }
 
     @Override
@@ -266,7 +245,7 @@ public class JModVisitor extends JVisitor {
       checkReplacement(this.node, node);
       this.node = node;
       replaced = true;
-      ++numVisitorChanges;
+      madeChanges();
     }
   }
 
@@ -381,4 +360,5 @@ public class JModVisitor extends JVisitor {
   protected void traverse(JNode node, Context context) {
     node.traverse(this, context);
   }
+
 }

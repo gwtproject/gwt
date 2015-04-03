@@ -28,13 +28,12 @@ import com.google.gwt.core.ext.linker.impl.StandardCompilationResult;
 import com.google.gwt.core.ext.linker.impl.StandardLinkerContext;
 import com.google.gwt.dev.CompileTaskRunner.CompileTask;
 import com.google.gwt.dev.cfg.BindingProperty;
+import com.google.gwt.dev.cfg.BindingProps;
 import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.cfg.ModuleDefLoader;
 import com.google.gwt.dev.cfg.PropertyPermutations;
 import com.google.gwt.dev.cfg.ResourceLoader;
 import com.google.gwt.dev.cfg.ResourceLoaders;
-import com.google.gwt.dev.cfg.StaticPropertyOracle;
-import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.jjs.PermutationResult;
 import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter;
 import com.google.gwt.dev.resource.ResourceOracle;
@@ -46,10 +45,12 @@ import com.google.gwt.dev.util.PersistenceBackedObject;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.arg.ArgHandlerDeployDir;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
+import com.google.gwt.dev.util.arg.ArgHandlerJsInteropMode;
 import com.google.gwt.dev.util.arg.ArgHandlerSaveSourceOutput;
 import com.google.gwt.dev.util.arg.ArgHandlerWarDir;
 import com.google.gwt.dev.util.arg.OptionDeployDir;
 import com.google.gwt.dev.util.arg.OptionExtraDir;
+import com.google.gwt.dev.util.arg.OptionJsInteropMode;
 import com.google.gwt.dev.util.arg.OptionSaveSourceOutput;
 import com.google.gwt.dev.util.arg.OptionWarDir;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
@@ -81,7 +82,8 @@ public class Link {
    * Options for Link.
    */
   public interface LinkOptions extends OptionExtraDir,
-      OptionWarDir, OptionDeployDir, OptionSaveSourceOutput, CompileTaskOptions {
+      OptionWarDir, OptionDeployDir, OptionSaveSourceOutput, CompileTaskOptions,
+      OptionJsInteropMode {
   }
 
   static class ArgProcessor extends CompileArgProcessor {
@@ -91,6 +93,7 @@ public class Link {
       registerHandler(new ArgHandlerWarDir(options));
       registerHandler(new ArgHandlerDeployDir(options));
       registerHandler(new ArgHandlerSaveSourceOutput(options));
+      registerHandler(new ArgHandlerJsInteropMode(options));
     }
 
     @Override
@@ -170,14 +173,17 @@ public class Link {
   public static void link(TreeLogger logger, ModuleDef module, ResourceOracle publicResourceOracle,
       ArtifactSet generatedArtifacts, Permutation[] permutations,
       List<PersistenceBackedObject<PermutationResult>> resultFiles,
-      Set<PermutationResult> libraries, JJSOptions precompileOptions, LinkOptions linkOptions)
+      Set<PermutationResult> libraries, PrecompileTaskOptions precompileOptions,
+      LinkOptions linkOptions)
       throws UnableToCompleteException, IOException {
     StandardLinkerContext linkerContext =
-        new StandardLinkerContext(logger, module, publicResourceOracle, precompileOptions);
+        new StandardLinkerContext(logger, module, publicResourceOracle,
+            precompileOptions.getOutput());
     ArtifactSet artifacts = doSimulatedShardingLink(
-        logger, module, linkerContext, generatedArtifacts, permutations, resultFiles, libraries);
+        logger, module, linkerContext, generatedArtifacts, permutations, resultFiles);
 
-    doProduceOutput(logger, artifacts, linkerContext, module, linkOptions);
+    doProduceOutput(logger, artifacts, linkerContext, module, precompileOptions.shouldSaveSource(),
+        linkOptions);
   }
 
   /**
@@ -200,7 +206,7 @@ public class Link {
       JarOutputStream jar = new JarOutputStream(new FileOutputStream(jarFile));
 
       StandardLinkerContext linkerContext = new StandardLinkerContext(logger,
-          module, publicResourceOracle, precompileOptions);
+          module, publicResourceOracle, precompileOptions.getOutput());
 
       StandardCompilationResult compilation = new StandardCompilationResult(
           permResult);
@@ -312,11 +318,9 @@ public class Link {
   private static void addSelectionPermutations(
       StandardCompilationResult compilation, Permutation perm,
       StandardLinkerContext linkerContext) {
-    for (StaticPropertyOracle propOracle : perm.getPropertyOracles()) {
-      compilation.addSelectionPermutation(computeSelectionPermutation(
-          linkerContext, propOracle));
-      compilation.addSoftPermutation(computeSoftPermutation(linkerContext,
-          propOracle));
+    for (BindingProps props : perm.getProps().getSoftProps()) {
+      compilation.addSelectionPermutation(computeSelectionPermutation(linkerContext, props));
+      compilation.addSoftPermutation(computeSoftPermutation(linkerContext, props));
     }
   }
 
@@ -344,9 +348,9 @@ public class Link {
    * Return a map giving the value of each non-trivial selection property.
    */
   private static Map<SelectionProperty, String> computeSelectionPermutation(
-      StandardLinkerContext linkerContext, StaticPropertyOracle propOracle) {
-    BindingProperty[] orderedProps = propOracle.getOrderedProps();
-    String[] orderedPropValues = propOracle.getOrderedPropValues();
+      StandardLinkerContext linkerContext, BindingProps props) {
+    BindingProperty[] orderedProps = props.getOrderedProps();
+    String[] orderedPropValues = props.getOrderedPropValues();
     Map<SelectionProperty, String> unboundProperties = new HashMap<SelectionProperty, String>();
     for (int i = 0; i < orderedProps.length; i++) {
       SelectionProperty key = linkerContext.getProperty(orderedProps[i].getName());
@@ -369,9 +373,9 @@ public class Link {
   }
 
   private static Map<SelectionProperty, String> computeSoftPermutation(
-      StandardLinkerContext linkerContext, StaticPropertyOracle propOracle) {
-    BindingProperty[] orderedProps = propOracle.getOrderedProps();
-    String[] orderedPropValues = propOracle.getOrderedPropValues();
+      StandardLinkerContext linkerContext, BindingProps props) {
+    BindingProperty[] orderedProps = props.getOrderedProps();
+    String[] orderedPropValues = props.getOrderedPropValues();
     Map<SelectionProperty, String> softProperties = new HashMap<SelectionProperty, String>();
     for (int i = 0; i < orderedProps.length; i++) {
       if (orderedProps[i].getCollapsedValues().isEmpty()) {
@@ -388,7 +392,7 @@ public class Link {
    * Emit final output.
    */
   private static void doProduceOutput(TreeLogger logger, ArtifactSet artifacts,
-      StandardLinkerContext linkerContext, ModuleDef module,
+      StandardLinkerContext linkerContext, ModuleDef module, boolean saveSources,
       LinkOptions options) throws IOException, UnableToCompleteException {
 
     // == create output filesets ==
@@ -415,10 +419,12 @@ public class Link {
     linkerContext.produceOutput(logger, artifacts, Visibility.Private,
         extraFileSet);
 
-    // Assume that all source code is available in the compiler's classpath.
-    // (This will have to be adjusted to work with Super Dev Mode.)
-    ResourceLoader loader = ResourceLoaders.forClassLoader(Thread.currentThread());
-    SourceSaver.save(logger, artifacts, loader, options, destPrefix, extraFileSet);
+    if (saveSources) {
+      // Assume that all source code is available in the compiler's classpath.
+      // (This will have to be adjusted to work with Super Dev Mode.)
+      ResourceLoader loader = ResourceLoaders.forClassLoader(Thread.currentThread());
+      SourceSaver.save(logger, artifacts, loader, options, destPrefix, extraFileSet);
+    }
 
     outFileSet.close();
     extraFileSet.close();
@@ -436,14 +442,12 @@ public class Link {
    */
   private static ArtifactSet doSimulatedShardingLink(TreeLogger logger, ModuleDef module,
       StandardLinkerContext linkerContext, ArtifactSet generatedArtifacts, Permutation[] perms,
-      List<PersistenceBackedObject<PermutationResult>> resultFiles,
-      Set<PermutationResult> libraries)
+      List<PersistenceBackedObject<PermutationResult>> resultFiles)
       throws UnableToCompleteException {
     ArtifactSet combinedArtifacts = new ArtifactSet();
     for (int i = 0; i < perms.length; ++i) {
       ArtifactSet newArtifacts = finishPermutation(
-          logger, perms[i], resultFiles.get(i), libraries, linkerContext,
-          generatedArtifacts);
+          logger, perms[i], resultFiles.get(i), linkerContext, generatedArtifacts);
       combinedArtifacts.addAll(newArtifacts);
     }
 
@@ -467,12 +471,12 @@ public class Link {
    *         operation
    */
   private static ArtifactSet finishPermutation(TreeLogger logger, Permutation perm,
-      PersistenceBackedObject<PermutationResult> resultFile, Set<PermutationResult> libraries,
-      StandardLinkerContext linkerContext, ArtifactSet generatedArtifacts)
+      PersistenceBackedObject<PermutationResult> resultFile, StandardLinkerContext linkerContext,
+      ArtifactSet generatedArtifacts)
       throws UnableToCompleteException {
     PermutationResult permResult = resultFile.newInstance(logger);
     StandardCompilationResult compilation =
-        new StandardCompilationResult(permResult, libraries);
+        new StandardCompilationResult(permResult);
     addSelectionPermutations(compilation, perm, linkerContext);
     logScriptSize(logger, perm.getId(), compilation);
 
@@ -658,7 +662,7 @@ public class Link {
         Precompilation precomp = (Precompilation) precompileResults;
         Permutation[] perms = precomp.getPermutations();
         List<PersistenceBackedObject<PermutationResult>> resultFiles =
-            CompilePerms.makeResultFiles(compilerWorkDir, perms);
+            CompilePerms.makeResultFiles(compilerWorkDir, perms, compilerContext.getOptions());
 
         // Check that all files are present
         for (PersistenceBackedObject<PermutationResult> file : resultFiles) {
@@ -709,7 +713,7 @@ public class Link {
     TreeLogger branch = logger.branch(TreeLogger.INFO, "Linking module "
         + module.getName());
     StandardLinkerContext linkerContext = new StandardLinkerContext(branch,
-        module, publicResourceOracle, precompileOptions);
+        module, publicResourceOracle, precompileOptions.getOutput());
 
     try {
       ArtifactSet artifacts = scanCompilePermResults(logger, resultFiles);
@@ -717,7 +721,8 @@ public class Link {
           module));
       artifacts = linkerContext.invokeFinalLink(logger, artifacts);
 
-      doProduceOutput(logger, artifacts, linkerContext, module, options);
+      doProduceOutput(logger, artifacts, linkerContext, module,
+          precompileOptions.shouldSaveSource(), options);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Exception during final linking", e);
       throw new UnableToCompleteException();

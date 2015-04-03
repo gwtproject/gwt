@@ -16,6 +16,7 @@
 package com.google.gwt.dev.cfg;
 
 import com.google.gwt.core.ext.TreeLogger;
+import com.google.gwt.thirdparty.guava.common.base.Objects;
 
 /**
  * A deferred binding condition to determine whether the type being rebound is
@@ -32,8 +33,17 @@ public class ConditionWhenTypeIs extends Condition {
   }
 
   @Override
-  public String toSource() {
-    return String.format("requestTypeClass == @%s::class", exactTypeSourceName);
+  public boolean equals(Object object) {
+    if (object instanceof ConditionWhenTypeIs) {
+      ConditionWhenTypeIs that = (ConditionWhenTypeIs) object;
+      return Objects.equal(this.exactTypeSourceName, that.exactTypeSourceName);
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(exactTypeSourceName);
   }
 
   @Override

@@ -73,7 +73,6 @@ import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrefixOperation;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.ast.JReboundEntryPoint;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
@@ -91,8 +90,6 @@ import com.google.gwt.dev.jjs.ast.js.JsniFieldRef;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.jjs.ast.js.JsonArray;
-import com.google.gwt.dev.jjs.ast.js.JsonObject;
-import com.google.gwt.dev.jjs.ast.js.JsonObject.JsonPropInit;
 import com.google.gwt.dev.js.JsSourceGenerationVisitor;
 import com.google.gwt.dev.util.TextOutput;
 
@@ -145,7 +142,6 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected static final char[] CHARS_SWITCH = "switch ".toCharArray();
   protected static final char[] CHARS_THIS = "this".toCharArray();
   protected static final char[] CHARS_THROW = "throw".toCharArray();
-  protected static final char[] CHARS_THROWS = " throws ".toCharArray();
   protected static final char[] CHARS_TRUE = "true".toCharArray();
   protected static final char[] CHARS_TRY = "try ".toCharArray();
   protected static final char[] CHARS_WHILE = "while ".toCharArray();
@@ -466,7 +462,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   @Override
   public boolean visit(JFloatLiteral x, Context ctx) {
-    printFloatLiteral(x.getValue());
+    printDoubleLiteral(x.getValue());
     return false;
   }
 
@@ -656,13 +652,21 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
       print('.');
       printName(target);
     } else if (x.isStaticDispatchOnly()) {
-      // super() or this() call.
-      JReferenceType thisType = (JReferenceType) x.getInstance().getType();
-      thisType = thisType.getUnderlyingType();
-      if (thisType == target.getEnclosingType()) {
+      // super(), this() or super.m() call.
+      JReferenceType thisType = (JReferenceType) x.getInstance().getType().getUnderlyingType();
+      if (thisType == target.getEnclosingType() && !(thisType instanceof JInterfaceType)) {
         print(CHARS_THIS);
       } else {
+        if (thisType instanceof JInterfaceType) {
+          // This is a static default method dispatch.
+          printTypeName(target.getEnclosingType());
+          print('.');
+        }
         print(CHARS_SUPER);
+      }
+      if (!x.getTarget().isConstructor()) {
+        print('.');
+        printName(target);
       }
     } else {
       // Instance call.
@@ -795,13 +799,6 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   }
 
   @Override
-  public boolean visit(JReboundEntryPoint x, Context ctx) {
-    print("<JReboundEntryPoint>");
-    print(x.getSourceType());
-    return false;
-  }
-
-  @Override
   public boolean visit(JReturnStatement x, Context ctx) {
     print(CHARS_RETURN);
     if (x.getExpr() != null) {
@@ -840,22 +837,6 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
     print('[');
     visitCollectionWithCommas(x.getExprs().iterator());
     print(']');
-    return false;
-  }
-
-  @Override
-  public boolean visit(JsonObject x, Context ctx) {
-    print('{');
-    visitCollectionWithCommas(x.propInits.iterator());
-    print('}');
-    return false;
-  }
-
-  @Override
-  public boolean visit(JsonPropInit x, Context ctx) {
-    accept(x.labelExpr);
-    print(':');
-    accept(x.valueExpr);
     return false;
   }
 
@@ -1071,11 +1052,6 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
     }
   }
 
-  protected void printFloatLiteral(float value) {
-    print(Float.toString(value));
-    print('f');
-  }
-
   protected void printLongLiteral(long value) {
     print(Long.toString(value));
     print('L');
@@ -1133,8 +1109,8 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   protected void printStringLiteral(String string) {
     char[] s = string.toCharArray();
     print('\"');
-    for (int i = 0; i < s.length; ++i) {
-      printChar(s[i]);
+    for (char value : s) {
+      printChar(value);
     }
     print('\"');
   }

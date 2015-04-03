@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "sg" locale.
@@ -232,7 +227,6 @@ public class LocalizedNamesImpl_sg extends LocalizedNamesImpl {
         "SH",
         "LC",
         "VC",
-        "CS",
         "IO",
         "PS",
         "SC",
@@ -247,8 +241,8 @@ public class LocalizedNamesImpl_sg extends LocalizedNamesImpl {
         "SK",
         "SI",
         "SO",
-        "SS",
         "SD",
+        "SS",
         "SE",
         "CH",
         "SR",
@@ -279,6 +273,7 @@ public class LocalizedNamesImpl_sg extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "YE",
         "JM",
         "DE",
@@ -340,7 +335,6 @@ public class LocalizedNamesImpl_sg extends LocalizedNamesImpl {
     namesMap.put("CN", "Shîna");
     namesMap.put("CO", "Kolombïi");
     namesMap.put("CR", "Kôsta Rîka");
-    namesMap.put("CS", "Serbïi na Möntënegröo");
     namesMap.put("CU", "Kubäa");
     namesMap.put("CV", "Azûâ tî Kâpo-Vêre");
     namesMap.put("CY", "Sîpri");
@@ -478,6 +472,7 @@ public class LocalizedNamesImpl_sg extends LocalizedNamesImpl {
     namesMap.put("SN", "Senegäle");
     namesMap.put("SO", "Somalïi");
     namesMap.put("SR", "Surinäm");
+    namesMap.put("SS", "Sudäan-Mbongo");
     namesMap.put("ST", "Sâô Tömê na Prinsîpe");
     namesMap.put("SV", "Salvadöro");
     namesMap.put("SY", "Sirïi");
@@ -566,7 +561,6 @@ public class LocalizedNamesImpl_sg extends LocalizedNamesImpl {
         "CN": "Shîna",
         "CO": "Kolombïi",
         "CR": "Kôsta Rîka",
-        "CS": "Serbïi na Möntënegröo",
         "CU": "Kubäa",
         "CV": "Azûâ tî Kâpo-Vêre",
         "CY": "Sîpri",
@@ -704,6 +698,7 @@ public class LocalizedNamesImpl_sg extends LocalizedNamesImpl {
         "SN": "Senegäle",
         "SO": "Somalïi",
         "SR": "Surinäm",
+        "SS": "Sudäan-Mbongo",
         "ST": "Sâô Tömê na Prinsîpe",
         "SV": "Salvadöro",
         "SY": "Sirïi",

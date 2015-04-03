@@ -17,7 +17,6 @@ package com.google.gwt.resources.rg;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.shared.impl.StringCase;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
@@ -32,6 +31,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -693,17 +694,16 @@ class ImageBundleBuilder {
     // Be safe by default and assume that the incoming image is lossy
     boolean lossy = true;
     // Load the image
-    try {
+    try (InputStream is = imageUrl.openStream();
+         MemoryCacheImageInputStream imageInputStream = new MemoryCacheImageInputStream(is)) {
       /*
        * ImageIO uses an SPI pattern API. We don't care about the particulars of
        * the implementation, so just choose the first ImageReader.
        */
-      MemoryCacheImageInputStream input = new MemoryCacheImageInputStream(
-          imageUrl.openStream());
-      Iterator<ImageReader> it = ImageIO.getImageReaders(input);
+      Iterator<ImageReader> it = ImageIO.getImageReaders(imageInputStream);
       readers : while (it.hasNext()) {
         ImageReader reader = it.next();
-        reader.setInput(input);
+        reader.setInput(imageInputStream);
 
         int numImages = reader.getNumImages(true);
         if (numImages == 0) {
@@ -759,7 +759,7 @@ class ImageBundleBuilder {
         }
       }
     } catch (IllegalArgumentException iex) {
-      if (StringCase.toLower(imageName).endsWith("png")
+      if (imageName.toLowerCase(Locale.ROOT).endsWith("png")
           && iex.getMessage() != null
           && iex.getStackTrace()[0].getClassName().equals(
               "javax.imageio.ImageTypeSpecifier$Indexed")) {

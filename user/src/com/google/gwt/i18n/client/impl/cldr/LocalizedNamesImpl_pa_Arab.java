@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6177 $
-//  date=$Date: 2011-09-27 11:37:06 -0400 (Tue, 27 Sep 2011) $
-//  type=root
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "pa_Arab" locale.
@@ -290,6 +285,7 @@ public class LocalizedNamesImpl_pa_Arab extends LocalizedNamesImpl_pa {
         "VU",
         "WF",
         "WS",
+        "XK",
         "YE",
         "YT",
         "ZA",

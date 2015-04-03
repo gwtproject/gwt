@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "mer" locale.
@@ -234,7 +229,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "RS",
         "PS",
         "RW",
-        "CS",
         "SM",
         "WS",
         "AS",
@@ -288,6 +282,7 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "VE",
         "VN",
         "WF",
+        "XK",
         "YE",
         "ZM",
         "ZW",
@@ -330,7 +325,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
     namesMap.put("CM", "Kameruni");
     namesMap.put("CO", "Kolombia");
     namesMap.put("CR", "Kostarika");
-    namesMap.put("CS", "Sabia na Montenegoro");
     namesMap.put("CU", "Kiuba");
     namesMap.put("CV", "Kepuvede");
     namesMap.put("CY", "Caipurasi");
@@ -508,7 +502,6 @@ public class LocalizedNamesImpl_mer extends LocalizedNamesImpl {
         "CM": "Kameruni",
         "CO": "Kolombia",
         "CR": "Kostarika",
-        "CS": "Sabia na Montenegoro",
         "CU": "Kiuba",
         "CV": "Kepuvede",
         "CY": "Caipurasi",

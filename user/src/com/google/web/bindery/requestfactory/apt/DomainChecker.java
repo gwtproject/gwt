@@ -187,8 +187,13 @@ class DomainChecker extends ScannerBase<Void> {
       // Did not find a service method
       StringBuilder sb = new StringBuilder();
       sb.append(returnType).append(" ").append(name).append("(");
+      boolean first = true;
       for (TypeMirror param : lookFor) {
+        if (!first) {
+          sb.append(", ");
+        }
         sb.append(param);
+        first = false;
       }
       sb.append(")");
 
@@ -317,7 +322,7 @@ class DomainChecker extends ScannerBase<Void> {
    * 
    * @param clientMethod the RequestContext method to validate
    * @param parameterAccumulator an out parameter that will be populated with
-   *          the converted paramater types
+   *          the converted parameter types
    * @param warnTo The element to which warnings should be posted if one or more
    *          client types cannot be converted to domain types for validation
    * @param state the State object

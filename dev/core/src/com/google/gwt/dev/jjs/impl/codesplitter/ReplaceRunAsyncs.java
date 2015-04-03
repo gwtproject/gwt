@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -105,16 +105,18 @@ public class ReplaceRunAsyncs {
         runAsyncCall.addArg(new JNumericEntry(info, "RunAsyncFragmentIndex", splitPoint));
         runAsyncCall.addArg(asyncCallback);
 
-        JReferenceType callbackType = (JReferenceType) asyncCallback.getType();
-        callbackType = callbackType.getUnderlyingType();
+        JReferenceType callbackType = (JReferenceType) asyncCallback.getType().getUnderlyingType();
         JMethod callbackMethod;
         if (callbackType instanceof JClassType) {
-          callbackMethod =
-              program.typeOracle.getPolyMethod((JClassType) callbackType, "onSuccess()V");
+          callbackMethod = program.typeOracle.getInstanceMethodBySignature(
+              (JClassType) callbackType, "onSuccess()V");
         } else {
           callbackMethod = program.getIndexedMethod("RunAsyncCallback.onSuccess");
         }
-        if (callbackMethod == null) {
+        if (callbackMethod == null ||
+            // The callback method is a synthetic stub inserted for more accurate override
+            // tracking, ignore it.
+            callbackMethod.isAbstract() && callbackMethod.isSynthetic()) {
           error(x.getSourceInfo(), "Only a RunAsyncCallback with a defined onSuccess() can "
               + "be passed to runAsync().");
           return;
@@ -226,9 +228,7 @@ public class ReplaceRunAsyncs {
     String name;
     StringBuilder sb = new StringBuilder();
     sb.append('@');
-    sb.append(method.getEnclosingType().getName());
-    sb.append("::");
-    sb.append(JProgram.getJsniSig(method, false));
+    sb.append(method.getJsniSignature(true, false));
     name = sb.toString();
     return name;
   }

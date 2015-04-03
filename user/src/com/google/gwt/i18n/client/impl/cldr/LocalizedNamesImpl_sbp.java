@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 6546 $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "sbp" locale.
@@ -228,7 +223,6 @@ public class LocalizedNamesImpl_sbp extends LocalizedNamesImpl {
         "VC",
         "SA",
         "ST",
-        "CS",
         "SN",
         "TD",
         "SC",
@@ -288,6 +282,7 @@ public class LocalizedNamesImpl_sbp extends LocalizedNamesImpl {
         "PT",
         "RU",
         "AE",
+        "XK",
         "YE",
         "JO",
         "UA",
@@ -340,7 +335,6 @@ public class LocalizedNamesImpl_sbp extends LocalizedNamesImpl {
     namesMap.put("CN", "Shina");
     namesMap.put("CO", "Kolombiya");
     namesMap.put("CR", "Kositalika");
-    namesMap.put("CS", "Selibiya ni Montenegilo");
     namesMap.put("CU", "Kuba");
     namesMap.put("CV", "Kepuvede");
     namesMap.put("CY", "Kupilosi");
@@ -562,7 +556,6 @@ public class LocalizedNamesImpl_sbp extends LocalizedNamesImpl {
         "CN": "Shina",
         "CO": "Kolombiya",
         "CR": "Kositalika",
-        "CS": "Selibiya ni Montenegilo",
         "CU": "Kuba",
         "CV": "Kepuvede",
         "CY": "Kupilosi",

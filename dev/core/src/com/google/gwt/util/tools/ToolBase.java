@@ -1,12 +1,12 @@
 /*
  * Copyright 2006 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -30,7 +30,7 @@ import java.util.Set;
  * <li>In your constructor, call {@link #registerHandler(ArgHandler)}
  * repeatedly to register particular command line arguments and options.</li>
  * <li>Write a main that looks like this:
- * 
+ *
  * <pre>
  * public static void main(String[] args) {
  *  MyShell myShell = new MyShell();
@@ -40,7 +40,7 @@ import java.util.Set;
  *  System.exit(1);
  * }
  * </pre>
- * 
+ *
  * </li>
  * <li>Create launch config whose main class is MyShell.</li>
  * </ol>
@@ -48,16 +48,6 @@ import java.util.Set;
 public abstract class ToolBase {
 
   private static final String PROPERTY_NOWARN_LEGACY_TOOLS = "gwt.nowarn.legacy.tools";
-
-  public static void legacyWarn(Class<?> legacy, Class<?> replacement) {
-    if (System.getProperty(PROPERTY_NOWARN_LEGACY_TOOLS) == null) {
-      System.err.println("WARNING: '" + legacy.getName()
-          + "' is deprecated and will be removed in a future release.");
-      System.err.println("Use '" + replacement.getName() + "' instead.");
-      System.err.println("(To disable this warning, pass -D"
-          + PROPERTY_NOWARN_LEGACY_TOOLS + " as a JVM arg.)");
-    }
-  }
 
   /**
    * Use a linked hash map to preserve the declaration order.

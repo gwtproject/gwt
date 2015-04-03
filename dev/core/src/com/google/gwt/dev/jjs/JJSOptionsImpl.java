@@ -16,6 +16,8 @@
 package com.google.gwt.dev.jjs;
 
 import com.google.gwt.dev.js.JsNamespaceOption;
+import com.google.gwt.dev.util.arg.OptionJsInteropMode;
+import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.arg.SourceLevel;
 
@@ -27,9 +29,9 @@ import java.io.Serializable;
 public class JJSOptionsImpl implements JJSOptions, Serializable {
 
   private boolean addRuntimeChecks = false;
-  private boolean aggressivelyOptimize = true;
   private boolean closureCompilerEnabled;
   private boolean clusterSimilarFunctions = true;
+  private boolean incrementalCompile = false;
   private boolean compilerMetricsEnabled = false;
   private boolean disableCastChecking = false;
   private boolean disableClassMetadata = false;
@@ -51,22 +53,24 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   private boolean soycExtra = false;
   private boolean soycHtmlDisabled = false;
   private boolean strict = false;
-  private boolean strictResources = false;
+  private boolean strictSourceResources = false;
+  private boolean strictPublicResources = false;
+  private OptionJsInteropMode.Mode jsInteropMode = OptionJsInteropMode.Mode.NONE;
+  private boolean useDetailedTypeIds = false;
+  private OptionMethodNameDisplayMode.Mode methodNameDisplayMode =
+      OptionMethodNameDisplayMode.Mode.NONE;
+  private boolean closureFormatEnabled = false;
 
   public JJSOptionsImpl() {
   }
 
-  public JJSOptionsImpl(JJSOptions other) {
-    copyFrom(other);
-  }
-
   public void copyFrom(JJSOptions other) {
     setAddRuntimeChecks(other.shouldAddRuntimeChecks());
-    setAggressivelyOptimize(other.isAggressivelyOptimize());
     setCastCheckingDisabled(other.isCastCheckingDisabled());
     setClassMetadataDisabled(other.isClassMetadataDisabled());
     setClosureCompilerEnabled(other.isClosureCompilerEnabled());
     setClusterSimilarFunctions(other.shouldClusterSimilarFunctions());
+    setIncrementalCompileEnabled(other.isIncrementalCompileEnabled());
     setCompilerMetricsEnabled(other.isCompilerMetricsEnabled());
     setEnableAssertions(other.isEnableAssertions());
     setFragmentCount(other.getFragmentCount());
@@ -83,14 +87,24 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
     setJsonSoycEnabled(other.isJsonSoycEnabled());
     setSoycHtmlDisabled(other.isSoycHtmlDisabled());
     setStrict(other.isStrict());
-    setEnforceStrictResources(other.enforceStrictResources());
+    setEnforceStrictSourceResources(other.enforceStrictSourceResources());
+    setEnforceStrictPublicResources(other.enforceStrictPublicResources());
     setSourceLevel(other.getSourceLevel());
     setNamespace(other.getNamespace());
+    setJsInteropMode(other.getJsInteropMode());
+    setUseDetailedTypeIds(other.useDetailedTypeIds());
+    setMethodNameDisplayMode(other.getMethodNameDisplayMode());
+    setClosureCompilerFormatEnabled(other.isClosureCompilerFormatEnabled());
   }
 
   @Override
-  public boolean enforceStrictResources() {
-    return strictResources;
+  public boolean enforceStrictSourceResources() {
+    return strictSourceResources;
+  }
+
+  @Override
+  public boolean enforceStrictPublicResources() {
+    return strictPublicResources;
   }
 
   @Override
@@ -103,6 +117,10 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
     return fragmentsMerge;
   }
 
+  @Override
+  public com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode.Mode getMethodNameDisplayMode() {
+    return methodNameDisplayMode;
+  }
   @Override
   public JsNamespaceOption getNamespace() {
     return namespace;
@@ -121,12 +139,6 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   @Override
   public SourceLevel getSourceLevel() {
     return sourceLevel;
-  }
-
-  @Override
-  @Deprecated
-  public boolean isAggressivelyOptimize() {
-    return aggressivelyOptimize;
   }
 
   @Override
@@ -199,12 +211,6 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
-  @Deprecated
-  public void setAggressivelyOptimize(boolean enabled) {
-    aggressivelyOptimize = enabled;
-  }
-
-  @Override
   public void setCastCheckingDisabled(boolean disabled) {
     disableCastChecking = disabled;
   }
@@ -225,6 +231,11 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
+  public void setIncrementalCompileEnabled(boolean enabled) {
+    incrementalCompile = enabled;
+  }
+
+  @Override
   public void setCompilerMetricsEnabled(boolean enabled) {
     compilerMetricsEnabled = enabled;
   }
@@ -235,8 +246,13 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
-  public void setEnforceStrictResources(boolean strictResources) {
-    this.strictResources = strictResources;
+  public void setEnforceStrictSourceResources(boolean strictSourceResources) {
+    this.strictSourceResources = strictSourceResources;
+  }
+
+  @Override
+  public void setEnforceStrictPublicResources(boolean strictPublicResources) {
+    this.strictPublicResources = strictPublicResources;
   }
 
   @Override
@@ -257,6 +273,12 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   @Override
   public void setJsonSoycEnabled(boolean enabled) {
     jsonSoycEnabled = enabled;
+  }
+
+  @Override
+  public void setMethodNameDisplayMode(
+      com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode.Mode methodNameDisplayMode) {
+    this.methodNameDisplayMode = methodNameDisplayMode;
   }
 
   @Override
@@ -325,6 +347,11 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
+  public void setUseDetailedTypeIds(boolean enabled) {
+    useDetailedTypeIds = enabled;
+  }
+
+  @Override
   public boolean shouldAddRuntimeChecks() {
     return addRuntimeChecks;
   }
@@ -335,8 +362,18 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
+  public boolean isIncrementalCompileEnabled() {
+    return incrementalCompile;
+  }
+
+  @Override
   public boolean shouldInlineLiteralParameters() {
     return inlineLiteralParameters;
+  }
+
+  @Override
+  public boolean shouldJDTInlineCompileTimeConstants() {
+    return !isIncrementalCompileEnabled();
   }
 
   @Override
@@ -352,5 +389,30 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   @Override
   public boolean shouldRemoveDuplicateFunctions() {
     return removeDuplicateFunctions;
+  }
+
+  @Override
+  public OptionJsInteropMode.Mode getJsInteropMode() {
+    return jsInteropMode;
+  }
+
+  @Override
+  public void setJsInteropMode(OptionJsInteropMode.Mode mode) {
+    jsInteropMode = mode;
+  }
+
+  @Override
+  public boolean useDetailedTypeIds() {
+    return useDetailedTypeIds;
+  }
+
+  @Override
+  public boolean isClosureCompilerFormatEnabled() {
+    return closureFormatEnabled;
+  }
+
+  @Override
+  public void setClosureCompilerFormatEnabled(boolean enabled) {
+    closureFormatEnabled = enabled;
   }
 }

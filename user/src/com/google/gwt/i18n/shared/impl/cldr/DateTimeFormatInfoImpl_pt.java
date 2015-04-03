@@ -14,12 +14,7 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6546 Google $
-//  date=$Date: 2012-02-07 13:32:35 -0500 (Tue, 07 Feb 2012) $
-//  type=root
 
 /**
  * Implementation of DateTimeFormatInfo for the "pt" locale.
@@ -38,7 +33,7 @@ public class DateTimeFormatInfoImpl_pt extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatMedium() {
-    return "dd/MM/yyyy";
+    return "dd/MM/y";
   }
 
   @Override
@@ -65,21 +60,6 @@ public class DateTimeFormatInfoImpl_pt extends DateTimeFormatInfoImpl {
   @Override
   public int firstDayOfTheWeek() {
     return 0;
-  }
-
-  @Override
-  public String formatHour24Minute() {
-    return "HH'h'mm";
-  }
-
-  @Override
-  public String formatHour24MinuteSecond() {
-    return "HH'h'mm'min'ss's'";
-  }
-
-  @Override
-  public String formatMinuteSecond() {
-    return "mm'min'ss's'";
   }
 
   @Override
@@ -124,27 +104,17 @@ public class DateTimeFormatInfoImpl_pt extends DateTimeFormatInfoImpl {
 
   @Override
   public String formatYearMonthNum() {
-    return "MM/yyyy";
+    return "MM/y";
   }
 
   @Override
   public String formatYearMonthNumDay() {
-    return "dd/MM/yyyy";
+    return "dd/MM/y";
   }
 
   @Override
   public String formatYearMonthWeekdayDay() {
     return "EEE, d 'de' MMM 'de' y";
-  }
-
-  @Override
-  public String formatYearQuarterFull() {
-    return "yyyy QQQQ";
-  }
-
-  @Override
-  public String formatYearQuarterShort() {
-    return "yyyy Q";
   }
 
   @Override
@@ -201,16 +171,6 @@ public class DateTimeFormatInfoImpl_pt extends DateTimeFormatInfoImpl {
         "T3",
         "T4"
     };
-  }
-
-  @Override
-  public String timeFormatFull() {
-    return "HH'h'mm'min'ss's' zzzz";
-  }
-
-  @Override
-  public String timeFormatLong() {
-    return "HH'h'mm'min'ss's' z";
   }
 
   @Override

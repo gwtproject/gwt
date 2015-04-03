@@ -18,12 +18,14 @@ package com.google.gwt.dev.jjs;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.CompilerContext;
+import com.google.gwt.dev.NullRebuildCache;
 import com.google.gwt.dev.PrecompileTaskOptions;
-import com.google.gwt.dev.cfg.Properties;
+import com.google.gwt.dev.cfg.ConfigProps;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.StandardGeneratorContext;
 import com.google.gwt.dev.jdt.RebindPermutationOracle;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JTypeOracle.StandardTypes;
 import com.google.gwt.dev.jjs.impl.AssertionNormalizer;
 import com.google.gwt.dev.jjs.impl.AssertionRemover;
 import com.google.gwt.dev.jjs.impl.FixAssignmentsToUnboxOrCast;
@@ -44,11 +46,12 @@ public class AstConstructor {
    * {@link JavaToJavaScriptCompiler}.
    */
   public static JProgram construct(TreeLogger logger, final CompilationState state,
-      PrecompileTaskOptions options, Properties properties) throws UnableToCompleteException {
+      PrecompileTaskOptions options, ConfigProps config) throws UnableToCompleteException {
 
     InternalCompilerException.preload();
 
-    CompilerContext compilerContext = new CompilerContext.Builder().options(options).build();
+    CompilerContext compilerContext = new CompilerContext.Builder().options(options)
+        .minimalRebuildCache(new NullRebuildCache()).build();
 
     RebindPermutationOracle rpo = new RebindPermutationOracle() {
       @Override
@@ -72,13 +75,14 @@ public class AstConstructor {
       }
     };
 
-    JProgram jprogram = new JProgram();
+    JProgram jprogram = new JProgram(compilerContext.getMinimalRebuildCache());
     JsProgram jsProgram = new JsProgram();
     UnifyAst unifyAst = new UnifyAst(logger, compilerContext, jprogram, jsProgram, rpo);
     unifyAst.buildEverything();
 
     // Compute all super type/sub type info
-    jprogram.typeOracle.computeBeforeAST();
+    jprogram.typeOracle.computeBeforeAST(StandardTypes.createFrom(jprogram),
+        jprogram.getDeclaredTypes(), jprogram.getModuleDeclaredTypes());
 
     // (3) Perform Java AST normalizations.
     FixAssignmentsToUnboxOrCast.exec(jprogram);
@@ -97,8 +101,8 @@ public class AstConstructor {
 
     if (options.isRunAsyncEnabled()) {
       ReplaceRunAsyncs.exec(logger, jprogram);
-      if (properties != null) {
-        CodeSplitters.pickInitialLoadSequence(logger, jprogram, properties);
+      if (config != null) {
+        CodeSplitters.pickInitialLoadSequence(logger, jprogram, config);
       }
     }
 

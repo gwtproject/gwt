@@ -30,6 +30,8 @@ import com.google.gwt.validation.rebind.ValidatorGenerator;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import java.util.regex.Pattern;
+
 import javax.validation.ValidationException;
 import javax.validation.Validator;
 
@@ -46,7 +48,7 @@ public abstract class TckCompileTestCase extends TestCase {
   protected void assertBeanValidatorFailsToCompile(
       Class<? extends Validator> validatorClass, Class<?> beanType,
       Class<? extends ValidationException> expectedException,
-      String expectedMessage) throws UnableToCompleteException {
+      Pattern expectedMessage) throws UnableToCompleteException {
     ValidatorGenerator generator = new ValidatorGenerator(cache, validGroups);
     generator.generate(failOnErrorLogger, context,
         validatorClass.getCanonicalName());
@@ -62,7 +64,7 @@ public abstract class TckCompileTestCase extends TestCase {
   protected void assertValidatorFailsToCompile(
       Class<? extends Validator> validatorClass,
       Class<? extends ValidationException> expectedException,
-      String expectedMessage) {
+      Pattern expectedMessage) {
     ValidatorGenerator generator = new ValidatorGenerator(cache, validGroups);
     assertUnableToComplete(expectedException, expectedMessage, generator,
         validatorClass.getCanonicalName());
@@ -77,9 +79,20 @@ public abstract class TckCompileTestCase extends TestCase {
     validGroups = new Class<?>[]{ };
   }
 
+  @Override
+  protected void tearDown() throws Exception {
+    super.tearDown();
+    // Free all references to compiler internal objects to avoid heap exhaustion because the test
+    // runner keeps all test instances alive.
+    cache = null;
+    failOnErrorLogger =  null;
+    context = null;
+    validGroups =  null;
+  }
+
   private void assertUnableToComplete(
       Class<? extends ValidationException> expectedException,
-      String expectedMessage, Generator generator, final String typeName) {
+      Pattern expectedMessage, Generator generator, final String typeName) {
     UnitTestTreeLogger testLogger = createTestLogger(expectedException,
         expectedMessage);
 

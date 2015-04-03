@@ -21,8 +21,7 @@ import java.util.List;
 
 /**
  * This interface provides an abstraction around the underlying data model
- * (JavaScriptObject, {@code org.json}, or XML) used to encode an AutoBeanCodex
- * payload.
+ * (JavaScriptObject, or JSON) used to encode an AutoBeanCodex payload.
  */
 public interface Splittable {
   /**
@@ -134,6 +133,13 @@ public interface Splittable {
    * Returns {@code true} if the value of the key is undefined.
    */
   boolean isUndefined(String key);
+
+  /**
+   * Removes a tag value from the Splittable.
+   *
+   * @param key the key for the value to be removed
+   */
+  void removeReified(String key);
 
   /**
    * Associates a tag value with the Splittable.

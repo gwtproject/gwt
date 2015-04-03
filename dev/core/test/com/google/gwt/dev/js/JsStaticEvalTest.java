@@ -34,6 +34,7 @@ public class JsStaticEvalTest extends OptimizerTestBase {
   public void testAssociativity() throws Exception {
     // Simple test
     assertEquals("alert(a||b||c||d);", optimize("alert((a||b)||(c||d));"));
+    assertEquals("alert(a||b||c||d||e||f);", optimize("alert((a||b)||(c||(d||(e||f))));"));
     assertEquals("alert(a&&b&&c&&d);", optimize("alert((a&&b)&&(c&&d));"));
 
     // Preserve precedence
@@ -45,8 +46,10 @@ public class JsStaticEvalTest extends OptimizerTestBase {
     assertEquals("a()&&b,c();", optimize("a() && b, c()"));
 
     // Don't damage math expressions
-    assertEquals("alert(seconds/(60*60));",
+    assertEquals("alert(seconds/3600);",
         optimize("alert(seconds / (60 * 60))"));
+    assertEquals("alert(seconds/60*60);",
+        optimize("alert(seconds / 60 * 60)"));
     assertEquals("alert(1-(1-foo));", optimize("alert(1 - (1 - foo))"));
 
     // Don't damage assignments
@@ -60,25 +63,17 @@ public class JsStaticEvalTest extends OptimizerTestBase {
     // Break comma expressions up
     assertEquals("alert((a(),b(),c(),d));",
         optimize("alert(((a(),b()),(c(),d)));"));
+    assertEquals("alert((a(),b(),c(),d));",
+        optimize("alert(((a(),b()),(c(),d)));"));
     // and remove expressions without side effects
     assertEquals("alert(d);", optimize("alert(((a,b),(c,d)));"));
 
     // Pattern of coercing a numeric add operation to a string
     assertEquals("alert(''+(a+b));", optimize("alert('' + (a + b))"));
-    assertEquals("alert('foo'+(a+b));",
-        optimize("alert('foo' + ('' + (a + b)))"));
 
     // Tests involving numeric and string literals and identifiers
     assertEquals("alert(21+(1+$foo));",
         optimize("alert((20 + 1) + (1 + $foo));"));
-    assertEquals("alert('211'+$foo);",
-        optimize("alert((20 + 1) + ('1' + $foo));"));
-    assertEquals("alert('2011'+$foo);",
-        optimize("alert((20 + '1') + ('1' + $foo));"));
-    assertEquals("alert('2011'+$foo);",
-        optimize("alert(('20' + 1) + ('1' + $foo));"));
-    assertEquals("alert('2011'+$foo);",
-        optimize("alert(('20' + '1') + ('1' + $foo));"));
 
     // These are also tricky, because $foo could be non-numeric
     assertEquals("alert($foo+1+21);", optimize("alert(($foo + 1) + (20 + 1));"));
@@ -151,6 +146,12 @@ public class JsStaticEvalTest extends OptimizerTestBase {
     assertEquals("alert(false);", optimize("alert(3 <= 2)"));
     assertEquals("alert(false);", optimize("alert(1.8E+10308 < 1.9E+10308)"));
     assertEquals("alert(false);", optimize("alert(1.8E+10308 > 1.9E+10308)"));
+    assertEquals("alert(true);", optimize("alert(\"a\" == \"a\")"));
+    assertEquals("alert(true);", optimize("alert(\"a\" === \"a\")"));
+    assertEquals("alert(true);", optimize("alert(\"a\" != \"b\")"));
+    assertEquals("alert(true);", optimize("alert(\"a\" !== \"b\")"));
+    assertEquals("alert(true);", optimize("alert(\"a\" != null)"));
+    assertEquals("alert(true);", optimize("alert(\"a\" !== null)"));
   }
 
   public void testLiteralEqNull() throws Exception {

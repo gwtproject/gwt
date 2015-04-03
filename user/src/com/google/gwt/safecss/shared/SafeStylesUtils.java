@@ -63,7 +63,7 @@ public final class SafeStylesUtils {
    */
   static class ImplServer extends Impl {
 
-    private ImplIE6To8 implIE = new ImplIE6To8();
+    private ImplIE8 implIE = new ImplIE8();
 
     @Override
     public SafeStyles forOpacity(double value) {
@@ -75,12 +75,12 @@ public final class SafeStylesUtils {
   }
 
   /**
-   * IE6-IE8 implementation of this class.
+   * IE8 implementation of this class.
    */
-  static class ImplIE6To8 extends Impl {
+  static class ImplIE8 extends Impl {
     @Override
     public SafeStyles forOpacity(double value) {
-      // IE6-IE8 uses an alpha filter instead of opacity.
+      // IE8 uses an alpha filter instead of opacity.
       return new SafeStylesString("filter: alpha(opacity=" + (value * 100) + ");");
     }
   }
@@ -666,7 +666,7 @@ public final class SafeStylesUtils {
    * 
    * @param styles the CSS properties string
    * @throws NullPointerException if the css is null
-   * @throws AssertionError if the css does not meet the contraints
+   * @throws AssertionError if the css does not meet the constraints
    */
   static void verifySafeStylesConstraints(String styles) {
     if (styles == null) {

@@ -14,17 +14,20 @@
  * the License.
  */
 package com.google.gwt.i18n.shared.impl.cldr;
-
 // DO NOT EDIT - GENERATED FROM CLDR AND ICU DATA
-//  cldrVersion=21.0
-//  number=$Revision: 6450 $
-//  type=root
-//  date=$Date: 2012-01-25 19:20:54 -0500 (Wed, 25 Jan 2012) $
 
 /**
  * Implementation of DateTimeFormatInfo for the "mgh" locale.
  */
 public class DateTimeFormatInfoImpl_mgh extends DateTimeFormatInfoImpl {
+
+  @Override
+  public String[] ampms() {
+    return new String[] {
+        "wichishu",
+        "mchochil'l"
+    };
+  }
 
   @Override
   public String dateFormatFull() {
@@ -43,7 +46,7 @@ public class DateTimeFormatInfoImpl_mgh extends DateTimeFormatInfoImpl {
 
   @Override
   public String dateFormatShort() {
-    return "dd/MM/yyyy";
+    return "dd/MM/y";
   }
 
   @Override
@@ -60,6 +63,11 @@ public class DateTimeFormatInfoImpl_mgh extends DateTimeFormatInfoImpl {
         "HY",
         "YY"
     };
+  }
+
+  @Override
+  public int firstDayOfTheWeek() {
+    return 0;
   }
 
   @Override

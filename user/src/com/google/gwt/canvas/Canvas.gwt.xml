@@ -13,9 +13,8 @@
   License for the specific language governing permissions and limitations under
   the License.
 -->
-<module type="fileset">
-  <inherits name="com.google.gwt.user.User"/>
-  <inherits name="com.google.gwt.canvas.dom.DOM"/>
+<module>
+  <inherits name='com.google.gwt.useragent.UserAgent'/>
 
   <!-- Define the support property -->
   <define-property name="canvasElementSupport" values="maybe,no" />

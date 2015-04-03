@@ -17,12 +17,7 @@ package com.google.gwt.i18n.client.impl.cldr;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-// DO NOT EDIT - GENERATED FROM CLDR DATA:
-//  cldrVersion=21.0
-//  number=$Revision: 5798 $
-//  date=$Date: 2011-05-02 02:05:34 -0400 (Mon, 02 May 2011) $
-//  type=root
-
+// DO NOT EDIT - GENERATED FROM CLDR DATA
 
 /**
  * Localized names for the "ia" locale.
@@ -246,10 +241,10 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "SI",
         "SO",
         "LK",
-        "SS",
         "ST",
         "US",
         "SD",
+        "SS",
         "CH",
         "SR",
         "SV",
@@ -286,6 +281,7 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "VI",
         "VN",
         "WF",
+        "XK",
         "YE",
         "YT",
         "ZM",
@@ -366,6 +362,7 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
     namesMap.put("SB", "Insulas Solomon");
     namesMap.put("SE", "Svedia");
     namesMap.put("SK", "Slovachia");
+    namesMap.put("SS", "Sudan del Sud");
     namesMap.put("SZ", "Swazilandia");
     namesMap.put("TC", "Insulas Turcos e Caicos");
     namesMap.put("TD", "Tchad");
@@ -459,6 +456,7 @@ public class LocalizedNamesImpl_ia extends LocalizedNamesImpl {
         "SB": "Insulas Solomon",
         "SE": "Svedia",
         "SK": "Slovachia",
+        "SS": "Sudan del Sud",
         "SZ": "Swazilandia",
         "TC": "Insulas Turcos e Caicos",
         "TD": "Tchad",

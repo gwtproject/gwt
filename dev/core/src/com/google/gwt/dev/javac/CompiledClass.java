@@ -19,6 +19,7 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.DiskCacheToken;
 import com.google.gwt.dev.util.StringInterner;
+import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
@@ -43,7 +44,6 @@ public class CompiledClass implements Serializable {
     if (in == null) {
       return null;
     }
-    CompiledClass[] orig = new CompiledClass[in.size()];
     List<CompiledClass> copy = new ArrayList<CompiledClass>();
 
     Map<CompiledClass, CompiledClass> enclosingClassMap = new HashMap<CompiledClass, CompiledClass>();
@@ -87,7 +87,7 @@ public class CompiledClass implements Serializable {
   /**
    * For mock construction in tests.
    */
-  // VisibleForTesting
+  @VisibleForTesting
   protected CompiledClass(CompiledClass enclosingClass,
       String internalName, String sourceName) {
     this.enclosingClass = enclosingClass;

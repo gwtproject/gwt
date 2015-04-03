@@ -67,24 +67,16 @@ public class ResourceOracleImplTest extends AbstractResourceOrientedTestBase {
 
   private static class ResourceOracleSnapshot {
     private final Set<String> pathNames;
-    private final Map<String, Resource> resourceMap;
     private final Set<Resource> resources;
 
     public ResourceOracleSnapshot(ResourceOracleImpl oracle) {
       resources = oracle.getResources();
-      resourceMap = oracle.getResourceMap();
       pathNames = oracle.getPathNames();
     }
 
     public void assertCollectionsConsistent(int expectedSize) {
       assertEquals(expectedSize, resources.size());
-      assertEquals(resources.size(), resourceMap.size());
       assertEquals(resources.size(), pathNames.size());
-
-      // Ensure every resource is in the map correctly.
-      for (Resource r : resources) {
-        assertSame(r, resourceMap.get(r.getPath()));
-      }
 
       // Ensure that every resource path is in the set.
       for (Resource r : resources) {
@@ -93,7 +85,6 @@ public class ResourceOracleImplTest extends AbstractResourceOrientedTestBase {
     }
 
     public void assertNotSameCollections(ResourceOracleSnapshot other) {
-      assertNotSame(resourceMap, other.resourceMap);
       assertNotSame(resources, other.resources);
       assertNotSame(pathNames, other.pathNames);
     }
@@ -109,8 +100,12 @@ public class ResourceOracleImplTest extends AbstractResourceOrientedTestBase {
     public void assertPathIncluded(String expectedPath, ClassPathEntry expectedCpe) {
       AbstractResource resource = findResourceWithPath(expectedPath);
       assertNotNull(resource);
-      ClassPathEntry actualCpe = resource.getClassPathEntry();
-      assertEquals(expectedCpe.getLocation(), actualCpe.getLocation());
+      String cpeLocation = expectedCpe.getLocation();
+      if (cpeLocation.endsWith(".jar") || cpeLocation.endsWith(".zip")) {
+        assertTrue(resource.getLocation().startsWith("jar:" + cpeLocation));
+      } else {
+        assertTrue(resource.getLocation().startsWith(cpeLocation));
+      }
     }
 
     public void assertPathNotIncluded(String path) {
@@ -118,7 +113,6 @@ public class ResourceOracleImplTest extends AbstractResourceOrientedTestBase {
     }
 
     public void assertSameCollections(ResourceOracleSnapshot other) {
-      assertResourcesEqual(resourceMap, other.resourceMap);
       assertResourcesEqual(resources, other.resources);
       assertEquals(pathNames, other.pathNames);
     }
@@ -197,20 +191,20 @@ public class ResourceOracleImplTest extends AbstractResourceOrientedTestBase {
     // test basic caching
     PathPrefixSet pps1 = new PathPrefixSet();
     pps1.add(new PathPrefix("com/google/gwt/", null, false));
-    Map<AbstractResource, PathPrefix> resourceMap1 = cpe1jar.findApplicableResources(
-        logger, pps1);
+    Map<AbstractResource, ResourceResolution> resourceMap1 =
+        cpe1jar.findApplicableResources(logger, pps1);
     assertSame(resourceMap1, cpe1jar.findApplicableResources(logger, pps1));
 
     // test that cache is invalidated if PathPrefixSet is modified.
     pps1.add(new PathPrefix("com/google/gwt/user/", null, false));
-    Map<AbstractResource, PathPrefix> resourceMap2 = cpe1jar.findApplicableResources(
-        logger, pps1);
+    Map<AbstractResource, ResourceResolution> resourceMap2 =
+        cpe1jar.findApplicableResources(logger, pps1);
     assertNotSame(resourceMap1, resourceMap2);
 
     PathPrefixSet pps2 = new PathPrefixSet();
     pps2.add(new PathPrefix("org/example/bar/", null, false));
-    Map<AbstractResource, PathPrefix> resourceMap3 = cpe1jar.findApplicableResources(
-        logger, pps2);
+    Map<AbstractResource, ResourceResolution> resourceMap3 =
+        cpe1jar.findApplicableResources(logger, pps2);
     // check that the entry did go in the cache
     assertSame(resourceMap3, cpe1jar.findApplicableResources(logger, pps2));
 
@@ -550,61 +544,48 @@ public class ResourceOracleImplTest extends AbstractResourceOrientedTestBase {
       throws IOException {
     TreeLogger logger = createTestTreeLogger();
 
+    String commandPath = "com/google/gwt/user/client/Command.java";
+    String messagesPath = "com/google/gwt/i18n/client/Messages.java";
+
+    String userPackage = "cpe1.com.google.gwt.user.client";
+    String i18nPackage = "cpe2.com.google.gwt.i18n.client";
+
     ResourceOracleImpl oracle = createResourceOracle(cpe1, cpe2);
     ResourceOracleSnapshot s = refreshAndSnapshot(logger, oracle);
     s.assertCollectionsConsistent(10);
-    s.assertPathIncluded("com/google/gwt/user/client/Command.java", cpe1);
-    s.assertPathIncluded("com/google/gwt/i18n/client/Messages.java", cpe2);
 
-    {
-      /*
-       * Read a resource in cpe1.
-       */
-      AbstractResource res = s.findResourceWithPath("com/google/gwt/user/client/Command.java");
-      BufferedReader rdr = null;
-      try {
-        InputStream is = res.openContents();
-        assertNotNull(is);
-        rdr = new BufferedReader(new InputStreamReader(is));
+    // Read a resource in cpe1.
+    readAndAssertResource(oracle, commandPath, userPackage);
 
-        // Skip lines until package line is found.
-        String line = rdr.readLine();
-        while (line != null && !line.startsWith("package")) {
-          line = rdr.readLine();
-        }
-        assertTrue(line != null && line.indexOf(
-            "package com.google.gwt.dev.resource.impl.testdata.cpe1.com.google.gwt.user.client;") >= 0);
-      } finally {
-        Utility.close(rdr);
+    // Read a resource in cpe2.
+    readAndAssertResource(oracle, messagesPath, i18nPackage);
+
+    // Read relative path.
+    readAndAssertResource(oracle, "com/google/gwt/i18n/../i18n/client/Messages.java", i18nPackage);
+
+    // Read path that doesn't exist.
+    assertNull(oracle.getResource("com/google/gwt/i18n/client/DoesntExist.java"));
+  }
+
+  private void readAndAssertResource(ResourceOracleImpl oracle, String path, String expectedPackage)
+      throws IOException {
+    Resource res = oracle.getResource(path);
+    assertNotNull(res);
+    BufferedReader rdr = null;
+    try {
+      InputStream is = res.openContents();
+      assertNotNull(is);
+      rdr = new BufferedReader(new InputStreamReader(is));
+      // Skip lines until package line is found.
+      String line = rdr.readLine();
+      while (line != null && !line.startsWith("package")) {
+        line = rdr.readLine();
       }
-    }
-
-    {
-      /*
-       * Read a resource in cpe2.
-       */
-      AbstractResource res = s.findResourceWithPath("com/google/gwt/i18n/client/Messages.java");
-      BufferedReader rdr = null;
-      try {
-        InputStream is = res.openContents();
-        assertNotNull(is);
-        rdr = new BufferedReader(new InputStreamReader(is));
-        // Skip lines until package line is found.
-        String line = rdr.readLine();
-        while (line != null && !line.startsWith("package")) {
-          line = rdr.readLine();
-        }
-        assertTrue(line != null && line.indexOf(
-            "package com.google.gwt.dev.resource.impl.testdata.cpe2.com.google.gwt.i18n.client;") >= 0);
-      } finally {
-        Utility.close(rdr);
-      }
-    }
-
-    {
-      /*
-       * TODO: Try to read an invalid resource and watch it fail as intended.
-       */
+      assertTrue(line != null
+          && line.indexOf("package com.google.gwt.dev.resource.impl.testdata." + expectedPackage
+              + ";") >= 0);
+    } finally {
+      Utility.close(rdr);
     }
   }
 

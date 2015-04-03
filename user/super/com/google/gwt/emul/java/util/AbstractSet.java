@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+
 /**
  * Skeletal implementation of the Set interface. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractSet.html">[Sun
@@ -36,37 +38,21 @@ public abstract class AbstractSet<E> extends AbstractCollection<E> implements
     }
 
     Set<?> other = (Set<?>) o;
-
     if (other.size() != size()) {
       return false;
     }
-
-    for (Iterator<?> iter = other.iterator(); iter.hasNext();) {
-      Object otherItem = iter.next();
-      if (!contains(otherItem)) {
-        return false;
-      }
-    }
-    return true;
+    return containsAll(other);
   }
 
   @Override
   public int hashCode() {
-    int hashCode = 0;
-    for (Iterator<E> iter = iterator(); iter.hasNext();) {
-      // Sets can have null members
-      E next = iter.next();
-      if (next != null) {
-        hashCode += next.hashCode();
-        // handle int overflow by coercing to int
-        hashCode = ~~hashCode;
-      }
-    }
-    return hashCode;
+    return Collections.hashCode(this);
   }
 
   @Override
   public boolean removeAll(Collection<?> c) {
+    checkNotNull(c);
+
     int size = size();
     if (size < c.size()) {
       // If the member of 'this' is in 'c', remove it from 'this'.
@@ -80,8 +66,7 @@ public abstract class AbstractSet<E> extends AbstractCollection<E> implements
     } else {
       // Remove every member of 'c' from 'this'.
       //
-      for (Iterator<?> iter = c.iterator(); iter.hasNext();) {
-        Object o = iter.next();
+      for (Object o : c) {
         remove(o);
       }
     }

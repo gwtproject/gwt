@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -33,7 +33,7 @@ public class JavaSourceParserTest extends CompilationStateTestBase {
   private static final MockJavaResource BAR = new MockJavaResource("test.Bar") {
     @Override
     public CharSequence getContent() {
-      StringBuffer code = new StringBuffer();
+      StringBuilder code = new StringBuilder();
       code.append("package test;\n");
       code.append("public class Bar {\n");
       code.append("  public String value(String a, int val) { return \"Bar\"; }\n");
@@ -47,7 +47,7 @@ public class JavaSourceParserTest extends CompilationStateTestBase {
   private static final MockJavaResource BAZ = new MockJavaResource("test.Baz") {
     @Override
     public CharSequence getContent() {
-      StringBuffer code = new StringBuffer();
+      StringBuilder code = new StringBuilder();
       code.append("package test;\n");
       code.append("public class Baz {\n");
       code.append("  public static class Baz1 {\n");
@@ -66,7 +66,7 @@ public class JavaSourceParserTest extends CompilationStateTestBase {
   private static final MockJavaResource FOO = new MockJavaResource("test.Foo") {
     @Override
     public CharSequence getContent() {
-      StringBuffer code = new StringBuffer();
+      StringBuilder code = new StringBuilder();
       code.append("package test;\n");
       code.append("public class Foo {\n");
       code.append("  public String value(String a, int val) { return \"Foo\"; }\n");
@@ -79,7 +79,7 @@ public class JavaSourceParserTest extends CompilationStateTestBase {
       "test.FooInt") {
     @Override
     public CharSequence getContent() {
-      StringBuffer code = new StringBuffer();
+      StringBuilder code = new StringBuilder();
       code.append("package test;\n");
       code.append("public interface FooInt {\n");
       code.append("  String value(String a, int val);\n");

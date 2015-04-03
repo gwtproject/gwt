@@ -25,6 +25,7 @@ import com.google.gwt.core.ext.RebindRuleResolver;
 import com.google.gwt.core.ext.SubsetFilteringPropertyOracle;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.impl.ResourceLocatorImpl;
 import com.google.gwt.core.ext.linker.Artifact;
 import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
@@ -33,7 +34,10 @@ import com.google.gwt.core.ext.linker.impl.StandardGeneratedResource;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.CompilerContext;
+import com.google.gwt.dev.cfg.RuleGenerateWith;
+import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
+import com.google.gwt.dev.resource.impl.AbstractResourceOracle;
 import com.google.gwt.dev.util.DiskCache;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashSet;
@@ -41,6 +45,7 @@ import com.google.gwt.dev.util.collect.IdentityHashMap;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+import com.google.gwt.thirdparty.guava.common.io.Files;
 import com.google.gwt.util.tools.Utility;
 
 import java.io.ByteArrayOutputStream;
@@ -65,6 +70,41 @@ import java.util.SortedSet;
 public class StandardGeneratorContext implements GeneratorContext {
 
   /**
+   * Wraps a ResourceOracle to collect the paths of Resources read by Generators.
+   */
+  private class RecordingResourceOracle extends AbstractResourceOracle {
+
+    private final ResourceOracle wrappedResourceOracle;
+
+    public RecordingResourceOracle(ResourceOracle wrappedResourceOracle) {
+      this.wrappedResourceOracle = wrappedResourceOracle;
+    }
+
+    @Override
+    public void clear() {
+      wrappedResourceOracle.clear();
+    }
+
+    @Override
+    public Set<String> getPathNames() {
+      return wrappedResourceOracle.getPathNames();
+    }
+
+    @Override
+    public Resource getResource(String pathName) {
+      pathName = Files.simplifyPath(pathName);
+      compilerContext.getMinimalRebuildCache().associateReboundTypeWithInputResource(
+          currentRebindBinaryTypeName, pathName);
+      return wrappedResourceOracle.getResource(pathName);
+    }
+
+    @Override
+    public Set<Resource> getResources() {
+      return wrappedResourceOracle.getResources();
+    }
+  }
+
+  /**
    * Extras added to {@link GeneratedUnit}.
    */
   private static interface Generated extends GeneratedUnit {
@@ -79,7 +119,7 @@ public class StandardGeneratorContext implements GeneratorContext {
    * that source isn't requested until the generator has finished writing it.
    * This version is backed by {@link StandardGeneratorContext#diskCache}.
    */
-  private static class GeneratedUnitImpl implements Generated {
+  public static class GeneratedUnitImpl implements Generated {
 
     /**
      * A token to retrieve this object's bytes from the disk cache.
@@ -264,8 +304,6 @@ public class StandardGeneratorContext implements GeneratorContext {
         CompilerEventType.GENERATOR_I18N);
     eventsByGeneratorType.put("com.google.gwt.user.rebind.rpc.ServiceInterfaceProxyGenerator",
         CompilerEventType.GENERATOR_RPC);
-    eventsByGeneratorType.put("com.google.gwt.rpc.rebind.RpcServiceGenerator",
-        CompilerEventType.GENERATOR_RPC); // deRPC
     eventsByGeneratorType.put("com.google.gwt.uibinder.rebind.UiBinderGenerator",
         CompilerEventType.GENERATOR_UIBINDER);
     eventsByGeneratorType.put("com.google.gwt.inject.rebind.GinjectorGenerator",
@@ -310,6 +348,10 @@ public class StandardGeneratorContext implements GeneratorContext {
 
   private CompilerContext compilerContext;
 
+  private String currentRebindBinaryTypeName;
+
+  private final ResourceOracle buildResourceOracle;
+
   /**
    * Normally, the compiler host would be aware of the same types that are
    * available in the supplied type oracle although it isn't strictly required.
@@ -321,6 +363,11 @@ public class StandardGeneratorContext implements GeneratorContext {
     this.genDir = compilerContext.getOptions().getGenDir();
     this.allGeneratedArtifacts = allGeneratedArtifacts;
     this.isProdMode = isProdMode;
+
+    this.buildResourceOracle =
+        new RecordingResourceOracle(compilerContext.getBuildResourceOracle());
+
+    ResourceLocatorImpl.resetClassLoaderLoadWarningCount();
   }
 
   /**
@@ -579,18 +626,9 @@ public class StandardGeneratorContext implements GeneratorContext {
     return propertyOracle;
   }
 
-  /**
-   * Returns whether the current compile and generator passes are executing in
-   * the global phase of a compile, as opposed to further down in the dependency
-   * tree.
-   */
-  public boolean isGlobalCompile() {
-    return compilerContext.getOptions().shouldLink();
-  }
-
   @Override
   public ResourceOracle getResourcesOracle() {
-    return compilerContext.getBuildResourceOracle();
+    return buildResourceOracle;
   }
 
   @Override
@@ -679,8 +717,8 @@ public class StandardGeneratorContext implements GeneratorContext {
       // incompatible way) so that all Generators are forced to accurately declare the names of
       // properties they care about.
       propertyOracle = new SubsetFilteringPropertyOracle(
-          generator.getAccessedPropertyNames(), originalPropertyOracle,
-          generatorClassName + ".getAccessedPropertyNames() may need to be updated.");
+          RuleGenerateWith.getAccessedPropertyNames(generator.getClass()), originalPropertyOracle,
+          generatorClassName + "'s RunsLocal annotation may need to be updated.");
       if (generator instanceof IncrementalGenerator) {
         IncrementalGenerator incGenerator = (IncrementalGenerator) generator;
 
@@ -741,6 +779,10 @@ public class StandardGeneratorContext implements GeneratorContext {
     this.currentGenerator = currentGenerator;
   }
 
+  public void setCurrentRebindBinaryTypeName(String currentRebindBinaryTypeName) {
+    this.currentRebindBinaryTypeName = currentRebindBinaryTypeName;
+  }
+
   public void setGeneratorResultCachingEnabled(boolean enabled) {
     this.generatorResultCachingEnabled = enabled;
   }
@@ -765,6 +807,10 @@ public class StandardGeneratorContext implements GeneratorContext {
     } else {
       typeName = packageName + '.' + simpleTypeName;
     }
+
+    compilerContext.getMinimalRebuildCache().associateReboundTypeWithGeneratedCompilationUnitName(
+        currentRebindBinaryTypeName, typeName);
+
     // Is type already known to the host?
     JClassType existingType = getTypeOracle().findType(packageName, simpleTypeName);
     if (existingType != null) {
@@ -845,7 +891,7 @@ public class StandardGeneratorContext implements GeneratorContext {
     }
 
     // Check for public path collision.
-    if (compilerContext.getPublicResourceOracle().getResourceMap().containsKey(partialPath)) {
+    if (compilerContext.getPublicResourceOracle().getResource(partialPath) != null) {
       logger.log(TreeLogger.WARN, "Cannot create resource '" + partialPath
           + "' because it already exists on the public path", null);
       return null;
@@ -901,12 +947,9 @@ public class StandardGeneratorContext implements GeneratorContext {
     }
 
     // Warn the user about uncommitted resources.
-    logger =
-        logger
-            .branch(
-                TreeLogger.WARN,
-                "The following resources will not be created because they were never committed (did you forget to call commit()?)",
-                null);
+    logger = logger.branch(TreeLogger.WARN,
+        "The following resources will not be created because they were never "
+        + "committed (did you forget to call commit()?)", null);
 
     for (Entry<String, PendingResource> entry : pendingResources.entrySet()) {
       logger.log(TreeLogger.WARN, entry.getKey());

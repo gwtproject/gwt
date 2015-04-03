@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,6 +21,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.util.tools.Utility;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -31,7 +32,7 @@ import java.io.OutputStream;
  * be emitted by the compiler into the module's output directory. This type may
  * be extended by Linker providers to provide alternative implementations of
  * {@link #getContents(TreeLogger)}.
- * 
+ *
  * TODO(bobv): provide a timestamp so we can make the time on output files match
  * that of input files?
  */
@@ -46,7 +47,7 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
      * A public artifact is something that may be served to clients.
      */
     Public,
-    
+
     /**
      * A private artifact is something that is only used during the build
      * process.
@@ -63,7 +64,7 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
         }
       }
     },
-    
+
     /**
      * A deploy artifact is deployed to the server but is never served to the
      * client.
@@ -94,7 +95,7 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
      * should be visible to the server.  These artifacts will now be treated as
      * both Private and Deploy, so that existing build tools that expect to find
      * them in the output directory for Private artifacts will find them.
-     * 
+     *
      * New code should use Deploy instead.
      */
     LegacyDeploy {
@@ -110,12 +111,12 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
         }
       }
     };
-    
+
     /**
      * Returns true if this visibility matches the requested visibility level,
      * dealing with the fact that {@link #LegacyDeploy} matches both
      * {@link #Private} and {@link #Deploy}.
-     * 
+     *
      * @param visibility
      * @return true if this visibility matches the requested level
      */
@@ -151,7 +152,7 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
    * <p>
    * The default implementation always returns the current time. Subclasses
    * should override this method to provide a type-appropriate value.
-   * 
+   *
    * @return the time at which the Artifact was last modified
    */
   public long getLastModified() {
@@ -179,39 +180,6 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
   }
 
   /**
-   * Returns whether or not the data contained in the EmittedArtifact should be
-   * written into the module output directory or into an auxiliary directory.
-   * <p>
-   * EmittedArtifacts that return <code>true</code> for this method will not
-   * be emitted into the normal module output location, but will instead be
-   * written into a directory that is a sibling to the module output directory.
-   * The partial path of the EmittedArtifact will be prepended with the
-   * short-name of the Linker type that created the EmittedArtifact.
-   * <p>
-   * Private EmittedArtifacts are intended for resources that generally should
-   * not be deployed to the server in the same location as the module
-   * compilation artifacts.
-   * 
-   * @deprecated use {@link #getVisibility()} instead
-   */
-  @Deprecated
-  public boolean isPrivate() {
-    return visibility == Visibility.Private;
-  }
-
-  /**
-   * Sets the private attribute of the EmittedResource.
-   * 
-   * @param isPrivate true if this artifact is private
-   *
-   * @deprecated use {@link #setVisibility(Visibility)} instead
-   */
-  @Deprecated
-  public void setPrivate(boolean isPrivate) {
-    this.visibility = isPrivate ? Visibility.Private : Visibility.Public;
-  }
-
-  /**
    * @param visibility the visibility to set
    */
   public void setVisibility(Visibility visibility) {
@@ -228,13 +196,15 @@ public abstract class EmittedArtifact extends Artifact<EmittedArtifact> {
    */
   public void writeTo(TreeLogger logger, OutputStream out)
       throws UnableToCompleteException {
+    InputStream in = null;
     try {
-      InputStream in = getContents(logger);
+      in = new BufferedInputStream(getContents(logger));
       Util.copyNoClose(in, out);
-      Utility.close(in);
     } catch (IOException e) {
       logger.log(TreeLogger.ERROR, "Unable to copy artifact: " + getPartialPath(), e);
       throw new UnableToCompleteException();
+    } finally {
+      Utility.close(in);
     }
   }
 

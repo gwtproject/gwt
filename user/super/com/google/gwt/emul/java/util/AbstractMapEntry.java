@@ -23,14 +23,12 @@ abstract class AbstractMapEntry<K, V> implements Map.Entry<K, V> {
 
   @Override
   public final boolean equals(Object other) {
-    if (other instanceof Map.Entry) {
-      Map.Entry<?, ?> entry = (Map.Entry<?, ?>) other;
-      if (Objects.equals(getKey(), entry.getKey())
-          && Objects.equals(getValue(), entry.getValue())) {
-        return true;
-      }
+    if (!(other instanceof Map.Entry)) {
+      return false;
     }
-    return false;
+    Map.Entry<?, ?> entry = (Map.Entry<?, ?>) other;
+    return Objects.equals(getKey(), entry.getKey())
+        && Objects.equals(getValue(), entry.getValue());
   }
 
   /**
@@ -38,19 +36,12 @@ abstract class AbstractMapEntry<K, V> implements Map.Entry<K, V> {
    */
   @Override
   public final int hashCode() {
-    int keyHash = 0;
-    int valueHash = 0;
-    if (getKey() != null) {
-      keyHash = getKey().hashCode();
-    }
-    if (getValue() != null) {
-      valueHash = getValue().hashCode();
-    }
-    return keyHash ^ valueHash;
+    return Objects.hashCode(getKey()) ^ Objects.hashCode(getValue());
   }
 
   @Override
   public final String toString() {
+    // for compatibility with the real Jre: issue 3422
     return getKey() + "=" + getValue();
   }
 }

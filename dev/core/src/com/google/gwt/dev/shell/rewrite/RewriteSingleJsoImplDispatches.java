@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -17,14 +17,15 @@ package com.google.gwt.dev.shell.rewrite;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dev.asm.ClassVisitor;
-import com.google.gwt.dev.asm.MethodVisitor;
-import com.google.gwt.dev.asm.Opcodes;
-import com.google.gwt.dev.asm.Type;
-import com.google.gwt.dev.asm.commons.Method;
 import com.google.gwt.dev.shell.rewrite.HostedModeClassRewriter.SingleJsoImplData;
 import com.google.gwt.dev.util.collect.Maps;
 import com.google.gwt.dev.util.collect.Sets;
+
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.commons.Method;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -56,7 +57,7 @@ import java.util.TreeSet;
 public class RewriteSingleJsoImplDispatches extends ClassVisitor {
   private class MyMethodVisitor extends MethodVisitor {
     public MyMethodVisitor(MethodVisitor mv) {
-      super(Opcodes.ASM4, mv);
+      super(Opcodes.ASM5, mv);
     }
 
     /*
@@ -64,7 +65,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
      */
     @Override
     public void visitMethodInsn(int opcode, String owner, String name,
-        String desc) {
+        String desc, boolean dintf) {
       if (opcode == Opcodes.INVOKEINTERFACE) {
         if (jsoData.getSingleJsoIntfTypes().contains(owner)) {
           // Simple case; referring directly to a SingleJso interface.
@@ -74,13 +75,13 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
         } else {
           /*
            * Might be referring to a subtype of a SingleJso interface:
-           * 
+           *
            * interface IA { void foo() }
-           * 
+           *
            * interface JA extends JSO implements IA;
-           * 
+           *
            * interface IB extends IA {}
-           * 
+           *
            * void bar() { ((IB) object).foo(); }
            */
           outer : for (String intf : computeAllInterfaces(owner)) {
@@ -119,7 +120,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
         }
       }
 
-      super.visitMethodInsn(opcode, owner, name, desc);
+      super.visitMethodInsn(opcode, owner, name, desc, dintf);
     }
   }
 
@@ -132,7 +133,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
 
   public RewriteSingleJsoImplDispatches(ClassVisitor v, TypeOracle typeOracle,
       SingleJsoImplData jsoData) {
-    super(Opcodes.ASM4, v);
+    super(Opcodes.ASM5, v);
     this.typeOracle = typeOracle;
     this.jsoData = jsoData;
   }
@@ -220,7 +221,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
     List<JClassType> q = new LinkedList<JClassType>();
     JClassType intf = typeOracle.findType(intfName.replace('/', '.').replace(
         '$', '.'));
-    
+
     /*
      * If the interface's compilation unit wasn't retained due to an error, then
      * it won't be available in the typeOracle for us to rewrite
@@ -275,7 +276,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
     }
     return toReturn;
   }
-  
+
   private void writeEmptyMethod(String mangledMethodName, Method declMethod) {
     MethodVisitor mv = super.visitMethod(Opcodes.ACC_PUBLIC
         | Opcodes.ACC_ABSTRACT, mangledMethodName, declMethod.getDescriptor(),
@@ -310,7 +311,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
            * It just so happens that the stack and local variable sizes are the
            * same, but they're kept distinct to aid in clarity should the
            * dispatch logic change.
-           * 
+           *
            * These start at 1 because we need to load "this" onto the stack
            */
           int var = 1;
@@ -330,7 +331,7 @@ public class RewriteSingleJsoImplDispatches extends ClassVisitor {
           size = Math.max(size, toCall.getReturnType().getSize());
 
           mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, currentTypeName,
-              toCall.getName(), toCall.getDescriptor());
+              toCall.getName(), toCall.getDescriptor(), false);
           mv.visitInsn(toCall.getReturnType().getOpcode(Opcodes.IRETURN));
           mv.visitMaxs(size, var);
           mv.visitEnd();

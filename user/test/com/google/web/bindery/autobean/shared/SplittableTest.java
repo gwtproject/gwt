@@ -185,11 +185,7 @@ public class SplittableTest extends GWTTestCase {
    */
   public void testNull() {
     Splittable n = Splittable.NULL;
-    if (GWT.isScript()) {
-      assertNull(n);
-    } else {
-      assertNotNull(n);
-    }
+    assertNotNull(n);
     assertFalse("boolean", n.isBoolean());
     assertFalse("indexed", n.isIndexed());
     assertFalse("keyed", n.isKeyed());
@@ -277,6 +273,23 @@ public class SplittableTest extends GWTTestCase {
     assertEquals("[\"World\",\"Wide\",\"Web\"]", data.getPayload());
 
     assertEquals(data.getPayload(), normalize(data).getPayload());
+  }
+
+  public void testSplittableListRemove() {
+    Splittable data = StringQuoter.split("[\"a\",\"b\",\"c\",\"d\"]");
+    SplittableList<String> list =
+        new SplittableList<String>(data, AutoBeanCodexImpl.valueCoder(String.class), testState);
+    assertEquals(list.size(), 4);
+    boolean removed = list.remove("b");
+    assertTrue(removed);
+    assertEquals(list.size(), 3);
+    assertTrue(list.equals(Arrays.asList("a", "c", "d")));
+    assertEquals("a", list.get(0));
+    assertTrue(list.contains("a"));
+    assertEquals("c", list.get(1));
+    assertTrue(list.contains("c"));
+    assertEquals("d", list.get(2));
+    assertTrue(list.contains("d"));
   }
 
   public void testSplittableMapStringString() {

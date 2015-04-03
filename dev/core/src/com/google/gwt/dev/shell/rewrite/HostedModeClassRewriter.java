@@ -16,16 +16,17 @@
 package com.google.gwt.dev.shell.rewrite;
 
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.google.gwt.dev.asm.ClassReader;
-import com.google.gwt.dev.asm.ClassVisitor;
-import com.google.gwt.dev.asm.ClassWriter;
-import com.google.gwt.dev.asm.Opcodes;
-import com.google.gwt.dev.asm.commons.Method;
 import com.google.gwt.dev.javac.asmbridge.EmptyVisitor;
 import com.google.gwt.dev.shell.JsValueGlue;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
+
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.commons.Method;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -244,7 +245,8 @@ public class HostedModeClassRewriter {
 
     v = new RewriteJsniMethods(v, anonymousClassMap);
 
-    if (Double.parseDouble(System.getProperty("java.class.version")) < Opcodes.V1_6) {
+    if (Double.parseDouble(System.getProperty("java.class.version")) < Opcodes.V1_8) {
+      // TODO(cromwellian) implement Retrolambda?
       v = new ForceClassVersion15(v);
     }
 

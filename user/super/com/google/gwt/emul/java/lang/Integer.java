@@ -68,7 +68,7 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static Integer decode(String s) throws NumberFormatException {
-    return Integer.valueOf((int) __decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
+    return Integer.valueOf(__decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
   }
 
   /**
@@ -198,15 +198,15 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static String toBinaryString(int value) {
-    return toPowerOfTwoString(value, 1);
+    return toUnsignedRadixString(value, 2);
   }
 
   public static String toHexString(int value) {
-    return toPowerOfTwoString(value, 4);
+    return toUnsignedRadixString(value, 16);
   }
 
   public static String toOctalString(int value) {
-    return toPowerOfTwoString(value, 3);
+    return toUnsignedRadixString(value, 8);
   }
 
   public static String toString(int value) {
@@ -217,26 +217,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     if (radix == 10 || radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
       return String.valueOf(value);
     }
-
-    final int bufSize = 33;
-    char[] buf = new char[bufSize];
-    char[] digits = __Digits.digits;
-    int pos = bufSize - 1;
-    if (value >= 0) {
-      while (value >= radix) {
-        buf[pos--] = digits[value % radix];
-        value /= radix;
-      }
-      buf[pos] = digits[value];
-    } else {
-      while (value <= -radix) {
-        buf[pos--] = digits[-(value % radix)];
-        value /= radix;
-      }
-      buf[pos--] = digits[-value];
-      buf[pos] = '-';
-    }
-    return String.__valueOf(buf, pos, bufSize);
+    return toRadixString(value, radix);
   }
 
   public static Integer valueOf(int i) {
@@ -252,7 +233,7 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static Integer valueOf(String s) throws NumberFormatException {
-    return Integer.valueOf(Integer.parseInt(s));
+    return valueOf(s, 10);
   }
 
   public static Integer valueOf(String s, int radix)
@@ -260,26 +241,14 @@ public final class Integer extends Number implements Comparable<Integer> {
     return Integer.valueOf(Integer.parseInt(s, radix));
   }
 
-  private static String toPowerOfTwoString(int value, int shift) {
-    final int bufSize = 32 / shift;
-    int bitMask = (1 << shift) - 1;
-    char[] buf = new char[bufSize];
-    char[] digits = __Digits.digits;
-    int pos = bufSize - 1;
-    if (value >= 0) {
-      while (value > bitMask) {
-        buf[pos--] = digits[value & bitMask];
-        value >>= shift;
-      }
-    } else {
-      while (pos > 0) {
-        buf[pos--] = digits[value & bitMask];
-        value >>= shift;
-      }
-    }
-    buf[pos] = digits[value & bitMask];
-    return String.__valueOf(buf, pos, bufSize);
-  }
+  private static native String toRadixString(int value, int radix) /*-{
+    return value.toString(radix);
+  }-*/;
+
+  private static native String toUnsignedRadixString(int value, int radix) /*-{
+    // ">>> 0" converts the value to unsigned number.
+    return (value >>> 0).toString(radix);
+  }-*/;
 
   private final transient int value;
 

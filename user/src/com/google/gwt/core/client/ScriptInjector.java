@@ -122,6 +122,7 @@ public class ScriptInjector {
     private boolean removeTag = false;
     private final String scriptUrl;
     private JavaScriptObject window;
+    private static JavaScriptObject scriptRegistry = JavaScriptObject.createObject();
 
     private FromUrl(String scriptUrl) {
       this.scriptUrl = scriptUrl;
@@ -134,19 +135,25 @@ public class ScriptInjector {
      * @return the script element created for the injection.
      */
     public JavaScriptObject inject() {
+      JavaScriptObject scriptElement = isScriptLoaded(scriptRegistry, scriptUrl);
+      if(scriptElement != null){
+          return scriptElement;
+      } 
       JavaScriptObject wnd = (window == null) ? nativeDefaultWindow() : window;
       assert wnd != null;
       JavaScriptObject doc = nativeGetDocument(wnd);
       assert doc != null;
-      JavaScriptObject scriptElement = nativeMakeScriptElement(doc);
+      scriptElement = nativeMakeScriptElement(doc);
       assert scriptElement != null;
-      if (callback != null || removeTag) {
-        attachListeners(scriptElement, callback, removeTag);
-      }
+      attachListeners(scriptElement, scriptRegistry, callback, removeTag);
       nativeSetSrc(scriptElement, scriptUrl);
       nativeAttachToHead(doc, scriptElement);
       return scriptElement;
     }
+    
+    private native JavaScriptObject isScriptLoaded(JavaScriptObject scriptRegistry, String scriptUrl)/*-{
+        return (scriptRegistry[scriptUrl] || null);
+    }-*/;
 
     /**
      * Specify a callback to be invoked when the script is loaded or loading
@@ -256,7 +263,7 @@ public class ScriptInjector {
    * @param scriptElement element to which the event handlers will be attached
    * @param callback callback that runs when the script is loaded and parsed.
    */
-  private static native void attachListeners(JavaScriptObject scriptElement,
+  private static native void attachListeners(JavaScriptObject scriptElement, JavaScriptObject scriptRegistry,
       Callback<Void, Exception> callback, boolean removeTag) /*-{
     function clearCallbacks() {
       scriptElement.onerror = scriptElement.onreadystatechange = scriptElement.onload = null;
@@ -265,6 +272,7 @@ public class ScriptInjector {
       }
     }
     scriptElement.onload = $entry(function() {
+      scriptRegistry[scriptElement.src] = scriptElement;
       clearCallbacks();
       if (callback) {
         callback.@com.google.gwt.core.client.Callback::onSuccess(Ljava/lang/Object;)(null);

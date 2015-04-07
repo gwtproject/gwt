@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3d89a3c_ae15e7c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-07T01:44:38Z",
+      "side": 1,
+      "message": "pls update",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 42
+      },
+      "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83cefea1_5406414e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-07T01:44:38Z",
+      "side": 1,
+      "message": "checking JClassType seems like a redundant check?",
+      "range": {
+        "startLine": 594,
+        "startChar": 37,
+        "endLine": 594,
+        "endChar": 68
+      },
+      "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83cefea1_2f5ed254",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-07T01:44:38Z",
+      "side": 1,
+      "message": "Didn\u0027t deeply evaluated but looks like following seems to cover more scenarios and more readable. WDYT? \n\n if (!fromType.canBeSubclass() {\n   return !castSuccedsTrivally(fromType, toType)\n }\n\nIf this covers more scenarios, we should add a test for the missing ones.",
+      "range": {
+        "startLine": 594,
+        "startChar": 3,
+        "endLine": 597,
+        "endChar": 5
+      },
+      "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83cefea1_efb57ae3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-07T01:44:38Z",
+      "side": 1,
+      "message": "nit: as both cannot be subclasses, this basically means fromType \u003d\u003d toType. So perhaps we should have an early exit for returnType \u003d\u003d toType and move it from here.",
+      "range": {
+        "startLine": 681,
+        "startChar": 37,
+        "endLine": 681,
+        "endChar": 95
+      },
+      "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3d89a3c_ae6a475c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1594,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-07T01:44:38Z",
+      "side": 1,
+      "message": "seems redundant?",
+      "range": {
+        "startLine": 1594,
+        "startChar": 10,
+        "endLine": 1594,
+        "endChar": 54
+      },
+      "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

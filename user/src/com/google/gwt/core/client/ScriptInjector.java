@@ -120,8 +120,10 @@ public class ScriptInjector {
   public static class FromUrl {
     private Callback<Void, Exception> callback;
     private boolean removeTag = false;
+    private boolean duplicateLoad = true;
     private final String scriptUrl;
     private JavaScriptObject window;
+    private static final JavaScriptObject scriptRegistry = JavaScriptObject.createObject();
 
     private FromUrl(String scriptUrl) {
       this.scriptUrl = scriptUrl;
@@ -134,19 +136,36 @@ public class ScriptInjector {
      * @return the script element created for the injection.
      */
     public JavaScriptObject inject() {
+      JavaScriptObject scriptElement = null;
+      if (!duplicateLoad) {
+        scriptElement = isScriptLoaded(scriptRegistry, scriptUrl);
+      if (scriptElement != null) {
+          if (callback != null) {
+             callback.onSuccess(null);
+          }
+        return scriptElement;
+        }
+      } 
       JavaScriptObject wnd = (window == null) ? nativeDefaultWindow() : window;
       assert wnd != null;
       JavaScriptObject doc = nativeGetDocument(wnd);
       assert doc != null;
-      JavaScriptObject scriptElement = nativeMakeScriptElement(doc);
+      scriptElement = nativeMakeScriptElement(doc);
       assert scriptElement != null;
-      if (callback != null || removeTag) {
-        attachListeners(scriptElement, callback, removeTag);
-      }
+      attachListeners(scriptElement, callback, removeTag);
       nativeSetSrc(scriptElement, scriptUrl);
       nativeAttachToHead(doc, scriptElement);
+      addScriptToRegistry(scriptRegistry,scriptElement);
       return scriptElement;
     }
+    
+    private native JavaScriptObject isScriptLoaded(JavaScriptObject scriptRegistry,String scriptUrl)/*-{
+        return (scriptRegistry[scriptUrl] || null);
+    }-*/;
+    
+    private native void addScriptToRegistry(JavaScriptObject scriptRegistry, JavaScriptObject scriptElement)/*-{
+        scriptRegistry[scriptElement.src] = scriptElement;
+    }-*/;
 
     /**
      * Specify a callback to be invoked when the script is loaded or loading
@@ -185,6 +204,16 @@ public class ScriptInjector {
      */
     public FromUrl setRemoveTag(boolean removeTag) {
       this.removeTag = removeTag;
+      return this;
+    }
+    
+    /**
+     * @param duplicateLoad If true, loads the script from url more than one time.
+     *
+     *          Default value is {@code true}
+     */
+    public FromUrl setDuplicateLoad(boolean duplicateLoad) {
+      this.duplicateLoad = duplicateLoad;
       return this;
     }
 

@@ -360,6 +360,90 @@ public class ScriptInjectorTest extends GWTTestCase {
             }).inject();
     assertNotNull(injectedElement);
   }
+  
+  public void testInjectDuplicate() {
+    delayTestFinish(TEST_DELAY);
+    final String scriptUrl = "script_injector_test9.js";
+    assertFalse(nativeTest9Worked());
+    JavaScriptObject injectedElement = ScriptInjector.fromUrl(scriptUrl).setRemoveTag(false)
+        .setWindow(ScriptInjector.TOP_WINDOW).inject();
+    JavaScriptObject injectedElement2 = ScriptInjector.fromUrl(scriptUrl).setRemoveTag(false)
+        .setWindow(ScriptInjector.TOP_WINDOW).inject();
+    assertNotNull(injectedElement);
+    assertNotNull(injectedElement2);
+    assertFalse(injectedElement.equals(injectedElement2));
+    assertSame(getSrc(injectedElement),getSrc(injectedElement2));
+  }
+  
+  public void testInjectNoDuplicate() {
+    delayTestFinish(TEST_DELAY);
+    final String scriptUrl = "script_injector_test10.js";
+    assertFalse(nativeTest10Worked());
+    JavaScriptObject injectedElement = ScriptInjector.fromUrl(scriptUrl).setRemoveTag(false)
+        .setWindow(ScriptInjector.TOP_WINDOW).inject();
+    JavaScriptObject injectedElement2 = ScriptInjector.fromUrl(scriptUrl).setRemoveTag(false).setDuplicateLoad(false)
+        .setWindow(ScriptInjector.TOP_WINDOW).inject();
+    assertNotNull(injectedElement);
+    assertNotNull(injectedElement2);
+    assertEquals(injectedElement,injectedElement2);
+    assertSame(getSrc(injectedElement),getSrc(injectedElement2));
+  }
+  
+  public void testInjectNoDuplicateWithRemoveTag() {
+    delayTestFinish(TEST_DELAY);
+    final String scriptUrl = "script_injector_test11.js";
+    assertFalse(nativeTest11Worked());
+    JavaScriptObject injectedElement = ScriptInjector.fromUrl(scriptUrl).setRemoveTag(true)
+        .setWindow(ScriptInjector.TOP_WINDOW).inject();
+    JavaScriptObject injectedElement2 = ScriptInjector.fromUrl(scriptUrl).setRemoveTag(true).setDuplicateLoad(false)
+        .setWindow(ScriptInjector.TOP_WINDOW).inject();
+    assertNotNull(injectedElement);
+    assertNotNull(injectedElement2);
+    assertEquals(injectedElement,injectedElement2);
+    assertSame(getSrc(injectedElement),getSrc(injectedElement2));
+  }
+  
+  public void testInjectNoDuplicateWithCallback() {
+    delayTestFinish(TEST_DELAY);
+    final String scriptUrl = "script_injector_test12.js";
+    assertFalse(nativeTest12Worked());
+    JavaScriptObject injectedElement = ScriptInjector.fromUrl(scriptUrl).setRemoveTag(true)
+        .setWindow(ScriptInjector.TOP_WINDOW).inject();
+    JavaScriptObject injectedElement2 = ScriptInjector.fromUrl(scriptUrl).setRemoveTag(false).setDuplicateLoad(false)
+        .setWindow(ScriptInjector.TOP_WINDOW).setCallback(new Callback<Void, Exception>() {
+          
+          @Override
+          public void onSuccess(Void result) {
+            boolean worked = nativeTest12Worked();
+            JavaScriptObject scriptElement = findScriptUrlInTopWindow(scriptUrl);
+            if (!isIE8Or9()) {
+              cleanupTopWindow("__ti12_var__", scriptElement);
+              assertFalse("cleanup failed", nativeTest12Worked());
+            }
+            assertTrue("__ti12_var not set in top window", worked);
+            assertNull("script element 12 not found", scriptElement);
+          }
+          
+          @Override
+          public void onFailure(Exception reason) {
+            assertNotNull(reason);
+            fail("Injection failed: " + reason.toString());            
+          }
+        }).inject();
+    assertNotNull(injectedElement);
+    assertNotNull(injectedElement2);
+    assertEquals(injectedElement,injectedElement2);
+    assertSame(getSrc(injectedElement),getSrc(injectedElement2));
+    finishTest();
+  }
+  
+  private native String getSrc(JavaScriptObject scriptElement)/*-{
+      if(scriptElement){
+        return scriptElement["src"];
+      }
+      
+      return null;
+  }-*/;
 
   private void cleanupThisWindow(String property, JavaScriptObject scriptElement) {
     cleanupWindow(nativeThisWindow(), property, scriptElement);
@@ -450,6 +534,22 @@ public class ScriptInjectorTest extends GWTTestCase {
 
   private native boolean nativeTest7Worked() /*-{
     return !!$wnd["__ti7_var__"] && $wnd["__ti7_var__"] == 7;
+  }-*/;
+  
+  private native boolean nativeTest9Worked() /*-{
+    return !!$wnd["__ti9_var__"] && $wnd["__ti9_var__"] == 9;
+  }-*/;
+  
+  private native boolean nativeTest10Worked() /*-{
+    return !!$wnd["__ti10_var__"] && $wnd["__ti10_var__"] == 10;
+  }-*/;
+  
+  private native boolean nativeTest11Worked() /*-{
+    return !!$wnd["__ti11_var__"] && $wnd["__ti11_var__"] == 11;
+  }-*/;
+  
+  private native boolean nativeTest12Worked() /*-{
+    return !!$wnd["__ti12_var__"] && $wnd["__ti12_var__"] == 12;
   }-*/;
 
   private native String nativeGetTestUtf8Var() /*-{

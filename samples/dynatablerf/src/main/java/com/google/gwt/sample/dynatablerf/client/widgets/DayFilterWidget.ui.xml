@@ -2,15 +2,15 @@
   xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:dt='urn:import:com.google.gwt.sample.dynatablerf.client.widgets'>
   <ui:style>
     .all {
-    	float: left;
+      float: left;
     }
     
     .cb {
-    	display: block;
+      display: block;
     }
     
     .none {
-    	margin-left: 5px;
+      margin-left: 5px;
     }
   </ui:style>
   <g:FlowPanel>

@@ -1,7 +1,6 @@
 <ui:UiBinder
   xmlns:ui='urn:ui:com.google.gwt.uibinder'
-  xmlns:g='urn:import:com.google.gwt.user.client.ui'
-  xmlns:mail='urn:import:com.google.gwt.sample.mail.client'>
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
   <ui:image field='photo' src='default_photo.jpg'/>
 
@@ -14,8 +13,8 @@
     height: 2.5em;
   }
 
-  @sprite .photo {
-    gwt-image: 'photo';
+  .photo {
+    gwt-sprite: 'photo';
 
     float: left;
     margin-right: 4px;

@@ -79,7 +79,7 @@ public class CustomScrollPanel extends ScrollPanel {
     /**
      * The path to the default CSS styles used by this resource.
      */
-    String DEFAULT_CSS = "com/google/gwt/user/client/ui/CustomScrollPanel.css";
+    String DEFAULT_CSS = "com/google/gwt/user/client/ui/CustomScrollPanel.gss";
 
     /**
      * Applied to the widget.

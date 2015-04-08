@@ -130,7 +130,7 @@ public class SimplePager extends AbstractPager {
     /**
      * The styles used in this widget.
      */
-    @Source("SimplePager.css")
+    @Source("SimplePager.gss")
     Style simplePagerStyle();
   }
 

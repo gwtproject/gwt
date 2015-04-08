@@ -68,7 +68,7 @@ public class SummaryWidget extends Composite {
 
   interface TableResources extends DataGrid.Resources {
     @Override
-    @Source(value = {DataGrid.Style.DEFAULT_CSS, "DataGridPatch.css"})
+    @Source(value = {DataGrid.Style.DEFAULT_CSS, "DataGridPatch.gss"})
     DataGrid.Style dataGridStyle();
   }
 

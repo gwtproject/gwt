@@ -1,20 +1,19 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-  xmlns:g='urn:import:com.google.gwt.user.client.ui'
-  xmlns:mail='urn:import:com.google.gwt.sample.mail.client'>
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
   <ui:image field='logo' src='gwt-logo.png'/>
 
   <ui:style>
   .panel {
     padding: 10px;
- 	}
+  }
 
   .aboutText {
     text-align: left;
   }
 
-  @sprite .logo {
-    gwt-image: 'logo';
+  .logo {
+    gwt-sprite: 'logo';
     float: left;
     padding-right: 1em;
   }

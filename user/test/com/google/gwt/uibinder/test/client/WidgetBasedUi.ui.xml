@@ -107,7 +107,7 @@
 <!--
   Tests creating a CssResource from an external file.
  -->
-<ui:style field='myStyle' src='WidgetBasedUi.css com/google/gwt/uibinder/test/client/Menu.css'
+<ui:style field='myStyle' src='WidgetBasedUi.gss com/google/gwt/uibinder/test/client/Menu.gss'
     type='com.google.gwt.uibinder.test.client.WidgetBasedUi.Style'>
     .menuBar {
       font-family: sans-serif;
@@ -137,21 +137,21 @@
 </ui:style>
 
 <ui:style field='cursorifficStyle'>
-  @url cursor heartCursorResource;
+  @def CURSOR resourceUrl("heartCursorResource");
   .cursor {
-    cursor:cursor,pointer;
+    cursor:CURSOR,pointer;
   }
 </ui:style>
 
 <ui:data field='heartCursorResource' src='heart.cur'/>
 
 <ui:style field='mySpritelyStyle'>
-  @sprite .simpleSprite {
-    gwt-image: "prettyImage";
+  .simpleSprite {
+    gwt-sprite: "prettyImage";
   }
 
-  @sprite .tilingSprite {
-    gwt-image: "prettyTilingImage";
+  .tilingSprite {
+    gwt-sprite: "prettyTilingImage";
   }
 
   .garish {

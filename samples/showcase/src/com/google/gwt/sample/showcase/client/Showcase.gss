@@ -13,19 +13,15 @@
   cursor: hand;
 }
 
-@noflip {
-  .cw-DictionaryExample-header {
-    color: #7aa5d6;
-    text-decoration: underline;
-    font-weight: bold;
-    padding-right: 20px;
-  }
+.cw-DictionaryExample-header {
+  color: #7aa5d6;
+  text-decoration: underline;
+  font-weight: bold;
+  /* @noflip */ padding-right: 20px;
 }
 
-@noflip {
-  .cw-DictionaryExample-data {
-    padding-right: 20px;
-  }
+.cw-DictionaryExample-data {
+  /* @noflip */ padding-right: 20px;
 }
 
 .cw-DockPanel td {

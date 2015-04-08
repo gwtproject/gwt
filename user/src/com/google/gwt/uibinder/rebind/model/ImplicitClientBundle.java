@@ -57,7 +57,7 @@ public class ImplicitClientBundle {
    * Called to declare a new CssResource accessor on this bundle.
    *
    * @param name the method name and the ui:field name
-   * @param source path to the .css file resource
+   * @param source path to the .gss file resource
    * @param extendedInterface the public interface implemented by this
    *          CssResource, or null
    * @param body the inline css text

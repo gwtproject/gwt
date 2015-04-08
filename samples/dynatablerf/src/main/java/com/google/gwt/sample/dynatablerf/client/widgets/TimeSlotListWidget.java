@@ -45,7 +45,7 @@ public class TimeSlotListWidget extends Composite implements ValueAwareEditor<Li
 
   interface TableResources extends CellTable.Resources {
     @Override
-    @Source(value = {CellTable.Style.DEFAULT_CSS, "CellTablePatch.css"})
+    @Source(value = {CellTable.Style.DEFAULT_CSS, "CellTablePatch.gss"})
     CellTable.Style cellTableStyle();
   }
 

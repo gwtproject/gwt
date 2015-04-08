@@ -1,7 +1,6 @@
 <ui:UiBinder
   xmlns:ui='urn:ui:com.google.gwt.uibinder'
-  xmlns:g='urn:import:com.google.gwt.user.client.ui'
-  xmlns:mail='urn:import:com.google.gwt.sample.mail.client'>
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
   <ui:style field='style'
     type='com.google.gwt.sample.mail.client.Contacts.Style'>
@@ -12,8 +11,8 @@
   }
 
   .item {
-  	display: block;
- 	}
+    display: block;
+  }
   </ui:style>
 
   <g:FlowPanel styleName='{style.contacts}' ui:field='panel'/>

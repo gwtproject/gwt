@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
 
 /**
  * Aggregates and minifies CSS stylesheets. A CssResource represents a regular
- * CSS file with GWT-specific at-rules.
+ * GSS (Google cloure stylesheet) file.
  * <p>
  * Currently-supported accessor functions:
  * 
@@ -40,60 +40,7 @@ import java.lang.annotation.Target;
  * The defined value must be a raw number, a CSS length, or a percentage value
  * if it is to be returned as a numeric type.
  * </ul>
- * 
- * <p>
- * Currently-supported rules:
- * 
- * <ul>
- * <li>{@code @def NAME replacement-expression; .myClass background: NAME;}
- * Define a static constant. The replacement expression may be any CSS that
- * would be valid in a property value context. A {@code @def} may refer to
- * previously-defined rules, but no forward-references will be honored.</li>
- * <li>{@code @eval NAME Java-expression; .myClass background: NAME;} Define a
- * constant based on a Java expression.</li>
- * <li>{@code @external class-name, class-name, ...;} Disable obfuscation for
- * specific class selectors and exclude those class selectors from strictness
- * requirements.</li>
- * <li><code>{@literal @if} [!]property list of values {ruleBlock}</code> Include or
- * exclude CSS rules based on the value of a deferred-binding property. Also
- * {@code @elif} and {@code @else} follow the same pattern.<br/>
- * This might look like {@code @if user.agent ie6 safari ...}.</li>
- * <li><code>{@literal @if} (Java-expression) {ruleBlock}</code> Include or exclude
- * CSS rules based on a boolean Java expression.</li>
- * <li><code>{@literal @noflip} { rules }</code> will suppress the automatic
- * right-to-left transformation applied to the CSS when the module is compiled
- * for an RTL language.</li>
- * <li>
- * <code>{@literal @}sprite .any .selector {gwt-image: "imageResourceFunction";}</code>
- * . The appearance, size, and height of the sprite will be affected by any
- * {@link ImageResource.ImageOptions} annotations present on the related
- * {@link ImageResource} accessor function. Additional properties may be
- * specified in the rule block.</li>
- * <li>{@code @url NAME siblingDataResource; .myClass background: NAME
- * repeat-x;} Use a {@link DataResource} to generate a <code>url('...'}</code> value.</li>
- * </ul>
- * 
- * <p>
- * Currently-supported CSS functions:
- * 
- * <ul>
- * <li>{@code literal("expression")} substitutes a property value that does not
- * conform to CSS2 parsing rules. The escape sequences {@code \"} and {@code \\}
- * will be replaced with {@code "} and {@code \} respectively.
- * <li>{@code value("bundleFunction.someFunction[.other[...]]" [, "suffix"])}
- * substitute the value of a sequence of named zero-arg function invocations. An
- * optional suffix will be appended to the return value of the function. The
- * first name is resolved relative to the bundle interface passed to
- * {@link com.google.gwt.core.client.GWT#create(Class)}. An example:
- * 
- * <pre>
- * .bordersTheSizeOfAnImage {
- *   border-left: value('leftBorderImageResource.getWidth', 'px') solid blue;
- * }
- * </pre>
- * </li>
- * </ul>
- * 
+ *
  * <p>
  * Any class selectors that do not correspond with a String accessor method in
  * the return type will trigger a compilation error. This ensures that the
@@ -111,13 +58,14 @@ import java.lang.annotation.Target;
  * }
  * 
  * interface MyBundle extends ClientBundle {
- *  {@literal @Source("my.css")}
+ *  {@literal @Source("my.gss")}
  *   MyCss css();
  * }
  * </pre>
  * 
  * the source CSS will fail to compile if it does not contain exactly the one
  * class selector defined in the MyCss type.
+ *
  * <p>
  * The {@code @external} at-rule can be used in strict mode to indicate that
  * certain class selectors are exempt from the strict semantics. Class selectors
@@ -126,7 +74,7 @@ import java.lang.annotation.Target;
  * above <code>MyCss</code> interface:
  * 
  * <pre>
-   * {@literal @external} .foo, .bar;
+   * {@literal @external} foo, bar;
    * .foo .someClass .bar { .... }
    * </pre>
  * 
@@ -140,11 +88,12 @@ import java.lang.annotation.Target;
  * would return the string value "<code>foo</code>".
  * <p>
  * The utility tool <code>com.google.gwt.resources.css.InterfaceGenerator</code>
- * can be used to automatically generate a Java interface from a
- * CssResource-compatible CSS file.
- * 
- * @see <a href="http://code.google.com/p/google-web-toolkit/wiki/CssResource"
- *      >CssResource design doc</a>
+ * can be used to automatically generate a Java interface from a GSS file.
+ *
+ * <p>
+ * For more information about GSS syntax please refer to
+ * <a href="http://www.gwtproject.org/doc/latest/DevGuideGssVsCss.html"> the documentation</a>
+ *
  */
 @DefaultExtensions(value = {".css", ".gss"})
 @ResourceGeneratorType(CssResourceGenerator.class)
@@ -191,11 +140,11 @@ public interface CssResource extends CssResourceBase {
    * 
    * interface Resources extends ClientBundle {
    *  {@literal @Import}(value = {ToImport.class, OtherImport.class})
-   *  {@literal @Source}("my.css")
+   *  {@literal @Source}("my.gss")
    *   CssResource usesImports();
    * }
    * 
-   * my.css:
+   * my.gss:
    * // Now I can refer to these classes defined elsewhere with no 
    * // fear of name collisions
    * .some-prefix-widget .other-import-widget {...}
@@ -241,7 +190,7 @@ public interface CssResource extends CssResourceBase {
    * <pre>
    * interface Resources extends ClientBundle {
    *  {@literal @NotStrict}
-   *  {@literal @Source}("legacy.css")
+   *  {@literal @Source}("legacy.gss")
    *   CssResource css();
    * }
    * </pre>
@@ -273,7 +222,7 @@ public interface CssResource extends CssResourceBase {
    *   String widget();
    * }
    * 
-   * input.css:
+   * input.gss:
    * *.focused .widget {border: thin solid blue;}
    * 
    * Application.java:
@@ -284,7 +233,7 @@ public interface CssResource extends CssResourceBase {
    * Because the <code>FocusCss</code> interface is tagged with {@code @Shared},
    * the <code>focused()</code> method on the instance of <code>PanelCss</code>
    * will match the <code>.focused</code> parent selector in
-   * <code>input.css</code>.
+   * <code>input.gss</code>.
    * <p>
    * The effect of inheriting an {@code Shared} interface can be replicated by
    * use use of the {@link Import} annotation (e.g. {@code .FocusCss-focused

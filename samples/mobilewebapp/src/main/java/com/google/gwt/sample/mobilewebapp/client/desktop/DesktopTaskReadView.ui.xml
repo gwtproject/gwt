@@ -1,9 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder
   xmlns:ui="urn:ui:com.google.gwt.uibinder"
-  xmlns:g="urn:import:com.google.gwt.user.client.ui"
-  xmlns:c="urn:import:com.google.gwt.user.cellview.client"
-  xmlns:app="urn:import:com.google.gwt.sample.mobilewebapp.client.ui">
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
   <ui:style>
     .title {

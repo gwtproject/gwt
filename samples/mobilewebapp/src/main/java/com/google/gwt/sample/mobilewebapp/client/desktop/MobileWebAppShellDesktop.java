@@ -79,7 +79,7 @@ public class MobileWebAppShellDesktop extends ResizeComposite implements MobileW
      * {@link CellList.Style#DEFAULT_CSS} with the styles defined in
      * MainMenuCellList.css.
      */
-    @Source({"MainMenuCellList.css", CellList.Style.DEFAULT_CSS})
+    @Source({"MainMenuCellList.gss", CellList.Style.DEFAULT_CSS})
     MainMenuStyle cellListStyle();
   }
 

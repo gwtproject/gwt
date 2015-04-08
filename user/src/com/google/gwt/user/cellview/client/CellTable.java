@@ -159,7 +159,7 @@ public class CellTable<T> extends AbstractCellTable<T> implements
     /**
      * The path to the default CSS styles used by this resource.
      */
-    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellTable.css";
+    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellTable.gss";
 
     /**
      * Applied to every cell.
@@ -295,7 +295,7 @@ public class CellTable<T> extends AbstractCellTable<T> implements
     /**
      * The path to the default CSS styles used by this resource.
      */
-    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellTableBasic.css";
+    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellTableBasic.gss";
   }
 
   /**

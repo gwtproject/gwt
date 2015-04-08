@@ -100,7 +100,7 @@ public class CellList<T> extends AbstractHasData<T> {
     /**
      * The path to the default CSS styles used by this resource.
      */
-    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellList.css";
+    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellList.gss";
 
     /**
      * Applied to even items.

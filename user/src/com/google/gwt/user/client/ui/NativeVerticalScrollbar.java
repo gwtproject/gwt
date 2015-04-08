@@ -64,7 +64,7 @@ public class NativeVerticalScrollbar extends AbstractNativeScrollbar implements 
     /**
      * The path to the default CSS styles used by this resource.
      */
-    String DEFAULT_CSS = "com/google/gwt/user/client/ui/NativeVerticalScrollbar.css";
+    String DEFAULT_CSS = "com/google/gwt/user/client/ui/NativeVerticalScrollbar.gss";
 
     /**
      * Applied to the scrollbar.
@@ -80,7 +80,7 @@ public class NativeVerticalScrollbar extends AbstractNativeScrollbar implements 
     /**
      * The path to the default CSS styles used by this resource.
      */
-    String DEFAULT_CSS = "com/google/gwt/user/client/ui/NativeVerticalScrollbarTransparent.css";
+    String DEFAULT_CSS = "com/google/gwt/user/client/ui/NativeVerticalScrollbarTransparent.gss";
   }
 
   private static Resources DEFAULT_RESOURCES;

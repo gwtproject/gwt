@@ -3,13 +3,9 @@
 >
 <ui:UiBinder
   xmlns:ui='urn:ui:com.google.gwt.uibinder'
-  xmlns:g='urn:import:com.google.gwt.user.client.ui'
-  xmlns:mail='urn:import:com.google.gwt.sample.mail.client'>
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
   <ui:image field='logo' src='logo.png'/>
-
-  <!-- IE6 cannot handle transparent png, which is what ImageResource creates -->
-  <ui:data field='logoIe6Data' src='logo_ie6.gif' />
 
   <ui:style>
 
@@ -22,19 +18,9 @@
     text-align: right;
   }
 
-  @if user.agent ie6 {
-    @url logoIe6 logoIe6Data;
-    .logo {
-      background-image: logoIe6;
-      width: 140px;
-      height: 75px;
-      position: absolute;
-    }
-  } @else {
-    @sprite .logo {
-      gwt-image: 'logo';
-      position: absolute;
-    }
+  .logo {
+    gwt-sprite: 'logo';
+    position: absolute;
   }
   </ui:style>
 

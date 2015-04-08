@@ -120,7 +120,7 @@ public class DataGrid<T> extends AbstractCellTable<T> implements RequiresResize 
     /**
      * The path to the default CSS styles used by this resource.
      */
-    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/DataGrid.css";
+    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/DataGrid.gss";
 
     /**
      * Applied to every cell.

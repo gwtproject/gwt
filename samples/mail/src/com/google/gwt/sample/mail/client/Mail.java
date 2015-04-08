@@ -39,7 +39,7 @@ public class Mail implements EntryPoint {
 
   interface GlobalResources extends ClientBundle {
     @NotStrict
-    @Source("global.css")
+    @Source("global.gss")
     CssResource css();
   }
 

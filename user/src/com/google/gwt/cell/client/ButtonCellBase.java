@@ -136,7 +136,7 @@ public class ButtonCellBase<C> extends AbstractCell<C> implements IsCollapsible,
      */
     @ImportedWithPrefix("gwt-ButtonCellBase")
     public interface Style extends CssResource {
-      String DEFAULT_CSS = "com/google/gwt/cell/client/ButtonCellBase.css";
+      String DEFAULT_CSS = "com/google/gwt/cell/client/ButtonCellBase.gss";
 
       /**
        * Applied to the button.

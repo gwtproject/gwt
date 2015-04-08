@@ -134,7 +134,7 @@ public class CellBrowser extends AbstractCellTree implements ProvidesResize, Req
     /**
      * The path to the default CSS styles used by this resource.
      */
-    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellBrowser.css";
+    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellBrowser.gss";
 
     /**
      * Applied to all columns.

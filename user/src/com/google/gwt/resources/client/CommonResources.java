@@ -27,7 +27,7 @@ public class CommonResources {
    */
   static interface Bundle extends ClientBundle {
 
-    @Source("inline-block.css")
+    @Source("inline-block.gss")
     InlineBlockStyle inlineBlockStyle();
   }
 

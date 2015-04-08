@@ -204,7 +204,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
     }
 
     /**
-     * The container that holds the content, includind the children.
+     * The container that holds the content, including the children.
      */
     Element contentContainer;
 
@@ -376,7 +376,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
     /**
      * The path to the default CSS styles used by this resource.
      */
-    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellTree.css";
+    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellTree.gss";
 
     /**
      * Applied to the empty message.
@@ -452,7 +452,7 @@ public class CellTree extends AbstractCellTree implements HasAnimation,
     /**
      * The path to the default CSS styles used by this resource.
      */
-    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellTreeBasic.css";
+    String DEFAULT_CSS = "com/google/gwt/user/cellview/client/CellTreeBasic.gss";
   }
 
   interface Template extends SafeHtmlTemplates {

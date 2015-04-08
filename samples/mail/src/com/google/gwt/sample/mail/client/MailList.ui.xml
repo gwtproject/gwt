@@ -1,7 +1,6 @@
 <ui:UiBinder
   xmlns:ui='urn:ui:com.google.gwt.uibinder'
-  xmlns:g='urn:import:com.google.gwt.user.client.ui'
-  xmlns:mail='urn:import:com.google.gwt.sample.mail.client'>
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
   <ui:image field='gradient' src='gradient_bg_dark.png' repeatStyle='Horizontal'/>
 
@@ -13,8 +12,8 @@
     cursor: hand;
   }
 
-  @sprite .header {
-  	gwt-image: 'gradient';
+  .header {
+  	gwt-sprite: 'gradient';
   	background-color: #d3d6dd;
     table-layout: fixed;
     width: 100%;

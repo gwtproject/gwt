@@ -44,7 +44,7 @@ public interface ShowcaseResources extends ClientBundle {
    * The styles used in LTR mode.
    */
   @NotStrict
-  @Source("Showcase.css")
+  @Source("Showcase.gss")
   CssResource css();
 
   ImageResource gwtLogo();

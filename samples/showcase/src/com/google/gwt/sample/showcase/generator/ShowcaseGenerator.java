@@ -52,7 +52,7 @@ public class ShowcaseGenerator extends Generator {
    */
   private static final String[] SRC_CSS = {
       "com/google/gwt/user/theme/$THEME/public/gwt/$THEME/$THEME$RTL.css",
-      "com/google/gwt/sample/showcase/client/Showcase.css"};
+      "com/google/gwt/sample/showcase/client/Showcase.gss"};
 
   /**
    * The class loader used to get resources.

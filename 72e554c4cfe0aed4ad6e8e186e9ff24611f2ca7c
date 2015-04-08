@@ -34,6 +34,24 @@
       "revId": "72e554c4cfe0aed4ad6e8e186e9ff24611f2ca7c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23e3924b_363eee8b",
+        "filename": "user/src/com/google/gwt/user/cellview/client/DefaultCellTableBuilder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 6825
+      },
+      "writtenOn": "2015-04-08T00:13:50Z",
+      "side": 1,
+      "message": "Here is an example if you look in internal code for DebugCompositeCell.java. It\u0027s a cell with the sole purpose of injecting a div with a gwtdebugid between the TD and the actual cell. That div itself would be unnecessary if GWT allowed putting the debug id directly onto the TD.\n\nDoing both in the TableBuilder and Column would make sense to me.",
+      "parentUuid": "832a7e12_89b70938",
+      "revId": "72e554c4cfe0aed4ad6e8e186e9ff24611f2ca7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

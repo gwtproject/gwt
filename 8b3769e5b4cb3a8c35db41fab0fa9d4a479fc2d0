@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "a3c5c2ce_68725b11",
+        "filename": "samples/mail/src/com/google/gwt/sample/mail/Mail.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-04-09T18:06:54Z",
+      "side": 1,
+      "message": "I don\u0027t know the mail sample but maybe \"M\" was intentional because the sample uses some non-obfuscated css classes as well?\n\nAlso given that its a sample project that people read who want to learn GWT you might want to add back some infos about that property, e.g. add \"which gives us shorter obfuscated CSS class names.\"",
+      "range": {
+        "startLine": 19,
+        "startChar": 74,
+        "endLine": 19,
+        "endChar": 79
+      },
+      "revId": "8b3769e5b4cb3a8c35db41fab0fa9d4a479fc2d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "237f124e_32f37021",
         "filename": "user/src/com/google/gwt/resources/client/CommonResources.java",
         "patchSetId": 2

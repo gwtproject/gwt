@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "237f124e_52cb94ef",
+        "filename": "user/src/com/google/gwt/resources/client/CommonResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-09T15:54:28Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027static\u0027 modifier.",
+      "revId": "7e3f821e862d606190f7b065dab590688d56e0f2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

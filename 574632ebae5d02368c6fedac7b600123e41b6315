@@ -376,6 +376,24 @@
     },
     {
       "key": {
+        "uuid": "c3cab6dd_1a132de2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-09T06:11:48Z",
+      "side": 1,
+      "message": "Sorry, I misread.",
+      "parentUuid": "237f124e_36fc4eb3",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d89a3c_285d4f80",
         "filename": "user/test/com/google/gwt/dev/jjs/test/SpecializationTest.java",
         "patchSetId": 17

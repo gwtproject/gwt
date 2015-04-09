@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "a3c5c2ce_a87e1366",
+        "filename": "user/src/com/google/gwt/core/client/ScriptInjector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 8505
+      },
+      "writtenOn": "2015-04-09T18:10:43Z",
+      "side": 1,
+      "message": "+Daniel Kurka, initially I thought to track the duplicate script injection via url alone. But inject method returns ScriptElement - when duplicatescript flag is false, in few cases can\u0027t able return the actual script element. For instance, removeflag is true in the first load, etc., If I change the return type of inject() method, thus make backward compatibility issues.",
+      "parentUuid": "a3c5c2ce_45902aca",
+      "revId": "0f89a0e5ca3c40de088843d1a15001b675180114",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3c5c2ce_a5bbde57",
         "filename": "user/src/com/google/gwt/core/client/ScriptInjector.java",
         "patchSetId": 1

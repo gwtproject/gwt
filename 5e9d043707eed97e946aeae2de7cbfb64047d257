@@ -306,6 +306,30 @@
       "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "237f124e_d52cee40",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1594,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T19:01:09Z",
+      "side": 1,
+      "message": "I am not sure why I did not also require that rhs is a reference type here. \n\nThe reasoning can not be extended to primitive types, e.g.\n\n  int a \u003d 1;\n  double b \u003d 1.0;\n\n  a \u003d\u003d b // this is true\n\nBut the analysis would say by type incompatibility that it is false. I think just requiring lhs to be reference is enough as comparing primitive vs reference can be deemed false (we do not have to care about boxing as it is expressed explicitely in the AST. Coertions I believe not.",
+      "parentUuid": "c3cab6dd_1a04cdcc",
+      "range": {
+        "startLine": 1594,
+        "startChar": 10,
+        "endLine": 1594,
+        "endChar": 54
+      },
+      "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

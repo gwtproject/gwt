@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "237f124e_76833606",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3d89a3c_4e07fb9e",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d89a3c_c8b063d2",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JNode.java",
         "patchSetId": 17
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-31T23:28:32Z",
       "side": 1,
       "message": "nit: move above method as a method comment",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "237f124e_90e522a6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JNode.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:15:13Z",
+      "side": 1,
+      "message": "Done, or you meant JavaDoc?",
+      "parentUuid": "e3d89a3c_c8b063d2",
       "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "237f124e_7016de00",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3d89a3c_a8dcff10",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d89a3c_c8d94320",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 17
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "237f124e_1083d251",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3d89a3c_c8d94320",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d89a3c_a8579fe4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 17
@@ -81,6 +153,24 @@
       "writtenOn": "2015-03-31T23:28:32Z",
       "side": 1,
       "message": "The string check earlier make me nervous about this. It looks like they were trying to handle external types here for some reason. This seems like going to change the behavior.",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "237f124e_3b2517d7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:15:13Z",
+      "side": 1,
+      "message": "The null type is never external. readResolve always returns JReferenceType.NULL_TYPE.\n\nThe string check was done when the JTypeOracle was refactored for incremental.\n\nI think this is completely safe.",
+      "parentUuid": "e3d89a3c_a8579fe4",
       "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -110,6 +200,30 @@
     },
     {
       "key": {
+        "uuid": "237f124e_fb780f7c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:15:13Z",
+      "side": 1,
+      "message": "You mean replacing strings by a more implicit check? \n\nObject should never be external.",
+      "parentUuid": "e3d89a3c_88a49b2d",
+      "range": {
+        "startLine": 683,
+        "startChar": 37,
+        "endLine": 683,
+        "endChar": 85
+      },
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d89a3c_e8e7e7ab",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 17
@@ -121,6 +235,24 @@
       "writtenOn": "2015-03-31T23:28:32Z",
       "side": 1,
       "message": "nit: The comment here is more general, gives the wrong idea that all listed situations are handled here.",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "237f124e_3b419717",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3d89a3c_e8e7e7ab",
       "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -150,6 +282,30 @@
     },
     {
       "key": {
+        "uuid": "237f124e_bb73e718",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3d89a3c_2818ef2e",
+      "range": {
+        "startLine": 735,
+        "startChar": 11,
+        "endLine": 736,
+        "endChar": 71
+      },
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d89a3c_089a4bb9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 17
@@ -167,6 +323,24 @@
     },
     {
       "key": {
+        "uuid": "237f124e_36ce0eaf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:15:13Z",
+      "side": 1,
+      "message": "I understood, but I follows the approach as with the MultiExpression below. \n\n\nWe could remove the createOptimized to just create but lets leave it for a follow up because it might increase the number of iterations to reach the fixpoint.",
+      "parentUuid": "e3d89a3c_089a4bb9",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d89a3c_a8b95f2d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 17
@@ -178,6 +352,24 @@
       "writtenOn": "2015-03-31T23:28:32Z",
       "side": 1,
       "message": "We should have a test that reproduces the problem and probably better to do in a separate path.",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "237f124e_36fc4eb3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:15:13Z",
+      "side": 1,
+      "message": "Did I change funcitonality? I just replaced sort by a SortedSet.",
+      "parentUuid": "e3d89a3c_a8b95f2d",
       "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -213,6 +405,24 @@
       "side": 1,
       "message": "pls ignore.",
       "parentUuid": "e3d89a3c_285d4f80",
+      "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "237f124e_d635e20c",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/SpecializationTest.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:15:13Z",
+      "side": 1,
+      "message": "Ignored :)",
+      "parentUuid": "e3d89a3c_ce95cbbd",
       "revId": "574632ebae5d02368c6fedac7b600123e41b6315",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

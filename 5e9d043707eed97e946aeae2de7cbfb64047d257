@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "237f124e_8a296a82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3d89a3c_ae15e7c6",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 42
+      },
+      "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83cefea1_5406414e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2015-04-07T01:44:38Z",
       "side": 1,
       "message": "checking JClassType seems like a redundant check?",
+      "range": {
+        "startLine": 594,
+        "startChar": 37,
+        "endLine": 594,
+        "endChar": 68
+      },
+      "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "237f124e_b6bf7ea3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:16:16Z",
+      "side": 1,
+      "message": "Yes it is now. Removed.",
+      "parentUuid": "83cefea1_5406414e",
       "range": {
         "startLine": 594,
         "startChar": 37,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "237f124e_b6f85efd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:16:16Z",
+      "side": 1,
+      "message": "It is not trivial to think why and depends on a (more) precise implementation of castSucceedsTrivially. I am not sure if this covers arrays e.g casting from an exact array to a interface array. Even if it is correct it does not read right (in the sense that castSucceedsTrivially is not precise and a more imprecise implementation could break this.\n\nTo me we should refactor this to one function staticallyAnalyzeCast with three possible results (FAILS, SUCCEEDS, UNKNOWN) and then it would be cleaner.",
+      "parentUuid": "83cefea1_2f5ed254",
+      "range": {
+        "startLine": 594,
+        "startChar": 3,
+        "endLine": 597,
+        "endChar": 5
+      },
+      "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83cefea1_efb57ae3",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 3
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "237f124e_2a1a1e6e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:16:16Z",
+      "side": 1,
+      "message": "modulo nulability. I rewrote the code, see if you like it.",
+      "parentUuid": "83cefea1_efb57ae3",
+      "range": {
+        "startLine": 681,
+        "startChar": 37,
+        "endLine": 681,
+        "endChar": 95
+      },
+      "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d89a3c_ae6a475c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
         "patchSetId": 3
@@ -105,6 +201,30 @@
       "writtenOn": "2015-04-07T01:44:38Z",
       "side": 1,
       "message": "seems redundant?",
+      "range": {
+        "startLine": 1594,
+        "startChar": 10,
+        "endLine": 1594,
+        "endChar": 54
+      },
+      "revId": "5e9d043707eed97e946aeae2de7cbfb64047d257",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "237f124e_ea6836a3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1594,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-09T01:16:16Z",
+      "side": 1,
+      "message": "I don\u0027t think so. \n\nThis case cover \n\n   a \u003d\u003d b\n\nby checking type compatibility. The case in which we can clearly see that they are incompatible is if both are exact and not null then if the underlying types are not the same we can conclude that the result of false.",
+      "parentUuid": "e3d89a3c_ae6a475c",
       "range": {
         "startLine": 1594,
         "startChar": 10,

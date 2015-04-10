@@ -65,7 +65,7 @@ public class TreeItemTest extends GWTTestCase {
     TreeItem child = item.addItem(SafeHtmlUtils.fromSafeConstant(HTML));
     assertEquals(HTML, child.getHTML().toLowerCase(Locale.ROOT));
   }
-  
+
   /**
    * Test for {@link Tree#addTextItem(String)}.
    */
@@ -78,7 +78,17 @@ public class TreeItemTest extends GWTTestCase {
     String html = item.getHTML().replace(">", "&gt;");
     assertEquals("Some&lt;br&gt;text", html);
   }
-  
+
+  /**
+   * Test for {@link TreeItem#setTitle(String)}.
+   */
+  public void testSetTitle() {
+    TreeItem root = new TreeItem(SafeHtmlUtils.fromSafeConstant("foo"));
+    String rootTitle = "Root Title";
+    root.setTitle(rootTitle);
+    assertEquals(root.getTitle(), rootTitle);
+  }
+
   public void testAsTreeItem() {
     TreeItem item = new TreeItem(SafeHtmlUtils.fromSafeConstant("foo"));
     assertSame(item, item.asTreeItem());

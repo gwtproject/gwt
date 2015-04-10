@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3617abc_da3a617a",
+        "filename": "user/src/com/google/gwt/user/client/ui/TreeItem.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-10T14:55:14Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "revId": "cec317a4ecef896e4b604a87857712878f26ea97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3617abc_fa3f2567",
+        "filename": "user/src/com/google/gwt/user/client/ui/TreeItem.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-10T14:55:14Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "revId": "cec317a4ecef896e4b604a87857712878f26ea97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3617abc_1a35b988",
+        "filename": "user/src/com/google/gwt/user/client/ui/TreeItem.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-10T14:55:14Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "revId": "cec317a4ecef896e4b604a87857712878f26ea97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3617abc_3a327da1",
+        "filename": "user/test/com/google/gwt/user/client/ui/TreeItemTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-10T14:55:14Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "revId": "cec317a4ecef896e4b604a87857712878f26ea97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3617abc_ba5bedda",
+        "filename": "user/test/com/google/gwt/user/client/ui/TreeItemTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-10T14:55:14Z",
+      "side": 1,
+      "message": "This test is not very useful, since it is only testing get/set title on an element.\n\nI am unsure how one could come up with a tests that uses the actual title from moving the mouse over the the elements. That would be the right test case here.",
+      "revId": "cec317a4ecef896e4b604a87857712878f26ea97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3617abc_5a2f3134",
+        "filename": "user/test/com/google/gwt/user/client/ui/TreeItemTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-10T14:55:14Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "revId": "cec317a4ecef896e4b604a87857712878f26ea97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3617abc_7a2cf53e",
+        "filename": "user/test/com/google/gwt/user/client/ui/TreeItemTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-10T14:55:14Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "revId": "cec317a4ecef896e4b604a87857712878f26ea97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -487,18 +487,8 @@ public class TypeTightener {
 
     @Override
     public void endVisit(JGwtCreate x, Context ctx) {
-      List<JReferenceType> typeList = new ArrayList<JReferenceType>();
-      for (JExpression expr : x.getInstantiationExpressions()) {
-        JReferenceType type = (JReferenceType) expr.getType();
-        typeList.add(type);
-      }
-
-      JReferenceType refType = (JReferenceType) x.getType();
-      JReferenceType resultType = program.strengthenType(refType, typeList);
-      if (refType != resultType) {
-        x.setType(resultType);
-        madeChanges();
-      }
+      throw new IllegalStateException("AST should not contain permutation dependent values at " +
+          "this point but contains " + x);
     }
 
     @Override

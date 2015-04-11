@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c326369c_10e20919",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-11T00:05:04Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "ea719e9527c0fa0f2c9226062da36edf546aed5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

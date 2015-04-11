@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c326369c_c6bef7f6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-11T01:03:11Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "0e3c8da3ebaaf92c147fe3309141f143ef9d2109",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

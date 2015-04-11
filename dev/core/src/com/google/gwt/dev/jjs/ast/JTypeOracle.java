@@ -595,7 +595,7 @@ public class JTypeOracle implements Serializable {
     fromType = fromType.getUnderlyingType();
     toType = toType.getUnderlyingType();
 
-    if (fromType == toType || isJavaLangObject(toType)) {
+    if (fromType == toType || isJavaLangObject(fromType) ) {
       return false;
     }
 
@@ -603,7 +603,7 @@ public class JTypeOracle implements Serializable {
      * Cross-cast allowed in theory, prevents TypeTightener from turning
      * cross-casts into null-casts.
      */
-    if (canCrossCastLikeJso(fromType) && canCrossCastLikeJso(toType)) {
+    if (canCrossCastLikeJso(fromType) || canCrossCastLikeJso(toType)) {
       return false;
     }
 

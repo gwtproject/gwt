@@ -209,6 +209,30 @@ public class SuggestBoxTest extends WidgetTestBase {
         display.getSuggestion(2).getDisplayString());
   }
 
+  public void testMultipleSuggestionsWithSameInternalNormalizedCandidate() {
+    MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
+    oracle.add("Mobile");
+    oracle.add("MOBILE");
+    oracle.add("MoBiLe");
+    oracle.add("mobile");
+
+    TestSuggestionDisplay display = new TestSuggestionDisplay();
+    SuggestBox box = new SuggestBox(oracle, new TextBox(), display);
+    RootPanel.get().add(box);
+    box.setText("m");
+    box.showSuggestionList();
+    assertTrue(display.isSuggestionListShowing());
+    assertEquals(4, display.getSuggestionCount());
+    assertEquals("<strong>M</strong>OBILE",
+        display.getSuggestion(0).getDisplayString());
+    assertEquals("<strong>M</strong>oBiLe",
+        display.getSuggestion(1).getDisplayString());
+    assertEquals("<strong>M</strong>obile",
+        display.getSuggestion(2).getDisplayString());
+    assertEquals("<strong>m</strong>obile",
+        display.getSuggestion(3).getDisplayString());
+  }
+
   @SuppressWarnings("deprecation")
   public void testShowAndHide() {
     SuggestBox box = createSuggestBox();
@@ -424,3 +448,4 @@ public class SuggestBoxTest extends WidgetTestBase {
     return oracle;
   }
 }
+

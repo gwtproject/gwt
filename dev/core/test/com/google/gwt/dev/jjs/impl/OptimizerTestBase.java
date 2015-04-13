@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
@@ -38,6 +39,7 @@ import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
+import com.google.gwt.dev.util.UnitTestTreeLogger;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
@@ -318,9 +320,15 @@ public abstract class OptimizerTestBase extends JJSTestBase {
     }.accept(method);
   }
 
+  protected final Result optimize(TreeLogger logger, final String returnType,
+      final String... codeSnippet) throws UnableToCompleteException {
+    return optimizeMethod(logger, MAIN_METHOD_NAME, returnType, codeSnippet);
+  }
+
+
   protected final Result optimize(final String returnType,
       final String... codeSnippet) throws UnableToCompleteException {
-    return optimizeMethod(MAIN_METHOD_NAME, returnType, codeSnippet);
+    return optimize(TreeLogger.NULL, returnType, codeSnippet);
   }
 
   /**
@@ -393,7 +401,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
     }
 
     // Finally optimize.
-    boolean madeChanges = optimizeMethod(program, method);
+    boolean madeChanges = optimizeMethod(TreeLogger.NULL, program, method);
     if (madeChanges && runDeadCodeElimination) {
       DeadCodeElimination.exec(program);
     }
@@ -404,15 +412,61 @@ public abstract class OptimizerTestBase extends JJSTestBase {
   protected final Result optimizeMethod(final String methodName,
       final String mainMethodReturnType, final String... mainMethodSnippet)
       throws UnableToCompleteException {
+    return optimizeMethod(TreeLogger.NULL, methodName, mainMethodReturnType, mainMethodSnippet);
+  }
+
+  protected final Result optimizeMethod(TreeLogger logger, final String methodName,
+      final String mainMethodReturnType, final String... mainMethodSnippet)
+      throws UnableToCompleteException {
     String snippet = Joiner.on("\n").join(mainMethodSnippet);
     JProgram program = compileSnippet(mainMethodReturnType, snippet, true);
     JMethod method = findMethod(program, methodName);
-    boolean madeChanges = optimizeMethod(program, method);
+    boolean madeChanges = optimizeMethod(logger, program, method);
     if (madeChanges && runDeadCodeElimination) {
       DeadCodeElimination.exec(program);
     }
     return new Result(program, mainMethodReturnType, methodName, snippet, madeChanges);
   }
 
-  protected abstract boolean optimizeMethod(JProgram program, JMethod method);
+  protected abstract boolean optimizeMethod(TreeLogger logger, JProgram program, JMethod method)
+      throws UnableToCompleteException;
+
+  public final void assertCompileFails(String code, String... expectedErrors) {
+    assert expectedErrors != null : "Failed compiles must specify error messages.";
+    UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
+    builder.setLowestLogLevel(TreeLogger.ERROR);
+    for (String expectedError : expectedErrors) {
+      builder.expectError(expectedError, null);
+    }
+    UnitTestTreeLogger errorLogger = builder.createLogger();
+
+    try {
+      optimize(errorLogger, "void", code);
+      fail("Compile should have failed but succeeded.");
+    } catch (Exception e) {
+      assertTrue(e.getCause() instanceof UnableToCompleteException
+          || e instanceof UnableToCompleteException);
+    }
+    errorLogger.assertCorrectLogEntries();
+  }
+
+  public final void assertCompileSucceeds(String code,
+      String... expectedWarnings) throws UnableToCompleteException {
+    UnitTestTreeLogger.Builder builder = new UnitTestTreeLogger.Builder();
+    builder.setLowestLogLevel(TreeLogger.WARN);
+    if (expectedWarnings != null) {
+      for (String expectedWarning : expectedWarnings) {
+        builder.expectWarn(expectedWarning, null);
+      }
+    }
+    UnitTestTreeLogger errorLogger = builder.createLogger();
+
+    try {
+      optimize(errorLogger, "void", code);
+    } catch (UnableToCompleteException e) {
+      fail("Compile failed");
+    } finally {
+      errorLogger.assertCorrectLogEntries();
+    }
+  }
 }

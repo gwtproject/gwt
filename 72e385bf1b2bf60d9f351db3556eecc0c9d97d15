@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10597645_e83bb349",
+        "filename": "user/test/com/google/gwt/user/client/ui/RadioButtonTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-13T17:17:32Z",
+      "side": 1,
+      "message": "just call RootPanel.get().clear(). Other changes in the file is not needed.",
+      "revId": "72e385bf1b2bf60d9f351db3556eecc0c9d97d15",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10597645_48d87fa5",
+        "filename": "user/test/com/google/gwt/user/client/ui/TabLayoutPanelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-13T17:17:32Z",
+      "side": 1,
+      "message": "schedule(0) should be fine right?",
+      "range": {
+        "startLine": 507,
+        "startChar": 15,
+        "endLine": 507,
+        "endChar": 18
+      },
+      "revId": "72e385bf1b2bf60d9f351db3556eecc0c9d97d15",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -25,9 +25,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * The default {@link com.google.gwt.user.client.ui.SuggestOracle}. The default
@@ -143,9 +145,11 @@ public class MultiWordSuggestOracle extends SuggestOracle {
   private HashMap<String, Set<String>> toCandidates = new HashMap<String, Set<String>>();
 
   /**
-   * Associates candidates with their formatted suggestions.
+   * Associates candidates with their formatted suggestions. Multiple formatted suggestions could be
+   * normalized to the same candidate, e.g. both 'Mobile' and 'MOBILE' are normalized to 'mobile'.
    */
-  private HashMap<String, String> toRealSuggestions = new HashMap<String, String>();
+  private HashMap<String, TreeSet<String>> toRealSuggestions =
+      new HashMap<String, TreeSet<String>>();
 
   /**
    * The whitespace masks used to prevent matching and replacing of the given
@@ -198,7 +202,12 @@ public class MultiWordSuggestOracle extends SuggestOracle {
   public void add(String suggestion) {
     String candidate = normalizeSuggestion(suggestion);
     // candidates --> real suggestions.
-    toRealSuggestions.put(candidate, suggestion);
+    TreeSet<String> realSuggestions = toRealSuggestions.get(candidate);
+    if (realSuggestions == null) {
+      realSuggestions = new TreeSet<String>();
+      toRealSuggestions.put(candidate, realSuggestions);
+    }
+    realSuggestions.add(suggestion);
 
     // word fragments --> candidates.
     String[] words = candidate.split(WHITESPACE_STRING);
@@ -334,43 +343,46 @@ public class MultiWordSuggestOracle extends SuggestOracle {
 
     for (int i = 0; i < candidates.size(); i++) {
       String candidate = candidates.get(i);
-      int cursor = 0;
-      int index = 0;
       // Use real suggestion for assembly.
-      String formattedSuggestion = toRealSuggestions.get(candidate);
+      Iterator<String> realSuggestionsIterator = toRealSuggestions.get(candidate).iterator();
+      while (realSuggestionsIterator.hasNext()) {
+        int cursor = 0;
+        int index = 0;
+        String formattedSuggestion = realSuggestionsIterator.next();
 
-      // Create strong search string.
-      SafeHtmlBuilder accum = new SafeHtmlBuilder();
+        // Create strong search string.
+        SafeHtmlBuilder accum = new SafeHtmlBuilder();
 
-      String[] searchWords = query.split(WHITESPACE_STRING);
-      while (true) {
-        WordBounds wordBounds = findNextWord(candidate, searchWords, index);
-        if (wordBounds == null) {
-          break;
+        String[] searchWords = query.split(WHITESPACE_STRING);
+        while (true) {
+          WordBounds wordBounds = findNextWord(candidate, searchWords, index);
+          if (wordBounds == null) {
+            break;
+          }
+          if (wordBounds.startIndex == 0 ||
+              WHITESPACE_CHAR == candidate.charAt(wordBounds.startIndex - 1)) {
+            String part1 = formattedSuggestion.substring(cursor, wordBounds.startIndex);
+            String part2 = formattedSuggestion.substring(wordBounds.startIndex,
+                wordBounds.endIndex);
+            cursor = wordBounds.endIndex;
+            accum.appendEscaped(part1);
+            accum.appendHtmlConstant("<strong>");
+            accum.appendEscaped(part2);
+            accum.appendHtmlConstant("</strong>");
+          }
+          index = wordBounds.endIndex;
         }
-        if (wordBounds.startIndex == 0 ||
-            WHITESPACE_CHAR == candidate.charAt(wordBounds.startIndex - 1)) {
-          String part1 = formattedSuggestion.substring(cursor, wordBounds.startIndex);
-          String part2 = formattedSuggestion.substring(wordBounds.startIndex,
-              wordBounds.endIndex);
-          cursor = wordBounds.endIndex;
-          accum.appendEscaped(part1);
-          accum.appendHtmlConstant("<strong>");
-          accum.appendEscaped(part2);
-          accum.appendHtmlConstant("</strong>");
+
+        // Check to make sure the search was found in the string.
+        if (cursor == 0) {
+          continue;
         }
-        index = wordBounds.endIndex;
-      }
 
-      // Check to make sure the search was found in the string.
-      if (cursor == 0) {
-        continue;
+        accum.appendEscaped(formattedSuggestion.substring(cursor));
+        MultiWordSuggestion suggestion = createSuggestion(formattedSuggestion,
+            accum.toSafeHtml().asString());
+        suggestions.add(suggestion);
       }
-
-      accum.appendEscaped(formattedSuggestion.substring(cursor));
-      MultiWordSuggestion suggestion = createSuggestion(formattedSuggestion,
-          accum.toSafeHtml().asString());
-      suggestions.add(suggestion);
     }
     return suggestions;
   }
@@ -498,3 +510,4 @@ public class MultiWordSuggestOracle extends SuggestOracle {
     return formattedSuggestion;
   }
 }
+

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -26,6 +26,8 @@ import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.DOM;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -45,6 +47,20 @@ public class RadioButtonTest extends GWTTestCase {
   private static final String html1 = "<b>hello</b><i>world</i>:)";
   private static final String html2 = "<b>goodbye</b><i>world</i>:(";
 
+  private List<Widget> toRemove;
+
+  @Override
+  protected void gwtSetUp() {
+    toRemove = new ArrayList<>();
+  }
+
+  @Override
+  protected void gwtTearDown() {
+    for (Widget w: toRemove) {
+      w.removeFromParent();
+    }
+  }
+
   /**
    * TODO: Re-enable when we figure out how to make them work properly on IE
    * (which has the unfortunate property of not passing synthesized events on to
@@ -55,7 +71,9 @@ public class RadioButtonTest extends GWTTestCase {
     RadioButton r1 = new RadioButton("group1", "Radio 1");
     RadioButton r2 = new RadioButton("group1", "Radio 2");
     RootPanel.get().add(r1);
+    toRemove.add(r1);
     RootPanel.get().add(r2);
+    toRemove.add(r2);
     r1.setValue(true);
 
     Changeable c1 = new Changeable();
@@ -92,7 +110,9 @@ public class RadioButtonTest extends GWTTestCase {
     RadioButton r1 = new RadioButton("group1", "Radio 1");
     RadioButton r2 = new RadioButton("group1", "Radio 2");
     RootPanel.get().add(r1);
+    toRemove.add(r1);
     RootPanel.get().add(r2);
+    toRemove.add(r2);
     r1.setValue(true);
 
     Changeable c1 = new Changeable();
@@ -132,6 +152,7 @@ public class RadioButtonTest extends GWTTestCase {
 
     radio.ensureDebugId("myRadio");
     RootPanel.get().add(radio);
+    toRemove.add(radio);
 
     UIObjectTest.assertDebugId("myRadio", radio.getElement());
     UIObjectTest.assertDebugId("myRadio-input", newInput);
@@ -147,8 +168,11 @@ public class RadioButtonTest extends GWTTestCase {
     RadioButton r2 = new RadioButton("group1", "Radio 2");
     RadioButton r3 = new RadioButton("group2", "Radio 3");
     RootPanel.get().add(r1);
+    toRemove.add(r1);
     RootPanel.get().add(r2);
+    toRemove.add(r2);
     RootPanel.get().add(r3);
+    toRemove.add(r3);
 
     // Check one button in each group
     r2.setValue(true);
@@ -181,8 +205,11 @@ public class RadioButtonTest extends GWTTestCase {
     RadioButton r2 = new RadioButton("group1", "Radio 2");
     RadioButton r3 = new RadioButton("group2", "Radio 3");
     RootPanel.get().add(r1);
+    toRemove.add(r1);
     RootPanel.get().add(r2);
+    toRemove.add(r2);
     RootPanel.get().add(r3);
+    toRemove.add(r3);
 
     // Check one button in each group
     r2.setValue(true);
@@ -224,14 +251,14 @@ public class RadioButtonTest extends GWTTestCase {
   }
 
   public void testSafeHtml() {
-    RadioButton radio = 
+    RadioButton radio =
       new RadioButton("radio", SafeHtmlUtils.fromSafeConstant(html1));
-    
+
     assertEquals("radio", radio.getName());
     assertEquals(html1, radio.getHTML().toLowerCase(Locale.ROOT));
-    
+
     radio.setHTML(SafeHtmlUtils.fromSafeConstant(html2));
-    
+
     assertEquals(html2, radio.getHTML().toLowerCase(Locale.ROOT));
   }
 

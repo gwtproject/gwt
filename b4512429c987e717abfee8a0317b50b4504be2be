@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0242aae_e91cba95",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-14T19:17:46Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be just plain assignment?",
+      "range": {
+        "startLine": 97,
+        "startChar": 15,
+        "endLine": 97,
+        "endChar": 17
+      },
+      "revId": "b4512429c987e717abfee8a0317b50b4504be2be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0242aae_09adc696",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-14T19:17:46Z",
+      "side": 1,
+      "message": "curious if you only added todo instead of changing it to keep this smaller or are there any concerns on merging?",
+      "revId": "b4512429c987e717abfee8a0317b50b4504be2be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0242aae_49050e13",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-14T19:17:46Z",
+      "side": 1,
+      "message": "It looks like we should a similar problem with JsTypes or is it handled somehwhere else?",
+      "revId": "b4512429c987e717abfee8a0317b50b4504be2be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -3841,7 +3841,7 @@ public class GwtAstBuilder {
    */
   public static List<JDeclaredType> process(CompilationUnitDeclaration cud, String sourceMapPath,
       Map<MethodDeclaration, JsniMethod> jsniMethods, Map<String, Binding> jsniRefs,
-      CompilerContext compilerContext) {
+      String packageNameSpace, CompilerContext compilerContext) {
     return new GwtAstBuilder(cud, sourceMapPath, jsniMethods, jsniRefs, compilerContext)
         .processImpl();
   }

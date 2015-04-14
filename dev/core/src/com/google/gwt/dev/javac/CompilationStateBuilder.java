@@ -123,11 +123,15 @@ public class CompilationStateBuilder {
             // cause later compiler stages to fail.
             BinaryTypeReferenceRestrictionsChecker.check(cud);
 
+            ReferenceBinding packageInfo = compiler.resolveType(
+                (cud.currentPackage == null ? "" : cud.currentPackage.toString() + ".")
+                    + "package-info");
+
             if (!cud.compilationResult().hasErrors()) {
               // The above checks might have recorded errors; so we need to check here again.
               // So only construct the GWT AST if no JDT errors and no errors from our checks.
               types = GwtAstBuilder.process(cud, builder.getSourceMapPath(), jsniMethods, jsniRefs,
-                  compilerContext);
+                  null, compilerContext);
             }
 
             // Only run this pass if JDT was able to compile the unit with no errors, otherwise

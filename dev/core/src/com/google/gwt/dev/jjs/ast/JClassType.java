@@ -93,10 +93,11 @@ public class JClassType extends JDeclaredType {
    * Sets this type's super class.
    */
   public final void setSuperClass(JClassType superClass) {
-    // Super class can only be set once.
-    assert this.superClass == null;
     this.superClass = superClass;
-    this.isJso |= superClass != null && superClass.isJso;
+
+    if (!name.equals(JProgram.JAVASCRIPTOBJECT) && superClass != null) {
+      this.isJso = superClass.isJso;
+    }
   }
 
   public boolean isJsPrototypeStub() {

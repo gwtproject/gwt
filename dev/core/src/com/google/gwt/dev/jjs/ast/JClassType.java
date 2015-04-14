@@ -39,6 +39,7 @@ public class JClassType extends JDeclaredType {
 
   private final boolean isAbstract;
   private final boolean isFinal;
+  private boolean isJso;
   private JClassType superClass;
   private boolean isJsPrototypeStub;
 
@@ -46,6 +47,7 @@ public class JClassType extends JDeclaredType {
     super(info, name);
     this.isAbstract = isAbstract;
     this.isFinal = isFinal;
+    this.isJso = name.equals(JProgram.JAVASCRIPTOBJECT);
   }
 
   /**
@@ -55,6 +57,7 @@ public class JClassType extends JDeclaredType {
     super(SourceOrigin.UNKNOWN, name);
     isAbstract = false;
     isFinal = false;
+    isJso = name.equals(JProgram.JAVASCRIPTOBJECT);
     setExternal(true);
   }
 
@@ -81,11 +84,17 @@ public class JClassType extends JDeclaredType {
     return isFinal;
   }
 
+  @Override
+  public boolean isJsoType() {
+    return isJso;
+  }
+
   /**
    * Sets this type's super class.
    */
   public final void setSuperClass(JClassType superClass) {
     this.superClass = superClass;
+    this.isJso |= superClass == null ? false : superClass.isJso;
   }
 
   public boolean isJsPrototypeStub() {

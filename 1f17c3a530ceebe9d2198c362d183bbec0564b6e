@@ -512,6 +512,24 @@
     },
     {
       "key": {
+        "uuid": "b07b4aac_6fc9cd2b",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-15T18:09:45Z",
+      "side": 1,
+      "message": "Then may catch both NullPointerException and JavaScriptException (the first will be thrown in DevMode and the second in Web mode.\n\nThe problem with blindly catching Exception (or Throwable)  is that other possible errors are masked.",
+      "parentUuid": "43308612_13eed3ff",
+      "revId": "1f17c3a530ceebe9d2198c362d183bbec0564b6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3782ec51_92e07c16",
         "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
         "patchSetId": 1

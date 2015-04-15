@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0242aae_ae310a1c",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsoTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-15T00:54:38Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "a947baaef656c32b48ecf0ead9afe7c339c63187",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0242aae_8e264ee3",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsoTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-15T00:54:38Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "a947baaef656c32b48ecf0ead9afe7c339c63187",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0242aae_6e2322d4",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsoTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-15T00:54:38Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "a947baaef656c32b48ecf0ead9afe7c339c63187",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0242aae_4e2066c5",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsoTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-15T00:54:38Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "a947baaef656c32b48ecf0ead9afe7c339c63187",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b07b4aac_3ebeadc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-15T16:41:17Z",
+      "side": 1,
+      "message": "remove [issue 9140]: from title.\n\nAdd Bug: issue 9140 on the line before Change-id:.... (no empty line between them).",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "5a036f5da79a5dab46f6308f31e6fcb794962652",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

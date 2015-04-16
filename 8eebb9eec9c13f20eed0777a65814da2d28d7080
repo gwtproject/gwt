@@ -19,6 +19,52 @@
     },
     {
       "key": {
+        "uuid": "10dc16fc_370b37ad",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2671,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-16T22:30:13Z",
+      "side": 1,
+      "message": "See the previous implementation; little bit more readable:\n\n      SourceInfo sourceInfo \u003d x.getSourceInfo();\n\n      // var ClassName \u003d function() {}\n      JsName classVar \u003d declareSynthesizedClosureConstructor(x, globalStmts);\n\n      // defineClass(..., ClasName)\n      generateCallToDefineClass(x, globalStmts, Arrays.asList(classVar.makeRef(sourceInfo)));",
+      "range": {
+        "startLine": 2665,
+        "startChar": 0,
+        "endLine": 2671,
+        "endChar": 65
+      },
+      "revId": "8eebb9eec9c13f20eed0777a65814da2d28d7080",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_177e332b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2700,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-16T22:30:13Z",
+      "side": 1,
+      "message": "replace with createEmptyFunctionLiteral? (You need to change it to take the name.)",
+      "range": {
+        "startLine": 2699,
+        "startChar": 6,
+        "endLine": 2700,
+        "endChar": 51
+      },
+      "revId": "8eebb9eec9c13f20eed0777a65814da2d28d7080",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10dc16fc_eafe2bab",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 1

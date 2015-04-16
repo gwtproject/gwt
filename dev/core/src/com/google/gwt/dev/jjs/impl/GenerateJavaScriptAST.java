@@ -109,7 +109,6 @@ import com.google.gwt.dev.js.ast.JsArrayLiteral;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsBlock;
-import com.google.gwt.dev.js.ast.JsBooleanLiteral;
 import com.google.gwt.dev.js.ast.JsBreak;
 import com.google.gwt.dev.js.ast.JsCase;
 import com.google.gwt.dev.js.ast.JsCatch;
@@ -2662,11 +2661,13 @@ public class GenerateJavaScriptAST {
      * the compiler disambiguate which methods belong to which type.
      */
     private void generateClosureClassDefinition(JClassType x, List<JsStatement> globalStmts) {
-      // defineClass(...)
-      generateCallToDefineClass(x, globalStmts, new ArrayList<JsNameRef>());
-
-      // var ClassName = defineHiddenClosureConstructor()
+      // function ClassName(){}
       declareSynthesizedClosureConstructor(x, globalStmts);
+
+      // defineClass(..., ClassName)
+      generateCallToDefineClass(x, globalStmts,
+          Arrays.asList(declareSynthesizedClosureConstructor(x, globalStmts).makeRef(
+              x.getSourceInfo())));
 
       // Ctor1.prototype = ClassName.prototype
       // Ctor2.prototype = ClassName.prototype
@@ -2683,19 +2684,21 @@ public class GenerateJavaScriptAST {
 
     /*
      * Declare an empty synthesized constructor that looks like:
-     *  var ClassName = defineHiddenClosureConstructor()
+     * function ClassName(){}
+     *
+     * Closure Compiler's RewriteFunctionExpressions pass can be enabled to turn these back
+     * into a factory method after optimizations.
      *
      * TODO(goktug): throw Error in the body to prevent instantiation via this constructor.
      */
-    private void declareSynthesizedClosureConstructor(JDeclaredType x,
+    private JsName declareSynthesizedClosureConstructor(JDeclaredType x,
         List<JsStatement> globalStmts) {
       SourceInfo sourceInfo = x.getSourceInfo();
       JsName classVar = topScope.declareName(JjsUtils.getNameString(x));
-      JsVar var = new JsVar(sourceInfo, classVar);
-      var.setInitExpr(constructInvocation(sourceInfo,
-          "JavaClassHierarchySetupUtil.defineHiddenClosureConstructor"));
-      globalStmts.add(new JsVars(sourceInfo, var));
+      JsFunction closureCtor = JsUtils.createEmptyFunctionLiteral(sourceInfo, topScope, classVar);
+      globalStmts.add(closureCtor.makeStmt());
       names.put(x, classVar);
+      return classVar;
     }
 
     /*
@@ -2806,12 +2809,11 @@ public class GenerateJavaScriptAST {
           if (typeOracle.needsJsInteropBridgeMethod(method)) {
             JsName exportedName = polyJsName.getEnclosing().declareName(method.getName(),
                 method.getName());
-            // _.exportedName = makeBridgeMethod(_.polyName)
+            // _.exportedName = [obfuscatedMethodReference | function() { bridge code }]
             exportedName.setObfuscatable(false);
             JsNameRef polyRef = polyJsName.makeRef(sourceInfo);
-            polyRef.setQualifier(getPrototypeQualifierOf(method));
             generateVTableAssignment(globalStmts, method, exportedName,
-                createJsInteropBridgeMethod(method, polyRef));
+                createBridgeMethodOrReturnAlias(method, polyRef));
           }
           if (method.exposesOverriddenPackagePrivateMethod() &&
               getPackagePrivateName(method) != null) {
@@ -2901,28 +2903,64 @@ public class GenerateJavaScriptAST {
       }
     }
 
-    private JsExpression createJsInteropBridgeMethod(JMethod m, JsNameRef methodRef) {
+    /*
+     * If a method needs a bridge, there are two cases:
+     * 1) the method merely needs an alias (one or more names), e.g. return Foo.prototype.methodRef
+     * 2) the method needs to coerce parameters somehow. For now, this means long <-> JS number,
+     * but in the future, this will be how @JsConvert/@JsAware are implemented. A synthetic
+     * function is generated which invokes the method and coerces each argument or return type
+     * as needed.
+     */
+    private JsExpression createBridgeMethodOrReturnAlias(JMethod m, JsNameRef methodRef) {
       if (m.isStatic() || m instanceof JConstructor) {
         return methodRef;
       } else {
-        // call JHCSU.makeBridgeMethod(functionRefToBeCalled)
-        JsFunction makeBridgeMethod = indexedFunctions.get("JavaClassHierarchySetupUtil.makeBridgeMethod");
-        JsNameRef makeBridgeMethodRef = makeBridgeMethod.getName().makeRef(methodRef.getSourceInfo());
-        JsInvocation invokeBridge = new JsInvocation(methodRef.getSourceInfo());
-        invokeBridge.setQualifier(makeBridgeMethodRef);
-        invokeBridge.getArguments().add(methodRef);
-        invokeBridge.getArguments().add(m.getType() == JPrimitiveType.LONG ?
-            JsBooleanLiteral.TRUE : JsBooleanLiteral.FALSE);
-        JsArrayLiteral arrayLiteral = new JsArrayLiteral(m.getSourceInfo());
-        for (JParameter p : m.getParams()) {
-          if (p.getType() == JPrimitiveType.LONG) {
-            arrayLiteral.getExpressions().add(JsBooleanLiteral.TRUE);
+        List<JsExpression> potentiallyCoercedArguments = new ArrayList<JsExpression>();
+
+        boolean needsAnyCoercions = m.getType() == JPrimitiveType.LONG;
+        // Construct function($arg1, $arg2, ...){ return this.meth($arg1, $arg2); }
+        SourceInfo info = m.getSourceInfo();
+        JsFunction bridgeMethod = JsUtils.createEmptyFunctionLiteral(info, topScope,
+            null);
+
+        int argNumber = 0;
+        // compute coercion expressions for each parameter that needs is (is a long)
+        for (JParameter param : m.getParams()) {
+          // declare $argn in the function params
+          JsName argJsName = bridgeMethod.getScope().declareName("$arg" + argNumber++);
+          bridgeMethod.getParameters().add(new JsParameter(info, argJsName));
+
+          // arg reference to be used in the body of the synthesized function
+          JsNameRef argJsNameRef = argJsName.makeRef(info);
+
+          // if the type is long, add coerceToLong($argn)
+          if (param.getType() == JPrimitiveType.LONG) {
+            needsAnyCoercions = true;
+            potentiallyCoercedArguments.add(constructInvocation(info,
+                "JavaClassHierarchySetupUtil.coerceToLong", argJsNameRef));
           } else {
-            arrayLiteral.getExpressions().add(JsBooleanLiteral.FALSE);
+            // else pass through $argn unchanged
+            potentiallyCoercedArguments.add(argJsNameRef);
           }
         }
-        invokeBridge.getArguments().add(arrayLiteral);
-        return invokeBridge;
+
+        if (!needsAnyCoercions) {
+          // simply return Foo.prototype.methodRef or _.methodRef
+          methodRef.setQualifier(getPrototypeQualifierOf(m));
+          return methodRef;
+        }
+
+        // return coerceFromLong(this.methodRef(coerceToLong(arg1), arg2, ...))
+        JsInvocation methodToBeInvoked = new JsInvocation(info, methodRef);
+        methodToBeInvoked.setQualifier(new JsThisRef(info));
+        methodToBeInvoked.getArguments().addAll(potentiallyCoercedArguments);
+
+        bridgeMethod.getBody().getStatements().add(new JsReturn(info,
+            m.getType() == JPrimitiveType.LONG ? constructInvocation(info,
+                "JavaClassHierarchySetupUtil.coerceFromLong", methodToBeInvoked) :
+                methodToBeInvoked));
+
+        return bridgeMethod;
       }
     }
 

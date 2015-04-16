@@ -70,6 +70,10 @@ class ClosureJsInteropExportsGenerator implements JsInteropExportsGenerator {
   @Override
   public void exportType(JDeclaredType x) {
     // Note that synthesized constructors use the name of the declared types.
+    // HACK: because GwtAstBuilder doesn't record whether something's an anonymous/local class
+    if (Character.isDigit(x.getSimpleName().charAt(0))) {
+      return;
+    }
     generateExport(x.getQualifiedExportName(), x.getQualifiedExportName(), x, x.getSourceInfo());
   }
 

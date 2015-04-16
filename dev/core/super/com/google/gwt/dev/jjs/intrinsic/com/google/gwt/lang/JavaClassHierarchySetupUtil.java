@@ -28,17 +28,6 @@ public class JavaClassHierarchySetupUtil {
   private static JavaScriptObject prototypesByTypeId = JavaScriptObject.createObject();
 
   /**
-   * Defines a hidden constructor for closure using the prototype set to globalTemp (i.e. '_'). The
-   * constructor is intentionally hidden as Closure -for some unknown reason right now- having
-   * trouble dealing with an explicit one and increases code size.
-   */
-  public static native void defineHiddenClosureConstructor()/*-{
-    function F() {};
-    F.prototype = _;
-    return F;
-  }-*/;
-
-  /**
    * If not already created it creates the prototype for the class and stores it in
    * {@code prototypesByTypeId}. If superTypeId is null, it means that the class being defined
    * is the topmost class (i.e. java.lang.Object) and creates an empty prototype for it.
@@ -190,20 +179,34 @@ public class JavaClassHierarchySetupUtil {
   }-*/;
 
   /**
-   * Create a function that invokes the specified method reference.
+   * Create a function that invokes the specified method reference. Coerces any parameters that
+   * are doubles but expected to be java longs into long types. On return, converts any long
+   * return values back into Javascript double types.
    */
   public static native JavaScriptObject makeBridgeMethod(
       JavaScriptObject methodRef, boolean returnsLong, boolean[] longParams) /*-{
     return function() {
-      var args = [];
-      for (var i = 0; i < arguments.length; i++) {
-        var maybeCoerced = @JavaClassHierarchySetupUtil::maybeCoerceToLong(Ljava/lang/Object;Z)(arguments[i], longParams[i]);
-        args.push(maybeCoerced);
-      }
+      var args = @JavaClassHierarchySetupUtil::maybeCoerceParameters(*)(arguments, longParams);
       var result = methodRef.apply(this, args);
-      return returnsLong ? @JavaClassHierarchySetupUtil::maybeCoerceFromLong(Ljava/lang/Object;Z)(result, returnsLong) : result;
+      return returnsLong ? @JavaClassHierarchySetupUtil::maybeCoerceFromLong(*)(result, returnsLong)
+       : result;
     };
   }-*/;
+
+  /**
+   * Process incoming parameters, converting any long parameters in double format back to Java long.
+   */
+  public static native JavaScriptObject maybeCoerceParameters(JavaScriptObject params,
+      boolean[] isLongParam) /*-{
+    var args = [];
+    for (var i = 0; i < params.length; i++) {
+      var maybeCoerced = @JavaClassHierarchySetupUtil::maybeCoerceToLong(*)(params[i],
+        isLongParam[i]);
+      args.push(maybeCoerced);
+    }
+    return args;
+  }-*/;
+
 
   /**
    * Create a function that applies the specified samMethod on itself, and whose __proto__ points to

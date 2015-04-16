@@ -2662,11 +2662,13 @@ public class GenerateJavaScriptAST {
      * the compiler disambiguate which methods belong to which type.
      */
     private void generateClosureClassDefinition(JClassType x, List<JsStatement> globalStmts) {
-      // defineClass(...)
-      generateCallToDefineClass(x, globalStmts, new ArrayList<JsNameRef>());
-
-      // var ClassName = defineHiddenClosureConstructor()
+      // function ClassName(){}
       declareSynthesizedClosureConstructor(x, globalStmts);
+
+      // defineClass(..., ClassName)
+      ArrayList<JsNameRef> constructorArgs = new ArrayList<>();
+      constructorArgs.add(names.get(x).makeRef(x.getSourceInfo()));
+      generateCallToDefineClass(x, globalStmts, constructorArgs);
 
       // Ctor1.prototype = ClassName.prototype
       // Ctor2.prototype = ClassName.prototype
@@ -2683,7 +2685,10 @@ public class GenerateJavaScriptAST {
 
     /*
      * Declare an empty synthesized constructor that looks like:
-     *  var ClassName = defineHiddenClosureConstructor()
+     * function ClassName(){}
+     *
+     * Closure Compiler's RewriteFunctionExpressions pass can be enabled to turn these back
+     * into a factory method after optimizations.
      *
      * TODO(goktug): throw Error in the body to prevent instantiation via this constructor.
      */
@@ -2691,10 +2696,9 @@ public class GenerateJavaScriptAST {
         List<JsStatement> globalStmts) {
       SourceInfo sourceInfo = x.getSourceInfo();
       JsName classVar = topScope.declareName(JjsUtils.getNameString(x));
-      JsVar var = new JsVar(sourceInfo, classVar);
-      var.setInitExpr(constructInvocation(sourceInfo,
-          "JavaClassHierarchySetupUtil.defineHiddenClosureConstructor"));
-      globalStmts.add(new JsVars(sourceInfo, var));
+      JsFunction closureCtor = new JsFunction(sourceInfo, topScope, classVar);
+      closureCtor.setBody(new JsBlock(sourceInfo));
+      globalStmts.add(closureCtor.makeStmt());
       names.put(x, classVar);
     }
 
@@ -2806,11 +2810,12 @@ public class GenerateJavaScriptAST {
           if (typeOracle.needsJsInteropBridgeMethod(method)) {
             JsName exportedName = polyJsName.getEnclosing().declareName(method.getName(),
                 method.getName());
-            // _.exportedName = makeBridgeMethod(_.polyName)
+            // _.exportedName = [inlineClosureBridgeMethod | makeBridgeMethod(_.polyName)]
             exportedName.setObfuscatable(false);
             JsNameRef polyRef = polyJsName.makeRef(sourceInfo);
             polyRef.setQualifier(getPrototypeQualifierOf(method));
             generateVTableAssignment(globalStmts, method, exportedName,
+                closureCompilerFormatEnabled ? createJsInteropBridgeMethodClosure(method, polyRef) :
                 createJsInteropBridgeMethod(method, polyRef));
           }
           if (method.exposesOverriddenPackagePrivateMethod() &&
@@ -2906,23 +2911,69 @@ public class GenerateJavaScriptAST {
         return methodRef;
       } else {
         // call JHCSU.makeBridgeMethod(functionRefToBeCalled)
-        JsFunction makeBridgeMethod = indexedFunctions.get("JavaClassHierarchySetupUtil.makeBridgeMethod");
-        JsNameRef makeBridgeMethodRef = makeBridgeMethod.getName().makeRef(methodRef.getSourceInfo());
-        JsInvocation invokeBridge = new JsInvocation(methodRef.getSourceInfo());
-        invokeBridge.setQualifier(makeBridgeMethodRef);
-        invokeBridge.getArguments().add(methodRef);
-        invokeBridge.getArguments().add(m.getType() == JPrimitiveType.LONG ?
-            JsBooleanLiteral.TRUE : JsBooleanLiteral.FALSE);
-        JsArrayLiteral arrayLiteral = new JsArrayLiteral(m.getSourceInfo());
-        for (JParameter p : m.getParams()) {
-          if (p.getType() == JPrimitiveType.LONG) {
-            arrayLiteral.getExpressions().add(JsBooleanLiteral.TRUE);
-          } else {
-            arrayLiteral.getExpressions().add(JsBooleanLiteral.FALSE);
-          }
-        }
-        invokeBridge.getArguments().add(arrayLiteral);
+        JsBooleanLiteral returnsLong = m.getType() == JPrimitiveType.LONG ?
+            JsBooleanLiteral.TRUE : JsBooleanLiteral.FALSE;
+
+        JsInvocation invokeBridge = constructInvocation(m.getSourceInfo(),
+            "JavaClassHierarchySetupUtil.makeBridgeMethod", methodRef, returnsLong,
+            createBridgeMethodParameterCoercionArrayLiteral(m));
         return invokeBridge;
+      }
+    }
+
+    private JsArrayLiteral createBridgeMethodParameterCoercionArrayLiteral(JMethod m) {
+      JsArrayLiteral arrayLiteral = new JsArrayLiteral(m.getSourceInfo());
+      for (JParameter p : m.getParams()) {
+        if (p.getType() == JPrimitiveType.LONG) {
+          arrayLiteral.getExpressions().add(JsBooleanLiteral.TRUE);
+        } else {
+          arrayLiteral.getExpressions().add(JsBooleanLiteral.FALSE);
+        }
+      }
+      return arrayLiteral;
+    }
+
+    /*
+     * Using factory methods to synthesize functions for prototype can cause Closure Compiler's
+     * CrossModuleMethodMotion optimization pass to get confused and incorrectly move methods.
+     * This change causes bridge methods to be inlined, not synthetic.
+     */
+    private JsExpression createJsInteropBridgeMethodClosure(JMethod m, JsNameRef methodRef) {
+      if (m.isStatic() || m instanceof JConstructor) {
+        return methodRef;
+      } else {
+        /*
+         * Inline bridge method (assigned to prototype property)
+         *
+         * function() {
+         *   return maybeCoerceToLong(methodRef.apply(this,
+         *                            maybeCoerceParameters(arguments, longParams)));
+         * }
+         */
+        JsBooleanLiteral returnsLong = m.getType() == JPrimitiveType.LONG ?
+            JsBooleanLiteral.TRUE : JsBooleanLiteral.FALSE;
+
+        JsArrayLiteral arrayLiteral = createBridgeMethodParameterCoercionArrayLiteral(m);
+        // maybeCoerceParameters(arguments, longParams)
+        JsInvocation invokeMaybeCoerceParameters = constructInvocation(m.getSourceInfo(),
+            "JavaClassHierarchySetupUtil.maybeCoerceParameters", new JsNameRef(m.getSourceInfo(),
+            "arguments"), arrayLiteral);
+
+        // methodRef.apply(this, maybeCoerceParameters(arguments, longParams))
+        JsNameRef applyRef = new JsNameRef(m.getSourceInfo(), "apply");
+        applyRef.setQualifier(methodRef);
+        JsInvocation invokeBridge = new JsInvocation(m.getSourceInfo(), applyRef, new JsThisRef(m
+            .getSourceInfo()), invokeMaybeCoerceParameters);
+
+
+        // maybeCoerceToLong(methodRef.apply(this, maybeCoerceParameters(args, [longParams])))
+        JsInvocation invokeMaybeCoerceFromLong = constructInvocation(m.getSourceInfo(),
+            "JavaClassHierarchySetupUtil.maybeCoerceFromLong", invokeBridge, returnsLong);
+        JsFunction bridgeMethod = new JsFunction(m.getSourceInfo(), topScope);
+        bridgeMethod.setBody(new JsBlock(m.getSourceInfo()));
+        bridgeMethod.getBody().getStatements().add(new JsReturn(m.getSourceInfo(),
+            invokeMaybeCoerceFromLong));
+        return bridgeMethod;
       }
     }
 

@@ -16,6 +16,167 @@
       "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_9199dec6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-17T16:27:44Z",
+      "side": 1,
+      "message": "Do this in the proper way. Add isAnonymous (or isAnonymousOrLocal) to JClassType and populate it in GwtAstBuilder).\n\nAlso make this a separate patch.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 5
+      },
+      "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_34bed8c5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2914,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-17T16:27:44Z",
+      "side": 1,
+      "message": "I think here it should recieve an JsName not a JsNameRef and possibly name it aliasedMethodName.",
+      "range": {
+        "startLine": 2914,
+        "startChar": 78,
+        "endLine": 2914,
+        "endChar": 87
+      },
+      "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_9451cc35",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2914,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-17T16:27:44Z",
+      "side": 1,
+      "message": "s/m/method",
+      "range": {
+        "startLine": 2914,
+        "startChar": 64,
+        "endLine": 2914,
+        "endChar": 66
+      },
+      "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_f46db000",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2930,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-17T16:27:44Z",
+      "side": 1,
+      "message": "Nitpicking. No need to number arguments here, you could just do \"$arg_\" + param.getName();",
+      "range": {
+        "startLine": 2930,
+        "startChar": 74,
+        "endLine": 2930,
+        "endChar": 85
+      },
+      "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_74f6a0a7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2954,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-17T16:27:44Z",
+      "side": 1,
+      "message": "s/methodToBeInvoked/aliasedMethodInvocation",
+      "range": {
+        "startLine": 2954,
+        "startChar": 21,
+        "endLine": 2954,
+        "endChar": 38
+      },
+      "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_142cfcc5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2963,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-17T16:27:44Z",
+      "side": 1,
+      "message": "Nit picking here. Could you structure this method more like\n\n  if (m.isStatic() || m instanceof JConstructor) {\n        return aliasedMethodName.makeRef(info);\n  }\n  \n  boolean needsLongConversions \u003d  m.getType() \u003d\u003d JPrimitiveType.LONG || Iterables.any(m.getParams(), Predicates.equalsTo(JPrimitiveType.LONG));\n\n  if (!needsLongConversions) {\n    // simply return Foo.prototype.aliasedMethod or _.aliasedMethod\n    JsNameRef aliasedMethodRef \u003d aliasedMethodName.makeRef(info);\n    aliasedMethodRef.setQualifier(getPrototypeQualifierOf(m));\n    return aliasedMethodRef;\n  }\n\n  // Bridge requires conversions.\n\n  // return coerceFromLong(this.aliasedMethod(coerceToLong(arg1), arg2, ...))\n   JsInvocation aliasedMethodInvocation \u003d new JsInvocation(info, aliasedMethodRef);\n   aliasedMethodInvocation.setQualifier(new JsThisRef(info));\n\n   for (JParameter param : method.getParams() {\n     JsName argJsName \u003d bridgeMethod.getScope().declareName(\"$arg_\" + param.getName());\n     aliasedMethodInvocation.getParameters.add(param.getType() \u003d\u003d JPrimitiveType.LONG ? constructInvocation(info, \"JavaClassHierarchySetupUtil.coerceToLong\", argJsName.makeRef(info)) : argJsName.makeRef(info) );\n   }\n\n   bridgeMethod.getBody().getStatements().add(new JsReturn(info,\n        m.getType() \u003d\u003d JPrimitiveType.LONG ? constructInvocation(info,\n            \"JavaClassHierarchySetupUtil.coerceFromLong\", aliasedMethodInvocation) :\n             aliasedMethodInvocation));\n\n   return bridgeMethod;\n  }",
+      "range": {
+        "startLine": 2918,
+        "startChar": 0,
+        "endLine": 2963,
+        "endChar": 28
+      },
+      "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_91c23ea1",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-17T16:27:44Z",
+      "side": 1,
+      "message": "These two functions do not belong in here. Move to LongLib or Cast.",
+      "range": {
+        "startLine": 209,
+        "startChar": 2,
+        "endLine": 221,
+        "endChar": 7
+      },
+      "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90a1e660_3681e849",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-04-17T21:15:17Z",
+      "side": 1,
+      "message": "How about TOP_LEVEL instead?",
+      "revId": "f40bcf703a1131fdc8e8366b11095f09f72425f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

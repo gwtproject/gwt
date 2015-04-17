@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "d0c51e25_e4965393",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-17T21:52:06Z",
+      "side": 1,
+      "message": "Great.",
+      "parentUuid": "d0c51e25_c37794ca",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 5
+      },
+      "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0c51e25_34bed8c5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -193,6 +217,30 @@
       "side": 1,
       "message": "Sure, although I\u0027m surprised you didn\u0027t suggest Iterables.transformer() to map List\u003cJParameter\u003e to List\u003cJsExpression\u003e :)",
       "parentUuid": "d0c51e25_142cfcc5",
+      "range": {
+        "startLine": 2918,
+        "startChar": 0,
+        "endLine": 2963,
+        "endChar": 28
+      },
+      "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_4422c723",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2963,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-17T21:52:06Z",
+      "side": 1,
+      "message": "That would be neat too...\n\nAlthough without lambdas it gets quite clunky.\n\nThe only two things that I consider important are: 1) we should not be passing JsNameRefs as they should be only accessed from the usage site (and for that reason I prefer calling makeRef when sticking the ref), and 2) making easier to read the two different scenarios (conversion vs no conversion).",
+      "parentUuid": "d0c51e25_43172444",
       "range": {
         "startLine": 2918,
         "startChar": 0,

@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "d0c51e25_c37794ca",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-04-17T19:02:03Z",
+      "side": 1,
+      "message": "I sent out a patch to add JDeclaredType.getClassDisposition() which can delineate between the 5 different types in the JLS (top level, static nested, inner nested, anonymous inner nested, local class, and lambdas)",
+      "parentUuid": "d0c51e25_9199dec6",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 5
+      },
+      "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0c51e25_34bed8c5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -145,6 +169,30 @@
       "writtenOn": "2015-04-17T16:27:44Z",
       "side": 1,
       "message": "Nit picking here. Could you structure this method more like\n\n  if (m.isStatic() || m instanceof JConstructor) {\n        return aliasedMethodName.makeRef(info);\n  }\n  \n  boolean needsLongConversions \u003d  m.getType() \u003d\u003d JPrimitiveType.LONG || Iterables.any(m.getParams(), Predicates.equalsTo(JPrimitiveType.LONG));\n\n  if (!needsLongConversions) {\n    // simply return Foo.prototype.aliasedMethod or _.aliasedMethod\n    JsNameRef aliasedMethodRef \u003d aliasedMethodName.makeRef(info);\n    aliasedMethodRef.setQualifier(getPrototypeQualifierOf(m));\n    return aliasedMethodRef;\n  }\n\n  // Bridge requires conversions.\n\n  // return coerceFromLong(this.aliasedMethod(coerceToLong(arg1), arg2, ...))\n   JsInvocation aliasedMethodInvocation \u003d new JsInvocation(info, aliasedMethodRef);\n   aliasedMethodInvocation.setQualifier(new JsThisRef(info));\n\n   for (JParameter param : method.getParams() {\n     JsName argJsName \u003d bridgeMethod.getScope().declareName(\"$arg_\" + param.getName());\n     aliasedMethodInvocation.getParameters.add(param.getType() \u003d\u003d JPrimitiveType.LONG ? constructInvocation(info, \"JavaClassHierarchySetupUtil.coerceToLong\", argJsName.makeRef(info)) : argJsName.makeRef(info) );\n   }\n\n   bridgeMethod.getBody().getStatements().add(new JsReturn(info,\n        m.getType() \u003d\u003d JPrimitiveType.LONG ? constructInvocation(info,\n            \"JavaClassHierarchySetupUtil.coerceFromLong\", aliasedMethodInvocation) :\n             aliasedMethodInvocation));\n\n   return bridgeMethod;\n  }",
+      "range": {
+        "startLine": 2918,
+        "startChar": 0,
+        "endLine": 2963,
+        "endChar": 28
+      },
+      "revId": "c69050252c7314e59f48f31ef8d41707ab38051c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_43172444",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2963,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-04-17T19:02:03Z",
+      "side": 1,
+      "message": "Sure, although I\u0027m surprised you didn\u0027t suggest Iterables.transformer() to map List\u003cJParameter\u003e to List\u003cJsExpression\u003e :)",
+      "parentUuid": "d0c51e25_142cfcc5",
       "range": {
         "startLine": 2918,
         "startChar": 0,

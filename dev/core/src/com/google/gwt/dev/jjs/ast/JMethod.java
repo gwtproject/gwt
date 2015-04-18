@@ -44,7 +44,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
    * isX(), hasX() and getX() while setters have signatures like x(int a) and setX(int a).
    */
   public static enum JsPropertyType {
-    HAS, GET, SET
+    GET, SET, UNDEFINED;
   }
 
   public static final Comparator<JMethod> BY_SIGNATURE_COMPARATOR = new Comparator<JMethod>() {

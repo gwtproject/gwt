@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b03eeaea_c6fe78ab",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GwtAstBuilderTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-04-19T04:09:27Z",
+      "side": 1,
+      "message": "Move this to testNestedClassDisposition otherwise it gets compiled with Java7 by the other test methods and fails.",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 7
+      },
+      "revId": "e7ed526c59f6bfdfabccb19f9f63b36735f9b74b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

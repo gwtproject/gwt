@@ -16,6 +16,29 @@
       "revId": "091dc0bb22943ed976c0bd4426868161b8702756",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d01a7eb3_89b59d2f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2884,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-20T20:44:49Z",
+      "side": 1,
+      "message": "only anonymous classes miss a name so perhaps this should re-written as x.getClassDisposition() !\u003d ANONYMOUS ?",
+      "range": {
+        "startLine": 2882,
+        "startChar": 12,
+        "endLine": 2884,
+        "endChar": 84
+      },
+      "revId": "091dc0bb22943ed976c0bd4426868161b8702756",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

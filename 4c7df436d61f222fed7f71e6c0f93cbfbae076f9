@@ -16,6 +16,29 @@
       "revId": "4c7df436d61f222fed7f71e6c0f93cbfbae076f9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06c3e17_ebb9b158",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-20T15:53:33Z",
+      "side": 1,
+      "message": "Fix.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 1
+      },
+      "revId": "4c7df436d61f222fed7f71e6c0f93cbfbae076f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

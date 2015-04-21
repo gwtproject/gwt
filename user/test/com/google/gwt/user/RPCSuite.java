@@ -42,7 +42,6 @@ import com.google.gwt.user.client.rpc.UnicodeEscapingTestWithTypeObfuscation;
 import com.google.gwt.user.client.rpc.ValueTypesTest;
 import com.google.gwt.user.client.rpc.ValueTypesTestWithTypeObfuscation;
 import com.google.gwt.user.client.rpc.XsrfProtectionTest;
-import com.google.gwt.user.client.rpc.impl.WebModeClientSerializationStreamReaderTest;
 
 import junit.framework.Test;
 
@@ -85,7 +84,6 @@ public class RPCSuite {
     suite.addTestSuite(XsrfProtectionTest.class);
     suite.addTestSuite(FailedRequestTest.class);
     suite.addTestSuite(FailingRequestBuilderTest.class);
-    suite.addTestSuite(WebModeClientSerializationStreamReaderTest.class);
 
     // This test turns on the type-elision feature of RPC
     suite.addTestSuite(ValueTypesTestWithTypeObfuscation.class);

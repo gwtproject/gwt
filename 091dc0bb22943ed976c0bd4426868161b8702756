@@ -39,6 +39,30 @@
       "revId": "091dc0bb22943ed976c0bd4426868161b8702756",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d01a7eb3_9b778e02",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2884,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-04-21T22:35:36Z",
+      "side": 1,
+      "message": "Added getClassDisposition().isLocalType()",
+      "parentUuid": "d01a7eb3_89b59d2f",
+      "range": {
+        "startLine": 2882,
+        "startChar": 12,
+        "endLine": 2884,
+        "endChar": 84
+      },
+      "revId": "091dc0bb22943ed976c0bd4426868161b8702756",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

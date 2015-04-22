@@ -526,16 +526,21 @@ public final class JavaToJavaScriptCompiler {
 
   private Map<JsName, JsLiteral> runDetailedNamer(ConfigurationProperties config)
       throws IllegalNameException {
-    Map<JsName, JsLiteral> internedTextByVariableName = null;
-    if (shouldOptimize()) {
-      // Only perform the interning optimization when optimizations are enabled.
-      internedTextByVariableName =
-          JsLiteralInterner.exec(jprogram, jsProgram, (byte) (JsLiteralInterner.INTERN_ALL
-              & (byte) (jprogram.typeOracle.isJsInteropEnabled()
-              ? ~JsLiteralInterner.INTERN_STRINGS : ~0)));
-    }
+    Map<JsName, JsLiteral> internedTextByVariableName = maybeInternLiterals();
     JsVerboseNamer.exec(jsProgram, config);
     return internedTextByVariableName;
+  }
+
+  private Map<JsName, JsLiteral> maybeInternLiterals() {
+    if (!shouldOptimize()) {
+      return null;
+    }
+    // Only perform the interning optimization when optimizations are enabled, and do not
+    // intern strings in closure format as it breaks goog.provides, etc..
+    int inlineMask = options.isClosureCompilerFormatEnabled() ?
+        JsLiteralInterner.INTERN_ALL & ~JsLiteralInterner.INTERN_STRINGS :
+        JsLiteralInterner.INTERN_ALL;
+    return JsLiteralInterner.exec(jprogram, jsProgram, inlineMask);
   }
 
   private Pair<SyntheticArtifact, MultipleDependencyGraphRecorder> splitJsIntoFragments(
@@ -1056,10 +1061,7 @@ public final class JavaToJavaScriptCompiler {
 
   private Map<JsName, JsLiteral> runObfuscateNamer(PermutationProperties properties)
       throws IllegalNameException {
-    Map<JsName, JsLiteral> internedLiteralByVariableName =
-        JsLiteralInterner.exec(jprogram, jsProgram, (byte) (JsLiteralInterner.INTERN_ALL
-            & (byte) (jprogram.typeOracle.isJsInteropEnabled()
-            ? ~JsLiteralInterner.INTERN_STRINGS : ~0)));
+    Map<JsName, JsLiteral> internedLiteralByVariableName =  maybeInternLiterals();
     FreshNameGenerator freshNameGenerator = JsObfuscateNamer.exec(jsProgram,
         properties.getConfigurationProperties());
     if (options.shouldRemoveDuplicateFunctions()

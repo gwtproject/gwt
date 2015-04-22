@@ -15,7 +15,10 @@
  */
 package com.google.gwt.core.client.interop;
 
+import static com.google.gwt.core.client.js.JsNamespace.GLOBAL;
+
 import com.google.gwt.core.client.js.JsExport;
+import com.google.gwt.core.client.js.JsNamespace;
 
 /**
  * A test class that exhibits a variety of @JsExports on constructors.
@@ -23,6 +26,7 @@ import com.google.gwt.core.client.js.JsExport;
 public class MyClassExportsConstructors {
   private int a;
 
+  @JsNamespace(GLOBAL)
   @JsExport("MyClassExportsConstructors1")
   public MyClassExportsConstructors(int a) {
     this.a = a;

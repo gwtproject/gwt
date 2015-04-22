@@ -44,12 +44,19 @@ public class JsExportTest extends GWTTestCase {
   public void testMethodExport() {
     // Test exported method can be called from JS in host page
     ScriptInjector.fromString("$global.exportedFromJava();").setWindow(TOP_WINDOW).inject();
-    assertTrue(MyClassExportsMethod.calledFromJs);
+    assertTrue(MyClassExportsMethod.calledFromCallMe1);
 
-    MyClassExportsMethod.calledFromJs = false;
+    ScriptInjector.fromString("$global.exportNamespace.exportedFromJava();").setWindow(TOP_WINDOW)
+        .inject();
+    assertTrue(MyClassExportsMethod.calledFromCallMe2);
+
+    ScriptInjector.fromString("$global.exportNamespace.callMe3();").setWindow(TOP_WINDOW).inject();
+    assertTrue(MyClassExportsMethod.calledFromCallMe3);
+
+    MyClassExportsMethod.calledFromCallMe1 = false;
     // Test exported constructor called from JS in module window
     ScriptInjector.fromString("$global.exportedFromJava();").inject();
-    assertTrue(MyClassExportsMethod.calledFromJs);
+    assertTrue(MyClassExportsMethod.calledFromCallMe1);
   }
 
   public void testMethodExport_noTypeTightenParams() {

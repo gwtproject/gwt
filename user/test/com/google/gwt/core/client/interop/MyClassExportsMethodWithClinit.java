@@ -15,9 +15,12 @@
  */
 package com.google.gwt.core.client.interop;
 
+import static com.google.gwt.core.client.js.JsNamespace.GLOBAL;
+
 import static junit.framework.Assert.assertEquals;
 
 import com.google.gwt.core.client.js.JsExport;
+import com.google.gwt.core.client.js.JsNamespace;
 
 class MyClassExportsMethodWithClinit {
 
@@ -30,6 +33,7 @@ class MyClassExportsMethodWithClinit {
     }
   }
 
+  @JsNamespace(GLOBAL)
   @JsExport("MyClassExportsMethodWithClinit")
   public MyClassExportsMethodWithClinit() {
     // ensure clinit() is called even when invoked from JS

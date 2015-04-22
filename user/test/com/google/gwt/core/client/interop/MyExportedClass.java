@@ -15,7 +15,10 @@
  */
 package com.google.gwt.core.client.interop;
 
+import static com.google.gwt.core.client.js.JsNamespace.GLOBAL;
+
 import com.google.gwt.core.client.js.JsExport;
+import com.google.gwt.core.client.js.JsNamespace;
 import com.google.gwt.core.client.js.JsType;
 
 /**
@@ -60,6 +63,7 @@ public class MyExportedClass {
     }
   }
 
+  @JsNamespace(GLOBAL)
   @JsExport("newInnerClass")
   public static InnerClass newInnerClass(int field) {
     return new InnerClass(field);

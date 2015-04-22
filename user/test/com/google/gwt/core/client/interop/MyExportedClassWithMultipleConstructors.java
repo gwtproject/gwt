@@ -15,7 +15,10 @@
  */
 package com.google.gwt.core.client.interop;
 
+import static com.google.gwt.core.client.js.JsNamespace.GLOBAL;
+
 import com.google.gwt.core.client.js.JsExport;
+import com.google.gwt.core.client.js.JsNamespace;
 import com.google.gwt.core.client.js.JsType;
 
 /**
@@ -28,12 +31,14 @@ public class MyExportedClassWithMultipleConstructors {
   public int a;
   public int b;
 
+  @JsNamespace(GLOBAL)
   @JsExport("MyClassConstructor1")
   public MyExportedClassWithMultipleConstructors() {
     a = 1;
     b = 2;
   }
 
+  @JsNamespace(GLOBAL)
   @JsExport("MyClassConstructor2")
   public MyExportedClassWithMultipleConstructors(int a, int b) {
     this.a = a;

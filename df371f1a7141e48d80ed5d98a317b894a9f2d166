@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "50984e8f_02facaf3",
+        "filename": "user/src/com/google/gwt/user/client/ui/NativeVerticalScrollbar.ui.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-22T13:21:00Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "50984e8f_82813a9a",
+      "revId": "df371f1a7141e48d80ed5d98a317b894a9f2d166",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50984e8f_428b32b8",
         "filename": "user/src/com/google/gwt/user/client/ui/NativeVerticalScrollbar.ui.xml",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-22T13:05:10Z",
       "side": 0,
       "message": "idem here: recopy the comment",
+      "revId": "df371f1a7141e48d80ed5d98a317b894a9f2d166",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50984e8f_22ceeede",
+        "filename": "user/src/com/google/gwt/user/client/ui/NativeVerticalScrollbar.ui.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-22T13:21:00Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "50984e8f_428b32b8",
       "revId": "df371f1a7141e48d80ed5d98a317b894a9f2d166",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

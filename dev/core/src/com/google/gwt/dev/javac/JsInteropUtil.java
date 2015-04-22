@@ -54,10 +54,16 @@ public final class JsInteropUtil {
   }
 
   private static void setJsInteropProperties(JMember member, Annotation... annotations) {
+    String namespace = null;
+    AnnotationBinding jsNamespace = JdtUtil.getAnnotation(annotations, JSNAMESPACE_CLASS);
+    if (jsNamespace != null) {
+      namespace = JdtUtil.getAnnotationParameterString(jsNamespace, "value");
+    }
+
     AnnotationBinding jsExport = JdtUtil.getAnnotation(annotations, JSEXPORT_CLASS);
     if (jsExport != null) {
       String value = JdtUtil.getAnnotationParameterString(jsExport, "value");
-      setExportInfo(member, value == null ? "" : value);
+      setExportInfo(member, namespace, value == null ? "" : value);
     }
 
     /* Apply class wide JsInterop annotations */
@@ -74,7 +80,7 @@ public final class JsInteropUtil {
     }
 
     if (enclosingType.isClassWideExport() && !member.needsVtable() && jsExport == null) {
-      setExportInfo(member, "");
+      setExportInfo(member, namespace, "");
     }
   }
 
@@ -96,9 +102,11 @@ public final class JsInteropUtil {
 
   // TODO(goktug): Move other namespace logic to here as well after we get access to package
   // annotations in GwtAstBuilder.
-  private static void setExportInfo(JMember member, String exportName) {
+  private static void setExportInfo(JMember member, String namespace, String exportName) {
     if (exportName.isEmpty()) {
-      member.setExportInfo(null, computeExportName(member));
+      member.setExportInfo(namespace, computeExportName(member));
+    } else if (namespace != null) {
+      member.setExportInfo(namespace, exportName);
     } else {
       int split = exportName.lastIndexOf('.');
       if (split == -1) {

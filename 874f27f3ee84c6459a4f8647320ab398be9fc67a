@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d08d1e46_9703cec7",
+        "filename": "user/src/com/google/gwt/core/client/js/JsNamespace.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-22T01:02:12Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027final\u0027 modifier.",
+      "revId": "874f27f3ee84c6459a4f8647320ab398be9fc67a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

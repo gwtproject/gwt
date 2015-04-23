@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d0d43e30_cb807548",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2912,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-23T21:44:35Z",
+      "side": 1,
+      "message": "Swap lines 2911/2912",
+      "range": {
+        "startLine": 2912,
+        "startChar": 8,
+        "endLine": 2912,
+        "endChar": 24
+      },
+      "revId": "26fd183d65a6bc903671e0204b524b29897e87d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0d43e30_abbd39c9",
         "filename": "user/test/com/google/gwt/core/client/interop/ClassWithLongCoercionBridgeMethod.java",
         "patchSetId": 2

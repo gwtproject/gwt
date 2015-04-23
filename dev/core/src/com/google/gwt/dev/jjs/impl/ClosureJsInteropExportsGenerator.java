@@ -70,7 +70,8 @@ class ClosureJsInteropExportsGenerator implements JsInteropExportsGenerator {
   @Override
   public void exportType(JDeclaredType x) {
     // Note that synthesized constructors use the name of the declared types.
-    generateExport(x.getQualifiedExportName(), x.getQualifiedExportName(), x, x.getSourceInfo());
+    generateExport(x.getQualifiedExportName(), x.getQualifiedExportName(),
+        names.get(x).makeRef(x.getSourceInfo()), x.getSourceInfo());
   }
 
   /*
@@ -82,20 +83,21 @@ class ClosureJsInteropExportsGenerator implements JsInteropExportsGenerator {
    *  foo.bar.ClassSimpleName = <obfuscated-ctor-name>;
    */
   @Override
-  public void exportMember(JMember member) {
+  public void exportMember(JMember member, JsExpression bridgeMethodOrReturnAlias) {
     // TODO(goktug): fix export namespace for constructor to be same as qualified export name.
     String namespace = member instanceof JConstructor ? member.getQualifiedExportName()
         : member.getExportNamespace();
 
-    generateExport(namespace, member.getQualifiedExportName(), member, member.getSourceInfo());
+    generateExport(namespace, member.getQualifiedExportName(), bridgeMethodOrReturnAlias,
+        member.getSourceInfo());
   }
 
-  private void generateExport(String exportNamespace, String qualifiedExportName, HasName nameRef,
-      SourceInfo sourceInfo) {
+  private void generateExport(String exportNamespace, String qualifiedExportName,
+      JsExpression bridgeOrAlias, SourceInfo sourceInfo) {
     // goog.provide("a.b.c")
     ensureGoogProvide(exportNamespace, sourceInfo);
     // a.b.c = a_b_c_obf
-    generateAssignment(nameRef, qualifiedExportName, sourceInfo);
+    generateAssignment(bridgeOrAlias, qualifiedExportName, sourceInfo);
   }
 
   private void ensureGoogProvide(String namespace, SourceInfo info) {
@@ -110,9 +112,8 @@ class ClosureJsInteropExportsGenerator implements JsInteropExportsGenerator {
     exportStmts.add(provideCall.makeStmt());
   }
 
-  private void generateAssignment(HasName nameRef, String exportName, SourceInfo sourceInfo) {
+  private void generateAssignment(JsExpression rhs, String exportName, SourceInfo sourceInfo) {
     JsExpression lhs = createExportQualifier(exportName, sourceInfo);
-    JsNameRef rhs = names.get(nameRef).makeRef(sourceInfo);
     exportStmts.add(JsUtils.createAssignment(lhs, rhs).makeStmt());
   }
 

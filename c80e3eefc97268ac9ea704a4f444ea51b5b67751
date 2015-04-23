@@ -16,6 +16,24 @@
       "revId": "c80e3eefc97268ac9ea704a4f444ea51b5b67751",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0d43e30_40be7fa1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-23T22:21:09Z",
+      "side": 1,
+      "message": "Ack. Will add a TODO.",
+      "parentUuid": "d0d43e30_e0c22b86",
+      "revId": "c80e3eefc97268ac9ea704a4f444ea51b5b67751",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

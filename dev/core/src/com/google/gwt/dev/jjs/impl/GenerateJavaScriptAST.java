@@ -2909,17 +2909,19 @@ public class GenerateJavaScriptAST {
         // Bridge requires conversions.
         // return coerceFromLong(this.aliasedMethodRef(coerceToLong(arg1), arg2, ...))
         JsInvocation aliasedMethodInvocation = new JsInvocation(info, aliasedMethodRef);
-        aliasedMethodInvocation.setQualifier(new JsThisRef(info));
+        aliasedMethodRef.setQualifier(new JsThisRef(info));
         for (JParameter param : method.getParams()) {
           JsName argJsName = bridgeMethod.getScope().declareName("$arg_" + param.getName());
+          bridgeMethod.getParameters().add(new JsParameter(info, argJsName));
           aliasedMethodInvocation.getArguments().add(param.getType() == JPrimitiveType.LONG ?
-              constructInvocation(info, "Cast.coerceToLong",
+              constructInvocation(info, "JavaClassHierarchySetupUtil.coerceToLong",
                   argJsName.makeRef(info)) : argJsName.makeRef(info));
         }
 
         bridgeMethod.getBody().getStatements().add(new JsReturn(info,
             method.getType() == JPrimitiveType.LONG ? constructInvocation(info,
-                "Cast.coerceFromLong", aliasedMethodInvocation) : aliasedMethodInvocation));
+                "JavaClassHierarchySetupUtil.coerceFromLong", aliasedMethodInvocation) :
+                aliasedMethodInvocation));
         return bridgeMethod;
       }
     }

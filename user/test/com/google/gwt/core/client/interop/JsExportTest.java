@@ -228,6 +228,15 @@ public class JsExportTest extends GWTTestCase {
     assertNull(getNotExportedFields());
   }
 
+  public void testBridgeMethodLongCoercion() {
+    assertEquals(42.0, callLongMethod(40.0, 2.0));
+  }
+
+  private native double callLongMethod(double a, double b) /*-{
+    var bridgeMethodClass = $global.createLongCoercionBridgeMethod();
+    return bridgeMethodClass.addLong(a,b);
+  }-*/;
+
   private native Object getNotExportedFields() /*-{
     return $global.woo.StaticInitializerStaticField.NOT_EXPORTED_1
         || $global.woo.StaticInitializerStaticField.NOT_EXPORTED_2

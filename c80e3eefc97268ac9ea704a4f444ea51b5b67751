@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0d43e30_e0c22b86",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-04-23T22:18:58Z",
+      "side": 1,
+      "message": "Not something for you to fix in this CL, but I think these diagnostics could be improved to list the actual Class/Member it\u0027s conflicting with. Could be hard to debug in a large code base.",
+      "revId": "c80e3eefc97268ac9ea704a4f444ea51b5b67751",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50984e8f_96f4dcd2",
+        "filename": "user/src/com/google/gwt/user/client/ui/TreeItem.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-24T10:08:50Z",
+      "side": 1,
+      "message": "please renmove the three trailing whitespaces here",
+      "revId": "66496a6a73948542a5baac231e6f5b49c327c0dd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50984e8f_56ee5404",
+        "filename": "user/test/com/google/gwt/user/client/ui/TreeItemTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-24T10:08:50Z",
+      "side": 1,
+      "message": "I think the test does not make any sense, its only testing a setter / getter combination and not the real issue you are trying to fix. However I am not aware on how we could get the content of the popup programatically.",
+      "revId": "66496a6a73948542a5baac231e6f5b49c327c0dd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

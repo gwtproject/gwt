@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "d076fe11_06e5ef4c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2912,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-04-24T16:52:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0d43e30_cb807548",
+      "range": {
+        "startLine": 2912,
+        "startChar": 8,
+        "endLine": 2912,
+        "endChar": 24
+      },
+      "revId": "26fd183d65a6bc903671e0204b524b29897e87d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0d43e30_abbd39c9",
         "filename": "user/test/com/google/gwt/core/client/interop/ClassWithLongCoercionBridgeMethod.java",
         "patchSetId": 2
@@ -65,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "d076fe11_a667bb97",
+        "filename": "user/test/com/google/gwt/core/client/interop/ClassWithLongCoercionBridgeMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-04-24T16:52:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0d43e30_abbd39c9",
+      "revId": "26fd183d65a6bc903671e0204b524b29897e87d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0d43e30_eb48d191",
         "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
         "patchSetId": 2
@@ -76,6 +118,24 @@
       "writtenOn": "2015-04-23T21:10:25Z",
       "side": 1,
       "message": "Can you move this to JsTypeTest?",
+      "revId": "26fd183d65a6bc903671e0204b524b29897e87d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d076fe11_c664b795",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-04-24T16:52:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0d43e30_eb48d191",
       "revId": "26fd183d65a6bc903671e0204b524b29897e87d9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

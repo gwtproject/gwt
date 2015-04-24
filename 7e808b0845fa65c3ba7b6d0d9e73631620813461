@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "d076fe11_a131651c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2887,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-24T17:31:38Z",
+      "side": 1,
+      "message": "We need to figure out these as well but we already went beyond the original intention of the patch so lets defer it.",
+      "revId": "7e808b0845fa65c3ba7b6d0d9e73631620813461",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d076fe11_c17021d8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2911,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-24T17:31:38Z",
+      "side": 1,
+      "message": "is this intended/necessary change?",
+      "range": {
+        "startLine": 2911,
+        "startChar": 12,
+        "endLine": 2911,
+        "endChar": 39
+      },
+      "revId": "7e808b0845fa65c3ba7b6d0d9e73631620813461",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0d43e30_a47e8028",
         "filename": "user/test/com/google/gwt/core/client/interop/ClassWithLongCoercionBridgeMethod.java",
         "patchSetId": 3
@@ -13,6 +53,24 @@
       "writtenOn": "2015-04-24T16:50:55Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "7e808b0845fa65c3ba7b6d0d9e73631620813461",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d076fe11_61b4cde5",
+        "filename": "user/test/com/google/gwt/core/client/interop/ClassWithLongCoercionBridgeMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-24T17:31:38Z",
+      "side": 1,
+      "message": "pls fix",
+      "parentUuid": "d0d43e30_a47e8028",
       "revId": "7e808b0845fa65c3ba7b6d0d9e73631620813461",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -96,7 +96,7 @@ public class ImplicitCssResource {
     this.logger = logger;
     this.imports = Collections.unmodifiableSet(importTypes);
     this.resourceOracle = resourceOracle;
-    this.gss = Boolean.TRUE.equals(gss);
+    this.gss = !Boolean.FALSE.equals(gss);
     sources = Arrays.asList(source);
   }
 

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0d42a38_87c7fac3",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-26T22:28:47Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "3b8620ca54a38b681c75faef9e453b2495e3fa55",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d42a38_67c40ebf",
+        "filename": "user/test/com/google/gwt/resources/client/gss/TestResources.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-26T22:28:47Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "3b8620ca54a38b681c75faef9e453b2495e3fa55",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

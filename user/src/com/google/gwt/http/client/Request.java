@@ -145,7 +145,7 @@ public class Request {
    * @throws IllegalArgumentException if timeoutMillis &lt; 0
    * @throws NullPointerException if xmlHttpRequest, or callback are null
    */
-  Request(XMLHttpRequest xmlHttpRequest, int timeoutMillis, RequestCallback callback) {
+  public Request(XMLHttpRequest xmlHttpRequest, int timeoutMillis, RequestCallback callback) {
     if (xmlHttpRequest == null) {
       throw new NullPointerException();
     }
@@ -230,7 +230,7 @@ public class Request {
    * Method called when the JavaScript XmlHttpRequest object's readyState
    * reaches 4 (LOADED).
    */
-  void fireOnResponseReceived(RequestCallback callback) {
+  public void fireOnResponseReceived(RequestCallback callback) {
     if (xmlHttpRequest == null) {
       // the request has timed out at this point
       return;

@@ -1,0 +1,3 @@
+@def FOO 1px;
+@def BAR 2px;
+@def DERIVED_CONSTANT add(FOO, BAR);

@@ -190,6 +190,10 @@ public class GssResourceTest extends RenamingClassNameTest {
     assertEquals("", res().empty().getText());
   }
 
+  public void testDerivedConstant() {
+    assertEquals(3, res().mathConstants().derivedConstant());
+  }
+
   private String runtimeExpectedCss(String color, String padding, String foo) {
     String s = "." + foo + "{width:100%}" + "." + foo + "{color:" + color + "}";
 

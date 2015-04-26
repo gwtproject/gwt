@@ -177,6 +177,10 @@ public interface TestResources extends ClientBundle {
   interface Empty extends CssResource {
   }
 
+  interface MathContants extends CssResource {
+    int derivedConstant();
+  }
+
   @Source("constants.gss")
   Constants constants();
 
@@ -224,4 +228,6 @@ public interface TestResources extends ClientBundle {
   Charset charset();
 
   Empty empty();
+
+  MathContants mathConstants();
 }

@@ -16,6 +16,23 @@
       "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30375a6d_e117c644",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-26T19:13:33Z",
+      "side": 1,
+      "message": "Why would you want to be able to call this method directly?",
+      "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

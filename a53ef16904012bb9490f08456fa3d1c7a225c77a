@@ -33,6 +33,24 @@
       "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f712e2_8c404bf6",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2015-04-27T20:22:26Z",
+      "side": 1,
+      "message": "External apis that want to be able to use GWT\u0027s core http api extending com.google.gwt.http.client.XMLHttpRequest features need to both construct a com.google.gwt.http.client.Request object and call #fireOnResponseReceived method when the XHR reaches the LOADED state to properly rely on this api.",
+      "parentUuid": "30375a6d_e117c644",
+      "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

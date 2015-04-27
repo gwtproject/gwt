@@ -16,6 +16,24 @@
       "revId": "6be7bf6456d8cbc707c99b099a89b0e3ec3cc925",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30375a6d_07499a93",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/model/ImplicitCssResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-27T17:30:05Z",
+      "side": 1,
+      "message": "We should really have a configuration property for this, but I feel comfortable adding this at a later point (before 2.8).",
+      "parentUuid": "d0027e8c_5ab445c0",
+      "revId": "6be7bf6456d8cbc707c99b099a89b0e3ec3cc925",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

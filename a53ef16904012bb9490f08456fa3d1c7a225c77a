@@ -69,6 +69,24 @@
       "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f712e2_b7111052",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2015-04-27T21:35:26Z",
+      "side": 1,
+      "message": "The Request class is basically responsible for managing a logical timer for the http request, performing some operations over the XMLHttpRequest class and create Response objects. All these responsabilities are well encapsulated. It happens that this class was designed thinking only on the local use, and not on the extension. In order to better allow extension, the http package need to expose these two members of the Request class. This way, others will be able to build custom apis for requesting.\n\nGWT offers a low-level \u0027user-friendly\u0027 api for requesting - RequestBuilder - but it does not appropriately allow others to extend its core http package and build higher level apis in replacement of the default one.\n\nCurrently, it\u0027s not possible to use an external XMLHttpRequest extension in conjuction with the Request and Response classes because the Request constructor is package accessible and the Response factory method (placed in the Request class) which takes a XHR as argument is private accessible. So the cycle of creating a XMLHttpRequest, then creating a Request with this XHR and lastly retrieving a Response is broken. This way we can\u0027t extend the gwt http api.\n\nGWT already offers its own solution for requesting to the end user. I claim that it should also allow the entension of the http api by middle users.\n\nMaybe a better solution would be to transform the Request class in an interface exposing the current public members, and creating a RequestImpl exposing the other members for entension.",
+      "parentUuid": "30375a6d_071d1a65",
+      "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

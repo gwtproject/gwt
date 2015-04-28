@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0d42a38_71103485",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-28T19:11:50Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "0cfaeafe56929e71c563814ea03284a7b7912fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

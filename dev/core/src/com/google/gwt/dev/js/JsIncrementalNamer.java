@@ -69,19 +69,22 @@ public class JsIncrementalNamer extends JsNamer {
   public static final String RESERVED_IDENT_SUFFIX = "_g$";
 
   public static void exec(JsProgram program, ConfigurationProperties config, JsIncrementalNamerState state,
-      JavaToJavaScriptMap jjsmap) throws IllegalNameException {
-    new JsIncrementalNamer(program, config, state, jjsmap).execImpl();
+      JavaToJavaScriptMap jjsmap, boolean obfuscatedOutput) throws IllegalNameException {
+    new JsIncrementalNamer(program, config, state, jjsmap, obfuscatedOutput).execImpl();
   }
 
   private final JavaToJavaScriptMap jjsmap;
 
   private final JsIncrementalNamerState state;
 
+  private final boolean obfuscatedOutput;
+
   public JsIncrementalNamer(JsProgram program, ConfigurationProperties config,
-      JsIncrementalNamerState state, JavaToJavaScriptMap jjsmap) {
+      JsIncrementalNamerState state, JavaToJavaScriptMap jjsmap, boolean obfuscatedOutput) {
     super(program, config);
     this.state = state;
     this.jjsmap = jjsmap;
+    this.obfuscatedOutput = obfuscatedOutput;
   }
 
   @Override
@@ -125,7 +128,7 @@ public class JsIncrementalNamer extends JsNamer {
     }
 
     // If the name is for a method.
-    if (jjsmap != null && jjsmap.nameToMethod(name) != null) {
+    if (obfuscatedOutput && jjsmap != null && jjsmap.nameToMethod(name) != null) {
       // Come up with an obfuscated name (since OptionDisplayName will show it properly) and cache
       // it for reuse.
       String obfuscatedIdent = makeObfuscatedIdent();

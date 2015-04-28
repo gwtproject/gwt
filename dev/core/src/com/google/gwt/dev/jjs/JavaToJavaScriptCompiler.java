@@ -88,6 +88,7 @@ import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.jjs.impl.JjsUtils;
 import com.google.gwt.dev.jjs.impl.JsAbstractTextTransformer;
 import com.google.gwt.dev.jjs.impl.JsFunctionClusterer;
+import com.google.gwt.dev.jjs.impl.JsInteropNormalizer;
 import com.google.gwt.dev.jjs.impl.JsInteropRestrictionChecker;
 import com.google.gwt.dev.jjs.impl.JsNoopTransformer;
 import com.google.gwt.dev.jjs.impl.JsTypeLinker;
@@ -351,6 +352,9 @@ public final class JavaToJavaScriptCompiler {
       // Replace compile time constants by their values.
       // TODO(rluble): eventually move to normizeSemantics.
       CompileTimeConstantsReplacer.exec(jprogram);
+
+      // TODO: decide the place to run this.
+      JsInteropNormalizer.exec(jprogram);
 
       // TODO(stalcup): move to after normalize.
       // (3) Optimize the resolved Java AST

@@ -671,8 +671,26 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
+        "Constructor 'test.EntryPoint$Buggy.EntryPoint$Buggy(I) <init>' can only be a exported "
+        + "by a name since there are multiple constructors in the class.",
         "Member 'test.EntryPoint$Buggy.EntryPoint$Buggy(I) <init>' can't be "
         + "exported because the global name 'test.EntryPoint.Buggy' is already taken.");
+  }
+
+  public void testMultipleConstructorsFailWithSingleDefaultExport() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.js.JsExport");
+    addSnippetImport("com.google.gwt.core.client.js.JsNoExport");
+    addSnippetClassDecl(
+        "@JsExport",
+        "public static class Buggy {",
+        "  @JsNoExport",
+        "  public Buggy() {}",
+        "  public Buggy(int a) {}",
+        "}");
+
+    assertBuggyFails(
+        "Constructor 'test.EntryPoint$Buggy.EntryPoint$Buggy(I) <init>' can only be a exported "
+        + "by a name since there are multiple constructors in the class.");
   }
 
   public void testNonCollidingAccidentalOverrideSucceeds() throws Exception {

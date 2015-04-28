@@ -17,6 +17,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
@@ -43,6 +44,8 @@ import java.util.SortedSet;
  */
 // TODO: handle custom JsType field/method names when that feature exists.
 // TODO: move JsInterop checks from JSORestrictionsChecker to here.
+// TODO: provide more information in global name collisions as it could be difficult to pinpoint in
+// big projects.
 public class JsInteropRestrictionChecker extends JVisitor {
 
   public static void exec(TreeLogger logger, JProgram jprogram,
@@ -94,6 +97,8 @@ public class JsInteropRestrictionChecker extends JVisitor {
     checkJsFunctionJsTypeCollision(x);
     if (currentType instanceof JInterfaceType) {
       checkJsTypeHierarchy((JInterfaceType) currentType);
+    } else {
+      checkSingleConstructor(x);
     }
 
     // Perform custom class traversal to examine fields and methods of this class and all
@@ -106,6 +111,23 @@ public class JsInteropRestrictionChecker extends JVisitor {
 
     // Skip the default class traversal.
     return false;
+  }
+
+  private void checkSingleConstructor(JDeclaredType x) {
+    JMethod exportedConstructor = null;
+    int constructorCount = 0;
+    for (JMethod m : x.getMethods()) {
+      if (m instanceof JConstructor) {
+        constructorCount++;
+        if (m.isExported() && m.getExportName().isEmpty()) {
+          exportedConstructor = m;
+        }
+      }
+    }
+    if (exportedConstructor != null && constructorCount != 1) {
+      logError("Constructor '%s' can only be a exported by a name since there are multiple"
+          + " constructors in the class.", exportedConstructor.getQualifiedName());
+    }
   }
 
   @Override

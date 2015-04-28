@@ -144,12 +144,12 @@ public class JsExportTest extends GWTTestCase {
   }
 
   private native int getSumByDefaultConstructor() /*-{
-    var obj = new $global.woo.MyExportedClassWithMultipleConstructors.MyClassConstructor1();
+    var obj = $global.woo.MyExportedClassWithMultipleConstructors.newInstance();
     return obj.sum();
   }-*/;
 
   private native int getSumByConstructor() /*-{
-    var obj = new $global.woo.MyExportedClassWithMultipleConstructors.MyClassConstructor2(10, 20);
+    var obj = $global.woo.MyExportedClassWithMultipleConstructors.newInstanceWithAandB(10, 20);
     return obj.sum();
   }-*/;
 
@@ -161,11 +161,11 @@ public class JsExportTest extends GWTTestCase {
   }
 
   private native Object createMyExportedClassWithMultipleConstructors1() /*-{
-    return new $global.woo.MyExportedClassWithMultipleConstructors.MyClassConstructor1();
+    return $global.woo.MyExportedClassWithMultipleConstructors.newInstance();
   }-*/;
 
   private native Object createMyExportedClassWithMultipleConstructors2() /*-{
-    return new $global.woo.MyExportedClassWithMultipleConstructors.MyClassConstructor2(10, 20);
+    return $global.woo.MyExportedClassWithMultipleConstructors.newInstanceWithAandB(10, 20);
   }-*/;
 
   public void testExportConstructors() {

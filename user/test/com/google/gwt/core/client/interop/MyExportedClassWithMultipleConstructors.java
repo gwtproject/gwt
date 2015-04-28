@@ -28,13 +28,13 @@ public class MyExportedClassWithMultipleConstructors {
   public int a;
   public int b;
 
-  @JsExport("MyClassConstructor1")
+  @JsExport("newInstance")
   public MyExportedClassWithMultipleConstructors() {
     a = 1;
     b = 2;
   }
 
-  @JsExport("MyClassConstructor2")
+  @JsExport("newInstanceWithAandB")
   public MyExportedClassWithMultipleConstructors(int a, int b) {
     this.a = a;
     this.b = b;

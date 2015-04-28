@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0d42a38_f5d2dad3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1065,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-28T00:32:37Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "66e5aebdce5609f2472032aeab8da028ac032a3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d42a38_d5d7dec1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-04-28T00:32:37Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "66e5aebdce5609f2472032aeab8da028ac032a3b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

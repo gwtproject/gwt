@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30375a6d_27e7feaf",
+        "filename": "user/test/com/google/gwt/resources/client/gss/GssResourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-28T08:46:26Z",
+      "side": 1,
+      "message": "Can we also add a test to verify that the method\n\nint foo()\n\n\nwould work with:\n\n@def A 1px;\n@def B 2px;\n@def FOO add(A, B);",
+      "range": {
+        "startLine": 187,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 53
+      },
+      "revId": "92788f79e8cdee097f51dfe0a9d5bfbb35d03f45",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

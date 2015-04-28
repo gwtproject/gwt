@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d0027e8c_0df0d260",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsIncrementalNamer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-04-28T04:46:21Z",
+      "side": 1,
+      "message": "minifyFunctionNames?",
+      "parentUuid": "b0d42a38_50aadc7f",
+      "range": {
+        "startLine": 87,
+        "startChar": 28,
+        "endLine": 87,
+        "endChar": 44
+      },
+      "revId": "46834d57541a92a870cb4fcada4c177e3c88413e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0d42a38_d0ffec76",
         "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d0027e8c_adee5e84",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-04-28T04:46:21Z",
+      "side": 1,
+      "message": "Will fix.",
+      "parentUuid": "b0d42a38_d0ffec76",
+      "range": {
+        "startLine": 1158,
+        "startChar": 4,
+        "endLine": 1158,
+        "endChar": 43
+      },
+      "revId": "46834d57541a92a870cb4fcada4c177e3c88413e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0d42a38_500c1c3d",
         "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
         "patchSetId": 3
@@ -59,6 +107,24 @@
       "writtenOn": "2015-04-28T01:06:51Z",
       "side": 1,
       "message": "what is the pattern behind changing just these 2 methods in the file?\n\ni get that it seems kind of wasteful to run all tests in 3 methods, but there should probably be some pattern to the particular tests that are run in all 3 modes",
+      "revId": "46834d57541a92a870cb4fcada4c177e3c88413e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0027e8c_cde99a80",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-04-28T04:46:21Z",
+      "side": 1,
+      "message": "OBFUSCATED and PRETTY are almost functionally equivalent. I would want to just nominally run OBFUSCATED and leave all the brunt of the tests in PRETTY (or viceversa).\n\nBut there does not seem to be a incremental test that is general, they are all specific purpose. \n\nI agree running all of them in the three modes seems wasteful. \n\ntypeHierarchyChange seems to me one of the more general tests. Maybe do only that one in the three modes? WDYT?",
+      "parentUuid": "b0d42a38_500c1c3d",
       "revId": "46834d57541a92a870cb4fcada4c177e3c88413e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

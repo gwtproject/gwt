@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "30375a6d_4a6247bf",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-28T13:39:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30375a6d_8a87ef12",
+      "revId": "c637b7d2146ddc6a56cdcedee2c81dd3d3784f22",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30375a6d_aafaf387",
         "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-28T13:15:43Z",
       "side": 1,
       "message": "Boolean.parseBoolean(enableGss)",
+      "revId": "c637b7d2146ddc6a56cdcedee2c81dd3d3784f22",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30375a6d_8a3fef85",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-28T13:39:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30375a6d_aafaf387",
       "revId": "c637b7d2146ddc6a56cdcedee2c81dd3d3784f22",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "30375a6d_2a3ca38f",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-28T13:39:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30375a6d_caff3777",
+      "revId": "c637b7d2146ddc6a56cdcedee2c81dd3d3784f22",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30375a6d_8ab4cfc1",
         "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderParser.java",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-28T13:15:43Z",
       "side": 1,
       "message": "I don\u0027t remember if it\u0027s possible but do you think you could write tests for this logic ?",
+      "revId": "c637b7d2146ddc6a56cdcedee2c81dd3d3784f22",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30375a6d_aad2f3d2",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/UiBinderParser.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-28T13:39:51Z",
+      "side": 1,
+      "message": "we could expose the method to a blank unit test, but I think we are fine here without a test. This part will be very short lived (deleted right after 2.8), I think its not worth it.",
+      "parentUuid": "30375a6d_8ab4cfc1",
       "revId": "c637b7d2146ddc6a56cdcedee2c81dd3d3784f22",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

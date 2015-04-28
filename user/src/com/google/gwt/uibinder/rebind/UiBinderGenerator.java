@@ -28,6 +28,8 @@ import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.dev.resource.Resource;
 import com.google.gwt.dev.resource.ResourceOracle;
 import com.google.gwt.dev.util.Util;
+import com.google.gwt.resources.rg.GssResourceGenerator;
+import com.google.gwt.resources.rg.GssResourceGenerator.GssOptions;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.uibinder.rebind.messages.MessagesWriter;
 import com.google.gwt.uibinder.rebind.model.ImplicitClientBundle;
@@ -167,10 +169,13 @@ public class UiBinderGenerator extends Generator {
         useLazyWidgetBuilders(logger, propertyOracle) && !designTime.isDesignTime();
     FieldManager fieldManager = new FieldManager(oracle, logger, useLazyWidgetBuilders);
 
+    GssOptions gssOptions =
+        GssResourceGenerator.getGssOptions(propertyOracle, logger.getTreeLogger());
+
     UiBinderWriter uiBinderWriter = new UiBinderWriter(interfaceType, implName, templatePath,
         oracle, logger, fieldManager, messages, designTime, uiBinderCtx,
         useSafeHtmlTemplates(logger, propertyOracle), useLazyWidgetBuilders, BINDER_URI,
-        resourceOracle);
+        resourceOracle, gssOptions);
 
     Resource resource = getTemplateResource(logger, templatePath, resourceOracle);
 

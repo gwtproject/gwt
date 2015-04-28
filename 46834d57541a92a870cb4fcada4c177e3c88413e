@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0d42a38_50aadc7f",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsIncrementalNamer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-04-28T01:06:51Z",
+      "side": 1,
+      "message": "it doesn\u0027t obfuscate output. it obfuscates just function names. the name should be more accurate",
+      "range": {
+        "startLine": 87,
+        "startChar": 28,
+        "endLine": 87,
+        "endChar": 44
+      },
+      "revId": "46834d57541a92a870cb4fcada4c177e3c88413e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d42a38_d0ffec76",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-04-28T01:06:51Z",
+      "side": 1,
+      "message": "this is the wrong function to be calling here",
+      "range": {
+        "startLine": 1158,
+        "startChar": 4,
+        "endLine": 1158,
+        "endChar": 43
+      },
+      "revId": "46834d57541a92a870cb4fcada4c177e3c88413e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d42a38_500c1c3d",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-04-28T01:06:51Z",
+      "side": 1,
+      "message": "what is the pattern behind changing just these 2 methods in the file?\n\ni get that it seems kind of wasteful to run all tests in 3 methods, but there should probably be some pattern to the particular tests that are run in all 3 modes",
+      "revId": "46834d57541a92a870cb4fcada4c177e3c88413e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

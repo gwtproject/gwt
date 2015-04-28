@@ -174,13 +174,17 @@ public class JsNamerTest extends TestCase {
     switch (outputOption) {
       case PRETTY:
         if (persistent) {
-          JsIncrementalNamer.exec(program, config, jsIncrementalNamerState, null);
+          JsIncrementalNamer.exec(program, config, jsIncrementalNamerState, null, false);
         } else {
           JsPrettyNamer.exec(program, config);
         }
         break;
       case OBFUSCATED:
-        JsObfuscateNamer.exec(program, config);
+        if (persistent) {
+          JsIncrementalNamer.exec(program, config, jsIncrementalNamerState, null, true);
+        } else {
+          JsObfuscateNamer.exec(program, config);
+        }
         break;
       case DETAILED:
         JsVerboseNamer.exec(program, config);

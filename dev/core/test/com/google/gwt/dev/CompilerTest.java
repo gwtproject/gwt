@@ -1155,6 +1155,7 @@ public class CompilerTest extends ArgProcessorTestBase {
       IOException, InterruptedException {
     checkIncrementalRecompile_typeHierarchyChange(JsOutputOption.PRETTY);
     checkIncrementalRecompile_typeHierarchyChange(JsOutputOption.DETAILED);
+    checkIncrementalRecompile_defaultMethod(JsOutputOption.OBFUSCATED);
   }
 
   public void testIncrementalRecompile_defaultMethod() throws UnableToCompleteException,
@@ -1162,6 +1163,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     // Tests that default method on superclasses are correctly constructed
     checkIncrementalRecompile_defaultMethod(JsOutputOption.PRETTY);
     checkIncrementalRecompile_defaultMethod(JsOutputOption.DETAILED);
+    checkIncrementalRecompile_defaultMethod(JsOutputOption.OBFUSCATED);
   }
 
   public void testIncrementalRecompile_devirtualizeUnchangedJso() throws UnableToCompleteException,

@@ -105,6 +105,24 @@
       "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f712e2_bddc4f99",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2015-04-28T14:09:43Z",
+      "side": 1,
+      "message": "Requestor supports the XHR2 spec. So I had to extend com.google.gwt.http.client.XMLHttpRequest (see https://github.com/reinert/requestor/blob/master/requestor/core/requestor-api/src/main/java/io/reinert/requestor/XMLHttpRequest.java) and implement the missing features (sending blob, json, file, xml; retrieving the response as an object; onprogress event for upload and download; etc). In order to Requestor work upon gwt http api, I had to expose the Request class as suggested in this patch, so I could create a Request with my XMLHttpRequest extension and properly retrieve a Response. As a middle user I could add many features to my library only because I used the core elements of the gwt http api combined with my own extensions. \n\n\nAs the time goes by, and the XHR spec keeps evolving, extensions will be necessary to get compatibility with the \u0027bleeding edge\u0027 features. GWT core may not want to keep compatibility with such features. But it should not prevent others to achieve it. (since others may depend on them in someway)",
+      "parentUuid": "30375a6d_4a87a7e1",
+      "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

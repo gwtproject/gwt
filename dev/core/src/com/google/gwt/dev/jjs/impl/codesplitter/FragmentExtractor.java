@@ -94,16 +94,23 @@ public class FragmentExtractor {
 
     @Override
     public void endVisit(JsNameRef x, JsContext ctx) {
+      // Removes constructor references from defineClass parameters.
+      // These references can be either be originated by JConstructors or
+      // (in closure formatted code) by JClassTypes.
+      JClassType classType = map.nameToType(x.getName());
       JMethod method = map.nameToMethod(x.getName());
-      if (!(method instanceof JConstructor)) {
+      method = method instanceof JConstructor ? method : null;
+      if (classType == null || method == null) {
+        // Regular argument to defineClass, ignore;
         return;
       }
-      // Only examines references to constructor methods.
+      assert classType == null || method == null;
 
-      JConstructor constructor = (JConstructor) method;
-      boolean fragmentExpandsConstructorLiveness =
-          !alreadyLoadedPredicate.isLive(constructor) && livenessPredicate.isLive(constructor);
-      if (fragmentExpandsConstructorLiveness) {
+      boolean isConstructorLive = method != null ?
+          alreadyLoadedPredicate.isLive(method) && livenessPredicate.isLive(method) :
+          alreadyLoadedPredicate.isLive(classType) && livenessPredicate.isLive(classType);
+      if (isConstructorLive) {
+        // Constructor is live in current fragment.
         // Counts kept references to live constructors.
         liveConstructorCount++;
       } else {
@@ -192,7 +199,14 @@ public class FragmentExtractor {
     JsInvocation call = new JsInvocation(sourceInfo);
     call.setQualifier(wrapWithEntry(loadMethodName.makeRef(sourceInfo)));
     call.getArguments().add(new JsNumberLiteral(sourceInfo, fragmentId));
-    List<JsStatement> newStats = Collections.<JsStatement> singletonList(call.makeStmt());
+    JMethod clinitMethod = loadMethod.getEnclosingType().getClinitMethod();
+    JsExpression callOnLoad = call;
+    if (clinitMethod != null) {
+      JsInvocation callClinit = new JsInvocation(sourceInfo, map.nameForMethod(clinitMethod)
+          .makeRef(clinitMethod.getSourceInfo()));
+      callOnLoad = new JsBinaryOperation(sourceInfo, JsBinaryOperator.COMMA, callClinit, call);
+    }
+    List<JsStatement> newStats = Collections.<JsStatement> singletonList(callOnLoad.makeStmt());
     return newStats;
   }
 

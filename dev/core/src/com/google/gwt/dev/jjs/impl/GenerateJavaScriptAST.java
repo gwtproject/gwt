@@ -2650,7 +2650,7 @@ public class GenerateJavaScriptAST {
         JsNameRef rhsProtoRef = getPrototypeQualifierOf(method);
         JsExprStmt stmt = createAssignment(lhs, rhsProtoRef).makeStmt();
         globalStmts.add(stmt);
-        typeForStatMap.put(stmt, x);
+        vtableInitForMethodMap.put(stmt, method);
       }
     }
 
@@ -2668,8 +2668,13 @@ public class GenerateJavaScriptAST {
       SourceInfo sourceInfo = x.getSourceInfo();
       JsName classVar = topScope.declareName(JjsUtils.getNameString(x));
       JsFunction closureCtor = JsUtils.createEmptyFunctionLiteral(sourceInfo, topScope, classVar);
-      globalStmts.add(closureCtor.makeStmt());
+      JsExprStmt statement = closureCtor.makeStmt();
+      globalStmts.add(statement);
       names.put(x, classVar);
+      if (x instanceof JClassType) {
+        // needed for code splitter to determine how to move/extract it
+        typeForStatMap.put(statement, (JClassType) x);
+      }
       return classVar;
     }
 

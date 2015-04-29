@@ -463,6 +463,13 @@ public class Document extends Node {
   public final InputElement createImageInputElement() {
     return DOMImpl.impl.createInputElement(this, "image");
   }
+  
+  /**
+   * Creates an 'input' event.
+   */
+  public final NativeEvent createInputEvent() {
+    return createHtmlEvent(BrowserEvents.INPUT, false, true);
+  }
 
   /**
    * Creates an &lt;ins&gt; element.

@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "300cbaed_a8058398",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-29T22:55:24Z",
+      "side": 1,
+      "message": "End the sentence with a period.",
+      "revId": "32fc950984c0e3c21bd62b6b72fc68fb316adff4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_c800b78a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-29T22:55:24Z",
+      "side": 1,
+      "message": "move this to the the bottom before the change-id. Should read:\n\nBug: issue 9191.\nChange-Id:........",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "32fc950984c0e3c21bd62b6b72fc68fb316adff4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_08c90ffb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-29T22:55:24Z",
+      "side": 1,
+      "message": "wrap this line at or before col 72.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 64
+      },
+      "revId": "32fc950984c0e3c21bd62b6b72fc68fb316adff4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_08862f6a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-29T22:55:24Z",
+      "side": 1,
+      "message": "There is no need for a StringBuilder here. (these is only called once per lambda)\n\nAdd a comment:\n\n  // Using here constantPoolName() instead of coumpoundName due JDT not computing the \n  // right compoundName for some lambdas.\n\n  String innerLambdaClassName \u003d InternalName.toBinaryName(String.valueOf(x.binding.declaringClass\n          .constantPoolName())) + \"$\" + String.valueOf(x.binding.selector);\n  JClassType innerLambdaClass \u003d createInnerClass(innerLambdaClassName, x, info, funcType);",
+      "range": {
+        "startLine": 1230,
+        "startChar": 0,
+        "endLine": 1235,
+        "endChar": 36
+      },
+      "revId": "32fc950984c0e3c21bd62b6b72fc68fb316adff4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

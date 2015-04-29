@@ -108,6 +108,7 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsParameter;
+import com.google.gwt.dev.util.Name.InternalName;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.thirdparty.guava.common.base.Function;
@@ -1226,8 +1227,14 @@ public class GwtAstBuilder {
 
       // Create an inner class to implement the interface and SAM method.
       // class lambda$0$Type implements T {}
-      JClassType innerLambdaClass = createInnerClass(JdtUtil.asDottedString(x.binding.declaringClass.compoundName) +
-          "$" + new String(x.binding.selector), x, info, funcType);
+
+      StringBuilder sb = new StringBuilder();
+      sb.append(InternalName.toBinaryName(String.valueOf(x.binding.declaringClass
+          .constantPoolName())));
+      sb.append('$');
+      sb.append(x.binding.selector);
+
+      JClassType innerLambdaClass = createInnerClass(sb.toString(), x, info, funcType);
       JConstructor ctor = new JConstructor(info, innerLambdaClass, AccessModifier.PRIVATE);
 
       // locals captured by the lambda and saved as fields on the anonymous inner class

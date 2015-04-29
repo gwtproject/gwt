@@ -94,6 +94,17 @@ public class FragmentExtractor {
 
     @Override
     public void endVisit(JsNameRef x, JsContext ctx) {
+      // is Closure Formatted Mode we need to handle the synthetic ctor which maps to the type
+      JClassType classType = map.nameToType(x.getName());
+      if (classType != null) {
+        if (!alreadyLoadedPredicate.isLive(classType) || livenessPredicate.isLive(classType)) {
+          // type has become live, so synthetic ctor is needed
+          liveConstructorCount++;
+        } else {
+          ctx.removeMe();
+        }
+        return;
+      }
       JMethod method = map.nameToMethod(x.getName());
       if (!(method instanceof JConstructor)) {
         return;
@@ -328,6 +339,15 @@ public class FragmentExtractor {
   private boolean isLive(JsStatement stat, LivenessPredicate livenessPredicate) {
     JClassType type = map.typeForStatement(stat);
     if (type != null) {
+      JConstructor chainAssignedCtor = chainAssignedCtorFor(stat);
+      // don't treat all ctor assignment statements as live if the type is live
+      // instead, we only keep the chain assignment if associated constructor is live and its
+      // type is live
+      if (chainAssignedCtor != null) {
+        if (!livenessPredicate.isLive(chainAssignedCtor)) {
+          return false;
+        }
+      }
       // This is part of the code only needed once a type is instantiable
       return livenessPredicate.isLive(type);
     }
@@ -348,6 +368,49 @@ public class FragmentExtractor {
     }
 
     return livenessPredicate.miscellaneousStatementsAreLive();
+  }
+
+  /**
+   * Determine if statement is in form of ChildCtor.prototype = ClassCtor.prototype and if so,
+   * return the JConstructor associated with ChildCtor.
+   */
+  private JConstructor chainAssignedCtorFor(JsStatement stat) {
+    if (stat instanceof JsExprStmt) {
+      JsExpression expr = ((JsExprStmt) stat).getExpression();
+      if (expr instanceof JsBinaryOperation) {
+        JsBinaryOperation asgExpr = (JsBinaryOperation) expr;
+        if (asgExpr.getOperator() == JsBinaryOperator.ASG) {
+          if (asgExpr.getArg1() instanceof JsNameRef && asgExpr.getArg2() instanceof JsNameRef) {
+            JsName childCtorName = extractPrototypeQualifier(asgExpr.getArg1());
+            JsName syntheticCtorName = extractPrototypeQualifier(asgExpr.getArg2());
+            if (childCtorName != null && syntheticCtorName != null) {
+              JMethod childCtor = map.nameToMethod(childCtorName);
+              JClassType type = map.nameToType(syntheticCtorName);
+              // ChildCtor is both a JConstructor and it's enclosing type matches the ClassCtor
+              if (childCtor instanceof JConstructor && type != null &&
+                  childCtor.getEnclosingType() == type) {
+                return (JConstructor) childCtor;
+              }
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Extract the JsName associated with an expression such as Foo.prototype, returning the JsName
+   * for 'foo', null if there is no JsName or the qualifier expression isn't a JsNameRef.
+   */
+  private JsName extractPrototypeQualifier(JsExpression expression) {
+    if (expression instanceof JsNameRef) {
+      JsNameRef ref = (JsNameRef) expression;
+      if ("prototype".equals(ref.getShortIdent()) && ref.getQualifier() instanceof JsNameRef) {
+        return ((JsNameRef) ref.getQualifier()).getName();
+      }
+    }
+    return null;
   }
 
   /**

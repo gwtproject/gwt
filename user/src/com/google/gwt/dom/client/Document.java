@@ -465,6 +465,13 @@ public class Document extends Node {
   }
 
   /**
+   * Creates an 'input' event.
+   */
+  public final NativeEvent createInputEvent() {
+    return createHtmlEvent(BrowserEvents.INPUT, false, true);
+  }
+
+  /**
    * Creates an &lt;ins&gt; element.
    * 
    * @return the newly created element

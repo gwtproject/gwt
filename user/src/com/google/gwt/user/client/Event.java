@@ -273,6 +273,11 @@ public class Event extends NativeEvent {
   public static final int ONGESTURESTART = 0x1000000;
 
   /**
+   * Fired when an element receives user input, such as typing or pasting.
+   */
+  public static final int ONINPUT = 0x8000000;
+
+  /**
    * Fired when the user depresses a key.
    */
   public static final int ONKEYDOWN = 0x00080;

@@ -89,6 +89,7 @@ public abstract class DOMImpl {
     case "click": return 0x00001;
     case "dblclick": return 0x00002;
     case "focus": return 0x00800;
+    case "input": return 0x8000000;
     case "keydown": return 0x00080;
     case "keypress": return 0x00100;
     case "keyup": return 0x00200;

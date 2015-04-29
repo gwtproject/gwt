@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "300cbaed_ed75cd77",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-04-29T22:16:26Z",
+      "side": 1,
+      "message": "I thought this was only needed if more than 1 exported ctor exists?",
+      "range": {
+        "startLine": 65,
+        "startChar": 58,
+        "endLine": 65,
+        "endChar": 59
+      },
+      "revId": "1efaf0238f40164bd4013537d9e2831e8373bb33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_ed4cad53",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-04-29T22:16:26Z",
+      "side": 1,
+      "message": "I tend to like these kind of AST construction methods better if they include inline comments that show what example output is supposed to look like",
+      "revId": "1efaf0238f40164bd4013537d9e2831e8373bb33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_4d683969",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-04-29T22:16:26Z",
+      "side": 1,
+      "message": "I\u0027m still a little iffy on the overall need for this requirement. Why if there is only a single exported ctor, but all the other ctors are private, is this change required?\n\nThe other ctors would only ever be referenced by Java code, so why would this change need to be exposed to the developer? The compiler can just rewrite calls from \"new UnexportedCtor\" into a factory method call transparently, which forcing the developer to have to care whether he has to manually supply a name.\n\ne.g.\n\nclass Foo {\n  @JsExport\n   Foo(int x) {}\n   Foo(String y) {}\n}\n\na \u0027new Foo(\"bar\")\u0027 call can be silently rewritten as a factory constructor, so why should the developer be burdened to write @JsExport(\"some name\") on the integer constructor?",
+      "revId": "1efaf0238f40164bd4013537d9e2831e8373bb33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "300cbaed_ff57375a",
+        "filename": "user/src/com/google/gwt/dom/client/Document.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-29T21:34:50Z",
+      "side": 1,
+      "message": "According to [1] seems like it should be true, false.\n\n[1] https://developer.mozilla.org/en-US/docs/Web/Events/input",
+      "range": {
+        "startLine": 471,
+        "startChar": 48,
+        "endLine": 471,
+        "endChar": 59
+      },
+      "revId": "4631b592a04a364ee28458e67dee7d0ee4c083fb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

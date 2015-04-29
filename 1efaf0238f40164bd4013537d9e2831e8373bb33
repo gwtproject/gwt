@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "300cbaed_48a307ad",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-29T22:49:59Z",
+      "side": 1,
+      "message": "Providing an export name only required if more than once ctor exists. However when somebody provides a name, it is always exported as factory.\n\nFor example:\n  @JsExport(\"MyClassName\")\n  class Something {\n    public Something() {}\n  }\n\nis callable as:\n\n  new MyClassName()\n\nwhile\n\n  @JsExport(\"MyClassName\")\n  class Something {\n    @JsExport(\"MyCtorName\")\n    public Something() {}\n  }\n\nis callable as:\n\n  MyClassName.MyCtorName();\n\nSo in order for a constructor to be a javascript constructor, it shouldn\u0027t have a name so it gets to live under its parent class as a constructor. If it has a name, it still lives under its parent class as a factory method with the supplied name. I think this is similar to what you have proposed earlier for the closure output.",
+      "parentUuid": "300cbaed_ed75cd77",
+      "range": {
+        "startLine": 65,
+        "startChar": 58,
+        "endLine": 65,
+        "endChar": 59
+      },
+      "revId": "1efaf0238f40164bd4013537d9e2831e8373bb33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "300cbaed_ed4cad53",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropNormalizer.java",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "300cbaed_0890ef4a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-29T22:49:59Z",
+      "side": 1,
+      "message": "Will do; thanks for reminding.",
+      "parentUuid": "300cbaed_ed4cad53",
+      "revId": "1efaf0238f40164bd4013537d9e2831e8373bb33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "300cbaed_4d683969",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1
@@ -53,6 +95,24 @@
       "writtenOn": "2015-04-29T22:16:26Z",
       "side": 1,
       "message": "I\u0027m still a little iffy on the overall need for this requirement. Why if there is only a single exported ctor, but all the other ctors are private, is this change required?\n\nThe other ctors would only ever be referenced by Java code, so why would this change need to be exposed to the developer? The compiler can just rewrite calls from \"new UnexportedCtor\" into a factory method call transparently, which forcing the developer to have to care whether he has to manually supply a name.\n\ne.g.\n\nclass Foo {\n  @JsExport\n   Foo(int x) {}\n   Foo(String y) {}\n}\n\na \u0027new Foo(\"bar\")\u0027 call can be silently rewritten as a factory constructor, so why should the developer be burdened to write @JsExport(\"some name\") on the integer constructor?",
+      "revId": "1efaf0238f40164bd4013537d9e2831e8373bb33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_68ba4b4e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-04-29T22:49:59Z",
+      "side": 1,
+      "message": "I tried to explain this briefly in the commit message but this is basically for future compatibility.\n\nWhen we generate ES6 classes, most practical way to model multiple constructors is to generate factory methods since we can only have one constructor and everything will need to call it. \n\nLet\u0027s say you have following class:\n\n  class Abc extends Klm {\n    private Object fieldNeedsInit \u003d new Object();\n\n    public Abc() {\n       super(\"a\", \"b\");\n       someotherInit();\n    }\n\n    public Abc(Object someOtherParam) {\n       super(\"other\", \"other2\");\n       fieldNeedsInit \u003d someOtherParam;\n    }\n  }\n\nIn order to model multiple constructor and follow correct java initialization semantics, we will generate roughly something like:\n\nclass Abc extends Klm {\n\n   constructor() { \n     super();\n     this.fieldNeedsInit \u003d null;\n   }\n\n   static $init(instance) { \n     instance.fieldNeedsInit \u003d new Object();\n   }\n\n   static $Abc$Ctor1(instance) { \n     $init(instance);\n     $Klm_ctor(instance, \"a\", \"b\");\n   }\n\n   static $Abc$Ctor2(instance) { \n     $init(instance);\n     $Klm$Ctor(instance, \"other\", \"other2\");\n   }\n\n   static $create1() { \n     var instance \u003d new Abc();\n     $Abc$Ctor1(instance);\n     return instance;\n   }\n\n   static $create2(someOtherParam) { \n     var instance \u003d new Abc();\n     $Abc$Ctor2(instance, someOtherParam);\n     return instance;\n   }\n}\n\nFor example, if the constructor Abc is exported in the above example and let\u0027s assume we will transform it to a real constructor and keep the other constructor as factory; than that constructor will initialize super with (\"a\", \"b\") which is not what we want for the second constructor that still needs to call the real constructor.\n\nOf course, there are some cases where we can make the transformation (e.g. if all constructors are already calling the exported constructor) but semantics for that is not trivial and we don\u0027t really want to promise too much in the first phase where it might push us into a corner in the long run.\n\nSo at least for now, we start by supporting only the trivial case (single constructor) for the purposes export constructor as \u0027real\u0027 constructors as we know that it is something we can always support. This in the future can be more relaxed to cover more cases (e.g. all other constructors are calling the exported constructor) but for now this is reasonable start.",
+      "parentUuid": "300cbaed_4d683969",
       "revId": "1efaf0238f40164bd4013537d9e2831e8373bb33",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

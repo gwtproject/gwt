@@ -177,6 +177,24 @@
       "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7011d208_b3317820",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-04-30T17:08:03Z",
+      "side": 1,
+      "message": "Just seen that you have some custom cleanup code, so to make it work the GWT Request class would then need to provide an empty protected void cleanup() method for sub classes of Request as well.\n\nSo to sum it up:\n\n  - make the Request constructor protected and not public\n  - add protected void cleanup() for sub classes\n  - move ReadyStateChangeHandler code from RequestBuilder to Request\n  - call new Request.cleanup() method in ReadStateChangeHandler after xhr.clearOnReadyStateChange()\n\nThen in your library you can create a sub class of Request for cleanup work and you don\u0027t have to deal with fireOnResponseReceived() at all.",
+      "parentUuid": "7011d208_930f1c68",
+      "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

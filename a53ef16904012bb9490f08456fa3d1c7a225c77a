@@ -141,6 +141,24 @@
       "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "905806e7_989f45dd",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2015-04-30T15:17:16Z",
+      "side": 1,
+      "message": "Thanks. \n\nAbout why I use the class Request of gwt http instead of RequestBuilder, it first must be clear that I\u0027m using my own io.reinert.requestor.XMLHttpRequest implementation, which I inherited from com.google.gwt.http.client.XMLHttpRequest.\n\nNow, let\u0027s pay closer attention to RequestBuilder. It\u0027s the only way for requesting exposed by gwt http api and it\u0027s a \u0027user-friendly\u0027 approach.\n\nIt happens that RequestBuilder completely encapsulates the use of the XMLHttpRequest class (see https://gwt.googlesource.com/gwt/+/master/user/src/com/google/gwt/http/client/RequestBuilder.java#383). That\u0027s natural because RequestBuilder is \u0027user-friendly\u0027 and aims to simplify the task of requesting. But that also limits the power of flexibility by not allowing external access to the XMLHttpRequest object and prevent the possibility of using extensions of this class.\n\nSo I had to extend com.google.gwt.http.client.XMLHttpRequest class, RequestBuilder became useless to me. I needed lower level access to the Request class to make requests using my  io.reinert.requestor.XMLHttpRequest extension.\n\nMy problem is: I need to use my XMLHttpRequest extension, and gwt http api doesn\u0027t allow the use this class extensions.\n\nThis problem can be faced as: GWT core provides a default \u0027user-friendly\u0027 API for requesting: RequestBuilder. But it also could allow lower level manipulation of the core request elements (XMLHttpRequest and Request) for middle users to be more flexible and extensible.\n\nThat\u0027s my humble analysis of the http api, based on my own experience. I\u0027m open to discussions and other point of views.",
+      "parentUuid": "30e3da4b_44a020e8",
+      "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

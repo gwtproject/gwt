@@ -159,6 +159,24 @@
       "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7011d208_930f1c68",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-04-30T16:56:23Z",
+      "side": 1,
+      "message": "I think we can avoid making this method public if we move some code from RequestBuilder to Request. Basically RequestBuilder registers the ReadyStateChangeHandler in RequestBuilder.doSend() and the handler calls request.fireOnResponseReceived.\n\nI think the Request class could set the ReadStateChangeHandler itself which would allow making Request.fireOnResponseReceived() private and your library code does not have to deal with that method anymore.",
+      "parentUuid": "905806e7_989f45dd",
+      "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

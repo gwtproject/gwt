@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "300cbaed_d3fb393f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-30T22:10:53Z",
+      "side": 1,
+      "message": "NAme more appropriately like ConstructorToFactoryVisitor.",
+      "range": {
+        "startLine": 58,
+        "startChar": 16,
+        "endLine": 58,
+        "endChar": 32
+      },
+      "revId": "1efaf0238f40164bd4013537d9e2831e8373bb33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "300cbaed_ed75cd77",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropNormalizer.java",
         "patchSetId": 1
@@ -78,6 +101,29 @@
       "side": 1,
       "message": "Will do; thanks for reminding.",
       "parentUuid": "300cbaed_ed4cad53",
+      "revId": "1efaf0238f40164bd4013537d9e2831e8373bb33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_139131a1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-30T22:10:53Z",
+      "side": 1,
+      "message": "Annotate with an example of how the transformation looks. Look at JjsUtils.createForwardingMethod it seems that you could refactor to suit your purpose.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 3
+      },
       "revId": "1efaf0238f40164bd4013537d9e2831e8373bb33",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -123,6 +123,24 @@
       "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e3da4b_44a020e8",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-04-30T13:57:34Z",
+      "side": 1,
+      "message": "The requestor API look very nice, but I do not get why its depending on Request / XmlHttpRequest at all?\n\nIs there something I don\u0027t get?",
+      "parentUuid": "70f712e2_bddc4f99",
+      "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

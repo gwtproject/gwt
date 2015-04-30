@@ -195,6 +195,24 @@
       "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "905806e7_13d81618",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2015-04-30T17:38:26Z",
+      "side": 1,
+      "message": "Nice suggestion Jens.\n\nIt let me to wonder why the \u0027ReadyStateChangeHandler piece of code\u0027 were left to handle outside of the Request class. As the comment (https://gwt.googlesource.com/gwt/+/master/user/src/com/google/gwt/http/client/RequestBuilder.java#407) says, this handler must be set before calling the send() method, and it would be natural to handle it inside the class which defines this rule.\n\nI see one reason: external requesters, like RequestBuilder and my RequestDispatcherImpl, might want to do many things when the XHR\u0027s readyState change. As you noticed, I do some custom cleanup for my own needs when the XHR is DONE. But other might use it not only for \u0027cleanup\u0027 when DONE, but also for any need related to any other readyState of the XHR (remember they are five states!). There are a plenty of possibilities to handle the readyState change. And maybe it wouldn\u0027t be good to block requesters\u0027 access to this handler. (by encapsulating this logic inside the Request class)\n\nBased in what you said, making both the Request constructor and fireOnResponseReceived method protected would solve the problem - for me. (As I might need to extend the Request class anyway)\n\nAn alternative/additional solution, as I said before, would be turning the Request class into an interface exposing the current public members only, and creating a RequestImpl exposing the constructor and fireOnResponseReceived (either public or protected)",
+      "parentUuid": "7011d208_b3317820",
+      "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

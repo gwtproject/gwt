@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "300cbaed_c2b373fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-30T00:21:06Z",
+      "side": 1,
+      "message": "Can you rewrite it as follows?  \n\n  // Removes constructor references from defineClass parameters. \n  // These references can be either be originated by JConstructors or \n  // (in closure formatted code) by JClassTypes.\n\n  JClassType classType \u003d map.nameToType(x.getName());\n  JMethod method \u003d map.nameToMethod(x.getName());\n  method \u003d method instanceof JConstructor ? method : null;\n\n  if (classType \u003d\u003d null || method \u003d\u003d null) {\n    // Regular argument to defineClass, ignore;\n    return;\n  }\n\n  assert classType \u003d\u003d null || method \u003d\u003d null;\n  \n  boolean isConstructorLive \u003d method !\u003d null ?\n  alreadyLoadedPredicate.isLive(method) \u0026\u0026 livenessPredicate.isLive(method) : \n  alreadyLoadedPredicate.isLive(classType) \u0026\u0026 livenessPredicate.isLive(classType);\n\n   if (isConstructorLive) {\n     // Constructor is live in current fragment.\n     // Counts kept references to live constructors.\n     liveConstructorCount++;\n    } else {\n      // Removes references to dead constructors.\n    ctx.removeMe();\n    }",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 5
+      },
+      "revId": "97da925fa270bcfca0e2b2280e23934b4db1d382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_e24157fd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-04-30T00:21:06Z",
+      "side": 1,
+      "message": "I really don\u0027t like depending here on the actual way we output the aliases, this seems very fragile to me. It would be better to keep track of it explicitely in jjsmap instead of tagging it along the JClassType.\n\nWhat happens if we put the alias into vtableInitForMethodMap instead of typeForStatmap in GenerateJavaScriptAST.\n\nI know that is for instance methods but looking at the usages of nameToMethod it seems to me that it should work and none of the changes here are necessary. Can you check?",
+      "range": {
+        "startLine": 373,
+        "startChar": 2,
+        "endLine": 400,
+        "endChar": 3
+      },
+      "revId": "97da925fa270bcfca0e2b2280e23934b4db1d382",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

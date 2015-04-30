@@ -213,6 +213,24 @@
       "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "905806e7_138a56ec",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5900
+      },
+      "writtenOn": "2015-04-30T17:52:35Z",
+      "side": 1,
+      "message": "I like the idea of making both of them protected. It\u0027s a reasonable change balancing exposition and extension. The public level would expose too much, maybe affecting later evolution. The private level simply eliminates any possibility of extension. Middle users, like me, would go fine with protected access and having to extend the Request class.",
+      "parentUuid": "905806e7_13d81618",
+      "revId": "a53ef16904012bb9490f08456fa3d1c7a225c77a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

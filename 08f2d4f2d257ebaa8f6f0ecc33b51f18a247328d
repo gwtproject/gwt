@@ -33,6 +33,24 @@
       "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_a1be309e",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 6825
+      },
+      "writtenOn": "2015-04-30T20:37:29Z",
+      "side": 1,
+      "message": "There could be a lot of subtle issues with this. I certainly appreciate a thorough review of this code over breaking internal and external teams.\n\nThere are these existing bugs that are related. And looking at forum posts online, people seemed to have had a variety issues around this. And issues seems to have changed with years/different browser versions.\n\nhttps://code.google.com/p/google-web-toolkit/issues/detail?id\u003d6405\nhttps://code.google.com/p/google-web-toolkit/issues/detail?id\u003d6711\n\nAll the references to the colgroup field seem to handle the case of cols being removed. For example, addColumnStyleName calls ensureTableColElement to create the col as needed.\n\nAlso the col elements don\u0027t seem to contain stateful information. They have a width and style attached. However, once a column at that particular position is displayed again, the relevant col is being set with information from that column.",
+      "parentUuid": "300cbaed_7b58495b",
+      "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

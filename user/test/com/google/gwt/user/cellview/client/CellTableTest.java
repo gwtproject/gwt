@@ -24,12 +24,16 @@ import com.google.gwt.dom.client.TableElement;
 import com.google.gwt.dom.client.TableRowElement;
 import com.google.gwt.dom.client.TableSectionElement;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.cellview.client.AbstractHasData.RedrawEvent.Handler;
 import com.google.gwt.user.cellview.client.CellTable.Resources;
 import com.google.gwt.user.cellview.client.CellTable.Style;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -382,6 +386,47 @@ public class CellTableTest extends AbstractCellTableTestBase<CellTable<String>> 
 
     TableElement tableElem = table.getElement().cast();
     assertTrue(tableElem.getClassName().contains(tableWidgetStyle));
+  }
+
+  public void testTableRenderedEvent() {
+    // Trick to have a final reference to something that can be changed from an inner class. Each
+    // element counts as one. The element itself is meaningless.
+    final List<Integer> counter = new ArrayList<>();
+
+    CellTable<String> table = createAbstractHasData(new TextCell());
+    table.addRedrawHandler(new Handler() {
+      @Override
+      public void onRedraw() {
+        counter.add(1);
+        new Exception().printStackTrace();
+      }
+    });
+
+    // Cause table to redraw by removing a column.
+    Column<String, ?> column1 = table.getColumn(1);
+    table.removeColumn(column1);
+    table.getPresenter().flush();
+    assertEquals(1, counter.size());
+
+    // Cause table to redraw by changing the data.
+    table.setRowData(Arrays.asList(new String[]{"a", "b", "c"}));
+    table.getPresenter().flush();
+    assertEquals(2, counter.size());
+
+    // Cause table to redraw directly.
+    table.redraw();
+    table.getPresenter().flush();
+    assertEquals(3, counter.size());
+
+    // Cause a specific row to redraw.
+    table.redrawRow(0);
+    table.getPresenter().flush();
+    assertEquals(4, counter.size());
+
+    // Cause the table to redraw by resetting the {@link CellTableBuilder}.
+    table.setTableBuilder(new DefaultCellTableBuilder<String>(table));
+    table.getPresenter().flush();
+    assertEquals(5, counter.size());
   }
 
   @Override

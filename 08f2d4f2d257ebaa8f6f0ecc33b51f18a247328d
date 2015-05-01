@@ -69,6 +69,24 @@
       "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d078be71_a5f90801",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 6825
+      },
+      "writtenOn": "2015-05-01T21:12:33Z",
+      "side": 1,
+      "message": "To be clear: It\u0027s a Firefox issue. I saw posts on the web that suggested an old version of Chrome had similar issues.\n\nOur table uses table-layout:fixed.\n\nFirefox eventually lays out the table correctly. So, it seems that Firefox has the right rules. It simply doesn\u0027t seem to recalculate the width after a column is removed. For example, if I add and remove \"display: none\" on the table, the layout is fixed.\n\nCellTable tries to be smart by detaching the body section before modifying it. Maybe, the actual bug has something to do with the detached body section NOT recalculating the width when it should.\n\n\nI tried creating a repro with pure JavaScript in codebin. There are two cases: (a) Setting col to \"width: 0px; display: none\" (current CellTable behavior) and (b) Removing the col (behavior of this CL). Strangely, both are affected by the Firefox bug. (It works fine in Chrome.)\nhttps://codebin.googleplex.com/#/hxp7ne5p5xc\n\n\n\nThoughts about col indices:\n- All calls to col are guarded by ensureTableColElement(). This methods re-creates col elements as needed. So, there shouldn\u0027t be an array index exception or similar.\n\n- Setting the column width involves storing a mapping between columns and width. So, even if the columns are re-added in a different order, the right width is remembered. The mapping is in AbstractCellTable.columnWidths.\n\n- Adding a style to a column is NOT remembered. So, if column 5 receives a style, is removed, and re-added, the style is missing. The way how this works seems buggy. It should remember the mapping between column and style as is done for the column width. As of now, if columns are re-added in a different order, they\u0027ll get the wrong style.\n\n\nCorrect behavior:\nAs an outsider, the correct behavior would seem to be to:\n\n1. Remove col elements for columns that no longer exist.\n\n2. The column width and column style should be added on the Column class. That way if columns are re-added in different orders or different columns are added, the column supplies what it wants rather than some leftover from a previous (possibly unrelated) column. Also, it\u0027s strange to set column attributes in two different places (on the column directly and indirectly on the CellTable).\n\n\nAlternative:\nAn alternative fix would be if there is a way to trigger the table to recalculate the widths for Firefox only. I only know of ways that are clunky, like hiding/showing the whole table.\n\n\nEven though, I wrote a lot, I\u0027m looking for guidance on what to do on this. I simply tried to do my homework before bugging you.",
+      "parentUuid": "b0c50acf_4862ffbe",
+      "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

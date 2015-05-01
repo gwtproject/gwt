@@ -27,6 +27,7 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.safehtml.shared.SafeHtml;
@@ -213,6 +214,33 @@ public abstract class AbstractHasData<T> extends Composite implements HasData<T>
       display.setKeyboardSelectedRow(row, true);
     }
   }
+  
+  /**
+   * Event fired when one or more existing rows are re-rendered.
+   */
+  public static class RedrawEvent extends GwtEvent<RedrawEvent.Handler> {
+
+    private static final Type<Handler> TYPE = new Type<Handler>();
+
+    /**
+     * Implemented by objects that handle {@link RedrawEvent}.
+     */
+    public interface Handler extends EventHandler {
+      /**
+       * Performs implementation-specific work when the cell list re-renders one or more existing
+       * rows
+       */
+      void onRedraw();
+    }
+
+    @Override public Type<Handler> getAssociatedType() {
+      return TYPE;
+    }
+
+    @Override protected void dispatch(RedrawEvent.Handler handler) {
+      handler.onRedraw();
+    }
+  } 
 
   /**
    * Implementation of {@link HasDataPresenter.View} used by this widget.
@@ -226,6 +254,15 @@ public abstract class AbstractHasData<T> extends Composite implements HasData<T>
 
     public View(AbstractHasData<T> hasData) {
       this.hasData = hasData;
+      
+      addHandler(
+          new ValueChangeHandler<List<T>>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<List<T>> event) {
+              View.this.hasData.fireEvent(new RedrawEvent());
+            }
+          },
+          ValueChangeEvent.getType());
     }
 
     @Override
@@ -524,6 +561,13 @@ public abstract class AbstractHasData<T> extends Composite implements HasData<T>
   @Override
   public HandlerRegistration addRowCountChangeHandler(RowCountChangeEvent.Handler handler) {
     return presenter.addRowCountChangeHandler(handler);
+  }
+
+  /**
+   * Adds the given handler as a callback that is notified of events of type {@link RedrawEvent}.
+   */
+  public HandlerRegistration addRedrawHandler(RedrawEvent.Handler handler) {
+    return addHandler(handler, RedrawEvent.TYPE);
   }
 
   /**

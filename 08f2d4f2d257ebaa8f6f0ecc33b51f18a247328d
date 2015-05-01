@@ -51,6 +51,24 @@
       "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0c50acf_4862ffbe",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 6449
+      },
+      "writtenOn": "2015-05-01T16:41:12Z",
+      "side": 1,
+      "message": "I share Goktug\u0027s nervousness around completely dropping the old DOM with this call. I did a little Web search around Chrome quirks with columns sizing and found this:\nhttp://stackoverflow.com/questions/12212608/why-is-my-table-cell-width-wrong-in-chrome\n\nIt seems that a setting table-layout: fixed might make Chrome behave like other browsers and not show the columns of width 0. Did you consider a more CSS-based approach like that?",
+      "parentUuid": "300cbaed_a1be309e",
+      "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d078be71_f3f3c71a",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractHasData.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-05-01T23:45:13Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "e18557fd5f2b147359fe30fb595524238a37a394",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

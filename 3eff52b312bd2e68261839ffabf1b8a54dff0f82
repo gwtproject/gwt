@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7042b231_74d41e3b",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractHasData.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 6449
+      },
+      "writtenOn": "2015-05-04T16:57:53Z",
+      "side": 1,
+      "message": "This seems a bit brittle to me. I see how *currently* replaceAllChildren() and replaceChildren() will always fire a ValueChange event. But can we rely on that?\n\nDid you consider firing a RedrawEvent directly from within replaceAllChildren() and replaceChildren()?",
+      "revId": "3eff52b312bd2e68261839ffabf1b8a54dff0f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7042b231_7406de4e",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 6449
+      },
+      "writtenOn": "2015-05-04T16:57:53Z",
+      "side": 1,
+      "message": "These are nice tests. Can we put them on AbstractHasData directly instead of the Table subclass?\nThe one bit that you\u0027d have to keep here would be the test with the alternative TableBuilder.",
+      "revId": "3eff52b312bd2e68261839ffabf1b8a54dff0f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7042b231_f4300e19",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 6449
+      },
+      "writtenOn": "2015-05-04T16:57:53Z",
+      "side": 1,
+      "message": "Did you consider a TestHandler inner class so you wouldn\u0027t have to do this array trick? In that case the handler class should be able to have a basic mutable int field.",
+      "revId": "3eff52b312bd2e68261839ffabf1b8a54dff0f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

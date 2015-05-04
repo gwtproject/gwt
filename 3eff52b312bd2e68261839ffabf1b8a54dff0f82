@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7042b231_851dd691",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractHasData.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 6825
+      },
+      "writtenOn": "2015-05-04T19:48:21Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with all the code in here and all the intricacies of how it interacts.\n\nIt seemed to me that any time, the value changed a ValueChangeEvent would get fired. So, if there were a new way to change the value, the ValueChangeEvent would be added to that code.\n\nIf the replaceAllChildren and replaceChildren methods fired the RedrawEvent directly, one would have to remember to copy it to the new place as well. However, by chaining the events, that wouldn\u0027t have to be remembered.",
+      "parentUuid": "7042b231_74d41e3b",
+      "revId": "3eff52b312bd2e68261839ffabf1b8a54dff0f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7042b231_7406de4e",
         "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7042b231_80ba244b",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 6825
+      },
+      "writtenOn": "2015-05-04T19:48:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7042b231_7406de4e",
+      "revId": "3eff52b312bd2e68261839ffabf1b8a54dff0f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7042b231_f4300e19",
         "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2015-05-04T16:57:53Z",
       "side": 1,
       "message": "Did you consider a TestHandler inner class so you wouldn\u0027t have to do this array trick? In that case the handler class should be able to have a basic mutable int field.",
+      "revId": "3eff52b312bd2e68261839ffabf1b8a54dff0f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7042b231_252c2294",
+        "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 6825
+      },
+      "writtenOn": "2015-05-04T19:48:21Z",
+      "side": 1,
+      "message": "What you proposed, I did in another place for production code.\n\nFor a test, it seemed quicker to read without the inner class. It seems more correct to use the inner class. It\u0027s also more verbose.\n\nIt\u0027s changed. Done.",
+      "parentUuid": "7042b231_f4300e19",
       "revId": "3eff52b312bd2e68261839ffabf1b8a54dff0f82",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

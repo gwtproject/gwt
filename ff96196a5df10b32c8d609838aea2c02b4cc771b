@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7042b231_9427ca33",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-04T17:35:22Z",
+      "side": 1,
+      "message": "This should not be needed. AsyncFragmentLoader.onLoad is static so a call to clinit shoud be inserted as the first statement in onLoad by GenerateJavaScriptAST.\n\nIf it is not (in which case I wonder why it stopped working), then it is an error in GenerateJavaScriptAST which tries to optimize away the placement of such clinits in the case the static is only called from within one of its methods (RecordCrossClassCallsAndConstructorLiveness).",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 5
+      },
+      "revId": "ff96196a5df10b32c8d609838aea2c02b4cc771b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7042b231_7feb17f3",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-04T17:35:22Z",
+      "side": 1,
+      "message": "s/assertMethodInFragment/assertClosureFunctionInFragment/",
+      "range": {
+        "startLine": 540,
+        "startChar": 15,
+        "endLine": 540,
+        "endChar": 37
+      },
+      "revId": "ff96196a5df10b32c8d609838aea2c02b4cc771b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7042b231_ff19c7b0",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-04T17:35:22Z",
+      "side": 1,
+      "message": "assertClosureFunctionNotInFragment",
+      "range": {
+        "startLine": 579,
+        "startChar": 15,
+        "endLine": 579,
+        "endChar": 40
+      },
+      "revId": "ff96196a5df10b32c8d609838aea2c02b4cc771b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

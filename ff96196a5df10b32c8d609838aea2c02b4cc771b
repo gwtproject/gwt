@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6d19f971_39e587d3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-05T22:36:39Z",
+      "side": 1,
+      "message": "I added the check to RecordCrossClassCalls and removed this change. Verified it works.",
+      "parentUuid": "7042b231_9427ca33",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 5
+      },
+      "revId": "ff96196a5df10b32c8d609838aea2c02b4cc771b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7042b231_7feb17f3",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
         "patchSetId": 4
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "6d19f971_99d5bbe2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-05T22:36:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7042b231_7feb17f3",
+      "range": {
+        "startLine": 540,
+        "startChar": 15,
+        "endLine": 540,
+        "endChar": 37
+      },
+      "revId": "ff96196a5df10b32c8d609838aea2c02b4cc771b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7042b231_ff19c7b0",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
         "patchSetId": 4
@@ -83,6 +131,30 @@
       "writtenOn": "2015-05-04T17:35:22Z",
       "side": 1,
       "message": "assertClosureFunctionNotInFragment",
+      "range": {
+        "startLine": 579,
+        "startChar": 15,
+        "endLine": 579,
+        "endChar": 40
+      },
+      "revId": "ff96196a5df10b32c8d609838aea2c02b4cc771b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d19f971_f9deef05",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/CodeSplitterTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-05T22:36:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7042b231_ff19c7b0",
       "range": {
         "startLine": 579,
         "startChar": 15,

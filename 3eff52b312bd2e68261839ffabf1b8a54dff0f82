@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "d026fe9b_572630e5",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractHasData.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-05T20:28:41Z",
+      "side": 1,
+      "message": "\u003e If your project really needs to know when values change and you don\u0027t care specifically about redraws, then perhaps you should make addValueChangeHandler a public method.\n\n+1",
+      "parentUuid": "d026fe9b_f4a9dae0",
+      "revId": "3eff52b312bd2e68261839ffabf1b8a54dff0f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7042b231_7406de4e",
         "filename": "user/test/com/google/gwt/user/cellview/client/CellTableTest.java",
         "patchSetId": 3

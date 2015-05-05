@@ -87,6 +87,24 @@
       "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7042b231_45012ebe",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 6449
+      },
+      "writtenOn": "2015-05-05T20:35:58Z",
+      "side": 1,
+      "message": "Ah, thanks for helping me understand. You\u0027ve clearly thought about this deeply.\n\nI agree now that allowing columns to be deleted seems like the right way to go moving forward. I imagine this could be the default behavior for GWT 3.0, which is going to be a breaking release anyway.\n\nBut let\u0027s talk about transition plan: for now could the user pass an arg into refreshColumnWidths to use the new behavior?  Or maybe there\u0027s a columnRefreshStrategy enum property that you add to CellTable. The default value of the enum could use the old behavior, but clients could set the strategy to DELETE_OLD columns if they wanted the new. Just some thoughts...",
+      "parentUuid": "d078be71_a5f90801",
+      "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

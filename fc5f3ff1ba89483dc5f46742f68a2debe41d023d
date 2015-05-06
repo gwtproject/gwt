@@ -87,6 +87,30 @@
       "revId": "fc5f3ff1ba89483dc5f46742f68a2debe41d023d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d8435cc_7700d288",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-06T22:59:10Z",
+      "side": 0,
+      "message": "The existing testInstanceOf_jsoWithSyntheticProto() fails to test this code because another test in the same suite has a cast of (MyJsInterface) and that cast will rescue the interface being pruned allowing the instanceof to still work.\n\nIf you were to create a separate interface that is never used in any cast operator, only as an instanceof operation, you\u0027d see if fail.",
+      "parentUuid": "6d19f971_1fa186ec",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 5
+      },
+      "revId": "fc5f3ff1ba89483dc5f46742f68a2debe41d023d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

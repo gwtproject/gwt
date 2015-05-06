@@ -249,6 +249,24 @@
       "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d8435cc_5c85b554",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 6825
+      },
+      "writtenOn": "2015-05-06T22:41:13Z",
+      "side": 1,
+      "message": "Reversing it doesn\u0027t make it clearer for me.\n\nI\u0027ve already changed the code to your first suggestion.",
+      "parentUuid": "4d8435cc_0b504560",
+      "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

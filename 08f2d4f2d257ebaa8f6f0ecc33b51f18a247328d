@@ -159,6 +159,24 @@
       "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d19f971_0b9ee8ad",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 6449
+      },
+      "writtenOn": "2015-05-06T18:48:11Z",
+      "side": 1,
+      "message": "Thomas, do you think we\u0027ll have many more \"legacy\" behaviors like this? If so, then your \"legacyBehavior\" flag makes sense. If the list is small, then I would recommend a well-named, specific flag with a method like \"setLegacyZeroWidthColumnHiding(boolean)\".",
+      "parentUuid": "6d19f971_b64c06cf",
+      "revId": "08f2d4f2d257ebaa8f6f0ecc33b51f18a247328d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

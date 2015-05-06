@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4d8435cc_37132a5b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-06T22:51:24Z",
+      "side": 0,
+      "message": "Removing this will break web components won\u0027t it? Maybe the spec is different than when this was implemented but,\n\n\nclass MyButton extends HTMLButtonElement_prototype { ... }\n\nThis doesn\u0027t have @JsType annotation on it, but it\u0027s ancestor does. MyButton can be instantiated in JS via \u003cmy-button\u003e and won\u0027t be seen via a JNewInstance operation.",
+      "revId": "fc5f3ff1ba89483dc5f46742f68a2debe41d023d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d19f971_1fa186ec",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 1

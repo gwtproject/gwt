@@ -21,6 +21,8 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
+import com.google.gwt.dev.jjs.impl.ImplementClassLiteralsAsFields;
+import com.google.gwt.dev.jjs.impl.MakeCallsStatic;
 import com.google.gwt.dev.jjs.impl.codesplitter.FragmentPartitioningResult;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
@@ -320,12 +322,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   public JProgram(MinimalRebuildCache minimalRebuildCache) {
     super(SourceOrigin.UNKNOWN);
-    typeOracle = new JTypeOracle(this, minimalRebuildCache, true);
-  }
-
-  public JProgram(MinimalRebuildCache minimalRebuildCache, boolean hasWholeWorldKnowledge) {
-    super(SourceOrigin.UNKNOWN);
-    typeOracle = new JTypeOracle(this, minimalRebuildCache, hasWholeWorldKnowledge);
+    typeOracle = new JTypeOracle(this, minimalRebuildCache);
   }
 
   public void addEntryMethod(JMethod entryPoint) {

@@ -46,6 +46,30 @@
       "revId": "fc5f3ff1ba89483dc5f46742f68a2debe41d023d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d8435cc_b7209ac7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-06T22:46:48Z",
+      "side": 0,
+      "message": "Cast and instanceof rescue JSO-like objects because that\u0027s how we track instantiations of them.\n\nnative Object someMethod() /*-{\n  return expr;\n}-*/;\n\n((IFoo) someMethod()).bar() \u003d\u003e IFoo treated as instantiated\n\nin the case of JInstanceOf, having a @JsType(prototype\u003d\"blah\") meant that even if this type is NEVER instantiated anyway with a \"new\" or returned from JSNI method signature, we still need to keep it from being pruned because otherwise, the ImplementCastChecks pass will see it pruned to JNullType and you won\u0027t get the jsInstanceOf operation.\n\n\n@JsType(prototype\u003d\"HTMLButtonElement\")\ninterface IFoo {}\n\n\nnative Object foo() /-*{ return $doc.createElement(...); }-*/\n\nif (foo() instanceof IFoo) { ...}\n\nwill be replaced with\n\nif (foo() instanceof (nullType)) {...}\n\nif the IFoo isn\u0027t rescued as being alive.",
+      "parentUuid": "0d407d41_f61398dd",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 5
+      },
+      "revId": "fc5f3ff1ba89483dc5f46742f68a2debe41d023d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

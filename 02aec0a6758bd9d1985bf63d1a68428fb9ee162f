@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d8435cc_223d2e70",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-05-06T19:44:41Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.impl.ImplementClassLiteralsAsFields.",
+      "revId": "02aec0a6758bd9d1985bf63d1a68428fb9ee162f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d8435cc_4242b2ff",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-05-06T19:44:41Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.impl.MakeCallsStatic.",
+      "revId": "02aec0a6758bd9d1985bf63d1a68428fb9ee162f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

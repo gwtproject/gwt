@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d8435cc_93a7a335",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsPrototypeWithOnlyInstanceofReference.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-05-07T05:24:54Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "38bd2823dba9cc6837e228eba51f2ada6b07b8a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d8435cc_f3b86f54",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsPrototypeWithOnlyInstanceofReference.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-05-07T05:24:54Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not preceded with whitespace.",
+      "revId": "38bd2823dba9cc6837e228eba51f2ada6b07b8a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -177,6 +177,30 @@
       "revId": "fc5f3ff1ba89483dc5f46742f68a2debe41d023d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d407d41_7f8d3b87",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-05-07T05:35:09Z",
+      "side": 0,
+      "message": "I think this is because JTypeOracle.isInstantiatedType(JReferenceType) returns true for any JsType.\n\nRoberto has a comment in there to remove this hack when CFA is more precise. By removing the JInstanceOf rescue, you now can no longer remove this hack.",
+      "parentUuid": "4d8435cc_9db8140b",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 5
+      },
+      "revId": "fc5f3ff1ba89483dc5f46742f68a2debe41d023d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

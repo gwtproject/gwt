@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d8435cc_b6842010",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-05-07T01:40:34Z",
+      "side": 1,
+      "message": "update comment",
+      "range": {
+        "startLine": 552,
+        "startChar": 14,
+        "endLine": 552,
+        "endChar": 23
+      },
+      "revId": "3b742c2225a18ba6efe426ad7d8f5a2744fe26a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

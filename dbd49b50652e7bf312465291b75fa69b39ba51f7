@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "4d8435cc_a2fe1e2f",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-07T00:48:51Z",
+      "side": 1,
+      "message": "IIUC, this amount of customization is need because if somebody supplied source annotation explicitly, right? Thinking out loudly, what if we only support the case where source file is not supplied explicitly? What scenarios are not covered in that case?",
+      "revId": "dbd49b50652e7bf312465291b75fa69b39ba51f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d8435cc_c22d623e",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-07T00:48:51Z",
+      "side": 1,
+      "message": "Again thinking out loudly, what about updating the ResourceGeneratorUtil so that we can supply fallback extension? Would that simplify things?",
+      "revId": "dbd49b50652e7bf312465291b75fa69b39ba51f7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d8435cc_c276c2d0",
         "filename": "user/test/com/google/gwt/resources/client/CSSResourceTest.java",
         "patchSetId": 1

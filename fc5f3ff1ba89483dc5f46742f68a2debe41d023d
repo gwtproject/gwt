@@ -153,6 +153,30 @@
       "revId": "fc5f3ff1ba89483dc5f46742f68a2debe41d023d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d8435cc_9db8140b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-07T00:44:50Z",
+      "side": 0,
+      "message": "Ok, I couldn\u0027t reproduce the problem because some other stuff already rescue all JsTypes. But I added the test so when the code rescues the type is fixed, we will see the issue and solve it properly.",
+      "parentUuid": "4d8435cc_424f0717",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 5
+      },
+      "revId": "fc5f3ff1ba89483dc5f46742f68a2debe41d023d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

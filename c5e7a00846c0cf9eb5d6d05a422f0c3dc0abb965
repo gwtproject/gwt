@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d8435cc_948c8a93",
+        "filename": "user/src/com/google/gwt/user/cellview/client/CellTable.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 6449
+      },
+      "writtenOn": "2015-05-07T19:57:24Z",
+      "side": 1,
+      "message": "Good catch.",
+      "revId": "c5e7a00846c0cf9eb5d6d05a422f0c3dc0abb965",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

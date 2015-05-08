@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2d62a1ee_7d5c1f5a",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 5035
+      },
+      "writtenOn": "2015-05-08T09:17:43Z",
+      "side": 1,
+      "message": "Yep I thought about this problem during the implementation because I could happen (the old css resource generator doesn\u0027t enforce the the file is ending by .css).\n\nBut it\u0027s fine to not support this case because:\n- This patch modify the compiler in order to choose between the .css or .gss file depending whether gss is enabled or not. If both file are missing, the compiler will use the original source file. That don\u0027t break anything.\n- This patch is really useful for the sdk itself and third party libraries that want to support the old syntax and gss. In an application people will not maintain both syntax and will choose between css or gss.",
+      "parentUuid": "2d62a1ee_ddfaebb4",
+      "range": {
+        "startLine": 492,
+        "startChar": 8,
+        "endLine": 492,
+        "endChar": 97
+      },
+      "revId": "1b45910309f561145de7066d07dd7c022bfb9213",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d62a1ee_bd07374b",
         "filename": "user/test/com/google/gwt/resources/client/CSSResourceTest.java",
         "patchSetId": 2

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d62a1ee_ddfaebb4",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-05-08T09:01:27Z",
+      "side": 1,
+      "message": "Not sure if we should do anything about it, but there might be crazy people out there that have not named there resources .css (maybe no extension at all), so this would not work for them, but I think this is fine.",
+      "range": {
+        "startLine": 492,
+        "startChar": 8,
+        "endLine": 492,
+        "endChar": 97
+      },
+      "revId": "1b45910309f561145de7066d07dd7c022bfb9213",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d62a1ee_bd07374b",
+        "filename": "user/test/com/google/gwt/resources/client/CSSResourceTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-05-08T09:01:27Z",
+      "side": 1,
+      "message": "The source annotation in this test seems to be wrong? Should it be .gss?",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 73
+      },
+      "revId": "1b45910309f561145de7066d07dd7c022bfb9213",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

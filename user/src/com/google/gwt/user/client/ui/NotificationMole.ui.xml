@@ -1,7 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
   xmlns:g='urn:import:com.google.gwt.user.client.ui'>
-  <ui:style gss="true">
+  <ui:style>
     .container {
       position: absolute;
       height: 0;
@@ -25,7 +25,6 @@
       font-family: Helvetica;
       font-size: 1em;
     }
-
   </ui:style>
   <g:HTMLPanel styleName='{style.container}'>
     <div class='{style.centered}' style='display:none' ui:field='borderElement'>

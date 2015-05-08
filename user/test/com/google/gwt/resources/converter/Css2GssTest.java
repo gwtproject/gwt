@@ -121,6 +121,17 @@ public class Css2GssTest extends TestCase {
     assertFileContentEqualsAfterConversionAndIsGssCompatible("escape.css", "escape.gss", true);
   }
 
+  public void testNoTrailingWhiteSpacesWithMultiSelectors() throws IOException,
+      UnableToCompleteException {
+    assertFileContentEqualsAfterConversionAndIsGssCompatible(
+        "multi_selector_trailing_whitespace.css", "multi_selector_trailing_whitespace.gss", false);
+  }
+
+  public void testSpacesForParentChildSelectors() throws IOException, UnableToCompleteException {
+    assertFileContentEqualsAfterConversionAndIsGssCompatible("parent_child_whitespaces.css",
+        "parent_child_whitespaces.gss", false);
+  }
+
   public void testConvertingWithVariablesDefinedInAnotherFile()
       throws UnableToCompleteException, IOException {
     URL resource = Css2GssTest.class.getResource("variable_defined_in_another_file.css");

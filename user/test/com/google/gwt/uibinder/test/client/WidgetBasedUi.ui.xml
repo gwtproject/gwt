@@ -107,14 +107,14 @@
 <!--
   Tests creating a CssResource from an external file.
  -->
-<ui:style gss="true" field='myStyle' src='WidgetBasedUi.gss com/google/gwt/uibinder/test/client/Menu.gss'
+<ui:style field='myStyle' src='WidgetBasedUi.gss com/google/gwt/uibinder/test/client/Menu.gss'
     type='com.google.gwt.uibinder.test.client.WidgetBasedUi.Style'>
     .menuBar {
       font-family: sans-serif;
     }
 </ui:style>
 
-<ui:style gss="true" field='myOtherStyle' type='com.google.gwt.uibinder.test.client.WidgetBasedUi.Style'>
+<ui:style field='myOtherStyle' type='com.google.gwt.uibinder.test.client.WidgetBasedUi.Style'>
   /* because we extend WidgetBasedUi.Style and it's tagged @Shared, we can refine the menubar
      style defined in other files */
 
@@ -128,7 +128,7 @@
   }
 </ui:style>
 
-<ui:style gss="true" field='myTotallyPrivateStyle'>
+<ui:style field='myTotallyPrivateStyle'>
   /* An inline style tied to no public type */
 
   .super-private-color {
@@ -136,8 +136,8 @@
   }
 </ui:style>
 
-<ui:style gss="true" field='cursorifficStyle'>
-  @def CURSOR resourceUrl("heartCursorResource");
+<ui:style field='cursorifficStyle'>
+  @url CURSOR heartCursorResource;
   .cursor {
     cursor:CURSOR,pointer;
   }
@@ -145,14 +145,14 @@
 
 <ui:data field='heartCursorResource' src='heart.cur'/>
 
-<ui:style gss="true" field='mySpritelyStyle'>
-  .simpleSprite {
-    gwt-sprite: "prettyImage";
-  }
+<ui:style field='mySpritelyStyle'>
+   @sprite .simpleSprite {
+     gwt-image: "prettyImage";
+   }
 
-  .tilingSprite {
-    gwt-sprite: "prettyTilingImage";
-  }
+   @sprite .tilingSprite {
+     gwt-image: "prettyTilingImage";
+   }
 
   .garish {
     color: Purple;

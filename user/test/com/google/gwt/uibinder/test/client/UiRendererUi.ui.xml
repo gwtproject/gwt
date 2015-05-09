@@ -17,7 +17,7 @@
 
   <ui:with field="aValue"/>
   <ui:with field="aValueTwice"/>
-  <ui:style gss="true" field="uiStyle"  type="com.google.gwt.uibinder.test.client.UiRendererUi.UiStyle">
+  <ui:style field="uiStyle"  type="com.google.gwt.uibinder.test.client.UiRendererUi.UiStyle">
     .enabled {
       color: black;
     }

@@ -1,8 +1,8 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
-  <ui:style gss="true" type="com.google.gwt.uibinder.test.client.gss.WidgetUsingCss.CssStyle">
+  <ui:style type="com.google.gwt.uibinder.test.client.gss.WidgetUsingCss.CssStyle">
     @def MY_BLACK black;
-    @def MY_WHITE eval('com.google.gwt.uibinder.test.client.gss.WidgetUsingCss.WHITE');
+    @eval MY_WHITE com.google.gwt.uibinder.test.client.gss.WidgetUsingCss.WHITE;
 
     .main {
       background-color: MY_BLACK;

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d6d15ec_6891c14f",
+        "filename": "user/test/com/google/gwt/resources/converter/Css2GssTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-05-11T15:28:02Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027org.mockito.Mockito.mock\u0027 import.",
+      "revId": "a3092e945a99c4df70ea752483deeb523f6fcb25",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

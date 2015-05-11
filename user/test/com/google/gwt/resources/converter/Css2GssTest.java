@@ -15,18 +15,16 @@
  */
 package com.google.gwt.resources.converter;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.thirdparty.common.css.SourceCode;
 import com.google.gwt.thirdparty.common.css.compiler.ast.GssParser;
 import com.google.gwt.thirdparty.common.css.compiler.ast.GssParserException;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
-
 import junit.framework.TestCase;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -130,6 +128,12 @@ public class Css2GssTest extends TestCase {
     String convertedGss = new Css2Gss(resource, false, Predicates.<String>alwaysFalse(), set).toGss();
     String gss = IOUtils.toString(stream, "UTF-8");
     assertEquals(gss, convertedGss);
+  }
+
+  public void testNoTrailingWhiteSpacesWithMultiSelectors() throws IOException,
+      UnableToCompleteException {
+    assertFileContentEqualsAfterConversionAndIsGssCompatible(
+        "multi_selector_trailing_whitespace.css", "multi_selector_trailing_whitespace.gss", false);
   }
 
   private void assertFileContentEqualsAfterConversion(String inputCssFile, String expectedGssFile)

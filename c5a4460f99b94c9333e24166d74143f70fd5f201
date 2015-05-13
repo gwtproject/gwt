@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4dcc357d_e2bf069b",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2015-05-13T02:47:20Z",
+      "side": 1,
+      "message": "whitespace nit (these would be caught with the first +1 normally I think when jenkins runs the code).",
+      "revId": "c5a4460f99b94c9333e24166d74143f70fd5f201",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_cb2dc93e",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2015-05-13T02:47:20Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to be accurate - the step will run at least once no matter what (line 51), and may run several more times (line 68) before duration is first checked. \n\nThe return value should be documented - appears to be -1 if this task doesn\u0027t need to rerun, 0 if it ran less than the guessCount was, or duration.elapsedMillis if it ends up running more.",
+      "revId": "c5a4460f99b94c9333e24166d74143f70fd5f201",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_0b71a15d",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2015-05-13T02:47:20Z",
+      "side": 1,
+      "message": "since startMilli is either 0 or the return value from the last run (i.e. -1, 0, or an old duration.elapsedMillis value), does subtracting it make sense here?",
+      "range": {
+        "startLine": 65,
+        "startChar": 49,
+        "endLine": 65,
+        "endChar": 59
+      },
+      "revId": "c5a4460f99b94c9333e24166d74143f70fd5f201",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_4bf0b95f",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2015-05-13T02:47:20Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 65,
+        "startChar": 59,
+        "endLine": 65,
+        "endChar": 61
+      },
+      "revId": "c5a4460f99b94c9333e24166d74143f70fd5f201",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_0bf6c15e",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2015-05-13T02:47:20Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "c5a4460f99b94c9333e24166d74143f70fd5f201",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_c8d5cfe1",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2015-05-13T02:47:20Z",
+      "side": 1,
+      "message": "16ms * 60 ~\u003d 1000ms, is 13ms assuming approx 3-4ms per task? Why is this assumption changing?",
+      "revId": "c5a4460f99b94c9333e24166d74143f70fd5f201",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4dcc357d_62e5b6d2",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2015-05-13T02:47:20Z",
+      "side": 1,
+      "message": "Why is 7 the magic number? I understand its fairly small (as opposed to, say, 10), but what rules define 7 as being the right value?",
+      "revId": "c5a4460f99b94c9333e24166d74143f70fd5f201",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_e8bfeb9a",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2015-05-13T02:47:20Z",
+      "side": 1,
+      "message": "If a given task takes longer than the threshold (TIME_SLICE) when running once, it appears that the for loop won\u0027t terminate early, and we\u0027ll keep running. Only elapsedMilli seems to be updated to record how long we\u0027ve been working, and it appears that Task.executeRepeating doesn\u0027t check if we\u0027ve passed TIME_SLICE.\n\nLikewise, if ellapsedMilli is -1, then -1 will be passed in to the next task?\n\nSorry if I\u0027m misunderstand, but in lieu of unit tests, its hard to follow up.",
+      "revId": "c5a4460f99b94c9333e24166d74143f70fd5f201",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_8ba47185",
+        "filename": "user/src/com/google/gwt/core/client/impl/SchedulerImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2015-05-13T02:47:20Z",
+      "side": 1,
+      "message": "Since we only make one pass, no need to tombstone, or mark some tasks as canceled. Instead, we can rebuild the queue if elapsedMilli is greater than or equal to zero, and move the old rebuild into the else block below.",
+      "revId": "c5a4460f99b94c9333e24166d74143f70fd5f201",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

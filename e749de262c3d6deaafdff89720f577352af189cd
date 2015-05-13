@@ -48,6 +48,76 @@
     },
     {
       "key": {
+        "uuid": "ad15b184_ddf466d5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-13T20:52:13Z",
+      "side": 1,
+      "message": "I agree with this, on initial reading I wasn\u0027t sure if this was going to include rescuing members too.",
+      "parentUuid": "ad15b184_ff267fb2",
+      "range": {
+        "startLine": 237,
+        "startChar": 8,
+        "endLine": 237,
+        "endChar": 29
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_1dd6fe45",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-13T20:52:13Z",
+      "side": 1,
+      "message": "Technically, isn\u0027t it only needed for instanceof checking if it has a prototype attribute? Without it, it acts like a JSO.",
+      "range": {
+        "startLine": 302,
+        "startChar": 90,
+        "endLine": 302,
+        "endChar": 91
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_a2cce76a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-13T20:52:13Z",
+      "side": 1,
+      "message": "I think rescueAndInstantiate is more readable than rescue(type, true)  I had to lookup what the boolean meant (reference? instantiated?)",
+      "range": {
+        "startLine": 442,
+        "startChar": 10,
+        "endLine": 442,
+        "endChar": 11
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad15b184_1f543bd9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 1
@@ -59,6 +129,30 @@
       "writtenOn": "2015-05-13T17:13:48Z",
       "side": 1,
       "message": "Rewrite. Maybe along the lines\n\nTechnically, JsType/JsFunction are also instantiatable in JavaScript but instead of treating them as JSOs (where basically casts, and appearance as parameter or return return types make them live), we take a different approach. A JsType/JsFunction is considered instantiable in JS if there is an exported constructor or an instance method gets called.",
+      "range": {
+        "startLine": 512,
+        "startChar": 6,
+        "endLine": 513,
+        "endChar": 99
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_e269bf24",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-13T20:52:13Z",
+      "side": 1,
+      "message": "The ways in which a JsType could be instantiated:\n\n1) directly Java new\u0027ed (concrete type)\n2) @JsExported ctor\n3) Passed as a parameter from JS into another live JsType/JsExported method on any class (since you can completely implement the interface in JS)\n4) As a return type of a live @JsType method\n5) As a cast from some other type\n\n\nFor example:\n\n@JsType\ninterface Foo {}\n\nclass Bar {\n  // doIt can be called from JS with a raw JS object\n  @JsExport void doIt(Foo f) { f.blah(); }\n}\n\nor\n\n// no methods called, but Foo might still be needed for instanceof check. Also, if there\u0027s a Java implementor that\u0027s instantiable, Foo\u0027s liveness implies any of it\u0027s methods might be called if it is ever cast from FooImpl to Foo and escapes into JS.\nclass Bar {\n  // doIt can be called from JS with a raw JS object\n  @JsExport native Foo reinterpretCast(Object o) /*-{ return o; }-*/;\n}\n\nThe approach proposed is fine for now, but overly conservative, since it will end up rescuing every method of a JsType interface if even the type doesn\u0027t escape to JS.\n\nSo for example, if concrete FooImpl has 20 methods and implements Foo, which has an @JsType, and a single method is called on the interface, than all of FooImpl\u0027s methods get rescued, even if Foo never escapes to JS.\n\nGiven how @JsType might creep into lots of codebases over time and you pay a cost if JsInterop is enabled (which you want to enable by default), this means potential code size regressions for people adopting @JsType instead of JSOs.\n\nPeople can and will liberally throw around these annotations.",
+      "parentUuid": "ad15b184_1f543bd9",
       "range": {
         "startLine": 512,
         "startChar": 6,

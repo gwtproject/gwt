@@ -224,6 +224,7 @@ public class JsFunctionTest extends GWTTestCase {
     Object object = createFunction();
     assertTrue(object instanceof MyJsFunctionInterface);
     assertTrue(object instanceof MyJsFunctionIdentityInterface);
+    assertTrue(object instanceof MyJsFunctionWithOnlyInstanceofReference);
     assertFalse(object instanceof MyJsFunctionInterfaceImpl);
     assertTrue(object instanceof ElementLikeJsInterface);
   }
@@ -232,6 +233,7 @@ public class JsFunctionTest extends GWTTestCase {
     Object object = createObject();
     assertFalse(object instanceof MyJsFunctionInterface);
     assertFalse(object instanceof MyJsFunctionIdentityInterface);
+    assertFalse(object instanceof MyJsFunctionWithOnlyInstanceofReference);
     assertFalse(object instanceof MyJsFunctionInterfaceImpl);
     assertTrue(object instanceof ElementLikeJsInterface);
   }
@@ -241,6 +243,7 @@ public class JsFunctionTest extends GWTTestCase {
     assertTrue(object instanceof MyJsFunctionInterface);
     assertTrue(object instanceof MyJsFunctionInterfaceImpl);
     assertTrue(object instanceof MyJsFunctionIdentityInterface);
+    assertTrue(object instanceof MyJsFunctionWithOnlyInstanceofReference);
     // TODO: unexpected behavior. Anything can be instanceof a JsType(without prototype).
     assertFalse(object instanceof ElementLikeJsInterface);
   }

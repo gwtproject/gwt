@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad15b184_5ff0735f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-13T17:13:48Z",
+      "side": 1,
+      "message": "maybe refactor this code into maybeRescueJsoImplementor. I have seen code similar to this in this file.",
+      "range": {
+        "startLine": 195,
+        "startChar": 6,
+        "endLine": 208,
+        "endChar": 9
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_ff267fb2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-13T17:13:48Z",
+      "side": 1,
+      "message": "rescueAndInstantiateSuperInterfaces? This also rescues members which I found surprising....\n\nMaybe rescueMembersAndInstantiateSuperInterfaces?",
+      "range": {
+        "startLine": 237,
+        "startChar": 8,
+        "endLine": 237,
+        "endChar": 29
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_1f543bd9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-13T17:13:48Z",
+      "side": 1,
+      "message": "Rewrite. Maybe along the lines\n\nTechnically, JsType/JsFunction are also instantiatable in JavaScript but instead of treating them as JSOs (where basically casts, and appearance as parameter or return return types make them live), we take a different approach. A JsType/JsFunction is considered instantiable in JS if there is an exported constructor or an instance method gets called.",
+      "range": {
+        "startLine": 512,
+        "startChar": 6,
+        "endLine": 513,
+        "endChar": 99
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_9f0aebd1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-13T17:13:48Z",
+      "side": 1,
+      "message": "This code is similar to the one mentioned in my first comment in this file. Should it not be the same?",
+      "range": {
+        "startLine": 592,
+        "startChar": 0,
+        "endLine": 596,
+        "endChar": 7
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

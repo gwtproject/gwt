@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ad15b184_99d15d02",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-14T00:31:40Z",
+      "side": 1,
+      "message": "My mistake. Good catch.",
+      "parentUuid": "ad15b184_ddf466d5",
+      "range": {
+        "startLine": 237,
+        "startChar": 8,
+        "endLine": 237,
+        "endChar": 29
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad15b184_1dd6fe45",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 1
@@ -95,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ad15b184_595405da",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-14T00:31:40Z",
+      "side": 1,
+      "message": "Comment looks like a copy paste error. I updated it.\n\nIf we don\u0027t rescue the the type, then instanceof replaced with null check as there are no instances. I already added a test case that reproduces this exact problem. e.g.\n\n  assertTrue(createJso() instanceof MyJsInterfaceWithNoOtherReference)\n\nwill be re-written as createJso() \u003d\u003d null if we don\u0027t rescue the JsType here.",
+      "parentUuid": "ad15b184_1dd6fe45",
+      "range": {
+        "startLine": 302,
+        "startChar": 90,
+        "endLine": 302,
+        "endChar": 91
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad15b184_a2cce76a",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 1
@@ -106,6 +154,30 @@
       "writtenOn": "2015-05-13T20:52:13Z",
       "side": 1,
       "message": "I think rescueAndInstantiate is more readable than rescue(type, true)  I had to lookup what the boolean meant (reference? instantiated?)",
+      "range": {
+        "startLine": 442,
+        "startChar": 10,
+        "endLine": 442,
+        "endChar": 11
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_d93f5584",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-14T00:31:40Z",
+      "side": 1,
+      "message": "We tried a few combination but I\u0027ll take a look at this one more time.",
+      "parentUuid": "ad15b184_a2cce76a",
       "range": {
         "startLine": 442,
         "startChar": 10,
@@ -165,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "ad15b184_fca79f87",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-14T00:31:40Z",
+      "side": 1,
+      "message": "As I described in an another discussion, it doesn\u0027t seem feasible to track JsTypes across java/javascript boundary so we cannot precisely know which types escape to JS (this is because native bounding method (e.g. an export) can use super types or Object class (e.g. Map).\n\nThis means that, if there is a JsType that is instantiated, we need to keep its all JsType methods.\n\nI don\u0027t know if you recall it, but to overcome this issue, I earlier suggested @JsImplicit so that we could more precisely track type at boundary APIs. For example;\n\n  native void put(String key, @JsImplicit(Object.class) Object value)\n\nBy using JsImplicit in above example, we are promising the compiler that we will only ever call Object class methods from the javascript side. Using this extra information, compiler can trim down which methods to keep alive for JsTypes. (Even now I can see cases where this will be not enough (e.g. what happens if we pass a Map to javascript and javacript accesses objects inside it?).\n\nAnyway, right now I don\u0027t see an option. If I have a concrete type that implement JsType or if I have a concrete JsType, this means it is meant to be called from javascript and it is not optimizable as well as a regular non-jstype.",
+      "parentUuid": "ad15b184_e269bf24",
+      "range": {
+        "startLine": 512,
+        "startChar": 6,
+        "endLine": 513,
+        "endChar": 99
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad15b184_7dea92a2",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
         "patchSetId": 1
@@ -176,6 +272,30 @@
       "writtenOn": "2015-05-13T20:58:45Z",
       "side": 1,
       "message": "You may need to change this to not rescue JInterfaceType",
+      "range": {
+        "startLine": 566,
+        "startChar": 62,
+        "endLine": 566,
+        "endChar": 63
+      },
+      "revId": "e749de262c3d6deaafdff89720f577352af189cd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_3c8bf7ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-14T00:31:40Z",
+      "side": 1,
+      "message": "rluble is looking for that in a separate patch (we don\u0027t think this is a regression).",
+      "parentUuid": "ad15b184_7dea92a2",
       "range": {
         "startLine": 566,
         "startChar": 62,

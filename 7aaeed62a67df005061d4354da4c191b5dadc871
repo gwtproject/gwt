@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "cd8d8546_b4db6814",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-14T02:56:32Z",
+      "side": 0,
+      "message": "We changed the code to only traverse referenced types (as opposed to iterating references,entry methods and instantiations) so the whole assertion seemed unnecessary.",
+      "parentUuid": "ad15b184_ffc15f9f",
+      "range": {
+        "startLine": 411,
+        "startChar": 5,
+        "endLine": 411,
+        "endChar": 6
+      },
+      "revId": "7aaeed62a67df005061d4354da4c191b5dadc871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad15b184_bd552a24",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
         "patchSetId": 1
@@ -83,6 +107,30 @@
       "writtenOn": "2015-05-13T20:52:13Z",
       "side": 0,
       "message": "Why is this no longer needed? Or was it never needed?",
+      "range": {
+        "startLine": 485,
+        "startChar": 0,
+        "endLine": 485,
+        "endChar": 23
+      },
+      "revId": "7aaeed62a67df005061d4354da4c191b5dadc871",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd8d8546_34c7784a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Pruner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-14T02:56:32Z",
+      "side": 0,
+      "message": "This was not needed; IIRC even without my other changes removing this worked fine.",
+      "parentUuid": "ad15b184_bd552a24",
       "range": {
         "startLine": 485,
         "startChar": 0,

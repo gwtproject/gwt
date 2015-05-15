@@ -87,14 +87,11 @@ public class JavaClassHierarchySetupUtil {
    */
   private static native JavaScriptObject createSubclassPrototype(
       JavaScriptObject superTypeIdOrPrototype) /*-{
-    var superPrototype;
-    if (typeof superTypeIdOrPrototype != 'number') {
-      // Either it is null or the prototype of the super type.
-      superPrototype = (superTypeIdOrPrototype && superTypeIdOrPrototype.prototype) || {};
-    } else {
+    var superPrototype = superTypeIdOrPrototype && superTypeIdOrPrototype.prototype;
+    if (!superPrototype) {
+      // If it is not a prototype, then it should be a type id.
       superPrototype = @JavaClassHierarchySetupUtil::prototypesByTypeId[superTypeIdOrPrototype];
     }
-
     return @JavaClassHierarchySetupUtil::portableObjCreate(*)(superPrototype);
   }-*/;
 
@@ -225,3 +222,4 @@ public class JavaClassHierarchySetupUtil {
     return @com.google.gwt.lang.LongLib::toDouble(Lcom/google/gwt/lang/LongLibBase$LongEmul;)(o);
   }-*/;
 }
+

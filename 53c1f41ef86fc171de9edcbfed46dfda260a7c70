@@ -16,6 +16,46 @@
       "revId": "53c1f41ef86fc171de9edcbfed46dfda260a7c70",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd8d8546_284d3eca",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-15T21:34:17Z",
+      "side": 1,
+      "message": "I like this implementation (hopefully numbers and strings will never have a prototype property).",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 5
+      },
+      "revId": "53c1f41ef86fc171de9edcbfed46dfda260a7c70",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "edb169f2_4055ffa5",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-15T21:34:17Z",
+      "side": 1,
+      "message": "unnecessary blank line.",
+      "revId": "53c1f41ef86fc171de9edcbfed46dfda260a7c70",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

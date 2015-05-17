@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdabc59c_040ada58",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-05-17T16:40:52Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "e96aa220b86207cfae6ab14d1f8cf45970587336",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdabc59c_e40ece6a",
+        "filename": "user/test/com/google/gwt/place/impl/PlaceHistoryMapperGeneratorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-05-17T16:40:52Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "e96aa220b86207cfae6ab14d1f8cf45970587336",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdabc59c_c413d290",
+        "filename": "user/test/com/google/gwt/place/impl/PlaceHistoryMapperGeneratorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-05-17T16:40:52Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "e96aa220b86207cfae6ab14d1f8cf45970587336",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdabc59c_a418c6ab",
+        "filename": "user/test/com/google/gwt/place/impl/PlaceHistoryMapperGeneratorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-05-17T16:40:52Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "e96aa220b86207cfae6ab14d1f8cf45970587336",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

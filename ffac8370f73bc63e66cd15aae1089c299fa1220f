@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d179dd9_3e8711ac",
+        "filename": "user/src/com/google/gwt/http/client/Request.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-05-20T10:36:30Z",
+      "side": 1,
+      "message": "Must be final as sub classes should not be able to replace the implementation.",
+      "range": {
+        "startLine": 233,
+        "startChar": 2,
+        "endLine": 233,
+        "endChar": 12
+      },
+      "revId": "ffac8370f73bc63e66cd15aae1089c299fa1220f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

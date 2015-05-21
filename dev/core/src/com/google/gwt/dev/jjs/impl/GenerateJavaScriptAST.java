@@ -2553,6 +2553,9 @@ public class GenerateJavaScriptAST {
       // check if there's an overriding prototype
       JInterfaceType jsPrototypeIntf = JProgram.maybeGetJsTypeFromPrototype(superClass);
       String jsPrototype = jsPrototypeIntf != null ? jsPrototypeIntf.getJsPrototype() : null;
+      if (x.isOrExtendsJsFunction()) {
+        jsPrototype = "Function";
+      }
 
       List<JsExpression> defineClassArguments = Lists.newArrayList();
 

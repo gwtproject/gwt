@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cda1050e_b7966a49",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2556,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-22T00:23:25Z",
+      "side": 1,
+      "message": "Add a TODO here to remember to stash Object methods.",
+      "revId": "55223c38bb9ef4c6a6586790aec02dc3d7ecfe52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

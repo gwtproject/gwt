@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cdcae5dd_09f2cde6",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-22T19:28:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6da65929_6eff0f2d",
+      "range": {
+        "startLine": 382,
+        "startChar": 12,
+        "endLine": 382,
+        "endChar": 33
+      },
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6da65929_ee23ff5d",
         "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2015-05-22T17:35:17Z",
       "side": 1,
       "message": "rename the same way i requested in RapidTypeAnalyzer",
+      "range": {
+        "startLine": 384,
+        "startChar": 55,
+        "endLine": 384,
+        "endChar": 76
+      },
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcae5dd_49ecc508",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-22T19:28:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6da65929_ee23ff5d",
       "range": {
         "startLine": 384,
         "startChar": 55,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "cdcae5dd_a909f965",
+        "filename": "dev/core/src/com/google/gwt/dev/StringAnalyzableTypeEnvironment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-22T19:28:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6da65929_8e635b40",
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6da65929_4eafb35d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
         "patchSetId": 1
@@ -76,6 +142,30 @@
       "writtenOn": "2015-05-22T17:35:17Z",
       "side": 1,
       "message": "format this field the same as the other fields.",
+      "range": {
+        "startLine": 86,
+        "startChar": 39,
+        "endLine": 86,
+        "endChar": 40
+      },
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcae5dd_890ebd69",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-22T19:28:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6da65929_4eafb35d",
       "range": {
         "startLine": 86,
         "startChar": 39,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "cdcae5dd_c918b5ad",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-22T19:28:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6da65929_ee481f40",
+      "range": {
+        "startLine": 133,
+        "startChar": 14,
+        "endLine": 133,
+        "endChar": 35
+      },
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6da65929_0ed92bf5",
         "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
         "patchSetId": 1
@@ -122,6 +236,24 @@
       "writtenOn": "2015-05-22T17:35:17Z",
       "side": 1,
       "message": "nice test coverage",
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdcae5dd_29fea9aa",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-22T19:28:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6da65929_0ed92bf5",
       "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

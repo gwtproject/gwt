@@ -83,7 +83,7 @@ public class MinimalRebuildCacheManagerTest extends TestCase {
     typeEnvironment.recordMethodCallsMethod("Foo::start()V", "Bar::run()V");
     typeEnvironment.recordMethodInstantiatesType("Bar::start()V", "Baz");
     typeEnvironment.recordMethodCallsMethod("Bar::run()V", "Baz::run()V");
-    startingCache.computeReachableTypeNames();
+    startingCache.computeReachableTypeNames(false);
     startingCache.computeAndClearStaleTypesCache(TreeLogger.NULL,
         new JTypeOracle(null, startingCache));
     startingCache.addExportedGlobalName("alert", "Window");

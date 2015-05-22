@@ -72,12 +72,18 @@ public class RapidTypeAnalyzer {
      * none.
      */
     IntArrayList getTypeIdsInstantiatedIn(int methodId);
+
+    /**
+     * Returns the ids of interfaces implemented by this type id.
+     */
+    int[] getImplementedInterfaceTypeIds(int typeId);
   }
 
   /**
    * Contains control flow indexes upon which this analysis is based.
    */
   private AnalyzableTypeEnvironment analyzableTypeEnvironment;
+  private boolean closureCompilerFormat;
 
   /**
    * The set of ids of types which have so far been found to be instantiated. They are tracked so
@@ -123,8 +129,10 @@ public class RapidTypeAnalyzer {
    */
   private IntStack unprocessedReachableMethodIds = new IntStack();
 
-  public RapidTypeAnalyzer(AnalyzableTypeEnvironment analyzableTypeEnvironment) {
+  public RapidTypeAnalyzer(AnalyzableTypeEnvironment analyzableTypeEnvironment,
+      boolean closureCompilerFormat) {
     this.analyzableTypeEnvironment = analyzableTypeEnvironment;
+    this.closureCompilerFormat = closureCompilerFormat;
   }
 
   /**
@@ -243,6 +251,15 @@ public class RapidTypeAnalyzer {
       int superTypeId = analyzableTypeEnvironment.getSuperTypeId(typeId);
       if (superTypeId != -1) {
         markTypeIdInstantiated(superTypeId);
+      }
+
+      if (closureCompilerFormat) {
+        for (int interfaceTypeId : analyzableTypeEnvironment
+            .getImplementedInterfaceTypeIds(typeId)) {
+          if (interfaceTypeId != -1) {
+            markTypeIdInstantiated(interfaceTypeId);
+          }
+        }
       }
     }
   }

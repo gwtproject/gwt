@@ -1366,6 +1366,33 @@ public class CompilerTest extends ArgProcessorTestBase {
         originalResources, relinkMinimalRebuildCache, emptySet, output);
   }
 
+  /**
+   * Test that @JsType interfaces in -XclosureFormattedOutput produce empty function
+   * declaration representing the interface.
+   */
+  public void testJsTypeInterfacesInClosureFormatAreInOutput() throws Exception {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setJsInteropMode(OptionJsInteropMode.Mode.JS);
+    compilerOptions.setClosureCompilerFormatEnabled(true);
+    String js = compileToJs(compilerOptions, Files.createTempDir(), "com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, gwtCreateEntryPointResource),
+        new MinimalRebuildCache(), emptySet, JsOutputOption.DETAILED);
+    assertTrue(js.contains("function com_foo_TestEntryPoint$MyJsTypeInterface(){"));
+  }
+
+  /**
+   * Test that @JsType interfaces do not produce empty function declarations when not in
+   * closure format mode.
+   */
+  public void testJsTypeInterfacesNotInNonClosureFormatOutput() throws Exception {
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setJsInteropMode(OptionJsInteropMode.Mode.JS);
+    String js = compileToJs(compilerOptions, Files.createTempDir(), "com.foo.SimpleModule",
+        Lists.newArrayList(simpleModuleResource, gwtCreateEntryPointResource),
+        new MinimalRebuildCache(), emptySet, JsOutputOption.DETAILED);
+    assertFalse(js.contains("function com_foo_TestEntryPoint$MyJsTypeInterface(){"));
+  }
+
   private void checkIncrementalRecompile_noop(JsOutputOption output) throws UnableToCompleteException,
       IOException, InterruptedException {
     MinimalRebuildCache relinkMinimalRebuildCache = new MinimalRebuildCache();

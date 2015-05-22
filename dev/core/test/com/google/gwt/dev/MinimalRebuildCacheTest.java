@@ -87,7 +87,7 @@ public class MinimalRebuildCacheTest extends TestCase {
     // Ensure the types are known to be reachable.
     minimalRebuildCache.setRootTypeNames(Sets.newHashSet("Foo", "Bar", "Baz"));
     minimalRebuildCache.setEntryMethodNames(Lists.newArrayList("Bar::start()"));
-    minimalRebuildCache.computeReachableTypeNames();
+    minimalRebuildCache.computeReachableTypeNames(false);
 
     // Request clearing of cache related to stale types.
     minimalRebuildCache.computeAndClearStaleTypesCache(TreeLogger.NULL,

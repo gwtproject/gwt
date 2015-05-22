@@ -782,7 +782,8 @@ public final class JavaToJavaScriptCompiler {
        */
       if (options.isIncrementalCompileEnabled()) {
         transformer = new JsTypeLinker(logger, transformer, v.getClassRanges(),
-            v.getProgramClassRange(), getMinimalRebuildCache(), jprogram.typeOracle);
+            v.getProgramClassRange(), getMinimalRebuildCache(), jprogram.typeOracle,
+            options.isClosureCompilerFormatEnabled());
         transformer.exec();
       }
 

@@ -107,6 +107,10 @@ public class JTypeOracle implements Serializable {
       return immediateSuperclassesByClass.isEmpty() && immediateSuperInterfacesByInterface.isEmpty()
           && immediateImplementedInterfacesByClass.isEmpty();
     }
+
+    public Multimap<String, String> getImmediateInterfacesImplementedByClass() {
+      return immediateImplementedInterfacesByClass;
+    }
   }
 
   /**

@@ -149,6 +149,24 @@
     },
     {
       "key": {
+        "uuid": "cdcae5dd_09880d22",
+        "filename": "dev/core/src/com/google/gwt/dev/StringAnalyzableTypeEnvironment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-05-22T19:35:47Z",
+      "side": 1,
+      "message": "Weird, didn\u0027t pick up that file when I pushed. I\u0027ll send an update shortly.",
+      "parentUuid": "cdcae5dd_6921c1ca",
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6da65929_4eafb35d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
         "patchSetId": 1

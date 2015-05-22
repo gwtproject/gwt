@@ -379,9 +379,11 @@ public class MinimalRebuildCache implements Serializable {
    * <p>
    * Should only be called once per compile, so that the "lastReachableTypeNames" list accurately
    * reflects the reachable types of the immediately previous compile.
+   * @param closureCompilerFormat
    */
-  public Set<String> computeReachableTypeNames() {
-    RapidTypeAnalyzer rapidTypeAnalyzer = new RapidTypeAnalyzer(typeEnvironment);
+  public Set<String> computeReachableTypeNames(boolean closureCompilerFormat) {
+    RapidTypeAnalyzer rapidTypeAnalyzer = new RapidTypeAnalyzer(typeEnvironment,
+        closureCompilerFormat);
 
     // Artificially reach and traverse immortal codegen types since references to these may have
     // been synthesized in JS generation. These will not be pruned.

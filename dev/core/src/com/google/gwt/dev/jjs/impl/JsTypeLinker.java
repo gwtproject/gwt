@@ -48,6 +48,7 @@ public class JsTypeLinker extends JsAbstractTextTransformer {
   private final JsSourceMapExtractor jsSourceMapExtractor;
   private final Set<String> linkedTypeNames = Sets.newHashSet();
   private TreeLogger logger;
+  private final boolean closureCompilerFormatEnabled;
   private final MinimalRebuildCache minimalRebuildCache;
   private final StatementRangesBuilder statementRangesBuilder = new StatementRangesBuilder();
   private final StatementRangesExtractor statementRangesExtractor;
@@ -56,9 +57,11 @@ public class JsTypeLinker extends JsAbstractTextTransformer {
 
   public JsTypeLinker(TreeLogger logger, JsAbstractTextTransformer textTransformer,
       List<NamedRange> typeRanges, NamedRange programTypeRange,
-      MinimalRebuildCache minimalRebuildCache, JTypeOracle typeOracle) {
+      MinimalRebuildCache minimalRebuildCache, JTypeOracle typeOracle,
+      boolean closureCompilerFormatEnabled) {
     super(textTransformer);
     this.logger = logger;
+    this.closureCompilerFormatEnabled = closureCompilerFormatEnabled;
     this.statementRangesExtractor = new StatementRangesExtractor(statementRanges);
     this.jsSourceMapExtractor = sourceInfoMap.createExtractor();
     this.typeRanges = typeRanges;
@@ -88,7 +91,8 @@ public class JsTypeLinker extends JsAbstractTextTransformer {
 
   private List<String> computeReachableTypes() {
     List<String> reachableTypeNames =
-        Lists.newArrayList(minimalRebuildCache.computeReachableTypeNames());
+        Lists.newArrayList(minimalRebuildCache.computeReachableTypeNames(
+            closureCompilerFormatEnabled));
     Collections.sort(reachableTypeNames);
     return reachableTypeNames;
   }

@@ -126,6 +126,19 @@ public class StringAnalyzableTypeEnvironment implements AnalyzableTypeEnvironmen
     return instantiatedTypeIdsByMethodId.get(inMethodId);
   }
 
+  @Override
+  public int[] getImplementedInterfaceTypeIds(int typeId) {
+    String typeName = getTypeNameById(typeId);
+    Collection<String> interfaceNames = minimalRebuildCache.getImmediateTypeRelations()
+        .getImmediateInterfacesImplementedByClass().get(typeName);
+    int[] interfaceIds = new int[interfaceNames.size()];
+    int i = 0;
+    for (String interfaceName : interfaceNames) {
+      interfaceIds[i++] = getTypeIdByName(interfaceName);
+    }
+    return interfaceIds;
+  }
+
   public void recordExportedMethodInType(String methodName, String typeName) {
     int typeId = getTypeIdByName(typeName);
     int methodId = getMethodIdByName(methodName);

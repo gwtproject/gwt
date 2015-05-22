@@ -91,7 +91,7 @@ public class NullRebuildCache extends MinimalRebuildCache {
   }
 
   @Override
-  public Set<String> computeReachableTypeNames() {
+  public Set<String> computeReachableTypeNames(boolean closureCompilerFormat) {
     throw new UnsupportedOperationException(failMessage);
   }
 

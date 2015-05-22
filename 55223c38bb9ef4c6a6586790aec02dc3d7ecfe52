@@ -16,6 +16,24 @@
       "revId": "55223c38bb9ef4c6a6586790aec02dc3d7ecfe52",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4daef5fa_552e1e3a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2556,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-05-22T01:29:24Z",
+      "side": 1,
+      "message": "Done. I put it down below as this is not specific to jsfunction.",
+      "parentUuid": "cda1050e_b7966a49",
+      "revId": "55223c38bb9ef4c6a6586790aec02dc3d7ecfe52",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

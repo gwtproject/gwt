@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6da65929_6eff0f2d",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-05-22T17:35:17Z",
+      "side": 1,
+      "message": "remove @param",
+      "range": {
+        "startLine": 382,
+        "startChar": 12,
+        "endLine": 382,
+        "endChar": 33
+      },
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6da65929_ee23ff5d",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-05-22T17:35:17Z",
+      "side": 1,
+      "message": "rename the same way i requested in RapidTypeAnalyzer",
+      "range": {
+        "startLine": 384,
+        "startChar": 55,
+        "endLine": 384,
+        "endChar": 76
+      },
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6da65929_8e635b40",
+        "filename": "dev/core/src/com/google/gwt/dev/StringAnalyzableTypeEnvironment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-05-22T17:35:17Z",
+      "side": 1,
+      "message": "you may have noticed that the only other \"get\" function here that accesses getImmediateTypeRelations() and makes a bunch of calls to getTypeIdByName() is getSuperTypeId().\n\nthis is on purpose because doing is a lot slower than accessing already-built int-int indexes.\n\nthis is going to cost you roughly a couple hundred milliseconds on an incremental recompile of a large all that uses the Closure flag.\n\ni\u0027m sort of ok with it because it\u0027s not a huge impact, it will affect few apps, and it avoids needing to collect and save on disk a whole nother class-inteface index in MinimalRebuildCache (which would normally be populated in the RecordControlFlowVisitor).\n\nplease add a TODO to make this faster.",
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6da65929_4eafb35d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-05-22T17:35:17Z",
+      "side": 1,
+      "message": "format this field the same as the other fields.",
+      "range": {
+        "startLine": 86,
+        "startChar": 39,
+        "endLine": 86,
+        "endChar": 40
+      },
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6da65929_ee481f40",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RapidTypeAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-05-22T17:35:17Z",
+      "side": 1,
+      "message": "RapidTypeAnalyzer is a general purpose thing and doesn\u0027t know about application specific concepts like \"Closure\".\n\nwhat this boolean is really telling the RapidTypeAnalyzer is whether it should compute reachable interfaces. so that name of this parameter and field should be something along those lines",
+      "range": {
+        "startLine": 133,
+        "startChar": 14,
+        "endLine": 133,
+        "endChar": 35
+      },
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6da65929_0ed92bf5",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-05-22T17:35:17Z",
+      "side": 1,
+      "message": "nice test coverage",
+      "revId": "74f367bc4b6718c48981de03630088e3c2ca7151",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

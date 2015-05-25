@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "adc5b1ce_d1285706",
+        "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-05-25T07:34:11Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "29060fc4d08127de2a5f9e073a37afbcb128c348",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

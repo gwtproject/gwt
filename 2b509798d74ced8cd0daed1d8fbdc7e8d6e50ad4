@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd8f45ac_84ec0a0a",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeArrayTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-26T16:32:52Z",
+      "side": 1,
+      "message": "This was never promised by GWT for non JStype objects. Should we consider all JsTyped fields of a JStype instantiated if the JsType is considered instantiated?",
+      "range": {
+        "startLine": 70,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 3
+      },
+      "revId": "2b509798d74ced8cd0daed1d8fbdc7e8d6e50ad4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d99cdfb_7f878baa",
+        "filename": "dev/core/src/com/google/gwt/dev/cfg/Properties.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-26T17:55:36Z",
+      "side": 1,
+      "message": "Should this throw? I think it should only be a warning if you set a property that does exist. But this is the existing behaviour, so let\u0027s keep it for now.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 7
+      },
+      "revId": "cfd26f1a7ba9b93e30bc60d5a5a0b01d0991b92a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

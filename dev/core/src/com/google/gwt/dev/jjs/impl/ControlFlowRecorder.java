@@ -19,9 +19,9 @@ import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
-import com.google.gwt.dev.jjs.ast.JNewInstance;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
@@ -143,22 +143,32 @@ public class ControlFlowRecorder extends JVisitor {
       stringAnalyzableTypeEnvironment.recordExportedMethodInType(currentMethodName, typeName);
     }
 
+    if (x.isConstructor()) {
+      // Constructor calls if reachable are deemed to instantiate the class.
+      recordCurrentMethodIntantiatesType(x.getEnclosingType());
+    }
+
     return true;
+  }
+
+  private void recordCurrentMethodIntantiatesType(JDeclaredType type) {
+    if (type == null) {
+      return;
+    }
+    String typeName = type.getName();
+    stringAnalyzableTypeEnvironment.recordMethodInstantiatesType(currentMethodName, typeName);
+    maybeRecordClinitCall(typeName);
+
+    recordCurrentMethodIntantiatesType(type.getSuperClass());
+    for (JInterfaceType interfaceType : type.getImplements()) {
+      recordCurrentMethodIntantiatesType(interfaceType);
+    }
   }
 
   @Override
   public boolean visit(JMethodCall x, Context ctx) {
     processMethodCall(x);
     return true;
-  }
-
-  @Override
-  public boolean visit(JNewInstance x, Context ctx) {
-    String typeName = x.getTarget().getEnclosingType().getName();
-    stringAnalyzableTypeEnvironment.recordMethodInstantiatesType(currentMethodName, typeName);
-    maybeRecordClinitCall(typeName);
-    // Apply JMethodCall handling as well.
-    return super.visit(x, ctx);
   }
 
   private void execImpl() {

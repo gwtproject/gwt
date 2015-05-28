@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6d1bb95b_feffeef7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowRecorder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-28T21:44:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d54fde2_ffcc6b0a",
+      "range": {
+        "startLine": 148,
+        "startChar": 6,
+        "endLine": 148,
+        "endChar": 40
+      },
+      "revId": "6bcf432f8a63cfaf76c715ff5cf21cf649a9fb11",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed56c9ec_788b30ef",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowRecorder.java",
         "patchSetId": 2
@@ -107,6 +131,30 @@
       "side": 1,
       "message": "Well that was a choice. Either there or guarding the recursion on superclass. You choice.",
       "parentUuid": "ed56c9ec_788b30ef",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 4
+      },
+      "revId": "6bcf432f8a63cfaf76c715ff5cf21cf649a9fb11",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d1bb95b_9e98baf2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowRecorder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-05-28T21:44:46Z",
+      "side": 1,
+      "message": "Guarded the recursion on the supertype instead. It reads better.",
+      "parentUuid": "6d1bb95b_cc86236b",
       "range": {
         "startLine": 212,
         "startChar": 0,

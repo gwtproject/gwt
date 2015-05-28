@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d54fde2_ffcc6b0a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowRecorder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-05-28T00:27:13Z",
+      "side": 1,
+      "message": "that\u0027s spelled \"instantiates\"",
+      "range": {
+        "startLine": 148,
+        "startChar": 6,
+        "endLine": 148,
+        "endChar": 40
+      },
+      "revId": "6bcf432f8a63cfaf76c715ff5cf21cf649a9fb11",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed56c9ec_788b30ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowRecorder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-05-28T00:27:13Z",
+      "side": 1,
+      "message": "is this null check actually needed?",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 4
+      },
+      "revId": "6bcf432f8a63cfaf76c715ff5cf21cf649a9fb11",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -63,7 +63,6 @@ import com.google.gwt.dev.jjs.ast.JPermutationDependentValue;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
-import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
@@ -974,6 +973,7 @@ public class UnifyAst {
   private void assimilateSourceUnit(CompilationUnit unit, boolean reportErrors) {
     if (unit.isError()) {
       if (failedUnits.add(unit) && reportErrors) {
+        CompilationProblemReporter.reportErrors(logger, unit, false);
         CompilationProblemReporter.logErrorTrace(logger, TreeLogger.ERROR,
             compilerContext, unit.getTypeName(), true);
         errorsFound = true;
@@ -1226,7 +1226,7 @@ public class UnifyAst {
       info = method.getSourceInfo();
     }
     block.clear();
-    block.addStmt(new JReturnStatement(info, returnValue));
+    block.addStmt(returnValue.makeReturnStatement());
   }
 
   private void initializeNameBasedLocators() {

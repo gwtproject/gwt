@@ -184,4 +184,7 @@ public class Java8Test extends GWTTestCase {
 
   public void testInterfaceThis() {
   }
+
+  public void testSameMethodHandleRegression() {
+  }
 }

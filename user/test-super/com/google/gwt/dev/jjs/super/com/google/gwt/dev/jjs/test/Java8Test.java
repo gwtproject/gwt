@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.test;
 
 import com.google.gwt.core.client.GwtScriptOnly;
+import com.google.gwt.dev.jjs.test.java8.ClassWithMethodHandleReference;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -997,6 +998,22 @@ public class Java8Test extends GWTTestCase {
   }
 
   public void testInterfaceThis() {
+    class A implements InterfaceWithThisReference {
+      public String n() {
+        return "n";
+      }
+    }
+    assertEquals("Object super n", new A().callNUnqualified());
+    assertEquals("Object super n", new A().callNWithThis());
+    assertEquals("Object n", new A().callNWithInterfaceThis());
+    assertEquals("Object super n", new A().callNWithSuper());
+    assertEquals("Object default n", new A().callNWithInterfaceSuper());
+  }
+
+  /**
+   * Test for issue 9190.
+   */
+  public void testSameMethodHandleRegression() {
     class A implements InterfaceWithThisReference {
       public String n() {
         return "n";

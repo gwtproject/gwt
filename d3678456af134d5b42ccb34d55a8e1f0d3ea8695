@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99e914d2_dc4d8dbe",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JavaAstVerifier.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-05T00:56:29Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "d3678456af134d5b42ccb34d55a8e1f0d3ea8695",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

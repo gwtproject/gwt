@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f923f0e9_2a2c5fd2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/GwtAstBuilderTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-06-05T01:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d96c6c17_00d20745",
+      "revId": "29a85668eabb7e377b5fd1c9f0e4ec34839698b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d96c6c17_60de5b53",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-03T23:26:41Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "29a85668eabb7e377b5fd1c9f0e4ec34839698b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f923f0e9_8a1c6b9d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-06-05T01:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d96c6c17_60de5b53",
       "revId": "29a85668eabb7e377b5fd1c9f0e4ec34839698b3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

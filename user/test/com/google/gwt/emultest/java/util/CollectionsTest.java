@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import com.google.gwt.core.client.JavaScriptException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,7 +34,22 @@ import java.util.Set;
  * Test various collections.
  */
 public class CollectionsTest extends EmulTestBase {
+  
+  static class MyInt {
+    int data;
 
+    public MyInt(int value) {
+      data = value;
+    }
+
+    public int compareTo(MyInt object) {
+      return data > object.data ? 1 : (data < object.data ? -1 : 0);
+    }
+  }
+  static Object[] objArray;
+  
+  static Object[] myobjArray;
+  
   public static List<Integer> createRandomList() {
     ArrayList<Integer> l = new ArrayList<Integer>();
     l.add(new Integer(5));
@@ -42,6 +59,7 @@ public class CollectionsTest extends EmulTestBase {
     l.add(new Integer(4));
     return l;
   }
+
 
   public static List<String> createSortedList() {
     ArrayList<String> l = new ArrayList<String>();
@@ -53,6 +71,15 @@ public class CollectionsTest extends EmulTestBase {
 
   private static Entry<String, String> dummyEntry() {
     return Collections.singletonMap("foo", "bar").entrySet().iterator().next();
+  }
+
+  {
+    objArray = new Object[1000];
+    myobjArray = new Object[1000];
+    for (int i = 0; i < objArray.length; i++) {
+      objArray[i] = new Integer(i);
+      myobjArray[i] = new MyInt(i);
+    }
   }
 
   public void testAsLifoQueue() {
@@ -275,7 +302,66 @@ public class CollectionsTest extends EmulTestBase {
     Collections.reverse(b);
     assertEquals(b, createRandomList());
   }
+  
+  /**
+   * @tests java.util.Collections#rotate(java.util.List, int)
+   */
+  public void testRotate2() {
+    List list = new ArrayList();
+    try {
+      Collections.rotate(list, 5);
+    } catch (UnsupportedOperationException e) {
+      fail("Unexpected UnsupportedOperationException for empty list, "
+          + e);
+    }
 
+    list.add(0, "zero");
+    list.add(1, "one");
+    list.add(2, "two");
+    list.add(3, "three");
+    list.add(4, "four");
+
+    Collections.rotate(list, Integer.MIN_VALUE);
+    assertEquals("Rotated incorrectly at position 0, ", "three",
+        (String) list.get(0));
+    assertEquals("Rotated incorrectly at position 1, ", "four",
+        (String) list.get(1));
+    assertEquals("Rotated incorrectly at position 2, ", "zero",
+        (String) list.get(2));
+    assertEquals("Rotated incorrectly at position 3, ", "one",
+        (String) list.get(3));
+    assertEquals("Rotated incorrectly at position 4, ", "two",
+        (String) list.get(4));
+  }
+
+  /**
+   * @tests java.util.Collections#rotate(java.util.List, int)
+   */
+  public void testRotateLjavaUtilListI() {
+    // Test for method rotate(java.util.List, int)
+
+    try {
+      Collections.rotate(null, 0);
+      fail("Expected NullPointerException for null list parameter");
+    } catch (NullPointerException | JavaScriptException e) {
+            //Expected
+    }
+
+    // Test rotating a Sequential Access List
+    LinkedList list1 = new LinkedList();
+    for (int i = 0; i < 10; i++) {
+      list1.add(objArray[i]);
+    }
+    testRotate(list1, "Sequential Access");
+
+    // Test rotating a Random Access List
+    ArrayList list2 = new ArrayList();
+    for (int i = 0; i < 10; i++) {
+      list2.add(objArray[i]);
+    }
+    testRotate(list2, "Random Access");
+  }
+  
   public void testSort() {
     List<String> a = createSortedList();
     Collections.reverse(a);
@@ -297,6 +383,7 @@ public class CollectionsTest extends EmulTestBase {
     assertEquals(expected, a);
   }
 
+
   public void testToArray() {
     List<Integer> testList = createRandomList();
     Integer[] testArray = new Integer[testList.size()];
@@ -305,5 +392,60 @@ public class CollectionsTest extends EmulTestBase {
       Integer val = testList.get(i);
       assertEquals(val, testArray[i]);
     }
+  }
+
+  private String getString(List list) {
+    StringBuffer buffer = new StringBuffer();
+    for (int i = 0; i < list.size(); i++) {
+      buffer.append(list.get(i));
+    }
+    return buffer.toString();
+  }
+
+  private void testRotate(List list, String type) {
+    // rotate with positive distance
+    Collections.rotate(list, 7);
+    assertEquals("Test1: rotate modified the " + type
+        + " list incorrectly,", "3456789012", getString(list));
+
+    // rotate with negative distance
+    Collections.rotate(list, -2);
+    assertEquals("Test2: rotate modified the " + type
+        + " list incorrectly,", "5678901234", getString(list));
+
+    // rotate sublist with negative distance
+    List subList = list.subList(1, 5);
+    Collections.rotate(subList, -1);
+    assertEquals("Test3: rotate modified the " + type
+        + " list incorrectly,", "5789601234", getString(list));
+
+    // rotate sublist with positive distance
+    Collections.rotate(subList, 2);
+    assertEquals("Test4: rotate modified the " + type
+        + " list incorrectly,", "5967801234", getString(list));
+
+    // rotate with positive distance that is larger than list size
+    Collections.rotate(list, 23);
+    assertEquals("Test5: rotate modified the " + type
+        + " list incorrectly,", "2345967801", getString(list));
+
+    // rotate with negative distance that is larger than list size
+    Collections.rotate(list, -23);
+    assertEquals("Test6: rotate modified the " + type
+        + " list incorrectly,", "5967801234", getString(list));
+
+    // rotate with 0 and equivalent distances, this should make no
+    // modifications to the list
+    Collections.rotate(list, 0);
+    assertEquals("Test7: rotate modified the " + type
+        + " list incorrectly,", "5967801234", getString(list));
+
+    Collections.rotate(list, -30);
+    assertEquals("Test8: rotate modified the " + type
+        + " list incorrectly,", "5967801234", getString(list));
+
+    Collections.rotate(list, 30);
+    assertEquals("Test9: rotate modified the " + type
+        + " list incorrectly,", "5967801234", getString(list));
   }
 }

@@ -1105,6 +1105,61 @@ public class Collections {
       }
     };
   }
+  
+  /**
+   * Rotates the elements in {@code list} by the distance {@code dist}
+   * <p>
+   * e.g. for a given list with elements [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], calling rotate(list, 3) or
+   * rotate(list, -7) would modify the list to look like this: [8, 9, 0, 1, 2, 3, 4, 5, 6, 7]
+   *
+   * @param lst the list whose elements are to be rotated.
+   * @param dist is the distance the list is rotated. This can be any valid integer. Negative values
+   *          rotate the list backwards.
+   */
+  @SuppressWarnings("unchecked")
+  public static void rotate(List<?> lst, int dist) {
+    List<Object> list = (List<Object>) lst;
+    int size = list.size();
+
+    // Can't sensibly rotate an empty collection
+    if (size == 0) {
+      return;
+    }
+
+    // normalize the distance
+    int normdist;
+    if (dist > 0) {
+      normdist = dist % size;
+    } else {
+      normdist = size - ((dist % size) * (-1));
+    }
+
+    if (normdist == 0 || normdist == size) {
+      return;
+    }
+
+    if (list instanceof RandomAccess) {
+      // make sure each element gets juggled
+      // with the element in the position it is supposed to go to
+      Object temp = list.get(0);
+      int index = 0, beginIndex = 0;
+      for (int i = 0; i < size; i++) {
+        index = (index + normdist) % size;
+        temp = list.set(index, temp);
+        if (index == beginIndex) {
+          index = ++beginIndex;
+          temp = list.get(beginIndex);
+        }
+      }
+    } else {
+      int divideIndex = (size - normdist) % size;
+      List<Object> sublist1 = list.subList(0, divideIndex);
+      List<Object> sublist2 = list.subList(divideIndex, size);
+      reverse(sublist1);
+      reverse(sublist2);
+      reverse(list);
+    }
+  }
 
   public static <T> Set<T> singleton(T o) {
     HashSet<T> set = new HashSet<T>(1);

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "59c15c6b_ba82314f",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T01:33:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9cfb89d_b5336022",
+      "range": {
+        "startLine": 1121,
+        "startChar": 4,
+        "endLine": 1121,
+        "endChar": 43
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9cfb89d_953864ff",
         "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2015-06-06T21:07:29Z",
       "side": 1,
       "message": "I would rewrite the conditions as\n\n  int size \u003d list.size();\n  if (dist \u003d\u003d 0 || size \u003d\u003d 0 || size \u003d\u003d dist) {\n    return;\n  }\n\nThese are all the easy cases for which we do not need to calculate anything at all.",
+      "range": {
+        "startLine": 1122,
+        "startChar": 4,
+        "endLine": 1127,
+        "endChar": 5
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59c15c6b_9a876d5f",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1127,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T01:33:08Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "b9cfb89d_953864ff",
       "range": {
         "startLine": 1122,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "59c15c6b_3a4e21ba",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T01:33:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99ce74a2_94dce456",
+      "range": {
+        "startLine": 1129,
+        "startChar": 0,
+        "endLine": 1139,
+        "endChar": 5
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99ce74a2_14d21446",
         "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2015-06-06T21:07:29Z",
       "side": 1,
       "message": "At this point \"normdist\" is always positive and always smaller than size. There is no reason to calculate a modulo.",
+      "range": {
+        "startLine": 1155,
+        "startChar": 24,
+        "endLine": 1155,
+        "endChar": 48
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59c15c6b_5a51d559",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T01:33:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99ce74a2_14d21446",
       "range": {
         "startLine": 1155,
         "startChar": 24,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "59c15c6b_3a7741fc",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T01:33:08Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "99ce74a2_b4d7e031",
+      "range": {
+        "startLine": 1156,
+        "startChar": 6,
+        "endLine": 1156,
+        "endChar": 18
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79c9c09b_33d5282e",
         "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2015-06-06T21:07:29Z",
       "side": 1,
       "message": "List\u003c?\u003e",
+      "range": {
+        "startLine": 1157,
+        "startChar": 6,
+        "endLine": 1157,
+        "endChar": 18
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59c15c6b_1a747df3",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1157,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T01:33:08Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "79c9c09b_33d5282e",
       "range": {
         "startLine": 1157,
         "startChar": 6,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "59c15c6b_fa5f896b",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T01:33:08Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "79c9c09b_13d22c46",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 2
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9cfb89d_754ee88c",
         "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
         "patchSetId": 1
@@ -174,6 +342,30 @@
       "writtenOn": "2015-06-06T21:07:29Z",
       "side": 1,
       "message": "Delete",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 5
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59c15c6b_da64c542",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T01:33:08Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "b9cfb89d_754ee88c",
       "range": {
         "startLine": 74,
         "startChar": 0,
@@ -266,6 +458,30 @@
       "writtenOn": "2015-06-06T21:07:29Z",
       "side": 1,
       "message": "Change to\n\n\n  public void testRotateImpl(ListImplProvider listImpl) {\n\n\n    // rotating empty list should not throw exception\n    List\u003cInteger\u003e list \u003d listImpl.copyOf(Collections.emptyList());\n    Collections.rotate(list, 2);\n    \n\n    List\u003cInteger\u003e original \u003d Arrays.asList(0, 1, 2, 3, 4);\n    List\u003cInteger\u003e list \u003d listImpl.copyOf(original);\n\n\n    Collections.rotate(list, 0);\n    assertEquals(original, list);\n\n\n    Collections.rotate(list, 3);\n    assertEquals(Arrays.asList(2, 3, 4, 0, 1), list);\n\n\n    Collections.rotate(list, list.size());\n    assertEquals(Arrays.asList(2, 3, 4, 0, 1), list);\n\n\n    Collections.rotate(list, list.size() + 3);\n    assertEquals(Arrays.asList(4, 0, 1, 2, 3), list);\n\n\n    Collections.rotate(list, -(list.size() + 3));\n    assertEquals(Arrays.asList(2, 3, 4, 0, 1), list);\n\n\n    Collections.rotate(list, -list.size());\n    assertEquals(Arrays.asList(2, 3, 4, 0, 1), list);\n\n\n    Collections.rotate(list, -3);\n    assertEquals(original, list);\n  }\n\n\nI think tests for rotating sub lists aren\u0027t needed.",
+      "range": {
+        "startLine": 405,
+        "startChar": 15,
+        "endLine": 405,
+        "endChar": 49
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59c15c6b_9dc52781",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T01:33:08Z",
+      "side": 1,
+      "message": "Done, but why public?",
+      "parentUuid": "99ce74a2_34ecf003",
       "range": {
         "startLine": 405,
         "startChar": 15,

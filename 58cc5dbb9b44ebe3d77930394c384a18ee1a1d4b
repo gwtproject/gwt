@@ -401,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "59c15c6b_1d6eb7f4",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T17:27:01Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "99ce74a2_74f268e6",
+      "range": {
+        "startLine": 309,
+        "startChar": 14,
+        "endLine": 309,
+        "endChar": 25
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79c9c09b_93dcfc56",
         "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
         "patchSetId": 1
@@ -435,6 +459,30 @@
       "writtenOn": "2015-06-06T21:07:29Z",
       "side": 1,
       "message": "Delete",
+      "range": {
+        "startLine": 397,
+        "startChar": 0,
+        "endLine": 403,
+        "endChar": 3
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59c15c6b_fd39c305",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T17:27:01Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "99ce74a2_54ef6cfa",
       "range": {
         "startLine": 397,
         "startChar": 0,
@@ -506,6 +554,30 @@
       "side": 1,
       "message": "Oh, yeah I meant private",
       "parentUuid": "59c15c6b_9dc52781",
+      "range": {
+        "startLine": 405,
+        "startChar": 15,
+        "endLine": 405,
+        "endChar": 49
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59c15c6b_dd3effeb",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-07T17:27:01Z",
+      "side": 1,
+      "message": "Changed it to private.",
+      "parentUuid": "99ce74a2_d43edceb",
       "range": {
         "startLine": 405,
         "startChar": 15,

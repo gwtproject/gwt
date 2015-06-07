@@ -491,6 +491,30 @@
       "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99ce74a2_d43edceb",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-06-07T12:10:05Z",
+      "side": 1,
+      "message": "Oh, yeah I meant private",
+      "parentUuid": "59c15c6b_9dc52781",
+      "range": {
+        "startLine": 405,
+        "startChar": 15,
+        "endLine": 405,
+        "endChar": 49
+      },
+      "revId": "58cc5dbb9b44ebe3d77930394c384a18ee1a1d4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

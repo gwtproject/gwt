@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b9d41838_c4ce0dd2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-06-09T18:39:10Z",
+      "side": 1,
+      "message": "Yes. In NormalizeVisitor.",
+      "parentUuid": "b9d41838_04ed3583",
+      "revId": "52dc0ff65a2a737a12c8de29293db63ab25caa7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9d41838_50c65ca8",
         "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "b9d41838_27a5d38b",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1444,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-06-09T18:39:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9d41838_50c65ca8",
+      "revId": "52dc0ff65a2a737a12c8de29293db63ab25caa7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9d41838_b0a6a00c",
         "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-09T17:41:37Z",
       "side": 1,
       "message": "from the discussion that initiated this bug-fix it seemed like the repro case was more complicated than this. does this new test fail without the fix?",
+      "revId": "52dc0ff65a2a737a12c8de29293db63ab25caa7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9d41838_a43421e6",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-06-09T18:39:10Z",
+      "side": 1,
+      "message": "Yes it does fail without the fix. I could simplify the repro case by testing the root cause.\n\nThis test fails without the patch because the \"compile/add reference/recompile\" creates the class literal in the epilogue whereas the \"compile with the reference\" creates the class literal in the class. I would argue that this is the root cause of the the problem, i.e. that the class literal is not created with the class.",
+      "parentUuid": "b9d41838_b0a6a00c",
       "revId": "52dc0ff65a2a737a12c8de29293db63ab25caa7c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

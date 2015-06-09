@@ -22,6 +22,30 @@
       "revId": "aca7791f402384decc108bd321f4abaa3dcf6206",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39c4a87c_6e6a9314",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-06-09T22:40:51Z",
+      "side": 1,
+      "message": "They get added classLiteralFields by resolveClassLiteralField and then at the end of this method recordClassLiteralFields will see those as well.",
+      "parentUuid": "b9d41838_6ed29047",
+      "range": {
+        "startLine": 381,
+        "startChar": 6,
+        "endLine": 381,
+        "endChar": 7
+      },
+      "revId": "aca7791f402384decc108bd321f4abaa3dcf6206",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9d41838_6ed29047",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-06-09T21:34:38Z",
+      "side": 1,
+      "message": "do these not need to be added to classLiteralFields/recordClassLiteralFields?",
+      "range": {
+        "startLine": 381,
+        "startChar": 6,
+        "endLine": 381,
+        "endChar": 7
+      },
+      "revId": "aca7791f402384decc108bd321f4abaa3dcf6206",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

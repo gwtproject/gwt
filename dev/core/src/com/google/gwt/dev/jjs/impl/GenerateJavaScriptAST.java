@@ -1977,7 +1977,9 @@ public class GenerateJavaScriptAST {
     }
 
     private void generateEpilogue(List<JsStatement> globalStmts) {
-      // Emit all the class literals for classes that where pruned.
+      // Emit all the class literals for primitives, intrinsic and classes that where pruned.
+      // TODO(rluble): literals referenced whose classes are not part of the current incremental
+      // compile will also be generated here redundantly. Fix.
       generateClassLiterals(globalStmts, Iterables.filter(classLiteralDeclarationsByType.keySet(),
           Predicates.not(Predicates.<JType>in(alreadyRan))));
 

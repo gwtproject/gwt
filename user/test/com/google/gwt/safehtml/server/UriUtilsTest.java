@@ -106,8 +106,9 @@ public class UriUtilsTest extends TestCase {
     goodUris.add(new UriTestCaseSpec("http://foo.com/bar", "http"));
     goodUris.add(new UriTestCaseSpec("http://foo.com/bar#baz", "http"));
 
-    // URIs with https, ftp, mailto scheme.
+    // URIs with https, ftp, mailto, tel scheme.
     goodUris.add(new UriTestCaseSpec("mailto:good@good.com", "mailto"));
+    goodUris.add(new UriTestCaseSpec("tel:+16502530000", "tel"));
     goodUris.add(new UriTestCaseSpec("https://foo.com", "https"));
     goodUris.add(new UriTestCaseSpec("ftp://foo.com", "ftp"));
 

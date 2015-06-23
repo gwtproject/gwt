@@ -40,7 +40,6 @@ import com.google.gwt.dev.util.arg.ArgHandlerGenDir;
 import com.google.gwt.dev.util.arg.ArgHandlerIncrementalCompileWarnings;
 import com.google.gwt.dev.util.arg.ArgHandlerJsInteropMode;
 import com.google.gwt.dev.util.arg.ArgHandlerJsonSoyc;
-import com.google.gwt.dev.util.arg.ArgHandlerMaxPermsPerPrecompile;
 import com.google.gwt.dev.util.arg.ArgHandlerMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.ArgHandlerMissingDepsFile;
 import com.google.gwt.dev.util.arg.ArgHandlerNamespace;
@@ -83,7 +82,6 @@ class PrecompileTaskArgProcessor extends CompileArgProcessor {
     registerHandler(new ArgHandlerIncrementalCompileWarnings());
     registerHandler(new ArgHandlerJsInteropMode(options));
     registerHandler(new ArgHandlerMaxPermsPerPrecompile(options));
-    registerHandler(new ArgHandlerMethodNameDisplayMode(options));
     registerHandler(new ArgHandlerMissingDepsFile());
     registerHandler(new ArgHandlerNamespace(options));
     registerHandler(new ArgHandlerOptimize(options));
@@ -95,7 +93,7 @@ class PrecompileTaskArgProcessor extends CompileArgProcessor {
     registerHandler(new ArgHandlerSoycDetailed(options));
     registerHandler(new ArgHandlerJsonSoyc(options));
     registerHandler(new ArgHandlerStrict(options));
-    registerHandler(new ArgHandlerStrictResources(options));
+    registerHandler(new ArgHandlerStrictResources());
     registerHandler(new ArgHandlerValidateOnlyFlag(options));
     registerHandler(new ArgHandlerSourceLevel(options));
   }

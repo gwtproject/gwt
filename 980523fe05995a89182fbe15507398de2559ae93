@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de761212_66eb0e28",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-06-24T13:55:32Z",
+      "side": 1,
+      "message": "delete whitespace",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 2
+      },
+      "revId": "980523fe05995a89182fbe15507398de2559ae93",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de761212_86cf2ace",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-06-24T13:55:32Z",
+      "side": 1,
+      "message": "delete empty line",
+      "revId": "980523fe05995a89182fbe15507398de2559ae93",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ea26abf_8076d64f",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-06-24T13:55:32Z",
+      "side": 1,
+      "message": "delete whitespace",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 2
+      },
+      "revId": "980523fe05995a89182fbe15507398de2559ae93",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e9bae8e_81313aab",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-06-24T13:55:32Z",
+      "side": 1,
+      "message": "should be private",
+      "range": {
+        "startLine": 343,
+        "startChar": 2,
+        "endLine": 343,
+        "endChar": 8
+      },
+      "revId": "980523fe05995a89182fbe15507398de2559ae93",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ea26abf_6073d261",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-06-24T13:55:32Z",
+      "side": 1,
+      "message": "delete empty line",
+      "revId": "980523fe05995a89182fbe15507398de2559ae93",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

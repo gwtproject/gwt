@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "de47f2ea_fe3f61e5",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-24T19:37:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe0bd6a6_4d1ecd94",
+      "range": {
+        "startLine": 1123,
+        "startChar": 4,
+        "endLine": 1123,
+        "endChar": 48
+      },
+      "revId": "e720bb5b62f62c6f016bf799f32d3fd128e5a409",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe0bd6a6_8d2ba5b7",
         "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2015-06-24T18:51:52Z",
       "side": 1,
       "message": "remove this comment as it no longer applies",
+      "range": {
+        "startLine": 1124,
+        "startChar": 4,
+        "endLine": 1124,
+        "endChar": 75
+      },
+      "revId": "e720bb5b62f62c6f016bf799f32d3fd128e5a409",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de47f2ea_9e341d0c",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-24T19:37:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe0bd6a6_8d2ba5b7",
       "range": {
         "startLine": 1124,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "de47f2ea_be39d902",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-24T19:37:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe0bd6a6_ad5b0956",
+      "range": {
+        "startLine": 1129,
+        "startChar": 4,
+        "endLine": 1129,
+        "endChar": 29
+      },
+      "revId": "e720bb5b62f62c6f016bf799f32d3fd128e5a409",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe0bd6a6_6d663121",
         "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
         "patchSetId": 5
@@ -82,6 +154,30 @@
       "writtenOn": "2015-06-24T18:51:52Z",
       "side": 1,
       "message": "Replace with\n\n  // Transform a rotation to the left into the equivalent rotation to the right.",
+      "range": {
+        "startLine": 1134,
+        "startChar": 4,
+        "endLine": 1134,
+        "endChar": 39
+      },
+      "revId": "e720bb5b62f62c6f016bf799f32d3fd128e5a409",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de47f2ea_5e4f7586",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-24T19:37:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe0bd6a6_6d663121",
       "range": {
         "startLine": 1134,
         "startChar": 4,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "de47f2ea_7e4cb190",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-24T19:37:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe0bd6a6_0d6d75f6",
+      "range": {
+        "startLine": 1141,
+        "startChar": 0,
+        "endLine": 1142,
+        "endChar": 65
+      },
+      "revId": "e720bb5b62f62c6f016bf799f32d3fd128e5a409",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe0bd6a6_8d396503",
         "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
         "patchSetId": 5
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "de47f2ea_1e49ed7f",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-24T19:37:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe0bd6a6_8d396503",
+      "range": {
+        "startLine": 293,
+        "startChar": 56,
+        "endLine": 293,
+        "endChar": 57
+      },
+      "revId": "e720bb5b62f62c6f016bf799f32d3fd128e5a409",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe0bd6a6_cd3f5de6",
         "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
         "patchSetId": 5
@@ -151,6 +295,30 @@
       "writtenOn": "2015-06-24T18:51:52Z",
       "side": 1,
       "message": "Remove.",
+      "range": {
+        "startLine": 296,
+        "startChar": 5,
+        "endLine": 296,
+        "endChar": 29
+      },
+      "revId": "e720bb5b62f62c6f016bf799f32d3fd128e5a409",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de47f2ea_3e462971",
+        "filename": "user/test/com/google/gwt/emultest/java/util/CollectionsTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 6421
+      },
+      "writtenOn": "2015-06-24T19:37:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe0bd6a6_cd3f5de6",
       "range": {
         "startLine": 296,
         "startChar": 5,

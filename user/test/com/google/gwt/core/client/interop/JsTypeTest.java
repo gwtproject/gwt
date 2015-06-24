@@ -19,6 +19,7 @@ import static com.google.gwt.core.client.ScriptInjector.TOP_WINDOW;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.ScriptInjector;
+import com.google.gwt.core.client.js.JsType;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Iterator;
@@ -359,5 +360,52 @@ public class JsTypeTest extends GWTTestCase {
     for (String field : fields) {
       assertFalse("Field '" + field + "' should not be exported", hasField(obj, field));
     }
+  }
+
+  @JsType
+  interface SimpleJsTypeFieldInterface {
+  }
+
+  static class SimpleJsTypeFieldClass implements SimpleJsTypeFieldInterface {
+  }
+
+  @JsType
+  static class SimpleJsTypeWithField {
+    public SimpleJsTypeFieldInterface someField;
+  }
+
+  public void __disabled__testJsTypeField() {
+    new SimpleJsTypeFieldClass();
+    SimpleJsTypeWithField holder = new SimpleJsTypeWithField();
+    fillJsTypeField(holder);
+    SimpleJsTypeFieldInterface someField = holder.someField;
+    assertNotNull(someField);
+  }
+
+  private native void fillJsTypeField(SimpleJsTypeWithField jstype) /*-{
+    jstype.someField = {};
+  }-*/;
+
+  @JsType
+  interface InterfaceWithSingleJavaConcrete {
+    int m();
+  }
+
+  static class JavaConcrete implements InterfaceWithSingleJavaConcrete {
+    public int m() {
+      return 5;
+    }
+  }
+
+  private native Object nativeObjectImplementingM() /*-{
+    return {m: function() { return 3;} }
+  }-*/;
+
+  public void testSingleJavaConcreteInterface() {
+    // Create a couple of instances and use the objects in some way to avoid complete pruning
+    // of JavaConcrete
+    assertTrue(new JavaConcrete() != new JavaConcrete());
+    assertSame(5, new JavaConcrete().m());
+    assertSame(3, ((InterfaceWithSingleJavaConcrete) nativeObjectImplementingM()).m());
   }
 }

@@ -84,6 +84,7 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
     return value;
   }
 
+  @Override
   public int compareTo(Boolean b) {
     return compare(value, b.value);
   }

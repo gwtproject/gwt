@@ -26,6 +26,7 @@ public interface Comparator<T> {
 
   int compare(T a, T b);
 
+  @Override
   boolean equals(Object other);
 
 }

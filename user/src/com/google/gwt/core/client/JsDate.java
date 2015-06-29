@@ -15,113 +15,144 @@
  */
 package com.google.gwt.core.client;
 
+import com.google.j2cl.emul.core.client.JsDateFactory;
+
 /**
  * A simple wrapper around a native JS Date object.
  */
-public class JsDate extends JavaScriptObject {
+public class JsDate extends JavaScriptObject implements com.google.j2cl.emul.core.client.JsDate {
 
   /**
    * Creates a new date with the current time.
+   *
+   * @deprecated use {@link JsDateFactory#create()} instead.
    */
-  public static native JsDate create() /*-{
-    return new Date();
-  }-*/;
+  @Deprecated
+  public static JsDate create() {
+    return (JsDate) JsDateFactory.create();
+  }
 
   /**
    * Creates a new date with the specified internal representation, which is the
    * number of milliseconds since midnight on January 1st, 1970. This is the
    * same representation returned by {@link #getTime()}.
+   *
+   * @deprecated use {@link JsDateFactory#create(double)} instead.
    */
-  public static native JsDate create(double milliseconds) /*-{
-    return new Date(milliseconds);
-  }-*/;
+  @Deprecated
+  public static JsDate create(double milliseconds) {
+    return (JsDate) JsDateFactory.create(milliseconds);
+  }
 
   /**
    * Creates a new date using the specified values.
+   *
+   * @deprecated use {@link JsDateFactory#create(int, int)} instead.
    */
-  public static native JsDate create(int year, int month) /*-{
-    return new Date(year, month);
-  }-*/;
+  @Deprecated
+  public static JsDate create(int year, int month) {
+    return (JsDate) JsDateFactory.create(year, month);
+  }
 
   /**
    * Creates a new date using the specified values.
+   *
+   * @deprecated use {@link JsDateFactory#create(int, int, int)} instead.
    */
-  public static native JsDate create(int year, int month, int dayOfMonth) /*-{
-    return new Date(year, month, dayOfMonth);
-  }-*/;
+  @Deprecated
+  public static JsDate create(int year, int month, int dayOfMonth) {
+    return (JsDate) JsDateFactory.create(year, month, dayOfMonth);
+  }
 
   /**
    * Creates a new date using the specified values.
+   *
+   * @deprecated use {@link JsDateFactory#create(int, int, int, int)} instead.
    */
-  public static native JsDate create(int year, int month, int dayOfMonth, int hours) /*-{
-    return new Date(year, month, dayOfMonth, hours);
-  }-*/;
+  @Deprecated
+  public static JsDate create(int year, int month, int dayOfMonth, int hours) {
+    return (JsDate) JsDateFactory.create(year, month, dayOfMonth, hours);
+  }
 
   /**
    * Creates a new date using the specified values.
+   *
+   * @deprecated use {@link JsDateFactory#create(int, int, int, int, int)} instead.
    */
-  public static native JsDate create(int year, int month, int dayOfMonth, int hours,
-      int minutes) /*-{
-    return new Date(year, month, dayOfMonth, hours, minutes);
-  }-*/;
+  @Deprecated
+  public static JsDate create(int year, int month, int dayOfMonth, int hours,
+      int minutes) {
+    return (JsDate) JsDateFactory.create(year, month, dayOfMonth, hours, minutes);
+  }
 
   /**
    * Creates a new date using the specified values.
+   *
+   * @deprecated use {@link JsDateFactory#create(int, int, int, int, int, int)} instead.
    */
-  public static native JsDate create(int year, int month, int dayOfMonth, int hours,
-      int minutes, int seconds) /*-{
-    return new Date(year, month, dayOfMonth, hours, minutes, seconds);
-  }-*/;
+  @Deprecated
+  public static JsDate create(int year, int month, int dayOfMonth, int hours,
+      int minutes, int seconds) {
+    return (JsDate) JsDateFactory.create(year, month, dayOfMonth, hours, minutes, seconds);
+  }
 
   /**
    * Creates a new date using the specified values.
+   *
+   * @deprecated use {@link JsDateFactory#create(int, int, int, int, int, int, int)} instead.
    */
-  public static native JsDate create(int year, int month, int dayOfMonth, int hours,
-      int minutes, int seconds, int millis) /*-{
-    return new Date(year, month, dayOfMonth, hours, minutes, seconds, millis);
-  }-*/;
+  @Deprecated
+  public static JsDate create(int year, int month, int dayOfMonth, int hours,
+      int minutes, int seconds, int millis) {
+    return (JsDate) JsDateFactory.create(year, month, dayOfMonth, hours, minutes, seconds, millis);
+  }
 
   /**
    * Creates a new date from a string to be parsed.
+   *
+   * @deprecated use {@link JsDateFactory#create(String)} instead.
    */
-  public static native JsDate create(String dateString) /*-{
-    return new Date(dateString);
-  }-*/;
+  @Deprecated
+  public static JsDate create(String dateString) {
+    return (JsDate) JsDateFactory.create(dateString);
+  }
 
   /**
    * Returns the numeric value corresponding to the current time -
    * the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC.
+   *
+   * @deprecated use {@link JsDateFactory#now()} instead.
    */
-  public static native double now() /*-{
-      // IE8 does not have Date.now
-      // when removing IE8 support we change this to Date.now()
-      if (Date.now) {
-          // Date.now vs Date.getTime() performance comparison:
-          // http://jsperf.com/date-now-vs-new-date/8
-          return Date.now();
-      }
-      return (new Date()).getTime();
-  }-*/;
+  @Deprecated
+  public static double now() {
+    return JsDateFactory.now();
+  }
 
   /**
    * Parses a string representation of a date and time and returns the internal
    * millisecond representation. If the string cannot be parsed, the returned
    * value will be <code>NaN</code>. Use {@link Double#isNaN(double)} to check
    * the result.
+   *
+   * @deprecated use {@link JsDateFactory#parse(String)} instead.
    */
-  public static native double parse(String dateString) /*-{
-    return Date.parse(dateString);
-  }-*/;
+  @Deprecated
+  public static double parse(String dateString) {
+    return JsDateFactory.parse(dateString);
+  }
 
   // CHECKSTYLE_OFF: Matching the spec.
   /**
    * Returns the internal millisecond representation of the specified UTC date
    * and time.
+   *
+   * @deprecated use {@link JsDateFactory#UTC(int, int, int, int, int, int, int)} instead.
    */
-  public static native double UTC(int year, int month, int dayOfMonth, int hours,
-      int minutes, int seconds, int millis) /*-{
-    return Date.UTC(year, month, dayOfMonth, hours, minutes, seconds, millis);
-  }-*/;
+  @Deprecated
+  public static double UTC(int year, int month, int dayOfMonth, int hours,
+      int minutes, int seconds, int millis) {
+    return JsDateFactory.UTC(year, month, dayOfMonth, hours, minutes, seconds, millis);
+  }
 
   // CHECKSTYLE_ON
 
@@ -134,6 +165,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns the day of the month.
    */
+  @Override
   public final native int getDate() /*-{
     return this.getDate();
   }-*/;
@@ -142,6 +174,7 @@ public class JsDate extends JavaScriptObject {
    * Returns the day of the week, from <code>0</code> (Sunday) to <code>6</code>
    * Saturday.
    */
+  @Override
   public final native int getDay() /*-{
     return this.getDay();
   }-*/;
@@ -149,6 +182,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns the four-digit year.
    */
+  @Override
   public final native int getFullYear() /*-{
     return this.getFullYear();
   }-*/;
@@ -156,6 +190,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns the hour, between <code>0</code> (midnight) and <code>23</code>.
    */
+  @Override
   public final native int getHours() /*-{
     return this.getHours();
   }-*/;
@@ -163,6 +198,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns the milliseconds, between <code>0</code> and <code>999</code>.
    */
+  @Override
   public final native int getMilliseconds() /*-{
     return this.getMilliseconds();
   }-*/;
@@ -170,6 +206,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns the minutes, between <code>0</code> and <code>59</code>.
    */
+  @Override
   public final native int getMinutes() /*-{
     return this.getMinutes();
   }-*/;
@@ -178,6 +215,7 @@ public class JsDate extends JavaScriptObject {
    * Returns the month, from <code>0</code> (January) to <code>11</code>
    * December.
    */
+  @Override
   public final native int getMonth() /*-{
     return this.getMonth();
   }-*/;
@@ -185,6 +223,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns the seconds, between <code>0</code> and <code>59</code>.
    */
+  @Override
   public final native int getSeconds() /*-{
     return this.getSeconds();
   }-*/;
@@ -194,6 +233,7 @@ public class JsDate extends JavaScriptObject {
    * milliseconds since midnight on January 1st, 1970. This is the same
    * representation returned by {@link #getTime()}.
    */
+  @Override
   public final native double getTime() /*-{
     return this.getTime();
   }-*/;
@@ -203,6 +243,7 @@ public class JsDate extends JavaScriptObject {
    * representations of this date. The value returned is affected by whether or
    * not daylight savings time would be in effect on specified date.
    */
+  @Override
   public final native int getTimezoneOffset() /*-{
     return this.getTimezoneOffset();
   }-*/;
@@ -210,6 +251,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns the day of the month, in UTC.
    */
+  @Override
   public final native int getUTCDate() /*-{
     return this.getUTCDate();
   }-*/;
@@ -218,6 +260,7 @@ public class JsDate extends JavaScriptObject {
    * Returns the day of the week, from <code>0</code> (Sunday) to <code>6</code>
    * Saturday, in UTC.
    */
+  @Override
   public final native int getUTCDay() /*-{
     return this.getUTCDay();
   }-*/;
@@ -225,6 +268,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns the four-digit year, in UTC.
    */
+  @Override
   public final native int getUTCFullYear() /*-{
     return this.getUTCFullYear();
   }-*/;
@@ -233,6 +277,7 @@ public class JsDate extends JavaScriptObject {
    * Returns the hour, between <code>0</code> (midnight) and <code>23</code>, in
    * UTC.
    */
+  @Override
   public final native int getUTCHours() /*-{
     return this.getUTCHours();
   }-*/;
@@ -241,6 +286,7 @@ public class JsDate extends JavaScriptObject {
    * Returns the milliseconds, between <code>0</code> and <code>999</code>, in
    * UTC.
    */
+  @Override
   public final native int getUTCMilliseconds() /*-{
     return this.getUTCMilliseconds();
   }-*/;
@@ -248,6 +294,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns the minutes, between <code>0</code> and <code>59</code>, in UTC.
    */
+  @Override
   public final native int getUTCMinutes() /*-{
     return this.getUTCMinutes();
   }-*/;
@@ -256,6 +303,7 @@ public class JsDate extends JavaScriptObject {
    * Returns the month, from <code>0</code> (January) to <code>11</code>
    * December, in UTC.
    */
+  @Override
   public final native int getUTCMonth() /*-{
     return this.getUTCMonth();
   }-*/;
@@ -263,6 +311,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns the seconds, between <code>0</code> and <code>59</code>, in UTC.
    */
+  @Override
   public final native int getUTCSeconds() /*-{
     return this.getUTCSeconds();
   }-*/;
@@ -273,6 +322,7 @@ public class JsDate extends JavaScriptObject {
    * @deprecated Use {@link #getFullYear()}.
    */
   @Deprecated
+  @Override
   public final native int getYear() /*-{
     return this.getYear();
   }-*/;
@@ -281,6 +331,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the day of the month. Returns the millisecond representation of the
    * adjusted date.
    */
+  @Override
   public final native double setDate(int dayOfMonth) /*-{
     this.setDate(dayOfMonth);
     return this.getTime();
@@ -289,6 +340,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Sets the year. Returns the millisecond representation of the adjusted date.
    */
+  @Override
   public final native double setFullYear(int year) /*-{
     this.setFullYear(year);
     return this.getTime();
@@ -298,6 +350,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the year and month. Returns the millisecond representation of the
    * adjusted date.
    */
+  @Override
   public final native double setFullYear(int year, int month) /*-{
     this.setFullYear(year, month);
     return this.getTime();
@@ -307,6 +360,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the year, month, and day. Returns the millisecond representation of
    * the adjusted date.
    */
+  @Override
   public final native double setFullYear(int year, int month, int day) /*-{
     this.setFullYear(year, month, day);
     return this.getTime();
@@ -315,6 +369,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Sets the hour. Returns the millisecond representation of the adjusted date.
    */
+  @Override
   public final native double setHours(int hours) /*-{
     this.setHours(hours);
     return this.getTime();
@@ -324,6 +379,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the hour and minutes. Returns the millisecond representation of the
    * adjusted date.
    */
+  @Override
   public final native double setHours(int hours, int mins) /*-{
     this.setHours(hours, mins);
     return this.getTime();
@@ -333,6 +389,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the hour, minutes, and seconds. Returns the millisecond representation
    * of the adjusted date.
    */
+  @Override
   public final native double setHours(int hours, int mins, int secs) /*-{
     this.setHours(hours, mins, secs);
     return this.getTime();
@@ -342,6 +399,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the hour, minutes, seconds, and milliseconds. Returns the millisecond
    * representation of the adjusted date.
    */
+  @Override
   public final native double setHours(int hours, int mins, int secs, int ms) /*-{
     this.setHours(hours, mins, secs, ms);
     return this.getTime();
@@ -351,6 +409,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the minutes. Returns the millisecond representation of the adjusted
    * date.
    */
+  @Override
   public final native double setMinutes(int minutes) /*-{
     this.setMinutes(minutes);
     return this.getTime();
@@ -360,6 +419,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the minutes and seconds. Returns the millisecond representation of the
    * adjusted date.
    */
+  @Override
   public final native double setMinutes(int minutes, int seconds) /*-{
     this.setMinutes(minutes, seconds);
     return this.getTime();
@@ -369,6 +429,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the minutes, seconds, and milliseconds. Returns the millisecond
    * representation of the adjusted date.
    */
+  @Override
   public final native double setMinutes(int minutes, int seconds, int millis) /*-{
     this.setMinutes(minutes, seconds, millis);
     return this.getTime();
@@ -378,6 +439,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the month. Returns the millisecond representation of the adjusted
    * date.
    */
+  @Override
   public final native double setMonth(int month) /*-{
     this.setMonth(month);
     return this.getTime();
@@ -387,6 +449,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the month and day. Returns the millisecond representation of the
    * adjusted date.
    */
+  @Override
   public final native double setMonth(int month, int dayOfMonth) /*-{
     this.setMonth(month, dayOfMonth);
     return this.getTime();
@@ -396,6 +459,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the seconds. Returns the millisecond representation of the adjusted
    * date.
    */
+  @Override
   public final native double setSeconds(int seconds) /*-{
     this.setSeconds(seconds);
     return this.getTime();
@@ -405,6 +469,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the seconds and milliseconds. Returns the millisecond representation
    * of the adjusted date.
    */
+  @Override
   public final native double setSeconds(int seconds, int millis) /*-{
     this.setSeconds(seconds, millis);
     return this.getTime();
@@ -414,6 +479,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the internal date representation. Returns the
    * <code>milliseconds</code> argument.
    */
+  @Override
   public final native double setTime(double milliseconds) /*-{
     this.setTime(milliseconds);
     return this.getTime();
@@ -423,6 +489,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the day of the month, in UTC. Returns the millisecond representation
    * of the adjusted date.
    */
+  @Override
   public final native double setUTCDate(int dayOfMonth) /*-{
     this.setUTCDate(dayOfMonth);
     return this.getTime();
@@ -432,6 +499,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the year, in UTC. Returns the millisecond representation of the
    * adjusted date.
    */
+  @Override
   public final native double setUTCFullYear(int year) /*-{
     this.setUTCFullYear(year);
     return this.getTime();
@@ -441,6 +509,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the year and month, in UTC. Returns the millisecond representation of
    * the adjusted date.
    */
+  @Override
   public final native double setUTCFullYear(int year, int month) /*-{
     this.setUTCFullYear(year, month);
     return this.getTime();
@@ -450,6 +519,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the year, month, and day, in UTC. Returns the millisecond
    * representation of the adjusted date.
    */
+  @Override
   public final native double setUTCFullYear(int year, int month, int day) /*-{
     this.setUTCFullYear(year, month, day);
     return this.getTime();
@@ -459,6 +529,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the hour, in UTC. Returns the millisecond representation of the
    * adjusted date.
    */
+  @Override
   public final native double setUTCHours(int hours) /*-{
     this.setUTCHours(hours);
     return this.getTime();
@@ -468,6 +539,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the hour and minutes, in UTC. Returns the millisecond representation
    * of the adjusted date.
    */
+  @Override
   public final native double setUTCHours(int hours, int mins) /*-{
     this.setUTCHours(hours, mins);
     return this.getTime();
@@ -477,6 +549,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the hour, minutes, and seconds, in UTC. Returns the millisecond
    * representation of the adjusted date.
    */
+  @Override
   public final native double setUTCHours(int hours, int mins, int secs) /*-{
     this.setUTCHours(hours, mins, secs);
     return this.getTime();
@@ -486,6 +559,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the hour, minutes, seconds, and milliseconds, in UTC. Returns the
    * millisecond representation of the adjusted date.
    */
+  @Override
   public final native double setUTCHours(int hours, int mins, int secs, int ms) /*-{
     this.setUTCHours(hours, mins, secs, ms);
     return this.getTime();
@@ -495,6 +569,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the minutes, in UTC. Returns the millisecond representation of the
    * adjusted date.
    */
+  @Override
   public final native double setUTCMinutes(int minutes) /*-{
     this.setUTCMinutes(minutes);
     return this.getTime();
@@ -504,6 +579,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the minutes and seconds, in UTC. Returns the millisecond
    * representation of the adjusted date.
    */
+  @Override
   public final native double setUTCMinutes(int minutes, int seconds) /*-{
     this.setUTCMinutes(minutes, seconds);
     return this.getTime();
@@ -513,6 +589,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the minutes, seconds, and milliseconds, in UTC. Returns the
    * millisecond representation of the adjusted date.
    */
+  @Override
   public final native double setUTCMinutes(int minutes, int seconds, int millis) /*-{
     this.setUTCMinutes(minutes, seconds, millis);
     return this.getTime();
@@ -522,6 +599,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the month, in UTC. Returns the millisecond representation of the
    * adjusted date.
    */
+  @Override
   public final native double setUTCMonth(int month) /*-{
     this.setUTCMonth(month);
     return this.getTime();
@@ -531,6 +609,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the month and day, in UTC. Returns the millisecond representation of
    * the adjusted date.
    */
+  @Override
   public final native double setUTCMonth(int month, int dayOfMonth) /*-{
     this.setUTCMonth(month, dayOfMonth);
     return this.getTime();
@@ -540,6 +619,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the seconds, in UTC. Returns the millisecond representation of the
    * adjusted date.
    */
+  @Override
   public final native double setUTCSeconds(int seconds) /*-{
     this.setUTCSeconds(seconds);
     return this.getTime();
@@ -549,6 +629,7 @@ public class JsDate extends JavaScriptObject {
    * Sets the seconds and milliseconds, in UTC. Returns the millisecond
    * representation of the adjusted date.
    */
+  @Override
   public final native double setUTCSeconds(int seconds, int millis) /*-{
     this.setUTCSeconds(seconds, millis);
     return this.getTime();
@@ -560,6 +641,7 @@ public class JsDate extends JavaScriptObject {
    * @deprecated Use {@link #setFullYear(int)}.
    */
   @Deprecated
+  @Override
   public final native double setYear(int year) /*-{
     this.setYear(year);
     return this.getTime();
@@ -568,6 +650,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns a date string in the local time zone.
    */
+  @Override
   public final native String toDateString() /*-{
     return this.toDateString();
   }-*/;
@@ -578,6 +661,7 @@ public class JsDate extends JavaScriptObject {
    * @deprecated Use {@link #toUTCString()}.
    */
   @Deprecated
+  @Override
   public final native String toGMTString() /*-{
     return this.toGMTString();
   }-*/;
@@ -586,6 +670,7 @@ public class JsDate extends JavaScriptObject {
    * Returns a date string in the local time zone according to local formatting
    * conventions.
    */
+  @Override
   public final native String toLocaleDateString() /*-{
     return this.toLocaleDateString();
   }-*/;
@@ -594,6 +679,7 @@ public class JsDate extends JavaScriptObject {
    * Returns a date and time string in the local time zone according to local
    * formatting conventions.
    */
+  @Override
   public final native String toLocaleString() /*-{
     return this.toLocaleString();
   }-*/;
@@ -602,6 +688,7 @@ public class JsDate extends JavaScriptObject {
    * Returns a time string in the local time zone according to local formatting
    * conventions.
    */
+  @Override
   public final native String toLocaleTimeString() /*-{
     return this.toLocaleTimeString();
   }-*/;
@@ -609,6 +696,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns a time string in the local time zone.
    */
+  @Override
   public final native String toTimeString() /*-{
     return this.toTimeString();
   }-*/;
@@ -616,6 +704,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns a date and time string in UTC.
    */
+  @Override
   public final native String toUTCString() /*-{
     return this.toUTCString();
   }-*/;
@@ -623,6 +712,7 @@ public class JsDate extends JavaScriptObject {
   /**
    * Returns the millisecond representation, as {@link #getTime()}.
    */
+  @Override
   public final native double valueOf() /*-{
     return this.valueOf();
   }-*/;

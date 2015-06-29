@@ -27,6 +27,7 @@
   <define-property name="superdevmode" values="off, on"/>
   <set-property name="superdevmode" value="off"/>
 
+  <inherits name="com.google.j2cl.emul.core.Core" />
   <inherits name="com.google.gwt.dev.jjs.intrinsic.Intrinsic" />
   <inherits name="com.google.gwt.core.CompilerParameters" />
   <inherits name="com.google.gwt.emul.Emulation" />

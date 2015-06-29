@@ -13,15 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.logging.impl;
-
-import com.google.gwt.core.client.impl.ConsoleLogger;
+package com.google.j2cl.emul.core.client.impl;
 
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
-class SimpleConsoleLogHandler extends Handler {
+public class SimpleConsoleLogHandler extends Handler {
 
   @Override
   public void publish(LogRecord record) {

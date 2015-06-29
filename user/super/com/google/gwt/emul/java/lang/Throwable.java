@@ -15,9 +15,9 @@
  */
 package java.lang;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalArgument;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkCriticalArgument;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkState;
 
 import com.google.gwt.core.client.impl.StackTraceCreator;
 

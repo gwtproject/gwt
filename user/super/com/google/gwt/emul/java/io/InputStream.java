@@ -19,7 +19,7 @@
 
 package java.io;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkNotNull;
 
 /**
  * A readable source of bytes.
@@ -115,6 +115,7 @@ public abstract class InputStream extends Object implements Closeable {
      * @throws IOException
      *             if an error occurs while closing this stream.
      */
+    @Override
     public void close() throws IOException {
         /* empty */
     }

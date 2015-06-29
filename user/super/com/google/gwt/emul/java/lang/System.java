@@ -15,12 +15,12 @@
  */
 package java.lang;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArrayType;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkArrayType;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkNotNull;
 
-import com.google.gwt.core.client.JsDate;
-import com.google.gwt.core.client.impl.Impl;
-import com.google.gwt.lang.Array;
+import com.google.j2cl.emul.core.client.JsDateFactory;
+import com.google.j2cl.emul.core.client.impl.Impl;
+
 
 import java.io.PrintStream;
 
@@ -35,13 +35,13 @@ public final class System {
    * Does nothing in web mode. To get output in web mode, subclass PrintStream
    * and call {@link #setErr(PrintStream)}.
    */
-  public static final PrintStream err = new PrintStream(null);
+  public static PrintStream err = new PrintStream(null);
 
   /**
    * Does nothing in web mode. To get output in web mode, subclass
    * {@link PrintStream} and call {@link #setOut(PrintStream)}.
    */
-  public static final PrintStream out = new PrintStream(null);
+  public static PrintStream out = new PrintStream(null);
 
   public static void arraycopy(Object src, int srcOfs, Object dest, int destOfs, int len) {
     checkNotNull(src, "src");
@@ -56,8 +56,8 @@ public final class System {
     Class<?> destComp = destType.getComponentType();
     checkArrayType(arrayTypeMatch(srcComp, destComp), "Array types don't match");
 
-    int srclen = getArrayLength(src);
-    int destlen = getArrayLength(dest);
+    int srclen = Array_Helper.getArrayLength(src);
+    int destlen = Array_Helper.getArrayLength(dest);
     if (srcOfs < 0 || destOfs < 0 || len < 0 || srcOfs + len > srclen || destOfs + len > destlen) {
       throw new IndexOutOfBoundsException();
     }
@@ -85,12 +85,12 @@ public final class System {
         }
       }
     } else if (len > 0) {
-      Array.nativeArraycopy(src, srcOfs, dest, destOfs, len);
+      Array_Helper.nativeArraycopy(src, srcOfs, dest, destOfs, len);
     }
   }
 
   public static long currentTimeMillis() {
-    return (long) JsDate.now();
+    return (long) JsDateFactory.now();
   }
 
   /**
@@ -117,21 +117,16 @@ public final class System {
 
   public static int identityHashCode(Object o) {
     return (o == null) ? 0 : (!(o instanceof String)) ? Impl.getHashCode(o)
-        : String.HashCache.getHashCode(unsafeCast(o));
+        : Impl.geHashCodeForString(Cast_Helper.unsafeCast(o));
   }
 
-  // TODO(goktug): replace unsafeCast with a real cast when the compiler can optimize it.
-  private static native String unsafeCast(Object string) /*-{
-    return string;
-  }-*/;
+  public static void setErr(PrintStream err) {
+    System.err = err;
+  }
 
-  public static native void setErr(PrintStream err) /*-{
-    @java.lang.System::err = err;
-  }-*/;
-
-  public static native void setOut(PrintStream out) /*-{
-    @java.lang.System::out = out;
-  }-*/;
+  public static void setOut(PrintStream out) {
+    System.out = out;
+  }
 
   private static boolean arrayTypeMatch(Class<?> srcComp, Class<?> destComp) {
     if (srcComp.isPrimitive()) {
@@ -140,11 +135,4 @@ public final class System {
       return !destComp.isPrimitive();
     }
   }
-
-  /**
-   * Returns the length of an array via Javascript.
-   */
-  private static native int getArrayLength(Object array) /*-{
-    return array.length;
-  }-*/;
 }

@@ -15,7 +15,7 @@
  */
 package java.util;
 
-import com.google.gwt.core.client.impl.Impl;
+import com.google.j2cl.emul.core.client.impl.Impl;
 
 import java.io.Serializable;
 

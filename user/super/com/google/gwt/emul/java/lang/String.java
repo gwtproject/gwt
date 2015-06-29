@@ -16,10 +16,11 @@
 
 package java.lang;
 
-import static com.google.gwt.core.client.impl.Coercions.ensureInt;
+import static com.google.j2cl.emul.core.client.impl.Coercions.ensureInt;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.impl.DoNotInline;
+import com.google.j2cl.emul.core.client.impl.StringHelper;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -196,11 +197,11 @@ public final class String implements Comparable<String>, CharSequence,
   public static String valueOf(char x[], int offset, int count) {
     int end = offset + count;
     __checkBounds(x.length, offset, end);
-    return __valueOf(x, offset, end);
+    return StringHelper.valueOf(x, offset, end);
   }
 
   public static String valueOf(char[] x) {
-    return __valueOf(x, 0, x.length);
+    return StringHelper.valueOf(x, 0, x.length);
   }
 
   public static String valueOf(double x) {
@@ -276,20 +277,6 @@ public final class String implements Comparable<String>, CharSequence,
     }
     return replaceStr;
   }
-
-  static native String __valueOf(char x[], int start, int end) /*-{
-    // Work around function.prototype.apply call stack size limits:
-    // https://code.google.com/p/v8/issues/detail?id=2896
-    // Performance: http://jsperf.com/string-fromcharcode-test/13
-    var batchSize = @com.google.gwt.lang.Array::ARRAY_PROCESS_BATCH_SIZE;
-    var s = "";
-    for (var batchStart = start; batchStart < end;) { // increment in block
-      var batchEnd = Math.min(batchStart + batchSize, end);
-      s += String.fromCharCode.apply(null, x.slice(batchStart, batchEnd));
-      batchStart = batchEnd;
-    }
-    return s;
-  }-*/;
 
   /**
    * @skip

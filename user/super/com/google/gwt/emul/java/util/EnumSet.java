@@ -15,13 +15,12 @@
  */
 package java.util;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkArgument;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkElement;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkState;
 
 import com.google.gwt.core.client.impl.SpecializeMethod;
-import com.google.gwt.lang.Array;
 
 /**
  * A {@link java.util.Set} of {@link Enum}s. <a
@@ -56,10 +55,12 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
         findNext();
       }
 
+      @Override
       public boolean hasNext() {
         return i < capacity();
       }
 
+      @Override
       public E next() {
         checkElement(hasNext());
         last = i;
@@ -67,6 +68,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
         return set[last];
       }
 
+      @Override
       public void remove() {
         checkState(last != -1);
         assert (set[last] != null);
@@ -124,8 +126,9 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
       return false;
     }
 
+    @Override
     public EnumSet<E> clone() {
-      E[] clonedSet = Array.clone(set);
+      E[] clonedSet = Array_Helper.clone(set);
       return new EnumSetImpl<E>(all, clonedSet, size);
     }
 
@@ -172,7 +175,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
 
   public static <E extends Enum<E>> EnumSet<E> allOf(Class<E> elementType) {
     E[] all = elementType.getEnumConstants();
-    E[] set = Array.clone(all);
+    E[] set = Array_Helper.clone(all);
     return new EnumSetImpl<E>(all, set, all.length);
   }
 
@@ -180,7 +183,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
     EnumSetImpl<E> s = (EnumSetImpl<E>) other;
     E[] all = s.all;
     E[] oldSet = s.set;
-    E[] newSet = Array.createFrom(oldSet);
+    E[] newSet = Array_Helper.createFrom(oldSet);
     for (int i = 0, c = oldSet.length; i < c; ++i) {
       if (oldSet[i] == null) {
         newSet[i] = all[i];
@@ -212,7 +215,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
 
   public static <E extends Enum<E>> EnumSet<E> noneOf(Class<E> elementType) {
     E[] all = elementType.getEnumConstants();
-    return new EnumSetImpl<E>(all, Array.createFrom(all), 0);
+    return new EnumSetImpl<E>(all, Array_Helper.createFrom(all), 0);
   }
 
   public static <E extends Enum<E>> EnumSet<E> of(E first) {
@@ -231,7 +234,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
     checkArgument(from.compareTo(to) <= 0, "%s > %s", from, to);
 
     E[] all = from.getDeclaringClass().getEnumConstants();
-    E[] set = Array.createFrom(all);
+    E[] set = Array_Helper.createFrom(all);
 
     // Inclusive
     int start = from.ordinal();

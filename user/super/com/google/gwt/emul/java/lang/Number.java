@@ -15,19 +15,12 @@
  */
 package java.lang;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 import java.io.Serializable;
 
 /**
  * Abstract base class for numeric wrapper classes.
  */
 public abstract class Number implements Serializable {
-
-  /**
-   * Stores a regular expression object to verify format of float values.
-   */
-  protected static JavaScriptObject floatRegex;
 
   // CHECKSTYLE_OFF: A special need to use unusual identifiers to avoid
   // introducing name collisions.
@@ -177,7 +170,7 @@ public abstract class Number implements Serializable {
    * point number and validating the range.
    */
   protected static double __parseAndValidateDouble(String s) throws NumberFormatException {
-    if (!__isValidDouble(s)) {
+    if (!Number_Helper.__isValidDouble(s)) {
       throw NumberFormatException.forInputString(s);
     }
     return __parseDouble(s);
@@ -319,43 +312,27 @@ public abstract class Number implements Serializable {
   /**
    * @skip
    */
-  private static native boolean __isNaN(double x) /*-{
-    return isNaN(x);
-  }-*/;
-
-  /**
-   * @skip
-   * 
-   * @param str
-   * @return {@code true} if the string matches {@link #floatRegex}, {@code false} otherwise
-   */
-  private static native boolean __isValidDouble(String str) /*-{
-    var floatRegex = @java.lang.Number::floatRegex;
-    if (!floatRegex) {
-      // Disallow '.' with no digits on either side
-      floatRegex = @java.lang.Number::floatRegex =
-          /^\s*[+-]?(NaN|Infinity|((\d+\.?\d*)|(\.\d+))([eE][+-]?\d+)?[dDfF]?)\s*$/;
-    }
-    return floatRegex.test(str);
-  }-*/;
+  private static boolean __isNaN(double x) {
+    return Number_Helper.__isNaN(x);
+  }
 
   /**
    * @skip
    * 
    * @return The floating-point representation of <code>str</code>.
    */
-  private static native double __parseDouble(String str) /*-{
-    return parseFloat(str);
-  }-*/;
+  private static double __parseDouble(String str) {
+    return Number_Helper.__parseDouble(str);
+  }
 
   /**
    * @skip
    * 
    * Invokes the global JS function <code>parseInt()</code>.
    */
-  private static native int __parseInt(String s, int radix) /*-{
-    return parseInt(s, radix);
-  }-*/;
+  private static int __parseInt(String s, int radix) {
+    return Number_Helper.__parseInt(s, radix);
+  }
 
   // CHECKSTYLE_ON
 

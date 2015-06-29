@@ -15,7 +15,7 @@
  */
 package com.google.gwt.lang;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArrayType;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkArrayType;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.impl.DoNotInline;
@@ -56,13 +56,6 @@ public final class Array {
         Array.getElementTypeCategory(array), result);
     // implicit type arg not inferred (as of JDK 1.5.0_07)
     return Array.<T> asArray(result);
-  }
-
-  /**
-   * Creates a new array of the exact same type and length as a given array.
-   */
-  public static <T> T[] createFrom(T[] array) {
-    return createFrom(array, array.length);
   }
 
   /**

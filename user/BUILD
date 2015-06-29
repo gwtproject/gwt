@@ -350,6 +350,7 @@ java_library(
             "src/com/google/gwt/i18n/rebind/keygen/*.java",
             # And it's also sensible to want for serialization:
             "src/com/google/gwt/user/client/ui/SuggestOracle.java",
+            "src/com/google/j2cl/emul/core/**/*.java",
         ],
         exclude = [
             "**/junit/**",
@@ -642,4 +643,30 @@ filegroup(
         ],
         exclude = ANT_EXCLUDES,
     ),
+)
+
+java_library(
+    name = "j2cl_core",
+    srcs = glob(["src/com/google/j2cl/emul/core/**/*.java"]),
+    deps = ["//third_party/java_src/gwt/svn/trunk/dev:compiler.standalone.super"],
+)
+
+java_library(
+    name = "jre",
+    srcs = glob(
+        ["super/com/google/gwt/emul/java/**/*java"],
+        exclude = [
+            "super/com/google/gwt/emul/java/lang/Enum.java",
+            "super/com/google/gwt/emul/java/lang/String.java",
+            "super/com/google/gwt/emul/java/lang/Object.java",
+            "super/com/google/gwt/emul/java/lang/Class.java",
+            "super/com/google/gwt/emul/java/lang/Throwable.java",
+            "super/com/google/gwt/emul/java/util/InternalJsStringMap.java",
+            "super/com/google/gwt/emul/java/util/InternalJsHashCodeMap.java",
+        ],
+    ),
+    deps = [
+        ":j2cl_core",
+        "//third_party/java_src/gwt/svn/trunk/dev:compiler.standalone.super",
+    ],
 )

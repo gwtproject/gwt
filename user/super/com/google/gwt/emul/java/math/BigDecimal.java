@@ -34,9 +34,7 @@
  */
 package java.math;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
-
-import com.google.gwt.core.client.JavaScriptObject;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 
@@ -134,8 +132,6 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
    * The constant zero as a {@code BigDecimal}.
    */
   public static final BigDecimal ZERO = new BigDecimal(0, 0);
-
-  protected static JavaScriptObject unscaledRegex;
 
   private static final int BI_SCALED_BY_ZERO_LENGTH = 11;
 
@@ -397,18 +393,6 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
     return quotient > 0 ? Math.floor(quotient) : Math.ceil(quotient);
   }
 
-  private static native double parseUnscaled(String str) /*-{
-    var unscaledRegex = @java.math.BigDecimal::unscaledRegex;
-    if (!unscaledRegex) {
-      unscaledRegex = @java.math.BigDecimal::unscaledRegex = /^[+-]?\d*$/i;
-    }
-    if (unscaledRegex.test(str)) {
-      return parseInt(str, 10);
-    } else {
-      return Number.NaN;
-    }
-  }-*/;
-
   /**
    * Return an increment that can be -1,0 or 1, depending of {@code
    * roundingMode}.
@@ -482,18 +466,6 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
       return (int) doubleScale;
     }
   }
-
-  /**
-   * Convert a double to a string with {@code digits} precision.  The resulting
-   * string may still be in exponential notation.
-   * 
-   * @param d double value
-   * @param digits number of digits of precision to include
-   * @return non-localized string representation of {@code d}
-   */
-  private static native String toPrecision(double d, int digits) /*-{
-    return d.toPrecision(digits);
-  }-*/;
 
   private static BigDecimal valueOf(double smallValue, double scale) {
     return new BigDecimal(smallValue, scale);
@@ -709,7 +681,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
       // math.03=Infinity or NaN
       throw new NumberFormatException("Infinite or NaN"); //$NON-NLS-1$
     }
-    initFrom(toPrecision(val, 20));
+    initFrom(Number_Helper.toPrecision(val, 20));
   }
 
   /**
@@ -729,7 +701,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
       // math.03=Infinity or NaN
       throw new NumberFormatException("Infinite or NaN"); //$NON-NLS-1$
     }
-    initFrom(toPrecision(val, 20));
+    initFrom(Number_Helper.toPrecision(val, 20));
     inplaceRound(mc);
   }
 
@@ -977,6 +949,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
    *         {@code 0} if {@code this == val}.
    * @throws NullPointerException if {@code val == null}.
    */
+  @Override
   public int compareTo(BigDecimal val) {
     int thisSign = signum();
     int valueSign = val.signum();
@@ -2647,7 +2620,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
     // Parsing the unscaled value
     String unscaled = unscaledBuffer.toString();
     if (unscaled.length() < 16) {
-      smallValue = parseUnscaled(unscaled);
+      smallValue = Number_Helper.parseUnscaled(unscaled);
       if (Double.isNaN(smallValue)) {
         throw new NumberFormatException("For input string: \"" + val + "\"");
       }

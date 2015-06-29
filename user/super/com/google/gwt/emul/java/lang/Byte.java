@@ -95,6 +95,7 @@ public final class Byte extends Number implements Comparable<Byte> {
     return value;
   }
 
+  @Override
   public int compareTo(Byte b) {
     return compare(value, b.value);
   }

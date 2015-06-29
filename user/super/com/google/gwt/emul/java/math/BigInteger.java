@@ -34,8 +34,8 @@
  */
 package java.math;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalArgument;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkCriticalArgument;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 import java.util.Random;
@@ -232,17 +232,6 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     bi.digits = digits;
     bi.cutOffLeadingZeroes();
   }
-
-  /**
-   * Converts an integral double to an unsigned integer; ie 2^31 will be
-   * returned as 0x80000000.
-   *
-   * @param val
-   * @return val as an unsigned int
-   */
-  private static native int toUnsignedInt(double val) /*-{
-    return val | 0;
-  }-*/;
 
   /**
    * The magnitude of this big integer. This array is in little endian order and
@@ -510,10 +499,11 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     if (val < POW32) {
       // It fits in one 'int'
       numberLength = 1;
-      digits = new int[] { toUnsignedInt(val) };
+      digits = new int[] { Number_Helper.toUnsignedInt(val) };
     } else {
       numberLength = 2;
-      digits = new int[] { toUnsignedInt(val % POW32), toUnsignedInt(val / POW32) };
+      digits = new int[] {
+          Number_Helper.toUnsignedInt(val % POW32), Number_Helper.toUnsignedInt(val / POW32)};
     }
   }
 
@@ -634,6 +624,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    *         {@code 0} if {@code this == val}.
    * @throws NullPointerException if {@code val == null}.
    */
+  @Override
   public int compareTo(BigInteger val) {
     if (sign > val.sign) {
       return GREATER;

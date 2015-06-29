@@ -241,14 +241,13 @@ public final class Integer extends Number implements Comparable<Integer> {
     return Integer.valueOf(Integer.parseInt(s, radix));
   }
 
-  private static native String toRadixString(int value, int radix) /*-{
-    return value.toString(radix);
-  }-*/;
+  private static String toRadixString(int value, int radix) {
+    return Number_Helper.toRadixString(value, radix);
+  }
 
-  private static native String toUnsignedRadixString(int value, int radix) /*-{
-    // ">>> 0" converts the value to unsigned number.
-    return (value >>> 0).toString(radix);
-  }-*/;
+  private static String toUnsignedRadixString(int value, int radix) {
+    return Number_Helper.toUnsignedRadixString(value, radix);
+  }
 
   private final transient int value;
 
@@ -265,6 +264,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     return (byte) value;
   }
 
+  @Override
   public int compareTo(Integer b) {
     return compare(value, b.value);
   }

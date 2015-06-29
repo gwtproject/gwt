@@ -27,12 +27,14 @@ public interface Map<K, V> {
    * Represents an individual map entry.
    */
   public interface Entry<K, V> {
+    @Override
     boolean equals(Object o);
 
     K getKey();
 
     V getValue();
 
+    @Override
     int hashCode();
 
     V setValue(V value);
@@ -46,10 +48,12 @@ public interface Map<K, V> {
 
   Set<Entry<K, V>> entrySet();
 
+  @Override
   boolean equals(Object o);
 
   V get(Object key);
 
+  @Override
   int hashCode();
 
   boolean isEmpty();

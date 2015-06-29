@@ -15,10 +15,8 @@
  */
 package java.util;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
-
-import com.google.gwt.lang.Array;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkArgument;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkState;
 
 /**
  * A {@link java.util.Map} of {@link Enum}s. <a
@@ -60,6 +58,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
       return false;
     }
 
+    @Override
     public int size() {
       return EnumMap.this.size();
     }
@@ -69,15 +68,18 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
     private Iterator<K> it = keySet.iterator();
     private K key;
 
+    @Override
     public boolean hasNext() {
       return it.hasNext();
     }
 
+    @Override
     public Entry<K, V> next() {
       key = it.next();
       return new MapEntry(key);
     }
 
+    @Override
     public void remove() {
       checkState(key != null);
 
@@ -94,14 +96,17 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
       this.key = key;
     }
 
+    @Override
     public K getKey() {
       return key;
     }
 
+    @Override
     public V getValue() {
       return values[key.ordinal()];
     }
 
+    @Override
     public V setValue(V value) {
       return set(key.ordinal(), value);
     }
@@ -203,7 +208,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
 
   private void init(EnumMap<K, ? extends V> m) {
     keySet = m.keySet.clone();
-    values = Array.clone(m.values);
+    values = Array_Helper.clone(m.values);
   }
 
   private V set(int ordinal, V value) {

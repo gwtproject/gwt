@@ -15,10 +15,9 @@
  */
 package java.util;
 
-import static com.google.gwt.core.client.impl.Coercions.ensureInt;
-
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElementIndex;
+import static com.google.j2cl.emul.core.client.impl.Coercions.ensureInt;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkArgument;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkElementIndex;
 
 import java.io.Serializable;
 
@@ -281,15 +280,18 @@ public class Collections {
       this.element = element;
     }
 
+    @Override
     public boolean contains(Object item) {
       return Objects.equals(element, item);
     }
 
+    @Override
     public E get(int index) {
       checkElementIndex(index, 1);
       return element;
     }
 
+    @Override
     public int size() {
       return 1;
     }
@@ -306,58 +308,72 @@ public class Collections {
       this.coll = coll;
     }
 
+    @Override
     public boolean add(T o) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean addAll(Collection<? extends T> c) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public void clear() {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean contains(Object o) {
       return coll.contains(o);
     }
 
+    @Override
     public boolean containsAll(Collection<?> c) {
       return coll.containsAll(c);
     }
 
+    @Override
     public boolean isEmpty() {
       return coll.isEmpty();
     }
 
+    @Override
     public Iterator<T> iterator() {
       return new UnmodifiableCollectionIterator<T>(coll.iterator());
     }
 
+    @Override
     public boolean remove(Object o) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean removeAll(Collection<?> c) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean retainAll(Collection<?> c) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public int size() {
       return coll.size();
     }
 
+    @Override
     public Object[] toArray() {
       return coll.toArray();
     }
 
+    @Override
     public <E> E[] toArray(E[] a) {
       return coll.toArray(a);
     }
 
+    @Override
     public String toString() {
       return coll.toString();
     }
@@ -372,10 +388,12 @@ public class Collections {
       this.list = list;
     }
 
+    @Override
     public void add(int index, T element) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean addAll(int index, Collection<? extends T> c) {
       throw new UnsupportedOperationException();
     }
@@ -385,6 +403,7 @@ public class Collections {
       return list.equals(o);
     }
 
+    @Override
     public T get(int index) {
       return list.get(index);
     }
@@ -394,6 +413,7 @@ public class Collections {
       return list.hashCode();
     }
 
+    @Override
     public int indexOf(Object o) {
       return list.indexOf(o);
     }
@@ -403,26 +423,32 @@ public class Collections {
       return list.isEmpty();
     }
 
+    @Override
     public int lastIndexOf(Object o) {
       return list.lastIndexOf(o);
     }
 
+    @Override
     public ListIterator<T> listIterator() {
       return listIterator(0);
     }
 
+    @Override
     public ListIterator<T> listIterator(int from) {
       return new UnmodifiableListIterator<T>(list.listIterator(from));
     }
 
+    @Override
     public T remove(int index) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public T set(int index, T element) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public List<T> subList(int fromIndex, int toIndex) {
       return new UnmodifiableList<T>(list.subList(fromIndex, toIndex));
     }
@@ -445,10 +471,12 @@ public class Collections {
           return entry.equals(o);
         }
 
+        @Override
         public K getKey() {
           return entry.getKey();
         }
 
+        @Override
         public V getValue() {
           return entry.getValue();
         }
@@ -458,6 +486,7 @@ public class Collections {
           return entry.hashCode();
         }
 
+        @Override
         public V setValue(V value) {
           throw new UnsupportedOperationException();
         }
@@ -489,14 +518,17 @@ public class Collections {
       public Iterator<Map.Entry<K, V>> iterator() {
         final Iterator<Map.Entry<K, V>> it = (Iterator<Entry<K, V>>) coll.iterator();
         return new Iterator<Map.Entry<K, V>>() {
+          @Override
           public boolean hasNext() {
             return it.hasNext();
           }
 
+          @Override
           public Map.Entry<K, V> next() {
             return new UnmodifiableEntry<K, V>(it.next());
           }
 
+          @Override
           public void remove() {
             throw new UnsupportedOperationException();
           }
@@ -541,18 +573,22 @@ public class Collections {
       this.map = map;
     }
 
+    @Override
     public void clear() {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean containsKey(Object key) {
       return map.containsKey(key);
     }
 
+    @Override
     public boolean containsValue(Object val) {
       return map.containsValue(val);
     }
 
+    @Override
     public Set<Map.Entry<K, V>> entrySet() {
       if (entrySet == null) {
         entrySet = new UnmodifiableEntrySet<K, V>(map.entrySet());
@@ -565,6 +601,7 @@ public class Collections {
       return map.equals(o);
     }
 
+    @Override
     public V get(Object key) {
       return map.get(key);
     }
@@ -574,10 +611,12 @@ public class Collections {
       return map.hashCode();
     }
 
+    @Override
     public boolean isEmpty() {
       return map.isEmpty();
     }
 
+    @Override
     public Set<K> keySet() {
       if (keySet == null) {
         keySet = new UnmodifiableSet<K>(map.keySet());
@@ -585,18 +624,22 @@ public class Collections {
       return keySet;
     }
 
+    @Override
     public V put(K key, V value) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> t) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public V remove(Object key) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public int size() {
       return map.size();
     }
@@ -606,6 +649,7 @@ public class Collections {
       return map.toString();
     }
 
+    @Override
     public Collection<V> values() {
       if (values == null) {
         values = new UnmodifiableCollection<V>(map.values());
@@ -648,6 +692,7 @@ public class Collections {
       this.sortedMap = sortedMap;
     }
 
+    @Override
     public Comparator<? super K> comparator() {
       return sortedMap.comparator();
     }
@@ -657,6 +702,7 @@ public class Collections {
       return sortedMap.equals(o);
     }
 
+    @Override
     public K firstKey() {
       return sortedMap.firstKey();
     }
@@ -666,18 +712,22 @@ public class Collections {
       return sortedMap.hashCode();
     }
 
+    @Override
     public SortedMap<K, V> headMap(K toKey) {
       return new UnmodifiableSortedMap<K, V>(sortedMap.headMap(toKey));
     }
 
+    @Override
     public K lastKey() {
       return sortedMap.lastKey();
     }
 
+    @Override
     public SortedMap<K, V> subMap(K fromKey, K toKey) {
       return new UnmodifiableSortedMap<K, V>(sortedMap.subMap(fromKey, toKey));
     }
 
+    @Override
     public SortedMap<K, V> tailMap(K fromKey) {
       return new UnmodifiableSortedMap<K, V>(sortedMap.tailMap(fromKey));
     }
@@ -693,6 +743,7 @@ public class Collections {
       this.sortedSet = (SortedSet<E>) sortedSet;
     }
 
+    @Override
     public Comparator<? super E> comparator() {
       return sortedSet.comparator();
     }
@@ -702,6 +753,7 @@ public class Collections {
       return sortedSet.equals(o);
     }
 
+    @Override
     public E first() {
       return sortedSet.first();
     }
@@ -711,19 +763,23 @@ public class Collections {
       return sortedSet.hashCode();
     }
 
+    @Override
     public SortedSet<E> headSet(E toElement) {
       return new UnmodifiableSortedSet<E>(sortedSet.headSet(toElement));
     }
 
+    @Override
     public E last() {
       return sortedSet.last();
     }
 
+    @Override
     public SortedSet<E> subSet(E fromElement, E toElement) {
       return new UnmodifiableSortedSet<E>(sortedSet.subSet(fromElement,
           toElement));
     }
 
+    @Override
     public SortedSet<E> tailSet(E fromElement) {
       return new UnmodifiableSortedSet<E>(sortedSet.tailSet(fromElement));
     }
@@ -736,14 +792,17 @@ public class Collections {
       this.it = it;
     }
 
+    @Override
     public boolean hasNext() {
       return it.hasNext();
     }
 
+    @Override
     public T next() {
       return it.next();
     }
 
+    @Override
     public void remove() {
       throw new UnsupportedOperationException();
     }
@@ -758,26 +817,32 @@ public class Collections {
       this.lit = lit;
     }
 
+    @Override
     public void add(T o) {
       throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean hasPrevious() {
       return lit.hasPrevious();
     }
 
+    @Override
     public int nextIndex() {
       return lit.nextIndex();
     }
 
+    @Override
     public T previous() {
       return lit.previous();
     }
 
+    @Override
     public int previousIndex() {
       return lit.previousIndex();
     }
 
+    @Override
     public void set(T o) {
       throw new UnsupportedOperationException();
     }
@@ -976,10 +1041,12 @@ public class Collections {
   public static <T> Enumeration<T> enumeration(Collection<T> c) {
     final Iterator<T> it = c.iterator();
     return new Enumeration<T>() {
+      @Override
       public boolean hasMoreElements() {
         return it.hasNext();
       }
 
+      @Override
       public T nextElement() {
         return it.next();
       }
@@ -1100,6 +1167,7 @@ public class Collections {
       return reverseOrder();
     }
     return new Comparator<T>() {
+      @Override
       public int compare(T t1, T t2) {
         return cmp.compare(t2, t1);
       }

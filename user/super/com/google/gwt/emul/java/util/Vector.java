@@ -15,7 +15,7 @@
  */
 package java.util;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkElement;
 
 import java.io.Serializable;
 

@@ -34,8 +34,8 @@
  */
 package java.math;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalArgument;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkCriticalArgument;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 
@@ -141,7 +141,7 @@ public final class MathContext implements Serializable {
     checkNotNull(val, "null string");
 
     try {
-      String[] extractedValues = parseValue(val);
+      String[] extractedValues = Number_Helper.parseMathContextValue(val);
       this.precision = Integer.parseInt(extractedValues[1]);
       // Can use RoundingMode.valueOf here because it is blacklisted in enum obfuscation.
       this.roundingMode = RoundingMode.valueOf(extractedValues[2]);
@@ -152,10 +152,6 @@ public final class MathContext implements Serializable {
 
     checkCriticalArgument(this.precision >= 0, "Digits < 0");
   }
-
-  private static native String[] parseValue(String val) /*-{
-    return /^precision=(\d+)\ roundingMode=(\w+)$/.exec(val);
-  }-*/;
 
   /* Public Methods */
 

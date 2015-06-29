@@ -15,7 +15,7 @@
  */
 package java.util;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkNotNull;
 
 class Comparators {
   /*
@@ -32,6 +32,7 @@ class Comparators {
    * @see java.lang.Comparable
    */
   private static final Comparator<Object> NATURAL = new Comparator<Object>() {
+    @Override
     public int compare(Object o1, Object o2) {
       checkNotNull(o1);
       checkNotNull(o2);

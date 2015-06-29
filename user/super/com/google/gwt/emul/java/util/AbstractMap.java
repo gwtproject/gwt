@@ -15,7 +15,7 @@
  */
 package java.util;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkNotNull;
 
 /**
  * Skeletal implementation of the Map interface. <a
@@ -244,6 +244,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     };
   }
 
+  @Override
   public V put(K key, V value) {
     throw new UnsupportedOperationException("Put not supported on this map");
   }
@@ -261,6 +262,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     return getEntryValueOrNull(implFindEntry(key, true));
   }
 
+  @Override
   public int size() {
     return entrySet().size();
   }

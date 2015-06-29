@@ -15,7 +15,7 @@
  */
 package java.lang;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalArgument;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkCriticalArgument;
 
 import java.io.Serializable;
 
@@ -81,14 +81,17 @@ public final class Character implements Comparable<Character>, Serializable {
       this.end = end;
     }
 
+    @Override
     public char charAt(int index) {
       return charArray[index + start];
     }
 
+    @Override
     public int length() {
       return end - start;
     }
 
+    @Override
     public java.lang.CharSequence subSequence(int start, int end) {
       return new CharSequenceAdapter(charArray, this.start + start,
           this.start + end);
@@ -221,30 +224,21 @@ public final class Character implements Comparable<Character>, Serializable {
     return c;
   }
 
-  /*
-   * TODO: correct Unicode handling.
-   */
-  public static native boolean isDigit(char c) /*-{
-    return (null != String.fromCharCode(c).match(/\d/));
-  }-*/;
+  public static boolean isDigit(char c) {
+    return Character_Jsni.isDigit(c);
+  }
 
   public static boolean isHighSurrogate(char ch) {
     return ch >= MIN_HIGH_SURROGATE && ch <= MAX_HIGH_SURROGATE;
   }
 
-  /*
-   * TODO: correct Unicode handling.
-   */
-  public static native boolean isLetter(char c) /*-{
-    return (null != String.fromCharCode(c).match(/[A-Z]/i));
-  }-*/;
+  public static boolean isLetter(char c) {
+    return Character_Jsni.isLetter(c);
+  }
 
-  /*
-   * TODO: correct Unicode handling.
-   */
-  public static native boolean isLetterOrDigit(char c) /*-{
-    return (null != String.fromCharCode(c).match(/[A-Z\d]/i));
-  }-*/;
+  public static boolean isLetterOrDigit(char c) {
+    return Character_Jsni.isLetterOrDigit(c);
+  }
 
   /*
    * TODO: correct Unicode handling.
@@ -282,13 +276,9 @@ public final class Character implements Comparable<Character>, Serializable {
     return isWhitespace((int) ch);
   }
 
-  // The regex would just be /\s/, but browsers handle non-breaking spaces inconsistently. Also,
-  // the Java definition includes separators.
-  public static native boolean isWhitespace(int codePoint) /*-{
-    return (null !== String.fromCharCode(codePoint).match(
-      /[\t-\r \u1680\u180E\u2000-\u2006\u2008-\u200A\u2028\u2029\u205F\u3000\uFEFF]|[\x1C-\x1F]/
-    ));
-  }-*/;
+  public static boolean isWhitespace(int codePoint) {
+    return Character_Jsni.isWhitespace(codePoint);
+  }
 
   public static boolean isSupplementaryCodePoint(int codePoint) {
     return codePoint >= MIN_SUPPLEMENTARY_CODE_POINT && codePoint <= MAX_CODE_POINT;
@@ -378,17 +368,17 @@ public final class Character implements Comparable<Character>, Serializable {
     return MIN_SUPPLEMENTARY_CODE_POINT + ((highSurrogate & 1023) << 10) + (lowSurrogate & 1023);
   }
 
-  public static native char toLowerCase(char c) /*-{
-    return String.fromCharCode(c).toLowerCase().charCodeAt(0);
-  }-*/;
+  public static char toLowerCase(char c) {
+    return Character_Jsni.toLowerCase(c);
+  }
 
   public static String toString(char x) {
     return String.valueOf(x);
   }
 
-  public static native char toUpperCase(char c) /*-{
-    return String.fromCharCode(c).toUpperCase().charCodeAt(0);
-  }-*/;
+  public static char toUpperCase(char c) {
+    return Character_Jsni.toUpperCase(c);
+  }
 
   public static Character valueOf(char c) {
     if (c < 128) {
@@ -466,6 +456,7 @@ public final class Character implements Comparable<Character>, Serializable {
     return value;
   }
 
+  @Override
   public int compareTo(Character c) {
     return compare(value, c.value);
   }

@@ -13,54 +13,34 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.client.impl;
+package com.google.j2cl.emul.core.client.impl;
 
 /**
  * A helper to print log messages to console.
  * <p> Note that, this is not a public API and can change/disappear in any release.
  */
-public class ConsoleLogger {
-  public static ConsoleLogger createIfSupported() {
-    return isSupported() ? new ConsoleLogger() : null;
-  }
+public class ConsoleLogger_Jsni {
 
-  private static native boolean isSupported() /*-{
+  static native boolean isSupported() /*-{
     return !!window.console;
   }-*/;
 
-  public native void log(String level, String message) /*-{
+  static native void log(String level, String message) /*-{
     console[level](message);
   }-*/;
 
-  public void log(String level, Throwable t) {
-    log(level, t, "Exception: ", true);
-  }
-
-  private void log(String level, Throwable t, String label, boolean expanded) {
-    groupStart(label + t.toString(), expanded);
-    log(level, getBackingError(t));
-    Throwable cause = t.getCause();
-    if (cause != null) {
-      log(level, cause, "Caused by: ", false);
-    }
-    for (Throwable suppressed : t.getSuppressed()) {
-      log(level, suppressed, "Suppressed: ", false);
-    }
-    groupEnd();
-  };
-
-  private native void groupStart(String msg, boolean expanded) /*-{
+  static native void groupStart(String msg, boolean expanded) /*-{
     // Not all browsers support grouping:
     var groupStart = (!expanded && console.groupCollapsed) || console.group || console.log;
     groupStart.call(console, msg);
   }-*/;
 
-  private native void groupEnd() /*-{
+  static native void groupEnd() /*-{
     var groupEnd = console.groupEnd || function(){};
     groupEnd.call(console);
   }-*/;
 
-  private native String getBackingError(Throwable t) /*-{
+  static native String getBackingError(Throwable t) /*-{
     // Converts CollectorLegacy (IE8/IE9/Safari5) function stack to something readable.
     function stringify(fnStack) {
       if (!fnStack || fnStack.length == 0) {

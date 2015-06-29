@@ -20,28 +20,21 @@ package java.util;
  * utility so that we could remove the checks easily by a flag.
  */
 class ConcurrentModificationDetector {
-
   public static void structureChanged(Object map) {
     // Ensure that modCount is initialized if it is not already.
-    int modCount = getModCount(map) | 0;
-    setModCount(map, modCount + 1);
+    int modCount = ConcurrentModificationDetector_Jsni.getModCount(map) | 0;
+    ConcurrentModificationDetector_Jsni.setModCount(map, modCount + 1);
   }
 
   public static void recordLastKnownStructure(Object host, Iterator<?> iterator) {
-    setModCount(iterator, getModCount(host));
+    ConcurrentModificationDetector_Jsni.setModCount(
+        iterator, ConcurrentModificationDetector_Jsni.getModCount(host));
   }
-  
+
   public static void checkStructuralChange(Object host, Iterator<?> iterator) {
-    if (getModCount(iterator) != getModCount(host)) {
+    if (ConcurrentModificationDetector_Jsni.getModCount(iterator)
+        != ConcurrentModificationDetector_Jsni.getModCount(host)) {
       throw new ConcurrentModificationException();
     }
   }
-
-  private static native void setModCount(Object o, int modCount) /*-{
-    o._gwt_modCount = modCount;
-  }-*/;
-
-  private static native int getModCount(Object o) /*-{
-    return o._gwt_modCount;
-  }-*/;
 }

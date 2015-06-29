@@ -15,10 +15,8 @@
  */
 package java.util;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
-
-import com.google.gwt.core.client.JavaScriptObject;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkElement;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkState;
 
 import java.util.Map.Entry;
 
@@ -34,14 +32,14 @@ import java.util.Map.Entry;
  * {@code Object.create} is not available, {@link InternalJsStringMapLegacy} prepends each key with
  * a ':' while storing.
  */
-class InternalJsStringMap<K, V> {
+class InternalJsStringMap<K, V> implements InternalJsStringMapInterface<K, V> {
 
   /**
    * String map implementation for browsers that doesn't support Object.create (IE8, FF3.6).
    */
   static class InternalJsStringMapLegacy<K, V> extends InternalJsStringMap<K, V> {
     @Override
-    native JavaScriptObject createMap() /*-{
+    public native Object createMap() /*-{
       return {};
     }-*/;
 
@@ -124,7 +122,7 @@ class InternalJsStringMap<K, V> {
     }
 
     @Override
-    protected String[] keys() {
+    public String[] keys() {
       String[] keys = super.keys();
       if (contains(PROTO)) {
         keys[keys.length] = PROTO; // safe in webmode
@@ -133,21 +131,25 @@ class InternalJsStringMap<K, V> {
     }
   }
 
-  private final JavaScriptObject backingMap = createMap();
+  private final Object backingMap = createMap();
   AbstractHashMap<K,V> host;
 
-  native JavaScriptObject createMap() /*-{
+  @Override
+  public native Object createMap() /*-{
     return Object.create(null);
   }-*/;
 
+  @Override
   public final boolean contains(String key) {
     return !isUndefined(get(key));
   }
 
+  @Override
   public V get(String key) {
     return at(key);
   }
 
+  @Override
   public V put(String key, V value) {
     V oldValue = at(key);
     if (isUndefined(oldValue)) {
@@ -159,6 +161,7 @@ class InternalJsStringMap<K, V> {
     return oldValue;
   }
 
+  @Override
   public V remove(String key) {
     V value = at(key);
     if (!isUndefined(value)) {
@@ -181,6 +184,7 @@ class InternalJsStringMap<K, V> {
     delete this.@InternalJsStringMap::backingMap[key];
   }-*/;
 
+  @Override
   public native boolean containsValue(Object value) /*-{
     var map = this.@InternalJsStringMap::backingMap;
     for (var key in map) {
@@ -191,6 +195,7 @@ class InternalJsStringMap<K, V> {
     return false;
   }-*/;
 
+  @Override
   public Iterator<Entry<K, V>> entries() {
     final String[] keys = keys();
     return new Iterator<Map.Entry<K,V>>() {
@@ -215,11 +220,13 @@ class InternalJsStringMap<K, V> {
     };
   }
 
-  protected native String[] keys() /*-{
+  @Override
+  public native String[] keys() /*-{
     return Object.getOwnPropertyNames(this.@InternalJsStringMap::backingMap);
   }-*/;
 
-  protected final Entry<K, V> newMapEntry(final String key) {
+  @Override
+  public final Entry<K, V> newMapEntry(final String key) {
     return new AbstractMapEntry<K, V>() {
       @Override
       public K getKey() {
@@ -241,7 +248,8 @@ class InternalJsStringMap<K, V> {
    * in JSNI. By putting the polymorphism in Java code, the compiler can do a
    * better job of optimizing in most cases.
    */
-  protected final boolean equalsBridge(Object value1, Object value2) {
+  @Override
+  public final boolean equalsBridge(Object value1, Object value2) {
     return host.equals(value1, value2);
   }
 
@@ -252,4 +260,9 @@ class InternalJsStringMap<K, V> {
   private static native boolean isUndefined(Object value) /*-{
     return value === undefined;
   }-*/;
+
+  @Override
+  public void setHost(AbstractHashMap<K, V> host) {
+    this.host = host; 
+  }
 }

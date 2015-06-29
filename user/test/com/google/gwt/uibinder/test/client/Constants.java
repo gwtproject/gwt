@@ -40,6 +40,10 @@ public class Constants {
     @SuppressWarnings("unused")
     private static String PRIVATE = "private";
   }
+  
+  interface InterfaceConst {
+    String someValue = "imported text";
+  }
 
   public static String CONST_FOO = "Foo";
 

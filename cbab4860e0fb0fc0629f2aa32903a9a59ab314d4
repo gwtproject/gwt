@@ -1,0 +1,1058 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "138ee5ef_f5937a28",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_15913e20",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_b58df208",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_d58af6ed",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_756bea9d",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_9570ee85",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_35756274",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_557a6665",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_f55e1af3",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_155cdef8",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_b568929b",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_d56516c2",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_75520ae4",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_95578ed1",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_354c8246",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_555106d9",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_f545ba18",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_15437e14",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_b53f3291",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_d53c369e",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_75c52a03",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_95ca2e13",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_35cfa225",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_55d4a6b2",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_f5d85ae8",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_15d61eba",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_b5e2d298",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_d5df56cb",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_75ec4a8d",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_95f1ce62",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_35e6c2ab",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_55eb4672",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_f5fffa29",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_15fdbe31",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_b5f97246",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_d5f67653",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_75176a03",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_951c6e27",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_3521e261",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_5526e67a",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_f50a9ad8",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_15085ede",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_b51412f9",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_d5119607",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_753e8a7d",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_95430ef7",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_3538028c",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_553d867a",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_f5313aa6",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_152ffe45",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_b52bb236",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_d528b63b",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_7561aa8a",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_9566aea2",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_356b226d",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_55702652",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_f574da47",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_15729e59",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_b57e5224",
+        "filename": "user/src/com/google/j2cl/emul/core/client/JsDate.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027public\u0027 modifier.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_d57bd632",
+        "filename": "user/src/com/google/j2cl/emul/core/client/impl/SimpleConsoleLogHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_7548ca04",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Number_Helper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_954d4e16",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-06-29T18:42:04Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "cbab4860e0fb0fc0629f2aa32903a9a59ab314d4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

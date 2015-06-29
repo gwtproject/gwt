@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 /**
  * Unit tests for the Javascript emulation of the Integer/int autoboxed
  * fundamental type.
@@ -28,6 +30,7 @@ public class IntegerTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testBadStrings() {
     try {
       new Integer("05abcd");
@@ -100,6 +103,7 @@ public class IntegerTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testBinaryString() {
     assertEquals("11000000111001", Integer.toBinaryString(12345));
     assertEquals("0", Integer.toBinaryString(0));
@@ -107,6 +111,7 @@ public class IntegerTest extends GWTTestCase {
         Integer.toBinaryString(-12345));
   }
 
+  @Test
   public void testBitCount() {
     assertEquals(0, Integer.bitCount(0));
     assertEquals(1, Integer.bitCount(1));
@@ -115,6 +120,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(1, Integer.bitCount(Integer.MIN_VALUE));
   }
 
+  @Test
   public void testCompare() {
     assertTrue("Integer.compare failed for 1 < 2", Integer.compare(1, 2) < 0);
     assertTrue("Integer.compare failed for 2 > 1", Integer.compare(2, 1) > 0);
@@ -122,23 +128,27 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(-1, Integer.compare(Integer.MIN_VALUE, 1));
   }
 
+  @Test
   public void testCompareTo() {
     assertEquals(-1, new Integer(12345).compareTo(new Integer(12346)));
     assertEquals(1, new Integer("12345").compareTo(new Integer(12344)));
     assertEquals(0, new Integer("12345").compareTo(new Integer(12345)));
   }
 
+  @Test
   public void testConstants() {
     assertEquals(32, Integer.SIZE);
     assertEquals(0x7fffffff, Integer.MAX_VALUE);
     assertEquals(0x80000000, Integer.MIN_VALUE);
   }
 
+  @Test
   public void testConstructor() {
     assertEquals(12345, new Integer(12345).intValue());
     assertEquals(12345, new Integer("12345").intValue());
   }
 
+  @Test
   public void testDecode() {
     assertEquals(Integer.MAX_VALUE, Integer.decode(
         String.valueOf(Integer.MAX_VALUE)).intValue());
@@ -159,15 +169,18 @@ public class IntegerTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testEquals() {
     assertFalse(new Integer(12345).equals(new Integer(12346)));
     assertEquals(new Integer("12345"), new Integer(12345));
   }
 
+  @Test
   public void testHashCode() {
     assertEquals(1234, new Integer(1234).hashCode());
   }
 
+  @Test
   public void testHighestOneBit() {
     assertEquals(0, Integer.highestOneBit(0));
     assertEquals(Integer.MIN_VALUE, Integer.highestOneBit(-1));
@@ -177,6 +190,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(0x40000000, Integer.highestOneBit(Integer.MAX_VALUE));
   }
 
+  @Test
   public void testLowestOneBit() {
     assertEquals(0, Integer.lowestOneBit(0));
     assertEquals(1, Integer.lowestOneBit(-1));
@@ -186,6 +200,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(0x80000000, Integer.lowestOneBit(Integer.MIN_VALUE));
   }
 
+  @Test
   public void testNumberOfLeadingZeros() {
     assertEquals(32, Integer.numberOfLeadingZeros(0));
     assertEquals(31, Integer.numberOfLeadingZeros(1));
@@ -196,6 +211,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(0, Integer.numberOfLeadingZeros(-0x8000));
   }
 
+  @Test
   public void testNumberOfTrailingZeros() {
     assertEquals(32, Integer.numberOfTrailingZeros(0));
     assertEquals(0, Integer.numberOfTrailingZeros(1));
@@ -206,6 +222,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(4, Integer.numberOfTrailingZeros(-0x7ff0));
   }
 
+  @Test
   public void testReverse() {
     assertEquals(0, Integer.reverse(0));
     assertEquals(-1, Integer.reverse(-1));
@@ -219,6 +236,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(0x00550055, Integer.reverse(0xaa00aa00));
   }
 
+  @Test
   public void testReverseBytes() {
     assertEquals(0, Integer.reverseBytes(0));
     // two-complement bugs?
@@ -227,6 +245,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(0x21436587, Integer.reverseBytes(0x87654321));
   }
 
+  @Test
   public void testRotateLeft() {
     assertEquals(0, Integer.rotateLeft(0, 4));
     assertEquals(0x2, Integer.rotateLeft(1, 1));
@@ -236,6 +255,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(1, Integer.rotateLeft(Integer.MIN_VALUE, 1));
   }
 
+  @Test
   public void testRotateRight() {
     assertEquals(0, Integer.rotateRight(0, 4));
     assertEquals(Integer.MIN_VALUE, Integer.rotateRight(1, 1));
@@ -243,6 +263,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(-1, Integer.rotateRight(-1, 4));
   }
 
+  @Test
   public void testSignum() {
     assertEquals(0, Integer.signum(0));
     assertEquals(1, Integer.signum(1));
@@ -251,6 +272,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(-1, Integer.signum(Integer.MIN_VALUE));
   }
 
+  @Test
   public void testStaticValueOf() {
     assertEquals(Integer.MIN_VALUE,
         Integer.valueOf(Integer.MIN_VALUE).intValue());
@@ -258,11 +280,13 @@ public class IntegerTest extends GWTTestCase {
         Integer.valueOf(Integer.MAX_VALUE).intValue());
   }
 
+  @Test
   public void testToBinaryString() {
     assertEquals("1111111111111111111111111111111", Integer.toBinaryString(Integer.MAX_VALUE));
     assertEquals("10000000000000000000000000000000", Integer.toBinaryString(Integer.MIN_VALUE));
   }
 
+  @Test
   public void testToHexString() {
     assertEquals("12345", Integer.toHexString(0x12345));
     assertEquals("fff12345", Integer.toHexString(0xFFF12345));
@@ -277,11 +301,13 @@ public class IntegerTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testToOctalString() {
     assertEquals("17777777777", Integer.toOctalString(Integer.MAX_VALUE));
     assertEquals("20000000000", Integer.toOctalString(Integer.MIN_VALUE));
   }
 
+  @Test
   public void testToString() {
     assertEquals("12345", new Integer(12345).toString());
     assertEquals("-12345", new Integer("-12345").toString());
@@ -306,11 +332,13 @@ public class IntegerTest extends GWTTestCase {
     assertEquals("-2147483648", Integer.toString(-2147483648, 10));
   }
 
+  @Test
   public void testValueOf() {
     assertEquals(new Integer(12345), Integer.valueOf("12345"));
     assertEquals(new Integer(1865), Integer.valueOf("12345", 6));
   }
 
+  @Test
   public void testParseInt() {
     assertEquals(12345, Integer.parseInt("12345"));
     assertEquals(12345, Integer.parseInt("+12345"));
@@ -323,6 +351,7 @@ public class IntegerTest extends GWTTestCase {
         Integer.parseInt(String.valueOf(Integer.MIN_VALUE)));
   }
 
+  @Test
   public void testXValue() {
     assertEquals("short", (short) 12345, new Integer(12345).shortValue());
     assertEquals("long", 1234567890L, new Integer(1234567890).longValue());

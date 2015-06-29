@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 /**
  * Tests for the JRE Short type.
  */
@@ -27,23 +29,27 @@ public class ShortTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testCompare() {
     assertTrue("Short.compare failed for 1 < 2", Short.compare((short) 1, (short) 2) < 0);
     assertTrue("Short.compare failed for 2 > 1", Short.compare((short) 2, (short) 1) > 0);
     assertEquals(0, Short.compare((short) 1, (short) 1));
   }
 
+  @Test
   public void testConstants() {
     assertEquals(16, Short.SIZE);
     assertEquals((short) 0x7fff, Short.MAX_VALUE);
     assertEquals((short) 0x8000, Short.MIN_VALUE);
   }
 
+  @Test
   public void testReverseBytes() {
     assertEquals(0x1122, Short.reverseBytes((short) 0x2211));
     assertEquals(0, Short.reverseBytes((short) 0));
   }
 
+  @Test
   public void testStaticValueOf() {
     assertEquals(Short.MIN_VALUE, Short.valueOf(Short.MIN_VALUE).shortValue());
     assertEquals(Short.MAX_VALUE, Short.valueOf(Short.MAX_VALUE).shortValue());

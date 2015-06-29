@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -29,6 +31,7 @@ public class VectorTest extends ListTestBase {
     return new Vector();
   }
 
+  @Test
   public void testIndexOf() {
     Vector<String> v = new Vector<String>();
     v.addAll(Arrays.asList("a", "b", "b", "c"));
@@ -47,6 +50,7 @@ public class VectorTest extends ListTestBase {
     assertEquals(-1, v.indexOf("a", 10));
   }
 
+  @Test
   public void testLastIndexOf() {
     Vector<String> v = new Vector<String>();
     v.addAll(Arrays.asList("a", "b", "b", "c"));
@@ -65,6 +69,7 @@ public class VectorTest extends ListTestBase {
     assertEquals(-1, v.lastIndexOf("a", -10));
   }
 
+  @Test
   public void testExceptions() throws Exception {
     Vector<String> v = new Vector<String>();
     v.add("a");

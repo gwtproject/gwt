@@ -18,6 +18,8 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 /**
  * Tests for JRE emulation of java.lang.Math.
  * 
@@ -38,7 +40,8 @@ public class MathTest extends GWTTestCase {
   public String getModuleName() {
     return "com.google.gwt.emultest.EmulSuite";
   }
-  
+
+  @Test
   public void testAbs() {
     double v = Math.abs(-1.0);
     double negativeZero = makeNegativeZero();
@@ -58,12 +61,14 @@ public class MathTest extends GWTTestCase {
     v = Math.abs(Double.NaN);
     assertTrue(Double.isNaN(v));
   }
-  
+
+  @Test
   public void testCbrt() {
     double v = Math.cbrt(1000.0);
     assertEquals(10.0, v, 1e-7);
   }
-  
+
+  @Test
   public void testCos() {
     double v = Math.cos(0.0);
     assertEquals(1.0, v, 1e-7);
@@ -82,7 +87,8 @@ public class MathTest extends GWTTestCase {
     v = Math.cos(Double.POSITIVE_INFINITY);
     assertTrue(Double.isNaN(v));
   }
-  
+
+  @Test
   public void testCosh() {
     double v = Math.cosh(0.0);
     assertEquals(1.0, v, 1e-7);
@@ -98,16 +104,19 @@ public class MathTest extends GWTTestCase {
     assertEquals(Double.POSITIVE_INFINITY, v);
   }
 
+  @Test
   public void testLog() {
     double v = Math.log(Math.E);
     assertEquals(1.0, v, 1e-15);
   }
-  
+
+  @Test
   public void testLog10() {
     double v = Math.log10(1000.0);
     assertEquals(3.0, v, 1e-15);
   }
-  
+
+  @Test
   public void testSin() {
     double v = Math.sin(0.0);
     assertEquals(0.0, v, 1e-7);
@@ -126,7 +135,8 @@ public class MathTest extends GWTTestCase {
     v = Math.sin(Double.POSITIVE_INFINITY);
     assertTrue(Double.isNaN(v));
   }
-  
+
+  @Test
   public void testSinh() {
     double v = Math.sinh(0.0);
     assertEquals(0.0, v);
@@ -143,7 +153,8 @@ public class MathTest extends GWTTestCase {
     v = Math.sinh(-0.0);
     assertEquals(-0.0, v);
   }
-  
+
+  @Test
   public void testTan() {
     double v = Math.tan(0.0);
     assertEquals(0.0, v, 1e-7);
@@ -156,7 +167,8 @@ public class MathTest extends GWTTestCase {
     v = Math.tan(Double.POSITIVE_INFINITY);
     assertTrue(Double.isNaN(v));
   }
-  
+
+  @Test
   public void testTanh() {
     double v = Math.tanh(0.0);
     assertEquals(0.0, v);
@@ -174,6 +186,7 @@ public class MathTest extends GWTTestCase {
     assertEquals(-0.0, v);
   }
 
+  @Test
   public void testScalb() {
     assertEquals(40.0d, Math.scalb(5d, 3));
     assertEquals(40.0f, Math.scalb(5f, 3));

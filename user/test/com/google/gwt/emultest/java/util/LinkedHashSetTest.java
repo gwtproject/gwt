@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.util;
 
 import org.apache.commons.collections.TestSet;
+import org.junit.Test;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -53,6 +54,7 @@ public class LinkedHashSetTest extends TestSet {
    * Test method for 'java.util.LinkedHashSet.clone()'
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testClone() {
     LinkedHashSet<String> srcSet = new LinkedHashSet<String>();
     checkEmptyLinkedHashSetAssumptions(srcSet);

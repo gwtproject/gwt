@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -184,10 +186,12 @@ public class EnumMapTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testBasics() {
     enumTests(Number.class);
   }
 
+  @Test
   public void testNulls() {
     EnumMap<Number, Integer> numbers = new EnumMap<Number, Integer>(Number.class);
 
@@ -204,6 +208,7 @@ public class EnumMapTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testOrdering() {
     EnumMap<Number, Integer> numbers = new EnumMap<Number, Integer>(Number.class);
     Number[] enums = Number.values();

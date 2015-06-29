@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 /**
  * Tests for the JRE Boolean type.
  */
@@ -38,12 +40,14 @@ public class BooleanTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testCompare() {
     assertTrue("Boolean.compare failed for false < true", Boolean.compare(false, true) < 0);
     assertTrue("Boolean.compare failed for true > false", Boolean.compare(true, false) > 0);
     assertEquals(0, Boolean.compare(true, true));
   }
 
+  @Test
   public void testCtor() {
     assertTrue(new Boolean(btrue));
     assertTrue(new Boolean(true1));
@@ -56,6 +60,7 @@ public class BooleanTest extends GWTTestCase {
     assertFalse(new Boolean(false4));
   }
 
+  @Test
   public void testParseBoolean() {
     assertTrue(Boolean.parseBoolean(true1));
     assertTrue(Boolean.parseBoolean(true2));
@@ -66,6 +71,7 @@ public class BooleanTest extends GWTTestCase {
     assertFalse(Boolean.parseBoolean(false4));
   }
 
+  @Test
   public void testValueOf() {
     assertTrue(Boolean.valueOf(btrue));
     assertTrue(Boolean.valueOf(true1));

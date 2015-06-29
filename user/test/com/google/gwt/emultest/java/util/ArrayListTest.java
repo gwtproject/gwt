@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import org.junit.Test;
+
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,7 @@ public class ArrayListTest extends ListTestBase {
     }
   }
 
+  @Test
   public void testAbstractListUnmodifiableFailedIteratorAddIndexCorruption() {
     ListIterator<String> i = new AbstractList<String>() {
       @Override
@@ -55,6 +58,7 @@ public class ArrayListTest extends ListTestBase {
     assertFalse(i.hasPrevious());
   }
 
+  @Test
   public void testRemoveRange() {
     ArrayListWithRemoveRange l = new ArrayListWithRemoveRange();
     for (int i = 0; i < 10; i++) {

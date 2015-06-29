@@ -18,6 +18,8 @@ package com.google.gwt.emultest.java.util;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -44,6 +46,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public boolean java.util.Date.after(java.util.Date). */
+  @Test
   public void testAfter() {
 
     // /////////////////////////////
@@ -71,6 +74,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public boolean java.util.Date.before(java.util.Date). */
+  @Test
   public void testBefore() {
 
     // /////////////////////////////
@@ -101,6 +105,7 @@ public class DateTest extends GWTTestCase {
    * Tests that if daylight savings time occurs tomorrow, the current date isn't
    * affected.
    */
+  @Test
   public void testClockForwardNextDay() {
     int[] monthDayHour = new int[3];
     if (!findClockForwardTime(2009, monthDayHour)) {
@@ -131,6 +136,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public java.lang.Object java.util.Date.clone(). */
+  @Test
   public void testClone() {
 
     // /////////////////////////////
@@ -158,6 +164,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public int java.util.Date.compareTo(java.util.Date). */
+  @Test
   public void testCompareTo() {
 
     // /////////////////////////////
@@ -184,6 +191,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public int java.util.Date.getDate(). */
+  @Test
   public void testGetDate() {
 
     // /////////////////////////////
@@ -214,6 +222,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public int java.util.Date.getDay(). */
+  @Test
   public void testGetDay() {
 
     // /////////////////////////////
@@ -236,12 +245,14 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public int java.util.Date.getHours(). */
+  @Test
   public void testGetHours() {
     // Cannot be done because each time zone will give a different
     // answer
   }
 
   /** Testing for public int java.util.Date.getMinutes(). */
+  @Test
   public void testGetMinutes() {
 
     // /////////////////////////////
@@ -259,6 +270,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public int java.util.Date.getMonth(). */
+  @Test
   public void testGetMonth() {
 
     // /////////////////////////////
@@ -277,6 +289,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public int java.util.Date.getSeconds(). */
+  @Test
   public void testGetSeconds() {
 
     // /////////////////////////////
@@ -295,6 +308,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public long java.util.Date.getTime(). */
+  @Test
   public void testGetTime() {
 
     // /////////////////////////////
@@ -313,6 +327,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public int java.util.Date.getTimezoneOffset(). */
+  @Test
   public void testGetTimezoneOffset() {
 
     // /////////////////////////////
@@ -335,6 +350,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public int java.util.Date.getYear(). */
+  @Test
   public void testGetYear() {
 
     // /////////////////////////////
@@ -357,6 +373,7 @@ public class DateTest extends GWTTestCase {
    * days in it, that the date rolls over to the first day of the next month in
    * sequence.
    */
+  @Test
   public void testInvalidDateForMonth() {
     int monthNum = 3; // April
     int numDaysInOldMonth = 30;
@@ -368,6 +385,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public static long java.util.Date.parse(java.lang.String). */
+  @Test
   public void testParse() {
     try {
       Date.parse(null);
@@ -407,6 +425,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public void java.util.Date.setDate(int). */
+  @Test
   public void testSetDate() {
     // We only go through dates from 0-28 here. There are some months that do
     // not
@@ -421,6 +440,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public void java.util.Date.setHours(int). */
+  @Test
   public void testSetHours() {
     for (int i = 0; i < 24; i++) {
       Date accum0 = create();
@@ -439,6 +459,7 @@ public class DateTest extends GWTTestCase {
    * returned by the date class will be one higher than the month that we
    * originally set (according to the spec of java.util.date).
    */
+  @Test
   public void testSetInvalidMonthForDate() {
     int dayNum = 31;
     int newMonthNum = 1;
@@ -454,6 +475,7 @@ public class DateTest extends GWTTestCase {
    * set the year to a non-leap year, that the month and day will roll over to
    * March 1st.
    */
+  @Test
   public void testSetInvalidYearForDate() {
     int dayNum = 29;
     int monthNum = 1; // February
@@ -467,6 +489,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public void java.util.Date.setMinutes(int). */
+  @Test
   public void testSetMinutes() {
     for (int i = 0; i < 24; i++) {
       Date accum0 = create();
@@ -476,6 +499,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public void java.util.Date.setMonth(int). */
+  @Test
   public void testSetMonth() {
     for (int i = 0; i < 12; i++) {
       // We want to use a fixed date here. If we use the current date, the
@@ -490,6 +514,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public void java.util.Date.setSeconds(int). */
+  @Test
   public void testSetSeconds() {
     for (int i = 0; i < 24; i++) {
       Date accum0 = create();
@@ -499,6 +524,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public void java.util.Date.setTime(long). */
+  @Test
   public void testSetTime() {
     long[] values = new long[] {-100000000000L, -100L, 0, 100L, 1000000000L};
     for (int i = 0; i < values.length; i++) {
@@ -512,6 +538,7 @@ public class DateTest extends GWTTestCase {
    * We want to test to see that if the date is Feb 29th (in a leap year) and we
    * set the year to another leap year, that the month and day will be retained.
    */
+  @Test
   public void testSetValidLeapYearForDate() {
     int dayNum = 29;
     int monthNum = 1; // February
@@ -525,6 +552,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public void java.util.Date.setYear(int). */
+  @Test
   public void testSetYear() {
     for (int i = 1880; i < 2030; i++) {
       // We want to use a fixed date here. If we use the current date, the
@@ -537,6 +565,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public java.lang.String java.util.Date.toGMTString(). */
+  @Test
   public void testToGMTString() {
 
     // We can't rely on the JRE's toString, as it is an implementation detail.
@@ -558,6 +587,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public java.lang.String java.util.Date.toLocaleString(). */
+  @Test
   public void testToLocaleString() {
 
     // We can't rely on the JRE's toString, as it is an implementation detail.
@@ -578,6 +608,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Date docs specify an exact format for toString(). */
+  @Test
   public void testToString() {
 
     // We can't rely on the JRE's toString, as it is an implementation detail.
@@ -605,6 +636,7 @@ public class DateTest extends GWTTestCase {
   }
 
   /** Testing for public static long java.util.Date.UTC(int,int,int,int,int,int). */
+  @Test
   public void testUTC() {
 
     // /////////////////////////////
@@ -757,6 +789,7 @@ public class DateTest extends GWTTestCase {
         && monthDayHour[1] == date.getDate();
   }
 
+  @Test
   public void testClockBackwardTime() {
     int[] monthDayHour = new int[3];
     if (!findClockBackwardTime(2009, monthDayHour)) {
@@ -776,6 +809,7 @@ public class DateTest extends GWTTestCase {
     assertEquals(hour, d.getHours());
   }
 
+  @Test
   public void testClockForwardTime() {
     int[] monthDayHour = new int[3];
     if (!findClockForwardTime(2009, monthDayHour)) {

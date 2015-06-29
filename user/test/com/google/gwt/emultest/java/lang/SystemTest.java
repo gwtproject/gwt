@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 
 /**
@@ -76,6 +78,7 @@ public class SystemTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testArraycopyEnumToInterface() {
     EnumImpl[] src = new EnumImpl[]{ EnumImpl.FOO, null, EnumImpl.BAZ };
     Interfaz[] dest = new Interfaz[5];
@@ -87,6 +90,7 @@ public class SystemTest extends GWTTestCase {
         Arrays.asList(dest));
   }
 
+  @Test
   public void testArraycopyEnumToObject() {
     EnumImpl[] src = new EnumImpl[]{ EnumImpl.FOO, null, EnumImpl.BAZ };
     Object[] dest = new Object[5];
@@ -98,6 +102,7 @@ public class SystemTest extends GWTTestCase {
         Arrays.asList(dest));
   }
 
+  @Test
   public void testArraycopyFailures() {
     int[] src = new int[4];
     int[] dest = new int[] {1, 1, 1, 1};
@@ -155,6 +160,7 @@ public class SystemTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testArraycopyInterfaceToObject() {
     Interfaz[] src = new Interfaz[]{
         new InterfazImpl("foo"), null, new InterfazImpl("bar") };
@@ -166,6 +172,7 @@ public class SystemTest extends GWTTestCase {
         new InterfazImpl("bar"), null), Arrays.asList(dest));
   }
 
+  @Test
   public void testArraycopyMultidim() {
     Object[][] objArray = new Object[1][1];
     String[][] strArray = new String[1][1];
@@ -186,6 +193,7 @@ public class SystemTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testArraycopyNulls() {
     int[] src = new int[4];
     int[] dest = new int[] {1, 1, 1, 1};
@@ -205,6 +213,7 @@ public class SystemTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testArraycopyObjects() {
     Foo[] fooArray = new Foo[4];
     Bar[] barArray = new Bar[4];
@@ -224,7 +233,8 @@ public class SystemTest extends GWTTestCase {
       assertNull(barArray[3]);
     }
   }
-  
+
+  @Test
   public void testArraycopyOverlap() {
     int[] intArray = new int[] {0, 1, 2, 3};
     String[] strArray = new String[] {"0", "1", "2", "3"};
@@ -261,6 +271,7 @@ public class SystemTest extends GWTTestCase {
      */
   }
 
+  @Test
   public void testArraycopyPrimitives() {
     int[] src = new int[] {0, 1, 2, 3, 4, 5, 6, 7};
     int[] dest = new int[8];
@@ -276,6 +287,7 @@ public class SystemTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testArraycopyLargeArray() {
     char[] largeCharArrayValue = C.getLargeCharArrayValue();
     char[] charDest = new char[largeCharArrayValue.length];
@@ -294,6 +306,7 @@ public class SystemTest extends GWTTestCase {
     assertEquals('a', charDest[offset + manyNulls.length]);
   }
 
+  @Test
   public void testGetProperty() {
     assertEquals("default", System.getProperty("key", "default"));
   }

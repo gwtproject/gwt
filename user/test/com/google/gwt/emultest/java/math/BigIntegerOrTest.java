@@ -39,6 +39,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.math.BigInteger;
 
 /**
@@ -48,6 +50,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for two negative numbers; the first is longer.
    */
+  @Test
   public void testNegNegFirstLonger() {
     byte aBytes[] = {
         -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
@@ -71,6 +74,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for two negative numbers; the first is shorter.
    */
+  @Test
   public void testNegNegFirstShorter() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     byte bBytes[] = {
@@ -94,6 +98,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for two negative numbers of the same length.
    */
+  @Test
   public void testNegNegSameLength() {
     byte aBytes[] = {-128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
@@ -115,6 +120,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for a negative number and zero.
    */
+  @Test
   public void testNegPos() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     byte bBytes[] = {0};
@@ -136,6 +142,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for a negative and a positive numbers; the first is longer.
    */
+  @Test
   public void testNegPosFirstLonger() {
     byte aBytes[] = {
         -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
@@ -160,6 +167,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for two negative numbers; the first is shorter.
    */
+  @Test
   public void testNegPosFirstShorter() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     byte bBytes[] = {
@@ -182,6 +190,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for two numbers of different signs and the same length.
    */
+  @Test
   public void testNegPosSameLength() {
     byte aBytes[] = {-128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
@@ -202,6 +211,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for one and one.
    */
+  @Test
   public void testOneOne() {
     byte aBytes[] = {1};
     byte bBytes[] = {1};
@@ -222,6 +232,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for a positive and a negative numbers; the first is longer.
    */
+  @Test
   public void testPosNegFirstLonger() {
     byte aBytes[] = {
         -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
@@ -244,6 +255,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for a positive and a negative number; the first is shorter.
    */
+  @Test
   public void testPosNegFirstShorter() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     byte bBytes[] = {
@@ -268,6 +280,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for two numbers of different signs and the same length.
    */
+  @Test
   public void testPosNegSameLength() {
     byte aBytes[] = {-128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
@@ -289,6 +302,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for two positive numbers; the first is longer.
    */
+  @Test
   public void testPosPosFirstLonger() {
     byte aBytes[] = {
         -128, 9, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117, 23, 87,
@@ -313,6 +327,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for two positive numbers; the first is shorter.
    */
+  @Test
   public void testPosPosFirstShorter() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     byte bBytes[] = {
@@ -337,6 +352,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for two positive numbers of the same length.
    */
+  @Test
   public void testPosPosSameLength() {
     byte aBytes[] = {-128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, -117};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
@@ -358,6 +374,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for a positive number and zero.
    */
+  @Test
   public void testPosZero() {
     byte aBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
     byte bBytes[] = {0};
@@ -375,6 +392,7 @@ public class BigIntegerOrTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, result.signum());
   }
 
+  @Test
   public void testRegression() {
     // Regression test for HARMONY-1996
     BigInteger x = new BigInteger("-1023");
@@ -387,6 +405,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for zero and a negative number.
    */
+  @Test
   public void testZeroNeg() {
     byte aBytes[] = {0};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
@@ -408,6 +427,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for zero and one.
    */
+  @Test
   public void testZeroOne() {
     byte aBytes[] = {0};
     byte bBytes[] = {1};
@@ -428,6 +448,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for zero and a positive number.
    */
+  @Test
   public void testZeroPos() {
     byte aBytes[] = {0};
     byte bBytes[] = {-2, -3, -4, -4, 5, 14, 23, 39, 48, 57, 66, 5, 14, 23};
@@ -448,6 +469,7 @@ public class BigIntegerOrTest extends EmulTestBase {
   /**
    * Or for zero and zero.
    */
+  @Test
   public void testZeroZero() {
     byte aBytes[] = {0};
     byte bBytes[] = {0};

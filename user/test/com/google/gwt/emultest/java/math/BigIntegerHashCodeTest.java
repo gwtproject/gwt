@@ -39,6 +39,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.math.BigInteger;
 
 /**
@@ -48,6 +50,7 @@ public class BigIntegerHashCodeTest extends EmulTestBase {
   /**
    * Test hash codes for equal objects.
    */
+  @Test
   public void testEqualObjects() {
     String value1 = "12378246728727834290276457386374882976782849";
     String value2 = "12378246728727834290276457386374882976782849";
@@ -64,6 +67,7 @@ public class BigIntegerHashCodeTest extends EmulTestBase {
    * Test hash codes for the same object.
    */
   @SuppressWarnings("ReturnValueIgnored")
+  @Test
   public void testSameObject() {
     String value1 = "12378246728727834290276457386374882976782849";
     String value2 = "-5634562095872038262928728727834290276457386374882976782849";
@@ -82,6 +86,7 @@ public class BigIntegerHashCodeTest extends EmulTestBase {
   /**
    * Test hash codes for unequal objects. The codes are unequal.
    */
+  @Test
   public void testUnequalObjectsUnequal() {
     String value1 = "12378246728727834290276457386374882976782849";
     String value2 = "-5634562095872038262928728727834290276457386374882976782849";

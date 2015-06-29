@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.core.client.JavaScriptException;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -62,6 +64,7 @@ public class CollectionsTest extends EmulTestBase {
     return Collections.singletonMap("foo", "bar").entrySet().iterator().next();
   }
 
+  @Test
   public void testAsLifoQueue() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -130,6 +133,7 @@ public class CollectionsTest extends EmulTestBase {
    * of elements not found value larger than all elements not found value
    * smaller than all elements
    */
+  @Test
   public void testBinarySearchObject() {
     List<String> a1 = new ArrayList<String>();
     int ret = Collections.binarySearch(a1, "");
@@ -157,6 +161,7 @@ public class CollectionsTest extends EmulTestBase {
    * of elements not found value larger than all elements not found value
    * smaller than all elements null Comparator uses natural ordering
    */
+  @Test
   public void testBinarySearchObjectComparator() {
     Comparator<String> inverseSort = new Comparator<String>() {
       @Override
@@ -188,6 +193,7 @@ public class CollectionsTest extends EmulTestBase {
     assertEquals(3, ret);
   }
 
+  @Test
   public void testEntrySetToArrayOversized() {
     Map<String, String> delegate = new HashMap<String, String>();
     delegate.put("key", "value");
@@ -207,6 +213,7 @@ public class CollectionsTest extends EmulTestBase {
     assertNull("The element after last should be null.", result[1]);
   }
 
+  @Test
   public void testFill() {
     List<String> a = createSortedList();
     Collections.fill(a, null);
@@ -217,6 +224,7 @@ public class CollectionsTest extends EmulTestBase {
     assertEquals(new Object[b.size()], b);
   }
 
+  @Test
   public void testListCopy() {
     List<Integer> src = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
     List<Integer> dest = new ArrayList<Integer>(Arrays.asList(1, 2));
@@ -236,6 +244,7 @@ public class CollectionsTest extends EmulTestBase {
     assertEquals(new Integer[]{1, 2, 3}, dest);
   }
 
+  @Test
   public void testNewSetFromMap() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -271,6 +280,7 @@ public class CollectionsTest extends EmulTestBase {
     assertEquals(0, set.size());
   }
 
+  @Test
   public void testReverse() {
     List<String> a = createSortedList();
     Collections.reverse(a);
@@ -286,6 +296,7 @@ public class CollectionsTest extends EmulTestBase {
   /**
    * @tests java.util.Collections#rotate(java.util.List, int)
    */
+  @Test
   public void testRotate() {
     try {
       Collections.rotate(null, 0);
@@ -307,6 +318,7 @@ public class CollectionsTest extends EmulTestBase {
     });
   }
 
+  @Test
   public void testSort() {
     List<String> a = createSortedList();
     Collections.reverse(a);
@@ -314,6 +326,7 @@ public class CollectionsTest extends EmulTestBase {
     assertEquals(createSortedList(), a);
   }
 
+  @Test
   public void testSortWithComparator() {
     Comparator<String> x = new Comparator<String>() {
       @Override
@@ -328,6 +341,7 @@ public class CollectionsTest extends EmulTestBase {
     assertEquals(expected, a);
   }
 
+  @Test
   public void testToArray() {
     List<Integer> testList = createRandomList();
     Integer[] testArray = new Integer[testList.size()];

@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -66,39 +68,47 @@ public class ArraysTest extends EmulTestBase {
    * embedded null references works properly (and most importantly doesn't
    * throw an NPE).
    */
+  @Test
   public void testArraysHashCodeWithNullElements() {
     String[] a = new String[] { "foo", null, "bar", "baz" };
     Arrays.hashCode(a);
   }
 
+  @Test
   public void testArraysEqualsWithEmptyArrays() {
     assertTrue(Arrays.equals(new String[0], new String[0]));
   }
 
+  @Test
   public void testArraysEqualsWithoutNullElementsEqual() {
     assertTrue(Arrays.equals(
         new String[]{"foo"}, new String[]{"foo"}));
   }
 
+  @Test
   public void testArraysEqualsWithoutNullElementsNotEqual() {
     assertFalse(Arrays.equals(
         new String[]{"foo"}, new String[]{"bar"}));
   }
 
+  @Test
   public void testArraysEqualsWithNullElementsEqual() {
     assertTrue(Arrays.equals(new String[2], new String[2]));
   }
 
+  @Test
   public void testArraysEqualsWithNullElementsNotEqual() {
     assertFalse(Arrays.equals(new String[2], new String[1]));
   }
 
+  @Test
   public void testArraysEqualsWithNullAndNonNullElementsEqual() {
     assertTrue(Arrays.equals(
         new String[]{null, "foo", null, "bar"},
         new String[]{null, "foo", null, "bar"}));
   }
 
+  @Test
   public void testArraysEqualsWithNullAndNonNullElementsNotEqual() {
     assertFalse(Arrays.equals(
         new String[]{null, "bar", null, "foo"},
@@ -109,6 +119,7 @@ public class ArraysTest extends EmulTestBase {
    * Tests {@link Arrays#asList(Object[])}.
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testAsList() {
     // 0
     Object[] test = {};
@@ -129,6 +140,7 @@ public class ArraysTest extends EmulTestBase {
    * reflected in the original array.
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testAsListBacking() {
     Object[] test1 = {0, 1, 2};
     List result1 = Arrays.asList(test1);
@@ -144,6 +156,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#asList(Object[])}.
    */
+  @Test
   public void testAsListIsFixed() {
     List<String> list = Arrays.asList("foo", "bar", "baz");
 
@@ -197,6 +210,7 @@ public class ArraysTest extends EmulTestBase {
    *   negative values
    * </pre>
    */
+  @Test
   public void testBinarySearchByte() {
     byte[] a1 = {};
     int ret = Arrays.binarySearch(a1, (byte) 0);
@@ -227,6 +241,7 @@ public class ArraysTest extends EmulTestBase {
    *   not found value smaller than all elements
    * </pre>
    */
+  @Test
   public void testBinarySearchChar() {
     char[] a1 = {};
     int ret = Arrays.binarySearch(a1, (char) 0);
@@ -258,6 +273,7 @@ public class ArraysTest extends EmulTestBase {
    *   negative values
    * </pre>
    */
+  @Test
   public void testBinarySearchDouble() {
     double[] a1 = {};
     int ret = Arrays.binarySearch(a1, 0);
@@ -289,6 +305,7 @@ public class ArraysTest extends EmulTestBase {
    *   negative values
    * </pre>
    */
+  @Test
   public void testBinarySearchFloat() {
     float[] a1 = {};
     int ret = Arrays.binarySearch(a1, 0);
@@ -320,6 +337,7 @@ public class ArraysTest extends EmulTestBase {
    *   negative values
    * </pre>
    */
+  @Test
   public void testBinarySearchInt() {
     int[] a1 = {};
     int ret = Arrays.binarySearch(a1, 0);
@@ -351,6 +369,7 @@ public class ArraysTest extends EmulTestBase {
    *   negative values
    * </pre>
    */
+  @Test
   public void testBinarySearchLong() {
     long[] a1 = {};
     int ret = Arrays.binarySearch(a1, 0L);
@@ -381,6 +400,7 @@ public class ArraysTest extends EmulTestBase {
    *   not found value smaller than all elements
    * </pre>
    */
+  @Test
   public void testBinarySearchObject() {
     Object[] a1 = {};
     int ret = Arrays.binarySearch(a1, "");
@@ -413,6 +433,7 @@ public class ArraysTest extends EmulTestBase {
    * </pre>
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testBinarySearchObjectComparator() {
     Comparator inverseSort = new Comparator() {
       @Override
@@ -454,6 +475,7 @@ public class ArraysTest extends EmulTestBase {
    *   negative values
    * </pre>
    */
+  @Test
   public void testBinarySearchShort() {
     short[] a1 = {};
     int ret = Arrays.binarySearch(a1, (short) 0);
@@ -475,6 +497,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOf(boolean[], int)}.
    */
+  @Test
   public void testCopyOfBoolean() {
     boolean[] a1 = {true, true, false, true, true, true, false, false, true};
     boolean[] ret = Arrays.copyOf(a1, a1.length);
@@ -508,6 +531,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOf(byte[], int)}.
    */
+  @Test
   public void testCopyOfByte() {
     byte[] a1 = {9, 8, 7, 5, 1, 2, 3, 4, 0};
     byte[] ret = Arrays.copyOf(a1, a1.length);
@@ -541,6 +565,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOf(char[], int)}.
    */
+  @Test
   public void testCopyOfChar() {
     char[] a1 = {9, 8, 7, 5, 1, 2, 3, 4, 0};
     char[] ret = Arrays.copyOf(a1, a1.length);
@@ -574,6 +599,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOf(double[], int)}.
    */
+  @Test
   public void testCopyOfDouble() {
     double[] a1 = {0.5, 1.25, -7., 0., 3.75, 101, 0.25, 33.75};
     double[] ret = Arrays.copyOf(a1, a1.length);
@@ -607,6 +633,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOf(float[], int)}.
    */
+  @Test
   public void testCopyOfFloat() {
     float[] a1 = {0.5f, 1.25f, -7f, 0f, 3.75f, 101f, 0.25f, 33.75f};
     float[] ret = Arrays.copyOf(a1, a1.length);
@@ -640,6 +667,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOf(int[], int)}.
    */
+  @Test
   public void testCopyOfInt() {
     int[] a1 = {9, 8, 7, 5, 1, 2, -1037, 3, 4, 0};
     int[] ret = Arrays.copyOf(a1, a1.length);
@@ -673,6 +701,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOf(long[], int)}.
    */
+  @Test
   public void testCopyOfLong() {
     long[] a1 = {9, 8, 7, 5, 1, 2, -1037, 3, 4, 0};
     long[] ret = Arrays.copyOf(a1, a1.length);
@@ -706,6 +735,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOf(short[], int)}.
    */
+  @Test
   public void testCopyOfShort() {
     short[] a1 = {9, 8, 7, 5, 1, 2, -1037, 3, 4, 0};
     short[] ret = Arrays.copyOf(a1, a1.length);
@@ -739,6 +769,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOf(Object[], int)}.
    */
+  @Test
   public void testCopyOfObject() {
     Object obj1 = new Object();
     Object obj2 = new Object();
@@ -776,6 +807,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOfRange(boolean[], int, int)}.
    */
+  @Test
   public void testCopyOfRangeBoolean() {
     boolean[] a1 = {true, true, false, true, true};
     boolean[] ret = Arrays.copyOfRange(a1, 0, a1.length);
@@ -818,6 +850,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOfRange(byte[], int, int)}.
    */
+  @Test
   public void testCopyOfRangeByte() {
     byte[] a1 = {9, 8, 7, 5, 1};
     byte[] ret = Arrays.copyOfRange(a1, 0, a1.length);
@@ -860,6 +893,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOfRange(char[], int, int)}.
    */
+  @Test
   public void testCopyOfRangeChar() {
     char[] a1 = {9, 8, 7, 5, 1};
     char[] ret = Arrays.copyOfRange(a1, 0, a1.length);
@@ -902,6 +936,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOfRange(double[], int, int)}.
    */
+  @Test
   public void testCopyOfRangeDouble() {
     double[] a1 = {0.5, 1.25, -7., 0., 3.75};
     double[] ret = Arrays.copyOfRange(a1, 0, a1.length);
@@ -944,6 +979,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOfRange(float[], int, int)}.
    */
+  @Test
   public void testCopyOfRangeFloat() {
     float[] a1 = {0.5f, 1.25f, -7f, 0f, 3.75f};
     float[] ret = Arrays.copyOfRange(a1, 0, a1.length);
@@ -986,6 +1022,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOfRange(int[], int, int)}.
    */
+  @Test
   public void testCopyOfRangeInt() {
     int[] a1 = {9, 8, 7, 5, 1};
     int[] ret = Arrays.copyOfRange(a1, 0, a1.length);
@@ -1028,6 +1065,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOfRange(long[], int, int)}.
    */
+  @Test
   public void testCopyOfRangeLong() {
     long[] a1 = {9, 8, 7, 5, 1};
     long[] ret = Arrays.copyOfRange(a1, 0, a1.length);
@@ -1070,6 +1108,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOfRange(short[], int, int)}.
    */
+  @Test
   public void testCopyOfRangeShort() {
     short[] a1 = {9, 8, 7, 5, 1};
     short[] ret = Arrays.copyOfRange(a1, 0, a1.length);
@@ -1112,6 +1151,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#copyOfRange(Object[], int, int)}.
    */
+  @Test
   public void testCopyOfRangeObject() {
     Object obj1 = new Object();
     Object obj2 = new Object();
@@ -1158,6 +1198,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests sorting of long primitives.
    */
+  @Test
   public void testLongSort() {
     long[] x = {3, 11, 2, 1, 22, 3};
     Arrays.sort(x);
@@ -1172,6 +1213,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Verifies that values are sorted numerically rather than as strings.
    */
+  @Test
   public void testNumericSort() {
     Integer[] x = {3, 11, 2, 1};
     Arrays.sort(x);
@@ -1182,6 +1224,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests sorting primitives.
    */
+  @Test
   public void testPrimitiveSort() {
     int[] x = {3, 11, 2, 1, 22, 3};
     Arrays.sort(x);
@@ -1196,6 +1239,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests sorting a subrange of a primitive array.
    */
+  @Test
   public void testPrimitiveSubrangeSort() {
     int[] x = {3, 11, 2, 1, 22, 3};
     Arrays.sort(x, 1, 5);
@@ -1210,6 +1254,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests simple use cases for {@link Arrays#sort(Object[])}.
    */
+  @Test
   public void testSimpleSort() {
     // empty array
     Object[] test = {};
@@ -1230,6 +1275,7 @@ public class ArraysTest extends EmulTestBase {
   /**
    * Tests {@link Arrays#sort(Object[], Comparator)}.
    */
+  @Test
   public void testSort() {
     Object[] x = {"c", "b", "b", "a"};
     int hash = x[1].hashCode();
@@ -1260,6 +1306,7 @@ public class ArraysTest extends EmulTestBase {
    * The current test is 6 elements, so there are 6! = 720 possible orderings to
    * test.
    */
+  @Test
   public void testStableSort() {
     TestObject[] origData = new TestObject[] {
         new TestObject(3), new TestObject(11), new TestObject(2),
@@ -1288,6 +1335,7 @@ public class ArraysTest extends EmulTestBase {
     }
   }
 
+  @Test
   public void testDeepToString() {
     assertEquals("[1, 2, Hello]", Arrays.deepToString(new Object[]{1, 2L, "Hello"}));
 

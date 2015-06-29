@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -34,6 +36,7 @@ public class PriorityQueueTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testBasic() {
     PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
     assertEquals(0, pq.size());
@@ -68,6 +71,7 @@ public class PriorityQueueTest extends GWTTestCase {
     assertTrue(pq.isEmpty());
   }
 
+  @Test
   public void testCollectionMethods() {
     PriorityQueue<Integer> pq = buildPQ(3, 4, 21, 5, 23, 31, 22);
     ArrayList<Integer> src = new ArrayList<Integer>();
@@ -101,6 +105,7 @@ public class PriorityQueueTest extends GWTTestCase {
     assertTrue(pq.isEmpty());
   }
 
+  @Test
   public void testComparator() {
     PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
     assertNull(pq.comparator());
@@ -125,6 +130,7 @@ public class PriorityQueueTest extends GWTTestCase {
     assertEquals(sortedSet.comparator(), pq.comparator());
   }
 
+  @Test
   public void testFromCollection() {
     ArrayList<Integer> src = new ArrayList<Integer>();
     addArray(src, 13, 3, 7, 5);
@@ -137,6 +143,7 @@ public class PriorityQueueTest extends GWTTestCase {
     assertTrue(pq.isEmpty());
   }
   
+  @Test
   public void testPollRemove() {
     PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
     try {

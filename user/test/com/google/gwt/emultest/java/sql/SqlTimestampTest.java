@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.sql;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -36,6 +38,7 @@ public class SqlTimestampTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testCompareTo() {
     Timestamp now = Timestamp.valueOf("2011-01-05 12:45:18.000000000");
     // add 1.5 << 31 so coercing the ms difference to int results in a
@@ -48,12 +51,14 @@ public class SqlTimestampTest extends GWTTestCase {
    * Timestamps have some non-obvious comparison semantics when compared to
    * dates.
    */
+  @Test
   public void testDateComparison() {
     /* Consider two cases, whether or not the time is a multiple of 1000 */
     testDateComparisonOneValue(1283895274000L);
     testDateComparisonOneValue(1283895273475L);
   }
 
+  @Test
   public void testNanosAffectTime() {
     long now = 1283895273475L;
     int millis = (int) (now % 1000);
@@ -69,6 +74,7 @@ public class SqlTimestampTest extends GWTTestCase {
     assertEquals(now - millis + 999, t.getTime());
   }
 
+  @Test
   public void testNanosComparison() {
     long now = 1283895273475L;
     Timestamp t = new Timestamp(now);
@@ -91,6 +97,7 @@ public class SqlTimestampTest extends GWTTestCase {
     assertTrue(t2.after(t));
   }
 
+  @Test
   public void testNanosRange() {
     long now = 1283895273475L;
     Timestamp t = new Timestamp(now);
@@ -117,6 +124,7 @@ public class SqlTimestampTest extends GWTTestCase {
     t.setNanos(999999999);
   }
 
+  @Test
   public void testTimeAffectsNanos() {
     // A value 5 millis past the current second
     long now = 1283895273005L; // (1283895273475 / 1000) * 1000 + 5;
@@ -128,11 +136,13 @@ public class SqlTimestampTest extends GWTTestCase {
     assertEquals(6000000, t.getNanos());
   }
 
+  @Test
   public void testToString() {
     Timestamp ts = new Timestamp(2000 - 1900, 1 - 1, 1, 12, 34, 56, 123456789);
     assertEquals("2000-01-01 12:34:56.123456789", ts.toString());
   }
 
+  @Test
   public void testValueOf() {
     try {
       Timestamp.valueOf("");

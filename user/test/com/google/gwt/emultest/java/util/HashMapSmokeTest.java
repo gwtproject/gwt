@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +34,7 @@ public class HashMapSmokeTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuiteIsolated";
   }
 
+  @Test
   public void testSmoke() {
     Map<Object, Object> map = new HashMap<Object, Object>();
     Object object = new Object();

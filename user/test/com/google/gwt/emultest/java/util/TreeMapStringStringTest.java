@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import org.junit.Test;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,6 +30,7 @@ import java.util.TreeMap;
  */
 public class TreeMapStringStringTest extends TreeMapTest<String, String> {
 
+  @Test
   public void testHeadMapClear() {
     TreeMap<String, String> map = new TreeMap<String, String>();
     map.put("a", "value a");
@@ -43,6 +46,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
     assertEquals("headMap.isEmpty", true, headMap.isEmpty());
   }
     
+  @Test
   public void testHeadMapEqualsFirst() {
     SortedMap<String, String> sortedMap = createKnownKeysMap();
     SortedMap<String, String> subMap = sortedMap.headMap("aa");
@@ -52,6 +56,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
     assertFalse("iterator[0]", it.hasNext());
   }
 
+  @Test
   public void testHeadMapEqualsSecond() {
     SortedMap<String, String> sortedMap = createKnownKeysMap();
     SortedMap<String, String> subMap = sortedMap.headMap("bb");
@@ -69,6 +74,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
    * Perform some tests on submap that are hard to do without specific knowledge
    * of the keys used.
    */
+  @Test
   public void testHeadMapSimple() {
     SortedMap<String, String> sortedMap = createKnownKeysMap();
     SortedMap<String, String> subMap = sortedMap.headMap("bz");
@@ -85,6 +91,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
     assertEquals("lastKey", "bb", subMap.lastKey());
   }
 
+  @Test
   public void testSubMapClear() {
     TreeMap<String, String> map = new TreeMap<String, String>();
     map.put("a", "value a");
@@ -103,6 +110,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
   /**
    * Tests that compositing submap operations function as expected.
    */
+  @Test
   public void testSubMapComposite() {
     SortedMap<String, String> sortedMap = createKnownKeysMap();
     SortedMap<String, String> subMap1 = sortedMap.headMap("cz").tailMap("bb");
@@ -114,6 +122,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
     assertEquals("headMap(tailMap) size", 2, subMap1.size());
   }
   
+  @Test
   public void testTailMapClear() {
     TreeMap<String, String> map = new TreeMap<String, String>();
     map.put("a", "value a");
@@ -129,6 +138,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
     assertEquals("tailMap.isEmpty", true, tailMap.isEmpty());
   }
 
+  @Test
   public void testTailMapPastEnd() {
     SortedMap<String, String> sortedMap = createKnownKeysMap();
     SortedMap<String, String> subMap = sortedMap.tailMap("dz");
@@ -148,6 +158,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
     }
   }
 
+  @Test
   public void testTailMapSimple() {
     SortedMap<String, String> sortedMap = createKnownKeysMap();
     SortedMap<String, String> subMap = sortedMap.tailMap("bb");
@@ -167,6 +178,7 @@ public class TreeMapStringStringTest extends TreeMapTest<String, String> {
   }
 
   // checks for compatibility with real Jre's EntrySet.remove(): issue 3423
+  @Test
   public void testTreeMapEntrySetRemove() {
     Map<String, String> treeMap = new TreeMap<String, String>();
     treeMap.put("foo", "fooValue");
@@ -184,6 +196,7 @@ treeMap.entrySet().iterator();
   }
   
   // checks for compatibility with real Jre's Entry.toString(): issue 3422
+  @Test
   public void testTreeMapEntryToString() {
     Map<String, String> treeMap = new TreeMap<String, String>();
     treeMap.put("bar", "barValue");
@@ -192,6 +205,7 @@ treeMap.entrySet().iterator();
         treeMap.entrySet().iterator().next().toString());
   }
   
+  @Test
   public void testTreeMapRemove() {
     Map<String, String> treeMap = new TreeMap<String, String>();
     treeMap.put("foo", "fooValue");

@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import org.junit.Test;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +35,7 @@ public class LinkedListTest extends ListTestBase {
     }
   }
 
+  @Test
   public void testAddFirst() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -47,6 +50,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o3, o2, o1);
   }
 
+  @Test
   public void testAddLast() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -61,6 +65,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o2, o3);
   }
 
+  @Test
   public void testDescendingIterator() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -110,6 +115,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o2);
   }
 
+  @Test
   public void testElement() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -130,6 +136,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o2);
   }
 
+  @Test
   public void testGetFirst() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -150,6 +157,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o2);
   }
 
+  @Test
   public void testGetLast() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -170,6 +178,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o2);
   }
 
+  @Test
   public void testOffer() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -184,6 +193,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o2, o3);
   }
 
+  @Test
   public void testOfferFirst() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -198,6 +208,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o3, o2, o1);
   }
 
+  @Test
   public void testOfferLast() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -212,6 +223,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o2, o3);
   }
 
+  @Test
   public void testPeek() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -228,6 +240,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o2);
   }
 
+  @Test
   public void testPeekFirst() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -244,6 +257,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o2);
   }
 
+  @Test
   public void testPeekLast() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -260,6 +274,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o2);
   }
 
+  @Test
   public void testPoll() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -277,6 +292,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o2);
   }
 
+  @Test
   public void testPollFirst() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -294,6 +310,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o2);
   }
 
+  @Test
   public void testPollLast() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -311,6 +328,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1);
   }
 
+  @Test
   public void testPop() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -332,6 +350,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o2);
   }
 
+  @Test
   public void testPush() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -346,6 +365,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o3, o2, o1);
   }
 
+  @Test
   public void testRemove() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -367,6 +387,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o2);
   }
 
+  @Test
   public void testRemoveFirst() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -388,6 +409,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o2);
   }
 
+  @Test
   public void testRemoveFirstOccurrence() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -418,6 +440,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o3, o1, o2, o3);
   }
 
+  @Test
   public void testRemoveLast() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -439,6 +462,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1);
   }
 
+  @Test
   public void testRemoveLastOccurrence() {
     Object o1 = new Object();
     Object o2 = new Object();
@@ -469,6 +493,7 @@ public class LinkedListTest extends ListTestBase {
     checkListSizeAndContent(l, o1, o2, o3, o1, o3);
   }
 
+  @Test
   public void testRemoveRange() {
     LinkedListWithRemoveRange l = new LinkedListWithRemoveRange();
     for (int i = 0; i < 10; i++) {

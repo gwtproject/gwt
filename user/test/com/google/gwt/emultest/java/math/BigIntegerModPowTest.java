@@ -39,6 +39,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.math.BigInteger;
 
 /**
@@ -48,6 +50,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * gcd: both numbers are zeros.
    */
+  @Test
   public void testGcdBothZeros() {
     byte rBytes[] = {0};
     BigInteger aNumber = new BigInteger("0");
@@ -63,6 +66,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * gcd: the first number is longer.
    */
+  @Test
   public void testGcdFirstLonger() {
     byte aBytes[] = {
         -15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28,
@@ -85,6 +89,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * gcd: the first number is zero.
    */
+  @Test
   public void testGcdFirstZero() {
     byte aBytes[] = {0};
     byte bBytes[] = {15, 24, 123, 57, -15, 24, 123, 57, -15, 24, 123, 57};
@@ -105,6 +110,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * gcd: the first number is ZERO.
    */
+  @Test
   public void testGcdFirstZERO() {
     byte bBytes[] = {15, 24, 123, 57, -15, 24, 123, 57, -15, 24, 123, 57};
     int bSign = 1;
@@ -123,6 +129,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * gcd: the second number is longer.
    */
+  @Test
   public void testGcdSecondLonger() {
     byte aBytes[] = {-12, 1, 0, 0, 0, 23, 44, 55, 66};
     byte bBytes[] = {
@@ -145,6 +152,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * gcd: the second number is zero.
    */
+  @Test
   public void testGcdSecondZero() {
     byte aBytes[] = {15, 24, 123, 57, -15, 24, 123, 57, -15, 24, 123, 57};
     byte bBytes[] = {0};
@@ -165,6 +173,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * modInverse: non-positive modulus.
    */
+  @Test
   public void testmodInverseException() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte mBytes[] = {1, 2, 3};
@@ -184,6 +193,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * modInverse: negative number.
    */
+  @Test
   public void testmodInverseNeg1() {
     byte aBytes[] = {
         15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28,
@@ -206,6 +216,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * modInverse: negative number (another case: x < 0).
    */
+  @Test
   public void testmodInverseNeg2() {
     byte aBytes[] = {-15, 24, 123, 57, -15, 24, 123, 57, -15, 24, 123, 57};
     byte mBytes[] = {122, 2, 4, 122, 2, 4};
@@ -224,6 +235,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * modInverse: non-invertible number.
    */
+  @Test
   public void testmodInverseNonInvertible() {
     byte aBytes[] = {
         -15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28,
@@ -245,6 +257,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * modInverse: positive number.
    */
+  @Test
   public void testmodInversePos1() {
     byte aBytes[] = {
         24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28, -127};
@@ -266,6 +279,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * modInverse: positive number (another case: a < 0).
    */
+  @Test
   public void testmodInversePos2() {
     byte aBytes[] = {
         15, 24, 123, 56, -11, -112, -34, -98, 8, 10, 12, 14, 25, 125, -15, 28,
@@ -288,6 +302,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * modPow: non-positive modulus.
    */
+  @Test
   public void testModPowException() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte eBytes[] = {1, 2, 3, 4, 5};
@@ -310,6 +325,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * modPow: negative exponent.
    */
+  @Test
   public void testModPowNegExp() {
     byte aBytes[] = {-127, 100, 56, 7, 98, -1, 39, -128, 127, 75, 48, -7};
     byte eBytes[] = {27, -15, 65, 39};
@@ -333,6 +349,7 @@ public class BigIntegerModPowTest extends EmulTestBase {
   /**
    * modPow: positive exponent.
    */
+  @Test
   public void testModPowPosExp() {
     byte aBytes[] = {-127, 100, 56, 7, 98, -1, 39, -128, 127, 75, 48, -7};
     byte eBytes[] = {27, -15, 65, 39};

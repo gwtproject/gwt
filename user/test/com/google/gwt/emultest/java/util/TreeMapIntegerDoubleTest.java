@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import org.junit.Test;
+
 /**
  * Tests <code>TreeMap</code> with a <code>Comparator</code>.
  */
@@ -96,6 +98,7 @@ public class TreeMapIntegerDoubleTest extends TreeMapTest<Integer, Double> {
   }
 
   @Override
+  @Test
   public void testSpecialKeysValues() {
     // Disabled as this test is only applicable for Maps with String keys.
   }

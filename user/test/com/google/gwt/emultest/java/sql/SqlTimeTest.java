@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.sql;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.sql.Time;
 
 /**
@@ -35,6 +37,7 @@ public class SqlTimeTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testUnimplementedFunctions() {
     Time d = new Time(0);
 
@@ -88,6 +91,7 @@ public class SqlTimeTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testParse() {
     try {
       Time.parse(null);
@@ -119,11 +123,13 @@ public class SqlTimeTest extends GWTTestCase {
     assertEquals(t2, Time.valueOf(t2.toString()));
   }
 
+  @Test
   public void testToString() {
     Time time = new Time(12, 34, 56);
     assertEquals("12:34:56", time.toString());
   }
 
+  @Test
   public void testInternalPrecision() {
     long millis = 1283895273475L;
     Time today = new Time(millis);

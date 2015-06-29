@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import org.junit.Test;
+
 import java.util.AbstractSequentialList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -104,6 +106,7 @@ public class AbstractSequentialListTest extends EmulTestBase {
     }
   }
 
+  @Test
   public void testIteratorFunction() {
     List l = new AbstractSequentialListImpl<Integer>();
     int firstFivePrimes[] = {2, 3, 5, 7, 11};

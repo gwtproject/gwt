@@ -18,6 +18,8 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 /**
  * Unit tests for the emulated-in-Javascript Double/double autoboxed types.
  */
@@ -28,6 +30,7 @@ public class DoubleTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testBadStrings() {
     try {
       new Double("0.0e");
@@ -79,6 +82,7 @@ public class DoubleTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testCompare() {
     assertTrue(Double.compare(Double.NaN, Double.NaN) == 0);
     assertTrue(Double.compare(0.0, Double.NaN) < 0);
@@ -90,6 +94,7 @@ public class DoubleTest extends GWTTestCase {
     assertTrue(Double.compare(500.0, 500.0) == 0);
   }
 
+  @Test
   public void testCompareTo() {
     Double zero = new Double(0.0);
     Double three = new Double(3.0);
@@ -108,6 +113,7 @@ public class DoubleTest extends GWTTestCase {
   }
 
   @SuppressWarnings({"SelfEquality", "EqualsNaN"})
+  @Test
   public void testDoubleConstants() {
     assertTrue(Double.isNaN(Double.NaN));
     assertTrue(Double.isInfinite(Double.NEGATIVE_INFINITY));
@@ -124,6 +130,7 @@ public class DoubleTest extends GWTTestCase {
     assertFalse(Double.isInfinite(Double.NaN));
   }
 
+  @Test
   public void testParse() {
     assertTrue(0 == Double.parseDouble("0"));
     assertTrue(100 == Double.parseDouble("1e2"));
@@ -198,6 +205,7 @@ public class DoubleTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testDoubleBits() {
     // special values
     compareDoubleBits(0x0000000000000000L, 0.0);

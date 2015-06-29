@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -30,6 +32,7 @@ public class ObjectsTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testCompare() {
     Comparator<Integer> intComparator = new Comparator<Integer>() {
       @Override
@@ -56,6 +59,7 @@ public class ObjectsTest extends GWTTestCase {
     assertEquals(0, Objects.compare(new Integer("12345"), new Integer(12345), intComparator));
   }
 
+  @Test
   public void testDeepEquals() {
     assertTrue(Objects.deepEquals(null, null));
     assertFalse(Objects.deepEquals(null, "not null"));
@@ -74,6 +78,7 @@ public class ObjectsTest extends GWTTestCase {
     assertTrue(Objects.deepEquals(intArray1, intArray3));
   }
 
+  @Test
   public void testEquals() {
     assertTrue(Objects.equals(null, null));
     assertFalse(Objects.equals(null, "not null"));
@@ -84,6 +89,7 @@ public class ObjectsTest extends GWTTestCase {
     assertTrue(Objects.equals(obj, obj));
   }
 
+  @Test
   public void testHashCode() {
     assertEquals(0, Objects.hashCode(null));
     Object obj = new Object();

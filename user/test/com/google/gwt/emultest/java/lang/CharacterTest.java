@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 /**
  * Tests for java.lang.Character.
  */
@@ -182,6 +184,7 @@ public class CharacterTest extends GWTTestCase {
     assertEquals(new Character((char) 32).charValue(), (char) 32);
   }
 
+  @Test
   public void testCodePoint() {
     assertEquals(1, Character.charCount(65));
     assertEquals(2, Character.charCount(Character.MIN_SUPPLEMENTARY_CODE_POINT));
@@ -246,6 +249,7 @@ public class CharacterTest extends GWTTestCase {
     assertEquals(1, Character.codePointCount(nonBmpChar, 0, 2));
   }
 
+  @Test
   public void testCompare() {
     assertTrue(Character.compare('A', 'B') < 0);
     assertTrue(Character.compare('B', 'A') > 0);
@@ -253,6 +257,7 @@ public class CharacterTest extends GWTTestCase {
     assertTrue(Character.compare('\uA001', '\uA000') > 0);
   }
 
+  @Test
   public void testCompareTo() {
     assertTrue(Character.valueOf('A').compareTo('B') < 0);
     assertTrue(Character.valueOf('B').compareTo('A') > 0);
@@ -260,14 +265,17 @@ public class CharacterTest extends GWTTestCase {
     assertTrue(Character.valueOf('\uA001').compareTo('\uA000') > 0);
   }
 
+  @Test
   public void testConstructor() {
     assertEquals(new Character((char) 32), new Character(' '));
   }
 
+  @Test
   public void testDigit() {
     assertEquals("wrong number of digits", 10, digitJudge.allPass().length());
   }
-  
+
+  @Test
   public void testSurrogates() {
     assertFalse(Character.isHighSurrogate('\uDF46'));
     assertTrue(Character.isLowSurrogate('\uDF46'));
@@ -295,15 +303,18 @@ public class CharacterTest extends GWTTestCase {
     assertEquals(0x10346, Character.toCodePoint('\uD800', '\uDF46'));
   }
 
+  @Test
   public void testLetter() {
     assertEquals("wrong number of letters", 52, letterJudge.allPass().length());
   }
 
+  @Test
   public void testLetterOrDigit() {
     assertEquals("wrong number of letters", 62,
         letterOrDigitJudge.allPass().length());
   }
 
+  @Test
   public void testLowerCase() {
     assertEquals("wrong number of lowercase letters", 26,
         lowerCaseJudge.allPass().length());
@@ -311,10 +322,12 @@ public class CharacterTest extends GWTTestCase {
         new LowerCaseJudge(lowerCaseChanger.changed()).allPass().length());
   }
 
+  @Test
   public void testSpace() {
     assertEquals("wrong number of spaces", 5, spaceJudge.allPass().length());
   }
 
+  @Test
   public void testToFromDigit() {
     for (int i = 0; i < 16; i++) {
       assertEquals(i, Character.digit(Character.forDigit(i, 16), 16));
@@ -327,6 +340,7 @@ public class CharacterTest extends GWTTestCase {
   }
 
   @SuppressWarnings("deprecation")
+  @Test
   public void testIsSpace() {
     assertFalse(Character.isSpace('a'));
     assertFalse(Character.isSpace('_'));
@@ -335,6 +349,7 @@ public class CharacterTest extends GWTTestCase {
     assertTrue(Character.isSpace('\n'));
   }
 
+  @Test
   public void testIsWhitepace() {
     char[] separators = {
         '\u0020', // SPACE.
@@ -416,17 +431,20 @@ public class CharacterTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testToString() {
     assertEquals(" ", new Character((char) 32).toString());
   }
 
+  @Test
   public void testUpperCase() {
     assertEquals("wrong number of uppercase letters", 26,
         upperCaseJudge.allPass().length());
     assertEquals("wrong number of uppercase letters after toUpperCase", 52,
         new UpperCaseJudge(upperCaseChanger.changed()).allPass().length());
   }
-  
+
+  @Test
   public void testValueOf() {
     assertEquals('A', Character.valueOf('A').charValue());
   }

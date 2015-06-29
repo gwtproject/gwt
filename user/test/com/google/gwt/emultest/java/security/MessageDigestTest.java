@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.security;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 
@@ -106,6 +108,7 @@ public class MessageDigestTest extends EmulTestBase {
     return buf.toString();
   }
 
+  @Test
   public void testMd5() throws Exception {
     MessageDigest md5 = MessageDigest.getInstance("MD5");
     for (int i = 0; i < md5TestData.length; i += 2) {
@@ -113,6 +116,7 @@ public class MessageDigestTest extends EmulTestBase {
     }
   }
 
+  @Test
   public void testMd5ByBytes() throws Exception {
     MessageDigest md5 = MessageDigest.getInstance("MD5");
     for (int i = 0; i < md5TestData.length; i += 2) {

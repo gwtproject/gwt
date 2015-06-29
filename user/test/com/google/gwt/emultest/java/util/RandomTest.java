@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.util.Random;
 
 /**
@@ -33,6 +35,7 @@ public class RandomTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
   
+  @Test
   public void testNextBytes() {
     Random r = new Random(1);
     byte[] b = new byte[5];
@@ -50,6 +53,7 @@ public class RandomTest extends GWTTestCase {
     }
   }
   
+  @Test
   public void testNextDouble() {
     Random r = new Random(1);
     assertEquals(0.7308781907032909, r.nextDouble());
@@ -59,6 +63,7 @@ public class RandomTest extends GWTTestCase {
     assertEquals(0.9677559094241207, r.nextDouble());
   }
   
+  @Test
   public void testNextFloat() {
     Random r = new Random(1);
     assertEquals(0.7308782f, r.nextFloat());
@@ -68,6 +73,7 @@ public class RandomTest extends GWTTestCase {
     assertEquals(0.2077148f, r.nextFloat());
   }
   
+  @Test
   public void testNextGaussian() {
     Random r = new Random(1);
     assertEquals(1.561581040188955, r.nextGaussian());
@@ -77,6 +83,7 @@ public class RandomTest extends GWTTestCase {
     assertEquals(-1.1182832102556484, r.nextGaussian());
   }
   
+  @Test
   public void testNextInt() {
     Random r = new Random(1);
     assertEquals(-1155869325, r.nextInt());
@@ -98,6 +105,7 @@ public class RandomTest extends GWTTestCase {
     }
   }
   
+  @Test
   public void testNextInt100() {
     Random r = new Random(1);
     assertEquals(85, r.nextInt(100));
@@ -107,6 +115,7 @@ public class RandomTest extends GWTTestCase {
     assertEquals(54, r.nextInt(100));
   }  
   
+  @Test
   public void testNextInt128() {
     Random r = new Random(1);
     assertEquals(93, r.nextInt(128));
@@ -116,6 +125,7 @@ public class RandomTest extends GWTTestCase {
     assertEquals(26, r.nextInt(128));
   }
   
+  @Test
   public void testNextLong() {
     Random r = new Random(1);
     assertEquals(-4964420948893066024L, r.nextLong());
@@ -125,6 +135,7 @@ public class RandomTest extends GWTTestCase {
     assertEquals(-594798593157429144L, r.nextLong());
   }
   
+  @Test
   public void testSetSeed() {
     Random r = new Random();
     

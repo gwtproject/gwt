@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.math.RoundingMode;
 
 /**
@@ -28,6 +30,7 @@ public class RoundingModeTest extends EmulTestBase {
    * Check the order of the enum values.  This is important for serialization
    * with a real JRE implementation.
    */
+  @Test
   public void testValues() {
     RoundingMode[] values = RoundingMode.values();
     assertEquals(8, values.length);

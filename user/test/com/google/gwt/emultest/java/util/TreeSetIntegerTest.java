@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import org.junit.Test;
+
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -55,6 +57,7 @@ public class TreeSetIntegerTest extends TreeSetTest<Integer> {
   /**
    * Verify nulls are handled properly.
    */
+  @Test
   public void testAdd_null() {
     TreeSet<Record> set = new TreeSet<Record>(new RecordCompare());
     set.add(new Record(10, 1));
@@ -76,6 +79,7 @@ public class TreeSetIntegerTest extends TreeSetTest<Integer> {
   /**
    * Verify that Set.add doesn't replace an existing entry that compares equal.
    */
+  @Test
   public void testAdd_overwrite() {
     TreeSet<Record> set = new TreeSet<Record>(new RecordCompare());
     assertTrue(set.add(new Record(1, 1)));

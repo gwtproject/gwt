@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.math.MathContext;
 import java.math.RoundingMode;
 
@@ -25,6 +27,7 @@ import java.math.RoundingMode;
  */
 public class MathContextTest extends EmulTestBase {
   
+  @Test
   public void testMathContextSingleArgConstructor() {
     MathContext mc1 = new MathContext("precision=16 roundingMode=CEILING"); 
     assertTrue(mc1.getPrecision() == 16);
@@ -108,6 +111,7 @@ public class MathContextTest extends EmulTestBase {
     }
   }
   
+  @Test
   public void testMathContextConstructorEquality() {
     MathContext mc1 = new MathContext(16,RoundingMode.CEILING); 
     MathContext mc1a = new MathContext("precision=16 roundingMode=CEILING"); 

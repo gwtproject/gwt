@@ -20,6 +20,8 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
 
+import org.junit.Test;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 
@@ -46,10 +48,12 @@ public class StringTest extends GWTTestCase {
   /*
    * TODO: needs rewriting to avoid compiler optimizations.
    */
+  @Test
   public void testCharAt() {
     assertEquals("abc".charAt(1), 'b');
   }
 
+  @Test
   public void testCodePoint() {
     String testPlain = hideFromCompiler("CAT");
     String testUnicode = hideFromCompiler("C\uD801\uDF00T");
@@ -104,6 +108,7 @@ public class StringTest extends GWTTestCase {
     assertEquals(1, nonBmpChar.codePointCount(0, 2));
   }
 
+  @Test
   public void testConcat() {
     String abc = String.valueOf(new char[] {'a', 'b', 'c'});
     String def = String.valueOf(new char[] {'d', 'e', 'f'});
@@ -121,6 +126,7 @@ public class StringTest extends GWTTestCase {
     assertEquals("abcd", s);
   }
 
+  @Test
   public void testConstructor() {
     char[] chars = {'a', 'b', 'c', 'd', 'e', 'f'};
     String constant = String.valueOf(new char[] {'a', 'b', 'c', 'd', 'e', 'f'});
@@ -150,6 +156,7 @@ public class StringTest extends GWTTestCase {
     assertEquals("\uD801\uDC00", new String(sb));
   }
 
+  @Test
   public void testConstructorBytes() {
     byte bytes[] = new byte[] {
         'a', 'b', 'c', 'd', 'e', 'f'
@@ -175,6 +182,7 @@ public class StringTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testConstructorLatin1() throws UnsupportedEncodingException {
     internalTestConstructorLatin1("ISO-8859-1");
     internalTestConstructorLatin1("iso-8859-1");
@@ -205,6 +213,7 @@ public class StringTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testConstructorUtf8() throws UnsupportedEncodingException {
     internalTestConstructorUtf8("UTF-8");
     internalTestConstructorUtf8("utf-8");
@@ -240,6 +249,7 @@ public class StringTest extends GWTTestCase {
    * TODO: needs rewriting to avoid compiler optimizations. (StringBuffer tests
    * are ok)
    */
+  @Test
   public void testContains() {
     // at the beginning
     assertTrue("abcdef".contains("ab"));
@@ -258,6 +268,7 @@ public class StringTest extends GWTTestCase {
     assertFalse("abcdef".contains(new StringBuffer("z")));
   }
 
+  @Test
   public void testEndsWith() {
     String haystack = "abcdefghi";
     assertTrue("a", haystack.endsWith("defghi"));
@@ -265,6 +276,7 @@ public class StringTest extends GWTTestCase {
     assertFalse("c", haystack.endsWith(haystack + "j"));
   }
 
+  @Test
   public void testEquals() {
     assertFalse("ABC".equals("abc"));
     assertFalse("abc".equals("ABC"));
@@ -289,6 +301,7 @@ public class StringTest extends GWTTestCase {
   /*
    * TODO: needs rewriting to avoid compiler optimizations.
    */
+  @Test
   public void testEqualsIgnoreCase() {
     assertTrue("ABC".equalsIgnoreCase("abc"));
     assertTrue("abc".equalsIgnoreCase("ABC"));
@@ -300,6 +313,7 @@ public class StringTest extends GWTTestCase {
     assertFalse("".equalsIgnoreCase(null));
   }
 
+  @Test
   public void testGetBytesAscii() {
     // Simple ASCII should get through any standard encoding (EBCDIC users,
     // you're out of luck).
@@ -311,6 +325,7 @@ public class StringTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testGetBytesLatin1() throws UnsupportedEncodingException {
     internalTestGetBytesLatin1("ISO-8859-1");
     internalTestGetBytesLatin1("iso-8859-1");
@@ -327,6 +342,7 @@ public class StringTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testGetBytesUtf8() throws UnsupportedEncodingException {
     internalTestGetBytesUtf8("UTF-8");
     internalTestGetBytesUtf8("utf-8");
@@ -380,6 +396,7 @@ public class StringTest extends GWTTestCase {
    * #631.
    *
    */
+  @Test
   public void testHashCode() {
     String[] testStrings = {
         "watch", "unwatch", "toString", "toSource", "eval", "valueOf",
@@ -413,6 +430,7 @@ public class StringTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testIndexOf() {
     String haystack = "abcdefghi";
     assertEquals(haystack.indexOf("q"), -1);
@@ -424,6 +442,7 @@ public class StringTest extends GWTTestCase {
     assertEquals(haystack.indexOf(""), 0);
   }
 
+  @Test
   public void testIntern() {
     String s1 = String.valueOf(new char[] {'a', 'b', 'c', 'd', 'e', 'f'});
     String s2 = String.valueOf(new char[] {'a', 'b', 'c', 'd', 'e', 'f'});
@@ -431,6 +450,7 @@ public class StringTest extends GWTTestCase {
     assertSame("interns are not the same reference", s1.intern(), s2.intern());
   }
 
+  @Test
   public void testLastIndexOf() {
     String x = "abcdeabcdef";
     assertEquals(9, x.lastIndexOf("e"));
@@ -438,6 +458,7 @@ public class StringTest extends GWTTestCase {
     assertEquals(-1, x.lastIndexOf("f", 1));
   }
 
+  @Test
   public void testLength() {
     String abc = String.valueOf(new char[] {'a', 'b', 'c'});
     assertEquals(3, abc.length());
@@ -453,6 +474,7 @@ public class StringTest extends GWTTestCase {
   /*
    * TODO: needs rewriting to avoid compiler optimizations.
    */
+  @Test
   public void testLowerCase() {
     assertEquals("abc", "AbC".toLowerCase());
     assertEquals("abc", "abc".toLowerCase());
@@ -467,6 +489,7 @@ public class StringTest extends GWTTestCase {
     assertEquals("", "".toLowerCase(Locale.getDefault()));
   }
 
+  @Test
   public void testMatch() {
     assertFalse("1f", hideFromCompiler("abbbbcd").matches("b*"));
     assertFalse("2f", hideFromCompiler("abbbbcd").matches("b+"));
@@ -493,6 +516,7 @@ public class StringTest extends GWTTestCase {
   /*
    * TODO: needs rewriting to avoid compiler optimizations.
    */
+  @Test
   public void testNull() {
     assertNull(returnNull());
     /*
@@ -504,6 +528,7 @@ public class StringTest extends GWTTestCase {
     assertEquals("nullnull", a);
   }
 
+  @Test
   public void testRegionMatches() {
     String test = String.valueOf(new char[] {'a', 'b', 'c', 'd', 'e', 'f'});
     assertTrue(test.regionMatches(1, "bcd", 0, 3));
@@ -539,6 +564,7 @@ public class StringTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testReplace() {
     String axax = String.valueOf(new char[] {'a', 'x', 'a', 'x'});
     String aaaa = String.valueOf(new char[] {'a', 'a', 'a', 'a'});
@@ -564,6 +590,7 @@ public class StringTest extends GWTTestCase {
     assertEquals("ABABAB", testStr.replace('\u1111', 'A'));
   }
 
+  @Test
   public void testReplaceAll() {
     String regex = hideFromCompiler("*[").replaceAll(
         "([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}])", "\\\\$1");
@@ -588,6 +615,7 @@ public class StringTest extends GWTTestCase {
     assertEquals("$$x$", x5.replaceAll("(x)", "\\$\\$$1\\$"));
   }
 
+  @Test
   public void testReplaceString() {
     assertEquals("foobar", hideFromCompiler("bazbar").replace("baz", "foo"));
     assertEquals("$0bar", hideFromCompiler("foobar").replace("foo", "$0"));
@@ -606,6 +634,7 @@ public class StringTest extends GWTTestCase {
     assertEquals("a$'b", hideFromCompiler("a[x]b").replace("[x]", "$'"));
   }
 
+  @Test
   public void testSplit() {
     compareList("fullSplit", new String[] {"abc", "", "", "de", "f"},
         hideFromCompiler("abcxxxdexfxx").split("x"));
@@ -634,6 +663,7 @@ public class StringTest extends GWTTestCase {
     assertTrue(s[0].length() == 0);
   }
 
+  @Test
   public void testSplit_emptyExpr() {
     // TODO(rluble):  implement JDK8 string.split semantics and fix test.
     String[] expected = (!GWT.isScript() && TestUtils.getJdkVersion() > 7) ?
@@ -642,6 +672,7 @@ public class StringTest extends GWTTestCase {
     compareList("emptyRegexSplit", expected, "abcxxdexfx".split(""));
   }
 
+  @Test
   public void testStartsWith() {
     String haystack = "abcdefghi";
     assertTrue(haystack.startsWith("abc"));
@@ -653,6 +684,7 @@ public class StringTest extends GWTTestCase {
   /*
    * TODO: needs rewriting to avoid compiler optimizations.
    */
+  @Test
   public void testSubstring() {
     String haystack = "abcdefghi";
     assertEquals("cd", haystack.substring(2, 4));
@@ -660,6 +692,7 @@ public class StringTest extends GWTTestCase {
     assertEquals("bcdef", "abcdef".substring(1));
   }
 
+  @Test
   public void testToCharArray() {
     char[] a1 = "abc".toCharArray();
     char[] a2 = new char[] {'a', 'b', 'c'};
@@ -668,6 +701,7 @@ public class StringTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testToString() {
     String str = hideFromCompiler("abc");
     assertSame("str same as str.toString()", str, str.toString());
@@ -683,6 +717,7 @@ public class StringTest extends GWTTestCase {
   /*
    * TODO: needs rewriting to avoid compiler optimizations.
    */
+  @Test
   public void testTrim() {
     trimRightAssertEquals("abc", "   \t abc \n  ");
     trimRightAssertEquals("abc", "abc");
@@ -718,6 +753,7 @@ public class StringTest extends GWTTestCase {
   /*
    * TODO: needs rewriting to avoid compiler optimizations.
    */
+  @Test
   public void testUpperCase() {
     assertEquals("ABC", "AbC".toUpperCase());
     assertEquals("ABC", "abc".toUpperCase());
@@ -735,6 +771,7 @@ public class StringTest extends GWTTestCase {
   /*
    * TODO: needs rewriting to avoid compiler optimizations.
    */
+  @Test
   public void testValueOf() {
     assertTrue(String.valueOf(C.FLOAT_VALUE).startsWith(C.FLOAT_STRING));
     assertEquals(C.INT_STRING, String.valueOf(C.INT_VALUE));
@@ -755,6 +792,7 @@ public class StringTest extends GWTTestCase {
    *
    * TODO: insufficient, compiler now inlines.
    */
+  @Test
   public void trimRightAssertEquals(String left, String right) {
     assertEquals(left, right.trim());
   }
@@ -764,6 +802,7 @@ public class StringTest extends GWTTestCase {
    *
    * TODO: insufficient, compiler now inlines.
    */
+  @Test
   public void trimRightAssertSame(String left, String right) {
     assertSame(left, right.trim());
   }

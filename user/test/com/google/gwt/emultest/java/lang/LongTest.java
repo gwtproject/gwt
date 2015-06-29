@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 /**
  * Unit tests for the Javascript emulation of the Long/long autoboxed
  * fundamental type.
@@ -28,6 +30,7 @@ public class LongTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testBitCount() {
     assertEquals(0, Long.bitCount(0));
     assertEquals(1, Long.bitCount(1));
@@ -36,6 +39,7 @@ public class LongTest extends GWTTestCase {
     assertEquals(1, Long.bitCount(Long.MIN_VALUE));
   }
 
+  @Test
   public void testCompare() {
     assertTrue("Long.compare failed for 1 < 2", Long.compare(1L, 2L) < 0);
     assertTrue("Long.compare failed for 2 > 1", Long.compare(2L, 1L) > 0);
@@ -43,12 +47,14 @@ public class LongTest extends GWTTestCase {
     assertEquals(-1, Long.compare(Long.MIN_VALUE, 1L));
   }
 
+  @Test
   public void testConstants() {
     assertEquals(64, Long.SIZE);
     assertEquals(0x7fffffffffffffffL, Long.MAX_VALUE);
     assertEquals(0x8000000000000000L, Long.MIN_VALUE);
   }
 
+  @Test
   public void testHighestOneBit() {
     assertEquals(0, Long.highestOneBit(0));
     assertEquals(Long.MIN_VALUE, Long.highestOneBit(-1));
@@ -58,6 +64,7 @@ public class LongTest extends GWTTestCase {
     assertEquals(0x4000000000000000L, Long.highestOneBit(Long.MAX_VALUE));
   }
 
+  @Test
   public void testLowestOneBit() {
     assertEquals(0, Long.lowestOneBit(0));
     assertEquals(1, Long.lowestOneBit(-1));
@@ -67,6 +74,7 @@ public class LongTest extends GWTTestCase {
     assertEquals(Long.MIN_VALUE, Long.lowestOneBit(Long.MIN_VALUE));
   }
 
+  @Test
   public void testNumberOfLeadingZeros() {
     assertEquals(64, Long.numberOfLeadingZeros(0));
     assertEquals(63, Long.numberOfLeadingZeros(1));
@@ -77,6 +85,7 @@ public class LongTest extends GWTTestCase {
     assertEquals(0, Long.numberOfLeadingZeros(-0x80000000L));
   }
 
+  @Test
   public void testNumberOfTrailingZeros() {
     assertEquals(64, Long.numberOfTrailingZeros(0));
     assertEquals(0, Long.numberOfTrailingZeros(1));
@@ -87,6 +96,7 @@ public class LongTest extends GWTTestCase {
     assertEquals(20, Long.numberOfTrailingZeros(-0x7ff00000L));
   }
  
+  @Test
   public void testParse() {
     assertEquals(0L, Long.parseLong("0"));
     assertEquals(100000000000L, Long.parseLong("100000000000"));
@@ -195,6 +205,7 @@ public class LongTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testReverse() {
     assertEquals(0L, Long.reverse(0L));
     assertEquals(-1L, Long.reverse(-1L));
@@ -208,6 +219,7 @@ public class LongTest extends GWTTestCase {
     assertEquals(0x0055005500550055L, Long.reverse(0xaa00aa00aa00aa00L));
   }
 
+  @Test
   public void testReverseBytes() {
     assertEquals(0, Long.reverseBytes(0));
     assertEquals(-1, Long.reverseBytes(-1));
@@ -216,6 +228,7 @@ public class LongTest extends GWTTestCase {
     assertEquals(0xf0debc9a78563412L, Long.reverseBytes(0x123456789abcdef0L));
   }
 
+  @Test
   public void testRotateLeft() {
     assertEquals(0, Long.rotateLeft(0, 4));
     assertEquals(0x2, Long.rotateLeft(1, 1));
@@ -225,6 +238,7 @@ public class LongTest extends GWTTestCase {
     assertEquals(1, Long.rotateLeft(Long.MIN_VALUE, 1));
   }
 
+  @Test
   public void testRotateRight() {
     assertEquals(0, Long.rotateRight(0, 4));
     assertEquals(Long.MIN_VALUE, Long.rotateRight(1, 1));
@@ -232,6 +246,7 @@ public class LongTest extends GWTTestCase {
     assertEquals(-1, Long.rotateRight(-1, 4));
   }
 
+  @Test
   public void testSignum() {
     assertEquals(0, Long.signum(0));
     assertEquals(1, Long.signum(1));
@@ -240,11 +255,13 @@ public class LongTest extends GWTTestCase {
     assertEquals(-1, Long.signum(Long.MIN_VALUE));
   }
 
+  @Test
   public void testStaticValueOf() {
     assertEquals(Long.MIN_VALUE, Long.valueOf(Long.MIN_VALUE).longValue());
     assertEquals(Long.MAX_VALUE, Long.valueOf(Long.MAX_VALUE).longValue());
   }
 
+  @Test
   public void testToBinaryString() {
     assertEquals("0", Long.toBinaryString(0L));
     assertEquals("10001111101101101111011110001100100000000", Long.toBinaryString(1234500000000L));
@@ -252,6 +269,7 @@ public class LongTest extends GWTTestCase {
         Long.toBinaryString(-1234500000000L));
   }
 
+  @Test
   public void testToHexString() {
     assertEquals("a", Long.toHexString(0xAL));
     assertEquals("12345", Long.toHexString(0x12345L));
@@ -259,6 +277,7 @@ public class LongTest extends GWTTestCase {
     assertEquals("fff1234500000000", Long.toHexString(0xFFF1234500000000L));
   }
 
+  @Test
   public void testToOctalString() {
     assertEquals("7", Long.toOctalString(7L));
     assertEquals("77777777777", Long.toOctalString(077777777777L));
@@ -266,6 +285,7 @@ public class LongTest extends GWTTestCase {
     assertEquals("777777777777777777777", Long.toOctalString(Long.MAX_VALUE));
   }
 
+  @Test
   public void testToString() {
     assertEquals("89000000005", new Long(89000000005L).toString());
     assertEquals("-9223372036854775808", new Long(Long.MIN_VALUE).toString());

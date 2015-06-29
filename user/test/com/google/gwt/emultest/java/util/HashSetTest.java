@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.util;
 
 import org.apache.commons.collections.TestSet;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,12 +32,14 @@ public class HashSetTest extends TestSet {
     super("Dummy");
   }
 
+  @Test
   public void testAddingKeys() {
     Map<Object, Object> map = new HashMap<Object, Object>();
     Set<Object> keys = new HashSet<Object>(map.keySet());
     keys.add(new Object()); // Throws exception in IE6 (web-mode) but not GWT
   }
 
+  @Test
   public void testAddWatch() {
     HashSet<String> s = new HashSet<String>();
     s.add("watch");

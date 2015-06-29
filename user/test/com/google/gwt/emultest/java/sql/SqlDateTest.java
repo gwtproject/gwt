@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.sql;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.sql.Date;
 
 /**
@@ -35,6 +37,7 @@ public class SqlDateTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testInternalPrecision() {
     long millis = 1283895273475L;
     Date now = new Date(millis);
@@ -46,6 +49,7 @@ public class SqlDateTest extends GWTTestCase {
     assertTrue(before.before(now));
   }
 
+  @Test
   public void testRoundedToDay() {
     java.util.Date utilDate = new java.util.Date();
     Date sqlDate = new Date(utilDate.getTime());
@@ -57,11 +61,13 @@ public class SqlDateTest extends GWTTestCase {
     assertEquals(utilDate.getDate(), utilDate2.getDate());
   }
 
+  @Test
   public void testToString() {
     Date sqlDate = new Date(2000 - 1900, 1 - 1, 1);
     assertEquals("2000-01-01", sqlDate.toString());
   }
   
+  @Test
   public void testUnimplementedFunctions() {
     Date d = new Date(0);
 
@@ -108,6 +114,7 @@ public class SqlDateTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testValueOf() {
     Date d = Date.valueOf("2008-03-26");
     // Months are 0-based, days are 1-based

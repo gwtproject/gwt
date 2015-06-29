@@ -40,6 +40,8 @@ package com.google.gwt.emultest.java.math;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
@@ -54,6 +56,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Abs(MathContext) of a negative BigDecimal.
    */
+  @Test
   public void testAbsMathContextNeg() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -70,6 +73,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Abs(MathContext) of a positive BigDecimal.
    */
+  @Test
   public void testAbsMathContextPos() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -86,6 +90,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Abs() of a negative BigDecimal.
    */
+  @Test
   public void testAbsNeg() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -96,6 +101,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Abs() of a positive BigDecimal.
    */
+  @Test
   public void testAbsPos() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -106,6 +112,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Compare to a number of an equal scale.
    */
+  @Test
   public void testCompareEqualScale1() {
     String a = "12380964839238475457356735674573563567890295784902768787678287";
     int aScale = 18;
@@ -120,6 +127,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Compare to a number of an equal scale.
    */
+  @Test
   public void testCompareEqualScale2() {
     String a = "12380964839238475457356735674573563567890295784902768787678287";
     int aScale = 18;
@@ -134,6 +142,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Compare to a number of an greater scale.
    */
+  @Test
   public void testCompareGreaterScale1() {
     String a = "12380964839238475457356735674573563567890295784902768787678287";
     int aScale = 28;
@@ -148,6 +157,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Compare to a number of an greater scale.
    */
+  @Test
   public void testCompareGreaterScale2() {
     String a = "12380964839238475457356735674573563567890295784902768787678287";
     int aScale = 48;
@@ -162,6 +172,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Compare to a number of an less scale.
    */
+  @Test
   public void testCompareLessScale1() {
     String a = "12380964839238475457356735674573563567890295784902768787678287";
     int aScale = 18;
@@ -176,6 +187,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Compare to a number of an less scale.
    */
+  @Test
   public void testCompareLessScale2() {
     String a = "12380964839238475457356735674573";
     int aScale = 36;
@@ -190,6 +202,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * equals() for equal BigDecimals.
    */
+  @Test
   public void testEqualsEqual() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -203,6 +216,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * equals() for equal BigDecimals.
    */
+  @Test
   public void testEqualsNull() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -213,6 +227,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Equals() for unequal BigDecimals.
    */
+  @Test
   public void testEqualsUnequal1() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -226,6 +241,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Equals() for unequal BigDecimals.
    */
+  @Test
   public void testEqualsUnequal2() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -239,6 +255,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * Equals() for unequal BigDecimals.
    */
+  @Test
   public void testEqualsUnequal3() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -251,6 +268,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
    * Test identical fraction values with different scales.
    * http://code.google.com/p/google-web-toolkit/issues/detail?id=7834
    */
+  @Test
   public void testFractionScale() {
     BigDecimal a = new BigDecimal("0.02");
     BigDecimal b = new BigDecimal("0.02000");
@@ -267,6 +285,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * hashCode() for equal BigDecimals.
    */
+  @Test
   public void testHashCodeEqual() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = -24;
@@ -280,6 +299,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * hashCode() for unequal BigDecimals.
    */
+  @Test
   public void testHashCodeUnequal() {
     String a = "8478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -293,6 +313,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * max() for equal BigDecimals.
    */
+  @Test
   public void testMaxEqual() {
     String a = "8478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -309,6 +330,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * max() for unequal BigDecimals.
    */
+  @Test
   public void testMaxUnequal1() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 24;
@@ -325,6 +347,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * max() for unequal BigDecimals.
    */
+  @Test
   public void testMaxUnequal2() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -341,6 +364,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * min() for equal BigDecimals.
    */
+  @Test
   public void testMinEqual() {
     String a = "8478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -357,6 +381,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * min() for unequal BigDecimals.
    */
+  @Test
   public void testMinUnequal1() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 24;
@@ -373,6 +398,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * min() for unequal BigDecimals.
    */
+  @Test
   public void testMinUnequal2() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -389,6 +415,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * negate(MathContext) for a negative BigDecimal.
    */
+  @Test
   public void testNegateMathContextNegative() {
     if (!GWT.isScript()) {
       // OpenJDK fails this test, so for now we only run it in Production Mode
@@ -410,6 +437,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * negate(MathContext) for a positive BigDecimal.
    */
+  @Test
   public void testNegateMathContextPositive() {
     if (!GWT.isScript()) {
       // OpenJDK fails this test, so for now we only run it in Production Mode
@@ -431,6 +459,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * negate() for a negative BigDecimal.
    */
+  @Test
   public void testNegateNegative() {
     String a = "-92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -444,6 +473,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * negate() for a positive BigDecimal.
    */
+  @Test
   public void testNegatePositive() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -457,6 +487,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * plus(MathContext) for a negative BigDecimal.
    */
+  @Test
   public void testPlusMathContextNegative() {
     String a = "-92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 49;
@@ -474,6 +505,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * plus(MathContext) for a positive BigDecimal.
    */
+  @Test
   public void testPlusMathContextPositive() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -491,6 +523,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * plus() for a negative BigDecimal.
    */
+  @Test
   public void testPlusNegative() {
     String a = "-92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -504,6 +537,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * plus() for a positive BigDecimal.
    */
+  @Test
   public void testPlusPositive() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -517,6 +551,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * signum() for a negative BigDecimal.
    */
+  @Test
   public void testSignumNegative() {
     String a = "-92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -527,6 +562,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * signum() for a positive BigDecimal.
    */
+  @Test
   public void testSignumPositive() {
     String a = "92948782094488478231212478987482988429808779810457634781384756794987";
     int aScale = 41;
@@ -537,6 +573,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
   /**
    * signum() for zero.
    */
+  @Test
   public void testSignumZero() {
     String a = "0";
     int aScale = 41;

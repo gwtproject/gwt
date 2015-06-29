@@ -39,6 +39,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.math.BigInteger;
 
 /**
@@ -48,6 +50,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Multiply two negative numbers of the same length.
    */
+  @Test
   public void testCase1() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -70,6 +73,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Multiply a negative number by ONE.
    */
+  @Test
   public void testCase10() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 1, 2, 3, 4, 5};
     int aSign = -1;
@@ -89,6 +93,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
    * Multiply two numbers of the same length and different signs. The first is
    * negative.
    */
+  @Test
   public void testCase2() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -111,6 +116,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Multiply two positive numbers of different length. The first is longer.
    */
+  @Test
   public void testCase3() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 1, 2, 3, 4, 5};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -133,6 +139,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Multiply two positive numbers of different length. The second is longer.
    */
+  @Test
   public void testCase4() {
     byte aBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 1, 2, 3, 4, 5};
@@ -156,6 +163,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
    * Multiply two numbers of different length and different signs. The first is
    * positive. The first is longer.
    */
+  @Test
   public void testCase5() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 1, 2, 3, 4, 5};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -179,6 +187,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
    * Multiply two numbers of different length and different signs. The first is
    * positive. The second is longer.
    */
+  @Test
   public void testCase6() {
     byte aBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 1, 2, 3, 4, 5};
@@ -201,6 +210,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Multiply a number by zero.
    */
+  @Test
   public void testCase7() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 1, 2, 3, 4, 5};
     byte bBytes[] = {0};
@@ -221,6 +231,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Multiply a number by ZERO.
    */
+  @Test
   public void testCase8() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 1, 2, 3, 4, 5};
     int aSign = 1;
@@ -239,6 +250,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Multiply a positive number by ONE.
    */
+  @Test
   public void testCase9() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 1, 2, 3, 4, 5};
     int aSign = 1;
@@ -257,6 +269,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Multiply two numbers of 4 bytes length.
    */
+  @Test
   public void testIntbyInt1() {
     byte aBytes[] = {10, 20, 30, 40};
     byte bBytes[] = {1, 2, 3, 4};
@@ -277,6 +290,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Multiply two numbers of 4 bytes length.
    */
+  @Test
   public void testIntbyInt2() {
     byte aBytes[] = {-1, -1, -1, -1};
     byte bBytes[] = {-1, -1, -1, -1};
@@ -297,6 +311,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Negative exponent.
    */
+  @Test
   public void testPowException() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     int aSign = 1;
@@ -314,6 +329,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Exponentiation of a negative number to an even exponent.
    */
+  @Test
   public void testPowNegativeNumToEvenExp() {
     byte aBytes[] = {50, -26, 90, 69, 120, 32, 63, -103, -14, 35};
     int aSign = -1;
@@ -335,6 +351,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Exponentiation of a negative number to an odd exponent.
    */
+  @Test
   public void testPowNegativeNumToOddExp() {
     byte aBytes[] = {50, -26, 90, 69, 120, 32, 63, -103, -14, 35};
     int aSign = -1;
@@ -357,6 +374,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Exponentiation of a negative number to zero exponent.
    */
+  @Test
   public void testPowNegativeNumToZeroExp() {
     byte aBytes[] = {50, -26, 90, 69, 120, 32, 63, -103, -14, 35};
     int aSign = -1;
@@ -375,6 +393,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Exponentiation of a positive number.
    */
+  @Test
   public void testPowPositiveNum() {
     byte aBytes[] = {50, -26, 90, 69, 120, 32, 63, -103, -14, 35};
     int aSign = 1;
@@ -397,6 +416,7 @@ public class BigIntegerMultiplyTest extends EmulTestBase {
   /**
    * Exponentiation of a negative number to zero exponent.
    */
+  @Test
   public void testPowPositiveNumToZeroExp() {
     byte aBytes[] = {50, -26, 90, 69, 120, 32, 63, -103, -14, 35};
     int aSign = 1;

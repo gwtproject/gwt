@@ -18,6 +18,7 @@ package com.google.gwt.emultest.java.util;
 import com.google.gwt.core.client.GWT;
 
 import org.apache.commons.collections.TestMap;
+import org.junit.Test;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -145,6 +146,7 @@ public class LinkedHashMapTest extends TestMap {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testAddEqualKeys() {
     final LinkedHashMap<Number, Object> expected = new LinkedHashMap<Number, Object>();
     assertEquals(expected.size(), 0);
@@ -158,6 +160,7 @@ public class LinkedHashMapTest extends TestMap {
     iterateThrough(expected);
   }
 
+  @Test
   public void testAddWatch() {
     LinkedHashMap<String, String> m = new LinkedHashMap<String, String>();
     m.put("watch", "watch");
@@ -167,6 +170,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.LinkedHashMap.clear()'
    */
+  @Test
   public void testClear() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -184,6 +188,7 @@ public class LinkedHashMapTest extends TestMap {
    * Test method for 'java.util.LinkedHashMap.clone()'
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testClone() {
     LinkedHashMap<String, String> srcMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(srcMap);
@@ -210,6 +215,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.LinkedHashMap.containsKey(Object)'
    */
+  @Test
   public void testContainsKey() {
     LinkedHashMap<String, Integer> hashMap = new LinkedHashMap<String, Integer>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -227,6 +233,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.LinkedHashMap.containsValue(Object)'
    */
+  @Test
   public void testContainsValue() {
     LinkedHashMap<String, Integer> hashMap = new LinkedHashMap<String, Integer>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -247,6 +254,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.LinkedHashMap.entrySet()'
    */
+  @Test
   public void testEntrySet() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -280,6 +288,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Used to test the entrySet remove method.
    */
+  @Test
   public void testEntrySetRemove() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     hashMap.put("A", "B");
@@ -310,6 +319,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.lang.Object.finalize()'.
    */
+  @Test
   public void testFinalize() {
     // no tests for finalize
   }
@@ -317,6 +327,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.LinkedHashMap.get(Object)'.
    */
+  @Test
   public void testGet() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -336,6 +347,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.AbstractMap.hashCode()'.
    */
+  @Test
   public void testHashCode() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -351,6 +363,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.AbstractMap.isEmpty()'
    */
+  @Test
   public void testIsEmpty() {
     LinkedHashMap<String, String> srcMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(srcMap);
@@ -369,6 +382,7 @@ public class LinkedHashMapTest extends TestMap {
     assertEquals(dstMap.size(), 0);
   }
 
+  @Test
   public void testKeysConflict() {
     LinkedHashMap<Object, String> hashMap = new LinkedHashMap<Object, String>();
 
@@ -396,6 +410,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.LinkedHashMap.keySet()'
    */
+  @Test
   public void testKeySet() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -415,6 +430,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.LinkedHashMap.LinkedHashMap()'.
    */
+  @Test
   public void testLinkedHashMap() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -423,6 +439,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.LinkedHashMap.LinkedHashMap(int)'
    */
+  @Test
   public void testLinkedHashMapInt() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>(CAPACITY_16);
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -448,6 +465,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.LinkedHashMap.LinkedHashMap(int, float)'
    */
+  @Test
   public void testLinkedHashMapIntFloat() {
 
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>(CAPACITY_16,
@@ -492,6 +510,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.LinkedHashMap.LinkedHashMap(Map)'
    */
+  @Test
   public void testLinkedHashMapMap() {
     LinkedHashMap<Integer, Integer> srcMap = new LinkedHashMap<Integer, Integer>();
     assertNotNull(srcMap);
@@ -516,6 +535,7 @@ public class LinkedHashMapTest extends TestMap {
     assertTrue(keyColl.contains(INTEGER_3));
   }
 
+  @Test
   public void testLRU() {
     LinkedHashMap<String, String> m = new LinkedHashMap<String, String>(10,
         .5f, true);
@@ -540,6 +560,7 @@ public class LinkedHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.LinkedHashMap.put(Object, Object)'
    */
+  @Test
   public void testPut() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -553,6 +574,7 @@ public class LinkedHashMapTest extends TestMap {
   /**
    * Test method for 'java.util.LinkedHashMap.putAll(Map)'.
    */
+  @Test
   public void testPutAll() {
     LinkedHashMap<String, String> srcMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(srcMap);
@@ -618,6 +640,7 @@ public class LinkedHashMapTest extends TestMap {
   /**
    * Test method for 'java.util.LinkedHashMap.remove(Object)'.
    */
+  @Test
   public void testRemove() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -631,6 +654,7 @@ public class LinkedHashMapTest extends TestMap {
     assertNull(hashMap.remove(KEY_TEST_REMOVE));
   }
 
+  @Test
   public void testRemoveEldest() {
     TestRemoveEldestMap<String, String> m = new TestRemoveEldestMap<String, String>(false);
     m.put("A", "A");
@@ -650,6 +674,7 @@ public class LinkedHashMapTest extends TestMap {
     assertEquals(4, m.size());
   }
 
+  @Test
   public void testRemoveEldestMapLRU() {
     TestRemoveEldestMap<String, String> m = new TestRemoveEldestMap<String, String>(true);
     m.put("A", "A");
@@ -674,6 +699,7 @@ public class LinkedHashMapTest extends TestMap {
   /**
    * Test method for 'java.util.LinkedHashMap.size()'.
    */
+  @Test
   public void testSize() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -711,6 +737,7 @@ public class LinkedHashMapTest extends TestMap {
   /**
    * Test method for 'java.util.AbstractMap.toString()'.
    */
+  @Test
   public void testToString() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);
@@ -722,6 +749,7 @@ public class LinkedHashMapTest extends TestMap {
   /**
    * Test method for 'java.util.AbstractMap.values()'.
    */
+  @Test
   public void testValues() {
     LinkedHashMap<String, String> hashMap = new LinkedHashMap<String, String>();
     checkEmptyLinkedHashMapAssumptions(hashMap);

@@ -39,6 +39,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -48,6 +50,7 @@ import java.math.BigInteger;
  */
 public class BigDecimalConvertTest extends EmulTestBase {
 
+  @Test
   public void testByteValue() {
     assertEquals((byte) 1, BigDecimal.ONE.byteValue());
     assertEquals((byte) -1, BigDecimal.valueOf(255).byteValue());
@@ -74,6 +77,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Double value of a negative BigDecimal.
    */
+  @Test
   public void testDoubleValueNeg() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -84,6 +88,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Double value of a large negative BigDecimal.
    */
+  @Test
   public void testDoubleValueNegInfinity() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E+400";
     BigDecimal aNumber = new BigDecimal(a);
@@ -106,6 +111,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Double value of a positive BigDecimal.
    */
+  @Test
   public void testDoubleValuePos() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -116,6 +122,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Double value of a large positive BigDecimal.
    */
+  @Test
   public void testDoubleValuePosInfinity() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E+400";
     BigDecimal aNumber = new BigDecimal(a);
@@ -138,6 +145,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Float value of a negative BigDecimal.
    */
+  @Test
   public void testFloatValueNeg() {
     String a = "-1238096483923847.6356789029578E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -149,6 +157,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Float value of a large negative BigDecimal.
    */
+  @Test
   public void testFloatValueNegInfinity() {
     String a = "-123809648392384755735.63567887678287E+200";
     BigDecimal aNumber = new BigDecimal(a);
@@ -171,6 +180,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Float value of a positive BigDecimal.
    */
+  @Test
   public void testFloatValuePos() {
     String a = "1238096483923847.6356789029578E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -182,6 +192,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Float value of a large positive BigDecimal.
    */
+  @Test
   public void testFloatValuePosInfinity() {
     String a = "123809648373567356745735.6356789787678287E+200";
     BigDecimal aNumber = new BigDecimal(a);
@@ -192,6 +203,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Integer value of a negative BigDecimal.
    */
+  @Test
   public void testIntValueNeg() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -207,6 +219,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Integer value of a positive BigDecimal.
    */
+  @Test
   public void testIntValuePos() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -222,6 +235,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Long value of a negative BigDecimal.
    */
+  @Test
   public void testLongValueNeg() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -237,6 +251,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Long value of a positive BigDecimal.
    */
+  @Test
   public void testLongValuePos() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigDecimal aNumber = new BigDecimal(a);
@@ -252,6 +267,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * scaleByPowerOfTen(int n).
    */
+  @Test
   public void testScaleByPowerOfTen1() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = 13;
@@ -266,6 +282,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * scaleByPowerOfTen(int n).
    */
+  @Test
   public void testScaleByPowerOfTen2() {
     String a = "1231212478987482988429808779810457634781384756794987";
     int aScale = -13;
@@ -277,6 +294,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
     assertEquals("incorrect scale", resScale, result.scale());
   }
 
+  @Test
   public void testShortValue() {
     BigDecimal value = BigDecimal.valueOf(0x13fff);
     assertEquals(0x3fff, value.shortValue());
@@ -290,6 +308,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * toBigIntegerExact().
    */
+  @Test
   public void testToBigIntegerExact1() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E+45";
     BigDecimal aNumber = new BigDecimal(a);
@@ -301,6 +320,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * toBigIntegerExact().
    */
+  @Test
   public void testToBigIntegerExactException() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E-10";
     BigDecimal aNumber = new BigDecimal(a);
@@ -315,6 +335,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a negative BigDecimal to BigInteger.
    */
+  @Test
   public void testToBigIntegerNeg1() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigInteger bNumber = new BigInteger(
@@ -327,6 +348,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a negative BigDecimal to BigInteger.
    */
+  @Test
   public void testToBigIntegerNeg2() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E+15";
     BigInteger bNumber = new BigInteger(
@@ -339,6 +361,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a negative BigDecimal to BigInteger.
    */
+  @Test
   public void testToBigIntegerNeg3() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E+45";
     BigInteger bNumber = new BigInteger(
@@ -351,6 +374,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a positive BigDecimal to BigInteger.
    */
+  @Test
   public void testToBigIntegerPos1() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E+21";
     BigInteger bNumber = new BigInteger(
@@ -363,6 +387,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a positive BigDecimal to BigInteger.
    */
+  @Test
   public void testToBigIntegerPos2() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E+15";
     BigInteger bNumber = new BigInteger(
@@ -375,6 +400,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a positive BigDecimal to BigInteger.
    */
+  @Test
   public void testToBigIntegerPos3() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E+45";
     BigInteger bNumber = new BigInteger(
@@ -387,6 +413,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a small BigDecimal to BigInteger.
    */
+  @Test
   public void testToBigIntegerZero() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E-500";
     BigInteger bNumber = new BigInteger("0");
@@ -398,6 +425,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a negative BigDecimal to an engineering string representation.
    */
+  @Test
   public void testToEngineeringStringNeg() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E-501";
     BigDecimal aNumber = new BigDecimal(a);
@@ -408,6 +436,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a positive BigDecimal to an engineering string representation.
    */
+  @Test
   public void testToEngineeringStringPos() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E-501";
     BigDecimal aNumber = new BigDecimal(a);
@@ -418,6 +447,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a negative BigDecimal to an engineering string representation.
    */
+  @Test
   public void testToEngineeringStringZeroNegExponent() {
     String a = "0.0E-16";
     BigDecimal aNumber = new BigDecimal(a);
@@ -428,6 +458,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a negative BigDecimal to an engineering string representation.
    */
+  @Test
   public void testToEngineeringStringZeroPosExponent() {
     String a = "0.0E+16";
     BigDecimal aNumber = new BigDecimal(a);
@@ -439,6 +470,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
    * Convert a negative BigDecimal with a negative exponent to a plain string
    * representation; scale == 0.
    */
+  @Test
   public void testToPlainStringNegNegExp() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E-100";
     BigDecimal aNumber = new BigDecimal(a);
@@ -450,6 +482,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
    * Convert a negative BigDecimal with a positive exponent to a plain string
    * representation; scale == 0.
    */
+  @Test
   public void testToPlainStringNegPosExp() {
     String a = "-123809648392384754573567356745735.63567890295784902768787678287E100";
     BigDecimal aNumber = new BigDecimal(a);
@@ -461,6 +494,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
    * Convert a positive BigDecimal with a negative exponent to a plain string
    * representation; scale == 0.
    */
+  @Test
   public void testToPlainStringPosNegExp() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E-100";
     BigDecimal aNumber = new BigDecimal(a);
@@ -472,6 +506,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
    * Convert a negative BigDecimal with a negative exponent to a plain string
    * representation; scale == 0.
    */
+  @Test
   public void testToPlainStringPosPosExp() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E+100";
     BigDecimal aNumber = new BigDecimal(a);
@@ -482,6 +517,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a negative BigDecimal to a string representation.
    */
+  @Test
   public void testToStringNeg() {
     String a = "-123.4564563673567380964839238475457356735674573563567890295784902768787678287E-5";
     BigDecimal aNumber = new BigDecimal(a);
@@ -492,6 +528,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a positive BigDecimal to a string representation.
    */
+  @Test
   public void testToStringPos() {
     String a = "123809648392384754573567356745735.63567890295784902768787678287E-500";
     BigDecimal aNumber = new BigDecimal(a);
@@ -502,6 +539,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Convert a BigDecimal to a string representation; scale == 0.
    */
+  @Test
   public void testToStringZeroScale() {
     String a = "-123809648392384754573567356745735635678902957849027687876782870";
     BigDecimal aNumber = new BigDecimal(new BigInteger(a));
@@ -513,6 +551,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
    * valueOf(Double.NaN).
    */
   @SuppressWarnings("ReturnValueIgnored")
+  @Test
   public void testValueOfDoubleNaN() {
     double a = Double.NaN;
     try {
@@ -526,6 +565,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a negative double value.
    */
+  @Test
   public void testValueOfDoubleNeg() {
     double a = -65678765876567576.98788767;
     BigDecimal result = BigDecimal.valueOf(a);
@@ -538,6 +578,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a positive double value.
    */
+  @Test
   public void testValueOfDoublePos1() {
     double a = 65678765876567576.98788767;
     BigDecimal result = BigDecimal.valueOf(a);
@@ -550,6 +591,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a positive double value.
    */
+  @Test
   public void testValueOfDoublePos2() {
     double a = 12321237576.98788767;
     BigDecimal result = BigDecimal.valueOf(a);
@@ -562,6 +604,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a positive double value.
    */
+  @Test
   public void testValueOfDoublePos3() {
     double a = 12321237576.9878838;
     BigDecimal result = BigDecimal.valueOf(a);
@@ -574,6 +617,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a negative long value; scale is negative.
    */
+  @Test
   public void testValueOfNegScaleNeg() {
     long a = -98374823947823578L;
     int scale = -12;
@@ -585,6 +629,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a negative long value; scale is positive.
    */
+  @Test
   public void testValueOfNegScalePos() {
     long a = -98374823947823578L;
     int scale = 12;
@@ -596,6 +641,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a negative long value; scale is 0.
    */
+  @Test
   public void testValueOfNegZeroScale() {
     long a = -98374823947823578L;
     BigDecimal aNumber = BigDecimal.valueOf(a);
@@ -606,6 +652,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a negative long value; scale is negative.
    */
+  @Test
   public void testValueOfPosScaleNeg() {
     long a = 98374823947823578L;
     int scale = -12;
@@ -617,6 +664,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a negative long value; scale is positive.
    */
+  @Test
   public void testValueOfPosScalePos() {
     long a = 98374823947823578L;
     int scale = 12;
@@ -628,6 +676,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a positive long value; scale == 0.
    */
+  @Test
   public void testValueOfPosZeroScale() {
     long a = 98374823947823578L;
     BigDecimal aNumber = BigDecimal.valueOf(a);
@@ -638,6 +687,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a zero value; with a small negative scale.
    */
+  @Test
   public void testValueOfZeroScaleNeg() {
     int scale = -2;
     BigDecimal number = BigDecimal.valueOf(0L, scale);
@@ -648,6 +698,7 @@ public class BigDecimalConvertTest extends EmulTestBase {
   /**
    * Create a BigDecimal from a zero value; with a small positive scale.
    */
+  @Test
   public void testValueOfZeroScalePos() {
     int scale = 1;
     BigDecimal number = BigDecimal.valueOf(0L, scale);

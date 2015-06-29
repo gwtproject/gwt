@@ -39,6 +39,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.math.BigInteger;
 
 /**
@@ -49,6 +51,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * bitCount() of a negative number.
    */
+  @Test
   public void testBitCountNeg() {
     BigInteger aNumber = new BigInteger(
         "-12378634756382937873487638746283767238657872368748726875");
@@ -58,6 +61,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * bitCount() of a negative number.
    */
+  @Test
   public void testBitCountPos() {
     BigInteger aNumber = new BigInteger(
         "12378634756343564757582937873487638746283767238657872368748726875");
@@ -67,6 +71,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * bitCount() of zero.
    */
+  @Test
   public void testBitCountZero() {
     BigInteger aNumber = new BigInteger("0");
     assertEquals(0, aNumber.bitCount());
@@ -75,6 +80,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * bitLength() of a negative number.
    */
+  @Test
   public void testBitLengthNegative1() {
     byte aBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
     int aSign = -1;
@@ -85,6 +91,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * bitLength() of a negative number with the leftmost bit set.
    */
+  @Test
   public void testBitLengthNegative2() {
     byte aBytes[] = {-128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -95,6 +102,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * bitLength() of a negative number which is a power of 2.
    */
+  @Test
   public void testBitLengthNegative3() {
     byte aBytes[] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     int aSign = -1;
@@ -105,6 +113,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * bitLength() of a positive number.
    */
+  @Test
   public void testBitLengthPositive1() {
     byte aBytes[] = {12, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26, 3, 91};
     int aSign = 1;
@@ -115,6 +124,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * bitLength() of a positive number with the leftmost bit set.
    */
+  @Test
   public void testBitLengthPositive2() {
     byte aBytes[] = {-128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -125,6 +135,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * bitLength() of a positive number which is a power of 2.
    */
+  @Test
   public void testBitLengthPositive3() {
     byte aBytes[] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     int aSign = 1;
@@ -135,6 +146,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * bitLength() of zero.
    */
+  @Test
   public void testBitLengthZero() {
     BigInteger aNumber = new BigInteger("0");
     assertEquals(0, aNumber.bitLength());
@@ -143,6 +155,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) of a negative n.
    */
+  @Test
   public void testClearBitException() {
     byte aBytes[] = {-1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -160,6 +173,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) inside a negative number.
    */
+  @Test
   public void testClearBitNegativeInside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -178,6 +192,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) inside a negative number.
    */
+  @Test
   public void testClearBitNegativeInside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -196,6 +211,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(2) in the negative number with all ones in bit representation.
    */
+  @Test
   public void testClearBitNegativeInside3() {
     String as = "-18446744073709551615";
     int number = 2;
@@ -208,6 +224,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
    * clearBit(0) in the negative number of length 1 with all ones in bit
    * representation. the resulting number's length is 2.
    */
+  @Test
   public void testClearBitNegativeInside4() {
     String as = "-4294967295";
     String res = "-4294967296";
@@ -221,6 +238,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
    * clearBit(0) in the negative number of length 2 with all ones in bit
    * representation. the resulting number's length is 3.
    */
+  @Test
   public void testClearBitNegativeInside5() {
     String as = "-18446744073709551615";
     String res = "-18446744073709551616";
@@ -233,6 +251,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) outside a negative number.
    */
+  @Test
   public void testClearBitNegativeOutside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -253,6 +272,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) outside a negative number.
    */
+  @Test
   public void testClearBitNegativeOutside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -273,6 +293,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) inside a positive number.
    */
+  @Test
   public void testClearBitPositiveInside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -291,6 +312,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) inside a positive number.
    */
+  @Test
   public void testClearBitPositiveInside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -309,6 +331,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) inside a positive number.
    */
+  @Test
   public void testClearBitPositiveInside3() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -327,6 +350,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) inside a positive number.
    */
+  @Test
   public void testClearBitPositiveInside4() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -345,6 +369,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) inside a positive number.
    */
+  @Test
   public void testClearBitPositiveInside5() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -363,6 +388,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) outside a positive number.
    */
+  @Test
   public void testClearBitPositiveOutside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -381,6 +407,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) outside a positive number.
    */
+  @Test
   public void testClearBitPositiveOutside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -399,6 +426,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) the leftmost bit in a negative number.
    */
+  @Test
   public void testClearBitTopNegative() {
     byte aBytes[] = {1, -128, 56, 100, -15, 35, 26};
     int aSign = -1;
@@ -417,6 +445,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) outside zero.
    */
+  @Test
   public void testClearBitZero() {
     byte aBytes[] = {0};
     int aSign = 0;
@@ -435,6 +464,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * clearBit(int n) outside zero.
    */
+  @Test
   public void testClearBitZeroOutside1() {
     byte aBytes[] = {0};
     int aSign = 0;
@@ -453,6 +483,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) of a negative n.
    */
+  @Test
   public void testFlipBitException() {
     byte aBytes[] = {-1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -470,6 +501,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) the leftmost bit in a negative number.
    */
+  @Test
   public void testFlipBitLeftmostNegative() {
     byte aBytes[] = {1, -128, 56, 100, -15, 35, 26};
     int aSign = -1;
@@ -488,6 +520,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) the leftmost bit in a positive number.
    */
+  @Test
   public void testFlipBitLeftmostPositive() {
     byte aBytes[] = {1, -128, 56, 100, -15, 35, 26};
     int aSign = 1;
@@ -506,6 +539,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) inside a negative number.
    */
+  @Test
   public void testFlipBitNegativeInside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -524,6 +558,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) inside a negative number.
    */
+  @Test
   public void testFlipBitNegativeInside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -542,6 +577,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) inside a negative number with all ones in bit representation.
    */
+  @Test
   public void testFlipBitNegativeInside3() {
     String as = "-18446744073709551615";
     String res = "-18446744073709551611";
@@ -555,6 +591,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
    * flipBit(0) in the negative number of length 1 with all ones in bit
    * representation. the resulting number's length is 2.
    */
+  @Test
   public void testFlipBitNegativeInside4() {
     String as = "-4294967295";
     String res = "-4294967296";
@@ -568,6 +605,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
    * flipBit(0) in the negative number of length 2 with all ones in bit
    * representation. the resulting number's length is 3.
    */
+  @Test
   public void testFlipBitNegativeInside5() {
     String as = "-18446744073709551615";
     String res = "-18446744073709551616";
@@ -580,6 +618,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) outside a negative number.
    */
+  @Test
   public void testFlipBitNegativeOutside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -600,6 +639,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) outside a negative number.
    */
+  @Test
   public void testFlipBitNegativeOutside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -620,6 +660,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) inside a positive number.
    */
+  @Test
   public void testFlipBitPositiveInside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -638,6 +679,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) inside a positive number.
    */
+  @Test
   public void testFlipBitPositiveInside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -656,6 +698,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) outside a positive number.
    */
+  @Test
   public void testFlipBitPositiveOutside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -676,6 +719,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) outside a positive number.
    */
+  @Test
   public void testFlipBitPositiveOutside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -696,6 +740,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) zero.
    */
+  @Test
   public void testFlipBitZero() {
     byte aBytes[] = {0};
     int aSign = 0;
@@ -714,6 +759,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) outside zero.
    */
+  @Test
   public void testFlipBitZeroOutside1() {
     byte aBytes[] = {0};
     int aSign = 0;
@@ -732,6 +778,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * flipBit(int n) outside zero.
    */
+  @Test
   public void testFlipBitZeroOutside2() {
     byte aBytes[] = {0};
     int aSign = 0;
@@ -751,6 +798,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
    * setBit: check the case when the number of bit to be set can be represented
    * as n * 32 + 31, where n is an arbitrary integer. Here 191 = 5 * 32 + 31.
    */
+  @Test
   public void testSetBitBug1331() {
     BigInteger result = BigInteger.valueOf(0L).setBit(191);
     assertEquals("incorrect value",
@@ -762,6 +810,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) of a negative n.
    */
+  @Test
   public void testSetBitException() {
     byte aBytes[] = {-1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -779,6 +828,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) the leftmost bit in a negative number.
    */
+  @Test
   public void testSetBitLeftmostNegative() {
     byte aBytes[] = {1, -128, 56, 100, -15, 35, 26};
     int aSign = -1;
@@ -797,6 +847,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) inside a negative number.
    */
+  @Test
   public void testSetBitNegativeInside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -815,6 +866,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) inside a negative number.
    */
+  @Test
   public void testSetBitNegativeInside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -833,6 +885,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) inside a negative number with all ones in bit representation.
    */
+  @Test
   public void testSetBitNegativeInside3() {
     String as = "-18446744073709551615";
     String res = "-18446744073709551611";
@@ -846,6 +899,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
    * setBit(0) in the negative number of length 1 with all ones in bit
    * representation. the resulting number's length is 2.
    */
+  @Test
   public void testSetBitNegativeInside4() {
     String as = "-4294967295";
     int number = 0;
@@ -858,6 +912,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
    * setBit(0) in the negative number of length 2 with all ones in bit
    * representation. the resulting number's length is 3.
    */
+  @Test
   public void testSetBitNegativeInside5() {
     String as = "-18446744073709551615";
     int number = 0;
@@ -869,6 +924,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) outside a negative number.
    */
+  @Test
   public void testSetBitNegativeOutside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -887,6 +943,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) outside a negative number.
    */
+  @Test
   public void testSetBitNegativeOutside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -905,6 +962,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) inside a positive number.
    */
+  @Test
   public void testSetBitPositiveInside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -923,6 +981,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) inside a positive number.
    */
+  @Test
   public void testSetBitPositiveInside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -941,6 +1000,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) inside a positive number.
    */
+  @Test
   public void testSetBitPositiveInside3() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -959,6 +1019,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) inside a positive number.
    */
+  @Test
   public void testSetBitPositiveInside4() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -977,6 +1038,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) outside a positive number.
    */
+  @Test
   public void testSetBitPositiveOutside1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -997,6 +1059,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) outside a positive number.
    */
+  @Test
   public void testSetBitPositiveOutside2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1017,6 +1080,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) the leftmost bit in a positive number.
    */
+  @Test
   public void testSetBitTopPositive() {
     byte aBytes[] = {1, -128, 56, 100, -15, 35, 26};
     int aSign = 1;
@@ -1035,6 +1099,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) outside zero.
    */
+  @Test
   public void testSetBitZero() {
     byte aBytes[] = {0};
     int aSign = 0;
@@ -1053,6 +1118,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * setBit(int n) outside zero.
    */
+  @Test
   public void testSetBitZeroOutside1() {
     byte aBytes[] = {0};
     int aSign = 0;
@@ -1071,6 +1137,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * shiftLeft(int n), n = 0.
    */
+  @Test
   public void testShiftLeft1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1089,6 +1156,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * shiftLeft(int n), n < 0.
    */
+  @Test
   public void testShiftLeft2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1107,6 +1175,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * shiftLeft(int n) a positive number, n > 0.
    */
+  @Test
   public void testShiftLeft3() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1126,6 +1195,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * shiftLeft(int n) a positive number, n > 0.
    */
+  @Test
   public void testShiftLeft4() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1145,6 +1215,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * shiftLeft(int n) a negative number, n > 0.
    */
+  @Test
   public void testShiftLeft5() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -1165,6 +1236,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * shiftRight(int n), n = 0.
    */
+  @Test
   public void testShiftRight1() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1183,6 +1255,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * shiftRight(int n), n < 0.
    */
+  @Test
   public void testShiftRight2() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1202,6 +1275,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * shiftRight(int n), 0 < n < 32.
    */
+  @Test
   public void testShiftRight3() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1220,6 +1294,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * shiftRight(int n), n > 32.
    */
+  @Test
   public void testShiftRight4() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1238,6 +1313,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * shiftRight(int n), n is greater than bitLength().
    */
+  @Test
   public void testShiftRight5() {
     byte aBytes[] = {1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1257,6 +1333,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
    * shiftRight a negative number; shift distance is NOT multiple of 32; shifted
    * bits are NOT zeroes.
    */
+  @Test
   public void testShiftRightNegNonZeroes() {
     byte aBytes[] = {
         1, -128, 56, 100, -2, -76, 89, 45, 91, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -1277,6 +1354,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
    * shiftRight a negative number; shift distance is multiple of 32; shifted
    * bits are NOT zeroes.
    */
+  @Test
   public void testShiftRightNegNonZeroesMul32() {
     byte aBytes[] = {
         1, -128, 56, 100, -2, -76, 89, 45, 91, 1, 0, 0, 0, 0, 0, 0, 0};
@@ -1297,6 +1375,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
    * shiftRight a negative number; shift distance is NOT multiple of 32; shifted
    * bits are zeroes.
    */
+  @Test
   public void testShiftRightNegZeroes() {
     byte aBytes[] = {
         1, -128, 56, 100, -2, -76, 89, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -1317,6 +1396,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
    * shiftRight a negative number; shift distance is multiple of 32; shifted
    * bits are zeroes.
    */
+  @Test
   public void testShiftRightNegZeroesMul32() {
     byte aBytes[] = {
         1, -128, 56, 100, -2, -76, 89, 45, 91, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -1336,6 +1416,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * testBit(int n) of a negative n.
    */
+  @Test
   public void testTestBitException() {
     byte aBytes[] = {-1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1353,6 +1434,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * testBit(int n) of a negative number.
    */
+  @Test
   public void testTestBitNegative1() {
     byte aBytes[] = {-1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -1364,6 +1446,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * testBit(int n) of a positive n.
    */
+  @Test
   public void testTestBitNegative2() {
     byte aBytes[] = {-1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -1375,6 +1458,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * testBit(int n) of a positive n, n > bitLength().
    */
+  @Test
   public void testTestBitNegative3() {
     byte aBytes[] = {-1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = -1;
@@ -1386,6 +1470,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * testBit(int n) of a positive number.
    */
+  @Test
   public void testTestBitPositive1() {
     byte aBytes[] = {-1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1397,6 +1482,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * testBit(int n) of a positive number.
    */
+  @Test
   public void testTestBitPositive2() {
     byte aBytes[] = {-1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;
@@ -1408,6 +1494,7 @@ public class BigIntegerOperateBitsTest extends EmulTestBase {
   /**
    * testBit(int n) of a positive number, n > bitLength().
    */
+  @Test
   public void testTestBitPositive3() {
     byte aBytes[] = {-1, -128, 56, 100, -2, -76, 89, 45, 91, 3, -15, 35, 26};
     int aSign = 1;

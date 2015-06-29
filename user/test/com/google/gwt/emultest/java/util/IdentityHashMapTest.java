@@ -18,6 +18,7 @@ package com.google.gwt.emultest.java.util;
 import com.google.gwt.core.client.GWT;
 
 import org.apache.commons.collections.TestMap;
+import org.junit.Test;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -132,6 +133,7 @@ public class IdentityHashMapTest extends TestMap {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testAddEqualKeys() {
     final IdentityHashMap expected = new IdentityHashMap();
     assertEquals(expected.size(), 0);
@@ -145,6 +147,7 @@ public class IdentityHashMapTest extends TestMap {
     iterateThrough(expected);
   }
 
+  @Test
   public void testAddWatch() {
     IdentityHashMap m = new IdentityHashMap();
     m.put("watch", "watch");
@@ -154,6 +157,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.IdentityHashMap.clear()'
    */
+  @Test
   public void testClear() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -170,6 +174,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.IdentityHashMap.clone()'
    */
+  @Test
   public void testClone() {
     IdentityHashMap srcMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(srcMap);
@@ -198,6 +203,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.IdentityHashMap.containsKey(Object)'
    */
+  @Test
   public void testContainsKey() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -215,6 +221,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.IdentityHashMap.containsValue(Object)'
    */
+  @Test
   public void testContainsValue() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -237,6 +244,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.IdentityHashMap.entrySet()'
    */
+  @Test
   public void testEntrySet() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -270,6 +278,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Used to test the entrySet entry's set method.
    */
+  @Test
   public void testEntrySetEntrySetterNonString() {
     HashMap hashMap = new HashMap();
     Integer key = 1;
@@ -289,6 +298,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Used to test the entrySet entry's set method.
    */
+  @Test
   public void testEntrySetEntrySetterNull() {
     HashMap hashMap = new HashMap();
     hashMap.put(null, 2);
@@ -307,6 +317,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Used to test the entrySet entry's set method.
    */
+  @Test
   public void testEntrySetEntrySetterString() {
     HashMap hashMap = new HashMap();
     String key = "A";
@@ -326,6 +337,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Used to test the entrySet remove method.
    */
+  @Test
   public void testEntrySetRemove() {
     IdentityHashMap hashMap = new IdentityHashMap();
     hashMap.put("A", "B");
@@ -341,6 +353,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.AbstractMap.equals(Object)'
    */
+  @Test
   public void testEquals() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -357,6 +370,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.lang.Object.finalize()'.
    */
+  @Test
   public void testFinalize() {
     // no tests for finalize
   }
@@ -364,6 +378,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.IdentityHashMap.get(Object)'.
    */
+  @Test
   public void testGet() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -383,6 +398,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.AbstractMap.hashCode()'.
    */
+  @Test
   public void testHashCode() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -398,6 +414,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.IdentityHashMap.IdentityHashMap()'.
    */
+  @Test
   public void testHashMap() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -406,6 +423,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.IdentityHashMap.IdentityHashMap(int)'
    */
+  @Test
   public void testHashMapInt() {
     IdentityHashMap hashMap = new IdentityHashMap(CAPACITY_16);
     checkEmptyHashMapAssumptions(hashMap);
@@ -431,6 +449,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.IdentityHashMap.IdentityHashMap(Map)'
    */
+  @Test
   public void testHashMapMap() {
     IdentityHashMap srcMap = new IdentityHashMap();
     assertNotNull(srcMap);
@@ -459,6 +478,7 @@ public class IdentityHashMapTest extends TestMap {
    * Test that the implementation differs from a standard map in demanding
    * identity.
    */
+  @Test
   public void testIdentity() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -477,6 +497,7 @@ public class IdentityHashMapTest extends TestMap {
    * Test that the implementation differs from a standard map in demanding
    * identity.
    */
+  @Test
   public void testIdentityBasedEquality() {
     IdentityHashMap hashMap1 = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap1);
@@ -493,6 +514,7 @@ public class IdentityHashMapTest extends TestMap {
    * Test that the implementation differs from a standard map in demanding
    * identity.
    */
+  @Test
   public void testIdentityBasedHashCode() {
     IdentityHashMap hashMap1 = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap1);
@@ -512,6 +534,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.AbstractMap.isEmpty()'
    */
+  @Test
   public void testIsEmpty() {
     IdentityHashMap srcMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(srcMap);
@@ -530,6 +553,7 @@ public class IdentityHashMapTest extends TestMap {
     assertEquals(dstMap.size(), 0);
   }
 
+  @Test
   public void testKeysConflict() {
     IdentityHashMap hashMap = new IdentityHashMap();
 
@@ -557,6 +581,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.IdentityHashMap.keySet()'
    */
+  @Test
   public void testKeySet() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -577,6 +602,7 @@ public class IdentityHashMapTest extends TestMap {
   /*
    * Test method for 'java.util.IdentityHashMap.put(Object, Object)'
    */
+  @Test
   public void testPut() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -590,6 +616,7 @@ public class IdentityHashMapTest extends TestMap {
   /**
    * Test method for 'java.util.IdentityHashMap.putAll(Map)'.
    */
+  @Test
   public void testPutAll() {
     IdentityHashMap srcMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(srcMap);
@@ -655,6 +682,7 @@ public class IdentityHashMapTest extends TestMap {
   /**
    * Test method for 'java.util.IdentityHashMap.remove(Object)'.
    */
+  @Test
   public void testRemove() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -671,6 +699,7 @@ public class IdentityHashMapTest extends TestMap {
   /**
    * Test method for 'java.util.IdentityHashMap.size()'.
    */
+  @Test
   public void testSize() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -708,6 +737,7 @@ public class IdentityHashMapTest extends TestMap {
   /**
    * Test method for 'java.util.AbstractMap.toString()'.
    */
+  @Test
   public void testToString() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);
@@ -719,6 +749,7 @@ public class IdentityHashMapTest extends TestMap {
   /**
    * Test method for 'java.util.AbstractMap.values()'.
    */
+  @Test
   public void testValues() {
     IdentityHashMap hashMap = new IdentityHashMap();
     checkEmptyHashMapAssumptions(hashMap);

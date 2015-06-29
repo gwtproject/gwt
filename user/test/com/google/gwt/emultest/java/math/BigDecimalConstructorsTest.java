@@ -39,6 +39,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
@@ -52,6 +54,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(BigInteger value).
    */
+  @Test
   public void testConstrBI() {
     String a = "1231212478987482988429808779810457634781384756794987";
     BigInteger bA = new BigInteger(a);
@@ -70,6 +73,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(BigInteger value, MathContext).
    */
+  @Test
   public void testConstrBigIntegerMathContext() {
     String a = "1231212478987482988429808779810457634781384756794987";
     BigInteger bA = new BigInteger(a);
@@ -86,6 +90,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(BigInteger value, int scale, MathContext).
    */
+  @Test
   public void testConstrBigIntegerScaleMathContext() {
     String a = "1231212478987482988429808779810457634781384756794987";
     BigInteger bA = new BigInteger(a);
@@ -103,6 +108,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(BigInteger value, int scale).
    */
+  @Test
   public void testConstrBIScale() {
     String a = "1231212478987482988429808779810457634781384756794987";
     BigInteger bA = new BigInteger(a);
@@ -115,6 +121,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(char[] value).
    */
+  @Test
   public void testConstrChar() {
     char value[] = {
         '-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4',
@@ -136,6 +143,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(char[] value, int offset, int len).
    */
+  @Test
   public void testConstrCharIntInt() {
     char value[] = {
         '-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4',
@@ -159,6 +167,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(char[] value, int offset, int len, MathContext mc).
    */
+  @Test
   public void testConstrCharIntIntMathContext() {
     char value[] = {
         '-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4',
@@ -185,6 +194,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(char[] value, int offset, int len, MathContext mc).
    */
+  @Test
   public void testConstrCharIntIntMathContextException1() {
     char value[] = {
         '-', '1', '2', '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4',
@@ -204,6 +214,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(char[] value, int offset, int len, MathContext mc).
    */
+  @Test
   public void testConstrCharIntIntMathContextException2() {
     char value[] = {
         '-', '1', '2', '3', '8', '0', ',', '4', '7', '3', '8', 'E', '-', '4',
@@ -223,6 +234,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(char[] value, MathContext mc).
    */
+  @Test
   public void testConstrCharMathContext() {
     char value[] = {
         '3', '8', '0', '.', '4', '7', '3', '8', 'E', '-', '4', '2'
@@ -247,6 +259,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(double value).
    */
+  @Test
   public void testConstrDouble() {
     double a = 732546982374982347892379283571094797.287346782359284756;
     BigDecimal aNumber = new BigDecimal(a);
@@ -258,6 +271,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(0.1).
    */
+  @Test
   public void testConstrDouble01() {
     double a = 1.E-1;
     BigDecimal aNumber = new BigDecimal(a);
@@ -269,6 +283,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(0.555).
    */
+  @Test
   public void testConstrDouble02() {
     double a = 0.555;
     BigDecimal aNumber = new BigDecimal(a);
@@ -280,6 +295,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(double value) when value is denormalized.
    */
+  @Test
   public void testConstrDoubleDenormalized() {
     // HtmlUnit incorrectly converts the following double to a string
     // Safari can't handle e-309 here
@@ -293,6 +309,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(double, MathContext).
    */
+  @Test
   public void testConstrDoubleMathContext() {
     double a = 732546982374982347892379283571094797.287346782359284756;
     int precision = 21;
@@ -321,6 +338,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(-0.1).
    */
+  @Test
   public void testConstrDoubleMinus01() {
     double a = -1.E-1;
     BigDecimal aNumber = new BigDecimal(a);
@@ -332,6 +350,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(double value) when value is NaN.
    */
+  @Test
   public void testConstrDoubleNaN() {
     double a = Double.NaN;
     try {
@@ -346,6 +365,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(double value) when value is positive infinity.
    */
+  @Test
   public void testConstrDoubleNegInfinity() {
     double a = Double.NEGATIVE_INFINITY;
     try {
@@ -360,6 +380,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(double value) when value is positive infinity.
    */
+  @Test
   public void testConstrDoublePosInfinity() {
     double a = Double.POSITIVE_INFINITY;
     try {
@@ -374,6 +395,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(int value).
    */
+  @Test
   public void testConstrInt() {
     int a = 732546982;
     String res = "732546982";
@@ -386,6 +408,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(int, MathContext).
    */
+  @Test
   public void testConstrIntMathContext() {
     int a = 732546982;
     int precision = 21;
@@ -401,6 +424,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(long value).
    */
+  @Test
   public void testConstrLong() {
     long a = 4576578677732546982L;
     String res = "4576578677732546982";
@@ -413,6 +437,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(long, MathContext).
    */
+  @Test
   public void testConstrLongMathContext() {
     long a = 4576578677732546982L;
     int precision = 5;
@@ -429,6 +454,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value) when value is not a valid representation of
    * BigDecimal.
    */
+  @Test
   public void testConstrStringException() {
     String a = "-238768.787678287a+10";
     try {
@@ -441,6 +467,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(String value) when exponent is empty.
    */
+  @Test
   public void testConstrStringExceptionEmptyExponent1() {
     String a = "-238768.787678287e";
     try {
@@ -453,6 +480,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(String value) when exponent is empty.
    */
+  @Test
   public void testConstrStringExceptionEmptyExponent2() {
     String a = "-238768.787678287e-";
     try {
@@ -466,6 +494,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value) when exponent is greater than
    * Integer.MAX_VALUE.
    */
+  @Test
   public void testConstrStringExceptionExponentGreaterIntegerMax() {
     String a = "-238768.787678287e214748364767876";
     try {
@@ -478,6 +507,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(String value) when exponent is less than Integer.MIN_VALUE.
    */
+  @Test
   public void testConstrStringExceptionExponentLessIntegerMin() {
     String a = "-238768.787678287e-214748364767876";
     try {
@@ -490,6 +520,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(String value) when exponent is Integer.MAX_VALUE.
    */
+  @Test
   public void testConstrStringExponentIntegerMax() {
     String a = "-238768.787678287e2147483647";
     int aScale = -2147483638;
@@ -502,6 +533,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(String value) when exponent is Integer.MIN_VALUE.
    */
+  @Test
   public void testConstrStringExponentIntegerMin() {
     String a = ".238768e-2147483648";
     try {
@@ -516,6 +548,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(String value) when value has multiple signs.
    */
+  @Test
   public void testConstrStringMultipleSignsStartWithPlus() {
     String a = "+-3";
     try {
@@ -528,6 +561,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(String value) when value has multiple signs.
    */
+  @Test
   public void testConstrStringMultipleSignsStartWithMinus() {
     String a = "-+3";
     try {
@@ -540,6 +574,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(String value, MathContext).
    */
+  @Test
   public void testConstrStringMathContext() {
     String a = "-238768787678287e214";
     int precision = 5;
@@ -556,6 +591,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value); value contains exponent and does not contain
    * decimal point.
    */
+  @Test
   public void testConstrStringWithExponentWithoutPoint1() {
     String a = "-238768787678287e214";
     int aScale = -214;
@@ -569,6 +605,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value); value contains exponent and does not contain
    * decimal point.
    */
+  @Test
   public void testConstrStringWithExponentWithoutPoint2() {
     String a = "-238768787678287e-214";
     int aScale = 214;
@@ -582,6 +619,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value); value contains exponent and does not contain
    * decimal point.
    */
+  @Test
   public void testConstrStringWithExponentWithoutPoint3() {
     String a = "238768787678287e-214";
     int aScale = 214;
@@ -595,6 +633,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value); value contains exponent and does not contain
    * decimal point.
    */
+  @Test
   public void testConstrStringWithExponentWithoutPoint4() {
     String a = "238768787678287e+214";
     int aScale = -214;
@@ -608,6 +647,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value); value contains exponent and does not contain
    * decimal point.
    */
+  @Test
   public void testConstrStringWithExponentWithoutPoint5() {
     String a = "238768787678287E214";
     int aScale = -214;
@@ -621,6 +661,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value); value contains both exponent and decimal
    * point.
    */
+  @Test
   public void testConstrStringWithExponentWithPoint1() {
     String a = "23985439837984782435652424523876878.7678287e+214";
     int aScale = -207;
@@ -634,6 +675,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value); value contains both exponent and decimal
    * point.
    */
+  @Test
   public void testConstrStringWithExponentWithPoint2() {
     String a = "238096483923847545735673567457356356789029578490276878.7678287e-214";
     int aScale = 221;
@@ -648,6 +690,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value); value contains both exponent and decimal
    * point.
    */
+  @Test
   public void testConstrStringWithExponentWithPoint3() {
     String a = "2380964839238475457356735674573563567890.295784902768787678287E+21";
     int aScale = 0;
@@ -662,6 +705,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value); value contains both exponent and decimal
    * point.
    */
+  @Test
   public void testConstrStringWithExponentWithPoint4() {
     String a = "23809648392384754573567356745735635678.90295784902768787678287E+21";
     int aScale = 2;
@@ -676,6 +720,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value); value contains both exponent and decimal
    * point.
    */
+  @Test
   public void testConstrStringWithExponentWithPoint5() {
     String a = "238096483923847545735673567457356356789029.5784902768787678287E+21";
     int aScale = -2;
@@ -691,6 +736,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * to validate that precision is calculated correctly when leading zeros
    * and minus signs are present.
    */
+  @Test
   public void testConstrStringWithLeadingZeros() {
     assertEquals("bad precision", 1, new BigDecimal("-000.1").precision());
     assertEquals("bad precision", 4, new BigDecimal("001234").precision());
@@ -705,6 +751,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(String value); value does not contain exponent.
    */
+  @Test
   public void testConstrStringWithoutExpNeg() {
     String a = "-732546982374982347892379283571094797.287346782359284756";
     int aScale = 18;
@@ -718,6 +765,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(String value); value does not contain exponent.
    */
+  @Test
   public void testConstrStringWithoutExpPos1() {
     String a = "732546982374982347892379283571094797.287346782359284756";
     int aScale = 18;
@@ -731,6 +779,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * new BigDecimal(String value); value does not contain exponent.
    */
+  @Test
   public void testConstrStringWithoutExpPos2() {
     String a = "+732546982374982347892379283571094797.287346782359284756";
     int aScale = 18;
@@ -745,6 +794,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
    * new BigDecimal(String value); value does not contain exponent and decimal
    * point.
    */
+  @Test
   public void testConstrStringWithoutExpWithoutPoint() {
     String a = "-732546982374982347892379283571094797287346782359284756";
     int aScale = 0;
@@ -758,6 +808,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * Test that constructing BigDecimals from zeros works properly.
    */
+  @Test
   public void testConstrZero() {
     BigDecimal bd = new BigDecimal("0");
     assertEquals(0, bd.intValueExact());
@@ -776,6 +827,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * check ONE.
    */
+  @Test
   public void testFieldONE() {
     String oneS = "1";
     double oneD = 1.0;
@@ -787,6 +839,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * check TEN.
    */
+  @Test
   public void testFieldTEN() {
     String oneS = "10";
     double oneD = 10.0;
@@ -798,6 +851,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
   /**
    * check ZERO.
    */
+  @Test
   public void testFieldZERO() {
     String oneS = "0";
     double oneD = 0.0;

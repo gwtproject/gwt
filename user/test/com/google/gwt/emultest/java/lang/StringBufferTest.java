@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.util.Locale;
 
 /**
@@ -42,6 +44,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests <code>append</code>.
    */
+  @Test
   public void testAppend() {
     StringBuffer x = new StringBuffer();
     x.append(C.FLOAT_VALUE);
@@ -87,6 +90,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * Check that capacity methods are present, even though they do nothing.
    */
+  @Test
   public void testCapacity() {
     StringBuffer buf = new StringBuffer();
     buf.ensureCapacity(100);
@@ -97,6 +101,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests <code>charAt</code>.
    */
+  @Test
   public void testCharAt() {
     assertEquals(new StringBuffer("abc").charAt(1), 'b');
   }
@@ -104,6 +109,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests string creation and equality.
    */
+  @Test
   public void testContructor() {
     String constant = "abcdef";
     assertEquals(new StringBuffer(constant).toString(), constant);
@@ -114,6 +120,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests <code>delete</code>.
    */
+  @Test
   public void testDelete() {
     StringBuffer haystack = new StringBuffer("abcdefghi");
     haystack.delete(2, 4);
@@ -127,6 +134,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * Tests toCharArray.
    */
+  @Test
   public void testGetChars() {
     StringBuffer x = new StringBuffer("ABCDEFGHIJ");
     char[] a1 = "abcdefghij".toCharArray();
@@ -140,6 +148,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests <code>indexOf</code>.
    */
+  @Test
   public void testIndexOf() {
     String haystack = "abcdefghi";
     assertEquals(haystack.indexOf("q"), -1);
@@ -154,6 +163,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests <code>insert</code>.
    */
+  @Test
   public void testInsert() {
     StringBuffer x = new StringBuffer("!");
     x.insert(1, C.FLOAT_VALUE);
@@ -193,6 +203,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method does interleaved inserts and deletes.
    */
+  @Test
   public void testInterleavedInsertAndDelete() {
     StringBuffer x = new StringBuffer();
     for (int i = 0; i < 9; i++) {
@@ -207,6 +218,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests <code>lastIndexOf</code>.
    */
+  @Test
   public void testLastIndexOf() {
     StringBuffer x = new StringBuffer("abcdeabcdef");
     assertEquals(9, x.lastIndexOf("e"));
@@ -218,6 +230,7 @@ public class StringBufferTest extends GWTTestCase {
    * This method tests <code>length</code>, and tests moderately long
    * StringBuffers.
    */
+  @Test
   public void testLength() {
     assertEquals(3, new StringBuffer("abc").length());
     StringBuffer str = new StringBuffer("x");
@@ -230,6 +243,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests <code>toLowerCase</code>.
    */
+  @Test
   public void testLowerCase() {
     assertEquals("abc", "AbC".toLowerCase(Locale.ROOT));
     assertEquals("abc", "abc".toLowerCase(Locale.ROOT));
@@ -239,6 +253,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * Tests correctness under repeated insertion and append.
    */
+  @Test
   public void testRepeatedAppendsAndInserts() {
     StringBuffer x = new StringBuffer();
     final int size = 1000;
@@ -274,12 +289,14 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests <code>replace</code>.
    */
+  @Test
   public void testReplace() {
     StringBuffer x = new StringBuffer("xxyyxx");
     x.replace(2, 4, "YY");
     assertEquals("xxYYxx", x.toString());
   }
 
+  @Test
   public void testReverse() {
     assertEqualsReverse("", "");
     assertEqualsReverse(" ", " ");
@@ -312,6 +329,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests <code>setLength</code>.
    */
+  @Test
   public void testSetLength() {
     StringBuffer x = new StringBuffer("abcdefghi");
     x.setLength(20);
@@ -325,6 +343,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests <code>startsWith</code>.
    */
+  @Test
   public void testStartsWith() {
     String haystack = "abcdefghi";
     assertTrue(haystack.startsWith("abc"));
@@ -338,6 +357,7 @@ public class StringBufferTest extends GWTTestCase {
    * The implementation is currently shared with StringBuffer, so all the tricky
    * test cases are not repeated.
    */
+  @Test
   public void testStringBuilder() {
     StringBuilder bld = new StringBuilder();
     bld = new StringBuilder(100);
@@ -530,6 +550,7 @@ public class StringBufferTest extends GWTTestCase {
   /**
    * This method tests <code>substring</code>.
    */
+  @Test
   public void testSubstring() {
     StringBuffer haystack = new StringBuffer("abcdefghi");
     assertEquals("cd", haystack.substring(2, 4));

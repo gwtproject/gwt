@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.util.EmptyStackException;
 import java.util.Stack;
 
@@ -35,6 +37,7 @@ public class StackTest extends GWTTestCase {
   }
 
   /** Tests clone on Stacks. */
+  @Test
   public void testClone() {
     Stack<Integer> large = createLargeStack();
     @SuppressWarnings("unchecked")
@@ -48,6 +51,7 @@ public class StackTest extends GWTTestCase {
    * order. Also verifies that we get the correct exception when we run out of
    * elements, and tests peek
    */
+  @Test
   public void testCountAndOrderWithPeek() {
     Stack<Integer> large = new Stack<Integer>();
     for (int i = 0; i < TEST_SIZE; i++) {
@@ -62,6 +66,7 @@ public class StackTest extends GWTTestCase {
   }
 
   /** tests empty and tries to get emptyStackException as desired. */
+  @Test
   public void testEmptyAndEmptyStackException() {
     Stack<String> s = new Stack<String>();
     String item = "empty1";
@@ -73,6 +78,7 @@ public class StackTest extends GWTTestCase {
   }
 
   /** Tests pop and peek. */
+  @Test
   public void testPopAndPeek() {
     Stack<String> testStack = createStack();
     int x = testStack.size();
@@ -82,6 +88,7 @@ public class StackTest extends GWTTestCase {
   }
 
   /** Tests push and peek. */
+  @Test
   public void testPushAndPeek() {
     Stack<String> testStack = createStack();
     int x = testStack.size();
@@ -95,6 +102,7 @@ public class StackTest extends GWTTestCase {
    * Tests all combinations of search for a stack that attains a max size of
    * TEST_SEARCH_SIZE.
    */
+  @Test
   public void testSearch() {
     Stack<Integer> searchStack = new Stack<Integer>();
     checkEmptiness(searchStack);

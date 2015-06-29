@@ -18,6 +18,7 @@ package com.google.gwt.emultest.java.util;
 import com.google.gwt.core.client.GWT;
 
 import org.apache.commons.collections.TestSet;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -130,6 +131,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#put(Object)
    */
+  @Test
   public void testAdd() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -146,6 +148,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#add(Object)
    */
+  @Test
   public void testAdd_entries3() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -172,6 +175,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#add(Object)
    */
+  @Test
   public void testAdd_replace() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -192,6 +196,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.Set#add(Object)
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testAdd_throwsClassCastException_key() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -214,6 +219,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.Set#add(Object)
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testAdd_throwsClassCastException_value() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -234,6 +240,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#add(Object)
    */
+  @Test
   public void testAdd_throwsUnsupportedOperationException() {
     if (!isAddSupported) {
       Set<E> set = createSet();
@@ -251,6 +258,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#addAll(Map)
    */
+  @Test
   public void testAddAll() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -272,6 +280,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#addAll(Map)
    */
+  @Test
   public void testAddAll_addEntries() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -293,6 +302,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#addAll(Map)
    */
+  @Test
   public void testAddAll_emptyMap() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -313,6 +323,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#addAll(Map)
    */
+  @Test
   public void testAddAll_overwrite() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -335,6 +346,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.Set#addAll(Map)
    */
   @SuppressWarnings("ModifyingCollectionWithItself")
+  @Test
   public void testAddAll_self() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -354,6 +366,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.Set#addAll(Map)
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testAddAll_throwsClassCastException() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -379,6 +392,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#addAll(Map)
    */
+  @Test
   public void testAddAll_throwsNullPointerException() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -398,6 +412,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#addAll(Map)
    */
+  @Test
   public void testAddAll_throwsUnsupportedOperationException() {
     Set<E> set = createSet();
     if (!isPutAllSupported) {
@@ -410,6 +425,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     }
   }
 
+  @Test
   public void testCeiling() {
     NavigableSet<E> set = createNavigableSet();
 
@@ -430,6 +446,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#clear()
    */
+  @Test
   public void testClear() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -448,6 +465,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#clear()
    */
+  @Test
   public void testClear_throwsUnsupportedOperationException() {
     Set<E> set = createSet();
     if (!isClearSupported) {
@@ -465,6 +483,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.SortedSet#comparator()
    */
+  @Test
   public void testComparator() {
     SortedSet<E> sortedSet = createNavigableSet();
     if (isNaturalOrder()) {
@@ -479,6 +498,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.TreeSet#TreeSet()
    */
+  @Test
   public void testConstructor() {
     TreeSet<E> treeSet = new TreeSet<E>();
     _assertEmpty(treeSet);
@@ -489,6 +509,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.TreeSet#TreeSet(Comparator)
    */
+  @Test
   public void testConstructor_comparator() {
     TreeSet<E> TreeSet = new TreeSet<E>(getComparator());
     _assertEmpty(TreeSet);
@@ -504,6 +525,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.TreeSet#TreeSet(Set)
    */
+  @Test
   public void testConstructor_Set() {
     // The source set should be just a Map. Not a sorted set.
     Set<E> sourceMap = new HashSet<E>();
@@ -523,6 +545,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.TreeSet#TreeSet(Set)
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testConstructor_Set_rawType() {
     Set sourceSet = new HashSet();
     sourceSet.add(getConflictingKey());
@@ -537,6 +560,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.TreeSet#TreeSet(Set)
    */
+  @Test
   public void testConstructor_Set_throwsNullPointerException() {
     try {
       new TreeSet<E>((Set<E>) null);
@@ -551,6 +575,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.TreeSet#TreeSet(SortedSet)
    */
+  @Test
   public void testConstructor_SortedMap_throwsNullPointerException() {
     try {
       new TreeSet<E>((SortedSet<E>) null);
@@ -565,6 +590,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.TreeSet#TreeSet(SortedSet)
    */
+  @Test
   public void testConstructor_SortedSet() {
     SortedSet<E> sourceMap = new TreeSet<E>();
     _assertEmpty(sourceMap);
@@ -583,6 +609,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#contains(Object)
    */
+  @Test
   public void testContains() {
     Set<E> set = createSet();
     assertFalse(set.contains(getKeys()[0]));
@@ -597,6 +624,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#contains(Object)
    */
+  @Test
   public void testContains_throwsClassCastException() {
     Set<E> set = createSet();
     set.add(getKeys()[0]);
@@ -613,6 +641,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#contains(Object)
    */
+  @Test
   public void testContains_throwsNullPointerException() {
     Set<E> set = createSet();
     if (isNaturalOrder() && !isNullKeySupported) {
@@ -625,6 +654,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     }
   }
 
+  @Test
   public void testDescendingIterator() {
     NavigableSet<E> set = createNavigableSet();
     set.add(getKeys()[0]);
@@ -645,6 +675,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     assertEquals(0, set.size());
   }
 
+  @Test
   public void testDescendingSet() {
     NavigableSet<E> set = createNavigableSet();
     set.add(getKeys()[0]);
@@ -677,6 +708,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#equals(Object)
    */
+  @Test
   public void testEquals() {
     Set<E> set0 = createSet();
     Set<E> set1 = createSet();
@@ -694,6 +726,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.SortedSet#first()
    */
+  @Test
   public void testFirst() {
     SortedSet<E> sortedSet = createNavigableSet();
     // test with a single entry set
@@ -719,6 +752,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.SortedSet#first()
    */
+  @Test
   public void testFirstKey_throwsNoSuchElementException() {
     SortedSet<E> SortedSet = createNavigableSet();
     // test with no entries
@@ -730,6 +764,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     }
   }
 
+  @Test
   public void testFloor() {
     NavigableSet<E> set = createNavigableSet();
 
@@ -752,6 +787,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#hashCode()
    */
+  @Test
   public void testHashCode() {
     Set<E> set0 = createSet();
     Set<E> set1 = createSet();
@@ -780,6 +816,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#headSet(Object)
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testHeadMap_throwsClassCastException() {
     SortedSet SortedSet = createNavigableSet();
     SortedSet.add(getKeys()[0]);
@@ -803,6 +840,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#headSet(Object)
    * @see java.util.NavigableSet#headSet(Object, boolean)
    */
+  @Test
   public void testHeadSet() {
     // test with no entries
     NavigableSet<E> set = createNavigableSet();
@@ -818,6 +856,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#headSet(Object)
    * @see java.util.NavigableSet#headSet(Object, boolean)
    */
+  @Test
   public void testHeadSet_entries0_size() {
     // test with no entries
     NavigableSet<E> set = createNavigableSet();
@@ -833,6 +872,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#headSet(Object)
    * @see java.util.NavigableSet#headSet(Object, boolean)
    */
+  @Test
   public void testHeadSet_entries1() {
     NavigableSet<E> set = createNavigableSet();
     // test with a single entry set
@@ -850,6 +890,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#headSet(Object)
    * @see java.util.NavigableSet#headSet(Object, boolean)
    */
+  @Test
   public void testHeadSet_entries2() {
     NavigableSet<E> set = createNavigableSet();
     // test with two entry set
@@ -872,6 +913,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     assertEquals(getKeys()[1], set.headSet(getKeys()[1], true).toArray()[1]);
   }
 
+  @Test
   public void testHigher() {
     NavigableSet<E> set = createNavigableSet();
 
@@ -893,6 +935,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.Set#isEmpty()
    * 
    */
+  @Test
   public void testIsEmpty() {
     Set<E> sourceSet = createSet();
     Set<E> destSet = createSet();
@@ -913,6 +956,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.SortedSet#last()
    */
+  @Test
   public void testLastKey() {
     SortedSet<E> sortedSet = createNavigableSet();
 
@@ -939,6 +983,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.SortedSet#last()
    */
+  @Test
   public void testLastKey_throwsNoSuchElementException() {
     SortedSet<E> SortedSet = createNavigableSet();
     // test with no entries
@@ -950,6 +995,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     }
   }
 
+  @Test
   public void testLower() {
     NavigableSet<E> set = createNavigableSet();
 
@@ -967,6 +1013,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     assertEquals(getKeys()[1], set.lower(getGreaterThanMaximumKey()));
   }
 
+  @Test
   public void testPollFirst() {
     NavigableSet<E> set = createNavigableSet();
 
@@ -986,6 +1033,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     assertNull(set.pollFirst());
   }
 
+  @Test
   public void testPollLast() {
     NavigableSet<E> set = createNavigableSet();
 
@@ -1010,6 +1058,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#remove(Object)
    */
+  @Test
   public void testRemove() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -1028,6 +1077,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#remove(Object)
    */
+  @Test
   public void testRemove_throwsClassCastException() {
     // The _throwsUnsupportedOperationException version of this test will
     // verify that the method is not supported.
@@ -1048,6 +1098,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#remove(Object)
    */
+  @Test
   public void testRemove_throwsUnsupportedOperationException() {
     Set<E> set = createSet();
     if (!isRemoveSupported) {
@@ -1065,6 +1116,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.Set#size()
    */
+  @Test
   public void testSize() {
     Set<E> set = createSet();
 
@@ -1101,6 +1153,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#subSet(Object, Object)
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testSubMap_throwsClassCastException() {
     SortedSet SortedSet = createNavigableSet();
     SortedSet.add(getKeys()[0]);
@@ -1129,6 +1182,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.SortedSet#subSet(Object, Object)
    */
+  @Test
   public void testSubMap_throwsIllegalArgumentException() {
     SortedSet<E> SortedSet = createNavigableSet();
     try {
@@ -1147,6 +1201,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#subSet(Object, Object)
    * @see java.util.NavigableSet#subSet(Object, boolean, Object, boolean)
    */
+  @Test
   public void testSubSet() {
     NavigableSet<E> sortedSet = createNavigableSet();
     // test with no entries
@@ -1223,6 +1278,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#tailSet(Object)
    * @see java.util.NavigableSet#tailSet(Object, boolean)
    */
+  @Test
   public void testTailSet_entries0() {
     // test with no entries
     NavigableSet<E> navigableSet = createNavigableSet();
@@ -1239,6 +1295,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#tailSet(Object)
    * @see java.util.NavigableSet#tailSet(Object, boolean)
    */
+  @Test
   public void testTailSet_entries0_size() {
     // test with no entries
     NavigableSet<E> navigableSet = createNavigableSet();
@@ -1263,6 +1320,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#tailSet(Object)
    * @see java.util.NavigableSet#tailSet(Object, boolean)
    */
+  @Test
   public void testTailSet_entries1_size_keyValue() {
     NavigableSet<E> sortedSet = createNavigableSet();
     // test with a single entry set
@@ -1288,6 +1346,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#tailSet(Object)
    * @see java.util.NavigableSet#tailSet(Object, boolean)
    */
+  @Test
   public void testTailSet_entries2_size_keyValue() {
     NavigableSet<E> sortedSet = createNavigableSet();
     // test with two entry set
@@ -1332,6 +1391,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * @see java.util.SortedSet#tailSet(Object)
    */
   @SuppressWarnings("unchecked")
+  @Test
   public void testTailSet_throwsClassCastException() {
     SortedSet SortedSet = createNavigableSet();
     SortedSet.add(getKeys()[0]);
@@ -1353,6 +1413,7 @@ public abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
    * 
    * @see java.util.SortedSet#tailSet(Object)
    */
+  @Test
   public void testTailSet_throwsIllegalArgumentException() {
     // TODO I don't know of any case where this could happen.
   }

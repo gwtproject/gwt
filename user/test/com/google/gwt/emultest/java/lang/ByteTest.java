@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 /**
  * Tests for the JRE Byte type.
  */
@@ -27,18 +29,21 @@ public class ByteTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testConstants() {
     assertEquals(-128, Byte.MIN_VALUE);
     assertEquals(127, Byte.MAX_VALUE);
     assertEquals(8, Byte.SIZE);
   }
 
+  @Test
   public void testCompare() {
     assertTrue("Byte.compare failed for 1 < 2", Byte.compare((byte) 1, (byte) 2) < 0);
     assertTrue("Byte.compare failed for 2 > 1", Byte.compare((byte) 2, (byte) 1) > 0);
     assertEquals(0, Byte.compare((byte) 1, (byte) 1));
   }
 
+  @Test
   public void testStatics() {
     // test the new 1.5 statics... older stuff "assumed to work"
     assertEquals(0, Byte.valueOf((byte) 0).intValue());

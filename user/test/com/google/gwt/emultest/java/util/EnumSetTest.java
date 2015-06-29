@@ -17,6 +17,8 @@ package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -51,6 +53,7 @@ public class EnumSetTest extends GWTTestCase {
   /**
    * Tests that an EnumSet can be statically initialized in an enum.
    */
+  @Test
   public void testClinitRace() {
     assertEquals(4, ClinitRace.set.size());
     assertTrue(ClinitRace.set.contains(ClinitRace.Zero));
@@ -62,6 +65,7 @@ public class EnumSetTest extends GWTTestCase {
   /**
    * Test failure mode from issue 3605.  Previously resulted in an incorrect size.
    */
+  @Test
   public void testDuplicates() {
     EnumSet<Numbers> set = EnumSet.of(Numbers.Two, Numbers.One, Numbers.Two, Numbers.One);
     assertEquals(2, set.size());
@@ -72,6 +76,7 @@ public class EnumSetTest extends GWTTestCase {
   /**
    * Test failure mode from issue 3605.  Previously resulted in a NoSuchElementException.
    */
+  @Test
   public void testDuplicatesToArray() {
     EnumSet<Numbers> set = EnumSet.of(Numbers.Two, Numbers.One, Numbers.Two, Numbers.One);
     Numbers[] array = set.toArray(new Numbers[set.size()]);
@@ -85,6 +90,7 @@ public class EnumSetTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testNumbers() {
     enumTest(Numbers.class);
   }

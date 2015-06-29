@@ -16,6 +16,7 @@
 package com.google.gwt.emultest.java.util;
 
 import org.apache.commons.collections.TestArrayList;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +33,7 @@ public abstract class ListTestBase extends TestArrayList {
 
   private static volatile boolean NO_OPTIMIZE_FALSE = false;
 
+  @Test
   public void testAddAll() {
     List<Integer> list = makeEmptyList();
     list.addAll(Arrays.asList(1, 2, 3, 4));
@@ -52,6 +54,7 @@ public abstract class ListTestBase extends TestArrayList {
     checkListSizeAndContent(list, 1, 2, 3 ,4, 21, 22);
   }
 
+  @Test
   public void testAddAllReturnValue() {
     assertFalse(makeEmptyList().addAll(makeEmptyList()));
     assertTrue(makeEmptyList().addAll(makeFullList()));
@@ -63,12 +66,14 @@ public abstract class ListTestBase extends TestArrayList {
     assertTrue(makeFullList().addAll(1, makeFullList()));
   }
 
+  @Test
   public void testAddWatch() {
     List s = makeEmptyList();
     s.add("watch");
     assertEquals(s.get(0), "watch");
   }
 
+  @Test
   public void testListIteratorAddInSeveralPositions() {
     List l = makeEmptyList();
     ListIterator i = l.listIterator();
@@ -91,6 +96,7 @@ public abstract class ListTestBase extends TestArrayList {
     }
   }
 
+  @Test
   public void testListIteratorCreateInvalid() {
     List l = makeEmptyList();
     l.add(new Integer(1));
@@ -107,6 +113,7 @@ public abstract class ListTestBase extends TestArrayList {
     }
   }
 
+  @Test
   public void testListIteratorHasNextHasPreviousAndIndexes() {
     List l = makeEmptyList();
     ListIterator i = l.listIterator();
@@ -127,10 +134,12 @@ public abstract class ListTestBase extends TestArrayList {
     assertTrue(i.hasPrevious());
   }
 
+  @Test
   public void testListIteratorRemove() {
     // TODO(jat): implement
   }
 
+  @Test
   public void testListIteratorSetInSeveralPositions() {
     List l = makeEmptyList();
     for (int n = 0; n < 5; n += 2) {
@@ -145,6 +154,7 @@ public abstract class ListTestBase extends TestArrayList {
     }
   }
 
+  @Test
   public void testRemoveAllDuplicates() {
     Collection c = makeCollection();
     c.add("a");
@@ -155,6 +165,7 @@ public abstract class ListTestBase extends TestArrayList {
     assertEquals(0, c.size());
   }
 
+  @Test
   public void testSubList() {
     List<Integer> wrappedList = createListWithContent(new int[] {1, 2, 3, 4, 5});
     List<Integer> testList = wrappedList.subList(1, 4);
@@ -240,6 +251,7 @@ public abstract class ListTestBase extends TestArrayList {
   /**
    * Test add() method for list returned by List<E>.subList() method.
    */
+  @Test
   public void testSubListAdd() {
     List<Integer> baseList = createListWithContent(new int[] {1, 2, 3, 4, 5});
     List<Integer> sublist = baseList.subList(1, 3);
@@ -286,6 +298,7 @@ public abstract class ListTestBase extends TestArrayList {
     checkListSizeAndContent(baseList, 10, 1, 21, 22, 2, 3, 33, 34, 35, 4, 44, 5, 55);
   }
 
+  @Test
   public void testSubListRemove() {
     List<Integer> baseList = createListWithContent(new int[] {1, 2, 3, 4, 5});
     List<Integer> sublist = baseList.subList(1, 3);
@@ -311,6 +324,7 @@ public abstract class ListTestBase extends TestArrayList {
     checkListSizeAndContent(baseList, 1, 6, 4, 5);
   }
 
+  @Test
   public void testToArray() {
     List l = makeEmptyList();
     for (int i = 0; i < 10; i++) {

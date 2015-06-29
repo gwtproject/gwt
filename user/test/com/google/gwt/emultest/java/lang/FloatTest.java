@@ -18,6 +18,8 @@ package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import org.junit.Test;
+
 /**
  * Unit tests for the Javascript emulation of the Float/float autoboxed
  * fundamental type.
@@ -29,6 +31,7 @@ public class FloatTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
+  @Test
   public void testBadStrings() {
     try {
       new Float("0.0e");
@@ -52,6 +55,7 @@ public class FloatTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testCompare() {
     assertTrue("Float.compare failed for 1 < 2", Float.compare(1f, 2f) < 0);
     assertTrue("Float.compare failed for 2 > 1", Float.compare(2f, 1f) > 0);
@@ -64,6 +68,7 @@ public class FloatTest extends GWTTestCase {
     assertTrue(Float.compare(Float.POSITIVE_INFINITY, Float.NaN) < 0);
   }
 
+  @Test
   public void testCompareTo() {
     Float float1 = new Float(1f);
     Float float2 = new Float(2f);
@@ -81,6 +86,7 @@ public class FloatTest extends GWTTestCase {
   }
 
   @SuppressWarnings({"SelfEquality", "EqualsNaN"})
+  @Test
   public void testFloatConstants() {
     assertTrue(Float.isNaN(Float.NaN));
     assertTrue(Float.isInfinite(Float.NEGATIVE_INFINITY));
@@ -97,6 +103,7 @@ public class FloatTest extends GWTTestCase {
     assertFalse(Float.isInfinite(Float.NaN));
   }
 
+  @Test
   public void testParse() {
     /*
      * Note: we must use appropriate deltas for a somewhat subtle reason.
@@ -161,6 +168,7 @@ public class FloatTest extends GWTTestCase {
     }
   }
 
+  @Test
   public void testFloatBits() {
     compareFloatBits(0x1, 1.401298464324817E-45F);
     compareFloatBits(0x2, 1.401298464324817E-45F * 2.0F);

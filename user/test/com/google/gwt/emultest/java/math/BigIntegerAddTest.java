@@ -39,6 +39,8 @@ package com.google.gwt.emultest.java.math;
 
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
+import org.junit.Test;
+
 import java.math.BigInteger;
 
 /**
@@ -49,6 +51,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add two positive numbers of the same length.
    */
+  @Test
   public void testCase1() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -69,6 +72,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add two negative numbers of the same length.
    */
+  @Test
   public void testCase2() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -90,6 +94,7 @@ public class BigIntegerAddTest extends EmulTestBase {
    * Add two numbers of the same length. The first one is positive and the
    * second is negative. The first one is greater in absolute value.
    */
+  @Test
   public void testCase3() {
     byte aBytes[] = {3, 4, 5, 6, 7, 8, 9};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -111,6 +116,7 @@ public class BigIntegerAddTest extends EmulTestBase {
    * Add two numbers of the same length. The first one is negative and the
    * second is positive. The first one is greater in absolute value.
    */
+  @Test
   public void testCase4() {
     byte aBytes[] = {3, 4, 5, 6, 7, 8, 9};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -132,6 +138,7 @@ public class BigIntegerAddTest extends EmulTestBase {
    * Add two numbers of the same length. The first is positive and the second is
    * negative. The first is less in absolute value.
    */
+  @Test
   public void testCase5() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {3, 4, 5, 6, 7, 8, 9};
@@ -153,6 +160,7 @@ public class BigIntegerAddTest extends EmulTestBase {
    * Add two numbers of the same length. The first one is negative and the
    * second is positive. The first one is less in absolute value.
    */
+  @Test
   public void testCase6() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {3, 4, 5, 6, 7, 8, 9};
@@ -173,6 +181,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add two positive numbers of different length. The first is longer.
    */
+  @Test
   public void testCase7() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -193,6 +202,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add two positive numbers of different length. The second is longer.
    */
+  @Test
   public void testCase8() {
     byte aBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
@@ -211,6 +221,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add two negative numbers of different length. The first is longer.
    */
+  @Test
   public void testCase9() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -232,6 +243,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add two negative numbers of different length. The second is longer.
    */
+  @Test
   public void testCase10() {
     byte aBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
@@ -254,6 +266,7 @@ public class BigIntegerAddTest extends EmulTestBase {
    * Add two numbers of different length and sign. The first is positive. The
    * first is longer.
    */
+  @Test
   public void testCase11() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -275,6 +288,7 @@ public class BigIntegerAddTest extends EmulTestBase {
    * Add two numbers of different length and sign. The first is positive. The
    * second is longer.
    */
+  @Test
   public void testCase12() {
     byte aBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
@@ -296,6 +310,7 @@ public class BigIntegerAddTest extends EmulTestBase {
    * Add two numbers of different length and sign. The first is negative. The
    * first is longer.
    */
+  @Test
   public void testCase13() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
@@ -317,6 +332,7 @@ public class BigIntegerAddTest extends EmulTestBase {
    * Add two numbers of different length and sign. The first is negative. The
    * second is longer.
    */
+  @Test
   public void testCase14() {
     byte aBytes[] = {10, 20, 30, 40, 50, 60, 70, 10, 20, 30};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7};
@@ -337,6 +353,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add two equal numbers of different signs.
    */
+  @Test
   public void testCase15() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -356,6 +373,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add zero to a number.
    */
+  @Test
   public void testCase16() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte bBytes[] = {0};
@@ -376,6 +394,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add a number to zero.
    */
+  @Test
   public void testCase17() {
     byte aBytes[] = {0};
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -396,6 +415,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add zero to zero.
    */
+  @Test
   public void testCase18() {
     byte aBytes[] = {0};
     byte bBytes[] = {0};
@@ -416,6 +436,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add ZERO to a number.
    */
+  @Test
   public void testCase19() {
     byte aBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte rBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -434,6 +455,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add a number to zero.
    */
+  @Test
   public void testCase20() {
     byte bBytes[] = {1, 2, 3, 4, 5, 6, 7};
     byte rBytes[] = {1, 2, 3, 4, 5, 6, 7};
@@ -452,6 +474,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add ZERO to ZERO.
    */
+  @Test
   public void testCase21() {
     byte rBytes[] = {0};
     BigInteger aNumber = BigInteger.ZERO;
@@ -468,6 +491,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add ONE to ONE.
    */
+  @Test
   public void testCase22() {
     byte rBytes[] = {2};
     BigInteger aNumber = BigInteger.ONE;
@@ -484,6 +508,7 @@ public class BigIntegerAddTest extends EmulTestBase {
   /**
    * Add two numbers so that carry is 1.
    */
+  @Test
   public void testCase23() {
     byte aBytes[] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     byte bBytes[] = {-1, -1, -1, -1, -1, -1, -1, -1};

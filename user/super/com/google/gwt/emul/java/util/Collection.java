@@ -34,12 +34,15 @@ public interface Collection<E> extends Iterable<E> {
 
   boolean containsAll(Collection<?> c);
 
+  @Override
   boolean equals(Object o);
 
+  @Override
   int hashCode();
 
   boolean isEmpty();
 
+  @Override
   Iterator<E> iterator();
 
   boolean remove(Object o);

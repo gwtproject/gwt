@@ -60,29 +60,29 @@ public final class Math {
     return x < 0 ? -x : x;
   }
 
-  public static native double acos(double x) /*-{
-    return Math.acos(x);
-  }-*/;
-
-  public static native double asin(double x) /*-{
-    return Math.asin(x);
-  }-*/;
-
-  public static native double atan(double x) /*-{
-    return Math.atan(x);
-  }-*/;
-
-  public static native double atan2(double y, double x) /*-{
-    return Math.atan2(y, x);
-  }-*/;
-
-  public static double cbrt(double x) {
-    return Math.pow(x, 1.0 / 3.0);
+  public static  double acos(double x) {
+    return Math_Jsni.acos(x);
   }
 
-  public static native double ceil(double x) /*-{
-    return Math.ceil(x);
-  }-*/;
+  public static  double asin(double x) {
+    return Math_Jsni.asin(x);
+  }
+
+  public static  double atan(double x) {
+    return Math_Jsni.atan(x);
+  }
+
+  public static  double atan2(double y, double x) {
+    return Math_Jsni.atan2(y, x);
+  }
+
+  public static double cbrt(double x) {
+    return Math_Jsni.pow(x, 1.0 / 3.0);
+  }
+
+  public static  double ceil(double x) {
+    return Math_Jsni.ceil(x);
+  }
 
   public static double copySign(double magnitude, double sign) {
     if (sign < 0) {
@@ -96,17 +96,17 @@ public final class Math {
     return (float) (copySign((double) magnitude, (double) sign));
   }
 
-  public static native double cos(double x) /*-{
-    return Math.cos(x);
-  }-*/;
+  public static  double cos(double x) {
+    return Math_Jsni.cos(x);
+  }
 
-  public static native double cosh(double x) /*-{
-    return (Math.exp(x) + Math.exp(-x)) / 2.0;
-  }-*/;
+  public static  double cosh(double x) {
+    return Math_Jsni.cosh(x);
+  }
 
-  public static native double exp(double x) /*-{
-    return Math.exp(x);
-  }-*/;
+  public static  double exp(double x) {
+    return Math_Jsni.exp(x);
+  }
 
   public static double expm1(double d) {
     if (d == 0.0 || Double.isNaN(d)) {
@@ -121,21 +121,21 @@ public final class Math {
     return exp(d) + 1.0d;
   }
 
-  public static native double floor(double x) /*-{
-    return Math.floor(x);
-  }-*/;
+  public static  double floor(double x) {
+    return Math_Jsni.floor(x);
+  }
 
   public static double hypot(double x, double y) {
     return sqrt(x * x + y * y);
   }
 
-  public static native double log(double x) /*-{
-    return Math.log(x);
-  }-*/;
+  public static  double log(double x) {
+    return Math_Jsni.log(x);
+  }
 
-  public static native double log10(double x) /*-{
-    return Math.log(x) * Math.LOG10E;
-  }-*/;
+  public static  double log10(double x) {
+    return Math_Jsni.log10(x);
+  }
 
   public static double log1p(double x) {
     return Math.log(x + 1.0d);
@@ -173,13 +173,13 @@ public final class Math {
     return x < y ? x : y;
   }
 
-  public static native double pow(double x, double exp) /*-{
-    return Math.pow(x, exp);
-  }-*/;
+  public static  double pow(double x, double exp) {
+    return Math_Jsni.pow(x, exp);
+  }
 
-  public static native double random() /*-{
-    return Math.random();
-  }-*/;
+  public static  double random() {
+    return Math_Jsni.random();
+  }
 
   public static double rint(double d) {
     if (Double.isNaN(d)) {
@@ -194,12 +194,12 @@ public final class Math {
   }
 
   public static long round(double x) {
-    return (long) round0(x);
+    return (long) Math_Jsni.roundDouble(x);
   }
 
-  public static native int round(float x) /*-{
-    return Math.round(x);
-  }-*/;
+  public static  int round(float x) {
+    return Math_Jsni.round(x);
+  }
 
   public static double scalb(double d, int scaleFactor) {
     if (scaleFactor >= 31 || scaleFactor <= -31) {
@@ -245,29 +245,25 @@ public final class Math {
     }
   }
 
-  public static native double sin(double x) /*-{
-    return Math.sin(x);
-  }-*/;
+  public static  double sin(double x) {
+    return Math_Jsni.sin(x);
+  }
 
-  public static native double sinh(double x) /*-{
-    return (Math.exp(x) - Math.exp(-x)) / 2.0;
-  }-*/;
+  public static  double sinh(double x) {
+    return Math_Jsni.sinh(x);
+  }
 
-  public static native double sqrt(double x) /*-{
-    return Math.sqrt(x);
-  }-*/;
+  public static  double sqrt(double x) {
+    return Math_Jsni.sqrt(x);
+  }
 
-  public static native double tan(double x) /*-{
-    return Math.tan(x);
-  }-*/;
+  public static  double tan(double x) {
+    return Math_Jsni.tan(x);
+  }
 
-  public static native double tanh(double x) /*-{
-    if (x == Infinity) {
-      return 1.0;
-    }
-    var e2x = Math.exp(2.0 * x);
-    return (e2x - 1) / (e2x + 1);
-  }-*/;
+  public static  double tanh(double x) {
+    return Math_Jsni.tanh(x);
+  }
 
   public static double toDegrees(double x) {
     return x * PI_UNDER_180;
@@ -276,8 +272,4 @@ public final class Math {
   public static double toRadians(double x) {
     return x * PI_OVER_180;
   }
-
-  private static native double round0(double x) /*-{
-    return Math.round(x);
-  }-*/;
 }

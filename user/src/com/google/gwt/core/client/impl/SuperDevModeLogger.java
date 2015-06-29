@@ -16,6 +16,7 @@
 package com.google.gwt.core.client.impl;
 
 import com.google.gwt.core.shared.impl.JsLogger;
+import com.google.j2cl.emul.core.client.impl.ConsoleLogger;
 
 /**
  * The implementation of GWT.log() used when Super Dev Mode is on.

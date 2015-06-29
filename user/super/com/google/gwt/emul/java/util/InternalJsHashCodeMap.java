@@ -15,10 +15,8 @@
  */
 package java.util;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
-
-import com.google.gwt.core.client.JavaScriptObject;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkElement;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkState;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
@@ -33,12 +31,12 @@ import java.util.Map.Entry;
  * have the same hash, each value in hashCodeMap is actually an array containing all entries whose
  * keys share the same hash.
  */
-class InternalJsHashCodeMap<K, V> {
+class InternalJsHashCodeMap<K, V> implements InternalJsHashCodeMapInterface<K, V> {
 
   static class InternalJsHashCodeMapLegacy<K, V> extends InternalJsHashCodeMap<K, V> {
 
     @Override
-    native JavaScriptObject createMap() /*-{
+    public native Object createMap() /*-{
       return {};
     }-*/;
 
@@ -101,13 +99,15 @@ class InternalJsHashCodeMap<K, V> {
     }
   }
 
-  private final JavaScriptObject backingMap = createMap();
+  private final Object backingMap = createMap();
   AbstractHashMap<K, V> host;
 
-  native JavaScriptObject createMap() /*-{
+  @Override
+  public native Object createMap() /*-{
     return Object.create(null);
   }-*/;
 
+  @Override
   public V put(K key, V value) {
     Entry<K, V>[] chain = ensureChain(hash(key));
     for (Entry<K, V> entry : chain) {
@@ -121,6 +121,7 @@ class InternalJsHashCodeMap<K, V> {
     return null;
   }
 
+  @Override
   public V remove(Object key) {
     String hashCode = hash(key);
     Entry<K, V>[] chain = getChainOrEmpty(hashCode);
@@ -141,6 +142,7 @@ class InternalJsHashCodeMap<K, V> {
     return null;
   }
 
+  @Override
   public Map.Entry<K, V> getEntry(Object key) {
     for (Entry<K, V> entry : getChainOrEmpty(hash(key))) {
       if (host.equals(key, entry.getKey())) {
@@ -150,6 +152,7 @@ class InternalJsHashCodeMap<K, V> {
     return null;
   }
 
+  @Override
   public boolean containsValue(Object value) {
     for (String hashCode : keys()) {
       for (Entry<K, V> entry : getChain(hashCode)) {
@@ -161,6 +164,7 @@ class InternalJsHashCodeMap<K, V> {
     return false;
   }
 
+  @Override
   public Iterator<Entry<K, V>> entries() {
     return new Iterator<Map.Entry<K,V>>() {
       final String[] keys = keys();
@@ -243,4 +247,9 @@ class InternalJsHashCodeMap<K, V> {
   private static native void splice(Object arr, int index) /*-{
     arr.splice(index, 1);
   }-*/;
+
+  @Override
+  public void setHost(AbstractHashMap<K, V> host) {
+    this.host = host;  
+  }
 }

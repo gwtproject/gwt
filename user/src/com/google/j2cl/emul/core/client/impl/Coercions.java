@@ -13,19 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.logging.impl;
-
-import java.util.logging.Logger;
+package com.google.j2cl.emul.core.client.impl;
 
 /**
- * A configurator for {@link Logger}s. When a logger added to {@link java.util.logging.LogManager}
- * for the very first time, it will be configured via the {@link LoggerConfigurator}.
+ * Private implementation class for GWT. This API should not be
+ * considered public or stable.
  */
-public interface LoggerConfigurator {
+public final class Coercions {
 
   /**
-   * Configures the passed in logger instance.
+   * Coerce js int to 32 bits.
+   * Trick related to JS and lack of integer rollover.
+   * {@see com.google.gwt.lang.Cast#narrow_int}
    */
-  void configure(Logger logger);
+  public static int ensureInt(int value) {
+    return value | 0;
+  }
 
+  private Coercions() { }
 }

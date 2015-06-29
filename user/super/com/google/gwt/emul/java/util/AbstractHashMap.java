@@ -15,15 +15,14 @@
  */
 package java.util;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkArgument;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkElement;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkState;
 
 import static java.util.ConcurrentModificationDetector.checkStructuralChange;
 import static java.util.ConcurrentModificationDetector.recordLastKnownStructure;
 import static java.util.ConcurrentModificationDetector.structureChanged;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.impl.SpecializeMethod;
 
 /**
@@ -119,12 +118,12 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   /**
    * A map of integral hashCodes onto entries.
    */
-  private transient InternalJsHashCodeMap<K, V> hashCodeMap;
+  private transient InternalJsHashCodeMapInterface<K, V> hashCodeMap;
 
   /**
    * A map of Strings onto values.
    */
-  private transient InternalJsStringMap<K, V> stringMap;
+  private transient InternalJsStringMapInterface<K, V> stringMap;
 
   private int size;
 
@@ -156,11 +155,11 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   }
 
   private void reset() {
-    InternalJsMapFactory factory = GWT.create(InternalJsMapFactory.class);
+    InternalJsMapFactory factory = new InternalJsMapFactory.BackwardCompatibleJsMapFactory();
     hashCodeMap = factory.createJsHashCodeMap();
-    hashCodeMap.host = this;
+    hashCodeMap.setHost(this);
     stringMap = factory.createJsStringMap();
-    stringMap.host = this;
+    stringMap.setHost(this);
     size = 0;
     structureChanged(this);
   }
@@ -168,7 +167,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   @SpecializeMethod(params = {String.class}, target = "hasStringValue")
   @Override
   public boolean containsKey(Object key) {
-    return key instanceof String ? hasStringValue(unsafeCast(key)) : hasHashValue(key);
+    return key instanceof String ? hasStringValue(Cast_Helper.unsafeCast(key)) : hasHashValue(key);
   }
 
   @Override
@@ -184,19 +183,21 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   @SpecializeMethod(params = {String.class}, target = "getStringValue")
   @Override
   public V get(Object key) {
-    return key instanceof String ? getStringValue(unsafeCast(key)) : getHashValue(key);
+    return key instanceof String ? getStringValue(Cast_Helper.unsafeCast(key)) : getHashValue(key);
   }
 
   @SpecializeMethod(params = {String.class, Object.class}, target = "putStringValue")
   @Override
   public V put(K key, V value) {
-    return key instanceof String ? putStringValue(unsafeCast(key), value) : putHashValue(key, value);
+    return key instanceof String
+        ? putStringValue(Cast_Helper.unsafeCast(key), value) : putHashValue(key, value);
   }
 
   @SpecializeMethod(params = {String.class}, target = "removeStringValue")
   @Override
   public V remove(Object key) {
-    return key instanceof String ? removeStringValue(unsafeCast(key)) : removeHashValue(key);
+    return key instanceof String
+        ? removeStringValue(Cast_Helper.unsafeCast(key)) : removeHashValue(key);
   }
 
   @Override
@@ -296,9 +297,4 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
   private V removeStringValue(String key) {
     return key == null ? removeHashValue(null) : stringMap.remove(key);
   }
-
-  // TODO(goktug): replace unsafeCast with a real cast when the compiler can optimize it.
-  private static native String unsafeCast(Object string) /*-{
-    return string;
-  }-*/;
 }

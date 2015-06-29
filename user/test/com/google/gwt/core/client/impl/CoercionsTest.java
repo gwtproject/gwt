@@ -15,7 +15,7 @@
  */
 package com.google.gwt.core.client.impl;
 
-import static com.google.gwt.core.client.impl.Coercions.ensureInt;
+import static com.google.j2cl.emul.core.client.impl.Coercions.ensureInt;
 
 import com.google.gwt.junit.client.GWTTestCase;
 

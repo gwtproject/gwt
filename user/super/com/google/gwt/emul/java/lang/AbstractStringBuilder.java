@@ -22,6 +22,18 @@ package java.lang;
  * which is O(n), and thus should not be used many times on the same <code>StringBuffer</code>.
  */
 abstract class AbstractStringBuilder {
+  
+  private static void checkBounds(int legalCount, int start, int end) {
+    if (start < 0) {
+      throw new StringIndexOutOfBoundsException(start);
+    }
+    if (end < start) {
+      throw new StringIndexOutOfBoundsException(end - start);
+    }
+    if (end > legalCount) {
+      throw new StringIndexOutOfBoundsException(end);
+    }
+  }
 
   String string;
 
@@ -61,8 +73,8 @@ abstract class AbstractStringBuilder {
   }
 
   public void getChars(int srcStart, int srcEnd, char[] dst, int dstStart) {
-    String.__checkBounds(length(), srcStart, srcEnd);
-    String.__checkBounds(dst.length, dstStart, dstStart + (srcEnd - srcStart));
+    checkBounds(length(), srcStart, srcEnd);
+    checkBounds(dst.length, dstStart, dstStart + (srcEnd - srcStart));
     while (srcStart < srcEnd) {
       dst[dstStart++] = string.charAt(srcStart++);
     }

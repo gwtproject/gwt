@@ -34,10 +34,10 @@
  */
 package java.util;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalArgument;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkCriticalArgument;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkNotNull;
 
-import com.google.gwt.core.client.JsDate;
+import com.google.j2cl.emul.core.client.JsDateFactory;
 
 /**
  * This class provides methods that generates pseudo-random numbers of different
@@ -114,7 +114,7 @@ public class Random {
   public Random() {
     // JsDate.now used instead of System.currentTimeMillis()
     // as it returns a double in order to avoid the use os LongLib.
-    double seed = uniqueSeed++ + JsDate.now();
+    double seed = uniqueSeed++ + JsDateFactory.now();
     int hi = (int) Math.floor(seed * twoToTheMinus24) & 0xffffff;
     int lo = (int) (seed - (hi * twoToThe24));
     setSeed(hi, lo);

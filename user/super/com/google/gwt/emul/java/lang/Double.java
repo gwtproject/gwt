@@ -193,13 +193,13 @@ public final class Double extends Number implements Comparable<Double> {
     return (int) d;
   }
 
-  public static native boolean isInfinite(double x) /*-{
-    return !isFinite(x) && !isNaN(x);
-  }-*/;
+  public static boolean isInfinite(double x) {
+    return !Number_Helper.__isfinite(x) && !Number_Helper.__isNaN(x);
+  }
 
-  public static native boolean isNaN(double x) /*-{
-    return isNaN(x);
-  }-*/;
+  public static boolean isNaN(double x) {
+    return Number_Helper.__isNaN(x);
+  }
 
   public static double longBitsToDouble(long bits) {
     long ihi = (long) (bits >> 32);
@@ -284,6 +284,7 @@ public final class Double extends Number implements Comparable<Double> {
     return (byte) value;
   }
 
+  @Override
   public int compareTo(Double b) {
     return compare(this.value, b.value);
   }

@@ -15,8 +15,8 @@
  */
 package java.util;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkCriticalElement;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkCriticalElement;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkState;
 
 import static java.util.ConcurrentModificationDetector.checkStructuralChange;
 import static java.util.ConcurrentModificationDetector.recordLastKnownStructure;
@@ -98,10 +98,12 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
         recordLastKnownStructure(map, this);
       }
 
+      @Override
       public boolean hasNext() {
         return next != head;
       }
 
+      @Override
       public Map.Entry<K, V> next() {
         checkStructuralChange(map, this);
         checkCriticalElement(hasNext());
@@ -111,6 +113,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> implements Map<K, V> {
         return last;
       }
 
+      @Override
       public void remove() {
         checkState(last != null);
         checkStructuralChange(map, this);

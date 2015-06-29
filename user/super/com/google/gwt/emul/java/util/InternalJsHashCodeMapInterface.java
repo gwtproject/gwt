@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Google Inc.
+ * Copyright 2015 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,20 +13,30 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.logging.impl;
+package java.util;
 
-import java.util.logging.Logger;
+import java.util.Map.Entry;
+
 /**
- * A simple {@link LoggerConfigurator} that configures the root logger to log to the console.
- * <p>
- * This is only used when the application doesn't depend on com.google.gwt.logging.Logging.
+ * A simple wrapper around JavaScriptObject to provide {@link java.util.Map}-like semantics for any
+ * key type.
+ *
+ * @param <K> key type
+ * @param <V> value type
  */
-class LoggerConfiguratorConsole implements LoggerConfigurator {
+public interface InternalJsHashCodeMapInterface<K, V> {
 
-  @Override
-  public void configure(Logger logger) {
-    if (logger.getName().isEmpty()) {
-      logger.addHandler(new SimpleConsoleLogHandler());
-    }
-  }
+  Object createMap();
+
+  V put(K key, V value);
+
+  V remove(Object key);
+
+  Map.Entry<K, V> getEntry(Object key);
+
+  boolean containsValue(Object value);
+
+  Iterator<Entry<K, V>> entries();
+  
+  void setHost(AbstractHashMap<K, V> host);
 }

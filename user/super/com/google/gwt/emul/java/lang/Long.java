@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import com.google.j2cl.emul.core.client.impl.StringHelper;
+
 /**
  * Wraps a primitive <code>long</code> as an object.
  */
@@ -191,7 +193,7 @@ public final class Long extends Number implements Comparable<Long> {
       buf[pos--] = Character.forDigit(-((int) value));
       buf[pos] = '-';
     }
-    return String.__valueOf(buf, pos, bufSize);
+    return StringHelper.valueOf(buf, pos, bufSize);
   }
 
   public static Long valueOf(long i) {
@@ -229,7 +231,7 @@ public final class Long extends Number implements Comparable<Long> {
       value >>>= shift;
     } while (value != 0);
 
-    return String.__valueOf(buf, pos, bufSize);
+    return StringHelper.valueOf(buf, pos, bufSize);
   }
 
   private final transient long value;
@@ -247,6 +249,7 @@ public final class Long extends Number implements Comparable<Long> {
     return (byte) value;
   }
 
+  @Override
   public int compareTo(Long b) {
     return compare(value, b.value);
   }

@@ -15,36 +15,32 @@
  */
 package java.util;
 
-import java.util.InternalJsHashCodeMap.InternalJsHashCodeMapLegacy;
-import java.util.InternalJsStringMap.InternalJsStringMapLegacy;
-import java.util.InternalJsStringMap.InternalJsStringMapWithKeysWorkaround;
-
 /**
  * A factory to create internal JS map instances for modern browsers.
  */
 class InternalJsMapFactory {
 
-  public <K, V> InternalJsHashCodeMap<K, V> createJsHashCodeMap() {
-    return new InternalJsHashCodeMap<K, V>();
-  }
+  public native <K, V> InternalJsHashCodeMapInterface<K, V> createJsHashCodeMap() /*-{
+    return @java.util.InternalJsHashCodeMap::new()();
+  }-*/;
 
-  public <K, V> InternalJsStringMap<K, V> createJsStringMap() {
-    return new InternalJsStringMap<K, V>();
-  }
+  public native <K, V> InternalJsStringMapInterface<K, V> createJsStringMap() /*-{
+    return @java.util.InternalJsStringMap::new()();
+  }-*/;
 
   /**
    * A {@code InternalJsMapFactory} that returns JS map instances compatible with legacy browsers.
    */
   static class LegacyInternalJsMapFactory extends InternalJsMapFactory {
     @Override
-    public <K, V> InternalJsHashCodeMap<K, V> createJsHashCodeMap() {
-      return new InternalJsHashCodeMapLegacy<K, V>();
-    }
+    public native <K, V> InternalJsHashCodeMapInterface<K, V> createJsHashCodeMap() /*-{
+      return @java.util.InternalJsHashCodeMap.InternalJsHashCodeMapLegacy::new()();
+    }-*/;
 
     @Override
-    public <K, V> InternalJsStringMap<K, V> createJsStringMap() {
-      return new InternalJsStringMapLegacy<K, V>();
-    }
+    public native <K, V> InternalJsStringMapInterface<K, V> createJsStringMap() /*-{
+      return @java.util.InternalJsStringMap.InternalJsStringMapLegacy::new()();
+    }-*/;
   }
 
   /**
@@ -52,9 +48,9 @@ class InternalJsMapFactory {
    */
   static class KeysWorkaroundJsMapFactory extends InternalJsMapFactory {
     @Override
-    public <K, V> InternalJsStringMap<K, V> createJsStringMap() {
-      return new InternalJsStringMapWithKeysWorkaround<K, V>();
-    }
+    public native <K, V> InternalJsStringMapInterface<K, V> createJsStringMap() /*-{
+      return @java.util.InternalJsStringMap.InternalJsStringMapWithKeysWorkaround::new()();
+    }-*/;
   }
 
   /**
@@ -107,12 +103,12 @@ class InternalJsMapFactory {
     }-*/;
 
     @Override
-    public <K, V> InternalJsHashCodeMap<K, V> createJsHashCodeMap() {
+    public <K, V> InternalJsHashCodeMapInterface<K, V> createJsHashCodeMap() {
       return delegate.createJsHashCodeMap();
     }
 
     @Override
-    public <K, V> InternalJsStringMap<K, V> createJsStringMap() {
+    public <K, V> InternalJsStringMapInterface<K, V> createJsStringMap() {
       return delegate.createJsStringMap();
     }
   }

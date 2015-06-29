@@ -15,12 +15,10 @@
  */
 package java.util;
 
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElementIndex;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndex;
-import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndexes;
-
-import com.google.gwt.lang.Array;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkArgument;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkElementIndex;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkPositionIndex;
+import static com.google.j2cl.emul.core.shared.impl.InternalPreconditions.checkPositionIndexes;
 
 import java.io.Serializable;
 
@@ -45,17 +43,8 @@ import java.io.Serializable;
 public class ArrayList<E> extends AbstractList<E> implements List<E>,
     Cloneable, RandomAccess, Serializable {
 
-  private static native void splice(Object[] array, int index, int deleteCount) /*-{
-    array.splice(index, deleteCount);
-  }-*/;
-
-  private static native void splice(Object[] array, int index, int deleteCount,
-      Object value) /*-{
-    array.splice(index, deleteCount, value);
-  }-*/;
-
   private void insertAt(int index, Object[] values) {
-    Array.nativeArrayInsert(values, 0, array, index, values.length);
+    Array_Helper.nativeArrayInsert(values, 0, array, index, values.length);
   }
 
   /**
@@ -92,7 +81,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   @Override
   public void add(int index, E o) {
     checkPositionIndex(index, array.length);
-    splice(array, index, 0, o);
+    Array_Helper.splice(array, index, 0, o);
   }
 
   @Override
@@ -160,7 +149,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   @Override
   public E remove(int index) {
     E previous = get(index);
-    splice(array, index, 1);
+    Array_Helper.splice(array, index, 1);
     return previous;
   }
 
@@ -188,7 +177,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public Object[] toArray() {
-    return Array.cloneSubrange(array, 0, array.length);
+    return Array_Helper.cloneSubrange(array, 0, array.length);
   }
 
   /*
@@ -199,7 +188,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   public <T> T[] toArray(T[] out) {
     int size = array.length;
     if (out.length < size) {
-      out = Array.createFrom(out, size);
+      out = Array_Helper.createFrom(out, size);
     }
     for (int i = 0; i < size; ++i) {
       out[i] = (T) array[i];
@@ -218,7 +207,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   protected void removeRange(int fromIndex, int endIndex) {
     checkPositionIndexes(fromIndex, endIndex, array.length);
     int count = endIndex - fromIndex;
-    splice(array, fromIndex, count);
+    Array_Helper.splice(array, fromIndex, count);
   }
 
   /**
@@ -245,7 +234,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
     return -1;
   }
 
-  native void setSize(int newSize) /*-{
-    this.@ArrayList::array.length = newSize;
-  }-*/;
+  void setSize(int newSize) {
+    Array_Helper.setArrayLength(array, newSize);
+  }
 }

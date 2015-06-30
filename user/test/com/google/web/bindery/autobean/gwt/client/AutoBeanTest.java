@@ -584,6 +584,10 @@ public class AutoBeanTest extends GWTTestCase {
     }
   }
 
+  public void testFactoryToString() {
+    assertNotNull(factory.toString());
+  }
+
   @Override
   protected void gwtSetUp() throws Exception {
     factory = GWT.create(Factory.class);

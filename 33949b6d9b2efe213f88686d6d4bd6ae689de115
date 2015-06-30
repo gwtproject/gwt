@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b388b937_0d8a7125",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/FactoryHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-06-30T15:09:08Z",
+      "side": 1,
+      "message": "As you noted in https://github.com/gwtproject/gwt/issues/9150 I think we should try to fix all those methods at once.\n\nReading the doc for java.lang.reflect.Proxy, I see that the declaring class for all those methods is set to java.lang.Object, so we could start the method with an:\n\n if (Object.class.equals(method.getDeclaringClass())) {\n   // …\n }\n\nand handle the methods there.\n\nActually, looking at ShimHandler in the same package, it uses BeanMethod.OBJECT.matches(method) which does exactly the same, and in this case calls the method on itself (the InvocationHandler):\n\n method.invoke(this, args);\n\nI think we should just do the same here, and we can then just inherit the toString(), equals() and hashCode() implementations.",
+      "revId": "33949b6d9b2efe213f88686d6d4bd6ae689de115",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

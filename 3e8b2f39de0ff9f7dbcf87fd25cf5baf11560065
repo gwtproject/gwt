@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b388b937_6dde9506",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-06-30T16:03:14Z",
+      "side": 1,
+      "message": "This should reference \"AutoBeanFactory proxy instances\" (or \"AutoBeanFactory proxies\"). Maybe:\n\n Properly handle Object methods in AutoBeanFactory in the JVM",
+      "revId": "3e8b2f39de0ff9f7dbcf87fd25cf5baf11560065",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b388b937_adbf9da9",
+        "filename": "user/test/com/google/web/bindery/autobean/gwt/client/AutoBeanTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-06-30T16:03:14Z",
+      "side": 1,
+      "message": "Maybe add\n\n assertEquals(factory.hashCode(), factory.hashCode());",
+      "revId": "3e8b2f39de0ff9f7dbcf87fd25cf5baf11560065",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

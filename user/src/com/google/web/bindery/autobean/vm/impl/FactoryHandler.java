@@ -64,6 +64,9 @@ public class FactoryHandler implements InvocationHandler {
     } else if (name.equals("getToken")) {
       Enum<?> e = (Enum<?>) args[0];
       return getToken(e);
+    } else if (name.equals("toString")) {
+      // Return a result similar to the Object#toString() implementation
+      return proxy.getClass().getName() + '@' + Integer.toHexString(System.identityHashCode(proxy));
     } else {
       // Declared factory method, use the parameterization
       // AutoBean<Foo> foo(); or Autobean<foo> foo(Foo toWrap);

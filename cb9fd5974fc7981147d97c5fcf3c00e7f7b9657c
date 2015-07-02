@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13b8a53c_903c14f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-07-02T09:20:42Z",
+      "side": 1,
+      "message": "Please reference AutoBeanFactory here, otherwise a \"git log --oneline\", or any other similar listing of commits that only shows the summary line (e.g. the list of changes in Gerrit), is misleading.",
+      "revId": "cb9fd5974fc7981147d97c5fcf3c00e7f7b9657c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

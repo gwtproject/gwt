@@ -47,14 +47,20 @@ public class FactoryHandler implements InvocationHandler {
   public Object invoke(Object proxy, Method method, Object[] args)
       throws Throwable {
 
-    Class<?> beanType;
-    Object toWrap = null;
+    // Handle methods of Object early on
     String name = method.getName();
     if (BeanMethod.OBJECT.matches(method)) {
-      // Redirect all methods of Object early on
-      return method.invoke(this, args);
+      if (name.equals("equals")) {
+        // Only identity considered as equal
+        return proxy == args[0];
+      } else {
+        // Redirect to the same method on the handler instance
+        return method.invoke(this, args);
+      }
     }
 
+    Class<?> beanType;
+    Object toWrap = null;
     if (name.equals("create")) {
       // Dynamic create. Guaranteed to have at least one argument
       // create(clazz); or create(clazz, toWrap);

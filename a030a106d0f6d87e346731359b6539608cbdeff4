@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7311e108_56e0d290",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/FactoryHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-02T08:43:19Z",
+      "side": 1,
+      "message": "[warning] Definition of \u0027equals()\u0027 without corresponding definition of \u0027hashCode()\u0027.",
+      "revId": "a030a106d0f6d87e346731359b6539608cbdeff4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

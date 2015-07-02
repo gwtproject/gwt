@@ -34,6 +34,24 @@
       "revId": "a030a106d0f6d87e346731359b6539608cbdeff4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b317d9fa_756fc8f3",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/FactoryHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-07-02T08:55:59Z",
+      "side": 1,
+      "message": "OK, just added an hashCode implementation simply calling super.hashCode(). We already do this in the java.lang.Enum and java.sql.Timestamp emulations, as seemingly useless as it sounds.",
+      "parentUuid": "b317d9fa_35655014",
+      "revId": "a030a106d0f6d87e346731359b6539608cbdeff4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

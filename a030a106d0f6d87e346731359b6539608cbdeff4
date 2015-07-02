@@ -16,6 +16,24 @@
       "revId": "a030a106d0f6d87e346731359b6539608cbdeff4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b317d9fa_35655014",
+        "filename": "user/src/com/google/web/bindery/autobean/vm/impl/FactoryHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-07-02T08:46:03Z",
+      "side": 1,
+      "message": "Anyone knows a way to disable that warning? I think we\u0027re safe here.",
+      "parentUuid": "7311e108_56e0d290",
+      "revId": "a030a106d0f6d87e346731359b6539608cbdeff4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

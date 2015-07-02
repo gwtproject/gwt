@@ -457,9 +457,8 @@ public class TypeTightener {
 
     @Override
     public void exit(JField x, Context ctx) {
-      // TODO: we should also skip @JsType fields when we implement them.
       if (program.codeGenTypes.contains(x.getEnclosingType())
-          || x.isExported()) {
+          || x.isExported() || x.isJsTypeMember()) {
         // We cannot tighten this field as we don't know all callers.
         return;
       }

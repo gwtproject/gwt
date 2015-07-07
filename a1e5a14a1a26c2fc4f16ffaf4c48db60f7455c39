@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f80dae2c_1ac199c5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/SameParameterValueOptimizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-07-07T16:58:11Z",
+      "side": 1,
+      "message": "pull out this as a static method isNotOptimizable(method) (or a better name) and use it here and in JMethodCall to bail out early on the same condition (I assume that isExported is cheap)",
+      "range": {
+        "startLine": 123,
+        "startChar": 10,
+        "endLine": 123,
+        "endChar": 43
+      },
+      "revId": "a1e5a14a1a26c2fc4f16ffaf4c48db60f7455c39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f80dae2c_baaf4d1a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/SameParameterValueOptimizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-07-07T16:58:11Z",
+      "side": 1,
+      "message": "This comment is not accurate. Here are also all the polymorphic methods where you see all calls. Rephrase.",
+      "range": {
+        "startLine": 197,
+        "startChar": 51,
+        "endLine": 197,
+        "endChar": 82
+      },
+      "revId": "a1e5a14a1a26c2fc4f16ffaf4c48db60f7455c39",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

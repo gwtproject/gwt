@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f80dae2c_40016475",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-07T21:50:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f80dae2c_80de5c85",
+      "range": {
+        "startLine": 462,
+        "startChar": 61,
+        "endLine": 462,
+        "endChar": 68
+      },
+      "revId": "d5d4b7e4aac2755b6d151e639ed9e7aa984e34c8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7311e108_b6a206b7",
         "filename": "user/test/com/google/gwt/core/client/interop/ConcreteJsType.java",
         "patchSetId": 1

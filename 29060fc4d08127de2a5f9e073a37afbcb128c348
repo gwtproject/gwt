@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d8fb8a32_3ea20988",
+        "filename": "user/src/com/google/gwt/junit/JUnitShell.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-07T11:44:43Z",
+      "side": 1,
+      "message": "Why is this in this change?",
+      "range": {
+        "startLine": 288,
+        "startChar": 26,
+        "endLine": 288,
+        "endChar": 57
+      },
+      "revId": "29060fc4d08127de2a5f9e073a37afbcb128c348",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "adc5b1ce_d1285706",
         "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
         "patchSetId": 4

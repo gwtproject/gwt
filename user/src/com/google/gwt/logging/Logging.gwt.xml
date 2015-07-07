@@ -20,4 +20,8 @@
   <set-property name="gwt.logging.enabled" value="TRUE">
     <when-property-is name="superdevmode" value="on"/>
   </set-property>
+
+  <set-property name="gwt.logging.simpleConsoleLoggerEnabled" value="TRUE">
+    <when-property-is name="superdevmode" value="on"/>
+  </set-property>
 </module>

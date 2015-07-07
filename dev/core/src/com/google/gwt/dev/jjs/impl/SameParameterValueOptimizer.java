@@ -17,7 +17,6 @@ package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
-import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
@@ -65,15 +64,8 @@ public class SameParameterValueOptimizer {
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
 
-      if (x.canBePolymorphic() || rescuedMethods.contains(method)
-          /*
-           * Don't optimize calls visible to JS callers, because you don't know what
-           * parameter values they'll supply.
-           */
-          || program.isJsTypePrototype(method.getEnclosingType())
-          || method.isOrOverridesJsTypeMethod()
-          || method.isOrOverridesJsFunctionMethod()
-          || method.isExported()) {
+      // A quick check to reduce extra work needed otherwise...
+      if (method.needsVtable()) {
         return;
       }
 
@@ -122,26 +114,14 @@ public class SameParameterValueOptimizer {
     @Override
     public void endVisit(JsniMethodBody x, Context ctx) {
       for (JsniMethodRef methodRef : x.getJsniMethodRefs()) {
-        rescuedMethods.add(methodRef.getTarget());
+        nonOptimizableMethods.add(methodRef.getTarget());
       }
     }
 
     @Override
-    public boolean visit(JConstructor x, Context ctx) {
-      // Cannot be overridden or staticified.
-      return true;
-    }
-
-    @Override
     public boolean visit(JMethod x, Context ctx) {
-      Set<JMethod> overriddenMethods = x.getOverriddenMethods();
-      if (!overriddenMethods.isEmpty() || x.isOrOverridesJsTypeMethod()
-          || x.isOrOverridesJsFunctionMethod()
-          || x.isExported()) {
-        for (JMethod m : overriddenMethods) {
-          rescuedMethods.add(m);
-        }
-        rescuedMethods.add(x);
+      if (x.needsVtable() || x.isExported()) {
+        nonOptimizableMethods.add(x);
       }
       return true;
     }
@@ -214,12 +194,9 @@ public class SameParameterValueOptimizer {
   private final JProgram program;
 
   /**
-   * These methods should not be tried to optimized due to their polymorphic
-   * nature.
-   *
-   * TODO: support polymorphic calls properly.
+   * These methods should not be tried to optimize as we cannot see all the calls.
    */
-  private final Set<JMethod> rescuedMethods = new HashSet<JMethod>();
+  private final Set<JMethod> nonOptimizableMethods = new HashSet<JMethod>();
 
   private SameParameterValueOptimizer(JProgram program) {
     this.program = program;
@@ -231,7 +208,7 @@ public class SameParameterValueOptimizer {
     analysisVisitor.accept(node);
 
     for (JParameter parameter : parameterValues.keySet()) {
-      if (rescuedMethods.contains(parameter.getEnclosingMethod())) {
+      if (nonOptimizableMethods.contains(parameter.getEnclosingMethod())) {
         continue;
       }
       JValueLiteral valueLiteral = parameterValues.get(parameter);

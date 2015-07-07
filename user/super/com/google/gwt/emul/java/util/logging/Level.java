@@ -16,11 +16,8 @@
 
 package java.util.logging;
 
-import com.google.gwt.core.shared.GWT;
-import com.google.gwt.logging.impl.LevelImpl;
-import com.google.gwt.logging.impl.LevelImplNull;
-
 import java.io.Serializable;
+import java.util.Locale;
 
 /**
  *  An emulation of the java.util.logging.Level class. See 
@@ -28,7 +25,57 @@ import java.io.Serializable;
  *  The Java API doc for details</a>
  */
 public class Level implements Serializable {
-  private static LevelImpl staticImpl = GWT.create(LevelImplNull.class);
+
+  /**
+   * Interface for the implementation of Level. We use a LevelImplNull to ensure
+   * that logging code compiles out when logging is disabled, and a
+   * LevelImplRegular to provide normal functionality when logging is enabled.
+   */
+  private interface LevelImpl {
+    Level parse(String name);
+  }
+  
+  /**
+   * Null implementation for the Level class which ensures that calls to Level
+   * compile out when logging is disabled.
+   */
+  private static class LevelImplNull implements LevelImpl {
+    @Override
+    public Level parse(String name) {
+      return null;
+    }
+  }
+  
+  /**
+   * Implementation for the Level class when logging is enabled.
+   */
+  private static class LevelImplRegular implements LevelImpl {
+    @Override
+    public Level parse(String name) {
+      name = name.toUpperCase(Locale.ROOT);
+      if (name.equals("ALL")) {
+        return Level.ALL;
+      } else if (name.equals("CONFIG")) {
+        return Level.CONFIG;
+      } else if (name.equals("FINE")) {
+        return Level.FINE;
+      } else if (name.equals("FINER")) {
+        return Level.FINER;
+      } else if (name.equals("FINEST")) {
+        return Level.FINEST;
+      } else if (name.equals("INFO")) {
+        return Level.INFO;
+      } else if (name.equals("OFF")) {
+        return Level.OFF;
+      } else if (name.equals("SEVERE")) {
+        return Level.SEVERE;
+      } else if (name.equals("WARNING")) {
+        return Level.WARNING;
+      }
+      throw new IllegalArgumentException("Invalid level \"" + name + "\"");  }
+  }
+
+  private static LevelImpl staticImpl = createLevelImpl();
   public static Level ALL = new LevelAll();
   public static Level CONFIG = new LevelConfig();
   public static Level FINE = new LevelFine();
@@ -82,6 +129,15 @@ public class Level implements Serializable {
   private static class LevelWarning extends Level {
     @Override public String getName() { return "WARNING"; }
     @Override public int intValue() { return 900; }
+  }
+
+  private static LevelImpl createLevelImpl() {
+    String logginEnabled = System.getProperty("gwt.logging.enabled");
+    if ("TRUE".equals(logginEnabled) || "SEVERE".equals(logginEnabled)
+        || "WARNING".equals(logginEnabled)) {
+      return new LevelImplRegular();
+    }
+    return new LevelImplNull();
   }
 
   public static Level parse(String name) {

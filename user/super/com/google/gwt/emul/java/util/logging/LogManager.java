@@ -16,8 +16,7 @@
 
 package java.util.logging;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.logging.impl.LoggerConfigurator;
+import com.google.gwt.core.client.impl.SimpleConsoleLogHandler;
 
 import java.util.Collections;
 import java.util.Enumeration;
@@ -42,7 +41,10 @@ public class LogManager {
     return singleton;
   }
   
-  private LoggerConfigurator loggerConfigurator = GWT.create(LoggerConfigurator.class);
+  private static  boolean isSDM() {
+    return "on".equals(System.getProperty("superdevmode"));
+  }
+
   private HashMap<String, Logger> loggerMap = new HashMap<String, Logger>();
   
   protected LogManager() { }
@@ -79,7 +81,11 @@ public class LogManager {
   }
 
   private void addLoggerImpl(Logger logger) {
-    loggerConfigurator.configure(logger);
+    if (isSDM()) {
+      if (logger.getName().isEmpty()) {
+        logger.addHandler(new SimpleConsoleLogHandler());
+      }
+    }
     loggerMap.put(logger.getName(), logger);
   }
   

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f80dae2c_00fb6cef",
+        "filename": "user/test/com/google/gwt/core/client/interop/ConcreteJsType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-07T21:50:35Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "92e6445dc8ebe8975463ded9ae9eec08203c917a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f80dae2c_e0f75801",
+        "filename": "user/test/com/google/gwt/core/client/interop/ConcreteJsType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-07T21:50:35Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "92e6445dc8ebe8975463ded9ae9eec08203c917a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

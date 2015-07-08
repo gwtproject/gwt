@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f80dae2c_aff70487",
+        "filename": "user/src/com/google/gwt/logging/LogImpl.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-08T23:13:32Z",
+      "side": 1,
+      "message": "let\u0027s remove this as well and keep the default in the code. I\u0027ll comment in the corresponding part of the code.",
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f80dae2c_8fb7a076",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-08T23:13:32Z",
+      "side": 1,
+      "message": "You don\u0027t need all other classes anymore:\n\n boolean loggingDisabled \u003d System.getProperty(\"gwt.logging.enabled\", \"FALSE\").equals(\"FALSE\");\n if (loggingDisabled) {\n   return;\n }\n\n // .. and have the parse logic down here ...",
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f80dae2c_0fd5d0ad",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/LogManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-08T23:13:32Z",
+      "side": 1,
+      "message": "You can inline this or rename it to something more explicit e.g. isSuperDevModeEnabled. Also please move the helper method next to place where it is related to help readability if you are going to keep it.",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 84,
+        "endChar": 13
+      },
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f80dae2c_ef429cbe",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-08T23:13:32Z",
+      "side": 1,
+      "message": "loggin -\u003e logging",
+      "range": {
+        "startLine": 469,
+        "startChar": 11,
+        "endLine": 469,
+        "endChar": 24
+      },
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f80dae2c_2f49b4e3",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-08T23:13:32Z",
+      "side": 1,
+      "message": "System.getProperty(\"gwt.logging.enabled\", \"FALSE\")",
+      "range": {
+        "startLine": 469,
+        "startChar": 27,
+        "endLine": 469,
+        "endChar": 68
+      },
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f80dae2c_af07048d",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-08T23:13:32Z",
+      "side": 1,
+      "message": "I think you can inline the implementation and have if-else based logic in the methods (in a way similar to how I described in other classes). WDYT?",
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

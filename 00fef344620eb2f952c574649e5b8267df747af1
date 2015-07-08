@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8f4ce42_82353c69",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/LogManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-08T13:36:53Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 44,
+        "startChar": 16,
+        "endLine": 44,
+        "endChar": 18
+      },
+      "revId": "00fef344620eb2f952c574649e5b8267df747af1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "782e1e92_4b34051a",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-08T13:36:53Z",
+      "side": 1,
+      "message": "This interface was public before the move. People could have implemented their own LoggerImpl",
+      "revId": "00fef344620eb2f952c574649e5b8267df747af1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1840c241_9619eca8",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-08T13:36:53Z",
+      "side": 1,
+      "message": "trailing spaces",
+      "range": {
+        "startLine": 135,
+        "startChar": 13,
+        "endLine": 135,
+        "endChar": 17
+      },
+      "revId": "00fef344620eb2f952c574649e5b8267df747af1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

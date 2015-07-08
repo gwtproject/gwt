@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f80dae2c_f446f172",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-08T21:38:08Z",
+      "side": 1,
+      "message": "nit: pls update the msg\n\n .. and removes trailing spaces.",
+      "revId": "7c62a10e798b92a885eeac7e2bd5171de3c402ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f80dae2c_31dda007",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-08T03:31:01Z",
+      "side": 1,
+      "message": "@Ray, does closure have any concept of typed functions?",
+      "range": {
+        "startLine": 1037,
+        "startChar": 64,
+        "endLine": 1037,
+        "endChar": 83
+      },
+      "revId": "d711bc85d88746ece2ca34886812597962f5711c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

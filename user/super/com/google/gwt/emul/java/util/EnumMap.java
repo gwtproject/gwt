@@ -18,7 +18,7 @@ package java.util;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkArgument;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkState;
 
-import com.google.gwt.lang.Array;
+import java.internal.ArrayHelper;
 
 /**
  * A {@link java.util.Map} of {@link Enum}s. <a
@@ -210,7 +210,7 @@ public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
 
   private void init(EnumMap<K, ? extends V> m) {
     keySet = m.keySet.clone();
-    values = Array.clone(m.values);
+    values = ArrayHelper.clone(m.values, 0, m.values.length);
   }
 
   private V set(int ordinal, V value) {

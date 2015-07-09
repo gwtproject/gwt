@@ -20,8 +20,7 @@ import static com.google.gwt.core.shared.impl.InternalPreconditions.checkElement
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndex;
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkPositionIndexes;
 
-import com.google.gwt.lang.Array;
-
+import java.internal.ArrayHelper;
 import java.io.Serializable;
 
 /**
@@ -55,7 +54,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   }-*/;
 
   private void insertAt(int index, Object[] values) {
-    Array.nativeArrayInsert(values, 0, array, index, values.length);
+    ArrayHelper.arrayInsert(values, 0, array, index, values.length);
   }
 
   /**
@@ -189,7 +188,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
 
   @Override
   public Object[] toArray() {
-    return Array.cloneSubrange(array, 0, array.length);
+    return ArrayHelper.clone(array, 0, array.length);
   }
 
   /*
@@ -200,7 +199,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   public <T> T[] toArray(T[] out) {
     int size = array.length;
     if (out.length < size) {
-      out = Array.createFrom(out, size);
+      out = ArrayHelper.createFrom(out, size);
     }
     for (int i = 0; i < size; ++i) {
       out[i] = (T) array[i];

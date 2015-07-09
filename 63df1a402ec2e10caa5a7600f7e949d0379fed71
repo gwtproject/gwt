@@ -22,6 +22,30 @@
       "revId": "63df1a402ec2e10caa5a7600f7e949d0379fed71",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "58e87a65_5685b411",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-09T18:55:45Z",
+      "side": 1,
+      "message": "I actually meant \u0027suspicious\u0027. Does that make sense?",
+      "parentUuid": "586ddaeb_80d3dafd",
+      "range": {
+        "startLine": 9,
+        "startChar": 18,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "63df1a402ec2e10caa5a7600f7e949d0379fed71",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -17,7 +17,7 @@ package java.util;
 
 import static com.google.gwt.core.shared.impl.InternalPreconditions.checkNotNull;
 
-import com.google.gwt.lang.Array;
+import java.internal.ArrayHelper;
 
 /**
  * Skeletal implementation of the Collection interface. <a
@@ -128,7 +128,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
   public <T> T[] toArray(T[] a) {
     int size = size();
     if (a.length < size) {
-      a = Array.createFrom(a, size);
+      a = ArrayHelper.createFrom(a, size);
     }
     Object[] result = a;
     Iterator<E> it = iterator();

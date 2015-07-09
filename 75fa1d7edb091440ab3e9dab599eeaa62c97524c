@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1840c241_f9c14b25",
+        "filename": "user/src/com/google/gwt/logging/LogImpl.gwt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-09T13:33:18Z",
+      "side": 1,
+      "message": "Removing this makes the compile fail for many tests.\n\nI do not think we should investigate here, but the old compiler does not work with free floating values.",
+      "parentUuid": "f80dae2c_aff70487",
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f80dae2c_8fb7a076",
         "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "1840c241_59fcd768",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-09T13:33:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f80dae2c_8fb7a076",
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f80dae2c_0fd5d0ad",
         "filename": "user/super/com/google/gwt/emul/java/util/logging/LogManager.java",
         "patchSetId": 2
@@ -47,6 +83,30 @@
       "writtenOn": "2015-07-08T23:13:32Z",
       "side": 1,
       "message": "You can inline this or rename it to something more explicit e.g. isSuperDevModeEnabled. Also please move the helper method next to place where it is related to help readability if you are going to keep it.",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 84,
+        "endChar": 13
+      },
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d829ca86_b78e2a01",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/LogManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-09T13:33:18Z",
+      "side": 1,
+      "message": "removed extra method",
+      "parentUuid": "f80dae2c_0fd5d0ad",
       "range": {
         "startLine": 84,
         "startChar": 8,
@@ -105,6 +165,54 @@
     },
     {
       "key": {
+        "uuid": "782e1e92_0e0bab2e",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-09T13:33:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f80dae2c_ef429cbe",
+      "range": {
+        "startLine": 469,
+        "startChar": 11,
+        "endLine": 469,
+        "endChar": 24
+      },
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "782e1e92_2e066728",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-09T13:33:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f80dae2c_2f49b4e3",
+      "range": {
+        "startLine": 469,
+        "startChar": 27,
+        "endLine": 469,
+        "endChar": 68
+      },
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f80dae2c_af07048d",
         "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
         "patchSetId": 2
@@ -116,6 +224,24 @@
       "writtenOn": "2015-07-08T23:13:32Z",
       "side": 1,
       "message": "I think you can inline the implementation and have if-else based logic in the methods (in a way similar to how I described in other classes). WDYT?",
+      "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "782e1e92_eeabbf5e",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-09T13:33:18Z",
+      "side": 1,
+      "message": "Done that. PTAL.",
+      "parentUuid": "f80dae2c_af07048d",
       "revId": "75fa1d7edb091440ab3e9dab599eeaa62c97524c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

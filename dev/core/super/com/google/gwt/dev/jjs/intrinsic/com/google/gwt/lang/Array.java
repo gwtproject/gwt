@@ -41,13 +41,6 @@ public final class Array {
   private static final int ARRAY_PROCESS_BATCH_SIZE = 10000;
 
   /**
-   * Creates a copy of the specified array.
-   */
-  public static <T> T[] clone(T[] array) {
-    return cloneSubrange(array, 0, array.length);
-  }
-
-  /**
    * Creates a copy of a subrange of the specified array.
    */
   public static <T> T[] cloneSubrange(T[] array, int fromIndex, int toIndex) {
@@ -56,13 +49,6 @@ public final class Array {
         Array.getElementTypeCategory(array), result);
     // implicit type arg not inferred (as of JDK 1.5.0_07)
     return Array.<T> asArray(result);
-  }
-
-  /**
-   * Creates a new array of the exact same type and length as a given array.
-   */
-  public static <T> T[] createFrom(T[] array) {
-    return createFrom(array, array.length);
   }
 
   /**

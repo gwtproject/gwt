@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58e87a65_362eb0ca",
+        "filename": "user/super/com/google/gwt/emul/java/internal/InternalPreconditions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-09T17:58:59Z",
+      "side": 1,
+      "message": "Let\u0027s also add a package-info.java and some javadoc to document the intended usage of this package.",
+      "revId": "56ba92b766daa3ba827bbdcb5c44e6a00a2ace35",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

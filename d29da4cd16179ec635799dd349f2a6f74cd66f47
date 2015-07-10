@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78753eb8_f6b85e32",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-10T20:30:58Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.internal.InternalPreconditions.checkArrayType\u0027 import.",
+      "revId": "d29da4cd16179ec635799dd349f2a6f74cd66f47",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78753eb8_96c56aa1",
+        "filename": "user/super/com/google/gwt/emul/java/util/EnumSet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-10T20:30:58Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.internal.InternalPreconditions.checkArgument\u0027 import.",
+      "revId": "d29da4cd16179ec635799dd349f2a6f74cd66f47",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

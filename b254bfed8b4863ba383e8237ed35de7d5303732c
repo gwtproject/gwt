@@ -135,6 +135,52 @@
       "revId": "b254bfed8b4863ba383e8237ed35de7d5303732c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78753eb8_d9ea339c",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-10T22:26:22Z",
+      "side": 1,
+      "message": "BTW, following is how I did this in InternalPrecondtion which I find compact and readable; also helps to stand out when there is a different code path based on these flags. WDYT?\n\n public final class InternalPreconditions {\n  private static final boolean CHECKED_MODE \u003d System.getProperty(\"superdevmode\").equals(\"on\");\n  private static final boolean JSNI_CHECK \u003d System.getProperty(\"checks.jsni\").equals(\"ENABLED\");\n  private static final boolean TYPE_CHECK \u003d System.getProperty(\"checks.type\").equals(\"ENABLED\");\n  private static final boolean API_CHECK \u003d System.getProperty(\"checks.api\").equals(\"ENABLED\");\n  private static final boolean BOUND_CHECK \u003d System.getProperty(\"checks.bounds\").equals(\"ENABLED\");\n\nSimilarly you can do LOGGING_TRUE, LOGGING_WARNING, LOGGING_SEVERE.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 3
+      },
+      "revId": "b254bfed8b4863ba383e8237ed35de7d5303732c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78753eb8_d9ab135f",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-10T22:26:22Z",
+      "side": 1,
+      "message": "Value cannot be null so you can do the regular direction value.equals(blah)",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 37
+      },
+      "revId": "b254bfed8b4863ba383e8237ed35de7d5303732c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

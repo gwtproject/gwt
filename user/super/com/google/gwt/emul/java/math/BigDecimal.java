@@ -34,10 +34,9 @@
  */
 package java.math;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 import static java.internal.InternalPreconditions.checkNotNull;
 
+import java.internal.NumberHelper;
 import java.io.Serializable;
 
 /**
@@ -134,8 +133,6 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
    * The constant zero as a {@code BigDecimal}.
    */
   public static final BigDecimal ZERO = new BigDecimal(0, 0);
-
-  protected static JavaScriptObject unscaledRegex;
 
   private static final int BI_SCALED_BY_ZERO_LENGTH = 11;
 
@@ -397,17 +394,10 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
     return quotient > 0 ? Math.floor(quotient) : Math.ceil(quotient);
   }
 
-  private static native double parseUnscaled(String str) /*-{
-    var unscaledRegex = @java.math.BigDecimal::unscaledRegex;
-    if (!unscaledRegex) {
-      unscaledRegex = @java.math.BigDecimal::unscaledRegex = /^[+-]?\d*$/i;
-    }
-    if (unscaledRegex.test(str)) {
-      return parseInt(str, 10);
-    } else {
-      return Number.NaN;
-    }
-  }-*/;
+  private static double parseUnscaled(String str) {
+    return NumberHelper.isValidBigUnscaledDecimal(str)
+        ? NumberHelper.parseInt(str, 10) : Double.NaN;
+  }
 
   /**
    * Return an increment that can be -1,0 or 1, depending of {@code

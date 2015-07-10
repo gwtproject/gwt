@@ -16,6 +16,24 @@
       "revId": "a8924c2396901c540a11c941db578f3c018dad88",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8438a7f_5e6fd575",
+        "filename": "user/super/com/google/gwt/emul/java/internal/ArrayHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-10T20:23:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78753eb8_56ed9286",
+      "revId": "a8924c2396901c540a11c941db578f3c018dad88",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

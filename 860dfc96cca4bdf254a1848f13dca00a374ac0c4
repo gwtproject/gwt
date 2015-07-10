@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78753eb8_d6a4420b",
+        "filename": "user/super/com/google/gwt/emul/java/lang/System.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-10T20:35:58Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.internal.ArrayHelper\u0027 import.",
+      "revId": "860dfc96cca4bdf254a1848f13dca00a374ac0c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -226,6 +226,14 @@ public class JjsUtils {
    * Creates a multi expression from a list of expressions, removing expressions that do
    * not have side effects if possible.
    */
+  public static JExpression createOptimizedMultiExpression(List<JExpression> expressions) {
+    return createOptimizedMultiExpression(false, expressions);
+  }
+
+  /**
+   * Creates a multi expression from a list of expressions, removing expressions that do
+   * not have side effects if possible.
+   */
   public static JExpression createOptimizedMultiExpression(boolean ignoringResult,
       List<JExpression> expressions) {
 

@@ -15,12 +15,12 @@
  */
 package java.util;
 
-import static com.google.gwt.core.client.impl.Coercions.ensureInt;
-
 import static java.internal.InternalPreconditions.checkArgument;
 import static java.internal.InternalPreconditions.checkElementIndex;
 
 import java.io.Serializable;
+
+import static javaemul.internal.Coercions.ensureInt;
 
 /**
  * Utility methods that operate on collections. <a

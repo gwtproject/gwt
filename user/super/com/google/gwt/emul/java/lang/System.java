@@ -19,7 +19,6 @@ import static java.internal.InternalPreconditions.checkArrayType;
 import static java.internal.InternalPreconditions.checkNotNull;
 
 import com.google.gwt.core.client.JsDate;
-import com.google.gwt.core.client.impl.Impl;
 
 import java.internal.ArrayHelper;
 import java.io.PrintStream;
@@ -35,13 +34,13 @@ public final class System {
    * Does nothing in web mode. To get output in web mode, subclass PrintStream
    * and call {@link #setErr(PrintStream)}.
    */
-  public static final PrintStream err = new PrintStream(null);
+  public static PrintStream err = new PrintStream(null);
 
   /**
    * Does nothing in web mode. To get output in web mode, subclass
    * {@link PrintStream} and call {@link #setOut(PrintStream)}.
    */
-  public static final PrintStream out = new PrintStream(null);
+  public static PrintStream out = new PrintStream(null);
 
   public static void arraycopy(Object src, int srcOfs, Object dest, int destOfs, int len) {
     checkNotNull(src, "src");
@@ -116,8 +115,8 @@ public final class System {
   }
 
   public static int identityHashCode(Object o) {
-    return (o == null) ? 0 : (!(o instanceof String)) ? Impl.getHashCode(o)
-        : String.HashCache.getHashCode(unsafeCast(o));
+    return (o == null) ? 0 : (!(o instanceof String)) ? hashCode(o)
+        : hashCodeString((unsafeCast(o)));
   }
 
   // TODO(goktug): replace unsafeCast with a real cast when the compiler can optimize it.
@@ -125,13 +124,13 @@ public final class System {
     return string;
   }-*/;
 
-  public static native void setErr(PrintStream err) /*-{
-    @java.lang.System::err = err;
-  }-*/;
+  public static void setErr(PrintStream err) {
+    System.err = err;
+  }
 
-  public static native void setOut(PrintStream out) /*-{
-    @java.lang.System::out = out;
-  }-*/;
+  public static void setOut(PrintStream out) {
+    System.out = out;
+  }
 
   private static boolean arrayTypeMatch(Class<?> srcComp, Class<?> destComp) {
     if (srcComp.isPrimitive()) {
@@ -146,5 +145,13 @@ public final class System {
    */
   private static native int getArrayLength(Object array) /*-{
     return array.length;
+  }-*/;
+
+  private static native int hashCode(Object o) /*-{
+    return @com.google.gwt.core.client.impl.Impl::getHashCode(*)(o);
+  }-*/;
+
+  private static native int hashCodeString(String s) /*-{
+    return @java.lang.String.HashCache::getHashCode(*)(s);
   }-*/;
 }

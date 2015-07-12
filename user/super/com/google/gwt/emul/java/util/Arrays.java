@@ -16,8 +16,6 @@
 
 package java.util;
 
-import static com.google.gwt.core.client.impl.Coercions.ensureInt;
-
 import static java.internal.InternalPreconditions.checkArgument;
 import static java.internal.InternalPreconditions.checkArraySize;
 import static java.internal.InternalPreconditions.checkElementIndex;
@@ -28,6 +26,8 @@ import com.google.gwt.core.client.UnsafeNativeLong;
 
 import java.internal.ArrayHelper;
 import java.io.Serializable;
+
+import static javaemul.internal.Coercions.ensureInt;
 
 /**
  * Utility methods related to native arrays. <a

@@ -15,9 +15,9 @@
  */
 package java.util;
 
-import static com.google.gwt.core.client.impl.Coercions.ensureInt;
-
 import java.io.Serializable;
+
+import static javaemul.internal.Coercions.ensureInt;
 
 /**
  * Implementation of Map interface based on a hash table. <a

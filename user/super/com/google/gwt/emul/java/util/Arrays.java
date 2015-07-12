@@ -23,9 +23,6 @@ import static java.internal.InternalPreconditions.checkArraySize;
 import static java.internal.InternalPreconditions.checkElementIndex;
 import static java.internal.InternalPreconditions.checkPositionIndexes;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.UnsafeNativeLong;
-
 import java.internal.ArrayHelper;
 import java.io.Serializable;
 
@@ -1288,7 +1285,7 @@ public class Arrays {
    */
   @SuppressWarnings("unused")
   // see above
-  private static native JavaScriptObject getNativeComparator(Object array,
+  private static native Object getNativeComparator(Object array,
       Comparator<?> comp) /*-{
     function compare(a, b) {
       var elementCompare = comp.@java.util.Comparator::compare(Ljava/lang/Object;Ljava/lang/Object;)(array[a], array[b]);
@@ -1414,7 +1411,6 @@ public class Arrays {
   /**
    * Sort an entire array of number primitives.
    */
-  @UnsafeNativeLong
   private static native void nativeLongSort(Object array) /*-{
     array.sort(@com.google.gwt.lang.LongLib::compare(Lcom/google/gwt/lang/LongLibBase$LongEmul;Lcom/google/gwt/lang/LongLibBase$LongEmul;));
   }-*/;
@@ -1422,7 +1418,6 @@ public class Arrays {
   /**
    * Sort a subset of an array of number primitives.
    */
-  @UnsafeNativeLong
   private static native void nativeLongSort(Object array, int fromIndex,
       int toIndex) /*-{
     var temp = array.slice(fromIndex, toIndex);
@@ -1481,7 +1476,7 @@ public class Arrays {
   @SuppressWarnings("unused")
   // Currently unused, but useful for future; see above comment.
   private static native void nativeObjSort(Object array, int fromIndex,
-      int toIndex, JavaScriptObject comp) /*-{
+      int toIndex, Object comp) /*-{
     var n = toIndex - fromIndex;
     var indexArray = new Array(n);
     var arrayIdx = fromIndex;

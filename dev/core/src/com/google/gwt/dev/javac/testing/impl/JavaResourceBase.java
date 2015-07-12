@@ -303,7 +303,7 @@ public class JavaResourceBase {
       createMockJavaResource("java.lang.String",
           "package java.lang;",
           "import java.io.Serializable;",
-          "import com.google.gwt.core.client.impl.SpecializeMethod;",
+          "import javax.internal.SpecializeMethod;",
           "public final class String implements Comparable<String>, CharSequence, Serializable {",
           "  public String() { }",
           "  public String(char c) { }",
@@ -365,8 +365,8 @@ public class JavaResourceBase {
           "}");
 
   public static final MockJavaResource SPECIALIZE_METHOD =
-      createMockJavaResource("com.google.gwt.core.client.impl.SpecializeMethod",
-          "package com.google.gwt.core.client.impl;",
+      createMockJavaResource("javax.internal.SpecializeMethod",
+          "package javax.internal;",
           "public @interface SpecializeMethod {\n",
           "  Class<?>[] params();\n" +
           "  String target();\n",

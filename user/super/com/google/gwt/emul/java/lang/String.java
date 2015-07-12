@@ -19,12 +19,13 @@ package java.lang;
 import static com.google.gwt.core.client.impl.Coercions.ensureInt;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.impl.DoNotInline;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Comparator;
 import java.util.Locale;
+
+import javax.internal.DoNotInline;
 
 /**
  * Intrinsic string class.

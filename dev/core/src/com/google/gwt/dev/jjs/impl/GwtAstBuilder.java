@@ -15,9 +15,6 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
-import com.google.gwt.core.client.impl.DoNotInline;
-import com.google.gwt.core.client.impl.HasNoSideEffects;
-import com.google.gwt.core.client.impl.SpecializeMethod;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.JSORestrictionsChecker;
 import com.google.gwt.dev.javac.JdtUtil;
@@ -235,6 +232,10 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+
+import javax.internal.DoNotInline;
+import javax.internal.HasNoSideEffects;
+import javax.internal.SpecializeMethod;
 
 /**
  * Constructs a GWT Java AST from a single isolated compilation unit. The AST is

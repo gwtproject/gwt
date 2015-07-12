@@ -15,6 +15,7 @@
  */
 package com.google.gwt.emultest;
 
+import com.google.gwt.emultest.java.internal.CoercionsTest;
 import com.google.gwt.emultest.java.io.ByteArrayInputStreamTest;
 import com.google.gwt.emultest.java.io.ByteArrayOutputStreamTest;
 import com.google.gwt.emultest.java.io.InputStreamTest;
@@ -55,6 +56,8 @@ public class EmulSuite {
    */
   public static Test suite() {
     GWTTestSuite suite = new GWTTestSuite("Tests for com.google.gwt.emul.java");
+
+    suite.addTestSuite(CoercionsTest.class);
 
     // $JUnit-BEGIN$
     //-- java.io

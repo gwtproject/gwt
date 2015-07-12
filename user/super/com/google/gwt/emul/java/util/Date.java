@@ -15,9 +15,10 @@
  */
 package java.util;
 
-import com.google.gwt.core.client.JsDate;
-
 import java.io.Serializable;
+
+import javax.internal.JsDate;
+import javax.internal.JsDateFactory;
 
 /**
  * Represents a date and time.
@@ -37,7 +38,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   }
 
   public static long parse(String s) {
-    double parsed = JsDate.parse(s);
+    double parsed = JsDateFactory.parse(s);
     if (Double.isNaN(parsed)) {
       throw new IllegalArgumentException();
     }
@@ -47,7 +48,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   // CHECKSTYLE_OFF: Matching the spec.
   public static long UTC(int year, int month, int date, int hrs, int min,
       int sec) {
-    return (long) JsDate.UTC(year + 1900, month, date, hrs, min, sec, 0);
+    return (long) JsDateFactory.UTC(year + 1900, month, date, hrs, min, sec, 0);
   }
 
   // CHECKSTYLE_ON
@@ -79,7 +80,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   private final JsDate jsdate;
 
   public Date() {
-    jsdate = JsDate.create();
+    jsdate = JsDateFactory.create();
   }
 
   public Date(int year, int month, int date) {
@@ -91,14 +92,14 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   }
 
   public Date(int year, int month, int date, int hrs, int min, int sec) {
-    jsdate = JsDate.create();
+    jsdate = JsDateFactory.create();
     jsdate.setFullYear(year + 1900, month, date);
     jsdate.setHours(hrs, min, sec, 0);
     fixDaylightSavings(hrs);
   }
 
   public Date(long date) {
-    jsdate = JsDate.create(date);
+    jsdate = JsDateFactory.create(date);
   }
 
   public Date(String date) {
@@ -109,7 +110,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
    * For use by {@link #createFrom(double)}, should inline away.
    */
   Date(double milliseconds, boolean dummyArgForOverloadResolution) {
-    jsdate = JsDate.create(milliseconds);
+    jsdate = JsDateFactory.create(milliseconds);
   }
 
   public boolean after(Date when) {
@@ -277,7 +278,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
       // Hours passed to the constructor don't match the hours in the created JavaScript Date; this
       // might be due either because they are outside 0-24 range, there was overflow from
       // minutes:secs:millis or because we are in the situation GAP and has to be fixed.
-      JsDate copy = JsDate.create(jsdate.getTime());
+      JsDate copy = JsDateFactory.create(jsdate.getTime());
       copy.setDate(copy.getDate() + 1);
       int timeDiff = jsdate.getTimezoneOffset() - copy.getTimezoneOffset();
 
@@ -294,7 +295,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
         if (badHours + timeDiffHours >= 24) {
           day++;
         }
-        JsDate newTime = JsDate.create(jsdate.getFullYear(), jsdate.getMonth(),
+        JsDate newTime = JsDateFactory.create(jsdate.getFullYear(), jsdate.getMonth(),
             day, requestedHours + timeDiffHours, jsdate.getMinutes() + timeDiffMinutes,
             jsdate.getSeconds(), jsdate.getMilliseconds());
         jsdate.setTime(newTime.getTime());

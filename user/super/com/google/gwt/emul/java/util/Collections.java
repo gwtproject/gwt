@@ -15,8 +15,7 @@
  */
 package java.util;
 
-import static com.google.gwt.core.client.impl.Coercions.ensureInt;
-
+import static java.internal.Coercions.ensureInt;
 import static java.internal.InternalPreconditions.checkArgument;
 import static java.internal.InternalPreconditions.checkElementIndex;
 

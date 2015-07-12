@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "38cf4674_410b525f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-12T17:12:46Z",
+      "side": 1,
+      "message": "typo: introduce",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "48ab48913c4bca7df95144fe31e309ae70709634",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38cf4674_61105689",
+        "filename": "user/src/com/google/gwt/core/Core.gwt.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-12T17:12:46Z",
+      "side": 1,
+      "message": "revert",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 2
+      },
+      "revId": "48ab48913c4bca7df95144fe31e309ae70709634",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "78753eb8_7ce3cd54",
         "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
         "patchSetId": 6
@@ -132,6 +178,138 @@
       "writtenOn": "2015-07-12T14:12:46Z",
       "side": 1,
       "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "48ab48913c4bca7df95144fe31e309ae70709634",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38cf4674_81155a7a",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-12T17:12:46Z",
+      "side": 1,
+      "message": "You could add a \n\n      private static boolean LOGGING_TRUE \u003d \"TRUE\".equals(System.getProperty(\"gwt.logging.enabled\", \"FALSE\"));\n\nand use all these Boolean static variables in the if clause:\n\n    if (LOGGING_TRUE || LOGGING_FALSE || LOGGING_SEVERE || LOGGING+WARNING) { return; }\n\n \nMoreover, as you assert that the user cannot use an undefined value, you can use LOGGING_TRUE in some other conditionnal clauses in order to replace :\n   \n    if (LOGGING_FALSE || LOGGING_SEVERE || LOGGING_WARNING) {\n\nby\n\n   if (!LOGGING_TRUE) {",
+      "revId": "48ab48913c4bca7df95144fe31e309ae70709634",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38cf4674_a1f97ebf",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-12T17:12:46Z",
+      "side": 1,
+      "message": "if (!LOGGING_TRUE) {",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 61
+      },
+      "revId": "48ab48913c4bca7df95144fe31e309ae70709634",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38cf4674_c1f682ce",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-12T17:12:46Z",
+      "side": 1,
+      "message": "if (!LOGGING_TRUE) {",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 61
+      },
+      "revId": "48ab48913c4bca7df95144fe31e309ae70709634",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38cf4674_e1038641",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-12T17:12:46Z",
+      "side": 1,
+      "message": "if (!LOGGING_TRUE) {",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 61
+      },
+      "revId": "48ab48913c4bca7df95144fe31e309ae70709634",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38cf4674_01014a39",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-12T17:12:46Z",
+      "side": 1,
+      "message": "if (!LOGGING_TRUE) {",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 61
+      },
+      "revId": "48ab48913c4bca7df95144fe31e309ae70709634",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38cf4674_212f2eca",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-12T17:12:46Z",
+      "side": 1,
+      "message": "if (!LOGGING_TRUE) {",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 61
+      },
       "revId": "48ab48913c4bca7df95144fe31e309ae70709634",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

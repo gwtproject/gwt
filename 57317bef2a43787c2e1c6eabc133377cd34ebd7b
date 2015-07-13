@@ -69,6 +69,24 @@
       "revId": "57317bef2a43787c2e1c6eabc133377cd34ebd7b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8762a12_063fba77",
+        "filename": "user/test/com/google/gwt/emultest/java/internal/CoercionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-13T21:11:47Z",
+      "side": 1,
+      "message": "If we change the package name, this should work fine I guess. Let\u0027s finalize that before going forward with this one.",
+      "parentUuid": "38cf4674_44a7e0c8",
+      "revId": "57317bef2a43787c2e1c6eabc133377cd34ebd7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

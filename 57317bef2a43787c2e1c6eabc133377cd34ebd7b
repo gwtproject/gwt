@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f8d84e3c_c2eda404",
+        "filename": "user/test/com/google/gwt/emultest/EmulSuite.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-13T19:38:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78753eb8_e20098c2",
+      "revId": "57317bef2a43787c2e1c6eabc133377cd34ebd7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "78753eb8_c2f79c4f",
         "filename": "user/test/com/google/gwt/emultest/java/internal/CoercionsTest.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-13T19:32:32Z",
       "side": 1,
       "message": "This is because it doesn\u0027t compile with java otherwise right? We probably need to find a better solution that works better with j2cl. WDYT?",
+      "revId": "57317bef2a43787c2e1c6eabc133377cd34ebd7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38cf4674_44a7e0c8",
+        "filename": "user/test/com/google/gwt/emultest/java/internal/CoercionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-13T19:38:53Z",
+      "side": 1,
+      "message": "It won\u0027t compile since our emulation is not on the classpath when the java compile happens (it would be illegal). For j2cl we can just super source this one method.",
+      "parentUuid": "78753eb8_c2f79c4f",
       "revId": "57317bef2a43787c2e1c6eabc133377cd34ebd7b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

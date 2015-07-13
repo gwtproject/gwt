@@ -229,6 +229,30 @@
       "revId": "b254bfed8b4863ba383e8237ed35de7d5303732c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78753eb8_62f7a888",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-13T19:26:56Z",
+      "side": 1,
+      "message": "It can never be null (regardless of gwt.xmls) because we are using System.getProperty with two arguments where the second is the value if the variable is not defined.",
+      "parentUuid": "98e912d2_5cd7bd31",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 37
+      },
+      "revId": "b254bfed8b4863ba383e8237ed35de7d5303732c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

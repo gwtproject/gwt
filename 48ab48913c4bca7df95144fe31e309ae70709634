@@ -266,6 +266,30 @@
     },
     {
       "key": {
+        "uuid": "78753eb8_c2e1dcbe",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-13T19:26:56Z",
+      "side": 1,
+      "message": "What Julien is recommending is also early return, which is fine by me.",
+      "parentUuid": "18d6020d_a0f09adb",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 61
+      },
+      "revId": "48ab48913c4bca7df95144fe31e309ae70709634",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38cf4674_c1f682ce",
         "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
         "patchSetId": 6

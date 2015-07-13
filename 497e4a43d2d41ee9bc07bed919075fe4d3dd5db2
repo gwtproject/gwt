@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78753eb8_e232d8aa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-13T19:47:42Z",
+      "side": 1,
+      "message": "Is this class compiling fine with this?",
+      "revId": "497e4a43d2d41ee9bc07bed919075fe4d3dd5db2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78753eb8_a22ce04e",
+        "filename": "dev/core/super/javax/internal/CompilerHint.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-13T19:47:42Z",
+      "side": 1,
+      "message": "javax -\u003e java, also internal -\u003e internal.annotations\n\nIf you did this workaround some class loading permission problems, we should probably find an alternative package and put everything there.",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "497e4a43d2d41ee9bc07bed919075fe4d3dd5db2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

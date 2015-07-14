@@ -133,9 +133,20 @@ public class DefaultCellTableBuilder<T> extends AbstractCellTableBuilder<T> {
       div.endDiv();
       td.endTD();
     }
+    addRowAttributes(tr, rowValue);
 
     // End the row.
     tr.endTR();
+  }
+
+  /**
+   * Hook for subclasses to add their own attributes to each row in the table. The default does
+   * nothing.
+   *
+   * @param tr the row element
+   * @param rowValue the row value
+   */
+  protected void addRowAttributes(TableRowBuilder tr, T rowValue) {
   }
 
   /**

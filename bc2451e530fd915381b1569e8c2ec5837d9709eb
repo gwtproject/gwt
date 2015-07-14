@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "d88d4a46_ee3fdf3d",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-14T12:16:42Z",
+      "side": 1,
+      "message": "No need to instantiate the factory here",
+      "range": {
+        "startLine": 155,
+        "startChar": 18,
+        "endLine": 155,
+        "endChar": 25
+      },
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "389bc68e_e1f12663",
+        "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-14T12:16:42Z",
+      "side": 1,
+      "message": "Move to javaemul/internal",
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18a282bf_80649619",
         "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
         "patchSetId": 5
@@ -19,6 +59,29 @@
     },
     {
       "key": {
+        "uuid": "f8a4cecc_df9cbb46",
+        "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-14T12:16:42Z",
+      "side": 1,
+      "message": "If we want to avoid the clinit we should not do it this way. It is not good for two reasons:\n\n - AbstractHashMap knows about ES6MapFactory which it does not need to know about\n - method should really be static in the first place\n\nIf we rewrite this as:\n\npublic *static* EsMap\u003cV\u003e newJsMap() {\n  if (jsMapCtor \u003d\u003d null) {\n    jsMapCtor \u003d getJsMapConstructor();\n  }\n  return makenativeInstance(jsMapCtor);\n}\n\nwe can avoid all of this.",
+      "range": {
+        "startLine": 29,
+        "startChar": 30,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "78b0de09_7e336db0",
         "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
         "patchSetId": 5
@@ -30,6 +93,40 @@
       "writtenOn": "2015-07-14T02:57:13Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027check that a space is left after a colon on an assembled error message\u0027.",
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d88d4a46_6eedaf3c",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsHashCodeMap.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-14T12:16:42Z",
+      "side": 1,
+      "message": "Move to javaemul/internal",
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8a4cecc_bfa1f784",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalJsStringMap.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-14T12:16:42Z",
+      "side": 1,
+      "message": "Move to javaemul/internal",
       "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

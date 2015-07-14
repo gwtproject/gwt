@@ -60,6 +60,7 @@ import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.Iterator;
@@ -329,8 +330,7 @@ public class Pruner {
 
       // Traverse the call arguments left to right.
       SourceInfo sourceInfo = x.getSourceInfo();
-      JMultiExpression unevaluatedArgumentsForPrunedParameters =
-          new JMultiExpression(sourceInfo);
+      List<JExpression> unevaluatedArgumentsForPrunedParameters = Lists.newArrayList();
       List<JExpression> args = x.getArgs();
       for (int currentArgumentIndex = 0; currentArgumentIndex < args.size();
           ++currentArgumentIndex) {
@@ -340,13 +340,14 @@ public class Pruner {
         if (referencedNonTypes.contains(originalParams.get(currentArgumentIndex))) {
           // Add the current argument to the list of unevaluated arguments and pass the multi
           // expression to the call.
-          unevaluatedArgumentsForPrunedParameters.addExpressions(arg);
-          replacementCall.addArg(unevaluatedArgumentsForPrunedParameters);
+          unevaluatedArgumentsForPrunedParameters.add(arg);
+          replacementCall.addArg(
+              JjsUtils.createOptimizedMultiExpression(unevaluatedArgumentsForPrunedParameters));
           // Reset the accumulating multi expression.
-          unevaluatedArgumentsForPrunedParameters =  new JMultiExpression(sourceInfo);
+          unevaluatedArgumentsForPrunedParameters.clear();
         } else if (arg.hasSideEffects()) {
           // If the argument was pruned and has sideffects accumulate it; otherwise discard.
-          unevaluatedArgumentsForPrunedParameters.addExpressions(arg);
+          unevaluatedArgumentsForPrunedParameters.add(arg);
         }
       }
 
@@ -360,8 +361,9 @@ public class Pruner {
       // for those parameters.
       if (replacementCall.getArgs().isEmpty()) {
         // All parameters have been pruned, replace by (prunedArg1, ..., prunedArgn, m()).
-        unevaluatedArgumentsForPrunedParameters.addExpressions(replacementCall);
-        ctx.replaceMe(unevaluatedArgumentsForPrunedParameters);
+        unevaluatedArgumentsForPrunedParameters.add(replacementCall);
+        ctx.replaceMe(
+            JjsUtils.createOptimizedMultiExpression(unevaluatedArgumentsForPrunedParameters));
         return;
       }
       // Some parameters have been pruned from the end, replace by
@@ -370,10 +372,11 @@ public class Pruner {
       JLocal tempVar =
           createTempLocal(sourceInfo, Iterables.getLast(
               Iterables.filter(originalParams, Predicates.in(referencedNonTypes))).getType());
-      unevaluatedArgumentsForPrunedParameters.addExpressions(0, JProgram.createAssignment(
+      unevaluatedArgumentsForPrunedParameters.add(0, JProgram.createAssignment(
           lastArg.getSourceInfo(), new JLocalRef(sourceInfo, tempVar), lastArg));
-      unevaluatedArgumentsForPrunedParameters.addExpressions(new JLocalRef(sourceInfo, tempVar));
-      replacementCall.setArg(replacementCall.getArgs().size() - 1, unevaluatedArgumentsForPrunedParameters);
+      unevaluatedArgumentsForPrunedParameters.add(new JLocalRef(sourceInfo, tempVar));
+      replacementCall.setArg(replacementCall.getArgs().size() - 1,
+          JjsUtils.createOptimizedMultiExpression(unevaluatedArgumentsForPrunedParameters));
       ctx.replaceMe(replacementCall);
     }
 
@@ -463,7 +466,6 @@ public class Pruner {
             --i;
           }
         }
-
         if (x.getParams().size() != originalParameters.size()) {
           // Parameters were pruned. record the original parameters for the cleanup pass.
           priorParametersByMethod.putAll(x, originalParameters);

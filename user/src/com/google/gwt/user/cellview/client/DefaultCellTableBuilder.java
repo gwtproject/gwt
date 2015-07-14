@@ -84,6 +84,9 @@ public class DefaultCellTableBuilder<T> extends AbstractCellTableBuilder<T> {
     TableRowBuilder tr = startRow();
     tr.className(trClasses.toString());
 
+    // Add custom attributes before any childrens are added.
+    addRowAttributes(tr, rowValue);
+
     // Build the columns.
     int columnCount = cellTable.getColumnCount();
     for (int curColumn = 0; curColumn < columnCount; curColumn++) {
@@ -136,6 +139,16 @@ public class DefaultCellTableBuilder<T> extends AbstractCellTableBuilder<T> {
 
     // End the row.
     tr.endTR();
+  }
+
+  /**
+   * Hook for subclasses to add their own attributes to each row in the table. The default does
+   * nothing.
+   *
+   * @param tr the row element
+   * @param rowValue the row value
+   */
+  protected void addRowAttributes(TableRowBuilder tr, T rowValue) {
   }
 
   /**

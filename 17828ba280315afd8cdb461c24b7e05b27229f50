@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "389bc68e_a47fac5a",
+        "filename": "user/src/com/google/gwt/user/cellview/client/DefaultCellTableBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-14T20:19:42Z",
+      "side": 1,
+      "message": "A more generic name for the method should be better. Something like:\n\n  protected void beforeEndRow(TableRowBuilder tr, T rowValue)",
+      "revId": "17828ba280315afd8cdb461c24b7e05b27229f50",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

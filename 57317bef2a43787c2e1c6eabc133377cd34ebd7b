@@ -105,6 +105,24 @@
       "revId": "57317bef2a43787c2e1c6eabc133377cd34ebd7b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78b0de09_efc8e91c",
+        "filename": "user/test/com/google/gwt/emultest/java/internal/CoercionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-14T22:01:58Z",
+      "side": 1,
+      "message": "If we put source outside of super and don\u0027t use java package, this would work (as we include the source in java compilation). But I understand it may cause some pain but also note that we will need to experience that pain for jsinterop annotations as well as they needed to be compiled as well.",
+      "parentUuid": "389bc68e_e4337431",
+      "revId": "57317bef2a43787c2e1c6eabc133377cd34ebd7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

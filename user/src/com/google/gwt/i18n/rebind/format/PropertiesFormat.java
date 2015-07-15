@@ -33,7 +33,11 @@ import java.util.Set;
  * those that were from this interface but no longer used.  The output file
  * is assumed to be in UTF-8 encoding rather than using the {@code \\uXXXX}
  * escapes.
+ *
+ * @deprecated Use {@link com.google.gwt.i18n.server.PropertyCatalogFactory}
+ * instead.
  */
+@Deprecated
 public class PropertiesFormat implements MessageCatalogFormat {
 
   public String getExtension() {

@@ -37,7 +37,8 @@ public class FindPackages {
    */
   private static final String[] EXCLUSIONS = {
       "^com.example.", "^com.google.gwt.dev(.|$)", "^com.google.gwt.emul.",
-      "^com.google.gwt.examples(.|$)", "^com.google.gwt.i18n.server(.|$)",
+      "^com.google.gwt.examples(.|$)", "^com.google.gwt.i18n.server.impl(.|$)",
+      "^com.google.gwt.i18n.server.testing(.|$)",
       "^com.google.gwt.i18n.tools", "^com.google.gwt.lang",
       "^com.google.gwt.junit(.|$)", "^com.google.gwt.resources.css(.|$)",
       "^com.google.gwt.resources.rg(.|$)",
@@ -77,9 +78,7 @@ public class FindPackages {
    */
   private static final String[] USER_CLASSES = {
       "user/src/com/google/gwt/junit/tools/GWTTestSuite.java",
-      "user/src/com/google/gwt/i18n/rebind/LocaleUtils.java",
-      "user/src/com/google/gwt/i18n/server/GwtLocaleFactoryImpl.java",
-      "user/src/com/google/gwt/i18n/server/GwtLocaleImpl.java"};
+      "user/src/com/google/gwt/i18n/rebind/LocaleUtils.java"};
 
   private static Pattern exclusions;
   static {

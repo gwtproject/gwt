@@ -33,6 +33,7 @@ import com.google.gwt.i18n.rebind.AbstractResource.ResourceList;
 import com.google.gwt.i18n.rebind.AnnotationsResource.AnnotationsError;
 import com.google.gwt.i18n.rebind.format.MessageCatalogFormat;
 import com.google.gwt.i18n.server.KeyGenerator;
+import com.google.gwt.i18n.server.KeyGeneratorAdapter;
 import com.google.gwt.i18n.server.MessageCatalogFactory;
 import com.google.gwt.i18n.server.MessageCatalogFactory.Context;
 import com.google.gwt.i18n.server.MessageCatalogFactory.Writer;
@@ -277,14 +278,16 @@ abstract class AbstractLocalizableImplCreator extends
               Class<? extends MessageCatalogFormat> msgFormatClass
                   = clazz.asSubclass(MessageCatalogFormat.class);
               msgWriter = msgFormatClass.newInstance();
+              logger.log(TreeLogger.WARN, genClassName + " is deprecated. Use "
+                  + "a class that implements MessageCatalogFactory instead.");
             } else if (MessageCatalogFactory.class.isAssignableFrom(clazz)) {
               Class<? extends MessageCatalogFactory> msgFactoryClass
                   = clazz.asSubclass(MessageCatalogFactory.class);
               msgCatFactory = msgFactoryClass.newInstance();
             } else {
               logger.log(TreeLogger.ERROR, "Class specified in @Generate must "
-                  + "either be a subtype of MessageCatalogFormat or "
-                  + "MessageCatalogFactory");
+                  + "either be a subtype of MessageCatalogFormat (deprecated) "
+                  + "or MessageCatalogFactory");
               seenError = true;
               continue;
             }
@@ -452,6 +455,12 @@ abstract class AbstractLocalizableImplCreator extends
     } catch (AnnotationsError e) {
       logger.log(TreeLogger.WARN, "Error getting key generator for "
           + targetClass.getQualifiedSourceName(), e);
+    }
+    if (keyGenerator instanceof KeyGeneratorAdapter) {
+      logger.log(TreeLogger.WARN,
+          "com.google.gwt.i18n.rebind.keygen.KeyGenerator is deprecated, use "
+          + "a class that extends com.google.gwt.i18n.server.KeyGenerator "
+          + "instead.");
     }
   }
 

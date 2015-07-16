@@ -61,6 +61,9 @@
 
   <replace-with class="com.google.gwt.user.client.impl.DOMImplMozilla">
     <when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>
-    <when-property-is name="user.agent" value="gecko1_8"/>
+    <any>
+      <when-property-is name="user.agent" value="gecko1_8"/>
+      <when-property-is name="user.agent" value="ie11"/>
+    </any>
   </replace-with>
 </module>

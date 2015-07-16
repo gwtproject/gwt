@@ -16,6 +16,24 @@
       "revId": "89f6339ff2b0d39254326896d1cc530bf2673a00",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18f0c2db_99899f2f",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-16T19:24:38Z",
+      "side": 1,
+      "message": "I don\u0027t know how eclipse is constantly getting this wrong... For some reason it randomly does this with me :/.\n\nManually added all files.",
+      "parentUuid": "98fcb2c6_8a238fb2",
+      "revId": "89f6339ff2b0d39254326896d1cc530bf2673a00",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

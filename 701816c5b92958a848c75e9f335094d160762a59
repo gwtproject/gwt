@@ -2,6 +2,86 @@
   "comments": [
     {
       "key": {
+        "uuid": "98fcb2c6_cad2a7fa",
+        "filename": "dev/core/super/javaemul/internal/StackTraceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T18:24:59Z",
+      "side": 1,
+      "message": "Remove the one that returns String[] ?",
+      "revId": "701816c5b92958a848c75e9f335094d160762a59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98fcb2c6_eacd635c",
+        "filename": "dev/core/super/javaemul/internal/StackTraceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T18:24:59Z",
+      "side": 1,
+      "message": "unsafecast",
+      "range": {
+        "startLine": 408,
+        "startChar": 33,
+        "endLine": 408,
+        "endChar": 37
+      },
+      "revId": "701816c5b92958a848c75e9f335094d160762a59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98fcb2c6_0a30bfee",
+        "filename": "dev/core/super/javaemul/internal/StackTraceCreator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T18:24:59Z",
+      "side": 1,
+      "message": "you changed a lot of visibilities probably due to some intermediate state. Can you revert those back?",
+      "range": {
+        "startLine": 417,
+        "startChar": 2,
+        "endLine": 417,
+        "endChar": 8
+      },
+      "revId": "701816c5b92958a848c75e9f335094d160762a59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98fcb2c6_aad76be8",
+        "filename": "user/src/com/google/gwt/core/client/impl/MethodNameResolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T18:24:59Z",
+      "side": 1,
+      "message": "Not needed as it is package visible.",
+      "revId": "701816c5b92958a848c75e9f335094d160762a59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3837466d_301ad675",
         "filename": "user/src/com/google/gwt/core/client/impl/MethodNameResolver.java",
         "patchSetId": 1
@@ -13,6 +93,23 @@
       "writtenOn": "2015-07-16T17:26:20Z",
       "side": 1,
       "message": "[info] First sentence should end with a period.",
+      "revId": "701816c5b92958a848c75e9f335094d160762a59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98fcb2c6_8adcaf0b",
+        "filename": "user/test/com/google/gwt/dev/jjs/CompilerSuite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T18:24:59Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we move this one as well?",
       "revId": "701816c5b92958a848c75e9f335094d160762a59",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -15,9 +15,9 @@
  */
 package java.util;
 
-import static java.internal.InternalPreconditions.checkNotNull;
-
 import java.io.Serializable;
+
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 /**
  * Implements a set using a TreeMap. <a

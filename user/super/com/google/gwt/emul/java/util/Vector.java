@@ -15,9 +15,9 @@
  */
 package java.util;
 
-import static java.internal.InternalPreconditions.checkElement;
-
 import java.io.Serializable;
+
+import static javaemul.internal.InternalPreconditions.checkElement;
 
 /**
  * To keep performance characteristics in line with Java community expectations,

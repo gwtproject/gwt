@@ -17,10 +17,10 @@ package java.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-import static java.internal.InternalPreconditions.checkCriticalArgument;
-import static java.internal.InternalPreconditions.checkNotNull;
-
 import java.io.Serializable;
+
+import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 /**
  * The first-class representation of an enumeration.

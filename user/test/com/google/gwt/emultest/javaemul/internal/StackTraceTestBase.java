@@ -13,11 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.client.impl;
+package com.google.gwt.emultest.javaemul.internal;
 
-import static com.google.gwt.core.client.impl.StackTraceExamples.JAVA;
-import static com.google.gwt.core.client.impl.StackTraceExamples.RECURSION;
-import static com.google.gwt.core.client.impl.StackTraceExamples.TYPE_ERROR;
+import static com.google.gwt.emultest.javaemul.internal.StackTraceExamples.JAVA;
+import static com.google.gwt.emultest.javaemul.internal.StackTraceExamples.RECURSION;
+import static com.google.gwt.emultest.javaemul.internal.StackTraceExamples.TYPE_ERROR;
 
 import com.google.gwt.junit.client.GWTTestCase;
 

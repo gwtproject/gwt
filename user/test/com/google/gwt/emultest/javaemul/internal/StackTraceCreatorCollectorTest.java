@@ -13,15 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.client.impl;
-
-import static com.google.gwt.core.client.impl.StackTraceCreator.extractFunctionName;
+package com.google.gwt.emultest.javaemul.internal;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.impl.StackTraceCreator.CollectorModern;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
+
+import static javaemul.internal.StackTraceCreator.extractFunctionName;
+
+import javaemul.internal.StackTraceCreator.CollectorModern;
 
 /**
  * Tests different {@link StackTraceCreator.Collector} implementations.
@@ -31,7 +32,7 @@ public class StackTraceCreatorCollectorTest extends GWTTestCase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.core.Core";
+    return "com.google.gwt.emultest.EmulSuite";
   }
 
   public void testExtractName() {

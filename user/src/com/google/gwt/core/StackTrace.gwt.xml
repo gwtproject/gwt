@@ -33,21 +33,5 @@
   <set-property name="compiler.stackMode" value="native" />
   <set-property name="compiler.stackMode" value="emulated" >
     <when-property-is name="compiler.emulatedStack" value="true" />
-  </set-property>  
-
-  <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorEmulated">
-    <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
-    <when-property-is name="compiler.stackMode" value="emulated" />
-  </replace-with>
-
-  <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorModernNoSourceMap">
-    <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
-    <when-property-is name="compiler.stackMode" value="native" />
-  </replace-with>
-
-
-  <replace-with class="com.google.gwt.core.client.impl.StackTraceCreator.CollectorNull">
-    <when-type-is class="com.google.gwt.core.client.impl.StackTraceCreator.Collector" />
-    <when-property-is name="compiler.stackMode" value="strip" />
-  </replace-with>
+  </set-property>
 </module>

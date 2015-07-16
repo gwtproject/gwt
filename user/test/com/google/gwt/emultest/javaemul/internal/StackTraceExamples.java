@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.client.impl;
+package com.google.gwt.emultest.javaemul.internal;
 
 import static junit.framework.Assert.fail;
 
@@ -85,8 +85,8 @@ public class StackTraceExamples {
       }
 
       return [
-        @StackTraceCreator::getFunctionName(*)(arguments.callee),
-        @StackTraceCreator::getFunctionName(*)(arguments.callee.caller),
+        @javaemul.internal.StackTraceCreator::getFunctionName(*)(arguments.callee),
+        @javaemul.internal.StackTraceCreator::getFunctionName(*)(arguments.callee.caller),
       ];
     }
     return native1();

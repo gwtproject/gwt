@@ -15,7 +15,6 @@
  */
 package com.google.gwt.dev.jjs;
 
-import com.google.gwt.core.client.impl.StackTraceLineNumbersTest;
 import com.google.gwt.dev.jjs.scriptonly.ScriptOnlyTest;
 import com.google.gwt.dev.jjs.test.AnnotationsTest;
 import com.google.gwt.dev.jjs.test.AutoboxTest;
@@ -55,6 +54,7 @@ import com.google.gwt.dev.jjs.test.UnstableGeneratorTest;
 import com.google.gwt.dev.jjs.test.UnusedImportsTest;
 import com.google.gwt.dev.jjs.test.VarargsTest;
 import com.google.gwt.dev.jjs.test.singlejso.TypeHierarchyTest;
+import com.google.gwt.emultest.javaemul.internal.StackTraceLineNumbersTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
 
 import junit.framework.Test;

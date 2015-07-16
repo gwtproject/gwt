@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.client.impl;
+package com.google.gwt.emultest.javaemul.internal;
 
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
@@ -26,7 +26,7 @@ public class StackTraceStripTest extends StackTraceTestBase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.core.StackTraceStrip";
+    return "com.google.gwt.emultest.StackTraceStrip";
   }
 
   @Override

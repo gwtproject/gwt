@@ -16,8 +16,8 @@
 package com.google.gwt.lang;
 
 import com.google.gwt.core.client.JavaScriptException;
-import com.google.gwt.core.client.impl.StackTraceCreator;
 
+import javaemul.internal.StackTraceCreator;
 import javaemul.internal.annotations.DoNotInline;
 
 /**

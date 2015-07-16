@@ -15,7 +15,6 @@
  */
 package com.google.gwt.emultest;
 
-import com.google.gwt.emultest.java.internal.CoercionsTest;
 import com.google.gwt.emultest.java.io.ByteArrayInputStreamTest;
 import com.google.gwt.emultest.java.io.ByteArrayOutputStreamTest;
 import com.google.gwt.emultest.java.io.InputStreamTest;
@@ -42,6 +41,12 @@ import com.google.gwt.emultest.java.security.MessageDigestTest;
 import com.google.gwt.emultest.java.sql.SqlDateTest;
 import com.google.gwt.emultest.java.sql.SqlTimeTest;
 import com.google.gwt.emultest.java.sql.SqlTimestampTest;
+import com.google.gwt.emultest.javaemul.internal.CoercionsTest;
+import com.google.gwt.emultest.javaemul.internal.StackTraceCreatorCollectorTest;
+import com.google.gwt.emultest.javaemul.internal.StackTraceDevTest;
+import com.google.gwt.emultest.javaemul.internal.StackTraceEmulTest;
+import com.google.gwt.emultest.javaemul.internal.StackTraceNativeTest;
+import com.google.gwt.emultest.javaemul.internal.StackTraceStripTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
 
 import junit.framework.Test;
@@ -58,7 +63,6 @@ public class EmulSuite {
     GWTTestSuite suite = new GWTTestSuite("Tests for com.google.gwt.emul.java");
 
     // $JUnit-BEGIN$
-    suite.addTestSuite(CoercionsTest.class);
     //-- java.io
     suite.addTestSuite(ByteArrayInputStreamTest.class);
     suite.addTestSuite(ByteArrayOutputStreamTest.class);
@@ -94,6 +98,14 @@ public class EmulSuite {
     suite.addTestSuite(SqlDateTest.class);
     suite.addTestSuite(SqlTimeTest.class);
     suite.addTestSuite(SqlTimestampTest.class);
+
+    //-- javaemul.internal
+    suite.addTestSuite(CoercionsTest.class);
+    suite.addTestSuite(StackTraceCreatorCollectorTest.class);
+    suite.addTestSuite(StackTraceDevTest.class);
+    suite.addTestSuite(StackTraceEmulTest.class);
+    suite.addTestSuite(StackTraceNativeTest.class);
+    suite.addTestSuite(StackTraceStripTest.class);
     // $JUnit-END$
 
     return suite;

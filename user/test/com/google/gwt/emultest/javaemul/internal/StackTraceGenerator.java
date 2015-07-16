@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.client.impl;
+package com.google.gwt.emultest.javaemul.internal;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -24,7 +24,7 @@ public class StackTraceGenerator extends GWTTestCase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.core.StackTraceNative";
+    return "com.google.gwt.emultest.StackTraceNative";
   }
 
   public void testPrintStackTrace() {

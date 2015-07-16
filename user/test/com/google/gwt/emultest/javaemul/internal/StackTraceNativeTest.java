@@ -13,14 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.core.client.impl;
+package com.google.gwt.emultest.javaemul.internal;
 
-import static com.google.gwt.core.client.impl.StackTraceExamples.TYPE_ERROR;
+import static com.google.gwt.emultest.javaemul.internal.StackTraceExamples.TYPE_ERROR;
 
-import com.google.gwt.core.client.impl.StackTraceCreator.CollectorLegacy;
-import com.google.gwt.core.client.impl.StackTraceCreator.CollectorModern;
+import com.google.gwt.core.client.impl.Impl;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
+
+import javaemul.internal.StackTraceCreator;
+import javaemul.internal.StackTraceCreator.CollectorLegacy;
+import javaemul.internal.StackTraceCreator.CollectorModern;
 
 /**
  * Tests {@link StackTraceCreator} in the native mode.
@@ -30,7 +33,7 @@ public class StackTraceNativeTest extends StackTraceTestBase {
 
   @Override
   public String getModuleName() {
-    return "com.google.gwt.core.StackTraceNative";
+    return "com.google.gwt.emultest.StackTraceNative";
   }
 
   @Override
@@ -39,10 +42,10 @@ public class StackTraceNativeTest extends StackTraceTestBase {
         Impl.getNameOf("@java.lang.Throwable::fillInStackTrace()"),
         Impl.getNameOf("@java.lang.Throwable::new(Ljava/lang/String;)"),
         Impl.getNameOf("@java.lang.Exception::new(Ljava/lang/String;)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException2(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException1(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::getLiveException(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceTestBase::testTraceJava()"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwException2(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwException1(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::getLiveException(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceTestBase::testTraceJava()"),
     };
   }
 
@@ -52,24 +55,24 @@ public class StackTraceNativeTest extends StackTraceTestBase {
         Impl.getNameOf("@java.lang.Throwable::fillInStackTrace()"),
         Impl.getNameOf("@java.lang.Throwable::new(Ljava/lang/String;)"),
         Impl.getNameOf("@java.lang.Exception::new(Ljava/lang/String;)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException2(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException1(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwRecursive(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwRecursive(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwRecursive(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException2(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException1(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::getLiveException(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceTestBase::testTraceRecursion()"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwException2(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwException1(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwRecursive(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwRecursive(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwRecursive(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwException2(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwException1(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::getLiveException(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceTestBase::testTraceRecursion()"),
     };
 
     final String[] expectedLegacy = {
         Impl.getNameOf("@java.lang.Throwable::fillInStackTrace()"),
         Impl.getNameOf("@java.lang.Throwable::new(Ljava/lang/String;)"),
         Impl.getNameOf("@java.lang.Exception::new(Ljava/lang/String;)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException2(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException1(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwRecursive(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwException2(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwException1(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwRecursive(*)"),
     };
 
     return isLegacyCollector() ? expectedLegacy : expectedModern;
@@ -81,17 +84,17 @@ public class StackTraceNativeTest extends StackTraceTestBase {
     final String[] full = {
         nativeMethodNames[0],
         nativeMethodNames[1],
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwJse(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException2(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::throwException1(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::getLiveException(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceTestBase::assertJse(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwJse(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwException2(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::throwException1(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::getLiveException(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceTestBase::assertJse(*)"),
     };
 
     final String[] limited = {
         Impl.getNameOf("@com.google.gwt.lang.Exceptions::wrap(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceExamples::getLiveException(*)"),
-        Impl.getNameOf("@com.google.gwt.core.client.impl.StackTraceTestBase::assertJse(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceExamples::getLiveException(*)"),
+        Impl.getNameOf("@com.google.gwt.emultest.javaemul.internal.StackTraceTestBase::assertJse(*)"),
     };
 
     // For legacy browsers and non-error javascript exceptions (e.g. throw "string"), we can only

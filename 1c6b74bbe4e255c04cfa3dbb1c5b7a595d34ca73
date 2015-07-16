@@ -2,6 +2,63 @@
   "comments": [
     {
       "key": {
+        "uuid": "3837466d_c737320b",
+        "filename": "dev/core/super/javaemul/internal/SimpleConsoleLogHandler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T02:51:59Z",
+      "side": 1,
+      "message": "Only used by logger. Can you move it there and change the visibility of the class?",
+      "revId": "1c6b74bbe4e255c04cfa3dbb1c5b7a595d34ca73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3837466d_87936a62",
+        "filename": "user/src/com/google/gwt/logging/LogImpl.gwt.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T02:51:59Z",
+      "side": 1,
+      "message": "We already put the logic in the java code so this shouldn\u0027t be needed, right?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 17
+      },
+      "revId": "1c6b74bbe4e255c04cfa3dbb1c5b7a595d34ca73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3837466d_479d6269",
+        "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T02:51:59Z",
+      "side": 1,
+      "message": "Can you keep the original comment:\n\n\u003c!-- Disable simple logging as the app already opted into Logging by inheriting this module --\u003e",
+      "revId": "1c6b74bbe4e255c04cfa3dbb1c5b7a595d34ca73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3837466d_c1a6429a",
         "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
         "patchSetId": 10

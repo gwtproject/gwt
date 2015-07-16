@@ -36,6 +36,7 @@ public class StackTraceNativeTest extends StackTraceTestBase {
   @Override
   protected String[] getTraceJava() {
     return new String[] {
+        Impl.getNameOf("@java.lang.Throwable::captureStackTrace(*)"),
         Impl.getNameOf("@java.lang.Throwable::fillInStackTrace()"),
         Impl.getNameOf("@java.lang.Throwable::new(Ljava/lang/String;)"),
         Impl.getNameOf("@java.lang.Exception::new(Ljava/lang/String;)"),
@@ -49,6 +50,7 @@ public class StackTraceNativeTest extends StackTraceTestBase {
   @Override
   protected String[] getTraceRecursion() {
     final String[] expectedModern = {
+        Impl.getNameOf("@java.lang.Throwable::captureStackTrace(*)"),
         Impl.getNameOf("@java.lang.Throwable::fillInStackTrace()"),
         Impl.getNameOf("@java.lang.Throwable::new(Ljava/lang/String;)"),
         Impl.getNameOf("@java.lang.Exception::new(Ljava/lang/String;)"),
@@ -64,6 +66,7 @@ public class StackTraceNativeTest extends StackTraceTestBase {
     };
 
     final String[] expectedLegacy = {
+        Impl.getNameOf("@java.lang.Throwable::captureStackTrace(*)"),
         Impl.getNameOf("@java.lang.Throwable::fillInStackTrace()"),
         Impl.getNameOf("@java.lang.Throwable::new(Ljava/lang/String;)"),
         Impl.getNameOf("@java.lang.Exception::new(Ljava/lang/String;)"),

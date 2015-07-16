@@ -31,7 +31,7 @@ public class StackTraceCreator {
    * trace. This is just a safe guard just in case if {@code fillInStackTrace} doesn't show up in
    * the stack trace for some reason.
    */
-  private static final int DROP_FRAME_LIMIT = 5;
+  private static final int DROP_FRAME_LIMIT = 6;
 
   /**
    * Line number used in a stack trace when it is unknown.

@@ -19,8 +19,6 @@ import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkState;
 
-import com.google.gwt.core.client.impl.StackTraceCreator;
-
 import java.io.PrintStream;
 import java.io.Serializable;
 
@@ -113,9 +111,13 @@ public class Throwable implements Serializable {
    */
   public Throwable fillInStackTrace() {
     stackTrace = null; // Invalidate the cached trace
-    StackTraceCreator.captureStackTrace(this, detailMessage);
+    captureStackTrace(this, detailMessage);
     return this;
   }
+
+  private static native void captureStackTrace(Throwable t, String detailMessage) /*-{
+    @com.google.gwt.core.client.impl.StackTraceCreator::captureStackTrace(*)(t, detailMessage);
+  }-*/;
 
   public Throwable getCause() {
     return cause;
@@ -136,10 +138,14 @@ public class Throwable implements Serializable {
    */
   public StackTraceElement[] getStackTrace() {
     if (stackTrace == null) {
-      stackTrace = StackTraceCreator.constructJavaStackTrace(this);
+      stackTrace = constructJavaStackTrace(this);
     }
     return stackTrace;
   }
+
+  private static native StackTraceElement[] constructJavaStackTrace(Throwable t) /*-{
+    return @com.google.gwt.core.client.impl.StackTraceCreator::constructJavaStackTrace(*)(t);
+  }-*/;
 
   /**
    * Returns the array of Exception that this one suppressedExceptions.

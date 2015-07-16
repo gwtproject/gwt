@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "b89c16d9_8db88116",
+        "filename": "user/src/com/google/gwt/logging/LogImpl.gwt.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-16T22:36:59Z",
+      "side": 1,
+      "message": "As discussed offline, there is not easy way of leaving properties undefined in GWT (bindings don\u0027t work, SDM blows up with multiple permutations)\nFixing this would be a major thing in the compiler which is probably not worth it. However it would be nice to get rid of the duplication in code and gwt.xml files, but it seems not worth our time right now.",
+      "parentUuid": "d8754a3f_2e44c768",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 17
+      },
+      "revId": "1c6b74bbe4e255c04cfa3dbb1c5b7a595d34ca73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3837466d_479d6269",
         "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
         "patchSetId": 10

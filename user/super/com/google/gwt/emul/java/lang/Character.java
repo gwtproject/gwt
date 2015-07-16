@@ -15,9 +15,9 @@
  */
 package java.lang;
 
-import static java.internal.InternalPreconditions.checkCriticalArgument;
-
 import java.io.Serializable;
+
+import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 
 /**
  * Wraps a native <code>char</code> as an object.

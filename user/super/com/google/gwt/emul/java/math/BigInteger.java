@@ -34,11 +34,11 @@
  */
 package java.math;
 
-import static java.internal.InternalPreconditions.checkCriticalArgument;
-import static java.internal.InternalPreconditions.checkNotNull;
-
 import java.io.Serializable;
 import java.util.Random;
+
+import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 /**
  * This class represents immutable integer numbers of arbitrary length. Large

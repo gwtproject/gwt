@@ -17,11 +17,11 @@ package java.util;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-import static java.internal.InternalPreconditions.checkElement;
-import static java.internal.InternalPreconditions.checkState;
-
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
+
+import static javaemul.internal.InternalPreconditions.checkElement;
+import static javaemul.internal.InternalPreconditions.checkState;
 
 /**
  * A simple wrapper around JavaScriptObject to provide {@link java.util.Map}-like semantics for any

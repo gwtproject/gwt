@@ -34,10 +34,10 @@
  */
 package java.math;
 
-import static java.internal.InternalPreconditions.checkCriticalArgument;
-import static java.internal.InternalPreconditions.checkNotNull;
-
 import java.io.Serializable;
+
+import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 /**
  * Immutable objects describing settings such as rounding mode and digit

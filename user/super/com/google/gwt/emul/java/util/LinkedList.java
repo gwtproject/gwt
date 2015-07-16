@@ -15,11 +15,11 @@
  */
 package java.util;
 
-import static java.internal.InternalPreconditions.checkElement;
-import static java.internal.InternalPreconditions.checkPositionIndex;
-import static java.internal.InternalPreconditions.checkState;
-
 import java.io.Serializable;
+
+import static javaemul.internal.InternalPreconditions.checkElement;
+import static javaemul.internal.InternalPreconditions.checkPositionIndex;
+import static javaemul.internal.InternalPreconditions.checkState;
 
 /**
  * Linked list implementation. <a

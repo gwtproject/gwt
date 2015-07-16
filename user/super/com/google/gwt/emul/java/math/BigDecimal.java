@@ -34,9 +34,9 @@
  */
 package java.math;
 
-import static java.internal.InternalPreconditions.checkNotNull;
-
 import java.io.Serializable;
+
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 /**
  * This class represents immutable arbitrary precision decimal numbers. Each

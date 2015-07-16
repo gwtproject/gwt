@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "98fcb2c6_0a443f68",
+        "filename": "dev/core/super/javaemul/internal/SimpleConsoleLogHandler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T21:02:03Z",
+      "side": 1,
+      "message": "Also keep in mind, old dev-mode doesn\u0027t use our emul.",
+      "parentUuid": "18f0c2db_1617bc4d",
+      "revId": "1c6b74bbe4e255c04cfa3dbb1c5b7a595d34ca73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3837466d_87936a62",
         "filename": "user/src/com/google/gwt/logging/LogImpl.gwt.xml",
         "patchSetId": 10
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "The current logic in the java code only overrides logging if logging values are not set (undefined). So SDM will not force logging on if somenoe explictly sets a logging level, so right now this is added.",
       "parentUuid": "3837466d_87936a62",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 17
+      },
+      "revId": "1c6b74bbe4e255c04cfa3dbb1c5b7a595d34ca73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8754a3f_2e44c768",
+        "filename": "user/src/com/google/gwt/logging/LogImpl.gwt.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T21:02:03Z",
+      "side": 1,
+      "message": "I think I see what you mean. Do we need to explicitly set the logging enabled where it is defined? Can\u0027t we just leave it undefined?",
+      "parentUuid": "18f0c2db_563664ef",
       "range": {
         "startLine": 21,
         "startChar": 0,

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "18f0c2db_1617bc4d",
+        "filename": "dev/core/super/javaemul/internal/SimpleConsoleLogHandler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-16T10:34:13Z",
+      "side": 1,
+      "message": "This is used in a rebind rule (LoggingDisabled.gwt.xml) so moving it into a hidden super place will break old dev mode.\n\nThe rebind rule only is true for sdm being enabled so this is fine, moved.",
+      "parentUuid": "3837466d_c737320b",
+      "revId": "1c6b74bbe4e255c04cfa3dbb1c5b7a595d34ca73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3837466d_87936a62",
         "filename": "user/src/com/google/gwt/logging/LogImpl.gwt.xml",
         "patchSetId": 10
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "18f0c2db_563664ef",
+        "filename": "user/src/com/google/gwt/logging/LogImpl.gwt.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-16T10:34:13Z",
+      "side": 1,
+      "message": "The current logic in the java code only overrides logging if logging values are not set (undefined). So SDM will not force logging on if somenoe explictly sets a logging level, so right now this is added.",
+      "parentUuid": "3837466d_87936a62",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 17
+      },
+      "revId": "1c6b74bbe4e255c04cfa3dbb1c5b7a595d34ca73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3837466d_479d6269",
         "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
         "patchSetId": 10
@@ -53,6 +95,24 @@
       "writtenOn": "2015-07-16T02:51:59Z",
       "side": 1,
       "message": "Can you keep the original comment:\n\n\u003c!-- Disable simple logging as the app already opted into Logging by inheriting this module --\u003e",
+      "revId": "1c6b74bbe4e255c04cfa3dbb1c5b7a595d34ca73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18f0c2db_3633e0ff",
+        "filename": "user/src/com/google/gwt/logging/LoggingDisabled.gwt.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-16T10:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3837466d_479d6269",
       "revId": "1c6b74bbe4e255c04cfa3dbb1c5b7a595d34ca73",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

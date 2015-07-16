@@ -40,8 +40,9 @@ public class SystemGetPropertyTest extends GWTTestCase {
 
   @DoNotRunWith(Platform.Devel)
   public void testConfigurationProperties() {
-    assertEquals("conf", System.getProperty("someConfigurationProperty"));
-    assertEquals("conf", System.getProperty("someConfigurationProperty", "default"));
+    String someConfig = System.getProperty("someConfigurationProperty");
+    assertEquals("conf", someConfig);
+    assertEquals("conf", System.getProperty("someConfigurationProperty", someConfig));
   }
 
   public void testDefaultValues() {

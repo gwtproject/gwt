@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "3837466d_07a75ac9",
+        "filename": "user/src/com/google/gwt/logging/LogImpl.gwt.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T02:51:59Z",
+      "side": 1,
+      "message": "Ok, I see that but let\u0027s still move the properties there as it where they are used and consumed and remove the dep to this module from emul.gwt.xml.",
+      "parentUuid": "38e906fb_91997cfd",
+      "revId": "9a862317e53abf5472acd0b86252b0b329b65794",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "78b0de09_2f9db16a",
         "filename": "user/src/com/google/gwt/logging/Logging.gwt.xml",
         "patchSetId": 8
@@ -418,6 +436,30 @@
       "side": 1,
       "message": "You can\u0027t do it this way with current compiler since System.getProperty can only be called with string literals, this ends up being a compile error.\n\nI think this default thing is mostly about j2cl (the default for GWT comes from the GWT.xml file anyway).\n\nEither we allow this kind of constant propagation in the gwt compiler or we can not do it this way for j2cl.\n\nFor now I have choosen to implement it in the static block.",
       "parentUuid": "78b0de09_cfa1ad84",
+      "range": {
+        "startLine": 30,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 73
+      },
+      "revId": "9a862317e53abf5472acd0b86252b0b329b65794",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3837466d_cac2d77a",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T02:51:59Z",
+      "side": 1,
+      "message": "Fixed it in https://gwt-review.googlesource.com/#/c/13160/",
+      "parentUuid": "985112ab_dc486d06",
       "range": {
         "startLine": 30,
         "startChar": 1,

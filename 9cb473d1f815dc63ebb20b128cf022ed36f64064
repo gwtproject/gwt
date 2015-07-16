@@ -51,6 +51,24 @@
       "revId": "9cb473d1f815dc63ebb20b128cf022ed36f64064",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18f0c2db_79f15bde",
+        "filename": "user/src/com/google/gwt/i18n/rebind/format/PropertiesFormat.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-07-16T16:06:07Z",
+      "side": 1,
+      "message": "Yes there are occurrences are in : \n \n    user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.ui.xml\n    samples/showcase/src/com/google/gwt/sample/showcase/client/content/cell/ContactInfoForm.ui.xml\n    samples/showcase/src/com/google/gwt/sample/showcase/client/ShowcaseShell.ui.xml",
+      "parentUuid": "18f0c2db_d695b492",
+      "revId": "9cb473d1f815dc63ebb20b128cf022ed36f64064",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

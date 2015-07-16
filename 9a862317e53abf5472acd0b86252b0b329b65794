@@ -487,6 +487,30 @@
       "revId": "9a862317e53abf5472acd0b86252b0b329b65794",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8754a3f_eea6bfcb",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-16T21:02:03Z",
+      "side": 1,
+      "message": "This is submitted. You can switch to other version.",
+      "parentUuid": "3837466d_cac2d77a",
+      "range": {
+        "startLine": 30,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 73
+      },
+      "revId": "9a862317e53abf5472acd0b86252b0b329b65794",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

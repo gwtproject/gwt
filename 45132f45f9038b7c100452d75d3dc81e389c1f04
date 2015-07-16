@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98fcb2c6_aa59ab5d",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/SystemGetPropertyTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-07-16T16:49:36Z",
+      "side": 1,
+      "message": "it is more meaningful if someConfig is a different value, so that we know for sure it is not returning the default.",
+      "range": {
+        "startLine": 45,
+        "startChar": 73,
+        "endLine": 45,
+        "endChar": 83
+      },
+      "revId": "45132f45f9038b7c100452d75d3dc81e389c1f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d81c6a21_d62d04ce",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-16T22:38:37Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "5f5b9dc39d2770bbe521af3b72bf0fc316256f6b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d81c6a21_362398e3",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-16T22:38:37Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "5f5b9dc39d2770bbe521af3b72bf0fc316256f6b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d81c6a21_16201cd3",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-16T22:38:37Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "5f5b9dc39d2770bbe521af3b72bf0fc316256f6b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d81c6a21_761d1093",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-16T22:38:37Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "5f5b9dc39d2770bbe521af3b72bf0fc316256f6b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d81c6a21_561a949c",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-16T22:38:37Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "5f5b9dc39d2770bbe521af3b72bf0fc316256f6b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d81c6a21_b64fa893",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-16T22:38:37Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "5f5b9dc39d2770bbe521af3b72bf0fc316256f6b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d81c6a21_96542c27",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-16T22:38:37Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "5f5b9dc39d2770bbe521af3b72bf0fc316256f6b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d81c6a21_f659205d",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-16T22:38:37Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "5f5b9dc39d2770bbe521af3b72bf0fc316256f6b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

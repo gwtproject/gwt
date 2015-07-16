@@ -16,6 +16,23 @@
       "revId": "9cb473d1f815dc63ebb20b128cf022ed36f64064",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "985112ab_a21e9a62",
+        "filename": "user/src/com/google/gwt/i18n/rebind/format/PropertiesFormat.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-07-16T14:28:15Z",
+      "side": 1,
+      "message": "This is used in some ui.xml in examples and test, should we change those files ?",
+      "revId": "9cb473d1f815dc63ebb20b128cf022ed36f64064",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3837466d_0ac99f1e",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-17T03:24:06Z",
+      "side": 1,
+      "message": "ConcurrentModificationDetector is designed to work on any collection not only Map. And the reason for shared ConcurrentModificationDetector class is so that the checks can be removed easily.",
+      "parentUuid": "389bc68e_21114e08",
+      "range": {
+        "startLine": 109,
+        "startChar": 6,
+        "endLine": 109,
+        "endChar": 27
+      },
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d88d4a46_ee3fdf3d",
         "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2015-07-14T12:16:42Z",
       "side": 1,
       "message": "No need to instantiate the factory here",
+      "range": {
+        "startLine": 155,
+        "startChar": 18,
+        "endLine": 155,
+        "endChar": 25
+      },
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8754a3f_b451e8dd",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-17T03:24:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d88d4a46_ee3fdf3d",
       "range": {
         "startLine": 155,
         "startChar": 18,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "d8754a3f_54d8c4e5",
+        "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-17T03:24:06Z",
+      "side": 1,
+      "message": "I looked at it. It seems unlikely that StringHashCache will immediately benefit from this. Let\u0027s keep it here and we will move if it ends up being useful there.",
+      "parentUuid": "389bc68e_e1f12663",
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18a282bf_80649619",
         "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
         "patchSetId": 5
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "3837466d_2ae2639c",
+        "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-17T03:24:06Z",
+      "side": 1,
+      "message": "Good point.",
+      "parentUuid": "18a282bf_80649619",
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8a4cecc_df9cbb46",
         "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
         "patchSetId": 5
@@ -93,6 +177,30 @@
       "writtenOn": "2015-07-14T12:16:42Z",
       "side": 1,
       "message": "If we want to avoid the clinit we should not do it this way. It is not good for two reasons:\n\n - AbstractHashMap knows about ES6MapFactory which it does not need to know about\n - method should really be static in the first place\n\nIf we rewrite this as:\n\npublic *static* EsMap\u003cV\u003e newJsMap() {\n  if (jsMapCtor \u003d\u003d null) {\n    jsMapCtor \u003d getJsMapConstructor();\n  }\n  return makenativeInstance(jsMapCtor);\n}\n\nwe can avoid all of this.",
+      "range": {
+        "startLine": 29,
+        "startChar": 30,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3837466d_ea3ebb79",
+        "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-17T03:24:06Z",
+      "side": 1,
+      "message": "With clinit you need to call an empty function for each newJsMap call, now you need to check if the field is initialized for each newJsMap call; that\u0027s not much different than having clinits.\n\nThis was probably a premature optimization as there will be 2 calls two an empty function instead of 1. I\u0027ll remove the optimization.",
+      "parentUuid": "f8a4cecc_df9cbb46",
       "range": {
         "startLine": 29,
         "startChar": 30,
@@ -145,6 +253,30 @@
     },
     {
       "key": {
+        "uuid": "d8754a3f_54476421",
+        "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-17T03:24:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8a6d6d3_5da9db65",
+      "range": {
+        "startLine": 110,
+        "startChar": 35,
+        "endLine": 110,
+        "endChar": 37
+      },
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d88d4a46_cef4e3ff",
         "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
         "patchSetId": 5
@@ -156,6 +288,30 @@
       "writtenOn": "2015-07-14T12:33:01Z",
       "side": 1,
       "message": "I am assuming we are going to turn these into interfaces eventually?",
+      "range": {
+        "startLine": 157,
+        "startChar": 15,
+        "endLine": 157,
+        "endChar": 26
+      },
+      "revId": "bc2451e530fd915381b1569e8c2ec5837d9709eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3837466d_aa38b38c",
+        "filename": "user/super/com/google/gwt/emul/java/util/ES6MapFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-17T03:24:06Z",
+      "side": 1,
+      "message": "Yes, they will be JsType interfaces.",
+      "parentUuid": "d88d4a46_cef4e3ff",
       "range": {
         "startLine": 157,
         "startChar": 15,

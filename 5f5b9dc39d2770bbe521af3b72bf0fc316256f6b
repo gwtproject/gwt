@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d8754a3f_34cf389f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-17T00:09:53Z",
+      "side": 1,
+      "message": "no longer true...",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 49
+      },
+      "revId": "5f5b9dc39d2770bbe521af3b72bf0fc316256f6b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d81c6a21_d62d04ce",
         "filename": "user/super/com/google/gwt/emul/java/util/logging/Level.java",
         "patchSetId": 12

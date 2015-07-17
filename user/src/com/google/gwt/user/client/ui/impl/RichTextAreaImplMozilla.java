@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -14,6 +14,8 @@
  * the License.
  */
 package com.google.gwt.user.client.ui.impl;
+
+import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * Mozilla-specific implementation of rich-text editing.
@@ -26,6 +28,96 @@ public class RichTextAreaImplMozilla extends RichTextAreaImplStandard {
    */
   boolean isFirstFocus;
 
+  /**
+   * It is necessary to keep the last position to insert
+   * the current cursor position.
+   */
+  protected JavaScriptObject lastRange;
+
+  /**
+   * If IE11 set selection hook.
+   */
+  @Override
+  protected void onElementInitialized() {
+    super.onElementInitialized();
+    if (isIE()) {
+      initSelectionHook();
+    }
+  }
+
+  /**
+   * Check IE.
+   * @return
+   */
+  private native boolean isIE() /*-{
+      return window.ActiveXObject || "ActiveXObject" in window;
+  }-*/;
+
+  /**
+   * Adding hook onselectionchange.
+   */
+  private native void initSelectionHook() /*-{
+      var _this = this;
+      var elem = _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem;
+      elem.contentWindow.document.onselectionchange = $entry(function () {
+          var range = elem.contentWindow.document.getSelection().getRangeAt(0);
+          _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplMozilla::lastRange = range;
+      })
+  }-*/;
+
+  /**
+   * For IE11 create link as insertHtml
+   * @param url
+   */
+  @Override
+  public void createLink(String url) {
+    if(isIE()) {
+      insertHTMLIE("<a href=" + url + ">" + url + "</a>");
+    }
+    else{
+      super.createLink(url);
+    }
+  }
+
+  /**
+   * Override implementation for IE11
+   * @param html
+   */
+  @Override
+  public void insertHTML(String html) {
+    if(isIE()) {
+      insertHTMLIE(html);
+    }
+    else{
+      super.insertHTML(html);
+    }
+  }
+
+  /**
+   * Insert html into current cursor position for IE11
+   * @param html
+   */
+  public native void insertHTMLIE(String html) /*-{
+      try {
+          var elem = this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem;
+          var doc = elem.contentWindow.document;
+          var selection = doc.getSelection();
+          var lastRange = this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplMozilla::lastRange;
+          elem.contentWindow.focus();
+          if (lastRange) {
+              selection.addRange(lastRange);
+          }
+          var range = selection.getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(range.createContextualFragment(html));
+          selection.removeAllRanges();
+          selection.addRange(range);
+      }
+      catch (e) {
+          return;
+      }
+  }-*/;
+
   @Override
   public String getBackColor() {
     return queryCommandValue("HiliteColor");
@@ -33,40 +125,42 @@ public class RichTextAreaImplMozilla extends RichTextAreaImplStandard {
 
   @Override
   public native void initElement() /*-{
-    // Mozilla doesn't allow designMode to be set reliably until the iframe is
-    // fully loaded.
-    var _this = this;
-    var iframe = _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem;
-    _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::onElementInitializing()();
-    _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplMozilla::isFirstFocus = true;
+      // Mozilla doesn't allow designMode to be set reliably until the iframe is
+      // fully loaded.
+      var _this = this;
+      var iframe = _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem;
+      _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::onElementInitializing()();
+      _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplMozilla::isFirstFocus = true;
 
-    iframe.onload = $entry(function() {
-      // Some Mozillae have the nasty habit of calling onload again when you set
-      // designMode, so let's avoid doing it more than once.
-      iframe.onload = null;
+      iframe.onload = $entry(function () {
+          // Some Mozillae have the nasty habit of calling onload again when you set
+          // designMode, so let's avoid doing it more than once.
+          iframe.onload = null;
 
-      // Don't set designMode until the RTA is targeted by an event. This is
-      // necessary because editing won't work on Mozilla if the iframe is
-      // *hidden, but attached*. Waiting for an event gets around this issue.
-      //
-      // Note: These events will not conflict with the
-      // addEventListener('oneventtype', ...) in RichTextAreaImplStandard.
-      iframe.contentWindow.onfocus = function() {
-        iframe.contentWindow.onfocus = null;
-        iframe.contentWindow.onmouseover = null;
-        iframe.contentWindow.document.designMode = 'On';
-      };
+          // Don't set designMode until the RTA is targeted by an event. This is
+          // necessary because editing won't work on Mozilla if the iframe is
+          // *hidden, but attached*. Waiting for an event gets around this issue.
+          //
+          // Note: These events will not conflict with the
+          // addEventListener('oneventtype', ...) in RichTextAreaImplStandard.
+          // may produce NullPointerException
+          if(contentWindow) {
+              iframe.contentWindow.onfocus = function () {
+                  iframe.contentWindow.onfocus = null;
+                  iframe.contentWindow.onmouseover = null;
+                  iframe.contentWindow.document.designMode = 'On';
+              };
+          }
+          // Issue 1441: we also need to catch the onmouseover event because focus
+          // occurs after mouse down, so the cursor will not appear until the user
+          // clicks twice, making the RichTextArea look uneditable. Catching the
+          // mouseover event allows us to set design mode earlier. The focus event
+          // is still needed to handle tab selection.
+          iframe.contentWindow.onmouseover = iframe.contentWindow.onfocus;
 
-      // Issue 1441: we also need to catch the onmouseover event because focus
-      // occurs after mouse down, so the cursor will not appear until the user
-      // clicks twice, making the RichTextArea look uneditable. Catching the
-      // mouseover event allows us to set design mode earlier. The focus event
-      // is still needed to handle tab selection.
-      iframe.contentWindow.onmouseover = iframe.contentWindow.onfocus;
-
-      // Send notification that the iframe has finished loading.
-      _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::onElementInitialized()();
-    });
+          // Send notification that the iframe has finished loading.
+          _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::onElementInitialized()();
+      });
   }-*/;
 
   @Override
@@ -83,25 +177,25 @@ public class RichTextAreaImplMozilla extends RichTextAreaImplStandard {
    * RichTextArea is initialized. See issue 3503.
    */
   protected native void setFirstFocusImpl() /*-{
-    var elem = this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem;
-    var wnd = elem.contentWindow;
+      var elem = this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem;
+      var wnd = elem.contentWindow;
 
-    // Remove event listeners so we don't generate extra focus and blur events.
-    wnd.removeEventListener('focus', elem.__gwt_focusHandler, true);
-    wnd.removeEventListener('blur', elem.__gwt_blurHandler, true);
-    wnd.focus();
-    wnd.blur();
-    wnd.focus();
+      // Remove event listeners so we don't generate extra focus and blur events.
+      wnd.removeEventListener('focus', elem.__gwt_focusHandler, true);
+      wnd.removeEventListener('blur', elem.__gwt_blurHandler, true);
+      wnd.focus();
+      wnd.blur();
+      wnd.focus();
 
-    // Add the event listeners now that we have focus and a caret.
-    wnd.addEventListener('focus', elem.__gwt_focusHandler, true);
-    wnd.addEventListener('blur', elem.__gwt_blurHandler, true);
+      // Add the event listeners now that we have focus and a caret.
+      wnd.addEventListener('focus', elem.__gwt_focusHandler, true);
+      wnd.addEventListener('blur', elem.__gwt_blurHandler, true);
 
-    // Fire a synthetic focus event. We can't move the last call to wnd.focus()
-    // here because firefox will not fire the focus event reliably.
-    var evt = document.createEvent('HTMLEvents');
-    evt.initEvent('focus', false, false);
-    wnd.dispatchEvent(evt);
+      // Fire a synthetic focus event. We can't move the last call to wnd.focus()
+      // here because firefox will not fire the focus event reliably.
+      var evt = document.createEvent('HTMLEvents');
+      evt.initEvent('focus', false, false);
+      wnd.dispatchEvent(evt);
   }-*/;
 
   @Override

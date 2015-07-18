@@ -125,7 +125,7 @@ import java.lang.annotation.Target;
  * complete example of using annotations in this way is:
  * 
  * <code><pre>
- * &#64;Generate(format = "com.google.gwt.i18n.rebind.format.PropertiesFormat")
+ * &#64;Generate(format = "com.google.gwt.i18n.server.PropertyCatalogFactory")
  * &#64;DefaultLocale("en_US")
  * public interface MyMessages extends Messages {
  *   &#64;Key("1234")

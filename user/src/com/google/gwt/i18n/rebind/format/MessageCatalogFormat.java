@@ -33,7 +33,11 @@ import java.io.PrintWriter;
  * <p>Implementations of this interface are executed at compile time and
  * therefore must not contain any JSNI code.
  * </p>
+ *
+ * @deprecated Use {@link com.google.gwt.i18n.server.MessageCatalogFactory}
+ * instead.
  */
+@Deprecated
 public interface MessageCatalogFormat {
 
   /**

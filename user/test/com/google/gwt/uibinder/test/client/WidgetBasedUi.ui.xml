@@ -54,7 +54,7 @@
   ui:baseMessagesInterface="com.google.gwt.uibinder.test.client.MyMessages"
   ui:defaultLocale="en_US"
   ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
-  ui:generateFormat="com.google.gwt.i18n.rebind.format.PropertiesFormat"
+  ui:generateFormat="com.google.gwt.i18n.server.PropertyCatalogFactory"
   ui:generateFilename="myapp_translate_source"
   ui:generateLocales="en_US"
 >

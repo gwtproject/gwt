@@ -20,16 +20,18 @@ sourceSets {
 
 dependencies {
     compile toolJar('protobuf/protobuf-2.5.0/protobuf-java-rebased-2.5.0.jar')
-    compile toolJar('eclipse/org.eclipse.jdt.core_3.8.3.v20130121-145325.jar')
-    compile toolJar('eclipse/jdtCompilerAdapter-3.8.3.v20130121-145325.jar')
-    compile toolJar('jscomp/20131118/compiler-rebased.jar')
+    compile toolJar('eclipse/org.eclipse.jdt.core_3.11.0.v20150126-2015.jar')
+    compile toolJar('eclipse/jdtCompilerAdapter_3.11.0.v20150126-2015.jar')
+    compile toolJar('jscomp/20131118.json.rebased/compiler-rebased.jar')
     compile toolJar('jscomp/20131118/sourcemap-rebased.jar')
     compile toolJar('jetty/jetty-8.1.12.v20130726/jetty-8.1.12.v20130726.jar')
     compile toolJar('jetty/jetty-8.1.12.v20130726/servlet-api-3.0-NoMetaInf.jar')
     compile toolJar('icu4j/50.1.1/icu4j.jar')
     compile toolJar('jsr305/jsr305.jar')
+    compile toolJar('json/android-sdk-19.1/json-android-rebased.jar')
+    // needed for SourceMapTest
     compile toolJar('json/android-sdk-19.1/json-android.jar')
-    compile toolJar('guava/guava-16.0.1/guava-16.0.1-rebased.jar')
+    compile toolJar('guava/guava-18.0/guava-18.0-rebased.jar')
     compile toolJar('htmlunit/htmlunit-2.13/htmlunit-2.13.jar')
     compile toolJar('htmlunit/htmlunit-2.13/htmlunit-core-js-2.13.jar')
     compile toolJar('apache/james/apache-mime4j-0.6.jar')
@@ -64,6 +66,8 @@ dependencies {
     compile toolJar('jboss/test-audit/jboss-test-audit-api-1.0.0.jar')
     compile toolJar('junit/junit-4.8.2.jar')
     compile toolJar('apache/ant-1.6.5.jar')
+    compile toolJar('colt/colt-1.2.jar')
+    compile toolJar('objectweb/asm-5.0.3/lib/asm-all-5.0.3.jar')
     compile files('core/super')
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
@@ -71,7 +75,6 @@ dependencies {
 idea {
     module {
         excludeDirs = [file("core/super/com/google/gwt/dev/jjs/intrinsic")]
-
         addSourcesToIdeaClasspath(iml, ['file://$MODULE_DIR$/core/super'])
     }
 }

@@ -21,6 +21,7 @@ import com.google.gwt.thirdparty.guava.common.io.Resources;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -102,6 +103,10 @@ public class JsProtectedNames {
     } catch (IOException e) {
       throw new RuntimeException("JsProtectedNames can't read resource: " + path, e);
     }
+  }
+
+  public static void banNames(Collection<String> bannedNames) {
+    illegalNames.addAll(bannedNames);
   }
 
   public static boolean isKeyword(String s) {

@@ -102,6 +102,7 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.jjs.ast.js.JsonArray;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeMapper;
+import com.google.gwt.dev.js.JsProtectedNames;
 import com.google.gwt.dev.js.JsStackEmulator;
 import com.google.gwt.dev.js.JsUtils;
 import com.google.gwt.dev.js.ast.JsArrayAccess;
@@ -3479,6 +3480,7 @@ public class GenerateJavaScriptAST {
     namesToIdents.put("equals", "eQ");
     namesToIdents.put("toString", "tS");
     namesToIdents.put("finalize", "fZ");
+    JsProtectedNames.banNames(namesToIdents.values());
 
     List<JMethod> methods = Lists.newArrayList(program.getTypeJavaLangObject().getMethods());
     for (JMethod method : methods) {
@@ -3496,6 +3498,7 @@ public class GenerateJavaScriptAST {
     namesToIdents.put("typeMarker", "tM");
     namesToIdents.put("castableTypeMap", "cM");
     namesToIdents.put("___clazz", "cZ");
+    JsProtectedNames.banNames(namesToIdents.values());
 
     for (JField field : program.getTypeJavaLangObject().getFields()) {
       if (!field.isStatic()) {

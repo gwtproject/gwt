@@ -4,10 +4,6 @@ sourceSets {
     main {
         java {
             srcDir 'src'
-            exclude '**/com/google/gwt/regexp/super/**'
-            exclude '**/com/google/gwt/validation/super/**'
-            exclude '**/javax/validation/super/**'
-            exclude '**/org/hibernate/validator/super/**'
         }
     }
    test {
@@ -33,6 +29,9 @@ dependencies {
     compile toolJar("hibernate/validator/hibernate-validator-4.1.0.Final-sources.jar")
     compile toolJar("requestfactory/requestfactory-apt-2011-08-18.jar")
     compile toolJar("streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar")
+    compile toolJar("gss/2015-02-18/closure-stylesheets-library-20150218-rebased.jar")
+    compile toolJar("apache/commons/commons-io-2.4.jar")
+    compile toolJar("mockito/1.9.5/mockito-all-1.9.5.jar")
     compile project(":dev")
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
@@ -40,8 +39,8 @@ dependencies {
 idea {
     module {
         excludeDirs = [file('super')]
-        excludeEachSubDir(module, "src", "super")
-        excludeEachSubDir(module, "test", "testdata")
+        excludeEachSubDir(module, "user/src", "super")
+        excludeEachSubDir(module, "user/test", "testdata")
         addSourcesToIdeaClasspath(iml, ['file://$MODULE_DIR$/super', 'file://$MODULE_DIR$/src'])
         addGwtFacetToIdea(iml)
     }

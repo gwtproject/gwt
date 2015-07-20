@@ -154,6 +154,17 @@ def addGwtCompilerRunner(XmlProvider provider, String menuName, String gwtModule
 }
 
 idea {
+   project {
+     languageLevel = '1.7'
+     ipr {
+       withXml { provider ->
+         provider.node.component
+             .find { it.@name == 'VcsDirectoryMappings' }
+             .mapping.@vcs = 'Git'
+         }
+       }
+     }
+
     workspace {
         iws.withXml {
             provider ->

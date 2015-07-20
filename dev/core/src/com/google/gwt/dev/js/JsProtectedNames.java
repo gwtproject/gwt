@@ -16,12 +16,14 @@
 package com.google.gwt.dev.js;
 
 import com.google.gwt.thirdparty.guava.common.base.Charsets;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.io.Resources;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -32,6 +34,8 @@ public class JsProtectedNames {
   private static final Set<String> javaScriptKeywords;
 
   private static final Set<String> illegalNames;
+
+  private static final Map<String, String> javaLangObjectObfuscatedNamesByMemberSignature;
 
   static {
     javaScriptKeywords = Sets.newHashSet(
@@ -86,6 +90,23 @@ public class JsProtectedNames {
     illegalNames.addAll(loadGlobals("ie9"));
     // Impl.getHashCode
     illegalNames.add("$H");
+
+    javaLangObjectObfuscatedNamesByMemberSignature =
+        ImmutableMap.<String, String>builder()
+            // Object polymorphic methods
+            .put("getClass()Ljava/lang/Class;", "gC")
+            .put("hashCode()I", "hC")
+            .put("equals(Ljava/lang/Object;)Z", "eQ")
+            .put("toString()Ljava/lang/String;", "tS")
+            .put("finalize()V", "fZ")
+             // Object instance fields
+            .put("expando", "eX")
+            .put("typeMarker", "tM")
+            .put("castableTypeMap", "cM")
+            .put("___clazz", "cZ")
+            .build();
+
+    illegalNames.addAll(javaLangObjectObfuscatedNamesByMemberSignature.values());
   }
 
   /**
@@ -106,6 +127,10 @@ public class JsProtectedNames {
 
   public static boolean isKeyword(String s) {
     return javaScriptKeywords.contains(s);
+  }
+
+  public static String javaLangObjectObfuscatedNameBySignature(String s) {
+    return javaLangObjectObfuscatedNamesByMemberSignature.get(s);
   }
 
   public static boolean isLegalName(String s) {

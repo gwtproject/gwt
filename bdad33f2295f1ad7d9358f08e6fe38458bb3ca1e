@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d83d4aa0_4e7873e8",
+        "filename": "dev/core/super/javaemul/internal/StringHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-20T21:30:26Z",
+      "side": 1,
+      "message": "if you apply the changes that I suggested, this class could be removed.",
+      "revId": "bdad33f2295f1ad7d9358f08e6fe38458bb3ca1e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d83d4aa0_6e9c4fb7",
+        "filename": "dev/core/super/javaemul/internal/StringHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-20T21:30:26Z",
+      "side": 1,
+      "message": "InternalPreconditions.checkStringBounds()",
+      "range": {
+        "startLine": 32,
+        "startChar": 21,
+        "endLine": 32,
+        "endChar": 32
+      },
+      "revId": "bdad33f2295f1ad7d9358f08e6fe38458bb3ca1e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d83d4aa0_ae7e37d7",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Long.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-20T21:30:26Z",
+      "side": 1,
+      "message": "Keep it Sting.java and make it package visible?",
+      "range": {
+        "startLine": 234,
+        "startChar": 24,
+        "endLine": 234,
+        "endChar": 31
+      },
+      "revId": "bdad33f2295f1ad7d9358f08e6fe38458bb3ca1e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

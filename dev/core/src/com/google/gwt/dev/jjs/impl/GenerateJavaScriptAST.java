@@ -102,6 +102,7 @@ import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.jjs.ast.js.JsonArray;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.TypeMapper;
+import com.google.gwt.dev.js.JsProtectedNames;
 import com.google.gwt.dev.js.JsStackEmulator;
 import com.google.gwt.dev.js.JsUtils;
 import com.google.gwt.dev.js.ast.JsArrayAccess;
@@ -436,8 +437,8 @@ public class GenerateJavaScriptAST {
         recordSymbol(x, jsName);
       } else {
         JsName jsName;
-        if (specialObfuscatedFields.containsKey(x)) {
-          jsName = scopeStack.peek().declareName(mangleNameSpecialObfuscate(x));
+        if (isJavaLangObjectInstanceField(x)) {
+          jsName = scopeStack.peek().declareName(mangleJavaLangObjectInstanceField(x));
           jsName.setObfuscatable(false);
         } else if (x.isJsTypeMember()) {
           jsName = scopeStack.peek().declareName(name, name);
@@ -567,8 +568,8 @@ public class GenerateJavaScriptAST {
             // so that it can be referred when generating the vtable of a subclass that
             // increases the visibility of this method.
             polymorphicNames.put(typeOracle.getTopMostDefinition(x), polyName);
-          } else if (specialObfuscatedMethodSigs.containsKey(x.getSignature())) {
-            polyName = interfaceScope.declareName(mangleNameSpecialObfuscate(x));
+          } else if (isJavaLangObjectPolymorphicMethodSignature(x.getSignature())) {
+            polyName = interfaceScope.declareName(mangleJavaLangObjectInstanceMethod(x));
             polyName.setObfuscatable(false);
             // if a JsType and we can set set the interface method to non-obfuscatable
           } else if (x.isOrOverridesJsTypeMethod() && !typeOracle.needsJsInteropBridgeMethod(x)) {
@@ -3466,45 +3467,6 @@ public class GenerateJavaScriptAST {
 
     this.stripStack = JsStackEmulator.getStackMode(properties) == JsStackEmulator.StackMode.STRIP;
     this.closureCompilerFormatEnabled = options.isClosureCompilerFormatEnabled();
-
-    /*
-     * Because we modify the JavaScript String prototype, all fields and
-     * polymorphic methods on String and super types need special handling.
-     */
-
-    // Object polymorphic
-    Map<String, String> namesToIdents = Maps.newHashMap();
-    namesToIdents.put("getClass", "gC");
-    namesToIdents.put("hashCode", "hC");
-    namesToIdents.put("equals", "eQ");
-    namesToIdents.put("toString", "tS");
-    namesToIdents.put("finalize", "fZ");
-
-    List<JMethod> methods = Lists.newArrayList(program.getTypeJavaLangObject().getMethods());
-    for (JMethod method : methods) {
-      if (method.canBePolymorphic()) {
-        String ident = namesToIdents.get(method.getName());
-        assert ident != null : method.getEnclosingType().getName() + "::" + method.getName() +
-            " is not in the list of known methods.";
-        specialObfuscatedMethodSigs.put(method.getSignature(), ident);
-      }
-    }
-
-    namesToIdents.clear();
-    // Object fields
-    namesToIdents.put("expando", "eX");
-    namesToIdents.put("typeMarker", "tM");
-    namesToIdents.put("castableTypeMap", "cM");
-    namesToIdents.put("___clazz", "cZ");
-
-    for (JField field : program.getTypeJavaLangObject().getFields()) {
-      if (!field.isStatic()) {
-        String ident = namesToIdents.get(field.getName());
-        assert ident != null : field.getEnclosingType().getName() + "::" + field.getName() +
-            " is not in the list of known fields.";
-        specialObfuscatedFields.put(field, ident);
-      }
-    }
   }
 
   /**
@@ -3581,30 +3543,40 @@ public class GenerateJavaScriptAST {
     return StringInterner.get().intern(JjsUtils.constructManglingSignature(x, mangledName));
   }
 
-  String mangleNameSpecialObfuscate(JField x) {
-    assert (specialObfuscatedFields.containsKey(x));
+  String mangleJavaLangObjectInstanceField(JField field) {
+    assert (JsProtectedNames.javaLangObjectObfuscatedNameBySignature(field.getName()) != null)
+      : "java.lang.Object field \"" + field.getName() + "\" is not in JsProtectedNames";
     switch (output) {
       case OBFUSCATED:
-        return specialObfuscatedFields.get(x);
+        return JsProtectedNames.javaLangObjectObfuscatedNameBySignature(field.getName());
       case PRETTY:
-        return x.getName() + "$";
+        return field.getName() + "$";
       case DETAILED:
-        return mangleName(x) + "$";
+        return mangleName(field) + "$";
     }
     throw new InternalCompilerException("Unknown output mode");
   }
 
-  String mangleNameSpecialObfuscate(JMethod x) {
-    assert (specialObfuscatedMethodSigs.containsKey(x.getSignature()));
+  String mangleJavaLangObjectInstanceMethod(JMethod method) {
+    assert (JsProtectedNames.javaLangObjectObfuscatedNameBySignature(method.getSignature()) != null)
+        : "java.lang.Object method \"" + method.getSignature() + "\" is not in JsProtectedNames";
     switch (output) {
       case OBFUSCATED:
-        return specialObfuscatedMethodSigs.get(x.getSignature());
+        return JsProtectedNames.javaLangObjectObfuscatedNameBySignature(method.getSignature());
       case PRETTY:
-        return x.getName() + "$";
+        return method.getName() + "$";
       case DETAILED:
-        return mangleNameForPoly(x) + "$";
+        return mangleNameForPoly(method) + "$";
     }
     throw new InternalCompilerException("Unknown output mode");
+  }
+
+  private boolean isJavaLangObjectPolymorphicMethodSignature(String signature) {
+    return JsProtectedNames.javaLangObjectObfuscatedNameBySignature(signature) != null;
+  }
+
+  private boolean isJavaLangObjectInstanceField(JField field) {
+    return field.getEnclosingType() == program.getTypeJavaLangObject() && !field.isStatic();
   }
 
   private final Map<JType, JDeclarationStatement> classLiteralDeclarationsByType =

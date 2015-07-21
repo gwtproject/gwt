@@ -235,6 +235,27 @@ public class InternalPreconditions {
   }
 
   /**
+   * Checks that bounds are correct.
+   *
+   * @param legalCount the end of the legal range
+   * @param start must be >= 0
+   * @param end must be <= legalCount and must be >= start
+   * @throw StringIndexOutOfBoundsException if the range is not legal
+   * @skip
+   */
+  public static void checkStringBounds(int legalCount, int start, int end) {
+    if (start < 0) {
+      throw new StringIndexOutOfBoundsException(start);
+    }
+    if (end < start) {
+      throw new StringIndexOutOfBoundsException(end - start);
+    }
+    if (end > legalCount) {
+      throw new StringIndexOutOfBoundsException(end);
+    }
+  }
+
+  /**
    * Substitutes each {@code %s} in {@code template} with an argument. These are matched by
    * position: the first {@code %s} gets {@code args[0]}, etc.  If there are more arguments than
    * placeholders, the unmatched arguments will be appended to the end of the formatted message in

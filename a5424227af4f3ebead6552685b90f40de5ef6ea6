@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d83d4aa0_1d64df17",
+        "filename": "dev/core/super/javaemul/internal/InternalPreconditions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-21T18:35:04Z",
+      "side": 1,
+      "message": "This should be similar to the method above.:\n- Re-order params: start, end, size\n- @skip, @param javadoc seems unnecessary\n- Exception is missing useful information.\n\nI guess, you can copy paste from there and change the exception.\n\nBut before doing that if you use eclipse refactoring for method signatures, you can change the parameter order there and it will take care of fixing the call sites; otherwise you need to make sure you didn\u0027t miss any call site.",
+      "revId": "a5424227af4f3ebead6552685b90f40de5ef6ea6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

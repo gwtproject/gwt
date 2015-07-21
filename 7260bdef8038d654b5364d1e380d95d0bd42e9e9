@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d83d4aa0_94f6ec89",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 3483,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-21T00:21:38Z",
+      "side": 1,
+      "message": "This introduces global mutable state which causes all sorts of problems (e.g. concurrent modification, or someones else calling JsProtectedName earlier than this constructor).\n\nCan we change the direction of the dependency? For example, JsProtectedNames may call another class to get these additional protected names or from this class we may call JsProtectedNames to get this name map.",
+      "revId": "7260bdef8038d654b5364d1e380d95d0bd42e9e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

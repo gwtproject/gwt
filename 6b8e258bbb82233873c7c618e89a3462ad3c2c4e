@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd882a39_b34e208d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/AbstractStringBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-24T18:06:38Z",
+      "side": 1,
+      "message": "nit: for consistency and readability, use static imports.",
+      "revId": "6b8e258bbb82233873c7c618e89a3462ad3c2c4e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

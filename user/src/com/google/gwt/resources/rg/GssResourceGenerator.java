@@ -46,9 +46,12 @@ import com.google.gwt.resources.ext.ResourceContext;
 import com.google.gwt.resources.ext.ResourceGeneratorUtil;
 import com.google.gwt.resources.ext.SupportsGeneratorResultCaching;
 import com.google.gwt.resources.gss.BooleanConditionCollector;
+import com.google.gwt.resources.gss.ClassNamesCollector2;
 import com.google.gwt.resources.gss.CollectAndRemoveConstantDefinitions;
 import com.google.gwt.resources.gss.CreateRuntimeConditionalNodes;
 import com.google.gwt.resources.gss.CssPrinter;
+import com.google.gwt.resources.gss.CssRulesetCollector;
+import com.google.gwt.resources.gss.CssRulesetCollector.SelectorOut;
 import com.google.gwt.resources.gss.ExtendedEliminateConditionalNodes;
 import com.google.gwt.resources.gss.ExternalClassesCollector;
 import com.google.gwt.resources.gss.GwtGssFunctionMapProvider;
@@ -67,6 +70,8 @@ import com.google.gwt.thirdparty.common.css.SubstitutionMap;
 import com.google.gwt.thirdparty.common.css.compiler.ast.CssCompositeValueNode;
 import com.google.gwt.thirdparty.common.css.compiler.ast.CssDefinitionNode;
 import com.google.gwt.thirdparty.common.css.compiler.ast.CssNumericNode;
+import com.google.gwt.thirdparty.common.css.compiler.ast.CssSelectorListNode;
+import com.google.gwt.thirdparty.common.css.compiler.ast.CssSelectorNode;
 import com.google.gwt.thirdparty.common.css.compiler.ast.CssTree;
 import com.google.gwt.thirdparty.common.css.compiler.ast.CssValueNode;
 import com.google.gwt.thirdparty.common.css.compiler.ast.ErrorManager;
@@ -109,6 +114,8 @@ import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
+import com.google.gwt.thirdparty.guava.common.collect.BiMap;
+import com.google.gwt.thirdparty.guava.common.collect.HashBiMap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet.Builder;
@@ -753,6 +760,12 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
   @Override
   protected String getCssExpression(TreeLogger logger, ResourceContext context,
       JMethod method) throws UnableToCompleteException {
+
+
+    if(true) {
+      throw new RuntimeException("should not happen");
+    }
+
     CssTree cssTree = cssParsingResultMap.get(method).tree;
 
     String standard = printCssTree(cssTree);
@@ -1320,9 +1333,10 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
 
     Map<JMethod, String> methodToClassName = new LinkedHashMap<>();
 
+
     for (JMethod toImplement : gssResource.getOverridableMethods()) {
       if (toImplement == getTextMethod) {
-        writeGetText(logger, context, method, sw);
+        continue;
       } else if (toImplement == ensuredInjectedMethod) {
         writeEnsureInjected(sw);
       } else if (toImplement == getNameMethod) {
@@ -1333,11 +1347,112 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
       }
     }
 
+    writeGetText(logger, context, method, sw, methodToClassName);
+
     if (!success) {
       throw new UnableToCompleteException();
     }
 
     return methodToClassName;
+  }
+
+  protected void writeGetText(TreeLogger logger, ResourceContext context, JMethod method,
+      SourceWriter sw, Map<JMethod, String> methodToClassName) throws UnableToCompleteException {
+
+
+    BiMap<JMethod,String> map = HashBiMap.create();
+    map.putAll(methodToClassName);
+    BiMap<String, JMethod> classNameToJMethod = map.inverse();
+
+    CssTree cssTree = cssParsingResultMap.get(method).tree;
+
+
+    CssPrinter cssPrinterPass = new CssPrinter(cssTree);
+    cssPrinterPass.runPass();
+    String standard = cssPrinterPass.getCompactPrintedString();
+    CssRulesetCollector cssRulesetCollector = new CssRulesetCollector(cssTree);
+    cssRulesetCollector.runPass();
+    List<SelectorOut> cssOuts = cssRulesetCollector.getCssOuts();
+
+
+    sw.println("public String getText() {");
+    sw.indentln("return " + standard + ";");
+    sw.println("}");
+
+    for (SelectorOut selectorOut : cssOuts) {
+
+      String s = buildTernary(selectorOut, classNameToJMethod, cssTree);
+
+      sw.println(String.format("private String %s() {", selectorOut.getMethodName()));
+      sw.indentln("return " + s);
+      sw.println("}");
+    }
+
+  }
+
+
+  /**
+   * @param selectorOut
+   * @param classNameToJMethod
+   * @param cssTree
+   * @return
+   */
+  private String buildTernary(SelectorOut selectorOut, BiMap<String, JMethod> classNameToJMethod, CssTree cssTree) {
+
+
+    CssSelectorListNode selectors = selectorOut.getSelectors();
+
+    ClassNamesCollector2 classNamesCollector2 = new ClassNamesCollector2();
+
+    StringBuilder builder = new StringBuilder();
+
+    builder.append("(");
+
+    boolean first = true;
+
+    for(CssSelectorNode n : selectors.getChildren()) {
+
+
+
+      Set<String> classNames = classNamesCollector2.getClassNames(cssTree, n);
+
+      if (first) {
+        builder.append("( true ");
+        first = false;
+      } else {
+        builder.append(" || ( true ");
+      }
+
+      if (classNameToJMethod.keySet().containsAll(classNames)) {
+        // this is missing ids!
+
+        for (String className : classNames) {
+          JMethod jMethod = classNameToJMethod.get(className);
+          String jsniSig = jMethod.getJsniSignature();
+
+          builder.append(" && com.google.gwt.core.client.impl.Impl.getNameOf(\"");
+          builder.append(jsniSig);
+
+          builder.append("\") != null ");
+        }
+      } else {
+        return selectorOut.getContent() + ";";
+      }
+
+      builder.append(" )");
+
+
+
+
+      System.out.println(n);
+    }
+
+    builder.append(") ? ");
+
+    builder.append(selectorOut.getContent());
+    builder.append(": \"\"; ");
+
+    return builder.toString();
   }
 
   private boolean writeUserMethod(TreeLogger logger, JMethod userMethod, SourceWriter sw,

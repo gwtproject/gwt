@@ -16,6 +16,7 @@
 package com.google.gwt.resources.gss;
 
 import com.google.gwt.core.ext.Generator;
+import com.google.gwt.resources.gss.CssRulesetCollector.SelectorOut;
 import com.google.gwt.resources.gss.ast.CssDotPathNode;
 import com.google.gwt.resources.gss.ast.CssJavaExpressionNode;
 import com.google.gwt.resources.gss.ast.CssRuntimeConditionalRuleNode;
@@ -24,6 +25,7 @@ import com.google.gwt.thirdparty.common.css.compiler.ast.CssConditionalBlockNode
 import com.google.gwt.thirdparty.common.css.compiler.ast.CssConditionalRuleNode;
 import com.google.gwt.thirdparty.common.css.compiler.ast.CssNode;
 import com.google.gwt.thirdparty.common.css.compiler.ast.CssRootNode;
+import com.google.gwt.thirdparty.common.css.compiler.ast.CssRulesetNode;
 import com.google.gwt.thirdparty.common.css.compiler.ast.CssTree;
 import com.google.gwt.thirdparty.common.css.compiler.ast.CssValueNode;
 import com.google.gwt.thirdparty.common.css.compiler.passes.CompactPrinter;
@@ -65,7 +67,7 @@ public class CssPrinter extends CompactPrinter {
   private static final String RIGHT_PARENTHESIS = ")";
   private static final String DOUBLE_QUOTE = "\"";
   private static final String CONTATENATION_BLOCK = ") + (";
-  private static final String CONDITIONAL_OPERATOR = ") ? (";
+  private static final String CONDITIONAL_OPERATOR = ") ? ( \"\"";
 
   private final Stack<Boolean> elseNodeFound = new Stack<Boolean>();
 
@@ -84,6 +86,7 @@ public class CssPrinter extends CompactPrinter {
   @Override
   public boolean enterTree(CssRootNode root) {
     masterStringBuilder.append(LEFT_PARENTHESIS);
+    masterStringBuilder.append("\"\"");
     return super.enterTree(root);
   }
 
@@ -102,7 +105,7 @@ public class CssPrinter extends CompactPrinter {
   public void runPass() {
     masterStringBuilder = new StringBuilder();
     concatenationNumber = 0;
-
+    counter = 0;
     super.runPass();
 
     css = masterStringBuilder
@@ -130,6 +133,7 @@ public class CssPrinter extends CompactPrinter {
       masterStringBuilder.append(DOUBLE_QUOTE).append(DOUBLE_QUOTE);
     }
     masterStringBuilder.append(CONTATENATION_BLOCK);
+    masterStringBuilder.append("\"\"");
 
     // Reset concatenation counter
     concatenationNumber = 0;
@@ -142,6 +146,8 @@ public class CssPrinter extends CompactPrinter {
       elseNodeFound.push(true);
 
       masterStringBuilder.append(LEFT_PARENTHESIS);
+      masterStringBuilder.append("\"\"");
+
     } else {
       CssRuntimeConditionalRuleNode conditionalRuleNode = (CssRuntimeConditionalRuleNode) node;
 
@@ -165,35 +171,39 @@ public class CssPrinter extends CompactPrinter {
     }
   }
 
+  private int counter = 0;
+
   @Override
-  protected void appendValueNode(CssValueNode node) {
-    if (node instanceof CssJavaExpressionNode || node instanceof CssDotPathNode) {
-      concat(LEFT_PARENTHESIS + node.getValue() + RIGHT_PARENTHESIS);
-    } else {
-      super.appendValueNode(node);
-    }
+  public boolean enterRuleset(CssRulesetNode ruleset) {
+    // TODO emit method call
+
+    masterStringBuilder.append(" + __ruleSet" + counter + "()");
+
+
+    counter++;
+    return false;
   }
 
-  private void concat(String stringToAppend) {
-    masterStringBuilder.append(flushInternalStringBuilder());
+//  private void concat(String stringToAppend) {
+//    masterStringBuilder.append(flushInternalStringBuilder());
+//
+//    appendConcatOperation();
+//
+//    masterStringBuilder.append(stringToAppend);
+//
+//    appendConcatOperation();
+//  }
 
-    appendConcatOperation();
-
-    masterStringBuilder.append(stringToAppend);
-
-    appendConcatOperation();
-  }
-
-  private void appendConcatOperation() {
-    // Avoid long string concatenation chain
-    if (concatenationNumber >= CONCAT_EXPRESSION_LIMIT) {
-      masterStringBuilder.append(CONTATENATION_BLOCK);
-      concatenationNumber = 0;
-    } else {
-      masterStringBuilder.append(CONTATENATION);
-      concatenationNumber++;
-    }
-  }
+//  private void appendConcatOperation() {
+//    // Avoid long string concatenation chain
+//    if (concatenationNumber >= CONCAT_EXPRESSION_LIMIT) {
+//      masterStringBuilder.append(CONTATENATION_BLOCK);
+//      concatenationNumber = 0;
+//    } else {
+//      masterStringBuilder.append(CONTATENATION);
+//      concatenationNumber++;
+//    }
+//  }
 
   /**
    * Read what the internal StringBuilder used by the CompactPrinter has already built. Escape it.
@@ -207,7 +217,7 @@ public class CssPrinter extends CompactPrinter {
     // space. I believe that you'll be safe because, if there's nothing in the buffer, there is
     // nothing to delete, but you may have some unnecessary characters in the output. you may
     // want to call that out explicitly in the code.
-    String content = DOUBLE_QUOTE + Generator.escape(getOutputBuffer()) + DOUBLE_QUOTE;
+    String content = "+" + DOUBLE_QUOTE + Generator.escape(getOutputBuffer()) + DOUBLE_QUOTE;
     resetBuffer();
 
     return content;

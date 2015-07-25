@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
@@ -52,12 +53,11 @@ public  enum TypeCategory {
       return TypeCategory.TYPE_JAVA_LANG_STRING;
     } else if (program.typeOracle.willCrossCastLikeJso(type)) {
       return TypeCategory.TYPE_JSO;
-    } else if (program.typeOracle.isDualJsoInterface(type) ||
-        program.typeOracle.isOrExtendsJsType(type, false) &&
-        !program.typeOracle.isOrExtendsJsType(type, true)) {
-      return TypeCategory.TYPE_JAVA_OBJECT_OR_JSO;
     } else if (program.typeOracle.isOrExtendsJsType(type, true)) {
       return TypeCategory.TYPE_JS_INTERFACE;
+    } else if (program.typeOracle.isDualJsoInterface(type)
+        || (type.isJsType() && type instanceof JInterfaceType)) {
+      return TypeCategory.TYPE_JAVA_OBJECT_OR_JSO;
     } else if (type.isJsFunction()) {
       return TypeCategory.TYPE_JS_FUNCTION;
     }

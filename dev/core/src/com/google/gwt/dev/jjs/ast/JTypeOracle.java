@@ -523,7 +523,7 @@ public class JTypeOracle implements Serializable {
         && type instanceof JInterfaceType && !hasLiveImplementors(type);
   }
 
-  public boolean hasLiveImplementors(JType type) {
+  private boolean hasLiveImplementors(JType type) {
     if (!optimize) {
       // Assume the worst case, that the provided type does have live implementors.
       return true;

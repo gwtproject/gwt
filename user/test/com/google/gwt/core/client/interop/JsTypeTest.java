@@ -206,6 +206,7 @@ public class JsTypeTest extends GWTTestCase {
     assertTrue(object instanceof ElementLikeJsInterface);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertFalse(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof ConcreteJsType);
   }
 
   public void testInstanceOf_jsoSansProto() {
@@ -220,6 +221,7 @@ public class JsTypeTest extends GWTTestCase {
     assertTrue(object instanceof ElementLikeJsInterface);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertFalse(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof ConcreteJsType);
   }
 
   public void testInstanceOf_jsoWithNativeButtonProto() {
@@ -234,6 +236,7 @@ public class JsTypeTest extends GWTTestCase {
     assertTrue(object instanceof ElementLikeJsInterface);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertTrue(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof ConcreteJsType);
   }
 
   public void testInstanceOf_javaImplementorOfInterfaceWithProto() {

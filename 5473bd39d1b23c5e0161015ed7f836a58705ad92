@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0dbec2e2_9709843a",
+        "filename": "dev/core/super/javaemul/internal/ArrayHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-25T10:13:53Z",
+      "side": 1,
+      "message": "maybe we should separate these two statements into to native method calls:\n\nprivate static native Object applySplice(Object array, Object argsAsArray) {\nArray.prototype.splice.apply(array, argsAsArray);\n}\n\nand:\n\narray.push and array.concat as two arrayhelper methods.",
+      "range": {
+        "startLine": 87,
+        "startChar": 48,
+        "endLine": 87,
+        "endChar": 59
+      },
+      "revId": "5473bd39d1b23c5e0161015ed7f836a58705ad92",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8db0f20a_3bc7373a",
+        "filename": "dev/core/super/javaemul/internal/ArrayStamper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-25T10:13:53Z",
+      "side": 1,
+      "message": "Will this kind of stamping after creation actually work with j2cl?\n\nSo far I have only seen things that require the dimensions and leave types at the same times. Also adding the field after array creation might impact performance for arrays. We should at least have a todo to check on this for j2cl",
+      "range": {
+        "startLine": 22,
+        "startChar": 31,
+        "endLine": 22,
+        "endChar": 48
+      },
+      "revId": "5473bd39d1b23c5e0161015ed7f836a58705ad92",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dbb86f3_58331dfc",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-07-25T10:13:53Z",
+      "side": 0,
+      "message": "careful when bringing this in, guava relies on this being present :/",
+      "range": {
+        "startLine": 57,
+        "startChar": 24,
+        "endLine": 57,
+        "endChar": 34
+      },
+      "revId": "fa4e5c7b319589f2aab533cbe97f52b2ccf6d37a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

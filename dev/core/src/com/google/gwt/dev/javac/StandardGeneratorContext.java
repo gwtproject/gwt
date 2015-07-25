@@ -150,6 +150,7 @@ public class StandardGeneratorContext implements GeneratorContext {
     @Override
     public void commit(TreeLogger logger) {
       String source = sw.toString();
+      System.out.println(source);
       strongHash = Util.computeStrongName(Util.getBytes(source));
       sourceToken = diskCache.writeString(source);
       sw = null;

@@ -56,6 +56,13 @@ public class CssPrinterTest extends BaseGssTest {
         ));
   }
 
+  public void testFoo() {
+    CssTree cssTree = parseAndBuildTree(".a > .b {} .c .d {} .e, .f {}");
+
+    CssPrinter pass = new CssPrinter(cssTree);
+    pass.runPass();
+  }
+
   public void testRuntimeConditionalNode() {
     String expectedCss = "((com.foo.BAR) ? (\".foo{color:black}\") + (" +
         "(com.foo.BAR2) ? (\".foo{color:white}\") : (\".foo{color:gray}\"))" +

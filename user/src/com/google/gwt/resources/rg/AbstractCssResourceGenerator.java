@@ -23,6 +23,7 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.resources.ext.AbstractResourceGenerator;
 import com.google.gwt.resources.ext.ResourceContext;
+import com.google.gwt.thirdparty.common.css.compiler.ast.CssTree;
 import com.google.gwt.user.rebind.SourceWriter;
 
 /**

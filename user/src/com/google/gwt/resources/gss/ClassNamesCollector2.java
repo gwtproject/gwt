@@ -34,29 +34,57 @@ import java.util.TreeSet;
  */
 public class ClassNamesCollector2 extends DefaultTreeVisitor {
   private Set<String>  classNames;
+  private CssSelectorNode selector;
 
   /**
    * Extract all CSS class names in the provided stylesheet, modulo those
    * imported from another context.
    */
-  public Set<String> getClassNames(CssSelectorNode selector) {
-    Preconditions.checkNotNull(selector, "tree cannot be null");
+  public Set<String> getClassNames(CssTree tree, CssSelectorNode selector) {
+    this.selector = selector;
+    Preconditions.checkNotNull(tree, "tree cannot be null");
+
+    System.out.println("sel: " + selector);
+
+    System.out.println("refiner: " + selector.getRefiners());
+    System.out.println("combitanor: " + selector.getCombinator());
 
     classNames = new LinkedHashSet<>();
-    selector.getVisitController().startVisit(this);
+    tree.getVisitController().startVisit(this);
 
     return classNames;
   }
 
+  boolean collect = false;
+
+  @Override
+  public boolean enterSelector(CssSelectorNode node) {
+    if (selector == node) {
+      collect = true;
+
+    }
+    return true;
+  }
+
+  @Override
+  public void leaveSelector(CssSelectorNode node) {
+    collect = false;
+  }
+
+
   @Override
   public boolean enterClassSelector(CssClassSelectorNode classSelector) {
+    if (!collect)
+    {
+      return true;
+    }
     String className = classSelector.getRefinerName();
 
 
       classNames.add(className);
 
 
-    return false;
+    return true;
   }
 
 

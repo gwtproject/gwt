@@ -1375,7 +1375,7 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
 
     for (SelectorOut selectorOut : cssOuts) {
 
-      String s = buildTernary(selectorOut, classNameToJMethod);
+      String s = buildTernary(selectorOut, classNameToJMethod, cssTree);
 
       sw.println(String.format("private String %s() {", selectorOut.getMethodName()));
       sw.indentln("return " + s);
@@ -1388,9 +1388,10 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
   /**
    * @param selectorOut
    * @param classNameToJMethod
+   * @param cssTree
    * @return
    */
-  private String buildTernary(SelectorOut selectorOut, BiMap<String, JMethod> classNameToJMethod) {
+  private String buildTernary(SelectorOut selectorOut, BiMap<String, JMethod> classNameToJMethod, CssTree cssTree) {
 
 
     CssSelectorListNode selectors = selectorOut.getSelectors();
@@ -1404,12 +1405,15 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
     boolean first = true;
 
     for(CssSelectorNode n : selectors.getChildren()) {
-      Set<String> classNames = classNamesCollector2.getClassNames(n);
+
+
+
+      Set<String> classNames = classNamesCollector2.getClassNames(cssTree, n);
 
       if (first) {
-        builder.append("(");
+        builder.append("( true ");
       } else {
-        builder.append(" || (");
+        builder.append(" || ( true ");
       }
 
       if (classNameToJMethod.keySet().containsAll(classNames)) {
@@ -1419,13 +1423,13 @@ public class GssResourceGenerator extends AbstractCssResourceGenerator implement
           JMethod jMethod = classNameToJMethod.get(className);
           String jsniSig = jMethod.getJsniSignature();
 
-          builder.append(" && com.googlegwt.core.client.impl.Impl.getNameOf(\"");
+          builder.append(" && com.google.gwt.core.client.impl.Impl.getNameOf(\"");
           builder.append(jsniSig);
 
           builder.append("\") != null ");
         }
       } else {
-        return selectorOut.getContent();
+        return selectorOut.getContent() + ";";
       }
 
       builder.append(" )");

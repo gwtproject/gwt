@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad5136aa_620f323c",
+        "filename": "user/test/com/google/gwt/emultest/EmulSuite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-28T00:53:49Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.emultest.java.nio.StandardCharsetsTest.",
+      "revId": "b2b891e1591f7c23c113a0c6f7cf49346969623d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

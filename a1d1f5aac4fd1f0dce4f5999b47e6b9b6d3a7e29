@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2db8e63c_90fff473",
+        "filename": "user/test/com/google/gwt/emultest/java/nio/charset/StandardCharsetsTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-28T05:24:09Z",
+      "side": 1,
+      "message": "This is not testing the StandardCharsets. Can you make sure all the gwt tests are passing?",
+      "revId": "a1d1f5aac4fd1f0dce4f5999b47e6b9b6d3a7e29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -506,36 +506,12 @@ public class JTypeOracle implements Serializable {
   }
 
   /**
-   * True if the type is a JSO or interface implemented by JSO or a JsType without prototype.
+   * JsType interfaces without prototypes are special that anything could be cast to them as they
+   * don't really represent a type but a soft contract for dynamic javascript objects.
    */
-  public boolean canCrossCastLikeJso(JType type) {
-    JDeclaredType dtype = getNearestJsType(type, false);
-    return canBeJavaScriptObject(type) || (dtype instanceof JInterfaceType
-        && isOrExtendsJsType(type, false) && !isOrExtendsJsType(type, true));
-  }
-
-  /**
-   * True if the type is a JSO or JSO Interface that is not dually implemented, or is a JsType
-   * without the prototype that is not implemented by a Java class.
-   */
-  public boolean willCrossCastLikeJso(JType type) {
-    return isEffectivelyJavaScriptObject(type) || canCrossCastLikeJso(type)
-        && type instanceof JInterfaceType && !hasLiveImplementors(type);
-  }
-
-  public boolean hasLiveImplementors(JType type) {
-    if (!optimize) {
-      // Assume the worst case, that the provided type does have live implementors.
-      return true;
-    }
-    if (type instanceof JInterfaceType) {
-      for (JReferenceType impl : getTypes(classesByImplementingInterface.get(type.getName()))) {
-        if (isInstantiatedType((JClassType) impl)) {
-          return true;
-        }
-      }
-    }
-    return false;
+  public boolean isJsTypeInterfaceWithoutPrototype(JType type) {
+    return type instanceof JInterfaceType && isOrExtendsJsType(type, false)
+        && !isOrExtendsJsType(type, true);
   }
 
   public boolean castFailsTrivially(JReferenceType fromType, JReferenceType toType) {
@@ -563,7 +539,7 @@ public class JTypeOracle implements Serializable {
      * Cross-cast allowed in theory, prevents TypeTightener from turning
      * cross-casts into null-casts.
      */
-    if (canCrossCastLikeJso(fromType) && canCrossCastLikeJso(toType)) {
+    if (canBeJavaScriptObject(fromType) && canBeJavaScriptObject(toType)) {
       return false;
     }
 
@@ -650,6 +626,10 @@ public class JTypeOracle implements Serializable {
     }
 
     if (isJavaLangObject(toType)) {
+      return true;
+    }
+
+    if (isJsTypeInterfaceWithoutPrototype(toType)) {
       return true;
     }
 
@@ -882,9 +862,6 @@ public class JTypeOracle implements Serializable {
     if (implementedInterfacesByClass.containsKey(type.getName())) {
       Iterables.addAll(castableDestinationTypes,
           getTypes(implementedInterfacesByClass.get(type.getName())));
-    }
-    if (willCrossCastLikeJso(type)) {
-      ensureTypeExistsAndAppend(JProgram.JAVASCRIPTOBJECT, castableDestinationTypes);
     }
     // Do not add itself if it is a JavaScriptObject subclass, add JavaScriptObject.
     if (type.isJsoType()) {

@@ -18,6 +18,7 @@ package java.lang;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Comparator;
 import java.util.Locale;
 
@@ -214,9 +215,25 @@ public final class String implements Comparable<String>, CharSequence,
   /**
    * @skip
    */
+  static String _String(byte[] bytes, int ofs, int len, Charset charset)
+      throws UnsupportedEncodingException {
+    return _String(bytes, ofs, len, charset.name());
+  }
+
+  /**
+   * @skip
+   */
   static String _String(byte[] bytes, String charsetName)
       throws UnsupportedEncodingException {
     return _String(bytes, 0, bytes.length, charsetName);
+  }
+
+  /**
+   * @skip
+   */
+  static String _String(byte[] bytes, Charset charset)
+      throws UnsupportedEncodingException {
+    return _String(bytes, 0, bytes.length, charset.name());
   }
 
   /**
@@ -570,6 +587,10 @@ public final class String implements Comparable<String>, CharSequence,
       return getBytesLatin1(this);
     }
     throw new UnsupportedEncodingException(charSet + " is not supported");
+  }
+
+  public byte[] getBytes(Charset charSet) throws UnsupportedEncodingException {
+    return getBytes(charSet.name());
   }
 
   public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {

@@ -194,7 +194,7 @@ public class JsTypeTest extends GWTTestCase {
     assertNotNull(button);
   }
 
-  public void testInstanceOf_jsoWithSyntheticProto() {
+  public void testInstanceOf_jsoWithProto() {
     Object object = createMyJsInterface();
 
     assertTrue(object instanceof Object);
@@ -204,11 +204,13 @@ public class JsTypeTest extends GWTTestCase {
     assertFalse(object instanceof Iterator);
     assertTrue(object instanceof MyJsInterface);
     assertTrue(object instanceof ElementLikeJsInterface);
+    assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertFalse(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof ConcreteJsType);
   }
 
-  public void testInstanceOf_jsoSansProto() {
+  public void testInstanceOf_jsoWithoutProto() {
     Object object = JavaScriptObject.createObject();
 
     assertTrue(object instanceof Object);
@@ -218,8 +220,10 @@ public class JsTypeTest extends GWTTestCase {
     assertFalse(object instanceof Iterator);
     assertFalse(object instanceof MyJsInterface);
     assertTrue(object instanceof ElementLikeJsInterface);
+    assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertFalse(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof ConcreteJsType);
   }
 
   public void testInstanceOf_jsoWithNativeButtonProto() {
@@ -232,11 +236,48 @@ public class JsTypeTest extends GWTTestCase {
     assertFalse(object instanceof Iterator);
     assertFalse(object instanceof MyJsInterface);
     assertTrue(object instanceof ElementLikeJsInterface);
+    assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
     assertTrue(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof ConcreteJsType);
   }
 
-  public void testInstanceOf_javaImplementorOfInterfaceWithProto() {
+  public void testInstanceOf_implementsJsType() {
+    // Foils type tightening.
+    Object object = alwaysTrue() ? new ElementLikeJsInterfaceImpl() : new Object();
+
+    assertTrue(object instanceof Object);
+    assertFalse(object instanceof HTMLAnotherElement);
+    assertFalse(object instanceof HTMLButtonElement);
+    assertFalse(object instanceof HTMLElement);
+    assertFalse(object instanceof Iterator);
+    assertFalse(object instanceof MyJsInterface);
+    assertTrue(object instanceof ElementLikeJsInterface);
+    assertTrue(object instanceof ElementLikeJsInterfaceImpl);
+    assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof ConcreteJsType);
+  }
+
+  public void testInstanceOf_concreteJsType() {
+    // Foils type tightening.
+    Object object = alwaysTrue() ? new ConcreteJsType() : new Object();
+
+    assertTrue(object instanceof Object);
+    assertFalse(object instanceof HTMLAnotherElement);
+    assertFalse(object instanceof HTMLButtonElement);
+    assertFalse(object instanceof HTMLElement);
+    assertFalse(object instanceof Iterator);
+    assertFalse(object instanceof MyJsInterface);
+    assertTrue(object instanceof ElementLikeJsInterface);
+    assertFalse(object instanceof ElementLikeJsInterfaceImpl);
+    assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertTrue(object instanceof ConcreteJsType);
+  }
+
+
+  public void testInstanceOf_extendsJsTypeWithProto() {
     // Foils type tightening.
     Object object = alwaysTrue() ? new MyCustomHtmlButtonWithIterator() : new Object();
 

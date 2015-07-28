@@ -87,6 +87,13 @@ final class Cast {
   }
 
   /**
+   * Allow a cast to a type if it is not null.
+   */
+  static Object noOp(Object src) {
+    return src;
+  }
+
+  /**
    * Allow a dynamic cast to a JsFunction interface only if it is a function.
    */
   static Object dynamicCastToJsFunction(Object src) {
@@ -106,7 +113,7 @@ final class Cast {
     return (src != null) && canCast(src, dstId);
   }
 
-  static boolean instanceOfJsType(Object src, JavaScriptObject dstId, String jsType) {
+  static boolean instanceOfJsPrototype(Object src, JavaScriptObject dstId, String jsType) {
     return instanceOf(src, dstId) || jsInstanceOf(src, jsType);
   }
 

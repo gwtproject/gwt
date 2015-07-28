@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd8aea9e_7de5d711",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-07-28T09:54:40Z",
+      "side": 1,
+      "message": "We do support ISO-8859-1 in String#getBytes(String) and new String(byte[],String)\n\nBTW, if adding emulation of Charset, we\u0027d want to add String#getBytes(Charset) and new String(byte[],Charset)",
+      "revId": "645efc70c8d44a13b017f864b3b43eada2092e15",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d862697_80fcf6aa",
+        "filename": "user/super/com/google/gwt/emul/java/nio/charset/StandardCharsets.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-07-28T09:54:40Z",
+      "side": 1,
+      "message": "We don\u0027t emulate java.nio.charset.Charset, so this won\u0027t work.\n\nGuava-GWT has its own Charset emulation that\u0027d need to be backported here as well.",
+      "revId": "645efc70c8d44a13b017f864b3b43eada2092e15",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

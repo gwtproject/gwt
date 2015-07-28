@@ -33,6 +33,24 @@
       "revId": "645efc70c8d44a13b017f864b3b43eada2092e15",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2db8e63c_9071b489",
+        "filename": "user/super/com/google/gwt/emul/java/nio/charset/StandardCharsets.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 7175
+      },
+      "writtenOn": "2015-07-28T09:56:53Z",
+      "side": 1,
+      "message": "I think I meant to use the Guava Charset here. Would that work?",
+      "parentUuid": "2d862697_80fcf6aa",
+      "revId": "645efc70c8d44a13b017f864b3b43eada2092e15",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

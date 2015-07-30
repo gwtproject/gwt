@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a5ce834_27eb3a9e",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTableBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-30T19:58:24Z",
+      "side": 1,
+      "message": "The changes seems fine to me. Probably we don\u0027t need this deprecation as well. WDYT?",
+      "revId": "57f4641035a6ab876f0ff75d3cd534d52bca8059",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

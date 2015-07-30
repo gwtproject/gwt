@@ -34,10 +34,11 @@ public final class Array {
   private static final int TYPE_JSO = 2;
   private static final int TYPE_JAVA_LANG_OBJECT = 3;
   private static final int TYPE_JAVA_LANG_STRING = 4;
-  private static final int TYPE_JS_INTERFACE = 5;
-  private static final int TYPE_PRIMITIVE_LONG = 6;
-  private static final int TYPE_PRIMITIVE_NUMBER = 7;
-  private static final int TYPE_PRIMITIVE_BOOLEAN = 8;
+  private static final int TYPE_JS_PROTOTYPE = 5;
+  private static final int TYPE_JS_FUNCTION = 6;
+  private static final int TYPE_PRIMITIVE_LONG = 7;
+  private static final int TYPE_PRIMITIVE_NUMBER = 8;
+  private static final int TYPE_PRIMITIVE_BOOLEAN = 9;
 
   /**
    * Creates a copy of a subrange of the specified array.

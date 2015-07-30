@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a40cc41_30d5a82f",
+        "filename": "user/super/com/google/gwt/emul/java/nio/charset/Charset.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-30T03:59:07Z",
+      "side": 1,
+      "message": "Can you extract a method for this and do the check with javascript regex?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 5
+      },
+      "revId": "8bb7914467a4a69ee1be078e9db5db129a0ef62c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "revId": "57f4641035a6ab876f0ff75d3cd534d52bca8059",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d657ec3_209a4e46",
+        "filename": "user/src/com/google/gwt/user/cellview/client/AbstractCellTableBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-07-30T20:31:14Z",
+      "side": 1,
+      "message": "The two methods are hooks for subclasses and do the same thing so I think it\u0027s better to deprecate this one in favor of the second so that you could delete it in the future and just maintain one hook method.",
+      "parentUuid": "0a5ce834_27eb3a9e",
+      "revId": "57f4641035a6ab876f0ff75d3cd534d52bca8059",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

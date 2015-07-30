@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a40cc41_301a482f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-07-30T06:43:59Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "e0dc9cd4d233ff8641a8c9cba8b4e59c94311103",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

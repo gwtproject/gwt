@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "0a5ce834_50f0225b",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-07-31T16:58:32Z",
+      "side": 1,
+      "message": "Just use int[] and implement assuming it automatically grows (no need for manual resizing). There is no bound checking so it will work fine. Most of the collection emulation already doing that.",
+      "parentUuid": "4d68ba9e_7f3f878e",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "0db364f40a67f40c98d2fadcdcb536048b20691f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd8aea9e_e0477cf2",
         "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
         "patchSetId": 5

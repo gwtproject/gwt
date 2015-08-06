@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ac9b89e_82c2649a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-06T20:04:16Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "c15b0dfb61ad40165a2c1c7dbd588c2884c4bff6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

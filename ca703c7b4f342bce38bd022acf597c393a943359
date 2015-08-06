@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8ac9b89e_dc5a8157",
+        "filename": "dev/core/super/javaemul/internal/EmulatedCharset.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-06T06:02:25Z",
+      "side": 1,
+      "message": "I am following a similar design to LatinCharset and same charset can be potentially used with different names in the future.",
+      "parentUuid": "4ada60aa_697b859b",
+      "range": {
+        "startLine": 29,
+        "startChar": 61,
+        "endLine": 29,
+        "endChar": 68
+      },
+      "revId": "ca703c7b4f342bce38bd022acf597c393a943359",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ada60aa_89feb975",
         "filename": "dev/core/super/javaemul/internal/annotations/GwtIncompatible.java",
         "patchSetId": 1
@@ -48,6 +72,23 @@
     },
     {
       "key": {
+        "uuid": "8ac9b89e_9c640915",
+        "filename": "user/src/com/google/gwt/core/shared/GwtIncompatible.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-06T06:02:25Z",
+      "side": 1,
+      "message": "Actually I messed up this one, I removed the javadoc from incorrect class. I\u0027m reverting this.",
+      "revId": "ca703c7b4f342bce38bd022acf597c393a943359",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cadad034_43443a72",
         "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
         "patchSetId": 1
@@ -65,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8ac9b89e_5c679116",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-06T06:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cadad034_43443a72",
+      "revId": "ca703c7b4f342bce38bd022acf597c393a943359",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ada60aa_090be92e",
         "filename": "user/super/com/google/gwt/emul/java/nio/charset/Charset.java",
         "patchSetId": 1
@@ -76,6 +135,30 @@
       "writtenOn": "2015-08-06T04:52:18Z",
       "side": 1,
       "message": "Why are we rebuilding the map every time?",
+      "range": {
+        "startLine": 32,
+        "startChar": 32,
+        "endLine": 32,
+        "endChar": 33
+      },
+      "revId": "ca703c7b4f342bce38bd022acf597c393a943359",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ac9b89e_3c74d5c1",
+        "filename": "user/super/com/google/gwt/emul/java/nio/charset/Charset.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-06T06:02:25Z",
+      "side": 1,
+      "message": "I thought I was preventing introduction of extra map classes (UnModifiableSortedMap, TreeMap,NavigableMap,SortedMap etc) to many applications and serialization policies as it is not as trivial to optimize when it is in a clinit. However now noticing that clinit is part of another class, it was already fine. I\u0027m reverting this part.",
+      "parentUuid": "4ada60aa_090be92e",
       "range": {
         "startLine": 32,
         "startChar": 32,

@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import static com.google.gwt.dev.jjs.impl.JjsUtils.replaceMethodBody;
+
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.javac.JSORestrictionsChecker;
 import com.google.gwt.dev.javac.JdtUtil;
@@ -2082,7 +2084,7 @@ public class GwtAstBuilder {
         JBlock tryBlock = pop(x.tryBlock);
 
         if (x.resources.length > 0) {
-          tryBlock = normalizeTryWithResources(info, x, tryBlock, scope);
+          tryBlock = normalizeTryWithResources(info, x, tryBlock);
         }
         List<JTryStatement.CatchClause> catchClauses = Lists.newArrayList();
         if (x.catchBlocks != null) {
@@ -2110,8 +2112,7 @@ public class GwtAstBuilder {
       }
     }
 
-    private JBlock normalizeTryWithResources(SourceInfo info, TryStatement x, JBlock tryBlock,
-        BlockScope scope) {
+    private JBlock normalizeTryWithResources(SourceInfo info, TryStatement x, JBlock tryBlock) {
       /**
        * Apply the following source transformation:
        *
@@ -2789,7 +2790,7 @@ public class GwtAstBuilder {
         // Only inline values() if it is small.
         method.setInliningAllowed(false);
       }
-      implementMethod(method, valuesArrayCopy);
+      replaceMethodBody(method, valuesArrayCopy);
     }
 
     private JLocal createLocal(LocalDeclaration x) {
@@ -2895,21 +2896,8 @@ public class GwtAstBuilder {
          */
         type.getMethods().remove(2);
       } else {
-        implementMethod(method, new JClassLiteral(info, type));
+        replaceMethodBody(method, new JClassLiteral(info, type));
       }
-    }
-
-    private void implementMethod(JMethod method, JExpression returnValue) {
-      JMethodBody body = (JMethodBody) method.getBody();
-      JBlock block = body.getBlock();
-      SourceInfo info;
-      if (block.getStatements().size() > 0) {
-        info = block.getStatements().get(0).getSourceInfo();
-      } else {
-        info = method.getSourceInfo();
-      }
-      block.clear();
-      block.addStmt(returnValue.makeReturnStatement());
     }
 
     private JDeclarationStatement makeDeclaration(SourceInfo info, JLocal local,
@@ -3470,7 +3458,7 @@ public class GwtAstBuilder {
         JParameterRef nameRef = new JParameterRef(info, method.getParams().get(0));
         JMethodCall call = new JMethodCall(info, null, typeMap.get(valueOfBinding));
         call.addArgs(mapRef, nameRef);
-        implementMethod(method, call);
+        replaceMethodBody(method, call);
       }
     }
 

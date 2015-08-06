@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import static com.google.gwt.dev.jjs.impl.JjsUtils.replaceMethodBody;
+
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -34,7 +36,6 @@ import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
-import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JBooleanLiteral;
 import com.google.gwt.dev.jjs.ast.JCastOperation;
 import com.google.gwt.dev.jjs.ast.JClassLiteral;
@@ -1236,13 +1237,6 @@ public class UnifyAst {
     return sourceNameBasedTypeLocator;
   }
 
-  private void implementMagicMethod(JMethod method, JExpression returnValue) {
-    JMethodBody body = (JMethodBody) method.getBody();
-    JBlock block = body.getBlock();
-    block.clear();
-    block.addStmt(returnValue.makeReturnStatement());
-  }
-
   private void initializeNameBasedLocators() {
     sourceNameBasedTypeLocator = new NameBasedTypeLocator(compiledClassesBySourceName) {
       @Override
@@ -1402,15 +1396,15 @@ public class UnifyAst {
       if (methodSignature.startsWith("com.google.gwt.core.client.GWT.")
           || methodSignature.startsWith("com.google.gwt.core.shared.GWT.")) {
         // GWT.isClient, GWT.isScript, GWT.isProdMode all true.
-        implementMagicMethod(method, JBooleanLiteral.TRUE);
+        replaceMethodBody(method, JBooleanLiteral.TRUE);
         continue;
       }
       assert methodSignature.startsWith("java.lang.Class.");
       if (CLASS_DESIRED_ASSERTION_STATUS.equals(methodSignature)) {
-        implementMagicMethod(method,
+        replaceMethodBody(method,
             JBooleanLiteral.get(compilerContext.getOptions().isEnableAssertions()));
       } else if (CLASS_IS_CLASS_METADATA_ENABLED.equals(methodSignature)) {
-        implementMagicMethod(method,
+        replaceMethodBody(method,
             JBooleanLiteral.get(!compilerContext.getOptions().isClassMetadataDisabled()));
       } else {
         assert false;

@@ -334,6 +334,30 @@
     },
     {
       "key": {
+        "uuid": "e7242fa6_7913031b",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 7175
+      },
+      "writtenOn": "2015-08-07T05:28:44Z",
+      "side": 1,
+      "message": "Looks good.",
+      "parentUuid": "0abb083c_af8619f1",
+      "range": {
+        "startLine": 175,
+        "startChar": 28,
+        "endLine": 175,
+        "endChar": 38
+      },
+      "revId": "0db364f40a67f40c98d2fadcdcb536048b20691f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd8aea9e_2062447f",
         "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
         "patchSetId": 5

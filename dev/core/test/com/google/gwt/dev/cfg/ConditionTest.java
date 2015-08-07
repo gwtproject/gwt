@@ -77,6 +77,12 @@ public class ConditionTest extends TestCase {
     assertTrue(isTrue(isObject, "java.lang.Object"));
     assertFalse(isTrue(isObject, "java.lang.String"));
 
+    ConditionWhenTypeAnnotatedWith annotatedWithCondition = new ConditionWhenTypeAnnotatedWith(
+        "java.lang.FunctionalInterface");
+    // not sure how to include classes in the CompilationState
+    //assertTrue(isTrue(annotatedWithCondition, "java.lang.Runnable"));
+    assertFalse(isTrue(annotatedWithCondition, "java.lang.String"));
+
     {
       ConditionAll all = new ConditionAll();
       all.getConditions().add(assignableToObject);

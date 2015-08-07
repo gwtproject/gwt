@@ -915,6 +915,9 @@ public class ModuleDefSchema extends Schema {
     @SuppressWarnings("unused") // referenced reflectively
     protected final String __when_type_is_1_class = null;
 
+    @SuppressWarnings("unused") // referenced reflectively
+    protected final String __when_type_annotated_1_class = null;
+
     public FullConditionSchema(CompoundCondition parentCondition) {
       super(parentCondition);
     }
@@ -931,6 +934,15 @@ public class ModuleDefSchema extends Schema {
     @SuppressWarnings("unused") // called reflectively
     protected Schema __when_type_is_begin(String className) {
       Condition cond = new ConditionWhenTypeIs(className);
+      parentCondition.getConditions().add(cond);
+
+      // No children allowed.
+      return null;
+    }
+
+    @SuppressWarnings("unused") // called reflectively
+    protected Schema __when_type_annotated_begin(String className) {
+      Condition cond = new ConditionWhenTypeAnnotatedWith(className);
       parentCondition.getConditions().add(cond);
 
       // No children allowed.

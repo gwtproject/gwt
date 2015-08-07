@@ -13,6 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
+(function() {
+
 __BEGIN_TRY_BLOCK__
 function __MODULE_FUNC__() {
   var $wnd = __WINDOW_DEF__;
@@ -166,3 +169,8 @@ __MODULE_FUNC__.succeeded = __MODULE_FUNC__();
 __END_TRY_BLOCK_AND_START_CATCH__
   __MODULE_FUNC_ERROR_CATCH__
 __END_CATCH_BLOCK__
+
+
+__WINDOW_DEF__.__MODULE_FUNC__ =  __MODULE_FUNC__;
+
+})();

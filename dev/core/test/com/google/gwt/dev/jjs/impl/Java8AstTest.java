@@ -423,6 +423,21 @@ public class Java8AstTest extends FullCompileTestBase {
         formatSource(lambdaMethod2.toSource()));
   }
 
+  public void testLambdaNestingInAnonymousCaptureLocal() throws Exception {
+    String lambda =
+        "int x = 42;\n" +
+        "new Runnable() { public void run() { Lambda<Integer> l = (a, b) -> x + a + b; l.run(1, 2); } }.run();";
+    assertEqualBlock("int x=42;(new EntryPoint$1(this,x)).run();", lambda);
+    JProgram program = compileSnippet("void", lambda, false);
+    JClassType outerClass = (JClassType) getType(program, "test.EntryPoint$1");
+
+    // check that anonymous class implementation uses synthetic field val$x2 to initialize lambda
+    // synthetic class
+    assertEquals(
+        "public void run(){Lambda l=new EntryPoint$1$lambda$0$Type(this.val$x2);l.run(1,2);}",
+        formatSource(findMethod(outerClass, "run").toSource()));
+  }
+
   public void testLambdaNestingCaptureField() throws Exception {
     addSnippetClassDecl("interface Inner {\n" +
         "    void f();\n" +

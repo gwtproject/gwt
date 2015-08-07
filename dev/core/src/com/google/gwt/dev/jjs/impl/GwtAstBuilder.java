@@ -109,6 +109,7 @@ import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.arg.OptionJsInteropMode.Mode;
 import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.thirdparty.guava.common.base.Function;
+import com.google.gwt.thirdparty.guava.common.base.Optional;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
@@ -231,6 +232,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 /**
@@ -1362,7 +1364,7 @@ public class GwtAstBuilder {
       return lambdaMethod;
     }
 
-    private void replaceLambdaWithInnerClassAllocation(LambdaExpression x, SourceInfo info,
+    private void replaceLambdaWithInnerClassAllocation(LambdaExpression x, final SourceInfo info,
         JClassType innerLambdaClass, JConstructor ctor, SyntheticArgumentBinding[] synthArgs) {
       // Finally, we replace the LambdaExpression with
       // new InnerLambdaClass(this, local1, local2, ...);
@@ -1373,10 +1375,10 @@ public class GwtAstBuilder {
         allocLambda.addArg(new JThisRef(info, innerLambdaClass.getEnclosingType()));
       }
       for (final SyntheticArgumentBinding sa : synthArgs) {
-        MethodInfo method = methodStack.peek();
+        final MethodInfo method = methodStack.peek();
         // Find the local variable in the current method context that is referred by the inner
         // lambda.
-        LocalVariableBinding argument = FluentIterable.from(method.locals.keySet()).firstMatch(
+        Optional<JExpression> argumentRef = FluentIterable.from(method.locals.keySet()).firstMatch(
             new Predicate<LocalVariableBinding>() {
               @Override
               public boolean apply(LocalVariableBinding enclosingLocal) {
@@ -1388,8 +1390,40 @@ public class GwtAstBuilder {
                         ((SyntheticArgumentBinding) enclosingLocal)
                             .actualOuterLocalVariable == sa.actualOuterLocalVariable;
               }
-            }).get();
-        allocLambda.addArg(makeLocalRef(info, argument, method));
+            }).transform(new Function<LocalVariableBinding, JExpression>() {
+              @Override
+              public JExpression apply(LocalVariableBinding b) {
+                return makeLocalRef(info, b, method);
+              }
+            });
+
+        // Local variable not found in current method context. Trying to find corresponding
+        // synthetic field in case if lambda is placed in anonymous/local class
+        // e.g. { int x = 1; new Outer(){ void m (){ Lambda l = () -> x+1;} }; }
+        if (!argumentRef.isPresent()
+            && innerLambdaClass.getEnclosingType().getClassDisposition().isLocalType()) {
+          argumentRef = FluentIterable.from(curClass.syntheticFields.entrySet()).firstMatch(
+                  new Predicate<Entry<SyntheticArgumentBinding, JField>>() {
+                    @Override
+                    public boolean apply(Entry<SyntheticArgumentBinding, JField> entry) {
+                      return entry.getKey().actualOuterLocalVariable == sa.actualOuterLocalVariable;
+                    }
+                  }).transform(
+                  new Function<Entry<SyntheticArgumentBinding, JField>, JExpression>() {
+                    @Override
+                    public JExpression apply(Entry<SyntheticArgumentBinding, JField> entry) {
+                      return makeInstanceFieldRef(info, entry.getValue());
+                    }
+                  });
+        }
+
+        // We cannot build expression to assign value to synthetic argument
+        if (!argumentRef.isPresent()) {
+          throw new InternalCompilerException(
+              "Unable to create expression for Lambda synthetic argument [" + sa + "]");
+        }
+
+        allocLambda.addArg(argumentRef.get());
       }
       // put the result on the stack, and pop out synthetic method from the scope
       push(allocLambda);

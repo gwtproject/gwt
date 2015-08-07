@@ -158,6 +158,9 @@ public class Java8Test extends GWTTestCase {
   public void testLambdaNestingCaptureLocal() {
   }
 
+  public void testLambdaNestingInAnonymousCaptureLocal() {
+  }
+
   public void testLambdaNestingCaptureField() {
   }
 

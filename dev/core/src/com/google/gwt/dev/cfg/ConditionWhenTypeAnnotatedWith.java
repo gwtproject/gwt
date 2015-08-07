@@ -61,7 +61,7 @@ public class ConditionWhenTypeAnnotatedWith extends Condition {
 
   @Override
   public String toString() {
-    return "<when-annotated with='" + annotatedWithTypeName + "'/>";
+    return "<when-annotated class='" + annotatedWithTypeName + "'/>";
   }
 
   @Override

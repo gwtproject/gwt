@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47e97bf9_57ae646d",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/SymbolMapHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-10T19:04:23Z",
+      "side": 1,
+      "message": "Is this used at all?",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 78
+      },
+      "revId": "815ce6206e1531978ad49cb40949b8c2239f8e36",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

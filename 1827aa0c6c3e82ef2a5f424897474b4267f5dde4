@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47e97bf9_7734c8e1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1378,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-10T18:57:08Z",
+      "side": 1,
+      "message": "I think the original code (and also the fix) are not doing the right thing.\n\nThere could be arbitrary nesting and we should add tests for that (integration tests in the supersourced Java8Test.java file). \n\nThe idea is that a captured local is either a local in the immediate enclosing method scope (that would be the scope creating it) or (for the cases of arbitrary nesting) it has been captured by the enclosing class and hence should be a field access.\n\nIIRC This is already what happens in the inner class setting and JDT models it correctly. But maybe because JDT does not model lambdas in the same way we might need to compute that ourselves.\n\nI suggest that you create complex nesting scenarios and I suspect the current code will fail those.",
+      "range": {
+        "startLine": 1378,
+        "startChar": 0,
+        "endLine": 1378,
+        "endChar": 8
+      },
+      "revId": "1827aa0c6c3e82ef2a5f424897474b4267f5dde4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47e97bf9_74c16697",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-10T18:57:08Z",
+      "side": 1,
+      "message": "Add the actual test to the supersourced Java8Test class at\nuser/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java\n\nThis file is supersourced so that GWT can be built on Java \u003c 8.\n\nAlso add tests where the declaring scope is not the immediate outer scope,\n\ne.g.\n.  \nClass A {\n  void m() { int x \u003d 1; class B() { void m() { Runnable r \u003d () -\u003e { int b \u003d x; } }}}\n\n\n(this will probably fail with the current fix)",
+      "revId": "1827aa0c6c3e82ef2a5f424897474b4267f5dde4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

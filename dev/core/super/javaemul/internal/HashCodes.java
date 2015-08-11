@@ -21,6 +21,7 @@ package javaemul.internal;
 public class HashCodes {
 
   private static int sNextHashId = 0;
+  private static final String HASH_CODE_PROPERTY = "$H";
 
   public static int hashCodeForString(String s) {
     return StringHashCache.getHashCode(s);
@@ -31,25 +32,15 @@ public class HashCodes {
       return 0;
     }
     return o instanceof String
-        ?  hashCodeForString(unsafeCast(o)) : getObjectIdentityHashCode(o);
+        ?  hashCodeForString(JsUtils.unsafeCastToString(o)) : getObjectIdentityHashCode(o);
   }
 
-  public static native int getObjectIdentityHashCode(Object o) /*-{
-    return o.$H || (o.$H = @HashCodes::getNextHashId()());
-  }-*/;
-
-  // TODO(goktug): replace unsafeCast with a real cast when the compiler can optimize it.
-  private static native String unsafeCast(Object string) /*-{
-    return string;
-  }-*/;
-
-  /**
-   * Called from JSNI. Do not change this implementation without updating:
-   * <ul>
-   * <li>{@link com.google.gwt.user.client.rpc.impl.SerializerBase}</li>
-   * </ul>
-   */
-  private static int getNextHashId() {
-    return ++sNextHashId;
+  public static int getObjectIdentityHashCode(Object o) {
+    if (JsUtils.isPropertyUndefined(o, HASH_CODE_PROPERTY)) {
+      int id = ++sNextHashId;
+      JsUtils.setIntProperty(o, HASH_CODE_PROPERTY, id);
+      return id;
+    }
+    return JsUtils.getIntProperty(o, HASH_CODE_PROPERTY);
   }
 }

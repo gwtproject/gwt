@@ -24,7 +24,7 @@ class StringHashCache {
   /**
    * The "old" cache; it will be dumped when front is full.
    */
-  private static Object back = createMap();
+  private static Object back = JsUtils.createNativeObject();
   /**
    * Tracks the number of entries in front.
    */
@@ -32,7 +32,7 @@ class StringHashCache {
   /**
    * The "new" cache; it will become back when it becomes full.
    */
-  private static Object front = createMap();
+  private static Object front = JsUtils.createNativeObject();
   /**
    * Pulled this number out of thin air.
    */
@@ -44,17 +44,17 @@ class StringHashCache {
     String key = ":" + str;
 
     // Check the front store.
-    Object result = get(front, key);
-    if (!isUndefined(result)) {
-      return cast(result);
+    Object result = JsUtils.getProperty(front, key);
+    if (!JsUtils.isUndefined(result)) {
+      return JsUtils.unsafeCastToInt(result);
     }
     // Check the back store.
-    result = get(back, key);
-    int hashCode = isUndefined(result) ? compute(str) : cast(result);
+    result = JsUtils.getProperty(back, key);
+    int hashCode = JsUtils.isUndefined(result) ? compute(str) : JsUtils.unsafeCastToInt(result);
     // Increment can trigger the swap/flush; call after checking back but
     // before writing to front.
     increment();
-    set(front, key, hashCode);
+    JsUtils.setIntProperty(front, key, hashCode);
 
     return hashCode;
   }
@@ -89,31 +89,9 @@ class StringHashCache {
   private static void increment() {
     if (count == MAX_CACHE) {
       back = front;
-      front = createMap();
+      front = JsUtils.createNativeObject();
       count = 0;
     }
     ++count;
   }
-
-  private static native Object get(Object map, String key) /*-{
-    return map[key];
-  }-*/;
-
-  private static native void set(Object map, String key, int value) /*-{
-    map[key] = value;
-  }-*/;
-
-  // Note: we are explicitly checking for undefined since '0 == null' equals true in JavaScript
-  private static native boolean isUndefined(Object o) /*-{
-    return o === undefined;
-  }-*/;
-
-  private static native int cast(Object o) /*-{
-    return o;
-  }-*/;
-
-  private static native Object createMap() /*-{
-    return {};
-  }-*/;
 }
-

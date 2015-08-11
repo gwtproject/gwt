@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "a41eb557_34a6b098",
+        "filename": "dev/core/super/javaemul/internal/HashCodes.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T23:11:47Z",
+      "side": 1,
+      "message": "played with the inliner with rluble@ help, and now I am getting Pk to be inlined. so new code (with the inliner change):\n\ngetObjectIdentityHashCode:\nfunction Gk(a) {\n  var b;\n  if (a[\u0027$H\u0027]\u003d\u003d\u003dundefined) {\n\tb\u003d++Fk;\n\ta[\u0027$H\u0027] \u003d b;\n\treturn b\n  }\n  return a[\u0027$H\u0027]\n}",
+      "parentUuid": "64e83d66_85d9c46b",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_330d7245",
         "filename": "dev/core/super/javaemul/internal/JsUtils.java",
         "patchSetId": 2

@@ -1,0 +1,334 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27b8073d_b09dd8f0",
+        "filename": "dev/core/super/javaemul/internal/HashCodes.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "Can you send me the javascript code snippet that result with this code?",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_330d7245",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "Instead of these last two you may introduce getInfinity() { return Infinity; }",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 7
+      },
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_93fd3e7c",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "Can we keep the Number related ones in the number class? A smaller scope helps us to more easily identify unused pieces and remove them when no longer needed.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 7
+      },
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_33cf32d7",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "This might be unneeded, see my other comment.",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_13a82e0f",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "This comment is not correct. A copy paste error?",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_73b53a63",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "same here.",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_53b2b67c",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "shouldn\u0027t be needed as we have both isUndefined and getProperty.",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_b39de2f0",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "getIntProperty?",
+      "range": {
+        "startLine": 71,
+        "startChar": 27,
+        "endLine": 71,
+        "endChar": 51
+      },
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_f3976aca",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "getProperty?",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_d3bb462b",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "Looks like only used from StringHashcache, we can move it there.",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_339292db",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "setIntProperty?",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_331d72f3",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "return x \u003d\u003d JsUtils.getFinite() || x \u003d\u003d -JsUtils.getFinite() and then remove IsFinite completely.",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_7327fa3e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Float.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "Double.isInfinite(x)",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_f3292a10",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Float.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "Double.isNan",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_708c10bf",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "We should not do an unsafe cast here. The rounded value might a larger than int.",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_13414ebf",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Number.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "parseDouble??",
+      "range": {
+        "startLine": 183,
+        "startChar": 19,
+        "endLine": 183,
+        "endChar": 29
+      },
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_7027f03e",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "This and others are probably not needed anymore as they implemented something this for this. Can you talk with @rluble,@leafwang and also verify the generated js output?",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_137f8e87",
+        "filename": "user/super/com/google/gwt/emul/java/util/ConcurrentModificationDetector.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-11T19:45:51Z",
+      "side": 1,
+      "message": "Inline these two methods?",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

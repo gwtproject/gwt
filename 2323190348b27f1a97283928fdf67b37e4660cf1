@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "e4298d86_0e3ccbe9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-11T23:11:35Z",
+      "side": 1,
+      "message": "Oh I see. Looking more closely we model lambda captures different from nested classes captures (which should probably not be that case). \n\ncase 1: directly enclosing method scope \u003d\u003e actualOuterLocalVariable is in method.local\ncase 2: captured by the outer lambda \u003d\u003e the capture is a parameter to the outer lambda, so we find the \"local\" with the same actualOuterLocalVariable, which is actually a parameter.\ncase 3: captured by an outer class (annonymous or local or plainly nested), then find the field in the enclosing class that captured the local.\n\nI think the condition innerLambdaClass.getEnclosingType().getClassDisposition().isLocalType() is not correct. Can you add the example of an innerclass capturing some outerclass variable.\n\n  class A { \n     int f;\n        class B {\n             void m() {  Runnable r \u003d () -\u003e ... f  ...; }\n        }\n   }\n\nThen you should also add the converse, e.g.\n\n  () -\u003e  {int b \u003d ... ;  () \u003e { new A() {void  m() { ... b.. } }}\n\nHere the inner class refers to a parameter in the outer lambda, which I am not sure if we treat correctly.",
+      "parentUuid": "47209b2d_7c76f54a",
+      "range": {
+        "startLine": 1381,
+        "startChar": 0,
+        "endLine": 1424,
+        "endChar": 9
+      },
+      "revId": "2323190348b27f1a97283928fdf67b37e4660cf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_d317c6d1",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 5

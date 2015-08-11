@@ -15,11 +15,15 @@
  */
 package java.util;
 
+import javaemul.internal.JsUtils;
+
 /**
  * A helper to detect concurrent modifications to collections. This is implemented as a helper
  * utility so that we could remove the checks easily by a flag.
  */
 class ConcurrentModificationDetector {
+
+  private static final String MOD_COUNT_PROPERTY = "_gwt_modCount";
 
   public static void structureChanged(Object map) {
     // Ensure that modCount is initialized if it is not already.
@@ -37,11 +41,11 @@ class ConcurrentModificationDetector {
     }
   }
 
-  private static native void setModCount(Object o, int modCount) /*-{
-    o._gwt_modCount = modCount;
-  }-*/;
+  private static void setModCount(Object o, int modCount) {
+    JsUtils.setIntPropertyOnObject(o, MOD_COUNT_PROPERTY, modCount);
+  }
 
-  private static native int getModCount(Object o) /*-{
-    return o._gwt_modCount;
-  }-*/;
+  private static int getModCount(Object o) {
+    return JsUtils.getIntPropertyFromObject(o, MOD_COUNT_PROPERTY);
+  }
 }

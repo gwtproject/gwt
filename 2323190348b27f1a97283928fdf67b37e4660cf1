@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27b8073d_53c8f6b9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-11T19:46:00Z",
+      "side": 1,
+      "message": "I think all this needs to be rewritten \nJExpression capturedLocalReference \u003d null;\n\nif (method.locals.containsKey(sa.actualOuterLocalVarialble)) {\n  // lambda is capturing a local from the immediate context\n  capturedLocalReference \u003d makeLocalRef(info, sa.actualOuterLocalVarialble, method)\n} else {\n  // local from outer scope has already been captured by enclosing class.\n\n  JField capturedLocalInOuterClass \u003d curClass.syntheticField.get(sa.actualOuterLocalVariable);\n\n  if (capturedLocalInOuterClass !\u003d null) {\n  captureLocalReference \u003d  makeInstanceFieldRef(info, capturedLocalInOuterClass);\n}\n\nassert capturedLocalReference !\u003d null;\n\nallocLambda.addArg(capturedLocalReference);\n}\n\n\nI think this is much more readable.",
+      "range": {
+        "startLine": 1381,
+        "startChar": 0,
+        "endLine": 1424,
+        "endChar": 9
+      },
+      "revId": "2323190348b27f1a97283928fdf67b37e4660cf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_d317c6d1",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-11T19:46:00Z",
+      "side": 1,
+      "message": "remove trailing whitespace. (you should configure your IDE to to do that for you).",
+      "range": {
+        "startLine": 817,
+        "startChar": 0,
+        "endLine": 817,
+        "endChar": 2
+      },
+      "revId": "2323190348b27f1a97283928fdf67b37e4660cf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_538916ad",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-11T19:46:00Z",
+      "side": 1,
+      "message": "this should be just l.run(1,2);",
+      "range": {
+        "startLine": 832,
+        "startChar": 21,
+        "endLine": 832,
+        "endChar": 39
+      },
+      "revId": "2323190348b27f1a97283928fdf67b37e4660cf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27b8073d_131aeefa",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-11T19:46:00Z",
+      "side": 1,
+      "message": "Due to super sourcing, a good practice during development is to make EACH of the tests fail to make sure they are running.",
+      "revId": "2323190348b27f1a97283928fdf67b37e4660cf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

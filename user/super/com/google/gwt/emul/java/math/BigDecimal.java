@@ -38,6 +38,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 
+import javaemul.internal.JsUtils;
+
 /**
  * This class represents immutable arbitrary precision decimal numbers. Each
  * {@code BigDecimal} instance is represented with a unscaled arbitrary
@@ -406,9 +408,9 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
     return regexTest(unscaledRegex, str);
   }
 
-  public static native double parseInt(String value, int base) /*-{
-    return parseInt(value, base);
-  }-*/;
+  public static double parseInt(String value, int base) {
+    return JsUtils.parseInt(value, base);
+  }
 
   private static native Object createBigDecimalUnscaledRegex() /*-{
     return /^[+-]?\d*$/i;

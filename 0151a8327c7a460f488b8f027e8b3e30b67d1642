@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "64e83d66_85d9c46b",
+        "filename": "dev/core/super/javaemul/internal/HashCodes.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "getObjectIdentityHashCode:\nfunction Gk(a) {\n  var b;\n  if (a[\u0027$H\u0027]\u003d\u003d\u003dundefined) {\n\tb\u003d++Fk;\n\tPk(a,\u0027$H\u0027,b);\n\treturn b\n  }\n  return a[\u0027$H\u0027]\n}\n\nJsUtils.setIntProperty:\nfunction Pk(a,b,c) {\n  a[b]\u003dc\n}",
+      "parentUuid": "27b8073d_b09dd8f0",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_330d7245",
         "filename": "dev/core/super/javaemul/internal/JsUtils.java",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2015-08-11T19:45:51Z",
       "side": 1,
       "message": "Instead of these last two you may introduce getInfinity() { return Infinity; }",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 7
+      },
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64e83d66_42fdf2de",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8073d_330d7245",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "64e83d66_a2edde2e",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "You can always just look for callers here, I\u0027d rather have these in a central place since it makes super sourcing them easier.",
+      "parentUuid": "27b8073d_93fd3e7c",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 7
+      },
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_33cf32d7",
         "filename": "dev/core/super/javaemul/internal/JsUtils.java",
         "patchSetId": 2
@@ -76,6 +142,24 @@
       "writtenOn": "2015-08-11T19:45:51Z",
       "side": 1,
       "message": "This might be unneeded, see my other comment.",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64e83d66_82ac1af9",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "see comment",
+      "parentUuid": "27b8073d_33cf32d7",
       "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "64e83d66_a2c6feac",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8073d_13a82e0f",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_73b53a63",
         "filename": "dev/core/super/javaemul/internal/JsUtils.java",
         "patchSetId": 2
@@ -116,6 +218,24 @@
     },
     {
       "key": {
+        "uuid": "64e83d66_82953a99",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8073d_73b53a63",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_53b2b67c",
         "filename": "dev/core/super/javaemul/internal/JsUtils.java",
         "patchSetId": 2
@@ -127,6 +247,24 @@
       "writtenOn": "2015-08-11T19:45:51Z",
       "side": 1,
       "message": "shouldn\u0027t be needed as we have both isUndefined and getProperty.",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64e83d66_2221ce5d",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "This is needed as lon as we still have dev mode. We can not refer to a int as Object if that code is run in dev mode.",
+      "parentUuid": "27b8073d_53b2b67c",
       "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -156,6 +294,30 @@
     },
     {
       "key": {
+        "uuid": "64e83d66_02a92adb",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8073d_b39de2f0",
+      "range": {
+        "startLine": 71,
+        "startChar": 27,
+        "endLine": 71,
+        "endChar": 51
+      },
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_f3976aca",
         "filename": "dev/core/super/javaemul/internal/JsUtils.java",
         "patchSetId": 2
@@ -167,6 +329,24 @@
       "writtenOn": "2015-08-11T19:45:51Z",
       "side": 1,
       "message": "getProperty?",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64e83d66_e2a52601",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8073d_f3976aca",
       "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -190,6 +370,24 @@
     },
     {
       "key": {
+        "uuid": "64e83d66_0206cad9",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "I prefer having these in a central place and not having to deal with the mangling for j2cl  (having these public static).",
+      "parentUuid": "27b8073d_d3bb462b",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_339292db",
         "filename": "dev/core/super/javaemul/internal/JsUtils.java",
         "patchSetId": 2
@@ -201,6 +399,24 @@
       "writtenOn": "2015-08-11T19:45:51Z",
       "side": 1,
       "message": "setIntProperty?",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64e83d66_c2a222f7",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8073d_339292db",
       "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -224,6 +440,24 @@
     },
     {
       "key": {
+        "uuid": "64e83d66_e2cac6c2",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8073d_331d72f3",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_7327fa3e",
         "filename": "user/super/com/google/gwt/emul/java/lang/Float.java",
         "patchSetId": 2
@@ -235,6 +469,24 @@
       "writtenOn": "2015-08-11T19:45:51Z",
       "side": 1,
       "message": "Double.isInfinite(x)",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64e83d66_e2a64644",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Float.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8073d_7327fa3e",
       "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -258,6 +510,24 @@
     },
     {
       "key": {
+        "uuid": "64e83d66_c2b34280",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Float.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8073d_f3292a10",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_708c10bf",
         "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
         "patchSetId": 2
@@ -269,6 +539,24 @@
       "writtenOn": "2015-08-11T19:45:51Z",
       "side": 1,
       "message": "We should not do an unsafe cast here. The rounded value might a larger than int.",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64e83d66_c25a22c8",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "this is what the code was doing before and what we do in all places, this is not changing behaviour.",
+      "parentUuid": "27b8073d_708c10bf",
       "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -298,6 +586,30 @@
     },
     {
       "key": {
+        "uuid": "64e83d66_224c2e18",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Number.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "The method being called here is not parseDouble it is parseFloat and it think the java call signature should make this clear.",
+      "parentUuid": "27b8073d_13414ebf",
+      "range": {
+        "startLine": 183,
+        "startChar": 19,
+        "endLine": 183,
+        "endChar": 29
+      },
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_7027f03e",
         "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
         "patchSetId": 2
@@ -315,6 +627,24 @@
     },
     {
       "key": {
+        "uuid": "64e83d66_c28102a0",
+        "filename": "user/super/com/google/gwt/emul/java/util/AbstractHashMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "The patch you are referring to is not merged. So for now it has to be this way, also rluble@ pointed out that for performance critical code he would not rely on the patch and we should continue to have these unsafe casts.",
+      "parentUuid": "27b8073d_7027f03e",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_137f8e87",
         "filename": "user/super/com/google/gwt/emul/java/util/ConcurrentModificationDetector.java",
         "patchSetId": 2
@@ -326,6 +656,24 @@
       "writtenOn": "2015-08-11T19:45:51Z",
       "side": 1,
       "message": "Inline these two methods?",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64e83d66_6208f69e",
+        "filename": "user/super/com/google/gwt/emul/java/util/ConcurrentModificationDetector.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-11T22:38:57Z",
+      "side": 1,
+      "message": "I found it to be more readable with the extra methods, but changed anyway.",
+      "parentUuid": "27b8073d_137f8e87",
       "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

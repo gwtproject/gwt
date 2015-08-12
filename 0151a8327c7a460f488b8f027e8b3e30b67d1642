@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "645f5d28_b4798da0",
+        "filename": "dev/core/super/javaemul/internal/HashCodes.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-12T23:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "645f5d28_4a42b369",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_330d7245",
         "filename": "dev/core/super/javaemul/internal/JsUtils.java",
         "patchSetId": 2
@@ -263,6 +281,30 @@
       "side": 1,
       "message": "That\u0027s not true, earlier I cc\u0027d you the related J2CL review thread.",
       "parentUuid": "645f5d28_cae903f4",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 7
+      },
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "645f5d28_3420fda0",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-12T23:46:56Z",
+      "side": 1,
+      "message": "I moved parseFloat back to number since it was the only caller, for IsNaN we have three callers and I think thus this is the better place and for parseInt we got two (so I kept it as well)",
+      "parentUuid": "645f5d28_ca958313",
       "range": {
         "startLine": 22,
         "startChar": 0,
@@ -616,6 +658,24 @@
       "side": 1,
       "message": "With JsMethod we already avoiding the mangling, so I don\u0027t think it is a concern.\nWe already have native methods spread across JRE and the benefit of seeing \u0027some\u0027 of them in one place is minimal to none compared to preserving a good cohesion across code base.\nLet\u0027s talk in person tomorrow if you feel strongly about this.",
       "parentUuid": "645f5d28_6ad9f768",
+      "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "645f5d28_14e739d3",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-12T23:46:56Z",
+      "side": 1,
+      "message": "moved back",
+      "parentUuid": "645f5d28_4a5cf3f8",
       "revId": "0151a8327c7a460f488b8f027e8b3e30b67d1642",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4a15560_1cedf5b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-12T22:44:35Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "e8489eecf49b3ce92cec67e15987571774396498",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4a15560_3cf23191",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JJSOptionsImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-12T22:44:35Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "e8489eecf49b3ce92cec67e15987571774396498",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4a15560_dce6add5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RemoveAutoboxing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-12T22:44:35Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JMethod.",
+      "revId": "e8489eecf49b3ce92cec67e15987571774396498",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4a15560_fce369c2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RemoveAutoboxing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-12T22:44:35Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JReferenceType.",
+      "revId": "e8489eecf49b3ce92cec67e15987571774396498",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4a15560_9ce025b8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RemoveAutoboxing.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-12T22:44:35Z",
+      "side": 1,
+      "message": "[error] \u0027!\u003d\u0027 is not followed by whitespace.",
+      "revId": "e8489eecf49b3ce92cec67e15987571774396498",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4a15560_bcdde100",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/SameParameterValueOptimizer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-12T22:44:35Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "e8489eecf49b3ce92cec67e15987571774396498",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

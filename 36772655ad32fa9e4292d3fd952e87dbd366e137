@@ -94,6 +94,23 @@
     },
     {
       "key": {
+        "uuid": "a4a15560_9c7105d3",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-12T17:47:01Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "36772655ad32fa9e4292d3fd952e87dbd366e137",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "645f5d28_a4471e72",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 6

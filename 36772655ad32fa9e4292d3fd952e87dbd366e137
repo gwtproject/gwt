@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "045ce134_47174e07",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2015-08-12T19:06:10Z",
+      "side": 1,
+      "message": "Done\n\nStrange, but eclipse mars doesn\u0027t wrap this line.",
+      "parentUuid": "645f5d28_84541a2c",
+      "range": {
+        "startLine": 1391,
+        "startChar": 71,
+        "endLine": 1391,
+        "endChar": 95
+      },
+      "revId": "36772655ad32fa9e4292d3fd952e87dbd366e137",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "645f5d28_64592660",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2015-08-12T17:46:38Z",
       "side": 1,
       "message": "Fix trailing whitespace.",
+      "range": {
+        "startLine": 445,
+        "startChar": 19,
+        "endLine": 445,
+        "endChar": 20
+      },
+      "revId": "36772655ad32fa9e4292d3fd952e87dbd366e137",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "446259ef_e960557a",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2015-08-12T19:06:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "645f5d28_64592660",
       "range": {
         "startLine": 445,
         "startChar": 19,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "045ce134_271c5a27",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2015-08-12T19:06:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "645f5d28_445e224a",
+      "range": {
+        "startLine": 461,
+        "startChar": 0,
+        "endLine": 461,
+        "endChar": 4
+      },
+      "revId": "36772655ad32fa9e4292d3fd952e87dbd366e137",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "645f5d28_24632e10",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
         "patchSetId": 6
@@ -82,6 +154,30 @@
       "writtenOn": "2015-08-12T17:46:38Z",
       "side": 1,
       "message": "Fix trailing whitespace. here and elsewhere.",
+      "range": {
+        "startLine": 493,
+        "startChar": 0,
+        "endLine": 493,
+        "endChar": 2
+      },
+      "revId": "36772655ad32fa9e4292d3fd952e87dbd366e137",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "045ce134_0721565d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2015-08-12T19:06:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "645f5d28_24632e10",
       "range": {
         "startLine": 493,
         "startChar": 0,
@@ -122,6 +218,30 @@
       "writtenOn": "2015-08-12T17:46:38Z",
       "side": 1,
       "message": "Let\u0027s capture here something from all different scenarios. \n1. a variable for the runnable method.\n2. a parameter from the runnable method (make it Lambda\u003cInteger\u003e so that it takes paramter\n3. a parameter from the outer lambda.",
+      "range": {
+        "startLine": 976,
+        "startChar": 2,
+        "endLine": 979,
+        "endChar": 11
+      },
+      "revId": "36772655ad32fa9e4292d3fd952e87dbd366e137",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "045ce134_67125219",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2015-08-12T19:06:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "645f5d28_a4471e72",
       "range": {
         "startLine": 976,
         "startChar": 2,

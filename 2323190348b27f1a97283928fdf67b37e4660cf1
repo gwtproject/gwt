@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "645f5d28_64ab6690",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-12T17:46:38Z",
+      "side": 1,
+      "message": "It reads much better now.",
+      "parentUuid": "045ce134_a7e60a22",
+      "range": {
+        "startLine": 1381,
+        "startChar": 0,
+        "endLine": 1424,
+        "endChar": 9
+      },
+      "revId": "2323190348b27f1a97283928fdf67b37e4660cf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_d317c6d1",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 5

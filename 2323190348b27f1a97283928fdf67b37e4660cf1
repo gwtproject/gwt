@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "045ce134_a7e60a22",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2015-08-12T08:53:41Z",
+      "side": 1,
+      "message": "Done\n\n\u003e example of an innerclass capturing some outerclass variable\n\nImplemented in \nJava8Test.testLambdaNestingCaptureField_InnerClassCapturingOuterClassVariable\nI\u0027ve used top level static class for clean initial scope.\n\n\u003e inner class refers to a parameter in the outer lambda\n\nImplmeneted in\nJava8Test.testInnerClassCaptureLocalFromOuterLambda()\n\nCompilerSuite and AST tests passed.\n\n+\n\n\u003e I think all this needs to be rewritten\n\nI\u0027ve tried to simplify code.",
+      "parentUuid": "e4298d86_0e3ccbe9",
+      "range": {
+        "startLine": 1381,
+        "startChar": 0,
+        "endLine": 1424,
+        "endChar": 9
+      },
+      "revId": "2323190348b27f1a97283928fdf67b37e4660cf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_d317c6d1",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 5
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "045ce134_07d83661",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2015-08-12T08:53:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8073d_d317c6d1",
+      "range": {
+        "startLine": 817,
+        "startChar": 0,
+        "endLine": 817,
+        "endChar": 2
+      },
+      "revId": "2323190348b27f1a97283928fdf67b37e4660cf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27b8073d_538916ad",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 5
@@ -107,6 +155,30 @@
       "writtenOn": "2015-08-11T19:46:00Z",
       "side": 1,
       "message": "this should be just l.run(1,2);",
+      "range": {
+        "startLine": 832,
+        "startChar": 21,
+        "endLine": 832,
+        "endChar": 39
+      },
+      "revId": "2323190348b27f1a97283928fdf67b37e4660cf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "045ce134_e7ec0206",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2015-08-12T08:53:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8073d_538916ad",
       "range": {
         "startLine": 832,
         "startChar": 21,
@@ -147,6 +219,24 @@
       "writtenOn": "2015-08-11T21:20:42Z",
       "side": 1,
       "message": "I checked all new tests on failure before submit patch. Did I missed something?",
+      "parentUuid": "27b8073d_131aeefa",
+      "revId": "2323190348b27f1a97283928fdf67b37e4660cf1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "045ce134_c7e9fef3",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 7970
+      },
+      "writtenOn": "2015-08-12T08:53:41Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "27b8073d_131aeefa",
       "revId": "2323190348b27f1a97283928fdf67b37e4660cf1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

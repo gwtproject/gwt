@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64591d73_7d1c5328",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1552,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-13T22:29:48Z",
+      "side": 1,
+      "message": "revert.",
+      "revId": "b1e2ce37946b169b1600db40cb21a5b4e3701e04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_7a89f930",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-13T22:29:48Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be common. Other code should use Double.isNan instead.",
+      "revId": "b1e2ce37946b169b1600db40cb21a5b4e3701e04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_1a943d49",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-13T22:29:48Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be common. Other code should use Integer.parseInt instead.",
+      "revId": "b1e2ce37946b169b1600db40cb21a5b4e3701e04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_1deef77f",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-13T22:29:48Z",
+      "side": 1,
+      "message": "only used from StringHashCache",
+      "revId": "b1e2ce37946b169b1600db40cb21a5b4e3701e04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_fdf6a350",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-13T22:29:48Z",
+      "side": 1,
+      "message": "only used in Math.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 57
+      },
+      "revId": "b1e2ce37946b169b1600db40cb21a5b4e3701e04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_bd4a6b2a",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-13T22:29:48Z",
+      "side": 1,
+      "message": "unused",
+      "revId": "b1e2ce37946b169b1600db40cb21a5b4e3701e04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_3d12db17",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-13T22:29:48Z",
+      "side": 1,
+      "message": "move to ConcurrentModificationDetector\n(you can simply revert ConcurrentModificationDetector)",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 7
+      },
+      "revId": "b1e2ce37946b169b1600db40cb21a5b4e3701e04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

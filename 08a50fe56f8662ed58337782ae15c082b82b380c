@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4a15560_7c0d19c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-13T21:15:29Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "08a50fe56f8662ed58337782ae15c082b82b380c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4a15560_1c12d5e5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JJSOptionsImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-13T21:15:29Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "08a50fe56f8662ed58337782ae15c082b82b380c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4a15560_3c1791d6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AutoboxUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-13T21:15:29Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JConstructor.",
+      "revId": "08a50fe56f8662ed58337782ae15c082b82b380c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4a15560_dc1b0dfd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AutoboxUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-13T21:15:29Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "08a50fe56f8662ed58337782ae15c082b82b380c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4a15560_fc184902",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AutoboxUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-13T21:15:29Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "08a50fe56f8662ed58337782ae15c082b82b380c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4a15560_9c258539",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RemoveBoxedTypes.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-13T21:15:29Z",
+      "side": 1,
+      "message": "[error] \u0027!\u003d\u0027 is not followed by whitespace.",
+      "revId": "08a50fe56f8662ed58337782ae15c082b82b380c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4a15560_bc22c12c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/SameParameterValueOptimizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-13T21:15:29Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "08a50fe56f8662ed58337782ae15c082b82b380c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

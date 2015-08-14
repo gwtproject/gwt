@@ -276,17 +276,17 @@ public class JsInliner {
 
     @Override
     public void endVisit(JsArrayAccess x, JsContext ctx) {
-      complexity++;
+      complexity += "[]".length();
     }
 
     @Override
     public void endVisit(JsArrayLiteral x, JsContext ctx) {
-      complexity++;
+      complexity += x.getExpressions().size()* ",".length() + "[]".length();
     }
 
     @Override
     public void endVisit(JsBinaryOperation x, JsContext ctx) {
-      complexity++;
+      complexity += x.getOperator().getSymbol().length();
     }
 
     @Override
@@ -296,67 +296,69 @@ public class JsInliner {
 
     @Override
     public void endVisit(JsConditional x, JsContext ctx) {
-      complexity++;
+      complexity += "?:".length();
     }
 
     @Override
     public void endVisit(JsFunction x, JsContext ctx) {
-      complexity++;
+      complexity += "function ".length() + x.getParameters().size() * ",".length()
+          + "(){}".length();
     }
 
     @Override
     public void endVisit(JsInvocation x, JsContext ctx) {
-      complexity++;
+      complexity += x.getArguments().size() * ",".length() + "()".length();
     }
 
     @Override
     public void endVisit(JsNameRef x, JsContext ctx) {
-      complexity++;
+      // Average name length in obfuscated mode.
+      complexity += 2;
     }
 
     @Override
     public void endVisit(JsNew x, JsContext ctx) {
-      complexity++;
+      complexity += "new ".length() + x.getArguments().size() * ",".length() + "()".length();
     }
 
     @Override
     public void endVisit(JsNullLiteral x, JsContext ctx) {
-      complexity++;
+      complexity += "null".length();
     }
 
     @Override
     public void endVisit(JsNumberLiteral x, JsContext ctx) {
-      complexity++;
+      complexity += x.toSource().length();
     }
 
     @Override
     public void endVisit(JsObjectLiteral x, JsContext ctx) {
-      complexity++;
+      complexity += x.getPropertyInitializers().size() * ",:".length() + "{}".length();
     }
 
     @Override
     public void endVisit(JsPostfixOperation x, JsContext ctx) {
-      complexity++;
+      complexity += x.getOperator().getSymbol().length();
     }
 
     @Override
     public void endVisit(JsPrefixOperation x, JsContext ctx) {
-      complexity++;
+      complexity += x.getOperator().getSymbol().length();
     }
 
     @Override
     public void endVisit(JsRegExp x, JsContext ctx) {
-      complexity++;
+      complexity += x.getPattern().length();
     }
 
     @Override
     public void endVisit(JsStringLiteral x, JsContext ctx) {
-      complexity++;
+      complexity += x.getValue().length() + "\"\"".length();
     }
 
     @Override
     public void endVisit(JsThisRef x, JsContext ctx) {
-      complexity++;
+      complexity += "this".length();
     }
 
     public int getComplexity() {
@@ -1549,7 +1551,7 @@ public class JsInliner {
    * code to be inlined, but at a cost of larger JS output.
    */
   private static final double MAX_COMPLEXITY_INCREASE = Double.parseDouble(System.getProperty(
-      "gwt.jsinlinerRatio", "1.5"));
+      "gwt.jsinlinerRatio", "1.0"));
 
   /**
    * Static entry point used by JavaToJavaScriptCompiler.

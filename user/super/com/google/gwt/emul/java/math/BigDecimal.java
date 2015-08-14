@@ -38,6 +38,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 
+import javaemul.internal.JsUtils;
+
 /**
  * This class represents immutable arbitrary precision decimal numbers. Each
  * {@code BigDecimal} instance is represented with a unscaled arbitrary

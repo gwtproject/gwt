@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64591d73_2040eeee",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-14T02:36:35Z",
+      "side": 1,
+      "message": "Lets not use the 32 bits, here is why:\n\nin v8 on a 32 bit architecture they use something called SMI. Essentially they represent the value of a 31 bit integer in a pointer. To distinguish between pointers and int vaules they use one bit for flagging.\n\nif you look into v8.h \u003d\u003e IsValidSmi you can see that code. It works different for 64 bits.\n\nThe problem with 32 bits is that its mostly use on low performance hardware anyway, e.. chromebooks, android phones, etc. so we should have a good implementation there.\n\nAn array of SMI is faster than an array of doubles. All arrays start out as an array of SMI and then maybe convert to other things.\n\n\n\nSo this code:\n\nvar a \u003d new Array();\n\na[0] \u003d 1;\na[1] \u003d 0.5;\n\nwould cause a reallocation for a[1] and a conversion of the whole array.\n\n\nSo we should really only be using the first 31 bits of the number to store our bits there.",
+      "range": {
+        "startLine": 23,
+        "startChar": 42,
+        "endLine": 23,
+        "endChar": 50
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_00296a39",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-14T02:36:35Z",
+      "side": 1,
+      "message": "I think this statement is not true anymore",
+      "range": {
+        "startLine": 24,
+        "startChar": 3,
+        "endLine": 27,
+        "endChar": 2
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_e025565f",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-14T02:36:35Z",
+      "side": 1,
+      "message": "not sure about this statement, why would we be different than the JVM here?",
+      "range": {
+        "startLine": 28,
+        "startChar": 3,
+        "endLine": 32,
+        "endChar": 50
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_40640299",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-14T02:36:35Z",
+      "side": 1,
+      "message": "I think this can now go away since we are not using the sparse nature at all only using valid indexes.",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 17
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_6073065d",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-14T02:36:35Z",
+      "side": 1,
+      "message": "remove comment",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 40
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_c0777246",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-14T02:36:35Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 3
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_e07ef61e",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-14T02:36:35Z",
+      "side": 1,
+      "message": "Should not be needed anymore right?",
+      "range": {
+        "startLine": 226,
+        "startChar": 32,
+        "endLine": 226,
+        "endChar": 43
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_00820aa3",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-14T02:36:35Z",
+      "side": 1,
+      "message": "our array will not be sparse anymore so I think we can just use the last position in the array right?",
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

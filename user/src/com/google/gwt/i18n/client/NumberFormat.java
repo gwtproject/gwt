@@ -451,7 +451,7 @@ public class NumberFormat {
   /**
    * Provides the global currency format for the current locale, using its
    * default currency.
-   * 
+   *
    * @return a <code>NumberFormat</code> capable of producing and consuming
    *         currency format for the current locale
    */
@@ -471,7 +471,7 @@ public class NumberFormat {
     return new NumberFormat(defaultNumberConstants.globalCurrencyPattern(),
         currencyData, false);
   }
-  
+
   /**
    * Provides the global currency format for the current locale, using a
    * specified currency.
@@ -546,7 +546,7 @@ public class NumberFormat {
    * Provides the simple currency format for the current locale using a
    * specified currency. Note that these formats may be ambiguous if the
    * currency isn't clear from other content on the page.
-   * 
+   *
    * @param currencyCode valid currency code, as defined in
    *        com.google.gwt.i18n.client
    *        .constants.CurrencyCodeMapConstants.properties
@@ -889,6 +889,30 @@ public class NumberFormat {
     this(defaultNumberConstants, pattern, cdata, userSuppliedPattern);
   }
 
+  // Copy constructor for internal use
+  private NumberFormat(NumberFormat numberFormat) {
+    this.pattern = numberFormat.pattern;
+    this.numberConstants = numberFormat.numberConstants;
+    this.currencyData = numberFormat.currencyData;
+    this.decimalPosition = numberFormat.decimalPosition;
+    this.decimalSeparatorAlwaysShown = numberFormat.decimalSeparatorAlwaysShown;
+    this.digitsLength = numberFormat.digitsLength;
+    this.exponent = numberFormat.exponent;
+    this.groupingSize = numberFormat.groupingSize;
+    this.isCurrencyFormat = numberFormat.isCurrencyFormat;
+    this.maximumFractionDigits = numberFormat.maximumFractionDigits;
+    this.maximumIntegerDigits = numberFormat.maximumIntegerDigits;
+    this.minExponentDigits = numberFormat.minExponentDigits;
+    this.minimumFractionDigits = numberFormat.minimumFractionDigits;
+    this.minimumIntegerDigits = numberFormat.minimumIntegerDigits;
+    this.multiplier = numberFormat.multiplier;
+    this.negativePrefix = numberFormat.negativePrefix;
+    this.negativeSuffix = numberFormat.negativeSuffix;
+    this.positivePrefix = numberFormat.positivePrefix;
+    this.positiveSuffix = numberFormat.positiveSuffix;
+    this.useExponentialNotation = numberFormat.useExponentialNotation;
+  }
+
   /**
    * This method formats a double to produce a string.
    *
@@ -975,34 +999,43 @@ public class NumberFormat {
   }
 
   /**
-   * Change the number of fractional digits used for formatting with this
+   * Change the number of fractional digits used for formatting in the returned
    * instance.
-   * 
+   *
+   * <p>
+   * Note: The current instance will not be changed so callers need to use the returned instance.
+   *
    * @param digits the exact number of fractional digits for formatted
    *     values; must be >= 0
-   * @return {@code this}, for chaining purposes
+   * @return {@code this}, the newly formatting instance (different from the current instance).
    */
   public NumberFormat overrideFractionDigits(int digits) {
     return overrideFractionDigits(digits, digits);
   }
 
   /**
-   * Change the number of fractional digits used for formatting with this
+   * Change the number of fractional digits used for formatting in the returned
    * instance. Digits after {@code minDigits} that are zero will be omitted from
    * the formatted value.
-   * 
+   *
+   * <p>
+   * Note: The current instance will not be changed so callers need to use the returned instance.
+   *
    * @param minDigits the minimum number of fractional digits for formatted
    *     values; must be >= 0
    * @param maxDigits the maximum number of fractional digits for formatted
    *     values; must be >= {@code minDigits}
-   * @return {@code this}, for chaining purposes
+   * @return {@code this}, the newly formatting instance (different from the current instance).
    */
   public NumberFormat overrideFractionDigits(int minDigits, int maxDigits) {
     assert minDigits >= 0;
     assert maxDigits >= minDigits;
-    minimumFractionDigits = minDigits;
-    maximumFractionDigits = maxDigits;
-    return this;
+
+    NumberFormat clonedFormat = new NumberFormat(this);
+    clonedFormat.minimumFractionDigits = minDigits;
+    clonedFormat.maximumFractionDigits = maxDigits;
+
+    return clonedFormat;
   }
 
   /**

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -538,6 +538,16 @@ public class NumberFormat_en_Test extends GWTTestCase {
     assertEquals(".0", str);
     str = NumberFormat.getFormat("#").format(0);
     assertEquals("0", str);
+  }
+
+  public void testOverrideDigitPrecision() {
+    NumberFormat originalFormat = NumberFormat.getFormat("0.0000");
+    assertEquals("123.4567", originalFormat.format(123.4567));
+    NumberFormat changedFormat = originalFormat.overrideFractionDigits(0, 2);
+
+    assertEquals("123.46", changedFormat.format(123.4567));
+    assertEquals("123.4567", originalFormat.format(123.4567));
+    assertNotSame(originalFormat, changedFormat);
   }
 
   private void assertAllZeros(String str, int prefixLen) {

@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -14,8 +14,6 @@
  * the License.
  */
 package com.google.gwt.emultest.java.util;
-
-import com.google.gwt.core.client.GWT;
 
 import org.apache.commons.collections.TestMap;
 
@@ -27,6 +25,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import javaemul.internal.Environment;
 
 /**
  * Tests <code>IdentityHashMap</code>.
@@ -104,7 +104,7 @@ public class IdentityHashMapTest extends TestMap {
 
   /**
    * Check the state of a newly constructed, empty IdentityHashMap.
-   * 
+   *
    * @param hashMap
    */
   private static void checkEmptyHashMapAssumptions(IdentityHashMap hashMap) {
@@ -502,7 +502,7 @@ public class IdentityHashMapTest extends TestMap {
 
     hashMap1.put(new Foo(), VALUE_1);
     hashMap2.put(new Foo(), VALUE_1);
-    if (GWT.isScript()) {
+    if (!Environment.isJreEnvironment()) {
       // Only reliable in Production Mode since Development Mode can have
       // identity hash collisions.
       assertFalse(hashMap1.hashCode() == hashMap2.hashCode());

@@ -1,12 +1,12 @@
 /*
  * Copyright 2009 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -21,15 +21,15 @@
  * licenses this file to You under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
- * 
+ *
  * INCLUDES MODIFICATIONS BY GOOGLE.
  */
 /**
@@ -37,13 +37,14 @@
  */
 package com.google.gwt.emultest.java.math;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.emultest.java.util.EmulTestBase;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
+
+import javaemul.internal.Environment;
 
 /**
  * Class: java.math.BigDecimal Methods: abs, compareTo, equals, hashCode, max,
@@ -390,7 +391,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
    * negate(MathContext) for a negative BigDecimal.
    */
   public void testNegateMathContextNegative() {
-    if (!GWT.isScript()) {
+    if (Environment.isJreEnvironment()) {
       // OpenJDK fails this test, so for now we only run it in Production Mode
       return;
     }
@@ -411,7 +412,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
    * negate(MathContext) for a positive BigDecimal.
    */
   public void testNegateMathContextPositive() {
-    if (!GWT.isScript()) {
+    if (Environment.isJreEnvironment()) {
       // OpenJDK fails this test, so for now we only run it in Production Mode
       return;
     }

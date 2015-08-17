@@ -15,14 +15,14 @@
  */
 package com.google.gwt.emultest.java.lang;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Locale;
+
+import javaemul.internal.Environment;
 
 /**
  * TODO: COMPILER OPTIMIZATIONS HAVE MADE THIS TEST NOT ACTUALLY TEST ANYTHING!
@@ -161,17 +161,17 @@ public class StringTest extends GWTTestCase {
     assertEquals("bcd", str);
     try {
       new String(bytes, 1, 6);
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2);
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 6, 2);
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
   }
@@ -191,32 +191,32 @@ public class StringTest extends GWTTestCase {
     assertEquals("ßçÐ", str);
     try {
       new String(bytes, 1, 6, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 6, 2, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 1, 6, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 6, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
   }
@@ -237,32 +237,32 @@ public class StringTest extends GWTTestCase {
     assertEquals("ßçÐ", str);
     try {
       new String(bytes, 2, 12, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 12, 2, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 2, 12, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 12, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", GWT.isScript());
+      assertTrue("Should have thrown IOOB in Development Mode", !Environment.isJreEnvironment());
     } catch (IndexOutOfBoundsException expected) {
     }
   }
@@ -667,7 +667,7 @@ public class StringTest extends GWTTestCase {
 
   public void testSplit_emptyExpr() {
     // TODO(rluble):  implement JDK8 string.split semantics and fix test.
-    String[] expected = (!GWT.isScript() && TestUtils.getJdkVersion() > 7) ?
+    String[] expected = (Environment.isJreEnvironment() && TestUtils.getJdkVersion() > 7) ?
         new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"} :
         new String[] {"", "a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
     compareList("emptyRegexSplit", expected, "abcxxdexfx".split(""));
@@ -706,7 +706,7 @@ public class StringTest extends GWTTestCase {
     assertEquals("concat with str.toString()", "0abcd", "0" + str.toString() + "d");
 
     // issue 4301
-    Object s = TRUE ? "abc" : JavaScriptObject.createObject();
+    Object s = TRUE ? "abc" : createJavaScriptObject();
     assertTrue("issue4301", isJsStringValue(s.toString()));
     assertSame("s same as s.toString()", s, s.toString());
   }
@@ -817,5 +817,9 @@ public class StringTest extends GWTTestCase {
   private String toS(char from) {
     return Character.toString(from);
   }
+
+  private static native Object createJavaScriptObject() /*-{
+    return {};
+  }-*/;
 
 }

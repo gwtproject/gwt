@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Google Inc.
+ * Copyright 2015 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,25 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.testing;
+package javaemul.internal;
 
 /**
- * Utility functions needed by various tests.
+ * Allows access to the underlying environment.
  */
-public class TestUtils {
-
-  public static int getJdkVersion() {
-    String versionString = System.getProperty("java.version", "none");
-    if (versionString.equals("none")) {
-      return -1;
-    }
-
-    return getMajorVersion(versionString);
-  }
-
-  private static int getMajorVersion(String versionString) {
-    String[] split = versionString.split("\\.");
-    assert split.length >= 1;
-    return Integer.parseInt(split[1]);
-  }
+public class Environment {
+  /**
+   * Returns true if running in a JRE, otherwise false.
+   */
+  public static native boolean isJreEnvironment() /*-{
+    return !@com.google.gwt.core.shared.GWT::isScript()();
+  }-*/;
 }
+

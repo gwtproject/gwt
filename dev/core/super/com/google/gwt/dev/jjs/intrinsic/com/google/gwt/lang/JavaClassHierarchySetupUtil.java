@@ -151,7 +151,16 @@ public class JavaClassHierarchySetupUtil {
   public static native JavaScriptObject makeLambdaFunction(JavaScriptObject samMethod,
       JavaScriptObject instance) /*-{
     var lambda = function() { return samMethod.apply(lambda, arguments); }
-    lambda.__proto__ = instance;
+
+    var canSetPrototype = ({ __proto__: [] } instanceof Array);
+    if (canSetPrototype) {
+      lambda.__proto__ = instance;
+    } else {
+      for (var prop in instance) {
+        lambda[prop] = instance[prop];
+      }
+    }
+
     return lambda;
   }-*/;
 

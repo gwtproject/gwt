@@ -1,12 +1,12 @@
 /*
  * Copyright 2008 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,11 +15,12 @@
  */
 package com.google.gwt.emultest.java.util;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import javaemul.internal.Environment;
 
 /**
  * Tests for GWT's emulation of the JRE Date class.
@@ -540,7 +541,7 @@ public class DateTest extends GWTTestCase {
   public void testToGMTString() {
 
     // We can't rely on the JRE's toString, as it is an implementation detail.
-    if (GWT.isScript()) {
+    if (!Environment.isJreEnvironment()) {
       // /////////////////////////////
       // Past
       // /////////////////////////////
@@ -561,7 +562,7 @@ public class DateTest extends GWTTestCase {
   public void testToLocaleString() {
 
     // We can't rely on the JRE's toString, as it is an implementation detail.
-    if (GWT.isScript()) {
+    if (!Environment.isJreEnvironment()) {
       // /////////////////////////////
       // Past
       // /////////////////////////////
@@ -581,7 +582,7 @@ public class DateTest extends GWTTestCase {
   public void testToString() {
 
     // We can't rely on the JRE's toString, as it is an implementation detail.
-    if (GWT.isScript()) {
+    if (!Environment.isJreEnvironment()) {
       // /////////////////////////////
       // Past
       // /////////////////////////////
@@ -647,7 +648,7 @@ public class DateTest extends GWTTestCase {
   // Month and date of days with time shifts
   private ArrayList<Integer> timeShiftMonth = new ArrayList<Integer>();
   private ArrayList<Integer> timeShiftDate = new ArrayList<Integer>();
-  
+
   private boolean containsTimeShift(Date start, int days) {
     long startTime = start.getTime();
     Date end = new Date();
@@ -666,12 +667,12 @@ public class DateTest extends GWTTestCase {
       timeShiftDate.add(start.getDate());
       return;
     }
-    
+
     // Recurse over the first half of the period
     if (containsTimeShift(start, days / 2)) {
       findTimeShift(start, days / 2);
     }
-    
+
     // Recurse over the second half of the period
     Date mid = new Date();
     mid.setTime(start.getTime());
@@ -724,7 +725,7 @@ public class DateTest extends GWTTestCase {
     for (int i = 0; i < numShifts; i++) {
       int month = timeShiftMonth.get(i);
       int startDay = timeShiftDate.get(i);
-      
+
       for (int day = startDay; day <= startDay + 1; day++) {
         for (int hour = 0; hour < 24; hour++) {
           Date d = new Date(year - 1900, month, day, hour, 0, 0);
@@ -744,7 +745,7 @@ public class DateTest extends GWTTestCase {
 
   /**
    * Check if daylight saving time occurs on the date.
-   * 
+   *
    * @param date the date to check
    * @return true if DST occurs on the date, false if not
    */
@@ -762,12 +763,12 @@ public class DateTest extends GWTTestCase {
     if (!findClockBackwardTime(2009, monthDayHour)) {
       return;
     }
-    
+
     Date d;
     int month = monthDayHour[0];
     int day = monthDayHour[1];
     int hour = monthDayHour[2];
-    
+
     // Check that this is the later of the two times having the
     // same hour:minute:second
     d = new Date(2009 - 1900, month, day, hour, 30, 0);

@@ -19,4 +19,6 @@
 <!--                                                                        -->
 <module>
   <source path=""/>
+  <define-property name="js.environment" values="true,false"/>
+  <set-property name="js.environment" value="true"/>
 </module>

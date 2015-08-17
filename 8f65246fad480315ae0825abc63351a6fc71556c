@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "840ff177_03b18e4d",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-17T22:54:44Z",
+      "side": 1,
+      "message": "[error] \u0027*\u0027 is not preceded with whitespace.",
+      "revId": "8f65246fad480315ae0825abc63351a6fc71556c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84bd31cc_738e603b",
+        "filename": "dev/core/super/javaemul/internal/Environment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-08-17T14:59:41Z",
+      "side": 1,
+      "message": "Not sure why JSNI is used here, but I would at least name the method differently (and reword the javadoc). What this currently does is:\n\n* return true in \"classic dev mode\" (currently, that should only be the case of GWTTestCase, as everyone is expected to have moved to SuperDevMode for in-browser testing during development)\n* return false in \"prod mode\" (and SDM)\n* crash in a JVM when not in \"dev mode\".\n\nI know we\u0027re in a \"javaemul\" package in the \"dev/core/super/\" source root, but still.\n\nisClassicDevMode? isLegacyDevMode? or switch the return value and call it isScript? isProdMode?\n\nAnd/or maybe move that class inside \"user/test-super/\" ?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 7
+      },
+      "revId": "1808eb3d8eccaaaee6b0ab478620359a0e06a0f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

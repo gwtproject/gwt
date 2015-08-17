@@ -46,6 +46,30 @@
       "revId": "1808eb3d8eccaaaee6b0ab478620359a0e06a0f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04a781c0_8f82d50b",
+        "filename": "dev/core/super/javaemul/internal/Environment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-08-17T15:56:52Z",
+      "side": 1,
+      "message": "SGTM\n\nI maintain my comment about the naming though ;-)",
+      "parentUuid": "04a781c0_6f8e913b",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 7
+      },
+      "revId": "1808eb3d8eccaaaee6b0ab478620359a0e06a0f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

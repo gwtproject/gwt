@@ -22,6 +22,30 @@
       "revId": "1808eb3d8eccaaaee6b0ab478620359a0e06a0f5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04a781c0_6f8e913b",
+        "filename": "dev/core/super/javaemul/internal/Environment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-17T15:53:27Z",
+      "side": 1,
+      "message": "Your comment made me think, as you might have guessed there is a second version of this file that works with j2cl and the jre, which is \"super sourced\" in j2cl.\n\nI found a way to not require to super source these at all and it looks pretty clean to me. PTAL",
+      "parentUuid": "84bd31cc_738e603b",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 7
+      },
+      "revId": "1808eb3d8eccaaaee6b0ab478620359a0e06a0f5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

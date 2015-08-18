@@ -21,6 +21,7 @@ import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.PrecompileTaskOptions;
 import com.google.gwt.dev.cfg.PermutationProperties;
+import com.google.gwt.dev.common.InliningMode;
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
@@ -1238,9 +1239,10 @@ public class GenerateJavaScriptAST {
 
       javaMethodForJSFunction.put(jsFunc, x);
 
+      jsFunc.setInliningMode(x.getInliningMode());
       if (!program.isInliningAllowed(x)) {
-        jsProgram.disallowInlining(jsFunc);
-      }
+        jsFunc.setInliningMode(InliningMode.DO_NOT_INLINE);
+     }
 
       // Collect the resulting function to be considered by the JsInliner.
       if (methodsForJsInlining.contains(x)) {
@@ -1403,8 +1405,6 @@ public class GenerateJavaScriptAST {
         JsInvocation getPrototypeCall = constructInvocation(x.getSourceInfo(),
             "JavaClassHierarchySetupUtil.getClassPrototype",
             convertJavaLiteral(typeMapper.get(superMethodTargetType)));
-        // getClassPrototype is a JSNI call, so we are enabling inlining
-        methodsForJsInlining.add(currentMethod);
 
         JsNameRef methodNameRef = polymorphicNames.get(method).makeRef(x.getSourceInfo());
         methodNameRef.setQualifier(getPrototypeCall);

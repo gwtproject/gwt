@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64591d73_eb8febb1",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-18T23:18:35Z",
+      "side": 1,
+      "message": "Move this comment to the call site.",
+      "range": {
+        "startLine": 35,
+        "startChar": 2,
+        "endLine": 35,
+        "endChar": 83
+      },
+      "revId": "2816f13326fbab27851f927a6184c468c12d608a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_ab9e93e5",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-18T23:18:35Z",
+      "side": 1,
+      "message": "Maybe change to:\n\npublic static native \u003cT\u003e T unsafeCast(Object string)",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 8
+      },
+      "revId": "2816f13326fbab27851f927a6184c468c12d608a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

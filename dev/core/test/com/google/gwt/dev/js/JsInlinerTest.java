@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.common.InliningMode;
 import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
@@ -120,7 +121,6 @@ public class JsInlinerTest extends OptimizerTestBase {
     // Always make more than one call, because there are special heuristics for functions that
     // are called only once.
 
-    // Inline a devirtualized getter
     input = Joiner.on('\n').join(
         "function a(o) { $wnd.blah(o); }",
         "function f(t,u,b,d) {var a = t;  return a.u;}",
@@ -129,6 +129,31 @@ public class JsInlinerTest extends OptimizerTestBase {
         "function d(a){$wnd.blah(a)}",
         "function e(a){var b,c;d((b=a,b.u));d((c=a,c.u))}",
         "e({})");
+    verifyOptimizedObfuscated(expected, input);
+  }
+
+  public void testInliningAnnotations() throws Exception {
+    String input, expected;
+    // Always make more than one call, because there are special heuristics for functions that
+    // are called only once.
+
+    // Test FORCE_INLINE
+    input = Joiner.on('\n').join(
+        "function uniqueId_forceInline(id) {return jsinterop.closure.getUniqueId(id);}",
+        "function b1() { uniqueId_forceInline('a'); uniqueId_forceInline('b');  } b1();");
+    expected = Joiner.on('\n').join(
+        "function a(){jsinterop.closure.getUniqueId('a');jsinterop.closure.getUniqueId('b')}",
+        "a();");
+    verifyOptimizedObfuscated(expected, input);
+
+    // Test DO_NOT_INLINE
+    input = Joiner.on('\n').join(
+        "function uniqueId_doNotInline(id) {return jsinterop.closure.getUniqueId(id);}",
+        "function b1() { uniqueId_doNotInline('a'); uniqueId_doNotInline('b');  } b1();");
+    expected = Joiner.on('\n').join(
+        "function b(a){return jsinterop.closure.getUniqueId(a)}",
+        "function c(){b('a');b('b')}",
+        "c();");
     verifyOptimizedObfuscated(expected, input);
   }
   /**
@@ -361,6 +386,15 @@ public class JsInlinerTest extends OptimizerTestBase {
         @Override
         public void endVisit(JsFunction x, JsContext ctx) {
           inlineableFunctions.add(x);
+          JsName functionName = x.getName();
+          if (functionName == null) {
+            return;
+          }
+          if (functionName.getIdent().endsWith("_forceInline")) {
+            x.setInliningMode(InliningMode.FORCE_INLINE);
+          } else if (functionName.getIdent().endsWith("_doNotInline")) {
+            x.setInliningMode(InliningMode.DO_NOT_INLINE);
+          }
         }
       }.accept(program);
       return JsInliner.exec(program, inlineableFunctions);

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "64591d73_cb5e6748",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-18T22:11:42Z",
+      "side": 1,
+      "message": "Deleted the conditional, no longer necessary.",
+      "parentUuid": "64591d73_082fc541",
+      "range": {
+        "startLine": 1242,
+        "startChar": 2,
+        "endLine": 1245,
+        "endChar": 6
+      },
+      "revId": "31eca69ded502c6d7a93e799eb67d30b579e8dbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64591d73_a8c5f9d7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "64591d73_ab63330d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1397,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-18T22:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64591d73_a8c5f9d7",
+      "range": {
+        "startLine": 1396,
+        "startChar": 7,
+        "endLine": 1397,
+        "endChar": 89
+      },
+      "revId": "31eca69ded502c6d7a93e799eb67d30b579e8dbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64591d73_680da1c6",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2015-08-18T21:41:17Z",
       "side": 1,
       "message": "maybeSetInliningMode to keep it consistent?",
+      "range": {
+        "startLine": 4095,
+        "startChar": 4,
+        "endLine": 4095,
+        "endChar": 19
+      },
+      "revId": "31eca69ded502c6d7a93e799eb67d30b579e8dbf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_0b685fe6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 4095,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-18T22:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64591d73_680da1c6",
       "range": {
         "startLine": 4095,
         "startChar": 4,

@@ -81,6 +81,24 @@
       "revId": "f7239881e111fd50fb2114eb0db8bf91bb3d5ce7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_0b997f4d",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigDecimal.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-18T22:41:25Z",
+      "side": 1,
+      "message": "Why does it matter?",
+      "parentUuid": "247d65ed_8860177a",
+      "revId": "f7239881e111fd50fb2114eb0db8bf91bb3d5ce7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

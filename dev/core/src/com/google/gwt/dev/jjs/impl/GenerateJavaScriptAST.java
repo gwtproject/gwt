@@ -742,11 +742,6 @@ public class GenerateJavaScriptAST {
 
     private final JsName prototype = objectScope.declareName("prototype");
 
-    // JavaScript functions that arise from methods that were not inlined in the Java AST
-    // NOTE: We use a LinkedHashSet to preserve the order of insertion. So that the following passes
-    // that use this result are deterministic.
-    private final Set<JsNode> functionsForJsInlining = Sets.newLinkedHashSet();
-
     {
       globalTemp.setObfuscatable(false);
       prototype.setObfuscatable(false);
@@ -1238,14 +1233,7 @@ public class GenerateJavaScriptAST {
 
       javaMethodForJSFunction.put(jsFunc, x);
 
-      if (!program.isInliningAllowed(x)) {
-        jsProgram.disallowInlining(jsFunc);
-      }
-
-      // Collect the resulting function to be considered by the JsInliner.
-      if (methodsForJsInlining.contains(x)) {
-        functionsForJsInlining.add(jsFunc);
-      }
+      jsFunc.setInliningMode(x.getInliningMode());
 
       List<JsParameter> params = popList(x.getParams().size()); // params
 
@@ -1391,8 +1379,11 @@ public class GenerateJavaScriptAST {
          */
         qualifiedMethodName.setQualifier(names.get(method).makeRef(x.getSourceInfo()));
       } else {
-        // Regular super call. This calls are always static and optimizations normally statify them.
-        // They can appear in completely unoptimized code, hence need to be handled here.
+        // These are regular super method call. These calls are always dispatched statically and
+        // optimizations will statify them (except in a few cases, like being target of
+        // {@link Impl.getNameOf}.
+        // For the most part these calls only appear in completely unoptimized code, hence need to
+        // be handled here.
 
         // Construct JCHSU.getPrototypeFor(type).polyname
         // TODO(rluble): Ideally we would want to construct the inheritance chain the JS way and
@@ -1403,8 +1394,6 @@ public class GenerateJavaScriptAST {
         JsInvocation getPrototypeCall = constructInvocation(x.getSourceInfo(),
             "JavaClassHierarchySetupUtil.getClassPrototype",
             convertJavaLiteral(typeMapper.get(superMethodTargetType)));
-        // getClassPrototype is a JSNI call, so we are enabling inlining
-        methodsForJsInlining.add(currentMethod);
 
         JsNameRef methodNameRef = polymorphicNames.get(method).makeRef(x.getSourceInfo());
         methodNameRef.setQualifier(getPrototypeCall);
@@ -3135,15 +3124,22 @@ public class GenerateJavaScriptAST {
     }
   }
 
-  private class RecordJSInlinableMethods extends JVisitor {
+  private class CollectJsFunctionsForInlining extends JVisitor {
 
+    // JavaScript functions that arise from methods that were not inlined in the Java AST
+    // NOTE: We use a LinkedHashSet to preserve the order of insertion. So that the following passes
+    // that use this result are deterministic.
+    private Set<JsNode> functionsForJsInlining = Sets.newLinkedHashSet();
     private JMethod currentMethod;
 
     @Override
     public void endVisit(JMethod x, Context ctx) {
       if (x.isNative()) {
         // These are methods that were not considered by the Java method inliner.
-        methodsForJsInlining.add(x);
+        JsFunction function = methodBodyMap.get(x.getBody());
+        if (function != null && function.getBody() != null) {
+          functionsForJsInlining.add(function);
+        }
       }
 
       currentMethod = null;
@@ -3152,11 +3148,14 @@ public class GenerateJavaScriptAST {
     @Override
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod target = x.getTarget();
-      if (program.isInliningAllowed(target) && (target.isNative()
+      if (target.isInliningAllowed() && (target.isNative()
           || program.getIndexedTypes().contains(target.getEnclosingType()))) {
         // the currentMethod calls a method that was not considered by the Java MethodInliner; these
         // include JSNI methods and methods whose calls were inserted by normalization passes.
-        methodsForJsInlining.add(currentMethod);
+        JsFunction function = methodBodyMap.get(currentMethod.getBody());
+        if (function != null && function.getBody() != null) {
+          functionsForJsInlining.add(function);
+        }
       }
     }
 
@@ -3164,6 +3163,11 @@ public class GenerateJavaScriptAST {
     public boolean visit(JMethod x, Context ctx) {
       currentMethod = x;
       return true;
+    }
+
+    public Set<JsNode> getFunctionsForJsInlining() {
+      accept(program);
+      return functionsForJsInlining;
     }
   }
 
@@ -3323,12 +3327,6 @@ public class GenerateJavaScriptAST {
   private Map<String, JsFunction> indexedFunctions = Maps.newHashMap();
 
   private Map<String, JsName> indexedFields = Maps.newHashMap();
-
-  /**
-   * Methods where inlining hasn't happened yet because they are native or contain calls to native
-   * methods. See {@link RecordJSInlinableMethods}.
-   */
-  private Set<JMethod> methodsForJsInlining = Sets.newHashSet();
 
   /**
    * Contains JsNames for all interface methods. A special scope is needed so
@@ -3538,7 +3536,6 @@ public class GenerateJavaScriptAST {
     if (!incremental) {
       // TODO(rluble): pull out this analysis and make it a Java AST optimization pass.
       new RecordCrossClassCallsAndConstructorLiveness().accept(program);
-      new RecordJSInlinableMethods().accept(program);
     }
 
     // Map class literals to their respective types.
@@ -3558,7 +3555,10 @@ public class GenerateJavaScriptAST {
     JavaToJavaScriptMap jjsMap = new JavaToJavaScriptMapImpl(program.getDeclaredTypes(),
         names, typeForStatMap, vtableInitForMethodMap);
 
-    return Pair.create(jjsMap, generator.functionsForJsInlining);
+    Set<JsNode> functionsForJsInlining = incremental ? Collections.<JsNode>emptySet() :
+        new CollectJsFunctionsForInlining().getFunctionsForJsInlining();
+
+    return Pair.create(jjsMap, functionsForJsInlining);
   }
 
   private JsFunction getJsFunctionFor(JMethod jMethod) {

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64591d73_cb882778",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-18T23:48:53Z",
+      "side": 1,
+      "message": "Should we have a diagnostic that reports a warning when a FORCE_INLINE method doesn\u0027t inline for other reasons?",
+      "range": {
+        "startLine": 1060,
+        "startChar": 60,
+        "endLine": 1060,
+        "endChar": 72
+      },
+      "revId": "8d825d58fb53ebffb4f43e6254e74aebab94ac4b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

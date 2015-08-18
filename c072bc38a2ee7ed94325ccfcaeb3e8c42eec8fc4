@@ -16,6 +16,41 @@
       "revId": "c072bc38a2ee7ed94325ccfcaeb3e8c42eec8fc4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_d0d0d9c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-18T02:51:11Z",
+      "side": 1,
+      "message": "pls fix.",
+      "parentUuid": "840ff177_c3f3f65e",
+      "revId": "c072bc38a2ee7ed94325ccfcaeb3e8c42eec8fc4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_b0ca8514",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/JavaClassHierarchySetupUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-18T02:51:11Z",
+      "side": 1,
+      "message": "Let\u0027s do (lambda.__proto__) instead. Seems to work for ie10.",
+      "revId": "c072bc38a2ee7ed94325ccfcaeb3e8c42eec8fc4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

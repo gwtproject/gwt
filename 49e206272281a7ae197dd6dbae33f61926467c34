@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "840ff177_86646c15",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-18T19:44:09Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is preceded with whitespace.",
+      "revId": "49e206272281a7ae197dd6dbae33f61926467c34",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "840ff177_e671e0d1",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-18T19:44:09Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is preceded with whitespace.",
+      "revId": "49e206272281a7ae197dd6dbae33f61926467c34",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

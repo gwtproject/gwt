@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4c23555_34ee9080",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/CompilerConstantStringTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-08-18T09:17:43Z",
+      "side": 1,
+      "message": "not actually needed: getJdkVersion will return -1 if isJvm() is false (that\u0027s indeed how it\u0027s implemented)",
+      "range": {
+        "startLine": 253,
+        "startChar": 25,
+        "endLine": 253,
+        "endChar": 42
+      },
+      "revId": "bf42cec898718de073f24362b19369d34d9ce9b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "247d65ed_28a1eb7f",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-08-18T09:17:43Z",
+      "side": 1,
+      "message": "same here: not needed, getJdkVersion is enough",
+      "range": {
+        "startLine": 668,
+        "startChar": 25,
+        "endLine": 668,
+        "endChar": 42
+      },
+      "revId": "bf42cec898718de073f24362b19369d34d9ce9b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4c23555_54e30c97",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-08-18T09:17:43Z",
+      "side": 1,
+      "message": "again",
+      "range": {
+        "startLine": 650,
+        "startChar": 24,
+        "endLine": 650,
+        "endChar": 41
+      },
+      "revId": "bf42cec898718de073f24362b19369d34d9ce9b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04b221f6_17f35498",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1157,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-08-18T09:17:43Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1157,
+        "startChar": 10,
+        "endLine": 1157,
+        "endChar": 27
+      },
+      "revId": "bf42cec898718de073f24362b19369d34d9ce9b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04b221f6_37f85870",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2169,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-08-18T09:17:43Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 2169,
+        "startChar": 15,
+        "endLine": 2169,
+        "endChar": 32
+      },
+      "revId": "bf42cec898718de073f24362b19369d34d9ce9b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "247d65ed_88af3768",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-08-18T09:17:43Z",
+      "side": 1,
+      "message": "same here, even though removing the isJvm test would probably require a comment re. the special -1 value.",
+      "range": {
+        "startLine": 2280,
+        "startChar": 8,
+        "endLine": 2280,
+        "endChar": 26
+      },
+      "revId": "bf42cec898718de073f24362b19369d34d9ce9b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4c8ad77_3608589e",
+        "filename": "user/test/com/google/gwt/emultest/java/util/TreeMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2360,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-08-18T09:17:43Z",
+      "side": 1,
+      "message": ".",
+      "range": {
+        "startLine": 2360,
+        "startChar": 12,
+        "endLine": 2360,
+        "endChar": 29
+      },
+      "revId": "bf42cec898718de073f24362b19369d34d9ce9b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

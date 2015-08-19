@@ -45,6 +45,30 @@
       "revId": "2816f13326fbab27851f927a6184c468c12d608a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_ee641916",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-19T00:11:42Z",
+      "side": 1,
+      "message": "Doesn\u0027t that introduce a cast on call site?",
+      "parentUuid": "64591d73_ab9e93e5",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 8
+      },
+      "revId": "2816f13326fbab27851f927a6184c468c12d608a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

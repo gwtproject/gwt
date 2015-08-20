@@ -561,10 +561,6 @@ public class GenerateJavaScriptAST {
             polyName = interfaceScope.declareName(mangleNameForPrivatePoly(x), name);
           } else if (x.isPackagePrivate()) {
             polyName = interfaceScope.declareName(mangleNameForPackagePrivatePoly(x), name);
-            // Also add the mapping from the top of the package private overriding chain, so
-            // so that it can be referred when generating the vtable of a subclass that
-            // increases the visibility of this method.
-            polymorphicNames.put(typeOracle.getTopMostDefinition(x), polyName);
           } else if (x.isOrOverridesJsMethod() && !typeOracle.needsJsInteropBridgeMethod(x)) {
             if (x.isOrOverridesJsPropertyAccessor()) {
               // Prevent JsProperty functions like x() from colliding with intended JS native
@@ -2926,7 +2922,12 @@ public class GenerateJavaScriptAST {
      * Returns the package private JsName for {@code method}.
      */
     private JsName getPackagePrivateName(JMethod method) {
-      return polymorphicNames.get(typeOracle.getTopMostDefinition(method));
+      for (JMethod overridenMethod : method.getOverriddenMethods()) {
+        if (overridenMethod.isPackagePrivate()) {
+          return polymorphicNames.get(overridenMethod);
+        }
+      }
+      return null;
     }
 
     private void handleClinit(JsFunction clinitFunc, JsFunction superClinit) {
@@ -3464,15 +3465,14 @@ public class GenerateJavaScriptAST {
 
   String mangleNameForPackagePrivatePoly(JMethod x) {
     assert x.isPackagePrivate() && !x.isStatic();
-    JMethod topDefinition = typeOracle.getTopMostDefinition(x);
     /*
-     * Package private instance methods in different classes should not override each
+     * Package private instance methods in different package should not override each
      * other, so they must have distinct polymorphic names. Therefore, add the
-     * class name of where the method is first defined to the mangled name.
+     * package to the mangled name.
      */
     String mangledName = Joiner.on("$").join(
         "package_private",
-        JjsUtils.mangledNameString(topDefinition.getEnclosingType()),
+        JjsUtils.mangledNameString(x.getEnclosingType().getPackageName()),
         JjsUtils.mangledNameString(x));
     return StringInterner.get().intern(JjsUtils.constructManglingSignature(x, mangledName));
   }

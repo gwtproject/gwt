@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64591d73_d62ba0b6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2777,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-20T02:04:20Z",
+      "side": 1,
+      "message": "Remove this as well?",
+      "range": {
+        "startLine": 2777,
+        "startChar": 14,
+        "endLine": 2777,
+        "endChar": 51
+      },
+      "revId": "c287d868b07baa3e2c2f45e4077eedff53905db6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_f62a24b0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2927,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-20T02:04:20Z",
+      "side": 1,
+      "message": "assert not null",
+      "range": {
+        "startLine": 2927,
+        "startChar": 17,
+        "endLine": 2927,
+        "endChar": 48
+      },
+      "revId": "c287d868b07baa3e2c2f45e4077eedff53905db6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64591d73_561f9092",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2930,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-20T02:04:20Z",
+      "side": 1,
+      "message": "throw new AssertionError",
+      "revId": "c287d868b07baa3e2c2f45e4077eedff53905db6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

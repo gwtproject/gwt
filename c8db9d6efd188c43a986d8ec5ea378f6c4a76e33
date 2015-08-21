@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_3bc723ac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteBooleanAndDoubleBoxedInstantiations.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-21T17:45:59Z",
+      "side": 1,
+      "message": "I\"think modification to the optimization passes should be minimal, but there might be cases I am overlooking.\n\n1. SBVO, yes needs to exclude constructors for devirtualized classes. AFAICT it is already a potential problem for string, so it needs to be fixed anyway.\n\n2. I suggest that the $create functions be moved to intrinsic (where they seem to belong anyway), probably to Util.java which I think it is already a codegen type.\n\n\nIn short I don\u0027t think we need to specialize any of the passes anymore than we did/didnt do for strings.",
+      "parentUuid": "a47f9520_fbbafb58",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_7bfa8b37",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
         "patchSetId": 2

@@ -16,22 +16,16 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.cfg.PermutationProperties;
-import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.dev.js.ast.JsBinaryOperation;
-import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
-import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
-import com.google.gwt.dev.js.ast.JsObjectLiteral;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.js.ast.JsVisitor;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -41,8 +35,9 @@ import java.util.Set;
 /**
  * Rewrite JavaScript to better handle references from one code fragment to
  * another. For any function defined off the initial download and accessed from
- * a different island than the one it's defined on, predefine a variable in the
- * initial download to hold its definition.
+ * a different island than the one it's defined on, set it's JsName namespace to
+ * the cross fragment namespace. JsNamespaceChooser will later rewrite code to exist within
+ * this namespace.
  */
 public class HandleCrossFragmentReferences {
 
@@ -117,85 +112,8 @@ public class HandleCrossFragmentReferences {
     }
   }
 
-  /**
-   * Rewrite var and function declarations as assignments, if their name is
-   * accessed cross-island. Rewrite refs to such names correspondingly.
-   */
-  private class RewriteDeclsAndRefs extends JsModVisitor {
-    @Override
-    public void endVisit(JsFunction x, JsContext ctx) {
-      if (namesToPredefine.contains(x.getName())) {
-        JsBinaryOperation asg =
-            new JsBinaryOperation(x.getSourceInfo(), JsBinaryOperator.ASG, makeRefViaJslink(x
-                .getName(), x.getSourceInfo()), x);
-        x.setName(null);
-        ctx.replaceMe(asg);
-      }
-    }
-
-    @Override
-    public void endVisit(JsNameRef x, JsContext ctx) {
-      if (namesToPredefine.contains(x.getName())) {
-        ctx.replaceMe(makeRefViaJslink(x.getName(), x.getSourceInfo()));
-      }
-    }
-
-    @Override
-    public void endVisit(JsVars x, JsContext ctx) {
-      if (!ctx.canInsert()) {
-        return;
-      }
-
-      /*
-       * Loop through each var and see if it was predefined. If so, then remove
-       * the var. If the var has an initializer, then add back an assignment
-       * statement to initialize it. If there is no initializer, then don't add
-       * anything back; the var will still have undefined as its initial value,
-       * just like before.
-       *
-       * A complication is that the variables that are predefined might be
-       * interspersed with variables that are not. That means the general result
-       * of this transformation has alternating var lists and assignment
-       * statements. The currentVar variable holds the most recently inserted
-       * statement, if that statement was a JsVars; otherwise it holds null.
-       */
-
-      JsVars currentVar = null;
-      Iterator<JsVar> varsIterator = x.iterator();
-      while (varsIterator.hasNext()) {
-        JsVar var = varsIterator.next();
-        if (namesToPredefine.contains(var.getName())) {
-          // The var was predefined
-          if (var.getInitExpr() != null) {
-            // If it has an initializer, add an assignment statement
-            JsBinaryOperation asg =
-                new JsBinaryOperation(var.getSourceInfo(), JsBinaryOperator.ASG, makeRefViaJslink(
-                    var.getName(), var.getSourceInfo()), var.getInitExpr());
-            ctx.insertBefore(asg.makeStmt());
-            currentVar = null;
-          }
-        } else {
-          // The var was not predefined; add it to a var list
-          if (currentVar == null) {
-            currentVar = new JsVars(x.getSourceInfo());
-            ctx.insertBefore(currentVar);
-          }
-          currentVar.add(var);
-        }
-      }
-
-      ctx.removeMe();
-    }
-
-    private JsNameRef makeRefViaJslink(JsName name, SourceInfo sourceInfo) {
-      JsNameRef ref = name.makeRef(sourceInfo);
-      ref.setQualifier(jslink.makeRef(sourceInfo));
-      return ref;
-    }
-  }
-
-  public static void exec(JsProgram jsProgram, PermutationProperties properties) {
-    new HandleCrossFragmentReferences(jsProgram, properties).execImpl();
+  public static JsName exec(JsProgram jsProgram, PermutationProperties properties) {
+    return new HandleCrossFragmentReferences(jsProgram, properties).execImpl();
   }
 
   private static boolean containsOtherThan(Set<Integer> set, int allowed) {
@@ -243,6 +161,7 @@ public class HandleCrossFragmentReferences {
 
       if (containsOtherThan(islandsUsing.get(name), defIsland)) {
         namesToPredefine.add(name);
+        name.setNamespace(jslink);
       }
     }
   }
@@ -252,26 +171,20 @@ public class HandleCrossFragmentReferences {
    * references.
    */
   private void defineJsLink() {
-    SourceInfo info = jsProgram.createSourceInfoSynthetic(HandleCrossFragmentReferences.class);
-    jslink = jsProgram.getScope().declareName("jslink");
-    JsVars vars = new JsVars(info);
-    JsVar var = new JsVar(info, jslink);
-    var.setInitExpr(new JsObjectLiteral(info));
-    vars.add(var);
-    jsProgram.getFragmentBlock(0).getStatements().add(0, vars);
+    jslink = jsProgram.getScope().declareName("$gwt_jslink");
   }
 
-  private void execImpl() {
+  private JsName execImpl() {
     if (jsProgram.getFragmentCount() == 1) {
-      return;
+      return null;
     }
     if (!shouldPredeclareReferences) {
-      return;
+      return null;
     }
     defineJsLink();
     FindNameReferences findNameReferences = new FindNameReferences();
     findNameReferences.accept(jsProgram);
     chooseNamesToPredefine(findNameReferences.islandsDefining, findNameReferences.islandsUsing);
-    new RewriteDeclsAndRefs().accept(jsProgram);
+    return jslink;
   }
 }

@@ -29,6 +29,8 @@ import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.impl.FullCompileTestBase;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
+import com.google.gwt.dev.js.JsNamespaceChooser;
+import com.google.gwt.dev.js.JsNamespaceOption;
 import com.google.gwt.dev.js.ast.JsBlock;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsExprStmt;
@@ -95,6 +97,8 @@ public class CodeSplitterTest extends FullCompileTestBase {
       new ConfigurationProperty(CodeSplitters.PROP_INITIAL_SEQUENCE, true);
 
   private boolean closureOutputFormat = false;
+  protected boolean namespacePackage = false;
+
   private JavaToJavaScriptMap currentJjsMap;
 
   @Override
@@ -693,6 +697,10 @@ public class CodeSplitterTest extends FullCompileTestBase {
     if (closureOutputFormat) {
       options.setClosureCompilerFormatEnabled(true);
     }
+    if (namespacePackage) {
+      options.setNamespace(JsNamespaceOption.PACKAGE);
+    }
+
     return new CompilerContext.Builder().options(options).build();
   }
 
@@ -700,9 +708,13 @@ public class CodeSplitterTest extends FullCompileTestBase {
   protected Pair<JavaToJavaScriptMap, Set<JsNode>> compileSnippetToJS(final String code)
       throws UnableToCompleteException {
     currentJjsMap = super.compileSnippetToJS(code).getLeft();
+    PrecompileTaskOptions options = provideCompilerContext().getOptions();
     CodeSplitter.exec(logger, jProgram, jsProgram, currentJjsMap, expectedFragmentCount,
         leftOverMergeSize,
        NULL_RECORDER);
+    if (options.isClosureCompilerFormatEnabled()) {
+      JsNamespaceChooser.exec(jsProgram, currentJjsMap, options.isClosureCompilerFormatEnabled());
+    }
     return null;
   }
 

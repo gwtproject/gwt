@@ -231,6 +231,23 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_0630ce20",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-21T18:04:58Z",
+      "side": 1,
+      "message": "I think you can  keep all methods non-native except booleanValue. Then you can use booleanValue() to make the conversion and call static.",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4ab15ef_ac010347",
         "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
         "patchSetId": 2
@@ -260,6 +277,24 @@
       "side": 1,
       "message": "Move these new functions to a class in intrinsic (Maybe Util.java) and don\u0027t use $ in the name.",
       "parentUuid": "a4ab15ef_ac010347",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_86f35eda",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-21T18:04:58Z",
+      "side": 1,
+      "message": "No we decided to keep these in here per our devirtualization discussion. This should work same as String.java",
+      "parentUuid": "a47f9520_fb167b09",
       "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

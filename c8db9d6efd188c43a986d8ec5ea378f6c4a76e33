@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_fbbafb58",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteBooleanAndDoubleBoxedInstantiations.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-21T17:12:38Z",
+      "side": 1,
+      "message": "If you do it post optimizations, you\u0027ll have to modify optimization passes:\n\n1. SameParameterValueOptimizer has to avoid optimizing the args to the Double/Boolean ctors. Pruner can\u0027t prune the args either which are unused.\n\n2. Pruner can\u0027t remove the $create functions. They won\u0027t be referenced by the AST preoptimization, and therefore will get deleted, so they\u0027ll have to be moved to a code-gen-type to avoid being deadstripped until the end.\n\nAs things exist now, \"new Double(42)\" will either result in replacement as \"new Double()\" because the arg is unused, or result in \"new Double()\" if only one instantiation exists because of SameParameterValueOptimizer moving the arg into the body of the ctor.\n\nSo the tradeoff is having to specialize the optimization passes for Double/Boolean.",
+      "parentUuid": "a47f9520_5b06afda",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_7bfa8b37",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
         "patchSetId": 2

@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4ab15ef_2cc4f387",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-21T16:14:20Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.jjs.impl.RemoveEmptySuperCalls\u0027 import.",
+      "revId": "127b5b72f53a2060e82ac598183f7de92eff5781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_6ccefba7",
+        "filename": "samples/hello/src/com/google/gwt/sample/hello/client/Hello.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-21T16:14:20Z",
+      "side": 1,
+      "message": "[error] Instantiation of java.lang.Boolean should be avoided.",
+      "revId": "127b5b72f53a2060e82ac598183f7de92eff5781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_0cc13778",
+        "filename": "samples/hello/src/com/google/gwt/sample/hello/client/Hello.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-21T16:14:20Z",
+      "side": 1,
+      "message": "[error] Instantiation of Boolean should be avoided.",
+      "revId": "127b5b72f53a2060e82ac598183f7de92eff5781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_4ccb3f96",
+        "filename": "samples/hello/src/com/google/gwt/sample/hello/client/Hello.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-21T16:14:20Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "127b5b72f53a2060e82ac598183f7de92eff5781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_acd8e366",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-21T16:14:20Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createBoolean\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "127b5b72f53a2060e82ac598183f7de92eff5781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_8cdd2757",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-21T16:14:20Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createBooleanFromString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "127b5b72f53a2060e82ac598183f7de92eff5781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_ecd2eb44",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-21T16:14:20Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createDouble\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "127b5b72f53a2060e82ac598183f7de92eff5781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_ccd72f33",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-21T16:14:20Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createDoubleFromString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "127b5b72f53a2060e82ac598183f7de92eff5781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

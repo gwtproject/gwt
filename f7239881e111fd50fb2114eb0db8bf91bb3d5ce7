@@ -135,6 +135,24 @@
       "revId": "f7239881e111fd50fb2114eb0db8bf91bb3d5ce7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24656596_a8019b7b",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigDecimal.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-21T18:59:43Z",
+      "side": 1,
+      "message": "I don\u0027t undestand what you want me to do here. Inline the JsUtil call and have others call it?\n\nOr just inline the call here and leave JsUtils as is?",
+      "parentUuid": "a47f9520_fba3db2e",
+      "revId": "f7239881e111fd50fb2114eb0db8bf91bb3d5ce7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

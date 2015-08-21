@@ -405,6 +405,7 @@ public class JsLiteralInterner {
       if (name == null) {
         String ident = PREFIX + lastId++;
         name = scope.declareName(ident);
+        name.setStaticRef(x);
         variableNameForInternedLiteral.put(x, name);
       }
 

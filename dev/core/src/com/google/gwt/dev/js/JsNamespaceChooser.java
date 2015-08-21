@@ -15,7 +15,7 @@
  */
 package com.google.gwt.dev.js;
 
-import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
@@ -26,6 +26,8 @@ import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFunction;
+import com.google.gwt.dev.js.ast.JsInvocation;
+import com.google.gwt.dev.js.ast.JsLiteral;
 import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
@@ -36,55 +38,186 @@ import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
-import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * A compiler pass that creates a namespace for each Java package
  * with at least one global variable or function.
  *
- * <p>Prerequisite: JsVarRefs must be resolved.</p>
+ * <p>Prerequisite: JsNameRefs must be resolved.</p>
  */
 public class JsNamespaceChooser {
 
-  public static void exec(JsProgram program, JavaToJavaScriptMap jjsmap) {
-    new JsNamespaceChooser(program, jjsmap).execImpl();
+  public static void exec(JsProgram program, JavaToJavaScriptMap jjsmap,
+      FreshNameGenerator freshNameGenerator, boolean closureCompilerFormatEnabled,
+      JsName crossFragmentNamespace, JsNamespaceOption namespaceOption) {
+    new JsNamespaceChooser(program, jjsmap, freshNameGenerator,
+        closureCompilerFormatEnabled, crossFragmentNamespace,
+        namespaceOption).execImpl();
   }
 
   private final JsProgram program;
   private final JavaToJavaScriptMap jjsmap;
+  private FreshNameGenerator freshNameGenerator;
+  private boolean closureCompilerFormatEnabled;
+  private JsName crossFragmentNamespace;
+  private JsNamespaceOption namespaceOption;
 
-  /**
-   * The namespaces to be added to the program.
-   */
-  private final Map<String, JsName> packageToNamespace = Maps.newLinkedHashMap();
-
-  private JsNamespaceChooser(JsProgram program, JavaToJavaScriptMap jjsmap) {
+  private JsNamespaceChooser(JsProgram program, JavaToJavaScriptMap jjsmap,
+      FreshNameGenerator freshNameGenerator, boolean closureCompilerFormatEnabled,
+      JsName crossFragmentNamespace, JsNamespaceOption namespaceOption) {
     this.program = program;
     this.jjsmap = jjsmap;
+    this.freshNameGenerator = freshNameGenerator;
+    this.closureCompilerFormatEnabled = closureCompilerFormatEnabled;
+    this.crossFragmentNamespace = crossFragmentNamespace;
+    this.namespaceOption = namespaceOption;
+    if (crossFragmentNamespace != null && freshNameGenerator != null) {
+      crossFragmentNamespace.setShortIdent(freshNameGenerator.getFreshName());
+    }
   }
 
   private void execImpl() {
 
-    // First pass: visit each top-level statement in the program and move it if possible.
-    // (This isn't a standard visitor because we don't want to recurse.)
+    // Namespaces that have already been initialized by previously loaded fragments
+    Map<String, JsName> liveNamespaces = new LinkedHashMap<>();
 
-    List<JsStatement> globalStatements = program.getGlobalBlock().getStatements();
+    // process fragment 0 first
+    liveNamespaces.putAll(addInitializers(processFragment(0, liveNamespaces)));
+
+    // process leftovers fragment if it exists
+    if (program.getFragmentCount() > 1) {
+      FragmentNamespaceResult leftoversResult = processFragment(program.getFragmentCount() - 1,
+          liveNamespaces);
+      liveNamespaces.putAll(leftoversResult.getNewlyAddedNamespaces());
+
+      // records the fragment a namespace was first declared in
+      Map<String, Integer> namespaceToFragment = new HashMap<>();
+      Map<Integer, FragmentNamespaceResult> fragmentToResults = new LinkedHashMap<>();
+
+      // process all exclusive fragments
+      // first, move symbols and record new namespaces created or referenced by fragment
+      for (int i = 1; i < program.getFragmentCount() - 1; i++) {
+        FragmentNamespaceResult result = processFragment(i, liveNamespaces);
+        fragmentToResults.put(i, result);
+        liveNamespaces.putAll(result.getNewlyAddedNamespaces());
+
+        // record all usages of namespace and which fragment it first appears in
+        for (String namespace : result.getNewlyAddedNamespaces().keySet()) {
+          namespaceToFragment.put(namespace, i);
+        }
+      }
+
+      // second, hoist namespaces that are not exclusive into leftovers
+      for (Map.Entry<Integer,FragmentNamespaceResult> entry : fragmentToResults.entrySet()) {
+        // look for namespaces referenced in fragment, but declared in a different exclusive
+        // fragment
+        for (String namespace : entry.getValue().getReferencedNamespaces()) {
+          Integer referencedInFragment = entry.getKey();
+          Integer declaredInFragment = namespaceToFragment.get(namespace);
+          // this namespace is declared in an exclusive referencedInFragment other than our own
+          if (declaredInFragment != null && !referencedInFragment.equals(declaredInFragment)) {
+            // hoist it into leftovers
+            JsName jsNamespace = fragmentToResults.get(declaredInFragment)
+                .getNewlyAddedNamespaces().remove(namespace);
+            leftoversResult.getNewlyAddedNamespaces().put(namespace, jsNamespace);
+          }
+        }
+      }
+
+      // add all leftovers
+      addInitializers(leftoversResult);
+
+      // third, declare all exclusives
+      for (FragmentNamespaceResult result : fragmentToResults.values()) {
+        addInitializers(result);
+      }
+    }
+
+    // fix all references for moved names.
+    new NameFixer().accept(program);
+  }
+
+  private Map<String, JsName> addInitializers(FragmentNamespaceResult result) {
+    result.getStatements().addAll(0,
+        createNamespaceInitializers(result.getNewlyAddedNamespaces().values()));
+    return result.getNewlyAddedNamespaces();
+  }
+
+  static class FragmentNamespaceResult {
+
+    private final List<JsStatement> statements;
+    private Map<String, JsName> newlyAddedNamespaces;
+    private Set<String> referencedNamespaces;
+
+    public FragmentNamespaceResult(List<JsStatement> statements, Map<String, JsName>
+        newlyAddedNamespaces, Set<String> referencedNamespaces) {
+      this.statements = statements;
+      this.newlyAddedNamespaces = newlyAddedNamespaces;
+      this.referencedNamespaces = referencedNamespaces;
+    }
+
+    public void setNewlyAddedNamespaces(Map<String, JsName> newlyAddedNamespaces) {
+      this.newlyAddedNamespaces = newlyAddedNamespaces;
+    }
+
+    public List<JsStatement> getStatements() {
+      return statements;
+    }
+
+    public Map<String, JsName> getNewlyAddedNamespaces() {
+      return newlyAddedNamespaces;
+    }
+
+    public Set<String> getReferencedNamespaces() {
+      return referencedNamespaces;
+    }
+  }
+
+  private FragmentNamespaceResult processFragment(int i, Map<String, JsName> liveNamespaces) {
+    // visit each top-level statement in the program and move it if possible.
+    // (This isn't a standard visitor because we don't want to recurse.)
+    List<JsStatement> globalStatements = program.getFragment(i).getGlobalBlock().getStatements();
     List<JsStatement> after = Lists.newArrayList();
+    Map<String, JsName> newlyAddedNamespaces = new LinkedHashMap<>();
+    Set<String> referencedNamedspaces = new HashSet<>();
+
+    FragmentNamespaceResult fragmentNamespaceResult = new FragmentNamespaceResult(globalStatements,
+        newlyAddedNamespaces, referencedNamedspaces);
+
     for (JsStatement before : globalStatements) {
       if (before instanceof JsExprStmt) {
-        JsExpression exp = ((JsExprStmt) before).getExpression();
+        final JsExpression exp = ((JsExprStmt) before).getExpression();
         if (exp instanceof JsFunction) {
-          after.add(visitGlobalFunction((JsFunction) exp));
-        } else {
-          after.add(before);
+          JsFunction beforeFunc = (JsFunction) exp;
+          final JsExpression expr = visitGlobalFunction(beforeFunc, liveNamespaces,
+              fragmentNamespaceResult);
+          // We don't want to change the JsExprStmt reference, because that will invalidate
+          // the JJS Maps which map statements to types. Instead we modify the expression,
+          // but leave the previous statement intact.
+          if (beforeFunc != expr) {
+            new JsModVisitor() {
+              @Override
+              public void endVisit(JsFunction x, JsContext ctx) {
+                if (x == exp) {
+                  ctx.replaceMe(expr);
+                }
+              }
+            }.accept(before);
+          }
         }
+        after.add(before);
       } else if (before instanceof JsVars) {
         for (JsVar var : ((JsVars) before)) {
-          JsStatement replacement = visitGlobalVar(var);
+          JsStatement replacement = visitGlobalVar(var, liveNamespaces, fragmentNamespaceResult);
           if (replacement != null) {
             after.add(replacement);
           }
@@ -94,13 +227,10 @@ public class JsNamespaceChooser {
       }
     }
 
-    after.addAll(0, createNamespaceInitializers(packageToNamespace.values()));
-
     globalStatements.clear();
     globalStatements.addAll(after);
 
-    // Second pass: fix all references for moved names.
-    new NameFixer().accept(program);
+    return fragmentNamespaceResult;
   }
 
   /**
@@ -108,10 +238,11 @@ public class JsNamespaceChooser {
    * (The references must still be fixed up.)
    * @return the new initializer or null to delete it
    */
-  private JsStatement visitGlobalVar(JsVar x) {
+  private JsStatement visitGlobalVar(JsVar x, Map<String, JsName> liveNamespaces,
+      FragmentNamespaceResult result) {
     JsName name = x.getName();
 
-    if (!moveName(name)) {
+    if (!moveName(name, liveNamespaces, result)) {
       // We can't move it, but let's put the initializer on a separate line for readability.
       JsVars vars = new JsVars(x.getSourceInfo());
       vars.add(x);
@@ -126,6 +257,7 @@ public class JsNamespaceChooser {
       // (The namespace is sufficient.)
       return null;
     }
+
     JsBinaryOperation assign = new JsBinaryOperation(x.getSourceInfo(),
         JsBinaryOperator.ASG, newName, init);
     return assign.makeStmt();
@@ -136,10 +268,11 @@ public class JsNamespaceChooser {
    * (References must still be fixed up.)
    * @return the new function definition.
    */
-  private JsStatement visitGlobalFunction(JsFunction func) {
+  private JsExpression visitGlobalFunction(JsFunction func, Map<String, JsName> liveNamespaces,
+      FragmentNamespaceResult result) {
     JsName name = func.getName();
-    if (name == null || !moveName(name)) {
-      return func.makeStmt(); // no change
+    if (name == null || !moveName(name, liveNamespaces, result)) {
+      return func; // no change
     }
 
     // Convert the function statement into an assignment taking a named function expression:
@@ -152,21 +285,34 @@ public class JsNamespaceChooser {
     JsNameRef newName = name.makeRef(func.getSourceInfo());
     JsBinaryOperation assign =
         new JsBinaryOperation(func.getSourceInfo(), JsBinaryOperator.ASG, newName, func);
-    return assign.makeStmt();
+    return assign;
   }
 
   /**
-   * Creates a "var = {}" statement for each namespace.
+   * Creates a "var = {}" or goog.provide statement for each namespace.
    */
-  private List<JsStatement> createNamespaceInitializers(Collection<JsName> namespaces) {
+  private List<JsStatement> createNamespaceInitializers(Collection<JsName> namespaceList) {
+    List<JsName> namespaces = new ArrayList<>(namespaceList);
+    if (crossFragmentNamespace != null) {
+      namespaces.add(crossFragmentNamespace);
+    }
+
     // Let's list them vertically for readability.
+    SourceInfo info = program.createSourceInfoSynthetic(JsNamespaceChooser.class);
     List<JsStatement> inits = Lists.newArrayList();
     for (JsName name : namespaces) {
-      JsVar var = new JsVar(SourceOrigin.UNKNOWN, name);
-      var.setInitExpr(new JsObjectLiteral(SourceOrigin.UNKNOWN));
-      JsVars vars = new JsVars(SourceOrigin.UNKNOWN);
-      vars.add(var);
-      inits.add(vars);
+      if (closureCompilerFormatEnabled) {
+        // Closure mode, we use goog.provide
+        JsInvocation invokeGoogProvide = JsUtils.createGoogProvideInvocation(name.getShortIdent(),
+            info);
+        inits.add(invokeGoogProvide.makeStmt());
+      } else {
+        JsVar var = new JsVar(info, name);
+        var.setInitExpr(new JsObjectLiteral(info));
+        JsVars vars = new JsVars(info);
+        vars.add(var);
+        inits.add(vars);
+      }
     }
     return inits;
   }
@@ -174,11 +320,21 @@ public class JsNamespaceChooser {
   /**
    * Attempts to move the given name to a namespace. Returns true if it was changed.
    * Side effects: may set the name's namespace and/or add a new mapping to
-   * {@link #packageToNamespace}.
+   * <code>newlyAddedNamespaces</code>.
    */
-  private boolean moveName(JsName name) {
+  private boolean moveName(JsName name, Map<String, JsName> liveNamespaces,
+      FragmentNamespaceResult result) {
+    // even in NONE mode we handle the crossFragmentNamespace
+    if (crossFragmentNamespace != null && name.getNamespace() == crossFragmentNamespace) {
+      return true;
+    }
+
+    if (namespaceOption == JsNamespaceOption.NONE) {
+      return false;
+    }
+
     if (name.getNamespace() != null) {
-      return false; // already in a namespace. (Shouldn't happen.)
+      return false;
     }
 
     if (!name.isObfuscatable()) {
@@ -190,17 +346,18 @@ public class JsNamespaceChooser {
       return false; // not compiled from Java
     }
 
-    if (name.getStaticRef() instanceof JsFunction) {
-      JsFunction func = (JsFunction) name.getStaticRef();
-      if (program.isIndexedFunction(func)) {
-        return false; // may be called directly in another pass (for example JsStackEmulator).
-      }
-    }
-
-    JsName namespace = packageToNamespace.get(packageName);
+    JsName namespace = liveNamespaces.get(packageName);
     if (namespace == null) {
-      namespace = program.getScope().declareName(chooseUnusedName(packageName));
-      packageToNamespace.put(packageName, namespace);
+      namespace = result.getNewlyAddedNamespaces().get(packageName);
+      if (namespace == null) {
+        namespace = program.getScope().declareName(chooseUnusedName(packageName));
+        if (freshNameGenerator != null) {
+          namespace.setShortIdent(freshNameGenerator.getFreshName());
+        }
+        result.getNewlyAddedNamespaces().put(packageName, namespace);
+      }
+    } else {
+      result.getReferencedNamespaces().add(packageName);
     }
 
     name.setNamespace(namespace);
@@ -231,19 +388,27 @@ public class JsNamespaceChooser {
     if (field != null) {
       return findPackage(field.getEnclosingType());
     }
+    JDeclaredType type = jjsmap.nameToType(name);
+    if (type != null) {
+      return findPackage(type);
+    }
+    // interned literal
+    if (name.getStaticRef() instanceof JsLiteral) {
+      return "$.g";
+    }
     return null; // not found
   }
 
-  private static String findPackage(JDeclaredType type) {
+  private String findPackage(JDeclaredType type) {
     String packageName = Util.getPackageName(type.getName());
     // Return null for the default package.
-    return packageName.isEmpty() ? null : packageName;
+    return packageName.isEmpty() ? "$.g" : packageName;
   }
 
   /**
    * Find the initials of a package. For example, "java.lang" -> "jl".
    */
-  private static String initialsForPackage(String packageName) {
+  private String initialsForPackage(String packageName) {
     StringBuilder result = new StringBuilder();
 
     int end = packageName.length();

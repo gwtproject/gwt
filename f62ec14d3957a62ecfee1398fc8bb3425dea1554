@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4ab15ef_ac3c63ee",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigDecimal.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-21T19:17:43Z",
+      "side": 1,
+      "message": "[error] Unused import - javaemul.internal.JsUtils.",
+      "revId": "f62ec14d3957a62ecfee1398fc8bb3425dea1554",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

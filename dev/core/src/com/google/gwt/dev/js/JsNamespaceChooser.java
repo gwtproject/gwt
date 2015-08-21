@@ -26,12 +26,14 @@ import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFunction;
+import com.google.gwt.dev.js.ast.JsInvocation;
 import com.google.gwt.dev.js.ast.JsModVisitor;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsObjectLiteral;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsStatement;
+import com.google.gwt.dev.js.ast.JsStringLiteral;
 import com.google.gwt.dev.js.ast.JsVars;
 import com.google.gwt.dev.js.ast.JsVars.JsVar;
 import com.google.gwt.dev.util.Util;
@@ -39,8 +41,10 @@ import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * A compiler pass that creates a namespace for each Java package
@@ -50,38 +54,76 @@ import java.util.Map;
  */
 public class JsNamespaceChooser {
 
-  public static void exec(JsProgram program, JavaToJavaScriptMap jjsmap) {
-    new JsNamespaceChooser(program, jjsmap).execImpl();
+  public static void exec(JsProgram program, JavaToJavaScriptMap jjsmap,
+      boolean closureCompilerFormatEnabled) {
+    new JsNamespaceChooser(program, jjsmap, closureCompilerFormatEnabled).execImpl();
   }
 
   private final JsProgram program;
   private final JavaToJavaScriptMap jjsmap;
+  private boolean closureCompilerFormatEnabled;
 
   /**
    * The namespaces to be added to the program.
    */
   private final Map<String, JsName> packageToNamespace = Maps.newLinkedHashMap();
 
-  private JsNamespaceChooser(JsProgram program, JavaToJavaScriptMap jjsmap) {
+  private JsNamespaceChooser(JsProgram program, JavaToJavaScriptMap jjsmap,
+      boolean closureCompilerFormatEnabled) {
     this.program = program;
     this.jjsmap = jjsmap;
+    this.closureCompilerFormatEnabled = closureCompilerFormatEnabled;
   }
 
   private void execImpl() {
 
-    // First pass: visit each top-level statement in the program and move it if possible.
-    // (This isn't a standard visitor because we don't want to recurse.)
+    // Namespaces that have already been initialized by previously loaded fragments
+    Set<String> liveNamespaces = new HashSet<>();
 
-    List<JsStatement> globalStatements = program.getGlobalBlock().getStatements();
+    // process fragment 0 first
+    processFragment(0, liveNamespaces);
+
+    // process leftovers fragment if it exists
+    if (program.getFragmentCount() > 1) {
+      processFragment(program.getFragmentCount() - 1, liveNamespaces);
+    }
+
+    // process all exclusive fragments
+    // we do it in this order so the liveNamespaces are handled in the correct order
+    for (int i = 1; i < program.getFragmentCount() - 1; i++) {
+      processFragment(i, liveNamespaces);
+    }
+
+    // Second pass: fix all references for moved names.
+    new NameFixer().accept(program);
+  }
+
+  private void processFragment(int i, Set<String> liveNamespaces) {
+    // visit each top-level statement in the program and move it if possible.
+    // (This isn't a standard visitor because we don't want to recurse.)
+    List<JsStatement> globalStatements = program.getFragment(i).getGlobalBlock().getStatements();
     List<JsStatement> after = Lists.newArrayList();
     for (JsStatement before : globalStatements) {
       if (before instanceof JsExprStmt) {
-        JsExpression exp = ((JsExprStmt) before).getExpression();
+        final JsExpression exp = ((JsExprStmt) before).getExpression();
         if (exp instanceof JsFunction) {
-          after.add(visitGlobalFunction((JsFunction) exp));
-        } else {
-          after.add(before);
+          JsFunction beforeFunc = (JsFunction) exp;
+          final JsExpression expr = visitGlobalFunction(beforeFunc);
+          // We don't want to change the JsExprStmt reference, because that will invalidate
+          // the JJS Maps which map statements to types. Instead we modify the expression,
+          // but leave the previous statement intact.
+          if (beforeFunc != expr) {
+            new JsModVisitor() {
+              @Override
+              public void endVisit(JsFunction x, JsContext ctx) {
+                if (x == exp) {
+                  ctx.replaceMe(expr);
+                }
+              }
+            }.accept(before);
+          }
         }
+        after.add(before);
       } else if (before instanceof JsVars) {
         for (JsVar var : ((JsVars) before)) {
           JsStatement replacement = visitGlobalVar(var);
@@ -94,13 +136,13 @@ public class JsNamespaceChooser {
       }
     }
 
-    after.addAll(0, createNamespaceInitializers(packageToNamespace.values()));
+    List<JsStatement> namespaceInitializers = createNamespaceInitializers(
+        packageToNamespace.values(), liveNamespaces);
+
+    after.addAll(0, namespaceInitializers);
 
     globalStatements.clear();
     globalStatements.addAll(after);
-
-    // Second pass: fix all references for moved names.
-    new NameFixer().accept(program);
   }
 
   /**
@@ -126,6 +168,7 @@ public class JsNamespaceChooser {
       // (The namespace is sufficient.)
       return null;
     }
+
     JsBinaryOperation assign = new JsBinaryOperation(x.getSourceInfo(),
         JsBinaryOperator.ASG, newName, init);
     return assign.makeStmt();
@@ -136,10 +179,10 @@ public class JsNamespaceChooser {
    * (References must still be fixed up.)
    * @return the new function definition.
    */
-  private JsStatement visitGlobalFunction(JsFunction func) {
+  private JsExpression visitGlobalFunction(JsFunction func) {
     JsName name = func.getName();
     if (name == null || !moveName(name)) {
-      return func.makeStmt(); // no change
+      return func; // no change
     }
 
     // Convert the function statement into an assignment taking a named function expression:
@@ -152,21 +195,33 @@ public class JsNamespaceChooser {
     JsNameRef newName = name.makeRef(func.getSourceInfo());
     JsBinaryOperation assign =
         new JsBinaryOperation(func.getSourceInfo(), JsBinaryOperator.ASG, newName, func);
-    return assign.makeStmt();
+    return assign;
   }
 
   /**
    * Creates a "var = {}" statement for each namespace.
    */
-  private List<JsStatement> createNamespaceInitializers(Collection<JsName> namespaces) {
+  private List<JsStatement> createNamespaceInitializers(Collection<JsName> namespaces,
+      Set<String> liveNamespaces) {
     // Let's list them vertically for readability.
     List<JsStatement> inits = Lists.newArrayList();
     for (JsName name : namespaces) {
-      JsVar var = new JsVar(SourceOrigin.UNKNOWN, name);
-      var.setInitExpr(new JsObjectLiteral(SourceOrigin.UNKNOWN));
-      JsVars vars = new JsVars(SourceOrigin.UNKNOWN);
-      vars.add(var);
-      inits.add(vars);
+      if (liveNamespaces.add(name.getShortIdent())) {
+        if (closureCompilerFormatEnabled) {
+          // Closure mode, we use goog.provide
+          JsNameRef googProvide = JsUtils.createQualifier("goog.provide", SourceOrigin.UNKNOWN);
+          JsStringLiteral namespaceLiteral = new JsStringLiteral(SourceOrigin.UNKNOWN,
+              name.getShortIdent());
+          inits.add(
+              new JsInvocation(SourceOrigin.UNKNOWN, googProvide, namespaceLiteral).makeStmt());
+        } else {
+          JsVar var = new JsVar(SourceOrigin.UNKNOWN, name);
+          var.setInitExpr(new JsObjectLiteral(SourceOrigin.UNKNOWN));
+          JsVars vars = new JsVars(SourceOrigin.UNKNOWN);
+          vars.add(var);
+          inits.add(vars);
+        }
+      }
     }
     return inits;
   }
@@ -188,13 +243,6 @@ public class JsNamespaceChooser {
     String packageName = findPackage(name);
     if (packageName == null) {
       return false; // not compiled from Java
-    }
-
-    if (name.getStaticRef() instanceof JsFunction) {
-      JsFunction func = (JsFunction) name.getStaticRef();
-      if (program.isIndexedFunction(func)) {
-        return false; // may be called directly in another pass (for example JsStackEmulator).
-      }
     }
 
     JsName namespace = packageToNamespace.get(packageName);
@@ -231,19 +279,24 @@ public class JsNamespaceChooser {
     if (field != null) {
       return findPackage(field.getEnclosingType());
     }
+    JDeclaredType type = jjsmap.nameToType(name);
+    if (type != null) {
+      return findPackage(type);
+    }
+
     return null; // not found
   }
 
-  private static String findPackage(JDeclaredType type) {
+  private String findPackage(JDeclaredType type) {
     String packageName = Util.getPackageName(type.getName());
     // Return null for the default package.
-    return packageName.isEmpty() ? null : packageName;
+    return packageName.isEmpty() ? "$.g" : packageName;
   }
 
   /**
    * Find the initials of a package. For example, "java.lang" -> "jl".
    */
-  private static String initialsForPackage(String packageName) {
+  private String initialsForPackage(String packageName) {
     StringBuilder result = new StringBuilder();
 
     int end = packageName.length();

@@ -383,9 +383,6 @@ public final class JavaToJavaScriptCompiler {
 
       // TODO(stalcup): move to AST construction
       JsSymbolResolver.exec(jsProgram);
-      if (options.getNamespace() == JsNamespaceOption.PACKAGE) {
-        JsNamespaceChooser.exec(jsProgram, jjsmap);
-      }
 
       // TODO(stalcup): move to normalization
       EvalFunctionsAtTopScope.exec(jsProgram, jjsmap);
@@ -584,6 +581,10 @@ public final class JavaToJavaScriptCompiler {
     }
     dependenciesAndRecorder = Pair.create(
         dependencies, dependencyRecorder);
+
+    if (options.getNamespace() == JsNamespaceOption.PACKAGE) {
+      JsNamespaceChooser.exec(jsProgram, jjsmap, options.isClosureCompilerFormatEnabled());
+    }
 
     // No new JsNames or references to JSNames can be introduced after this
     // point.

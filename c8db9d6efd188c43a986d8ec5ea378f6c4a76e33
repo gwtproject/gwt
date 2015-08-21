@@ -2,6 +2,114 @@
   "comments": [
     {
       "key": {
+        "uuid": "a47f9520_5b622fbb",
+        "filename": "build.gradle",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-21T16:59:46Z",
+      "side": 1,
+      "message": "Remove this file from the patch.",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_7b5febf1",
+        "filename": "dev/build.gradle",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-21T16:59:46Z",
+      "side": 1,
+      "message": "Remove this file from the patch.",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_5b06afda",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteBooleanAndDoubleBoxedInstantiations.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-21T16:59:46Z",
+      "side": 1,
+      "message": "I think I suggested to rewrite this preoptimizations. But given all the work that is done in postoptimizations I think it makes sense to do this rewriting as a post normalization. \n\nMoving the $createXXX to Util.java eliminates the need to keep Double and Boolean as codegen types (not that I care for the size they would bring, but more for the assymetry between these and String).\n\nalso the $create versions that do not take strings do not even need to exist in the post opimization scenario, and they could be just replaced by the parameter.",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_7bfa8b37",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-21T16:59:46Z",
+      "side": 1,
+      "message": "Heed this comment. TypeCategory here needs to be in sync with array.\n\nArray needs to contemplate these cases correctly.\n\nAdd tests for the Double[] and Boolean[] arrays.",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 70
+      },
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_fbed1b83",
+        "filename": "samples/hello/build.gradle",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-21T16:59:46Z",
+      "side": 1,
+      "message": "Remove this file.",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_5bfd4f2c",
+        "filename": "samples/hello/src/com/google/gwt/sample/hello/client/Hello.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-21T16:59:46Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4ab15ef_0cead7e7",
         "filename": "samples/hello/src/com/google/gwt/sample/hello/client/Hello.java",
         "patchSetId": 2
@@ -53,6 +161,40 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_9be2d792",
+        "filename": "settings.gradle",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-21T16:59:46Z",
+      "side": 1,
+      "message": "remove this file",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_bbe793a1",
+        "filename": "user/build.gradle",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-21T16:59:46Z",
+      "side": 1,
+      "message": "remove this file",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4ab15ef_ac010347",
         "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
         "patchSetId": 2
@@ -64,6 +206,24 @@
       "writtenOn": "2015-08-21T16:20:23Z",
       "side": 1,
       "message": "[error] Name \u0027$createBoolean\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_fb167b09",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-21T16:59:46Z",
+      "side": 1,
+      "message": "Move these new functions to a class in intrinsic (Maybe Util.java) and don\u0027t use $ in the name.",
+      "parentUuid": "a4ab15ef_ac010347",
       "revId": "c8db9d6efd188c43a986d8ec5ea378f6c4a76e33",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

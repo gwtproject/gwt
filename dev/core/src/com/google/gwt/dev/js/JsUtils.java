@@ -26,6 +26,7 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsScope;
+import com.google.gwt.dev.js.ast.JsStringLiteral;
 import com.google.gwt.dev.util.StringInterner;
 
 /**
@@ -114,5 +115,13 @@ public class JsUtils {
   private static final String CALL_STRING = StringInterner.get().intern("call");
 
   private JsUtils() {
+  }
+
+  public static JsInvocation createGoogProvideInvocation(String namespace, SourceInfo info) {
+    JsNameRef provideFuncRef = createQualifier("goog.provide", info);
+    JsInvocation provideCall = new JsInvocation(info);
+    provideCall.setQualifier(provideFuncRef);
+    provideCall.getArguments().add(new JsStringLiteral(info, namespace));
+    return provideCall;
   }
 }

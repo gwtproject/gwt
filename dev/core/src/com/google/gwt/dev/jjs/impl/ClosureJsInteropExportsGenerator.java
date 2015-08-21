@@ -21,9 +21,7 @@ import com.google.gwt.dev.js.JsUtils;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsInvocation;
 import com.google.gwt.dev.js.ast.JsName;
-import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsStatement;
-import com.google.gwt.dev.js.ast.JsStringLiteral;
 
 import java.util.HashSet;
 import java.util.List;
@@ -100,10 +98,7 @@ class ClosureJsInteropExportsGenerator implements JsInteropExportsGenerator {
       return;
     }
 
-    JsNameRef provideFuncRef = JsUtils.createQualifier("goog.provide", info);
-    JsInvocation provideCall = new JsInvocation(info);
-    provideCall.setQualifier(provideFuncRef);
-    provideCall.getArguments().add(new JsStringLiteral(info, namespace));
+    JsInvocation provideCall = JsUtils.createGoogProvideInvocation(namespace, info);
     exportStmts.add(provideCall.makeStmt());
   }
 

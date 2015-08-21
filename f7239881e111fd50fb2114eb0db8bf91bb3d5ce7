@@ -117,6 +117,24 @@
       "revId": "f7239881e111fd50fb2114eb0db8bf91bb3d5ce7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_fba3db2e",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigDecimal.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-21T17:14:46Z",
+      "side": 1,
+      "message": "Integer java doesn\u0027t call this.\n\nThe call sites don\u0027t need a cast either because int implicitly casts to double.",
+      "parentUuid": "c459e9e9_c5e87a76",
+      "revId": "f7239881e111fd50fb2114eb0db8bf91bb3d5ce7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

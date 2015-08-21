@@ -69,6 +69,30 @@
       "revId": "2816f13326fbab27851f927a6184c468c12d608a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "845371c9_23db8ae5",
+        "filename": "dev/core/super/javaemul/internal/JsUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-08-21T09:46:41Z",
+      "side": 1,
+      "message": "ping",
+      "parentUuid": "64591d73_ee641916",
+      "range": {
+        "startLine": 36,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 8
+      },
+      "revId": "2816f13326fbab27851f927a6184c468c12d608a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

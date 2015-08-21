@@ -512,6 +512,24 @@ public class JdtCompiler {
     }
 
     private NameEnvironmentAnswer findTypeInClassPath(String internalName) {
+      if(nullTypeInClassPathCache.contains(internalName))
+        return null;
+
+      NameEnvironmentAnswer cached = typeInClassPathCache.get(internalName);
+      if(cached !=null)
+        return cached;
+
+      cached = findTypeInClassPathCached(internalName);
+
+      if(cached == null )
+        nullTypeInClassPathCache.add(internalName);
+      else
+        typeInClassPathCache.put(internalName, cached);
+
+      return cached;
+    }
+
+    private NameEnvironmentAnswer findTypeInClassPathCached(String internalName) {
       URL resource = getClassLoader().getResource(internalName + ".class");
       if (resource == null) {
         return null;
@@ -760,6 +778,23 @@ public class JdtCompiler {
           SourceLevel.JAVA6, ClassFileConstants.JDK1_6,
           SourceLevel.JAVA7, ClassFileConstants.JDK1_7);
 
+  /**
+   * Caches frequently retrieved data
+   */
+  private HashSet<String> nullTypeInClassPathCache = new HashSet<String>();
+  
+  private HashMap<String, NameEnvironmentAnswer> typeInClassPathCache =
+      new HashMap<String, NameEnvironmentAnswer>();
+
+  private final static HashSet<String> nullReferenceBindingsCache =
+      new HashSet<String>();
+
+  private final static HashMap<String, ReferenceBinding> referenceBindingCache =
+      new HashMap<String, ReferenceBinding>();
+
+  private final static HashMap<String, Boolean> caseSensitivePathCache =
+      new HashMap<String, Boolean>();
+
   public JdtCompiler(CompilerContext compilerContext, UnitProcessor processor) {
     this.compilerContext = compilerContext;
     this.processor = processor;
@@ -1003,6 +1038,28 @@ public class JdtCompiler {
   }
 
   public ReferenceBinding resolveType(String sourceOrBinaryName) {
+    String key = System.identityHashCode(compilerImpl.lookupEnvironment) + "-" + sourceOrBinaryName;
+
+    if(nullReferenceBindingsCache.contains(key))
+      return null;
+
+    ReferenceBinding cached;
+
+    cached = referenceBindingCache.get(key);
+    if( cached != null )
+      return cached;
+
+    cached = resolveTypeCached(sourceOrBinaryName);
+
+    if( cached == null )
+      nullReferenceBindingsCache.add(key);
+    else
+      referenceBindingCache.put(key, cached);
+
+    return cached;
+  }
+
+  public ReferenceBinding resolveTypeCached(String sourceOrBinaryName) {
     return resolveType(compilerImpl.lookupEnvironment, sourceOrBinaryName);
   }
 
@@ -1043,6 +1100,18 @@ public class JdtCompiler {
   }
 
   private static boolean caseSensitivePathExists(String resourcePath) {
+    Boolean cached = caseSensitivePathCache.get(resourcePath);
+    if(cached !=null)
+      return cached;
+
+    cached = caseSensitivePathExistsCached(resourcePath);
+
+    caseSensitivePathCache.put(resourcePath, cached);
+
+    return cached;
+  }
+
+  private static boolean caseSensitivePathExistsCached(String resourcePath) {
     URL resourceURL = getClassLoader().getResource(resourcePath + '/');
     if (resourceURL == null) {
       return false;

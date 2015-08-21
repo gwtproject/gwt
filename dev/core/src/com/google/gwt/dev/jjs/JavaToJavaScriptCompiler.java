@@ -383,9 +383,6 @@ public final class JavaToJavaScriptCompiler {
 
       // TODO(stalcup): move to AST construction
       JsSymbolResolver.exec(jsProgram);
-      if (options.getNamespace() == JsNamespaceOption.PACKAGE) {
-        JsNamespaceChooser.exec(jsProgram, jjsmap);
-      }
 
       // TODO(stalcup): move to normalization
       EvalFunctionsAtTopScope.exec(jsProgram, jjsmap);
@@ -405,8 +402,20 @@ public final class JavaToJavaScriptCompiler {
       Pair<SyntheticArtifact, MultipleDependencyGraphRecorder> dependenciesAndRecorder =
           splitJsIntoFragments(properties, permutationId, jjsmap);
 
+
       // TODO(stalcup): move to optimize.
-      Map<JsName, JsLiteral> internedLiteralByVariableName = renameJsSymbols(properties, jjsmap);
+      RenamingResult renamingResult = renameJsSymbols(properties, jjsmap);
+
+
+
+      JsName crossFragmentNamespace = HandleCrossFragmentReferences.exec(jsProgram, properties);
+
+      JsNamespaceChooser.exec(jsProgram, jjsmap, renamingResult.getFreshNameGenerator(),
+            options.isClosureCompilerFormatEnabled(), crossFragmentNamespace,
+            options.getNamespace());
+
+      // No new JsNames or references to JSNames can be introduced after this
+      // point.
 
       // TODO(stalcup): move to normalization
       JsBreakUpLargeVarStatements.exec(jsProgram, properties.getConfigurationProperties());
@@ -429,8 +438,8 @@ public final class JavaToJavaScriptCompiler {
 
       // TODO(stalcup): hide metrics gathering in a callback or subclass
       addSyntheticArtifacts(unifiedAst, permutation, startTimeMs, permutationId, jjsmap,
-          dependenciesAndRecorder, internedLiteralByVariableName, isSourceMapsEnabled, jsFragments,
-          sizeBreakdowns, sourceInfoMaps, permutationResult);
+          dependenciesAndRecorder, renamingResult.getInternedLiteralByVariableName(),
+          isSourceMapsEnabled, jsFragments, sizeBreakdowns, sourceInfoMaps, permutationResult);
       return permutationResult;
     } catch (Throwable e) {
       throw CompilationProblemReporter.logAndTranslateException(logger, e);
@@ -523,12 +532,12 @@ public final class JavaToJavaScriptCompiler {
     }
   }
 
-  private Map<JsName, JsLiteral> runDetailedNamer(ConfigurationProperties config)
+  private RenamingResult runDetailedNamer(ConfigurationProperties config)
       throws IllegalNameException {
     Map<JsName, JsLiteral> internedTextByVariableName =
         maybeInternLiterals(JsLiteralInterner.INTERN_ALL);
     JsVerboseNamer.exec(jsProgram, config);
-    return internedTextByVariableName;
+    return new RenamingResult(internedTextByVariableName, null);
   }
 
   private Map<JsName, JsLiteral> maybeInternLiterals(int interningMask) {
@@ -585,9 +594,7 @@ public final class JavaToJavaScriptCompiler {
     dependenciesAndRecorder = Pair.create(
         dependencies, dependencyRecorder);
 
-    // No new JsNames or references to JSNames can be introduced after this
-    // point.
-    HandleCrossFragmentReferences.exec(jsProgram, properties);
+
 
     return dependenciesAndRecorder;
   }
@@ -1033,19 +1040,40 @@ public final class JavaToJavaScriptCompiler {
     }
   }
 
-  private Map<JsName, JsLiteral> renameJsSymbols(PermutationProperties properties,
+  private static class RenamingResult {
+    private Map<JsName, JsLiteral> internedLiteralByVariableName;
+    private FreshNameGenerator freshNameGenerator;
+
+    public RenamingResult(
+        Map<JsName, JsLiteral> internedLiteralByVariableName,
+        FreshNameGenerator freshNameGenerator) {
+      this.internedLiteralByVariableName = internedLiteralByVariableName;
+      this.freshNameGenerator = freshNameGenerator;
+    }
+
+    public Map<JsName, JsLiteral> getInternedLiteralByVariableName() {
+      return internedLiteralByVariableName == null ? ImmutableMap.<JsName, JsLiteral>of() :
+          internedLiteralByVariableName;
+    }
+
+    public FreshNameGenerator getFreshNameGenerator() {
+      return freshNameGenerator;
+    }
+  }
+
+  private RenamingResult renameJsSymbols(PermutationProperties properties,
       JavaToJavaScriptMap jjsmap) throws UnableToCompleteException {
-    Map<JsName, JsLiteral> internedLiteralByVariableName = null;
+    RenamingResult renamingResult = null;
     try {
       switch (options.getOutput()) {
         case OBFUSCATED:
-          internedLiteralByVariableName = runObfuscateNamer(options, properties, jjsmap);
+          renamingResult = runObfuscateNamer(options, properties, jjsmap);
           break;
         case PRETTY:
-          internedLiteralByVariableName = runPrettyNamer(options, properties, jjsmap);
+          renamingResult = runPrettyNamer(options, properties, jjsmap);
           break;
         case DETAILED:
-          internedLiteralByVariableName = runDetailedNamer(properties.getConfigurationProperties());
+          renamingResult = runDetailedNamer(properties.getConfigurationProperties());
           break;
         default:
           throw new InternalCompilerException("Unknown output mode");
@@ -1054,16 +1082,14 @@ public final class JavaToJavaScriptCompiler {
       logger.log(TreeLogger.ERROR, e.getMessage(), e);
       throw new UnableToCompleteException();
     }
-    return internedLiteralByVariableName == null ?
-        ImmutableMap.<JsName, JsLiteral>of() : internedLiteralByVariableName;
+    return renamingResult;
   }
 
-  private Map<JsName, JsLiteral> runObfuscateNamer(JJSOptions options,
+  private RenamingResult runObfuscateNamer(JJSOptions options,
       PermutationProperties properties, JavaToJavaScriptMap jjsmap)
       throws IllegalNameException {
     if (options.isIncrementalCompileEnabled()) {
-      runIncrementalNamer(options, properties.getConfigurationProperties(), jjsmap);
-      return null;
+      return runIncrementalNamer(options, properties.getConfigurationProperties(), jjsmap);
     }
 
     Map<JsName, JsLiteral> internedLiteralByVariableName =
@@ -1071,33 +1097,36 @@ public final class JavaToJavaScriptCompiler {
     FreshNameGenerator freshNameGenerator =
         JsObfuscateNamer.exec(jsProgram, properties.getConfigurationProperties());
     if (options.shouldRemoveDuplicateFunctions()
-        && JsStackEmulator.getStackMode(properties) == JsStackEmulator.StackMode.STRIP) {
+        && JsStackEmulator.getStackMode(properties) == JsStackEmulator.StackMode.STRIP
+        // We don't run this pass if namespacing is on, since it later renames JsNames
+        // and it is not safe to do so if this pass runs
+        && options.getNamespace() == JsNamespaceOption.NONE) {
       JsDuplicateFunctionRemover.exec(jsProgram, freshNameGenerator);
     }
-    return internedLiteralByVariableName;
+    return new RenamingResult(internedLiteralByVariableName, freshNameGenerator);
   }
 
-  private Map<JsName, JsLiteral> runPrettyNamer(JJSOptions options,
+  private RenamingResult runPrettyNamer(JJSOptions options,
       PermutationProperties properties, JavaToJavaScriptMap jjsmap)
       throws IllegalNameException {
     if (options.isIncrementalCompileEnabled()) {
-      runIncrementalNamer(options, properties.getConfigurationProperties(), jjsmap);
-      return null;
+      return runIncrementalNamer(options, properties.getConfigurationProperties(), jjsmap);
     }
     // We don't intern strings in pretty mode to improve readability
     Map<JsName, JsLiteral> internedLiteralByVariableName =
         maybeInternLiterals(JsLiteralInterner.INTERN_ALL & ~JsLiteralInterner.INTERN_STRINGS);
 
     JsPrettyNamer.exec(jsProgram, properties.getConfigurationProperties());
-    return internedLiteralByVariableName;
+    return new RenamingResult(internedLiteralByVariableName, null);
   }
 
-  private void runIncrementalNamer(JJSOptions options,
+  private RenamingResult runIncrementalNamer(JJSOptions options,
       ConfigurationProperties configurationProperties, JavaToJavaScriptMap jjsmap)
     throws IllegalNameException {
     JsIncrementalNamer.exec(jsProgram, configurationProperties,
         compilerContext.getMinimalRebuildCache().getPersistentPrettyNamerState(), jjsmap,
         options.getOutput() == JsOutputOption.OBFUSCATED);
+    return new RenamingResult(null, null);
   }
 
   /**

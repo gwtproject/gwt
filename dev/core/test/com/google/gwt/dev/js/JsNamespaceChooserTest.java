@@ -57,25 +57,31 @@ public class JsNamespaceChooserTest extends TestCase {
 
   private Map<HasName, JsName> javaToName = Maps.newHashMap();
 
+  protected boolean closureMode = false;
+
   public void testMoveJavaField() throws Exception {
     program = parseJs("var x = 1; x = 2;");
     mapJavaField("x");
-    checkResult("var ce={};ce.x=1;ce.x=2;");
+    checkResult(namespace("ce") + ";ce.x=1;ce.x=2;");
     checkNamespaceEquals("ce", "x");
+  }
+
+  private String namespace(String ce) {
+    return closureMode ? String.format("goog.provide('%s')", ce) : String.format("var %s={}", ce);
   }
 
   public void testMoveUninitializedJavaField() throws Exception {
     program = parseJs("var x; x = 1;");
     mapJavaField("x");
-    checkResult("var ce={};ce.x=1;");
+    checkResult(namespace("ce") + ";ce.x=1;");
     checkNamespaceEquals("ce", "x");
   }
 
   public void testSkipDefaultPackageMember() throws Exception {
     program = parseJs("var x = 1; x = 2;");
     mapJavaField("x", defaultPackageBarClass);
-    checkResult("var x=1;x=2;");
-    checkNamespaceEquals(null, "x");
+    checkResult(namespace("$g") + ";$g.x=1;$g.x=2;");
+    checkNamespaceEquals("$g", "x");
   }
 
   public void testSkipNonJavaGlobal() throws Exception {
@@ -87,7 +93,7 @@ public class JsNamespaceChooserTest extends TestCase {
   public void testMoveJavaFunction() throws Exception {
     program = parseJs("function f() {} f();");
     mapJavaMethod("f");
-    checkResult("var ce={};ce.f=function f(){};ce.f();");
+    checkResult(namespace("ce") + ";ce.f=function f(){};ce.f();");
     checkNamespaceEquals("ce", "f");
   }
 
@@ -162,7 +168,7 @@ public class JsNamespaceChooserTest extends TestCase {
         typeForStatement, vtableInitForMethod);
 
     // Run it.
-    JsNamespaceChooser.exec(program, jjsmap);
+    JsNamespaceChooser.exec(program, jjsmap, closureMode);
   }
 
   private static JsProgram parseJs(String js) throws IOException, JsParserException {

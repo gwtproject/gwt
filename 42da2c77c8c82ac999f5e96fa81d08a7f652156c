@@ -22,6 +22,30 @@
       "revId": "42da2c77c8c82ac999f5e96fa81d08a7f652156c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "845371c9_26db98e5",
+        "filename": "dev/core/super/javaemul/internal/StringHelper.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2015-08-24T19:39:52Z",
+      "side": 1,
+      "message": "I moved it here to show that this method is not one of public JDK API valueOf methods.\nDo you think I should move it back to AbstractStringBuilder or even maybe rename it?",
+      "parentUuid": "845371c9_6648b033",
+      "range": {
+        "startLine": 42,
+        "startChar": 29,
+        "endLine": 42,
+        "endChar": 38
+      },
+      "revId": "42da2c77c8c82ac999f5e96fa81d08a7f652156c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

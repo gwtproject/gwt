@@ -643,3 +643,20 @@ filegroup(
         exclude = ANT_EXCLUDES,
     ),
 )
+
+filegroup(
+    name = "emul",
+    srcs = glob(
+        [
+            "super/com/google/gwt/emul/java/**/*.java",
+        ],
+        exclude = [
+            "super/com/google/gwt/emul/java/lang/String.java",
+            "super/com/google/gwt/emul/java/lang/Enum.java",
+            "super/com/google/gwt/emul/java/lang/Class.java",
+            "super/com/google/gwt/emul/java/lang/Object.java",
+            "super/com/google/gwt/emul/java/util/InternalJsMapFactory.java",
+        ],
+    ),
+    visibility = ["//third_party/java_src/j2cl:__subpackages__"],
+)

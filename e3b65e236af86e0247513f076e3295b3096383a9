@@ -1,0 +1,378 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4ab15ef_4fa171a9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EqualityNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027comparison_strategy\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_af8e153a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EqualityNormalizer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_8f935962",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createDouble\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_ef881d30",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createDouble\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_cf8d613e",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createBoolean\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_2f834513",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createBoolean\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_0f800903",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_6f7d4d8b",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_4f7a1195",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_aff7359a",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_8ffcf97d",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_ef013d14",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_cf06012a",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_2f0ce546",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_0f092937",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_6f16ed56",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_4f133165",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_af20d5a5",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_8f2519b6",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Util.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Name \u0027$createString\u0027 must match pattern \u0027^[a-z][a-zA-Z0-9]*$\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_ef1add73",
+        "filename": "samples/hello/src/com/google/gwt/sample/hello/client/Hello.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Instantiation of Boolean should be avoided.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_cf1f2162",
+        "filename": "samples/hello/src/com/google/gwt/sample/hello/client/Hello.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Instantiation of java.lang.Boolean should be avoided.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4ab15ef_2f3505df",
+        "filename": "samples/hello/src/com/google/gwt/sample/hello/client/Hello.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T23:31:05Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "e3b65e236af86e0247513f076e3295b3096383a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

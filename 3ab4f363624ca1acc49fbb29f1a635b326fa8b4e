@@ -16,6 +16,29 @@
       "revId": "3ab4f363624ca1acc49fbb29f1a635b326fa8b4e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_ac60b82b",
+        "filename": "user/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-24T18:18:17Z",
+      "side": 1,
+      "message": "Ideally, these should be excluded at j2cl side of the build, instead of here.",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 658,
+        "endChar": 76
+      },
+      "revId": "3ab4f363624ca1acc49fbb29f1a635b326fa8b4e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

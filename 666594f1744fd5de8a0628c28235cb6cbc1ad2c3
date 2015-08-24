@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4ab15ef_0ca6570c",
+        "filename": "user/super/com/google/gwt/emul/java/lang/AbstractStringBuilder.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-08-24T17:53:24Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027javaemul.internal.InternalPreconditions.checkStringBounds\u0027 import.",
+      "revId": "666594f1744fd5de8a0628c28235cb6cbc1ad2c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

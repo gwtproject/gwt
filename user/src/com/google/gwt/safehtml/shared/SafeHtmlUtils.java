@@ -29,6 +29,7 @@ public final class SafeHtmlUtils {
    */
   public static final SafeHtml EMPTY_SAFE_HTML = new SafeHtmlString("");
 
+  private static final RegExp HTML_CHARS_RE = RegExp.compile("[&<>'\"]");
   private static final RegExp AMP_RE = RegExp.compile("&", "g");
   private static final RegExp GT_RE = RegExp.compile(">", "g");
   private static final RegExp LT_RE = RegExp.compile("<", "g");
@@ -104,7 +105,7 @@ public final class SafeHtmlUtils {
 
   /**
    * HTML-escapes a character. HTML meta characters will be escaped as follows:
-   * 
+   *
    * <pre>
    * &amp; - &amp;amp;
    * &lt; - &amp;lt;
@@ -153,6 +154,9 @@ public final class SafeHtmlUtils {
    *         replaced with their corresponding HTML Entity References
    */
   public static String htmlEscape(String s) {
+    if (!HTML_CHARS_RE.test(s)) {
+      return s;
+    }
     if (s.indexOf("&") != -1) {
       s = AMP_RE.replace(s, "&amp;");
     }

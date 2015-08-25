@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_617df28a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-25T21:03:48Z",
+      "side": 1,
+      "message": "Yeah, because the field on the class that stores the constructor parameter doesn\u0027t exist anymore, or will be pruned. \n\nSo for example\n\nnew Double(13) -\u003e this.value inside constructor is never read because Double.doubleValue() isn\u0027t referenced. Therefore the field assignment is pruned, therefore the parameter is unreferenced and pruned. \n\nOriginally, I didn\u0027t implement JSNI methods, I left in the original Double/Boolean implementation, and had a post-optimization pass that replaced references of this.value with this, but Goktug objected to that.",
+      "parentUuid": "a47f9520_7e902f20",
+      "revId": "672aed551a58668249f6c2b500c05fce9e517768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_de77e377",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
         "patchSetId": 6
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_219cca48",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-25T21:03:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_de77e377",
+      "range": {
+        "startLine": 475,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 5
+      },
+      "revId": "672aed551a58668249f6c2b500c05fce9e517768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_9ed4fbb7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EqualityNormalizer.java",
         "patchSetId": 6
@@ -53,6 +95,30 @@
       "writtenOn": "2015-08-25T18:19:21Z",
       "side": 1,
       "message": "I think here should be \n\nT,T,T,T,D,T \n\nto avoid  !\"\" ,!0, !false, etc.\n\nSame for the the last column.",
+      "range": {
+        "startLine": 214,
+        "startChar": 5,
+        "endLine": 214,
+        "endChar": 31
+      },
+      "revId": "672aed551a58668249f6c2b500c05fce9e517768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_c1094638",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EqualityNormalizer.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-25T21:03:48Z",
+      "side": 1,
+      "message": "There\u0027s an if statement above in the \"case D:\" that handles that. I suppose we could update the matrix and remove the special if clause. However, triple equal case applies maskUndefined, which means every a \u003d\u003d\u003d b comparison comes out as\n\n((a \u003d\u003d null) ? null : a) \u003d\u003d\u003d ((b \u003d\u003d null) ? null : b)\n\nbut in the case where both sides are known to be null, that doesn\u0027t appear to be needed.",
+      "parentUuid": "a47f9520_9ed4fbb7",
       "range": {
         "startLine": 214,
         "startChar": 5,

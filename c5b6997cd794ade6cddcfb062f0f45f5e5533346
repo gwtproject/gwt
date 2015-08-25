@@ -46,6 +46,52 @@
       "revId": "c5b6997cd794ade6cddcfb062f0f45f5e5533346",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_878a6ea0",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-25T23:40:43Z",
+      "side": 1,
+      "message": "private",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 2
+      },
+      "revId": "c5b6997cd794ade6cddcfb062f0f45f5e5533346",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_67266245",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-25T23:40:43Z",
+      "side": 1,
+      "message": "remove @skip - are they useful for anything?",
+      "range": {
+        "startLine": 674,
+        "startChar": 1,
+        "endLine": 676,
+        "endChar": 5
+      },
+      "revId": "c5b6997cd794ade6cddcfb062f0f45f5e5533346",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

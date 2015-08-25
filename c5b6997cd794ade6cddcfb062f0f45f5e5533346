@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a47f9520_6782e2a5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EqualityNormalizer.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-25T23:32:13Z",
+      "side": 1,
+      "message": "I thought you would leave this as before (DDDDD) as you were right. Anyhow whatever you choose make it the same for the last column (vertical).",
+      "range": {
+        "startLine": 214,
+        "startChar": 4,
+        "endLine": 214,
+        "endChar": 33
+      },
+      "revId": "c5b6997cd794ade6cddcfb062f0f45f5e5533346",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

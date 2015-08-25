@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a47f9520_7e902f20",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-25T18:19:21Z",
+      "side": 1,
+      "message": "Now that constructors are replaced in a postnormalization, is this really needed?",
+      "revId": "672aed551a58668249f6c2b500c05fce9e517768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_de77e377",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-25T18:19:21Z",
+      "side": 1,
+      "message": "Extract to a method and call it for the three cases to avoid duplication.",
+      "range": {
+        "startLine": 475,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 5
+      },
+      "revId": "672aed551a58668249f6c2b500c05fce9e517768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_9ed4fbb7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EqualityNormalizer.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-25T18:19:21Z",
+      "side": 1,
+      "message": "I think here should be \n\nT,T,T,T,D,T \n\nto avoid  !\"\" ,!0, !false, etc.\n\nSame for the the last column.",
+      "range": {
+        "startLine": 214,
+        "startChar": 5,
+        "endLine": 214,
+        "endChar": 31
+      },
+      "revId": "672aed551a58668249f6c2b500c05fce9e517768",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

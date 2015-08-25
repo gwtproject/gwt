@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "845371c9_e66b400e",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2015-08-25T22:02:31Z",
+      "side": 1,
+      "message": "Daniel, for some reason you put null here. Am I missing something?",
+      "revId": "c6495e59ffac9bc33c47bd467d2328acb902d964",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "845371c9_e9ed5183",
+        "filename": "dev/core/super/javaemul/internal/StringHelper.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2015-08-26T17:36:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "847a9131_0e3f8b3d",
+      "range": {
+        "startLine": 23,
+        "startChar": 30,
+        "endLine": 23,
+        "endChar": 39
+      },
+      "revId": "43d09bf9c28841b516fa9680084b9378f49cad03",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "048941a8_3f650710",
         "filename": "user/super/com/google/gwt/emul/java/lang/AbstractStringBuilder.java",
         "patchSetId": 17
@@ -106,6 +130,30 @@
       "writtenOn": "2015-08-26T12:26:58Z",
       "side": 1,
       "message": "Method is only used from inside string (if you implement my suggestings) I would make it private then.",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 7
+      },
+      "revId": "43d09bf9c28841b516fa9680084b9378f49cad03",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "845371c9_89e29d92",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2015-08-26T17:36:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c459e9e9_8b77f178",
       "range": {
         "startLine": 153,
         "startChar": 0,

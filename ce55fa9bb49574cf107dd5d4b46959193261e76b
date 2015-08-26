@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a47f9520_58ca23b4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-26T18:24:01Z",
+      "side": 1,
+      "message": "I don\u0027t  love this name but I couldn\u0027t come up with a better one.\n\nMaybe isDevirtualizedType? isRawType? isNativeType? \n\nIf you find a better one please rename this method and the next.",
+      "range": {
+        "startLine": 381,
+        "startChar": 17,
+        "endLine": 381,
+        "endChar": 33
+      },
+      "revId": "ce55fa9bb49574cf107dd5d4b46959193261e76b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_b8f467fa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-26T18:24:01Z",
+      "side": 1,
+      "message": "Rewrite this one to use program.getUnboxedTypes()",
+      "range": {
+        "startLine": 217,
+        "startChar": 5,
+        "endLine": 218,
+        "endChar": 99
+      },
+      "revId": "ce55fa9bb49574cf107dd5d4b46959193261e76b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

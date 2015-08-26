@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a47f9520_7816ff7d",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-26T16:45:14Z",
+      "side": 1,
+      "message": "I\u0027m not sure about the changes here.\n\nIt introduces getResourceBundleName but it always returns null.The field is unused.\n\nIt also introduces overloads as new APIs in Logger and LogManager that actually accepts this parameter and does nothing with it but putting the API there that suggests actually we do something with it.That\u0027s misleading users. It is better if we keep the APIs out that actually doesn\u0027t do what it suppose to do unless there is strong reason to introduce the API (an example of a good reason is; if a lot shared code uses it to pass null so you want them keep compiling and they will still work correctly; in that case you need verify the parameter is null).\n\nSo as it is this change doesn\u0027t make sense.",
+      "revId": "3cb7e43b429ee75b6b88fd64a910a7d3c4970dc0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a47f9520_58c8e349",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayList.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-26T18:15:50Z",
+      "side": 1,
+      "message": "If toArray doesn\u0027t return Object[] (which doesn\u0027t need to), then this will result in incorrect behavior; for example in toArray of this class. It is not good.",
+      "revId": "f9549cb40d7d7b0430f7fbef1d6e1e615dc5a564",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_186edba8",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-26T18:15:50Z",
+      "side": 1,
+      "message": "len?",
+      "range": {
+        "startLine": 450,
+        "startChar": 27,
+        "endLine": 450,
+        "endChar": 36
+      },
+      "revId": "f9549cb40d7d7b0430f7fbef1d6e1e615dc5a564",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_d877f377",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-26T18:15:50Z",
+      "side": 1,
+      "message": "Are we covering all the checks available in System.arrayCopy? When I first look at this earlier, I thought we would miss some checks/exception when ArrayHelper.copy is called directly, perhaps I\u0027m wrong.",
+      "revId": "f9549cb40d7d7b0430f7fbef1d6e1e615dc5a564",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

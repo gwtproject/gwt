@@ -2243,16 +2243,9 @@ public class GenerateJavaScriptAST {
 
     private JsExpression buildClosureStyleCastMapFromArrayLiteral(
             List<JsExpression> runtimeTypeIdLiterals, SourceInfo sourceInfo) {
-      /*
-       * goog.object.createSet('foo', 'bar', 'baz') is optimized by closure compiler into
-       * {'foo': !0, 'bar': !0, baz: !0}
-       */
-      JsNameRef createSet = new JsNameRef(sourceInfo, "createSet");
-      JsNameRef googObject = new JsNameRef(sourceInfo, "object");
-      JsNameRef goog = new JsNameRef(sourceInfo, "goog");
-      createSet.setQualifier(googObject);
-      googObject.setQualifier(goog);
-
+      // Use substituted function for goog.object.createSet for JsCompiler
+      // optimization
+      JsNameRef createSet = new JsNameRef(sourceInfo, "goog$object$createSet");
       JsInvocation jsInvocation = new JsInvocation(sourceInfo, createSet);
 
       for (JsExpression expr : runtimeTypeIdLiterals) {

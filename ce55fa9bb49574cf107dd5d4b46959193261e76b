@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_d35d944c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-26T18:38:34Z",
+      "side": 1,
+      "message": "remove this condition after doing rluble\u0027s suggestion?",
+      "revId": "ce55fa9bb49574cf107dd5d4b46959193261e76b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_b8f467fa",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
         "patchSetId": 15

@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a47f9520_fe5df44b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-27T17:34:06Z",
+      "side": 1,
+      "message": "Remove comment.",
+      "range": {
+        "startLine": 518,
+        "startChar": 1,
+        "endLine": 518,
+        "endChar": 55
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_fe36540c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-27T17:34:06Z",
+      "side": 1,
+      "message": "Is this only needed now so that UnifyAST does not remove $createXXX?",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 65
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_7e4b447f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-27T17:34:06Z",
+      "side": 1,
+      "message": "by either",
+      "range": {
+        "startLine": 113,
+        "startChar": 9,
+        "endLine": 113,
+        "endChar": 15
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_dee4b8cd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-27T17:34:06Z",
+      "side": 1,
+      "message": "isSuperOfRepresentedAsNativeType",
+      "range": {
+        "startLine": 214,
+        "startChar": 20,
+        "endLine": 214,
+        "endChar": 40
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_bee76cd0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-27T17:34:06Z",
+      "side": 1,
+      "message": "getRepresentedAsNativeTypes",
+      "range": {
+        "startLine": 215,
+        "startChar": 37,
+        "endLine": 215,
+        "endChar": 52
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_be9a0c79",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 2675,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-27T17:34:06Z",
+      "side": 1,
+      "message": "remove.",
+      "range": {
+        "startLine": 2675,
+        "startChar": 28,
+        "endLine": 2675,
+        "endChar": 39
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_fe88942f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-27T17:34:06Z",
+      "side": 1,
+      "message": "Make this a constant so that it is not repeated everywhere.",
+      "range": {
+        "startLine": 48,
+        "startChar": 41,
+        "endLine": 48,
+        "endChar": 49
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_1e8ec039",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-27T17:34:06Z",
+      "side": 1,
+      "message": "BoxedType",
+      "range": {
+        "startLine": 64,
+        "startChar": 30,
+        "endLine": 64,
+        "endChar": 34
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_be83ec10",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-27T17:34:06Z",
+      "side": 1,
+      "message": "BoxedType",
+      "range": {
+        "startLine": 78,
+        "startChar": 32,
+        "endLine": 78,
+        "endChar": 36
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_9ec5d033",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-27T17:34:06Z",
+      "side": 1,
+      "message": "I think this is more common than casting to Double.\n\nMaybe we should index \"native\" castmaps by the result of typeof().\n\nthen it would become\n\nvar castmap \u003d Cast::nativeCastmaps[typeof(src)] | src.@java.lang.Object::castableTypeMap;\nreturn castmap \u0026\u0026 !!castmap[dstId];\n\nbut I am not sure this would perform better.",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 98
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

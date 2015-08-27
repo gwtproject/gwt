@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a47f9520_fb7e665b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2247,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-08-27T04:46:12Z",
+      "side": 1,
+      "message": "nit: you don\u0027t actually need to wrap here.",
+      "revId": "4578ef942e61bc25ae77a72bf5305c8fadda08c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

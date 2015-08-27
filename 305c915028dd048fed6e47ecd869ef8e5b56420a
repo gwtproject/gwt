@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_d9cb72c6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-27T22:06:12Z",
+      "side": 1,
+      "message": "How about adding the calls in all the constructors, e.g.\n\nnew String() {\n  $createString(this)\n}\n\netc",
+      "parentUuid": "a47f9520_193a5a80",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 65
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_7e4b447f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
         "patchSetId": 18

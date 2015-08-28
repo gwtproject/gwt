@@ -18,6 +18,7 @@ package com.google.gwt.dev.jjs.impl.codesplitter;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -257,8 +258,11 @@ public class FragmentExtractor {
         }
         JClassType vtableType = vtableTypeNeeded(statement);
         if (vtableType != null && vtableType != currentVtableType) {
-          assert pendingVtableType == vtableType;
-          extractedStats.add(pendingDefineClass);
+          // there is no defineClass() call in -XclosureFormattedOutput
+          assert pendingVtableType == vtableType || pendingDefineClass == null;
+          if (pendingDefineClass != null) {
+            extractedStats.add(pendingDefineClass);
+          }
           currentVtableType = pendingVtableType;
           pendingDefineClass = null;
           pendingVtableType = null;
@@ -333,7 +337,7 @@ public class FragmentExtractor {
   }
 
   private boolean isLive(JsStatement stat, LivenessPredicate livenessPredicate) {
-    JClassType type = map.typeForStatement(stat);
+    JDeclaredType type = map.typeForStatement(stat);
     if (type != null) {
       // This is part of the code only needed once a type is instantiable
       return livenessPredicate.isLive(type);
@@ -486,7 +490,7 @@ public class FragmentExtractor {
   private JClassType vtableTypeNeeded(JsStatement stat) {
     JMethod meth = map.vtableInitToMethod(stat);
     if (meth != null) {
-      if (meth.needsVtable()) {
+      if (meth.needsVtable() && !meth.isAbstract()) {
         return (JClassType) meth.getEnclosingType();
       }
     }

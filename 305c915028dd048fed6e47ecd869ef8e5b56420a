@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8497f201_1eef2d2f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_fe5df44b",
+      "range": {
+        "startLine": 518,
+        "startChar": 1,
+        "endLine": 518,
+        "endChar": 55
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_fe36540c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 18
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "8497f201_3ef46900",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_d9cb72c6",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 65
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_7e4b447f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
         "patchSetId": 18
@@ -107,6 +155,30 @@
       "writtenOn": "2015-08-27T17:34:06Z",
       "side": 1,
       "message": "by either",
+      "range": {
+        "startLine": 113,
+        "startChar": 9,
+        "endLine": 113,
+        "endChar": 15
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_ded8e592",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_7e4b447f",
       "range": {
         "startLine": 113,
         "startChar": 9,
@@ -142,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "8497f201_fed5a157",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_dee4b8cd",
+      "range": {
+        "startLine": 214,
+        "startChar": 20,
+        "endLine": 214,
+        "endChar": 40
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_bee76cd0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
         "patchSetId": 18
@@ -153,6 +249,30 @@
       "writtenOn": "2015-08-27T17:34:06Z",
       "side": 1,
       "message": "getRepresentedAsNativeTypes",
+      "range": {
+        "startLine": 215,
+        "startChar": 37,
+        "endLine": 215,
+        "endChar": 52
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_9ee25d3f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_bee76cd0",
       "range": {
         "startLine": 215,
         "startChar": 37,
@@ -188,6 +308,30 @@
     },
     {
       "key": {
+        "uuid": "8497f201_bedf1976",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 2675,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_be9a0c79",
+      "range": {
+        "startLine": 2675,
+        "startChar": 28,
+        "endLine": 2675,
+        "endChar": 39
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_fe88942f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
         "patchSetId": 18
@@ -199,6 +343,30 @@
       "writtenOn": "2015-08-27T17:34:06Z",
       "side": 1,
       "message": "Make this a constant so that it is not repeated everywhere.",
+      "range": {
+        "startLine": 48,
+        "startChar": 41,
+        "endLine": 48,
+        "endChar": 49
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_5e0cd5b6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_fe88942f",
       "range": {
         "startLine": 48,
         "startChar": 41,
@@ -234,6 +402,30 @@
     },
     {
       "key": {
+        "uuid": "8497f201_7e1191cd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_1e8ec039",
+      "range": {
+        "startLine": 64,
+        "startChar": 30,
+        "endLine": 64,
+        "endChar": 34
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_be83ec10",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
         "patchSetId": 18
@@ -245,6 +437,30 @@
       "writtenOn": "2015-08-27T17:34:06Z",
       "side": 1,
       "message": "BoxedType",
+      "range": {
+        "startLine": 78,
+        "startChar": 32,
+        "endLine": 78,
+        "endChar": 36
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_1e064d95",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_be83ec10",
       "range": {
         "startLine": 78,
         "startChar": 32,
@@ -291,6 +507,30 @@
       "writtenOn": "2015-08-27T21:34:50Z",
       "side": 1,
       "message": "I\u0027ll try a JsPerf test to see if I can figure out what\u0027s faster. \n\nOn the ordering issue, I think you\u0027re right, but the former order will make us look good on numerical benchmarks. :) I\u0027ll change it.",
+      "parentUuid": "a47f9520_9ec5d033",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 98
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_deff85d4",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "a47f9520_9ec5d033",
       "range": {
         "startLine": 54,

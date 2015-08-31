@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8497f201_fe27e147",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:53:38Z",
+      "side": 1,
+      "message": "I\u0027m not really happy with the name given to this, I\u0027d welcome suggestions for a better name.",
+      "range": {
+        "startLine": 65,
+        "startChar": 27,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "a6e022c279d139684c4fc9c4866ddfc7ffd2f7e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_de51c5a4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/EqualityNormalizer.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-08-31T20:53:38Z",
+      "side": 1,
+      "message": "The last bit of hardcoded-ness. It would be nice to get rid of the strategy matrix and this hardcoded lookup here in favor of putting the logic on the enums themselves,  but I\u0027m ok with leaving the table here.",
+      "range": {
+        "startLine": 154,
+        "startChar": 51,
+        "endLine": 154,
+        "endChar": 52
+      },
+      "revId": "a6e022c279d139684c4fc9c4866ddfc7ffd2f7e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

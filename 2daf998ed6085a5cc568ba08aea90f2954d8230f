@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8497f201_7e50b14a",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Long.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-31T19:18:34Z",
+      "side": 1,
+      "message": "Did you choose 8 here to optimize for 8, 10, 16?",
+      "range": {
+        "startLine": 186,
+        "startChar": 7,
+        "endLine": 186,
+        "endChar": 39
+      },
+      "revId": "2daf998ed6085a5cc568ba08aea90f2954d8230f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_fe89211a",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Long.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-08-31T19:18:34Z",
+      "side": 1,
+      "message": "I don\u0027t see where are we caching a converted version. I know this comment was already there, maybe remove.",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 190,
+        "endChar": 76
+      },
+      "revId": "2daf998ed6085a5cc568ba08aea90f2954d8230f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

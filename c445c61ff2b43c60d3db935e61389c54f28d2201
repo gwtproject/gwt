@@ -22,6 +22,30 @@
       "revId": "c445c61ff2b43c60d3db935e61389c54f28d2201",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_4d67455c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-01T22:23:49Z",
+      "side": 1,
+      "message": "How about I just derive it from the enum name?\n\n\"Cast.isJava\" + camelCase(Enum.name())\n\"Cast.\" + enum.name().toLowerCase() + \"CastMap\"\n\"Cast.dynamicCastTo\" + camelCase(Enum.name())\n\nand only keep the TypeCategory reference (of course, I could also do TypeCategory.valueOf(\"TYPE_JAVA_LANG_\" + enum.name().toUpperCase())\n\nAnd just rely on conventions?",
+      "parentUuid": "8497f201_0dab7dbf",
+      "range": {
+        "startLine": 68,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 45
+      },
+      "revId": "c445c61ff2b43c60d3db935e61389c54f28d2201",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

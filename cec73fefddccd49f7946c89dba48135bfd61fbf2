@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04306211_82d3ba95",
+        "filename": "user/test/com/google/gwt/emultest/java/util/HashMapTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-02T15:45:13Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "cec73fefddccd49f7946c89dba48135bfd61fbf2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

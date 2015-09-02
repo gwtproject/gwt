@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4deb6f4_32310e21",
+        "filename": "user/test/com/google/gwt/emultest/java/util/HashMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-09-02T17:48:25Z",
+      "side": 1,
+      "message": "It seems this test is a generalization of the previous one. So the previous one is not needed anymore.",
+      "revId": "231a20c0d3ae397cf20c99f62e1492e21343274e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -143,13 +143,17 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
       public void remove() {
         checkState(lastEntry != null);
 
+        // Read the chain length before removal since we need to distinguish two cases here:
+        // - We have two items left in the chain -> we need to decrease item index after removal
+        // - We have only one item in the chain -> chain will be dropped do not change the itemIndex
+        int lengthBeforeRemoval = chain.length;
         InternalHashCodeMap.this.remove(lastEntry.getKey());
 
         // If we are sill in the same chain, our itemIndex just jumped an item. We can fix that
         // by decrementing the itemIndex. However there is an exception: if there is only one
         // item, the whole chain is simply dropped not the item. If we decrement in that case, as
-        // the item is not drop from the chain, we will end up returning the same item twice.
-        if (chain == lastChain && chain.length != 1) {
+        // the item is not dropped from the chain, we will end up returning the same item twice.
+        if (chain == lastChain && lengthBeforeRemoval != 1) {
           itemIndex--;
         }
 

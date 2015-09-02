@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4deb6f4_2ff44900",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-09-02T12:40:46Z",
+      "side": 1,
+      "message": "Actually, the bug is in Iterator#remove while iterating on keys, when there are exactly 2 items (left) with the same hashcode. If you don\u0027t call Iterator#remove, or if there are 3 items with the same hashcode when you call Iterator#remove, then it works OK (AFAICT/IIUC).\n\nMaybe update the test to make it test for the 1-item and 3-items cases too? (initialize with 3 items with same hashcode, call remove(), you should have 2 items left in the map; call remove again, you should have 1 item left; call remove again, the map should now be empty).",
+      "revId": "36b0645bb57fd3a003c91680499e1e6f2b67b7f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4deb6f4_0fef052f",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalHashCodeMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-09-02T12:40:46Z",
+      "side": 1,
+      "message": "add comma between \"will be dropped\" and \"do not change\" (typo?)",
+      "range": {
+        "startLine": 148,
+        "startChar": 51,
+        "endLine": 148,
+        "endChar": 100
+      },
+      "revId": "36b0645bb57fd3a003c91680499e1e6f2b67b7f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4deb6f4_6fea5120",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalHashCodeMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-09-02T12:40:46Z",
+      "side": 1,
+      "message": "typo: still\n\n(you fixed a grammar issue a couple lines below, so why not fix the typo here too ;-) )",
+      "range": {
+        "startLine": 152,
+        "startChar": 21,
+        "endLine": 152,
+        "endChar": 25
+      },
+      "revId": "36b0645bb57fd3a003c91680499e1e6f2b67b7f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4deb6f4_ef4e4102",
+        "filename": "user/test/com/google/gwt/emultest/java/util/HashMapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-09-02T12:40:46Z",
+      "side": 1,
+      "message": "typo: this test",
+      "range": {
+        "startLine": 797,
+        "startChar": 72,
+        "endLine": 797,
+        "endChar": 82
+      },
+      "revId": "36b0645bb57fd3a003c91680499e1e6f2b67b7f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

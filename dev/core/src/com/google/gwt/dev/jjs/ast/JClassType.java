@@ -17,6 +17,7 @@ package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
+import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
 
 import java.io.Serializable;
 
@@ -59,6 +60,16 @@ public class JClassType extends JDeclaredType {
     isFinal = false;
     isJso = name.equals(JProgram.JAVASCRIPTOBJECT);
     setExternal(true);
+  }
+
+  @Override
+  public final JMethod getInitMethod() {
+    assert getMethods().size() > 1;
+    JMethod init = this.getMethods().get(1);
+
+    assert init != null;
+    assert init.getName().equals(GwtAstBuilder.INIT_NAME);
+    return init;
   }
 
   @Override

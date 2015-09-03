@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "841a92b2_a6752656",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-03T20:47:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "10e75cc10c3e6ca01c382f4079168a174f20b2da",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841a92b2_8672aa69",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-03T20:47:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "10e75cc10c3e6ca01c382f4079168a174f20b2da",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841a92b2_e66f1e80",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-03T20:47:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "10e75cc10c3e6ca01c382f4079168a174f20b2da",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841a92b2_c66ca28e",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JChangeTrackingVisitorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-03T20:47:53Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "10e75cc10c3e6ca01c382f4079168a174f20b2da",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

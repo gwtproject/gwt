@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8497f201_b5996472",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalHashCodeMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-03T16:54:14Z",
+      "side": 1,
+      "message": "There is just a typo. It should be \u003d\u003d instead of !\u003d .\nThe general idea is to detect that if this is the last item or not; if it is not (i.e. there are more items in the chain to iterate) then we will be pointing incorrect index after removal hence needs a decrement.",
+      "parentUuid": "e4d42ed5_145b9a20",
+      "revId": "231a20c0d3ae397cf20c99f62e1492e21343274e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8497f201_9b3264be",
         "filename": "user/super/com/google/gwt/emul/java/util/InternalHashCodeMap.java",
         "patchSetId": 3

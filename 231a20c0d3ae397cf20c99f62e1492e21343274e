@@ -161,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "8497f201_1594d82f",
+        "filename": "user/test/com/google/gwt/emultest/java/util/HashMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-03T16:59:11Z",
+      "side": 1,
+      "message": "I think now with the latest changes (i.e. having multiple chains in this one), at least the former one is verifying the behavior with single chain so I\u0027m fine having them both.",
+      "parentUuid": "a4deb6f4_b2109e15",
+      "revId": "231a20c0d3ae397cf20c99f62e1492e21343274e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8497f201_8ae768e6",
         "filename": "user/test/com/google/gwt/emultest/java/util/HashMapTest.java",
         "patchSetId": 3

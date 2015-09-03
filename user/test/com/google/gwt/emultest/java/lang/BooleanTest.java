@@ -15,6 +15,7 @@
  */
 package com.google.gwt.emultest.java.lang;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -90,6 +91,17 @@ public class BooleanTest extends GWTTestCase {
       boolean bb = b;
       fail("Should have thrown exception" + bb);
     } catch (Exception e) {
+    }
+  }
+
+  public void testDoesNotCastToJso() {
+    try {
+      Boolean b = true;
+      Object o = Math.random() < 0 ? new Object() : b;
+      JavaScriptObject jso = (JavaScriptObject) o;
+      assertNotNull(jso);
+      fail("Boolean should fail to cast to a JSO");
+    } catch (ClassCastException e) {
     }
   }
 

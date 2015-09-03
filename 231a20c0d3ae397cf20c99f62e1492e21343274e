@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "a4deb6f4_b2109e15",
+        "filename": "user/test/com/google/gwt/emultest/java/util/HashMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-09-03T13:19:09Z",
+      "side": 1,
+      "message": "Take a look at the latest patchset. This is testing the same issue and also iteration in general, while the former test pin points the issue.",
+      "parentUuid": "a4deb6f4_12d64adf",
+      "revId": "231a20c0d3ae397cf20c99f62e1492e21343274e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8497f201_8ae768e6",
         "filename": "user/test/com/google/gwt/emultest/java/util/HashMapTest.java",
         "patchSetId": 3

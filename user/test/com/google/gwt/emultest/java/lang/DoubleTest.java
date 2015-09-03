@@ -16,6 +16,7 @@
 
 package com.google.gwt.emultest.java.lang;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -102,6 +103,17 @@ public class DoubleTest extends GWTTestCase {
       double dd = d;
       fail("Should have thrown exception" + dd);
     } catch (Exception e) {
+    }
+  }
+
+  public void testDoesNotCastToJso() {
+    try {
+      Double d = 1.2;
+      Object o = Math.random() < 0 ? new Object() : d;
+      JavaScriptObject jso = (JavaScriptObject) o;
+      assertNotNull(jso);
+      fail("Double should fail to cast to a JSO");
+    } catch (ClassCastException e) {
     }
   }
 

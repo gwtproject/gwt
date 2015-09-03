@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8497f201_bb9e3557",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-03T22:14:20Z",
+      "side": 1,
+      "message": "That\u0027s what I meant. You should return true for functions as well.",
+      "parentUuid": "8497f201_8060a4cb",
+      "revId": "7ab6a3cde8bcaf5f64129ef6822b41a79de820e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8497f201_555ca063",
         "filename": "user/test/com/google/gwt/emultest/java/lang/BooleanTest.java",
         "patchSetId": 2

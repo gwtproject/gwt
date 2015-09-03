@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8497f201_9b99f972",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-09-03T22:26:49Z",
+      "side": 1,
+      "message": "why do we need this hack? I think we can do one consistent check, whether\nreturn method.isStatic() \u0026\u0026 method.getName().equals(...);\nor\nreturn enclosingType!\u003dnull \u0026\u0026 method\u003d\u003denclosingType.getInitMethod();\n\nOr,\nIs it because enclosingType may be null?\nThen the hack should be\nif (enclosingType \u003d\u003d null) {\n  return method.isStatic() \u0026\u0026 method.getName().equals(...);\n}",
+      "range": {
+        "startLine": 282,
+        "startChar": 3,
+        "endLine": 285,
+        "endChar": 5
+      },
+      "revId": "ec2f0d5cd75a4377a951d0608cd8445a72dc5f18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

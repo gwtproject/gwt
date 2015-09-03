@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8497f201_955a2869",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-03T16:45:55Z",
+      "side": 1,
+      "message": "will return false to \u0027function\u0027 but shouldn\u0027t. Please add a test for that.\n\nAlso this is unfortunately a breaking change as earlier we were treating everything as JSO but I don\u0027t see a way around it.",
+      "revId": "7ab6a3cde8bcaf5f64129ef6822b41a79de820e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_555ca063",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/BooleanTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-03T16:45:55Z",
+      "side": 1,
+      "message": "We run these tests both in draft and optimized so it is better not to trick the compiler. (So that we will be testing the behavior is correct in both modes.)",
+      "revId": "7ab6a3cde8bcaf5f64129ef6822b41a79de820e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_f5684c02",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/DoubleTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-03T16:45:55Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "7ab6a3cde8bcaf5f64129ef6822b41a79de820e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

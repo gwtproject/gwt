@@ -22,6 +22,30 @@
       "revId": "ec2f0d5cd75a4377a951d0608cd8445a72dc5f18",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_063fcc7b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-03T22:49:21Z",
+      "side": 1,
+      "message": "Because if init has been devirtualized (by MakeCallsStatic) it is a static method named \"$$init\" otherwise it is an instance method named \"$init\".",
+      "parentUuid": "8497f201_9b99f972",
+      "range": {
+        "startLine": 282,
+        "startChar": 3,
+        "endLine": 285,
+        "endChar": 5
+      },
+      "revId": "ec2f0d5cd75a4377a951d0608cd8445a72dc5f18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

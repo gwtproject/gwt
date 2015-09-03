@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "a4deb6f4_12d64adf",
+        "filename": "user/test/com/google/gwt/emultest/java/util/HashMapTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-09-03T09:54:28Z",
+      "side": 1,
+      "message": "The only difference is that you test that the keys returned by the keySet.iterator is equals to the keys you\u0027ve put in the map. AFAIC, this is not related to the bug you\u0027re fixing. If you want to keep this test, rename the method in a more explicit name and remove the comment above the method in order to avoid confusion.",
+      "parentUuid": "a4deb6f4_52b5b2b6",
+      "revId": "231a20c0d3ae397cf20c99f62e1492e21343274e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8497f201_8ae768e6",
         "filename": "user/test/com/google/gwt/emultest/java/util/HashMapTest.java",
         "patchSetId": 3

@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "8497f201_967a2bb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-04T17:43:58Z",
+      "side": 1,
+      "message": "number triplet",
+      "range": {
+        "startLine": 12,
+        "startChar": 44,
+        "endLine": 12,
+        "endChar": 57
+      },
+      "revId": "eb52b1befdcea43e1e6255e1af2087385cd7f9a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_b67f27a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-04T17:43:58Z",
+      "side": 1,
+      "message": "the number triplet",
+      "range": {
+        "startLine": 16,
+        "startChar": 19,
+        "endLine": 16,
+        "endChar": 33
+      },
+      "revId": "eb52b1befdcea43e1e6255e1af2087385cd7f9a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "841a92b2_495a856b",
         "filename": "dev/core/super/com/google/gwt/lang/BigLongLibBase.java",
         "patchSetId": 1

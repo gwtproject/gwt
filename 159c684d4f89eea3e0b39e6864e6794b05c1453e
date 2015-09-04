@@ -22,6 +22,30 @@
       "revId": "159c684d4f89eea3e0b39e6864e6794b05c1453e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_d683d3cc",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-04T17:49:33Z",
+      "side": 0,
+      "message": "I never tried but they should work. So I guess you prefer to rename the tests and keep them?",
+      "parentUuid": "8497f201_36b0f7bf",
+      "range": {
+        "startLine": 351,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 7
+      },
+      "revId": "159c684d4f89eea3e0b39e6864e6794b05c1453e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -231,6 +231,16 @@ public class JsNamespaceChooser {
     if (field != null) {
       return findPackage(field.getEnclosingType());
     }
+    JDeclaredType type = jjsmap.nameToClassType(name);
+    if (type != null) {
+      return findPackage(type);
+    }
+
+    type = jjsmap.nameToInterfaceType(name);
+    if (type != null) {
+      return findPackage(type);
+    }
+
     return null; // not found
   }
 

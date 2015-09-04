@@ -132,6 +132,7 @@ import com.google.gwt.dev.js.DuplicateExecuteOnceRemover;
 import com.google.gwt.dev.js.EvalFunctionsAtTopScope;
 import com.google.gwt.dev.js.FreshNameGenerator;
 import com.google.gwt.dev.js.JsBreakUpLargeVarStatements;
+import com.google.gwt.dev.js.JsClosureJsDocDecorator;
 import com.google.gwt.dev.js.JsDuplicateCaseFolder;
 import com.google.gwt.dev.js.JsDuplicateFunctionRemover;
 import com.google.gwt.dev.js.JsForceInliningChecker;
@@ -759,6 +760,10 @@ public final class JavaToJavaScriptCompiler {
 
     Event generateJavascriptEvent =
         SpeedTracerLogger.start(CompilerEventType.GENERATE_JAVASCRIPT);
+
+    if (options.isClosureCompilerFormatEnabled()) {
+      JsClosureJsDocDecorator.exec(jprogram, jsProgram, jjsMap);
+    }
 
     boolean useClosureCompiler = options.isClosureCompilerEnabled();
     if (useClosureCompiler) {

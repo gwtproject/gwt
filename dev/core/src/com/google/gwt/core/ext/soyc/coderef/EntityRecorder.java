@@ -128,7 +128,7 @@ public class EntityRecorder {
           continue;
         }
         // find class
-        JClassType type = jjsmap.nameToType(name);
+        JClassType type = jjsmap.nameToClassType(name);
         if (type != null) {
           codeGraph.classDescriptorFrom(type).addFragment(new Fragment(i, size));
           continue;

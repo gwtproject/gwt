@@ -19,7 +19,9 @@ import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
@@ -36,23 +38,30 @@ public class JavaToJavaScriptMapImpl implements JavaToJavaScriptMap {
   private final Map<JsName, JField> fieldForName;
   private final Map<JsName, JMethod> methodForName;
   private final Map<JsName, JClassType> typeForConstructorName;
+  private final Map<JsName, JInterfaceType> interfaceTypeForConstructorName;
 
   private final Map<JsStatement, JClassType> typeForStatement;
   private final Map<JsStatement, JMethod> methodForVTableInit;
+  private final Map<JsStatement, Object> memberForExportStatement;
 
   public JavaToJavaScriptMapImpl(List<JDeclaredType> types,
       Map<HasName, JsName> names,
       Map<JsStatement, JClassType> typeForStatement,
-      Map<JsStatement, JMethod> vtableInitForMethod) {
+      Map<JsStatement, JMethod> vtableInitForMethod,
+      Map<JsStatement, Object> memberForExportStatement) {
 
     // Generate reverse indexes for names.
     Map<JsName, JMethod> nameToMethodMap = Maps.newHashMap();
     Map<JsName, JField> nameToFieldMap = Maps.newHashMap();
     Map<JsName, JClassType> constructorNameToTypeMap = Maps.newHashMap();
+    Map<JsName, JInterfaceType> interfaceNameToTypeMap = Maps.newHashMap();
+
     for (JDeclaredType type : types) {
       JsName typeName = names.get(type);
       if (type instanceof JClassType && typeName != null) {
         constructorNameToTypeMap.put(typeName, (JClassType) type);
+      } else if (type instanceof JInterfaceType && typeName != null) {
+        interfaceNameToTypeMap.put(typeName, (JInterfaceType) type);
       }
       for (JField field : type.getFields()) {
         if (field.isStatic()) {
@@ -74,9 +83,11 @@ public class JavaToJavaScriptMapImpl implements JavaToJavaScriptMap {
     this.fieldForName = nameToFieldMap;
     this.methodForName = nameToMethodMap;
     this.typeForConstructorName = constructorNameToTypeMap;
+    this.interfaceTypeForConstructorName = interfaceNameToTypeMap;
 
     this.typeForStatement = typeForStatement;
     this.methodForVTableInit = vtableInitForMethod;
+    this.memberForExportStatement = memberForExportStatement;
   }
 
   @Override
@@ -90,7 +101,7 @@ public class JavaToJavaScriptMapImpl implements JavaToJavaScriptMap {
   }
 
   @Override
-  public JsName nameForType(JClassType type) {
+  public JsName nameForType(JDeclaredType type) {
     return names.get(type);
   }
 
@@ -105,8 +116,18 @@ public class JavaToJavaScriptMapImpl implements JavaToJavaScriptMap {
   }
 
   @Override
-  public JClassType nameToType(JsName name) {
+  public JClassType nameToClassType(JsName name) {
     return typeForConstructorName.get(name);
+  }
+
+  @Override
+  public JInterfaceType nameToInterfaceType(JsName name) {
+    return interfaceTypeForConstructorName.get(name);
+  }
+
+  @Override
+  public Object entityForExportStatement(JsStatement stat) {
+    return memberForExportStatement.get(stat);
   }
 
   @Override
@@ -117,5 +138,15 @@ public class JavaToJavaScriptMapImpl implements JavaToJavaScriptMap {
   @Override
   public JMethod vtableInitToMethod(JsStatement stat) {
     return methodForVTableInit.get(stat);
+  }
+
+  @Override
+  public JDeclaredType typeForString(String qualifiedSourceName) {
+    for (Map.Entry<HasName, JsName> e : names.entrySet()) {
+      if (e.getKey() instanceof JDeclaredType && e.getKey().getName().equals(qualifiedSourceName)) {
+        return (JDeclaredType) e.getKey();
+      }
+    }
+    return null;
   }
 }

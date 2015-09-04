@@ -19,7 +19,10 @@ import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
+import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
@@ -32,7 +35,8 @@ public interface JavaToJavaScriptMap {
 
   JavaToJavaScriptMap EMPTY = new JavaToJavaScriptMapImpl(
       ImmutableList.<JDeclaredType>of(), ImmutableMap.<HasName, JsName>of(),
-      ImmutableMap.<JsStatement, JClassType>of(), ImmutableMap.<JsStatement, JMethod>of());
+      ImmutableMap.<JsStatement, JClassType>of(), ImmutableMap.<JsStatement, JMethod>of(),
+      ImmutableMap.<JsStatement, Object>of());
 
   /**
    * Return the JavaScript name corresponding to a Java field.
@@ -45,8 +49,9 @@ public interface JavaToJavaScriptMap {
 
   /**
    * Return the JavaScript name corresponding to a Java type.
+   * @param type
    */
-  JsName nameForType(JClassType type);
+  JsName nameForType(JDeclaredType type);
 
   /**
    * If <code>name</code> is the name of a
@@ -65,7 +70,19 @@ public interface JavaToJavaScriptMap {
    * If <code>name</code> is the name of a constructor function corresponding to
    * a Java type, then return that type. Otherwise, return <code>null</code>.
    */
-  JClassType nameToType(JsName name);
+  JClassType nameToClassType(JsName name);
+
+  /**
+   * If <code>name</code> is the name of a constructor function corresponding to
+   * a Java Interface type, then return that type. Otherwise, return <code>null</code>.
+   */
+  JInterfaceType nameToInterfaceType(JsName name);
+
+  /**
+   * If <code>stat</code> is used to setup an export statement, return the exported
+   * member it represents.
+   */
+  Object entityForExportStatement(JsStatement stat);
 
   /**
    * If <code>stat</code> is used to set up the definition of some class, return
@@ -78,4 +95,9 @@ public interface JavaToJavaScriptMap {
    * return that method. Otherwise return null.
    */
   JMethod vtableInitToMethod(JsStatement stat);
+
+  /**
+   * Look up a type given a typeName.
+   */
+  JDeclaredType typeForString(String qualifiedSourceName);
 }

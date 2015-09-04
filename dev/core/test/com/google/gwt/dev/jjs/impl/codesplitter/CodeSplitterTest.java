@@ -617,7 +617,7 @@ public class CodeSplitterTest extends FullCompileTestBase {
       public boolean visit(JsFunction x, JsContext ctx) {
         JsName jsName = x.getName();
         if (jsName != null && jsName.getShortIdent().equals(functionName)
-            && currentJjsMap.nameToType(jsName) != null) {
+            && currentJjsMap.nameToClassType(jsName) != null) {
           found[0] = true;
         }
         return false;

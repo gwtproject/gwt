@@ -19,6 +19,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JMember;
+import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsInvocation;
@@ -55,8 +56,9 @@ class DefaultJsInteropExportsGenerator implements JsInteropExportsGenerator {
   }
 
   @Override
-  public void exportType(JDeclaredType x) {
+  public JsExprStmt exportType(JDeclaredType x) {
     // non-Closure mode doesn't do anything special to export types
+    return null;
   }
 
   /*
@@ -67,13 +69,13 @@ class DefaultJsInteropExportsGenerator implements JsInteropExportsGenerator {
    * TODO(goktug): optimizing provide calls shouldn't be difficult as exports are now sorted.
    */
   @Override
-  public void exportMember(JMember x, JsExpression bridgeMethodOrAlias) {
+  public JsExprStmt exportMember(JMember x, JsExpression bridgeMethodOrAlias) {
     if (x.getJsName().isEmpty()) {
       assert x instanceof JConstructor;
 
       // _ = provide('foo.bar.ExportNamespace', ExportedConstructor)
       ensureProvideNamespace(x, bridgeMethodOrAlias);
-      return;
+      return null;
     }
 
     // _ = provide('foo.bar.ExportNamespace', null)
@@ -82,7 +84,9 @@ class DefaultJsInteropExportsGenerator implements JsInteropExportsGenerator {
     // _.memberName = RHS
     JsNameRef lhs = new JsNameRef(x.getSourceInfo(), x.getJsName());
     lhs.setQualifier(globalTemp.makeRef(x.getSourceInfo()));
-    exportStmts.add(createAssignment(lhs, bridgeMethodOrAlias).makeStmt());
+    JsExprStmt stmt = createAssignment(lhs, bridgeMethodOrAlias).makeStmt();
+    exportStmts.add(stmt);
+    return stmt;
   }
 
   private void ensureProvideNamespace(JMember member, JsExpression ctor) {

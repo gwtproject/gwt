@@ -23,6 +23,7 @@ import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.impl.JJSTestBase;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
@@ -115,7 +116,7 @@ public class FragmentExtractorTest extends JJSTestBase {
     }
 
     @Override
-    public JsName nameForType(JClassType type) {
+    public JsName nameForType(JDeclaredType type) {
       return null;
     }
 
@@ -130,7 +131,17 @@ public class FragmentExtractorTest extends JJSTestBase {
     }
 
     @Override
-    public JClassType nameToType(JsName name) {
+    public JClassType nameToClassType(JsName name) {
+      return null;
+    }
+
+    @Override
+    public JInterfaceType nameToInterfaceType(JsName name) {
+      return null;
+    }
+
+    @Override
+    public Object entityForExportStatement(JsStatement stat) {
       return null;
     }
 
@@ -141,6 +152,11 @@ public class FragmentExtractorTest extends JJSTestBase {
 
     @Override
     public JMethod vtableInitToMethod(JsStatement stat) {
+      return null;
+    }
+
+    @Override
+    public JDeclaredType typeForString(String qualifiedSourceName) {
       return null;
     }
   }
@@ -205,7 +221,17 @@ public class FragmentExtractorTest extends JJSTestBase {
           return null;
         }
 
-          @Override
+        @Override
+        public JInterfaceType nameToInterfaceType(JsName name) {
+          return null;
+        }
+
+        @Override
+        public Object entityForExportStatement(JsStatement stat) {
+          return null;
+        }
+
+        @Override
         public JClassType typeForStatement(JsStatement statement) {
           if (statement == defineClassStatement) {
             // Indicates that Bar is the type associated with the defineClass statement.

@@ -437,6 +437,9 @@ public class JsToStringGenerationVisitor extends JsVisitor {
 
   @Override
   public boolean visit(JsExprStmt x, JsContext ctx) {
+    if (x.getJsDoc() != null) {
+      p.print(x.getJsDoc());
+    }
     boolean surroundWithParentheses = JsFirstExpressionVisitor.exec(x);
     if (surroundWithParentheses) {
       _lparen();

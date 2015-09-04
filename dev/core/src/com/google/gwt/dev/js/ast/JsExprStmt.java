@@ -21,6 +21,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 public final class JsExprStmt extends JsStatement {
 
   private JsExpression expr;
+  private String jsDoc;
 
   public JsExprStmt(SourceInfo sourceInfo, JsExpression expr) {
     super(sourceInfo);
@@ -42,5 +43,13 @@ public final class JsExprStmt extends JsStatement {
       expr = v.accept(expr);
     }
     v.endVisit(this, ctx);
+  }
+
+  public void setJsDoc(String jsDoc) {
+    this.jsDoc = jsDoc;
+  }
+
+  public String getJsDoc() {
+    return jsDoc;
   }
 }

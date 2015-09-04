@@ -1185,7 +1185,7 @@ public class GenerateJavaScriptAST {
        * is undefined even though the goog.provide('Foo') statement exists. Here we synthesize a
        * simple constructor to aid the linker.
        */
-      if (closureCompilerFormatEnabled && x.isJsType()) {
+      if (closureCompilerFormatEnabled) {
         declareSynthesizedClosureConstructor(x, globalStmts);
       }
 
@@ -2020,12 +2020,18 @@ public class GenerateJavaScriptAST {
 
       for (Object exportedEntity : exportedMembersByExportName.values()) {
         if (exportedEntity instanceof JDeclaredType) {
-          exportGenerator.exportType((JDeclaredType) exportedEntity);
+          JsExprStmt stmt = exportGenerator.exportType((JDeclaredType) exportedEntity);
+          if (stmt != null) {
+            memberForExportStatement.put(stmt, exportedEntity);
+          }
         } else {
           JMember member = (JMember) exportedEntity;
           maybeHoistClinit(globalStmts, generatedClinits, member);
-          exportGenerator.exportMember(member, createBridgeMethodOrReturnAlias(member,
-              names.get(member)));
+          JsExprStmt stmt = exportGenerator.exportMember(member,
+              createBridgeMethodOrReturnAlias(member, names.get(member)));
+          if (stmt != null) {
+            memberForExportStatement.put(stmt, member);
+          }
         }
       }
     }
@@ -2498,6 +2504,7 @@ public class GenerateJavaScriptAST {
           // add after var declaration, but before everything else
           JsFunction func = pop();
           assert func.getName() != null;
+          names.put(method, func.getName());
           globalStmts.add(1, func.makeStmt());
         }
 
@@ -3406,6 +3413,7 @@ public class GenerateJavaScriptAST {
 
   private final JTypeOracle typeOracle;
 
+  private final Map<JsStatement, Object> memberForExportStatement = Maps.newHashMap();
   private final Map<JsStatement, JMethod> vtableInitForMethodMap = Maps.newHashMap();
 
   private final TypeMapper<?> typeMapper;
@@ -3565,7 +3573,7 @@ public class GenerateJavaScriptAST {
     // TODO(spoon): Instead of gathering the information here, get it via
     // SourceInfo
     JavaToJavaScriptMap jjsMap = new JavaToJavaScriptMapImpl(program.getDeclaredTypes(),
-        names, typeForStatMap, vtableInitForMethodMap);
+        names, typeForStatMap, vtableInitForMethodMap, memberForExportStatement);
 
     Set<JsNode> functionsForJsInlining = incremental ? Collections.<JsNode>emptySet() :
         new CollectJsFunctionsForInlining().getFunctionsForJsInlining();

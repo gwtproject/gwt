@@ -1076,8 +1076,16 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     return typeJavaLangObject;
   }
 
+  public JClassType getTypeJavaLangBoolean() {
+    return typeBoolean;
+  }
+
   public JClassType getTypeJavaLangString() {
     return typeString;
+  }
+
+  public JClassType getTypeJavaLangDouble() {
+    return typeDouble;
   }
 
   public Set<String> getTypeNamesToIndex() {

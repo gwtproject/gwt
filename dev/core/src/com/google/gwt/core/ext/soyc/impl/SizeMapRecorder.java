@@ -218,7 +218,7 @@ public class SizeMapRecorder {
       return new TypedProgramReference("field", sb.toString());
     }
 
-    JClassType type = jjsmap.nameToType(name);
+    JClassType type = jjsmap.nameToClassType(name);
     if (type != null) {
       return new TypedProgramReference("type", type.getName());
     }

@@ -18,6 +18,7 @@ package com.google.gwt.dev.jjs.impl.codesplitter;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -97,7 +98,7 @@ public class FragmentExtractor {
       // Removes constructor references from defineClass parameters.
       // These references can be either be originated by JConstructors or
       // (in closure formatted code) by JClassTypes.
-      JClassType classType = map.nameToType(x.getName());
+      JClassType classType = map.nameToClassType(x.getName());
       JMethod method = map.nameToMethod(x.getName());
       method = method instanceof JConstructor ? method : null;
       if (classType == null && method == null) {
@@ -258,7 +259,9 @@ public class FragmentExtractor {
         JClassType vtableType = vtableTypeNeeded(statement);
         if (vtableType != null && vtableType != currentVtableType) {
           assert pendingVtableType == vtableType;
-          extractedStats.add(pendingDefineClass);
+          if (pendingDefineClass != null) {
+            extractedStats.add(pendingDefineClass);
+          }
           currentVtableType = pendingVtableType;
           pendingDefineClass = null;
           pendingVtableType = null;

@@ -158,8 +158,10 @@ public class JsNamespaceChooserTest extends TestCase {
         defaultPackageBarClass);
     Map<JsStatement, JClassType> typeForStatement = ImmutableMap.of();
     Map<JsStatement, JMethod> vtableInitForMethod = ImmutableMap.of();
+    Map<JsStatement, Object> memberForExportStatement = ImmutableMap.of();
+
     JavaToJavaScriptMapImpl jjsmap = new JavaToJavaScriptMapImpl(types, javaToName,
-        typeForStatement, vtableInitForMethod);
+        typeForStatement, vtableInitForMethod, memberForExportStatement);
 
     // Run it.
     JsNamespaceChooser.exec(program, jjsmap);

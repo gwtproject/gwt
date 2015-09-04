@@ -18,6 +18,7 @@ import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.js.JsUtils;
+import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsInvocation;
 import com.google.gwt.dev.js.ast.JsName;
@@ -67,9 +68,9 @@ class ClosureJsInteropExportsGenerator implements JsInteropExportsGenerator {
    * {@code /* @returns {number} * / Foo.prototype.method;} that are added by linker works.
    */
   @Override
-  public void exportType(JDeclaredType x) {
+  public JsExprStmt exportType(JDeclaredType x) {
     // Note that synthesized constructors use the name of the declared types.
-    generateExport(x.getQualifiedExportName(), x.getQualifiedExportName(),
+    return generateExport(x.getQualifiedExportName(), x.getQualifiedExportName(),
         names.get(x).makeRef(x.getSourceInfo()), x.getSourceInfo());
   }
 
@@ -82,34 +83,37 @@ class ClosureJsInteropExportsGenerator implements JsInteropExportsGenerator {
    *  foo.bar.ClassSimpleName = <obfuscated-ctor-name>;
    */
   @Override
-  public void exportMember(JMember member, JsExpression bridgeMethodOrAlias) {
-    generateExport(member.getExportNamespace(), member.getQualifiedExportName(),
+  public JsExprStmt exportMember(JMember member, JsExpression bridgeMethodOrAlias) {
+    return generateExport(member.getExportNamespace(), member.getQualifiedExportName(),
         bridgeMethodOrAlias, member.getSourceInfo());
   }
 
-  private void generateExport(String exportNamespace, String qualifiedExportName,
+  private JsExprStmt generateExport(String exportNamespace, String qualifiedExportName,
       JsExpression bridgeOrAlias, SourceInfo sourceInfo) {
     // goog.provide("a.b.c")
-    ensureGoogProvide(exportNamespace, sourceInfo);
+    ensureGoogProvide(exportNamespace, qualifiedExportName, sourceInfo);
     // a.b.c = a_b_c_obf
-    generateAssignment(bridgeOrAlias, qualifiedExportName, sourceInfo);
+    return generateAssignment(bridgeOrAlias, qualifiedExportName, sourceInfo);
   }
 
-  private void ensureGoogProvide(String namespace, SourceInfo info) {
-    if (!providedNamespaces.add(namespace) || namespace.isEmpty()) {
+  private void ensureGoogProvide(String namespace, String qualifiedExportName, SourceInfo info) {
+    if (!namespace.isEmpty() && !providedNamespaces.add(namespace)) {
       return;
     }
 
     JsNameRef provideFuncRef = JsUtils.createQualifier("goog.provide", info);
     JsInvocation provideCall = new JsInvocation(info);
     provideCall.setQualifier(provideFuncRef);
-    provideCall.getArguments().add(new JsStringLiteral(info, namespace));
+    provideCall.getArguments().add(new JsStringLiteral(info, namespace.isEmpty() ?
+        qualifiedExportName : namespace));
     exportStmts.add(provideCall.makeStmt());
   }
 
-  private void generateAssignment(JsExpression rhs, String exportName, SourceInfo sourceInfo) {
+  private JsExprStmt generateAssignment(JsExpression rhs, String exportName, SourceInfo sourceInfo) {
     JsExpression lhs = createExportQualifier(exportName, sourceInfo);
-    exportStmts.add(JsUtils.createAssignment(lhs, rhs).makeStmt());
+    JsExprStmt stmt = JsUtils.createAssignment(lhs, rhs).makeStmt();
+    exportStmts.add(stmt);
+    return stmt;
   }
 
   private static JsExpression createExportQualifier(String namespace, SourceInfo sourceInfo) {

@@ -59,7 +59,7 @@ public class VerifySymbolMap extends JsVisitor {
     JsName name = x.getName();
     if (jjsmap.nameToField(name) != null ||
         jjsmap.nameToMethod(name) != null ||
-        jjsmap.nameToType(name) != null) {
+        jjsmap.nameToClassType(name) != null) {
       String n = name.getIdent();
       if (!nameMap.contains(n)) {
         throw new InternalCompilerException("Missing symbol in SymbolMap: " + n);

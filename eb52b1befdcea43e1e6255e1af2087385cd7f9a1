@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "841a92b2_495a856b",
+        "filename": "dev/core/super/com/google/gwt/lang/BigLongLibBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-04T09:04:19Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "eb52b1befdcea43e1e6255e1af2087385cd7f9a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

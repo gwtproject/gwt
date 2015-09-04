@@ -98,3 +98,11 @@ jsinterop.closure.getUniqueId = function (identifier) {
   }
   return jsinterop.closure.uniqueIds_[identifier];
 };
+
+function goog$object$createSet(var_args) {
+  var rv = {};
+  for (var i = 0; i < arguments.length; i++) {
+    rv[arguments[i]] = true;
+  }
+  return rv;
+}

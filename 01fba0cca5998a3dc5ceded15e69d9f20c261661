@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8497f201_537ef57a",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-04T08:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8497f201_6100fac7",
+      "revId": "01fba0cca5998a3dc5ceded15e69d9f20c261661",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8497f201_a10602e5",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2015-09-04T00:48:48Z",
       "side": 1,
       "message": "isJsObjectOrFunction",
+      "range": {
+        "startLine": 281,
+        "startChar": 24,
+        "endLine": 281,
+        "endChar": 34
+      },
+      "revId": "01fba0cca5998a3dc5ceded15e69d9f20c261661",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_737bf188",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-04T08:07:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8497f201_a10602e5",
       "range": {
         "startLine": 281,
         "startChar": 24,

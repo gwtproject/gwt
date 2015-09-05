@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8497f201_47a4eb1d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-05T08:28:01Z",
+      "side": 0,
+      "message": "Why is this no longer needed?",
+      "range": {
+        "startLine": 566,
+        "startChar": 53,
+        "endLine": 566,
+        "endChar": 54
+      },
+      "revId": "cb823e4ad3b7e04450a0ecd42d2720ac28931bcf",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

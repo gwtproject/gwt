@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8497f201_e7b5f74f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2708,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-05T08:28:01Z",
+      "side": 1,
+      "message": "Did you do a comparison of the output size before/after this change? In an app with several hundreds of @JsType methods (e.g. something like Inbox, but not using closure output format / hybrid compilation), this is going to generate one extra vtable assignment per method. \n\nIn the previous model (if correctly implemented), simple @JsType methods which don\u0027t collide, are simply marked unobfuscatable. \n\nSo the difference you have is, in the old model, you pay more cost at call sides because GWT\u003c-\u003eGWT calls would use the unobfuscated name, but you don\u0027t have O(# jstype method) vtable assignments.\n\nIn the new model, the GWT\u003c-\u003eGWT calls can still use obfuscated identifiers? But each method generates an additional assignment statement per concrete implementor.\n\nFor -XclosureFormattedOutput this doesn\u0027t matter, because Closure can remove the aliases in many cases. But I\u0027d be curious what the effect is on a JsInterop app that uses a ton of JsType methods.\n\nOne way to check it would be to build the Inbox GWT API without closureFormat mode, and with -style OBF.",
+      "revId": "6a0e5876bfd55af451a9404dc46807db031e525d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

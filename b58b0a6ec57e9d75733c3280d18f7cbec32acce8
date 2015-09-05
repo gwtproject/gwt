@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "841a92b2_e9a7f1ee",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JavaToJavaScriptMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-05T10:08:47Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JMember.",
+      "revId": "b58b0a6ec57e9d75733c3280d18f7cbec32acce8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841a92b2_c9a4b5ed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JavaToJavaScriptMap.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-05T10:08:47Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JType.",
+      "revId": "b58b0a6ec57e9d75733c3280d18f7cbec32acce8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841a92b2_29810936",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JavaToJavaScriptMapImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-05T10:08:47Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JType.",
+      "revId": "b58b0a6ec57e9d75733c3280d18f7cbec32acce8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841a92b2_0986cd4d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-05T10:08:47Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JDeclaredType.",
+      "revId": "b58b0a6ec57e9d75733c3280d18f7cbec32acce8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841a92b2_698b0156",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsClosureJsDocDecorator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-05T10:08:47Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "b58b0a6ec57e9d75733c3280d18f7cbec32acce8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841a92b2_4990c580",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsClosureJsDocDecorator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-05T10:08:47Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "b58b0a6ec57e9d75733c3280d18f7cbec32acce8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841a92b2_a974d910",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsClosureJsDocDecorator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-05T10:08:47Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "b58b0a6ec57e9d75733c3280d18f7cbec32acce8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

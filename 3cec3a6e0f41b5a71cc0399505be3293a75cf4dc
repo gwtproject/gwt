@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "841a92b2_0c137b68",
+        "filename": "dev/core/super/javaemul/internal/Characters.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-07T12:35:37Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "3cec3a6e0f41b5a71cc0399505be3293a75cf4dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841a92b2_6c082f31",
+        "filename": "dev/core/super/javaemul/internal/Strings.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-07T12:35:37Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "3cec3a6e0f41b5a71cc0399505be3293a75cf4dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

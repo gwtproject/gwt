@@ -19,6 +19,8 @@ import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 
 import java.io.Serializable;
 
+import javaemul.internal.Characters;
+
 /**
  * Wraps a native <code>char</code> as an object.
  *
@@ -132,27 +134,27 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static int codePointAt(char[] a, int index) {
-    return codePointAt(new CharSequenceAdapter(a), index, a.length);
+    return Characters.codePointAt(new CharSequenceAdapter(a), index, a.length);
   }
 
   public static int codePointAt(char[] a, int index, int limit) {
-    return codePointAt(new CharSequenceAdapter(a), index, limit);
+    return Characters.codePointAt(new CharSequenceAdapter(a), index, limit);
   }
 
   public static int codePointAt(CharSequence seq, int index) {
-    return codePointAt(seq, index, seq.length());
+    return Characters.codePointAt(seq, index, seq.length());
   }
 
   public static int codePointBefore(char[] a, int index) {
-    return codePointBefore(new CharSequenceAdapter(a), index, 0);
+    return Characters.codePointBefore(new CharSequenceAdapter(a), index, 0);
   }
 
   public static int codePointBefore(char[] a, int index, int start) {
-    return codePointBefore(new CharSequenceAdapter(a), index, start);
+    return Characters.codePointBefore(new CharSequenceAdapter(a), index, start);
   }
 
   public static int codePointBefore(CharSequence cs, int index) {
-    return codePointBefore(cs, index, 0);
+    return Characters.codePointBefore(cs, index, 0);
   }
 
   public static int codePointCount(char[] a, int offset, int count) {
@@ -349,8 +351,8 @@ public final class Character implements Comparable<Character>, Serializable {
 
     if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
       return new char[] {
-          getHighSurrogate(codePoint),
-          getLowSurrogate(codePoint),
+          Characters.getHighSurrogate(codePoint),
+          Characters.getLowSurrogate(codePoint),
       };
     } else {
       return new char[] {
@@ -363,8 +365,8 @@ public final class Character implements Comparable<Character>, Serializable {
     checkCriticalArgument(codePoint >= 0 && codePoint <= MAX_CODE_POINT);
 
     if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
-      dst[dstIndex++] = getHighSurrogate(codePoint);
-      dst[dstIndex] = getLowSurrogate(codePoint);
+      dst[dstIndex++] = Characters.getHighSurrogate(codePoint);
+      dst[dstIndex] = Characters.getLowSurrogate(codePoint);
       return 2;
     } else {
       dst[dstIndex] = (char) codePoint;
@@ -404,26 +406,6 @@ public final class Character implements Comparable<Character>, Serializable {
     return new Character(c);
   }
 
-  static int codePointAt(CharSequence cs, int index, int limit) {
-    char hiSurrogate = cs.charAt(index++);
-    char loSurrogate;
-    if (Character.isHighSurrogate(hiSurrogate) && index < limit
-        && Character.isLowSurrogate(loSurrogate = cs.charAt(index))) {
-      return Character.toCodePoint(hiSurrogate, loSurrogate);
-    }
-    return hiSurrogate;
-  }
-
-  static int codePointBefore(CharSequence cs, int index, int start) {
-    char loSurrogate = cs.charAt(--index);
-    char highSurrogate;
-    if (isLowSurrogate(loSurrogate) && index > start
-        && isHighSurrogate(highSurrogate = cs.charAt(index - 1))) {
-      return toCodePoint(highSurrogate, loSurrogate);
-    }
-    return loSurrogate;
-  }
-
   /**
    * Shared implementation with {@link Long#toString}.
    *
@@ -432,31 +414,6 @@ public final class Character implements Comparable<Character>, Serializable {
   static char forDigit(int digit) {
     final int overBaseTen = digit - 10;
     return (char) (overBaseTen < 0 ? '0' + digit : 'a' + overBaseTen);
-  }
-
-  /**
-   * Computes the high surrogate character of the UTF16 representation of a
-   * non-BMP code point. See {@link getLowSurrogate}.
-   *
-   * @param codePoint requested codePoint, required to be >=
-   *          MIN_SUPPLEMENTARY_CODE_POINT
-   * @return high surrogate character
-   */
-  static char getHighSurrogate(int codePoint) {
-    return (char) (MIN_HIGH_SURROGATE
-        + (((codePoint - MIN_SUPPLEMENTARY_CODE_POINT) >> 10) & 1023));
-  }
-
-  /**
-   * Computes the low surrogate character of the UTF16 representation of a
-   * non-BMP code point. See {@link getHighSurrogate}.
-   *
-   * @param codePoint requested codePoint, required to be >=
-   *          MIN_SUPPLEMENTARY_CODE_POINT
-   * @return low surrogate character
-   */
-  static char getLowSurrogate(int codePoint) {
-    return (char) (MIN_LOW_SURROGATE + ((codePoint - MIN_SUPPLEMENTARY_CODE_POINT) & 1023));
   }
 
   private final transient char value;

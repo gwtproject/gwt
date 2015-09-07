@@ -2,6 +2,91 @@
   "comments": [
     {
       "key": {
+        "uuid": "049a2278_b25b806b",
+        "filename": "dev/core/super/javaemul/internal/Characters.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-09-07T12:12:34Z",
+      "side": 1,
+      "message": "add empty private constructor",
+      "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4d8763b_1f17e3dd",
+        "filename": "dev/core/super/javaemul/internal/Strings.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-09-07T12:12:34Z",
+      "side": 1,
+      "message": "It should be nice for the users to mention in the javadoc of each classes of javaemul, that this class is not expected to be used outside of the gwt sdk and that we can modify or delete this class without any warning",
+      "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4deb6f4_b595e8be",
+        "filename": "dev/core/super/javaemul/internal/Strings.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-09-07T12:12:34Z",
+      "side": 1,
+      "message": "Final is not needed here.\n\nAlso maybe add a private empty constructors so that this class cannot be instantiated.",
+      "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4deb6f4_358a58a1",
+        "filename": "dev/core/super/javaemul/internal/Strings.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-09-07T12:12:34Z",
+      "side": 1,
+      "message": "Why do we have to disable Checkstyle here ?",
+      "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "049a2278_725af86b",
+        "filename": "dev/core/super/javaemul/internal/Strings.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-09-07T12:12:34Z",
+      "side": 1,
+      "message": "rm 122 123",
+      "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "841a92b2_2ce757e8",
         "filename": "dev/core/super/javaemul/internal/Strings.java",
         "patchSetId": 1

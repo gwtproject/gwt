@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a4deb6f4_3561f896",
+        "filename": "dev/core/super/javaemul/internal/Characters.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-09-07T12:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "049a2278_b25b806b",
+      "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4d8763b_1f17e3dd",
         "filename": "dev/core/super/javaemul/internal/Strings.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-07T12:12:34Z",
       "side": 1,
       "message": "It should be nice for the users to mention in the javadoc of each classes of javaemul, that this class is not expected to be used outside of the gwt sdk and that we can modify or delete this class without any warning",
+      "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a455d63a_3a83fdcf",
+        "filename": "dev/core/super/javaemul/internal/Strings.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-09-07T12:34:10Z",
+      "side": 1,
+      "message": "package-info.java does this (and the package name as well). I think we are fine here.",
+      "parentUuid": "a4d8763b_1f17e3dd",
       "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "a4deb6f4_f572906a",
+        "filename": "dev/core/super/javaemul/internal/Strings.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-09-07T12:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4deb6f4_b595e8be",
+      "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4deb6f4_358a58a1",
         "filename": "dev/core/super/javaemul/internal/Strings.java",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "64c3de5a_557a2cb8",
+        "filename": "dev/core/super/javaemul/internal/Strings.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-09-07T12:34:10Z",
+      "side": 1,
+      "message": "I renamed the methods, this can now go away",
+      "parentUuid": "a4deb6f4_358a58a1",
+      "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "049a2278_725af86b",
         "filename": "dev/core/super/javaemul/internal/Strings.java",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2015-09-07T12:12:34Z",
       "side": 1,
       "message": "rm 122 123",
+      "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4deb6f4_956f8481",
+        "filename": "dev/core/super/javaemul/internal/Strings.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-09-07T12:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "049a2278_725af86b",
       "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

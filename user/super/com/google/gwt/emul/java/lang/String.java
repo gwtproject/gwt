@@ -16,22 +16,17 @@
 
 package java.lang;
 
-import static javaemul.internal.InternalPreconditions.checkStringBounds;
-
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import java.nio.charset.UnsupportedCharsetException;
 import java.util.Comparator;
 import java.util.Locale;
 
-import javaemul.internal.ArrayHelper;
-import javaemul.internal.EmulatedCharset;
-import javaemul.internal.HashCodes;
 import javaemul.internal.annotations.DoNotInline;
 
 /**
  * Intrinsic string class.
+ *
  */
 
 public final class String implements Comparable<String>, CharSequence,
@@ -51,11 +46,6 @@ public final class String implements Comparable<String>, CharSequence,
    * <ul>
    * <li>copyValueOf(char[] data)
    * <li>copyValueOf(char[] data, int offset, int count)
-   * </ul>
-   * <li>methods added in Java 1.6 (the issue is how will it impact users
-   * building against Java 1.5)
-   * <ul>
-   * <li>isEmpty()
    * </ul>
    * <li>other methods which are not straightforward in JS
    * <ul>
@@ -88,71 +78,50 @@ public final class String implements Comparable<String>, CharSequence,
    * IMPORTANT NOTE: if newer JREs add new interfaces to String, please update
    * {@link Devirtualizer} and {@link JavaResourceBase}
    */
-  public static final Comparator<String> CASE_INSENSITIVE_ORDER = new Comparator<String>() {
-    @Override
-    public int compare(String a, String b) {
-      return a.compareToIgnoreCase(b);
-    }
-  };
+  public static final Comparator<String> CASE_INSENSITIVE_ORDER = DevirtualizedString.CASE_INSENSITIVE_ORDER;
 
   public static String copyValueOf(char[] v) {
-    return valueOf(v);
+    return DevirtualizedString.valueOf(v);
   }
 
   public static String copyValueOf(char[] v, int offset, int count) {
-    return valueOf(v, offset, count);
+    return DevirtualizedString.valueOf(v, offset, count);
   }
 
   public static String valueOf(boolean x) {
-    return "" + x;
+    return DevirtualizedString.valueOf(x);
   }
 
-  public static native String valueOf(char x) /*-{
-    return String.fromCharCode(x);
-  }-*/;
+  public static String valueOf(char x) {
+    return DevirtualizedString.valueOf(x);
+  }
 
   public static String valueOf(char x[], int offset, int count) {
-    int end = offset + count;
-    checkStringBounds(offset, end, x.length);
-    // Work around function.prototype.apply call stack size limits:
-    // https://code.google.com/p/v8/issues/detail?id=2896
-    // Performance: http://jsperf.com/string-fromcharcode-test/13
-    int batchSize = ArrayHelper.ARRAY_PROCESS_BATCH_SIZE;
-    String s = "";
-    for (int batchStart = offset; batchStart < end;) {
-      int batchEnd = Math.min(batchStart + batchSize, end);
-      s += fromCharCode(ArrayHelper.unsafeClone(x, batchStart, batchEnd));
-      batchStart = batchEnd;
-    }
-    return s;
+    return DevirtualizedString.valueOf(x, offset, count);
   }
 
-  private static native String fromCharCode(Object array) /*-{
-    return String.fromCharCode.apply(null, array);
-  }-*/;
-
   public static String valueOf(char[] x) {
-    return valueOf(x, 0, x.length);
+    return DevirtualizedString.valueOf(x);
   }
 
   public static String valueOf(double x) {
-    return "" + x;
+    return DevirtualizedString.valueOf(x);
   }
 
   public static String valueOf(float x) {
-    return "" + x;
+    return DevirtualizedString.valueOf(x);
   }
 
   public static String valueOf(int x) {
-    return "" + x;
+    return DevirtualizedString.valueOf(x);
   }
 
   public static String valueOf(long x) {
-    return "" + x;
+    return DevirtualizedString.valueOf(x);
   }
 
   public static String valueOf(Object x) {
-    return "" + x;
+    return DevirtualizedString.valueOf(x);
   }
 
   // CHECKSTYLE_OFF: This class has special needs.
@@ -162,60 +131,6 @@ public final class String implements Comparable<String>, CharSequence,
    */
   static String[] __createArray(int numElements) {
     return new String[numElements];
-  }
-
-  static native String __substr(String str, int beginIndex, int len) /*-{
-    return str.substr(beginIndex, len);
-  }-*/;
-
-  /**
-   * This method converts Java-escaped dollar signs "\$" into JavaScript-escaped
-   * dollar signs "$$", and removes all other lone backslashes, which serve as
-   * escapes in Java but are passed through literally in JavaScript.
-   *
-   * @skip
-   */
-  static String __translateReplaceString(String replaceStr) {
-    int pos = 0;
-    while (0 <= (pos = replaceStr.indexOf("\\", pos))) {
-      if (replaceStr.charAt(pos + 1) == '$') {
-        replaceStr = replaceStr.substring(0, pos) + "$"
-            + replaceStr.substring(++pos);
-      } else {
-        replaceStr = replaceStr.substring(0, pos) + replaceStr.substring(++pos);
-      }
-    }
-    return replaceStr;
-  }
-
- 
-
-  // CHECKSTYLE_ON
-
-  private static native int compareTo(String thisStr, String otherStr) /*-{
-    if (thisStr == otherStr) {
-      return 0;
-    }
-    return thisStr < otherStr ? -1 : 1;
-  }-*/;
-
-  private static Charset getCharset(String charsetName) throws UnsupportedEncodingException {
-    try {
-      return Charset.forName(charsetName);
-    } catch (UnsupportedCharsetException e) {
-      throw new UnsupportedEncodingException(charsetName);
-    }
-  }
-
-  private static String fromCodePoint(int codePoint) {
-    if (codePoint >= Character.MIN_SUPPLEMENTARY_CODE_POINT) {
-      char hiSurrogate = Character.getHighSurrogate(codePoint);
-      char loSurrogate = Character.getLowSurrogate(codePoint);
-      return String.valueOf(hiSurrogate)
-          + String.valueOf(loSurrogate);
-    } else {
-      return String.valueOf((char) codePoint);
-    }
   }
 
   public String() {
@@ -339,51 +254,49 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   @Override
-  public native char charAt(int index) /*-{
-    return this.charCodeAt(index);
-  }-*/;
+  public char charAt(int index) {
+    return DevirtualizedString.charAt(this, index);
+  }
 
   public int codePointAt(int index) {
-    return Character.codePointAt(this, index, length());
+    return DevirtualizedString.codePointAt(this, index);
   }
 
   public int codePointBefore(int index) {
-    return Character.codePointBefore(this, index, 0);
+    return DevirtualizedString.codePointBefore(this, index);
   }
 
   public int codePointCount(int beginIndex, int endIndex) {
-    return Character.codePointCount(this, beginIndex, endIndex);
+    return DevirtualizedString.codePointCount(this, beginIndex, endIndex);
   }
 
   @Override
   public int compareTo(String other) {
-    return compareTo(this, other);
+    return DevirtualizedString.compareTo(this, other);
   }
 
   public int compareToIgnoreCase(String other) {
-    return compareTo(toLowerCase(), other.toLowerCase());
+    return DevirtualizedString.compareToIgnoreCase(this, other);
   }
 
-  public native String concat(String str) /*-{
-    return this + str;
-  }-*/;
+  public String concat(String str) {
+    return DevirtualizedString.concat(this, str);
+  }
 
   public boolean contains(CharSequence s) {
-    return indexOf(s.toString()) != -1;
+    return DevirtualizedString.contains(this, s);
   }
 
   public boolean contentEquals(CharSequence cs) {
-    return equals(cs.toString());
+    return DevirtualizedString.contentEquals(this, cs);
   }
 
   public boolean contentEquals(StringBuffer sb) {
-    return equals(sb.toString());
+    return DevirtualizedString.contentEquals(this, sb);
   }
 
   public boolean endsWith(String suffix) {
-    // If IE8 supported negative start index, we could have just used "-suffixlength".
-    int suffixlength = suffix.length();
-    return __substr(this, length() - suffixlength, suffixlength).equals(suffix);
+    return DevirtualizedString.endsWith(this, suffix);
   }
 
   // Marked with @DoNotInline because we don't have static eval for "==" yet.
@@ -395,33 +308,24 @@ public final class String implements Comparable<String>, CharSequence,
     return this == other;
   }
 
-  public native boolean equalsIgnoreCase(String other) /*-{
-    if (other == null) {
-      return false;
-    }
-    if (this == other) {
-      return true;
-    }
-    return (this.length == other.length) && (this.toLowerCase() == other.toLowerCase());
-  }-*/;
+  public boolean equalsIgnoreCase(String other) {
+    return DevirtualizedString.equalsIgnoreCase(this, other);
+  }
 
   public byte[] getBytes() {
-    // default character set for GWT is UTF-8
-    return getBytes(EmulatedCharset.UTF_8);
+    return DevirtualizedString.getBytes(this);
   }
 
   public byte[] getBytes(String charsetName) throws UnsupportedEncodingException {
-    return getBytes(getCharset(charsetName));
+    return DevirtualizedString.getBytes(this, charsetName);
   }
 
   public byte[] getBytes(Charset charset) {
-    return ((EmulatedCharset) charset).getBytes(this);
+    return DevirtualizedString.getBytes(this, charset);
   }
 
   public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
-    for (int srcIdx = srcBegin; srcIdx < srcEnd; ++srcIdx) {
-      dst[dstBegin++] = charAt(srcIdx);
-    }
+    DevirtualizedString.getChars(this, srcBegin, srcEnd, dst, dstBegin);
   }
 
   /**
@@ -445,286 +349,135 @@ public final class String implements Comparable<String>, CharSequence,
 
   @Override
   public int hashCode() {
-    return HashCodes.hashCodeForString(this);
+    return DevirtualizedString.hashCode(this);
   }
 
   public int indexOf(int codePoint) {
-    return indexOf(fromCodePoint(codePoint));
+    return DevirtualizedString.indexOf(this, codePoint);
   }
 
   public int indexOf(int codePoint, int startIndex) {
-    return indexOf(fromCodePoint(codePoint), startIndex);
+    return DevirtualizedString.indexOf(this, codePoint, startIndex);
   }
 
-  public native int indexOf(String str) /*-{
-    return this.indexOf(str);
-  }-*/;
+  public int indexOf(String str) {
+    return DevirtualizedString.indexOf(this, str);
+  }
 
-  public native int indexOf(String str, int startIndex) /*-{
-    return this.indexOf(str, startIndex);
-  }-*/;
+  public int indexOf(String str, int startIndex) {
+    return DevirtualizedString.indexOf(this, str, startIndex);
+  }
 
-  public native String intern() /*-{
-    return this;
-  }-*/;
+  public String intern() {
+    return DevirtualizedString.intern(this);
+  }
 
-  public native boolean isEmpty() /*-{
-    return !this.length;
-  }-*/;
+  public boolean isEmpty() {
+    return DevirtualizedString.isEmpty(this);
+  }
 
   public int lastIndexOf(int codePoint) {
-    return lastIndexOf(fromCodePoint(codePoint));
+    return DevirtualizedString.lastIndexOf(this, codePoint);
   }
 
   public int lastIndexOf(int codePoint, int startIndex) {
-    return lastIndexOf(fromCodePoint(codePoint), startIndex);
+    return DevirtualizedString.lastIndexOf(this, codePoint, startIndex);
   }
 
-  public native int lastIndexOf(String str) /*-{
-    return this.lastIndexOf(str);
-  }-*/;
+  public int lastIndexOf(String str) {
+    return DevirtualizedString.lastIndexOf(this, str);
+  }
 
-  public native int lastIndexOf(String str, int start) /*-{
-    return this.lastIndexOf(str, start);
-  }-*/;
+  public int lastIndexOf(String str, int start) {
+    return DevirtualizedString.lastIndexOf(this, str, start);
+  }
 
   @Override
-  public native int length() /*-{
-    return this.length;
-  }-*/;
+  public int length() {
+    return DevirtualizedString.length(this);
+  }
 
-  /**
-   * Regular expressions vary from the standard implementation. The
-   * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
-   * regular expression. For consistency, use only the subset of regular
-   * expression syntax common to both Java and JavaScript.
-   *
-   * TODO(jat): properly handle Java regex syntax
-   */
-  public native boolean matches(String regex) /*-{
-    // We surround the regex with '^' and '$' because it must match
-    // the entire string.
-    return new RegExp('^(' + regex + ')$').test(this);
-  }-*/;
+  public boolean matches(String regex) {
+    return DevirtualizedString.matches(this, regex);
+  }
 
   public int offsetByCodePoints(int index, int codePointOffset) {
-    return Character.offsetByCodePoints(this, index, codePointOffset);
+    return DevirtualizedString.offsetByCodePoints(this, index, codePointOffset);
   }
 
   public boolean regionMatches(boolean ignoreCase, int toffset, String other,
       int ooffset, int len) {
-    if (other == null) {
-      throw new NullPointerException();
-    }
-    if (toffset < 0 || ooffset < 0 || len <= 0) {
-      return false;
-    }
-    if (toffset + len > this.length() || ooffset + len > other.length()) {
-      return false;
-    }
-
-    String left = __substr(this, toffset, len);
-    String right = __substr(other, ooffset, len);
-    return ignoreCase ? left.equalsIgnoreCase(right) : left.equals(right);
+    return DevirtualizedString.regionMatches(this, ignoreCase, toffset, other, ooffset, len);
   }
 
   public boolean regionMatches(int toffset, String other, int ooffset, int len) {
-    return regionMatches(false, toffset, other, ooffset, len);
+    return DevirtualizedString.regionMatches(this, toffset, other, ooffset, len);
   }
 
-  public native String replace(char from, char to) /*-{
-    // Translate 'from' into unicode escape sequence (\\u and a four-digit hexadecimal number).
-    // Escape sequence replacement is used instead of a string literal replacement
-    // in order to escape regexp special characters (e.g. '.').
-    var hex = @java.lang.Integer::toHexString(I)(from);
-    var regex = "\\u" + "0000".substring(hex.length) + hex;
-    return this.replace(RegExp(regex, "g"), String.fromCharCode(to));
-  }-*/;
+  public String replace(char from, char to) {
+    return DevirtualizedString.replace(this, from, to);
+  }
 
   public String replace(CharSequence from, CharSequence to) {
-    // Implementation note: This uses a regex replacement instead of
-    // a string literal replacement because Safari does not
-    // follow the spec for "$$" in the replacement string: it
-    // will insert a literal "$$". IE and Firefox, meanwhile,
-    // treat "$$" as "$".
-
-    // Escape regex special characters from literal replacement string.
-    String regex = from.toString().replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}$^])", "\\\\$1");
-    // Escape $ since it is for match backrefs and \ since it is used to escape
-    // $.
-    String replacement = to.toString().replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\$");
-
-    return replaceAll(regex, replacement);
+    return DevirtualizedString.replace(this, from, to);
   }
 
-  /**
-   * Regular expressions vary from the standard implementation. The
-   * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
-   * regular expression. For consistency, use only the subset of regular
-   * expression syntax common to both Java and JavaScript.
-   *
-   * TODO(jat): properly handle Java regex syntax
-   */
-  public native String replaceAll(String regex, String replace) /*-{
-    replace = @java.lang.String::__translateReplaceString(Ljava/lang/String;)(replace);
-    return this.replace(RegExp(regex, "g"), replace);
-  }-*/;
+  public String replaceAll(String regex, String replace) {
+    return DevirtualizedString.replaceAll(this, regex, replace);
+  }
 
-  /**
-   * Regular expressions vary from the standard implementation. The
-   * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
-   * regular expression. For consistency, use only the subset of regular
-   * expression syntax common to both Java and JavaScript.
-   *
-   * TODO(jat): properly handle Java regex syntax
-   */
-  public native String replaceFirst(String regex, String replace) /*-{
-    replace = @java.lang.String::__translateReplaceString(Ljava/lang/String;)(replace);
-    return this.replace(RegExp(regex), replace);
-  }-*/;
+  public String replaceFirst(String regex, String replace) {
+    return DevirtualizedString.replaceFirst(this, regex, replace);
+  }
 
-  /**
-   * Regular expressions vary from the standard implementation. The
-   * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
-   * regular expression. For consistency, use only the subset of regular
-   * expression syntax common to both Java and JavaScript.
-   */
   public String[] split(String regex) {
-    return split(regex, 0);
+    return DevirtualizedString.split(this, regex);
   }
 
-  /**
-   * Regular expressions vary from the standard implementation. The
-   * <code>regex</code> parameter is interpreted by JavaScript as a JavaScript
-   * regular expression. For consistency, use only the subset of regular
-   * expression syntax common to both Java and JavaScript.
-   *
-   * TODO(jat): properly handle Java regex syntax
-   */
-  public native String[] split(String regex, int maxMatch) /*-{
-    // The compiled regular expression created from the string
-    var compiled = new RegExp(regex, "g");
-    // the Javascipt array to hold the matches prior to conversion
-    var out = [];
-    // how many matches performed so far
-    var count = 0;
-    // The current string that is being matched; trimmed as each piece matches
-    var trail = this;
-    // used to detect repeated zero length matches
-    // Must be null to start with because the first match of "" makes no
-    // progress by intention
-    var lastTrail = null;
-    // We do the split manually to avoid Javascript incompatibility
-    while (true) {
-      // None of the information in the match returned are useful as we have no
-      // subgroup handling
-      var matchObj = compiled.exec(trail);
-      if (matchObj == null || trail == "" || (count == (maxMatch - 1) && maxMatch > 0)) {
-        out[count] = trail;
-        break;
-      } else {
-        out[count] = trail.substring(0, matchObj.index);
-        trail = trail.substring(matchObj.index + matchObj[0].length, trail.length);
-        // Force the compiled pattern to reset internal state
-        compiled.lastIndex = 0;
-        // Only one zero length match per character to ensure termination
-        if (lastTrail == trail) {
-          out[count] = trail.substring(0, 1);
-          trail = trail.substring(1);
-        }
-        lastTrail = trail;
-        count++;
-      }
-    }
-    // all blank delimiters at the end are supposed to disappear if maxMatch == 0;
-    // however, if the input string is empty, the output should consist of a
-    // single empty string
-    if (maxMatch == 0 && this.length > 0) {
-      var lastNonEmpty = out.length;
-      while (lastNonEmpty > 0 && out[lastNonEmpty - 1] == "") {
-        --lastNonEmpty;
-      }
-      if (lastNonEmpty < out.length) {
-        out.splice(lastNonEmpty, out.length - lastNonEmpty);
-      }
-    }
-    var jr = @java.lang.String::__createArray(I)(out.length);
-    for ( var i = 0; i < out.length; ++i) {
-      jr[i] = out[i];
-    }
-    return jr;
-  }-*/;
+  public String[] split(String regex, int maxMatch) {
+    return DevirtualizedString.split(this, regex, maxMatch);
+  }
 
   public boolean startsWith(String prefix) {
-    return startsWith(prefix, 0);
+    return DevirtualizedString.startsWith(this, prefix);
   }
 
   public boolean startsWith(String prefix, int toffset) {
-    return toffset >= 0 && __substr(this, toffset, prefix.length()).equals(prefix);
+    return DevirtualizedString.startsWith(this, prefix, toffset);
   }
 
   @Override
   public CharSequence subSequence(int beginIndex, int endIndex) {
-    return this.substring(beginIndex, endIndex);
+    return DevirtualizedString.subSequence(this, beginIndex, endIndex);
   }
 
   public String substring(int beginIndex) {
-    return __substr(this, beginIndex, this.length() - beginIndex);
+    return DevirtualizedString.substring(this, beginIndex);
   }
 
   public String substring(int beginIndex, int endIndex) {
-    return __substr(this, beginIndex, endIndex - beginIndex);
+    return DevirtualizedString.substring(this, beginIndex, endIndex);
   }
 
   public char[] toCharArray() {
-    int n = this.length();
-    char[] charArr = new char[n];
-    getChars(0, n, charArr, 0);
-    return charArr;
+    return DevirtualizedString.toCharArray(this);
   }
 
-  /**
-   * Transforms the String to lower-case in a locale insensitive way.
-   * <p>
-   * Unlike JRE, we don't do locale specific transformation by default. That is backward compatible
-   * for GWT and in most of the cases that is what the developer actually wants. If you want to make
-   * a transformation based on native locale of the browser, you can do
-   * {@code toLowerCase(Locale.getDefault())} instead.
-   */
-  public native String toLowerCase() /*-{
-    return this.toLowerCase();
-  }-*/;
+  public String toLowerCase() {
+    return DevirtualizedString.toLowerCase(this);
+  }
 
-  /**
-   * Transforms the String to lower-case based on the native locale of the browser.
-   */
-  private native String toLocaleLowerCase() /*-{
-    return this.toLocaleLowerCase();
-  }-*/;
-
-  /**
-   * If provided {@code locale} is {@link Locale#getDefault()}, uses javascript's
-   * {@code toLocaleLowerCase} to do a locale specific transformation. Otherwise, it will fallback
-   * to {@code toLowerCase} which performs the right thing for the limited set of Locale's
-   * predefined in GWT Locale emulation.
-   */
   public String toLowerCase(Locale locale) {
-    return locale == Locale.getDefault() ? toLocaleLowerCase() : toLowerCase();
+    return DevirtualizedString.toLowerCase(this, locale);
   }
 
-  // See the notes in lowerCase pair.
-  public native String toUpperCase() /*-{
-    return this.toUpperCase();
-  }-*/;
-
-  // See the notes in lowerCase pair.
-  private native String toLocaleUpperCase() /*-{
-    return this.toLocaleUpperCase();
-  }-*/;
+  public String toUpperCase() {
+    return DevirtualizedString.toUpperCase(this);
+  }
 
   // See the notes in lowerCase pair.
   public String toUpperCase(Locale locale) {
-    return locale == Locale.getDefault() ? toLocaleUpperCase() : toUpperCase();
+    return DevirtualizedString.toUpperCase(this, locale);
   }
 
   @Override
@@ -737,16 +490,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public String trim() {
-    int length = length();
-    int start = 0;
-    while (start < length && charAt(start) <= ' ') {
-      start++;
-    }
-    int end = length;
-    while (end > start && charAt(end - 1) <= ' ') {
-      end--;
-    }
-    return start > 0 || end < length ? substring(start, end) : this;
+    return DevirtualizedString.trim(this);
   }
 
   // CHECKSTYLE_OFF: Utility Methods for unboxed String.
@@ -756,59 +500,54 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   static String $createString(byte[] bytes) {
-    return $createString(bytes, 0, bytes.length);
+    return DevirtualizedString.$createString(bytes);
   }
 
   static String $createString(byte[] bytes, int ofs, int len) {
-    return $createString(bytes, ofs, len, EmulatedCharset.UTF_8);
+    return DevirtualizedString.$createString(bytes, ofs, len);
   }
 
   static String $createString(byte[] bytes, int ofs, int len, String charsetName)
       throws UnsupportedEncodingException {
-    return $createString(bytes, ofs, len, String.getCharset(charsetName));
+    return DevirtualizedString.$createString(bytes, ofs, len, charsetName);
   }
 
   static String $createString(byte[] bytes, int ofs, int len, Charset charset) {
-    return String.valueOf(((EmulatedCharset) charset).decodeString(bytes, ofs, len));
+    return DevirtualizedString.$createString(bytes, ofs, len, charset);
   }
 
   static String $createString(byte[] bytes, String charsetName)
       throws UnsupportedEncodingException {
-    return $createString(bytes, 0, bytes.length, charsetName);
+    return DevirtualizedString.$createString(bytes, charsetName);
   }
 
   static String $createString(byte[] bytes, Charset charset)
       throws UnsupportedEncodingException {
-    return $createString(bytes, 0, bytes.length, charset.name());
+    return DevirtualizedString.$createString(bytes, charset);
   }
 
   static String $createString(char value[]) {
-    return String.valueOf(value);
+    return DevirtualizedString.$createString(value);
   }
 
   static String $createString(char value[], int offset, int count) {
-    return String.valueOf(value, offset, count);
+    return DevirtualizedString.$createString(value, offset, count);
   }
 
   static String $createString(int[] codePoints, int offset, int count) {
-    char[] chars = new char[count * 2];
-    int charIdx = 0;
-    while (count-- > 0) {
-      charIdx += Character.toChars(codePoints[offset++], chars, charIdx);
-    }
-    return String.valueOf(chars, 0, charIdx);
+    return DevirtualizedString.$createString(codePoints, offset, count);
   }
 
   static String $createString(String other) {
-    return other;
+    return DevirtualizedString.$createString(other);
   }
 
   static String $createString(StringBuffer sb) {
-    return String.valueOf(sb);
+    return DevirtualizedString.$createString(sb);
   }
 
   static String $createString(StringBuilder sb) {
-    return String.valueOf(sb);
+    return DevirtualizedString.$createString(sb);
   }
   // CHECKSTYLE_ON: end utility methods
 }

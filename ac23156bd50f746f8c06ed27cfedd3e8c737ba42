@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "841a92b2_2ce757e8",
+        "filename": "dev/core/super/javaemul/internal/Strings.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-07T11:48:32Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "ac23156bd50f746f8c06ed27cfedd3e8c737ba42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

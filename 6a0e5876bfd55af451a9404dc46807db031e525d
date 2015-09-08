@@ -16,6 +16,24 @@
       "revId": "6a0e5876bfd55af451a9404dc46807db031e525d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_98eed47f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2708,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-08T19:24:57Z",
+      "side": 1,
+      "message": "The new model doesn\u0027t actually uses obfuscated names but it could.\n\nCurrently the assignment are in the form of\n\n  _.\u003cobfs_name\u003e \u003d function() { blah }\n  _.\u003cname\u003e \u003d _.\u003cobfs_name\u003e\n\n for all, instead of directly doing\n\n   _.\u003cname\u003e \u003d function() { blah }\n\nwhere no bridge is needed.\n\nso we basically see 10 extra chars per method (_.\u003cobfs_name\u003e seen twice) which is roughly 10k for one thousand methods at worst scenario (not gzipped). And that shouldn\u0027t effect closure apps.\n\nFurther, like you mentioned this can further optimized to use obfuscate name at call sites and the overall implementation is much simpler. So it seems to me a good trade off.\n\nWe can double check inbox while pulling in the change.",
+      "parentUuid": "8497f201_e7b5f74f",
+      "revId": "6a0e5876bfd55af451a9404dc46807db031e525d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

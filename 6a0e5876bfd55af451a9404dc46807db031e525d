@@ -34,6 +34,24 @@
       "revId": "6a0e5876bfd55af451a9404dc46807db031e525d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_ab5c028d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2708,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-08T23:52:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand this comment. You say the the new code doesn\u0027t use obf names, but doesn\u0027t this code generate both assignments?\n\nYou call generateVTableAssignment() above, which produces _.obfName \u003d RHS, and then you call generateVTableAlias() below which calls _.exportNamed \u003d obfName, so you\u0027ll get both assignments in the output, rather than\n\n_.name \u003d function() { ... }",
+      "parentUuid": "8497f201_98eed47f",
+      "revId": "6a0e5876bfd55af451a9404dc46807db031e525d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -15,10 +15,12 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JCharLiteral;
+import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JLongLiteral;
 import com.google.gwt.dev.jjs.ast.JMethod;
@@ -26,6 +28,7 @@ import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JType;
 
 /**
@@ -51,16 +54,31 @@ public class TypeCoercionNormalizer {
         return;
       }
 
-      JExpression newLhs = coerceToString(x.getLhs());
-      JExpression newRhs = coerceToString(x.getRhs());
+      JExpression lhs = x.getLhs();
+      JExpression rhs = x.getRhs();
 
-      assert !x.getOp().isAssignment() || newLhs == x.getLhs() :
+      JExpression newLhs = coerceToString(lhs);
+      JExpression newRhs = coerceToString(rhs);
+
+      assert !x.getOp().isAssignment() || newLhs ==lhs :
           "L-values can never be rewritten (CONCAT_ASG can not have an lhs of type char or long).";
 
-      if (newLhs != x.getLhs() || newRhs != x.getRhs()) {
+      SourceInfo sourceInfo = x.getSourceInfo();
+      JClassType typeJavaLangString = program.getTypeJavaLangString();
+      if (newLhs != lhs || newRhs != rhs) {
         JBinaryOperation newExpr =
-            new JBinaryOperation(x.getSourceInfo(), program.getTypeJavaLangString(),
+            new JBinaryOperation(sourceInfo, typeJavaLangString,
                 x.getOp(), newLhs, newRhs);
+        ctx.replaceMe(newExpr);
+      } else if (lhs.getType().canBeNull() && rhs.getType().canBeNull()) {
+        // Replace a + b with a + "" + b and
+        // a += b with a += "" + b
+        JBinaryOperation newExpr =
+            new JBinaryOperation(sourceInfo, typeJavaLangString, x.getOp(),
+                lhs,
+                new JBinaryOperation(sourceInfo, typeJavaLangString, JBinaryOperator.CONCAT,
+                    new JStringLiteral(sourceInfo, "", typeJavaLangString),
+                    rhs));
         ctx.replaceMe(newExpr);
       }
     }

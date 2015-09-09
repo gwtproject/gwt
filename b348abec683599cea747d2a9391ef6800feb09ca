@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a40b16a8_07a556e6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JBinaryOperation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-09T22:01:15Z",
+      "side": 1,
+      "message": "[error] \u0027type\u0027 hides a field.",
+      "revId": "b348abec683599cea747d2a9391ef6800feb09ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

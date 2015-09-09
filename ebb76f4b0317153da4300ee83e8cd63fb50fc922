@@ -16,6 +16,24 @@
       "revId": "ebb76f4b0317153da4300ee83e8cd63fb50fc922",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_95fdc2aa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JBinaryOperation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-09T23:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40b16a8_eaae87ba",
+      "revId": "ebb76f4b0317153da4300ee83e8cd63fb50fc922",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

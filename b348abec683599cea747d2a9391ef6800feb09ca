@@ -16,6 +16,23 @@
       "revId": "b348abec683599cea747d2a9391ef6800feb09ca",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_1277a85d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JBinaryOperation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-09T22:20:46Z",
+      "side": 1,
+      "message": "nit: because also the above code uses isAssignment the comment becomes little confusing. Can you change \"the assignment operation\" to \"\u0027\u003d\u0027 operation\":\n\n All binary operations except \u0027\u003d\u0027 operation return ...",
+      "revId": "b348abec683599cea747d2a9391ef6800feb09ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

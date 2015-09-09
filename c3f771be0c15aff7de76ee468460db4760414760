@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "c4ef2afe_125328ae",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1080,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-09T22:41:01Z",
+      "side": 1,
+      "message": "INLINING_BIAS? also can you add a comment for the reasoning?",
+      "range": {
+        "startLine": 1080,
+        "startChar": 66,
+        "endLine": 1080,
+        "endChar": 89
+      },
+      "revId": "c3f771be0c15aff7de76ee468460db4760414760",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a40b16a8_e767e25c",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
         "patchSetId": 1
@@ -13,6 +36,29 @@
       "writtenOn": "2015-09-09T22:34:11Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "c3f771be0c15aff7de76ee468460db4760414760",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_f24f84fc",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1569,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-09T22:41:01Z",
+      "side": 1,
+      "message": "should we try something smaller first, like 5? Also it would be great if this was driven from some other number like the average identifier length.",
+      "range": {
+        "startLine": 1569,
+        "startChar": 48,
+        "endLine": 1569,
+        "endChar": 50
+      },
       "revId": "c3f771be0c15aff7de76ee468460db4760414760",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

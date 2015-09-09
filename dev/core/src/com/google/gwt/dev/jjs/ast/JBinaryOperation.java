@@ -50,13 +50,18 @@ public class JBinaryOperation extends JExpression {
 
   @Override
   public JType getType() {
+    JType type = this.type;
     if (isAssignment()) {
       // Use the type of the lhs
-      return getLhs().getType();
-    } else {
-      // Most binary operators never change type
-      return type;
+      type = getLhs().getType();
     }
+
+    if (op != JBinaryOperator.ASG && type instanceof JReferenceType) {
+      // Except the = operation all other binary operations return a non nullable exact
+      // type.
+      type = ((JReferenceType) type).strengthenToNonNull().strengthenToExact();
+    }
+    return type;
   }
 
   @Override

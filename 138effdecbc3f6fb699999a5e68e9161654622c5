@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4ef2afe_069f839d",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalHashCodeMap.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-09T04:13:13Z",
+      "side": 1,
+      "message": "There is still a bug here. If you call in the order of [next, hasNext, remove] and hasNext caused a chain switch it will fail.\n\nWe don\u0027t want to decrement if this is beginning of next chain (can be check with itemIndex\u003d\u003d0).",
+      "revId": "138effdecbc3f6fb699999a5e68e9161654622c5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

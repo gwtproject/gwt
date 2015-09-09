@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c4ef2afe_b2321c88",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JBinaryOperation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-09T23:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40b16a8_07a556e6",
+      "revId": "b348abec683599cea747d2a9391ef6800feb09ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4ef2afe_1277a85d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JBinaryOperation.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-09T22:20:46Z",
       "side": 1,
       "message": "nit: because also the above code uses isAssignment the comment becomes little confusing. Can you change \"the assignment operation\" to \"\u0027\u003d\u0027 operation\":\n\n All binary operations except \u0027\u003d\u0027 operation return ...",
+      "revId": "b348abec683599cea747d2a9391ef6800feb09ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_d235a072",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JBinaryOperation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-09T23:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4ef2afe_1277a85d",
       "revId": "b348abec683599cea747d2a9391ef6800feb09ca",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

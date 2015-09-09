@@ -16,6 +16,29 @@
       "revId": "6f240bad87a1cc8ff991cb7962e47dcc64b70ad4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_3253ccdf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCoercionNormalizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-09T22:08:06Z",
+      "side": 1,
+      "message": "this code is hard to read. Can you change it so it is easier to read.\nOr perhaps we should introduces a helper in Cast.java?",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 26
+      },
+      "revId": "6f240bad87a1cc8ff991cb7962e47dcc64b70ad4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

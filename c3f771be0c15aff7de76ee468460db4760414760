@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c4ef2afe_b5f8c6b2",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1080,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-09T23:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4ef2afe_125328ae",
+      "range": {
+        "startLine": 1080,
+        "startChar": 66,
+        "endLine": 1080,
+        "endChar": 89
+      },
+      "revId": "c3f771be0c15aff7de76ee468460db4760414760",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a40b16a8_e767e25c",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2015-09-09T22:34:11Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "c3f771be0c15aff7de76ee468460db4760414760",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_9524a2f2",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-09T23:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40b16a8_e767e25c",
       "revId": "c3f771be0c15aff7de76ee468460db4760414760",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "c4ef2afe_f5152e77",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1569,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-09T23:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4ef2afe_f24f84fc",
+      "range": {
+        "startLine": 1569,
+        "startChar": 48,
+        "endLine": 1569,
+        "endChar": 50
+      },
+      "revId": "c3f771be0c15aff7de76ee468460db4760414760",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a40b16a8_c76cde43",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
         "patchSetId": 1
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "c4ef2afe_d5122a8e",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1570,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-09T23:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40b16a8_c76cde43",
+      "revId": "c3f771be0c15aff7de76ee468460db4760414760",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a40b16a8_a761ea49",
         "filename": "dev/core/test/com/google/gwt/dev/js/JsInlinerTest.java",
         "patchSetId": 1
@@ -93,6 +177,24 @@
       "writtenOn": "2015-09-09T22:34:11Z",
       "side": 1,
       "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "c3f771be0c15aff7de76ee468460db4760414760",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_75501e4b",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsInlinerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-09T23:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40b16a8_a761ea49",
       "revId": "c3f771be0c15aff7de76ee468460db4760414760",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

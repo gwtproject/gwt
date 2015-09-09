@@ -1054,11 +1054,8 @@ public class JsInliner {
        * Compare the relative complexity of the original invocation versus the
        * inlined form.
        */
-      int originalComplexity = complexity(x);
-      int inlinedComplexity = complexity(op);
-      double ratio = ((double) inlinedComplexity) / originalComplexity;
       if (invokedFunction.getInliningMode() != InliningMode.FORCE_INLINE
-          && ratio > MAX_COMPLEXITY_INCREASE
+          && isTooComplexToInline(x, op)
           && isInvokedMoreThanOnce(invokedFunction)) {
         return x;
       }
@@ -1075,6 +1072,13 @@ public class JsInliner {
       invocationCountingVisitor.removeCountsFor(x);
       invocationCountingVisitor.accept(op);
       return op;
+    }
+
+    private boolean isTooComplexToInline(JsInvocation x, JsExpression op) {
+      int originalComplexity = complexity(x);
+      int inlinedComplexity = complexity(op);
+      return ((double) inlinedComplexity) / (originalComplexity + ALLOWED_CONST_EXPANSION)
+          > MAX_COMPLEXITY_INCREASE;
     }
   }
 
@@ -1559,6 +1563,11 @@ public class JsInliner {
    */
   private static final double MAX_COMPLEXITY_INCREASE = Double.parseDouble(System.getProperty(
       "gwt.jsinlinerRatio", "1.0"));
+
+
+  private static final int ALLOWED_CONST_EXPANSION =  Integer.parseInt(System.getProperty(
+      "gwt.jsinlinerAllowedConstantExpansion", "10"));
+  ;
 
   /**
    * Static entry point used by JavaToJavaScriptCompiler.

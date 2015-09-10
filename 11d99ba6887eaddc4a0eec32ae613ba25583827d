@@ -16,6 +16,24 @@
       "revId": "11d99ba6887eaddc4a0eec32ae613ba25583827d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_60073e59",
+        "filename": "dev/core/src/com/google/gwt/dev/js/globals/chrome.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-10T00:22:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4ef2afe_e0e44e15",
+      "revId": "11d99ba6887eaddc4a0eec32ae613ba25583827d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

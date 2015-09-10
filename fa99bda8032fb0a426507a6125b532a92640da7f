@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c4ef2afe_a801737b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-10T21:26:48Z",
+      "side": 1,
+      "message": "That\u0027s no true though. Previously, it unconditionally ran the propagation. In your updated patch, it only runs for NO_REFERENCES/CORRECT_ORDER, but does not invoke markCallsAsSideEffectFree for FAILS. That\u0027s a semantic change introduced in the refactoring.",
+      "parentUuid": "c4ef2afe_08e99f29",
+      "revId": "fa99bda8032fb0a426507a6125b532a92640da7f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4ef2afe_28522305",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/MethodInlinerTest.java",
         "patchSetId": 5

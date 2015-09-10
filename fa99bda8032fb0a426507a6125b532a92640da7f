@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c4ef2afe_08e99f29",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-10T21:23:40Z",
+      "side": 1,
+      "message": "Yes, the annotation superseeds the compiler analysis (which as of yet is non existent).  When the annotation is present it is trusted by the compiler. \n\n(this patch does no change anything related to @HasNoSideEffect, just encapsultes the propagation in a method)\n\nThe inliner propagates trust when it inlines and yes it can be used to subvert the compiler (look at the HasNoSideEffectsTest)",
+      "parentUuid": "c4ef2afe_a87f3374",
+      "revId": "fa99bda8032fb0a426507a6125b532a92640da7f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4ef2afe_28522305",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/MethodInlinerTest.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-10T20:33:08Z",
       "side": 1,
       "message": "Can you test a local that doesn\u0027t have an initializer?\n\ne.g.\nstatic int fun() { int a; a \u003d 1; return a; }\n\nThere was a bug I noticed in JsInliner with it not including JsVar declarations for inlined locals, which meant later-initialized locals actually ended up assigning to variables in the global scope unintentionally.",
+      "revId": "fa99bda8032fb0a426507a6125b532a92640da7f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_c8f27715",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/MethodInlinerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-10T21:23:40Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "c4ef2afe_28522305",
       "revId": "fa99bda8032fb0a426507a6125b532a92640da7f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

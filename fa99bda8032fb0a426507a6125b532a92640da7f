@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4ef2afe_a87f3374",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-10T20:33:08Z",
+      "side": 1,
+      "message": "I think I had this discussion with Goktug before when he first landed support for this annotation, but wasn\u0027t the conclusion from that discussion that the annotation applies no matter what the compiler thinks about about if the method has side effects or not?\n\nFor example, Array.canSet() is marked @HasNoSideEffects, but clearly, it will fail the OrderVisitor won\u0027t it, since it makes method calls which can throw exceptions.  Now, this method won\u0027t inline anyway, and almost all other cases of @HasNoSideEffects are JSNI methods, but Goktug should comment on whether or not his intent is that @HasNoSideEffects should override compiler side-effect checks which are overly conservative.",
+      "revId": "fa99bda8032fb0a426507a6125b532a92640da7f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_28522305",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/MethodInlinerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-10T20:33:08Z",
+      "side": 1,
+      "message": "Can you test a local that doesn\u0027t have an initializer?\n\ne.g.\nstatic int fun() { int a; a \u003d 1; return a; }\n\nThere was a bug I noticed in JsInliner with it not including JsVar declarations for inlined locals, which meant later-initialized locals actually ended up assigning to variables in the global scope unintentionally.",
+      "revId": "fa99bda8032fb0a426507a6125b532a92640da7f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

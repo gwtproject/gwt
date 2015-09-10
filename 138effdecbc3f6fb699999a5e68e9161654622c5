@@ -34,6 +34,24 @@
       "revId": "138effdecbc3f6fb699999a5e68e9161654622c5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_cb7dd1ae",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalHashCodeMap.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-10T22:07:11Z",
+      "side": 1,
+      "message": "I just copy pasted the test and it fails. Are you running it with the latest changes?",
+      "parentUuid": "e41fceee_19fa6be4",
+      "revId": "138effdecbc3f6fb699999a5e68e9161654622c5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,4 +1,5 @@
 AnalyserNode
+AppBannerPromptResult
 ApplicationCache
 ApplicationCacheErrorEvent
 Array
@@ -14,6 +15,7 @@ AudioParam
 AudioProcessingEvent
 AutocompleteErrorEvent
 BarProp
+BeforeInstallPromptEvent
 BeforeLoadEvent
 BiquadFilterNode
 Blob
@@ -284,6 +286,7 @@ ReferenceError
 RegExp
 Request
 Response
+ServiceWorkerMessageEvent
 SVGAElement
 SVGAltGlyphDefElement
 SVGAltGlyphElement

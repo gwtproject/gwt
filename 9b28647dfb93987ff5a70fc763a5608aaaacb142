@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a44076d4_e2aee8ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-09-11T10:36:05Z",
+      "side": 1,
+      "message": "Could you explain in the commit message what this commit is about, without the need to open a link?",
+      "revId": "9b28647dfb93987ff5a70fc763a5608aaaacb142",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e436ee6e_84c04866",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/XMLElement.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-09-11T10:36:05Z",
+      "side": 1,
+      "message": "Should that check be in \u0027consumeAttributeWithDefault\u0027 instead?",
+      "range": {
+        "startLine": 807,
+        "startChar": 7,
+        "endLine": 807,
+        "endChar": 21
+      },
+      "revId": "9b28647dfb93987ff5a70fc763a5608aaaacb142",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8447f2eb_81e7dc18",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/XMLElement.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-09-11T10:36:05Z",
+      "side": 1,
+      "message": "nit: formatting\n\n if (",
+      "range": {
+        "startLine": 807,
+        "startChar": 4,
+        "endLine": 807,
+        "endChar": 7
+      },
+      "revId": "9b28647dfb93987ff5a70fc763a5608aaaacb142",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e436ee6e_c4bdf0ee",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/XMLElement.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-09-11T10:36:05Z",
+      "side": 1,
+      "message": "Maybe use logger.die() instead?",
+      "range": {
+        "startLine": 808,
+        "startChar": 12,
+        "endLine": 808,
+        "endChar": 36
+      },
+      "revId": "9b28647dfb93987ff5a70fc763a5608aaaacb142",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

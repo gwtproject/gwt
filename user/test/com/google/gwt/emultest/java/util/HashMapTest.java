@@ -818,6 +818,22 @@ public class HashMapTest extends TestMap {
     assertTrue(keys.isEmpty());
   }
 
+  public void testIterationWithCollidingHashCodes_chainChange() {
+    HashMap<Object, String> testMap = new HashMap<>();
+    testMap.put(createObjectWithHashCode(1), "one");
+    testMap.put(createObjectWithHashCode(2), "two");
+
+    Iterator<Object> it = testMap.keySet().iterator();
+    it.next();
+    assertTrue("iterator should have next after first", it.hasNext());
+    it.remove();
+    assertTrue("iterator should have next after removal", it.hasNext());
+
+    it.next();
+    it.remove();
+    assertFalse(it.hasNext());
+  }
+
   private Object createObjectWithHashCode(final int hashCode) {
     return new Object() {
       @Override

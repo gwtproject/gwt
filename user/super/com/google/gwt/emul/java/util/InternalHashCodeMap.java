@@ -16,7 +16,6 @@
 package java.util;
 
 import static java.util.ConcurrentModificationDetector.structureChanged;
-
 import static javaemul.internal.InternalPreconditions.checkElement;
 import static javaemul.internal.InternalPreconditions.checkState;
 
@@ -75,6 +74,7 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
       Entry<K, V> entry = chain[i];
       if (host.equals(key, entry.getKey())) {
         if (chain.length == 1) {
+          ArrayHelper.setLength(chain, 0);
           // remove the whole array
           backingMap.delete(hashCode);
         } else {
@@ -112,7 +112,6 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
       final InternalJsIterator<Object> chains = backingMap.entries();
       int itemIndex = 0;
       Entry<K, V>[] chain = newEntryChain();
-      Entry<K, V>[] lastChain = null;
       Entry<K, V> lastEntry = null;
 
       @Override
@@ -134,7 +133,6 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
       public Entry<K, V> next() {
         checkElement(hasNext());
 
-        lastChain = chain;
         lastEntry = chain[itemIndex++];
         return lastEntry;
       }
@@ -143,14 +141,11 @@ class InternalHashCodeMap<K, V> implements Iterable<Entry<K, V>> {
       public void remove() {
         checkState(lastEntry != null);
 
-        boolean isLastChain = itemIndex == lastChain.length;
         InternalHashCodeMap.this.remove(lastEntry.getKey());
-
-        // If this was not the last item in the chain, our itemIndex just jumped an item.
-        if (!isLastChain) {
+        // Unless we are in a new chain, all items have shifted so our itemIndex should as well...
+        if (itemIndex != 0) {
           itemIndex--;
         }
-
         lastEntry = null;
       }
     };

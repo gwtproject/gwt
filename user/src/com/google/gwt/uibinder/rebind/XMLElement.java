@@ -258,6 +258,10 @@ public class XMLElement {
     }
 
     AttributeParser parser = attributeParsers.getParser(types);
+    if (parser == null) {
+      logger.die("Attribute '" + name + "' cannot be parsed, null parser. " +
+          "Please ensure the content of this attribute matches its assignment method.");
+    }
     return consumeAttributeWithParser(name, parser);
   }
 

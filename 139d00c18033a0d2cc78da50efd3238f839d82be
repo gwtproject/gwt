@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "44725a92_d7a23e9c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-11T22:44:03Z",
+      "side": 1,
+      "message": "That makes the callsites look uglier though, since they have to check for null and synthesize an empty collection.",
+      "parentUuid": "a47f9520_f6b0b4c8",
+      "range": {
+        "startLine": 1124,
+        "startChar": 10,
+        "endLine": 1124,
+        "endChar": 42
+      },
+      "revId": "139d00c18033a0d2cc78da50efd3238f839d82be",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_d6b7b8ba",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/HandleCrossFragmentReferences.java",
         "patchSetId": 6

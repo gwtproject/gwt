@@ -93,6 +93,30 @@
     },
     {
       "key": {
+        "uuid": "8497f201_a125b889",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-11T22:44:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_e803fec6",
+      "range": {
+        "startLine": 54,
+        "startChar": 20,
+        "endLine": 54,
+        "endChar": 29
+      },
+      "revId": "96ac45d74174742d1ac9a11e9d1cd606634cb1ec",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_58ba23a6",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
         "patchSetId": 5

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e41fceee_7ccd9544",
+        "filename": "user/test/com/google/gwt/emultest/java/util/HashMapTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-09-11T12:38:24Z",
+      "side": 1,
+      "message": "How can these be colliding hash codes according to the method description?",
+      "range": {
+        "startLine": 823,
+        "startChar": 4,
+        "endLine": 824,
+        "endChar": 52
+      },
+      "revId": "7ce67cdd6cc08498b9f8253c8d686ca529596984",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

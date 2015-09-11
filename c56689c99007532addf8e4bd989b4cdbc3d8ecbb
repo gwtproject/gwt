@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "44725a92_f7d73a7f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-11T23:46:03Z",
+      "side": 1,
+      "message": "Hmm. Native jstypes shouldn\u0027t be any different than other jstypes in this context so this seems unnecessary and if we want to be conservative we should probably do it for all jstypes.\n\nTo answer your question: native classes can only extend/implement native classes. But a regular class can extend/implement native class.",
+      "parentUuid": "44725a92_9737e6c7",
+      "range": {
+        "startLine": 522,
+        "startChar": 1,
+        "endLine": 523,
+        "endChar": 30
+      },
+      "revId": "c56689c99007532addf8e4bd989b4cdbc3d8ecbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44725a92_f7365ac8",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "44725a92_77324a8b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-11T23:46:03Z",
+      "side": 1,
+      "message": "Yeah, I\u0027m planning to have a check to ensure there are not static initialization (at least at the beginning - this might be relaxed later).",
+      "parentUuid": "44725a92_f7365ac8",
+      "range": {
+        "startLine": 1304,
+        "startChar": 8,
+        "endLine": 1304,
+        "endChar": 77
+      },
+      "revId": "c56689c99007532addf8e4bd989b4cdbc3d8ecbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44725a92_5742ae05",
         "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2015-09-11T23:27:04Z",
       "side": 1,
       "message": "This seems out of place now.",
+      "range": {
+        "startLine": 190,
+        "startChar": 5,
+        "endLine": 190,
+        "endChar": 24
+      },
+      "revId": "c56689c99007532addf8e4bd989b4cdbc3d8ecbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_97e44653",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-11T23:46:03Z",
+      "side": 1,
+      "message": "What do you mean? This is making it consistent with the current casting behavior (we couldn\u0027t change the cast behavior due inbox).",
+      "parentUuid": "44725a92_5742ae05",
       "range": {
         "startLine": 190,
         "startChar": 5,

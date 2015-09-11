@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "44725a92_142bd418",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-11T21:53:28Z",
+      "side": 1,
+      "message": "ack",
+      "parentUuid": "44ab3af0_f2f000a0",
+      "range": {
+        "startLine": 227,
+        "startChar": 1,
+        "endLine": 228,
+        "endChar": 65
+      },
+      "revId": "395f27a6e70b9210164d3eb78ab4524246cac810",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44ab3af0_8fe9992c",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/TypeTightenerTest.java",
         "patchSetId": 1

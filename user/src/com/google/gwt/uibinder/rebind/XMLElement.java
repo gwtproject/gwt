@@ -804,6 +804,10 @@ public class XMLElement {
 
   private String consumeAttributeWithParser(String name, AttributeParser parser)
       throws UnableToCompleteException {
+    if(parser == null) {
+      throw new NullPointerException("Attribute '" + name + "' cannot be parsed, null parser. " +
+          "Please ensure the content of this attribute matches its assignment method.");
+    }
     String value = parser.parse(this, consumeRawAttribute(name));
     designTime.putAttribute(this, name, value);
     return value;

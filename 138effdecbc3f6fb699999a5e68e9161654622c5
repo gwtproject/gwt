@@ -52,6 +52,24 @@
       "revId": "138effdecbc3f6fb699999a5e68e9161654622c5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4ef2afe_ee55433a",
+        "filename": "user/super/com/google/gwt/emul/java/util/InternalHashCodeMap.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-11T00:27:12Z",
+      "side": 1,
+      "message": "https://gwt-review.googlesource.com/13489",
+      "parentUuid": "c4ef2afe_cb7dd1ae",
+      "revId": "138effdecbc3f6fb699999a5e68e9161654622c5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

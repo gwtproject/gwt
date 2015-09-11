@@ -91,7 +91,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
   }
 
   public boolean canBeImplementedExternally() {
-    return isJsFunctionMethod() || isJsInterfaceMethod();
+    return isJsNative() || isJsFunctionMethod() || isJsInterfaceMethod();
   }
 
   private boolean isJsInterfaceMethod() {
@@ -574,6 +574,10 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
 
   public boolean isForwarding() {
     return isForwarding;
+  }
+
+  public boolean isJsNative() {
+    return enclosingType.isJsNative();
   }
 
   @Override

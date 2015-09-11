@@ -299,6 +299,9 @@ public class MakeCallsStatic {
       if (method.isAbstract()) {
         return false;
       }
+      if (method.isJsNative()) {
+        return false;
+      }
       if (method == program.getNullMethod()) {
         // Special case: we don't make calls to this method static.
         return false;
@@ -306,10 +309,6 @@ public class MakeCallsStatic {
 
       if (!method.getEnclosingType().getMethods().contains(method)) {
         // The target method was already pruned (TypeTightener will fix this).
-        return false;
-      }
-
-      if (program.isJsTypePrototype(method.getEnclosingType())) {
         return false;
       }
 

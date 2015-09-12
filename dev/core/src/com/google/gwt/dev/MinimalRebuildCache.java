@@ -162,8 +162,8 @@ public class MinimalRebuildCache implements Serializable {
   private final Set<String> deletedDiskSourcePaths = Sets.newHashSet();
   private final Set<String> deletedResourcePaths = Sets.newHashSet();
   private final Set<String> dualJsoImplInterfaceNames = Sets.newHashSet();
-  private final Set<String> exportedGlobalNames = Sets.newHashSet();
-  private final Multimap<String, String> exportedGlobalNamesByTypeName = HashMultimap.create();
+  private final Set<String> globalNames = Sets.newHashSet();
+  private final Multimap<String, String> globalNamesByTypeName = HashMultimap.create();
   private final ArtifactSet generatedArtifacts = new ArtifactSet();
   private final Multimap<String, String> generatedCompilationUnitNamesByReboundTypeNames =
       HashMultimap.create();
@@ -196,9 +196,9 @@ public class MinimalRebuildCache implements Serializable {
   private StringAnalyzableTypeEnvironment typeEnvironment = new StringAnalyzableTypeEnvironment();
   private final Multimap<String, String> typeNamesByReferencingTypeName = HashMultimap.create();
 
-  public boolean addExportedGlobalName(String exportedGlobalName, String inTypeName) {
-    exportedGlobalNamesByTypeName.put(inTypeName, exportedGlobalName);
-    return exportedGlobalNames.add(exportedGlobalName);
+  public boolean addGlobalName(String globalName, String inTypeName) {
+    globalNamesByTypeName.put(inTypeName, globalName);
+    return globalNames.add(globalName);
   }
 
   /**
@@ -472,7 +472,7 @@ public class MinimalRebuildCache implements Serializable {
     copyMap(that.sourceMapsByTypeName, this.sourceMapsByTypeName);
     copyMap(that.statementRangesByTypeName, this.statementRangesByTypeName);
 
-    copyMultimap(that.exportedGlobalNamesByTypeName, this.exportedGlobalNamesByTypeName);
+    copyMultimap(that.globalNamesByTypeName, this.globalNamesByTypeName);
     copyMultimap(that.generatedCompilationUnitNamesByReboundTypeNames,
         this.generatedCompilationUnitNamesByReboundTypeNames);
     copyMultimap(that.nestedTypeNamesByUnitTypeName, this.nestedTypeNamesByUnitTypeName);
@@ -487,7 +487,7 @@ public class MinimalRebuildCache implements Serializable {
     copyCollection(that.deletedDiskSourcePaths, this.deletedDiskSourcePaths);
     copyCollection(that.deletedResourcePaths, this.deletedResourcePaths);
     copyCollection(that.dualJsoImplInterfaceNames, this.dualJsoImplInterfaceNames);
-    copyCollection(that.exportedGlobalNames, this.exportedGlobalNames);
+    copyCollection(that.globalNames, this.globalNames);
     copyCollection(that.generatedArtifacts, this.generatedArtifacts);
     copyCollection(that.jsoStatusChangedTypeNames, this.jsoStatusChangedTypeNames);
     copyCollection(that.jsoTypeNames, this.jsoTypeNames);
@@ -682,8 +682,8 @@ public class MinimalRebuildCache implements Serializable {
 
   public void removeJsInteropNames(String inTypeName) {
     Collection<String> exportedGlobalNamesForType =
-        exportedGlobalNamesByTypeName.removeAll(inTypeName);
-    exportedGlobalNames.removeAll(exportedGlobalNamesForType);
+        globalNamesByTypeName.removeAll(inTypeName);
+    globalNames.removeAll(exportedGlobalNamesForType);
   }
 
   public void removeReferencesFrom(String fromTypeName) {
@@ -769,8 +769,8 @@ public class MinimalRebuildCache implements Serializable {
         && Objects.equal(this.deletedResourcePaths, that.deletedResourcePaths)
         && Objects.equal(this.dualJsoImplInterfaceNames, that.dualJsoImplInterfaceNames)
         && Objects.equal(this.generatedArtifacts, that.generatedArtifacts)
-        && Objects.equal(this.exportedGlobalNames, that.exportedGlobalNames)
-        && Objects.equal(this.exportedGlobalNamesByTypeName, that.exportedGlobalNamesByTypeName)
+        && Objects.equal(this.globalNames, that.globalNames)
+        && Objects.equal(this.globalNamesByTypeName, that.globalNamesByTypeName)
         && Objects.equal(this.generatedCompilationUnitNamesByReboundTypeNames,
             that.generatedCompilationUnitNamesByReboundTypeNames)
         && this.intTypeMapper.hasSameContent(that.intTypeMapper)

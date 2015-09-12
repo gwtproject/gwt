@@ -60,11 +60,11 @@ public class JsInteropRestrictionChecker extends JVisitor {
     }
   }
 
-  private Map<String, String> currentJsTypeMethodNameByGetterNames;
-  private Map<String, String> currentJsTypeMethodNameByMemberNames;
-  private Map<String, String> currentJsTypeMethodNameBySetterNames;
-  private Set<JMethod> currentJsTypeProcessedMethods;
-  private Map<String, JType> currentJsTypePropertyTypeByName;
+  private Map<String, String> currentJsMethodNameByGetterNames;
+  private Map<String, String> currentJsMethodNameBySetterNames;
+  private Map<String, JType> currentJsPropertyTypeByName;
+  private Map<String, String> currentLocalNameByMemberNames;
+  private Set<JMethod> currentProcessedMethods;
   private JDeclaredType currentType;
   private boolean hasErrors;
   private final JProgram jprogram;
@@ -87,11 +87,11 @@ public class JsInteropRestrictionChecker extends JVisitor {
   @Override
   public boolean visit(JDeclaredType x, Context ctx) {
     assert currentType == null;
-    currentJsTypeProcessedMethods = Sets.newHashSet();
-    currentJsTypePropertyTypeByName = Maps.newHashMap();
-    currentJsTypeMethodNameByMemberNames = Maps.newHashMap();
-    currentJsTypeMethodNameByGetterNames = Maps.newHashMap();
-    currentJsTypeMethodNameBySetterNames = Maps.newHashMap();
+    currentProcessedMethods = Sets.newHashSet();
+    currentJsPropertyTypeByName = Maps.newHashMap();
+    currentJsMethodNameByGetterNames = Maps.newHashMap();
+    currentJsMethodNameBySetterNames = Maps.newHashMap();
+    currentLocalNameByMemberNames = Maps.newHashMap();
     minimalRebuildCache.removeJsInteropNames(x.getName());
     currentType = x;
 
@@ -102,7 +102,7 @@ public class JsInteropRestrictionChecker extends JVisitor {
     } else if (x.isJsType() && x instanceof JInterfaceType) {
       checkJsInterface(x);
     } else {
-      checkConstructors(x);
+      checkJsConstructors(x);
     }
 
     // Perform custom class traversal to examine fields and methods of this class and all
@@ -117,8 +117,8 @@ public class JsInteropRestrictionChecker extends JVisitor {
     return false;
   }
 
-  private void checkConstructors(JDeclaredType x) {
-    List<JMethod> exportedCtors = FluentIterable
+  private void checkJsConstructors(JDeclaredType x) {
+    List<JMethod> jsConstructors = FluentIterable
         .from(x.getMethods())
         .filter(new Predicate<JMethod>() {
            @Override
@@ -127,30 +127,30 @@ public class JsInteropRestrictionChecker extends JVisitor {
            }
         }).toList();
 
-    if (exportedCtors.isEmpty()) {
+    if (jsConstructors.isEmpty()) {
       return;
     }
 
-    if (exportedCtors.size() > 1) {
-      logError("More than one constructor exported for %s.", x.getName());
+    if (jsConstructors.size() > 1) {
+      logError("More than one JsConstructor exists for %s.", x.getName());
     }
 
-    final JConstructor exportedCtor = (JConstructor) exportedCtors.get(0);
-    if (!exportedCtor.getJsName().isEmpty()) {
-      logError("Constructor '%s' cannot have an export name.", exportedCtor.getQualifiedName());
+    final JConstructor jsConstructor = (JConstructor) jsConstructors.get(0);
+    if (!jsConstructor.getJsName().isEmpty()) {
+      logError("Constructor '%s' cannot have an export name.", jsConstructor.getQualifiedName());
     }
 
     boolean anyNonDelegatingConstructor = Iterables.any(x.getMethods(), new Predicate<JMethod>() {
       @Override
       public boolean apply(JMethod method) {
-        return method != exportedCtor && method instanceof JConstructor
-            && !isDelegatingToConstructor((JConstructor) method, exportedCtor);
+        return method != jsConstructor && method instanceof JConstructor
+            && !isDelegatingToConstructor((JConstructor) method, jsConstructor);
       }
     });
 
     if (anyNonDelegatingConstructor) {
-      logError("Constructor '%s' can only be exported if all constructors in the class are "
-          + "delegating to it.", exportedCtor.getQualifiedName());
+      logError("Constructor '%s' can be a JsConstructor only if all constructors in the class are "
+          + "delegating to it.", jsConstructor.getQualifiedName());
     }
   }
 
@@ -169,9 +169,9 @@ public class JsInteropRestrictionChecker extends JVisitor {
     }
 
     if (x.needsVtable()) {
-      checkJsTypeFieldName(x, x.getJsName());
+      checkLocalName(x);
     } else if (currentType == x.getEnclosingType()) {
-      checkExportName(x);
+      checkGlobalName(x);
     }
 
     return false;
@@ -179,49 +179,42 @@ public class JsInteropRestrictionChecker extends JVisitor {
 
   @Override
   public boolean visit(JMethod x, Context ctx) {
-    if (!currentJsTypeProcessedMethods.add(x)) {
+    if (!currentProcessedMethods.add(x)) {
       return false;
     }
-    currentJsTypeProcessedMethods.addAll(x.getOverriddenMethods());
+    currentProcessedMethods.addAll(x.getOverriddenMethods());
 
     if (!x.isOrOverridesJsMethod()) {
       return false;
     }
 
     if (x.needsVtable()) {
-      checkJsTypeMethod(x);
+      checkJsMethod(x);
     } else if (currentType == x.getEnclosingType()) {
-      checkExportName(x);
-    }
-
-    if (currentType == x.getEnclosingType()) {
-      if (x.isJsPropertyAccessor() && !currentType.isJsType()) {
-        if (currentType instanceof JInterfaceType) {
-          logError("Method '%s' can't be a JsProperty since interface '%s' is not a JsType.",
-              x.getName(), x.getEnclosingType().getName());
-        } else {
-          logError("Method '%s' can't be a JsProperty since '%s' "
-              + "is not an interface.", x.getName(), x.getEnclosingType().getName());
-        }
-      }
+      checkGlobalName(x);
     }
 
     return false;
   }
 
-  private void checkExportName(JMember x) {
-    boolean success = minimalRebuildCache.addExportedGlobalName(x.getQualifiedExportName(),
-        currentType.getName());
-    if (!success) {
-      logError("Member '%s' can't be exported because the global name '%s' is already taken.",
+  private void checkGlobalName(JMember x) {
+    if (!minimalRebuildCache.addGlobalName(x.getQualifiedExportName(), currentType.getName())) {
+      logError("'%s' can't be exported because the global name '%s' is already taken.",
           x.getQualifiedName(), x.getQualifiedExportName());
     }
   }
 
-  private void checkInconsistentPropertyType(String propertyName, String enclosingTypeName,
-      JType parameterType) {
-    JType recordedType = currentJsTypePropertyTypeByName.put(propertyName, parameterType);
-    if (recordedType != null && recordedType != parameterType) {
+  private void checkLocalName(JMember member) {
+    String jsName = member.getJsName();
+    if (currentLocalNameByMemberNames.put(jsName, member.getQualifiedName()) != null) {
+      logError("'%s' can't be exported in type '%s' because the name '%s' is already taken.",
+          member.getQualifiedName(), currentType.getName(), jsName);
+    }
+  }
+
+  private void checkJsPropertyType(String propertyName, String enclosingTypeName, JType type) {
+    JType recordedType = currentJsPropertyTypeByName.put(propertyName, type);
+    if (recordedType != null && recordedType != type) {
       logError("The setter and getter for JsProperty '%s' in type '%s' must have consistent types.",
           propertyName, enclosingTypeName);
     }
@@ -237,16 +230,7 @@ public class JsInteropRestrictionChecker extends JVisitor {
     }
   }
 
-  private void checkJsTypeFieldName(JField field, String memberName) {
-    boolean success =
-        currentJsTypeMethodNameByMemberNames.put(memberName, field.getQualifiedName()) == null;
-    if (!success) {
-      logError("Field '%s' can't be exported in type '%s' because the member name "
-          + "'%s' is already taken.", field.getQualifiedName(), currentType.getName(), memberName);
-    }
-  }
-
-  private void checkJsTypeMethod(JMethod method) {
+  private void checkJsMethod(JMethod method) {
     if (method.isSynthetic() && !method.isForwarding()) {
       // A name slot taken up by a synthetic method, such as a bridge method for a generic method,
       // is not the fault of the user and so should not be reported as an error. JS generation
@@ -279,58 +263,54 @@ public class JsInteropRestrictionChecker extends JVisitor {
             qualifiedMethodName);
         return;
       }
-      if (currentJsTypeMethodNameByGetterNames.put(jsMemberName, qualifiedMethodName) != null) {
+      if (currentJsMethodNameByGetterNames.put(jsMemberName, qualifiedMethodName) != null) {
         // Don't allow multiple getters for the same property name.
         logError("There can't be more than one getter for JsProperty '%s' in type '%s'.",
             jsMemberName, typeName);
         return;
       }
       checkNameCollisionForGetterAndRegular(jsMemberName, typeName);
-      checkInconsistentPropertyType(jsMemberName, typeName, method.getOriginalReturnType());
+      checkJsPropertyType(jsMemberName, typeName, method.getOriginalReturnType());
     } else if (accessorType == JsPropertyAccessorType.SETTER) {
       if (method.getParams().size() != 1 || method.getType() != JPrimitiveType.VOID) {
         logError("There needs to be single parameter and void return type for the JsProperty setter"
             + " '%s'.", qualifiedMethodName);
         return;
       }
-      if (currentJsTypeMethodNameBySetterNames.put(jsMemberName, qualifiedMethodName) != null) {
+      if (currentJsMethodNameBySetterNames.put(jsMemberName, qualifiedMethodName) != null) {
         // Don't allow multiple setters for the same property name.
         logError("There can't be more than one setter for JsProperty '%s' in type '%s'.",
             jsMemberName, typeName);
         return;
       }
       checkNameCollisionForSetterAndRegular(jsMemberName, typeName);
-      checkInconsistentPropertyType(jsMemberName, typeName,
+      checkJsPropertyType(jsMemberName, typeName,
           Iterables.getOnlyElement(method.getParams()).getType());
     } else if (accessorType == JsPropertyAccessorType.UNDEFINED) {
       // We couldn't extract the JsPropertyType.
       logError("JsProperty '%s' doesn't follow Java Bean naming conventions.", qualifiedMethodName);
     } else {
-      // If it's just an regular JsType method.
-      if (currentJsTypeMethodNameByMemberNames.put(jsMemberName, qualifiedMethodName) != null) {
-        logError("Method '%s' can't be exported in type '%s' because the member name "
-            + "'%s' is already taken.", qualifiedMethodName, currentType.getName(), jsMemberName);
-      }
+      checkLocalName(method);
       checkNameCollisionForGetterAndRegular(jsMemberName, typeName);
       checkNameCollisionForSetterAndRegular(jsMemberName, typeName);
     }
   }
 
   private void checkNameCollisionForGetterAndRegular(String getterName, String typeName) {
-    if (currentJsTypeMethodNameByGetterNames.containsKey(getterName)
-        && currentJsTypeMethodNameByMemberNames.containsKey(getterName)) {
-      logError("The JsType member '%s' and JsProperty '%s' can't both be named "
-          + "'%s' in type '%s'.", currentJsTypeMethodNameByMemberNames.get(getterName),
-          currentJsTypeMethodNameByGetterNames.get(getterName), getterName, typeName);
+    if (currentJsMethodNameByGetterNames.containsKey(getterName)
+        && currentLocalNameByMemberNames.containsKey(getterName)) {
+      logError("'%s' and '%s' can't both be named '%s' in type '%s'.",
+          currentLocalNameByMemberNames.get(getterName),
+          currentJsMethodNameByGetterNames.get(getterName), getterName, typeName);
     }
   }
 
   private void checkNameCollisionForSetterAndRegular(String setterName, String typeName) {
-    if (currentJsTypeMethodNameBySetterNames.containsKey(setterName)
-        && currentJsTypeMethodNameByMemberNames.containsKey(setterName)) {
-      logError("The JsType member '%s' and JsProperty '%s' can't both be named "
-          + "'%s' in type '%s'.", currentJsTypeMethodNameByMemberNames.get(setterName),
-          currentJsTypeMethodNameBySetterNames.get(setterName), setterName, typeName);
+    if (currentJsMethodNameBySetterNames.containsKey(setterName)
+        && currentLocalNameByMemberNames.containsKey(setterName)) {
+      logError("'%s' and '%s' can't both be named '%s' in type '%s'.",
+          currentLocalNameByMemberNames.get(setterName),
+          currentJsMethodNameBySetterNames.get(setterName), setterName, typeName);
     }
   }
 

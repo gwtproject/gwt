@@ -47,8 +47,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Method 'test.EntryPoint$Buggy.doIt(Ltest/EntryPoint$Bar;)V' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'doIt' is already taken.");
+        "'test.EntryPoint$Buggy.doIt(Ltest/EntryPoint$Bar;)V' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the name 'doIt' is already taken.");
   }
 
   public void testCollidingAccidentalOverrideAbstractMethodFails() throws Exception {
@@ -69,8 +69,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "public static class Buggy {}  // Unrelated class");
 
     assertBuggyFails(
-        "Method 'test.EntryPoint$Baz.doIt(Ltest/EntryPoint$Bar;)V' can't be exported in type "
-        + "'test.EntryPoint$Baz' because the member name 'doIt' is already taken.");
+        "'test.EntryPoint$Baz.doIt(Ltest/EntryPoint$Bar;)V' can't be exported in type "
+        + "'test.EntryPoint$Baz' because the name 'doIt' is already taken.");
   }
 
   public void testCollidingAccidentalOverrideHalfAndHalfFails() throws Exception {
@@ -93,8 +93,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "public static class Buggy extends Parent implements Bar {}");
 
     assertBuggyFails(
-        "Method 'test.EntryPoint$Parent.doIt(Ltest/EntryPoint$Foo;)V' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'doIt' is already taken.");
+        "'test.EntryPoint$Parent.doIt(Ltest/EntryPoint$Foo;)V' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the name 'doIt' is already taken.");
   }
 
   public void testCollidingFieldExportsFails() throws Exception {
@@ -108,7 +108,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Member 'test.EntryPoint$Buggy.display' can't be exported because the "
+        "'test.EntryPoint$Buggy.display' can't be exported because the "
         + "global name 'test.EntryPoint.Buggy.show' is already taken.");
   }
 
@@ -232,12 +232,10 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "The JsType member 'test.EntryPoint$IBuggy.x(Z)Z' and JsProperty "
-        + "'test.EntryPoint$IBuggy.getX()I' can't both be named 'x' in "
-        + "type 'test.EntryPoint$IBuggy'.",
-        "The JsType member 'test.EntryPoint$Buggy.x(Z)Z' and JsProperty "
-        + "'test.EntryPoint$Buggy.getX()I' can't both be named 'x' in "
-        + "type 'test.EntryPoint$Buggy'.");
+        "'test.EntryPoint$IBuggy.x(Z)Z' and 'test.EntryPoint$IBuggy.getX()I' "
+        + "can't both be named 'x' in type 'test.EntryPoint$IBuggy'.",
+        "'test.EntryPoint$Buggy.x(Z)Z' and 'test.EntryPoint$Buggy.getX()I' "
+        + "can't both be named 'x' in type 'test.EntryPoint$Buggy'.");
   }
 
   public void testCollidingJsTypeAndJsPropertySetterFails() throws Exception {
@@ -256,12 +254,10 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "The JsType member 'test.EntryPoint$IBuggy.x(Z)Z' and JsProperty "
-        + "'test.EntryPoint$IBuggy.setX(I)V' can't both be named 'x' in "
-        + "type 'test.EntryPoint$IBuggy'.",
-        "The JsType member 'test.EntryPoint$Buggy.x(Z)Z' and JsProperty "
-        + "'test.EntryPoint$Buggy.setX(I)V' can't both be named 'x' in "
-        + "type 'test.EntryPoint$Buggy'.");
+        "'test.EntryPoint$IBuggy.x(Z)Z' and 'test.EntryPoint$IBuggy.setX(I)V' "
+        + "can't both be named 'x' in type 'test.EntryPoint$IBuggy'.",
+        "'test.EntryPoint$Buggy.x(Z)Z' and 'test.EntryPoint$Buggy.setX(I)V' "
+        + "can't both be named 'x' in type 'test.EntryPoint$Buggy'.");
   }
 
   public void testCollidingMethodExportsFails() throws Exception {
@@ -275,7 +271,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Member 'test.EntryPoint$Buggy.display()V' can't be exported "
+        "'test.EntryPoint$Buggy.display()V' can't be exported "
         + "because the global name 'test.EntryPoint.Buggy.show' is already taken.");
   }
 
@@ -290,7 +286,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Member 'test.EntryPoint$Buggy.show()V' can't be exported because the "
+        "'test.EntryPoint$Buggy.show()V' can't be exported because the "
         + "global name 'test.EntryPoint.Buggy.show' is already taken.");
   }
 
@@ -304,8 +300,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Method 'test.EntryPoint$Buggy.show()V' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'show' is already taken.");
+        "'test.EntryPoint$Buggy.show()V' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the name 'show' is already taken.");
   }
 
   public void testCollidingMethodToMethodJsTypeFails() throws Exception {
@@ -318,8 +314,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Method 'test.EntryPoint$Buggy.show()V' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'show' is already taken.");
+        "'test.EntryPoint$Buggy.show()V' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the name 'show' is already taken.");
   }
 
   public void testCollidingSubclassExportedFieldToFieldJsTypeSucceeds() throws Exception {
@@ -405,8 +401,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Field 'test.EntryPoint$ParentBuggy.foo' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
+        "'test.EntryPoint$ParentBuggy.foo' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the name 'foo' is already taken.");
   }
 
   public void testCollidingSubclassFieldToMethodJsTypeFails() throws Exception {
@@ -422,8 +418,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Field 'test.EntryPoint$ParentBuggy.foo' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
+        "'test.EntryPoint$ParentBuggy.foo' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the name 'foo' is already taken.");
   }
 
   public void testCollidingSubclassMethodToExportedMethodJsTypeSucceeds() throws Exception {
@@ -459,8 +455,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Method 'test.EntryPoint$Buggy.show()V' can't be exported in type "
-        + "'test.EntryPoint$Buggy2' because the member name 'show' is already taken.");
+        "'test.EntryPoint$Buggy.show()V' can't be exported in type "
+        + "'test.EntryPoint$Buggy2' because the name 'show' is already taken.");
   }
 
   public void testCollidingSubclassMethodToMethodJsTypeFails() throws Exception {
@@ -476,8 +472,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Method 'test.EntryPoint$ParentBuggy.foo()V' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
+        "'test.EntryPoint$ParentBuggy.foo()V' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the name 'foo' is already taken.");
   }
 
   public void testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails() throws Exception {
@@ -503,8 +499,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Method 'test.EntryPoint$Buggy.show()V' can't be exported in type "
-        + "'test.EntryPoint$Buggy2' because the member name 'show' is already taken.");
+        "'test.EntryPoint$Buggy.show()V' can't be exported in type "
+        + "'test.EntryPoint$Buggy2' because the name 'show' is already taken.");
   }
 
   public void testCollidingSyntheticBridgeMethodSucceeds() throws Exception {
@@ -539,8 +535,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Field 'test.EntryPoint$ParentParentBuggy.foo' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
+        "'test.EntryPoint$ParentParentBuggy.foo' can't be exported in type "
+        + "'test.EntryPoint$Buggy' because the name 'foo' is already taken.");
   }
 
   public void testConsistentPropertyTypeSucceeds() throws Exception {
@@ -608,35 +604,6 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         + "must have consistent types.");
   }
 
-  public void testJsPropertyInNonJsTypeFails() throws Exception {
-    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
-    addSnippetClassDecl(
-        "public static class Buggy {",
-        "  @JsProperty",
-        "  public int getX() {return 0;}",
-        "}");
-
-    assertBuggyFails("Method 'getX' can't be a JsProperty since 'test.EntryPoint$Buggy' "
-        + "is not an interface.");
-  }
-
-  public void testJsPropertyInTransitiveNonJsTypeFails() throws Exception {
-    addSnippetImport("com.google.gwt.core.client.js.JsType");
-    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
-    addSnippetClassDecl(
-        "@JsType",
-        "public static interface ParentExported {",
-        "}",
-        "public static interface Exported extends ParentExported {",
-        "  @JsProperty",
-        "  public int getX();",
-        "}",
-        "public static class Buggy {} // Unrelated class");
-
-    assertBuggyFails("Method 'getX' can't be a JsProperty since interface "
-        + "'test.EntryPoint$Exported' is not a JsType.");
-  }
-
   public void testJsTypeInterfaceExtendsNonJsTypeFails() throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsType");
     addSnippetClassDecl(
@@ -649,7 +616,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         + "interface 'test.EntryPoint$IBuggyParent'. This is not recommended.");
   }
 
-  public void testMultiplePrivateConstructorsExportSucceeds() throws Exception {
+  public void testMultiplePrivateJsConstructorsSucceeds() throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsExport");
     addSnippetClassDecl(
         "@JsExport",
@@ -661,7 +628,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggySucceeds();
   }
 
-  public void testMultiplePublicConstructorsAllDelegatesToExportedConstructorSucceeds()
+  public void testMultiplePublicConstructorsAllDelegatesToJsConstructorSucceeds()
       throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsExport");
     addSnippetImport("com.google.gwt.core.client.js.JsNoExport");
@@ -678,7 +645,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggySucceeds();
   }
 
-  public void testMultipleConstructorsNotAllDelegatedToExportedConstructorFails()
+  public void testMultipleConstructorsNotAllDelegatedToJsConstructorFails()
       throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsExport");
     addSnippetImport("com.google.gwt.core.client.js.JsNoExport");
@@ -692,8 +659,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Constructor 'test.EntryPoint$Buggy.EntryPoint$Buggy() <init>' can only be exported if all "
-        + "constructors in the class are delegating to it.");
+        "Constructor 'test.EntryPoint$Buggy.EntryPoint$Buggy() <init>' can be a JsConstructor only "
+        + "if all constructors in the class are delegating to it.");
   }
 
   public void testMultiplePublicConstructorsExportFails() throws Exception {
@@ -702,14 +669,14 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "@JsExport",
         "public static class Buggy {",
         "  public Buggy() {}",
-        "  public Buggy(int a) {}",
+        "  public Buggy(int a) {",
+        "    this();",
+        "  }",
         "}");
 
     assertBuggyFails(
-        "More than one constructor exported for test.EntryPoint$Buggy.",
-        "Constructor 'test.EntryPoint$Buggy.EntryPoint$Buggy() <init>' can only be exported if all "
-        + "constructors in the class are delegating to it.",
-        "Member 'test.EntryPoint$Buggy.EntryPoint$Buggy(I) <init>' can't be "
+        "More than one JsConstructor exists for test.EntryPoint$Buggy.",
+        "'test.EntryPoint$Buggy.EntryPoint$Buggy(I) <init>' can't be "
         + "exported because the global name 'test.EntryPoint.Buggy' is already taken.");
   }
 

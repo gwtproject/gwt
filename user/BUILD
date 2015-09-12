@@ -39,6 +39,7 @@ AugmentedJar(
         "//third_party/java_src/gwt/svn/tools:user_jars",
     ],
     added_roots = [
+        "interop-src",
         "src",
         "super",
     ],
@@ -60,7 +61,10 @@ AugmentedJar(
 java_library(
     name = "gwt-user-bare",
     srcs = glob(
-        ["src/**/*.java"],
+        [
+            "src/**/*.java",
+            "interop-src/**/*.java",
+        ],
         exclude = [
             "src/com/google/gwt/junit/**/*.java",  # see gwt-testing
             "**/super/**",
@@ -395,7 +399,7 @@ java_library(
 # GWT JsInterop annotations in a separate library used by hybrid app projects
 java_library(
     name = "gwt-jsinterop-annotations",
-    srcs = [
+    srcs = glob(["interop-src/**/*.java"]) + [
         "src/com/google/gwt/core/client/js/JsExport.java",
         "src/com/google/gwt/core/client/js/JsFunction.java",
         "src/com/google/gwt/core/client/js/JsNamespace.java",
@@ -634,6 +638,7 @@ filegroup(
         [
             "build.xml",
             "javadoc/**/*",
+            "interop-src/**/*",
             "src/**/*",
             "style/**/*",
             "super/**/*",

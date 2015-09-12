@@ -23,6 +23,7 @@ public final class Byte extends Number implements Comparable<Byte> {
   public static final byte MIN_VALUE = (byte) 0x80;
   public static final byte MAX_VALUE = (byte) 0x7F;
   public static final int SIZE = 8;
+  public static final int BYTES = SIZE / Byte.SIZE;
   public static final Class<Byte> TYPE = byte.class;
 
   /**
@@ -41,11 +42,6 @@ public final class Byte extends Number implements Comparable<Byte> {
     return Byte.valueOf((byte) __decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
   }
 
-  /**
-   * @skip
-   *
-   * Here for shared implementation with Arrays.hashCode
-   */
   public static int hashCode(byte b) {
     return b;
   }
@@ -61,6 +57,14 @@ public final class Byte extends Number implements Comparable<Byte> {
 
   public static String toString(byte b) {
     return String.valueOf(b);
+  }
+
+  public static int toUnsignedInt(byte b) {
+    return b & 0xff;
+  }
+
+  public static long toUnsignedLong(byte b) {
+    return toUnsignedInt(b);
   }
 
   public static Byte valueOf(byte b) {

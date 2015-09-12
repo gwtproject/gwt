@@ -23,6 +23,7 @@ public final class Short extends Number implements Comparable<Short> {
   public static final short MIN_VALUE = (short) 0x8000;
   public static final short MAX_VALUE = (short) 0x7fff;
   public static final int SIZE = 16;
+  public static final int BYTES = SIZE / Byte.SIZE;
   public static final Class<Short> TYPE = short.class;
 
   /**
@@ -41,9 +42,6 @@ public final class Short extends Number implements Comparable<Short> {
     return Short.valueOf((short) __decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
   }
 
-  /**
-   * @skip Here for shared implementation with Arrays.hashCode
-   */
   public static int hashCode(short s) {
     return s;
   }
@@ -63,6 +61,14 @@ public final class Short extends Number implements Comparable<Short> {
 
   public static String toString(short b) {
     return String.valueOf(b);
+  }
+
+  public static int toUnsignedInt(short s) {
+    return s & 0xffff;
+  }
+
+  public static long toUnsignedLong(short s) {
+    return toUnsignedInt(s);
   }
 
   public static Short valueOf(short s) {

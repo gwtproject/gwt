@@ -291,7 +291,7 @@ abstract class AbstractNavigableMap<K, V> extends AbstractMap<K, V> implements N
     }
   }
 
-  private static <K, V> Entry<K, V> copyOf(Entry<K, V> entry) {
+  static <K, V> Entry<K, V> copyOf(Entry<K, V> entry) {
     return entry == null ? null : new SimpleImmutableEntry<K, V>(entry);
   }
 

@@ -115,7 +115,7 @@ public class JsInlinerTest extends OptimizerTestBase {
         "function getP(t) { return t.a; }",
         "function b1(o) { getP(o) == getP(o); } b1({});");
     expected = Joiner.on('\n').join(
-        "function b1(o){o.a==o.a;}",
+        "function b1(o){}",
         "b1({});");
     verifyOptimized(expected, input);
 

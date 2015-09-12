@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44725a92_fa600195",
+        "filename": "user/test/com/google/gwt/dev/jjs/optimized/ArrayListOptimizationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-12T05:12:58Z",
+      "side": 1,
+      "message": "remove spaces",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 2
+      },
+      "revId": "b2ce9372eeb74871dc9d39a21def6d6124ae4290",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

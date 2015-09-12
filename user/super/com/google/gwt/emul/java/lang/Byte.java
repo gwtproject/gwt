@@ -23,6 +23,7 @@ public final class Byte extends Number implements Comparable<Byte> {
   public static final byte MIN_VALUE = (byte) 0x80;
   public static final byte MAX_VALUE = (byte) 0x7F;
   public static final int SIZE = 8;
+  public static final int BYTES = SIZE / Byte.SIZE;
   public static final Class<Byte> TYPE = byte.class;
 
   /**
@@ -38,14 +39,9 @@ public final class Byte extends Number implements Comparable<Byte> {
   }
 
   public static Byte decode(String s) throws NumberFormatException {
-    return Byte.valueOf((byte) __decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
+    return valueOf((byte) __decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
   }
 
-  /**
-   * @skip
-   *
-   * Here for shared implementation with Arrays.hashCode
-   */
   public static int hashCode(byte b) {
     return b;
   }
@@ -77,7 +73,7 @@ public final class Byte extends Number implements Comparable<Byte> {
   }
 
   public static Byte valueOf(String s, int radix) throws NumberFormatException {
-    return Byte.valueOf(Byte.parseByte(s, radix));
+    return valueOf(parseByte(s, radix));
   }
 
   private final transient byte value;

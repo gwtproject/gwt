@@ -66,6 +66,20 @@ public final class Math {
     return Math.acos(x);
   }-*/;
 
+  public static int addExact(int x, int y) {
+    int r = x + y;
+    // "Hacker's Delight" 2-12 Overflow if both arguments have the opposite sign of the result
+    throwOverflowIf(((x ^ r) & (y ^ r)) < 0);
+    return r;
+  }
+
+  public static long addExact(long x, long y) {
+    long r = x + y;
+    // "Hacker's Delight" 2-12 Overflow if both arguments have the opposite sign of the result
+    throwOverflowIf(((x ^ r) & (y ^ r)) < 0);
+    return r;
+  }
+
   public static native double asin(double x) /*-{
     return Math.asin(x);
   }-*/;
@@ -106,6 +120,16 @@ public final class Math {
     return (Math.exp(x) + Math.exp(-x)) / 2.0;
   }
 
+  public static int decrementExact(int a) {
+    throwOverflowIf(a == Integer.MIN_VALUE);
+    return a - 1;
+  }
+
+  public static long decrementExact(long a) {
+    throwOverflowIf(a == Long.MIN_VALUE);
+    return a - 1;
+  }
+
   public static native double exp(double x) /*-{
     return Math.exp(x);
   }-*/;
@@ -127,8 +151,44 @@ public final class Math {
     return Math.floor(x);
   }-*/;
 
+  public static int floorDiv(int x, int y) {
+    int r = x / y;
+    // if the signs are different and modulo not zero, round down
+    if ((x ^ y) < 0 && (r * y != x)) {
+      r--;
+    }
+    return r;
+  }
+
+  public static long floorDiv(long x, long y) {
+    long r = x / y;
+    // if the signs are different and modulo not zero, round down
+    if ((x ^ y) < 0 && (r * y != x)) {
+      r--;
+    }
+    return r;
+  }
+
+  public static int floorMod(int x, int y) {
+    return x - floorDiv(x, y) * y;
+  }
+
+  public static long floorMod(long x, long y) {
+    return x - floorDiv(x, y) * y;
+  }
+
   public static double hypot(double x, double y) {
     return sqrt(x * x + y * y);
+  }
+
+  public static int incrementExact(int a) {
+    throwOverflowIf(a == Integer.MAX_VALUE);
+    return a + 1;
+  }
+
+  public static long incrementExact(long a) {
+    throwOverflowIf(a == Long.MAX_VALUE);
+    return a + 1;
   }
 
   public static native double log(double x) /*-{
@@ -175,6 +235,29 @@ public final class Math {
     return x < y ? x : y;
   }
 
+  public static int multiplyExact(int x, int y) {
+    long r = (long) x * (long) y;
+    int ir = (int) r;
+    throwOverflowIf(ir != r);
+    return ir;
+  }
+
+  public static long multiplyExact(long x, long y) {
+    long r = x * y;
+    throwOverflowIf((x == Long.MIN_VALUE && y == -1) || (y != 0 && (r / y != x)));
+    return r;
+  }
+
+  public static int negateExact(int a) {
+    throwOverflowIf(a == Integer.MIN_VALUE);
+    return -a;
+  }
+
+  public static long negateExact(long a) {
+    throwOverflowIf(a == Long.MIN_VALUE);
+    return -a;
+  }
+
   public static native double pow(double x, double exp) /*-{
     return Math.pow(x, exp);
   }-*/;
@@ -202,6 +285,22 @@ public final class Math {
   public static int round(float x) {
     double roundedValue = round0(x);
     return unsafeCastToInt(roundedValue);
+  }
+
+  public static int subtractExact(int x, int y) {
+    int r = x - y;
+    // "Hacker's Delight" Overflow if the arguments have different signs and
+    // the sign of the result is different than the sign of x
+    throwOverflowIf(((x ^ y) & (x ^ r)) < 0);
+    return r;
+  }
+
+  public static long subtractExact(long x, long y) {
+    long r = x - y;
+    // "Hacker's Delight" Overflow if the arguments have different signs and
+    // the sign of the result is different than the sign of x
+    throwOverflowIf(((x ^ y) & (x ^ r)) < 0);
+    return r;
   }
 
   private static native int unsafeCastToInt(double d) /*-{
@@ -283,6 +382,12 @@ public final class Math {
     return x * PI_UNDER_180;
   }
 
+  public static int toIntExact(long x) {
+    int ix = (int) x;
+    throwOverflowIf(ix != x);
+    return ix;
+  }
+
   public static double toRadians(double x) {
     return x * PI_OVER_180;
   }
@@ -290,4 +395,10 @@ public final class Math {
   private static native double round0(double x) /*-{
     return Math.round(x);
   }-*/;
+
+  private static void throwOverflowIf(boolean overflowCondition) {
+    if (overflowCondition) {
+      throw new ArithmeticException("overflow");
+    }
+  }
 }

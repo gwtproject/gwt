@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import java.math.BigInteger;
+
 /**
  * Wraps a primitive <code>long</code> as an object.
  */
@@ -49,14 +51,32 @@ public final class Long extends Number implements Comparable<Long> {
     }
   }
 
+  public static int compareUnsigned(long x, long y) {
+    return compare(x + MIN_VALUE, y + MIN_VALUE);
+  }
+
   public static Long decode(String s) throws NumberFormatException {
     __Decode decode = __decodeNumberString(s);
     return valueOf(decode.payload, decode.radix);
   }
 
-  /**
-   * @skip Here for shared implementation with Arrays.hashCode
-   */
+  public static long divideUnsigned(long dividend, long divisor) {
+    // signed comparison
+    if (divisor < 0L) {
+      // Answer must be 0 or 1 depending on relative magnitude
+      // of dividend and divisor.
+      return compareUnsigned(dividend, divisor) < 0 ? 0L : 1L;
+    }
+
+    //  Both inputs non-negative
+    if (dividend > 0) {
+      return dividend / divisor;
+    }
+
+    return toUnsignedBigInteger(dividend).
+        divide(toUnsignedBigInteger(divisor)).longValue();
+  }
+
   public static int hashCode(long l) {
     return (int) l;
   }
@@ -72,6 +92,14 @@ public final class Long extends Number implements Comparable<Long> {
 
   public static long lowestOneBit(long i) {
     return i & -i;
+  }
+
+  public static long max(long a, long b) {
+    return Math.max(a, b);
+  }
+
+  public static long min(long a, long b) {
+    return Math.min(a, b);
   }
 
   public static int numberOfLeadingZeros(long i) {
@@ -98,6 +126,57 @@ public final class Long extends Number implements Comparable<Long> {
 
   public static long parseLong(String s, int radix) throws NumberFormatException {
     return __parseAndValidateLong(s, radix);
+  }
+
+  public static long parseUnsignedLong(String s) throws NumberFormatException {
+    return parseUnsignedLong(s, 10);
+  }
+
+  public static long parseUnsignedLong(String s, int radix) throws NumberFormatException {
+    if (s == null)  {
+      throw NumberFormatException.forNullInputString();
+    }
+
+    int len = s.length();
+    if (len == 0) {
+      throw NumberFormatException.forInputString(s);
+    }
+
+    if (s.charAt(0) == '-') {
+      throw NumberFormatException.forInputString(s);
+    }
+
+    if (len <= 12 || // Long.MAX_VALUE in Character.MAX_RADIX is 13 digits
+        (radix == 10 && len <= 18)) { // Long.MAX_VALUE in base 10 is 19 digits
+      return parseLong(s, radix);
+    }
+
+    long first = parseLong(s.substring(0, len - 1), radix);
+    int second = Character.digit(s.charAt(len - 1), radix);
+    if (second < 0) {
+      throw NumberFormatException.forInputString(s);
+    }
+    long result = first * radix + second;
+    // check for overflow
+    if (compareUnsigned(result, first) < 0) {
+      throw NumberFormatException.forInputString(s);
+    }
+    return result;
+  }
+
+  public static long remainderUnsigned(long dividend, long divisor) {
+    // signed comparisons
+    if (dividend > 0 && divisor > 0) {
+      return dividend % divisor;
+    }
+
+    // Avoid explicit check for 0 divisor
+    if (compareUnsigned(dividend, divisor) < 0) {
+      return dividend;
+    }
+
+    return toUnsignedBigInteger(dividend).
+        remainder(toUnsignedBigInteger(divisor)).longValue();
   }
 
   public static long reverse(long i) {
@@ -143,6 +222,10 @@ public final class Long extends Number implements Comparable<Long> {
     } else {
       return 1;
     }
+  }
+
+  public static long sum(long a, long b) {
+    return a + b;
   }
 
   public static String toBinaryString(long value) {
@@ -200,6 +283,33 @@ public final class Long extends Number implements Comparable<Long> {
     return String.valueOf(buf, cursor, bufLen - cursor);
   }
 
+  public static String toUnsignedString(long value) {
+    return toUnsignedString(value, 10);
+  }
+
+  public static String toUnsignedString(long value, int radix) {
+    if (value >= 0) {
+      return toString(value, radix);
+    }
+
+    if (radix == 10 || radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
+      int intValue = (int) value;
+      if (intValue == value) {
+        return Integer.toUnsignedString(intValue);
+      }
+
+      long quot = (value >>> 1) / 5;
+      int rem = (int) (value - quot * 10);
+      return toString(quot) + rem;
+    }
+
+    if ((radix & (radix - 1)) == 0) {
+      return toPowerOfTwoUnsignedString(value, radix);
+    }
+
+    return toUnsignedBigInteger(value).toString(radix);
+  }
+
   public static Long valueOf(long i) {
     if (i > -129 && i < 128) {
       int rebase = (int) i + 128;
@@ -236,6 +346,15 @@ public final class Long extends Number implements Comparable<Long> {
     } while (value != 0);
 
     return String.valueOf(buf, pos, bufSize - pos);
+  }
+
+
+  private static BigInteger toUnsignedBigInteger(long value) {
+    BigInteger b = BigInteger.valueOf(value);
+    if (b.signum() >= 0) {
+      return b;
+    }
+    return b.add(BigInteger.valueOf(Long.MIN_VALUE));
   }
 
   private final transient long value;

@@ -23,6 +23,7 @@ public final class Integer extends Number implements Comparable<Integer> {
   public static final int MAX_VALUE = 0x7fffffff;
   public static final int MIN_VALUE = 0x80000000;
   public static final int SIZE = 32;
+  public static final int BYTES = SIZE / Byte.SIZE;
   public static final Class<Integer> TYPE = int.class;
 
   /**
@@ -67,15 +68,18 @@ public final class Integer extends Number implements Comparable<Integer> {
     }
   }
 
-  public static Integer decode(String s) throws NumberFormatException {
-    return Integer.valueOf(__decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
+  public static int compareUnsigned(int x, int y) {
+    return compare(x + MIN_VALUE, y + MIN_VALUE);
   }
 
-  /**
-   * @skip
-   * 
-   * Here for shared implementation with Arrays.hashCode
-   */
+  public static Integer decode(String s) throws NumberFormatException {
+    return valueOf(__decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
+  }
+
+  public static native int divideUnsigned(int dividend, int divisor) /*-{
+    return (dividend >>> 0) / (divisor >>> 0);
+  }-*/;
+
   public static int hashCode(int i) {
     return i;
   }
@@ -96,6 +100,14 @@ public final class Integer extends Number implements Comparable<Integer> {
 
   public static int lowestOneBit(int i) {
     return i & -i;
+  }
+
+  public static int max(int a, int b) {
+    return Math.max(a, b);
+  }
+
+  public static int min(int a, int b) {
+    return Math.min(a, b);
   }
 
   public static int numberOfLeadingZeros(int i) {
@@ -153,6 +165,41 @@ public final class Integer extends Number implements Comparable<Integer> {
     return __parseAndValidateInt(s, radix, MIN_VALUE, MAX_VALUE);
   }
 
+  public static int parseUnsignedInt(String s) throws NumberFormatException {
+    return parseUnsignedInt(s, 10);
+  }
+
+  public static int parseUnsignedInt(String s, int radix) throws NumberFormatException {
+    if (s == null) {
+      throw NumberFormatException.forNullInputString();
+    }
+
+    int len = s.length();
+    if (len == 0) {
+      throw NumberFormatException.forInputString(s);
+    }
+
+    if (s.charAt(0) == '-') {
+      throw NumberFormatException.forInputString(s);
+    }
+
+    if (len <= 5 || // Integer.MAX_VALUE in Character.MAX_RADIX is 6 digits
+        (radix == 10 && len <= 9)) { // Integer.MAX_VALUE in base 10 is 10 digits
+      return parseInt(s, radix);
+    }
+
+    long l = Long.parseLong(s, radix);
+    int i = (int) l;
+    if (i != l) {
+      throw NumberFormatException.forInputString(s);
+    }
+    return i;
+  }
+
+  public static native int remainderUnsigned(int dividend, int divisor) /*-{
+    return (dividend >>> 0) % (divisor >>> 0);
+  }-*/;
+
   public static int reverse(int i) {
     int[] nibbles = ReverseNibbles.reverseNibbles;
     return (nibbles[i >>> 28]) | (nibbles[(i >> 24) & 0xf] << 4)
@@ -197,6 +244,10 @@ public final class Integer extends Number implements Comparable<Integer> {
     }
   }
 
+  public static int sum(int a, int b) {
+    return a + b;
+  }
+
   public static String toBinaryString(int value) {
     return toUnsignedRadixString(value, 2);
   }
@@ -232,13 +283,27 @@ public final class Integer extends Number implements Comparable<Integer> {
     return new Integer(i);
   }
 
+  public static long toUnsignedLong(int x) {
+    return (long) x + MIN_VALUE;
+  }
+
+  public static String toUnsignedString(int x) {
+    return toUnsignedString(x, 10);
+  }
+
+  public static String toUnsignedString(int x, int radix) {
+    if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
+      radix = 10;
+    }
+    return toUnsignedRadixString(x, radix);
+  }
+
   public static Integer valueOf(String s) throws NumberFormatException {
     return valueOf(s, 10);
   }
 
-  public static Integer valueOf(String s, int radix)
-      throws NumberFormatException {
-    return Integer.valueOf(Integer.parseInt(s, radix));
+  public static Integer valueOf(String s, int radix) throws NumberFormatException {
+    return valueOf(parseInt(s, radix));
   }
 
   private static native String toRadixString(int value, int radix) /*-{

@@ -22,6 +22,29 @@
       "revId": "6a13de2553fe227319e955d4b67348928e18b272",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_ba7f693f",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsInlinerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-12T04:20:31Z",
+      "side": 1,
+      "message": "Keep in mind that reads in JS can have side effects. getters() can be invoked or trigger DOM layouts.",
+      "range": {
+        "startLine": 118,
+        "startChar": 22,
+        "endLine": 118,
+        "endChar": 27
+      },
+      "revId": "6a13de2553fe227319e955d4b67348928e18b272",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

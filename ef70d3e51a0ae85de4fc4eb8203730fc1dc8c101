@@ -16,6 +16,29 @@
       "revId": "ef70d3e51a0ae85de4fc4eb8203730fc1dc8c101",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9f4cf41_7fae4fbc",
+        "filename": "user/src/com/google/gwt/uibinder/rebind/AbstractFieldWriter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-09-12T10:31:08Z",
+      "side": 1,
+      "message": "Note that you could use isAnnotationPresent here instead of getAnnotation!\u003dnull",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 86
+      },
+      "revId": "ef70d3e51a0ae85de4fc4eb8203730fc1dc8c101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

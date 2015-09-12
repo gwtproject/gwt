@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44725a92_ba5849fd",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsInlinerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-12T04:04:46Z",
+      "side": 1,
+      "message": "change this to \"return getP(o) \u003d\u003d getP(o)\"  so that the test remains meaningful, i.e. it inlines a simple getter. Here we can not tell the difference between inlining and disposing and just disposing of the fn calls.",
+      "range": {
+        "startLine": 116,
+        "startChar": 25,
+        "endLine": 116,
+        "endChar": 46
+      },
+      "revId": "6a13de2553fe227319e955d4b67348928e18b272",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

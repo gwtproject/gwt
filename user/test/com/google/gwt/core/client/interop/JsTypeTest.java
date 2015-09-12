@@ -125,7 +125,15 @@ public class JsTypeTest extends GWTTestCase {
     assertTrue(hasField(revealedOverrideSubType, "run"));
   }
 
-  public void testSubClassWithSuperCalls() {
+  public void testConcreteNativeType() {
+    MyJsClassWithPrototype obj = new MyJsClassWithPrototype();
+    assertTrue(isUndefined(obj.getX()));
+    obj.setX(72);
+    assertEquals(72, obj.getX());
+    assertEquals(74, obj.sum(2));
+  }
+
+  public void testConcreteNativeType_sublasss() {
     MyClassExtendsJsPrototype mc = new MyClassExtendsJsPrototype();
     assertEquals(143, mc.sum(1));
 
@@ -207,7 +215,8 @@ public class JsTypeTest extends GWTTestCase {
     assertTrue(object instanceof ElementLikeJsInterface);
     assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
-    assertFalse(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsInterfaceWithPrototypeAndOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsClassWithPrototypeAndOnlyInstanceofReference);
     assertFalse(object instanceof ConcreteJsType);
   }
 
@@ -224,7 +233,8 @@ public class JsTypeTest extends GWTTestCase {
     assertTrue(object instanceof ElementLikeJsInterface);
     assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
-    assertFalse(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsInterfaceWithPrototypeAndOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsClassWithPrototypeAndOnlyInstanceofReference);
     assertFalse(object instanceof ConcreteJsType);
   }
 
@@ -241,7 +251,8 @@ public class JsTypeTest extends GWTTestCase {
     assertTrue(object instanceof ElementLikeJsInterface);
     assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
-    assertTrue(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertTrue(object instanceof MyJsInterfaceWithPrototypeAndOnlyInstanceofReference);
+    assertTrue(object instanceof MyJsClassWithPrototypeAndOnlyInstanceofReference);
     assertFalse(object instanceof ConcreteJsType);
   }
 
@@ -259,7 +270,8 @@ public class JsTypeTest extends GWTTestCase {
     assertTrue(object instanceof ElementLikeJsInterface);
     assertTrue(object instanceof ElementLikeJsInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
-    assertFalse(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsInterfaceWithPrototypeAndOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsClassWithPrototypeAndOnlyInstanceofReference);
     assertFalse(object instanceof ConcreteJsType);
   }
 
@@ -277,7 +289,8 @@ public class JsTypeTest extends GWTTestCase {
     assertFalse(object instanceof ElementLikeJsInterface);
     assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
-    assertFalse(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsInterfaceWithPrototypeAndOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsClassWithPrototypeAndOnlyInstanceofReference);
     assertFalse(object instanceof ConcreteJsType);
   }
 
@@ -295,7 +308,8 @@ public class JsTypeTest extends GWTTestCase {
     assertFalse(object instanceof ElementLikeJsInterface);
     assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
-    assertFalse(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsInterfaceWithPrototypeAndOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsClassWithPrototypeAndOnlyInstanceofReference);
     assertTrue(object instanceof ConcreteJsType);
   }
 
@@ -308,16 +322,14 @@ public class JsTypeTest extends GWTTestCase {
     assertTrue(object instanceof HTMLButtonElement);
     assertTrue(object instanceof HTMLElement);
     assertTrue(object instanceof Iterable);
-    /*
-     * TODO: this works, but only because Object can't be type-tightened to HTMLElement. But it will
-     * evaluate statically to false for HTMLElement instanceof HTMLAnotherElement. Depending on what
-     * the spec decides, fix JTypeOracle so that canTheoreticallyCast returns the appropriate
-     * result, as well as add a test here that can be type-tightened.
-     */
     assertFalse(object instanceof MyJsInterfaceWithPrototype);
-    assertTrue(object instanceof ElementLikeJsInterface);
-    assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
-    assertTrue(object instanceof MyJsPrototypeWithOnlyInstanceofReference);
+    assertFalse(object instanceof MyJsInterfaceWithPrototypeImpl);
+    assertFalse(object instanceof ElementLikeJsInterface);
+    assertFalse(object instanceof ElementLikeJsInterfaceImpl);
+    assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
+    assertTrue(object instanceof MyJsInterfaceWithPrototypeAndOnlyInstanceofReference);
+    assertTrue(object instanceof MyJsClassWithPrototypeAndOnlyInstanceofReference);
+    assertFalse(object instanceof ConcreteJsType);
   }
 
   public void testInstanceOfWithNameSpace() {

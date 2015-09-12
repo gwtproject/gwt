@@ -260,6 +260,30 @@
       "revId": "c56689c99007532addf8e4bd989b4cdbc3d8ecbb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_7a3dd1f0",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-12T00:35:44Z",
+      "side": 1,
+      "message": "I see. But these tests are both run in draft and optimized mode, so shouldn\u0027t we let the optimizer do its job and assert its correctness.\n\nCast operations always return hasSideEffects \u003d true so there is no danger from them being pruned by the optimization pipeline due to it result not being referenced. So I am not sure why all these asserts are here.",
+      "parentUuid": "44725a92_b7b7822e",
+      "range": {
+        "startLine": 190,
+        "startChar": 5,
+        "endLine": 190,
+        "endChar": 24
+      },
+      "revId": "c56689c99007532addf8e4bd989b4cdbc3d8ecbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

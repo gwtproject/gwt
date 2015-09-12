@@ -33,6 +33,7 @@ public final class Double extends Number implements Comparable<Double> {
   public static final double NEGATIVE_INFINITY = -1d / 0d;
   public static final double POSITIVE_INFINITY = 1d / 0d;
   public static final int SIZE = 64;
+  public static final int BYTES = SIZE / Byte.SIZE;
   public static final Class<Double> TYPE = double.class;
 
   // 2^512, 2^-512
@@ -192,20 +193,21 @@ public final class Double extends Number implements Comparable<Double> {
     return (ihi << 32) | ilo;
   }
 
-  /**
-   * @skip Here for shared implementation with Arrays.hashCode
-   */
   public static int hashCode(double d) {
     return (int) d;
   }
 
-  public static boolean isInfinite(double x) {
-    return x == JsUtils.getInfinity() || x == -JsUtils.getInfinity();
+  public static boolean isFinite(double x) {
+    return NEGATIVE_INFINITY < x && x < POSITIVE_INFINITY;
   }
 
-  public static native boolean isNaN(double x) /*-{
-    return isNaN(x);
-  }-*/;
+  public static boolean isInfinite(double x) {
+    return x == NEGATIVE_INFINITY || x == POSITIVE_INFINITY;
+  }
+
+  public static boolean isNaN(double x) {
+    return JsUtils.isNaN(x);
+  }
 
   public static double longBitsToDouble(long bits) {
     long ihi = (long) (bits >> 32);
@@ -259,8 +261,20 @@ public final class Double extends Number implements Comparable<Double> {
     return negative ? -d : d;
   }
 
+  public static double max(double a, double b) {
+    return Math.max(a, b);
+  }
+
+  public static double min(double a, double b) {
+    return Math.min(a, b);
+  }
+
   public static double parseDouble(String s) throws NumberFormatException {
     return __parseAndValidateDouble(s);
+  }
+
+  public static double sum(double a, double b) {
+    return a + b;
   }
 
   public static String toString(double b) {

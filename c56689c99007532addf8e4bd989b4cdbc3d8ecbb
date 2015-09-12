@@ -284,6 +284,30 @@
       "revId": "c56689c99007532addf8e4bd989b4cdbc3d8ecbb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_5a973536",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-12T00:40:17Z",
+      "side": 1,
+      "message": "The tests are not running in draft mode but I agree we should run them in both modes once we enable them by default (otherwise becomes harder to manage the build rules).\n\nI think we can do cleanup in a later cl though.",
+      "parentUuid": "44725a92_7a3dd1f0",
+      "range": {
+        "startLine": 190,
+        "startChar": 5,
+        "endLine": 190,
+        "endChar": 24
+      },
+      "revId": "c56689c99007532addf8e4bd989b4cdbc3d8ecbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

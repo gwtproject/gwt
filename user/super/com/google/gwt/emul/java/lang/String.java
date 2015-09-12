@@ -16,6 +16,7 @@
 
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkStringBounds;
 
 import java.io.Serializable;
@@ -23,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Locale;
 
 import javaemul.internal.ArrayHelper;
@@ -105,6 +107,35 @@ public final class String implements Comparable<String>, CharSequence,
 
   public static String copyValueOf(char[] v, int offset, int count) {
     return valueOf(v, offset, count);
+  }
+
+  public static String join(CharSequence delimiter, CharSequence... elements) {
+    checkNotNull(delimiter);
+    checkNotNull(elements);
+    if (elements.length == 0) {
+      return "";
+    }
+    StringBuilder builder = new StringBuilder(elements[0]);
+    for (int i = 1; i < elements.length; i++) {
+      builder.append(delimiter);
+      builder.append(elements[i]);
+    }
+    return builder.toString();
+  }
+
+  public static String join(CharSequence delimiter, Iterable<? extends CharSequence> elements) {
+    checkNotNull(delimiter);
+    checkNotNull(elements);
+    Iterator<? extends CharSequence> it = elements.iterator();
+    if (!it.hasNext()) {
+      return "";
+    }
+    StringBuilder builder = new StringBuilder(it.next());
+    while (it.hasNext()) {
+      builder.append(delimiter);
+      builder.append(it.next());
+    }
+    return builder.toString();
   }
 
   public static String valueOf(boolean x) {

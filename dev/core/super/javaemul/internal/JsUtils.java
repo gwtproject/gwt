@@ -24,6 +24,10 @@ public class JsUtils {
     return Infinity;
   }-*/;
 
+  public static native boolean isNaN(double x) /*-{
+    return isNaN(x);
+  }-*/;
+
   public static native int parseInt(String s, int radix) /*-{
     return parseInt(s, radix);
   }-*/;

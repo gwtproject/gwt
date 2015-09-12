@@ -22,6 +22,19 @@ import com.google.gwt.junit.client.GWTTestCase;
  */
 public class ByteTest extends GWTTestCase {
 
+  private static final int[] UNSIGNED_INTS = {
+      0,
+      1,
+      2,
+      3,
+      0x12,
+      0x5a,
+      0x6c,
+      0xfd,
+      0xfe,
+      0xff
+  };
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.emultest.EmulSuite";
@@ -45,5 +58,17 @@ public class ByteTest extends GWTTestCase {
     assertEquals(127, Byte.valueOf((byte) 127).intValue());
     assertEquals(-128, Byte.valueOf((byte) -128).intValue());
     assertEquals(-1, Byte.valueOf((byte) 255).intValue());
+  }
+
+  public void testToUnsignedInt() {
+    for (int a : UNSIGNED_INTS) {
+      assertEquals(a, Byte.toUnsignedInt((byte) a));
+    }
+  }
+
+  public void testToUnsignedLong() {
+    for (int a : UNSIGNED_INTS) {
+      assertEquals((long) a, Byte.toUnsignedLong((byte) a));
+    }
   }
 }

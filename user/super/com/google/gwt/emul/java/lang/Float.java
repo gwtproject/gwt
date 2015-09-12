@@ -28,6 +28,7 @@ public final class Float extends Number implements Comparable<Float> {
   public static final float NEGATIVE_INFINITY = -1f / 0f;
   public static final float POSITIVE_INFINITY = 1f / 0f;
   public static final int SIZE = 32;
+  public static final int BYTES = SIZE / Byte.SIZE;
   public static final Class<Float> TYPE = float.class;
 
   private static final long POWER_31_INT = 2147483648L;
@@ -85,8 +86,6 @@ public final class Float extends Number implements Comparable<Float> {
   }
 
   /**
-   * @skip Here for shared implementation with Arrays.hashCode.
-   * @param f
    * @return hash value of float (currently just truncated to int)
    */
   public static int hashCode(float f) {
@@ -130,6 +129,10 @@ public final class Float extends Number implements Comparable<Float> {
     return (float) Double.longBitsToDouble(bits64);
   }
 
+  public static boolean isFinite(float x) {
+    return Double.isFinite(x);
+  }
+
   public static boolean isInfinite(float x) {
     return Double.isInfinite(x);
   }
@@ -138,14 +141,27 @@ public final class Float extends Number implements Comparable<Float> {
     return Double.isNaN(x);
   }
 
+  public static float max(float a, float b) {
+    return Math.max(a, b);
+  }
+
+  public static float min(float a, float b) {
+    return Math.min(a, b);
+  }
+
   public static float parseFloat(String s) throws NumberFormatException {
     double doubleValue = __parseAndValidateDouble(s);
     if (doubleValue > Float.MAX_VALUE) {
       return Float.POSITIVE_INFINITY;
     } else if (doubleValue < -Float.MAX_VALUE) {
       return Float.NEGATIVE_INFINITY;
+    } else {
+      return (float) doubleValue;
     }
-    return (float) doubleValue;
+  }
+
+  public static float sum(float a, float b) {
+    return a + b;
   }
 
   public static String toString(float b) {
@@ -163,7 +179,7 @@ public final class Float extends Number implements Comparable<Float> {
   private final transient float value;
 
   public Float(double value) {
-    this.value = (float) value;
+    this((float) value);
   }
 
   public Float(float value) {
@@ -171,7 +187,7 @@ public final class Float extends Number implements Comparable<Float> {
   }
 
   public Float(String s) {
-    value = parseFloat(s);
+    this(parseFloat(s));
   }
 
   @Override

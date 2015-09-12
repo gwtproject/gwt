@@ -22,6 +22,20 @@ import com.google.gwt.junit.client.GWTTestCase;
  */
 public class ShortTest extends GWTTestCase {
 
+  private static final int[] UNSIGNED_INTS = {
+      0,
+      1,
+      2,
+      3,
+      0x1234,
+      0x5a43,
+      0x6cf7,
+      0xff1a,
+      0xfffd,
+      0xfffe,
+      0xffff
+  };
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.emultest.EmulSuite";
@@ -47,5 +61,17 @@ public class ShortTest extends GWTTestCase {
   public void testStaticValueOf() {
     assertEquals(Short.MIN_VALUE, Short.valueOf(Short.MIN_VALUE).shortValue());
     assertEquals(Short.MAX_VALUE, Short.valueOf(Short.MAX_VALUE).shortValue());
+  }
+
+  public void testToUnsignedInt() {
+    for (int a : UNSIGNED_INTS) {
+      assertEquals(a, Short.toUnsignedInt((short) a));
+    }
+  }
+
+  public void testToUnsignedLong() {
+    for (int a : UNSIGNED_INTS) {
+      assertEquals((long) a, Short.toUnsignedLong((short) a));
+    }
   }
 }

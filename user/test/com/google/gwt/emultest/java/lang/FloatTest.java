@@ -97,6 +97,19 @@ public class FloatTest extends GWTTestCase {
     assertFalse(Float.isInfinite(Float.NaN));
   }
 
+  public void testIsFinite() {
+    final float[] numbers = new float[] {
+        Float.NEGATIVE_INFINITY, -Float.MAX_VALUE, -1f, -0f, 0f, 1f, Float.MAX_VALUE,
+        Float.POSITIVE_INFINITY,
+        Float.MIN_NORMAL, -Float.MIN_NORMAL,  Float.MIN_VALUE, -Float.MIN_VALUE,
+        Integer.MIN_VALUE, Integer.MAX_VALUE, Long.MIN_VALUE, Long.MAX_VALUE
+    };
+
+    for (float value : numbers) {
+      assertEquals(!(Float.isInfinite(value) || Float.isNaN(value)), Float.isFinite(value));
+    }
+  }
+
   public void testParse() {
     /*
      * Note: we must use appropriate deltas for a somewhat subtle reason.

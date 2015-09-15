@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "44725a92_865c0c65",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-15T20:17:14Z",
+      "side": 1,
+      "message": "You can keep the checknotnull, I was referring to equals part.\n\n  checkNotNull(this) \u003d\u003d o;",
+      "parentUuid": "2900dfee_5e9dd159",
+      "revId": "9a6f88fc459fb05d4a6be7b23d54d833157cb64d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44725a92_e085a741",
         "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
         "patchSetId": 1

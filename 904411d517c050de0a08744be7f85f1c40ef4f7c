@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44725a92_4fc76e9e",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-15T08:56:40Z",
+      "side": 1,
+      "message": "Does this change actually do anything? In each case, aren\u0027t the JsName\u0027s referenced and scopes the same?",
+      "revId": "904411d517c050de0a08744be7f85f1c40ef4f7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

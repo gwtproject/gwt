@@ -168,6 +168,30 @@
     },
     {
       "key": {
+        "uuid": "44725a92_2c0079c7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-15T23:30:13Z",
+      "side": 1,
+      "message": "Add an assertion \n  assert clinitTarget \u003d\u003d null || !type.isJsNative()",
+      "parentUuid": "44725a92_77a5eae5",
+      "range": {
+        "startLine": 1304,
+        "startChar": 8,
+        "endLine": 1304,
+        "endChar": 77
+      },
+      "revId": "c56689c99007532addf8e4bd989b4cdbc3d8ecbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44725a92_5742ae05",
         "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
         "patchSetId": 1

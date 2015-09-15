@@ -77,8 +77,8 @@ import java.util.Set;
 /**
  * Perform inlining optimizations on the JavaScript AST.
  *
- * TODO(bobv): remove anything that's duplicating work with {@link JsStaticEval}
- * migrate other stuff to that class perhaps.
+ * TODO(bobv): remove anything that's duplicating work with {@link JsStaticEval} migrate other stuff
+ * to that class perhaps.
  */
 public class JsInliner {
   private static final String NAME = JsInliner.class.getSimpleName();
@@ -145,11 +145,10 @@ public class JsInliner {
   }
 
   /**
-   * Make comma binary operations left-nested since commas are naturally
-   * left-associative. We will define the comma-normal form such that a comma
-   * expression should never have a comma expression as its RHS and contains no
-   * side-effect-free expressions save for the outer, right-hand expression.
-   * This form has a nice side-effect of minimizing the number of generated
+   * Make comma binary operations left-nested since commas are naturally left-associative. We will
+   * define the comma-normal form such that a comma expression should never have a comma expression
+   * as its RHS and contains no side-effect-free expressions save for the outer, right-hand
+   * expression. This form has a nice side-effect of minimizing the number of generated
    * parentheses.
    *
    * <pre>
@@ -264,14 +263,13 @@ public class JsInliner {
   }
 
   /**
-   * Provides a relative metric by which the syntactic complexity of a
-   * JsExpression can be gauged.
+   * Provides a relative metric by which the syntactic complexity of a JsExpression can be gauged.
    */
   private static class ComplexityEstimator extends JsVisitor {
     public static final int AVERAGE_OBFUSCATED_IDENTIFIER_LENGTH = 2;
     /**
-     * The current measure of complexity. This measures the number of
-     * expressions that have been encountered by the visitor.
+     * The current measure of complexity. This measures the number of expressions that have been
+     * encountered by the visitor.
      */
     private int complexity = 0;
 
@@ -370,9 +368,8 @@ public class JsInliner {
   }
 
   /**
-   * Determines that a list of names is guaranteed to be evaluated in a
-   * particular order. Also ensures that all names are evaluated before any
-   * invocations occur.
+   * Determines that a list of names is guaranteed to be evaluated in a particular order. Also
+   * ensures that all names are evaluated before any invocations occur.
    */
   private static class EvaluationOrderVisitor extends JsVisitor {
     /**
@@ -423,8 +420,8 @@ public class JsInliner {
     }
 
     /**
-     * If the condition would cause conditional evaluation of strict parameters,
-     * don't allow inlining.
+     * If the condition would cause conditional evaluation of strict parameters, don't allow
+     * inlining.
      */
     @Override
     public void endVisit(JsConditional x, JsContext ctx) {
@@ -437,9 +434,8 @@ public class JsInliner {
     }
 
     /**
-     * The statement declares a function closure. This makes actual evaluation
-     * order of the parameters difficult or impossible to determine, so we'll
-     * just ignore them.
+     * The statement declares a function closure. This makes actual evaluation order of the
+     * parameters difficult or impossible to determine, so we'll just ignore them.
      */
     @Override
     public void endVisit(JsFunction x, JsContext ctx) {
@@ -447,13 +443,12 @@ public class JsInliner {
     }
 
     /**
-     * The innermost invocation we see must consume all presently unevaluated
-     * parameters to ensure that an exception does not prevent their evaluation.
+     * The innermost invocation we see must consume all presently unevaluated parameters to ensure
+     * that an exception does not prevent their evaluation.
      *
-     * In the case of a nested invocation, such as
-     * <code>F(r1, r2, G(r3, r4), f1);</code> the evaluation order is guaranteed
-     * to be maintained, provided that no required parameters occur after the
-     * nested invocation.
+     * In the case of a nested invocation, such as <code>F(r1, r2, G(r3, r4), f1);</code> the
+     * evaluation order is guaranteed to be maintained, provided that no required parameters occur
+     * after the nested invocation.
      */
     @Override
     public void endVisit(JsInvocation x, JsContext ctx) {
@@ -492,22 +487,20 @@ public class JsInliner {
     }
 
     /**
-     * Check to see if the evaluation of this JsName will break program order assumptions given
-     * the parameters left to be substituted.
+     * Check to see if the evaluation of this JsName will break program order assumptions given the
+     * parameters left to be substituted.
      *
-     * The cases are as follows:
-     * 1) JsName is a function parameter name which has side effects or is affected by side effects
-     * (hereafter called 'volatile'), so it will be in 'toEvaluate'
-     * 2) JsName is a function parameter which is not volatile (not in toEvaluate)
-     * 3) JsName is a reference to a global variable
-     * 4) JsName is a reference to a local variable
+     * The cases are as follows: 1) JsName is a function parameter name which has side effects or is
+     * affected by side effects (hereafter called 'volatile'), so it will be in 'toEvaluate' 2)
+     * JsName is a function parameter which is not volatile (not in toEvaluate) 3) JsName is a
+     * reference to a global variable 4) JsName is a reference to a local variable
      *
      * A reference to a global while there are still parameters left to evaluate / substitute
      * implies an order violation.
      *
-     * A reference to a volatile parameter is ok if it is the next parameter in sequence to
-     * be evaluated (beginning of unevaluated list). Else, it is either being evaluated out of
-     * order with respect to other parameters, or it is being evaluated more than once.
+     * A reference to a volatile parameter is ok if it is the next parameter in sequence to be
+     * evaluated (beginning of unevaluated list). Else, it is either being evaluated out of order
+     * with respect to other parameters, or it is being evaluated more than once.
      */
     private void checkName(JsName name) {
       if (!toEvaluate.contains(name)) {
@@ -536,22 +529,21 @@ public class JsInliner {
   }
 
   /**
-   * Collect names in a hoisted statement that are local to the original
-   * scope.  These names will need to be copied to the destination scope
-   * once the statement becomes hoisted.
+   * Collect names in a hoisted statement that are local to the original scope.  These names will
+   * need to be copied to the destination scope once the statement becomes hoisted.
    */
-  private static class HoistedNameVisitor extends JsVisitor {
+  private static class ExtrudedNamesCollector extends JsVisitor {
     private final JsScope toScope;
     private final JsScope fromScope;
     private final List<JsName> hoistedNames;
 
-    public HoistedNameVisitor(JsScope toScope, JsScope fromScope) {
+    public ExtrudedNamesCollector(JsScope toScope, JsScope fromScope) {
       this.toScope = toScope;
       this.fromScope = fromScope;
       this.hoistedNames = Lists.newArrayList();
     }
 
-    public List<JsName> getHoistedNames() {
+    public List<JsName> getExtrudedNames() {
       return hoistedNames;
     }
 
@@ -577,8 +569,8 @@ public class JsInliner {
   }
 
   /**
-   * Collect all of the idents used in an AST node. The collector can be
-   * configured to collect idents from qualified xor unqualified JsNameRefs.
+   * Collect all of the idents used in an AST node. The collector can be configured to collect
+   * idents from qualified xor unqualified JsNameRefs.
    */
   private static class IdentCollector extends JsVisitor {
     private final boolean collectQualified;
@@ -607,18 +599,16 @@ public class JsInliner {
   }
 
   /**
-   * This class looks for function invocations that can be inlined and performs
-   * the replacement by replacing the JsInvocation with a comma expression
-   * consisting of the expressions evaluated by the target function. A second
-   * step may convert the expressions in the comma expression back to multiple
-   * statements if the context of the invocation would allow this.
+   * This class looks for function invocations that can be inlined and performs the replacement by
+   * replacing the JsInvocation with a comma expression consisting of the expressions evaluated by
+   * the target function. A second step may convert the expressions in the comma expression back to
+   * multiple statements if the context of the invocation would allow this.
    */
   private static class InliningVisitor extends JsModVisitor {
     private final Set<JsFunction> blacklist = Sets.newHashSet();
     private final Set<JsNode> whitelist;
     /**
-     * This reflects the functions that are currently being inlined to prevent
-     * infinite expansion.
+     * This reflects the functions that are currently being inlined to prevent infinite expansion.
      */
     private final Stack<JsFunction> inlining = new Stack<JsFunction>();
     /**
@@ -630,10 +620,10 @@ public class JsInliner {
     private final Stack<List<JsName>> newLocalVariableStack = Stack.create();
 
     /**
-     * A map containing the next integer to try as an identifier suffix for a
-     * given JsScope.
+     * A map containing the next integer to try as an identifier suffix for a given JsScope.
      */
-    private Map<JsScope, Multiset<String>> startIdentForScope = Maps.newIdentityHashMap();
+    private Map<JsScope, Multiset<String>> nextSuffixForIdentifierByScope =
+        Maps.newIdentityHashMap();
 
     /**
      * Not a stack because program fragments aren't nested.
@@ -895,10 +885,11 @@ public class JsInliner {
         statements = Collections.emptyList();
       }
 
-      List<JsExpression> hoisted = Lists.newArrayListWithCapacity(statements.size());
+      List<JsExpression> inlinableBodyAsExpression =
+          Lists.newArrayListWithCapacity(statements.size());
       JsExpression thisExpr = ((JsNameRef) x.getQualifier()).getQualifier();
-      HoistedNameVisitor hoistedNameVisitor =
-          new HoistedNameVisitor(callerFunction.getScope(), invokedFunction.getScope());
+      ExtrudedNamesCollector extrudedNamesCollector =
+          new ExtrudedNamesCollector(callerFunction.getScope(), invokedFunction.getScope());
 
       boolean sawReturnStatement = false;
 
@@ -923,36 +914,34 @@ public class JsInliner {
          * Create replacement expressions to use in place of the original
          * statements. It is important that the replacement is newly-minted and
          * therefore not referenced by any other AST nodes. Consider the case of
-         * a common, delegating function. If the hoisted expressions were not
+         * a common, delegating function. If the inlinableBodyAsExpression expressions were not
          * distinct objects, it would not be possible to substitute different
          * JsNameRefs at different call sites.
          */
-        JsExpression h = hoistedExpression(statement);
-        if (h == null) {
+        JsExpression statementAsExpression = convertToExpression(statement);
+        if (statementAsExpression == null) {
           return x;
         }
 
-        /*
-         * Visit the statement to find names that will be moved to the caller's
-         * scope from the invoked function.
-         */
-        hoistedNameVisitor.accept(h);
 
-        if (isReturnStatement(statement)) {
-          sawReturnStatement = true;
-          hoisted.add(h);
-        } else if (hasSideEffects(Collections.singletonList(h))) {
-          hoisted.add(h);
+        sawReturnStatement |= isReturnStatement(statement);
+        if (sawReturnStatement || statementAsExpression.hasSideEffects()) {
+          /*
+           * Visit the statement to find names that will be moved to the caller's
+           * scope from the invoked function.
+           */
+          extrudedNamesCollector.accept(statementAsExpression);
+          inlinableBodyAsExpression.add(statementAsExpression);
         }
       }
 
       /*
        * Get the referenced names that need to be copied to the caller's scope.
        */
-      List<JsName> hoistedNames = hoistedNameVisitor.getHoistedNames();
+      List<JsName> extrudedNames = extrudedNamesCollector.getExtrudedNames();
 
-      if (hoistedNames.size() != 0 && callerFunction == programFunction) {
-        // Don't hoist variables into the global scope.
+      if (extrudedNames.size() != 0 && callerFunction == programFunction) {
+        // Don't extrude variables into the global scope.
         return x;
       }
 
@@ -962,11 +951,11 @@ public class JsInliner {
        * JsExprStmt.
        */
       if (!sawReturnStatement) {
-        hoisted.add(new JsNameRef(x.getSourceInfo(),
+        inlinableBodyAsExpression.add(new JsNameRef(x.getSourceInfo(),
             JsRootScope.INSTANCE.getUndefined()));
       }
 
-      assert (hoisted.size() > 0);
+      assert (inlinableBodyAsExpression.size() > 0);
 
       /*
        * Build up the new comma expression from right-to-left; building the
@@ -975,57 +964,46 @@ public class JsInliner {
        * expression.
        */
       SourceInfo sourceInfo = x.getSourceInfo();
-      ListIterator<JsExpression> i = hoisted.listIterator(hoisted.size());
+      ListIterator<JsExpression> i =
+          inlinableBodyAsExpression.listIterator(inlinableBodyAsExpression.size());
       JsExpression op = i.previous();
       while (i.hasPrevious()) {
-        JsBinaryOperation outerOp = new JsBinaryOperation(sourceInfo,
-            JsBinaryOperator.COMMA);
+        JsBinaryOperation outerOp = new JsBinaryOperation(sourceInfo, JsBinaryOperator.COMMA);
         outerOp.setArg1(i.previous());
         outerOp.setArg2(op);
         op = outerOp;
       }
 
       // Confirm that the expression conforms to the desired heuristics
-      if (!isInlinable(callerFunction, invokedFunction, thisExpr,
-          x.getArguments(), op)) {
+      if (!isInlinable(callerFunction, invokedFunction, thisExpr, x.getArguments(), op)) {
         return x;
       }
 
       // Perform the name replacement
-      NameRefReplacerVisitor v = new NameRefReplacerVisitor(thisExpr,
+      NameRefReplacerVisitor nameRefReplacer = new NameRefReplacerVisitor(thisExpr,
           x.getArguments(), invokedFunction.getParameters());
-      for (ListIterator<JsName> nameIterator = hoistedNames.listIterator();
+      for (ListIterator<JsName> nameIterator = extrudedNames.listIterator();
           nameIterator.hasNext();) {
+
         JsName name = nameIterator.next();
 
-        /*
-         * Find an unused identifier in the caller's scope. It's possible that
-         * the same function has been inlined in multiple places within the
-         * function so we'll use a counter for disambiguation.
-         */
-        String ident;
-        String base = invokedFunction.getName() + "_" + name.getIdent();
-        JsScope scope = callerFunction.getScope();
-        Multiset<String> startIdent = startIdentForScope.get(scope);
-        if (startIdent == null) {
-          startIdent = HashMultiset.create();
-          startIdentForScope.put(scope, startIdent);
-        }
 
-        int suffix = startIdent.count(base);
-        do {
-          ident = base + "_" + suffix++;
-        } while (scope.findExistingName(ident) != null);
-        startIdent.setCount(base, suffix);
-
-        JsName newName = scope.declareName(ident, name.getShortIdent());
-        v.setReplacementName(name, newName);
+        JsName newName = getUnusedName(
+            callerFunction.getScope(),
+            invokedFunction.getName() + "_" + name.getIdent(),
+            name.getShortIdent());
+        nameRefReplacer.setReplacementName(name, newName);
         nameIterator.set(newName);
       }
-      op = v.accept(op);
+      op = nameRefReplacer.accept(op);
 
       // Normalize any nested comma expressions that we may have generated.
-      op = (new CommaNormalizer(hoistedNames)).accept(op);
+      op = (new CommaNormalizer(extrudedNames)).accept(op);
+
+      if (callerFunction == programFunction && extrudedNames.size() > 0) {
+        // Don't add additional variables to the top-level program.
+        return x;
+      }
 
       /*
        * Compare the relative complexity of the original invocation versus the
@@ -1037,18 +1015,35 @@ public class JsInliner {
         return x;
       }
 
-      if (callerFunction == programFunction && hoistedNames.size() > 0) {
-        // Don't add additional variables to the top-level program.
-        return x;
-      }
-
       // We've committed to the inlining, ensure the vars are created
-      newLocalVariableStack.peek().addAll(hoistedNames);
+      newLocalVariableStack.peek().addAll(extrudedNames);
 
       // update invocation counts according to this inlining
       invocationCountingVisitor.removeCountsFor(x);
       invocationCountingVisitor.accept(op);
       return op;
+    }
+
+    private JsName getUnusedName(JsScope scope, String baseName, String shortIdentifier) {
+      /*
+       * Find an unused identifier in the caller's scope. It's possible that
+       * the same function has been inlined in multiple places within the
+       * function so we'll use a counter for disambiguation.
+       */
+      String identifier;
+      Multiset<String> nextSuffixForIdentifier = nextSuffixForIdentifierByScope.get(scope);
+      if (nextSuffixForIdentifier == null) {
+        nextSuffixForIdentifier = HashMultiset.create();
+        nextSuffixForIdentifierByScope.put(scope, nextSuffixForIdentifier);
+      }
+
+      int suffix = nextSuffixForIdentifier.count(baseName);
+      do {
+        identifier = baseName + "_" + suffix++;
+      } while (scope.findExistingName(identifier) != null);
+      nextSuffixForIdentifier.setCount(baseName, suffix);
+
+      return scope.declareName(identifier, shortIdentifier);
     }
 
     private boolean isTooComplexToInline(JsInvocation x, JsExpression op) {
@@ -1688,14 +1683,13 @@ public class JsInliner {
    * @return a JsExpression representing all expressions that would have been
    *         evaluated by the statement
    */
-  private static JsExpression hoistedExpression(JsStatement statement) {
+  private static JsExpression convertToExpression(JsStatement statement) {
 
     JsExpression expression;
     if (statement instanceof JsExprStmt) {
       // Extract the expression
       JsExprStmt exprStmt = (JsExprStmt) statement;
       expression = exprStmt.getExpression();
-
     } else if (statement instanceof JsReturn) {
       // Extract the return value
       JsReturn ret = (JsReturn) statement;
@@ -1704,7 +1698,6 @@ public class JsInliner {
         expression = new JsNameRef(ret.getSourceInfo(),
             JsRootScope.INSTANCE.getUndefined());
       }
-
     } else if (statement instanceof JsVars) {
       // Create a comma expression for variable initializers
       JsVars vars = (JsVars) statement;

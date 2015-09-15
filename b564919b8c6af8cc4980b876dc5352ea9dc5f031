@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "44725a92_4052dba9",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-15T19:27:44Z",
+      "side": 1,
+      "message": "I agree it\u0027s messy, but even after you\u0027re proposal there\u0027s still some semantic messiness. We are changing adding a qualifier to globally scoped variables, but leaving their JsName scope as the global scope. Technically, it\u0027s no longer global scope anymore. It just so happens this works, because I moved the namespace fixes after most other optimization passes.\n\nI can easily make the changed proposed, as it is just moving a field into a map, the more difficult piece will be figuring out how to unify HandleCrossFragmentReferences nicely.\n\nOne of the nice things about reusing and generalizing Brian\u0027s code is it simplified HCFR.",
+      "parentUuid": "44725a92_605c3764",
+      "revId": "b564919b8c6af8cc4980b876dc5352ea9dc5f031",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44725a92_60e7d719",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
         "patchSetId": 9

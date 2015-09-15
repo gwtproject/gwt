@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44725a92_aacab082",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-15T14:43:30Z",
+      "side": 1,
+      "message": "Is this field still necessary? j2cl doesn\u0027t seem like proper handling of static method handling devirtualized classes, nor clinit. We should resolve those before processing.",
+      "revId": "ab06536d215525ac1dd9cabe12bbad81f04b0ad6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

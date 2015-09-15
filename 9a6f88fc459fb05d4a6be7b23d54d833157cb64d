@@ -2,6 +2,125 @@
   "comments": [
     {
       "key": {
+        "uuid": "44725a92_a049eff9",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-15T19:47:00Z",
+      "side": 1,
+      "message": "I think there is chance that checkNotNull here will be prune as \"this\" is not nullable but IIRC we already have tests for this.",
+      "revId": "9a6f88fc459fb05d4a6be7b23d54d833157cb64d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_00ef032e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-15T19:47:00Z",
+      "side": 1,
+      "message": "unsafeCast? That was what were using but I\u0027m not sure which one is better.",
+      "revId": "9a6f88fc459fb05d4a6be7b23d54d833157cb64d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_804cf309",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-15T19:47:00Z",
+      "side": 1,
+      "message": "use this \u003d\u003d o",
+      "revId": "9a6f88fc459fb05d4a6be7b23d54d833157cb64d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_e085a741",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-15T19:47:00Z",
+      "side": 1,
+      "message": "(I didn\u0027t replicate my comments for other classes.)",
+      "revId": "9a6f88fc459fb05d4a6be7b23d54d833157cb64d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_a0e00f38",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-15T19:47:00Z",
+      "side": 1,
+      "message": "duplicate for the one above.",
+      "revId": "9a6f88fc459fb05d4a6be7b23d54d833157cb64d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_e01047cd",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-15T19:47:00Z",
+      "side": 1,
+      "message": "seems like you can do some reuse here.",
+      "revId": "9a6f88fc459fb05d4a6be7b23d54d833157cb64d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_00bd430e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-15T19:47:00Z",
+      "side": 1,
+      "message": "You can just call Array.stampJavaType instead of copying.",
+      "revId": "9a6f88fc459fb05d4a6be7b23d54d833157cb64d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4447ba3e_6f660d35",
         "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
         "patchSetId": 1

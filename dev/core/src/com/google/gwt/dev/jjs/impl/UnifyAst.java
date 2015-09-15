@@ -1354,7 +1354,8 @@ public class UnifyAst {
 
   private boolean requiresDevirtualization(JDeclaredType type) {
     // NOTE: these types are the ones {@link Devirtualizer} handles.
-    return isJso(type) || type == program.getTypeJavaLangString();
+    return isJso(type) ||
+        JProgram.getRepresentedAsNativeClassNames().contains(type.getName());
   }
 
   private boolean isJso(JDeclaredType type) {

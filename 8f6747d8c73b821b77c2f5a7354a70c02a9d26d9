@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4447ba3e_cfcf0190",
+        "filename": "user/super/com/google/gwt/emul/java/lang/DevirtualizedDouble.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-15T12:12:45Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8f6747d8c73b821b77c2f5a7354a70c02a9d26d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4447ba3e_efd4bd26",
+        "filename": "user/super/com/google/gwt/emul/java/lang/DevirtualizedDouble.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-15T12:12:45Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8f6747d8c73b821b77c2f5a7354a70c02a9d26d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

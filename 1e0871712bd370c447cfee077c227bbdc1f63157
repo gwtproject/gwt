@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44725a92_0932cfbf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-15T22:46:21Z",
+      "side": 1,
+      "message": "isRepresentAsNativeType(className) and return boolean?",
+      "range": {
+        "startLine": 469,
+        "startChar": 28,
+        "endLine": 469,
+        "endChar": 60
+      },
+      "revId": "1e0871712bd370c447cfee077c227bbdc1f63157",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_69218365",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-15T22:46:21Z",
+      "side": 1,
+      "message": "assert classType",
+      "revId": "1e0871712bd370c447cfee077c227bbdc1f63157",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

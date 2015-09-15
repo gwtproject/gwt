@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 import javaemul.internal.JsUtils;
 
 /**
@@ -304,13 +306,21 @@ public final class Double extends Number implements Comparable<Double> {
   }
 
   @Override
-  public native double doubleValue() /*-{
-    return @javaemul.internal.InternalPreconditions::checkNotNull(Ljava/lang/Object;)(this);
+  public double doubleValue() {
+    return doubleValue0(checkNotNull(this));
+  }
+
+  private native double doubleValue0(Object instance) /*-{
+    return instance;
   }-*/;
 
   @Override
-  public native boolean equals(Object o) /*-{
-    return this === o;
+  public boolean equals(Object o) {
+    return equals0(checkNotNull(this), o);
+  }
+
+  private native boolean equals0(Object instance, Object other) /*-{
+    return instance === other;
   }-*/;
 
   @Override

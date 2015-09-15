@@ -157,13 +157,6 @@ public final class String implements Comparable<String>, CharSequence,
 
   // CHECKSTYLE_OFF: This class has special needs.
 
-  /**
-   * @skip
-   */
-  static String[] __createArray(int numElements) {
-    return new String[numElements];
-  }
-
   static native String __substr(String str, int beginIndex, int len) /*-{
     return str.substr(beginIndex, len);
   }-*/;
@@ -175,7 +168,7 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * @skip
    */
-  static String __translateReplaceString(String replaceStr) {
+  private static String translateReplaceString(String replaceStr) {
     int pos = 0;
     while (0 <= (pos = replaceStr.indexOf("\\", pos))) {
       if (replaceStr.charAt(pos + 1) == '$') {
@@ -187,8 +180,6 @@ public final class String implements Comparable<String>, CharSequence,
     }
     return replaceStr;
   }
-
- 
 
   // CHECKSTYLE_ON
 
@@ -532,12 +523,16 @@ public final class String implements Comparable<String>, CharSequence,
     return regionMatches(false, toffset, other, ooffset, len);
   }
 
-  public native String replace(char from, char to) /*-{
+  public String replace(char from, char to) {
     // Translate 'from' into unicode escape sequence (\\u and a four-digit hexadecimal number).
     // Escape sequence replacement is used instead of a string literal replacement
     // in order to escape regexp special characters (e.g. '.').
-    var hex = @java.lang.Integer::toHexString(I)(from);
-    var regex = "\\u" + "0000".substring(hex.length) + hex;
+    String hex = Integer.toHexString(from);
+    String regex = "\\u" + "0000".substring(hex.length()) + hex;
+    return replace0(regex, to);
+  }
+
+  private native String replace0(String regex, char to) /*-{
     return this.replace(RegExp(regex, "g"), String.fromCharCode(to));
   }-*/;
 
@@ -565,8 +560,12 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * TODO(jat): properly handle Java regex syntax
    */
-  public native String replaceAll(String regex, String replace) /*-{
-    replace = @java.lang.String::__translateReplaceString(Ljava/lang/String;)(replace);
+  public String replaceAll(String regex, String replace) {
+    replace = translateReplaceString(replace);
+    return replaceAll0(regex, replace);
+  }
+
+  private native String replaceAll0(String regex, String replace) /*-{
     return this.replace(RegExp(regex, "g"), replace);
   }-*/;
 
@@ -578,8 +577,12 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * TODO(jat): properly handle Java regex syntax
    */
-  public native String replaceFirst(String regex, String replace) /*-{
-    replace = @java.lang.String::__translateReplaceString(Ljava/lang/String;)(replace);
+  public String replaceFirst(String regex, String replace) {
+    replace = translateReplaceString(replace);
+    return replaceFirst0(regex, replace);
+  }
+
+  private native String replaceFirst0(String regex, String replace) /*-{
     return this.replace(RegExp(regex), replace);
   }-*/;
 
@@ -601,7 +604,23 @@ public final class String implements Comparable<String>, CharSequence,
    *
    * TODO(jat): properly handle Java regex syntax
    */
-  public native String[] split(String regex, int maxMatch) /*-{
+  public String[] split(String regex, int maxMatch) {
+    Object jsArrayString = split0(regex, maxMatch);
+
+    int length = ArrayHelper.getLength(jsArrayString);
+    String[] array = new String[length];
+
+    for ( int i = 0; i < length; i++) {
+      array[i] = getStringValueFromArray(jsArrayString, i);
+    }
+    return array;
+  }
+
+  private static native String getStringValueFromArray(Object array, int index) /*-{
+    return array[index];
+  }-*/;
+
+  public native Object[] split0(String regex, int maxMatch) /*-{
     // The compiled regular expression created from the string
     var compiled = new RegExp(regex, "g");
     // the Javascipt array to hold the matches prior to conversion
@@ -648,11 +667,7 @@ public final class String implements Comparable<String>, CharSequence,
         out.splice(lastNonEmpty, out.length - lastNonEmpty);
       }
     }
-    var jr = @java.lang.String::__createArray(I)(out.length);
-    for ( var i = 0; i < out.length; ++i) {
-      jr[i] = out[i];
-    }
-    return jr;
+    return out;
   }-*/;
 
   public boolean startsWith(String prefix) {

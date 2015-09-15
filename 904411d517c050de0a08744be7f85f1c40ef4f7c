@@ -16,6 +16,24 @@
       "revId": "904411d517c050de0a08744be7f85f1c40ef4f7c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_4afbdc81",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsInliner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-15T15:44:12Z",
+      "side": 1,
+      "message": "Actually yes. This is what solves the missing hoisiting. The reason being is that JsVar contains a JsName not a JsNameRef and if the variable only appears in the declaration then is not seen by HostedNameVisitor. \n\nIt is also better to run these visitor from the expression that is going to be inlined, in the sense that while extracting the body of the function to inline, some transformations might happen.",
+      "parentUuid": "44725a92_4fc76e9e",
+      "revId": "904411d517c050de0a08744be7f85f1c40ef4f7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

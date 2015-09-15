@@ -16,6 +16,46 @@
       "revId": "b564919b8c6af8cc4980b876dc5352ea9dc5f031",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_605c3764",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-15T18:08:07Z",
+      "side": 1,
+      "message": "I have some misgivings about the whole approach in JsNameSpaceChooser. This was a hack already for SDM.\n\nWhat I don\u0027t like about this is that now the qualified name concept (that was already there for JsNameRefs) is also in JsName. I know you did not design this pass, but now that is a general pass I think it should be redesigned.\n\nI propose:\n  1) get rid of the namespace JsName in JsName\n  2) compute the mapping (as done here) from JsName to JsName namespace.\n  3) run a global JsVisitor pass that adds the qualifiers appropriately.\n\nAm I missing a reason why it shouldn\u0027t be done this way?\n\nAlso the fragment/code splitter code is kind of duplicated in many places. We should look at those and simplify instead of adding an extra layer. I think the handling of fragments should be done in one place not split between JsNamespaceChooser and HandleCrossFragmentReferences.",
+      "revId": "b564919b8c6af8cc4980b876dc5352ea9dc5f031",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_60e7d719",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-15T18:08:07Z",
+      "side": 1,
+      "message": "Extract a constant with an appropriate name and lets use the same convention as before:  \"$gwt_interned\".",
+      "range": {
+        "startLine": 396,
+        "startChar": 0,
+        "endLine": 398,
+        "endChar": 5
+      },
+      "revId": "b564919b8c6af8cc4980b876dc5352ea9dc5f031",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

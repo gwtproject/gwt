@@ -26,8 +26,8 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
    */
 
   // CHECKSTYLE_OFF: These have to be created somewhere.
-  public static final Boolean FALSE = new Boolean(false);
-  public static final Boolean TRUE = new Boolean(true);
+  public static final Boolean FALSE = DevirtualizedBoolean.$createBoolean(false);
+  public static final Boolean TRUE = DevirtualizedBoolean.$createBoolean(true);
 
   // CHECKSTYLE_ON
 
@@ -38,36 +38,35 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
   }
 
   public static int hashCode(boolean value) {
-    // The Java API doc defines these magic numbers.
-    return value ? 1231 : 1237;
+    return DevirtualizedBoolean.hashCode(value);
   }
 
   public static boolean logicalAnd(boolean a, boolean b) {
-    return a && b;
+    return DevirtualizedBoolean.logicalAnd(a, b);
   }
 
   public static boolean logicalOr(boolean a, boolean b) {
-    return a || b;
+    return DevirtualizedBoolean.logicalOr(a, b);
   }
 
   public static boolean logicalXor(boolean a, boolean b) {
-    return a ^ b;
+    return DevirtualizedBoolean.logicalXor(a, b);
   }
 
   public static boolean parseBoolean(String s) {
-    return "true".equalsIgnoreCase(s);
+    return DevirtualizedBoolean.parseBoolean(s);
   }
 
   public static String toString(boolean x) {
-    return String.valueOf(x);
+    return DevirtualizedBoolean.toString(x);
   }
 
   public static Boolean valueOf(boolean b) {
-    return b ? TRUE : FALSE;
+    return DevirtualizedBoolean.valueOf(b);
   }
 
   public static Boolean valueOf(String s) {
-    return valueOf(parseBoolean(s));
+    return DevirtualizedBoolean.valueOf(s);
   }
 
   public Boolean(boolean value) {
@@ -88,37 +87,37 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
     $createBoolean(s);
   }
 
-  public native boolean booleanValue() /*-{
-    return @javaemul.internal.InternalPreconditions::checkNotNull(Ljava/lang/Object;)(this);
-  }-*/;
+  public boolean booleanValue() {
+    return DevirtualizedBoolean.booleanValue(this);
+  }
 
   @Override
   public int compareTo(Boolean b) {
-    return compare(booleanValue(), b.booleanValue());
-  };
+    return DevirtualizedBoolean.compareTo(this, b);
+  }
 
   @Override
-  public native boolean equals(Object o) /*-{
-    return this === o;
-  }-*/;
+  public boolean equals(Object o) {
+    return DevirtualizedBoolean.equals(this, o);
+  }
 
   @Override
   public int hashCode() {
-    return hashCode(booleanValue());
+    return DevirtualizedBoolean.hashCode(this);
   }
 
   @Override
   public String toString() {
-    return toString(booleanValue());
+    return DevirtualizedBoolean.toString(this);
   }
 
   // CHECKSTYLE_OFF: Utility Methods for unboxed Boolean.
-  static native Boolean $createBoolean(boolean x) /*-{
-    return x;
-  }-*/;
+  static Boolean $createBoolean(boolean x) {
+    return DevirtualizedBoolean.$createBoolean(x);
+  }
 
   static Boolean $createBoolean(String x) {
-    return $createBoolean(Boolean.parseBoolean(x));
+    return DevirtualizedBoolean.$createBoolean(x);
   }
   // CHECKSTYLE_ON: End utility methods
 }

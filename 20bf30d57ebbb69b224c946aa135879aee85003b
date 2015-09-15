@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44725a92_aa6b90e3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2603,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-15T15:37:07Z",
+      "side": 1,
+      "message": "Just that you are at it rename toStringMeth to toStringMethod here.",
+      "range": {
+        "startLine": 2603,
+        "startChar": 14,
+        "endLine": 2603,
+        "endChar": 26
+      },
+      "revId": "20bf30d57ebbb69b224c946aa135879aee85003b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

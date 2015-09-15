@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.jjs.impl;
 
+import static com.google.gwt.dev.js.JsUtils.createAssignment;
+
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.linker.impl.StandardSymbolData;
 import com.google.gwt.dev.CompilerContext;
@@ -2204,10 +2206,6 @@ public class GenerateJavaScriptAST {
       }
     }
 
-    private JsExpression createAssignment(JsExpression lhs, JsExpression rhs) {
-      return new JsBinaryOperation(lhs.getSourceInfo(), JsBinaryOperator.ASG, lhs, rhs);
-    }
-
     private JsExpression createCommaExpression(JsExpression lhs, JsExpression rhs) {
       if (lhs == null) {
         return rhs;
@@ -2215,14 +2213,6 @@ public class GenerateJavaScriptAST {
         return lhs;
       }
       return new JsBinaryOperation(lhs.getSourceInfo(), JsBinaryOperator.COMMA, lhs, rhs);
-    }
-
-    private JsNameRef createNativeToStringRef(JsExpression qualifier) {
-      JsName toStringName = objectScope.declareName("toString");
-      toStringName.setObfuscatable(false);
-      JsNameRef toStringRef = toStringName.makeRef(qualifier.getSourceInfo());
-      toStringRef.setQualifier(qualifier);
-      return toStringRef;
     }
 
     private JsExpression generateCastableTypeMap(JClassType x) {
@@ -2612,27 +2602,9 @@ public class GenerateJavaScriptAST {
     private void generateToStringAlias(JClassType x, List<JsStatement> globalStmts) {
       JMethod toStringMeth = program.getIndexedMethod("Object.toString");
       if (x.getMethods().contains(toStringMeth)) {
-        SourceInfo sourceInfo = x.getSourceInfo();
-        // _.toString = function(){return this.java_lang_Object_toString();}
-
-        // lhs
-        JsNameRef lhs = createNativeToStringRef(getPrototypeQualifierOf(x, sourceInfo));
-
-        // rhs
-        JsNameRef toStringRef = new JsNameRef(sourceInfo, polymorphicNames.get(toStringMeth));
-        toStringRef.setQualifier(new JsThisRef(sourceInfo));
-        JsInvocation call = new JsInvocation(sourceInfo, toStringRef);
-        JsReturn jsReturn = new JsReturn(sourceInfo, call);
-        JsFunction rhs = new JsFunction(sourceInfo, topScope);
-        JsBlock body = new JsBlock(sourceInfo);
-        body.getStatements().add(jsReturn);
-        rhs.setBody(body);
-
-        // asg
-        JsExpression asg = createAssignment(lhs, rhs);
-        JsExprStmt stmt = asg.makeStmt();
-        globalStmts.add(stmt);
-        typeForStatMap.put(stmt, program.getTypeJavaLangObject());
+        JsName toStringName = objectScope.declareName("toString");
+        toStringName.setObfuscatable(false);
+        generateVTableAlias(globalStmts, toStringMeth, toStringName);
       }
     }
 

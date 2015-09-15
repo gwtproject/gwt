@@ -176,7 +176,7 @@ public abstract class Number implements Serializable {
    * This function contains common logic for parsing a String as a floating-
    * point number and validating the range.
    */
-  protected static double __parseAndValidateDouble(String s) throws NumberFormatException {
+  static double __parseAndValidateDouble(String s) throws NumberFormatException {
     if (!__isValidDouble(s)) {
       throw NumberFormatException.forInputString(s);
     }

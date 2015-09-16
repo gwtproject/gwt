@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "44725a92_4fdbe706",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-16T00:51:32Z",
+      "side": 1,
+      "message": "With this fix it should not. I created a CompileTest with the repro (the tests in CompileTest do real incremental compiles for the most part).\n\nThe reason for this failure is that in incremental mode Boolean and Double where not considered instantiated hence if you performed a small compile that had a call to a devirtualized method (lets say Comparable o, o.compareTo) then when synthesizing the trapoline it would fail. Incremental compile relies on being able to \"recreate\" class that wont be output but where calls to them happen.",
+      "parentUuid": "44725a92_a9fabbe1",
+      "revId": "0027f33cb8817ed87eac667655207a544d93c6e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44725a92_c9f7f7f7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-15T23:00:11Z",
       "side": 1,
       "message": "Oops, how did I miss this? It\u0027s kind of annoying how spread out these instantiation/liveness checks are in the compiler.",
+      "revId": "0027f33cb8817ed87eac667655207a544d93c6e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_6fd0a3e0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1360,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-16T00:51:32Z",
+      "side": 1,
+      "message": "Yes. it is.",
+      "parentUuid": "44725a92_c9f7f7f7",
       "revId": "0027f33cb8817ed87eac667655207a544d93c6e7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

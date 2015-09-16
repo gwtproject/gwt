@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44725a92_109ae7ad",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Boolean.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-16T16:28:54Z",
+      "side": 1,
+      "message": "Changing this to a Java method is going to make this worse for GWT, because it will be compiled as\n\nmaskUndefined(this) \u003d\u003d\u003d maskUndefined(o)\n\nor inlined to\n\n(this \u003d\u003d null ? null) : this \u003d\u003d\u003d (o \u003d\u003d null ? null : o)\n\n\u0027this \u003d\u003d\u003d o\u0027 is exactly what we want this to optimize to for unboxed Booleans and Doubles with checks disabled.\n\nWhen you make changes like this, you should actually look at the result in terms of performance and size this has on Docs, which is heavily dependent on the unboxing performance.",
+      "revId": "6421d2824dadc2aad926365dd8d365ed2ea39cc4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44725a92_309fe39d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-16T16:28:54Z",
+      "side": 1,
+      "message": "Same issue as Boolean.equals, this looks like a code-size and performance regression to me, even with checkNotNull compiled out.",
+      "revId": "6421d2824dadc2aad926365dd8d365ed2ea39cc4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

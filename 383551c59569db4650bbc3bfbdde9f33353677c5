@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9cec775_8132ba24",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-17T20:05:14Z",
+      "side": 1,
+      "message": "jsPrototype.lastIndexOf(\".\");\n\nor maybe\n\n  String[] components \u003d jsPrototype.split(\".\");\n  namespace \u003d Joiner.on(\u0027.\u0027).join(Arrays.asList(components).sublist(0, components.lentgth - 1));\n  exportName \u003d components[components.length - 1];",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 84
+      },
+      "revId": "383551c59569db4650bbc3bfbdde9f33353677c5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

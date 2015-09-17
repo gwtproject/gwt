@@ -47,7 +47,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
    * {@link com.google.gwt.dev.jjs.impl.JsInteropRestrictionChecker}.
    */
   public enum JsPropertyAccessorType {
-    GETTER, SETTER, UNDEFINED;
+    GETTER, SETTER, UNDEFINED, NONE;
   }
 
   public static final Comparator<JMethod> BY_SIGNATURE_COMPARATOR = new Comparator<JMethod>() {
@@ -60,7 +60,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
   private String jsName;
   private boolean exported;
   private String exportNamespace;
-  private JsPropertyAccessorType jsPropertyType;
+  private JsPropertyAccessorType jsPropertyType = JsPropertyAccessorType.NONE;
   private Specialization specialization;
   private InliningMode inliningMode = InliningMode.NORMAL;
   private boolean preventDevirtualization = false;
@@ -191,23 +191,11 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
         return overriddenMethod.jsPropertyType;
       }
     }
-    return null;
+    return JsPropertyAccessorType.NONE;
   }
 
   public boolean isJsPropertyAccessor() {
-    return jsPropertyType != null;
-  }
-
-  public boolean isOrOverridesJsPropertyAccessor() {
-    if (isJsPropertyAccessor()) {
-      return true;
-    }
-    for (JMethod overriddenMethod : getOverriddenMethods()) {
-      if (overriddenMethod.isJsPropertyAccessor()) {
-        return true;
-      }
-    }
-    return false;
+    return jsPropertyType != JsPropertyAccessorType.NONE;
   }
 
   private boolean isJsFunctionMethod() {

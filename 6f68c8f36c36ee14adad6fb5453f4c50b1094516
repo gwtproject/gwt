@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9cec775_c1884217",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-17T20:07:21Z",
+      "side": 1,
+      "message": "Can you update the comment explaining the meaning of NONE (vs UNDEFINED)",
+      "range": {
+        "startLine": 50,
+        "startChar": 31,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "6f68c8f36c36ee14adad6fb5453f4c50b1094516",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

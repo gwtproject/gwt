@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a90a0f5b_ef14210d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-17T19:52:36Z",
+      "side": 1,
+      "message": "Maybe we should have declareUnobfuscatableName.",
+      "range": {
+        "startLine": 733,
+        "startChar": 44,
+        "endLine": 733,
+        "endChar": 55
+      },
+      "revId": "f04fd17c2bf02482b298382118a4d16eefb94c8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

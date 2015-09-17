@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49a1935d_a59f041e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-17T19:08:35Z",
+      "side": 1,
+      "message": "convert to static?",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 608,
+        "endChar": 7
+      },
+      "revId": "80a06f65464349fac726298ac37715299b6d1f08",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49a1935d_c59c902b",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-17T19:08:35Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 610,
+        "startChar": 0,
+        "endLine": 612,
+        "endChar": 7
+      },
+      "revId": "80a06f65464349fac726298ac37715299b6d1f08",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -22,6 +22,30 @@
       "revId": "6f68c8f36c36ee14adad6fb5453f4c50b1094516",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e99c0776_ab8dc5b7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-18T19:36:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9cec775_c1884217",
+      "range": {
+        "startLine": 50,
+        "startChar": 31,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "6f68c8f36c36ee14adad6fb5453f4c50b1094516",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

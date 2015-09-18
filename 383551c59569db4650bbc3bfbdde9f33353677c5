@@ -22,6 +22,30 @@
       "revId": "383551c59569db4650bbc3bfbdde9f33353677c5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e99c0776_57e88473",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-18T02:12:22Z",
+      "side": 1,
+      "message": "Good catch!!\n\nI think the current form is simpler so I will go with that.",
+      "parentUuid": "e9cec775_8132ba24",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 84
+      },
+      "revId": "383551c59569db4650bbc3bfbdde9f33353677c5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

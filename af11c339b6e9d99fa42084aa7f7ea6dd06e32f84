@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49fc33c5_043e76ed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-18T19:37:57Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "af11c339b6e9d99fa42084aa7f7ea6dd06e32f84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49fc33c5_e497da3b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-18T19:37:57Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "af11c339b6e9d99fa42084aa7f7ea6dd06e32f84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49fc33c5_c49cde60",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-18T19:37:57Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "af11c339b6e9d99fa42084aa7f7ea6dd06e32f84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49fc33c5_a4a1e29a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-18T19:37:57Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027No one line javadoc comments\u0027.",
+      "revId": "af11c339b6e9d99fa42084aa7f7ea6dd06e32f84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49fc33c5_84a6e6ae",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-18T19:37:57Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "af11c339b6e9d99fa42084aa7f7ea6dd06e32f84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

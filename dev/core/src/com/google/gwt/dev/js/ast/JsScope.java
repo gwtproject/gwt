@@ -48,10 +48,11 @@ public abstract class JsScope implements Serializable {
   }
 
   /**
-   * Gets a name object associated with the specified ident in this scope, creating it if necessary.
-   *
-   * @param ident An identifier that is unique within this scope.
-   */
+     * Gets a name object associated with the specified ident in this scope, creating it if necessary.
+     *
+     * @param ident An identifier that is unique within this scope.
+     */
+  }
   public final JsName declareName(String ident) {
     JsName name = findExistingNameNoRecurse(ident);
     if (name != null) {
@@ -79,6 +80,32 @@ public abstract class JsScope implements Serializable {
       return name;
     }
     return doCreateName(ident, shortIdent);
+  }
+
+  /**
+   * Gets a name object associated with the specified ident in this scope, creating it if necessary,
+   * and makes it non obfuscatable.
+   *
+   * @param ident An identifier that is unique within this scope.
+   */
+  public final JsName declareUnobfuscatableName(String ident) {
+    JsName name = declareName(ident);
+    name.setUnobfuscatable();
+    return name;
+  }
+
+  /**
+   * Gets a name object associated with the specified ident in this scope, creating it if necessary.
+   *
+   * @param ident An identifier that is unique within this scope.
+   * @param shortIdent A "pretty" name that does not have to be unique.
+   * @throws IllegalArgumentException if ident already exists in this scope but the requested short
+   *           name does not match the existing short name.
+   */
+  public final JsName declareUnobfuscatableName(String ident, String shortIdent) {
+    JsName name = declareName(ident, shortIdent);
+    name.setUnobfuscatable();
+    return name;
   }
 
   /**

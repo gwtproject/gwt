@@ -431,23 +431,19 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JField x, Context ctx) {
-      String name = x.getName();
-      String mangleName = mangleName(x);
-      if (x.isStatic()) {
-        JsName jsName = topScope.declareName(mangleName, name);
-        names.put(x, jsName);
-        recordSymbol(x, jsName);
+      JsName jsName;
+      if (x.isStatic() && !x.isJsNative()) {
+        jsName = topScope.declareName(mangleName(x), x.getName());
       } else {
-        JsName jsName;
         if (x.isJsProperty()) {
-          jsName = scopeStack.peek().declareName(name, name);
+          jsName = scopeStack.peek().declareName(x.getJsName(), x.getJsName());
           jsName.setObfuscatable(false);
         } else {
-          jsName = scopeStack.peek().declareName(mangleName, name);
+          jsName = scopeStack.peek().declareName(mangleName(x), x.getName());
         }
-        names.put(x, jsName);
-        recordSymbol(x, jsName);
       }
+      names.put(x, jsName);
+      recordSymbol(x, jsName);
     }
 
     @Override
@@ -1040,35 +1036,26 @@ public class GenerateJavaScriptAST {
 
     @Override
     public void endVisit(JFieldRef x, Context ctx) {
-      JField field = x.getField();
-      JsName jsFieldName = names.get(field);
-      JsNameRef nameRef = jsFieldName.makeRef(x.getSourceInfo());
-      JsExpression curExpr = nameRef;
+      push(x.getField().isStatic() ? dispatchToStaticField(x) : dispatchToInstanceField(x));
+    }
 
+    private JsExpression dispatchToStaticField(JFieldRef x) {
       /*
        * Note: the comma expressions here would cause an illegal tree state if
        * the result expression ended up on the lhs of an assignment. A hack in
        * in endVisit(JBinaryOperation) rectifies the situation.
        */
 
-      // See if we need a clinit
-      JsInvocation jsInvocation = maybeCreateClinitCall(field, false);
-      if (jsInvocation != null) {
-        curExpr = createCommaExpression(jsInvocation, curExpr);
-      }
+      JsExpression result = names.get(x.getField()).makeRef(x.getSourceInfo());
+      // Add clinit (if needed).
+      result = createCommaExpression(maybeCreateClinitCall(x.getField(), false), result);
+      return maybeAddUnnecessaryInstanceQualifier(result, x.getInstance());
+    }
 
-      if (x.getInstance() != null) {
-        JsExpression qualifier = pop();
-        if (field.isStatic()) {
-          // unnecessary qualifier, create a comma expression
-          curExpr = createCommaExpression(qualifier, curExpr);
-        } else {
-          // necessary qualifier, qualify the name ref
-          nameRef.setQualifier(qualifier);
-        }
-      }
-
-      push(curExpr);
+    private JsExpression dispatchToInstanceField(JFieldRef x) {
+      JsNameRef reference = names.get(x.getField()).makeRef(x.getSourceInfo());
+      reference.setQualifier((JsExpression) pop()); // instance
+      return reference;
     }
 
     @Override
@@ -1337,7 +1324,12 @@ public class GenerateJavaScriptAST {
               ? createJsQualifier(method.getQualifiedJsName(), x.getSourceInfo())
               : names.get(method).makeRef(x.getSourceInfo());
       JsExpression result = new JsInvocation(x.getSourceInfo(), methodName, args);
-      if (x.getInstance() != null) {
+      return maybeAddUnnecessaryInstanceQualifier(result, x.getInstance());
+    }
+
+    private JsExpression maybeAddUnnecessaryInstanceQualifier(
+        JsExpression result, JExpression instance) {
+      if (instance != null) {
         JsExpression unnecessaryQualifier = pop();
         result = createCommaExpression(unnecessaryQualifier, result);
       }

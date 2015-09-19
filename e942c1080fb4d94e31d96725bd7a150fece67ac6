@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e99c0776_9d320625",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsScope.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-19T04:00:05Z",
+      "side": 1,
+      "message": "This overload seems unnecessary as we don\u0027t have mangled unobfuscatable names.",
+      "revId": "e942c1080fb4d94e31d96725bd7a150fece67ac6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e99c0776_bd8b4a11",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-19T05:15:27Z",
+      "side": 1,
+      "message": "why do we have both java_lang_double and type_primitive_number? They should be the same with this patch.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 25
+      },
+      "revId": "e261a009786b4e855da569c257c12f3d838c65ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

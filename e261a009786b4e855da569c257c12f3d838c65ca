@@ -22,6 +22,30 @@
       "revId": "e261a009786b4e855da569c257c12f3d838c65ca",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e99c0776_9df5a690",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-19T06:30:04Z",
+      "side": 1,
+      "message": "Not exactly. These types have to line up with similar ordinals in Array.java. Primitive Boolean/Number are not the same semantics as Unboxed Boolean/Double.  Primitives aren\u0027t nullable, unboxed types are.\n\nPrimitive arrays are initialized to false/0, unboxed arrays are initialized to null. Primitive arrays can set array elements without doing Cast.isJavaBoolean()/Cast.isJavaDouble().\n\nIf you don\u0027t have this distinction, then\n\nDouble d[] \u003d new Double[10]; \n\ngets initialized with all 0s, and d[n] !\u003d null, even though it should be null.",
+      "parentUuid": "e99c0776_bd8b4a11",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 25
+      },
+      "revId": "e261a009786b4e855da569c257c12f3d838c65ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

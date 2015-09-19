@@ -1046,7 +1046,7 @@ public class GenerateJavaScriptAST {
        * in endVisit(JBinaryOperation) rectifies the situation.
        */
 
-      JsExpression result = names.get(x.getField()).makeRef(x.getSourceInfo());
+      JsExpression result = createStaticReference(x.getField(), x.getSourceInfo());
       // Add clinit (if needed).
       result = createCommaExpression(maybeCreateClinitCall(x.getField(), false), result);
       return maybeAddUnnecessaryInstanceQualifier(result, x.getInstance());
@@ -1319,21 +1319,9 @@ public class GenerateJavaScriptAST {
     }
 
     private JsExpression dispatchToStatic(JMethodCall x, JMethod method, List<JsExpression> args) {
-      JsNameRef methodName =
-          method.isJsNative()
-              ? createJsQualifier(method.getQualifiedJsName(), x.getSourceInfo())
-              : names.get(method).makeRef(x.getSourceInfo());
+      JsNameRef methodName = createStaticReference(method, x.getSourceInfo());
       JsExpression result = new JsInvocation(x.getSourceInfo(), methodName, args);
       return maybeAddUnnecessaryInstanceQualifier(result, x.getInstance());
-    }
-
-    private JsExpression maybeAddUnnecessaryInstanceQualifier(
-        JsExpression result, JExpression instance) {
-      if (instance != null) {
-        JsExpression unnecessaryQualifier = pop();
-        result = createCommaExpression(unnecessaryQualifier, result);
-      }
-      return result;
     }
 
     private JsExpression dispatchToSuper(JMethodCall x, JMethod method, List<JsExpression> args) {
@@ -2172,6 +2160,22 @@ public class GenerateJavaScriptAST {
         return lhs;
       }
       return new JsBinaryOperation(lhs.getSourceInfo(), JsBinaryOperator.COMMA, lhs, rhs);
+    }
+
+    private JsNameRef createStaticReference(JMember member, SourceInfo sourceInfo) {
+      assert member.isStatic();
+      return member.isJsNative()
+          ? createJsQualifier(member.getQualifiedJsName(), sourceInfo)
+          : names.get(member).makeRef(sourceInfo);
+    }
+
+    private JsExpression maybeAddUnnecessaryInstanceQualifier(
+        JsExpression result, JExpression instance) {
+      if (instance != null) {
+        JsExpression unnecessaryQualifier = pop();
+        result = createCommaExpression(unnecessaryQualifier, result);
+      }
+      return result;
     }
 
     private JsExpression generateCastableTypeMap(JClassType x) {

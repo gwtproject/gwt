@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_707e0cd8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-19T06:30:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_d9cb72c6",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 65
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_7e4b447f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
         "patchSetId": 18
@@ -176,6 +200,30 @@
         "id": 5001
       },
       "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_7e4b447f",
+      "range": {
+        "startLine": 113,
+        "startChar": 9,
+        "endLine": 113,
+        "endChar": 15
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_9083785c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-19T06:30:04Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "a47f9520_7e4b447f",
@@ -238,6 +286,30 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_30888475",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-19T06:30:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_dee4b8cd",
+      "range": {
+        "startLine": 214,
+        "startChar": 20,
+        "endLine": 214,
+        "endChar": 40
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_bee76cd0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
         "patchSetId": 18
@@ -270,6 +342,30 @@
         "id": 5001
       },
       "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_bee76cd0",
+      "range": {
+        "startLine": 215,
+        "startChar": 37,
+        "endLine": 215,
+        "endChar": 52
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_508d1083",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-19T06:30:04Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "a47f9520_bee76cd0",
@@ -332,6 +428,30 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_f072fc06",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 2675,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-19T06:30:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_be9a0c79",
+      "range": {
+        "startLine": 2675,
+        "startChar": 28,
+        "endLine": 2675,
+        "endChar": 39
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_fe88942f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
         "patchSetId": 18
@@ -364,6 +484,30 @@
         "id": 5001
       },
       "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_fe88942f",
+      "range": {
+        "startLine": 48,
+        "startChar": 41,
+        "endLine": 48,
+        "endChar": 49
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_1070e8fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-19T06:30:04Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "a47f9520_fe88942f",
@@ -426,6 +570,30 @@
     },
     {
       "key": {
+        "uuid": "a47f9520_b07c74d8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-19T06:30:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_1e8ec039",
+      "range": {
+        "startLine": 64,
+        "startChar": 30,
+        "endLine": 64,
+        "endChar": 34
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47f9520_be83ec10",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
         "patchSetId": 18
@@ -458,6 +626,30 @@
         "id": 5001
       },
       "writtenOn": "2015-08-31T20:56:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47f9520_be83ec10",
+      "range": {
+        "startLine": 78,
+        "startChar": 32,
+        "endLine": 78,
+        "endChar": 36
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_d07900e8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-19T06:30:04Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "a47f9520_be83ec10",
@@ -531,6 +723,30 @@
       "writtenOn": "2015-08-31T20:56:22Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "a47f9520_9ec5d033",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 98
+      },
+      "revId": "305c915028dd048fed6e47ecd869ef8e5b56420a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47f9520_7067ec45",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-09-19T06:30:04Z",
+      "side": 1,
+      "message": "Changed order, but didn\u0027t implement table at this point.",
       "parentUuid": "a47f9520_9ec5d033",
       "range": {
         "startLine": 54,

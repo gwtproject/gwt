@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49fc33c5_843a6694",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-20T14:52:07Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.HashSet.",
+      "revId": "bebf909df4ab21bb6193e9c328a7cf5cca860bde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49fc33c5_64208a63",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-20T14:52:07Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Set.",
+      "revId": "bebf909df4ab21bb6193e9c328a7cf5cca860bde",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

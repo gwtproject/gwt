@@ -16,6 +16,24 @@
       "revId": "e942c1080fb4d94e31d96725bd7a150fece67ac6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c98bc36e_53c21671",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsScope.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-21T18:38:48Z",
+      "side": 1,
+      "message": "There is one use. Look at GenerateJavaScriptAST line 444 in this patch.",
+      "parentUuid": "e99c0776_9d320625",
+      "revId": "e942c1080fb4d94e31d96725bd7a150fece67ac6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

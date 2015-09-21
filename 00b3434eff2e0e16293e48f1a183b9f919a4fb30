@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49fc33c5_67752cc4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-21T21:41:50Z",
+      "side": 1,
+      "message": "else if",
+      "range": {
+        "startLine": 437,
+        "startChar": 6,
+        "endLine": 439,
+        "endChar": 7
+      },
+      "revId": "00b3434eff2e0e16293e48f1a183b9f919a4fb30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49fc33c5_e70ebc3d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-21T21:41:50Z",
+      "side": 1,
+      "message": "I would move the pop()s to the endVisit,\n\n  endVisit(JFieldRef x, Context ctx) {\n    JsExpression qualifier \u003d null;\n    if (x.getIntance() !\u003d null) {\n       qualifier \u003d pop();\n    }\n    push(..isStatic() ? dispatchToStaticField(x, qualifier) : dispatchToInstanceField(x, qualifier);\n}\n\nI think it reads better.",
+      "range": {
+        "startLine": 1057,
+        "startChar": 29,
+        "endLine": 1057,
+        "endChar": 50
+      },
+      "revId": "00b3434eff2e0e16293e48f1a183b9f919a4fb30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

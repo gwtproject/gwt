@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6959f7e7_45756ac3",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-22T23:44:12Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "1390d26bec35fd496d28675d5d07961ddf3d7e74",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

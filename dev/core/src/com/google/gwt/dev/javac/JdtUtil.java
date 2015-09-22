@@ -25,6 +25,7 @@ import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.impl.BooleanConstant;
+import org.eclipse.jdt.internal.compiler.impl.Constant;
 import org.eclipse.jdt.internal.compiler.impl.StringConstant;
 import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
 import org.eclipse.jdt.internal.compiler.lookup.Binding;
@@ -39,6 +40,7 @@ import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SyntheticArgumentBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SyntheticMethodBinding;
 import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
+import org.eclipse.jdt.internal.compiler.lookup.TypeIds;
 
 import java.util.Arrays;
 import java.util.List;
@@ -343,5 +345,14 @@ public final class JdtUtil {
 
   public static boolean isStaticClass(SourceTypeBinding binding) {
     return binding.isNestedType() && binding.isStatic();
+  }
+
+  public static boolean isCompileTimeConstant(FieldBinding binding) {
+    assert !binding.isFinal() || !binding.isVolatile();
+    boolean isCompileTimeConstant = binding.isStatic() && binding.isFinal() &&
+        binding.constant() != Constant.NotAConstant;
+    assert !isCompileTimeConstant || binding.type.isBaseType() ||
+        (binding.type.id == TypeIds.T_JavaLangString);
+    return isCompileTimeConstant;
   }
 }

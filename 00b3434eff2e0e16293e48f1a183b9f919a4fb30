@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "49fc33c5_4d893118",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-22T00:05:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49fc33c5_0a931f4c",
+      "range": {
+        "startLine": 437,
+        "startChar": 6,
+        "endLine": 439,
+        "endChar": 7
+      },
+      "revId": "00b3434eff2e0e16293e48f1a183b9f919a4fb30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49fc33c5_e70ebc3d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2

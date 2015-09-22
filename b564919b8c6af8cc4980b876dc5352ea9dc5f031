@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "44725a92_e69940ba",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-09-22T18:03:31Z",
+      "side": 1,
+      "message": "I think to do it properly one would create a scope per new name (child of top scope) or a sort of module scope (the names are already unique I think) and move those JsNames from top scope.\n\nThe other think that I don\u0027t like is that code that decides which fragment to put stuff on is all sprinkled here, in HCFR and in CodeSplitter itself (fixups). It would be nicer if there is one place where all this is one at once.",
+      "parentUuid": "44725a92_4052dba9",
+      "revId": "b564919b8c6af8cc4980b876dc5352ea9dc5f031",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44725a92_60e7d719",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsNamespaceChooser.java",
         "patchSetId": 9

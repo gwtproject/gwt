@@ -21,13 +21,16 @@ import com.google.gwt.dev.util.collect.Stack;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.ASTNode;
+import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.AllocationExpression;
+import org.eclipse.jdt.internal.compiler.ast.Clinit;
 import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.ConstructorDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.FieldDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.MethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
+import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
 import org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope;
@@ -87,6 +90,8 @@ public class JSORestrictionsChecker {
       "@JsFunction is only allowed on functional interface";
   public static final String ERR_JS_FUNCTION_CANNOT_HAVE_DEFAULT_METHODS =
       "JsFunction cannot have default methods";
+  public static final String ERR_JS_TYPE_NATIVE_CANNOT_CLINIT =
+      "JsType(native=true) cannot have non constant static initializers";
 
   private enum ClassState {
     NORMAL, JSO
@@ -241,6 +246,23 @@ public class JSORestrictionsChecker {
       }
     }
 
+    private void checkJsTypeNative(TypeDeclaration type, TypeBinding typeBinding) {
+      ReferenceBinding binding = (ReferenceBinding) typeBinding;
+      AnnotationBinding jsTypeAnnotation =
+          JdtUtil.getAnnotation(binding, JsInteropUtil.JSTYPE_CLASS);
+      if (jsTypeAnnotation == null) {
+        return;
+      }
+
+      if (JdtUtil.getAnnotationParameterString(jsTypeAnnotation, "prototype") == null) {
+        return;
+      }
+
+      if (!isClinitEmpty(type)) {
+        errorOn(type, ERR_JS_TYPE_NATIVE_CANNOT_CLINIT);
+      }
+    }
+
     private void checkJsExport(MethodBinding mb) {
       if (JdtUtil.getAnnotation(mb, JsInteropUtil.JSEXPORT_CLASS) != null) {
         boolean isStatic = mb.isConstructor() || mb.isStatic();
@@ -276,6 +298,7 @@ public class JSORestrictionsChecker {
     private ClassState checkType(TypeDeclaration type) {
       SourceTypeBinding binding = type.binding;
       checkJsFunction(type, binding);
+      checkJsTypeNative(type, binding);
 
       if (!isJsoSubclass(binding)) {
         return ClassState.NORMAL;
@@ -328,6 +351,39 @@ public class JSORestrictionsChecker {
       classStateStack.push(checkType(type));
       typeBindingStack.push(type.binding);
     }
+  }
+
+  private static boolean isClinitEmpty(TypeDeclaration type) {
+    Clinit clinit = getStaticInitializerBlock(type);
+    if (clinit == null) {
+      return true;
+    }
+
+    if (clinit.statements != null && clinit.statements.length != 0) {
+      return false;
+    }
+
+    for (FieldDeclaration fieldDeclaration : type.fields) {
+      if (!fieldDeclaration.isStatic() || fieldDeclaration.initialization == null) {
+        continue;
+      }
+
+      if (!JdtUtil.isCompileTimeConstant(fieldDeclaration.binding)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static Clinit getStaticInitializerBlock(TypeDeclaration type) {
+    Clinit clinit = null;
+    for (AbstractMethodDeclaration methodDeclaration : type.methods) {
+      if (methodDeclaration instanceof Clinit) {
+        clinit = (Clinit) methodDeclaration;
+        break;
+      }
+    }
+    return clinit;
   }
 
   /**

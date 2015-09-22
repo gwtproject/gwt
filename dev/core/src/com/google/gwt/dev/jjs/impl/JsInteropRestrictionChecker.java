@@ -275,7 +275,7 @@ public class JsInteropRestrictionChecker extends JVisitor {
         return;
       }
       if (method.getType() != JPrimitiveType.BOOLEAN && method.getName().startsWith("is")) {
-        logError("There can't be non-booelean return for the JsProperty 'is' getter '%s'.",
+        logError("There can't be non-boolean return for the JsProperty 'is' getter '%s'.",
             qualifiedMethodName);
         return;
       }

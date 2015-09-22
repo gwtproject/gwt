@@ -142,7 +142,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "There can't be non-booelean return for the JsProperty 'is' getter"
+        "There can't be non-boolean return for the JsProperty 'is' getter"
         + " 'test.EntryPoint$Buggy.isX()I'.",
         "There can't be void return type or any parameters for the JsProperty getter"
         + " 'test.EntryPoint$Buggy.getY(I)I'.",

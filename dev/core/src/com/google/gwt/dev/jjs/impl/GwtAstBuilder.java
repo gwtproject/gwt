@@ -249,6 +249,7 @@ public class GwtAstBuilder {
   public static final String INIT_NAME = "$init";
   public static final String STATIC_INIT_NAME =  "$" + INIT_NAME;
   public static final String OUTER_LAMBDA_PARAM_NAME = "$$outer_0";
+  public static final String GET_CLASS_METHOD_NAME = "getClass";
 
   /**
    * Visit the JDT AST and produce our own AST. By the end of this pass, the
@@ -1478,8 +1479,9 @@ public class GwtAstBuilder {
           true, AccessModifier.PRIVATE);
 
       // Add a getClass() implementation for all non-Object classes.
-      createSyntheticMethod(info, "getClass", innerLambdaClass, javaLangClass, false, false, false,
-          AccessModifier.PUBLIC,new JClassLiteral(info, innerLambdaClass).makeReturnStatement());
+      createSyntheticMethod(info, GET_CLASS_METHOD_NAME, innerLambdaClass, javaLangClass, false,
+          false, false, AccessModifier.PUBLIC,new JClassLiteral(info, innerLambdaClass)
+              .makeReturnStatement());
 
       innerLambdaClass.setClassDisposition(JDeclaredType.NestedClassDisposition.LAMBDA);
       return innerLambdaClass;
@@ -2912,7 +2914,7 @@ public class GwtAstBuilder {
      */
     private void implementGetClass(JDeclaredType type) {
       JMethod method = type.getMethods().get(2);
-      assert ("getClass".equals(method.getName()));
+      assert (GET_CLASS_METHOD_NAME.equals(method.getName()));
       SourceInfo info = method.getSourceInfo();
       if ("com.google.gwt.lang.Array".equals(type.getName())) {
         /*
@@ -3193,13 +3195,13 @@ public class GwtAstBuilder {
     }
 
     private void pushInitializerMethodInfo(FieldDeclaration x, MethodScope scope) {
-      JMethod initMeth;
+      JMethod initMethod;
       if (x.isStatic()) {
-        initMeth = curClass.type.getClinitMethod();
+        initMethod = curClass.type.getClinitMethod();
       } else {
-        initMeth = curClass.type.getInitMethod();
+        initMethod = curClass.type.getInitMethod();
       }
-      pushMethodInfo(new MethodInfo(initMeth, (JMethodBody) initMeth.getBody(), scope));
+      pushMethodInfo(new MethodInfo(initMethod, (JMethodBody) initMethod.getBody(), scope));
     }
 
     private void pushMethodInfo(MethodInfo newInfo) {
@@ -3224,7 +3226,7 @@ public class GwtAstBuilder {
       assert b.isConstructor();
       JConstructor ctor = (JConstructor) typeMap.get(b);
       JMethodCall call = new JNewInstance(info, ctor);
-      JExpression qualExpr = pop(qualifier);
+      JExpression qualifierExpression = pop(qualifier);
 
       // Enums: hidden arguments for the name and id.
       if (x.enumConstant != null) {
@@ -3245,7 +3247,7 @@ public class GwtAstBuilder {
           for (ReferenceBinding argType : targetBinding.syntheticEnclosingInstanceTypes()) {
             argType = (ReferenceBinding) argType.erasure();
             if (qualifier != null && argType == targetEnclosingType) {
-              call.addArg(qualExpr);
+              call.addArg(qualifierExpression);
             } else {
               JExpression thisRef = resolveThisReference(info, argType, false, scope);
               call.addArg(thisRef);
@@ -3448,7 +3450,7 @@ public class GwtAstBuilder {
         JFieldRef mapRef = new JFieldRef(info, null, mapField, mapClass);
         JDeclarationStatement declStmt = new JDeclarationStatement(info, mapRef, call);
         JMethod clinit =
-            createSyntheticMethod(info, "$clinit", mapClass, JPrimitiveType.VOID, false, true,
+            createSyntheticMethod(info, CLINIT_NAME, mapClass, JPrimitiveType.VOID, false, true,
                 true, AccessModifier.PRIVATE);
         JBlock clinitBlock = ((JMethodBody) clinit.getBody()).getBlock();
         clinitBlock.addStmt(declStmt);
@@ -3690,7 +3692,7 @@ public class GwtAstBuilder {
 
   static Disposition getFieldDisposition(FieldBinding binding) {
     Disposition disposition;
-    if (isCompileTimeConstant(binding)) {
+    if (JdtUtil.isCompileTimeConstant(binding)) {
       disposition = Disposition.COMPILE_TIME_CONSTANT;
     } else if (binding.isFinal()) {
       disposition = Disposition.FINAL;
@@ -3738,16 +3740,7 @@ public class GwtAstBuilder {
     FieldBinding fieldBinding = (FieldBinding) binding;
     return (compilerContext.getOptions().shouldJDTInlineCompileTimeConstants()
         || isBinaryBinding(fieldBinding.declaringClass)) &&
-        isCompileTimeConstant(fieldBinding);
-  }
-
-  private static boolean isCompileTimeConstant(FieldBinding binding) {
-    assert !binding.isFinal() || !binding.isVolatile();
-    boolean isCompileTimeConstant = binding.isStatic() && binding.isFinal() &&
-        binding.constant() != Constant.NotAConstant;
-    assert !isCompileTimeConstant || binding.type.isBaseType() ||
-        (binding.type.id == TypeIds.T_JavaLangString);
-    return isCompileTimeConstant;
+        JdtUtil.isCompileTimeConstant(fieldBinding);
   }
 
   private boolean isBinaryBinding(ReferenceBinding binding) {
@@ -3935,7 +3928,7 @@ public class GwtAstBuilder {
         // Add a getClass() implementation for all non-Object, non-String classes.
         if (isSyntheticGetClassNeeded(x, type)) {
           assert type.getMethods().size() == 2;
-          createSyntheticMethod(info, "getClass", type, javaLangClass, false, false, false,
+          createSyntheticMethod(info, GET_CLASS_METHOD_NAME, type, javaLangClass, false, false, false,
               AccessModifier.PUBLIC);
         }
       }

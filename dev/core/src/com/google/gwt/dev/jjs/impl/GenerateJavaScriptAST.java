@@ -895,9 +895,7 @@ public class GenerateJavaScriptAST {
           vars.add((JsVar) node);
         } else {
           assert (node instanceof JsStatement);
-          JsStatement stmt = (JsStatement) node;
-          globalStmts.add(stmt);
-          typeForStatMap.put(stmt, x);
+          addToGlobalsAndRegister(globalStmts, x, (JsStatement) node);
         }
       }
 
@@ -1015,10 +1013,7 @@ public class GenerateJavaScriptAST {
       } else {
         // for non-statics, only setup an assignment if needed
         if (rhs != null) {
-          JsNameRef fieldRef = name.makeRef(x.getSourceInfo());
-          fieldRef.setQualifier(getPrototypeQualifierOf(x));
-          JsExpression asg = createAssignment(fieldRef, rhs);
-          push(new JsExprStmt(x.getSourceInfo(), asg));
+          push(createPrototypeAssignmentStatement(x, name, rhs));
         } else {
           push(null);
         }
@@ -2427,18 +2422,14 @@ public class GenerateJavaScriptAST {
       defineClassArguments.addAll(constructorArgs);
 
       // JavaClassHierarchySetupUtil.defineClass(typeId, superTypeId, castableMap, constructors)
-      JsStatement defineClassStatement = constructInvocation(x.getSourceInfo(),
-          "JavaClassHierarchySetupUtil.defineClass", defineClassArguments).makeStmt();
-      globalStmts.add(defineClassStatement);
-      typeForStatMap.put(defineClassStatement, x);
+      addToGlobalsAndRegister(globalStmts, x, constructInvocation(x.getSourceInfo(),
+          "JavaClassHierarchySetupUtil.defineClass", defineClassArguments).makeStmt());
 
       if (jsPrototype != null) {
         JExpression objectTypeId = getRuntimeTypeReference(program.getTypeJavaLangObject());
-        JsStatement statement =
+        addToGlobalsAndRegister(globalStmts, x,
             constructInvocation(x.getSourceInfo(), "JavaClassHierarchySetupUtil.copyObjectMethods",
-                convertJavaLiteral(objectTypeId)).makeStmt();
-        globalStmts.add(statement);
-        typeForStatMap.put(statement, x);
+                convertJavaLiteral(objectTypeId)).makeStmt());
       }
     }
 
@@ -2507,12 +2498,9 @@ public class GenerateJavaScriptAST {
       // Ctor2.prototype = ClassName.prototype
       // etc.
       for (JMethod method : getPotentiallyAliveConstructors(x)) {
-        JsNameRef lhs = prototype.makeRef(method.getSourceInfo());
-        lhs.setQualifier(names.get(method).makeRef(method.getSourceInfo()));
-        JsNameRef rhsProtoRef = getPrototypeQualifierOf(method);
-        JsExprStmt stmt = createAssignment(lhs, rhsProtoRef).makeStmt();
-        globalStmts.add(stmt);
-        vtableInitForMethodMap.put(stmt, method);
+        JsStatement stmt = createPrototypeAssignmentStatement(method, names.get(method),
+            getPrototypeQualifierOf(method));
+        addToGlobalsAndRegister(globalStmts, method, stmt);
       }
     }
 
@@ -2531,12 +2519,7 @@ public class GenerateJavaScriptAST {
       JsName classVar = topScope.declareName(JjsUtils.mangledNameString(x));
       JsFunction closureCtor = JsUtils.createEmptyFunctionLiteral(sourceInfo, topScope, classVar);
       JsExprStmt statement = closureCtor.makeStmt();
-      globalStmts.add(statement);
-      names.put(x, classVar);
-      if (x instanceof JClassType) {
-        // needed for code splitter to determine how to move/extract it
-        typeForStatMap.put(statement, (JClassType) x);
-      }
+      addToGlobalsAndRegister(globalStmts, x, statement);
       return classVar;
     }
 
@@ -2551,10 +2534,7 @@ public class GenerateJavaScriptAST {
       JsNameRef ctmRef = castableTypeMapName.makeRef(x.getSourceInfo());
 
       JsExpression castMapLit = generateCastableTypeMap(x);
-      JsExpression ctmAsg = createAssignment(ctmRef, castMapLit);
-      JsExprStmt ctmAsgStmt = ctmAsg.makeStmt();
-      globalStmts.add(ctmAsgStmt);
-      typeForStatMap.put(ctmAsgStmt, x);
+      addToGlobalsAndRegister(globalStmts, x, createAssignment(ctmRef, castMapLit).makeStmt());
     }
 
     private void generateToStringAlias(JClassType x, List<JsStatement> globalStmts) {
@@ -2565,37 +2545,61 @@ public class GenerateJavaScriptAST {
       }
     }
 
+
+    /**
+     * Create a vtable assignment of the form Qualifier.polyname = rhs.
+     */
+    private JsStatement createPrototypeAssignmentStatement(
+        JMember member, JsName lhsName, JsExpression rhs) {
+      SourceInfo sourceInfo = member.getSourceInfo();
+      JsNameRef lhs = lhsName.makeRef(sourceInfo);
+      lhs.setQualifier(getPrototypeQualifierOf(member));
+      return createAssignment(lhs, rhs).makeStmt();
+    }
+
     /**
      * Create a vtable assignment of the form _.polyname = rhs; and register the line as
      * created for {@code method}.
      */
-    private void generateVTableAssignment(List<JsStatement> globalStmts, JMethod method,
+    private void generateVTableMethodEntry(List<JsStatement> globalStmts, JMethod method,
         JsName lhsName, JsExpression rhs) {
-      SourceInfo sourceInfo = method.getSourceInfo();
-      JsNameRef lhs = lhsName.makeRef(sourceInfo);
-      lhs.setQualifier(getPrototypeQualifierOf(method));
-      JsExprStmt polyAssignment = createAssignment(lhs, rhs).makeStmt();
-      globalStmts.add(polyAssignment);
-      vtableInitForMethodMap.put(polyAssignment, method);
+      JsStatement vtableAssignment = createPrototypeAssignmentStatement(method, lhsName, rhs);
+      addToGlobalsAndRegister(globalStmts, method, vtableAssignment);
 
       if (shouldEmitDisplayNames()) {
-        JsExprStmt displayNameAssignment = outputDisplayName(lhs, method);
-        globalStmts.add(displayNameAssignment);
-        vtableInitForMethodMap.put(displayNameAssignment, method);
+        JsExprStmt displayNameAssignment =
+            outputDisplayName(lhsName.makeRef(method.getSourceInfo()), method);
+        addToGlobalsAndRegister(globalStmts, method, displayNameAssignment);
+      }
+    }
+
+    /**
+     * Adds statement to globals and registers it in the appropriate map.
+     */
+    private void addToGlobalsAndRegister(List<JsStatement> globalStmts, JNode node,
+        JsStatement vtableAssignment) {
+      globalStmts.add(vtableAssignment);
+      if (node instanceof JClassType) {
+        classForStatement.put(vtableAssignment, (JClassType) node);
+      } else if (node instanceof JMethod) {
+        methodForVtableEntryStatement.put(vtableAssignment, (JMethod) node);
+      } else if (node instanceof JMember) {
+        classForStatement.put(vtableAssignment, (JClassType) ((JMember) node).getEnclosingType());
       }
     }
 
     private void generateVTableAlias(List<JsStatement> globalStmts, JMethod method, JsName alias) {
       JsName polyName = polymorphicNames.get(method);
       JsExpression bridge = JsUtils.createBridge(method, polyName, topScope);
-      generateVTableAssignment(globalStmts, method, alias, bridge);
+      generateVTableMethodEntry(globalStmts, method, alias, bridge);
     }
 
     private JsExprStmt outputDisplayName(JsNameRef function, JMethod method) {
       JsNameRef displayName = new JsNameRef(function.getSourceInfo(), "displayName");
       displayName.setQualifier(function);
       String displayStringName = getDisplayName(method);
-      JsStringLiteral displayMethodName = new JsStringLiteral(function.getSourceInfo(), displayStringName);
+      JsStringLiteral displayMethodName =
+          new JsStringLiteral(function.getSourceInfo(), displayStringName);
       return createAssignment(displayName, displayMethodName).makeStmt();
     }
 
@@ -2630,7 +2634,7 @@ public class GenerateJavaScriptAST {
 
         if (!method.isAbstract()) {
           JsExpression rhs = getJsFunctionFor(method);
-          generateVTableAssignment(globalStmts, method, polymorphicNames.get(method), rhs);
+          generateVTableMethodEntry(globalStmts, method, polymorphicNames.get(method), rhs);
         }
 
         if (method.exposesJsMethod()) {
@@ -3198,11 +3202,18 @@ public class GenerateJavaScriptAST {
    */
   private final JsScope topScope;
 
-  private final Map<JsStatement, JClassType> typeForStatMap = Maps.newHashMap();
+  /**
+   * A mapping that associates a class to a statement in the JS program.
+   */
+  private final Map<JsStatement, JClassType> classForStatement = Maps.newHashMap();
+
+  /**
+   * A mapping that associates a method to a statement that sets up the vtable of a class.
+   */
+  private final Map<JsStatement, JMethod> methodForVtableEntryStatement = Maps.newHashMap();
 
   private final JTypeOracle typeOracle;
 
-  private final Map<JsStatement, JMethod> vtableInitForMethodMap = Maps.newHashMap();
 
   private final TypeMapper<?> typeMapper;
 
@@ -3353,7 +3364,7 @@ public class GenerateJavaScriptAST {
     // TODO(spoon): Instead of gathering the information here, get it via
     // SourceInfo
     JavaToJavaScriptMap jjsMap = new JavaToJavaScriptMapImpl(program.getDeclaredTypes(),
-        names, typeForStatMap, vtableInitForMethodMap);
+        names, classForStatement, methodForVtableEntryStatement);
 
     Set<JsNode> functionsForJsInlining = incremental ? Collections.<JsNode>emptySet() :
         new CollectJsFunctionsForInlining().getFunctionsForJsInlining();

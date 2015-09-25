@@ -2329,8 +2329,8 @@ public class GenerateJavaScriptAST {
       List<JsStatement> globalStmts = jsProgram.getGlobalBlock().getStatements();
       List<JClassType> immortalTypesReversed = Lists.reverse(program.immortalCodeGenTypes);
       // visit in reverse order since insertions start at head
-      JMethod createObjMethod = program.getIndexedMethod("JavaScriptObject.createObject");
-      JMethod createArrMethod = program.getIndexedMethod("JavaScriptObject.createArray");
+      JMethod createEmptyObjectMethod = program.getIndexedMethod("JavaScriptObject.createObject");
+      JMethod createEmptyArrayMethod = program.getIndexedMethod("JavaScriptObject.createArray");
 
       for (JClassType x : immortalTypesReversed) {
         // Don't generate JS for referenceOnly types.
@@ -2350,20 +2350,10 @@ public class GenerateJavaScriptAST {
             continue;
           }
           if (JProgram.isClinit(method)) {
-            /**
-             * Emit empty clinits that will be pruned. If a type B extends A, then even if
-             * B and A have no fields to initialize, there will be a call inserted in B's clinit
-             * to invoke A's clinit. Likewise, if you have a static field initialized to
-             * JavaScriptObject.createObject(), the clinit() will include this initializer code,
-             * which we don't want.
-             */
-            JsFunction func = new JsFunction(x.getSourceInfo(), topScope,
-                topScope.declareName(mangleNameForGlobal(method)), true);
-            func.setBody(new JsBlock(method.getBody().getSourceInfo()));
-            push(func);
-          } else {
-            accept(method);
+            // Immortal types can not have clinit.
+            continue;
           }
+          accept(method);
           // add after var declaration, but before everything else
           JsFunction func = pop();
           assert func.getName() != null;
@@ -2377,24 +2367,23 @@ public class GenerateJavaScriptAST {
           JsNode node = pop();
           assert node instanceof JsVar;
           JsVar fieldVar = (JsVar) node;
-          JExpression init = field.getInitializer();
-          if (init != null
-              && field.getLiteralInitializer() == null) {
-            // no literal, but it could be a JavaScriptObject
-            if (init.getType() == program.getJavaScriptObject()) {
-              assert init instanceof JMethodCall;
-              JMethod meth = ((JMethodCall) init).getTarget();
-              // immortal types can only have non-primitive literal initializers of createArray,createObject
-              if (meth == createObjMethod) {
-                fieldVar.setInitExpr(new JsObjectLiteral(init.getSourceInfo()));
-              } else if (meth == createArrMethod) {
-                fieldVar.setInitExpr(new JsArrayLiteral(init.getSourceInfo()));
-              } else {
-                assert false : "Illegal initializer expression for immortal field " + field;
-              }
+          JExpression initializer = field.getInitializer();
+          globals.add(fieldVar);
+          // Patch up fields that are initialized to empty object/array literal by a call to
+          // JavaScriptObject.createObject() and JavaScriptObject.createArray()
+          if (initializer != null
+              && field.getLiteralInitializer() == null
+              && initializer.getType() == program.getJavaScriptObject()) {
+            assert initializer instanceof JMethodCall;
+            JMethod method = ((JMethodCall) initializer).getTarget();
+            if (method == createEmptyObjectMethod) {
+              fieldVar.setInitExpr(new JsObjectLiteral(initializer.getSourceInfo()));
+            } else if (method == createEmptyArrayMethod) {
+              fieldVar.setInitExpr(new JsArrayLiteral(initializer.getSourceInfo()));
+            } else {
+              assert false : "Illegal initializer expression for immortal field " + field;
             }
           }
-          globals.add(fieldVar);
         }
       }
     }

@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e470569_4fef60c0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-25T01:00:07Z",
+      "side": 1,
+      "message": "\"first js method in the method hierarchy that exposes...\"",
+      "range": {
+        "startLine": 160,
+        "startChar": 53,
+        "endLine": 160,
+        "endChar": 54
+      },
+      "revId": "32c65cfdfe4a915b40f728ff91eb6ca77e638195",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e6c7116_b919dbb4",
         "filename": "user/test/com/google/gwt/core/client/interop/ConcreteJsTypeJsSubclass.java",
         "patchSetId": 1

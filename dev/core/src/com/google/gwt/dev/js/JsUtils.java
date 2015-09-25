@@ -22,6 +22,7 @@ import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.js.ast.JsBinaryOperation;
 import com.google.gwt.dev.js.ast.JsBinaryOperator;
 import com.google.gwt.dev.js.ast.JsBlock;
+import com.google.gwt.dev.js.ast.JsExprStmt;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsInvocation;
@@ -31,6 +32,7 @@ import com.google.gwt.dev.js.ast.JsNode;
 import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.js.ast.JsReturn;
 import com.google.gwt.dev.js.ast.JsScope;
+import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsThisRef;
 import com.google.gwt.dev.util.StringInterner;
 
@@ -44,7 +46,7 @@ public class JsUtils {
    */
   public static JsFunction isExecuteOnce(JsInvocation invocation) {
     JsFunction f = isFunction(invocation.getQualifier());
-    if (f != null && f.getExecuteOnce()) {
+    if (f != null && f.isClinit()) {
       return f;
     }
     return null;
@@ -139,6 +141,51 @@ public class JsUtils {
       ref = newRef;
     }
     return ref;
+  }
+
+  /**
+   * Attempts to extract a single expression from a given statement and returns
+   * it. If no such expression exists, returns <code>null</code>.
+   */
+  public static JsExpression extractExpression(JsStatement stmt) {
+    if (stmt == null) {
+      return null;
+    }
+
+    if (stmt instanceof JsExprStmt) {
+      return ((JsExprStmt) stmt).getExpression();
+    }
+
+    if (stmt instanceof JsBlock && ((JsBlock) stmt).getStatements().size() == 1) {
+      return extractExpression(((JsBlock) stmt).getStatements().get(0));
+    }
+
+    return null;
+  }
+
+  public static boolean isEmpty(JsStatement stmt) {
+    if (stmt == null) {
+      return true;
+    }
+    return (stmt instanceof JsBlock && ((JsBlock) stmt).getStatements().isEmpty());
+  }
+
+  /**
+   * If the statement is a JsExprStmt that declares a function with no other
+   * side effects, returns that function; otherwise <code>null</code>.
+   */
+  public static JsFunction isFunctionDeclaration(JsStatement stmt) {
+    if (stmt instanceof JsExprStmt) {
+      JsExprStmt exprStmt = (JsExprStmt) stmt;
+      JsExpression expr = exprStmt.getExpression();
+      if (expr instanceof JsFunction) {
+        JsFunction func = (JsFunction) expr;
+        if (func.getName() != null) {
+          return func;
+        }
+      }
+    }
+    return null;
   }
 
   private static final String CALL_STRING = StringInterner.get().intern("call");

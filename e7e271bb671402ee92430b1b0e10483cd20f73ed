@@ -46,6 +46,30 @@
       "revId": "e7e271bb671402ee92430b1b0e10483cd20f73ed",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e470569_efce0c44",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-25T01:17:37Z",
+      "side": 1,
+      "message": "Remember to add this check to your other JsInterop restrictions patch I see in gerrit. (for later, don\u0027t need to do now)",
+      "parentUuid": "2e470569_8fde78f6",
+      "range": {
+        "startLine": 265,
+        "startChar": 22,
+        "endLine": 265,
+        "endChar": 23
+      },
+      "revId": "e7e271bb671402ee92430b1b0e10483cd20f73ed",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -234,7 +234,7 @@ public class DuplicateExecuteOnceRemover extends JsModVisitor {
     JsFunction func = JsUtils.isExecuteOnce(x);
     while (func != null) {
       called.add(func);
-      func = func.getImpliedExecute();
+      func = func.getSuperClinit();
     }
     return true;
   }

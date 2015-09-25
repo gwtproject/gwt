@@ -97,6 +97,7 @@ import com.google.gwt.dev.jjs.impl.MakeCallsStatic;
 import com.google.gwt.dev.jjs.impl.MethodCallSpecializer;
 import com.google.gwt.dev.jjs.impl.MethodCallTightener;
 import com.google.gwt.dev.jjs.impl.MethodInliner;
+import com.google.gwt.dev.jjs.impl.NameClashesFixer;
 import com.google.gwt.dev.jjs.impl.OptimizerContext;
 import com.google.gwt.dev.jjs.impl.OptimizerStats;
 import com.google.gwt.dev.jjs.impl.PostOptimizationCompoundAssignmentNormalizer;
@@ -151,6 +152,7 @@ import com.google.gwt.dev.js.JsSymbolResolver;
 import com.google.gwt.dev.js.JsUnusedFunctionRemover;
 import com.google.gwt.dev.js.JsVerboseNamer;
 import com.google.gwt.dev.js.SizeBreakdown;
+import com.google.gwt.dev.js.ast.JavaScriptVerifier;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsForIn;
 import com.google.gwt.dev.js.ast.JsFunction;
@@ -415,6 +417,9 @@ public final class JavaToJavaScriptCompiler {
       // TODO(stalcup): move to normalization
       JsBreakUpLargeVarStatements.exec(jsProgram, properties.getConfigurationProperties());
 
+      // If assertions are enable, this pass verifies consistency between jsProgram and jjsmap.
+      JavaScriptVerifier.verify(jsProgram, jjsmap);
+
       // (8) Generate Js source
       List<JsSourceMap> sourceInfoMaps = new ArrayList<JsSourceMap>();
       boolean isSourceMapsEnabled = properties.isTrueInAnyPermutation("compiler.useSourceMaps");
@@ -490,6 +495,8 @@ public final class JavaToJavaScriptCompiler {
 
       TypeMapper<?> typeMapper = getTypeMapper();
       ResolveRuntimeTypeReferences.exec(jprogram, typeMapper, getTypeOrder());
+
+      NameClashesFixer.exec(jprogram);
       return typeMapper;
     } finally {
       event.end();

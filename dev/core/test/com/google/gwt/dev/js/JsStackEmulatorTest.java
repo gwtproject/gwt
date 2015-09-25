@@ -172,7 +172,7 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
         "var stackIndex;$stack[stackIndex=++$stackDepth]=onModuleLoad;" +
         "$location[stackIndex]='EntryPoint.java:'+'6',$clinit_EntryPoint();" +
         "throw new RuntimeException(" +
-        "($tmp=($location[stackIndex]='EntryPoint.java:'+'4',thing).toString()," +
+        "($tmp=($location[stackIndex]='EntryPoint.java:'+'4',thing).toString__Ljava_lang_String_2()," +
         "$location[stackIndex]='EntryPoint.java:'+'7',$tmp))" +
         "}");
   }
@@ -231,7 +231,7 @@ public class JsStackEmulatorTest extends FullCompileTestBase {
         "}catch($e0){$e0=wrap($e0);" +
         "$stackDepth=($location[stackIndex]='EntryPoint.java:'+'6',stackIndex);" +
         "if(instanceOf($e0,'java.lang.RuntimeException')){" +
-        "e=$e0;s=($location[stackIndex]='EntryPoint.java:'+'7',e).getMessage()}" +
+        "e=$e0;s=($location[stackIndex]='EntryPoint.java:'+'7',e).getMessage__Ljava_lang_String_2()}" +
         "else throw unwrap(($location[stackIndex]='EntryPoint.java:'+'6',$e0))}" +
         "$stackDepth=stackIndex-1" +
         "}");

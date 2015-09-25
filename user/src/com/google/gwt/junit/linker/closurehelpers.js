@@ -6,7 +6,7 @@ var jsinterop = {};
 goog.global = this;
 goog.implicitNamespaces_ = {};
 
-function goog$object$createSet() {
+goog.object.createSet = function goog$object$createSet() {
   var result = {};
   for (var i = 0; i < arguments.length; i++) {
     result[arguments[i]] = true;
@@ -109,7 +109,7 @@ goog.exportPath_ = function (name, opt_object, opt_objectToExportTo) {
  * @param {Function} childCtor Child class.
  * @param {Function} parentCtor Parent class.
  */
-function goog$inherits(childCtor, parentCtor) {
+goog.inherits = function(childCtor, parentCtor) {
   // Workaround MyJsInterfaceWithPrototype test since the parentCtor doesn't exist
   // until after ScriptInjector, but this test back-patches the ctor
   if (!parentCtor) {

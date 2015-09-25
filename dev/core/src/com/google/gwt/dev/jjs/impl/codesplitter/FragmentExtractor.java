@@ -337,7 +337,7 @@ public class FragmentExtractor {
   }
 
   private boolean isLive(JsStatement stat, LivenessPredicate livenessPredicate) {
-    JDeclaredType type = map.typeForStatement(stat);
+    JClassType type = map.typeForStatement(stat);
     if (type != null) {
       // This is part of the code only needed once a type is instantiable
       return livenessPredicate.isLive(type);

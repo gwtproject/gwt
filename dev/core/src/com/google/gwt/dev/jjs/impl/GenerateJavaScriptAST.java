@@ -708,7 +708,7 @@ public class GenerateJavaScriptAST {
 
   private class GenerateJavaScriptVisitor extends JVisitor {
 
-    public static final String GOOG_INHERITS = "goog$inherits";
+    public static final String GOOG_INHERITS = "goog.inherits";
     public static final String GOOG_ABSTRACT_METHOD = "goog.abstractMethod";
     private final Set<JDeclaredType> alreadyRan = Sets.newLinkedHashSet();
 
@@ -2184,7 +2184,7 @@ public class GenerateJavaScriptAST {
        * goog.object.createSet('foo', 'bar', 'baz') is optimized by closure compiler into
        * {'foo': !0, 'bar': !0, baz: !0}
        */
-      JsNameRef createSet = new JsNameRef(sourceInfo, "goog$object$createSet");
+      JsNameRef createSet = new JsNameRef(sourceInfo, "goog.object.createSet");
       JsInvocation jsInvocation = new JsInvocation(sourceInfo, createSet);
 
       for (JsExpression expr : runtimeTypeIdLiterals) {

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e470569_2f2544ed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JDeclaredType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-25T00:28:46Z",
+      "side": 1,
+      "message": "What about JsFunction? Can they have clinits? e.g.\n\n@JsFunction\ninterface Function {\n   static Field x \u003d ...;\n}\n?",
+      "range": {
+        "startLine": 265,
+        "startChar": 22,
+        "endLine": 265,
+        "endChar": 23
+      },
+      "revId": "e7e271bb671402ee92430b1b0e10483cd20f73ed",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

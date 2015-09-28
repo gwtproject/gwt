@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e470569_0f2b9b61",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-28T16:03:24Z",
+      "side": 1,
+      "message": "In Closure output mode,  I will need to output a goog.abstractMethod assignment. I\u0027m wondering if there isn\u0027t a better way to handle this generally, such as just generating methods unconditionally, and then removing them in a later pass. Hmm.\n\nI can always output the goog.abstractMethod() in generateVTable(), so it\u0027s not a big deal.",
+      "revId": "8f5940547ebd3c7f17afbc6d85f30c4497c827b1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

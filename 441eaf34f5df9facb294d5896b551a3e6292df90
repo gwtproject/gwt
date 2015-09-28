@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e470569_5e026281",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-28T22:44:20Z",
+      "side": 1,
+      "message": "nit: not required. Next line already covers null case.",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 7
+      },
+      "revId": "441eaf34f5df9facb294d5896b551a3e6292df90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e470569_745f7fd1",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-28T22:44:20Z",
+      "side": 1,
+      "message": "pls also add a simple test with jsfunction",
+      "revId": "441eaf34f5df9facb294d5896b551a3e6292df90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e470569_146e0b88",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JSORestrictionsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-09-28T22:44:20Z",
+      "side": 1,
+      "message": "bit: not sure if I was consistent but I think I have been using NativeJsType, NativeJsTypeInterface  etc.",
+      "range": {
+        "startLine": 677,
+        "startChar": 14,
+        "endLine": 677,
+        "endChar": 58
+      },
+      "revId": "441eaf34f5df9facb294d5896b551a3e6292df90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

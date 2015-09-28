@@ -1,0 +1,1534 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e6c7116_6a811fec",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ca75d3c3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_aa7217d7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_0a706bce",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ea6c0f00",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_4ae543df",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_2aea87b0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_8aef5bbf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_6af47f8f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_caf83385",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_aaf5f78a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_0a034b1b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_eaffef66",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_4a0c2349",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_2a11e75c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_8a063b25",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_6a0bdf2e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ca1f9366",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_aa1cd772",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_0a1a2b75",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ea16cf4e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_4ab703bf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_2abc47a1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_8ac11b20",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_6ac63f37",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_caaaf354",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_aaa7b78a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_0ab50bb0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_eab1afc3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_4adee3f8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_2ae3a7c4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_8ad8fb09",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_6add9ff7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_cad153e3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_aace9742",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_0acceb49",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_eac88f37",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_4a81c3c6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_2a8607e0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_8a8bdbe6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_6a90ff0e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ca94b304",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_aa917712",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_0a9fcb1e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ea9b6f2e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_4a68a3c0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_2a6d67d0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_8a62bbdc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_6a675fee",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 820,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ca7b1386",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_aa78578a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_0a76ab9c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ea724fa6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_4a538306",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_2a58c720",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_8a5d9b13",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_6a62bfd6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ca467344",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_aa433732",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_0a518bf7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ea4d2f5f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_4a3a63b0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_2a3f27a0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_8a347bc1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_6a391fb7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ca2dd376",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_aa2a175a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_0a286b61",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ea240f8f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_4add43d2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_2ae28797",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_8ae75ba6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_6aec7f8a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_caf0335c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_aaedf785",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_0afb4b3e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_eaf7ef4d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_4a0423e0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_2a09e7f7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_8afe3b28",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_6a03dfd5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ca17930d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_aa14d709",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_0a122b1c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ea0ecff9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[warning] \u0027(\u0027 is followed by whitespace.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_4a2f035a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_2a3447a8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1248,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_8a391ba3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1785,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_6a3e3f8a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 2813,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e6c7116_ca22f36b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 2830,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-09-28T23:59:46Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "b8d82a9ffeabe88859db7bfc3298fbb1bfc7cba8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

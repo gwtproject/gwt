@@ -15,10 +15,7 @@
  */
 package com.google.gwt.core.client.interop;
 
-import static com.google.gwt.core.client.ScriptInjector.TOP_WINDOW;
-
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.core.client.js.JsFunction;
 import com.google.gwt.core.client.js.JsType;
 import com.google.gwt.junit.client.GWTTestCase;
@@ -35,23 +32,6 @@ public class JsTypeTest extends GWTTestCase {
   public String getModuleName() {
     return "com.google.gwt.core.Core";
   }
-
-  @Override
-  protected void gwtSetUp() throws Exception {
-    ScriptInjector.fromString("function MyJsInterface() {}\n"
-        + "MyJsInterface.staticX = 33;"
-        + "MyJsInterface.answerToLife = function() { return 42;};"
-        + "MyJsInterface.prototype.sum = function sum(bias) { return this.x + bias; };")
-        .setWindow(TOP_WINDOW).inject();
-    patchPrototype(MyClassExtendsJsPrototype.class);
-  }
-
-  /**
-   * Workaround for the fact that the script is injected after defineClass() has been called.
-   */
-  private native void patchPrototype(Class<MyClassExtendsJsPrototype> myClass) /*-{
-      @java.lang.Class::getPrototypeForClass(Ljava/lang/Class;)(myClass).prototype = $wnd.MyClass;
-  }-*/;
 
   public void testVirtualUpRefs() {
     ListImpl listWithExport = new ListImpl(); // Exports .add().
@@ -148,70 +128,6 @@ public class JsTypeTest extends GWTTestCase {
     };
     assertEquals(100, subclassInterface.publicMethodAlsoExposedAsNonJsMethod());
   }
-
-  public void testConcreteNativeType() {
-    assertEquals(33, MyJsClassWithPrototype.staticX);
-    MyJsClassWithPrototype.staticX = 34;
-    assertEquals(34, MyJsClassWithPrototype.staticX);
-    assertEquals(42, MyJsClassWithPrototype.answerToLife());
-
-    MyJsClassWithPrototype obj = new MyJsClassWithPrototype();
-    assertTrue(isUndefined(obj.x));
-    obj.x = 72;
-    assertEquals(72, obj.x);
-    assertEquals(74, obj.sum(2));
-
-    assertTrue(isUndefined(obj.getY()));
-    obj.setY(91);
-    assertEquals(91, obj.getY());
-  }
-
-  public void testConcreteNativeType_sublasss() {
-    MyClassExtendsJsPrototype mc = new MyClassExtendsJsPrototype();
-    assertEquals(143, mc.sum(1));
-
-    mc.x = -mc.x;
-    assertEquals(58, mc.sum(0));
-
-    assertEquals(52, mc.getY());
-  }
-
-  public void testJsPropertyIsX() {
-    JsTypeIsProperty object = (JsTypeIsProperty) JavaScriptObject.createObject();
-
-    assertFalse(object.isX());
-    object.setX(true);
-    assertTrue(object.isX());
-    object.setX(false);
-    assertFalse(object.isX());
-  }
-
-  public void testJsPropertyGetX() {
-    JsTypeGetProperty object = (JsTypeGetProperty) JavaScriptObject.createObject();
-
-    assertTrue(isUndefined(object.getX()));
-    object.setX(10);
-    assertEquals(10, object.getX());
-    object.setX(0);
-    assertEquals(0, object.getX());
-  }
-
-  public void testProtectedNames() {
-    MyJsInterfaceWithProtectedNames obj = createMyJsInterfaceWithProtectedNames();
-    assertEquals("var", obj.var());
-    assertEquals("nullField", obj.getNullField());
-    assertEquals("import", obj.getImport());
-    obj.setImport("import2");
-    assertEquals("import2", obj.getImport());
-  }
-
-  private static native MyJsInterfaceWithProtectedNames createMyJsInterfaceWithProtectedNames() /*-{
-    var a = {};
-    a["nullField"] = "nullField";
-    a["import"] = "import";
-    a["var"] = function() { return "var"; };
-    return a;
-  }-*/;
 
   public void testCasts() {
     MyJsInterfaceWithPrototype myClass;
@@ -437,6 +353,14 @@ public class JsTypeTest extends GWTTestCase {
   private static native int callPublicMethodFromEnumerationSubclass(
       MyEnumWithSubclassGen enumeration) /*-{
     return enumeration.foo();
+  }-*/;
+
+  private static native int readX(Object object) /*-{
+    return object.x;
+  }-*/;
+
+  private static native void writeX(Object object, int value) /*-{
+    return object.x = value;
   }-*/;
 
   public static void assertJsTypeHasFields(Object obj, String... fields) {

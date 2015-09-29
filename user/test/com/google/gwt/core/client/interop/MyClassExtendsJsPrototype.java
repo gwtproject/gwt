@@ -15,15 +15,3 @@
  */
 package com.google.gwt.core.client.interop;
 
-class MyClassExtendsJsPrototype extends MyJsClassWithPrototype {
-
-  MyClassExtendsJsPrototype() {
-    this.x = 42;
-    setY(52);
-  }
-
-  @Override
-  public int sum(int bias) {
-    return super.sum(bias) + 100;
-  }
-}

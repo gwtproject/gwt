@@ -1799,13 +1799,11 @@ public class GenerateJavaScriptAST {
         }
 
         if (JProgram.isClinit(method)) {
-          if (type.getClinitTarget() == type) {
-            JDeclaredType superClass = type.getSuperClass();
-            handleClinit(function, clinitFunctionForType.get(superClass));
-            clinitFunctionForType.put(type, function);
-          } else {
-            continue;
-          }
+          JDeclaredType superClass = type.getSuperClass();
+          JsFunction superClinitFunction = superClass == null
+              ? null : clinitFunctionForType.get(superClass.getClinitTarget());
+          handleClinit(function, superClinitFunction);
+          clinitFunctionForType.put(type, function);
         }
         // don't add polymorphic JsFuncs, inline decl into vtable assignment
         JsExprStmt functionDefinitionStatement = function.makeStmt();
@@ -2005,22 +2003,8 @@ public class GenerateJavaScriptAST {
               || shouldNotEmitMethodImplementation(method)) {
             continue;
           }
-          JsFunction function = null;
-          if (JProgram.isClinit(method)) {
-            /**
-             * Emit empty clinits that will be pruned. If a type B extends A, then even if
-             * B and A have no fields to initialize, there will be a call inserted in B's clinit
-             * to invoke A's clinit. Likewise, if you have a static field initialized to
-             * JavaScriptObject.createObject(), the clinit() will include this initializer code,
-             * which we don't want.
-             */
-            function = new JsFunction(x.getSourceInfo(), topScope,
-                topScope.declareName(mangleNameForGlobal(method)), true);
-            function.setBody(new JsBlock(method.getBody().getSourceInfo()));
-          } else {
-            function = transform(method);
-          }
           // add after var declaration, but before everything else
+          JsFunction function = transform(method);
           assert function.getName() != null;
           addMethodDefinitionStatement(1, method, function.makeStmt());
         }
@@ -2620,11 +2604,12 @@ public class GenerateJavaScriptAST {
   }
 
   /**
-   * Return false if the methods need to be generated. Some methods do not need any output,
+   * Return false if the method needs to be generated. Some methods do not need any output,
    * in particular abstract methods and static intializers that are never called.
    */
   private static boolean shouldNotEmitMethodImplementation(JMethod x) {
-    return x.isAbstract();
+    return x.isAbstract()
+        || JProgram.isClinit(x) && x.getEnclosingType().getClinitTarget() != x.getEnclosingType();
   }
 
   private static class JavaToJsOperatorMap {

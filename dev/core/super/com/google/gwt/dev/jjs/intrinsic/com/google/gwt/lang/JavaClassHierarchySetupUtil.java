@@ -210,4 +210,12 @@ public class JavaClassHierarchySetupUtil {
   static native JavaScriptObject uniqueId(String id) /*-{
     return jsinterop.closure.getUniqueId(id);
   }-*/;
+
+  static native void defineProperties(
+      JavaScriptObject proto, JavaScriptObject propertyDefinition) /*-{
+    for (var key in propertyDefinition) {
+      propertyDefinition[key]['configurable'] = true;
+    }
+    Object.defineProperties(proto,  propertyDefinition);
+  }-*/;
 }

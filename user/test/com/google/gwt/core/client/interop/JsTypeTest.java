@@ -20,6 +20,7 @@ import static com.google.gwt.core.client.ScriptInjector.TOP_WINDOW;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.core.client.js.JsFunction;
+import com.google.gwt.core.client.js.JsProperty;
 import com.google.gwt.core.client.js.JsType;
 import com.google.gwt.junit.client.GWTTestCase;
 
@@ -195,6 +196,127 @@ public class JsTypeTest extends GWTTestCase {
     object.setX(0);
     assertEquals(0, object.getX());
   }
+
+
+  static class MyJsInterfaceWithPrototypeImplNeedsBridge
+      extends SimpleAccidental implements MyJsInterfaceWithPrototype {
+  }
+
+  static abstract class SimpleAccidental {
+    private int x;
+
+    public int getX() {
+      return x;
+    }
+
+    public void setX(int x) {
+      this.x = x;
+    }
+
+    public int sum(int bias) {
+      return bias + x;
+    }
+  }
+
+  public void testPropertyBridges_accidental() {
+    MyJsInterfaceWithPrototype object = new MyJsInterfaceWithPrototypeImplNeedsBridge();
+
+    object.setX(3);
+    assertEquals(3, object.getX());
+
+    SimpleAccidental simpleAccidental = (SimpleAccidental) object;
+
+    simpleAccidental.setX(3);
+    assertEquals(3, simpleAccidental.getX());
+    assertEquals(3, readX(object));
+
+    writeX(object, 4);
+    assertEquals(4, simpleAccidental.getX());
+    assertEquals(4, readX(object));
+
+    assertEquals(3 + 4, simpleAccidental.sum(3));
+  }
+
+  static public class MyJsInterfaceWithPrototypeImplNeedsBridgeAndSubclass
+      extends SimpleSubclass implements MyJsInterfaceWithPrototype {
+  }
+
+  static abstract class SimpleSubclass {
+    private int x;
+
+    public int getX() {
+      return x;
+    }
+
+    public void setX(int x) {
+      this.x = x;
+    }
+
+    public int sum(int bias) {
+      return bias + x;
+    }
+  }
+
+  static class  MyJsInterfaceWithPrototypeImplNeedsBridgeSubclass
+      extends MyJsInterfaceWithPrototypeImplNeedsBridgeAndSubclass {
+    private int y;
+
+    public int getX() {
+      return y;
+    }
+
+    public void setX(int y) {
+      this.y = y;
+    }
+
+    public void setParentX(int value) {
+      super.setX(value);
+    }
+
+    public int getXPlusY() {
+      return super.getX() + y;
+    }
+  }
+
+  public void testPropertyBridges_subclass() {
+    MyJsInterfaceWithPrototype object = new MyJsInterfaceWithPrototypeImplNeedsBridgeSubclass();
+
+    object.setX(3);
+    assertEquals(3, object.getX());
+
+    SimpleSubclass simple = (SimpleSubclass) object;
+
+    simple.setX(3);
+    assertEquals(3, simple.getX());
+    assertEquals(3, readX(object));
+
+    writeX(object, 4);
+    assertEquals(4, simple.getX());
+    assertEquals(4, readX(object));
+
+    MyJsInterfaceWithPrototypeImplNeedsBridgeSubclass subclass =
+        (MyJsInterfaceWithPrototypeImplNeedsBridgeSubclass) object;
+
+    subclass.setParentX(5);
+    assertEquals(8, simple.sum(3));
+    assertEquals(9, subclass.getXPlusY());
+  }
+
+
+  @JsType
+  interface MyJsInterfaceWithProtectedNames {
+    String var();
+
+    @JsProperty
+    String getNullField(); // Defined in object scope but shouldn't obfuscate
+
+    @JsProperty
+    String getImport();
+
+    @JsProperty
+    void setImport(String str);
+  }
+
 
   public void testProtectedNames() {
     MyJsInterfaceWithProtectedNames obj = createMyJsInterfaceWithProtectedNames();
@@ -437,6 +559,14 @@ public class JsTypeTest extends GWTTestCase {
   private static native int callPublicMethodFromEnumerationSubclass(
       MyEnumWithSubclassGen enumeration) /*-{
     return enumeration.foo();
+  }-*/;
+
+  private static native int readX(Object object) /*-{
+    return object.x;
+  }-*/;
+
+  private static native void writeX(Object object, int value) /*-{
+    return object.x = value;
   }-*/;
 
   public static void assertJsTypeHasFields(Object obj, String... fields) {

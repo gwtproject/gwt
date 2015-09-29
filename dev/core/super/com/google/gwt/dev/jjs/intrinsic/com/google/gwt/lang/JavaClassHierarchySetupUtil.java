@@ -163,15 +163,23 @@ public class JavaClassHierarchySetupUtil {
       JavaScriptObject instance) /*-{
     var lambda = function() { return samMethod.apply(lambda, arguments); }
 
-    if (lambda.__proto__) {
-      lambda.__proto__ = instance;
+    @JavaClassHierarchySetupUtil::assignPrototype(*)(lambda, instance);
+    return lambda;
+  }-*/;
+
+  /**
+   * Assigns the prototype of an object if possible, otherwise it polyfills it.
+   */
+  public static native void assignPrototype(JavaScriptObject object,
+      JavaScriptObject newProto) /*-{
+
+    if (object.__proto__) {
+      object.__proto__ = newProto;
     } else {
-      for (var prop in instance) {
-        lambda[prop] = instance[prop];
+      for (var prop in newProto) {
+        object[prop] = newProto[prop];
       }
     }
-
-    return lambda;
   }-*/;
 
   /**
@@ -209,5 +217,13 @@ public class JavaClassHierarchySetupUtil {
   @ForceInline
   static native JavaScriptObject uniqueId(String id) /*-{
     return jsinterop.closure.getUniqueId(id);
+  }-*/;
+
+  static native void defineProperties(
+      JavaScriptObject proto, JavaScriptObject propertyDefinition) /*-{
+    for (var key in propertyDefinition) {
+      propertyDefinition[key]['configurable'] = true;
+    }
+    Object.defineProperties(proto,  propertyDefinition);
   }-*/;
 }

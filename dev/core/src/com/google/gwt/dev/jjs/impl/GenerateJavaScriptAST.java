@@ -1431,15 +1431,6 @@ public class GenerateJavaScriptAST {
       setupGwtOnLoad();
 
       embedBindingProperties();
-
-      if (program.getRunAsyncs().size() > 0) {
-        // Prevent onLoad from being pruned.
-        JMethod onLoadMethod = program.getIndexedMethod("AsyncFragmentLoader.onLoad");
-        JsName name = names.get(onLoadMethod);
-        assert name != null;
-        JsFunction function = (JsFunction) name.getStaticRef();
-        function.setArtificiallyRescued(true);
-      }
     }
 
     private void generateRemainingClassLiterals() {

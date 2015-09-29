@@ -985,7 +985,7 @@ public class GenerateJavaScriptAST {
         // then we could do Type.prototype.polyname.call(this, ...). Currently prototypes do not
         // have global names instead they are stuck into the prototypesByTypeId array.
         return constructInvocation(sourceInfo, "JavaClassHierarchySetupUtil.getClassPrototype",
-            convertJavaLiteral(typeMapper.get(type)));
+            (JsExpression) transform(getRuntimeTypeReference(type)));
       }
     }
 
@@ -1319,7 +1319,7 @@ public class GenerateJavaScriptAST {
         JsNameRef clazzField = indexedFields.get("Object.___clazz").makeRef(type.getSourceInfo());
         clazzField.setQualifier(protoRef);
         JsExprStmt stmt = createAssignment(clazzField, classLiteralRef).makeStmt();
-        addTypeDefinionStatement(type, stmt);
+        addTypeDefinitionStatement(type, stmt);
       }
     }
 
@@ -1771,7 +1771,7 @@ public class GenerateJavaScriptAST {
           }
           JsNameRef fieldRef =
               name.makeQualifiedRef(field.getSourceInfo(), getPrototypeQualifierOf(field));
-          addTypeDefinionStatement(x, createAssignment(fieldRef, initiliazer).makeStmt());
+          addTypeDefinitionStatement(x, createAssignment(fieldRef, initiliazer).makeStmt());
         }
       }
       addVarsIfNotEmpty(vars);
@@ -2044,7 +2044,6 @@ public class GenerateJavaScriptAST {
 
     private void generateCallToDefineClass(JClassType x,
         List<JsNameRef> constructorArgs) {
-      JExpression typeId = getRuntimeTypeReference(x);
       JClassType superClass = x.getSuperClass();
       JExpression superTypeId = (superClass == null) ? JNullLiteral.INSTANCE :
           getRuntimeTypeReference(superClass);
@@ -2052,8 +2051,8 @@ public class GenerateJavaScriptAST {
 
       List<JsExpression> defineClassArguments = Lists.newArrayList();
 
-      defineClassArguments.add(convertJavaLiteral(typeId));
-      defineClassArguments.add(jsPrototype == null ? convertJavaLiteral(superTypeId) :
+      defineClassArguments.add(transform(getRuntimeTypeReference(x)));
+      defineClassArguments.add(jsPrototype == null ? transform(superTypeId) :
           createJsQualifier(jsPrototype, x.getSourceInfo()));
       defineClassArguments.add(generateCastableTypeMap(x));
       defineClassArguments.addAll(constructorArgs);
@@ -2061,7 +2060,7 @@ public class GenerateJavaScriptAST {
       // JavaClassHierarchySetupUtil.defineClass(typeId, superTypeId, castableMap, constructors)
       JsStatement defineClassStatement = constructInvocation(x.getSourceInfo(),
           "JavaClassHierarchySetupUtil.defineClass", defineClassArguments).makeStmt();
-      addTypeDefinionStatement(x, defineClassStatement);
+      addTypeDefinitionStatement(x, defineClassStatement);
 
       if (jsPrototype != null) {
         JsStatement statement =
@@ -2070,7 +2069,7 @@ public class GenerateJavaScriptAST {
             getPrototypeQualifierViaLookup(program.getTypeJavaLangObject(), x.getSourceInfo()),
             globalTemp.makeRef(x.getSourceInfo()))
             .makeStmt();
-        addTypeDefinionStatement(x, statement);
+        addTypeDefinitionStatement(x, statement);
       }
     }
 
@@ -2184,7 +2183,7 @@ public class GenerateJavaScriptAST {
         // Use goog$inherits(ChildCtor, ParentCtor) to setup inheritance
         JsExprStmt callGoogInherits = new JsInvocation(x.getSourceInfo(), googInherits,
             classVar.makeRef(x.getSourceInfo()), parentCtor).makeStmt();
-        addTypeDefinionStatement(x, callGoogInherits);
+        addTypeDefinitionStatement(x, callGoogInherits);
       }
 
       if (x == program.getTypeJavaLangObject()) {
@@ -2200,7 +2199,7 @@ public class GenerateJavaScriptAST {
                 getPrototypeQualifierOf(program.getTypeJavaLangObject(), x.getSourceInfo()),
                 getPrototypeQualifierOf(x, x.getSourceInfo()))
                 .makeStmt();
-        addTypeDefinionStatement(x, statement);
+        addTypeDefinitionStatement(x, statement);
       }
     }
 
@@ -2218,10 +2217,10 @@ public class GenerateJavaScriptAST {
 
     private void generateVTableAssignmentToJavaField(JDeclaredType x, String javaField,
         JsExpression rhs) {
-      JsNameRef protoRef = getPrototypeQualifierOf(x, x.getSourceInfo());
-      JsNameRef jsFieldRef = indexedFields.get(javaField).makeRef(x.getSourceInfo());
-      jsFieldRef.setQualifier(protoRef);
-      addTypeDefinionStatement(x, createAssignment(jsFieldRef, rhs).makeStmt());
+      SourceInfo sourceInfo = x.getSourceInfo();
+      JsNameRef protoRef = getPrototypeQualifierOf(x, sourceInfo);
+      JsNameRef fieldRef = indexedFields.get(javaField).makeQualifiedRef(sourceInfo, protoRef);
+      addTypeDefinitionStatement(x, createAssignment(fieldRef, rhs).makeStmt());
     }
 
     private void addMethodDefinitionStatement(JMethod method,
@@ -2236,7 +2235,7 @@ public class GenerateJavaScriptAST {
       methodByGlobalStatement.put(methodDefinitionStatement, method);
     }
 
-    private void addTypeDefinionStatement(JDeclaredType x, JsStatement statement) {
+    private void addTypeDefinitionStatement(JDeclaredType x, JsStatement statement) {
       getGlobalStatements().add(statement);
       javaTypeByGlobalStatement.put(statement, x);
     }
@@ -2255,7 +2254,7 @@ public class GenerateJavaScriptAST {
       JsName classVar = topScope.declareName(JjsUtils.mangledNameString(x));
       JsFunction closureCtor = JsUtils.createEmptyFunctionLiteral(sourceInfo, topScope, classVar);
       JsExprStmt statement = closureCtor.makeStmt();
-      addTypeDefinionStatement(x, statement);
+      addTypeDefinitionStatement(x, statement);
       names.put(x, classVar);
       return classVar;
     }
@@ -2270,7 +2269,7 @@ public class GenerateJavaScriptAST {
       JsNameRef castMapVarRef = castableTypeMapName.makeRef(type.getSourceInfo());
 
       JsExpression castMapLiteral = generateCastableTypeMap(type);
-      addTypeDefinionStatement(type, createAssignment(castMapVarRef, castMapLiteral).makeStmt());
+      addTypeDefinitionStatement(type, createAssignment(castMapVarRef, castMapLiteral).makeStmt());
     }
 
     private void maybeGenerateToStringAlias(JDeclaredType x) {
@@ -2411,13 +2410,9 @@ public class GenerateJavaScriptAST {
      * Returns either _ or ClassCtor.prototype depending on output mode.
      */
     private JsNameRef getPrototypeQualifierOf(JDeclaredType type, SourceInfo info) {
-      if (closureCompilerFormatEnabled) {
-        JsNameRef protoRef = prototype.makeRef(info);
-        protoRef.setQualifier(names.get(type).makeRef(info));
-        return protoRef;
-      } else {
-        return globalTemp.makeRef(info);
-      }
+      return closureCompilerFormatEnabled
+          ? prototype.makeQualifiedRef(info, names.get(type).makeRef(info))
+          : globalTemp.makeRef(info);
     }
 
     private void collectExports(JDeclaredType x) {
@@ -2547,14 +2542,6 @@ public class GenerateJavaScriptAST {
      * If a field is a literal, we can potentially treat it as immutable and assign it once on the
      * prototype, to be reused by all instances of the class, instead of re-assigning the same
      * literal in each constructor.
-     *
-     * Technically, to match JVM semantics, we should only do this for final or static fields. For
-     * non-final/non-static fields, a super class's cstr, when it calls a polymorphic method that is
-     * overridden in the subclass, should actually see default values (not the literal initializer)
-     * before the subclass's cstr runs.
-     *
-     * However, cstr's calling polymorphic methods is admittedly an uncommon case, so we apply some
-     * heuristics to see if we can initialize the field on the prototype anyway.
      */
     private boolean initializeAtTopScope(JField x) {
       if (x.getLiteralInitializer() == null) {
@@ -2979,14 +2966,7 @@ public class GenerateJavaScriptAST {
    * Retrieves the runtime typeId for {@code type}.
    */
   JExpression getRuntimeTypeReference(JReferenceType type) {
-    Object typeId = typeMapper.get(type);
-    if (typeId == null) {
-      return null;
-    }
-    if (typeId instanceof JMethodCall) {
-      return (JMethodCall) typeId;
-    }
-    return program.getLiteral(typeId);
+    return typeMapper.get(type);
   }
 
   private String mangleName(JField x) {

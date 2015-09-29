@@ -196,6 +196,18 @@ public class JsTypeTest extends GWTTestCase {
     assertEquals(0, object.getX());
   }
 
+  public void testPropertyBridges() {
+    MyJsInterfaceWithPrototype object = new MyJsInterfaceWithPrototypeImplNeedsBridge();
+
+    object.setX(3);
+    assertEquals(3, object.getX());
+
+    Simple simple = (Simple) object;
+
+    simple.setX(3);
+    assertEquals(3, simple.getX());
+  }
+
   public void testProtectedNames() {
     MyJsInterfaceWithProtectedNames obj = createMyJsInterfaceWithProtectedNames();
     assertEquals("var", obj.var());

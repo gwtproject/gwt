@@ -28,30 +28,19 @@ import java.util.Iterator;
 /**
  * Tests JsType functionality.
  */
-// TODO(cromwellian): Add test cases for property overriding of @JsProperty methods in java object
 public class JsTypeTest extends GWTTestCase {
 
   @Override
   public String getModuleName() {
     return "com.google.gwt.core.Core";
   }
-
   @Override
   protected void gwtSetUp() throws Exception {
-    ScriptInjector.fromString("function MyJsInterface() {}\n"
-        + "MyJsInterface.staticX = 33;"
-        + "MyJsInterface.answerToLife = function() { return 42;};"
-        + "MyJsInterface.prototype.sum = function sum(bias) { return this.x + bias; };")
+    ScriptInjector.fromString("function JsTypeTest_MyNativeJsTypeInterface() {}\n"
+        + "JsTypeTest_MyNativeJsTypeInterface.prototype.sum = "
+        + "    function sum(bias) { return this.x + bias; };")
         .setWindow(TOP_WINDOW).inject();
-    patchPrototype(MyClassExtendsJsPrototype.class);
   }
-
-  /**
-   * Workaround for the fact that the script is injected after defineClass() has been called.
-   */
-  private native void patchPrototype(Class<MyClassExtendsJsPrototype> myClass) /*-{
-      @java.lang.Class::getPrototypeForClass(Ljava/lang/Class;)(myClass).prototype = $wnd.MyClass;
-  }-*/;
 
   public void testVirtualUpRefs() {
     ListImpl listWithExport = new ListImpl(); // Exports .add().
@@ -149,76 +138,40 @@ public class JsTypeTest extends GWTTestCase {
     assertEquals(100, subclassInterface.publicMethodAlsoExposedAsNonJsMethod());
   }
 
-  public void testConcreteNativeType() {
-    assertEquals(33, MyJsClassWithPrototype.staticX);
-    MyJsClassWithPrototype.staticX = 34;
-    assertEquals(34, MyJsClassWithPrototype.staticX);
-    assertEquals(42, MyJsClassWithPrototype.answerToLife());
+  @JsType(prototype = "JsTypeTest_MyNativeJsTypeInterface")
+  interface MyNativeJsTypeInterface {
+    int getX();
 
-    MyJsClassWithPrototype obj = new MyJsClassWithPrototype();
-    assertTrue(isUndefined(obj.x));
-    obj.x = 72;
-    assertEquals(72, obj.x);
-    assertEquals(74, obj.sum(2));
+    void setX(int x);
 
-    assertTrue(isUndefined(obj.getY()));
-    obj.setY(91);
-    assertEquals(91, obj.getY());
+    int sum(int bias);
   }
 
-  public void testConcreteNativeType_sublasss() {
-    MyClassExtendsJsPrototype mc = new MyClassExtendsJsPrototype();
-    assertEquals(143, mc.sum(1));
+  public class MyNativeJsTypeInterfaceImpl implements MyNativeJsTypeInterface {
+    private int x;
 
-    mc.x = -mc.x;
-    assertEquals(58, mc.sum(0));
+    @Override
+    public int getX() {
+      return x;
+    }
 
-    assertEquals(52, mc.getY());
+    @Override
+    public void setX(int x) {
+      this.x = x;
+    }
+
+    @Override
+    public int sum(int bias) {
+      return bias;
+    }
   }
-
-  public void testJsPropertyIsX() {
-    JsTypeIsProperty object = (JsTypeIsProperty) JavaScriptObject.createObject();
-
-    assertFalse(object.isX());
-    object.setX(true);
-    assertTrue(object.isX());
-    object.setX(false);
-    assertFalse(object.isX());
-  }
-
-  public void testJsPropertyGetX() {
-    JsTypeGetProperty object = (JsTypeGetProperty) JavaScriptObject.createObject();
-
-    assertTrue(isUndefined(object.getX()));
-    object.setX(10);
-    assertEquals(10, object.getX());
-    object.setX(0);
-    assertEquals(0, object.getX());
-  }
-
-  public void testProtectedNames() {
-    MyJsInterfaceWithProtectedNames obj = createMyJsInterfaceWithProtectedNames();
-    assertEquals("var", obj.var());
-    assertEquals("nullField", obj.getNullField());
-    assertEquals("import", obj.getImport());
-    obj.setImport("import2");
-    assertEquals("import2", obj.getImport());
-  }
-
-  private static native MyJsInterfaceWithProtectedNames createMyJsInterfaceWithProtectedNames() /*-{
-    var a = {};
-    a["nullField"] = "nullField";
-    a["import"] = "import";
-    a["var"] = function() { return "var"; };
-    return a;
-  }-*/;
 
   public void testCasts() {
-    MyJsInterfaceWithPrototype myClass;
-    assertNotNull(myClass = (MyJsInterfaceWithPrototype) createMyJsInterface());
+    MyNativeJsTypeInterface myClass;
+    assertNotNull(myClass = (MyNativeJsTypeInterface) createMyNativeJsTypeInterface());
 
     try {
-      assertNotNull(myClass = (MyJsInterfaceWithPrototype) createNativeButton());
+      assertNotNull(myClass = (MyNativeJsTypeInterface) createNativeButton());
       fail();
     } catch (ClassCastException cce) {
       // Expected.
@@ -226,7 +179,7 @@ public class JsTypeTest extends GWTTestCase {
 
     ElementLikeJsInterface button;
     // JsTypes without prototypes can cross-cast like JSOs
-    assertNotNull(button = (ElementLikeJsInterface) createMyJsInterface());
+    assertNotNull(button = (ElementLikeJsInterface) createMyNativeJsTypeInterface());
 
     /*
      * If the optimizations are turned on, it is possible for the compiler to dead-strip the
@@ -236,16 +189,23 @@ public class JsTypeTest extends GWTTestCase {
     assertNotNull(button);
   }
 
+  /**
+   * A test class marked with JsType but isn't referenced from any Java code except instanceof.
+   */
+  @JsType(prototype = "JsTypeTest_MyNativeJsTypeInterface")
+  public interface MyJsInterfaceWithPrototypeAndOnlyInstanceofReference {
+  }
+
   public void testInstanceOf_jsoWithProto() {
-    Object object = createMyJsInterface();
+    Object object = createMyNativeJsTypeInterface();
 
     assertTrue(object instanceof Object);
     assertFalse(object instanceof HTMLAnotherElement);
     assertFalse(object instanceof HTMLButtonElement);
     assertFalse(object instanceof HTMLElement);
     assertFalse(object instanceof Iterator);
-    assertTrue(object instanceof MyJsInterfaceWithPrototype);
-    assertFalse(object instanceof MyJsInterfaceWithPrototypeImpl);
+    assertTrue(object instanceof MyNativeJsTypeInterface);
+    assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertTrue(object instanceof ElementLikeJsInterface);
     assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -262,8 +222,8 @@ public class JsTypeTest extends GWTTestCase {
     assertFalse(object instanceof HTMLButtonElement);
     assertFalse(object instanceof HTMLElement);
     assertFalse(object instanceof Iterator);
-    assertFalse(object instanceof MyJsInterfaceWithPrototype);
-    assertFalse(object instanceof MyJsInterfaceWithPrototypeImpl);
+    assertFalse(object instanceof MyNativeJsTypeInterface);
+    assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertTrue(object instanceof ElementLikeJsInterface);
     assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -280,8 +240,8 @@ public class JsTypeTest extends GWTTestCase {
     assertTrue(object instanceof HTMLButtonElement);
     assertTrue(object instanceof HTMLElement);
     assertFalse(object instanceof Iterator);
-    assertFalse(object instanceof MyJsInterfaceWithPrototype);
-    assertFalse(object instanceof MyJsInterfaceWithPrototypeImpl);
+    assertFalse(object instanceof MyNativeJsTypeInterface);
+    assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertTrue(object instanceof ElementLikeJsInterface);
     assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertTrue(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -299,8 +259,8 @@ public class JsTypeTest extends GWTTestCase {
     assertFalse(object instanceof HTMLButtonElement);
     assertFalse(object instanceof HTMLElement);
     assertFalse(object instanceof Iterator);
-    assertFalse(object instanceof MyJsInterfaceWithPrototype);
-    assertFalse(object instanceof MyJsInterfaceWithPrototypeImpl);
+    assertFalse(object instanceof MyNativeJsTypeInterface);
+    assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertTrue(object instanceof ElementLikeJsInterface);
     assertTrue(object instanceof ElementLikeJsInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -311,15 +271,15 @@ public class JsTypeTest extends GWTTestCase {
 
   public void testInstanceOf_implementsJsTypeWithPrototype() {
     // Foils type tightening.
-    Object object = alwaysTrue() ? new MyJsInterfaceWithPrototypeImpl() : new Object();
+    Object object = alwaysTrue() ? new MyNativeJsTypeInterfaceImpl() : new Object();
 
     assertTrue(object instanceof Object);
     assertFalse(object instanceof HTMLAnotherElement);
     assertFalse(object instanceof HTMLButtonElement);
     assertFalse(object instanceof HTMLElement);
     assertFalse(object instanceof Iterator);
-    assertTrue(object instanceof MyJsInterfaceWithPrototype);
-    assertTrue(object instanceof MyJsInterfaceWithPrototypeImpl);
+    assertTrue(object instanceof MyNativeJsTypeInterface);
+    assertTrue(object instanceof MyNativeJsTypeInterfaceImpl);
     assertFalse(object instanceof ElementLikeJsInterface);
     assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -337,8 +297,8 @@ public class JsTypeTest extends GWTTestCase {
     assertFalse(object instanceof HTMLButtonElement);
     assertFalse(object instanceof HTMLElement);
     assertFalse(object instanceof Iterator);
-    assertFalse(object instanceof MyJsInterfaceWithPrototype);
-    assertFalse(object instanceof MyJsInterfaceWithPrototypeImpl);
+    assertFalse(object instanceof MyNativeJsTypeInterface);
+    assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertFalse(object instanceof ElementLikeJsInterface);
     assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -356,8 +316,8 @@ public class JsTypeTest extends GWTTestCase {
     assertTrue(object instanceof HTMLButtonElement);
     assertTrue(object instanceof HTMLElement);
     assertTrue(object instanceof Iterable);
-    assertFalse(object instanceof MyJsInterfaceWithPrototype);
-    assertFalse(object instanceof MyJsInterfaceWithPrototypeImpl);
+    assertFalse(object instanceof MyNativeJsTypeInterface);
+    assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertFalse(object instanceof ElementLikeJsInterface);
     assertFalse(object instanceof ElementLikeJsInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
@@ -366,12 +326,16 @@ public class JsTypeTest extends GWTTestCase {
     assertFalse(object instanceof ConcreteJsType);
   }
 
-  public void testInstanceOfWithNameSpace() {
+  @JsType(prototype = "testfoo.bar.JsTypeTest_MyNativeJsTypeInterface")
+  interface MyNamespacedJsInterface {
+  }
+
+  public void testInstanceOf_withNameSpace() {
     Object obj1 = createMyNamespacedJsInterface();
     Object obj2 = createMyWrongNamespacedJsInterface();
 
     assertTrue(obj1 instanceof MyNamespacedJsInterface);
-    assertFalse(obj1 instanceof MyJsInterfaceWithPrototype);
+    assertFalse(obj1 instanceof MyNativeJsTypeInterface);
 
     assertFalse(obj2 instanceof MyNamespacedJsInterface);
   }
@@ -406,20 +370,20 @@ public class JsTypeTest extends GWTTestCase {
     return $doc.createElement("button");
   }-*/;
 
-  private static native Object createMyJsInterface() /*-{
-    return new $wnd.MyJsInterface();
+  private static native Object createMyNativeJsTypeInterface() /*-{
+    return new $wnd.JsTypeTest_MyNativeJsTypeInterface();
   }-*/;
 
   private static native Object createMyNamespacedJsInterface() /*-{
     $wnd.testfoo = {};
     $wnd.testfoo.bar = {};
-    $wnd.testfoo.bar.MyJsInterface = function(){};
-    return new $wnd.testfoo.bar.MyJsInterface();
+    $wnd.testfoo.bar.JsTypeTest_MyNativeJsTypeInterface = function(){};
+    return new $wnd.testfoo.bar.JsTypeTest_MyNativeJsTypeInterface();
   }-*/;
 
   private static native Object createMyWrongNamespacedJsInterface() /*-{
-    $wnd["testfoo.bar.MyJsInterface"] = function(){};
-    return new $wnd['testfoo.bar.MyJsInterface']();
+    $wnd["testfoo.bar.JsTypeTest_MyNativeJsTypeInterface"] = function(){};
+    return new $wnd['testfoo.bar.JsTypeTest_MyNativeJsTypeInterface']();
   }-*/;
 
   private static native boolean isUndefined(int value) /*-{

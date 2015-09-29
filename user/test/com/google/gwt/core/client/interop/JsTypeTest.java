@@ -196,6 +196,49 @@ public class JsTypeTest extends GWTTestCase {
     assertEquals(0, object.getX());
   }
 
+  public void testPropertyBridges_accidental() {
+    MyJsInterfaceWithPrototype object = new MyJsInterfaceWithPrototypeImplNeedsBridge();
+
+    object.setX(3);
+    assertEquals(3, object.getX());
+
+    Simple simple = (Simple) object;
+
+    simple.setX(3);
+    assertEquals(3, simple.getX());
+    assertEquals(3, readX(object));
+
+    writeX(object, 4);
+    assertEquals(4, simple.getX());
+    assertEquals(4, readX(object));
+
+    assertEquals(3 + 4, simple.sum(3));
+  }
+
+  public void testPropertyBridges_subclass() {
+    MyJsInterfaceWithPrototype object = new MyJsInterfaceWithPrototypeImplNeedsBridgeSubclass();
+
+    object.setX(3);
+    assertEquals(3, object.getX());
+
+    Simple2 simple = (Simple2) object;
+
+    simple.setX(3);
+    assertEquals(3, simple.getX());
+    assertEquals(3, readX(object));
+
+    writeX(object, 4);
+    assertEquals(4, simple.getX());
+    assertEquals(4, readX(object));
+
+    MyJsInterfaceWithPrototypeImplNeedsBridgeSubclass subclass =
+        (MyJsInterfaceWithPrototypeImplNeedsBridgeSubclass) object;
+
+    subclass.setParentX(5);
+    assertEquals(8, simple.sum(3));
+    assertEquals(9, subclass.getXPlusY());
+  }
+
   public void testProtectedNames() {
     MyJsInterfaceWithProtectedNames obj = createMyJsInterfaceWithProtectedNames();
     assertEquals("var", obj.var());
@@ -437,6 +480,14 @@ public class JsTypeTest extends GWTTestCase {
   private static native int callPublicMethodFromEnumerationSubclass(
       MyEnumWithSubclassGen enumeration) /*-{
     return enumeration.foo();
+  }-*/;
+
+  private static native int readX(Object object) /*-{
+    return object.x;
+  }-*/;
+
+  private static native void writeX(Object object, int value) /*-{
+    return object.x = value;
   }-*/;
 
   public static void assertJsTypeHasFields(Object obj, String... fields) {

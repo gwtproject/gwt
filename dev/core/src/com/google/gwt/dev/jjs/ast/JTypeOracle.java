@@ -135,6 +135,9 @@ public class JTypeOracle implements Serializable {
     this.optimize = optimize;
   }
 
+  public static Iterable<JDeclaredType> getClinitTargetsForEmptyClinit(JDeclaredType type) {
+
+  }
   /**
    * Checks a clinit method to find out a few things.
    *
@@ -1061,13 +1064,12 @@ public class JTypeOracle implements Serializable {
 
     JMethod method = type.getClinitMethod();
     assert (JProgram.isClinit(method));
-    CheckClinitVisitor v = new CheckClinitVisitor();
-    v.accept(method);
-    if (v.hasLiveCode()) {
+    List<JDeclaredType> clinitTargets = getClinitTargetsForEmptyClinit(type);
+    if (clinitTargets == null) {
+      // The clinit has live code.
       return type;
     }
     // Check for trivial super clinit.
-    JDeclaredType[] clinitTargets = v.getClinitTargets();
     if (clinitTargets.length == 1) {
       JDeclaredType singleTarget = clinitTargets[0];
       if (type instanceof JClassType && singleTarget instanceof JClassType

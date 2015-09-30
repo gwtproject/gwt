@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9555663b_e0c4387e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-30T21:57:04Z",
+      "side": 1,
+      "message": "I\u0027m starting to think an error-prone pass specifically for this and J2CL is a good idea. :)",
+      "range": {
+        "startLine": 894,
+        "startChar": 59,
+        "endLine": 894,
+        "endChar": 62
+      },
+      "revId": "380ee91bcb5c64a946c5e5ba8049e020fa0a40e0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

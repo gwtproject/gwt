@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9555663b_dd575b69",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/ExclusivityMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-30T21:56:02Z",
+      "side": 1,
+      "message": "Were these just getting implicitly assigned by the fixup passes before?",
+      "revId": "6eb4cee85b2e33a472f7d5b3c9503632b84d774e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_a0ba40ed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/ExclusivityMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-09-30T21:56:02Z",
+      "side": 1,
+      "message": "Maybe call this updateMapIfUnMapped or something similar to denote it\u0027s a no-op for atoms that have already been assigned a fragment?\n\nperhaps ever better\n\nassignAtomsToFragmentIfUnmapped ?",
+      "revId": "6eb4cee85b2e33a472f7d5b3c9503632b84d774e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

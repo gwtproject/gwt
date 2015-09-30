@@ -30,13 +30,13 @@ import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
 import com.google.gwt.dev.js.ast.JsStatement;
-import com.google.gwt.dev.util.collect.HashMap;
-import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.ArrayDeque;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -154,54 +154,16 @@ class ExclusivityMap {
     return isLiveInFragment(fragmentForType, type, fragment);
   }
 
-  /**
-   * Update fragment map so that fields that are not in notExclusiveAtoms are assigned to
-   * the specified fragment.
-   */
-  public void updateFields(Fragment fragment, Set<?> notExclusiveAtoms, Iterable<JField> fields) {
-    updateMap(fragment, fragmentForField, notExclusiveAtoms, fields);
-  }
-
-  /**
-   * Update fragment map so that methods that are not in notExclusiveAtoms are assigned to
-   * the specified fragment.
-   */
-  public void updateMethods(Fragment fragment, Set<?> notExclusiveAtoms,
-      Iterable<JMethod> methods) {
-    updateMap(fragment, fragmentForMethod, notExclusiveAtoms, methods);
-  }
-
-  /**
-   * Update fragment map so that strings that are not in notExclusiveAtoms are assigned to
-   * the specified fragment.
-   */
-  public void updateStrings(Fragment fragment, Set<?> notExclusiveAtoms, Iterable<String> strings) {
-    updateMap(fragment, fragmentForString, notExclusiveAtoms, strings);
-  }
-
-  /**
-   * Update fragment map so that types that are not in notExclusiveAtoms are assigned to
-   * the specified fragment.
-   */
-  public void updateTypes(Fragment fragment, Set<?> notExclusiveAtoms,
-      Iterable<JDeclaredType> types) {
-    updateMap(fragment, fragmentForType, notExclusiveAtoms, types);
-  }
-
-  private Map<JField, Fragment> fragmentForField = new HashMap<JField, Fragment>();
-  private Map<JMethod, Fragment> fragmentForMethod = new HashMap<JMethod, Fragment>();
-  private Map<String, Fragment> fragmentForString = new HashMap<String, Fragment>();
-  private Map<JDeclaredType, Fragment> fragmentForType = new HashMap<JDeclaredType, Fragment>();
-
-  private Set<JField> allFields = Sets.newHashSet();
-  private Set<JMethod> allMethods = Sets.newHashSet();
-
+  private Map<JField, Fragment> fragmentForField = Maps.newHashMap();
+  private Map<JMethod, Fragment> fragmentForMethod = Maps.newHashMap();
+  private Map<String, Fragment> fragmentForString = Maps.newHashMap();
+  private Map<JDeclaredType, Fragment> fragmentForType = Maps.newHashMap();
 
   /**
    * Traverse {@code exp} and find all referenced JFields.
    */
   private static Set<JClassLiteral> classLiteralsIn(JExpression exp) {
-    final Set<JClassLiteral> literals = new HashSet<JClassLiteral>();
+    final Set<JClassLiteral> literals = Sets.newHashSet();
     class ClassLiteralFinder extends JVisitor {
       @Override
       public void endVisit(JClassLiteral classLiteral, Context ctx) {
@@ -218,9 +180,10 @@ class ExclusivityMap {
    * exclusively live fragment associated with that split point.
    */
   public static ExclusivityMap computeExclusivityMap(Collection<Fragment> exclusiveFragments,
-      ControlFlowAnalyzer completeCfa, Map<Fragment, ControlFlowAnalyzer> notLiveCfaByFragment) {
+      ControlFlowAnalyzer completeCfa,
+      Map<Fragment, ControlFlowAnalyzer> notExclusiveCfaByFragment) {
     ExclusivityMap exclusivityMap = new ExclusivityMap();
-    exclusivityMap.compute(exclusiveFragments, completeCfa, notLiveCfaByFragment);
+    exclusivityMap.compute(exclusiveFragments, completeCfa, notExclusiveCfaByFragment);
     return exclusivityMap;
   }
 
@@ -270,33 +233,35 @@ class ExclusivityMap {
    * are only needed by a single split point. Such code can be moved to the
    * exclusively live fragment associated with that split point.
    */
-  private void compute(Collection<Fragment> exclusiveFragments,
-      ControlFlowAnalyzer completeCfa, Map<Fragment, ControlFlowAnalyzer> notLiveCfaByFragment) {
-    for (JNode node : completeCfa.getLiveFieldsAndMethods()) {
-      if (node instanceof JField) {
-        allFields.add((JField) node);
-      }
-      if (node instanceof JMethod) {
-        allMethods.add((JMethod) node);
-      }
-    }
-    allFields.addAll(completeCfa.getFieldsWritten());
+  private void compute(Collection<Fragment> exclusiveFragments, ControlFlowAnalyzer completeCfa,
+      Map<Fragment, ControlFlowAnalyzer> notExclusiveCfaByFragment) {
+
+    Set<JField> liveFields = declaredFieldsIn(Sets.union(completeCfa.getLiveFieldsAndMethods(),
+        completeCfa.getFieldsWritten()));
+    Set<JMethod> allLiveMethods = declaredMethodsIn(completeCfa.getLiveFieldsAndMethods());
+    Set<String> allLiveStrings = completeCfa.getLiveStrings();
+    Set<JDeclaredType> allLiveTypes = declaredTypesIn(completeCfa.getInstantiatedTypes());
 
     for (Fragment fragment : exclusiveFragments) {
       assert fragment.isExclusive();
-      ControlFlowAnalyzer notLiveInFragment = notLiveCfaByFragment.get(fragment);
-      Set<JNode> allLiveNodes =
-          Sets.union(notLiveInFragment.getLiveFieldsAndMethods(),
-              notLiveInFragment.getFieldsWritten());
-      updateFields(fragment, allLiveNodes, allFields);
-      updateMethods(fragment, notLiveInFragment.getLiveFieldsAndMethods(),
-          allMethods);
-      updateStrings(fragment, notLiveInFragment.getLiveStrings(), completeCfa
-          .getLiveStrings());
-      updateTypes(fragment,
-          declaredTypesIn(notLiveInFragment.getInstantiatedTypes()),
-          declaredTypesIn(completeCfa.getInstantiatedTypes()));
+      ControlFlowAnalyzer complementCfa = notExclusiveCfaByFragment.get(fragment);
+      Set<JNode> nodesNotExclusiveToFragment = Sets.union(complementCfa.getLiveFieldsAndMethods(),
+          complementCfa.getFieldsWritten());
+
+      updateMap(fragment, fragmentForField, nodesNotExclusiveToFragment, liveFields);
+      updateMap(fragment, fragmentForMethod, complementCfa.getLiveFieldsAndMethods(),
+          allLiveMethods);
+      updateMap(fragment, fragmentForString, complementCfa.getLiveStrings(), allLiveStrings);
+      updateMap(fragment, fragmentForType,
+          declaredTypesIn(complementCfa.getInstantiatedTypes()),
+          allLiveTypes);
     }
+
+    // Assign all living atoms to left overs.
+    updateMap(NOT_EXCLUSIVE, fragmentForField, Collections.emptySet(), liveFields);
+    updateMap(NOT_EXCLUSIVE, fragmentForMethod, Collections.emptySet(), allLiveMethods);
+    updateMap(NOT_EXCLUSIVE, fragmentForString, Collections.emptySet(), allLiveStrings);
+    updateMap(NOT_EXCLUSIVE, fragmentForType, Collections.emptySet(), allLiveTypes);
   }
 
   /**
@@ -322,13 +287,13 @@ class ExclusivityMap {
         continue;
       }
 
-      Fragment classLiteralFragment = getFragment(fragmentForField, field);
+      Fragment classLiteralFragment = fragmentForField.get(field);
       JExpression initializer = field.getInitializer();
 
       // Fixup the string literals.
       for (String string : stringsIn(initializer)) {
         numClassLitStrings++;
-        Fragment stringFrag = getFragment(fragmentForString, string);
+        Fragment stringFrag = fragmentForString.get(string);
         if (!fragmentsAreConsistent(classLiteralFragment, stringFrag)) {
           numFixups++;
           fragmentForString.put(string, NOT_EXCLUSIVE);
@@ -338,8 +303,7 @@ class ExclusivityMap {
       for (JClassLiteral superclassClassLiteral : classLiteralsIn(initializer)) {
         JField superclassClassLiteralField = superclassClassLiteral.getField();
         // Fix the super class literal and add it to the reexamined.
-        Fragment superclassClassLiteralFragment = getFragment(fragmentForField,
-            superclassClassLiteralField);
+        Fragment superclassClassLiteralFragment = fragmentForField.get(superclassClassLiteralField);
         if (!fragmentsAreConsistent(classLiteralFragment, superclassClassLiteralFragment)) {
           numClassLiteralFixups++;
           fragmentForField.put(superclassClassLiteralField, NOT_EXCLUSIVE);
@@ -359,9 +323,9 @@ class ExclusivityMap {
    * Fixup string literals that appear in field initializers.
    *
    * <p>GenerateJavaScriptAST decides whether a field will be initialized at the declaration or
-   * by the instance/class initialer when lowering to JavasScript.
+   * by the instance/class initializer when lowering to JavasScript.
    *
-   * <p>Only literals are affeced and only string literals are relevant for code splitting.
+   * <p>Only literals are affected and only string literals are relevant for code splitting.
    */
   private void fixUpLoadOrderDependenciesForFieldsInitializedToStrings(TreeLogger logger,
       JProgram jprogram) {
@@ -375,8 +339,8 @@ class ExclusivityMap {
           numFieldStrings[0]++;
 
           String string = ((JStringLiteral) field.getInitializer()).getValue();
-          Fragment fieldFrag = getFragment(fragmentForField, field);
-          Fragment stringFrag = getFragment(fragmentForString, string);
+          Fragment fieldFrag = fragmentForField.get(field);
+          Fragment stringFrag = fragmentForString.get(string);
           if (!fragmentsAreConsistent(fieldFrag, stringFrag)) {
             numFixups[0]++;
             fragmentForString.put(string, NOT_EXCLUSIVE);
@@ -398,8 +362,8 @@ class ExclusivityMap {
     int numFixups = 0;
 
     for (JDeclaredType type : jprogram.getDeclaredTypes()) {
-      Fragment typeFrag = getFragment(fragmentForType, type);
-      if (!typeFrag.isExclusive()) {
+      Fragment typeFrag = fragmentForType.get(type);
+      if (typeFrag == null || !typeFrag.isExclusive()) {
         continue;
       }
       /*
@@ -408,7 +372,7 @@ class ExclusivityMap {
       */
       for (JMethod method : type.getMethods()) {
         if (method.needsVtable() && methodsInJavaScript.contains(method)
-            && typeFrag != getFragment(fragmentForMethod, method)) {
+            && typeFrag != fragmentForMethod.get(method)) {
           fragmentForType.put(type, NOT_EXCLUSIVE);
           numFixups++;
           break;
@@ -433,8 +397,8 @@ class ExclusivityMap {
     while (!typesToCheck.isEmpty()) {
       JDeclaredType type = typesToCheck.remove();
       if (type.getSuperClass() != null) {
-        Fragment typeFrag = getFragment(fragmentForType, type);
-        Fragment supertypeFrag = getFragment(fragmentForType, type.getSuperClass());
+        Fragment typeFrag = fragmentForType.get(type);
+        Fragment supertypeFrag = fragmentForType.get(type.getSuperClass());
         if (!fragmentsAreConsistent(typeFrag, supertypeFrag)) {
           numFixups++;
           fragmentForType.put(type.getSuperClass(), NOT_EXCLUSIVE);
@@ -455,15 +419,25 @@ class ExclusivityMap {
   }
 
   /**
-   * Returns true if atoms in thatStatement are visible from thisFragment.
+   * Extract the methods from a set of JNodes.
+   * @param types
    */
-  private static boolean fragmentsAreConsistent(Fragment thisFragment, Fragment thatFragment) {
-    return thisFragment == thatFragment || !thatFragment.isExclusive();
+  private static Set<JMethod> declaredMethodsIn(Set<? extends JNode> types) {
+    return (Set) Sets.filter(types, Predicates.instanceOf(JMethod.class));
   }
 
-  private static <T> Fragment getFragment(Map<T, Fragment> fragmentForAtom, T atom) {
-    Fragment fragment = fragmentForAtom.get(atom);
-    return (fragment == null) ? NOT_EXCLUSIVE : fragment;
+  /**
+   * Extract the fields from a set of JNodes.
+   * @param types
+   */
+  private static Set<JField> declaredFieldsIn(Set<? extends JNode> types) {
+    return (Set) Sets.filter(types, Predicates.instanceOf(JField.class));
+  }
+  /**
+   * Returns true if atoms in thatFragment are visible from thisFragment.
+   */
+  private static boolean fragmentsAreConsistent(Fragment thisFragment, Fragment thatFragment) {
+    return thisFragment == null ||  thisFragment == thatFragment || !thatFragment.isExclusive();
   }
 
   /**
@@ -472,15 +446,16 @@ class ExclusivityMap {
    */
   private static <T> boolean isLiveInFragment(Map<T, Fragment> map, T atom,
       Fragment expectedFragment) {
-    Fragment actualFragment = getFragment(map, atom);
-    return (expectedFragment == actualFragment || !actualFragment.isExclusive());
+    Fragment actualFragment = map.get(atom);
+    return actualFragment != null &&
+        (expectedFragment == actualFragment || !actualFragment.isExclusive());
   }
 
   /**
    * Traverse {@code exp} and find all string literals within it.
    */
   private static Set<String> stringsIn(JExpression exp) {
-    final Set<String> strings = new HashSet<String>();
+    final Set<String> strings = Sets.newHashSet();
     class StringFinder extends JVisitor {
       @Override
       public void endVisit(JStringLiteral stringLiteral, Context ctx) {
@@ -494,14 +469,11 @@ class ExclusivityMap {
   private <T> void updateMap(Fragment fragment, Map<T, Fragment>  map, Set<?> notExclusiveAtoms,
       Iterable<T> atoms) {
     for (T atom : atoms) {
-      if (!notExclusiveAtoms.contains(atom)) {
-        /*
-         * Note that it is fine to overwrite a preexisting entry in the map. If
-         * an atom is dead until split point i has been reached, and is also
-         * dead until entry j has been reached, then it is dead until both have
-         * been reached. Thus, it can be downloaded along with either i's or j's
-         * code.
-         */
+      if (!notExclusiveAtoms.contains(atom) && !map.containsKey(atom)) {
+        // Some atoms might atoms might be dead until both split points i and j are reached, and
+        // thus they could be assigned to either.
+        // We choose here to assign to the first fragment, so that we could use this method
+        // to assign leftovers.
         map.put(atom, fragment);
       }
     }

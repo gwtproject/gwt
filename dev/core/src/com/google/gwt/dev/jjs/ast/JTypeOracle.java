@@ -21,6 +21,7 @@ import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Objects;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
+import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.HashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableSetMultimap;
@@ -135,8 +136,13 @@ public class JTypeOracle implements Serializable {
     this.optimize = optimize;
   }
 
-  public static Iterable<JDeclaredType> getClinitTargetsForEmptyClinit(JDeclaredType type) {
-
+  private static Set<JDeclaredType> getClinitTargetsForEmptyClinit(JDeclaredType type) {
+    CheckClinitVisitor visitor = new CheckClinitVisitor();
+    visitor.accept(type.getClinitMethod());
+    if (visitor.hasLiveCode()) {
+      return null;
+    }
+    return visitor.getClinitTargets();
   }
   /**
    * Checks a clinit method to find out a few things.
@@ -157,7 +163,7 @@ public class JTypeOracle implements Serializable {
    */
   private static final class CheckClinitVisitor extends JVisitor {
 
-    private final Set<JDeclaredType> clinitTargets = Sets.newIdentityHashSet();
+    private final Set<JDeclaredType> clinitTargets = Sets.newLinkedHashSet();
 
     /**
      * Tracks whether any live code is run in this clinit. This is only reliable
@@ -169,8 +175,8 @@ public class JTypeOracle implements Serializable {
      */
     private boolean hasLiveCode = false;
 
-    public JDeclaredType[] getClinitTargets() {
-      return clinitTargets.toArray(new JDeclaredType[clinitTargets.size()]);
+    public Set<JDeclaredType> getClinitTargets() {
+      return clinitTargets;
     }
 
     public boolean hasLiveCode() {
@@ -195,7 +201,8 @@ public class JTypeOracle implements Serializable {
       if (target instanceof JField) {
         JField field = (JField) target;
         // {@See ControlFlowAnalizer.rescue(JVariable var)
-        if (field.getLiteralInitializer() != null && field.isStatic()) {
+        if (field.getLiteralInitializer() != null) {
+          assert field.isStatic();
           // Literal initializers for static fields, even though they appear in the clinit they are
           // not considered part of it; instead they are normally considered part of the fields they
           // initialize.
@@ -1064,16 +1071,15 @@ public class JTypeOracle implements Serializable {
 
     JMethod method = type.getClinitMethod();
     assert (JProgram.isClinit(method));
-    List<JDeclaredType> clinitTargets = getClinitTargetsForEmptyClinit(type);
+    Set<JDeclaredType> clinitTargets = getClinitTargetsForEmptyClinit(type);
     if (clinitTargets == null) {
       // The clinit has live code.
       return type;
     }
     // Check for trivial super clinit.
-    if (clinitTargets.length == 1) {
-      JDeclaredType singleTarget = clinitTargets[0];
-      if (type instanceof JClassType && singleTarget instanceof JClassType
-          && isSuperClass(type, singleTarget)) {
+    if (clinitTargets.size() == 1) {
+      JDeclaredType singleTarget = clinitTargets.iterator().next();
+      if (isSuperClass(type, singleTarget)) {
         return singleTarget.getClinitTarget();
       }
     }

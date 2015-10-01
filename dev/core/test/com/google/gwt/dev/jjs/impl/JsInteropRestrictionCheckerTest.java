@@ -142,18 +142,18 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "There can't be non-booelean return for the JsProperty 'is' getter"
-        + " 'test.EntryPoint$Buggy.isX()I'.",
+        "There can't be non-boolean return for the JsProperty 'is' getter"
+            + " 'test.EntryPoint$Buggy.isX()I'.",
         "There can't be void return type or any parameters for the JsProperty getter"
-        + " 'test.EntryPoint$Buggy.getY(I)I'.",
+            + " 'test.EntryPoint$Buggy.getY(I)I'.",
         "There can't be void return type or any parameters for the JsProperty getter"
-        + " 'test.EntryPoint$Buggy.getZ()V'.",
+            + " 'test.EntryPoint$Buggy.getZ()V'.",
         "There needs to be single parameter and void return type for the JsProperty setter"
-        + " 'test.EntryPoint$Buggy.setX(II)V'.",
+            + " 'test.EntryPoint$Buggy.setX(II)V'.",
         "There needs to be single parameter and void return type for the JsProperty setter"
-        + " 'test.EntryPoint$Buggy.setY()V'.",
+            + " 'test.EntryPoint$Buggy.setY()V'.",
         "There needs to be single parameter and void return type for the JsProperty setter"
-        + " 'test.EntryPoint$Buggy.setZ(I)I'.");
+            + " 'test.EntryPoint$Buggy.setZ(I)I'.");
   }
 
   public void testJsPropertyNonGetterStyleFails() throws Exception {
@@ -233,11 +233,11 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "The JsType member 'test.EntryPoint$IBuggy.x(Z)Z' and JsProperty "
-        + "'test.EntryPoint$IBuggy.getX()I' can't both be named 'x' in "
-        + "type 'test.EntryPoint$IBuggy'.",
+            + "'test.EntryPoint$IBuggy.getX()I' can't both be named 'x' in "
+            + "type 'test.EntryPoint$IBuggy'.",
         "The JsType member 'test.EntryPoint$Buggy.x(Z)Z' and JsProperty "
-        + "'test.EntryPoint$Buggy.getX()I' can't both be named 'x' in "
-        + "type 'test.EntryPoint$Buggy'.");
+            + "'test.EntryPoint$Buggy.getX()I' can't both be named 'x' in "
+            + "type 'test.EntryPoint$Buggy'.");
   }
 
   public void testCollidingJsTypeAndJsPropertySetterFails() throws Exception {
@@ -406,7 +406,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Field 'test.EntryPoint$ParentBuggy.foo' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
+            + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
   }
 
   public void testCollidingSubclassFieldToMethodJsTypeFails() throws Exception {
@@ -423,7 +423,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Field 'test.EntryPoint$ParentBuggy.foo' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
+            + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
   }
 
   public void testCollidingSubclassMethodToExportedMethodJsTypeSucceeds() throws Exception {
@@ -460,7 +460,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Method 'test.EntryPoint$Buggy.show()V' can't be exported in type "
-        + "'test.EntryPoint$Buggy2' because the member name 'show' is already taken.");
+            + "'test.EntryPoint$Buggy2' because the member name 'show' is already taken.");
   }
 
   public void testCollidingSubclassMethodToMethodJsTypeFails() throws Exception {
@@ -477,7 +477,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Method 'test.EntryPoint$ParentBuggy.foo()V' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
+            + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
   }
 
   public void testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails() throws Exception {
@@ -504,7 +504,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Method 'test.EntryPoint$Buggy.show()V' can't be exported in type "
-        + "'test.EntryPoint$Buggy2' because the member name 'show' is already taken.");
+            + "'test.EntryPoint$Buggy2' because the member name 'show' is already taken.");
   }
 
   public void testCollidingSyntheticBridgeMethodSucceeds() throws Exception {
@@ -540,7 +540,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Field 'test.EntryPoint$ParentParentBuggy.foo' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
+            + "'test.EntryPoint$Buggy' because the member name 'foo' is already taken.");
   }
 
   public void testConsistentPropertyTypeSucceeds() throws Exception {
@@ -580,9 +580,9 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "The setter and getter for JsProperty 'foo' in type 'test.EntryPoint$IBuggy' "
-        + "must have consistent types.",
+            + "must have consistent types.",
         "The setter and getter for JsProperty 'foo' in type 'test.EntryPoint$Buggy' "
-        + "must have consistent types.");
+            + "must have consistent types.");
   }
 
   public void testInconsistentIsSetPropertyTypeFails() throws Exception {
@@ -693,7 +693,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Constructor 'test.EntryPoint$Buggy.EntryPoint$Buggy() <init>' can only be exported if all "
-        + "constructors in the class are delegating to it.");
+            + "constructors in the class are delegating to it.");
   }
 
   public void testMultiplePublicConstructorsExportFails() throws Exception {
@@ -708,9 +708,9 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggyFails(
         "More than one constructor exported for test.EntryPoint$Buggy.",
         "Constructor 'test.EntryPoint$Buggy.EntryPoint$Buggy() <init>' can only be exported if all "
-        + "constructors in the class are delegating to it.",
+            + "constructors in the class are delegating to it.",
         "Member 'test.EntryPoint$Buggy.EntryPoint$Buggy(I) <init>' can't be "
-        + "exported because the global name 'test.EntryPoint.Buggy' is already taken.");
+            + "exported because the global name 'test.EntryPoint.Buggy' is already taken.");
   }
 
   public void testNonCollidingAccidentalOverrideSucceeds() throws Exception {
@@ -745,7 +745,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Constructor 'test.EntryPoint$Buggy.EntryPoint$Buggy() <init>' cannot have an export "
-        + "name.");
+            + "name.");
   }
 
   public void testSingleExportSucceeds() throws Exception {
@@ -874,6 +874,158 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggyFails(
         "'test.EntryPoint$Buggy' cannot be both a JsFunction implementation and a JsType at the "
         + "same time.");
+  }
+
+  public void testJsFunctionStaticInitializerFails() {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsFunction");
+    addSnippetClassDecl(
+        "public static String someString() { return \"hello\"; }",
+        "@JsFunction public interface Buggy {",
+        "  static String s = someString();",
+        "  void m();",
+        "}");
+
+    assertBuggyFails(
+        "JsFunction 'test.EntryPoint$Buggy' cannot have static initializer.");
+  }
+
+  public void testJsTypeNativeAndJsFunctionFails() {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsFunction");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"x\") @JsFunction public static interface Buggy {",
+        "  void m();",
+        "}");
+
+    assertBuggyFails(
+        "'test.EntryPoint$Buggy' cannot be both a JsFunction and a JsType at the same time.");
+  }
+
+  public void testJsTypeNativeStaticInitializerFails() {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"x\") public static class Buggy {",
+        "  static String s = \"hello\";",
+        "  static {  s += \"hello\"; }",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType 'test.EntryPoint$Buggy' cannot have static initializer.");
+  }
+
+  public void testJsTypeNativeInilineStaticInitializerFails() {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"x\") public static class Buggy {",
+        "  static final String s = new String(\"hello\");",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType 'test.EntryPoint$Buggy' cannot have static initializer.");
+  }
+
+  public void testJsTypeNativeInterfaceInlineInitializerFails() {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"x\") public interface Buggy {",
+        "  static final String s = new String(\"hello\");",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType 'test.EntryPoint$Buggy' cannot have static initializer.");
+  }
+
+  public void testJsTypeNativeCompileTimeConstantSucceeds() throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"x\") public static class Buggy {",
+        "  static final String s = \"hello\";",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testJsTypeInterfaceNativeCompileTimeConstantSucceeds()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"x\") public interface Buggy {",
+        "  static final String s = \"hello\";",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testJsTypeNativeExtendsJsTypeNativeSucceeds() throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"S\") public static class Super {",
+        "}",
+        "@JsType(prototype = \"B\") public static class Buggy extends Super {",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testJsTypeNativeImplementsJsTypeNativeSucceeds() throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"S\") public interface Super {",
+        "}",
+        "@JsType(prototype = \"B\") public static class Buggy implements Super {",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testJsTypeNativeInterfaceImplementsJsTypeNativeSucceeds()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"S\") public interface Super {",
+        "}",
+        "@JsType(prototype = \"B\") public interface Buggy extends Super {",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testJsTypeNativeExtendsNonJsTypeNativeFails() throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "public static class Super {",
+        "}",
+        "@JsType(prototype = \"B\") public static class Buggy extends Super {",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType 'test.EntryPoint$Buggy' can only extend native JsType classes.");
+  }
+
+  public void testJsTypeNativeImplementsNonJsTypeNativeFails() throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "public interface Super {",
+        "}",
+        "@JsType(prototype = \"B\") public static class Buggy implements Super {",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType 'test.EntryPoint$Buggy' can only implement native JsType interfaces.");
+  }
+
+  public void testJsTypeNativeInterfaceImplementsNonJsTypeNativeFails()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "public interface Super {",
+        "}",
+        "@JsType(prototype = \"B\") public interface Buggy extends Super {",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType 'test.EntryPoint$Buggy' can only implement native JsType interfaces.");
   }
 
   private static final MockJavaResource jsFunctionInterface = new MockJavaResource(

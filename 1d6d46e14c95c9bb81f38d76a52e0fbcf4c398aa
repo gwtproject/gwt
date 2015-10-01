@@ -1,0 +1,243 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9555663b_c08f7421",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "extra empty line",
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_40dfdfcf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTransformer.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "Is there a particular reason why? Wouldn\u0027t someone overriding transformMethodCall() want to intercept these too?",
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_c0776f57",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "is there any case in which this method will ever return non-null? Should we just make this a specialized one that returns void?",
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_80dbb7b0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "Maybe have this method simply return a reference to goog.abstractMethod in Closure output mode?",
+      "range": {
+        "startLine": 814,
+        "startChar": 48,
+        "endLine": 814,
+        "endChar": 49
+      },
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_80b4574f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 1752,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "spelling of initializer",
+      "range": {
+        "startLine": 1752,
+        "startChar": 39,
+        "endLine": 1752,
+        "endChar": 40
+      },
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_00a04702",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 1757,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "Should this branch come first or is it ok if initializeAtTopScope is true for Object?",
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_c022cf35",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "This comment doesn\u0027t make sense. The method is already static, so not a vtable assignment.",
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_a0351b6d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 1882,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "if we\u0027re getting rid of the C++ mnemonic, maybe rename this to generatePrototypeDefinitionsForType()?",
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_400ebfb2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 2241,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "rename to generatePrototypeAssignmentForJavaField?",
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_c0f92fec",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 2317,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "Should we be consistent and just not use the VTable terminology (opting for \u0027prototype\u0027 instead)",
+      "range": {
+        "startLine": 2317,
+        "startChar": 92,
+        "endLine": 2317,
+        "endChar": 93
+      },
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_20f74bf9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 2379,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "This sould be cleaner if transform() just returned a goog.abstractMethod reference in Closure mode.",
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_6028234a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 2622,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "Sort of not true for ClosureFormattedOutput. The virtual methods need to be generated on the prototype, but left as empty placeholders (preferably goog.abstractMethod which Closure Compiler specifically recognizes and prunes), but it depends on how this is handed downstream.",
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_60b66333",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JavaToJavaScriptMap.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 1,
+      "message": "instanceMethodForStatement?",
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

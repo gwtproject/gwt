@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9555663b_009967fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T23:03:06Z",
+      "side": 0,
+      "message": "Should we move this, and the AssertStatement one into Transformer? I mean, this is highly unlikely to blow up, but someone could trip over it later if they disable a normalization pass. Just thinking out loud, I\u0027m not overly attached to just deleting these.",
+      "revId": "c9c32256f6ffb8ca69f50693a06b91bc25331fef",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

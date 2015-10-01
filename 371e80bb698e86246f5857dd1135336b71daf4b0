@@ -1,0 +1,376 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9555663b_4637fc15",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "I think the name is quite confusing here.",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_66f1609d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "it also looks like the method is randomly located here.",
+      "range": {
+        "startLine": 138,
+        "startChar": 36,
+        "endLine": 138,
+        "endChar": 66
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_e668d0fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "It is not clear to me what this is?",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 5
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_a6f2589e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "All things together, perhaps you should keep the old style?",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_0600640f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "wasn\u0027t this already part of a different patch?",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_86ec74c5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "isn\u0027t this part of a different patch?",
+      "range": {
+        "startLine": 203,
+        "startChar": 1,
+        "endLine": 204,
+        "endChar": 34
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_46853cfe",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "This is nice but I actually had a check for instanceof which was convenient with the visitor; now it needs to have its own visitor.",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_469c1c64",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "nit: seems earlier formatting was correct.",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 11
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_268ac80d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 3
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_a68c182e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "seems redundant?",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 5
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_e696103e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "nit: extract local \u0027superClass\u0027",
+      "range": {
+        "startLine": 297,
+        "startChar": 8,
+        "endLine": 297,
+        "endChar": 28
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_c68f8c21",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "nit:\n\n for (;type !\u003d null; type \u003d type.getSuperClass())\n\nor I usually do following:\n\n for (JDeclaredType t \u003d currentType; t !\u003d null; t \u003d t.getSuperClass())",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_86311421",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "Nice! I always hated the hacky visitor.",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_6684c000",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "We already have testJsFunctionMarkedAsJsTypeFails",
+      "range": {
+        "startLine": 893,
+        "startChar": 14,
+        "endLine": 893,
+        "endChar": 48
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_c6782cba",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 917,
+        "startChar": 32,
+        "endLine": 917,
+        "endChar": 33
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_a67538c2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "NativeJsType\nNativeJsTypeInterface\netc.",
+      "range": {
+        "startLine": 949,
+        "startChar": 18,
+        "endLine": 949,
+        "endChar": 33
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_46e25cd4",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "Missing:\n\n testJsTypeExtendsNativeJsTypeSucceeds\n testJsTypeExtendsNonJsTypeSucceeds\n testNonJsTypeExtendsJsTypeSucceeds\n\n(and the interface versions)",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_e66f30ea",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-01T03:05:19Z",
+      "side": 1,
+      "message": "Rename to testNativeJsTypeExtendsNonJsTypeFails (and others similarly)\nand also can you pls add:\n\n testNativeJsTypeExtendsJsTypeFails\n\n(and the interface versions)",
+      "range": {
+        "startLine": 994,
+        "startChar": 14,
+        "endLine": 994,
+        "endChar": 57
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

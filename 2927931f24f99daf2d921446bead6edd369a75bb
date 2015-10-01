@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9555663b_40599f29",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsObjectLiteral.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T22:03:47Z",
+      "side": 1,
+      "message": "I\u0027m so tempted to suggest @AutoValue/AutoValue.Builder for this, but that would introduce another dependency into GWT. :(",
+      "revId": "2927931f24f99daf2d921446bead6edd369a75bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

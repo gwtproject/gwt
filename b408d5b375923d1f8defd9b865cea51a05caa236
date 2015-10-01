@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9555663b_806e17c2",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUnusedFunctionRemover.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-01T22:00:17Z",
+      "side": 1,
+      "message": "This seems kind of ugly. We go from a general purpose mechanism for pinning to a specific lookup for a magically named function. \n\nThis logic exists only so that the FragmentExtractor onLoaded expression can delegate to it. But if there\u0027s any code-splitting live at all, this function must exist, so why don\u0027t we somehow leverage @JsInterop.  Essentially, we\u0027d exporting an entrypoint for the code-splitter fragments to call into.\n\nIf code splitting is turned on, why not programmatically lookup the onLoad() method and mark it exported. It would be unrenameable, which is a shame, but we can make it small.",
+      "revId": "b408d5b375923d1f8defd9b865cea51a05caa236",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "revId": "b408d5b375923d1f8defd9b865cea51a05caa236",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_1619ad85",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUnusedFunctionRemover.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-02T18:17:06Z",
+      "side": 1,
+      "message": "Well we had this \"general\" purpose mechanism that was only used for this particular case.\n\nAsyncFragmentLoader is responsible for 2 similar hacks  that get masqueraded opaquely into general purpose. This is one of them and the other is JMethodCall.isVolatile().\n\nHaving these general purpose mechanisms so that they can be used for one specific case seem very wasteful and hides the opportunity to notice the hacky cases and perform the better fix. I prefer that hacks are not hidden.\n\nOther option here is to generate \n\n  AsyncFragmentLoader.onLoad(0) \n\nat the end of the program (if code splitting is active).\n\nFor the isVolatile() issue we should probably introduce an annotation @DoNotOptimizeCalls or maybe @Api and mark the method accordingly.",
+      "parentUuid": "9555663b_806e17c2",
+      "revId": "b408d5b375923d1f8defd9b865cea51a05caa236",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

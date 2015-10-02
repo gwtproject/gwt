@@ -459,6 +459,30 @@
     },
     {
       "key": {
+        "uuid": "9555663b_f414f182",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 2380,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-02T22:45:31Z",
+      "side": 1,
+      "message": "How about \n\nJsExpression functionDefinition \u003d transform(method);\nif (functionDefinition !\u003d null) {\n   generateVTable(x, method, functionDefinition);\n}\n\nJsNode transform(JMethod method) {\n  if (shouldNotEmitMethodImplementation(method)) {\n    return closureFormattedOutput ?JsUtils.createQualifiedNameRef(GOOG_ABSTRACT_METHOD, x.getSourceInfo()) : null;\n  } else {\n    // regular transform code\n  }\n}",
+      "parentUuid": "9555663b_cb9155da",
+      "range": {
+        "startLine": 2376,
+        "startChar": 0,
+        "endLine": 2380,
+        "endChar": 99
+      },
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_eb9899fa",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 19

@@ -34,6 +34,24 @@
       "revId": "b408d5b375923d1f8defd9b865cea51a05caa236",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_197d5e76",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUnusedFunctionRemover.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-02T21:09:16Z",
+      "side": 1,
+      "message": "To be fair, those were actually used by more than one thing originally. ArtificialRescue was introduced for deRPC, because we didn\u0027t have @JsExport to pin. And volatile existed for the same reason it\u0027s used in C, because we didn\u0027t have anything like @DoNotInline.\n\nThe async special casing is spread into many places, GenJsAst, UnifyAst, CFA, FragmentExtractor. I guess it\u0027s unavoidable, because of the special semantic nature of Async, but I think it\u0027s nice if there\u0027s only one way to mark a method as unprunable. \n\nThat said, I am not overly hung up on it.",
+      "parentUuid": "9555663b_1619ad85",
+      "revId": "b408d5b375923d1f8defd9b865cea51a05caa236",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

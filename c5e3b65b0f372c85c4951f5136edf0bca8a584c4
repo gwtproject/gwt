@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5cefe75_ea10bb1c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 2444,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-03T00:45:24Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "c5e3b65b0f372c85c4951f5136edf0bca8a584c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5cefe75_0a0ebffb",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUtils.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-03T00:45:24Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "c5e3b65b0f372c85c4951f5136edf0bca8a584c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

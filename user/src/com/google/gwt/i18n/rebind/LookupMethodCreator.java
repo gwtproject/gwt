@@ -76,24 +76,58 @@ class LookupMethodCreator extends AbstractMethodCreator {
     outdent();
     println("}");
     JMethod[] methods = ((ConstantsWithLookupImplCreator) currentCreator).allInterfaceMethods;
-    JType erasedType = returnType.getErasedType();
-    for (int i = 0; i < methods.length; i++) {
-      if (methods[i].getReturnType().getErasedType().equals(erasedType)
-          && methods[i] != targetMethod) {
-        String methodName = methods[i].getName();
-        String body = "if(arg0.equals(" + wrap(methodName) + ")) {";
-        println(body);
+    
+    final int partitionsSize = 500;
+    final int partitions = (methods.length / partitionsSize) + 1;
+    println(returnTypeName + " tmp;");
+    for (int i = 0; i < partitions; i++) {
+        println("tmp = " + targetMethod.getName() + i + "(arg0);");
+        println("if (tmp != null) {");
         indent();
-        printFound(methodName);
+        println("return tmp;");
         outdent();
         println("}");
-      }
     }
+
     String format = "throw new java.util.MissingResourceException(\"Cannot find constant ''\" +"
         + "{0} + \"''; expecting a method name\", \"{1}\", {0});";
     String result = MessageFormat.format(format, "arg0",
         this.currentCreator.getTarget().getQualifiedSourceName());
     println(result);
+    outdent();
+    println("}");
+
+    println("");
+    
+    final String argument0Type = targetMethod.getParameterTypes()[0].getQualifiedSourceName();
+    for (int p = 0; p < partitions; p++) {
+        final String templateNewMethod = "public {0} {1}{2}({3} arg0) '{";
+        final String header = MessageFormat.format(templateNewMethod, new Object[] {returnTypeName,
+                targetMethod.getName(), p, argument0Type});
+        println(header);
+        indent();
+        final JType erasedType = returnType.getErasedType();
+        for (int i = 0 + p * partitionsSize; i < methods.length && i < (p + 1) * partitionsSize; i++) {
+            final JMethod method = methods[i];
+            if (method.getReturnType().getErasedType().equals(erasedType)
+                && method != targetMethod) {
+              String methodName = method.getName();
+              String body = "if(arg0.equals(" + wrap(methodName) + ")) {";
+              println(body);
+              indent();
+              printFound(methodName);
+              outdent();
+              println("}");
+            }
+        }
+        
+        println("return null;"); //$NON-NLS-1$
+        if (p < partitions - 1) {
+            outdent();
+            println("}"); //$NON-NLS-1$
+            println(""); //$NON-NLS-1$
+        }
+    }
   }
 
   void printFound(String methodName) {

@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_5c1ff5fd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-05T22:25:29Z",
+      "side": 1,
+      "message": "Will add an assert clinit.isEmpty in a follow up.",
+      "parentUuid": "ab804cc5_fc0e0102",
+      "revId": "59203ec4668c0944a442a9942adb5e01e38d6a42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab804cc5_3c59d9e5",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 13
@@ -47,6 +65,30 @@
       "writtenOn": "2015-10-05T22:24:03Z",
       "side": 1,
       "message": "(in a latter CL) let\u0027s separate this, and make explicit check for both.",
+      "range": {
+        "startLine": 2568,
+        "startChar": 11,
+        "endLine": 2569,
+        "endChar": 87
+      },
+      "revId": "59203ec4668c0944a442a9942adb5e01e38d6a42",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_7c243151",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2569,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-05T22:25:29Z",
+      "side": 1,
+      "message": "will.do.",
+      "parentUuid": "ab804cc5_3c59d9e5",
       "range": {
         "startLine": 2568,
         "startChar": 11,

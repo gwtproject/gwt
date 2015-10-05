@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_1cde5df0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 1752,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-05T22:25:39Z",
+      "side": 1,
+      "message": "To be done in a followup.",
+      "parentUuid": "ab804cc5_5914e7c7",
+      "revId": "fb6ccd8bf12ce533dab99e0097c67bff727d91bd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab804cc5_5c2a95b8",
         "filename": "dev/core/src/com/google/gwt/dev/js/JsUtils.java",
         "patchSetId": 23
@@ -30,6 +48,30 @@
       "writtenOn": "2015-10-05T21:27:45Z",
       "side": 1,
       "message": "nit:\n\n createCommaExpressionHelper(JsExpression[] expressions, int index)\n\nAlso maybe put it next to only place it is used.",
+      "range": {
+        "startLine": 196,
+        "startChar": 30,
+        "endLine": 196,
+        "endChar": 57
+      },
+      "revId": "fb6ccd8bf12ce533dab99e0097c67bff727d91bd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_5ce4d5c1",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUtils.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-05T22:25:39Z",
+      "side": 1,
+      "message": "To be done in a followup.",
+      "parentUuid": "ab804cc5_5c2a95b8",
       "range": {
         "startLine": 196,
         "startChar": 30,

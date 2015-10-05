@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5cefe75_ea5a7b91",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsInterfaceWithPrototypeImplNeedsBridgeAndSubclass.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-05T17:33:58Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "19df01e3a0aee87a3327c567c3c4012033b42308",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5cefe75_0a587f97",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsInterfaceWithPrototypeImplNeedsBridgeAndSubclass.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-05T17:33:58Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "19df01e3a0aee87a3327c567c3c4012033b42308",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

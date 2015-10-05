@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab804cc5_5914e7c7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 1752,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-05T20:55:12Z",
+      "side": 1,
+      "message": "We can rename this \u0027vtable\u0027 to something else in a followup patch (e.g. method.needsPrototypalDispatch()?)",
+      "revId": "fb6ccd8bf12ce533dab99e0097c67bff727d91bd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

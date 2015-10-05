@@ -205,7 +205,7 @@ public class JjsUtils {
     JMethodBody body = (JMethodBody) forwardingMethod.getBody();
     // Invoke methodToDelegate
     JMethodCall forwardingCall = new JMethodCall(methodToDelegateTo.getSourceInfo(),
-        new JThisRef(methodToDelegateTo.getSourceInfo(), methodToDelegateTo.getEnclosingType()),
+        new JThisRef(methodToDelegateTo.getSourceInfo(), type),
         methodToDelegateTo);
     forwardingCall.setStaticDispatchOnly();
     // copy params

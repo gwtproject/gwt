@@ -1076,6 +1076,24 @@
       "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_d959d7c5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JavaToJavaScriptMap.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-05T20:55:12Z",
+      "side": 1,
+      "message": "Ok.",
+      "parentUuid": "9555663b_f9f22acd",
+      "revId": "1d6d46e14c95c9bb81f38d76a52e0fbcf4c398aa",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

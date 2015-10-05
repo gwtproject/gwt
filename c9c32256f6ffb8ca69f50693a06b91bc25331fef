@@ -16,6 +16,24 @@
       "revId": "c9c32256f6ffb8ca69f50693a06b91bc25331fef",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_b68e01b4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-05T17:55:48Z",
+      "side": 0,
+      "message": "The transformer already handles the case, it should end up calling missing(x) and throwing an error.\n\nThe transformer by design and unlike the JVisitor will throw an exception if it is not handled.",
+      "parentUuid": "9555663b_009967fc",
+      "revId": "c9c32256f6ffb8ca69f50693a06b91bc25331fef",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

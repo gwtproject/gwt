@@ -16,6 +16,7 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.MinimalRebuildCache;
+import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -30,6 +31,7 @@ import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
@@ -276,6 +278,19 @@ public class JsInteropRestrictionChecker {
     }
   }
 
+  private void checkNoStaticJsPropertyCalls() {
+    new JVisitor() {
+      @Override
+      public void endVisit(JMethodCall x, Context ctx) {
+        JMethod target = x.getTarget();
+        if (x.isStaticDispatchOnly() && target.isJsPropertyAccessor()) {
+          logError("Cannot call property accessor '%s' using '%s'.",
+              target.getQualifiedName(), x);
+        }
+      }
+    }.accept(jprogram);
+  }
+
   private void checkJsNative(JDeclaredType type) {
     if (!JjsUtils.isClinitEmpty(type)) {
       logError("Native JsType '%s' cannot have static initializer.", type);
@@ -339,6 +354,7 @@ public class JsInteropRestrictionChecker {
     for (JDeclaredType type : jprogram.getModuleDeclaredTypes()) {
       checkType(type);
     }
+    checkNoStaticJsPropertyCalls();
   }
 
   private void checkType(JDeclaredType type) {

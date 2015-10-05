@@ -1139,6 +1139,56 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "Native JsType 'test.EntryPoint$Buggy' can only extend native JsType interfaces.");
   }
 
+  public void testJsPropertySuperCallFails()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType public static class Super {",
+        "  @JsProperty public int getX() { return 5; }",
+        "}",
+        "@JsType public static class Buggy extends Super {",
+        "  public int m() { return super.getX(); }",
+        "}");
+
+    assertBuggyFails(
+        "Cannot call property accessor 'test.EntryPoint$Super.getX()I' using 'super.getX()'.");
+  }
+
+  public void testJsPropertyCallSucceeds()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType public static class Super {",
+        "  @JsProperty public int getX() { return 5; }",
+        "}",
+        "@JsType public static class Buggy extends Super {",
+        "  public int m() { return getX(); }",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testJsPropertyAccidentalSuperCallFails()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType public static class Super {",
+        "  @JsProperty public int getX() { return 5; }",
+        "}",
+        "@JsType public interface Interface {",
+        "  @JsProperty int getX();",
+        "}",
+
+        "@JsType public static class Buggy extends Super implements Interface {",
+        "}");
+
+    assertBuggyFails(
+        "Cannot call property accessor 'test.EntryPoint$Super.getX()I' using 'super.getX()'.");
+  }
+
   private static final MockJavaResource jsFunctionInterface = new MockJavaResource(
       "test.MyJsFunctionInterface") {
     @Override

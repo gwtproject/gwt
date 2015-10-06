@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_d66d2484",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "9555663b_66f1609d",
+      "range": {
+        "startLine": 138,
+        "startChar": 36,
+        "endLine": 138,
+        "endChar": 66
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_e668d0fc",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 3
@@ -53,6 +77,30 @@
       "writtenOn": "2015-10-01T03:05:19Z",
       "side": 1,
       "message": "It is not clear to me what this is?",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 5
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_76c690cf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "I didn\u0027t refactor this well enough. The code does 2 thing, it decided whether the the clinit has any side effecting code (excluiding calls to other clinits). If that is the case it return all the clinit that are being called.\n\nIf it find it has side effects it returns null.\n\nThat is the logic that was in the clinit target computation. \n\nBut I\u0027ll revert this part.",
+      "parentUuid": "9555663b_e668d0fc",
       "range": {
         "startLine": 141,
         "startChar": 0,
@@ -82,6 +130,24 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_765f70cd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "Agreed. Don\u0027t like it either way, I though I would be able to use the same \"emptyClinit\" logic for the checker but I could not.",
+      "parentUuid": "9555663b_a6f2589e",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_0600640f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 3
@@ -93,6 +159,24 @@
       "writtenOn": "2015-10-01T03:05:19Z",
       "side": 1,
       "message": "wasn\u0027t this already part of a different patch?",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_16cb9cd6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "No? I don\u0027t think so. You are probably confusing this with the non determinsm fixed in CFA.",
+      "parentUuid": "9555663b_0600640f",
       "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -122,6 +206,30 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_36d01880",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "nope. In a static initializer there can only be DeclarationStatements for static fields (and variables).",
+      "parentUuid": "9555663b_86ec74c5",
+      "range": {
+        "startLine": 203,
+        "startChar": 1,
+        "endLine": 204,
+        "endChar": 34
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_46853cfe",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3
@@ -139,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_b6398877",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "I think is a better tradeoff. BTW where is the check for instanceof I don\u0027t see it here.",
+      "parentUuid": "9555663b_46853cfe",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_469c1c64",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3
@@ -150,6 +276,30 @@
       "writtenOn": "2015-10-01T03:05:19Z",
       "side": 1,
       "message": "nit: seems earlier formatting was correct.",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 11
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_d659a4c5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "It is already correct:)",
+      "parentUuid": "9555663b_469c1c64",
       "range": {
         "startLine": 83,
         "startChar": 0,
@@ -185,6 +335,30 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_f660603a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "Done. Is this no longer needed?",
+      "parentUuid": "9555663b_268ac80d",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 3
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_a68c182e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3
@@ -196,6 +370,30 @@
       "writtenOn": "2015-10-01T03:05:19Z",
       "side": 1,
       "message": "seems redundant?",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 5
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_99db5f4b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "Sort of. The dispatch does either checkJsNative || checkJsFunction.",
+      "parentUuid": "9555663b_a68c182e",
       "range": {
         "startLine": 293,
         "startChar": 0,
@@ -231,6 +429,30 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_d9e8f7dc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9555663b_e696103e",
+      "range": {
+        "startLine": 297,
+        "startChar": 8,
+        "endLine": 297,
+        "endChar": 28
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_c68f8c21",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3
@@ -242,6 +464,24 @@
       "writtenOn": "2015-10-01T03:05:19Z",
       "side": 1,
       "message": "nit:\n\n for (;type !\u003d null; type \u003d type.getSuperClass())\n\nor I usually do following:\n\n for (JDeclaredType t \u003d currentType; t !\u003d null; t \u003d t.getSuperClass())",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_19ff4f99",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9555663b_c68f8c21",
       "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -265,6 +505,24 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_39048b5a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "9555663b_86311421",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_6684c000",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 3
@@ -276,6 +534,30 @@
       "writtenOn": "2015-10-01T03:05:19Z",
       "side": 1,
       "message": "We already have testJsFunctionMarkedAsJsTypeFails",
+      "range": {
+        "startLine": 893,
+        "startChar": 14,
+        "endLine": 893,
+        "endChar": 48
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_99f27fc9",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "9555663b_6684c000",
       "range": {
         "startLine": 893,
         "startChar": 14,
@@ -311,6 +593,30 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_b9ef3be0",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9555663b_c6782cba",
+      "range": {
+        "startLine": 917,
+        "startChar": 32,
+        "endLine": 917,
+        "endChar": 33
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_a67538c2",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 3
@@ -322,6 +628,30 @@
       "writtenOn": "2015-10-01T03:05:19Z",
       "side": 1,
       "message": "NativeJsType\nNativeJsTypeInterface\netc.",
+      "range": {
+        "startLine": 949,
+        "startChar": 18,
+        "endLine": 949,
+        "endChar": 33
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_591ce7b0",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9555663b_a67538c2",
       "range": {
         "startLine": 949,
         "startChar": 18,
@@ -351,6 +681,24 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_19f98f82",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9555663b_46e25cd4",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_e66f30ea",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 3
@@ -362,6 +710,30 @@
       "writtenOn": "2015-10-01T03:05:19Z",
       "side": 1,
       "message": "Rename to testNativeJsTypeExtendsNonJsTypeFails (and others similarly)\nand also can you pls add:\n\n testNativeJsTypeExtendsJsTypeFails\n\n(and the interface versions)",
+      "range": {
+        "startLine": 994,
+        "startChar": 14,
+        "endLine": 994,
+        "endChar": 57
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_199bcf70",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9555663b_e66f30ea",
       "range": {
         "startLine": 994,
         "startChar": 14,

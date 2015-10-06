@@ -22,6 +22,69 @@
       "revId": "5ae2f123aa4f1598632581d01cda97d8cd1394ea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_4a15e34f",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-06T01:56:38Z",
+      "side": 1,
+      "message": "Also seems missing:\n - testNonJsTypeExtendsNativeJsTypeSucceeds\n - testNonJsTypeImplementsNativeJsTypeInterfaceSucceeds",
+      "range": {
+        "startLine": 970,
+        "startChar": 14,
+        "endLine": 970,
+        "endChar": 51
+      },
+      "revId": "5ae2f123aa4f1598632581d01cda97d8cd1394ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_8a1bfb87",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-06T01:56:38Z",
+      "side": 1,
+      "message": "not introduced yet :P",
+      "range": {
+        "startLine": 1069,
+        "startChar": 37,
+        "endLine": 1069,
+        "endChar": 42
+      },
+      "revId": "5ae2f123aa4f1598632581d01cda97d8cd1394ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_6a169f62",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1120,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-06T01:56:38Z",
+      "side": 1,
+      "message": "not a jstype but that\u0027s covered elswhere; I guess you meant testNativeJsTypeImplementsNonJsType?",
+      "revId": "5ae2f123aa4f1598632581d01cda97d8cd1394ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b30dc11_451c1cb1",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsObjectLiteral.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-06T20:15:24Z",
+      "side": 1,
+      "message": "[error] \u0027private\u0027 modifier out of order with the JLS suggestions.",
+      "revId": "300db4c6ba9e1d401c514907684c3de6dfd3873f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b30dc11_252118e9",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-06T20:15:24Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "300db4c6ba9e1d401c514907684c3de6dfd3873f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b30dc11_8516248d",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-06T20:15:24Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "300db4c6ba9e1d401c514907684c3de6dfd3873f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b30dc11_651b20b7",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-06T20:15:24Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "300db4c6ba9e1d401c514907684c3de6dfd3873f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b30dc11_c50f8c6e",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-06T20:15:24Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "300db4c6ba9e1d401c514907684c3de6dfd3873f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

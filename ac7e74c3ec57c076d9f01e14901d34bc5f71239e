@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_0f2245ee",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2311,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T23:58:22Z",
+      "side": 1,
+      "message": "To be able to postprocess with the closure compiler (rename properties pass).",
+      "parentUuid": "ab804cc5_7f5f43cd",
+      "range": {
+        "startLine": 2311,
+        "startChar": 31,
+        "endLine": 2311,
+        "endChar": 54
+      },
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_e096f83d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -208,6 +232,24 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_af105991",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2320,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T23:58:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab804cc5_1fcbafd6",
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_60f1489d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -261,6 +303,24 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_6ffe719c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2322,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T23:58:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab804cc5_dfb45762",
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_a0f2409e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -308,6 +368,24 @@
       "side": 1,
       "message": "We already discussed this and decided to ban super.someGetter() calls where someGetter is jsNative, right? Or are you pointing something else?",
       "parentUuid": "9555663b_5685e5fd",
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_4f1c4dad",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T23:58:22Z",
+      "side": 1,
+      "message": "Something else. This is explaining why we pass JsPropAcc.NONE.",
+      "parentUuid": "ab804cc5_5f1fe7fd",
       "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

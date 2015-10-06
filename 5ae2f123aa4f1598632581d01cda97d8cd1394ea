@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab804cc5_9f901fd7",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:19:48Z",
+      "side": 1,
+      "message": "Ignore this. will revert.",
+      "range": {
+        "startLine": 626,
+        "startChar": 0,
+        "endLine": 626,
+        "endChar": 2
+      },
+      "revId": "5ae2f123aa4f1598632581d01cda97d8cd1394ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

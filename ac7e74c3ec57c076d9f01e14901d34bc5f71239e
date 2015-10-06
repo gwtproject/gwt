@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_7f5f43cd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2311,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-06T01:11:36Z",
+      "side": 1,
+      "message": "Don\u0027t get it, shouldn\u0027t it still work with quoted name?",
+      "parentUuid": "d5cefe75_6705c61c",
+      "range": {
+        "startLine": 2311,
+        "startChar": 31,
+        "endLine": 2311,
+        "endChar": 54
+      },
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_e096f83d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -166,6 +190,24 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_1fcbafd6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2320,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-06T01:11:36Z",
+      "side": 1,
+      "message": "Is it optional? In JsObjectLiteral, it is a constructor param, so it wasn\u0027t optional until the builder introduced.\n\nAlso in any case, shouldn\u0027t that SourceOrigin.UNKNOWN be explicit when needed? We don\u0027t want people to be lazy or not forget about it as it is very easy to do so.",
+      "parentUuid": "d5cefe75_87bf2a91",
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_60f1489d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -201,6 +243,24 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_dfb45762",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2322,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-06T01:11:36Z",
+      "side": 1,
+      "message": "Because you had builder insider builder, I think could have helped to separate.\nAnyway I\u0027don\u0027t mind much with the added comment.",
+      "parentUuid": "d5cefe75_c7a05270",
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_a0f2409e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -230,6 +290,24 @@
       "side": 1,
       "message": "We should probably add the restriction that concrete @JsProperty methods need to be final, WDYT?",
       "parentUuid": "9555663b_a0f2409e",
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_5f1fe7fd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-06T01:11:36Z",
+      "side": 1,
+      "message": "We already discussed this and decided to ban super.someGetter() calls where someGetter is jsNative, right? Or are you pointing something else?",
+      "parentUuid": "9555663b_5685e5fd",
       "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

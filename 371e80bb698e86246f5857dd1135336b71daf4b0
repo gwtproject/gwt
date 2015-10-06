@@ -265,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "ab804cc5_0a004b13",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-06T01:56:38Z",
+      "side": 1,
+      "message": "I have a separate CL and requires new jsinterop semantics to be enabled (so that I can ban the \"instanceof somenativejsinterface\"). When I have that, I will need to put the visitor back. I guess you suggesting to create a separate visitor here just for that?",
+      "parentUuid": "ab804cc5_b6398877",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_469c1c64",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3
@@ -347,6 +365,30 @@
       "side": 1,
       "message": "Done. Is this no longer needed?",
       "parentUuid": "9555663b_268ac80d",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 3
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_ca09f340",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-06T01:56:38Z",
+      "side": 1,
+      "message": "No, it is no longer needed. Your new check covers the new semantics.",
+      "parentUuid": "ab804cc5_f660603a",
       "range": {
         "startLine": 181,
         "startChar": 0,

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d5cefe75_6705c61c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2311,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:13:27Z",
+      "side": 1,
+      "message": "So that closure is happy. In defineProperties the property field is passed as a JsName (unquoted), whereas in defineProperty is passed as a String.",
+      "parentUuid": "9555663b_60db08b2",
+      "range": {
+        "startLine": 2311,
+        "startChar": 31,
+        "endLine": 2311,
+        "endChar": 54
+      },
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_e096f83d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2015-09-30T23:02:14Z",
       "side": 1,
       "message": "perhaps introduce getKey?  method.getJsPropertyAccessorType().getKey()",
+      "range": {
+        "startLine": 2314,
+        "startChar": 9,
+        "endLine": 2314,
+        "endChar": 44
+      },
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5cefe75_0716ba56",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2314,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:13:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9555663b_e096f83d",
       "range": {
         "startLine": 2314,
         "startChar": 9,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "d5cefe75_47b522b3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2319,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:13:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9555663b_208ab00d",
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_40e244d4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -76,6 +142,24 @@
       "writtenOn": "2015-09-30T23:02:14Z",
       "side": 1,
       "message": "setSourceInfo doesn\u0027t seem optional so I think it should either go to build(sourceInfo) or builder(sourceInfo)",
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5cefe75_87bf2a91",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2320,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:13:27Z",
+      "side": 1,
+      "message": "It is optional and gets set to SourceOrigin.UNKNOWN in those cases (look at the other callers).",
+      "parentUuid": "9555663b_40e244d4",
       "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "d5cefe75_c7a05270",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2322,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:13:27Z",
+      "side": 1,
+      "message": "added comment, I don\u0027t see that splitting it into two help readability in anyway..",
+      "parentUuid": "9555663b_60f1489d",
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_a0f2409e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2
@@ -110,6 +212,24 @@
       "writtenOn": "2015-09-30T23:02:14Z",
       "side": 1,
       "message": "luckily we don\u0027t have package visible js members :)",
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_5685e5fd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-06T00:13:27Z",
+      "side": 1,
+      "message": "We should probably add the restriction that concrete @JsProperty methods need to be final, WDYT?",
+      "parentUuid": "9555663b_a0f2409e",
       "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

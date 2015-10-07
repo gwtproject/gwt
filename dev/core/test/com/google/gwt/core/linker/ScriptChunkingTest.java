@@ -23,6 +23,7 @@ import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.StatementRanges;
 import com.google.gwt.core.ext.linker.impl.SelectionScriptLinker;
 import com.google.gwt.core.ext.linker.impl.StandardStatementRanges;
+import com.google.gwt.dev.jjs.CompilerPoperties;
 
 import junit.framework.TestCase;
 
@@ -65,7 +66,7 @@ public class ScriptChunkingTest extends TestCase {
 
         @Override
         public String getName() {
-          return SelectionScriptLinker.USE_SOURCE_MAPS_PROPERTY;
+          return CompilerPoperties.USE_SOURCE_MAPS_BINDING_PROPERTY;
         }
 
         @Override

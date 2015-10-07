@@ -28,6 +28,7 @@ import com.google.gwt.dev.cfg.PermutationProperties;
 import com.google.gwt.dev.javac.CompilationState;
 import com.google.gwt.dev.javac.CompilationStateBuilder;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
+import com.google.gwt.dev.jjs.CompilerPoperties;
 import com.google.gwt.dev.jjs.JavaAstConstructor;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences.IntTypeMapper;
@@ -60,7 +61,8 @@ public abstract class FullCompileTestBase extends JJSTestBase {
   public void setUp() throws Exception {
     super.setUp();
     // Stack mode is a required property.
-    BindingProperty stackMode = new BindingProperty("compiler.stackMode");
+    BindingProperty stackMode = new BindingProperty(
+        CompilerPoperties.COMPILER_STACK_MODE_BINDING_PROPERTY);
     stackMode.addDefinedValue(new ConditionNone(), "STRIP");
     setProperties(new BindingProperty[]{stackMode}, new String[]{"STRIP"},
         new ConfigurationProperty[]{});

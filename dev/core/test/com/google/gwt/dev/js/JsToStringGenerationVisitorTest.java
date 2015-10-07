@@ -18,6 +18,7 @@ import com.google.gwt.core.ext.linker.impl.NamedRange;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ConditionNone;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
+import com.google.gwt.dev.jjs.CompilerPoperties;
 import com.google.gwt.dev.jjs.impl.FullCompileTestBase;
 import com.google.gwt.dev.util.DefaultTextOutput;
 import com.google.gwt.dev.util.TextOutput;
@@ -35,7 +36,8 @@ public class JsToStringGenerationVisitorTest extends FullCompileTestBase {
   @Override
   public void setUp() throws Exception {
     // Compilation Configuration Properties.
-    BindingProperty stackMode = new BindingProperty("compiler.stackMode");
+    BindingProperty stackMode =
+        new BindingProperty(CompilerPoperties.COMPILER_STACK_MODE_BINDING_PROPERTY);
     stackMode.addDefinedValue(new ConditionNone(), "STRIP");
     setProperties(new BindingProperty[] {stackMode}, new String[] {"STRIP"},
         new ConfigurationProperty[] {});

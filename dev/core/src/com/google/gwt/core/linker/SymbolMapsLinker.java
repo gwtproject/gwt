@@ -28,9 +28,9 @@ import com.google.gwt.core.ext.linker.LinkerOrder;
 import com.google.gwt.core.ext.linker.LinkerOrder.Order;
 import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.Shardable;
-import com.google.gwt.core.ext.linker.SoftPermutation;
 import com.google.gwt.core.ext.linker.SymbolData;
 import com.google.gwt.core.ext.linker.SyntheticArtifact;
+import com.google.gwt.dev.jjs.CompilerPoperties;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
@@ -45,7 +45,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.regex.Pattern;
 
@@ -57,8 +56,6 @@ import java.util.regex.Pattern;
 @LinkerOrder(Order.POST)
 @Shardable
 public class SymbolMapsLinker extends AbstractLinker {
-
-  public static final String MAKE_SYMBOL_MAPS = "compiler.useSymbolMaps";
 
   /**
    * Artifact to record insertions or deletions made to Javascript fragments.
@@ -206,8 +203,7 @@ public class SymbolMapsLinker extends AbstractLinker {
     return writer.toString();
   }
 
-  private static void printPropertyMap(PrintWriter pw,
-      Map<SelectionProperty, String> map) {
+  private static void printPropertyMap(PrintWriter pw, Map<SelectionProperty, String> map) {
     boolean needsComma = false;
     for (Map.Entry<SelectionProperty, String> entry : map.entrySet()) {
       if (needsComma) {
@@ -252,19 +248,11 @@ public class SymbolMapsLinker extends AbstractLinker {
       ByteArrayOutputStream out = new ByteArrayOutputStream();
       for (CompilationResult result : artifacts.find(CompilationResult.class)) {
 
-        boolean makeSymbolMaps = true;
-
-        for (SoftPermutation perm : result.getSoftPermutations()) {
-          for (Entry<SelectionProperty, String> propMapEntry : perm.getPropertyMap().entrySet()) {
-            if (propMapEntry.getKey().getName().equals(MAKE_SYMBOL_MAPS)) {
-              makeSymbolMaps = Boolean.valueOf(propMapEntry.getValue());
-            }
-          }
-        }
 
         permMap.put(result.getPermutationId(), result.getStrongName());
 
-        if (makeSymbolMaps) {
+        if (CompilerPoperties.isTrueInAnyPermutation(result.getSoftPermutations(),
+            CompilerPoperties.USE_SYMBOL_MAPS_BINDING_PROPERTY)) {
           PrintWriter pw = new PrintWriter(out);
           doWriteSymbolMap(logger, result, pw);
           pw.close();

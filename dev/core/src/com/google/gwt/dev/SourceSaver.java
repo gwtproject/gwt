@@ -24,6 +24,7 @@ import com.google.gwt.core.ext.linker.EmittedArtifact.Visibility;
 import com.google.gwt.core.linker.SymbolMapsLinker.SourceMapArtifact;
 import com.google.gwt.dev.Link.LinkOptions;
 import com.google.gwt.dev.cfg.ResourceLoader;
+import com.google.gwt.dev.jjs.CompilerPoperties;
 import com.google.gwt.dev.json.JsonArray;
 import com.google.gwt.dev.json.JsonException;
 import com.google.gwt.dev.json.JsonObject;
@@ -77,7 +78,7 @@ class SourceSaver {
 
     if (sourceMaps.isEmpty()) {
       logger.log(Type.WARN, "Not saving source because sourcemaps weren't generated. " +
-          "Hint: set compiler.useSourceMaps.");
+          "Hint: set " + CompilerPoperties.USE_SOURCE_MAPS_BINDING_PROPERTY + ".");
       return;
     }
 

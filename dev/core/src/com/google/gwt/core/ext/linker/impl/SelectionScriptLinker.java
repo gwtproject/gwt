@@ -29,6 +29,7 @@ import com.google.gwt.core.ext.linker.SelectionProperty;
 import com.google.gwt.core.ext.linker.SoftPermutation;
 import com.google.gwt.core.ext.linker.StatementRanges;
 import com.google.gwt.core.linker.SymbolMapsLinker;
+import com.google.gwt.dev.jjs.CompilerPoperties;
 import com.google.gwt.dev.util.Util;
 import com.google.gwt.util.tools.Utility;
 
@@ -54,8 +55,6 @@ import java.util.TreeMap;
  * available within the nocache.js scope and must be made available to the permutation js scope.
  */
 public abstract class SelectionScriptLinker extends AbstractLinker {
-
-  public static final String USE_SOURCE_MAPS_PROPERTY = "compiler.useSourceMaps";
 
   /**
    * File name for computeScriptBase.js.
@@ -113,7 +112,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
       int charsPerChunk, String scriptChunkSeparator, LinkerContext context) {
     boolean useSourceMaps = false;
     for (SelectionProperty prop : context.getProperties()) {
-      if (USE_SOURCE_MAPS_PROPERTY.equals(prop.getName())) {
+      if (CompilerPoperties.USE_SOURCE_MAPS_BINDING_PROPERTY.equals(prop.getName())) {
         String str = prop.tryGetValue();
         useSourceMaps = str == null ? false : Boolean.parseBoolean(str);
         break;

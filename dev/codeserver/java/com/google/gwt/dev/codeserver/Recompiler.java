@@ -40,6 +40,7 @@ import com.google.gwt.dev.cfg.ResourceLoaders;
 import com.google.gwt.dev.codeserver.Job.Result;
 import com.google.gwt.dev.codeserver.JobEvent.CompileStrategy;
 import com.google.gwt.dev.javac.UnitCache;
+import com.google.gwt.dev.jjs.CompilerPoperties;
 import com.google.gwt.dev.resource.impl.ResourceOracleImpl;
 import com.google.gwt.dev.resource.impl.ZipFileClassPathEntry;
 import com.google.gwt.dev.util.log.CompositeTreeLogger;
@@ -511,8 +512,8 @@ public class Recompiler {
       maybeOverrideConfig(moduleDef, "CssResource.style", "stable");
     }
 
-    overrideBinding(moduleDef, "compiler.useSourceMaps", "true");
-    overrideBinding(moduleDef, "compiler.useSymbolMaps", "false");
+    overrideBinding(moduleDef, CompilerPoperties.USE_SOURCE_MAPS_BINDING_PROPERTY, "true");
+    overrideBinding(moduleDef, CompilerPoperties.USE_SYMBOL_MAPS_BINDING_PROPERTY, "false");
     overrideBinding(moduleDef, "superdevmode", "on");
 
     return moduleDef;

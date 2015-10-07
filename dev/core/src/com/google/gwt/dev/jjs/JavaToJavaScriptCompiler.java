@@ -424,8 +424,9 @@ public final class JavaToJavaScriptCompiler {
       }
 
       // (8) Generate Js source
-      List<JsSourceMap> sourceInfoMaps = new ArrayList<JsSourceMap>();
-      boolean isSourceMapsEnabled = properties.isTrueInAnyPermutation("compiler.useSourceMaps");
+      List<JsSourceMap> sourceInfoMaps = Lists.newArrayList();
+      boolean isSourceMapsEnabled = properties.isTrueInAnyPermutation(
+          CompilerPoperties.USE_SOURCE_MAPS_BINDING_PROPERTY);
       String[] jsFragments = new String[jsProgram.getFragmentCount()];
       StatementRanges[] ranges = new StatementRanges[jsFragments.length];
       SizeBreakdown[] sizeBreakdowns = options.isJsonSoycEnabled() || options.isSoycEnabled()
@@ -689,7 +690,8 @@ public final class JavaToJavaScriptCompiler {
       // TODO: enable this when ClosureCompiler is enabled
       if (options.isClosureCompilerEnabled()) {
         logger.log(TreeLogger.WARN, "Incompatible options: -XenableClosureCompiler and "
-            + "compiler.useSourceMaps=true; ignoring compiler.useSourceMaps=true.");
+            + CompilerPoperties.USE_SOURCE_MAPS_BINDING_PROPERTY + "=true; ignoring "
+            + CompilerPoperties.USE_SOURCE_MAPS_BINDING_PROPERTY + "=true.");
       } else {
         logger.log(TreeLogger.INFO, "Source Maps Enabled");
         permutationResult.addArtifacts(SourceMapRecorder.exec(permutationId, sourceInfoMaps,

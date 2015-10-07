@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_d8ee41e3",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_35ecb831",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a915c_d551ec9a",
         "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
         "patchSetId": 9
@@ -53,6 +77,24 @@
       "writtenOn": "2015-10-07T01:02:24Z",
       "side": 1,
       "message": "Remove",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_438a66eb",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_d551ec9a",
       "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -76,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_43ff0621",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_f5023084",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a915c_d5ff2cc8",
         "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
         "patchSetId": 9
@@ -93,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_230482e5",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_d5ff2cc8",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a915c_15bff410",
         "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
         "patchSetId": 9
@@ -104,6 +182,24 @@
       "writtenOn": "2015-10-07T01:02:24Z",
       "side": 1,
       "message": "also add assertEquals(10, obj.x); ?",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_83472e11",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_15bff410",
       "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -133,6 +229,30 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_634cca33",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_35a318f5",
+      "range": {
+        "startLine": 104,
+        "startChar": 15,
+        "endLine": 104,
+        "endChar": 36
+      },
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a915c_b5cd48b8",
         "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
         "patchSetId": 9
@@ -144,6 +264,24 @@
       "writtenOn": "2015-10-07T01:02:24Z",
       "side": 1,
       "message": "similar comment here",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_c34016f9",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_b5cd48b8",
       "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -167,6 +305,24 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_43c0a6b2",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_5514dcc5",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a915c_55a21ced",
         "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
         "patchSetId": 9
@@ -184,6 +340,24 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_a33d128d",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "The class is package protected, this makes the constructor public. Needed until we fix that issue. Added a TODO.",
+      "parentUuid": "d00a915c_55a21ced",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a915c_f5d7d045",
         "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
         "patchSetId": 9
@@ -195,6 +369,30 @@
       "writtenOn": "2015-10-07T01:02:24Z",
       "side": 1,
       "message": "testNativeJsType to be consistent with new pattern",
+      "range": {
+        "startLine": 151,
+        "startChar": 14,
+        "endLine": 151,
+        "endChar": 38
+      },
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_e3371aa9",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_f5d7d045",
       "range": {
         "startLine": 151,
         "startChar": 14,
@@ -230,6 +428,30 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_837c4e43",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_7592c094",
+      "range": {
+        "startLine": 181,
+        "startChar": 14,
+        "endLine": 181,
+        "endChar": 45
+      },
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a915c_95dc847c",
         "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
         "patchSetId": 9
@@ -241,6 +463,30 @@
       "writtenOn": "2015-10-07T01:02:24Z",
       "side": 1,
       "message": "Rename methods with _ patterns or vice versa",
+      "range": {
+        "startLine": 291,
+        "startChar": 14,
+        "endLine": 291,
+        "endChar": 44
+      },
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_03905ed5",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_95dc847c",
       "range": {
         "startLine": 291,
         "startChar": 14,
@@ -270,6 +516,24 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_e3655a99",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_b5df0870",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a915c_754120cc",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 9
@@ -287,6 +551,41 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_fe0b2d36",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "The issue is that if JsPropertyTest is run first then the setup is done and persists. \n\nI\u0027ll add it back here and make sure that each test injects different classes.",
+      "parentUuid": "d00a915c_754120cc",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_3e17755f",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "removed.",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a915c_f5851046",
         "filename": "user/test/com/google/gwt/core/client/interop/MyClassExtendsJsPrototype.java",
         "patchSetId": 9
@@ -298,6 +597,24 @@
       "writtenOn": "2015-10-07T01:02:24Z",
       "side": 1,
       "message": "delete the file",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_1e1c317e",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyClassExtendsJsPrototype.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:36:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_f5851046",
       "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

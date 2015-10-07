@@ -22,6 +22,7 @@ import com.google.gwt.dev.PrecompileTaskOptionsImpl;
 import com.google.gwt.dev.cfg.BindingProperty;
 import com.google.gwt.dev.cfg.ConditionNone;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
+import com.google.gwt.dev.jjs.CompilerPoperties;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JMethod;
@@ -101,7 +102,8 @@ public class CodeSplitterTest extends FullCompileTestBase {
   public void setUp() throws Exception {
     super.setUp();
     // Compilation Configuration Properties.
-    BindingProperty stackMode = new BindingProperty("compiler.stackMode");
+    BindingProperty stackMode = new BindingProperty(
+        CompilerPoperties.COMPILER_STACK_MODE_BINDING_PROPERTY);
     stackMode.addDefinedValue(new ConditionNone(), "STRIP");
     setProperties(new BindingProperty[]{stackMode}, new String[]{"STRIP"},
         new ConfigurationProperty[]{initialSequenceProp});

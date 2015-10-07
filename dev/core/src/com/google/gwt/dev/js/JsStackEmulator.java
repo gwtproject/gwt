@@ -17,6 +17,7 @@ package com.google.gwt.dev.js;
 
 import com.google.gwt.dev.cfg.ConfigurationProperties;
 import com.google.gwt.dev.cfg.PermutationProperties;
+import com.google.gwt.dev.jjs.CompilerPoperties;
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -962,7 +963,7 @@ public class JsStackEmulator {
   }
 
   public static StackMode getStackMode(PermutationProperties properties) {
-    String value = properties.mustGetString("compiler.stackMode");
+    String value = properties.mustGetString(CompilerPoperties.COMPILER_STACK_MODE_BINDING_PROPERTY);
     return StackMode.valueOf(value.toUpperCase(Locale.ROOT));
   }
 

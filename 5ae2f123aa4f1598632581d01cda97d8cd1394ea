@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_24d4881f",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T23:19:38Z",
+      "side": 1,
+      "message": "Look at the highlight \"Naive\"JsType",
+      "parentUuid": "d00a915c_c99dd531",
+      "range": {
+        "startLine": 1069,
+        "startChar": 37,
+        "endLine": 1069,
+        "endChar": 42
+      },
+      "revId": "5ae2f123aa4f1598632581d01cda97d8cd1394ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab804cc5_6a169f62",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 5

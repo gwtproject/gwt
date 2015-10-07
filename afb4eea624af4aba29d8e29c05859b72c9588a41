@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d00a915c_24f928b3",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1212,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T23:19:38Z",
+      "side": 1,
+      "message": "Add TODO: make this work",
+      "revId": "afb4eea624af4aba29d8e29c05859b72c9588a41",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_e4072053",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T23:19:38Z",
+      "side": 1,
+      "message": "seems not intended to be in this patch,",
+      "range": {
+        "startLine": 1181,
+        "startChar": 0,
+        "endLine": 1229,
+        "endChar": 3
+      },
+      "revId": "afb4eea624af4aba29d8e29c05859b72c9588a41",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

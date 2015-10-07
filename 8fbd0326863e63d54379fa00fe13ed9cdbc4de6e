@@ -1,0 +1,306 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d00a915c_55705c0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "Implements JsProperty method overriding",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_35ecb831",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "2015",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_d551ec9a",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "Remove",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_f5023084",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "return x + 1 so we are really sure that the getter is called",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_d5ff2cc8",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "this.x \u003d x+1 so we are sue that the getter is called.",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_15bff410",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "also add assertEquals(10, obj.x); ?",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_35a318f5",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "MyConcreteJsType",
+      "range": {
+        "startLine": 104,
+        "startChar": 15,
+        "endLine": 104,
+        "endChar": 36
+      },
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_b5cd48b8",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "similar comment here",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_5514dcc5",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "Can you define classes before the method? (looks like in same case you did earlier, in some cases later)",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_55a21ced",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "remove?",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_f5d7d045",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "testNativeJsType to be consistent with new pattern",
+      "range": {
+        "startLine": 151,
+        "startChar": 14,
+        "endLine": 151,
+        "endChar": 38
+      },
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_7592c094",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "testNativeJsTypeSubclass",
+      "range": {
+        "startLine": 181,
+        "startChar": 14,
+        "endLine": 181,
+        "endChar": 45
+      },
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_95dc847c",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "Rename methods with _ patterns or vice versa",
+      "range": {
+        "startLine": 291,
+        "startChar": 14,
+        "endLine": 291,
+        "endChar": 44
+      },
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_b5df0870",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "getProperty(Object obj, String propertyName)\nsetProperty(Object obj, String propertyName, Object value)",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_754120cc",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "actually the prototype stuff you deleted should be still here. The tests passing without it actually points that some test are not testing what they suppose to be testing. Can you do a follow up for that?",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_f5851046",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyClassExtendsJsPrototype.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "delete the file",
+      "revId": "8fbd0326863e63d54379fa00fe13ed9cdbc4de6e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_15aed409",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2311,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-07T01:02:24Z",
+      "side": 1,
+      "message": "it would be nice to add a comment for this.",
+      "parentUuid": "d00a915c_0f2245ee",
+      "range": {
+        "startLine": 2311,
+        "startChar": 31,
+        "endLine": 2311,
+        "endChar": 54
+      },
+      "revId": "ac7e74c3ec57c076d9f01e14901d34bc5f71239e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_e096f83d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
         "patchSetId": 2

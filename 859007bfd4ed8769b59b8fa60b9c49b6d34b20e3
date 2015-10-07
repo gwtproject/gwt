@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0a611c3_cf969dbb",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-07T21:34:26Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "859007bfd4ed8769b59b8fa60b9c49b6d34b20e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

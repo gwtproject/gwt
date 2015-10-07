@@ -283,6 +283,24 @@
     },
     {
       "key": {
+        "uuid": "d00a915c_69e4a9c0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:55:18Z",
+      "side": 1,
+      "message": "Yes, anonymous inner class if possible and small.",
+      "parentUuid": "ab804cc5_0a004b13",
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_469c1c64",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3
@@ -389,6 +407,30 @@
       "side": 1,
       "message": "No, it is no longer needed. Your new check covers the new semantics.",
       "parentUuid": "ab804cc5_f660603a",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 3
+      },
+      "revId": "371e80bb698e86246f5857dd1135336b71daf4b0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00a915c_a9d5f1c9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-07T21:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab804cc5_ca09f340",
       "range": {
         "startLine": 181,
         "startChar": 0,

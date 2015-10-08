@@ -439,11 +439,24 @@ public class JsInteropRestrictionChecker {
   }
 
   private void checkNativeJsType(JDeclaredType type) {
-    // TODO(rluble): add inheritance restrictions.
     if (type.isEnumOrSubclass() != null) {
       logError("Enum '%s' cannot be a native JsType.", type);
       return;
     }
+
+    JClassType superClass = type.getSuperClass();
+    if (superClass != null && superClass != jprogram.getTypeJavaLangObject() &&
+        !superClass.isJsNative()) {
+      logError("Native JsType '%s' can only extend native JsType classes.", type);
+    }
+
+    for (JInterfaceType interfaceType : type.getImplements()) {
+      if (!interfaceType.isJsNative()) {
+        logError("Native JsType '%s' can only %s native JsType interfaces.", type.getName(),
+            type instanceof JInterfaceType ? "extend" : "implement");
+      }
+    }
+
     if (!isClinitEmpty(type)) {
       logError("Native JsType '%s' cannot have static initializer.", type);
     }

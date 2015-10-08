@@ -1649,6 +1649,66 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
             + "cannot both use the same JavaScript name 'm'.");
   }
 
+  public void testNativeJsTypeExtendsJsTypeFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType public static class Super {",
+        "}",
+        "@JsType(isNative=true) public static class Buggy extends Super {",
+        "}");
+
+    assertBuggyFails(
+        "Line 6: Native JsType 'EntryPoint.Buggy' can only extend native JsType classes.");
+  }
+
+  public void testNativeJsTypeImplementsJsTypeInterfaceFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType public interface Interface {",
+        "}",
+        "@JsType(isNative=true) public static class Buggy implements Interface {",
+        "}");
+
+    assertBuggyFails(
+        "Line 6: Native JsType ''EntryPoint.Buggy'' can only implement native JsType interfaces.");
+  }
+
+  public void testNativeJsTypeInterfaceExtendsJsTypeInterfaceFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType public interface Interface {",
+        "}",
+        "@JsType(isNative=true) public interface Buggy extends Interface {",
+        "}");
+
+    assertBuggyFails(
+        "Line 6: Native JsType ''EntryPoint.Buggy'' can only extend native JsType interfaces.");
+  }
+
+  public void testNativeJsTypeImplementsNonJsTypeFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "public interface Super {",
+        "}",
+        "@JsType(isNative=true) public static class Buggy implements Super {",
+        "}");
+
+    assertBuggyFails(
+        "Line 6: Native JsType ''EntryPoint.Buggy'' can only implement native JsType interfaces.");
+  }
+
+  public void testNativeJsTypeInterfaceExtendsNonJsTypeFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "public interface Super {",
+        "}",
+        "@JsType(isNative=true) public interface Buggy extends Super {",
+        "}");
+
+    assertBuggyFails(
+        "Line 6: Native JsType ''EntryPoint.Buggy'' can only extend native JsType interfaces.");
+  }
+
   public void testNonJsTypeExtendsJsTypeSucceeds() throws Exception {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetClassDecl(

@@ -15,9 +15,11 @@
  */
 package com.google.gwt.dev.javac;
 
+import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyAccessorType;
@@ -51,9 +53,33 @@ public final class JsInteropUtil {
       namespace = indexOf == -1 ? "" : jsPrototype.substring(0, indexOf);
       exportName = jsPrototype.substring(indexOf + 1);
     }
-    type.setJsTypeInfo(jsType != null, isJsNative, namespace, exportName, exportName != null);
+    boolean isJsType = jsType != null;
+    boolean isClassWideExport = exportName != null;
+    boolean isJsFunction = JdtUtil.getAnnotation(annotations, JSFUNCTION_CLASS) != null;
+    boolean canBeImplementedExternally =
+        (type instanceof JInterfaceType && (isJsType || isJsFunction))
+        || (type instanceof JClassType && isJsNative);
+    type.setJsTypeInfo(isJsType, isJsNative, isJsFunction, namespace, exportName, isClassWideExport,
+        canBeImplementedExternally);
+  }
 
-    type.setJsFunctionInfo(JdtUtil.getAnnotation(annotations, JSFUNCTION_CLASS) != null);
+  public static void maybeSetJsInteropPropertiesNew(JDeclaredType type, Annotation[] annotations) {
+    AnnotationBinding jsType = getInteropAnnotation(annotations, "JsType");
+    String namespace = JdtUtil.getAnnotationParameterString(jsType, "namespace");
+    String name = JdtUtil.getAnnotationParameterString(jsType, "name");
+    boolean isJsNative = JdtUtil.getAnnotationParameterBoolean(jsType, "isNative", false);
+    boolean export = JdtUtil.getAnnotationParameterBoolean(jsType, "export", false);
+
+    AnnotationBinding jsPackage = getInteropAnnotation(annotations, "JsPackage");
+    String packageNamespace = JdtUtil.getAnnotationParameterString(jsPackage, "namespace");
+    if (packageNamespace != null) {
+      namespace = packageNamespace;
+    }
+
+    boolean isJsFunction = getInteropAnnotation(annotations, "JsFunction") != null;
+    boolean canBeImplementedExternally = isJsNative || isJsFunction;
+    type.setJsTypeInfo(jsType != null, isJsNative, isJsFunction, namespace, name, export,
+        canBeImplementedExternally);
   }
 
   public static void maybeSetJsInteropProperties(JMethod method, Annotation... annotations) {
@@ -63,8 +89,28 @@ public final class JsInteropUtil {
     }
   }
 
+  public static void maybeSetJsInteropPropertiesNew(JMethod method, Annotation... annotations) {
+    AnnotationBinding annotation = getInteropAnnotation(annotations, "JsMethod");
+    if (annotation == null) {
+      annotation = getInteropAnnotation(annotations, "JsConstructor");
+    }
+    if (annotation == null) {
+      annotation = getInteropAnnotation(annotations, "JsProperty");
+    }
+
+    setJsInteropPropertiesNew(method, annotations, annotation);
+    if (getInteropAnnotation(annotations, "JsProperty") != null) {
+      setJsPropertyProperties(method);
+    }
+  }
+
   public static void maybeSetJsInteropProperties(JField field, Annotation... annotations) {
     setJsInteropProperties(field, annotations);
+  }
+
+  public static void maybeSetJsInteropPropertiesNew(JField field, Annotation... annotations) {
+    AnnotationBinding annotation = getInteropAnnotation(annotations, "JsProperty");
+    setJsInteropPropertiesNew(field, annotations, annotation);
   }
 
   private static void setJsInteropProperties(JMember member, Annotation... annotations) {
@@ -89,6 +135,35 @@ public final class JsInteropUtil {
       member.setJsMemberInfo(namespace, computeName(member), true);
     }
   }
+
+  private static void setJsInteropPropertiesNew(
+      JMember member, Annotation[] annotations, AnnotationBinding memberAnnotation) {
+    if (getInteropAnnotation(annotations, "JsIgnore") != null) {
+      return;
+    }
+
+    String namespace = JdtUtil.getAnnotationParameterString(memberAnnotation, "namespace");
+    String name = JdtUtil.getAnnotationParameterString(memberAnnotation, "name");
+    Boolean export = JdtUtil.getAnnotationParameterBoolean(memberAnnotation, "export");
+
+    if (memberAnnotation != null && name == null) {
+      name = computeName(member);
+    }
+
+
+    /* Apply class wide JsInterop annotations */
+    if (member.getEnclosingType().isJsType() && member.isPublic()) {
+      if (name == null) {
+        name = computeName(member);
+      }
+      if (export == null) {
+        export = member.getEnclosingType().isClassWideExport();
+      }
+    }
+
+    member.setJsMemberInfo(namespace, name, Boolean.TRUE.equals(export));
+  }
+
   private static void setJsPropertyProperties(JMethod method) {
     String methodName = method.getName();
     if (startsWithCamelCase(methodName, "set")) {
@@ -103,6 +178,10 @@ public final class JsInteropUtil {
     } else {
       method.setJsPropertyInfo("<invalid>", JsPropertyAccessorType.UNDEFINED);
     }
+  }
+
+  private static AnnotationBinding getInteropAnnotation(Annotation[] annotations, String name) {
+    return JdtUtil.getAnnotation(annotations, "jsinterop.annotations." + name);
   }
 
   private static String computeName(JMember member) {

@@ -146,11 +146,7 @@ public class JavaClassHierarchySetupUtil {
 
     // Parentheses added to eliminate strict JS warning in Firefox.
     for (var part; parts.length && (part = parts.shift());) {
-        if (cur[part]) {
-            cur = cur[part];
-        } else {
-            cur = cur[part] = optCtor || {};
-        }
+        cur = cur[part] = cur[part] ? cur[part] : parts.length == 1 ? optCtor : {};
     }
     return cur;
   }-*/;

@@ -16,6 +16,7 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.MinimalRebuildCache;
+import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpressionStatement;
@@ -276,9 +277,21 @@ public class JsInteropRestrictionChecker {
   }
 
   private void checkJsNative(JDeclaredType type) {
-    // TODO(rluble): add inheritance restrictions.
     if (!JjsUtils.isClinitEmpty(type)) {
       logError("Native JsType '%s' cannot have static initializer.", type);
+    }
+
+    JClassType superClass = type.getSuperClass();
+    if (superClass != null && superClass != jprogram.getTypeJavaLangObject() &&
+        !superClass.isJsNative()) {
+      logError("Native JsType '%s' can only extend native JsType classes.", type);
+    }
+
+    for (JInterfaceType interfaceType : type.getImplements()) {
+      if (!interfaceType.isJsNative()) {
+        logError("Native JsType '%s' can only %s native JsType interfaces.", type.getName(),
+            type instanceof JInterfaceType ? "extend" : "implement");
+      }
     }
   }
 

@@ -1046,6 +1046,68 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggySucceeds();
   }
 
+  public void testNativeJsTypeExtendsJsTypeFails() throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType public static class Super {",
+        "}",
+        "@JsType(prototype = \"B\") public static class Buggy extends Super {",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType 'test.EntryPoint$Buggy' can only extend native JsType classes.");
+  }
+
+  public void testNativeJsTypeImplementsJsTypeInterfaceFails() throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType public interface Interface {",
+        "}",
+        "@JsType(prototype = \"B\") public static class Buggy implements Interface {",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType 'test.EntryPoint$Buggy' can only implement native JsType interfaces.");
+  }
+
+  public void testNativeJsTypeInterfaceExtendsJsTypeInterfaceFails()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType public interface Interface {",
+        "}",
+        "@JsType(prototype = \"B\") public interface Buggy extends Interface {",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType 'test.EntryPoint$Buggy' can only extend native JsType interfaces.");
+  }
+
+  public void testNativeJsTypeImplementsNonJsTypeFails() throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "public interface Super {",
+        "}",
+        "@JsType(prototype = \"B\") public static class Buggy implements Super {",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType 'test.EntryPoint$Buggy' can only implement native JsType interfaces.");
+  }
+
+  public void testNativeJsTypeInterfaceExtendsNonJsTypeFails()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "public interface Super {",
+        "}",
+        "@JsType(prototype = \"B\") public interface Buggy extends Super {",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType 'test.EntryPoint$Buggy' can only extend native JsType interfaces.");
+  }
+
   public void testNonJsTypeExtendsJsTypeSucceeds() throws UnableToCompleteException {
     addSnippetImport("com.google.gwt.core.client.js.JsType");
     addSnippetClassDecl(

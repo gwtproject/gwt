@@ -25,7 +25,6 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
-import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
 import com.google.gwt.dev.js.ast.JsStatement;
@@ -154,7 +153,6 @@ class ExclusivityMap {
 
   private Map<JField, Fragment> fragmentForField = Maps.newHashMap();
   private Map<JMethod, Fragment> fragmentForMethod = Maps.newHashMap();
-  private Map<String, Fragment> fragmentForString = Maps.newHashMap();
   private Map<JDeclaredType, Fragment> fragmentForType = Maps.newHashMap();
 
   /**
@@ -183,6 +181,41 @@ class ExclusivityMap {
     ExclusivityMap exclusivityMap = new ExclusivityMap();
     exclusivityMap.compute(exclusiveFragments, completeCfa, notExclusiveCfaByFragment);
     return exclusivityMap;
+  }
+
+  /**
+   * Map atoms to exclusive fragments. Do this by trying to find code atoms that
+   * are only needed by a single split point. Such code can be moved to the
+   * exclusively live fragment associated with that split point.
+   */
+  private void compute(Collection<Fragment> exclusiveFragments, ControlFlowAnalyzer completeCfa,
+      Map<Fragment, ControlFlowAnalyzer> notExclusiveCfaByFragment) {
+
+    Set<JField> allLiveFields = filter(Sets.union(completeCfa.getLiveFieldsAndMethods(),
+        completeCfa.getFieldsWritten()), JField.class);
+    Set<JMethod> allLiveMethods = filter(completeCfa.getLiveFieldsAndMethods(), JMethod.class);
+    Set<JDeclaredType> allLiveTypes =
+        filter(completeCfa.getInstantiatedTypes(), JDeclaredType.class);
+
+    for (Fragment fragment : exclusiveFragments) {
+      assert fragment.isExclusive();
+      ControlFlowAnalyzer complementCfa = notExclusiveCfaByFragment.get(fragment);
+      Set<JNode> nodesNotExclusiveToFragment = Sets.union(complementCfa.getLiveFieldsAndMethods(),
+          complementCfa.getFieldsWritten());
+
+      putIfAbsent(fragmentForField, fragment,
+          Sets.difference(allLiveFields, nodesNotExclusiveToFragment));
+      putIfAbsent(fragmentForMethod, fragment,
+          Sets.difference(allLiveMethods, complementCfa.getLiveFieldsAndMethods()));
+      putIfAbsent(fragmentForType, fragment,
+          Sets.difference(allLiveTypes,
+              filter(complementCfa.getInstantiatedTypes(), JDeclaredType.class)));
+    }
+
+    // Assign all living atoms to left overs.
+    putIfAbsent(fragmentForField, NOT_EXCLUSIVE, allLiveFields);
+    putIfAbsent(fragmentForMethod, NOT_EXCLUSIVE, allLiveMethods);
+    putIfAbsent(fragmentForType, NOT_EXCLUSIVE, allLiveTypes);
   }
 
   /**
@@ -223,46 +256,6 @@ class ExclusivityMap {
     fixUpLoadOrderDependenciesForMethods(logger, jprogram, methodsInJavaScript);
     fixUpLoadOrderDependenciesForTypes(logger, jprogram);
     fixUpLoadOrderDependenciesForClassLiterals(logger, jprogram);
-    fixUpLoadOrderDependenciesForFieldsInitializedToStrings(logger, jprogram);
-  }
-
-  /**
-   * Map atoms to exclusive fragments. Do this by trying to find code atoms that
-   * are only needed by a single split point. Such code can be moved to the
-   * exclusively live fragment associated with that split point.
-   */
-  private void compute(Collection<Fragment> exclusiveFragments, ControlFlowAnalyzer completeCfa,
-      Map<Fragment, ControlFlowAnalyzer> notExclusiveCfaByFragment) {
-
-    Set<JField> allLiveFields = filter(Sets.union(completeCfa.getLiveFieldsAndMethods(),
-        completeCfa.getFieldsWritten()), JField.class);
-    Set<JMethod> allLiveMethods = filter(completeCfa.getLiveFieldsAndMethods(), JMethod.class);
-    Set<String> allLiveStrings = completeCfa.getLiveStrings();
-    Set<JDeclaredType> allLiveTypes =
-        filter(completeCfa.getInstantiatedTypes(), JDeclaredType.class);
-
-    for (Fragment fragment : exclusiveFragments) {
-      assert fragment.isExclusive();
-      ControlFlowAnalyzer complementCfa = notExclusiveCfaByFragment.get(fragment);
-      Set<JNode> nodesNotExclusiveToFragment = Sets.union(complementCfa.getLiveFieldsAndMethods(),
-          complementCfa.getFieldsWritten());
-
-      putIfAbsent(fragmentForField, fragment,
-          Sets.difference(allLiveFields, nodesNotExclusiveToFragment));
-      putIfAbsent(fragmentForMethod, fragment,
-          Sets.difference(allLiveMethods, complementCfa.getLiveFieldsAndMethods()));
-      putIfAbsent(fragmentForString, fragment,
-          Sets.difference(allLiveStrings, complementCfa.getLiveStrings()));
-      putIfAbsent(fragmentForType, fragment,
-          Sets.difference(allLiveTypes,
-              filter(complementCfa.getInstantiatedTypes(), JDeclaredType.class)));
-    }
-
-    // Assign all living atoms to left overs.
-    putIfAbsent(fragmentForField, NOT_EXCLUSIVE, allLiveFields);
-    putIfAbsent(fragmentForMethod, NOT_EXCLUSIVE, allLiveMethods);
-    putIfAbsent(fragmentForString, NOT_EXCLUSIVE, allLiveStrings);
-    putIfAbsent(fragmentForType, NOT_EXCLUSIVE, allLiveTypes);
   }
 
   /**
@@ -271,9 +264,7 @@ class ExclusivityMap {
    * loaded and make sure that superclass class literals are loaded before.
    */
   private void fixUpLoadOrderDependenciesForClassLiterals(TreeLogger logger, JProgram jprogram) {
-    int numClassLitStrings = 0;
     int numFixups = 0;
-    int numClassLiteralFixups = 0;
     /**
      * Consider all static fields of ClassLiteralHolder; the majority if not all its static
      * fields are class literal fields. It is safe to fix up extra fields.
@@ -291,68 +282,22 @@ class ExclusivityMap {
       Fragment classLiteralFragment = fragmentForField.get(field);
       JExpression initializer = field.getInitializer();
 
-      // Fixup the string literals.
-      for (String string : stringsIn(initializer)) {
-        numClassLitStrings++;
-        Fragment stringFrag = fragmentForString.get(string);
-        if (!fragmentsAreConsistent(classLiteralFragment, stringFrag)) {
-          numFixups++;
-          fragmentForString.put(string, NOT_EXCLUSIVE);
-        }
-      }
       // Fixup the class literals.
       for (JClassLiteral superclassClassLiteral : classLiteralsIn(initializer)) {
         JField superclassClassLiteralField = superclassClassLiteral.getField();
         // Fix the super class literal and add it to the reexamined.
         Fragment superclassClassLiteralFragment = fragmentForField.get(superclassClassLiteralField);
         if (!fragmentsAreConsistent(classLiteralFragment, superclassClassLiteralFragment)) {
-          numClassLiteralFixups++;
+          numFixups++;
           fragmentForField.put(superclassClassLiteralField, NOT_EXCLUSIVE);
           // Add the field back so that its superclass classliteral gets fixed if necessary.
           potentialClassLiteralFields.add(superclassClassLiteralField);
         }
       }
     }
-    logger.log(TreeLogger.DEBUG, "Fixed up load-order dependencies by moving " + numFixups
-        + " strings in class literal constructors to fragment 0, out of " + numClassLitStrings);
     logger.log(TreeLogger.DEBUG, "Fixed up load-order dependencies by moving " +
-        numClassLiteralFixups + " fields in class literal constructors to fragment 0, out of " +
+        numFixups + " fields in class literal constructors to fragment 0, out of " +
         numClassLiterals);
-  }
-
-  /**
-   * Fixup string literals that appear in field initializers.
-   *
-   * <p>GenerateJavaScriptAST decides whether a field will be initialized at the declaration or
-   * by the instance/class initializer when lowering to JavasScript.
-   *
-   * <p>Only literals are affected and only string literals are relevant for code splitting.
-   */
-  private void fixUpLoadOrderDependenciesForFieldsInitializedToStrings(TreeLogger logger,
-      JProgram jprogram) {
-    final int[] numFixups = new int[1];
-    final int[] numFieldStrings = new int[1];
-
-    (new JVisitor() {
-      @Override
-      public void endVisit(JField field, Context ctx) {
-        if (field.getInitializer() instanceof JStringLiteral) {
-          numFieldStrings[0]++;
-
-          String string = ((JStringLiteral) field.getInitializer()).getValue();
-          Fragment fieldFrag = fragmentForField.get(field);
-          Fragment stringFrag = fragmentForString.get(string);
-          if (!fragmentsAreConsistent(fieldFrag, stringFrag)) {
-            numFixups[0]++;
-            fragmentForString.put(string, NOT_EXCLUSIVE);
-          }
-        }
-      }
-    }).accept(jprogram);
-
-
-    logger.log(TreeLogger.DEBUG, "Fixed up load-order dependencies by moving " + numFixups[0]
-        + " strings used to initialize fields to fragment 0, out of " + numFieldStrings[0]);
   }
 
   /**
@@ -432,20 +377,6 @@ class ExclusivityMap {
     Fragment actualFragment = map.get(atom);
     return actualFragment != null &&
         (expectedFragment == actualFragment || !actualFragment.isExclusive());
-  }
-
-  /**
-   * Traverse {@code exp} and find all string literals within it.
-   */
-  private static Set<String> stringsIn(JExpression exp) {
-    final Set<String> strings = Sets.newHashSet();
-    new JVisitor() {
-      @Override
-      public void endVisit(JStringLiteral stringLiteral, Context ctx) {
-        strings.add(stringLiteral.getValue());
-      }
-    }.accept(exp);
-    return strings;
   }
 
   private <T> void putIfAbsent(Map<T, Fragment> map, Fragment fragment, Iterable<T> atoms) {

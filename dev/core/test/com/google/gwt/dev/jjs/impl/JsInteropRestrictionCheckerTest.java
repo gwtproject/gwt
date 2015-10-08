@@ -173,6 +173,56 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "JsProperty 'test.EntryPoint$Buggy.x(I)V' doesn't follow Java Bean naming conventions.");
   }
 
+  public void testJsPropertySuperCallFails()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType public static class Super {",
+        "  @JsProperty public int getX() { return 5; }",
+        "}",
+        "@JsType public static class Buggy extends Super {",
+        "  public int m() { return super.getX(); }",
+        "}");
+
+    assertBuggyFails(
+        "Cannot call property accessor 'test.EntryPoint$Super.getX()I' using 'super.getX()'.");
+  }
+
+  public void testJsPropertyCallSucceeds()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType public static class Super {",
+        "  @JsProperty public int getX() { return 5; }",
+        "}",
+        "@JsType public static class Buggy extends Super {",
+        "  public int m() { return getX(); }",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testJsPropertyAccidentalSuperCallFails()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType public static class Super {",
+        "  @JsProperty public int getX() { return 5; }",
+        "}",
+        "@JsType public interface Interface {",
+        "  @JsProperty int getX();",
+        "}",
+
+        "@JsType public static class Buggy extends Super implements Interface {",
+        "}");
+
+    assertBuggyFails(
+        "Cannot call property accessor 'test.EntryPoint$Super.getX()I' using 'super.getX()'.");
+  }
+
   public void testCollidingJsPropertiesTwoGettersFails() throws Exception {
     addSnippetImport("com.google.gwt.core.client.js.JsType");
     addSnippetImport("com.google.gwt.core.client.js.JsProperty");
@@ -257,8 +307,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "The JsType member 'test.EntryPoint$IBuggy.x(Z)Z' and JsProperty "
-        + "'test.EntryPoint$IBuggy.setX(I)V' can't both be named 'x' in "
-        + "type 'test.EntryPoint$IBuggy'.",
+            + "'test.EntryPoint$IBuggy.setX(I)V' can't both be named 'x' in "
+            + "type 'test.EntryPoint$IBuggy'.",
         "The JsType member 'test.EntryPoint$Buggy.x(Z)Z' and JsProperty "
         + "'test.EntryPoint$Buggy.setX(I)V' can't both be named 'x' in "
         + "type 'test.EntryPoint$Buggy'.");

@@ -145,11 +145,16 @@ public class JsExportTest extends GWTTestCase {
   }-*/;
 
   public void testExportClass_implicitConstructor() {
-    assertNotNull(createMyExportedClassWithImplicitConstructor());
+    assertNull(createMyExportedClassWithImplicitConstructor("bar"));
+    assertNull(createMyExportedClassWithImplicitConstructor("bar.foo"));
+    Object o = createMyExportedClassWithImplicitConstructor("bar.foo.baz");
+    assertNotNull(o);
+    assertTrue(o instanceof MyExportedClassWithImplicitConstructor);
   }
 
-  private native Object createMyExportedClassWithImplicitConstructor() /*-{
-    return new $global.woo.MyExportedClassWithImplicitConstructor();
+  private native Object createMyExportedClassWithImplicitConstructor(String ns) /*-{
+    var o = eval('$global.' + ns + '.MyExportedClassWithImplicitConstructor');
+    return o ? new o : null;
   }-*/;
 
   public void testExportConstructors() {

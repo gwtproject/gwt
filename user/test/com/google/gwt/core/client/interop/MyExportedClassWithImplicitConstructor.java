@@ -19,9 +19,9 @@ import com.google.gwt.core.client.js.JsExport;
 
 /**
  * A class which only has implicit default constructor and is annotated by "JsExport".
- * Its default constructor is exported automatically.
+ * Its default constructor is exported automatically under the "JsNamespace" path.
  */
 @JsExport
+@JsNamespace("bar.foo.baz")
 public class MyExportedClassWithImplicitConstructor {
-
 }

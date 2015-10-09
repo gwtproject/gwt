@@ -291,6 +291,8 @@ public class ComputeOverridesAndImplementDefaultMethods {
       } else {
         // Creates a forwarding method to act as the place holder for this accidental override.
         implementingMethod = JjsUtils.createForwardingMethod(type, method);
+        implementingMethod.setSyntheticOverride();
+
         if (method.isFinal()) {
           // To keep consistency we reset the final mark
           method.setFinal(false);

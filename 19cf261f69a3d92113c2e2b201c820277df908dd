@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "eaf16251_069c9e30",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-09T18:56:54Z",
+      "side": 1,
+      "message": "It was not used before either then. Removed from here and added it back to JsTypeTest together with a test that excercises this codepath.",
+      "parentUuid": "d00a915c_298d8171",
+      "revId": "19cf261f69a3d92113c2e2b201c820277df908dd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a915c_6981498b",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 11
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "eaf16251_2697a212",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-09T18:56:54Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "d00a915c_6981498b",
+      "revId": "19cf261f69a3d92113c2e2b201c820277df908dd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a915c_89474d11",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
         "patchSetId": 11
@@ -47,6 +83,24 @@
       "writtenOn": "2015-10-07T23:00:22Z",
       "side": 1,
       "message": "I think it will be less confusing here if the types wasn\u0027t reusing same name we defined earlier.",
+      "revId": "19cf261f69a3d92113c2e2b201c820277df908dd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eaf16251_8692ee51",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-09T18:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a915c_89474d11",
       "revId": "19cf261f69a3d92113c2e2b201c820277df908dd",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -2541,8 +2541,9 @@ public class GenerateJavaScriptAST {
    */
   private static boolean doesNotHaveConcreteImplementation(JMethod method) {
     return method.isAbstract()
-        || JProgram.isClinit(method)
-            && method.getEnclosingType().getClinitTarget() != method.getEnclosingType();
+        || JjsUtils.isUnnecessarySyntheticOverride(method)
+        || (JProgram.isClinit(method)
+            && method.getEnclosingType().getClinitTarget() != method.getEnclosingType());
   }
 
   private static class JavaToJsOperatorMap {

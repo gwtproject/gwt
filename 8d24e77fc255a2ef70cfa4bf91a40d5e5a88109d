@@ -16,6 +16,29 @@
       "revId": "8d24e77fc255a2ef70cfa4bf91a40d5e5a88109d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eaf16251_096f11ee",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-09T18:56:54Z",
+      "side": 1,
+      "message": "Of course this does not work with closure style.....",
+      "range": {
+        "startLine": 51,
+        "startChar": 1,
+        "endLine": 54,
+        "endChar": 7
+      },
+      "revId": "8d24e77fc255a2ef70cfa4bf91a40d5e5a88109d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

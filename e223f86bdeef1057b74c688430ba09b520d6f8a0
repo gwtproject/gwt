@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "eaf16251_a920256a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-09T19:59:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaf16251_83154055",
+      "revId": "e223f86bdeef1057b74c688430ba09b520d6f8a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eaf16251_c32228bb",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-09T01:52:28Z",
       "side": 1,
       "message": "We said we will not put the ban unless it works for accidental overrides?",
+      "revId": "e223f86bdeef1057b74c688430ba09b520d6f8a0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eaf16251_66bdaa14",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-09T19:59:46Z",
+      "side": 1,
+      "message": "I\u0027ll add a todo. This will be fixed in a follow up.",
+      "parentUuid": "eaf16251_c32228bb",
       "revId": "e223f86bdeef1057b74c688430ba09b520d6f8a0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

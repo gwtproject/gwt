@@ -300,6 +300,12 @@ public class JsInteropRestrictionChecker {
   private void checkNoStaticJsPropertyCalls() {
     new JVisitor() {
       @Override
+      public boolean visit(JMethod x, Context ctx) {
+        // Skip unnecessary synthetic override, as they will not be generated.
+        return !JjsUtils.isUnnecessarySyntheticOverride(x);
+      }
+
+      @Override
       public void endVisit(JMethodCall x, Context ctx) {
         JMethod target = x.getTarget();
         if (x.isStaticDispatchOnly() && target.isJsPropertyAccessor()) {

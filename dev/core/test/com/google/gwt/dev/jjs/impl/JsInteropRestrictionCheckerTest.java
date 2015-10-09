@@ -669,8 +669,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggySucceeds();
   }
 
-  // TODO(rluble): this test should succeed, fix after eliminating the accidental overrides.
-  public void testJsPropertyAccidentalSuperCallFails()
+  public void testJsPropertyAccidentalSuperCallSucceeds()
       throws UnableToCompleteException {
     addSnippetImport("com.google.gwt.core.client.js.JsType");
     addSnippetImport("com.google.gwt.core.client.js.JsProperty");
@@ -685,9 +684,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "@JsType public static class Buggy extends Super implements Interface {",
         "}");
 
-    assertBuggyFails(
-        "Cannot call property accessor 'test.EntryPoint$Super.getX()I' via super "
-            + "(test/EntryPoint.java:6).");
+    assertBuggySucceeds();
   }
 
   public void testMultiplePrivateConstructorsExportSucceeds() throws Exception {

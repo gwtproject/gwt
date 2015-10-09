@@ -359,6 +359,16 @@ public class JjsUtils {
   }
 
   /**
+   * Returns true if the method is a synthetic override that trivially dispatches to its
+   * same name super.
+   */
+  public static boolean isUnnecessarySyntheticOverride(JMethod method) {
+    return method.isSyntheticOverride()
+        && !method.getOverriddenMethods().isEmpty()
+        && !method.getOverriddenMethods().iterator().next().isAbstract();
+  }
+
+  /**
    * Mangles a qualified name into a Javah signature.
    */
   public static String javahSignatureFromName(String name) {

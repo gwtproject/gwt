@@ -2336,7 +2336,7 @@ public class GenerateJavaScriptAST {
     }
 
     private void generatePrototypeDefinition(JMethod method, JsExpression functionDefinition) {
-      if (functionDefinition != null) {
+      if (functionDefinition != null || JjsUtils.isUnnecessarySyntheticOverride(method)) {
         generatePrototypeAssignment(method, polymorphicNames.get(method), functionDefinition);
       }
 

@@ -359,6 +359,22 @@ public class JjsUtils {
   }
 
   /**
+   * Returns true if the method is a synthetic override that trivially dispatches to its
+   * same name super.
+   */
+  public static boolean isUnnecessarySyntheticOverride(JMethod method) {
+    // Assumptions on synthethic overrides, if any of these change.
+    assert !method.isSyntheticOverride()
+        || (!method.getOverriddenMethods().isEmpty()
+            && !method.getOverriddenMethods().iterator().next().isAbstract()
+            && !method.exposesPackagePrivateMethod());
+
+    // A synthetic override is unnecessary iff it retains the same property name (polyname) as its
+    // super.
+    return method.isSyntheticOverride() && !method.exposesNonJsMethod();
+  }
+
+  /**
    * Mangles a qualified name into a Javah signature.
    */
   public static String javahSignatureFromName(String name) {

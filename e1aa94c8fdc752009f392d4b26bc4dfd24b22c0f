@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a33b2f5_ccb12f37",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-10T01:57:46Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not followed by whitespace.",
+      "revId": "e1aa94c8fdc752009f392d4b26bc4dfd24b22c0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

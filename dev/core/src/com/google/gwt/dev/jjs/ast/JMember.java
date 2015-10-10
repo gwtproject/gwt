@@ -25,6 +25,8 @@ public interface JMember extends HasEnclosingType, HasName, HasJsInfo, HasType, 
 
   boolean isPublic();
 
+  boolean isSynthetic();
+
   boolean needsVtable();
 
   String getQualifiedName();

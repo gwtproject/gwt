@@ -332,7 +332,6 @@ public class JsTypeTest extends GWTTestCase {
     }-*/;
   }
 
-
   // TODO(rluble): enable when the subclass is setup correctly.
   public void _disabled_testNativeJsTypeSubclass() {
     MyNativeJsTypeSubclass myNativeJsTypeSubclass = new MyNativeJsTypeSubclass();

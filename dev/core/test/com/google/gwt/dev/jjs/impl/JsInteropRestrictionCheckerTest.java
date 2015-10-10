@@ -94,7 +94,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Method 'test.EntryPoint$Parent.doIt(Ltest/EntryPoint$Foo;)V' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the member name 'doIt' is already taken.");
+            + "'test.EntryPoint$Buggy' because the member name 'doIt' is already taken.");
   }
 
   public void testCollidingFieldExportsFails() throws Exception {
@@ -882,7 +882,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("com.google.gwt.core.client.js.JsType");
     addSnippetClassDecl(
         "@JsType(prototype = \"x\") public static class Buggy {",
-        "  static String s = \"hello\";",
+        "  public static String s = \"hello\";",
         "  static {  s += \"hello\"; }",
         "}");
 
@@ -894,7 +894,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("com.google.gwt.core.client.js.JsType");
     addSnippetClassDecl(
         "@JsType(prototype = \"x\") public static class Buggy {",
-        "  static final String s = new String(\"hello\");",
+        "  public static final String s = new String(\"hello\");",
         "}");
 
     assertBuggyFails(
@@ -916,7 +916,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("com.google.gwt.core.client.js.JsType");
     addSnippetClassDecl(
         "@JsType(prototype = \"x\") public static class Buggy {",
-        "  static final String s = \"hello\";",
+        "  public static final String s = \"hello\";",
         "}");
 
     assertBuggySucceeds();
@@ -1041,6 +1041,88 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "@JsType(prototype = \"S\") public static class Super {",
         "}",
         "@JsType(prototype = \"B\") public static class Buggy extends Super {",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testNativeJsTypeNonPublicFieldFails() {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"B\") static class Buggy {",
+        "  int f;",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType members can only be public and not be annotated with @JsNoExport. "
+            + "Field 'test.EntryPoint$Buggy.f' is not public or has @JsNoExport.");
+  }
+
+  public void testNativeJsTypeJsIgnoredFieldFails() {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsNoExport");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"B\") static class Buggy {",
+        "  @JsNoExport public int x;",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType members can only be public and not be annotated with @JsNoExport. "
+            + "Field 'test.EntryPoint$Buggy.x' is not public or has @JsNoExport.");
+  }
+
+  public void testNativeJsTypeNonPublicMethodFails() {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"B\") static class Buggy {",
+        "  native void m();",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType members can only be public and not be annotated with @JsNoExport. "
+            + "Method 'test.EntryPoint$Buggy.m()V' is not public or has @JsNoExport.");
+  }
+
+  public void testNativeJsTypeJsIgnoredMethodFails() {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsNoExport");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"B\") static class Buggy {",
+        "  @JsNoExport public native void m();",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType members can only be public and not be annotated with @JsNoExport. "
+            + "Method 'test.EntryPoint$Buggy.m()V' is not public or has @JsNoExport.");
+  }
+
+  public void testNativeJsTypeJsIgnoredConstructorFails() {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsNoExport");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"B\") static class Buggy {",
+        "  @JsNoExport public Buggy() { }",
+        "}");
+
+    assertBuggyFails(
+        "Native JsType members can only be public and not be annotated with @JsNoExport. "
+            + "Constructor 'test.EntryPoint$Buggy.EntryPoint$Buggy() <init>' is not public or has @JsNoExport.");
+  }
+
+  public void testNativeJsTypeNonPublicConstructorSucceeds() throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"B\") static class Buggy {",
+        "  Buggy() { }",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testNativeJsTypeDefaultConstructorSucceeds() throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"B\") static class Buggy {",
         "}");
 
     assertBuggySucceeds();

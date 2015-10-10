@@ -122,6 +122,10 @@ public class JsInteropRestrictionChecker {
   }
 
   private void checkField(JField x) {
+    if (x.isJsNative()) {
+      checkNativeJsMember(x);
+    }
+
     if (!x.isJsProperty()) {
       return;
     }
@@ -138,6 +142,10 @@ public class JsInteropRestrictionChecker {
       return;
     }
     currentJsTypeProcessedMethods.addAll(x.getOverriddenMethods());
+
+    if (x.isJsNative()) {
+      checkNativeJsMember(x);
+    }
 
     if (!x.isOrOverridesJsMethod()) {
       return;
@@ -187,8 +195,30 @@ public class JsInteropRestrictionChecker {
     }
   }
 
+  private void checkNativeJsMember(JMember member) {
+    if (member.isSynthetic()) {
+      return;
+    }
+
+    if (member.getJsName() == null) {
+      logError("Native JsType members can only be public and not be annotated with @JsNoExport. "
+              + "%s '%s' is not public or has @JsNoExport.",
+          getMemberTypeDescription(member),
+          member.getQualifiedName());
+      return;
+    }
+  }
+
+  private String getMemberTypeDescription(JMember member) {
+    if (member instanceof JField) {
+      return "Field";
+    }
+    JMethod method = (JMethod) member;
+    return method.isConstructor() ? "Constructor" : "Method";
+  }
+
   private void checkJsTypeMethod(JMethod method) {
-    if (method.isSynthetic() && !method.isForwarding()) {
+      if (method.isSynthetic() && !method.isForwarding()) {
       // A name slot taken up by a synthetic method, such as a bridge method for a generic method,
       // is not the fault of the user and so should not be reported as an error. JS generation
       // should take responsibility for ensuring that only the correct method version (in this
@@ -275,7 +305,7 @@ public class JsInteropRestrictionChecker {
     }
   }
 
-  private void checkJsNative(JDeclaredType type) {
+  private void checkNativeJsType(JDeclaredType type) {
     // TODO(rluble): add inheritance restrictions.
     if (!JjsUtils.isClinitEmpty(type)) {
       logError("Native JsType '%s' cannot have static initializer.", type);
@@ -338,7 +368,7 @@ public class JsInteropRestrictionChecker {
     minimalRebuildCache.removeJsInteropNames(type.getName());
 
     if (type.isJsNative()) {
-      checkJsNative(type);
+      checkNativeJsType(type);
     }
 
     if (type.isJsFunction()) {

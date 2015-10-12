@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "9f290a88_ce86c3dd",
+        "filename": "user/super/com/google/gwt/emul/java/util/function/BiConsumer.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-10-12T18:12:20Z",
+      "side": 1,
+      "message": "As I have to touch all files, do you agree that checkCriticalNotNull should be used now? Back in the days I created this patch I think this method did not exist yet.\n\nPersonally I would go crazy when composed instances throw NPE when used later and you have no idea who has added null to the chain. Using checkCriticalNotNull would make it obvious.",
+      "parentUuid": "ff13e649_19008b49",
+      "revId": "1de01bae7274d10ed25efd8d12f8db60124ee1e2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca557e3a_b72f282c",
         "filename": "user/super/com/google/gwt/emul/java/util/function/BiConsumer.java",
         "patchSetId": 9

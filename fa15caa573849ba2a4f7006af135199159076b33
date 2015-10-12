@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "ca557e3a_9a25e9c6",
+        "filename": "user/super/com/google/gwt/emul/java/util/Optional.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2015-10-12T19:54:23Z",
+      "side": 1,
+      "message": "checkCriticalNotNull otherwise NPE will be thrown much later.",
+      "revId": "fa15caa573849ba2a4f7006af135199159076b33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a27faf5_aa668f57",
+        "filename": "user/super/com/google/gwt/emul/java/util/Optional.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2015-10-12T19:54:23Z",
+      "side": 1,
+      "message": "checkCriticalNotNull?",
+      "revId": "fa15caa573849ba2a4f7006af135199159076b33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff13e649_7948a726",
+        "filename": "user/super/com/google/gwt/emul/java/util/Optional.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2015-10-12T19:54:23Z",
+      "side": 1,
+      "message": "What if ref \u003d\u003d \"EMPTY\"?\n\nI suggest to use guava\u0027s format.\n\n\"Optional.of(\" + ref + \")\"\nand\n\"Optional.empty()\"",
+      "revId": "fa15caa573849ba2a4f7006af135199159076b33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff13e649_39422f05",
+        "filename": "user/super/com/google/gwt/emul/java/util/OptionalDouble.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2015-10-12T19:54:23Z",
+      "side": 1,
+      "message": "I think we should use here: Double.compare(ref, other.ref)",
+      "revId": "fa15caa573849ba2a4f7006af135199159076b33",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83143e89_07f7d8a5",
         "filename": "user/test/com/google/gwt/emultest/java/util/OptionalDoubleTest.java",
         "patchSetId": 1

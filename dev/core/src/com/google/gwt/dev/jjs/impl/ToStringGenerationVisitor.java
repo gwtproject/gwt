@@ -1083,7 +1083,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
   }
 
   protected void printNativeFlag(CanBeNative x) {
-    if (x.isNative()) {
+    if (x.isJsniMethod()) {
       print(CHARS_NATIVE);
     }
   }

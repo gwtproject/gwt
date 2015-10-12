@@ -611,11 +611,11 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
   }
 
   @Override
-  public boolean isNative() {
+  public boolean isJsniMethod() {
     if (body == null) {
       return false;
     } else {
-      return body.isNative();
+      return body.isJsniMethodBody();
     }
   }
 
@@ -651,7 +651,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract, CanBeNativ
    */
   public void removeParam(int index) {
     params = Lists.remove(params, index);
-    if (isNative()) {
+    if (isJsniMethod()) {
       ((JsniMethodBody) getBody()).getFunc().getParameters().remove(index);
     }
   }

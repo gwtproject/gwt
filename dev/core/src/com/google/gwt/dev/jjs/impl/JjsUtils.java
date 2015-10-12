@@ -323,42 +323,6 @@ public class JjsUtils {
   }
 
   /**
-   * Returns true if the clinit for a type isEmpty (except for the call to its super clinit).
-   */
-  public static boolean isClinitEmpty(JDeclaredType type) {
-    JMethod clinit = type.getClinitMethod();
-    List<JStatement> statements = FluentIterable
-        .from(((JMethodBody) clinit.getBody()).getStatements())
-        .filter(new Predicate<JStatement>() {
-          @Override
-          public boolean apply(JStatement statement) {
-            if (!(statement instanceof JDeclarationStatement)) {
-              return true;
-            }
-            JDeclarationStatement declarationStatement = (JDeclarationStatement) statement;
-            JField field = (JField) declarationStatement.getVariableRef().getTarget();
-            return !field.isCompileTimeConstant();
-          }
-        }).toList();
-    if (statements.isEmpty()) {
-      return true;
-    }
-    return statements.size() == 1 && isClinitCall(statements.get(0), type.getSuperClass());
-  }
-
-  private static boolean isClinitCall(JStatement statement, JClassType superClass) {
-    if (superClass == null || !(statement instanceof JExpressionStatement)) {
-      return false;
-    }
-
-    JExpression expression = ((JExpressionStatement) statement).getExpr();
-    if (!(expression instanceof JMethodCall)) {
-      return false;
-    }
-    return ((JMethodCall) expression).getTarget() == superClass.getClinitMethod();
-  }
-
-  /**
    * Mangles a qualified name into a Javah signature.
    */
   public static String javahSignatureFromName(String name) {

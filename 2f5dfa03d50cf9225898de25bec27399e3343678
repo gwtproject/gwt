@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df39c202_89f5a184",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyExportedClassWithImplicitConstructor.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-12T23:01:27Z",
+      "side": 1,
+      "message": "revert",
+      "revId": "2f5dfa03d50cf9225898de25bec27399e3343678",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -260,7 +260,7 @@ public class CodeSplitter {
    *          included in the created fragment
    */
   private List<JsStatement>  statementsForFragment(int fragmentId,
-      LivenessPredicate alreadyLoaded, LivenessPredicate liveNow) {
+      NodeSet alreadyLoaded, NodeSet liveNow) {
     if (logFragmentMap) {
       System.out.println();
       System.out.println("==== Fragment " + fragmentId + " ====");
@@ -378,8 +378,8 @@ public class CodeSplitter {
        * Compute the base fragment. It includes everything that is live when the
        * program starts.
        */
-      LivenessPredicate alreadyLoaded = new NothingAlivePredicate();
-      LivenessPredicate liveNow = new CfaLivenessPredicate(initiallyLiveCfa);
+      NodeSet alreadyLoaded = NodeSet.EMPTY;
+      NodeSet liveNow = new CfaLiveNodeSet(initiallyLiveCfa);
       Fragment fragment =
           new Fragment(Fragment.Type.INITIAL);
       fragment.setFragmentId(nextFragmentIdToAssign++);
@@ -398,7 +398,7 @@ public class CodeSplitter {
     String extendsCfa = "initial";
     List<Integer> initialFragmentNumberSequence = new ArrayList<Integer>();
     for (JRunAsync runAsync : initialLoadSequence) {
-      LivenessPredicate alreadyLoaded = new CfaLivenessPredicate(initialSequenceCfa);
+      NodeSet alreadyLoaded = new CfaLiveNodeSet(initialSequenceCfa);
 
       String depGraphName = "sp" + runAsync.getRunAsyncId();
       dependencyRecorder.startDependencyGraph(depGraphName, extendsCfa);
@@ -408,7 +408,7 @@ public class CodeSplitter {
       liveAfterSp.traverseFromRunAsync(runAsync);
       dependencyRecorder.endDependencyGraph();
 
-      LivenessPredicate liveNow = new CfaLivenessPredicate(liveAfterSp);
+      NodeSet liveNow = new CfaLiveNodeSet(liveAfterSp);
 
       Fragment fragment = new Fragment(Fragment.Type.INITIAL, lastInitialFragment);
       fragment.setFragmentId(nextFragmentIdToAssign++);
@@ -464,9 +464,9 @@ public class CodeSplitter {
     for (Fragment fragment : exclusiveFragments) {
       assert fragment.isExclusive();
 
-      LivenessPredicate alreadyLoaded = exclusivityMap.getLivenessPredicate(
+      NodeSet alreadyLoaded = exclusivityMap.getLiveNodeSet(
           ExclusivityMap.NOT_EXCLUSIVE);
-      LivenessPredicate liveNow = exclusivityMap.getLivenessPredicate(fragment);
+      NodeSet liveNow = exclusivityMap.getLiveNodeSet(fragment);
       List<JsStatement> statements = statementsForFragment(fragment.getFragmentId(),
           alreadyLoaded, liveNow);
       fragment.setStatements(statements);
@@ -480,8 +480,8 @@ public class CodeSplitter {
      * Populate the leftovers fragment.
      */
     {
-      LivenessPredicate alreadyLoaded = new CfaLivenessPredicate(initialSequenceCfa);
-      LivenessPredicate liveNow = exclusivityMap.getLivenessPredicate(ExclusivityMap.NOT_EXCLUSIVE);
+      NodeSet alreadyLoaded = new CfaLiveNodeSet(initialSequenceCfa);
+      NodeSet liveNow = exclusivityMap.getLiveNodeSet(ExclusivityMap.NOT_EXCLUSIVE);
       leftOverFragment.setFragmentId(nextFragmentIdToAssign++);
       List<JsStatement> statements = statementsForFragment(leftOverFragment.getFragmentId(),
           alreadyLoaded, liveNow);

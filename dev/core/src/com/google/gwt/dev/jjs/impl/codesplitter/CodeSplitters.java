@@ -19,7 +19,9 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.cfg.ConfigurationProperties;
 import com.google.gwt.dev.jjs.ast.JArrayType;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
+import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JNewArray;
@@ -28,21 +30,25 @@ import com.google.gwt.dev.jjs.ast.JNumericEntry;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
+import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
 import com.google.gwt.dev.jjs.impl.JsniRefLookup;
 import com.google.gwt.dev.util.JsniRef;
 import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
+import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.Collections2;
 import com.google.gwt.thirdparty.guava.common.collect.LinkedListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Utility function related to code splitting.
@@ -254,5 +260,17 @@ public class CodeSplitters {
       runAsyncsByName.put(name, runAsync);
     }
     return runAsyncsByName;
+  }
+
+  static Predicate<JNode> isRelevantAtom = new Predicate<JNode>() {
+    @Override
+    public boolean apply(JNode node) {
+      return node instanceof JField || node instanceof JMethod || node instanceof JDeclaredType;
+    }
+  };
+
+  static Set<JNode> getRelevantLiveAtoms(ControlFlowAnalyzer cfa) {
+    return Sets.filter(Sets.union(cfa.getInstantiatedTypes(),
+        Sets.union(cfa.getLiveFieldsAndMethods(), cfa.getFieldsWritten())), isRelevantAtom);
   }
 }

@@ -50,30 +50,21 @@ class ExclusivityMap {
   /**
    * A liveness predicate that is based on an exclusivity map.
    */
-  private class ExclusivityMapLivenessPredicate implements LivenessPredicate {
+  private class LiveInFragmentSet implements NodeSet {
     private final Fragment fragment;
 
-    public ExclusivityMapLivenessPredicate(Fragment fragment) {
+    public LiveInFragmentSet(Fragment fragment) {
       this.fragment = fragment;
     }
 
     @Override
-    public boolean isLive(JDeclaredType type) {
-      return isLiveInFragment(fragment, type);
+    public boolean contains(JNode type) {
+      Fragment atomFragment = fragmentForAtom.get(type);
+      return atomFragment != null && (fragment == atomFragment || !atomFragment.isExclusive());
     }
 
     @Override
-    public boolean isLive(JField field) {
-      return isLiveInFragment(fragment, field);
-    }
-
-    @Override
-    public boolean isLive(JMethod method) {
-      return isLiveInFragment(fragment, method);
-    }
-
-    @Override
-    public boolean miscellaneousStatementsAreLive() {
+    public boolean containsUnclassifiedItems() {
       return true;
     }
   }
@@ -124,36 +115,13 @@ class ExclusivityMap {
   };
 
   /**
-   * Gets the liveness predicate for fragment.
+   * Gets the live nodeset for fragment.
    */
-  LivenessPredicate getLivenessPredicate(Fragment fragment) {
-    return new ExclusivityMapLivenessPredicate(fragment);
+  NodeSet getLiveNodeSet(Fragment fragment) {
+    return new LiveInFragmentSet(fragment);
   }
 
-  /**
-   * Determine whether a field is live in a fragment.
-   */
-  public boolean isLiveInFragment(Fragment fragment, JField field) {
-    return isLiveInFragment(fragmentForField, field, fragment);
-  }
-
-  /**
-   * Determine whether a method is live in a fragment.
-   */
-  public boolean isLiveInFragment(Fragment fragment, JMethod method) {
-    return isLiveInFragment(fragmentForMethod, method, fragment);
-  }
-
-  /**
-   * Determine whether a type is live in a fragment.
-   */
-  public boolean isLiveInFragment(Fragment fragment, JDeclaredType type) {
-    return isLiveInFragment(fragmentForType, type, fragment);
-  }
-
-  private Map<JField, Fragment> fragmentForField = Maps.newHashMap();
-  private Map<JMethod, Fragment> fragmentForMethod = Maps.newHashMap();
-  private Map<JDeclaredType, Fragment> fragmentForType = Maps.newHashMap();
+  private Map<JNode, Fragment> fragmentForAtom = Maps.newHashMap();
 
   /**
    * Traverse {@code exp} and find all referenced JFields.
@@ -186,7 +154,7 @@ class ExclusivityMap {
   /**
    * <p>
    * Patch up the fragment map to satisfy load-order dependencies, as described
-   * in the comment of {@link LivenessPredicate}.
+   * in the comment of {@link NodeSet}.
    * Load-order dependencies can be
    * violated when an atom is mapped to 0 as a leftover, but it has some
    * load-order dependency on an atom that was put in an exclusive fragment.
@@ -229,33 +197,18 @@ class ExclusivityMap {
    * exclusively live fragment associated with that split point.
    */
   private void compute(Collection<Fragment> exclusiveFragments, ControlFlowAnalyzer completeCfa,
-      Map<Fragment, ControlFlowAnalyzer> notExclusiveCfaByFragment) {
+      Map<Fragment, ControlFlowAnalyzer> notLiveCfaByFragment) {
 
-    Set<JField> allLiveFields = filter(Sets.union(completeCfa.getLiveFieldsAndMethods(),
-        completeCfa.getFieldsWritten()), JField.class);
-    Set<JMethod> allLiveMethods = filter(completeCfa.getLiveFieldsAndMethods(), JMethod.class);
-    Set<JDeclaredType> allLiveTypes =
-        filter(completeCfa.getInstantiatedTypes(), JDeclaredType.class);
-
+    Set<JNode> allLiveThings = CodeSplitters.getRelevantLiveAtoms(completeCfa);
     for (Fragment fragment : exclusiveFragments) {
       assert fragment.isExclusive();
-      ControlFlowAnalyzer complementCfa = notExclusiveCfaByFragment.get(fragment);
-      Set<JNode> nodesNotExclusiveToFragment = Sets.union(complementCfa.getLiveFieldsAndMethods(),
-          complementCfa.getFieldsWritten());
-
-      putIfAbsent(fragmentForField, fragment,
-          Sets.difference(allLiveFields, nodesNotExclusiveToFragment));
-      putIfAbsent(fragmentForMethod, fragment,
-          Sets.difference(allLiveMethods, complementCfa.getLiveFieldsAndMethods()));
-      putIfAbsent(fragmentForType, fragment,
-          Sets.difference(allLiveTypes,
-              filter(complementCfa.getInstantiatedTypes(), JDeclaredType.class)));
+      ControlFlowAnalyzer notLiveInFragment = notLiveCfaByFragment.get(fragment);
+      putIfAbsent(fragment,
+          Sets.difference(allLiveThings, CodeSplitters.getRelevantLiveAtoms(notLiveInFragment)));
     }
 
     // Assign all living atoms to left overs.
-    putIfAbsent(fragmentForField, NOT_EXCLUSIVE, allLiveFields);
-    putIfAbsent(fragmentForMethod, NOT_EXCLUSIVE, allLiveMethods);
-    putIfAbsent(fragmentForType, NOT_EXCLUSIVE, allLiveTypes);
+    putIfAbsent(NOT_EXCLUSIVE, allLiveThings);
   }
 
   /**
@@ -279,17 +232,17 @@ class ExclusivityMap {
         continue;
       }
 
-      Fragment classLiteralFragment = fragmentForField.get(field);
+      Fragment classLiteralFragment = fragmentForAtom.get(field);
       JExpression initializer = field.getInitializer();
 
       // Fixup the class literals.
       for (JClassLiteral superclassClassLiteral : classLiteralsIn(initializer)) {
         JField superclassClassLiteralField = superclassClassLiteral.getField();
         // Fix the super class literal and add it to the reexamined.
-        Fragment superclassClassLiteralFragment = fragmentForField.get(superclassClassLiteralField);
+        Fragment superclassClassLiteralFragment = fragmentForAtom.get(superclassClassLiteralField);
         if (!fragmentsAreConsistent(classLiteralFragment, superclassClassLiteralFragment)) {
           numFixups++;
-          fragmentForField.put(superclassClassLiteralField, NOT_EXCLUSIVE);
+          fragmentForAtom.put(superclassClassLiteralField, NOT_EXCLUSIVE);
           // Add the field back so that its superclass classliteral gets fixed if necessary.
           potentialClassLiteralFields.add(superclassClassLiteralField);
         }
@@ -308,7 +261,7 @@ class ExclusivityMap {
     int numFixups = 0;
 
     for (JDeclaredType type : jprogram.getDeclaredTypes()) {
-      Fragment typeFrag = fragmentForType.get(type);
+      Fragment typeFrag = fragmentForAtom.get(type);
       if (typeFrag == null || !typeFrag.isExclusive()) {
         continue;
       }
@@ -318,8 +271,8 @@ class ExclusivityMap {
       */
       for (JMethod method : type.getMethods()) {
         if (method.needsDynamicDispatch() && methodsInJavaScript.contains(method)
-            && typeFrag != fragmentForMethod.get(method)) {
-          fragmentForType.put(type, NOT_EXCLUSIVE);
+            && typeFrag != fragmentForAtom.get(method)) {
+          fragmentForAtom.put(type, NOT_EXCLUSIVE);
           numFixups++;
           break;
         }
@@ -343,11 +296,11 @@ class ExclusivityMap {
     while (!typesToCheck.isEmpty()) {
       JDeclaredType type = typesToCheck.remove();
       if (type.getSuperClass() != null) {
-        Fragment typeFrag = fragmentForType.get(type);
-        Fragment supertypeFrag = fragmentForType.get(type.getSuperClass());
+        Fragment typeFrag = fragmentForAtom.get(type);
+        Fragment supertypeFrag = fragmentForAtom.get(type.getSuperClass());
         if (!fragmentsAreConsistent(typeFrag, supertypeFrag)) {
           numFixups++;
-          fragmentForType.put(type.getSuperClass(), NOT_EXCLUSIVE);
+          fragmentForAtom.put(type.getSuperClass(), NOT_EXCLUSIVE);
           typesToCheck.add(type.getSuperClass());
         }
       }
@@ -368,25 +321,14 @@ class ExclusivityMap {
     return thisFragment == null || thisFragment == thatFragment || !thatFragment.isExclusive();
   }
 
-  /**
-   * An atom is live in a fragment if either it is exclusive to that fragment or not exclusive
-   * to any fragment.
-   */
-  private static <T> boolean isLiveInFragment(Map<T, Fragment> map, T atom,
-      Fragment expectedFragment) {
-    Fragment actualFragment = map.get(atom);
-    return actualFragment != null &&
-        (expectedFragment == actualFragment || !actualFragment.isExclusive());
-  }
-
-  private <T> void putIfAbsent(Map<T, Fragment> map, Fragment fragment, Iterable<T> atoms) {
+  private <T extends JNode> void putIfAbsent(Fragment fragment, Iterable<T> atoms) {
     for (T atom : atoms) {
-      if (!map.containsKey(atom)) {
+      if (!fragmentForAtom.containsKey(atom)) {
         // Some atoms might atoms might be dead until both split points i and j are reached, and
         // thus they could be assigned to either.
         // We choose here to assign to the first fragment, so that we could use this method
         // to assign leftovers.
-        map.put(atom, fragment);
+        fragmentForAtom.put(atom, fragment);
       }
     }
   }

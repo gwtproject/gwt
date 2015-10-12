@@ -15,32 +15,29 @@
  */
 package com.google.gwt.dev.jjs.impl.codesplitter;
 
-import com.google.gwt.dev.jjs.ast.JDeclaredType;
-import com.google.gwt.dev.jjs.ast.JField;
-import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JNode;
+import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
 
 /**
-* A {@link LivenessPredicate} where nothing is alive.
-*/
-public class NothingAlivePredicate implements LivenessPredicate {
+ * A {@link NodeSet} that bases liveness on a single
+ * {@link com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer}.
+ */
+public class CfaLiveNodeSet implements NodeSet {
+  private final ControlFlowAnalyzer cfa;
 
-  @Override
-  public boolean isLive(JDeclaredType type) {
-    return false;
+  public CfaLiveNodeSet(ControlFlowAnalyzer cfa) {
+    this.cfa = cfa;
   }
 
   @Override
-  public boolean isLive(JField field) {
-    return false;
+  public boolean contains(JNode node) {
+    return cfa.getInstantiatedTypes().contains(node)
+        || cfa.getLiveFieldsAndMethods().contains(node)
+        || cfa.getFieldsWritten().contains(node);
   }
 
   @Override
-  public boolean isLive(JMethod method) {
-    return false;
-  }
-
-  @Override
-  public boolean miscellaneousStatementsAreLive() {
-    return false;
+  public boolean containsUnclassifiedItems() {
+    return true;
   }
 }

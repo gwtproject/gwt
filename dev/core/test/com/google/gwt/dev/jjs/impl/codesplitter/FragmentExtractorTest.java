@@ -24,6 +24,7 @@ import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.impl.JJSTestBase;
 import com.google.gwt.dev.jjs.impl.JavaToJavaScriptMap;
 import com.google.gwt.dev.js.ast.JsExprStmt;
@@ -145,29 +146,6 @@ public class FragmentExtractorTest extends JJSTestBase {
     }
   }
 
-  private static class MockLivenessPredicate implements LivenessPredicate {
-
-    @Override
-    public boolean isLive(JDeclaredType type) {
-      return false;
-    }
-
-    @Override
-    public boolean isLive(JField field) {
-      return false;
-    }
-
-    @Override
-    public boolean isLive(JMethod method) {
-      return false;
-    }
-
-    @Override
-    public boolean miscellaneousStatementsAreLive() {
-      return false;
-    }
-  }
-
   /**
    * Invokes FragmentExtractor with a fragment description claiming that Bar was not made live by
    * the current fragment, but that it has a constructor which *was* made live. Verifies that the
@@ -175,7 +153,7 @@ public class FragmentExtractorTest extends JJSTestBase {
    */
   public void testDefineClass_DeadTypeLiveConstructor() {
     FragmentExtractor fragmentExtractor;
-    LivenessPredicate constructorLivePredicate;
+    NodeSet constructorLivePredicate;
 
     // Environment setup.
     {
@@ -215,23 +193,22 @@ public class FragmentExtractorTest extends JJSTestBase {
         }
       };
       fragmentExtractor = new FragmentExtractor(null, jsProgram, map);
-      constructorLivePredicate = new MockLivenessPredicate() {
-          @Override
-        public boolean isLive(JDeclaredType type) {
-          // Claims that Bar is not made live by the current fragment.
-          return false;
+      constructorLivePredicate = new NodeSet() {
+        @Override
+        public boolean contains(JNode node) {
+          // Claims that the bar Constructor *is* made live by the current fragment.
+          return node == barConstructor;
         }
 
-          @Override
-        public boolean isLive(JMethod method) {
-          // Claims that the bar Constructor *is* made live by the current fragment.
-          return method == barConstructor;
+        @Override
+        public boolean containsUnclassifiedItems() {
+          return false;
         }
       };
     }
 
     List<JsStatement> extractedStatements =
-        fragmentExtractor.extractStatements(constructorLivePredicate, new NothingAlivePredicate());
+        fragmentExtractor.extractStatements(constructorLivePredicate, NodeSet.EMPTY);
 
     // Asserts that the single defineClass statement was included in the extraction output.
     assertEquals(1, extractedStatements.size());

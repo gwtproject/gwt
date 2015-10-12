@@ -83,14 +83,14 @@ public class FragmentExtractor {
    */
   private class DefineClassMinimizerVisitor extends JsModVisitor {
 
-    private final LivenessPredicate alreadyLoadedPredicate;
-    private final LivenessPredicate livenessPredicate;
+    private final NodeSet alreadyLoadedPredicate;
+    private final NodeSet nodeSet;
     private int liveConstructorCount;
 
     private DefineClassMinimizerVisitor(
-        LivenessPredicate alreadyLoadedPredicate, LivenessPredicate livenessPredicate) {
+        NodeSet alreadyLoadedPredicate, NodeSet nodeSet) {
       this.alreadyLoadedPredicate = alreadyLoadedPredicate;
-      this.livenessPredicate = livenessPredicate;
+      this.nodeSet = nodeSet;
     }
 
     @Override
@@ -108,8 +108,8 @@ public class FragmentExtractor {
       assert classType != null || method != null;
 
       boolean isConstructorLive = method != null ?
-          !alreadyLoadedPredicate.isLive(method) && livenessPredicate.isLive(method) :
-          !alreadyLoadedPredicate.isLive(classType) && livenessPredicate.isLive(classType);
+          !alreadyLoadedPredicate.contains(method) && nodeSet.contains(method) :
+          !alreadyLoadedPredicate.contains(classType) && nodeSet.contains(classType);
       if (isConstructorLive) {
         // Constructor is live in current fragment.
         // Counts kept references to live constructors.
@@ -187,7 +187,7 @@ public class FragmentExtractor {
    * than <code>alreadyLoadedPredicate</code>.
    */
   public List<JsStatement> extractStatements(
-      LivenessPredicate livenessPredicate, LivenessPredicate alreadyLoadedPredicate) {
+      NodeSet nodeSet, NodeSet alreadyLoadedPredicate) {
     List<JsStatement> extractedStats = new ArrayList<JsStatement>();
 
     /**
@@ -205,9 +205,9 @@ public class FragmentExtractor {
       if (vtableTypeAssigned != null) {
         // Keeps defineClass statements of live types or types with a live constructor.
         MinimalDefineClassResult minimalDefineClassResult = createMinimalDefineClass(
-            livenessPredicate, alreadyLoadedPredicate, (JsExprStmt) statement);
-        boolean liveType = !alreadyLoadedPredicate.isLive(vtableTypeAssigned)
-            && livenessPredicate.isLive(vtableTypeAssigned);
+            nodeSet, alreadyLoadedPredicate, (JsExprStmt) statement);
+        boolean liveType = !alreadyLoadedPredicate.contains(vtableTypeAssigned)
+            && nodeSet.contains(vtableTypeAssigned);
         boolean liveConstructors = minimalDefineClassResult.liveConstructorCount > 0;
 
         if (liveConstructors || liveType) {
@@ -219,10 +219,10 @@ public class FragmentExtractor {
           keep = false;
         }
       } else if (containsRemovableVars(statement)) {
-        statement = removeSomeVars((JsVars) statement, livenessPredicate, alreadyLoadedPredicate);
+        statement = removeSomeVars((JsVars) statement, nodeSet, alreadyLoadedPredicate);
         keep = !(statement instanceof JsEmpty);
       } else {
-        keep = isLive(statement, livenessPredicate) && !isLive(statement, alreadyLoadedPredicate);
+        keep = isLive(statement, nodeSet) && !isLive(statement, alreadyLoadedPredicate);
       }
 
       statementLogger.log(statement, keep);
@@ -272,9 +272,9 @@ public class FragmentExtractor {
 
   /**
    * Check whether this statement is a {@link JsVars} that contains individual vars that could be
-   * removed. If it does, then {@link #removeSomeVars(JsVars, LivenessPredicate, LivenessPredicate)}
+   * removed. If it does, then {@link #removeSomeVars(JsVars, NodeSet, NodeSet)}
    * is sensible for this statement and should be used instead of
-   * {@link #isLive(JsStatement, LivenessPredicate)} .
+   * {@link #isLive(JsStatement, NodeSet)} .
    */
   private boolean containsRemovableVars(JsStatement statement) {
     if (statement instanceof JsVars) {
@@ -300,21 +300,21 @@ public class FragmentExtractor {
    * stripped constructors will be kept by other defineClass calls in other fragments at other times.
    * </p>
    */
-  private MinimalDefineClassResult createMinimalDefineClass(LivenessPredicate livenessPredicate,
-      LivenessPredicate alreadyLoadedPredicate, JsExprStmt defineClassStatement) {
+  private MinimalDefineClassResult createMinimalDefineClass(NodeSet nodeSet,
+      NodeSet alreadyLoadedPredicate, JsExprStmt defineClassStatement) {
     DefineClassMinimizerVisitor defineClassMinimizerVisitor =
-        new DefineClassMinimizerVisitor(alreadyLoadedPredicate, livenessPredicate);
+        new DefineClassMinimizerVisitor(alreadyLoadedPredicate, nodeSet);
     JsExprStmt minimalDefineClassStatement = createDefineClassClone(defineClassStatement);
     defineClassMinimizerVisitor.accept(minimalDefineClassStatement);
     return new MinimalDefineClassResult(
         minimalDefineClassStatement, defineClassMinimizerVisitor.liveConstructorCount);
   }
 
-  private boolean isLive(JsStatement statement, LivenessPredicate livenessPredicate) {
+  private boolean isLive(JsStatement statement, NodeSet nodeSet) {
     JDeclaredType type = map.typeForStatement(statement);
     if (type != null) {
       // This is part of the code only needed once a type is instantiable
-      return livenessPredicate.isLive(type);
+      return nodeSet.contains(type);
     }
 
     JMethod method = map.methodForStatement(statement);
@@ -323,16 +323,16 @@ public class FragmentExtractor {
       /*
        * This statement either defines a method or installs it in a vtable.
        */
-      if (!livenessPredicate.isLive(method)) {
+      if (!nodeSet.contains(method)) {
         // The method is not live. Skip it.
         return false;
       }
       // The method is live. Check that its enclosing type is instantiable.
       // TODO(spoon): this check should not be needed once the CFA is updated
-      return !method.needsDynamicDispatch() || livenessPredicate.isLive(method.getEnclosingType());
+      return !method.needsDynamicDispatch() || nodeSet.contains(method.getEnclosingType());
     }
 
-    return livenessPredicate.miscellaneousStatementsAreLive();
+    return nodeSet.containsUnclassifiedItems();
   }
 
   /**
@@ -344,15 +344,15 @@ public class FragmentExtractor {
    * Whenever this method is updated, also look at
    * {@link #containsRemovableVars(JsStatement)}.
    */
-  private boolean isLive(JsVar var, LivenessPredicate livenessPredicate) {
+  private boolean isLive(JsVar var, NodeSet nodeSet) {
     JField field = map.nameToField(var.getName());
     if (field != null) {
       // It's a field
-      return livenessPredicate.isLive(field);
+      return nodeSet.contains(field);
     }
 
     // It's not an intern variable at all
-    return livenessPredicate.miscellaneousStatementsAreLive();
+    return nodeSet.containsUnclassifiedItems();
   }
 
   /**
@@ -361,12 +361,12 @@ public class FragmentExtractor {
    * <code>currentLivenessPredicate</code> but not by
    * <code>alreadyLoadedPredicate</code>.
    */
-  private JsStatement removeSomeVars(JsVars stat, LivenessPredicate currentLivenessPredicate,
-      LivenessPredicate alreadyLoadedPredicate) {
+  private JsStatement removeSomeVars(JsVars stat, NodeSet currentNodeSet,
+      NodeSet alreadyLoadedPredicate) {
     JsVars newVars = new JsVars(stat.getSourceInfo());
 
     for (JsVar var : stat) {
-      if (isLive(var, currentLivenessPredicate) && !isLive(var, alreadyLoadedPredicate)) {
+      if (isLive(var, currentNodeSet) && !isLive(var, alreadyLoadedPredicate)) {
         newVars.add(var);
       }
     }

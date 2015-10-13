@@ -45,6 +45,30 @@
       "revId": "0105564e443f113fade2211508d0992cb1a6b185",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df39c202_8fc3e11f",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-13T16:45:47Z",
+      "side": 1,
+      "message": "cannot remove. assertBuggySucceeds throws.",
+      "parentUuid": "df39c202_344ca8b1",
+      "range": {
+        "startLine": 974,
+        "startChar": 53,
+        "endLine": 974,
+        "endChar": 86
+      },
+      "revId": "0105564e443f113fade2211508d0992cb1a6b185",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

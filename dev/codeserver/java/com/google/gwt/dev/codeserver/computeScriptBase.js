@@ -43,7 +43,8 @@ function computeScriptBase() {
     }
     var candidate = tag.src;
     var lastMatch = candidate.lastIndexOf(expectedSuffix);
-    if (lastMatch == candidate.length - expectedSuffix.length) {
+    if (lastMatch != -1 &&
+        lastMatch == candidate.length - expectedSuffix.length) {
       // Assumes that either the URL is absolute, or it's relative
       // and the html file is hosted by this code server.
       return candidate.substring(0, lastMatch + 1);

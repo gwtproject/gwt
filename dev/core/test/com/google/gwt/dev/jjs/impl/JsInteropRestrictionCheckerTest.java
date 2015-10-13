@@ -109,7 +109,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Member 'test.EntryPoint$Buggy.display' can't be exported because the "
-        + "global name 'test.EntryPoint.Buggy.show' is already taken.");
+            + "global name 'test.EntryPoint.Buggy.show' is already taken.");
   }
 
   public void testJsPropertyGetterStyleSucceeds() throws Exception {
@@ -973,6 +973,15 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggySucceeds();
+  }
+
+  public void testNativeJsTypeEnumFails() {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetClassDecl(
+        "@JsType(prototype = \"x\") public enum Buggy { A, B }");
+
+    assertBuggyFails(
+        "Enum 'test.EntryPoint$Buggy' cannot be a Native JsType.");
   }
 
   public void testNativeJsTypeInterfaceCompileTimeConstantSucceeds()

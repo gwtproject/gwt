@@ -34,6 +34,23 @@
       "revId": "1f793d467d2e95df4c78d89c699c3e40017be097",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df39c202_ba00a181",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/computeScriptBase.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-13T21:03:09Z",
+      "side": 1,
+      "message": "Based on the way GWT\u0027s String.endsWith implemented, this could be written as:\n\n var candidate \u003d tag.src;\n int suffixlength \u003d expectedSuffix.length();\n if (candidate.subString(candidate.length() - suffixlength, suffixlength).equals(expectedSuffix))",
+      "revId": "1f793d467d2e95df4c78d89c699c3e40017be097",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

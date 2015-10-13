@@ -31,6 +31,7 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.dev.js.JsUtils;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
@@ -124,6 +125,8 @@ public class JsInteropRestrictionChecker {
   }
 
   private void checkField(JField x) {
+    checkMemberQualifiedJsName(x);
+
     if (x.isJsNative()) {
       checkNativeJsMember(x);
     }
@@ -144,6 +147,10 @@ public class JsInteropRestrictionChecker {
       return;
     }
     currentJsTypeProcessedMethods.addAll(x.getOverriddenMethods());
+
+    if (x.getJsPropertyAccessorType() != JsPropertyAccessorType.UNDEFINED) {
+      checkMemberQualifiedJsName(x);
+    }
 
     if (x.isJsNative()) {
       checkNativeJsMember(x);
@@ -206,6 +213,46 @@ public class JsInteropRestrictionChecker {
       logError("Native JsType member '%s' is not public or has @JsNoExport.",
           member.getQualifiedName());
       return;
+    }
+  }
+
+  private void checkTypeQualifiedJsName(JDeclaredType type) {
+    String qualifiedJsName = type.getQualifiedJsName();
+
+    if (qualifiedJsName != null) {
+      String[] components = qualifiedJsName.split(".");
+
+      for (String compnent : components) {
+        if (!JsUtils.isValidJsIdentifier(compnent)) {
+          logError("'%s' in namespace of '%s' is not a valid JavaScript identifier.",
+              qualifiedJsName, type.getName());
+        }
+      }
+    }
+  }
+
+  private void checkMemberQualifiedJsName(JMember member) {
+    String jsName = member.getJsName();
+    if (jsName == null || jsName.isEmpty()) {
+      return;
+    }
+
+    String jsNameSpace = member.getJsNamespace();
+
+    if (!JsUtils.isValidJsIdentifier(jsName)) {
+      logError("'%s' in '%s' is not a valid JavaScript identifier.",
+          jsName, member.getQualifiedName());
+    }
+
+    if (jsNameSpace != null && !jsNameSpace.isEmpty()) {
+      String[] components = jsNameSpace.split(".");
+
+      for (String component : components) {
+        if (!JsUtils.isValidJsIdentifier(component)) {
+          logError("'%s' in '%s' is not a valid JavaScript identifier.",
+              jsNameSpace, member.getQualifiedName());
+        }
+      }
     }
   }
 
@@ -374,6 +421,10 @@ public class JsInteropRestrictionChecker {
     currentJsTypeMethodNameBySetterNames = Maps.newHashMap();
     currentType = type;
     minimalRebuildCache.removeJsInteropNames(type.getName());
+
+    if (type.isJsType()) {
+      checkTypeQualifiedJsName(type);
+    }
 
     if (type.isJsNative()) {
       checkNativeJsType(type);

@@ -36,6 +36,8 @@ import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsThisRef;
 import com.google.gwt.dev.util.StringInterner;
 
+import java.util.regex.Pattern;
+
 /**
  * Utils for JS AST.
  */
@@ -212,6 +214,17 @@ public class JsUtils {
     return null;
   }
 
+  /**
+   * A JavaScript identifier contains only letters, numbers, _, $ and does not begin with a number.
+   * There are actually other valid identifiers, such as ones that contain escaped Unicode
+   * characters but we disallow those for the time being.
+   */
+  public static boolean isValidJsIdentifier(String name) {
+    return JAVASCRIPT_VALID_IDENTIFIER_PATTERN.matcher(name).matches();
+  }
+
+  private static final Pattern JAVASCRIPT_VALID_IDENTIFIER_PATTERN =
+      Pattern.compile("[a-zA-Z_$][\\w$]*");
   private static final String CALL_STRING = StringInterner.get().intern("call");
 
   private JsUtils() {

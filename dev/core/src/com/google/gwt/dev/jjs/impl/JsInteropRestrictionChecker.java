@@ -302,6 +302,16 @@ public class JsInteropRestrictionChecker {
     }
   }
 
+  private boolean checkStaticJsPropertyAccessor(JMember member) {
+    if (!member.isJsNative()) {
+      logError(member, "static JsProperty '%s' in type '%s' can only be native.",
+          JjsUtils.getReadableDescription(member),
+          JjsUtils.getReadableDescription(member.getEnclosingType()));
+      return false;
+    }
+    return true;
+  }
+
   private void checkJsOverlay(JMember member) {
     if (member.getEnclosingType().isJsoType()) {
       return;
@@ -412,12 +422,14 @@ public class JsInteropRestrictionChecker {
     if (member.getJsMemberType() == JsMemberType.UNDEFINED_ACCESSOR) {
       logError(member, "JsProperty %s should have a correct setter or getter signature.",
           getMemberDescription(member));
+      return false;
     }
 
     if (member.getJsMemberType() == JsMemberType.GETTER) {
       if (member.getType() != JPrimitiveType.BOOLEAN && member.getName().startsWith("is")) {
         logError(member, "JsProperty %s cannot have a non-boolean return.",
             getMemberDescription(member));
+        return false;
       }
     }
 
@@ -425,8 +437,14 @@ public class JsInteropRestrictionChecker {
       if (((JMethod) member).getParams().get(0).isVarargs()) {
         logError(member, "JsProperty %s cannot have a vararg parameter.",
             getMemberDescription(member));
+        return false;
       }
     }
+
+    if (member.isStatic() && member.getJsMemberType().isPropertyAccessor()) {
+      checkStaticJsPropertyAccessor(member);
+    }
+
     return true;
   }
 

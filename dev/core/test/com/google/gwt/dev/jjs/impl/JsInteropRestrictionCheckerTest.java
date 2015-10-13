@@ -143,13 +143,13 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("jsinterop.annotations.JsProperty");
     addSnippetClassDecl(
         "@JsType",
-        "public interface Buggy {",
-        "  @JsProperty static int getStaticX(){ return 0;}",
-        "  @JsProperty static void setStaticX(int x){}",
-        "  @JsProperty int getX();",
-        "  @JsProperty void setX(int x);",
-        "  @JsProperty boolean isY();",
-        "  @JsProperty void setY(boolean y);",
+        "public abstract static class Buggy {",
+        "  @JsProperty static native int getStaticX();",
+        "  @JsProperty static native void setStaticX(int x);",
+        "  @JsProperty abstract int getX();",
+        "  @JsProperty abstract void setX(int x);",
+        "  @JsProperty abstract boolean isY();",
+        "  @JsProperty abstract void setY(boolean y);",
         "}");
 
     assertBuggySucceeds();
@@ -286,14 +286,15 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
             + "cannot both use the same JavaScript name 'x'.");
   }
 
-  public void testCollidingPropertyAccessorExportsFails() throws Exception {
+  // TODO(rluble): enable when static property definitions are implemented.
+  public void _disabled__testCollidingPropertyAccessorExportsFails() throws Exception {
     addSnippetImport("jsinterop.annotations.JsProperty");
     addSnippetClassDecl(
         "public static class Buggy {",
         "  @JsProperty",
-        "  public static void setDisplay(int x) {}",
+        "  public static void setDisplay(int x);",
         "  @JsProperty(name = \"display\")",
-        "  public static void setDisplay2(int x) {}",
+        "  public static void setDisplay2(int x);",
         "}");
 
     assertBuggyFails(
@@ -318,7 +319,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
             + "by 'void EntryPoint.Buggy.show()'.");
   }
 
-  public void testCollidingMethodToPropertyAccessorExportsFails() throws Exception {
+  // TODO(rluble): enable when static property definitions are implemented.
+  public void _disabled__testCollidingMethodToPropertyAccessorExportsFails() throws Exception {
     addSnippetImport("jsinterop.annotations.JsMethod");
     addSnippetImport("jsinterop.annotations.JsProperty");
     addSnippetClassDecl(
@@ -822,6 +824,19 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Line 9: Cannot call property accessor 'int EntryPoint.Super.getX()' via super.");
+  }
+
+  public void testJsPropertyOnStaticMethodFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsProperty");
+    addSnippetClassDecl(
+        "@JsType public static class Buggy {",
+        "  @JsProperty public static int getX() { return 0; }",
+        "}");
+
+    assertBuggyFails(
+        "Line 6: static JsProperty 'int EntryPoint.Buggy.getX()' in type 'EntryPoint.Buggy'"
+            + " can only be native.");
   }
 
   public void testJsPropertyCallSucceeds() throws Exception {

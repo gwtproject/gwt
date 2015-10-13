@@ -123,59 +123,63 @@ public class JsInteropRestrictionChecker {
     return call.getTarget().equals(targetCtor);
   }
 
-  private void checkField(JField x) {
-    if (x.isJsNative()) {
-      checkNativeJsMember(x);
+  private void checkField(JField field) {
+    if (field.isJsNative()) {
+      checkNativeJsMember(field);
     }
 
-    if (!x.isJsProperty()) {
+    if (!field.isJsProperty()) {
       return;
     }
 
-    if (x.needsDynamicDispatch()) {
-      checkJsTypeFieldName(x, x.getJsName());
-    } else if (!x.isJsNative() && currentType == x.getEnclosingType()) {
-      checkExportName(x);
+    if (field.needsDynamicDispatch()) {
+      checkJsTypeFieldName(field, field.getJsName());
+    } else if (!field.isJsNative() && currentType == field.getEnclosingType()) {
+      checkExportName(field);
     }
   }
 
-  private void checkMethod(JMethod x) {
-    if (!currentJsTypeProcessedMethods.add(x)) {
+  private void checkMethod(JMethod method) {
+    if (!currentJsTypeProcessedMethods.add(method)) {
       return;
     }
-    currentJsTypeProcessedMethods.addAll(x.getOverriddenMethods());
+    currentJsTypeProcessedMethods.addAll(method.getOverriddenMethods());
 
-    if (x.isJsNative()) {
-      checkNativeJsMember(x);
+    if (method.isJsNative()) {
+      checkNativeJsMember(method);
     }
 
-    if (!x.isOrOverridesJsMethod()) {
+    if (!method.isOrOverridesJsMethod()) {
       return;
     }
 
-    if (x.needsDynamicDispatch()) {
-      checkJsTypeMethod(x);
-    } else if (!x.isJsNative() && currentType == x.getEnclosingType()) {
-      checkExportName(x);
+    if (method.needsDynamicDispatch()) {
+      checkJsTypeMethod(method);
+    } else if (!method.isJsNative() && currentType == method.getEnclosingType()) {
+      checkExportName(method);
     }
 
-    if (currentType == x.getEnclosingType() && x.isJsPropertyAccessor() && !currentType.isJsType()) {
-      if (currentType instanceof JInterfaceType) {
+    if (currentType == method.getEnclosingType() && method.isJsPropertyAccessor()) {
+      if (!currentType.isJsType() &&  currentType instanceof JInterfaceType) {
         logError("Method '%s' can't be a JsProperty since interface '%s' is not a JsType.",
-            x.getName(), x.getEnclosingType().getName());
-      } else {
+            method.getName(), method.getEnclosingType().getName());
+      } else  if (!currentType.isJsType()) {
         logError("Method '%s' can't be a JsProperty since '%s' "
-            + "is not an interface.", x.getName(), x.getEnclosingType().getName());
+            + "is not an interface.", method.getName(), method.getEnclosingType().getName());
+      } else if (method.isStatic()) {
+        logError("JsProperty '%s' in type '%s' is not an instance method.",
+            method.getName(), method.getEnclosingType().getName());
+        return;
       }
     }
   }
 
-  private void checkExportName(JMember x) {
-    boolean success = minimalRebuildCache.addExportedGlobalName(x.getQualifiedJsName(),
+  private void checkExportName(JMember member) {
+    boolean success = minimalRebuildCache.addExportedGlobalName(member.getQualifiedJsName(),
         currentType.getName());
     if (!success) {
       logError("Member '%s' can't be exported because the global name '%s' is already taken.",
-          x.getQualifiedName(), x.getQualifiedJsName());
+          member.getQualifiedName(), member.getQualifiedJsName());
     }
   }
 
@@ -250,6 +254,7 @@ public class JsInteropRestrictionChecker {
       }
       checkNameCollisionForGetterAndRegular(jsMemberName, typeName);
       checkInconsistentPropertyType(jsMemberName, typeName, method.getOriginalReturnType());
+
     } else if (accessorType == JsPropertyAccessorType.SETTER) {
       if (method.getParams().size() != 1 || method.getType() != JPrimitiveType.VOID) {
         logError("There needs to be single parameter and void return type for the JsProperty setter"

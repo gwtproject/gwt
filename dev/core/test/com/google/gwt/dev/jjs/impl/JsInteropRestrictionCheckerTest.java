@@ -654,6 +654,19 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
             + "(test/EntryPoint.java:9).");
   }
 
+  public void testJsPropertyOnStaticMethodFails()
+      throws UnableToCompleteException {
+    addSnippetImport("com.google.gwt.core.client.js.JsType");
+    addSnippetImport("com.google.gwt.core.client.js.JsProperty");
+    addSnippetClassDecl(
+        "@JsType public static class Buggy {",
+        "  @JsProperty public static int getX() { return 0; }",
+        "}");
+
+    assertBuggyFails(
+        "JsProperty 'getX' in type 'test.EntryPoint$Buggy' is not an instance method.");
+  }
+
   public void testJsPropertyCallSucceeds()
       throws UnableToCompleteException {
     addSnippetImport("com.google.gwt.core.client.js.JsType");
@@ -914,7 +927,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "'test.EntryPoint$Buggy' cannot be both a JsFunction implementation and a JsType at the "
-        + "same time.");
+            + "same time.");
   }
 
   public void testJsFunctionStaticInitializerFails() {

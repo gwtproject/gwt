@@ -94,7 +94,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "'test.EntryPoint$Parent.doIt(Ltest/EntryPoint$Foo;)V' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the name 'doIt' is already taken.");
+            + "'test.EntryPoint$Buggy' because the name 'doIt' is already taken.");
   }
 
   public void testCollidingFieldExportsFails() throws Exception {
@@ -734,6 +734,44 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "public static class Buggy extends Parent implements Foo {}");
 
     assertBuggySucceeds();
+  }
+
+  public void testJsNameInvalidNamesFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsProperty");
+    addSnippetClassDecl(
+        "@JsType(name = \"a.b.c\") public static class Buggy {",
+        "   @JsMethod(name = \"34s\") public void m() {}",
+        "   @JsProperty(name = \"s^\") public int  m;",
+        "   @JsProperty(name = \"\") public int n;",
+        "}");
+
+    assertBuggyFails(
+        "Cannot specify empty name in 'test.EntryPoint$Buggy.n'.",
+        "Invalid name '34s' in 'test.EntryPoint$Buggy.m()V'.",
+        "Invalid name 'a.b.c' in 'test.EntryPoint$Buggy'.",
+        "Invalid name 's^' in 'test.EntryPoint$Buggy.m'.");
+  }
+
+  public void testJsNameInvalidNamespacesFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsProperty");
+    addSnippetClassDecl(
+        "@JsType(namespace = \"a.b.\") public static class Buggy {",
+        "   @JsMethod(namespace = \"34s\") public static void m() {}",
+        "   @JsProperty(namespace = \"s^\") public static int  n;",
+        "   @JsProperty(namespace = \"\") public int p;",
+        "   @JsMethod(namespace = \"a\") public void q() {}",
+        "}");
+
+    assertBuggyFails(
+        "Invalid namespace 'a.b.' in 'test.EntryPoint$Buggy'.",
+        "Invalid namespace '34s' in 'test.EntryPoint$Buggy.m()V'.",
+        "Invalid namespace 's^' in 'test.EntryPoint$Buggy.n'.",
+        "Cannot specify namespace for instance member 'test.EntryPoint$Buggy.p'.",
+        "Cannot specify namespace for instance member 'test.EntryPoint$Buggy.q()V'.");
   }
 
   public void testSingleJsTypeSucceeds() throws Exception {

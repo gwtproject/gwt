@@ -606,6 +606,14 @@ public abstract class JDeclaredType extends JReferenceType implements CanHaveSup
     return null;
   }
 
+  public String getJsName() {
+    return jsName;
+  }
+
+  public String getJsNameSpace() {
+    return jsNamespace;
+  }
+
   public String getQualifiedJsName() {
     String simpleJsName = Strings.isNullOrEmpty(jsName) ? getSimpleName() : jsName;
     return jsNamespace.isEmpty() ? simpleJsName : jsNamespace + "." + simpleJsName;

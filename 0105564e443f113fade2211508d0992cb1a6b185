@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df39c202_54184cc0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-13T00:50:43Z",
+      "side": 1,
+      "message": "\"Native JsType constructor \u0027%s\u0027 cannot have non-empty method body.\"",
+      "range": {
+        "startLine": 418,
+        "startChar": 37,
+        "endLine": 418,
+        "endChar": 70
+      },
+      "revId": "0105564e443f113fade2211508d0992cb1a6b185",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df39c202_344ca8b1",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-13T00:50:43Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 974,
+        "startChar": 53,
+        "endLine": 974,
+        "endChar": 86
+      },
+      "revId": "0105564e443f113fade2211508d0992cb1a6b185",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

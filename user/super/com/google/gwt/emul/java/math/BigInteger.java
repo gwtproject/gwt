@@ -487,13 +487,14 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   BigInteger(int sign, long val) {
     // PRE: (val >= 0) && (sign >= -1) && (sign <= 1)
     this.sign = sign;
-    if ((val & 0xFFFFFFFF00000000L) == 0) {
+    int high = (int) (val >>> 32);
+    if (high == 0) {
       // It fits in one 'int'
       numberLength = 1;
       digits = new int[] {(int) val};
     } else {
       numberLength = 2;
-      digits = new int[] {(int) val, (int) (val >> 32)};
+      digits = new int[] {(int) val, high};
     }
   }
 
@@ -604,6 +605,16 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    */
   public int bitLength() {
     return BitLevel.bitLength(this);
+  }
+
+  public byte byteValueExact() {
+    if (numberLength <= 1 && bitLength() <= 31) {
+      int value = intValue();
+      if (Byte.MIN_VALUE <= value && value <= Byte.MAX_VALUE) {
+        return (byte) value;
+      }
+    }
+    throw new ArithmeticException("out of byte range");
   }
 
   /**
@@ -761,6 +772,10 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    */
   @Override
   public double doubleValue() {
+    if (sign == 0) {
+      return 0.;
+    }
+    // return Conversion.bigInteger2Double(this);
     return Double.parseDouble(this.toString());
   }
 
@@ -894,7 +909,19 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    */
   @Override
   public int intValue() {
-    return (sign * digits[0]);
+    int i = digits[0];
+    // TODO: optimize it or fix it for the case BigInteger.valueOf(Integer.MIN_VALUE).intValue()
+    if (sign < 0 && i == Integer.MIN_VALUE) {
+      return i;
+    }
+    return sign * i;
+  }
+
+  public int intValueExact() {
+    if (numberLength <= 1 && bitLength() <= 31) {
+      return intValue();
+    }
+    throw new ArithmeticException("out of int range");
   }
 
   /**
@@ -919,9 +946,16 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    */
   @Override
   public long longValue() {
-    long value = (numberLength > 1) ? (((long) digits[1]) << 32)
-        | (digits[0] & 0xFFFFFFFFL) : (digits[0] & 0xFFFFFFFFL);
+    long low = digits[0] & 0xFFFFFFFFL;
+    long value = (numberLength > 1) ? (((long) digits[1]) << 32) | low : low;
     return (sign * value);
+  }
+
+  public long longValueExact() {
+    if (numberLength <= 2 && bitLength() <= 63) {
+      return longValue();
+    }
+    throw new ArithmeticException("out of long range");
   }
 
   /**
@@ -966,11 +1000,6 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     BigInteger rem = remainder(m);
     return ((rem.sign < 0) ? rem.add(m) : rem);
   }
-
-  // @Override
-  // public double doubleValue() {
-  // return Conversion.bigInteger2Double(this);
-  // }
 
   /**
    * Returns a new {@code BigInteger} whose value is {@code 1/this mod m}. The
@@ -1241,11 +1270,17 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    * @return {@code this >> n} if {@code n >= 0}; {@code this << (-n)} otherwise
    */
   public BigInteger shiftRight(int n) {
-    if ((n == 0) || (sign == 0)) {
-      return this;
+    return shiftLeft(-n);
+  }
+
+  public short shortValueExact() {
+    if (numberLength <= 1 && bitLength() <= 31) {
+      int value = intValue();
+      if (Short.MIN_VALUE <= value && value <= Short.MAX_VALUE) {
+        return (short) value;
+      }
     }
-    return ((n > 0) ? BitLevel.shiftRight(this, n) : BitLevel.shiftLeft(this,
-        -n));
+    throw new ArithmeticException("out of short range");
   }
 
   /**

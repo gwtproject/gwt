@@ -113,7 +113,7 @@ public class SourceInfoCorrelator {
 
     @Override
     public void endVisit(JsniMethodBody x, Context ctx) {
-      jsVisitor.accept(x.getFunc());
+      jsVisitor.accept(x.getJsniFunction());
       super.endVisit(x, ctx);
     }
 

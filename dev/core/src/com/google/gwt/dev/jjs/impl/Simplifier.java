@@ -271,9 +271,9 @@ public class Simplifier {
       JMultiExpression condMulti = (JMultiExpression) condExpr;
       JBlock newBlock = new JBlock(info);
       for (JExpression expr : allButLast(condMulti.getExpressions())) {
-        newBlock.addStmt(expr.makeStatement());
+        newBlock.addStatement(expr.makeStatement());
       }
-      newBlock.addStmt(ifStatementImpl(null, info, last(condMulti.getExpressions()), thenStmt,
+      newBlock.addStatement(ifStatementImpl(null, info, last(condMulti.getExpressions()), thenStmt,
           elseStmt, currentMethod));
       // TODO(spoon): immediately simplify the resulting block
       return newBlock;
@@ -517,7 +517,7 @@ public class Simplifier {
     }
     if (!(stmt instanceof JBlock)) {
       JBlock block = new JBlock(stmt.getSourceInfo());
-      block.addStmt(stmt);
+      block.addStatement(stmt);
       stmt = block;
     }
     return stmt;

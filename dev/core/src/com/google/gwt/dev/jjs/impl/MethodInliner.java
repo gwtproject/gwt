@@ -19,6 +19,7 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
+import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JCastOperation;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -133,8 +134,7 @@ public class MethodInliner {
         return InlineResult.BLACKLIST;
       }
 
-      JMethodBody body = (JMethodBody) method.getBody();
-      List<JStatement> stmts = body.getStatements();
+      List<JStatement> stmts = method.getJavaBlock().getStatements();
 
       if (method.getEnclosingType() != null
          && method.getEnclosingType().getClinitMethod() == method && !stmts.isEmpty()) {
@@ -143,7 +143,8 @@ public class MethodInliner {
       }
 
       // try to inline
-      List<JExpression> expressions = extractExpressionsFromBody(body);
+      List<JExpression> expressions =
+          extractExpressionsFromBody(method.getJavaBlock(), method.getType());
       if (expressions == null) {
         // If it will never be possible to inline the method, add it to a
         // blacklist
@@ -210,7 +211,7 @@ public class MethodInliner {
       JMethod clinit = targetType.getClinitMethod();
 
       // If the clinit is a non-native, empty body we can optimize it out here
-      if (!clinit.isJsniMethod() && (((JMethodBody) clinit.getBody())).getStatements().size() == 0) {
+      if (!clinit.isJsniMethod() && clinit.getJavaBlock().getStatements().size() == 0) {
         return null;
       }
 
@@ -227,7 +228,7 @@ public class MethodInliner {
      * expression of the method. If the method is void, the output of the
      * multi-expression should be considered undefined.
      */
-    private List<JExpression> extractExpressionsFromBody(JMethodBody body) {
+    private List<JExpression> extractExpressionsFromBody(JBlock body, JType resultType) {
       List<JExpression> expressions = Lists.newArrayList();
       CloneCalleeExpressionVisitor cloner = new CloneCalleeExpressionVisitor();
 
@@ -257,7 +258,7 @@ public class MethodInliner {
           JExpression expr = returnStatement.getExpr();
           if (expr != null) {
             JExpression clone = cloner.cloneExpression(expr);
-            clone = maybeCast(clone, body.getMethod().getType());
+            clone = maybeCast(clone, resultType);
             expressions.add(clone);
           }
           // We hit an unconditional return; no need to evaluate anything else.
@@ -539,7 +540,8 @@ public class MethodInliner {
       JLocal originalLocal = x.getLocal();
       JLocal newLocal = newLocalsByOriginalLocal.get(originalLocal);
       if (newLocal == null) {
-        newLocal = JProgram.createLocal(originalLocal.getSourceInfo(), originalLocal.getName(), originalLocal.getType(), originalLocal.isFinal(), methodBody);
+        newLocal = JProgram.createLocal(originalLocal.getSourceInfo(), originalLocal.getName(),
+            originalLocal.getType(), originalLocal.isFinal(), methodBody);
         newLocalsByOriginalLocal.put(originalLocal, newLocal);
       }
 

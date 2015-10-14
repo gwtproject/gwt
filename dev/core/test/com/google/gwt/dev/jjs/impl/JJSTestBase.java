@@ -441,8 +441,7 @@ public abstract class JJSTestBase extends CheckerTestCase {
       throws UnableToCompleteException {
     JProgram program = compileSnippet("void", statement, false);
     JMethod mainMethod = findMainMethod(program);
-    JMethodBody body = (JMethodBody) mainMethod.getBody();
-    return body.getBlock();
+    return mainMethod.getJavaBlock();
   }
 
   /**

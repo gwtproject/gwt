@@ -271,8 +271,8 @@ public class DeadCodeElimination {
            */
           JBlock block = (JBlock) stmt;
           if (canPromoteBlock(block)) {
-            x.removeStmt(i);
-            x.addStmts(i, block.getStatements());
+            x.removeStatement(i);
+            x.addStatements(i, block.getStatements());
             i--;
             madeChanges();
             continue;
@@ -283,11 +283,11 @@ public class DeadCodeElimination {
           JExpressionStatement stmtExpr = (JExpressionStatement) stmt;
           if (stmtExpr.getExpr() instanceof JMultiExpression) {
             // Promote a multi's expressions to the current block
-            x.removeStmt(i);
+            x.removeStatement(i);
             int start = i;
             JMultiExpression multi = ((JMultiExpression) stmtExpr.getExpr());
             for (JExpression expr : multi.getExpressions()) {
-              x.addStmt(i++, expr.makeStatement());
+              x.addStatement(i++, expr.makeStatement());
             }
             i = start - 1;
             continue;
@@ -297,7 +297,7 @@ public class DeadCodeElimination {
         if (stmt.unconditionalControlBreak()) {
           // Abrupt change in flow, chop the remaining items from this block
           for (int j = i + 1; j < x.getStatements().size();) {
-            x.removeStmt(j);
+            x.removeStatement(j);
             madeChanges();
           }
         }
@@ -414,7 +414,7 @@ public class DeadCodeElimination {
         // If false, replace the for statement with its initializers
         if (!booleanLiteral.getValue()) {
           JBlock block = new JBlock(x.getSourceInfo());
-          block.addStmts(x.getInitializers());
+          block.addStatements(x.getInitializers());
           replaceMe(block, ctx);
         }
       }
@@ -1447,7 +1447,7 @@ public class DeadCodeElimination {
         JStatement statement = body.getStatements().get(i);
         boolean isBreak = isUnconditionalBreak(statement);
         if (isBreak && lastWasBreak) {
-          body.removeStmt(i--);
+          body.removeStatement(i--);
           madeChanges();
         }
         lastWasBreak = isBreak;
@@ -1456,7 +1456,7 @@ public class DeadCodeElimination {
       // Remove a trailing break statement from a case block
       if (body.getStatements().size() > 0
           && isUnconditionalUnlabeledBreak(last(body.getStatements()))) {
-        body.removeStmt(body.getStatements().size() - 1);
+        body.removeStatement(body.getStatements().size() - 1);
         madeChanges();
       }
     }
@@ -1489,7 +1489,7 @@ public class DeadCodeElimination {
 
       if (noOpCaseStatements.size() > 0) {
         for (JStatement statement : noOpCaseStatements) {
-          body.removeStmt(body.getStatements().indexOf(statement));
+          body.removeStatement(body.getStatements().indexOf(statement));
           madeChanges();
         }
       }
@@ -1937,15 +1937,15 @@ public class DeadCodeElimination {
               new JBinaryOperation(x.getSourceInfo(), program.getTypePrimitiveBoolean(),
                   JBinaryOperator.EQ, x.getExpr(), caseStatement.getExpr());
           JBlock block = new JBlock(x.getSourceInfo());
-          block.addStmt(statement);
+          block.addStatement(statement);
           JIfStatement ifStatement =
               new JIfStatement(x.getSourceInfo(), compareOperation, block, null);
           replaceMe(ifStatement, ctx);
         } else {
           // All we have is a default case; convert to a JBlock.
           JBlock block = new JBlock(x.getSourceInfo());
-          block.addStmt(x.getExpr().makeStatement());
-          block.addStmt(statement);
+          block.addStatement(x.getExpr().makeStatement());
+          block.addStatement(statement);
           replaceMe(block, ctx);
         }
       }

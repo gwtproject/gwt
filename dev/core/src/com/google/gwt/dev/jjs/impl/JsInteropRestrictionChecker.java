@@ -116,7 +116,7 @@ public class JsInteropRestrictionChecker {
   }
 
   private boolean isDelegatingToConstructor(JConstructor ctor, JConstructor targetCtor) {
-    List<JStatement> statements = ctor.getBody().getBlock().getStatements();
+    List<JStatement> statements = ctor.getJavaBlock().getStatements();
     JExpressionStatement statement = (JExpressionStatement) statements.get(0);
     JMethodCall call = (JMethodCall) statement.getExpr();
     assert call.isStaticDispatchOnly() : "Every ctor should either have this() or super() call";

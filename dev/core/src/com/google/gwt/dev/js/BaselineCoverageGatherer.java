@@ -121,7 +121,7 @@ public class BaselineCoverageGatherer {
           @Override public void endVisit(JsExpression x, JsContext ctx) {
             cover(x.getSourceInfo());
           }
-        }.accept(x.getFunc());
+        }.accept(x.getJsniFunction());
       }
 
       // don't instrument fields whose initializers are literals, because (1) CoverageVisitor

@@ -19,8 +19,8 @@ import com.google.gwt.dev.common.InliningMode;
 import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
-import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.impl.JjsUtils;
+import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
@@ -517,6 +517,14 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
     return body;
   }
 
+  public JBlock getJavaBlock() {
+    return body != null ? body.getJavaBlock() : null;
+  }
+
+  public JsFunction getJsniFunction() {
+    return body != null ? body.getJsniFunction() : null;
+  }
+
   @Override
   public JDeclaredType getEnclosingType() {
     return enclosingType;
@@ -627,7 +635,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
     if (body == null) {
       return false;
     } else {
-      return body.isJsniMethodBody();
+      return body.getJsniFunction() != null;
     }
   }
 
@@ -664,7 +672,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
   public void removeParam(int index) {
     params = Lists.remove(params, index);
     if (isJsniMethod()) {
-      ((JsniMethodBody) getBody()).getFunc().getParameters().remove(index);
+      getJsniFunction().getParameters().remove(index);
     }
   }
 

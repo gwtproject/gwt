@@ -19,6 +19,7 @@ import com.google.gwt.dev.jjs.Correlation.Literal;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JArrayType;
+import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
@@ -30,7 +31,6 @@ import com.google.gwt.dev.jjs.ast.JFieldRef;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNullLiteral;
@@ -306,13 +306,13 @@ public class ImplementClassLiteralsAsFields {
           newClassRefs.add(jsniClassLiteral);
         }
       };
-      replaceJsniClassLiteralVisitor.accept(jsniMethodBody.getFunc());
+      replaceJsniClassLiteralVisitor.accept(jsniMethodBody.getJsniFunction());
       if (!replaceJsniClassLiteralVisitor.didChange()) {
         // Nothing was changed, no need to replace JsniMethodBody.
         return;
       }
 
-      JsniMethodBody newBody = new JsniMethodBody(jsniMethodBody.getSourceInfo(), jsniMethodBody.getFunc(),
+      JsniMethodBody newBody = new JsniMethodBody(jsniMethodBody.getSourceInfo(), jsniMethodBody.getJsniFunction(),
           Lists.newArrayList(newClassRefs), jsniMethodBody.getJsniFieldRefs(),
           jsniMethodBody.getJsniMethodRefs(), jsniMethodBody.getUsedStrings());
 
@@ -332,7 +332,7 @@ public class ImplementClassLiteralsAsFields {
   }
 
   private final Map<JType, JField> classLiteralFields = Maps.newIdentityHashMap();
-  private final JMethodBody classLiteralHolderClinitBody;
+  private final JBlock classLiteralHolderClinitBodyBlock;
   private final JProgram program;
   private final JClassType typeClassLiteralHolder;
   private final boolean shouldOptimize;
@@ -340,7 +340,8 @@ public class ImplementClassLiteralsAsFields {
   private ImplementClassLiteralsAsFields(JProgram program, boolean shouldOptimize) {
     this.program = program;
     this.typeClassLiteralHolder = program.getTypeClassLiteralHolder();
-    this.classLiteralHolderClinitBody = (JMethodBody) typeClassLiteralHolder.getClinitMethod().getBody();
+    this.classLiteralHolderClinitBodyBlock =
+        typeClassLiteralHolder.getClinitMethod().getJavaBlock();
     this.shouldOptimize = shouldOptimize;
     assert program.getDeclaredTypes().contains(typeClassLiteralHolder);
   }
@@ -462,7 +463,7 @@ public class ImplementClassLiteralsAsFields {
       JFieldRef fieldRef = new JFieldRef(info, null, field, typeClassLiteralHolder);
       JDeclarationStatement decl =
           new JDeclarationStatement(info, fieldRef, classLiteralCreationExpression);
-      classLiteralHolderClinitBody.getBlock().addStmt(decl);
+      classLiteralHolderClinitBodyBlock.addStatement(decl);
       classLiteralFields.put(type, field);
     }
     return field;

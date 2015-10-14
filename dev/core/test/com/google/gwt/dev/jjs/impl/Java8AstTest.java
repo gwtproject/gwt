@@ -21,7 +21,6 @@ import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.util.arg.SourceLevel;
@@ -1203,7 +1202,7 @@ public class Java8AstTest extends FullCompileTestBase {
     JMethod defaultMethod = findMethod(intf, "method2");
     assertNotNull(defaultMethod);
     assertNotNull(defaultMethod.getBody());
-    assertEquals(1, ((JMethodBody) defaultMethod.getBody()).getBlock().getStatements().size());
+    assertEquals(1, defaultMethod.getJavaBlock().getStatements().size());
   }
 
   public void testDefaultInterfaceMethodSuperResolution() throws Exception {

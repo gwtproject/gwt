@@ -16,7 +16,7 @@
 package com.google.gwt.dev.jjs.impl.gflow.cfg;
 
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
+import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.impl.JJSTestBase;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
@@ -1687,8 +1687,8 @@ public class CfgBuilderTest extends JJSTestBase {
   private CfgBuilderResult assertCfg(String returnType, String ...codeSnippet)
       throws UnableToCompleteException {
     JProgram program = compileSnippet(returnType, Joiner.on("\n").join(codeSnippet), true);
-    JMethodBody body = (JMethodBody) findMainMethod(program).getBody();
-    Cfg cfgGraph = CfgBuilder.build(program, body.getBlock());
+    JBlock body = findMainMethod(program).getJavaBlock();
+    Cfg cfgGraph = CfgBuilder.build(program, body);
     return new CfgBuilderResult(cfgGraph);
   }
 

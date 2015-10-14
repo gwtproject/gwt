@@ -647,7 +647,7 @@ public class GwtAstBuilder {
       try {
         List<JStatement> statements = pop(x.statements);
         JStatement constructorCall = pop(x.constructorCall);
-        JBlock block = curMethod.body.getBlock();
+        JBlock block = curMethod.body.getJavaBlock();
         SourceInfo info = curMethod.method.getSourceInfo();
 
         /*
@@ -671,21 +671,21 @@ public class GwtAstBuilder {
             if (nestedBinding.enclosingInstances != null) {
               for (SyntheticArgumentBinding arg : nestedBinding.enclosingInstances) {
                 JBinaryOperation asg = assignSyntheticField(info, arg);
-                block.addStmt(asg.makeStatement());
+                block.addStatement(asg.makeStatement());
               }
             }
 
             if (nestedBinding.outerLocalVariables != null) {
               for (SyntheticArgumentBinding arg : nestedBinding.outerLocalVariables) {
                 JBinaryOperation asg = assignSyntheticField(info, arg);
-                block.addStmt(asg.makeStatement());
+                block.addStatement(asg.makeStatement());
               }
             }
           }
         }
 
         if (constructorCall != null) {
-          block.addStmt(constructorCall);
+          block.addStatement(constructorCall);
         }
 
         /*
@@ -695,11 +695,11 @@ public class GwtAstBuilder {
         if (!hasExplicitThis) {
           JMethod initMethod = curClass.type.getInitMethod();
           JMethodCall initCall = new JMethodCall(info, makeThisRef(info), initMethod);
-          block.addStmt(initCall.makeStatement());
+          block.addStatement(initCall.makeStatement());
         }
 
         // user code (finally!)
-        block.addStmts(statements);
+        block.addStatements(statements);
         popMethodInfo();
       } catch (Throwable e) {
         throw translateException(x, e);
@@ -840,7 +840,7 @@ public class GwtAstBuilder {
               new JDeclarationStatement(info, new JFieldRef(info, instance, field, curClass.type),
                   initialization);
           // will either be init or clinit
-          curMethod.body.getBlock().addStmt(decl);
+          curMethod.body.getJavaBlock().addStatement(decl);
         }
         popMethodInfo();
       } catch (Throwable e) {
@@ -944,7 +944,7 @@ public class GwtAstBuilder {
           // T elementVar = i$array[i$index];
           elementDecl.initializer =
               new JArrayRef(info, new JLocalRef(info, arrayVar), new JLocalRef(info, indexVar));
-          body.addStmt(0, elementDecl);
+          body.addStatement(0, elementDecl);
 
           result = new JForStatement(info, initializers, condition, increments, body);
         } else {
@@ -988,7 +988,7 @@ public class GwtAstBuilder {
             elementDecl.initializer = maybeCast(toType, elementDecl.initializer);
           }
 
-          body.addStmt(0, elementDecl);
+          body.addStatement(0, elementDecl);
 
           result = new JForStatement(info, initializers, condition,
               null, body);
@@ -1051,7 +1051,7 @@ public class GwtAstBuilder {
       try {
         JBlock block = pop(x.block);
         if (block != null) {
-          curMethod.body.getBlock().addStmt(block);
+          curMethod.body.getJavaBlock().addStatement(block);
         }
         popMethodInfo();
       } catch (Throwable e) {
@@ -1112,7 +1112,7 @@ public class GwtAstBuilder {
             dims.add(JAbsentArrayDimension.INSTANCE);
           }
           JNewArray newArray = JNewArray.createDims(synthMethod.getSourceInfo(), arrayType, dims);
-          body.getBlock().addStmt(newArray.makeReturnStatement());
+          body.getJavaBlock().addStatement(newArray.makeReturnStatement());
           synthMethod.setBody(body);
         }
         push(null); // no qualifier
@@ -1299,7 +1299,7 @@ public class GwtAstBuilder {
       }
 
       // we either add a return statement, or don't, depending on what the interface wants
-      samMethodBody.getBlock().addStmt(
+      samMethodBody.getJavaBlock().addStatement(
           JjsUtils.makeMethodEndStatement(samMethod.getType(), samCall));
 
       samMethod.setBody(samMethodBody);
@@ -1359,11 +1359,9 @@ public class GwtAstBuilder {
         node = simplify((JExpression) node, (Expression) x.body);
       }
 
-      JMethodBody body = (JMethodBody) curMethod.method.getBody();
       // and copy those nodes into the body of our synthetic method
       JStatement lambdaStatement = getOrCreateLambdaStatement(node);
-      body.getBlock().addStmt(lambdaStatement);
-      lambdaMethod.setBody(body);
+      lambdaMethod.getJavaBlock().addStatement(lambdaStatement);
       return lambdaMethod;
     }
 
@@ -1438,7 +1436,7 @@ public class GwtAstBuilder {
       JThisRef thisRef = new JThisRef(info, ctor.getEnclosingType());
       JFieldRef paramFieldRef = new JFieldRef(info, thisRef, paramField, ctor.getEnclosingType());
       JParameterRef paramRef = new JParameterRef(info, param);
-      ctorBody.getBlock().addStmt(
+      ctorBody.getJavaBlock().addStatement(
           new JBinaryOperation(info, paramFieldRef.getType(),
               JBinaryOperator.ASG,
               paramFieldRef, paramRef).makeStatement());
@@ -1565,7 +1563,7 @@ public class GwtAstBuilder {
           processNativeMethod(x);
         } else {
           List<JStatement> statements = pop(x.statements);
-          curMethod.body.getBlock().addStmts(statements);
+          curMethod.body.getJavaBlock().addStatements(statements);
         }
         popMethodInfo();
       } catch (Throwable e) {
@@ -1914,9 +1912,10 @@ public class GwtAstBuilder {
         if (samMethod.getType() != JPrimitiveType.VOID) {
           JExpression samExpression = boxOrUnboxExpression(samCall, x.binding.returnType,
               samBinding.returnType);
-          samMethodBody.getBlock().addStmt(simplify(samExpression, x).makeReturnStatement());
+          samMethodBody.getJavaBlock().addStatement(
+              simplify(samExpression, x).makeReturnStatement());
         } else {
-          samMethodBody.getBlock().addStmt(samCall.makeStatement());
+          samMethodBody.getJavaBlock().addStatement(samCall.makeStatement());
         }
         samMethod.setBody(samMethodBody);
         innerLambdaClass.addMethod(samMethod);
@@ -2068,7 +2067,7 @@ public class GwtAstBuilder {
       try {
         JBlock block = pop(x.block);
         JExpression expression = pop(x.expression);
-        block.addStmt(0, expression.makeStatement());
+        block.addStatement(0, expression.makeStatement());
         push(block);
       } catch (Throwable e) {
         throw translateException(x, e);
@@ -2178,13 +2177,13 @@ public class GwtAstBuilder {
 
         JLocal resourceVar = (JLocal) curMethod.locals.get(x.resources[i].binding);
         resourceVariables.add(0, resourceVar);
-        innerBlock.addStmt(0, resourceDecl);
+        innerBlock.addStatement(0, resourceDecl);
       }
 
       // add exception variable
       JLocal exceptionVar = createLocalThrowable(info, "$primary_ex");
 
-      innerBlock.addStmt(makeDeclaration(info, exceptionVar, JNullLiteral.INSTANCE));
+      innerBlock.addStatement(makeDeclaration(info, exceptionVar, JNullLiteral.INSTANCE));
 
       // create catch block
       List<JTryStatement.CatchClause> catchClauses = Lists.newArrayListWithCapacity(1);
@@ -2196,8 +2195,8 @@ public class GwtAstBuilder {
       JLocal catchVar = createLocalThrowable(info, "$caught_ex");
 
       JBlock catchBlock = new JBlock(info);
-      catchBlock.addStmt(createAssignment(info, javaLangThrowable, exceptionVar, catchVar));
-      catchBlock.addStmt(new JThrowStatement(info, new JLocalRef(info, exceptionVar)));
+      catchBlock.addStatement(createAssignment(info, javaLangThrowable, exceptionVar, catchVar));
+      catchBlock.addStatement(new JThrowStatement(info, new JLocalRef(info, exceptionVar)));
 
       catchClauses.add(new JTryStatement.CatchClause(clauseTypes, new JLocalRef(info, catchVar),
           catchBlock));
@@ -2205,19 +2204,19 @@ public class GwtAstBuilder {
       // create finally block
       JBlock finallyBlock = new JBlock(info);
       for (int i = x.resources.length - 1; i >= 0; i--) {
-        finallyBlock.addStmt(createCloseBlockFor(info,
+        finallyBlock.addStatement(createCloseBlockFor(info,
             resourceVariables.get(i), exceptionVar));
       }
 
       // if (exception != null) throw exception
       JExpression exceptionNotNull = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
           JBinaryOperator.NEQ, new JLocalRef(info, exceptionVar), JNullLiteral.INSTANCE);
-      finallyBlock.addStmt(new JIfStatement(info, exceptionNotNull,
+      finallyBlock.addStatement(new JIfStatement(info, exceptionNotNull,
           new JThrowStatement(info, new JLocalRef(info, exceptionVar)), null));
 
       // Stitch all together into a inner try block
-      innerBlock.addStmt(new JTryStatement(info, tryBlock, catchClauses,
-            finallyBlock));
+      innerBlock.addStatement(new JTryStatement(info, tryBlock, catchClauses,
+          finallyBlock));
       return innerBlock;
     }
 
@@ -2531,8 +2530,7 @@ public class GwtAstBuilder {
         JMethod myClinit = type.getClinitMethod();
         JMethod superClinit = type.getSuperClass().getClinitMethod();
         JMethodCall superClinitCall = new JMethodCall(myClinit.getSourceInfo(), null, superClinit);
-        JMethodBody body = (JMethodBody) myClinit.getBody();
-        body.getBlock().addStmt(0, superClinitCall.makeStatement());
+        myClinit.getJavaBlock().addStatement(0, superClinitCall.makeStatement());
       }
 
       // Implement getClass() implementation for all non-Object classes.
@@ -2617,7 +2615,7 @@ public class GwtAstBuilder {
       }
       JBlock block = new JBlock(info);
       if (stmt != null) {
-        block.addStmt(stmt);
+        block.addStatement(stmt);
       }
       return block;
     }
@@ -2625,7 +2623,7 @@ public class GwtAstBuilder {
     protected JBlock popBlock(SourceInfo info, Statement[] statements) {
       List<JStatement> stmts = pop(statements);
       JBlock block = new JBlock(info);
-      block.addStmts(stmts);
+      block.addStatements(stmts);
       return block;
     }
 
@@ -2795,11 +2793,10 @@ public class GwtAstBuilder {
         call.addArg(maybeCast(implParams.get(i).getType(), paramRef));
       }
 
-      JMethodBody body = (JMethodBody) bridgeMethod.getBody();
       if (bridgeMethod.getType() == JPrimitiveType.VOID) {
-        body.getBlock().addStmt(call.makeStatement());
+        bridgeMethod.getJavaBlock().addStatement(call.makeStatement());
       } else {
-        body.getBlock().addStmt(call.makeReturnStatement());
+        bridgeMethod.getJavaBlock().addStatement(call.makeReturnStatement());
       }
     }
 
@@ -3450,8 +3447,7 @@ public class GwtAstBuilder {
         JMethod clinit =
             createSyntheticMethod(info, "$clinit", mapClass, JPrimitiveType.VOID, false, true,
                 true, AccessModifier.PRIVATE);
-        JBlock clinitBlock = ((JMethodBody) clinit.getBody()).getBlock();
-        clinitBlock.addStmt(declStmt);
+        clinit.getJavaBlock().addStatement(declStmt);
       }
 
       /*
@@ -4158,7 +4154,7 @@ public class GwtAstBuilder {
     method.setSynthetic();
     JMethodBody body = new JMethodBody(info);
     for (JStatement statement : statements) {
-      body.getBlock().addStmt(statement);
+      body.getJavaBlock().addStatement(statement);
     }
     method.setBody(body);
     enclosingType.addMethod(method);

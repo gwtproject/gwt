@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.js.ast.JsFunction;
 
 /**
  * Represents a the body of a method. Can be Java or JSNI.
@@ -31,7 +32,9 @@ public abstract class JAbstractMethodBody extends JNode {
     return method;
   }
 
-  public abstract boolean isJsniMethodBody();
+  public abstract JBlock getJavaBlock();
+
+  public abstract JsFunction getJsniFunction();
 
   public void setMethod(JMethod method) {
     this.method = method;

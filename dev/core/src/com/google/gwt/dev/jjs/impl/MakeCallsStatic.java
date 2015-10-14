@@ -33,7 +33,6 @@ import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
-import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.impl.codesplitter.CodeSplitter;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
@@ -204,7 +203,7 @@ public class MakeCallsStatic {
         JParameter param = x.getParams().get(i);
         newCall.addArg(new JParameterRef(sourceInfo, param));
       }
-      newBody.getBlock().addStmt(JjsUtils.makeMethodEndStatement(returnType, newCall));
+      newBody.getJavaBlock().addStatement(JjsUtils.makeMethodEndStatement(returnType, newCall));
 
       /*
        * Rewrite the method body. Update all thisRefs to paramRefs. Update
@@ -214,7 +213,7 @@ public class MakeCallsStatic {
         // For natives, we also need to create the JsParameter for this$static,
         // because the jsFunc already has parameters.
         // TODO: Do we really need to do that in BuildTypeMap?
-        JsFunction jsFunc = ((JsniMethodBody) movedBody).getFunc();
+        JsFunction jsFunc = movedBody.getJsniFunction();
         JsName paramName = jsFunc.getScope().declareName("this$static");
         jsFunc.getParameters().add(0, new JsParameter(sourceInfo, paramName));
         RewriteJsniMethodBody rewriter = new RewriteJsniMethodBody(paramName);

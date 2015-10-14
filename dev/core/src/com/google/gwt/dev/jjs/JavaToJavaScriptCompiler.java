@@ -55,7 +55,6 @@ import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JTypeOracle.StandardTypes;
@@ -1369,7 +1368,7 @@ public final class JavaToJavaScriptCompiler {
         gwtType.findMethod("create(Ljava/lang/Class;)Ljava/lang/Object;", false);
 
     // Synthesize all onModuleLoad() calls.
-    JBlock initMethodBlock = ((JMethodBody) initMethod.getBody()).getBlock();
+    JBlock initMethodBlock = initMethod.getJavaBlock();
     SourceInfo origin = initMethodBlock.getSourceInfo().makeChild();
     for (String entryPointTypeName : entryPointTypeNames) {
       // Get type and onModuleLoad function for the current entryPointTypeName.
@@ -1389,7 +1388,7 @@ public final class JavaToJavaScriptCompiler {
         // Synthesize a static invocation FooEntryPoint.onModuleLoad(); call.
         JMethodCall staticOnModuleLoadCall =
             new JMethodCall(origin, null, specificOnModuleLoadMethod);
-        initMethodBlock.addStmt(staticOnModuleLoadCall.makeStatement());
+        initMethodBlock.addStatement(staticOnModuleLoadCall.makeStatement());
       } else {
         // Synthesize ((EntryPoint)GWT.create(FooEntryPoint.class)).onModuleLoad();
         JClassLiteral entryPointTypeClassLiteral =
@@ -1400,7 +1399,7 @@ public final class JavaToJavaScriptCompiler {
             new JCastOperation(origin, entryPointType, createInstanceCall);
         JMethodCall instanceOnModuleLoadCall =
             new JMethodCall(origin, castToEntryPoint, onModuleLoadMethod);
-        initMethodBlock.addStmt(instanceOnModuleLoadCall.makeStatement());
+        initMethodBlock.addStatement(instanceOnModuleLoadCall.makeStatement());
       }
     }
   }

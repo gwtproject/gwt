@@ -64,7 +64,7 @@ public class DataflowOptimizer {
 
     @Override
     public boolean visit(JMethodBody methodBody, Context ctx) {
-      Cfg cfg = CfgBuilder.build(program, methodBody.getBlock());
+      Cfg cfg = CfgBuilder.build(program, methodBody.getJavaBlock());
 
       JMethod method = methodBody.getMethod();
       JDeclaredType enclosingType = method.getEnclosingType();
@@ -88,7 +88,7 @@ public class DataflowOptimizer {
         madeChanges = AnalysisSolver.solveIntegrated(cfg, fwdAnalysis, true)
             || madeChanges;
 
-        cfg = CfgBuilder.build(program, methodBody.getBlock());
+        cfg = CfgBuilder.build(program, methodBody.getJavaBlock());
         Preconditions.checkNotNull(cfg);
 
         CombinedIntegratedAnalysis<CfgNode<?>, CfgEdge, CfgTransformer, Cfg>

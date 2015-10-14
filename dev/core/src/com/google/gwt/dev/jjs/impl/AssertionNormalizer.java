@@ -61,7 +61,7 @@ public class AssertionNormalizer {
     public void endVisit(JAssertStatement x, Context ctx) {
       JBlock then = new JBlock(x.getSourceInfo());
 
-      then.addStmt(new JDebuggerStatement(x.getSourceInfo()));
+      then.addStatement(new JDebuggerStatement(x.getSourceInfo()));
 
       String methodName = "Exceptions.makeAssertionError" + getAssertMethodSuffix(x.getArg());
       JMethod method = program.getIndexedMethod(methodName);
@@ -69,7 +69,7 @@ public class AssertionNormalizer {
       if (x.getArg() != null) {
         call.addArg(x.getArg());
       }
-      then.addStmt(new JThrowStatement(x.getSourceInfo(), call));
+      then.addStatement(new JThrowStatement(x.getSourceInfo(), call));
 
       JUnaryOperation notX =
           new JPrefixOperation(x.getSourceInfo(), JUnaryOperator.NOT, x.getTestExpr());

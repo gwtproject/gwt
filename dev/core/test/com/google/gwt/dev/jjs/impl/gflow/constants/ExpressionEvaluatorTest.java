@@ -19,7 +19,6 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JStatement;
@@ -94,7 +93,7 @@ public class ExpressionEvaluatorTest extends JJSTestBase {
     codeSnippet += "return " + expr + ";";
     JProgram program = compileSnippet(type, codeSnippet, true);
     JMethod mainMethod = findMainMethod(program);
-    JBlock block = ((JMethodBody) mainMethod.getBody()).getBlock();
+    JBlock block = mainMethod.getJavaBlock();
 
     List<JStatement> statements = block.getStatements();
     // TODO: not a pretty assumption detection.

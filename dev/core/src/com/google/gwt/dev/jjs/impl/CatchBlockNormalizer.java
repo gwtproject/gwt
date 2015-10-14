@@ -82,7 +82,7 @@ public class CatchBlockNormalizer {
         // $e = Exceptions.wrap($e)
         JMethodCall call = new JMethodCall(catchInfo, null, wrapMethod);
         call.addArg(new JLocalRef(catchInfo, exceptionVariable));
-        newCatchBlock.addStmt(JProgram.createAssignmentStmt(catchInfo, new JLocalRef(catchInfo,
+        newCatchBlock.addStatement(JProgram.createAssignmentStmt(catchInfo, new JLocalRef(catchInfo,
             exceptionVariable), call));
       }
 
@@ -118,12 +118,12 @@ public class CatchBlockNormalizer {
         }
         JDeclarationStatement declaration =
             new JDeclarationStatement(catchInfo, arg, new JLocalRef(catchInfo, exceptionVariable));
-        block.addStmt(0, declaration);
+        block.addStatement(0, declaration);
         // nest the previous as an else for me
         cur = new JIfStatement(catchInfo, ifTest, block, cur);
       }
 
-      newCatchBlock.addStmt(cur);
+      newCatchBlock.addStatement(cur);
 
       // Replace with a single catch block.
       x.getCatchClauses().clear();

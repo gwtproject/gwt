@@ -27,7 +27,6 @@ import com.google.gwt.dev.jjs.ast.JIntLiteral;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JLongLiteral;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
@@ -138,8 +137,8 @@ public abstract class CompoundAssignmentNormalizer {
     }
 
     @Override
-    protected String newTemporaryLocalName(SourceInfo info, JType type, JMethodBody methodBody) {
-      return CompoundAssignmentNormalizer.this.newTemporaryLocalName(info, type, methodBody);
+    protected String newTemporaryLocalName(SourceInfo info, JType type) {
+      return CompoundAssignmentNormalizer.this.newTemporaryLocalName(info, type);
     }
 
     @Override
@@ -292,7 +291,7 @@ public abstract class CompoundAssignmentNormalizer {
    *
    * <p> Subclasses might decide on different approaches to naming local temporaries.
    */
-  protected String newTemporaryLocalName(SourceInfo info, JType type, JMethodBody methodBody) {
+  protected String newTemporaryLocalName(SourceInfo info, JType type) {
     return TEMP_LOCAL_NAME;
   }
 

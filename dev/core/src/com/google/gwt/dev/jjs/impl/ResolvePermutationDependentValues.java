@@ -246,11 +246,11 @@ public class ResolvePermutationDependentValues {
 
       for (int permutationId : permutations) {
         // case 33:
-        switchBody.addStmt(new JCaseStatement(info, program.getLiteralInt(permutationId)));
+        switchBody.addStatement(new JCaseStatement(info, program.getLiteralInt(permutationId)));
       }
 
       // return new FooImpl();
-      switchBody.addStmt(expression.makeReturnStatement());
+      switchBody.addStatement(expression.makeReturnStatement());
     }
 
     assert switchBody.getStatements().size() > 0 : "No case statement emitted "
@@ -264,9 +264,8 @@ public class ResolvePermutationDependentValues {
     assert mostUsedExpression != null : "No most-used expression";
     JReturnStatement fallbackReturn = mostUsedExpression.makeReturnStatement();
 
-    JMethodBody body = (JMethodBody) toReturn.getBody();
-    body.getBlock().addStmt(sw);
-    body.getBlock().addStmt(fallbackReturn);
+    toReturn.getJavaBlock().addStatement(sw);
+    toReturn.getJavaBlock().addStatement(fallbackReturn);
 
     return toReturn;
   }

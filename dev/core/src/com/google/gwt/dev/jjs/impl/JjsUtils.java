@@ -202,8 +202,6 @@ public class JjsUtils {
       forwardingMethod.setDefaultMethod();
     }
 
-    // Create the forwarding body.
-    JMethodBody body = (JMethodBody) forwardingMethod.getBody();
     // Invoke methodToDelegate
     JMethodCall forwardingCall = new JMethodCall(methodToDelegateTo.getSourceInfo(),
         new JThisRef(methodToDelegateTo.getSourceInfo(), type),
@@ -215,7 +213,8 @@ public class JjsUtils {
     }
 
     // return statement if not void return type
-    body.getBlock().addStmt(makeMethodEndStatement(forwardingMethod.getType(), forwardingCall));
+    forwardingMethod.getJavaBlock().addStatement(
+        makeMethodEndStatement(forwardingMethod.getType(), forwardingCall));
     return forwardingMethod;
   }
 
@@ -300,10 +299,9 @@ public class JjsUtils {
   }
 
   public static void replaceMethodBody(JMethod method, JExpression returnValue) {
-    JMethodBody body = (JMethodBody) method.getBody();
-    JBlock block = body.getBlock();
+    JBlock block = method.getJavaBlock();
     block.clear();
-    block.addStmt(returnValue.makeReturnStatement());
+    block.addStatement(returnValue.makeReturnStatement());
   }
 
   /**
@@ -328,7 +326,7 @@ public class JjsUtils {
   public static boolean isClinitEmpty(JDeclaredType type) {
     JMethod clinit = type.getClinitMethod();
     List<JStatement> statements = FluentIterable
-        .from(((JMethodBody) clinit.getBody()).getStatements())
+        .from(clinit.getJavaBlock().getStatements())
         .filter(new Predicate<JStatement>() {
           @Override
           public boolean apply(JStatement statement) {

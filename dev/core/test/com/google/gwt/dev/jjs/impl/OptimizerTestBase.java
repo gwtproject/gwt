@@ -21,6 +21,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
+import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JExpressionStatement;
@@ -438,7 +439,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
     String snippet = Joiner.on(";\n").join(expressionSnippets) + ";\n";
     final JProgram program = compileSnippet(returnType, snippet, true);
     JMethod method = findMethod(program, MAIN_METHOD_NAME);
-    JMethodBody body = (JMethodBody) method.getBody();
+    JBlock body =  method.getJavaBlock();
     JMultiExpression multi = new JMultiExpression(body.getSourceInfo());
 
     // Transform statement sequence into a JMultiExpression
@@ -465,7 +466,7 @@ public abstract class OptimizerTestBase extends JJSTestBase {
 
     // Replace the method body
     JMethodBody newBody = new JMethodBody(method.getBody().getSourceInfo());
-    newBody.getBlock().addStmt(multiStm);
+    newBody.getJavaBlock().addStatement(multiStm);
     method.setBody(newBody);
     newBody.setMethod(method);
     if (addClinitCalls) {

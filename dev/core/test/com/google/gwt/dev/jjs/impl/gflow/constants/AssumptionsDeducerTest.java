@@ -20,7 +20,6 @@ import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JBooleanLiteral;
 import com.google.gwt.dev.jjs.ast.JIfStatement;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.impl.JJSTestBase;
@@ -106,7 +105,7 @@ public class AssumptionsDeducerTest extends JJSTestBase {
   private Result from(String decls, String expr, boolean b) throws UnableToCompleteException {
     JProgram program = compileSnippet("void", decls + "\n if(" + expr + ") return;", true);
     JMethod mainMethod = findMainMethod(program);
-    JBlock block = ((JMethodBody) mainMethod.getBody()).getBlock();
+    JBlock block = mainMethod.getJavaBlock();
     List<JStatement> statements = block.getStatements();
     JIfStatement ifStatement = (JIfStatement) statements.get(statements.size() - 1);
 

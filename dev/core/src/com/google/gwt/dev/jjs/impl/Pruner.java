@@ -378,7 +378,7 @@ public class Pruner {
     }
 
     @Override
-    protected String newTemporaryLocalName(SourceInfo info, JType type, JMethodBody methodBody) {
+    protected String newTemporaryLocalName(SourceInfo info, JType type) {
       // The name can be reused a later pass will make sure each instance of JLocal in a method
       // has a different name.
       return "lastArg";

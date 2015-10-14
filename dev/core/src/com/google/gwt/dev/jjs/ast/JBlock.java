@@ -34,29 +34,29 @@ public class JBlock extends JStatement {
   /**
    * Insert a statement into this block.
    */
-  public void addStmt(int index, JStatement toAdd) {
-    statements.add(index, toAdd);
+  public void addStatement(int index, JStatement statement) {
+    statements.add(index, statement);
   }
 
   /**
    * Add a statement to the end of this block.
    */
-  public void addStmt(JStatement toAdd) {
-    statements.add(toAdd);
+  public void addStatement(JStatement statement) {
+    statements.add(statement);
   }
 
   /**
    * Insert a statements into this block.
    */
-  public void addStmts(int index, List<JStatement> toAdd) {
-    statements.addAll(index, toAdd);
+  public void addStatements(int index, List<JStatement> statements) {
+    this.statements.addAll(index, statements);
   }
 
   /**
    * Add statements to the end of this block.
    */
-  public void addStmts(List<JStatement> toAdd) {
-    statements.addAll(toAdd);
+  public void addStatements(List<JStatement> statements) {
+    this.statements.addAll(statements);
   }
 
   public void clear() {
@@ -82,7 +82,7 @@ public class JBlock extends JStatement {
   /**
    * Removes the statement from this block at the specified index.
    */
-  public void removeStmt(int index) {
+  public void removeStatement(int index) {
     statements.remove(index);
   }
 

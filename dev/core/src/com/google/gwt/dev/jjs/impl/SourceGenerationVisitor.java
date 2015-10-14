@@ -21,7 +21,6 @@ import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.util.TextOutput;
 
@@ -77,12 +76,9 @@ public class SourceGenerationVisitor extends ToStringGenerationVisitor {
       newline();
     }
     for (JMethod method : x.getMethods()) {
-      if (JProgram.isClinit(method)) {
+      if (JProgram.isClinit(method) && method.getJavaBlock().getStatements().isEmpty()) {
         // Suppress empty clinit.
-        JMethodBody body = (JMethodBody) method.getBody();
-        if (body.getBlock().getStatements().isEmpty()) {
-          continue;
-        }
+        continue;
       }
       accept(method);
       newline();
@@ -118,12 +114,9 @@ public class SourceGenerationVisitor extends ToStringGenerationVisitor {
       newline();
     }
     for (JMethod method : x.getMethods()) {
-      if (JProgram.isClinit(method)) {
+      if (JProgram.isClinit(method) &&  method.getJavaBlock().getStatements().isEmpty()) {
         // Suppress empty clinit.
-        JMethodBody body = (JMethodBody) method.getBody();
-        if (body.getBlock().getStatements().isEmpty()) {
-          continue;
-        }
+        continue;
       }
       accept(method);
       newline();

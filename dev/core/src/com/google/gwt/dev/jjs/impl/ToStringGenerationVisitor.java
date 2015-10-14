@@ -614,7 +614,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   @Override
   public boolean visit(JMethodBody x, Context ctx) {
-    accept(x.getBlock());
+    accept(x.getJavaBlock());
     return false;
   }
 
@@ -811,7 +811,7 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
     print(" /*-");
     new JsSourceGenerationVisitor(this) {
       {
-        printJsBlock(x.getFunc().getBody(), false, false);
+        printJsBlock(x.getJsniFunction().getBody(), false, false);
       }
     };
     print("-*/");

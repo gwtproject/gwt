@@ -342,7 +342,7 @@ public class UnifyAst {
 
     @Override
     public void endVisit(JsniMethodBody x, Context ctx) {
-      JsNestingScope funcScope = (JsNestingScope) x.getFunc().getScope();
+      JsNestingScope funcScope = (JsNestingScope) x.getJsniFunction().getScope();
       assert funcScope.getParent() == JsRootScope.INSTANCE;
       funcScope.nestInto(jsProgram.getScope());
     }

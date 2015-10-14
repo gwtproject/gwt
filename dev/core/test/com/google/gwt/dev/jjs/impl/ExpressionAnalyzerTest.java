@@ -18,7 +18,6 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReturnStatement;
 
@@ -177,8 +176,8 @@ public class ExpressionAnalyzerTest extends JJSTestBase {
     JProgram program = compileSnippet(type, "return " + expression + ";", true);
     ExpressionAnalyzer ea = new ExpressionAnalyzer();
     JMethod mainMethod = findMainMethod(program);
-    JMethodBody body = (JMethodBody) mainMethod.getBody();
-    JReturnStatement returnStmt = (JReturnStatement) body.getStatements().get(0);
+    JReturnStatement returnStmt =
+        (JReturnStatement) mainMethod.getJavaBlock().getStatements().get(0);
     ea.accept(returnStmt.getExpr());
     return new Result(ea);
   }

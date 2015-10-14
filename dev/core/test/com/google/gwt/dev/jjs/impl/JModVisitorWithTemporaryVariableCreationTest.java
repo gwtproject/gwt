@@ -23,7 +23,6 @@ import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JExpressionStatement;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JType;
 
 /**
@@ -63,7 +62,7 @@ public class JModVisitorWithTemporaryVariableCreationTest extends JJSTestBase {
 
     private int nextIdToAssign;
     @Override
-    protected String newTemporaryLocalName(SourceInfo info, JType type, JMethodBody methodBody) {
+    protected String newTemporaryLocalName(SourceInfo info, JType type) {
       return "$t" + nextIdToAssign++;
     }
   }

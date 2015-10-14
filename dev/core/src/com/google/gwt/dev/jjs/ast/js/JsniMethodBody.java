@@ -18,6 +18,7 @@ package com.google.gwt.dev.jjs.ast.js;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JAbstractMethodBody;
+import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsFunction;
@@ -86,7 +87,8 @@ public class JsniMethodBody extends JAbstractMethodBody {
     return classRefs;
   }
 
-  public JsFunction getFunc() {
+  @Override
+  public JsFunction getJsniFunction() {
     assert (this.jsFunction != null);
     return jsFunction;
   }
@@ -98,6 +100,11 @@ public class JsniMethodBody extends JAbstractMethodBody {
     return jsniFieldRefs;
   }
 
+  @Override
+  public JBlock getJavaBlock() {
+    return null;
+  }
+
   /**
    * Return this method's references to Java methods.
    */
@@ -107,11 +114,6 @@ public class JsniMethodBody extends JAbstractMethodBody {
 
   public Set<String> getUsedStrings() {
     return stringLiterals;
-  }
-
-  @Override
-  public boolean isJsniMethodBody() {
-    return true;
   }
 
   public void setFunc(JsFunction jsFunction) {

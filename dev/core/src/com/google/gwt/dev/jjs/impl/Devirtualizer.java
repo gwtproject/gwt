@@ -525,7 +525,7 @@ public class Devirtualizer {
     // return dispatchConditional;
     JReturnStatement returnStatement = new JReturnStatement(sourceInfo, dispatchExpression);
 
-    ((JMethodBody) devirtualMethod.getBody()).getBlock().addStmt(returnStatement);
+    devirtualMethod.getJavaBlock().addStatement(returnStatement);
     methodByDevirtualMethod.put(method, devirtualMethod);
 
     return devirtualMethod;

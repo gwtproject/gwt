@@ -64,7 +64,7 @@ public abstract class JModVisitorWithTemporaryVariableCreation extends JChangeTr
   protected JLocal createTempLocal(SourceInfo info, JType type) {
     assert !getCurrentMethod().isJsniMethod();
     JMethodBody currentMethodBody = (JMethodBody) getCurrentMethod().getBody();
-    String temporaryLocalName = newTemporaryLocalName(info, type, currentMethodBody);
+    String temporaryLocalName = newTemporaryLocalName(info, type);
     JLocal local = JProgram.createLocal(info, temporaryLocalName, type, false, currentMethodBody);
     JDeclarationStatement declarationStatement =
         new JDeclarationStatement(info, new JLocalRef(info, local), null);
@@ -72,6 +72,5 @@ public abstract class JModVisitorWithTemporaryVariableCreation extends JChangeTr
     return local;
   }
 
-  protected abstract String newTemporaryLocalName(SourceInfo info, JType type,
-      JMethodBody methodBody);
+  protected abstract String newTemporaryLocalName(SourceInfo info, JType type);
 }

@@ -16,7 +16,7 @@
 package com.google.gwt.dev.jjs.impl.gflow;
 
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.dev.jjs.ast.JMethodBody;
+import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.impl.JJSTestBase;
 import com.google.gwt.dev.jjs.impl.gflow.cfg.AssumptionsPrinter;
@@ -44,8 +44,8 @@ public abstract class CfgAnalysisTestBase<A extends Assumption<A>>
       String... codeSnippet) throws UnableToCompleteException {
     JProgram program = compileSnippet(null, returnType, params, Joiner.on("\n").join(codeSnippet),
         true);
-    JMethodBody body = (JMethodBody) findMainMethod(program).getBody();
-    Cfg cfgGraph = CfgBuilder.build(program, body.getBlock());
+    JBlock body = findMainMethod(program).getJavaBlock();
+    Cfg cfgGraph = CfgBuilder.build(program, body);
 
     assertNotNull(cfgGraph);
 

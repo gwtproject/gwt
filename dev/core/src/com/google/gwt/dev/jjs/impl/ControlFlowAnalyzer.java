@@ -348,8 +348,7 @@ public class ControlFlowAnalyzer {
 
       if (x.isJsniMethod()) {
         // Manually rescue native parameter references
-        final JsniMethodBody body = (JsniMethodBody) x.getBody();
-        final JsFunction func = body.getFunc();
+        final JsFunction function = x.getJsniFunction();
 
         new JsVisitor() {
           @Override
@@ -359,13 +358,13 @@ public class ControlFlowAnalyzer {
             if (ident != null) {
               // If we're referencing a parameter, rescue the associated
               // JParameter
-              int index = func.getParameters().indexOf(ident.getStaticRef());
+              int index = function.getParameters().indexOf(ident.getStaticRef());
               if (index != -1) {
                 rescue(x.getParams().get(index));
               }
             }
           }
-        }.accept(func);
+        }.accept(function);
       }
 
       return true;

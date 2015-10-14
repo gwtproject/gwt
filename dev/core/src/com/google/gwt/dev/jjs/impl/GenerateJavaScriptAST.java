@@ -403,8 +403,7 @@ public class GenerateJavaScriptAST {
       JsFunction function;
       if (x.isJsniMethod()) {
         // set the global name of the JSNI peer
-        JsniMethodBody body = (JsniMethodBody) x.getBody();
-        function = body.getFunc();
+        function = x.getJsniFunction();
         function.setName(globalName);
       } else {
         /*
@@ -828,7 +827,7 @@ public class GenerateJavaScriptAST {
     @Override
     public JsNode transformMethodBody(JMethodBody methodBody) {
 
-      JsBlock body = transform(methodBody.getBlock());
+      JsBlock body = transform(methodBody.getJavaBlock());
 
       JsFunction function = jsFunctionsByJavaMethodBody.get(methodBody);
       function.setBody(body);
@@ -1503,7 +1502,7 @@ public class GenerateJavaScriptAST {
         jsniMap.put(ref.getIdent(), ref.getTarget());
       }
 
-      final JsFunction function = jsniMethodBody.getFunc();
+      final JsFunction function = jsniMethodBody.getJsniFunction();
 
       // replace all JSNI idents with a real JsName now that we know it
       new JsModVisitor() {
@@ -3009,9 +3008,8 @@ public class GenerateJavaScriptAST {
        * Must execute in clinit statement order, NOT field order, so that back
        * refs to super classes are preserved.
        */
-    JMethodBody clinitBody =
-        (JMethodBody) program.getTypeClassLiteralHolder().getClinitMethod().getBody();
-    for (JStatement stmt : clinitBody.getStatements()) {
+    JBlock clinitBodyBlock = program.getTypeClassLiteralHolder().getClinitMethod().getJavaBlock();
+    for (JStatement stmt : clinitBodyBlock.getStatements()) {
       if (!(stmt instanceof JDeclarationStatement)) {
         continue;
       }

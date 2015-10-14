@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.util.collect.Lists;
 
 import java.util.Collections;
@@ -42,8 +43,14 @@ public class JMethodBody extends JAbstractMethodBody {
     locals = Lists.add(locals, local);
   }
 
-  public JBlock getBlock() {
+  @Override
+  public JBlock getJavaBlock() {
     return block;
+  }
+
+  @Override
+  public JsFunction getJsniFunction() {
+    return null;
   }
 
   /**
@@ -55,11 +62,6 @@ public class JMethodBody extends JAbstractMethodBody {
 
   public List<JStatement> getStatements() {
     return block.getStatements();
-  }
-
-  @Override
-  public boolean isJsniMethodBody() {
-    return false;
   }
 
   /**

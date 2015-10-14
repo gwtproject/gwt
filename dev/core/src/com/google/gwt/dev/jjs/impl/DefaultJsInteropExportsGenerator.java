@@ -51,7 +51,7 @@ class DefaultJsInteropExportsGenerator implements JsInteropExportsGenerator {
       Map<String, JsFunction> indexedFunctions) {
     this.exportStmts = exportStmts;
     this.globalTemp = globalTemp;
-    this.provideFunc = indexedFunctions.get("JavaClassHierarchySetupUtil.provide").getName();
+    this.provideFunc = indexedFunctions.get("Runtime.provide").getName();
   }
 
   @Override

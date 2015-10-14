@@ -185,7 +185,7 @@ public class FragmentExtractorTest extends JJSTestBase {
       final JConstructor barConstructor =
           new JConstructor(nullSourceInfo, barType, AccessModifier.PUBLIC);
       Map<String, JsFunction> functionsByName = new HashMap<String, JsFunction>();
-      functionsByName.put("JavaClassHierarchySetupUtil.defineClass",
+      functionsByName.put("Runtime.defineClass",
           new JsFunction(nullSourceInfo, new JsRootScope(), DEFINE_CLASS_FUNCTION_NAME));
 
       final JsExprStmt defineClassStatement = createDefineClassStatement(barConstructorName);

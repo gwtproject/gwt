@@ -409,7 +409,7 @@ public class FragmentExtractor {
       }
       JsNameRef func = (JsNameRef) call.getQualifier();
       JsFunction defineClassJsFunc =
-          jsprogram.getIndexedFunction("JavaClassHierarchySetupUtil.defineClass");
+          jsprogram.getIndexedFunction("Runtime.defineClass");
       if (func.getName() != defineClassJsFunc.getName()) {
         return null;
       }

@@ -24,7 +24,7 @@ final class CollapsedPropertyHolder {
   /**
    * This variable is initialized by the compiler in gwtOnLoad.
    */
-  public static volatile int permutationId = -1;
+  public static volatile int permutationId = 0xFFFFFFFF;
 
   public static int getPermutationId() {
     assert permutationId != -1 : "The bootstrap linker did not provide a "

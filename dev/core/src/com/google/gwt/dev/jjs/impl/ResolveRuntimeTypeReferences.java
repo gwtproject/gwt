@@ -166,7 +166,7 @@ public class ResolveRuntimeTypeReferences {
 
     @Override
     public JMethodCall get(JType type) {
-      JMethod getUniqueId = program.getIndexedMethod("JavaClassHierarchySetupUtil.uniqueId");
+      JMethod getUniqueId = program.getIndexedMethod("Runtime.uniqueId");
      return new JMethodCall(type.getSourceInfo(), null,
           getUniqueId, program.getStringLiteral(type.getSourceInfo(), type.getName()));
     }

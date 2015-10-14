@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df39c202_1baa6c44",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/CollapsedPropertyHolder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-14T23:41:14Z",
+      "side": 1,
+      "message": "For some reason -1 is a the prefix operation - applied to 1. Added an explicit assertion that disallows non literal initializers in immortal types.",
+      "range": {
+        "startLine": 27,
+        "startChar": 45,
+        "endLine": 27,
+        "endChar": 55
+      },
+      "revId": "c4f576e32aa286ead8f83d0c329da279495aadb4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

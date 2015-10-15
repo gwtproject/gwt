@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19d29ae7_727a3844",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-15T23:57:25Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "c0be66952fba1c678a209f0dc51c0b2dc26b4a2c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19d29ae7_127f2c33",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-15T23:57:25Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "c0be66952fba1c678a209f0dc51c0b2dc26b4a2c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -17,6 +17,7 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
@@ -30,6 +31,7 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyAccessorType;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
+import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JStatement;
@@ -75,6 +77,7 @@ public class JsInteropRestrictionChecker {
   private final JProgram jprogram;
   private final TreeLogger logger;
   private final MinimalRebuildCache minimalRebuildCache;
+  private Set<JType> typesExposedByExportedMethods = Sets.newHashSet();
 
   private JsInteropRestrictionChecker(TreeLogger logger, JProgram jprogram,
       MinimalRebuildCache minimalRebuildCache) {
@@ -263,6 +266,8 @@ public class JsInteropRestrictionChecker {
             + "is not an interface.", x.getName(), x.getEnclosingType().getName());
       }
     }
+
+    typesExposedByExportedMethods.add(x.isConstructor() ? x.getEnclosingType() : x.getType());
   }
 
   private void checkExportName(JMember x) {
@@ -470,6 +475,7 @@ public class JsInteropRestrictionChecker {
       checkType(type);
     }
     checkNoStaticJsPropertyCalls();
+    checkJsOpaque();
   }
 
   private void checkType(JDeclaredType type) {
@@ -501,6 +507,39 @@ public class JsInteropRestrictionChecker {
         checkMethod(method);
       }
     }
+  }
+
+  private void checkJsOpaque() {
+    new JVisitor() {
+      @Override
+      public void endVisit(JMethod x, Context ctx) {
+        if (!x.canBeCalledExternally() || x.isJsOpaque()) {
+          return;
+        }
+        for (JParameter parameter : x.getParams()) {
+          JType type = parameter.getType();
+          if (!isExposedToJS(type) && !parameter.isJsOpaque()) {
+            logWarning(
+                "Type of parameter '%s' in method '%s', '%s', is not exposed to JavaScript, add "
+                + "@SuppressWarnings(\"JsOpaque\") if this is intended.",
+                parameter.getName(), x.getName(), type.getName());
+          }
+        }
+      }
+    }.accept(jprogram);
+  }
+
+  private boolean isExposedToJS(JType type) {
+    if (type instanceof JArrayType) {
+      return isExposedToJS(((JArrayType) type).getLeafType());
+    }
+    return typesExposedByExportedMethods.contains(type)
+        || type.isJsType()
+        || type.isJsoType()
+        || type.isJsFunction()
+        || (type instanceof JPrimitiveType && type != JPrimitiveType.LONG)
+        || jprogram.isRepresentedAsNativeJsPrimitive(type)
+        || type == jprogram.getTypeJavaLangObject();
   }
 
   private void logError(String format, JType type) {

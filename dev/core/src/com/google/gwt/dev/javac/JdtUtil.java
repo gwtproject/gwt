@@ -278,6 +278,28 @@ public final class JdtUtil {
     return null;
   }
 
+  public static StringConstant[] getAnnotationParameterStringConstantArray(
+      AnnotationBinding annotationBinding, String paramName) {
+    if (annotationBinding == null) {
+      return null;
+    }
+    for (ElementValuePair maybeValue : annotationBinding.getElementValuePairs()) {
+      if (!paramName.equals(String.valueOf(maybeValue.getName()))) {
+        continue;
+      }
+      Object value = maybeValue.getValue();
+      if (value instanceof Object[]) {
+        Object[] values = (Object[]) value;
+        StringConstant[] stringConstants = new StringConstant[values.length];
+        System.arraycopy(values, 0, stringConstants, 0, values.length);
+        return stringConstants;
+      }
+      assert value instanceof StringConstant;
+      return new StringConstant[] {(StringConstant) value};
+    }
+    return null;
+  }
+
   /**
    * Work around JDT bug.
    */

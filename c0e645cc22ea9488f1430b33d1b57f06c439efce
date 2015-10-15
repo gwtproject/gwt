@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f9bdc694_1ef2d950",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-15T22:06:56Z",
+      "side": 1,
+      "message": "Yes. There is a get indexed type down at line 1246 (accounting for the bootstrap() call in as a statement for the Runtime class)",
+      "parentUuid": "df39c202_5617a95f",
+      "range": {
+        "startLine": 525,
+        "startChar": 42,
+        "endLine": 525,
+        "endChar": 49
+      },
+      "revId": "c0e645cc22ea9488f1430b33d1b57f06c439efce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df39c202_f6251dbf",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeReferences.java",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2015-10-15T01:40:02Z",
       "side": 1,
       "message": "Should we make this a constant and stash it with the rest of them and maybe move them to a RuntimeHelper or RuntimeConstants class?",
+      "revId": "c0e645cc22ea9488f1430b33d1b57f06c439efce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9bdc694_5e237178",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ResolveRuntimeTypeReferences.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-15T22:06:56Z",
+      "side": 1,
+      "message": "Yes. I thought of making an enum with all used methods, that way it is centralized and less error prone. \n\nMoved to RuntimeConstants.",
+      "parentUuid": "df39c202_f6251dbf",
       "revId": "c0e645cc22ea9488f1430b33d1b57f06c439efce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "f9bdc694_d230b5cc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-15T22:06:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df39c202_d62299b4",
+      "range": {
+        "startLine": 412,
+        "startChar": 32,
+        "endLine": 412,
+        "endChar": 33
+      },
+      "revId": "c0e645cc22ea9488f1430b33d1b57f06c439efce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df39c202_161d217a",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/CollapsedPropertyHolder.java",
         "patchSetId": 2
@@ -76,6 +142,24 @@
       "writtenOn": "2015-10-15T01:40:02Z",
       "side": 1,
       "message": "any reason why you define this in hex instead of as -1?",
+      "revId": "c0e645cc22ea9488f1430b33d1b57f06c439efce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9bdc694_92d6bdb0",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/CollapsedPropertyHolder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-15T22:06:56Z",
+      "side": 1,
+      "message": "(commented on the 1st patch). For some reason -1 is represented in the unoptimized AST as a PrefixOperation(-) on 1. I added an assertion that disallows non literal initializers in immortal types.",
+      "parentUuid": "df39c202_161d217a",
       "revId": "c0e645cc22ea9488f1430b33d1b57f06c439efce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "f9bdc694_52e04580",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Runtime.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-15T22:06:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7992b615_ddb46b0c",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 0
+      },
+      "revId": "c0e645cc22ea9488f1430b33d1b57f06c439efce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df39c202_56be89a1",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractorTest.java",
         "patchSetId": 2
@@ -116,6 +224,24 @@
       "writtenOn": "2015-10-15T01:40:02Z",
       "side": 1,
       "message": "Move as constant to helper?",
+      "revId": "c0e645cc22ea9488f1430b33d1b57f06c439efce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9bdc694_f2e4d995",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/codesplitter/FragmentExtractorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-15T22:06:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df39c202_56be89a1",
       "revId": "c0e645cc22ea9488f1430b33d1b57f06c439efce",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

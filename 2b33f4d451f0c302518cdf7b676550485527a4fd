@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19d29ae7_92331cd8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-15T21:50:08Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "2b33f4d451f0c302518cdf7b676550485527a4fd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

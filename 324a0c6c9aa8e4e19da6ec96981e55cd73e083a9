@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f9bdc694_d21d1531",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-15T21:36:58Z",
+      "side": 1,
+      "message": "These are synthetic overrides due to accidental overriding (not due to generics); unifyAST adds these so that the concept of accidental override is no longer present. There is no cast, there is only a dispatch to super. So it is OK to remove these as they are really noops.\n\nSo in your example the override method is not a synthetic override. I should rename to syntheticAccidentalOverride to make it clearer.",
+      "parentUuid": "f9bdc694_52f84577",
+      "range": {
+        "startLine": 327,
+        "startChar": 71,
+        "endLine": 327,
+        "endChar": 72
+      },
+      "revId": "324a0c6c9aa8e4e19da6ec96981e55cd73e083a9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f266a9b_e60e9eb7",
         "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
         "patchSetId": 4

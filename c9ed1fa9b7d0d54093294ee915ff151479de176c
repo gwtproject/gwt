@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b90b4ea8_078af65a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-10-16T19:06:44Z",
+      "side": 0,
+      "message": "since export collection and emitting occur in the same function now, there\u0027s no longer a need to hold onto the collect information in this hashtable",
+      "revId": "c9ed1fa9b7d0d54093294ee915ff151479de176c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b90b4ea8_e775a2fa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-10-16T19:06:44Z",
+      "side": 0,
+      "message": "the old behavior was to collect imports here in Type traversal but only after passing guards against reference only types and native types.\n\nthe result was that in an incremental recompile there would only be information collected in the set of newly modified types.\n\ni\u0027ve moved the collecting over into the generateExports() function and it now traverses even reference only types, so that it can have a complete export collection even in an incremental recompile.\n\nthe result is that now the exports generated in the epilogue are accurate all the time",
+      "revId": "c9ed1fa9b7d0d54093294ee915ff151479de176c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b90b4ea8_8774a6fb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsTypeLinker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-10-16T19:06:44Z",
+      "side": 0,
+      "message": "since the generated epilogue is now always accurate it makes sense to always grab and reuse the newest epilogue, so that when users add/remove JsInterop annotations the export information in the relinked result will be up to date",
+      "revId": "c9ed1fa9b7d0d54093294ee915ff151479de176c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

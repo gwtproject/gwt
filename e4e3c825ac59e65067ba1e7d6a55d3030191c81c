@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b90b4ea8_676ad21b",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-10-16T19:06:44Z",
+      "side": 1,
+      "message": "I added a bunch of tests that show that given an incremental recompile after a JsInterop related change, the generated output matches what is generated from scratch (using the incremental path but compiling everything with no cache) given the same JsInterop change.\n\nas long as we have proof that from scratch compiles of JsInterop stuff are accurate then these tests prove that incremental recompiles stay accurate.\n\nit looks like we do\u0027nt have the JsInterop suite turned on in incremental mode, i\u0027ll turn that on in followup CL",
+      "revId": "e4e3c825ac59e65067ba1e7d6a55d3030191c81c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

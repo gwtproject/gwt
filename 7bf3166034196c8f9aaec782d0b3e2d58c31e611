@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b90b4ea8_509f82d2",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-17T18:41:03Z",
+      "side": 1,
+      "message": "I don\u0027t love this rename, I this the exported makes it clear that it is interop related. maybe interopGlobalNames?",
+      "range": {
+        "startLine": 772,
+        "startChar": 30,
+        "endLine": 772,
+        "endChar": 41
+      },
+      "revId": "7bf3166034196c8f9aaec782d0b3e2d58c31e611",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b90b4ea8_309c0edc",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-17T18:41:03Z",
+      "side": 1,
+      "message": "Why not keep this name in JsInteropUtil?",
+      "range": {
+        "startLine": 218,
+        "startChar": 42,
+        "endLine": 218,
+        "endChar": 75
+      },
+      "revId": "7bf3166034196c8f9aaec782d0b3e2d58c31e611",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b90b4ea8_10990aec",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/testing/impl/JavaResourceBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-17T18:41:03Z",
+      "side": 1,
+      "message": "You should probably add JsMethod and JsIgnore here.",
+      "range": {
+        "startLine": 411,
+        "startChar": 46,
+        "endLine": 411,
+        "endChar": 82
+      },
+      "revId": "7bf3166034196c8f9aaec782d0b3e2d58c31e611",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b90b4ea8_f018b618",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-17T18:41:03Z",
+      "side": 1,
+      "message": "Is this restriction necessary with the new annotations?",
+      "range": {
+        "startLine": 204,
+        "startChar": 1,
+        "endLine": 207,
+        "endChar": 5
+      },
+      "revId": "7bf3166034196c8f9aaec782d0b3e2d58c31e611",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

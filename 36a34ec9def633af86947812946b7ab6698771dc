@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b90b4ea8_b07ebe33",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-17T18:00:02Z",
+      "side": 1,
+      "message": "@Goktug, we should probably forbid this in JsInterpoRestrictionChecker, shouldn\u0027t we?",
+      "range": {
+        "startLine": 1454,
+        "startChar": 31,
+        "endLine": 1454,
+        "endChar": 72
+      },
+      "revId": "36a34ec9def633af86947812946b7ab6698771dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -15,9 +15,10 @@
  */
 package com.google.gwt.core.client.interop;
 
-import com.google.gwt.core.client.js.JsProperty;
-import com.google.gwt.core.client.js.JsType;
 import com.google.gwt.junit.client.GWTTestCase;
+
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Tests JsType with array functionality.
@@ -31,7 +32,7 @@ public class JsTypeArrayTest extends GWTTestCase {
 
   /* MAKE SURE EACH TYPE IS ONLY USED ONCE PER TEST CASE */
 
-  @JsType
+  @JsType(isNative = true)
   interface SimpleJsTypeReturnFromNative { }
 
   public void testJsTypeArray_returnFromNative() {
@@ -44,7 +45,7 @@ public class JsTypeArrayTest extends GWTTestCase {
     return [{}, {}];
   }-*/;
 
-  @JsType
+  @JsType(isNative = true)
   interface SimpleJsTypeReturnFromNativeWithACall {
     @JsProperty int getId();
   }
@@ -58,7 +59,7 @@ public class JsTypeArrayTest extends GWTTestCase {
     return [{id:1}, {id:2}];
   }-*/;
 
-  @JsType
+  @JsType(isNative = true)
   interface SimpleJsTypeAsAField { }
 
   @JsType
@@ -79,7 +80,7 @@ public class JsTypeArrayTest extends GWTTestCase {
     holder.arrayField = [{}, {}];
   }-*/;
 
-  @JsType
+  @JsType(isNative = true)
   interface SimpleJsTypeAsAParam { }
 
   @JsType
@@ -103,7 +104,7 @@ public class JsTypeArrayTest extends GWTTestCase {
     holder.setArrayParam([{}, {}]);
   }-*/;
 
-  @JsType
+  @JsType(isNative = true)
   interface SimpleJsTypeReturnForMultiDimArray {
     @JsProperty int getId();
   }

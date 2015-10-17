@@ -185,9 +185,11 @@ public class JsFunctionTest extends GWTTestCase {
     assertNotNull(c3);
     MyJsFunctionIdentityInterface c4 = (MyJsFunctionIdentityInterface) object;
     assertNotNull(c4);
+    ElementLikeJsInterface c5 = (ElementLikeJsInterface) object;
+    assertNotNull(c5);
     try {
-      ElementLikeJsInterface c5 = (ElementLikeJsInterface) object;
-      assertNotNull(c5);
+      HTMLElement c6 = (HTMLElement) object;
+      assertNotNull(c6);
       fail("ClassCastException should be caught.");
     } catch (ClassCastException cce) {
       // Expected.
@@ -224,7 +226,8 @@ public class JsFunctionTest extends GWTTestCase {
     assertTrue(object instanceof MyJsFunctionInterfaceImpl);
     assertTrue(object instanceof MyJsFunctionIdentityInterface);
     assertTrue(object instanceof MyJsFunctionWithOnlyInstanceofReference);
-    assertFalse(object instanceof ElementLikeJsInterface);
+    assertTrue(object instanceof ElementLikeJsInterface);
+    assertFalse(object instanceof HTMLElement);
   }
 
   // uncomment when Java8 is supported.

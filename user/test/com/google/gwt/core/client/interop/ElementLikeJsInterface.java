@@ -16,13 +16,13 @@
 package com.google.gwt.core.client.interop;
 
 
-import com.google.gwt.core.client.js.JsProperty;
-import com.google.gwt.core.client.js.JsType;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * An interface that represent part of HTML element's contract.
  */
-@JsType
+@JsType(isNative = true)
 public interface ElementLikeJsInterface {
   @JsProperty
   String getTagName();

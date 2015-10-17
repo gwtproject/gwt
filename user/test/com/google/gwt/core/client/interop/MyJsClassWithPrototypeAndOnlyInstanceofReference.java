@@ -15,11 +15,12 @@
  */
 package com.google.gwt.core.client.interop;
 
-import com.google.gwt.core.client.js.JsType;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * A test class marked with JsType but isn't referenced from any Java code except instanceof.
  */
-@JsType(prototype = "HTMLButtonElement")
+@JsType(namespace = JsPackage.GLOBAL, name = "JsTypeTest_MyNativeJsTypeInterface", isNative = true)
 public class MyJsClassWithPrototypeAndOnlyInstanceofReference {
 }

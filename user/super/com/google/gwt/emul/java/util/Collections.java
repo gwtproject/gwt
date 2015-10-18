@@ -199,15 +199,6 @@ public class Collections {
     }
   }
 
-  private static final class ReverseComparator implements Comparator<Comparable<Object>> {
-    static final ReverseComparator INSTANCE = new ReverseComparator();
-
-    @Override
-    public int compare(Comparable<Object> o1, Comparable<Object> o2) {
-      return o2.compareTo(o1);
-    }
-  }
-
   private static final class SetFromMap<E> extends AbstractSet<E>
       implements Serializable {
 
@@ -734,6 +725,126 @@ public class Collections {
     }
   }
 
+  static class UnmodifiableNavigableMap<K, V> extends UnmodifiableSortedMap<K, V>
+      implements NavigableMap<K, V> {
+
+    private static final NavigableMap<Object, Object> EMPTY =
+        new UnmodifiableNavigableMap<Object, Object>(new TreeMap<Object, Object>()) {
+          @Override
+          public Set<Entry<Object, Object>> entrySet() {
+            return emptySet();
+          }
+
+          @Override
+          public NavigableSet<Object> navigableKeySet() {
+            return emptyNavigableSet();
+          }
+        };
+
+    private NavigableMap<K, ? extends V> navigableMap;
+
+    public UnmodifiableNavigableMap(NavigableMap<K, ? extends V> navigableMap) {
+      super(navigableMap);
+      this.navigableMap = navigableMap;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> ceilingEntry(K key) {
+      return (Entry<K, V>) AbstractNavigableMap.copyOf(navigableMap.ceilingEntry(key));
+    }
+
+    @Override
+    public K ceilingKey(K key) {
+      return navigableMap.ceilingKey(key);
+    }
+
+    @Override
+    public NavigableSet<K> descendingKeySet() {
+      return new UnmodifiableNavigableSet<K>(navigableMap.descendingKeySet());
+    }
+
+    @Override
+    public NavigableMap<K, V> descendingMap() {
+      return new UnmodifiableNavigableMap<K, V>(navigableMap.descendingMap());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> firstEntry() {
+      return (Entry<K, V>) AbstractNavigableMap.copyOf(navigableMap.firstEntry());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> floorEntry(K key) {
+      return (Entry<K, V>) AbstractNavigableMap.copyOf(navigableMap.floorEntry(key));
+    }
+
+    @Override
+    public K floorKey(K key) {
+      return navigableMap.floorKey(key);
+    }
+
+    @Override
+    public NavigableMap<K, V> headMap(K toKey, boolean inclusive) {
+      return new UnmodifiableNavigableMap<K, V>(navigableMap.headMap(toKey, inclusive));
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> higherEntry(K key) {
+      return (Entry<K, V>) AbstractNavigableMap.copyOf(navigableMap.higherEntry(key));
+    }
+
+    @Override
+    public K higherKey(K key) {
+      return navigableMap.higherKey(key);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> lastEntry() {
+      return (Entry<K, V>) AbstractNavigableMap.copyOf(navigableMap.lastEntry());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> lowerEntry(K key) {
+      return (Entry<K, V>) AbstractNavigableMap.copyOf(navigableMap.lowerEntry(key));
+    }
+
+    @Override
+    public K lowerKey(K key) {
+      return navigableMap.lowerKey(key);
+    }
+
+    @Override
+    public NavigableSet<K> navigableKeySet() {
+      return new UnmodifiableNavigableSet<K>(navigableMap.navigableKeySet());
+    }
+
+    @Override
+    public Entry<K, V> pollFirstEntry() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Entry<K, V> pollLastEntry() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public NavigableMap<K, V> subMap(K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
+      return new UnmodifiableNavigableMap<K, V>(navigableMap.subMap(fromKey, fromInclusive, toKey, toInclusive));
+    }
+
+    @Override
+    public NavigableMap<K, V> tailMap(K fromKey, boolean inclusive) {
+      return new UnmodifiableNavigableMap<K, V>(navigableMap.tailMap(fromKey, inclusive));
+    }
+  }
+
   static class UnmodifiableSortedSet<E> extends UnmodifiableSet<E> implements
       SortedSet<E> {
     private SortedSet<E> sortedSet;
@@ -783,6 +894,75 @@ public class Collections {
     @Override
     public SortedSet<E> tailSet(E fromElement) {
       return new UnmodifiableSortedSet<E>(sortedSet.tailSet(fromElement));
+    }
+  }
+
+  static class UnmodifiableNavigableSet<T> extends UnmodifiableSortedSet<T>
+      implements NavigableSet<T> {
+
+    private static final NavigableSet<Object> EMPTY =
+        new UnmodifiableNavigableSet<Object>(new TreeSet<Object>());
+
+    private final NavigableSet<T> navigableSet;
+
+    public UnmodifiableNavigableSet(NavigableSet<T> navigableSet) {
+      super(navigableSet);
+      this.navigableSet = navigableSet;
+    }
+
+    @Override
+    public T ceiling(T e) {
+      return navigableSet.ceiling(e);
+    }
+
+    @Override
+    public Iterator<T> descendingIterator() {
+      return descendingSet().iterator();
+    }
+
+    @Override
+    public NavigableSet<T> descendingSet() {
+      return new UnmodifiableNavigableSet<T>(navigableSet.descendingSet());
+    }
+
+    @Override
+    public T floor(T e) {
+      return navigableSet.floor(e);
+    }
+
+    @Override
+    public NavigableSet<T> headSet(T toElement, boolean inclusive) {
+      return new UnmodifiableNavigableSet<T>(navigableSet.headSet(toElement, inclusive));
+    }
+
+    @Override
+    public T higher(T e) {
+      return navigableSet.higher(e);
+    }
+
+    @Override
+    public T lower(T e) {
+      return navigableSet.lower(e);
+    }
+
+    @Override
+    public T pollFirst() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public T pollLast() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public NavigableSet<T> subSet(T fromElement, boolean fromInclusive, T toElement, boolean toInclusive) {
+      return new UnmodifiableNavigableSet<T>(navigableSet.subSet(fromElement, fromInclusive, toElement, toInclusive));
+    }
+
+    @Override
+    public NavigableSet<T> tailSet(T fromElement, boolean inclusive) {
+      return new UnmodifiableNavigableSet<T>(navigableSet.tailSet(fromElement, inclusive));
     }
   }
 
@@ -1035,8 +1215,28 @@ public class Collections {
   }
 
   @SuppressWarnings(value = {"unchecked", "cast"})
+  public static <K, V> SortedMap<K, V> emptySortedMap() {
+    return (SortedMap<K, V>) UnmodifiableNavigableMap.EMPTY;
+  }
+
+  @SuppressWarnings(value = {"unchecked", "cast"})
+  public static <K, V> NavigableMap<K, V> emptyNavigableMap() {
+    return (NavigableMap<K, V>) UnmodifiableNavigableMap.EMPTY;
+  }
+
+  @SuppressWarnings(value = {"unchecked", "cast"})
   public static <T> Set<T> emptySet() {
     return (Set<T>) EMPTY_SET;
+  }
+
+  @SuppressWarnings(value = {"unchecked", "cast"})
+  public static <T> NavigableSet<T> emptyNavigableSet() {
+    return (NavigableSet<T>) UnmodifiableNavigableSet.EMPTY;
+  }
+
+  @SuppressWarnings(value = {"unchecked", "cast"})
+  public static <T> SortedSet<T> emptySortedSet() {
+    return (SortedSet<T>) UnmodifiableNavigableSet.EMPTY;
   }
 
   public static <T> Enumeration<T> enumeration(Collection<T> c) {
@@ -1160,19 +1360,11 @@ public class Collections {
 
   @SuppressWarnings("unchecked")
   public static <T> Comparator<T> reverseOrder() {
-    return (Comparator<T>) ReverseComparator.INSTANCE;
+    return (Comparator<T>) Comparator.reverseOrder();
   }
 
   public static <T> Comparator<T> reverseOrder(final Comparator<T> cmp) {
-    if (cmp == null) {
-      return reverseOrder();
-    }
-    return new Comparator<T>() {
-      @Override
-      public int compare(T t1, T t2) {
-        return cmp.compare(t2, t1);
-      }
-    };
+    return cmp == null ? reverseOrder() : cmp.reversed();
   }
 
   /**
@@ -1251,11 +1443,8 @@ public class Collections {
     sort(target, null);
   }
 
-  @SuppressWarnings("unchecked")
   public static <T> void sort(List<T> target, Comparator<? super T> c) {
-    Object[] x = target.toArray();
-    Arrays.sort(x, (Comparator<Object>) c);
-    replaceContents(target, x);
+    target.sort(c);
   }
 
   public static void swap(List<?> list, int i, int j) {
@@ -1287,9 +1476,16 @@ public class Collections {
     return new UnmodifiableSortedMap<K, V>(map);
   }
 
-  public static <T> SortedSet<T> unmodifiableSortedSet(
-      SortedSet<? extends T> set) {
+  public static <K, V> NavigableMap<K, V> unmodifiableNavigableMap(NavigableMap<K, ? extends V> m) {
+    return new UnmodifiableNavigableMap<K, V>(m);
+  }
+
+  public static <T> SortedSet<T> unmodifiableSortedSet(SortedSet<? extends T> set) {
     return new UnmodifiableSortedSet<T>(set);
+  }
+
+  public static <T> NavigableSet<T> unmodifiableNavigableSet(NavigableSet<T> s) {
+    return new UnmodifiableNavigableSet<T>(s);
   }
 
   /**
@@ -1314,22 +1510,6 @@ public class Collections {
       hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
-  }
-
-  /**
-   * Replace contents of a list from an array.
-   *
-   * @param <T> element type
-   * @param target list to replace contents from an array
-   * @param x an Object array which can contain only T instances
-   */
-  @SuppressWarnings("unchecked")
-  private static <T> void replaceContents(List<T> target, Object[] x) {
-    int size = target.size();
-    assert (x.length == size);
-    for (int i = 0; i < size; i++) {
-      target.set(i, (T) x[i]);
-    }
   }
 
   private static <T> void swapImpl(List<T> list, int i, int j) {

@@ -18,11 +18,15 @@ package java.util;
 import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkElement;
 import static javaemul.internal.InternalPreconditions.checkElementIndex;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkPositionIndex;
 import static javaemul.internal.InternalPreconditions.checkPositionIndexes;
 import static javaemul.internal.InternalPreconditions.checkState;
 
 import java.io.Serializable;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 import javaemul.internal.ArrayHelper;
 
@@ -165,6 +169,14 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   }
 
   @Override
+  public void forEach(Consumer<? super E> consumer) {
+    checkNotNull(consumer);
+    for (E e : array) {
+      consumer.accept(e);
+    }
+  }
+
+  @Override
   public boolean isEmpty() {
     return array.length == 0;
   }
@@ -192,6 +204,31 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   }
 
   @Override
+  public boolean removeIf(Predicate<? super E> filter) {
+    checkNotNull(filter);
+    E[] newArray = ArrayHelper.createFrom(array, array.length);
+    int i = 0;
+    for (E e : array) {
+      if (!filter.test(e)) {
+        newArray[i++] = e;
+      }
+    }
+    if (i == array.length) {
+      return false;
+    }
+    ArrayHelper.setLength(newArray, i);
+    array = newArray;
+    return true;
+  }
+
+  @Override
+  public void replaceAll(UnaryOperator<E> operator) {
+    for (int i = 0; i < array.length; i++) {
+      array[i] = operator.apply(array[i]);
+    }
+  }
+
+  @Override
   public E set(int index, E o) {
     E previous = get(index);
     array[index] = o;
@@ -201,6 +238,18 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   @Override
   public int size() {
     return array.length;
+  }
+
+  @Override
+  public void sort(Comparator<? super E> c) {
+    Arrays.sort(array, 0, array.length, c);
+  }
+
+  @Override
+  public Spliterator<E> spliterator() {
+    // TODO: check concurrent modification
+    return Spliterators.spliterator(array,
+        Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SUBSIZED);
   }
 
   @Override

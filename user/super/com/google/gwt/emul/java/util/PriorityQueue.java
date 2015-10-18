@@ -24,6 +24,8 @@ package java.util;
  */
 public class PriorityQueue<E> extends AbstractQueue<E> {
 
+  private static final int DEFAULT_INITIAL_CAPACITY = 11;
+
   private static int getLeftChild(int node) {
     return 2 * node + 1;
   }
@@ -50,7 +52,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
   private ArrayList<E> heap;
 
   public PriorityQueue() {
-    this(11);
+    this(DEFAULT_INITIAL_CAPACITY);
   }
 
   public PriorityQueue(Collection<? extends E> c) {
@@ -68,6 +70,10 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
       cmp = Comparators.natural();
     }
     this.cmp = cmp;
+  }
+
+  public PriorityQueue(Comparator<? super E> comparator) {
+    this(DEFAULT_INITIAL_CAPACITY, comparator);
   }
 
   @SuppressWarnings("unchecked")

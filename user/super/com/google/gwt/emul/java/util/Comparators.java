@@ -17,6 +17,8 @@ package java.util;
 
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
+import java.io.Serializable;
+
 class Comparators {
   /*
    * This is a utility class that provides a default Comparator. This class
@@ -26,22 +28,42 @@ class Comparators {
    * This class is package protected since it is not in the JRE.
    */
 
-  /**
-   * Compares two Objects according to their <i>natural ordering</i>.
-   *
-   * @see java.lang.Comparable
-   */
-  private static final Comparator<Object> NATURAL = new Comparator<Object>() {
-    @Override
-    public int compare(Object o1, Object o2) {
-      checkNotNull(o1);
-      checkNotNull(o2);
-      return ((Comparable<Object>) o1).compareTo(o2);
+  static final class NullComparator<T> implements Comparator<T>, Serializable {
+    private final boolean nullFirst;
+    private final Comparator<T> delegate;
+
+    @SuppressWarnings("unchecked")
+    NullComparator(boolean nullFirst, Comparator<? super T> delegate) {
+      this.nullFirst = nullFirst;
+      this.delegate = (Comparator<T>) delegate;
     }
-  };
+
+    @Override
+    public int compare(T a, T b) {
+      if (a == null) {
+        return b == null ? 0 : (nullFirst ? -1 : 1);
+      }
+      if (b == null) {
+        return nullFirst ? 1 : -1;
+      }
+      return delegate == null ? 0 : delegate.compare(a, b);
+    }
+
+    @Override
+    public Comparator<T> reversed() {
+      return new NullComparator<>(!nullFirst, delegate == null ? null : delegate.reversed());
+    }
+
+    @Override
+    public Comparator<T> thenComparing(Comparator<? super T> other) {
+      return new NullComparator<>(nullFirst, delegate == null ?
+          other : delegate.thenComparing(other));
+    }
+  }
 
   /**
-   * Returns the natural Comparator.
+   * Returns the natural Comparator which compares two Objects
+   * according to their <i>natural ordering</i>.
    * <p>
    * Example:
    *
@@ -49,7 +71,13 @@ class Comparators {
    *
    * @return the natural Comparator
    */
+  @SuppressWarnings("unchecked")
   public static <T> Comparator<T> natural() {
-    return (Comparator<T>) NATURAL;
+    return (a, b) -> checkNotNull((Comparable<Object>) a).compareTo(checkNotNull(b));
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T> Comparator<T> reverseOrder() {
+    return (a, b) -> checkNotNull((Comparable<Object>) b).compareTo(checkNotNull(a));
   }
 }

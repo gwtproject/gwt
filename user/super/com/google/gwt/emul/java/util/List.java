@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import java.util.function.UnaryOperator;
+
 /**
  * Represents a sequence of objects. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html">[Sun docs]</a>
@@ -72,6 +74,12 @@ public interface List<E> extends Collection<E> {
   @Override
   boolean removeAll(Collection<?> c);
 
+  default void replaceAll(UnaryOperator<E> operator) {
+    for (ListIterator<E> it = listIterator(); it.hasNext();) {
+      it.set(operator.apply(it.next()));
+    }
+  }
+
   @Override
   boolean retainAll(Collection<?> c);
 
@@ -79,6 +87,22 @@ public interface List<E> extends Collection<E> {
 
   @Override
   int size();
+
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  default void sort(Comparator<? super E> c) {
+    Object[] a = toArray();
+    Arrays.sort(a, (Comparator) c);
+    ListIterator<E> it = listIterator();
+    for (Object e : a) {
+      it.next();
+      it.set((E) e);
+    }
+  }
+
+  @Override
+  default Spliterator<E> spliterator() {
+    return Spliterators.spliterator(this, Spliterator.ORDERED);
+  }
 
   List<E> subList(int fromIndex, int toIndex);
 

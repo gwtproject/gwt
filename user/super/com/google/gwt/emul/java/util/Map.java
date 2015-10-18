@@ -15,6 +15,10 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
+
+import java.io.Serializable;
+
 /**
  * Abstract interface for maps.
  *
@@ -26,7 +30,7 @@ public interface Map<K, V> {
   /**
    * Represents an individual map entry.
    */
-  public interface Entry<K, V> {
+  interface Entry<K, V> {
     @Override
     boolean equals(Object o);
 
@@ -38,6 +42,22 @@ public interface Map<K, V> {
     int hashCode();
 
     V setValue(V value);
+
+    static <K extends Comparable<? super K>, V> Comparator<Map.Entry<K,V>> comparingByKey() {
+      return (Comparator<Map.Entry<K, V>> & Serializable)
+          (a, b) -> a.getKey().compareTo(b.getKey());
+    }
+
+    static <K, V extends Comparable<? super V>> Comparator<Map.Entry<K,V>> comparingByValue() {
+      return (Comparator<Map.Entry<K, V>> & Serializable)
+          (a, b) -> a.getValue().compareTo(b.getValue());
+    }
+
+    static <K, V> Comparator<Map.Entry<K, V>> comparingByKey(Comparator<? super K> cmp) {
+      checkCriticalNotNull(cmp);
+      return (Comparator<Map.Entry<K, V>> & Serializable)
+          (a, b) -> cmp.compare(a.getKey(), b.getKey());
+    }
   }
 
   void clear();

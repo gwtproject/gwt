@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import java.util.function.Predicate;
+
 /**
  * General-purpose interface for storing collections of objects. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html">[Sun
@@ -49,9 +51,26 @@ public interface Collection<E> extends Iterable<E> {
 
   boolean removeAll(Collection<?> c);
 
+  default boolean removeIf(Predicate<? super E> filter) {
+    boolean removed = false;
+    Iterator<E> it = iterator();
+    while (it.hasNext()) {
+      if (filter.test(it.next())) {
+        it.remove();
+        removed = true;
+      }
+    }
+    return removed;
+  }
+
   boolean retainAll(Collection<?> c);
 
   int size();
+
+  @Override
+  default Spliterator<E> spliterator() {
+    return Spliterators.spliterator(this, 0);
+  }
 
   Object[] toArray();
 

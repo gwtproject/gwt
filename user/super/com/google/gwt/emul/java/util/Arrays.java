@@ -25,6 +25,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkPositionIndexes;
 
 import java.io.Serializable;
+import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.LongCompareHolder;
@@ -46,7 +48,7 @@ public class Arrays {
     private E[] array;
 
     ArrayList(E[] array) {
-      assert (array != null);
+      checkNotNull(array);
       this.array = array;
     }
 
@@ -56,9 +58,24 @@ public class Arrays {
     }
 
     @Override
+    public void forEach(Consumer<? super E> consumer) {
+      checkNotNull(consumer);
+      for (E e : array) {
+        consumer.accept(e);
+      }
+    }
+
+    @Override
     public E get(int index) {
       checkElementIndex(index, size());
       return array[index];
+    }
+
+    @Override
+    public void replaceAll(UnaryOperator<E> operator) {
+      for (int i = 0; i < array.length; i++) {
+        array[i] = operator.apply(array[i]);
+      }
     }
 
     @Override
@@ -71,6 +88,11 @@ public class Arrays {
     @Override
     public int size() {
       return array.length;
+    }
+
+    @Override
+    public void sort(Comparator<? super E> c) {
+      Arrays.sort(array, 0, array.length, c);
     }
 
     /*

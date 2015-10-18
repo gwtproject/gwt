@@ -15,7 +15,12 @@
  */
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Consumer;
 
 /**
  * Allows an instance of a class implementing this interface to be used in the
@@ -27,4 +32,15 @@ import java.util.Iterator;
  */
 public interface Iterable<T> {
   Iterator<T> iterator();
+
+  default void forEach(Consumer<? super T> consumer) {
+    checkNotNull(consumer);
+    for (T e : this) {
+      consumer.accept(e);
+    }
+  }
+
+  default Spliterator<T> spliterator() {
+    return Spliterators.spliteratorUnknownSize(iterator(), 0);
+  }
 }

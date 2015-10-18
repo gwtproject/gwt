@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import java.util.function.Consumer;
+
 /**
  * See <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Iterator.html">the
@@ -30,4 +32,9 @@ public interface Iterator<E> {
 
   void remove();
 
+  default void forEachRemaining(Consumer<? super E> consumer) {
+    while (hasNext()) {
+      consumer.accept(next());
+    }
+  }
 }

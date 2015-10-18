@@ -20,6 +20,7 @@ import com.google.gwt.emultest.java8.util.OptionalIntTest;
 import com.google.gwt.emultest.java8.util.OptionalLongTest;
 import com.google.gwt.emultest.java8.util.OptionalTest;
 import com.google.gwt.emultest.java8.util.PrimitiveIteratorTest;
+import com.google.gwt.emultest.java8.util.SpliteratorsTest;
 import com.google.gwt.emultest.java8.util.StringJoinerTest;
 import com.google.gwt.junit.tools.GWTTestSuite;
 
@@ -39,6 +40,7 @@ public class EmulJava8Suite {
     suite.addTestSuite(OptionalLongTest.class);
     suite.addTestSuite(OptionalDoubleTest.class);
     suite.addTestSuite(PrimitiveIteratorTest.class);
+    suite.addTestSuite(SpliteratorsTest.class);
     suite.addTestSuite(StringJoinerTest.class);
 
     return suite;

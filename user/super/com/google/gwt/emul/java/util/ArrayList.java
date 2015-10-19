@@ -58,6 +58,8 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
    */
   @SuppressWarnings("unused")
   private E exposeElement;
+  @SuppressWarnings("unused")
+  private Object[] exposeArrayType;
 
   public ArrayList() {
   }

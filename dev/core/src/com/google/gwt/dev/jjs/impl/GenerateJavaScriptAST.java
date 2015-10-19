@@ -185,7 +185,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedSet;
-import java.util.TreeMap;
 
 /**
  * Creates a JavaScript AST from a <code>JProgram</code> node.
@@ -527,8 +526,6 @@ public class GenerateJavaScriptAST {
 
     private final Set<JDeclaredType> alreadyRan = Sets.newLinkedHashSet();
 
-    private final Map<String, Object> exportedMembersByExportName = new TreeMap<String, Object>();
-
     private final Map<JDeclaredType, JsFunction> clinitFunctionForType = Maps.newHashMap();
 
     private JMethod currentMethod = null;
@@ -650,8 +647,6 @@ public class GenerateJavaScriptAST {
       generateTypeSetup(type);
 
       emitFields(type);
-
-      collectExports(type);
       return null;
     }
 
@@ -1166,12 +1161,16 @@ public class GenerateJavaScriptAST {
       return statement != null ? statement : new JsEmpty(info);
     }
 
-    private void insertInTopologicalOrder(JDeclaredType type,
-        Set<JDeclaredType> topologicallySortedSet) {
-      if (type == null || topologicallySortedSet.contains(type) || program.isReferenceOnly(type)) {
+    private void insertInTopologicalOrder(
+        JDeclaredType type,
+        Set<JDeclaredType> topologicallySortedSet,
+        boolean includeReferenceOnly) {
+      if (type == null
+          || topologicallySortedSet.contains(type)
+          || (!includeReferenceOnly && program.isReferenceOnly(type))) {
         return;
       }
-      insertInTopologicalOrder(type.getSuperClass(), topologicallySortedSet);
+      insertInTopologicalOrder(type.getSuperClass(), topologicallySortedSet, includeReferenceOnly);
       topologicallySortedSet.add(type);
     }
 
@@ -1202,7 +1201,8 @@ public class GenerateJavaScriptAST {
       // Sort normal types according to superclass relationship.
       Set<JDeclaredType> topologicallySortedBodyTypes = Sets.newLinkedHashSet();
       for (JDeclaredType type : program.getModuleDeclaredTypes()) {
-        insertInTopologicalOrder(type, topologicallySortedBodyTypes);
+        insertInTopologicalOrder(
+            type, topologicallySortedBodyTypes, false /* includeReferenceOnly */);
       }
       // Remove all preamble types that might have been inserted here.
       topologicallySortedBodyTypes.removeAll(preambleTypes);
@@ -1321,7 +1321,7 @@ public class GenerateJavaScriptAST {
         if (alreadyProcessedTypes.contains(type)) {
           continue;
         }
-        insertInTopologicalOrder(type, orderedPreambleClasses);
+        insertInTopologicalOrder(type, orderedPreambleClasses, false /* includeReferenceOnly */);
       }
 
       // TODO(rluble): The set of preamble types might be overly large, in particular will include
@@ -1443,41 +1443,67 @@ public class GenerateJavaScriptAST {
     }
 
     private void generateExports() {
-      if (exportedMembersByExportName.isEmpty()) {
-        return;
+      Set<JDeclaredType> hoistedClinits = Sets.newHashSet();
+      JsInteropExportsGenerator exportGenerator =
+          closureCompilerFormatEnabled
+              ? new ClosureJsInteropExportsGenerator(getGlobalStatements(), names)
+              : new DefaultJsInteropExportsGenerator(
+                  getGlobalStatements(), globalTemp, indexedFunctions);
+
+      // Sort normal types according to superclass relationship.
+      Set<JDeclaredType> topologicallySortedTypes = Sets.newLinkedHashSet();
+      for (JDeclaredType type : program.getDeclaredTypes()) {
+        insertInTopologicalOrder(type, topologicallySortedTypes, true /* includeReferenceOnly */);
       }
 
-      JsInteropExportsGenerator exportGenerator;
-      if (closureCompilerFormatEnabled) {
-        exportGenerator = new ClosureJsInteropExportsGenerator(getGlobalStatements(), names);
-      } else {
-        exportGenerator = new DefaultJsInteropExportsGenerator(getGlobalStatements(), globalTemp,
-            indexedFunctions);
-      }
+      for (JDeclaredType type : topologicallySortedTypes) {
+        if (type.isJsNative()) {
+          return;
+        }
 
-      Set<JDeclaredType> generatedClinits = Sets.newHashSet();
+        if (type.isJsType() && !type.getClassDisposition().isLocalType()) {
+          // Only types with explicit source names in Java may have an exported prototype
+          exportGenerator.exportType(type);
+        }
 
-      for (Object exportedEntity : exportedMembersByExportName.values()) {
-        if (exportedEntity instanceof JDeclaredType) {
-          exportGenerator.exportType((JDeclaredType) exportedEntity);
-        } else {
-          JMember member = (JMember) exportedEntity;
-          maybeHoistClinit(generatedClinits, member);
-          exportGenerator.exportMember(member, names.get(member).makeRef(member.getSourceInfo()));
+        for (JMethod method : type.getMethods()) {
+          if (!method.isJsInteropEntryPoint()) {
+            continue;
+          }
+
+          maybeHoistClinit(hoistedClinits, method);
+          exportGenerator.exportMember(method, names.get(method).makeRef(method.getSourceInfo()));
+        }
+
+        for (JField field : type.getFields()) {
+          if (!field.isJsInteropEntryPoint()) {
+            continue;
+          }
+
+          if (!field.isFinal()) {
+            logger.log(
+                TreeLogger.Type.WARN,
+                "Exporting effectively non-final field "
+                    + field.getQualifiedName()
+                    + ". Due to the way exporting works, the value of the"
+                    + " exported field will not be reflected across Java/JavaScript border.");
+          }
+          maybeHoistClinit(hoistedClinits, field);
+          exportGenerator.exportMember(field, names.get(field).makeRef(field.getSourceInfo()));
         }
       }
     }
 
-    private void maybeHoistClinit(Set<JDeclaredType> generatedClinits, JMember member) {
+    private void maybeHoistClinit(Set<JDeclaredType> hoistedClinits, JMember member) {
       JDeclaredType enclosingType = member.getEnclosingType();
-      if (generatedClinits.contains(enclosingType)) {
+      if (hoistedClinits.contains(enclosingType)) {
         return;
       }
 
       JsInvocation clinitCall = member instanceof JMethod ? maybeCreateClinitCall((JMethod) member)
           : maybeCreateClinitCall((JField) member);
       if (clinitCall != null) {
-        generatedClinits.add(enclosingType);
+        hoistedClinits.add(enclosingType);
         getGlobalStatements().add(clinitCall.makeStmt());
       }
     }
@@ -2361,30 +2387,6 @@ public class GenerateJavaScriptAST {
       return closureCompilerFormatEnabled
           ? prototype.makeQualifiedRef(info, names.get(type).makeRef(info))
           : globalTemp.makeRef(info);
-    }
-
-    private void collectExports(JDeclaredType type) {
-      if (type.isJsType() && !type.getClassDisposition().isLocalType()) {
-        // only types with explicit source names in Java may have an exported prototype
-        exportedMembersByExportName.put(type.getQualifiedJsName(), type);
-      }
-
-      for (JMethod method : type.getMethods()) {
-        if (method.isJsInteropEntryPoint()) {
-          exportedMembersByExportName.put(method.getQualifiedJsName(), method);
-        }
-      }
-
-      for (JField field : type.getFields()) {
-        if (field.isJsInteropEntryPoint()) {
-          if (!field.isFinal()) {
-            logger.log(TreeLogger.Type.WARN, "Exporting effectively non-final field "
-                + field.getQualifiedName() + ". Due to the way exporting works, the value of the"
-                + " exported field will not be reflected across Java/JavaScript border.");
-          }
-          exportedMembersByExportName.put(field.getQualifiedJsName(), field);
-        }
-      }
     }
 
     /**

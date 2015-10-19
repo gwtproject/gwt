@@ -45,7 +45,7 @@ public class Arrays {
      */
     private E[] array;
 
-    ArrayList(E[] array) {
+    ArrayListq(E[] array) {
       assert (array != null);
       this.array = array;
     }
@@ -73,12 +73,9 @@ public class Arrays {
       return array.length;
     }
 
-    /*
-     * Semantics are to return an array of identical type.
-     */
     @Override
     public Object[] toArray() {
-      return ArrayHelper.clone(array, 0, array.length);
+      return toArray(new Object[array.length]);
     }
 
     /*

@@ -25,12 +25,14 @@ public class CoverageUtil {
    * An object whose keys are Java filenames and whose values are objects mapping
    * line numbers to 1 (executed) or 0 (not executed).
    */
-  private static JavaScriptObject coverage = JavaScriptObject.createObject();
+  private static JavaScriptObject coverage;
 
   /**
    * Updates the coverage object, marking the given filename-line number pair as executed.
    */
   public static native void cover(String filename, String lineNumber) /*-{
+//    @com.google.gwt.lang.CoverageUtil::coverage = @com.google.gwt.lang.CoverageUtil::coverage || {};
+//    @com.google.gwt.lang.CoverageUtil::coverage = @com.google.gwt.lang.CoverageUtil::coverage || {};
     @com.google.gwt.lang.CoverageUtil::coverage[filename][lineNumber] = 1;
   }-*/;
 

@@ -42,6 +42,12 @@ import com.google.gwt.thirdparty.guava.common.collect.Multimap;
  */
 public class CoverageInstrumentor {
 
+  public static final String GWT_COVERAGE_SYSTEM_PROPERTY = "gwt.coverage";
+
+  public static boolean isCoverageEnabled() {
+    return System.getProperty(GWT_COVERAGE_SYSTEM_PROPERTY) != null;
+  }
+
   /**
    * This class does the actual instrumentation. It replaces
    * {@code expr} with {@code (CoverageUtil.cover(file, line), expr)}.
@@ -66,6 +72,10 @@ public class CoverageInstrumentor {
   }
 
   public static void exec(JsProgram jsProgram, Multimap<String, Integer> instrumentableLines) {
+    if (instrumentableLines == null) {
+      // Coverage is not enabled.
+      return;
+    }
     new CoverageInstrumentor(jsProgram, instrumentableLines).execImpl();
   }
 

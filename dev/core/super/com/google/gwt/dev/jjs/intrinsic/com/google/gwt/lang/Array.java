@@ -143,7 +143,7 @@ public final class Array {
    * If the elementTypeId is {@link TYPE_JAVA_OBJECT_OR_JSO}, this indicates that both
    * JavaScriptObjects, and Java types can be stored. In the case of Java types, a normal cast check
    * should be performed, using the elementTypeId as the cast destination type.
-   * This case is provided to support arrays declared with an interface type, which has dual
+   * This case is provided to support arrays declared with an interface type, which has dualCom
    * implementations (i.e. interface types which have both Java and JavaScriptObject
    * implementations).
    * <p>

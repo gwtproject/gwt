@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b90b4ea8_3acd0042",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/JsniReferenceResolverTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-20T01:00:49Z",
+      "side": 1,
+      "message": "I think these should be legal code and should not generate warnings.",
+      "range": {
+        "startLine": 315,
+        "startChar": 14,
+        "endLine": 315,
+        "endChar": 46
+      },
+      "revId": "63f69f14a0380c4c6a97397494df7e4a0bc77378",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

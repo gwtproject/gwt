@@ -21,7 +21,6 @@ import com.google.gwt.dev.jjs.ast.CanBeStatic;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.HasType;
-import com.google.gwt.dev.jjs.ast.JAbsentArrayDimension;
 import com.google.gwt.dev.jjs.ast.JArrayLength;
 import com.google.gwt.dev.jjs.ast.JArrayRef;
 import com.google.gwt.dev.jjs.ast.JArrayType;
@@ -150,12 +149,6 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
 
   public ToStringGenerationVisitor(TextOutput textOutput) {
     super(textOutput);
-  }
-
-  @Override
-  public boolean visit(JAbsentArrayDimension x, Context ctx) {
-    // nothing to print, parent prints []
-    return false;
   }
 
   @Override

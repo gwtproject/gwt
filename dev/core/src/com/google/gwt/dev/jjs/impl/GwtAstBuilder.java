@@ -26,7 +26,6 @@ import com.google.gwt.dev.jjs.InternalCompilerException;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.AccessModifier;
-import com.google.gwt.dev.jjs.ast.JAbsentArrayDimension;
 import com.google.gwt.dev.jjs.ast.JArrayLength;
 import com.google.gwt.dev.jjs.ast.JArrayRef;
 import com.google.gwt.dev.jjs.ast.JArrayType;
@@ -112,6 +111,8 @@ import com.google.gwt.dev.util.collect.Stack;
 import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
+import com.google.gwt.thirdparty.guava.common.base.Predicates;
+import com.google.gwt.thirdparty.guava.common.collect.Collections2;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.Interner;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
@@ -227,6 +228,7 @@ import org.eclipse.jdt.internal.compiler.util.Util;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -388,17 +390,8 @@ public class GwtAstBuilder {
           // handled by ArrayInitializer.
         } else {
           // Annoyingly, JDT only visits non-null dims, so we can't popList().
-          List<JExpression> dims = Lists.newArrayList();
-          for (int i = x.dimensions.length - 1; i >= 0; --i) {
-            JExpression dimension = pop(x.dimensions[i]);
-            // can be null if index expression was empty
-            if (dimension == null) {
-              dimension = JAbsentArrayDimension.INSTANCE;
-            }
-            dims.add(dimension);
-          }
-          // Undo the stack reversal.
-          Collections.reverse(dims);
+
+          List<JExpression> dims = pop(x.dimensions);
           push(JNewArray.createDims(info, type, dims));
         }
       } catch (Throwable e) {
@@ -1108,9 +1101,6 @@ public class GwtAstBuilder {
           JParameter dimParam = synthMethod.getParams().get(0);
           JExpression dimArgExpr = new JParameterRef(dimParam.getSourceInfo(), dimParam);
           dims.add(dimArgExpr);
-          for (int i = 1; i < arrayType.getDims(); i++) {
-            dims.add(JAbsentArrayDimension.INSTANCE);
-          }
           JNewArray newArray = JNewArray.createDims(synthMethod.getSourceInfo(), arrayType, dims);
           body.getBlock().addStmt(newArray.makeReturnStatement());
           synthMethod.setBody(body);
@@ -2224,7 +2214,7 @@ public class GwtAstBuilder {
     private JLocal createLocalThrowable(SourceInfo info, String prefix) {
       int index = curMethod.body.getLocals().size() + 1;
       return JProgram.createLocal(info, prefix + "_" + index,
-            javaLangThrowable, false, curMethod.body);
+          javaLangThrowable, false, curMethod.body);
     }
 
     private JStatement createCloseBlockFor(
@@ -2573,8 +2563,11 @@ public class GwtAstBuilder {
       if (expressions == null) {
         return Collections.emptyList();
       }
-      List<T> result = (List<T>) popList(expressions.length);
-      for (int i = 0; i < expressions.length; ++i) {
+
+      List<T> result = (List<T>) popList(Collections2.filter(Arrays.asList(expressions),
+          Predicates.notNull()).size());
+
+      for (int i = 0; i < result.size(); i++) {
         result.set(i, (T) simplify(result.get(i), expressions[i]));
       }
       return result;

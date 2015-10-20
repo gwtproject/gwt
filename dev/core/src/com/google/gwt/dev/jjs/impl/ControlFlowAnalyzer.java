@@ -16,7 +16,6 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.ast.Context;
-import com.google.gwt.dev.jjs.ast.JAbsentArrayDimension;
 import com.google.gwt.dev.jjs.ast.JArrayLength;
 import com.google.gwt.dev.jjs.ast.JArrayRef;
 import com.google.gwt.dev.jjs.ast.JArrayType;
@@ -423,14 +422,11 @@ public class ControlFlowAnalyzer {
       JArrayType arrayType = newArray.getArrayType();
       if (newArray.dims != null) {
         // rescue my type and all the implicitly nested types (with fewer dims)
-        int nDims = arrayType.getDims();
+        int actualDims = newArray.dims.size();
         JType leafType = arrayType.getLeafType();
-        assert (newArray.dims.size() == nDims);
-        for (int i = 0; i < nDims; ++i) {
-          if (newArray.dims.get(i) instanceof JAbsentArrayDimension) {
-            break;
-          }
-          rescue(program.getOrCreateArrayType(leafType, nDims - i), true);
+        assert (actualDims <= arrayType.getDims());
+        for (int i = 0; i < actualDims; ++i) {
+          rescue(program.getOrCreateArrayType(leafType, arrayType.getDims() - i), true);
         }
       } else {
         // just rescue my own specific type

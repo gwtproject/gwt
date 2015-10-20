@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b90b4ea8_da96e417",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-20T01:00:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b90b4ea8_87df06c4",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 3
+      },
+      "revId": "4c8f14fe9590fc12c33cbf97339660281516f5bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b90b4ea8_47510e9c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2015-10-17T18:01:53Z",
       "side": 1,
       "message": "!canBeCalledExternally \u0026\u0026 !canBeImplementedExternally || isJsOpaque",
+      "range": {
+        "startLine": 516,
+        "startChar": 12,
+        "endLine": 516,
+        "endChar": 56
+      },
+      "revId": "4c8f14fe9590fc12c33cbf97339660281516f5bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b90b4ea8_ba9b3040",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-20T01:00:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b90b4ea8_47510e9c",
       "range": {
         "startLine": 516,
         "startChar": 12,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b90b4ea8_9aa18c6e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-20T01:00:49Z",
+      "side": 1,
+      "message": "The warning message is changed a little bit.",
+      "parentUuid": "b90b4ea8_2793bae6",
+      "range": {
+        "startLine": 523,
+        "startChar": 50,
+        "endLine": 523,
+        "endChar": 59
+      },
+      "revId": "4c8f14fe9590fc12c33cbf97339660281516f5bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b90b4ea8_e75b62e2",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2015-10-17T18:01:53Z",
       "side": 1,
       "message": "x.getQualifiedName()",
+      "range": {
+        "startLine": 525,
+        "startChar": 37,
+        "endLine": 525,
+        "endChar": 63
+      },
+      "revId": "4c8f14fe9590fc12c33cbf97339660281516f5bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b90b4ea8_5aab144c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-20T01:00:49Z",
+      "side": 1,
+      "message": "I prefer to use simple name, method.getQualifiedName() contains the full signature which I think is too spammy.",
+      "parentUuid": "b90b4ea8_e75b62e2",
       "range": {
         "startLine": 525,
         "startChar": 37,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "b90b4ea8_3aa8604d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-20T01:00:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b90b4ea8_27e97a1b",
+      "range": {
+        "startLine": 515,
+        "startChar": 0,
+        "endLine": 529,
+        "endChar": 8
+      },
+      "revId": "4c8f14fe9590fc12c33cbf97339660281516f5bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b90b4ea8_47146e0c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2015-10-17T18:01:53Z",
       "side": 1,
       "message": "This should not need the global table. I think all the types that are there should be also already marked .isJsType.\n\nIIUC, any type that has a @Js... annotation is a JsType is it not? Goktug has been tweaking the annotations, so lets have a quick chat with him.\n\nWe should probably add JType.isOpaque() that subsumes all the checks.",
+      "range": {
+        "startLine": 536,
+        "startChar": 11,
+        "endLine": 536,
+        "endChar": 55
+      },
+      "revId": "4c8f14fe9590fc12c33cbf97339660281516f5bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b90b4ea8_fa788883",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-20T01:00:49Z",
+      "side": 1,
+      "message": "It was used to collect the type which may be exposed by the return type of an exported method. As we\u0027ve discussed that this kind of type should also be annotated as JsOpaque, it is removed.",
+      "parentUuid": "b90b4ea8_47146e0c",
       "range": {
         "startLine": 536,
         "startChar": 11,

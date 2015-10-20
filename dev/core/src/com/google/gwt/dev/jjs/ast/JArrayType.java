@@ -95,6 +95,11 @@ public class JArrayType extends JReferenceType {
   }
 
   @Override
+  public boolean isJsOpaque() {
+    return getLeafType().isJsOpaque();
+  }
+
+  @Override
   public boolean replaces(JType originalType) {
     return (originalType instanceof JArrayType)
         && elementType.replaces(((JArrayType) originalType).getElementType());

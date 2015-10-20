@@ -124,6 +124,7 @@ import org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression;
 import org.eclipse.jdt.internal.compiler.ast.ASTNode;
 import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.AllocationExpression;
+import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.ast.AnnotationMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.Argument;
 import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
@@ -4134,14 +4135,18 @@ public class GwtAstBuilder {
     method.setSpecialization(paramTypes, returnsType, targetMethod);
   }
 
-  private void createParameter(SourceInfo info, LocalVariableBinding binding, JMethod method) {
-    createParameter(info, binding, intern(binding.name), method);
+  private void createParameter(SourceInfo info, LocalVariableBinding binding, JMethod method,
+      Annotation... annotations) {
+    createParameter(info, binding, intern(binding.name), method, annotations);
   }
 
   private void createParameter(SourceInfo info, LocalVariableBinding binding, String name,
-      JMethod method) {
+      JMethod method, Annotation... annotations) {
     JParameter param =
         new JParameter(info, name, typeMap.get(binding.type), binding.isFinal(), false, method);
+    if (isLegacyJsInteropEnabled || isNewJsInteropEnabled) {
+      JsInteropUtil.maybeSetJsInteropProperties(param, annotations);
+    }
     method.addParam(param);
   }
 
@@ -4150,7 +4155,7 @@ public class GwtAstBuilder {
       for (Argument argument : x.arguments) {
         SourceInfo info = makeSourceInfo(argument);
         LocalVariableBinding binding = argument.binding;
-        createParameter(info, binding, method);
+        createParameter(info, binding, method, argument.annotations);
       }
     }
     method.freezeParamTypes();

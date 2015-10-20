@@ -85,6 +85,10 @@ public abstract class JType extends JNode implements HasName, CanBeFinal {
     return false;
   }
 
+  public boolean isJsOpaque() {
+    return false;
+  }
+
   /**
    * Returns {@code true} if this is a JavaScriptObject type.
    */

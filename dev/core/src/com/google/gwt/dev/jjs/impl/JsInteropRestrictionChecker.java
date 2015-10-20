@@ -30,6 +30,7 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyAccessorType;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
+import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JStatement;
@@ -222,6 +223,10 @@ public class JsInteropRestrictionChecker {
       checkNativeJsMember(x);
     }
 
+    if (x.canBeReferencedExternally()) {
+      checkJsOpaque(x);
+    }
+
     if (!x.isJsProperty()) {
       return;
     }
@@ -241,6 +246,10 @@ public class JsInteropRestrictionChecker {
 
     if (x.isJsNative()) {
       checkNativeJsMember(x);
+    }
+
+    if (x.isDirectJsApi()) {
+      checkJsOpaque(x);
     }
 
     if (!x.isOrOverridesJsMethod()) {
@@ -500,6 +509,43 @@ public class JsInteropRestrictionChecker {
       for (JMethod method : type.getMethods()) {
         checkMethod(method);
       }
+    }
+  }
+
+  private void checkJsOpaque(JMethod method) {
+    if (method.isJsOpaque()) {
+      return;
+    }
+    String methodName = method.getName();
+    // check parameters.
+    for (JParameter parameter : method.getParams()) {
+      JType type = parameter.getType();
+      if (!type.isJsOpaque() && !parameter.isJsOpaque()) {
+        String parameterName = parameter.getName();
+        String typeName = type.getName();
+        logWarning(
+            "Type of parameter '%s' in method '%s:%s()', '%s', is not exposed to JavaScript, add "
+            + "@SuppressWarnings(\"JsOpaque\") to '%s' or '%s()' if this is intended.",
+            parameterName, method.getEnclosingType().getName(), methodName, typeName, parameterName,
+            methodName);
+      }
+    }
+    // check return type.
+    if (!method.getType().isJsOpaque()) {
+      logWarning(
+          "Return type of method '%s:%s()', '%s', is not exposed to JavaScript, add "
+          + "@SuppressWarnings(\"JsOpaque\") to '%s()' if this is intended.",
+          method.getEnclosingType().getName(), methodName, method.getType().getName(), methodName);
+    }
+  }
+
+  private void checkJsOpaque(JField field) {
+    JType type = field.getType();
+    if (!type.isJsOpaque() && !field.isJsOpaque()) {
+      logWarning(
+          "Type of field '%s' in type '%s', '%s', is not exposed to JavaScript, add "
+          + "@SuppressWarnings(\"JsOpaque\") to '%s' if this is intended.",
+          field.getName(), field.getEnclosingType().getName(), type.getName(), field.getName());
     }
   }
 

@@ -89,6 +89,7 @@ public class JField extends JVariable implements JMember {
   private final boolean isThisRef;
   private boolean isVolatile;
   private transient String signature;
+  private boolean isJsOpaque;
 
   /**
    * The access modifier; stored as an int to reduce memory / serialization footprint.
@@ -167,6 +168,14 @@ public class JField extends JVariable implements JMember {
   @Override
   public String getJsName() {
     return jsName;
+  }
+
+  public boolean isJsOpaque() {
+    return this.isJsOpaque;
+  }
+
+  public void setJsOpaque(boolean isJsOpaque) {
+    this.isJsOpaque = isJsOpaque;
   }
 
   public String getSignature() {

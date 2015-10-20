@@ -736,6 +736,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}",
         "@JsType",
         "public static class Parent extends ParentParent {",
+        "  @SuppressWarnings(\"JsOpaque\") ",
         "  public void doIt(Foo x) {}",
         "}",
         "public static class Buggy extends Parent implements Foo {}");
@@ -1273,6 +1274,116 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggySucceeds();
+  }
+
+  public void testJsOpaqueSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl("public static class A {}");
+    addSnippetClassDecl(
+        "@JsType",
+        "public static class Buggy {",
+        "  @SuppressWarnings(\"JsOpaque\") public A field;",// add "JsOpaque" to field.
+        "  @SuppressWarnings({\"JsOpaque\", \"unused\"})", // test multiple warnings.
+        "  public A t0(A a, A b) { return null; }", // add "JsOpaque" to the method.
+        "  public void t1(",
+        "    @SuppressWarnings(\"JsOpaque\")A a,",
+        "    @SuppressWarnings(\"JsOpaque\")A b",
+        "  ) {}", // add "JsOpaque" to parameters.
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testJsOpaqueLegalTypesSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsExport");
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsFunction");
+    addSnippetImport("com.google.gwt.core.client.JavaScriptObject");
+    addSnippetClassDecl(
+        "@JsType public static class A {",
+        "}",
+        "@JsType public static interface I {}",
+        "@JsFunction public static interface FI {void foo();}",
+        "public static class C extends JavaScriptObject {protected C(){}}",
+        "@JsType public static class Buggy {",
+        "  public void f1(boolean a, int b, double c) {}", // primitive types work fine.
+        "  public void f2(Boolean a, Double b, String c) {}", // unboxed types work fine.
+        "  public void f3(A a) {}", // JsType works fine.
+        "  public void f4(FI a) {}", // JsFunction works fine.
+        "  public void f5(C a) {}", // JavaScriptObject works fine.
+        "  public void f6(Object a) {}", // Java Object works fine.
+        "  public void f7(boolean[] a) {}", // array of primitive types work fine.
+        "  public void f8(Boolean[] a, Double[] b, String[] c) {}", // array of unboxed types.
+        "  public void f9(A[] a) {}", // array of JsType works fine.
+        "  public void f10(FI[] a) {}", // array of JsFunction works fine.
+        "  public void f11(C[][] a) {}", // array of JavaScriptObject works fine.
+        "  public void f12(Object[] a) {}", // array of Java Object works fine.
+        "}");
+    assertBuggySucceeds();
+  }
+
+  public void testJsOpaqueNotExportedMembersSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "public static class A {}",
+        "@JsType public static class Buggy {",
+        "  private A field;", // private field.
+        "  private A f1(A a) { return null; }", // private method.
+        "}");
+    assertBuggySucceeds();
+  }
+
+  public void testJsOpaqueFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsFunction");
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "public static class A {}",
+        "@JsType public static interface I {}",
+        "public static class B implements I {}",
+        "@JsFunction public static interface FI  { void f(A a); }", // JsFunction method is checked.
+        "@JsType public static class Buggy {",
+        "  public A field;", // exported field
+        "  public A f1(A a) { return null; }", // regular class fails.
+        "  public A[] f2(A[] a) { return null; }", // array of regular class fails.
+        "  public long f3(long a) { return 1l; }", // long fails.
+        "  public B f4(B a) { return null; }", // non-JsType class that implements a JsType interface fails.
+        "  public void f5(Object[][] a) {}", // Object[][] fails.
+        "}");
+
+    assertBuggySucceeds(
+        "Type of parameter 'a' in method 'test.EntryPoint$FI:f()', 'test.EntryPoint$A', "
+            + "is not exposed to JavaScript, add @SuppressWarnings(\"JsOpaque\") to 'a' or 'f()' "
+            + "if this is intended.",
+        "Type of field 'field' in type 'test.EntryPoint$Buggy', 'test.EntryPoint$A', "
+            + "is not exposed to JavaScript, add @SuppressWarnings(\"JsOpaque\") to 'field' "
+            + "if this is intended.",
+        "Return type of method 'test.EntryPoint$Buggy:f1()', 'test.EntryPoint$A', "
+            + "is not exposed to JavaScript, add @SuppressWarnings(\"JsOpaque\") to 'f1()' "
+            + "if this is intended.",
+        "Return type of method 'test.EntryPoint$Buggy:f2()', 'test.EntryPoint$A[]', "
+            + "is not exposed to JavaScript, add @SuppressWarnings(\"JsOpaque\") to 'f2()' "
+            + "if this is intended.",
+        "Return type of method 'test.EntryPoint$Buggy:f3()', 'long', "
+            + "is not exposed to JavaScript, add @SuppressWarnings(\"JsOpaque\") to 'f3()' "
+            + "if this is intended.",
+        "Return type of method 'test.EntryPoint$Buggy:f4()', 'test.EntryPoint$B', "
+            + "is not exposed to JavaScript, add @SuppressWarnings(\"JsOpaque\") to 'f4()' "
+            + "if this is intended.",
+        "Type of parameter 'a' in method 'test.EntryPoint$Buggy:f1()', 'test.EntryPoint$A', "
+            + "is not exposed to JavaScript, add @SuppressWarnings(\"JsOpaque\") to 'a' or 'f1()' "
+            + "if this is intended.",
+        "Type of parameter 'a' in method 'test.EntryPoint$Buggy:f2()', 'test.EntryPoint$A[]', "
+            + "is not exposed to JavaScript, add @SuppressWarnings(\"JsOpaque\") to 'a' or 'f2()' "
+            + "if this is intended.",
+        "Type of parameter 'a' in method 'test.EntryPoint$Buggy:f3()', 'long', "
+            + "is not exposed to JavaScript, add @SuppressWarnings(\"JsOpaque\") to 'a' or 'f3()' "
+            + "if this is intended.",
+        "Type of parameter 'a' in method 'test.EntryPoint$Buggy:f4()', 'test.EntryPoint$B', "
+            + "is not exposed to JavaScript, add @SuppressWarnings(\"JsOpaque\") to 'a' or 'f4()' "
+            + "if this is intended.",
+        "Type of parameter 'a' in method 'test.EntryPoint$Buggy:f5()', 'java.lang.Object[][]', "
+            + "is not exposed to JavaScript, add @SuppressWarnings(\"JsOpaque\") to 'a' or 'f5()' "
+            + "if this is intended.");
   }
 
   private static final MockJavaResource jsFunctionInterface = new MockJavaResource(

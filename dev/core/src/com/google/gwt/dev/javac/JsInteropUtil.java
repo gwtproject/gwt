@@ -23,6 +23,7 @@ import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyAccessorType;
+import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
 
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
@@ -41,6 +42,7 @@ public final class JsInteropUtil {
   public static final String JSNOEXPORT_CLASS = "com.google.gwt.core.client.js.JsNoExport";
   public static final String JSPROPERTY_CLASS = "com.google.gwt.core.client.js.JsProperty";
   public static final String JSTYPE_CLASS = "com.google.gwt.core.client.js.JsType";
+  public static final String JSOPAQUE = "JsOpaque";
 
   public static void maybeSetJsInteropProperties(JDeclaredType type, Annotation... annotations) {
     AnnotationBinding jsType = JdtUtil.getAnnotation(annotations, JSTYPE_CLASS);
@@ -87,6 +89,7 @@ public final class JsInteropUtil {
     if (JdtUtil.getAnnotation(annotations, JSPROPERTY_CLASS) != null) {
       setJsPropertyProperties(method);
     }
+    method.setJsOpaqueSuppressed(isJsOpaqueSuppressed(annotations));
   }
 
   public static void maybeSetJsInteropPropertiesNew(JMethod method, Annotation... annotations) {
@@ -102,15 +105,22 @@ public final class JsInteropUtil {
     if (getInteropAnnotation(annotations, "JsProperty") != null) {
       setJsPropertyProperties(method);
     }
+    method.setJsOpaqueSuppressed(isJsOpaqueSuppressed(annotations));
   }
 
   public static void maybeSetJsInteropProperties(JField field, Annotation... annotations) {
     setJsInteropProperties(field, annotations);
+    field.setJsOpaqueSuppressed(isJsOpaqueSuppressed(annotations));
   }
 
   public static void maybeSetJsInteropPropertiesNew(JField field, Annotation... annotations) {
     AnnotationBinding annotation = getInteropAnnotation(annotations, "JsProperty");
     setJsInteropPropertiesNew(field, annotations, annotation);
+    field.setJsOpaqueSuppressed(isJsOpaqueSuppressed(annotations));
+  }
+
+  public static void maybeSetJsInteropProperties(JParameter parameter, Annotation... annotations) {
+    parameter.setJsOpaqueSuppressed(isJsOpaqueSuppressed(annotations));
   }
 
   private static void setJsInteropProperties(JMember member, Annotation... annotations) {
@@ -192,6 +202,10 @@ public final class JsInteropUtil {
     }
     String value = JdtUtil.getAnnotationParameterString(jsExport, "value");
     return Strings.isNullOrEmpty(value) ? calculatedName : value;
+  }
+
+  private static boolean isJsOpaqueSuppressed(Annotation[] annotations) {
+    return JdtUtil.getSuppressedWarnings(annotations).contains(JSOPAQUE);
   }
 
   private static boolean startsWithCamelCase(String string, String prefix) {

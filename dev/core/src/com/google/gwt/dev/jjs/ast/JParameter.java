@@ -36,6 +36,7 @@ public class JParameter extends JVariable implements HasEnclosingMethod {
 
   private final JMethod enclosingMethod;
   private final boolean isThis;
+  private boolean isJsOpaqueSuppressed;
 
   public JParameter(SourceInfo info, String name, JType type, boolean isFinal, boolean isThis,
       JMethod enclosingMethod) {
@@ -55,6 +56,14 @@ public class JParameter extends JVariable implements HasEnclosingMethod {
    */
   public boolean isThis() {
     return isThis;
+  }
+
+  public boolean isJsOpaqueSuppressed() {
+    return isJsOpaqueSuppressed;
+  }
+
+  public void setJsOpaqueSuppressed(boolean isJsOpaqueSuppressed) {
+    this.isJsOpaqueSuppressed = isJsOpaqueSuppressed;
   }
 
   @Override

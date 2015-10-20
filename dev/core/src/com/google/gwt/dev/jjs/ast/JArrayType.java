@@ -95,6 +95,17 @@ public class JArrayType extends JReferenceType {
   }
 
   @Override
+  public boolean canBeReferencedExternally() {
+    if (getDims() > 1) {
+      // Object[][] cannot be referenced externally because the elements can be added without
+      // doing setCheck.
+      return getLeafType().canBeReferencedExternally()
+          && !getLeafType().getName().equals("java.lang.Object");
+    }
+    return getLeafType().canBeReferencedExternally();
+  }
+
+  @Override
   public boolean replaces(JType originalType) {
     return (originalType instanceof JArrayType)
         && elementType.replaces(((JArrayType) originalType).getElementType());

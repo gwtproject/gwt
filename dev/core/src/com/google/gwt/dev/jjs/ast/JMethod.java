@@ -86,6 +86,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
   private boolean exported;
   private String jsNamespace;
   private JsPropertyAccessorType jsPropertyType = JsPropertyAccessorType.NONE;
+  private boolean isJsOpaqueSuppressed;
   private Specialization specialization;
   private InliningMode inliningMode = InliningMode.NORMAL;
   private boolean preventDevirtualization = false;
@@ -101,6 +102,10 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
 
   public boolean isJsInteropEntryPoint() {
     return exported && !needsDynamicDispatch();
+  }
+
+  public boolean isDirectJsApi() {
+    return exported || isJsFunctionMethod();
   }
 
   public boolean canBeCalledExternally() {
@@ -242,6 +247,14 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
 
   public boolean isJsNative() {
     return enclosingType != null && enclosingType.isJsNative();
+  }
+
+  public boolean isJsOpaqueSuppressed() {
+    return isJsOpaqueSuppressed;
+  }
+
+  public void setJsOpaqueSuppressed(boolean isJsOpaqueSuppressed) {
+    this.isJsOpaqueSuppressed = isJsOpaqueSuppressed;
   }
 
   public void setSpecialization(List<JType> paramTypes, JType returnsType, String targetMethod) {

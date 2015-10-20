@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "39111e0a_fc2a98b1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JArrayType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-20T23:09:06Z",
+      "side": 1,
+      "message": "Object[][] returns false, and multiple-dimension array of other types returns true.",
+      "parentUuid": "b90b4ea8_f5a53bdb",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 38
+      },
+      "revId": "63f69f14a0380c4c6a97397494df7e4a0bc77378",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b90b4ea8_d5aa37ab",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JInterfaceType.java",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "39111e0a_9c3a84fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JInterfaceType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-20T23:09:06Z",
+      "side": 1,
+      "message": "renamed to canBeReferencedExternally.",
+      "parentUuid": "b90b4ea8_d5aa37ab",
+      "range": {
+        "startLine": 78,
+        "startChar": 17,
+        "endLine": 78,
+        "endChar": 27
+      },
+      "revId": "63f69f14a0380c4c6a97397494df7e4a0bc77378",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b90b4ea8_95b5df07",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2015-10-20T03:38:21Z",
       "side": 1,
       "message": "is this ever called with false. Consider setJsOpaque() without parameters.",
+      "range": {
+        "startLine": 256,
+        "startChar": 25,
+        "endLine": 256,
+        "endChar": 44
+      },
+      "revId": "63f69f14a0380c4c6a97397494df7e4a0bc77378",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39111e0a_dc96bc49",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-20T23:09:06Z",
+      "side": 1,
+      "message": "it is called as setJsOpaque(isJsOpaque(annotations)) in JsInteropUtil. I think it is simpler with the parameter.",
+      "parentUuid": "b90b4ea8_95b5df07",
       "range": {
         "startLine": 256,
         "startChar": 25,

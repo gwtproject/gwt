@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f935c6bb_2c67bb50",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-21T19:42:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39111e0a_55d6ffd6",
+      "range": {
+        "startLine": 45,
+        "startChar": 41,
+        "endLine": 45,
+        "endChar": 49
+      },
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39111e0a_55a1df6a",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2015-10-21T03:21:39Z",
       "side": 1,
       "message": "I think it is makes sensible to make this generic and do it from GwtAstBuilder:\n\n  node.addSuppressedWarnings(Jdt.getSuppressedWarning(..))\n\nthen we can do getSuppressedWarnings().contains(\"blah\") where needed.",
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f935c6bb_4c64ef49",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-21T19:42:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39111e0a_55a1df6a",
       "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "f935c6bb_cc6fff29",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JArrayType.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-21T19:42:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d95e42fd_b8a5b9dc",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 104,
+        "endChar": 5
+      },
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39111e0a_95ab774b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JArrayType.java",
         "patchSetId": 3
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "f935c6bb_ec74c3fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JArrayType.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-21T19:42:49Z",
+      "side": 1,
+      "message": "As Roberto suggested, removed the condition check.",
+      "parentUuid": "39111e0a_95ab774b",
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39111e0a_958257c9",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
         "patchSetId": 3
@@ -93,6 +177,30 @@
       "writtenOn": "2015-10-21T03:21:39Z",
       "side": 1,
       "message": "I think this is better to be implemented in JDeclaredType to share the impl with JInterfaceType",
+      "range": {
+        "startLine": 106,
+        "startChar": 17,
+        "endLine": 106,
+        "endChar": 42
+      },
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f935c6bb_6c61b338",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-21T19:42:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39111e0a_958257c9",
       "range": {
         "startLine": 106,
         "startChar": 17,
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "f935c6bb_8fa099cd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-21T19:42:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39111e0a_156e47bf",
+      "range": {
+        "startLine": 107,
+        "startChar": 11,
+        "endLine": 107,
+        "endChar": 34
+      },
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39111e0a_757fbb64",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
         "patchSetId": 3
@@ -145,6 +277,24 @@
     },
     {
       "key": {
+        "uuid": "f935c6bb_2fb24d1e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-21T19:42:49Z",
+      "side": 1,
+      "message": "It is used to guard if we should do JsOpaque check on the method. We only check the direct Js method, not overriding methods.",
+      "parentUuid": "39111e0a_757fbb64",
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39111e0a_7505fb4f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3
@@ -156,6 +306,30 @@
       "writtenOn": "2015-10-21T03:21:39Z",
       "side": 1,
       "message": "Let\u0027s do javac style warning:\n\"[unusable-by-js] Return type of \u0027%:%s\u0027 is not usable by but exposed to JavaScript\"",
+      "range": {
+        "startLine": 515,
+        "startChar": 57,
+        "endLine": 515,
+        "endChar": 64
+      },
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f935c6bb_6fbc45f0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-21T19:42:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39111e0a_7505fb4f",
       "range": {
         "startLine": 515,
         "startChar": 57,
@@ -191,6 +365,30 @@
     },
     {
       "key": {
+        "uuid": "f935c6bb_afcc7d9c",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-21T19:42:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39111e0a_d58ccf0e",
+      "range": {
+        "startLine": 1304,
+        "startChar": 8,
+        "endLine": 1304,
+        "endChar": 11
+      },
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39111e0a_15976715",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 3
@@ -208,6 +406,24 @@
     },
     {
       "key": {
+        "uuid": "f935c6bb_cfc1b163",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-21T19:42:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39111e0a_15976715",
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39111e0a_156927af",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 3
@@ -219,6 +435,24 @@
       "writtenOn": "2015-10-21T03:21:39Z",
       "side": 1,
       "message": "over 100",
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f935c6bb_efc67578",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-21T19:42:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39111e0a_156927af",
       "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -38,7 +38,7 @@ import java.util.Set;
 /**
  * A Java method implementation.
  */
-public class JMethod extends JNode implements JMember, CanBeAbstract {
+public class JMethod extends JNode implements JMember, CanBeAbstract, CanHaveSuppressedWarnings {
 
   /**
    * Indicates whether a method is a JsProperty accessor.
@@ -91,6 +91,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
   private boolean preventDevirtualization = false;
   private boolean hasSideEffects = true;
   private boolean defaultMethod = false;
+  private Set<String> suppressedWarnings = Sets.newHashSet();
 
   @Override
   public void setJsMemberInfo(String namespace, String name, boolean exported) {
@@ -101,6 +102,10 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
 
   public boolean isJsInteropEntryPoint() {
     return exported && !needsDynamicDispatch();
+  }
+
+  public boolean isDirectJsApi() {
+    return exported || isJsFunctionMethod();
   }
 
   public boolean canBeCalledExternally() {
@@ -723,6 +728,16 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
 
   public void setType(JType newType) {
     returnType = newType;
+  }
+
+  @Override
+  public Set<String> getSuppressedWarnings() {
+    return suppressedWarnings;
+  }
+
+  @Override
+  public void addSuppressedWarnings(Set<String> suppressedWarnings) {
+    this.suppressedWarnings.addAll(suppressedWarnings);
   }
 
   @Override

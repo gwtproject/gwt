@@ -24,6 +24,7 @@ import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -31,6 +32,7 @@ import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Base class for any declared type.
@@ -49,7 +51,7 @@ import java.util.List;
  * initialization, and use the private variable <code>clinitTarget</code>to keep track which
  * initializer in the superclass chain needs to be called.
  */
-public abstract class JDeclaredType extends JReferenceType {
+public abstract class JDeclaredType extends JReferenceType implements CanHaveSuppressedWarnings {
 
   private boolean isJsFunction;
   private boolean isJsType;
@@ -58,6 +60,7 @@ public abstract class JDeclaredType extends JReferenceType {
   private boolean canBeImplementedExternally;
   private String jsNamespace = null;
   private String jsName = null;
+  private Set<String> suppressedWarnings = Sets.newHashSet();
 
   /**
    * The types of nested classes, https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
@@ -388,6 +391,22 @@ public abstract class JDeclaredType extends JReferenceType {
     return false;
   }
 
+  public boolean canBeReferencedExternally() {
+    for (JMethod method : getMethods()) {
+      if (method.canBeCalledExternally()) {
+        return true;
+      }
+    }
+
+    for (JField field : getFields()) {
+      if (field.canBeReferencedExternally()) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   @Override
   public boolean isJsNative() {
     return isJsNative;
@@ -599,5 +618,15 @@ public abstract class JDeclaredType extends JReferenceType {
 
   public void setClassDisposition(NestedClassDisposition nestedClassDisposition) {
     this.nestedClassDisposition = nestedClassDisposition;
+  }
+
+  @Override
+  public Set<String> getSuppressedWarnings() {
+    return suppressedWarnings;
+  }
+
+  @Override
+  public void addSuppressedWarnings(Set<String> suppressedWarnings) {
+    this.suppressedWarnings.addAll(suppressedWarnings);
   }
 }

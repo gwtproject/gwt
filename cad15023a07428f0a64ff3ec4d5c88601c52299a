@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b90b4ea8_c4184fbe",
+        "filename": "user/test/com/google/gwt/core/client/interop/ElementLikeJsInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-21T01:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b90b4ea8_905a9adb",
+      "revId": "cad15023a07428f0a64ff3ec4d5c88601c52299a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b90b4ea8_70704656",
         "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2015-10-17T18:23:50Z",
       "side": 1,
       "message": "Can we named this HTMLElementConcreteNativeJsType?\n\nI find myself going back and forth to the definitions.",
+      "range": {
+        "startLine": 230,
+        "startChar": 34,
+        "endLine": 230,
+        "endChar": 45
+      },
+      "revId": "cad15023a07428f0a64ff3ec4d5c88601c52299a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b90b4ea8_44057f4f",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsFunctionTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-21T01:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b90b4ea8_70704656",
       "range": {
         "startLine": 230,
         "startChar": 34,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "b90b4ea8_c453af4e",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsPropertyTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-21T01:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b90b4ea8_50b8a24d",
+      "range": {
+        "startLine": 202,
+        "startChar": 55,
+        "endLine": 202,
+        "endChar": 84
+      },
+      "revId": "cad15023a07428f0a64ff3ec4d5c88601c52299a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b90b4ea8_10c22aba",
         "filename": "user/test/com/google/gwt/core/client/interop/JsTypeArrayTest.java",
         "patchSetId": 1
@@ -76,6 +142,30 @@
       "writtenOn": "2015-10-17T18:23:50Z",
       "side": 1,
       "message": "WithAMethod",
+      "range": {
+        "startLine": 49,
+        "startChar": 40,
+        "endLine": 49,
+        "endChar": 49
+      },
+      "revId": "cad15023a07428f0a64ff3ec4d5c88601c52299a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b90b4ea8_4460df0c",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeArrayTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-21T01:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b90b4ea8_10c22aba",
       "range": {
         "startLine": 49,
         "startChar": 40,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "b90b4ea8_a4d67bd4",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-21T01:57:05Z",
+      "side": 1,
+      "message": "Not yet, I\u0027ll send a separate patch.",
+      "parentUuid": "b90b4ea8_90acda0e",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 84
+      },
+      "revId": "cad15023a07428f0a64ff3ec4d5c88601c52299a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b90b4ea8_f0ad560d",
         "filename": "user/test/com/google/gwt/core/client/interop/MyJsClassWithPrototypeAndOnlyInstanceofReference.java",
         "patchSetId": 1
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "39111e0a_b5edd3bd",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsClassWithPrototypeAndOnlyInstanceofReference.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-21T01:57:05Z",
+      "side": 1,
+      "message": "This is not exported, just a reference to an existing type.",
+      "parentUuid": "b90b4ea8_f0ad560d",
+      "range": {
+        "startLine": 24,
+        "startChar": 46,
+        "endLine": 24,
+        "endChar": 80
+      },
+      "revId": "cad15023a07428f0a64ff3ec4d5c88601c52299a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b90b4ea8_d0b25269",
         "filename": "user/test/com/google/gwt/dev/jjs/optimized/OptimizationTestBase.java",
         "patchSetId": 1
@@ -145,6 +283,30 @@
       "writtenOn": "2015-10-17T18:23:50Z",
       "side": 1,
       "message": "add _ as well",
+      "range": {
+        "startLine": 51,
+        "startChar": 40,
+        "endLine": 51,
+        "endChar": 46
+      },
+      "revId": "cad15023a07428f0a64ff3ec4d5c88601c52299a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b90b4ea8_640643f0",
+        "filename": "user/test/com/google/gwt/dev/jjs/optimized/OptimizationTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-21T01:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b90b4ea8_d0b25269",
       "range": {
         "startLine": 51,
         "startChar": 40,

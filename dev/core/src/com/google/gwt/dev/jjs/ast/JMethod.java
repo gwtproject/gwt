@@ -550,7 +550,8 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
   }
 
   /**
-   * Returns the transitive closure of all the methods this method overrides.
+   * Returns the transitive closure of all the methods this method overrides; this set is ordered
+   * from most specific to least specific, where class methods appear before interface methods.
    */
   public Set<JMethod> getOverriddenMethods() {
     return overriddenMethods;
@@ -558,7 +559,9 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
 
   /**
    * Returns the transitive closure of all the methods that override this method; caveat this
-   * list is only complete in monolithic compiles and should not be used in incremental compiles..
+   * list is only complete in monolithic compiles and should not be used in incremental compiles.
+   * The returned set is ordered in such a way that most specific overriding methods appear after
+   * less specific ones.
    */
   public Set<JMethod> getOverridingMethods() {
     return overridingMethods;

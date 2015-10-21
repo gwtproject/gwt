@@ -379,11 +379,17 @@ public class JsInteropRestrictionChecker {
   }
 
   private void checkMemberOfNativeJsType(JMember member) {
-    if (member.isSynthetic()) {
+    if (member.isSynthetic() || member.isJsNative()) {
       return;
     }
 
-    if (member.getJsName() == null && !member.isJsOverlay()) {
+    if (member.isJsOverlay() ||
+        (member.isStatic() && member.isPrivate() && member instanceof JMethod)) {
+      // Allow @JsOverlays and private static helper methods.
+      return;
+    }
+
+    if (member.getJsName() == null) {
       logError(member, "Native JsType member %s is not public or has @JsIgnore.",
           getMemberDescription(member));
       return;
@@ -435,6 +441,16 @@ public class JsInteropRestrictionChecker {
     if (!jsNamespace.isEmpty() && !JsUtils.isValidJsQualifiedName(jsNamespace)) {
       logError(item, "%s has invalid namespace '%s'.", getDescription(item), jsNamespace);
     }
+
+    JMethod method = (JMethod) member;
+    if (method.isJsniMethod()) {
+      logError(method, "JSNI method %s is not allowed in a native JsType.",
+          getMemberDescription(method));
+      return;
+    }
+
+    logError(method, "Native JsType method %s should be native or abstract.",
+        getMemberDescription(method));
   }
 
   private void checkStaticJsPropertyCalls() {
@@ -614,7 +630,7 @@ public class JsInteropRestrictionChecker {
         logWarning(
             parameter,
             "[unusable-by-js] Type of parameter '%s' in method %s is not usable by but exposed to"
-            + " JavaScript.",
+                + " JavaScript.",
             parameter.getName(), getMemberDescription(method));
       }
     }

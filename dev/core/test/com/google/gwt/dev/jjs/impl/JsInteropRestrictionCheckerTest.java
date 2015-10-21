@@ -109,7 +109,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "'test.EntryPoint$Buggy.display' can't be exported because the "
-        + "global name 'test.EntryPoint.Buggy.show' is already taken.");
+            + "global name 'test.EntryPoint.Buggy.show' is already taken.");
   }
 
   public void testJsPropertyGetterStyleSucceeds() throws Exception {
@@ -718,7 +718,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggyFails(
         "More than one JsConstructor exists for test.EntryPoint$Buggy.",
         "'test.EntryPoint$Buggy.EntryPoint$Buggy(I) <init>' can't be "
-        + "exported because the global name 'test.EntryPoint.Buggy' is already taken.");
+            + "exported because the global name 'test.EntryPoint.Buggy' is already taken.");
   }
 
   public void testNonCollidingAccidentalOverrideSucceeds() throws Exception {
@@ -1183,7 +1183,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Native JsType member 'test.EntryPoint$Buggy.EntryPoint$Buggy() <init>' "
-          + "is not public or has @JsIgnore.");
+            + "is not public or has @JsIgnore.");
   }
 
   public void testNativeJsTypeNonPublicConstructorSucceeds() throws UnableToCompleteException {
@@ -1200,6 +1200,76 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetClassDecl(
         "@JsType(isNative=true) static class Buggy {",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testNativeJsTypeInstanceMethodOverloadSucceeds() throws UnableToCompleteException {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) public static class Buggy {",
+        "  public native void m(Object o);",
+        "  public native void m(Object[] o);",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testNativeJsTypeStaticMethodOverloadSucceeds() throws UnableToCompleteException {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) public static class Buggy {",
+        "  public static native void m(Object o);",
+        "  public static native void m(Object[] o);",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodOverloadsSucceeds()
+      throws UnableToCompleteException {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) public static class Super {",
+        "  public native void m(Object o);",
+        "  public native void m(Object[] o);",
+        "}",
+        "public static class Buggy extends Super {",
+        "  public void m(Object[] o) { }",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodOverloadsFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) public static class Super {",
+        "  public native void m(Object o);",
+        "  public native void m(Object[] o);",
+        "}",
+        "public static class Buggy extends Super {",
+        "  public void m(Object o) { }",
+        "  public void m(Object[] o) { }",
+        "}");
+
+    assertBuggyFails(
+        "'test.EntryPoint$Buggy.m([Ljava/lang/Object;)V' can't be exported in type " +
+            "'test.EntryPoint$Buggy' because the name 'm' is already taken.");
+  }
+
+  public void testNonJsTypeExtendingNativeJsTypeWithStaticMethodOverloadsSucceeds()
+      throws UnableToCompleteException {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) public static class Super {",
+        "  public static native void m(Object o);",
+        "  public static native void m(Object[] o);",
+        "}",
+        "public static class Buggy extends Super {",
+        "  public static void m(Object o) { }",
+        "  public static void m(Object[] o) { }",
         "}");
 
     assertBuggySucceeds();

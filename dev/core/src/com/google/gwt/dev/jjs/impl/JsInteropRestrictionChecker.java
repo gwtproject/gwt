@@ -371,6 +371,15 @@ public class JsInteropRestrictionChecker {
     }
   }
 
+  private void checkNativeMethodsOnNonNativeType(JDeclaredType type) {
+    for (JMethod method : type.getMethods()) {
+      if (!method.isJsNative() && method.getBody() == null) {
+        logError("Native method '%s' can only be declared on a native JsType.",
+            method.getQualifiedName());
+      }
+    }
+  }
+
   private void checkNoStaticJsPropertyCalls() {
     new JVisitor() {
       @Override
@@ -471,6 +480,8 @@ public class JsInteropRestrictionChecker {
     } else {
       checkJsConstructors(type);
     }
+
+    checkNativeMethodsOnNonNativeType(type);
 
     for (;type != null; type = type.getSuperClass())  {
       for (JField field : type.getFields()) {

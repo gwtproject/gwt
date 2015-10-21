@@ -1275,6 +1275,27 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggySucceeds();
   }
 
+  public void testNativeMethodOnNonNativeJsTypeFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType public static class Buggy {",
+        "  public native void m();",
+        "}");
+
+    assertBuggyFails(
+        "Native method 'test.EntryPoint$Buggy.m()V' can only be declared on a native JsType.");
+  }
+
+  public void testNativeMethodOnJavaTypeFails() {
+    addSnippetClassDecl(
+        "public static class Buggy {",
+        "  public native void m();",
+        "}");
+
+    assertBuggyFails(
+        "Native method 'test.EntryPoint$Buggy.m()V' can only be declared on a native JsType.");
+  }
+
   private static final MockJavaResource jsFunctionInterface = new MockJavaResource(
       "test.MyJsFunctionInterface") {
     @Override

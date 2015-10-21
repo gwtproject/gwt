@@ -261,7 +261,9 @@ public class JsInteropRestrictionChecker {
 
   private void checkLocalName(JMember member) {
     String jsName = member.getJsName();
-    if (currentLocalNameByMemberNames.put(jsName, member.getQualifiedName()) != null) {
+    if (currentLocalNameByMemberNames.put(jsName, member.getQualifiedName()) != null
+        // Native member are allowed to collide.
+        && !member.isJsNative()) {
       logError("'%s' can't be exported in type '%s' because the name '%s' is already taken.",
           member.getQualifiedName(), currentType.getName(), jsName);
     }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f935c6bb_49d6a125",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUnusedFunctionRemover.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5570
+      },
+      "writtenOn": "2015-10-21T08:42:23Z",
+      "side": 1,
+      "message": "Why won\u0027t onLoad() get pruned now?",
+      "revId": "daa8c67a7d27599e113324df9109faaebf934367",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -34,6 +34,47 @@
       "revId": "daa8c67a7d27599e113324df9109faaebf934367",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f935c6bb_2c86dba7",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUnusedFunctionRemover.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-21T18:58:18Z",
+      "side": 1,
+      "message": "Gotcha.",
+      "parentUuid": "f935c6bb_c93ff19f",
+      "revId": "daa8c67a7d27599e113324df9109faaebf934367",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f935c6bb_0c703755",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/RunAsyncTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-10-21T18:58:18Z",
+      "side": 1,
+      "message": "Nice! It fixed this heisenbug from namespacechooser cl.",
+      "range": {
+        "startLine": 73,
+        "startChar": 49,
+        "endLine": 73,
+        "endChar": 50
+      },
+      "revId": "daa8c67a7d27599e113324df9109faaebf934367",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

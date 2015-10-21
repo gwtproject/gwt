@@ -225,6 +225,30 @@
     },
     {
       "key": {
+        "uuid": "39111e0a_d5ba0fab",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-21T02:25:41Z",
+      "side": 1,
+      "message": "ok.",
+      "parentUuid": "b90b4ea8_a4d67bd4",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 84
+      },
+      "revId": "cad15023a07428f0a64ff3ec4d5c88601c52299a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b90b4ea8_f0ad560d",
         "filename": "user/test/com/google/gwt/core/client/interop/MyJsClassWithPrototypeAndOnlyInstanceofReference.java",
         "patchSetId": 1
@@ -260,6 +284,30 @@
       "side": 1,
       "message": "This is not exported, just a reference to an existing type.",
       "parentUuid": "b90b4ea8_f0ad560d",
+      "range": {
+        "startLine": 24,
+        "startChar": 46,
+        "endLine": 24,
+        "endChar": 80
+      },
+      "revId": "cad15023a07428f0a64ff3ec4d5c88601c52299a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39111e0a_b5bf9399",
+        "filename": "user/test/com/google/gwt/core/client/interop/MyJsClassWithPrototypeAndOnlyInstanceofReference.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-21T02:25:41Z",
+      "side": 1,
+      "message": "Then change the name of the class to reflect that.\n\nAliasToBlhaOnlyInstanceReferecne",
+      "parentUuid": "39111e0a_b5edd3bd",
       "range": {
         "startLine": 24,
         "startChar": 46,

@@ -1234,6 +1234,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  @JsOverlay private final void n() { }",
         "  @JsOverlay final void o() { }",
         "  @JsOverlay protected final void p() { }",
+        "  private static void q() { }",
         "}");
 
     assertBuggySucceeds();
@@ -1290,7 +1291,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 6: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final, static, nor native.");
+        "Line 6: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final, "
+            + "static, nor native.");
   }
 
   public void testJsOverlayOnNativeMethodFails() {
@@ -1302,7 +1304,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 6: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final, static, nor native.");
+        "Line 6: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final, "
+            + "static, nor native.");
   }
 
   public void testJsOverlayOnJsoMethodSucceeds() throws Exception {
@@ -1811,6 +1814,30 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "Line 10: [unusable-by-js] Type of parameter 'x' in method "
             + "'void EntryPoint.Parent.doIt(Class)' (exposed by 'EntryPoint.Buggy') is not usable "
             + "by but exposed to JavaScript.");
+  }
+
+  public void testNativeMethodOnJsTypeSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetClassDecl(
+        "public static class Buggy {",
+        "  @JsMethod public native void m();",
+        "  @JsMethod public native void n() /*-{}-*/;",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testNonNativeMethodOnNativeJsTypeFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) public static class Buggy {",
+        "  public void m() {}",
+        "  public native void n() /*-{}-*/;",
+        "}");
+
+    assertBuggyFails(
+        "Line 5: Native JsType method 'void EntryPoint.Buggy.m()' should be native or abstract.",
+        "Line 6: JSNI method 'void EntryPoint.Buggy.n()' is not allowed in a native JsType.");
   }
 
   private static final MockJavaResource jsFunctionInterface = new MockJavaResource(

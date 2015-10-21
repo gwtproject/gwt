@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39111e0a_d5196fc4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-10-21T01:12:22Z",
+      "side": 1,
+      "message": "you\u0027ve verified that this change in behavior for getSubTypeNames() won\u0027t have surprising effect in other places not being examined in this CL?",
+      "revId": "d4bc07b2555c21f109b2331137aa67c9041e1d18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39111e0a_b5f793b8",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-10-21T01:12:22Z",
+      "side": 1,
+      "message": "missing @JsType ? the other Foo has it",
+      "range": {
+        "startLine": 1053,
+        "startChar": 13,
+        "endLine": 1053,
+        "endChar": 19
+      },
+      "revId": "d4bc07b2555c21f109b2331137aa67c9041e1d18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39111e0a_f5010b52",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-10-21T01:12:22Z",
+      "side": 1,
+      "message": "unused import?",
+      "revId": "d4bc07b2555c21f109b2331137aa67c9041e1d18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39111e0a_35e42302",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-10-21T01:12:22Z",
+      "side": 1,
+      "message": "unused import?",
+      "revId": "d4bc07b2555c21f109b2331137aa67c9041e1d18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39111e0a_95f1b7c2",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1258,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-10-21T01:12:22Z",
+      "side": 1,
+      "message": "s/prototype/native",
+      "range": {
+        "startLine": 1258,
+        "startChar": 21,
+        "endLine": 1258,
+        "endChar": 30
+      },
+      "revId": "d4bc07b2555c21f109b2331137aa67c9041e1d18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

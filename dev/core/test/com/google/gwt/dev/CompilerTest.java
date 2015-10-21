@@ -1260,7 +1260,7 @@ public class CompilerTest extends ArgProcessorTestBase {
             "package com.foo;",
             "import jsinterop.annotations.JsType;",
             "@JsType(isNative=true) public class Foo {",
-            "  public static void doStaticBar() {}",
+            "  private static void doStaticBar() {}",
             "}");
 
     MockJavaResource regularFooResource =
@@ -1269,7 +1269,7 @@ public class CompilerTest extends ArgProcessorTestBase {
             "package com.foo;",
             "import jsinterop.annotations.JsType;",
             "@JsType public class Foo {",
-            "  public static void doStaticBar() {}",
+            "  private static void doStaticBar() {}",
             "}");
 
     checkRecompiledModifiedApp(

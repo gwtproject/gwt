@@ -1234,6 +1234,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  @JsOverlay private final void n() { }",
         "  @JsOverlay final void o() { }",
         "  @JsOverlay protected final void p() { }",
+        "  private static void q() { }",
         "}");
 
     assertBuggySucceeds();
@@ -1290,7 +1291,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 6: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final, static, nor native.");
+        "Line 6: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final, "
+            + "static, nor native.");
   }
 
   public void testJsOverlayOnNativeMethodFails() {
@@ -1302,7 +1304,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 6: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final, static, nor native.");
+        "Line 6: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final, "
+            + "static, nor native.");
   }
 
   public void testJsOverlayOnJsoMethodSucceeds() throws Exception {
@@ -1438,7 +1441,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 5: Native JsType member 'int EntryPoint.Buggy.f' is not public or has @JsIgnore.");
+        "Line 5: Native JsType member 'int EntryPoint.Buggy.f' is not public, "
+            + "non-native or has @JsIgnore.");
   }
 
   public void testNativeJsTypeJsIgnoredFieldFails() {
@@ -1450,7 +1454,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 6: Native JsType member 'int EntryPoint.Buggy.x' is not public or has @JsIgnore.");
+        "Line 6: Native JsType member 'int EntryPoint.Buggy.x' is not public, "
+            + "non-native or has @JsIgnore.");
   }
 
   public void testNativeJsTypeNonPublicMethodFails() {
@@ -1461,7 +1466,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 5: Native JsType member 'void EntryPoint.Buggy.m()' is not public or has @JsIgnore.");
+        "Line 5: Native JsType member 'void EntryPoint.Buggy.m()' is not public, "
+            + "non-native or has @JsIgnore.");
   }
 
   public void testNativeJsTypeJsIgnoredMethodFails() {
@@ -1473,7 +1479,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 6: Native JsType member 'void EntryPoint.Buggy.m()' is not public or has @JsIgnore.");
+        "Line 6: Native JsType member 'void EntryPoint.Buggy.m()' is not public, "
+            + "non-native or has @JsIgnore.");
   }
 
   public void testNativeJsTypeJsIgnoredConstructorFails() {
@@ -1485,8 +1492,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 6: Native JsType member 'EntryPoint.Buggy.EntryPoint$Buggy()' is not public or "
-            + "has @JsIgnore.");
+        "Line 6: Native JsType member 'EntryPoint.Buggy.EntryPoint$Buggy()' is not public, "
+            + "non-native or has @JsIgnore.");
   }
 
   public void testNativeJsTypeMutlipleConstructorSucceeds() throws Exception {
@@ -1811,6 +1818,32 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "Line 10: [unusable-by-js] Type of parameter 'x' in method "
             + "'void EntryPoint.Parent.doIt(Class)' (exposed by 'EntryPoint.Buggy') is not usable "
             + "by but exposed to JavaScript.");
+  }
+
+  public void testNativeMethodOnJsTypeSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetClassDecl(
+        "public static class Buggy {",
+        "  @JsMethod public native void m();",
+        "  @JsMethod public native void n() /*-{}-*/;",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testNonNativeMethodOnNativeJsTypeFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType(isNative=true)public static class Buggy {",
+        "  public void m() {}",
+        "  public native void n() /*-{}-*/;",
+        "}");
+
+    assertBuggyFails(
+        "Line 5: Native JsType member 'void EntryPoint.Buggy.m()' is not public, "
+            + "non-native or has @JsIgnore.",
+        "Line 6: Native JsType member 'void EntryPoint.Buggy.n()' is not public, "
+            + "non-native or has @JsIgnore.");
   }
 
   private static final MockJavaResource jsFunctionInterface = new MockJavaResource(

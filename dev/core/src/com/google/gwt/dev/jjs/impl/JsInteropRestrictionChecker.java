@@ -377,11 +377,18 @@ public class JsInteropRestrictionChecker {
       return;
     }
 
-    if (member.getJsName() == null && !member.isJsOverlay()) {
-      logError(member, "Native JsType member %s is not public or has @JsIgnore.",
-          getMemberDescription(member));
+    if (member.isJsOverlay() ||
+        (member.isStatic() && member.isPrivate() && member instanceof JMethod)) {
+      // Allow @JsOverlays and private static helper methods.
       return;
     }
+
+    if (member.getJsName() != null && (member.isJsNative() || member.isAbstract())) {
+      return;
+    }
+
+    logError(member, "Native JsType member %s is not public, non-native or has @JsIgnore.",
+        getMemberDescription(member));
   }
 
   private void checkStaticJsPropertyCalls() {
@@ -558,7 +565,7 @@ public class JsInteropRestrictionChecker {
         logWarning(
             parameter,
             "[unusable-by-js] Type of parameter '%s' in method %s is not usable by but exposed to"
-            + " JavaScript.",
+                + " JavaScript.",
             parameter.getName(), getMemberDescription(method));
       }
     }

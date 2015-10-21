@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "39111e0a_b54953a6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-21T03:21:39Z",
+      "side": 1,
+      "message": "Let\u0027s use the qualified name to be consistent with the rest and than we can refactor all together.",
+      "parentUuid": "b90b4ea8_5aab144c",
+      "range": {
+        "startLine": 525,
+        "startChar": 37,
+        "endLine": 525,
+        "endChar": 63
+      },
+      "revId": "4c8f14fe9590fc12c33cbf97339660281516f5bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b90b4ea8_27e97a1b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1

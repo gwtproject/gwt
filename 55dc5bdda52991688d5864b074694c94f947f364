@@ -16,6 +16,24 @@
       "revId": "55dc5bdda52991688d5864b074694c94f947f364",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f935c6bb_89a099cd",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-21T06:36:45Z",
+      "side": 1,
+      "message": "Looking at ArrayList the behavior is correct. Although it clones its internal array, that array is guaranteed to be an Object[]",
+      "parentUuid": "d91642dc_d8114ddb",
+      "revId": "55dc5bdda52991688d5864b074694c94f947f364",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

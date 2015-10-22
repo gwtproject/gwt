@@ -24,6 +24,8 @@ import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JExpressionStatement;
 import com.google.gwt.dev.jjs.ast.JField;
+import com.google.gwt.dev.jjs.ast.JInstanceOf;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyAccessorType;
@@ -31,6 +33,7 @@ import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
+import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
@@ -47,10 +50,6 @@ import java.util.Set;
 /**
  * Checks and throws errors for invalid JsInterop constructs.
  */
-// TODO: handle custom JsType field/method names when that feature exists.
-// TODO: move JsInterop checks from JSORestrictionsChecker to here.
-// TODO: provide more information in global name collisions as it could be difficult to pinpoint in
-// big projects.
 public class JsInteropRestrictionChecker {
 
   public static void exec(TreeLogger logger, JProgram jprogram,
@@ -58,7 +57,7 @@ public class JsInteropRestrictionChecker {
     JsInteropRestrictionChecker jsInteropRestrictionChecker =
         new JsInteropRestrictionChecker(logger, jprogram, minimalRebuildCache);
 
-    jsInteropRestrictionChecker.checkProgram(jprogram);
+    jsInteropRestrictionChecker.checkProgram();
     if (jsInteropRestrictionChecker.hasErrors) {
       throw new UnableToCompleteException();
     }
@@ -90,7 +89,7 @@ public class JsInteropRestrictionChecker {
    */
   private static boolean isConstructorEmpty(final JConstructor constructor) {
     List<JStatement> statements = FluentIterable
-        .from(((JMethodBody) constructor.getBody()).getStatements())
+        .from(constructor.getBody().getStatements())
         .filter(new Predicate<JStatement>() {
           @Override
           public boolean apply(JStatement statement) {
@@ -371,7 +370,7 @@ public class JsInteropRestrictionChecker {
     }
   }
 
-  private void checkNoStaticJsPropertyCalls() {
+  private void checkStaticJsPropertyCalls() {
     new JVisitor() {
       @Override
       public boolean visit(JMethod x, Context ctx) {
@@ -388,6 +387,22 @@ public class JsInteropRestrictionChecker {
               x.getSourceInfo().getFileName(),
               x.getSourceInfo().getStartLine());
         }
+      }
+    }.accept(jprogram);
+  }
+
+  private void checkInstanceOfNativeJsTypes() {
+    new JVisitor() {
+      @Override
+      public boolean visit(JInstanceOf x, Context ctx) {
+        JReferenceType type = x.getTestType();
+        if (type.isJsNative() && type instanceof JInterfaceType) {
+          logError("Cannot do instanceof against native JsType interface %s (%s:%d).",
+              type.getName(),
+              x.getSourceInfo().getFileName(),
+              x.getSourceInfo().getStartLine());
+        }
+        return true;
       }
     }.accept(jprogram);
   }
@@ -450,11 +465,12 @@ public class JsInteropRestrictionChecker {
     }
   }
 
-  private void checkProgram(JProgram jprogram) {
+  private void checkProgram() {
     for (JDeclaredType type : jprogram.getModuleDeclaredTypes()) {
       checkType(type);
     }
-    checkNoStaticJsPropertyCalls();
+    checkStaticJsPropertyCalls();
+    checkInstanceOfNativeJsTypes();
   }
 
   private void checkType(JDeclaredType type) {

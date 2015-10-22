@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f935c6bb_d8aa59ab",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-22T05:38:04Z",
+      "side": 1,
+      "message": "This one does not seem a noop nit. At first sight it seems that the previous behavior was wrong.",
+      "range": {
+        "startLine": 112,
+        "startChar": 10,
+        "endLine": 112,
+        "endChar": 35
+      },
+      "revId": "593174bde92c94ee1e47e9b30818e6f0a38c9a5c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

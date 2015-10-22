@@ -295,6 +295,24 @@
     },
     {
       "key": {
+        "uuid": "f935c6bb_98f2a1c9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-22T05:53:01Z",
+      "side": 1,
+      "message": "I think it is OK to use canBeCalledExternally instead. \n\nRequiring suppression on overrides seems to provide a good place to add the suppression as documentation.\n\nWe already have suppression on types, why not use that also to suppress all it uses? @Goktug, WDYT?",
+      "parentUuid": "f935c6bb_2fb24d1e",
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39111e0a_7505fb4f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3

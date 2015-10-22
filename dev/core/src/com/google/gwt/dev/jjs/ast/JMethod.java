@@ -101,7 +101,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
   }
 
   public boolean isJsInteropEntryPoint() {
-    return exported && !needsDynamicDispatch();
+    return exported && !needsDynamicDispatch() && !isJsNative();
   }
 
   public boolean canBeCalledExternally() {
@@ -241,8 +241,9 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
     return false;
   }
 
+  @Override
   public boolean isJsNative() {
-    return enclosingType != null && enclosingType.isJsNative();
+    return body == null && jsName != null;
   }
 
   public void setSyntheticAccidentalOverride() {

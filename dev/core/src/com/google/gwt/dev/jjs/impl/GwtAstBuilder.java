@@ -3090,6 +3090,7 @@ public class GwtAstBuilder {
       JMethod method = curMethod.method;
       JsniMethod jsniMethod = jsniMethods.get(x);
       if (jsniMethod == null) {
+        method.setBody(null);
         return;
       }
       SourceInfo info = method.getSourceInfo();

@@ -216,8 +216,8 @@ public class JsInteropRestrictionChecker {
   }
 
   private void checkField(JField x) {
-    if (x.isJsNative()) {
-      checkNativeJsMember(x);
+    if (x.getEnclosingType().isJsNative()) {
+      checkMemberOfNativeJsType(x);
     }
 
     if (!x.isJsProperty()) {
@@ -237,8 +237,8 @@ public class JsInteropRestrictionChecker {
     }
     currentProcessedMethods.addAll(x.getOverriddenMethods());
 
-    if (x.isJsNative()) {
-      checkNativeJsMember(x);
+    if (x.getEnclosingType().isJsNative()) {
+      checkMemberOfNativeJsType(x);
     }
 
     if (!x.isOrOverridesJsMethod()) {
@@ -275,7 +275,7 @@ public class JsInteropRestrictionChecker {
     }
   }
 
-  private void checkNativeJsMember(JMember member) {
+  private void checkMemberOfNativeJsType(JMember member) {
     if (member.isSynthetic()) {
       return;
     }

@@ -313,6 +313,24 @@
     },
     {
       "key": {
+        "uuid": "f6d4f5d4_11aaccaa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 7701
+      },
+      "writtenOn": "2015-10-22T18:24:09Z",
+      "side": 1,
+      "message": "Done. Used suppression on type to suppress all its directly declared fields and methods.",
+      "parentUuid": "f935c6bb_98f2a1c9",
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39111e0a_7505fb4f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3

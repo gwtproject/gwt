@@ -349,6 +349,24 @@
     },
     {
       "key": {
+        "uuid": "f6d4f5d4_31a590aa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-22T18:56:37Z",
+      "side": 1,
+      "message": "Well it is warning suppression. You would probably have allowed @JsOpaque annotating a type for this purpose. It is a convenience but if you are very opposed to it, we can remove it.",
+      "parentUuid": "f6d4f5d4_7132382c",
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39111e0a_7505fb4f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3

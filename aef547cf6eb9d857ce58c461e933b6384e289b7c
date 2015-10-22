@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f935c6bb_d825f9e2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-22T14:20:40Z",
+      "side": 1,
+      "message": "I think here the is forwarding exclusion is redundant isn\u0027t it.",
+      "range": {
+        "startLine": 342,
+        "startChar": 4,
+        "endLine": 342,
+        "endChar": 55
+      },
+      "revId": "aef547cf6eb9d857ce58c461e933b6384e289b7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f935c6bb_982b81b9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-22T14:20:40Z",
+      "side": 1,
+      "message": "Here should say, use the concrete implementation this override delegates to.\n\nThis is to avoid having a synthetic method as the method responsible for the conflict and rather point to the actual culprit,",
+      "range": {
+        "startLine": 368,
+        "startChar": 11,
+        "endLine": 368,
+        "endChar": 78
+      },
+      "revId": "aef547cf6eb9d857ce58c461e933b6384e289b7c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

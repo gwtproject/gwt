@@ -137,6 +137,19 @@ public class TypeTightenerTest extends OptimizerTestBase {
     assertParameterTypes(result, "EntryPoint$Test2.fun(Ltest/EntryPoint$A;)V", "EntryPoint$B");
   }
 
+  public void testTightenParameterWithAccidentalOverrides() throws Exception {
+    addSnippetClassDecl("interface I { boolean m(Object obj); }");
+    addSnippetClassDecl("static class A { public boolean m(Object obj) { return obj == null; } }");
+    addSnippetClassDecl("static class B extends A {}");
+    addSnippetClassDecl("static class C extends B implements I {}");
+    Result result = optimize("void",
+        "A a = new A();",
+        "boolean b1 = a.m(null);",
+        "C c = new C();",
+        "boolean b2 = c.m(c);");
+    assertParameterTypes(result, "EntryPoint$A.m(Ljava/lang/Object;)Z", "Object");
+  }
+
   public void testMethodBasedOnLeafType() throws Exception {
     addSnippetClassDecl("abstract static class A { void makeSureFunIsCalled() {fun(this);} }");
     addSnippetClassDecl("static class B extends A {}");
@@ -213,6 +226,7 @@ public class TypeTightenerTest extends OptimizerTestBase {
     program.addEntryMethod(findMainMethod(program));
     boolean didChange = false;
     while (TypeTightener.exec(program).didChange()) {
+      MethodCallTightener.exec(program);
       DeadCodeElimination.exec(program);
       didChange = true;
     }

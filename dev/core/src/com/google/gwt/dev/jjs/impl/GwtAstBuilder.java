@@ -3638,7 +3638,6 @@ public class GwtAstBuilder {
    * TODO(zundel): something much more awesome?
    */
   private static final long AST_VERSION = 3;
-  private static final char[] _STRING = "_String".toCharArray();
   private static final String ARRAY_LENGTH_FIELD = "length";
 
   private static final int MAX_INLINEABLE_ENUM_SIZE = 10;
@@ -3786,7 +3785,7 @@ public class GwtAstBuilder {
 
   private boolean isLegacyJsInteropEnabled;
 
-  private boolean isNewJsInteropEnabled;
+  private boolean generateJsInteropExports;
 
   /**
    * Externalized class and method form for Exceptions.safeClose() to provide support
@@ -3836,7 +3835,7 @@ public class GwtAstBuilder {
     this.jsniMethods = jsniMethods;
     this.compilerContext = compilerContext;
     this.isLegacyJsInteropEnabled = compilerContext.getOptions().getJsInteropMode() == Mode.JS;
-    this.isNewJsInteropEnabled = compilerContext.getOptions().getJsInteropMode() == Mode.JS_RC;
+    this.generateJsInteropExports = compilerContext.getOptions().shouldGenerateJsInteropExports();
     this.newTypes = Lists.newArrayList();
     this.curCud = new CudInfo(cud);
   }
@@ -3911,8 +3910,8 @@ public class GwtAstBuilder {
     enclosingType.addField(field);
     if (isLegacyJsInteropEnabled) {
       JsInteropUtil.maybeSetJsInteropProperties(field, x.annotations);
-    } else if (isNewJsInteropEnabled) {
-      JsInteropUtil.maybeSetJsInteropPropertiesNew(field, x.annotations);
+    } else {
+      JsInteropUtil.maybeSetJsInteropPropertiesNew(field, generateJsInteropExports, x.annotations);
     }
     typeMap.setField(binding, field);
   }
@@ -4085,8 +4084,8 @@ public class GwtAstBuilder {
     maybeSetHasNoSideEffects(x, method);
     if (isLegacyJsInteropEnabled) {
       JsInteropUtil.maybeSetJsInteropProperties(method, x.annotations);
-    } else if (isNewJsInteropEnabled) {
-      JsInteropUtil.maybeSetJsInteropPropertiesNew(method, x.annotations);
+    } else {
+      JsInteropUtil.maybeSetJsInteropPropertiesNew(method, generateJsInteropExports, x.annotations);
     }
   }
 
@@ -4179,8 +4178,8 @@ public class GwtAstBuilder {
     method.setBody(new JMethodBody(info));
     if (isLegacyJsInteropEnabled) {
       JsInteropUtil.maybeSetJsInteropProperties(method);
-    } else if (isNewJsInteropEnabled) {
-      JsInteropUtil.maybeSetJsInteropPropertiesNew(method);
+    } else {
+      JsInteropUtil.maybeSetJsInteropPropertiesNew(method, generateJsInteropExports);
     }
     typeMap.setMethod(binding, method);
     return method;
@@ -4216,7 +4215,7 @@ public class GwtAstBuilder {
       }
       if (isLegacyJsInteropEnabled) {
         JsInteropUtil.maybeSetJsInteropProperties(type, x.annotations);
-      } else if (isNewJsInteropEnabled) {
+      } else {
         JsInteropUtil.maybeSetJsInteropPropertiesNew(type, x.annotations);
       }
       JdtUtil.setClassDispositionFromBinding(binding, type);

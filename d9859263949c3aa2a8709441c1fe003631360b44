@@ -22,6 +22,30 @@
       "revId": "d9859263949c3aa2a8709441c1fe003631360b44",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f935c6bb_5d001b82",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-22T03:45:17Z",
+      "side": 1,
+      "message": "reverted as this shouldn\u0027t be in this patch. I\u0027ll send another patch.",
+      "parentUuid": "f935c6bb_5d9c9bdc",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 4
+      },
+      "revId": "d9859263949c3aa2a8709441c1fe003631360b44",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -22,6 +22,30 @@
       "revId": "593174bde92c94ee1e47e9b30818e6f0a38c9a5c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6d4f5d4_34f81e2e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-22T22:30:01Z",
+      "side": 1,
+      "message": "We couldn\u0027t find a test to reproduce the problem. Most optimizations disable anyway if the parent method is exported. I added some tests but succeeds with or without the change.",
+      "parentUuid": "f935c6bb_d8aa59ab",
+      "range": {
+        "startLine": 112,
+        "startChar": 10,
+        "endLine": 112,
+        "endChar": 35
+      },
+      "revId": "593174bde92c94ee1e47e9b30818e6f0a38c9a5c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

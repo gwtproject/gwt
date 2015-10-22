@@ -331,6 +331,24 @@
     },
     {
       "key": {
+        "uuid": "f6d4f5d4_7132382c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-22T18:45:58Z",
+      "side": 1,
+      "message": "Assuming I understood correctly, I\u0027m not sure I like this idea; this is not java style so it will be surprising.. Let\u0027s talk when I come to office.",
+      "parentUuid": "f6d4f5d4_11aaccaa",
+      "revId": "bfdc905800f7eb0303960eb1619ef2bdacac9f3f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39111e0a_7505fb4f",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3

@@ -18,6 +18,7 @@ package java.lang;
 import java.io.Serializable;
 
 import javaemul.internal.JsUtils;
+import jsinterop.annotations.JsMethod;
 
 /**
  * Abstract base class for numeric wrapper classes.
@@ -124,6 +125,15 @@ public abstract class Number implements Serializable {
       }
     }
   }
+
+  @JsMethod
+  public static boolean $isInstance(Object instance) {
+    return $isInstance0(instance);
+  }
+
+  private static native boolean $isInstance0(Object instance) /*-{
+    return typeof instance == 'number' || instance instanceof Number;
+  }-*/;
 
   /**
    * @skip

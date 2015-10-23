@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "763e45ee_9d6fa3e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-23T02:16:50Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "4a76a219661a6859ca6d639cb13cd691657d4f3e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "763e45ee_fd6ce7f3",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-23T02:16:50Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "4a76a219661a6859ca6d639cb13cd691657d4f3e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

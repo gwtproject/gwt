@@ -221,10 +221,10 @@ public class JsInteropRestrictionChecker {
     if (x.getEnclosingType().isJsNative()) {
       checkMemberOfNativeJsType(x);
     }
-
     checkUnusableByJs(x);
 
     if (!x.isJsProperty()) {
+
       return;
     }
 
@@ -244,6 +244,8 @@ public class JsInteropRestrictionChecker {
     if (x.getEnclosingType().isJsNative()) {
       checkMemberOfNativeJsType(x);
     }
+
+    checkJsOverlay(x);
 
     checkUnusableByJs(x);
 
@@ -281,13 +283,48 @@ public class JsInteropRestrictionChecker {
     }
   }
 
+  private void checkJsOverlay(JMethod method) {
+    if (method.isJsOverlay() && method.getEnclosingType().isJsoType()) {
+      return;
+    }
+
+    if (method.isJsOverlay() && method instanceof JConstructor) {
+      logError("Native JsType constructor '%s' can not be @JsOverlay.",
+          method.getQualifiedName());
+      return;
+    }
+
+    if (method.isJsOverlay() && !method.isFinal()) {
+      logError("Non final native JsType method '%s' can not be @JsOverlay.",
+          method.getQualifiedName());
+      return;
+    }
+
+    if (method.isJsOverlay() && (method.isJsNative() || method.isJsniMethod())) {
+      logError("Native method '%s' can not be @JsOverlay.", method.getQualifiedName());
+      return;
+    }
+
+    if (method.isJsOverlay() && !method.getEnclosingType().isJsNative()) {
+      logError("Method '%s' can not be @JsOverlay. @JsOverlay is only allowed in native JsTypes.",
+          method.getQualifiedName());
+      return;
+    }
+
+    if (method.isJsOverlay() && method.isStatic()) {
+      logError("Static native JsType method '%s' can not be @JsOverlay.",
+          method.getQualifiedName());
+      return;
+    }
+  }
+
   private void checkMemberOfNativeJsType(JMember member) {
     if (member.isSynthetic()) {
       return;
     }
 
-    if (member.getJsName() == null) {
-      logError("Native JsType member '%s' is not public or has @JsIgnore.",
+    if (member.getJsName() == null && !member.isJsOverlay()) {
+      logError("Native JsType member '%s' is not public, has @JsIgnore or has @JsOverlay.",
           member.getQualifiedName());
       return;
     }

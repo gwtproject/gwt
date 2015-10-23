@@ -99,15 +99,15 @@ public class JConstructor extends JMethod {
   }
 
   /**
-   * Returns <code>true</code> if this constructor does no real work.
-   *
-   * NOTE: this method does NOT account for any clinits that would be triggered
-   * if this constructor is the target of a new instance operation from an
-   * external class.
-   *
-   * TODO(scottb): make this method less expensive by computing in an external
-   * visitor.
-   */
+    * Returns <code>true</code> if this constructor does no real work.
+    *
+    * NOTE: this method does NOT account for any clinits that would be triggered
+    * if this constructor is the target of a new instance operation from an
+    * external class.
+    *
+    * TODO(scottb): make this method less expensive by computing in an external
+    * visitor.
+    */
   public boolean isEmpty() {
     if (isEmpty) {
       return true;

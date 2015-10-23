@@ -13,22 +13,19 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.dev.jjs.ast;
+package jsinterop.annotations;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Abstracts JsInterop information for the AST nodes.
+ * JsOverlay marks a method in a native JsType that will be overlaid on a native JavaScript object.
  */
-public interface HasJsInfo {
-
-  void setJsMemberInfo(String namespace, String name, boolean exported);
-
-  String getJsName();
-
-  String getJsNamespace();
-
-  String getQualifiedJsName();
-
-  boolean isJsNative();
-
-  boolean isJsOverlay();
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Documented
+public @interface JsOverlay {
 }

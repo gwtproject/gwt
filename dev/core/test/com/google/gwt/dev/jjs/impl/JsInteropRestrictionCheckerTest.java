@@ -94,7 +94,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "'test.EntryPoint$Parent.doIt(Ltest/EntryPoint$Foo;)V' can't be exported in type "
-        + "'test.EntryPoint$Buggy' because the name 'doIt' is already taken.");
+            + "'test.EntryPoint$Buggy' because the name 'doIt' is already taken.");
   }
 
   public void testCollidingFieldExportsFails() throws Exception {
@@ -1006,6 +1006,32 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Enum 'test.EntryPoint$Buggy' cannot be a native JsType.");
+  }
+
+  public void testInnerNativeJsTypeFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) public class Buggy { }");
+
+    assertBuggyFails(
+        "Non static inner class 'test.EntryPoint$Buggy' cannot be a native JsType.");
+  }
+
+  public void testInnerJsTypeSucceeds() throws UnableToCompleteException {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType public class Buggy { }");
+
+    assertBuggySucceeds();
+  }
+
+  public void testLocalJsTypeFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "public class Buggy { void m() { @JsType class Local {} } }");
+
+    assertBuggyFails(
+        "Local class 'test.EntryPoint$Buggy$1Local' cannot be a JsType.");
   }
 
   public void testNativeJsTypeInterfaceCompileTimeConstantSucceeds()

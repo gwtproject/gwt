@@ -1457,8 +1457,7 @@ public class GenerateJavaScriptAST {
           continue;
         }
 
-        if (type.isJsType() && !type.getClassDisposition().isLocalType()) {
-          // only types with explicit source names in Java may have an exported prototype
+        if (type.isJsType()) {
           exportedMembersByExportName.put(type.getQualifiedJsName(), type);
         }
 

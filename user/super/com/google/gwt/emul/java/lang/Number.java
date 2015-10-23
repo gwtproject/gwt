@@ -18,6 +18,7 @@ package java.lang;
 import java.io.Serializable;
 
 import javaemul.internal.JsUtils;
+import jsinterop.annotations.JsMethod;
 
 /**
  * Abstract base class for numeric wrapper classes.
@@ -64,6 +65,15 @@ public abstract class Number implements Serializable {
       6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, // base 22-35
       5 // base 36
     };
+
+    @JsMethod
+    public static boolean $isInstance(Object instance) {
+      return $isInstance0(instance);
+    }
+
+    private static native boolean $isInstance0(Object instance) /*-{
+      return typeof instance == 'number' || instance instanceof Number;
+    }-*/;
 
     /**
      * A table of values radix*maxDigitsForRadix[radix].

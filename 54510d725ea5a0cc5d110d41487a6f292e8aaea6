@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6d4f5d4_578cc40b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-23T00:21:20Z",
+      "side": 1,
+      "message": "should you add || x.isJsNative() to the condition and to the next as well or are they covered elsewhere?",
+      "range": {
+        "startLine": 220,
+        "startChar": 6,
+        "endLine": 220,
+        "endChar": 31
+      },
+      "revId": "54510d725ea5a0cc5d110d41487a6f292e8aaea6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

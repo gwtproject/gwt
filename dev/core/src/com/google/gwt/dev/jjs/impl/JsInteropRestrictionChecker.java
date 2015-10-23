@@ -414,12 +414,38 @@ public class JsInteropRestrictionChecker {
     }.accept(jprogram);
   }
 
+  private boolean checkJsType(JDeclaredType type) {
+    if (type.isEnumOrSubclass() != null && type.isJsNative()) {
+      logError("Enum '%s' cannot be a native JsType.", type);
+      return false;
+    }
+
+    switch (type.getClassDisposition()) {
+      case INNER:
+        if (type.isJsNative()) {
+          logError("Non static inner class '%s' cannot be a native JsType.", type);
+          return false;
+        }
+        break;
+      case LOCAL:
+        if (type.isJsType()) {
+          logError("Local class '%s' cannot be a JsType.", type);
+          return false;
+        }
+        break;
+      case ANONYMOUS:
+      case LAMBDA:
+        // Java (at least up to Java 8) does not allow to annotate anonymous classes or lambdas; if
+        // it ever becomes possible we should emit an error.
+        assert !type.isJsType();
+        break;
+    }
+    return true;
+  }
+
   private void checkNativeJsType(JDeclaredType type) {
     // TODO(rluble): add inheritance restrictions.
-    if (type.isEnumOrSubclass() != null) {
-      logError("Enum '%s' cannot be a native JsType.", type);
-      return;
-    }
+
     if (!isClinitEmpty(type)) {
       logError("Native JsType '%s' cannot have static initializer.", type);
     }
@@ -489,6 +515,9 @@ public class JsInteropRestrictionChecker {
     currentType = type;
     minimalRebuildCache.removeExportedNames(type.getName());
 
+    if (!checkJsType(type)) {
+      return;
+    }
     if (type.isJsNative()) {
       checkNativeJsType(type);
     }

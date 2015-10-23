@@ -109,7 +109,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "'test.EntryPoint$Buggy.display' can't be exported because the "
-        + "global name 'test.EntryPoint.Buggy.show' is already taken.");
+            + "global name 'test.EntryPoint.Buggy.show' is already taken.");
   }
 
   public void testJsPropertyGetterStyleSucceeds() throws Exception {
@@ -715,7 +715,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggyFails(
         "More than one JsConstructor exists for test.EntryPoint$Buggy.",
         "'test.EntryPoint$Buggy.EntryPoint$Buggy(I) <init>' can't be "
-        + "exported because the global name 'test.EntryPoint.Buggy' is already taken.");
+            + "exported because the global name 'test.EntryPoint.Buggy' is already taken.");
   }
 
   public void testNonCollidingAccidentalOverrideSucceeds() throws Exception {
@@ -1006,6 +1006,32 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Enum 'test.EntryPoint$Buggy' cannot be a native JsType.");
+  }
+
+  public void testNativeJsTypeInnerClassFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) public class Buggy { }");
+
+    assertBuggyFails(
+        "Non static inner class 'test.EntryPoint$Buggy' cannot be a native JsType.");
+  }
+
+  public void testNativeJsTypeStaticInnerClassSucceeds() throws UnableToCompleteException {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType public class Buggy { }");
+
+    assertBuggySucceeds();
+  }
+
+  public void testNativeJsTypeLocalFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "public class Buggy { void m() { @JsType class Local {} } }");
+
+    assertBuggyFails(
+        "Local class 'test.EntryPoint$Buggy$1Local' cannot be a JsType.");
   }
 
   public void testNativeJsTypeInterfaceCompileTimeConstantSucceeds()

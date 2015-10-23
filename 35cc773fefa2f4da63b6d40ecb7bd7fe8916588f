@@ -164,6 +164,30 @@
     },
     {
       "key": {
+        "uuid": "96ae5964_8608ca6a",
+        "filename": "user/super/com/google/gwt/emul/java/util/PrimitiveIterator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-10-23T11:00:36Z",
+      "side": 1,
+      "message": "Oh ok, forget that. In that case it actually makes sense, imagine:\n\n  class StrangeConsumer implements DoubleConsumer, Consumer\u003cDouble\u003e { .. }\n\n  DoubleStream stream \u003d DoubleStream.of(1,2);\n  PrimitiveIterator.ofDouble iter \u003d stream.iterator();\n  Consumer\u003cDouble\u003e consumer \u003d new StrangeConsumer();\n  iter.forEachRemaining(consumer);\n\nThen the instanceof check required by JavaDoc will actually be true and the primitive consumer implementation will be preferred.",
+      "parentUuid": "76c00516_2d9bed40",
+      "range": {
+        "startLine": 51,
+        "startChar": 10,
+        "endLine": 51,
+        "endChar": 44
+      },
+      "revId": "35cc773fefa2f4da63b6d40ecb7bd7fe8916588f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39259e43_73b8604e",
         "filename": "user/super/com/google/gwt/emul/java/util/PrimitiveIterator.java",
         "patchSetId": 1

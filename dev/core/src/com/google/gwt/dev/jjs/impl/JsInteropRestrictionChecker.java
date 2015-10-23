@@ -221,7 +221,6 @@ public class JsInteropRestrictionChecker {
     if (x.getEnclosingType().isJsNative()) {
       checkMemberOfNativeJsType(x);
     }
-
     checkUnusableByJs(x);
 
     if (!x.isJsProperty()) {
@@ -243,6 +242,10 @@ public class JsInteropRestrictionChecker {
 
     if (x.getEnclosingType().isJsNative()) {
       checkMemberOfNativeJsType(x);
+    }
+
+    if (x.isJsOverlay()) {
+      checkJsOverlay(x);
     }
 
     checkUnusableByJs(x);
@@ -281,12 +284,43 @@ public class JsInteropRestrictionChecker {
     }
   }
 
+  private void checkJsOverlay(JMethod method) {
+    if (method.getEnclosingType().isJsoType()) {
+      return;
+    }
+
+    String qualifiedName = method.getQualifiedName();
+    if (!method.getEnclosingType().isJsNative()) {
+      logError("Method '%s' in non-native type cannot be @JsOverlay.", qualifiedName);
+    }
+
+    if (method instanceof JConstructor) {
+      logError("Native JsType constructor '%s' cannot be @JsOverlay.", qualifiedName);
+      return;
+    }
+
+    if (!method.isFinal()) {
+      logError("Non final native JsType method '%s' cannot be @JsOverlay.", qualifiedName);
+      return;
+    }
+
+    if (method.isJsNative() || method.isJsniMethod()) {
+      logError("Native method '%s' cannot be @JsOverlay.", qualifiedName);
+      return;
+    }
+
+    if (method.isStatic()) {
+      logError("Static native JsType method '%s' cannot be @JsOverlay.", qualifiedName);
+      return;
+    }
+  }
+
   private void checkMemberOfNativeJsType(JMember member) {
     if (member.isSynthetic()) {
       return;
     }
 
-    if (member.getJsName() == null) {
+    if (member.getJsName() == null && !member.isJsOverlay()) {
       logError("Native JsType member '%s' is not public or has @JsIgnore.",
           member.getQualifiedName());
       return;

@@ -1,0 +1,221 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6ae1193_dbc3c7bd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JConstructor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T22:58:06Z",
+      "side": 1,
+      "message": "revert",
+      "revId": "2cf37597c73dbd7e4d2694be8edaa6e9fb944600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_1b18df14",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T22:58:06Z",
+      "side": 1,
+      "message": "why did you remove the name check? Is that to verify the jsname in checker?",
+      "range": {
+        "startLine": 248,
+        "startChar": 23,
+        "endLine": 248,
+        "endChar": 24
+      },
+      "revId": "2cf37597c73dbd7e4d2694be8edaa6e9fb944600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_3bb4c355",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T22:58:06Z",
+      "side": 1,
+      "message": "nit: perhaps isJsOverlay || \u003cblah\u003e",
+      "range": {
+        "startLine": 255,
+        "startChar": 10,
+        "endLine": 255,
+        "endChar": 11
+      },
+      "revId": "2cf37597c73dbd7e4d2694be8edaa6e9fb944600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_5b225744",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T22:58:06Z",
+      "side": 1,
+      "message": "pls rm extra space and perhaps keep the space above.",
+      "revId": "2cf37597c73dbd7e4d2694be8edaa6e9fb944600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_3b4683ed",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T22:58:06Z",
+      "side": 1,
+      "message": "Please follow the pattern of:\n\n if (method.isJsOverlay()) {\n   checkJsOverlay(method);\n }\n\nat the call site.",
+      "revId": "2cf37597c73dbd7e4d2694be8edaa6e9fb944600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_9b06afa0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T22:58:06Z",
+      "side": 1,
+      "message": "cannot",
+      "range": {
+        "startLine": 292,
+        "startChar": 47,
+        "endLine": 292,
+        "endChar": 54
+      },
+      "revId": "2cf37597c73dbd7e4d2694be8edaa6e9fb944600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_db002785",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T22:58:06Z",
+      "side": 1,
+      "message": "I think this should be the first as other error messages assume this.",
+      "revId": "2cf37597c73dbd7e4d2694be8edaa6e9fb944600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_5b0df7bc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T22:58:06Z",
+      "side": 1,
+      "message": "Method \u0027%s\u0027 in non-native type cannot be @JsOverlay",
+      "revId": "2cf37597c73dbd7e4d2694be8edaa6e9fb944600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_dbd9077d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T22:58:06Z",
+      "side": 1,
+      "message": "this change seems wrong in many ways :)",
+      "range": {
+        "startLine": 327,
+        "startChar": 71,
+        "endLine": 327,
+        "endChar": 88
+      },
+      "revId": "2cf37597c73dbd7e4d2694be8edaa6e9fb944600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_9eb3fd22",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1100,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T22:58:06Z",
+      "side": 1,
+      "message": "I think you can just merge these all together.",
+      "range": {
+        "startLine": 1056,
+        "startChar": 0,
+        "endLine": 1100,
+        "endChar": 3
+      },
+      "revId": "2cf37597c73dbd7e4d2694be8edaa6e9fb944600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_fe1b1981",
+        "filename": "user/src/jsinterop/annotations/JsOverlay.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T22:58:06Z",
+      "side": 1,
+      "message": "JsOverlay is used to mark a non-native method in a native JsType to add new APIs to existing JavaScript types.\n\u003cp\u003eNote that the JsOverlay methods cannot be called from JavaScript, cannot override any existing methods and needs to be marked as final. Underneath, the original type is not modified and the method is simply turned into a static dispatch.",
+      "revId": "2cf37597c73dbd7e4d2694be8edaa6e9fb944600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

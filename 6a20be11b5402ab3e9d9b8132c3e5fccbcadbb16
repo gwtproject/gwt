@@ -16,6 +16,86 @@
       "revId": "6a20be11b5402ab3e9d9b8132c3e5fccbcadbb16",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6d4f5d4_57bcc415",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T02:50:36Z",
+      "side": 1,
+      "message": "checkJsType",
+      "range": {
+        "startLine": 417,
+        "startChar": 18,
+        "endLine": 417,
+        "endChar": 41
+      },
+      "revId": "6a20be11b5402ab3e9d9b8132c3e5fccbcadbb16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6d4f5d4_b7d6504b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T02:50:36Z",
+      "side": 1,
+      "message": "This should just move to \"case LOCAL\" right?\nOr it should be better like following at the call site:\n\n  if(type.isJsType()) {\n    checkJsType(type);\n  }",
+      "revId": "6a20be11b5402ab3e9d9b8132c3e5fccbcadbb16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6d4f5d4_97d9cc7d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T02:50:36Z",
+      "side": 1,
+      "message": "\"Java language won\u0027t allow to annotate\"",
+      "range": {
+        "startLine": 439,
+        "startChar": 11,
+        "endLine": 439,
+        "endChar": 32
+      },
+      "revId": "6a20be11b5402ab3e9d9b8132c3e5fccbcadbb16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6d4f5d4_179f1ca6",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-23T02:50:36Z",
+      "side": 1,
+      "message": "Can you have a test to show that jstype can be a non-static inner class?",
+      "revId": "6a20be11b5402ab3e9d9b8132c3e5fccbcadbb16",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

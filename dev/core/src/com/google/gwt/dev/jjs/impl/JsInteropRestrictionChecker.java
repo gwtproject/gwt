@@ -399,12 +399,38 @@ public class JsInteropRestrictionChecker {
     }.accept(jprogram);
   }
 
+  private boolean checkClassCompatibility(JDeclaredType type) {
+    if (!type.isJsType()) {
+      return true;
+    }
+
+    if (type.isEnumOrSubclass() != null && type.isJsNative()) {
+      logError("Enum '%s' cannot be a native JsType.", type);
+      return false;
+    }
+
+    switch (type.getClassDisposition()) {
+      case INNER:
+        if (type.isJsNative()) {
+          logError("Non static inner class '%s' cannot be a native JsType.", type);
+          return false;
+        }
+        break;
+      case LOCAL:
+        logError("Local class '%s' cannot be a JsType.", type);
+        return false;
+      case ANONYMOUS:
+      case LAMBDA:
+        // can not be annotated with JsType
+        assert false;
+        break;
+    }
+    return true;
+  }
+
   private void checkNativeJsType(JDeclaredType type) {
     // TODO(rluble): add inheritance restrictions.
-    if (type.isEnumOrSubclass() != null) {
-      logError("Enum '%s' cannot be a native JsType.", type);
-      return;
-    }
+
     if (!isClinitEmpty(type)) {
       logError("Native JsType '%s' cannot have static initializer.", type);
     }
@@ -473,6 +499,9 @@ public class JsInteropRestrictionChecker {
     currentType = type;
     minimalRebuildCache.removeExportedNames(type.getName());
 
+    if (!checkClassCompatibility(type)) {
+      return;
+    }
     if (type.isJsNative()) {
       checkNativeJsType(type);
     }

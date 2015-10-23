@@ -116,6 +116,30 @@
     },
     {
       "key": {
+        "uuid": "36ca0d3a_8bef6dde",
+        "filename": "user/super/com/google/gwt/emul/java/util/PrimitiveIterator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2015-10-23T10:35:03Z",
+      "side": 1,
+      "message": "Great catch, Jens!\nWow :) DoubleConsumer really cannot be cast to Consumer",
+      "parentUuid": "96ae5964_26af96bb",
+      "range": {
+        "startLine": 51,
+        "startChar": 10,
+        "endLine": 51,
+        "endChar": 44
+      },
+      "revId": "35cc773fefa2f4da63b6d40ecb7bd7fe8916588f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39259e43_73b8604e",
         "filename": "user/super/com/google/gwt/emul/java/util/PrimitiveIterator.java",
         "patchSetId": 1

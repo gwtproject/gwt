@@ -243,9 +243,8 @@ class CellTreeNodeView<T> extends UIObject {
         SafeHtmlBuilder sb = new SafeHtmlBuilder();
         render(sb, values, 0, selectionModel);
 
-        Map<Object, CellTreeNodeView<?>> savedViews = saveChildState(values, start);
-
         nodeView.tree.isRefreshing = true;
+        Map<Object, CellTreeNodeView<?>> savedViews = saveChildState(values, start);
         SafeHtml html = sb.toSafeHtml();
         Element newChildren = AbstractHasData.convertToElements(nodeView.tree, getTmpElem(), html);
         AbstractHasData

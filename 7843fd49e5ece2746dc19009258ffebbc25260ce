@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6ae1193_e1ed3c77",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethodCall.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-24T03:31:38Z",
+      "side": 1,
+      "message": "overridden",
+      "range": {
+        "startLine": 102,
+        "startChar": 9,
+        "endLine": 102,
+        "endChar": 28
+      },
+      "revId": "7843fd49e5ece2746dc19009258ffebbc25260ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

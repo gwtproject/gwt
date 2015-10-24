@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "d6ae1193_41fee81e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-24T03:41:26Z",
+      "side": 1,
+      "message": "Taking it back, this is for non-jso jsni methods. Can you check if you have a test for that.",
+      "parentUuid": "d6ae1193_41d508a5",
+      "range": {
+        "startLine": 307,
+        "startChar": 31,
+        "endLine": 307,
+        "endChar": 52
+      },
+      "revId": "309e1f5dad8f161264cd3f68b49b9b3f1471d167",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6ae1193_81df20c3",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 4
@@ -82,6 +106,29 @@
     },
     {
       "key": {
+        "uuid": "d6ae1193_c1091800",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-24T03:41:26Z",
+      "side": 1,
+      "message": "Let\u0027s merge all together:\n\"JsOverlay method \u003cblah\u003e cannot be non-final, static nor native.\"",
+      "range": {
+        "startLine": 307,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 5
+      },
+      "revId": "309e1f5dad8f161264cd3f68b49b9b3f1471d167",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6ae1193_a13a64ac",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 4
@@ -110,6 +157,30 @@
       "writtenOn": "2015-10-24T03:26:59Z",
       "side": 1,
       "message": "I know I\u0027m correcting myself but let\u0027s replace this with:\n\nJsOverlay is used to add new helper APIs to existing JavaScript types. This is achieved by adding the new method to @JsType(isNative\u003dtrue) and mark it with this annotation.",
+      "range": {
+        "startLine": 25,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 20
+      },
+      "revId": "309e1f5dad8f161264cd3f68b49b9b3f1471d167",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_0104f0e4",
+        "filename": "user/src/jsinterop/annotations/JsOverlay.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-24T03:41:26Z",
+      "side": 1,
+      "message": "\"marking it with\"",
+      "parentUuid": "d6ae1193_013230d4",
       "range": {
         "startLine": 25,
         "startChar": 3,

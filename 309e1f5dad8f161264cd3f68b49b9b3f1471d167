@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6ae1193_21d014b6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-24T03:26:59Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 5
+      },
+      "revId": "309e1f5dad8f161264cd3f68b49b9b3f1471d167",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_41d508a5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-24T03:26:59Z",
+      "side": 1,
+      "message": "if this was working your test for Jso\u0027s should have failed :)",
+      "range": {
+        "startLine": 307,
+        "startChar": 31,
+        "endLine": 307,
+        "endChar": 52
+      },
+      "revId": "309e1f5dad8f161264cd3f68b49b9b3f1471d167",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_81df20c3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-24T03:26:59Z",
+      "side": 1,
+      "message": "Can you make this before final; it is a more significant problem.",
+      "revId": "309e1f5dad8f161264cd3f68b49b9b3f1471d167",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_61da0cd6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-24T03:26:59Z",
+      "side": 1,
+      "message": "can you more this before final as well? Otherwise if you have a non-final static method it will fail by complaining it is not final.",
+      "revId": "309e1f5dad8f161264cd3f68b49b9b3f1471d167",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_a13a64ac",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1082,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-24T03:26:59Z",
+      "side": 1,
+      "message": "As we discussed this is unnecessary.",
+      "revId": "309e1f5dad8f161264cd3f68b49b9b3f1471d167",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_013230d4",
+        "filename": "user/src/jsinterop/annotations/JsOverlay.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-24T03:26:59Z",
+      "side": 1,
+      "message": "I know I\u0027m correcting myself but let\u0027s replace this with:\n\nJsOverlay is used to add new helper APIs to existing JavaScript types. This is achieved by adding the new method to @JsType(isNative\u003dtrue) and mark it with this annotation.",
+      "range": {
+        "startLine": 25,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 20
+      },
+      "revId": "309e1f5dad8f161264cd3f68b49b9b3f1471d167",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_e1345cc3",
+        "filename": "user/src/jsinterop/annotations/JsOverlay.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-24T03:26:59Z",
+      "side": 1,
+      "message": "Can you change it with \"This is because underneath\"",
+      "range": {
+        "startLine": 29,
+        "startChar": 44,
+        "endLine": 29,
+        "endChar": 54
+      },
+      "revId": "309e1f5dad8f161264cd3f68b49b9b3f1471d167",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

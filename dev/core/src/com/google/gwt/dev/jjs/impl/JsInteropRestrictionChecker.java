@@ -41,14 +41,9 @@ import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
-import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
-import com.google.gwt.thirdparty.guava.common.collect.Iterables;
-import com.google.gwt.thirdparty.guava.common.collect.Maps;
-import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.thirdparty.guava.common.collect.*;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Checks and throws errors for invalid JsInterop constructs.
@@ -66,12 +61,10 @@ public class JsInteropRestrictionChecker {
     }
   }
 
-  private Map<String, String> currentJsMethodNameByGetterNames;
-  private Map<String, String> currentJsMethodNameBySetterNames;
+  private Multimap<String, JMethod> methodsByGetterNames;
+  private Multimap<String, JMethod> methodsBySetterNames;
   private Map<String, JType> currentJsPropertyTypeByName;
-  private Map<String, String> currentLocalNameByMemberNames;
-  private Set<JMethod> currentProcessedMethods;
-  private JDeclaredType currentType;
+  private Multimap<String, JMember> localMemberByMemberNames;
   private boolean hasErrors;
   private final JProgram jprogram;
   private final TreeLogger logger;
@@ -204,8 +197,8 @@ public class JsInteropRestrictionChecker {
     });
 
     if (anyNonDelegatingConstructor) {
-      logError("Constructor '%s' can be a JsConstructor only if all constructors in the class are "
-          + "delegating to it.", jsConstructor.getQualifiedName());
+      logError("Constructor %s can be a JsConstructor only if all constructors in the class are "
+          + "delegating to it.", getDescription(jsConstructor));
     }
   }
 
@@ -228,19 +221,12 @@ public class JsInteropRestrictionChecker {
       return;
     }
 
-    if (x.needsDynamicDispatch()) {
-      checkLocalName(x);
-    } else if (!x.isJsNative() && currentType == x.getEnclosingType()) {
+    if (!x.needsDynamicDispatch() && !x.getEnclosingType().isJsNative()) {
       checkGlobalName(x);
     }
   }
 
   private void checkMethod(JMethod x) {
-    if (!currentProcessedMethods.add(x)) {
-      return;
-    }
-    currentProcessedMethods.addAll(x.getOverriddenMethods());
-
     if (x.getEnclosingType().isJsNative()) {
       checkMemberOfNativeJsType(x);
     }
@@ -253,23 +239,15 @@ public class JsInteropRestrictionChecker {
 
     if (x.needsDynamicDispatch()) {
       checkJsMethod(x);
-    } else if (!x.isJsNative() && currentType == x.getEnclosingType()) {
+    } else if (!x.getEnclosingType().isJsNative()) {
       checkGlobalName(x);
     }
   }
 
   private void checkGlobalName(JMember x) {
-    if (!minimalRebuildCache.addExportedGlobalName(x.getQualifiedJsName(), currentType.getName())) {
-      logError("'%s' can't be exported because the global name '%s' is already taken.",
-          x.getQualifiedName(), x.getQualifiedJsName());
-    }
-  }
-
-  private void checkLocalName(JMember member) {
-    String jsName = member.getJsName();
-    if (currentLocalNameByMemberNames.put(jsName, member.getQualifiedName()) != null) {
-      logError("'%s' can't be exported in type '%s' because the name '%s' is already taken.",
-          member.getQualifiedName(), currentType.getName(), jsName);
+    if (!minimalRebuildCache.addExportedGlobalName(x.getQualifiedJsName(), x.getEnclosingType().getName())) {
+      logError("%s can't be exported because the global name '%s' is already taken.",
+          getDescription(x), x.getQualifiedJsName());
     }
   }
 
@@ -287,8 +265,8 @@ public class JsInteropRestrictionChecker {
     }
 
     if (member.getJsName() == null) {
-      logError("Native JsType member '%s' is not public or has @JsIgnore.",
-          member.getQualifiedName());
+      logError("Native JsType member %s is not public or has @JsIgnore.",
+          getDescription(member));
       return;
     }
   }
@@ -306,74 +284,89 @@ public class JsInteropRestrictionChecker {
     }
 
     String jsMemberName = method.getJsName();
-    String qualifiedMethodName = method.getQualifiedName();
     String typeName = method.getEnclosingType().getName();
     JsPropertyAccessorType accessorType = method.getJsPropertyAccessorType();
 
     if (jsMemberName == null) {
-      logError("'%s' can't be exported because the method overloads multiple methods with "
-          + "different names.", qualifiedMethodName);
+      logError("%s can't be exported because the method overloads multiple methods with "
+          + "different names.", getDescription(method));
     }
 
     if (accessorType == JsPropertyAccessorType.GETTER) {
       if (!method.getParams().isEmpty() || method.getType() == JPrimitiveType.VOID) {
         logError("There can't be void return type or any parameters for the JsProperty getter"
-            + " '%s'.", qualifiedMethodName);
+            + " %s.", getDescription(method));
         return;
       }
       if (method.getType() != JPrimitiveType.BOOLEAN && method.getName().startsWith("is")) {
-        logError("There can't be non-boolean return for the JsProperty 'is' getter '%s'.",
-            qualifiedMethodName);
+        logError("There can't be non-boolean return for the JsProperty 'is' getter %s.",
+            getDescription(method));
         return;
       }
-      if (currentJsMethodNameByGetterNames.put(jsMemberName, qualifiedMethodName) != null) {
-        // Don't allow multiple getters for the same property name.
-        logError("There can't be more than one getter for JsProperty '%s' in type '%s'.",
-            jsMemberName, typeName);
-        return;
-      }
-      checkNameCollisionForGetterAndRegular(jsMemberName, typeName);
       checkJsPropertyType(jsMemberName, typeName, method.getOriginalReturnType());
     } else if (accessorType == JsPropertyAccessorType.SETTER) {
       if (method.getParams().size() != 1 || method.getType() != JPrimitiveType.VOID) {
         logError("There needs to be single parameter and void return type for the JsProperty setter"
-            + " '%s'.", qualifiedMethodName);
+            + " %s.", getDescription(method));
         return;
       }
-      if (currentJsMethodNameBySetterNames.put(jsMemberName, qualifiedMethodName) != null) {
-        // Don't allow multiple setters for the same property name.
-        logError("There can't be more than one setter for JsProperty '%s' in type '%s'.",
-            jsMemberName, typeName);
-        return;
-      }
-      checkNameCollisionForSetterAndRegular(jsMemberName, typeName);
-      checkJsPropertyType(jsMemberName, typeName,
-          Iterables.getOnlyElement(method.getParams()).getType());
+      checkJsPropertyType(
+          jsMemberName, typeName, Iterables.getOnlyElement(method.getParams()).getType());
     } else if (accessorType == JsPropertyAccessorType.UNDEFINED) {
       // We couldn't extract the JsPropertyType.
-      logError("JsProperty '%s' doesn't follow Java Bean naming conventions.", qualifiedMethodName);
-    } else {
-      checkLocalName(method);
-      checkNameCollisionForGetterAndRegular(jsMemberName, typeName);
-      checkNameCollisionForSetterAndRegular(jsMemberName, typeName);
+      logError("JsProperty '%s' doesn't follow Java Bean naming conventions.", method.getQualifiedName());
     }
   }
 
-  private void checkNameCollisionForGetterAndRegular(String getterName, String typeName) {
-    if (currentJsMethodNameByGetterNames.containsKey(getterName)
-        && currentLocalNameByMemberNames.containsKey(getterName)) {
-      logError("'%s' and '%s' can't both be named '%s' in type '%s'.",
-          currentLocalNameByMemberNames.get(getterName),
-          currentJsMethodNameByGetterNames.get(getterName), getterName, typeName);
+  private void checkLocalNames(JDeclaredType type) {
+
+    collectLocalNames(type);
+
+    for (String jsName : Sets.union(localMemberByMemberNames.keySet(),
+        Sets.union(methodsByGetterNames.keySet(), methodsBySetterNames.keySet()))) {
+      Collection<JMember> members = localMemberByMemberNames.get(jsName);
+
+      checkNameCollisionForPropertyAccessorAndRegular(jsName, type.getName());
+
+      if (methodsByGetterNames.get(jsName).size() > 1) {
+        // Don't allow multiple getters for the same property name.
+        logError("There can't be more than one getter for JsProperty '%s' in type '%s'.",
+            jsName, type.getName());
+      }
+
+      if (methodsBySetterNames.get(jsName).size() > 1) {
+        // Don't allow multiple getters for the same property name.
+        logError("There can't be more than one setter for JsProperty '%s' in type '%s'.",
+            jsName, type.getName());
+      }
+
+      if (members.size() <= 1) {
+        // no conflict;
+        continue;
+      }
+
+      Iterator<JMember> iterator = members.iterator();
+      JMember member = iterator.next();
+      List<JMember> conflictingMembers = Lists.newArrayList(iterator);
+      if (member.getEnclosingType().isJsNative()) {
+        // Native JsTypes are allowed to use the same name for different methods.
+        continue;
+      }
+      logError("%s can't be exported because the name '%s' is already taken by %s.",
+          getDescription(member), jsName,
+          getDescription(conflictingMembers.get(0)));
     }
   }
 
-  private void checkNameCollisionForSetterAndRegular(String setterName, String typeName) {
-    if (currentJsMethodNameBySetterNames.containsKey(setterName)
-        && currentLocalNameByMemberNames.containsKey(setterName)) {
-      logError("'%s' and '%s' can't both be named '%s' in type '%s'.",
-          currentLocalNameByMemberNames.get(setterName),
-          currentJsMethodNameBySetterNames.get(setterName), setterName, typeName);
+  private void checkNameCollisionForPropertyAccessorAndRegular(String getterName, String typeName) {
+    Multimap<String, JMember> methodsByAccessorName = LinkedHashMultimap.create();
+    methodsByAccessorName.putAll(methodsByGetterNames);
+    methodsByAccessorName.putAll(methodsBySetterNames);
+    if (methodsByAccessorName.containsKey(getterName)
+        && localMemberByMemberNames.containsKey(getterName)) {
+      logError("%s and %s can't both be named '%s' in type '%s'.",
+          getDescription(localMemberByMemberNames.get(getterName).iterator().next()),
+          getDescription(methodsByAccessorName.get(getterName).iterator().next()), getterName, typeName);
     }
   }
 
@@ -389,8 +382,8 @@ public class JsInteropRestrictionChecker {
       public void endVisit(JMethodCall x, Context ctx) {
         JMethod target = x.getTarget();
         if (x.isStaticDispatchOnly() && target.isJsPropertyAccessor()) {
-          logError("Cannot call property accessor '%s' via super (%s:%d).",
-              target.getQualifiedName(),
+          logError("Cannot call property accessor %s via super (%s:%d).",
+              getDescription(target),
               x.getSourceInfo().getFileName(),
               x.getSourceInfo().getStartLine());
         }
@@ -426,8 +419,8 @@ public class JsInteropRestrictionChecker {
 
     for (JConstructor constructor : type.getConstructors()) {
       if (!isConstructorEmpty(constructor)) {
-        logError("Native JsType constructor '%s' cannot have non-empty method body.",
-            constructor.getQualifiedName());
+        logError("Native JsType constructor %s cannot have non-empty method body.",
+            getDescription(constructor));
       }
     }
   }
@@ -481,12 +474,10 @@ public class JsInteropRestrictionChecker {
   }
 
   private void checkType(JDeclaredType type) {
-    currentProcessedMethods = Sets.newHashSet();
-    currentLocalNameByMemberNames = Maps.newHashMap();
-    currentJsMethodNameByGetterNames = Maps.newHashMap();
-    currentJsMethodNameBySetterNames = Maps.newHashMap();
+    localMemberByMemberNames = LinkedHashMultimap.create();
+    methodsByGetterNames = LinkedHashMultimap.create();
+    methodsBySetterNames = LinkedHashMultimap.create();
     currentJsPropertyTypeByName = Maps.newHashMap();
-    currentType = type;
     minimalRebuildCache.removeExportedNames(type.getName());
 
     if (type.isJsNative()) {
@@ -501,13 +492,13 @@ public class JsInteropRestrictionChecker {
       checkJsConstructors(type);
     }
 
-    for (;type != null; type = type.getSuperClass())  {
-      for (JField field : type.getFields()) {
-        checkField(field);
-      }
-      for (JMethod method : type.getMethods()) {
-        checkMethod(method);
-      }
+    checkLocalNames(type);
+
+    for (JField field : type.getFields()) {
+      checkField(field);
+    }
+    for (JMethod method : type.getMethods()) {
+      checkMethod(method);
     }
   }
 
@@ -516,22 +507,21 @@ public class JsInteropRestrictionChecker {
         || isUnusableByJsSuppressed(method)) {
       return;
     }
-    String methodName = method.getQualifiedName();
     // check parameters.
     for (JParameter parameter : method.getParams()) {
       if (!parameter.getType().canBeReferencedExternally()
           && !isUnusableByJsSuppressed(parameter)) {
         logWarning(
-            "[unusable-by-js] Type of parameter '%s' in method '%s' is not usable by but exposed to"
+            "[unusable-by-js] Type of parameter '%s' in method %s is not usable by but exposed to"
             + " JavaScript",
-            parameter.getName(), methodName);
+            parameter.getName(), getDescription(method));
       }
     }
     // check return type.
     if (!method.getType().canBeReferencedExternally()) {
       logWarning(
-          "[unusable-by-js] Return type of '%s' is not usable by but exposed to JavaScript",
-          methodName);
+          "[unusable-by-js] Return type of %s is not usable by but exposed to JavaScript",
+          getDescription(method));
     }
   }
 
@@ -546,6 +536,76 @@ public class JsInteropRestrictionChecker {
           + "JavaScript",
           field.getName(), field.getEnclosingType().getName());
     }
+  }
+
+  private void collectLocalNames(JDeclaredType type) {
+    for (;type != null; type = type.getSuperClass())  {
+      for (JField field : type.getFields()) {
+        collectLocalNames(field);
+      }
+      for (JMethod method : type.getMethods()) {
+        collectLocalNames(method);
+      }
+    }
+  }
+
+  private void collectLocalNames(JMethod method) {
+    if (!method.isOrOverridesJsMethod() || !method.needsDynamicDispatch()) {
+      return;
+    }
+
+    if (method.isSynthetic() && !method.isForwarding()) {
+      return;
+    }
+
+    String jsMemberName = method.getJsName();
+    switch (method.getJsPropertyAccessorType()) {
+      case GETTER:
+        addNameIfNotOverridden(methodsByGetterNames, jsMemberName, method);
+        break;
+      case SETTER :
+        addNameIfNotOverridden(methodsBySetterNames, jsMemberName, method);
+        break;
+      case NONE:
+        addNameIfNotOverridden(localMemberByMemberNames, jsMemberName, method);
+        break;
+    }
+  }
+
+  private void collectLocalNames(JField field) {
+    if (!field.needsDynamicDispatch() || !field.isJsProperty()) {
+      return;
+    }
+
+    String jsMemberName = field.getJsName();
+    addNameIfNotOverridden(localMemberByMemberNames, jsMemberName, field);
+  }
+
+  public <T extends JMember>  void addNameIfNotOverridden(
+      Multimap<String, T> multimap, String jsName, T newMember) {
+    Collection<T> currentMembers = multimap.get(jsName);
+
+
+    for (JMember member : currentMembers) {
+      if (member instanceof JMethod &&
+          ((JMethod) member).getOverriddenMethods().contains(newMember)) {
+        return;
+      }
+    }
+    multimap.put(jsName, newMember);
+  }
+
+  private static String getDescription(JMember member) {
+    String description = "'" + member.getQualifiedName() + "'";
+    if (member instanceof JField) {
+      return description;
+    }
+    JMethod method = (JMethod) member;
+    if (method.isSyntheticAccidentalOverride()) {
+      description
+          += " (synthetic override of '" + method.getOverriddenMethods().iterator().next().getQualifiedName() + "')";
+    }
+    return description;
   }
 
   private boolean isUnusableByJsSuppressed(CanHaveSuppressedWarnings x) {

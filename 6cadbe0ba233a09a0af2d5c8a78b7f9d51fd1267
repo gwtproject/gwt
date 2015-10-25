@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f69a3588_613e36f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-10-25T12:12:07Z",
+      "side": 1,
+      "message": "Move down above the Change-Id line and use\n\n  Bug: issue 8866",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "6cadbe0ba233a09a0af2d5c8a78b7f9d51fd1267",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56b5c1f6_5ce31dfd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-10-25T12:12:07Z",
+      "side": 1,
+      "message": "Please reformat. Message lines shouldn\u0027t be longer than 72 chars.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 447
+      },
+      "revId": "6cadbe0ba233a09a0af2d5c8a78b7f9d51fd1267",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

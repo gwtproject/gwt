@@ -20,6 +20,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.HasType;
+import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JBlock;
@@ -30,6 +31,7 @@ import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JDoubleLiteral;
 import com.google.gwt.dev.jjs.ast.JExpression;
+import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFloatLiteral;
 import com.google.gwt.dev.jjs.ast.JIntLiteral;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
@@ -66,12 +68,14 @@ import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
+import com.google.gwt.thirdparty.guava.common.base.Strings;
 import com.google.gwt.thirdparty.guava.common.collect.Collections2;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -297,6 +301,48 @@ public class JjsUtils {
     return createEmptyMethodFromExample(type, superTypeMethod, true);
   }
 
+  /**
+   * Returns a description for a type suitable for reporting errors to the users.
+   */
+  public static String printableDescription(JType type) {
+    if (type instanceof JArrayType) {
+      JArrayType arrayType = (JArrayType) type;
+      return printableDescription(arrayType.getLeafType()) + Strings.repeat("[]",
+          arrayType.getDims());
+    }
+    return Joiner.on(".").join(type.getCompoundName());
+  }
+
+  /**
+   * Returns a description for a member suitable for reporting errors to the users.
+   */
+  public static String printableDescription(JMember member) {
+    if (member instanceof JField) {
+      return String.format("%s %s.%s",
+          printableDescription(member.getType()),
+          printableDescription(member.getEnclosingType()),
+          member.getName());
+    }
+
+    JMethod method = (JMethod) member;
+    String printableDescription = "";
+    if (!method.isConstructor()) {
+      printableDescription += printableDescription(method.getType()) + " ";
+    }
+    printableDescription += String.format("%s.%s(%s)",
+        printableDescription(method.getEnclosingType()),
+        method.getName(),
+        Joiner.on(", ").join(
+            Iterables.transform(method.getOriginalParamTypes(), new Function<JType, String>() {
+                  @Nullable
+                  @Override
+                  public String apply(JType type) {
+                    return printableDescription(type);
+                  }
+                }
+            )));
+    return printableDescription;
+  }
   public static void replaceMethodBody(JMethod method, JExpression returnValue) {
     JMethodBody body = (JMethodBody) method.getBody();
     JBlock block = body.getBlock();

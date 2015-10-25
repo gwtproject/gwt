@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76a645d7_dd796b86",
+        "filename": "user/super/com/google/gwt/emul/java/util/OptionalLong.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-25T22:05:12Z",
+      "side": 1,
+      "message": "[error] Unused import - javaemul.internal.InternalPreconditions.",
+      "revId": "d120f752a09c5fe5d7023bb33c432c4c055592d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76a645d7_bd6e9fbc",
+        "filename": "user/super/com/google/gwt/emul/java/util/OptionalLong.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-25T22:05:12Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027javaemul.internal.InternalPreconditions.checkCriticalElement\u0027 import.",
+      "revId": "d120f752a09c5fe5d7023bb33c432c4c055592d0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

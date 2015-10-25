@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76a645d7_bd957f0e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-25T21:46:08Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - com.google.gwt.thirdparty.guava.common.collect.*.",
+      "revId": "8687c9451c791243d7a8b2501135615c4b180e44",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76a645d7_9d9ac33a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-25T21:46:08Z",
+      "side": 1,
+      "message": "[error] Using the \u0027.*\u0027 form of import should be avoided - java.util.*.",
+      "revId": "8687c9451c791243d7a8b2501135615c4b180e44",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76a645d7_7da01769",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-25T21:46:08Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "8687c9451c791243d7a8b2501135615c4b180e44",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

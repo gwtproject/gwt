@@ -34,6 +34,24 @@
       "revId": "4a4dbbd184a7880ab936e5654f8bb95e1d3b4e81",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "36b04d09_fb954f3f",
+        "filename": "user/super/com/google/gwt/emul/java/util/DoubleSummaryStatistics.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-10-26T14:23:51Z",
+      "side": 1,
+      "message": "Ah right, it\u0027s java.lang.Math, not JS\u0027s Math! ;-)",
+      "parentUuid": "7671e51a_65f78689",
+      "revId": "4a4dbbd184a7880ab936e5654f8bb95e1d3b4e81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

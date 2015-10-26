@@ -141,6 +141,9 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
     }
 
     @Override
+    public boolean isArrayType() { return ref.isArrayType(); }
+
+    @Override
     public boolean isJsoType() {
       return ref.isJsoType();
     }

@@ -254,7 +254,7 @@ public abstract class JDeclaredType extends JReferenceType implements CanHaveSup
    */
   public final JMethod getClinitMethod() {
     assert getMethods().size() != 0;
-    JMethod clinit = this.getMethods().get(0);
+    JMethod clinit = this.getMethods().get(GwtAstBuilder.CLINIT_METHOD_INDEX);
 
     assert clinit != null;
     assert clinit.getName().equals(GwtAstBuilder.CLINIT_NAME);

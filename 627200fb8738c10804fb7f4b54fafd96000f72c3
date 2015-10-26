@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6ae1193_b809b900",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JavaAstVerifier.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-26T22:43:17Z",
+      "side": 1,
+      "message": "Earlier I did similar thing in compiler with following so you really avoid the overhead:\n\n  assert verifyCorrectOrder();",
+      "revId": "627200fb8738c10804fb7f4b54fafd96000f72c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76a645d7_7d55b789",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-26T18:33:18Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "914be9aa33f38fb2968659c599080b69c6cda7d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76a645d7_5d52fba3",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-26T18:33:18Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "914be9aa33f38fb2968659c599080b69c6cda7d1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

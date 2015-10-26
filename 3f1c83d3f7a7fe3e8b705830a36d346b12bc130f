@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76a645d7_fd46673c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-26T00:22:28Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "3f1c83d3f7a7fe3e8b705830a36d346b12bc130f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76a645d7_dd4bab42",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-26T00:22:28Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "3f1c83d3f7a7fe3e8b705830a36d346b12bc130f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

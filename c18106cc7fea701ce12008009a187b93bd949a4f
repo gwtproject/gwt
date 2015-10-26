@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d6ae1193_6d0bdd3a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ArrayNormalizer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-26T22:45:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6ae1193_12b0bc2a",
+      "range": {
+        "startLine": 210,
+        "startChar": 24,
+        "endLine": 210,
+        "endChar": 41
+      },
+      "revId": "c18106cc7fea701ce12008009a187b93bd949a4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6ae1193_12627c3e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2015-10-26T22:20:14Z",
       "side": 1,
       "message": "change the index",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 48
+      },
+      "revId": "c18106cc7fea701ce12008009a187b93bd949a4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_cdd309e5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-26T22:45:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6ae1193_12627c3e",
       "range": {
         "startLine": 264,
         "startChar": 0,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "d6ae1193_edd0cdda",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-26T22:45:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6ae1193_6daafdab",
+      "revId": "c18106cc7fea701ce12008009a187b93bd949a4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6ae1193_4dce1995",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
         "patchSetId": 4
@@ -76,6 +142,24 @@
       "writtenOn": "2015-10-26T22:20:14Z",
       "side": 1,
       "message": "discussed offline to remove HasNoSideEffects.",
+      "revId": "c18106cc7fea701ce12008009a187b93bd949a4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_4d91b920",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-26T22:45:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6ae1193_4dce1995",
       "revId": "c18106cc7fea701ce12008009a187b93bd949a4f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "d6ae1193_6d967d1b",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-26T22:45:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6ae1193_6dfcbd9c",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 17
+      },
+      "revId": "c18106cc7fea701ce12008009a187b93bd949a4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6ae1193_6d275dec",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/JavaAstConstructor.java",
         "patchSetId": 4
@@ -116,6 +224,30 @@
       "writtenOn": "2015-10-26T22:20:14Z",
       "side": 1,
       "message": "wrap",
+      "range": {
+        "startLine": 62,
+        "startChar": 20,
+        "endLine": 70,
+        "endChar": 36
+      },
+      "revId": "c18106cc7fea701ce12008009a187b93bd949a4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_ad9fb529",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/JavaAstConstructor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-26T22:45:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6ae1193_6d275dec",
       "range": {
         "startLine": 62,
         "startChar": 20,

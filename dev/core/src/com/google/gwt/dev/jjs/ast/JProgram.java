@@ -484,6 +484,9 @@ public class JProgram extends JNode implements ArrayTypeCreator {
       return EnumSet.allOf(DispatchType.class);
     }
 
+    if (type.isArrayType()) {
+      return EnumSet.of(DispatchType.JAVA_ARRAY);
+    }
     EnumSet<DispatchType> dispatchSet = EnumSet.noneOf(DispatchType.class);
     DispatchType dispatchType = getRepresentedAsNativeTypesDispatchMap().get(type);
     if (dispatchType != null) {

@@ -64,7 +64,7 @@ public class JClassType extends JDeclaredType {
   @Override
   public final JMethod getInitMethod() {
     assert getMethods().size() > 1;
-    JMethod init = this.getMethods().get(1);
+    JMethod init = this.getMethods().get(GwtAstBuilder.INIT_METHOD_INDEX);
 
     if (!init.getName().equals(GwtAstBuilder.INIT_NAME)) {
       // the init method was removed.

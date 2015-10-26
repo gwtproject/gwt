@@ -2526,7 +2526,7 @@ public class GwtAstBuilder {
       }
 
       // Implement getClass() implementation for all non-Object classes.
-      if (isSyntheticGetClassNeeded(x, type)) {
+      if (isSyntheticGetClassNeeded(x, type) && !type.isAbstract()) {
         implementGetClass(type);
       }
 
@@ -2907,17 +2907,7 @@ public class GwtAstBuilder {
       JMethod method = type.getMethods().get(2);
       assert ("getClass".equals(method.getName()));
       SourceInfo info = method.getSourceInfo();
-      if ("com.google.gwt.lang.Array".equals(type.getName())) {
-        /*
-         * Don't implement, fall through to Object.getClass(). Array emulation code
-         * in com.google.gwt.lang.Array invokes Array.getClass() and expects to get the
-         * class literal for the actual runtime type of the array (e.g. Foo[].class) and
-         * not Array.class.
-         */
-        type.getMethods().remove(2);
-      } else {
-        JjsUtils.replaceMethodBody(method, new JClassLiteral(info, type));
-      }
+      JjsUtils.replaceMethodBody(method, new JClassLiteral(info, type));
     }
 
     private JDeclarationStatement makeDeclaration(SourceInfo info, JLocal local,
@@ -3935,8 +3925,8 @@ public class GwtAstBuilder {
         // Add a getClass() implementation for all non-Object, non-String classes.
         if (isSyntheticGetClassNeeded(x, type)) {
           assert type.getMethods().size() == 2;
-          createSyntheticMethod(info, "getClass", type, javaLangClass, false, false, false,
-              AccessModifier.PUBLIC);
+          createSyntheticMethod(info, "getClass", type, javaLangClass, type.isAbstract(), false,
+              false, AccessModifier.PUBLIC);
         }
       }
 

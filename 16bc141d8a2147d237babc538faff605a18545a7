@@ -130,6 +130,24 @@
       "revId": "16bc141d8a2147d237babc538faff605a18545a7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_22064f5f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-27T04:19:09Z",
+      "side": 1,
+      "message": "I bet this will not fail in following scenario:\n\nA {\n  @JsProperty(\"x\")\n  void getAbc();\n}\n\nB extends A {\n  @JsProperty(\"x\")\n  void getKlm();\n}\n\nI think you started with refactoring the existing code and at the time existing code written there was no way to customize the name, so that was forcing getter to override other getters.\n\nBeing said that, you could still do following which doesn\u0027t override getter but causes conflict:\n\nA {\n  @JsProperty\n  boolean getAbc();\n}\n\nB extends A {\n  @JsProperty\n  boolean isAbc();\n}\n\nThis feels like deja vu. I might already asked for such a test earlier, need to check...",
+      "parentUuid": "d6ae1193_e2b0d717",
+      "revId": "16bc141d8a2147d237babc538faff605a18545a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -148,6 +148,24 @@
       "revId": "16bc141d8a2147d237babc538faff605a18545a7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_82f2bb97",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-27T04:58:55Z",
+      "side": 1,
+      "message": "Actually I just saw there is a check for this...",
+      "parentUuid": "d6ae1193_22064f5f",
+      "revId": "16bc141d8a2147d237babc538faff605a18545a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

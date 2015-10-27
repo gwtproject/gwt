@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76a645d7_80825844",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-27T23:23:37Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "50c621d3ab09d6b5f59750b1ec13bc1bca4188a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76a645d7_607f4cde",
+        "filename": "dev/core/test/com/google/gwt/dev/util/UnitTestTreeLogger.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-27T23:23:37Z",
+      "side": 1,
+      "message": "[warning] Definition of \u0027equals()\u0027 without corresponding definition of \u0027hashCode()\u0027.",
+      "revId": "50c621d3ab09d6b5f59750b1ec13bc1bca4188a4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

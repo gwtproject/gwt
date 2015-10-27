@@ -132,6 +132,8 @@ public abstract class Number implements Serializable {
   }
 
   private static native boolean nativeIsInstance(Object instance) /*-{
+    // Note: The instanceof Number here does not refer to JavaScript Number in j2cl
+    // But rather refers to this ES6 class Number.
     return typeof instance == 'number' || instance instanceof Number;
   }-*/;
 

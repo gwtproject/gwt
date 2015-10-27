@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d6ae1193_8d74b18d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JavaAstVerifier.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-27T04:13:42Z",
+      "side": 1,
+      "message": "VisibleForTesting.",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 8
+      },
+      "revId": "627200fb8738c10804fb7f4b54fafd96000f72c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6ae1193_b809b900",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JavaAstVerifier.java",
         "patchSetId": 9
@@ -13,6 +36,24 @@
       "writtenOn": "2015-10-26T22:43:17Z",
       "side": 1,
       "message": "Earlier I did similar thing in compiler with following so you really avoid the overhead:\n\n  assert verifyCorrectOrder();",
+      "revId": "627200fb8738c10804fb7f4b54fafd96000f72c3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_ad8895ec",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JavaAstVerifier.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-27T04:13:42Z",
+      "side": 1,
+      "message": "oppps didn\u0027t see this class never executed.",
+      "parentUuid": "d6ae1193_b809b900",
       "revId": "627200fb8738c10804fb7f4b54fafd96000f72c3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -19,6 +19,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import javaemul.internal.JsUtils;
 
+import jsinterop.annotations.JsMethod;
+
 /**
  * Wraps a primitive <code>double</code> as an object.
  */
@@ -371,8 +373,23 @@ public final class Double extends Number implements Comparable<Double> {
     return x;
   }-*/;
 
+  @JsMethod(name = "$create__java_lang_String")
   static Double $createDouble(String s) {
     return $createDouble(Double.parseDouble(s));
   }
   // CHECKSTYLE_ON: End utility methods
+
+  @JsMethod(name = "$create__double")
+  public static double create(double d) {
+    return $createDouble(d);
+  }
+
+  @JsMethod(name = "$isInstance")
+  public static boolean isInstance(Object instance) {
+    return nativeIsInstance(instance);
+  }
+
+  private static native boolean nativeIsInstance(Object instance) /*-{
+    return typeof instance == 'number';
+  }-*/;
 }

@@ -19,6 +19,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 
+import jsinterop.annotations.JsMethod;
+
 /**
  * Wraps native <code>boolean</code> as an object.
  */
@@ -123,8 +125,23 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
     return x;
   }-*/;
 
+  @JsMethod(name = "$create__java_lang_String")
   static Boolean $createBoolean(String x) {
     return $createBoolean(Boolean.parseBoolean(x));
   }
   // CHECKSTYLE_ON: End utility methods
+
+  @JsMethod(name = "$create__boolean")
+  public static boolean create(boolean b) {
+    return $createBoolean(b);
+  }
+
+  @JsMethod(name = "$isInstance")
+  public static boolean isInstance(Object instance) {
+    return nativeIsInstance(instance);
+  }
+
+  private static native boolean nativeIsInstance(Object instance) /*-{
+    return typeof instance == 'boolean';
+  }-*/;
 }

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76a645d7_20b0242b",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-27T23:22:37Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "32496bb07e8508ef6b4f85fb3b70c0b1dbeaaa95",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76a645d7_008e4874",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-27T23:22:37Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "32496bb07e8508ef6b4f85fb3b70c0b1dbeaaa95",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76a645d7_e0923c96",
+        "filename": "dev/core/test/com/google/gwt/dev/util/UnitTestTreeLogger.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-27T23:22:37Z",
+      "side": 1,
+      "message": "[warning] Definition of \u0027equals()\u0027 without corresponding definition of \u0027hashCode()\u0027.",
+      "revId": "32496bb07e8508ef6b4f85fb3b70c0b1dbeaaa95",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

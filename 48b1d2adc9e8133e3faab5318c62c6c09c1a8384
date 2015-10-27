@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76a645d7_a00f9444",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-27T00:25:13Z",
+      "side": 1,
+      "message": "[error] \u0027||\u0027 is not preceded with whitespace.",
+      "revId": "48b1d2adc9e8133e3faab5318c62c6c09c1a8384",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
@@ -54,6 +55,7 @@ class TypeVisitorBase<T> extends SimpleTypeVisitor6<T, State> {
     types.add(state.findType(BigInteger.class));
     types.add(state.findType(Date.class));
     types.add(state.findType(String.class));
+    types.add(state.findType(UUID.class));
     types.add(state.findType(Void.class));
     // Avoids compile-dependency bloat
     types.add(state.types.getDeclaredType(state.elements

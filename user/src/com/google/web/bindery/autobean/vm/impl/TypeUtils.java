@@ -30,6 +30,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Shared code for answering question about Class objects. This is a
@@ -41,7 +42,7 @@ public class TypeUtils {
   @SuppressWarnings("unchecked")
   static final Set<Class<?>> VALUE_TYPES = Collections.unmodifiableSet(new HashSet<Class<?>>(
       Arrays.asList(Boolean.class, Character.class, Class.class, Date.class,
-          Enum.class, Number.class, String.class, Void.class)));
+          Enum.class, Number.class, String.class, UUID.class, Void.class)));
 
   static {
     Map<Class<?>, Object> temp = new HashMap<Class<?>, Object>();

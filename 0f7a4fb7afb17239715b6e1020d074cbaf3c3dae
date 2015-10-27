@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6ae1193_9fe214b1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-27T01:01:29Z",
+      "side": 1,
+      "message": "I think this should be still separate (and probably the first one), the error msg doesn\u0027t cover it.",
+      "range": {
+        "startLine": 299,
+        "startChar": 8,
+        "endLine": 299,
+        "endChar": 47
+      },
+      "revId": "0f7a4fb7afb17239715b6e1020d074cbaf3c3dae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_5f915c20",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-27T01:01:29Z",
+      "side": 1,
+      "message": "nit: SuperClass",
+      "range": {
+        "startLine": 1097,
+        "startChar": 42,
+        "endLine": 1097,
+        "endChar": 43
+      },
+      "revId": "0f7a4fb7afb17239715b6e1020d074cbaf3c3dae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

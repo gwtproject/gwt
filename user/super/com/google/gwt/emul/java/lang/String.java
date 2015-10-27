@@ -153,7 +153,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public static String valueOf(Object x) {
-    return "" + x;
+    return x == null ? "null" : x.toString();
   }
 
   // CHECKSTYLE_OFF: This class has special needs.

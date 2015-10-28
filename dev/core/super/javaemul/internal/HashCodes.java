@@ -23,6 +23,15 @@ public class HashCodes {
   private static int sNextHashId = 0;
   private static final String HASH_CODE_PROPERTY = "$H";
 
+  public static int hashCodeForBoolean(boolean value) {
+    // The Java API doc defines these magic numbers.
+    return value ? 1231 : 1237;
+  }
+
+  public static int hashCodeForDouble(double d) {
+    return (int) d;
+  }
+
   public static int hashCodeForString(String s) {
     return StringHashCache.getHashCode(s);
   }

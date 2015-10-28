@@ -17,6 +17,7 @@ package java.lang;
 
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
+import javaemul.internal.HashCodes;
 import javaemul.internal.JsUtils;
 
 import jsinterop.annotations.JsMethod;
@@ -196,11 +197,8 @@ public final class Double extends Number implements Comparable<Double> {
     return (ihi << 32) | ilo;
   }
 
-  /**
-   * @skip Here for shared implementation with Arrays.hashCode
-   */
   public static int hashCode(double d) {
-    return (int) d;
+    return HashCodes.hashCodeForDouble(d);
   }
 
   public static boolean isInfinite(double x) {

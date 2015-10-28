@@ -19,6 +19,7 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 
+import javaemul.internal.HashCodes;
 import javaemul.internal.JsUtils;
 
 import jsinterop.annotations.JsMethod;
@@ -44,8 +45,7 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
   }
 
   public static int hashCode(boolean value) {
-    // The Java API doc defines these magic numbers.
-    return value ? 1231 : 1237;
+    return HashCodes.hashCodeForBoolean(value);
   }
 
   public static boolean logicalAnd(boolean a, boolean b) {

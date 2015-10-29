@@ -28,6 +28,23 @@ public class OptionalTest extends GWTTestCase {
   }
 
   public void testSomething() {
-    // test...
+    try {
+      requireNonNull(null, () -> "Must not be null");
+      fail("must throw NPE");
+    } catch (NullPointerException e) {
+      // expected
+    }
+  }
+
+  private static <T> T requireNonNull(T obj, Supplier<String> messageSupplier) {
+    if (obj == null) {
+      throw new NullPointerException(messageSupplier.get());
+    }
+    return obj;
+  }
+
+  @FunctionalInterface
+  private interface Supplier<T> {
+    T get();
   }
 }

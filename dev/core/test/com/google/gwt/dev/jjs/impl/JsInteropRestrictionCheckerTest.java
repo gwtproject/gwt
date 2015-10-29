@@ -1468,6 +1468,29 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggySucceeds();
   }
 
+  public void testUnusableByJsJsoSucceeds() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.JavaScriptObject");
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "public static class JSO extends JavaScriptObject {",
+        "  protected JSO() {}",
+        "}",
+        "@JsType public static class Buggy {",
+        "  public void m(JSO x) {}",
+        "}");
+    assertBuggySucceeds();
+  }
+
+  public void testUnusableByJsMarkerJsTypeInterfaceSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType interface IFoo {}",
+        "@JsType public static class Buggy {",
+        "  public void m(IFoo x) {}",
+        "}");
+    assertBuggySucceeds();
+  }
+
   public void testUnusuableByJsFails() throws Exception {
     addSnippetImport("jsinterop.annotations.JsFunction");
     addSnippetImport("jsinterop.annotations.JsType");

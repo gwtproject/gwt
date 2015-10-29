@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_070ab8f3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_e6e274b5",
+      "range": {
+        "startLine": 266,
+        "startChar": 65,
+        "endLine": 266,
+        "endChar": 82
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_06e8c091",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 26
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_07a0f80e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_06e8c091",
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_26d13cdd",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 26
@@ -53,6 +95,30 @@
       "writtenOn": "2015-10-28T08:28:43Z",
       "side": 1,
       "message": "nonAccessorCount",
+      "range": {
+        "startLine": 286,
+        "startChar": 12,
+        "endLine": 286,
+        "endChar": 30
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c4e1d1_a7212473",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_26d13cdd",
       "range": {
         "startLine": 286,
         "startChar": 12,
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_8726a886",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_869db032",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 40
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_e674b490",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 26
@@ -99,6 +189,24 @@
       "writtenOn": "2015-10-28T08:28:43Z",
       "side": 1,
       "message": "Shouldn\u0027t we fail notOnlyAccessor case for native types as well? WDYT?\n\nAlso what about having two fields with same name?",
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c4e1d1_0713d827",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "That is an option. I allows to declare a sort of unsafe c union type.\n\nWhatever you prefer, because we are not checking for collisions in natives, it is not crazy to allow ANY conflict.",
+      "parentUuid": "7642c5df_e674b490",
       "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_e744bc14",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Here is for non-native, do you want the check also in native I guess. \n\nOriginally I was thinking that natives allow multiple getters/setters, so consistency only made sense for non native.",
+      "parentUuid": "7642c5df_86d4d0ce",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 57
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_c6e178af",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 26
@@ -145,6 +277,24 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_c749c02a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_c6e178af",
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_a6dc6cf8",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 26
@@ -156,6 +306,30 @@
       "writtenOn": "2015-10-28T08:28:43Z",
       "side": 1,
       "message": "at this stage shouldn\u0027t getter / setter guaranteed to be 0 or 1?",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 7
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c4e1d1_073c7887",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Originally I thought that we would allow setters/getters be multiply defined in native types. Let\u0027s talk about that.",
+      "parentUuid": "7642c5df_a6dc6cf8",
       "range": {
         "startLine": 312,
         "startChar": 0,
@@ -191,6 +365,30 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_6739ec97",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "this would become unnecessary if we moved it to be used for both native and non-native.",
+      "parentUuid": "7642c5df_26b85cab",
+      "range": {
+        "startLine": 331,
+        "startChar": 8,
+        "endLine": 331,
+        "endChar": 38
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_46b568b2",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 26
@@ -202,6 +400,30 @@
       "writtenOn": "2015-10-28T08:28:43Z",
       "side": 1,
       "message": "wrapping seems seems little bit weird",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 332,
+        "endChar": 70
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c4e1d1_473670a9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_46b568b2",
       "range": {
         "startLine": 330,
         "startChar": 0,
@@ -231,6 +453,24 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_a773e46e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_c6c8983f",
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_86ab705b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 26
@@ -242,6 +482,30 @@
       "writtenOn": "2015-10-28T08:28:43Z",
       "side": 1,
       "message": "assert instead?",
+      "range": {
+        "startLine": 343,
+        "startChar": 10,
+        "endLine": 343,
+        "endChar": 42
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c4e1d1_e77ddc38",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_86ab705b",
       "range": {
         "startLine": 343,
         "startChar": 10,
@@ -277,6 +541,30 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_c7826096",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_66ae646e",
+      "range": {
+        "startLine": 344,
+        "startChar": 13,
+        "endLine": 345,
+        "endChar": 45
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_a6c30c23",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 26
@@ -288,6 +576,24 @@
       "writtenOn": "2015-10-28T08:28:43Z",
       "side": 1,
       "message": "nit: drop? also seems inconsistent with getter case",
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c4e1d1_278894b3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_a6c30c23",
       "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -311,6 +617,24 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_67928ce3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_06bf609a",
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_e6b914b7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 26
@@ -322,6 +646,30 @@
       "writtenOn": "2015-10-28T08:28:43Z",
       "side": 1,
       "message": "do we still need this?",
+      "range": {
+        "startLine": 585,
+        "startChar": 16,
+        "endLine": 585,
+        "endChar": 62
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c4e1d1_4768306d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Yes. We would like to ignore bridges inserted by the JDT, don\u0027t we?\n\nGenerics bring a slight complication e.g.\n\n@JsType\nclass A\u003cT\u003e {\n   void m(T obj) {...}\n}\n\n@JsType\nclass B extends A\u003cM\u003e {\n   void m(M obj) { ...}\n}\n\nB.m conceptually overrides A.m, but when generics are erased\n\n@JsType\nclass A\u003cT\u003e {\n   void m(T obj) {...}\n}\n\n@JsType\nclass B extends A\u003cM\u003e {\n   void m(Object obj) { m((M) obj);...} // sythetic bridge\n   void m(M obj) { ...}\n}\n\nso we would report a conflict between B.m and A.m. (I\u0027ll add the test case).\n\nThis is kind of strange as it would be solvable by @JsIgnore in B.m but it is not obvious.\n\nOther solution is do the same as we do for accidental overrides, report the error in the synthetic with the right description (will do).",
+      "parentUuid": "7642c5df_e6b914b7",
       "range": {
         "startLine": 585,
         "startChar": 16,
@@ -357,6 +705,30 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_679d6cd7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_461c887a",
+      "range": {
+        "startLine": 599,
+        "startChar": 18,
+        "endLine": 599,
+        "endChar": 45
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_261ffc71",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 26
@@ -368,6 +740,30 @@
       "writtenOn": "2015-10-28T08:28:43Z",
       "side": 1,
       "message": "replace w/ \n\n  Collections.disjoint(method.getOverridingMethods(), collectedMembers)",
+      "range": {
+        "startLine": 600,
+        "startChar": 0,
+        "endLine": 605,
+        "endChar": 17
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c4e1d1_87ca28d6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Great tip. I was looking for *.difference to no avail.",
+      "parentUuid": "7642c5df_261ffc71",
       "range": {
         "startLine": 600,
         "startChar": 0,
@@ -403,6 +799,30 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_87b3486e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7642c5df_868610df",
+      "range": {
+        "startLine": 615,
+        "startChar": 9,
+        "endLine": 615,
+        "endChar": 57
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_668984ef",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 26
@@ -414,6 +834,30 @@
       "writtenOn": "2015-10-28T08:28:43Z",
       "side": 1,
       "message": "move to corresponding method and also EnumSet seems unnecessary?",
+      "range": {
+        "startLine": 657,
+        "startChar": 0,
+        "endLine": 662,
+        "endChar": 47
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c4e1d1_c7ad400a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "it is now.",
+      "parentUuid": "7642c5df_668984ef",
       "range": {
         "startLine": 657,
         "startChar": 0,
@@ -449,6 +893,30 @@
     },
     {
       "key": {
+        "uuid": "56c4e1d1_272c1433",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Made it JsType to make sure that if the subclass is processed it would not error.",
+      "parentUuid": "7642c5df_067a007a",
+      "range": {
+        "startLine": 1452,
+        "startChar": 8,
+        "endLine": 1454,
+        "endChar": 10
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7642c5df_a66eacbc",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 26
@@ -460,6 +928,30 @@
       "writtenOn": "2015-10-28T08:28:43Z",
       "side": 1,
       "message": "what if they are both native?",
+      "range": {
+        "startLine": 1481,
+        "startChar": 0,
+        "endLine": 1482,
+        "endChar": 59
+      },
+      "revId": "a9505bd9e99a16bccd902842a2e54f9fa2821fb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c4e1d1_07291823",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 1482,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Also fails because the type is not native, do you prefer that?\n\nShould we allow native methods to conflict independent of whether they are in an native type or not.",
+      "parentUuid": "7642c5df_a66eacbc",
       "range": {
         "startLine": 1481,
         "startChar": 0,

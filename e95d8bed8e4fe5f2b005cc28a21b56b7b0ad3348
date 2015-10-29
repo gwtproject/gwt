@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "166509c4_5ab815ac",
+        "filename": "user/super/com/google/gwt/emul/java/util/function/BinaryOperator.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2015-10-29T10:25:43Z",
+      "side": 1,
+      "message": "I don\u0027t really care about this but wouldn\u0027t it be easier to read if the comparison would be \u003e\u003d 0?",
+      "revId": "e95d8bed8e4fe5f2b005cc28a21b56b7b0ad3348",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56722192_f45bb8dd",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-29T02:40:41Z",
+      "side": 1,
+      "message": "[error] // comments must be followed by a space and be on their own line",
+      "revId": "4069fc6931684135b96238b261abdd8af23da104",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56722192_1471145b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-29T02:40:41Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "4069fc6931684135b96238b261abdd8af23da104",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

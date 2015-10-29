@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56c4e1d1_6b5ff24f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-29T18:16:48Z",
+      "side": 1,
+      "message": "by-js",
+      "revId": "6c7a0ec7a31ef5e475af33efc0edc02492b23e30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c4e1d1_0b275eec",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-29T18:16:48Z",
+      "side": 1,
+      "message": "Can you add this to the original succeeds test?",
+      "revId": "6c7a0ec7a31ef5e475af33efc0edc02492b23e30",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

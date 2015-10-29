@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7642c5df_20c4c4c5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Refactored the code.",
+      "parentUuid": "d6ae1193_2203af27",
+      "revId": "16bc141d8a2147d237babc538faff605a18545a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6ae1193_622047e4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 23
@@ -30,6 +48,30 @@
       "writtenOn": "2015-10-27T04:13:42Z",
       "side": 1,
       "message": "We do a check with checkLocalNames and it does check for all hierarchy and we do another check here just at this level. It seems like there is some redundancy but no tests are failing. I\u0027m kind of lost here.",
+      "range": {
+        "startLine": 340,
+        "startChar": 14,
+        "endLine": 340,
+        "endChar": 97
+      },
+      "revId": "16bc141d8a2147d237babc538faff605a18545a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7642c5df_40c1d0b4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6ae1193_622047e4",
       "range": {
         "startLine": 340,
         "startChar": 14,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "7642c5df_e0aedc07",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "now it is.",
+      "parentUuid": "d6ae1193_62ce8795",
+      "range": {
+        "startLine": 358,
+        "startChar": 45,
+        "endLine": 358,
+        "endChar": 49
+      },
+      "revId": "16bc141d8a2147d237babc538faff605a18545a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6ae1193_82fc7b9d",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 23
@@ -76,6 +142,24 @@
       "writtenOn": "2015-10-27T04:13:42Z",
       "side": 1,
       "message": "Wouldn\u0027t this iteration re-print all collision that are reported by parent? I thought you wanted avoid that?",
+      "revId": "16bc141d8a2147d237babc538faff605a18545a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7642c5df_00b42854",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:04:23Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "d6ae1193_82fc7b9d",
       "revId": "16bc141d8a2147d237babc538faff605a18545a7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6195673_53a4a4c8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 31
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:11:35Z",
+      "side": 1,
+      "message": "missing parameter x to get correct reporting.",
+      "range": {
+        "startLine": 458,
+        "startChar": 17,
+        "endLine": 458,
+        "endChar": 22
+      },
+      "revId": "96816f1c10ab2a7bb327d2415bc378b6f46e9c02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_d3af94a1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 31
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-10-29T20:11:35Z",
+      "side": 1,
+      "message": "these should be move to JjsUtils and used elsewhere in the reporting. Add a todo.",
+      "range": {
+        "startLine": 628,
+        "startChar": 2,
+        "endLine": 680,
+        "endChar": 3
+      },
+      "revId": "96816f1c10ab2a7bb327d2415bc378b6f46e9c02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

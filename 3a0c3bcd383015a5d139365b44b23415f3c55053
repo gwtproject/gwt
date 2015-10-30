@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56722192_1a713d5b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-30T21:59:30Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.javac.JdtUtil.",
+      "revId": "3a0c3bcd383015a5d139365b44b23415f3c55053",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56722192_3a6ef97b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 34
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-10-30T21:59:30Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.JJSOptions.",
+      "revId": "3a0c3bcd383015a5d139365b44b23415f3c55053",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

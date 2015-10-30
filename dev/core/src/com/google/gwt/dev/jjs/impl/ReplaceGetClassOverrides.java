@@ -50,7 +50,9 @@ public class ReplaceGetClassOverrides {
 
     @Override
     public void endVisit(JMethod x, Context ctx) {
-      if (isGetClassMethod(x)) {
+      // Remove all overrides but keep the method in java.lang.Object as references from JSNI
+      // are not removed.
+      if (x.getEnclosingType() != program.getTypeJavaLangObject() && isGetClassMethod(x)) {
         ctx.removeMe();
       }
     }

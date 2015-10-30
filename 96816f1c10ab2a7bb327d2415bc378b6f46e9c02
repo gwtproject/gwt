@@ -2,6 +2,109 @@
   "comments": [
     {
       "key": {
+        "uuid": "f6195673_33c6c81d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 31
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-30T05:27:53Z",
+      "side": 1,
+      "message": "if (conflictingMembers.isEmpty) {\n  continue;\n}\n\n// There are conflicting members. Let\u0027s see if they are ok.",
+      "revId": "96816f1c10ab2a7bb327d2415bc378b6f46e9c02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_537824a7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 31
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-30T05:27:53Z",
+      "side": 1,
+      "message": "// Fields cannot conflict with anything\n\nWith the early exit above for conflictingMember.isEmpty the second part of the condition (members.size \u003e 1) also becomes unnecessary.\n\nAlso this could be the first check so all setter/getter checks become next to each other.",
+      "revId": "96816f1c10ab2a7bb327d2415bc378b6f46e9c02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_b30bf838",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 31
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-30T05:27:53Z",
+      "side": 1,
+      "message": "i think adding getFirst helper will help readability.",
+      "range": {
+        "startLine": 322,
+        "startChar": 14,
+        "endLine": 322,
+        "endChar": 32
+      },
+      "revId": "96816f1c10ab2a7bb327d2415bc378b6f46e9c02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_93123c3c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 31
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-30T05:27:53Z",
+      "side": 1,
+      "message": "if you move this before setter/getter count check, they will be together and you can also reuse the extracted setter variable in the error message.",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 7
+      },
+      "revId": "96816f1c10ab2a7bb327d2415bc378b6f46e9c02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_f96b8f35",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 31
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-30T05:27:53Z",
+      "side": 1,
+      "message": "There are no exporting in native types. Perhaps we should generate a separate error message for this and the earlier field vs members check:\n\"JsProperty %s and JsMethod %s cannot have the same JavaScript name %s\"\n\nWDYT?",
+      "range": {
+        "startLine": 341,
+        "startChar": 14,
+        "endLine": 341,
+        "endChar": 30
+      },
+      "revId": "96816f1c10ab2a7bb327d2415bc378b6f46e9c02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6195673_53a4a4c8",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 31
@@ -25,6 +128,23 @@
     },
     {
       "key": {
+        "uuid": "f6195673_b3d3f829",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 31
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-30T05:27:53Z",
+      "side": 1,
+      "message": "Check this.",
+      "revId": "96816f1c10ab2a7bb327d2415bc378b6f46e9c02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6195673_d3af94a1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 31
@@ -42,6 +162,23 @@
         "endLine": 680,
         "endChar": 3
       },
+      "revId": "96816f1c10ab2a7bb327d2415bc378b6f46e9c02",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_b38658f7",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 31
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-10-30T05:27:53Z",
+      "side": 1,
+      "message": "Yeah, this shouldn\u0027t be an error.",
       "revId": "96816f1c10ab2a7bb327d2415bc378b6f46e9c02",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

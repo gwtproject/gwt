@@ -58,7 +58,7 @@ public final class Long extends Number implements Comparable<Long> {
    * @skip Here for shared implementation with Arrays.hashCode
    */
   public static int hashCode(long l) {
-    return (int) l;
+    return (int) (l ^ (l >>> 32));
   }
 
   public static long highestOneBit(long i) {

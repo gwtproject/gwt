@@ -290,4 +290,8 @@ public class LongTest extends GWTTestCase {
     assertEquals("-8000000000000000", Long.toString(0x8000000000000000L, 16));
     assertEquals("7fffffffffffffff", Long.toString(0x7fffffffffffffffL, 16));
   }
+  
+  public void testHashCode() {
+    assertEquals(new Long(9223372036854775807L).hashCode(), -2147483648);
+  }
 }

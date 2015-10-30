@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "d6ae1193_225f2f51",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-10-30T08:59:42Z",
+      "side": 1,
+      "message": "It is not redundant. The local name above does not check JsProperty names.  And the ideas is to only report the error on only one of the methods involved in a conflict. So I choose to report it on the first (because these are accumulated by name and subclasses before supers, only one of the paths will be satisfied.\n\nIt felt bad to have some property checks here and some with the local names.",
+      "parentUuid": "d6ae1193_622047e4",
+      "range": {
+        "startLine": 340,
+        "startChar": 14,
+        "endLine": 340,
+        "endChar": 97
+      },
+      "revId": "16bc141d8a2147d237babc538faff605a18545a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6ae1193_62ce8795",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 23
@@ -166,6 +190,24 @@
     },
     {
       "key": {
+        "uuid": "d6ae1193_422d03cb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-10-30T08:59:42Z",
+      "side": 1,
+      "message": "Missing an escape clause. Should bail out at line 367 if member.getEnclosingType() !\u003d type",
+      "parentUuid": "d6ae1193_82fc7b9d",
+      "revId": "16bc141d8a2147d237babc538faff605a18545a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6ae1193_e2e297f7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 23
@@ -177,6 +219,24 @@
       "writtenOn": "2015-10-27T04:13:42Z",
       "side": 1,
       "message": "seems like this is kind of late to bail out for this case; kind of confuses.",
+      "revId": "16bc141d8a2147d237babc538faff605a18545a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6ae1193_a22c1fce",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-10-30T08:59:42Z",
+      "side": 1,
+      "message": "I don\u0027t think it is too late, all names that are taken by a member of a native jstype will bail out here.",
+      "parentUuid": "d6ae1193_e2e297f7",
       "revId": "16bc141d8a2147d237babc538faff605a18545a7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

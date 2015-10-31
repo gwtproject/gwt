@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6627eec_896439f4",
+        "filename": "dev/build.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2015-10-31T12:30:33Z",
+      "side": 1,
+      "message": "Looks like this dep wasn\u0027t uploaded to GWT_TOOLS repo?\n\n  $ svn ls https://google-web-toolkit.googlecode.com/svn/tools/lib/gss/\n  2014-09-11/\n  2015-02-13/\n  2015-02-18/",
+      "range": {
+        "startLine": 39,
+        "startChar": 52,
+        "endLine": 39,
+        "endChar": 62
+      },
+      "revId": "b2b4f7a2dae2fd546af6aa23fa0ee3e636d5c9ec",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

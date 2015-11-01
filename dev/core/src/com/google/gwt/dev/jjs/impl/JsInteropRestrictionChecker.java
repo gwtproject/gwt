@@ -43,16 +43,16 @@ import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
-import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
-import com.google.gwt.thirdparty.guava.common.collect.LinkedListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 import com.google.gwt.thirdparty.guava.common.collect.TreeMultimap;
 
-import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeSet;
 
 /**
@@ -72,6 +72,7 @@ public class JsInteropRestrictionChecker {
 
   private Multimap<String, String> errorsByFilename = TreeMultimap.create();
   private Multimap<String, String> warningsByFilename = TreeMultimap.create();
+  private LinkedHashMap<String, JsMember> localNames;
   private final JProgram jprogram;
   private final MinimalRebuildCache minimalRebuildCache;
 
@@ -230,7 +231,9 @@ public class JsInteropRestrictionChecker {
       return;
     }
 
-    if (!x.needsDynamicDispatch() && !x.isJsNative()) {
+    if (x.needsDynamicDispatch()) {
+      checkLocalName(x);
+    } else if (!x.isJsNative()) {
       checkGlobalName(x);
     }
   }
@@ -250,7 +253,9 @@ public class JsInteropRestrictionChecker {
       return;
     }
 
-    if (!x.needsDynamicDispatch() && !x.isJsNative()) {
+    if (x.needsDynamicDispatch()) {
+      checkLocalName(x);
+    } else if (!x.isJsNative()) {
       checkGlobalName(x);
     }
   }
@@ -263,78 +268,50 @@ public class JsInteropRestrictionChecker {
     }
   }
 
-  private void checkLocalNames(JDeclaredType type) {
-    LinkedListMultimap<String, JsMember> memberByLocalMemberNames = collectLocalNames(type);
-    for (String jsName : memberByLocalMemberNames.keySet()) {
-
-      List<JsMember> members = memberByLocalMemberNames.get(jsName);
-      JsMember member = members.get(0);
-
-      if (!member.isDefinedIn(type)) {
-        // If the first member is not defined here, then all member defined in supertypes and
-        // corresponding errors are reported when supertypes are checked.
-        continue;
-      }
-
-      if (jsName.equals(JsInteropUtil.INVALID_JSNAME)) {
-        logInvalidMemberErrors(type, members);
-        continue;
-      }
-
-      if (member instanceof JsPropertyAccessorMember) {
-        checkJsPropertyAccessor(type, (JsPropertyAccessorMember) member);
-      }
-
-      List<JsMember> clashes = members.subList(1, members.size());
-      if (clashes.isEmpty()) {
-        return;
-      }
-
-      // We allow clashes for only overloads of native methods.
-      Predicate<JsMember> predicate = new Predicate<JsMember>() {
-        @Override
-        public boolean apply(JsMember member) {
-          return member.isNative() && !member.isProperty();
-        }
-      };
-
-      if (Iterables.all(members, predicate)) {
-        return;
-      }
-
-      JsMember firstConflict = Iterables.find(clashes, Predicates.not(predicate), clashes.get(0));
-      logError(member.member, "%s and %s cannot both use the same JavaScript name '%s'.",
-          getMemberDescription(member.member), getMemberDescription(firstConflict.member), jsName);
-    }
-  }
-
-  private void logInvalidMemberErrors(JDeclaredType type, Collection<JsMember> members) {
-    for (JsMember member : members) {
-      if (!member.isDefinedIn(type)) {
-        break;
-      }
-      if (member instanceof JsPropertyAccessorMember) {
-        logError(member.member, "JsProperty %s doesn't follow Java Bean naming conventions.",
-            getMemberDescription(member.member));
+  private void checkLocalName(JMember x) {
+    if (x.getJsName().equals(JsInteropUtil.INVALID_JSNAME)) {
+      if (x instanceof JMethod
+          && ((JMethod) x).getJsPropertyAccessorType() == JsPropertyAccessorType.UNDEFINED) {
+        logError(x, "JsProperty %s doesn't follow Java Bean naming conventions.",
+            getMemberDescription(x));
       } else {
         logError(
-            member.member,
-            "%s cannot be assigned a different JavaScript name than the method "
-            + "it overrides.",
-            getMemberDescription(member.member));
+            x, "%s cannot be assigned a different JavaScript name than the method it overrides.",
+            getMemberDescription(x));
       }
+      return;
     }
+
+    JsMember oldMember = localNames.get(x.getJsName());
+    JsMember newMember = createOrUpdateJsMember(oldMember, x);
+
+    checkJsPropertyAccessor(x, newMember);
+
+
+    if (oldMember == null || newMember.containsOrOverrides(oldMember)) {
+      localNames.put(x.getJsName(), newMember);
+      return;
+    }
+
+    // TODO: skip overriddes
+    if (oldMember.isNativeMethod() && newMember.isNativeMethod()) {
+      return;
+    }
+
+    logError(x, "%s and %s cannot both use the same JavaScript name '%s'.", getMemberDescription(x),
+        getMemberDescription(oldMember.member), x.getJsName());
   }
 
-  private void checkJsPropertyAccessor(JDeclaredType type, JsPropertyAccessorMember member) {
-    if (member.setter != null) {
-      checkValidSetter(member.setter);
+  void checkJsPropertyAccessor(JMember x, JsMember newMember) {
+    if (newMember.setter != null) {
+      checkValidSetter(newMember.setter);
     }
-    if (member.getter != null) {
-      checkValidGetter(member.getter);
+    if (newMember.getter != null) {
+      checkValidGetter(newMember.getter);
     }
-    if (member.setter != null && member.getter != null) {
-      checkJsPropertyGetterConsistentWithSetter(type, member.setter, member.getter);
+    if (newMember.setter != null && newMember.getter != null) {
+      checkJsPropertyGetterConsistentWithSetter(
+          x.getEnclosingType(), newMember.setter, newMember.getter);
     }
   }
 
@@ -526,7 +503,7 @@ public class JsInteropRestrictionChecker {
       checkJsConstructors(type);
     }
 
-    checkLocalNames(type);
+    localNames = collectNames(type.getSuperClass());
 
     for (JField field : type.getFields()) {
       checkField(field);
@@ -575,105 +552,82 @@ public class JsInteropRestrictionChecker {
 
   private static class JsMember {
     private JMember member;
+    private JMethod setter;
+    private JMethod getter;
 
     public JsMember(JMember member) {
       this.member = member;
     }
 
-    public boolean isNative() {
-      return member.isJsNative();
+
+    public JsMember(JMethod member, JMethod setter, JMethod getter) {
+      this.member = member;
+      this.setter = setter;
+      this.getter = getter;
     }
 
-    public boolean isProperty() {
-      return member instanceof JField;
+    public boolean isNativeMethod() {
+      return member instanceof JMethod && member.isJsNative() && setter == null && getter == null;
     }
 
-    public boolean isDefinedIn(JDeclaredType type) {
-      return member.getEnclosingType() == type;
+    public boolean containsOrOverrides(JsMember other) {
+      if ((other.member == getter || other.member == setter)
+          && (other.getter == null || other.setter == null)) {
+        // Property Accessor other is now part of a property pair.
+        return true;
+      }
+
+      if (member instanceof JField) {
+        return false;
+      }
+
+      JMethod method = (JMethod) member;
+      return method.getOverriddenMethods().contains(other.member);
     }
   }
 
-  private static class JsPropertyAccessorMember extends JsMember {
-    private JMethod setter;
-    private JMethod getter;
-    public JsPropertyAccessorMember(JMember member) {
-      super(member);
+  private LinkedHashMap<String, JsMember> collectNames(JDeclaredType type) {
+    if (type == null) {
+      return Maps.newLinkedHashMap();
     }
-    @Override
-    public boolean isProperty() {
-      return true;
+
+    LinkedHashMap<String, JsMember> memberByLocalMemberNames = collectNames(type.getSuperClass());
+
+    for (JField field : type.getFields()) {
+      if (!field.isJsProperty() || !field.needsDynamicDispatch()) {
+        continue;
+      }
+      updateJsMembers(memberByLocalMemberNames, field);
     }
-  }
 
-  private LinkedListMultimap<String, JsMember> collectLocalNames(JDeclaredType type) {
-    LinkedListMultimap<String, JsMember> memberByLocalMemberNames = LinkedListMultimap.create();
-    for (;type != null; type = type.getSuperClass())  {
-      for (JField field : type.getFields()) {
-        if (!field.isJsProperty()) {
-          continue;
-        }
-        if (field.needsDynamicDispatch()) {
-          memberByLocalMemberNames.put(field.getJsName(), new JsMember(field));
-        }
+    for (JMethod method : type.getMethods()) {
+      if (!method.isOrOverridesJsMethod() || !method.needsDynamicDispatch()) {
+        continue;
       }
-
-      for (JMethod method : type.getMethods()) {
-        if (!method.isOrOverridesJsMethod()) {
-          continue;
-        }
-
-        List<JsMember> members = memberByLocalMemberNames.get(method.getJsName());
-        if (method.needsDynamicDispatch()) {
-          updateMemberList(members, method);
-        }
-      }
+      updateJsMembers(memberByLocalMemberNames, method);
     }
     return memberByLocalMemberNames;
   }
 
-  private void updateMemberList(List<JsMember> members, JMethod method) {
+  private void updateJsMembers(Map<String, JsMember> memberByLocalMemberNames, JMember member) {
+    JsMember oldJsMember = memberByLocalMemberNames.get(member.getJsName());
+    JsMember updatedJsMember = createOrUpdateJsMember(oldJsMember, member);
+    memberByLocalMemberNames.put(member.getJsName(), updatedJsMember);
+  }
+
+  private JsMember createOrUpdateJsMember(JsMember jsMember, JMember member) {
+    if (member instanceof JField) {
+      return new JsMember(member);
+    }
+
+    JMethod method = (JMethod) member;
     switch (method.getJsPropertyAccessorType()) {
-      case UNDEFINED:
       case GETTER:
-        for (JsMember jsMember : members) {
-          if (jsMember instanceof JsPropertyAccessorMember) {
-            JsPropertyAccessorMember jsPropertyAccessorMember = (JsPropertyAccessorMember) jsMember;
-            if (jsPropertyAccessorMember.getter == null) {
-              jsPropertyAccessorMember.getter = method;
-              return;
-            } else if (method.getOverridingMethods().contains(jsPropertyAccessorMember.getter)) {
-              return;
-            }
-          }
-        }
-        JsPropertyAccessorMember getterMember = new JsPropertyAccessorMember(method);
-        getterMember.getter = method;
-        members.add(getterMember);
-        return;
+        return new JsMember(method, jsMember == null ? null : jsMember.setter, method);
       case SETTER:
-        for (JsMember jsMember : members) {
-          if (jsMember instanceof JsPropertyAccessorMember) {
-            JsPropertyAccessorMember jsPropertyAccessorMember = (JsPropertyAccessorMember) jsMember;
-            if (jsPropertyAccessorMember.setter == null) {
-              jsPropertyAccessorMember.setter = method;
-              return;
-            } else if (method.getOverridingMethods().contains(jsPropertyAccessorMember.setter)) {
-              return;
-            }
-          }
-        }
-        JsPropertyAccessorMember setterMember = new JsPropertyAccessorMember(method);
-        setterMember.setter = method;
-        members.add(setterMember);
-        return;
+        return new JsMember(method, method, jsMember == null ? null : jsMember.getter);
       default:
-        for (JsMember jsMember : members) {
-          if (method.getOverridingMethods().contains(jsMember.member)) {
-            return;
-          }
-        }
-        members.add(new JsMember(method));
-        return;
+        return new JsMember(method);
     }
   }
 

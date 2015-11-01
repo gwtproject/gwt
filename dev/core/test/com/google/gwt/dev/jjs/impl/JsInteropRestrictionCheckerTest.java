@@ -50,9 +50,9 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 13: 'void EntryPoint.ParentBuggy.doIt(EntryPoint.Foo)' "
+        "Line 14: 'void EntryPoint.ParentBuggy.doIt(EntryPoint.Bar)' "
             + "(exposed by 'EntryPoint.Buggy') and "
-            + "'void EntryPoint.ParentBuggy.doIt(EntryPoint.Bar)' (exposed by 'EntryPoint.Buggy') "
+            + "'void EntryPoint.ParentBuggy.doIt(EntryPoint.Foo)' (exposed by 'EntryPoint.Buggy') "
             + "cannot both use the same JavaScript name 'doIt'.");
   }
 
@@ -74,8 +74,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "public static class Buggy {}  // Unrelated class");
 
     assertBuggyFails(
-        "Line 13: 'void EntryPoint.Baz.doIt(EntryPoint.Foo)' and "
-            + "'void EntryPoint.Baz.doIt(EntryPoint.Bar)' cannot both use the same "
+        "Line 14: 'void EntryPoint.Baz.doIt(EntryPoint.Bar)' and "
+            + "'void EntryPoint.Baz.doIt(EntryPoint.Foo)' cannot both use the same "
             + "JavaScript name 'doIt'.");
   }
 
@@ -198,7 +198,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 8: 'boolean EntryPoint.Buggy.isX()' and 'boolean EntryPoint.Buggy.getX()' "
+        "Line 10: 'boolean EntryPoint.Buggy.getX()' and 'boolean EntryPoint.Buggy.isX()' "
             + "cannot both use the same JavaScript name 'x'.");
   }
 
@@ -215,7 +215,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 8: 'void EntryPoint.Buggy.setX(boolean)' and 'void EntryPoint.Buggy.setX(int)' "
+        "Line 10: 'void EntryPoint.Buggy.setX(int)' and 'void EntryPoint.Buggy.setX(boolean)' "
             + "cannot both use the same JavaScript name 'x'.");
   }
 
@@ -235,9 +235,9 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 7: 'boolean EntryPoint.IBuggy.x(boolean)' and 'int EntryPoint.IBuggy.getX()' "
+        "Line 9: 'int EntryPoint.IBuggy.getX()' and 'boolean EntryPoint.IBuggy.x(boolean)' "
             + "cannot both use the same JavaScript name 'x'.",
-        "Line 12: 'boolean EntryPoint.Buggy.x(boolean)' and 'int EntryPoint.Buggy.getX()' "
+        "Line 13: 'int EntryPoint.Buggy.getX()' and 'boolean EntryPoint.Buggy.x(boolean)' "
             + "cannot both use the same JavaScript name 'x'.");
   }
 
@@ -257,9 +257,9 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 7: 'boolean EntryPoint.IBuggy.x(boolean)' and 'void EntryPoint.IBuggy.setX(int)' "
+        "Line 9: 'void EntryPoint.IBuggy.setX(int)' and 'boolean EntryPoint.IBuggy.x(boolean)' "
             + "cannot both use the same JavaScript name 'x'.",
-        "Line 12: 'boolean EntryPoint.Buggy.x(boolean)' and 'void EntryPoint.Buggy.setX(int)' "
+        "Line 13: 'void EntryPoint.Buggy.setX(int)' and 'boolean EntryPoint.Buggy.x(boolean)' "
             + "cannot both use the same JavaScript name 'x'.");
   }
 
@@ -304,7 +304,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 7: 'int EntryPoint.Buggy.show' and 'void EntryPoint.Buggy.show()' cannot both use "
+        "Line 6: 'void EntryPoint.Buggy.show()' and 'int EntryPoint.Buggy.show' cannot both use "
             + "the same JavaScript name 'show'.");
   }
 
@@ -318,7 +318,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 6: 'void EntryPoint.Buggy.show(int)' and 'void EntryPoint.Buggy.show()' cannot both "
+        "Line 7: 'void EntryPoint.Buggy.show()' and 'void EntryPoint.Buggy.show(int)' cannot both "
             + "use the same JavaScript name 'show'.");
   }
 
@@ -538,8 +538,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "public static class Buggy {}");
 
     assertBuggyFails(
-        "Line 11: 'int EntryPoint.Enum.compareTo(EntryPoint.Enum)' and "
-            + "'int EntryPoint.Comparable.compareTo(Object)' (exposed by 'EntryPoint.Enum') "
+        "Line 11: 'int EntryPoint.Comparable.compareTo(Object)' (exposed by 'EntryPoint.Enum') and "
+            + "'int EntryPoint.Enum.compareTo(EntryPoint.Enum)' "
             + "cannot both use the same JavaScript name 'compareTo'.");
   }
 
@@ -1525,7 +1525,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggyFails(
-        "Line 5: 'void EntryPoint.Buggy.m(Object)' and 'void EntryPoint.Buggy.m(int)' "
+        "Line 6: 'void EntryPoint.Buggy.m(int)' and 'void EntryPoint.Buggy.m(Object)' "
             + "cannot both use the same JavaScript name 'm'.");
   }
 

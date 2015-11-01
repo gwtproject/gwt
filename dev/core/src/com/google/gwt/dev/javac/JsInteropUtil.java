@@ -157,7 +157,12 @@ public final class JsInteropUtil {
 
     String namespace = JdtUtil.getAnnotationParameterString(memberAnnotation, "namespace");
     String name = JdtUtil.getAnnotationParameterString(memberAnnotation, "name");
-    member.setJsMemberInfo(namespace, name == null ? computeName(member) : name, true);
+    if (name == null) {
+      name = computeName(member);
+    } else if (name.isEmpty()) {
+      name = "<invalid>";
+    }
+    member.setJsMemberInfo(namespace, name, true);
   }
 
   private static void setJsPropertyProperties(JMethod method) {

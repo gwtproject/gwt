@@ -21,6 +21,7 @@ import com.google.gwt.dev.javac.JsInteropUtil;
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.ast.CanHaveSuppressedWarnings;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.HasJsName;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
@@ -42,6 +43,7 @@ import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.dev.js.JsUtils;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
@@ -230,6 +232,8 @@ public class JsInteropRestrictionChecker {
       return;
     }
 
+    checkMemberQualifiedJsName(field);
+
     if (field.needsDynamicDispatch()) {
       checkLocalName(localNames, field);
     } else if (!field.isJsNative()) {
@@ -251,6 +255,8 @@ public class JsInteropRestrictionChecker {
     if (!method.isOrOverridesJsMethod()) {
       return;
     }
+
+    checkMemberQualifiedJsName(method);
 
     if (method.needsDynamicDispatch()) {
       if (!isSyntheticBridgeMethod(method)) {
@@ -296,7 +302,6 @@ public class JsInteropRestrictionChecker {
     if (oldMember.isNativeMethod() && newMember.isNativeMethod()) {
       return;
     }
-
     logError(member, "%s and %s cannot both use the same JavaScript name '%s'.",
         getMemberDescription(member), getMemberDescription(oldMember.member), member.getJsName());
   }
@@ -376,6 +381,56 @@ public class JsInteropRestrictionChecker {
       logError(member, "Native JsType member %s is not public or has @JsIgnore.",
           getMemberDescription(member));
       return;
+    }
+  }
+
+  private void checkMemberQualifiedJsName(JMember member) {
+    if (member instanceof JConstructor) {
+      // Constructors always inherit their name and namespace from the enclosing type.
+      // The corresponding checks are done for the type separately.
+      return;
+    }
+
+    checkJsName(member);
+
+    String jsNamespace = member.getJsNamespace();
+    assert jsNamespace != null;
+
+    if (jsNamespace.equals(member.getEnclosingType().getQualifiedJsName())) {
+      // Namespace set by the enclosing type has already been checked.
+      return;
+    }
+
+    if (member.needsDynamicDispatch()) {
+      logError(member, "Instance member %s cannot declare a namespace.",
+          getMemberDescription(member));
+      return;
+    }
+
+    checkJsNamespace(member);
+  }
+
+  private <T extends HasJsName & HasSourceInfo>  void checkJsName(T item) {
+    String jsName = item.getJsName();
+    if (jsName.equals("<invalid>")) {
+      // Errors were already reported.
+      return;
+    }
+
+    if (jsName.isEmpty()) {
+      logError(item, "%s cannot have an empty name.", getDescription(item));
+      return;
+    }
+    if (!JsUtils.isValidJsIdentifier(jsName)) {
+      logError(item, "%s has invalid name '%s'.", getDescription(item), jsName);
+      return;
+    }
+  }
+
+  private <T extends HasJsName & HasSourceInfo> void checkJsNamespace(T item) {
+      String jsNamespace = item.getJsNamespace();
+    if (!jsNamespace.isEmpty() && !JsUtils.isValidJsQualifiedName(jsNamespace)) {
+      logError(item, "%s has invalid namespace '%s'.", getDescription(item), jsNamespace);
     }
   }
 
@@ -488,6 +543,11 @@ public class JsInteropRestrictionChecker {
 
   private void checkType(JDeclaredType type) {
     minimalRebuildCache.removeExportedNames(type.getName());
+
+    if (type.isJsType()) {
+      checkJsName(type);
+      checkJsNamespace(type);
+    }
 
     if (type.isJsNative()) {
       checkNativeJsType(type);
@@ -667,6 +727,13 @@ public class JsInteropRestrictionChecker {
         .equals(potentiallyOverriddenMethod.getJsniSignature(false, false));
   }
 
+  private static String getDescription(HasSourceInfo hasSourceInfo) {
+    if (hasSourceInfo instanceof JDeclaredType) {
+      return getTypeDescription((JDeclaredType) hasSourceInfo);
+    } else {
+      return getMemberDescription((JMember) hasSourceInfo);
+    }
+  }
   private static String getMemberDescription(JMember member) {
     if (member instanceof JField) {
       return String.format("'%s'", JjsUtils.getReadableDescription(member));
@@ -682,6 +749,10 @@ public class JsInteropRestrictionChecker {
           JjsUtils.getReadableDescription(method.getEnclosingType()));
     }
     return String.format("'%s'", JjsUtils.getReadableDescription(method));
+  }
+
+  private static String getTypeDescription(JDeclaredType type) {
+    return String.format("'%s'", JjsUtils.getReadableDescription(type));
   }
 
   private boolean isUnusableByJsSuppressed(CanHaveSuppressedWarnings x) {

@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import javaemul.internal.annotations.DoNotInline;
-import jsinterop.annotations.JsType;
+import jsinterop.annotations.JsMethod;
 
 /**
  * Tests Miscelaneous fixes.
@@ -317,15 +317,15 @@ public class CompilerMiscRegressionTest extends GWTTestCase {
   public void testIncorrectDispatch() {
     final int[] state = new int[1];
 
-    @JsType
     abstract class A {
+      @JsMethod
       public void m() {
         state[0] = 1;
       }
     }
 
-    @JsType
     class B extends A {
+      @JsMethod
       public void m() {
         super.m();
       }

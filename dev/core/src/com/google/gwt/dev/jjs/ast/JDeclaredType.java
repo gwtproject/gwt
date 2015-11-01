@@ -20,6 +20,7 @@ import com.google.gwt.dev.jjs.impl.GwtAstBuilder;
 import com.google.gwt.dev.jjs.impl.JjsUtils;
 import com.google.gwt.dev.util.StringInterner;
 import com.google.gwt.dev.util.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.base.Joiner;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
 import com.google.gwt.thirdparty.guava.common.base.Predicates;
 import com.google.gwt.thirdparty.guava.common.base.Strings;
@@ -50,7 +51,8 @@ import java.util.Set;
  * initialization, and use the private variable <code>clinitTarget</code>to keep track which
  * initializer in the superclass chain needs to be called.
  */
-public abstract class JDeclaredType extends JReferenceType implements CanHaveSuppressedWarnings {
+public abstract class JDeclaredType extends JReferenceType
+    implements CanHaveSuppressedWarnings, HasJsName {
 
   private boolean isJsFunction;
   private boolean isJsType;
@@ -612,9 +614,16 @@ public abstract class JDeclaredType extends JReferenceType implements CanHaveSup
     return null;
   }
 
+  public String getJsName() {
+    return Strings.isNullOrEmpty(jsName) ? getSimpleName() : jsName;
+  }
+
+  public String getJsNamespace() {
+    return jsNamespace;
+  }
+
   public String getQualifiedJsName() {
-    String simpleJsName = Strings.isNullOrEmpty(jsName) ? getSimpleName() : jsName;
-    return jsNamespace.isEmpty() ? simpleJsName : jsNamespace + "." + simpleJsName;
+    return Joiner.on('.').skipNulls().join(Strings.emptyToNull(jsNamespace), getJsName());
   }
 
   public NestedClassDisposition getClassDisposition() {

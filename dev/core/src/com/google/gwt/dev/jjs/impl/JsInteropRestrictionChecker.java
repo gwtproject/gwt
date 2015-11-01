@@ -19,6 +19,7 @@ import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.javac.JsInteropUtil;
 import com.google.gwt.dev.jjs.ast.CanHaveSuppressedWarnings;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.HasJsInfo;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
@@ -40,6 +41,7 @@ import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.dev.js.JsUtils;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
@@ -217,47 +219,51 @@ public class JsInteropRestrictionChecker {
     return call.getTarget().equals(targetCtor);
   }
 
-  private void checkField(JField x) {
-    if (x.getEnclosingType().isJsNative()) {
-      checkMemberOfNativeJsType(x);
+  private void checkField(JField field) {
+    if (field.getEnclosingType().isJsNative()) {
+      checkMemberOfNativeJsType(field);
     }
-    checkUnusableByJs(x);
+    checkUnusableByJs(field);
 
-    if (!x.isJsProperty()) {
+    if (!field.isJsProperty()) {
       return;
     }
 
-    if (x.needsDynamicDispatch()) {
-      checkLocalName(x);
-    } else if (!x.isJsNative() && currentType == x.getEnclosingType()) {
-      checkGlobalName(x);
+    checkMemberQualifiedJsName(field);
+
+    if (field.needsDynamicDispatch()) {
+      checkLocalName(field);
+    } else if (!field.isJsNative() && currentType == field.getEnclosingType()) {
+      checkGlobalName(field);
     }
   }
 
-  private void checkMethod(JMethod x) {
-    if (!currentProcessedMethods.add(x)) {
+  private void checkMethod(JMethod method) {
+    if (!currentProcessedMethods.add(method)) {
       return;
     }
-    currentProcessedMethods.addAll(x.getOverriddenMethods());
+    currentProcessedMethods.addAll(method.getOverriddenMethods());
 
-    if (x.getEnclosingType().isJsNative()) {
-      checkMemberOfNativeJsType(x);
+    if (method.getEnclosingType().isJsNative()) {
+      checkMemberOfNativeJsType(method);
     }
 
-    if (x.isJsOverlay()) {
-      checkJsOverlay(x);
+    if (method.isJsOverlay()) {
+      checkJsOverlay(method);
     }
 
-    checkUnusableByJs(x);
+    checkUnusableByJs(method);
 
-    if (!x.isOrOverridesJsMethod()) {
+    if (!method.isOrOverridesJsMethod()) {
       return;
     }
 
-    if (x.needsDynamicDispatch()) {
-      checkJsMethod(x);
-    } else if (!x.isJsNative() && currentType == x.getEnclosingType()) {
-      checkGlobalName(x);
+    checkMemberQualifiedJsName(method);
+
+    if (method.needsDynamicDispatch()) {
+      checkJsMethod(method);
+    } else if (!method.isJsNative() && currentType == method.getEnclosingType()) {
+      checkGlobalName(method);
     }
   }
 
@@ -314,6 +320,75 @@ public class JsInteropRestrictionChecker {
       logError("Native JsType member '%s' is not public or has @JsIgnore.",
           member.getQualifiedName());
       return;
+    }
+  }
+
+  private void checkMemberQualifiedJsName(JMember member) {
+    if (member instanceof JConstructor) {
+      return;
+    }
+    String jsNamespace = member.getJsNamespace();
+    String memberQualifiedName = member.getQualifiedName();
+
+    checkJsName(member);
+
+    if (jsNamespace != null
+        && jsNamespace.equals(member.getEnclosingType().getQualifiedJsName())) {
+      // Namespace set by the enclosing type has already been checked.
+      return;
+    }
+
+    if (member.needsDynamicDispatch()) {
+      if (jsNamespace != null) {
+        logError("Cannot specify namespace for instance member '%s'.", memberQualifiedName);
+        }
+      return;
+    }
+
+    checkJsNamespace(member);
+  }
+
+  private void checkJsName(JDeclaredType type) {
+    if (type.getJsName() == null) {
+      return;
+    }
+    checkJsName(type.getJsName(), type.getName());
+  }
+
+  private void checkJsName(JMember member) {
+    checkJsName(member.getJsName(), member.getQualifiedName());
+  }
+  
+  private void checkJsName(String jsName, String description) {
+    if (jsName.equals("<invalid>")) {
+      // Errors were already reported.
+      return;
+    }
+
+    if (jsName.isEmpty()) {
+      logError("Cannot specify empty name in '%s'.", description);
+      return;
+    }
+    if (!JsUtils.isValidJsIdentifier(jsName)) {
+      logError("Invalid name '%s' in '%s'.", jsName, description);
+      return;
+    }
+  }
+
+  private void checkJsNamespace(JDeclaredType type) {
+    if (type.getJsNamespace() == null) {
+      return;
+    }
+    checkJsNamespace(type.getJsNamespace(), type.getName());
+  }
+
+  private void checkJsNamespace(JMember member) {
+    checkJsNamespace(member.getJsNamespace(), member.getQualifiedName());
+  }
+
+  private void checkJsNamespace(String jsNamespace, String description) {
+    if (!JsUtils.isValidJsQualifiedName(jsNamespace)) {
+      logError("Invalid namespace '%s' in '%s'.", jsNamespace, description);
     }
   }
 
@@ -513,6 +588,11 @@ public class JsInteropRestrictionChecker {
     currentType = type;
     minimalRebuildCache.removeExportedNames(type.getName());
 
+    if (type.isJsType()) {
+      checkJsName(type);
+      checkJsNamespace(type);
+    }
+
     if (type.isJsNative()) {
       checkNativeJsType(type);
     }
@@ -596,5 +676,12 @@ public class JsInteropRestrictionChecker {
 
   private void logWarning(String format, Object... args) {
     logger.log(TreeLogger.WARN, String.format(format, args));
+  }
+
+  private Object getDescription(HasJsInfo hasJsInfo) {
+    if (hasJsInfo instanceof JType) {
+      return ((JType) hasJsInfo).getName();
+    }
+    return ((JMember) hasJsInfo).getQualifiedName();
   }
 }

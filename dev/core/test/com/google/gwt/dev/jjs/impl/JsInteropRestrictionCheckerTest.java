@@ -109,7 +109,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "'test.EntryPoint$Buggy.display' can't be exported because the "
-            + "global name 'test.EntryPoint.Buggy.show' is already taken.");
+            + "global name 'test.EntryPoint.Buggy.show' is already taken by "
+            + "'test.EntryPoint$Buggy.show'.");
   }
 
   public void testJsPropertyGetterStyleSucceeds() throws Exception {
@@ -272,7 +273,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "'test.EntryPoint$Buggy.display()V' can't be exported "
-            + "because the global name 'test.EntryPoint.Buggy.show' is already taken.");
+            + "because the global name 'test.EntryPoint.Buggy.show' is already taken "
+           + "by 'test.EntryPoint$Buggy.show()V'.");
   }
 
   public void testCollidingMethodToFieldExportsFails() throws Exception {
@@ -288,7 +290,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "'test.EntryPoint$Buggy.show()V' can't be exported because the "
-            + "global name 'test.EntryPoint.Buggy.show' is already taken.");
+            + "global name 'test.EntryPoint.Buggy.show' is already taken by "
+            + "'test.EntryPoint$Buggy.show'.");
   }
 
   public void testCollidingMethodToFieldJsTypeFails() throws Exception {
@@ -715,7 +718,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggyFails(
         "More than one JsConstructor exists for test.EntryPoint$Buggy.",
         "'test.EntryPoint$Buggy.EntryPoint$Buggy(I) <init>' can't be "
-            + "exported because the global name 'test.EntryPoint.Buggy' is already taken.");
+            + "exported because the global name 'test.EntryPoint.Buggy' is already taken by "
+            + "'test.EntryPoint$Buggy.EntryPoint$Buggy() <init>'.");
   }
 
   public void testNonCollidingAccidentalOverrideSucceeds() throws Exception {

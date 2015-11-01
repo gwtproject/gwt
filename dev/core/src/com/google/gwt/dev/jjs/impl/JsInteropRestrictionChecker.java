@@ -262,9 +262,12 @@ public class JsInteropRestrictionChecker {
   }
 
   private void checkGlobalName(JMember x) {
-    if (!minimalRebuildCache.addExportedGlobalName(x.getQualifiedJsName(), currentType.getName())) {
-      logError("'%s' can't be exported because the global name '%s' is already taken.",
-          x.getQualifiedName(), x.getQualifiedJsName());
+    String currentGlobalNameDescription =
+        minimalRebuildCache.addExportedGlobalName(x.getQualifiedJsName(), x.getQualifiedName(),
+          currentType.getName());
+    if (currentGlobalNameDescription != null) {
+      logError("'%s' can't be exported because the global name '%s' is already taken by '%s'.",
+          x.getQualifiedName(), x.getQualifiedJsName(), currentGlobalNameDescription);
     }
   }
 

@@ -623,7 +623,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
       if (shouldSuppressUnresolvableAnnotation(logger, binaryName)) {
         level = TreeLogger.DEBUG;
       }
-      logger.log(level, "Ignoring unresolvable annotation type " + binaryName);
+      //logger.log(level, "Ignoring unresolvable annotation type " + binaryName);
       return null;
     }
   }

@@ -883,6 +883,44 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggySucceeds();
   }
 
+  public void testJsNameInvalidNamesFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsProperty");
+    addSnippetClassDecl(
+        "@JsType(name = \"a.b.c\") public static class Buggy {",
+        "   @JsMethod(name = \"34s\") public void m() {}",
+        "   @JsProperty(name = \"s^\") public int  m;",
+        "   @JsProperty(name = \"\") public int n;",
+        "}");
+
+    assertBuggyFails(
+        "Line 6: Invalid name 'a.b.c' in 'EntryPoint.Buggy'.",
+        "Line 7: Invalid name '34s' in 'void EntryPoint.Buggy.m()'.",
+        "Line 8: Invalid name 's^' in 'int EntryPoint.Buggy.m'.",
+        "Line 9: Cannot specify empty name in 'int EntryPoint.Buggy.n'.");
+  }
+
+  public void testJsNameInvalidNamespacesFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsProperty");
+    addSnippetClassDecl(
+        "@JsType(namespace = \"a.b.\") public static class Buggy {",
+        "   @JsMethod(namespace = \"34s\") public static void m() {}",
+        "   @JsProperty(namespace = \"s^\") public static int  n;",
+        "   @JsProperty(namespace = \"\") public int p;",
+        "   @JsMethod(namespace = \"a\") public void q() {}",
+        "}");
+
+    assertBuggyFails(
+        "Line 6: Invalid namespace 'a.b.' in 'EntryPoint.Buggy'.",
+        "Line 7: Invalid namespace '34s' in 'void EntryPoint.Buggy.m()'.",
+        "Line 8: Invalid namespace 's^' in 'int EntryPoint.Buggy.n'.",
+        "Line 9: Cannot specify namespace for instance member 'int EntryPoint.Buggy.p'.",
+        "Line 10: Cannot specify namespace for instance member 'void EntryPoint.Buggy.q()'.");
+  }
+
   public void testSingleJsTypeSucceeds() throws Exception {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetClassDecl(

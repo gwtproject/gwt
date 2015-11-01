@@ -42,6 +42,7 @@ import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.dev.js.JsUtils;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
@@ -230,6 +231,8 @@ public class JsInteropRestrictionChecker {
       return;
     }
 
+    checkMemberQualifiedJsName(field);
+
     if (field.needsDynamicDispatch()) {
       checkLocalName(localNames, field);
     } else if (!field.isJsNative()) {
@@ -251,6 +254,8 @@ public class JsInteropRestrictionChecker {
     if (!method.isOrOverridesJsMethod()) {
       return;
     }
+
+    checkMemberQualifiedJsName(method);
 
     if (method.needsDynamicDispatch()) {
       if (!isSyntheticBridgeMethod(method)) {
@@ -296,7 +301,6 @@ public class JsInteropRestrictionChecker {
     if (oldMember.isNativeMethod() && newMember.isNativeMethod()) {
       return;
     }
-
     logError(member, "%s and %s cannot both use the same JavaScript name '%s'.",
         getMemberDescription(member), getMemberDescription(oldMember.member), member.getJsName());
   }
@@ -376,6 +380,77 @@ public class JsInteropRestrictionChecker {
       logError(member, "Native JsType member %s is not public or has @JsIgnore.",
           getMemberDescription(member));
       return;
+    }
+  }
+
+  private void checkMemberQualifiedJsName(JMember member) {
+    if (member instanceof JConstructor) {
+      return;
+    }
+    String jsNamespace = member.getJsNamespace();
+
+    checkJsName(member);
+
+    if (jsNamespace != null
+        && jsNamespace.equals(member.getEnclosingType().getQualifiedJsName())) {
+      // Namespace set by the enclosing type has already been checked.
+      return;
+    }
+
+    if (member.needsDynamicDispatch()) {
+      if (jsNamespace != null) {
+        logError(member, "Cannot specify namespace for instance member %s.",
+            getMemberDescription(member));
+        }
+      return;
+    }
+
+    checkJsNamespace(member);
+  }
+
+  private void checkJsName(JDeclaredType type) {
+    if (type.getJsName() == null) {
+      return;
+    }
+    checkJsName(type.getJsName(), type,
+        getTypeDescription(type));
+  }
+
+  private void checkJsName(JMember member) {
+    checkJsName(member.getJsName(), member, getMemberDescription(member));
+  }
+
+  private void checkJsName(String jsName, HasSourceInfo hasSourceInfo, String description) {
+    if (jsName.equals("<invalid>")) {
+      // Errors were already reported.
+      return;
+    }
+
+    if (jsName.isEmpty()) {
+      logError(hasSourceInfo, "Cannot specify empty name in %s.", description);
+      return;
+    }
+    if (!JsUtils.isValidJsIdentifier(jsName)) {
+      logError(hasSourceInfo, "Invalid name '%s' in %s.", jsName, description);
+      return;
+    }
+  }
+
+  private void checkJsNamespace(JDeclaredType type) {
+    if (type.getJsNamespace() == null) {
+      return;
+    }
+    checkJsNamespace(type.getJsNamespace(), type, getTypeDescription(type));
+  }
+
+  private void checkJsNamespace(JMember member) {
+    checkJsNamespace(member.getJsNamespace(), member, getMemberDescription(member));
+  }
+
+  private void checkJsNamespace(
+      String jsNamespace, HasSourceInfo hasSourceInfo, String description) {
+    if (!JsUtils.isValidJsQualifiedName(jsNamespace)) {
+      logError(hasSourceInfo, "Invalid namespace '%s' in %s.", jsNamespace, description);
     }
   }
 
@@ -488,6 +563,11 @@ public class JsInteropRestrictionChecker {
 
   private void checkType(JDeclaredType type) {
     minimalRebuildCache.removeExportedNames(type.getName());
+
+    if (type.isJsType()) {
+      checkJsName(type);
+      checkJsNamespace(type);
+    }
 
     if (type.isJsNative()) {
       checkNativeJsType(type);
@@ -682,6 +762,10 @@ public class JsInteropRestrictionChecker {
           JjsUtils.getReadableDescription(method.getEnclosingType()));
     }
     return String.format("'%s'", JjsUtils.getReadableDescription(method));
+  }
+
+  private String getTypeDescription(JDeclaredType type) {
+    return String.format("'%s'", JjsUtils.getReadableDescription(type));
   }
 
   private boolean isUnusableByJsSuppressed(CanHaveSuppressedWarnings x) {

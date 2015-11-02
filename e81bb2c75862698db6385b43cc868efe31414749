@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6195673_351343a7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 40
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-02T23:51:36Z",
+      "side": 1,
+      "message": "isSynthteticBridge.",
+      "range": {
+        "startLine": 598,
+        "startChar": 18,
+        "endLine": 598,
+        "endChar": 37
+      },
+      "revId": "e81bb2c75862698db6385b43cc868efe31414749",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

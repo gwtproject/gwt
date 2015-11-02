@@ -484,7 +484,7 @@ public class Anchor extends FocusWidget implements HasHorizontalAlignment,
 
   @Override
   public String getText() {
-    return directionalTextHelper.getTextOrHtml(false);
+    return directionalTextHelper.getText();
   }
 
   @Override
@@ -576,12 +576,12 @@ public class Anchor extends FocusWidget implements HasHorizontalAlignment,
 
   @Override
   public void setHTML(String html) {
-    directionalTextHelper.setTextOrHtml(html, true);
+    directionalTextHelper.setHtml(html);
   }
 
   @Override
   public void setHTML(SafeHtml html, Direction dir) {
-    directionalTextHelper.setTextOrHtml(html.asString(), dir, true);
+    directionalTextHelper.setHtml(html.asString(), dir);
   }
 
   @Override
@@ -606,12 +606,12 @@ public class Anchor extends FocusWidget implements HasHorizontalAlignment,
 
   @Override
   public void setText(String text) {
-    directionalTextHelper.setTextOrHtml(text, false);
+    directionalTextHelper.setText(text);
   }
 
   @Override
   public void setText(String text, Direction dir) {
-    directionalTextHelper.setTextOrHtml(text, dir, false);
+    directionalTextHelper.setText(text, dir);
   }
 
   @Override

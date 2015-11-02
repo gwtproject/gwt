@@ -84,7 +84,8 @@ public class DirectionalTextHelper implements HasDirectionEstimator {
    * The direction of the element's content.
    * Note: this may not match the direction attribute of the element itself.
    * See
-   * {@link #setTextOrHtml(String, com.google.gwt.i18n.client.HasDirection.Direction, boolean) setTextOrHtml(String, Direction, boolean)}
+   * {@link #setTextOrHtml(String, com.google.gwt.i18n.client.HasDirection.Direction, boolean)
+   * setTextOrHtml(String, Direction, boolean)}
    * for details.
    */
   private Direction textDir;
@@ -109,6 +110,26 @@ public class DirectionalTextHelper implements HasDirectionEstimator {
 
   public Direction getTextDirection() {
     return textDir;
+  }
+
+  /**
+   * Get the inner text of the element, taking the inner span wrap into
+   * consideration, if needed.
+   *
+   * @return the text
+   */
+  public String getText() {
+    return getTextOrHtml(false /* isHtml */);
+  }
+
+  /**
+   * Get the inner html of the element, taking the inner span wrap into
+   * consideration, if needed.
+   *
+   * @return the html
+   */
+  public String getHtml() {
+    return getTextOrHtml(true /* isHtml */);
   }
 
   /**
@@ -137,7 +158,7 @@ public class DirectionalTextHelper implements HasDirectionEstimator {
      * For backwards compatibility, assure there's no span wrap, and update the
      * content direction.
      */
-    setInnerTextOrHtml(getTextOrHtml(true), true);
+    setInnerTextOrHtml(getHtml(), true);
     isSpanWrapped = false;
     textDir = initialElementDir;
     isDirectionExplicitlySet = true;
@@ -164,8 +185,36 @@ public class DirectionalTextHelper implements HasDirectionEstimator {
      * setTextOrHtml call.
      */
     if (!isDirectionExplicitlySet) {
-      setTextOrHtml(getTextOrHtml(true), true);
+      setHtml(getHtml());
     }
+  }
+
+  /**
+   * Sets the element's content to the given value (plain text).
+   * If direction estimation is off, the direction is verified to match the
+   * element's initial direction. Otherwise, the direction is affected as
+   * described at
+   * {@link #setTextOrHtml(String, com.google.gwt.i18n.client.HasDirection.Direction, boolean)
+   * setTextOrHtml(String, Direction, boolean)}.
+   *
+   * @param content the element's new content
+   */
+  public void setText(String content) {
+    setTextOrHtml(content, false /* isHtml */);
+  }
+
+  /**
+   * Sets the element's content to the given value (html).
+   * If direction estimation is off, the direction is verified to match the
+   * element's initial direction. Otherwise, the direction is affected as
+   * described at
+   * {@link #setTextOrHtml(String, com.google.gwt.i18n.client.HasDirection.Direction, boolean)
+   * setTextOrHtml(String, Direction, boolean)}.
+   *
+   * @param content the element's new content
+   */
+  public void setHtml(String content) {
+    setTextOrHtml(content, true /* isHtml */);
   }
 
   /**
@@ -173,7 +222,8 @@ public class DirectionalTextHelper implements HasDirectionEstimator {
    * If direction estimation is off, the direction is verified to match the
    * element's initial direction. Otherwise, the direction is affected as
    * described at
-   * {@link #setTextOrHtml(String, com.google.gwt.i18n.client.HasDirection.Direction, boolean) setTextOrHtml(String, Direction, boolean)}.
+   * {@link #setTextOrHtml(String, com.google.gwt.i18n.client.HasDirection.Direction, boolean)
+   * setTextOrHtml(String, Direction, boolean)}.
    *
    * @param content the element's new content
    * @param isHtml whether the content is HTML
@@ -197,6 +247,54 @@ public class DirectionalTextHelper implements HasDirectionEstimator {
           isHtml), isHtml);
     }
     isDirectionExplicitlySet = false;
+  }
+
+  /**
+   * Sets the element's content to the given value (plain text), applying the
+   * given direction.
+   * <p>
+   * Implementation details:
+   * <ul>
+   * <li> If the element is a block element, sets its dir attribute according
+   * to the given direction.
+   * <li> Otherwise (i.e. the element is inline), the direction is set using a
+   * nested &lt;span dir=...&gt; element which holds the content of the element.
+   * This nested span may be followed by a zero-width Unicode direction
+   * character (LRM or RLM). This manipulation is necessary to prevent garbling
+   * in case the direction of the element is opposite to the direction of its
+   * context. See {@link com.google.gwt.i18n.shared.BidiFormatter} for more
+   * details.
+   * </ul>
+   *
+   * @param content the element's new content
+   * @param dir the content's direction
+   */
+  public void setText(String content, Direction dir) {
+    setTextOrHtml(content, dir, false /* isHtml */);
+  }
+
+  /**
+   * Sets the element's content to the given value (html), applying the given
+   * direction.
+   * <p>
+   * Implementation details:
+   * <ul>
+   * <li> If the element is a block element, sets its dir attribute according
+   * to the given direction.
+   * <li> Otherwise (i.e. the element is inline), the direction is set using a
+   * nested &lt;span dir=...&gt; element which holds the content of the element.
+   * This nested span may be followed by a zero-width Unicode direction
+   * character (LRM or RLM). This manipulation is necessary to prevent garbling
+   * in case the direction of the element is opposite to the direction of its
+   * context. See {@link com.google.gwt.i18n.shared.BidiFormatter} for more
+   * details.
+   * </ul>
+   *
+   * @param content the element's new content
+   * @param dir the content's direction
+   */
+  public void setHtml(String content, Direction dir) {
+    setTextOrHtml(content, dir, true /* isHtml */);
   }
 
   /**

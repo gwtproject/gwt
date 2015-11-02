@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "f6195673_df5b0ed2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-02T20:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6195673_8841e33f",
+      "range": {
+        "startLine": 418,
+        "startChar": 4,
+        "endLine": 427,
+        "endChar": 23
+      },
+      "revId": "3cf0bd18201d695fef3f3aa94cd1e1dd30698d3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6195673_a8649ff3",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 6
@@ -82,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "f6195673_bf5852d6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-02T20:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6195673_a8649ff3",
+      "revId": "3cf0bd18201d695fef3f3aa94cd1e1dd30698d3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6195673_28508f07",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 6
@@ -93,6 +135,24 @@
       "writtenOn": "2015-10-31T21:42:47Z",
       "side": 1,
       "message": "perhaps you should witch to a less buggy IDE :)",
+      "revId": "3cf0bd18201d695fef3f3aa94cd1e1dd30698d3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_9ff596f2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-02T20:21:27Z",
+      "side": 1,
+      "message": "Yeah, I am using vi now.",
+      "parentUuid": "f6195673_28508f07",
       "revId": "3cf0bd18201d695fef3f3aa94cd1e1dd30698d3a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -122,6 +182,30 @@
     },
     {
       "key": {
+        "uuid": "f6195673_3f0442a2",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-02T20:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6195673_8828c377",
+      "range": {
+        "startLine": 1011,
+        "startChar": 14,
+        "endLine": 1011,
+        "endChar": 45
+      },
+      "revId": "3cf0bd18201d695fef3f3aa94cd1e1dd30698d3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6195673_a83b7fc5",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 6
@@ -133,6 +217,30 @@
       "writtenOn": "2015-10-31T21:42:47Z",
       "side": 1,
       "message": "testInnerJsTypeSucceeds",
+      "range": {
+        "startLine": 1020,
+        "startChar": 14,
+        "endLine": 1020,
+        "endChar": 54
+      },
+      "revId": "3cf0bd18201d695fef3f3aa94cd1e1dd30698d3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_1fe98616",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-02T20:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6195673_a83b7fc5",
       "range": {
         "startLine": 1020,
         "startChar": 14,
@@ -179,6 +287,54 @@
       "writtenOn": "2015-10-31T21:42:47Z",
       "side": 1,
       "message": "testLocalJsTypeFails",
+      "range": {
+        "startLine": 1028,
+        "startChar": 14,
+        "endLine": 1028,
+        "endChar": 40
+      },
+      "revId": "3cf0bd18201d695fef3f3aa94cd1e1dd30698d3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_ffe5aa39",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-02T20:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6195673_0835d3d3",
+      "range": {
+        "startLine": 1028,
+        "startChar": 14,
+        "endLine": 1028,
+        "endChar": 40
+      },
+      "revId": "3cf0bd18201d695fef3f3aa94cd1e1dd30698d3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_dff2ee01",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-02T20:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6195673_e83177e7",
       "range": {
         "startLine": 1028,
         "startChar": 14,

@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Provides unified encoding and decoding of value objects.
@@ -208,6 +209,17 @@ public class ValueCodex {
       @Override
       public Splittable encode(Object value) {
         return (Splittable) value;
+      }
+    },
+    UUID(UUID.class) {
+      @Override
+      public UUID decode(Class<?> clazz, Splittable value) {
+        return java.util.UUID.fromString(value.asString());
+      }
+
+      @Override
+      public Splittable encode(Object value) {
+        return StringQuoter.create(((UUID) value).toString());
       }
     },
     VOID(Void.class, void.class, null) {

@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Simple encoding / decoding tests for the AutoBeanCodex.
@@ -48,6 +49,8 @@ public class AutoBeanCodexTest extends GWTTestCase {
     AutoBean<HasLong> hasLong();
 
     AutoBean<HasMap> hasMap();
+
+    AutoBean<HasUUID> hasUUID();
 
     AutoBean<HasSimple> hasSimple();
 
@@ -131,6 +134,12 @@ public class AutoBeanCodexTest extends GWTTestCase {
     void setNestedMap(Map<Map<String, String>, Map<String, String>> map);
 
     void setSimpleMap(Map<String, Simple> map);
+  }
+
+  interface HasUUID {
+    UUID getUUID();
+
+    void setUUID(UUID u);
   }
 
   interface HasSimple {
@@ -322,6 +331,14 @@ public class AutoBeanCodexTest extends GWTTestCase {
       AutoBean<HasLong> decodedBean = checkEncode(bean);
       assertEquals(l, decodedBean.as().getLong());
     }
+  }
+
+  public void testUuid() {
+    UUID test = new UUID(0x0000000000004000L,0x8000000000000000L);
+    AutoBean<HasUUID> bean = f.hasUUID();
+    bean.as().setUUID(test);
+    AutoBean<HasUUID> decodedBean = checkEncode(bean);
+    assertEquals(test, decodedBean.as().getUUID());
   }
 
   public void testMap() {

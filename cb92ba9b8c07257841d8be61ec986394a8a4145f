@@ -22,6 +22,30 @@
       "revId": "cb92ba9b8c07257841d8be61ec986394a8a4145f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b65c3e65_dc3761b8",
+        "filename": "dev/core/src/com/google/gwt/dev/util/log/AbstractTreeLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-03T23:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b65c3e65_bc98ad39",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 9
+      },
+      "revId": "cb92ba9b8c07257841d8be61ec986394a8a4145f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

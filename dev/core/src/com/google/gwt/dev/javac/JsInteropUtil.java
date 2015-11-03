@@ -91,7 +91,8 @@ public final class JsInteropUtil {
     }
   }
 
-  public static void maybeSetJsInteropPropertiesNew(JMethod method, Annotation... annotations) {
+  public static void maybeSetJsInteropPropertiesNew(
+      JMethod method, boolean generateExport, Annotation... annotations) {
     AnnotationBinding annotation = getInteropAnnotation(annotations, "JsMethod");
     if (getInteropAnnotation(annotations, "JsOverlay") != null) {
       method.setJsOverlay();
@@ -103,7 +104,8 @@ public final class JsInteropUtil {
     if (annotation == null) {
       annotation = getInteropAnnotation(annotations, "JsProperty");
     }
-    setJsInteropPropertiesNew(method, annotations, annotation);
+
+    setJsInteropPropertiesNew(method, generateExport, annotations, annotation);
     if (getInteropAnnotation(annotations, "JsProperty") != null) {
       setJsPropertyProperties(method);
     }
@@ -113,9 +115,10 @@ public final class JsInteropUtil {
     setJsInteropProperties(field, annotations);
   }
 
-  public static void maybeSetJsInteropPropertiesNew(JField field, Annotation... annotations) {
+  public static void maybeSetJsInteropPropertiesNew(
+      JField field, boolean generateExport, Annotation... annotations) {
     AnnotationBinding annotation = getInteropAnnotation(annotations, "JsProperty");
-    setJsInteropPropertiesNew(field, annotations, annotation);
+    setJsInteropPropertiesNew(field, generateExport, annotations, annotation);
   }
 
   private static void setJsInteropProperties(JMember member, Annotation... annotations) {
@@ -145,8 +148,8 @@ public final class JsInteropUtil {
     return member instanceof JConstructor && member.isJsNative();
   }
 
-  private static void setJsInteropPropertiesNew(
-      JMember member, Annotation[] annotations, AnnotationBinding memberAnnotation) {
+  private static void setJsInteropPropertiesNew(JMember member, boolean generateExport,
+      Annotation[] annotations, AnnotationBinding memberAnnotation) {
     if (getInteropAnnotation(annotations, "JsIgnore") != null) {
       return;
     }
@@ -158,7 +161,7 @@ public final class JsInteropUtil {
 
     String namespace = JdtUtil.getAnnotationParameterString(memberAnnotation, "namespace");
     String name = JdtUtil.getAnnotationParameterString(memberAnnotation, "name");
-    member.setJsMemberInfo(namespace, name == null ? computeName(member) : name, true);
+    member.setJsMemberInfo(namespace, name == null ? computeName(member) : name, generateExport);
   }
 
   private static void setJsPropertyProperties(JMethod method) {

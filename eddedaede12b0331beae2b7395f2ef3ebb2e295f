@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6195673_1cb4f43e",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUtils.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-03T03:13:14Z",
+      "side": 1,
+      "message": "This should be ? instead of * for clarity (it does not affect the set of strings matched though)",
+      "range": {
+        "startLine": 265,
+        "startChar": 85,
+        "endLine": 265,
+        "endChar": 86
+      },
+      "revId": "eddedaede12b0331beae2b7395f2ef3ebb2e295f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

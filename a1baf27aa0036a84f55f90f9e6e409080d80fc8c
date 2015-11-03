@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6195673_70f9c939",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-03T04:28:38Z",
+      "side": 1,
+      "message": "comment why you early return",
+      "revId": "a1baf27aa0036a84f55f90f9e6e409080d80fc8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_50fecd23",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-03T04:28:38Z",
+      "side": 1,
+      "message": "move down",
+      "revId": "a1baf27aa0036a84f55f90f9e6e409080d80fc8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_300351ec",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-03T04:28:38Z",
+      "side": 1,
+      "message": "shouldn\u0027t be null",
+      "range": {
+        "startLine": 394,
+        "startChar": 8,
+        "endLine": 394,
+        "endChar": 19
+      },
+      "revId": "a1baf27aa0036a84f55f90f9e6e409080d80fc8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_f00cb91a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-03T04:28:38Z",
+      "side": 1,
+      "message": "this should never happen.",
+      "range": {
+        "startLine": 401,
+        "startChar": 10,
+        "endLine": 401,
+        "endChar": 21
+      },
+      "revId": "a1baf27aa0036a84f55f90f9e6e409080d80fc8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_d009bd08",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-03T04:28:38Z",
+      "side": 1,
+      "message": "change to compute on the fly.",
+      "revId": "a1baf27aa0036a84f55f90f9e6e409080d80fc8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_10273593",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-03T04:28:38Z",
+      "side": 1,
+      "message": "\u003cblah\u003e cannot have empty name.",
+      "range": {
+        "startLine": 430,
+        "startChar": 31,
+        "endLine": 430,
+        "endChar": 61
+      },
+      "revId": "a1baf27aa0036a84f55f90f9e6e409080d80fc8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_f0239982",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-03T04:28:38Z",
+      "side": 1,
+      "message": "\u003cblah\u003e has invalid name \u003cblah\u003e",
+      "range": {
+        "startLine": 434,
+        "startChar": 31,
+        "endLine": 434,
+        "endChar": 56
+      },
+      "revId": "a1baf27aa0036a84f55f90f9e6e409080d80fc8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_901b4550",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-03T04:28:38Z",
+      "side": 1,
+      "message": "remove and inline method",
+      "revId": "a1baf27aa0036a84f55f90f9e6e409080d80fc8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6195673_b06401cb",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUtils.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-03T04:28:38Z",
+      "side": 1,
+      "message": "this shouldn\u0027t accept empty.",
+      "range": {
+        "startLine": 259,
+        "startChar": 24,
+        "endLine": 259,
+        "endChar": 46
+      },
+      "revId": "a1baf27aa0036a84f55f90f9e6e409080d80fc8c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

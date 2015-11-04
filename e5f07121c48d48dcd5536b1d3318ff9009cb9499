@@ -34,6 +34,24 @@
       "revId": "e5f07121c48d48dcd5536b1d3318ff9009cb9499",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_6cc5b35e",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-04T21:13:29Z",
+      "side": 1,
+      "message": "Let\u0027s move these next to those than.",
+      "parentUuid": "b686fe2b_694da517",
+      "revId": "e5f07121c48d48dcd5536b1d3318ff9009cb9499",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

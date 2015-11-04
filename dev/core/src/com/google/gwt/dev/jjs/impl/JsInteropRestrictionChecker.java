@@ -21,6 +21,7 @@ import com.google.gwt.dev.javac.JsInteropUtil;
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.ast.CanHaveSuppressedWarnings;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.HasJsInfo.JsMemberType;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclarationStatement;
@@ -32,7 +33,6 @@ import com.google.gwt.dev.jjs.ast.JInstanceOf;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyAccessorType;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JParameter;
@@ -248,7 +248,7 @@ public class JsInteropRestrictionChecker {
 
     checkUnusableByJs(method);
 
-    if (!method.isOrOverridesJsMethod()) {
+    if (!method.isJsMember()) {
       return;
     }
 
@@ -272,7 +272,7 @@ public class JsInteropRestrictionChecker {
   private void checkLocalName(Map<String, JsMember> localNames, JMember member) {
     if (member.getJsName().equals(JsInteropUtil.INVALID_JSNAME)) {
       if (member instanceof JMethod
-          && ((JMethod) member).getJsPropertyAccessorType() == JsPropertyAccessorType.UNDEFINED) {
+          && ((JMethod) member).getJsMemberType() == JsMemberType.UNDEFINED_ACCESSOR) {
         logError(member, "JsProperty %s doesn't follow Java Bean naming conventions.",
             getMemberDescription(member));
       } else {
@@ -301,7 +301,7 @@ public class JsInteropRestrictionChecker {
         getMemberDescription(member), getMemberDescription(oldMember.member), member.getJsName());
   }
 
-  void checkJsPropertyAccessor(JMember x, JsMember newMember) {
+  private void checkJsPropertyAccessor(JMember x, JsMember newMember) {
     if (newMember.setter != null) {
       checkValidSetter(newMember.setter);
     }
@@ -372,7 +372,7 @@ public class JsInteropRestrictionChecker {
       return;
     }
 
-    if (member.getJsName() == null && !member.isJsOverlay()) {
+    if (member.isJsNative() && !member.isJsOverlay()) {
       logError(member, "Native JsType member %s is not public or has @JsIgnore.",
           getMemberDescription(member));
       return;
@@ -390,8 +390,9 @@ public class JsInteropRestrictionChecker {
       @Override
       public void endVisit(JMethodCall x, Context ctx) {
         JMethod target = x.getTarget();
-        if (x.isStaticDispatchOnly() &&
-            target.getJsPropertyAccessorType() != JsPropertyAccessorType.NONE) {
+        if (x.isStaticDispatchOnly()
+            && (target.getJsMemberType() == JsMemberType.GETTER
+                || target.getJsMemberType() == JsMemberType.SETTER)) {
           logError(x, "Cannot call property accessor %s via super.",
               getMemberDescription(target));
         }
@@ -587,7 +588,7 @@ public class JsInteropRestrictionChecker {
       updateJsMembers(memberByLocalMemberNames, field);
     }
     for (JMethod method : type.getMethods()) {
-      if (!method.isOrOverridesJsMethod() || !method.needsDynamicDispatch()
+      if (!method.isJsMember() || !method.needsDynamicDispatch()
           || isSyntheticBridgeMethod(method)) {
         continue;
       }
@@ -619,7 +620,7 @@ public class JsInteropRestrictionChecker {
     }
 
     JMethod method = (JMethod) member;
-    switch (method.getJsPropertyAccessorType()) {
+    switch (method.getJsMemberType()) {
       case GETTER:
         if (jsMember != null && jsMember.isPropertyAccessor()) {
           if (jsMember.getter == null || overrides(method, jsMember.getter)) {

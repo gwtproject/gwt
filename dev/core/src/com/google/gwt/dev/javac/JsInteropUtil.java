@@ -15,6 +15,7 @@
  */
 package com.google.gwt.dev.javac;
 
+import com.google.gwt.dev.jjs.ast.HasJsInfo.JsMemberType;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -22,13 +23,10 @@ import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyAccessorType;
-import com.google.gwt.thirdparty.guava.common.base.Strings;
+import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
-
-import java.beans.Introspector;
 
 /**
  * Utility functions to interact with JDT classes for JsInterop.
@@ -47,7 +45,7 @@ public final class JsInteropUtil {
   public static void maybeSetJsInteropProperties(JDeclaredType type, Annotation... annotations) {
     AnnotationBinding jsType = JdtUtil.getAnnotation(annotations, JSTYPE_CLASS);
     String namespace = maybeGetJsNamespace(annotations);
-    String exportName = maybeGetJsExportName(annotations, "");
+    String exportName = maybeGetJsExportName(annotations);
     String jsPrototype = JdtUtil.getAnnotationParameterString(jsType, "prototype");
     boolean isJsNative = jsPrototype != null;
     if (isJsNative) {
@@ -56,7 +54,7 @@ public final class JsInteropUtil {
       exportName = jsPrototype.substring(indexOf + 1);
     }
     boolean isJsType = jsType != null;
-    boolean isClassWideExport = exportName != null;
+    boolean isClassWideExport = JdtUtil.getAnnotation(annotations, JSEXPORT_CLASS) != null;
     boolean isJsFunction = JdtUtil.getAnnotation(annotations, JSFUNCTION_CLASS) != null;
     boolean canBeImplementedExternally =
         (type instanceof JInterfaceType && (isJsType || isJsFunction))
@@ -85,59 +83,60 @@ public final class JsInteropUtil {
   }
 
   public static void maybeSetJsInteropProperties(JMethod method, Annotation... annotations) {
-    setJsInteropProperties(method, annotations);
-    if (JdtUtil.getAnnotation(annotations, JSPROPERTY_CLASS) != null) {
-      setJsPropertyProperties(method);
-    }
+    boolean isPropertyAccessor = JdtUtil.getAnnotation(annotations, JSPROPERTY_CLASS) != null;
+    setJsInteropProperties(method, annotations, isPropertyAccessor);
   }
 
   public static void maybeSetJsInteropPropertiesNew(JMethod method, Annotation... annotations) {
-    AnnotationBinding annotation = getInteropAnnotation(annotations, "JsMethod");
     if (getInteropAnnotation(annotations, "JsOverlay") != null) {
       method.setJsOverlay();
     }
 
+    AnnotationBinding annotation = getInteropAnnotation(annotations, "JsMethod");
     if (annotation == null) {
       annotation = getInteropAnnotation(annotations, "JsConstructor");
     }
     if (annotation == null) {
       annotation = getInteropAnnotation(annotations, "JsProperty");
     }
-    setJsInteropPropertiesNew(method, annotations, annotation);
-    if (getInteropAnnotation(annotations, "JsProperty") != null) {
-      setJsPropertyProperties(method);
-    }
+
+    boolean isPropertyAccessor = getInteropAnnotation(annotations, "JsProperty") != null;
+    setJsInteropPropertiesNew(method, annotations, annotation, isPropertyAccessor);
   }
 
   public static void maybeSetJsInteropProperties(JField field, Annotation... annotations) {
-    setJsInteropProperties(field, annotations);
+    setJsInteropProperties(field, annotations, false);
   }
 
   public static void maybeSetJsInteropPropertiesNew(JField field, Annotation... annotations) {
     AnnotationBinding annotation = getInteropAnnotation(annotations, "JsProperty");
-    setJsInteropPropertiesNew(field, annotations, annotation);
+    setJsInteropPropertiesNew(field, annotations, annotation, false);
   }
 
-  private static void setJsInteropProperties(JMember member, Annotation... annotations) {
-    String namespace = maybeGetJsNamespace(annotations);
-    String exportName = maybeGetJsExportName(annotations, computeName(member));
-    member.setJsMemberInfo(namespace, exportName, exportName != null);
+  private static void setJsInteropProperties(
+      JMember member, Annotation[] annotations, boolean isPropertyAccessor) {
+    boolean hasExport = JdtUtil.getAnnotation(annotations, JSEXPORT_CLASS) != null;
 
     /* Apply class wide JsInterop annotations */
 
     boolean ignore = JdtUtil.getAnnotation(annotations, JSNOEXPORT_CLASS) != null;
-    if (ignore || (!member.isPublic() && !isNativeConstructor(member)) || exportName != null) {
+    if (ignore || (!member.isPublic() && !isNativeConstructor(member)) || !hasExport) {
       return;
     }
+
+    String namespace = maybeGetJsNamespace(annotations);
+    String exportName = maybeGetJsExportName(annotations);
+    JsMemberType memberType = getJsMemberType(member, isPropertyAccessor);
+    member.setJsMemberInfo(memberType, namespace, exportName, hasExport);
 
     JDeclaredType enclosingType = member.getEnclosingType();
 
     if (enclosingType.isJsType() && member.needsDynamicDispatch()) {
-      member.setJsMemberInfo(namespace, computeName(member), true);
+      member.setJsMemberInfo(memberType, namespace, exportName, true);
     }
 
     if (enclosingType.isClassWideExport() && !member.needsDynamicDispatch()) {
-      member.setJsMemberInfo(namespace, computeName(member), true);
+      member.setJsMemberInfo(memberType, namespace, exportName, true);
     }
   }
 
@@ -145,8 +144,8 @@ public final class JsInteropUtil {
     return member instanceof JConstructor && member.isJsNative();
   }
 
-  private static void setJsInteropPropertiesNew(
-      JMember member, Annotation[] annotations, AnnotationBinding memberAnnotation) {
+  private static void setJsInteropPropertiesNew(JMember member, Annotation[] annotations,
+      AnnotationBinding memberAnnotation, boolean isAccessor) {
     if (getInteropAnnotation(annotations, "JsIgnore") != null) {
       return;
     }
@@ -158,31 +157,34 @@ public final class JsInteropUtil {
 
     String namespace = JdtUtil.getAnnotationParameterString(memberAnnotation, "namespace");
     String name = JdtUtil.getAnnotationParameterString(memberAnnotation, "name");
-    member.setJsMemberInfo(namespace, name == null ? computeName(member) : name, true);
+    JsMemberType memberType = getJsMemberType(member, isAccessor);
+    member.setJsMemberInfo(memberType, namespace, name, true);
   }
 
-  private static void setJsPropertyProperties(JMethod method) {
-    String methodName = method.getName();
-    if (startsWithCamelCase(methodName, "set")) {
-      String jsName = Introspector.decapitalize(methodName.substring(3));
-      method.setJsPropertyInfo(jsName, JsPropertyAccessorType.SETTER);
-    } else if (startsWithCamelCase(methodName, "get")) {
-      String jsName = Introspector.decapitalize(methodName.substring(3));
-      method.setJsPropertyInfo(jsName, JsPropertyAccessorType.GETTER);
-    } else if (startsWithCamelCase(methodName, "is")) {
-      String jsName = Introspector.decapitalize(methodName.substring(2));
-      method.setJsPropertyInfo(jsName, JsPropertyAccessorType.GETTER);
-    } else {
-      method.setJsPropertyInfo(INVALID_JSNAME, JsPropertyAccessorType.UNDEFINED);
+  private static JsMemberType getJsMemberType(JMember member, boolean isPropertyAccessor) {
+    if (member instanceof JField) {
+      return JsMemberType.PROPERTY;
     }
+    if (member instanceof JConstructor) {
+      return JsMemberType.CONSTRUCTOR;
+    }
+    if (isPropertyAccessor) {
+      return getJsPropertyAccessorType((JMethod) member);
+    }
+    return JsMemberType.METHOD;
+  }
+
+  static JsMemberType getJsPropertyAccessorType(JMethod method) {
+    if (method.getParams().size() == 1 && method.getType() == JPrimitiveType.VOID) {
+      return JsMemberType.SETTER;
+    } else if (method.getParams().isEmpty() && method.getType() != JPrimitiveType.VOID) {
+      return JsMemberType.GETTER;
+    }
+    return JsMemberType.UNDEFINED_ACCESSOR;
   }
 
   private static AnnotationBinding getInteropAnnotation(Annotation[] annotations, String name) {
     return JdtUtil.getAnnotation(annotations, "jsinterop.annotations." + name);
-  }
-
-  private static String computeName(JMember member) {
-    return member instanceof JConstructor ? "" : member.getName();
   }
 
   private static String maybeGetJsNamespace(Annotation[] annotations) {
@@ -190,17 +192,8 @@ public final class JsInteropUtil {
     return JdtUtil.getAnnotationParameterString(jsNamespace, "value");
   }
 
-  private static String maybeGetJsExportName(Annotation[] annotations, String calculatedName) {
-    AnnotationBinding jsExport = JdtUtil.getAnnotation(annotations, JSEXPORT_CLASS);
-    if (jsExport == null) {
-      return null;
-    }
-    String value = JdtUtil.getAnnotationParameterString(jsExport, "value");
-    return Strings.isNullOrEmpty(value) ? calculatedName : value;
-  }
-
-  private static boolean startsWithCamelCase(String string, String prefix) {
-    return string.length() > prefix.length() && string.startsWith(prefix)
-        && Character.isUpperCase(string.charAt(prefix.length()));
+  private static String maybeGetJsExportName(Annotation[] annotations) {
+    AnnotationBinding annotation = JdtUtil.getAnnotation(annotations, JSEXPORT_CLASS);
+    return JdtUtil.getAnnotationParameterString(annotation, "value");
   }
 }

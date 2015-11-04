@@ -131,8 +131,8 @@ public class JField extends JVariable implements JMember {
   }
 
   @Override
-  public void setJsMemberInfo(String namespace, String name, boolean exported) {
-    this.jsName = name;
+  public void setJsMemberInfo(JsMemberType type, String namespace, String name, boolean exported) {
+    this.jsName = name != null ? name : type.computeName(this);
     this.jsNamespace = namespace;
     this.exported = exported;
   }

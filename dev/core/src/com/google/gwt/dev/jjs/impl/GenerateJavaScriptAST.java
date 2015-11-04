@@ -30,6 +30,7 @@ import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.HasEnclosingType;
+import com.google.gwt.dev.jjs.ast.HasJsInfo.JsMemberType;
 import com.google.gwt.dev.jjs.ast.HasName;
 import com.google.gwt.dev.jjs.ast.JAbstractMethodBody;
 import com.google.gwt.dev.jjs.ast.JArrayLength;
@@ -64,7 +65,6 @@ import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
-import com.google.gwt.dev.jjs.ast.JMethod.JsPropertyAccessorType;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JNameOf;
@@ -366,7 +366,7 @@ public class GenerateJavaScriptAST {
           } else if (x.isPackagePrivate()) {
             polyName = interfaceScope.declareName(mangleNameForPackagePrivatePoly(x), name);
           } else {
-            boolean isJsMethod = x.isOrOverridesJsMethod();
+            boolean isJsMethod = x.isJsMember();
             polyName =
                 isJsMethod
                     ? interfaceScope.declareUnobfuscatableName(x.getJsName())
@@ -951,10 +951,8 @@ public class GenerateJavaScriptAST {
     private JsExpression dispatchToInstanceMethod(
         JsExpression instance, JMethod method, List<JsExpression> args, SourceInfo sourceInfo) {
       JsNameRef reference = polymorphicNames.get(method).makeQualifiedRef(sourceInfo, instance);
-
-      JsPropertyAccessorType propertyAccessorType = method.getJsPropertyAccessorType();
-      return JsUtils
-          .createInvocationOrPropertyAccess(sourceInfo, propertyAccessorType, reference, args);
+      return JsUtils.createInvocationOrPropertyAccess(
+          sourceInfo, method.getJsMemberType(), reference, args);
     }
 
     @Override
@@ -2228,7 +2226,7 @@ public class GenerateJavaScriptAST {
     }
 
     private void generatePrototypeAssignment(JMethod method, JsName name, JsExpression rhs) {
-      generatePrototypeAssignment(method, name, rhs, method.getJsPropertyAccessorType());
+      generatePrototypeAssignment(method, name, rhs, method.getJsMemberType());
     }
 
      /**
@@ -2236,18 +2234,20 @@ public class GenerateJavaScriptAST {
       * created for {@code method}.
       */
     private void generatePrototypeAssignment(JMethod method, JsName name, JsExpression rhs,
-        JsPropertyAccessorType accessorType) {
+        JsMemberType memberType) {
       SourceInfo sourceInfo = method.getSourceInfo();
       JsNameRef prototypeQualifierOf = getPrototypeQualifierOf(method);
       JsNameRef lhs = name.makeQualifiedRef(sourceInfo, prototypeQualifierOf);
-      switch (accessorType) {
+      switch (memberType) {
         case GETTER:
         case SETTER:
           emitPropertyImplementation(method, prototypeQualifierOf, name.makeRef(sourceInfo), rhs);
           break;
-        default:
+        case METHOD:
           emitMethodImplementation(method, lhs, createAssignment(lhs, rhs).makeStmt());
           break;
+        default:
+          throw new AssertionError();
       }
     }
 
@@ -2267,7 +2267,7 @@ public class GenerateJavaScriptAST {
                // {name: {get: function() { ..... }} or {set : function (v) {....}}}
               .add(name, JsObjectLiteral.builder(sourceInfo)
                       // {get: function() { ..... }} or {set : function (v) {....}}
-                  .add(method.getJsPropertyAccessorType().getKey(), methodDefinitionStatement)
+                  .add(method.getJsMemberType().getKey(), methodDefinitionStatement)
                   .build())
               .build();
 
@@ -2289,7 +2289,7 @@ public class GenerateJavaScriptAST {
       JsName polyName = polymorphicNames.get(method);
       JsExpression bridge = JsUtils.createBridge(method, polyName, topScope);
       // Aliases are never property accessors.
-      generatePrototypeAssignment(method, alias, bridge, JsPropertyAccessorType.NONE);
+      generatePrototypeAssignment(method, alias, bridge, JsMemberType.METHOD);
     }
 
     private JsExprStmt outputDisplayName(JsNameRef function, JMethod method) {

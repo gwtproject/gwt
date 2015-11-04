@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b65c3e65_228e3417",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-04T03:18:50Z",
+      "side": 1,
+      "message": "To catch non public or @Jsingnored members. Is there a better way?",
+      "parentUuid": "b65c3e65_7fff27d0",
+      "range": {
+        "startLine": 386,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 37
+      },
+      "revId": "055b7dbc402ab4d508b66454ae59325d9bae734c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b65c3e65_fff21701",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2015-11-04T01:29:19Z",
       "side": 1,
       "message": "non-native part is potentially confusing because if you look at a field, it is non-native.",
+      "range": {
+        "startLine": 1445,
+        "startChar": 15,
+        "endLine": 1445,
+        "endChar": 24
+      },
+      "revId": "055b7dbc402ab4d508b66454ae59325d9bae734c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b65c3e65_a2952401",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-04T03:18:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b65c3e65_fff21701",
       "range": {
         "startLine": 1445,
         "startChar": 15,

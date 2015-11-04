@@ -80,6 +80,7 @@ public class JField extends JVariable implements JMember {
   public static final JField NULL_FIELD = new JField(SourceOrigin.UNKNOWN, "nullField", null,
       JReferenceType.NULL_TYPE, false, Disposition.FINAL);
 
+  private JsMemberType jsMembertype = JsMemberType.NONE;
   private String jsName;
   private String jsNamespace;
   private boolean exported;
@@ -131,16 +132,24 @@ public class JField extends JVariable implements JMember {
   }
 
   @Override
-  public void setJsMemberInfo(String namespace, String name, boolean exported) {
-    this.jsName = name;
+  public void setJsMemberInfo(
+      JsMemberType jsMembertype, String namespace, String name, boolean exported) {
+    this.jsMembertype = jsMembertype;
+    this.jsName = name != null ? name : jsMembertype.computeName(this);
     this.jsNamespace = namespace;
     this.exported = exported;
+  }
+
+  @Override
+  public JsMemberType getJsMemberType() {
+    return jsMembertype;
   }
 
   public boolean isJsInteropEntryPoint() {
     return exported && isStatic();
   }
 
+  @Override
   public boolean canBeReferencedExternally() {
     return exported;
   }
@@ -159,10 +168,6 @@ public class JField extends JVariable implements JMember {
   @Override
   public boolean isAbstract() {
     return false;
-  }
-
-  public boolean isJsProperty() {
-    return jsName != null;
   }
 
   @Override

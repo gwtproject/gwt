@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b65c3e65_3fc3ef87",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-04T01:33:35Z",
+      "side": 1,
+      "message": "looks like alphabetically ordered.",
+      "revId": "5b23cf2334888804c2a78bdcd35f35a89a6a316f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

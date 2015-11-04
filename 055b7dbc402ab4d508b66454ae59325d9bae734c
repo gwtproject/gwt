@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b65c3e65_7fff27d0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-04T01:29:19Z",
+      "side": 1,
+      "message": "why do we have this check?",
+      "range": {
+        "startLine": 386,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 37
+      },
+      "revId": "055b7dbc402ab4d508b66454ae59325d9bae734c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b65c3e65_fff21701",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-04T01:29:19Z",
+      "side": 1,
+      "message": "non-native part is potentially confusing because if you look at a field, it is non-native.",
+      "range": {
+        "startLine": 1445,
+        "startChar": 15,
+        "endLine": 1445,
+        "endChar": 24
+      },
+      "revId": "055b7dbc402ab4d508b66454ae59325d9bae734c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

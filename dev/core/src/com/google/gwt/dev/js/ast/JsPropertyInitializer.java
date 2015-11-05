@@ -14,6 +14,7 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
+import com.google.gwt.thirdparty.guava.common.base.Objects;
 
 /**
  * Used in object literals to specify property values by name.
@@ -21,21 +22,22 @@ import com.google.gwt.dev.jjs.SourceInfo;
 public class JsPropertyInitializer extends JsNode {
 
   private JsExpression labelExpr;
-
   private JsExpression valueExpr;
+  private boolean isQuotedLabel = true;
 
   public JsPropertyInitializer(SourceInfo sourceInfo) {
     super(sourceInfo);
   }
 
   public JsPropertyInitializer(SourceInfo sourceInfo, JsExpression labelExpr,
-      JsExpression valueExpr) {
+      JsExpression valueExpr, boolean isQuotedLabel) {
     super(sourceInfo);
 
     assert labelExpr instanceof JsStringLiteral || labelExpr instanceof JsNumberLiteral ||
-        labelExpr instanceof JsNameRef;
+        labelExpr instanceof JsNameRef : labelExpr + " is not a valid property label";;
     this.labelExpr = labelExpr;
     this.valueExpr = valueExpr;
+    this.isQuotedLabel = isQuotedLabel;
   }
 
   @Override
@@ -43,8 +45,12 @@ public class JsPropertyInitializer extends JsNode {
     if (that == null || that.getClass() != this.getClass()) {
       return false;
     }
-    return labelExpr.equals(((JsPropertyInitializer) that).labelExpr) &&
-        valueExpr.equals(((JsPropertyInitializer) that).valueExpr);
+
+    JsPropertyInitializer thatPropertyInitializer = (JsPropertyInitializer) that;
+
+    return isQuotedLabel == thatPropertyInitializer.isQuotedLabel
+        && Objects.equal(labelExpr, thatPropertyInitializer.labelExpr)
+        && Objects.equal(valueExpr, thatPropertyInitializer.valueExpr);
   }
 
   @Override
@@ -60,19 +66,21 @@ public class JsPropertyInitializer extends JsNode {
     return valueExpr;
   }
 
+  public boolean isQuotedLabel() {
+    return isQuotedLabel;
+  }
+
   @Override
   public int hashCode() {
-    return labelExpr.hashCode() + 17 * valueExpr.hashCode();
+    return Objects.hashCode(labelExpr, valueExpr);
   }
 
   public boolean hasSideEffects() {
     return labelExpr.hasSideEffects() || valueExpr.hasSideEffects();
   }
 
-  public void setLabelExpr(JsExpression labelExpr) {
-    assert labelExpr instanceof JsStringLiteral || labelExpr instanceof JsNumberLiteral ||
-        labelExpr instanceof JsNameRef : labelExpr.toString() + " is not a valid property label";
-    this.labelExpr = labelExpr;
+  public void setQuotedLabel(boolean quotedLabel) {
+    isQuotedLabel = quotedLabel;
   }
 
   public void setValueExpr(JsExpression valueExpr) {

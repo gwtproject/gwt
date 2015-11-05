@@ -50,10 +50,22 @@ public final class JsObjectLiteral extends JsLiteral {
       return this;
     }
 
-    public Builder add(SourceInfo sourceInfo, JsExpression property, JsExpression value) {
-      propertyInitializers.add(new JsPropertyInitializer(sourceInfo, property, value));
+    public Builder add(JsStringLiteral property, JsExpression value, boolean isQuoted) {
+      add(sourceInfo, property, value, isQuoted);
       return this;
     }
+
+    public Builder add(SourceInfo sourceInfo, JsExpression property, JsExpression value) {
+      propertyInitializers.add(new JsPropertyInitializer(sourceInfo, property, value, true));
+      return this;
+    }
+
+    public Builder add(
+        SourceInfo sourceInfo, JsStringLiteral property, JsExpression value, boolean isQuoted) {
+      propertyInitializers.add(new JsPropertyInitializer(sourceInfo, property, value, isQuoted));
+      return this;
+    }
+
 
     public Builder setInternable() {
       internable = true;
@@ -84,16 +96,7 @@ public final class JsObjectLiteral extends JsLiteral {
    * NOTE: Does not check for duplicate names.
    */
   public void addProperty(SourceInfo sourceInfo, JsExpression label, JsExpression value) {
-    properties.add(new JsPropertyInitializer(sourceInfo, label, value));
-  }
-
-  /**
-   * Adds a property and its initial value to the object literal.
-   * <p>
-   * NOTE: Does not check for duplicate names.
-   */
-  public void addProperty(SourceInfo sourceInfo, String label, JsExpression value) {
-    addProperty(sourceInfo, new JsStringLiteral(sourceInfo, label), value);
+    properties.add(new JsPropertyInitializer(sourceInfo, label, value, true));
   }
 
   @Override
@@ -164,3 +167,4 @@ public final class JsObjectLiteral extends JsLiteral {
     internable = true;
   }
 }
+

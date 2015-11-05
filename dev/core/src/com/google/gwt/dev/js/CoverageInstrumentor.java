@@ -106,7 +106,7 @@ public class CoverageInstrumentor {
       for (int line : instrumentableLines.get(filename)) {
         linesBuilder.add(new JsNumberLiteral(info, line), new JsNumberLiteral(info, 0));
       }
-      baselineBuilder.add(new JsStringLiteral(info, filename), linesBuilder.build());
+      baselineBuilder.add(new JsStringLiteral(info, filename), linesBuilder.build(), true);
     }
     return baselineBuilder.build();
   }

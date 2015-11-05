@@ -67,7 +67,8 @@ public class JsLiteralInternerTest extends TestCase {
     checkTranslation(
         String.format("var x={a:%1$s,b:%2$s}, y={a:%1$s,b:%2$s}, z={a:%1$s,b:%3$s};",
             ONES, TWOS, THREES),
-        String.format("var $intern_0={a:%1$s,b:%2$s};var x=$intern_0,y=$intern_0,z={a:%1$s,b:%3$s};",
+        String.format(
+            "var $intern_0={a:%1$s,b:%2$s};var x=$intern_0,y=$intern_0,z={a:%1$s,b:%3$s};",
             ONES, TWOS, THREES));
 
     checkTranslation(

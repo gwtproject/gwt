@@ -44,10 +44,10 @@ public enum TypeCategory {
    * initialize to zero vs. null).
    */
 
-  TYPE_JAVA_OBJECT("", true, false),
+TYPE_JAVA_OBJECT("", true, false),
   TYPE_JAVA_OBJECT_OR_JSO("AllowJso", true, false),
   TYPE_JSO("Jso"),
-  TYPE_ARRAY("Array"),
+  TYPE_OBJECT_ARRAY("ObjectArray"),
   TYPE_JSO_ARRAY("JsoArray", true, false),
   TYPE_JAVA_LANG_OBJECT("AllowJso", true, false),
   TYPE_JAVA_LANG_STRING("String"),
@@ -110,13 +110,13 @@ public enum TypeCategory {
     assert type instanceof JReferenceType;
     type = type.getUnderlyingType();
     if (type == program.getTypeJavaLangObjectArray()) {
-      return TypeCategory.TYPE_ARRAY;
+      return TypeCategory.TYPE_OBJECT_ARRAY;
+    } else if (program.isUntypedArrayType(type)) {
+      return TypeCategory.TYPE_JS_ARRAY;
     } else if (isJsoArray(type)) {
       return TypeCategory.TYPE_JSO_ARRAY;
     } else if (getJsSpecialType(type) != null) {
       return getJsSpecialType(type);
-    } else if (program.isUntypedArrayType(type)) {
-      return TypeCategory.TYPE_JS_ARRAY;
     } else if (type == program.getTypeJavaLangObject()) {
       return TypeCategory.TYPE_JAVA_LANG_OBJECT;
     } else if (program.getRepresentedAsNativeTypesDispatchMap().containsKey(type)) {

@@ -161,8 +161,9 @@ public class JsTypeArrayTest extends GWTTestCase {
     SimpleJsTypeReturnForMultiDimArray[] array =
         (SimpleJsTypeReturnForMultiDimArray[]) returnObjectArrayFromNative();
     assertNotNull((Object[]) array);
-    assertEquals(3, array.length);
-    assertEquals("1", array[0]);
+    Object[] objectArray = (Object[]) returnObjectArrayFromNative();
+    assertEquals(3, objectArray.length);
+    assertEquals("1", objectArray[0]);
   }
 
   public void testJsTypeArray_objectArrayInterchangeability() {
@@ -241,4 +242,28 @@ public class JsTypeArrayTest extends GWTTestCase {
     return function(a) { return a + 2; };
   }-*/;
 
+  @JsFunction
+  interface SomeJsFunction {
+    int m();
+  }
+
+  private native SomeJsFunction returnJsFunction(int n) /*-{
+    return function() { return n };
+  }-*/;
+
+  public void testJsFunctionArray2() {
+    SomeJsFunction[] jsFunctionArray = new SomeJsFunction[10];
+    for (int i = 0; i < jsFunctionArray.length; i++) {
+      jsFunctionArray[i] = returnJsFunction(i);
+    }
+
+    assertEquals(5, jsFunctionArray[2].m() + jsFunctionArray[3].m());
+
+    Object[] asObjectArray = jsFunctionArray;
+    try {
+      asObjectArray[3] = new Object();
+      fail("Should have thrown");
+    } catch (ArrayStoreException expected) {
+    }
+  }
 }

@@ -68,21 +68,6 @@ public class MiscellaneousTest extends GWTTestCase {
 
   private static volatile boolean TRUE = true;
 
-  private static void assertAllCanStore(Object[] dest, Object[] src) {
-    for (int i = 0; i < src.length; ++i) {
-      dest[0] = src[i];
-    }
-  }
-
-  private static void assertNoneCanStore(Object[] dest, Object[] src) {
-    for (int i = 0; i < src.length; ++i) {
-      try {
-        dest[0] = src[i];
-        fail();
-      } catch (ArrayStoreException e) {
-      }
-    }
-  }
 
   private static native void clinitFromNative() /*-{
     @com.google.gwt.dev.jjs.test.MiscellaneousTest$HasClinit::i = 5;
@@ -98,117 +83,6 @@ public class MiscellaneousTest extends GWTTestCase {
   @Override
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.CompilerSuite";
-  }
-
-  public void testArrayCasts() {
-    {
-      // thwart optimizer
-      Object f1 = FALSE ? (Object) new PolyA() : (Object) new IFoo[1];
-      if (expectClassMetadata()) {
-        assertEquals("[Lcom.google.gwt.dev.jjs.test.MiscellaneousTest$IFoo;",
-            f1.getClass().getName());
-      }
-      assertFalse(f1 instanceof PolyA[][]);
-      assertFalse(f1 instanceof IFoo[][]);
-      assertFalse(f1 instanceof PolyA[]);
-      assertTrue(f1 instanceof IFoo[]);
-      assertFalse(f1 instanceof PolyA);
-      assertFalse(f1 instanceof IFoo);
-      assertTrue(f1 instanceof Object[]);
-      assertFalse(f1 instanceof Object[][]);
-
-      assertAllCanStore((Object[]) f1, new Object[] {new PolyA(), new IFoo() {
-      }});
-      assertNoneCanStore((Object[]) f1, new Object[] {
-          new PolyB(), new Object(), new Object[0]});
-    }
-
-    {
-      // thwart optimizer
-      Object a1 = FALSE ? (Object) new PolyA() : (Object) new PolyA[1];
-      if (expectClassMetadata()) {
-        assertEquals("[Lcom.google.gwt.dev.jjs.test.MiscellaneousTest$PolyA;",
-            a1.getClass().getName());
-      }
-      assertFalse(a1 instanceof PolyA[][]);
-      assertFalse(a1 instanceof IFoo[][]);
-      assertTrue(a1 instanceof PolyA[]);
-      assertTrue(a1 instanceof IFoo[]);
-      assertFalse(a1 instanceof PolyA);
-      assertFalse(a1 instanceof IFoo);
-      assertTrue(a1 instanceof Object[]);
-      assertFalse(a1 instanceof Object[][]);
-
-      assertAllCanStore((Object[]) a1, new Object[] {new PolyA()});
-      assertNoneCanStore((Object[]) a1, new Object[] {new IFoo() {
-      }, new PolyB(), new Object(), new Object[0]});
-    }
-
-    {
-      // thwart optimizer
-      Object f2 = FALSE ? (Object) new PolyA() : (Object) new IFoo[1][];
-      if (expectClassMetadata()) {
-        assertEquals("[[Lcom.google.gwt.dev.jjs.test.MiscellaneousTest$IFoo;",
-            f2.getClass().getName());
-      }
-      assertFalse(f2 instanceof PolyA[][]);
-      assertTrue(f2 instanceof IFoo[][]);
-      assertFalse(f2 instanceof PolyA[]);
-      assertFalse(f2 instanceof IFoo[]);
-      assertFalse(f2 instanceof PolyA);
-      assertFalse(f2 instanceof IFoo);
-      assertTrue(f2 instanceof Object[]);
-      assertTrue(f2 instanceof Object[][]);
-
-      assertAllCanStore((Object[]) f2, new Object[] {new PolyA[0], new IFoo[0]});
-      assertNoneCanStore((Object[]) f2, new Object[] {new IFoo() {
-      }, new PolyB(), new Object(), new Object[0]});
-    }
-
-    {
-      // thwart optimizer
-      Object a2 = FALSE ? (Object) new PolyA() : (Object) new PolyA[1][];
-      if (expectClassMetadata()) {
-        assertEquals("[[Lcom.google.gwt.dev.jjs.test.MiscellaneousTest$PolyA;",
-            a2.getClass().getName());
-      }
-      assertTrue(a2 instanceof PolyA[][]);
-      assertTrue(a2 instanceof IFoo[][]);
-      assertFalse(a2 instanceof PolyA[]);
-      assertFalse(a2 instanceof IFoo[]);
-      assertFalse(a2 instanceof PolyA);
-      assertFalse(a2 instanceof IFoo);
-      assertTrue(a2 instanceof Object[]);
-      assertTrue(a2 instanceof Object[][]);
-
-      assertAllCanStore((Object[]) a2, new Object[] {new PolyA[0]});
-      assertNoneCanStore((Object[]) a2, new Object[] {new IFoo() {
-      }, new PolyB(), new Object(), new Object[0], new IFoo[0]});
-    }
-  }
-
-  public void testArrays() {
-    int[] c = new int[] {1, 2};
-    int[][] d = new int[][] { {1, 2}, {3, 4}};
-    int[][][] e = new int[][][] { { {1, 2}, {3, 4}}, { {5, 6}, {7, 8}}};
-    if (expectClassMetadata()) {
-      assertEquals("[I", c.getClass().getName());
-      assertEquals("[[I", d.getClass().getName());
-      assertEquals("[I", d[1].getClass().getName());
-      assertEquals("[[[I", e.getClass().getName());
-      assertEquals("[[I", e[1].getClass().getName());
-      assertEquals("[I", e[1][1].getClass().getName());
-    }
-    assertEquals(2, c[1]);
-    assertEquals(3, d[1][0]);
-    assertEquals(8, e[1][1][1]);
-
-    int[][][] b = new int[3][2][1];
-    b[2][1][0] = 1;
-    b = new int[3][2][];
-    b[2][1] = null;
-    b = new int[3][][];
-    b[2] = null;
   }
 
   public void testAssociativityCond() {
@@ -297,17 +171,5 @@ public class MiscellaneousTest extends GWTTestCase {
   @Override
   public String toString() {
     return "com.google.gwt.dev.jjs.test.MiscellaneousTest";
-  }
-
-  private boolean expectClassMetadata() {
-    String name = Object.class.getName();
-
-    if (name.equals("java.lang.Object")) {
-      return true;
-    } else if (name.startsWith("Class$")) {
-      return false;
-    }
-
-    throw new RuntimeException("Unexpected class name " + name);
   }
 }

@@ -93,14 +93,6 @@ final class Cast {
   }
 
   /**
-   * Allow a cast to an java.lang.Object array, accepting also untyped arrays.
-   */
-  static Object castToArray(Object src) {
-    checkType(src == null || instanceOfArray(src));
-    return src;
-  }
-
-  /**
    * Allow a cast to an array of Jsos, accepting also untyped arrays.
    */
   static Object castToJsoArray(Object src, JavaScriptObject dstId) {
@@ -113,6 +105,14 @@ final class Cast {
    */
   static Object castToJsArray(Object src) {
     checkType(src == null || instanceOfJsArray(src));
+    return src;
+  }
+
+  /**
+   * Allow a cast to Object[], accepting also untyped arrays but not primitive arrays.
+   */
+  static Object castToObjectArray(Object src) {
+    checkType(src == null || instanceOfObjectArray(src));
     return src;
   }
 
@@ -182,13 +182,6 @@ final class Cast {
   /**
    * Returns true if {@code src} is Java object array or an untyped array.
    */
-  static boolean instanceOfArray(Object src) {
-    return isArray(src) && !Array.isPrimitiveArray(src);
-  }
-
-  /**
-   * Returns true if {@code src} is Java object array or an untyped array.
-   */
   static boolean instanceOfJsoArray(Object src, JavaScriptObject dstId) {
     return canCast(src, dstId) || !Util.hasTypeMarker(src) && isArray(src);
   }
@@ -198,6 +191,14 @@ final class Cast {
    */
   static boolean instanceOfJsArray(Object src) {
     return isArray(src);
+  }
+
+  /**
+   * Returns true if {@code src} is an Object array, accepting also untyped arrays but not primitive
+   * arrays.
+   */
+  static boolean instanceOfObjectArray(Object src) {
+    return isArray(src) && !Array.isPrimitiveArray(src);
   }
 
   static boolean instanceOfNative(Object src, JavaScriptObject jsType) {
@@ -389,7 +390,7 @@ final class Cast {
   @HasNoSideEffects
   static native Class<?> getClass(Object array) /*-{
     return array.@java.lang.Object::___clazz
-        || Array.isArray(array) && @JavaScriptObject[]::class
+        || Array.isArray(array) && @java.lang.Object[]::class
         || @JavaScriptObject::class;
   }-*/;
 }

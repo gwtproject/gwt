@@ -68,11 +68,11 @@ public class NativeJsTypeTest extends GWTTestCase {
   public void testClassLiterals() {
     assertEquals(JavaScriptObject.class, MyNativeJsType.class);
     assertEquals(JavaScriptObject.class, MyNativeJsTypeInterface.class);
-    assertEquals(JavaScriptObject[].class, MyNativeJsType[].class);
-    assertEquals(JavaScriptObject[].class, MyNativeJsTypeInterface[].class);
-    assertEquals(JavaScriptObject[].class, MyNativeJsType[][].class);
-    assertEquals(JavaScriptObject[].class, MyNativeJsTypeInterface[][].class);
-    assertEquals(JavaScriptObject[].class, JavaScriptObject.createArray().getClass());
+    assertEquals(Object[].class, MyNativeJsType[].class);
+    assertEquals(Object[].class, MyNativeJsTypeInterface[].class);
+    assertEquals(Object[].class, MyNativeJsType[][].class);
+    assertEquals(Object[].class, MyNativeJsTypeInterface[][].class);
+    assertEquals(Object[].class, JavaScriptObject.createArray().getClass());
   }
 
   public void testGetClass() {
@@ -122,7 +122,10 @@ public class NativeJsTypeTest extends GWTTestCase {
     assertEquals("[object Object]", nativeObjectWithoutToString.toString());
 
     Object nativeArray = createNativeArray();
-    assertEquals("", nativeArray.toString());
+    // toString inherited from Object is of the form "[Ljava.lang.Object;@nnn", but the class name
+    // can be obfuscated.
+    assertTrue(nativeArray.toString().startsWith("[L"));
+    assertTrue(nativeArray.toString().contains(";@"));
   }
 
   private static native FinalNativeObject createNativeObject() /*-{

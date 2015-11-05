@@ -66,6 +66,10 @@ public class JsParserTest extends TestCase {
     parse("{ foo() }").into("{ foo(); } ");
   }
 
+  public void testObjectLiterals() throws JsParserException {
+    parse("({ foo: 1, 'bar': 2, 3 :4 })").into("({foo:1, 'bar':2, 3:4}); ");
+  }
+
   public void testParseErrors() {
     parse("1a2b").error(
         "test.js(1): missing ; before statement\n> 1a2b\n> ----^");

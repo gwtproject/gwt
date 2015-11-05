@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b637de6a_81b03a04",
+        "filename": "user/test/com/google/gwt/user/client/ui/DirectionalTextHelperTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-11-05T09:32:00Z",
+      "side": 1,
+      "message": "Should this be getHtml() ?",
+      "range": {
+        "startLine": 127,
+        "startChar": 48,
+        "endLine": 127,
+        "endChar": 57
+      },
+      "revId": "182d3bbdeb9d4c5e950dad372ab019868953e37c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

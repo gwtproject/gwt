@@ -50,19 +50,23 @@ public class ArrayNormalizerTest extends OptimizerTestBase {
 
   public void testObjectArray() throws Exception {
     optimize("void", "Object[] o = new Object[10];")
-        .intoString("Object[] o = Array.initUnidimensionalArray(Object.class, [], "
-            + "/* JRuntimeTypeReference */\"java.lang.Object\", 10, "
-            + TypeCategory.TYPE_JAVA_LANG_OBJECT.ordinal() + ", 1);");
+        .intoString("Object[] o = Array.newArray(10);");
     optimize("void", "Object[] o = {null, null, Object.class};")
-        .intoString("Object[] o = Array.stampJavaTypeInfo("
-            + "Array.getClassLiteralForArray(ClassLiteralHolder.Ljava_lang_Object_2_classLit, 1), "
-            + "[], /* JRuntimeTypeReference */\"java.lang.Object\", "
-            + TypeCategory.TYPE_JAVA_LANG_OBJECT.ordinal() + ", [null, null, Object.class]);");
+        .intoString("Object[] o = [null, null, Object.class];");
     optimize("void", "Object[] o = new Object[] {};")
-        .intoString("Object[] o = Array.stampJavaTypeInfo(Array.getClassLiteralForArray("
-            + "ClassLiteralHolder.Ljava_lang_Object_2_classLit, 1), [], "
-            + "/* JRuntimeTypeReference */\"java.lang.Object\", "
-            + TypeCategory.TYPE_JAVA_LANG_OBJECT.ordinal() + ", []);");
+        .intoString("Object[] o = [];");
+    optimize("void", "Object[][] o = new Object[10][];")
+        .intoString(
+            "Object[][] o = Array.initUnidimensionalArray(Object.class, "
+                + "[], /* JRuntimeTypeReference */\"java.lang.Object[]\", 10, 3, 2);");
+    optimize("void", "Object[][][] o = new Object[10][10][];")
+        .intoString("Object[][][] o = Array.initMultidimensionalArray(Object.class, [[], []], "
+            + "[/* JRuntimeTypeReference */\"java.lang.Object[][]\", "
+            + "/* JRuntimeTypeReference */\"java.lang.Object[]\"], 3, [10, 10], 2);");
+    optimize("void", "Object[][][][] o = new Object[10][10][][];")
+        .intoString("Object[][][][] o = Array.initMultidimensionalArray(Object.class, [[], []], "
+            + "[/* JRuntimeTypeReference */\"java.lang.Object[][][]\", "
+            + "/* JRuntimeTypeReference */\"java.lang.Object[][]\"], 0, [10, 10], 2);");
   }
 
   public void testNativeJsTypeArray() throws Exception {

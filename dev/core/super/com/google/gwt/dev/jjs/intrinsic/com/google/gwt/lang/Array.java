@@ -33,7 +33,7 @@ public final class Array {
   private static final int TYPE_JAVA_OBJECT = 0;
   private static final int TYPE_JAVA_OBJECT_OR_JSO = 1;
   private static final int TYPE_JSO = 2;
-  private static final int TYPE_ARRAY = 3;
+  private static final int TYPE_OBJECT_ARRAY = 3;
   private static final int TYPE_JSO_ARRAY = 4;
   private static final int TYPE_JAVA_LANG_OBJECT = 5;
   private static final int TYPE_JAVA_LANG_STRING = 6;
@@ -50,7 +50,7 @@ public final class Array {
   private static final int TYPE_PRIMITIVE_BOOLEAN = 16;
 
   public static <T> T[] stampJavaTypeInfo(Object array, T[] referenceType) {
-    if (Array.getElementTypeCategory(referenceType) != TYPE_JS_UNKNOWN_NATIVE) {
+    if (needsStamping(Array.getElementTypeCategory(referenceType))) {
       stampJavaTypeInfo(referenceType.getClass(), Util.getCastableTypeMap(referenceType),
           Array.getElementTypeId(referenceType),
           Array.getElementTypeCategory(referenceType), array);
@@ -87,7 +87,7 @@ public final class Array {
       JavaScriptObject castableTypeMap, JavaScriptObject elementTypeId, int length,
       int elementTypeCategory, int dimensions) {
     Object result = initializeArrayElementsWithDefaults(elementTypeCategory, length);
-    if (elementTypeCategory != TYPE_JS_UNKNOWN_NATIVE) {
+    if (needsStamping(elementTypeCategory)) {
       stampJavaTypeInfo(getClassLiteralForArray(leafClassLiteral, dimensions), castableTypeMap,
           elementTypeId, elementTypeCategory, result);
     }
@@ -147,7 +147,7 @@ public final class Array {
   }
 
   /**
-   * Performs an array assignment, after validating the type of the value being
+   * Performs an array assignment after validating the type of the value being
    * stored. The form of the type check depends on the value of elementTypeId and
    * elementTypeCategory as follows:
    * <p>
@@ -181,27 +181,51 @@ public final class Array {
     switch (Array.getElementTypeCategory(array)) {
       case TYPE_JAVA_LANG_STRING:
         return Cast.instanceOfString(value);
+      case TYPE_PRIMITIVE_NUMBER:
+        if (value == null) {
+          return false;
+        }
       case TYPE_JAVA_LANG_DOUBLE:
         return Cast.instanceOfDouble(value);
+      case TYPE_PRIMITIVE_BOOLEAN:
+        if (value == null) {
+          return false;
+        }
       case TYPE_JAVA_LANG_BOOLEAN:
         return Cast.instanceOfBoolean(value);
-      case TYPE_ARRAY:
-        return Cast.instanceOfArray(value);
       case TYPE_JS_FUNCTION:
         return Cast.instanceOfFunction(value);
       case TYPE_JS_OBJECT:
         return Cast.instanceOfJsObject(value);
       case TYPE_JAVA_OBJECT:
         return Cast.canCast(value, Array.getElementTypeId(array));
+      case TYPE_OBJECT_ARRAY:
+        return Cast.instanceOfObjectArray(value);
+      case TYPE_JS_ARRAY:
+        return Cast.instanceOfJsArray(value);
       case TYPE_JSO:
         return Cast.isJavaScriptObject(value);
       case TYPE_JAVA_OBJECT_OR_JSO:
         return Cast.isJavaScriptObject(value)
             || Cast.canCast(value, Array.getElementTypeId(array));
+      case TYPE_PRIMITIVE_LONG:
+        return isLong(value);
       default:
         return true;
     }
   }
+
+  /**
+   * Does obj represent a primitive long.
+   */
+  private static native boolean isLong(Object obj) /*-{
+    // NOTE: the implementation of this methods should be in sync with LongLib et al.
+    return typeof obj == "number"
+        || (obj
+            && obj.h && typeof obj.h == "number"
+            && obj.m && typeof obj.m == "number"
+            && obj.l && typeof obj.l == "number");
+  }-*/;
 
   /**
    * Use JSNI to effect a castless type change.
@@ -246,7 +270,7 @@ public final class Array {
     int elementTypeCategory = isLastDimension ? leafElementTypeCategory : TYPE_JAVA_OBJECT;
 
     Object result = initializeArrayElementsWithDefaults(elementTypeCategory, length);
-    if (leafElementTypeCategory != TYPE_JS_UNKNOWN_NATIVE) {
+    if (needsStamping(elementTypeCategory)) {
       stampJavaTypeInfo(getClassLiteralForArray(leafClassLiteral, count - index),
           castableTypeMapExprs[index], elementTypeIds[index], elementTypeCategory, result);
     }
@@ -274,7 +298,7 @@ public final class Array {
 
   private static native int getElementTypeCategory(Object array) /*-{
     return array.__elementTypeCategory$ == null
-        ? @Array::TYPE_JS_UNKNOWN_NATIVE
+        ? @Array::TYPE_JAVA_LANG_OBJECT
         : array.__elementTypeCategory$;
   }-*/;
 
@@ -282,6 +306,12 @@ public final class Array {
   private static native JavaScriptObject getElementTypeId(Object array) /*-{
     return array.__elementTypeId$;
   }-*/;
+
+  static boolean isPrimitiveArray(Object array) {
+    int elementTypeCategory = getElementTypeCategory(array);
+    return elementTypeCategory >= TYPE_PRIMITIVE_LONG
+        && elementTypeCategory <= TYPE_PRIMITIVE_BOOLEAN;
+  };
 
   // DO NOT INLINE this method into {@link getClassLiteralForArray}.
   // The purpose of this method is to avoid introducing a public api to {@link java.lang.Class}.
@@ -318,17 +348,17 @@ public final class Array {
     return Cast.isArray(src) && Util.hasTypeMarker(src);
   }
 
-  /**
-   * Returns true if {@code src} is a Java array.
-   */
-  static boolean isPrimitiveArray(Object array) {
-    int elementTypeCategory = getElementTypeCategory(array);
-    return elementTypeCategory >= TYPE_PRIMITIVE_LONG
-        && elementTypeCategory <= TYPE_PRIMITIVE_BOOLEAN;
-  };
-
   public static Object ensureNotNull(Object array) {
     return checkNotNull(array);
+  }
+  /**
+   * Arrays of these types are created as plain JavaScript arrays.
+   */
+  private static boolean needsStamping(int elementTypeCategory) {
+    return elementTypeCategory != TYPE_JAVA_LANG_OBJECT
+        && elementTypeCategory != TYPE_JS_NATIVE
+        && elementTypeCategory != TYPE_JS_UNKNOWN_NATIVE
+        && elementTypeCategory != TYPE_JS_ARRAY;
   }
 
   private Array() {

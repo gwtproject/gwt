@@ -340,7 +340,6 @@ public class JProgram extends JNode implements ArrayTypeCreator {
   private JArrayType typeJavaLangObjectArray;
   private JClassType typeSpecialClassLiteralHolder;
   private JClassType typeSpecialJavaScriptObject;
-
   private JClassType typeString;
 
   private FragmentPartitioningResult fragmentPartitioningResult;
@@ -1139,7 +1138,8 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     }
 
     JArrayType arrayType = (JArrayType) type;
-    return arrayType.getLeafType().isJsNative();
+    return arrayType.getElementType() == typeJavaLangObject
+        || arrayType.getLeafType().isJsNative();
   }
 
   public boolean isJavaLangString(JType type) {

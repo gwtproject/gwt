@@ -170,6 +170,9 @@ public class JavaScriptObject {
    */
   @Override
   public final String toString() {
+    if (isArray(this)) {
+      return super.toString();
+    }
     return JavaScriptObject.class.desiredAssertionStatus() ?
         toStringVerbose(this) : toStringSimple(this);
   }
@@ -188,5 +191,9 @@ public class JavaScriptObject {
 
   private static native int callHashCode(Object object) /*-{
     return object.hashCode();
+  }-*/;
+
+  private static native boolean isArray(JavaScriptObject object) /*-{
+    return Array.isArray(object);
   }-*/;
 }

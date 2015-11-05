@@ -23,6 +23,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Iterator;
 
+import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -514,13 +515,21 @@ public class JsTypeTest extends GWTTestCase {
     object[name] = value;
   }-*/;
 
-  @JsType(isNative = true)
+  @JsType(isNative = true, namespace = GLOBAL, name = "Object")
   static class NativeJsTypeWithOverlay {
-    public native int m();
 
-    @JsOverlay
-    public final int callM() {
-      return m();
+    public static native String[] keys(Object o);
+
+    @JsOverlay @DoNotInline
+    public static final boolean hasM(Object obj) {
+      return keys(obj)[0].equals("m");
+    }
+
+    public native boolean hasOwnProperty(String name);
+
+    @JsOverlay @DoNotInline
+    public final boolean hasM() {
+      return hasOwnProperty("m");
     }
   }
 
@@ -530,6 +539,7 @@ public class JsTypeTest extends GWTTestCase {
 
   public void testNativeJsTypeWithOverlay() {
     NativeJsTypeWithOverlay object = createNativeJsTypeWithOverlay();
-    assertEquals(6, object.callM());
+    assertTrue(object.hasM());
+    assertTrue(NativeJsTypeWithOverlay.hasM(object));
   }
 }

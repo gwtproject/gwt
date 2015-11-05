@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b686fe2b_3d776771",
+        "filename": "user/test/com/google/gwt/core/client/interop/NativeJsTypeTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-05T14:45:42Z",
+      "side": 1,
+      "message": "Yes along the lines we discussed offline.",
+      "parentUuid": "b686fe2b_d2d63a72",
+      "revId": "5fad58be793a5aac621cd3102465767502d48974",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b686fe2b_92ccc2e4",
         "filename": "user/test/com/google/gwt/core/client/interop/NativeJsTypeTest.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-11-05T03:16:37Z",
       "side": 1,
       "message": "As we discussed we will probably change this behavior in a later patch.",
+      "revId": "5fad58be793a5aac621cd3102465767502d48974",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_7d71df77",
+        "filename": "user/test/com/google/gwt/core/client/interop/NativeJsTypeTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-05T14:45:42Z",
+      "side": 1,
+      "message": "ack.",
+      "parentUuid": "b686fe2b_92ccc2e4",
       "revId": "5fad58be793a5aac621cd3102465767502d48974",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "b686fe2b_bd82776b",
+        "filename": "user/test/com/google/gwt/core/client/interop/NativeJsTypeTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-05T14:45:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b686fe2b_52e32a58",
+      "range": {
+        "startLine": 73,
+        "startChar": 39,
+        "endLine": 73,
+        "endChar": 69
+      },
+      "revId": "5fad58be793a5aac621cd3102465767502d48974",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b686fe2b_32deb691",
         "filename": "user/test/com/google/gwt/core/client/interop/NativeJsTypeTest.java",
         "patchSetId": 3
@@ -70,6 +130,30 @@
       "writtenOn": "2015-11-05T03:16:37Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 77,
+        "startChar": 39,
+        "endLine": 77,
+        "endChar": 72
+      },
+      "revId": "5fad58be793a5aac621cd3102465767502d48974",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_dd7f2b42",
+        "filename": "user/test/com/google/gwt/core/client/interop/NativeJsTypeTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-05T14:45:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b686fe2b_32deb691",
       "range": {
         "startLine": 77,
         "startChar": 39,

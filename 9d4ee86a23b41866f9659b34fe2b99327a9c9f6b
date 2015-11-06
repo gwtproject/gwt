@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b686fe2b_15ffd783",
+        "filename": "user/super/com/google/gwt/emul/java/lang/AbstractStringBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-11-06T11:13:24Z",
+      "side": 1,
+      "message": "Add initialization \n \n  String string \u003d \"\";\n\notherwise the null value will be definitely included in set. Once that is done if the uninitialized value can not be observed we should be fine.\n\nStill I am not sure whether ComputePotentiallyObservableUninitializedValues will be able infer that the uninitialized value can be observed. Looking at the code it seems that it should but we have to verify this.",
+      "range": {
+        "startLine": 29,
+        "startChar": 9,
+        "endLine": 29,
+        "endChar": 15
+      },
+      "revId": "9d4ee86a23b41866f9659b34fe2b99327a9c9f6b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

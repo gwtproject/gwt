@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16fd0ac1_e4c23a82",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JLocal.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-06T03:34:51Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "2e4ac7d127dbc7969da428b257cadcc50e30c39c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16fd0ac1_c4c73e90",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/SameParameterValueOptimizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-06T03:34:51Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "2e4ac7d127dbc7969da428b257cadcc50e30c39c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b637de6a_c19f2281",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-11-06T14:25:44Z",
+      "side": 1,
+      "message": "Actually, that behavior is not that important (now that DevMode is deprecated and everyone should use SDM, which will overwrite the file unconditionally, I think we can accept that \"old DevMode\" also overwrites unconditionally, particularly if it goes away just after 2.8); what matters is that currently the mtime of the nocache.js is based only on the XML files so in many cases the content of the nocache.js changes (because permutation names change) but the mtime stays the same, breaking any HTTP conditional request based on the mtime.\n\nI think it\u0027s acceptable that we always use \u0027now\u0027 as the lastModified value of the nocache.js, and always overwrite the file.",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 7
+      },
+      "revId": "265520cd5f8e29aaa820264de66517cfaab69c6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

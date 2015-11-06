@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "16fd0ac1_e7c59c62",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2786,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-06T06:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b686fe2b_f2d6d971",
+      "revId": "083bdfc7efeedb788a3e14b2b7217103a50d1dbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b686fe2b_12d44d68",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-11-06T06:10:34Z",
       "side": 1,
       "message": "and here",
+      "revId": "083bdfc7efeedb788a3e14b2b7217103a50d1dbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16fd0ac1_c7caa072",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 4029,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-06T06:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b686fe2b_12d44d68",
       "revId": "083bdfc7efeedb788a3e14b2b7217103a50d1dbc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

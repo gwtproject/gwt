@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16fd0ac1_273bb4a9",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-06T22:00:23Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "de7bc182b684dc4ef61d3d1fd9537e03ebd19d18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

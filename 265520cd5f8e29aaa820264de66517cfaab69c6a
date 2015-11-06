@@ -22,6 +22,30 @@
       "revId": "265520cd5f8e29aaa820264de66517cfaab69c6a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_6ba4b0e0",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-11-06T23:34:34Z",
+      "side": 1,
+      "message": "Fair enough. But given that each round of changes for this has made some users or tests unhappy (but only amonst open source users and not amongst interal Google users) and the only known-good version was the original, i\u0027d rather not make any changes.\n\nWould like to treat it as a pure rollback.",
+      "parentUuid": "b637de6a_c19f2281",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 7
+      },
+      "revId": "265520cd5f8e29aaa820264de66517cfaab69c6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

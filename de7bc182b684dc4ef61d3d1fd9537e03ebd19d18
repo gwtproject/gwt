@@ -2,6 +2,80 @@
   "comments": [
     {
       "key": {
+        "uuid": "b686fe2b_8b50040a",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-11-06T23:08:49Z",
+      "side": 1,
+      "message": "s/removePath/recursivelyRemovePath",
+      "revId": "de7bc182b684dc4ef61d3d1fd9537e03ebd19d18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_cb311ce8",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-11-06T23:08:49Z",
+      "side": 1,
+      "message": "s/parent/path",
+      "range": {
+        "startLine": 213,
+        "startChar": 37,
+        "endLine": 213,
+        "endChar": 43
+      },
+      "revId": "de7bc182b684dc4ef61d3d1fd9537e03ebd19d18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_0b3c14bd",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-11-06T23:08:49Z",
+      "side": 1,
+      "message": "// Stop listening to this path.",
+      "revId": "de7bc182b684dc4ef61d3d1fd9537e03ebd19d18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_2b28f875",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-11-06T23:08:49Z",
+      "side": 1,
+      "message": "// Recursive into sub directories and files.",
+      "revId": "de7bc182b684dc4ef61d3d1fd9537e03ebd19d18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16fd0ac1_273bb4a9",
         "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ChangedFileAccumulator.java",
         "patchSetId": 1
@@ -13,6 +87,23 @@
       "writtenOn": "2015-11-06T22:00:23Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "de7bc182b684dc4ef61d3d1fd9537e03ebd19d18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_eb5180e2",
+        "filename": "dev/core/test/com/google/gwt/dev/resource/impl/ChangedFileAccumulatorTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-11-06T23:08:49Z",
+      "side": 1,
+      "message": "tests look good",
       "revId": "de7bc182b684dc4ef61d3d1fd9537e03ebd19d18",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

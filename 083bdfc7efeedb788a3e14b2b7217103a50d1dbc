@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b686fe2b_f2d6d971",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2786,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-06T06:10:34Z",
+      "side": 1,
+      "message": "format",
+      "revId": "083bdfc7efeedb788a3e14b2b7217103a50d1dbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_12d44d68",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 4029,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-06T06:10:34Z",
+      "side": 1,
+      "message": "and here",
+      "revId": "083bdfc7efeedb788a3e14b2b7217103a50d1dbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

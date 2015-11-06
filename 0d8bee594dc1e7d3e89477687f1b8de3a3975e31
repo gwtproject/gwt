@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16fd0ac1_07d1d820",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-06T20:31:50Z",
+      "side": 1,
+      "message": "identification",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "0d8bee594dc1e7d3e89477687f1b8de3a3975e31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_08a6da2b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-06T20:31:50Z",
+      "side": 1,
+      "message": "Should this be moved to JMember (the one in JField does not have the isJsNative exclusion and I think they should be exactly the same shouldnt they.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 3
+      },
+      "revId": "0d8bee594dc1e7d3e89477687f1b8de3a3975e31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_4877f26f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-06T20:31:50Z",
+      "side": 1,
+      "message": "Should we use the member type for overlay as well?",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 3
+      },
+      "revId": "0d8bee594dc1e7d3e89477687f1b8de3a3975e31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_28d9dea8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-06T20:31:50Z",
+      "side": 1,
+      "message": "This one here is a bit innacurate, maybe is more consistent with JsMemberType.NONE as the alias is just an regular (nonjs) method.",
+      "range": {
+        "startLine": 2276,
+        "startChar": 57,
+        "endLine": 2276,
+        "endChar": 76
+      },
+      "revId": "0d8bee594dc1e7d3e89477687f1b8de3a3975e31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

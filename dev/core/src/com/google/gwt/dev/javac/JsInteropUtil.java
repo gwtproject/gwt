@@ -88,7 +88,8 @@ public final class JsInteropUtil {
     setJsInteropProperties(method, annotations, isPropertyAccessor);
   }
 
-  public static void maybeSetJsInteropPropertiesNew(JMethod method, Annotation... annotations) {
+  public static void maybeSetJsInteropPropertiesNew(
+      JMethod method, boolean generateExport, Annotation... annotations) {
     if (getInteropAnnotation(annotations, "JsOverlay") != null) {
       method.setJsOverlay();
     }
@@ -102,16 +103,17 @@ public final class JsInteropUtil {
     }
 
     boolean isPropertyAccessor = getInteropAnnotation(annotations, "JsProperty") != null;
-    setJsInteropPropertiesNew(method, annotations, annotation, isPropertyAccessor);
+    setJsInteropPropertiesNew(method, annotations, annotation, isPropertyAccessor, generateExport);
   }
 
   public static void maybeSetJsInteropProperties(JField field, Annotation... annotations) {
     setJsInteropProperties(field, annotations, false);
   }
 
-  public static void maybeSetJsInteropPropertiesNew(JField field, Annotation... annotations) {
+  public static void maybeSetJsInteropPropertiesNew(
+      JField field, boolean generateExport, Annotation... annotations) {
     AnnotationBinding annotation = getInteropAnnotation(annotations, "JsProperty");
-    setJsInteropPropertiesNew(field, annotations, annotation, false);
+    setJsInteropPropertiesNew(field, annotations, annotation, false, generateExport);
   }
 
   private static void setJsInteropProperties(
@@ -148,7 +150,7 @@ public final class JsInteropUtil {
   }
 
   private static void setJsInteropPropertiesNew(JMember member, Annotation[] annotations,
-      AnnotationBinding memberAnnotation, boolean isAccessor) {
+      AnnotationBinding memberAnnotation, boolean isAccessor, boolean generateExport) {
     if (getInteropAnnotation(annotations, "JsIgnore") != null) {
       return;
     }
@@ -161,7 +163,7 @@ public final class JsInteropUtil {
     String namespace = JdtUtil.getAnnotationParameterString(memberAnnotation, "namespace");
     String name = JdtUtil.getAnnotationParameterString(memberAnnotation, "name");
     JsMemberType memberType = getJsMemberType(member, isAccessor);
-    member.setJsMemberInfo(memberType, namespace, name, true);
+    member.setJsMemberInfo(memberType, namespace, name, generateExport);
   }
 
   private static JsMemberType getJsMemberType(JMember member, boolean isPropertyAccessor) {

@@ -45,6 +45,30 @@
       "revId": "df4d3572b40479dd597826446e8d3123bb762826",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b66efe78_09bd49da",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulatorManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-07T20:09:01Z",
+      "side": 1,
+      "message": "No, that\u0027s not correct.\n\nIt does it every 10 milliseconds :)\n\nGood catch. Done.",
+      "parentUuid": "b686fe2b_01d7956f",
+      "range": {
+        "startLine": 91,
+        "startChar": 12,
+        "endLine": 91,
+        "endChar": 28
+      },
+      "revId": "df4d3572b40479dd597826446e8d3123bb762826",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

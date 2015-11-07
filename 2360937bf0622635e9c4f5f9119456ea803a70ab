@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b686fe2b_e182816c",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1666,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-11-07T18:28:14Z",
+      "side": 0,
+      "message": "Is this one already covered.",
+      "range": {
+        "startLine": 1658,
+        "startChar": 0,
+        "endLine": 1666,
+        "endChar": 3
+      },
+      "revId": "2360937bf0622635e9c4f5f9119456ea803a70ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

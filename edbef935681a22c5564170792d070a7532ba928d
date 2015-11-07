@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b686fe2b_a171697a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-11-07T18:28:14Z",
+      "side": 1,
+      "message": "Is there any reason to apply classwide annotation to non public native members? Previously we did that only for native consturctors because the default constructor may be non public.",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 5
+      },
+      "revId": "edbef935681a22c5564170792d070a7532ba928d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b686fe2b_c1857d77",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2015-11-07T18:28:14Z",
+      "side": 1,
+      "message": "I think your changes here are problematic. \n\nYou are not only allowing field initializers but also an arbitrary init block\n\n@JsType(native)\nclass A {\n  {\n     ...\n  }\n}\n\n\nYou need analyze inits the same way clinits are analyzed.\n \nAdd a test case for this.",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 110,
+        "endChar": 7
+      },
+      "revId": "edbef935681a22c5564170792d070a7532ba928d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

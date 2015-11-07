@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16fd0ac1_a7b9e43c",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsObjectLiteral.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-07T00:29:45Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "3c98d3e194987433783f85e3ed00b4f2f13accc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16fd0ac1_87bee820",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JsPropertyInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-07T00:29:45Z",
+      "side": 1,
+      "message": "[error] Empty statement.",
+      "revId": "3c98d3e194987433783f85e3ed00b4f2f13accc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16fd0ac1_67b40c40",
+        "filename": "dev/core/test/com/google/gwt/dev/js/JsParserTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-07T00:29:45Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "3c98d3e194987433783f85e3ed00b4f2f13accc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

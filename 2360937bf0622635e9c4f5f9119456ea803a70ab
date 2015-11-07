@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b66efe78_89bff9ce",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-07T20:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b686fe2b_41d98da7",
+      "range": {
+        "startLine": 232,
+        "startChar": 78,
+        "endLine": 232,
+        "endChar": 94
+      },
+      "revId": "2360937bf0622635e9c4f5f9119456ea803a70ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b686fe2b_61de9192",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "b66efe78_a9c43d63",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-07T20:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b686fe2b_61de9192",
+      "range": {
+        "startLine": 386,
+        "startChar": 39,
+        "endLine": 386,
+        "endChar": 62
+      },
+      "revId": "2360937bf0622635e9c4f5f9119456ea803a70ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b686fe2b_81e38557",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2015-11-07T18:41:28Z",
       "side": 1,
       "message": "maybe extract variables as in checkLocalName",
+      "range": {
+        "startLine": 403,
+        "startChar": 8,
+        "endLine": 403,
+        "endChar": 30
+      },
+      "revId": "2360937bf0622635e9c4f5f9119456ea803a70ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b66efe78_49da6143",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-07T20:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b686fe2b_81e38557",
       "range": {
         "startLine": 403,
         "startChar": 8,

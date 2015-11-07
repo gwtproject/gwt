@@ -1123,7 +1123,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetClassDecl(
         "@JsType(isNative=true) public static class Buggy {",
-        "  public static String s = \"hello\";",
+        "  public static String s;",
         "  static {  s += \"hello\"; }",
         "}");
 
@@ -1143,20 +1143,6 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggyFails(
         "Line 5: Native JsType constructor 'EntryPoint.Buggy.EntryPoint$Buggy(int)' cannot have "
             + "non-empty method body.");
-  }
-
-  public void testNativeJsTypeInstanceInitializerFails() {
-    addSnippetImport("jsinterop.annotations.JsType");
-    addSnippetClassDecl(
-        "@JsType(isNative=true) public static class Buggy {",
-        "  public int x = 1;",
-        "  public Buggy(int n) {",
-        "  }",
-        "}");
-
-    assertBuggyFails(
-        "Line 6: Native JsType constructor 'EntryPoint.Buggy.EntryPoint$Buggy(int)' "
-            + "cannot have non-empty method body.");
   }
 
   public void testNativeJsTypeImplicitSuperSucceeds() throws Exception {
@@ -1201,38 +1187,6 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public Buggy(int n) {",
         "    super(n++);",
         "  }",
-        "}");
-
-    assertBuggySucceeds();
-  }
-
-  public void testNativeJsTypeInlineStaticInitializerFails() {
-    addSnippetImport("jsinterop.annotations.JsType");
-    addSnippetClassDecl(
-        "@JsType(isNative=true) public static class Buggy {",
-        "  public static final String s = new String(\"hello\");",
-        "}");
-
-    assertBuggyFails(
-        "Line 4: Native JsType 'EntryPoint.Buggy' cannot have static initializer.");
-  }
-
-  public void testNativeJsTypeInterfaceInlineInitializerFails() {
-    addSnippetImport("jsinterop.annotations.JsType");
-    addSnippetClassDecl(
-        "@JsType(isNative=true) public interface Buggy {",
-        "  static final String s = new String(\"hello\");",
-        "}");
-
-    assertBuggyFails(
-        "Line 4: Native JsType 'EntryPoint.Buggy' cannot have static initializer.");
-  }
-
-  public void testNativeJsTypeCompileTimeConstantSucceeds() throws Exception {
-    addSnippetImport("jsinterop.annotations.JsType");
-    addSnippetClassDecl(
-        "@JsType(isNative=true) public static class Buggy {",
-        "  public static final String s = \"hello\";",
         "}");
 
     assertBuggySucceeds();
@@ -1283,16 +1237,6 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
     assertBuggyFails(
         "Line 4: Local class 'EntryPoint.Buggy.1Local' cannot be a JsType.");
-  }
-
-  public void testNativeJsTypeInterfaceCompileTimeConstantSucceeds() throws Exception {
-    addSnippetImport("jsinterop.annotations.JsType");
-    addSnippetClassDecl(
-        "@JsType(isNative=true) public interface Buggy {",
-        "  static final String s = \"hello\";",
-        "}");
-
-    assertBuggySucceeds();
   }
 
   public void testNativeJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
@@ -1393,24 +1337,15 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("jsinterop.annotations.JsOverlay");
     addSnippetClassDecl(
         "@JsType(isNative=true) public static class Buggy {",
-        "  @JsOverlay public final void m() { }",
-        "  @JsOverlay public final void m(int x) { }",
-        "  @JsOverlay private final void n() { }",
-        "  @JsOverlay final void o() { }",
-        "  @JsOverlay protected final void p() { }",
-        "}");
-
-    assertBuggySucceeds();
-  }
-
-  public void testJsOverlayOnStaticSucceds() throws Exception {
-    addSnippetImport("jsinterop.annotations.JsType");
-    addSnippetImport("jsinterop.annotations.JsOverlay");
-    addSnippetClassDecl(
-        "@JsType(isNative=true) public static class Buggy {",
+        "  @JsOverlay public static final int f = 2;",
         "  @JsOverlay public static void m() { }",
         "  @JsOverlay public static void m(int x) { }",
         "  @JsOverlay private static void m(boolean x) { }",
+        "  @JsOverlay public final void n() { }",
+        "  @JsOverlay public final void n(int x) { }",
+        "  @JsOverlay private final void n(boolean x) { }",
+        "  @JsOverlay final void o() { }",
+        "  @JsOverlay protected final void p() { }",
         "}");
 
     assertBuggySucceeds();
@@ -1446,16 +1381,20 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "Line 9: JsOverlay method 'void EntryPoint.Buggy.m()' cannot override a supertype method.");
   }
 
-  public void testJsOverlayOnNonFinalFails() {
+  public void testJsOverlayOnNonFinalMethodAndNonCompileTimeConstantFieldFails() {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetImport("jsinterop.annotations.JsOverlay");
     addSnippetClassDecl(
         "@JsType(isNative=true) public static class Buggy {",
+        "  @JsOverlay public static int f1 = 2;",
+        "  @JsOverlay public final int f2 = 2;",
         "  @JsOverlay public void m() { }",
         "}");
 
     assertBuggyFails(
-        "Line 6: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final nor native.");
+        "Line 6: JsOverlay field 'int EntryPoint.Buggy.f1' can only be a compile time constant.",
+        "Line 7: JsOverlay field 'int EntryPoint.Buggy.f2' can only be a compile time constant.",
+        "Line 8: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final nor native.");
   }
 
   public void testJsOverlayOnNativeMethodFails() {
@@ -1505,22 +1444,13 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("jsinterop.annotations.JsOverlay");
     addSnippetClassDecl(
         "@JsType public static class Buggy {",
+        "  @JsOverlay public static final int f = 2;",
         "  @JsOverlay public final void m() { };",
         "}");
 
     assertBuggyFails(
-        "Line 6: Method 'void EntryPoint.Buggy.m()' in non-native type cannot be @JsOverlay.");
-  }
-
-  public void testJsOverlayOnNonJsTypeFails() {
-    addSnippetImport("jsinterop.annotations.JsOverlay");
-    addSnippetClassDecl(
-        "public static class Buggy {",
-        "  @JsOverlay public final void m() { };",
-        "}");
-
-    assertBuggyFails(
-        "Line 5: Method 'void EntryPoint.Buggy.m()' in non-native type cannot be @JsOverlay.");
+        "Line 6: JsOverlay 'int EntryPoint.Buggy.f' can only be declared in a native type.",
+        "Line 7: JsOverlay 'void EntryPoint.Buggy.m()' can only be declared in a native type.");
   }
 
   public void testJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
@@ -1601,27 +1531,26 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggySucceeds();
   }
 
-  public void testNativeJsTypeMembersFails() {
+  public void testNativeJsTypeBadMembersFails() {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetImport("jsinterop.annotations.JsIgnore");
     addSnippetClassDecl(
         "@JsType(isNative=true) static class Buggy {",
+        "  public static final int s = 42;",
+        "  public int f = 42;",
         "  @JsIgnore public Buggy() { }",
         "  @JsIgnore public int x;",
-        "  native void m();",
         "  @JsIgnore public native void n();",
-        "  int f;",
         "  public void o() {}",
         "  public native void p() /*-{}-*/;",
         "}");
 
     assertBuggyFails(
-        "Line 6: Native JsType member 'EntryPoint.Buggy.EntryPoint$Buggy()' is not public or "
-            + "has @JsIgnore.",
-        "Line 7: Native JsType member 'int EntryPoint.Buggy.x' is not public or has @JsIgnore.",
-        "Line 8: Native JsType member 'void EntryPoint.Buggy.m()' is not public or has @JsIgnore.",
-        "Line 9: Native JsType member 'void EntryPoint.Buggy.n()' is not public or has @JsIgnore.",
-        "Line 10: Native JsType member 'int EntryPoint.Buggy.f' is not public or has @JsIgnore.",
+        "Line 6: Native JsType field 'int EntryPoint.Buggy.s' cannot have initializer.",
+        "Line 7: Native JsType field 'int EntryPoint.Buggy.f' cannot have initializer.",
+        "Line 8: Native JsType member 'EntryPoint.Buggy.EntryPoint$Buggy()' cannot have @JsIgnore.",
+        "Line 9: Native JsType member 'int EntryPoint.Buggy.x' cannot have @JsIgnore.",
+        "Line 10: Native JsType member 'void EntryPoint.Buggy.n()' cannot have @JsIgnore.",
         "Line 11: Native JsType method 'void EntryPoint.Buggy.o()' should be native or abstract.",
         "Line 12: JSNI method 'void EntryPoint.Buggy.p()' is not allowed in a native JsType.");
   }
@@ -1640,36 +1569,32 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
   public void testNativeJsTypeOverloadsSucceeds() throws Exception {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetClassDecl(
-        "@JsType(isNative=true) static class Buggy {",
+        "@JsType(isNative=true) abstract static class Buggy {",
         "  public static native void m();",
-        "  public static native void m(Object o);",
-        "  public static native void m(String o);",
+        "  protected static native void m(Object o);",
+        "  private static native void m(String o);",
         "  public Buggy() { }",
-        "  public Buggy(Object o) { }",
-        "  public Buggy(String o) { }",
+        "  protected Buggy(Object o) { }",
+        "  private Buggy(String o) { }",
         "  public native void n();",
         "  public native void n(Object o);",
-        "  public native void n(String o);",
+        "  private native void n(String o);",
+        "  abstract void o(Object o);",
         "}");
 
     assertBuggySucceeds();
   }
 
-  public void testNativeJsTypeAbstractMethodSucceeds() throws Exception {
-    addSnippetImport("jsinterop.annotations.JsType");
-    addSnippetClassDecl(
-        "@JsType(isNative=true) static abstract class Buggy {",
-        "  public abstract void m(Object o);",
-        "}");
-
-    assertBuggySucceeds();
-  }
-
-  public void testNativeJsTypeNonPublicConstructorSucceeds() throws Exception {
+  public void testNativeJsTypeFieldsSucceeds() throws Exception {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetClassDecl(
         "@JsType(isNative=true) static class Buggy {",
-        "  Buggy() { }",
+        "  public static int f1;",
+        "  protected static int f2;",
+        "  private static int f3;",
+        "  public int f4;",
+        "  protected int f5;",
+        "  private int f6;",
         "}");
 
     assertBuggySucceeds();

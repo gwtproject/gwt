@@ -89,10 +89,6 @@ public final class JsInteropUtil {
   }
 
   public static void maybeSetJsInteropPropertiesNew(JMethod method, Annotation... annotations) {
-    if (getInteropAnnotation(annotations, "JsOverlay") != null) {
-      method.setJsOverlay();
-    }
-
     AnnotationBinding annotation = getInteropAnnotation(annotations, "JsMethod");
     if (annotation == null) {
       annotation = getInteropAnnotation(annotations, "JsConstructor");
@@ -143,18 +139,19 @@ public final class JsInteropUtil {
     }
   }
 
-  private static boolean isNativeConstructor(JMember member) {
-    return member instanceof JConstructor && member.getEnclosingType().isJsNative();
-  }
-
   private static void setJsInteropPropertiesNew(JMember member, Annotation[] annotations,
       AnnotationBinding memberAnnotation, boolean isAccessor) {
+    if (getInteropAnnotation(annotations, "JsOverlay") != null) {
+      member.setJsOverlay();
+    }
+
     if (getInteropAnnotation(annotations, "JsIgnore") != null) {
       return;
     }
 
     boolean isPublicMemberForJsType = member.getEnclosingType().isJsType() && member.isPublic();
-    if (!isPublicMemberForJsType && !isNativeConstructor(member) && memberAnnotation == null) {
+    boolean memberForNativeType = member.getEnclosingType().isJsNative();
+    if (!isPublicMemberForJsType && !memberForNativeType && memberAnnotation == null) {
       return;
     }
 

@@ -46,6 +46,30 @@
       "revId": "265520cd5f8e29aaa820264de66517cfaab69c6a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56030291_a944199c",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/SelectionScriptLinker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-11-09T09:28:28Z",
+      "side": 1,
+      "message": "Sure, but with this change, if want to switch between SDM and \"legacy DevMode\", you\u0027d have to manually delete the nocache.js: SDM would overwrite the nocache.js unconditionally, but legacy DevMode would use context.getModuleLastModified() to conditionally generate the file, which would keep the SDM-generated file, and legacy DevMode would fail.\n\nI don\u0027t know the details about why the previous attempt was reverted (I don\u0027t think the complaint was made publicly, or I missed it, in which case if you have a link to share…) but AFAICT most people would be fine with just setting \u0027lastModified\u0027 to System.currentTimeMillis() unconditionally, and not changing any other file (in other words, what I\u0027m saying is that the original change was a good move, except for the choice of using context.getModuleLastModified()). The ideal value would be the max mtime of all files used during the compilation, but as/if wwe don\u0027t have it, then currentTimeMillis is the best we can do.\n\nBTW, that was exactly the comment on and suggested change after I4087ebc291a7f6dc219c93902f6b9429be5bf8d3 was submitted. It\u0027s also inline with your comment there on the rationale for the change: to always overwrite the file. The problem now is not that the file is always overwritten, it is that its mtime is set wrong, which plays badly with other systems that rely on it (mainly HTTP\u0027s If-Modified-Since)",
+      "parentUuid": "b686fe2b_6ba4b0e0",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 7
+      },
+      "revId": "265520cd5f8e29aaa820264de66517cfaab69c6a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

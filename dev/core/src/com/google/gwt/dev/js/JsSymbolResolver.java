@@ -15,9 +15,11 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsProgram;
+import com.google.gwt.dev.js.ast.JsPropertyInitializer;
 
 /**
  * Resolves any unresolved JsNameRefs.
@@ -30,21 +32,42 @@ public class JsSymbolResolver {
   private class JsResolveSymbolsVisitor extends JsAbstractSymbolResolver {
 
     @Override
+    public boolean visit(JsPropertyInitializer x, JsContext ctx) {
+      if (x.getLabelExpr() instanceof JsNameRef) {
+        // JsNameRefs in labels of object literals are considered object scope even though they
+        // are created with no qualifier, matching their use as regular object property names.
+        resolveFromObjectScope((JsNameRef) x.getLabelExpr());
+      }
+      accept(x.getValueExpr());
+      return false;
+    }
+
+    @Override
     protected void resolve(JsNameRef x) {
-      JsName name;
-      String ident = x.getIdent();
       if (x.getQualifier() == null) {
-        name = getScope().findExistingName(ident);
-        if (name == null) {
-          // No clue what this is; create a new unobfuscatable name
-          name = program.getScope().declareUnobfuscatableName(ident);
-        }
-      } else {
-        name = program.getObjectScope().findExistingName(ident);
-        if (name == null) {
-          // No clue what this is; create a new unobfuscatable name
-          name = program.getObjectScope().declareUnobfuscatableName(ident);
-        }
+        resolveFromCurrentScope(x);
+        return;
+      }
+
+      resolveFromObjectScope(x);
+    }
+
+    private void resolveFromCurrentScope(JsNameRef x) {
+      String ident = x.getIdent();
+      JsName name = getScope().findExistingName(ident);
+      if (name == null) {
+        // No clue what this is; create a new unobfuscatable name
+        name = program.getScope().declareUnobfuscatableName(ident);
+      }
+      x.resolve(name);
+    }
+
+    private void resolveFromObjectScope(JsNameRef x) {
+      String ident = x.getIdent();
+      JsName name = program.getObjectScope().findExistingName(ident);
+      if (name == null) {
+        // No clue what this is; create a new unobfuscatable name
+        name = program.getObjectScope().declareUnobfuscatableName(ident);
       }
       x.resolve(name);
     }

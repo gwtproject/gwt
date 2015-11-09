@@ -1769,7 +1769,7 @@ public class GenerateJavaScriptAST {
       if (castMap != null && castableTypeMapName != null) {
         return transform(castMap);
       }
-      return new JsObjectLiteral(SourceOrigin.UNKNOWN);
+      return JsObjectLiteral.EMPTY;
     }
 
     private JField getClassLiteralField(JType type) {

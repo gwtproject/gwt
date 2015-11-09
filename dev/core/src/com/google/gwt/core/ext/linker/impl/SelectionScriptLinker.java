@@ -295,7 +295,7 @@ public abstract class SelectionScriptLinker extends AbstractLinker {
   protected EmittedArtifact emitSelectionScript(TreeLogger logger,
       LinkerContext context, ArtifactSet artifacts)
       throws UnableToCompleteException {
-    long lastModified = context.getModuleLastModified();
+    long lastModified = System.currentTimeMillis();
     String ss = generateSelectionScript(logger, context, artifacts);
     return emitString(logger, ss, context.getModuleName()
         + ".nocache.js", lastModified);

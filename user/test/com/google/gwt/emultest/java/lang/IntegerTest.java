@@ -211,6 +211,8 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(-1, Integer.reverse(-1));
     assertEquals(Integer.MIN_VALUE, Integer.reverse(1));
     assertEquals(1, Integer.reverse(Integer.MIN_VALUE));
+    assertEquals(Integer.MAX_VALUE, Integer.reverse(-2));
+    assertEquals(-2, Integer.reverse(Integer.MAX_VALUE));
     assertEquals(0xaaaaaaaa, Integer.reverse(0x55555555));
     assertEquals(0xaaaa0000, Integer.reverse(0x00005555));
     assertEquals(0xaa00aa00, Integer.reverse(0x00550055));

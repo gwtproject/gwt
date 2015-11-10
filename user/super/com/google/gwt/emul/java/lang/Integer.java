@@ -33,19 +33,6 @@ public final class Integer extends Number implements Comparable<Integer> {
     private static Integer[] boxedValues = new Integer[256];
   }
 
-  /**
-   * Use nested class to avoid clinit on outer.
-   */
-  private static class ReverseNibbles {
-    /**
-     * A fast-lookup of the reversed bits of all the nibbles 0-15. Used to
-     * implement {@link #reverse(int)}.
-     */
-    private static int[] reverseNibbles = {
-        0x0, 0x8, 0x4, 0xc, 0x2, 0xa, 0x6, 0xe, 0x1, 0x9, 0x5, 0xd, 0x3, 0xb,
-        0x7, 0xf};
-  }
-
   public static int bitCount(int x) {
     // Courtesy the University of Kentucky
     // http://aggregate.org/MAGIC/#Population%20Count%20(Ones%20Count)
@@ -124,7 +111,7 @@ public final class Integer extends Number implements Comparable<Integer> {
 
       y = i - 0x4000;
       m = (y >> 16) & 2;
-      n += m; 
+      n += m;
       i <<= m;
 
       y = i >> 14;
@@ -154,11 +141,12 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static int reverse(int i) {
-    int[] nibbles = ReverseNibbles.reverseNibbles;
-    return (nibbles[i >>> 28]) | (nibbles[(i >> 24) & 0xf] << 4)
-        | (nibbles[(i >> 20) & 0xf] << 8) | (nibbles[(i >> 16) & 0xf] << 12)
-        | (nibbles[(i >> 12) & 0xf] << 16) | (nibbles[(i >> 8) & 0xf] << 20)
-        | (nibbles[(i >> 4) & 0xf] << 24) | (nibbles[i & 0xf] << 28);
+    // Based on Henry S. Warren "Hacker's Delight", 2nd edition, Figure 7-1.
+    i = (i & 0x55555555) << 1 | (i >>> 1) & 0x55555555;
+    i = (i & 0x33333333) << 2 | (i >>> 2) & 0x33333333;
+    i = (i & 0x0f0f0f0f) << 4 | (i >>> 4) & 0x0f0f0f0f;
+    i = (i << 24) | ((i & 0xff00) << 8) | ((i >>> 8) & 0xff00) | (i >>> 24);
+    return i;
   }
 
   public static int reverseBytes(int i) {

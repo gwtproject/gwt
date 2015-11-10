@@ -2510,9 +2510,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
       return toStringImage;
     }
     if (bitLength < 32) {
-      // TODO convert to double math dont cast to long :-(
-      toStringImage = Conversion.toDecimalScaledString((long) smallValue,
-          (int) scale);
+      toStringImage = Conversion.toDecimalScaledString(BigInteger.valueOf(smallValue), (int) scale);
       return toStringImage;
     }
     String intString = getUnscaledValue().toString();

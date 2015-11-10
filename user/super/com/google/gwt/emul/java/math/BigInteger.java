@@ -606,6 +606,13 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     return BitLevel.bitLength(this);
   }
 
+  public byte byteValueExact() {
+    if (numberLength <= 1 && bitLength() <= 7) {
+      return byteValue();
+    }
+    throw new ArithmeticException("out of byte range");
+  }
+
   /**
    * Returns a new {@code BigInteger} which has the same binary representation
    * as {@code this} but with the bit at position n cleared. The result is
@@ -899,6 +906,13 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     return (sign > 0 || i == Integer.MIN_VALUE) ? i : -i;
   }
 
+  public int intValueExact() {
+    if (numberLength <= 1 && bitLength() <= 31) {
+      return intValue();
+    }
+    throw new ArithmeticException("out of int range");
+  }
+
   /**
    * Tests whether this {@code BigInteger} is probably prime. If {@code true} is
    * returned, then this is prime with a probability beyond (1-1/2^certainty).
@@ -924,6 +938,13 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     long value = (numberLength > 1) ? (((long) digits[1]) << 32)
         | (digits[0] & 0xFFFFFFFFL) : (digits[0] & 0xFFFFFFFFL);
     return (sign * value);
+  }
+
+  public long longValueExact() {
+    if (numberLength <= 2 && bitLength() <= 63) {
+      return longValue();
+    }
+    throw new ArithmeticException("out of long range");
   }
 
   /**
@@ -1248,6 +1269,13 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     }
     return ((n > 0) ? BitLevel.shiftRight(this, n) : BitLevel.shiftLeft(this,
         -n));
+  }
+
+  public short shortValueExact() {
+    if (numberLength <= 1 && bitLength() <= 15) {
+      return shortValue();
+    }
+    throw new ArithmeticException("out of short range");
   }
 
   /**

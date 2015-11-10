@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16fd0ac1_2ad7fb6f",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-10T01:39:29Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "0dc98d37159056e51316ac6182b7fead5dd7708c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16fd0ac1_0ad43f67",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-10T01:39:29Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "0dc98d37159056e51316ac6182b7fead5dd7708c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

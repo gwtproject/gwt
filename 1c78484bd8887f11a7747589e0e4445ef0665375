@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16fd0ac1_cac4e7b6",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java7Test.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-10T01:41:28Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "1c78484bd8887f11a7747589e0e4445ef0665375",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

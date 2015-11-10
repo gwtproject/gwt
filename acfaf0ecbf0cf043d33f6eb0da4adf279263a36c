@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "569062ca_3e00a9dc",
+        "filename": "user/test/com/google/gwt/emultest/java/math/BigIntegerConvertTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-11-10T19:48:15Z",
+      "side": 1,
+      "message": "Not that it really matters but using 1L was intentional? (Also below)",
+      "range": {
+        "startLine": 665,
+        "startChar": 45,
+        "endLine": 665,
+        "endChar": 47
+      },
+      "revId": "acfaf0ecbf0cf043d33f6eb0da4adf279263a36c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "36220e8b_45804a64",
+        "filename": "user/test/com/google/gwt/emultest/java/math/BigIntegerConvertTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2015-11-10T19:48:15Z",
+      "side": 1,
+      "message": "nit: I think a lot of tests in GWT call these exceptions either \"e\" along with an \"expected\" comment in the catch block or they call these exceptions directly \"expected\" without comment. I think we should keep that pattern as its more descriptive.",
+      "range": {
+        "startLine": 667,
+        "startChar": 23,
+        "endLine": 667,
+        "endChar": 30
+      },
+      "revId": "acfaf0ecbf0cf043d33f6eb0da4adf279263a36c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

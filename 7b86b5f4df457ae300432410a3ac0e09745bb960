@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16c50ace_730c0a51",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-11-11T00:03:27Z",
+      "side": 1,
+      "message": "nice",
+      "revId": "7b86b5f4df457ae300432410a3ac0e09745bb960",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16c50ace_3399f23d",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-11-11T00:03:27Z",
+      "side": 1,
+      "message": "s/A3/B3",
+      "range": {
+        "startLine": 1237,
+        "startChar": 19,
+        "endLine": 1237,
+        "endChar": 21
+      },
+      "revId": "7b86b5f4df457ae300432410a3ac0e09745bb960",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

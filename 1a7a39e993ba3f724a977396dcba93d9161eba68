@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b64d1e5c_778ee8e1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsPredicates.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-12T22:20:46Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "1a7a39e993ba3f724a977396dcba93d9161eba68",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b64d1e5c_97598c43",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-12T22:20:46Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "1a7a39e993ba3f724a977396dcba93d9161eba68",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b64d1e5c_b75e9026",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-12T22:20:46Z",
+      "side": 1,
+      "message": "[error] \u0027assert\u0027 is not followed by whitespace.",
+      "revId": "1a7a39e993ba3f724a977396dcba93d9161eba68",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "revId": "6f07670d8ea181c376432226520e31e850595d0f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b532b27_06495ab2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2318,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-12T23:53:31Z",
+      "side": 1,
+      "message": "This was already the case. However the code made the assumption that bridges would always appear before the methods they were forwarding to. That assumption was not promised by JDT, consequently sometimes we would emit the correct code and others code with infinite loops.",
+      "parentUuid": "16c50ace_bf8f60a1",
+      "revId": "6f07670d8ea181c376432226520e31e850595d0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

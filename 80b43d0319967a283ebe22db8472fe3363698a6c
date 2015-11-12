@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "563ea29c_f14ca21d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Character.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2015-11-12T05:46:08Z",
+      "side": 1,
+      "message": "if you are using $wnd here how does this work with j2cl?\n\nIn the previous patches I was using window here which is probably better since it does not create a potential cross frame reference.",
+      "range": {
+        "startLine": 231,
+        "startChar": 20,
+        "endLine": 231,
+        "endChar": 24
+      },
+      "revId": "80b43d0319967a283ebe22db8472fe3363698a6c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

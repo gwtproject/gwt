@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16c50ace_bf8f60a1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2318,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-11-12T23:13:29Z",
+      "side": 1,
+      "message": "This also will lead to suboptimal Closure Compiler optimizations, because if Closure sees the same slot written twice, it will not assume it is const, and so won\u0027t be able to make assumptions about what it invokes or returns.",
+      "revId": "6f07670d8ea181c376432226520e31e850595d0f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

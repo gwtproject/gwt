@@ -258,14 +258,23 @@ public class ImplementCastsAndTypeChecks {
     }
 
     call.addArg(targetExpression);
+
+    // Ideally the method and its use should have the same number of parameters, but optimizations
+    // (especially when -XdisableClassMetadata) might trim parameters that are not really used.
     if (method.getParams().size() >= 2) {
+      assert targetTypeCategory.needsTypeId();
       call.addArg((new JRuntimeTypeReference(sourceInfo, program.getTypeJavaLangObject(),
           targetType)));
     }
     if (method.getParams().size() == 3) {
-     call.addArg(program.getStringLiteral(sourceInfo,
-         ((JDeclaredType) targetType).getQualifiedJsName()));
+      assert targetTypeCategory.needsPrototype();
+      call.addArg(program.getStringLiteral(sourceInfo,
+          ((JDeclaredType) targetType).getQualifiedJsName()));
     }
+
+    assert call.getArgs().size() == method.getParams().size() : "Method "
+        +  JjsUtils.getReadableDescription(method) + " is expected to have "
+        + call.getArgs().size() + " parameters but has " + method.getParams().size();
     return call;
   }
 

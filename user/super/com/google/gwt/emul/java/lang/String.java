@@ -112,7 +112,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public static native String valueOf(char x) /*-{
-    return String.fromCharCode(x);
+    return $wnd.String.fromCharCode(x);
   }-*/;
 
   public static String valueOf(char x[], int offset, int count) {
@@ -132,7 +132,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   private static native String fromCharCode(Object array) /*-{
-    return String.fromCharCode.apply(null, array);
+    return $wnd.String.fromCharCode.apply(null, array);
   }-*/;
 
   public static String valueOf(char[] x) {
@@ -558,7 +558,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   private native String fromCharCode(char to) /*-{
-    return String.fromCharCode(to);
+    return $wnd.String.fromCharCode(to);
   }-*/;
 
   public String replace(CharSequence from, CharSequence to) {

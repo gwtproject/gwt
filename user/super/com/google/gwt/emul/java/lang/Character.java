@@ -228,7 +228,7 @@ public final class Character implements Comparable<Character>, Serializable {
    * TODO: correct Unicode handling.
    */
   public static native boolean isDigit(char c) /*-{
-    return (null != String.fromCharCode(c).match(/\d/));
+    return (null != $wnd.String.fromCharCode(c).match(/\d/));
   }-*/;
 
   public static boolean isHighSurrogate(char ch) {
@@ -239,14 +239,14 @@ public final class Character implements Comparable<Character>, Serializable {
    * TODO: correct Unicode handling.
    */
   public static native boolean isLetter(char c) /*-{
-    return (null != String.fromCharCode(c).match(/[A-Z]/i));
+    return (null != $wnd.String.fromCharCode(c).match(/[A-Z]/i));
   }-*/;
 
   /*
    * TODO: correct Unicode handling.
    */
   public static native boolean isLetterOrDigit(char c) /*-{
-    return (null != String.fromCharCode(c).match(/[A-Z\d]/i));
+    return (null != $wnd.String.fromCharCode(c).match(/[A-Z\d]/i));
   }-*/;
 
   /*
@@ -288,7 +288,7 @@ public final class Character implements Comparable<Character>, Serializable {
   // The regex would just be /\s/, but browsers handle non-breaking spaces inconsistently. Also,
   // the Java definition includes separators.
   public static native boolean isWhitespace(int codePoint) /*-{
-    return (null !== String.fromCharCode(codePoint).match(
+    return (null !== $wnd.String.fromCharCode(codePoint).match(
       /[\t-\r \u1680\u180E\u2000-\u2006\u2008-\u200A\u2028\u2029\u205F\u3000\uFEFF]|[\x1C-\x1F]/
     ));
   }-*/;
@@ -382,7 +382,7 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static native char toLowerCase(char c) /*-{
-    return String.fromCharCode(c).toLowerCase().charCodeAt(0);
+    return $wnd.String.fromCharCode(c).toLowerCase().charCodeAt(0);
   }-*/;
 
   public static String toString(char x) {
@@ -390,7 +390,7 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static native char toUpperCase(char c) /*-{
-    return String.fromCharCode(c).toUpperCase().charCodeAt(0);
+    return $wnd.String.fromCharCode(c).toUpperCase().charCodeAt(0);
   }-*/;
 
   public static Character valueOf(char c) {

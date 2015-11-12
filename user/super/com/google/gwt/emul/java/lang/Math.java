@@ -63,19 +63,19 @@ public final class Math {
   }
 
   public static native double acos(double x) /*-{
-    return Math.acos(x);
+    return $wnd.Math.acos(x);
   }-*/;
 
   public static native double asin(double x) /*-{
-    return Math.asin(x);
+    return $wnd.Math.asin(x);
   }-*/;
 
   public static native double atan(double x) /*-{
-    return Math.atan(x);
+    return $wnd.Math.atan(x);
   }-*/;
 
   public static native double atan2(double y, double x) /*-{
-    return Math.atan2(y, x);
+    return $wnd.Math.atan2(y, x);
   }-*/;
 
   public static double cbrt(double x) {
@@ -83,7 +83,7 @@ public final class Math {
   }
 
   public static native double ceil(double x) /*-{
-    return Math.ceil(x);
+    return $wnd.Math.ceil(x);
   }-*/;
 
   public static double copySign(double magnitude, double sign) {
@@ -99,7 +99,7 @@ public final class Math {
   }
 
   public static native double cos(double x) /*-{
-    return Math.cos(x);
+    return $wnd.Math.cos(x);
   }-*/;
 
   public static double cosh(double x) {
@@ -107,7 +107,7 @@ public final class Math {
   }
 
   public static native double exp(double x) /*-{
-    return Math.exp(x);
+    return $wnd.Math.exp(x);
   }-*/;
 
   public static double expm1(double d) {
@@ -124,7 +124,7 @@ public final class Math {
   }
 
   public static native double floor(double x) /*-{
-    return Math.floor(x);
+    return $wnd.Math.floor(x);
   }-*/;
 
   public static double hypot(double x, double y) {
@@ -132,11 +132,11 @@ public final class Math {
   }
 
   public static native double log(double x) /*-{
-    return Math.log(x);
+    return $wnd.Math.log(x);
   }-*/;
 
   public static native double log10(double x) /*-{
-    return Math.log(x) * Math.LOG10E;
+    return $wnd.Math.log(x) * $wnd.Math.LOG10E;
   }-*/;
 
   public static double log1p(double x) {
@@ -176,11 +176,11 @@ public final class Math {
   }
 
   public static native double pow(double x, double exp) /*-{
-    return Math.pow(x, exp);
+    return $wnd.Math.pow(x, exp);
   }-*/;
 
   public static native double random() /*-{
-    return Math.random();
+    return $wnd.Math.random();
   }-*/;
 
   public static double rint(double d) {
@@ -253,7 +253,7 @@ public final class Math {
   }
 
   public static native double sin(double x) /*-{
-    return Math.sin(x);
+    return $wnd.Math.sin(x);
   }-*/;
 
   public static double sinh(double x) {
@@ -261,11 +261,11 @@ public final class Math {
   }
 
   public static native double sqrt(double x) /*-{
-    return Math.sqrt(x);
+    return $wnd.Math.sqrt(x);
   }-*/;
 
   public static native double tan(double x) /*-{
-    return Math.tan(x);
+    return $wnd.Math.tan(x);
   }-*/;
 
   public static double tanh(double x) {
@@ -288,6 +288,6 @@ public final class Math {
   }
 
   private static native double round0(double x) /*-{
-    return Math.round(x);
+    return $wnd.Math.round(x);
   }-*/;
 }

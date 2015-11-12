@@ -16,6 +16,24 @@
       "revId": "5d65009d83fc333d8b8c5fc558f1393b376d542e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb2e9f8f_114e2c14",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsToStringGenerationVisitor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-12T23:30:13Z",
+      "side": 1,
+      "message": "This only changed how JsStringLiterals are handled. {1.2:\"foo\" } is allowed and there is a test (in one of the files modified by this patch) what shows it gets translated correctly.",
+      "parentUuid": "16c50ace_ff6278ba",
+      "revId": "5d65009d83fc333d8b8c5fc558f1393b376d542e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

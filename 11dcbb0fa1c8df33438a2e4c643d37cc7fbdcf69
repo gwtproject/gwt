@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "563ea29c_94634cc2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-13T18:15:23Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "11dcbb0fa1c8df33438a2e4c643d37cc7fbdcf69",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

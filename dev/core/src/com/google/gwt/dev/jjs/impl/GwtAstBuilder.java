@@ -1845,7 +1845,9 @@ public class GwtAstBuilder {
         if (!haveReceiver && !referredMethod.isStatic() && instance == null &&
             samMethod.getParams().size() == referredMethod.getParams().size() + 1) {
           // the instance qualifier is the first parameter in this case.
-          instance = new JParameterRef(info, paramIt.next());
+          // Needs to be cast the actual type due to generics.
+          instance = new JCastOperation(info, typeMap.get(referredMethodBinding.declaringClass),
+              new JParameterRef(info, paramIt.next()));
         }
         JMethodCall samCall = null;
 
@@ -3649,6 +3651,9 @@ public class GwtAstBuilder {
    * Reflective access to {@link ForeachStatement#collectionElementType}.
    */
   private static final Field collectionElementTypeField;
+  /**
+   * Reflective access to {@link ReferenceExpression#haveReceiver}.
+   */
   private static final Field haveReceiverField;
 
   private static final TypeBinding[] NO_TYPES = new TypeBinding[0];

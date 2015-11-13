@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5b532b27_a96819c8",
+        "filename": "user/src/com/google/gwt/user/client/ui/DirectionalTextHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-13T08:46:43Z",
+      "side": 1,
+      "message": "Can you update the comment to remove the details and point to new methods and encourage their use instead? (Please don\u0027t deprecate the method.)",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 46
+      },
+      "revId": "182d3bbdeb9d4c5e950dad372ab019868953e37c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b637de6a_81b03a04",
         "filename": "user/test/com/google/gwt/user/client/ui/DirectionalTextHelperTest.java",
         "patchSetId": 2
@@ -37,6 +60,30 @@
       "side": 1,
       "message": "No. I want to check if assigning HTML changes also the text.",
       "parentUuid": "b637de6a_81b03a04",
+      "range": {
+        "startLine": 127,
+        "startChar": 48,
+        "endLine": 127,
+        "endChar": 57
+      },
+      "revId": "182d3bbdeb9d4c5e950dad372ab019868953e37c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b532b27_89655df2",
+        "filename": "user/test/com/google/gwt/user/client/ui/DirectionalTextHelperTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-13T08:46:43Z",
+      "side": 1,
+      "message": "The update of innerText via innerHtml is actually the contract of Div element not the DirectionTextHelper. Because of that asserting the state via getHtml seems more appropriate and also it will be less surprising for the reader.",
+      "parentUuid": "b686fe2b_584b495d",
       "range": {
         "startLine": 127,
         "startChar": 48,

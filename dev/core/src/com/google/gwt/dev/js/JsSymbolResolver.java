@@ -15,9 +15,11 @@
  */
 package com.google.gwt.dev.js;
 
+import com.google.gwt.dev.js.ast.JsContext;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsProgram;
+import com.google.gwt.dev.js.ast.JsPropertyInitializer;
 
 /**
  * Resolves any unresolved JsNameRefs.
@@ -30,21 +32,25 @@ public class JsSymbolResolver {
   private class JsResolveSymbolsVisitor extends JsAbstractSymbolResolver {
 
     @Override
-    protected void resolve(JsNameRef x) {
-      JsName name;
+    protected void resolveQualifiedName(JsNameRef x) {
       String ident = x.getIdent();
-      if (x.getQualifier() == null) {
-        name = getScope().findExistingName(ident);
-        if (name == null) {
-          // No clue what this is; create a new unobfuscatable name
-          name = program.getScope().declareUnobfuscatableName(ident);
-        }
-      } else {
-        name = program.getObjectScope().findExistingName(ident);
-        if (name == null) {
-          // No clue what this is; create a new unobfuscatable name
-          name = program.getObjectScope().declareUnobfuscatableName(ident);
-        }
+      JsName name = program.getObjectScope().findExistingName(ident);
+      if (name == null) {
+        // No clue what this is; create a new unobfuscatable name
+        name = program.getObjectScope().declareUnobfuscatableName(ident);
+      } else if (name.isObfuscatable()) {
+        name.setUnobfuscatable();
+      }
+      x.resolve(name);
+    }
+
+    @Override
+    protected void resolveUnqualifiedName(JsNameRef x) {
+      String ident = x.getIdent();
+      JsName name = getScope().findExistingName(ident);
+      if (name == null) {
+        // No clue what this is; create a new unobfuscatable name
+        name = program.getScope().declareUnobfuscatableName(ident);
       }
       x.resolve(name);
     }

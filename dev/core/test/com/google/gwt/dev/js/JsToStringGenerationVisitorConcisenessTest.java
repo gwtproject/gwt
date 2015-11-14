@@ -53,12 +53,12 @@ public class JsToStringGenerationVisitorConcisenessTest extends TestCase {
   }
 
   public void testObjectLiteralAssignment() throws Exception {
-    assertEquals("var x={'a':b=2,'c':d}", parse("var x = {a : (b = 2), c : d}"));
+    assertEquals("var x={a:b=2,c:d}", parse("var x = {a : (b = 2), c : d}"));
   }
 
   public void testObjectLiteralConditional() throws Exception {
     // the parentheses are not required around the conditional
-    assertEquals("var x={'a':b?c:d,'e':f}",
+    assertEquals("var x={a:b?c:d,e:f}",
         parse("var x = {a : (b ? c : d), e : f}"));
   }
 
@@ -67,6 +67,7 @@ public class JsToStringGenerationVisitorConcisenessTest extends TestCase {
     // literals
     assertEquals("var x={1:'b'}", parse("var x = {1 : 'b'}"));
     assertEquals("var x={'$a_':'b'}", parse("var x = {'$a_' : 'b'}"));
+    assertEquals("var x={$a_:'b'}", parse("var x = {$a_ : 'b'}"));
     assertEquals("var x={1.2:'b'}", parse("var x = {1.2 : 'b'}"));
   }
 

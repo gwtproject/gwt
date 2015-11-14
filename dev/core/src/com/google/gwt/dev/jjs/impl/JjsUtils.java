@@ -507,14 +507,14 @@ public class JjsUtils {
         if (values.length == 1) {
           return new JsNumberLiteral(literal.getSourceInfo(), ((JLongLiteral) literal).getValue());
         }
-        JsObjectLiteral objectLiteral = new JsObjectLiteral(sourceInfo);
-        objectLiteral.setInternable();
+        JsObjectLiteral.Builder objectLiteralBuilder = JsObjectLiteral.builder(sourceInfo)
+            .setInternable();
 
         assert values.length == names.length;
         for (int i = 0; i < names.length; i++) {
-          addPropertyToObject(sourceInfo, names[i], values[i], objectLiteral);
+          addPropertyToObject(sourceInfo, names[i], values[i], objectLiteralBuilder);
         }
-        return objectLiteral;
+        return objectLiteralBuilder.build();
       }
     },
     STRING_LITERAL_TRANSLATOR() {
@@ -549,10 +549,10 @@ public class JjsUtils {
   }
 
   private static void addPropertyToObject(SourceInfo sourceInfo, JsName propertyName,
-      long propertyValue, JsObjectLiteral objectLiteral) {
+      long propertyValue, JsObjectLiteral.Builder objectLiteralBulider) {
     JsExpression label = propertyName.makeRef(sourceInfo);
     JsExpression value = new JsNumberLiteral(sourceInfo, propertyValue);
-    objectLiteral.addProperty(sourceInfo, label, value);
+    objectLiteralBulider.add(label, value);
   }
 
   private static JMethod createEmptyMethodFromExample(

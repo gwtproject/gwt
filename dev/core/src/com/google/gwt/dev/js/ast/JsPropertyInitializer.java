@@ -43,8 +43,9 @@ public class JsPropertyInitializer extends JsNode {
     if (that == null || that.getClass() != this.getClass()) {
       return false;
     }
-    return labelExpr.equals(((JsPropertyInitializer) that).labelExpr) &&
-        valueExpr.equals(((JsPropertyInitializer) that).valueExpr);
+    JsPropertyInitializer thatPropertyInitializer = (JsPropertyInitializer) that;
+    return areLabelsEqual(labelExpr, thatPropertyInitializer.labelExpr) &&
+        valueExpr.equals(thatPropertyInitializer.valueExpr);
   }
 
   @Override
@@ -62,7 +63,7 @@ public class JsPropertyInitializer extends JsNode {
 
   @Override
   public int hashCode() {
-    return labelExpr.hashCode() + 17 * valueExpr.hashCode();
+    return labelExpr.toString().hashCode() + 17 * valueExpr.hashCode();
   }
 
   public boolean hasSideEffects() {
@@ -86,5 +87,18 @@ public class JsPropertyInitializer extends JsNode {
       valueExpr = v.accept(valueExpr);
     }
     v.endVisit(this, ctx);
+  }
+
+  private static boolean areLabelsEqual(JsExpression thisLabel, JsExpression thatLabel) {
+    if (thisLabel instanceof JsNameRef && thatLabel instanceof JsNameRef) {
+      JsNameRef thisJsNameRef = (JsNameRef) thisLabel;
+      JsNameRef thatJsNameRef = (JsNameRef) thatLabel;
+      assert thatJsNameRef.getQualifier() == null && thisJsNameRef.getQualifier() == null;
+      JsName thisJsName = thisJsNameRef.getName();
+      JsName thatJsName = thatJsNameRef.getName();
+      assert !thisJsName.isObfuscatable() && !thatJsName.isObfuscatable();
+      return thisJsName.getIdent().equals(thatJsName.getIdent());
+    }
+    return thisLabel.equals(thatLabel);
   }
 }

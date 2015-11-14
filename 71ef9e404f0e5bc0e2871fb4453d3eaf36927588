@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "563ea29c_77f26293",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-14T18:54:21Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "71ef9e404f0e5bc0e2871fb4453d3eaf36927588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "563ea29c_97fd0e63",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsSymbolResolver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-14T18:54:21Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsContext.",
+      "revId": "71ef9e404f0e5bc0e2871fb4453d3eaf36927588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "563ea29c_b7020a20",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsSymbolResolver.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-14T18:54:21Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsPropertyInitializer.",
+      "revId": "71ef9e404f0e5bc0e2871fb4453d3eaf36927588",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

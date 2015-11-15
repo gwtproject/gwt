@@ -1,5 +1,7 @@
 ## GWT
 
+[![Join the chat at https://gitter.im/gwtproject/gwt](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gwtproject/gwt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
   GWT is the official open source project for GWT releases 2.5 and onwards.
 
   In this document you have some quick instructions to build the SDK from

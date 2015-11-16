@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b6aafda_d7367c29",
+        "filename": "user/src/com/google/gwt/user/client/ui/DirectionalTextHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 7895
+      },
+      "writtenOn": "2015-11-16T22:19:32Z",
+      "side": 1,
+      "message": "Would it be preferable to consume SafeHtml content here?",
+      "range": {
+        "startLine": 216,
+        "startChar": 14,
+        "endLine": 216,
+        "endChar": 37
+      },
+      "revId": "a795c3af1ac6bbfd3e93d1764673c5d35fde5a1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

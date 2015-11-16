@@ -54,16 +54,7 @@ import com.google.gwt.user.rebind.rpc.testcases.client.SubclassUsedInArray;
 import junit.framework.TestCase;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Used to test the {@link SerializableTypeOracleBuilder}.
@@ -169,7 +160,7 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
   private static void addICRSE(Set<Resource> resources) {
     StringBuffer code = new StringBuffer();
     code.append("package com.google.gwt.user.client.rpc;\n");
-    code.append("public class IncompatibleRemoteServiceException extends Throwable {\n");
+    code.append("public class IncompatibleRemoteServiceException extends Throwable implements IsSerializable {\n");
     code.append("}\n");
     resources.add(new StaticJavaResource(
         "com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException", code));
@@ -2420,6 +2411,108 @@ public class SerializableTypeOracleBuilderTest extends TestCase {
     assertInstantiable(so, b);
     assertInstantiable(so, c);
     assertNotInstantiableOrFieldSerializable(so, a.getRawType());
+  }
+
+  public void testPendingInstantiable() throws NotFoundException, UnableToCompleteException {
+    // When running the GwtRandomBug test suite attached to https://github.com/gwtproject/gwt/issues/7247#issue-87058425
+    // computeTypeInstantiability() is called in the this order:
+    //     Level1, Root, Parameter, Level2, AnInterface
+    // Use LinkedHashSet to mimic this order
+    // Unfortunately this test case still visits them in this order:
+    //     Root, Level1, Level2, Parameter, AnInterface
+    // this may be why this test passes without the fixed SerializableTypeOracleBuilder
+    Set<Resource> resources = new LinkedHashSet<>();
+    addStandardClasses(resources);
+
+    {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.stibo.gwtrandombug.client.components;\n");
+      code.append("import com.stibo.gwtrandombug.client.AnInterface;\n");
+      code.append("public class Level1 implements AnInterface {\n");
+      code.append("    private Level2 container;\n");
+      code.append("}");
+      resources.add(new StaticJavaResource("com.stibo.gwtrandombug.client.components.Level1", code));
+    }
+
+    {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.stibo.gwtrandombug.client.components;\n");
+      code.append("import com.stibo.gwtrandombug.client.AnInterface;\n");
+      code.append("import com.google.gwt.user.client.rpc.IsSerializable;\n");
+      code.append("public class Root implements IsSerializable {\n");
+      code.append("    private Level1 three;\n");
+      code.append("    private AnInterface anInterface;\n");
+      code.append("}"
+      );
+      resources.add(new StaticJavaResource("com.stibo.gwtrandombug.client.components.Root", code));
+    }
+
+    {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.stibo.gwtrandombug.client;\n");
+      code.append("import java.io.Serializable;\n");
+      code.append("public class Parameter<E extends Serializable> implements Serializable {\n");
+      code.append("    private E e;\n");
+      code.append("    public Parameter() {\n");
+      code.append("    }\n");
+      code.append("    public Parameter(E e) {\n");
+      code.append("        this.e = e;\n");
+      code.append("    }\n");
+      code.append("    public E getE() {\n");
+      code.append("        return e;\n");
+      code.append("    }\n");
+      code.append("}");
+      resources.add(new StaticJavaResource("com.stibo.gwtrandombug.client.Parameter", code));
+    }
+
+    {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.stibo.gwtrandombug.client.components;\n");
+      code.append("import com.google.gwt.user.client.rpc.IsSerializable;\n");
+      code.append("import com.stibo.gwtrandombug.client.AnInterface;\n");
+      code.append("import com.stibo.gwtrandombug.client.Parameter;\n");
+      code.append("public class Level2 implements IsSerializable {\n");
+      code.append("    private Parameter parameter;\n");
+      code.append("    private AnInterface anInterface;\n");
+      code.append("}");
+      resources.add(new StaticJavaResource("com.stibo.gwtrandombug.client.components.Level2", code));
+    }
+
+    {
+      StringBuilder code = new StringBuilder();
+      code.append("package com.stibo.gwtrandombug.client;\n");
+      code.append("import com.google.gwt.user.client.rpc.IsSerializable;\n");
+      code.append("public interface AnInterface extends IsSerializable {\n");
+      code.append("}");
+      resources.add(new StaticJavaResource("com.stibo.gwtrandombug.client.AnInterface", code));
+    }
+
+    TreeLogger logger = createLogger();
+    TypeOracle to = TypeOracleTestingUtils.buildTypeOracle(logger, resources);
+    SerializableTypeOracleBuilder sob = createSerializableTypeOracleBuilder(logger, to);
+
+    JClassType level1 = to.getType("com.stibo.gwtrandombug.client.components.Level1");
+    JClassType root = to.getType("com.stibo.gwtrandombug.client.components.Root");
+    JClassType parameter = to.getType("com.stibo.gwtrandombug.client.Parameter");
+    JClassType level2 = to.getType("com.stibo.gwtrandombug.client.components.Level2");
+
+    JClassType string = to.getType("java.lang.String");
+    JClassType number = to.getType("java.lang.Number");
+    JClassType irse = to.getType("com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException");
+
+    sob.addRootType(logger, string);
+    sob.addRootType(logger, irse);
+//    sob.addRootType(logger, to.getType("com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException"));
+//    sob.addRootType(logger, to.getType("com.google.gwt.user.client.rpc.XsrfToken"));
+//    sob.addRootType(logger, to.getType("com.google.gwt.user.client.rpc.RpcTokenException"));
+    sob.addRootType(logger, root);    
+    SerializableTypeOracle so = sob.build(logger);
+
+    assertInstantiable(so, root);
+    assertInstantiable(so, level1);
+    assertInstantiable(so, level2);
+
+    assertSerializableTypes(so, irse, level1, root, parameter, level2, string, number);
   }
 
   /**

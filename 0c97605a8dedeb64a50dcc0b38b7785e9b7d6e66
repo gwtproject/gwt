@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96865a95_09e81133",
+        "filename": "user/test/com/google/gwt/user/rebind/rpc/SerializableTypeOracleBuilderTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2425,
+      "author": {
+        "id": 5600
+      },
+      "writtenOn": "2015-11-16T21:43:07Z",
+      "side": 1,
+      "message": "Note that this currently passes - even without the fix to SerializableTypeOracleBuilder. Need suggestions for how I can make it behave closer to the original test suite attached to the issue tracker",
+      "revId": "0c97605a8dedeb64a50dcc0b38b7785e9b7d6e66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

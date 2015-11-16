@@ -16,6 +16,24 @@
       "revId": "0c97605a8dedeb64a50dcc0b38b7785e9b7d6e66",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96865a95_49ca19c8",
+        "filename": "user/test/com/google/gwt/user/rebind/rpc/SerializableTypeOracleBuilderTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2425,
+      "author": {
+        "id": 5600
+      },
+      "writtenOn": "2015-11-16T21:49:41Z",
+      "side": 1,
+      "message": "Passes is the wrong word. It does fail but it correctly marks Root, Level1, Level2 serializable. In the original test suite Level2 is not marked serializable.",
+      "parentUuid": "96865a95_09e81133",
+      "revId": "0c97605a8dedeb64a50dcc0b38b7785e9b7d6e66",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

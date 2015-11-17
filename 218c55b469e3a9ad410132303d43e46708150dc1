@@ -25,6 +25,46 @@
     },
     {
       "key": {
+        "uuid": "7b6aafda_5d3a8b19",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-17T03:10:31Z",
+      "side": 1,
+      "message": "Also see the items from the todo list:\n\n\"To be updated for new jsinterop semantics\n- instanceOfJsPrototype needs to be updated to not look for type id\n- make sure we don\u0027t record native on type maps (see usages of castSucceedsTriviallyJsoSemantics in Castability)\n- See program.typeOracle.castSucceedsTrivially in MethodInliner\"",
+      "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_bdff2781",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-17T03:10:31Z",
+      "side": 1,
+      "message": "You missed this one and all related code.",
+      "range": {
+        "startLine": 395,
+        "startChar": 0,
+        "endLine": 395,
+        "endChar": 34
+      },
+      "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db6d5bee_dab46543",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
         "patchSetId": 1

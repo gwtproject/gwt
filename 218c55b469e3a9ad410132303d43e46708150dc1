@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7b6aafda_a0d4e013",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-17T22:47:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b6aafda_5ad851a3",
+      "range": {
+        "startLine": 50,
+        "startChar": 12,
+        "endLine": 50,
+        "endChar": 38
+      },
+      "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b6aafda_5d3a8b19",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "7b6aafda_80f19cc5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-17T22:47:02Z",
+      "side": 1,
+      "message": "* instanceOfJsPrototype, that is already done.\n* make sure we don\u0027t record native on type map, doe\n* method inliner, I think it is correct as it is.",
+      "parentUuid": "7b6aafda_5d3a8b19",
+      "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b6aafda_bdff2781",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2015-11-17T03:10:31Z",
       "side": 1,
       "message": "You missed this one and all related code.",
+      "range": {
+        "startLine": 395,
+        "startChar": 0,
+        "endLine": 395,
+        "endChar": 34
+      },
+      "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_e04df8be",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-17T22:47:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b6aafda_bdff2781",
       "range": {
         "startLine": 395,
         "startChar": 0,
@@ -100,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "7b6aafda_004b4caa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-17T22:47:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b6aafda_9dd4a314",
+      "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b6aafda_1df653bc",
         "filename": "user/src/com/google/gwt/core/client/js/JsExport.java",
         "patchSetId": 1
@@ -111,6 +195,24 @@
       "writtenOn": "2015-11-17T02:53:09Z",
       "side": 1,
       "message": "Did you miss the other annotations in this package?",
+      "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_a057004f",
+        "filename": "user/src/com/google/gwt/core/client/js/JsExport.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-17T22:47:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b6aafda_1df653bc",
       "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

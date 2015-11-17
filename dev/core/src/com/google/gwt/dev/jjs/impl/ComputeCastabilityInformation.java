@@ -42,7 +42,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Builds minimal cast maps to cover cast and instanceof operations. Depends
@@ -163,12 +162,9 @@ public class ComputeCastabilityInformation {
       recordCast(x.getTestType(), x.getExpr());
     }
 
-    private boolean castSucceedsTriviallyJsoSemantics(
-        JReferenceType fromType, JReferenceType toType) {
-      // TODO(rluble): this should be the semantics of castSucceedsTrivially; no need for two
-      // different semantics. However changing JTypeOracle.castSucceedsTrivially affects how
-      // decisions are made to remove casts and change return types, which in turn affects
-      // how we compute liveness of JSO type.
+    // Whether a cast/instanceof can succeed between fromType and toType.
+    private boolean castSucceedsAtRuntime(JReferenceType fromType, JReferenceType toType) {
+
       fromType = fromType.getUnderlyingType();
       toType = toType.getUnderlyingType();
 
@@ -213,14 +209,15 @@ public class ComputeCastabilityInformation {
       }
 
       // Find all possible query types which I can satisfy
-      Set<JReferenceType> castableTypes = new TreeSet<JReferenceType>(HasName.BY_NAME_COMPARATOR);
+      Set<JReferenceType> castableTypes = Sets.newTreeSet(HasName.BY_NAME_COMPARATOR);
 
       /*
        * NOTE: non-deterministic iteration over HashSet and HashMap. Okay
        * because we're sorting the results.
        */
       for (JReferenceType castTargetType : castSourceTypesPerCastTargetType.keySet()) {
-        if (!castSucceedsTriviallyJsoSemantics(type, castTargetType)) {
+        if (!castSucceedsAtRuntime(type, castTargetType)) {
+          // Cannot cast type to castTargetType, hence no entry in the cast map.
           continue;
         }
 
@@ -231,8 +228,8 @@ public class ComputeCastabilityInformation {
          * with JSO cross-casts anymore.
          */
         for (JReferenceType castSourceType : castSourceTypes) {
-          if (castSucceedsTriviallyJsoSemantics(type, castSourceType) ||
-              castTargetType.isJsoType()) {
+          if (castSucceedsAtRuntime(type, castSourceType)
+              && !JTypeOracle.isNoOpCast(castTargetType)) {
             boolean isTrivialCast = castTargetType == program.getTypeJavaLangObject()
                 || castTargetType == program.getJavaScriptObject();
             if (recordTrivialCasts || !isTrivialCast) {

@@ -250,17 +250,23 @@ public class ImplementCastsAndTypeChecks {
     }
 
     call.addArg(targetExpression);
-    if (method.getParams().size() >= 2) {
+    assert method.getParams().size() <= 2;
+    if (method.getParams().size() != 2) {
+      return call;
+    }
+
+    if (targetTypeCategory.requiresTypeId()) {
       call.addArg((new JRuntimeTypeReference(sourceInfo, program.getTypeJavaLangObject(),
           targetType)));
-    }
-    if (method.getParams().size() == 3) {
+    } else if (targetTypeCategory.requiresJsConstructor()) {
       JDeclaredType declaredType = (JDeclaredType) targetType;
 
       JMethod jsConstructor = JjsUtils.getJsNativeConstructorOrNull(declaredType);
       assert jsConstructor != null &&  declaredType.isJsNative();
       call.addArg(new JsniMethodRef(sourceInfo, declaredType.getQualifiedJsName(), jsConstructor,
           program.getJavaScriptObject()));
+    } else {
+      assert false;
     }
     return call;
   }

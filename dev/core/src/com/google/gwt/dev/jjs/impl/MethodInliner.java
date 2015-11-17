@@ -659,5 +659,5 @@ public class MethodInliner {
     return result;
   }
 
-  private enum InlineResult { BLACKLIST, DO_NOT_BLACKLIST}
+  private enum InlineResult { BLACKLIST, DO_NOT_BLACKLIST }
 }

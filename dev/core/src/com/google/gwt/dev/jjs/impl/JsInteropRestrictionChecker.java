@@ -343,6 +343,12 @@ public class JsInteropRestrictionChecker {
   }
 
   private void checkMemberOfNativeJsType(JMember member) {
+    if (member instanceof JMethod && isForbiddenJsMethod((JMethod) member)) {
+      logError(member, "Method %s is not allowed in a native JsType.",
+          getMemberDescription(member));
+      return;
+    }
+
     if (member instanceof JMethod && ((JMethod) member).isJsniMethod()) {
       logError(member, "JSNI method %s is not allowed in a native JsType.",
           getMemberDescription(member));
@@ -383,6 +389,18 @@ public class JsInteropRestrictionChecker {
             getMemberDescription(member));
         break;
     }
+  }
+
+  private boolean isForbiddenJsMethod(JMethod method) {
+    for (JMethod objectMethod : jprogram.getTypeJavaLangObject().getMethods()) {
+      if (method.isSynthetic()) {
+        continue;
+      }
+      if (method.getSignature().equals(objectMethod.getSignature())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private void checkMethodParameters(JMethod method) {

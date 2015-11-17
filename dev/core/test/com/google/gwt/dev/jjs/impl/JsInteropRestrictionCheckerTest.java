@@ -1834,6 +1834,9 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  @JsIgnore public native void n();",
         "  public void o() {}",
         "  public native void p() /*-{}-*/;",
+        "  public native int hashCode();",
+        "  public native String toString();",
+        "  public native boolean equals(Object obj);",
         "}");
 
     assertBuggyFails(
@@ -1844,7 +1847,11 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "Line 9: Native JsType member 'int EntryPoint.Buggy.x' cannot have @JsIgnore.",
         "Line 10: Native JsType member 'void EntryPoint.Buggy.n()' cannot have @JsIgnore.",
         "Line 11: Native JsType method 'void EntryPoint.Buggy.o()' should be native or abstract.",
-        "Line 12: JSNI method 'void EntryPoint.Buggy.p()' is not allowed in a native JsType.");
+        "Line 12: JSNI method 'void EntryPoint.Buggy.p()' is not allowed in a native JsType.",
+        "Line 13: Method 'int EntryPoint.Buggy.hashCode()' is not allowed in a native JsType.",
+        "Line 14: Method 'String EntryPoint.Buggy.toString()' is not allowed in a native JsType.",
+        "Line 15: Method 'boolean EntryPoint.Buggy.equals(Object)' is not allowed in a native "
+            + "JsType.");
   }
 
   public void testNativeMethodOnJsTypeSucceeds() throws Exception {

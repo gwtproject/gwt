@@ -1084,6 +1084,10 @@ public class GenerateJavaScriptAST {
     @Override
     public JsNameRef transformJsniMethodRef(JsniMethodRef jsniMethodRef) {
       JMethod method = jsniMethodRef.getTarget();
+      if (method.isJsNative()) {
+        // Construct Constructor.prototype.jsname or Constructor.
+        return createJsQualifier(method.getQualifiedJsName(), jsniMethodRef.getSourceInfo());
+      }
       return names.get(method).makeRef(jsniMethodRef.getSourceInfo());
     }
 

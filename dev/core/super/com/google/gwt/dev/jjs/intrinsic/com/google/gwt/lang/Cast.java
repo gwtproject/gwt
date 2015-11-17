@@ -127,7 +127,7 @@ final class Cast {
   /**
    * A dynamic cast that optionally checks for JsType prototypes.
    */
-  static Object castToNative(Object src, String jsType) {
+  static Object castToNative(Object src, JavaScriptObject jsType) {
     checkType(src == null ||  jsinstanceOf(src, jsType));
     return src;
   }
@@ -162,7 +162,7 @@ final class Cast {
     return isArray(src);
   }
 
-  static boolean instanceOfNative(Object src, String jsType) {
+  static boolean instanceOfNative(Object src, JavaScriptObject jsType) {
     return jsinstanceOf(src, jsType);
   }
 
@@ -229,19 +229,11 @@ final class Cast {
   }-*/;
 
   /**
-   * Determine if object is an instanceof jsType regardless of window or frame.
+   * Determine if object is an instanceof jsType.
    */
   @HasNoSideEffects
-  private static native boolean jsinstanceOf(Object obj, String jsTypeStr) /*-{
-    if (!obj) {
-        return false;
-    }
-
-    var jsType = $wnd;
-    for (var i = 0, parts = jsTypeStr.split("."), l = parts.length; i < l ; i++) {
-      jsType = jsType && jsType[parts[i]];
-    }
-    return jsType && obj instanceof jsType;
+  private static native boolean jsinstanceOf(Object obj, JavaScriptObject jsType) /*-{
+    return (obj instanceof jsType);
   }-*/;
 
   static native boolean jsNotEquals(Object a, Object b) /*-{

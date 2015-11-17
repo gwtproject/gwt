@@ -38,15 +38,15 @@ public enum TypeCategory {
    * initialize to zero vs. null).
    */
 
-  TYPE_JAVA_OBJECT,
-  TYPE_JAVA_OBJECT_OR_JSO("AllowJso"),
+  TYPE_JAVA_OBJECT("", true, false),
+  TYPE_JAVA_OBJECT_OR_JSO("AllowJso", true, false),
   TYPE_JSO("Jso"),
   TYPE_NATIVE_ARRAY("NativeArray"),
-  TYPE_JAVA_LANG_OBJECT("AllowJso"),
+  TYPE_JAVA_LANG_OBJECT("AllowJso", true, false),
   TYPE_JAVA_LANG_STRING("String"),
   TYPE_JAVA_LANG_DOUBLE("Double"),
   TYPE_JAVA_LANG_BOOLEAN("Boolean"),
-  TYPE_JS_NATIVE("Native"),
+  TYPE_JS_NATIVE("Native", false, true),
   TYPE_JS_UNKNOWN_NATIVE("UnknownNative"),
   TYPE_JS_FUNCTION("Function"),
   TYPE_PRIMITIVE_LONG,
@@ -54,19 +54,36 @@ public enum TypeCategory {
   TYPE_PRIMITIVE_BOOLEAN;
 
   private final String castInstanceOfQualifier;
+  private final boolean requiresTypeId;
+  private final boolean requiresConstructor;
+
 
   TypeCategory() {
-    this("");
+    this(null, false, false);
   }
 
   TypeCategory(String castInstanceOfQualifier) {
+    this(castInstanceOfQualifier, false, false);
+  }
+
+  TypeCategory(
+      String castInstanceOfQualifier, boolean requiresTypeId, boolean requiresConstructor) {
     this.castInstanceOfQualifier = castInstanceOfQualifier;
+    this.requiresTypeId = requiresTypeId;
+    this.requiresConstructor = requiresConstructor;
   }
 
   public String castInstanceOfQualifier() {
     return castInstanceOfQualifier;
   }
 
+  public boolean requiresTypeId() {
+    return requiresTypeId;
+  }
+
+  public boolean requiresJsConstructor() {
+    return requiresConstructor;
+  }
   /**
    * Determines the type category for a specific type.
    */

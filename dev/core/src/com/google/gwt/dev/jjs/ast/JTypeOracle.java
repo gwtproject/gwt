@@ -394,17 +394,12 @@ public class JTypeOracle implements Serializable {
   private StandardTypes standardTypes;
   private boolean legacyJsInterop;
 
-  public JTypeOracle(ArrayTypeCreator arrayTypeCreator, MinimalRebuildCache minimalRebuildCache) {
-    this(arrayTypeCreator, minimalRebuildCache, true);
-  }
   /**
    * Constructs a new JTypeOracle.
    */
-  public JTypeOracle(ArrayTypeCreator arrayTypeCreator, MinimalRebuildCache minimalRebuildCache,
-      boolean legacyJsInterop) {
+  public JTypeOracle(ArrayTypeCreator arrayTypeCreator, MinimalRebuildCache minimalRebuildCache) {
     this.immediateTypeRelations = minimalRebuildCache.getImmediateTypeRelations();
     this.arrayTypeCreator = arrayTypeCreator;
-    this.legacyJsInterop = legacyJsInterop;
 
     // Be ready to answer simple questions (type hierarchy) even before recompute...().
     computeExtendedTypeRelations();

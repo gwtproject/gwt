@@ -34,6 +34,8 @@ import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
+import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.EnumSet;
@@ -267,8 +269,12 @@ public class ImplementCastsAndTypeChecks {
       call.addArg((new JRuntimeTypeReference(sourceInfo, program.getTypeJavaLangObject(),
           targetType)));
     } else if (targetTypeCategory.requiresJsConstructor()) {
-       call.addArg(
-           program.getStringLiteral(sourceInfo, ((JDeclaredType) targetType).getQualifiedJsName()));
+      JDeclaredType declaredType = (JDeclaredType) targetType;
+      assert declaredType.isJsNative();
+      call.addArg(new JsniMethodRef(sourceInfo, declaredType.getQualifiedJsName(),
+          Iterables.getFirst(
+              Iterables.filter(declaredType.getMethods(), JjsPredicates.IS_JS_CONSTRUCTOR), null),
+          program.getJavaScriptObject()));
     } else {
       assert false;
     }
@@ -301,9 +307,11 @@ public class ImplementCastsAndTypeChecks {
         continue;
       }
       String instanceOfMethod = "Cast.instanceOf" + typeCategory.castInstanceOfQualifier();
-      instanceOfMethodsByTargetTypeCategory.put(typeCategory, program.getIndexedMethod(instanceOfMethod));
+      instanceOfMethodsByTargetTypeCategory.put(
+          typeCategory, program.getIndexedMethod(instanceOfMethod));
       String castMethod = "Cast.castTo" + typeCategory.castInstanceOfQualifier();
-      dynamicCastMethodsByTargetTypeCategory.put(typeCategory, program.getIndexedMethod(castMethod));
+      dynamicCastMethodsByTargetTypeCategory.put(
+          typeCategory, program.getIndexedMethod(castMethod));
     }
   }
 

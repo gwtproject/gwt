@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "7b6aafda_5ad851a3",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-17T02:53:09Z",
+      "side": 1,
+      "message": "pls move this logic to the node itself. It was here because the behavior was different in two modes.",
+      "range": {
+        "startLine": 50,
+        "startChar": 12,
+        "endLine": 50,
+        "endChar": 38
+      },
+      "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db6d5bee_dab46543",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
         "patchSetId": 1
@@ -13,6 +36,41 @@
       "writtenOn": "2015-11-17T01:16:54Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_9dd4a314",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-17T02:53:09Z",
+      "side": 1,
+      "message": "pls fix",
+      "parentUuid": "db6d5bee_dab46543",
+      "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_1df653bc",
+        "filename": "user/src/com/google/gwt/core/client/js/JsExport.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-17T02:53:09Z",
+      "side": 1,
+      "message": "Did you miss the other annotations in this package?",
       "revId": "218c55b469e3a9ad410132303d43e46708150dc1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96865a95_4938597c",
+        "filename": "user/src/com/google/gwt/user/rebind/rpc/SerializableTypeOracleBuilder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5600
+      },
+      "writtenOn": "2015-11-17T08:36:39Z",
+      "side": 1,
+      "message": "This change is enough to fix the problem in production and the original test suite. The second half of the original patch file is not needed.",
+      "revId": "ccc072d2ef3b65dbe065ed8ac689cd0b7fd38f56",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

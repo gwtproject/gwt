@@ -258,13 +258,19 @@ public class ImplementCastsAndTypeChecks {
     }
 
     call.addArg(targetExpression);
-    if (method.getParams().size() >= 2) {
+    assert method.getParams().size() <= 2;
+    if (method.getParams().size() != 2) {
+      return call;
+    }
+
+    if (targetTypeCategory.requiresTypeId()) {
       call.addArg((new JRuntimeTypeReference(sourceInfo, program.getTypeJavaLangObject(),
           targetType)));
-    }
-    if (method.getParams().size() == 3) {
-     call.addArg(program.getStringLiteral(sourceInfo,
-         ((JDeclaredType) targetType).getQualifiedJsName()));
+    } else if (targetTypeCategory.requiresJsConstructor()) {
+       call.addArg(
+           program.getStringLiteral(sourceInfo, ((JDeclaredType) targetType).getQualifiedJsName()));
+    } else {
+      assert false;
     }
     return call;
   }
@@ -290,11 +296,14 @@ public class ImplementCastsAndTypeChecks {
     this.program = program;
     this.pruneTrivialCasts = pruneTrivialCasts;
 
-    for (TypeCategory t : TypeCategory.values()) {
-      String instanceOfMethod = "Cast.instanceOf" + t.castInstanceOfQualifier();
-      instanceOfMethodsByTargetTypeCategory.put(t, program.getIndexedMethod(instanceOfMethod));
-      String castMethod = "Cast.castTo" + t.castInstanceOfQualifier();
-      dynamicCastMethodsByTargetTypeCategory.put(t, program.getIndexedMethod(castMethod));
+    for (TypeCategory typeCategory : TypeCategory.values()) {
+      if (typeCategory.castInstanceOfQualifier() == null) {
+        continue;
+      }
+      String instanceOfMethod = "Cast.instanceOf" + typeCategory.castInstanceOfQualifier();
+      instanceOfMethodsByTargetTypeCategory.put(typeCategory, program.getIndexedMethod(instanceOfMethod));
+      String castMethod = "Cast.castTo" + typeCategory.castInstanceOfQualifier();
+      dynamicCastMethodsByTargetTypeCategory.put(typeCategory, program.getIndexedMethod(castMethod));
     }
   }
 

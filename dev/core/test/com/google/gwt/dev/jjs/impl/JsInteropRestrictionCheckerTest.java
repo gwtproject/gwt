@@ -1963,8 +1963,11 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetClassDecl(
         "@JsType(isNative=true) public static class Super {",
+        "  public native int hashCode();",
         "}",
         "@JsType(isNative=true) public static class Buggy extends Super {",
+        "  public native String toString();",
+        "  public native boolean equals(Object obj);",
         "}");
 
     assertBuggySucceeds();
@@ -1992,11 +1995,44 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "Line 8: Native JsType 'EntryPoint.Buggy' cannot have initializer.",
         "Line 9: Native JsType field 'int EntryPoint.Buggy.s' cannot have initializer.",
         "Line 10: Native JsType field 'int EntryPoint.Buggy.f' cannot have initializer.",
-        "Line 11: Native JsType member 'EntryPoint.Buggy.EntryPoint$Buggy()' cannot have @JsIgnore.",
+        "Line 11: Native JsType member 'EntryPoint.Buggy.EntryPoint$Buggy()' "
+            + "cannot have @JsIgnore.",
         "Line 12: Native JsType member 'int EntryPoint.Buggy.x' cannot have @JsIgnore.",
         "Line 13: Native JsType member 'void EntryPoint.Buggy.n()' cannot have @JsIgnore.",
         "Line 14: Native JsType method 'void EntryPoint.Buggy.o()' should be native or abstract.",
         "Line 15: JSNI method 'void EntryPoint.Buggy.p()' is not allowed in a native JsType.");
+  }
+
+  public void testSubclassOfNativeJsTypeBadMembersFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsIgnore");
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) static class NativeType {",
+        "  @JsMethod(name =\"string\")",
+        "  public native String toString();",
+        "}",
+        "static class Buggy extends NativeType {",
+        "  public String toString() { return super.toString(); }",
+        "  @JsMethod(name = \"blah\")",
+        "  public int hashCode() { return super.hashCode(); }",
+        "}",
+        "static class SubBuggy extends Buggy {",
+        "  public boolean equals(Object obj) { return super.equals(obj); }",
+        "}");
+
+    assertBuggyFails(
+       "Line 8: Method 'String EntryPoint.NativeType.toString()' overriding "
+            + "a method from 'java.lang.Object' must be a JsMethod with name 'toString'." ,
+        "Line 11: Cannot use super to call 'EntryPoint.NativeType.toString'. 'java.lang.Object' "
+            + "methods in native JsTypes cannot be called using super.",
+        "Line 13: 'int EntryPoint.Buggy.hashCode()' cannot be assigned a different JavaScript "
+            + "name than the method it overrides.",
+        "Line 13: Cannot use super to call 'EntryPoint.NativeType.hashCode'. "
+            + "'java.lang.Object' methods in native JsTypes cannot be called using super.",
+        "Line 16: Cannot use super to call 'EntryPoint.NativeType.equals'. 'java.lang.Object' "
+            + "methods in native JsTypes cannot be called using super."
+    );
   }
 
   public void testNativeMethodOnJsTypeSucceeds() throws Exception {
@@ -2011,6 +2047,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
   }
 
   public void testNativeJsTypeSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsMethod");
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetClassDecl(
         "@JsType(isNative=true) abstract static class Buggy {",
@@ -2026,6 +2063,19 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public abstract void o();",
         "  protected abstract void o(Object o);",
         "  abstract void o(String o);",
+        "}",
+        "@JsType(isNative=true) abstract static class NativeClass {",
+        "  public native String toString();",
+        "  public abstract int hashCode();",
+        "}",
+        "static class NativeSubclass extends NativeClass {",
+        "  public String toString() { return null; }",
+        "  @JsMethod",
+        "  public boolean equals(Object obj) { return false; }",
+        "  public int hashCode() { return 0; }",
+        "}",
+        "static class SubNativeSubclass extends NativeSubclass {",
+        "  public boolean equals(Object obj) { return super.equals(obj); }",
         "}");
 
     assertBuggySucceeds();

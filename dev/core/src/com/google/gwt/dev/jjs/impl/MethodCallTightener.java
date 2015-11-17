@@ -28,6 +28,9 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+
+import java.util.Set;
 
 /**
  * Update polymorphic method calls to tighter bindings based on the type of the
@@ -125,7 +128,10 @@ public class MethodCallTightener {
       JMethod mostSpecificOverride =
           program.typeOracle.findMostSpecificOverride(underlyingType, original);
 
-      if (mostSpecificOverride == original) {
+      if (mostSpecificOverride == original
+          // Never tighten to a synthetic native method. This decision forces
+          // the use of the Object trampoline for hashcCode, equals and toString.
+          || (mostSpecificOverride.isJsNative() && mostSpecificOverride.isSynthetic())) {
         return methodCall;
       }
       JMethodCall newCall = new JMethodCall(

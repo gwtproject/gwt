@@ -43,25 +43,13 @@ public class C {
   public static final long LONG_VALUE = 1234567890123456L;
 
   public static String getLargeCharArrayString() {
-    if (TestUtils.isJvm()) {
-      StringBuffer buffer = new StringBuffer();
-      int len = numberOfCopies();
-      for (int i = 0; i < len; ++i) {
-        buffer.append(CHAR_ARRAY_STRING);
-      }
-      return buffer.toString();
+    StringBuffer buffer = new StringBuffer();
+    int len = numberOfCopies();
+    for (int i = 0; i < len; ++i) {
+      buffer.append(CHAR_ARRAY_STRING);
     }
-    return getLargeCharArrayString0();
+    return buffer.toString();
   }
-
-  private static native String getLargeCharArrayString0() /*-{
-    var value = ""
-    var len = @C::numberOfCopies()();
-    for (var i = 0; i < len; ++i) {
-      value += @C::CHAR_ARRAY_STRING;
-    }
-    return value;
-  }-*/;
 
   public static char[] getLargeCharArrayValue() {
     char[] largeCharArray;

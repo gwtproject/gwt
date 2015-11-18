@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db6d5bee_5d736f85",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsTypeObjectMethodsTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-18T00:00:14Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "cee7b5028f822ffdecd72d0fa741e46af8ec0421",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

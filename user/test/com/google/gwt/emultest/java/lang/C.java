@@ -51,14 +51,14 @@ public class C {
       }
       return buffer.toString();
     }
-    return getLargeCharArrayString0();
+    return getLargeCharArrayString0(numberOfCopies(), CHAR_ARRAY_STRING);
   }
 
-  private static native String getLargeCharArrayString0() /*-{
+  private static native String getLargeCharArrayString0(int numberOfCopies,
+      String charArrayString) /*-{
     var value = ""
-    var len = @C::numberOfCopies()();
-    for (var i = 0; i < len; ++i) {
-      value += @C::CHAR_ARRAY_STRING;
+    for (var i = 0; i < numberOfCopies; ++i) {
+      value += charArrayString;
     }
     return value;
   }-*/;

@@ -100,5 +100,4 @@ public class ArrayTest extends GWTTestCase {
     Object[] array = new Object[] { 1, 2 ,3 };
     assertEquals(Object[].class.getName(), ((Object) array).toString().split("@")[0]);
   }
-
 }

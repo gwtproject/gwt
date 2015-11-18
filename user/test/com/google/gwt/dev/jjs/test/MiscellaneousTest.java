@@ -18,6 +18,8 @@ package com.google.gwt.dev.jjs.test;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import jsinterop.annotations.JsType;
+
 /**
  * This should probably be refactored at some point.
  */

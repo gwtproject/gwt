@@ -25,6 +25,7 @@ import java.util.Iterator;
 
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -538,5 +539,21 @@ public class JsTypeTest extends GWTTestCase {
         SomeConcreteSubclass.class.getName().compareTo(SomeZAbstractSubclass.class.getName()) < 0);
     SomeConcreteSubclass o = new SomeConcreteSubclass();
     assertEquals(o, o.m());
+  }
+
+  static class X {
+    @JsMethod(namespace = JsPackage.GLOBAL, name = "mmm") @DoNotInline
+    public static String m(String s) {
+      return s;
+    }
+  }
+
+  private native String callM(String s) /*-{
+    return $wnd.mmm(s);
+  }-*/;
+
+  public void testSameParameterValueOptimization() {
+    assertEquals("L", X.m("L"));
+    assertEquals("M", callM("M"));
   }
 }

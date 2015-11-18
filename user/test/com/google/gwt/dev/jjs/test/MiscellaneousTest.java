@@ -18,6 +18,8 @@ package com.google.gwt.dev.jjs.test;
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import jsinterop.annotations.JsType;
+
 /**
  * This should probably be refactored at some point.
  */
@@ -309,5 +311,19 @@ public class MiscellaneousTest extends GWTTestCase {
     }
 
     throw new RuntimeException("Unexpected class name " + name);
+  }
+
+  @JsType(isNative = true)
+  static class A {
+    public String field;
+  }
+
+  private native A createA() /*-{
+    return { field: "AA" };
+  }-*/;
+
+  public void testANotPruned() {
+    A a = createA();
+    assertEquals("aa", a.field.toLowerCase());
   }
 }

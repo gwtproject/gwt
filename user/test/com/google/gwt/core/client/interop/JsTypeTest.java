@@ -19,12 +19,14 @@ import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.ScriptInjector;
+import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Iterator;
 
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -287,9 +289,11 @@ public class JsTypeTest extends GWTTestCase {
   }
 
   @JsType(isNative = true, namespace = GLOBAL, name = "JsTypeTest_MyNativeJsType")
-  static class MyNativeJsType { }
+  static class MyNativeJsType {
+  }
 
-  static class MyNativeJsTypeSubclass extends MyNativeJsType { }
+  static class MyNativeJsTypeSubclass extends MyNativeJsType {
+  }
 
   static class MyNativeJsTypeSubclassWithIterator extends MyNativeJsType implements Iterable {
     @Override
@@ -370,12 +374,14 @@ public class JsTypeTest extends GWTTestCase {
   private static native Object createMyNamespacedJsInterface() /*-{
     $wnd.testfoo = {};
     $wnd.testfoo.bar = {};
-    $wnd.testfoo.bar.MyNamespacedNativeJsType = function(){};
+    $wnd.testfoo.bar.MyNamespacedNativeJsType = function () {
+    };
     return new $wnd.testfoo.bar.MyNamespacedNativeJsType();
   }-*/;
 
   private static native Object createMyWrongNamespacedJsInterface() /*-{
-    $wnd["testfoo.bar.MyNamespacedNativeJsType"] = function(){};
+    $wnd["testfoo.bar.MyNamespacedNativeJsType"] = function () {
+    };
     return new $wnd['testfoo.bar.MyNamespacedNativeJsType']();
   }-*/;
 
@@ -444,7 +450,11 @@ public class JsTypeTest extends GWTTestCase {
   }
 
   private native Object nativeObjectImplementingM() /*-{
-    return {m: function() { return 3;} }
+    return {
+      m: function () {
+        return 3;
+      }
+    }
   }-*/;
 
   public void testSingleJavaConcreteInterface() {
@@ -467,7 +477,9 @@ public class JsTypeTest extends GWTTestCase {
   }
 
   private native Object nativeJsFunction() /*-{
-    return function() { return 3;};
+    return function () {
+      return 3;
+    };
   }-*/;
 
   public void testSingleJavaConcreteJsFunction() {
@@ -490,21 +502,27 @@ public class JsTypeTest extends GWTTestCase {
 
     public static native String[] keys(Object o);
 
-    @JsOverlay @DoNotInline
+    @JsOverlay
+    @DoNotInline
     public static final boolean hasM(Object obj) {
       return keys(obj)[0].equals("m");
     }
 
     public native boolean hasOwnProperty(String name);
 
-    @JsOverlay @DoNotInline
+    @JsOverlay
+    @DoNotInline
     public final boolean hasM() {
       return hasOwnProperty("m");
     }
   }
 
   private native NativeJsTypeWithOverlay createNativeJsTypeWithOverlay() /*-{
-    return { m: function() { return 6; } };
+    return {
+      m: function () {
+        return 6;
+      }
+    };
   }-*/;
 
   public void testNativeJsTypeWithOverlay() {
@@ -539,4 +557,23 @@ public class JsTypeTest extends GWTTestCase {
     SomeConcreteSubclass o = new SomeConcreteSubclass();
     assertEquals(o, o.m());
   }
+
+  static class X {
+    @JsMethod(namespace = JsPackage.GLOBAL, name = "mmm")
+    @DoNotInline
+    public static String m(String s) {
+      return s;
+    }
+  }
+
+  private native String callM(String s) /*-{
+    return $wnd.mmm(s);
+  }-*/;
+
+  public void testSameParameterValueOptimization() {
+    assertEquals("L", X.m("L"));
+    assertEquals("M", callM("M"));
+  }
+
+
 }

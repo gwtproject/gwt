@@ -15,6 +15,8 @@
  */
 package com.google.gwt.safehtml.shared;
 
+import com.google.gwt.safehtml.shared.annotations.IsSafeHtml;
+
 /**
  * A string wrapped as an object of type {@link SafeHtml}.
  *
@@ -42,6 +44,8 @@ public class OnlyToBeUsedInGeneratedCodeStringBlessedAsSafeHtml
   /**
    * {@inheritDoc}
    */
+  @IsSafeHtml
+  @SuppressIsSafeHtmlCastCheck
   public String asString() {
     return html;
   }

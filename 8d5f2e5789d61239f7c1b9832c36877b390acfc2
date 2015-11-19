@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b6aafda_142b855f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-19T02:39:45Z",
+      "side": 1,
+      "message": "it looks like this randomly located here at the bottom.",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 68
+      },
+      "revId": "8d5f2e5789d61239f7c1b9832c36877b390acfc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_744be13b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-19T02:39:45Z",
+      "side": 1,
+      "message": "or the initial value.",
+      "range": {
+        "startLine": 464,
+        "startChar": 70,
+        "endLine": 464,
+        "endChar": 71
+      },
+      "revId": "8d5f2e5789d61239f7c1b9832c36877b390acfc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_342d6969",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-19T02:39:45Z",
+      "side": 1,
+      "message": "Pls add a comment to explain why the test is here.",
+      "revId": "8d5f2e5789d61239f7c1b9832c36877b390acfc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_d4398dae",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-19T02:39:45Z",
+      "side": 1,
+      "message": "Can you move the tests to more appropriate location?",
+      "revId": "8d5f2e5789d61239f7c1b9832c36877b390acfc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

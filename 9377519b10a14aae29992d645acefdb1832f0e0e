@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "3b4e7783_6e88e309",
+        "filename": "user/src/com/google/gwt/safehtml/shared/SuppressIsSafeHtmlCastCheck.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-11-19T11:40:46Z",
+      "side": 1,
+      "message": "This should reference @IsSafeHtml instead of Types.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 39
+      },
+      "revId": "9377519b10a14aae29992d645acefdb1832f0e0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b6aafda_9429d57b",
         "filename": "user/src/com/google/gwt/safehtml/shared/SuppressIsSafeHtmlCastCheck.java",
         "patchSetId": 5
@@ -13,6 +36,29 @@
       "writtenOn": "2015-11-19T02:11:48Z",
       "side": 1,
       "message": "Can you move this as well to annoations package?",
+      "revId": "9377519b10a14aae29992d645acefdb1832f0e0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56278298_cf21b591",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsSafeHtml.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-11-19T11:40:46Z",
+      "side": 1,
+      "message": "I suppose this should be @IsSafeHtml",
+      "range": {
+        "startLine": 29,
+        "startChar": 29,
+        "endLine": 29,
+        "endChar": 34
+      },
       "revId": "9377519b10a14aae29992d645acefdb1832f0e0e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

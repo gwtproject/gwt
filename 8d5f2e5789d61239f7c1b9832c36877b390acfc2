@@ -131,6 +131,24 @@
     },
     {
       "key": {
+        "uuid": "7b6aafda_afc7e491",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-19T17:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b6aafda_342d6969",
+      "revId": "8d5f2e5789d61239f7c1b9832c36877b390acfc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b6aafda_d4398dae",
         "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
         "patchSetId": 1
@@ -159,6 +177,24 @@
       "writtenOn": "2015-11-19T17:36:23Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "7b6aafda_d4398dae",
+      "revId": "8d5f2e5789d61239f7c1b9832c36877b390acfc2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_4fa5e8db",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-19T17:47:48Z",
+      "side": 1,
+      "message": "Sorry, I missed this one. There are no JsInterop related tests that run with --nogenerateJsInteropExports.\n\nI created a GwtTest and made it part of CompilerSuite.",
       "parentUuid": "7b6aafda_d4398dae",
       "revId": "8d5f2e5789d61239f7c1b9832c36877b390acfc2",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

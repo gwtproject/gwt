@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b6aafda_9429d57b",
+        "filename": "user/src/com/google/gwt/safehtml/shared/SuppressIsSafeHtmlCastCheck.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-19T02:11:48Z",
+      "side": 1,
+      "message": "Can you move this as well to annoations package?",
+      "revId": "9377519b10a14aae29992d645acefdb1832f0e0e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

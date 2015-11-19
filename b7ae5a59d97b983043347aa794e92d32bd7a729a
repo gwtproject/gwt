@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7b6aafda_cf66d86d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-19T18:36:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b6aafda_0cc943d0",
+      "revId": "b7ae5a59d97b983043347aa794e92d32bd7a729a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b6aafda_acd5b768",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 4
@@ -30,6 +48,30 @@
       "writtenOn": "2015-11-18T03:23:32Z",
       "side": 1,
       "message": "These will give warning for dispatch over instance. You can probably just inline these.",
+      "range": {
+        "startLine": 420,
+        "startChar": 0,
+        "endLine": 426,
+        "endChar": 3
+      },
+      "revId": "b7ae5a59d97b983043347aa794e92d32bd7a729a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_af7e04fa",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-19T18:36:04Z",
+      "side": 1,
+      "message": "I am not sure what you mean. And it is used somewhere else.",
+      "parentUuid": "7b6aafda_acd5b768",
       "range": {
         "startLine": 420,
         "startChar": 0,
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "7b6aafda_2f6af431",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-19T18:36:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b6aafda_6cd8ffa3",
+      "revId": "b7ae5a59d97b983043347aa794e92d32bd7a729a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b6aafda_8cdd5395",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
         "patchSetId": 4
@@ -70,6 +130,30 @@
       "writtenOn": "2015-11-18T03:23:32Z",
       "side": 1,
       "message": "pls remove - already covered isJsInteropCrossCastTarget above as it requires to be checked before exact type shortcut.",
+      "range": {
+        "startLine": 468,
+        "startChar": 69,
+        "endLine": 468,
+        "endChar": 90
+      },
+      "revId": "b7ae5a59d97b983043347aa794e92d32bd7a729a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_0ab27e0d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-19T18:36:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b6aafda_8cdd5395",
       "range": {
         "startLine": 468,
         "startChar": 69,
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "7b6aafda_6a4f7a68",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-19T18:36:04Z",
+      "side": 1,
+      "message": "See if it is better now.",
+      "parentUuid": "7b6aafda_ec864f83",
+      "revId": "b7ae5a59d97b983043347aa794e92d32bd7a729a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b6aafda_2ce20756",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
         "patchSetId": 4
@@ -116,6 +218,24 @@
     },
     {
       "key": {
+        "uuid": "7b6aafda_0a86fecb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-19T18:36:04Z",
+      "side": 1,
+      "message": "I cleaned this up a bit. See if you find it clearer.",
+      "parentUuid": "7b6aafda_2ce20756",
+      "revId": "b7ae5a59d97b983043347aa794e92d32bd7a729a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b6aafda_4ce73b65",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
         "patchSetId": 4
@@ -127,6 +247,24 @@
       "writtenOn": "2015-11-18T03:23:32Z",
       "side": 1,
       "message": "pls revert",
+      "revId": "b7ae5a59d97b983043347aa794e92d32bd7a729a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_0a1d9e4f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodInliner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-19T18:36:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b6aafda_4ce73b65",
       "revId": "b7ae5a59d97b983043347aa794e92d32bd7a729a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

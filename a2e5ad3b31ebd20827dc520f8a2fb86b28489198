@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db6d5bee_6079e612",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/BasicJsInteropTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-19T17:46:11Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.core.client.JavaScriptObject.",
+      "revId": "a2e5ad3b31ebd20827dc520f8a2fb86b28489198",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db6d5bee_807e7afa",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/BasicJsInteropTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-19T17:46:11Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.List.",
+      "revId": "a2e5ad3b31ebd20827dc520f8a2fb86b28489198",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db6d5bee_2073ee34",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/BasicJsInteropTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-19T17:46:11Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "a2e5ad3b31ebd20827dc520f8a2fb86b28489198",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db6d5bee_4078620c",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/MiscellaneousTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-19T17:46:11Z",
+      "side": 1,
+      "message": "[error] Unused import - jsinterop.annotations.JsType.",
+      "revId": "a2e5ad3b31ebd20827dc520f8a2fb86b28489198",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

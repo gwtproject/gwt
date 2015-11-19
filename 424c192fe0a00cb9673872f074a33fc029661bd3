@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db6d5bee_006a6a31",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/BasicJsInteropTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-19T17:47:12Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.core.client.JavaScriptObject.",
+      "revId": "424c192fe0a00cb9673872f074a33fc029661bd3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db6d5bee_a0661e6c",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/BasicJsInteropTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-19T17:47:12Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.List.",
+      "revId": "424c192fe0a00cb9673872f074a33fc029661bd3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

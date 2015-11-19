@@ -45,6 +45,30 @@
       "revId": "f606888674033f2ae06fa4220d7269a963060d7e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_aaa91252",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-19T18:24:29Z",
+      "side": 1,
+      "message": "missed this one as well but it is not a big deal.",
+      "parentUuid": "7b6aafda_cfdfb855",
+      "range": {
+        "startLine": 464,
+        "startChar": 70,
+        "endLine": 464,
+        "endChar": 71
+      },
+      "revId": "f606888674033f2ae06fa4220d7269a963060d7e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

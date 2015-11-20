@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b4e13ac_9c0fa545",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-11-20T17:44:52Z",
+      "side": 1,
+      "message": "getMethodAndItsOverrides suggest method+overriding whereas here is method+overriden. Maybe getOverridenMethodsIncludingSelf",
+      "range": {
+        "startLine": 79,
+        "startChar": 26,
+        "endLine": 79,
+        "endChar": 50
+      },
+      "revId": "970e8fcb0b72c6c44a4171dd832419b9e1fa4b62",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

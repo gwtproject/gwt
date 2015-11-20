@@ -16,6 +16,23 @@
       "revId": "29d52dd2c32bf282387a8bb9ffc53314fa630f9b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3b167790_e54396ef",
+        "filename": "dev/core/src/com/google/gwt/dev/js/rhino/Parser.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-11-20T21:08:40Z",
+      "side": 1,
+      "message": "This comment is out of date now (move down)",
+      "revId": "29d52dd2c32bf282387a8bb9ffc53314fa630f9b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

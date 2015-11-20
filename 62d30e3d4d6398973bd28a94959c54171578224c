@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b6aafda_ec0c0552",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/SuppressIsSafeHtmlCastCheck.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-20T22:20:51Z",
+      "side": 1,
+      "message": "Can you remove the extra spaces and other formatting issues and use \u003cp\u003e for new paragraphs? (for other annotation as well)",
+      "revId": "62d30e3d4d6398973bd28a94959c54171578224c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

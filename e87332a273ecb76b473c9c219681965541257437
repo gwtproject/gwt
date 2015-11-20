@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b6aafda_6fc7871a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JTypeOracle.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-20T08:08:26Z",
+      "side": 1,
+      "message": "I think isJsInteropCrossCastTarget was a good abstraction",
+      "range": {
+        "startLine": 427,
+        "startChar": 8,
+        "endLine": 427,
+        "endChar": 48
+      },
+      "revId": "e87332a273ecb76b473c9c219681965541257437",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_4fbe4381",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-20T08:08:26Z",
+      "side": 1,
+      "message": "This doesn\u0027t make sense when you read. Probably we should talk/resolve this offline.",
+      "range": {
+        "startLine": 214,
+        "startChar": 13,
+        "endLine": 214,
+        "endChar": 34
+      },
+      "revId": "e87332a273ecb76b473c9c219681965541257437",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6aafda_efbab789",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-20T08:08:26Z",
+      "side": 1,
+      "message": "inline? (will be consistent with down and reader can compare easier)",
+      "range": {
+        "startLine": 113,
+        "startChar": 34,
+        "endLine": 113,
+        "endChar": 44
+      },
+      "revId": "e87332a273ecb76b473c9c219681965541257437",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

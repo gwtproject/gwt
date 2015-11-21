@@ -18,6 +18,11 @@
             <artifactId>jsinterop-annotations</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.jsinterop</groupId>
+            <artifactId>jsinterop-annotations</artifactId>
+            <classifier>sources</classifier>
+        </dependency>
+        <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>

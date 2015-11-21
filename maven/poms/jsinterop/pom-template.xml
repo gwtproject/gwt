@@ -27,6 +27,12 @@
                 <artifactId>jsinterop-annotations</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.google.jsinterop</groupId>
+                <artifactId>jsinterop-annotations</artifactId>
+                <version>${project.version}</version>
+                <classifier>sources</classifier>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

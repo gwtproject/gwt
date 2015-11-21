@@ -350,6 +350,25 @@ final class Cast {
     return array.@java.lang.Object::___clazz
         || @JavaScriptObject::class;
   }-*/;
+
+  static native String objectType(Object obj) /*-{
+    var objType = typeof obj;
+    switch (objType) {
+      case "string":
+      case "number":
+      case "function":
+      case "boolean":
+        return objType;
+    }
+    if (@Util::hasTypeMarker(*)(obj)) {
+      return "java";
+    }
+
+    if (Array.isArray(obj)) {
+      return "array";
+    }
+    return "native";
+  }-*/;
 }
 
 // CHECKSTYLE_NAMING_ON

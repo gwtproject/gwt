@@ -124,7 +124,7 @@ public class MethodCallTightener {
 
       JMethod mostSpecificOverride =
           program.typeOracle.findMostSpecificOverride(underlyingType, original);
-      if (mostSpecificOverride == original) {
+      if (mostSpecificOverride == original || mostSpecificOverride.isJsNative()) {
         return methodCall;
       }
       JMethodCall newCall = new JMethodCall(

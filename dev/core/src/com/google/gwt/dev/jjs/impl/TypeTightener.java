@@ -552,7 +552,7 @@ public class TypeTightener {
 
       JMethod concreteMethod = getSingleConcreteMethodOverride(target);
       assert concreteMethod != target;
-      if (concreteMethod != null) {
+      if (concreteMethod != null && !concreteMethod.isJsNative()) {
         assert !x.isStaticDispatchOnly();
         JMethodCall newCall = new JMethodCall(x.getSourceInfo(), x.getInstance(), concreteMethod);
         newCall.addArgs(x.getArgs());

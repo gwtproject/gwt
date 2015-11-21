@@ -20,7 +20,7 @@ function finishAndCleanup () {
       rm -rf $jarExpandDir-${i}
     done
     # Remove POMs & ASCs, leaving only templates
-    find $pomDir -name pom.xml -o -name pom.xml.asc | xargs rm
+    find $pomDir -name pom.xml -o -name pom.xml.asc -delete
   fi
 
 }
@@ -130,14 +130,15 @@ function maven-gwt() {
 
     if [[ "$i" == "user" ]]; then
       # Get rid of JsInterop classes from gwt-user.jar
-      echo "Removing jsinterop/* from gwt-${i}"
-      zip -d $CUR_FILE "jsinterop/*"
+      # but maintain .java files otherwise gwt compiler fails
+      echo "Removing jsinterop/*.class from gwt-${i}"
+      find ./jsinterop -name "*.class" | zip -d $CUR_FILE -@
 
       # Create jsinterop jars
       for i in $jsinteropLibs
       do
         rm -rf jsinterop-${i}-classfilelist jsinterop-${i}-javafilelist
-        find . -path "./jsinterop/$i/*" -name "*.class" -print  > jsinterop-${i}-classfilelist
+        find . -path "./jsinterop/$i/*" -name "*.class" > jsinterop-${i}-classfilelist
         if [ -s jsinterop-${i}-classfilelist ]; then
           jar cf jsinterop-${i}.jar @jsinterop-${i}-classfilelist
         fi

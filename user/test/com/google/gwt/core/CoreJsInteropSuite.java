@@ -21,6 +21,7 @@ import com.google.gwt.core.client.interop.JsPropertyTest;
 import com.google.gwt.core.client.interop.JsTypeArrayTest;
 import com.google.gwt.core.client.interop.JsTypeBridgeTest;
 import com.google.gwt.core.client.interop.JsTypeTest;
+import com.google.gwt.core.client.interop.NativeJsTypeTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -38,6 +39,7 @@ public class CoreJsInteropSuite {
     suite.addTestSuite(JsMethodTest.class);
     suite.addTestSuite(JsTypeArrayTest.class);
     suite.addTestSuite(JsFunctionTest.class);
+    suite.addTestSuite(NativeJsTypeTest.class);
 
     return suite;
   }

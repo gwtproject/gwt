@@ -552,7 +552,9 @@ public class TypeTightener {
 
       JMethod concreteMethod = getSingleConcreteMethodOverride(target);
       assert concreteMethod != target;
-      if (concreteMethod != null) {
+      // Do not replace by a static dispatch if the target method is a native JsMethod,
+      // this prevents tightening to the synthetic getClass().
+      if (concreteMethod != null && !concreteMethod.isJsNative()) {
         assert !x.isStaticDispatchOnly();
         JMethodCall newCall = new JMethodCall(x.getSourceInfo(), x.getInstance(), concreteMethod);
         newCall.addArgs(x.getArgs());

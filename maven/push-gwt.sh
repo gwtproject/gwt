@@ -45,7 +45,7 @@ if ! expr "$gwtVersion" : "$VERSION_REGEX" >/dev/null; then
   exit 1
 fi
 
-read -e -p"JsInterop version for Maven (${jsinteropVersionDefault:-ex: 1.0.0-SNAPSHOT}): " gwtVersion
+read -e -p"JsInterop version for Maven (${jsinteropVersionDefault:-ex: 1.0.0-SNAPSHOT}): " jsinteropVersion
 jsinteropVersion=${jsinteropVersion:=$jsinteropVersionDefault}
 if ! expr "$jsinteropVersion" : "$VERSION_REGEX" >/dev/null; then
   echo "Please enter a version of the form x.y.z or x.y.z-abc"

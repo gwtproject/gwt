@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fbbdbfca_73fbc0a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-11-22T23:32:41Z",
+      "side": 1,
+      "message": "for some reason the only way to make the compiler work is maintaining .java files in gwt-user.",
+      "parentUuid": "7b80ef13_67c6b26e",
+      "revId": "ec4811089a234beb30bb3866a9837020a554ffab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3bc4b760_55c14c53",
         "filename": "maven/lib-gwt.sh",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-11-22T14:04:36Z",
       "side": 1,
       "message": "Thinking a bit more about it, I think we should just exclude all *.java. If you\u0027re going to include *.java then simplify the find command to only include the -path, with no -name at all.",
+      "revId": "ec4811089a234beb30bb3866a9837020a554ffab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbbdbfca_b3dc7834",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-11-22T23:32:41Z",
+      "side": 1,
+      "message": "Removed .java from jsinterop, your dependency patch is better. Although we should maintain .java files in gwt-user right now",
+      "parentUuid": "3bc4b760_55c14c53",
       "revId": "ec4811089a234beb30bb3866a9837020a554ffab",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

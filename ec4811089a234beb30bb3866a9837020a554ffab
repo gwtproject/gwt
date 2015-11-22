@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b80ef13_67c6b26e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-11-22T14:04:36Z",
+      "side": 1,
+      "message": "Does adding a dependency on the -sources.jar (as in I27faa5ff3d0a421fffc26b4dad6643dff7b1add1) really not work?",
+      "revId": "ec4811089a234beb30bb3866a9837020a554ffab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bc4b760_55c14c53",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-11-22T14:04:36Z",
+      "side": 1,
+      "message": "Thinking a bit more about it, I think we should just exclude all *.java. If you\u0027re going to include *.java then simplify the find command to only include the -path, with no -name at all.",
+      "revId": "ec4811089a234beb30bb3866a9837020a554ffab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5bc96b78_b6dc6834",
+        "filename": "maven/push-gwt.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-11-22T14:04:36Z",
+      "side": 1,
+      "message": "oops!",
+      "revId": "ec4811089a234beb30bb3866a9837020a554ffab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

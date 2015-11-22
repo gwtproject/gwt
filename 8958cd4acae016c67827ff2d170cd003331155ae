@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b80ef13_87dac63e",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-11-22T14:04:36Z",
+      "side": 0,
+      "message": "If we\u0027re going to remove -print, we should remove it everywhere.",
+      "range": {
+        "startLine": 140,
+        "startChar": 56,
+        "endLine": 140,
+        "endChar": 62
+      },
+      "revId": "8958cd4acae016c67827ff2d170cd003331155ae",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fbbdbfca_b3bb98fe",
+        "filename": "user/src/com/google/gwt/i18n/shared/BidiFormatter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-11-23T19:56:09Z",
+      "side": 1,
+      "message": "Why do we need this annotation here ? str will be escaped as a text and it\u0027s safe.",
+      "revId": "e6ded4b60e4db474ec30632f3a9920b4e5e46dda",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbbdbfca_d3b81404",
+        "filename": "user/src/com/google/gwt/i18n/shared/BidiFormatterBase.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-11-23T19:56:09Z",
+      "side": 1,
+      "message": "idem I don\u0027t really understand the use of this annotation here.",
+      "range": {
+        "startLine": 262,
+        "startChar": 3,
+        "endLine": 262,
+        "endChar": 30
+      },
+      "revId": "e6ded4b60e4db474ec30632f3a9920b4e5e46dda",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbbdbfca_73aae0ac",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/SuppressIsSafeHtmlCastCheck.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-11-23T19:56:09Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 22,
+        "startChar": 47,
+        "endLine": 22,
+        "endChar": 48
+      },
+      "revId": "e6ded4b60e4db474ec30632f3a9920b4e5e46dda",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

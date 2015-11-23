@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "fbbdbfca_739f4082",
+        "filename": "user/src/com/google/gwt/i18n/shared/BidiFormatter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-11-23T20:30:03Z",
+      "side": 1,
+      "message": "ok I got it ! Thanks for the clarification",
+      "parentUuid": "3b167790_39267764",
+      "revId": "e6ded4b60e4db474ec30632f3a9920b4e5e46dda",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbbdbfca_d3b81404",
         "filename": "user/src/com/google/gwt/i18n/shared/BidiFormatterBase.java",
         "patchSetId": 9

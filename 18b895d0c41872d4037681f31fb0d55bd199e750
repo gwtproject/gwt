@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b77ab0e_e6fffe7f",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-11-23T09:32:32Z",
+      "side": 1,
+      "message": "To be future-proof, we should probably move that into the for loop and using path \"./jsinterop/$i\" instead of ./jsinterop.\n\nWe could just use the jsinterop-${i]-classfilelist then (and choose how to build it: either \u0027-not -name \"*.java\"\u0027 or \u0027-name \"*.class\"\u0027)",
+      "revId": "18b895d0c41872d4037681f31fb0d55bd199e750",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

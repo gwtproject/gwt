@@ -78,6 +78,29 @@
     },
     {
       "key": {
+        "uuid": "5b77ab0e_86d56a3b",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsSafeHtml.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-11-23T22:21:13Z",
+      "side": 1,
+      "message": "remove closing p tag",
+      "range": {
+        "startLine": 30,
+        "startChar": 14,
+        "endLine": 30,
+        "endChar": 18
+      },
+      "revId": "e6ded4b60e4db474ec30632f3a9920b4e5e46dda",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbbdbfca_73aae0ac",
         "filename": "user/src/com/google/gwt/safehtml/shared/annotations/SuppressIsSafeHtmlCastCheck.java",
         "patchSetId": 9

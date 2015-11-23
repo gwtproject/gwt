@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3b167790_39267764",
+        "filename": "user/src/com/google/gwt/i18n/shared/BidiFormatter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-23T20:17:47Z",
+      "side": 1,
+      "message": "It casts str String param to IsSafeHtml_String param while calling spanWrapWithKnownDir which is an unsafe cast.",
+      "parentUuid": "fbbdbfca_b3bb98fe",
+      "revId": "e6ded4b60e4db474ec30632f3a9920b4e5e46dda",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbbdbfca_d3b81404",
         "filename": "user/src/com/google/gwt/i18n/shared/BidiFormatterBase.java",
         "patchSetId": 9
@@ -59,6 +77,23 @@
         "endLine": 22,
         "endChar": 48
       },
+      "revId": "e6ded4b60e4db474ec30632f3a9920b4e5e46dda",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3b167790_59353385",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/SuppressIsSafeHtmlCastCheck.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-23T20:17:47Z",
+      "side": 1,
+      "message": "In javadoc conventions, \u003cp\u003e \u0027s are not closed.",
       "revId": "e6ded4b60e4db474ec30632f3a9920b4e5e46dda",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

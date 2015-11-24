@@ -22,6 +22,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -495,6 +496,20 @@ public class JsExportTest extends GWTTestCase {
   public void testSameParameterValueOptimization() {
     assertEquals("L", X.m("L"));
     assertEquals("M", callM("M"));
+  }
+
+  static class B {
+    @JsProperty
+    public String field;
+  }
+  private native String getB(B b)/*-{
+    return b.field;
+  }-*/;
+
+  public void testNotReadExpoprtedFieldNotPruned() {
+    B b = new B();
+    b.field = "secret";
+    assertEquals("secret", getB(b));
   }
 
 }

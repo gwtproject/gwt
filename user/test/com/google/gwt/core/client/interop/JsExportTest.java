@@ -22,6 +22,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -496,5 +497,4 @@ public class JsExportTest extends GWTTestCase {
     assertEquals("L", X.m("L"));
     assertEquals("M", callM("M"));
   }
-
 }

@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 /**
  * A fast way to create strings using multiple appends.
  * 
@@ -23,25 +25,36 @@ package java.lang;
  */
 public final class StringBuilder extends AbstractStringBuilder implements CharSequence, Appendable {
 
+  // Make sure the compiler can prove the field string is not nullable.
+  private String string = "";
+
   public StringBuilder() {
-    super("");
   }
 
   public StringBuilder(CharSequence s) {
-    super(String.valueOf(s));
+    string += String.valueOf(s);
   }
 
-  /**
+  /*
    * This implementation does not track capacity; using this constructor is
    * functionally equivalent to using the zero-argument constructor.
    */
-  @SuppressWarnings("unused")
-  public StringBuilder(int ignoredCapacity) {
-    super("");
+  public StringBuilder(@SuppressWarnings("unused") int ignoredCapacity) {
   }
 
   public StringBuilder(String s) {
-    super(s);
+    checkNotNull(s);
+    string += s;
+  }
+
+  @Override
+  String getString() {
+    return string;
+  }
+
+  @Override
+  void setString(String string) {
+    this.string = string;
   }
 
   public StringBuilder append(boolean x) {

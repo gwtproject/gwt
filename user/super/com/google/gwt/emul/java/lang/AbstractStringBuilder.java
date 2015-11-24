@@ -25,22 +25,21 @@ import static javaemul.internal.InternalPreconditions.checkStringBounds;
  */
 abstract class AbstractStringBuilder {
 
-  String string;
+  abstract String getString();
 
-  public AbstractStringBuilder(String string) {
-    this.string = string;
-  }
+  abstract void setString(String string);
 
   public int length() {
-    return string.length();
+    return getString().length();
   }
 
   public void setLength(int newLength) {
     int oldLength = length();
     if (newLength < oldLength) {
-      string = string.substring(0, newLength);
+      // Concat with empty string so that the compiler knows the field cannot be null.
+      setString("" + getString().substring(0, newLength));
     } else if (newLength > oldLength) {
-      string += String.valueOf(new char[newLength - oldLength]);
+      setString(getString() + String.valueOf(new char[newLength - oldLength]));
     }
   }
 
@@ -59,14 +58,14 @@ abstract class AbstractStringBuilder {
   }
 
   public char charAt(int index) {
-    return string.charAt(index);
+    return getString().charAt(index);
   }
 
   public void getChars(int srcStart, int srcEnd, char[] dst, int dstStart) {
     checkStringBounds(srcStart, srcEnd, length());
     checkStringBounds(dstStart, dstStart + (srcEnd - srcStart), dst.length);
     while (srcStart < srcEnd) {
-      dst[dstStart++] = string.charAt(srcStart++);
+      dst[dstStart++] = getString().charAt(srcStart++);
     }
   }
 
@@ -79,55 +78,55 @@ abstract class AbstractStringBuilder {
   }
 
   public CharSequence subSequence(int start, int end) {
-    return string.substring(start, end);
+    return getString().substring(start, end);
   }
 
   public String substring(int begin) {
-    return string.substring(begin);
+    return getString().substring(begin);
   }
 
   public String substring(int begin, int end) {
-    return string.substring(begin, end);
+    return getString().substring(begin, end);
   }
 
   public int indexOf(String x) {
-    return string.indexOf(x);
+    return getString().indexOf(x);
   }
 
   public int indexOf(String x, int start) {
-    return string.indexOf(x, start);
+    return getString().indexOf(x, start);
   }
 
   public int lastIndexOf(String s) {
-    return string.lastIndexOf(s);
+    return getString().lastIndexOf(s);
   }
 
   public int lastIndexOf(String s, int start) {
-    return string.lastIndexOf(s, start);
+    return getString().lastIndexOf(s, start);
   }
 
   @Override
   public String toString() {
-    return string;
+    return getString();
   }
 
   void append0(CharSequence x, int start, int end) {
     if (x == null) {
       x = "null";
     }
-    string += x.subSequence(start, end);
+    setString(getString() + x.subSequence(start, end));
   }
 
   void appendCodePoint0(int x) {
-    string += String.valueOf(Character.toChars(x));
+    setString(getString() + String.valueOf(Character.toChars(x)));
   }
 
   void replace0(int start, int end, String toInsert) {
-    string = string.substring(0, start) + toInsert + string.substring(end);
+    setString(getString().substring(0, start) + toInsert + getString().substring(end));
   }
 
   void reverse0() {
-    int length = string.length();
+    int length = getString().length();
 
     if (length <= 1) {
       return;
@@ -135,16 +134,16 @@ abstract class AbstractStringBuilder {
 
     char[] buffer = new char[length];
 
-    buffer[0] = string.charAt(length - 1);
+    buffer[0] = getString().charAt(length - 1);
 
     for (int i = 1; i < length; i++) {
-      buffer[i] = string.charAt(length - 1 - i);
+      buffer[i] = getString().charAt(length - 1 - i);
       if (Character.isSurrogatePair(buffer[i], buffer[i - 1])) {
         swap(buffer, i - 1, i);
       }
     }
 
-    string = new String(buffer);
+    setString(new String(buffer));
   }
 
   private static void swap(char[] buffer, int f, int s) {

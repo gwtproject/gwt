@@ -15,6 +15,7 @@
  */
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkStringBounds;
 
 /**
@@ -28,7 +29,9 @@ abstract class AbstractStringBuilder {
   String string;
 
   public AbstractStringBuilder(String string) {
-    this.string = string;
+    checkNotNull(string);
+    // Concat with empty string so that the compiler knows the field cannot be null.
+    this.string = "" + string;
   }
 
   public int length() {
@@ -38,7 +41,8 @@ abstract class AbstractStringBuilder {
   public void setLength(int newLength) {
     int oldLength = length();
     if (newLength < oldLength) {
-      string = string.substring(0, newLength);
+      // Concat with empty string so that the compiler knows the field cannot be null.
+      string = "" + string.substring(0, newLength);
     } else if (newLength > oldLength) {
       string += String.valueOf(new char[newLength - oldLength]);
     }

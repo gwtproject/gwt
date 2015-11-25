@@ -87,8 +87,8 @@ public class DirectionalTextHelper implements HasDirectionEstimator {
    * The direction of the element's content.
    * Note: this may not match the direction attribute of the element itself.
    * See
-   * {@link #setText(String, com.google.gwt.i18n.client.HasDirection.Direction, boolean)
-   * setText(String, Direction, boolean)}
+   * {@link #setText(String, com.google.gwt.i18n.client.HasDirection.Direction)
+   * setText(String, Direction)}
    * for details.
    */
   private Direction textDir;

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b8ecb42_f140a2e5",
+        "filename": "user/test/com/google/gwt/core/interop/ElementLikeNativeInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-25T02:44:30Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "2394a16baf3befb12a6b77387698b24ddcce7bce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b8ecb42_91b4be42",
+        "filename": "user/test/com/google/gwt/core/client/interop/JsExportTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-11-25T02:26:28Z",
+      "side": 1,
+      "message": "[error] Unused import - jsinterop.annotations.JsProperty.",
+      "revId": "b56f59ced3ba8cf7b707df954d408374b040fd8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

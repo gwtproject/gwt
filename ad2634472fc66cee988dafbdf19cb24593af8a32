@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b167790_a47877d3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-11-25T02:14:13Z",
+      "side": 1,
+      "message": "perhaps special case in getSingleConcreteMethodOverride",
+      "range": {
+        "startLine": 557,
+        "startChar": 37,
+        "endLine": 557,
+        "endChar": 65
+      },
+      "revId": "ad2634472fc66cee988dafbdf19cb24593af8a32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

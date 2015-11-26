@@ -34,7 +34,7 @@ public class ArgHandlerDisableCastChecking extends ArgHandlerFlag {
 
   @Override
   public String getPurposeSnippet() {
-    return "DEPRECATED: use checks.checkLevel instead.";
+    return "DEPRECATED: use goog.jre.checks.checkLevel instead.";
   }
 
   @Override
@@ -45,7 +45,7 @@ public class ArgHandlerDisableCastChecking extends ArgHandlerFlag {
   @Override
   public boolean setFlag(boolean value) {
     List<String> propertyValue = Arrays.asList(value ? "ENABLED" : "DISABLED");
-    setProperties.setPropertyValues("checks.type", propertyValue);
+    setProperties.setPropertyValues("goog.jre.checks.type", propertyValue);
     return true;
   }
 

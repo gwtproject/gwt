@@ -182,7 +182,7 @@ public class JavaScriptExceptionTest extends GWTTestCase {
   }
 
   // jsni throw -> java catch -> java throw -> jsni catch
-  public void testNativeJavaNativeSandwichCatch() {
+  public void _disabled_testNativeJavaNativeSandwichCatch() {
     Object e;
 
     e = makeJSO();

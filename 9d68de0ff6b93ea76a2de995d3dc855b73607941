@@ -16,6 +16,24 @@
       "revId": "9d68de0ff6b93ea76a2de995d3dc855b73607941",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9b0923b2_aea423e1",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-01T01:21:05Z",
+      "side": 1,
+      "message": "Yes, that is what is defined in JLS 12.4.2. Interfaces with static methods or static blocks will be initialized on static field accesses or static method calls.",
+      "parentUuid": "9b0923b2_aef78346",
+      "revId": "9d68de0ff6b93ea76a2de995d3dc855b73607941",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b488bfd_8106fc60",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-12-01T19:24:52Z",
+      "side": 1,
+      "message": "Just a nit, this leaves a jsinterop/ empty folder in gwt-user.jar.\nWhat is the reason for not removing all the folder and we visit each jsinterop lib? what other stuff is  thought to come into this folder apart from annotations?",
+      "revId": "c4b0c9a0086cc7374f6cf457b9b9213fac0a2441",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

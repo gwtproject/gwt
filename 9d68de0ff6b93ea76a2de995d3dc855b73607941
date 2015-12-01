@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b0923b2_aef78346",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-12-01T00:21:12Z",
+      "side": 1,
+      "message": "Is it only interfaces with default methods? What about with static fields or static blocks?",
+      "revId": "9d68de0ff6b93ea76a2de995d3dc855b73607941",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

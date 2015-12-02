@@ -22,6 +22,47 @@
       "revId": "320b8693e42f2df73b115d9964c9df5d4addfb01",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fba69f26_65f1ea8d",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-02T23:26:28Z",
+      "side": 1,
+      "message": "Sorry. The fix should be in jsInstanceOf instead.",
+      "parentUuid": "fba69f26_df4eab6a",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 17
+      },
+      "revId": "320b8693e42f2df73b115d9964c9df5d4addfb01",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fba69f26_c5225ee7",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-02T23:26:28Z",
+      "side": 1,
+      "message": "add it here:\n\nif (jsTypeStr \u003d\u003d \"Object\") {\n  // TODO(rluble): Handle this case in the compiler side.\n  return true;\n} else if (jsTypeStr \u003d\u003d \"Array\" ) {\n  // TODO(rluble): remove array special handling once \n  // instanceOf can be customized for native classes.\n  return isArray(obj);\n}",
+      "revId": "320b8693e42f2df73b115d9964c9df5d4addfb01",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

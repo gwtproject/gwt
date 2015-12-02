@@ -16,6 +16,24 @@
       "revId": "c4b0c9a0086cc7374f6cf457b9b9213fac0a2441",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0f23453_00e926a8",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-02T15:25:54Z",
+      "side": 1,
+      "message": "Goktug is apparently working on a \"jsinterop-base\" set of classes that he\u0027d like to put in a different JAR. This is why I chose to handle jsinterop-annotations as if there were several JARs already (including the com.google.jsinterop:jsinterop parent POM).",
+      "parentUuid": "5b488bfd_8106fc60",
+      "revId": "c4b0c9a0086cc7374f6cf457b9b9213fac0a2441",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -27,42 +27,21 @@ final class Exceptions {
 
   @DoNotInline // This frame can be useful in understanding the native stack
   static Object wrap(Object e) {
-    if (e instanceof Throwable) {
-      return e;
+    Throwable javaException = getJavaException(e);
+    if (javaException == null) {
+      javaException = new JavaScriptException(e);
+      StackTraceCreator.captureStackTrace(javaException);
     }
-
-    JavaScriptException jse = getCachedJavaScriptException(e);
-    if (jse == null) {
-      jse = new JavaScriptException(e);
-      StackTraceCreator.captureStackTrace(jse, e);
-      cacheJavaScriptException(e, jse);
-    }
-
-    return jse;
+    return javaException;
   }
 
-  static Object unwrap(Object e) {
-    if (e instanceof JavaScriptException) {
-      JavaScriptException jse = ((JavaScriptException) e);
-      if (jse.isThrownSet()) {
-        return jse.getThrown();
-      }
-    }
-    return e;
-  }
-
-  private static native JavaScriptException getCachedJavaScriptException(Object e) /*-{
-    return e && e.__gwt$exception;
+  @DoNotInline // This method shouldn't be inlined and pruned as JsStackEmulator needs it.
+  static native Object unwrap(Object t)/*-{
+    return t.backingJsObject;
   }-*/;
 
-  private static native void cacheJavaScriptException(Object e, JavaScriptException jse) /*-{
-    if (e && typeof e == 'object') {
-      try {
-        e.__gwt$exception = jse;
-      } catch (ignored) {
-        // See https://code.google.com/p/google-web-toolkit/issues/detail?id=8449
-      }
-    }
+  private static native Throwable getJavaException(Object e)/*-{
+    return e && e.__java$exception;
   }-*/;
 
   static AssertionError makeAssertionError() {

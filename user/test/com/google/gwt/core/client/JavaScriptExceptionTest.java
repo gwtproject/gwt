@@ -20,6 +20,9 @@ import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.useragent.client.UserAgent;
 
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
+
 /**
  * Any JavaScript exceptions occurring within JSNI methods are wrapped as this
  * class when caught in Java code. The wrapping does not occur until the
@@ -156,12 +159,25 @@ public class JavaScriptExceptionTest extends GWTTestCase {
     assertJavaScriptException(jso, catchJava(createThrowRunnable(e)));
   }
 
-  public void testCatchNativePropagatedFromFinally() {
-    RuntimeException e = new RuntimeException();
-    assertSame(e, catchNative(wrapWithFinally(createThrowRunnable(e))));
+  @DoNotRunWith(Platform.Devel)
+  public void testCatchNative() {
+    RuntimeException e = new RuntimeException("<my msg>");
+    Object caughtNative = catchNative(createThrowRunnable(e));
+    assertTrue(caughtNative instanceof NativeError);
+    assertTrue(caughtNative.toString().contains("<my msg>"));
+    assertTrue(caughtNative.toString().contains(RuntimeException.class.getName()));
 
     JavaScriptObject jso = makeJSO();
     e = new JavaScriptException(jso);
+    assertSame(jso, catchNative(createThrowRunnable(e)));
+  }
+
+  @JsType(isNative = true, name = "Error", namespace = JsPackage.GLOBAL)
+  private static class NativeError { }
+
+  public void testCatchNativePropagatedFromFinally() {
+    JavaScriptObject jso = makeJSO();
+    JavaScriptException e = new JavaScriptException(jso);
     assertSame(jso, catchNative(wrapWithFinally(createThrowRunnable(e))));
 
     assertTrue(keepFinallyAlive);
@@ -178,7 +194,7 @@ public class JavaScriptExceptionTest extends GWTTestCase {
   }
 
   private Throwable javaNativeJavaSandwich(RuntimeException e) {
-    return catchJava(createThrowNativeRunnable(catchJava(createThrowRunnable(e))));
+    return catchJava(createThrowNativeRunnable(catchNative(createThrowRunnable(e))));
   }
 
   public void testCatchThrowNative() {
@@ -195,15 +211,6 @@ public class JavaScriptExceptionTest extends GWTTestCase {
 
     e = makeJavaObject();
     assertJavaScriptException(e, catchJava(createThrowNativeRunnable(e)));
-
-    e = new RuntimeException();
-    assertSame(e, catchJava(createThrowNativeRunnable(e)));
-
-    e = new JavaScriptException("exception message"); // Thrown is not set
-    assertSame(e, catchJava(createThrowNativeRunnable(e)));
-
-    e = new JavaScriptException(makeJSO());
-    assertSame(e, catchJava(createThrowNativeRunnable(e)));
   }
 
   // jsni throw -> java catch -> java throw -> jsni catch
@@ -230,10 +237,6 @@ public class JavaScriptExceptionTest extends GWTTestCase {
 
     e = new JavaScriptException("exception message"); // Thrown is not set
     assertSame(e, nativeJavaNativeSandwich(e));
-
-    JavaScriptObject jso = makeJSO();
-    e = new JavaScriptException(jso);
-    assertSame(jso, nativeJavaNativeSandwich(e));
   }
 
   private Object nativeJavaNativeSandwich(Object e) {

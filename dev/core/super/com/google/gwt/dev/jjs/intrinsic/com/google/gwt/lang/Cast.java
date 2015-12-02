@@ -128,6 +128,11 @@ final class Cast {
    * A dynamic cast that optionally checks for JsType prototypes.
    */
   static Object castToNative(Object src, JavaScriptObject dstId, String jsType) {
+    if (jsType == "Object") {
+      return src;
+    } else if (jsType == "Array" && isArray(src)) {
+      return src;
+    }
     // TODO(goktug): Remove canCast after new JsInterop semantics.
     checkType(src == null || canCast(src, dstId) || jsinstanceOf(src, jsType));
     return src;

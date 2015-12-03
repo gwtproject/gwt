@@ -13,7 +13,8 @@
 
   <properties>
     <!-- Convenience property to set the GWT version -->
-    <gwtVersion>2.7.0-SNAPSHOT</gwtVersion>
+    <gwt.version>2.8.0-SNAPSHOT</gwt.version>
+    <gwt.plugin.version>2.7.0</gwt.plugin.version>
 
     <!-- GWT needs at least java 1.6 -->
     <maven.compiler.source>1.7</maven.compiler.source>
@@ -29,7 +30,7 @@
       <dependency>
         <groupId>com.google.gwt</groupId>
         <artifactId>gwt</artifactId>
-        <version>${gwtVersion}</version>
+        <version>${gwt.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -82,7 +83,6 @@
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
-      <version>1.0.0.GA</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -124,7 +124,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
-        <version>${gwtVersion}</version>
+        <version>${gwt.plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -149,7 +149,6 @@
       </plugin>
 
     </plugins>
-
   </build>
 
   <repositories>
@@ -165,16 +164,6 @@
     </repository>
   </repositories>
   <pluginRepositories>
-    <pluginRepository>
-      <id>codehaus-snapshots</id>
-      <url>https://nexus.codehaus.org/content/groups/snapshots-group/</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
     <pluginRepository>
       <id>google-snapshots</id>
       <url>https://oss.sonatype.org/content/repositories/google-snapshots/</url>

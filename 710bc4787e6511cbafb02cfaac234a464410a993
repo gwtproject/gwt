@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b21b386_c4727e2f",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-03T09:29:21Z",
+      "side": 0,
+      "message": "Should instead be replaced with Sonatype OSSRH to get gwt-maven-plugin 2.8.0-SNAPSHOT: https://oss.sonatype.org/content/repositories/snapshots",
+      "revId": "710bc4787e6511cbafb02cfaac234a464410a993",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0f23453_80ed367b",
+        "filename": "samples/dynatablerf/src/main/java/com/google/gwt/sample/dynatablerf/DynaTableRf.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-12-03T08:44:43Z",
+      "side": 1,
+      "message": "You don\u0027t need to enable auto conversion if you covert everything",
+      "revId": "8bf33b1ec5ddee63440a129b5473d0bffcac6152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9b2da379_883b37ac",
+        "filename": "samples/dynatablerf/src/main/java/com/google/gwt/sample/dynatablerf/client/PersonEditorWorkflow.ui.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-12-03T08:44:43Z",
+      "side": 1,
+      "message": "you don\u0027t need to set this attribute if you enable gss by default in uibinder by adding this configuration property:\n\n\u003cset-configuration-property name\u003d\"CssResource.gssDefaultInUiBinder\" value\u003d\"true\" /\u003e",
+      "revId": "8bf33b1ec5ddee63440a129b5473d0bffcac6152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80f5303f_9f3fd360",
+        "filename": "samples/dynatablerf/src/main/java/com/google/gwt/sample/dynatablerf/client/common.gss",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-12-03T08:44:43Z",
+      "side": 1,
+      "message": "This should not compile... \nGss requiert that constant names are defined in upper case",
+      "range": {
+        "startLine": 2,
+        "startChar": 5,
+        "endLine": 2,
+        "endChar": 15
+      },
+      "revId": "8bf33b1ec5ddee63440a129b5473d0bffcac6152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb36e7c5_493a21a4",
+        "filename": "samples/mobilewebapp/src/main/java/com/google/gwt/sample/mobilewebapp/MobileWebApp.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-12-03T08:44:43Z",
+      "side": 1,
+      "message": "remove this property and enable GSS in uibinder",
+      "revId": "8bf33b1ec5ddee63440a129b5473d0bffcac6152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb1bff58_43f20605",
+        "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/Validation.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-12-03T08:44:43Z",
+      "side": 1,
+      "message": "remove this property and enable GSS in uibinder",
+      "revId": "8bf33b1ec5ddee63440a129b5473d0bffcac6152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

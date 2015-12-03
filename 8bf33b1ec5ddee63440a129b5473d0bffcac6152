@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9b2da379_ab2715f5",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-03T17:02:28Z",
+      "side": 1,
+      "message": "I don\u0027t know, I have no idea how it works with IDEs.\n\nLet\u0027s do that in a separate change anyway.",
+      "parentUuid": "c0148835_39a7cfd0",
+      "revId": "8bf33b1ec5ddee63440a129b5473d0bffcac6152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0f23453_80ed367b",
         "filename": "samples/dynatablerf/src/main/java/com/google/gwt/sample/dynatablerf/DynaTableRf.gwt.xml",
         "patchSetId": 1
@@ -123,6 +141,24 @@
       "side": 1,
       "message": "I had to turn this on for a css dependency: \n@Source({\"MainMenuCellList.css\", CellList.Style.DEFAULT_CSS})\n\nCellList.Style.DEFAULT_CSS\u003dcom/google/gwt/user/cellview/client/CellList.css\u003d",
       "parentUuid": "bb36e7c5_493a21a4",
+      "revId": "8bf33b1ec5ddee63440a129b5473d0bffcac6152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db339bd5_ed59213e",
+        "filename": "samples/mobilewebapp/src/main/java/com/google/gwt/sample/mobilewebapp/MobileWebApp.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-03T17:02:28Z",
+      "side": 1,
+      "message": "But there\u0027s a CellList.gss so if I correctly understand what Julien said, the CellList.gss should be picked up correctly (assuming the MainMenuCellList is converted to GSS I suppose)",
+      "parentUuid": "60259c9f_76ef90e2",
       "revId": "8bf33b1ec5ddee63440a129b5473d0bffcac6152",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

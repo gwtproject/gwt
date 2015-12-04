@@ -36,17 +36,13 @@ public class JsProtectedNames {
   static {
     javaScriptKeywords = Sets.newHashSet(
         // These are current keywords
-        "break", "delete", "function", "return", "typeof", "case", "do", "if",
-        "switch", "var", "catch", "else", "in", "this", "void", "continue",
-        "false", "instanceof", "throw", "while", "debugger",
-        "finally", "new", "true", "with", "default", "for", "null", "try",
-
-        // These are future keywords
-        "abstract", "double", "goto", "native", "static", "boolean", "enum",
-        "implements", "package", "super", "byte", "export", "import",
-        "private", "synchronized", "char", "extends", "int", "protected",
-        "throws", "class", "final", "interface", "public", "transient",
-        "const", "float", "long", "short", "volatile");
+        "abstract", "arguments", "boolean", "break", "byte", "case", "catch", "char", "class",
+        "const", "continue", "debugger", "default", "delete", "do", "double", "else", "enum",
+        "eval", "export", "extends", "false", "final", "finally", "float", "for", "function",
+        "goto", "if", "implements", "import", "in", "instanceof", "int",  "interface", "let",
+        "long", "native", "new", "null", "package", "private", "protected", "public", "return",
+        "short", "static", "super", "switch", "synchronized", "this", "throw", "throws",
+        "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with", "yield");
 
     illegalNames = Sets.newHashSet(
         // These might be top level variables or functions that we care not to hide. Grabbed from
@@ -62,7 +58,7 @@ public class JsProtectedNames {
         "java", "big", "parse", "media", "floor", "abbr", "gamma", "id", "dump", "exp", "some",
         "link", "abs", "self", "tan", "test", "every", "isNaN", "index", "pop", "join", "fixed",
         "ceil", "span", "UTC", "SQRT2", "name", "tFoot", "pow", "URL", "face", "sub", "vLink",
-        "label", "cells", "rows", "eval", "cols", "acos", "lang", "trim", "LN10", "cite", "frame",
+        "label", "cells", "rows", "cols", "acos", "lang", "trim", "LN10", "cite", "frame",
         "sun", "links", "sup", "areas", "isId", "type", "seal", "shift", "keys", "call", "close",
         "axis", "alt", "uri", "value", "rules", "reset", "alpha", "E", "open", "aLink", "sheet",
         "start", "Node", "blink", "stack", "now", "slice", "clear", "rel", "top", "scope", "item",
@@ -70,13 +66,13 @@ public class JsProtectedNames {
         "match", "src", "cos", "title", "write", "JSON", "PI", "beta", "log", "forms", "split",
         "input", "NaN", "focus", "map", "defer", "data", "push", "atan2", "atan", "shape", "small",
         "blur", "text", "LN2", "get", "max", "arity", "dir", "x", "Error", "y", "z", "sort", "size",
-        "round", "Math",
+        "round", "Math", "undefined",
         // From Chrome 30
         "CSS", "Rect", "Blob", "self", "Node", "JSON", "Intl", "Attr", "Date",
         "File", "name", "Text", "Array", "Audio", "event", "Range", "Touch", "Image", "Error",
         "Event", "top", "url",
         // From Firefox 25
-        "Map", "Set", "eval", "Proxy",
+        "Map", "Set", "Proxy",
         // From Safari 7.0
         "Path", "self");
 
@@ -102,10 +98,6 @@ public class JsProtectedNames {
     } catch (IOException e) {
       throw new RuntimeException("JsProtectedNames can't read resource: " + path, e);
     }
-  }
-
-  public static boolean isKeyword(String s) {
-    return javaScriptKeywords.contains(s);
   }
 
   public static boolean isLegalName(String s) {

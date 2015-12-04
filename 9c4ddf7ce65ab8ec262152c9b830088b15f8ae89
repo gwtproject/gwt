@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "a0531454_98d4d512",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-04T16:17:40Z",
+      "side": 1,
+      "message": "OK, maybe someone should file an issue on Mojo\u0027s Plugin for GWT to remove the feature then if it doesn\u0027t work (and the steps given here work like a charm, thanks!)",
+      "parentUuid": "e06d0cee_e9e2c1f3",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 57
+      },
+      "revId": "9c4ddf7ce65ab8ec262152c9b830088b15f8ae89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80f5303f_c23c649f",
         "filename": "samples/mobilewebapp/pom.xml",
         "patchSetId": 2

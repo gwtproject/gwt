@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db339bd5_6d50d1de",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-04T10:18:28Z",
+      "side": 1,
+      "message": "\"mvn install\" is an anti-pattern. Its only \"acceptable\" usage is:\n* to actually install a lib so you can use it in another project (similar to deploying, but local-only)\n* in multi-module projects, as a workaround for plugins that don\u0027t play well with reactor builds (e.g. jetty-maven-plugin, and possibly appengine-maven-plugin; but we\u0027re not in a multi-project here so that doesn\u0027t apply)\n\nIf you want to run all tests and integration tests, use \"mvn verify\" and don\u0027t mess with your local repository (and as a nice though limited side effect, save some disk space).\n\nHere the instructions are about \"running\" the project, so it should just be \"mvn package\" or \"mvn war:exploded\".",
+      "revId": "9c4ddf7ce65ab8ec262152c9b830088b15f8ae89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0f23453_83c42069",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-04T10:18:28Z",
+      "side": 1,
+      "message": "Out of curiosity, the integration of AppEngine with DevMode through\n\n -server com.google.appengine.tools.development.gwt.AppEngineLauncher\n\nno longer works? or is no longer detected by Mojo\u0027s Plugin for GWT for some reason? Or maybe it\u0027s just no longer working or too brittle or crappy for whatever reason? Maybe it should be removed from the plugin for GWT then?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 57
+      },
+      "revId": "9c4ddf7ce65ab8ec262152c9b830088b15f8ae89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80f5303f_c23c649f",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-04T10:18:28Z",
+      "side": 1,
+      "message": "Did you mean \"comment out\" ?",
+      "range": {
+        "startLine": 246,
+        "startChar": 15,
+        "endLine": 246,
+        "endChar": 25
+      },
+      "revId": "9c4ddf7ce65ab8ec262152c9b830088b15f8ae89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

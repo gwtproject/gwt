@@ -15,6 +15,9 @@
  */
 package com.google.gwt.safehtml.shared;
 
+import com.google.gwt.safehtml.shared.annotations.IsTrustedResourceUrl;
+import com.google.gwt.safehtml.shared.annotations.SuppressIsSafeUrlCastCheck;
+
 /**
  * A string wrapped as an object of type {@link SafeUri}.
  * 
@@ -53,6 +56,8 @@ class SafeUriString implements SafeUri {
   /**
    * {@inheritDoc}
    */
+  @IsTrustedResourceUrl
+  @SuppressIsSafeUrlCastCheck
   public String asString() {
     return uri;
   }

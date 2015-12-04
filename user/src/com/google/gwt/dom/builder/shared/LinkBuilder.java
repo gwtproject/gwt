@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dom.builder.shared;
 
+import com.google.gwt.safehtml.shared.annotations.IsTrustedResourceUrl;
+
 /**
  * Builds an link element.
  */
@@ -33,7 +35,7 @@ public interface LinkBuilder extends ElementBuilderBase<LinkBuilder> {
    *      href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/links.html#adef-href">W3C
    *      HTML Specification</a>
    */
-  LinkBuilder href(String href);
+  LinkBuilder href(@IsTrustedResourceUrl String href);
 
   /**
    * Language code of the linked resource.

@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0dcf4fd_73255aee",
+        "filename": "user/src/com/google/gwt/safehtml/shared/SafeUri.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-04T23:56:02Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.safehtml.shared.annotations.IsSafeUrl.",
+      "revId": "2c786cc233f0d59f7bf9e78c3a125c7a380f518b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0dcf4fd_131acea9",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsSafeUrl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-04T23:56:02Z",
+      "side": 1,
+      "message": "[error] Missing a header - not enough lines in file.",
+      "revId": "2c786cc233f0d59f7bf9e78c3a125c7a380f518b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0dcf4fd_331fd29a",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsTrustedResourceUrl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-04T23:56:02Z",
+      "side": 1,
+      "message": "[error] Missing a header - not enough lines in file.",
+      "revId": "2c786cc233f0d59f7bf9e78c3a125c7a380f518b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0dcf4fd_d333e634",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/SuppressIsSafeUrlCastCheck.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-04T23:56:02Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "2c786cc233f0d59f7bf9e78c3a125c7a380f518b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

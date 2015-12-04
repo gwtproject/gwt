@@ -16,6 +16,23 @@
       "revId": "710bc4787e6511cbafb02cfaac234a464410a993",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0f23453_e3d40c13",
+        "filename": "samples/validation/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-04T10:42:44Z",
+      "side": 0,
+      "message": "We should remove this from the pom.xmlsrc template for webAppCreator too.",
+      "revId": "710bc4787e6511cbafb02cfaac234a464410a993",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -21,6 +21,7 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Node;
 import com.google.gwt.dom.client.ScriptElement;
+import com.google.gwt.safehtml.shared.annotations.SuppressIsSafeUrlCastCheck;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -196,6 +197,7 @@ public class JsonpRequest<T> {
    *
    * @param baseUri To be sent to the server.
    */
+  @SuppressIsSafeUrlCastCheck
   void send(final String baseUri) {
     registerCallbacks(CALLBACKS, canHaveMultipleRequestsForSameId);
     StringBuilder uri = new StringBuilder(baseUri);

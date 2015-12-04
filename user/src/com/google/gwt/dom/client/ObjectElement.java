@@ -17,6 +17,7 @@ package com.google.gwt.dom.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.safehtml.shared.SafeUri;
+import com.google.gwt.safehtml.shared.annotations.IsTrustedResourceUrl;
 
 /**
  * Generic embedded object.
@@ -166,7 +167,7 @@ public class ObjectElement extends Element {
    *
    * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/objects.html#adef-data">W3C HTML Specification</a>
    */
-  public final native void setData(String data) /*-{
+  public final native void setData(@IsTrustedResourceUrl String data) /*-{
      this.data = data;
    }-*/;
 

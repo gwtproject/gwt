@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e06d0cee_09bff57b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-04T17:38:36Z",
+      "side": 1,
+      "message": "Translate instanceof as typeof \u003d\u003d \"object\"  for native GLOBAL.Object.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "c37b8c10c4bf557f1928a772220a42cc67b62491",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e06d0cee_c9a1fd65",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-04T17:38:36Z",
+      "side": 1,
+      "message": "if (jsTypeStr \u003d \"Object\") {\n  return (typeof obj) \u003d\u003d \"object;\n}\n\nWe don\u0027t what fall through here.",
+      "range": {
+        "startLine": 244,
+        "startChar": 13,
+        "endLine": 244,
+        "endChar": 17
+      },
+      "revId": "c37b8c10c4bf557f1928a772220a42cc67b62491",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

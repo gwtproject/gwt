@@ -201,6 +201,24 @@
     },
     {
       "key": {
+        "uuid": "a0531454_f8d19120",
+        "filename": "samples/mobilewebapp/src/main/java/com/google/gwt/sample/mobilewebapp/MobileWebApp.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-04T16:17:40Z",
+      "side": 1,
+      "message": "I believe this is because we have MainMenuCellList.css without a GSS alternative (or actually, in the samples, I believe we should go ahead and convert the CSS to GSS and only have the MainMenuCellList.gss; IIUC)",
+      "parentUuid": "e06d0cee_2910b996",
+      "revId": "8bf33b1ec5ddee63440a129b5473d0bffcac6152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb1bff58_43f20605",
         "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/Validation.gwt.xml",
         "patchSetId": 1

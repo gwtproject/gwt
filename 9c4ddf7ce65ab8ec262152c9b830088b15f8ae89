@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "e06d0cee_e9e2c1f3",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2015-12-04T15:31:27Z",
+      "side": 1,
+      "message": "I deem using -server appengine no longer working and not effective with a maven configuration. The GPE devs, before me were moving away and wanted to use the Eclipse runtime server instead, which I think is much more effective in most situations to run any backend you want. Although it requires a couple more steps to setup, I\u0027ve got the new GWT Eclipse plugin working very well with it. http://gwt-plugins.github.io/documentation/gwt-eclipse-plugin/servers/AppEngine.html describes how to configure the IDE. \n\nThe real problem is that the old maven plugin was bound to the sdk and there are some issues with unpacking the zip. Instead, using the official Google maven plugin is more effective with the Eclipse server config.",
+      "parentUuid": "a0f23453_83c42069",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 57
+      },
+      "revId": "9c4ddf7ce65ab8ec262152c9b830088b15f8ae89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80f5303f_c23c649f",
         "filename": "samples/mobilewebapp/pom.xml",
         "patchSetId": 2
@@ -53,6 +77,30 @@
       "writtenOn": "2015-12-04T10:18:28Z",
       "side": 1,
       "message": "Did you mean \"comment out\" ?",
+      "range": {
+        "startLine": 246,
+        "startChar": 15,
+        "endLine": 246,
+        "endChar": 25
+      },
+      "revId": "9c4ddf7ce65ab8ec262152c9b830088b15f8ae89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e06d0cee_09e055e9",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2015-12-04T15:31:27Z",
+      "side": 1,
+      "message": "I think I copied this from the App Engine archetype and they mean to enable it to comment it in, but now that I read it I think it needs tuning.",
+      "parentUuid": "80f5303f_c23c649f",
       "range": {
         "startLine": 246,
         "startChar": 15,

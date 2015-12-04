@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e06d0cee_d400b446",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsProtectedNames.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-04T19:17:57Z",
+      "side": 0,
+      "message": "removed because it already appears in the list at line 65.",
+      "range": {
+        "startLine": 79,
+        "startChar": 22,
+        "endLine": 79,
+        "endChar": 29
+      },
+      "revId": "b01585b6e6c82377aee70fc6cdb557ab050e6723",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

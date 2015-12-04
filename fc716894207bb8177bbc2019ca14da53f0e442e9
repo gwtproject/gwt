@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e06d0cee_544824b1",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsProtectedNames.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-04T19:17:57Z",
+      "side": 1,
+      "message": "This is the main reason for the patch. sdh reported that we were generating yield as a name.",
+      "range": {
+        "startLine": 40,
+        "startChar": 40,
+        "endLine": 40,
+        "endChar": 47
+      },
+      "revId": "fc716894207bb8177bbc2019ca14da53f0e442e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e06d0cee_943ebc09",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsProtectedNames.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-04T19:17:57Z",
+      "side": 1,
+      "message": "added",
+      "range": {
+        "startLine": 69,
+        "startChar": 25,
+        "endLine": 69,
+        "endChar": 36
+      },
+      "revId": "fc716894207bb8177bbc2019ca14da53f0e442e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

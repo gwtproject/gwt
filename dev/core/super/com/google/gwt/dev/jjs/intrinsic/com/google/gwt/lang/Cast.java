@@ -239,7 +239,7 @@ final class Cast {
         return false;
     }
 
-    if (jsTypeStr == "Object") {
+    if (jsTypeStr == "Object" && (typeof obj) == "object") {
       // TODO(rluble): Handle this case in the compiler side.
       return true;
     } else if (jsTypeStr == "Array" ) {

@@ -165,6 +165,24 @@
     },
     {
       "key": {
+        "uuid": "1b21b386_07e81811",
+        "filename": "samples/mobilewebapp/src/main/java/com/google/gwt/sample/mobilewebapp/MobileWebApp.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2015-12-04T10:54:55Z",
+      "side": 1,
+      "message": "Yes, the auto-conversion should be only enabled during the conversion process when some part of your application css is still using the old syntax.\n\nWhat error do you get if you don\u0027t enable the auto-conversion ?",
+      "parentUuid": "db339bd5_ed59213e",
+      "revId": "8bf33b1ec5ddee63440a129b5473d0bffcac6152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb1bff58_43f20605",
         "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/Validation.gwt.xml",
         "patchSetId": 1

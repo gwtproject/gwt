@@ -183,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "e06d0cee_2910b996",
+        "filename": "samples/mobilewebapp/src/main/java/com/google/gwt/sample/mobilewebapp/MobileWebApp.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2015-12-04T15:42:28Z",
+      "side": 1,
+      "message": "Disabling the conversion results in these errors:\n\n--- gwt-maven-plugin:2.8.0-SNAPSHOT:compile (default) @ MobileWebApp ---\n[INFO] Compiling module com.google.gwt.sample.mobilewebapp.MobileWebApp\n[INFO]    Computing all possible rebind results for \u0027com.google.gwt.sample.mobilewebapp.client.desktop.MobileWebAppShellDesktop.Resources\u0027\n[INFO]       Rebinding com.google.gwt.sample.mobilewebapp.client.desktop.MobileWebAppShellDesktop.Resources\n[INFO]          Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator\n[INFO]             Preparing method cellListStyle\n[INFO]                [ERROR] Your ClientBundle is referencing css files instead of gss. You will need to either convert these files to gss using the converter tool or turn on auto convertion in your gwt.xml file. Note: Autoconversion will be removed in the next version of GWT, you will need to move to gss.Add this line to your gwt.xml file to temporary avoid this:\u003cset-configuration-property name\u003d\"CssResource.conversionMode\"    value\u003d\"strict\" /\u003e Details on how to migrate to GSS can be found at: http://goo.gl/tEQnmJ\n[INFO]    [ERROR] Errors in \u0027com/google/gwt/sample/mobilewebapp/client/desktop/MobileWebAppShellDesktop.java\u0027\n[INFO]       [ERROR] Line 147: Failed to resolve \u0027com.google.gwt.sample.mobilewebapp.client.desktop.MobileWebAppShellDesktop.Resources\u0027 via deferred binding\n[INFO]    Computing all possible rebind results for \u0027com.google.gwt.sample.mobilewebapp.client.mobile.MobileTaskListView.CellListResources\u0027\n[INFO]       Rebinding com.google.gwt.sample.mobilewebapp.client.mobile.MobileTaskListView.CellListResources\n[INFO]          Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator\n[INFO]             Preparing method cellListStyle\n[INFO]                [ERROR] Your ClientBundle is referencing css files instead of gss. You will need to either convert these files to gss using the converter tool or turn on auto convertion in your gwt.xml file. Note: Autoconversion will be removed in the next version of GWT, you will need to move to gss.Add this line to your gwt.xml file to temporary avoid this:\u003cset-configuration-property name\u003d\"CssResource.conversionMode\"    value\u003d\"strict\" /\u003e Details on how to migrate to GSS can be found at: http://goo.gl/tEQnmJ\n[INFO]    [ERROR] Errors in \u0027com/google/gwt/sample/mobilewebapp/client/mobile/MobileTaskListView.java\u0027\n[INFO]       [ERROR] Line 78: Failed to resolve \u0027com.google.gwt.sample.mobilewebapp.client.mobile.MobileTaskListView.CellListResources\u0027 via deferred binding\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD FAILURE\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time: 38.299 s\n[INFO] Finished at: 2015-12-04T07:41:39-08:00\n[INFO] Final Memory: 30M/254M\n[INFO] -------------------------------------------------",
+      "parentUuid": "1b21b386_07e81811",
+      "revId": "8bf33b1ec5ddee63440a129b5473d0bffcac6152",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb1bff58_43f20605",
         "filename": "samples/validation/src/main/java/com/google/gwt/sample/validation/Validation.gwt.xml",
         "patchSetId": 1

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00106094_a3b07a02",
+        "filename": "user/src/com/google/gwt/resources/css/InterfaceGenerator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-05T09:50:29Z",
+      "side": 1,
+      "message": "Needs to be qualified for Java 7:\n\n Sets.\u003cJClassType\u003enewHashSet()\n\nMaybe switch to\n\n new HashSet\u003cJClassType\u003e()\n\nthen?",
+      "range": {
+        "startLine": 252,
+        "startChar": 66,
+        "endLine": 252,
+        "endChar": 83
+      },
+      "revId": "0bc8e5640654d003d55c181daa12c7e33878c911",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

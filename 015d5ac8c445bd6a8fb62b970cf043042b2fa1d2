@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0dcf4fd_b30742f5",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-05T09:36:34Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.shell.ShellJavaScriptHost.",
+      "revId": "015d5ac8c445bd6a8fb62b970cf043042b2fa1d2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

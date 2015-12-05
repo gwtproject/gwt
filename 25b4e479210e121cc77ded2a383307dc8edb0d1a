@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c001e83e_11c9cc7f",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-05T01:54:43Z",
+      "side": 1,
+      "message": "Just noticed this needs to be updated in the README-MAVEN.txt, which also talks about the maven-gae-plugin.",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 57
+      },
+      "revId": "25b4e479210e121cc77ded2a383307dc8edb0d1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0dcf4fd_73f23a57",
+        "filename": "user/src/com/google/gwt/resources/css/InterfaceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-05T09:33:34Z",
+      "side": 1,
+      "message": "[error] Unused import - javax.annotation.Nullable.",
+      "revId": "c6dfb9a71e3c71b987d5198301a0ec9d51ae5e72",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0dcf4fd_13f72e46",
+        "filename": "user/src/com/google/gwt/resources/css/InterfaceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-05T09:33:34Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.io.File\u0027 import.",
+      "revId": "c6dfb9a71e3c71b987d5198301a0ec9d51ae5e72",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0dcf4fd_33fcb227",
+        "filename": "user/src/com/google/gwt/resources/css/InterfaceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-05T09:33:34Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.ArrayList.",
+      "revId": "c6dfb9a71e3c71b987d5198301a0ec9d51ae5e72",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0dcf4fd_d300c6e1",
+        "filename": "user/src/com/google/gwt/resources/css/InterfaceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-05T09:33:34Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.LinkedList.",
+      "revId": "c6dfb9a71e3c71b987d5198301a0ec9d51ae5e72",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0dcf4fd_f3fdca22",
+        "filename": "user/src/com/google/gwt/resources/rg/GssResourceGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-05T09:33:34Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.shell.ShellJavaScriptHost.",
+      "revId": "c6dfb9a71e3c71b987d5198301a0ec9d51ae5e72",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

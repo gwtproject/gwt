@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0dcf4fd_f324ea90",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-05T13:08:09Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.gargoylesoftware.htmlunit.InteractivePage\u0027 import.",
+      "revId": "f54373928dcb86517aa5e878e4e0254b78e15799",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

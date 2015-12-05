@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60f2fca8_2e9d877b",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsSafeUrl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-05T00:36:58Z",
+      "side": 1,
+      "message": "Should probably be IsSafeUri (with a final I, rather than L) for consistency with SafeUri (and as used in the javadoc)",
+      "range": {
+        "startLine": 24,
+        "startChar": 18,
+        "endLine": 24,
+        "endChar": 27
+      },
+      "revId": "11e5fc28fac72ecc78c3232d72e5eeee23bded31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40edf8c8_2d9d8d7b",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsTrustedResourceUrl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-05T00:36:58Z",
+      "side": 1,
+      "message": "Same here (URI vs. URL)",
+      "range": {
+        "startLine": 24,
+        "startChar": 18,
+        "endLine": 24,
+        "endChar": 38
+      },
+      "revId": "11e5fc28fac72ecc78c3232d72e5eeee23bded31",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

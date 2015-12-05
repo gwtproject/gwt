@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "601bdcb8_269db67b",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-05T02:46:43Z",
+      "side": 1,
+      "message": "Given that at this point the POM still uses Mojo\u0027s Maven Plugin, this should be run-codeserver.",
+      "revId": "b7dcf5b9e089b24a191fde2269d61fd8305dbde2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "4016d890_c5ce5a82",
+        "filename": "maven/poms/gwt/gwt-dev/pom-template.xml",
+        "patchSetId": 24
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2015-12-06T18:17:21Z",
+      "side": 1,
+      "message": "This change uses 9.2.14.v20151106 Jett version, yet, this templates uses 9.2.10.v20150310.",
+      "range": {
+        "startLine": 32,
+        "startChar": 21,
+        "endLine": 32,
+        "endChar": 37
+      },
+      "revId": "f54373928dcb86517aa5e878e4e0254b78e15799",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0dcf4fd_f324ea90",
         "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
         "patchSetId": 24

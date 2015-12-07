@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40edf8c8_edd1c520",
+        "filename": "dev/build.xml",
+        "patchSetId": 25
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-07T00:49:01Z",
+      "side": 1,
+      "message": "HtmlUnit says it depends on Jetty websocket-client [1], shouldn\u0027t it be added here? (and in the gwt-dev pom-template.xml, instead of adding them only in the test.extraclasspath in user/build.xml; if they\u0027re needed there, they\u0027re probably needed for anyone using GWTTestCase)\n\nAlso, maybe we could use jetty-all instead? Do you know what would be the difference?\n\n [1] http://htmlunit.sourceforge.net/dependencies.html",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 87
+      },
+      "revId": "ef5cee69eff122227e18124734a1d8889f2de33c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "800b7060_cfb79df6",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-07T00:49:01Z",
+      "side": 1,
+      "message": "FIREFOX_31 is deprecated [1], can we use FIREFOX_38 instead?\n\nCan we also add EDGE?\n\n [1] http://htmlunit.sourceforge.net/apidocs/com/gargoylesoftware/htmlunit/BrowserVersion.html",
+      "revId": "ef5cee69eff122227e18124734a1d8889f2de33c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60f2fca8_6e7b0fa2",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-07T00:49:01Z",
+      "side": 1,
+      "message": "FF38",
+      "revId": "ef5cee69eff122227e18124734a1d8889f2de33c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "60c91c79_7cb631b1",
+        "filename": "samples/mobilewebapp/README-MAVEN.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2015-12-07T22:47:36Z",
+      "side": 1,
+      "message": "I think reverting this file changes, and do it in another patch is fine.",
+      "parentUuid": "60f2fca8_0ea24bbf",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 84
+      },
+      "revId": "ab09acf0f164d0805976ea7539cd3e08d0645954",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c001e83e_91d49c12",
         "filename": "samples/mobilewebapp/README-MAVEN.txt",
         "patchSetId": 6

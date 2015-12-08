@@ -43,13 +43,12 @@ public class NullPointerExceptionTest extends GWTTestCase {
 
   private native Object catchNpeInNative() /*-{
     try {
-      this.throwJavaNpe();
+      this.@tNullPointerExceptionTest::hrowJavaNpe()();
     } catch (e) {
       return e;
     }
   }-*/;
 
-  @JsMethod
   private void throwJavaNpe() {
     throw new NullPointerException("<my msg>");
   }

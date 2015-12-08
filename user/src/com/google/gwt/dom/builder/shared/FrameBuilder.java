@@ -16,6 +16,7 @@
 package com.google.gwt.dom.builder.shared;
 
 import com.google.gwt.safehtml.shared.SafeUri;
+import com.google.gwt.safehtml.shared.annotations.IsSafeUri;
 
 /**
  * Builds an frame element.
@@ -110,5 +111,5 @@ public interface FrameBuilder extends ElementBuilderBase<FrameBuilder> {
    *      href="http://www.w3.org/TR/1999/REC-html401-19991224/present/frames.html#adef-src-FRAME">W3C
    *      HTML Specification</a>
    */
-  FrameBuilder src(String src);
+  FrameBuilder src(@IsSafeUri String src);
 }

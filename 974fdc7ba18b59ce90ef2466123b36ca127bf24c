@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0834c1b_8a32cbc8",
+        "filename": "user/src/com/google/gwt/safehtml/shared/SafeUri.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-08T20:09:12Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.safehtml.shared.annotations.IsTrustedResourceUri.",
+      "revId": "974fdc7ba18b59ce90ef2466123b36ca127bf24c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0834c1b_aa2f8f63",
+        "filename": "user/src/com/google/gwt/safehtml/shared/SafeUriString.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2015-12-08T20:09:12Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.safehtml.shared.annotations.IsTrustedResourceUri.",
+      "revId": "974fdc7ba18b59ce90ef2466123b36ca127bf24c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

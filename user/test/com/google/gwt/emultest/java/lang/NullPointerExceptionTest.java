@@ -20,8 +20,6 @@ import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
-import jsinterop.annotations.JsMethod;
-
 /**
  * Unit tests for the GWT emulation of java.lang.NullPointerException class.
  */
@@ -43,13 +41,12 @@ public class NullPointerExceptionTest extends GWTTestCase {
 
   private native Object catchNpeInNative() /*-{
     try {
-      this.throwJavaNpe();
+      this.@NullPointerExceptionTest::throwJavaNpe()();
     } catch (e) {
       return e;
     }
   }-*/;
 
-  @JsMethod
   private void throwJavaNpe() {
     throw new NullPointerException("<my msg>");
   }

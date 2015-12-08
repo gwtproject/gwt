@@ -128,7 +128,7 @@ public class Element extends Node {
   }-*/;
 
   /**
-   * Dispatched the given event with this element as its target. The event will
+   * Dispatches the given event with this element as its target. The event will
    * go through all phases of the browser's normal event dispatch mechanism.
    * 
    * Note: Because the browser's normal dispatch mechanism is used, exceptions

@@ -20,6 +20,7 @@ import com.google.gwt.user.client.rpc.SerializationException;
 import com.google.gwt.user.client.rpc.SerializationStreamReader;
 import com.google.gwt.user.client.rpc.SerializationStreamWriter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -234,6 +235,59 @@ public final class Collections {
     @Override
     public void serializeInstance(SerializationStreamWriter streamWriter,
         List instance) throws SerializationException {
+      serialize(streamWriter, instance);
+    }
+  }
+
+  public static final class UnmodifiableRandomAccessList_CustomFieldSerializer extends
+      CustomFieldSerializer<List> {
+
+    public static String concreteType() {
+      return java.util.Collections.unmodifiableList(java.util.Collections.emptyList()).getClass().getName();
+    }
+
+    public static void deserialize(SerializationStreamReader streamReader,
+                                   List instance) throws SerializationException {
+    }
+
+    public static List instantiate(SerializationStreamReader streamReader)
+        throws SerializationException {
+
+      List wrapped = new ArrayList();
+      int size = streamReader.readInt();
+      for (int i = 0; i < size; ++i) {
+        Object obj = streamReader.readObject();
+        wrapped.add(obj);
+      }
+
+      return java.util.Collections.unmodifiableList(wrapped);
+    }
+
+    public static void serialize(SerializationStreamWriter streamWriter,
+                                 List instance) throws SerializationException {
+      com.google.gwt.user.client.rpc.core.java.util.Collection_CustomFieldSerializerBase.serialize(streamWriter, instance);
+    }
+
+    @Override
+    public void deserializeInstance(SerializationStreamReader streamReader,
+                                    List instance) throws SerializationException {
+      deserialize(streamReader, instance);
+    }
+
+    @Override
+    public boolean hasCustomInstantiateInstance() {
+      return true;
+    }
+
+    @Override
+    public List instantiateInstance(SerializationStreamReader streamReader)
+        throws SerializationException {
+      return instantiate(streamReader);
+    }
+
+    @Override
+    public void serializeInstance(SerializationStreamWriter streamWriter,
+                                  List instance) throws SerializationException {
       serialize(streamWriter, instance);
     }
   }

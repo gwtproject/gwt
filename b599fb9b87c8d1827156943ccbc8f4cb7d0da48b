@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0098cde_fd690394",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 7895
+      },
+      "writtenOn": "2015-12-09T01:16:50Z",
+      "side": 1,
+      "message": "s/Url/Uri",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0098cde_3d609b83",
+        "filename": "user/src/com/google/gwt/dom/client/FrameElement.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 7895
+      },
+      "writtenOn": "2015-12-09T01:16:50Z",
+      "side": 1,
+      "message": "In other implementations we\u0027ve required TrustedResourceUri for frames/iframes (based on the observation that framing/iframing untrustworthy content can result in exploitable scenarios; e.g., top.location-navigating to a phishing page).\n\nHowever, since there\u0027s no risk of XSS, and setSrc above requires SafeUri, it\u0027s maybe OK to leave at @IsSafeUri for consistency.",
+      "range": {
+        "startLine": 244,
+        "startChar": 35,
+        "endLine": 244,
+        "endChar": 44
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0098cde_3deb7b13",
+        "filename": "user/src/com/google/gwt/dom/client/ObjectElement.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 7895
+      },
+      "writtenOn": "2015-12-09T01:16:50Z",
+      "side": 1,
+      "message": "As discussed offline, it might be worth requiring @IsTrustedResourceUri SafeUri data to effectively strengthen the API contract to what it should have been to begin with.",
+      "range": {
+        "startLine": 163,
+        "startChar": 20,
+        "endLine": 163,
+        "endChar": 27
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0098cde_1d0f97b9",
+        "filename": "user/src/com/google/gwt/jsonp/client/JsonpRequest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 7895
+      },
+      "writtenOn": "2015-12-09T01:16:50Z",
+      "side": 1,
+      "message": "Why are both @Suppress annotations needed here?",
+      "range": {
+        "startLine": 201,
+        "startChar": 3,
+        "endLine": 201,
+        "endChar": 29
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0098cde_bd882b9e",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsTrustedResourceUri.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 7895
+      },
+      "writtenOn": "2015-12-09T01:16:50Z",
+      "side": 1,
+      "message": "Suggested wording:\n\nA type annotation that represents URIs referencing the application’s own, trusted resources. Such URIs can be used to safely load scripts, CSS and other sensitive resources without the risk of untrusted code execution.",
+      "range": {
+        "startLine": 19,
+        "startChar": 45,
+        "endLine": 19,
+        "endChar": 91
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0098cde_1d5797d6",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsTrustedResourceUri.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 7895
+      },
+      "writtenOn": "2015-12-09T01:16:50Z",
+      "side": 1,
+      "message": "Remove this sentence, since there\u0027s no TrustedResourceUrl type in GWT.",
+      "range": {
+        "startLine": 22,
+        "startChar": 3,
+        "endLine": 22,
+        "endChar": 30
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0098cde_bd6f8b98",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/SuppressIsTrustedResourceUriCastCheck.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 7895
+      },
+      "writtenOn": "2015-12-09T01:16:50Z",
+      "side": 1,
+      "message": "Adjust comment to refer to TrustedResourceUri.",
+      "range": {
+        "startLine": 22,
+        "startChar": 53,
+        "endLine": 22,
+        "endChar": 62
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

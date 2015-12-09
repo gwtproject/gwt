@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05487277_26de98fd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2015-12-09T19:48:17Z",
+      "side": 1,
+      "message": "LGTM, but I wonder if this couldn\u0027t be fixed another way, say changing the order of when the varargs pass runs, or ensuring that the type is rescued earlier?\n\nAnyway, I don\u0027t object to this implementation.",
+      "revId": "7da36d915ef310beee9aa259941bf0897fd837c5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

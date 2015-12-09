@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0650cc5_7a015948",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.ui.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5025
+      },
+      "writtenOn": "2015-12-09T05:29:11Z",
+      "side": 1,
+      "message": "Did you mean to change this line?",
+      "revId": "5fc88be525835fe8ae18c5a5b1b92ab960e6ebe6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

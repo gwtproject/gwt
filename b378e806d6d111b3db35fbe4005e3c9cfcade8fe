@@ -187,6 +187,24 @@
       "revId": "b378e806d6d111b3db35fbe4005e3c9cfcade8fe",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05487277_d763ec1e",
+        "filename": "user/test/com/google/gwt/core/interop/JsExportOptimizationTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-12-10T02:52:11Z",
+      "side": 1,
+      "message": "I meant both tests. Either keep them both here or move to JsMethod.",
+      "parentUuid": "05487277_37bfe0ce",
+      "revId": "b378e806d6d111b3db35fbe4005e3c9cfcade8fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05487277_37dec0fd",
+        "filename": "user/test/com/google/gwt/core/interop/JsExportOptimizationTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-12-10T02:52:11Z",
+      "side": 1,
+      "message": "If you would like to run this in J2CL, you need to remove the dep (replace it with native JsType method calls instead).",
+      "revId": "7e6ea4d2418b4b71eea508f5db3d37a124b92375",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

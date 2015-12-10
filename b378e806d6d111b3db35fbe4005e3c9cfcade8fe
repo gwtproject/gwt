@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "05487277_f7d82847",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-10T02:16:42Z",
+      "side": 1,
+      "message": "Not really that castSucceedJsoSemantics is used in 2 places.\n\nSay you have a cast (ToType) object and object is of type A\n\n1) to see if object can hold objects of type B we do CSJS(B, A)\n2) if that succeeds to see if ToType is or not in the cast map of B by issuing CSJS(B,ToType)\n\n\nI am going to refactor this.",
+      "parentUuid": "05487277_ac3b87a3",
+      "revId": "b378e806d6d111b3db35fbe4005e3c9cfcade8fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05487277_2c92f7c9",
         "filename": "user/test/com/google/gwt/core/interop/JsExportOptimizationTest.java",
         "patchSetId": 1

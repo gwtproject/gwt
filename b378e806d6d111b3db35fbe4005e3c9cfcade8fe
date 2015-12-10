@@ -73,6 +73,24 @@
       "revId": "b378e806d6d111b3db35fbe4005e3c9cfcade8fe",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05487277_ecbcdff7",
+        "filename": "user/test/com/google/gwt/core/interop/JsExportOptimizationTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-10T01:49:06Z",
+      "side": 1,
+      "message": "I am indifferent to moving it because the first test can not be easily ported to j2cl and both are testing GWT specific functionality",
+      "parentUuid": "05487277_0c705b72",
+      "revId": "b378e806d6d111b3db35fbe4005e3c9cfcade8fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

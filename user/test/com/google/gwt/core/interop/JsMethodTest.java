@@ -19,6 +19,7 @@ import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import com.google.gwt.junit.client.GWTTestCase;
 
+import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 
@@ -80,4 +81,20 @@ public class JsMethodTest extends GWTTestCase {
     setJsInteropSecret("very secret!");
     assertEquals("very secret!", getJsInteropSecret());
   }
+
+  public void testNoSameParameterValueOptimization() {
+    assertEquals("L", X.m("L"));
+    assertEquals("M", callM("M"));
+  }
+
+  static class X {
+    @JsMethod
+    @DoNotInline
+    public static String m(String s) {
+      return s;
+    }
+  }
+
+  @JsMethod(namespace = "$global.woo.JsMethodTest.X", name = "m")
+  private static native String callM(String s);
 }

@@ -18,7 +18,6 @@ package com.google.gwt.core.interop;
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Iterator;
@@ -40,13 +39,6 @@ public class JsTypeTest extends GWTTestCase {
   @Override
   public String getModuleName() {
     return "com.google.gwt.core.Interop";
-  }
-
-  @Override
-  protected void gwtSetUp() throws Exception {
-    ScriptInjector.fromString("function JsTypeTest_MyNativeJsType() {}")
-        .setWindow(ScriptInjector.TOP_WINDOW)
-        .inject();
   }
 
   public void testConcreteJsTypeAccess() {
@@ -178,7 +170,7 @@ public class JsTypeTest extends GWTTestCase {
   /**
    * A test class marked with JsType but isn't referenced from any Java code except instanceof.
    */
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "JsTypeTest_MyNativeJsType")
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Error")
   public static class AliasToMyNativeJsTypeWithOnlyInstanceofReference {
   }
 
@@ -287,7 +279,7 @@ public class JsTypeTest extends GWTTestCase {
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);
   }
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "JsTypeTest_MyNativeJsType")
+  @JsType(isNative = true, namespace = GLOBAL, name = "Error")
   static class MyNativeJsType { }
 
   static class MyNativeJsTypeSubclass extends MyNativeJsType { }
@@ -314,7 +306,7 @@ public class JsTypeTest extends GWTTestCase {
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl);
     assertFalse(object instanceof ElementLikeNativeInterfaceImpl);
     assertFalse(object instanceof MyJsInterfaceWithOnlyInstanceofReference);
-    assertFalse(object instanceof AliasToMyNativeJsTypeWithOnlyInstanceofReference);
+    assertTrue(object instanceof AliasToMyNativeJsTypeWithOnlyInstanceofReference);
     assertFalse(object instanceof ConcreteJsType);
     assertFalse(object instanceof MyNativeJsTypeInterface[]);
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);
@@ -365,7 +357,7 @@ public class JsTypeTest extends GWTTestCase {
   }-*/;
 
   private static native Object createMyNativeJsType() /*-{
-    return new $wnd.JsTypeTest_MyNativeJsType();
+    return new $wnd.Error();
   }-*/;
 
   private static native Object createMyNamespacedJsInterface() /*-{

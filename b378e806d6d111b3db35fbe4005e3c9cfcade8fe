@@ -205,6 +205,24 @@
       "revId": "b378e806d6d111b3db35fbe4005e3c9cfcade8fe",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05487277_3df7bf7f",
+        "filename": "user/test/com/google/gwt/core/interop/JsExportOptimizationTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2015-12-10T20:22:15Z",
+      "side": 1,
+      "message": "alright, keeping them both here.",
+      "parentUuid": "05487277_d763ec1e",
+      "revId": "b378e806d6d111b3db35fbe4005e3c9cfcade8fe",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

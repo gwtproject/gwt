@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "05487277_d22e5a67",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-10T18:25:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05487277_b7bcf084",
+      "range": {
+        "startLine": 286,
+        "startChar": 38,
+        "endLine": 286,
+        "endChar": 45
+      },
+      "revId": "7e78a9c6c4537b2581c6caa16f7018fdc7db5ac1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05487277_97a21419",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2015-12-10T07:38:41Z",
       "side": 1,
       "message": "if we put this as the final item it in checkJsOverlay, it could be simpler and more self documenting why we need this:\n\n  if (method.isDefaultMethod() \u0026\u0026 method. getOverridingMethods().isempty()) {\n   ....\n  }",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 5
+      },
+      "revId": "7e78a9c6c4537b2581c6caa16f7018fdc7db5ac1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05487277_b23bdea3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2015-12-10T18:25:44Z",
+      "side": 1,
+      "message": "The reason that I coded it here is to make it a local check (instead of a global check) so that it is directly portable to j2cl.",
+      "parentUuid": "05487277_97a21419",
       "range": {
         "startLine": 279,
         "startChar": 0,

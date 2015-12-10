@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05487277_b7bcf084",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-12-10T07:38:41Z",
+      "side": 1,
+      "message": "can not -\u003e cannot for consistency with rest.",
+      "range": {
+        "startLine": 286,
+        "startChar": 38,
+        "endLine": 286,
+        "endChar": 45
+      },
+      "revId": "7e78a9c6c4537b2581c6caa16f7018fdc7db5ac1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05487277_97a21419",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-12-10T07:38:41Z",
+      "side": 1,
+      "message": "if we put this as the final item it in checkJsOverlay, it could be simpler and more self documenting why we need this:\n\n  if (method.isDefaultMethod() \u0026\u0026 method. getOverridingMethods().isempty()) {\n   ....\n  }",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 5
+      },
+      "revId": "7e78a9c6c4537b2581c6caa16f7018fdc7db5ac1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05487277_7771d879",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1320,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2015-12-10T07:38:41Z",
+      "side": 1,
+      "message": "You are casting boxed type to primitive? Is that a java8 thing?",
+      "range": {
+        "startLine": 1320,
+        "startChar": 13,
+        "endLine": 1320,
+        "endChar": 27
+      },
+      "revId": "7e78a9c6c4537b2581c6caa16f7018fdc7db5ac1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

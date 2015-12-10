@@ -47,10 +47,9 @@ import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
-import java.util.ArrayList;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -119,14 +118,12 @@ public class MakeCallsStatic {
       @Override
       public void endVisit(JParameterRef x, Context ctx) {
         JParameter param = varMap.get(x.getTarget());
-        JParameterRef paramRef = new JParameterRef(x.getSourceInfo(), param);
-        ctx.replaceMe(paramRef);
+        ctx.replaceMe(param.makeRef(x.getSourceInfo()));
       }
 
       @Override
       public void endVisit(JThisRef x, Context ctx) {
-        JParameterRef paramRef = new JParameterRef(x.getSourceInfo(), thisParam);
-        ctx.replaceMe(paramRef);
+        ctx.replaceMe(thisParam.makeRef(x.getSourceInfo()));
       }
     }
 
@@ -179,15 +176,10 @@ public class MakeCallsStatic {
 
       JType thisParameterType = enclosingType.strengthenToNonNull();
       // Setup parameters; map from the old params to the new params
-      JParameter thisParam =
-          JProgram.createParameter(sourceInfo, "this$static", thisParameterType, true, true,
-              newMethod);
-      Map<JParameter, JParameter> varMap = new IdentityHashMap<JParameter, JParameter>();
-      for (int i = 0; i < x.getParams().size(); ++i) {
-        JParameter oldVar = x.getParams().get(i);
-        JParameter newVar =
-            JProgram.createParameter(oldVar.getSourceInfo(), oldVar.getName(), oldVar.getType(),
-                oldVar.isFinal(), false, newMethod);
+      JParameter thisParam = newMethod.createThisParameter(sourceInfo, thisParameterType);
+      Map<JParameter, JParameter> varMap = Maps.newIdentityHashMap();
+      for (JParameter oldVar : x.getParams()) {
+        JParameter newVar = newMethod.cloneParameter(oldVar);
         varMap.put(oldVar, newVar);
       }
 
@@ -207,7 +199,7 @@ public class MakeCallsStatic {
       newCall.addArg(new JThisRef(sourceInfo, enclosingType));
       for (int i = 0; i < x.getParams().size(); ++i) {
         JParameter param = x.getParams().get(i);
-        newCall.addArg(new JParameterRef(sourceInfo, param));
+        newCall.addArg(param.makeRef(sourceInfo));
       }
       newBody.getBlock().addStmt(JjsUtils.makeMethodEndStatement(returnType, newCall));
 
@@ -492,7 +484,7 @@ public class MakeCallsStatic {
       Specialization specialization = method.getSpecialization();
       if (specialization != null) {
         JMethod staticMethod = program.getStaticImpl(method);
-        List<JType> params = new ArrayList<JType>(specialization.getParams());
+        List<JType> params = Lists.newArrayList(specialization.getParams());
         params.add(0, staticMethod.getParams().get(0).getType());
         staticMethod.setSpecialization(params, specialization.getReturns(),
             staticMethod.getName());

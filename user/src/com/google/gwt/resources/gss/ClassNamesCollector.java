@@ -35,6 +35,12 @@ public class ClassNamesCollector extends DefaultTreeVisitor {
   private SortedSet<String> excludedPrefixes;
 
   /**
+   * Extract all CSS class names in the provided stylesheet.
+   */
+  public Set<String> getClassNames(CssTree tree) {
+    return getClassNames(tree, new HashSet<JClassType>());
+  }
+  /**
    * Extract all CSS class names in the provided stylesheet, modulo those
    * imported from another context.
    */
@@ -42,8 +48,8 @@ public class ClassNamesCollector extends DefaultTreeVisitor {
     Preconditions.checkNotNull(tree, "tree cannot be null");
     Preconditions.checkNotNull(imports, "imports set cannot be null");
 
-    classNames = new HashSet<String>();
-    excludedPrefixes = new TreeSet<String>();
+    classNames = new HashSet<>();
+    excludedPrefixes = new TreeSet<>();
 
     for (JClassType importedType : imports) {
       excludedPrefixes.add(GssResourceGenerator.getImportPrefix(importedType));

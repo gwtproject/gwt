@@ -18,7 +18,6 @@ package com.google.gwt.resources.css;
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.dev.util.log.PrintWriterTreeLogger;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.CssResource.ClassName;
@@ -249,7 +248,7 @@ public class InterfaceGenerator extends ToolBase {
     // Sort all names
     Set<String> names = new TreeSet<String>(NAME_COMPARATOR);
 
-    names.addAll(new ClassNamesCollector().getClassNames(cssTree, new HashSet<JClassType>()));
+    names.addAll(new ClassNamesCollector().getClassNames(cssTree));
 
     CollectConstantDefinitions collectConstantDefinitionsPass = new CollectConstantDefinitions(
             cssTree);

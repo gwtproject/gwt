@@ -32,7 +32,6 @@ import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
 import com.google.gwt.dev.jjs.ast.JLocal;
-import com.google.gwt.dev.jjs.ast.JLocalRef;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
@@ -369,19 +368,12 @@ public class Pruner {
       JExpression lastArg = Iterables.getLast(replacementCall.getArgs());
       JLocal tempVar =
           createTempLocal(sourceInfo, Iterables.getLast(
-              Iterables.filter(originalParams, Predicates.in(referencedNonTypes))).getType());
+              Iterables.filter(originalParams, Predicates.in(referencedNonTypes))).getType(), "lastArg");
       unevaluatedArgumentsForPrunedParameters.addExpressions(0, JProgram.createAssignment(
-          lastArg.getSourceInfo(), new JLocalRef(sourceInfo, tempVar), lastArg));
-      unevaluatedArgumentsForPrunedParameters.addExpressions(new JLocalRef(sourceInfo, tempVar));
+          lastArg.getSourceInfo(), tempVar.makeRef(sourceInfo), lastArg));
+      unevaluatedArgumentsForPrunedParameters.addExpressions(tempVar.makeRef(sourceInfo));
       replacementCall.setArg(replacementCall.getArgs().size() - 1, unevaluatedArgumentsForPrunedParameters);
       ctx.replaceMe(replacementCall);
-    }
-
-    @Override
-    protected String newTemporaryLocalName(SourceInfo info, JType type, JMethodBody methodBody) {
-      // The name can be reused a later pass will make sure each instance of JLocal in a method
-      // has a different name.
-      return "lastArg";
     }
   }
 

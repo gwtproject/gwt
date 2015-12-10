@@ -168,6 +168,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  @JsProperty void setY();",
         "  @JsProperty int setZ(int z);",
         "  @JsProperty static void setStatic(){}",
+        "  @JsProperty void setW(int... z);",
         "}");
 
     assertBuggyFails(
@@ -183,7 +184,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "Line 12: JsProperty 'int EntryPoint.Buggy.setZ(int)' should have a correct setter "
             + "or getter signature.",
         "Line 13: JsProperty 'void EntryPoint.Buggy.setStatic()' should have a correct setter "
-            + "or getter signature.");
+            + "or getter signature.",
+        "Line 14: JsProperty 'void EntryPoint.Buggy.setW(int[])' cannot have a vararg parameter.");
   }
 
   public void testJsPropertyNonGetterStyleFails() throws Exception {
@@ -893,6 +895,29 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
            + "both use the same JavaScript name 'z'.");
   }
 
+  public void testJsMethodJSNIVarargsWithNoReferenceSucceeds()
+      throws Exception {
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetClassDecl(
+        "public static class Buggy {",
+        "  @JsMethod public native void m(int i, int... z) /*-{ return arguments[i]; }-*/;",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testJsMethodJSNIVarargsWithReferenceFails() {
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetClassDecl(
+        "public static class Buggy {",
+        "  @JsMethod public native void m(int i, int... z) /*-{ return z[0];}-*/;",
+        "}");
+
+    assertBuggyFails(
+        "Line 5: Cannot access vararg parameter 'z' from JSNI in JsMethod "
+            + "'void EntryPoint.Buggy.m(int, int[])'. Use 'arguments' instead.");
+  }
+
   public void testMultiplePrivateConstructorsExportSucceeds() throws Exception {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetClassDecl(
@@ -1458,21 +1483,31 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "Line 9: JsOverlay method 'void EntryPoint.Buggy.m()' cannot override a supertype method.");
   }
 
-  public void testJsOverlayOnNonFinalMethodAndNonCompileTimeConstantFieldFails() {
+  public void testJsOverlayOnNonFinalMethodAndInstanceFieldFails() {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetImport("jsinterop.annotations.JsOverlay");
     addSnippetClassDecl(
         "@JsType(isNative=true) public static class Buggy {",
-        "  @JsOverlay public static int f1 = 2;",
         "  @JsOverlay public final int f2 = 2;",
         "  @JsOverlay public void m() { }",
         "}");
 
     assertBuggyFails(
         "Line 5: Native JsType 'EntryPoint.Buggy' cannot have initializer.",
-        "Line 6: JsOverlay field 'int EntryPoint.Buggy.f1' can only be a compile time constant.",
-        "Line 7: JsOverlay field 'int EntryPoint.Buggy.f2' can only be a compile time constant.",
-        "Line 8: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final nor native.");
+        "Line 6: JsOverlay field 'int EntryPoint.Buggy.f2' can only be static.",
+        "Line 7: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final nor native.");
+  }
+
+  public void testJsOverlayWithStaticInitializerSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsOverlay");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) public static class Buggy {",
+        "  @JsOverlay public final static Object f1 = new Object();",
+        "  @JsOverlay public static int f2 = 2;",
+        "}");
+
+    assertBuggySucceeds();
   }
 
   public void testJsOverlayOnNativeMethodFails() {

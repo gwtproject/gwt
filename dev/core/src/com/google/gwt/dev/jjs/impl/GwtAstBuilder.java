@@ -774,10 +774,9 @@ public class GwtAstBuilder {
 
         if (curClass.classType.isEnumOrSubclass() != null) {
           // Enums: wire up synthetic name/ordinal params to the super method.
-          JParameterRef enumNameRef = new JParameterRef(info, curMethod.method.getParams().get(0));
+          JParameterRef enumNameRef = curMethod.method.getParams().get(0).makeRef(info);
           call.addArg(enumNameRef);
-          JParameterRef enumOrdinalRef =
-              new JParameterRef(info, curMethod.method.getParams().get(1));
+          JParameterRef enumOrdinalRef = curMethod.method.getParams().get(1).makeRef(info);
           call.addArg(enumOrdinalRef);
         }
 
@@ -858,17 +857,7 @@ public class GwtAstBuilder {
         FieldBinding fieldBinding = x.binding;
         SourceInfo info = makeSourceInfo(x);
         JExpression instance = pop(x.receiver);
-        JExpression expr;
-        if (fieldBinding.declaringClass == null) {
-          if (!LENGTH_FIELD_NAME.equals(String.valueOf(fieldBinding.name))) {
-            throw new InternalCompilerException("Expected [array].length.");
-          }
-          expr = new JArrayLength(info, instance);
-        } else {
-          JField field = typeMap.get(fieldBinding);
-          expr = new JFieldRef(info, instance, field, curClass.type);
-        }
-
+        JExpression expr = createFieldRef(instance, info, fieldBinding);
         if (x.genericCast != null) {
           JType castType = typeMap.get(x.genericCast);
           /*
@@ -933,21 +922,21 @@ public class GwtAstBuilder {
           // int i$index = 0
           initializers.add(makeDeclaration(info, indexVar, JIntLiteral.get(0)));
           // int i$max = i$array.length
-          initializers.add(makeDeclaration(info, maxVar, new JArrayLength(info, new JLocalRef(info,
-              arrayVar))));
+          initializers.add(makeDeclaration(info, maxVar,
+              new JArrayLength(info, arrayVar.makeRef(info))));
 
           // i$index < i$max
           JExpression condition =
-              new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.LT, new JLocalRef(
-                  info, indexVar), new JLocalRef(info, maxVar));
+              new JBinaryOperation(info, JPrimitiveType.BOOLEAN, JBinaryOperator.LT,
+                  indexVar.makeRef(info), maxVar.makeRef(info));
 
           // ++i$index
           JExpression increments = new JPrefixOperation(info, JUnaryOperator.INC,
-              new JLocalRef(info, indexVar));
+              indexVar.makeRef(info));
 
           // T elementVar = i$array[i$index];
           elementDecl.initializer =
-              new JArrayRef(info, new JLocalRef(info, arrayVar), new JLocalRef(info, indexVar));
+              new JArrayRef(info, arrayVar.makeRef(info), indexVar.makeRef(info));
           body.addStmt(0, elementDecl);
 
           result = new JForStatement(info, initializers, condition, increments, body);
@@ -977,11 +966,11 @@ public class GwtAstBuilder {
 
           // i$iterator.hasNext()
           JExpression condition =
-              new JMethodCall(info, new JLocalRef(info, iteratorVar), typeMap.get(hasNext));
+              new JMethodCall(info, iteratorVar.makeRef(info), typeMap.get(hasNext));
 
           // T elementVar = (T) i$iterator.next();
           elementDecl.initializer =
-              new JMethodCall(info, new JLocalRef(info, iteratorVar), typeMap.get(next));
+              new JMethodCall(info, iteratorVar.makeRef(info), typeMap.get(next));
 
           // Perform any implicit reference type casts (due to generics).
           // Note this occurs before potential unboxing.
@@ -1110,7 +1099,7 @@ public class GwtAstBuilder {
           List<JExpression> dims = new ArrayList<JExpression>();
           JArrayType arrayType = (JArrayType) synthMethod.getType();
           JParameter dimParam = synthMethod.getParams().get(0);
-          JExpression dimArgExpr = new JParameterRef(dimParam.getSourceInfo(), dimParam);
+          JExpression dimArgExpr = dimParam.makeRef(dimParam.getSourceInfo());
           dims.add(dimArgExpr);
           JNewArray newArray = JNewArray.createArrayWithDimensionExpressions(
               synthMethod.getSourceInfo(), arrayType, dims);
@@ -1275,9 +1264,7 @@ public class GwtAstBuilder {
       // The parameters to this method will be the same as the Java interface that must be
       // implemented
       for (JParameter origParam : interfaceMethod.getParams()) {
-        JType origType = origParam.getType();
-        samMethod.addParam(new JParameter(origParam.getSourceInfo(), origParam.getName(), origType,
-            origParam.isFinal(), origParam.isThis()));
+        samMethod.cloneParameter(origParam);
       }
       // Create a body like void onClick(ClickEvent e) { OuterClass.lambdaMethod(locals, e); }
       JMethodBody samMethodBody = new JMethodBody(info);
@@ -1296,7 +1283,7 @@ public class GwtAstBuilder {
       // and now we propagate the rest of the actual interface method parameters on the end
       // (e.g. ClickEvent e)
       for (JParameter param : samMethod.getParams()) {
-        samCall.addArg(new JParameterRef(info, param));
+        samCall.addArg(param.makeRef(info));
       }
 
       // we either add a return statement, or don't, depending on what the interface wants
@@ -1438,7 +1425,7 @@ public class GwtAstBuilder {
       // this.paramField = param
       JThisRef thisRef = new JThisRef(info, ctor.getEnclosingType());
       JFieldRef paramFieldRef = new JFieldRef(info, thisRef, paramField, ctor.getEnclosingType());
-      JParameterRef paramRef = new JParameterRef(info, param);
+      JParameterRef paramRef = param.makeRef(info);
       ctorBody.getBlock().addStmt(
           new JBinaryOperation(info, paramFieldRef.getType(),
               JBinaryOperator.ASG,
@@ -1457,9 +1444,7 @@ public class GwtAstBuilder {
 
     private JParameter createLambdaParameter(SourceInfo info, String paramName, JType paramType,
         JConstructor ctor) {
-      JParameter outerParam = new JParameter(info, paramName, paramType, true, false);
-      ctor.addParam(outerParam);
-      return outerParam;
+      return ctor.createFinalParameter(info, paramName, paramType);
     }
 
     private JClassType createInnerClass(String name, FunctionalExpression x, SourceInfo info,
@@ -1492,7 +1477,7 @@ public class GwtAstBuilder {
         SourceInfo info = makeSourceInfo(x);
         JLocal local = (JLocal) curMethod.locals.get(x.binding);
         assert local != null;
-        JLocalRef localRef = new JLocalRef(info, local);
+        JLocalRef localRef = local.makeRef(info);
         JExpression initialization = pop(x.initialization);
         push(new JDeclarationStatement(info, localRef, initialization));
       } catch (Throwable e) {
@@ -1667,16 +1652,7 @@ public class GwtAstBuilder {
         if (x.otherBindings != null) {
           for (int i = 0; i < x.otherBindings.length; ++i) {
             FieldBinding fieldBinding = x.otherBindings[i];
-            if (fieldBinding.declaringClass == null) {
-              // probably array.length
-              if (!LENGTH_FIELD_NAME.equals(String.valueOf(fieldBinding.name))) {
-                throw new InternalCompilerException("Expected [array].length.");
-              }
-              curRef = new JArrayLength(info, curRef);
-            } else {
-              JField field = typeMap.get(fieldBinding);
-              curRef = new JFieldRef(info, curRef, field, curClass.type);
-            }
+            curRef = createFieldRef(curRef, info, fieldBinding);
             if (x.otherGenericCasts != null && x.otherGenericCasts[i] != null) {
               JType castType = typeMap.get(x.otherGenericCasts[i]);
               curRef = maybeCast(castType, curRef);
@@ -1687,6 +1663,21 @@ public class GwtAstBuilder {
       } catch (Throwable e) {
         throw translateException(x, e);
       }
+    }
+
+    private JExpression createFieldRef(JExpression instance, SourceInfo info,
+        FieldBinding fieldBinding) {
+      if (fieldBinding.declaringClass == null) {
+        // probably array.length
+        if (!LENGTH_FIELD_NAME.equals(String.valueOf(fieldBinding.name))) {
+          throw new InternalCompilerException("Expected [array].length.");
+        }
+        instance = new JArrayLength(info, instance);
+      } else {
+        JField field = typeMap.get(fieldBinding);
+        instance = new JFieldRef(info, instance, field, curClass.type);
+      }
+      return instance;
     }
 
     @Override
@@ -1830,9 +1821,7 @@ public class GwtAstBuilder {
             innerLambdaClass, interfaceMethod.getType(),
             false, false, true, interfaceMethod.getAccess());
         for (JParameter origParam : interfaceMethod.getParams()) {
-          JType origType = origParam.getType();
-          samMethod.addParam(new JParameter(origParam.getSourceInfo(), origParam.getName(),
-              origType, origParam.isFinal(), origParam.isThis()));
+          samMethod.cloneParameter(origParam);
         }
         JMethodBody samMethodBody = new JMethodBody(info);
 
@@ -1847,7 +1836,7 @@ public class GwtAstBuilder {
           // the instance qualifier is the first parameter in this case.
           // Needs to be cast the actual type due to generics.
           instance = new JCastOperation(info, typeMap.get(referredMethodBinding.declaringClass),
-              new JParameterRef(info, paramIt.next()));
+              paramIt.next().makeRef(info));
         }
         JMethodCall samCall = null;
 
@@ -1884,7 +1873,7 @@ public class GwtAstBuilder {
 
         while (paramIt.hasNext()) {
           JParameter param = paramIt.next();
-          JExpression paramExpr = new JParameterRef(info, param);
+          JExpression paramExpr = param.makeRef(info);
           // params may need to be boxed or unboxed
           TypeBinding destParam = null;
           // if it is not the trailing param or varargs, or interface method is already varargs
@@ -2137,7 +2126,7 @@ public class GwtAstBuilder {
               // Regular exception
               catchTypes.add(local.getType());
             }
-            catchClauses.add(new JTryStatement.CatchClause(catchTypes, new JLocalRef(info, local),
+            catchClauses.add(new JTryStatement.CatchClause(catchTypes, local.makeRef(info),
                 catchBlocks.get(i)));
           }
         }
@@ -2206,9 +2195,9 @@ public class GwtAstBuilder {
 
       JBlock catchBlock = new JBlock(info);
       catchBlock.addStmt(createAssignment(info, javaLangThrowable, exceptionVar, catchVar));
-      catchBlock.addStmt(new JThrowStatement(info, new JLocalRef(info, exceptionVar)));
+      catchBlock.addStmt(new JThrowStatement(info, exceptionVar.makeRef(info)));
 
-      catchClauses.add(new JTryStatement.CatchClause(clauseTypes, new JLocalRef(info, catchVar),
+      catchClauses.add(new JTryStatement.CatchClause(clauseTypes, catchVar.makeRef(info),
           catchBlock));
 
       // create finally block
@@ -2220,9 +2209,9 @@ public class GwtAstBuilder {
 
       // if (exception != null) throw exception
       JExpression exceptionNotNull = new JBinaryOperation(info, JPrimitiveType.BOOLEAN,
-          JBinaryOperator.NEQ, new JLocalRef(info, exceptionVar), JNullLiteral.INSTANCE);
+          JBinaryOperator.NEQ, exceptionVar.makeRef(info), JNullLiteral.INSTANCE);
       finallyBlock.addStmt(new JIfStatement(info, exceptionNotNull,
-          new JThrowStatement(info, new JLocalRef(info, exceptionVar)), null));
+          new JThrowStatement(info, exceptionVar.makeRef(info)), null));
 
       // Stitch all together into a inner try block
       outerTryBlock.addStmt(new JTryStatement(info, tryBlock, catchClauses,
@@ -2258,16 +2247,16 @@ public class GwtAstBuilder {
        */
 
       JMethodCall safeCloseCall = new JMethodCall(info, null, SAFE_CLOSE_METHOD);
-      safeCloseCall.addArg(0, new JLocalRef(info, resourceVar));
-      safeCloseCall.addArg(1, new JLocalRef(info, exceptionVar));
+      safeCloseCall.addArg(0, resourceVar.makeRef(info));
+      safeCloseCall.addArg(1, exceptionVar.makeRef(info));
 
-      return new JBinaryOperation(info, javaLangThrowable, JBinaryOperator.ASG, new JLocalRef(info,
-          exceptionVar), safeCloseCall).makeStatement();
+      return new JBinaryOperation(info, javaLangThrowable, JBinaryOperator.ASG,
+          exceptionVar.makeRef(info), safeCloseCall).makeStatement();
     }
 
     private JStatement createAssignment(SourceInfo info, JType type, JLocal lhs, JLocal rhs) {
-      return new JBinaryOperation(info, type, JBinaryOperator.ASG, new JLocalRef(info, lhs),
-          new JLocalRef(info, rhs)).makeStatement();
+      return new JBinaryOperation(info, type, JBinaryOperator.ASG, lhs.makeRef(info),
+          rhs.makeRef(info)).makeStatement();
     }
 
     @Override
@@ -2740,10 +2729,8 @@ public class GwtAstBuilder {
       JField field = curClass.syntheticFields.get(arg);
       assert field != null;
       JFieldRef lhs = makeInstanceFieldRef(info, field);
-      JParameterRef rhs = new JParameterRef(info, param);
-      JBinaryOperation asg =
-          new JBinaryOperation(info, lhs.getType(), JBinaryOperator.ASG, lhs, rhs);
-      return asg;
+      return
+          new JBinaryOperation(info, lhs.getType(), JBinaryOperator.ASG, lhs, param.makeRef(info));
     }
 
     private JExpression box(JExpression original, int implicitConversion) {
@@ -2787,9 +2774,7 @@ public class GwtAstBuilder {
       for (TypeBinding jdtParamType : jdtBridgeMethod.parameters) {
         JParameter param = implParams.get(paramIdx++);
         JType paramType = typeMap.get(jdtParamType.erasure());
-        JParameter newParam =
-            new JParameter(param.getSourceInfo(), param.getName(), paramType, true, false);
-        bridgeMethod.addParam(newParam);
+        bridgeMethod.createFinalParameter(param.getSourceInfo(), param.getName(), paramType);
       }
       for (ReferenceBinding exceptionReference : jdtBridgeMethod.thrownExceptions) {
         bridgeMethod.addThrownException((JClassType) typeMap.get(exceptionReference.erasure()));
@@ -2800,8 +2785,7 @@ public class GwtAstBuilder {
       JMethodCall call = new JMethodCall(info, makeThisRef(info), implmeth);
       for (int i = 0; i < bridgeMethod.getParams().size(); i++) {
         JParameter param = bridgeMethod.getParams().get(i);
-        JParameterRef paramRef = new JParameterRef(info, param);
-        call.addArg(maybeCast(implParams.get(i).getType(), paramRef));
+        call.addArg(maybeCast(implParams.get(i).getType(), param.makeRef(info)));
       }
 
       JMethodBody body = (JMethodBody) bridgeMethod.getBody();
@@ -2937,25 +2921,15 @@ public class GwtAstBuilder {
 
     private JDeclarationStatement makeDeclaration(SourceInfo info, JLocal local,
         JExpression value) {
-      return new JDeclarationStatement(info, new JLocalRef(info, local), value);
+      return new JDeclarationStatement(info, local.makeRef(info), value);
     }
 
     private JFieldRef makeInstanceFieldRef(SourceInfo info, JField field) {
       return new JFieldRef(info, makeThisRef(info), field, curClass.classType);
     }
 
-    private JExpression makeLocalRef(SourceInfo info, LocalVariableBinding b, MethodInfo cur) {
-      JVariable variable = cur.locals.get(b);
-      assert variable != null;
-      if (variable instanceof JLocal) {
-        return new JLocalRef(info, (JLocal) variable);
-      } else {
-        return new JParameterRef(info, (JParameter) variable);
-      }
-    }
-
-    private JExpression makeLocalRef(SourceInfo info, LocalVariableBinding b) {
-      return makeLocalRef(info, b, curMethod);
+    private JExpression makeLocalRef(SourceInfo info, LocalVariableBinding b, MethodInfo method) {
+      return method.locals.get(b).makeRef(info);
     }
 
     private JThisRef makeThisRef(SourceInfo info) {
@@ -2985,7 +2959,7 @@ public class GwtAstBuilder {
         SyntheticArgumentBinding b = (SyntheticArgumentBinding) path[0];
         JParameter param = (JParameter) curMethod.locals.get(b);
         assert param != null;
-        ref = new JParameterRef(info, param);
+        ref = param.makeRef(info);
         type = (ReferenceBinding) b.type.erasure();
       } else if (path[0] instanceof FieldBinding) {
         FieldBinding b = (FieldBinding) path[0];
@@ -3131,7 +3105,7 @@ public class GwtAstBuilder {
             throw new InternalCompilerException(
                 "Could not find matching local arg for explicit super ctor call.");
           }
-          call.addArg(new JParameterRef(call.getSourceInfo(), param));
+          call.addArg(param.makeRef(call.getSourceInfo()));
         }
       }
     }
@@ -3165,7 +3139,7 @@ public class GwtAstBuilder {
         for (SyntheticArgumentBinding arg : binding.syntheticOuterLocalVariables()) {
           JParameter param = (JParameter) curMethod.locals.get(arg);
           assert param != null;
-          call.addArg(new JParameterRef(call.getSourceInfo(), param));
+          call.addArg(param.makeRef(call.getSourceInfo()));
         }
       }
     }
@@ -3181,7 +3155,7 @@ public class GwtAstBuilder {
         for (@SuppressWarnings("unused")
         ReferenceBinding argType : binding.syntheticEnclosingInstanceTypes()) {
           JParameter param = paramIt.next();
-          call.addArg(new JParameterRef(call.getSourceInfo(), param));
+          call.addArg(param.makeRef(call.getSourceInfo()));
         }
       }
     }
@@ -3282,7 +3256,7 @@ public class GwtAstBuilder {
               assert field != null;
               call.addArg(makeInstanceFieldRef(info, field));
             } else if (path[0] instanceof LocalVariableBinding) {
-              JExpression localRef = makeLocalRef(info, (LocalVariableBinding) path[0]);
+              JExpression localRef = makeLocalRef(info, (LocalVariableBinding) path[0], curMethod);
               call.addArg(localRef);
             } else if (path[0] instanceof FieldBinding) {
               JField field = typeMap.get((FieldBinding) path[0]);
@@ -3355,7 +3329,7 @@ public class GwtAstBuilder {
             assert field != null;
             result = makeInstanceFieldRef(info, field);
           } else if (path[0] instanceof LocalVariableBinding) {
-            result = makeLocalRef(info, (LocalVariableBinding) path[0]);
+            result = makeLocalRef(info, (LocalVariableBinding) path[0], curMethod);
           } else if (path[0] instanceof FieldBinding) {
             FieldBinding fb = (FieldBinding) path[0];
             assert curClass.typeDecl.binding.isCompatibleWith(x.actualReceiverType.erasure());
@@ -3366,7 +3340,7 @@ public class GwtAstBuilder {
             throw new InternalCompilerException("Unknown emulation path.");
           }
         } else {
-          result = makeLocalRef(info, b);
+          result = makeLocalRef(info, b, curMethod);
         }
       } else if (binding instanceof FieldBinding) {
         FieldBinding b = ((FieldBinding) x.binding).original();
@@ -3478,7 +3452,7 @@ public class GwtAstBuilder {
         assert valueOfBinding != null;
 
         JFieldRef mapRef = new JFieldRef(info, null, mapField, type);
-        JParameterRef nameRef = new JParameterRef(info, method.getParams().get(0));
+        JParameterRef nameRef = method.getParams().get(0).makeRef(info);
         JMethodCall call = new JMethodCall(info, null, typeMap.get(valueOfBinding));
         call.addArgs(mapRef, nameRef);
         JjsUtils.replaceMethodBody(method, call);
@@ -3999,11 +3973,7 @@ public class GwtAstBuilder {
         }
       }
     } catch (Throwable e) {
-      InternalCompilerException ice = translateException(null, e);
-      StringBuffer sb = new StringBuffer();
-      x.printHeader(0, sb);
-      ice.addNode(x.getClass().getName(), sb.toString(), type.getSourceInfo());
-      throw ice;
+      throw getInternalCompilerException(x, e);
     }
   }
 
@@ -4033,9 +4003,8 @@ public class GwtAstBuilder {
       }
       if (x.binding.declaringClass.isEnum()) {
         // Enums have hidden arguments for name and value
-        method.addParam(new JParameter(info, "enum$name", typeMap.get(x.scope.getJavaLangString()),
-            true, false));
-        method.addParam(new JParameter(info, "enum$ordinal", JPrimitiveType.INT, true, false));
+        method.createFinalParameter(info, "enum$name", typeMap.get(x.scope.getJavaLangString()));
+        method.createFinalParameter(info, "enum$ordinal", JPrimitiveType.INT);
       }
       // add synthetic args for outer this
       if (isNested) {
@@ -4047,7 +4016,7 @@ public class GwtAstBuilder {
             if (alreadyNamedVariables.contains(argName)) {
               argName += "_" + i;
             }
-            createParameter(info, arg, argName, method);
+            createParameter(info, arg, argName, method, false);
             alreadyNamedVariables.add(argName);
           }
         }
@@ -4073,7 +4042,7 @@ public class GwtAstBuilder {
             if (alreadyNamedVariables.contains(argName)) {
               argName += "_" + i;
             }
-            createParameter(info, arg, argName, method);
+            createParameter(info, arg, argName, method, false);
             alreadyNamedVariables.add(argName);
           }
         }
@@ -4157,17 +4126,16 @@ public class GwtAstBuilder {
     method.setSpecialization(paramTypes, returnsType, targetMethod);
   }
 
-  private void createParameter(SourceInfo info, LocalVariableBinding binding, JMethod method,
-      Annotation... annotations) {
-    createParameter(info, binding, intern(binding.name), method, annotations);
+  private void createParameter(SourceInfo info, LocalVariableBinding binding, boolean isVarargs,
+      JMethod method, Annotation... annotations) {
+    createParameter(info, binding, intern(binding.name), method, isVarargs, annotations);
   }
 
   private void createParameter(SourceInfo info, LocalVariableBinding binding, String name,
-      JMethod method, Annotation... annotations) {
+      JMethod method, boolean isVarargs, Annotation... annotations) {
     JParameter param =
-        new JParameter(info, name, typeMap.get(binding.type), binding.isFinal(), false);
+        method.createParameter(info, name, typeMap.get(binding.type), binding.isFinal(), isVarargs);
     processSuppressedWarnings(param, annotations);
-    method.addParam(param);
   }
 
   private void createParameters(JMethod method, AbstractMethodDeclaration x) {
@@ -4175,7 +4143,9 @@ public class GwtAstBuilder {
       for (Argument argument : x.arguments) {
         SourceInfo info = makeSourceInfo(argument);
         LocalVariableBinding binding = argument.binding;
-        createParameter(info, binding, method, argument.annotations);
+        boolean isVarargs = x.binding.isVarargs()
+            && argument == x.arguments[x.arguments.length - 1];
+        createParameter(info, binding, isVarargs, method, argument.annotations);
       }
     }
     method.freezeParamTypes();
@@ -4297,12 +4267,17 @@ public class GwtAstBuilder {
         }
       }
     } catch (Throwable e) {
-      InternalCompilerException ice = translateException(null, e);
-      StringBuffer sb = new StringBuffer();
-      x.printHeader(0, sb);
-      ice.addNode(x.getClass().getName(), sb.toString(), type.getSourceInfo());
-      throw ice;
+      throw getInternalCompilerException(x, e);
     }
+  }
+
+  private InternalCompilerException getInternalCompilerException(TypeDeclaration x, Throwable e) {
+    JDeclaredType type = (JDeclaredType) typeMap.get(x.binding);
+    InternalCompilerException ice = translateException(null, e);
+    StringBuffer sb = new StringBuffer();
+    x.printHeader(0, sb);
+    ice.addNode(x.getClass().getName(), sb.toString(), type.getSourceInfo());
+    return ice;
   }
 
   /**

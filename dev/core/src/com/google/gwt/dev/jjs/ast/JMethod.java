@@ -72,11 +72,16 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
 
   @Override
   public boolean isJsInteropEntryPoint() {
-    return exported && !needsDynamicDispatch() && !isJsNative();
+    return exported && !needsDynamicDispatch() && !isJsNative() && !isJsOverlay();
   }
 
   @Override
   public boolean canBeReferencedExternally() {
+    if (isJsOverlay() || (!needsDynamicDispatch() && isJsNative()))  {
+      // JsOverlays, native constructors and native static methods can not be referenced
+      // externally
+      return false;
+    }
     for (JMethod method : getOverriddenMethodsIncludingSelf()) {
       if (method.exported || method.isJsFunctionMethod()) {
         return true;
@@ -88,6 +93,64 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
   @Override
   public boolean canBeImplementedExternally() {
     return isJsNative() || isJsFunctionMethod() || isJsInterfaceMethod();
+  }
+
+  /**
+   * Adds a new final parameter to this method.
+   */
+  public JParameter createFinalParameter(SourceInfo info, String name, JType type) {
+    return createParameter(info, name, type, true, false, false);
+  }
+
+  /**
+   * Adds a new parameter to this method.
+   */
+  public JParameter createParameter(SourceInfo info, String name, JType type) {
+    return createParameter(info, name, type, false, false, false);
+  }
+
+  /**
+   * Adds a new parameter to this method.
+   */
+  public JParameter createParameter(SourceInfo info, String name, JType type, boolean isFinal,
+      boolean isVarargs) {
+    return createParameter(info, name, type, isFinal, isVarargs, false);
+  }
+
+  /**
+   * Adds a new parameter to this method that is a copy of {@code from}.
+   */
+  public JParameter cloneParameter(JParameter from) {
+    return createParameter(from.getSourceInfo(), from.getName(), from.getType(), from.isFinal(),
+        from.isVarargs(), from.isThis());
+  }
+
+  /**
+   * Creates a parameter to hold the value of this in devirtualized methods.
+   */
+  public JParameter createThisParameter(SourceInfo info, JType type) {
+    return createParameter(info,  "this$static", type, true, false, true);
+  }
+
+  private JParameter createParameter(SourceInfo info, String name, JType type,
+      boolean isFinal, boolean isVarargs, boolean isThis) {
+    assert (name != null);
+    assert (type != null);
+
+    JParameter parameter = new JParameter(info, name, type, isFinal, isVarargs, isThis);
+    addParameter(parameter);
+    return parameter;
+  }
+
+  /**
+   * Adds a parameter to this method.
+   */
+  private void addParameter(JParameter x) {
+    // Local types can capture local variables and sandwich the parameters of constructors between
+    // the outer reference and the local captures.
+    assert params.isEmpty() || !params.get(params.size() - 1).isVarargs()
+        || getEnclosingType().getClassDisposition().isLocalType();
+    params = Lists.add(params, x);
   }
 
   private boolean isJsInterfaceMethod() {
@@ -186,7 +249,8 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
 
   @Override
   public boolean isJsOverlay() {
-    return isJsOverlay || getEnclosingType().isJsoType();
+    return isJsOverlay || getEnclosingType().isJsoType() ||
+        getEnclosingType().isJsNative() && JProgram.isClinit(this);
   }
 
   public void setSyntheticAccidentalOverride() {
@@ -251,6 +315,14 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
     this.preventDevirtualization = true;
   }
 
+  public boolean isJsMethodVarargs() {
+    if (getParams().isEmpty() || !(canBeReferencedExternally() || canBeImplementedExternally())) {
+      return false;
+    }
+
+    JParameter lastParameter = Iterables.getLast(getParams());
+    return lastParameter.isVarargs();
+  }
   /**
    * AST representation of @SpecializeMethod.
    */
@@ -411,12 +483,6 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
     assert canBePolymorphic() : this + " is not polymorphic";
     assert overridingMethod != this : this + " cannot override itself";
     overridingMethods.add(overridingMethod);
-  }
-  /**
-   * Adds a parameter to this method.
-   */
-  public void addParam(JParameter x) {
-    params = Lists.add(params, x);
   }
 
   public void addThrownException(JClassType exceptionType) {

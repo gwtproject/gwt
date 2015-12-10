@@ -21,19 +21,43 @@ import com.google.gwt.dev.jjs.SourceInfo;
  * Java method parameter definition.
  */
 public class JParameter extends JVariable {
-  private final boolean isThis;
 
-  public JParameter(SourceInfo info, String name, JType type, boolean isFinal, boolean isThis) {
-    super(info, name, type, isFinal);
-    this.isThis = isThis;
+  private final boolean isThis;
+  private final boolean isVarags;
+
+  public JParameter(SourceInfo info, String name, JType type, boolean isFinal) {
+    this(info, name, type, isFinal, false, false);
   }
 
+  JParameter(SourceInfo info, String name, JType type, boolean isFinal, boolean isVarargs,
+      boolean isThis) {
+    super(info, name, type, isFinal);
+    this.isThis = isThis;
+    this.isVarags = isVarargs;
+    assert !isVarargs || type.isArrayType();
+  }
+
+  public JParameterRef createRef(SourceInfo info) {
+    return new JParameterRef(info, this);
+  }
   /**
    * Returns <code>true</code> if this parameter is the this parameter of a
    * static impl method.
    */
   public boolean isThis() {
     return isThis;
+  }
+
+  /**
+   * Returns <code>true</code> if this parameter is a varargs parameter.
+   */
+  public boolean isVarargs() {
+    return isVarags;
+  }
+
+  @Override
+  public JParameterRef makeRef(SourceInfo info) {
+    return new JParameterRef(info, this);
   }
 
   @Override

@@ -133,6 +133,12 @@ public class JField extends JVariable implements JMember {
     return null;
   }
 
+
+  @Override
+  public JFieldRef makeRef(SourceInfo info) {
+    throw new UnsupportedOperationException();
+  }
+
   @Override
   public void setJsMemberInfo(
       JsMemberType jsMembertype, String namespace, String name, boolean exported) {
@@ -154,12 +160,12 @@ public class JField extends JVariable implements JMember {
 
   @Override
   public boolean isJsInteropEntryPoint() {
-    return exported && isStatic() && !isJsNative();
+    return exported && isStatic() && !isJsNative() && !isJsOverlay();
   }
 
   @Override
   public boolean canBeReferencedExternally() {
-    return exported;
+    return exported && !isJsNative();
   }
 
   @Override
@@ -191,6 +197,11 @@ public class JField extends JVariable implements JMember {
   @Override
   public boolean isJsOverlay() {
     return isJsOverlay;
+  }
+
+  @Override
+  public boolean isJsMethodVarargs() {
+    return false;
   }
 
   @Override

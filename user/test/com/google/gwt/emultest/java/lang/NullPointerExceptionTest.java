@@ -15,17 +15,15 @@
  */
 package com.google.gwt.emultest.java.lang;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
-import com.google.gwt.junit.client.GWTTestCase;
 
 import jsinterop.annotations.JsFunction;
 
 /**
  * Unit tests for the GWT emulation of java.lang.NullPointerException class.
  */
-public class NullPointerExceptionTest extends GWTTestCase {
+public class NullPointerExceptionTest extends ThrowableTestBase {
 
   @Override
   public String getModuleName() {
@@ -41,7 +39,7 @@ public class NullPointerExceptionTest extends GWTTestCase {
       }
     });
 
-    assertTrue(caughtNative instanceof JavaScriptObject);
+    assertInstanceOf("TypeError", caughtNative);
     assertTrue(caughtNative.toString().startsWith("TypeError:"));
     assertTrue(caughtNative.toString().contains("<my msg>"));
     assertTrue(caughtNative.toString().contains(NullPointerException.class.getName()));

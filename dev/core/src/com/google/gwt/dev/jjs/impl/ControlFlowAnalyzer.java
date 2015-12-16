@@ -297,7 +297,7 @@ public class ControlFlowAnalyzer {
       if (target.isStatic()) {
         rescue(target.getEnclosingType(), false);
       }
-      if (target.isStatic() || instantiatedTypes.contains(target.getEnclosingType())) {
+      if (target.isStatic() || isTypeInstantiatedOrNative(target.getEnclosingType())) {
         rescue(target);
       } else {
         // It's a field whose class is not instantiable
@@ -388,7 +388,7 @@ public class ControlFlowAnalyzer {
          */
         return true;
       }
-      if (method.isStatic() || isTypeInstantiatedOrJso(method.getEnclosingType())) {
+      if (method.isStatic() || isTypeInstantiatedOrNative(method.getEnclosingType())) {
         rescue(method);
       } else {
         // It's a virtual method whose class is not instantiable
@@ -869,12 +869,12 @@ public class ControlFlowAnalyzer {
     }
   }
 
-  private boolean isTypeInstantiatedOrJso(JDeclaredType type) {
+  private boolean isTypeInstantiatedOrNative(JDeclaredType type) {
     if (type == null) {
       return false;
     }
 
-    return type.isJsoType() || instantiatedTypes.contains(type);
+    return type.isJsoType() || type.isJsNative() || instantiatedTypes.contains(type);
   }
 
   /**

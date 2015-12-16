@@ -16,6 +16,24 @@
       "revId": "25b4e479210e121cc77ded2a383307dc8edb0d1a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65f4ce02_7eba11e2",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2015-12-16T22:20:25Z",
+      "side": 0,
+      "message": "Do you mean that this change would break the Eclipse plugin? If so then it needs to be fixed.\n\nSee Iaef14e17716e0f4784a466361db13930f887c996 (original on master and cherry-pick on release/2.7 which shipped in 2.7.0-rc1)",
+      "parentUuid": "e06d0cee_a1fcddda",
+      "revId": "25b4e479210e121cc77ded2a383307dc8edb0d1a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

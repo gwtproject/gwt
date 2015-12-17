@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5ea461e_e0c162a7",
+        "filename": "user/src/com/google/gwt/user/tools/templates/_eclipse-test/_moduleShortName_Suite-dev.launchsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-12-17T20:21:11Z",
+      "side": 0,
+      "message": "Do we still need these launchers,  GPE offers a \u0027run as GWT test\u0027 option, @brandom might have something to say though.",
+      "revId": "4628f9b843c5994916545be875bfb4976ba7177b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

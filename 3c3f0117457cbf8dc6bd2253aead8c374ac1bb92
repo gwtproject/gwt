@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05f952fe_9bc44b91",
+        "filename": "samples/dynatablerf/README-MAVEN.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-12-17T19:12:55Z",
+      "side": 1,
+      "message": "Is it possible that the new plugin also had the :run task? I think many people are used to it, as well as there could be some scripts we could break (I have some projects with gulp scripts running maven tasks)",
+      "revId": "3c3f0117457cbf8dc6bd2253aead8c374ac1bb92",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05f952fe_fbc90fa7",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-12-17T19:12:55Z",
+      "side": 1,
+      "message": "why is the moduleShortName needed? shouldn\u0027t be enough with the rename-to attribute in the gwt.file ?",
+      "revId": "3c3f0117457cbf8dc6bd2253aead8c374ac1bb92",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea116b43_daab2591",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2015-12-17T19:12:55Z",
+      "side": 1,
+      "message": "is @moduleShortName defined somewhere, you might forget update the webappcreator",
+      "revId": "3c3f0117457cbf8dc6bd2253aead8c374ac1bb92",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

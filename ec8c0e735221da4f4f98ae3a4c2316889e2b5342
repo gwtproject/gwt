@@ -22,6 +22,30 @@
       "revId": "ec8c0e735221da4f4f98ae3a4c2316889e2b5342",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a1bbbb8_bb6ffb3e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Throwable.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-04T19:27:46Z",
+      "side": 1,
+      "message": "Yes, but I tihnk it is wasteful to cause an exception unnecessarily.",
+      "parentUuid": "6a1bbbb8_1be28f51",
+      "range": {
+        "startLine": 144,
+        "startChar": 3,
+        "endLine": 144,
+        "endChar": 24
+      },
+      "revId": "ec8c0e735221da4f4f98ae3a4c2316889e2b5342",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

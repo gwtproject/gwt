@@ -62,7 +62,7 @@
           <include name="apache/tapestry-util-text-4.0.2.jar"/>
           <include name="apache/ant-1.6.5.jar"/>
           <include name="colt/colt-1.2.jar"/>
-          <include name="eclipse/org.eclipse.jdt.core_3.11.0.v20150126-2015.jar"/>
+          <include name="eclipse/org.eclipse.jdt.core_3.11.2-CUSTOM-GWT-2.8-20160205.jar"/>
           <include name="eclipse/jdtCompilerAdapter_3.11.0.v20150126-2015.jar"/>
           <include name="objectweb/asm-5.0.3/lib/asm-all-5.0.3.jar"/>
           <include name="guava/guava-18.0/guava-18.0-rebased.jar"/>
@@ -114,7 +114,7 @@
           <zipfileset src="${gwt.tools.lib}/apache/ant-1.6.5.jar"/>
           <zipfileset src="${gwt.tools.lib}/colt/colt-1.2.jar"/>
           <zipfileset
-              src="${gwt.tools.lib}/eclipse/org.eclipse.jdt.core_3.11.0.v20150126-2015.jar"/>
+              src="${gwt.tools.lib}/eclipse/org.eclipse.jdt.core_3.11.2-CUSTOM-GWT-2.8-20160205.jar"/>
           <zipfileset
               src="${gwt.tools.lib}/eclipse/jdtCompilerAdapter_3.11.0.v20150126-2015.jar"/>
           <zipfileset src="${gwt.tools.lib}/guava/guava-18.0/guava-18.0-rebased.jar"/>
@@ -201,7 +201,7 @@
         <pathelement
             location="${gwt.tools.lib}/apache/commons/commons-collections-3.2.1.jar"/>
         <pathelement
-            location="${gwt.tools.lib}/eclipse/org.eclipse.jdt.core_3.11.0.v20150126-2015.jar"/>
+            location="${gwt.tools.lib}/eclipse/org.eclipse.jdt.core_3.11.2-CUSTOM-GWT-2.8-20160205.jar"/>
         <pathelement
             location="${gwt.tools.lib}/eclipse/jdtCompilerAdapter_3.11.0.v20150126-2015.jar"/>
         <pathelement

@@ -46,6 +46,30 @@
       "revId": "1f96545c666ab28a654bc025497ee0a41fbc35ed",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca6827a1_99eabb5a",
+        "filename": "dev/core/super/javaemul/internal/ConsoleLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-08T18:11:02Z",
+      "side": 1,
+      "message": "Why  not have it as a first class field like backingJsObject, that is what I meant.",
+      "parentUuid": "aa1773d7_78afd69f",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 75
+      },
+      "revId": "1f96545c666ab28a654bc025497ee0a41fbc35ed",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

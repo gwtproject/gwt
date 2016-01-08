@@ -22,6 +22,30 @@
       "revId": "1f96545c666ab28a654bc025497ee0a41fbc35ed",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa1773d7_78afd69f",
+        "filename": "dev/core/super/javaemul/internal/ConsoleLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-08T01:43:40Z",
+      "side": 1,
+      "message": "backingObject is a field in Throwable. fnStack is an expando added by emulated and legacy stack trace styles.\n\nThe warning points that there is no such field.",
+      "parentUuid": "6a1bbbb8_7bbe2321",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 75
+      },
+      "revId": "1f96545c666ab28a654bc025497ee0a41fbc35ed",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

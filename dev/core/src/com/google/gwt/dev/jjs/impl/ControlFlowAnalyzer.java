@@ -30,6 +30,7 @@ import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JFieldRef;
+import com.google.gwt.dev.jjs.ast.JInstanceOf;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JLocal;
 import com.google.gwt.dev.jjs.ast.JLocalRef;
@@ -59,6 +60,7 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
@@ -200,6 +202,10 @@ public class ControlFlowAnalyzer {
     public boolean visit(JCastOperation x, Context ctx) {
       // Rescue any JavaScriptObject type that is the target of a cast.
       JType targetType = x.getCastType();
+
+      // Casts to native classes use the native constructor qualified name.
+      maybeRescueNativeConstructor(targetType);
+
       if (!canBeInstantiatedInJavaScript(targetType)) {
         return true;
       }
@@ -305,6 +311,13 @@ public class ControlFlowAnalyzer {
           membersToRescueIfTypeIsInstantiated.add(target);
         }
       }
+      return true;
+    }
+
+    @Override
+    public boolean visit(JInstanceOf expression, Context ctx) {
+      // Instanceof checks for native classes use the native constructor qualified name.
+      maybeRescueNativeConstructor(expression.getTestType());
       return true;
     }
 
@@ -748,6 +761,16 @@ public class ControlFlowAnalyzer {
         List<JExpression> list = argsToRescueIfParameterRead.removeAll(var);
         for (JExpression arg : list) {
           this.accept(arg);
+        }
+      }
+    }
+
+    private void maybeRescueNativeConstructor(JType type) {
+      if (type.isJsNative() && type.isClassType()) {
+        JMethod jsConstructor = Iterables.getFirst(Iterables.filter(
+            ((JClassType) type).getMethods(), JjsPredicates.IS_JS_CONSTRUCTOR), null);
+        if (jsConstructor != null) {
+          rescue(jsConstructor);
         }
       }
     }

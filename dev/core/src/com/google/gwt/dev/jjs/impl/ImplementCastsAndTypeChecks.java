@@ -21,6 +21,7 @@ import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JCastOperation;
+import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JInstanceOf;
@@ -34,6 +35,8 @@ import com.google.gwt.dev.jjs.ast.JReferenceType;
 import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
+import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
 import java.util.EnumSet;
@@ -265,8 +268,15 @@ public class ImplementCastsAndTypeChecks {
           targetType)));
     }
     if (method.getParams().size() == 3) {
-     call.addArg(program.getStringLiteral(sourceInfo,
-         ((JDeclaredType) targetType).getQualifiedJsName()));
+      JDeclaredType declaredType = (JDeclaredType) targetType;
+
+      JMethod jsConstructor = Iterables.getFirst(
+          Iterables.filter(declaredType.getMethods(), JjsPredicates.IS_JS_CONSTRUCTOR), null);
+      if (jsConstructor != null) {
+        assert declaredType.isJsNative();
+        call.addArg(new JsniMethodRef(sourceInfo, declaredType.getQualifiedJsName(), jsConstructor,
+            program.getJavaScriptObject()));
+      }
     }
     return call;
   }

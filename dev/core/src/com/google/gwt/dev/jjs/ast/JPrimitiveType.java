@@ -133,6 +133,16 @@ public class JPrimitiveType extends JType {
   }
 
   @Override
+  public boolean isClassType() {
+    return false;
+  }
+
+  @Override
+  public boolean isInterfaceType() {
+    return false;
+  }
+
+  @Override
   public boolean isFinal() {
     return true;
   }

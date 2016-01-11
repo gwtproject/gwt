@@ -88,6 +88,16 @@ public class JClassType extends JDeclaredType {
   }
 
   @Override
+  public boolean isClassType() {
+    return true;
+  }
+
+  @Override
+  public boolean isInterfaceType() {
+    return false;
+  }
+
+  @Override
   public JEnumType isEnumOrSubclass() {
     if (getSuperClass() != null) {
       return getSuperClass().isEnumOrSubclass();

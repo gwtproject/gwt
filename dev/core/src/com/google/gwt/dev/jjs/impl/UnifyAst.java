@@ -182,6 +182,7 @@ public class UnifyAst {
     @Override
     public void endVisit(JCastOperation x, Context ctx) {
       x.resolve(translate(x.getCastType()));
+      maybeFlowIntoNativeConstructor(x.getCastType());
     }
 
     @Override
@@ -266,6 +267,7 @@ public class UnifyAst {
     @Override
     public void endVisit(JInstanceOf x, Context ctx) {
       x.resolve(translate(x.getTestType()));
+      maybeFlowIntoNativeConstructor(x.getTestType());
     }
 
     @Override
@@ -409,6 +411,16 @@ public class UnifyAst {
       return !MAGIC_METHOD_CALLS.contains(target.getQualifiedName());
     }
 
+
+    private void maybeFlowIntoNativeConstructor(JType type) {
+      if (type.isJsNative() && type.isClassType()) {
+        JMethod jsConstructor = Iterables.getFirst(Iterables.filter(
+            ((JClassType) type).getMethods(), JjsPredicates.IS_JS_CONSTRUCTOR), null);
+        if (jsConstructor != null) {
+          flowInto(jsConstructor);
+        }
+      }
+    }
     private JExpression handleSystemGetProperty(JMethodCall gwtGetPropertyCall) {
       assert (gwtGetPropertyCall.getArgs().size() == 1 || gwtGetPropertyCall.getArgs().size() == 2);
       JExpression propertyNameExpression = gwtGetPropertyCall.getArgs().get(0);

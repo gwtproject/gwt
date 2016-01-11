@@ -80,6 +80,16 @@ public class JArrayType extends JReferenceType {
   }
 
   @Override
+  public boolean isClassType() {
+    return false;
+  }
+
+  @Override
+  public boolean isInterfaceType() {
+    return false;
+  }
+
+  @Override
   public boolean isAbstract() {
     return false;
   }

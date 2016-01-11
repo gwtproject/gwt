@@ -179,9 +179,20 @@ public class UnifyAst {
       x.setType(translate(x.getType().getUnderlyingType()));
     }
 
+    private void maybeFlowIntoNativeConstructor(JType type) {
+      if (type.isJsNative() && type.isClassType()) {
+        JMethod jsConstructor = Iterables.getFirst(Iterables.filter(
+            ((JClassType) type).getMethods(), JjsPredicates.IS_JS_CONSTRUCTOR), null);
+        if (jsConstructor != null) {
+          flowInto(jsConstructor);
+        }
+      }
+    }
+
     @Override
     public void endVisit(JCastOperation x, Context ctx) {
       x.resolve(translate(x.getCastType()));
+      maybeFlowIntoNativeConstructor(x.getCastType());
     }
 
     @Override
@@ -266,6 +277,7 @@ public class UnifyAst {
     @Override
     public void endVisit(JInstanceOf x, Context ctx) {
       x.resolve(translate(x.getTestType()));
+      maybeFlowIntoNativeConstructor(x.getTestType());
     }
 
     @Override

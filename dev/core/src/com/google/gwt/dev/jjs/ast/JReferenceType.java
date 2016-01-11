@@ -66,6 +66,16 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
         }
 
         @Override
+        public boolean isClassType() {
+          return false;
+        }
+
+        @Override
+        public boolean isInterfaceType() {
+          return false;
+        }
+
+        @Override
         public boolean isNullType() {
           return true;
         }
@@ -183,6 +193,15 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
     @Override
     public boolean isArrayType() {
       return ref.isArrayType();
+    }
+
+    public boolean isClassType() {
+      return ref.isClassType();
+    }
+
+    @Override
+    public boolean isInterfaceType() {
+      return ref.isInterfaceType();
     }
 
     @Override

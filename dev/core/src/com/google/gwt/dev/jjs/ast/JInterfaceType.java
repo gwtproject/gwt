@@ -67,6 +67,16 @@ public class JInterfaceType extends JDeclaredType {
   }
 
   @Override
+  public boolean isClassType() {
+    return false;
+  }
+
+  @Override
+  public boolean isInterfaceType() {
+    return false;
+  }
+
+  @Override
   public boolean isFinal() {
     return false;
   }

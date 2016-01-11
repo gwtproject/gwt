@@ -77,6 +77,10 @@ public abstract class JType extends JNode implements HasName, CanBeFinal {
 
   public abstract boolean isJsNative();
 
+  public abstract boolean isClassType();
+
+  public abstract boolean isInterfaceType();
+
   public abstract boolean canBeImplementedExternally();
 
   public abstract boolean canBeReferencedExternally();

@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07623a24_966dca47",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JClassType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-12T02:44:23Z",
+      "side": 1,
+      "message": "There is a lot of instanceof based detection; not migrating those but introducing it just for your usage here seem like an overkill to me and leaves the code in inconsistent state.\n\nIs there any issue with just adding instanceof against getUnderlyingType?",
+      "revId": "b048dc87adf68fba947441b9bc17bee3d44dd805",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07623a24_d6674263",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-12T02:44:23Z",
+      "side": 1,
+      "message": "assert?",
+      "revId": "b048dc87adf68fba947441b9bc17bee3d44dd805",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07623a24_76774e1c",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-12T02:44:23Z",
+      "side": 1,
+      "message": "merge to single statement",
+      "range": {
+        "startLine": 238,
+        "startChar": 3,
+        "endLine": 242,
+        "endChar": 43
+      },
+      "revId": "b048dc87adf68fba947441b9bc17bee3d44dd805",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

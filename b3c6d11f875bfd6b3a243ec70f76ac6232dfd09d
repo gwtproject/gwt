@@ -16,6 +16,24 @@
       "revId": "b3c6d11f875bfd6b3a243ec70f76ac6232dfd09d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07623a24_fc8698fb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2016-01-13T21:16:04Z",
+      "side": 1,
+      "message": "ControlFlowAnalyzer line 1018 rescues all canBeReferencedExternally types.",
+      "parentUuid": "c5e3ba48_64d0c41c",
+      "revId": "b3c6d11f875bfd6b3a243ec70f76ac6232dfd09d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

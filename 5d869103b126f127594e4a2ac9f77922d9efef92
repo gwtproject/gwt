@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e727e6f2_8a846b37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-01-13T10:52:20Z",
+      "side": 1,
+      "message": "Could you reword this to something along the lines of:\n\n Log instead of throwing when saving generated sources\n \n Filenames exceeding file system limits shouldn\u0027t break the\n build if they cannot be saved to disk; they just wouldn\u0027t be\n available for sourcemaps.\n This is a similar issue to https://github.com/gwtproject/gwt/issues/6014\n\n Bug: #9263\n Bug-Link: https://github.com/gwtproject/gwt/issues/9263",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 69
+      },
+      "revId": "5d869103b126f127594e4a2ac9f77922d9efef92",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -44,6 +44,7 @@ public enum TypeCategory {
   TYPE_JAVA_OBJECT_OR_JSO("AllowJso"),
   TYPE_JSO("Jso"),
   TYPE_NATIVE_ARRAY("NativeArray"),
+  TYPE_ARRAY("Array"),
   TYPE_JAVA_LANG_OBJECT("AllowJso"),
   TYPE_JAVA_LANG_STRING("String"),
   TYPE_JAVA_LANG_DOUBLE("Double"),

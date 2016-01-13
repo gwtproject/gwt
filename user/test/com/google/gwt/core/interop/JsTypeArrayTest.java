@@ -129,11 +129,7 @@ public class JsTypeArrayTest extends GWTTestCase {
   public void testObjectArray_castFromNative() {
     SimpleJsTypeReturnForMultiDimArray[] array =
         (SimpleJsTypeReturnForMultiDimArray[]) returnObjectArrayFromNative();
-    try {
-      assertNotNull((Object[]) array);
-
-    } catch (ClassCastException expected) {
-    }
+    assertNotNull((Object[]) array);
     assertEquals(3, array.length);
     assertEquals("1", array[0]);
   }

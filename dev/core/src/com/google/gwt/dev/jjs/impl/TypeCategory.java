@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.javac.JsInteropUtil;
+import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -40,10 +41,11 @@ public enum TypeCategory {
    * initialize to zero vs. null).
    */
 
-  TYPE_JAVA_OBJECT,
+  TYPE_JAVA_OBJECT(""),
   TYPE_JAVA_OBJECT_OR_JSO("AllowJso"),
   TYPE_JSO("Jso"),
   TYPE_NATIVE_ARRAY("NativeArray"),
+  TYPE_ARRAY("Array"),
   TYPE_JAVA_LANG_OBJECT("AllowJso"),
   TYPE_JAVA_LANG_STRING("String"),
   TYPE_JAVA_LANG_DOUBLE("Double"),
@@ -58,7 +60,7 @@ public enum TypeCategory {
   private final String castInstanceOfQualifier;
 
   TypeCategory() {
-    this("");
+    this(null);
   }
 
   TypeCategory(String castInstanceOfQualifier) {
@@ -89,6 +91,8 @@ public enum TypeCategory {
       return getJsSpecialType(type);
     } else if (program.isUntypedArrayType(type)) {
       return TypeCategory.TYPE_NATIVE_ARRAY;
+    } else if (type.isArrayType() && ((JArrayType) type).getLeafType().isJavaLangObject()) {
+      return TypeCategory.TYPE_ARRAY;
     } else if (type == program.getTypeJavaLangObject()) {
       return TypeCategory.TYPE_JAVA_LANG_OBJECT;
     } else if (program.getRepresentedAsNativeTypesDispatchMap().containsKey(type)) {

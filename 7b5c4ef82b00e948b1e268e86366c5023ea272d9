@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a73a4ef4_a3e244bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-01-13T13:28:32Z",
+      "side": 1,
+      "message": "[warning] Footer lines should form a single paragraph (i.e. must not be separated by blank lines.)",
+      "revId": "7b5c4ef82b00e948b1e268e86366c5023ea272d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a73a4ef4_c3e5c8c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-01-13T13:28:32Z",
+      "side": 1,
+      "message": "[warning] Footer lines should form a single paragraph (i.e. must not be separated by blank lines.)",
+      "revId": "7b5c4ef82b00e948b1e268e86366c5023ea272d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

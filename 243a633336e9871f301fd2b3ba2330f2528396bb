@@ -50,6 +50,40 @@
       "revId": "243a633336e9871f301fd2b3ba2330f2528396bb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e798c691_65d9a046",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/RequestFactoryServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-01-14T20:41:24Z",
+      "side": 1,
+      "message": "In the StackTraceDeobfuscator [1] there is a fromResource method which could be confusing with this parameter name, I\u0027d rather reference the fact of we are using here fromUrl, so symbolMapsUrl sounds more reasonable to me. \n\n[1] http://www.gwtproject.org/javadoc/latest/com/google/gwt/core/server/StackTraceDeobfuscator.html",
+      "revId": "243a633336e9871f301fd2b3ba2330f2528396bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e798c691_45e69c02",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/RequestFactoryServlet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-01-14T20:41:24Z",
+      "side": 1,
+      "message": "This line is so long for our syntax checker.",
+      "revId": "243a633336e9871f301fd2b3ba2330f2528396bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

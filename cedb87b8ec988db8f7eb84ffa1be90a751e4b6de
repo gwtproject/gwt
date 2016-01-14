@@ -19,6 +19,46 @@
     },
     {
       "key": {
+        "uuid": "e798c691_e226c65d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-01-14T16:13:39Z",
+      "side": 1,
+      "message": "nit: remove leading space (also above) and remove blank line",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 52
+      },
+      "revId": "cedb87b8ec988db8f7eb84ffa1be90a751e4b6de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e798c691_024bea0b",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/RequestFactoryServlet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-01-14T16:13:39Z",
+      "side": 1,
+      "message": "useContextPath is misleading IMO.\n\nI was rather thinking about a symbolMapsResource or symbolMapsResourcePath init-param that you\u0027d use *instead* of symbolMapsDirectory when your symbol maps are bundled within the webapp; with symbolMapsResourcePath probably overriding symbolMapsDirectory if both are sets.\n\nWDYT?",
+      "revId": "cedb87b8ec988db8f7eb84ffa1be90a751e4b6de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07f87ad1_63e642d5",
         "filename": "user/src/com/google/web/bindery/requestfactory/server/RequestFactoryServlet.java",
         "patchSetId": 1

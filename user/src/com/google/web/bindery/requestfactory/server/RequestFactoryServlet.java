@@ -155,18 +155,15 @@ public class RequestFactoryServlet extends HttpServlet {
 
   private void ensureConfig() {
     String symbolMapsDirectory = getServletConfig().getInitParameter("symbolMapsDirectory");
-    if (symbolMapsDirectory != null) {
-      boolean useContextPath = Boolean.parseBoolean(getServletConfig().getInitParameter("useContextPath"));
-      if (useContextPath) {
-        try {
-          Logging.setStackTraceDeobfuscator(StackTraceDeobfuscator.fromUrl(getServletContext().getResource(symbolMapsDirectory)));
-        } catch (MalformedURLException e) {
-          log.log(Level.WARNING,"Failed to get URL to symbolMaps",e);
-        }
+    String symbolMapsResource = getServletConfig().getInitParameter("symbolMapsResource");
+    if (symbolMapsResource != null) {
+      try {
+        Logging.setStackTraceDeobfuscator(StackTraceDeobfuscator.fromUrl(getServletContext().getResource(symbolMapsResource)));
+      } catch (MalformedURLException e) {
+        log.log(Level.WARNING,"Failed to get the symbolMaps resource",e);
       }
-      else {
-        Logging.setSymbolMapsDirectory(symbolMapsDirectory);
-      }
+    } else if (symbolMapsDirectory != null) {
+      Logging.setSymbolMapsDirectory(symbolMapsDirectory);
     }
   }
 }

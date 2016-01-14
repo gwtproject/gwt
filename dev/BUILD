@@ -87,10 +87,23 @@ java_library(
     ],
 )
 
+ZipCat(
+    name = "gwt-dev-deps.jar",
+    exclude = [
+        "about.html",
+    ],
+    zips = [
+        ":gwt-dev-deps-jarjared.jar",
+        "//third_party/java_src/gwt/svn/tools:jdt_jar",
+    ],
+)
+
 # Builds gwt-dev-deps.jar, which contains third-party deps for gwt-dev.jar.
 # (This is a separate jar for better build caching.)
 AugmentedJar(
-    name = "gwt-dev-deps",
+    name = "gwt-dev-deps-jarjared",
+    # Builds gwt-dev-deps.jar, which contains third-party deps for gwt-dev.jar.
+    # (This is a separate jar for better build caching.)
     srcs = [],
     added_jars = [
         "//third_party/java_src/gwt/legacy:libdev-bare.jar",
@@ -101,6 +114,9 @@ AugmentedJar(
     constraints = [],
     dojarjar = 1,
     wrap_javalibrary = 0,
+    deps = [
+        "//third_party/java_src/gwt/svn/tools:jdt_jar",
+    ],
 )
 
 # Builds gwt-dev-only.jar, which contains the GWT compiler and tools.
@@ -132,6 +148,7 @@ java_library(
     deps = [
         ":compiler.standalone.super",
         "//third_party/java_src/gwt/svn/tools:dev_deps",
+        "//third_party/java_src/gwt/svn/tools:jdt_jar",
         "//third_party/java_src/gwt/svn/tools:servlet_api_3",
     ],
 )
@@ -305,6 +322,7 @@ java_library(
         ":gwt-dev-bare",
         "//third_party/java/junit",
         "//third_party/java_src/gwt/svn/tools:dev_deps",
+        "//third_party/java_src/gwt/svn/tools:jdt_jar",
     ],
 )
 

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07f87ad1_83e01eb9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-01-14T15:35:00Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "cedb87b8ec988db8f7eb84ffa1be90a751e4b6de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07f87ad1_63e642d5",
+        "filename": "user/src/com/google/web/bindery/requestfactory/server/RequestFactoryServlet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-01-14T15:35:00Z",
+      "side": 1,
+      "message": "[warning] \u0027}\u0027 should be on the same line.",
+      "revId": "cedb87b8ec988db8f7eb84ffa1be90a751e4b6de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

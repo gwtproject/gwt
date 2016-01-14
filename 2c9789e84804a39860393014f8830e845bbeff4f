@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "07623a24_5c4b4c0a",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Array.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-14T00:44:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07623a24_8d8015b6",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 4
+      },
+      "revId": "2c9789e84804a39860393014f8830e845bbeff4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07623a24_5cd22cfa",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "07623a24_7c4a8804",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-14T00:44:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07623a24_5cd22cfa",
+      "range": {
+        "startLine": 169,
+        "startChar": 3,
+        "endLine": 169,
+        "endChar": 5
+      },
+      "revId": "2c9789e84804a39860393014f8830e845bbeff4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07623a24_fcecd8b0",
         "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
         "patchSetId": 5
@@ -59,6 +107,24 @@
       "writtenOn": "2016-01-13T21:30:28Z",
       "side": 1,
       "message": "This comment is inaccurate isn\u0027t it? It returns true if the object is a JS array and not stamped as a long[], double[], or boolean[], it\u0027s true for Object[], but also true for Foo[] and untyped.",
+      "revId": "2c9789e84804a39860393014f8830e845bbeff4f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07623a24_bc5b80d6",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-14T00:44:29Z",
+      "side": 1,
+      "message": "java.lang.Object or subtype. reworded.",
+      "parentUuid": "07623a24_fcecd8b0",
       "revId": "2c9789e84804a39860393014f8830e845bbeff4f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "07623a24_216d85d4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-19T18:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07623a24_e6356382",
+      "range": {
+        "startLine": 165,
+        "startChar": 45,
+        "endLine": 165,
+        "endChar": 71
+      },
+      "revId": "6a03e8452f9b3b49849d6e934b6cc23fb7fd3b8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07623a24_26b3db54",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2016-01-15T03:44:08Z",
       "side": 1,
       "message": "this doesn\u0027t read right. Do you mean is \"possible\" vs allowed?",
+      "range": {
+        "startLine": 175,
+        "startChar": 1,
+        "endLine": 178,
+        "endChar": 7
+      },
+      "revId": "6a03e8452f9b3b49849d6e934b6cc23fb7fd3b8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07623a24_a14eb56e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-19T18:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07623a24_26b3db54",
       "range": {
         "startLine": 175,
         "startChar": 1,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "07623a24_c13491d6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-19T18:58:09Z",
+      "side": 1,
+      "message": "Native arrays are handled by the previous if. Lets add a test in a follow up.",
+      "parentUuid": "07623a24_a62c0b3d",
+      "revId": "6a03e8452f9b3b49849d6e934b6cc23fb7fd3b8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07623a24_c6b5c739",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
         "patchSetId": 6
@@ -76,6 +142,30 @@
       "writtenOn": "2016-01-15T03:44:08Z",
       "side": 1,
       "message": "As commented earlier this reads bad; very misleading name. \"canCastSucceedAtRuntime\"?",
+      "range": {
+        "startLine": 219,
+        "startChar": 13,
+        "endLine": 219,
+        "endChar": 34
+      },
+      "revId": "6a03e8452f9b3b49849d6e934b6cc23fb7fd3b8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07623a24_2142a541",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-19T18:58:09Z",
+      "side": 1,
+      "message": "REverted to the old name.",
+      "parentUuid": "07623a24_c6b5c739",
       "range": {
         "startLine": 219,
         "startChar": 13,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "07623a24_c11db154",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeCastabilityInformation.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-19T18:58:09Z",
+      "side": 1,
+      "message": "I thnk we should be using here TypeCategory.typeCategoryForType(castTargetType, program).requiresTypeId()\n\nBut it filters some array types (I\u0027ll have to check why). For now  we could use isNoopCast to prune out native interfaces but lets leave it as before for now.",
+      "parentUuid": "07623a24_e6b8c331",
+      "range": {
+        "startLine": 232,
+        "startChar": 17,
+        "endLine": 232,
+        "endChar": 56
+      },
+      "revId": "6a03e8452f9b3b49849d6e934b6cc23fb7fd3b8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07623a24_865e2f28",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
         "patchSetId": 6
@@ -122,6 +236,30 @@
       "writtenOn": "2016-01-15T03:44:08Z",
       "side": 1,
       "message": "shouldn\u0027t this be the else statement at the end?\n\nAnd I think we should also move parameter count assertion to corresponding if blocks after that.",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 256,
+        "endChar": 5
+      },
+      "revId": "6a03e8452f9b3b49849d6e934b6cc23fb7fd3b8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07623a24_0118495f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementCastsAndTypeChecks.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-19T18:58:09Z",
+      "side": 1,
+      "message": "Done. And thanks to your CastOptimizationTest, I caught a potential failure to optimize when rearranging this code. \n\nThe reason why the number of paramters check is done before is to prevent calling with more than 1 parameter when cast checking is disabled (because if caller and callsite do not agree on number of parameters JsInliner does not inline).",
+      "parentUuid": "07623a24_865e2f28",
       "range": {
         "startLine": 253,
         "startChar": 0,

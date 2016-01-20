@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c786622d_efe0b515",
+        "filename": "elemental/idl/templates/jso_impl_ElementalMixinBase.darttemplate",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-01-20T11:22:05Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be better to convert this method to a non-JSNI version that simply delegates to the 3-arg addEventListener() JSNI method in line 146?",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 5
+      },
+      "revId": "c0a73ac81723c24de6b688e3608840b064d49e3e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -102,7 +102,9 @@ public class MethodCallTightener {
     }
 
     private boolean hasPotentialOverride(JReferenceType instanceType, JMethod target) {
-      if (target.isAbstract()) {
+      if (target.isAbstract() ||
+          // treat method on native types as polymorphic.
+          instanceType.canBeImplementedExternally() && !target.isJsOverlay()) {
         return true;
       }
 
@@ -122,10 +124,14 @@ public class MethodCallTightener {
       JClassType underlyingType =
           (JClassType) methodCall.getInstance().getType().getUnderlyingType();
 
+      if (underlyingType.canBeImplementedExternally()) {
+        return methodCall;
+      }
+
       JMethod mostSpecificOverride =
           program.typeOracle.findMostSpecificOverride(underlyingType, original);
 
-      if (mostSpecificOverride == original || mostSpecificOverride.isJsNative()) {
+      if (mostSpecificOverride == original) {
         // Do not tighten if the target method is a native JsMethod; this is necessary for the
         // JSO trampoline to be invoked on getClass().
         return methodCall;

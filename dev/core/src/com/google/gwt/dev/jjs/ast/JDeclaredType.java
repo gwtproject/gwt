@@ -423,7 +423,7 @@ public abstract class JDeclaredType extends JReferenceType
 
   @Override
   public boolean canBeImplementedExternally() {
-    return isJsNative() || isJsFunction();
+    return isJsNative() || isJsFunction() || isJavaLangObject();
   }
 
   /**

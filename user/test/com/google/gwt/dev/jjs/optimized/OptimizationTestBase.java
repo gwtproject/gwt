@@ -45,7 +45,7 @@ public abstract class OptimizationTestBase extends GWTTestCase {
   }
 
   private static String createRegex(String pattern) {
-    for (char toBeEscaped : ".[]+".toCharArray()) {
+    for (char toBeEscaped : ".[](){}+".toCharArray()) {
       pattern = pattern.replace("" + toBeEscaped, "\\" + toBeEscaped);
     }
     pattern = pattern.replace("<obf>", "[\\w$_]+");

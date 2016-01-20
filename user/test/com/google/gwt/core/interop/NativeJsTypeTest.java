@@ -51,6 +51,11 @@ public class NativeJsTypeTest extends GWTTestCase {
   interface MyNativeJsTypeInterface {
   }
 
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  final static class NativeObject implements MyNativeJsTypeInterface {
+  }
+
   public void testClassLiterals() {
     assertEquals(JavaScriptObject.class, MyNativeJsType.class);
     assertEquals(JavaScriptObject.class, MyNativeJsTypeInterface.class);
@@ -59,9 +64,15 @@ public class NativeJsTypeTest extends GWTTestCase {
     assertEquals(JavaScriptObject.class, MyNativeJsType[][].class);
     assertEquals(JavaScriptObject.class, MyNativeJsTypeInterface[][].class);
 
-    Object nativeObject = createNativeObjectWithoutToString();
+    Object object = createNativeObjectWithoutToString();
+    assertEquals(JavaScriptObject.class, object.getClass());
+
+    MyNativeJsTypeInterface nativeInterface =
+        (MyNativeJsTypeInterface) createNativeObjectWithoutToString();
+    assertEquals(JavaScriptObject.class, nativeInterface.getClass());
+
+    NativeObject nativeObject = (NativeObject) object;
     assertEquals(JavaScriptObject.class, nativeObject.getClass());
-    assertEquals(JavaScriptObject.class, ((MyNativeJsTypeInterface) nativeObject).getClass());
   }
 
   public void testToString() {

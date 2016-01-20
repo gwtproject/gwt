@@ -120,10 +120,26 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
   private transient AnalysisDecoratedTypePool analysisDecoratedTypePool = null;
 
   enum AnalysisResult {
-    NULLABLE_NOT_EXACT,
-    NOT_NULLABLE_NOT_EXACT,
-    NULLABLE_EXACT,
-    NOT_NULLABLE_EXACT;
+    NULLABLE_NOT_EXACT(true, false),
+    NOT_NULLABLE_NOT_EXACT(false, false),
+    NULLABLE_EXACT(true, true),
+    NOT_NULLABLE_EXACT(false, true);
+
+    private final boolean isNullable;
+    private final boolean isExact;
+
+    AnalysisResult(boolean isNullable, boolean isExact) {
+      this.isNullable = isNullable;
+      this.isExact = isExact;
+    }
+
+    private boolean isNullable() {
+      return isNullable;
+    }
+
+    private boolean isExact() {
+      return isExact;
+    }
   }
   /**
    * A reference type decorated with the result of static analysis. Only two analysis properties
@@ -278,14 +294,12 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
 
   @Override
   public final boolean canBeNull() {
-    return getAnalysisResult() == AnalysisResult.NULLABLE_EXACT ||
-        getAnalysisResult() == AnalysisResult.NULLABLE_NOT_EXACT;
+    return getAnalysisResult().isNullable();
   }
 
   @Override
   public final boolean canBeSubclass() {
-    boolean canBeSubclass = getAnalysisResult() == AnalysisResult.NULLABLE_NOT_EXACT ||
-        getAnalysisResult() == AnalysisResult.NOT_NULLABLE_NOT_EXACT;
+    boolean canBeSubclass = !getAnalysisResult().isExact();
     assert canBeSubclass || !isJsoType() : "A JSO type can never be EXACT but " + name + " is.";
     return canBeSubclass;
   }
@@ -399,7 +413,7 @@ public abstract class JReferenceType extends JType implements CanBeAbstract {
   }
 
   AnalysisResult getAnalysisResult() {
-    if (isFinal() && !isJsoType()) {
+    if (isFinal() && !isJsoType() && !canBeImplementedExternally()) {
       return AnalysisResult.NULLABLE_EXACT;
     }
     return AnalysisResult.NULLABLE_NOT_EXACT;

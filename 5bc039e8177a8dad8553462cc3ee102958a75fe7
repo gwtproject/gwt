@@ -16,6 +16,24 @@
       "revId": "5bc039e8177a8dad8553462cc3ee102958a75fe7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a77deeee_fccdd187",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-01-20T15:55:41Z",
+      "side": 0,
+      "message": "Ah right, let me revert this change in the samples (but I\u0027ll leave the property out of the webappcreator template)",
+      "parentUuid": "a5ea461e_20cb4acd",
+      "revId": "5bc039e8177a8dad8553462cc3ee102958a75fe7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

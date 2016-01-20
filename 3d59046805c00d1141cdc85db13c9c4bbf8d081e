@@ -2,6 +2,126 @@
   "comments": [
     {
       "key": {
+        "uuid": "e7ae06f9_b5c82a2f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-20T20:26:10Z",
+      "side": 1,
+      "message": "This part needs more love :)",
+      "range": {
+        "startLine": 11,
+        "startChar": 13,
+        "endLine": 11,
+        "endChar": 40
+      },
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7ae06f9_3580bae2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-20T20:26:10Z",
+      "side": 1,
+      "message": "Normally, our optimization are responsible for checking canBeImplementedExternally and not upgrading the type. Having it here basically means that we are missing the check some places, isn\u0027t it?",
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7ae06f9_d59a0e55",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-20T20:26:10Z",
+      "side": 1,
+      "message": "Normally, our optimization are responsible for checking canBeImplementedExternally and not upgrading the type. Having it here basically means that we are missing the check some places, isn\u0027t it?",
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7ae06f9_d5e04eba",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-20T20:26:10Z",
+      "side": 1,
+      "message": "Should we also check for final or is it already handled elsewhere?",
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7ae06f9_b59f8a27",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-20T20:26:10Z",
+      "side": 1,
+      "message": "Should be have this in findMostSpecificOverride instead? Seems more appropriate.",
+      "range": {
+        "startLine": 125,
+        "startChar": 10,
+        "endLine": 125,
+        "endChar": 53
+      },
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7ae06f9_95a40677",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-20T20:26:10Z",
+      "side": 1,
+      "message": "pls remove the stale comment",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 54
+      },
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0726ba4f_5627528f",
         "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
         "patchSetId": 1

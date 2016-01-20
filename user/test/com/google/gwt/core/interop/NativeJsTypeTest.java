@@ -51,6 +51,10 @@ public class NativeJsTypeTest extends GWTTestCase {
   interface MyNativeJsTypeInterface {
   }
 
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  static class NativeObject implements MyNativeJsTypeInterface {
+  }
+
   public void testClassLiterals() {
     assertEquals(JavaScriptObject.class, MyNativeJsType.class);
     assertEquals(JavaScriptObject.class, MyNativeJsTypeInterface.class);
@@ -59,9 +63,54 @@ public class NativeJsTypeTest extends GWTTestCase {
     assertEquals(JavaScriptObject.class, MyNativeJsType[][].class);
     assertEquals(JavaScriptObject.class, MyNativeJsTypeInterface[][].class);
 
-    Object nativeObject = createNativeObjectWithoutToString();
-    assertEquals(JavaScriptObject.class, nativeObject.getClass());
-    assertEquals(JavaScriptObject.class, ((MyNativeJsTypeInterface) nativeObject).getClass());
+    Object object = createNativeObjectWithoutToString();
+    assertEquals(JavaScriptObject.class, object.getClass());
+
+    MyNativeJsTypeInterface nativeInterface =
+        (MyNativeJsTypeInterface) createNativeObjectWithoutToString();
+    assertEquals(JavaScriptObject.class, nativeInterface.getClass());
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  final static class FinalNativeObject implements MyNativeJsTypeInterface {
+  }
+
+  @JsType(isNative = true)
+  interface MyNativeJsTypeInterfaceOnlyOneConcreteImplementor {
+  }
+
+  public void testOptimizedDispatches() {
+    // Makes sure that <NativeType?.getClass is not optimized to Object.getClass due to bad
+    // type/call tightening.
+
+    // nativeObject1 could be marked as EXACT due to newing, messing getClass dispatch.
+    NativeObject nativeObject1 = new NativeObject();
+    assertEquals(JavaScriptObject.class, nativeObject1.getClass());
+
+    // nativeObject1 could be marked as EXACT due to final modifier in the calls,
+    // messing getClass dispatch.
+    FinalNativeObject nativeObject2 = createNativeObject();
+    assertEquals(JavaScriptObject.class, nativeObject2.getClass());
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  final static class AnotherFinalNativeObject implements MyNativeJsTypeInterface {
+  }
+
+  private static boolean same(Object thisObject, Object thatObject) {
+    return thisObject == thatObject;
+  }
+
+  public void testEqualityOptimization() {
+    // Makes sure that == does not get optimized away due to static class incompatibility.
+
+    // finalNativeObject could be marked as EXACT type of class FinalNativeObject.
+    FinalNativeObject finalNativeObject = new FinalNativeObject();
+
+    AnotherFinalNativeObject anotherFinalNativeObject =
+        (AnotherFinalNativeObject) (Object) finalNativeObject;
+    // DeadCodeElimination could optimize statically to false which is incorrect.
+    assertTrue(same(anotherFinalNativeObject, finalNativeObject));
   }
 
   public void testToString() {
@@ -74,6 +123,10 @@ public class NativeJsTypeTest extends GWTTestCase {
     Object nativeArray = createNativeArray();
     assertEquals("", nativeArray.toString());
   }
+
+  private static native FinalNativeObject createNativeObject() /*-{
+    return {};
+  }-*/;
 
   private static native MyNativeJsType createNativeObjectWithToString() /*-{
     return {toString: function() { return "Native type"; } };

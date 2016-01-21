@@ -41,6 +41,9 @@ public class JCastOperation extends JExpression {
 
   @Override
   public JType getType() {
+    if (!expr.getType().canBeNull() && !castType.isNullType()) {
+      return castType.strengthenToNonNull();
+    }
     return castType;
   }
 

@@ -41,11 +41,12 @@ public abstract class OptimizationTestBase extends GWTTestCase {
     assertTrue("Resulting function: " + functionDef, stripped.endsWith("}"));
     stripped = stripped.substring(0, stripped.length() - 1);
     stripped = stripped.replace('"', '\''); // for HtmlUnit
+    stripped = stripped.replace("()", ""); // to accont for the removal of () in new operations.
     return stripped;
   }
 
   private static String createRegex(String pattern) {
-    for (char toBeEscaped : ".[]+".toCharArray()) {
+    for (char toBeEscaped : ".[](){}+=?".toCharArray()) {
       pattern = pattern.replace("" + toBeEscaped, "\\" + toBeEscaped);
     }
     pattern = pattern.replace("<obf>", "[\\w$_]+");

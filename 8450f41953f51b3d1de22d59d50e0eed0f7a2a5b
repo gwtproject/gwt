@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d439b2d1_748d66b0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-21T18:53:24Z",
+      "side": 0,
+      "message": "This test is redundant and is handled implicitly by the switch bellow.",
+      "range": {
+        "startLine": 328,
+        "startChar": 36,
+        "endLine": 328,
+        "endChar": 75
+      },
+      "revId": "8450f41953f51b3d1de22d59d50e0eed0f7a2a5b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

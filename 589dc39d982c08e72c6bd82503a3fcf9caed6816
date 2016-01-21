@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d439b2d1_374240ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-21T22:34:49Z",
+      "side": 1,
+      "message": "Does it? does it not? I think the previous check is written in obscurely it just means if either is true but not both, rewritten  now in a way is more obvious (taking advantage of the second test).\n\nThis second test is to account for the fact that strengthen may not really strengthen.",
+      "parentUuid": "d439b2d1_5794a428",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 525,
+        "endChar": 71
+      },
+      "revId": "589dc39d982c08e72c6bd82503a3fcf9caed6816",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d439b2d1_f78278eb",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JType.java",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2016-01-21T20:04:04Z",
       "side": 1,
       "message": "nit: move to more relevant place above.",
+      "revId": "589dc39d982c08e72c6bd82503a3fcf9caed6816",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d439b2d1_571f04ef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JType.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-21T22:34:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d439b2d1_f78278eb",
       "revId": "589dc39d982c08e72c6bd82503a3fcf9caed6816",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "d439b2d1_371480cf",
+        "filename": "user/test/com/google/gwt/dev/jjs/optimized/CastOptimizationTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-21T22:34:49Z",
+      "side": 1,
+      "message": "because I am using it below also.",
+      "parentUuid": "d439b2d1_b78cf01f",
+      "range": {
+        "startLine": 55,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 24
+      },
+      "revId": "589dc39d982c08e72c6bd82503a3fcf9caed6816",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d439b2d1_37db6013",
         "filename": "user/test/com/google/gwt/dev/jjs/optimized/CastOptimizationTest.java",
         "patchSetId": 2
@@ -76,6 +142,30 @@
       "writtenOn": "2016-01-21T20:04:04Z",
       "side": 1,
       "message": "What about:\n\n  assertFunctionMatches(functionDef, \"new \u003cobf\u003e()\");",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 43
+      },
+      "revId": "589dc39d982c08e72c6bd82503a3fcf9caed6816",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d439b2d1_7a754da9",
+        "filename": "user/test/com/google/gwt/dev/jjs/optimized/CastOptimizationTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-21T22:34:49Z",
+      "side": 1,
+      "message": "Changed to the actual content (I am not sure why it is not stripped away because there are no side effects, will check later).",
+      "parentUuid": "d439b2d1_37db6013",
       "range": {
         "startLine": 119,
         "startChar": 0,

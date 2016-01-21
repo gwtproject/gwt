@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "e74a8641_d2416422",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-01-21T17:09:46Z",
+      "side": 1,
+      "message": "The plugin can\u0027t determine whether your existing output (if any) is up-to-date and will always recompile your client code (because it\u0027ll never find the configured folder, it\u0027ll always assume the app hasn\u0027t been compiled yet, i.e. it\u0027d assume it\u0027s a \"clean build\" even if it actually isn\u0027t).\n\nIn other words, the only impact is a \"build performance\" one, with \"build too many\" errors rather than \"build too few\".",
+      "parentUuid": "341f6e57_14ee143f",
+      "revId": "3c3f0117457cbf8dc6bd2253aead8c374ac1bb92",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea116b43_daab2591",
         "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
         "patchSetId": 4

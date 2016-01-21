@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "341f6e57_14ee143f",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-01-21T16:57:16Z",
+      "side": 1,
+      "message": "what happens if rename-to is empty, or the configuration name does not match with the rename-to ?",
+      "parentUuid": "e798c691_f69208d0",
+      "revId": "3c3f0117457cbf8dc6bd2253aead8c374ac1bb92",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea116b43_daab2591",
         "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
         "patchSetId": 4

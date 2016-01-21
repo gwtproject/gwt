@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c73662c7_a9655dc3",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsoTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-01-21T18:47:08Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "ef6e9dab9e9d638b5c4fe94667e07b913cecd13e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c73662c7_c95a9106",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/JsoTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-01-21T18:47:08Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "ef6e9dab9e9d638b5c4fe94667e07b913cecd13e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

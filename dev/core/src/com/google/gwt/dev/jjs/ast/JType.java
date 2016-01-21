@@ -180,4 +180,9 @@ public abstract class JType extends JNode implements HasName, CanBeFinal {
     }
     return originalType.isExternal() && originalType.getName().equals(this.getName());
   }
+
+  /**
+   * Returns a non nullable version of this type if possible.
+   */
+  public abstract JType strengthenToNonNull();
 }

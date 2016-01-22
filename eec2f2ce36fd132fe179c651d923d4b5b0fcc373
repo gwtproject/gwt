@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d439b2d1_609c7c92",
+        "filename": "user/test/com/google/gwt/dev/jjs/optimized/CastOptimizationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-22T08:25:34Z",
+      "side": 1,
+      "message": "Why don\u0027t you follow the same pattern as the other test? Create a field. move the field initialization gwtSetup and assert if \n\n if(field \u003d\u003d null) throw new RTE()\n\nis completely optimized.",
+      "revId": "eec2f2ce36fd132fe179c651d923d4b5b0fcc373",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

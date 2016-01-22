@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "54aa2254_6bf0f5b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-22T21:32:18Z",
+      "side": 1,
+      "message": "Rewritten.",
+      "parentUuid": "e7ae06f9_b5c82a2f",
+      "range": {
+        "startLine": 11,
+        "startChar": 13,
+        "endLine": 11,
+        "endChar": 40
+      },
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7ae06f9_3580bae2",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
         "patchSetId": 1
@@ -59,6 +83,24 @@
     },
     {
       "key": {
+        "uuid": "e7ae06f9_95eec66b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JReferenceType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-22T21:32:18Z",
+      "side": 1,
+      "message": "This one here is a shortcut. It starts by labelling a final class as EXACT (which is not really true for native types)\n\nExactness messes up the j.l.Object method dispatch, causing methods that should be devirtualized and get the JSO implementation, to be optimized to the Object implementation. \n\nIt is pretty hard to craft the examples that hit these code paths; (it took me the whole morning to get a minimal repro case for the reported bug, much after the fix became obvious).\n\nNativeJsTypeTest#testOptimizedDispatches tests this code path.",
+      "parentUuid": "e7ae06f9_3580bae2",
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7ae06f9_d5e04eba",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
         "patchSetId": 1
@@ -76,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "e7ae06f9_35fefa1c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-22T21:32:18Z",
+      "side": 1,
+      "message": "final is handled here I believe, and final methods can not be implemented externally. But anyway it seems that this check is also unnecessary unless we considered JS classes that extend  Java classes.",
+      "parentUuid": "e7ae06f9_d5e04eba",
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7ae06f9_b59f8a27",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
         "patchSetId": 1
@@ -87,6 +147,30 @@
       "writtenOn": "2016-01-20T20:26:10Z",
       "side": 1,
       "message": "Should be have this in findMostSpecificOverride instead? Seems more appropriate.",
+      "range": {
+        "startLine": 125,
+        "startChar": 10,
+        "endLine": 125,
+        "endChar": 53
+      },
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7ae06f9_b512ea37",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-22T21:32:18Z",
+      "side": 1,
+      "message": "Not needed anymore since native js types return canBeSubclass().",
+      "parentUuid": "e7ae06f9_b59f8a27",
       "range": {
         "startLine": 125,
         "startChar": 10,
@@ -122,6 +206,30 @@
     },
     {
       "key": {
+        "uuid": "e7ae06f9_f80aa96b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-22T21:32:18Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "e7ae06f9_95a40677",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 54
+      },
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0726ba4f_5627528f",
         "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
         "patchSetId": 1
@@ -133,6 +241,24 @@
       "writtenOn": "2016-01-20T19:40:44Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7ae06f9_d5f68eb5",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-22T21:32:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0726ba4f_5627528f",
       "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

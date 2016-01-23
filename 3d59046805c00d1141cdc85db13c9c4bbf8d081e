@@ -136,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "54aa2254_aea7db24",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-23T01:13:15Z",
+      "side": 1,
+      "message": "Not sure if understand why this is unnecessary. Wouldn\u0027t concrete native types extended internally hit this issue? Do we have a test for that?",
+      "parentUuid": "e7ae06f9_35fefa1c",
+      "revId": "3d59046805c00d1141cdc85db13c9c4bbf8d081e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7ae06f9_b59f8a27",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
         "patchSetId": 1

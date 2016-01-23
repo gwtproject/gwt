@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54aa2254_39fa5799",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-23T02:25:51Z",
+      "side": 1,
+      "message": "I think you misunderstood. I am recommending to create a new test called testGetClass for these part.",
+      "range": {
+        "startLine": 74,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 67
+      },
+      "revId": "fb7be86aabe348baf2e249bbd7c0b460388186bd",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

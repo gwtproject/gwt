@@ -559,6 +559,24 @@
       "revId": "2df8bc28e9dab32dd855d618045d1909be0a0c2f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4a43ebb_103d240b",
+        "filename": "user/test/com/google/gwt/dev/jjs/optimized/JsOverlayMethodOptimizationTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-25T20:33:40Z",
+      "side": 1,
+      "message": "See if you like the current state better.",
+      "parentUuid": "54aa2254_b989670f",
+      "revId": "2df8bc28e9dab32dd855d618045d1909be0a0c2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

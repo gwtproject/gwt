@@ -801,7 +801,7 @@ public class JProgram extends JNode implements ArrayTypeCreator {
             leafTypeClassLiteralField.getEnclosingType()), getLiteralInt(dimensions));
   }
 
-  public Map<JReferenceType, JCastMap> getCastMap() {
+  public Map<JReferenceType, JCastMap> getCastMapByType() {
     return Collections.unmodifiableMap(castMaps);
   }
 
@@ -814,6 +814,15 @@ public class JProgram extends JNode implements ArrayTypeCreator {
     return castMaps.get(referenceType);
   }
 
+  public JExpression getArrayCastMap(SourceInfo sourceInfo, JArrayType arrayType) {
+    JCastMap castableTypeMap = getCastMap(arrayType);
+    if (castableTypeMap == null) {
+      return new JCastMap(sourceInfo, getTypeJavaLangObject(),
+          Collections.<JReferenceType>emptyList());
+    }
+    return castableTypeMap;
+  }
+
   public JField getClassLiteralField(JType type) {
     return classLiteralFieldsByType.get(
         type.isJsoType() ? getJavaScriptObject() : type);
@@ -821,6 +830,26 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
   public List<JDeclaredType> getDeclaredTypes() {
     return allTypes;
+  }
+
+  public JRuntimeTypeReference getRuntimeTypeReference(SourceInfo sourceInfo, JType type) {
+    if (!(type instanceof JReferenceType)) {
+      // type is a primitive type, store check will be performed statically.
+      type = JReferenceType.NULL_TYPE;
+    }
+
+    if (typeOracle.isEffectivelyJavaScriptObject(type)) {
+      /*
+       * treat types that are effectively JSO's as JSO's, for the purpose of
+       * castability checking
+       */
+      type = getJavaScriptObject();
+    } else {
+      type = type.getUnderlyingType();
+    }
+
+    type = normalizeJsoType(type);
+    return new JRuntimeTypeReference(sourceInfo, getTypeJavaLangObject(), (JReferenceType) type);
   }
 
   public List<JMethod> getEntryMethods() {
@@ -1021,6 +1050,14 @@ public class JProgram extends JNode implements ArrayTypeCreator {
       arrayTypes.put(elementType, arrayType);
     }
     return arrayType;
+  }
+
+  /**
+   * Returns a literal that represent the type category for a type.
+   * @param type
+   */
+  public JIntLiteral getTypeCategoryLiteral(JType type) {
+    return JIntLiteral.get(TypeCategory.typeCategoryForType(type, this).ordinal());
   }
 
   // TODO(dankurka): Why does JProgram synthezise array types on the fly

@@ -26,6 +26,7 @@ import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JBooleanLiteral;
 import com.google.gwt.dev.jjs.ast.JCharLiteral;
+import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -47,11 +48,14 @@ import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JReferenceType;
+import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
 import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.jjs.ast.RuntimeConstants;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
+import com.google.gwt.dev.jjs.ast.js.JsonArray;
 import com.google.gwt.dev.js.ast.JsBooleanLiteral;
 import com.google.gwt.dev.js.ast.JsExpression;
 import com.google.gwt.dev.js.ast.JsLiteral;
@@ -301,6 +305,37 @@ public class JjsUtils {
     assert type.isAbstract();
     assert superTypeMethod.isAbstract();
     return createEmptyMethodFromExample(type, superTypeMethod, true);
+  }
+
+  static class ArrayStamper {
+    private final JMethod stampJavaTypeInfoMethod;
+    private final JProgram program;
+
+    ArrayStamper(JProgram program) {
+      this.program = program;
+      stampJavaTypeInfoMethod =
+          program.getIndexedMethod(RuntimeConstants.ARRAY_STAMP_JAVA_TYPE_INFO);
+    }
+
+    JExpression getStampArrayExpression(JExpression array, JArrayType arrayType) {
+      SourceInfo sourceInfo = array.getSourceInfo();
+      JExpression classLitExpression =
+          program.createArrayClassLiteralExpression(array.getSourceInfo(),
+              new JClassLiteral(sourceInfo, arrayType.getLeafType()), arrayType.getDims());
+      JExpression castableTypeMap = program.getArrayCastMap(sourceInfo, arrayType);
+      JRuntimeTypeReference elementTypeIds =
+          program.getRuntimeTypeReference(sourceInfo, arrayType.getElementType());
+      JsonArray initializers =
+          new JsonArray(sourceInfo, program.getJavaScriptObject(), array);
+      JIntLiteral leafElementTypeCategory =
+          program.getTypeCategoryLiteral(arrayType.getElementType());
+      JMethodCall call = new JMethodCall(sourceInfo, null, stampJavaTypeInfoMethod);
+      call.overrideReturnType(arrayType);
+      call.addArgs(classLitExpression, castableTypeMap, elementTypeIds, leafElementTypeCategory,
+          initializers);
+      return call;
+
+    }
   }
 
   /**

@@ -22,6 +22,30 @@
       "revId": "ea10573008a2c111581375032f1f4c3d27d35962",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74ac86b5_9edf5dfc",
+        "filename": "user/src/com/google/gwt/resources/css/InterfaceGenerator.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2016-01-26T11:04:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74ac86b5_7edff12b",
+      "range": {
+        "startLine": 252,
+        "startChar": 77,
+        "endLine": 252,
+        "endChar": 78
+      },
+      "revId": "ea10573008a2c111581375032f1f4c3d27d35962",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

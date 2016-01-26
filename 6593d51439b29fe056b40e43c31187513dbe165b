@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54722221_083d070b",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/SuppressIsSafeHtmlCastCheckLegacy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-01-26T21:41:29Z",
+      "side": 1,
+      "message": "[error] Line does not match expected header line of \u0027^/\\*[ ]*$\u0027.",
+      "revId": "6593d51439b29fe056b40e43c31187513dbe165b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -218,7 +218,7 @@ public class ImplementClassLiteralsAsFields {
             new JClassLiteral(x.getSourceInfo(), arrayType.getLeafType());
         resolveClassLiteral(leafTypeClassLiteral);
 
-        JExpression arrayClassLiteralExpression = program.createArrayClassLiteralExpression(
+        JExpression arrayClassLiteralExpression = program.getArrayClassLiteralExpression(
             x.getSourceInfo(), leafTypeClassLiteral, arrayType.getDims());
         ctx.replaceMe(arrayClassLiteralExpression);
       } else {

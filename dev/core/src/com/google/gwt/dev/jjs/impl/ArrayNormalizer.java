@@ -21,10 +21,7 @@ import com.google.gwt.dev.jjs.ast.JArrayRef;
 import com.google.gwt.dev.jjs.ast.JArrayType;
 import com.google.gwt.dev.jjs.ast.JBinaryOperation;
 import com.google.gwt.dev.jjs.ast.JBinaryOperator;
-import com.google.gwt.dev.jjs.ast.JCastMap;
 import com.google.gwt.dev.jjs.ast.JExpression;
-import com.google.gwt.dev.jjs.ast.JIntLiteral;
-import com.google.gwt.dev.jjs.ast.JLiteral;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
@@ -35,8 +32,8 @@ import com.google.gwt.dev.jjs.ast.JRuntimeTypeReference;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
 import com.google.gwt.dev.jjs.ast.js.JsonArray;
+import com.google.gwt.dev.jjs.impl.JjsUtils.ArrayStamper;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -95,118 +92,72 @@ public class ArrayNormalizer {
       ctx.replaceMe(initializeMultidimensionalArray(x, type));
     }
 
-    private JRuntimeTypeReference getElementRuntimeTypeReference(SourceInfo sourceInfo,
-        JArrayType arrayType) {
+    private JExpression initializeUnidimensionalArray(JNewArray newArray, JArrayType arrayType) {
+      SourceInfo sourceInfo = newArray.getSourceInfo();
       JType elementType = arrayType.getElementType();
-      if (!(elementType instanceof JReferenceType)) {
-        // elementType is a primitive type, store check will be performed statically.
-        elementType = JReferenceType.NULL_TYPE;
-      }
-
-      if (program.typeOracle.isEffectivelyJavaScriptObject(elementType)) {
-        /*
-         * treat types that are effectively JSO's as JSO's, for the purpose of
-         * castability checking
-         */
-        elementType = program.getJavaScriptObject();
-      } else {
-        elementType = elementType.getUnderlyingType();
-      }
-
-      elementType = program.normalizeJsoType(elementType);
-      return new JRuntimeTypeReference(sourceInfo, program.getTypeJavaLangObject(),
-          (JReferenceType) elementType);
-    }
-
-    private JExpression getOrCreateCastMap(SourceInfo sourceInfo, JArrayType arrayType) {
-      JCastMap castableTypeMap = program.getCastMap(arrayType);
-      if (castableTypeMap == null) {
-        return new JCastMap(sourceInfo, program.getTypeJavaLangObject(),
-            Collections.<JReferenceType>emptyList());
-      }
-      return castableTypeMap;
-    }
-
-    private JExpression initializeUnidimensionalArray(JNewArray x, JArrayType arrayType) {
+      JMethodCall call =  new JMethodCall(sourceInfo, null, initializeUnidimensionalArrayMethod,
+          // parameters
+          newArray.getLeafTypeClassLiteral(),
+          program.getArrayCastMap(sourceInfo, arrayType),
+          program.getRuntimeTypeReference(sourceInfo, elementType),
+          newArray.getDimensionExpressions().get(0),
+          program.getTypeCategoryLiteral(elementType),
+          program.getLiteralInt(arrayType.getDims()));
       // override the type of the called method with the array's type
-      SourceInfo sourceInfo = x.getSourceInfo();
-      JLiteral classLit = x.getLeafTypeClassLiteral();
-      JExpression castableTypeMap = getOrCreateCastMap(sourceInfo, arrayType);
-      JRuntimeTypeReference arrayElementRuntimeTypeReference =
-          getElementRuntimeTypeReference(sourceInfo, arrayType);
-      JType elementType = arrayType.getElementType();
-      JIntLiteral elementTypeCategory = getTypeCategoryLiteral(elementType);
-      JExpression dim = x.getDimensionExpressions().get(0);
-      JMethodCall call =
-          new JMethodCall(sourceInfo, null, initializeUnidimensionalArrayMethod);
       call.overrideReturnType(arrayType);
-      call.addArgs(classLit, castableTypeMap, arrayElementRuntimeTypeReference, dim,
-          elementTypeCategory, program.getLiteralInt(arrayType.getDims()));
       return call;
     }
 
-    private JExpression initializeMultidimensionalArray(JNewArray x, JArrayType arrayType) {
-      // override the type of the called method with the array's type
-      SourceInfo sourceInfo = x.getSourceInfo();
+    private JExpression initializeMultidimensionalArray(JNewArray newArray, JArrayType arrayType) {
+      SourceInfo sourceInfo = newArray.getSourceInfo();
       JsonArray castableTypeMaps = new JsonArray(sourceInfo, program.getJavaScriptObject());
       JsonArray elementTypeReferences = new JsonArray(sourceInfo, program.getJavaScriptObject());
-      JsonArray dimList = new JsonArray(sourceInfo, program.getJavaScriptObject());
+      JsonArray dimensions = new JsonArray(sourceInfo, program.getJavaScriptObject());
       JType currentElementType = arrayType;
-      JLiteral classLit = x.getLeafTypeClassLiteral();
-      for (int i = 0; i < x.getDimensionExpressions().size(); ++i) {
+      for (int i = 0; i < newArray.getDimensionExpressions().size(); ++i) {
         // Walk down each type from most dims to least.
         JArrayType curArrayType = (JArrayType) currentElementType;
 
-        JExpression castableTypeMap = getOrCreateCastMap(sourceInfo, curArrayType);
+        JExpression castableTypeMap = program.getArrayCastMap(sourceInfo, curArrayType);
         castableTypeMaps.getExpressions().add(castableTypeMap);
 
-        JRuntimeTypeReference elementTypeIdLit = getElementRuntimeTypeReference(sourceInfo,
-            curArrayType);
+        JRuntimeTypeReference elementTypeIdLit = program.getRuntimeTypeReference(sourceInfo,
+            curArrayType.getElementType());
         elementTypeReferences.getExpressions().add(elementTypeIdLit);
 
-        dimList.getExpressions().add(x.getDimensionExpressions().get(i));
+        dimensions.getExpressions().add(newArray.getDimensionExpressions().get(i));
         currentElementType = curArrayType.getElementType();
       }
       JType leafElementType = currentElementType;
-      JIntLiteral leafElementTypeCategory = getTypeCategoryLiteral(leafElementType);
       JMethodCall call =
-          new JMethodCall(sourceInfo, null, initializeMultidimensionalArrayMethod);
-      call.overrideReturnType(arrayType);
-      call.addArgs(classLit, castableTypeMaps, elementTypeReferences, leafElementTypeCategory,
-          dimList, program.getLiteralInt(x.getDimensionExpressions().size()));
-      return call;
-    }
-
-    private JExpression createArrayFromInitializers(JNewArray x, JArrayType arrayType) {
+          new JMethodCall(sourceInfo, null, initializeMultidimensionalArrayMethod,
+              // parameters
+              newArray.getLeafTypeClassLiteral(),
+              castableTypeMaps,
+              elementTypeReferences,
+              program.getTypeCategoryLiteral(leafElementType),
+              dimensions,
+              program.getLiteralInt(newArray.getDimensionExpressions().size()));
       // override the type of the called method with the array's type
-      SourceInfo sourceInfo = x.getSourceInfo();
-      JExpression classLitExpression = program.createArrayClassLiteralExpression(x.getSourceInfo(),
-          x.getLeafTypeClassLiteral(), arrayType.getDims());
-      JExpression castableTypeMap = getOrCreateCastMap(sourceInfo, arrayType);
-      JRuntimeTypeReference elementTypeIds = getElementRuntimeTypeReference(sourceInfo, arrayType);
-      JsonArray initializers =
-          new JsonArray(sourceInfo, program.getJavaScriptObject(), x.getInitializers());
-      JIntLiteral leafElementTypeCategory = getTypeCategoryLiteral(arrayType.getElementType());
-      JMethodCall call = new JMethodCall(sourceInfo, null, stampJavaTypeInfoMethod);
       call.overrideReturnType(arrayType);
-      call.addArgs(classLitExpression, castableTypeMap, elementTypeIds, leafElementTypeCategory,
-          initializers);
       return call;
     }
 
-    /**
-     * Returns a literal that represent the type category for a type.
-     */
-    private JIntLiteral getTypeCategoryLiteral(JType type) {
-      return JIntLiteral.get(TypeCategory.typeCategoryForType(type, program).ordinal());
+    private JExpression createArrayFromInitializers(JNewArray newArray, JArrayType arrayType) {
+      // override the type of the called method with the array's type
+      SourceInfo sourceInfo = newArray.getSourceInfo();
+      JsonArray initializerArray =
+          new JsonArray(sourceInfo, program.getJavaScriptObject(), newArray.getInitializers());
+      return arrayStamper.getStampArrayExpression(initializerArray, arrayType,
+          newArray.getLeafTypeClassLiteral());
     }
   }
 
-  private JArrayRef needsSetCheck(JBinaryOperation x) {
-    if (x.getOp() != JBinaryOperator.ASG || !(x.getLhs() instanceof JArrayRef)) {
+  private JArrayRef needsSetCheck(JBinaryOperation expression) {
+    if (expression.getOp() != JBinaryOperator.ASG || !(expression.getLhs() instanceof JArrayRef)) {
       return null;
     }
-    JArrayRef arrayRef = (JArrayRef) x.getLhs();
+    JArrayRef arrayRef = (JArrayRef) expression.getLhs();
     JType elementType = arrayRef.getType();
     JExpression arrayInstance = arrayRef.getInstance();
     if (elementType.isNullType()) {
@@ -216,7 +167,7 @@ public class ArrayNormalizer {
       // Primitive array types are statically correct, no need to set check.
       return null;
     } else if (!arrayInstance.getType().canBeSubclass() &&
-        program.typeOracle.castSucceedsTrivially((JReferenceType) x.getRhs().getType(),
+        program.typeOracle.castSucceedsTrivially((JReferenceType) expression.getRhs().getType(),
             (JReferenceType) elementType)) {
       // There is no need to check as the static check already proved the cast is correct.
       return null;
@@ -225,8 +176,8 @@ public class ArrayNormalizer {
     return arrayRef;
   }
 
-  public static JsonArray getInitializerArray(JNewArray x) {
-    return new JsonArray(x.getSourceInfo(), x.getType(), x.getInitializers());
+  public static JsonArray getInitializerArray(JNewArray newArray) {
+    return new JsonArray(newArray.getSourceInfo(), newArray.getType(), newArray.getInitializers());
   }
 
   public static void exec(JProgram program) {
@@ -235,8 +186,8 @@ public class ArrayNormalizer {
 
   private final JMethod initializeUnidimensionalArrayMethod;
   private final JMethod initializeMultidimensionalArrayMethod;
-  private final JMethod stampJavaTypeInfoMethod;
   private final JMethod setCheckMethod;
+  private final ArrayStamper arrayStamper;
   private final JProgram program;
 
   private ArrayNormalizer(JProgram program) {
@@ -246,7 +197,7 @@ public class ArrayNormalizer {
         RuntimeConstants.ARRAY_INITIALIZE_UNIDIMENSIONAL_ARRAY);
     initializeMultidimensionalArrayMethod = program.getIndexedMethod(
         RuntimeConstants.ARRAY_INITIALIZE_MULTIDIMENSIONAL_ARRAY);
-    stampJavaTypeInfoMethod = program.getIndexedMethod(RuntimeConstants.ARRAY_STAMP_JAVA_TYPE_INFO);
+    arrayStamper = new ArrayStamper(program);
   }
 
   private void execImpl() {

@@ -260,7 +260,7 @@ public class ResolveRuntimeTypeReferences {
     runtimeTypeCollector.accept(program);
     // Collects runtime type references that are missed (inside of annotations) in a normal AST
     // traversal.
-    runtimeTypeCollector.accept(Lists.newArrayList(program.getCastMap().values()));
+    runtimeTypeCollector.accept(Lists.newArrayList(program.getCastMapByType().values()));
     // Collects runtime type references in the ClassLiteralHolder even if the ClassLiteralHolder
     // isn't part of the current compile.
     runtimeTypeCollector.accept(program.getIndexedType("ClassLiteralHolder"));
@@ -275,7 +275,7 @@ public class ResolveRuntimeTypeReferences {
     // TODO(rluble): Improve the code so that things are not scattered all over; here cast maps
     // that appear as parameters to soon to be generated
     // {@link JavaClassHierarchySetup::defineClass()} are NOT traversed when traversing the program.
-    for (Entry<JReferenceType, JCastMap> entry : program.getCastMap().entrySet()) {
+    for (Entry<JReferenceType, JCastMap> entry : program.getCastMapByType().entrySet()) {
       JCastMap castMap = entry.getValue();
       replaceTypeIdsVisitor.accept(castMap);
     }

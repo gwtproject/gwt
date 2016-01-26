@@ -26,6 +26,7 @@ import com.google.gwt.dev.jjs.ast.JBinaryOperator;
 import com.google.gwt.dev.jjs.ast.JBlock;
 import com.google.gwt.dev.jjs.ast.JBooleanLiteral;
 import com.google.gwt.dev.jjs.ast.JCharLiteral;
+import com.google.gwt.dev.jjs.ast.JClassLiteral;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
@@ -51,6 +52,7 @@ import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.jjs.ast.RuntimeConstants;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.js.ast.JsBooleanLiteral;
 import com.google.gwt.dev.js.ast.JsExpression;
@@ -301,6 +303,30 @@ public class JjsUtils {
     assert type.isAbstract();
     assert superTypeMethod.isAbstract();
     return createEmptyMethodFromExample(type, superTypeMethod, true);
+  }
+
+  static class ArrayStamper {
+    private final JMethod stampJavaTypeInfoMethod;
+    private final JProgram program;
+
+    ArrayStamper(JProgram program) {
+      this.program = program;
+      stampJavaTypeInfoMethod =
+          program.getIndexedMethod(RuntimeConstants.ARRAY_STAMP_JAVA_TYPE_INFO);
+    }
+
+    JExpression getStampArrayExpression(JExpression array, JArrayType arrayType,
+        JClassLiteral leafClassLiteral) {
+      SourceInfo sourceInfo = array.getSourceInfo();
+      JMethodCall call = new JMethodCall(sourceInfo, null, stampJavaTypeInfoMethod,
+          // stampArray parameters
+          program.getArrayClassLiteralExpression(sourceInfo, leafClassLiteral, arrayType.getDims()),
+          program.getArrayCastMap(sourceInfo, arrayType),
+          program.getRuntimeTypeReference(sourceInfo, arrayType.getElementType()),
+          program.getTypeCategoryLiteral(arrayType.getElementType()), array);
+      call.overrideReturnType(arrayType);
+      return call;
+    }
   }
 
   /**

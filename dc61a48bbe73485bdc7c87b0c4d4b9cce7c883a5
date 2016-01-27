@@ -34,6 +34,24 @@
       "revId": "dc61a48bbe73485bdc7c87b0c4d4b9cce7c883a5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4a43ebb_8d19f609",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2016-01-27T22:24:17Z",
+      "side": 1,
+      "message": "Oh, you mean the case where people do something like\n\nJSO[] x \u003d new JSO[10];\n\nHmm, I wonder if we should just translate those as \"new Array(10)\" unstamped and remove this special case?\n\nThat is, JSO[] is always a native array, but I guess that might break cases where people need to tell the difference between JSO[] in old GWT and NativeType[] or JSO?",
+      "parentUuid": "b4a43ebb_0d5346bc",
+      "revId": "dc61a48bbe73485bdc7c87b0c4d4b9cce7c883a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

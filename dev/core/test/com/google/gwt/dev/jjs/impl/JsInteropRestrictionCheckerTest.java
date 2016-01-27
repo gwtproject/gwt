@@ -1302,6 +1302,19 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         + "'EntryPoint.IBuggy'.");
   }
 
+  public void testGlobalObjectInstanceofFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsOverlay");
+    addSnippetImport("jsinterop.annotations.JsPackage");
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = \"Object\")",
+        " public static class Buggy {",
+        "  @JsOverlay public final void m() { if (new Object() instanceof Buggy) {} }",
+        "}");
+
+    assertBuggyFails("Line 8: Cannot do instanceof against native jsType 'GLOBAL.Object'.");
+  }
+
   public void testNativeJsTypeEnumFails() {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetClassDecl(

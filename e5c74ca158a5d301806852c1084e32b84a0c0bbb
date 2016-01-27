@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4a43ebb_e507fca0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-27T03:02:47Z",
+      "side": 1,
+      "message": "Looks like random located in the file.",
+      "revId": "e5c74ca158a5d301806852c1084e32b84a0c0bbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

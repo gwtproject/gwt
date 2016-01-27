@@ -570,13 +570,24 @@ public class JsInteropRestrictionChecker {
   private void checkInstanceOfNativeJsTypes() {
     new JVisitor() {
       @Override
-      public boolean visit(JInstanceOf x, Context ctx) {
+      public void endVisit(JInstanceOf x, Context ctx) {
         JReferenceType type = x.getTestType();
-        if (type.isJsNative() && type instanceof JInterfaceType) {
+        if (!type.isJsNative() || !(type instanceof JDeclaredType)) {
+          return;
+        }
+        if (type instanceof JInterfaceType) {
           logError(x, "Cannot do instanceof against native JsType interface '%s'.",
               JjsUtils.getReadableDescription(type));
+          return;
         }
-        return true;
+        JClassType nativeClass = (JClassType) type;
+        if (JsInteropUtil.isGlobal(nativeClass.getJsNamespace())
+            && nativeClass.getJsName().equals("Object")) {
+          // instanceOf GLOBAL.Object is disallows as there are two natural possible semantics: (1)
+          // always true akin typeof == "object" and (2) not a Java object.
+          logError(x, "Cannot do instanceof against native jsType 'GLOBAL.Object'.",
+              JjsUtils.getReadableDescription(type));
+        }
       }
     }.accept(jprogram);
   }

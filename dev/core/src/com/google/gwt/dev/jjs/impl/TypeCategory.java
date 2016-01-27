@@ -136,6 +136,7 @@ public enum TypeCategory {
       return null;
     }
 
+
     switch (classType.getJsName()) {
       case "Object":
         return TypeCategory.TYPE_JAVA_LANG_OBJECT;

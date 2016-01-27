@@ -116,9 +116,7 @@ public class JsTypeSpecialTypesTest extends GWTTestCase {
 
   public void testNativeObject() {
     Object object = new Object();
-
     assertNotNull((NativeObject) object);
-    assertTrue(object instanceof NativeObject);
 
     Object nativeObject = new NativeObject();
     assertNotNull((Object) nativeObject);

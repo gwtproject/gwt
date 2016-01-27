@@ -52,6 +52,24 @@
       "revId": "dc61a48bbe73485bdc7c87b0c4d4b9cce7c883a5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4a43ebb_cdbcdef4",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-27T22:31:25Z",
+      "side": 1,
+      "message": "This would be a change of current GWT behavior where currently JSO[] are NOT native arrays. (we have test coverage for this and I think probably some usage were people expect that arrays passed from JS are not instanceof Jso[]). \n\nI don\u0027t think we need to change semantics of this.",
+      "parentUuid": "b4a43ebb_8d19f609",
+      "revId": "dc61a48bbe73485bdc7c87b0c4d4b9cce7c883a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b4a43ebb_6d4212f0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-27T22:15:54Z",
+      "side": 1,
+      "message": "The collection in the constructor is not stored in the castmap, instead its elements are traversed to add the correspoinding JRuntimeTypeReference (JCastMap:44)",
+      "parentUuid": "b4a43ebb_ed0602fe",
+      "revId": "e5c74ca158a5d301806852c1084e32b84a0c0bbb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4a43ebb_e507fca0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
         "patchSetId": 4

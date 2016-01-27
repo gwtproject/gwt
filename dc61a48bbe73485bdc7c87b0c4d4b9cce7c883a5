@@ -16,6 +16,24 @@
       "revId": "dc61a48bbe73485bdc7c87b0c4d4b9cce7c883a5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4a43ebb_0d5346bc",
+        "filename": "dev/core/super/com/google/gwt/dev/jjs/intrinsic/com/google/gwt/lang/Cast.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-01-27T22:18:05Z",
+      "side": 1,
+      "message": "dstId is the cast target for the case of JSO[] (not Native[]), which is a proper Java array.",
+      "parentUuid": "b4a43ebb_ad887add",
+      "revId": "dc61a48bbe73485bdc7c87b0c4d4b9cce7c883a5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

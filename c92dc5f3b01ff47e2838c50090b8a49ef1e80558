@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b45fdef8_58001d4a",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeVarargsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-28T22:04:51Z",
+      "side": 1,
+      "message": "so passing null directly treated as passing null array per java semantics? I totally forgot about that.",
+      "range": {
+        "startLine": 156,
+        "startChar": 53,
+        "endLine": 156,
+        "endChar": 59
+      },
+      "revId": "c92dc5f3b01ff47e2838c50090b8a49ef1e80558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b45fdef8_d80b4d72",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeVarargsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-01-28T22:04:51Z",
+      "side": 1,
+      "message": "is JSE ever possible? (and others)",
+      "range": {
+        "startLine": 158,
+        "startChar": 13,
+        "endLine": 158,
+        "endChar": 32
+      },
+      "revId": "c92dc5f3b01ff47e2838c50090b8a49ef1e80558",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

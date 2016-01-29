@@ -141,6 +141,14 @@ final class Cast {
   }
 
   /**
+   * Allow a dynamic cast to a native GLOBAL.Object if it is JavaScript object.
+   */
+  static Object castToJsObject(Object src) {
+    checkType(src == null || isJsObject(src));
+    return src;
+  }
+
+  /**
    * A dynamic cast that optionally checks for JsType prototypes.
    */
   static Object castToNative(Object src, JavaScriptObject jsType) {
@@ -220,11 +228,23 @@ final class Cast {
   }
 
   /**
+   * Returns true if the object is a JS object.
+   */
+  static boolean instanceOfJsObject(Object src) {
+    return (src != null) && isJsObject(src);
+  }
+
+  /**
    * Returns whether the Object is a function.
    */
   @HasNoSideEffects
   private static native boolean isFunction(Object src)/*-{
     return typeof(src) === "function";
+  }-*/;
+
+  @HasNoSideEffects
+  private static native boolean isJsObject(Object src)/*-{
+    return typeof(src) === "object";
   }-*/;
 
   @HasNoSideEffects

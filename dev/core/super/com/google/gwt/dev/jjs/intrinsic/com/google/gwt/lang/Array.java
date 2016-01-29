@@ -39,12 +39,13 @@ public final class Array {
   private static final int TYPE_JAVA_LANG_STRING = 7;
   private static final int TYPE_JAVA_LANG_DOUBLE = 8;
   private static final int TYPE_JAVA_LANG_BOOLEAN = 9;
-  private static final int TYPE_JS_NATIVE = 10;
-  private static final int TYPE_JS_UNKNOWN_NATIVE = 11;
-  private static final int TYPE_JS_FUNCTION = 12;
-  private static final int TYPE_PRIMITIVE_LONG = 13;
-  private static final int TYPE_PRIMITIVE_NUMBER = 14;
-  private static final int TYPE_PRIMITIVE_BOOLEAN = 15;
+  private static final int TYPE_JS_OBJECT = 10;
+  private static final int TYPE_JS_NATIVE = 11;
+  private static final int TYPE_JS_UNKNOWN_NATIVE = 12;
+  private static final int TYPE_JS_FUNCTION = 13;
+  private static final int TYPE_PRIMITIVE_LONG = 14;
+  private static final int TYPE_PRIMITIVE_NUMBER = 15;
+  private static final int TYPE_PRIMITIVE_BOOLEAN = 16;
 
   public static <T> T[] stampJavaTypeInfo(Object array, T[] referenceType) {
     if (Array.getElementTypeCategory(referenceType) != TYPE_JS_UNKNOWN_NATIVE) {
@@ -186,6 +187,8 @@ public final class Array {
         return Cast.instanceOfArray(value);
       case TYPE_JS_FUNCTION:
         return Cast.instanceOfFunction(value);
+      case TYPE_JS_OBJECT:
+        return Cast.instanceOfJsObject(value);
       case TYPE_JAVA_OBJECT:
         return Cast.canCast(value, Array.getElementTypeId(array));
       case TYPE_JSO:

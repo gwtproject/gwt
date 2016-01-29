@@ -51,6 +51,7 @@ public enum TypeCategory {
   TYPE_JAVA_LANG_STRING("String"),
   TYPE_JAVA_LANG_DOUBLE("Double"),
   TYPE_JAVA_LANG_BOOLEAN("Boolean"),
+  TYPE_JS_OBJECT("JsObject"),
   TYPE_JS_NATIVE("Native", false, true),
   TYPE_JS_UNKNOWN_NATIVE("UnknownNative"),
   TYPE_JS_FUNCTION("Function"),
@@ -142,7 +143,7 @@ public enum TypeCategory {
 
     switch (classType.getJsName()) {
       case "Object":
-        return TypeCategory.TYPE_JAVA_LANG_OBJECT;
+        return TypeCategory.TYPE_JS_OBJECT;
       case "Function":
         return TypeCategory.TYPE_JS_FUNCTION;
       case "Array":

@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "5422228b_d4130ae7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeCategory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-02-01T18:52:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5422228b_19bebb7b",
+      "revId": "affce1dfd63ea47a0c22e81f397d3c1ec540118b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5422228b_19895be1",
         "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "5422228b_f4aac6a9",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-02-01T18:52:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5422228b_19895be1",
+      "revId": "affce1dfd63ea47a0c22e81f397d3c1ec540118b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5422228b_79b5ef91",
         "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
         "patchSetId": 1
@@ -64,6 +100,24 @@
       "writtenOn": "2016-01-30T01:16:26Z",
       "side": 1,
       "message": "Just FYI, some of these already tested under corresponding instanceof test in other classes.",
+      "revId": "affce1dfd63ea47a0c22e81f397d3c1ec540118b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5422228b_140e82c1",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-02-01T18:52:12Z",
+      "side": 1,
+      "message": "Yes, I guessed. But here they are all together.",
+      "parentUuid": "5422228b_79b5ef91",
       "revId": "affce1dfd63ea47a0c22e81f397d3c1ec540118b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

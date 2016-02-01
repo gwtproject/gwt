@@ -138,7 +138,7 @@
     <dependency>
       <groupId>com.googlecode.objectify</groupId>
       <artifactId>objectify</artifactId>
-      <version>3.0</version>
+      <version>5.1.10</version>
     </dependency>
     <dependency>
       <groupId>javax.persistence</groupId>

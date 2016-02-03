@@ -1162,6 +1162,7 @@ public class GenerateJavaScriptAST {
       if (type == null || topologicallySortedSet.contains(type) || program.isReferenceOnly(type)) {
         return;
       }
+
       insertInTopologicalOrder(type.getSuperClass(), topologicallySortedSet);
 
       for (JInterfaceType intf : type.getImplements()) {

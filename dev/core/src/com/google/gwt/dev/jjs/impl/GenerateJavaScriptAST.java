@@ -1162,6 +1162,14 @@ public class GenerateJavaScriptAST {
       if (type == null || topologicallySortedSet.contains(type) || program.isReferenceOnly(type)) {
         return;
       }
+
+      if (type.isJsNative() && program.getJavaScriptObject() != null) {
+        // Make sure that JSO appears before any Native JsType so that class literal dependencies
+        // are fullfilled, correctly. The case in cuestion is that the super class literal for
+        // a native type subclass is JSO.
+        insertInTopologicalOrder(program.getTypeJavaLangObject(), topologicallySortedSet);
+      }
+
       insertInTopologicalOrder(type.getSuperClass(), topologicallySortedSet);
 
       for (JInterfaceType intf : type.getImplements()) {

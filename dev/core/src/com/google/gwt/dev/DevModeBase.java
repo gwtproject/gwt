@@ -150,10 +150,10 @@ public abstract class DevModeBase implements DoneCallback {
         InetAddress address = InetAddress.getByName(value);
         options.setBindAddress(value);
         if (address.isAnyLocalAddress()) {
-          // replace a wildcard address with our machine's local address
-          // this isn't fully accurate, as there is no guarantee we will get
-          // the right one on a multihomed host
-          options.setConnectAddress(InetAddress.getLocalHost().getHostAddress());
+          // make a guess as to the best IP to use by looking up the IP for the canonical host name
+          String canonicalHostName = InetAddress.getLocalHost().getCanonicalHostName();
+          String canonicalHostAddress = InetAddress.getByName(canonicalHostName).getHostAddress();
+          options.setConnectAddress(canonicalHostAddress);
         } else {
           options.setConnectAddress(value);
         }

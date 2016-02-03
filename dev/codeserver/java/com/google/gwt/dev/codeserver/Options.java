@@ -526,7 +526,10 @@ public class Options {
       try {
         InetAddress newBindAddress = InetAddress.getByName(newValue);
         if (newBindAddress.isAnyLocalAddress()) {
-          preferredHost = InetAddress.getLocalHost().getHostName();
+          // make a guess as to the best IP to use by looking up the IP for the canonical host name
+          String canonicalHostName = InetAddress.getLocalHost().getCanonicalHostName();
+          String canonicalHostAddress = InetAddress.getByName(canonicalHostName).getHostAddress();
+          preferredHost = canonicalHostAddress;
         } else {
           preferredHost = newValue;
         }

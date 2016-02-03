@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51db1439_1d1b7303",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-03T19:01:22Z",
+      "side": 1,
+      "message": "I think the implementation in this class and the implementation in \n\nhttps://gwt.googlesource.com/gwt/+/master/dev/core/src/com/google/gwt/dev/DevModeBase.java#156\n\nshould be the same. Ideally DevMode and CodeServer should use the same ArgHandler class. Currently each has its own class (BindAddressFlag vs. ArgHandlerBindAddress).",
+      "range": {
+        "startLine": 529,
+        "startChar": 0,
+        "endLine": 532,
+        "endChar": 47
+      },
+      "revId": "7c100e7bb786616ab4c444011c3548ad58b651eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

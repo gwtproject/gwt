@@ -45,11 +45,17 @@ import com.google.gwt.util.tools.ArgHandler;
 import com.google.gwt.util.tools.ArgHandlerDir;
 import com.google.gwt.util.tools.ArgHandlerExtra;
 import com.google.gwt.util.tools.ArgHandlerFlag;
+import com.google.gwt.util.tools.ArgHandlerHost;
 import com.google.gwt.util.tools.ArgHandlerInt;
-import com.google.gwt.util.tools.ArgHandlerString;
+import java.io.File;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 import java.io.File;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,8 +80,8 @@ public class Options {
   private final List<String> moduleNames = new ArrayList<String>();
   private boolean allowMissingSourceDir = false;
   private final List<File> sourcePath = new ArrayList<File>();
-  private String bindAddress = "127.0.0.1";
-  private String preferredHost = "localhost";
+  private String bindAddress = ArgHandlerHost.DEFAULT_HOST_ADDRESS;
+  private String preferredHost = ArgHandlerHost.DEFAULT_HOST_NAME;
   private int port = 9876;
 
   private RecompileListener recompileListener = RecompileListener.NONE;
@@ -504,7 +510,7 @@ public class Options {
     }
   }
 
-  private class BindAddressFlag extends ArgHandlerString {
+  private class BindAddressFlag extends ArgHandlerHost {
 
     @Override
     public String getTag() {
@@ -512,32 +518,26 @@ public class Options {
     }
 
     @Override
-    public String[] getTagArgs() {
-      return new String[] {"address"};
-    }
-
-    @Override
     public String getPurpose() {
-      return "The ip address of the code server. Defaults to 127.0.0.1.";
+      return "Specifies the bind address for the code server (defaults to "
+          + DEFAULT_HOST_ADDRESS + ")";
     }
 
     @Override
-    public boolean setString(String newValue) {
+    public boolean setString(String value) {
       try {
-        InetAddress newBindAddress = InetAddress.getByName(newValue);
-        if (newBindAddress.isAnyLocalAddress()) {
-          preferredHost = InetAddress.getLocalHost().getHostName();
+        if (getResolvedHost().isAnyLocalAddress()) {
+          bindAddress = getResolvedHost().getHostAddress();
+          preferredHost = getPreferredHost().getHostAddress();
         } else {
-          preferredHost = newValue;
+          bindAddress = getRawHost();
+          preferredHost = getRawHost();
         }
+        return true;
       } catch (UnknownHostException e) {
-        System.err.println("Can't resolve bind address: " + newValue);
+        // exception will have already been logged by the arg handler
         return false;
       }
-
-      // Save the original since there's no way to get it back from an InetAddress.
-      bindAddress = newValue;
-      return true;
     }
   }
 

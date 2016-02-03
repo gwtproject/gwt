@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91a74cbf_2f93a943",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JavaScriptVerifier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-03T19:18:32Z",
+      "side": 1,
+      "message": "[error] \u0027;\u0027 is preceded with whitespace.",
+      "revId": "afcb2921a4e793e8826d0a6d937ee57bdb3aa816",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91a74cbf_4f98ed5b",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ast/JavaScriptVerifier.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-03T19:18:32Z",
+      "side": 1,
+      "message": "[error] \u0027for\u0027 is not followed by whitespace.",
+      "revId": "afcb2921a4e793e8826d0a6d937ee57bdb3aa816",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91a74cbf_6f9db14a",
+        "filename": "dev/core/test/com/google/gwt/dev/CompilerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2295,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-03T19:18:32Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "afcb2921a4e793e8826d0a6d937ee57bdb3aa816",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -41,10 +41,10 @@ import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.util.tools.ArgHandlerFlag;
+import com.google.gwt.util.tools.ArgHandlerHost;
 import com.google.gwt.util.tools.ArgHandlerString;
 
 import java.io.File;
-import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -112,10 +112,7 @@ public abstract class DevModeBase implements DoneCallback {
   /**
    * Handles the -bindAddress command line flag.
    */
-  protected static class ArgHandlerBindAddress extends ArgHandlerString {
-
-    private static final String BIND_ADDRESS_TAG = "-bindAddress";
-    private static final String DEFAULT_BIND_ADDRESS = "127.0.0.1";
+  protected static class ArgHandlerBindAddress extends ArgHandlerHost {
 
     private final OptionBindAddress options;
 
@@ -124,42 +121,29 @@ public abstract class DevModeBase implements DoneCallback {
     }
 
     @Override
-    public String[] getDefaultArgs() {
-      return new String[]{BIND_ADDRESS_TAG, DEFAULT_BIND_ADDRESS};
+    public String getTag() {
+      return "-bindAddress";
     }
 
     @Override
     public String getPurpose() {
-      return "Specifies the bind address for the code server and web server " + "(defaults to "
-          + DEFAULT_BIND_ADDRESS + ")";
-    }
-
-    @Override
-    public String getTag() {
-      return BIND_ADDRESS_TAG;
-    }
-
-    @Override
-    public String[] getTagArgs() {
-      return new String[]{"host-name-or-address"};
+      return "Specifies the bind address for the code server and web server (defaults to "
+          + DEFAULT_HOST_ADDRESS + ")";
     }
 
     @Override
     public boolean setString(String value) {
       try {
-        InetAddress address = InetAddress.getByName(value);
-        options.setBindAddress(value);
-        if (address.isAnyLocalAddress()) {
-          // replace a wildcard address with our machine's local address
-          // this isn't fully accurate, as there is no guarantee we will get
-          // the right one on a multihomed host
-          options.setConnectAddress(InetAddress.getLocalHost().getHostAddress());
+        if (getResolvedHost().isAnyLocalAddress()) {
+          options.setBindAddress(getResolvedHost().getHostAddress());
+          options.setConnectAddress(getPreferredHost().getHostAddress());
         } else {
-          options.setConnectAddress(value);
+          options.setBindAddress(getRawHost());
+          options.setConnectAddress(getRawHost());
         }
         return true;
       } catch (UnknownHostException e) {
-        System.err.println("-bindAddress host \"" + value + "\" unknown");
+        // exception will have already been logged by the arg handler
         return false;
       }
     }

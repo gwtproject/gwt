@@ -74,7 +74,7 @@ public class BrowserListener implements CodeServerListener {
       this.logger = treeLogger;
       listenSocket = new ServerSocket();
       listenSocket.setReuseAddress(true);
-      InetAddress address = InetAddress.getByName(options.getBindAddress());
+      InetAddress address = options.getBindAddress();
       listenSocket.bind(new InetSocketAddress(address, options.getCodeServerPort()));
 
       if (logger.isLoggable(TreeLogger.TRACE)) {
@@ -137,7 +137,7 @@ public class BrowserListener implements CodeServerListener {
       String query = parsedUrl.getQuery();
       String hash = parsedUrl.getRef();
       String hostedParam =
-          BrowserListener.getDevModeURLParams(options.getConnectAddress(), getSocketPort());
+          BrowserListener.getDevModeURLParams(options.getBindAddress().getHostAddress(), getSocketPort());
       if (query == null) {
         query = hostedParam;
       } else {

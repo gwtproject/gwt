@@ -95,7 +95,7 @@ public class Recompiler {
     this.options = options;
     this.unitCache = unitCache;
     this.minimalRebuildCacheManager = minimalRebuildCacheManager;
-    this.serverPrefix = options.getPreferredHost() + ":" + options.getPort();
+    this.serverPrefix = options.getBindAddress().getHostAddress() + ":" + options.getPort();
     compilerContext = compilerContextBuilder.build();
   }
 

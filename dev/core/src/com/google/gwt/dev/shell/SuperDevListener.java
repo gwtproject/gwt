@@ -153,7 +153,7 @@ public class SuperDevListener implements CodeServerListener {
     args.add(String.valueOf(options.getSourceLevel()));
     if (options.getBindAddress() != null) {
       args.add("-bindAddress");
-      args.add(options.getBindAddress());
+      args.add(options.getBindAddressAsEntered());
     }
     if (options.getWorkDir() != null) {
       args.add("-workDir");

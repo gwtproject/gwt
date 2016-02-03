@@ -622,7 +622,7 @@ public class DevMode extends DevModeBase implements RestartServerCallback {
         JettyLauncher jetty = (JettyLauncher) scl;
         jetty.setBaseRequestLogLevel(getBaseLogLevelForUI());
       }
-      scl.setBindAddress(options.getBindAddress());
+      scl.setBindAddress(options.getBindAddress().getHostAddress());
 
       if (serverLogger.isLoggable(TreeLogger.TRACE)) {
         serverLogger.log(TreeLogger.TRACE, "Starting HTTP on port " + getPort(), null);

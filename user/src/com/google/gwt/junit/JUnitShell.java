@@ -689,9 +689,10 @@ public class JUnitShell extends DevMode {
       // URLs. Note that connectAddress isn't actually used here, as we
       // override it from the runsStyle in getModuleUrl, but we set it to match
       // what will actually be used anyway to avoid confusion.
-      unitTestShell.options.setBindAddress("0.0.0.0");
+      unitTestShell.options.setBindAddressAsEntered("0.0.0.0");
       try {
-        unitTestShell.options.setConnectAddress(InetAddress.getLocalHost().getHostAddress());
+        unitTestShell.options.setBindAddress(InetAddress.getByName(
+            InetAddress.getLocalHost().getCanonicalHostName()));
       } catch (UnknownHostException e) {
         throw new JUnitFatalLaunchException("Unable to resolve my address", e);
       }

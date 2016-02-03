@@ -34,9 +34,11 @@ import com.google.gwt.dev.ui.DevModeUI;
 import com.google.gwt.dev.ui.DoneCallback;
 import com.google.gwt.dev.ui.DoneEvent;
 import com.google.gwt.dev.util.BrowserInfo;
+import com.google.gwt.dev.util.arg.ArgHandlerBindAddress;
 import com.google.gwt.dev.util.arg.ArgHandlerEnableGeneratorResultCaching;
 import com.google.gwt.dev.util.arg.ArgHandlerGenDir;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
+import com.google.gwt.dev.util.arg.OptionBindAddress;
 import com.google.gwt.dev.util.log.speedtracer.DevModeEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
@@ -46,7 +48,6 @@ import com.google.gwt.util.tools.ArgHandlerString;
 import java.io.File;
 import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -105,62 +106,6 @@ public abstract class DevModeBase implements DoneCallback {
         throw e;
       } finally {
         moduleSpaceHostCreateEvent.end();
-      }
-    }
-  }
-
-  /**
-   * Handles the -bindAddress command line flag.
-   */
-  protected static class ArgHandlerBindAddress extends ArgHandlerString {
-
-    private static final String BIND_ADDRESS_TAG = "-bindAddress";
-    private static final String DEFAULT_BIND_ADDRESS = "127.0.0.1";
-
-    private final OptionBindAddress options;
-
-    public ArgHandlerBindAddress(OptionBindAddress options) {
-      this.options = options;
-    }
-
-    @Override
-    public String[] getDefaultArgs() {
-      return new String[]{BIND_ADDRESS_TAG, DEFAULT_BIND_ADDRESS};
-    }
-
-    @Override
-    public String getPurpose() {
-      return "Specifies the bind address for the code server and web server " + "(defaults to "
-          + DEFAULT_BIND_ADDRESS + ")";
-    }
-
-    @Override
-    public String getTag() {
-      return BIND_ADDRESS_TAG;
-    }
-
-    @Override
-    public String[] getTagArgs() {
-      return new String[]{"host-name-or-address"};
-    }
-
-    @Override
-    public boolean setString(String value) {
-      try {
-        InetAddress address = InetAddress.getByName(value);
-        options.setBindAddress(value);
-        if (address.isAnyLocalAddress()) {
-          // replace a wildcard address with our machine's local address
-          // this isn't fully accurate, as there is no guarantee we will get
-          // the right one on a multihomed host
-          options.setConnectAddress(InetAddress.getLocalHost().getHostAddress());
-        } else {
-          options.setConnectAddress(value);
-        }
-        return true;
-      } catch (UnknownHostException e) {
-        System.err.println("-bindAddress host \"" + value + "\" unknown");
-        return false;
       }
     }
   }
@@ -408,7 +353,8 @@ public abstract class DevModeBase implements DoneCallback {
   protected static class HostedModeBaseOptionsImpl extends PrecompileTaskOptionsImpl implements
       HostedModeBaseOptions {
 
-    private String bindAddress;
+    private InetAddress bindAddress;
+    private String bindAddressAsEntered;
     private int codeServerPort;
     private String connectAddress;
     private boolean isNoServer;
@@ -430,8 +376,13 @@ public abstract class DevModeBase implements DoneCallback {
     }
 
     @Override
-    public String getBindAddress() {
+    public InetAddress getBindAddress() {
       return bindAddress;
+    }
+
+    @Override
+    public String getBindAddressAsEntered() {
+      return bindAddressAsEntered;
     }
 
     @Override
@@ -442,11 +393,6 @@ public abstract class DevModeBase implements DoneCallback {
     @Override
     public int getCodeServerPort() {
       return codeServerPort;
-    }
-
-    @Override
-    public String getConnectAddress() {
-      return connectAddress;
     }
 
     @Override
@@ -488,8 +434,13 @@ public abstract class DevModeBase implements DoneCallback {
     }
 
     @Override
-    public void setBindAddress(String bindAddress) {
+    public void setBindAddress(InetAddress bindAddress) {
       this.bindAddress = bindAddress;
+    }
+
+    @Override
+    public void setBindAddressAsEntered(String bindAddress) {
+      this.bindAddressAsEntered = bindAddress;
     }
 
     @Override
@@ -500,11 +451,6 @@ public abstract class DevModeBase implements DoneCallback {
     @Override
     public void setCodeServerPort(int port) {
       codeServerPort = port;
-    }
-
-    @Override
-    public void setConnectAddress(String connectAddress) {
-      this.connectAddress = connectAddress;
     }
 
     @Override
@@ -536,19 +482,6 @@ public abstract class DevModeBase implements DoneCallback {
     public boolean useRemoteUI() {
       return remoteUIHost != null;
     }
-  }
-
-  /**
-   * Controls what local address to bind to.
-   */
-  protected interface OptionBindAddress {
-    String getBindAddress();
-
-    String getConnectAddress();
-
-    void setBindAddress(String bindAddress);
-
-    void setConnectAddress(String connectAddress);
   }
 
   /**
@@ -695,8 +628,6 @@ public abstract class DevModeBase implements DoneCallback {
   }
 
   protected TreeLogger.Type baseLogLevelForUI = null;
-
-  protected String connectAddress;
 
   protected boolean isHttps;
 
@@ -846,8 +777,6 @@ public abstract class DevModeBase implements DoneCallback {
    * @return true if startup was successful
    */
   protected boolean doStartup(File persistentCacheDir) {
-    connectAddress = options.getConnectAddress();
-
     // Create the main app window.
     ui.initialize(options.getLogLevel());
     topLogger = ui.getTopLogger();
@@ -886,7 +815,7 @@ public abstract class DevModeBase implements DoneCallback {
   protected abstract void ensureCodeServerListener();
 
   protected String getHost() {
-    return connectAddress;
+    return options.getBindAddress().getHostAddress();
   }
 
   /**

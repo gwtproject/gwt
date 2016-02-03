@@ -99,7 +99,7 @@ public class CodeServer {
     try {
       start(options);
 
-      String url = "http://" + options.getPreferredHost() + ":" + options.getPort() + "/";
+      String url = "http://" + options.getBindAddress().getHostAddress() + ":" + options.getPort() + "/";
 
       System.out.println();
       System.out.println("The code server is ready at " + url);
@@ -140,7 +140,7 @@ public class CodeServer {
     SourceHandler sourceHandler = new SourceHandler(outboxTable, exporter);
     SymbolMapHandler symbolMapHandler = new SymbolMapHandler(outboxTable);
     WebServer webServer = new WebServer(sourceHandler, symbolMapHandler, exporter, outboxTable,
-        runner, eventTable, options.getBindAddress(), options.getPort());
+        runner, eventTable, options.getBindAddress().getHostAddress(), options.getPort());
     webServer.start(topLogger);
 
     return webServer;

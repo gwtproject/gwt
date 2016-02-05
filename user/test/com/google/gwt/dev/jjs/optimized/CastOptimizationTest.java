@@ -42,8 +42,6 @@ public class CastOptimizationTest extends OptimizationTestBase {
 
   private static Object field;
 
-  private static int randomNumber = new Random().nextInt(42);
-
   @Override
   protected void gwtSetUp() throws Exception {
     field = createField();
@@ -52,7 +50,7 @@ public class CastOptimizationTest extends OptimizationTestBase {
   private static Object createField() {
     // Makes sure that field type is not upgradable even the compiler becomes really smart and also
     // no types are pruned otherwise casts can be statically evaluated.
-    switch (randomNumber) {
+    switch (new Random().nextInt(42)) {
       case 0:
         return new TestObject();
       case 1:
@@ -86,7 +84,7 @@ public class CastOptimizationTest extends OptimizationTestBase {
     return ((String) field);
   }
 
-  private static native String getGeneratedCastFunctionDefinition() /*-{
+  private static native String getGeneratedFunctionDefinition() /*-{
     return function() {
       @CastOptimizationTest::castOp()();
       @CastOptimizationTest::castOpJso()();
@@ -97,25 +95,7 @@ public class CastOptimizationTest extends OptimizationTestBase {
   }-*/;
 
   public void testCastsAreRemoved() throws Exception {
-    String functionDef = getGeneratedCastFunctionDefinition();
+    String functionDef = getGeneratedFunctionDefinition();
     assertFunctionMatches(functionDef, "");
-  }
-
-  private static native String getGeneratedNullnessPropagationFunctionDefinition() /*-{
-    return function() {
-      @CastOptimizationTest::castNonNullnessCheck()();
-    }.toString();
-  }-*/;
-
-  public static void castNonNullnessCheck() {
-    if ((String) (randomNumber == 1 ?  "uniqueCastString" :  new Object()) == null) {
-      throw new RuntimeException();
-    }
-  }
-
-  public void testCastsPropagatesNullness() throws Exception {
-    String functionDef = getGeneratedNullnessPropagationFunctionDefinition();
-    // Means that the function was inlined but the throw was optimized away.
-    assertFunctionMatches(functionDef, "<obf>==1?'uniqueCastString':new<obf>()");
   }
 }

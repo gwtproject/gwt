@@ -128,11 +128,6 @@ public class JPrimitiveType extends JType {
     return null;
   }
 
-  @Override
-  public JPrimitiveType strengthenToNonNull() {
-    return this;
-  }
-
   public String getWrapperTypeName() {
     return wrapperTypeName;
   }

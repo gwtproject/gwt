@@ -50,14 +50,28 @@ public class ArrayNormalizer {
 
     @Override
     public void endVisit(JBinaryOperation x, Context ctx) {
-      JArrayRef arrayRef = needsSetCheck(x);
-      if (arrayRef == null) {
+      if (x.getOp() != JBinaryOperator.ASG || !(x.getLhs() instanceof JArrayRef)) {
+        return;
+      }
+      JArrayRef arrayRef = (JArrayRef) x.getLhs();
+      JType elementType = arrayRef.getType();
+      JExpression arrayInstance = arrayRef.getInstance();
+      if (elementType.isNullType()) {
+        // JNullType will generate a null pointer exception instead,
+        return;
+      } else if (!(elementType instanceof JReferenceType)) {
+        // Primitive array types are statically correct, no need to set check.
+        return;
+      } else if (!arrayInstance.getType().canBeSubclass() &&
+          program.typeOracle.castSucceedsTrivially((JReferenceType) x.getRhs().getType(),
+              (JReferenceType) elementType)) {
+        // There is no need to check as the static check already proved the cast is correct.
         return;
       }
 
       // replace this assignment with a call to setCheck()
       JMethodCall call = new JMethodCall(x.getSourceInfo(), null, setCheckMethod);
-      call.addArgs(arrayRef.getInstance(), arrayRef.getIndexExpr(), x.getRhs());
+      call.addArgs(arrayInstance, arrayRef.getIndexExpr(), x.getRhs());
       ctx.replaceMe(call);
     }
 
@@ -67,7 +81,7 @@ public class ArrayNormalizer {
 
       List<JExpression> initializers = x.getInitializers();
       if (initializers != null) {
-        JsonArray initializerArray = getInitializerArray(x);
+        JsonArray initializerArray = new JsonArray(x.getSourceInfo(), type, initializers);
         if (program.isUntypedArrayType(type)) {
           ctx.replaceMe(initializerArray);
           return;
@@ -202,32 +216,6 @@ public class ArrayNormalizer {
     }
   }
 
-  private JArrayRef needsSetCheck(JBinaryOperation x) {
-    if (x.getOp() != JBinaryOperator.ASG || !(x.getLhs() instanceof JArrayRef)) {
-      return null;
-    }
-    JArrayRef arrayRef = (JArrayRef) x.getLhs();
-    JType elementType = arrayRef.getType();
-    JExpression arrayInstance = arrayRef.getInstance();
-    if (elementType.isNullType()) {
-      // JNullType will generate a null pointer exception instead,
-      return null;
-    } else if (!(elementType instanceof JReferenceType)) {
-      // Primitive array types are statically correct, no need to set check.
-      return null;
-    } else if (!arrayInstance.getType().canBeSubclass() &&
-        program.typeOracle.castSucceedsTrivially((JReferenceType) x.getRhs().getType(),
-            (JReferenceType) elementType)) {
-      // There is no need to check as the static check already proved the cast is correct.
-      return null;
-    }
-    return arrayRef;
-  }
-
-  public static JsonArray getInitializerArray(JNewArray x) {
-    return new JsonArray(x.getSourceInfo(), x.getType(), x.getInitializers());
-  }
-
   public static void exec(JProgram program) {
     new ArrayNormalizer(program).execImpl();
   }
@@ -249,6 +237,7 @@ public class ArrayNormalizer {
   }
 
   private void execImpl() {
-    new ArrayVisitor().accept(program);
+    ArrayVisitor visitor = new ArrayVisitor();
+    visitor.accept(program);
   }
 }

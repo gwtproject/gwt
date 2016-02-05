@@ -14,10 +14,8 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,20 +23,13 @@ import java.util.List;
  */
 public final class JsNew extends JsExpression implements HasArguments {
 
-  private final List<JsExpression> args = Lists.newArrayList();
+  private final List<JsExpression> args = new ArrayList<JsExpression>();
 
   private JsExpression ctorExpr;
 
-  public JsNew(SourceInfo sourceInfo, JsExpression ctorExpr, JsExpression... args) {
-    this(sourceInfo, ctorExpr, Arrays.asList(args));
-  }
-
-  public JsNew(SourceInfo sourceInfo, JsExpression ctorExpr, Collection<JsExpression> args) {
+  public JsNew(SourceInfo sourceInfo, JsExpression ctorExpr) {
     super(sourceInfo);
     this.ctorExpr = ctorExpr;
-    if (args != null) {
-      this.args.addAll(args);
-    }
   }
 
   @Override

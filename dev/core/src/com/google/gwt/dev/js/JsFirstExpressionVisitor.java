@@ -110,7 +110,7 @@ public class JsFirstExpressionVisitor extends JsVisitor {
 
   @Override
   public boolean visit(JsNameRef x, JsContext ctx) {
-    if (x.getQualifier() != null) {
+    if (!x.isLeaf()) {
       accept(x.getQualifier());
     }
     return false;

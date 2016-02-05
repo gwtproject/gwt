@@ -14,10 +14,9 @@
 package com.google.gwt.dev.js.ast;
 
 import com.google.gwt.dev.jjs.SourceInfo;
-import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,13 +28,9 @@ public final class JsArrayLiteral extends JsLiteral {
 
   private boolean internable = false;
 
-  public JsArrayLiteral(SourceInfo sourceInfo, Iterable<JsExpression> expressions) {
-    super(sourceInfo);
-    Iterables.addAll(this.exprs, expressions);
-  }
-
   public JsArrayLiteral(SourceInfo sourceInfo, JsExpression... expressions) {
-    this(sourceInfo, Arrays.asList(expressions));
+    super(sourceInfo);
+    Collections.addAll(this.exprs, expressions);
   }
 
   public List<JsExpression> getExpressions() {

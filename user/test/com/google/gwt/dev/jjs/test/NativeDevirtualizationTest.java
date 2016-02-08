@@ -133,6 +133,7 @@ public class NativeDevirtualizationTest extends GWTTestCase {
   public void testNativeJavaScriptArray() {
     Object jsoArray = JavaScriptObject.createArray(10);
     assertEquals(JavaScriptObject[].class, jsoArray.getClass());
+    // Plain arrays should return false.
     assertTrue(jsoArray instanceof JavaScriptObject);
     assertTrue(jsoArray instanceof JavaScriptObject[]);
 

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d44b487_9e72fdb1",
+        "filename": "user/test/com/google/gwt/dev/jjs/ExtraCompilerSuite.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2016-02-08T22:22:02Z",
+      "side": 1,
+      "message": "the class name says extra and the comment says extra, but what does extra mean here?",
+      "revId": "d257d75e75d821b24e5b44d5e9482305e5ad2c87",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d44b487_fe6fc1c7",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/NativeDevirtualizationTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2016-02-08T22:22:02Z",
+      "side": 1,
+      "message": "seems like this should be a TODO comment",
+      "revId": "d257d75e75d821b24e5b44d5e9482305e5ad2c87",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

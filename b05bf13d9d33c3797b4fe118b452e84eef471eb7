@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd977c52_15e7d68f",
+        "filename": "user/src/com/google/gwt/jsonp/client/JsonpRequest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-10T01:58:42Z",
+      "side": 1,
+      "message": "[error] \u0027@IsTrustedResourceUri\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "b05bf13d9d33c3797b4fe118b452e84eef471eb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd977c52_35ecd271",
+        "filename": "user/src/com/google/gwt/safehtml/shared/SafeUriString.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-10T01:58:42Z",
+      "side": 1,
+      "message": "[error] \u0027@IsSafeUri\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "b05bf13d9d33c3797b4fe118b452e84eef471eb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd977c52_55f15e48",
+        "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-10T01:58:42Z",
+      "side": 1,
+      "message": "[error] \u0027@IsSafeUri\u0027 annotation modifier does not preceed non-annotation modifiers.",
+      "revId": "b05bf13d9d33c3797b4fe118b452e84eef471eb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd977c52_75f65a43",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsSafeUri.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-10T01:58:42Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "b05bf13d9d33c3797b4fe118b452e84eef471eb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd977c52_95fae623",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsTrustedResourceUri.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-10T01:58:42Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "b05bf13d9d33c3797b4fe118b452e84eef471eb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd977c52_b5f7e23a",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/SuppressIsSafeUriCastCheck.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-10T01:58:42Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "b05bf13d9d33c3797b4fe118b452e84eef471eb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd977c52_d5046efa",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/SuppressIsTrustedResourceUriCastCheck.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-10T01:58:42Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "b05bf13d9d33c3797b4fe118b452e84eef471eb7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -18,6 +18,8 @@ package com.google.gwt.safehtml.shared;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.regexp.shared.RegExp;
+import com.google.gwt.safehtml.shared.annotations.IsSafeUri;
+import com.google.gwt.safehtml.shared.annotations.SuppressIsSafeUriCastCheck;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
@@ -170,6 +172,7 @@ public final class UriUtils {
    * @param s the input String
    * @return a SafeUri instance
    */
+  @SuppressIsSafeUriCastCheck
   public static SafeUri fromSafeConstant(String s) {
     SafeUriHostedModeUtils.maybeCheckValidUri(s);
     return new SafeUriString(s);
@@ -196,6 +199,7 @@ public final class UriUtils {
    * @param s the input String
    * @return a SafeUri instance
    */
+  @SuppressIsSafeUriCastCheck
   public static SafeUri fromTrustedString(String s) {
     SafeUriHostedModeUtils.maybeCheckValidUri(s);
     return new SafeUriString(s);
@@ -247,7 +251,8 @@ public final class UriUtils {
    * @param uri the URI to sanitize
    * @return a sanitized String
    */
-  public static String sanitizeUri(String uri) {
+  @SuppressIsSafeUriCastCheck
+  public static @IsSafeUri String sanitizeUri(String uri) {
     if (isSafeUri(uri)) {
       return encodeAllowEscapes(uri);
     } else {
@@ -271,6 +276,7 @@ public final class UriUtils {
    *             strings.
    */
   @Deprecated
+  @SuppressIsSafeUriCastCheck
   public static SafeUri unsafeCastFromUntrustedString(String s) {
     return new SafeUriString(s);
   }

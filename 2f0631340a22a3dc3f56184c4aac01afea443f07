@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdce9ca2_4e28f7c8",
+        "filename": "user/src/com/google/gwt/dom/builder/shared/LinkBuilder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7895
+      },
+      "writtenOn": "2016-02-10T19:45:57Z",
+      "side": 1,
+      "message": "It might be worth adding a comment that href is annotated @IsTrustedResourceUri on a conservative basis. This annotation is called for when the resulting link is a stylesheet one, but not for instance if it\u0027s rel\u003dauthor or similar.",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 38,
+        "endChar": 40
+      },
+      "revId": "2f0631340a22a3dc3f56184c4aac01afea443f07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdce9ca2_4e147761",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsTrustedResourceUri.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 7895
+      },
+      "writtenOn": "2016-02-10T19:45:57Z",
+      "side": 1,
+      "message": "Space after period.\n\nActually, isn\u0027t the following sentence redundant?",
+      "range": {
+        "startLine": 21,
+        "startChar": 35,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "2f0631340a22a3dc3f56184c4aac01afea443f07",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

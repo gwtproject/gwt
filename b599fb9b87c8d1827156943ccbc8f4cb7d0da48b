@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "fdce9ca2_7a5c9154",
+        "filename": "user/src/com/google/gwt/dom/client/FrameElement.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 9290
+      },
+      "writtenOn": "2016-02-10T02:05:26Z",
+      "side": 1,
+      "message": "Requiring @IsTrustedResourceUrl on both this and the above SafeUri version.",
+      "parentUuid": "e0098cde_3d609b83",
+      "range": {
+        "startLine": 244,
+        "startChar": 35,
+        "endLine": 244,
+        "endChar": 44
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0098cde_3deb7b13",
         "filename": "user/src/com/google/gwt/dom/client/ObjectElement.java",
         "patchSetId": 5
@@ -59,6 +83,30 @@
       "writtenOn": "2015-12-09T01:16:50Z",
       "side": 1,
       "message": "As discussed offline, it might be worth requiring @IsTrustedResourceUri SafeUri data to effectively strengthen the API contract to what it should have been to begin with.",
+      "range": {
+        "startLine": 163,
+        "startChar": 20,
+        "endLine": 163,
+        "endChar": 27
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdce9ca2_7a75b1d2",
+        "filename": "user/src/com/google/gwt/dom/client/ObjectElement.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 9290
+      },
+      "writtenOn": "2016-02-10T02:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0098cde_3deb7b13",
       "range": {
         "startLine": 163,
         "startChar": 20,
@@ -117,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "fdce9ca2_3a561933",
+        "filename": "user/src/com/google/gwt/safehtml/shared/SafeUriString.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 9290
+      },
+      "writtenOn": "2016-02-10T02:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0098cde_00a72acf",
+      "range": {
+        "startLine": 61,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 24
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0098cde_bd882b9e",
         "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsTrustedResourceUri.java",
         "patchSetId": 5
@@ -128,6 +200,30 @@
       "writtenOn": "2015-12-09T01:16:50Z",
       "side": 1,
       "message": "Suggested wording:\n\nA type annotation that represents URIs referencing the application’s own, trusted resources. Such URIs can be used to safely load scripts, CSS and other sensitive resources without the risk of untrusted code execution.",
+      "range": {
+        "startLine": 19,
+        "startChar": 45,
+        "endLine": 19,
+        "endChar": 91
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdce9ca2_5a72f5ec",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsTrustedResourceUri.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 9290
+      },
+      "writtenOn": "2016-02-10T02:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0098cde_bd882b9e",
       "range": {
         "startLine": 19,
         "startChar": 45,
@@ -163,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "fdce9ca2_3a7f39b5",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/IsTrustedResourceUri.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 9290
+      },
+      "writtenOn": "2016-02-10T02:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0098cde_1d5797d6",
+      "range": {
+        "startLine": 22,
+        "startChar": 3,
+        "endLine": 22,
+        "endChar": 30
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0098cde_bd6f8b98",
         "filename": "user/src/com/google/gwt/safehtml/shared/annotations/SuppressIsTrustedResourceUriCastCheck.java",
         "patchSetId": 5
@@ -174,6 +294,30 @@
       "writtenOn": "2015-12-09T01:16:50Z",
       "side": 1,
       "message": "Adjust comment to refer to TrustedResourceUri.",
+      "range": {
+        "startLine": 22,
+        "startChar": 53,
+        "endLine": 22,
+        "endChar": 62
+      },
+      "revId": "b599fb9b87c8d1827156943ccbc8f4cb7d0da48b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdce9ca2_1a7c7dbc",
+        "filename": "user/src/com/google/gwt/safehtml/shared/annotations/SuppressIsTrustedResourceUriCastCheck.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 9290
+      },
+      "writtenOn": "2016-02-10T02:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0098cde_bd6f8b98",
       "range": {
         "startLine": 22,
         "startChar": 53,

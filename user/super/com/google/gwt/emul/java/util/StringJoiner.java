@@ -69,6 +69,9 @@ public final class StringJoiner {
   }
 
   public StringJoiner setEmptyValue(CharSequence emptyValue) {
+    if (emptyValue == null) {
+      throw new NullPointerException();
+    }
     this.emptyValue = emptyValue.toString();
     return this;
   }

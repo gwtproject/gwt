@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "1dc45060_3b3affb0",
+        "filename": "maven/poms/gwt/gwt-dev/pom-template.xml",
+        "patchSetId": 33
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2016-02-11T16:12:53Z",
+      "side": 1,
+      "message": "For the record, previous patch set included real artifacts here, but after you commented (in other place) to use aggregate version instead, i erroneously replaced it here as well.",
+      "parentUuid": "1ddb703a_a017b4d7",
+      "revId": "79f59cae011af5ba006cbfa7574239379aea0417",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bdb504dc_7d23933f",
         "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
         "patchSetId": 33

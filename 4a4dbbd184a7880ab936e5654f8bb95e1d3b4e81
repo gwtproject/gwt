@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "1dc45060_5befbbd5",
+        "filename": "user/super/com/google/gwt/emul/java/util/DoubleSummaryStatistics.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-11T09:50:01Z",
+      "side": 1,
+      "message": "I think its worth adding as it makes the sum more accurate, especially when you sum lots of doubles and not just a few.",
+      "parentUuid": "fdce9ca2_893de9c6",
+      "revId": "4a4dbbd184a7880ab936e5654f8bb95e1d3b4e81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16c1896c_1a38fd01",
         "filename": "user/super/com/google/gwt/emul/java/util/DoubleSummaryStatistics.java",
         "patchSetId": 2
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "Thomas, you still have this listed as \"-1\" - is that still accurate, or are you okay with what is committed right now?",
       "parentUuid": "36b04d09_fb954f3f",
+      "revId": "4a4dbbd184a7880ab936e5654f8bb95e1d3b4e81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dc45060_5bb89bee",
+        "filename": "user/super/com/google/gwt/emul/java/util/DoubleSummaryStatistics.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-11T09:50:01Z",
+      "side": 1,
+      "message": "Its -1 because it has no tests yet (Double.NaN / Infinities) and I agree with it. I\u0027ll add some by the end of the week.",
+      "parentUuid": "fdce9ca2_296db5cf",
       "revId": "4a4dbbd184a7880ab936e5654f8bb95e1d3b4e81",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

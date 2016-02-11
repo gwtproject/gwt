@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "1dc45060_d81111e3",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/Constants.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-11T01:15:10Z",
+      "side": 1,
+      "message": "remove spaces",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 2
+      },
+      "revId": "5fc88be525835fe8ae18c5a5b1b92ab960e6ebe6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0650cc5_7a015948",
         "filename": "user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.ui.xml",
         "patchSetId": 5
@@ -31,6 +54,47 @@
       "side": 1,
       "message": "https://gwt-review.googlesource.com/#/c/13150/2\ni\u0027ve been trying to resolve conflict with this issue.\nIf ti should be done another way - let\u0027s use patchset #4",
       "parentUuid": "e0650cc5_7a015948",
+      "revId": "5fc88be525835fe8ae18c5a5b1b92ab960e6ebe6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dde478f9_fea79d7d",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.ui.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-11T01:15:10Z",
+      "side": 1,
+      "message": "just undo that change here. Its ok to have a conflict with a different patch here on Gerrit.",
+      "parentUuid": "4520aa91_f8c26d08",
+      "revId": "5fc88be525835fe8ae18c5a5b1b92ab960e6ebe6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fde93cd0_5f8b2f0d",
+        "filename": "user/test/com/google/gwt/uibinder/test/client/WidgetBasedUi.ui.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-11T01:15:10Z",
+      "side": 1,
+      "message": "remove spaces",
+      "range": {
+        "startLine": 717,
+        "startChar": 0,
+        "endLine": 717,
+        "endChar": 6
+      },
       "revId": "5fc88be525835fe8ae18c5a5b1b92ab960e6ebe6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

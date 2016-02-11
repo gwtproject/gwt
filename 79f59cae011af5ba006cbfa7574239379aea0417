@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1ddb703a_a08c1464",
+        "filename": "eclipse/dev/codeserver/.classpath",
+        "patchSetId": 33
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2016-02-11T17:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dc45060_9bfa3324",
+      "revId": "79f59cae011af5ba006cbfa7574239379aea0417",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ddb703a_a017b4d7",
         "filename": "maven/poms/gwt/gwt-dev/pom-template.xml",
         "patchSetId": 33
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "5da5e8c5_8575c6d5",
+        "filename": "maven/poms/gwt/gwt-dev/pom-template.xml",
+        "patchSetId": 33
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2016-02-11T17:52:20Z",
+      "side": 1,
+      "message": "Not applicable any more.",
+      "parentUuid": "1ddb703a_a017b4d7",
+      "revId": "79f59cae011af5ba006cbfa7574239379aea0417",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bdb504dc_7d23933f",
         "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
         "patchSetId": 33
@@ -77,6 +113,30 @@
     },
     {
       "key": {
+        "uuid": "bdb504dc_9d730728",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2016-02-11T17:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdb504dc_7d23933f",
+      "range": {
+        "startLine": 202,
+        "startChar": 37,
+        "endLine": 202,
+        "endChar": 41
+      },
+      "revId": "79f59cae011af5ba006cbfa7574239379aea0417",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fde93cd0_3f3ae3b0",
         "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
         "patchSetId": 33
@@ -88,6 +148,24 @@
       "writtenOn": "2016-02-11T16:05:37Z",
       "side": 1,
       "message": "Similarly, we don\u0027t have an \"ie11\" permutation, IE 11 will use the \"gecko1_8\" permutation.",
+      "revId": "79f59cae011af5ba006cbfa7574239379aea0417",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7daf0c90_fe9dd9de",
+        "filename": "user/src/com/google/gwt/junit/RunStyleHtmlUnit.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2016-02-11T17:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fde93cd0_3f3ae3b0",
       "revId": "79f59cae011af5ba006cbfa7574239379aea0417",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7dd62c0e_0696be01",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/OptionalTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-02-12T10:53:28Z",
+      "side": 1,
+      "message": "I agree that throwing a NPE is more clear",
+      "parentUuid": "bdb504dc_2081eeed",
+      "range": {
+        "startLine": 84,
+        "startChar": 13,
+        "endLine": 84,
+        "endChar": 57
+      },
+      "revId": "e21dbb24b289a9a233ea92f83c8962bffeff613c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1dc45060_3b9e7f91",
         "filename": "user/test/com/google/gwt/emultest/java8/util/StringJoinerTest.java",
         "patchSetId": 4

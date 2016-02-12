@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "1dc45060_bb70cf1b",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/StringJoinerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-02-12T11:10:49Z",
+      "side": 1,
+      "message": "Not sure about that. Roberto asked to move this test to java8 package because it\u0027s Java 8 API.",
+      "parentUuid": "1dc45060_3b9e7f91",
+      "revId": "e21dbb24b289a9a233ea92f83c8962bffeff613c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bdb504dc_608be60d",
         "filename": "user/test/com/google/gwt/emultest/java8/util/StringJoinerTest.java",
         "patchSetId": 4

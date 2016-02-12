@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdb504dc_2081eeed",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/OptionalTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-12T10:32:17Z",
+      "side": 1,
+      "message": "Not sure I like it but kind of depends what is the general stance for emulated code. If JavaDoc states a NullPointer should be thrown then IMHO it should really be a Java NullPointerException and not a JavaScriptException. That means instead of catching both exceptions here I would add checkNotNull() in Optional.ifPresent() instead. Same for the other methods. What do you guys think?",
+      "range": {
+        "startLine": 84,
+        "startChar": 13,
+        "endLine": 84,
+        "endChar": 57
+      },
+      "revId": "e21dbb24b289a9a233ea92f83c8962bffeff613c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dc45060_3b9e7f91",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/StringJoinerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-12T10:32:17Z",
+      "side": 1,
+      "message": "I don\u0027t think this move is needed as the java8 package was introduced for tests that rely on Java8 syntax. As StringJoinerTest does not rely on Java8 syntax I think its fine to keep it in java instead of java8. Thats actually why I put it into java package.",
+      "revId": "e21dbb24b289a9a233ea92f83c8962bffeff613c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bdb504dc_608be60d",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/StringJoinerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-12T10:32:17Z",
+      "side": 1,
+      "message": "Maybe checkNotNull() in StringJoiner.merge() instead. See similar comment in OptionalTest",
+      "range": {
+        "startLine": 77,
+        "startChar": 34,
+        "endLine": 77,
+        "endChar": 55
+      },
+      "revId": "e21dbb24b289a9a233ea92f83c8962bffeff613c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

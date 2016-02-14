@@ -159,6 +159,24 @@
       "revId": "4a4dbbd184a7880ab936e5654f8bb95e1d3b4e81",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dde478f9_c17a064c",
+        "filename": "user/super/com/google/gwt/emul/java/util/DoubleSummaryStatistics.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-14T16:13:28Z",
+      "side": 1,
+      "message": "Tests require https://gwt-review.googlesource.com/#/c/14351/ to be committed first as I use Math.min/max here. Otherwise they will fail.",
+      "parentUuid": "1dc45060_5bb89bee",
+      "revId": "4a4dbbd184a7880ab936e5654f8bb95e1d3b4e81",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

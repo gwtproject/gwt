@@ -46,6 +46,30 @@
       "revId": "bcc1ea02977fea169aa753d9604802853593e147",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dc45060_1e245149",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java7AstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-15T11:51:02Z",
+      "side": 1,
+      "message": "FYI, that\u0027s indeed what I did first (simply uncommenting the test), but the 1 is actually turned into Integer.valueOf(1). Then I figured out all other tests used null, and the test really is about casting a Number to a primitive \u0027int\u0027 and see it being cast to an intermediary Integer, so 1 or null wouldn\u0027t change much things.",
+      "parentUuid": "1dc45060_9ef061f5",
+      "range": {
+        "startLine": 96,
+        "startChar": 20,
+        "endLine": 96,
+        "endChar": 24
+      },
+      "revId": "bcc1ea02977fea169aa753d9604802853593e147",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

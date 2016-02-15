@@ -22,6 +22,30 @@
       "revId": "bcc1ea02977fea169aa753d9604802853593e147",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dc45060_9ef061f5",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java7AstTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-15T11:43:15Z",
+      "side": 1,
+      "message": "Well ok, forget it :)",
+      "parentUuid": "1dc45060_5e07a9b0",
+      "range": {
+        "startLine": 96,
+        "startChar": 20,
+        "endLine": 96,
+        "endChar": 24
+      },
+      "revId": "bcc1ea02977fea169aa753d9604802853593e147",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

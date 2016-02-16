@@ -22,6 +22,30 @@
       "revId": "1f7b72277d06e646270d7f41b01ffac56fc83c18",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dc45060_a9216587",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-02-16T10:03:21Z",
+      "side": 1,
+      "message": "Gotcha.\nLeaving maven.compiler.source with it\u0027s previous value and configuring the gwt-maven-compiler appropriately.\nAlso changed comments, let me know if they are more accurate now.",
+      "parentUuid": "1dc45060_c9f7813a",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 61
+      },
+      "revId": "1f7b72277d06e646270d7f41b01ffac56fc83c18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

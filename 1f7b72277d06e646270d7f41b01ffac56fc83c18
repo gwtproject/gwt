@@ -46,6 +46,30 @@
       "revId": "1f7b72277d06e646270d7f41b01ffac56fc83c18",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dc45060_293555c0",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-16T10:12:08Z",
+      "side": 1,
+      "message": "\u003e Also changed comments, let me know if they are more accurate now.\n\nSGTM",
+      "parentUuid": "1dc45060_a9216587",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 61
+      },
+      "revId": "1f7b72277d06e646270d7f41b01ffac56fc83c18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

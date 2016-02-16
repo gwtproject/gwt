@@ -13,10 +13,6 @@
     <!-- Convenience property to set the GWT version -->
     <gwt.version>2.8.0-SNAPSHOT</gwt.version>
 
-    <!-- GWT needs at least java 1.7 -->
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-
     <!-- App Engine properties -->
     <appengine.version>1.9.30</appengine.version>
     <appengine.application.version>1</appengine.application.version>

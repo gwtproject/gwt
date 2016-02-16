@@ -15,8 +15,13 @@
     <!-- Convenience property to set the GWT version -->
     <gwt.version>2.8.0-SNAPSHOT</gwt.version>
 
-    <!-- GWT needs at least java 1.7 -->
-    <maven.compiler.source>1.7</maven.compiler.source>
+    <!-- Don't set maven.compiler.source to 1.7 since GWT 2.8 only supports 
+         sourceLevel 1.8 and gwt-maven-plugin reuses the property to set it.
+         Not setting maven.compiler.source allows you compile the project
+         awith both 1.7 and 1.8 Java SDKs 
+       <maven.compiler.source>1.7</maven.compiler.source> -->
+
+    <!-- We can still generate .class files compatible with 1.7 runtime -->
     <maven.compiler.target>1.7</maven.compiler.target>
 
     <!-- Don't let your Mac use a crazy non-standard encoding -->

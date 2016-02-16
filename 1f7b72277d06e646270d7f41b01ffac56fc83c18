@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1dc45060_c9f7813a",
+        "filename": "samples/dynatablerf/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-16T09:34:00Z",
+      "side": 1,
+      "message": "This is not accurate.\n\n * this is about source language, not the JDK version. JDK 8 can very well compile Java 7 sources (with -source 7)\n * not setting maven.compiler.source does not mean that no -source argument will be passed to JavaC: the maven-compiler-plugin defaults to \"-source 1.5\" (depending on the version of the plugin, earlier versions defaulted to \"-source 1.4\", the version of the plugin depending here on the version of Maven you\u0027re using, as we don\u0027t specify a version in the POM)\n\nIMO, we should either:\n * pass \u003csourceLevel\u003e8\u003c/sourceLevel\u003e to the gwt-maven-plugin\n * not set those properties but instead configure the maven-compiler-plugin directly\n\nIn any case, we should add a comment noting that JavaC and GWT won\u0027t use the same source language.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 61
+      },
+      "revId": "1f7b72277d06e646270d7f41b01ffac56fc83c18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

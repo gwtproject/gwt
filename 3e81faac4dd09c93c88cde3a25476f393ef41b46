@@ -16,6 +16,24 @@
       "revId": "3e81faac4dd09c93c88cde3a25476f393ef41b46",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e248b9a2_1b371b3a",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigInteger.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-02-19T11:16:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3de034e0_64dbfe97",
+      "revId": "3e81faac4dd09c93c88cde3a25476f393ef41b46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

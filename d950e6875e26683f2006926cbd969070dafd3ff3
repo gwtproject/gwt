@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02a94d5f_87c0c865",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/PrimitiveIteratorTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-19T13:41:04Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "d950e6875e26683f2006926cbd969070dafd3ff3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02a94d5f_a7bdc4fa",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/PrimitiveIteratorTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-19T13:41:04Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "d950e6875e26683f2006926cbd969070dafd3ff3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02a94d5f_479890a3",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/PrimitiveIteratorTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-02-19T13:41:04Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "d950e6875e26683f2006926cbd969070dafd3ff3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -22,6 +22,30 @@
       "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02c30d5c_54eeacd9",
+        "filename": ".github/PULL_REQUEST_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-20T23:45:00Z",
+      "side": 1,
+      "message": "It would be formatted as link but people will see this text in a HTML textarea and should then not click on their \"create pull request\" button. I omitted any markdown syntax here, so it can easily be read.",
+      "parentUuid": "a2b881d5_f9f7b7a0",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

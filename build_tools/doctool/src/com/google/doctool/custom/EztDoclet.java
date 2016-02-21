@@ -151,8 +151,7 @@ public class EztDoclet {
               cls.name(), cls.name());
 
           // Print out all fields
-          Collection<FieldDoc> fields = new ArrayList<FieldDoc>();
-          fields.addAll(Arrays.asList(cls.fields(true)));
+          Collection<FieldDoc> fields = new ArrayList<FieldDoc>(Arrays.asList(cls.fields(true)));
 
           if (!fields.isEmpty()) {
             pw.format("  <dd style='margin-bottom: 0.5em;'>%s</dd>\n", createFieldList(fields));

@@ -38,15 +38,9 @@ import com.google.gwt.i18n.client.ConstantsWithLookup;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.i18n.shared.GwtLocale;
+import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Generator used to bind classes extending the <code>Localizable</code> and
@@ -317,8 +311,7 @@ public class LocalizableGenerator extends Generator {
       }
     }
     // collect methods from superinterfaces until hitting Localizable
-    ArrayList<JClassType> todo = new ArrayList<JClassType>();
-    todo.addAll(Arrays.asList(targetClass.getImplementedInterfaces()));
+    List<JClassType> todo = Lists.create(targetClass.getImplementedInterfaces());
     while (!todo.isEmpty()) {
       JClassType clazz = todo.remove(0);
       for (JMethod method : clazz.getMethods()) {

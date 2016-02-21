@@ -71,8 +71,7 @@ class SourceMap {
       directories.add(lastSlashPos < 0 ? "" : filename.substring(0, lastSlashPos));
     }
 
-    List<String> result = new ArrayList<String>();
-    result.addAll(directories);
+    List<String> result = new ArrayList<String>(directories);
     Collections.sort(result);
     return result;
   }

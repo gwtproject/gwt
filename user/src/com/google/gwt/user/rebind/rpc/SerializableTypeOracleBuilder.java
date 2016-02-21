@@ -814,8 +814,7 @@ public class SerializableTypeOracleBuilder {
     // so that the leaf type's instantiableTypes variable is ready (if it's computed at all)
     // and all of the leaf's subtypes are ready.
     // (Copy values to avoid concurrent modification.)
-    List<TypeInfoComputed> ticsToCheck = new ArrayList<TypeInfoComputed>();
-    ticsToCheck.addAll(typeToTypeInfoComputed.values());
+    List<TypeInfoComputed> ticsToCheck = new ArrayList<TypeInfoComputed>(typeToTypeInfoComputed.values());
     for (TypeInfoComputed tic : ticsToCheck) {
       JArrayType type = tic.getType().isArray();
       if (type != null && tic.instantiable) {

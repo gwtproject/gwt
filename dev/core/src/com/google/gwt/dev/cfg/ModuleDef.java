@@ -453,9 +453,7 @@ public class ModuleDef implements DepsInfoProvider {
    * deleted.
    */
   public int getInputFilenameHash() {
-    List<String> filenames = new ArrayList<String>();
-
-    filenames.addAll(gwtXmlPathByModuleName.values());
+    List<String> filenames = new ArrayList<String>(gwtXmlPathByModuleName.values());
 
     for (Resource resource : getResourcesNewerThan(Integer.MIN_VALUE)) {
       filenames.add(resource.getLocation());

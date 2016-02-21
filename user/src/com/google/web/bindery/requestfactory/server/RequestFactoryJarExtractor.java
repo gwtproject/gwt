@@ -795,8 +795,7 @@ public class RequestFactoryJarExtractor {
             ValidationTool.class));
     List<Class<?>> sharedClasses = Arrays.<Class<?>> asList(SHARED_CLASSES);
 
-    List<Class<?>> clientClasses = new ArrayList<Class<?>>();
-    clientClasses.addAll(sharedClasses);
+    List<Class<?>> clientClasses = new ArrayList<Class<?>>(sharedClasses);
     clientClasses.add(UrlRequestTransport.class);
 
     List<Class<?>> serverClasses = new ArrayList<Class<?>>();

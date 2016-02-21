@@ -52,7 +52,7 @@ final class ReflectiveServiceLayer extends ServiceLayerDecorator {
    */
 
   private static final Validator jsr303Validator;
-  private static final Logger log = Logger.getLogger(ServiceLayer.class.getName());
+  private static final Logger log = Logger.getLogger(ReflectiveServiceLayer.class.getName());
 
   static {
     Validator found;

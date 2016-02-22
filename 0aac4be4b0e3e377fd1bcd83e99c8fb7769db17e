@@ -16,6 +16,29 @@
       "revId": "0aac4be4b0e3e377fd1bcd83e99c8fb7769db17e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2b881d5_997ebb3f",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/rebind/AutoBeanFactoryGenerator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-22T15:03:30Z",
+      "side": 1,
+      "message": "nit: put on a single line",
+      "range": {
+        "startLine": 546,
+        "startChar": 0,
+        "endLine": 547,
+        "endChar": 66
+      },
+      "revId": "0aac4be4b0e3e377fd1bcd83e99c8fb7769db17e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

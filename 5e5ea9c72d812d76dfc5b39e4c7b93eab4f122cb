@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "02e4ed24_724290e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-02-22T14:40:05Z",
+      "side": 1,
+      "message": "Made the change and pushed, alas, its too long. Will find a compromise.",
+      "parentUuid": "62a769c0_2f8569fa",
+      "revId": "5e5ea9c72d812d76dfc5b39e4c7b93eab4f122cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22c49160_f5f8986a",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "02e4ed24_b237d896",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-02-22T14:40:05Z",
+      "side": 1,
+      "message": "The generics being tossed (and casts I am introducing) are all in generated Java - it is my understanding that we don\u0027t usually bother with generating SuppressWarnings or Override as well, since no IDE will get a good look at this code anyway.\n\nIf we should have one there, I suggest we already should _have_ had one there, but if this is the new standard and I missed it, I\u0027ll see about adding it.",
+      "parentUuid": "22c49160_f5f8986a",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "5e5ea9c72d812d76dfc5b39e4c7b93eab4f122cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2b881d5_59b6e3bc",
         "filename": "user/src/com/google/web/bindery/autobean/gwt/rebind/AutoBeanFactoryGenerator.java",
         "patchSetId": 2
@@ -53,6 +95,30 @@
       "writtenOn": "2016-02-22T10:32:54Z",
       "side": 1,
       "message": "nit: put on a single line?\n\n(same below with callValueType)",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 515,
+        "endChar": 67
+      },
+      "revId": "5e5ea9c72d812d76dfc5b39e4c7b93eab4f122cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02e4ed24_923cdc79",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/rebind/AutoBeanFactoryGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-02-22T14:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2b881d5_59b6e3bc",
       "range": {
         "startLine": 514,
         "startChar": 0,

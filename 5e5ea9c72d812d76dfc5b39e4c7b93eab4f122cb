@@ -108,6 +108,30 @@
     },
     {
       "key": {
+        "uuid": "02e4ed24_920a9cb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-02-22T15:14:06Z",
+      "side": 1,
+      "message": "Interesting that we haven\u0027t seen them then, unless javac proper doesn\u0027t run on generated code. We definitely have been implementing Map/Set/List as a shim as part of the unit tests for a very long time without any flags being raised.",
+      "parentUuid": "22c49160_9595a4bb",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "5e5ea9c72d812d76dfc5b39e4c7b93eab4f122cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2b881d5_59b6e3bc",
         "filename": "user/src/com/google/web/bindery/autobean/gwt/rebind/AutoBeanFactoryGenerator.java",
         "patchSetId": 2

@@ -374,6 +374,24 @@
     },
     {
       "key": {
+        "uuid": "e2bd19cb_93769ca8",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T12:05:32Z",
+      "side": 1,
+      "message": "Hmm ok then lets keep things consistent and just leave it empty with some blank lines. In addition we could add a comment, saying that these optional sections should be deleted if not required (either a small comment per section or a more prominent single comment above known workarounds section).\n\nIf people don\u0027t delete unused sections it will look a bit strange once rendered as HTML (just some headlines) but I can live with it.",
+      "parentUuid": "e2bd19cb_d3149465",
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a237a16a_a1145e87",
         "filename": ".github/PULL_REQUEST_TEMPLATE.md",
         "patchSetId": 1

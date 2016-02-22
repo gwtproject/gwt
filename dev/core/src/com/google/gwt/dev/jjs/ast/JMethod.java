@@ -65,7 +65,7 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
   @Override
   public void setJsMemberInfo(JsMemberType type, String namespace, String name, boolean exported) {
     this.jsMemberType = type;
-    this.jsName = name != null ? name : type.computeName(this);
+    this.jsName = name;
     this.jsNamespace = namespace;
     this.exported = exported;
   }
@@ -172,29 +172,34 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
   @Override
   public String getQualifiedJsName() {
     String namespace = getJsNamespace();
-    if (jsName.isEmpty()) {
+    String computedJsName = getJsName();
+    if (computedJsName.isEmpty()) {
       assert !needsDynamicDispatch();
       return namespace;
     } else if (JsInteropUtil.isGlobal(namespace)) {
       assert !needsDynamicDispatch();
-      return jsName;
+      return computedJsName;
     } else {
-      return namespace + (isStatic() ? "." : ".prototype.") + jsName;
+      return namespace + (isStatic() ? "." : ".prototype.") + computedJsName;
     }
   }
 
   @Override
   public String getJsName() {
+    JsMemberType inheritedJsMemberType = jsMemberType;
     for (JMethod method : getOverriddenMethodsIncludingSelf()) {
       if (method.jsName != null) {
         return method.jsName;
       }
+      if (method.jsMemberType != JsMemberType.NONE) {
+        inheritedJsMemberType = method.jsMemberType;
+      }
     }
-    return null;
+    return inheritedJsMemberType.computeName(this);
   }
 
   public boolean isJsConstructor() {
-    return isConstructor() && jsName != null;
+    return isConstructor() && getJsName() != null;
   }
 
   /**

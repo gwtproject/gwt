@@ -132,6 +132,30 @@
     },
     {
       "key": {
+        "uuid": "a2b881d5_f9a3370a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-22T15:44:34Z",
+      "side": 1,
+      "message": "Well, first, the generated code is compiled by JDT, not JavaC, and we apparently turn off warnings for JDT as a whole, with the expectation that you\u0027d run your sources through JavaC first: https://github.com/gwtproject/gwt/blob/2f021dc2a821782b76509f74974b1d3ad2f12fa3/dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java#L634-L661",
+      "parentUuid": "02e4ed24_920a9cb6",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "5e5ea9c72d812d76dfc5b39e4c7b93eab4f122cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2b881d5_59b6e3bc",
         "filename": "user/src/com/google/web/bindery/autobean/gwt/rebind/AutoBeanFactoryGenerator.java",
         "patchSetId": 2

@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "42c98578_d94f57ab",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T19:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c283b51b_6a1af7b2",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 26
+      },
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a237a16a_e11a66b4",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1
@@ -168,6 +192,30 @@
     },
     {
       "key": {
+        "uuid": "62b209f8_775650a8",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T19:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22dbb13a_fd1b275f",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a237a16a_0120aae4",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1
@@ -268,6 +316,24 @@
     },
     {
       "key": {
+        "uuid": "22dbb13a_00a78881",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T19:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02c30d5c_343690e5",
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42c98578_16635cec",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1
@@ -315,6 +381,24 @@
       "side": 1,
       "message": "SGTM",
       "parentUuid": "22c49160_f57a58c0",
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "82affd8e_d812ede6",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T19:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62b209f8_372058e5",
       "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -392,6 +476,24 @@
     },
     {
       "key": {
+        "uuid": "82affd8e_f80fb1b9",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T19:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2bd19cb_93769ca8",
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a237a16a_a1145e87",
         "filename": ".github/PULL_REQUEST_TEMPLATE.md",
         "patchSetId": 1
@@ -415,6 +517,30 @@
     },
     {
       "key": {
+        "uuid": "a2b881d5_fcc9656f",
+        "filename": ".github/PULL_REQUEST_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T19:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a237a16a_a1145e87",
+      "range": {
+        "startLine": 3,
+        "startChar": 64,
+        "endLine": 3,
+        "endChar": 65
+      },
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a237a16a_c11962be",
         "filename": ".github/PULL_REQUEST_TEMPLATE.md",
         "patchSetId": 1
@@ -426,6 +552,30 @@
       "writtenOn": "2016-02-22T02:50:39Z",
       "side": 1,
       "message": "Nit: trailing whitespace.",
+      "range": {
+        "startLine": 4,
+        "startChar": 58,
+        "endLine": 4,
+        "endChar": 59
+      },
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02c30d5c_17327649",
+        "filename": ".github/PULL_REQUEST_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T19:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a237a16a_c11962be",
       "range": {
         "startLine": 4,
         "startChar": 58,

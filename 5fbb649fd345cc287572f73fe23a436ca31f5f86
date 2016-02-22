@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "42c98578_96768ca8",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T09:50:12Z",
+      "side": 1,
+      "message": "Yeah for evergreen browsers its not that important but for IE it is. So maybe\n\n  Browser (IE with version, except Edge)\n\nWhat do you think?",
+      "parentUuid": "a2b881d5_19de2bf9",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a237a16a_0120aae4",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1
@@ -137,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "22dbb13a_dd974bfe",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T09:50:12Z",
+      "side": 1,
+      "message": "Hehe I can already see some people writing their text into the comment ;-) So I guess I would rather delete the line. Instead maybe add some more blank lines so its clear where to put text.",
+      "parentUuid": "c283b51b_0a325b49",
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42c98578_16635cec",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1
@@ -154,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "22c49160_f57a58c0",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T09:50:12Z",
+      "side": 1,
+      "message": "Given that the Github Editor now has some format buttons, including lists, I think we should then just delete this line and add couple of blank lines like above.",
+      "parentUuid": "42c98578_16635cec",
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2b881d5_59e8a39b",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1
@@ -165,6 +225,24 @@
       "writtenOn": "2016-02-22T09:26:41Z",
       "side": 1,
       "message": "Same here; and below.",
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22dbb13a_1d6373ec",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T09:50:12Z",
+      "side": 1,
+      "message": "I thought to put some default text here as there are often no workarounds and no links to further discussions. That way people don\u0027t have to delete the sections and don\u0027t have to type anything.",
+      "parentUuid": "a2b881d5_59e8a39b",
       "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

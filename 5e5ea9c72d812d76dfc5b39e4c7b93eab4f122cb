@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62a769c0_2f8569fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-22T10:32:54Z",
+      "side": 1,
+      "message": "Maybe reword as something like\n\n Fix AutoBeanFactoryGenerator in preparation for Spliterator/Stream addition",
+      "revId": "5e5ea9c72d812d76dfc5b39e4c7b93eab4f122cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22c49160_f5f8986a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-22T10:32:54Z",
+      "side": 1,
+      "message": "Do we need to @SuppressWarnings then?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "5e5ea9c72d812d76dfc5b39e4c7b93eab4f122cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2b881d5_59b6e3bc",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/rebind/AutoBeanFactoryGenerator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-22T10:32:54Z",
+      "side": 1,
+      "message": "nit: put on a single line?\n\n(same below with callValueType)",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 515,
+        "endChar": 67
+      },
+      "revId": "5e5ea9c72d812d76dfc5b39e4c7b93eab4f122cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

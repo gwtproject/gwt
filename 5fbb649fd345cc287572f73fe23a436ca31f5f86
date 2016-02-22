@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c283b51b_6a1af7b2",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-22T10:26:01Z",
+      "side": 1,
+      "message": "Ha, good remark!\n\nI think we shouldn\u0027t put a default value, but we should indeed add a note that they ought to test in the latest version. We don\u0027t necessarily need to \"name\" that default version though.\n\n Please make sure your issue can be reproduced in the latest version. If possible, test in latest beta or RC.\n\nThings will probably change with GWT 3.x, as 2.x will continue to live alongside it, but we can revisit this text then.",
+      "parentUuid": "62b209f8_d74f1cab",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 26
+      },
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a237a16a_e11a66b4",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1
@@ -120,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "22dbb13a_fd1b275f",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-22T10:26:01Z",
+      "side": 1,
+      "message": "Microsoft just cut support for all versions of IE except IE11 (except for IE9 on Windows Vista –for one more year– and IE10 on Windows Server 2012; see https://www.xfive.co/blog/stop-supporting-ie10-ie9-ie8/ ), and Edge is not a version of IE, it\u0027s a separate browser.\n\nFor evergreen browsers, the version can be important (Chrome Canari or Beta, vs. stable; Firefox ESR vs. \"evergreen\" vs. developer edition), so we should ask for the version IMO, but what matters most (in most cases at least) is the browser engine, so the version shouldn\u0027t be the most prominent information.",
+      "parentUuid": "42c98578_96768ca8",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a237a16a_0120aae4",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1
@@ -202,6 +250,24 @@
     },
     {
       "key": {
+        "uuid": "02c30d5c_343690e5",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-22T10:26:01Z",
+      "side": 1,
+      "message": "+1 for blank lines\n\n(and yes, I also thought of people writing inside the comments ;-) )",
+      "parentUuid": "22dbb13a_dd974bfe",
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42c98578_16635cec",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1
@@ -237,6 +303,24 @@
     },
     {
       "key": {
+        "uuid": "62b209f8_372058e5",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-22T10:26:01Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "22c49160_f57a58c0",
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2b881d5_59e8a39b",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1
@@ -266,6 +350,24 @@
       "side": 1,
       "message": "I thought to put some default text here as there are often no workarounds and no links to further discussions. That way people don\u0027t have to delete the sections and don\u0027t have to type anything.",
       "parentUuid": "a2b881d5_59e8a39b",
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2bd19cb_d3149465",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-22T10:26:01Z",
+      "side": 1,
+      "message": "I\u0027d prefer that people delete sections they don\u0027t need. Maybe replace the \"N/A\" with\n\n (if any)\n\n?",
+      "parentUuid": "22dbb13a_1d6373ec",
       "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

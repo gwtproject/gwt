@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "22c49160_558a2c09",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T09:19:17Z",
+      "side": 1,
+      "message": "Intentional, so people can just start writing text.",
+      "parentUuid": "a237a16a_e11a66b4",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a237a16a_0120aae4",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-02-22T02:50:39Z",
       "side": 1,
       "message": "Nit: trailing whitespace.",
+      "range": {
+        "startLine": 3,
+        "startChar": 21,
+        "endLine": 3,
+        "endChar": 22
+      },
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "82affd8e_786801f3",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T09:19:17Z",
+      "side": 1,
+      "message": "Intentional, so people can just start writing text.",
+      "parentUuid": "a237a16a_0120aae4",
       "range": {
         "startLine": 3,
         "startChar": 21,

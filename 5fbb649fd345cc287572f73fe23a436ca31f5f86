@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "62b209f8_d74f1cab",
+        "filename": ".github/ISSUE_TEMPLATE.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-02-22T09:58:39Z",
+      "side": 1,
+      "message": "@Thomas: I put 2.8-beta1 here as default value since we don\u0027t fix older GWT releases, so it should regularly be updated. What do you think about adding a sentence above GWT version saying something like\n\n  The current version of GWT is 2.8. If you use an older GWT version, please verify that your issue still exists in GWT 2.8.",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 26
+      },
+      "revId": "5fbb649fd345cc287572f73fe23a436ca31f5f86",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a237a16a_e11a66b4",
         "filename": ".github/ISSUE_TEMPLATE.md",
         "patchSetId": 1

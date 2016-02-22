@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "22c49160_9595a4bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-02-22T15:03:30Z",
+      "side": 1,
+      "message": "No, that was pure curiosity (I had the impression we should have had a suppress warnings here already, just wanted to confirm)\n\nBTW, SuppressWarnings aren\u0027t for IDEs, the compiler will emit warnings that you can suppress that way: https://docs.oracle.com/javase/8/docs/technotes/tools/unix/javac.html#BHCJCABJ",
+      "parentUuid": "02e4ed24_b237d896",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "5e5ea9c72d812d76dfc5b39e4c7b93eab4f122cb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2b881d5_59b6e3bc",
         "filename": "user/src/com/google/web/bindery/autobean/gwt/rebind/AutoBeanFactoryGenerator.java",
         "patchSetId": 2

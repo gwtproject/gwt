@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "02e4ed24_16ca1993",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-02-23T20:59:19Z",
+      "side": 1,
+      "message": "Done. But I don\u0027t like that there will be 2 traversals (although they should be short).",
+      "parentUuid": "02e4ed24_467116ae",
+      "range": {
+        "startLine": 189,
+        "startChar": 17,
+        "endLine": 189,
+        "endChar": 35
+      },
+      "revId": "57975f55f1a6f04875eb9bdb25a2a79d8a7e1986",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02e4ed24_6639b2d6",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 2
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "02e4ed24_56e8a1f7",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-02-23T20:59:19Z",
+      "side": 1,
+      "message": "Actually it is not different than Child3 (if you add @JsConstructor to its default constructor).",
+      "parentUuid": "02e4ed24_6639b2d6",
+      "revId": "57975f55f1a6f04875eb9bdb25a2a79d8a7e1986",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02e4ed24_a6567afc",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 2
@@ -53,6 +95,24 @@
       "writtenOn": "2016-02-23T00:35:14Z",
       "side": 1,
       "message": "We need to add following test in a follow up:\n\n class Object {\n   @JsMethod(\"a\")\n   String toString() {}\n }\n\n @JsType\n interface A {\n   String toString();\n }",
+      "revId": "57975f55f1a6f04875eb9bdb25a2a79d8a7e1986",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02e4ed24_16b33937",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-02-23T20:59:19Z",
+      "side": 1,
+      "message": "You mean in a GWTTestCase, I presume. ACK.",
+      "parentUuid": "02e4ed24_a6567afc",
       "revId": "57975f55f1a6f04875eb9bdb25a2a79d8a7e1986",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

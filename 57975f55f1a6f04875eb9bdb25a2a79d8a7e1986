@@ -116,6 +116,24 @@
       "revId": "57975f55f1a6f04875eb9bdb25a2a79d8a7e1986",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02e4ed24_f8e896ce",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-02-24T19:40:36Z",
+      "side": 1,
+      "message": "Pls don\u0027t forget this one.",
+      "parentUuid": "02e4ed24_16b33937",
+      "revId": "57975f55f1a6f04875eb9bdb25a2a79d8a7e1986",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

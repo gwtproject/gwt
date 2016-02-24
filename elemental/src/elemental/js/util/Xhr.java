@@ -63,9 +63,10 @@ public class Xhr {
    *
    * @param url
    * @param callback
+   * @return a reference to the sent XmlHttpRequest
    */
-  public static void get(String url, Callback callback) {
-    request(create(), "GET", url, callback);
+  public static XMLHttpRequest get(String url, Callback callback) {
+    return request(create(), "GET", url, callback);
   }
 
   /**
@@ -76,9 +77,10 @@ public class Xhr {
    *        constructor
    * @param url
    * @param callback
+   * @return a reference to the sent XmlHttpRequest
    */
-  public static void get(Window window, String url, Callback callback) {
-    request(create(window), "GET", url, callback);
+  public static XMLHttpRequest get(Window window, String url, Callback callback) {
+    return request(create(window), "GET", url, callback);
   }
 
   /**
@@ -87,9 +89,10 @@ public class Xhr {
    *
    * @param url
    * @param callback
+   * @return a reference to the sent XmlHttpRequest
    */
-  public static void head(String url, Callback callback) {
-    request(create(), "HEAD", url, callback);
+  public static XMLHttpRequest head(String url, Callback callback) {
+    return request(create(), "HEAD", url, callback);
   }
 
   /**
@@ -100,9 +103,10 @@ public class Xhr {
    *        constructor
    * @param url
    * @param callback
+   * @return a reference to the sent XmlHttpRequest
    */
-  public static void head(Window window, String url, Callback callback) {
-    request(create(window), "HEAD", url, callback);
+  public static XMLHttpRequest head(Window window, String url, Callback callback) {
+    return request(create(window), "HEAD", url, callback);
   }
 
   /**
@@ -113,9 +117,10 @@ public class Xhr {
    * @param requestData the data to be passed to XMLHttpRequest.send
    * @param contentType a value for the Content-Type HTTP header
    * @param callback
+   * @return a reference to the sent XmlHttpRequest
    */
-  public static void post(String url, String requestData, String contentType, Callback callback) {
-    request(create(), "POST", url, requestData, contentType, callback);
+  public static XMLHttpRequest post(String url, String requestData, String contentType, Callback callback) {
+    return request(create(), "POST", url, requestData, contentType, callback);
   }
 
   /**
@@ -128,10 +133,11 @@ public class Xhr {
    * @param requestData the data to be passed to XMLHttpRequest.send
    * @param contentType a value for the Content-Type HTTP header
    * @param callback
+   * @return a reference to the sent XmlHttpRequest
    */
-  public static void post(
+  public static XMLHttpRequest post(
       Window window, String url, String requestData, String contentType, Callback callback) {
-    request(create(window), "POST", url, requestData, contentType, callback);
+    return request(create(window), "POST", url, requestData, contentType, callback);
   }
 
   private static XMLHttpRequest create() {
@@ -146,7 +152,7 @@ public class Xhr {
     return new window.XMLHttpRequest();
   }-*/;
 
-  private static void request(XMLHttpRequest xhr,
+  private static XMLHttpRequest request(XMLHttpRequest xhr,
       String method,
       String url,
       String requestData,
@@ -162,9 +168,10 @@ public class Xhr {
       callback.onFail(xhr);
       xhr.clearOnReadyStateChange();
     }
+    return xhr;
   }
 
-  private static void request(XMLHttpRequest xhr,
+  private static XMLHttpRequest request(XMLHttpRequest xhr,
       String method,
       String url,
       final Callback callback) {
@@ -177,5 +184,6 @@ public class Xhr {
       callback.onFail(xhr);
       xhr.clearOnReadyStateChange();
     }
+    return xhr;
   }
 }

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a237a16a_9b43c38a",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T07:33:57Z",
+      "side": 1,
+      "message": "Done. Changed to use 31-bit groups.",
+      "parentUuid": "64591d73_2040eeee",
+      "range": {
+        "startLine": 23,
+        "startChar": 42,
+        "endLine": 23,
+        "endChar": 50
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64591d73_00296a39",
         "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2015-08-14T02:36:35Z",
       "side": 1,
       "message": "I think this statement is not true anymore",
+      "range": {
+        "startLine": 24,
+        "startChar": 3,
+        "endLine": 27,
+        "endChar": 2
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a237a16a_3b50774e",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T07:33:57Z",
+      "side": 1,
+      "message": "Changed to use a dense array, removed this statement.",
+      "parentUuid": "64591d73_00296a39",
       "range": {
         "startLine": 24,
         "startChar": 3,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a237a16a_5b4d3bb1",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T07:33:57Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "64591d73_e025565f",
+      "range": {
+        "startLine": 28,
+        "startChar": 3,
+        "endLine": 32,
+        "endChar": 50
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64591d73_40640299",
         "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
         "patchSetId": 8
@@ -82,6 +154,30 @@
       "writtenOn": "2015-08-14T02:36:35Z",
       "side": 1,
       "message": "I think this can now go away since we are not using the sparse nature at all only using valid indexes.",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 17
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a237a16a_fb1a0fb4",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T07:33:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64591d73_40640299",
       "range": {
         "startLine": 44,
         "startChar": 2,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "a237a16a_1b2013e5",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T07:33:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64591d73_6073065d",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 40
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64591d73_c0777246",
         "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
         "patchSetId": 8
@@ -128,6 +248,30 @@
       "writtenOn": "2015-08-14T02:36:35Z",
       "side": 1,
       "message": "remove?",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 3
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a237a16a_bb148787",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T07:33:57Z",
+      "side": 1,
+      "message": "This is used by clone().",
+      "parentUuid": "64591d73_c0777246",
       "range": {
         "startLine": 81,
         "startChar": 0,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "a237a16a_db194bbe",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T07:33:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64591d73_e07ef61e",
+      "range": {
+        "startLine": 226,
+        "startChar": 32,
+        "endLine": 226,
+        "endChar": 43
+      },
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64591d73_00820aa3",
         "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
         "patchSetId": 8
@@ -174,6 +342,24 @@
       "writtenOn": "2015-08-14T02:36:35Z",
       "side": 1,
       "message": "our array will not be sparse anymore so I think we can just use the last position in the array right?",
+      "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a237a16a_7b2fdfd2",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T07:33:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64591d73_00820aa3",
       "revId": "6c434cb943d237a36cf31b812d780e4e2ae277a1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

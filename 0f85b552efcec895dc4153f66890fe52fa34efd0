@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "02e4ed24_b8b1ee2b",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T21:50:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22c49160_5b8c1bb4",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 15
+      },
+      "revId": "0f85b552efcec895dc4153f66890fe52fa34efd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2bd19cb_7991dfcc",
         "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
         "patchSetId": 13
@@ -36,6 +60,30 @@
       "writtenOn": "2016-02-24T20:50:00Z",
       "side": 1,
       "message": "I think you can use here just \u0027return slice(array, 0, array.length)\u0027",
+      "range": {
+        "startLine": 118,
+        "startChar": 49,
+        "endLine": 125,
+        "endChar": 7
+      },
+      "revId": "0f85b552efcec895dc4153f66890fe52fa34efd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02e4ed24_18812227",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T21:50:21Z",
+      "side": 1,
+      "message": "Using Arrays.copyOf() now. Removed this method.",
+      "parentUuid": "e2bd19cb_7991dfcc",
       "range": {
         "startLine": 118,
         "startChar": 49,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "02e4ed24_d87a7afe",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T21:50:21Z",
+      "side": 1,
+      "message": "To avoid multiple reallocations, I think we need to set the new length of the array before iterating, which unfortunately needs JSNI but that\u0027s OK for now?",
+      "parentUuid": "62b209f8_bd70c7e4",
+      "range": {
+        "startLine": 172,
+        "startChar": 11,
+        "endLine": 172,
+        "endChar": 51
+      },
+      "revId": "0f85b552efcec895dc4153f66890fe52fa34efd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2bd19cb_598c23b4",
         "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
         "patchSetId": 13
@@ -82,6 +154,30 @@
       "writtenOn": "2016-02-24T20:50:00Z",
       "side": 1,
       "message": "Arrays.fill(array, 0)",
+      "range": {
+        "startLine": 340,
+        "startChar": 4,
+        "endLine": 342,
+        "endChar": 5
+      },
+      "revId": "0f85b552efcec895dc4153f66890fe52fa34efd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02e4ed24_b87faeec",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T21:50:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2bd19cb_598c23b4",
       "range": {
         "startLine": 340,
         "startChar": 4,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "02e4ed24_586faa38",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T21:50:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2bd19cb_9995dbbb",
+      "range": {
+        "startLine": 397,
+        "startChar": 4,
+        "endLine": 397,
+        "endChar": 22
+      },
+      "revId": "0f85b552efcec895dc4153f66890fe52fa34efd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22c49160_3b875f94",
         "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
         "patchSetId": 13
@@ -128,6 +248,30 @@
       "writtenOn": "2016-02-24T20:50:00Z",
       "side": 1,
       "message": "shouldn\u0027t it be 31? or just bitIndex(array.length)?",
+      "range": {
+        "startLine": 733,
+        "startChar": 26,
+        "endLine": 733,
+        "endChar": 28
+      },
+      "revId": "0f85b552efcec895dc4153f66890fe52fa34efd0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02e4ed24_3e96076a",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-02-24T21:50:21Z",
+      "side": 1,
+      "message": "32 is fine. This represents the actual memory we\u0027ve used for this BitSet. size() is implementation dependent[1] anyway so it\u0027s not important to be precise here.\n\n[1]: https://docs.oracle.com/javase/7/docs/api/java/util/BitSet.html, \"Note that the size is related to the implementation of a bit set, so it may change with implementation\".",
+      "parentUuid": "22c49160_3b875f94",
       "range": {
         "startLine": 733,
         "startChar": 26,

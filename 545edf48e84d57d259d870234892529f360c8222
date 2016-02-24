@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02e4ed24_670409f9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-02-24T02:55:00Z",
+      "side": 1,
+      "message": "jsMemerType \u003d\u003d JsMemberType.CONSTRUCTOR",
+      "range": {
+        "startLine": 198,
+        "startChar": 11,
+        "endLine": 198,
+        "endChar": 48
+      },
+      "revId": "545edf48e84d57d259d870234892529f360c8222",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

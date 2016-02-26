@@ -243,6 +243,10 @@ public class JsInteropRestrictionChecker {
       checkIllegalOverrides(member);
     }
 
+    if (member instanceof JMethod) {
+      checkMethodParameters((JMethod) member);
+    }
+
     if (member.isJsOverlay()) {
       checkJsOverlay(member);
       return;
@@ -258,10 +262,6 @@ public class JsInteropRestrictionChecker {
 
     if (!checkJsPropertyAccessor(member)) {
       return;
-    }
-
-    if (member.isJsMethodVarargs()) {
-      checkJsVarargs(member);
     }
 
     checkMemberQualifiedJsName(member);
@@ -380,8 +380,33 @@ public class JsInteropRestrictionChecker {
     }
   }
 
-  private void checkJsVarargs(JMember member) {
-    final JMethod method = (JMethod) member;
+  private void checkMethodParameters(JMethod method) {
+    boolean hasOptionalParameters = false;
+    for (JParameter parameter : method.getParams()) {
+      if (parameter.isOptional()) {
+        hasOptionalParameters = true;
+        continue;
+      }
+      if (hasOptionalParameters && !parameter.isVarargs()) {
+        logError(method, "JsOptional parameter '%s' in method %s cannot precede parameters "
+            + "that are not optional.", parameter.getName(), getMemberDescription(method));
+        break;
+      }
+    }
+
+    if (hasOptionalParameters
+        && method.getJsMemberType() != JsMemberType.CONSTRUCTOR
+        && method.getJsMemberType() != JsMemberType.METHOD
+        && !method.isOrOverridesJsFunctionMethod()) {
+      logError(method, "Method %s has JsOptional parameters and is not a JsMethod, "
+          + "a JsConstructor or a JsFunction method.", getMemberDescription(method));
+    }
+    if (method.isJsMethodVarargs()) {
+      checkJsVarargs(method);
+    }
+  }
+
+  private void checkJsVarargs(final JMethod method) {
     if (!method.isJsniMethod()) {
       return;
     }

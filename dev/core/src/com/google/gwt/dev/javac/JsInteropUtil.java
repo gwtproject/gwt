@@ -21,6 +21,7 @@ import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
+import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
@@ -68,6 +69,13 @@ public final class JsInteropUtil {
     setJsInteropProperties(method, annotations, annotation, isPropertyAccessor, generateExport);
   }
 
+  public static void maybeSetJsInteropProperties(JParameter parameter,  Annotation... annotations) {
+    boolean isOptional = getInteropAnnotation(annotations, "JsOptional") != null;
+    if (isOptional) {
+      parameter.setOptional();
+    }
+  }
+
   public static void maybeSetJsInteropProperties(
       JField field, boolean generateExport, Annotation... annotations) {
     AnnotationBinding annotation = getInteropAnnotation(annotations, "JsProperty");
@@ -78,6 +86,7 @@ public final class JsInteropUtil {
       AnnotationBinding memberAnnotation, boolean isAccessor, boolean generateExport) {
     if (getInteropAnnotation(annotations, "JsOverlay") != null) {
       member.setJsOverlay();
+      return;
     }
 
     if (getInteropAnnotation(annotations, "JsIgnore") != null) {

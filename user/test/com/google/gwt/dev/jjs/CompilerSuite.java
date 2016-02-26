@@ -54,34 +54,34 @@ public class CompilerSuite {
     GWTTestSuite suite = new GWTTestSuite("Test for com.google.gwt.dev.jjs");
 
     // $JUnit-BEGIN$
-    suite.addTestSuite(AnnotationsTest.class);
-    suite.addTestSuite(ArrayTest.class);
-    suite.addTestSuite(AutoboxTest.class);
-    suite.addTestSuite(ClassCastTest.class);
-    suite.addTestSuite(ClassLiteralsTest.class);
-    suite.addTestSuite(EnhancedForLoopTest.class);
-    suite.addTestSuite(EnumsTest.class);
-    suite.addTestSuite(FieldInitializationOrderTest.class);
-    suite.addTestSuite(GenericCastTest.class);
-    suite.addTestSuite(InitialLoadSequenceTest.class);
-    suite.addTestSuite(InnerClassTest.class);
-    suite.addTestSuite(InnerOuterSuperTest.class);
+//    suite.addTestSuite(AnnotationsTest.class);
+//    suite.addTestSuite(ArrayTest.class);
+//    suite.addTestSuite(AutoboxTest.class);
+//    suite.addTestSuite(ClassCastTest.class);
+//    suite.addTestSuite(ClassLiteralsTest.class);
+//    suite.addTestSuite(EnhancedForLoopTest.class);
+//    suite.addTestSuite(EnumsTest.class);
+//    suite.addTestSuite(FieldInitializationOrderTest.class);
+//    suite.addTestSuite(GenericCastTest.class);
+//    suite.addTestSuite(InitialLoadSequenceTest.class);
+//    suite.addTestSuite(InnerClassTest.class);
+//    suite.addTestSuite(InnerOuterSuperTest.class);
     suite.addTestSuite(Java7Test.class);
     // Java8Test cannot be the first one in a suite. It uses a hack
     // to avoid executing if not in a Java 8+ environment.
     suite.addTestSuite(Java8Test.class);
-    suite.addTestSuite(JavaAccessFromJavaScriptTest.class);
-    suite.addTestSuite(JsniConstructorTest.class);
-    suite.addTestSuite(JsniDispatchTest.class);
-    suite.addTestSuite(JsoTest.class);
-    suite.addTestSuite(MethodBindTest.class);
-    suite.addTestSuite(MethodCallTest.class);
-    suite.addTestSuite(MethodInterfaceTest.class);
-    suite.addTestSuite(NativeLongTest.class);
-    suite.addTestSuite(ObjectIdentityTest.class);
-    suite.addTestSuite(SingleJsoImplTest.class);
-    suite.addTestSuite(TypeHierarchyTest.class);
-    suite.addTestSuite(VarargsTest.class);
+//    suite.addTestSuite(JavaAccessFromJavaScriptTest.class);
+//    suite.addTestSuite(JsniConstructorTest.class);
+//    suite.addTestSuite(JsniDispatchTest.class);
+//    suite.addTestSuite(JsoTest.class);
+//    suite.addTestSuite(MethodBindTest.class);
+//    suite.addTestSuite(MethodCallTest.class);
+//    suite.addTestSuite(MethodInterfaceTest.class);
+//    suite.addTestSuite(NativeLongTest.class);
+//    suite.addTestSuite(ObjectIdentityTest.class);
+//    suite.addTestSuite(SingleJsoImplTest.class);
+//    suite.addTestSuite(TypeHierarchyTest.class);
+//    suite.addTestSuite(VarargsTest.class);
     // $JUnit-END$
 
     return suite;

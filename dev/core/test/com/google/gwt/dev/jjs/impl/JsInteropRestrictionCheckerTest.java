@@ -1512,6 +1512,9 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetImport("jsinterop.annotations.JsOverlay");
     addSnippetClassDecl(
+        "@JsType(isNative=true) public static final class FinalType {",
+        "  @JsOverlay public void n() { }",
+        "}",
         "@JsType(isNative=true) public static class Buggy {",
         "  @JsOverlay public static Object object = new Object();",
         "  @JsOverlay public static void m() { }",

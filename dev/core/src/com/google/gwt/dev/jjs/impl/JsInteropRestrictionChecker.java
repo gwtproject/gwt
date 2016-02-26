@@ -330,8 +330,8 @@ public class JsInteropRestrictionChecker {
       return;
     }
 
-    if (method.getBody() == null || (!method.isFinal() && !method.isStatic()
-        && !method.isDefaultMethod())) {
+    if (method.getBody() == null || (!method.isFinal() && !method.getEnclosingType().isFinal()
+        && !method.isStatic() && !method.isDefaultMethod())) {
       logError(member,
           "JsOverlay method '%s' cannot be non-final nor native.", methodDescription);
     }

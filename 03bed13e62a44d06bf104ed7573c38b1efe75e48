@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02e4ed24_85492309",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-02-26T05:03:39Z",
+      "side": 1,
+      "message": "I think the second term might read better this way\n\n  !(method.isFinal() || method.getEnclosingType().isFinal()\n        || method.isStatic() || method.isDefaultMethod())",
+      "range": {
+        "startLine": 333,
+        "startChar": 37,
+        "endLine": 334,
+        "endChar": 58
+      },
+      "revId": "03bed13e62a44d06bf104ed7573c38b1efe75e48",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

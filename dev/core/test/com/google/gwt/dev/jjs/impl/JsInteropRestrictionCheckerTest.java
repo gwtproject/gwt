@@ -1496,7 +1496,84 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
             + " method 'void EntryPoint.Interface.someOtherMethod()'.");
   }
 
-  public void testJsOverlayOnNativeJsTypeInterfaceSucceds() throws Exception {
+  public void testJsOptionalSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsConstructor");
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsOptional");
+    addSnippetClassDecl(
+        "public static class Buggy {",
+        "  @JsConstructor public Buggy(@JsOptional Object a) {}",
+        "  @JsMethod public void fun(int a, Object b, @JsOptional String c) {}",
+        "  @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String c) {}",
+        "  @JsMethod public void baz(@JsOptional int a, @JsOptional Object b) {}",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testJsOptionalWithVarargsSucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsOptional");
+    addSnippetClassDecl(
+        "public class Buggy {",
+        "   @JsMethod public void fun(@JsOptional String c, Object... os) {}",
+        "   @JsMethod public void bar(int a, @JsOptional Object b, @JsOptional String... c) {}",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testJsOptionalNotAtEndFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsConstructor");
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsOptional");
+    addSnippetClassDecl(
+        "public static class Buggy {",
+        "   @JsConstructor public Buggy(@JsOptional int a, Object b, @JsOptional String c) {}",
+        "   @JsMethod public void bar(int a, @JsOptional Object b, String c) {}",
+        "   @JsMethod public void baz(@JsOptional Object b, String c, Object... os) {}",
+        "}");
+
+    assertBuggyFails(
+        "Line 7: JsOptional parameter 'b' in method 'EntryPoint.Buggy.EntryPoint$Buggy(int, "
+            + "Object, String)' cannot precede parameters that are not optional.",
+        "Line 8: JsOptional parameter 'c' in method 'void EntryPoint.Buggy.bar(int, Object,"
+            + " String)' cannot precede parameters that are not optional.",
+        "Line 9: JsOptional parameter 'c' in method 'void EntryPoint.Buggy.baz(Object, String, "
+            + "Object[])' cannot precede parameters that are not optional.");
+  }
+
+  public void testJsOptionalOnNonJsExposedMethodsFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsProperty");
+    addSnippetImport("jsinterop.annotations.JsOptional");
+    addSnippetClassDecl(
+        "public static class Buggy {",
+        "  public void fun(int a, @JsOptional Object b, @JsOptional String c) {}",
+        "  @JsProperty public void setBar(@JsOptional Object o) {}",
+        "}");
+
+    assertBuggyFails(
+        "Line 6: Method 'void EntryPoint.Buggy.fun(int, Object, String)' has JsOptional parameters "
+            + "and is not a JsMethod, a JsConstructor or a JsFunction method.",
+        "Line 7: Method 'void EntryPoint.Buggy.setBar(Object)' has JsOptional parameters and is "
+            + "not a JsMethod, a JsConstructor or a JsFunction method.");
+  }
+
+  public void testJsOptionalOnJsOverlayMethodsFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsOptional");
+    addSnippetImport("jsinterop.annotations.JsOverlay");
+    addSnippetClassDecl(
+        "@JsType(isNative = true) public static class Buggy {",
+        "  @JsOverlay public final void fun(@JsOptional Object a) {}",
+        "}");
+
+    assertBuggyFails(
+        "Line 7: Method 'void EntryPoint.Buggy.fun(Object)' has JsOptional parameters and "
+            + "is not a JsMethod, a JsConstructor or a JsFunction method.");
+  }
+
+  public void testJsOverlayOnNativeJsTypeInterfaceSucceeds() throws Exception {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetImport("jsinterop.annotations.JsOverlay");
     addSnippetClassDecl(
@@ -1612,6 +1689,33 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertBuggySucceeds();
+  }
+
+  public void testJsOverlayOnJsMemberFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsOverlay");
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsProperty");
+    addSnippetImport("jsinterop.annotations.JsConstructor");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) public static class Buggy {",
+        "  @JsOverlay public Buggy() { }",
+        "  @JsOverlay @JsConstructor protected Buggy(int i) { }",
+        "  @JsMethod @JsOverlay public final void m() { }",
+        "  @JsMethod @JsOverlay public static void n() { }",
+        "  @JsProperty @JsOverlay public static void setA(String value) { }",
+        "}");
+
+    assertBuggyFails(
+        "Line 9: JsOverlay method 'EntryPoint.Buggy.EntryPoint$Buggy()' cannot be a constructor.",
+        "Line 10: JsOverlay method 'EntryPoint.Buggy.EntryPoint$Buggy(int)' cannot be a "
+            + "constructor.",
+        "Line 11: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be JsMethod nor "
+            + "JsProperty.",
+        "Line 12: JsOverlay method 'void EntryPoint.Buggy.n()' cannot be JsMethod nor "
+            + "JsProperty.",
+        "Line 13: JsOverlay method 'void EntryPoint.Buggy.setA(String)' cannot be JsMethod nor "
+            + "JsProperty.");
   }
 
   public void testImplicitJsOverlayOnJsoMethodSucceeds() throws Exception {

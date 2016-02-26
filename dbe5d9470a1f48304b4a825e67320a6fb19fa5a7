@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02806d4d_0c98f72c",
+        "filename": "user/src/com/google/gwt/i18n/shared/DateTimeFormat.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-02-26T12:22:08Z",
+      "side": 1,
+      "message": "nit: trainling whitespace",
+      "range": {
+        "startLine": 804,
+        "startChar": 0,
+        "endLine": 804,
+        "endChar": 4
+      },
+      "revId": "dbe5d9470a1f48304b4a825e67320a6fb19fa5a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02806d4d_2cc053f3",
+        "filename": "user/test/com/google/gwt/i18n/shared/DateTimeFormatTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-02-26T12:22:08Z",
+      "side": 1,
+      "message": "Wrong copyright here, please use the one from any other file.",
+      "range": {
+        "startLine": 2,
+        "startChar": 26,
+        "endLine": 2,
+        "endChar": 27
+      },
+      "revId": "dbe5d9470a1f48304b4a825e67320a6fb19fa5a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02806d4d_cc798fa5",
+        "filename": "user/test/com/google/gwt/i18n/shared/DateTimeFormatTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-02-26T12:22:08Z",
+      "side": 1,
+      "message": "nit: trainling whitespace",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 3
+      },
+      "revId": "dbe5d9470a1f48304b4a825e67320a6fb19fa5a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02806d4d_ec7ecb8a",
+        "filename": "user/test/com/google/gwt/i18n/shared/DateTimeFormatTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-02-26T12:22:08Z",
+      "side": 1,
+      "message": "nit: trainling whitespace",
+      "range": {
+        "startLine": 7,
+        "startChar": 2,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "dbe5d9470a1f48304b4a825e67320a6fb19fa5a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02806d4d_8c8387c5",
+        "filename": "user/test/com/google/gwt/i18n/shared/DateTimeFormatTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-02-26T12:22:08Z",
+      "side": 1,
+      "message": "nit: trainling whitespace",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 3
+      },
+      "revId": "dbe5d9470a1f48304b4a825e67320a6fb19fa5a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02806d4d_ac88c3df",
+        "filename": "user/test/com/google/gwt/i18n/shared/DateTimeFormatTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-02-26T12:22:08Z",
+      "side": 1,
+      "message": "nit: trainling whitespace",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 2
+      },
+      "revId": "dbe5d9470a1f48304b4a825e67320a6fb19fa5a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02806d4d_4c8effeb",
+        "filename": "user/test/com/google/gwt/i18n/shared/DateTimeFormatTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-02-26T12:22:08Z",
+      "side": 1,
+      "message": "nit: trainling whitespace",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 2
+      },
+      "revId": "dbe5d9470a1f48304b4a825e67320a6fb19fa5a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02806d4d_6c8bbbda",
+        "filename": "user/test/com/google/gwt/i18n/shared/DateTimeFormatTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-02-26T12:22:08Z",
+      "side": 1,
+      "message": "nit: trainling whitespace",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 2
+      },
+      "revId": "dbe5d9470a1f48304b4a825e67320a6fb19fa5a7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

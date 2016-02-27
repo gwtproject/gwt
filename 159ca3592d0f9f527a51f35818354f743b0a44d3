@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02e4ed24_f45bf3fb",
+        "filename": "user/src/jsinterop/annotations/JsOptional.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-02-27T00:10:32Z",
+      "side": 1,
+      "message": "2016",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "159ca3592d0f9f527a51f35818354f743b0a44d3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02e4ed24_14579fd4",
+        "filename": "user/src/jsinterop/annotations/JsOptional.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-02-27T00:10:32Z",
+      "side": 1,
+      "message": "JsConstructor as well",
+      "range": {
+        "startLine": 28,
+        "startChar": 49,
+        "endLine": 28,
+        "endChar": 74
+      },
+      "revId": "159ca3592d0f9f527a51f35818354f743b0a44d3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

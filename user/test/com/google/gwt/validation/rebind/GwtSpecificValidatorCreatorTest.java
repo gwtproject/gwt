@@ -70,9 +70,9 @@ public class GwtSpecificValidatorCreatorTest extends TestCase {
   public void testAsLiteral_1L() {
     assertLiteral("1L", 1L);
   }
-  
+
   public void testAsLiteral_9999999999L() {
-	  assertLiteral("9999999999L", 9999999999L);
+    assertLiteral("9999999999L", 9999999999L);
   }
 
   public void testAsLiteral_a() {

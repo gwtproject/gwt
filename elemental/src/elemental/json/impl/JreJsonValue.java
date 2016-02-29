@@ -21,6 +21,7 @@ import elemental.json.JsonValue;
  * JRE (non-Client) implementation of JreJsonValue.
  */
 public abstract class JreJsonValue implements JsonValue {
+
   public abstract Object getObject();
   public abstract void traverse(JsonVisitor visitor, JsonContext ctx);
 

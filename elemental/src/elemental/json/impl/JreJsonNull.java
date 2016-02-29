@@ -15,6 +15,11 @@
  */
 package elemental.json.impl;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.ObjectStreamException;
+
 import elemental.json.JsonNull;
 import elemental.json.JsonType;
 import elemental.json.JsonValue;
@@ -62,4 +67,9 @@ public class JreJsonNull extends JreJsonValue implements JsonNull {
   public String toJson() {
     return null;
   }
+
+  private Object readResolve() throws ObjectStreamException {
+	return NULL_INSTANCE;
+  }
+
 }

@@ -17,10 +17,15 @@ package elemental.json.impl;
 
 import elemental.json.JsonValue;
 
+import java.io.Serializable;
+
 /**
  * JRE (non-Client) implementation of JreJsonValue.
  */
-public abstract class JreJsonValue implements JsonValue {
+public abstract class JreJsonValue implements JsonValue, Serializable {
+
+  private static final long serialVersionUID = 1L;
+
   public abstract Object getObject();
   public abstract void traverse(JsonVisitor visitor, JsonContext ctx);
 

@@ -15,6 +15,11 @@
  */
 package elemental.json.impl;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import elemental.json.Json;
 import elemental.json.JsonBoolean;
 import elemental.json.JsonType;
 import elemental.json.JsonValue;
@@ -69,4 +74,16 @@ public class JreJsonBoolean extends JreJsonValue implements JsonBoolean {
   public String toJson() throws IllegalStateException {
     return String.valueOf(bool);
   }
+
+  private void readObject(ObjectInputStream stream)
+          throws IOException, ClassNotFoundException {
+    String jsonString = (String) stream.readObject();
+    JreJsonBoolean instance = Json.instance().parse(jsonString);
+    this.bool = instance.bool;
+  }
+
+  private void writeObject(ObjectOutputStream stream) throws IOException {
+    stream.writeObject(toJson());
+  }
+
 }

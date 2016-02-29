@@ -15,6 +15,9 @@
  */
 package elemental.json.impl;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,6 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import elemental.json.Json;
 import elemental.json.JsonArray;
 import elemental.json.JsonBoolean;
 import elemental.json.JsonFactory;
@@ -175,4 +179,20 @@ public class JreJsonObject extends JreJsonValue implements JsonObject {
     }
     visitor.endVisit(this, ctx);
   }
+
+  private void readObject(ObjectInputStream stream)
+          throws IOException, ClassNotFoundException {
+    String jsonString = (String) stream.readObject();
+    JreJsonObject instance = Json.instance().parse(jsonString);
+    this.factory = Json.instance();
+    this.map = new LinkedHashMap<String, JsonValue>();
+    for (String key : instance.map.keySet()) {
+      map.put(key, instance.map.get(key));
+    }
+  }
+
+  private void writeObject(ObjectOutputStream stream) throws IOException {
+    stream.writeObject(toJson());
+  }
+
 }

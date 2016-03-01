@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02806d4d_320188e8",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-01T17:41:23Z",
+      "side": 1,
+      "message": "This is not the place to do it.\n\nYou should also check the return value of mkdirs.",
+      "revId": "d25abe19448364698ebfa7723e3d2b39298ce3d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

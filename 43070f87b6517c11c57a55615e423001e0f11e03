@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "02feade5_fc673e22",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-03-02T00:58:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02feade5_c2fb86db",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 18
+      },
+      "revId": "43070f87b6517c11c57a55615e423001e0f11e03",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02feade5_a2291a23",
         "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "02feade5_3c5a4658",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-03-02T00:58:07Z",
+      "side": 1,
+      "message": "Done. Now JsOverlay members are treated like non public jstype members, in the sense that they don\u0027t inherit jsmethodness from the type.",
+      "parentUuid": "02feade5_a2291a23",
+      "revId": "43070f87b6517c11c57a55615e423001e0f11e03",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02feade5_e2d8426b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1
@@ -53,6 +95,24 @@
       "writtenOn": "2016-02-29T20:42:40Z",
       "side": 1,
       "message": "nit: empty line",
+      "revId": "43070f87b6517c11c57a55615e423001e0f11e03",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02feade5_7cf96e6c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-03-02T00:58:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02feade5_e2d8426b",
       "revId": "43070f87b6517c11c57a55615e423001e0f11e03",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

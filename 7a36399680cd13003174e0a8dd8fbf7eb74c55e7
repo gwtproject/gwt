@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a237a16a_ac43d837",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-03-04T00:13:59Z",
+      "side": 1,
+      "message": "One final nit: s/outboxes/outboxTable/g\n\nRename \"outboxes\" to \"outboxTable\", as suggested by John Stalcup in Patch Set 1: https://gwt-review.googlesource.com/#/c/14443/1/dev/codeserver/java/com/google/gwt/dev/codeserver/JobRunner.java@51.\n\n\"outboxes\" means a collection of Outbox, but here it\u0027s an OutboxTable instead, so \"outboxTable\" is indeed a better variable name.",
+      "range": {
+        "startLine": 51,
+        "startChar": 56,
+        "endLine": 51,
+        "endChar": 64
+      },
+      "revId": "7a36399680cd13003174e0a8dd8fbf7eb74c55e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

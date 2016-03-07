@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e242792f_cbce152c",
+        "filename": "dev/core/super/javaemul/internal/NativeRegExp.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-03-07T13:38:13Z",
+      "side": 1,
+      "message": "Maybe JsRegExp would be a better name for the class?",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 25
+      },
+      "revId": "ad3a921aaa2d284c3698d2805f45868ea24f86eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

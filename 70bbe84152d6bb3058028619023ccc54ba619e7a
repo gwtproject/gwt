@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a24de15b_510494f8",
+        "filename": "maven/poms/gwt/gwt-dev/pom-template.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2016-03-07T06:35:40Z",
+      "side": 1,
+      "message": "Why we need this? In [1] is described as Jetty JavaEE style services and depnds on org.eclipse.jetty.jetty-jndi and javax.transaction.javax.transaction-api\n\n* http://mvnrepository.com/artifact/org.eclipse.jetty/jetty-plus/9.3.8.RC0",
+      "range": {
+        "startLine": 43,
+        "startChar": 24,
+        "endLine": 43,
+        "endChar": 34
+      },
+      "revId": "70bbe84152d6bb3058028619023ccc54ba619e7a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e26d19b5_33fe2880",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2016-03-07T06:35:40Z",
+      "side": 1,
+      "message": "Is this enough for WebSocket? IIRC there were three artifacts: server, client, and the API.",
+      "revId": "70bbe84152d6bb3058028619023ccc54ba619e7a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

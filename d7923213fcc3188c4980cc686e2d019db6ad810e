@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2222d18a_65a46614",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2016-03-07T19:41:31Z",
+      "side": 1,
+      "message": "websocket-server and websocket-api are not needed? I had much more deoendencies in my attempt to unbounde Jetty: [1].\n\n* [1] https://gwt-review.googlesource.com/#/c/7857/22/maven/poms/gwt/gwt-dev/pom-template.xml",
+      "revId": "d7923213fcc3188c4980cc686e2d019db6ad810e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -23,43 +23,43 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-              <groupId>com.google.gwt</groupId>
-              <artifactId>gwt-user</artifactId>
-              <version>${project.version}</version>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-user</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-              <groupId>com.google.gwt</groupId>
-              <artifactId>gwt-dev</artifactId>
-              <version>${project.version}</version>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-dev</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-              <groupId>com.google.gwt</groupId>
-              <artifactId>gwt-codeserver</artifactId>
-              <version>${project.version}</version>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-codeserver</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-              <groupId>com.google.gwt</groupId>
-              <artifactId>gwt-servlet</artifactId>
-              <version>${project.version}</version>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-servlet</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-              <groupId>com.google.gwt</groupId>
-              <artifactId>gwt-elemental</artifactId>
-              <version>${project.version}</version>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-elemental</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
-              <groupId>com.google.web.bindery</groupId>
-              <artifactId>requestfactory</artifactId>
-              <version>${project.version}</version>
-              <type>pom</type>
-              <scope>import</scope>
+                <groupId>com.google.web.bindery</groupId>
+                <artifactId>requestfactory</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
-              <groupId>com.google.jsinterop</groupId>
-              <artifactId>jsinterop</artifactId>
-              <version>${jsinteropVersion}</version>
-              <type>pom</type>
-              <scope>import</scope>
+                <groupId>com.google.jsinterop</groupId>
+                <artifactId>jsinterop</artifactId>
+                <version>${jsinteropVersion}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>javax.validation</groupId>
@@ -79,6 +79,43 @@
                 <version>5.0.3</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- Dependency of HtmlUnit -->
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-client</artifactId>
+                <version>9.2.14.v20151106</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-webapp</artifactId>
+                <version>9.2.14.v20151106</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-servlets</artifactId>
+                <version>9.2.14.v20151106</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-plus</artifactId>
+                <version>9.2.14.v20151106</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-annotations</artifactId>
+                <version>9.2.14.v20151106</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-jsp</artifactId>
+                <version>9.2.14.v20151106</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.jetty.orbit</groupId>
+                        <artifactId>org.eclipse.jdt.core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>

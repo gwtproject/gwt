@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e29439c3_9b0c6b8f",
+        "filename": "maven/poms/gwt/gwt-dev/pom-template.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-07T08:38:03Z",
+      "side": 1,
+      "message": "Oh, just noticed jetty-webapp appears twice here.",
+      "revId": "70bbe84152d6bb3058028619023ccc54ba619e7a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a24de15b_510494f8",
         "filename": "maven/poms/gwt/gwt-dev/pom-template.xml",
         "patchSetId": 2
@@ -25,6 +42,58 @@
     },
     {
       "key": {
+        "uuid": "c26575c5_9a31cd47",
+        "filename": "maven/poms/gwt/gwt-dev/pom-template.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-07T08:38:03Z",
+      "side": 1,
+      "message": "This is needed for JSP support (which relies on annotations scanning, which needs this) in DevMode. That said, we could just declare the dependency on jetty-annotations and have jetty-plus as a transitive dependency.\n\nThese are \"optional\" but marking them as such would force users to explicitly declare the dependencies in their POM if they need them, which would be a breaking change from previous GWT versions; but you can actually safely exclude them.",
+      "parentUuid": "a24de15b_510494f8",
+      "revId": "70bbe84152d6bb3058028619023ccc54ba619e7a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e29439c3_bb1127aa",
+        "filename": "maven/poms/gwt/gwt-dev/pom-template.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-07T08:38:03Z",
+      "side": 1,
+      "message": "Oh, and this should actually be apache-jsp, not jetty-jsp (which actually brings Glassfish JSP). I think I fixed the POM that I had deployed in my local repo for testing, and forgot to update the templates.",
+      "revId": "70bbe84152d6bb3058028619023ccc54ba619e7a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c26575c5_ba36913a",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-07T08:38:03Z",
+      "side": 1,
+      "message": "Oops, this should be websocket-client, not jetty-client.",
+      "revId": "70bbe84152d6bb3058028619023ccc54ba619e7a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e26d19b5_33fe2880",
         "filename": "maven/poms/gwt/pom-template.xml",
         "patchSetId": 2
@@ -36,6 +105,24 @@
       "writtenOn": "2016-03-07T06:35:40Z",
       "side": 1,
       "message": "Is this enough for WebSocket? IIRC there were three artifacts: server, client, and the API.",
+      "revId": "70bbe84152d6bb3058028619023ccc54ba619e7a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e26d19b5_b336b83a",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-07T08:38:03Z",
+      "side": 1,
+      "message": "GWT DevMode never actually supported WebSockets (at least officially). AFAICT, Jetty Websocket support relies on annotation scanning (a ServletContainerInitializer), so adding the dependency websocket-server should Just Work™.",
+      "parentUuid": "e26d19b5_33fe2880",
       "revId": "70bbe84152d6bb3058028619023ccc54ba619e7a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

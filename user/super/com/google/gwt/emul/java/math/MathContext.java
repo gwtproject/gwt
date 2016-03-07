@@ -34,6 +34,8 @@
  */
 package java.math;
 
+import javaemul.internal.NativeRegExp;
+
 import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
@@ -140,7 +142,7 @@ public final class MathContext implements Serializable {
   public MathContext(String val) {
     checkNotNull(val, "null string");
 
-    String[] extractedValues = parseValue(val);
+    String[] extractedValues = (String[]) createParseRegexp().exec(val);
     if (extractedValues == null || extractedValues.length != 3) {
       throw new IllegalArgumentException("bad string format");
     }
@@ -157,8 +159,8 @@ public final class MathContext implements Serializable {
     checkCriticalArgument(this.precision >= 0, "Digits < 0");
   }
 
-  private static native String[] parseValue(String val) /*-{
-    return /^precision=(\d+)\ roundingMode=(\w+)$/.exec(val);
+  private static native NativeRegExp createParseRegexp() /*-{
+    return /^precision=(\d+)\ roundingMode=(\w+)$/;
   }-*/;
 
   /* Public Methods */

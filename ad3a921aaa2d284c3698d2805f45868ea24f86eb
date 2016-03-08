@@ -22,6 +22,30 @@
       "revId": "ad3a921aaa2d284c3698d2805f45868ea24f86eb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17aa7153_45372ac7",
+        "filename": "dev/core/super/javaemul/internal/NativeRegExp.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-03-08T00:24:09Z",
+      "side": 1,
+      "message": "Perhaps we can do NativeXyz like here for pure native abstractions and JsXyz for higher level abstractions (if we need them).\nWhat do you guys think?",
+      "parentUuid": "e242792f_cbce152c",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 25
+      },
+      "revId": "ad3a921aaa2d284c3698d2805f45868ea24f86eb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -19,6 +19,8 @@ import static java.util.ConcurrentModificationDetector.structureChanged;
 
 import java.util.Map.Entry;
 
+import javaemul.internal.InternalJsMap;
+import javaemul.internal.InternalJsMapFactory;
 import javaemul.internal.JsUtils;
 
 /**

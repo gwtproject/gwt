@@ -22,6 +22,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 import java.io.Serializable;
 
+import javaemul.internal.InternalJsMap;
+import javaemul.internal.InternalJsMapFactory;
+
 /**
  * The first-class representation of an enumeration.
  *
@@ -37,36 +40,26 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>,
     return invokeValueOf(enumValueOfFunc, name);
   }
 
-  protected static <T extends Enum<T>> JavaScriptObject createValueOfMap(
-      T[] enumConstants) {
-    JavaScriptObject result = JavaScriptObject.createObject();
+  protected static <T extends Enum<T>> Object createValueOfMap(T[] enumConstants) {
+    InternalJsMap<T> jsMap = InternalJsMapFactory.newJsMap();
     for (T value : enumConstants) {
-       put0(result, ":" + value.name(), value);
+      jsMap.set(value.name(), value);
     }
-    return result;
+    return jsMap;
   }
 
-  protected static <T extends Enum<T>> T valueOf(JavaScriptObject map, String name) {
+  @SuppressWarnings("unchecked")
+  protected static <T extends Enum<T>> T valueOf(Object map, String name) {
     checkNotNull(name);
-
-    T result = Enum.<T> get0(map, ":" + name);
+    InternalJsMap<T> jsMap = (InternalJsMap<T>) map;
+    T result = jsMap.get(name);
     checkCriticalArgument(result != null, "Enum constant undefined: %s", name);
     return result;
   }
 
-  private static native <T extends Enum<T>> T get0(JavaScriptObject map,
-      String name) /*-{
-    return map[name];
-  }-*/;
-
   private static native <T extends Enum<T>> T invokeValueOf(
       JavaScriptObject enumValueOfFunc, String name) /*-{
     return enumValueOfFunc(name);
-  }-*/;
-
-  private static native <T extends Enum<T>> void put0(JavaScriptObject map,
-      String name, T value) /*-{
-    map[name] = value;
   }-*/;
 
   private final String name;

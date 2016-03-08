@@ -21,6 +21,8 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 
 import javaemul.internal.ArrayHelper;
+import javaemul.internal.InternalJsMap;
+import javaemul.internal.InternalJsMapFactory;
 
 /**
  * A simple wrapper around JavaScriptObject to provide {@link java.util.Map}-like semantics for any

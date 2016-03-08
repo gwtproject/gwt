@@ -24,7 +24,7 @@ class StringHashCache {
   /**
    * The "old" cache; it will be dumped when front is full.
    */
-  private static Object back = createNativeObject();
+  private static InternalJsMap<Object> back = InternalJsMapFactory.newJsMap();
   /**
    * Tracks the number of entries in front.
    */
@@ -32,29 +32,25 @@ class StringHashCache {
   /**
    * The "new" cache; it will become back when it becomes full.
    */
-  private static Object front = createNativeObject();
+  private static InternalJsMap<Object> front = InternalJsMapFactory.newJsMap();
   /**
    * Pulled this number out of thin air.
    */
   private static final int MAX_CACHE = 256;
 
   public static int getHashCode(String str) {
-    // Accesses must to be prefixed with ':' to prevent conflict with built-in
-    // JavaScript properties.
-    String key = ":" + str;
-
     // Check the front store.
-    Object result = getProperty(front, key);
+    Object result = front.get(str);
     if (!JsUtils.isUndefined(result)) {
       return unsafeCastToInt(result);
     }
     // Check the back store.
-    result = getProperty(back, key);
+    result = back.get(str);
     int hashCode = JsUtils.isUndefined(result) ? compute(str) : unsafeCastToInt(result);
     // Increment can trigger the swap/flush; call after checking back but
     // before writing to front.
     increment();
-    JsUtils.setIntProperty(front, key, hashCode);
+    front.set(str, unsafeCastToObject(hashCode));
 
     return hashCode;
   }
@@ -89,21 +85,17 @@ class StringHashCache {
   private static void increment() {
     if (count == MAX_CACHE) {
       back = front;
-      front = createNativeObject();
+      front = InternalJsMapFactory.newJsMap();
       count = 0;
     }
     ++count;
   }
 
-  private static native Object getProperty(Object map, String key) /*-{
-    return map[key];
-  }-*/;
-
-  private static native Object createNativeObject() /*-{
-    return {};
-  }-*/;
-
   private static native int unsafeCastToInt(Object o) /*-{
     return o;
+  }-*/;
+
+  private static native Object unsafeCastToObject(int i) /*-{
+    return i;
   }-*/;
 }

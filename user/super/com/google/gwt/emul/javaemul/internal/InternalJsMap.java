@@ -13,24 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package java.util;
+package javaemul.internal;
 
-import javaemul.internal.JsUtils;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 // TODO(goktug): These classes should be interfaces with defender methods instead.
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-class InternalJsMap<V> {
+public class InternalJsMap<V> {
 
   @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-  static class Iterator<V> {
+  public static class Iterator<V> {
     public native IteratorEntry<V> next();
   }
 
   @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-  static class IteratorEntry<V> {
+  public static class IteratorEntry<V> {
     private Object[] value;
     public boolean done;
     @JsOverlay

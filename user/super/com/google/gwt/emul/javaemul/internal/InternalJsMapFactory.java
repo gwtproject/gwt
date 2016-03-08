@@ -13,14 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package java.util;
+package javaemul.internal;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * A factory to create JavaScript Map instances.
  */
-class InternalJsMapFactory {
+public class InternalJsMapFactory {
 
   private static final JavaScriptObject jsMapCtor = getJsMapConstructor();
 

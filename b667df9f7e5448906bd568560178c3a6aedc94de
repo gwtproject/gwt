@@ -16,6 +16,29 @@
       "revId": "b667df9f7e5448906bd568560178c3a6aedc94de",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d74c5916_fb3befb0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-03-09T17:37:35Z",
+      "side": 1,
+      "message": "@David Try changing this em dash (—) to a hyphen-minus (-).",
+      "range": {
+        "startLine": 15,
+        "startChar": 12,
+        "endLine": 15,
+        "endChar": 13
+      },
+      "revId": "b667df9f7e5448906bd568560178c3a6aedc94de",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

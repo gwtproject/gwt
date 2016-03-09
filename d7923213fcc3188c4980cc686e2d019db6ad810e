@@ -34,6 +34,24 @@
       "revId": "d7923213fcc3188c4980cc686e2d019db6ad810e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "976e6179_0970e916",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2016-03-09T17:35:58Z",
+      "side": 1,
+      "message": "You are right, of course. After working with Buck during recent years, I always rely on flattening all transitive dependencies on my own.",
+      "parentUuid": "d77a9932_cb25f548",
+      "revId": "d7923213fcc3188c4980cc686e2d019db6ad810e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

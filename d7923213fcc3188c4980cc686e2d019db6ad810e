@@ -16,6 +16,24 @@
       "revId": "d7923213fcc3188c4980cc686e2d019db6ad810e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d77a9932_cb25f548",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-09T17:33:18Z",
+      "side": 1,
+      "message": "\u003e websocket-server and websocket-api are not needed?\n\nActually not. Server-side websocket in Jetty is actually enabled through a ServletContainerInitializer, so if we don\u0027t include those, Jetty simply won\u0027t support WebSockets, and including the dependencies in the classpath should \"automagically\" add WebSocket support.\n\n\u003e I had much more deoendencies in my attempt to unbounde Jetty\n\nYeah, you basically flattened all dependencies, whereas I\u0027m relying on transitive dependencies AND I only picked the few dependencies that DevMode and CodeServer actually need. I basically looked at the dependencies that are bundled within the jetty-all JAR [1] and trimmed them down.\n\nI verified DevMode was still working by deploying to my local repo (maven/push-gwt.sh) and running the DynatableRf sample.\n\n\n* [1] https://search.maven.org/#artifactdetails%7Corg.eclipse.jetty.aggregate%7Cjetty-all%7C9.2.14.v20151106%7Cjar",
+      "parentUuid": "2222d18a_65a46614",
+      "revId": "d7923213fcc3188c4980cc686e2d019db6ad810e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "375f75cd_46c4927b",
+        "filename": "samples/validation/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-10T13:56:30Z",
+      "side": 0,
+      "message": "Maven will default to 1.5 if these are not set.",
+      "revId": "2f021dc2a821782b76509f74974b1d3ad2f12fa3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77656d95_481a5f01",
+        "filename": "user/src/com/google/gwt/user/tools/templates/maven/pom.xmlsrc",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-10T13:56:30Z",
+      "side": 0,
+      "message": "Same here",
+      "revId": "2f021dc2a821782b76509f74974b1d3ad2f12fa3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

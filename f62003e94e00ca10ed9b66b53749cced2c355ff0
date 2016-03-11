@@ -16,6 +16,75 @@
       "revId": "f62003e94e00ca10ed9b66b53749cced2c355ff0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7ab1dee_739c0fe0",
+        "filename": "user/src/jsinterop/annotations/JsConstructor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-03-11T23:47:04Z",
+      "side": 1,
+      "message": "Maybe\n\nNote that there can only be one JsConstructor on a type; all other constructors must delegate to it.",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 18
+      },
+      "revId": "f62003e94e00ca10ed9b66b53749cced2c355ff0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7ab1dee_537c7346",
+        "filename": "user/src/jsinterop/annotations/JsFunction.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-03-11T23:47:04Z",
+      "side": 1,
+      "message": "and the interface method",
+      "range": {
+        "startLine": 33,
+        "startChar": 91,
+        "endLine": 33,
+        "endChar": 94
+      },
+      "revId": "f62003e94e00ca10ed9b66b53749cced2c355ff0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7ab1dee_b3d79768",
+        "filename": "user/src/jsinterop/annotations/JsMethod.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-03-11T23:47:04Z",
+      "side": 1,
+      "message": "maybe \n\npreserving its name.",
+      "range": {
+        "startLine": 25,
+        "startChar": 85,
+        "endLine": 26,
+        "endChar": 27
+      },
+      "revId": "f62003e94e00ca10ed9b66b53749cced2c355ff0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

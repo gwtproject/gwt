@@ -33,6 +33,24 @@
       "revId": "bcd7a439806c841b023123eff87247e0c399b4b9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b77c4558_abdc79ff",
+        "filename": "user/src/jsinterop/annotations/JsMethod.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 9330
+      },
+      "writtenOn": "2016-03-15T21:53:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b77c4558_e5b870a7",
+      "revId": "bcd7a439806c841b023123eff87247e0c399b4b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

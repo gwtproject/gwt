@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 
 /**
  * JsProperty marks a field in a type as a method that will be directly translated into a JavaScript
- * property without any obfuscation to its name.
+ * preserving its name.
  * <p>
  * If it is applied to a method, it will be treated as a property accessor. As a result, instead of
  * translating method calls to JsProperty methods as method calls in JS, they will be translated as

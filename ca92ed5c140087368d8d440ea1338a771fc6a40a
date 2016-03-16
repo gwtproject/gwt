@@ -16,6 +16,29 @@
       "revId": "ca92ed5c140087368d8d440ea1338a771fc6a40a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b77c4558_f10592f2",
+        "filename": "user/src/jsinterop/annotations/JsProperty.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-03-16T00:47:09Z",
+      "side": 1,
+      "message": "I missed this one. preserving its name.",
+      "range": {
+        "startLine": 26,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 39
+      },
+      "revId": "ca92ed5c140087368d8d440ea1338a771fc6a40a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

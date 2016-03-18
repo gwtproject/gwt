@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c1bdab9_c01ac2fd",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T16:00:31Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.function.BiConsumer\u0027 import.",
+      "revId": "934832b5a5b2afba4656243b75408852a5540232",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c1bdab9_0015facc",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T16:00:31Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cR\u003e tag.",
+      "revId": "934832b5a5b2afba4656243b75408852a5540232",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c1bdab9_a017c6d5",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T16:00:31Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cA\u003e tag.",
+      "revId": "934832b5a5b2afba4656243b75408852a5540232",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c1bdab9_e011bee0",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T16:00:31Z",
+      "side": 1,
+      "message": "[error] Type Javadoc comment is missing an @param \u003cT\u003e tag.",
+      "revId": "934832b5a5b2afba4656243b75408852a5540232",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c1bdab9_40c8929b",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T16:00:31Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.List\u0027 import.",
+      "revId": "934832b5a5b2afba4656243b75408852a5540232",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c1bdab9_20cd96ab",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T16:00:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "934832b5a5b2afba4656243b75408852a5540232",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c1bdab9_80d28a47",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T16:00:31Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "934832b5a5b2afba4656243b75408852a5540232",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c1bdab9_60d78e39",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T16:00:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "934832b5a5b2afba4656243b75408852a5540232",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c1bdab9_c0dbe260",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T16:00:31Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "934832b5a5b2afba4656243b75408852a5540232",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

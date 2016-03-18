@@ -1,0 +1,103 @@
+package com.google.gwt.emultest.java8.util;
+
+import com.google.gwt.emultest.java.util.EmulTestBase;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+/**
+ * Java 8 methods to test in java.util.Comparator
+ */
+public class ComparatorTest extends EmulTestBase{
+
+  public void testThenComparing() {
+    Supplier<String[]> strings = () -> new String[] {"1,b", "1,a", "2,a"};
+    // expected sort results for 1st and 2nd char, each (f)orward or (r)everse
+    String[] f1f2 = {"1,a", "1,b", "2,a"};
+    String[] f1r2 = {"1,b", "1,a", "2,a"};
+    String[] f2f1 = {"1,a", "2,a" ,"1,b"};
+    String[] r2r1 = {"1,b", "2,a", "1,a"};
+
+    // keyextractor
+    assertSortedEquals(f1f2, strings.get(),
+        Comparator.<String, String>comparing(s -> s.split(",")[0])
+            .thenComparing(s -> s.split(",")[1])
+    );
+    // keyextractor, keycomparator
+    assertSortedEquals(f1r2, strings.get(),
+        Comparator.<String, String>comparing(s -> s.split(",")[0])
+            .thenComparing(
+                s -> s.split(",")[1],
+                Comparator.<String>reverseOrder()
+            )
+    );
+
+    // int key extractor
+    assertSortedEquals(f2f1, strings.get(),
+        Comparator.<String, String>comparing(s -> s.split(",")[1])
+            .thenComparingInt(
+                s -> Integer.parseInt(s.split(",")[0])
+            )
+    );
+    // long key extractor
+    assertSortedEquals(f2f1, strings.get(),
+        Comparator.<String, String>comparing(s -> s.split(",")[1])
+            .thenComparingLong(
+                s -> Long.parseLong(s.split(",")[0])
+            )
+    );
+    // double key extractor
+    assertSortedEquals(f2f1, strings.get(),
+        Comparator.<String, String>comparing(s -> s.split(",")[1])
+            .thenComparingDouble(
+                s -> Double.parseDouble(s.split(",")[0])
+            )
+    );
+  }
+
+  public void testComparing() {
+    Supplier<String[]> strings = () -> new String[] {"1b3", "2a1", "3c2"};
+    String[] first = {"1b3", "2a1", "3c2"};
+    String[] second = {"2a1", "1b3", "3c2"};
+    String[] secondReversed = {"3c2", "1b3", "2a1"};
+    String[] third = {"2a1", "3c2", "1b3"};
+
+    // keyextractor
+    assertSortedEquals(first, strings.get(), Comparator.comparing(Function.identity()));
+    assertSortedEquals(second, strings.get(), Comparator.comparing(a -> a.substring(1)));
+    assertSortedEquals(third, strings.get(), Comparator.comparing(a -> a.substring(2)));
+
+    // keyextractor, keycomparator
+    assertSortedEquals(secondReversed, strings.get(), Comparator.comparing(a -> a.substring(1), Comparator.<String>reverseOrder()));
+
+    // double key extractor
+    assertSortedEquals(third, strings.get(), Comparator.comparingDouble(a -> Double.parseDouble(a.substring(2))));
+    // int key extractor
+    assertSortedEquals(third, strings.get(), Comparator.comparingInt(a -> Integer.parseInt(a.substring(2))));
+    // long key extractor
+    assertSortedEquals(third, strings.get(), Comparator.comparingLong(a -> Long.parseLong(a.substring(2))));
+  }
+
+  private void assertSortedEquals(String[] expected, String[] presort, Comparator<String> comparator) {
+    Arrays.sort(presort, comparator);
+    assertEquals(expected, presort);
+  }
+
+  public void testNullsFirst() {
+    assertSortedEquals(
+        new String[] {null, null, "a", "b", "c"},
+        new String[] {"a", null, "c", null, "b"},
+        Comparator.nullsFirst(Comparator.naturalOrder())
+    );
+  }
+
+  public void testNullsLast() {
+    assertSortedEquals(
+        new String[] {"a", "b", "c", null, null},
+        new String[] {"a", null, "c", null, "b"},
+        Comparator.nullsLast(Comparator.naturalOrder())
+    );
+  }
+}

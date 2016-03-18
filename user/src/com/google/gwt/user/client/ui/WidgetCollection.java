@@ -148,18 +148,14 @@ public class WidgetCollection implements Iterable<Widget> {
     // Realloc array if necessary (doubling).
     if (size == array.length) {
       Widget[] newArray = new Widget[array.length * 2];
-      for (int i = 0; i < array.length; ++i) {
-        newArray[i] = array[i];
-      }
+      System.arraycopy(array, 0, newArray, 0, array.length);
       array = newArray;
     }
 
     ++size;
 
     // Move all widgets after 'beforeIndex' back a slot.
-    for (int i = size - 1; i > beforeIndex; --i) {
-      array[i] = array[i - 1];
-    }
+    System.arraycopy(array, beforeIndex, array, beforeIndex + 1, size - 1 - beforeIndex);
 
     array[beforeIndex] = w;
   }
@@ -186,9 +182,7 @@ public class WidgetCollection implements Iterable<Widget> {
     }
 
     --size;
-    for (int i = index; i < size; ++i) {
-      array[i] = array[i + 1];
-    }
+    System.arraycopy(array, index + 1, array, index, size - index);
 
     array[size] = null;
   }

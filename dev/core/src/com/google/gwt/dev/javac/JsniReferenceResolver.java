@@ -576,9 +576,7 @@ public class JsniReferenceResolver {
         formatParameters[6] = jsniRef.getResolvedMemberSignature();
       }
 
-      for (int i = 0; i < extraPars.length; i++) {
-        formatParameters[i + 7] = extraPars[i];
-      }
+      System.arraycopy(extraPars, 0, formatParameters, 7, extraPars.length);
 
       return String.format(msg, formatParameters);
     }

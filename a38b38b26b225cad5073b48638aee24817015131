@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c1bdab9_556a16ee",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DoubleSummaryStatisticsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T01:29:52Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "a38b38b26b225cad5073b48638aee24817015131",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c1bdab9_b55eea48",
+        "filename": "user/test/com/google/gwt/emultest/java/util/IntSummaryStatisticsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T01:29:52Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "a38b38b26b225cad5073b48638aee24817015131",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c1bdab9_955bee58",
+        "filename": "user/test/com/google/gwt/emultest/java/util/LongSummaryStatisticsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T01:29:52Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "a38b38b26b225cad5073b48638aee24817015131",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

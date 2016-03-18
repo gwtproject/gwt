@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c1bdab9_2d662efd",
+        "filename": "user/super/com/google/gwt/emul/java/util/Comparators.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-18T18:35:57Z",
+      "side": 1,
+      "message": "[error] Redundant import from the same package - java.util.Comparator.",
+      "revId": "af5995129f6393a4a97d2b5f23c30d918d758e51",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

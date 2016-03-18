@@ -1006,8 +1006,6 @@ class Division {
     res[modulusLen << 1] = (int) outerCarry;
 
     /* res / r */
-    for (int j = 0; j < modulusLen + 1; j++) {
-      res[j] = res[j + modulusLen];
-    }
+    System.arraycopy(res, modulusLen, res, 0, modulusLen + 1);
   }
 }

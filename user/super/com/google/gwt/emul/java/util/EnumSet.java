@@ -240,9 +240,7 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
     // Inclusive
     int start = from.ordinal();
     int end = to.ordinal() + 1;
-    for (int i = start; i < end; ++i) {
-      set[i] = all[i];
-    }
+    System.arraycopy(all, start, set, start, end - start);
     return new EnumSetImpl<E>(all, set, end - start);
   }
 

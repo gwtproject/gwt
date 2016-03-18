@@ -701,9 +701,7 @@ public class SerializabilityUtil {
       Type[] localTypes = expectedParameterTypes.clone();
       if (findExpectedInstanceClassFromSuper(instanceClass.getGenericSuperclass(), expectedType,
           resolvedTypes, expectedInstanceClasses, localTypes)) {
-        for (int i = 0; i < expectedParameterTypes.length; ++i) {
-          expectedParameterTypes[i] = localTypes[i];
-        }
+        System.arraycopy(localTypes, 0, expectedParameterTypes, 0, expectedParameterTypes.length);
         return true;
       }
     }
@@ -713,9 +711,7 @@ public class SerializabilityUtil {
       Type[] localTypes = expectedParameterTypes.clone();
       if (findExpectedInstanceClassFromSuper(interfaceType, expectedType, resolvedTypes,
           expectedInstanceClasses, localTypes)) {
-        for (int i = 0; i < expectedParameterTypes.length; ++i) {
-          expectedParameterTypes[i] = localTypes[i];
-        }
+        System.arraycopy(localTypes, 0, expectedParameterTypes, 0, expectedParameterTypes.length);
         return true;
       }
     }

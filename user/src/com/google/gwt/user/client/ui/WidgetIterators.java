@@ -27,9 +27,7 @@ class WidgetIterators {
 
   private static Widget[] copyWidgetArray(final Widget[] widgets) {
     final Widget[] clone = new Widget[widgets.length];
-    for (int i = 0; i < widgets.length; i++) {
-      clone[i] = widgets[i];
-    }
+    System.arraycopy(widgets, 0, clone, 0, widgets.length);
     return clone;
   }
 

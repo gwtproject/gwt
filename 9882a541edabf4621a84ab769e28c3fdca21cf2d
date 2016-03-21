@@ -52,6 +52,24 @@
       "revId": "9882a541edabf4621a84ab769e28c3fdca21cf2d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dce47ef9_fb116fe0",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/DoubleSummaryStatisticsTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-03-21T10:41:41Z",
+      "side": 1,
+      "message": "Well then Kahan sum will be used as its more correct and has not yet become infinity because of compensation.",
+      "parentUuid": "1cdb763a_1d837332",
+      "revId": "9882a541edabf4621a84ab769e28c3fdca21cf2d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

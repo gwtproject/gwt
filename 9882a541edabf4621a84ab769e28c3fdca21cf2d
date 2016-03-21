@@ -16,6 +16,24 @@
       "revId": "9882a541edabf4621a84ab769e28c3fdca21cf2d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dce47ef9_1b27fb52",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/DoubleSummaryStatisticsTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-03-21T09:27:36Z",
+      "side": 1,
+      "message": "Good catch and actually the tests fail because of kahan summation. As soon as you call stats.accept(someInfinity) the Kahan sumError becomes NaN and thus the sum becomes NaN. Wondering if we should add a second sum without Kahan to get the correct Infinity value in case the sum is NaN or if we should test for Infinity in the accept() method and special case it somehow.",
+      "parentUuid": "fce942d0_3c3831cc",
+      "revId": "9882a541edabf4621a84ab769e28c3fdca21cf2d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -34,6 +34,24 @@
       "revId": "9882a541edabf4621a84ab769e28c3fdca21cf2d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cdb763a_1d837332",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/DoubleSummaryStatisticsTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-21T09:43:01Z",
+      "side": 1,
+      "message": "the first option sounds simpler to me.\n\nI wonder what is the case when kahan sum is not a NaN but non-Kahan sum is Infinity?",
+      "parentUuid": "dce47ef9_1b27fb52",
+      "revId": "9882a541edabf4621a84ab769e28c3fdca21cf2d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cd96e3d_c8ece3b1",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-22T22:11:41Z",
+      "side": 1,
+      "message": "Unused imports?",
+      "revId": "32a35cf835615a4b786ac9ddc0a960a16f60cf18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ce03ae0_04a95a54",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerHost.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-22T22:11:41Z",
+      "side": 1,
+      "message": "This is extending ArgHandlerString, why is it not implementing its logic in setString and introducing an abstract setHost?\n\nHow about making it a non-abstract ArgHandlerBindAddress with corresponding OptionBindAddress?",
+      "revId": "32a35cf835615a4b786ac9ddc0a960a16f60cf18",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

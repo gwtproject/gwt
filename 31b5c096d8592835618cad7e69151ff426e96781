@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c1bdab9_430a4e44",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/DoubleSummaryStatisticsTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-22T02:02:12Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "31b5c096d8592835618cad7e69151ff426e96781",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bccc2a7e_28bb8f3b",
+        "filename": "user/test/com/google/gwt/emultest/java/math/BigIntegerConvertTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-03-22T20:21:22Z",
+      "side": 1,
+      "message": "nit: expected",
+      "range": {
+        "startLine": 60,
+        "startChar": 23,
+        "endLine": 60,
+        "endChar": 30
+      },
+      "revId": "616c75382655ad0b5bab4b087e0911a076c14a2f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

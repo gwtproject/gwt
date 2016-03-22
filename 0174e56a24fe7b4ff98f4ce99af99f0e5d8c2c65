@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cd96e3d_85264651",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-22T14:04:53Z",
+      "side": 1,
+      "message": "maybe move it inside of CollectorImpl constructor? or add a second constructor with varargs characteristics.\nOr you could create static helper method to convert array to set.",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ccf6672_4a6e0795",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-22T14:04:53Z",
+      "side": 1,
+      "message": "is this method used? cant find the usage",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bccc2a7e_48dc53e5",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-22T14:04:53Z",
+      "side": 1,
+      "message": "new HashMap\u003c\u003e(m1)",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ce03ae0_6121303a",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-22T14:04:53Z",
+      "side": 1,
+      "message": "Can we use String.join or StringJoiner instead?",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cd96e3d_45cd1eaa",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-22T14:04:53Z",
+      "side": 1,
+      "message": "Why do you want to use array with one element here?\nCan we use Function.identity or something like that instead?",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cd96e3d_65d2224b",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-22T14:04:53Z",
+      "side": 1,
+      "message": "maybe you could use combineAndThen with summarizingDouble to reuse the code here?",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bccc2a7e_28d70fc5",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-22T14:04:53Z",
+      "side": 1,
+      "message": "please add comments before described line",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ccf6672_2a69c38b",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-22T14:04:53Z",
+      "side": 1,
+      "message": "please add line breaks between methods",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

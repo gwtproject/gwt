@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc4c7e16_7bc83f1f",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/Options.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-23T17:59:10Z",
+      "side": 1,
+      "message": "Do we really need the host name actually? Couldn\u0027t we align with how DevMode works (keeps original arg value and its getHostAddress()) and change how bindAddress and preferredHost are used in CodeServer? To me, it looks like the problem really is there, DevMode using getHostAddress when CodeServer uses getHostName. Extracting the OptionBindAddress and ArgHandlerBindAddress from DevModeBase to top-level classes in com.google.gwt.dev.util.arg and reusing it here would solve the problem by ensuring DevMode and CodeServer use the same logic.",
+      "range": {
+        "startLine": 509,
+        "startChar": 6,
+        "endLine": 509,
+        "endChar": 19
+      },
+      "revId": "d353a334ed2f097c1db9214249fdf7474f4042d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ccf6672_d029eacf",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeBase.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-23T17:59:10Z",
+      "side": 1,
+      "message": "ArgHandlerBadAddress",
+      "revId": "d353a334ed2f097c1db9214249fdf7474f4042d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dce47ef9_a1741aa0",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeBase.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-23T17:59:10Z",
+      "side": 1,
+      "message": "Why hasn\u0027t this simply be extracted to a top-level class along with OptionBindAddress and reused as-is? (possibly with the addition of the intermediate \"resolved address\")",
+      "revId": "d353a334ed2f097c1db9214249fdf7474f4042d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc4c7e16_dbd633c7",
+        "filename": "dev/core/src/com/google/gwt/dev/DevModeBase.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-23T17:59:10Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 615,
+        "startChar": 36,
+        "endLine": 615,
+        "endChar": 41
+      },
+      "revId": "d353a334ed2f097c1db9214249fdf7474f4042d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcb50adc_6e36779b",
+        "filename": "dev/core/src/com/google/gwt/util/tools/ArgHandlerBindAddress.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-23T17:59:10Z",
+      "side": 1,
+      "message": "Should probably be in com.google.gwt.dev.util.arg then.",
+      "revId": "d353a334ed2f097c1db9214249fdf7474f4042d7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

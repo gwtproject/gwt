@@ -104,7 +104,7 @@ public final class Character implements Comparable<Character>, Serializable {
    */
   private static class BoxedValues {
     // Box values according to JLS - from \u0000 to \u007f
-    private static Character[] boxedValues = new Character[128];
+    private static final Character[] boxedValues = new Character[128];
 
     @HasNoSideEffects
     private static Character get(char c) {

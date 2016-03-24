@@ -17,6 +17,7 @@ package java.util.logging;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  *  An emulation of the java.util.logging.Logger class. See
@@ -87,11 +88,25 @@ public class Logger {
     log(Level.CONFIG, msg);
   }
 
+  public void config(Supplier<String> msgSupplier) {
+    if (LOGGING_FALSE || LOGGING_SEVERE || LOGGING_WARNING) {
+      return;
+    }
+    log(Level.CONFIG, msgSupplier);
+  }
+
   public void fine(String msg) {
     if (LOGGING_FALSE || LOGGING_SEVERE || LOGGING_WARNING) {
       return;
     }
     log(Level.FINE, msg);
+  }
+
+  public void fine(Supplier<String> msgSupplier) {
+    if (LOGGING_FALSE || LOGGING_SEVERE || LOGGING_WARNING) {
+      return;
+    }
+    log(Level.FINE, msgSupplier);
   }
 
   public void finer(String msg) {
@@ -101,11 +116,25 @@ public class Logger {
     log(Level.FINER, msg);
   }
 
+  public void finer(Supplier<String> msgSupplier) {
+    if (LOGGING_FALSE || LOGGING_SEVERE || LOGGING_WARNING) {
+      return;
+    }
+    log(Level.FINER, msgSupplier);
+  }
+
   public void finest(String msg) {
     if (LOGGING_FALSE || LOGGING_SEVERE || LOGGING_WARNING) {
       return;
     }
     log(Level.FINEST, msg);
+  }
+
+  public void finest(Supplier<String> msgSupplier) {
+    if (LOGGING_FALSE || LOGGING_SEVERE || LOGGING_WARNING) {
+      return;
+    }
+    log(Level.FINEST, msgSupplier);
   }
 
   public void info(String msg) {
@@ -115,6 +144,13 @@ public class Logger {
     log(Level.INFO, msg);
   }
 
+  public void info(Supplier<String> msgSupplier) {
+    if (LOGGING_FALSE || LOGGING_SEVERE || LOGGING_WARNING) {
+      return;
+    }
+    log(Level.INFO, msgSupplier);
+  }
+
   public void warning(String msg) {
     if (LOGGING_FALSE || LOGGING_SEVERE) {
       return;
@@ -122,11 +158,25 @@ public class Logger {
     log(Level.WARNING, msg);
   }
 
+  public void warning(Supplier<String> msgSupplier) {
+    if (LOGGING_FALSE || LOGGING_SEVERE) {
+      return;
+    }
+    log(Level.WARNING, msgSupplier);
+  }
+
   public void severe(String msg) {
     if (LOGGING_FALSE) {
       return;
     }
     log(Level.SEVERE, msg);
+  }
+
+  public void severe(Supplier<String> msgSupplier) {
+    if (LOGGING_FALSE) {
+      return;
+    }
+    log(Level.SEVERE, msgSupplier);
   }
 
   public Handler[] getHandlers() {
@@ -162,12 +212,16 @@ public class Logger {
     log(level, msg, null);
   }
 
+  public void log(Level level, Supplier<String> msgSupplier) {
+    log(level, null, msgSupplier);
+  }
+
   public void log(Level level, String msg, Throwable thrown) {
     if (LOGGING_FALSE) {
       return;
     }
     if (LOGGING_SEVERE) {
-      if (level.intValue() >= 1000) {
+      if (level.intValue() >= Level.SEVERE.intValue()) {
         actuallyLog(level, msg, thrown);
       }
     } else if (LOGGING_WARNING) {
@@ -175,7 +229,28 @@ public class Logger {
         actuallyLog(level, msg, thrown);
       }
     } else {
-      actuallyLog(level, msg, thrown);
+      if (isLoggable(level)) {
+        actuallyLog(level, msg, thrown);
+      }
+    }
+  }
+
+  public void log(Level level, Throwable thrown, Supplier<String> msgSupplier) {
+    if (LOGGING_FALSE) {
+      return;
+    }
+    if (LOGGING_SEVERE) {
+      if (level.intValue() >= Level.SEVERE.intValue()) {
+        actuallyLog(level, msgSupplier.get(), thrown);
+      }
+    } else if (LOGGING_WARNING) {
+      if (level.intValue() >= Level.WARNING.intValue()) {
+        actuallyLog(level, msgSupplier.get(), thrown);
+      }
+    } else {
+      if (isLoggable(level)) {
+        actuallyLog(level, msgSupplier.get(), thrown);
+      }
     }
   }
 
@@ -184,7 +259,7 @@ public class Logger {
       return;
     }
     if (LOGGING_SEVERE) {
-      if (record.getLevel().intValue() >= 1000) {
+      if (record.getLevel().intValue() >= Level.SEVERE.intValue()) {
         actuallyLog(record);
       }
     } else if (LOGGING_WARNING) {
@@ -192,7 +267,9 @@ public class Logger {
         actuallyLog(record);
       }
     } else {
-      actuallyLog(record);
+      if (isLoggable(record.getLevel())) {
+        actuallyLog(record);
+      }
     }
   }
 
@@ -243,26 +320,22 @@ public class Logger {
   }
 
   private void actuallyLog(Level level, String msg, Throwable thrown) {
-    if (isLoggable(level)) {
-      LogRecord record = new LogRecord(level, msg);
-      record.setThrown(thrown);
-      record.setLoggerName(getName());
-      actuallyLog(record);
-    }
+    LogRecord record = new LogRecord(level, msg);
+    record.setThrown(thrown);
+    record.setLoggerName(getName());
+    actuallyLog(record);
   }
 
   private void actuallyLog(LogRecord record) {
-    if (isLoggable(record.getLevel())) {
-      for (Handler handler : getHandlers()) {
+    for (Handler handler : getHandlers()) {
+      handler.publish(record);
+    }
+    Logger logger = getUseParentHandlers() ? getParent() : null;
+    while (logger != null) {
+      for (Handler handler : logger.getHandlers()) {
         handler.publish(record);
       }
-      Logger logger = getUseParentHandlers() ? getParent() : null;
-      while (logger != null) {
-        for (Handler handler : logger.getHandlers()) {
-          handler.publish(record);
-        }
-        logger = logger.getUseParentHandlers() ? logger.getParent() : null;
-      }
+      logger = logger.getUseParentHandlers() ? logger.getParent() : null;
     }
   }
 

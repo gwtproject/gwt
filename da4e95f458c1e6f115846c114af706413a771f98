@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c1bdab9_9363ea86",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerBindAddress.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-24T12:59:23Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.util.tools.ArgHandlerString\u0027 import.",
+      "revId": "da4e95f458c1e6f115846c114af706413a771f98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

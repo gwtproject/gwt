@@ -171,6 +171,55 @@ public class MathTest extends GWTTestCase {
     assertEquals(3.0, v, 1e-15);
   }
 
+  public void testRound() {
+    long v = Math.round(0.5);
+    assertEquals(1L, v);
+  }
+
+  public void testRint() {
+    final double twoTo52 = 1L << 52;
+    // format: value to be round and expected value
+    final double[] testValues = {
+        0, 0,
+        0.5, 0,
+        0.75, 1,
+        1.5, 2,
+        1.75, 2,
+        -0, -0,
+        -0.5, -0,
+        -1.25, -1,
+        -1.5, -2,
+        -2.5, -2,
+        twoTo52, twoTo52,
+        twoTo52 - 0.25, twoTo52,
+        twoTo52 + 0.25, twoTo52,
+        twoTo52 + 0.5, twoTo52,
+        twoTo52 - 0.5, twoTo52,
+        twoTo52 + 0.75, twoTo52 + 1,
+        twoTo52 - 0.75, twoTo52 - 1,
+        -twoTo52, -twoTo52,
+        -twoTo52 + 0.25, -twoTo52,
+        -twoTo52 - 0.25, -twoTo52,
+        -twoTo52 + 0.5, -twoTo52,
+        -twoTo52 - 0.5, -twoTo52,
+        -twoTo52 + 0.75, -twoTo52 + 1,
+        -twoTo52 - 0.75, -twoTo52 - 1,
+        Double.MIN_VALUE, 0,
+        Double.MAX_VALUE, Double.MAX_VALUE,
+        -Double.MAX_VALUE, -Double.MAX_VALUE,
+        Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY,
+        Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY,
+        Double.NaN, Double.NaN,
+    };
+    for (int i = 0; i < testValues.length;) {
+      double v = testValues[i++];
+      double expected = testValues[i++];
+      double actual = Math.rint(v);
+      assertEquals("value: " + v + ", expected: " + expected + ", actual: " + actual,
+          expected, actual, 0);
+    }
+  }
+
   public void testSin() {
     double v = Math.sin(0.0);
     assertEquals(0.0, v, 1e-7);

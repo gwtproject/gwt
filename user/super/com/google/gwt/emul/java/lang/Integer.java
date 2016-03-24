@@ -15,6 +15,11 @@
  */
 package java.lang;
 
+import javaemul.internal.JsUtils;
+
+import static javaemul.internal.Coercions.ensureInt;
+import static javaemul.internal.Coercions.toUnsignedInt;
+
 /**
  * Wraps a primitive <code>int</code> as an object.
  */
@@ -31,7 +36,7 @@ public final class Integer extends Number implements Comparable<Integer> {
    */
   private static class BoxedValues {
     // Box values according to JLS - between -128 and 127
-    private static Integer[] boxedValues = new Integer[256];
+    private static final Integer[] boxedValues = new Integer[256];
   }
 
   /**
@@ -68,8 +73,16 @@ public final class Integer extends Number implements Comparable<Integer> {
     }
   }
 
+  public static int compareUnsigned(int a, int b) {
+    return compare(a ^ MIN_VALUE, b ^ MIN_VALUE);
+  }
+
   public static Integer decode(String s) throws NumberFormatException {
     return Integer.valueOf(__decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
+  }
+
+  public static int divideUnsigned(int dividend, int divisor) {
+    return ensureInt(toUnsignedInt(dividend) / toUnsignedInt(divisor));
   }
 
   public static int hashCode(int i) {
@@ -157,6 +170,37 @@ public final class Integer extends Number implements Comparable<Integer> {
     return __parseAndValidateInt(s, radix, MIN_VALUE, MAX_VALUE);
   }
 
+  public static int parseUnsignedInt(String s) throws NumberFormatException {
+    return parseUnsignedInt(s, 10);
+  }
+
+  public static int parseUnsignedInt(String s, int radix) throws NumberFormatException {
+    if (s == null) {
+      throw NumberFormatException.forNullInputString();
+    }
+
+    int len = s.length();
+    if (len == 0 || s.charAt(0) == '-') {
+      throw NumberFormatException.forInputString(s);
+    }
+
+    // Integer.MAX_VALUE in Character.MAX_RADIX is 6 digits
+    // Integer.MAX_VALUE in base 10 is 10 digits
+    if (len <= 5 || (radix == 10 && len <= 9)) {
+      return parseInt(s, radix);
+    }
+
+    long value = Long.parseLong(s, radix);
+    if (!Long.fitsInUint(value)) {
+      throw NumberFormatException.forInputString(s);
+    }
+    return (int) value;
+  }
+
+  public static int remainderUnsigned(int dividend, int divisor) {
+    return ensureInt(toUnsignedInt(dividend) % toUnsignedInt(divisor));
+  }
+
   public static int reverse(int i) {
     int[] nibbles = ReverseNibbles.reverseNibbles;
     return (nibbles[i >>> 28]) | (nibbles[(i >> 24) & 0xf] << 4)
@@ -206,15 +250,15 @@ public final class Integer extends Number implements Comparable<Integer> {
   }
 
   public static String toBinaryString(int value) {
-    return toUnsignedRadixString(value, 2);
+    return toUnsignedString0(value, 2);
   }
 
   public static String toHexString(int value) {
-    return toUnsignedRadixString(value, 16);
+    return toUnsignedString0(value, 16);
   }
 
   public static String toOctalString(int value) {
-    return toUnsignedRadixString(value, 8);
+    return toUnsignedString0(value, 8);
   }
 
   public static String toString(int value) {
@@ -225,7 +269,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     if (radix == 10 || radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
       return String.valueOf(value);
     }
-    return toRadixString(value, radix);
+    return JsUtils.toString(value, radix);
   }
 
   public static Integer valueOf(int i) {
@@ -240,23 +284,32 @@ public final class Integer extends Number implements Comparable<Integer> {
     return new Integer(i);
   }
 
+  public static long toUnsignedLong(int x) {
+    return x & 0xffff_ffffL;
+  }
+
+  public static String toUnsignedString(int x) {
+    return toUnsignedString(x, 10);
+  }
+
+  public static String toUnsignedString(int x, int radix) {
+    if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
+      radix = 10;
+    }
+    return toUnsignedString0(x, radix);
+  }
+
   public static Integer valueOf(String s) throws NumberFormatException {
     return valueOf(s, 10);
   }
 
-  public static Integer valueOf(String s, int radix)
-      throws NumberFormatException {
-    return Integer.valueOf(Integer.parseInt(s, radix));
+  public static Integer valueOf(String s, int radix) throws NumberFormatException {
+    return valueOf(parseInt(s, radix));
   }
 
-  private static native String toRadixString(int value, int radix) /*-{
-    return value.toString(radix);
-  }-*/;
-
-  private static native String toUnsignedRadixString(int value, int radix) /*-{
-    // ">>> 0" converts the value to unsigned number.
-    return (value >>> 0).toString(radix);
-  }-*/;
+  private static String toUnsignedString0(int value, int radix) {
+    return JsUtils.toString(toUnsignedInt(value), radix);
+  }
 
   private final transient int value;
 

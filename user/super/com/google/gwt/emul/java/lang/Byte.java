@@ -63,6 +63,14 @@ public final class Byte extends Number implements Comparable<Byte> {
     return String.valueOf(b);
   }
 
+  public static int toUnsignedInt(byte b) {
+    return b & 0xff;
+  }
+
+  public static long toUnsignedLong(byte b) {
+    return toUnsignedInt(b);
+  }
+
   public static Byte valueOf(byte b) {
     int rebase = b + 128;
     Byte result = BoxedValues.boxedValues[rebase];

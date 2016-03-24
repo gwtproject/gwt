@@ -65,6 +65,14 @@ public final class Short extends Number implements Comparable<Short> {
     return String.valueOf(b);
   }
 
+  public static int toUnsignedInt(short s) {
+    return s & 0xffff;
+  }
+
+  public static long toUnsignedLong(short s) {
+    return toUnsignedInt(s);
+  }
+
   public static Short valueOf(short s) {
     if (s > -129 && s < 128) {
       int rebase = s + 128;

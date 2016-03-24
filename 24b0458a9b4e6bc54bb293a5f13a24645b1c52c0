@@ -22,6 +22,30 @@
       "revId": "24b0458a9b4e6bc54bb293a5f13a24645b1c52c0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c5a96dd_e5e016ba",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerBindAddress.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 9851
+      },
+      "writtenOn": "2016-03-24T15:30:02Z",
+      "side": 1,
+      "message": "\u003e This is a change in behavior; can you tell more about why you did\n \u003e it?\n\nThe original code had a comment in it that it wouldn\u0027t necessarily pick the best IP address on multi-homed machines.  This is my attempt to make a better choice by resolving to the canonical name and then looking that up - effectively punting the choice to the local DNS server (if any).  It\u0027s not a deal breaker for this patch if you want me to put it back.",
+      "parentUuid": "3ce03ae0_470a8444",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 64
+      },
+      "revId": "24b0458a9b4e6bc54bb293a5f13a24645b1c52c0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -28,6 +28,10 @@ public class JsUtils {
     return parseInt(s, radix);
   }-*/;
 
+  public static native String toString(int value, int radix) /*-{
+    return value.toString(radix);
+  }-*/;
+
   public static native boolean isUndefined(Object value) /*-{
     return value === undefined;
   }-*/;

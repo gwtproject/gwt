@@ -171,6 +171,28 @@ public class MathTest extends GWTTestCase {
     assertEquals(3.0, v, 1e-15);
   }
 
+  public void testRound() {
+    long v = Math.round(0.5);
+    assertEquals(1L, v);
+  }
+
+  public void testRint() {
+    double v = Math.rint(0d);
+    assertEquals(0d, v, 0);
+    v = Math.rint(0.5);
+    assertEquals(0d, v, 0);
+    v = Math.rint(1.5);
+    assertEquals(2d, v, 0);
+    v = Math.rint(-0.5);
+    assertEquals(-0d, v, 0);
+    v = Math.rint(-1.5);
+    assertEquals(-2d, v, 0);
+    v = Math.rint(Double.NEGATIVE_INFINITY);
+    assertEquals(Double.NEGATIVE_INFINITY, v, 0);
+    v = Math.rint(Double.NaN);
+    assertEquals(Double.NaN, v, 0);
+  }
+
   public void testSin() {
     double v = Math.sin(0.0);
     assertEquals(0.0, v, 1e-7);

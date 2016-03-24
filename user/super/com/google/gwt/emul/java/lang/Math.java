@@ -185,16 +185,8 @@ public final class Math {
     return NativeMath.random();
   }
 
-  public static double rint(double d) {
-    if (Double.isNaN(d)) {
-      return d;
-    } else if (Double.isInfinite(d)) {
-      return d;
-    } else if (d == 0.0d) {
-      return d;
-    } else {
-      return round(d);
-    }
+  public static double rint(double a) {
+    return 2 * NativeMath.round(a / 2);
   }
 
   public static long round(double x) {

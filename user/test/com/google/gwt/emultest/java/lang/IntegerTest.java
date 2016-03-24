@@ -23,6 +23,20 @@ import com.google.gwt.junit.client.GWTTestCase;
  */
 public class IntegerTest extends GWTTestCase {
 
+  private static final long[] UNSIGNED_INTS = {
+      0L,
+      1L,
+      2L,
+      3L,
+      0x12345678L,
+      0x5a4316b8L,
+      0x6cf78a4bL,
+      0xff1a618bL,
+      0xfffffffdL,
+      0xfffffffeL,
+      0xffffffffL
+  };
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.emultest.EmulSuite";
@@ -128,6 +142,16 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(0, new Integer("12345").compareTo(new Integer(12345)));
   }
 
+  public void testCompareUnsigned() {
+    for (long a : UNSIGNED_INTS) {
+      for (long b : UNSIGNED_INTS) {
+        int cmpAsLongs = Long.compare(a, b);
+        int cmpAsUInt = Integer.compareUnsigned((int) a, (int) b);
+        assertEquals(Integer.signum(cmpAsLongs), Integer.signum(cmpAsUInt));
+      }
+    }
+  }
+
   public void testConstants() {
     assertEquals(32, Integer.SIZE);
     assertEquals(0x7fffffff, Integer.MAX_VALUE);
@@ -156,6 +180,19 @@ public class IntegerTest extends GWTTestCase {
       fail();
     } catch (NumberFormatException e) {
       // pass
+    }
+  }
+
+  public void testDivideUnsigned() {
+    for (long a : UNSIGNED_INTS) {
+      for (long b : UNSIGNED_INTS) {
+        try {
+          assertEquals((int) (a / b), Integer.divideUnsigned((int) a, (int) b));
+          assertFalse(b == 0);
+        } catch (ArithmeticException e) {
+          assertEquals(0, b);
+        }
+      }
     }
   }
 
@@ -204,6 +241,87 @@ public class IntegerTest extends GWTTestCase {
     assertEquals(0, Integer.numberOfTrailingZeros(Integer.MAX_VALUE));
     assertEquals(31, Integer.numberOfTrailingZeros(Integer.MIN_VALUE));
     assertEquals(4, Integer.numberOfTrailingZeros(-0x7ff0));
+  }
+
+  public void testParseUnsignedInt() {
+    for (long a : UNSIGNED_INTS) {
+      assertEquals((int) a, Integer.parseUnsignedInt(Long.toString(a)));
+    }
+  }
+
+  public void testParseUnsignedIntFail() {
+    try {
+      Integer.parseUnsignedInt(Long.toString(1L << 32));
+      fail();
+    } catch (NumberFormatException expected) {
+    }
+
+    try {
+      Integer.parseUnsignedInt("-1");
+      fail();
+    } catch (NumberFormatException expected) {
+    }
+  }
+
+  public void testParseUnsignedIntWithRadix() {
+    for (long a : UNSIGNED_INTS) {
+      for (int radix = Character.MIN_RADIX; radix <= Character.MAX_RADIX; radix++) {
+        assertEquals((int) a, Integer.parseUnsignedInt(Long.toString(a, radix), radix));
+      }
+    }
+  }
+
+  public void testParseUnsignedIntWithRadixLimits() {
+    // loops through all legal radix values.
+    for (int radix = Character.MIN_RADIX; radix <= Character.MAX_RADIX; radix++) {
+      // tests can successfully parse a number string with this radix.
+      String maxAsString = Long.toString((1L << 32) - 1, radix);
+      assertEquals(-1, Integer.parseUnsignedInt(maxAsString, radix));
+
+      try {
+        // tests that we get exception where an overflow would occur.
+        long overflow = 1L << 32;
+        String overflowAsString = Long.toString(overflow, radix);
+        Integer.parseUnsignedInt(overflowAsString, radix);
+        fail();
+      } catch (NumberFormatException expected) {
+      }
+    }
+  }
+
+  public void testParseUnsignedIntThrowsExceptionForInvalidRadix() {
+    // Valid radix values are Character.MIN_RADIX to Character.MAX_RADIX, inclusive.
+    try {
+      Integer.parseUnsignedInt("0", Character.MIN_RADIX - 1);
+      fail();
+    } catch (NumberFormatException expected) {
+    }
+
+    try {
+      Integer.parseUnsignedInt("0", Character.MAX_RADIX + 1);
+      fail();
+    } catch (NumberFormatException expected) {
+    }
+
+    // The radix is used as an array index, so try a negative value.
+    try {
+      Integer.parseUnsignedInt("0", -1);
+      fail();
+    } catch (NumberFormatException expected) {
+    }
+  }
+
+  public void testRemainderUnsigned() {
+    for (long a : UNSIGNED_INTS) {
+      for (long b : UNSIGNED_INTS) {
+        try {
+          assertEquals((int) (a % b), Integer.remainderUnsigned((int) a, (int) b));
+          assertFalse(b == 0);
+        } catch (ArithmeticException e) {
+          assertEquals(0, b);
+        }
+      }
+    }
   }
 
   public void testReverse() {
@@ -259,6 +377,8 @@ public class IntegerTest extends GWTTestCase {
   }
 
   public void testToBinaryString() {
+    assertEquals("0", Integer.toBinaryString(0));
+    assertEquals("11111111111111111111111111111111", Integer.toBinaryString(-1));
     assertEquals("1111111111111111111111111111111", Integer.toBinaryString(Integer.MAX_VALUE));
     assertEquals("10000000000000000000000000000000", Integer.toBinaryString(Integer.MIN_VALUE));
   }
@@ -266,9 +386,10 @@ public class IntegerTest extends GWTTestCase {
   public void testToHexString() {
     assertEquals("12345", Integer.toHexString(0x12345));
     assertEquals("fff12345", Integer.toHexString(0xFFF12345));
+    assertEquals("0", Integer.toHexString(0));
+    assertEquals("ffffffff", Integer.toHexString(-1));
     assertEquals("7fffffff", Integer.toHexString(Integer.MAX_VALUE));
     assertEquals("80000000", Integer.toHexString(Integer.MIN_VALUE));
-    assertEquals("ffffffff", Integer.toHexString(-1));
 
     String[] hexDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
         "a", "b", "c", "d", "e", "f" };
@@ -278,6 +399,8 @@ public class IntegerTest extends GWTTestCase {
   }
 
   public void testToOctalString() {
+    assertEquals("0", Integer.toOctalString(0));
+    assertEquals("37777777777", Integer.toOctalString(-1));
     assertEquals("17777777777", Integer.toOctalString(Integer.MAX_VALUE));
     assertEquals("20000000000", Integer.toOctalString(Integer.MIN_VALUE));
   }
@@ -291,6 +414,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals("-2147483647", Integer.toString(-Integer.MAX_VALUE));
     assertEquals("-2147483648", Integer.toString(Integer.MIN_VALUE));
     assertEquals("0", Integer.toString(0));
+    assertEquals("-1", Integer.toString(-1));
 
     assertEquals("17777777777", Integer.toString(2147483647, 8));
     assertEquals("7fffffff", Integer.toString(2147483647, 16));
@@ -304,6 +428,21 @@ public class IntegerTest extends GWTTestCase {
     assertEquals("-80000000", Integer.toString(-2147483648, 16));
     assertEquals("-10000000000000000000000000000000", Integer.toString(-2147483648, 2));
     assertEquals("-2147483648", Integer.toString(-2147483648, 10));
+  }
+
+  public void testToUnsignedLong() {
+    for (long a : UNSIGNED_INTS) {
+      assertEquals(a, Integer.toUnsignedLong((int) a));
+    }
+  }
+
+  public void testToUnsignedString() {
+    int[] bases = {2, 5, 7, 8, 10, 16};
+    for (long a : UNSIGNED_INTS) {
+      for (int base : bases) {
+        assertEquals(Integer.toUnsignedString((int) a, base), Long.toString(a, base));
+      }
+    }
   }
 
   public void testValueOf() {

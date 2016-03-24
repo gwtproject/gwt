@@ -185,15 +185,18 @@ public final class Math {
     return NativeMath.random();
   }
 
-  public static double rint(double d) {
-    if (Double.isNaN(d)) {
-      return d;
-    } else if (Double.isInfinite(d)) {
-      return d;
-    } else if (d == 0.0d) {
-      return d;
+  public static double rint(double x) {
+    // FIXME: for some reason NativeMath.round(Double.MAX_VALUE) != Double.MAX_VALUE
+    // but it's totally legal in js code
+    if (Double.isNaN(x) || Double.isInfinite(x) || x == 0 || x == Double.MAX_VALUE) {
+      return x;
+    }
+
+    double mod2 = x % 2;
+    if ((mod2 == 0.5) || (mod2 == -1.5)) {
+      return NativeMath.floor(x);
     } else {
-      return round(d);
+      return NativeMath.round(x);
     }
   }
 

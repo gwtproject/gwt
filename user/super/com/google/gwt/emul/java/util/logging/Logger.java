@@ -30,6 +30,7 @@ public class Logger {
   private static final boolean LOGGING_WARNING = LOGGING_ENABLED.equals("WARNING");
   private static final boolean LOGGING_SEVERE = LOGGING_ENABLED.equals("SEVERE");
   private static final boolean LOGGING_FALSE = LOGGING_ENABLED.equals("FALSE");
+  private static final Handler[] EMPTY_HANDLERS = new Handler[0];
 
   static {
     assertLoggingValues();
@@ -70,12 +71,14 @@ public class Logger {
 
     this.name = name;
     this.useParentHandlers = true;
-    handlers = new ArrayList<Handler>();
   }
 
   public void addHandler(Handler handler) {
     if (LOGGING_FALSE) {
       return;
+    }
+    if (handlers == null) {
+      handlers = new ArrayList<>();
     }
     handlers.add(handler);
   }
@@ -131,9 +134,12 @@ public class Logger {
 
   public Handler[] getHandlers() {
     if (LOGGING_FALSE) {
-      return new Handler[0];
+      return EMPTY_HANDLERS;
     }
 
+    if (handlers == null || handlers.isEmpty()) {
+      return EMPTY_HANDLERS;
+    }
     return handlers.toArray(new Handler[handlers.size()]);
   }
 
@@ -200,7 +206,9 @@ public class Logger {
     if (LOGGING_FALSE) {
       return;
     }
-    handlers.remove(handler);
+    if (handlers != null) {
+      handlers.remove(handler);
+    }
   }
 
   public void setLevel(Level newLevel) {
@@ -253,10 +261,7 @@ public class Logger {
 
   private void actuallyLog(LogRecord record) {
     if (isLoggable(record.getLevel())) {
-      for (Handler handler : getHandlers()) {
-        handler.publish(record);
-      }
-      Logger logger = getUseParentHandlers() ? getParent() : null;
+      Logger logger = this;
       while (logger != null) {
         for (Handler handler : logger.getHandlers()) {
           handler.publish(record);

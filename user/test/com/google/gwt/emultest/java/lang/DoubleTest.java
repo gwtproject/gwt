@@ -164,6 +164,17 @@ public class DoubleTest extends GWTTestCase {
     assertFalse(Double.isInfinite(Double.NaN));
   }
 
+  public void testIsFinite() {
+    final double[] numbers = {
+        Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, -Double.MAX_VALUE, Double.MAX_VALUE,
+        Double.NaN, Double.MIN_VALUE, -1.0, -0.5, -0.1, -0.0, 0.0, 0.1, 0.5, 1.0,
+    };
+
+    for (double value : numbers) {
+      assertEquals(!Double.isNaN(value) && !Double.isInfinite(value), Double.isFinite(value));
+    }
+  }
+
   public void testParse() {
     assertTrue(0 == Double.parseDouble("0"));
     assertTrue(100 == Double.parseDouble("1e2"));

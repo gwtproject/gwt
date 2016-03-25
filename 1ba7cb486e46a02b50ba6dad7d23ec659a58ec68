@@ -22,6 +22,30 @@
       "revId": "1ba7cb486e46a02b50ba6dad7d23ec659a58ec68",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b187f5d0_e1fbc68b",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-25T16:58:32Z",
+      "side": 1,
+      "message": "I think you\u0027re right. I\u0027ll check if compiler can figure it out.",
+      "parentUuid": "314ea583_0507126d",
+      "range": {
+        "startLine": 238,
+        "startChar": 14,
+        "endLine": 238,
+        "endChar": 17
+      },
+      "revId": "1ba7cb486e46a02b50ba6dad7d23ec659a58ec68",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91d6710b_0957b132",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-27T03:51:52Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not preceded with whitespace.",
+      "revId": "9582107944d94be67fc7ca825b782ae6d2a236b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

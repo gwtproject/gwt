@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "91d6710b_a677d20f",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Done, let me know if you\u0027d see it done differently.",
+      "parentUuid": "1cdb763a_20b1e42a",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ccf6672_4a6e0795",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
         "patchSetId": 5
@@ -89,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "91d6710b_8683ae2e",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Thanks, done.",
+      "parentUuid": "1cdb763a_c0c1206d",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cdb763a_80b0f824",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
         "patchSetId": 5
@@ -100,6 +136,24 @@
       "writtenOn": "2016-03-22T15:48:08Z",
       "side": 1,
       "message": "The returned Set is expected to be immutable.",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91d6710b_c674d60d",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cdb763a_80b0f824",
       "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -123,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "91d6710b_49e619ff",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cdb763a_409fd089",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cdb763a_0095c863",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 5
@@ -134,6 +206,24 @@
       "writtenOn": "2016-03-22T15:48:08Z",
       "side": 1,
       "message": "That looks awfully complicated. From the javadoc, it looks like it could be:\n\n return Collector.\u003cT, Map\u003cK, List\u003cT\u003e\u003e, M\u003eof(\n   HashMap::new,\n   (m, o) -\u003e {\n     K key \u003d classifier.apply(o);\n     List\u003cT\u003e l \u003d m.get(k);\n     if (k \u003d\u003d null) {\n       l \u003d new ArrayList\u003c\u003e();\n       m.put(k, l;\n     }\n     l.add(o);\n   },\n   (m1, m2) -\u003e {\n     for (Map.Entry\u003cK, List\u003cT\u003e\u003e entry : m2.entrySet()) {\n       List\u003cT\u003e l \u003d m1.get(entry.getKey());\n       if (l !\u003d null) {\n         l.addAll(entry.getValue());\n       } else {\n         m.put(entry.getKey(), entry.getValue());\n       }\n     }\n   },\n   m -\u003e {\n     M result \u003d mapFactory.get();\n     for (Map.Entry\u003cK, List\u003cT\u003e\u003e entry : m.entrySet()) {\n       result.put(result.getKey(), result.getValue().stream().collect(downstream));\n     }\n   });",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91d6710b_89b901f0",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "I like it - my goal was to avoid extra intermediate objects (except the map, see below). This ended up meaning inlining the eventual collect(downstream) call in your finisher - only really saves the new ArrayList and doing the downstream processing during the finisher though. Your impl is undeniably easier to read though - I might just have my head too much in how this all behaves internally.\n\nOnly catch: stream() isn\u0027t emulated yet, this patch is to break up the stream patch into manageable pieces. This would mean including the supply/accumulate/finish details here again, though its just a few lines of code (as in the tests).",
+      "parentUuid": "1cdb763a_0095c863",
       "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -175,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "91d6710b_89a2e1bd",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "That would work, I just wanted to avoid mutating input to a function (as opposed to the biconsumer version that happens in the stream.collect() overload that doesn\u0027t take a collector).\n\nIn theory, no A is used after it is combined, so reusing the instance should be safe as you\u0027ve said.",
+      "parentUuid": "1cdb763a_2083a432",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cdb763a_8082b828",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 5
@@ -186,6 +294,24 @@
       "writtenOn": "2016-03-22T15:48:08Z",
       "side": 1,
       "message": "I\u0027m not really used to method references yet, but couldn\u0027t this be written:\n\n return Collector.\u003cCharSequence, StringBuilder, String\u003eof(\n     StringBuilder::new,\n     StringBuilder::append,\n     StringBuilder::append,\n     StringBuilder::toString);",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91d6710b_c9a309c0",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Yes, it appears so - my IDE setup isn\u0027t giving me any more than indentation and syntax highlighting for supersource.\n\nHowever, making this change appears to be triggering an error in the compiler. I\u0027ll see about reproducing it as a test case to get fixed directly.",
+      "parentUuid": "1cdb763a_8082b828",
       "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -209,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "3c1bdab9_8ef58da6",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Done - didn\u0027t occur to me to check if it was emulated yet, thanks for the pointer.",
+      "parentUuid": "3ce03ae0_6121303a",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cdb763a_c073e024",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 5
@@ -220,6 +364,24 @@
       "writtenOn": "2016-03-22T15:48:08Z",
       "side": 1,
       "message": "How about calling CollectorImpl ctor directly (passing the set as-is) instead of copying an immutable set into an array to build a new immutable set?",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91d6710b_09aed1a8",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Changed to pass in the set directly instead, however do note that as collector are chained, the set will continue to be wrapped in Collections.unmodifiableSet(...), which doesn\u0027t check if something is already wrapped before wrapping again.",
+      "parentUuid": "1cdb763a_c073e024",
       "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -261,6 +423,24 @@
     },
     {
       "key": {
+        "uuid": "91d6710b_29bab5e5",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Yep, took the shortcut for the sake of skipping another holder type.\n\nIt would save the unsafe cast, but if I\u0027m not mistaken, GWT will still add the runtime dynamicCast() call.",
+      "parentUuid": "1cdb763a_e3caa665",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cd96e3d_65d2224b",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 5
@@ -272,6 +452,24 @@
       "writtenOn": "2016-03-22T14:04:53Z",
       "side": 1,
       "message": "maybe you could use combineAndThen with summarizingDouble to reuse the code here?",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c1bdab9_eed9a13a",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Yep, good call - equally dumb, but easier to read.",
+      "parentUuid": "5cd96e3d_65d2224b",
       "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -295,6 +493,24 @@
     },
     {
       "key": {
+        "uuid": "91d6710b_49bff9d4",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cdb763a_83f562a6",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cdb763a_43eb5acb",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 5
@@ -306,6 +522,24 @@
       "writtenOn": "2016-03-22T15:48:08Z",
       "side": 1,
       "message": "Directly modify m1 instead of copying the map",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91d6710b_69b4bdf6",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cdb763a_43eb5acb",
       "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -329,6 +563,24 @@
     },
     {
       "key": {
+        "uuid": "91d6710b_a9cde584",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Done (and a few more above this)",
+      "parentUuid": "bccc2a7e_28d70fc5",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ccf6672_2a69c38b",
         "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
         "patchSetId": 5
@@ -340,6 +592,24 @@
       "writtenOn": "2016-03-22T14:04:53Z",
       "side": 1,
       "message": "please add line breaks between methods",
+      "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91d6710b_c9ca296a",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-27T03:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ccf6672_2a69c38b",
       "revId": "0174e56a24fe7b4ff98f4ce99af99f0e5d8c2c65",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -2,6 +2,80 @@
   "comments": [
     {
       "key": {
+        "uuid": "5177990e_062b3a30",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-29T14:36:41Z",
+      "side": 1,
+      "message": "Please add this class to EmulJava8Suite.\nAnd since we use this class to only test java 8 features, should we indicate that in the class name?",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5177990e_66bb0e37",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-29T14:36:41Z",
+      "side": 1,
+      "message": "Maybe get rid of supplier for original array and just do Arrays.copyOf in assertSortedEquals?",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5177990e_06bc1a30",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-29T14:36:41Z",
+      "side": 1,
+      "message": "It looks like it\u0027s not used",
+      "range": {
+        "startLine": 36,
+        "startChar": 13,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5177990e_c6a922ea",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-29T14:36:41Z",
+      "side": 1,
+      "message": "not sure if it makes sense to extract these expected values here (and in testComparingThen) because their names doesn\u0027t mean anything. For the tests I would just put them in assert statements.\nMaybe it\u0027s worth breaking this test method into smaller methods like testComparingDouble, ...",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3189453b_cd8229f0",
         "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
         "patchSetId": 9

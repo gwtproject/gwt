@@ -486,12 +486,9 @@ public class TreeMap<K, V> extends AbstractNavigableMap<K, V> implements Seriali
   }
 
   @SuppressWarnings("unchecked")
-  public TreeMap(Comparator<? super K> c) {
+  public TreeMap(Comparator<? super K> cmp) {
     root = null;
-    if (c == null) {
-      c = Comparators.natural();
-    }
-    cmp = c;
+    this.cmp = Comparators.comparatorOrNatural(cmp);
   }
 
   public TreeMap(Map<? extends K, ? extends V> map) {
@@ -513,10 +510,7 @@ public class TreeMap<K, V> extends AbstractNavigableMap<K, V> implements Seriali
 
   @Override
   public Comparator<? super K> comparator() {
-    if (cmp == Comparators.natural()) {
-      return null;
-    }
-    return cmp;
+    return cmp == Comparators.natural() ? null : cmp;
   }
 
   @Override

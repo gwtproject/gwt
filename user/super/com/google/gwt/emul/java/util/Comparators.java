@@ -52,4 +52,8 @@ class Comparators {
   public static <T> Comparator<T> natural() {
     return (Comparator<T>) NATURAL;
   }
+
+  public static <T> Comparator<T> comparatorOrNatural(Comparator<T> cmp) {
+    return cmp == null ? natural() : cmp;
+  }
 }

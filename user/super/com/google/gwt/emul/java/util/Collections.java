@@ -963,9 +963,7 @@ public class Collections {
      * in the JDK docs for non-RandomAccess Lists. Until GWT provides a
      * LinkedList, this shouldn't be an issue.
      */
-    if (comparator == null) {
-      comparator = Comparators.natural();
-    }
+    comparator = Comparators.comparatorOrNatural(comparator);
     int low = 0;
     int high = sortedList.size() - 1;
 
@@ -1091,9 +1089,7 @@ public class Collections {
   public static <T> T max(Collection<? extends T> coll,
       Comparator<? super T> comp) {
 
-    if (comp == null) {
-      comp = Comparators.natural();
-    }
+    comp = Comparators.comparatorOrNatural(comp);
 
     Iterator<? extends T> it = coll.iterator();
 

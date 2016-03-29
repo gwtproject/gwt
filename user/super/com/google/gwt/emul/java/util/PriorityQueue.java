@@ -64,10 +64,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   public PriorityQueue(int initialCapacity, Comparator<? super E> cmp) {
     heap = new ArrayList<E>(initialCapacity);
-    if (cmp == null) {
-      cmp = Comparators.natural();
-    }
-    this.cmp = cmp;
+    this.cmp = Comparators.comparatorOrNatural(cmp);
   }
 
   @SuppressWarnings("unchecked")

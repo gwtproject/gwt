@@ -312,7 +312,7 @@ public class Arrays {
    *           <code>sortedArray</code>'s elements.
    */
   public static int binarySearch(final Object[] sortedArray, final Object key) {
-    return binarySearch(sortedArray, key, Comparators.natural());
+    return binarySearch(sortedArray, key, null);
   }
 
   /**
@@ -364,9 +364,7 @@ public class Arrays {
    */
   public static <T> int binarySearch(final T[] sortedArray, final T key,
       Comparator<? super T> comparator) {
-    if (comparator == null) {
-      comparator = Comparators.natural();
-    }
+    comparator = Comparators.comparatorOrNatural(comparator);
     int low = 0;
     int high = sortedArray.length - 1;
 
@@ -1017,11 +1015,11 @@ public class Arrays {
   }
 
   public static void sort(Object[] array) {
-    mergeSort(array, 0, array.length, Comparators.natural());
+    mergeSort(array, 0, array.length, null);
   }
 
   public static void sort(Object[] x, int fromIndex, int toIndex) {
-    mergeSort(x, fromIndex, toIndex, Comparators.natural());
+    mergeSort(x, fromIndex, toIndex, null);
   }
 
   public static void sort(short[] array) {
@@ -1250,9 +1248,7 @@ public class Arrays {
    */
   @SuppressWarnings("unchecked")
   private static void mergeSort(Object[] x, int fromIndex, int toIndex, Comparator<?> comp) {
-    if (comp == null) {
-      comp = Comparators.natural();
-    }
+    comp = Comparators.comparatorOrNatural(comp);
     Object[] temp = copyOfRange(x, fromIndex, toIndex);
     mergeSort(temp, x, fromIndex, toIndex, -fromIndex,
         (Comparator<Object>) comp);

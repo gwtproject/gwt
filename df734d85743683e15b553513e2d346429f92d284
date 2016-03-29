@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3189453b_cd8229f0",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-29T08:01:43Z",
+      "side": 1,
+      "message": "Please make it static and move it to the bottom (? I dont remember where to move it by the code style)",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

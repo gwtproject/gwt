@@ -1020,8 +1020,9 @@ public class Arrays {
     mergeSort(array, 0, array.length, Comparators.natural());
   }
 
-  public static void sort(Object[] x, int fromIndex, int toIndex) {
-    mergeSort(x, fromIndex, toIndex, Comparators.natural());
+  public static void sort(Object[] array, int fromIndex, int toIndex) {
+    checkPositionIndexes(fromIndex, toIndex, array.length);
+    mergeSort(array, fromIndex, toIndex, Comparators.natural());
   }
 
   public static void sort(short[] array) {
@@ -1313,9 +1314,17 @@ public class Arrays {
    * Sort a subset of an array of number primitives.
    */
   private static void nativeLongSort(Object array, int fromIndex, int toIndex) {
+    int len = toIndex - fromIndex;
+    if (len == 0) {
+      return;
+    }
+    if (len == ArrayHelper.getLength(array)) {
+      nativeLongSort(array, LongCompareHolder.getLongComparator());
+      return;
+    }
     Object temp = ArrayHelper.unsafeClone(array, fromIndex, toIndex);
     nativeLongSort(temp, LongCompareHolder.getLongComparator());
-    ArrayHelper.copy(temp, 0, array, fromIndex, toIndex - fromIndex);
+    ArrayHelper.copy(temp, 0, array, fromIndex, len);
   }
 
   /**
@@ -1331,6 +1340,14 @@ public class Arrays {
    * Sort a subset of an array of number primitives.
    */
   private static void nativeNumberSort(Object array, int fromIndex, int toIndex) {
+    int len = toIndex - fromIndex;
+    if (len == 0) {
+      return;
+    }
+    if (len == ArrayHelper.getLength(array)) {
+      nativeNumberSort(array);
+      return;
+    }
     Object temp = ArrayHelper.unsafeClone(array, fromIndex, toIndex);
     nativeNumberSort(temp);
     ArrayHelper.copy(temp, 0, array, fromIndex, toIndex - fromIndex);

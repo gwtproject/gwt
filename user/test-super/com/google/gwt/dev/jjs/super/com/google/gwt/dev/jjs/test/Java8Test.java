@@ -1370,5 +1370,16 @@ public class Java8Test extends GWTTestCase {
     assertSame("c", callFromJSNI(function));
     String[] pars = new String[] {"a", "b", "c"};
     assertSame("a", function.f(0, pars));
- }
+  }
+
+  @FunctionalInterface
+  public interface ToString {
+    String apply(StringBuilder t);
+  }
+
+  public void testMethodReferenceImplementedInSuperclass() {
+    ToString toString= StringBuilder::toString;
+    assertEquals("Hello", toString.apply(new StringBuilder("Hello")));
+  }
 }
+

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1e62928_d235c4bb",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/SpliteratorsTest.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-29T13:32:52Z",
+      "side": 1,
+      "message": "2016 ;-)",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "e7e7d980e7ac1969fe445b7c6b7f392295151304",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

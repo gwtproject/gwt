@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5177990e_49b465f6",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-03-29T23:44:51Z",
+      "side": 1,
+      "message": "I think we don\u0027t really need EmulJava8Suite anymore given that GWT internally always runs in Java8 mode now (there is no other SourceLevel anymore, see https://gwt-review.googlesource.com/#/c/14353).",
+      "parentUuid": "5177990e_062b3a30",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5177990e_66bb0e37",
         "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
         "patchSetId": 9

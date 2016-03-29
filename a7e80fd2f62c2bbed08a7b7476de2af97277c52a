@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5177990e_263676c8",
+        "filename": "user/super/com/google/gwt/emul/java/util/Spliterators.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-29T13:02:20Z",
+      "side": 1,
+      "message": "https://gwt-review.googlesource.com/#/c/14580/",
+      "parentUuid": "d1e62928_72417835",
+      "range": {
+        "startLine": 18,
+        "startChar": 54,
+        "endLine": 18,
+        "endChar": 71
+      },
+      "revId": "a7e80fd2f62c2bbed08a7b7476de2af97277c52a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31a785d3_1d46b3fb",
         "filename": "user/super/com/google/gwt/emul/java/util/Spliterators.java",
         "patchSetId": 14

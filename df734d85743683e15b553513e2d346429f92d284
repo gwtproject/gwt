@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "71ed7d37_7fb16f09",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-30T13:13:31Z",
+      "side": 1,
+      "message": "At least in the ant wiring we still seem to - javac.source and target default to 1.7, and these java8 tests are skipped in that case. I\u0027m all for that being removed (though we still want java7 compatible server jars), but rewriting build.xml files is outside the scope of this patch.",
+      "parentUuid": "5177990e_49b465f6",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5177990e_66bb0e37",
         "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
         "patchSetId": 9
@@ -84,6 +102,24 @@
       "writtenOn": "2016-03-29T14:36:41Z",
       "side": 1,
       "message": "Maybe get rid of supplier for original array and just do Arrays.copyOf in assertSortedEquals?",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1e0e93e_a2be3ed6",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-30T13:13:31Z",
+      "side": 1,
+      "message": "My intention was to guarantee that someone couldn\u0027t forget to copy, and accidentally change data (and .get() is fewer chars that Arrays.copyOf?).",
+      "parentUuid": "5177990e_66bb0e37",
       "revId": "df734d85743683e15b553513e2d346429f92d284",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -124,6 +160,24 @@
       "writtenOn": "2016-03-29T14:36:41Z",
       "side": 1,
       "message": "not sure if it makes sense to extract these expected values here (and in testComparingThen) because their names doesn\u0027t mean anything. For the tests I would just put them in assert statements.\nMaybe it\u0027s worth breaking this test method into smaller methods like testComparingDouble, ...",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71f3bdea_a4ab18ac",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-30T13:13:31Z",
+      "side": 1,
+      "message": "I\u0027ll add comments, but they do have meaning - \"first\" means \"sorted on first char\", \"secondReversed\" means \"sorted in reverse on second char\".",
+      "parentUuid": "5177990e_c6a922ea",
       "revId": "df734d85743683e15b553513e2d346429f92d284",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

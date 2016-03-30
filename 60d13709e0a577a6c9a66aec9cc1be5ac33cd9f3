@@ -16,6 +16,24 @@
       "revId": "60d13709e0a577a6c9a66aec9cc1be5ac33cd9f3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e25349f_36b598f3",
+        "filename": ".idea/vcs.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 9915
+      },
+      "writtenOn": "2016-03-30T20:49:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c9be68c_c4b63001",
+      "revId": "60d13709e0a577a6c9a66aec9cc1be5ac33cd9f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

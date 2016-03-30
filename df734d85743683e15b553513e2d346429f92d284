@@ -149,6 +149,30 @@
     },
     {
       "key": {
+        "uuid": "71ed7d37_85c86672",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-30T13:59:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5177990e_06bc1a30",
+      "range": {
+        "startLine": 36,
+        "startChar": 13,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5177990e_c6a922ea",
         "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
         "patchSetId": 9
@@ -184,6 +208,24 @@
     },
     {
       "key": {
+        "uuid": "71ed7d37_c5e0aee4",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-30T13:59:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71f3bdea_a4ab18ac",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3189453b_cd8229f0",
         "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
         "patchSetId": 9
@@ -195,6 +237,24 @@
       "writtenOn": "2016-03-29T08:01:43Z",
       "side": 1,
       "message": "Please make it static and move it to the bottom (? I dont remember where to move it by the code style)",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71ed7d37_65c56256",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-03-30T13:59:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3189453b_cd8229f0",
       "revId": "df734d85743683e15b553513e2d346429f92d284",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

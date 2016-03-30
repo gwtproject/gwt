@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "31a785d3_a05b142a",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-03-30T08:29:09Z",
+      "side": 1,
+      "message": "Well for now I would keep adding stuff to EmulJava8Suite but once most Java8 emul stuff is done we probably want to try merging Java8 GWTTestCases with the normal ones. Non-GWTTestCase tests still need the separation, but I guess we won\u0027t write any.",
+      "parentUuid": "5177990e_c954d548",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5177990e_66bb0e37",
         "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
         "patchSetId": 9

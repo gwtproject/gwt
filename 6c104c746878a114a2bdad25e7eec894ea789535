@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51795972_bc24c945",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-03-30T21:02:14Z",
+      "side": 1,
+      "message": "This line is way too long for the summary line of a commit message. See http://chris.beams.io/posts/git-commit/\n\nI think you get a warning when pushing to Gerrit if the summary line is beyond 65 characters.",
+      "revId": "6c104c746878a114a2bdad25e7eec894ea789535",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

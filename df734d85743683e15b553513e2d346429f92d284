@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "5177990e_c954d548",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-30T08:16:23Z",
+      "side": 1,
+      "message": "Good to know. So we dont add new stuff to EmulJava8Suite anymore?\n\nAnd of course this test should be added to EmulSuite then anyway :)",
+      "parentUuid": "5177990e_49b465f6",
+      "revId": "df734d85743683e15b553513e2d346429f92d284",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5177990e_66bb0e37",
         "filename": "user/test/com/google/gwt/emultest/java8/util/ComparatorTest.java",
         "patchSetId": 9

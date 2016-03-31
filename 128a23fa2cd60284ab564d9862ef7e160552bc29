@@ -46,6 +46,30 @@
       "revId": "128a23fa2cd60284ab564d9862ef7e160552bc29",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1fbc56_340230a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-03-31T11:55:38Z",
+      "side": 1,
+      "message": "I don\u0027t know who configures this Gerrit instance but the tr: search could be fixed by adding additional trackingid sections in Gerrit config so you could search for google code and Github bugs correctly when using \u003cgithub keyword\u003e #xxxx in the future.\n\nNext Leeroy could be updated to reduce the probability of accidentally closing a Github issue. Basically it would only allow \u003cgithub keyword\u003e #xxxx on its own line in the commit footer and would disallow it anywhere else. So if you want to use \u003cgithub keyword\u003e #xxxx in the rest of the commit message to reference something you would need to leave out the \"#\" or don\u0027t use a github keyword to not trigger Github.\n\nLastly we should definitely create a Github webhook/bot once the issue workflow has been set in stone because what can be automated should be automated. Especially as managing the issue tracker happens in our spare time less work in the long term is always better.\n\nTo me it sounds like all mentioned issues can be solved if we just want to (unless we can not easily update Gerrit config and deploy updated Leeroy)",
+      "parentUuid": "4e25349f_56d6d4cd",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "128a23fa2cd60284ab564d9862ef7e160552bc29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

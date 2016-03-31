@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51795972_002e2785",
+        "filename": "dev/core/src/com/google/gwt/soyc/MakeTopLevelHtmlForPerm.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1663,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-03-31T19:26:46Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "6c9aa2dcc5ce320d6f93ac4a06a7b8d24d3a4c75",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1fbc56_d41bfc55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-03-31T10:48:59Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be beneficial to write \"Fixes #9308\" so Github closes the issue automatically once the commit has been mirrored? Then one could search for closed issues that are still ReviewPending and remove that label in batches more comfortably.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "128a23fa2cd60284ab564d9862ef7e160552bc29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

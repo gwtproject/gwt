@@ -16,6 +16,23 @@
       "revId": "2307e9ccac7e6e3aed8aaae2e93da4d645467407",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51795972_20016327",
+        "filename": "dev/core/src/com/google/gwt/dev/resource/impl/ResourceAccumulator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-03-31T19:07:38Z",
+      "side": 1,
+      "message": "Let\u0027s do an explicit Files.notExists check instead.",
+      "revId": "2307e9ccac7e6e3aed8aaae2e93da4d645467407",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

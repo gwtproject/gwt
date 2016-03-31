@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e25349f_3640f883",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-31T11:19:30Z",
+      "side": 1,
+      "message": "EnumSet.copyOf(Arrays.asList(characteristics)) ?\ninstead of creating HashSet in the collectorimpl constructor.\nyou could also remove the first constructor",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e25349f_1645fc93",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-31T11:19:30Z",
+      "side": 1,
+      "message": "Does it make this class public visible because you put CollectorImpl into public interface?",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e25349f_f64960ae",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-31T11:19:30Z",
+      "side": 1,
+      "message": "private?",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e25349f_d646649e",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-31T11:19:30Z",
+      "side": 1,
+      "message": "I think it makes sense to make it immutable right in the constructor",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f11b2d59_4374c699",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 10
@@ -13,6 +81,109 @@
       "writtenOn": "2016-03-30T22:09:29Z",
       "side": 1,
       "message": "changing this to (stats) -\u003e stats.getAverage() would make this easier to read, in my opinion ;).",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e25349f_361918c2",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-31T11:19:30Z",
+      "side": 1,
+      "message": "EnumSet.copyOf",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e25349f_b6a52877",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-31T11:19:30Z",
+      "side": 1,
+      "message": "0L",
+      "range": {
+        "startLine": 100,
+        "startChar": 20,
+        "endLine": 100,
+        "endChar": 28
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae14f033_190acb03",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-31T11:19:30Z",
+      "side": 1,
+      "message": "Long::sum ?",
+      "range": {
+        "startLine": 100,
+        "startChar": 48,
+        "endLine": 100,
+        "endChar": 77
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e25349f_96a22c6b",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-31T11:19:30Z",
+      "side": 1,
+      "message": "1L",
+      "range": {
+        "startLine": 100,
+        "startChar": 38,
+        "endLine": 100,
+        "endChar": 46
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e25349f_16b73cb4",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-31T11:19:30Z",
+      "side": 1,
+      "message": "can we reuse array u1 here? I mean can we store the result there?",
       "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

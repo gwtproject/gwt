@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "4e25349f_d625449f",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-03-31T14:05:09Z",
+      "side": 1,
+      "message": "It would be good to create Collections.emptySet() if characteristics.length \u003d\u003d 0. Such collector are used in Collectors",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e25349f_d646649e",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
         "patchSetId": 10

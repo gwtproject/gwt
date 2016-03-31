@@ -22,6 +22,30 @@
       "revId": "128a23fa2cd60284ab564d9862ef7e160552bc29",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e25349f_56d6d4cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-03-31T11:19:41Z",
+      "side": 1,
+      "message": "Well, the question is whether we lean towards GitHub\u0027s or Gerrit\u0027s style.\n\nThe \"Bug:\" footer has the advantage that it allows searching for reviews using the \"tr:\" operator (well, except that it doesn\u0027t work when the issue number is prefixed with a #, at least as currently configured on this Gerrit instance); this should surface only reviews fixing that bug (contrary to a grep on \"#9308\" which would also give commits with messages referencing the issue, without necessarily being about the issue; e.g. \"as discussed in comments of #9308\").\n\nI, for one, don\u0027t quite like the GitHub style because it\u0027s easy to have false positives (\"partially fixes #xxx\", or \"note that, while similar, it does not fix #xxx\") and false negatives. There\u0027s also the more general handling of issues: ReviewPending label is not removed, Milestone might have not been set, or would need to be updated, etc. Those things can be automated, but not by GitHub directly (needs a bot/webhook), so the GitHub \"formalism\" doesn\u0027t really help (the stricted Gerrit one is easier to handle).",
+      "parentUuid": "0e1fbc56_d41bfc55",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "128a23fa2cd60284ab564d9862ef7e160552bc29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

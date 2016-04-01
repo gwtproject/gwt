@@ -15,8 +15,6 @@
  */
 package java.lang;
 
-import static javaemul.internal.InternalPreconditions.checkNotNull;
-
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -34,10 +32,7 @@ public interface Iterable<T> {
   Iterator<T> iterator();
 
   default void forEach(Consumer<? super T> action) {
-    checkNotNull(action);
-    for (T t : this) {
-      action.accept(t);
-    }
+    iterator().forEachRemaining(action);
   }
 
   default Spliterator<T> spliterator() {

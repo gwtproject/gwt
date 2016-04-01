@@ -35,9 +35,7 @@ public interface Iterable<T> {
 
   default void forEach(Consumer<? super T> action) {
     checkNotNull(action);
-    for (T t : this) {
-      action.accept(t);
-    }
+    iterator().forEachRemaining(action);
   }
 
   default Spliterator<T> spliterator() {

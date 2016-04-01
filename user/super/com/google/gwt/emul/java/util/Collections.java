@@ -21,6 +21,11 @@ import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 /**
  * Utility methods that operate on collections.
@@ -90,6 +95,11 @@ public class Collections {
     @Override
     public int size() {
       return 0;
+    }
+
+    @Override
+    public Spliterator spliterator() {
+      return Spliterators.emptySpliterator();
     }
   }
 
@@ -234,6 +244,11 @@ public class Collections {
     }
 
     @Override
+    public boolean containsAll(Collection<?> c) {
+      return keySet().containsAll(c);
+    }
+
+    @Override
     public boolean equals(Object o) {
       return o == this || keySet().equals(o);
     }
@@ -254,6 +269,16 @@ public class Collections {
     }
 
     @Override
+    public boolean removeAll(Collection<?> c) {
+      return keySet().removeAll(c);
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+      return keySet().retainAll(c);
+    }
+
+    @Override
     public int size() {
       return keySet().size();
     }
@@ -261,6 +286,21 @@ public class Collections {
     @Override
     public String toString() {
       return keySet().toString();
+    }
+
+    @Override
+    public Spliterator<E> spliterator() {
+      return keySet().spliterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super E> consumer) {
+      keySet().forEach(consumer);
+    }
+
+    @Override
+    public boolean removeIf(Predicate<? super E> filter) {
+      return keySet().removeIf(filter);
     }
 
     /**
@@ -305,8 +345,8 @@ public class Collections {
   static class UnmodifiableCollection<T> implements Collection<T> {
     protected final Collection<? extends T> coll;
 
-    public UnmodifiableCollection(Collection<? extends T> coll) {
-      this.coll = coll;
+    UnmodifiableCollection(Collection<? extends T> coll) {
+      this.coll = checkNotNull(coll);
     }
 
     @Override
@@ -378,13 +418,23 @@ public class Collections {
     public String toString() {
       return coll.toString();
     }
+
+    @Override
+    public boolean removeIf(Predicate<? super T> filter) {
+      throw new UnsupportedOperationException();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Spliterator<T> spliterator() {
+      return (Spliterator<T>) coll.spliterator();
+    }
   }
 
-  static class UnmodifiableList<T> extends UnmodifiableCollection<T> implements
-      List<T> {
-    private final List<? extends T> list;
+  static class UnmodifiableList<T> extends UnmodifiableCollection<T> implements List<T> {
+    protected final List<? extends T> list;
 
-    public UnmodifiableList(List<? extends T> list) {
+    UnmodifiableList(List<? extends T> list) {
       super(list);
       this.list = list;
     }
@@ -401,7 +451,7 @@ public class Collections {
 
     @Override
     public boolean equals(Object o) {
-      return list.equals(o);
+      return this == o || list.equals(o);
     }
 
     @Override
@@ -420,11 +470,6 @@ public class Collections {
     }
 
     @Override
-    public boolean isEmpty() {
-      return list.isEmpty();
-    }
-
-    @Override
     public int lastIndexOf(Object o) {
       return list.lastIndexOf(o);
     }
@@ -436,11 +481,16 @@ public class Collections {
 
     @Override
     public ListIterator<T> listIterator(int from) {
-      return new UnmodifiableListIterator<T>(list.listIterator(from));
+      return new UnmodifiableListIterator<>(list.listIterator(from));
     }
 
     @Override
     public T remove(int index) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void replaceAll(UnaryOperator<T> operator) {
       throw new UnsupportedOperationException();
     }
 
@@ -450,8 +500,51 @@ public class Collections {
     }
 
     @Override
+    public void sort(Comparator<? super T> c) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
     public List<T> subList(int fromIndex, int toIndex) {
-      return new UnmodifiableList<T>(list.subList(fromIndex, toIndex));
+      return new UnmodifiableList<>(list.subList(fromIndex, toIndex));
+    }
+  }
+
+  private static class UnmodifiableEntry<K, V> implements Map.Entry<K, V> {
+    private final Map.Entry<? extends K, ? extends V> entry;
+
+    UnmodifiableEntry(Map.Entry<? extends K, ? extends V> entry) {
+      this.entry = entry;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      return this == o || entry.equals(o);
+    }
+
+    @Override
+    public K getKey() {
+      return entry.getKey();
+    }
+
+    @Override
+    public V getValue() {
+      return entry.getValue();
+    }
+
+    @Override
+    public int hashCode() {
+      return entry.hashCode();
+    }
+
+    @Override
+    public V setValue(V value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public String toString() {
+      return entry.toString();
     }
   }
 
@@ -459,44 +552,6 @@ public class Collections {
 
     static class UnmodifiableEntrySet<K, V> extends
         UnmodifiableSet<Map.Entry<K, V>> {
-
-      private static class UnmodifiableEntry<K, V> implements Map.Entry<K, V> {
-        private Map.Entry<? extends K, ? extends V> entry;
-
-        public UnmodifiableEntry(Map.Entry<? extends K, ? extends V> entry) {
-          this.entry = entry;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-          return entry.equals(o);
-        }
-
-        @Override
-        public K getKey() {
-          return entry.getKey();
-        }
-
-        @Override
-        public V getValue() {
-          return entry.getValue();
-        }
-
-        @Override
-        public int hashCode() {
-          return entry.hashCode();
-        }
-
-        @Override
-        public V setValue(V value) {
-          throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public String toString() {
-          return entry.toString();
-        }
-      }
 
       @SuppressWarnings("unchecked")
       public UnmodifiableEntrySet(
@@ -526,7 +581,7 @@ public class Collections {
 
           @Override
           public Map.Entry<K, V> next() {
-            return new UnmodifiableEntry<K, V>(it.next());
+            return new UnmodifiableEntry<>(it.next());
           }
 
           @Override
@@ -547,9 +602,11 @@ public class Collections {
       @SuppressWarnings("unchecked")
       public <T> T[] toArray(T[] a) {
         Object[] result = super.toArray(a);
-        wrap(result, coll.size());
+        wrap(result, size());
         return (T[]) result;
       }
+
+      // TODO: implement foreach and spliterator with UnmodifiableEntry
 
       /**
        * Wrap an array of Map.Entries as UnmodifiableEntries.
@@ -558,9 +615,9 @@ public class Collections {
        * @param size number of entries to wrap
        */
       @SuppressWarnings("unchecked")
-      private void wrap(Object[] array, int size) {
+      private static <K, V> void wrap(Object[] array, int size) {
         for (int i = 0; i < size; ++i) {
-          array[i] = new UnmodifiableEntry<K, V>((Map.Entry<K, V>) array[i]);
+          array[i] = new UnmodifiableEntry<>((Map.Entry<K, V>) array[i]);
         }
       }
     }
@@ -570,8 +627,8 @@ public class Collections {
     private final Map<? extends K, ? extends V> map;
     private transient UnmodifiableCollection<V> values;
 
-    public UnmodifiableMap(Map<? extends K, ? extends V> map) {
-      this.map = map;
+    UnmodifiableMap(Map<? extends K, ? extends V> map) {
+      this.map = checkNotNull(map);
     }
 
     @Override
@@ -592,14 +649,14 @@ public class Collections {
     @Override
     public Set<Map.Entry<K, V>> entrySet() {
       if (entrySet == null) {
-        entrySet = new UnmodifiableEntrySet<K, V>(map.entrySet());
+        entrySet = new UnmodifiableEntrySet<>(map.entrySet());
       }
       return entrySet;
     }
 
     @Override
     public boolean equals(Object o) {
-      return map.equals(o);
+      return o == this || map.equals(o);
     }
 
     @Override
@@ -657,24 +714,71 @@ public class Collections {
       }
       return values;
     }
+
+    @Override
+    public void replaceAll(BiFunction<? super K, ? super V, ? extends V> function) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V putIfAbsent(K key, V value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean replace(K key, V oldValue, V newValue) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V replace(K key, V value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V computeIfAbsent(K key, Function<? super K, ? extends V> mappingFunction) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
+      throw new UnsupportedOperationException();
+    }
   }
 
   static class UnmodifiableRandomAccessList<T> extends UnmodifiableList<T>
       implements RandomAccess {
-    public UnmodifiableRandomAccessList(List<? extends T> list) {
+
+    UnmodifiableRandomAccessList(List<? extends T> list) {
       super(list);
+    }
+
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+      return new UnmodifiableRandomAccessList<>(list.subList(fromIndex, toIndex));
     }
   }
 
   static class UnmodifiableSet<T> extends UnmodifiableCollection<T> implements
       Set<T> {
-    public UnmodifiableSet(Set<? extends T> set) {
+
+    UnmodifiableSet(Set<? extends T> set) {
       super(set);
     }
 
     @Override
     public boolean equals(Object o) {
-      return coll.equals(o);
+      return o == this || coll.equals(o);
     }
 
     @Override
@@ -686,9 +790,9 @@ public class Collections {
   static class UnmodifiableSortedMap<K, V> extends UnmodifiableMap<K, V>
       implements SortedMap<K, V> {
 
-    private SortedMap<K, ? extends V> sortedMap;
+    private final SortedMap<K, ? extends V> sortedMap;
 
-    public UnmodifiableSortedMap(SortedMap<K, ? extends V> sortedMap) {
+    UnmodifiableSortedMap(SortedMap<K, ? extends V> sortedMap) {
       super(sortedMap);
       this.sortedMap = sortedMap;
     }
@@ -699,23 +803,13 @@ public class Collections {
     }
 
     @Override
-    public boolean equals(Object o) {
-      return sortedMap.equals(o);
-    }
-
-    @Override
     public K firstKey() {
       return sortedMap.firstKey();
     }
 
     @Override
-    public int hashCode() {
-      return sortedMap.hashCode();
-    }
-
-    @Override
     public SortedMap<K, V> headMap(K toKey) {
-      return new UnmodifiableSortedMap<K, V>(sortedMap.headMap(toKey));
+      return new UnmodifiableSortedMap<>(sortedMap.headMap(toKey));
     }
 
     @Override
@@ -725,21 +819,145 @@ public class Collections {
 
     @Override
     public SortedMap<K, V> subMap(K fromKey, K toKey) {
-      return new UnmodifiableSortedMap<K, V>(sortedMap.subMap(fromKey, toKey));
+      return new UnmodifiableSortedMap<>(sortedMap.subMap(fromKey, toKey));
     }
 
     @Override
     public SortedMap<K, V> tailMap(K fromKey) {
-      return new UnmodifiableSortedMap<K, V>(sortedMap.tailMap(fromKey));
+      return new UnmodifiableSortedMap<>(sortedMap.tailMap(fromKey));
+    }
+  }
+
+  private static class UnmodifiableNavigableMap<K, V> extends UnmodifiableSortedMap<K, V>
+      implements NavigableMap<K, V> {
+
+    private static final NavigableMap<Object, Object> EMPTY =
+        new UnmodifiableNavigableMap<Object, Object>(new TreeMap<>()) {
+          @Override
+          public Set<Entry<Object, Object>> entrySet() {
+            return emptySet();
+          }
+
+          @Override
+          public NavigableSet<Object> navigableKeySet() {
+            return emptyNavigableSet();
+          }
+        };
+
+    private NavigableMap<K, ? extends V> navigableMap;
+
+    UnmodifiableNavigableMap(NavigableMap<K, ? extends V> navigableMap) {
+      super(navigableMap);
+      this.navigableMap = navigableMap;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> ceilingEntry(K key) {
+      return (Entry<K, V>) wrapEntryOrNull(navigableMap.ceilingEntry(key));
+    }
+
+    @Override
+    public K ceilingKey(K key) {
+      return navigableMap.ceilingKey(key);
+    }
+
+    @Override
+    public NavigableSet<K> descendingKeySet() {
+      return new UnmodifiableNavigableSet<>(navigableMap.descendingKeySet());
+    }
+
+    @Override
+    public NavigableMap<K, V> descendingMap() {
+      return new UnmodifiableNavigableMap<>(navigableMap.descendingMap());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> firstEntry() {
+      return (Entry<K, V>) wrapEntryOrNull(navigableMap.firstEntry());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> floorEntry(K key) {
+      return (Entry<K, V>) wrapEntryOrNull(navigableMap.floorEntry(key));
+    }
+
+    @Override
+    public K floorKey(K key) {
+      return navigableMap.floorKey(key);
+    }
+
+    @Override
+    public NavigableMap<K, V> headMap(K toKey, boolean inclusive) {
+      return new UnmodifiableNavigableMap<>(navigableMap.headMap(toKey, inclusive));
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> higherEntry(K key) {
+      return (Entry<K, V>) wrapEntryOrNull(navigableMap.higherEntry(key));
+    }
+
+    @Override
+    public K higherKey(K key) {
+      return navigableMap.higherKey(key);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> lastEntry() {
+      return (Entry<K, V>) wrapEntryOrNull(navigableMap.lastEntry());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Entry<K, V> lowerEntry(K key) {
+      return (Entry<K, V>) wrapEntryOrNull(navigableMap.lowerEntry(key));
+    }
+
+    @Override
+    public K lowerKey(K key) {
+      return navigableMap.lowerKey(key);
+    }
+
+    @Override
+    public NavigableSet<K> navigableKeySet() {
+      return new UnmodifiableNavigableSet<>(navigableMap.navigableKeySet());
+    }
+
+    @Override
+    public Entry<K, V> pollFirstEntry() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Entry<K, V> pollLastEntry() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public NavigableMap<K, V> subMap(K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
+      return new UnmodifiableNavigableMap<>(navigableMap.subMap(fromKey, fromInclusive, toKey, toInclusive));
+    }
+
+    @Override
+    public NavigableMap<K, V> tailMap(K fromKey, boolean inclusive) {
+      return new UnmodifiableNavigableMap<>(navigableMap.tailMap(fromKey, inclusive));
+    }
+
+    private static <K, V> Map.Entry<K, V> wrapEntryOrNull(Map.Entry<K, V> entry) {
+      return entry == null ? null : new UnmodifiableEntry<>(entry);
     }
   }
 
   static class UnmodifiableSortedSet<E> extends UnmodifiableSet<E> implements
       SortedSet<E> {
-    private SortedSet<E> sortedSet;
+    private final SortedSet<E> sortedSet;
 
     @SuppressWarnings("unchecked")
-    public UnmodifiableSortedSet(SortedSet<? extends E> sortedSet) {
+    UnmodifiableSortedSet(SortedSet<? extends E> sortedSet) {
       super(sortedSet);
       this.sortedSet = (SortedSet<E>) sortedSet;
     }
@@ -750,23 +968,13 @@ public class Collections {
     }
 
     @Override
-    public boolean equals(Object o) {
-      return sortedSet.equals(o);
-    }
-
-    @Override
     public E first() {
       return sortedSet.first();
     }
 
     @Override
-    public int hashCode() {
-      return sortedSet.hashCode();
-    }
-
-    @Override
     public SortedSet<E> headSet(E toElement) {
-      return new UnmodifiableSortedSet<E>(sortedSet.headSet(toElement));
+      return new UnmodifiableSortedSet<>(sortedSet.headSet(toElement));
     }
 
     @Override
@@ -776,13 +984,81 @@ public class Collections {
 
     @Override
     public SortedSet<E> subSet(E fromElement, E toElement) {
-      return new UnmodifiableSortedSet<E>(sortedSet.subSet(fromElement,
-          toElement));
+      return new UnmodifiableSortedSet<>(sortedSet.subSet(fromElement, toElement));
     }
 
     @Override
     public SortedSet<E> tailSet(E fromElement) {
-      return new UnmodifiableSortedSet<E>(sortedSet.tailSet(fromElement));
+      return new UnmodifiableSortedSet<>(sortedSet.tailSet(fromElement));
+    }
+  }
+
+  private static class UnmodifiableNavigableSet<T> extends UnmodifiableSortedSet<T>
+      implements NavigableSet<T> {
+
+    private static final NavigableSet<Object> EMPTY =
+        new UnmodifiableNavigableSet<>(new TreeSet<>());
+
+    private final NavigableSet<T> navigableSet;
+
+    UnmodifiableNavigableSet(NavigableSet<T> navigableSet) {
+      super(navigableSet);
+      this.navigableSet = navigableSet;
+    }
+
+    @Override
+    public T ceiling(T e) {
+      return navigableSet.ceiling(e);
+    }
+
+    @Override
+    public Iterator<T> descendingIterator() {
+      return descendingSet().iterator();
+    }
+
+    @Override
+    public NavigableSet<T> descendingSet() {
+      return new UnmodifiableNavigableSet<>(navigableSet.descendingSet());
+    }
+
+    @Override
+    public T floor(T e) {
+      return navigableSet.floor(e);
+    }
+
+    @Override
+    public NavigableSet<T> headSet(T toElement, boolean inclusive) {
+      return new UnmodifiableNavigableSet<>(navigableSet.headSet(toElement, inclusive));
+    }
+
+    @Override
+    public T higher(T e) {
+      return navigableSet.higher(e);
+    }
+
+    @Override
+    public T lower(T e) {
+      return navigableSet.lower(e);
+    }
+
+    @Override
+    public T pollFirst() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public T pollLast() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public NavigableSet<T> subSet(T fromElement, boolean fromInclusive, T toElement, boolean toInclusive) {
+      return new UnmodifiableNavigableSet<>(navigableSet.subSet(fromElement, fromInclusive, toElement, toInclusive));
+    }
+
+    @Override
+    public NavigableSet<T> tailSet(T fromElement, boolean inclusive) {
+      return new UnmodifiableNavigableSet<>(navigableSet.tailSet(fromElement, inclusive));
     }
   }
 
@@ -1038,9 +1314,29 @@ public class Collections {
     return (Map<K, V>) EMPTY_MAP;
   }
 
+  @SuppressWarnings("unchecked")
+  public static <K, V> SortedMap<K, V> emptySortedMap() {
+    return (SortedMap<K, V>) UnmodifiableNavigableMap.EMPTY;
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <K, V> NavigableMap<K, V> emptyNavigableMap() {
+    return (NavigableMap<K, V>) UnmodifiableNavigableMap.EMPTY;
+  }
+
   @SuppressWarnings(value = {"unchecked", "cast"})
   public static <T> Set<T> emptySet() {
     return (Set<T>) EMPTY_SET;
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T> NavigableSet<T> emptyNavigableSet() {
+    return (NavigableSet<T>) UnmodifiableNavigableSet.EMPTY;
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T> SortedSet<T> emptySortedSet() {
+    return (SortedSet<T>) UnmodifiableNavigableSet.EMPTY;
   }
 
   public static <T> Enumeration<T> enumeration(Collection<T> c) {
@@ -1312,9 +1608,16 @@ public class Collections {
     return new UnmodifiableSortedMap<K, V>(map);
   }
 
-  public static <T> SortedSet<T> unmodifiableSortedSet(
-      SortedSet<? extends T> set) {
+  public static <K, V> NavigableMap<K, V> unmodifiableNavigableMap(NavigableMap<K, ? extends V> m) {
+    return new UnmodifiableNavigableMap<>(m);
+  }
+
+  public static <T> SortedSet<T> unmodifiableSortedSet(SortedSet<? extends T> set) {
     return new UnmodifiableSortedSet<T>(set);
+  }
+
+  public static <T> NavigableSet<T> unmodifiableNavigableSet(NavigableSet<T> s) {
+    return new UnmodifiableNavigableSet<>(s);
   }
 
   /**

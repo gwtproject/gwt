@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "4e25349f_398eab21",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/DoubleTest.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-04-01T12:34:16Z",
+      "side": 1,
+      "message": "Good point. Done.",
+      "parentUuid": "91d6710b_c6d13618",
+      "range": {
+        "startLine": 168,
+        "startChar": 1,
+        "endLine": 173,
+        "endChar": 6
+      },
+      "revId": "b99985704948444f22e0e0c0afb374e36b902087",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "314ea583_2541ee87",
         "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
         "patchSetId": 19

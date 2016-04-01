@@ -39,6 +39,30 @@
       "revId": "04383e5fa9b3bf0dd589a36763a822ddb31f0147",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e25349f_593ba71f",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-04-01T11:42:27Z",
+      "side": 1,
+      "message": "I tested it in htmlunit. I guess that\u0027s where the problem is",
+      "parentUuid": "4e25349f_f9fcb385",
+      "range": {
+        "startLine": 189,
+        "startChar": 30,
+        "endLine": 189,
+        "endChar": 84
+      },
+      "revId": "04383e5fa9b3bf0dd589a36763a822ddb31f0147",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

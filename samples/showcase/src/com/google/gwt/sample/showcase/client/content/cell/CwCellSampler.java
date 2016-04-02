@@ -414,7 +414,7 @@ public class CwCellSampler extends ContentWidget {
     }, null);
 
     // SelectionCell.
-    List<String> options = new ArrayList<String>();
+    List<String> options = new ArrayList<String>(categories.length);
     for (Category category : categories) {
       options.add(category.getDisplayName());
     }

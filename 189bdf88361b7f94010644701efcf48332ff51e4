@@ -50,6 +50,24 @@
       "revId": "189bdf88361b7f94010644701efcf48332ff51e4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb5a4db_5a9c158a",
+        "filename": "user/src/com/google/gwt/validation/client/impl/AbstractGwtValidator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 9915
+      },
+      "writtenOn": "2016-04-02T15:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62a769c0_0f1b45b9",
+      "revId": "189bdf88361b7f94010644701efcf48332ff51e4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -254,7 +254,7 @@ public class CwCellTable extends ContentWidget {
 
     // Category.
     final Category[] categories = ContactDatabase.get().queryCategories();
-    List<String> categoryNames = new ArrayList<String>();
+    List<String> categoryNames = new ArrayList<String>(categories.length);
     for (Category category : categories) {
       categoryNames.add(category.getDisplayName());
     }

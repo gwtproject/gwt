@@ -112,7 +112,7 @@ public class CellTreeTest extends AbstractCellTreeTestBase {
 
     // Replace all values in the list.
     List<Integer> oldData = root.getList();
-    List<Integer> newData = new ArrayList<Integer>();
+    List<Integer> newData = new ArrayList<Integer>(oldData.size());
     for (int l : oldData) {
       newData.add(l + 100); // renders the same as the current value.
     }

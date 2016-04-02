@@ -473,7 +473,7 @@ public class DefaultSelectionEventManagerTest extends GWTTestCase {
    * @return a list of data
    */
   protected List<String> createData(int start, int length) {
-    List<String> toRet = new ArrayList<String>();
+    List<String> toRet = new ArrayList<String>(length);
     for (int i = 0; i < length; i++) {
       toRet.add("test " + (i + start));
     }

@@ -120,16 +120,18 @@ public class DelegateMapTest extends GWTTestCase {
   }
 
   private List<Editor<?>> editors(DelegateMap map, Object o) {
-    List<Editor<?>> toReturn = new ArrayList<Editor<?>>();
-    for (AbstractEditorDelegate<?, ?> delegate : map.get(o)) {
+    List<AbstractEditorDelegate<?, ?>> abstractEditorDelegates = map.get(o);
+    List<Editor<?>> toReturn = new ArrayList<>(abstractEditorDelegates.size());
+    for (AbstractEditorDelegate<?, ?> delegate : abstractEditorDelegates) {
       toReturn.add(delegate.getEditor());
     }
     return toReturn;
   }
 
   private List<Editor<?>> editors(DelegateMap map, String path) {
-    List<Editor<?>> toReturn = new ArrayList<Editor<?>>();
-    for (AbstractEditorDelegate<?, ?> delegate : map.getDelegatesByPath(path)) {
+    List<AbstractEditorDelegate<?, ?>> delegatesByPath = map.getDelegatesByPath(path);
+    List<Editor<?>> toReturn = new ArrayList<>(delegatesByPath.size());
+    for (AbstractEditorDelegate<?, ?> delegate : delegatesByPath) {
       toReturn.add(delegate.getEditor());
     }
     return toReturn;

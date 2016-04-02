@@ -64,7 +64,7 @@ public class ReflectionMessageInterface extends AbstractMessageInterface {
   @Override
   public Iterable<Message> getMessages() throws MessageProcessingException {
     final Method[] methods = msgIntf.getMethods();
-    List<Message> messages = new ArrayList<Message>();
+    List<Message> messages = new ArrayList<Message>(methods.length);
     for (Method method : methods) {
       messages.add(new ReflectionMessage(factory,
           ReflectionMessageInterface.this, method));

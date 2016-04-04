@@ -49,6 +49,10 @@ public final class InternalPreconditions {
     }
   }
 
+  public static boolean isArrayTypeChecked() {
+    return TYPE_CHECK || CHECKED_MODE;
+  }
+
   /**
    * Ensures the truth of an expression that verifies array type.
    */

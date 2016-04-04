@@ -38,6 +38,9 @@ import java.util.Set;
  */
 public class LocaleData {
 
+  private static Comparator<MapKey> comparator;
+  private static Comparator<GwtLocale> depthComparator;
+
   /**
    * Represents data about a single currency in a particular locale from CLDR.
    */
@@ -1118,14 +1121,26 @@ public class LocaleData {
   private MapKey[] getSortedMapKeys() {
     Set<MapKey> keySet = maps.keySet();
     MapKey[] keys = keySet.toArray(new MapKey[keySet.size()]);
-    Arrays.sort(keys, new Comparator<MapKey>() {
-      private final Comparator<GwtLocale> depthComparator = new LocaleComparator();
-
-      @Override
-      public int compare(MapKey a, MapKey b) {
-        return depthComparator.compare(a.getLocale(), b.getLocale());
-      }
-    });
+    Arrays.sort(keys, getComparator());
     return keys;
+  }
+
+  private Comparator<MapKey> getComparator() {
+    if (comparator == null) {
+      comparator = new Comparator<MapKey>() {
+        @Override
+        public int compare(MapKey a, MapKey b) {
+          return getDepthComparator().compare(a.getLocale(), b.getLocale());
+        }
+      };
+    }
+    return comparator;
+  }
+
+  private Comparator<GwtLocale> getDepthComparator() {
+    if (depthComparator == null) {
+      depthComparator = new LocaleComparator();
+    }
+    return depthComparator;
   }
 }

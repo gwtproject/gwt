@@ -22,6 +22,30 @@
       "revId": "52998481ae6827437c555d46d24440b4e467d252",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceccc47f_4897f368",
+        "filename": "dev/core/src/com/google/gwt/dev/js/ClosureJsRunner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-04-05T18:42:02Z",
+      "side": 0,
+      "message": "This option was removed. I\u0027m not sure what the replacement is. Need to ask the Closure team.",
+      "parentUuid": "cebbe49e_a726124d",
+      "range": {
+        "startLine": 374,
+        "startChar": 2,
+        "endLine": 377,
+        "endChar": 83
+      },
+      "revId": "52998481ae6827437c555d46d24440b4e467d252",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

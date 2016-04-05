@@ -166,9 +166,8 @@ public final class Long extends Number implements Comparable<Long> {
       return String.valueOf(value);
     }
 
-    int intValue = (int) value;
-    if (intValue == value) {
-      return Integer.toString(intValue, intRadix);
+    if (fitsInUint(value)) {
+      return Integer.toString((int) value, intRadix);
     }
 
     /*
@@ -222,7 +221,7 @@ public final class Long extends Number implements Comparable<Long> {
 
   private static String toPowerOfTwoUnsignedString(long value, int shift) {
     final int radix = 1 << shift;
-    if (Integer.MIN_VALUE <= value && value <= Integer.MAX_VALUE) {
+    if (fitsInUint(value)) {
       return Integer.toString((int) value, radix);
     }
 
@@ -236,6 +235,11 @@ public final class Long extends Number implements Comparable<Long> {
     } while (value != 0);
 
     return String.valueOf(buf, pos, bufSize - pos);
+  }
+
+  private static boolean fitsInUint(long value) {
+    int high = (int) (value >> 32);
+    return high == 0;
   }
 
   private final transient long value;

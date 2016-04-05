@@ -22,6 +22,30 @@
       "revId": "0e5ca7375270dc9c9152efd3383688afcdbda5b4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceccc47f_45835cca",
+        "filename": "eclipse/user/.classpath",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-04-05T04:53:58Z",
+      "side": 1,
+      "message": "No, but my Eclipse kept adding it to this file. Will investigate later, but not in this change.",
+      "parentUuid": "cebbe49e_96a1c9cf",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 18
+      },
+      "revId": "0e5ca7375270dc9c9152efd3383688afcdbda5b4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

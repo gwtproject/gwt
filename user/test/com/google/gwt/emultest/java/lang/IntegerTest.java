@@ -259,6 +259,8 @@ public class IntegerTest extends GWTTestCase {
   }
 
   public void testToBinaryString() {
+    assertEquals("0", Integer.toBinaryString(0));
+    assertEquals("11111111111111111111111111111111", Integer.toBinaryString(-1));
     assertEquals("1111111111111111111111111111111", Integer.toBinaryString(Integer.MAX_VALUE));
     assertEquals("10000000000000000000000000000000", Integer.toBinaryString(Integer.MIN_VALUE));
   }
@@ -266,6 +268,8 @@ public class IntegerTest extends GWTTestCase {
   public void testToHexString() {
     assertEquals("12345", Integer.toHexString(0x12345));
     assertEquals("fff12345", Integer.toHexString(0xFFF12345));
+    assertEquals("0", Integer.toHexString(0));
+    assertEquals("ffffffff", Integer.toHexString(-1));
     assertEquals("7fffffff", Integer.toHexString(Integer.MAX_VALUE));
     assertEquals("80000000", Integer.toHexString(Integer.MIN_VALUE));
     assertEquals("ffffffff", Integer.toHexString(-1));
@@ -278,6 +282,8 @@ public class IntegerTest extends GWTTestCase {
   }
 
   public void testToOctalString() {
+    assertEquals("0", Integer.toOctalString(0));
+    assertEquals("37777777777", Integer.toOctalString(-1));
     assertEquals("17777777777", Integer.toOctalString(Integer.MAX_VALUE));
     assertEquals("20000000000", Integer.toOctalString(Integer.MIN_VALUE));
   }
@@ -291,6 +297,7 @@ public class IntegerTest extends GWTTestCase {
     assertEquals("-2147483647", Integer.toString(-Integer.MAX_VALUE));
     assertEquals("-2147483648", Integer.toString(Integer.MIN_VALUE));
     assertEquals("0", Integer.toString(0));
+    assertEquals("-1", Integer.toString(-1));
 
     assertEquals("17777777777", Integer.toString(2147483647, 8));
     assertEquals("7fffffff", Integer.toString(2147483647, 16));

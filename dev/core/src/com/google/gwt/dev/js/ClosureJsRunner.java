@@ -34,11 +34,10 @@ import com.google.gwt.thirdparty.javascript.jscomp.CompilerOptions.Reach;
 import com.google.gwt.thirdparty.javascript.jscomp.DiagnosticGroups;
 import com.google.gwt.thirdparty.javascript.jscomp.JSError;
 import com.google.gwt.thirdparty.javascript.jscomp.JSModule;
-import com.google.gwt.thirdparty.javascript.jscomp.JSSourceFile;
 import com.google.gwt.thirdparty.javascript.jscomp.PropertyRenamingPolicy;
 import com.google.gwt.thirdparty.javascript.jscomp.Result;
 import com.google.gwt.thirdparty.javascript.jscomp.SourceAst;
-import com.google.gwt.thirdparty.javascript.jscomp.VariableMap;
+import com.google.gwt.thirdparty.javascript.jscomp.SourceFile;
 import com.google.gwt.thirdparty.javascript.jscomp.VariableRenamingPolicy;
 import com.google.gwt.thirdparty.javascript.jscomp.WarningLevel;
 import com.google.gwt.thirdparty.javascript.rhino.InputId;
@@ -47,9 +46,8 @@ import com.google.gwt.thirdparty.javascript.rhino.Node;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.ParseException;
+import java.nio.charset.Charset;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -99,7 +97,7 @@ public class ClosureJsRunner {
    * @return a mutable list
    * @throws IOException
    */
-  public static List<JSSourceFile> getDefaultExterns() throws IOException {
+  public static List<SourceFile> getDefaultExterns() throws IOException {
     Class<ClosureJsRunner> clazz = ClosureJsRunner.class;
     InputStream input = clazz.getResourceAsStream("/com/google/javascript/jscomp/externs.zip");
     if (input == null) {
@@ -110,14 +108,14 @@ public class ClosureJsRunner {
       input = clazz.getResourceAsStream("/externs.zip");
     }
     ZipInputStream zip = new ZipInputStream(input);
-    Map<String, JSSourceFile> externsMap = Maps.newHashMap();
+    Map<String, SourceFile> externsMap = Maps.newHashMap();
     for (ZipEntry entry = null; (entry = zip.getNextEntry()) != null;) {
       BufferedInputStream entryStream =
           new BufferedInputStream(ByteStreams.limit(zip, entry.getSize()));
-      externsMap.put(entry.getName(), JSSourceFile.fromInputStream(
+      externsMap.put(entry.getName(), SourceFile.fromInputStream(
       // Give the files an odd prefix, so that they do not conflict
       // with the user's files.
-          "externs.zip//" + entry.getName(), entryStream));
+          "externs.zip//" + entry.getName(), entryStream, Charset.defaultCharset()));
     }
 
     Preconditions.checkState(externsMap.keySet().equals(Sets.newHashSet(DEFAULT_EXTERNS_NAMES)),
@@ -125,7 +123,7 @@ public class ClosureJsRunner {
 
     // Order matters, so the resources must be added to the result list
     // in the expected order.
-    List<JSSourceFile> externs = Lists.newArrayList();
+    List<SourceFile> externs = Lists.newArrayList();
     for (String key : DEFAULT_EXTERNS_NAMES) {
       externs.add(externsMap.get(key));
     }
@@ -176,11 +174,8 @@ public class ClosureJsRunner {
   public void compile(JProgram jprogram, JsProgram program, String[] js,
       JsOutputOption jsOutputOption) {
     CompilerOptions options;
-    try {
-      options = getClosureCompilerOptions(jsOutputOption);
-    } catch (ParseException e) {
-      throw new RuntimeException("Error setting closure compiler options", e);
-    }
+    options = getClosureCompilerOptions(jsOutputOption);
+
     // Turn off Closure Compiler logging
     Logger.getLogger("com.google.gwt.thirdparty.javascript.jscomp").setLevel(Level.OFF);
 
@@ -192,7 +187,7 @@ public class ClosureJsRunner {
     List<JSModule> modules = createClosureModules(program);
 
     // Build the externs based on what we discovered building the modules.
-    List<JSSourceFile> externs = getClosureCompilerExterns();
+    List<SourceFile> externs = getClosureCompilerExterns();
 
     Result result = compiler.compileModules(externs, modules, options);
     if (result.success) {
@@ -209,8 +204,8 @@ public class ClosureJsRunner {
     }
   }
 
-  protected List<JSSourceFile> getDefaultExternsList() {
-    List<JSSourceFile> defaultExterns;
+  protected List<SourceFile> getDefaultExternsList() {
+    List<SourceFile> defaultExterns;
     try {
       defaultExterns = getDefaultExterns();
       return defaultExterns;
@@ -275,7 +270,7 @@ public class ClosureJsRunner {
       String source) {
     String inputName = source;
     InputId inputId = new InputId(inputName);
-    ClosureJsAstTranslator translator = new ClosureJsAstTranslator(validate, program);
+    ClosureJsAstTranslator translator = new ClosureJsAstTranslator(validate, program, compiler);
     Node root = translator.translate(fragment, inputId, source);
     globalVars.addAll(translator.getGlobalVariableNames());
     externalProps.addAll(translator.getExternalPropertyReferences());
@@ -315,14 +310,14 @@ public class ClosureJsRunner {
         modules[i].addDependency(leftovers);
       }
     }
-    modules[0].add(JSSourceFile.fromCode("hack", "window['gwtOnLoad'] = gwtOnLoad;\n"));
+    modules[0].add(SourceFile.fromCode("hack", "window['gwtOnLoad'] = gwtOnLoad;\n"));
 
     return Arrays.asList(modules);
   }
 
-  private List<JSSourceFile> getClosureCompilerExterns() {
-    List<JSSourceFile> externs = getDefaultExternsList();
-    externs.add(JSSourceFile.fromCode("gwt_externs",
+  private List<SourceFile> getClosureCompilerExterns() {
+    List<SourceFile> externs = getDefaultExternsList();
+    externs.add(SourceFile.fromCode("gwt_externs",
 
     "var gwtOnLoad;\n"
         + "var $entry;\n"
@@ -356,25 +351,16 @@ public class ClosureJsRunner {
       generatedExterns += "var " + var + ";\n";
     }
 
-    externs.add(JSSourceFile.fromCode("gwt_generated_externs", generatedExterns));
+    externs.add(SourceFile.fromCode("gwt_generated_externs", generatedExterns));
 
     return externs;
   }
 
-  private CompilerOptions getClosureCompilerOptions(JsOutputOption jsOutputOption)
-      throws ParseException {
+  private CompilerOptions getClosureCompilerOptions(JsOutputOption jsOutputOption) {
     CompilerOptions options = new CompilerOptions();
     WarningLevel.QUIET.setOptionsForWarningLevel(options);
 
     // Basically, use CompilationLevel.ADVANCED_OPTIMIZATIONS:
-
-    // Build an identity map of variable names to prevent GWT names from
-    // being renamed while allowing new global variables to be renamed.
-    HashMap<String, String> varNames = new HashMap<String, String>();
-    for (String var : globalVars) {
-      varNames.put(var, var);
-    }
-    options.setInputVariableMapSerialized(VariableMap.fromMap(varNames).toBytes());
     if (jsOutputOption == JsOutputOption.OBFUSCATED) {
       options.setRenamingPolicy(VariableRenamingPolicy.ALL, PropertyRenamingPolicy.OFF);
       options.setPrettyPrint(false);
@@ -412,7 +398,7 @@ public class ClosureJsRunner {
     options.setFlowSensitiveInlineVariables(true);
     options.setComputeFunctionSideEffects(true);
     // Remove unused vars also removes unused functions.
-    options.setRemoveUnusedVariable(Reach.ALL);
+    options.setRemoveUnusedVariables(Reach.ALL);
     options.setOptimizeParameters(true);
     options.setOptimizeReturns(true);
     options.setOptimizeCalls(true);
@@ -425,7 +411,6 @@ public class ClosureJsRunner {
 
     // Advanced optimization, disabled
     options.setRemoveClosureAsserts(false);
-    options.setAliasKeywords(false);
     options.setRemoveUnusedPrototypePropertiesInExterns(false);
     options.setCheckGlobalThisLevel(CheckLevel.OFF);
     options.setRewriteFunctionExpressions(false); // Performance hit

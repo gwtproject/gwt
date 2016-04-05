@@ -248,6 +248,12 @@ public class LongTest extends GWTTestCase {
 
   public void testToBinaryString() {
     assertEquals("0", Long.toBinaryString(0L));
+    assertEquals("1111111111111111111111111111111111111111111111111111111111111111",
+        Long.toBinaryString(-1));
+    assertEquals("1000000000000000000000000000000000000000000000000000000000000000",
+        Long.toBinaryString(Long.MIN_VALUE));
+    assertEquals("111111111111111111111111111111111111111111111111111111111111111",
+        Long.toBinaryString(Long.MAX_VALUE));
     assertEquals("10001111101101101111011110001100100000000", Long.toBinaryString(1234500000000L));
     assertEquals("1111111111111111111111101110000010010010000100001110011100000000",
         Long.toBinaryString(-1234500000000L));
@@ -258,17 +264,25 @@ public class LongTest extends GWTTestCase {
     assertEquals("12345", Long.toHexString(0x12345L));
     assertEquals("1234500000000", Long.toHexString(0x1234500000000L));
     assertEquals("fff1234500000000", Long.toHexString(0xFFF1234500000000L));
+    assertEquals("0", Long.toHexString(0));
+    assertEquals("ffffffffffffffff", Long.toHexString(-1));
+    assertEquals("8000000000000000", Long.toHexString(Long.MIN_VALUE));
+    assertEquals("7fffffffffffffff", Long.toHexString(Long.MAX_VALUE));
   }
 
   public void testToOctalString() {
     assertEquals("7", Long.toOctalString(7L));
     assertEquals("77777777777", Long.toOctalString(077777777777L));
+    assertEquals("0", Long.toOctalString(0));
+    assertEquals("1777777777777777777777", Long.toOctalString(-1));
     assertEquals("1000000000000000000000", Long.toOctalString(Long.MIN_VALUE));
     assertEquals("777777777777777777777", Long.toOctalString(Long.MAX_VALUE));
   }
 
   public void testToString() {
     assertEquals("89000000005", new Long(89000000005L).toString());
+    assertEquals("0", new Long(0).toString());
+    assertEquals("-1", new Long(-1).toString());
     assertEquals("-9223372036854775808", new Long(Long.MIN_VALUE).toString());
     assertEquals("9223372036854775807", new Long(Long.MAX_VALUE).toString());
 

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e31b481_36adf8aa",
+        "filename": "user/super/com/google/gwt/emul/java/util/Spliterators.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-04-06T07:53:14Z",
+      "side": 1,
+      "message": "I fixed that in master already.\nIf you could merge your comparators patch then I would rebase this patch.",
+      "parentUuid": "6ea598c6_2ea817e2",
+      "revId": "5b7992352c1e653ce046e7350c158812b6dc389a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ea598c6_2e45b7ef",
         "filename": "user/super/com/google/gwt/emul/java/util/Spliterators.java",
         "patchSetId": 18

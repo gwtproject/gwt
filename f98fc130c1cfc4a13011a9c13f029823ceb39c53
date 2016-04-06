@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ea598c6_74c82e91",
+        "filename": "user/super/com/google/gwt/emul/java/util/Spliterators.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-04-06T09:52:16Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027javaemul.internal.InternalPreconditions.checkCriticalElement\u0027 import.",
+      "revId": "f98fc130c1cfc4a13011a9c13f029823ceb39c53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

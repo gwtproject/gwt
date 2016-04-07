@@ -22,6 +22,63 @@
       "revId": "7fe4e2449320c91993fef9b4571edb1fff2519bb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce1da4f8_5dfd2f7e",
+        "filename": "distro-source/core/src/COPYING",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-04-07T11:24:28Z",
+      "side": 1,
+      "message": "\"the GWT\" ?",
+      "range": {
+        "startLine": 12,
+        "startChar": 43,
+        "endLine": 12,
+        "endChar": 50
+      },
+      "revId": "7fe4e2449320c91993fef9b4571edb1fff2519bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e31b481_5690b47c",
+        "filename": "distro-source/core/src/COPYING",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-04-07T11:24:28Z",
+      "side": 1,
+      "message": "Oh my, this list is awfully outdated! Tomcat, ASM 3.1, the JDT version, SWT, Jetty license and link, Mozilla.",
+      "revId": "7fe4e2449320c91993fef9b4571edb1fff2519bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e31b481_169a3c9b",
+        "filename": "distro-source/core/src/about.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-04-07T11:24:28Z",
+      "side": 1,
+      "message": "Update link (and \"label\")",
+      "revId": "7fe4e2449320c91993fef9b4571edb1fff2519bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

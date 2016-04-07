@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae1230d6_2cf83b65",
+        "filename": "distro-source/core/src/COPYING",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-04-07T11:05:34Z",
+      "side": 1,
+      "message": "Should this be \"the GWT authors\"?",
+      "range": {
+        "startLine": 5,
+        "startChar": 46,
+        "endLine": 5,
+        "endChar": 57
+      },
+      "revId": "7fe4e2449320c91993fef9b4571edb1fff2519bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

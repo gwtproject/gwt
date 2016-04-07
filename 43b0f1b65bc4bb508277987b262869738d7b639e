@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ea598c6_34fdfcca",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/GwtIncompatibleTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-04-07T02:36:40Z",
+      "side": 1,
+      "message": "This test is passing in Eclipse but failing in \"ant test\":\nFrom \"TEST-com.google.gwt.dev.jjs.ExtraCompilerSuite.txt\":\n\nTestcase: testIncompatibleClass took 0.077 sec\n        FAILED\nexpected: \u003c-1\u003e, actual: \u003c0\u003e\njunit.framework.AssertionFailedError: expected: \u003c-1\u003e, actual: \u003c0\u003e\n        at com.google.gwt.dev.jjs.test.GwtIncompatibleTest.testIncompatibleClass(GwtIncompatibleTest.java:122)\n        at com.google.gwt.junit.client.impl.GWTTestAccessor.invoke(GWTTestAccessor.java:39)\n        at com.google.gwt.junit.client.impl.GWTRunner.executeTestMethod(GWTRunner.java:226)\n        at com.google.gwt.junit.client.GWTTestCase.doRunTest(GWTTestCase.java:157)\n        at com.google.gwt.junit.client.GWTTestCase.runBare(GWTTestCase.java:151)\n        at com.google.gwt.junit.client.GWTTestCase.__doRunTest(GWTTestCase.java:115)\n        at com.google.gwt.junit.client.impl.GWTRunner.runTest(GWTRunner.java:302)\n        at com.google.gwt.junit.client.impl.GWTRunner.doRunTest(GWTRunner.java:235)\n        at com.google.gwt.junit.client.impl.GWTRunner.access$9(GWTRunner.java:229)\n        at com.google.gwt.junit.client.impl.GWTRunner$TestBlockListener.onSuccess(GWTRunner.java:106)\n        at com.google.gwt.junit.client.impl.GWTRunner$TestBlockListener.onSuccess(GWTRunner.java:1)\n        at com.google.gwt.user.client.rpc.impl.RequestCallbackAdapter.onResponseReceived(RequestCallbackAdapter.java:232)\n        at com.google.gwt.http.client.Request.fireOnResponseReceived(Request.java:250)\n        at com.google.gwt.http.client.RequestBuilder$1.onReadyStateChange(RequestBuilder.java:412)\n        at com.google.gwt.dev.shell.MethodAdaptor.invoke(MethodAdaptor.java:103)\n        at com.google.gwt.dev.shell.MethodDispatch.invoke(MethodDispatch.java:72)\n        at com.google.gwt.dev.shell.OophmSessionHandler.invoke(OophmSessionHandler.java:172)\n        at com.google.gwt.dev.shell.BrowserChannelServer.reactToMessagesWhileWaitingForReturn(BrowserChannelServer.java:341)\n        at com.google.gwt.dev.shell.BrowserChannelServer.invokeJavascript(BrowserChannelServer.java:222)\n        at com.google.gwt.dev.shell.ModuleSpaceOOPHM.doInvoke(ModuleSpaceOOPHM.java:121)\n        at com.google.gwt.dev.shell.ModuleSpace.invokeNative(ModuleSpace.java:573)\n        at com.google.gwt.dev.shell.ModuleSpace.invokeNativeObject(ModuleSpace.java:293)\n        at com.google.gwt.dev.shell.JavaScriptHost.invokeNativeObject(JavaScriptHost.java:91)\n        at com.google.gwt.core.client.impl.Impl.apply(Impl.java)\n        at com.google.gwt.core.client.impl.Impl.entry0(Impl.java:298)\n        at com.google.gwt.dev.shell.MethodAdaptor.invoke(MethodAdaptor.java:103)\n        at com.google.gwt.dev.shell.MethodDispatch.invoke(MethodDispatch.java:72)\n        at com.google.gwt.dev.shell.OophmSessionHandler.invoke(OophmSessionHandler.java:172)\n        at com.google.gwt.dev.shell.BrowserChannelServer.reactToMessages(BrowserChannelServer.java:296)\n        at com.google.gwt.dev.shell.BrowserChannelServer.processConnection(BrowserChannelServer.java:551)\n        at com.google.gwt.dev.shell.BrowserChannelServer.run(BrowserChannelServer.java:368)\n        at java.lang.Thread.run(Thread.java:745)",
+      "range": {
+        "startLine": 83,
+        "startChar": 14,
+        "endLine": 83,
+        "endChar": 35
+      },
+      "revId": "43b0f1b65bc4bb508277987b262869738d7b639e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

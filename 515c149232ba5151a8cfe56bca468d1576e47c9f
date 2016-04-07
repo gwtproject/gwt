@@ -91,6 +91,30 @@
       "revId": "515c149232ba5151a8cfe56bca468d1576e47c9f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e31b481_d902b72f",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1366,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-04-07T20:55:27Z",
+      "side": 1,
+      "message": "Hm ok this line is also changed in your other collections CL and uses \n\n  return (Comparator\u003cT\u003e) Comparator.reverseOrder()",
+      "parentUuid": "4e31b481_99e3dfbd",
+      "range": {
+        "startLine": 1366,
+        "startChar": 11,
+        "endLine": 1366,
+        "endChar": 32
+      },
+      "revId": "515c149232ba5151a8cfe56bca468d1576e47c9f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

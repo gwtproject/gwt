@@ -1,4 +1,4 @@
-Google Web Toolkit @GWT_VERSION@
+GWT @GWT_VERSION@
 (git revision @GWT_GITREV@)
 Copyright (c) Google, Inc. 2009.  All rights reserved.
 Visit Google Code (http://code.google.com/webtoolkit/).

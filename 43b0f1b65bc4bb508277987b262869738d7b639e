@@ -22,6 +22,30 @@
       "revId": "43b0f1b65bc4bb508277987b262869738d7b639e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ea598c6_d7f6d23c",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/GwtIncompatibleTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-04-07T04:40:13Z",
+      "side": 1,
+      "message": "The report is from gwt/trunk/build/out/user/test/emma-htmlunit/report.",
+      "parentUuid": "6ea598c6_34fdfcca",
+      "range": {
+        "startLine": 83,
+        "startChar": 14,
+        "endLine": 83,
+        "endChar": 35
+      },
+      "revId": "43b0f1b65bc4bb508277987b262869738d7b639e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

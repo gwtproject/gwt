@@ -45,6 +45,7 @@ import com.google.gwt.thirdparty.javascript.rhino.InputId;
 import com.google.gwt.thirdparty.javascript.rhino.Node;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -126,9 +127,9 @@ public class ClosureJsRunner {
       "w3c_serviceworker.js",
       "w3c_webcrypto.js",
       "w3c_xml.js",
-      "webstorage.js",
-      "webkit_notifications.js",
       "webgl.js",
+      "webkit_notifications.js",
+      "webstorage.js",
       "whatwg_encoding.js",
       "window.js");
 
@@ -149,12 +150,14 @@ public class ClosureJsRunner {
     ZipInputStream zip = new ZipInputStream(input);
     Map<String, SourceFile> externsMap = Maps.newHashMap();
     for (ZipEntry entry = null; (entry = zip.getNextEntry()) != null;) {
-      BufferedInputStream entryStream =
-          new BufferedInputStream(ByteStreams.limit(zip, entry.getSize()));
-      externsMap.put(entry.getName(), SourceFile.fromInputStream(
-      // Give the files an odd prefix, so that they do not conflict
-      // with the user's files.
-          "externs.zip//" + entry.getName(), entryStream, Charset.defaultCharset()));
+      if (!entry.isDirectory()) {
+        BufferedInputStream entryStream =
+            new BufferedInputStream(ByteStreams.limit(zip, entry.getSize()));
+        externsMap.put(new File(entry.getName()).getName(), SourceFile.fromInputStream(
+            // Give the files an odd prefix, so that they do not conflict
+            // with the user's files.
+            "externs.zip//" + entry.getName(), entryStream, Charset.defaultCharset()));
+      }
     }
 
     Preconditions.checkState(externsMap.keySet().equals(Sets.newHashSet(DEFAULT_EXTERNS_NAMES)),

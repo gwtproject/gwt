@@ -249,7 +249,7 @@ public class ClosureJsRunner {
       defaultExterns = getDefaultExterns();
       return defaultExterns;
     } catch (IOException e) {
-      throw Throwables.propagate(e);
+      throw new RuntimeException(e);
     }
   }
 

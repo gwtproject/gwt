@@ -21,6 +21,7 @@ import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
+import java.util.function.IntUnaryOperator;
 
 /**
  * Utility methods that operate on collections. <a
@@ -849,10 +850,6 @@ public class Collections {
     }
   }
 
-  private static class RandomHolder {
-    private static final Random rnd = new Random();
-  }
-
   @SuppressWarnings("unchecked")
   public static final List EMPTY_LIST = new EmptyList();
 
@@ -1233,19 +1230,24 @@ public class Collections {
   }
 
   public static <T> void shuffle(List<T> list) {
-    shuffle(list, RandomHolder.rnd);
+    shuffle(list, bounds -> (int) (Math.random() * bounds));
+  }
+
+  public static <T> void shuffle(List<T> list, Random rnd) {
+    checkNotNull(rnd);
+    shuffle(list, rnd::nextInt);
   }
 
   @SuppressWarnings("unchecked")
-  public static <T> void shuffle(List<T> list, Random rnd) {
+  private static <T> void shuffle(List<T> list, IntUnaryOperator rnd) {
     if (list instanceof RandomAccess) {
       for (int i = list.size() - 1; i >= 1; i--) {
-        swapImpl(list, i, rnd.nextInt(i + 1));
+        swapImpl(list, i, rnd.applyAsInt(i + 1));
       }
     } else {
       Object arr[] = list.toArray();
       for (int i = arr.length - 1; i >= 1; i--) {
-        swapImpl(arr, i, rnd.nextInt(i + 1));
+        swapImpl(arr, i, rnd.applyAsInt(i + 1));
       }
 
       ListIterator<T> it = list.listIterator();

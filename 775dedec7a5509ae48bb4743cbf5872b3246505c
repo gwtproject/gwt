@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e74807a_157bd48d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Integer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-04-08T10:45:04Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027javaemul.internal.Coercions.ensureInt\u0027 import.",
+      "revId": "775dedec7a5509ae48bb4743cbf5872b3246505c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

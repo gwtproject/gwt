@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce65a4c5_1ad4dd07",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collections.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-04-08T09:43:08Z",
+      "side": 1,
+      "message": "A singular name is probably better, e.g. bound, limit, maxIndex",
+      "range": {
+        "startLine": 1233,
+        "startChar": 18,
+        "endLine": 1233,
+        "endChar": 24
+      },
+      "revId": "df130b25fe43ff5d752d5c405f13821dd2ce1a67",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -20,7 +20,6 @@ import com.google.gwt.dev.jjs.impl.codesplitter.FragmentPartitioningResult;
 import com.google.gwt.dev.js.ast.JsProgram;
 import com.google.gwt.dev.js.ast.JsProgramFragment;
 import com.google.gwt.thirdparty.guava.common.base.Preconditions;
-import com.google.gwt.thirdparty.guava.common.base.Throwables;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
@@ -249,7 +248,7 @@ public class ClosureJsRunner {
       defaultExterns = getDefaultExterns();
       return defaultExterns;
     } catch (IOException e) {
-      throw Throwables.propagate(e);
+      throw new RuntimeException(e);
     }
   }
 

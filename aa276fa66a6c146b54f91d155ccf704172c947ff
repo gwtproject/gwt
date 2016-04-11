@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b25269f_d6e9c49c",
+        "filename": "elemental/src/elemental/json/impl/JreJsonObject.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5405
+      },
+      "writtenOn": "2016-04-11T12:03:19Z",
+      "side": 1,
+      "message": "Why not this.map \u003d instance.map; like it\u0027s done in JreJsonArray?",
+      "range": {
+        "startLine": 188,
+        "startChar": 19,
+        "endLine": 188,
+        "endChar": 32
+      },
+      "revId": "aa276fa66a6c146b54f91d155ccf704172c947ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb009af1_db3fb3b5",
+        "filename": "elemental/src/elemental/json/impl/JreJsonValue.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5405
+      },
+      "writtenOn": "2016-04-11T12:03:19Z",
+      "side": 1,
+      "message": "Redundant change",
+      "revId": "aa276fa66a6c146b54f91d155ccf704172c947ff",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

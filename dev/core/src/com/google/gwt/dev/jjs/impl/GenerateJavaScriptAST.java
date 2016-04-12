@@ -1283,14 +1283,26 @@ public class GenerateJavaScriptAST {
           continue;
         }
 
-        SourceInfo sourceInfo = type.getSourceInfo();
-        JsExpression protoRef = getPrototypeQualifierOf(type, sourceInfo);
-        JsNameRef clazzField =
-            getIndexedFieldJsName(RuntimeConstants.OBJECT_CLAZZ).makeRef(sourceInfo);
-        clazzField.setQualifier(protoRef);
-        JsExprStmt stmt = createAssignment(clazzField, classLiteralRef).makeStmt();
+        JsNameRef clazzField = getClassLiteralJsFieldRef(type);
+        JsExpression assignLiteral = createAssignment(clazzField, classLiteralRef);
+        JsExpression conditionalAssign = assignLiteral;
+        // classLiteral && foo.prototype.clazz = classLiteral
+        if (closureCompilerFormatEnabled) {
+          conditionalAssign = new JsBinaryOperation(type.getSourceInfo(),
+              JsBinaryOperator.AND, createClassLiteralReference(type), assignLiteral);
+        }
+        JsExprStmt stmt = conditionalAssign.makeStmt();
         addTypeDefinitionStatement(type, stmt);
       }
+    }
+
+    private JsNameRef getClassLiteralJsFieldRef(JDeclaredType type) {
+      SourceInfo sourceInfo = type.getSourceInfo();
+      JsExpression protoRef = getPrototypeQualifierOf(type, sourceInfo);
+      JsNameRef clazzField =
+          getIndexedFieldJsName(RuntimeConstants.OBJECT_CLAZZ).makeRef(sourceInfo);
+      clazzField.setQualifier(protoRef);
+      return clazzField;
     }
 
     private boolean shouldNotEmitTypeDefinition(JDeclaredType type) {
@@ -1816,6 +1828,19 @@ public class GenerateJavaScriptAST {
       var.setInitExpr(classLiteralObject);
       vars.add(var);
       addVarsIfNotEmpty(vars);
+      if (closureCompilerFormatEnabled) {
+        // install class literal if class prototype already exists
+        JsName classCtor = names.get(type);
+        assert classCtor != null;
+        SourceInfo sourceInfo = type.getSourceInfo();
+        JsNameRef classCtorRef = classCtor.makeRef(sourceInfo);
+        JsNameRef classField = getClassLiteralJsFieldRef((JDeclaredType) type);
+        JsExpression assignLiteral = createAssignment(classField, jsName.makeRef(sourceInfo));
+        // ctor && ctor.prototype.clazz == classLiteral
+        JsBinaryOperation andOp = new JsBinaryOperation(sourceInfo, JsBinaryOperator.AND,
+            classCtorRef, assignLiteral);
+        addTypeDefinitionStatement((JDeclaredType) type, andOp.makeStmt());
+      }
     }
 
     private JsNameRef createClassLiteralReference(JType type) {

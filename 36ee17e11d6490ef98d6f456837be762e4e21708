@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b547ee5_d0ecfce0",
+        "filename": "user/src/com/google/gwt/validation/client/impl/ConstraintViolationImpl.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-04-14T08:32:07Z",
+      "side": 1,
+      "message": "Hmm, actually, this could also be rewritten in terms of Objects.equal(); could improve readability. WDYT?",
+      "revId": "36ee17e11d6490ef98d6f456837be762e4e21708",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

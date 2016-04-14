@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4bcb66e2_d0217139",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-04-14T08:23:03Z",
+      "side": 1,
+      "message": "[warning] Subject line and body should be separated by a blank line.",
+      "revId": "989d425761ce56b9da7b2f394d041f4d3cd67c34",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4bcb66e2_b026754d",
+        "filename": "user/test/com/google/gwt/validation/client/impl/ConstraintViolationImplTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-04-14T08:23:03Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "989d425761ce56b9da7b2f394d041f4d3cd67c34",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

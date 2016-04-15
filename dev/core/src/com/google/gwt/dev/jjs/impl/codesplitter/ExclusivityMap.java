@@ -25,6 +25,7 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JRunAsync;
+import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer;
 import com.google.gwt.dev.js.ast.JsStatement;
@@ -217,8 +218,8 @@ class ExclusivityMap {
    * </p>
    */
   public void fixUpLoadOrderDependencies(TreeLogger logger, JProgram jprogram,
-      Set<JMethod> methodsInJavaScript) {
-    fixUpLoadOrderDependenciesForMethods(logger, jprogram, methodsInJavaScript);
+      Set<JMethod> methodsStillInJavaScript) {
+    fixUpLoadOrderDependenciesForMethods(logger, jprogram, methodsStillInJavaScript);
     fixUpLoadOrderDependenciesForTypes(logger, jprogram);
     fixUpLoadOrderDependenciesForClassLiterals(logger, jprogram);
   }
@@ -280,14 +281,25 @@ class ExclusivityMap {
       }
 
       Fragment classLiteralFragment = fragmentForField.get(field);
-      JExpression initializer = field.getInitializer();
 
-      // Fixup the class literals.
+      // In -XenableClosureFormat creation of class literals needs to happen before or with class
+      // definition. This fixup takes care when it is not the case.
+      JType type = jprogram.getTypeByClassLiteralField(field);
+      Fragment classLiteralTypeFragment = fragmentForType.get(type);
+      if (classLiteralTypeFragment != null
+          && !canReferenceAtomsFrom(classLiteralTypeFragment, classLiteralFragment)) {
+        numFixups++;
+        fragmentForField.put(field, NOT_EXCLUSIVE);
+        classLiteralFragment = NOT_EXCLUSIVE;
+      }
+
+      // Fixup the superclass class literals.
+      JExpression initializer = field.getInitializer();
       for (JClassLiteral superclassClassLiteral : classLiteralsIn(initializer)) {
         JField superclassClassLiteralField = superclassClassLiteral.getField();
         // Fix the super class literal and add it to the reexamined.
         Fragment superclassClassLiteralFragment = fragmentForField.get(superclassClassLiteralField);
-        if (!fragmentsAreConsistent(classLiteralFragment, superclassClassLiteralFragment)) {
+        if (!canReferenceAtomsFrom(classLiteralFragment, superclassClassLiteralFragment)) {
           numFixups++;
           fragmentForField.put(superclassClassLiteralField, NOT_EXCLUSIVE);
           // Add the field back so that its superclass classliteral gets fixed if necessary.
@@ -301,10 +313,14 @@ class ExclusivityMap {
   }
 
   /**
-   * Fixes up the load-order dependencies from instance methods to their enclosing types.
+   * Fixes up the load-order dependencies from instance methods to their enclosing types, in some
+   * cases there is some freedom to place instance methods in one of two or more exclusive
+   * fragment. That scenario arises when an instance method is only accessible after two or
+   * more exclusive fragments have been loaded. In such scenario this fixup will move the method
+   * to the fragment where the type is instantiated.
    */
   private void fixUpLoadOrderDependenciesForMethods(TreeLogger logger, JProgram jprogram,
-      Set<JMethod> methodsInJavaScript) {
+      Set<JMethod> methodsStillInJavaScript) {
     int numFixups = 0;
 
     for (JDeclaredType type : jprogram.getDeclaredTypes()) {
@@ -317,9 +333,11 @@ class ExclusivityMap {
       * must be in the same one.
       */
       for (JMethod method : type.getMethods()) {
-        if (method.needsDynamicDispatch() && methodsInJavaScript.contains(method)
+        if (method.needsDynamicDispatch() && methodsStillInJavaScript.contains(method)
             && typeFrag != fragmentForMethod.get(method)) {
-          fragmentForType.put(type, NOT_EXCLUSIVE);
+          // Instance methods can safely be moved to the fragment that makes the type instantiated
+          // if it is an exclusive fragment.
+          fragmentForType.put(type, typeFrag);
           numFixups++;
           break;
         }
@@ -345,7 +363,7 @@ class ExclusivityMap {
       if (type.getSuperClass() != null) {
         Fragment typeFrag = fragmentForType.get(type);
         Fragment supertypeFrag = fragmentForType.get(type.getSuperClass());
-        if (!fragmentsAreConsistent(typeFrag, supertypeFrag)) {
+        if (!canReferenceAtomsFrom(typeFrag, supertypeFrag)) {
           numFixups++;
           fragmentForType.put(type.getSuperClass(), NOT_EXCLUSIVE);
           typesToCheck.add(type.getSuperClass());
@@ -364,7 +382,7 @@ class ExclusivityMap {
   /**
    * Returns true if atoms in thatFragment are visible from thisFragment.
    */
-  private static boolean fragmentsAreConsistent(Fragment thisFragment, Fragment thatFragment) {
+  private static boolean canReferenceAtomsFrom(Fragment thisFragment, Fragment thatFragment) {
     return thisFragment == null || thisFragment == thatFragment || !thatFragment.isExclusive();
   }
 

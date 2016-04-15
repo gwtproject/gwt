@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b74727a_98b719fa",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 7170
+      },
+      "writtenOn": "2016-04-15T13:39:21Z",
+      "side": 1,
+      "message": "I\u0027ve found it very confusing to put here the jetty-servlets and jetty-servlet below. But after reading the comment this makes sense.",
+      "revId": "2639e9fbe600eb8e9b30cc620c962517058bcee6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

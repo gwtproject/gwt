@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8b5f1ef9_3877e90e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-04-15T08:29:56Z",
+      "side": 1,
+      "message": "Bug: #9316 \nBug-Link: https://github.com/gwtproject/gwt/issues/9316",
+      "revId": "7fe4e2449320c91993fef9b4571edb1fff2519bb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae1230d6_2cf83b65",
         "filename": "distro-source/core/src/COPYING",
         "patchSetId": 1

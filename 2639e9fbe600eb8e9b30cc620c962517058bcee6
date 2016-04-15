@@ -16,6 +16,23 @@
       "revId": "2639e9fbe600eb8e9b30cc620c962517058bcee6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b5f1ef9_1b14df64",
+        "filename": "maven/poms/gwt/pom-template.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-04-15T13:55:54Z",
+      "side": 1,
+      "message": "Wouldn\u0027t be better to add a properties block and set this version in a variable instead ?",
+      "revId": "2639e9fbe600eb8e9b30cc620c962517058bcee6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

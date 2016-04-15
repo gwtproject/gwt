@@ -378,8 +378,15 @@ public class DateTest extends GWTTestCase {
 
     try {
       Date.parse("");
-    } catch (IllegalArgumentException e) {
-      // Expected
+      fail();
+    } catch (IllegalArgumentException expected) {
+    }
+
+    // Long.MAX_VALUE cant be represented as js valid date
+    try {
+      Date.parse(""+Long.MAX_VALUE);
+      fail();
+    } catch (IllegalArgumentException expected) {
     }
 
     // /////////////////////////////

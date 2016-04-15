@@ -39,16 +39,16 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
 
   public static long parse(String s) {
     double parsed = NativeDate.parse(s);
-    if (Double.isNaN(parsed)) {
-      throw new IllegalArgumentException();
-    }
+    throwIfDateOverflow(parsed);
     return (long) parsed;
   }
 
   // CHECKSTYLE_OFF: Matching the spec.
   public static long UTC(int year, int month, int date, int hrs, int min,
       int sec) {
-    return (long) NativeDate.UTC(year + 1900, month, date, hrs, min, sec, 0);
+    double jsDate = NativeDate.UTC(year + 1900, month, date, hrs, min, sec, 0);
+    throwIfDateOverflow(jsDate);
+    return (long) jsDate;
   }
 
   // CHECKSTYLE_ON
@@ -63,6 +63,16 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
       return "0" + number;
     } else {
       return String.valueOf(number);
+    }
+  }
+
+  /**
+   * Check if date can be correctly represented by js date:
+   * JS max Date is new Date(8640000000000000) which is less than Java's new Date(Long.MAX_VALUE).
+   */
+  private static void throwIfDateOverflow(double jsDate) {
+    if (Double.isNaN(jsDate)) {
+      throw new IllegalArgumentException();
     }
   }
 
@@ -84,18 +94,20 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
   }
 
   public Date(int year, int month, int date, int hrs, int min, int sec) {
-    jsdate = new NativeDate();
-    jsdate.setFullYear(year + 1900, month, date);
-    jsdate.setHours(hrs, min, sec, 0);
+    jsdate = new NativeDate(year + 1900, month, date, hrs, min, sec, 0);
     fixDaylightSavings(hrs);
+    throwIfDateOverflow(jsdate.getTime());
   }
 
   public Date(long date) {
     jsdate = new NativeDate(date);
+    throwIfDateOverflow(jsdate.getTime());
   }
 
   public Date(String date) {
-    this(Date.parse(date));
+    double parsed = NativeDate.parse(date);
+    throwIfDateOverflow(parsed);
+    jsdate = new NativeDate(parsed);
   }
 
   public boolean after(Date when) {
@@ -166,39 +178,46 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
     int hours = jsdate.getHours();
     jsdate.setDate(date);
     fixDaylightSavings(hours);
+    throwIfDateOverflow();
   }
 
   public void setHours(int hours) {
     jsdate.setHours(hours);
     fixDaylightSavings(hours);
+    throwIfDateOverflow();
   }
 
   public void setMinutes(int minutes) {
     int hours = getHours() + minutes / 60;
     jsdate.setMinutes(minutes);
     fixDaylightSavings(hours);
+    throwIfDateOverflow();
   }
 
   public void setMonth(int month) {
     int hours = jsdate.getHours();
     jsdate.setMonth(month);
     fixDaylightSavings(hours);
+    throwIfDateOverflow();
   }
 
   public void setSeconds(int seconds) {
     int hours = getHours() + seconds / (60 * 60);
     jsdate.setSeconds(seconds);
     fixDaylightSavings(hours);
+    throwIfDateOverflow();
   }
 
   public void setTime(long time) {
     jsdate.setTime(time);
+    throwIfDateOverflow();
   }
 
   public void setYear(int year) {
     int hours = jsdate.getHours();
     jsdate.setFullYear(year + 1900);
     fixDaylightSavings(hours);
+    throwIfDateOverflow();
   }
 
   public String toGMTString() {
@@ -263,9 +282,11 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
       // Hours passed to the constructor don't match the hours in the created JavaScript Date; this
       // might be due either because they are outside 0-24 range, there was overflow from
       // minutes:secs:millis or because we are in the situation GAP and has to be fixed.
-      NativeDate copy = new NativeDate(jsdate.getTime());
-      copy.setDate(copy.getDate() + 1);
-      int timeDiff = jsdate.getTimezoneOffset() - copy.getTimezoneOffset();
+      double originalTimeInMillis = jsdate.getTime();
+      int originalTimezoneOffset = jsdate.getTimezoneOffset();
+      jsdate.setDate(jsdate.getDate() + 1);
+      int timeDiff = originalTimezoneOffset - jsdate.getTimezoneOffset();
+      jsdate.setTime(originalTimeInMillis);
 
       // If the time zone offset is changing, advance the hours and
       // minutes from the initially requested time by the change amount
@@ -280,10 +301,10 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
         if (badHours + timeDiffHours >= 24) {
           day++;
         }
-        NativeDate newTime = new NativeDate(jsdate.getFullYear(), jsdate.getMonth(),
-            day, requestedHours + timeDiffHours, jsdate.getMinutes() + timeDiffMinutes,
-            jsdate.getSeconds(), jsdate.getMilliseconds());
-        jsdate.setTime(newTime.getTime());
+
+        jsdate.setDate(day);
+        jsdate.setHours(requestedHours + timeDiffHours);
+        jsdate.setMinutes(jsdate.getMinutes() + timeDiffMinutes);
       }
     }
 
@@ -296,6 +317,10 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
       // We are not in the duplicated hour, so revert the change.
       jsdate.setTime(originalTimeInMillis);
     }
+  }
+
+  private void throwIfDateOverflow() {
+    throwIfDateOverflow(jsdate.getDate());
   }
 
   @JsType(isNative = true, name = "Date", namespace = JsPackage.GLOBAL)

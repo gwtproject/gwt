@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
 
@@ -365,6 +367,26 @@ public class DateTest extends GWTTestCase {
     dateWithThirtyDays.setDate(newDayNum);
     assertEquals(dateWithThirtyDays.getMonth(), monthNum + 1);
     assertEquals(dateWithThirtyDays.getDate(), newDayNum - numDaysInOldMonth);
+  }
+
+  /**
+   * Tests that exception is thrown on invalid JS time value.
+   */
+  @DoNotRunWith(Platform.Devel)
+  public void testECMACompliantNewDate() {
+    long[] validValues = {0, -8640000000000000L, 8640000000000000L};
+    for (long time : validValues) {
+      assertEquals(time, new Date(time).getTime());
+    }
+
+    long[] invalidValues = {-Long.MAX_VALUE, Long.MAX_VALUE, -8640000000000000L - 1, 8640000000000000L + 1};
+    for (long time : invalidValues) {
+      try {
+        new Date(time);
+        fail();
+      } catch (IllegalArgumentException expected) {
+      }
+    }
   }
 
   /** Testing for public static long java.util.Date.parse(java.lang.String). */

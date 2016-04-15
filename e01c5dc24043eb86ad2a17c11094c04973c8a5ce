@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b216e86_9e28cd36",
+        "filename": "user/test/com/google/gwt/dev/shell/jetty/client/JspTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-04-15T13:25:35Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "e01c5dc24043eb86ad2a17c11094c04973c8a5ce",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

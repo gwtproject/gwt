@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b79a672_b9893bae",
+        "filename": "samples/mobilewebapp/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-04-15T14:44:52Z",
+      "side": 1,
+      "message": "Given that we don\u0027t effectively enforce 1.7; I wonder if we shouldn\u0027t just remove the plugin; this is only a sample project after all.",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 40
+      },
+      "revId": "8d9e0108e15d9530a5fe333732916758443d9bbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b62eac1_7afcf517",
+        "filename": "samples/validation/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-04-15T14:44:52Z",
+      "side": 1,
+      "message": "Add the same comment as in the other POMs?",
+      "revId": "8d9e0108e15d9530a5fe333732916758443d9bbc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

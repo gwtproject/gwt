@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b74727a_580e6158",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-04-16T06:09:18Z",
+      "side": 1,
+      "message": "Do you mind adding these lines to your commit message:\nBug: #9157\nBug-Link: https://github.com/gwtproject/gwt/issues/9157",
+      "revId": "d4653c1b6d32bb4dfdce11a4019d69c505926e92",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "084df486_84aae693",
+        "filename": "user/test/com/google/gwt/i18n/server/PropertyCatalogFactoryTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-04-16T06:09:18Z",
+      "side": 1,
+      "message": "\\\u003d  shouldn\u0027t compile in java, probably you meant \\\\\u003d",
+      "revId": "d4653c1b6d32bb4dfdce11a4019d69c505926e92",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

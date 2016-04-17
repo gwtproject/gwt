@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b79a672_7c987130",
+        "filename": "elemental/tests/elemental/AllTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-04-17T16:18:24Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we rather have a *JreSuite for the *JreTest?",
+      "revId": "8226f75e89dacd7b50fa5145cd72a8a1fa06b46b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b574aea_b2393e28",
+        "filename": "elemental/tests/elemental/json/impl/JsonSerializationJreTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-04-17T16:18:24Z",
+      "side": 1,
+      "message": "Following the overall logic of this change, shouldn\u0027t this have a @GwtIncompatible too?",
+      "revId": "8226f75e89dacd7b50fa5145cd72a8a1fa06b46b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

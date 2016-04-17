@@ -29,6 +29,7 @@ import elemental.js.util.MapFromIntTests;
 import elemental.js.util.MapFromStringTests;
 import elemental.js.util.StringUtilTests;
 import elemental.json.JsonUtilTest;
+import elemental.json.impl.JsonSerializationJreTest;
 import elemental.util.TimerTest;
 
 /**
@@ -53,6 +54,7 @@ public class AllTests {
 
     //json
     suite.addTestSuite(JsonUtilTest.class);
+    suite.addTestSuite(JsonSerializationJreTest.class);
 
     // util
     suite.addTestSuite(TimerTest.class);

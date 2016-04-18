@@ -215,6 +215,78 @@ public class CollectionsTest extends EmulTestBase {
     assertEquals(new Object[b.size()], b);
   }
 
+  public void testIndexOfSubList() {
+    List<String> source = new ArrayList<>();
+    Collections.addAll(source, "a", "b", "c", "a", "b", "c");
+
+    List<String> target = Arrays.asList("a", "b", "c", "a", "b", "c");
+    assertEquals(0, Collections.indexOfSubList(source, target));
+
+    target = Arrays.asList("a", "b", "c", "a", "b", "c", "d");
+    assertEquals(-1, Collections.indexOfSubList(source, target));
+
+    target = Arrays.asList("b");
+    assertEquals(1, Collections.indexOfSubList(source, target));
+
+    target = Arrays.asList("b", "c");
+    assertEquals(1, Collections.indexOfSubList(source, target));
+
+    target = Arrays.asList("a", "b", "c");
+    assertEquals(0, Collections.indexOfSubList(source, target));
+
+    target = Arrays.asList("c");
+    assertEquals(2, Collections.indexOfSubList(source, target));
+
+    target = Arrays.asList("a", "b", "d");
+    assertEquals(-1, Collections.indexOfSubList(source, target));
+
+    target = Arrays.asList("a", "b", "d");
+    assertEquals(-1, Collections.indexOfSubList(source, target));
+
+    assertEquals(0, Collections.indexOfSubList(Collections.emptyList(), Collections.emptyList()));
+    assertEquals(0, Collections.indexOfSubList(source, Collections.emptyList()));
+
+    source = Arrays.asList("a", "b", "d", "a", "b", "e", "a", "b", "c");
+    target = Arrays.asList("a", "b", "c");
+    assertEquals(6, Collections.lastIndexOfSubList(source, target));
+  }
+
+  public void testLastIndexOfSubList() {
+    List<String> source = Arrays.asList("a", "b", "c", "a", "b", "c");
+
+    List<String> target = Arrays.asList("a", "b", "c", "a", "b", "c");
+    assertEquals(0, Collections.lastIndexOfSubList(source, target));
+
+    target = Arrays.asList("a", "b", "c", "a", "b", "c", "d");
+    assertEquals(-1, Collections.indexOfSubList(source, target));
+
+    target = Arrays.asList("b");
+    assertEquals(4, Collections.lastIndexOfSubList(source, target));
+
+    target = Arrays.asList("b", "c");
+    assertEquals(4, Collections.lastIndexOfSubList(source, target));
+
+    target = Arrays.asList("a", "b", "c");
+    assertEquals(3, Collections.lastIndexOfSubList(source, target));
+
+    target = Arrays.asList("c");
+    assertEquals(5, Collections.lastIndexOfSubList(source, target));
+
+    target = Arrays.asList("a", "b", "d");
+    assertEquals(-1, Collections.lastIndexOfSubList(source, target));
+
+    assertEquals(0, Collections.lastIndexOfSubList(Collections.emptyList(), Collections.emptyList()));
+    assertEquals(6, Collections.lastIndexOfSubList(source, Collections.emptyList()));
+
+    source = Arrays.asList("a", "b", "d", "a", "b", "c");
+    target = Arrays.asList("a", "b", "d");
+    assertEquals(0, Collections.lastIndexOfSubList(source, target));
+
+    source = Arrays.asList("a", "b", "c", "a", "b", "e", "a", "b", "d");
+    target = Arrays.asList("a", "b", "c");
+    assertEquals(0, Collections.lastIndexOfSubList(source, target));
+  }
+
   public void testListCopy() {
     List<Integer> src = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
     List<Integer> dest = new ArrayList<Integer>(Arrays.asList(1, 2));

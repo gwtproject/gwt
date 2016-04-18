@@ -1075,6 +1075,90 @@ public class Collections {
     return count;
   }
 
+  public static int indexOfSubList(List<?> source, List<?> target) {
+    if (target.isEmpty()) {
+      return 0;
+    }
+    int maxCandidateIndex = source.size() - target.size();
+
+    if (source instanceof RandomAccess && target instanceof RandomAccess) {
+      for (int i = 0; i <= maxCandidateIndex; i++) {
+        if (containsSubList(source, target, i)) {
+          return i;
+        }
+      }
+
+    } else if (maxCandidateIndex >= 0) {
+      ListIterator<?> sourceIt = source.listIterator();
+      for (int i = 0; i < maxCandidateIndex; i++) {
+        if (containsSubList(sourceIt, target, 1)) {
+          return i;
+        }
+      }
+      if (containsSubList(sourceIt, target, 0)) {
+        return maxCandidateIndex;
+      }
+    }
+
+    return -1;
+  }
+
+  public static int lastIndexOfSubList(List<?> source, List<?> target) {
+    if (target.isEmpty()) {
+      return source.size();
+    }
+    int maxCandidateIndex = source.size() - target.size();
+
+    if (source instanceof RandomAccess && target instanceof RandomAccess) {
+      for (int i = maxCandidateIndex; i >= 0; i--) {
+        if (containsSubList(source, target, i)) {
+          return i;
+        }
+      }
+
+    } else if (maxCandidateIndex >= 0) {
+      ListIterator<?> sourceIt = source.listIterator(maxCandidateIndex);
+      for (int i = maxCandidateIndex; i > 0; i--) {
+        if (containsSubList(sourceIt, target, -1)) {
+          return i;
+        }
+      }
+      if (containsSubList(sourceIt, target, 0)) {
+        return 0;
+      }
+    }
+
+    return -1;
+  }
+
+  private static boolean containsSubList(List<?> source, List<?> target, int index) {
+    for (int i = 0, size = target.size(); i < size; i++) {
+      if (!Objects.equals(source.get(index++), target.get(i))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean containsSubList(ListIterator<?> sourceIt, List<?> target, int rewindDir) {
+    Iterator<?> targetIt = target.iterator();
+    for (int i = 0, size = target.size(); i < size; i++) {
+      if (!Objects.equals(sourceIt.next(), targetIt.next())) {
+        // rewindDir is a rewind direction used to prepare source iterator for the next candidate:
+        // 0 - no rewind needed (used for the last candidate)
+        // -1 - rewind to the previous element of the original source iterator location
+        // 1 - rewind to the next element of the original source iterator location
+        if (rewindDir != 0) {
+          while (i-- > rewindDir) {
+            sourceIt.previous();
+          }
+        }
+        return false;
+      }
+    }
+    return true;
+  }
+
   public static <T> ArrayList<T> list(Enumeration<T> e) {
     ArrayList<T> arrayList = new ArrayList<T>();
     while (e.hasMoreElements()) {

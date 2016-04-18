@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "084df486_a4a1621c",
+        "filename": "elemental/tests/elemental/AllTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-04-18T11:37:13Z",
+      "side": 1,
+      "message": "You are right. At the beginning I thought the test was not run because it was not in the suite, but simply renaming the test is enough, and the test is not run twice.",
+      "parentUuid": "8867240e_98c6f566",
+      "revId": "8226f75e89dacd7b50fa5145cd72a8a1fa06b46b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b574aea_b2393e28",
         "filename": "elemental/tests/elemental/json/impl/JsonSerializationJreTest.java",
         "patchSetId": 3
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Couldn\u0027t it cause errors if tests are run with -strict?",
       "parentUuid": "6b574aea_9286fa0a",
+      "revId": "8226f75e89dacd7b50fa5145cd72a8a1fa06b46b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b574aea_f2b906a5",
+        "filename": "elemental/tests/elemental/json/impl/JsonSerializationJreTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-04-18T11:37:13Z",
+      "side": 1,
+      "message": "True. So, removing the test from the gwt suite don\u0027t need it.",
+      "parentUuid": "eb6dfab4_b98bf713",
       "revId": "8226f75e89dacd7b50fa5145cd72a8a1fa06b46b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

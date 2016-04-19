@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8275cf3_70b488ad",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/ExclusivityMap.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2016-04-19T00:07:27Z",
+      "side": 1,
+      "message": "I don\u0027t understand this change. Above, you do \nFragment typeFrag \u003d fragmentForType.get(type);\n\nHere you do \n\nfragmentForType.put(type, typeFrag);\n\nWith no intervening changes in type or typeFrag. Isn\u0027t this a no-op?\n\nDid you mean fragmentForType.put(method, typeFrag); ?",
+      "revId": "8714f91c652831bcbbc5f19066b3cb1db0ae220f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

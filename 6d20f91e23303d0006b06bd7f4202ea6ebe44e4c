@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08b6d404_d0026cef",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/codesplitter/ExclusivityMap.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-04-19T22:34:57Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "6d20f91e23303d0006b06bd7f4202ea6ebe44e4c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

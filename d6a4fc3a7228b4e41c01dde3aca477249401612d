@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8cf8871_c1a042ba",
+        "filename": "user/super/com/google/gwt/emul/java/util/Date.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-04-19T00:30:35Z",
+      "side": 1,
+      "message": "If you add explicit checking as mentioned below make it a constant, e.g.\n\n  /**\n   * ECMAScript Date supports +-100,000,000 days relative to epoch with exactly \n   * 86,400,000 ms per day.\n   */\n  private static final long MAX_ALLOWED_MILLISECONDS_SINCE_EPOCH \u003d 8_640_000_000_000_000L;",
+      "range": {
+        "startLine": 71,
+        "startChar": 29,
+        "endLine": 71,
+        "endChar": 45
+      },
+      "revId": "d6a4fc3a7228b4e41c01dde3aca477249401612d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0815f483_449f0e7c",
+        "filename": "user/super/com/google/gwt/emul/java/util/Date.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-04-19T00:30:35Z",
+      "side": 1,
+      "message": "If you want to have it consistently fail in all browsers you have to explicitly check if jsDate milliseconds are within +-8640000000000000 ms. Reason is that at least  Safari allows to work with JsDates outside the range defined by EcmaScript. \n\nIn Safari you can do\n\n  var d \u003d new Date(8640000000000000);\n  d.setHours(d.getHours() +1);\n\nwithout any errors and a correct result. But if you add that check here, you have to use a dedicated check in Date.parse() emulation, because it is totally valid in Browsers to parse Dates outside the specified range and get the correct milliseconds since epoch as a result.",
+      "range": {
+        "startLine": 73,
+        "startChar": 22,
+        "endLine": 73,
+        "endChar": 41
+      },
+      "revId": "d6a4fc3a7228b4e41c01dde3aca477249401612d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08989484_6c9f7b7c",
+        "filename": "user/test/com/google/gwt/emultest/java/util/DateTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-04-19T00:30:35Z",
+      "side": 1,
+      "message": "I think thats not a good test. For example in Chrome Date.parse(\"8640000000000000\") results in NaN as it does not treat the input as milliseconds. Also in Chrome Date.parse(\"1000000\") results in \n31494784777200000 but new Date(31494784777200000) is obviously an invalid JsDate.",
+      "range": {
+        "startLine": 387,
+        "startChar": 6,
+        "endLine": 387,
+        "endChar": 38
+      },
+      "revId": "d6a4fc3a7228b4e41c01dde3aca477249401612d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

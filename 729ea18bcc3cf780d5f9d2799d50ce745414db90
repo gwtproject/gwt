@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "085974e9_64774ad7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-04-20T01:20:38Z",
+      "side": 1,
+      "message": "Couldn\u0027t you just pass the javaTypeByGlobalStatement map here, and do the call jTBGS.put(type, statement) in the implmentation for exportType/Member? That would be cleaner. \n\nI am sure you already know and it is the safe thing to do here but note that type related statements may be duplicated in fragment extractor.\n\nAlso I don\u0027t understand why the export statements need to be in a fragment that is not the initial.",
+      "range": {
+        "startLine": 1481,
+        "startChar": 20,
+        "endLine": 1481,
+        "endChar": 52
+      },
+      "revId": "729ea18bcc3cf780d5f9d2799d50ce745414db90",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

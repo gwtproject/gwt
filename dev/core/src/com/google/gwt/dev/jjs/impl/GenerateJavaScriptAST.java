@@ -1446,14 +1446,10 @@ public class GenerateJavaScriptAST {
     private void generateExports() {
       Map<String, Object> exportedMembersByExportName = new TreeMap<String, Object>();
       Set<JDeclaredType> hoistedClinits = Sets.newHashSet();
-      JsInteropExportsGenerator exportGenerator =
-          closureCompilerFormatEnabled
-              ? new ClosureJsInteropExportsGenerator(getGlobalStatements(), names)
-              : new DefaultJsInteropExportsGenerator(getGlobalStatements(), globalTemp,
-                  getIndexedMethodJsName(RuntimeConstants.RUNTIME_PROVIDE));
 
       // Gather exported things in JsNamespace order.
       for (JDeclaredType type : program.getDeclaredTypes()) {
+
         if (type.isJsNative()) {
           // JsNative types have no implementation and so shouldn't export anything.
           continue;
@@ -1479,14 +1475,28 @@ public class GenerateJavaScriptAST {
         }
       }
 
+      List<JsStatement> exportStatements = Lists.newArrayList();
+      JsInteropExportsGenerator exportGenerator =
+          closureCompilerFormatEnabled
+              ? new ClosureJsInteropExportsGenerator(exportStatements, names)
+              : new DefaultJsInteropExportsGenerator(exportStatements, globalTemp,
+                  getIndexedMethodJsName(RuntimeConstants.RUNTIME_PROVIDE));
+
       // Output the exports.
       for (Object exportedEntity : exportedMembersByExportName.values()) {
+        exportStatements.clear();
         if (exportedEntity instanceof JDeclaredType) {
           exportGenerator.exportType((JDeclaredType) exportedEntity);
+          for (JsStatement exportStatement : exportStatements) {
+            addTypeDefinitionStatement((JDeclaredType) exportedEntity, exportStatement);
+          }
         } else {
           JMember member = (JMember) exportedEntity;
           maybeHoistClinit(hoistedClinits, member);
           exportGenerator.exportMember(member, names.get(member).makeRef(member.getSourceInfo()));
+          for (JsStatement exportStatement : exportStatements) {
+            addTypeDefinitionStatement(((JMember) exportedEntity).getEnclosingType(), exportStatement);
+          }
         }
       }
     }

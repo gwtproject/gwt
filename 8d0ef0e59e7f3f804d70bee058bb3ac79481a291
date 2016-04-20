@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "085974e9_5e81b577",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-04-20T21:53:23Z",
+      "side": 1,
+      "message": "Maybe word as\n\nDon\u0027t make the closure contructor moveable with the type definition.",
+      "revId": "8d0ef0e59e7f3f804d70bee058bb3ac79481a291",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -34,6 +34,24 @@
       "revId": "dc2e7f60bc0d3b6a16d069b797381490f15243b9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "085974e9_9e03adab",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2196,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2016-04-20T22:05:39Z",
+      "side": 0,
+      "message": "Doh, deleted too many lines. Fixed.",
+      "parentUuid": "085974e9_3e78794a",
+      "revId": "dc2e7f60bc0d3b6a16d069b797381490f15243b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

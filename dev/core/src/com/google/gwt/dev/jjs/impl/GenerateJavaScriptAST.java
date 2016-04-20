@@ -2193,7 +2193,6 @@ public class GenerateJavaScriptAST {
       JsName classVar = topScope.declareName(JjsUtils.mangledNameString(x));
       JsFunction closureCtor = JsUtils.createEmptyFunctionLiteral(sourceInfo, topScope, classVar);
       JsExprStmt statement = closureCtor.makeStmt();
-      addTypeDefinitionStatement(x, statement);
       names.put(x, classVar);
       return classVar;
     }

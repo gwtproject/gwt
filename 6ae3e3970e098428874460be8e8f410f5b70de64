@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "085974e9_1a2d8242",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdaterFromSourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-04-21T17:00:35Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "6ae3e3970e098428874460be8e8f410f5b70de64",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "085974e9_ba31ce9e",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdaterFromSourceTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-04-21T17:00:35Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "6ae3e3970e098428874460be8e8f410f5b70de64",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,10 +16,14 @@
 package com.google.gwt.dev.javac;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JMethod;
+import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
+import com.google.gwt.core.ext.typeinfo.JType;
+import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracleException;
 
 /**
- * Tests for {@link TypeOracleUpdater} when provided sources.
+ * Tests for {@link com.google.gwt.dev.javac.typemodel.TypeOracleUpdater} when provided sources.
  */
 public class CompilationUnitTypeOracleUpdaterFromSourceTest extends TypeOracleUpdaterTestBase {
 
@@ -182,6 +186,58 @@ public class CompilationUnitTypeOracleUpdaterFromSourceTest extends TypeOracleUp
     assertNotNull(typeOracle.findType(CU_Object.getTypeName()));
     assertEquals(1, typeOracle.getTypes().length);
   }
+
+  protected CheckedJavaResource CU_Java8Interface = new CheckedJavaResource("test", "Java8Interface") {
+    @Override
+    public void check(JClassType type) throws NotFoundException {
+      final JType[] noParamTypes = new JType[0];
+
+      JMethod method = type.getMethod("defaultImplMethod", noParamTypes);
+      assertSame(JPrimitiveType.INT, method.getReturnType());
+      assertEquals(0, method.getParameters().length);
+      assertFalse(method.isStatic());
+      assertFalse(method.isAbstract());
+      assertTrue(method.isPublic());
+
+      method = type.getMethod("staticImplMethod", noParamTypes);
+      assertSame(JPrimitiveType.INT, method.getReturnType());
+      assertEquals(0, method.getParameters().length);
+      assertTrue(method.isStatic());
+      assertFalse(method.isAbstract());
+      assertTrue(method.isPublic());
+
+      method = type.getMethod("noImplMethod", noParamTypes);
+      assertSame(JPrimitiveType.INT, method.getReturnType());
+      assertEquals(0, method.getParameters().length);
+      assertFalse(method.isStatic());
+      assertTrue(method.isAbstract());
+      assertTrue(method.isPublic());
+    }
+
+    @Override
+    public String getSource() {
+      return "package test;\n" +
+          "public interface Java8Interface {\n" +
+          "  default int defaultImplMethod() {\n" +
+          "    return 1;\n" +
+          "  }\n" +
+          "  static int staticImplMethod() {\n" +
+          "    return 1;\n" +
+          "  }\n" +
+          "  int noImplMethod();\n" +
+          "}\n";
+    }
+  };
+
+
+  public void testJava8InterfaceModifiers() throws TypeOracleException {
+    addTestResource(CU_Object);
+    addTestResource(CU_Java8Interface);
+
+    buildTypeOracle();
+    assertNotNull(typeOracle.findType(CU_Java8Interface.getTypeName()));
+  }
+
 
   @Override
   protected void buildTypeOracle() throws TypeOracleException {

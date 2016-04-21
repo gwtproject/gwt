@@ -1121,10 +1121,6 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     }
 
     addModifierBits(method, mapBits(ASM_TO_SHARED_MODIFIERS, methodData.getAccess()));
-    if (unresolvedType.isInterface() != null) {
-      // Always add implicit modifiers on interface methods.
-      addModifierBits(method, Shared.MOD_PUBLIC | Shared.MOD_ABSTRACT);
-    }
 
     if ((methodData.getAccess() & Opcodes.ACC_VARARGS) != 0) {
       setVarArgs(method);

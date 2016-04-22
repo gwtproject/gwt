@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8659cc5_20c7ae16",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-04-22T16:54:28Z",
+      "side": 1,
+      "message": "I think this second check is unneeded. Please update calling code to only use InternalPreconditions.checkIndex",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 22
+      },
+      "revId": "d30e8a7707d3fd7998055c687277f447a1b03f99",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e89420c3_deb8a13a",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-04-22T16:54:28Z",
+      "side": 1,
+      "message": "if (!set.get(index)) {",
+      "range": {
+        "startLine": 42,
+        "startChar": 12,
+        "endLine": 42,
+        "endChar": 15
+      },
+      "revId": "d30e8a7707d3fd7998055c687277f447a1b03f99",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4879ac72_9cd2add6",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-04-22T16:54:28Z",
+      "side": 1,
+      "message": "if (set.get(index)) {",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 11
+      },
+      "revId": "d30e8a7707d3fd7998055c687277f447a1b03f99",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2874787a_95cb649c",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-04-22T16:54:28Z",
+      "side": 1,
+      "message": "} catch (NegativeArraySizeException expected) {\n}",
+      "range": {
+        "startLine": 140,
+        "startChar": 13,
+        "endLine": 140,
+        "endChar": 39
+      },
+      "revId": "d30e8a7707d3fd7998055c687277f447a1b03f99",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88864495_a35024b0",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-04-22T16:54:28Z",
+      "side": 1,
+      "message": "No need to catch here, test would fail because of the exception anyway.",
+      "range": {
+        "startLine": 146,
+        "startChar": 13,
+        "endLine": 146,
+        "endChar": 39
+      },
+      "revId": "d30e8a7707d3fd7998055c687277f447a1b03f99",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c87cbc59_c8e62300",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-04-22T16:54:28Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 153,
+        "startChar": 32,
+        "endLine": 153,
+        "endChar": 35
+      },
+      "revId": "d30e8a7707d3fd7998055c687277f447a1b03f99",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

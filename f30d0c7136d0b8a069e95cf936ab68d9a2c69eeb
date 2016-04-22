@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2bd19cb_598423cd",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-04-22T16:54:28Z",
+      "side": 1,
+      "message": "what about just:\n\nreturn new int[length];",
+      "range": {
+        "startLine": 40,
+        "startChar": 30,
+        "endLine": 40,
+        "endChar": 41
+      },
+      "revId": "f30d0c7136d0b8a069e95cf936ab68d9a2c69eeb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

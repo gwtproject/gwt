@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "085974e9_6b7cd98d",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-04-24T23:35:39Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.HashSet.",
+      "revId": "af169036ec3c8536b72bde8c0e8bb9bb90726825",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "391bde5c_17176413",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LookupMethodCreator.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2016-04-24T10:04:43Z",
+      "side": 1,
+      "message": "I will write some comment on that.",
+      "parentUuid": "f63875ce_74c686d7",
+      "revId": "c86952eb6983b10a054e77af9fd0cae54d20a1d6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f63875ce_14d5fa73",
         "filename": "user/test/com/google/gwt/i18n/rebind/LookupMethodCreatorTest.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-22T19:19:40Z",
       "side": 1,
       "message": "In general, I think \"golden output\" tests like this are more trouble than they are worth unless you are interfacing to an external system.  I think it would be better to look for specific things, such as the existence of the partitioned methods and the top-level caller rather than matching the whole thing.",
+      "revId": "c86952eb6983b10a054e77af9fd0cae54d20a1d6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7938f6b0_10404a6b",
+        "filename": "user/test/com/google/gwt/i18n/rebind/LookupMethodCreatorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2016-04-24T10:04:43Z",
+      "side": 1,
+      "message": "remove second \"golden output\" test (for multiple partition methods)",
+      "parentUuid": "f63875ce_14d5fa73",
       "revId": "c86952eb6983b10a054e77af9fd0cae54d20a1d6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "7938f6b0_d025e2e2",
+        "filename": "user/test/com/google/gwt/i18n/rebind/LookupMethodCreatorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2016-04-24T10:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f63875ce_54cb82db",
+      "revId": "c86952eb6983b10a054e77af9fd0cae54d20a1d6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f63875ce_34d0fe83",
         "filename": "user/test/com/google/gwt/i18n/rebind/LookupMethodCreatorTest.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2015-10-22T19:19:40Z",
       "side": 1,
       "message": "What is this comment for?",
+      "revId": "c86952eb6983b10a054e77af9fd0cae54d20a1d6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b60d1d2e_dab0c117",
+        "filename": "user/test/com/google/gwt/i18n/rebind/LookupMethodCreatorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 6910
+      },
+      "writtenOn": "2016-04-24T10:04:43Z",
+      "side": 1,
+      "message": "Thanks for info. This was a test relict. I test the Creator before my changes and this was not deleted.",
+      "parentUuid": "f63875ce_34d0fe83",
       "revId": "c86952eb6983b10a054e77af9fd0cae54d20a1d6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

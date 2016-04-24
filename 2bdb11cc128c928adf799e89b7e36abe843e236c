@@ -19,6 +19,42 @@
     },
     {
       "key": {
+        "uuid": "085974e9_4bb9dda1",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-24T23:38:00Z",
+      "side": 1,
+      "message": "That\u0027s (approx) what it used to do, but the suggestion was made to not run it twice",
+      "parentUuid": "4e25349f_3640f883",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "085974e9_aba8914e",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-24T23:38:00Z",
+      "side": 1,
+      "message": "Okay, try out this implementation - the array is checked for empty or 1 value, and uses tbroyer\u0027s suggestion of EnumSet, and all three cases are immutable on creation. I\u0027m not sure there is a downside of multiple ctors as long as there are multiple methods that can\u0027t trivially be inlined into each other.",
+      "parentUuid": "4e25349f_3640f883",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e25349f_1645fc93",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
         "patchSetId": 10
@@ -30,6 +66,24 @@
       "writtenOn": "2016-03-31T11:19:30Z",
       "side": 1,
       "message": "Does it make this class public visible because you put CollectorImpl into public interface?",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "085974e9_eb9e892d",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-24T23:38:00Z",
+      "side": 1,
+      "message": "Technically it does, however without a Collector.CollectorImpl in the jdk (since this is super source), no one will be able to reference it, right?",
+      "parentUuid": "4e25349f_1645fc93",
       "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "085974e9_0b9c4533",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-24T23:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e25349f_f64960ae",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e25349f_d625449f",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
         "patchSetId": 10
@@ -64,6 +136,24 @@
       "writtenOn": "2016-03-31T14:05:09Z",
       "side": 1,
       "message": "It would be good to create Collections.emptySet() if characteristics.length \u003d\u003d 0. Such collector are used in Collectors",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "085974e9_cba5cd76",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-24T23:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e25349f_d625449f",
       "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "085974e9_6bd379dc",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-24T23:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e25349f_d646649e",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f11b2d59_4374c699",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 10
@@ -104,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "085974e9_47723374",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-24T23:38:00Z",
+      "side": 1,
+      "message": "The \"dumb\" part is building the whole summary stats just for the average. \n\nI disagree about the method references personally (and why have them at all if the consensus is that a -\u003e a.foo() is better?). They can\u0027t always be used, but I think that I can make this whole method here clearer with an .collectingAndThen() call like the summing* methods - will attempt in my revision.",
+      "parentUuid": "f11b2d59_4374c699",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e25349f_361918c2",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 10
@@ -115,6 +241,24 @@
       "writtenOn": "2016-03-31T11:19:30Z",
       "side": 1,
       "message": "EnumSet.copyOf",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "085974e9_8bd835f6",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-24T23:38:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e25349f_361918c2",
       "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -214,6 +358,30 @@
     },
     {
       "key": {
+        "uuid": "085974e9_2bcd8135",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-24T23:38:00Z",
+      "side": 1,
+      "message": "summingLong takes the side trail of computing the other summary stats (for now, subject to optimization), I was going for simplest+readable for the first impl.\n\nOther three: Done.",
+      "parentUuid": "4e25349f_766790f4",
+      "range": {
+        "startLine": 100,
+        "startChar": 48,
+        "endLine": 100,
+        "endChar": 77
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e25349f_16b73cb4",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 10
@@ -225,6 +393,24 @@
       "writtenOn": "2016-03-31T11:19:30Z",
       "side": 1,
       "message": "can we reuse array u1 here? I mean can we store the result there?",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "085974e9_67d40f65",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-24T23:38:00Z",
+      "side": 1,
+      "message": "Probably doable - as with in the last review from @t.broyer, I tried to keep these methods as functional as possible, never mutating inputs.\n\n(and Done, all tests happy)",
+      "parentUuid": "4e25349f_16b73cb4",
       "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

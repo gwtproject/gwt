@@ -68,6 +68,29 @@
       "revId": "8e01b629230a90c505152aad0ba11622982b6530",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e89420c3_1e7be9fb",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/MapTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-04-25T10:53:47Z",
+      "side": 1,
+      "message": "Use gwtSetUp() to avoid copy/paste in all tests. Also create two more instances then: entry1Copy, entry2Copy.",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 93
+      },
+      "revId": "8e01b629230a90c505152aad0ba11622982b6530",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

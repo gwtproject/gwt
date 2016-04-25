@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "289d58d4_a18aa60d",
+        "filename": "user/super/com/google/gwt/emul/java/util/Map.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-04-25T08:56:12Z",
+      "side": 1,
+      "message": "get() call is not required:\n\n  if (containsKey(key)) {\n    return put(key, value);\n  }\n  return null;",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 189,
+        "endChar": 80
+      },
+      "revId": "8e01b629230a90c505152aad0ba11622982b6530",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "288b98a4_c0a280d4",
+        "filename": "user/super/com/google/gwt/emul/java/util/Map.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-04-25T08:56:12Z",
+      "side": 1,
+      "message": "I think i would inline it as there is no need for a value variable.",
+      "range": {
+        "startLine": 204,
+        "startChar": 16,
+        "endLine": 204,
+        "endChar": 64
+      },
+      "revId": "8e01b629230a90c505152aad0ba11622982b6530",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c87cbc59_c8dc6303",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/AbstractJava8MapTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-04-25T08:56:12Z",
+      "side": 1,
+      "message": "call createTestMap() again so you don\u0027t have to manage map values in both places.",
+      "range": {
+        "startLine": 94,
+        "startChar": 35,
+        "endLine": 97,
+        "endChar": 27
+      },
+      "revId": "8e01b629230a90c505152aad0ba11622982b6530",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

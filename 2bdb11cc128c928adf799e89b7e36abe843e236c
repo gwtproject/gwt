@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "e89420c3_21632a17",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-04-25T13:47:01Z",
+      "side": 1,
+      "message": "Yeah, but everyone tries to not expose classes if possible so maybe move it as a separate class?",
+      "parentUuid": "085974e9_eb9e892d",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e25349f_f64960ae",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
         "patchSetId": 10
@@ -382,6 +400,99 @@
     },
     {
       "key": {
+        "uuid": "e89420c3_e116a290",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-04-25T13:47:01Z",
+      "side": 1,
+      "message": "Then please add summingLong impl as TODO",
+      "parentUuid": "085974e9_2bcd8135",
+      "range": {
+        "startLine": 100,
+        "startChar": 48,
+        "endLine": 100,
+        "endChar": 77
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e89420c3_417756d6",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-04-25T13:47:01Z",
+      "side": 1,
+      "message": "mapFactory?",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 20
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e89420c3_618452ff",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-04-25T13:47:01Z",
+      "side": 1,
+      "message": "I guess here we should use downstream.accumulator and downstream.supplier",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 125,
+        "endChar": 9
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e89420c3_217a4abf",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-04-25T13:47:01Z",
+      "side": 1,
+      "message": "I guess it should be Map.merge with downstream.combiner ?",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 9
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e25349f_16b73cb4",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 10
@@ -411,6 +522,29 @@
       "side": 1,
       "message": "Probably doable - as with in the last review from @t.broyer, I tried to keep these methods as functional as possible, never mutating inputs.\n\n(and Done, all tests happy)",
       "parentUuid": "4e25349f_16b73cb4",
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e89420c3_e18f821c",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-04-25T13:47:01Z",
+      "side": 1,
+      "message": "I\u0027d rebase on top of Map.merge pull request because your code does not follow javadoc spec for this method.",
+      "range": {
+        "startLine": 329,
+        "startChar": 12,
+        "endLine": 329,
+        "endChar": 65
+      },
       "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

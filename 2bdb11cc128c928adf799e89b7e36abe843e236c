@@ -424,6 +424,30 @@
     },
     {
       "key": {
+        "uuid": "085974e9_52aae54d",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-26T04:03:47Z",
+      "side": 1,
+      "message": "TODO added on summing/average methods.",
+      "parentUuid": "e89420c3_e116a290",
+      "range": {
+        "startLine": 100,
+        "startChar": 48,
+        "endLine": 100,
+        "endChar": 77
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e89420c3_417756d6",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 10
@@ -435,6 +459,30 @@
       "writtenOn": "2016-04-25T13:47:01Z",
       "side": 1,
       "message": "mapFactory?",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 20
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "085974e9_32b969a3",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-26T04:03:47Z",
+      "side": 1,
+      "message": "Map factory is in the finalizer already, this map is the ? in \u003cT, ?, M\u003e, at least in this impl. An earlier revision (patch #5) did it this way, @t.broyer suggested this impl instead as it was less verbose and more readable.",
+      "parentUuid": "e89420c3_417756d6",
       "range": {
         "startLine": 115,
         "startChar": 8,
@@ -470,6 +518,30 @@
     },
     {
       "key": {
+        "uuid": "085974e9_b2a55977",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-26T04:03:47Z",
+      "side": 1,
+      "message": "No, see earlier discussions with @t.broyer - instead, streamAndCollection functionally does a entry.getValue().stream().collect(downstream) below. TODO added to actually upgrade that to a stream call after streams merge.",
+      "parentUuid": "e89420c3_618452ff",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 125,
+        "endChar": 9
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e89420c3_217a4abf",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 10
@@ -481,6 +553,30 @@
       "writtenOn": "2016-04-25T13:47:01Z",
       "side": 1,
       "message": "I guess it should be Map.merge with downstream.combiner ?",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 9
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "085974e9_d2c7b513",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-26T04:03:47Z",
+      "side": 1,
+      "message": "Map.merge could be reasonable, but Downstream.combiner is a no (or a \"argue it out with tbroyer, he got here first\"), see above remarks. Plus the rebase. \n\nBy itself, Map.merge (plus forEach) could work:       \n   \n    m2.forEach((k, v) -\u003e m1.merge(k, v, List::addAll));\n\n\nTODO added for future reference, would like to resolve the downstream discussion first at least.",
+      "parentUuid": "e89420c3_217a4abf",
       "range": {
         "startLine": 126,
         "startChar": 8,
@@ -539,6 +635,30 @@
       "writtenOn": "2016-04-25T13:47:01Z",
       "side": 1,
       "message": "I\u0027d rebase on top of Map.merge pull request because your code does not follow javadoc spec for this method.",
+      "range": {
+        "startLine": 329,
+        "startChar": 12,
+        "endLine": 329,
+        "endChar": 65
+      },
+      "revId": "2bdb11cc128c928adf799e89b7e36abe843e236c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "085974e9_92737db1",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-04-26T04:03:47Z",
+      "side": 1,
+      "message": "Will TODO for now. I recognize that the sample JavaDoc impl isn\u0027t followed, but that\u0027s just a guideline, or are you saying there is an edge case I am failing?",
+      "parentUuid": "e89420c3_e18f821c",
       "range": {
         "startLine": 329,
         "startChar": 12,

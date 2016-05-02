@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a81dc9f8_fa2a096e",
+        "filename": "user/super/com/google/gwt/emul/java/util/Map.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-02T14:11:21Z",
+      "side": 1,
+      "message": "I would suppose that containsKey and remove have the same code to get the entry so there should be no penalty to not call containsKey before remove. \nAlso javadoc impl doesnt have containsKey so we\u0027re compliant here with OpenJDK expected behavior.",
+      "parentUuid": "48060dd1_17f5b492",
+      "range": {
+        "startLine": 80,
+        "startChar": 6,
+        "endLine": 80,
+        "endChar": 12
+      },
+      "revId": "a898fac41e162383c512eebf8531e4b307aa9bef",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "48060dd1_37f8b88c",
         "filename": "user/test/com/google/gwt/emultest/java8/util/AbstractJava8MapTest.java",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2016-05-02T10:43:15Z",
       "side": 1,
       "message": "I think you should keep the the assertTrue(expected.isEmpty()) test to make sure forEach() has really visited all entries. The current test would allow forEach() to always provide the same k,v pair to the lambda.",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 7
+      },
+      "revId": "a898fac41e162383c512eebf8531e4b307aa9bef",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "681751d9_b85ed964",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/AbstractJava8MapTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-02T14:11:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48060dd1_37f8b88c",
       "range": {
         "startLine": 107,
         "startChar": 0,

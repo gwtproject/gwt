@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd004ff2_e1ff6242",
+        "filename": "user/test/com/google/gwt/layout/client/LayoutTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-03T10:03:15Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd004ff2_c1fc6650",
+        "filename": "user/test/com/google/gwt/user/client/ui/DeckLayoutPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-03T10:03:15Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd004ff2_a1f95a5e",
+        "filename": "user/test/com/google/gwt/user/client/ui/DeckLayoutPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-03T10:03:15Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd004ff2_81941efa",
+        "filename": "user/test/com/google/gwt/user/client/ui/DockLayoutPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-03T10:03:15Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd004ff2_6199122e",
+        "filename": "user/test/com/google/gwt/user/client/ui/LayoutPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-03T10:03:15Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd004ff2_419e1618",
+        "filename": "user/test/com/google/gwt/user/client/ui/SplitLayoutPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-03T10:03:15Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd004ff2_21a30a62",
+        "filename": "user/test/com/google/gwt/user/client/ui/StackLayoutPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-03T10:03:15Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd004ff2_01880ed4",
+        "filename": "user/test/com/google/gwt/user/client/ui/TabLayoutPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-03T10:03:15Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

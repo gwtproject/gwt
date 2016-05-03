@@ -70,6 +70,24 @@
       "revId": "a734ed47e790e0065d4bd6178df5448347446d38",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad307b13_62603624",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 7220
+      },
+      "writtenOn": "2016-05-03T22:47:12Z",
+      "side": 1,
+      "message": "OK, I see thanks, so either we go back to the type parameters of #5 and use the provided mapFactory (similar to the jdk impl) or we keep the simpler solution and use LinkedHashmap::new instead so we can rely on iteration order in the finalizer. My preference is the former but fine either way.",
+      "parentUuid": "cd484fa3_9ef4b9e1",
+      "revId": "a734ed47e790e0065d4bd6178df5448347446d38",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

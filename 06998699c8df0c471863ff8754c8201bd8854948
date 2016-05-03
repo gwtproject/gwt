@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "ad84fbcc_02690a14",
+        "filename": "user/test/com/google/gwt/layout/client/LayoutTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-05-03T10:49:25Z",
+      "side": 1,
+      "message": "Use a Map\u003cLayer, Double\u003e so we can test it was correctly called with the appropriate layers?",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd004ff2_c1fc6650",
         "filename": "user/test/com/google/gwt/user/client/ui/DeckLayoutPanelTest.java",
         "patchSetId": 2
@@ -53,6 +70,23 @@
     },
     {
       "key": {
+        "uuid": "0d934719_1de9738f",
+        "filename": "user/test/com/google/gwt/user/client/ui/DeckLayoutPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-05-03T10:49:25Z",
+      "side": 1,
+      "message": "SimpleLayoutPanel? (not that it makes a big difference, but it\u0027s lighter-weight)",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd004ff2_81941efa",
         "filename": "user/test/com/google/gwt/user/client/ui/DockLayoutPanelTest.java",
         "patchSetId": 2
@@ -81,6 +115,23 @@
       "writtenOn": "2016-05-03T10:03:15Z",
       "side": 1,
       "message": "[info] First sentence should end with a period.",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d934719_3deeaf98",
+        "filename": "user/test/com/google/gwt/user/client/ui/LayoutPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-05-03T10:49:25Z",
+      "side": 1,
+      "message": "Don\u0027t we want to also test the onResize of the child? Other tests you added check the child\u0027s onResize, not the parent.",
       "revId": "06998699c8df0c471863ff8754c8201bd8854948",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

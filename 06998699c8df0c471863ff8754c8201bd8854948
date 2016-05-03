@@ -138,6 +138,24 @@
     },
     {
       "key": {
+        "uuid": "8d8737d1_01aeea3d",
+        "filename": "user/test/com/google/gwt/user/client/ui/LayoutPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 9710
+      },
+      "writtenOn": "2016-05-03T13:18:45Z",
+      "side": 1,
+      "message": "Yeah you are right, I can change that. Is it enough to just test the onResize of the children ?",
+      "parentUuid": "0d934719_3deeaf98",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd004ff2_419e1618",
         "filename": "user/test/com/google/gwt/user/client/ui/SplitLayoutPanelTest.java",
         "patchSetId": 2

@@ -156,6 +156,24 @@
     },
     {
       "key": {
+        "uuid": "cd476f66_03a38e61",
+        "filename": "user/test/com/google/gwt/user/client/ui/LayoutPanelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-05-03T14:51:24Z",
+      "side": 1,
+      "message": "I actually find it strange that onResize of the widget is called at all during forceLayout (there must be a good reason for that), but that\u0027s a different issue; so yes, let\u0027s only test the child\u0027s onResize.",
+      "parentUuid": "8d8737d1_01aeea3d",
+      "revId": "06998699c8df0c471863ff8754c8201bd8854948",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd004ff2_419e1618",
         "filename": "user/test/com/google/gwt/user/client/ui/SplitLayoutPanelTest.java",
         "patchSetId": 2

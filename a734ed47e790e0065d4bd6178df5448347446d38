@@ -16,6 +16,24 @@
       "revId": "a734ed47e790e0065d4bd6178df5448347446d38",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd484fa3_be3a55ba",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-05-03T22:04:07Z",
+      "side": 1,
+      "message": "Without reverting to the initial patch (#5, where Thomas requested that I take this easier-to-read approach instead), that doesn\u0027t make sense. Would you agree to LinkedHashMap::new instead here? Or should I back out this \"improved\" version, and see if you/Andrei and Thomas can find middle ground?\n\nTo reiterate, the initial implementation did not use an intermediate map, but instead used the downstream Collector for every operation - creating a new D wrapper for each item, accumulating into it rather than appending to the List\u003cT\u003e, etc. If we can agree that I\u0027m not going to re-revert, I\u0027ll go ahead and revert to that implementation.",
+      "parentUuid": "ad307b13_222f4ee7",
+      "revId": "a734ed47e790e0065d4bd6178df5448347446d38",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

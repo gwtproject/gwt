@@ -16,6 +16,24 @@
       "revId": "b099e7985a49a02653a315fd7e47ca1ff78fb118",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6da203c1_3456281b",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-05-04T22:22:26Z",
+      "side": 1,
+      "message": "Done, as well as the other TODO for Map.merge (though, based on discussion, might replace with older version?)",
+      "parentUuid": "8db817d6_39c04f61",
+      "revId": "b099e7985a49a02653a315fd7e47ca1ff78fb118",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

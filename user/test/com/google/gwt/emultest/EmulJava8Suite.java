@@ -15,6 +15,7 @@
  */
 package com.google.gwt.emultest;
 
+import com.google.gwt.emultest.java8.util.ArraysTest;
 import com.google.gwt.emultest.java8.util.ComparatorTest;
 import com.google.gwt.emultest.java8.util.DoubleSummaryStatisticsTest;
 import com.google.gwt.emultest.java8.util.HashMapTest;
@@ -45,6 +46,7 @@ public class EmulJava8Suite {
     GWTTestSuite suite = new GWTTestSuite("Tests for com.google.gwt.emul.java8");
 
     //-- java.util
+    suite.addTestSuite(ArraysTest.class);
     suite.addTestSuite(ComparatorTest.class);
     suite.addTestSuite(MapTest.class);
     suite.addTestSuite(MapEntryTest.class);

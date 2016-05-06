@@ -64,10 +64,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   public PriorityQueue(int initialCapacity, Comparator<? super E> cmp) {
     heap = new ArrayList<E>(initialCapacity);
-    if (cmp == null) {
-      cmp = Comparators.natural();
-    }
-    this.cmp = cmp;
+    this.cmp = Comparators.maybeNatural(cmp);
   }
 
   @SuppressWarnings("unchecked")
@@ -113,11 +110,6 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
   }
 
   @Override
-  public boolean isEmpty() {
-    return heap.isEmpty();
-  }
-
-  @Override
   public Iterator<E> iterator() {
     // TODO(jat): PriorityQueue is supposed to have a modifiable iterator.
     return Collections.unmodifiableList(heap).iterator();
@@ -144,19 +136,15 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public E peek() {
-    if (heap.size() == 0) {
-      return null;
-    }
-    return heap.get(0);
+    return heap.isEmpty() ? null : heap.get(0);
   }
 
   @Override
   public E poll() {
-    if (heap.size() == 0) {
-      return null;
+    E value = peek();
+    if (value != null) {
+      removeAtIndex(0);
     }
-    E value = heap.get(0);
-    removeAtIndex(0);
     return value;
   }
 
@@ -206,11 +194,6 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
   @Override
   public <T> T[] toArray(T[] a) {
     return heap.toArray(a);
-  }
-
-  @Override
-  public String toString() {
-    return heap.toString();
   }
 
   /**

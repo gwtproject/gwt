@@ -84,4 +84,8 @@ class Comparators {
   public static <T> Comparator<T> reverseOrder() {
     return (Comparator<T>) REVERSE_ORDER;
   }
+
+  public static <T> Comparator<T> maybeNatural(Comparator<T> cmp) {
+    return cmp == null ? natural() : cmp;
+  }
 }

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8d20172f_e549017c",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-05-06T14:16:58Z",
+      "side": 1,
+      "message": "We do use this, see below.",
+      "parentUuid": "2d5f2bcd_e6f33e83",
+      "range": {
+        "startLine": 91,
+        "startChar": 34,
+        "endLine": 91,
+        "endChar": 46
+      },
+      "revId": "2583e1234c44019bb775ac311a4d51089bb31690",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd7a0f33_0be45dbb",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 17
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8d20172f_4580ed9c",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-05-06T14:16:58Z",
+      "side": 1,
+      "message": "Read my discussion with Thomas. We use the mapFactory (See my discussion with Christian), it is in the finalizer, currently line 117.\n\nAgain: I can rebuild this to not use an intermediate map, but the code is more complex (as Thomas initially pointed out) and a bit harder to read, so at his suggestion I changed it.\n\nI\u0027ll add additional test to do instanceof checks on all returned objects if it will make you feel better, but for sure the correct type is returned, since the finalizer is calling mapFactory.get().",
+      "parentUuid": "cd7a0f33_0be45dbb",
+      "range": {
+        "startLine": 96,
+        "startChar": 8,
+        "endLine": 96,
+        "endChar": 26
+      },
+      "revId": "2583e1234c44019bb775ac311a4d51089bb31690",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d5f2bcd_a6ed469c",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 17
@@ -59,6 +107,30 @@
       "writtenOn": "2016-05-06T12:25:43Z",
       "side": 1,
       "message": "OpenJDK requires k to be nonnull here but I cant see that requirement in javadoc. Should we implement such behavior?",
+      "range": {
+        "startLine": 98,
+        "startChar": 12,
+        "endLine": 98,
+        "endChar": 13
+      },
+      "revId": "2583e1234c44019bb775ac311a4d51089bb31690",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d20172f_e57021d0",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-05-06T14:16:58Z",
+      "side": 1,
+      "message": "I implemented all of this entirely from javadoc, and haven\u0027t looked at any other existing implementations. Given other quirks of implementation that we\u0027ve noticed through experimentation, I\u0027d generally rather stick to the spec.",
+      "parentUuid": "2d5f2bcd_a6ed469c",
       "range": {
         "startLine": 98,
         "startChar": 12,

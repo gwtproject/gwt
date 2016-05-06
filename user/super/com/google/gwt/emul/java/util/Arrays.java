@@ -46,7 +46,7 @@ public class Arrays {
     private E[] array;
 
     ArrayList(E[] array) {
-      assert (array != null);
+      checkNotNull(array);
       this.array = array;
     }
 

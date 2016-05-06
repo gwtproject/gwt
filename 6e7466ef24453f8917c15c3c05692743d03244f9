@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8de3b749_21850ebe",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-06T12:40:21Z",
+      "side": 1,
+      "message": "testAnd, testOr, testXor, testAndNot, testIntersects, testEquals\nall these test method must include such a test case\nwhere setB has higher index set than setA\ne.g.\nBitSet setA \u003d new BitSet();\nsetA.set(2);\n\nBitSet setB \u003d new BitSet();\nsetB.set(1);\nsetB.set(3);",
+      "revId": "6e7466ef24453f8917c15c3c05692743d03244f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

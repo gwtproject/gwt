@@ -16,6 +16,24 @@
       "revId": "6e7466ef24453f8917c15c3c05692743d03244f9",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d7f374c_a112dea3",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-05-06T18:05:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8de3b749_21850ebe",
+      "revId": "6e7466ef24453f8917c15c3c05692743d03244f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

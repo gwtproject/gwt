@@ -84,7 +84,7 @@ public class Arrays {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T[] toArray(T[] out) {
-      int size = size();
+      int size = array.length;
       if (out.length < size) {
         out = ArrayHelper.createFrom(out, size);
       }

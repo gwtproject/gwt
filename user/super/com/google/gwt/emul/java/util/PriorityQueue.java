@@ -15,6 +15,9 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 /**
  * An unbounded priority queue based on a priority heap. <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/PriorityQueue.html">[Sun
@@ -86,6 +89,8 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public boolean addAll(Collection<? extends E> c) {
+    checkNotNull(c);
+    checkArgument(c != this);
     if (heap.addAll(c)) {
       makeHeap(0);
       return true;
@@ -104,7 +109,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public boolean contains(Object o) {
-    return heap.contains(o);
+    return indexOf(o) >= 0;
   }
 
   @Override
@@ -125,6 +130,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public boolean offer(E e) {
+    checkNotNull(e);
     int node = heap.size();
     heap.add(e);
     while (node > 0) {
@@ -162,7 +168,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
 
   @Override
   public boolean remove(Object o) {
-    int index = heap.indexOf(o);
+    int index = indexOf(o);
     if (index < 0) {
       return false;
     }
@@ -266,6 +272,10 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
       smallestChild = rightChild;
     }
     return smallestChild;
+  }
+
+  private int indexOf(Object o) {
+    return o == null ? -1 : heap.indexOf(o);
   }
 
   private boolean isLeaf(int node) {

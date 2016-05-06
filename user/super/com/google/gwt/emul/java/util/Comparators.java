@@ -28,9 +28,58 @@ class Comparators {
    * This class is package protected since it is not in the JRE.
    */
 
-  private static final Comparator<Comparable<Object>> NATURAL = (a, b) -> checkNotNull(a).compareTo(checkNotNull(b));
+  private static final Comparator<Comparable<Object>> INTERNAL_NATURAL_ORDER =
+      new NaturalOrderComparator();
 
-  private static final Comparator<Comparable<Object>> REVERSE_ORDER = (a, b) -> checkNotNull(b).compareTo(checkNotNull(a));
+  private static final Comparator<Comparable<Object>> NATURAL_ORDER =
+      new NaturalOrderComparator();
+
+  private static final Comparator<Comparable<Object>> REVERSE_ORDER =
+      new ReverseOrderComparator();
+
+  private static final class NaturalOrderComparator implements Comparator<Comparable<Object>> {
+    @Override
+    public int compare(Comparable<Object> a, Comparable<Object> b) {
+      return checkNotNull(a).compareTo(checkNotNull(b));
+    }
+
+    @Override
+    public Comparator<Comparable<Object>> reversed() {
+      return REVERSE_ORDER;
+    }
+  }
+
+  private static final class ReverseOrderComparator
+      implements Comparator<Comparable<Object>>, Serializable {
+
+    @Override
+    public int compare(Comparable<Object> a, Comparable<Object> b) {
+      return checkNotNull(b).compareTo(checkNotNull(a));
+    }
+
+    @Override
+    public Comparator<Comparable<Object>> reversed() {
+      return NATURAL_ORDER;
+    }
+  }
+
+  static final class ReversedComparator<T> implements Comparator<T>, Serializable {
+    private final Comparator<T> comparator;
+
+    ReversedComparator(Comparator<T> comparator) {
+      this.comparator = comparator;
+    }
+
+    @Override
+    public int compare(T a, T b) {
+      return comparator.compare(b, a);
+    }
+
+    @Override
+    public Comparator<T> reversed() {
+      return comparator;
+    }
+  }
 
   static final class NullComparator<T> implements Comparator<T>, Serializable {
     private final boolean nullFirst;
@@ -77,11 +126,22 @@ class Comparators {
    */
   @SuppressWarnings("unchecked")
   public static <T> Comparator<T> natural() {
-    return (Comparator<T>) NATURAL;
+    return (Comparator<T>) NATURAL_ORDER;
   }
 
   @SuppressWarnings("unchecked")
   public static <T> Comparator<T> reverseOrder() {
     return (Comparator<T>) REVERSE_ORDER;
   }
+
+  @SuppressWarnings("unchecked")
+  static <T> Comparator<T> nullToNatural(Comparator<T> cmp) {
+    return cmp == null ? (Comparator<T>) INTERNAL_NATURAL_ORDER : cmp;
+  }
+
+  static <T> Comparator<T> naturalToNull(Comparator<T> cmp) {
+    return cmp == INTERNAL_NATURAL_ORDER ? null : cmp;
+  }
+
+  private Comparators() { }
 }

@@ -39,7 +39,7 @@ public interface Comparator<T> {
   boolean equals(Object other);
 
   default Comparator<T> reversed() {
-    return (a, b) -> compare(b, a);
+    return new Comparators.ReversedComparator<T>(this);
   }
 
   default Comparator<T> thenComparing(Comparator<? super T> other) {

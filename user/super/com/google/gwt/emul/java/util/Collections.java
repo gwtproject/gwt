@@ -23,9 +23,9 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import java.io.Serializable;
 
 /**
- * Utility methods that operate on collections. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collections.html">[Sun
- * docs]</a>
+ * Utility methods that operate on collections.
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html">
+ * the official Java API doc</a> for details.
  */
 public class Collections {
 
@@ -196,15 +196,6 @@ public class Collections {
     @Override
     public Collection values() {
       return EMPTY_LIST;
-    }
-  }
-
-  private static final class ReverseComparator implements Comparator<Comparable<Object>> {
-    static final ReverseComparator INSTANCE = new ReverseComparator();
-
-    @Override
-    public int compare(Comparable<Object> o1, Comparable<Object> o2) {
-      return o2.compareTo(o1);
     }
   }
 
@@ -963,9 +954,7 @@ public class Collections {
      * in the JDK docs for non-RandomAccess Lists. Until GWT provides a
      * LinkedList, this shouldn't be an issue.
      */
-    if (comparator == null) {
-      comparator = Comparators.natural();
-    }
+    comparator = Comparators.maybeNatural(comparator);
     int low = 0;
     int high = sortedList.size() - 1;
 
@@ -1091,9 +1080,7 @@ public class Collections {
   public static <T> T max(Collection<? extends T> coll,
       Comparator<? super T> comp) {
 
-    if (comp == null) {
-      comp = Comparators.natural();
-    }
+    comp = Comparators.maybeNatural(comp);
 
     Iterator<? extends T> it = coll.iterator();
 
@@ -1145,17 +1132,18 @@ public class Collections {
     return modified;
   }
 
-  public static <T> void reverse(List<T> l) {
+  @SuppressWarnings("unchecked")
+  public static void reverse(List<?> l) {
     if (l instanceof RandomAccess) {
       for (int iFront = 0, iBack = l.size() - 1; iFront < iBack; ++iFront, --iBack) {
         Collections.swap(l, iFront, iBack);
       }
     } else {
-      ListIterator<T> head = l.listIterator();
-      ListIterator<T> tail = l.listIterator(l.size());
+      ListIterator head = l.listIterator();
+      ListIterator tail = l.listIterator(l.size());
       while (head.nextIndex() < tail.previousIndex()) {
-        T headElem = head.next();
-        T tailElem = tail.previous();
+        Object headElem = head.next();
+        Object tailElem = tail.previous();
         head.set(tailElem);
         tail.set(headElem);
       }
@@ -1164,19 +1152,11 @@ public class Collections {
 
   @SuppressWarnings("unchecked")
   public static <T> Comparator<T> reverseOrder() {
-    return (Comparator<T>) ReverseComparator.INSTANCE;
+    return (Comparator<T>) Comparator.reverseOrder();
   }
 
   public static <T> Comparator<T> reverseOrder(final Comparator<T> cmp) {
-    if (cmp == null) {
-      return reverseOrder();
-    }
-    return new Comparator<T>() {
-      @Override
-      public int compare(T t1, T t2) {
-        return cmp.compare(t2, t1);
-      }
-    };
+    return cmp == null ? reverseOrder() : cmp.reversed();
   }
 
   /**
@@ -1232,12 +1212,12 @@ public class Collections {
     }
   }
 
-  public static <T> void shuffle(List<T> list) {
+  public static void shuffle(List<?> list) {
     shuffle(list, RandomHolder.rnd);
   }
 
   @SuppressWarnings("unchecked")
-  public static <T> void shuffle(List<T> list, Random rnd) {
+  public static void shuffle(List<?> list, Random rnd) {
     if (list instanceof RandomAccess) {
       for (int i = list.size() - 1; i >= 1; i--) {
         swapImpl(list, i, rnd.nextInt(i + 1));
@@ -1248,10 +1228,10 @@ public class Collections {
         swapImpl(arr, i, rnd.nextInt(i + 1));
       }
 
-      ListIterator<T> it = list.listIterator();
+      ListIterator it = list.listIterator();
       for (Object e : arr) {
         it.next();
-        it.set((T) e);
+        it.set(e);
       }
     }
   }
@@ -1276,14 +1256,11 @@ public class Collections {
   }
 
   public static <T> void sort(List<T> target) {
-    sort(target, null);
+    target.sort(null);
   }
 
-  @SuppressWarnings("unchecked")
   public static <T> void sort(List<T> target, Comparator<? super T> c) {
-    Object[] x = target.toArray();
-    Arrays.sort(x, (Comparator<Object>) c);
-    replaceContents(target, x);
+    target.sort(c);
   }
 
   public static void swap(List<?> list, int i, int j) {
@@ -1315,8 +1292,7 @@ public class Collections {
     return new UnmodifiableSortedMap<K, V>(map);
   }
 
-  public static <T> SortedSet<T> unmodifiableSortedSet(
-      SortedSet<? extends T> set) {
+  public static <T> SortedSet<T> unmodifiableSortedSet(SortedSet<T> set) {
     return new UnmodifiableSortedSet<T>(set);
   }
 
@@ -1342,22 +1318,6 @@ public class Collections {
       hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
-  }
-
-  /**
-   * Replace contents of a list from an array.
-   *
-   * @param <T> element type
-   * @param target list to replace contents from an array
-   * @param x an Object array which can contain only T instances
-   */
-  @SuppressWarnings("unchecked")
-  private static <T> void replaceContents(List<T> target, Object[] x) {
-    int size = target.size();
-    assert (x.length == size);
-    for (int i = 0; i < size; i++) {
-      target.set(i, (T) x[i]);
-    }
   }
 
   private static <T> void swapImpl(List<T> list, int i, int j) {

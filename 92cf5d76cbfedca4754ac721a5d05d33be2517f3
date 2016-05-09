@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "f2c25456_14bef473",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-09T12:04:34Z",
+      "side": 1,
+      "message": "Let\u0027s put these private methods to the very bottom of the class",
+      "revId": "92cf5d76cbfedca4754ac721a5d05d33be2517f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2c25456_f49178ff",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-09T12:04:34Z",
+      "side": 1,
+      "message": "Collectors:addAll ?",
+      "range": {
+        "startLine": 321,
+        "startChar": 8,
+        "endLine": 324,
+        "endChar": 9
+      },
+      "revId": "92cf5d76cbfedca4754ac721a5d05d33be2517f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "326dcc11_d6490453",
         "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
         "patchSetId": 18
@@ -30,6 +70,98 @@
       "writtenOn": "2016-05-09T04:37:40Z",
       "side": 1,
       "message": "[error] Wrong order for \u0027java.util.stream.Collectors.averagingDouble\u0027 import.",
+      "revId": "92cf5d76cbfedca4754ac721a5d05d33be2517f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2c25456_f4a89833",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-09T12:04:34Z",
+      "side": 1,
+      "message": "Comparator.naturalOrder()",
+      "range": {
+        "startLine": 232,
+        "startChar": 53,
+        "endLine": 232,
+        "endChar": 86
+      },
+      "revId": "92cf5d76cbfedca4754ac721a5d05d33be2517f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2c25456_14619403",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-09T12:04:34Z",
+      "side": 1,
+      "message": "Comparator.naturalOrder()",
+      "range": {
+        "startLine": 241,
+        "startChar": 53,
+        "endLine": 241,
+        "endChar": 86
+      },
+      "revId": "92cf5d76cbfedca4754ac721a5d05d33be2517f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2c25456_b4ae203f",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-09T12:04:34Z",
+      "side": 1,
+      "message": "odd semicolon",
+      "range": {
+        "startLine": 512,
+        "startChar": 41,
+        "endLine": 512,
+        "endChar": 42
+      },
+      "revId": "92cf5d76cbfedca4754ac721a5d05d33be2517f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2c25456_d4ab9c2d",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-09T12:04:34Z",
+      "side": 1,
+      "message": "odd semicolon",
+      "range": {
+        "startLine": 515,
+        "startChar": 41,
+        "endLine": 515,
+        "endChar": 42
+      },
       "revId": "92cf5d76cbfedca4754ac721a5d05d33be2517f3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

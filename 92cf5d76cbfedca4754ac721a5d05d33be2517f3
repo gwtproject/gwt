@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "326dcc11_d6490453",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-09T04:37:40Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.stream.Collectors.",
+      "revId": "92cf5d76cbfedca4754ac721a5d05d33be2517f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "326dcc11_36767893",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-09T04:37:40Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.stream.Collectors.averagingDouble\u0027 import.",
+      "revId": "92cf5d76cbfedca4754ac721a5d05d33be2517f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

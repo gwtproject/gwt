@@ -159,8 +159,9 @@ public class CopyAssumption implements Assumption<CopyAssumption> {
 
     CopyAssumption result = new CopyAssumption();
 
-    for (JVariable v : copyToOriginal.keySet()) {
-      JVariable original = copyToOriginal.get(v);
+    for (Map.Entry<JVariable, JVariable> entry : copyToOriginal.entrySet()) {
+      JVariable original = entry.getValue();
+      JVariable v = entry.getKey();
       if (original == value.copyToOriginal.get(v)) {
         result.copyToOriginal.put(v, original);
       } else {

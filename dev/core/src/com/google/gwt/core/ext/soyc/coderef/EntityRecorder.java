@@ -200,8 +200,8 @@ public class EntityRecorder {
         runAsyncNames.add(runAsync.getName());
         runAsyncPerFragment.put(fragmentId, runAsyncNames);
       }
-      for (Integer idx : runAsyncPerFragment.keySet()) {
-        sizeMetrics[idx].put(FRAGMENT_POINTS, runAsyncPerFragment.get(idx));
+      for (Entry<Integer, Set<String>> entry : runAsyncPerFragment.entrySet()) {
+        sizeMetrics[entry.getKey()].put(FRAGMENT_POINTS, entry.getValue());
       }
       // initial fragment sequence points
       JSONArray initialSequence = new JSONArray();

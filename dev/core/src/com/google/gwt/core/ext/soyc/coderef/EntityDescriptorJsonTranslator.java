@@ -44,10 +44,10 @@ public class EntityDescriptorJsonTranslator {
     }
 
     private void setMethodDependencies() throws JSONException {
-      for (MethodDescriptor method : mapDependants.keySet()) {
-        JSONArray dependants = mapDependants.get(method);
+      for (Map.Entry<MethodDescriptor, JSONArray> entry : mapDependants.entrySet()) {
+        JSONArray dependants = entry.getValue();
         for (int i = 0; i < dependants.length(); i++) {
-          method.addDependant(mapMethods.get(dependants.getInt(i)));
+          entry.getKey().addDependant(mapMethods.get(dependants.getInt(i)));
         }
       }
     }

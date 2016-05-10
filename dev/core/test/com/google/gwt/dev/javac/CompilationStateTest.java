@@ -568,9 +568,9 @@ public class CompilationStateTest extends CompilationStateTestBase {
     // Compare the dependencies
     Map<String, Ref> origQualified = originalUnit.getDependencies().qualified;
     Map<String, Ref> newQualified = newUnit.getDependencies().qualified;
-    for (String name : origQualified.keySet()) {
-      Ref origRef = origQualified.get(name);
-      Ref newRef = newQualified.get(name);
+    for (Map.Entry<String, Ref> stringRefEntry : origQualified.entrySet()) {
+      Ref origRef = stringRefEntry.getValue();
+      Ref newRef = newQualified.get(stringRefEntry.getKey());
       if (origRef == null) {
         assertNull(newRef);
       } else {

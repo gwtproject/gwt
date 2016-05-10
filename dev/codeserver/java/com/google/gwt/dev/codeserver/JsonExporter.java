@@ -21,6 +21,7 @@ import com.google.gwt.dev.json.JsonObject;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.SortedMap;
 
 /**
@@ -200,8 +201,8 @@ class JsonExporter {
 
   private JsonObject exportMap(SortedMap<String, String> bindings) {
     JsonObject out = new JsonObject();
-    for (String name : bindings.keySet()) {
-      out.put(name, bindings.get(name));
+    for (Map.Entry<String, String> entry : bindings.entrySet()) {
+      out.put(entry.getKey(), entry.getValue());
     }
     return out;
   }

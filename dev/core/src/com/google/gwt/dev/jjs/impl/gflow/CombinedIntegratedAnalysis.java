@@ -238,10 +238,10 @@ public class CombinedIntegratedAnalysis<N, E, T, G extends Graph<N, E, T>>
         }
       }
 
-      for (E e : newAssumptions.keySet()) {
-        CombinedAssumption.CopyOnWrite newAssumption = newAssumptions.get(e);
+      for (Map.Entry<E, CombinedAssumption.CopyOnWrite> entry : newAssumptions.entrySet()) {
+        CombinedAssumption.CopyOnWrite newAssumption = entry.getValue();
         if (newAssumption.isCopied()) {
-          assumptionMap.setAssumption(e, newAssumption.unwrap());
+          assumptionMap.setAssumption(entry.getKey(), newAssumption.unwrap());
         }
       }
 

@@ -303,15 +303,16 @@ public class SourceMapTest extends TestCase {
     // Testing SourceMap as Soyc reports replacements
     assertTrue(root.exists());
 
-    for (Integer permutation : mapping.keySet()) {
+    for (Map.Entry<Integer, Map<String, SimpleSymbolData>> entry : mapping.entrySet()) {
 
+      Integer permutation = entry.getKey();
       checkSplitPloints(
           new File(root.getPath() + "/splitPoints" + permutation + ".xml.gz"),
           new File(root.getPath() + "/fragments"   + permutation + ".json"));
       checkEntities(
           new File(root.getPath() + "/stories"      + permutation + ".xml.gz"),
           new File(root.getPath() + "/dependencies" + permutation + ".xml.gz"),
-          mapping.get(permutation),
+              entry.getValue(),
           new File(root.getPath() + "/" + EntityRecorder.ENTITIES + permutation + ".json"));
     }
   }

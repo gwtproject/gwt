@@ -38,9 +38,10 @@ public abstract class NativeScrollbarTestBase<S extends AbstractNativeScrollbar>
     private boolean isFinished;
 
     public void finish() {
-      if (isFinished) {
-        fail("ScrollHandler already finished.");
-      }
+      // Event is fired multiple times in Firefox.
+      // if (isFinished) {
+      //  fail("ScrollHandler already finished.");
+      // }
       this.isFinished = true;
     }
 

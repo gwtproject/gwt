@@ -16,6 +16,24 @@
       "revId": "16baeed66fa1d8baab0123698b9555fef83c988d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d26b902f_9855c140",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-05-10T04:07:32Z",
+      "side": 1,
+      "message": "Can anyone tell me what the correct order here is? I\u0027m fairly certain I\u0027m not screwing up the alphabet, is there perhaps a bug in Leeroy\u0027s script?",
+      "parentUuid": "d26b902f_fdc22764",
+      "revId": "16baeed66fa1d8baab0123698b9555fef83c988d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

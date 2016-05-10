@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b2e61c27_9574c687",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 30
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-05-10T17:16:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92b838d6_f94c17bc",
+      "range": {
+        "startLine": 43,
+        "startChar": 17,
+        "endLine": 43,
+        "endChar": 22
+      },
+      "revId": "0353d01ff12766d2daec959221cf26cc14078e98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2f6309d_ab6e891f",
         "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
         "patchSetId": 30
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "b2e61c27_756a82a7",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 30
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-05-10T17:16:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2f6309d_ab6e891f",
+      "range": {
+        "startLine": 50,
+        "startChar": 12,
+        "endLine": 50,
+        "endChar": 15
+      },
+      "revId": "0353d01ff12766d2daec959221cf26cc14078e98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "721744d9_b80ed97c",
         "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
         "patchSetId": 30
@@ -59,6 +107,30 @@
       "writtenOn": "2016-05-10T10:02:36Z",
       "side": 1,
       "message": "I think its not a good idea to have a random test. What do we do if this test fails (for a certain random number) and then passes on the next run?\n\nI would feel comfortable with us writing tests for edge cases and one functional test instead.",
+      "range": {
+        "startLine": 148,
+        "startChar": 14,
+        "endLine": 148,
+        "endChar": 24
+      },
+      "revId": "0353d01ff12766d2daec959221cf26cc14078e98",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2e61c27_3564fad4",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 30
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 6055
+      },
+      "writtenOn": "2016-05-10T17:16:38Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "721744d9_b80ed97c",
       "range": {
         "startLine": 148,
         "startChar": 14,

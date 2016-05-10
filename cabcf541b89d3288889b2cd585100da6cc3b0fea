@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d25390c8_89093d79",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-10T19:07:30Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.stream.Collectors.averagingDouble\u0027 import.",
+      "revId": "cabcf541b89d3288889b2cd585100da6cc3b0fea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

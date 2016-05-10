@@ -22,6 +22,30 @@
       "revId": "f604559f5ac67243c57ce25a267a20583a64a617",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2ab34ee_0c2137ef",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-10T20:39:54Z",
+      "side": 1,
+      "message": "It\u0027s actually critical.\nI went for a name \"checkArrayBounds\" for arrays to match the name \"checkStringBounds\" for strings (it\u0027s critical too).",
+      "parentUuid": "f2ab34ee_0c3ad722",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 20
+      },
+      "revId": "f604559f5ac67243c57ce25a267a20583a64a617",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

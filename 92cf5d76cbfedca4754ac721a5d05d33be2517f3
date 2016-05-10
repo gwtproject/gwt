@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "721744d9_d8606d02",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collector.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-10T12:05:42Z",
+      "side": 1,
+      "message": "But JavaDoc declares that Collectors must return immutable set.\nI dont know if we should protect ourselves from this situation.\nI\u0027d rather not wrap downstream.characteristics() with unmodifiableSet\nbut I\u0027ll let you decide on this.\n\nBtw, when you call removeIdentFinisher(downstream.characteristics()) in Collectors.collectingAndThen, you already do not wrap downstream.characteristics() if it doesn\u0027t contain IDENTITY_FINISH",
+      "parentUuid": "326dcc11_b9743bbf",
+      "range": {
+        "startLine": 101,
+        "startChar": 29,
+        "endLine": 101,
+        "endChar": 56
+      },
+      "revId": "92cf5d76cbfedca4754ac721a5d05d33be2517f3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12ed28ca_2d974dfc",
         "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
         "patchSetId": 18

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92b1185a_51bf54b8",
+        "filename": "tools/api-checker/config/gwt27_28userApi.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-05-10T20:23:35Z",
+      "side": 1,
+      "message": "I guess one line can be deleted",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 75
+      },
+      "revId": "0387777173f72e365d8ea37a66922d4ee97b9449",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

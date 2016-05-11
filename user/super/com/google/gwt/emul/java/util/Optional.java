@@ -22,6 +22,7 @@ import java.util.function.Supplier;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalElement;
 import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">
@@ -72,7 +73,7 @@ public final class Optional<T> {
   }
 
   public Optional<T> filter(Predicate<? super T> predicate) {
-    checkCriticalNotNull(predicate);
+    checkNotNull(predicate);
     if (!isPresent() || predicate.test(ref)) {
       return this;
     }
@@ -80,7 +81,7 @@ public final class Optional<T> {
   }
 
   public <U> Optional<U> map(Function<? super T, ? extends U> mapper) {
-    checkCriticalNotNull(mapper);
+    checkNotNull(mapper);
     if (isPresent()) {
       return ofNullable(mapper.apply(ref));
     }
@@ -88,7 +89,7 @@ public final class Optional<T> {
   }
 
   public <U> Optional<U> flatMap(Function<? super T, Optional<U>> mapper) {
-    checkCriticalNotNull(mapper);
+    checkNotNull(mapper);
     if (isPresent()) {
       return checkCriticalNotNull(mapper.apply(ref));
     }

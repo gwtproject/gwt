@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d25390c8_127fb29a",
+        "filename": "dev/core/src/com/google/gwt/dev/js/globals/chrome.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-11T00:20:53Z",
+      "side": 0,
+      "message": "Never remove. Always add.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 21
+      },
+      "revId": "2fed9131fe3d403dff29f1ea5a92bcf10f5a0ad3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

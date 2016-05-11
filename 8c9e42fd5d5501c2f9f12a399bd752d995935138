@@ -16,6 +16,29 @@
       "revId": "8c9e42fd5d5501c2f9f12a399bd752d995935138",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d25390c8_d247da6a",
+        "filename": "user/test/com/google/gwt/user/client/ui/NativeScrollbarTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-11T00:20:53Z",
+      "side": 1,
+      "message": "Don\u0027t you want to exclude here also with the browser check?",
+      "range": {
+        "startLine": 44,
+        "startChar": 9,
+        "endLine": 44,
+        "endChar": 10
+      },
+      "revId": "8c9e42fd5d5501c2f9f12a399bd752d995935138",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

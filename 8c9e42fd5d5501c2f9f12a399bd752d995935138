@@ -39,6 +39,30 @@
       "revId": "8c9e42fd5d5501c2f9f12a399bd752d995935138",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d25390c8_d2327afe",
+        "filename": "user/test/com/google/gwt/user/client/ui/NativeScrollbarTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-11T00:23:05Z",
+      "side": 1,
+      "message": "I don\u0027t think we should expect only single event.",
+      "parentUuid": "d25390c8_d247da6a",
+      "range": {
+        "startLine": 44,
+        "startChar": 9,
+        "endLine": 44,
+        "endChar": 10
+      },
+      "revId": "8c9e42fd5d5501c2f9f12a399bd752d995935138",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

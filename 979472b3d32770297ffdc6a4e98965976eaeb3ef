@@ -161,6 +161,30 @@
     },
     {
       "key": {
+        "uuid": "d25390c8_028f5f3d",
+        "filename": "user/super/com/google/gwt/emul/java/util/Optional.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-11T19:53:25Z",
+      "side": 1,
+      "message": "That\u0027s true but also true for many other non-critical checks. \nIn many cases it will fail much sooner. As long as some NPE is reported, you know what to look for.\nIf you cannot trace down the issue, you still have the option to do the release with checks enabled to trace it down.\n\nIf you draw the line there (i.e. not leaking null values); people cannot have benefit from the check removal (if they opted-into it) since in many cases returning null instead of exception is the consequence of check removal.",
+      "parentUuid": "f216d4ff_376a72a6",
+      "range": {
+        "startLine": 94,
+        "startChar": 13,
+        "endLine": 94,
+        "endChar": 52
+      },
+      "revId": "979472b3d32770297ffdc6a4e98965976eaeb3ef",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d25390c8_62117341",
         "filename": "user/super/com/google/gwt/emul/java/util/PrimitiveIterator.java",
         "patchSetId": 1
@@ -348,6 +372,30 @@
       "side": 1,
       "message": "A Spliterator can be sorted or not. If its sorted it can be sorted by a comparator or by natural order. If its sorted by a comparator that comparator will be returned by Spliterator.getComparator(). If its sorted naturally then Spliterator.getComparator() will return null. If you call Spliterator.getComparator() on an unsorted spliterator you should get IllegalStateException.\n\nIf this check here would not exist you would never get an illegalStateException and eventually \"null\" is returned as comparator. But that could cause dependent code think that the spliterator is sorted (natural order) while in reality it is not.\n\nI think I would keep the critical check.",
       "parentUuid": "d25390c8_a2a20b0d",
+      "range": {
+        "startLine": 718,
+        "startChar": 4,
+        "endLine": 718,
+        "endChar": 67
+      },
+      "revId": "979472b3d32770297ffdc6a4e98965976eaeb3ef",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d25390c8_0592095a",
+        "filename": "user/super/com/google/gwt/emul/java/util/Spliterators.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-11T19:53:25Z",
+      "side": 1,
+      "message": "SGTM.",
+      "parentUuid": "d211d00a_d604e26e",
       "range": {
         "startLine": 718,
         "startChar": 4,

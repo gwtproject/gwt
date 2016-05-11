@@ -15,6 +15,7 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkCriticalElement;
 import static javaemul.internal.InternalPreconditions.checkElement;
 import static javaemul.internal.InternalPreconditions.checkPositionIndex;
 import static javaemul.internal.InternalPreconditions.checkState;
@@ -104,7 +105,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
 
     @Override
     public E next() {
-      checkElement(hasNext());
+      checkCriticalElement(hasNext());
 
       lastNode = currentNode;
       currentNode = currentNode.next;
@@ -119,7 +120,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
 
     @Override
     public E previous() {
-      checkElement(hasPrevious());
+      checkCriticalElement(hasPrevious());
 
       lastNode = currentNode = currentNode.prev;
       --currentIndex;

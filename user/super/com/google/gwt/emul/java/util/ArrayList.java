@@ -150,15 +150,17 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
       public E next() {
         checkElement(hasNext());
 
+        E e = array[i];
         last = i++;
-        return array[last];
+        return e;
       }
 
       @Override
       public void remove() {
         checkState(last != -1);
 
-        ArrayList.this.remove(i = last);
+        ArrayList.this.remove(last);
+        i = last;
         last = -1;
       }
     };

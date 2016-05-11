@@ -50,7 +50,9 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     public E next() {
       checkElement(hasNext());
 
-      return AbstractList.this.get(last = i++);
+      E e = AbstractList.this.get(i);
+      last = i++;
+      return e;
     }
 
     @Override
@@ -105,7 +107,9 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     public E previous() {
       checkElement(hasPrevious());
 
-      return AbstractList.this.get(last = --i);
+      E e = AbstractList.this.get(i - 1);
+      last = --i;
+      return e;
     }
 
     @Override

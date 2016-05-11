@@ -64,9 +64,11 @@ public abstract class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
       @Override
       public E next() {
         checkElement(hasNext());
+
+        E e = set[i];
         last = i;
         findNext();
-        return set[last];
+        return e;
       }
 
       @Override

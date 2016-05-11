@@ -46,6 +46,30 @@
       "revId": "2fed9131fe3d403dff29f1ea5a92bcf10f5a0ad3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d25390c8_1231f2f3",
+        "filename": "dev/core/src/com/google/gwt/dev/js/globals/chrome.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-11T00:26:03Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "d25390c8_1256d218",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 21
+      },
+      "revId": "2fed9131fe3d403dff29f1ea5a92bcf10f5a0ad3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

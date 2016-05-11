@@ -46,6 +46,30 @@
       "revId": "f604559f5ac67243c57ce25a267a20583a64a617",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2ab34ee_acebc38c",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-05-11T09:22:08Z",
+      "side": 1,
+      "message": "Oh, my bad. Can you rename it to contain \"critical\" then? I think naming should be consistent to normal vs. critical so you instantly know if a check in any given class might get compiled out or not. IMHO in a follow-up CL checkStringBounds and the like should also be renamed to contain \"critical\".",
+      "parentUuid": "f2ab34ee_0c2137ef",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 20
+      },
+      "revId": "f604559f5ac67243c57ce25a267a20583a64a617",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

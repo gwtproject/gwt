@@ -16,6 +16,29 @@
       "revId": "0f6c5f6c87e32485b4bcbac03d113c12eb81ea0c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9714aa34_fc9f055d",
+        "filename": "user/test/com/google/gwt/emultest/java8/math/BigIntegerConvertTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-12T21:12:15Z",
+      "side": 1,
+      "message": "java8\n\nIs it ok if I fix it in my separate pull request?",
+      "range": {
+        "startLine": 38,
+        "startChar": 32,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "0f6c5f6c87e32485b4bcbac03d113c12eb81ea0c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

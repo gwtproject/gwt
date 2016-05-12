@@ -48,6 +48,76 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
     Cloneable, RandomAccess, Serializable {
 
   /**
+   * Implementation of {@code ListIterator} for {@code ArrayList}.
+   */
+  private final class ListIteratorImpl implements ListIterator<E> {
+    private int i;
+    private int last = -1;
+
+    private ListIteratorImpl(int start) {
+      i = start;
+    }
+
+    @Override
+    public boolean hasNext() {
+      return i < array.length;
+    }
+
+    @Override
+    public E next() {
+      checkElement(hasNext());
+
+      last = i++;
+      return array[last];
+    }
+
+    @Override
+    public void remove() {
+      checkState(last != -1);
+
+      ArrayList.this.remove(last);
+      i = last;
+      last = -1;
+    }
+
+    @Override
+    public void add(E o) {
+      ArrayList.this.add(i, o);
+      i++;
+      last = -1;
+    }
+
+    @Override
+    public boolean hasPrevious() {
+      return i > 0;
+    }
+
+    @Override
+    public int nextIndex() {
+      return i;
+    }
+
+    @Override
+    public E previous() {
+      checkElement(hasPrevious());
+
+      return array[last = --i];
+    }
+
+    @Override
+    public int previousIndex() {
+      return i - 1;
+    }
+
+    @Override
+    public void set(E o) {
+      checkState(last != -1);
+
+      array[last] = o;
+    }
+  }
+
+  /**
    * This field holds a JavaScript array.
    */
   private transient E[] array = (E[]) new Object[0];
@@ -137,34 +207,6 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   }
 
   @Override
-  public Iterator<E> iterator() {
-    return new Iterator<E>() {
-      int i = 0, last = -1;
-
-      @Override
-      public boolean hasNext() {
-        return i < array.length;
-      }
-
-      @Override
-      public E next() {
-        checkElement(hasNext());
-
-        last = i++;
-        return array[last];
-      }
-
-      @Override
-      public void remove() {
-        checkState(last != -1);
-
-        ArrayList.this.remove(i = last);
-        last = -1;
-      }
-    };
-  }
-
-  @Override
   public boolean isEmpty() {
     return array.length == 0;
   }
@@ -172,6 +214,12 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   @Override
   public int lastIndexOf(Object o) {
     return lastIndexOf(o, size() - 1);
+  }
+
+  @Override
+  public ListIterator<E> listIterator(int from) {
+    checkPositionIndex(from, size());
+    return new ListIteratorImpl(from);
   }
 
   @Override

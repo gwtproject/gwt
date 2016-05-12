@@ -117,6 +117,30 @@
       "revId": "ac392aeb1854dda60242c81d9d646781707aa519",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37fcde2a_81609c01",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArraysTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1299,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-12T22:05:08Z",
+      "side": 1,
+      "message": "Good point, thanks. Done.",
+      "parentUuid": "9714aa34_19240ba1",
+      "range": {
+        "startLine": 1299,
+        "startChar": 14,
+        "endLine": 1299,
+        "endChar": 22
+      },
+      "revId": "ac392aeb1854dda60242c81d9d646781707aa519",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d700e2f1_9b480b4e",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-05-12T19:42:35Z",
+      "side": 1,
+      "message": "You forgot to fix code format here as well",
+      "range": {
+        "startLine": 1391,
+        "startChar": 38,
+        "endLine": 1391,
+        "endChar": 61
+      },
+      "revId": "a6050fbca66a8cbc61fca03497d0e1083480efe3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

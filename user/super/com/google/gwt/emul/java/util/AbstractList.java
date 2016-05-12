@@ -32,14 +32,22 @@ import static javaemul.internal.InternalPreconditions.checkState;
 public abstract class AbstractList<E> extends AbstractCollection<E> implements
     List<E> {
 
-  private class IteratorImpl implements Iterator<E> {
+  /**
+   * Implementation of <code>ListIterator</code> for abstract lists.
+   */
+  private final class ListIteratorImpl implements ListIterator<E> {
     /*
      * i is the index of the item that will be returned on the next call to
      * next() last is the index of the item that was returned on the previous
      * call to next() or previous (for ListIterator), -1 if no such item exists.
      */
 
-    int i = 0, last = -1;
+    private int i;
+    private int last = -1;
+
+    private ListIteratorImpl(int start) {
+      i = start;
+    }
 
     @Override
     public boolean hasNext() {
@@ -60,28 +68,6 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
       AbstractList.this.remove(last);
       i = last;
       last = -1;
-    }
-  }
-
-  /**
-   * Implementation of <code>ListIterator</code> for abstract lists.
-   */
-  private final class ListIteratorImpl extends IteratorImpl implements
-      ListIterator<E> {
-    /*
-     * i is the index of the item that will be returned on the next call to
-     * next() last is the index of the item that was returned on the previous
-     * call to next() or previous (for ListIterator), -1 if no such item exists.
-     */
-
-    private ListIteratorImpl() {
-      // Nothing to do
-    }
-
-    private ListIteratorImpl(int start) {
-      checkPositionIndex(start, AbstractList.this.size());
-
-      i = start;
     }
 
     @Override
@@ -250,7 +236,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
 
   @Override
   public Iterator<E> iterator() {
-    return new IteratorImpl();
+    return listIterator();
   }
 
   @Override
@@ -270,6 +256,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
 
   @Override
   public ListIterator<E> listIterator(int from) {
+    checkPositionIndex(from, size());
     return new ListIteratorImpl(from);
   }
 

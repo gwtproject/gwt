@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d25390c8_c28947ff",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-05-12T04:17:16Z",
+      "side": 1,
+      "message": "I don\u0027t understand - isn\u0027t that the same thing as is written here? All branches of the if return something, so the only difference between what I have and inverting the if would the order of the code, but not the execution of the statements, right?\n\nIf characteristics does _not_ contain IDENTITY_FINISH, the block is skipped, and the set is returned as-is.",
+      "parentUuid": "721744d9_38a96936",
+      "revId": "16baeed66fa1d8baab0123698b9555fef83c988d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d26b902f_fdc22764",
         "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
         "patchSetId": 19
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "You should put your static imports above regular imports, right after package declaration",
       "parentUuid": "d26b902f_9855c140",
+      "revId": "16baeed66fa1d8baab0123698b9555fef83c988d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d25390c8_e205636c",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-05-12T04:17:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "721744d9_58245dff",
       "revId": "16baeed66fa1d8baab0123698b9555fef83c988d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

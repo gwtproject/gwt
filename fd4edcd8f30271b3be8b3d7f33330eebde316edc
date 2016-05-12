@@ -50,6 +50,24 @@
       "revId": "fd4edcd8f30271b3be8b3d7f33330eebde316edc",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9714aa34_79fc271a",
+        "filename": "user/super/com/google/gwt/emul/java/util/LinkedList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-12T11:12:07Z",
+      "side": 1,
+      "message": "Yes, it will fail if you call this method twice.\nBut the iterator will be in an inconsistent state (lastNode and currentIndex are modified) and you cannot reuse it.",
+      "parentUuid": "d25390c8_42e6b756",
+      "revId": "fd4edcd8f30271b3be8b3d7f33330eebde316edc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

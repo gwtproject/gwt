@@ -93,6 +93,30 @@
       "revId": "ac392aeb1854dda60242c81d9d646781707aa519",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9714aa34_19240ba1",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArraysTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1299,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-05-12T11:48:49Z",
+      "side": 1,
+      "message": "But then it does not make sense to use two \"b\" in the array because their hashcode is the same and you don\u0027t know if the concrete instance of \"b\" has been moved or not. The hashcode test would make more sense if something other than String or numbers had been used for the array items.",
+      "parentUuid": "d700e2f1_3b32174e",
+      "range": {
+        "startLine": 1299,
+        "startChar": 14,
+        "endLine": 1299,
+        "endChar": 22
+      },
+      "revId": "ac392aeb1854dda60242c81d9d646781707aa519",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

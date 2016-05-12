@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9714aa34_f9ab97e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-05-12T12:46:52Z",
+      "side": 1,
+      "message": "Oh, I looked at the class content twice and didn\u0027t detect Java8 in it (hence my comment), sorry.\n(the commit needed an update anyway, so I didn\u0027t make you loose to much time at least ;-) )",
+      "revId": "0f6c5f6c87e32485b4bcbac03d113c12eb81ea0c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

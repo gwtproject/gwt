@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9714aa34_992ffb79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-05-12T11:56:33Z",
+      "side": 1,
+      "message": "Can you explain the \"why\" in the commit message?\n(so that, even if it\u0027s a temporary workaround for J2Cl or whatever, we have the information when looking at the history and know whether and/or when to possibly revert this)",
+      "revId": "0375a5c969676a860b6094c1e35913452f3e0f22",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

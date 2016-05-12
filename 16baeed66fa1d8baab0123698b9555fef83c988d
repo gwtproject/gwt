@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9714aa34_1962cb2e",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-12T10:11:06Z",
+      "side": 1,
+      "message": "I mean:\n\nif (!contains) {\n  return characteristics;\n}\nif (size() \u003d\u003d 1) {\n  return emptySet();\n}\nreturn characteristics.remove(IDENTITY_FINISH);\n\nSeems clearer to me but it\u0027s your call, not critical to me",
+      "parentUuid": "d25390c8_c28947ff",
+      "revId": "16baeed66fa1d8baab0123698b9555fef83c988d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d26b902f_fdc22764",
         "filename": "user/test/com/google/gwt/emultest/java8/util/stream/CollectorsTest.java",
         "patchSetId": 19

@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9714aa34_dcd441cc",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-13T09:02:01Z",
+      "side": 1,
+      "message": "I wonder what if \nHashSet::add\nmakes sense to put here?",
+      "range": {
+        "startLine": 297,
+        "startChar": 8,
+        "endLine": 297,
+        "endChar": 23
+      },
+      "revId": "272607022c3b9b0c96609d85a152f675612f6ae3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9714aa34_fcd705ce",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-13T09:02:01Z",
+      "side": 1,
+      "message": "!contains",
+      "revId": "272607022c3b9b0c96609d85a152f675612f6ae3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

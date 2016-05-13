@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1239a8b4_24709693",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-13T18:07:25Z",
+      "side": 1,
+      "message": "Why it doesn\u0027t hit this line?",
+      "revId": "5b943e7d93f92ea8119c90da6890a2ae20b63c57",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

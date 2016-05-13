@@ -15,6 +15,8 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
@@ -98,6 +100,7 @@ public interface Spliterator<T> {
       if (consumer instanceof DoubleConsumer) {
         return tryAdvance((DoubleConsumer) consumer);
       } else {
+        checkNotNull(consumer);
         return tryAdvance((DoubleConsumer) consumer::accept);
       }
     }
@@ -107,6 +110,7 @@ public interface Spliterator<T> {
       if (consumer instanceof DoubleConsumer) {
         forEachRemaining((DoubleConsumer) consumer);
       } else {
+        checkNotNull(consumer);
         forEachRemaining((DoubleConsumer) consumer::accept);
       }
     }
@@ -122,6 +126,7 @@ public interface Spliterator<T> {
       if (consumer instanceof IntConsumer) {
         return tryAdvance((IntConsumer) consumer);
       } else {
+        checkNotNull(consumer);
         return tryAdvance((IntConsumer) consumer::accept);
       }
     }
@@ -131,6 +136,7 @@ public interface Spliterator<T> {
       if (consumer instanceof IntConsumer) {
         forEachRemaining((IntConsumer) consumer);
       } else {
+        checkNotNull(consumer);
         forEachRemaining((IntConsumer) consumer::accept);
       }
     }
@@ -146,6 +152,7 @@ public interface Spliterator<T> {
       if (consumer instanceof LongConsumer) {
         return tryAdvance((LongConsumer) consumer);
       } else {
+        checkNotNull(consumer);
         return tryAdvance((LongConsumer) consumer::accept);
       }
     }
@@ -155,6 +162,7 @@ public interface Spliterator<T> {
       if (consumer instanceof LongConsumer) {
         forEachRemaining((LongConsumer) consumer);
       } else {
+        checkNotNull(consumer);
         forEachRemaining((LongConsumer) consumer::accept);
       }
     }

@@ -58,6 +58,7 @@ public interface PrimitiveIterator<T, C> extends Iterator<T> {
       if (consumer instanceof DoubleConsumer) {
         forEachRemaining((DoubleConsumer) consumer);
       } else {
+        checkNotNull(consumer);
         forEachRemaining((DoubleConsumer) consumer::accept);
       }
     }
@@ -88,6 +89,7 @@ public interface PrimitiveIterator<T, C> extends Iterator<T> {
       if (consumer instanceof IntConsumer) {
         forEachRemaining((IntConsumer) consumer);
       } else {
+        checkNotNull(consumer);
         forEachRemaining((IntConsumer) consumer::accept);
       }
     }
@@ -118,6 +120,7 @@ public interface PrimitiveIterator<T, C> extends Iterator<T> {
       if (consumer instanceof LongConsumer) {
         forEachRemaining((LongConsumer) consumer);
       } else {
+        checkNotNull(consumer);
         forEachRemaining((LongConsumer) consumer::accept);
       }
     }

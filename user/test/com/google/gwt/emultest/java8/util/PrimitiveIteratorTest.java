@@ -47,18 +47,6 @@ public class PrimitiveIteratorTest extends GWTTestCase {
       public void accept(double value) {
       }
     });
-
-    try {
-      it.forEachRemaining((Consumer<Double>) null);
-      fail();
-    } catch (NullPointerException expected) {
-    }
-
-    try {
-      it.forEachRemaining((DoubleConsumer) null);
-      fail();
-    } catch (NullPointerException expected) {
-    }
   }
 
   public void testForEachRemainingIntConsumer() {
@@ -73,18 +61,6 @@ public class PrimitiveIteratorTest extends GWTTestCase {
       public void accept(int value) {
       }
     });
-
-    try {
-      it.forEachRemaining((Consumer<Integer>) null);
-      fail();
-    } catch (NullPointerException expected) {
-    }
-
-    try {
-      it.forEachRemaining((IntConsumer) null);
-      fail();
-    } catch (NullPointerException expected) {
-    }
   }
 
   public void testForEachRemainingLongConsumer() {
@@ -99,18 +75,6 @@ public class PrimitiveIteratorTest extends GWTTestCase {
       public void accept(long value) {
       }
     });
-
-    try {
-      it.forEachRemaining((Consumer<Long>) null);
-      fail();
-    } catch (NullPointerException expected) {
-    }
-
-    try {
-      it.forEachRemaining((LongConsumer) null);
-      fail();
-    } catch (NullPointerException expected) {
-    }
   }
 
   private static PrimitiveIterator.OfDouble createTestPrimitiveDoubleIterator() {

@@ -26,12 +26,28 @@ import java.util.ArrayList;
 /**
  * Tests for JRE emulation of java.lang.Math.
  *
- * TODO: more tests
  */
 public class MathTest extends GWTTestCase {
 
   private static final Integer[] ALL_INTEGER_CANDIDATES = getAllIntegerCandidates();
   private static final Long[] ALL_LONG_CANDIDATES = getAllLongCandidates();
+
+  private static void assertNegativeZero(double x) {
+    assertTrue(isNegativeZero(x));
+  }
+
+  private static void assertPositiveZero(double x) {
+    assertEquals(0.0, x);
+    assertFalse(isNegativeZero(x));
+  }
+
+  private static void assertNaN(double x) {
+    assertTrue(Double.isNaN(x));
+  }
+
+  private static void assertEquals(double expected, double actual) {
+    assertEquals(expected, actual, 0.);
+  }
 
   private static boolean isNegativeZero(double x) {
     return Double.doubleToLongBits(-0.0) == Double.doubleToLongBits(x);
@@ -96,9 +112,86 @@ public class MathTest extends GWTTestCase {
     }
   }
 
+  public void testAsin() {
+    assertNaN(Math.asin(Double.NaN));
+    assertNaN(Math.asin(1.1));
+    assertNaN(Math.asin(Double.NEGATIVE_INFINITY));
+    assertNaN(Math.asin(Double.POSITIVE_INFINITY));
+    assertPositiveZero(Math.asin(0.));
+    assertNegativeZero(Math.asin(-0.));
+
+    assertEquals(0., Math.asin(0));
+    assertEquals(1.570796326, Math.asin(1), 1e-7);
+  }
+
+  public void testAcos() {
+    assertNaN(Math.acos(Double.NaN));
+    assertNaN(Math.acos(1.1));
+    assertNaN(Math.acos(Double.NEGATIVE_INFINITY));
+    assertNaN(Math.acos(Double.POSITIVE_INFINITY));
+
+    assertEquals(0., Math.acos(1));
+    assertEquals(1.570796326, Math.acos(0), 1e-7);
+  }
+
+  public void testAtan() {
+    assertNaN(Math.atan(Double.NaN));
+    assertPositiveZero(Math.atan(0.));
+    assertNegativeZero(Math.atan(-0.));
+    assertEquals(-1.570796326, Math.atan(Double.NEGATIVE_INFINITY), 1e-7);
+    assertEquals(1.570796326, Math.atan(Double.POSITIVE_INFINITY), 1e-7);
+    assertEquals(0.785398163, Math.atan(1), 1e-7);
+  }
+
+  public void testAtan2() {
+    assertNaN(Math.atan2(Double.NaN, 1));
+    assertNaN(Math.atan2(1, Double.NaN));
+    assertNaN(Math.atan2(Double.NaN, Double.NaN));
+    assertPositiveZero(Math.atan2(0., 1.));
+    assertPositiveZero(Math.atan2(1, Double.POSITIVE_INFINITY));
+    assertNegativeZero(Math.atan2(-0., 1.));
+    assertNegativeZero(Math.atan2(-1., Double.POSITIVE_INFINITY));
+    assertEquals(Math.PI, Math.atan2(0., -1.), 1e-7);
+    assertEquals(Math.PI, Math.atan2(1., Double.NEGATIVE_INFINITY), 1e-7);
+    assertEquals(-Math.PI, Math.atan2(-0., -1.), 1e-7);
+    assertEquals(-Math.PI, Math.atan2(-1., Double.NEGATIVE_INFINITY), 1e-7);
+    assertEquals(Math.PI / 2, Math.atan2(1., 0.), 1e-7);
+    assertEquals(Math.PI / 2, Math.atan2(1., -0.), 1e-7);
+    assertEquals(Math.PI / 2, Math.atan2(Double.POSITIVE_INFINITY, 1.), 1e-7);
+    assertEquals(-Math.PI / 2, Math.atan2(-1., 0.), 1e-7);
+    assertEquals(-Math.PI / 2, Math.atan2(-1., -0.), 1e-7);
+    assertEquals(-Math.PI / 2, Math.atan2(Double.NEGATIVE_INFINITY, 1.), 1e-7);
+    assertEquals(Math.PI / 4, Math.atan2(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY), 1e-7);
+    assertEquals(Math.PI * 3 / 4,
+        Math.atan2(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY), 1e-7);
+    assertEquals(-Math.PI / 4,
+        Math.atan2(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY), 1e-7);
+    assertEquals(-3 * Math.PI / 4,
+        Math.atan2(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY), 1e-7);
+
+    assertEquals(0.463647609, Math.atan2(1, 2), 1e-7);
+  }
+
   public void testCbrt() {
+    assertNaN(Math.cbrt(Double.NaN));
+    assertEquals(Double.POSITIVE_INFINITY, Math.cbrt(Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.cbrt(Double.NEGATIVE_INFINITY));
+    assertPositiveZero(Math.cbrt(0.));
+    assertNegativeZero(Math.cbrt(-0.));
+
     double v = Math.cbrt(1000.0);
     assertEquals(10.0, v, 1e-7);
+  }
+
+  public void testCeil() {
+    assertNaN(Math.ceil(Double.NaN));
+    assertEquals(Double.POSITIVE_INFINITY, Math.ceil(Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.ceil(Double.NEGATIVE_INFINITY));
+    assertPositiveZero(Math.ceil(0.));
+    assertNegativeZero(Math.ceil(-0.));
+
+    assertEquals(1., Math.ceil(0.5));
+    assertNegativeZero(Math.ceil(-0.5));
   }
 
   public void testCos() {
@@ -161,15 +254,26 @@ public class MathTest extends GWTTestCase {
     }
   }
 
+  public void testExp() {
+    assertNaN(Math.exp(Double.NaN));
+    assertEquals(Double.POSITIVE_INFINITY, Math.exp(Double.POSITIVE_INFINITY));
+    assertPositiveZero(Math.exp(Double.NEGATIVE_INFINITY));
+    assertEquals(1, Math.exp(0));
+    assertEquals(2.718281, Math.exp(1), 0.000001);
+  }
+
   public void testFloor() {
-    double v = Math.floor(0.5);
-    assertEquals(0, v, 0);
-    v = Math.floor(Double.POSITIVE_INFINITY);
+    double v = Math.floor(Double.POSITIVE_INFINITY);
     assertEquals(Double.POSITIVE_INFINITY, v, 0);
     v = Math.floor(Double.NEGATIVE_INFINITY);
     assertEquals(Double.NEGATIVE_INFINITY, v, 0);
     v = Math.floor(Double.NaN);
     assertEquals(Double.NaN, v, 0);
+    assertPositiveZero(Math.floor(0.));
+    assertNegativeZero(Math.floor(-0.));
+
+    assertEquals(0, Math.floor(0.5));
+    assertEquals(-1, Math.floor(-0.5));
   }
 
   @DoNotRunWith(Platform.HtmlUnitBug)
@@ -240,6 +344,38 @@ public class MathTest extends GWTTestCase {
       fail();
     } catch (ArithmeticException expected) {
     }
+  }
+
+  public void testHypot() {
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(0, Double.POSITIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(0, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(Double.POSITIVE_INFINITY, 0));
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(Double.NEGATIVE_INFINITY, 0));
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(Double.NaN, Double.POSITIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(Double.NaN, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(Double.POSITIVE_INFINITY, Double.NaN));
+    assertEquals(Double.POSITIVE_INFINITY,
+        Math.hypot(Double.NEGATIVE_INFINITY, Double.NaN));
+    assertNaN(Math.hypot(Double.NaN, 0));
+    assertNaN(Math.hypot(0, Double.NaN));
+
+    assertEquals(1.414213562, Math.hypot(1, 1), 1e-7);
+    assertEquals(5, Math.hypot(3, 4));
   }
 
   public void testIncrementExact() {
@@ -333,13 +469,40 @@ public class MathTest extends GWTTestCase {
   }
 
   public void testLog() {
+    assertNaN(Math.log(Double.NaN));
+    assertNaN(Math.log(Double.NEGATIVE_INFINITY));
+    assertNaN(Math.log(-1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.log(Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log(0.));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log(-0.));
+
     double v = Math.log(Math.E);
     assertEquals(1.0, v, 1e-15);
   }
 
   public void testLog10() {
+    assertNaN(Math.log10(Double.NaN));
+    assertNaN(Math.log10(Double.NEGATIVE_INFINITY));
+    assertNaN(Math.log10(-1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.log10(Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log10(0.));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log10(-0.));
+
     double v = Math.log10(1000.0);
     assertEquals(3.0, v, 1e-15);
+  }
+
+  public void testLog1p() {
+    assertNaN(Math.log1p(Double.NaN));
+    assertNaN(Math.log1p(-2));
+    assertNaN(Math.log1p(Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.log1p(Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log1p(-1));
+    assertPositiveZero(Math.log1p(0.));
+    assertNegativeZero(Math.log1p(-0.));
+
+    assertEquals(-0.693147180, Math.log1p(-0.5), 1e-7);
+    assertEquals(1.313261687, Math.log1p(Math.E), 1e-7);
   }
 
   public void testMultiplyExact() {
@@ -398,15 +561,56 @@ public class MathTest extends GWTTestCase {
     }
   }
 
+  public void testPow() {
+    assertEquals(1, Math.pow(2, 0.));
+    assertEquals(1, Math.pow(2, -0.));
+    assertEquals(2, Math.pow(2, 1));
+    assertEquals(-2, Math.pow(-2, 1));
+    assertNaN(Math.pow(1, Double.NaN));
+    assertNaN(Math.pow(Double.NaN, Double.NaN));
+    assertNaN(Math.pow(Double.NaN, 1));
+    assertEquals(1, Math.pow(Double.NaN, 0.));
+    assertEquals(1, Math.pow(Double.NaN, -0.));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(1.1, Double.POSITIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(-1.1, Double.POSITIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(0.9, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(-0.9, Double.NEGATIVE_INFINITY));
+    assertPositiveZero(Math.pow(1.1, Double.NEGATIVE_INFINITY));
+    assertPositiveZero(Math.pow(-1.1, Double.NEGATIVE_INFINITY));
+    assertPositiveZero(Math.pow(0.9, Double.POSITIVE_INFINITY));
+    assertPositiveZero(Math.pow(-0.9, Double.POSITIVE_INFINITY));
+    assertNaN(Math.pow(1, Double.POSITIVE_INFINITY));
+    assertNaN(Math.pow(-1, Double.POSITIVE_INFINITY));
+    assertNaN(Math.pow(1, Double.NEGATIVE_INFINITY));
+    assertNaN(Math.pow(-1, Double.NEGATIVE_INFINITY));
+    assertPositiveZero(Math.pow(0., 1));
+    assertPositiveZero(Math.pow(Double.POSITIVE_INFINITY, -1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(0., -1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(Double.POSITIVE_INFINITY, 1));
+    assertPositiveZero(Math.pow(-0., 2));
+    assertPositiveZero(Math.pow(Double.NEGATIVE_INFINITY, -2));
+    assertNegativeZero(Math.pow(-0., 1));
+    assertNegativeZero(Math.pow(Double.NEGATIVE_INFINITY, -1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(-0., -2));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(Double.NEGATIVE_INFINITY, 2));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.pow(-0., -1));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.pow(Double.NEGATIVE_INFINITY, 1));
+
+    assertEquals(9, Math.pow(3, 2));
+  }
+
+  public void testRound_float() {
+    assertEquals(1, Math.round(0.5f));
+    assertEquals(Integer.MAX_VALUE, Math.round(Float.POSITIVE_INFINITY));
+    assertEquals(Integer.MIN_VALUE, Math.round(Float.NEGATIVE_INFINITY));
+    assertEquals(0, Math.round(Float.NaN));
+  }
+
   public void testRound() {
-    long v = Math.round(0.5);
-    assertEquals(1L, v);
-    v = Math.round(Double.POSITIVE_INFINITY);
-    assertEquals(Long.MAX_VALUE, v, 0);
-    v = Math.round(Double.NEGATIVE_INFINITY);
-    assertEquals(Long.MIN_VALUE, v, 0);
-    v = Math.round(Double.NaN);
-    assertEquals(0, v, 0);
+    assertEquals(1L, Math.round(0.5));
+    assertEquals(Long.MAX_VALUE, Math.round(Double.POSITIVE_INFINITY));
+    assertEquals(Long.MIN_VALUE, Math.round(Double.NEGATIVE_INFINITY));
+    assertEquals(0, Math.round(Double.NaN));
   }
 
   @DoNotRunWith(Platform.HtmlUnitBug)
@@ -477,7 +681,7 @@ public class MathTest extends GWTTestCase {
 
   public void testSignum() {
     assertTrue(Double.isNaN(Math.signum(Double.NaN)));
-    assertTrue(isNegativeZero(Math.signum(-0.)));
+    assertNegativeZero(Math.signum(-0.));
     assertEquals(0., Math.signum(0.), 0);
     assertEquals(-1, Math.signum(-2), 0);
     assertEquals(1, Math.signum(2), 0);
@@ -489,9 +693,9 @@ public class MathTest extends GWTTestCase {
 
   public void testSin() {
     double v = Math.sin(0.0);
-    assertEquals(0.0, v, 1e-7);
+    assertPositiveZero(v);
     v = Math.sin(-0.0);
-    assertEquals(-0.0, v, 1e-7);
+    assertNegativeZero(v);
     v = Math.sin(Math.PI * .5);
     assertEquals(1.0, v, 1e-7);
     v = Math.sin(Math.PI);
@@ -508,7 +712,9 @@ public class MathTest extends GWTTestCase {
 
   public void testSinh() {
     double v = Math.sinh(0.0);
-    assertEquals(0.0, v);
+    assertPositiveZero(v);
+    v = Math.sinh(-0.0);
+    assertNegativeZero(v);
     v = Math.sinh(1.0);
     assertEquals(1.175201193, v, 1e-7);
     v = Math.sinh(-1.0);
@@ -519,15 +725,24 @@ public class MathTest extends GWTTestCase {
     assertEquals(Double.NEGATIVE_INFINITY, v);
     v = Math.sinh(Double.POSITIVE_INFINITY);
     assertEquals(Double.POSITIVE_INFINITY, v);
-    v = Math.sinh(-0.0);
-    assertEquals(-0.0, v);
+  }
+
+  public void testSqrt() {
+    assertNaN(Math.sqrt(Double.NaN));
+    assertNaN(Math.sqrt(Double.NEGATIVE_INFINITY));
+    assertNaN(Math.sqrt(-1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.sqrt(Double.POSITIVE_INFINITY));
+    assertPositiveZero(Math.sqrt(0.));
+    assertNegativeZero(Math.sqrt(-0.));
+
+    assertEquals(1.732050807, Math.sqrt(3), 1e-7);
   }
 
   public void testTan() {
     double v = Math.tan(0.0);
-    assertEquals(0.0, v, 1e-7);
+    assertPositiveZero(v);
     v = Math.tan(-0.0);
-    assertEquals(-0.0, v, 1e-7);
+    assertNegativeZero(v);
     v = Math.tan(Double.NaN);
     assertTrue(Double.isNaN(v));
     v = Math.tan(Double.NEGATIVE_INFINITY);
@@ -538,7 +753,9 @@ public class MathTest extends GWTTestCase {
 
   public void testTanh() {
     double v = Math.tanh(0.0);
-    assertEquals(0.0, v);
+    assertPositiveZero(v);
+    v = Math.tanh(-0.0);
+    assertNegativeZero(v);
     v = Math.tanh(1.0);
     assertEquals(0.761594155, v, 1e-7);
     v = Math.tanh(-1.0);
@@ -549,11 +766,17 @@ public class MathTest extends GWTTestCase {
     assertEquals(-1.0, v, 1e-7);
     v = Math.tanh(Double.POSITIVE_INFINITY);
     assertEquals(1.0, v, 1e-7);
-    v = Math.tanh(-0.0);
-    assertEquals(-0.0, v);
   }
 
   public void testScalb() {
+    for (int scaleFactor = -32; scaleFactor <= 32; scaleFactor++) {
+      assertNaN(Math.scalb(Double.NaN, scaleFactor));
+      assertEquals(Double.POSITIVE_INFINITY, Math.scalb(Double.POSITIVE_INFINITY, scaleFactor));
+      assertEquals(Double.NEGATIVE_INFINITY, Math.scalb(Double.NEGATIVE_INFINITY, scaleFactor));
+      assertPositiveZero(Math.scalb(0., scaleFactor));
+      assertNegativeZero(Math.scalb(-0., scaleFactor));
+    }
+
     assertEquals(40.0d, Math.scalb(5d, 3));
     assertEquals(40.0f, Math.scalb(5f, 3));
 

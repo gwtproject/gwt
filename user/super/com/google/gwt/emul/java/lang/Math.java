@@ -94,7 +94,7 @@ public final class Math {
   }
 
   public static double cbrt(double x) {
-    return Math.pow(x, 1.0 / 3.0);
+    return x == 0. || !Double.isFinite(x) ? x : NativeMath.pow(x, 1.0 / 3.0);
   }
 
   public static double ceil(double x) {
@@ -118,7 +118,7 @@ public final class Math {
   }
 
   public static double cosh(double x) {
-    return (Math.exp(x) + Math.exp(-x)) / 2.0;
+    return (exp(x) + exp(-x)) / 2.0;
   }
 
   public static int decrementExact(int x) {
@@ -181,7 +181,8 @@ public final class Math {
   }
 
   public static double hypot(double x, double y) {
-    return sqrt(x * x + y * y);
+    return Double.isInfinite(x) || Double.isInfinite(y) ?
+        Double.POSITIVE_INFINITY : sqrt(x * x + y * y);
   }
 
   public static int incrementExact(int x) {
@@ -203,7 +204,7 @@ public final class Math {
   }
 
   public static double log1p(double x) {
-    return Math.log(x + 1.0d);
+    return x == 0. ? x : NativeMath.log(x + 1);
   }
 
   public static double max(double x, double y) {
@@ -284,11 +285,17 @@ public final class Math {
 
   public static int round(float x) {
     double roundedValue = NativeMath.round(x);
-    return unsafeCastToInt(roundedValue);
+    if (roundedValue == Double.POSITIVE_INFINITY) {
+      return Integer.MAX_VALUE;
+    } else if (roundedValue == Double.NEGATIVE_INFINITY) {
+      return Integer.MIN_VALUE;
+    } else {
+      return coerceToInt(roundedValue);
+    }
   }
 
-  private static native int unsafeCastToInt(double d) /*-{
-    return d;
+  private static native int coerceToInt(double d) /*-{
+    return d | 0;
   }-*/;
 
   public static int subtractExact(int x, int y) {
@@ -309,13 +316,13 @@ public final class Math {
 
   public static double scalb(double d, int scaleFactor) {
     if (scaleFactor >= 31 || scaleFactor <= -31) {
-      return d * Math.pow(2, scaleFactor);
+      return d * pow(2, scaleFactor);
     } else if (scaleFactor > 0) {
       return d * (1 << scaleFactor);
     } else if (scaleFactor == 0) {
       return d;
     } else {
-      return d * 1.0d / (1 << -scaleFactor);
+      return d / (1 << -scaleFactor);
     }
   }
 
@@ -340,7 +347,7 @@ public final class Math {
   }
 
   public static double sinh(double x) {
-    return (Math.exp(x) - Math.exp(-x)) / 2.0d;
+    return x == 0. ? x : (exp(x) - exp(-x)) / 2.;
   }
 
   public static double sqrt(double x) {
@@ -352,12 +359,14 @@ public final class Math {
   }
 
   public static double tanh(double x) {
-    if (Double.isInfinite(x)) {
+    if (x == 0.) {
+      return x;
+    } else if (Double.isInfinite(x)) {
       return signum(x);
+    } else {
+      double e2x = exp(2.0 * x);
+      return (e2x - 1) / (e2x + 1);
     }
-
-    double e2x = Math.exp(2.0 * x);
-    return (e2x - 1) / (e2x + 1);
   }
 
   public static double toDegrees(double x) {

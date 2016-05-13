@@ -22,6 +22,30 @@
       "revId": "d91c52e56b32fe9f885328907e31d2f2738eefd5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1239a8b4_04547aeb",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-13T18:04:50Z",
+      "side": 1,
+      "message": "I think that did it because it was prone to compiler rewrites.",
+      "parentUuid": "9714aa34_5c0151f6",
+      "range": {
+        "startLine": 113,
+        "startChar": 26,
+        "endLine": 113,
+        "endChar": 44
+      },
+      "revId": "d91c52e56b32fe9f885328907e31d2f2738eefd5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -22,6 +22,30 @@
       "revId": "992f13915815fade0400c32e4ca53e06b61f6231",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9714aa34_1f418b4d",
+        "filename": "user/super/com/google/gwt/emul/java/util/StringJoiner.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-15T20:35:46Z",
+      "side": 1,
+      "message": "It looks like bug. I put critical check for now.",
+      "parentUuid": "9714aa34_ff7377d5",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 28
+      },
+      "revId": "992f13915815fade0400c32e4ca53e06b61f6231",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

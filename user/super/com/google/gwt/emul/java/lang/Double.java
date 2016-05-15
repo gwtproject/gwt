@@ -104,18 +104,22 @@ public final class Double extends Number implements Comparable<Double> {
       return 1;
     }
     if (x == y) {
-      return 0;
+      if (isNegativeZero(x)) {
+        return isNegativeZero(y) ? 0 : -1;
+      } else {
+        return isNegativeZero(y) ? 1 : 0;
+      }
     }
 
     if (isNaN(x)) {
-      if (isNaN(y)) {
-        return 0;
-      } else {
-        return 1;
-      }
+      return isNaN(y) ? 0 : 1;
     } else {
       return -1;
     }
+  }
+
+  private static boolean isNegativeZero(double value) {
+    return value == 0. && 1 / value < 0;
   }
 
   public static long doubleToLongBits(double value) {
@@ -332,7 +336,7 @@ public final class Double extends Number implements Comparable<Double> {
 
   @Override
   public boolean equals(Object o) {
-    return checkNotNull(this) == o;
+    return o instanceof Double && checkNotNull(this).compareTo((Double) o) == 0;
   }
 
   @Override

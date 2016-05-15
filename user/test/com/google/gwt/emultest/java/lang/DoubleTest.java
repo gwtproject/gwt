@@ -81,11 +81,21 @@ public class DoubleTest extends GWTTestCase {
   }
 
   public void testCompare() {
+    assertTrue(Double.compare(-0.0, -0.0) == 0);
+    assertTrue(Double.compare(0.0, 0.0) == 0);
+    assertTrue(Double.compare(-0.0, 0.0) < 0);
+    assertTrue(Double.compare(0.0, -0.0) > 0);
     assertTrue(Double.compare(Double.NaN, Double.NaN) == 0);
     assertTrue(Double.compare(0.0, Double.NaN) < 0);
+    assertTrue(Double.compare(Double.NaN, Double.NEGATIVE_INFINITY) > 0);
     assertTrue(Double.compare(Double.NaN, Double.POSITIVE_INFINITY) > 0);
     assertTrue(Double.compare(Double.NaN, 0.0) > 0);
+    assertTrue(Double.compare(Double.NEGATIVE_INFINITY, Double.NaN) < 0);
     assertTrue(Double.compare(Double.POSITIVE_INFINITY, Double.NaN) < 0);
+    assertTrue(Double.compare(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY) == 0);
+    assertTrue(Double.compare(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY) == 0);
+    assertTrue(Double.compare(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY) > 0);
+    assertTrue(Double.compare(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY) < 0);
     assertTrue(Double.compare(3.0, 500.0) < 0);
     assertTrue(Double.compare(500.0, 3.0) > 0);
     assertTrue(Double.compare(500.0, 500.0) == 0);
@@ -114,6 +124,36 @@ public class DoubleTest extends GWTTestCase {
       fail("Double should fail to cast to a JSO");
     } catch (ClassCastException e) {
     }
+  }
+
+  public void testEquals() {
+    Double[] trueValues = {
+        0.0, 0.0,
+        -0.0, -0.0,
+        Double.NaN, Double.NaN,
+        Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY,
+        Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY,
+    };
+    for (int i = 0; i < trueValues.length;) {
+      Double value1 = trueValues[i++];
+      Double value2 = trueValues[i++];
+      assertTrue(value1.equals(value2));
+    }
+
+    Double[] falseValues = {
+        0.0, -0.0,
+        -0.0, 0.0,
+        Double.NaN, 0.0,
+        0.0, Double.NaN,
+    };
+    for (int i = 0; i < falseValues.length;) {
+      Double value1 = falseValues[i++];
+      Double value2 = falseValues[i++];
+      assertFalse(value1.equals(value2));
+    }
+
+//    assertFalse(new Double(0).equals(new Object()));
+//    assertFalse(new Double(0).equals(new Integer(0)));
   }
 
   public void testEqualityNormalizer() {

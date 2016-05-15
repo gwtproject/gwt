@@ -16,6 +16,24 @@
       "revId": "822be0e35f2baf59226cd67d91d51821e852d2b3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d700e2f1_7e11ad9d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-15T12:08:27Z",
+      "side": 1,
+      "message": "Done in https://gwt-review.googlesource.com/#/c/14875/",
+      "parentUuid": "1239a8b4_84914aab",
+      "revId": "822be0e35f2baf59226cd67d91d51821e852d2b3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

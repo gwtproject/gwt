@@ -57,27 +57,45 @@ public class FloatTest extends GWTTestCase {
     assertTrue("Float.compare failed for 2 > 1", Float.compare(2f, 1f) > 0);
     assertEquals(0, Float.compare(1f, 1f));
 
-    assertEquals(0, Float.compare(Float.NaN, Float.NaN));
+    assertTrue(Float.compare(-0.0f, -0.0f) == 0);
+    assertTrue(Float.compare(0.0f, 0.0f) == 0);
+    assertTrue(Float.compare(-0.0f, 0.0f) < 0);
+    assertTrue(Float.compare(0.0f, -0.0f) > 0);
+    assertTrue(Float.compare(Float.NaN, Float.NaN) == 0);
     assertTrue(Float.compare(0.0f, Float.NaN) < 0);
+    assertTrue(Float.compare(Float.NaN, Float.NEGATIVE_INFINITY) > 0);
     assertTrue(Float.compare(Float.NaN, Float.POSITIVE_INFINITY) > 0);
     assertTrue(Float.compare(Float.NaN, 0.0f) > 0);
+    assertTrue(Float.compare(Float.NEGATIVE_INFINITY, Float.NaN) < 0);
     assertTrue(Float.compare(Float.POSITIVE_INFINITY, Float.NaN) < 0);
+    assertTrue(Float.compare(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY) == 0);
+    assertTrue(Float.compare(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY) == 0);
+    assertTrue(Float.compare(Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY) > 0);
+    assertTrue(Float.compare(Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY) < 0);
   }
 
   public void testCompareTo() {
     Float float1 = new Float(1f);
     Float float2 = new Float(2f);
-    Float floatNaN1 = new Float(Float.NaN);
-
     assertTrue("Float.compare failed for 1 < 2", float1.compareTo(2f) < 0);
     assertTrue("Float.compare failed for 2 > 1", float2.compareTo(1f) > 0);
     assertEquals(0, float1.compareTo(float1));
 
-    assertEquals(0, floatNaN1.compareTo(new Float(Float.NaN)));
-    assertTrue(new Float(0.0f).compareTo(new Float(Float.NaN)) < 0);
-    assertTrue(floatNaN1.compareTo(new Float(Float.POSITIVE_INFINITY)) > 0);
-    assertTrue(floatNaN1.compareTo(new Float(0.0f)) > 0);
-    assertTrue(new Float(Float.POSITIVE_INFINITY).compareTo(new Float(Float.NaN)) < 0);
+    assertTrue(new Float(-0.0f).compareTo(-0.0f) == 0);
+    assertTrue(new Float(0.0f).compareTo(0.0f) == 0);
+    assertTrue(new Float(-0.0f).compareTo(0.0f) < 0);
+    assertTrue(new Float(0.0f).compareTo(-0.0f) > 0);
+    assertTrue(new Float(Float.NaN).compareTo(Float.NaN) == 0);
+    assertTrue(new Float(0.0f).compareTo(Float.NaN) < 0);
+    assertTrue(new Float(Float.NaN).compareTo(Float.NEGATIVE_INFINITY) > 0);
+    assertTrue(new Float(Float.NaN).compareTo(Float.POSITIVE_INFINITY) > 0);
+    assertTrue(new Float(Float.NaN).compareTo(0.0f) > 0);
+    assertTrue(new Float(Float.NEGATIVE_INFINITY).compareTo(Float.NaN) < 0);
+    assertTrue(new Float(Float.POSITIVE_INFINITY).compareTo(Float.NaN) < 0);
+    assertTrue(new Float(Float.POSITIVE_INFINITY).compareTo(Float.POSITIVE_INFINITY) == 0);
+    assertTrue(new Float(Float.NEGATIVE_INFINITY).compareTo(Float.NEGATIVE_INFINITY) == 0);
+    assertTrue(new Float(Float.POSITIVE_INFINITY).compareTo(Float.NEGATIVE_INFINITY) > 0);
+    assertTrue(new Float(Float.NEGATIVE_INFINITY).compareTo(Float.POSITIVE_INFINITY) < 0);
   }
 
   @SuppressWarnings({"SelfEquality", "EqualsNaN"})
@@ -95,6 +113,36 @@ public class FloatTest extends GWTTestCase {
     // Math.getExponent(Float.MAX_VALUE));
     // issue 8073 - used to fail in prod mode
     assertFalse(Float.isInfinite(Float.NaN));
+  }
+
+  public void testEquals() {
+    Float[] trueValues = {
+        0.0f, 0.0f,
+        -0.0f, -0.0f,
+        Float.NaN, Float.NaN,
+        Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
+        Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY,
+    };
+    for (int i = 0; i < trueValues.length;) {
+      Float value1 = trueValues[i++];
+      Float value2 = trueValues[i++];
+      assertTrue(value1.equals(value2));
+    }
+
+    Float[] falseValues = {
+        0.0f, -0.0f,
+        -0.0f, 0.0f,
+        Float.NaN, 0.0f,
+        0.0f, Float.NaN,
+    };
+    for (int i = 0; i < falseValues.length;) {
+      Float value1 = falseValues[i++];
+      Float value2 = falseValues[i++];
+      assertFalse(value1.equals(value2));
+    }
+
+//    assertFalse(new Float(0).equals(new Object()));
+//    assertFalse(new Float(0).equals(new Integer(0)));
   }
 
   public void testIsFinite() {

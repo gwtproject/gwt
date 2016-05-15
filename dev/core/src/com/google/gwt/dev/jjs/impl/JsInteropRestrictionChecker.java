@@ -336,8 +336,11 @@ public class JsInteropRestrictionChecker {
 
     assert method.getOverriddenMethods().isEmpty();
 
-    if (method.getBody() == null || (!method.isFinal() && !method.isStatic()
-        && !method.isDefaultMethod())) {
+    if (method.getBody() == null
+        || (!method.isFinal()
+            && !method.isStatic()
+            && !method.isPrivate()
+            && !method.isDefaultMethod())) {
       logError(member, "JsOverlay method '%s' cannot be non-final nor native.", memberDescription);
     }
   }

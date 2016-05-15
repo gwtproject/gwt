@@ -1523,6 +1523,22 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     assertBuggySucceeds();
   }
 
+  public void testJsOptionalNotJsOptionalOverrideFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsOptional");
+    addSnippetClassDecl(
+        "interface Interface {",
+        "   @JsMethod void m(@JsOptional Object o);",
+        "}",
+        "public static class Buggy implements Interface {",
+        "   @JsMethod public void m(Object o) {}",
+        "}");
+
+    assertBuggyFails("Line 9: Method 'void EntryPoint.Buggy.m(Object)' overrides "
+        + "'void EntryPoint.Interface.m(Object)' and cannot redeclare parameter "
+        + "'o' as not JsOptional");
+  }
+
   public void testJsOptionalNotAtEndFails() throws Exception {
     addSnippetImport("jsinterop.annotations.JsConstructor");
     addSnippetImport("jsinterop.annotations.JsMethod");

@@ -17,6 +17,8 @@
 package com.google.gwt.emultest.java.lang;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -81,11 +83,22 @@ public class DoubleTest extends GWTTestCase {
   }
 
   public void testCompare() {
+    assertTrue(Double.compare(-0.0, -0.0) == 0);
+    assertTrue(Double.compare(0.0, 0.0) == 0);
+    assertTrue(Double.compare(-0.0, 0.0) < 0);
+    assertTrue(Double.compare(0.0, -0.0) > 0);
     assertTrue(Double.compare(Double.NaN, Double.NaN) == 0);
     assertTrue(Double.compare(0.0, Double.NaN) < 0);
+    assertTrue(Double.compare(Double.NaN, Double.NEGATIVE_INFINITY) > 0);
     assertTrue(Double.compare(Double.NaN, Double.POSITIVE_INFINITY) > 0);
     assertTrue(Double.compare(Double.NaN, 0.0) > 0);
+    assertTrue(Double.compare(Double.NEGATIVE_INFINITY, Double.NaN) < 0);
     assertTrue(Double.compare(Double.POSITIVE_INFINITY, Double.NaN) < 0);
+    assertTrue(Double.compare(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY) == 0);
+    assertTrue(Double.compare(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY) == 0);
+    assertTrue(Double.compare(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY) > 0);
+    assertTrue(Double.compare(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY) < 0);
+
     assertTrue(Double.compare(3.0, 500.0) < 0);
     assertTrue(Double.compare(500.0, 3.0) > 0);
     assertTrue(Double.compare(500.0, 500.0) == 0);
@@ -116,6 +129,44 @@ public class DoubleTest extends GWTTestCase {
     }
   }
 
+  public void testEquals() {
+    Double[] trueValues = {
+        0.0, 0.0,
+        -0.0, -0.0,
+        Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY,
+        Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY,
+    };
+    for (int i = 0; i < trueValues.length;) {
+      Double value1 = trueValues[i++];
+      Double value2 = trueValues[i++];
+      assertTrue(value1.equals(value2));
+    }
+
+    Double[] falseValues = {
+        Double.NaN, 0.0,
+        0.0, Double.NaN,
+    };
+    for (int i = 0; i < falseValues.length;) {
+      Double value1 = falseValues[i++];
+      Double value2 = falseValues[i++];
+      assertFalse(value1.equals(value2));
+    }
+
+    assertFalse(new Double(0).equals(new Object()));
+    assertFalse(new Double(0).equals("0"));
+    assertFalse(new Double(0).equals(new Integer(0)));
+  }
+
+  /**
+   * See {@link java.lang.Double#equals(Object)} for details
+   */
+  @DoNotRunWith(Platform.Devel)
+  public void testEquals_noncompat() {
+    assertFalse(new Double(Double.NaN).equals(new Double(Double.NaN)));
+    assertTrue(new Double(0.0).equals(new Double(-0.0)));
+    assertTrue(new Double(-0.0).equals(new Double(0.0)));
+  }
+
   public void testEqualityNormalizer() {
     Double d = 0.0;
     if (d != null) {
@@ -131,20 +182,25 @@ public class DoubleTest extends GWTTestCase {
   }
 
   public void testCompareTo() {
-    Double zero = new Double(0.0);
-    Double three = new Double(3.0);
-    Double fiveHundred = new Double(500.0);
-    Double infinity = new Double(Double.POSITIVE_INFINITY);
-    Double nan = new Double(Double.NaN);
+    assertTrue(new Double(-0.0).compareTo(-0.0) == 0);
+    assertTrue(new Double(0.0).compareTo(0.0) == 0);
+    assertTrue(new Double(-0.0).compareTo(0.0) < 0);
+    assertTrue(new Double(0.0f).compareTo(-0.0) > 0);
+    assertTrue(new Double(Double.NaN).compareTo(Double.NaN) == 0);
+    assertTrue(new Double(0.0).compareTo(Double.NaN) < 0);
+    assertTrue(new Double(Double.NaN).compareTo(Double.NEGATIVE_INFINITY) > 0);
+    assertTrue(new Double(Double.NaN).compareTo(Double.POSITIVE_INFINITY) > 0);
+    assertTrue(new Double(Double.NaN).compareTo(0.0) > 0);
+    assertTrue(new Double(Double.NEGATIVE_INFINITY).compareTo(Double.NaN) < 0);
+    assertTrue(new Double(Double.POSITIVE_INFINITY).compareTo(Double.NaN) < 0);
+    assertTrue(new Double(Double.POSITIVE_INFINITY).compareTo(Double.POSITIVE_INFINITY) == 0);
+    assertTrue(new Double(Double.NEGATIVE_INFINITY).compareTo(Double.NEGATIVE_INFINITY) == 0);
+    assertTrue(new Double(Double.POSITIVE_INFINITY).compareTo(Double.NEGATIVE_INFINITY) > 0);
+    assertTrue(new Double(Double.NEGATIVE_INFINITY).compareTo(Double.POSITIVE_INFINITY) < 0);
 
-    assertTrue(nan.compareTo(nan) == 0);
-    assertTrue(zero.compareTo(nan) < 0);
-    assertTrue(nan.compareTo(infinity) > 0);
-    assertTrue(nan.compareTo(zero) > 0);
-    assertTrue(infinity.compareTo(nan) < 0);
-    assertTrue(three.compareTo(fiveHundred) < 0);
-    assertTrue(fiveHundred.compareTo(three) > 0);
-    assertTrue(fiveHundred.compareTo(fiveHundred) == 0);
+    assertTrue(new Double(3.0).compareTo(500.0) < 0);
+    assertTrue(new Double(500.0).compareTo(3.0) > 0);
+    assertTrue(new Double(500.0).compareTo(500.0) == 0);
   }
 
   @SuppressWarnings({"SelfEquality", "EqualsNaN"})

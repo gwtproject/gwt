@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9714aa34_1f6f4bef",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/PrimitiveIteratorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-05-15T13:59:29Z",
+      "side": 0,
+      "message": "IMHO you could execute these \"null\" tests on a fresh iterator so the consumer actually gets called and produces an error. You should catch NPE + JavaScriptException then. Probably better than just deleting it.",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 5
+      },
+      "revId": "64da754d649bdfbeb7e2707f57c45706b26811a3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

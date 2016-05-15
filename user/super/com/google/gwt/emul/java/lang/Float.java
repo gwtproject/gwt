@@ -44,7 +44,7 @@ public final class Float extends Number implements Comparable<Float> {
     }
 
     if (value == 0.0f) {
-      if (1.0 / value == NEGATIVE_INFINITY) {
+      if (1.0 / value < 0.) {
         return 0x80000000; // -0.0f
       } else {
         return 0x0;
@@ -207,7 +207,7 @@ public final class Float extends Number implements Comparable<Float> {
 
   @Override
   public boolean equals(Object o) {
-    return (o instanceof Float) && (((Float) o).value == value);
+    return o instanceof Float && compareTo((Float) o) == 0;
   }
 
   @Override

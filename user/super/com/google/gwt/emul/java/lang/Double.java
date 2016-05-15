@@ -104,15 +104,20 @@ public final class Double extends Number implements Comparable<Double> {
       return 1;
     }
     if (x == y) {
-      return 0;
+      if (x != 0.) {
+        return 0;
+      }
+
+      // handle negative zero
+      if (1 / x < 0) {
+        return 1 / y < 0 ? 0 : -1;
+      } else {
+        return 1 / y > 0 ? 0 : 1;
+      }
     }
 
     if (isNaN(x)) {
-      if (isNaN(y)) {
-        return 0;
-      } else {
-        return 1;
-      }
+      return isNaN(y) ? 0 : 1;
     } else {
       return -1;
     }
@@ -125,7 +130,7 @@ public final class Double extends Number implements Comparable<Double> {
 
     boolean negative = false;
     if (value == 0.0) {
-      if (1.0 / value == NEGATIVE_INFINITY) {
+      if (1.0 / value < 0.0) {
         return 0x8000000000000000L; // -0.0
       } else {
         return 0x0L;
@@ -330,6 +335,16 @@ public final class Double extends Number implements Comparable<Double> {
     return instance;
   }-*/;
 
+  /*
+   * Double is an overlay type for primitive number that's why it's incompatible to
+   * OpenJDK's Double in following cases:
+   * new Double(-0.0).equals(0.0) is true
+   * new Double(Double.NaN).equals(new Double(Double.NaN)) is false
+   *
+   * It's done this way to be consistent with these incompatible implementation:
+   * new Double(-0.0) == new Double(0.0) is true
+   * new Double(Double.NaN) == new Double(Double.NaN) is false
+   */
   @Override
   public boolean equals(Object o) {
     return checkNotNull(this) == o;

@@ -248,6 +248,32 @@ public class BigDecimalCompareTest extends EmulTestBase {
   }
 
   /**
+   * Equals() for unequal BigDecimals.
+   */
+  public void testEqualsUnequal4() {
+    String a = "0";
+    int aScale = 0;
+    String b = "92948782094488478231212478987482988429808779810457634781384756794987";
+    int bScale = 0;
+    BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
+    BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
+    assertFalse(aNumber.equals(bNumber));
+  }
+
+  /**
+   * Equals() for unequal BigDecimals.
+   */
+  public void testEqualsUnequal5() {
+    String a = "92948782094488478231212478987482988429808779810457634781384756794987";
+    int aScale = 0;
+    String b = "0";
+    int bScale = 0;
+    BigDecimal aNumber = new BigDecimal(new BigInteger(a), aScale);
+    BigDecimal bNumber = new BigDecimal(new BigInteger(b), bScale);
+    assertFalse(aNumber.equals(bNumber));
+  }
+
+  /**
    * Test identical fraction values with different scales.
    * http://code.google.com/p/google-web-toolkit/issues/detail?id=7834
    */

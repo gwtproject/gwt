@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1239a8b4_b1111c44",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-16T23:24:48Z",
+      "side": 1,
+      "message": "You mean that is not allowed on primitives?\n\nIf so I\u0027ll do it as a separate patch.",
+      "parentUuid": "1239a8b4_d82fae78",
+      "revId": "849f41e24ef97fc86f6ac6c175d8cb901e7ca36b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1239a8b4_f8fc6a1c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 2
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "1239a8b4_31244ca3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-16T23:24:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1239a8b4_f8fc6a1c",
+      "range": {
+        "startLine": 414,
+        "startChar": 38,
+        "endLine": 414,
+        "endChar": 45
+      },
+      "revId": "849f41e24ef97fc86f6ac6c175d8cb901e7ca36b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1239a8b4_58757e81",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 2
@@ -53,6 +95,30 @@
       "writtenOn": "2016-05-16T18:52:17Z",
       "side": 1,
       "message": "What about:\n\n Method %s should declare parameter \u0027%s\u0027 as JsOptional",
+      "range": {
+        "startLine": 419,
+        "startChar": 53,
+        "endLine": 419,
+        "endChar": 56
+      },
+      "revId": "849f41e24ef97fc86f6ac6c175d8cb901e7ca36b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1239a8b4_11191068",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-16T23:24:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1239a8b4_58757e81",
       "range": {
         "startLine": 419,
         "startChar": 53,

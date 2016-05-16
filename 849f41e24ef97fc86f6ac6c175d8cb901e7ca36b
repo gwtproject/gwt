@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1239a8b4_d82fae78",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-16T18:52:17Z",
+      "side": 1,
+      "message": "Did we also need a check for primitives? Can\u0027t recall it.",
+      "revId": "849f41e24ef97fc86f6ac6c175d8cb901e7ca36b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1239a8b4_f8fc6a1c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-16T18:52:17Z",
+      "side": 1,
+      "message": "declared",
+      "range": {
+        "startLine": 414,
+        "startChar": 38,
+        "endLine": 414,
+        "endChar": 45
+      },
+      "revId": "849f41e24ef97fc86f6ac6c175d8cb901e7ca36b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1239a8b4_58757e81",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-16T18:52:17Z",
+      "side": 1,
+      "message": "What about:\n\n Method %s should declare parameter \u0027%s\u0027 as JsOptional",
+      "range": {
+        "startLine": 419,
+        "startChar": 53,
+        "endLine": 419,
+        "endChar": 56
+      },
+      "revId": "849f41e24ef97fc86f6ac6c175d8cb901e7ca36b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

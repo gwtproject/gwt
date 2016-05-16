@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1239a8b4_d82ece95",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-16T18:44:39Z",
+      "side": 1,
+      "message": "Since you are here, can you also merge:\nhttps://gwt-review.googlesource.com/#/c/14412/1/dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+      "revId": "ee8896effd1295014d3cb4a7fbda4d71e34ece2e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1239a8b4_780eba2e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-16T18:44:39Z",
+      "side": 1,
+      "message": "Perhaps we can reword this but I also don\u0027t want it to make unreadable by adding every condition.",
+      "revId": "ee8896effd1295014d3cb4a7fbda4d71e34ece2e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

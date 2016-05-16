@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1239a8b4_b1275cbb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-16T23:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1239a8b4_d82ece95",
+      "revId": "ee8896effd1295014d3cb4a7fbda4d71e34ece2e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1239a8b4_780eba2e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-16T18:44:39Z",
       "side": 1,
       "message": "Perhaps we can reword this but I also don\u0027t want it to make unreadable by adding every condition.",
+      "revId": "ee8896effd1295014d3cb4a7fbda4d71e34ece2e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1239a8b4_d124e8b8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-16T23:19:42Z",
+      "side": 1,
+      "message": "Left it as it is.",
+      "parentUuid": "1239a8b4_780eba2e",
       "revId": "ee8896effd1295014d3cb4a7fbda4d71e34ece2e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

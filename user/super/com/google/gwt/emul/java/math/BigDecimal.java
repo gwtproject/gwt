@@ -1566,9 +1566,27 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
     }
     if (x instanceof BigDecimal) {
       BigDecimal x1 = (BigDecimal) x;
-      return x1.scale == scale
-          && (bitLength < SMALL_VALUE_BITS ? (x1.smallValue == smallValue)
-              : intVal.equals(x1.intVal));
+
+      if (this.scale == x1.scale && this.bitLength < SMALL_VALUE_BITS
+          && x1.bitLength < SMALL_VALUE_BITS) {
+        return (smallValue == x1.smallValue);
+      }
+
+      double diffScale = this.scale - x1.scale;
+      double diffPrecision = this.approxPrecision() - x1.approxPrecision();
+      if (this.scale != x1.scale || (diffPrecision > diffScale + 1) || (diffPrecision < diffScale - 1)) {
+        return false;
+      } else {
+        BigInteger thisUnscaled = this.getUnscaledValue();
+        BigInteger x1Unscaled = x1.getUnscaledValue();
+        // If any of both precision is bigger, append zeros to the shorter one
+        if (diffScale < 0) {
+          thisUnscaled = thisUnscaled.multiply(Multiplication.powerOf10(-diffScale));
+        } else if (diffScale > 0) {
+          x1Unscaled = x1Unscaled.multiply(Multiplication.powerOf10(diffScale));
+        }
+        return thisUnscaled.equals(x1Unscaled);
+      }
     }
     return false;
   }

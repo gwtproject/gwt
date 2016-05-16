@@ -16,6 +16,24 @@
       "revId": "e6b5ef896e7bc14105e703b72b7c205728ad479f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9714aa34_6268ec0e",
+        "filename": "user/super/com/google/gwt/emul/java/util/StringJoiner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-05-16T20:27:56Z",
+      "side": 1,
+      "message": "Just did a quick example by copying a StringJoiner without any checks and doing method calls similar to the test case.\n\nThe generated JS does not contain a toString() call anymore in the StringJoiner constructor and setEmptyValue() method (pretty compile with -optimize 9):\n\n  function StringJoiner(prefix, suffix, delimiter){\n    this.prefix \u003d prefix;\n    this.suffix \u003d suffix;\n    this.delimiter \u003d delimiter;\n    this.emptyValue \u003d this.prefix + (\u0027\u0027 + this.suffix);\n  }\n  \n  function $setEmptyValue(this$static, emptyValue){\n    this$static.emptyValue \u003d emptyValue;\n    return this$static;\n  }",
+      "parentUuid": "1239a8b4_d875ee1f",
+      "revId": "e6b5ef896e7bc14105e703b72b7c205728ad479f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

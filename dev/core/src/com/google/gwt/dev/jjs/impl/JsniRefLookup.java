@@ -75,7 +75,7 @@ public class JsniRefLookup {
       if (fieldName.equals(JsniRef.CLASS)) {
         return type;
 
-      } else if (type instanceof JPrimitiveType) {
+      } else if (type.isPrimitiveType()) {
         errorReporter.reportError("May not refer to fields on primitive types");
         return null;
 
@@ -94,7 +94,7 @@ public class JsniRefLookup {
       errorReporter.reportError("Unresolvable native reference to field '" + fieldName
           + "' in type '" + className + "'");
       return null;
-    } else if (type instanceof JPrimitiveType) {
+    } else if (type.isPrimitiveType()) {
       errorReporter.reportError("May not refer to methods on primitive types");
       return null;
     } else {

@@ -629,7 +629,7 @@ public class Pruner {
       JType leafType = primitiveTypeOrNullTypeOrArray(program, ((JArrayType) type).getLeafType());
       return program.getOrCreateArrayType(leafType, ((JArrayType) type).getDims());
     }
-    if (type instanceof JPrimitiveType) {
+    if (type.isPrimitiveType()) {
       return type;
     }
     return JReferenceType.NULL_TYPE;

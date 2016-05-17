@@ -1630,7 +1630,7 @@ public class UnifyAst {
   }
 
   private JType translate(JType type) {
-    if (type instanceof JPrimitiveType) {
+    if (type.isPrimitiveType()) {
       return type;
     }
     return translate((JReferenceType) type);

@@ -97,7 +97,7 @@ public class AssertionNormalizer {
       return "_Object";
     }
 
-    assert (argType instanceof JPrimitiveType);
+    assert (argType.isPrimitiveType());
     return "_" + argType.getName();
   }
 

@@ -22,7 +22,7 @@
  * allowing the user to choose a GWT app to recompile. This dialog
  * contains a "Compile" bookmarklet for each available module.
  *
- * The "Compile" bookmarklet tells the code server to recompile a GWT app,
+ * The "Compile" button tells the code server to recompile a GWT app,
  * and if successful, reloads the current page with Super Dev Mode enabled.
  *
  * The bookmarklets themselves are just bootstrap scripts that set some
@@ -31,6 +31,12 @@
  */
 (function() {
   var $doc = document;
+  // Save scripts nonce for CSP compatibility.
+  var nonce = "";
+  var noncedScript = $doc.querySelector('script[nonce]');
+  if (noncedScript) {
+    nonce = noncedScript.getAttribute('nonce');
+  }
 
   // Set up globals needed for JSONP calls. (These persist between bookmarklet
   // calls, in case the user clicks the bookmarklet more than once.)
@@ -115,27 +121,29 @@
     return dialog;
   }
 
-  function makeBookmarklet(name, javascript) {
-    var result = makeTextElt('a', '12pt', name);
-    result.style.fontFamily = 'sans';
-    result.style.textDecoration = 'none';
-    result.style.background = '#ddd';
-    result.style.border = '2px outset #ddd';
-    result.style.padding = '3pt';
-    result.setAttribute('href', 'javascript:' + encodeURIComponent(javascript));
-    result.title = 'Tip: drag this button to the bookmark bar';
-    return result;
+  function makeButton(name, codeserver_url, module_name) {
+    var button = makeTextElt('button', '12pt', name);
+    button.style.fontFamily = 'sans';
+    button.style.textDecoration = 'none';
+    button.style.background = '#ddd';
+    button.style.border = '2px outset #ddd';
+    button.style.padding = '3pt';
+    button.onclick = function() {
+      window.__gwt_bookmarklet_params = {
+        server_url: codeserver_url,
+        module_name: module_name
+      };
+      var s = document.createElement('script');
+      s.src = codeserver_url + 'dev_mode_on.js';
+      // Propagate script nonce for CSP compatibility.
+      s.setAttribute('nonce', nonce);
+      document.getElementsByTagName('head')[0].appendChild(s);
+    };
+    return button;
   }
 
-  function makeCompileBookmarklet(codeserver_url, module_name) {
-    var bookmarklets_js = codeserver_url + 'dev_mode_on.js';
-    var javascript = '{ window.__gwt_bookmarklet_params = {'
-        + 'server_url:\'' + codeserver_url + '\','
-        + 'module_name:\'' + module_name + '\'};'
-        + ' var s = document.createElement(\'script\');'
-        + ' s.src = \'' + bookmarklets_js + '\';'
-        + ' void(document.getElementsByTagName(\'head\')[0].appendChild(s));}';
-    return makeBookmarklet('Compile', javascript);
+  function makeCompileButton(codeserver_url, module_name) {
+    return makeButton('Compile', codeserver_url, module_name);
   }
 
   /**
@@ -232,7 +240,7 @@
 
       if (!error) {
         // Compile button
-        var button = makeCompileBookmarklet(codeserver_url, module_name);
+        var button = makeCompileButton(codeserver_url, module_name);
         button.className = 'module_' + module_name;
         cell = $doc.createElement('td');
         cell.style.paddingLeft = '1em';

@@ -92,6 +92,24 @@
       "revId": "f46ae8e35c7fa31b4a43b99f1358ac3cf8dd53e6",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77dc96fd_d0943c9d",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-17T15:38:10Z",
+      "side": 1,
+      "message": "Forget it. It wont work with NaN either",
+      "parentUuid": "77dc96fd_50812c5f",
+      "revId": "f46ae8e35c7fa31b4a43b99f1358ac3cf8dd53e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

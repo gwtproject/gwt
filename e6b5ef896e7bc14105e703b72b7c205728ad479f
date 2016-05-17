@@ -52,6 +52,24 @@
       "revId": "e6b5ef896e7bc14105e703b72b7c205728ad479f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1720ba90_3b10dfef",
+        "filename": "user/super/com/google/gwt/emul/java/util/StringJoiner.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-05-17T00:05:08Z",
+      "side": 1,
+      "message": "If I do something like new StringJoiner(null, \"prefix\", new StringBuilder(\"suffix\")) the JS looks like\n\n  function StringJoiner(delimiter, prefix, suffix){\n    this.delimiter \u003d delimiter;\n    this.prefix \u003d prefix;\n    this.suffix \u003d ($clinit_String() , instanceOfString(suffix)?suffix:suffix.toString_0());\n    this.emptyValue \u003d this.prefix + (\u0027\u0027 + this.suffix);\n  }\n\nSo only the StringBuilder handling looks ok.",
+      "parentUuid": "1239a8b4_c9e6fe54",
+      "revId": "e6b5ef896e7bc14105e703b72b7c205728ad479f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1558,6 +1558,21 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
             + "Object[])' cannot precede parameters that are not optional.");
   }
 
+  public void testJsOptionalOnPrimitiveTypedParametersFails() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsOptional");
+    addSnippetClassDecl(
+        "public static class Buggy {",
+        "  @JsMethod public void m(@JsOptional int i, @JsOptional byte b) {}",
+        "}");
+
+    assertBuggyFails(
+        "Line 6: JsOptional parameter 'b' in method 'void EntryPoint.Buggy.m(int, byte)' cannot be "
+            + "of primitive type.",
+        "Line 6: JsOptional parameter 'i' in method 'void EntryPoint.Buggy.m(int, byte)' cannot be "
+            + "of primitive type.");
+  }
+
   public void testJsOptionalOnNonJsExposedMethodsFails() throws Exception {
     addSnippetImport("jsinterop.annotations.JsProperty");
     addSnippetImport("jsinterop.annotations.JsOptional");

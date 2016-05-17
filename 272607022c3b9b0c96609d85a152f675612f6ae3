@@ -39,6 +39,29 @@
       "revId": "272607022c3b9b0c96609d85a152f675612f6ae3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77dc96fd_508ccc3f",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-05-17T00:47:16Z",
+      "side": 1,
+      "message": "Maybe I miss something but why can this method safely assume that characteristics of size \u003d\u003d 1 will contain IDENTIFY_FINISH and not one of the other two constants? Looks like a bug to me.",
+      "range": {
+        "startLine": 309,
+        "startChar": 4,
+        "endLine": 311,
+        "endChar": 5
+      },
+      "revId": "272607022c3b9b0c96609d85a152f675612f6ae3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

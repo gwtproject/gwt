@@ -256,7 +256,7 @@ public class ComputeOverridesAndImplementDefaultMethods {
     JMethod implementingMethod = method;
 
     // Only populate classes with stubs, forwarding methods or default implementations.
-    if (needsStubMethod(type, method, interfaceMethod)) {
+    if (needsDefaultImplementationStubMethod(type, method, interfaceMethod)) {
 
       assert FluentIterable.from(interfaceMethods).filter(new Predicate<JMethod>() {
         @Override
@@ -313,14 +313,17 @@ public class ComputeOverridesAndImplementDefaultMethods {
 
   /**
    * Return true if the type {@code type} need to replace {@code method} (possibly {@code null})
-   * with a (forwarding) stub due to {@code interfaceMethod}?
+   * with a (forwarding) stub due to default {@code interfaceMethod}.
    */
-  private boolean needsStubMethod(JDeclaredType type, JMethod method, JMethod interfaceMethod) {
-    return type instanceof JClassType &&
-        interfaceMethod.isDefaultMethod() && (method == null ||
-        method.isDefaultMethod() &&
-            defaultMethodsByForwardingMethod.keySet().contains(method) &&
-            defaultMethodsByForwardingMethod.get(method) != interfaceMethod);
+  private boolean needsDefaultImplementationStubMethod(
+      JDeclaredType type, JMethod method, JMethod interfaceMethod) {
+    return type instanceof JClassType
+        && interfaceMethod.isDefaultMethod()
+        && (method == null
+            || (method.isAbstract() && method.isSynthetic())
+            || (method.isDefaultMethod()
+                && defaultMethodsByForwardingMethod.keySet().contains(method)
+                && defaultMethodsByForwardingMethod.get(method) != interfaceMethod));
   }
 
   /**

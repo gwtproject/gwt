@@ -1123,6 +1123,49 @@ public class Java8Test extends GWTTestCase {
     assertEquals("IRight.m()", new B().m());
   }
 
+  static class DefaultTrumpsOverSyntheticAbstractStub {
+    interface SuperInterface {
+      String m();
+    }
+
+    interface SubInterface extends SuperInterface {
+      default String m() {
+        return "SubInterface.m()";
+      }
+    }
+  }
+
+  public void testMultipleDefaults_defaultTrumpsOverSyntheticAbstractStub() {
+    abstract class A implements DefaultTrumpsOverSyntheticAbstractStub.SuperInterface { }
+    class B extends A implements DefaultTrumpsOverSyntheticAbstractStub.SubInterface { }
+
+    assertEquals("SubInterface.m()", new B().m());
+  }
+
+  static class DefaultTrumpsOverDefaultOnSuperAbstract {
+    interface SuperInterface {
+      default String m() {
+        return "SuperInterface.m()";
+      }
+    }
+
+    interface SubInterface extends SuperInterface {
+      default String m() {
+        return "SubInterface.m()";
+      }
+    }
+  }
+
+  interface IOther2 { default String m() { return "IOther2.m()"; } }
+  interface ISpecialized2 extends IOther2 { default String m() { return "ISpecialized2.m()"; } }
+
+  public void testMultipleDefaults_defaultTrumpsOverDefaultOnSuperAbstract() {
+    abstract class A implements DefaultTrumpsOverDefaultOnSuperAbstract.SuperInterface { }
+    class B extends A implements DefaultTrumpsOverDefaultOnSuperAbstract.SubInterface { }
+
+    assertEquals("SubInterface.m()", new B().m());
+  }
+
   interface InterfaceWithThisReference {
     default String n() {
       return "default n";

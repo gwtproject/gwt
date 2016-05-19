@@ -131,7 +131,7 @@ public class LongLibTest extends TestCase {
 
     @Override
     public int test(LongEmul longVal0, LongEmul longVal1) {
-      return (int) Math.signum(LongLib.compare(longVal0, longVal1));
+      return LongLib.compare(longVal0, longVal1);
     }
   };
 

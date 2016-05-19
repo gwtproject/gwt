@@ -29,12 +29,22 @@ import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JUnaryOperator;
 
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableSet;
+
+import java.util.Set;
+
 /**
  * Replaces long operations with calls to the emulation library. Depends on
  * {@link LongCastNormalizer} and {@link CompoundAssignmentNormalizer} having
  * been run.
  */
 public class LongEmulationNormalizer {
+
+  private static final Set<String> LONGLIB_EMUL_METHODS = ImmutableSet.of(
+      "java.lang.Long.hashCode(J)I",
+      "java.lang.Long.compare(JJ)I",
+      "java.lang.Long.signum(J)I"
+  );
 
   /**
    * Replace all long math with calls into the long emulation library.
@@ -45,6 +55,19 @@ public class LongEmulationNormalizer {
 
     public LongOpVisitor(JPrimitiveType longType) {
       this.longType = longType;
+    }
+
+    @Override
+    public void endVisit(JMethodCall x, Context ctx) {
+      String targetSignature = x.getTarget().getQualifiedName();
+      if (!LONGLIB_EMUL_METHODS.contains(targetSignature)) {
+        return;
+      }
+
+      JMethod method = program.getIndexedMethod("LongLib." + x.getTarget().getName());
+      JMethodCall call = new JMethodCall(x.getSourceInfo(), null, method, x.getArgs().get(0));
+      call.overrideReturnType(x.getType());
+      ctx.replaceMe(call);
     }
 
     @Override

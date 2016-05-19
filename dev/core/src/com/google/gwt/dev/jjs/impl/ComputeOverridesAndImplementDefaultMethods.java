@@ -317,7 +317,7 @@ public class ComputeOverridesAndImplementDefaultMethods {
    */
   private boolean needsStubMethod(JDeclaredType type, JMethod method, JMethod interfaceMethod) {
     return type instanceof JClassType &&
-        interfaceMethod.isDefaultMethod() && (method == null ||
+        interfaceMethod.isDefaultMethod() && (method == null ||  method.isAbstract() ||
         method.isDefaultMethod() &&
             defaultMethodsByForwardingMethod.keySet().contains(method) &&
             defaultMethodsByForwardingMethod.get(method) != interfaceMethod);

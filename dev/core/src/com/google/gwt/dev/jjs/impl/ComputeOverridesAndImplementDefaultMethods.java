@@ -256,7 +256,7 @@ public class ComputeOverridesAndImplementDefaultMethods {
     JMethod implementingMethod = method;
 
     // Only populate classes with stubs, forwarding methods or default implementations.
-    if (needsStubMethod(type, method, interfaceMethod)) {
+    if (needsDefaultImplementationStubMethod(type, method, interfaceMethod)) {
 
       assert FluentIterable.from(interfaceMethods).filter(new Predicate<JMethod>() {
         @Override
@@ -313,14 +313,22 @@ public class ComputeOverridesAndImplementDefaultMethods {
 
   /**
    * Return true if the type {@code type} need to replace {@code method} (possibly {@code null})
-   * with a (forwarding) stub due to {@code interfaceMethod}?
+   * with a (forwarding) stub due to default {@code interfaceMethod}.
    */
-  private boolean needsStubMethod(JDeclaredType type, JMethod method, JMethod interfaceMethod) {
-    return type instanceof JClassType &&
-        interfaceMethod.isDefaultMethod() && (method == null ||
-        method.isDefaultMethod() &&
-            defaultMethodsByForwardingMethod.keySet().contains(method) &&
-            defaultMethodsByForwardingMethod.get(method) != interfaceMethod);
+  private boolean needsDefaultImplementationStubMethod(
+      JDeclaredType type, JMethod method, JMethod interfaceMethod) {
+    return interfaceMethod.isDefaultMethod()
+        // Only add default forwarding methods to classes if either:
+        && type instanceof JClassType
+        // The method is not implemented or,
+        && (method == null
+            // an abstract stub was synthesized as the super (not necessarily direct) implementation
+            || (method.isAbstract() && method.isSynthetic())
+            // a default method stub to a different default ways synthesized as the super an was
+            // to a different target default.
+            || (method.isDefaultMethod()
+                && defaultMethodsByForwardingMethod.keySet().contains(method)
+                && defaultMethodsByForwardingMethod.get(method) != interfaceMethod));
   }
 
   /**

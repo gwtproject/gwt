@@ -103,16 +103,30 @@ public class LongLib {
     return compare(a, b) != 0;
   }
 
-  // VisibleForTesting
-  static double compare(LongEmul a, LongEmul b) {
+  public static int compare(LongEmul a, LongEmul b) {
     if (isSmallLong(a) && isSmallLong(b)) {
       double result = asDouble(a) - asDouble(b);
       if (!Double.isNaN(result)) {
-        return result;
+        return signum(result);
       }
     }
 
-    return BigLongLib.compare(toBigLong(a), toBigLong(b));
+    return signum(BigLongLib.compare(toBigLong(a), toBigLong(b)));
+  }
+
+  private static int signum(double value) {
+    return value == 0 ? 0 : (value < 0 ? -1 : 1);
+  }
+
+  public static int signum(LongEmul a) {
+    return compare(a, createSmallLongEmul(0));
+  }
+
+  public static int hashCode(LongEmul a) {
+    if (isSmallLong(a)) {
+      return coerceToInt(asDouble(a));
+    }
+    return BigLongLib.hashCode(asBigLong(a));
   }
 
   public static LongEmul div(LongEmul a, LongEmul b) {

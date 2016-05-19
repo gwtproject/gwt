@@ -309,6 +309,17 @@ class BigLongLib extends BigLongLibBase {
     return toDoubleHelper(a);
   }
 
+  public static int hashCode(BigLong a) {
+    int h = getH(a);
+    int m = getM(a);
+    int l = getL(a);
+
+    int hi1 = ((h & MASK_2) >>> (32 - BITS)) & MASK;
+    int hi2 = ((m >> (32 - BITS)) | (h << (BITS01 - 32))) & MASK;
+
+    return (l | (m << BITS)) ^ (hi2 | (hi1 << BITS));
+  }
+
   // Assumes Integer.MIN_VALUE <= a <= Integer.MAX_VALUE
   public static int toInt(BigLong a) {
     return getL(a) | (getM(a) << BITS);

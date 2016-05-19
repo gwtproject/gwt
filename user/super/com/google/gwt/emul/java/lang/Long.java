@@ -40,6 +40,7 @@ public final class Long extends Number implements Comparable<Long> {
     return Integer.bitCount(high) + Integer.bitCount(low);
   }
 
+  // replaced by the compiler
   public static int compare(long x, long y) {
     if (x < y) {
       return -1;
@@ -55,6 +56,7 @@ public final class Long extends Number implements Comparable<Long> {
     return valueOf(decode.payload, decode.radix);
   }
 
+  // replaced by the compiler
   public static int hashCode(long l) {
     return (int) l;
   }
@@ -141,6 +143,7 @@ public final class Long extends Number implements Comparable<Long> {
     return ui;
   }
 
+  // replaced by the compiler
   public static int signum(long i) {
     if (i == 0) {
       return 0;

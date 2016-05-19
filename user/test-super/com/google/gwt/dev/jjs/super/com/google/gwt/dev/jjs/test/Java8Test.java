@@ -1123,6 +1123,27 @@ public class Java8Test extends GWTTestCase {
     assertEquals("IRight.m()", new B().m());
   }
 
+
+  interface IOther { String m(); }
+  interface ISpecialized extends IOther { default String m() { return "ISpecialized.m()"; } }
+
+  public void testMultipleDefaults_defaultTrumpsOverSyntheticAbstractStub() {
+    abstract class A implements IOther { }
+    class B extends A implements ISpecialized { }
+
+    assertEquals("ISpecialized.m()", new B().m());
+  }
+
+  interface IOther2 { default String m() { return "IOther2.m()"; } }
+  interface ISpecialized2 extends IOther2 { default String m() { return "ISpecialized2.m()"; } }
+
+  public void testMultipleDefaults_defaultTrumpsOverDefaultOnSuperAbstract() {
+    abstract class A implements IOther2 { }
+    class B extends A implements ISpecialized2 { }
+
+    assertEquals("ISpecialized2.m()", new B().m());
+  }
+
   interface InterfaceWithThisReference {
     default String n() {
       return "default n";

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7721f6e1_053345e6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-19T00:12:45Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.util.collect.HashMap.",
+      "revId": "2afaa6558fc43befe245bb70c3b07e4332470f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7721f6e1_e52f1178",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-19T00:12:45Z",
+      "side": 1,
+      "message": "[error] Unused import - org.eclipse.jdt.internal.compiler.ast.ParameterizedSingleTypeReference.",
+      "revId": "2afaa6558fc43befe245bb70c3b07e4332470f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7721f6e1_454edd61",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1418,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-19T00:12:45Z",
+      "side": 1,
+      "message": "[error] \u0027;\u0027 is preceded with whitespace.",
+      "revId": "2afaa6558fc43befe245bb70c3b07e4332470f04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

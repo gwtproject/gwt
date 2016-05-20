@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7a62227_d42df235",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T17:52:05Z",
+      "side": 1,
+      "message": "rename to superMethod?",
+      "range": {
+        "startLine": 319,
+        "startChar": 34,
+        "endLine": 319,
+        "endChar": 40
+      },
+      "revId": "7fcfa8488a61058fda00105c86504f405d16ca7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -46,6 +46,9 @@ import java.util.Set;
 @LinkerOrder(Order.PRIMARY)
 @Shardable
 public class D8ScriptLinker extends SelectionScriptLinker {
+  
+  private static final char NEWLINE = '\n';
+  
   @Override
   public String getDescription() {
     return "D8 Single Script";
@@ -54,10 +57,12 @@ public class D8ScriptLinker extends SelectionScriptLinker {
   @Transferable
   private static class Script extends Artifact<Script> {
     private final String strongName;
+    private final String javaScript;
 
-    public Script(String strongName) {
+    public Script(String strongName, String javaScript) {
       super(D8ScriptLinker.class);
       this.strongName = strongName;
+      this.javaScript = javaScript;
     }
 
     @Override
@@ -83,6 +88,10 @@ public class D8ScriptLinker extends SelectionScriptLinker {
     public String toString() {
       return "Script " + strongName;
     }
+ 
+    public String getJavaScript() {
+      return javaScript;
+    }
   }
 
   @Override
@@ -99,12 +108,8 @@ public class D8ScriptLinker extends SelectionScriptLinker {
     }
 
     Collection<Artifact<?>> toReturn = new ArrayList<Artifact<?>>();
-    toReturn.add(new Script(result.getStrongName()));
+    toReturn.add(new Script(result.getStrongName(), js[0]));
     toReturn.addAll(emitSelectionInformation(result.getStrongName(), result));
-
-    SyntheticArtifact artifact = emitString(logger, js[0], result.getStrongName()
-        + ".js");
-    toReturn.add(artifact);
 
     return toReturn;
   }
@@ -126,24 +131,32 @@ public class D8ScriptLinker extends SelectionScriptLinker {
 
     DefaultTextOutput out = new DefaultTextOutput(true);
 
+    
+    StringBuilder prefixBuilder = new StringBuilder();
+    
     // Emit the selection script.
     String bootstrap = generateSelectionScript(logger, context, artifacts);
     bootstrap = context.optimizeJavaScript(logger, bootstrap);
-    out.print(bootstrap);
-    out.newlineOpt();
+    prefixBuilder.append(bootstrap);
+    prefixBuilder.append(NEWLINE);
 
-    out.print("var $gwt_version = \"" + About.getGwtVersionNum() + "\";");
-    out.newlineOpt();
-    out.print("var $wnd = window;");
-    out.newlineOpt();
-    out.print("var $doc = $wnd.document;");
-    out.newlineOpt();
-    out.print("var $moduleName, $moduleBase;");
-    out.newlineOpt();
+    prefixBuilder.append("var $gwt_version = \"" + About.getGwtVersionNum() + "\";");
+    prefixBuilder.append(NEWLINE);
+    prefixBuilder.append("var $wnd = window;");
+    prefixBuilder.append(NEWLINE);
+    prefixBuilder.append("var $doc = $wnd.document;");
+    prefixBuilder.append(NEWLINE);
+    prefixBuilder.append("var $moduleName, $moduleBase;");
+    prefixBuilder.append(NEWLINE);
 
-    out.print("var $strongName = '" + result.getStrongName() + "';");
-    out.newlineOpt();
-    out.print("load($strongName + '.js');");
+    prefixBuilder.append("var $strongName = '" + result.getStrongName() + "';");
+    prefixBuilder.append(NEWLINE);
+    
+    String prefix = prefixBuilder.toString();
+    out.print(prefix);
+
+    addSourceMapPrefix(artifacts, prefix);
+    out.print(result.getJavaScript());
 
     // Generate the call to tell the bootstrap code that we're ready to go.
     out.newlineOpt();
@@ -154,6 +167,26 @@ public class D8ScriptLinker extends SelectionScriptLinker {
     return emitString(logger, out.toString(), context.getModuleName()
         + ".nocache.js");
   }
+  
+  private void addSourceMapPrefix(
+      ArtifactSet artifacts,
+      String prefixLines) {
+    SymbolMapsLinker.ScriptFragmentEditsArtifact edArtifact = null;
+    for (SymbolMapsLinker.ScriptFragmentEditsArtifact editsArtifact :
+        artifacts.find(SymbolMapsLinker.ScriptFragmentEditsArtifact.class)) {
+      if (editsArtifact.getFragment() == 0) {
+        edArtifact = editsArtifact;
+        break;
+      }
+    }
+
+    if (edArtifact == null) {
+      edArtifact = new SymbolMapsLinker.ScriptFragmentEditsArtifact(null, 0);
+      artifacts.add(edArtifact);
+    }
+    edArtifact.prefixLines(prefixLines);
+  }
+
 
   /**
    * Unimplemented. Normally required by
@@ -181,3 +214,4 @@ public class D8ScriptLinker extends SelectionScriptLinker {
     return "com/google/gwt/core/linker/D8ScriptTemplate.js";
   }
 }
+

@@ -34,6 +34,7 @@ window.Array = Array;
 window.Function = Function;
 window.String = String;
 window.Number = Number;
+window.performance = performance;
 navigator = {};
 navigator.userAgent = {};
 navigator.userAgent.toLowerCase = function(){ return "webkit";};

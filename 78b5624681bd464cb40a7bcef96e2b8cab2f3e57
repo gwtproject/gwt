@@ -22,6 +22,30 @@
       "revId": "78b5624681bd464cb40a7bcef96e2b8cab2f3e57",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ceb9b63_21154e8d",
+        "filename": "dev/core/src/com/google/gwt/core/linker/D8ScriptTemplate.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-05-20T11:30:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7a62227_f1e760f5",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "78b5624681bd464cb40a7bcef96e2b8cab2f3e57",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

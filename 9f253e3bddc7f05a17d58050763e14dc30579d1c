@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "d7a62227_ee149f3e",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-20T04:06:16Z",
+      "side": 1,
+      "message": "Now I recall. This is by design. Abstract classes get an abstract stub if accidental or not at all in a superclass. Abstract stubs don\u0027t contribute any code but provide a point for tightening.",
+      "parentUuid": "d7a62227_eeb81f86",
+      "range": {
+        "startLine": 1131,
+        "startChar": 27,
+        "endLine": 1131,
+        "endChar": 49
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7a62227_ae62972f",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 4

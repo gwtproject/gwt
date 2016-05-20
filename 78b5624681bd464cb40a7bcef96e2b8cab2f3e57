@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7a62227_f1e760f5",
+        "filename": "dev/core/src/com/google/gwt/core/linker/D8ScriptTemplate.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T10:00:18Z",
+      "side": 1,
+      "message": "Why not window \u003d this at very beginning and remove individual copies?\n\nAlso update the description to incl these changes.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "78b5624681bd464cb40a7bcef96e2b8cab2f3e57",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

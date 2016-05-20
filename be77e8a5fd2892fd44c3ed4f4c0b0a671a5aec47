@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7a62227_2e23474b",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Float.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T06:24:46Z",
+      "side": 1,
+      "message": "0 or 0.0f to be consistent. I think most places do 0. Please update all.",
+      "range": {
+        "startLine": 47,
+        "startChar": 24,
+        "endLine": 47,
+        "endChar": 26
+      },
+      "revId": "be77e8a5fd2892fd44c3ed4f4c0b0a671a5aec47",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_0e200b3b",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Float.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T06:24:46Z",
+      "side": 1,
+      "message": "I think we should keep Double and Float consistent on this so that we could simply say for boxed types -0 equal 0 and also we can avoid surprising behavior change when people switched between float and double.",
+      "revId": "be77e8a5fd2892fd44c3ed4f4c0b0a671a5aec47",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_4e1a1305",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/DoubleTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T06:24:46Z",
+      "side": 1,
+      "message": "we are not saving much from the simple explicit assert which is easy to read. I think I would prefer that.",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 5
+      },
+      "revId": "be77e8a5fd2892fd44c3ed4f4c0b0a671a5aec47",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

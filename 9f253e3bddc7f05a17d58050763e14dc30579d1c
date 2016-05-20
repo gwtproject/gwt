@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d7a62227_6e942ff1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-20T03:25:39Z",
+      "side": 1,
+      "message": "I also noticed. I think this code should not be there as you point out.  I\u0027ll remove it in a follow up (didn\u0027t want to touch the existing pathway in this patch).",
+      "parentUuid": "d7a62227_8e7ebbcf",
+      "range": {
+        "startLine": 324,
+        "startChar": 16,
+        "endLine": 324,
+        "endChar": 40
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7a62227_6e78afe0",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d7a62227_4e9173ff",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-20T03:25:39Z",
+      "side": 1,
+      "message": "If you please.",
+      "parentUuid": "d7a62227_6e78afe0",
+      "range": {
+        "startLine": 1126,
+        "startChar": 22,
+        "endLine": 1126,
+        "endChar": 28
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7a62227_0e6beb10",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2016-05-20T02:37:34Z",
       "side": 1,
       "message": "I thought this extends shouldn\u0027t exist?",
+      "range": {
+        "startLine": 1131,
+        "startChar": 27,
+        "endLine": 1131,
+        "endChar": 49
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_eeb81f86",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-20T03:25:39Z",
+      "side": 1,
+      "message": "Yes to reproduce this situation. Looking at the computeOverrides code it seems that we might be introducing unnecessary (though correct) abstract stubs. I don\u0027t remember whether this is by design.",
+      "parentUuid": "d7a62227_0e6beb10",
       "range": {
         "startLine": 1131,
         "startChar": 27,
@@ -128,6 +200,30 @@
       "writtenOn": "2016-05-20T02:37:34Z",
       "side": 1,
       "message": "what part is synthetic?",
+      "range": {
+        "startLine": 1138,
+        "startChar": 52,
+        "endLine": 1138,
+        "endChar": 61
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_2eb347a9",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-20T03:25:39Z",
+      "side": 1,
+      "message": "abstract calls A gets a Synthetic abstract stub from SuperInterface.m. It is not strictly necessary in this situation as I said in the previous comment.",
+      "parentUuid": "d7a62227_ae62972f",
       "range": {
         "startLine": 1138,
         "startChar": 52,

@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d7a62227_4e497350",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-20T05:18:21Z",
+      "side": 1,
+      "message": "Ok. I looked at the code carefully. Forwarding methods due to default are marked as default (maybe we should use a different property, i.e. fowardsToDefault). The process is done in hierarchy order and when deciding which default methods are implemented in a subclass the default implemented in the super is excluded and a new default might be chosen. Those are the semantics. Probably ignoring if the forwarding flags is set might be equivalent. I think we introduced that flag later in the method. \n\nI will refrain from further modifications here.",
+      "parentUuid": "d7a62227_6e942ff1",
+      "range": {
+        "startLine": 324,
+        "startChar": 16,
+        "endLine": 324,
+        "endChar": 40
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7a62227_6e78afe0",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 4
@@ -108,6 +132,30 @@
       "side": 1,
       "message": "pretty please.\nother one has some bad association in my mind; I wonder why...",
       "parentUuid": "d7a62227_4e9173ff",
+      "range": {
+        "startLine": 1126,
+        "startChar": 22,
+        "endLine": 1126,
+        "endChar": 28
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_ae761791",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-20T05:18:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7a62227_ee693feb",
       "range": {
         "startLine": 1126,
         "startChar": 22,

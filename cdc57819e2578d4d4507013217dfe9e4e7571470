@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7a62227_8ec87b34",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T02:45:52Z",
+      "side": 1,
+      "message": "This will make all existing checks to be stale, isn\u0027t it? I would rather be consistent.",
+      "revId": "cdc57819e2578d4d4507013217dfe9e4e7571470",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_6ee26fb5",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1508,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T02:45:52Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 1508,
+        "startChar": 37,
+        "endLine": 1508,
+        "endChar": 54
+      },
+      "revId": "cdc57819e2578d4d4507013217dfe9e4e7571470",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_2ed867fd",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1547,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T02:45:52Z",
+      "side": 1,
+      "message": "did you run the test?",
+      "range": {
+        "startLine": 1547,
+        "startChar": 40,
+        "endLine": 1547,
+        "endChar": 57
+      },
+      "revId": "cdc57819e2578d4d4507013217dfe9e4e7571470",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

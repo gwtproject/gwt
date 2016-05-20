@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d7a62227_ced1e365",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-20T05:33:34Z",
+      "side": 1,
+      "message": "There you have it. I replaced all instanceof with isPrimitiveType.",
+      "parentUuid": "d7a62227_6ead4f41",
+      "revId": "cdc57819e2578d4d4507013217dfe9e4e7571470",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7a62227_6ee26fb5",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 1

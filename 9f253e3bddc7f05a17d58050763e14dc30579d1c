@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7a62227_8e7ebbcf",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ComputeOverridesAndImplementDefaultMethods.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T02:37:34Z",
+      "side": 1,
+      "message": "how is this possible when the type is JClassType?",
+      "range": {
+        "startLine": 324,
+        "startChar": 16,
+        "endLine": 324,
+        "endChar": 40
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_6e78afe0",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T02:37:34Z",
+      "side": 1,
+      "message": "shadows?",
+      "range": {
+        "startLine": 1126,
+        "startChar": 22,
+        "endLine": 1126,
+        "endChar": 28
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_0e6beb10",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T02:37:34Z",
+      "side": 1,
+      "message": "I thought this extends shouldn\u0027t exist?",
+      "range": {
+        "startLine": 1131,
+        "startChar": 27,
+        "endLine": 1131,
+        "endChar": 49
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_ae62972f",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T02:37:34Z",
+      "side": 1,
+      "message": "what part is synthetic?",
+      "range": {
+        "startLine": 1138,
+        "startChar": 52,
+        "endLine": 1138,
+        "endChar": 61
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_2e6ea720",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T02:37:34Z",
+      "side": 1,
+      "message": "Shadows?",
+      "range": {
+        "startLine": 1138,
+        "startChar": 42,
+        "endLine": 1138,
+        "endChar": 48
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a62227_0e548b40",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T02:37:34Z",
+      "side": 1,
+      "message": "what part is synthetic?",
+      "range": {
+        "startLine": 1138,
+        "startChar": 52,
+        "endLine": 1138,
+        "endChar": 61
+      },
+      "revId": "9f253e3bddc7f05a17d58050763e14dc30579d1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

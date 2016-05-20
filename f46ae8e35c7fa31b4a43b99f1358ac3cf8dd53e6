@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "d7a62227_8ebd1be7",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-20T06:24:46Z",
+      "side": 1,
+      "message": "Yes, that\u0027s what I meant. It is good to consistent with equals on comparison to preserve the comparator contract (when a\u003d\u003db then a.compareto(b) \u003d\u003d 0)",
+      "parentUuid": "77dc96fd_107ba469",
+      "revId": "f46ae8e35c7fa31b4a43b99f1358ac3cf8dd53e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1239a8b4_58d1fe61",
         "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
         "patchSetId": 2

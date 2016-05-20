@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7a62227_9f7b8379",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-20T19:02:32Z",
+      "side": 0,
+      "message": "Marking the forwarding method as default was a bit iffy. Modified the logic in computeOverrides to not need this.",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 4
+      },
+      "revId": "b5e676f6c65217bc26ce2139303f3bbe836ff905",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

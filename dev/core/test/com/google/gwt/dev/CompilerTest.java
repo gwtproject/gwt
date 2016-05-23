@@ -42,6 +42,7 @@ import com.google.gwt.util.tools.Utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -1513,12 +1514,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     // Since J2CL requires a @JsMethod in Number.java, String.java, etc. and since JsInterop types
     // are fully traversed (so that correct exports can be regenerated) Number is fully traversed
     // and so shows up in the processed list.
-    Set<String> staleTypeNames =
-        new HashSet<>(relinkMinimalRebuildCache.getProcessedStaleTypeNames());
-    staleTypeNames.remove("java.lang.Boolean");
-    staleTypeNames.remove("java.lang.Double");
-    staleTypeNames.remove("java.lang.Number");
-    staleTypeNames.remove("java.lang.String");
+    Set<String> staleTypeNames = getStaleTypeNames(relinkMinimalRebuildCache);
     // Show that only this little change is stale, not the whole world.
     assertEquals(2, staleTypeNames.size());
   }
@@ -2543,18 +2539,27 @@ public class CompilerTest extends ArgProcessorTestBase {
     }
 
     if (expectedProcessedStaleTypeNames != null) {
-      Set<String> staleTypeNames =
-          new HashSet<>(minimalRebuildCache.getProcessedStaleTypeNames());
-      // Since J2CL requires a @JsMethod in Number.java, String.java, etc.  and since JsInterop
-      // types are fully traversed (so that correct exports can be regenerated) Number is fully
-      // traversed and so shows up in the processed list.
-      staleTypeNames.remove("java.lang.Boolean");
-      staleTypeNames.remove("java.lang.Double");
-      staleTypeNames.remove("java.lang.Number");
-      staleTypeNames.remove("java.lang.String");
+      Set<String> staleTypeNames = getStaleTypeNames(minimalRebuildCache);
       assertEquals(expectedProcessedStaleTypeNames, staleTypeNames);
     }
     return Files.toString(outputJsFile, Charsets.UTF_8);
+  }
+
+  private Set<String> getStaleTypeNames(MinimalRebuildCache relinkMinimalRebuildCache) {
+    Set<String> staleTypeNames =
+        new HashSet<>(relinkMinimalRebuildCache.getProcessedStaleTypeNames());
+    // List of JRE types that provide JsInterop entry points and jre native JsTypes. These are
+    // always traversed fully and polute the tests, so they will be removed from stale type
+    // comparisons.
+    staleTypeNames.removeAll(Arrays.asList(
+        "java.lang.Boolean",
+        "java.lang.Double",
+        "java.lang.Number",
+        "java.lang.String",
+        "java.lang.String$NativeFunction",
+        "java.lang.String$NativeString",
+        "javaemul.internal.NativeRegExp"));
+    return staleTypeNames;
   }
 
   private String getEntryMethodHolderTypeName(String typeName) {

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c98df32_e4d18e38",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JArrayType.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-23T20:07:25Z",
+      "side": 1,
+      "message": "pls remove",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 3
+      },
+      "revId": "1568cb47b8b6018a79e69316cfd58aa5344227b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

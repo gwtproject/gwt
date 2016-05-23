@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c98df32_44a0824e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-23T19:08:55Z",
+      "side": 1,
+      "message": "Perhaps we can directly use isFinite but not a big deal.",
+      "revId": "ac5d74820b313d17fc0bcab902195afba7f5c59c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c98df32_44b72292",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-23T19:08:55Z",
+      "side": 1,
+      "message": "All of these overflow-checked operations will perform a lot faster, if you do the operations in double instead of long. See longlib on examples.",
+      "revId": "ac5d74820b313d17fc0bcab902195afba7f5c59c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

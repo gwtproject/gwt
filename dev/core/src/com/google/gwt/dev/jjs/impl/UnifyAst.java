@@ -846,7 +846,6 @@ public class UnifyAst {
     if (incrementalCompile) {
       fullFlowIntoRemainingStaleTypes();
     }
-
     /*
      * Since we're not actually optimizing here, it's easier to just visit
      * certain things up front instead of duplicating the exacting semantics of
@@ -1033,22 +1032,31 @@ public class UnifyAst {
       }
     }
 
-    for (JDeclaredType t : types) {
+    for (JDeclaredType type : types) {
       /*
        * Eagerly instantiate any type that requires devirtualization, i.e. String and
        * JavaScriptObject subtypes. That way we don't have to copy the exact semantics of
        * ControlFlowAnalyzer.
        */
-      if (requiresDevirtualization(t)) {
-        instantiate(t);
+      if (requiresDevirtualization(type)) {
+        instantiate(type);
       }
 
       /*
        * We also flow into the types with JsInterop entry point because our first pass on root types
        * with JsInterop entry points are missing these inner classes.
        */
-      if (t.hasJsInteropEntryPoints()) {
-        fullFlowIntoType(t);
+      if (type.hasJsInteropEntryPoints()) {
+        fullFlowIntoType(type);
+      }
+
+      if (type.isJsNative()) {
+        instantiate(type);
+        for (JMethod method : type.getMethods()) {
+          if (method.isJsConstructor()) {
+            flowInto(method);
+          }
+        }
       }
     }
   }

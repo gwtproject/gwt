@@ -511,7 +511,7 @@ public class Pruner {
       assert type.getMethods().get(0) == type.getClinitMethod();
       for (int i = 1; i < type.getMethods().size(); ++i) {
         JMethod method = type.getMethods().get(i);
-        if (!shouldRemove.apply(method)) {
+        if (!shouldRemove.apply(method) || method.isJsConstructor()) {
           continue;
         }
         prunedMethods.add(method);

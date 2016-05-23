@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17227a8a_45ee8aff",
+        "filename": "user/super/com/google/gwt/emul/java/math/BigDecimal.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1569,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-23T13:23:49Z",
+      "side": 1,
+      "message": "Seems like a copypaste of compareTo method.\nI\u0027d rather put here\n\nreturn compare(this, x1) \u003d\u003d 0\n\nfor simplicity",
+      "revId": "7dacdafd5493a8a22e348c0bccaf20f49302e3d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ceb9b63_e17c060e",
+        "filename": "user/test/com/google/gwt/emultest/java/math/BigDecimalCompareTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-23T13:23:49Z",
+      "side": 1,
+      "message": "We also need tests with equal/unequal decimals but with different scales",
+      "revId": "7dacdafd5493a8a22e348c0bccaf20f49302e3d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

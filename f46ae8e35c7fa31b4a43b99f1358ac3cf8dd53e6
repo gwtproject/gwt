@@ -120,6 +120,24 @@
     },
     {
       "key": {
+        "uuid": "1c98df32_e40e6e27",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-23T19:35:38Z",
+      "side": 1,
+      "message": "We cannot remove NaN handling since as it will make sorting algorithms to break.\n\nI think your argument is good that we already inconsistent. Although this is discouraged, it is still allowed; so I think we are fine with your change.",
+      "parentUuid": "7ceb9b63_81eada81",
+      "revId": "f46ae8e35c7fa31b4a43b99f1358ac3cf8dd53e6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1239a8b4_58d1fe61",
         "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
         "patchSetId": 2

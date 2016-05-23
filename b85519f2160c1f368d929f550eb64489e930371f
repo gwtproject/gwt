@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "1c98df32_e4350ec9",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-23T19:35:38Z",
+      "side": 1,
+      "message": "0",
+      "range": {
+        "startLine": 107,
+        "startChar": 15,
+        "endLine": 107,
+        "endChar": 17
+      },
+      "revId": "b85519f2160c1f368d929f550eb64489e930371f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7a62227_d1d224e0",
         "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
         "patchSetId": 5
@@ -13,6 +36,69 @@
       "writtenOn": "2016-05-20T13:15:18Z",
       "side": 1,
       "message": "[info] First sentence should end with a period.",
+      "revId": "b85519f2160c1f368d929f550eb64489e930371f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c98df32_84752a85",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-23T19:35:38Z",
+      "side": 1,
+      "message": "following incompatible emulation behavior.",
+      "range": {
+        "startLine": 344,
+        "startChar": 46,
+        "endLine": 344,
+        "endChar": 79
+      },
+      "revId": "b85519f2160c1f368d929f550eb64489e930371f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c98df32_84a44a16",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-23T19:35:38Z",
+      "side": 1,
+      "message": "technically this is how JRE would behave as well since instances are not equal. Let\u0027s drop this example to not confuse people.",
+      "range": {
+        "startLine": 346,
+        "startChar": 5,
+        "endLine": 346,
+        "endChar": 53
+      },
+      "revId": "b85519f2160c1f368d929f550eb64489e930371f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c98df32_64ed7e32",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/DoubleTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-23T19:35:38Z",
+      "side": 1,
+      "message": "Can you put TestUtils.isJvm check instead. We are running these tests like regular Java test for cross checking where DoNotRunWith is not supported.",
       "revId": "b85519f2160c1f368d929f550eb64489e930371f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

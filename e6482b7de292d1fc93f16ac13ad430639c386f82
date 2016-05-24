@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc14878a_531b4e72",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementJsVarargs.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-24T23:16:02Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JType.",
+      "revId": "e6482b7de292d1fc93f16ac13ad430639c386f82",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

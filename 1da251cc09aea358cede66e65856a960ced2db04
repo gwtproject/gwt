@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc14878a_38283122",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-24T22:44:03Z",
+      "side": 0,
+      "message": "Abandoned the old scheme to see whether the native jstype constructors could be reached by casts or instance of in favor of making them live if references to the type exists.\n\nThe main reason is that optimizations might introduce casts and instance of operations.",
+      "range": {
+        "startLine": 206,
+        "startChar": 6,
+        "endLine": 206,
+        "endChar": 34
+      },
+      "revId": "1da251cc09aea358cede66e65856a960ced2db04",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

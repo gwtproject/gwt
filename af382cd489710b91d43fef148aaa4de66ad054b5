@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dc14878a_c7a2e04a",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/InternalPreconditions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-24T19:23:55Z",
+      "side": 1,
+      "message": "I\u0027m planning to add them in the base JsInterop classes.",
+      "parentUuid": "dcfba784_8cc92768",
+      "range": {
+        "startLine": 30,
+        "startChar": 28,
+        "endLine": 30,
+        "endChar": 31
+      },
+      "revId": "af382cd489710b91d43fef148aaa4de66ad054b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cdc17fd_505a8cea",
         "filename": "user/super/com/google/gwt/emul/javaemul/internal/InternalPreconditions.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-05-24T14:30:52Z",
       "side": 1,
       "message": "I think the word higher here is misleading.\nThe checks are in fact lower not higher right?",
+      "range": {
+        "startLine": 85,
+        "startChar": 31,
+        "endLine": 85,
+        "endChar": 54
+      },
+      "revId": "af382cd489710b91d43fef148aaa4de66ad054b5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc14878a_673dec7a",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/InternalPreconditions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-24T19:23:55Z",
+      "side": 1,
+      "message": "I couldn\u0027t come up with a very intuitive name one way or the other. The name is basically based on check level so it means check level minimal or higher which is actually correct.",
+      "parentUuid": "5cdc17fd_505a8cea",
       "range": {
         "startLine": 85,
         "startChar": 31,

@@ -425,8 +425,8 @@ public final class InternalPreconditions {
   }
 
   /**
-   * Ensures that {@code start} and {@code end} specify a valid <i>positions</i> in an array, list
-   * or string of size {@code size}, and are in order. A position index may range from zero to
+   * Ensures that {@code start} and {@code end} specify a valid <i>positions</i> in a list
+   * of size {@code size}, and are in order. A position index may range from zero to
    * {@code size}, inclusive.
    */
   public static void checkCriticalPositionIndexes(int start, int end, int size) {
@@ -434,7 +434,7 @@ public final class InternalPreconditions {
       throw new IndexOutOfBoundsException("fromIndex: " + start + " < 0");
     }
     if (end > size) {
-      throw new IndexOutOfBoundsException("toIndex: " + end + " > size " + size);
+      throw new IndexOutOfBoundsException("toIndex: " + end + " > size: " + size);
     }
     if (start > end) {
       throw new IllegalArgumentException("fromIndex: " + start + " > toIndex: " + end);
@@ -442,8 +442,26 @@ public final class InternalPreconditions {
   }
 
   /**
+   * Ensures that {@code start} and {@code end} specify a valid <i>positions</i> in an array spliterator
+   * of size {@code length}, and are in order. A position index may range from zero to
+   * {@code length}, inclusive.
+   */
+  public static void checkCriticalArraySpliteratorBounds(int start, int end, int length) {
+    if (start < 0) {
+      throw new ArrayIndexOutOfBoundsException("fromIndex: " + start + " < 0");
+    }
+    if (end > length) {
+      throw new ArrayIndexOutOfBoundsException("toIndex: " + end + " > length: " + length);
+    }
+    if (start > end) {
+      throw new ArrayIndexOutOfBoundsException("fromIndex: " + start + " > toIndex: " + end);
+    }
+  }
+
+  /**
    * Checks that bounds are correct.
    *
+   * @throws IllegalArgumentException if start index > end index
    * @throws ArrayIndexOutOfBoundsException if the range is not legal
    */
   public static void checkCriticalArrayBounds(int start, int end, int length) {
@@ -451,7 +469,7 @@ public final class InternalPreconditions {
       throw new ArrayIndexOutOfBoundsException("fromIndex: " + start + " < 0");
     }
     if (end > length) {
-      throw new ArrayIndexOutOfBoundsException("toIndex: " + end + " > length " + length);
+      throw new ArrayIndexOutOfBoundsException("toIndex: " + end + " > length: " + length);
     }
     if (start > end) {
       throw new IllegalArgumentException("fromIndex: " + start + " > toIndex: " + end);

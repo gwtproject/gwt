@@ -39,6 +39,7 @@ import com.google.gwt.dev.jjs.ast.JPostfixOperation;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JStatement;
+import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JUnaryOperation;
 import com.google.gwt.dev.jjs.ast.JUnaryOperator;
 import com.google.gwt.dev.jjs.ast.JVariableRef;
@@ -290,7 +291,6 @@ public class ImplementJsVarargs {
       varargsParameter = Iterables.getLast(x.getParams());
       varargsIndex = x.getParams().size() - 1;
 
-      // JsVarargs parameter can be assumend not null in the implementing method
       varargsParameter.setType(varargsParameter.getType().strengthenToNonNull());
 
       argumentsCopyVariable = null;

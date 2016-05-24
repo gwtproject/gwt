@@ -15,7 +15,7 @@
  */
 package java.lang;
 
-import static javaemul.internal.InternalPreconditions.checkStringBounds;
+import static javaemul.internal.InternalPreconditions.checkCriticalStringBounds;
 
 /**
  * A base class to share implementation between {@link StringBuffer} and {@link StringBuilder}.
@@ -63,8 +63,8 @@ abstract class AbstractStringBuilder {
   }
 
   public void getChars(int srcStart, int srcEnd, char[] dst, int dstStart) {
-    checkStringBounds(srcStart, srcEnd, length());
-    checkStringBounds(dstStart, dstStart + (srcEnd - srcStart), dst.length);
+    checkCriticalStringBounds(srcStart, srcEnd, length());
+    checkCriticalStringBounds(dstStart, dstStart + (srcEnd - srcStart), dst.length);
     while (srcStart < srcEnd) {
       dst[dstStart++] = string.charAt(srcStart++);
     }

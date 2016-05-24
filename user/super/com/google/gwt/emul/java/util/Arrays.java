@@ -20,7 +20,6 @@ import static javaemul.internal.Coercions.ensureInt;
 import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkArraySize;
 import static javaemul.internal.InternalPreconditions.checkCriticalArrayBounds;
-import static javaemul.internal.InternalPreconditions.checkCriticalPositionIndexes;
 import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
@@ -1601,7 +1600,7 @@ public class Arrays {
     checkArgument(from <= to, "%s > %s", from, to);
     int len = ArrayHelper.getLength(array);
     to = Math.min(to, len);
-    checkCriticalPositionIndexes(from, to, len);
+    checkCriticalArrayBounds(from, to, len);
     return to - from;
   }
 

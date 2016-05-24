@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c98df32_854e818a",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Double.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-05-24T09:11:39Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "4f5d568b9f6f21c651e1dfc32384da14229d62f1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

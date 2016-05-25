@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc14878a_1e539d34",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-25T00:07:07Z",
+      "side": 1,
+      "message": "stale. pls rm.",
+      "range": {
+        "startLine": 313,
+        "startChar": 1,
+        "endLine": 317,
+        "endChar": 5
+      },
+      "revId": "74b756a953491965eb770415efb80795277ad1b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc14878a_3e35b9e4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-25T00:07:07Z",
+      "side": 1,
+      "message": "seems accidental",
+      "revId": "74b756a953491965eb770415efb80795277ad1b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc14878a_3e1c996c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-25T00:07:07Z",
+      "side": 1,
+      "message": "why not simply fullFlow? (i.e. type.hasJsInteropEntryPoints() || type.isJsNative())",
+      "revId": "74b756a953491965eb770415efb80795277ad1b9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

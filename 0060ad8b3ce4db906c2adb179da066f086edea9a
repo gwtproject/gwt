@@ -22,6 +22,30 @@
       "revId": "0060ad8b3ce4db906c2adb179da066f086edea9a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ca257c0_8029368d",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-05-25T13:09:17Z",
+      "side": 1,
+      "message": "For reference: junit.framework.AssertionFailedError: value: 4503599627370497, expected: 4503599627370497, actual: 4503599627370498 - expected: within \u003c0\u003e of \u003c4503599627370497\u003e, actual: \u003c4503599627370498\u003e",
+      "parentUuid": "5ca257c0_e03922e1",
+      "range": {
+        "startLine": 420,
+        "startChar": 14,
+        "endLine": 420,
+        "endChar": 22
+      },
+      "revId": "0060ad8b3ce4db906c2adb179da066f086edea9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ca257c0_c0b73e01",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-25T16:34:41Z",
+      "side": 1,
+      "message": "Can you please fix it in this method too?",
+      "range": {
+        "startLine": 492,
+        "startChar": 4,
+        "endLine": 492,
+        "endChar": 40
+      },
+      "revId": "800f72f304fcaaa05437ff7dd6768f30b68a7a22",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

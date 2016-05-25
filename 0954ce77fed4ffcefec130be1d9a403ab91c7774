@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc14878a_793d8b7a",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/InternalPreconditions.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-25T02:00:54Z",
+      "side": 1,
+      "message": "I think this is a very slight API difference that we should avoid trying to mimic. I would rather stick to a single version instead: all these specializations starts accumulating in code size.",
+      "revId": "0954ce77fed4ffcefec130be1d9a403ab91c7774",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

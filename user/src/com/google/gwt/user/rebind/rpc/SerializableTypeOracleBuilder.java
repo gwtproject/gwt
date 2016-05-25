@@ -461,6 +461,10 @@ public class SerializableTypeOracleBuilder {
 
   static boolean isAutoSerializable(JClassType type) {
     try {
+      if (type.getQualifiedSourceName().equals("java.lang.JsException")) {
+        // JsException is not considered serializable since it is not available at JVM.
+        return false;
+      }
       JClassType isSerializable = getIsSerializableMarkerInterface(type);
       JClassType serializable = getSerializableMarkerInterface(type);
       return type.isAssignableTo(isSerializable) || type.isAssignableTo(serializable);

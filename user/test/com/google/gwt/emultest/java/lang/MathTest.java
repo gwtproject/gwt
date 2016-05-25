@@ -486,14 +486,6 @@ public class MathTest extends GWTTestCase {
     assertEquals(0, v, 0);
   }
 
-  @DoNotRunWith(Platform.HtmlUnitBug)
-  public void testRound_DoubleMaxValue() {
-    long v = Math.round(Double.MAX_VALUE);
-    assertEquals(Double.MAX_VALUE, v, 0);
-    v = Math.round(-Double.MAX_VALUE);
-    assertEquals(-Double.MAX_VALUE, v, 0);
-  }
-
   public void testRint() {
     final double twoTo52 = 1L << 52;
     // format: value to be round and expected value

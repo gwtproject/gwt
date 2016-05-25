@@ -34,6 +34,24 @@
       "revId": "0954ce77fed4ffcefec130be1d9a403ab91c7774",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ca257c0_0000865c",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/InternalPreconditions.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-05-25T08:28:13Z",
+      "side": 1,
+      "message": "IMHO the added code size is negligible. Compiled with OBF its probably less than 100 bytes that will be added on top of all the code you pull in if you start using spliterators or streams. If we start to become inconsistent to JavaDoc you would need to add comments on the call sites / tests to make sure future maintainers/contributors do not stumble upon these inconsistencies. Then it would not only be this method but also checkStringBounds() that can be removed, especially because places where its used only declare IndexOutOfBoundsException in JavaDoc.",
+      "parentUuid": "5ca257c0_40d7ae02",
+      "revId": "0954ce77fed4ffcefec130be1d9a403ab91c7774",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

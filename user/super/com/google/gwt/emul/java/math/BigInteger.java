@@ -180,21 +180,33 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
    * @see BigInteger#BigInteger(String, int)
    */
   private static void setFromString(BigInteger bi, String val, int radix) {
-    int sign;
-    int[] digits;
-    int numberLength;
+    int sign = 1;
     int stringLength = val.length();
-    int startChar;
+    int startChar = 0;
     int endChar = stringLength;
 
-    if (val.charAt(0) == '-') {
-      sign = -1;
-      startChar = 1;
-      stringLength--;
-    } else {
-      sign = 1;
-      startChar = 0;
+    if (stringLength > 0) {
+      char firstChar = val.charAt(0);
+      if (firstChar == '-') {
+        sign = -1;
+        startChar = 1;
+        stringLength--;
+      } else if (firstChar == '+') {
+        startChar = 1;
+        stringLength--;
+      }
     }
+
+    if (stringLength == 0) {
+      throw new NumberFormatException("Zero length BigInteger");
+    }
+
+    for (int i = startChar; i < endChar; i++) {
+      if (Character.digit(val.charAt(i), radix) == -1) {
+        throw new NumberFormatException("For input string: \"" + val + "\"");
+      }
+    }
+
     /*
      * We use the following algorithm: split a string into portions of n
      * characters and convert each portion to an integer according to the radix.
@@ -210,7 +222,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     if (topChars != 0) {
       bigRadixDigitsLength++;
     }
-    digits = new int[bigRadixDigitsLength];
+    int[] digits = new int[bigRadixDigitsLength];
     // Get the maximal power of radix that fits in int
     int bigRadix = Conversion.bigRadices[radix - 2];
     // Parse an input string and accumulate the BigInteger's magnitude
@@ -226,9 +238,8 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
       newDigit += Elementary.inplaceAdd(digits, digitIndex, bigRadixDigit);
       digits[digitIndex++] = newDigit;
     }
-    numberLength = digitIndex;
     bi.sign = sign;
-    bi.numberLength = numberLength;
+    bi.numberLength = digitIndex;
     bi.digits = digits;
     bi.cutOffLeadingZeroes();
   }
@@ -422,10 +433,6 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     if ((radix < Character.MIN_RADIX) || (radix > Character.MAX_RADIX)) {
       // math.11=Radix out of range
       throw new NumberFormatException("Radix out of range"); //$NON-NLS-1$
-    }
-    if (val.isEmpty()) {
-      // math.12=Zero length BigInteger
-      throw new NumberFormatException("Zero length BigInteger"); //$NON-NLS-1$
     }
     setFromString(this, val, radix);
   }

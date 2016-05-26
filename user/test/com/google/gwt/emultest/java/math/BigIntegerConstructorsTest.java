@@ -778,6 +778,50 @@ public class BigIntegerConstructorsTest extends EmulTestBase {
     assertEquals("incorrect sign", 1, aNumber.signum());
   }
 
+  public void testConstructorStringRadix10PlusSign() {
+    BigInteger aNumber = new BigInteger("+100000000");
+    assertEquals(100000000, aNumber.intValue());
+    assertEquals("incorrect sign", 1, aNumber.signum());
+  }
+
+  public void testConstructorStringRadix10InvalidInputs() {
+    try {
+      new BigInteger("+100000000+100000000");
+      fail();
+    } catch (NumberFormatException expected) {
+    }
+
+    try {
+      new BigInteger("-100000000-100000000");
+      fail();
+    } catch (NumberFormatException expected) {
+    }
+
+    try {
+      new BigInteger(" 100000000");
+      fail();
+    } catch (NumberFormatException expected) {
+    }
+
+    try {
+      new BigInteger("+");
+      fail();
+    } catch (NumberFormatException expected) {
+    }
+
+    try {
+      new BigInteger("-");
+      fail();
+    } catch (NumberFormatException expected) {
+    }
+
+    try {
+      new BigInteger("");
+      fail();
+    } catch (NumberFormatException expected) {
+    }
+  }
+
   /**
    * Test internal static factory method.
    */

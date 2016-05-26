@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcf7d3e0_7b5ffa34",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-26T17:12:36Z",
+      "side": 1,
+      "message": "pls move comment to related piece and add comment for the new piece",
+      "revId": "1d197a17e96dce4bc4d9b2ccf99357860b3c9a01",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

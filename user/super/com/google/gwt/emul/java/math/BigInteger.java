@@ -34,6 +34,7 @@
  */
 package java.math;
 
+import static javaemul.internal.Coercions.ensureInt;
 import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
@@ -894,8 +895,8 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
     if (hashCode != 0) {
       return hashCode;
     }
-    for (int i = 0; i < digits.length; i++) {
-      hashCode = (hashCode * 33 + (digits[i] & 0xffffffff));
+    for (int i = 0; i < numberLength; i++) {
+      hashCode = ensureInt(hashCode * 33 + digits[i]);
     }
     hashCode = hashCode * sign;
     return hashCode;

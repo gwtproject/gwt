@@ -60,6 +60,15 @@ public class BigIntegerHashCodeTest extends EmulTestBase {
     }
   }
 
+  public void testConsistentHashCode() {
+    long a = 936417286865811553L;
+    long b = 1136802186495971562L;
+    BigInteger c = BigInteger.valueOf(a).add(BigInteger.valueOf(b));
+    BigInteger d = BigInteger.valueOf(a + b);
+    assertEquals(c, d);
+    assertEquals(c.hashCode(), d.hashCode());
+  }
+
   /**
    * Test hash codes for the same object.
    */

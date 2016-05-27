@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ca257c0_86714efe",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ArrayListTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-27T13:03:29Z",
+      "side": 1,
+      "message": "It should be moved to AbstractJava8ListTest but I\u0027ll need to verify tests after. I can move it myself later if you want.",
+      "revId": "231b289bce6ff2518a22e0b2bf04362f21520567",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

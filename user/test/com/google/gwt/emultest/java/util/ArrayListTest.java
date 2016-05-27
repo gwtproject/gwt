@@ -129,20 +129,6 @@ public class ArrayListTest extends ListTestBase {
     assertEquals(0, l.size());
   }
 
-  public void testSort() {
-    ArrayList<String> list = new ArrayList<>();
-    list.sort(null);
-
-    Collections.addAll(list, "b", "a", "c");
-    list.sort(null);
-    assertEquals(asList("a", "b", "c"), list);
-
-    list = new ArrayList<>();
-    Collections.addAll(list, "b", "a", "c");
-    list.sort(Collections.reverseOrder());
-    assertEquals(asList("c", "b", "a"), list);
-  }
-
   @Override
   protected List makeEmptyList() {
     return new ArrayList();

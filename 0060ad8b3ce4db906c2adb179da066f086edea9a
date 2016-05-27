@@ -70,6 +70,29 @@
       "revId": "0060ad8b3ce4db906c2adb179da066f086edea9a",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fccf8b9c_f8b78d92",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-05-27T12:58:42Z",
+      "side": 1,
+      "message": "this test does not work when run in pure java",
+      "range": {
+        "startLine": 463,
+        "startChar": 14,
+        "endLine": 463,
+        "endChar": 37
+      },
+      "revId": "0060ad8b3ce4db906c2adb179da066f086edea9a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

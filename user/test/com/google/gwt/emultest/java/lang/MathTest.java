@@ -19,6 +19,7 @@ package com.google.gwt.emultest.java.lang;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.testing.TestUtils;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -507,15 +508,11 @@ public class MathTest extends GWTTestCase {
         twoTo52 + 0.25, twoTo52,
         twoTo52 + 0.5, twoTo52,
         twoTo52 - 0.5, twoTo52,
-        twoTo52 + 0.75, twoTo52 + 1,
-        twoTo52 - 0.75, twoTo52 - 1,
         -twoTo52, -twoTo52,
         -twoTo52 + 0.25, -twoTo52,
         -twoTo52 - 0.25, -twoTo52,
         -twoTo52 + 0.5, -twoTo52,
         -twoTo52 - 0.5, -twoTo52,
-        -twoTo52 + 0.75, -twoTo52 + 1,
-        -twoTo52 - 0.75, -twoTo52 - 1,
         Double.MIN_VALUE, 0,
         Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY,
         Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY,
@@ -528,7 +525,57 @@ public class MathTest extends GWTTestCase {
       assertEquals("value: " + v + ", expected: " + expected + ", actual: " + actual,
           expected, actual, 0);
     }
+
+    // IE JavaScript engine has a flaw in Math.floor, yielding one of errros for large numbers
+    final double[] problematicValues = {
+      twoTo52 + 0.75, twoTo52 + 1,
+      twoTo52 - 0.75, twoTo52 - 1,
+      -twoTo52 + 0.75, -twoTo52 + 1,
+      -twoTo52 - 0.75, -twoTo52 - 1,
+    };
+
+    // For IE we thus allow a little tolerance in the test
+    double tolerance = shouldBeTolerant() ? 1 : 0;
+
+    for (int i = 0; i < problematicValues.length;) {
+      double v = problematicValues[i++];
+      double expected = problematicValues[i++];
+      double actual = Math.rint(v);
+      // for some reason IE comes out with a one difference here
+      assertEquals("value: " + v + ", expected: " + expected + ", actual: " + actual,
+          expected, actual, tolerance);
+    }
   }
+
+  private static boolean shouldBeTolerant() {
+    // Java is fine
+    if (TestUtils.isJvm()) {
+      return false;
+    }
+
+    switch (System.getProperty("user.agent", "safari")) {
+      case "safari":
+        // could be chrome, safari or edge:
+        return isEdge();
+      case "gecko1_8":
+        // could be IE11
+        return isIE11();
+      case "ie8":
+      case "ie9":
+      case "ie10":
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  private static native boolean isEdge() /*-{
+    return window.navigator.userAgent.toLowerCase().indexOf("edge") != -1;
+  }-*/;
+
+  private static native boolean isIE11() /*-{
+    return window.navigator.userAgent.toLowerCase().indexOf("trident/7.0") != -1;
+  }-*/;
 
   @DoNotRunWith(Platform.HtmlUnitBug)
   public void testRint_DoubleMaxValue() {

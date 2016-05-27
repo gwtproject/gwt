@@ -26,4 +26,18 @@ public class ArrayListTest extends AbstractJava8ListTest {
   protected List<String> createEmptyList() {
     return new ArrayList<>();
   }
+
+  public void testSort() {
+    ArrayList<String> list = new ArrayList<>();
+    list.sort(null);
+
+    Collections.addAll(list, "b", "a", "c");
+    list.sort(null);
+    assertEquals(asList("a", "b", "c"), list);
+
+    list = new ArrayList<>();
+    Collections.addAll(list, "b", "a", "c");
+    list.sort(Collections.reverseOrder());
+    assertEquals(asList("c", "b", "a"), list);
+  }
 }

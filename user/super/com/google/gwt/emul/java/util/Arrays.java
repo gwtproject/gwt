@@ -17,10 +17,8 @@
 package java.util;
 
 import static javaemul.internal.Coercions.ensureInt;
-import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkArraySize;
 import static javaemul.internal.InternalPreconditions.checkCriticalArrayBounds;
-import static javaemul.internal.InternalPreconditions.checkCriticalPositionIndexes;
 import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
@@ -1598,10 +1596,9 @@ public class Arrays {
   }
 
   private static int getCopyLength(Object array, int from, int to) {
-    checkArgument(from <= to, "%s > %s", from, to);
     int len = ArrayHelper.getLength(array);
+    checkCriticalArrayBounds(from, to, len);
     to = Math.min(to, len);
-    checkCriticalPositionIndexes(from, to, len);
     return to - from;
   }
 

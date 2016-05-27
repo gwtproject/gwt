@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcf7d3e0_2a8b652d",
+        "filename": "user/super/com/google/gwt/emul/java/util/Spliterators.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-05-27T17:51:11Z",
+      "side": 1,
+      "message": "i think this block is all you need, then a call to checkCriticalArrayBounds, since it will check the other two, and this first case has already been checked. That was my understanding of Goktug\u0027s suggested compromise, to avoid duping the entire method.",
+      "revId": "fe66c21ba15a8cf8c13822a02e16679abae4ed7d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcf7d3e0_cae731ee",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/InternalPreconditions.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-05-27T17:51:11Z",
+      "side": 1,
+      "message": "I am confused by this move, or was this just in the process of restoring the original?",
+      "revId": "fe66c21ba15a8cf8c13822a02e16679abae4ed7d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

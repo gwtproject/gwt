@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcf7d3e0_aa62b5f4",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-27T18:22:37Z",
+      "side": 1,
+      "message": "The test fail, if they fail; I don\u0027t increasing the tolerance is right approach.\n\nLet\u0027s move to a different test and skip the test for the platform it fails.",
+      "revId": "d0a8f2dfe37398607e51448d87024a913c0c4038",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcf7d3e0_2a35a5e3",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-27T18:22:37Z",
+      "side": 1,
+      "message": "Switch seems unnecessary since you already checking userAgent on window.",
+      "revId": "d0a8f2dfe37398607e51448d87024a913c0c4038",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -347,8 +347,16 @@ public class JsUtils {
         assert invocationDescriptor.nonVarargsArguments.size() == 0;
         return invocationDescriptor.reference;
       case FUNCTION:
-        return new JsInvocation(sourceInfo, invocationDescriptor.instance,
-            invocationDescriptor.nonVarargsArguments);
+        if (invocationDescriptor.instance instanceof JsNameRef
+            && ((JsNameRef) invocationDescriptor.instance).getQualifier() != null) {
+          return new JsInvocation(sourceInfo,
+              createQualifiedNameRef(sourceInfo, invocationDescriptor.instance, "call"),
+              Iterables.concat(Collections.singleton(JsNullLiteral.INSTANCE),
+                  invocationDescriptor.nonVarargsArguments));
+        } else {
+          return new JsInvocation(sourceInfo, invocationDescriptor.instance,
+              invocationDescriptor.nonVarargsArguments);
+        }
       case METHOD:
         return new JsInvocation(sourceInfo, invocationDescriptor.reference,
             invocationDescriptor.nonVarargsArguments);

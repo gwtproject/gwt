@@ -102,21 +102,6 @@ public class JjsUtils {
    * that are a function of the samInterface (e.g. Runnable), the method being referred to,
    * and the qualifying disposition (this::foo vs Class::foo if foo is an instance method)
    */
-  public static String classNameForMethodReference(JType cuType,
-      JInterfaceType functionalInterface, JMethod referredMethod, boolean hasReceiver) {
-    String prefix = classNamePrefixForMethodReference(cuType.getPackageName(), cuType.getName(),
-        functionalInterface.getName(), referredMethod.getEnclosingType().getName(),
-        referredMethod.getName(), hasReceiver);
-
-    return StringInterner.get().intern(
-        constructManglingSignature(referredMethod, prefix));
-  }
-
-  /**
-   * Java8 Method References such as String::equalsIgnoreCase should produce inner class names
-   * that are a function of the samInterface (e.g. Runnable), the method being referred to,
-   * and the qualifying disposition (this::foo vs Class::foo if foo is an instance method)
-   */
   @VisibleForTesting
   static String classNamePrefixForMethodReference(String packageName, String cuTypeName,
       String functionalInterfaceName, String referredMethodEnclosingClassName,

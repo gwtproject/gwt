@@ -486,7 +486,7 @@ public class CompilationStateBuilder {
    * Build a new compilation state from a source oracle. Allow the caller to
    * specify a compiler delegate that will handle undefined names.
    *
-   * TODO: maybe use a finer brush than to synchronize the whole thing.
+   * TODO: maybe use a finer brush than to synchronize the whole thing.                                                            Ï
    */
   public synchronized CompilationState doBuildFrom(TreeLogger logger,
       CompilerContext compilerContext, Set<Resource> resources,

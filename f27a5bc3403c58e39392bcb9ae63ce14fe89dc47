@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcaba7ee_3be1c33a",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-05-28T19:17:09Z",
+      "side": 1,
+      "message": "This needs to be refactored to the invocationDescriptor to make the decision on the format of the invocation.",
+      "range": {
+        "startLine": 350,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 61
+      },
+      "revId": "f27a5bc3403c58e39392bcb9ae63ce14fe89dc47",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

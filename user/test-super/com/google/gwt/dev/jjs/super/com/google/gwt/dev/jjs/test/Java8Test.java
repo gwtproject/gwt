@@ -41,7 +41,10 @@ public class Java8Test extends GWTTestCase {
   int local = 42;
 
   static abstract class SameClass {
-    public int method1() { return 10; }
+    public int method1() {
+      return 10;
+    }
+
     public abstract int method2();
   }
 
@@ -61,9 +64,11 @@ public class Java8Test extends GWTTestCase {
     public T accept(Lambda<T> foo) {
       return foo.run(10, 20);
     }
+
     public boolean accept2(Lambda2<String> foo) {
       return foo.run("a", "b");
     }
+
     public boolean accept3(Lambda3<String> foo) {
       return foo.run("hello");
     }
@@ -85,20 +90,34 @@ public class Java8Test extends GWTTestCase {
 
   interface DefaultInterface {
     void method1();
+
     // CHECKSTYLE_OFF
-    default int method2() { return 42; }
-    default int redeclaredAsAbstract() {
-        return 88;
+    default int method2() {
+      return 42;
     }
-    default Integer addInts(int x, int y) { return x + y; }
-    default String print() { return "DefaultInterface"; }
+
+    default int redeclaredAsAbstract() {
+      return 88;
+    }
+
+    default Integer addInts(int x, int y) {
+      return x + y;
+    }
+
+    default String print() {
+      return "DefaultInterface";
+    }
     // CHECKSTYLE_ON
   }
 
   interface DefaultInterface2 {
     void method3();
+
     // CHECKSTYLE_OFF
-    default int method4() { return 23; }
+    default int method4() {
+      return 23;
+    }
+
     default int redeclaredAsAbstract() {
       return 77;
     }
@@ -107,7 +126,10 @@ public class Java8Test extends GWTTestCase {
 
   interface DefaultInterfaceSubType extends DefaultInterface {
     // CHECKSTYLE_OFF
-    default int method2() { return 43; }
+    default int method2() {
+      return 43;
+    }
+
     default String print() {
       return "DefaultInterfaceSubType " + DefaultInterface.super.print();
     }
@@ -125,6 +147,7 @@ public class Java8Test extends GWTTestCase {
       DefaultInterface2 {
     public void method1() {
     }
+
     public void method3() {
     }
   }
@@ -143,6 +166,7 @@ public class Java8Test extends GWTTestCase {
     public int method2() {
       return 99;
     }
+
     public int redeclaredAsAbstract() {
       return 44;
     }
@@ -150,17 +174,24 @@ public class Java8Test extends GWTTestCase {
 
   class Inner {
     int local = 22;
+
     public void run() {
-      assertEquals(94, new AcceptsLambda<Integer>().accept((a,b) -> Java8Test.this.local +  local + a + b).intValue());
+      assertEquals(94,
+          new AcceptsLambda<Integer>().accept((a, b) -> Java8Test.this.local + local + a + b)
+              .intValue());
     }
   }
 
   static class Static {
     static int staticField;
+
     static {
       staticField = 99;
     }
-    static Integer staticMethod(int x, int y) { return x + y + staticField; }
+
+    static Integer staticMethod(int x, int y) {
+      return x + y + staticField;
+    }
   }
 
   static class StaticFailIfClinitRuns {
@@ -181,6 +212,7 @@ public class Java8Test extends GWTTestCase {
   static class DefaultInterfaceImpl2 implements DefaultInterface {
     public void method1() {
     }
+
     public int method2() {
       return 100;
     }
@@ -195,8 +227,11 @@ public class Java8Test extends GWTTestCase {
       implements DefaultInterfaceSubType {
     public void method1() {
     }
+
     // CHECKSTYLE_OFF
-    public String print() { return "DefaultInterfaceImplVirtualUpRefTwoInterfaces"; }
+    public String print() {
+      return "DefaultInterfaceImplVirtualUpRefTwoInterfaces";
+    }
     // CHECKSTYLE_ON
   }
 
@@ -211,34 +246,36 @@ public class Java8Test extends GWTTestCase {
 
   public void testLambdaCaptureLocal() {
     int x = 10;
-    assertEquals(40, new AcceptsLambda<Integer>().accept((a,b) -> x + a + b).intValue());
+    assertEquals(40, new AcceptsLambda<Integer>().accept((a, b) -> x + a + b).intValue());
   }
 
   public void testLambdaCaptureLocalWithInnerClass() {
     int x = 10;
-    Lambda<Integer> l = (a,b) -> new Lambda<Integer>() {
-      @Override public Integer run(int a, int b) {
+    Lambda<Integer> l = (a, b) -> new Lambda<Integer>() {
+      @Override
+      public Integer run(int a, int b) {
         int t = x;
         return t + a + b;
       }
-    }.run(a,b);
+    }.run(a, b);
     assertEquals(40, new AcceptsLambda<Integer>().accept(l).intValue());
   }
 
   public void testLambdaCaptureLocalAndField() {
     int x = 10;
-    assertEquals(82, new AcceptsLambda<Integer>().accept((a,b) -> x + local + a + b).intValue());
+    assertEquals(82, new AcceptsLambda<Integer>().accept((a, b) -> x + local + a + b).intValue());
   }
 
   public void testLambdaCaptureLocalAndFieldWithInnerClass() {
     int x = 10;
-    Lambda<Integer> l = (a,b) -> new Lambda<Integer>() {
-      @Override public Integer run(int j, int k) {
+    Lambda<Integer> l = (a, b) -> new Lambda<Integer>() {
+      @Override
+      public Integer run(int j, int k) {
         int t = x;
         int s = local;
         return t + s + a + b;
       }
-    }.run(a,b);
+    }.run(a, b);
     assertEquals(82, new AcceptsLambda<Integer>().accept(l).intValue());
   }
 
@@ -252,7 +289,7 @@ public class Java8Test extends GWTTestCase {
     Lambda l = dummyMethodToMakeCheckStyleHappy(StaticFailIfClinitRuns::staticMethod);
     try {
       // but now it should fail
-      l.run(1,2);
+      l.run(1, 2);
       fail("Clinit should have run for the first time");
     } catch (AssertionError ae) {
       // success, it was supposed to throw!
@@ -284,11 +321,11 @@ public class Java8Test extends GWTTestCase {
   }
 
   interface ArrayCtor {
-    ArrayElem [][][] copy(int i);
+    ArrayElem[][][] copy(int i);
   }
 
   interface ArrayCtorBoxed {
-    ArrayElem [][][] copy(Integer i);
+    ArrayElem[][][] copy(Integer i);
   }
 
   static class ArrayElem {
@@ -324,17 +361,17 @@ public class Java8Test extends GWTTestCase {
 
   public void testVarArgsReferenceBinding() {
     ThreeArgs t = Java8Test::addMany;
-    assertEquals(6, t.foo(1,2,3));
+    assertEquals(6, t.foo(1, 2, 3));
   }
 
   public void testVarArgsPassthroughReferenceBinding() {
     ThreeVarArgs t = Java8Test::addMany;
-    assertEquals(6, t.foo(1,2,3));
+    assertEquals(6, t.foo(1, 2, 3));
   }
 
   public void testVarArgsPassthroughReferenceBindingProvidedArray() {
     ThreeVarArgs t = Java8Test::addMany;
-    assertEquals(6, t.foo(1,2, new int[] {3}));
+    assertEquals(6, t.foo(1, 2, new int[]{3}));
   }
 
   interface I {
@@ -364,6 +401,7 @@ public class Java8Test extends GWTTestCase {
 
   static class X2 {
     protected int field;
+
     void foo() {
       int local;
       class Y extends X2 {
@@ -381,9 +419,11 @@ public class Java8Test extends GWTTestCase {
             x = new Z(456789);
             assertEquals(456791, x.field);
           }
+
           private Z(int z) {
             super(z + 2);
           }
+
           Z() {
           }
         }
@@ -401,6 +441,7 @@ public class Java8Test extends GWTTestCase {
     private X2(int x) {
       this.field = x;
     }
+
     X2() {
     }
   }
@@ -457,11 +498,13 @@ public class Java8Test extends GWTTestCase {
     assertEquals("DefaultInterfaceImplVirtualUpRefTwoInterfaces", interfaceSubType1.print());
     DefaultInterfaceSubType interfaceSubType2 = new DefaultInterfaceSubType() {
       @Override
-      public void method1() { }
+      public void method1() {
+      }
     };
     assertEquals("DefaultInterfaceSubType DefaultInterface",
         interfaceSubType2.print());
-    DefaultInterfaceSubType interfaceSubType3 = () -> { };
+    DefaultInterfaceSubType interfaceSubType3 = () -> {
+    };
     assertEquals("DefaultInterfaceSubType DefaultInterface",
         interfaceSubType3.print());
   }
@@ -480,8 +523,13 @@ public class Java8Test extends GWTTestCase {
 
   interface InterfaceWithTwoDefenderMethods {
     // CHECKSTYLE_OFF
-    default String foo() { return "interface.foo"; }
-    default String bar() { return this.foo() + " " + foo(); }
+    default String foo() {
+      return "interface.foo";
+    }
+
+    default String bar() {
+      return this.foo() + " " + foo();
+    }
     // CHECKSTYLE_ON
   }
 
@@ -494,7 +542,8 @@ public class Java8Test extends GWTTestCase {
   public void testThisRefInDefenderMethod() {
     ClassImplementOneDefenderMethod c = new ClassImplementOneDefenderMethod();
     InterfaceWithTwoDefenderMethods i1 = c;
-    InterfaceWithTwoDefenderMethods i2 = new InterfaceWithTwoDefenderMethods() { };
+    InterfaceWithTwoDefenderMethods i2 = new InterfaceWithTwoDefenderMethods() {
+    };
     assertEquals("class.foo class.foo", c.bar());
     assertEquals("class.foo class.foo", i1.bar());
     assertEquals("interface.foo interface.foo", i2.bar());
@@ -502,7 +551,9 @@ public class Java8Test extends GWTTestCase {
 
   interface InterfaceImplementOneDefenderMethod extends InterfaceWithTwoDefenderMethods {
     // CHECKSTYLE_OFF
-    default String foo() { return "interface1.foo"; }
+    default String foo() {
+      return "interface1.foo";
+    }
     // CHECKSTYLE_ON
   }
 
@@ -539,19 +590,26 @@ public class Java8Test extends GWTTestCase {
 
   interface InterfaceI {
     // CHECKSTYLE_OFF
-    default String print() { return "interface1"; }
+    default String print() {
+      return "interface1";
+    }
     // CHECKSTYLE_ON
   }
+
   interface InterfaceII {
     // CHECKSTYLE_OFF
-    default String print() { return "interface2"; }
+    default String print() {
+      return "interface2";
+    }
     // CHECKSTYLE_ON
   }
+
   class ClassI {
     public String print() {
       return "class1";
     }
   }
+
   class ClassII extends ClassI implements InterfaceI, InterfaceII {
     public String print() {
       return super.print() + " " + InterfaceI.super.print() + " " + InterfaceII.super.print();
@@ -565,32 +623,54 @@ public class Java8Test extends GWTTestCase {
 
   interface II {
     // CHECKSTYLE_OFF
-    default String fun() { return "fun() in i: " + this.foo(); };
-    default String foo() { return "foo() in i.\n"; };
+    default String fun() {
+      return "fun() in i: " + this.foo();
+    }
+
+    ;
+
+    default String foo() {
+      return "foo() in i.\n";
+    }
+
+    ;
     // CHECKSTYLE_ON
   }
+
   interface JJ extends II {
     // CHECKSTYLE_OFF
-    default String fun() { return "fun() in j: " + this.foo() + II.super.fun(); };
-    default String foo() { return "foo() in j.\n"; }
+    default String fun() {
+      return "fun() in j: " + this.foo() + II.super.fun();
+    }
+
+    ;
+
+    default String foo() {
+      return "foo() in j.\n";
+    }
     // CHECKSTYLE_ON
   }
+
   class AA {
     public String fun() {
       return "fun() in a: " + this.foo();
     }
+
     public String foo() {
       return "foo() in a.\n";
     }
   }
+
   class BB extends AA implements JJ {
     public String fun() {
       return "fun() in b: " + this.foo() + super.fun() + JJ.super.fun();
     }
+
     public String foo() {
       return "foo() in b.\n";
     }
   }
+
   class CC extends BB implements JJ {
     public String fun() {
       return "fun() in c: " + super.fun();
@@ -604,9 +684,11 @@ public class Java8Test extends GWTTestCase {
     BB b = new BB();
     II i2 = b;
     JJ j2 = b;
-    JJ j3 = new JJ() { };
+    JJ j3 = new JJ() {
+    };
     II i3 = j3;
-    II i4 = new II() { };
+    II i4 = new II() {
+    };
     String c_fun = "fun() in c: fun() in b: foo() in b.\n"
         + "fun() in a: foo() in b.\n"
         + "fun() in j: foo() in b.\n"
@@ -634,27 +716,34 @@ public class Java8Test extends GWTTestCase {
     default String m() {
       return "I.m;" + new InnerClass().n();
     }
+
     default String n() {
       return "I.n;" + this.m();
     }
+
     // CHECKSTYLE_ON
     class InnerClass {
       public String n() {
         return "A.n;" + m();
       }
+
       public String m() {
         return "A.m;";
       }
     }
   }
+
   class OuterClass {
     public String m() {
       return "B.m;";
     }
+
     public String n1() {
-      OuterInterface i = new OuterInterface() { };
+      OuterInterface i = new OuterInterface() {
+      };
       return "B.n1;" + i.n() + OuterClass.this.m();
     }
+
     public String n2() {
       OuterInterface i = new OuterInterface() {
         @Override
@@ -665,17 +754,28 @@ public class Java8Test extends GWTTestCase {
       return "B.n2;" + i.n() + OuterClass.this.m();
     }
   }
+
   public void testNestedInterfaceClass() {
     OuterClass outerClass = new OuterClass();
     assertEquals("B.n1;I.n;I.m;A.n;A.m;B.m;", outerClass.n1());
     assertEquals("B.n2;I.m;A.n;A.m;B.m;B.m;", outerClass.n2());
   }
 
-  class EmptyA { }
-  interface EmptyI { }
-  interface EmptyJ { }
-  class EmptyB extends EmptyA implements EmptyI { }
-  class EmptyC extends EmptyA implements EmptyI, EmptyJ { }
+  class EmptyA {
+  }
+
+  interface EmptyI {
+  }
+
+  interface EmptyJ {
+  }
+
+  class EmptyB extends EmptyA implements EmptyI {
+  }
+
+  class EmptyC extends EmptyA implements EmptyI, EmptyJ {
+  }
+
   public void testBaseIntersectionCast() {
     EmptyA localB = new EmptyB();
     EmptyA localC = new EmptyC();
@@ -713,43 +813,63 @@ public class Java8Test extends GWTTestCase {
   interface SimpleI {
     int fun();
   }
+
   interface SimpleJ {
     int foo();
+
     int bar();
   }
+
   interface SimpleK {
   }
+
   public void testIntersectionCastWithLambdaExpr() {
-    SimpleI simpleI1 = (SimpleI & EmptyI) () -> { return 11; };
+    SimpleI simpleI1 = (SimpleI & EmptyI) () -> {
+      return 11;
+    };
     assertEquals(11, simpleI1.fun());
-    SimpleI simpleI2 = (EmptyI & SimpleI) () -> { return 22; };
+    SimpleI simpleI2 = (EmptyI & SimpleI) () -> {
+      return 22;
+    };
     assertEquals(22, simpleI2.fun());
-    EmptyI emptyI = (EmptyI & SimpleI) () -> { return 33; };
+    EmptyI emptyI = (EmptyI & SimpleI) () -> {
+      return 33;
+    };
     try {
-      ((EmptyA & SimpleI) () -> { return 33; }).fun();
+      ((EmptyA & SimpleI) () -> {
+        return 33;
+      }).fun();
       fail("Should have thrown a ClassCastException");
     } catch (ClassCastException e) {
       // expected.
     }
     try {
-      ((SimpleI & SimpleJ) () -> { return 44; }).fun();
+      ((SimpleI & SimpleJ) () -> {
+        return 44;
+      }).fun();
       fail("Should have thrown a ClassCastException");
     } catch (ClassCastException e) {
       // expected.
     }
     try {
-      ((SimpleI & SimpleJ) () -> { return 44; }).foo();
+      ((SimpleI & SimpleJ) () -> {
+        return 44;
+      }).foo();
       fail("Should have thrown a ClassCastException");
     } catch (ClassCastException e) {
       // expected.
     }
     try {
-      ((SimpleI & SimpleJ) () -> { return 44; }).bar();
+      ((SimpleI & SimpleJ) () -> {
+        return 44;
+      }).bar();
       fail("Should have thrown a ClassCastException");
     } catch (ClassCastException e) {
       // expected.
     }
-    assertEquals(55, ((SimpleI & SimpleK) () -> { return 55; }).fun());
+    assertEquals(55, ((SimpleI & SimpleK) () -> {
+      return 55;
+    }).fun());
   }
 
   class SimpleA {
@@ -789,12 +909,18 @@ public class Java8Test extends GWTTestCase {
   interface ClickHandler {
     int onClick(int a);
   }
+
   private int addClickHandler(ClickHandler clickHandler) {
     return clickHandler.onClick(1);
   }
+
   private int addClickHandler(int a) {
-    return addClickHandler(x -> { int temp = a; return temp; });
+    return addClickHandler(x -> {
+      int temp = a;
+      return temp;
+    });
   }
+
   public void testLambdaCaptureParameter() {
     assertEquals(2, addClickHandler(2));
   }
@@ -802,20 +928,28 @@ public class Java8Test extends GWTTestCase {
   interface TestLambda_Inner {
     void f();
   }
+
   interface TestLambda_Outer {
     void accept(TestLambda_Inner t);
   }
+
   public void testLambda_call(TestLambda_Outer a) {
-    a.accept(() -> { });
+    a.accept(() -> {
+    });
   }
+
   public void testLambdaNestingCaptureLocal() {
-    int[] success = new int[] {0};
-    testLambda_call(sam1 -> { testLambda_call(sam2 -> { success[0] = 10; }); });
+    int[] success = new int[]{0};
+    testLambda_call(sam1 -> {
+      testLambda_call(sam2 -> {
+        success[0] = 10;
+      });
+    });
     assertEquals(10, success[0]);
   }
 
   public void testLambdaNestingInAnonymousCaptureLocal() {
-    int[] x = new int[] {42};
+    int[] x = new int[]{42};
     new Runnable() {
       public void run() {
         Lambda<Integer> l = (a, b) -> x[0] = x[0] + a + b;
@@ -830,7 +964,7 @@ public class Java8Test extends GWTTestCase {
     // Local Class -> Local Class -> Local Anonymous -> lambda -> Local Anonymous
     class A {
       int a() {
-        int[] x = new int[] {42};
+        int[] x = new int[]{42};
         class B {
           void b() {
             I i = new I() {
@@ -864,10 +998,10 @@ public class Java8Test extends GWTTestCase {
     // scopes Local Class -> Local Class -> Local Anonymous -> lambda -> Local Anonymous
     class A {
       int a() {
-        int[] x = new int[] {42};
+        int[] x = new int[]{42};
         class B {
           int b() {
-            int[] x = new int[] {22};
+            int[] x = new int[]{22};
             I i = new I() {
               public int foo(Integer arg) {
                 Runnable r = () -> {
@@ -900,7 +1034,7 @@ public class Java8Test extends GWTTestCase {
       int fA = 1;
 
       int a() {
-        int[] x = new int[] {42};
+        int[] x = new int[]{42};
         class B {
           int fB = 2;
 
@@ -935,7 +1069,7 @@ public class Java8Test extends GWTTestCase {
   public void testLambdaNestingInMultipleAnonymousCaptureLocal() {
     // checks that lambda has access to local variable and arguments when placed in local anonymous
     // class with multile nesting
-    int[] x = new int[] {42};
+    int[] x = new int[]{42};
     int result = new I() {
       public int foo(Integer i1) {
         return new I() {
@@ -954,7 +1088,7 @@ public class Java8Test extends GWTTestCase {
   }
 
   static class TestLambda_ClassA {
-    int[] f = new int[] {42};
+    int[] f = new int[]{42};
 
     class B {
       void m() {
@@ -976,11 +1110,11 @@ public class Java8Test extends GWTTestCase {
   }
 
   public void testInnerClassCaptureLocalFromOuterLambda() {
-    int[] x = new int[] {42};
+    int[] x = new int[]{42};
     Lambda<Integer> l = (a, b) -> {
-      int[] x1 = new int[] {32};
+      int[] x1 = new int[]{32};
       Lambda<Integer> r = (rA, rB) -> {
-        int[] x2 = new int[] {22};
+        int[] x2 = new int[]{22};
         I i = new I() {
           public int foo(Integer arg) {
             x1[0] = x1[0] + 1;
@@ -999,24 +1133,28 @@ public class Java8Test extends GWTTestCase {
   }
 
   static class TestLambda_Class {
-    public int[] s = new int[] {0};
+    public int[] s = new int[]{0};
+
     public void call(TestLambda_Outer a) {
-      a.accept(() -> { });
+      a.accept(() -> {
+      });
     }
+
     class TestLambda_InnerClass {
-      public int[] s = new int[] {0};
+      public int[] s = new int[]{0};
+
       public int test() {
-        int[] s = new int[] {0};
+        int[] s = new int[]{0};
         TestLambda_Class.this.call(
             sam0 -> TestLambda_Class.this.call(
                 sam1 -> {
                   TestLambda_Class.this.call(
-                    sam2 -> {
-                      TestLambda_Class.this.s[0] = 10;
-                      this.s[0] = 20;
-                      s[0] = 30;
-                    });
-                  }));
+                      sam2 -> {
+                        TestLambda_Class.this.s[0] = 10;
+                        this.s[0] = 20;
+                        s[0] = 30;
+                      });
+                }));
         return s[0];
       }
     }
@@ -1024,15 +1162,25 @@ public class Java8Test extends GWTTestCase {
 
   public void testLambdaNestingCaptureField() {
     TestLambda_Class a = new TestLambda_Class();
-    a.call(sam1 -> { a.call(sam2 -> { a.s[0] = 20; }); });
+    a.call(sam1 -> {
+      a.call(sam2 -> {
+        a.s[0] = 20;
+      });
+    });
     assertEquals(20, a.s[0]);
   }
 
   public void testLambdaMultipleNestingCaptureFieldAndLocal() {
     TestLambda_Class a = new TestLambda_Class();
     TestLambda_Class b = new TestLambda_Class();
-    int [] s = new int [] {0};
-    b.call(sam0 -> a.call(sam1 -> { a.call(sam2 -> { a.s[0] = 20; b.s[0] = 30; s[0] = 40; }); }));
+    int[] s = new int[]{0};
+    b.call(sam0 -> a.call(sam1 -> {
+      a.call(sam2 -> {
+        a.s[0] = 20;
+        b.s[0] = 30;
+        s[0] = 40;
+      });
+    }));
     assertEquals(20, a.s[0]);
     assertEquals(30, b.s[0]);
     assertEquals(40, s[0]);
@@ -1051,24 +1199,30 @@ public class Java8Test extends GWTTestCase {
     public static String getId() {
       return "A";
     }
+
     public int getIdx() {
       return 1;
     }
   }
+
   static class TestMF_B {
     public static String getId() {
       return "B";
     }
+
     public int getIdx() {
       return 2;
     }
   }
+
   interface Function<T> {
     T apply();
   }
+
   private String f(Function<String> arg) {
     return arg.apply();
   }
+
   private int g(Function<Integer> arg) {
     return arg.apply().intValue();
   }
@@ -1095,30 +1249,37 @@ public class Java8Test extends GWTTestCase {
     }
   }
 
-  interface ILeft extends ITop { }
+  interface ILeft extends ITop {
+  }
 
   public void testMultipleDefaults_fromInterfaces_left() {
-    class A implements ILeft, IRight { }
+    class A implements ILeft, IRight {
+    }
 
     assertEquals("IRight.m()", new A().m());
   }
 
   public void testMultipleDefaults_fromInterfaces_right() {
-    class A implements IRight, ILeft { }
+    class A implements IRight, ILeft {
+    }
 
     assertEquals("IRight.m()", new A().m());
   }
 
   public void testMultipleDefaults_superclass_left() {
-    class A implements ITop { }
-    class B extends A implements ILeft, IRight { }
+    class A implements ITop {
+    }
+    class B extends A implements ILeft, IRight {
+    }
 
     assertEquals("IRight.m()", new B().m());
   }
 
   public void testMultipleDefaults_superclass_right() {
-    class A implements ITop { }
-    class B extends A implements IRight, ILeft { }
+    class A implements ITop {
+    }
+    class B extends A implements IRight, ILeft {
+    }
 
     assertEquals("IRight.m()", new B().m());
   }
@@ -1136,8 +1297,10 @@ public class Java8Test extends GWTTestCase {
   }
 
   public void testMultipleDefaults_defaultShadowsOverSyntheticAbstractStub() {
-    abstract class A implements DefaultTrumpsOverSyntheticAbstractStub.SuperInterface { }
-    class B extends A implements DefaultTrumpsOverSyntheticAbstractStub.SubInterface { }
+    abstract class A implements DefaultTrumpsOverSyntheticAbstractStub.SuperInterface {
+    }
+    class B extends A implements DefaultTrumpsOverSyntheticAbstractStub.SubInterface {
+    }
 
     assertEquals("SubInterface.m()", new B().m());
   }
@@ -1157,8 +1320,10 @@ public class Java8Test extends GWTTestCase {
   }
 
   public void testMultipleDefaults_defaultShadowsOverDefaultOnSuperAbstract() {
-    abstract class A implements DefaultTrumpsOverDefaultOnSuperAbstract.SuperInterface { }
-    class B extends A implements DefaultTrumpsOverDefaultOnSuperAbstract.SubInterface { }
+    abstract class A implements DefaultTrumpsOverDefaultOnSuperAbstract.SuperInterface {
+    }
+    class B extends A implements DefaultTrumpsOverDefaultOnSuperAbstract.SubInterface {
+    }
 
     assertEquals("SubInterface.m()", new B().m());
   }
@@ -1167,6 +1332,7 @@ public class Java8Test extends GWTTestCase {
     default String n() {
       return "default n";
     }
+
     default String callNUnqualified() {
       class Super implements InterfaceWithThisReference {
         public String n() {
@@ -1179,6 +1345,7 @@ public class Java8Test extends GWTTestCase {
         }
       }.callNUnqualified();
     }
+
     default String callNWithThis() {
       class Super implements InterfaceWithThisReference {
         public String n() {
@@ -1191,6 +1358,7 @@ public class Java8Test extends GWTTestCase {
         }
       }.callNWithThis();
     }
+
     default String callNWithInterfaceThis() {
       class Super implements InterfaceWithThisReference {
         public String n() {
@@ -1204,6 +1372,7 @@ public class Java8Test extends GWTTestCase {
         }
       }.callNWithInterfaceThis();
     }
+
     default String callNWithSuper() {
       class Super implements InterfaceWithThisReference {
         public String n() {
@@ -1217,11 +1386,13 @@ public class Java8Test extends GWTTestCase {
         }
       }.callNWithSuper();
     }
+
     default String callNWithInterfaceSuper() {
       return new InterfaceWithThisReference() {
         public String n() {
           return "this n";
         }
+
         public String callNWithInterfaceSuper() {
           // In this method this has interface Test as its type and refers to default n();
           return "Object " + InterfaceWithThisReference.super.n();
@@ -1253,38 +1424,43 @@ public class Java8Test extends GWTTestCase {
   interface A1 {
     int fa1 = get("A1");
 
-    default void a1() { }
+    default void a1() {
+    }
   }
 
   interface A2 {
     int fa2 = get("A2");
 
-    default void a2() { }
+    default void a2() {
+    }
   }
 
   interface A3 {
     int fa3 = get("A3");
 
-    default void a3() { }
+    default void a3() {
+    }
   }
 
   interface B1 extends A1 {
     int fb1 = get("B1");
 
-    default void b1() { }
+    default void b1() {
+    }
   }
 
   interface B2 extends A2 {
     int fb2 = get("B2");
 
-    default void b2() { }
+    default void b2() {
+    }
   }
 
   interface B3 extends A3 {
     int fb3 = get("B3");
   }
 
-  static class C implements B1, A2  {
+  static class C implements B1, A2 {
     static {
       get("C");
     }
@@ -1315,9 +1491,20 @@ public class Java8Test extends GWTTestCase {
     }
   }
 
+  private static <T> String getClassName(T obj) {
+    return obj.getClass().getSimpleName();
+  }
+
   public void testMethodReference_generics() {
     P<B> p = B::getTrue;
     assertTrue(p.apply(new B()));
+    // The next two method reference will result in two different lambda implementations due
+    // to generics, see bug # 9333.
+    MyFunction1<B, String> f1 = Java8Test::getClassName;
+    MyFunction1<Double, String> f2 = Java8Test::getClassName;
+
+    assertEquals(B.class.getSimpleName(), f1.apply(new B()));
+    assertEquals(Double.class.getSimpleName(), f2.apply(new Double(2)));
   }
 
   public void testDefaultMethod_staticInitializer() {
@@ -1331,7 +1518,7 @@ public class Java8Test extends GWTTestCase {
   }
 
   @JsType(isNative = true)
-  interface  NativeJsTypeInterfaceWithStaticInitializationAndFieldAccess {
+  interface NativeJsTypeInterfaceWithStaticInitializationAndFieldAccess {
     @JsOverlay
     Object object = new Integer(3);
   }
@@ -1361,8 +1548,12 @@ public class Java8Test extends GWTTestCase {
   }
 
   private native NativeJsTypeInterfaceWithStaticInitializationAndInstanceOverlayMethod
-      createNativeJsTypeInterfaceWithStaticInitializationAndInstanceOverlayMethod() /*-{
-    return { getA: function() { return 1; } };
+  createNativeJsTypeInterfaceWithStaticInitializationAndInstanceOverlayMethod() /*-{
+    return {
+      getA: function () {
+        return 1;
+      }
+    };
   }-*/;
 
   @JsType(isNative = true)
@@ -1408,7 +1599,7 @@ public class Java8Test extends GWTTestCase {
     VarargsFunction function = (i, args) -> args[i];
     assertSame("b", function.f(1, "a", "b", "c"));
     assertSame("c", callFromJSNI(function));
-    String[] pars = new String[] {"a", "b", "c"};
+    String[] pars = new String[]{"a", "b", "c"};
     assertSame("a", function.f(0, pars));
   }
 
@@ -1418,14 +1609,17 @@ public class Java8Test extends GWTTestCase {
 
   static class Some<T> {
     T s;
-    MyFunction2<T, T ,T> combine;
-    Some(T s, MyFunction2<T, T, T>  combine) {
+    MyFunction2<T, T, T> combine;
+
+    Some(T s, MyFunction2<T, T, T> combine) {
       this.s = s;
       this.combine = combine;
     }
+
     public T m(T s2) {
       return combine.apply(s, s2);
     }
+
     public T m1() {
       return s;
     }
@@ -1446,7 +1640,7 @@ public class Java8Test extends GWTTestCase {
     assertEquals("Hello", toString.apply(new StringBuilder("Hello")));
   }
 
-  static MyFunction2<String, String, String> concat = (s,t) -> s + t;
+  static MyFunction2<String, String, String> concat = (s, t) -> s + t;
 
   public void testMethodReference_genericTypeParameters() {
     testMethodReference_genericTypeParameters(
@@ -1466,13 +1660,13 @@ public class Java8Test extends GWTTestCase {
     assertEquals(t1, ((MyFunction1<Some<T>, T>) Some<T>::m1).apply(some));
     assertEquals("Hello",
         ((MyFunction1<Some<String>, String>)
-              Some<String>::m1).apply(new Some<>("Hello", concat)));
+            Some<String>::m1).apply(new Some<>("Hello", concat)));
     // 4. Constructor reference.
     assertEquals(t1t2,
         ((MyFunction2<T, MyFunction2<T, T, T>, Some<T>>) Some<T>::new).apply(t1t2, combine).m1());
   }
 
-  static MyFunction2<Integer, Integer, Integer> addInteger = (s,t) -> s + t;
+  static MyFunction2<Integer, Integer, Integer> addInteger = (s, t) -> s + t;
 
   @FunctionalInterface
   interface MyIntFunction1 {
@@ -1499,18 +1693,21 @@ public class Java8Test extends GWTTestCase {
     int apply(SomeInteger t, int u);
   }
 
-  static MyIntFunction2 addint = (s,t) -> s + t;
+  static MyIntFunction2 addint = (s, t) -> s + t;
 
   static class SomeInteger {
     int s;
-    MyFunction2<Integer, Integer ,Integer> combine;
-    SomeInteger(int s, MyFunction2<Integer, Integer, Integer>  combine) {
+    MyFunction2<Integer, Integer, Integer> combine;
+
+    SomeInteger(int s, MyFunction2<Integer, Integer, Integer> combine) {
       this.s = s;
       this.combine = combine;
     }
+
     public int m(int s2) {
       return combine.apply(s, s2);
     }
+
     public int m1() {
       return s;
     }

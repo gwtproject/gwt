@@ -199,7 +199,7 @@ public class JsUtils {
   }
 
   private enum CallStyle {
-    DIRECT, USING_CALL_FOR_SUPER, USING_APPLY_FOR_VARARGS_ARRAY
+    DIRECT, USING_CALL, USING_APPLY_FOR_VARARGS_ARRAY
   }
 
   private static class InvocationDescriptor {
@@ -230,7 +230,10 @@ public class JsUtils {
       JMethod method, JsExpression instance, JsNameRef reference, List<JsExpression> args)  {
 
     CallStyle callStyle = invocationStyle == InvocationStyle.SUPER
-        ? CallStyle.USING_CALL_FOR_SUPER : CallStyle.DIRECT;
+        || invocationStyle == InvocationStyle.FUNCTION
+            && instance instanceof JsNameRef
+            && ((JsNameRef) instance).getQualifier() != null
+        ? CallStyle.USING_CALL : CallStyle.DIRECT;
 
     TargetType targetType;
     switch (invocationStyle) {
@@ -361,9 +364,9 @@ public class JsUtils {
     }
   }
 
-  public static JsExpression createSuperInvocationOrPropertyAccess(
+  public static JsExpression createSuperOrCallInvocationOrPropertyAccess(
       SourceInfo sourceInfo, InvocationDescriptor invocationDescriptor) {
-    assert invocationDescriptor.callStyle == CallStyle.USING_CALL_FOR_SUPER;
+    assert invocationDescriptor.callStyle == CallStyle.USING_CALL;
     switch (invocationDescriptor.targetType) {
       case SETTER:
         assert invocationDescriptor.nonVarargsArguments.size() == 1;
@@ -373,6 +376,11 @@ public class JsUtils {
         assert invocationDescriptor.nonVarargsArguments.size() == 0;
         // TODO(rluble): implement super getters.
         throw new UnsupportedOperationException("Super.getter is unsupported");
+      case FUNCTION:
+        return new JsInvocation(sourceInfo,
+            createQualifiedNameRef(sourceInfo, invocationDescriptor.instance, "call"),
+            Iterables.concat(Collections.singleton(JsNullLiteral.INSTANCE),
+                invocationDescriptor.nonVarargsArguments));
       case METHOD:
         // q.name.call(instance, p1, ..., pn)
         return new JsInvocation(sourceInfo,
@@ -400,8 +408,8 @@ public class JsUtils {
     switch (invocationDescriptor.callStyle) {
       case DIRECT:
         return createDirectInvocationOrPropertyAccess(sourceInfo, invocationDescriptor);
-      case USING_CALL_FOR_SUPER:
-        return createSuperInvocationOrPropertyAccess(sourceInfo, invocationDescriptor);
+      case USING_CALL:
+        return createSuperOrCallInvocationOrPropertyAccess(sourceInfo, invocationDescriptor);
       case USING_APPLY_FOR_VARARGS_ARRAY:
         return createApplyInvocation(sourceInfo, invocationDescriptor);
     }

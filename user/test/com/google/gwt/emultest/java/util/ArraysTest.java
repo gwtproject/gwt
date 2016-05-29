@@ -534,6 +534,9 @@ public class ArraysTest extends EmulTestBase {
     ret = Arrays.copyOf(a1, 2);
     assertTrue(Arrays.equals(new boolean[]{true, true}, ret));
 
+    ret = Arrays.copyOf(a1, 0);
+    assertEquals(0, ret.length);
+
     ret = Arrays.copyOf(a1, a1.length * 2);
     assertEquals(a1.length * 2, ret.length);
     int i = 0;
@@ -553,6 +556,9 @@ public class ArraysTest extends EmulTestBase {
     for (; i < ret.length; i++) {
       assertEquals(false, ret[i]);
     }
+
+    ret = Arrays.copyOf(new boolean[] {false, true}, 3);
+    assertTrue(Arrays.equals(new boolean[] {false, true, false}, ret));
   }
 
   /**
@@ -566,6 +572,9 @@ public class ArraysTest extends EmulTestBase {
 
     ret = Arrays.copyOf(a1, 2);
     assertTrue(Arrays.equals(new byte[] {9, 8}, ret));
+
+    ret = Arrays.copyOf(a1, 0);
+    assertEquals(0, ret.length);
 
     ret = Arrays.copyOf(a1, a1.length * 2);
     assertEquals(a1.length * 2, ret.length);
@@ -586,6 +595,9 @@ public class ArraysTest extends EmulTestBase {
     for (; i < ret.length; i++) {
       assertEquals((byte) 0, ret[i]);
     }
+
+    ret = Arrays.copyOf(new byte[] {1, 2}, 3);
+    assertTrue(Arrays.equals(new byte[] {1, 2, 0}, ret));
   }
 
   /**
@@ -599,6 +611,9 @@ public class ArraysTest extends EmulTestBase {
 
     ret = Arrays.copyOf(a1, 2);
     assertTrue(Arrays.equals(new char[] {9, 8}, ret));
+
+    ret = Arrays.copyOf(a1, 0);
+    assertEquals(0, ret.length);
 
     ret = Arrays.copyOf(a1, a1.length * 2);
     assertEquals(a1.length * 2, ret.length);
@@ -619,6 +634,9 @@ public class ArraysTest extends EmulTestBase {
     for (; i < ret.length; i++) {
       assertEquals((char) 0, ret[i]);
     }
+
+    ret = Arrays.copyOf(new char[] {1, 2}, 3);
+    assertTrue(Arrays.equals(new char[] {1, 2, 0}, ret));
   }
 
   /**
@@ -632,6 +650,9 @@ public class ArraysTest extends EmulTestBase {
 
     ret = Arrays.copyOf(a1, 2);
     assertTrue(Arrays.equals(new double[] {0.5, 1.25}, ret));
+
+    ret = Arrays.copyOf(a1, 0);
+    assertEquals(0, ret.length);
 
     ret = Arrays.copyOf(a1, a1.length * 2);
     assertEquals(a1.length * 2, ret.length);
@@ -652,6 +673,9 @@ public class ArraysTest extends EmulTestBase {
     for (; i < ret.length; i++) {
       assertEquals(0., ret[i]);
     }
+
+    ret = Arrays.copyOf(new double[] {1, 2}, 3);
+    assertTrue(Arrays.equals(new double[] {1, 2, 0}, ret));
   }
 
   /**
@@ -665,6 +689,9 @@ public class ArraysTest extends EmulTestBase {
 
     ret = Arrays.copyOf(a1, 2);
     assertTrue(Arrays.equals(new float[] {0.5f, 1.25f}, ret));
+
+    ret = Arrays.copyOf(a1, 0);
+    assertEquals(0, ret.length);
 
     ret = Arrays.copyOf(a1, a1.length * 2);
     assertEquals(a1.length * 2, ret.length);
@@ -685,6 +712,9 @@ public class ArraysTest extends EmulTestBase {
     for (; i < ret.length; i++) {
       assertEquals(0f, ret[i]);
     }
+
+    ret = Arrays.copyOf(new float[] {1, 2}, 3);
+    assertTrue(Arrays.equals(new float[] {1, 2, 0}, ret));
   }
 
   /**
@@ -698,6 +728,9 @@ public class ArraysTest extends EmulTestBase {
 
     ret = Arrays.copyOf(a1, 2);
     assertTrue(Arrays.equals(new int[] {9, 8}, ret));
+
+    ret = Arrays.copyOf(a1, 0);
+    assertEquals(0, ret.length);
 
     ret = Arrays.copyOf(a1, a1.length * 2);
     assertEquals(a1.length * 2, ret.length);
@@ -718,6 +751,9 @@ public class ArraysTest extends EmulTestBase {
     for (; i < ret.length; i++) {
       assertEquals(0, ret[i]);
     }
+
+    ret = Arrays.copyOf(new int[] {1, 2}, 3);
+    assertTrue(Arrays.equals(new int[] {1, 2, 0}, ret));
   }
 
   /**
@@ -731,6 +767,9 @@ public class ArraysTest extends EmulTestBase {
 
     ret = Arrays.copyOf(a1, 2);
     assertTrue(Arrays.equals(new long[] {9, 8}, ret));
+
+    ret = Arrays.copyOf(a1, 0);
+    assertEquals(0, ret.length);
 
     ret = Arrays.copyOf(a1, a1.length * 2);
     assertEquals(a1.length * 2, ret.length);
@@ -751,6 +790,9 @@ public class ArraysTest extends EmulTestBase {
     for (; i < ret.length; i++) {
       assertEquals(0L, ret[i]);
     }
+
+    ret = Arrays.copyOf(new long[] {1, 2}, 3);
+    assertTrue(Arrays.equals(new long[] {1, 2, 0}, ret));
   }
 
   /**
@@ -764,6 +806,9 @@ public class ArraysTest extends EmulTestBase {
 
     ret = Arrays.copyOf(a1, 2);
     assertTrue(Arrays.equals(new short[] {9, 8}, ret));
+
+    ret = Arrays.copyOf(a1, 0);
+    assertEquals(0, ret.length);
 
     ret = Arrays.copyOf(a1, a1.length * 2);
     assertEquals(a1.length * 2, ret.length);
@@ -784,6 +829,9 @@ public class ArraysTest extends EmulTestBase {
     for (; i < ret.length; i++) {
       assertEquals((short) 0, ret[i]);
     }
+
+    ret = Arrays.copyOf(new short[] {1, 2}, 3);
+    assertTrue(Arrays.equals(new short[] {1, 2, 0}, ret));
   }
 
   /**
@@ -801,6 +849,9 @@ public class ArraysTest extends EmulTestBase {
 
     ret = Arrays.copyOf(a1, 2);
     assertTrue(Arrays.equals(new Object[] {null, obj1}, ret));
+
+    ret = Arrays.copyOf(a1, 0);
+    assertEquals(0, ret.length);
 
     ret = Arrays.copyOf(a1, a1.length * 2);
     assertEquals(a1.length * 2, ret.length);
@@ -821,6 +872,9 @@ public class ArraysTest extends EmulTestBase {
     for (; i < ret.length; i++) {
       assertEquals(null, ret[i]);
     }
+
+    ret = Arrays.copyOf(new Object[] {obj1, obj2}, 3);
+    assertTrue(Arrays.equals(new Object[] {obj1, obj2, null}, ret));
   }
 
   /**

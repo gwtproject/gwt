@@ -70,6 +70,30 @@
       "revId": "d3b57eb39db7f9ececaf70fb52c326140f67ff46",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc72c790_d4ab1c7c",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1601,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-05-29T17:11:26Z",
+      "side": 1,
+      "message": "I reverted it and changed in https://gwt-review.googlesource.com/#/c/15010/",
+      "parentUuid": "bc42732e_8bb16df2",
+      "range": {
+        "startLine": 1601,
+        "startChar": 4,
+        "endLine": 1601,
+        "endChar": 27
+      },
+      "revId": "d3b57eb39db7f9ececaf70fb52c326140f67ff46",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

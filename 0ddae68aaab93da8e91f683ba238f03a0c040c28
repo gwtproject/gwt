@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcaba7ee_4185c0c0",
+        "filename": "user/test/com/google/gwt/core/interop/JsFunctionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-05-30T22:38:43Z",
+      "side": 1,
+      "message": "it seems that in htmlunit the window instance bound to \"this\"  is not \u003d\u003d nor \u003d\u003d\u003d.",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 256,
+        "endChar": 4
+      },
+      "revId": "0ddae68aaab93da8e91f683ba238f03a0c040c28",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

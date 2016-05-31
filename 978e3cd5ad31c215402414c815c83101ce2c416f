@@ -34,6 +34,24 @@
       "revId": "978e3cd5ad31c215402414c815c83101ce2c416f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc42732e_ab5e29da",
+        "filename": "user/super/com/google/gwt/emul/java/util/logging/Logger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-05-31T15:55:39Z",
+      "side": 0,
+      "message": "Would be nice if the compiler is also smart enough to let us remove the remaining early returns in info(), config(), warn(), etc. They all end up in isLoggable() and Level.intValue() used in the comparison can be traced back to a constant in these cases.",
+      "parentUuid": "bc42732e_8b324dab",
+      "revId": "978e3cd5ad31c215402414c815c83101ce2c416f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

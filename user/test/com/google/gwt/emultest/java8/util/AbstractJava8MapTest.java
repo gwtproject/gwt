@@ -54,6 +54,11 @@ abstract class AbstractJava8MapTest extends EmulTestBase {
     assertEquals("A", value);
     assertTrue(map.containsKey("a"));
     assertEquals("A", map.get("a"));
+
+    map.put("a", null);
+    value = map.compute("a", (k, v) -> null);
+    assertNull(value);
+    assertTrue(map.containsKey("a"));
   }
 
   public void testComputeIfAbsent() {

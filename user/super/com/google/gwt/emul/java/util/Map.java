@@ -72,12 +72,22 @@ public interface Map<K, V> {
   default V compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
     checkNotNull(remappingFunction);
 
-    V value = remappingFunction.apply(key, get(key));
-    if (value != null) {
-      put(key, value);
+    V oldValue = get(key);
+    V value = remappingFunction.apply(key, oldValue);
+    if (oldValue == null) {
+      if (value == null) {
+        return null;
+      } else {
+        put(key, value);
+      }
     } else {
-      remove(key);
+      if (value == null) {
+        remove(key);
+      } else {
+        put(key, value);
+      }
     }
+
     return value;
   }
 

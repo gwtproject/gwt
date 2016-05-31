@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc42732e_8bd32d74",
+        "filename": "user/test/com/google/gwt/emultest/java8/lang/DoubleTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-05-31T15:05:59Z",
+      "side": 1,
+      "message": "Those tests have likely been added in 2015 or 2016, should we use that in the copyright line?",
+      "revId": "e358545b6de9f07cd38d5c4b2dd17d6432e463ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc42732e_abd8e990",
+        "filename": "user/test/com/google/gwt/emultest/java8/lang/StringTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-05-31T15:05:59Z",
+      "side": 1,
+      "message": "Does this comment applies here? (note: there\u0027s no TODO in this file)",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 55
+      },
+      "revId": "e358545b6de9f07cd38d5c4b2dd17d6432e463ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

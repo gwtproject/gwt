@@ -545,7 +545,7 @@ public class JsInteropRestrictionChecker {
       return;
     }
 
-    if (oldJsMember.isNativeMethod() && newJsMember.isNativeMethod()) {
+    if (oldJsMember.isNative() && newJsMember.isNative()) {
       return;
     }
 
@@ -811,8 +811,12 @@ public class JsInteropRestrictionChecker {
       this.getter = getter;
     }
 
-    public boolean isNativeMethod() {
-      return member instanceof JMethod && member.isJsNative() && !isPropertyAccessor();
+    public boolean isNative() {
+      if (!isPropertyAccessor()) {
+        return member instanceof JMethod && member.isJsNative();
+      }
+      return (setter == null || setter.isJsNative())
+          && (getter == null || getter.isJsNative());
     }
 
     public boolean isPropertyAccessor() {

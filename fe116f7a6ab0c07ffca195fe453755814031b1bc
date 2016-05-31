@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b99c452b_cf210de9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1763,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2016-05-31T22:33:56Z",
+      "side": 1,
+      "message": "I\u0027m curious, what\u0027s the value of \u0027selector\u0027 when it\u0027s a ctor, \u003cblah\u003e?",
+      "range": {
+        "startLine": 1763,
+        "startChar": 83,
+        "endLine": 1763,
+        "endChar": 86
+      },
+      "revId": "fe116f7a6ab0c07ffca195fe453755814031b1bc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

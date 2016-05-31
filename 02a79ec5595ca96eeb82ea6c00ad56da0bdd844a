@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b99c452b_c4eb34ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-31T21:23:05Z",
+      "side": 1,
+      "message": "pls update the message with the additional changes.",
+      "revId": "02a79ec5595ca96eeb82ea6c00ad56da0bdd844a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b99c452b_24fbf887",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/InternalPreconditions.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-05-31T21:23:05Z",
+      "side": 1,
+      "message": "pls fix wrapping.",
+      "revId": "02a79ec5595ca96eeb82ea6c00ad56da0bdd844a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc42732e_6b4e012e",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/AbstractJava8MapTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-05-31T15:48:01Z",
+      "side": 1,
+      "message": "The default implementation in JavaDoc is not precise in this case, we also stumbled upon it. The actual behavior is different in JDK. If the function returns null then the key will be removed from the map, regardless of its value in the map. That is described in text form in the JavaDoc as \"If the function returns null, the mapping is removed (or remains absent if initially absent)\".\n\n  public static void main(String[] args) {\n    Map\u003cString, String\u003e map \u003d new HashMap\u003c\u003e();\n    map.put(\"a\", null);\n    System.out.println(map.containsKey(\"a\"));\n    map.compute(\"a\", (k, v) -\u003e null);\n    System.out.println(map.containsKey(\"a\"));\n  }\n\nprints out \"true\", \"false\" in JVM.",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 37
+      },
+      "revId": "361804c779df751ad6db7361d8fe0ea8a28444f9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

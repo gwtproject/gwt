@@ -507,11 +507,8 @@ public final class InternalPreconditions {
    * {@code size}, inclusive.
    */
   public static void checkCriticalPositionIndexes(int start, int end, int size) {
-    if (start < 0) {
-      throw new IndexOutOfBoundsException("fromIndex: " + start + " < 0");
-    }
-    if (end > size) {
-      throw new IndexOutOfBoundsException("toIndex: " + end + " > size " + size);
+    if (start < 0 || end > size) {
+      throw new IndexOutOfBoundsException("fromIndex: " + start + ", toIndex: " + end + ", size: " + size);
     }
     if (start > end) {
       throw new IllegalArgumentException("fromIndex: " + start + " > toIndex: " + end);
@@ -527,28 +524,19 @@ public final class InternalPreconditions {
     if (start > end) {
       throw new IllegalArgumentException("fromIndex: " + start + " > toIndex: " + end);
     }
-    if (start < 0) {
-      throw new ArrayIndexOutOfBoundsException("fromIndex: " + start + " < 0");
-    }
-    if (end > length) {
-      throw new ArrayIndexOutOfBoundsException("toIndex: " + end + " > length " + length);
+    if (start < 0 || end > length) {
+      throw new ArrayIndexOutOfBoundsException("fromIndex: " + start + ", toIndex: " + end + ", length: " + length);
     }
   }
 
   /**
-   * Checks that bounds are correct.
+   * Checks that string bounds are correct.
    *
    * @throws StringIndexOutOfBoundsException if the range is not legal
    */
-  public static void checkStringBounds(int start, int end, int size) {
-    if (start < 0) {
-      throw new StringIndexOutOfBoundsException("fromIndex: " + start + " < 0");
-    }
-    if (end > size) {
-      throw new StringIndexOutOfBoundsException("toIndex: " + end + " > size " + size);
-    }
-    if (end < start) {
-      throw new StringIndexOutOfBoundsException("fromIndex: " + start + " > toIndex: " + end);
+  public static void checkCriticalStringBounds(int start, int end, int length) {
+    if (start < 0 || end > length || end < start) {
+      throw new StringIndexOutOfBoundsException("fromIndex: " + start + ", toIndex: " + end + ", length: " + length);
     }
   }
 

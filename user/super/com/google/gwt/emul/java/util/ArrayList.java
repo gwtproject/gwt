@@ -206,23 +206,22 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   @Override
   public boolean removeIf(Predicate<? super E> filter) {
     checkNotNull(filter);
-    int length = array.length;
-    if (length == 0) {
-      return false;
-    }
-    E[] newArray = ArrayHelper.createFrom(array, length);
-    int i = 0;
-    for (E e : array) {
+
+    @SuppressWarnings("unchecked")
+    E[] newArray = (E[]) new Object[0];
+
+    int newIndex = 0;
+    int index = 0;
+    for (; index < array.length; index++) {
+      E e = array[index];
       if (!filter.test(e)) {
-        newArray[i++] = e;
+        newArray[newIndex] = e;
+        newIndex++;
       }
     }
-    if (i == length) {
-      return false;
-    }
-    ArrayHelper.setLength(newArray, i);
+
     array = newArray;
-    return true;
+    return newIndex > 0;
   }
 
   @Override

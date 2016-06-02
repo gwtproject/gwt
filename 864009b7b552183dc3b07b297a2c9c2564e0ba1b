@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b96b6530_63fb02ee",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-02T00:26:03Z",
+      "side": 1,
+      "message": "Wasn\u0027t this failing in the unit tests?",
+      "revId": "864009b7b552183dc3b07b297a2c9c2564e0ba1b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

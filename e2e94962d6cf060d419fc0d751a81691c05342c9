@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b96b6530_a9aeb9ef",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1568,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-02T05:28:16Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not preceded with whitespace.",
+      "revId": "e2e94962d6cf060d419fc0d751a81691c05342c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b96b6530_c9bbf530",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1568,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-02T05:28:16Z",
+      "side": 1,
+      "message": "[error] \u0027\u003d\u0027 is not followed by whitespace.",
+      "revId": "e2e94962d6cf060d419fc0d751a81691c05342c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

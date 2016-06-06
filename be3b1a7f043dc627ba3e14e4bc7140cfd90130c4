@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6fd3aea_0329ed25",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ArrayListTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-06T14:05:23Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Arrays.asList.",
+      "revId": "be3b1a7f043dc627ba3e14e4bc7140cfd90130c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6fd3aea_631ef100",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ArrayListTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-06T14:05:23Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.Collections.",
+      "revId": "be3b1a7f043dc627ba3e14e4bc7140cfd90130c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

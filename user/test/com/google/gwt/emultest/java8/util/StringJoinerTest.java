@@ -15,7 +15,6 @@
  */
 package com.google.gwt.emultest.java8.util;
 
-import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.StringJoiner;
@@ -74,7 +73,7 @@ public class StringJoinerTest extends GWTTestCase {
     try {
       joiner.merge(null);
       fail("NullPointerException must be thrown if other joiner is null");
-    } catch (NullPointerException | JavaScriptException e) {
+    } catch (Exception e) {
       // expected
     }
   }

@@ -15,7 +15,6 @@
  */
 package com.google.gwt.emultest.java8.util;
 
-import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.NoSuchElementException;
@@ -81,7 +80,7 @@ public class OptionalTest extends GWTTestCase {
     try {
       present.ifPresent(null);
       fail("Non-Empty Optional must throw NullPointerException if consumer is null");
-    } catch (NullPointerException | JavaScriptException e) {
+    } catch (Exception e) {
       // expected
     }
 
@@ -199,7 +198,7 @@ public class OptionalTest extends GWTTestCase {
     try {
       empty.orElseGet(null);
       fail("Empty Optional must throw NullPointerException if supplier is null");
-    } catch (NullPointerException | JavaScriptException e) {
+    } catch (Exception e) {
       // expected
     }
 
@@ -217,14 +216,14 @@ public class OptionalTest extends GWTTestCase {
     try {
       empty.orElseThrow(null);
       fail("Empty Optional must throw NullPointerException if supplier is null");
-    } catch (NullPointerException | JavaScriptException e) {
+    } catch (Exception e) {
       // expected
     }
 
     try {
       empty.<RuntimeException>orElseThrow(() -> null);
       fail("Empty Optional must throw NullPointerException if supplier returns null");
-    } catch (NullPointerException | JavaScriptException e) {
+    } catch (Exception e) {
       // expected
     }
 

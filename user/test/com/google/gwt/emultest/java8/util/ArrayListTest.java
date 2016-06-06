@@ -15,7 +15,10 @@
  */
 package com.google.gwt.emultest.java8.util;
 
+import static java.util.Arrays.asList;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**

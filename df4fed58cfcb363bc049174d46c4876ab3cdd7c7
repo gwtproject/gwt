@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63f21c57_a0c15a97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-06-06T15:17:14Z",
+      "side": 1,
+      "message": "No longer the case in patchset 2 if I\u0027m not mistaken.",
+      "revId": "df4fed58cfcb363bc049174d46c4876ab3cdd7c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

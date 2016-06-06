@@ -18,11 +18,15 @@ import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
+import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JVisitor;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
+import com.google.gwt.thirdparty.guava.common.collect.Sets;
+
+import java.util.Set;
 
 /**
  * Checks and throws errors for invalid JSNI constructs.
@@ -39,12 +43,29 @@ public class JsniRestrictionChecker extends JVisitor {
 
   private JMethod currentJsniMethod;
   private final JProgram jprogram;
+  private final Set<JDeclaredType> typesRequiringTrampolineDispatch;
   private final TreeLogger logger;
   private boolean hasErrors;
 
   public JsniRestrictionChecker(TreeLogger logger, JProgram jprogram) {
     this.logger = logger;
     this.jprogram = jprogram;
+    this.typesRequiringTrampolineDispatch = Sets.newHashSet();
+    for (JDeclaredType type : jprogram.getRepresentedAsNativeTypes()) {
+      collectAllSuperTypes(type , typesRequiringTrampolineDispatch);
+    }
+
+  }
+
+  private void collectAllSuperTypes(JDeclaredType type,  Set<JDeclaredType> allSuperTypes) {
+    if (type.getSuperClass() != null) {
+      allSuperTypes.add(type.getSuperClass());
+      collectAllSuperTypes(type.getSuperClass(), allSuperTypes);
+    }
+    for (JInterfaceType interfaceType : type.getImplements()) {
+      allSuperTypes.add(interfaceType);
+      collectAllSuperTypes(interfaceType, allSuperTypes);
+    }
   }
 
   @Override
@@ -59,22 +80,25 @@ public class JsniRestrictionChecker extends JVisitor {
     JDeclaredType enclosingTypeOfCalledMethod = calledMethod.getEnclosingType();
 
     if (isNonStaticJsoClassDispatch(calledMethod, enclosingTypeOfCalledMethod)) {
-      logError("JSNI method %s  attempts to call non-static method %s on an instance which is a "
+      logError("JSNI method %s calls non-static method %s on an instance which is a "
           + "subclass of JavaScriptObject. Only static method calls on JavaScriptObject subclasses "
           + "are allowed in JSNI.", currentJsniMethod.getQualifiedName(),
           calledMethod.getQualifiedName());
     } else if (isJsoInterface(enclosingTypeOfCalledMethod)) {
-      logError("JSNI method %s attempts to call method %s on an instance which might be a "
+      logError("JSNI method %s calls method %s on an instance which might be a "
           + "JavaScriptObject. Such a method call is only allowed in pure Java (non-JSNI) "
           + "functions.", currentJsniMethod.getQualifiedName(), calledMethod.getQualifiedName());
-    } else if (jprogram.isJavaLangString(enclosingTypeOfCalledMethod) && !calledMethod.isStatic()) {
-      logError("JSNI method %s attempts to call method %s. Only static methods from " +
-              "java.lang.String can be called from JSNI.",
+    } else if (jprogram.isRepresentedAsNativeJsPrimitive(enclosingTypeOfCalledMethod)
+        && !calledMethod.isStatic()) {
+      logError("JSNI method %s calls method %s. Only static methods from "
+          + enclosingTypeOfCalledMethod.getName() + " can be called from JSNI.",
           currentJsniMethod.getQualifiedName(),
           calledMethod.getQualifiedName());
-    } else if (jprogram.isJavaLangObject(enclosingTypeOfCalledMethod) && !calledMethod.isStatic()) {
-      log(Type.WARN, "JSNI method %s calls method %s. Instance java.lang.Object methods should " +
-              "not be called on String, Array or JSO instances.",
+    } else if (typesRequiringTrampolineDispatch.contains(enclosingTypeOfCalledMethod)
+        && !calledMethod.isStatic()) {
+      log(Type.WARN, "JSNI method %s calls method %s. Instance "
+          + enclosingTypeOfCalledMethod.getName() + " methods should "
+          + "not be called on Boolean, Double, String, Array or JSO instances.",
           currentJsniMethod.getQualifiedName(),
           calledMethod.getQualifiedName());
     }

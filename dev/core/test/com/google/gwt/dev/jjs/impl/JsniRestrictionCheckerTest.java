@@ -25,6 +25,47 @@ import com.google.gwt.dev.jjs.ast.JProgram;
  */
 public class JsniRestrictionCheckerTest extends OptimizerTestBase {
 
+  public void testInstanceCallToDevirtualizedFails() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.JavaScriptObject");
+    addSnippetClassDecl(
+        "static class Buggy {",
+        "  native void jsniMethod(Object o) /*-{",
+        "    new Object().@java.lang.Double::doubleValue()();",
+        "  }-*/;",
+        "}");
+
+    assertCompileFails("new Buggy().jsniMethod(null);",
+        "JSNI method test.EntryPoint$Buggy.jsniMethod(Ljava/lang/Object;)V calls method "
+            + "java.lang.Double.doubleValue()D. Only static methods from java.lang.Double can be "
+            + "called from JSNI.");
+  }
+
+  public void testInstanceCallToTrampolineWarns() throws Exception {
+    addSnippetImport("com.google.gwt.core.client.JavaScriptObject");
+    addSnippetClassDecl(
+        "static class Buggy {",
+        "  native void jsniMethod(Object o) /*-{",
+        "    new Object().@java.lang.Number::doubleValue()();",
+        "    new Object().@java.lang.CharSequence::charAt(I)(0);",
+        "    \"Hello\".@java.lang.Object::toString()();",
+        "  }-*/;",
+        "}");
+
+    assertCompileSucceeds("new Buggy().jsniMethod(null);",
+        "JSNI method test.EntryPoint$Buggy.jsniMethod(Ljava/lang/Object;)V calls method "
+            + "java.lang.Number.doubleValue()D. "
+            + "Instance java.lang.Number methods should not be called on "
+            + "Boolean, Double, String, Array or JSO instances.",
+        "JSNI method test.EntryPoint$Buggy.jsniMethod(Ljava/lang/Object;)V calls method "
+            + "java.lang.CharSequence.charAt(I)C. "
+            + "Instance java.lang.CharSequence methods should not be called on "
+            + "Boolean, Double, String, Array or JSO instances.",
+        "JSNI method test.EntryPoint$Buggy.jsniMethod(Ljava/lang/Object;)V calls method "
+            + "java.lang.Object.toString()Ljava/lang/String;. "
+            + "Instance java.lang.Object methods should not be called on "
+            + "Boolean, Double, String, Array or JSO instances.");
+  }
+
   public void testStaticJsoDispatchSucceeds() throws Exception {
     addSnippetImport("com.google.gwt.core.client.JavaScriptObject");
     addSnippetClassDecl(
@@ -58,7 +99,7 @@ public class JsniRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertCompileFails("new Buggy().jsniMeth(null);",
-        "JSNI method test.EntryPoint$Buggy.jsniMeth(Ljava/lang/Object;)V attempts to call " +
+        "JSNI method test.EntryPoint$Buggy.jsniMeth(Ljava/lang/Object;)V calls " +
             "method test.EntryPoint$Buggy$IFoo.foo()V on an instance which might be a " +
             "JavaScriptObject. Such a method call is only allowed in pure Java " +
             "(non-JSNI) functions.");
@@ -74,7 +115,7 @@ public class JsniRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertCompileFails("new Buggy().jsniMeth(null);",
-        "JSNI method test.EntryPoint$Buggy.jsniMeth(Ljava/lang/Object;)V  attempts to call " +
+        "JSNI method test.EntryPoint$Buggy.jsniMeth(Ljava/lang/Object;)V calls " +
             "non-static method " +
             "com.google.gwt.core.client.JavaScriptObject.toString()Ljava/lang/String; on an " +
             "instance which is a subclass of JavaScriptObject. Only static method calls on " +
@@ -95,7 +136,7 @@ public class JsniRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertCompileFails("new Buggy().jsniMeth(null);",
-        "JSNI method test.EntryPoint$Buggy.jsniMeth(Ljava/lang/Object;)V  attempts to call " +
+        "JSNI method test.EntryPoint$Buggy.jsniMeth(Ljava/lang/Object;)V calls " +
             "non-static method test.EntryPoint$Buggy$Foo.foo()V on an instance which is a " +
             "subclass of JavaScriptObject. Only static method calls on JavaScriptObject " +
             "subclasses are allowed in JSNI.");
@@ -111,7 +152,7 @@ public class JsniRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertCompileFails("new Buggy().jsniMeth(null);",
-        "JSNI method test.EntryPoint$Buggy.jsniMeth(Ljava/lang/Object;)V attempts to call method " +
+        "JSNI method test.EntryPoint$Buggy.jsniMeth(Ljava/lang/Object;)V calls method " +
             "java.lang.String.length()I. Only static methods from java.lang.String can be called " +
             "from JSNI.");
   }
@@ -126,22 +167,6 @@ public class JsniRestrictionCheckerTest extends OptimizerTestBase {
         "}");
 
     assertCompileSucceeds("new Buggy().jsniMeth(null);");
-  }
-
-  public void testObjectInstanceMethodCallWarn() throws Exception {
-    addSnippetClassDecl(
-        "static class Buggy {",
-        "  static String foo;",
-        "  native void jsniMeth(Object o) /*-{",
-        "    \"Hello\".@java.lang.Object::toString()();",
-        "  }-*/;",
-        "}");
-
-    assertCompileSucceeds("new Buggy().jsniMeth(null);",
-        "JSNI method test.EntryPoint$Buggy.jsniMeth(Ljava/lang/Object;)V calls method " +
-            "java.lang.Object.toString()Ljava/lang/String;. " +
-            "Instance java.lang.Object methods should not be called on String, Array or " +
-            "JSO instances.");
   }
 
   @Override

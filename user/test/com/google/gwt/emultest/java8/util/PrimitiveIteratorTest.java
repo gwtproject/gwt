@@ -15,7 +15,6 @@
  */
 package com.google.gwt.emultest.java8.util;
 
-import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Collections;
@@ -53,14 +52,14 @@ public class PrimitiveIteratorTest extends GWTTestCase {
       it = createTestPrimitiveDoubleIterator();
       it.forEachRemaining((Consumer<Double>) null);
       fail();
-    } catch (JavaScriptException | NullPointerException expected) {
+    } catch (Exception expected) {
     }
 
     try {
       it = createTestPrimitiveDoubleIterator();
       it.forEachRemaining((DoubleConsumer) null);
       fail();
-    } catch (JavaScriptException | NullPointerException expected) {
+    } catch (Exception expected) {
     }
   }
 
@@ -81,14 +80,14 @@ public class PrimitiveIteratorTest extends GWTTestCase {
       it = createTestPrimitiveIntIterator();
       it.forEachRemaining((Consumer<Integer>) null);
       fail();
-    } catch (JavaScriptException | NullPointerException expected) {
+    } catch (Exception expected) {
     }
 
     try {
       it = createTestPrimitiveIntIterator();
       it.forEachRemaining((IntConsumer) null);
       fail();
-    } catch (JavaScriptException | NullPointerException expected) {
+    } catch (Exception expected) {
     }
   }
 
@@ -109,14 +108,14 @@ public class PrimitiveIteratorTest extends GWTTestCase {
       it = createTestPrimitiveLongIterator();
       it.forEachRemaining((Consumer<Long>) null);
       fail();
-    } catch (JavaScriptException | NullPointerException expected) {
+    } catch (Exception expected) {
     }
 
     try {
       it = createTestPrimitiveLongIterator();
       it.forEachRemaining((LongConsumer) null);
       fail();
-    } catch (JavaScriptException | NullPointerException expected) {
+    } catch (Exception expected) {
     }
   }
 

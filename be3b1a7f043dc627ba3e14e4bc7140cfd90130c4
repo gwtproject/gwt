@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "63f21c57_e0ac02fd",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ArrayListTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-06T14:19:13Z",
+      "side": 1,
+      "message": "jenkins is wrong here",
+      "parentUuid": "e6fd3aea_0329ed25",
+      "revId": "be3b1a7f043dc627ba3e14e4bc7140cfd90130c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6fd3aea_631ef100",
         "filename": "user/test/com/google/gwt/emultest/java8/util/ArrayListTest.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-06-06T14:05:23Z",
       "side": 1,
       "message": "[error] Unused import - java.util.Collections.",
+      "revId": "be3b1a7f043dc627ba3e14e4bc7140cfd90130c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63f21c57_00b0064d",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/ArrayListTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-06T14:19:13Z",
+      "side": 1,
+      "message": "jenkins is wrong here",
+      "parentUuid": "e6fd3aea_631ef100",
       "revId": "be3b1a7f043dc627ba3e14e4bc7140cfd90130c4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

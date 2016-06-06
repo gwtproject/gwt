@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63f21c57_c0a33eba",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/Collectors.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-06T20:19:23Z",
+      "side": 1,
+      "message": "When javac compiling this I see:\n\ncom/google/gwt/emul/java/util/stream/Collectors.java:96: error: incompatible types: cannot infer type-variable(s) T,K#1,D,A,M,K#2,V\n    return groupingBy0(LinkedHashMap::new, classifier, mapFactory, downstream);\n                      ^\n    (argument mismatch; bad return type in method reference\n      LinkedHashMap\u003cK#2,V\u003e cannot be converted to Map\u003cK#1,List\u003cT\u003e\u003e)\n  where T,K#1,D,A,M,K#2,V are type-variables:\n    T extends Object declared in method \u003cT,K#1,D,A,M\u003egroupingBy0(Supplier\u003cMap\u003cK#1,List\u003cT\u003e\u003e\u003e,Function\u003c? super T,? extends K#1\u003e,Supplier\u003cM\u003e,Collector\u003c? super T,A,D\u003e)\n    K#1 extends Object declared in method \u003cT,K#1,D,A,M\u003egroupingBy0(Supplier\u003cMap\u003cK#1,List\u003cT\u003e\u003e\u003e,Function\u003c? super T,? extends K#1\u003e,Supplier\u003cM\u003e,Collector\u003c? super T,A,D\u003e)\n    D extends Object declared in method \u003cT,K#1,D,A,M\u003egroupingBy0(Supplier\u003cMap\u003cK#1,List\u003cT\u003e\u003e\u003e,Function\u003c? super T,? extends K#1\u003e,Supplier\u003cM\u003e,Collector\u003c? super T,A,D\u003e)\n    A extends Object declared in method \u003cT,K#1,D,A,M\u003egroupingBy0(Supplier\u003cMap\u003cK#1,List\u003cT\u003e\u003e\u003e,Function\u003c? super T,? extends K#1\u003e,Supplier\u003cM\u003e,Collector\u003c? super T,A,D\u003e)\n    M extends Map\u003cK#1,D\u003e declared in method \u003cT,K#1,D,A,M\u003egroupingBy0(Supplier\u003cMap\u003cK#1,List\u003cT\u003e\u003e\u003e,Function\u003c? super T,? extends K#1\u003e,Supplier\u003cM\u003e,Collector\u003c? super T,A,D\u003e)\n    K#2 extends Object declared in class LinkedHashMap\n    V extends Object declared in class LinkedHashMap",
+      "range": {
+        "startLine": 96,
+        "startChar": 23,
+        "endLine": 96,
+        "endChar": 36
+      },
+      "revId": "c0f2267872fae9f595c9fcdd34d536710c7b71ca",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

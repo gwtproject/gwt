@@ -122,6 +122,24 @@
       "revId": "be3b1a7f043dc627ba3e14e4bc7140cfd90130c4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e34c4c8d_e40bda16",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/OptionalDoubleTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-06-06T15:16:23Z",
+      "side": 1,
+      "message": "No, sounds good.",
+      "parentUuid": "63f21c57_40d16e67",
+      "revId": "be3b1a7f043dc627ba3e14e4bc7140cfd90130c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

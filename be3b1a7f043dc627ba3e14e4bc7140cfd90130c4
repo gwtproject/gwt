@@ -87,6 +87,23 @@
       "revId": "be3b1a7f043dc627ba3e14e4bc7140cfd90130c4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e34c4c8d_a433a2f8",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/OptionalDoubleTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-06-06T14:54:46Z",
+      "side": 1,
+      "message": "Couldn\u0027t we add some isNullPointerException helper that could use \"e instanceof NullPointerException || e instanceof JavaScriptException\" in GWT and just \"e instanceof NullPointerException\" in J2Cl? Then we could do:\n\n assertTrue(Xxx.isNullPointerException(e));\n\nand guard against false-positives in case another exception is ever thrown.",
+      "revId": "be3b1a7f043dc627ba3e14e4bc7140cfd90130c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

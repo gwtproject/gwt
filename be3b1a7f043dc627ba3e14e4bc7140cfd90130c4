@@ -104,6 +104,24 @@
       "revId": "be3b1a7f043dc627ba3e14e4bc7140cfd90130c4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63f21c57_40d16e67",
+        "filename": "user/test/com/google/gwt/emultest/java8/util/OptionalDoubleTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-06T15:00:17Z",
+      "side": 1,
+      "message": "I thought about this, but did not like the extra complexity (yet another super sourcing). Since the test is already vague in optimzed mode (any JavaScriptException) I am kinda fine with making it more vague.\n\nIf you feel strongly I can add the extra layer, but I prefer not to.",
+      "parentUuid": "e34c4c8d_a433a2f8",
+      "revId": "be3b1a7f043dc627ba3e14e4bc7140cfd90130c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1206,7 +1206,7 @@ public class GwtAstBuilder {
       JMethod interfaceMethod = typeMap.get(samBinding);
       // And its JInterface container we must implement
       // There may be more than more JInterface containers to be implemented
-      // if the lambda expression is cast to a IntersectionCastType.
+      // if the lambda expression is cast to a IntersectionCastx.gType.
       JInterfaceType[] funcType;
       if (binding instanceof IntersectionTypeBinding18) {
         funcType = processIntersectionTypeForLambda((IntersectionTypeBinding18) binding, blockScope,

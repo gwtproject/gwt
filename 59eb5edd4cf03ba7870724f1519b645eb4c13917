@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a382544f_d5358ee3",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-08T01:43:09Z",
+      "side": 1,
+      "message": "pls add comment; like see bug #xxx",
+      "revId": "59eb5edd4cf03ba7870724f1519b645eb4c13917",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a382544f_350ada1a",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-08T01:43:09Z",
+      "side": 1,
+      "message": "Not sure why we have \u0027super\u0027 here?",
+      "range": {
+        "startLine": 367,
+        "startChar": 29,
+        "endLine": 367,
+        "endChar": 72
+      },
+      "revId": "59eb5edd4cf03ba7870724f1519b645eb4c13917",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a382544f_752702b9",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-08T01:43:09Z",
+      "side": 1,
+      "message": "// q.name.call(null, p1, ..., pn)",
+      "revId": "59eb5edd4cf03ba7870724f1519b645eb4c13917",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a382544f_35317af0",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-08T01:43:09Z",
+      "side": 1,
+      "message": "extract method?",
+      "range": {
+        "startLine": 386,
+        "startChar": 1,
+        "endLine": 389,
+        "endChar": 59
+      },
+      "revId": "59eb5edd4cf03ba7870724f1519b645eb4c13917",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

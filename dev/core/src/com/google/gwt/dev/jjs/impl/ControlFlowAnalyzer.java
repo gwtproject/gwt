@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.HasJsInfo;
 import com.google.gwt.dev.jjs.ast.JArrayLength;
 import com.google.gwt.dev.jjs.ast.JArrayRef;
 import com.google.gwt.dev.jjs.ast.JArrayType;
@@ -635,6 +636,7 @@ public class ControlFlowAnalyzer {
           }
         }
         rescueOverridingMethods(method);
+        rescueOverridenJsMethods(method);
         if (method == getClassMethod) {
           rescueClassLiteralsIfGetClassIsLive();
         }
@@ -871,6 +873,18 @@ public class ControlFlowAnalyzer {
         } else {
           // The enclosing class is not yet alive, put override in limbo.
           membersToRescueIfTypeIsInstantiated.add(overridingMethod);
+        }
+      }
+    }
+
+    /**
+     * Assume that <code>method</code> is live. Rescue any overriden JsMethods, as the JsMember
+     * information is computed by looking at overridden methods.
+     */
+    private void rescueOverridenJsMethods(JMethod method) {
+      for (JMethod overriddenMethod : method.getOverriddenMethods()) {
+        if (overriddenMethod.getJsMemberType() != HasJsInfo.JsMemberType.NONE) {
+          rescue(overriddenMethod);
         }
       }
     }

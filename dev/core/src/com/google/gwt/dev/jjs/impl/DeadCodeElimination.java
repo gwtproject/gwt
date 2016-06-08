@@ -72,6 +72,7 @@ import com.google.gwt.dev.util.log.speedtracer.CompilerEventType;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger;
 import com.google.gwt.dev.util.log.speedtracer.SpeedTracerLogger.Event;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
+import com.google.gwt.thirdparty.guava.common.base.Strings;
 import com.google.gwt.thirdparty.guava.common.collect.ImmutableMap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
@@ -1397,8 +1398,8 @@ public class DeadCodeElimination {
       return statements.get(statements.size() - 1);
     }
 
-    private Class<?> mapType(JType type) {
-      return typeClassMap.get(type);
+    private Class<?> classObjectForType(JType type) {
+      return classObjectsByType.get(type);
     }
 
     /**
@@ -1820,81 +1821,75 @@ public class DeadCodeElimination {
         return;
       }
 
-      if (method.getName().endsWith("toString")) {
+      boolean isStaticImplMethod = program.isStaticImpl(method);
+      JExpression instance = isStaticImplMethod ? x.getArgs().get(0) : x.getInstance();
+
+      if (method.getName().endsWith("toString") ) {
         // replaces s.toString() with s
-        if (program.isStaticImpl(method)) {
-          ctx.replaceMe(x.getArgs().get(0));
-        } else {
-          ctx.replaceMe(x.getInstance());
+        if (!instance.getType().canBeNull()) {
+          // Only replace when its provably non null, otherwise it should follow the normal path
+          // and throw an NPE if null at runtime.
+          ctx.replaceMe(instance);
         }
         return;
       }
 
-      int skip = 0;
-      Object instance;
-      if (program.isStaticImpl(method)) {
-        // is it static implementation for instance method?
-        method = program.instanceMethodForStaticImpl(method);
-        instance = tryTranslateLiteral(x.getArgs().get(0), String.class);
-        skip = 1;
-      } else {
-        // instance may be null
-        instance = tryTranslateLiteral(x.getInstance(), String.class);
-      }
+      Object literal = tryTranslateLiteral(instance, String.class);;
+      method = isStaticImplMethod ? program.instanceMethodForStaticImpl(method) : method;
 
-      if (instance == null && !method.isStatic()) {
+      if (literal == null && !method.isStatic()) {
         return;
       }
 
-      List<JType> params = method.getOriginalParamTypes();
-      Class<?> paramTypes[] = new Class<?>[params.size()];
-      Object paramValues[] = new Object[params.size()];
-      List<JExpression> args = x.getArgs();
-      for (int i = 0; i != params.size(); ++i) {
-        paramTypes[i] = mapType(params.get(i));
-        if (paramTypes[i] == null) {
-          return;
-        }
-        paramValues[i] = tryTranslateLiteral(args.get(i + skip), paramTypes[i]);
-        if (paramValues[i] == null) {
+      Iterator<JExpression> argumentsIterator = x.getArgs().iterator();
+      if (isStaticImplMethod) {
+        // drop the instance argument
+        argumentsIterator.next();
+      }
+
+      // Extract constant values from arguments or bail out if not possible.
+      int numberOfParameters = method.getOriginalParamTypes().size();
+      Object[] argumentConstantValues= new Object[numberOfParameters];
+      Class<?>[] parametersClasses = new Class<?>[numberOfParameters];
+      for (int i = 0; i < numberOfParameters ; i++) {
+        parametersClasses[i] = classObjectForType(method.getOriginalParamTypes().get(i));
+        argumentConstantValues[i] = tryTranslateLiteral(argumentsIterator.next(), parametersClasses[i]);
+        if (parametersClasses[i]==  null || argumentConstantValues[i] == null) {
+          //  not a literal, cannot evaluate statically.
           return;
         }
       }
 
-      Method actual = getStringMethod(method, paramTypes);
-      if (actual == null) {
-        // Convert all parameters types to Object to find a more generic applicable method.
-        Arrays.fill(paramTypes, Object.class);
-        actual = getStringMethod(method, paramTypes);
-        // TODO(rluble): Generalize this hack by providing this functionality via an annotation,
-        // e.g. @StaticEval(target=String.class, method = "equals", params=Object.class) instead of
-        // looking at overloads here.
-      }
-      if (actual == null) {
-        return;
-      }
-
-      Object result = null;
-      try {
-        result = actual.invoke(instance, paramValues);
-      } catch (Exception e) {
-        // If the call threw an exception, just don't optimize
-        return;
-      }
-      if (result instanceof String) {
-        ctx.replaceMe(program.getStringLiteral(x.getSourceInfo(), (String) result));
-      } else if (result instanceof Boolean) {
-        ctx.replaceMe(program.getLiteralBoolean(((Boolean) result).booleanValue()));
-      } else if (result instanceof Character) {
-        ctx.replaceMe(program.getLiteralChar(((Character) result).charValue()));
-      } else if (result instanceof Integer) {
-        ctx.replaceMe(program.getLiteralInt(((Integer) result).intValue()));
+      JLiteral resultValue = staticallyInvoveStringMethod(
+          method.getName(), instance, parametersClasses, argumentConstantValues);
+      if (resultValue != null) {
+        ctx.replaceMe(resultValue);
       }
     }
 
-    private Method getStringMethod(JMethod method, Class<?>[] paramTypes) {
+    private JLiteral staticallyInvoveStringMethod(
+        String methodName, Object instance, Class<?>[] parametersClasses, Object[] argumentValues) {
+      Method actualMethod = getMethod(methodName, String.class, parametersClasses);
+      if (actualMethod == null) {
+        // Convert all parameters types to Object to find a more generic applicable method.
+        Arrays.fill(parametersClasses, Object.class);
+        actualMethod = getMethod(methodName, String.class, parametersClasses);
+      }
+      if (actualMethod == null) {
+        return null;
+      }
+
       try {
-        return String.class.getMethod(method.getName(), paramTypes);
+        return program.getLiteral(actualMethod.invoke(instance, argumentValues));
+      } catch (Exception e) {
+        // couldn't evaluate statically or convert the result to a JLiteral
+        return  null;
+      }
+    }
+
+    private Method getMethod(String name, Class<?> enclosingClass, Class<?>[] parameterTypes) {
+      try {
+        return enclosingClass.getMethod(name, parameterTypes);
       } catch (NoSuchMethodException e) {
         return null;
       }
@@ -1955,35 +1950,35 @@ public class DeadCodeElimination {
       }
     }
 
-    private Object tryTranslateLiteral(JExpression maybeLit, Class<?> type) {
-      if (!(maybeLit instanceof JValueLiteral)) {
+    private Object tryTranslateLiteral(JExpression maybeLititeral, Class<?> type) {
+      if (!(maybeLititeral instanceof JValueLiteral)) {
         return null;
       }
       // TODO: make this way better by a mile
-      if (type == boolean.class && maybeLit instanceof JBooleanLiteral) {
-        return Boolean.valueOf(((JBooleanLiteral) maybeLit).getValue());
+      if (type == boolean.class && maybeLititeral instanceof JBooleanLiteral) {
+        return Boolean.valueOf(((JBooleanLiteral) maybeLititeral).getValue());
       }
-      if (type == char.class && maybeLit instanceof JCharLiteral) {
-        return Character.valueOf(((JCharLiteral) maybeLit).getValue());
+      if (type == char.class && maybeLititeral instanceof JCharLiteral) {
+        return Character.valueOf(((JCharLiteral) maybeLititeral).getValue());
       }
-      if (type == double.class && maybeLit instanceof JFloatLiteral) {
-        return new Double(((JFloatLiteral) maybeLit).getValue());
+      if (type == double.class && maybeLititeral instanceof JFloatLiteral) {
+        return new Double(((JFloatLiteral) maybeLititeral).getValue());
       }
-      if (type == double.class && maybeLit instanceof JDoubleLiteral) {
-        return new Double(((JDoubleLiteral) maybeLit).getValue());
+      if (type == double.class && maybeLititeral instanceof JDoubleLiteral) {
+        return new Double(((JDoubleLiteral) maybeLititeral).getValue());
       }
-      if (type == int.class && maybeLit instanceof JIntLiteral) {
-        return Integer.valueOf(((JIntLiteral) maybeLit).getValue());
+      if (type == int.class && maybeLititeral instanceof JIntLiteral) {
+        return Integer.valueOf(((JIntLiteral) maybeLititeral).getValue());
       }
-      if (type == long.class && maybeLit instanceof JLongLiteral) {
-        return Long.valueOf(((JLongLiteral) maybeLit).getValue());
+      if (type == long.class && maybeLititeral instanceof JLongLiteral) {
+        return Long.valueOf(((JLongLiteral) maybeLititeral).getValue());
       }
-      if (type == String.class && maybeLit instanceof JStringLiteral) {
-        return ((JStringLiteral) maybeLit).getValue();
+      if (type == String.class && maybeLititeral instanceof JStringLiteral) {
+        return ((JStringLiteral) maybeLititeral).getValue();
       }
       if (type == Object.class) {
         // We already know it is a JValueLiteral instance
-        return ((JValueLiteral) maybeLit).getValueObj();
+        return ((JValueLiteral) maybeLititeral).getValueObj();
       }
       return null;
     }
@@ -2048,11 +2043,11 @@ public class DeadCodeElimination {
 
   private final JProgram program;
 
-  private final Map<JType, Class<?>> typeClassMap;
+  private final Map<JType, Class<?>> classObjectsByType;
 
   public DeadCodeElimination(JProgram program) {
     this.program = program;
-    typeClassMap = new ImmutableMap.Builder()
+    classObjectsByType = new ImmutableMap.Builder()
         .put(program.getTypeJavaLangObject(), Object.class)
         .put(program.getTypeJavaLangString(), String.class)
         .put(program.getTypePrimitiveBoolean(), boolean.class)

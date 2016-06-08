@@ -1820,16 +1820,6 @@ public class DeadCodeElimination {
         return;
       }
 
-      if (method.getName().endsWith("toString")) {
-        // replaces s.toString() with s
-        if (program.isStaticImpl(method)) {
-          ctx.replaceMe(x.getArgs().get(0));
-        } else {
-          ctx.replaceMe(x.getInstance());
-        }
-        return;
-      }
-
       int skip = 0;
       Object instance;
       if (program.isStaticImpl(method)) {

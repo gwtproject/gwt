@@ -635,6 +635,7 @@ public class ControlFlowAnalyzer {
           }
         }
         rescueOverridingMethods(method);
+        rescueOverridenNativeJsMethods(method);
         if (method == getClassMethod) {
           rescueClassLiteralsIfGetClassIsLive();
         }
@@ -871,6 +872,18 @@ public class ControlFlowAnalyzer {
         } else {
           // The enclosing class is not yet alive, put override in limbo.
           membersToRescueIfTypeIsInstantiated.add(overridingMethod);
+        }
+      }
+    }
+
+    /**
+     * Rescue any overridden native methods, to avoid discarding JsMethod information that affects
+     * overriding methods.
+     */
+    private void rescueOverridenNativeJsMethods(JMethod method) {
+      for (JMethod overriddenMethod : method.getOverriddenMethods()) {
+        if (overriddenMethod.isJsNative()) {
+          rescue(overriddenMethod);
         }
       }
     }

@@ -93,6 +93,30 @@
       "revId": "346094a1388610d4e909e5fe2b8b7aa846e85b59",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "438998a7_45c2fe4d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-08T20:31:42Z",
+      "side": 1,
+      "message": "I think there was a miscommunication. I meant to replace whole block with member.isJsNative",
+      "parentUuid": "a382544f_55999ed4",
+      "range": {
+        "startLine": 815,
+        "startChar": 0,
+        "endLine": 819,
+        "endChar": 53
+      },
+      "revId": "346094a1388610d4e909e5fe2b8b7aa846e85b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -16,6 +16,7 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.PrecompileTaskOptions;
+import com.google.gwt.dev.javac.JsInteropUtil;
 import com.google.gwt.dev.jjs.SourceInfo;
 import com.google.gwt.dev.jjs.SourceOrigin;
 import com.google.gwt.dev.jjs.ast.HasJsInfo.JsMemberType;
@@ -258,7 +259,7 @@ public class JjsUtils {
   public static JMethod createSyntheticAbstractStub(JDeclaredType type, JMethod superTypeMethod) {
     assert type.isAbstract();
     assert superTypeMethod.isAbstract();
-    return createEmptyMethodFromExample(type, superTypeMethod, true);
+    return createEmptyMethodFromExample(type, superTypeMethod, !type.isJsNative());
   }
 
   /**
@@ -518,16 +519,20 @@ public class JjsUtils {
 
   private static JMethod createEmptyMethodFromExample(
       JDeclaredType inType, JMethod exampleMethod, boolean isAbstract) {
+    assert !isAbstract || !inType.isJsNative();
     JMethod emptyMethod = new JMethod(exampleMethod.getSourceInfo(), exampleMethod.getName(),
-        inType, exampleMethod.getType(), isAbstract, false, false, exampleMethod.getAccess());
+        inType, exampleMethod.getType(), isAbstract , false, false, exampleMethod.getAccess());
+    emptyMethod.copyJsMemberInfoFrom(exampleMethod);
     emptyMethod.addThrownExceptions(exampleMethod.getThrownExceptions());
     emptyMethod.setSynthetic();
     // Copy parameters.
     for (JParameter param : exampleMethod.getParams()) {
       emptyMethod.cloneParameter(param);
     }
-    JMethodBody body = new JMethodBody(exampleMethod.getSourceInfo());
-    emptyMethod.setBody(body);
+    if (!inType.isJsNative()) {
+      JMethodBody body = new JMethodBody(exampleMethod.getSourceInfo());
+      emptyMethod.setBody(body);
+    }
     emptyMethod.freezeParamTypes();
     inType.addMethod(emptyMethod);
     return emptyMethod;

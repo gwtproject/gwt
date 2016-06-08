@@ -70,6 +70,13 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
     this.exported = exported;
   }
 
+  public void copyJsMemberInfoFrom(JMethod from) {
+    this.jsMemberType = from.jsMemberType;
+    this.jsName = from.jsName;
+    this.jsNamespace =from.jsNamespace;
+    this.exported = from.exported;
+  }
+
   @Override
   public boolean isJsInteropEntryPoint() {
     return exported && !needsDynamicDispatch() && !isJsNative() && !isJsOverlay();

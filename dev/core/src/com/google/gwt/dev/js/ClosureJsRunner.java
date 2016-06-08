@@ -442,7 +442,6 @@ public class ClosureJsRunner {
     options.setSmartNameRemoval(true); // ?
     options.setInlineConstantVars(true);
     options.setInlineFunctions(Reach.ALL);
-    options.setInlineGetters(true);
     options.setInlineVariables(Reach.ALL);
     options.setFlowSensitiveInlineVariables(true);
     options.setComputeFunctionSideEffects(true);

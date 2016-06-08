@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a382544f_553e7ea3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-08T01:48:32Z",
+      "side": 1,
+      "message": "I think there is no point in making native methods collide with anything, don\u0027t you think so?",
+      "range": {
+        "startLine": 548,
+        "startChar": 0,
+        "endLine": 550,
+        "endChar": 5
+      },
+      "revId": "346094a1388610d4e909e5fe2b8b7aa846e85b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a382544f_352c1a80",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-08T01:48:32Z",
+      "side": 1,
+      "message": "member.isJsNative?",
+      "range": {
+        "startLine": 815,
+        "startChar": 0,
+        "endLine": 819,
+        "endChar": 53
+      },
+      "revId": "346094a1388610d4e909e5fe2b8b7aa846e85b59",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

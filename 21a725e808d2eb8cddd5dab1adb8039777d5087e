@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ffc242a_e514053c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JConstructor.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_c511094a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JField.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_a51efd57",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JNode.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_852301a1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.JsUtils.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_6518f56a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsBlock.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_451df958",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsExpression.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_2532edec",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsFunction.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_052ff183",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsName.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_e52be573",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsNew.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_c528e979",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsParameter.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_a545dd33",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.js.ast.JsReturn.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_854ae140",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsniRestrictionCheckerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-09T19:27:58Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "21a725e808d2eb8cddd5dab1adb8039777d5087e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

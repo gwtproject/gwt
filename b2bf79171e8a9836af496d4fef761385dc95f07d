@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2c414d4_a78c8441",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 31
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-09T15:02:00Z",
+      "side": 1,
+      "message": "private static void checkValues(BitSet set, int... values) {\n    assertEquals(values.length, set.cardinality());\n    \n    int highestIndex \u003d values[values.length - 1];\n    \n    boolean[] bits \u003d new boolean[highestIndex];\n    \n    for (int value : values) {\n      bits[value] \u003d true;\n    }\n    \n    for (int index \u003d 0; index \u003c bits.length; index++) {\n      assertEquals(bits[index], set.get(index));\n    }\n  }",
+      "range": {
+        "startLine": 57,
+        "startChar": 22,
+        "endLine": 57,
+        "endChar": 33
+      },
+      "revId": "b2bf79171e8a9836af496d4fef761385dc95f07d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

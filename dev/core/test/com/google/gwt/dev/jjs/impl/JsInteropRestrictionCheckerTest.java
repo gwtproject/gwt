@@ -2221,23 +2221,13 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
 
   public final void assertBuggySucceeds(String... expectedWarnings)
       throws Exception {
-    List<String> allWarnings = Lists.newArrayList();
-    if (expectedWarnings.length > 0) {
-      allWarnings.add("Warnings in test/EntryPoint.java");
-      allWarnings.addAll(Arrays.asList(expectedWarnings));
-    }
-    Result result = assertCompileSucceeds("Buggy buggy = null;",
-        allWarnings.toArray(new String[0]));
+    Result result = assertCompileSucceeds("Buggy buggy = null;", expectedWarnings);
     assertNotNull(result.findClass("test.EntryPoint$Buggy"));
   }
 
   public final void assertBuggyFails(String... expectedErrors) {
     assertTrue(expectedErrors.length > 0);
-
-    List<String> allErrors = Lists.newArrayList();
-    allErrors.add("Errors in test/EntryPoint.java");
-    allErrors.addAll(Arrays.asList(expectedErrors));
-    assertCompileFails("Buggy buggy = null;", allErrors.toArray(new String[0]));
+    assertCompileFails("Buggy buggy = null;", expectedErrors);
   }
 
   @Override

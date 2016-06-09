@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ffc242a_24f0b603",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1823,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-09T01:52:00Z",
+      "side": 0,
+      "message": "I think we can keep the optimization if it cannot be null.",
+      "revId": "03741df8ae593395dd78adcc19c56aa048a6a40d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_84e1ca3b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1825,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-09T01:52:00Z",
+      "side": 0,
+      "message": "This should be probably the only case; seems like better to be an assert; rluble?",
+      "revId": "03741df8ae593395dd78adcc19c56aa048a6a40d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -20,13 +20,16 @@ import com.google.gwt.dev.jjs.ast.AccessModifier;
 import com.google.gwt.dev.jjs.ast.Context;
 import com.google.gwt.dev.jjs.ast.JClassType;
 import com.google.gwt.dev.jjs.ast.JConditional;
+import com.google.gwt.dev.jjs.ast.JConstructor;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JExpression;
+import com.google.gwt.dev.jjs.ast.JField;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
+import com.google.gwt.dev.jjs.ast.JNode;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JParameterRef;
 import com.google.gwt.dev.jjs.ast.JProgram;
@@ -36,11 +39,27 @@ import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
+import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
+import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.jjs.impl.MakeCallsStatic.CreateStaticImplsVisitor;
 import com.google.gwt.dev.jjs.impl.MakeCallsStatic.StaticCallConverter;
+import com.google.gwt.dev.js.JsUtils;
+import com.google.gwt.dev.js.ast.JsBlock;
+import com.google.gwt.dev.js.ast.JsContext;
+import com.google.gwt.dev.js.ast.JsExpression;
+import com.google.gwt.dev.js.ast.JsFunction;
+import com.google.gwt.dev.js.ast.JsInvocation;
+import com.google.gwt.dev.js.ast.JsModVisitor;
+import com.google.gwt.dev.js.ast.JsName;
+import com.google.gwt.dev.js.ast.JsNameRef;
+import com.google.gwt.dev.js.ast.JsNew;
+import com.google.gwt.dev.js.ast.JsParameter;
+import com.google.gwt.dev.js.ast.JsReturn;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.List;
@@ -104,6 +123,23 @@ public class Devirtualizer {
     }
 
     @Override
+    public void endVisit(JsniMethodRef x, Context ctx) {
+      JMethod method = x.getTarget();
+      if (!mightNeedDevirtualization(method)) {
+        return;
+      }
+      ensureDevirtualVersionExists(method);
+
+      // Replace the jsni reference to a reference to the devirtualized method call.
+      JMethod devirtualMethod = devirtualMethodByMethod.get(method);
+      ctx.replaceMe(new JsniMethodRef(
+          x.getSourceInfo(),
+          x.getIdent(),
+          devirtualMethod,
+          program.getJavaScriptObject()));
+    }
+
+    @Override
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
       if (!method.needsDynamicDispatch()) {
@@ -134,6 +170,45 @@ public class Devirtualizer {
       if (methodByDevirtualMethod.containsValue(x)) {
         return false;
       }
+      return true;
+    }
+
+    @Override
+    public boolean visit(JsniMethodBody x, Context ctx) {
+      final Map<String, JMethod> methodsByJsniReference = Maps.newHashMap();
+      for (JsniMethodRef ref : x.getJsniMethodRefs()) {
+        methodsByJsniReference.put(ref.getIdent(), ref.getTarget());
+      }
+
+      // Devirtualize method calls;
+      new JsModVisitor() {
+        @Override
+        public void endVisit(JsInvocation x, JsContext ctx) {
+          if (!(x.getQualifier() instanceof JsNameRef)) {
+            // If the invocation does not have a name as a qualifier (it might be an expression).
+            return;
+          }
+          JsNameRef ref = (JsNameRef) x.getQualifier();
+          if (!ref.isJsniReference()) {
+            // The invocation is not to a JSNI method.
+            return;
+          }
+
+          // Replace invocation to ctor with a new op.
+          JMethod method = methodsByJsniReference.get(ref.getIdent());
+          if (!mightNeedDevirtualization(method)) {
+            return;
+          }
+          // Devirtualize method by rewriting
+          // a.m(pars) ==> m_devirtual(a, pars);
+          ctx.replaceMe(
+              new JsInvocation(
+                  x.getSourceInfo(),
+                  new JsNameRef(ref.getSourceInfo(), ref.getIdent()),
+                  Iterables.concat(Collections.singleton(ref.getQualifier()), x.getArguments())));
+          return;
+        }
+      }.accept(x.getFunc());
       return true;
     }
 

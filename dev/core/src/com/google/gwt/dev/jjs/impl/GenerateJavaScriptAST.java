@@ -1507,15 +1507,15 @@ public class GenerateJavaScriptAST {
 
     @Override
     public JsFunction transformJsniMethodBody(JsniMethodBody jsniMethodBody) {
-      final Map<String, JNode> jsniMap = Maps.newHashMap();
+      final Map<String, JNode> nodeByJsniReference = Maps.newHashMap();
       for (JsniClassLiteral ref : jsniMethodBody.getClassRefs()) {
-        jsniMap.put(ref.getIdent(), ref.getField());
+        nodeByJsniReference.put(ref.getIdent(), ref.getField());
       }
       for (JsniFieldRef ref : jsniMethodBody.getJsniFieldRefs()) {
-        jsniMap.put(ref.getIdent(), ref.getField());
+        nodeByJsniReference.put(ref.getIdent(), ref.getField());
       }
       for (JsniMethodRef ref : jsniMethodBody.getJsniMethodRefs()) {
-        jsniMap.put(ref.getIdent(), ref.getTarget());
+        nodeByJsniReference.put(ref.getIdent(), ref.getTarget());
       }
 
       final JsFunction function = jsniMethodBody.getFunc();
@@ -1548,7 +1548,7 @@ public class GenerateJavaScriptAST {
 
           // Replace invocation to ctor with a new op.
           String ident = ref.getIdent();
-          JNode node = jsniMap.get(ident);
+          JNode node = nodeByJsniReference.get(ident);
           assert node instanceof JConstructor;
           assert ref.getQualifier() == null;
           JsName jsName = names.get(node);
@@ -1566,7 +1566,7 @@ public class GenerateJavaScriptAST {
           }
 
           String ident = x.getIdent();
-          JNode node = jsniMap.get(ident);
+          JNode node = nodeByJsniReference.get(ident);
           assert (node != null);
           if (node instanceof JField) {
             JField field = (JField) node;

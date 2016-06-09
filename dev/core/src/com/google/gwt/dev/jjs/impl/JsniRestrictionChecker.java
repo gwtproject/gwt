@@ -22,9 +22,17 @@ import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodBody;
 import com.google.gwt.dev.jjs.ast.JProgram;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
 import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
+import com.google.gwt.dev.js.ast.JsContext;
+import com.google.gwt.dev.js.ast.JsExpression;
+import com.google.gwt.dev.js.ast.JsInvocation;
+import com.google.gwt.dev.js.ast.JsModVisitor;
+import com.google.gwt.dev.js.ast.JsNameRef;
+import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -34,7 +42,6 @@ public class JsniRestrictionChecker {
 
   public static void exec(final TreeLogger logger, final JProgram jprogram)
       throws UnableToCompleteException {
-
     final Set<JDeclaredType> typesRequiringTrampolineDispatch = Sets.newHashSet();
     for (JDeclaredType type : jprogram.getRepresentedAsNativeTypes()) {
       collectAllSuperTypes(type, typesRequiringTrampolineDispatch);
@@ -59,34 +66,77 @@ public class JsniRestrictionChecker {
         }
 
         @Override
-        public boolean visit(JsniMethodRef x, Context ctx) {
-          JMethod method = x.getTarget();
-          JDeclaredType enclosingType = method.getEnclosingType();
-
-          if (isNonStaticJsoClassDispatch(method, enclosingType)) {
-            logError(x, "Cannot call non-static method %s on an instance which is a "
-                + "subclass of JavaScriptObject. Only static method calls on JavaScriptObject "
-                + "subclasses are allowed in JSNI.",
-                getDescription(method));
-          } else if (isJsoInterface(enclosingType)) {
-            logError(x, "Cannot call method %s on an instance which might be a JavaScriptObject. "
-                + "Such a method call is only allowed in pure Java (non-JSNI) functions.",
-                getDescription(method));
-          } else if (jprogram.isRepresentedAsNativeJsPrimitive(enclosingType)
-              && !method.isStatic()
-              && !method.isConstructor()) {
-            logError(x, "Cannot call method %s. Instance methods on %s cannot be called from JSNI.",
-                getDescription(method),
-                getDescription(enclosingType));
-          } else if (typesRequiringTrampolineDispatch.contains(enclosingType)
-              && !method.isStatic()
-              && !method.isConstructor()) {
-            logWarning(x, "Unsafe call to method %s. Instance methods from %s should "
-                + "not be called on Boolean, Double, String, Array or JSO instances from JSNI.",
-                getDescription(method),
-                getDescription(enclosingType));
+        public boolean visit(final JsniMethodBody x, Context ctx) {
+          final JMethod currentJsniMethod = x.getMethod();
+          final Map<String, JsniMethodRef> methodsByJsniReference = Maps.newHashMap();
+          for (JsniMethodRef ref : x.getJsniMethodRefs()) {
+            methodsByJsniReference.put(ref.getIdent(), ref);
           }
-          return true;
+          if (methodsByJsniReference.isEmpty()) {
+            return false;
+          }
+
+          // Devirtualize method calls;
+          new JsModVisitor() {
+            @Override
+            public boolean visit(JsInvocation x, JsContext ctx) {
+              if (!(x.getQualifier() instanceof JsNameRef)) {
+                // If the invocation does not have a name as a qualifier (it might be an expression).
+                return true;
+              }
+              JsNameRef ref = (JsNameRef) x.getQualifier();
+              if (!ref.isJsniReference()) {
+                // The invocation is not to a JSNI method.
+                return true;
+              }
+
+              // Skip the method JsNameRef but check the qualifier.
+              JsExpression methodQualifier = ref.getQualifier();
+              if (methodQualifier != null) {
+                accept(methodQualifier);
+              }
+
+              return false;
+            }
+
+            @Override
+            public void endVisit(JsNameRef x, JsContext ctx) {
+              JsniMethodRef jsniMethodReference = methodsByJsniReference.get(x.getIdent());
+              if (jsniMethodReference != null) {
+                checkJsniMethodRef(jsniMethodReference);
+              }
+            }
+
+            public void checkJsniMethodRef(JsniMethodRef x) {
+              JMethod method = x.getTarget();
+              JDeclaredType enclosingType = method.getEnclosingType();
+
+              if (isNonStaticJsoClassDispatch(method, enclosingType)
+                  || isJsoInterface(enclosingType)) {
+                logError(x,
+                    "Method %s is implemented by a JSO and can only be used in calls "
+                        + "within a JSNI method body.",
+                    getDescription(method));
+              } else if (jprogram.isRepresentedAsNativeJsPrimitive(enclosingType)
+                  && !method.isStatic()
+                  && !method.isConstructor()) {
+                logError(x,
+                    "Method %s is implemented by devirtualized type %s JSO and can only be used in "
+                        + "calls within a JSNI method body.",
+                    getDescription(method),
+                    getDescription(enclosingType));
+              } else if (typesRequiringTrampolineDispatch.contains(enclosingType)
+                  && !method.isStatic()
+                  && !method.isConstructor()) {
+                logWarning(x, "Unsafe reference to method %s. Instance methods from %s should "
+                        + "not be called on Boolean, Double, String, Array or JSO instances "
+                    + "from  within a JSNI method body.",
+                    getDescription(method),
+                    getDescription(enclosingType));
+              }
+            }
+          }.accept(x.getFunc());
+          return false;
         }
       }
 

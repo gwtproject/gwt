@@ -36,11 +36,19 @@ import com.google.gwt.dev.jjs.ast.JReturnStatement;
 import com.google.gwt.dev.jjs.ast.JTypeOracle;
 import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.RuntimeConstants;
+import com.google.gwt.dev.jjs.ast.js.JsniMethodBody;
+import com.google.gwt.dev.jjs.ast.js.JsniMethodRef;
 import com.google.gwt.dev.jjs.impl.MakeCallsStatic.CreateStaticImplsVisitor;
 import com.google.gwt.dev.jjs.impl.MakeCallsStatic.StaticCallConverter;
+import com.google.gwt.dev.js.ast.JsContext;
+import com.google.gwt.dev.js.ast.JsInvocation;
+import com.google.gwt.dev.js.ast.JsModVisitor;
+import com.google.gwt.dev.js.ast.JsNameRef;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.List;
@@ -104,6 +112,23 @@ public class Devirtualizer {
     }
 
     @Override
+    public void endVisit(JsniMethodRef x, Context ctx) {
+      JMethod method = x.getTarget();
+      if (method == null || !mightNeedDevirtualization(method)) {
+        return;
+      }
+      ensureDevirtualVersionExists(method);
+
+      // Replace the jsni reference to a reference to the devirtualized method call.
+      JMethod devirtualMethod = devirtualMethodByMethod.get(method);
+      ctx.replaceMe(new JsniMethodRef(
+          x.getSourceInfo(),
+          x.getIdent(),
+          devirtualMethod,
+          program.getJavaScriptObject()));
+    }
+
+    @Override
     public void endVisit(JMethodCall x, Context ctx) {
       JMethod method = x.getTarget();
       if (!method.needsDynamicDispatch()) {
@@ -134,6 +159,45 @@ public class Devirtualizer {
       if (methodByDevirtualMethod.containsValue(x)) {
         return false;
       }
+      return true;
+    }
+
+    @Override
+    public boolean visit(JsniMethodBody x, Context ctx) {
+      final Map<String, JMethod> methodsByJsniReference = Maps.newHashMap();
+      for (JsniMethodRef ref : x.getJsniMethodRefs()) {
+        methodsByJsniReference.put(ref.getIdent(), ref.getTarget());
+      }
+
+      // Devirtualize method calls;
+      new JsModVisitor() {
+        @Override
+        public void endVisit(JsInvocation x, JsContext ctx) {
+          if (!(x.getQualifier() instanceof JsNameRef)) {
+            // If the invocation does not have a name as a qualifier (it might be an expression).
+            return;
+          }
+          JsNameRef ref = (JsNameRef) x.getQualifier();
+          if (!ref.isJsniReference()) {
+            // The invocation is not to a JSNI method.
+            return;
+          }
+
+          // Replace invocation to ctor with a new op.
+          JMethod method = methodsByJsniReference.get(ref.getIdent());
+          if (method == null || !mightNeedDevirtualization(method)) {
+            return;
+          }
+          // Devirtualize method by rewriting
+          // a.m(pars) ==> m_devirtual(a, pars);
+          ctx.replaceMe(
+              new JsInvocation(
+                  x.getSourceInfo(),
+                  new JsNameRef(ref.getSourceInfo(), ref.getIdent()),
+                  Iterables.concat(Collections.singleton(ref.getQualifier()), x.getArguments())));
+          return;
+        }
+      }.accept(x.getFunc());
       return true;
     }
 

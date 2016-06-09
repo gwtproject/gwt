@@ -18,6 +18,7 @@ import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.jjs.HasSourceInfo;
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.JAbstractMethodBody;
 import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JInterfaceType;
 import com.google.gwt.dev.jjs.ast.JMethod;
@@ -32,113 +33,113 @@ import java.util.Set;
 /**
  * Checks and throws errors for invalid JSNI constructs.
  */
-public class JsniRestrictionChecker extends JVisitor {
+public class JsniRestrictionChecker {
 
   public static void exec(TreeLogger logger, JProgram jprogram) throws UnableToCompleteException {
-    JsniRestrictionChecker jsniRestrictionChecker = new JsniRestrictionChecker(logger, jprogram);
-    jsniRestrictionChecker.accept(jprogram);
-    if (jsniRestrictionChecker.hasErrors) {
+    boolean success = new Checker(logger, jprogram).checkProgram();;
+    if (!success) {
       throw new UnableToCompleteException();
     }
   }
 
-  private JMethod currentJsniMethod;
-  private final JProgram jprogram;
-  private final Set<JDeclaredType> typesRequiringTrampolineDispatch;
-  private TreeLogger logger;
-  private boolean hasErrors;
+  public static class Checker extends AbstractRestrictionChecker {
+    private JMethod currentJsniMethod;
+    private final JProgram jprogram;
+    private final Set<JDeclaredType> typesRequiringTrampolineDispatch;
+    private TreeLogger logger;
 
-  public JsniRestrictionChecker(TreeLogger logger, JProgram jprogram) {
-    this.logger = logger;
-    this.jprogram = jprogram;
-    this.typesRequiringTrampolineDispatch = Sets.newHashSet();
-    for (JDeclaredType type : jprogram.getRepresentedAsNativeTypes()) {
-      collectAllSuperTypes(type , typesRequiringTrampolineDispatch);
+    public Checker(TreeLogger logger,  JProgram jprogram) {
+      this.logger = logger;
+      this.jprogram = jprogram;
+      this.typesRequiringTrampolineDispatch = Sets.newHashSet();
+      for (JDeclaredType type : jprogram.getRepresentedAsNativeTypes()) {
+        collectAllSuperTypes(type, typesRequiringTrampolineDispatch);
+      }
     }
-  }
 
-  private void collectAllSuperTypes(JDeclaredType type,  Set<JDeclaredType> allSuperTypes) {
-    if (type.getSuperClass() != null) {
-      allSuperTypes.add(type.getSuperClass());
-      collectAllSuperTypes(type.getSuperClass(), allSuperTypes);
+    private void collectAllSuperTypes(JDeclaredType type, Set<JDeclaredType> allSuperTypes) {
+      if (type.getSuperClass() != null) {
+        allSuperTypes.add(type.getSuperClass());
+        collectAllSuperTypes(type.getSuperClass(), allSuperTypes);
+      }
+      for (JInterfaceType interfaceType : type.getImplements()) {
+        allSuperTypes.add(interfaceType);
+        collectAllSuperTypes(interfaceType, allSuperTypes);
+      }
     }
-    for (JInterfaceType interfaceType : type.getImplements()) {
-      allSuperTypes.add(interfaceType);
-      collectAllSuperTypes(interfaceType, allSuperTypes);
+
+    public boolean checkProgram() {
+      JsniRestrictionCheckerVisitor jsniRestrictionChecker =
+          new JsniRestrictionCheckerVisitor(logger, jprogram);
+      jsniRestrictionChecker.accept(jprogram);
+
+      boolean hasErrors = reportErrorsAndWarnings(logger);
+      return !hasErrors;
     }
-  }
 
-  @Override
-  public boolean visit(JDeclaredType x, Context ctx) {
-    TreeLogger currentLogger = this.logger;
-    this.logger = this.logger.branch(Type.INFO, "Errors in " + x.getSourceInfo().getFileName());
-    accept(x.getMethods());
-    this.logger = currentLogger;
-    return false;
-  }
 
-  @Override
-  public boolean visit(JsniMethodBody x, Context ctx) {
-    currentJsniMethod = x.getMethod();
-    return true;
-  }
+      public class JsniRestrictionCheckerVisitor extends JVisitor {
 
-  @Override
-  public boolean visit(JsniMethodRef x, Context ctx) {
-    JMethod calledMethod = x.getTarget();
-    JDeclaredType enclosingTypeOfCalledMethod = calledMethod.getEnclosingType();
+      public JsniRestrictionCheckerVisitor(TreeLogger logger, JProgram jprogram) {
+      }
 
-    if (isNonStaticJsoClassDispatch(calledMethod, enclosingTypeOfCalledMethod)) {
-      logError(x, "JSNI method %s calls non-static method %s on an instance which is a "
-          + "subclass of JavaScriptObject. Only static method calls on JavaScriptObject subclasses "
-          + "are allowed in JSNI.",
-          currentJsniMethod.getQualifiedName(),
-          calledMethod.getQualifiedName());
-    } else if (isJsoInterface(enclosingTypeOfCalledMethod)) {
-      logError(x, "JSNI method %s calls method %s on an instance which might be a "
-          + "JavaScriptObject. Such a method call is only allowed in pure Java (non-JSNI) "
-          + "functions.",
-          currentJsniMethod.getQualifiedName(),
-          calledMethod.getQualifiedName());
-    } else if (jprogram.isRepresentedAsNativeJsPrimitive(enclosingTypeOfCalledMethod)
-        && !calledMethod.isStatic()
-        && !calledMethod.isConstructor()) {
-      logError(x, "JSNI method %s calls method %s. Instance methods on %s "
-          + "cannot be called from JSNI.",
-          currentJsniMethod.getQualifiedName(),
-          calledMethod.getQualifiedName(),
-          enclosingTypeOfCalledMethod.getName());
-    } else if (typesRequiringTrampolineDispatch.contains(enclosingTypeOfCalledMethod)
-        && !calledMethod.isStatic()
-        && !calledMethod.isConstructor()) {
-      log(x, Type.WARN, "JSNI method %s calls method %s. Instance methods from %s should "
-          + "not be called on Boolean, Double, String, Array or JSO instances from JSNI.",
-          currentJsniMethod.getQualifiedName(),
-          calledMethod.getQualifiedName(),
-          enclosingTypeOfCalledMethod.getName());
+      @Override
+      public boolean visit(JAbstractMethodBody x, Context ctx) {
+        // Skip non jsni methods.
+        return false;
+      }
+
+      @Override
+      public boolean visit(JsniMethodBody x, Context ctx) {
+        currentJsniMethod = x.getMethod();
+        return true;
+      }
+
+      @Override
+      public boolean visit(JsniMethodRef x, Context ctx) {
+        JMethod calledMethod = x.getTarget();
+        JDeclaredType enclosingTypeOfCalledMethod = calledMethod.getEnclosingType();
+
+        if (isNonStaticJsoClassDispatch(calledMethod, enclosingTypeOfCalledMethod)) {
+          logError(x, "JSNI method %s calls non-static method %s on an instance which is a "
+                  + "subclass of JavaScriptObject. Only static method calls on JavaScriptObject subclasses "
+                  + "are allowed in JSNI.",
+              currentJsniMethod.getQualifiedName(),
+              calledMethod.getQualifiedName());
+        } else if (isJsoInterface(enclosingTypeOfCalledMethod)) {
+          logError(x, "JSNI method %s calls method %s on an instance which might be a "
+                  + "JavaScriptObject. Such a method call is only allowed in pure Java (non-JSNI) "
+                  + "functions.",
+              currentJsniMethod.getQualifiedName(),
+              calledMethod.getQualifiedName());
+        } else if (jprogram.isRepresentedAsNativeJsPrimitive(enclosingTypeOfCalledMethod)
+            && !calledMethod.isStatic()
+            && !calledMethod.isConstructor()) {
+          logError(x, "JSNI method %s calls method %s. Instance methods on %s "
+                  + "cannot be called from JSNI.",
+              currentJsniMethod.getQualifiedName(),
+              calledMethod.getQualifiedName(),
+              enclosingTypeOfCalledMethod.getName());
+        } else if (typesRequiringTrampolineDispatch.contains(enclosingTypeOfCalledMethod)
+            && !calledMethod.isStatic()
+            && !calledMethod.isConstructor()) {
+          logWarning(x, "JSNI method %s calls method %s. Instance methods from %s should "
+                  + "not be called on Boolean, Double, String, Array or JSO instances from JSNI.",
+              currentJsniMethod.getQualifiedName(),
+              calledMethod.getQualifiedName(),
+              enclosingTypeOfCalledMethod.getName());
+        }
+        return true;
+      }
+
+      private boolean isJsoInterface(JDeclaredType type) {
+        return jprogram.typeOracle.isSingleJsoImpl(type)
+            || jprogram.typeOracle.isDualJsoInterface(type);
+      }
+
+      private boolean isNonStaticJsoClassDispatch(JMethod method, JDeclaredType enclosingType) {
+        return !method.isStatic() && enclosingType.isJsoType();
+      }
     }
-    return true;
-  }
-
-  private void log(HasSourceInfo hasSourceInfo, Type type, String format, Object... args) {
-    logger.log(type, String.format(
-        String.format("Line %d: %s",
-            hasSourceInfo.getSourceInfo().getStartLine(),
-            format),
-        args));
-    hasErrors |= type == Type.ERROR;
-  }
-
-  private void logError(HasSourceInfo hasSourceInfo, String format, Object... args) {
-    log(hasSourceInfo, Type.ERROR, format, args);
-  }
-
-  private boolean isJsoInterface(JDeclaredType type) {
-    return jprogram.typeOracle.isSingleJsoImpl(type)
-        || jprogram.typeOracle.isDualJsoInterface(type);
-  }
-
-  private boolean isNonStaticJsoClassDispatch(JMethod method, JDeclaredType enclosingType) {
-    return !method.isStatic() && enclosingType.isJsoType();
   }
 }

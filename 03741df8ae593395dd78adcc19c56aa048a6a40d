@@ -69,6 +69,24 @@
       "revId": "03741df8ae593395dd78adcc19c56aa048a6a40d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_af6c96bb",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1825,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-10T14:49:12Z",
+      "side": 0,
+      "message": "All the unit test code in DeadCodeEliminationTest is written without this assumption because (int most cases) the devirtualizer is not run.",
+      "parentUuid": "0ffc242a_59f04404",
+      "revId": "03741df8ae593395dd78adcc19c56aa048a6a40d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ffc242a_6f432e4d",
+        "filename": "user/super/com/google/gwt/emul/java/util/Random.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-10T13:55:53Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027java.util.function.DoubleConsumer\u0027 import.",
+      "revId": "18ef4c902d94a571571077ce818603688165ed89",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

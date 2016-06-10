@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ffc242a_14772155",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-10T05:51:49Z",
+      "side": 1,
+      "message": "JsniMethodRef is a mapping from a string containing the jsni reference (@j.l.C::m()). That reference appears in the JS AST as a JsNameRef.\n\nSo the process does two things. Replaces the mapping keeping the same key here.\n\nAnd down when visiting JsniMethodBody it replaces the Js AST invocation node a.@j.l.c::m()(pars); with @j.l.c::m()(a, pars).",
+      "range": {
+        "startLine": 124,
+        "startChar": 24,
+        "endLine": 124,
+        "endChar": 37
+      },
+      "revId": "782fbe9c1e4e3b7408a54705ea801a6821f34353",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

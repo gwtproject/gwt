@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ffc242a_59a28414",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1828,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-06-10T01:11:07Z",
+      "side": 1,
+      "message": "Only optimize when it is know to be not null at runtime.",
+      "range": {
+        "startLine": 1828,
+        "startChar": 13,
+        "endLine": 1828,
+        "endChar": 43
+      },
+      "revId": "f5aada5ff4ec1dd4ce3ab85ec570c3a3fcea66f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_19a4fc1b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1887,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-06-10T01:11:07Z",
+      "side": 1,
+      "message": "I rewrote the logic here, to make it a bit less confusing. Will get another take at this.",
+      "range": {
+        "startLine": 1837,
+        "startChar": 0,
+        "endLine": 1887,
+        "endChar": 5
+      },
+      "revId": "f5aada5ff4ec1dd4ce3ab85ec570c3a3fcea66f0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,52 @@
       "revId": "7637fa428b46316b984e55a81259501429d45026",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cfa12c60_3fc783a1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1836,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-06-10T14:52:01Z",
+      "side": 1,
+      "message": "Probably? If can be null, then we should not replace it, I guess",
+      "range": {
+        "startLine": 1836,
+        "startChar": 31,
+        "endLine": 1836,
+        "endChar": 52
+      },
+      "revId": "7637fa428b46316b984e55a81259501429d45026",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f98a432_c1aec444",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1873,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-06-10T14:52:01Z",
+      "side": 1,
+      "message": "invoke",
+      "range": {
+        "startLine": 1873,
+        "startChar": 31,
+        "endLine": 1873,
+        "endChar": 37
+      },
+      "revId": "7637fa428b46316b984e55a81259501429d45026",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ffc242a_b4662da9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-10T05:47:10Z",
+      "side": 1,
+      "message": "Only change the error reporting and made the error message formated consistent with the JsInteropRestrictionChecker reusing all the logging logic of the former. The diff of Jsni..Test will give you how the formats are different. Other than that the checking logic is exactly the same as before.",
+      "parentUuid": "0ffc242a_799d40d2",
+      "revId": "20dd0e4f6174cdd352e5d20ff5b370c001214955",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ffc242a_3960d8b8",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsniRestrictionChecker.java",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2016-06-10T01:02:14Z",
       "side": 1,
       "message": "Why is this inner class and inconsistent with the other? Also because you heavily modified the file; it is much harder to review :(",
+      "revId": "20dd0e4f6174cdd352e5d20ff5b370c001214955",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_d459b9ea",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsniRestrictionChecker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-10T05:47:10Z",
+      "side": 1,
+      "message": "Yes. Sorry about that. The whole patch just fixes an issue with the error reporting. I had a misconception of log.branch  (I though it would emit the error message if there where submessages) so the previous patch was emitting \"Errors in Blah\"  for every class that had JSNI.\n\nSo I decided to reuse the login in JsInteropRestrictionChecker and that not only solves the issue but also improves the error logging.\n\nI could make JsniRestrictionChecker a subclass itself to make it consistent with the other (I sort of dislike the pattern where the class has a static entry point that creates an instance of itself that is not exposed.)",
+      "parentUuid": "0ffc242a_3960d8b8",
       "revId": "20dd0e4f6174cdd352e5d20ff5b370c001214955",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

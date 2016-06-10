@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f2734f4_eaa6c7d3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1840,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-10T18:38:06Z",
+      "side": 1,
+      "message": "BTW I wasn\u0027t against the idea to remove this logic.",
+      "range": {
+        "startLine": 1831,
+        "startChar": 2,
+        "endLine": 1840,
+        "endChar": 7
+      },
+      "revId": "b0eb499c781b74add5b101963acce7598a7da345",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f2734f4_adc1893b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DeadCodeElimination.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1892,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-10T18:38:06Z",
+      "side": 1,
+      "message": "nit: maybe change order, Class enclosingClass, String name",
+      "revId": "b0eb499c781b74add5b101963acce7598a7da345",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

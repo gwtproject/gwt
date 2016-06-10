@@ -34,8 +34,17 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
+
+import java.util.function.DoubleConsumer;
+import java.util.function.IntConsumer;
+import java.util.function.LongConsumer;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.StreamSupport;
 
 import javaemul.internal.DateUtil;
 
@@ -286,6 +295,78 @@ public class Random {
     setSeed((int) ((seed >> 24) & 0xffffff), (int) (seed & 0xffffff));
   }
 
+  public IntStream ints() {
+    return ints(Long.MAX_VALUE);
+  }
+
+  public IntStream ints(int origin, int bound) {
+    return ints(Long.MAX_VALUE, origin, bound);
+  }
+
+  public IntStream ints(long streamSize) {
+    checkArgument(streamSize >= 0, "streamSize < 0");
+    return ints0(streamSize, 0, 0);
+  }
+
+  public IntStream ints(long streamSize, int origin, int bound) {
+    checkArgument(streamSize >= 0, "streamSize < 0");
+    checkArgument(origin < bound, "origin >= bound");
+    return ints0(streamSize, origin, bound);
+  }
+
+  private IntStream ints0(long streamSize, int origin, int bound) {
+    RandomIntsSpliterator spliterator = new RandomIntsSpliterator(streamSize, origin, bound);
+    return StreamSupport.intStream(spliterator, false);
+  }
+
+  public DoubleStream doubles() {
+    return doubles(Long.MAX_VALUE);
+  }
+
+  public DoubleStream doubles(double origin, double bound) {
+    return doubles(Long.MAX_VALUE, origin, bound);
+  }
+
+  public DoubleStream doubles(long streamSize) {
+    checkArgument(streamSize >= 0, "streamSize < 0");
+    return doubles0(streamSize, 0, 0);
+  }
+
+  public DoubleStream doubles(long streamSize, double origin, double bound) {
+    checkArgument(streamSize >= 0, "streamSize < 0");
+    checkArgument(origin < bound, "origin >= bound");
+    return doubles0(streamSize, origin, bound);
+  }
+
+  private DoubleStream doubles0(long streamSize, double origin, double bound) {
+    RandomDoublesSpliterator spliterator = new RandomDoublesSpliterator(streamSize, origin, bound);
+    return StreamSupport.doubleStream(spliterator, false);
+  }
+
+  public LongStream longs() {
+    return longs(Long.MAX_VALUE);
+  }
+
+  public LongStream longs(long origin, long bound) {
+    return longs(Long.MAX_VALUE, origin, bound);
+  }
+
+  public LongStream longs(long streamSize) {
+    checkArgument(streamSize >= 0, "streamSize < 0");
+    return longs0(streamSize, 0, 0);
+  }
+
+  public LongStream longs(long streamSize, long origin, long bound) {
+    checkArgument(streamSize >= 0, "streamSize < 0");
+    checkArgument(origin < bound, "origin >= bound");
+    return longs0(streamSize, origin, bound);
+  }
+
+  private LongStream longs0(long streamSize, long origin, long bound) {
+    RandomLongsSpliterator spliterator = new RandomLongsSpliterator(streamSize, origin, bound);
+    return StreamSupport.longStream(spliterator, false);
+  }
+
   /**
    * Returns a pseudo-random uniformly distributed {@code int} value of the
    * number of bits specified by the argument {@code bits} as described by
@@ -340,5 +421,154 @@ public class Random {
     this.seedhi = seedhi ^ 0x5de;
     this.seedlo = seedlo ^ 0xece66d;
     haveNextNextGaussian = false;
+  }
+
+  private class RandomDoublesSpliterator implements Spliterator.OfDouble {
+    private final long streamSize;
+    private final double origin;
+    private final double bound;
+    private int i;
+
+    RandomDoublesSpliterator(long streamSize, double origin, double bound) {
+      this.streamSize = streamSize;
+      this.origin = origin;
+      this.bound = bound;
+    }
+
+    @Override
+    public OfDouble trySplit() {
+      return null;
+    }
+
+    @Override
+    public long estimateSize() {
+      return streamSize - i;
+    }
+
+    @Override
+    public int characteristics() {
+      return Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.IMMUTABLE | Spliterator.NONNULL;
+    }
+
+    @Override
+    public boolean tryAdvance(DoubleConsumer action) {
+      checkNotNull(action);
+      if (i < streamSize) {
+        i++;
+        action.accept(next());
+        return true;
+      }
+      return false;
+    }
+
+    private double next() {
+      if (origin == bound) {
+        return nextDouble();
+      }
+
+      double n = origin + nextDouble() * (bound - origin);
+      if (n >= bound) {
+        n = bound - Double.MIN_VALUE;
+      }
+      return n;
+    }
+  }
+
+  private class RandomIntsSpliterator implements Spliterator.OfInt {
+    private final long streamSize;
+    private final int origin;
+    private final int bound;
+    private int i;
+
+    RandomIntsSpliterator(long streamSize, int origin, int bound) {
+      this.streamSize = streamSize;
+      this.origin = origin;
+      this.bound = bound;
+    }
+
+    @Override
+    public OfInt trySplit() {
+      return null;
+    }
+
+    @Override
+    public long estimateSize() {
+      return streamSize - i;
+    }
+
+    @Override
+    public int characteristics() {
+      return Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.IMMUTABLE | Spliterator.NONNULL;
+    }
+
+    @Override
+    public boolean tryAdvance(IntConsumer action) {
+      checkNotNull(action);
+      if (i < streamSize) {
+        i++;
+        action.accept(next());
+        return true;
+      }
+      return false;
+    }
+
+    private int next() {
+      if (origin == bound) {
+        return nextInt();
+      } else {
+        return origin + nextInt(bound - origin);
+      }
+    }
+  }
+
+  private class RandomLongsSpliterator implements Spliterator.OfLong {
+    private final long streamSize;
+    private final long origin;
+    private final long bound;
+    private int i;
+
+    RandomLongsSpliterator(long streamSize, long origin, long bound) {
+      this.streamSize = streamSize;
+      this.origin = origin;
+      this.bound = bound;
+    }
+
+    @Override
+    public OfLong trySplit() {
+      return null;
+    }
+
+    @Override
+    public long estimateSize() {
+      return streamSize - i;
+    }
+
+    @Override
+    public int characteristics() {
+      return Spliterator.SIZED | Spliterator.SUBSIZED | Spliterator.IMMUTABLE | Spliterator.NONNULL;
+    }
+
+    @Override
+    public boolean tryAdvance(LongConsumer action) {
+      checkNotNull(action);
+      if (i < streamSize) {
+        i++;
+        action.accept(next());
+        return true;
+      }
+      return false;
+    }
+
+    private long next() {
+      if (origin == bound) {
+        return nextLong();
+      }
+
+      long n;
+      do {
+        n = nextLong();
+      } while (n < origin || n >= bound);
+      return n;
+    }
   }
 }

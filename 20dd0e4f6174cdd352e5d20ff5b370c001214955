@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ffc242a_799d40d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-10T01:02:14Z",
+      "side": 1,
+      "message": "As you heavily modified I don\u0027t even know what you have fixed here. Did you fix a test? Did you change error messages?",
+      "revId": "20dd0e4f6174cdd352e5d20ff5b370c001214955",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ffc242a_3960d8b8",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsniRestrictionChecker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-10T01:02:14Z",
+      "side": 1,
+      "message": "Why is this inner class and inconsistent with the other? Also because you heavily modified the file; it is much harder to review :(",
+      "revId": "20dd0e4f6174cdd352e5d20ff5b370c001214955",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

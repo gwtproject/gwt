@@ -15,9 +15,17 @@
  */
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkElement;
+
 import javaemul.internal.JsUtils;
 
 import jsinterop.annotations.JsMethod;
+
+import java.util.PrimitiveIterator;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
 
 /**
  * Abstracts the notion of a sequence of characters.
@@ -31,6 +39,25 @@ public interface CharSequence {
 
   @Override
   String toString();
+
+  default IntStream chars() {
+    PrimitiveIterator.OfInt it = new PrimitiveIterator.OfInt() {
+      int cursor;
+
+      @Override
+      public int nextInt() {
+        checkElement(hasNext());
+        return charAt(cursor++);
+      }
+
+      @Override
+      public boolean hasNext() {
+        return cursor < length();
+      }
+    };
+    Spliterator.OfInt spliterator = Spliterators.spliterator(it, length(), Spliterator.ORDERED);
+    return  StreamSupport.intStream(spliterator, false);
+  }
 
   // CHECKSTYLE_OFF: Utility methods.
   @JsMethod

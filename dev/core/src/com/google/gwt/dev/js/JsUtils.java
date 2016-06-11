@@ -230,6 +230,8 @@ public class JsUtils {
       JMethod method, JsExpression instance, JsNameRef reference, List<JsExpression> args)  {
 
     CallStyle callStyle = invocationStyle == InvocationStyle.SUPER
+        // JsFunctions that are accessed through an instance field need to be called using CALL to
+        // avoid accidentally binding "this" to the field' s enclosing class. See bug #9328.
         || invocationStyle == InvocationStyle.FUNCTION
             && instance instanceof JsNameRef
             && ((JsNameRef) instance).getQualifier() != null
@@ -256,7 +258,8 @@ public class JsUtils {
     }
 
     JsExpression lastArgument = Iterables.getLast(args, null);
-    boolean needsVarargsApply = method.isJsMethodVarargs() && !(lastArgument instanceof JsArrayLiteral);
+    boolean needsVarargsApply =
+        method.isJsMethodVarargs() && !(lastArgument instanceof JsArrayLiteral);
     List<JsExpression> nonVarargArguments = args;
     JsExpression varargArgument = null;
     if (method.isJsMethodVarargs()) {
@@ -364,7 +367,7 @@ public class JsUtils {
     }
   }
 
-  public static JsExpression createSuperOrCallInvocationOrPropertyAccess(
+  public static JsExpression createCallInvocationOrSuperPropertyAccess(
       SourceInfo sourceInfo, InvocationDescriptor invocationDescriptor) {
     assert invocationDescriptor.callStyle == CallStyle.USING_CALL;
     switch (invocationDescriptor.targetType) {
@@ -377,20 +380,26 @@ public class JsUtils {
         // TODO(rluble): implement super getters.
         throw new UnsupportedOperationException("Super.getter is unsupported");
       case FUNCTION:
-        return new JsInvocation(sourceInfo,
-            createQualifiedNameRef(sourceInfo, invocationDescriptor.instance, "call"),
-            Iterables.concat(Collections.singleton(JsNullLiteral.INSTANCE),
-                invocationDescriptor.nonVarargsArguments));
+        // instance.call(null, p1, ..., pn)
+        return createCallInvocation(sourceInfo, invocationDescriptor.instance,
+            JsNullLiteral.INSTANCE, invocationDescriptor.nonVarargsArguments);
       case METHOD:
-        // q.name.call(instance, p1, ..., pn)
-        return new JsInvocation(sourceInfo,
-            createQualifiedNameRef(sourceInfo, invocationDescriptor.reference, "call"),
-            Iterables.concat(Collections.singleton(invocationDescriptor.instance),
-                invocationDescriptor.nonVarargsArguments));
+        // q.methodname.call(instance, p1, ..., pn)
+        return createCallInvocation(sourceInfo, invocationDescriptor.reference,
+            invocationDescriptor.instance, invocationDescriptor.nonVarargsArguments);
       default:
         throw new AssertionError("Target type " + invocationDescriptor.targetType
             + " invalid for super invocation");
     }
+  }
+
+  /**
+   * Synthesize an invocation using .call().
+   */
+  private static JsInvocation createCallInvocation(SourceInfo sourceInfo, JsExpression target,
+      JsExpression instance, Iterable<JsExpression> arguments) {
+    return new JsInvocation(sourceInfo, createQualifiedNameRef(sourceInfo, target, "call"),
+        Iterables.concat(Collections.singleton(instance),arguments));
   }
 
   /**
@@ -409,7 +418,7 @@ public class JsUtils {
       case DIRECT:
         return createDirectInvocationOrPropertyAccess(sourceInfo, invocationDescriptor);
       case USING_CALL:
-        return createSuperOrCallInvocationOrPropertyAccess(sourceInfo, invocationDescriptor);
+        return createCallInvocationOrSuperPropertyAccess(sourceInfo, invocationDescriptor);
       case USING_APPLY_FOR_VARARGS_ARRAY:
         return createApplyInvocation(sourceInfo, invocationDescriptor);
     }

@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af6dd8b5_53a564b6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AbstractRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-06-12T12:21:34Z",
+      "side": 1,
+      "message": "nit: should it be 2016? (do we really care?)",
+      "revId": "6b75f0ee0e539ca5d87040d799b21e4cf6bee22b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f798473_f6958049",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AbstractRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-06-12T12:21:34Z",
+      "side": 1,
+      "message": "nit: safe\n\n(even though it\u0027s simply moved from the other class, now would be a good time to fix it)",
+      "range": {
+        "startLine": 56,
+        "startChar": 64,
+        "endLine": 56,
+        "endChar": 68
+      },
+      "revId": "6b75f0ee0e539ca5d87040d799b21e4cf6bee22b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf720c91_149bd47e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AbstractRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-06-12T12:21:34Z",
+      "side": 1,
+      "message": "Iterables.getFirst(method.getOverriddenMethods())",
+      "range": {
+        "startLine": 59,
+        "startChar": 32,
+        "endLine": 59,
+        "endChar": 79
+      },
+      "revId": "6b75f0ee0e539ca5d87040d799b21e4cf6bee22b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

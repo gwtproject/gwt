@@ -33,6 +33,23 @@
       "revId": "a4390fd116e09ac19828715ba23dfd3a8d3de40e",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f2d3c76_08374745",
+        "filename": "distro-source/core/src/about.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-06-13T09:14:10Z",
+      "side": 1,
+      "message": "nit: maybe we could just say\n\n Visit http://www.gwtproject.org",
+      "revId": "a4390fd116e09ac19828715ba23dfd3a8d3de40e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

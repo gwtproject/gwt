@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efeef035_91b6ec3c",
+        "filename": "dev/core/src/com/google/gwt/dev/js/JsUtils.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-13T19:52:06Z",
+      "side": 1,
+      "message": "field\u0027s instance qualifies",
+      "range": {
+        "startLine": 234,
+        "startChar": 52,
+        "endLine": 234,
+        "endChar": 76
+      },
+      "revId": "42d548ab97cd0e792dec9d848570a604a2da2d73",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

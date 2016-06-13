@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f44de986_850b021f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/Devirtualizer.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5001
+      },
+      "writtenOn": "2016-06-13T21:32:13Z",
+      "side": 1,
+      "message": "It\u0027s tough to understand what this is doing. Isn\u0027t \u0027ref\u0027 the identifier of the original function (e.g. \u0027m\u0027). Isn\u0027t this constructing m(a, pars) and not m_devirtual(a, pars)? I suppose the endVisit(JsniMethodRef) is rewriting the qualifier before this body is visited, but my memory of whether endVisit(JsniMethodRef) is visited before visit(JsniMethodBody) is rusty.\n\nMaybe add a comment explaining that \u0027ref\u0027 is now pointing at devirtual because it was visited first.",
+      "range": {
+        "startLine": 197,
+        "startChar": 65,
+        "endLine": 197,
+        "endChar": 69
+      },
+      "revId": "ff3f303e2af5319cfdd07202836ee773aa6c1f7f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "efeef035_004f2852",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AbstractRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-13T02:51:41Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "af6dd8b5_53a564b6",
+      "revId": "6b75f0ee0e539ca5d87040d799b21e4cf6bee22b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f798473_f6958049",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AbstractRestrictionChecker.java",
         "patchSetId": 6
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "efeef035_e0531cfc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AbstractRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-13T02:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f798473_f6958049",
+      "range": {
+        "startLine": 56,
+        "startChar": 64,
+        "endLine": 56,
+        "endChar": 68
+      },
+      "revId": "6b75f0ee0e539ca5d87040d799b21e4cf6bee22b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf720c91_149bd47e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AbstractRestrictionChecker.java",
         "patchSetId": 6
@@ -53,6 +95,30 @@
       "writtenOn": "2016-06-12T12:21:34Z",
       "side": 1,
       "message": "Iterables.getFirst(method.getOverriddenMethods())",
+      "range": {
+        "startLine": 59,
+        "startChar": 32,
+        "endLine": 59,
+        "endChar": 79
+      },
+      "revId": "6b75f0ee0e539ca5d87040d799b21e4cf6bee22b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efeef035_6040ac1b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AbstractRestrictionChecker.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-13T02:51:41Z",
+      "side": 1,
+      "message": "Done. Although there is no 1 parameter Iterables.getFirst(), a default value must always be specified.",
+      "parentUuid": "cf720c91_149bd47e",
       "range": {
         "startLine": 59,
         "startChar": 32,

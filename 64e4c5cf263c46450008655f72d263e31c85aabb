@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efeef035_661f24ff",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-13T18:15:25Z",
+      "side": 1,
+      "message": "[error] Unused import - jsinterop.annotations.JsProperty.",
+      "revId": "64e4c5cf263c46450008655f72d263e31c85aabb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efeef035_c6da7855",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-13T18:15:25Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "64e4c5cf263c46450008655f72d263e31c85aabb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efeef035_a6df6c43",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-13T18:15:25Z",
+      "side": 1,
+      "message": "[error] Missing a Javadoc comment.",
+      "revId": "64e4c5cf263c46450008655f72d263e31c85aabb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

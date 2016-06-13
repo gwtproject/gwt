@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "36ee69c7_4d9a9980",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-13T23:29:22Z",
+      "side": 1,
+      "message": "The passes are run in a loop, so TypeTightener will definitely see the changes made by RedundantCastRemoval. \n\nI am thinking on cases like\n\nA is a class that implements I\n\n    A a \u003d new A()\n    if (a instanceof I) {\n        ((I) a).m1();\n         A b \u003d a;\n         b.m();",
+      "parentUuid": "1c70a417_e44b7a15",
+      "range": {
+        "startLine": 1454,
+        "startChar": 0,
+        "endLine": 1456,
+        "endChar": 5
+      },
+      "revId": "b87963c1aaebb8b05277f58709450900ce224e5e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2bfb5b87_b29a7878",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JConditional.java",
         "patchSetId": 1

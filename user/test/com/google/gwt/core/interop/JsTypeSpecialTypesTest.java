@@ -41,10 +41,19 @@ public class JsTypeSpecialTypesTest extends GWTTestCase {
 
     assertNotNull((NativeArray) object);
     assertTrue(object instanceof NativeArray);
+    assertTrue(object instanceof NativeObject);
+    assertFalse(object instanceof NativeFunction);
+    assertFalse(object instanceof NativeString);
+    assertFalse(object instanceof NativeNumber);
 
     Object nativeArray = new NativeArray();
     assertNotNull((NativeArray[]) nativeArray);
     assertTrue(nativeArray instanceof NativeArray[]);
+    assertTrue(nativeArray instanceof NativeObject);
+    assertTrue(nativeArray instanceof NativeArray);
+    assertFalse(nativeArray instanceof NativeFunction);
+    assertFalse(nativeArray instanceof NativeString);
+    assertFalse(nativeArray instanceof NativeNumber);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Function")
@@ -65,9 +74,18 @@ public class JsTypeSpecialTypesTest extends GWTTestCase {
 
     assertNotNull((NativeFunction) object);
     assertTrue(object instanceof NativeFunction);
+    assertTrue(object instanceof NativeObject);
+    assertFalse(object instanceof NativeFunction);
+    assertFalse(object instanceof NativeString);
+    assertFalse(object instanceof NativeNumber);
 
     SomeFunctionalInterface nativeFunction = (SomeFunctionalInterface) new NativeFunction();
     assertTrue(nativeFunction instanceof SomeFunctionalInterface);
+    assertTrue(nativeFunction instanceof NativeObject);
+    assertFalse(nativeFunction instanceof NativeArray);
+    assertTrue(nativeFunction instanceof NativeFunction);
+    assertFalse(nativeFunction instanceof NativeString);
+    assertFalse(nativeFunction instanceof NativeNumber);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Number")
@@ -81,6 +99,10 @@ public class JsTypeSpecialTypesTest extends GWTTestCase {
 
     assertNotNull((NativeNumber) object);
     assertTrue(object instanceof NativeNumber);
+    assertFalse(object instanceof NativeObject);
+    assertFalse(object instanceof NativeFunction);
+    assertFalse(object instanceof NativeString);
+    assertFalse(object instanceof NativeArray);
 
     // new NativeString() returns a boxed JS number. Java Double object are only interchangeable
     // with unboxed JS numbers.
@@ -88,6 +110,11 @@ public class JsTypeSpecialTypesTest extends GWTTestCase {
     assertNotNull((Double) nativeNumber);
     assertTrue(nativeNumber instanceof Double);
     assertEquals(10.0, (Double) nativeNumber);
+    assertFalse(nativeNumber instanceof NativeObject);
+    assertFalse(nativeNumber instanceof NativeArray);
+    assertFalse(nativeNumber instanceof NativeFunction);
+    assertFalse(nativeNumber instanceof NativeString);
+    assertTrue(nativeNumber instanceof NativeNumber);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
@@ -101,6 +128,10 @@ public class JsTypeSpecialTypesTest extends GWTTestCase {
 
     assertNotNull((NativeString) object);
     assertTrue(object instanceof NativeString);
+    assertFalse(object instanceof NativeObject);
+    assertFalse(object instanceof NativeFunction);
+    assertFalse(object instanceof NativeArray);
+    assertFalse(object instanceof NativeNumber);
 
     // new NativeString() returns a boxed JS string. Java String objects are only interchangeable
     // with unboxed JS strings.
@@ -108,6 +139,11 @@ public class JsTypeSpecialTypesTest extends GWTTestCase {
     assertNotNull((String) nativeString);
     assertTrue(nativeString instanceof String);
     assertEquals("Hello", nativeString);
+    assertFalse(nativeString instanceof NativeObject);
+    assertFalse(nativeString instanceof NativeArray);
+    assertFalse(nativeString instanceof NativeFunction);
+    assertTrue(nativeString instanceof NativeString);
+    assertFalse(nativeString instanceof NativeNumber);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
@@ -119,9 +155,38 @@ public class JsTypeSpecialTypesTest extends GWTTestCase {
 
     assertNotNull((NativeObject) object);
     assertTrue(object instanceof NativeObject);
+    assertFalse(object instanceof NativeArray);
+    assertFalse(object instanceof NativeFunction);
+    assertFalse(object instanceof NativeString);
+    assertFalse(object instanceof NativeNumber);
 
     Object nativeObject = new NativeObject();
     assertNotNull((Object) nativeObject);
     assertTrue(nativeObject instanceof Object);
+    assertTrue(nativeObject instanceof NativeObject);
+    assertFalse(nativeObject instanceof NativeArray);
+    assertFalse(nativeObject instanceof NativeFunction);
+    assertFalse(nativeObject instanceof NativeString);
+    assertFalse(nativeObject instanceof NativeNumber);
+  }
+
+  private static native Object getUndefined() /*-{
+  }-*/;
+
+  public void testNullAndUndefined() {
+    Object object = null;
+
+    assertFalse(object instanceof NativeObject);
+    assertFalse(object instanceof NativeArray);
+    assertFalse(object instanceof NativeFunction);
+    assertFalse(object instanceof NativeString);
+    assertFalse(object instanceof NativeNumber);
+
+    object = getUndefined();
+    assertFalse(object instanceof NativeObject);
+    assertFalse(object instanceof NativeArray);
+    assertFalse(object instanceof NativeFunction);
+    assertFalse(object instanceof NativeString);
+    assertFalse(object instanceof NativeNumber);
   }
 }

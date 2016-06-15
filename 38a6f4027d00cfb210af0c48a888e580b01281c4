@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4fd45ea_3fb9a390",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AbstractRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-15T17:26:39Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.thirdparty.guava.common.collect.Lists.",
+      "revId": "38a6f4027d00cfb210af0c48a888e580b01281c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4fd45ea_1fb667a0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/AbstractRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-15T17:26:39Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.List.",
+      "revId": "38a6f4027d00cfb210af0c48a888e580b01281c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4fd45ea_7fb32bb0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-15T17:26:39Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "38a6f4027d00cfb210af0c48a888e580b01281c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

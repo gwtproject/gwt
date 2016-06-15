@@ -36,6 +36,29 @@
     },
     {
       "key": {
+        "uuid": "d4fd45ea_ff60db8e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-15T17:51:14Z",
+      "side": 1,
+      "message": "This is the error emitted by error-prone but maybe ours should be\n\nSuppress \"[unusable-by-js]\" warnings by adding an annotation ... to the corresponding member.",
+      "range": {
+        "startLine": 728,
+        "startChar": 10,
+        "endLine": 729,
+        "endChar": 50
+      },
+      "revId": "38a6f4027d00cfb210af0c48a888e580b01281c4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d4fd45ea_7fb32bb0",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 2

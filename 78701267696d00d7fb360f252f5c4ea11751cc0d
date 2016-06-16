@@ -16,6 +16,24 @@
       "revId": "78701267696d00d7fb360f252f5c4ea11751cc0d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "696200f0_0c4f377c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2006,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-16T22:31:28Z",
+      "side": 1,
+      "message": "IIRC these were introduced by closureFormatBlahMode.\n\nvia lookup (non closure mode) goes through the prototype table, the original implementation.\n\nthe other uses the namespace to access the prototype.",
+      "parentUuid": "696200f0_cc311f4e",
+      "revId": "78701267696d00d7fb360f252f5c4ea11751cc0d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

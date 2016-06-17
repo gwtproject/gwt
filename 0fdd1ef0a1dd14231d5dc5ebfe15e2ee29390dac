@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "696200f0_1d308349",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-06-17T05:01:43Z",
+      "side": 1,
+      "message": "Yes, but only if the types are instantiated. So if you implement a native type in Java then all its JsMembers will be retained if the type is instantiated. \n\nI think this is a reasonable behaviour and only affects native JsType subclasses and JsFunctions.\n\nI don\u0027t think it will have a negative effect in current applications.",
+      "parentUuid": "696200f0_525f0a5b",
+      "revId": "0fdd1ef0a1dd14231d5dc5ebfe15e2ee29390dac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "696200f0_d24ada97",
         "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
         "patchSetId": 6
@@ -30,6 +48,30 @@
       "writtenOn": "2016-06-17T01:44:04Z",
       "side": 1,
       "message": "nit: don\u0027t need a cast here; you can change the return type instead.",
+      "range": {
+        "startLine": 369,
+        "startChar": 34,
+        "endLine": 369,
+        "endChar": 52
+      },
+      "revId": "0fdd1ef0a1dd14231d5dc5ebfe15e2ee29390dac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "696200f0_fd348f3f",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-06-17T05:01:43Z",
+      "side": 1,
+      "message": "True. will fix.",
+      "parentUuid": "696200f0_d24ada97",
       "range": {
         "startLine": 369,
         "startChar": 34,

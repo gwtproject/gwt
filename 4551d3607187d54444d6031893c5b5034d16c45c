@@ -22,6 +22,30 @@
       "revId": "4551d3607187d54444d6031893c5b5034d16c45c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9c0b017_4d08b97c",
+        "filename": "user/super/com/google/gwt/emul/java/util/StringJoiner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-06-17T08:56:30Z",
+      "side": 0,
+      "message": "The general policy is that we don\u0027t care that exactly NPE will be thrown in compiled code because sane code should not catch NPE anyways. Its only important that the code fails and does not do anything bad if the check is absent. So in most cases NPE will become JSE in compiled code. Critical NPE checks are only used if debugging becomes difficult, e.g. in functional/stream code which might wrap null values in one place but get executed later and cause NPE in a totally different place.\n\nTests check for both exceptions because of legacy DevMode vs. compiled mode.",
+      "parentUuid": "696200f0_1ddc03eb",
+      "range": {
+        "startLine": 45,
+        "startChar": 22,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "4551d3607187d54444d6031893c5b5034d16c45c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

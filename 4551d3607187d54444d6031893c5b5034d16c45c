@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "696200f0_1ddc03eb",
+        "filename": "user/super/com/google/gwt/emul/java/util/StringJoiner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-06-17T05:23:27Z",
+      "side": 0,
+      "message": "I think the issue is here is that if you remove those checks the exception thrown will be JavaScriptException and not NPE as the StringJoinerTest expects.\n\nI am personally ok with removing these and changing the tests but I am not sure what is our policy about JSE instead of NPE i APIs that should throw NPE.",
+      "range": {
+        "startLine": 45,
+        "startChar": 22,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "4551d3607187d54444d6031893c5b5034d16c45c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

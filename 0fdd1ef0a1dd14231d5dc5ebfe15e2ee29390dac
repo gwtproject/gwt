@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "696200f0_525f0a5b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-17T01:44:04Z",
+      "side": 1,
+      "message": "I think this will start rescuing all overrides of the method of the method as well.",
+      "revId": "0fdd1ef0a1dd14231d5dc5ebfe15e2ee29390dac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "696200f0_d24ada97",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/CompilerMiscRegressionTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-17T01:44:04Z",
+      "side": 1,
+      "message": "nit: don\u0027t need a cast here; you can change the return type instead.",
+      "range": {
+        "startLine": 369,
+        "startChar": 34,
+        "endLine": 369,
+        "endChar": 52
+      },
+      "revId": "0fdd1ef0a1dd14231d5dc5ebfe15e2ee29390dac",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

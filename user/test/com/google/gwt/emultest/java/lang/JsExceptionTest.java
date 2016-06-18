@@ -156,7 +156,7 @@ public class JsExceptionTest extends ThrowableTestBase {
   }
 
   private static native Object getBackingJsObject(Throwable e) /*-{
-    return e.backingJsObject;
+    return e.@Throwable::backingJsObject;
   }-*/;
 
   private static native Object makeJSO() /*-{

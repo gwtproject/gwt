@@ -68,7 +68,7 @@ public class ConsoleLogger {
       }
       return "\t" + fnStack.join("\n\t");
     }
-    var backingError = t.backingJsObject;
+    var backingError = t.@Throwable::backingJsObject;
     return backingError && (backingError.stack || stringify(t["fnStack"]));
   }-*/;
 }

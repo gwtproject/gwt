@@ -244,8 +244,7 @@ public class GenerateJavaScriptAST {
       if (x.isStatic()) {
         jsName = topScope.declareName(mangleName(x), x.getName());
       } else {
-        jsName =
-            x.getJsMemberType() != JsMemberType.NONE
+        jsName = useJsName(x)
                 ? scopeStack.peek().declareUnobfuscatableName(x.getJsName())
                 : scopeStack.peek().declareName(mangleName(x), x.getName());
       }
@@ -369,8 +368,7 @@ public class GenerateJavaScriptAST {
       String name = x.getName();
       if (x.needsDynamicDispatch()) {
         if (polymorphicNames.get(x) == null) {
-          JsName polyName =
-              x.getJsMemberType() != JsMemberType.NONE
+          JsName polyName = useJsName(x)
                   ? interfaceScope.declareUnobfuscatableName(x.getJsName())
                   : interfaceScope.declareName(mangleNameForPoly(x), name);
           polymorphicNames.put(x, polyName);
@@ -511,6 +509,13 @@ public class GenerateJavaScriptAST {
           + " for " + member.getName() + " and key " + symbolData.getJsniIdent();
       symbolTable.put(symbolData, jsName);
     }
+  }
+
+  private static boolean useJsName(JMember member) {
+    // JsFunction interfaces and  implementations do not have JsNames but canBeReferencedExternally
+    // or canBeImplementedExternally.
+    return member.getJsMemberType() != JsMemberType.NONE
+        && (member.canBeImplementedExternally() || member.canBeReferencedExternally());
   }
 
   private class GenerateJavaScriptTransformer extends JTransformer<JsNode> {

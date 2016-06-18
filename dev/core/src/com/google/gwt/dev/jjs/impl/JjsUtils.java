@@ -539,6 +539,7 @@ public class JjsUtils {
   }
 
   /**
+<<<<<<< e1fcefa15e96a5d7450d9f874101226a72bbeefb
    * Extracts the this(..) or super(..) call from a statement if the statement is of the expected
    * form. Otherwise returns null.
    */
@@ -624,6 +625,16 @@ public class JjsUtils {
       return superClass;
     }
     return getNativeSuperClassOrNull(superClass);
+  }
+
+  /**
+   * Whether or not to use the JsName when implementing this member.
+   */
+  public static boolean exposesJsName(JMember member) {
+    // JsFunction interfaces and  implementations do not have JsNames but canBeReferencedExternally
+    // or canBeImplementedExternally.
+    return member.getJsMemberType() != JsMemberType.NONE
+        && (member.canBeImplementedExternally() || member.canBeReferencedExternally());
   }
 
   private JjsUtils() {

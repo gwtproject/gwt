@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9c35058_29d9d55e",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/BasicJsInteropTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-18T01:34:28Z",
+      "side": 1,
+      "message": "[error] \u0027{\u0027 is not followed by whitespace.",
+      "revId": "a7e59e419afd7b16af71843fbb945d1c052c55a2",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

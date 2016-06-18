@@ -15,10 +15,12 @@
  */
 package com.google.gwt.dev.jjs.test;
 
+import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -68,5 +70,27 @@ public class BasicJsInteropTest extends GWTTestCase {
     B b = new B();
     b.field = "secret";
     assertEquals("secret", getB(b));
+  }
+
+  @JsType
+  static class C {
+    @JsMethod(name = "method")
+    public void m() {}
+  }
+
+  @JsType(isNative = true)
+  interface ObjectWithMethod {
+    void method();
+  }
+
+  public void testJsMethodNameNotHonored() {
+    Object o = new C();
+    try {
+      // As this test runs with -nogenerateJsInteropExports, all non native types
+      // should not respect methods JsNames.
+      ((ObjectWithMethod) o).method();
+      fail("Should have failed");
+    } catch (JavaScriptException expected) {
+    }
   }
 }

@@ -245,9 +245,9 @@ public class GenerateJavaScriptAST {
         jsName = topScope.declareName(mangleName(x), x.getName());
       } else {
         jsName =
-            x.getJsMemberType() != JsMemberType.NONE
-                ? scopeStack.peek().declareUnobfuscatableName(x.getJsName())
-                : scopeStack.peek().declareName(mangleName(x), x.getName());
+            useMangledName(x)
+                ? scopeStack.peek().declareName(mangleName(x), x.getName())
+                : scopeStack.peek().declareUnobfuscatableName(x.getJsName());
       }
       names.put(x, jsName);
       recordSymbol(x, jsName);
@@ -370,9 +370,9 @@ public class GenerateJavaScriptAST {
       if (x.needsDynamicDispatch()) {
         if (polymorphicNames.get(x) == null) {
           JsName polyName =
-              x.getJsMemberType() != JsMemberType.NONE
-                  ? interfaceScope.declareUnobfuscatableName(x.getJsName())
-                  : interfaceScope.declareName(mangleNameForPoly(x), name);
+              useMangledName(x)
+                  ? interfaceScope.declareName(mangleNameForPoly(x), name)
+                  : interfaceScope.declareUnobfuscatableName(x.getJsName());
           polymorphicNames.put(x, polyName);
         }
       }
@@ -511,6 +511,12 @@ public class GenerateJavaScriptAST {
           + " for " + member.getName() + " and key " + symbolData.getJsniIdent();
       symbolTable.put(symbolData, jsName);
     }
+  }
+
+  private boolean useMangledName(JMember x) {
+    return
+        x.getJsMemberType() == JsMemberType.NONE || (!x.canBeImplementedExternally() && !x
+            .canBeReferencedExternally());
   }
 
   private class GenerateJavaScriptTransformer extends JTransformer<JsNode> {

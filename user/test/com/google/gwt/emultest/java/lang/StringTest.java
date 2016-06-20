@@ -15,6 +15,7 @@
  */
 package com.google.gwt.emultest.java.lang;
 
+import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
 
@@ -118,6 +119,16 @@ public class StringTest extends GWTTestCase {
     assertEquals("abcd", s + c);
     s += c;
     assertEquals("abcd", s);
+
+    try {
+      s = null;
+      s.concat("");
+      fail();
+    } catch (NullPointerException e) {
+      // expected
+    } catch (JavaScriptException e) {
+      // expected
+    }
   }
 
   public void testConstructor() {
@@ -313,6 +324,16 @@ public class StringTest extends GWTTestCase {
     assertTrue((r + "ABC").equals(r + "ABC"));
     assertFalse((r + "AbC").equals(r + "aBC"));
     assertFalse((r + "AbC").equals(r + "aBC"));
+
+    try {
+      String s = null;
+      s.equals("other");
+      fail();
+    } catch (NullPointerException e) {
+      // expected
+    } catch (JavaScriptException e) {
+      // expected
+    }
   }
 
   /*
@@ -327,6 +348,26 @@ public class StringTest extends GWTTestCase {
     assertTrue("AbC".equalsIgnoreCase("aBC"));
     assertTrue("".equalsIgnoreCase(""));
     assertFalse("".equalsIgnoreCase(null));
+
+    try {
+      String s = null;
+      s.equalsIgnoreCase("other");
+      fail();
+    } catch (NullPointerException e) {
+      // expected
+    } catch (JavaScriptException e) {
+      // expected
+    }
+
+    try {
+      String s = null;
+      s.equalsIgnoreCase(null);
+      fail();
+    } catch (NullPointerException e) {
+      // expected
+    } catch (JavaScriptException e) {
+      // expected
+    }
   }
 
   public void testGetBytesAscii() {
@@ -440,6 +481,16 @@ public class StringTest extends GWTTestCase {
       // get hashes again to verify the values are constant for a given string
       assertEquals(expectedHash, testStrings[i].hashCode());
     }
+
+    try {
+      String s = null;
+      s.hashCode();
+      fail();
+    } catch (NullPointerException e) {
+      // expected
+    } catch (JavaScriptException e) {
+      // expected
+    }
   }
 
   public void testIndexOf() {
@@ -451,6 +502,16 @@ public class StringTest extends GWTTestCase {
     assertEquals(haystack.indexOf('a', 1), -1);
     assertEquals(haystack.indexOf("bc"), 1);
     assertEquals(haystack.indexOf(""), 0);
+
+    try {
+      String s = null;
+      s.indexOf("");
+      fail();
+    } catch (NullPointerException e) {
+      // expected
+    } catch (JavaScriptException e) {
+      // expected
+    }
   }
 
   public void testIntern() {
@@ -458,6 +519,16 @@ public class StringTest extends GWTTestCase {
     String s2 = String.valueOf(new char[] {'a', 'b', 'c', 'd', 'e', 'f'});
     assertTrue("strings not equal", s1.equals(s2));
     assertSame("interns are not the same reference", s1.intern(), s2.intern());
+
+    try {
+      String s = null;
+      s.intern();
+      fail();
+    } catch (NullPointerException e) {
+      // expected
+    } catch (JavaScriptException e) {
+      // expected
+    }
   }
 
   public void testLastIndexOf() {

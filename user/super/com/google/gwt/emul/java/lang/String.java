@@ -210,12 +210,12 @@ public final class String implements Comparable<String>, CharSequence,
     return replaceStr;
   }
 
-  private static native int compareTo(String thisStr, String otherStr) /*-{
-    if (thisStr == otherStr) {
+  private static int compareTo(String thisStr, String otherStr) {
+    if (thisStr.equals(otherStr)) {
       return 0;
     }
-    return thisStr < otherStr ? -1 : 1;
-  }-*/;
+    return JsUtils.lt(thisStr, otherStr) ? -1 : 1;
+  }
 
   private static Charset getCharset(String charsetName) throws UnsupportedEncodingException {
     try {
@@ -390,7 +390,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public String concat(String str) {
-    return this + str;
+    return checkNotNull(this) + str;
   }
 
   public boolean contains(CharSequence s) {
@@ -421,18 +421,14 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public boolean equalsIgnoreCase(String other) {
-    return equalsIgnoreCase(this, other);
-  }
-
-  private static native boolean equalsIgnoreCase(String s, String other) /*-{
     if (other == null) {
       return false;
     }
-    if (s == other) {
+    if (equals(other)) {
       return true;
     }
-    return (s.length == other.length) && (s.toLowerCase() == other.toLowerCase());
-  }-*/;
+    return length() == other.length() && toLowerCase().equals(other.toLowerCase());
+  }
 
   public byte[] getBytes() {
     // default character set for GWT is UTF-8
@@ -450,7 +446,10 @@ public final class String implements Comparable<String>, CharSequence,
   public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
     checkCriticalStringBounds(srcBegin, srcEnd, length());
     checkCriticalStringBounds(dstBegin, dstBegin + (srcEnd - srcBegin), dst.length);
+    getChars0(srcBegin, srcEnd, dst, dstBegin);
+  }
 
+  private void getChars0(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
     while (srcBegin < srcEnd) {
       dst[dstBegin++] = charAt(srcBegin++);
     }
@@ -516,11 +515,7 @@ public final class String implements Comparable<String>, CharSequence,
    */
   public boolean matches(String regex) {
     // We surround the regex with '^' and '$' because it must match the entire string.
-    return nativeMatches(new NativeRegExp("^(" + regex + ")$"));
-  }
-
-  boolean nativeMatches(NativeRegExp regex) {
-    return regex.test(this);
+    return new NativeRegExp("^(" + regex + ")$").test(this);
   }
 
   public int offsetByCodePoints(int index, int codePointOffset) {
@@ -529,13 +524,11 @@ public final class String implements Comparable<String>, CharSequence,
 
   public boolean regionMatches(boolean ignoreCase, int toffset, String other,
       int ooffset, int len) {
-    if (other == null) {
-      throw new NullPointerException();
-    }
+    checkNotNull(other);
     if (toffset < 0 || ooffset < 0 || len <= 0) {
       return false;
     }
-    if (toffset + len > this.length() || ooffset + len > other.length()) {
+    if (toffset + len > length() || ooffset + len > other.length()) {
       return false;
     }
 
@@ -692,11 +685,11 @@ public final class String implements Comparable<String>, CharSequence,
 
   @Override
   public CharSequence subSequence(int beginIndex, int endIndex) {
-    return this.substring(beginIndex, endIndex);
+    return substring(beginIndex, endIndex);
   }
 
   public String substring(int beginIndex) {
-    return asNativeString().substr(beginIndex, this.length() - beginIndex);
+    return asNativeString().substr(beginIndex, length() - beginIndex);
   }
 
   public String substring(int beginIndex, int endIndex) {
@@ -704,9 +697,9 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public char[] toCharArray() {
-    int n = this.length();
+    int n = length();
     char[] charArr = new char[n];
-    getChars(0, n, charArr, 0);
+    getChars0(0, n, charArr, 0);
     return charArr;
   }
 

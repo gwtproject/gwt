@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 /**
  * A fast way to create strings using multiple appends.
  * 
@@ -28,7 +30,7 @@ public final class StringBuilder extends AbstractStringBuilder {
   }
 
   public StringBuilder(CharSequence s) {
-    super(String.valueOf(s));
+    super(s.toString());
   }
 
   /**
@@ -41,7 +43,7 @@ public final class StringBuilder extends AbstractStringBuilder {
   }
 
   public StringBuilder(String s) {
-    super(s);
+    super(checkNotNull(s));
   }
 
   public StringBuilder append(boolean x) {

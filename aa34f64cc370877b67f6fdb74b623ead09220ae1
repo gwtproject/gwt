@@ -46,6 +46,30 @@
       "revId": "aa34f64cc370877b67f6fdb74b623ead09220ae1",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce1e9259_177736be",
+        "filename": "user/super/com/google/gwt/emul/java/util/Collection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-21T22:30:39Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "696e807c_b85565e0",
+      "range": {
+        "startLine": 59,
+        "startChar": 20,
+        "endLine": 59,
+        "endChar": 34
+      },
+      "revId": "aa34f64cc370877b67f6fdb74b623ead09220ae1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

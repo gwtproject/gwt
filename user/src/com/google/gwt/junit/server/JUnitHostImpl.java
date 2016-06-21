@@ -183,11 +183,7 @@ public class JUnitHostImpl extends RemoteServiceServlet implements JUnitHost, Re
 
   private StackTraceDeobfuscator getDeobfuscator() throws IOException {
     if (deobfuscator == null) {
-      String path = getRequestModuleBasePath();
-      if (!path.endsWith("/")) {
-        path += "/";
-      }
-      path += JUnitSymbolMapsLinker.SYMBOL_MAP_DIR;
+      String path = getRequestModuleBasePath() + "/" + JUnitSymbolMapsLinker.SYMBOL_MAP_DIR;
       deobfuscator = StackTraceDeobfuscator.fromUrl(getServletContext().getResource(path));
     }
     return deobfuscator;

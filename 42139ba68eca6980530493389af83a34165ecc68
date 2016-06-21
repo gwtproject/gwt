@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9eef035_e31a0660",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/JsUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-21T00:42:23Z",
+      "side": 1,
+      "message": "Without context, lt is not readable. Let\u0027s make it more explicit: lessThan",
+      "range": {
+        "startLine": 23,
+        "startChar": 31,
+        "endLine": 23,
+        "endChar": 33
+      },
+      "revId": "42139ba68eca6980530493389af83a34165ecc68",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

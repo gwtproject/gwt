@@ -111,7 +111,7 @@ public class JsonUtilTest extends GWTTestCase {
   
   public void testEscapeControlChars() {
     String unicodeString = "\u2060Test\ufeffis a test\u17b5";
-    assertEquals("\\u00002060Test\\u0000feffis a test\\u000017b5",
+    assertEquals("\\u2060Test\\ufeffis a test\\u17b5",
         JsonUtil.escapeControlChars(unicodeString));
   }
 
@@ -142,8 +142,8 @@ public class JsonUtilTest extends GWTTestCase {
 
   public void testQuote() {
     String badString = "\bThis\"is\ufeff\ta\\bad\nstring\u2029\u2029";
-    assertEquals("\"\\bThis\\\"is\\u0000feff\\ta\\\\bad\\nstring"
-        + "\\u00002029\\u00002029\"", JsonUtil.quote(badString));
+    assertEquals("\"\\bThis\\\"is\\ufeff\\ta\\\\bad\\nstring"
+        + "\\u2029\\u2029\"", JsonUtil.quote(badString));
   }
 
   public void testStringify() {
@@ -214,4 +214,35 @@ public class JsonUtilTest extends GWTTestCase {
     o.y = o.x + 1;
     return o;
   }-*/;
+
+  public void testQuoteCharacters() {
+    // See spec at https://tools.ietf.org/html/rfc7159
+    for (int i = 0; i < 0xffff; i++) {
+      String res = JsonUtil.quote(String.valueOf((char) i));
+      if (res == String.valueOf((char) i)) {
+        if (i == 0x20 || i == 0x21 || (i >= 0x23 && i <= 0x5b)
+            || i >= 0x5d) {
+              // passed through unescaped
+              // ok for %x20-21 / %x23-5B / %x5D-10FFFF
+            } else {
+              fail("Character " + i + " must be escaped in JSON");
+            }
+          } else {
+            // Was escaped, should be unescaped, in format \\X or \\uXXXX
+            if (res.length() == 3) {
+              assertEquals((char)i,res.charAt(1));
+            } else if (res.length() == 4) {
+              // "\\X"
+              char escapedChar = res.charAt(2);
+              if (escapedChar == 'b') {
+                assertEquals('\b',i);
+              }
+            } else {
+              assertTrue("Character " + i + " was incorrectly encoded as " +
+              res,res.matches("\"\\\\u....\""));
+            }
+          }
+        }
+  }
+
 }

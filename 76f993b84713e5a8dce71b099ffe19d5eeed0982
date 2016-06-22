@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7046c4_9f481b9f",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-22T01:45:24Z",
+      "side": 1,
+      "message": "SPAM",
+      "range": {
+        "startLine": 941,
+        "startChar": 35,
+        "endLine": 941,
+        "endChar": 39
+      },
+      "revId": "76f993b84713e5a8dce71b099ffe19d5eeed0982",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ed5a6ce_b4cbae78",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 964,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-22T01:45:24Z",
+      "side": 1,
+      "message": "pls add comment",
+      "revId": "76f993b84713e5a8dce71b099ffe19d5eeed0982",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

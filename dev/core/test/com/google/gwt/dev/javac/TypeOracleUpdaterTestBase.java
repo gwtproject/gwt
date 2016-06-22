@@ -1345,7 +1345,7 @@ public abstract class TypeOracleUpdaterTestBase extends TestCase {
    * Tweak this if you want to see the log output.
    */
   protected TreeLogger createTreeLogger() {
-    boolean reallyLog = false;
+    boolean reallyLog = true;
     if (reallyLog) {
       AbstractTreeLogger logger = new PrintWriterTreeLogger();
       logger.setMaxDetail(TreeLogger.ALL);

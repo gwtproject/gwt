@@ -45,6 +45,30 @@
       "revId": "0ff33c1be592fce052818d8b6c92442b9114fe17",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6aced9_5d84cb20",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-22T01:56:12Z",
+      "side": 1,
+      "message": "Fixed and made to SPAM level.",
+      "parentUuid": "ae9cfe2a_95e79450",
+      "range": {
+        "startLine": 941,
+        "startChar": 35,
+        "endLine": 941,
+        "endChar": 39
+      },
+      "revId": "0ff33c1be592fce052818d8b6c92442b9114fe17",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

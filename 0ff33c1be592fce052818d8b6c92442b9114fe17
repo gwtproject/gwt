@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed2dae5_98ba5dcf",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-06-22T01:46:08Z",
+      "side": 1,
+      "message": "method",
+      "range": {
+        "startLine": 941,
+        "startChar": 68,
+        "endLine": 941,
+        "endChar": 74
+      },
+      "revId": "0ff33c1be592fce052818d8b6c92442b9114fe17",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae9cfe2a_95e79450",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationUnitTypeOracleUpdater.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 5130
+      },
+      "writtenOn": "2016-06-22T01:46:08Z",
+      "side": 1,
+      "message": "If we\u0027re logging as INFO, won\u0027t this cause a fair bit of spam? I\u0027m not terribly familiar with the internals of this class, but this appears to get called for every class out there, so this will log every default/static method in every interface?",
+      "range": {
+        "startLine": 941,
+        "startChar": 35,
+        "endLine": 941,
+        "endChar": 39
+      },
+      "revId": "0ff33c1be592fce052818d8b6c92442b9114fe17",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

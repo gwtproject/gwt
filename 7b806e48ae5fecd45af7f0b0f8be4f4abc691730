@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "031b25b9_a6052644",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-23T19:45:55Z",
+      "side": 1,
+      "message": "This is probably no longer hiding it from compiler; GWT nowadays much more aggressive on optimizing this stuff. Let calculate TRUE via Math.random() \u003e 0",
+      "revId": "7b806e48ae5fecd45af7f0b0f8be4f4abc691730",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

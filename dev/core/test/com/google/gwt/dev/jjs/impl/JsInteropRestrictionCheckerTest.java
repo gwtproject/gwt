@@ -1010,15 +1010,80 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("jsinterop.annotations.JsIgnore");
     addSnippetClassDecl(
         "@JsType",
-        "public static class Buggy {",
+        "static class Buggy {",
         "  public Buggy() {}",
         "  @JsIgnore",
         "  public Buggy(int a) {",
         "    this();",
         "  }",
+        "}",
+        "static class SubBuggy extends Buggy {",
+        "  public SubBuggy() { this(1);}",
+        "  public SubBuggy(int a) { super();}",
+        "}",
+        "@JsType",
+        "static class JsSubBuggy extends Buggy {",
+        "  @JsIgnore",
+        "  public JsSubBuggy() { this(1);}",
+        "  public JsSubBuggy(int a) { super();}",
+        "}",
+        "@JsType (isNative = true)",
+        "static class NativeBuggy {",
+        "  public NativeBuggy() {}",
+        "  public NativeBuggy(int a) {}",
+        "}",
+        "@JsType (isNative = true)",
+        "static class NativeSubNativeBuggy extends NativeBuggy{",
+        "  public NativeSubNativeBuggy() { super(1); }",
+        "  public NativeSubNativeBuggy(int a) { super();}",
+        "}",
+        "static class SubNativeBuggy extends NativeBuggy {",
+        "  public SubNativeBuggy() { this(1);}",
+        "  public SubNativeBuggy(int a) { super();}",
+        "}",
+        "static class SubSubNativeBuggy extends NativeBuggy {",
+        "  public SubSubNativeBuggy() { super(1);}",
+        "  public SubSubNativeBuggy(int a) { this(); }",
+        "}",
+        "static class SubNativeBuggyImplicitConstructor extends NativeBuggy {",
         "}");
 
     assertBuggySucceeds();
+  }
+
+  public void testMultipleConstructorsNonJsSubtypeRestrictionFails() {
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetImport("jsinterop.annotations.JsIgnore");
+    addSnippetClassDecl(
+        "@JsType",
+        "static class BuggyJsType {",
+        "  public BuggyJsType() {}",
+        "  @JsIgnore",
+        "  public BuggyJsType(int a) { this(); }",
+        "}",
+        "static class Buggy extends BuggyJsType {",
+        // Error: two non-delegation constructors"
+        "  public Buggy() {}",
+        "  public Buggy(int a) { super(a); }",
+        "}",
+        "static class SubBuggyJsType extends BuggyJsType {",
+        // Correct: one non-delegating constructor targeting super primary constructor
+        "  public SubBuggyJsType() { this(1); }",
+        "  public SubBuggyJsType(int a) { super(); }",
+        "}",
+        "static class SubSubBuggyJsType extends SubBuggyJsType {",
+        // Error: non-delegating constructor target the wrong super constructor.
+        "  public SubSubBuggyJsType() { this(1);}",
+        "  public SubSubBuggyJsType(int a) { super(); }",
+        "}");
+
+    assertBuggyFails(
+        "Line 11: Class 'EntryPoint.Buggy' should have only one constructor delegating to the "
+            + "superclass since it is subclass of a a type with JsConstructor.",
+        "Line 21: Constructor 'EntryPoint.SubSubBuggyJsType.EntryPoint$SubSubBuggyJsType(int)' "
+            + "can only delegate to super constructor "
+            + "'EntryPoint.SubBuggyJsType.EntryPoint$SubBuggyJsType(int)' since it is a subclass "
+            + "of a type with JsConstructor.");
   }
 
   public void testMultipleConstructorsNotAllDelegatedToJsConstructorFails()

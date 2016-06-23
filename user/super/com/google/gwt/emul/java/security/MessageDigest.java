@@ -387,6 +387,8 @@ public abstract class MessageDigest extends MessageDigestSpi {
       throws NoSuchAlgorithmException {
     if ("MD5".equals(algorithm)) {
       return new Md5Digest();
+    } else if ("SHA-256".equals(algorithm)) {
+      return new SHA256Digest();
     }
     throw new NoSuchAlgorithmException(algorithm + " not supported");
   }

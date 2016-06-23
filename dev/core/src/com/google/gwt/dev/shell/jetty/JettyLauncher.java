@@ -21,27 +21,24 @@ import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.dev.util.InstalledHelpInfo;
 import com.google.gwt.dev.util.Util;
-import com.google.gwt.thirdparty.guava.common.collect.Iterators;
-import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
-import org.eclipse.jetty.http.HttpField;
+import org.apache.tools.ant.taskdefs.Javac;
+import org.eclipse.jdt.core.JDTCompilerAdapter;
 import org.eclipse.jetty.http.HttpFields;
-import org.eclipse.jetty.server.HttpConfiguration;
-import org.eclipse.jetty.server.HttpConnectionFactory;
+import org.eclipse.jetty.http.HttpFields.Field;
+import org.eclipse.jetty.server.AbstractConnector;
+import org.eclipse.jetty.server.AbstractHttpConnection;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.RequestLog;
 import org.eclipse.jetty.server.Response;
-import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.ServerConnector;
-import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.server.handler.RequestLogHandler;
+import org.eclipse.jetty.server.nio.SelectChannelConnector;
+import org.eclipse.jetty.server.ssl.SslSocketConnector;
 import org.eclipse.jetty.util.component.AbstractLifeCycle;
 import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Logger;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.webapp.ClasspathPattern;
-import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 
@@ -52,10 +49,6 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -65,6 +58,23 @@ import javax.xml.parsers.ParserConfigurationException;
  * A {@link ServletContainerLauncher} for an embedded Jetty server.
  */
 public class JettyLauncher extends ServletContainerLauncher {
+
+  /**
+   * Ant compiler adapter for Eclipse Java compiler, but with default
+   * target and source compatibility set to Java 6.
+   */
+  public static final class JDTCompiler16 extends JDTCompilerAdapter {
+    @Override
+    public void setJavac(Javac attributes) {
+      if (attributes.getTarget() == null) {
+        attributes.setTarget("1.6");
+      }
+      if (attributes.getSource() == null) {
+        attributes.setSource("1.6");
+      }
+      super.setJavac(attributes);
+    }
+  }
 
   /**
    * Log jetty requests/responses to TreeLogger.
@@ -130,17 +140,18 @@ public class JettyLauncher extends ServletContainerLauncher {
             + " - " + request.getMethod() + ' ' + request.getUri() + " ("
             + userString + request.getRemoteHost() + ')' + bytesString);
         if (branch.isLoggable(logHeaders)) {
+          AbstractHttpConnection connection = request.getConnection();
           logHeaders(branch.branch(logHeaders, "Request headers"), logHeaders,
-              request.getHttpFields());
+              connection.getRequestFields());
           logHeaders(branch.branch(logHeaders, "Response headers"), logHeaders,
-              response.getHttpFields());
+              connection.getResponseFields());
         }
       }
     }
 
     private void logHeaders(TreeLogger logger, TreeLogger.Type logLevel, HttpFields fields) {
       for (int i = 0; i < fields.size(); ++i) {
-        HttpField field = fields.getField(i);
+        Field field = fields.getField(i);
         logger.log(logLevel, field.getName() + ": " + field.getValue());
       }
     }
@@ -162,10 +173,6 @@ public class JettyLauncher extends ServletContainerLauncher {
         throw new NullPointerException();
       }
       this.logger = logger;
-    }
-
-    public void debug(String msg, long arg) {
-      logger.log(TreeLogger.SPAM, format(msg, arg));
     }
 
     public void debug(String msg, Object... args) {
@@ -351,17 +358,13 @@ public class JettyLauncher extends ServletContainerLauncher {
 
       private final ClasspathPattern systemClassesFromWebappFirst = new ClasspathPattern(new String[] {
           "-javax.servlet.",
-          "-javax.el.",
           "javax.",
       });
       private final ClasspathPattern allowedFromSystemClassLoader = new ClasspathPattern(new String[] {
           "org.eclipse.jetty.",
-          "javax.websocket.",
           // Jasper
           "org.apache.jasper.",
-          "org.apache.juli.logging.",
-          "org.apache.tomcat.",
-          "org.apache.el.",
+          "org.apache.commons.logging.",
           // Xerces
           "org.apache.xerces.",
           "javax.xml.", // Used by Jetty for jetty-web.xml parsing
@@ -369,18 +372,6 @@ public class JettyLauncher extends ServletContainerLauncher {
 
       public WebAppClassLoaderExtension() throws IOException {
         super(bootStrapOnlyClassLoader, WebAppContextWithReload.this);
-      }
-
-      @Override
-      public Enumeration<URL> getResources(String name) throws IOException {
-        // Logic copied from Jetty's WebAppClassLoader
-        List<URL> fromParent = isServerClass(name)
-            ? Collections.<URL>emptyList()
-            : Lists.newArrayList(Iterators.forEnumeration(systemClassLoader.getResources(name)));
-        Iterator<URL> fromWebapp = isSystemClass(name) && !fromParent.isEmpty()
-            ? Collections.<URL>emptyIterator()
-            : Iterators.forEnumeration(findResources(name));
-        return Iterators.asEnumeration(Iterators.concat(fromWebapp, fromParent.iterator()));
       }
 
       @Override
@@ -394,7 +385,7 @@ public class JettyLauncher extends ServletContainerLauncher {
 
         // For a system path, load from the outside world.
         // Note: bootstrap has already been searched, so javax. classes should be
-        // tried from the webapp first (except for javax.servlet and javax.el).
+        // tried from the webapp first (except for javax.servlet).
         URL found;
         if (isSystemClass(checkName) && !systemClassesFromWebappFirst.match(checkName)) {
           found = systemClassLoader.getResource(name);
@@ -417,8 +408,12 @@ public class JettyLauncher extends ServletContainerLauncher {
 
         // Special-case Jetty/Jasper/etc. resources
         if (allowedFromSystemClassLoader.match(checkName) ||
-            // Jetty-plus reads jndi.properties
-            "jndi.properties".equals(name)) {
+            // Jasper uses Log4j (via Commons Logging), which will try
+            // to load those.
+            // We have a log4j.properties in user/test and don't want
+            // to add gwt-user when using a "Developer SDK" in Eclipse.
+            "log4j.xml".equals(name) ||
+            "log4j.properties".equals(name)) {
           return found;
         }
 
@@ -460,12 +455,6 @@ public class JettyLauncher extends ServletContainerLauncher {
           return null;
         }
 
-        // Special-case JDBCUnloader; it should always be loaded in the webapp classloader
-        if (JDBCUnloader.class.getName().equals(name)) {
-          byte[] jdbcUnloader = Util.readURLAsBytes(found);
-          return defineClass(name, jdbcUnloader, 0, jdbcUnloader.length);
-        }
-
         // Those classes are allowed to be loaded right from the systemClassLoader
         // Note: Jetty classes here are not "server classes", handled above.
         if (allowedFromSystemClassLoader.match(name)) {
@@ -504,7 +493,7 @@ public class JettyLauncher extends ServletContainerLauncher {
           return false;
         }
         branch = branch.branch(logLevel, "Adding classpath entry '"
-            + classPathURL + "' to the web app classpath for this session",
+                + classPathURL + "' to the web app classpath for this session",
             null, new InstalledHelpInfo("webAppClassPath.html"));
         try {
           addClassPath(classPathURL);
@@ -580,6 +569,16 @@ public class JettyLauncher extends ServletContainerLauncher {
    */
   private static final String PROPERTY_NOWARN_WEBAPP_CLASSPATH = "gwt.nowarn.webapp.classpath";
 
+  static {
+    /*
+     * Make JDT the default Ant compiler so that JSP compilation just works
+     * out-of-the-box. If we don't set this, it's very, very difficult to make
+     * JSP compilation work.
+     */
+    String antJavaC = System.getProperty("build.compiler", JDTCompiler16.class.getName());
+    System.setProperty("build.compiler", antJavaC);
+  }
+
   /**
    * Setup a connector for the bind address/port.
    *
@@ -587,7 +586,7 @@ public class JettyLauncher extends ServletContainerLauncher {
    * @param bindAddress
    * @param port
    */
-  private static void setupConnector(ServerConnector connector,
+  private static void setupConnector(AbstractConnector connector,
       String bindAddress, int port) {
     if (bindAddress != null) {
       connector.setHost(bindAddress.toString());
@@ -727,32 +726,12 @@ public class JettyLauncher extends ServletContainerLauncher {
 
     Server server = new Server();
 
-    ServerConnector connector = getConnector(server, logger);
+    AbstractConnector connector = getConnector(logger);
     setupConnector(connector, bindAddress, port);
     server.addConnector(connector);
 
-    Configuration.ClassList cl = Configuration.ClassList.setServerDefault(server);
-    try {
-      // from jetty-plus.xml
-      Thread.currentThread().getContextClassLoader().loadClass("org.eclipse.jetty.plus.webapp.PlusConfiguration");
-      cl.addAfter("org.eclipse.jetty.webapp.FragmentConfiguration",
-          "org.eclipse.jetty.plus.webapp.EnvConfiguration",
-          "org.eclipse.jetty.plus.webapp.PlusConfiguration");
-    } catch (ClassNotFoundException cnfe) {
-      logger.log(TreeLogger.Type.DEBUG, "jetty-plus isn't on the classpath, JNDI won't work. This might also affect annotations scanning and JSP.");
-    }
-    try {
-      // from jetty-annotations.xml
-      Thread.currentThread().getContextClassLoader()
-          .loadClass("org.eclipse.jetty.annotations.AnnotationConfiguration");
-      cl.addBefore("org.eclipse.jetty.webapp.JettyWebXmlConfiguration",
-          "org.eclipse.jetty.annotations.AnnotationConfiguration");
-    } catch (ClassNotFoundException cnfe) {
-      logger.log(TreeLogger.Type.DEBUG, "jetty-annotations isn't on the classpath, annotation scanning won't work. This might also affect annotations scanning.");
-    }
-
     // Create a new web app in the war directory.
-      WebAppContext wac = createWebAppContext(logger, appRootDir);
+    WebAppContext wac = createWebAppContext(logger, appRootDir);
 
     RequestLogHandler logHandler = new RequestLogHandler();
     logHandler.setRequestLog(new JettyRequestLogger(logger, getBaseLogLevel()));
@@ -771,6 +750,9 @@ public class JettyLauncher extends ServletContainerLauncher {
       branch.log(TreeLogger.ERROR, String.format(
           "Failed to connect to open channel with port %d (return value %d)",
           port, connectorPort));
+      if (connector.getConnection() == null) {
+        branch.log(TreeLogger.TRACE, "Connection is null");
+      }
     }
     return createServletContainer(logger, appRootDir, server, wac,
         connectorPort);
@@ -782,66 +764,43 @@ public class JettyLauncher extends ServletContainerLauncher {
   }
 
   protected WebAppContext createWebAppContext(TreeLogger logger, File appRootDir) {
-    WebAppContext context = new WebAppContextWithReload(logger, appRootDir.getAbsolutePath(), "/");
-    context.setConfigurationClasses(new String[] {
-        "org.eclipse.jetty.webapp.WebInfConfiguration",
-        "org.eclipse.jetty.webapp.WebXmlConfiguration",
-        "org.eclipse.jetty.webapp.MetaInfConfiguration",
-        "org.eclipse.jetty.webapp.FragmentConfiguration",
-        "org.eclipse.jetty.plus.webapp.EnvConfiguration",
-        "org.eclipse.jetty.plus.webapp.PlusConfiguration",
-        "org.eclipse.jetty.annotations.AnnotationConfiguration",
-        "org.eclipse.jetty.webapp.JettyWebXmlConfiguration"
-    });
-    return context;
+    return new WebAppContextWithReload(logger, appRootDir.getAbsolutePath(), "/");
   }
 
-  protected ServerConnector getConnector(Server server, TreeLogger logger) {
-    HttpConfiguration config = defaultConfig();
+  @SuppressWarnings("deprecation")
+  protected AbstractConnector getConnector(TreeLogger logger) {
     if (useSsl) {
       TreeLogger sslLogger = logger.branch(TreeLogger.INFO,
           "Listening for SSL connections");
       if (sslLogger.isLoggable(TreeLogger.TRACE)) {
         sslLogger.log(TreeLogger.TRACE, "Using keystore " + keyStore);
       }
-      SslContextFactory ssl = new SslContextFactory();
+      SslSocketConnector conn = new SslSocketConnector();
       if (clientAuth != null) {
         switch (clientAuth) {
           case NONE:
-            ssl.setWantClientAuth(false);
-            ssl.setNeedClientAuth(false);
+            conn.setWantClientAuth(false);
+            conn.setNeedClientAuth(false);
             break;
           case WANT:
             sslLogger.log(TreeLogger.TRACE, "Requesting client certificates");
-            ssl.setWantClientAuth(true);
-            ssl.setNeedClientAuth(false);
+            conn.setWantClientAuth(true);
+            conn.setNeedClientAuth(false);
             break;
           case REQUIRE:
             sslLogger.log(TreeLogger.TRACE, "Requiring client certificates");
-            ssl.setWantClientAuth(true);
-            ssl.setNeedClientAuth(true);
+            conn.setWantClientAuth(true);
+            conn.setNeedClientAuth(true);
             break;
         }
       }
-      ssl.setKeyStorePath(keyStore);
-      ssl.setTrustStorePath(keyStore);
-      ssl.setKeyStorePassword(keyStorePassword);
-      ssl.setTrustStorePassword(keyStorePassword);
-      config.addCustomizer(new SecureRequestCustomizer());
-      return new ServerConnector(server,
-          null, null, null, 0, 2,
-          new SslConnectionFactory(ssl, "http/1.1"),
-          new HttpConnectionFactory(config));
+      conn.setKeystore(keyStore);
+      conn.setTruststore(keyStore);
+      conn.setKeyPassword(keyStorePassword);
+      conn.setTrustPassword(keyStorePassword);
+      return conn;
     }
-    return new ServerConnector(server, new HttpConnectionFactory(config));
-  }
-
-  protected HttpConfiguration defaultConfig() {
-     HttpConfiguration config = new HttpConfiguration();
-     config.setRequestHeaderSize(16386);
-     config.setSendServerVersion(false);
-     config.setSendDateHeader(true);
-     return config;
+    return new SelectChannelConnector();
   }
 
   private void checkStartParams(TreeLogger logger, int port, File appRootDir) {

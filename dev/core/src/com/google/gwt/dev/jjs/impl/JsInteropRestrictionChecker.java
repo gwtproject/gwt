@@ -51,6 +51,7 @@ import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsParameter;
 import com.google.gwt.dev.js.ast.JsVisitor;
 import com.google.gwt.dev.util.Pair;
+import com.google.gwt.thirdparty.guava.common.base.Function;
 import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.FluentIterable;
 import com.google.gwt.thirdparty.guava.common.collect.Iterables;
@@ -59,6 +60,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Checks and throws errors for invalid JsInterop constructs.
@@ -212,6 +214,41 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
           "Constructor %s can be a JsConstructor only if all constructors in the class are "
           + "delegating to it.", getMemberDescription(jsConstructor));
     }
+  }
+
+  private boolean isJsConstructorSubtype(JDeclaredType type) {
+    JClassType superClass = type.getSuperClass();
+    if (superClass == null || JjsUtils.getJsConstructor(type) != null) {
+      return false;
+    }
+    if (JjsUtils.getJsConstructor(superClass) != null) {
+      return true;
+    }
+    return isJsConstructorSubtype(superClass);
+  }
+
+  private void checkJsConstructorSubtype(JDeclaredType type) {
+    JConstructor primaryConstructor = JjsUtils.getPrmaryConstructor(type);
+    if (primaryConstructor == null) {
+      logError(type,
+          "Class %s is a subclass of a JsType that declares a JsConstructor it should only have "
+              + "one non-delegating constructor.", getDescription(type));
+      return;
+    }
+
+    JConstructor delegatedConstructor =
+        JjsUtils.getDelegatedThisOrSuperConstructor(primaryConstructor);
+
+    if (delegatedConstructor.isJsConstructor() ||
+        delegatedConstructor == JjsUtils.getPrmaryConstructor(type.getSuperClass())) {
+      return;
+    }
+      logError(type,
+          "Class %s is a subclass of a JsType that declares a JsConstructor and its non "
+              + "delegating constructor %s can only delegate to a super JsConstructor or "
+              + "a non-delegating super constructor.",
+          getDescription(type),
+          getDescription(primaryConstructor));
   }
 
   private boolean isDelegatingToConstructor(JConstructor ctor, JConstructor targetCtor) {
@@ -756,6 +793,8 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
       checkJsFunction(type);
     } else if (type.isJsFunctionImplementation()) {
       checkJsFunctionImplementation(type);
+    } else if (isJsConstructorSubtype(type)) {
+      checkJsConstructorSubtype(type);
     } else {
       checkJsFunctionSubtype(type);
       checkJsConstructors(type);

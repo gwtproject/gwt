@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "839ab576_78bc99e6",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-23T23:51:23Z",
+      "side": 1,
+      "message": "[error] Unused import - javax.annotation.Nullable.",
+      "revId": "a5e6afa5d61bd2c7285164d9ef26e8894c3471e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

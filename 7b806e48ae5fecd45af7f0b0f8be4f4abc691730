@@ -16,6 +16,24 @@
       "revId": "7b806e48ae5fecd45af7f0b0f8be4f4abc691730",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "430b5d18_7894215c",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/StringTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-06-23T20:00:01Z",
+      "side": 1,
+      "message": "Done. I\u0027ve reused code of returnNull() method.",
+      "parentUuid": "031b25b9_a6052644",
+      "revId": "7b806e48ae5fecd45af7f0b0f8be4f4abc691730",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

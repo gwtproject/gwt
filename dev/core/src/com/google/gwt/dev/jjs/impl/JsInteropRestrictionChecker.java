@@ -214,12 +214,47 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
     }
   }
 
+  private boolean isJsConstructorSubtype(JDeclaredType type) {
+    JClassType superClass = type.getSuperClass();
+    if (Iterables.isEmpty(type.getConstructors())) {
+      // No constructors in the type; type is not instantiable.
+      return false;
+    }
+    if (superClass == null || JjsUtils.getJsConstructor(type) != null) {
+      return false;
+    }
+    if (JjsUtils.getJsConstructor(superClass) != null) {
+      return true;
+    }
+    return isJsConstructorSubtype(superClass);
+  }
+
+  private void checkJsConstructorSubtype(JDeclaredType type) {
+    JConstructor primaryConstructor = JjsUtils.getPrimaryConstructor(type);
+    if (primaryConstructor == null) {
+      logError(type,
+          "Class %s subclassing a JsType that declares a JsConstructor should only have "
+              + "one non-delegating constructor.", getDescription(type));
+      return;
+    }
+
+    JConstructor delegatedConstructor =
+        JjsUtils.getDelegatedThisOrSuperConstructor(primaryConstructor);
+
+    if (delegatedConstructor.isJsConstructor() ||
+        delegatedConstructor == JjsUtils.getPrimaryConstructor(type.getSuperClass())) {
+      return;
+    }
+      logError(type,
+          "Class %s subclassing a JsType that declares a JsConstructor should have one non-"
+              + "delegating constructor %s that targets a super JsConstructor or "
+              + "a non-delegating super constructor.",
+          getDescription(type),
+          getDescription(primaryConstructor));
+  }
+
   private boolean isDelegatingToConstructor(JConstructor ctor, JConstructor targetCtor) {
-    List<JStatement> statements = ctor.getBody().getBlock().getStatements();
-    JExpressionStatement statement = (JExpressionStatement) statements.get(0);
-    JMethodCall call = (JMethodCall) statement.getExpr();
-    assert call.isStaticDispatchOnly() : "Every ctor should either have this() or super() call";
-    return call.getTarget().equals(targetCtor);
+    return JjsUtils.getDelegatedThisOrSuperConstructor(ctor) == targetCtor;
   }
 
   private void checkMember(
@@ -756,6 +791,8 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
       checkJsFunction(type);
     } else if (type.isJsFunctionImplementation()) {
       checkJsFunctionImplementation(type);
+    } else if (isJsConstructorSubtype(type)) {
+      checkJsConstructorSubtype(type);
     } else {
       checkJsFunctionSubtype(type);
       checkJsConstructors(type);

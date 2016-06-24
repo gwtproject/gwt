@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "839ab576_3b5beb45",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-24T00:30:43Z",
+      "side": 1,
+      "message": "As no constructors of this type are reached the type is not loaded by UnifyAst. I think this is an OK solution.",
+      "range": {
+        "startLine": 220,
+        "startChar": 4,
+        "endLine": 221,
+        "endChar": 19
+      },
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

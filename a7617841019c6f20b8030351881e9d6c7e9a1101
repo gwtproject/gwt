@@ -2,6 +2,120 @@
   "comments": [
     {
       "key": {
+        "uuid": "839ab576_260e6e8c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-24T03:25:06Z",
+      "side": 1,
+      "message": "If you follow the previous method:\n\n    return\n        FluentIterable\n            .from(type.getBody().getStatements())\n            .filter(new Predicate\u003cJStatement\u003e() {\n              @Override\n              public boolean apply(JStatement statement) {\n                return getThisOrSuperConstructor(statement) !\u003d null;\n              }\n            }).first().orNull();",
+      "range": {
+        "startLine": 585,
+        "startChar": 0,
+        "endLine": 596,
+        "endChar": 37
+      },
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "839ab576_26f2ee74",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-24T03:25:06Z",
+      "side": 1,
+      "message": "I think having a transform here make it harder to follow since you basically want to filter the constructors of this type who callsSuper() (if calls supers it is primary).",
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "839ab576_e6ff0636",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-24T03:25:06Z",
+      "side": 1,
+      "message": "If I\u0027m reading this correctly; you are returning the super constructor from this method called by the primary; not the primary itself?\n\nIf I\u0027m right, pls make sure add a scenario that breaks the tests.",
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "839ab576_86f1da6e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-24T03:25:06Z",
+      "side": 1,
+      "message": "toList",
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "839ab576_66ecf695",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-24T03:25:06Z",
+      "side": 1,
+      "message": "if (delegatedSuperConstructors.size() \u003d\u003d 1) {\n      return delegatedSuperConstructors.get(0);\n    }\n    return null;",
+      "range": {
+        "startLine": 619,
+        "startChar": 0,
+        "endLine": 622,
+        "endChar": 64
+      },
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "839ab576_0647aa90",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-24T03:25:06Z",
+      "side": 1,
+      "message": "maybe move to related section below?",
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "839ab576_3b5beb45",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 3
@@ -19,6 +133,93 @@
         "endLine": 221,
         "endChar": 19
       },
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "839ab576_26cbce2c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-24T03:25:06Z",
+      "side": 1,
+      "message": "Would it be better if this an exit in checkJsConstructorSubType",
+      "parentUuid": "839ab576_3b5beb45",
+      "range": {
+        "startLine": 220,
+        "startChar": 4,
+        "endLine": 221,
+        "endChar": 19
+      },
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "839ab576_6656b64c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-24T03:25:06Z",
+      "side": 1,
+      "message": "if( JjsUtils.getJsConstructor(type)) {\n      // Types with JsConstructors checked separately.\n      return false; \n    }\n\n    JClassType superClass \u003d type.getSuperClass();\n    if (superClass \u003d\u003d null) {\n      return false;\n    }\n\n    if (JjsUtils.getJsConstructor(superClass) !\u003d null) {\n      return true;\n    }\n\n    return isJsConstructorSubtype(superClass);",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 46
+      },
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "839ab576_c693e265",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-24T03:25:06Z",
+      "side": 1,
+      "message": "Class \u0027EntryPoint.Buggy\u0027 should have all constructors delegating to a single constructor since it is subclass of a a type with JsConstructor.",
+      "range": {
+        "startLine": 1076,
+        "startChar": 17,
+        "endLine": 1077,
+        "endChar": 78
+      },
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "839ab576_86363a44",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-24T03:25:06Z",
+      "side": 1,
+      "message": "Constructor \u0027blah\u0027 can only call super constructor \u0027blah\u0027 since it is subclass of a a type with JsConstructor.",
       "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

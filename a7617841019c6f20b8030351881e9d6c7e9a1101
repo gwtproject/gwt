@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "a3bfb931_921262ae",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-25T01:33:32Z",
+      "side": 1,
+      "message": "Then you can keep transform version if you like",
+      "parentUuid": "a3bfb931_43ab0631",
+      "range": {
+        "startLine": 585,
+        "startChar": 0,
+        "endLine": 596,
+        "endChar": 37
+      },
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "839ab576_26f2ee74",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
         "patchSetId": 3
@@ -430,6 +454,24 @@
       "side": 1,
       "message": "Changed to \u0027Constructor \u0027blah\u0027 cannot call super constructor \u0027blah\u0027 since it is subclass of a a type with JsConstructor.\n\nBecause there might more than a super constructor that could be called (Native JsTypes with overloaded constructors).",
       "parentUuid": "839ab576_86363a44",
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3bfb931_b2bf9e74",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-25T01:33:32Z",
+      "side": 1,
+      "message": "If it is a native JsType we should never get this error message. Can you add a test?",
+      "parentUuid": "a3bfb931_a961f98f",
       "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

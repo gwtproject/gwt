@@ -475,6 +475,24 @@
       "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3bfb931_fd8d674d",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-26T18:24:51Z",
+      "side": 1,
+      "message": "You mean native type extending native type. Done",
+      "parentUuid": "a3bfb931_b2bf9e74",
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

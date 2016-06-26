@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a3bfb931_7dab379a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-26T18:24:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3bfb931_121f92b5",
+      "revId": "9f7ec9cf6679c29f5fcb84b6a08b86f6428dc8e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3bfb931_12667239",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "a3bfb931_5da8fb9b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-26T18:24:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3bfb931_12667239",
+      "revId": "9f7ec9cf6679c29f5fcb84b6a08b86f6428dc8e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3bfb931_d25a1a6e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 5
@@ -47,6 +83,30 @@
       "writtenOn": "2016-06-25T01:33:32Z",
       "side": 1,
       "message": "pls remove (checked above)",
+      "range": {
+        "startLine": 763,
+        "startChar": 0,
+        "endLine": 766,
+        "endChar": 5
+      },
+      "revId": "9f7ec9cf6679c29f5fcb84b6a08b86f6428dc8e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3bfb931_bd93ef73",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-26T18:24:51Z",
+      "side": 1,
+      "message": "oops.",
+      "parentUuid": "a3bfb931_d25a1a6e",
       "range": {
         "startLine": 763,
         "startChar": 0,

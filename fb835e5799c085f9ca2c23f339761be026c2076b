@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e321b186_c5b99a90",
+        "filename": "elemental/tests/elemental/json/JsonUtilTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5405
+      },
+      "writtenOn": "2016-06-27T07:14:41Z",
+      "side": 1,
+      "message": "0xffff",
+      "revId": "fb835e5799c085f9ca2c23f339761be026c2076b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e321b186_05b49292",
+        "filename": "elemental/tests/elemental/json/JsonUtilTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5405
+      },
+      "writtenOn": "2016-06-27T07:14:41Z",
+      "side": 1,
+      "message": "Seems like this is not testing anything at all since strings are generally never \u003d\u003d some other string",
+      "revId": "fb835e5799c085f9ca2c23f339761be026c2076b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

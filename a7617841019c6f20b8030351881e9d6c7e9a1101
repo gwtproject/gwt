@@ -493,6 +493,24 @@
       "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3bfb931_22035b3f",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-27T18:54:43Z",
+      "side": 1,
+      "message": "No, I think there was a misunderstanding. I was referring to you previous comment. You said you need to word i differently due to multiple constructors in Native jstypes and I said in that case you should never see this message.",
+      "parentUuid": "a3bfb931_fd8d674d",
+      "revId": "a7617841019c6f20b8030351881e9d6c7e9a1101",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e0c0c717_7620e691",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-28T22:14:10Z",
+      "side": 1,
+      "message": "Refactored and now it is much better.",
+      "parentUuid": "a3bfb931_98b557df",
+      "revId": "eeb41cc514707ce51259be560b77d3c4e2481265",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3bfb931_58bbdfd4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2016-06-28T03:13:49Z",
       "side": 1,
       "message": "nit: format.",
+      "revId": "eeb41cc514707ce51259be560b77d3c4e2481265",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0c0c717_76f7862d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-28T22:14:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3bfb931_58bbdfd4",
       "revId": "eeb41cc514707ce51259be560b77d3c4e2481265",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

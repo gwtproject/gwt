@@ -16,6 +16,24 @@
       "revId": "a8748b36a11cd433e9053cadcce08c23a59c98ab",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3bfb931_78d97b90",
+        "filename": "user/src/com/google/gwt/resources/css/GenerateCssAst.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-28T09:36:27Z",
+      "side": 1,
+      "message": "I was going for a minimal fix. \n\nBut if you prefer the minimal expression that would be \n\nString[] parts \u003d atRule.substring(10, atRule.length() - 1).replaceAll(\n          \"(,|\\\\s)\\\\s*\", \" \").replaceAll(\"\\\\.\", \"\").split(\" \");\n\nor if some assumptions can be made like the dots are always after a space or a comma:\n\nString[] parts \u003d atRule.substring(10, atRule.length() - 1).replaceAll(\n          \"(,|\\\\s)\\\\s*\\\\.?\", \" \").split(\" \");\n\nI don\u0027t really care much, let me know which one you prefer. I found this error (a new line in the @extern comment) while reproducing a different issue.",
+      "parentUuid": "a342592e_0ebe6bc5",
+      "revId": "a8748b36a11cd433e9053cadcce08c23a59c98ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

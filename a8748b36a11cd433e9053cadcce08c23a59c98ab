@@ -52,6 +52,24 @@
       "revId": "a8748b36a11cd433e9053cadcce08c23a59c98ab",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e321b186_6838bbde",
+        "filename": "user/src/com/google/gwt/resources/css/GenerateCssAst.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2016-06-28T10:12:53Z",
+      "side": 1,
+      "message": "The first one is the best I think:\n  String[] parts \u003d atRule.substring(10, atRule.length() - 1).replaceAll(\n          \"(,|\\\\s)\\\\s*\", \" \").replaceAll(\"\\\\.\", \"\").split(\" \");\n\nOtherwise you will have to deal with leading empty string in array returned by the split method:\n\n  \".foo, .bar, .baz\".split() will return [\"\", \"foo\", \"bar\", \"baz\"] I think.\n\nok to replace 10 by \"// @extern\".length",
+      "parentUuid": "a3bfb931_b8e3f337",
+      "revId": "a8748b36a11cd433e9053cadcce08c23a59c98ab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

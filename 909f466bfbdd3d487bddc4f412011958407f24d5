@@ -16,6 +16,24 @@
       "revId": "909f466bfbdd3d487bddc4f412011958407f24d5",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3bfb931_f8e44b47",
+        "filename": "user/super/com/google/gwt/emul/javaemul/internal/ConsoleLogger.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-06-28T09:26:57Z",
+      "side": 1,
+      "message": "I see. There are some options but none is really elegant.Let\u0027s talk tomorrow.\n\nAlso there is a devmode test that is broken by this but I don\u0027 t think that is really a problem and can be disabled.",
+      "parentUuid": "a3bfb931_d8aeaf95",
+      "revId": "909f466bfbdd3d487bddc4f412011958407f24d5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

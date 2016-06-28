@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3bfb931_98b557df",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-28T03:13:49Z",
+      "side": 1,
+      "message": "Having this check here (checkJsConstructorSubType) doesn\u0027t make much sense to me because this is not JsConstructor subtype limitation. Let\u0027s talk tomorrow.",
+      "revId": "eeb41cc514707ce51259be560b77d3c4e2481265",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3bfb931_58bbdfd4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-28T03:13:49Z",
+      "side": 1,
+      "message": "nit: format.",
+      "revId": "eeb41cc514707ce51259be560b77d3c4e2481265",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

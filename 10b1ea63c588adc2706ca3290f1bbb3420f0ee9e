@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0da8734_c373ea62",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-29T17:36:06Z",
+      "side": 1,
+      "message": "[error] Unused import - javax.annotation.Nullable.",
+      "revId": "10b1ea63c588adc2706ca3290f1bbb3420f0ee9e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0da8734_e370e658",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-29T17:36:06Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.ast.JType.",
+      "revId": "10b1ea63c588adc2706ca3290f1bbb3420f0ee9e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0da8734_036eb277",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-06-29T17:36:06Z",
+      "side": 1,
+      "message": "[warning] \u0027)\u0027 is preceded with whitespace.",
+      "revId": "10b1ea63c588adc2706ca3290f1bbb3420f0ee9e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

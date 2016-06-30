@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20be5fe3_97f2a409",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-30T00:28:04Z",
+      "side": 1,
+      "message": "Not sure why you need to special case infinity. NativeMath.pow already seems to work correctly?",
+      "range": {
+        "startLine": 93,
+        "startChar": 11,
+        "endLine": 93,
+        "endChar": 18
+      },
+      "revId": "737ad06ff583e0cfc6fe9ba67cf693c25aa69a8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20be5fe3_b79fe8cd",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-30T00:28:04Z",
+      "side": 1,
+      "message": "0",
+      "range": {
+        "startLine": 93,
+        "startChar": 16,
+        "endLine": 93,
+        "endChar": 18
+      },
+      "revId": "737ad06ff583e0cfc6fe9ba67cf693c25aa69a8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20be5fe3_57a76c1e",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-30T00:28:04Z",
+      "side": 1,
+      "message": "Double.isInfinite",
+      "range": {
+        "startLine": 93,
+        "startChar": 23,
+        "endLine": 93,
+        "endChar": 38
+      },
+      "revId": "737ad06ff583e0cfc6fe9ba67cf693c25aa69a8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20be5fe3_f7cc40cb",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-30T00:28:04Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 135,
+        "startChar": 16,
+        "endLine": 135,
+        "endChar": 18
+      },
+      "revId": "737ad06ff583e0cfc6fe9ba67cf693c25aa69a8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20be5fe3_375878e9",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-30T00:28:04Z",
+      "side": 1,
+      "message": "same here and all others below",
+      "range": {
+        "startLine": 188,
+        "startChar": 16,
+        "endLine": 188,
+        "endChar": 18
+      },
+      "revId": "737ad06ff583e0cfc6fe9ba67cf693c25aa69a8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0940fc2_fbd80fff",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-30T00:28:04Z",
+      "side": 1,
+      "message": "I don\u0027t think this is correct. Any value that larger than int max should be int max. That logic is came as casting float to int so we should just do that instead.",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 5
+      },
+      "revId": "737ad06ff583e0cfc6fe9ba67cf693c25aa69a8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0940fc2_7bfebf3a",
+        "filename": "user/super/com/google/gwt/emul/java/lang/Math.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-30T00:28:04Z",
+      "side": 1,
+      "message": "2.0",
+      "range": {
+        "startLine": 340,
+        "startChar": 46,
+        "endLine": 340,
+        "endChar": 48
+      },
+      "revId": "737ad06ff583e0cfc6fe9ba67cf693c25aa69a8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0940fc2_1b193b80",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-30T00:28:04Z",
+      "side": 1,
+      "message": "let\u0027s add a gwtSetup instead:\n\n  // Ensure -0.0 vs 0.0 behavior\n  assertPositiveZero(0.0);\n  assertNegativeZero(-0.0);\n  assertFalse(isNegativeZero(0.0));\n  \n\nand remove all other bits/methods and inline makeNegativeZero (since you already use -0.0 directly in new stuff)",
+      "revId": "737ad06ff583e0cfc6fe9ba67cf693c25aa69a8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0940fc2_bb7207cb",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-06-30T00:28:04Z",
+      "side": 1,
+      "message": "pls 0 or 0.0 instead 0.",
+      "revId": "737ad06ff583e0cfc6fe9ba67cf693c25aa69a8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

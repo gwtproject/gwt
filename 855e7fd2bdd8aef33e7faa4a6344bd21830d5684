@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0116f0b_b3f21874",
+        "filename": "elemental/tests/elemental/json/JsonUtilTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5405
+      },
+      "writtenOn": "2016-06-30T11:03:31Z",
+      "side": 1,
+      "message": "Indentation seems inconsistent with the rest of the file (or then gerrit is just showing things in a strange way)",
+      "revId": "855e7fd2bdd8aef33e7faa4a6344bd21830d5684",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0116f0b_f32f70e6",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "Should this be written with an InternalPreconditions check?",
+      "range": {
+        "startLine": 79,
+        "startChar": 27,
+        "endLine": 79,
+        "endChar": 29
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0116f0b_d334f43f",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "Should this be written with an InternalPreconditions check?",
+      "range": {
+        "startLine": 120,
+        "startChar": 18,
+        "endLine": 120,
+        "endChar": 49
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0116f0b_13eaeca5",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "Not sure about this error message?!",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 54
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "430b5d18_78ad41b2",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "We might not want to do this here, GWT RPC is already deprecated and nobody is using ArrayDeque with it anyway right now. So we might not add this here.",
+      "range": {
+        "startLine": 174,
+        "startChar": 3,
+        "endLine": 174,
+        "endChar": 19
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3e3cd1d_cccf6f35",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "modulo operator is more readable here",
+      "range": {
+        "startLine": 223,
+        "startChar": 22,
+        "endLine": 223,
+        "endChar": 23
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0116f0b_b30e9888",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "if (head \u003d\u003d tail) {\n  // queue empty nothing to do\n  return;\n}\n\nint length \u003d array.length;\nint numberOfElements \u003d size();\n\nfor (int i \u003d 0; i \u003c numberOfElements; i++) {\n  array[(i + head) % length] \u003d null;\n}\n\nhead \u003d 0;\ntail \u003d 0;",
+      "range": {
+        "startLine": 228,
+        "startChar": 14,
+        "endLine": 228,
+        "endChar": 19
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3e3cd1d_8cd96704",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "modulo again",
+      "range": {
+        "startLine": 231,
+        "startChar": 48,
+        "endLine": 231,
+        "endChar": 49
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3e3cd1d_2ce95389",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "modulo",
+      "range": {
+        "startLine": 327,
+        "startChar": 16,
+        "endLine": 327,
+        "endChar": 18
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80ae2bf8_72ced865",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "why do we set this to null?",
+      "range": {
+        "startLine": 417,
+        "startChar": 12,
+        "endLine": 417,
+        "endChar": 18
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00a23b11_8ed4fbfc",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "private void copyElements(Object[] dest) {\n  int length \u003d array.length;\n  int srcStart \u003d head;\n\n  for (int i \u003d 0; i \u003c length; i++) {\n    dest[i] \u003d array[(srcStart+i) % length];\n  }\n}",
+      "range": {
+        "startLine": 429,
+        "startChar": 2,
+        "endLine": 450,
+        "endChar": 3
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0116f0b_3323a8fd",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "How about just using the iterator implementation:\n\nIteratorImpl iterator \u003d new IteratorImpl();\n\nwhile(iterator.hasNext()) {\n  E e \u003d iterator.next();\n  if (o.equals(e)) {\n    return iterator.currentIndex;\n  }\n}\n\nreturn -1;",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 4
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0116f0b_13202ced",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "Decending iterator here?",
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20d49f7c_07c11636",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-06-30T09:36:38Z",
+      "side": 1,
+      "message": "Can this be simplified like copyElements?",
+      "range": {
+        "startLine": 516,
+        "startChar": 18,
+        "endLine": 516,
+        "endChar": 31
+      },
+      "revId": "1a45e65092f0f72086f683de79b778799e9b2533",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

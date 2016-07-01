@@ -1,0 +1,43 @@
+<!--                                                                        -->
+<!-- Copyright 2016 Google Inc.                                             -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); you    -->
+<!-- may not use this file except in compliance with the License. You may   -->
+<!-- may obtain a copy of the License at                                    -->
+<!--                                                                        -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                             -->
+<!--                                                                        -->
+<!-- Unless required by applicable law or agreed to in writing, software    -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,      -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or        -->
+<!-- implied. License for the specific language governing permissions and   -->
+<!-- limitations under the License.                                         -->
+
+<module>
+
+  <define-property name="gwt.logging.enabled" values="TRUE, FALSE, SEVERE, WARNING" />
+  <set-property name="gwt.logging.enabled" value="FALSE"/>
+  <set-property name="gwt.logging.enabled" value="TRUE">
+    <when-property-is name="jre.debugMode" value="ENABLED"/>
+  </set-property>
+
+  <!-- Forward gwt.logging.enabled to jre.logging.logLevel -->
+  <set-property name="jre.logging.logLevel" value="ALL">
+    <when-property-is name="gwt.logging.enabled" value="TRUE"/>
+  </set-property>
+  <set-property name="jre.logging.logLevel" value="SEVERE">
+    <when-property-is name="gwt.logging.enabled" value="SEVERE"/>
+  </set-property>
+  <set-property name="jre.logging.logLevel" value="WARNING">
+    <when-property-is name="gwt.logging.enabled" value="WARNING"/>
+  </set-property>
+
+
+  <define-property name="gwt.logging.simpleConsoleHandler" values="ENABLED, DISABLED" />
+  <set-property name="gwt.logging.simpleConsoleHandler" value="ENABLED"/>
+
+  <!-- Forward gwt.logging.simpleConsoleHandler to jre.logging.simpleConsoleHandler -->
+  <set-property name="jre.logging.simpleConsoleHandler" value="DISABLED">
+    <when-property-is name="gwt.logging.simpleConsoleHandler" value="DISABLED"/>
+  </set-property>
+
+</module>

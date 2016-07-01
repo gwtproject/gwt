@@ -22,6 +22,30 @@
       "revId": "b2bf79171e8a9836af496d4fef761385dc95f07d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdaeb264_49ce65c7",
+        "filename": "user/test/com/google/gwt/emultest/java/util/BitSetTest.java",
+        "patchSetId": 31
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-07-01T15:11:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2c414d4_a78c8441",
+      "range": {
+        "startLine": 57,
+        "startChar": 22,
+        "endLine": 57,
+        "endChar": 33
+      },
+      "revId": "b2bf79171e8a9836af496d4fef761385dc95f07d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

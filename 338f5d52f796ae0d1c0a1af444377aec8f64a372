@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d11e241_f79f1779",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 2953,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-01T20:08:49Z",
+      "side": 1,
+      "message": "nit: perhaps use member type instead",
+      "range": {
+        "startLine": 2953,
+        "startChar": 21,
+        "endLine": 2953,
+        "endChar": 30
+      },
+      "revId": "338f5d52f796ae0d1c0a1af444377aec8f64a372",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_5af4aa8b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-01T20:08:49Z",
+      "side": 1,
+      "message": "I\u0027m lost here. I don\u0027t think the user will understand what is going on....",
+      "range": {
+        "startLine": 907,
+        "startChar": 0,
+        "endLine": 908,
+        "endChar": 52
+      },
+      "revId": "338f5d52f796ae0d1c0a1af444377aec8f64a372",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

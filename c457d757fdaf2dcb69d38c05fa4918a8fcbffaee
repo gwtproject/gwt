@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d11e241_54f4848b",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-07-01T15:04:23Z",
+      "side": 1,
+      "message": "[warning] \u0027if\u0027 construct must use \u0027{}\u0027s.",
+      "revId": "c457d757fdaf2dcb69d38c05fa4918a8fcbffaee",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -330,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_b7a99fa3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-01T20:08:49Z",
+      "side": 1,
+      "message": "I meant the visitor below where it is used but doesn\u0027t matter.",
+      "parentUuid": "7d11e241_6310f0fc",
+      "range": {
+        "startLine": 336,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 3
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_201aee1c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 13
@@ -611,6 +635,30 @@
       "side": 1,
       "message": "Yep. only from native subtypes. I think it is reasonable to prevent that also. There is some ambiguity w.r.t. the semantics for those. It seems to me that super.getClass() should be the same as getClass().getSuperclass() and that means that super.getClass() for those types needs to return JSO. Let\u0027s just forbid that for now.",
       "parentUuid": "7d11e241_80c41a75",
+      "range": {
+        "startLine": 365,
+        "startChar": 15,
+        "endLine": 365,
+        "endChar": 76
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_5aa26aab",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-01T20:08:49Z",
+      "side": 1,
+      "message": "ok let\u0027s forbid. For the semantics part; we are bound with java semantics  which calls the same method since its final (so has the same result as this.getClass).",
+      "parentUuid": "7d11e241_a31cc80c",
       "range": {
         "startLine": 365,
         "startChar": 15,

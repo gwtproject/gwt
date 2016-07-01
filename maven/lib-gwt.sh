@@ -93,18 +93,9 @@ function maven-gwt() {
   done
 
   # Remove bundled third-parties from gwt-dev
-  echo "Removing ASM classes from gwt-dev"
-  zip -d $GWT_EXTRACT_DIR/gwt-dev.jar "org/objectweb/asm/*"
-  echo "Removing Gson classes from gwt-dev"
-  zip -d $GWT_EXTRACT_DIR/gwt-dev.jar "com/google/gson/*"
-  echo "Removing more dependencies from gwt-dev (incl. Jetty and HTMLUnit)"
-  zip -d $GWT_EXTRACT_DIR/gwt-dev.jar \
-      "META-INF/services/*" "javax/*" "org/w3c/*"  \
-      "org/eclipse/jetty/*" "org/apache/*" \
-      "com/gargoylesoftware/htmlunit/*" "net/sourceforge/htmlunit/*" \
-      "com/steadystate/css/*" "org/w3c/css/*" \
-      "org/cyberneko/html/*" "org/xml/sax/*" \
-      "cern/*" "com/ibm/icu/*" "java_cup/*"
+  zip $GWT_EXTRACT_DIR/gwt-dev.jar --copy --out $GWT_EXTRACT_DIR/gwt-dev-trimmed.jar \
+      "com/google/gwt/*" "org/eclipse/jdt/*" "org/w3c/flute/*"
+  mv $GWT_EXTRACT_DIR/gwt-dev-trimmed.jar $GWT_EXTRACT_DIR/gwt-dev.jar
 
   # Silently skip Elemental if it doesn't exist
   gwtLibs='dev user servlet codeserver'

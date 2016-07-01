@@ -671,6 +671,30 @@
     },
     {
       "key": {
+        "uuid": "7db562d9_9ab5cd90",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T23:24:28Z",
+      "side": 1,
+      "message": "So then we can easily allow, but let\u0027s forbid for now.",
+      "parentUuid": "7d11e241_5aa26aab",
+      "range": {
+        "startLine": 365,
+        "startChar": 15,
+        "endLine": 365,
+        "endChar": 76
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_e3eac0a7",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 13

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7db562d9_daaf453e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 2953,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T23:24:28Z",
+      "side": 1,
+      "message": "method.getJsType() \u003d\u003d METHOD? ok.",
+      "parentUuid": "7d11e241_f79f1779",
+      "range": {
+        "startLine": 2953,
+        "startChar": 21,
+        "endLine": 2953,
+        "endChar": 30
+      },
+      "revId": "338f5d52f796ae0d1c0a1af444377aec8f64a372",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_5af4aa8b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 15
@@ -36,6 +60,30 @@
       "writtenOn": "2016-07-01T20:08:49Z",
       "side": 1,
       "message": "I\u0027m lost here. I don\u0027t think the user will understand what is going on....",
+      "range": {
+        "startLine": 907,
+        "startChar": 0,
+        "endLine": 908,
+        "endChar": 52
+      },
+      "revId": "338f5d52f796ae0d1c0a1af444377aec8f64a372",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7db562d9_7a7c799c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T23:24:28Z",
+      "side": 1,
+      "message": "OK. Cleaned this up. Only forbid this one if it would result in the super.equals restriction. If the user defined it in the subclass it should be ok (need to add a test for this though, but it should work as it would create the right bridge).\n\nSo now the error is more selfexplanatory.",
+      "parentUuid": "7d11e241_5af4aa8b",
       "range": {
         "startLine": 907,
         "startChar": 0,

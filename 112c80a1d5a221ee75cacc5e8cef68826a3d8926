@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_8339c498",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2539,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "This is only needed to avoid tightening of native subclass methods to the Object implementation past its native supertype. It is enough to synthesize in native classes.",
+      "parentUuid": "7d11e241_6081066a",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_2048ae1c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 13
@@ -30,6 +48,30 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "maybe suffix?",
+      "range": {
+        "startLine": 2915,
+        "startChar": 17,
+        "endLine": 2915,
+        "endChar": 60
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_034db42c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2915,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_2048ae1c",
       "range": {
         "startLine": 2915,
         "startChar": 17,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_e349a020",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2921,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_e0be3612",
+      "range": {
+        "startLine": 2916,
+        "startChar": 0,
+        "endLine": 2921,
+        "endChar": 55
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_8039ba98",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 13
@@ -76,6 +142,30 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "maybe",
+      "range": {
+        "startLine": 2924,
+        "startChar": 17,
+        "endLine": 2924,
+        "endChar": 72
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_c3569cbc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2924,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_8039ba98",
       "range": {
         "startLine": 2924,
         "startChar": 17,
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_a353a8ca",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2928,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "By virtue of not having a body, added a comment.",
+      "parentUuid": "7d11e241_60ec6630",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_80e77a4c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 13
@@ -122,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_6365909a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2934,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "I think I can remove the synthetic here.",
+      "parentUuid": "7d11e241_80e77a4c",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_60d3466a",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 13
@@ -133,6 +259,24 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "I cannot see where you added the annotations?",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_830b04d5",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2946,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "This is a native type, the call is to make sure the annotations are propagated correctly to the method.",
+      "parentUuid": "7d11e241_60d3466a",
       "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -162,6 +306,30 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_6310f0fc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "You mean to JjsUtils class? Done.",
+      "parentUuid": "7d11e241_00748a48",
+      "range": {
+        "startLine": 336,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 3
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_201aee1c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 13
@@ -179,6 +347,24 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_e3fbe0c0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_201aee1c",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_c008d2d4",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 13
@@ -190,6 +376,30 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "why needed?",
+      "range": {
+        "startLine": 357,
+        "startChar": 41,
+        "endLine": 357,
+        "endChar": 58
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_c308dcd4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Changed into an assert.",
+      "parentUuid": "7d11e241_c008d2d4",
       "range": {
         "startLine": 357,
         "startChar": 41,
@@ -225,6 +435,30 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_a305e8ba",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_a01cbe0c",
+      "range": {
+        "startLine": 362,
+        "startChar": 11,
+        "endLine": 362,
+        "endChar": 14
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_63ad909b",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 13
@@ -236,6 +470,24 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "I think the comment here is not helping; it is not clear what it tries to explain. Maybe just say what is forbidden and why.",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_2331d892",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_63ad909b",
       "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -282,6 +534,48 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_e322c046",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Talked about this offline if the target is native method not defined on a native JsType then we assume the programmer intention and dispatch directly.",
+      "parentUuid": "7d11e241_e086362f",
+      "range": {
+        "startLine": 364,
+        "startChar": 46,
+        "endLine": 364,
+        "endChar": 82
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_83c42475",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "You mean invert the if? It is a complex expression that would not read very well negated.",
+      "parentUuid": "7d11e241_c0ac52b5",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_80c41a75",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 13
@@ -293,6 +587,30 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "This seems like incorrectly prevents super.getClass. Maybe that\u0027s ok for simplicity.",
+      "range": {
+        "startLine": 365,
+        "startChar": 15,
+        "endLine": 365,
+        "endChar": 76
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_a31cc80c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Yep. only from native subtypes. I think it is reasonable to prevent that also. There is some ambiguity w.r.t. the semantics for those. It seems to me that super.getClass() should be the same as getClass().getSuperclass() and that means that super.getClass() for those types needs to return JSO. Let\u0027s just forbid that for now.",
+      "parentUuid": "7d11e241_80c41a75",
       "range": {
         "startLine": 365,
         "startChar": 15,
@@ -328,6 +646,30 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_63c9108b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "This will imply a synthetic accidental override with a super call so we will be emitting an error for this, when (and if) we decide to handle supers that would be fixed then.\n\nI added a more descriptive error message for these cases.",
+      "parentUuid": "7d11e241_e3eac0a7",
+      "range": {
+        "startLine": 388,
+        "startChar": 10,
+        "endLine": 388,
+        "endChar": 57
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_c0d1f22c",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 13
@@ -339,6 +681,24 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "Method %s cannot override a method from \u0027java.lang.Object\u0027 and change its name.",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_a3ce088d",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_c0d1f22c",
       "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -362,6 +722,24 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_a3a968a3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "That is correct. But I guess confusing? When they are synthetic they are never a target of calls and their name is correct so the 2 checks that use this are still ok. I removed the synthetic from these methods now.",
+      "parentUuid": "7d11e241_632a30de",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_e3352036",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
         "patchSetId": 13
@@ -379,6 +757,24 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_83966461",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Nope. By 1 char.",
+      "parentUuid": "7d11e241_e3352036",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_631110a8",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReplaceNativeJavaLangObjectOverrides.java",
         "patchSetId": 13
@@ -390,6 +786,30 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "why the static check?",
+      "range": {
+        "startLine": 46,
+        "startChar": 39,
+        "endLine": 46,
+        "endChar": 65
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_639b508b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReplaceNativeJavaLangObjectOverrides.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Just to skip the intesection bellow. Premature optimization?",
+      "parentUuid": "7d11e241_631110a8",
       "range": {
         "startLine": 46,
         "startChar": 39,
@@ -425,6 +845,30 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_43904c63",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReplaceNativeJavaLangObjectOverrides.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_c319fccd",
+      "range": {
+        "startLine": 56,
+        "startChar": 20,
+        "endLine": 56,
+        "endChar": 36
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_43816ce0",
         "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
         "patchSetId": 13
@@ -436,6 +880,24 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "pls add tests with interfaces.",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_6176a576",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1970,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_43816ce0",
       "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -459,6 +921,24 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_8181b96c",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_e3676036",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_83f0a46a",
         "filename": "user/test/com/google/gwt/core/interop/JsTypeObjectMethodsTest.java",
         "patchSetId": 13
@@ -470,6 +950,24 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "2016",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_038a5435",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeObjectMethodsTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_83f0a46a",
       "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -510,6 +1008,24 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_c3833c1d",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeObjectMethodsTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Ah, got you.",
+      "parentUuid": "7d11e241_c3fd7c3e",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_434e0c85",
         "filename": "user/test/com/google/gwt/core/interop/JsTypeObjectMethodsTest.java",
         "patchSetId": 13
@@ -521,6 +1037,30 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "I think we should verify this 2 toString independently.",
+      "range": {
+        "startLine": 133,
+        "startChar": 27,
+        "endLine": 133,
+        "endChar": 60
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_8e81eb15",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeObjectMethodsTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_434e0c85",
       "range": {
         "startLine": 133,
         "startChar": 27,
@@ -556,6 +1096,30 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_6e86972d",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeObjectMethodsTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d11e241_43772cb9",
+      "range": {
+        "startLine": 137,
+        "startChar": 51,
+        "endLine": 137,
+        "endChar": 57
+      },
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d11e241_43bccc7c",
         "filename": "user/test/com/google/gwt/core/interop/JsTypeObjectMethodsTest.java",
         "patchSetId": 13
@@ -567,6 +1131,24 @@
       "writtenOn": "2016-07-01T01:43:32Z",
       "side": 1,
       "message": "This might break error reporting, please don\u0027t change it.",
+      "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_4e8bd333",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeObjectMethodsTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-01T18:19:55Z",
+      "side": 1,
+      "message": "Yeah.",
+      "parentUuid": "7d11e241_43bccc7c",
       "revId": "112c80a1d5a221ee75cacc5e8cef68826a3d8926",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

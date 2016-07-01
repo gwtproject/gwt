@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7d11e241_63e2300d",
+        "filename": "user/src/com/google/gwt/core/Core.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-01T03:02:22Z",
+      "side": 1,
+      "message": "There is no SPAM in java.logging perhaps you are referring to FINE?\n\nThe ones that we are missing are CONFIG, FINE, FINER, FINEST. For comparison INFO by itself is used magnitudes more than the total of all these together in Google.\nWe need to put a line somewhere since this is not free in draft. You can still set log level programmatically and I never seen people went into production with even INFO level so I think this is fine.",
+      "parentUuid": "00a23b11_0e900bb3",
+      "range": {
+        "startLine": 76,
+        "startChar": 55,
+        "endLine": 76,
+        "endChar": 86
+      },
+      "revId": "93b436784e10d1fb5a1b764f05512884e1490597",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0f88ffb_9b83ab72",
         "filename": "user/src/com/google/gwt/core/Core.gwt.xml",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-06-30T23:52:03Z",
       "side": 1,
       "message": "File missing in CL?",
+      "range": {
+        "startLine": 87,
+        "startChar": 18,
+        "endLine": 87,
+        "endChar": 51
+      },
+      "revId": "93b436784e10d1fb5a1b764f05512884e1490597",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d11e241_23ec38fd",
+        "filename": "user/src/com/google/gwt/core/Core.gwt.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-01T03:02:22Z",
+      "side": 1,
+      "message": "Good catch. Done.",
+      "parentUuid": "a0f88ffb_9b83ab72",
       "range": {
         "startLine": 87,
         "startChar": 18,

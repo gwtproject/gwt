@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7db562d9_20e72e4e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-02T01:11:25Z",
+      "side": 1,
+      "message": "Perhaps:\n synthetic (accidental)",
+      "range": {
+        "startLine": 906,
+        "startChar": 22,
+        "endLine": 906,
+        "endChar": 31
+      },
+      "revId": "47bf8b62a5659dd229dfb464a1125dba01d70190",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7db562d9_60768676",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-02T01:11:25Z",
+      "side": 1,
+      "message": "doesn\u0027t seem necessary.",
+      "range": {
+        "startLine": 908,
+        "startChar": 12,
+        "endLine": 908,
+        "endChar": 65
+      },
+      "revId": "47bf8b62a5659dd229dfb464a1125dba01d70190",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7db562d9_a08fbe94",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-02T01:11:25Z",
+      "side": 1,
+      "message": "Does it matter if the overridden method is synthetic or not?",
+      "revId": "47bf8b62a5659dd229dfb464a1125dba01d70190",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7db562d9_00e22a35",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-02T01:11:25Z",
+      "side": 1,
+      "message": "naively this should be just:\n\noverridenMethod.getEnclosingType() instanceof JInterfaceType\n  \u0026\u0026 overridenMethod.getJsMemberType() \u003d\u003d JsMemberType.NONE\n\nwithout above check but yeah probably missing something :)",
+      "revId": "47bf8b62a5659dd229dfb464a1125dba01d70190",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7db562d9_60c846b7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-02T01:11:25Z",
+      "side": 1,
+      "message": "What if make the rule simpler:\n\nNative JsType subclass %s can not implement interface %s that declares method \u0027%s\u0027 inherited from object.\n\nAnd that\u0027s all. Would this simplify the checking as well? This is very corner case so I\u0027m willing to ban this completely for simplicity. WDYT?",
+      "revId": "47bf8b62a5659dd229dfb464a1125dba01d70190",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

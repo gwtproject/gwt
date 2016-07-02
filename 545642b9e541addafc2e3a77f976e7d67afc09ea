@@ -33,6 +33,24 @@
       "revId": "545642b9e541addafc2e3a77f976e7d67afc09ea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bde35a1e_cc852f20",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-07-02T21:25:15Z",
+      "side": 1,
+      "message": "You mean jsinterop, not elemental, right? jsinterop-annotations-${version}.jar contains only classes, and jsinterop-annotations-${version}-sources.jar contains gwt.xml and java. If you use jsinterop annotations in a \"pure Java\" project, you only need classes, and if you the use that project in a GWT project, you add the sources and GWT module. For GWT libs, sources jars are mostly there because Maven Central mandates them (I think it helps IDEs to have a separate sources JAR even though the sources are in the \"normal\" JARs too)\n\nNote: I haven\u0027t changed the behavior here (or I hope so), on changed how the JARs were built (in the previous commit actually).",
+      "parentUuid": "fdd4f22f_7695d048",
+      "revId": "545642b9e541addafc2e3a77f976e7d67afc09ea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

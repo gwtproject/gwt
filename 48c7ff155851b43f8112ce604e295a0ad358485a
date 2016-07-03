@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7db562d9_239578ae",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ArrayDequeTest.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-07-03T17:43:45Z",
+      "side": 1,
+      "message": "[error] \u0027org.apache.commons.collections.TestCollection\u0027 should be separated from previous imports.",
+      "revId": "48c7ff155851b43f8112ce604e295a0ad358485a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

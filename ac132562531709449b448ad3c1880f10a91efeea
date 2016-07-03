@@ -22,6 +22,30 @@
       "revId": "ac132562531709449b448ad3c1880f10a91efeea",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9dde9659_cbd755fc",
+        "filename": "user/super/com/google/gwt/emul/java/lang/CharSequence.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-07-03T16:17:25Z",
+      "side": 1,
+      "message": "You\u0027re right, it should be lazy.\nDone.",
+      "parentUuid": "9d193675_532b8488",
+      "range": {
+        "startLine": 59,
+        "startChar": 26,
+        "endLine": 59,
+        "endChar": 35
+      },
+      "revId": "ac132562531709449b448ad3c1880f10a91efeea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

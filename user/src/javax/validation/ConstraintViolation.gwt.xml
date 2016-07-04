@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright 2011 Google Inc.
+  Copyright 2010 Google Inc.
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy of
@@ -14,12 +14,16 @@
   License for the specific language governing permissions and limitations under
   the License.
 -->
+<!-- Includes the javax.validation classes from the source jar  -->
 <module>
-  <inherits name="org.hibernate.jsr303.tck.tests.ValidationTck" />
   <source path="">
-    <include name="*.java" />
+    <include name="ConstraintViolation.java"/>
+    <include name="Path.java"/>
+    <include name="ElementKind.java"/>
+    <include name="metadata/ConstraintDescriptor.java"/>
+    <include name="ConstraintTarget.java"/>
+    <include name="ConstraintValidator.java"/>
+    <include name="ConstraintValidatorContext.java"/>
+    <include name="Payload.java"/>
   </source>
-  <replace-with class="org.hibernate.jsr303.tck.tests.xmlconfiguration.TckTestValidatorFactory">
-    <when-type-is class="javax.validation.ValidatorFactory"/>
-  </replace-with>
 </module>

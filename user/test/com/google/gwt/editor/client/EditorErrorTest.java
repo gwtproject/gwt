@@ -19,7 +19,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.adapters.EditorSource;
 import com.google.gwt.editor.client.adapters.ListEditor;
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.validation.client.impl.ConstraintViolationImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +28,7 @@ import java.util.List;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
+import javax.validation.metadata.ConstraintDescriptor;
 
 /**
  * Tests error propagation in generated code.
@@ -396,11 +396,36 @@ public class EditorErrorTest extends GWTTestCase {
   }
 
   private <T> ConstraintViolation<T> createViolation(
-      String msg, T rootBean, final String path) {
-    return new ConstraintViolationImpl.Builder<T>()
-        .setMessage(msg)
-        .setRootBean(rootBean)
-        .setPropertyPath(new Path() {
+      final String msg, final T rootBean, final String path) {
+    return new ConstraintViolation<T>() {
+      @Override
+      public ConstraintDescriptor<?> getConstraintDescriptor() {
+        return null;
+      }
+
+      @Override
+      public Object getInvalidValue() {
+        return null;
+      }
+
+      @Override
+      public Object getLeafBean() {
+        return null;
+      }
+
+      @Override
+      public String getMessage() {
+        return msg;
+      }
+
+      @Override
+      public String getMessageTemplate() {
+        return null;
+      }
+
+      @Override
+      public Path getPropertyPath() {
+        return new Path() {
           @Override
           public Iterator<Node> iterator() {
             return null;
@@ -410,6 +435,18 @@ public class EditorErrorTest extends GWTTestCase {
           public String toString() {
             return path;
           }
-        }).build();
+        };
+      }
+
+      @Override
+      public T getRootBean() {
+        return rootBean;
+      }
+
+      @Override
+      public Class<T> getRootBeanClass() {
+        return null;
+      }
+    };
   }
 }

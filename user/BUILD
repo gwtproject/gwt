@@ -207,23 +207,6 @@ java_library(
     constraints = ["android"],
 )
 
-# See //third_party/java/gwt:hibernate-validation-support
-java_library(
-    name = "hibernate-validation-support",
-    srcs = glob(
-        [
-            "src/org/hibernate/validator/**/*_CustomFieldSerializer.java",
-            "src/org/hibernate/validator/engine/ValidationSupport.java",
-        ],
-        exclude = ["**/package-info.java"],
-    ),
-    deps = [
-        "//third_party/java/hibernate:validator",
-        "//third_party/java/javax_validation",
-        "//third_party/java_src/gwt:gwt-servlet",
-    ],
-)
-
 # The indirection through libgwt-servlet-impl.jar is needed so that Java symbols in the outputs of
 # this package are distributed in one form (through the class jars, as AugmentedJar does)
 # This prevents them appearing them on classpath as both sources and classes, which confuses javac
@@ -244,7 +227,6 @@ java_library(
             "src/com/google/web/bindery/**/shared/**/*.java",
             "src/com/google/web/bindery/**/vm/**/*.java",
             "src/com/google/web/bindery/event/shared/**/*.java",
-            "src/javax/validation/**/*_CustomFieldSerializer.java",
             # Despite the "client" designation, these packages are
             # also reached by server RPC code:
             "src/com/google/gwt/canvas/dom/client/*.java",

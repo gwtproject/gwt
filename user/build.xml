@@ -28,10 +28,6 @@
     <isfalse value="${isJava8}" />
   </condition>
 
-  <property name="gwt.tck.testcase.dev.includes"
-            value="com/google/gwt/validation/tck/**/*GwtSuite.class"/>
-  <property name="gwt.tct.testcase.dev.excludes" value=""/>
-
   <property name="gwt.nongwt.testcase.includes" value="**/*JreSuite.class"/>
   <property name="gwt.nongwt.testcase.excludes" value=""/>
 
@@ -76,21 +72,6 @@
     <pathelement location="${gwt.tools.lib}/slf4j/slf4j-log4j12/slf4j-log4j12-1.7.12.jar"/>
     <pathelement
         location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
-    <!-- TCK jars -->
-    <pathelement
-        location="${gwt.tools.lib}/hibernate/validator/tck/jsr303-tck-1.0.3.GA-sources.jar"/>
-    <pathelement location="${gwt.tools.lib}/hibernate/validator/tck/jsr303-tck-1.0.3.GA.jar"/>
-    <pathelement
-        location="${gwt.tools.lib}/jboss/test-audit/jboss-test-audit-api-1.0.0-sources.jar"/>
-    <pathelement location="${gwt.tools.lib}/jboss/test-audit/jboss-test-audit-api-1.0.0.jar"/>
-    <pathelement
-        location="${gwt.tools.lib}/jboss/test-harness/jboss-test-harness-1.0.0-sources.jar"/>
-    <pathelement location="${gwt.tools.lib}/jboss/test-harness/jboss-test-harness-1.0.0.jar"/>
-    <pathelement
-        location="${gwt.tools.lib}/jboss/test-harness/jboss-test-harness-api-1.0.0-sources.jar"/>
-    <pathelement location="${gwt.tools.lib}/jboss/test-harness/jboss-test-harness-api-1.0.0.jar"/>
-    <pathelement location="${gwt.tools.lib}/testng/testng-5.14.1-sources.jar"/>
-    <pathelement location="${gwt.tools.lib}/testng/testng-5.14.1-nojunit.jar"/>
     <pathelement location="${gwt.dev.jar}"/>
     <pathelement location="${gwt.tools.lib}/gss/2015-11-04/closure-stylesheets-library-20151104-rebased.jar"/>
   </path>
@@ -112,11 +93,6 @@
         <!-- The source is included so validation is available from client code -->
         <pathelement
             location="${gwt.tools.lib}/javax/validation/validation-api-1.0.0.GA-sources.jar"/>
-        <!-- Hibernate is included until we can provide the super source as an third party jar" -->
-        <pathelement
-            location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final.jar"/>
-        <pathelement
-            location="${gwt.tools.lib}/hibernate/validator/hibernate-validator-4.1.0.Final-sources.jar"/>
         <pathelement
             location="${gwt.tools.lib}/streamhtmlparser/streamhtmlparser-jsilver-r10/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
         <pathelement location="${gwt.dev.jar}"/>
@@ -188,15 +164,6 @@
 
   <target name="checkstyle-source" description="Static analysis of source">
     <gwt.checkstyle>
-      <fileset dir="src">
-        <exclude name="javax/validation/super/javax/validation/constraints/Pattern.java"/>
-        <exclude name="javax/validation/super/javax/validation/spi/ConfigurationState.java"/>
-        <exclude name="javax/validation/super/javax/validation/MessageInterpolator.java"/>
-        <exclude name="javax/validation/super/javax/validation/Configuration.java"/>
-        <exclude name="javax/validation/super/javax/validation/Validation.java"/>
-        <exclude name="org/hibernate/validator/super/org/hibernate/validator/**/*.java"/>
-        <exclude name="org/hibernate/validator/ValidationMessages.java"/>
-      </fileset>
       <fileset dir="super/com/google/gwt/emul"/>
       <fileset dir="super/com/google/gwt/junit/translatable"/>
     </gwt.checkstyle>
@@ -581,118 +548,6 @@
         <antcall target="test.nometa.selenium"/>
       </parallel>
     </limit>
-  </target>
-
-
-  <!-- Validation TCK test and reports -->
-
-  <!-- TODO(nchalko) move the tck target to user/build.xml and then delete
-         all of samples/validaitontck -->
-  <target name="tck"
-          depends="tck.run,tck.report"
-          description="Run all tests for this project.">
-    <fail
-        message="One or more junit tests failed for target: @{test.name} @{test.args}"
-        if="junit.failure" status="2"/>
-  </target>
-
-  <target name="tck.run"
-          depends="compile, compile.tests"
-          description="Run all tests for this project.">
-    <!-- Prevent compilation for every target. -->
-    <property name="compile.complete" value="true"/>
-    <property name="compile.tests.complete" value="true"/>
-
-    <property.ensure name="dev.built" location="${gwt.dev.jar}"
-                     message="GWT must be built before performing any tests.  This can be fixed by running ant in the ${gwt.root} directory."/>
-    <limit failonerror="true" hours="${test.timeout}">
-
-      <antcall target="tck.dev.htmlunit"/>
-    </limit>
-
-    <fail
-        message="One or more tck tests failed for target: @{test.name} @{test.args}"
-        if="junit.failure" status="2"/>
-  </target>
-
-  <macrodef name="countMarkedTests">
-    <attribute name="annotation" default="NOT SET"/>
-    <attribute name="outputproperty" default="jsr303.marked.@{annotation}"/>
-    <sequential>
-
-    </sequential>
-  </macrodef>
-
-  <target name="tck.report">
-    <mkdir dir="${junit.out}/tck-report"/>
-    <mkdir dir="${junit.out}/tck-report/text"/>
-
-    <scan>
-      <fileset dir="test/org/hibernate/jsr303/tck/tests" id="id"/>
-      <filterchain>
-        <countfilter match="@Failing" property="jsr303.marked.Failing" init="0"/>
-        <countfilter match="@NonTckTest" property="jsr303.marked.NonTckTest" init="0"/>
-        <countfilter match="@NotSupported" property="jsr303.marked.NotSupported" init="0"/>
-        <countfilter match="@TestNotCompatible" property="jsr303.marked.TestNotCompatible"
-                     init="0"/>
-      </filterchain>
-    </scan>
-
-    <!-- force to zero if not set above -->
-    <property name="jsr303.marked.Failing" value="0"/>
-    <property name="jsr303.marked.NonTckTest" value="0"/>
-    <property name="jsr303.marked.NotSupported" value="0"/>
-    <property name="jsr303.marked.TestNotCompatible" value="0"/>
-
-    <echo message="Marked Failing = ${jsr303.marked.Failing}"/>
-    <echo message="Marked NonTckTest = ${jsr303.marked.NonTckTest}"/>
-    <echo message="Marked NotSupported = ${jsr303.marked.NotSupported}"/>
-    <echo message="Marked TestNotCompatible = ${jsr303.marked.TestNotCompatible}"/>
-
-    <junitreport todir="${junit.out}/tck-report">
-      <fileset dir="${junit.out}/tck-dev-htmlunit">
-        <include name="reports/TEST-*.xml"/>
-      </fileset>
-      <report format="noframes" todir="${junit.out}/tck-report" styledir="style/html">
-        <param name="markedFailing" expression="${jsr303.marked.Failing}"/>
-        <param name="markedNonTckTest" expression="${jsr303.marked.NonTckTest}"/>
-        <param name="markedNotSupported" expression="${jsr303.marked.NotSupported}"/>
-        <param name="markedTestNotCompatible" expression="${jsr303.marked.TestNotCompatible}"/>
-      </report>
-      <report format="noframes" todir="${junit.out}/tck-report/text" styledir="style/text">
-        <param name="markedFailing" expression="${jsr303.marked.Failing}"/>
-        <param name="markedNonTckTest" expression="${jsr303.marked.NonTckTest}"/>
-        <param name="markedNotSupported" expression="${jsr303.marked.NotSupported}"/>
-        <param name="markedTestNotCompatible" expression="${jsr303.marked.TestNotCompatible}"/>
-      </report>
-    </junitreport>
-
-    <concat taskname="JSR 303 TCK Result">
-      <filelist>
-        <file name="${junit.out}/tck-report/text/junit-noframes.html"/>
-      </filelist>
-    </concat>
-
-  </target>
-
-  <target name="tck.dev.htmlunit"
-          depends="compile, compile.tests"
-          description="Run dev-mode tests with HtmlUnit."
-          unless="test.dev.htmlunit.disable">
-    <fileset id="tck.dev.htmlunit.tests" dir="${javac.junit.out}"
-             includes="${gwt.tck.testcase.dev.includes}"
-             excludes="${gwt.tck.testcase.dev.excludes}"/>
-    <gwt.junit test.name="test.dev.htmlunit"
-               test.args="${test.args} -devMode"
-               test.jvmargs="-ea -Dcom.google.gwt.sample.validationtck.util.Failing.include=true"
-               test.out="${junit.out}/tck-dev-htmlunit"
-               test.cases="tck.dev.htmlunit.tests"
-               haltonfailure="false"
-        >
-      <extraclasspaths>
-        <path refid="test.extraclasspath"/>
-      </extraclasspaths>
-    </gwt.junit>
   </target>
 
   <!--

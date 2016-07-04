@@ -15,7 +15,7 @@
 <module>
   <inherits name="com.google.gwt.core.Core" />
   <inherits name="com.google.gwt.event.Event" />
-  <inherits name="com.google.gwt.validation.Validation" />
+  <inherits name="javax.validation.ConstraintViolation" />
 
   <source path="client"/>
   <source path="ui/client"/>

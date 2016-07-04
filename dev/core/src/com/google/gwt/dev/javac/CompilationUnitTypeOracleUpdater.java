@@ -1284,8 +1284,7 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
    */
   // TODO(zundel): Can be removed when javax.validation is included in the JRE
   private boolean shouldSuppressUnresolvableAnnotation(TreeLogger logger, String sourceName) {
-    if (sourceName.startsWith("javax.validation.")
-        || sourceName.startsWith("com.google.gwt.validation.")) {
+    if (sourceName.startsWith("javax.validation.")) {
       if (!warnedMissingValidationJar) {
         warnedMissingValidationJar = true;
         logger.log(TreeLogger.WARN, "Detected warnings related to '" + sourceName + "'. "

@@ -22,6 +22,30 @@
       "revId": "81b59dd9f85c8357d40fec1294595eb82c64c71c",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdd4f22f_f6c8c032",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1732,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-07-04T10:21:48Z",
+      "side": 1,
+      "message": "I removed it",
+      "parentUuid": "7db562d9_4e86132d",
+      "range": {
+        "startLine": 1725,
+        "startChar": 0,
+        "endLine": 1732,
+        "endChar": 5
+      },
+      "revId": "81b59dd9f85c8357d40fec1294595eb82c64c71c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

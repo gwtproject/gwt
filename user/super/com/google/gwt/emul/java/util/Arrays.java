@@ -20,7 +20,6 @@ import static javaemul.internal.Coercions.ensureInt;
 import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkArraySize;
 import static javaemul.internal.InternalPreconditions.checkCriticalArrayBounds;
-import static javaemul.internal.InternalPreconditions.checkCriticalPositionIndexes;
 import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
@@ -1634,12 +1633,22 @@ public class Arrays {
     return joiner.toString();
   }
 
-  private static int getCopyLength(Object array, int from, int to) {
+  private static int getCopyLength(Object original, int from, int to) {
+    checkCopyOfRange(original, from, to);
+    int len = ArrayHelper.getLength(original);
+    return Math.min(to, len) - from;
+  }
+
+  /**
+   * @throws IllegalArgumentException if {@code from > to}
+   * @throws NullPointerException if {@code original == null}
+   * @throws ArrayIndexOutOfBoundsException if {@code from < 0} or {@code from > original.length}
+   */
+  private static void checkCopyOfRange(Object original, int from, int to) {
     checkArgument(from <= to, "%s > %s", from, to);
-    int len = ArrayHelper.getLength(array);
-    to = Math.min(to, len);
-    checkCriticalPositionIndexes(from, to, len);
-    return to - from;
+    checkNotNull(original, "original");
+    int len = ArrayHelper.getLength(original);
+    checkCriticalArrayBounds(from, from, len);
   }
 
   /**

@@ -567,10 +567,7 @@ public class Arrays {
 
   public static <T> T[] copyOf(T[] original, int newLength) {
     checkArraySize(newLength);
-    checkNotNull(original, "original");
-    T[] clone = ArrayHelper.clone(original, 0, newLength);
-    ArrayHelper.setLength(clone, newLength);
-    return clone;
+    return copyOfRange(original, 0, newLength);
   }
 
   public static boolean[] copyOfRange(boolean[] original, int from, int to) {
@@ -630,9 +627,9 @@ public class Arrays {
   }
 
   public static <T> T[] copyOfRange(T[] original, int from, int to) {
-    int len = getCopyLength(original, from, to);
-    T[] copy = ArrayHelper.createFrom(original, to - from);
-    ArrayHelper.copy(original, from, copy, 0, len);
+    checkCopyOfRange(original, from, to);
+    T[] copy = ArrayHelper.clone(original, from, to);
+    ArrayHelper.setLength(copy, to - from);
     return copy;
   }
 

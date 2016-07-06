@@ -335,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "dd700e52_8d570144",
+        "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-06T23:44:45Z",
+      "side": 1,
+      "message": "I mean just use -0.0 instead of calling makeNegativeZero (since it is safe to do so as we verified the behavior in gwtSetup)",
+      "parentUuid": "7d348266_022aeadc",
+      "revId": "737ad06ff583e0cfc6fe9ba67cf693c25aa69a8d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0940fc2_bb7207cb",
         "filename": "user/test/com/google/gwt/emultest/java/lang/MathTest.java",
         "patchSetId": 4

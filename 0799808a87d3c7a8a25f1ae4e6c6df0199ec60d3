@@ -366,6 +366,30 @@
     },
     {
       "key": {
+        "uuid": "fd3dd29f_ce754369",
+        "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5385
+      },
+      "writtenOn": "2016-07-07T20:37:59Z",
+      "side": 1,
+      "message": "I think this is not a good idea, it makes the code harder to read and more error prone. I would prefer if we would not do this.",
+      "parentUuid": "a0116f0b_1665ba2d",
+      "range": {
+        "startLine": 233,
+        "startChar": 20,
+        "endLine": 233,
+        "endChar": 36
+      },
+      "revId": "0799808a87d3c7a8a25f1ae4e6c6df0199ec60d3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af75d8ba_13664cd9",
         "filename": "user/super/com/google/gwt/emul/java/util/BitSet.java",
         "patchSetId": 32

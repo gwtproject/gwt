@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa295886_4e71b3c4",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LookupMethodCreator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-07-08T14:40:36Z",
+      "side": 1,
+      "message": "typo: DEFAULT_PARTITIONS_SIZEF remove final F",
+      "revId": "e68fa733a9a8c84fb1c1ca2ea55dbd657a1b7d11",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa295886_2e7667be",
+        "filename": "user/src/com/google/gwt/i18n/rebind/LookupMethodCreator.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-07-08T14:40:36Z",
+      "side": 1,
+      "message": "Pls remove the IDE annotation NON-NLS-1",
+      "revId": "e68fa733a9a8c84fb1c1ca2ea55dbd657a1b7d11",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa295886_0e7baba4",
+        "filename": "user/test/com/google/gwt/i18n/rebind/LookupMethodCreatorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-07-08T14:40:36Z",
+      "side": 1,
+      "message": "If this test needs to be ignored it\u0027s better to remove it",
+      "revId": "e68fa733a9a8c84fb1c1ca2ea55dbd657a1b7d11",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

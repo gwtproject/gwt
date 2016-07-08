@@ -192,12 +192,8 @@ public abstract class Number implements Serializable {
     if (!__isValidDouble(s)) {
       throw NumberFormatException.forInputString(s);
     }
-    return parseFloat(s);
+    return JsUtils.parseFloat(s);
   }
-
-  private static native double parseFloat(String str) /*-{
-    return parseFloat(str);
-  }-*/;
 
   /**
    * @skip
@@ -224,15 +220,9 @@ public abstract class Number implements Serializable {
     }
 
     int toReturn = JsUtils.parseInt(s, radix);
-    // isTooLow is separated into its own variable to avoid a bug in BlackBerry OS 7. See
-    // https://code.google.com/p/google-web-toolkit/issues/detail?id=7291.
-    boolean isTooLow = toReturn < lowerBound;
-    if (Double.isNaN(toReturn)) {
-      throw NumberFormatException.forInputString(s);
-    } else if (isTooLow || toReturn > upperBound) {
+    if (Double.isNaN(toReturn) || toReturn < lowerBound || toReturn > upperBound) {
       throw NumberFormatException.forInputString(s);
     }
-
     return toReturn;
   }
 

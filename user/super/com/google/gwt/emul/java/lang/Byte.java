@@ -31,7 +31,7 @@ public final class Byte extends Number implements Comparable<Byte> {
    */
   private static class BoxedValues {
     // Box all values according to JLS
-    private static Byte[] boxedValues = new Byte[256];
+    private static final Byte[] boxedValues = new Byte[256];
   }
 
   public static int compare(byte x, byte y) {

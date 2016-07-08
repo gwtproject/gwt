@@ -31,7 +31,7 @@ public final class Short extends Number implements Comparable<Short> {
    */
   private static class BoxedValues {
     // Box values according to JLS - between -128 and 127
-    private static Short[] boxedValues = new Short[256];
+    private static final Short[] boxedValues = new Short[256];
   }
 
   public static int compare(short x, short y) {

@@ -32,8 +32,20 @@ public class JsUtils {
     return isNaN(d);
   }-*/;
 
+  public static native double parseFloat(String str) /*-{
+    return parseFloat(str);
+  }-*/;
+
   public static native int parseInt(String s, int radix) /*-{
     return parseInt(s, radix);
+  }-*/;
+
+  public static native String toString(int value, int radix) /*-{
+    return value.toString(radix);
+  }-*/;
+
+  public static native int toUnsignedInt(int value) /*-{
+    return (value >>> 0);
   }-*/;
 
   public static native boolean isUndefined(Object value) /*-{

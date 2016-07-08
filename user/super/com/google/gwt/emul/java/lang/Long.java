@@ -23,9 +23,9 @@ public final class Long extends Number implements Comparable<Long> {
   /**
    * Use nested class to avoid clinit on outer.
    */
-  static class BoxedValues {
+  private static class BoxedValues {
     // Box values according to JLS - between -128 and 127
-    static Long[] boxedValues = new Long[256];
+    private static final Long[] boxedValues = new Long[256];
   }
 
   public static final long MAX_VALUE = 0x7fffffffffffffffL;

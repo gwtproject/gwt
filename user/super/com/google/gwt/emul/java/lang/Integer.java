@@ -15,6 +15,10 @@
  */
 package java.lang;
 
+import static javaemul.internal.Coercions.ensureInt;
+
+import javaemul.internal.JsUtils;
+
 /**
  * Wraps a primitive <code>int</code> as an object.
  */
@@ -68,8 +72,16 @@ public final class Integer extends Number implements Comparable<Integer> {
     }
   }
 
+  public static int compareUnsigned(int a, int b) {
+    return compare(a ^ MIN_VALUE, b ^ MIN_VALUE);
+  }
+
   public static Integer decode(String s) throws NumberFormatException {
     return Integer.valueOf(__decodeAndValidateInt(s, MIN_VALUE, MAX_VALUE));
+  }
+
+  public static int divideUnsigned(int dividend, int divisor) {
+    return ensureInt(JsUtils.toUnsignedInt(dividend) / JsUtils.toUnsignedInt(divisor));
   }
 
   public static int hashCode(int i) {
@@ -157,6 +169,10 @@ public final class Integer extends Number implements Comparable<Integer> {
     return __parseAndValidateInt(s, radix, MIN_VALUE, MAX_VALUE);
   }
 
+  public static int remainderUnsigned(int dividend, int divisor) {
+    return ensureInt(JsUtils.toUnsignedInt(dividend) % JsUtils.toUnsignedInt(divisor));
+  }
+
   public static int reverse(int i) {
     int[] nibbles = ReverseNibbles.reverseNibbles;
     return (nibbles[i >>> 28]) | (nibbles[(i >> 24) & 0xf] << 4)
@@ -226,6 +242,10 @@ public final class Integer extends Number implements Comparable<Integer> {
       return String.valueOf(value);
     }
     return toRadixString(value, radix);
+  }
+
+  public static long toUnsignedLong(int x) {
+    return x & 0xffff_ffffL;
   }
 
   public static Integer valueOf(int i) {

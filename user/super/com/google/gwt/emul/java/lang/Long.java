@@ -50,9 +50,42 @@ public final class Long extends Number implements Comparable<Long> {
     }
   }
 
+  public static int compareUnsigned(long a, long b) {
+    return compare(a ^ MIN_VALUE, b ^ MIN_VALUE);
+  }
+
   public static Long decode(String s) throws NumberFormatException {
     __Decode decode = __decodeNumberString(s);
     return valueOf(decode.payload, decode.radix);
+  }
+
+  public static long divideUnsigned(long dividend, long divisor) {
+    if (divisor < 0) { // i.e., divisor >= 2^63:
+      if (compare(dividend, divisor) < 0) {
+        return 0; // dividend < divisor
+      } else {
+        return 1; // dividend >= divisor
+      }
+    }
+
+    // Optimization - use signed division if dividend < 2^63
+    if (dividend >= 0) {
+      return dividend / divisor;
+    }
+
+    /*
+     * Otherwise, approximate the quotient, check, and correct if necessary. Our approximation is
+     * guaranteed to be either exact or one less than the correct value. This follows from fact
+     * that floor(floor(x)/i) == floor(x/i) for any real x and integer i != 0. The proof is not
+     * quite trivial.
+     */
+    long quotient = ((dividend >>> 1) / divisor) << 1;
+    long rem = dividend - quotient * divisor;
+    if (compare(rem, divisor) >= 0) {
+      return quotient + 1;
+    } else {
+      return quotient;
+    }
   }
 
   public static int hashCode(long l) {
@@ -104,6 +137,35 @@ public final class Long extends Number implements Comparable<Long> {
 
   public static long parseLong(String s, int radix) throws NumberFormatException {
     return __parseAndValidateLong(s, radix);
+  }
+
+  public static long remainderUnsigned(long dividend, long divisor) {
+    if (divisor < 0) { // i.e., divisor >= 2^63:
+      if (compare(dividend, divisor) < 0) {
+        return dividend; // dividend < divisor
+      } else {
+        return dividend - divisor; // dividend >= divisor
+      }
+    }
+
+    // Optimization - use signed modulus if dividend < 2^63
+    if (dividend >= 0) {
+      return dividend % divisor;
+    }
+
+    /*
+     * Otherwise, approximate the quotient, check, and correct if necessary. Our approximation is
+     * guaranteed to be either exact or one less than the correct value. This follows from fact
+     * that floor(floor(x)/i) == floor(x/i) for any real x and integer i != 0. The proof is not
+     * quite trivial.
+     */
+    long quotient = ((dividend >>> 1) / divisor) << 1;
+    long rem = dividend - quotient * divisor;
+    if (compare(rem, divisor) >= 0) {
+      return rem - divisor;
+    } else {
+      return rem;
+    }
   }
 
   public static long reverse(long i) {

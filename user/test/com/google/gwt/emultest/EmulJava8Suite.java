@@ -15,9 +15,13 @@
  */
 package com.google.gwt.emultest;
 
+import com.google.gwt.emultest.java8.lang.ByteTest;
 import com.google.gwt.emultest.java8.lang.DoubleTest;
 import com.google.gwt.emultest.java8.lang.FloatTest;
+import com.google.gwt.emultest.java8.lang.IntegerTest;
+import com.google.gwt.emultest.java8.lang.LongTest;
 import com.google.gwt.emultest.java8.lang.MathTest;
+import com.google.gwt.emultest.java8.lang.ShortTest;
 import com.google.gwt.emultest.java8.lang.StringTest;
 import com.google.gwt.emultest.java8.math.BigIntegerConvertTest;
 import com.google.gwt.emultest.java8.util.ArrayListTest;
@@ -61,9 +65,13 @@ public class EmulJava8Suite {
     GWTTestSuite suite = new GWTTestSuite("Tests for com.google.gwt.emul.java8");
 
     //-- java.lang
+    suite.addTestSuite(ByteTest.class);
     suite.addTestSuite(DoubleTest.class);
     suite.addTestSuite(FloatTest.class);
+    suite.addTestSuite(IntegerTest.class);
+    suite.addTestSuite(LongTest.class);
     suite.addTestSuite(MathTest.class);
+    suite.addTestSuite(ShortTest.class);
     suite.addTestSuite(StringTest.class);
 
     //-- java.math

@@ -232,8 +232,11 @@ public final class Long extends Number implements Comparable<Long> {
 
   private static String toPowerOfTwoUnsignedString(long value, int shift) {
     final int radix = 1 << shift;
-    if (Integer.MIN_VALUE <= value && value <= Integer.MAX_VALUE) {
-      return Integer.toString((int) value, radix);
+
+    int intValue = (int) value;
+    // TODO: replace it with Integer.toUnsignedLong(intValue) == value
+    if ((intValue & 0xffffffffL) == value) {
+      return Integer.toString(intValue, radix);
     }
 
     final int mask = radix - 1;

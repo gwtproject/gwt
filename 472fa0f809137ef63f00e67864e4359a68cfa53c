@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a005cf1_a4e60350",
+        "filename": "user/super/com/google/gwt/emul/java/util/Arrays.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-07-09T00:04:21Z",
+      "side": 1,
+      "message": "It looks like this copyRange0 methods only exist to reuse \"new Short[to-from]\"\n\nI would just inline them so it would look like:\n\n checkCopyOfRange(original, from, to);\n return copyPrimitiveArray(original, new short[to-from],from, to);\n\nwithout the extra methods.",
+      "revId": "472fa0f809137ef63f00e67864e4359a68cfa53c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

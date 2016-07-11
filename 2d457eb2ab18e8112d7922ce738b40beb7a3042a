@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa295886_aebc9718",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-07-11T07:37:27Z",
+      "side": 1,
+      "message": "At this point there are some files like gwt-user which actually is not the original one, but the trimmed, that don\u0027t have the INDEX.LIST.\n\nThat causes an error in console that could confuse people:\n`zip warning: name not matched: META-INF/INDEX.LIST\n\nzip error: Nothing to do! (/.../gwt-user.jar)`\n\nI think we should do this only for the servlet and codeserver or change the line by\n`zip -q -d $CUR_FILE META-INF/INDEX.LIST \u003e/dev/null`",
+      "revId": "2d457eb2ab18e8112d7922ce738b40beb7a3042a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

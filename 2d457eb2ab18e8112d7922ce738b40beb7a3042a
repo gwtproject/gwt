@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "fa295886_0e472b10",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2016-07-11T08:43:33Z",
+      "side": 1,
+      "message": "This line can be removed",
+      "revId": "2d457eb2ab18e8112d7922ce738b40beb7a3042a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa295886_ee4bbf16",
+        "filename": "maven/lib-gwt.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2016-07-11T08:43:33Z",
+      "side": 1,
+      "message": "I would not introduce a for loop until we have an additional jsinterop jar file to produce.",
+      "revId": "2d457eb2ab18e8112d7922ce738b40beb7a3042a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa295886_aebc9718",
         "filename": "maven/lib-gwt.sh",
         "patchSetId": 1

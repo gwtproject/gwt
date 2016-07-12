@@ -240,7 +240,7 @@ public class CwBidiFormatting extends ContentWidget {
     String arg2 = arg2Box.getText().trim();
     message.setText(blogMessages.userComment(arg0, arg1, arg2));
 
-    bidiFormattedMessage.setHTML(
+    bidiFormattedMessage.setText(
         blogMessages.userComment(bidiFormatter.spanWrap(arg0),
         // arg1 is intended to be an unsigned number, so bidi formatting is not
         // needed. However, HTML escaping is a must to avoid an XSS attack hole!

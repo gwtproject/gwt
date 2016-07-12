@@ -18,6 +18,10 @@ package java.util;
 
 import static javaemul.internal.Coercions.ensureInt;
 import static javaemul.internal.InternalPreconditions.checkArraySize;
+import static javaemul.internal.InternalPreconditions.checkCriticalElement;
+
+import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
 
 import javaemul.internal.ArrayHelper;
 
@@ -707,6 +711,33 @@ public class BitSet {
 
   public int size() {
     return array.length * 32;
+  }
+
+  public IntStream stream() {
+    return StreamSupport.intStream(this::spliterator,
+        Spliterator.SIZED | Spliterator.SUBSIZED |
+            Spliterator.DISTINCT |  Spliterator.ORDERED | Spliterator.SORTED, false);
+  }
+
+  private Spliterator.OfInt spliterator() {
+    PrimitiveIterator.OfInt iterator = new PrimitiveIterator.OfInt() {
+      int cursor = nextSetBit(0);
+
+      @Override
+      public int nextInt() {
+        checkCriticalElement(hasNext());
+        int index = cursor;
+        cursor = nextSetBit(cursor + 1);
+        return index;
+      }
+
+      @Override
+      public boolean hasNext() {
+        return cursor != -1;
+      }
+    };
+    return Spliterators.spliterator(iterator, cardinality(),
+        Spliterator.DISTINCT | Spliterator.ORDERED | Spliterator.SORTED);
   }
 
   @Override

@@ -22,6 +22,7 @@ import com.google.gwt.emultest.java8.lang.StringTest;
 import com.google.gwt.emultest.java8.math.BigIntegerConvertTest;
 import com.google.gwt.emultest.java8.util.ArrayListTest;
 import com.google.gwt.emultest.java8.util.ArraysTest;
+import com.google.gwt.emultest.java8.util.BitSetTest;
 import com.google.gwt.emultest.java8.util.ComparatorTest;
 import com.google.gwt.emultest.java8.util.DoubleSummaryStatisticsTest;
 import com.google.gwt.emultest.java8.util.HashMapTest;
@@ -72,6 +73,7 @@ public class EmulJava8Suite {
     //-- java.util
     suite.addTestSuite(ArraysTest.class);
     suite.addTestSuite(ArrayListTest.class);
+    suite.addTestSuite(BitSetTest.class);
     suite.addTestSuite(LinkedListTest.class);
     suite.addTestSuite(ListTest.class);
     suite.addTestSuite(VectorTest.class);

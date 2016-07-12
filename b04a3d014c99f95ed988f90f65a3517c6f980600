@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bace00a2_d4cc9c44",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-07-12T12:03:10Z",
+      "side": 1,
+      "message": "Describing the \"mistakes\" would help reviewing the changes",
+      "revId": "b04a3d014c99f95ed988f90f65a3517c6f980600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bace00a2_144a149a",
+        "filename": "samples/showcase/src/com/google/gwt/sample/showcase/client/content/i18n/CwBidiFormatting.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-07-12T12:03:10Z",
+      "side": 1,
+      "message": "Really? the arguments to userComment seem to contain HTML (spanWrap, htmlEscape), so I\u0027d expect setHTML here (and bidiFormattedMessage is an HTML widget for some reason, otherwise it\u0027d be a Label.",
+      "revId": "b04a3d014c99f95ed988f90f65a3517c6f980600",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "9a0f7c78_b5653ecd",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JjsUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-13T17:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a0f7c78_7555860e",
+      "range": {
+        "startLine": 630,
+        "startChar": 5,
+        "endLine": 630,
+        "endChar": 68
+      },
+      "revId": "03a690aa2df0529ae947e530d0232ae45005c038",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a0f7c78_35630ef5",
         "filename": "user/test/com/google/gwt/dev/jjs/test/NoGenerateJsInteropExportsTest.java",
         "patchSetId": 5
@@ -53,6 +77,30 @@
       "writtenOn": "2016-07-13T17:51:17Z",
       "side": 1,
       "message": "2016",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "03a690aa2df0529ae947e530d0232ae45005c038",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a0f7c78_1556d2e4",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/NoGenerateJsInteropExportsTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-07-13T17:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a0f7c78_35630ef5",
       "range": {
         "startLine": 2,
         "startChar": 16,

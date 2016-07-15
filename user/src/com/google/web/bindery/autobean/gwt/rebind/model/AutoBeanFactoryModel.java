@@ -218,7 +218,7 @@ public class AutoBeanFactoryModel {
 
   private List<AutoBeanMethod> computeMethods(JClassType beanType) {
     List<JMethod> toExamine = new ArrayList<JMethod>();
-    toExamine.addAll(Arrays.asList(beanType.getInheritableMethods()));
+    toExamine.addAll(Arrays.asList(beanType.getAllInheritableMethods()));
     toExamine.addAll(objectMethods);
     List<AutoBeanMethod> toReturn = new ArrayList<AutoBeanMethod>(
         toExamine.size());
@@ -291,7 +291,7 @@ public class AutoBeanFactoryModel {
       return null;
     }
     for (JClassType category : categoryTypes) {
-      for (JMethod method : category.getOverloads("__intercept")) {
+      for (JMethod method : category.getAllOverloads("__intercept")) {
         // Ignore non-static, non-public methods
         // TODO: Implement visibleFrom() to allow package-protected categories
         if (!method.isStatic() || !method.isPublic()) {
@@ -342,7 +342,7 @@ public class AutoBeanFactoryModel {
       // One extra argument for the AutoBean
       JParameter[] methodParams = method.getParameters();
       int requiredArgs = methodParams.length + 1;
-      overload : for (JMethod overload : category.getOverloads(method.getName())) {
+      overload : for (JMethod overload : category.getAllOverloads(method.getName())) {
         if (!overload.isStatic() || !overload.isPublic()) {
           // Ignore non-static, non-public methods
           continue;

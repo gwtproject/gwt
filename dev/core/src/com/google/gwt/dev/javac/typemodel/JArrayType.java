@@ -127,6 +127,11 @@ public class JArrayType extends JClassType implements
   }
 
   @Override
+  public JMethod[] getAllInheritableMethods() {
+    return getOracle().getJavaLangObject().getAllInheritableMethods();
+  }
+
+  @Override
   public String getJNISignature() {
     return "[" + componentType.getJNISignature();
   }
@@ -145,6 +150,11 @@ public class JArrayType extends JClassType implements
   @Override
   public JMethod[] getMethods() {
     return getOracle().getJavaLangObject().getMethods();
+  }
+
+  @Override
+  public JMethod[] getAllMethods() {
+    return getOracle().getJavaLangObject().getAllMethods();
   }
 
   @Override
@@ -173,8 +183,18 @@ public class JArrayType extends JClassType implements
   }
 
   @Override
+  public JMethod[] getAllOverloads(String name) {
+    return getOracle().getJavaLangObject().getAllOverloads(name);
+  }
+
+  @Override
   public JMethod[] getOverridableMethods() {
     return getOracle().getJavaLangObject().getOverridableMethods();
+  }
+
+  @Override
+  public JMethod[] getAllOverridableMethods() {
+    return getOracle().getJavaLangObject().getAllOverridableMethods();
   }
 
   @Override

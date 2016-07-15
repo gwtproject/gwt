@@ -199,7 +199,14 @@ public class CompilationUnitTypeOracleUpdaterFromSourceTest extends TypeOracleUp
     buildTypeOracle();
 
     assertEquals(1, typeOracle.findType("test.java8.Java8Interface").getMethods().length);
+    assertEquals(3, typeOracle.findType("test.java8.Java8Interface").getAllMethods().length);
     assertEquals("m", typeOracle.findType("test.java8.Java8Interface").getMethods()[0].getName());
+    assertEquals(1, typeOracle.findType("test.java8.Java8Interface").getInheritableMethods().length);
+    assertEquals(3, typeOracle.findType("test.java8.Java8Interface").getAllInheritableMethods().length);
+    assertEquals("m", typeOracle.findType("test.java8.Java8Interface").getInheritableMethods()[0].getName());
+    assertEquals(1, typeOracle.findType("test.java8.Java8Interface").getOverridableMethods().length);
+    assertEquals(3, typeOracle.findType("test.java8.Java8Interface").getAllOverridableMethods().length);
+    assertEquals("m", typeOracle.findType("test.java8.Java8Interface").getOverridableMethods()[0].getName());
     assertNotNull(typeOracle.findType(CU_Object.getTypeName()));
     assertEquals(2, typeOracle.getTypes().length);
   }

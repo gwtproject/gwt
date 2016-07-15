@@ -936,11 +936,6 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     // Process methods
     for (CollectMethodData method : classData.getMethods()) {
       TreeLogger branch = logger.branch(TreeLogger.SPAM, "Resolving method " + method.getName());
-      // TODO(rluble): Allow the users to ask for Java 8 features. For now these are filtered out.
-      if (isInterface && isJava8InterfaceMethod(method)) {
-        logger.log(TreeLogger.Type.SPAM, "Ignoring Java 8 interface method " + method.getName());
-        continue;
-      }
       if (!resolveMethod(branch, unresolvedType, method, typeParamLookup, context)) {
         // Already logged.
         return false;
@@ -958,12 +953,6 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
       }
     }
     return true;
-  }
-
-  private boolean isJava8InterfaceMethod(CollectMethodData method) {
-    // (Normal) interface methods are abstract. Java 8 introduced the ability to declare default
-    // methods and static methods both of which are exposed as non abstract methods.
-    return (method.getAccess() & Opcodes.ACC_ABSTRACT) == 0;
   }
 
   private boolean resolveClass(
@@ -1132,10 +1121,6 @@ public class CompilationUnitTypeOracleUpdater extends TypeOracleUpdater {
     }
 
     addModifierBits(method, mapBits(ASM_TO_SHARED_MODIFIERS, methodData.getAccess()));
-    if (unresolvedType.isInterface() != null) {
-      // Always add implicit modifiers on interface methods.
-      addModifierBits(method, Shared.MOD_PUBLIC | Shared.MOD_ABSTRACT);
-    }
 
     if ((methodData.getAccess() & Opcodes.ACC_VARARGS) != 0) {
       setVarArgs(method);

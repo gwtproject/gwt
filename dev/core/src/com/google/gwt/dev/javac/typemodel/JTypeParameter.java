@@ -90,6 +90,11 @@ public class JTypeParameter extends JDelegatingClassType implements
   }
 
   @Override
+  public JMethod[] getAllMethods() {
+    return getBaseType().getAllMethods();
+  }
+
+  @Override
   public String getName() {
     return typeName;
   }

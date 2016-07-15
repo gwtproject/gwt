@@ -41,7 +41,9 @@ class DelegateMembers extends AbstractMembers {
   private JField[] fields;
   private List<JConstructor> lazyConstructors;
   private Map<String, Object> methodMap;
+  private Map<String, Object> allMethodMap;
   private JMethod[] methods;
+  private JMethod[] allMethods;
   private final Substitution substitution;
 
   /**
@@ -68,13 +70,45 @@ class DelegateMembers extends AbstractMembers {
   @Override
   public JMethod[] getMethods() {
     initMethods();
+    if (methods == null) {
+      methods = withoutJava8InterfaceMethods(allMethods);
+    }
     return methods.length == 0 ? methods : methods.clone();
+  }
+
+  @Override
+  public JMethod[] getAllMethods() {
+    initMethods();
+    return allMethods.length == 0 ? allMethods : allMethods.clone();
   }
 
   @Override
   public JMethod[] getOverloads(String name) {
     initMethods();
+    // Compute methodMap lazily based on allMethodMap
+    if (methodMap == null) {
+      methodMap = Maps.create();
+    }
     Object object = methodMap.get(name);
+    if (object == null) {
+      object = allMethodMap.get(name);
+      if (object == null) {
+        return TypeOracle.NO_JMETHODS;
+      } else {
+        methodMap = Maps.put(methodMap, name, object);
+      }
+    }
+    if (object instanceof JMethod) {
+      return new JMethod[]{(JMethod) object};
+    } else {
+      return ((JMethod[]) object).clone();
+    }
+  }
+
+  @Override
+  public JMethod[] getAllOverloads(String name) {
+    initMethods();
+    Object object = allMethodMap.get(name);
     if (object == null) {
       return TypeOracle.NO_JMETHODS;
     } else if (object instanceof JMethod) {
@@ -162,29 +196,29 @@ class DelegateMembers extends AbstractMembers {
 
   @SuppressWarnings("unchecked")
   private void initMethods() {
-    if (methods != null) {
+    if (allMethods != null) {
       return;
     }
     // Transitively sorted.
-    methods = baseType.getMethods();
-    methodMap = new HashMap<String, Object>();
-    for (int i = 0; i < methods.length; ++i) {
-      JMethod baseMethod = methods[i];
+    allMethods = baseType.getAllMethods();
+    allMethodMap = new HashMap<String, Object>();
+    for (int i = 0; i < allMethods.length; ++i) {
+      JMethod baseMethod = allMethods[i];
       JMethod newMethod = new JMethod(getParentType(), baseMethod);
       initializeParams(baseMethod, newMethod);
       newMethod.setReturnType(substitute(baseMethod.getReturnType()));
       initializeExceptions(baseMethod, newMethod);
-      methods[i] = newMethod;
+      allMethods[i] = newMethod;
 
       String methodName = newMethod.getName();
-      Object object = methodMap.get(methodName);
+      Object object = allMethodMap.get(methodName);
       if (object == null) {
-        methodMap.put(methodName, newMethod);
+        allMethodMap.put(methodName, newMethod);
       } else if (object instanceof JMethod) {
         List<JMethod> list = new ArrayList<JMethod>(2);
         list.add((JMethod) object);
         list.add(newMethod);
-        methodMap.put(methodName, list);
+        allMethodMap.put(methodName, list);
       } else {
         List<JMethod> list = (List<JMethod>) object;
         list.add(newMethod);
@@ -192,14 +226,14 @@ class DelegateMembers extends AbstractMembers {
     }
 
     // Replace the ArrayLists with plain arrays.
-    for (String methodName : methodMap.keySet()) {
-      Object object = methodMap.get(methodName);
+    for (String methodName : allMethodMap.keySet()) {
+      Object object = allMethodMap.get(methodName);
       if (object instanceof List) {
         List<JMethod> list = (List<JMethod>) object;
-        methodMap.put(methodName, list.toArray(TypeOracle.NO_JMETHODS));
+        allMethodMap.put(methodName, list.toArray(TypeOracle.NO_JMETHODS));
       }
     }
-    methodMap = Maps.normalize(methodMap);
+    allMethodMap = Maps.normalize(allMethodMap);
   }
 
   private JType substitute(JType type) {

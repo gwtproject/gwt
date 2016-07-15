@@ -325,7 +325,7 @@ public class JParameterizedTypeTest extends JDelegatingClassTypeTestBase {
         Arrays.asList(type.getInheritableMethods()));
     validateInheritableOrOverridableMethods(expected, actual, true);
 
-    actual = new ArrayList<JMethod>(Arrays.asList(type.getOverridableMethods()));
+    actual = new ArrayList<JMethod>(Arrays.asList(type.getAllOverridableMethods()));
     validateInheritableOrOverridableMethods(expected, actual, true);
   }
 
@@ -349,7 +349,7 @@ public class JParameterizedTypeTest extends JDelegatingClassTypeTestBase {
         Arrays.asList(type.getInheritableMethods()));
     validateInheritableOrOverridableMethods(expected, actual, true);
 
-    actual = new ArrayList<JMethod>(Arrays.asList(type.getOverridableMethods()));
+    actual = new ArrayList<JMethod>(Arrays.asList(type.getAllOverridableMethods()));
     validateInheritableOrOverridableMethods(expected, actual, true);
   }
 
@@ -370,7 +370,7 @@ public class JParameterizedTypeTest extends JDelegatingClassTypeTestBase {
     validateInheritableOrOverridableMethods(expected, actual, true);
 
     actual = new ArrayList<JMethod>(
-        Arrays.asList(paramType.getOverridableMethods()));
+        Arrays.asList(paramType.getAllOverridableMethods()));
 
     validateInheritableOrOverridableMethods(expected, actual, true);
   }

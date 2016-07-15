@@ -92,18 +92,49 @@ public interface JClassType extends JType, HasAnnotations {
    * This method offers a convenient way for Generators to find candidate
    * methods to call from a subclass.
    *
+   * For backwards compatibility, this does not include default methods
+   * on interfaces. Use {@code getAllInheritableMethods()} if you want them.
+   *
+   * @return an array of {@link JMethod} objects representing inheritable
+   *         methods
+   *
+   * @see #getAllInheritableMethods()
+   */
+  JMethod[] getInheritableMethods();
+
+  /**
+   * Iterates over the most-derived declaration of each unique inheritable
+   * method available in the type hierarchy of the specified type, including
+   * those found in superclasses and superinterfaces. A method is inheritable if
+   * its accessibility is <code>public</code>, <code>protected</code>, or
+   * package protected.
+   *
+   * This method offers a convenient way for Generators to find candidate
+   * methods to call from a subclass.
+   *
    * @return an array of {@link JMethod} objects representing inheritable
    *         methods
    */
-  JMethod[] getInheritableMethods();
+  JMethod[] getAllInheritableMethods();
 
   JMethod getMethod(String name, JType[] paramTypes) throws NotFoundException;
 
   /**
    * Returns the declared methods of this class (not any superclasses or
    * superinterfaces).
+   *
+   * For backwards compatibility, static and default methods on interfaces
+   * are not returned. Use {@code getAllMethods()} if you want them.
+   *
+   * @see #getAllMethods()
    */
   JMethod[] getMethods();
+
+  /**
+   * Returns the declared methods of this class (not any superclasses or
+   * superinterfaces).
+   */
+  JMethod[] getAllMethods();
 
   /**
    * If an array, returns the name of this class without the package name or
@@ -122,8 +153,43 @@ public interface JClassType extends JType, HasAnnotations {
   /**
    * Returns the declared methods of this class with the given name
    * (doesn't include any superclasses or superinterfaces).
+   *
+   * For backwards compatibility, this does not include default methods
+   * on interfaces. Use {@code getAllOverloads(name)} if you want them.
+   *
+   * @see #getAllOverloads(String)
    */
   JMethod[] getOverloads(String name);
+
+  /**
+   * Returns the declared methods of this class with the given name
+   * (doesn't include any superclasses or superinterfaces).
+   */
+  JMethod[] getAllOverloads(String name);
+
+  /**
+   * Iterates over the most-derived declaration of each unique overridable
+   * method available in the type hierarchy of the specified type, including
+   * those found in superclasses and superinterfaces. A method is overridable if
+   * it is not <code>final</code> and its accessibility is <code>public</code>,
+   * <code>protected</code>, or package protected.
+   *
+   * Deferred binding generators often need to generate method implementations;
+   * this method offers a convenient way to find candidate methods to implement.
+   *
+   * Note that the behavior does not match
+   * {@link Class#getMethod(String, Class[])}, which does not return the most
+   * derived method in some cases.
+   *
+   * For backwards compatibility, this does not include default methods on
+   * interfaces. Use {@code getAllOverridableMethods()} if you want them.
+   *
+   * @return an array of {@link JMethod} objects representing overridable
+   *         methods
+   *
+   * @see #getAllOverridableMethods()
+   */
+  JMethod[] getOverridableMethods();
 
   /**
    * Iterates over the most-derived declaration of each unique overridable
@@ -142,7 +208,7 @@ public interface JClassType extends JType, HasAnnotations {
    * @return an array of {@link JMethod} objects representing overridable
    *         methods
    */
-  JMethod[] getOverridableMethods();
+  JMethod[] getAllOverridableMethods();
 
   JPackage getPackage();
 

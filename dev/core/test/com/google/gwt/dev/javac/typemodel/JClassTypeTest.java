@@ -46,7 +46,7 @@ public class JClassTypeTest extends TestCase {
     // Verify IA.
     {
       JClassType type = typeOracle.getType("com.google.gwt.dev.javac.typemodel.test.IA");
-      JMethod[] leafMethods = type.getOverridableMethods();
+      JMethod[] leafMethods = type.getAllOverridableMethods();
       assertEquals(3, leafMethods.length);
 
       assertMethodOverridable(typeOracle,
@@ -65,7 +65,7 @@ public class JClassTypeTest extends TestCase {
     // Verify IB.
     {
       JClassType type = typeOracle.getType("com.google.gwt.dev.javac.typemodel.test.IB");
-      JMethod[] leafMethods = type.getOverridableMethods();
+      JMethod[] leafMethods = type.getAllOverridableMethods();
       assertEquals(5, leafMethods.length);
 
       assertMethodOverridable(typeOracle,
@@ -92,7 +92,7 @@ public class JClassTypeTest extends TestCase {
     // Verify IC.
     {
       JClassType type = typeOracle.getType("com.google.gwt.dev.javac.typemodel.test.IC");
-      JMethod[] leafMethods = type.getOverridableMethods();
+      JMethod[] leafMethods = type.getAllOverridableMethods();
       assertEquals(7, leafMethods.length);
 
       assertMethodOverridable(typeOracle,
@@ -338,10 +338,10 @@ public class JClassTypeTest extends TestCase {
     JClassType searchType = oracle.getType(searchTypeName);
 
     assertMethodInclusion(shouldBeInheritable,
-        searchType.getInheritableMethods(), methodName, expectedType,
+        searchType.getAllInheritableMethods(), methodName, expectedType,
         paramTypes);
     assertMethodInclusion(shouldBeOverridable,
-        searchType.getOverridableMethods(), methodName, expectedType,
+        searchType.getAllOverridableMethods(), methodName, expectedType,
         paramTypes);
   }
 

@@ -19,6 +19,7 @@ import com.google.gwt.dev.util.collect.Lists;
 import com.google.gwt.dev.util.collect.Maps;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +61,24 @@ class Members extends AbstractMembers {
     for (String methodName : methodOrder) {
       Object object = methodMap.get(methodName);
       if (object instanceof JMethod) {
+        JMethod method = (JMethod) object;
+        if (classType.isInterface() == null || !isJava8InterfaceMethod(method)) {
+          result.add(method);
+        }
+      } else {
+        result.addAll(withoutJava8InterfaceMethods((List<JMethod>) object));
+      }
+    }
+    return result.toArray(TypeOracle.NO_JMETHODS);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public JMethod[] getAllMethods() {
+    List<JMethod> result = new ArrayList<JMethod>();
+    for (String methodName : methodOrder) {
+      Object object = methodMap.get(methodName);
+      if (object instanceof JMethod) {
         result.add((JMethod) object);
       } else {
         result.addAll((List<JMethod>) object);
@@ -71,6 +90,25 @@ class Members extends AbstractMembers {
   @SuppressWarnings("unchecked")
   @Override
   public JMethod[] getOverloads(String name) {
+    Object object = methodMap.get(name);
+    if (object == null) {
+      return TypeOracle.NO_JMETHODS;
+    } else if (object instanceof JMethod) {
+      JMethod method = (JMethod) object;
+      if (classType.isInterface() != null && isJava8InterfaceMethod(method)) {
+        return TypeOracle.NO_JMETHODS;
+      } else {
+        return new JMethod[]{method};
+      }
+    } else {
+      Collection<JMethod> overloads = withoutJava8InterfaceMethods((List<JMethod>) object);
+      return overloads.toArray(TypeOracle.NO_JMETHODS);
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public JMethod[] getAllOverloads(String name) {
     Object object = methodMap.get(name);
     if (object == null) {
       return TypeOracle.NO_JMETHODS;

@@ -545,6 +545,7 @@ public final class CompilingClassLoader extends ClassLoader implements
          *
          * c_g_p_B_z() -> JsoB$.z$()
          */
+        // Note that we use getOverridableMethods to ignore static and default methods
         for (JMethod intfMethod : type.getOverridableMethods()) {
           assert intfMethod.isAbstract() : "Expecting only abstract methods";
 
@@ -705,7 +706,7 @@ public final class CompilingClassLoader extends ClassLoader implements
         erasedTypes[i] = intfMethod.getParameters()[i].getType().getErasedType();
       }
 
-      outer : for (JMethod method : implementingType.getOverloads(intfMethod.getName())) {
+      outer : for (JMethod method : implementingType.getAllOverloads(intfMethod.getName())) {
         JParameter[] params = method.getParameters();
         if (params.length != numParams) {
           continue;
@@ -785,7 +786,7 @@ public final class CompilingClassLoader extends ClassLoader implements
     } catch (ClassNotFoundException ignored) {
     }
     emmaStrategy = EmmaStrategy.get(emmaAvailable);
-    
+
     /* Bridging Jacoco's Offline entry point. */
     try {
       Class<?> jacoco = Class.forName(JACOCO_ENTRYPOINT,

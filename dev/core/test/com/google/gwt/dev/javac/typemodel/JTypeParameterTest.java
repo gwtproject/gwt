@@ -76,6 +76,8 @@ public class JTypeParameterTest extends JDelegatingClassTypeTestBase {
 
     assertTrue(Arrays.deepEquals(testType.getInheritableMethods(),
         testType.getFirstBound().getInheritableMethods()));
+    assertTrue(Arrays.deepEquals(testType.getAllInheritableMethods(),
+        testType.getFirstBound().getAllInheritableMethods()));
   }
 
   @Override
@@ -101,6 +103,8 @@ public class JTypeParameterTest extends JDelegatingClassTypeTestBase {
 
     assertTrue(Arrays.deepEquals(testType.getOverridableMethods(),
         testType.getFirstBound().getOverridableMethods()));
+    assertTrue(Arrays.deepEquals(testType.getAllOverridableMethods(),
+        testType.getFirstBound().getAllOverridableMethods()));
   }
 
   /*

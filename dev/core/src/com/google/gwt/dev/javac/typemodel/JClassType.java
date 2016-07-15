@@ -229,21 +229,11 @@ public abstract class JClassType implements
   @Override
   public abstract JClassType[] getImplementedInterfaces();
 
-  /**
-   * Iterates over the most-derived declaration of each unique inheritable
-   * method available in the type hierarchy of the specified type, including
-   * those found in superclasses and superinterfaces. A method is inheritable if
-   * its accessibility is <code>public</code>, <code>protected</code>, or
-   * package protected.
-   *
-   * This method offers a convenient way for Generators to find candidate
-   * methods to call from a subclass.
-   *
-   * @return an array of {@link JMethod} objects representing inheritable
-   *         methods
-   */
   @Override
   public abstract JMethod[] getInheritableMethods();
+
+  @Override
+  public abstract JMethod[] getAllInheritableMethods();
 
   @Override
   public abstract String getJNISignature();
@@ -257,12 +247,11 @@ public abstract class JClassType implements
   public abstract JMethod getMethod(String name, JType[] paramTypes)
       throws NotFoundException;
 
-  /*
-   * Returns the declared methods of this class (not any superclasses or
-   * superinterfaces).
-   */
   @Override
   public abstract JMethod[] getMethods();
+
+  @Override
+  public abstract JMethod[] getAllMethods();
 
   @Override
   public abstract String getName();
@@ -280,25 +269,14 @@ public abstract class JClassType implements
   @Override
   public abstract JMethod[] getOverloads(String name);
 
-  /**
-   * Iterates over the most-derived declaration of each unique overridable
-   * method available in the type hierarchy of the specified type, including
-   * those found in superclasses and superinterfaces. A method is overridable if
-   * it is not <code>final</code> and its accessibility is <code>public</code>,
-   * <code>protected</code>, or package protected.
-   *
-   * Deferred binding generators often need to generate method implementations;
-   * this method offers a convenient way to find candidate methods to implement.
-   *
-   * Note that the behavior does not match
-   * {@link Class#getMethod(String, Class[])}, which does not return the most
-   * derived method in some cases.
-   *
-   * @return an array of {@link JMethod} objects representing overridable
-   *         methods
-   */
+  @Override
+  public abstract JMethod[] getAllOverloads(String name);
+
   @Override
   public abstract JMethod[] getOverridableMethods();
+
+  @Override
+  public abstract JMethod[] getAllOverridableMethods();
 
   @Override
   public abstract JPackage getPackage();

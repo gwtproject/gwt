@@ -161,7 +161,7 @@ public class JEnumTypeTest extends TestCase {
       assertTrue(found);
     }
     {
-      JMethod[] methods = aClass.getOverridableMethods();
+      JMethod[] methods = aClass.getAllOverridableMethods();
       assertEquals(4, methods.length);
       // TODO(jat): verify getExtra is from A's anonymous subclass of
       // EnumInterface when/if that is implemented.

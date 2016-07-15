@@ -98,6 +98,11 @@ public class JWildcardType extends JDelegatingClassType implements
   }
 
   @Override
+  public JMethod[] getAllMethods() {
+    return getBaseType().getAllMethods();
+  }
+
+  @Override
   public String getQualifiedBinaryName() {
     // TODO(jat): !! does a binary name have meaning for a wildcard?
     return toString(true);

@@ -45,8 +45,22 @@ public class JAnnotationType extends JRealClassType implements
   }
 
   @Override
+  public JAnnotationMethod[] getAllMethods() {
+    JMethod[] methodArray = super.getAllMethods();
+    return Arrays.asList(methodArray).toArray(
+        new JAnnotationMethod[methodArray.length]);
+  }
+
+  @Override
   public JAnnotationMethod[] getOverridableMethods() {
     JMethod[] methodArray = super.getOverridableMethods();
+    return Arrays.asList(methodArray).toArray(
+        new JAnnotationMethod[methodArray.length]);
+  }
+
+  @Override
+  public JAnnotationMethod[] getAllOverridableMethods() {
+    JMethod[] methodArray = super.getAllOverridableMethods();
     return Arrays.asList(methodArray).toArray(
         new JAnnotationMethod[methodArray.length]);
   }

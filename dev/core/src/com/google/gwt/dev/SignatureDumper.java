@@ -125,14 +125,14 @@ class SignatureDumper {
       } else {
         addMethods(constructors, result, filter);
       }
-      addMethods(current.getMethods(), result, filter);
+      addMethods(current.getAllMethods(), result, filter);
 
       addFields(current.getFields(), result, filter);
 
       // If the parent class was filtered out, we might be missing some public API in the output
       // as they will be inherited by the current class. So let's add those as well:
       for (JClassType c = superclass; c != null && !filter.shouldPrint(c); c = c.getSuperclass()) {
-        addMethods(c.getMethods(), result, filter);
+        addMethods(c.getAllMethods(), result, filter);
         addFields(c.getFields(), result, filter);
       }
     }

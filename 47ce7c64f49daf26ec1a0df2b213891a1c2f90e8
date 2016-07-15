@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baab60ef_462156f4",
+        "filename": "user/src/com/google/web/bindery/autobean/gwt/rebind/AutoBeanFactoryGenerator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-07-15T16:25:48Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 106).",
+      "revId": "47ce7c64f49daf26ec1a0df2b213891a1c2f90e8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

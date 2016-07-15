@@ -685,11 +685,13 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
   private boolean classFullyImplements(JClassType cls, JClassType intf) {
     // If the interface has at least 1 method, then the class must at
     // least nominally implement the interface.
+    // Note that we use getMethods to ignore Java 8 default and static methods.
     if ((intf.getMethods().length > 0) && !intf.isAssignableFrom(cls)) {
       return false;
     }
 
     // Check to see whether it implements all the interfaces methods.
+    // Note that we use getInheritableMethods to ignore Java 8 default and static methods.
     for (JMethod meth : intf.getInheritableMethods()) {
       if (!classImplementsMethod(cls, meth)) {
         return false;
@@ -763,6 +765,7 @@ public class TypeOracle extends com.google.gwt.core.ext.typeinfo.TypeOracle {
           continue;
         }
 
+        // Note thtat we use getOverridableMethods to ignore static and default methods
         if (intf.getOverridableMethods().length == 0) {
           /*
            * Record a tag interface as being implemented by JSO, since they

@@ -17,6 +17,8 @@ package com.google.gwt.dev.javac.typemodel;
 
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
+import com.google.gwt.thirdparty.guava.common.base.Predicate;
+import com.google.gwt.thirdparty.guava.common.collect.Collections2;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,11 +26,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.annotation.Nullable;
+
 abstract class AbstractMembers {
 
   protected final JClassType classType;
   private JMethod[] cachedInheritableMethods;
+  private JMethod[] cachedAllInheritableMethods;
   private JMethod[] cachedOverridableMethods;
+  private JMethod[] cachedAllOverridableMethods;
 
   public AbstractMembers(JClassType classType) {
     this.classType = classType;
@@ -47,7 +53,7 @@ abstract class AbstractMembers {
   public abstract JField findField(String name);
 
   public JMethod findMethod(String name, JType[] paramTypes) {
-    JMethod[] overloads = getOverloads(name);
+    JMethod[] overloads = getAllOverloads(name);
     for (JMethod candidate : overloads) {
       if (candidate.hasParamTypes(paramTypes)) {
         return candidate;
@@ -84,6 +90,13 @@ abstract class AbstractMembers {
 
   public JMethod[] getInheritableMethods() {
     if (cachedInheritableMethods == null) {
+      cachedInheritableMethods = withoutJava8InterfaceMethods(getAllInheritableMethods());
+    }
+    return cachedInheritableMethods;
+  }
+
+  public JMethod[] getAllInheritableMethods() {
+    if (cachedAllInheritableMethods == null) {
       Map<String, JMethod> methodsBySignature = new TreeMap<String, JMethod>();
       getInheritableMethodsOnSuperinterfacesAndMaybeThisInterface(methodsBySignature);
       if (classType.isClass() != null) {
@@ -91,13 +104,13 @@ abstract class AbstractMembers {
       }
       int size = methodsBySignature.size();
       if (size == 0) {
-        cachedInheritableMethods = TypeOracle.NO_JMETHODS;
+        cachedAllInheritableMethods = TypeOracle.NO_JMETHODS;
       } else {
         Collection<JMethod> leafMethods = methodsBySignature.values();
-        cachedInheritableMethods = leafMethods.toArray(new JMethod[size]);
+        cachedAllInheritableMethods = leafMethods.toArray(new JMethod[size]);
       }
     }
-    return cachedInheritableMethods;
+    return cachedAllInheritableMethods;
   }
 
   public JMethod getMethod(String name, JType[] paramTypes)
@@ -110,6 +123,8 @@ abstract class AbstractMembers {
   }
 
   public abstract JMethod[] getMethods();
+
+  public abstract JMethod[] getAllMethods();
 
   public JClassType getNestedType(String typeName) throws NotFoundException {
     JClassType result = findNestedType(typeName);
@@ -125,9 +140,18 @@ abstract class AbstractMembers {
 
   public abstract JMethod[] getOverloads(String name);
 
+  public abstract JMethod[] getAllOverloads(String name);
+
   public JMethod[] getOverridableMethods() {
     if (cachedOverridableMethods == null) {
-      JMethod[] inheritableMethods = getInheritableMethods();
+      cachedOverridableMethods = withoutJava8InterfaceMethods(getAllOverridableMethods());
+    }
+    return cachedOverridableMethods;
+  }
+
+  public JMethod[] getAllOverridableMethods() {
+    if (cachedAllOverridableMethods == null) {
+      JMethod[] inheritableMethods = getAllInheritableMethods();
       ArrayList<JMethod> methods = new ArrayList<JMethod>(
           inheritableMethods.length);
       for (JMethod method : inheritableMethods) {
@@ -137,12 +161,12 @@ abstract class AbstractMembers {
       }
       int size = methods.size();
       if (size == 0) {
-        cachedOverridableMethods = TypeOracle.NO_JMETHODS;
+        cachedAllOverridableMethods = TypeOracle.NO_JMETHODS;
       } else {
-        cachedOverridableMethods = methods.toArray(new JMethod[size]);
+        cachedAllOverridableMethods = methods.toArray(new JMethod[size]);
       }
     }
-    return cachedOverridableMethods;
+    return cachedAllOverridableMethods;
   }
 
   protected abstract void addConstructor(JConstructor ctor);
@@ -177,7 +201,7 @@ abstract class AbstractMembers {
       superClass.getInheritableMethodsOnSuperclassesAndThisClass(methodsBySignature);
     }
 
-    JMethod[] declaredMethods = getMethods();
+    JMethod[] declaredMethods = getAllMethods();
     for (JMethod method : declaredMethods) {
       // Ensure that this method is inheritable.
       if (method.isPrivate() || method.isStatic()) {
@@ -195,7 +219,7 @@ abstract class AbstractMembers {
    * Gets the methods declared in interfaces that this type extends. If this
    * type is a class, its own methods are not added. If this type is an
    * interface, its own methods are added. Used internally by
-   * {@link #getOverridableMethods()}.
+   * {@link #getAllOverridableMethods()}.
    *
    * @param methodsBySignature
    */
@@ -214,7 +238,7 @@ abstract class AbstractMembers {
       return;
     }
 
-    JMethod[] declaredMethods = getMethods();
+    JMethod[] declaredMethods = getAllMethods();
     for (JMethod method : declaredMethods) {
       String sig = computeInternalSignature(method);
       JMethod existing = methodsBySignature.get(sig);
@@ -234,6 +258,56 @@ abstract class AbstractMembers {
     return classType;
   }
 
+  protected boolean isJava8InterfaceMethod(JMethod method) {
+    assert classType.isInterface() != null
+        : "isJava8InterfaceMethod helper should not be called for non-interface classes";
+    return !method.isAbstract();
+  }
+
+  // Tries to minimize allocations
+  protected JMethod[] withoutJava8InterfaceMethods(JMethod[] methods) {
+    if (classType.isInterface() == null) {
+      return methods;
+    }
+
+    int java8InterfaceMethods = 0;
+    for (JMethod method : methods) {
+      if (isJava8InterfaceMethod(method)) {
+        java8InterfaceMethods++;
+      }
+    }
+    if (java8InterfaceMethods == 0) {
+      return methods;
+    }
+    if (java8InterfaceMethods == methods.length) {
+      return TypeOracle.NO_JMETHODS;
+    }
+
+    JMethod[] result = new JMethod[methods.length - java8InterfaceMethods];
+    int i = 0;
+    for (JMethod method : methods) {
+      if (!isJava8InterfaceMethod(method)) {
+        result[i++] = method;
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Returns a filtered view of methods without the Java 8 interface methods.
+   */
+  protected Collection<JMethod> withoutJava8InterfaceMethods(Collection<JMethod> methods) {
+    if (classType.isInterface() == null) {
+      return methods;
+    }
+    return Collections2.filter(methods, new Predicate<JMethod>() {
+      @Override
+      public boolean apply(@Nullable JMethod method) {
+        return isJava8InterfaceMethod(method);
+      }
+    });
+  }
+
   private String computeInternalSignature(JMethod method) {
     StringBuilder sb = new StringBuilder();
     sb.setLength(0);
@@ -245,5 +319,4 @@ abstract class AbstractMembers {
     }
     return sb.toString();
   }
-
 }

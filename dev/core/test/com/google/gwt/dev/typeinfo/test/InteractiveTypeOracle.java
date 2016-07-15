@@ -357,7 +357,7 @@ public class InteractiveTypeOracle {
 
       String typename = currType.getQualifiedSourceName();
       TreeLogger sublogger = null;
-      JMethod[] methods = currType.getMethods();
+      JMethod[] methods = currType.getAllMethods();
       oracle.sort(methods);
       for (int i = 0; i < methods.length; i++) {
         if (sublogger == null) {

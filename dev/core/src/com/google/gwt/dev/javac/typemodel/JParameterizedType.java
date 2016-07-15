@@ -175,6 +175,11 @@ public class JParameterizedType extends JMaybeParameterizedType implements
   }
 
   @Override
+  public JMethod[] getAllInheritableMethods() {
+    return members.getAllInheritableMethods();
+  }
+
+  @Override
   public JMethod getMethod(String name, JType[] paramTypes)
       throws NotFoundException {
     return members.getMethod(name, paramTypes);
@@ -183,6 +188,11 @@ public class JParameterizedType extends JMaybeParameterizedType implements
   @Override
   public JMethod[] getMethods() {
     return members.getMethods();
+  }
+
+  @Override
+  public JMethod[] getAllMethods() {
+    return members.getAllMethods();
   }
 
   @Override
@@ -201,8 +211,18 @@ public class JParameterizedType extends JMaybeParameterizedType implements
   }
 
   @Override
+  public JMethod[] getAllOverloads(String name) {
+    return members.getAllOverloads(name);
+  }
+
+  @Override
   public JMethod[] getOverridableMethods() {
     return members.getOverridableMethods();
+  }
+
+  @Override
+  public JMethod[] getAllOverridableMethods() {
+    return members.getAllOverridableMethods();
   }
 
   @Override

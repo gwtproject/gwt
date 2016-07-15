@@ -129,6 +129,11 @@ abstract class JDelegatingClassType extends JClassType {
   }
 
   @Override
+  public JMethod[] getAllInheritableMethods() {
+    return baseType.getAllInheritableMethods();
+  }
+
+  @Override
   public String getJNISignature() {
     return baseType.getJNISignature();
   }
@@ -145,6 +150,12 @@ abstract class JDelegatingClassType extends JClassType {
    */
   @Override
   public abstract JMethod[] getMethods();
+
+  /**
+   * Subclasses will generally need to echo modified methods.
+   */
+  @Override
+  public abstract JMethod[] getAllMethods();
 
   @Override
   public String getName() {
@@ -172,8 +183,18 @@ abstract class JDelegatingClassType extends JClassType {
   }
 
   @Override
+  public JMethod[] getAllOverloads(String name) {
+    return baseType.getAllOverloads(name);
+  }
+
+  @Override
   public JMethod[] getOverridableMethods() {
     return baseType.getOverridableMethods();
+  }
+
+  @Override
+  public JMethod[] getAllOverridableMethods() {
+    return baseType.getAllOverridableMethods();
   }
 
   @Override

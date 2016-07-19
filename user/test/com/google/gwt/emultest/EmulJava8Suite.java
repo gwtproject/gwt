@@ -18,6 +18,8 @@ package com.google.gwt.emultest;
 import com.google.gwt.emultest.java8.lang.DoubleTest;
 import com.google.gwt.emultest.java8.lang.FloatTest;
 import com.google.gwt.emultest.java8.lang.MathTest;
+import com.google.gwt.emultest.java8.lang.StringBufferTest;
+import com.google.gwt.emultest.java8.lang.StringBuilderTest;
 import com.google.gwt.emultest.java8.lang.StringTest;
 import com.google.gwt.emultest.java8.math.BigIntegerConvertTest;
 import com.google.gwt.emultest.java8.util.ArrayListTest;
@@ -64,6 +66,8 @@ public class EmulJava8Suite {
     suite.addTestSuite(DoubleTest.class);
     suite.addTestSuite(FloatTest.class);
     suite.addTestSuite(MathTest.class);
+    suite.addTestSuite(StringBufferTest.class);
+    suite.addTestSuite(StringBuilderTest.class);
     suite.addTestSuite(StringTest.class);
 
     //-- java.math

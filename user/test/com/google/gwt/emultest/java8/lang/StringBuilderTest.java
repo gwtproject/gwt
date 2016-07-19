@@ -1,0 +1,63 @@
+/*
+ * Copyright 2016 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package com.google.gwt.emultest.java8.lang;
+
+import com.google.gwt.emultest.java.util.EmulTestBase;
+
+import java.util.BitSet;
+import java.util.stream.IntStream;
+
+/**
+ * Java 8 methods to test in java.lang.StringBuilder.
+ */
+public class StringBuilderTest extends EmulTestBase {
+
+  public void testChars() {
+    StringBuilder builder = new StringBuilder();
+    IntStream stream = builder.chars();
+    assertEquals(new int[0], stream.toArray());
+    assertStreamClosed(stream);
+
+    stream = builder.chars();
+    builder.append("a");
+    assertEquals(new int[] {'a'}, stream.toArray());
+    assertStreamClosed(stream);
+
+    stream = builder.chars();
+    builder.append("b");
+    builder.append("c");
+    assertEquals(new int[] {'a', 'b', 'c'}, stream.toArray());
+    assertStreamClosed(stream);
+
+    stream = builder.chars();
+    builder.delete(0, 2);
+    assertEquals(new int[] {'c'}, stream.toArray());
+    assertStreamClosed(stream);
+
+    stream = builder.chars();
+    builder.setLength(0);
+    assertEquals(new int[0], stream.toArray());
+    assertStreamClosed(stream);
+  }
+
+  private static void assertStreamClosed(IntStream stream) {
+    try {
+      stream.toArray();
+      fail("stream must be closed");
+    } catch (IllegalStateException expected) {
+    }
+  }
+}

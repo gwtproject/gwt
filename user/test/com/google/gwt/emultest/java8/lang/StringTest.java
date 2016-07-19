@@ -15,18 +15,38 @@
  */
 package com.google.gwt.emultest.java8.lang;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.emultest.java.util.EmulTestBase;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 /**
  * Java8 String tests.
  */
-public class StringTest extends GWTTestCase {
+public class StringTest extends EmulTestBase {
 
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
+  public void testChars() {
+    testCharsStream("");
+    testCharsStream("a");
+    testCharsStream("abc");
+  }
+
+  private void testCharsStream(String testString) {
+    IntStream stream = testString.chars();
+    int[] chars = stream.toArray();
+    assertEquals(testString.length(), chars.length);
+    for (int i = 0; i < testString.length(); i++) {
+      assertEquals(testString.charAt(i), chars[i]);
+    }
+    assertStreamClosed(stream);
+  }
+
+  private static void assertStreamClosed(IntStream stream) {
+    try {
+      stream.toArray();
+      fail("stream must be closed");
+    } catch (IllegalStateException expected) {
+    }
   }
 
   public void testJoin() {

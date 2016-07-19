@@ -15,7 +15,7 @@
  */
 package com.google.gwt.emultest.java.util;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import org.apache.commons.collections.TestCollection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,12 +28,7 @@ import java.util.TreeSet;
 /**
  * Test PriorityQueue.
  */
-public class PriorityQueueTest extends GWTTestCase {
-
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.emultest.EmulSuite";
-  }
+public class PriorityQueueTest extends TestCollection {
 
   public void testAdd() {
     PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
@@ -244,5 +239,33 @@ public class PriorityQueueTest extends GWTTestCase {
     PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
     addArray(pq, values);
     return pq;
-  } 
+  }
+
+  /**
+   * Null elements are prohibited in PriorityQueue.
+   */
+  @Override
+  protected Object[] getFullElements() {
+    return new Integer[] {1, 2, 3, 4};
+  }
+
+  @Override
+  protected Object[] getOtherElements() {
+    return new Integer[] {5, 6, 7, 8};
+  }
+
+  @Override
+  protected Collection makeConfirmedCollection() {
+    return new ArrayList<>();
+  }
+
+  @Override
+  protected Collection makeConfirmedFullCollection() {
+    return new ArrayList<>(Arrays.asList(getFullElements()));
+  }
+
+  @Override
+  protected Collection makeCollection() {
+    return new PriorityQueue();
+  }
 }

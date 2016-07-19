@@ -17,7 +17,9 @@ package java.util;
 
 import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
+import static javaemul.internal.InternalPreconditions.checkElement;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
+import static javaemul.internal.InternalPreconditions.checkState;
 
 /**
  * An unbounded priority queue based on a priority heap.
@@ -118,14 +120,32 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
   }
 
   @Override
-  public boolean containsAll(Collection<?> c) {
-    return heap.containsAll(c);
-  }
-
-  @Override
   public Iterator<E> iterator() {
-    // TODO(jat): PriorityQueue is supposed to have a modifiable iterator.
-    return Collections.unmodifiableList(heap).iterator();
+    return new Iterator<E>() {
+
+      int cursor;
+      int last = -1;
+
+      @Override
+      public boolean hasNext() {
+        return cursor < heap.size();
+      }
+
+      @Override
+      public E next() {
+        checkElement(hasNext());
+        last = cursor;
+        return heap.get(cursor++);
+      }
+
+      @Override
+      public void remove() {
+        checkState(last != -1);
+        removeAtIndex(last);
+        cursor--;
+        last = -1;
+      }
+    };
   }
 
   @Override
@@ -215,7 +235,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
    *
    * @param node
    */
-  protected void makeHeap(int node) {
+  private void makeHeap(int node) {
     if (isLeaf(node)) {
       // leaf node are automatically valid heaps
       return;
@@ -236,7 +256,7 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
    * 
    * @param node the parent of the two subtrees to merge
    */
-  protected void mergeHeaps(int node) {
+  private void mergeHeaps(int node) {
     int heapSize = heap.size();
     E value = heap.get(node);
     while (!isLeaf(node, heapSize)) {
@@ -273,6 +293,10 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
     return isLeaf(node, heap.size());
   }
 
+  /**
+   * This method leaves the elements at up to i-1, inclusive, untouched.
+   * This information is used by PriorityQueue iterator implementation.
+   */
   private void removeAtIndex(int index) {
     // Remove the last element; put it in place of the really removed element.
     E lastValue = heap.remove(heap.size() - 1);

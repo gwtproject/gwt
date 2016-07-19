@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a563f15_7ccd4162",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtCompiler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-07-19T15:58:19Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 101).",
+      "revId": "28480e4ef65f26f3107d01a1416b11a5a43bc089",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

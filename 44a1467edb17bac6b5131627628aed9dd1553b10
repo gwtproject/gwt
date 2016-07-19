@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a563f15_b100829c",
+        "filename": "user/test/com/google/gwt/emultest/EmulJava8Suite.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-07-19T15:27:15Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.emultest.java8.lang.StringBufferTest\u0027 import.",
+      "revId": "44a1467edb17bac6b5131627628aed9dd1553b10",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a563f15_91fd7ea4",
+        "filename": "user/test/com/google/gwt/emultest/java8/lang/StringBuilderTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-07-19T15:27:15Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.BitSet.",
+      "revId": "44a1467edb17bac6b5131627628aed9dd1553b10",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

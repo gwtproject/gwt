@@ -162,6 +162,7 @@ public class Compiler {
       ModuleDef moduleDef)
       throws UnableToCompleteException {
 
+
     CompilerOptionsImpl  options = new CompilerOptionsImpl(compilerOptions);
     boolean tempWorkDir = false;
     try {

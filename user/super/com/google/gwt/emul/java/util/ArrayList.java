@@ -255,6 +255,11 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   }
 
   @Override
+  public List<E> subList(int fromIndex, int toIndex) {
+    return new RandomAccessSubList<>(this, fromIndex, toIndex);
+  }
+
+  @Override
   public Object[] toArray() {
     return ArrayHelper.clone(array, 0, array.length);
   }

@@ -74,10 +74,6 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
      * call to next() or previous (for ListIterator), -1 if no such item exists.
      */
 
-    private ListIteratorImpl() {
-      // Nothing to do
-    }
-
     private ListIteratorImpl(int start) {
       checkPositionIndex(start, AbstractList.this.size());
 
@@ -122,11 +118,11 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
   }
 
   private static class SubList<E> extends AbstractList<E> {
-    private final List<E> wrapped;
+    private final AbstractList<E> wrapped;
     private final int fromIndex;
     private int size;
 
-    public SubList(List<E> wrapped, int fromIndex, int toIndex) {
+    SubList(AbstractList<E> wrapped, int fromIndex, int toIndex) {
       checkCriticalPositionIndexes(fromIndex, toIndex, wrapped.size());
 
       this.wrapped = wrapped;
@@ -168,6 +164,22 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
     @Override
     public int size() {
       return size;
+    }
+
+    @Override
+    public List<E> subList(int fromIndex, int toIndex) {
+      return new SubList<>(this, fromIndex, toIndex);
+    }
+  }
+
+  static class RandomAccessSubList<E> extends SubList<E> implements RandomAccess {
+    RandomAccessSubList(AbstractList<E> wrapped, int fromIndex, int toIndex) {
+      super(wrapped, fromIndex, toIndex);
+    }
+
+    @Override
+    public List<E> subList(int fromIndex, int toIndex) {
+      return new RandomAccessSubList<>(this, fromIndex, toIndex);
     }
   }
 
@@ -282,7 +294,8 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements
 
   @Override
   public List<E> subList(int fromIndex, int toIndex) {
-    return new SubList<E>(this, fromIndex, toIndex);
+    return this instanceof RandomAccess ? new RandomAccessSubList<>(this, fromIndex, toIndex)
+        : new SubList<>(this, fromIndex, toIndex);
   }
 
   protected void removeRange(int fromIndex, int endIndex) {

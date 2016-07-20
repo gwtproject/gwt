@@ -265,8 +265,10 @@ public class Collections {
     }
   }
 
-  private static final class SingletonList<E> extends AbstractList<E> implements Serializable {
-    private E element;
+  private static final class SingletonList<E> extends AbstractList<E>
+      implements RandomAccess, Serializable {
+
+    private final E element;
 
     public SingletonList(E element) {
       this.element = element;
@@ -949,11 +951,7 @@ public class Collections {
    */
   public static <T> int binarySearch(final List<? extends T> sortedList,
       final T key, Comparator<? super T> comparator) {
-    /*
-     * TODO: This doesn't implement the "iterator-based binary search" described
-     * in the JDK docs for non-RandomAccess Lists. Until GWT provides a
-     * LinkedList, this shouldn't be an issue.
-     */
+
     comparator = Comparators.nullToNaturalOrder(comparator);
     int low = 0;
     int high = sortedList.size() - 1;

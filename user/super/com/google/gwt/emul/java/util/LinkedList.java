@@ -16,6 +16,7 @@
 package java.util;
 
 import static javaemul.internal.InternalPreconditions.checkElement;
+import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkPositionIndex;
 import static javaemul.internal.InternalPreconditions.checkState;
 
@@ -240,6 +241,13 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
   }
 
   @Override
+  public E get(int index) {
+    checkElementIndex(index, size);
+
+    return getNode(index).value;
+  }
+
+  @Override
   public E getFirst() {
     checkElement(size != 0);
 
@@ -254,24 +262,10 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
   }
 
   @Override
-  public ListIterator<E> listIterator(final int index) {
+  public ListIterator<E> listIterator(int index) {
     checkPositionIndex(index, size);
 
-    Node<E> node;
-    // start from the nearest end of the list
-    if (index >= size >> 1) {
-      node = tail;
-      for (int i = size; i > index; --i) {
-        node = node.prev;
-      }
-    } else {
-      node = header.next;
-      for (int i = 0; i < index; ++i) {
-        node = node.next;
-      }
-    }
-
-    return new ListIteratorImpl(index, node);
+    return new ListIteratorImpl(index, getNode(index));
   }
 
   @Override
@@ -332,8 +326,30 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
   }
 
   @Override
+  public boolean contains(Object o) {
+    return indexOf(o) != -1;
+  }
+
+  @Override
+  public int indexOf(Object o) {
+    return getIndexOf(o, false);
+  }
+
+  @Override
+  public boolean remove(Object o) {
+    return getIndexOf(o, true) != -1;
+  }
+
+  @Override
   public E remove() {
     return removeFirst();
+  }
+
+  @Override
+  public E remove(int index) {
+    checkElementIndex(index, size);
+
+    return removeNode(getNode(index));
   }
 
   @Override
@@ -356,14 +372,23 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
   }
 
   @Override
+  public int lastIndexOf(Object o) {
+    return getLastIndexOf(o, false);
+  }
+
+  @Override
   public boolean removeLastOccurrence(Object o) {
-    for (Node<E> e = tail.prev; e != header; e = e.prev) {
-      if (Objects.equals(e.value, o)) {
-        removeNode(e);
-        return true;
-      }
-    }
-    return false;
+    return getLastIndexOf(o, true) != -1;
+  }
+
+  @Override
+  public E set(int index, E newValue) {
+    checkElementIndex(index, size);
+
+    Node<E> node = getNode(index);
+    E oldValue = node.value;
+    node.value = newValue;
+    return oldValue;
   }
 
   @Override
@@ -380,6 +405,23 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     ++size;
   }
 
+  private Node<E> getNode(int index) {
+    Node<E> node;
+    // start from the nearest end of the list
+    if (index >= size >> 1) {
+      node = tail;
+      for (int i = size; i > index; --i) {
+        node = node.prev;
+      }
+    } else {
+      node = header.next;
+      for (int i = 0; i < index; ++i) {
+        node = node.next;
+      }
+    }
+    return node;
+  }
+
   private E removeNode(Node<E> node) {
     E oldValue = node.value;
     node.next.prev = node.prev;
@@ -388,5 +430,31 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements
     node.value = null;
     --size;
     return oldValue;
+  }
+
+  private int getIndexOf(Object o, boolean remove) {
+    int i = 0;
+    for (Node<E> e = header.next; e != tail; e = e.next) {
+      if (Objects.equals(e.value, o)) {
+        if (remove) {
+          removeNode(e);
+        }
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  private int getLastIndexOf(Object o, boolean remove) {
+    int i = 0;
+    for (Node<E> e = tail.prev; e != header; e = e.prev) {
+      if (Objects.equals(e.value, o)) {
+        if (remove) {
+          removeNode(e);
+        }
+        return i;
+      }
+    }
+    return -1;
   }
 }

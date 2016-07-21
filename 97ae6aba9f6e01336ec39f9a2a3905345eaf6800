@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a89b33d_231bc6da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-07-21T19:59:25Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "97ae6aba9f6e01336ec39f9a2a3905345eaf6800",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "revId": "5e19260ce4ef10408989a5b8cded3a30a5ea3e84",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a88d372_b1db401e",
+        "filename": "samples/dynatablerf/README-MAVEN.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-07-23T10:58:28Z",
+      "side": 1,
+      "message": "As I said in the commit message, the goal was only to avoid shipping a broken link.\n\nThe content there doesn\u0027t look that much outdated to me: it says to use GPE and m2e-apt, which to my knowledge is still required. (of course, mentioning Indigo/Juno make it looks like oldish, but the \"newer version of Eclipse\" still applies, right?)\n\nOf course, in the long term, we should either remove the link if we think it\u0027s not needed (maybe newer versions of m2e support maven-compiler-plugin\u0027s recent annotationProcessorPaths and we could move to use this?), or have proper documentation somewhere (either the wiki on gwtproject/gwt or a page on the website), but that old wiki page could be enough for 2.8 (and we could possibly update it later to warn it\u0027s deprecated and link to newer documentation when we have it)",
+      "parentUuid": "2a89df77_b0f2589c",
+      "revId": "5e19260ce4ef10408989a5b8cded3a30a5ea3e84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

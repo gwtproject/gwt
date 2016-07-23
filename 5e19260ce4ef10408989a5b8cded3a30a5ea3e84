@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a89df77_b0f2589c",
+        "filename": "samples/dynatablerf/README-MAVEN.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-07-23T10:31:18Z",
+      "side": 1,
+      "message": "This link content is quite outdated.\nWe should update the file in github, or it should be better if we create a new doc in gwtproject website.",
+      "revId": "5e19260ce4ef10408989a5b8cded3a30a5ea3e84",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

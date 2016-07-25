@@ -47,7 +47,9 @@ class InternalJsMap<V> {
   public final void delete(int key) { JsHelper.delete(this, key); }
   @JsOverlay
   public final void delete(String key) { JsHelper.delete(this, key); }
-  public native Iterator<V> entries();
+  // JS's Map.entries() returns an IteratorIterable of Arrays where index 0 is a K and index 1 is a
+  // V. Array of Object is the closest description that can be made in Java.
+  public native Iterator<Object[]> entries();
 
   // Calls to delete are via brackets to be compatible with old browsers where delete is keyword.
   private static class JsHelper {

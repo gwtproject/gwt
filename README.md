@@ -12,7 +12,7 @@
 
   For a more detailed documentation visit our [web site](http://gwtproject.org).
   If you are interested in contributing with the project, please read the
-  [Making GWT better](http://gwtproject.gquery.org/makinggwtbetter.html)
+  [Making GWT better](http://www.gwtproject.org/makinggwtbetter.html)
   section.
 
 ### Building the GWT SDK:

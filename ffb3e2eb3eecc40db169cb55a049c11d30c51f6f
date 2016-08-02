@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4f9ce3d_608c6ce0",
+        "filename": "user/src/com/google/gwt/user/cellview/client/DefaultHeaderOrFooterBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-08-02T13:07:28Z",
+      "side": 1,
+      "message": "That comment is not accurate: this sets role\u003dbutton tabIndex\u003d-1 on the \u003cth\u003e, it doesn\u0027t add a \u003cdiv\u003e\n\nInstead of duplicating the inaccuracy, we should fix the original one.\n\nAlso maybe extract that code (the whole code that adds a header, from \"if (isSortable)\" up to \"th.endTH()\", with the exception of the lines that append the lastColumnXxx style) into a method instead of duplicating?",
+      "revId": "ffb3e2eb3eecc40db169cb55a049c11d30c51f6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

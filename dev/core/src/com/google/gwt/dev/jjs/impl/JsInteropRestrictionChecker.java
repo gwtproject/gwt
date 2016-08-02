@@ -566,6 +566,12 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
   private <T extends HasJsName & HasSourceInfo> void checkJsName(T item) {
     if (item.getJsName().isEmpty()) {
       logError(item, "%s cannot have an empty name.", getDescription(item));
+    } else if (JsInteropUtil.isGlobal(item.getJsNamespace()) && item.isJsNative()) {
+      // Allow qualified names in the name field for JsPackage.GLOBAL native items for future
+      // compatibility
+      if (!JsUtils.isValidJsQualifiedName(item.getJsName())) {
+        logError(item, "%s has invalid name '%s'.", getDescription(item), item.getJsName());
+      }
     } else if (!JsUtils.isValidJsIdentifier(item.getJsName())) {
       logError(item, "%s has invalid name '%s'.", getDescription(item), item.getJsName());
     }

@@ -1174,19 +1174,22 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
   public void testJsNameInvalidNamesFails() {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsPackage");
     addSnippetImport("jsinterop.annotations.JsProperty");
     addSnippetClassDecl(
         "@JsType(name = \"a.b.c\") public static class Buggy {",
         "   @JsMethod(name = \"34s\") public void m() {}",
         "   @JsProperty(name = \"s^\") public int  m;",
         "   @JsProperty(name = \"\") public int n;",
+        "   @JsMethod(namespace = JsPackage.GLOBAL, name = \"a.b\") public static void o() {}",
         "}");
 
     assertBuggyFails(
-        "Line 6: 'EntryPoint.Buggy' has invalid name 'a.b.c'.",
-        "Line 7: 'void EntryPoint.Buggy.m()' has invalid name '34s'.",
-        "Line 8: 'int EntryPoint.Buggy.m' has invalid name 's^'.",
-        "Line 9: 'int EntryPoint.Buggy.n' cannot have an empty name.");
+        "Line 7: 'EntryPoint.Buggy' has invalid name 'a.b.c'.",
+        "Line 8: 'void EntryPoint.Buggy.m()' has invalid name '34s'.",
+        "Line 9: 'int EntryPoint.Buggy.m' has invalid name 's^'.",
+        "Line 10: 'int EntryPoint.Buggy.n' cannot have an empty name.",
+        "Line 11: 'void EntryPoint.Buggy.o()' has invalid name 'a.b'.");
   }
 
   public void testJsNameInvalidNamespacesFails() {
@@ -1220,6 +1223,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "@JsType(namespace = JsPackage.GLOBAL) public static class Buggy {",
         "   @JsMethod(namespace = JsPackage.GLOBAL) public static void m() {}",
         "   @JsProperty(namespace = JsPackage.GLOBAL) public static int  n;",
+        "   @JsMethod(namespace = JsPackage.GLOBAL, name = \"a.b\") public static native void o();",
         "}");
 
     assertBuggySucceeds();

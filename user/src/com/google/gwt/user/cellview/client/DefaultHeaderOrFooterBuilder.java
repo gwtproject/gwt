@@ -158,6 +158,11 @@ public class DefaultHeaderOrFooterBuilder<T> extends AbstractHeaderOrFooterBuild
     enableColumnHandlers(th, column);
     if (prevHeader != null) {
       Context context = new Context(0, curColumn - prevColspan, prevHeader.getKey());
+      // Add div element with aria button role
+      if (isSortable) {
+        th.attribute("role", "button");
+        th.tabIndex(-1);
+      }
       renderSortableHeader(th, context, prevHeader, isSorted, isSortAscending);
     }
     th.endTH();

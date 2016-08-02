@@ -1174,12 +1174,14 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
   public void testJsNameInvalidNamesFails() {
     addSnippetImport("jsinterop.annotations.JsType");
     addSnippetImport("jsinterop.annotations.JsMethod");
+    addSnippetImport("jsinterop.annotations.JsPackage");
     addSnippetImport("jsinterop.annotations.JsProperty");
     addSnippetClassDecl(
         "@JsType(name = \"a.b.c\") public static class Buggy {",
         "   @JsMethod(name = \"34s\") public void m() {}",
         "   @JsProperty(name = \"s^\") public int  m;",
         "   @JsProperty(name = \"\") public int n;",
+        "   @JsMethod(namespace = JsPackage.GLOBAL, name = \"a.b\") public static void o() {}",
         "}");
 
     assertBuggyFails(
@@ -1220,6 +1222,7 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "@JsType(namespace = JsPackage.GLOBAL) public static class Buggy {",
         "   @JsMethod(namespace = JsPackage.GLOBAL) public static void m() {}",
         "   @JsProperty(namespace = JsPackage.GLOBAL) public static int  n;",
+        "   @JsMethod(namespace = JsPackage.GLOBAL, name = \"a.b\") public static native void o();",
         "}");
 
     assertBuggySucceeds();

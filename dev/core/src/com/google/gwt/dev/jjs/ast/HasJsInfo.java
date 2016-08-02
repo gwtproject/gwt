@@ -127,8 +127,6 @@ public interface HasJsInfo extends HasJsName {
 
   JsMemberType getJsMemberType();
 
-  boolean isJsNative();
-
   boolean isJsMethodVarargs();
 
   boolean isJsOverlay();

@@ -16,6 +16,24 @@
       "revId": "ffb3e2eb3eecc40db169cb55a049c11d30c51f6f",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4f9ce3d_600fcc3d",
+        "filename": "user/src/com/google/gwt/user/cellview/client/DefaultHeaderOrFooterBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 10330
+      },
+      "writtenOn": "2016-08-02T16:00:42Z",
+      "side": 1,
+      "message": "You are right. I just copied the code including the comment, lazy as I am.\n\nI moved the code which creates the TH to a separate method, which removes most of the duplicated code.",
+      "parentUuid": "d4f9ce3d_608c6ce0",
+      "revId": "ffb3e2eb3eecc40db169cb55a049c11d30c51f6f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

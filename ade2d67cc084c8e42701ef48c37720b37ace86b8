@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4f9ce3d_00fec807",
+        "filename": "user/src/com/google/gwt/user/cellview/client/DefaultHeaderOrFooterBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-08-02T16:38:42Z",
+      "side": 1,
+      "message": "I think we can move those lines into the buildTableHeader method.\n\nFor the last header, just do:\n\n    // The first and last columns could be the same column.\n    classesBuilder.append(\" \").append(\n        isFooter ? style.lastColumnFooter() : style.lastColumnHeader());\n\n    buildTableHeader(…);\n\nThe only side-effect would be that the lastColumnFooter/lastColumnHeader class would appear before the sortableStyle and/or sortedStyle in the class\u003d\"\" attribute, which won\u0027t have any effect in practice (AFAIK).",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 54
+      },
+      "revId": "ade2d67cc084c8e42701ef48c37720b37ace86b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "145b6640_0a339bf8",
+        "filename": "user/src/com/google/gwt/user/cellview/client/DefaultHeaderOrFooterBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-08-02T16:38:42Z",
+      "side": 1,
+      "message": "It\u0027s not accurate either actually ;-)\n\nSetting tabIndex to -1 will make the TH focusable (but out of the tab-order)\n\nI, for one, wouldn\u0027t put any comment here, or possibly simply state \"make the header focusable\".",
+      "revId": "ade2d67cc084c8e42701ef48c37720b37ace86b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "746022e5_5095c487",
+        "filename": "user/src/com/google/gwt/user/cellview/client/DefaultHeaderOrFooterBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-08-02T16:38:42Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "revId": "ade2d67cc084c8e42701ef48c37720b37ace86b8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

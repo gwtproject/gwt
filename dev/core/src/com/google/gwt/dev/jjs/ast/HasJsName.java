@@ -18,7 +18,7 @@ package com.google.gwt.dev.jjs.ast;
 /**
  * Abstracts JsInterop name related information for the AST nodes.
  */
-public interface HasJsName  {
+public interface HasJsName {
 
   String getJsName();
 

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7483c255_0143d400",
+        "filename": "user/test/com/google/gwt/dev/jjs/optimized/StringOptimizationTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-08-04T18:54:28Z",
+      "side": 1,
+      "message": "[error] Unused import - java.util.ArrayList.",
+      "revId": "a2a0c017591aa3101f6798f8779593632d1498c1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1969dfe4_9d1fc36c",
+        "filename": "dev/core/src/com/google/gwt/dev/DevMode.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-08-05T18:56:25Z",
+      "side": 1,
+      "message": "Already exists a few lines above.",
+      "revId": "cee2da18c2d16f5930f2c6c4c5413bffda53439c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

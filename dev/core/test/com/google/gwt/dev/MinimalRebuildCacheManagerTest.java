@@ -32,7 +32,8 @@ public class MinimalRebuildCacheManagerTest extends TestCase {
 
   public void testNoSuchCache() {
     MinimalRebuildCacheManager minimalRebuildCacheManager =
-        new MinimalRebuildCacheManager(TreeLogger.NULL, Files.createTempDir());
+        new MinimalRebuildCacheManager(
+            TreeLogger.NULL,  Files.createTempDir(), ImmutableMap.<String, String>of());
 
     // Make sure we start with a blank slate.
     minimalRebuildCacheManager.deleteCaches();
@@ -53,7 +54,8 @@ public class MinimalRebuildCacheManagerTest extends TestCase {
 
     String moduleName = "com.google.FooModule";
     MinimalRebuildCacheManager minimalRebuildCacheManager =
-        new MinimalRebuildCacheManager(TreeLogger.NULL, cacheDir);
+        new MinimalRebuildCacheManager(
+            TreeLogger.NULL, cacheDir, ImmutableMap.<String, String>of());
     PermutationDescription permutationDescription = new PermutationDescription();
 
     // Make sure we start with a blank slate.
@@ -96,7 +98,8 @@ public class MinimalRebuildCacheManagerTest extends TestCase {
 
     // Start a new cache manager in the same folder.
     MinimalRebuildCacheManager reloadedMinimalRebuildCacheManager =
-        new MinimalRebuildCacheManager(TreeLogger.NULL, cacheDir);
+        new MinimalRebuildCacheManager(
+            TreeLogger.NULL, cacheDir, ImmutableMap.<String, String>of());
 
     // Reread the previously saved cache.
     MinimalRebuildCache reloadedCache =

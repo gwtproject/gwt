@@ -15,6 +15,7 @@ package com.google.gwt.dev;
 
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.dev.cfg.PropertyCombinations.PermutationDescription;
+import com.google.gwt.dev.jjs.JJSOptions;
 import com.google.gwt.dev.util.CompilerVersion;
 import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
 import com.google.gwt.thirdparty.guava.common.cache.Cache;
@@ -33,6 +34,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -57,9 +61,13 @@ public class MinimalRebuildCacheManager {
   private final File minimalRebuildCacheDir;
   private final Cache<String, MinimalRebuildCache> minimalRebuildCachesByName =
       CacheBuilder.newBuilder().maximumSize(MEMORY_CACHE_COUNT_LIMIT).build();
+  private final Map<String, String> options = new LinkedHashMap<>();
 
-  public MinimalRebuildCacheManager(TreeLogger logger, File baseCacheDir) {
+
+  public MinimalRebuildCacheManager(
+      TreeLogger logger, File baseCacheDir, Map<String, String> options) {
     this.logger = logger;
+    this.options.putAll(options);
     if (baseCacheDir != null) {
       minimalRebuildCacheDir = new File(baseCacheDir, REBUILD_CACHE_PREFIX);
       minimalRebuildCacheDir.mkdir();
@@ -67,8 +75,7 @@ public class MinimalRebuildCacheManager {
       minimalRebuildCacheDir = null;
     }
   }
-
-  /**
+    /**
    * Synchronously delete all in memory caches managed here and all on disk in the managed folder.
    */
   public synchronized void deleteCaches() {
@@ -88,7 +95,8 @@ public class MinimalRebuildCacheManager {
    */
   public synchronized MinimalRebuildCache getCache(String moduleName,
       PermutationDescription permutationDescription) {
-    String cacheName = computeMinimalRebuildCacheName(moduleName, permutationDescription);
+    String cacheName =
+        computeMinimalRebuildCacheName(moduleName, permutationDescription);
 
     MinimalRebuildCache minimalRebuildCache = minimalRebuildCachesByName.getIfPresent(cacheName);
 
@@ -269,9 +277,21 @@ public class MinimalRebuildCacheManager {
     String currentWorkingDirectory = System.getProperty("user.dir");
     String compilerVersionHash = CompilerVersion.getHash();
     String permutationDescriptionString = permutationDescription.toString();
+    String optionsDescriptionString = " Options [" ;
+    String separator = "";
+    for (Map.Entry entry : options.entrySet()) {
+      optionsDescriptionString +=
+          String.format("%s%s = %s", separator, entry.getKey(), entry.getValue());
+      separator = ",";
+    }
+    optionsDescriptionString += "]";
 
     String consistentHash = StringUtils.toHexString(Md5Utils.getMd5Digest((
-        compilerVersionHash + moduleName + currentWorkingDirectory + permutationDescriptionString)
+        compilerVersionHash
+            + moduleName
+            + currentWorkingDirectory
+            + permutationDescriptionString
+            + optionsDescriptionString)
         .getBytes()));
     return REBUILD_CACHE_PREFIX + "-" + consistentHash;
   }

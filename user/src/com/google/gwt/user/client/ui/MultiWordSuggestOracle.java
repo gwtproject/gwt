@@ -526,7 +526,7 @@ public class MultiWordSuggestOracle extends SuggestOracle {
    * Takes the formatted suggestion, makes it lower case and blanks out any
    * existing whitespace for searching.
    */
-  private String normalizeSuggestion(String formattedSuggestion) {
+  protected String normalizeSuggestion(String formattedSuggestion) {
     // Formatted suggestions should already have normalized whitespace. So we
     // can skip that step.
 

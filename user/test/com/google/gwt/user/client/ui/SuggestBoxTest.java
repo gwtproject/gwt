@@ -186,6 +186,25 @@ public class SuggestBoxTest extends WidgetTestBase {
         display.getSuggestion(2).getDisplayString());
   }
 
+  public void testPreNormalizeSuggestion() {
+    MultiWordSuggestOracle oracle = new MultiWordSuggestOracle() {
+      @Override
+      protected String preNormalizeSuggestion(String formattedSuggestion) {
+        return formattedSuggestion.replace("é", "e").replace("è", "e");
+      }
+    };
+    oracle.add("élève");
+
+    TestSuggestionDisplay display = new TestSuggestionDisplay();
+    SuggestBox box = new SuggestBox(oracle, new TextBox(), display);
+    RootPanel.get().add(box);
+    box.setText("el");
+    box.showSuggestionList();
+    assertTrue(display.isSuggestionListShowing());
+    assertEquals(1, display.getSuggestionCount());
+    assertEquals("<strong>él</strong>ève", display.getSuggestion(0).getDisplayString());
+  }
+
   public void testMatchCustomSort() {
     MultiWordSuggestOracle oracle = new MultiWordSuggestOracle(",! ");
     oracle.add("Hark, Shark and Herald");

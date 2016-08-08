@@ -523,12 +523,16 @@ public class MultiWordSuggestOracle extends SuggestOracle {
   }
 
   /**
-   * Takes the formatted suggestion, makes it lower case and blanks out any
-   * existing whitespace for searching.
+   * Takes the formatted suggestion, apply a pre normalization
+   * {@link #preNormalizeSuggestion(String)} then makes it lower case and blanks out any existing
+   * whitespace for searching.
    */
   private String normalizeSuggestion(String formattedSuggestion) {
     // Formatted suggestions should already have normalized whitespace. So we
     // can skip that step.
+
+    // Apply a pre normalization
+    formattedSuggestion = preNormalizeSuggestion(formattedSuggestion);
 
     // Lower case suggestion.
     formattedSuggestion = formattedSuggestion.toLowerCase(Locale.ROOT);
@@ -541,6 +545,14 @@ public class MultiWordSuggestOracle extends SuggestOracle {
             WHITESPACE_CHAR);
       }
     }
+    return formattedSuggestion;
+  }
+
+  /**
+   * Apply a custom normalization to the formatted suggestion. It is used as pre step in
+   * {@link #normalizeSuggestion(String)}.
+   */
+  protected String preNormalizeSuggestion(String formattedSuggestion) {
     return formattedSuggestion;
   }
 }

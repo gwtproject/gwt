@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d92e6726_f8fe8dd0",
+        "filename": "dev/core/src/com/google/gwt/dev/MinimalRebuildCacheManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-08-09T23:34:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9ac0bb7_4475828f",
+      "range": {
+        "startLine": 74,
+        "startChar": 3,
+        "endLine": 75,
+        "endChar": 7
+      },
+      "revId": "117f921af49a765abddf4f445650c24b3dd41131",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9ac0bb7_24cef6b1",
         "filename": "dev/core/test/com/google/gwt/dev/MinimalRebuildCacheManagerTest.java",
         "patchSetId": 5
@@ -60,6 +84,30 @@
       "side": 1,
       "message": "very nice",
       "parentUuid": "f9ac0bb7_24cef6b1",
+      "range": {
+        "startLine": 33,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 33
+      },
+      "revId": "117f921af49a765abddf4f445650c24b3dd41131",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d92e6726_78d4bd41",
+        "filename": "dev/core/test/com/google/gwt/dev/MinimalRebuildCacheManagerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-08-09T23:34:12Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "d92e6726_38f5e5e7",
       "range": {
         "startLine": 33,
         "startChar": 2,

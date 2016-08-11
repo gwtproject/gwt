@@ -241,9 +241,17 @@ public class CwBidiFormatting extends ContentWidget {
     message.setText(blogMessages.userComment(arg0, arg1, arg2));
 
     bidiFormattedMessage.setHTML(
-        blogMessages.userComment(bidiFormatter.spanWrap(arg0),
-        // arg1 is intended to be an unsigned number, so bidi formatting is not
-        // needed. However, HTML escaping is a must to avoid an XSS attack hole!
-            SafeHtmlUtils.htmlEscape(arg1), bidiFormatter.spanWrap(arg2)));
+      // Can be considered as a trusted safe html string because bidiFormatter.spanWrap() escapes
+      // the string passed as argument.
+      SafeHtmlUtils.fromTrustedString(
+        blogMessages.userComment(
+          bidiFormatter.spanWrap(arg0),
+          // arg1 is intended to be an unsigned number, so bidi formatting is not
+          // needed. However, HTML escaping is a must to avoid an XSS attack hole!
+          SafeHtmlUtils.htmlEscape(arg1),
+          bidiFormatter.spanWrap(arg2)
+        )
+      )
+    );
   }
 }

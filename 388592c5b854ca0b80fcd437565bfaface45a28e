@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "991a2f56_69f521e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-08-11T12:43:10Z",
+      "side": 1,
+      "message": "[warning] Subject line and body should be separated by a blank line.",
+      "revId": "388592c5b854ca0b80fcd437565bfaface45a28e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

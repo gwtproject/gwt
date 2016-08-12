@@ -363,7 +363,6 @@ public class DeadCodeElimination {
 
     @Override
     public void endVisit(JFieldRef x, Context ctx) {
-
       if (x.getField() == enumOrdinalField) {
         maybeReplaceWithOrdinalValue(x.getInstance(), ctx);
         return;

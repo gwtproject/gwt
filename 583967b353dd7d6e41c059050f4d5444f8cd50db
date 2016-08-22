@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8a23f7a_e64660af",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-08-22T19:24:07Z",
+      "side": 1,
+      "message": "out[head] will be null (size \u003d\u003d 0, head \u003d\u003d 0) when toArray() is called from ensureCapacity()",
+      "revId": "583967b353dd7d6e41c059050f4d5444f8cd50db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6873e7d0_dcb301e1",
+        "filename": "user/super/com/google/gwt/emul/java/util/ArrayDeque.java",
+        "patchSetId": 29
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-08-22T19:24:07Z",
+      "side": 1,
+      "message": "ensureCapacity() shouldn\u0027t call toArray() here because it uses size() which in this special case is 0 because head \u003d\u003d tail (rollover)",
+      "revId": "583967b353dd7d6e41c059050f4d5444f8cd50db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -822,6 +822,26 @@ public class ArrayDequeTest extends TestCollection {
     assertFalse(deque.removeLastOccurrence(null));
   }
 
+  public void testRolloverInvariants() {
+    ArrayDeque<Integer> deque = new ArrayDeque<>();
+
+    assertTrue(deque.add(1));
+    assertEquals(1, (int) deque.removeFirst());
+    for (int i = 0; i < 100; i++) {
+      assertTrue(deque.add(i));
+    }
+    assertNotNull(deque.peek());
+    assertFalse(deque.isEmpty());
+
+    Iterator<Integer> it = deque.iterator();
+    while (it.hasNext()) {
+      it.next();
+      it.remove();
+    }
+    assertNull(deque.peek());
+    assertTrue(deque.isEmpty());
+  }
+
   /**
    * Null elements are prohibited in ArrayDeque.
    */

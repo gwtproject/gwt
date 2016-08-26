@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45b8cef5_db728712",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-08-26T19:31:17Z",
+      "side": 1,
+      "message": "[error] Unused import - javax.annotation.Nullable.",
+      "revId": "9318a61d6d506e81ccc0c41cb9be5e90afdf0d97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45b8cef5_bb77d300",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-08-26T19:31:17Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 102).",
+      "revId": "9318a61d6d506e81ccc0c41cb9be5e90afdf0d97",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45b8cef5_fb1b0bd9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-08-26T19:27:27Z",
+      "side": 1,
+      "message": "[error] Unused import - javax.annotation.Nullable.",
+      "revId": "90a198c961c8f10bcef4ff40cff301ead2d39004",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45b8cef5_db204706",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-08-26T19:27:27Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 102).",
+      "revId": "90a198c961c8f10bcef4ff40cff301ead2d39004",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45b8cef5_bb259314",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2777,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-08-26T19:27:27Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 123).",
+      "revId": "90a198c961c8f10bcef4ff40cff301ead2d39004",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45b8cef5_9b2acfe0",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2779,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-08-26T19:27:27Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 116).",
+      "revId": "90a198c961c8f10bcef4ff40cff301ead2d39004",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45b8cef5_7b301b4f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2797,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-08-26T19:27:27Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 108).",
+      "revId": "90a198c961c8f10bcef4ff40cff301ead2d39004",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45b8cef5_5b2d57f5",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-08-26T19:27:27Z",
+      "side": 1,
+      "message": "[warning] \u0027{\u0027 should have line break after.",
+      "revId": "90a198c961c8f10bcef4ff40cff301ead2d39004",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45b8cef5_3b3aa32d",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-08-26T19:27:27Z",
+      "side": 1,
+      "message": "[warning] \u0027cast\u0027 is not followed by whitespace.",
+      "revId": "90a198c961c8f10bcef4ff40cff301ead2d39004",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

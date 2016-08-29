@@ -1,11 +1,11 @@
 /*
  * Copyright 2015 Google Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -156,19 +156,19 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
     if (JjsUtils.getPrimaryConstructor(type) != jsConstructor) {
       logError(jsConstructor,
           "Constructor %s can be a JsConstructor only if all constructors in the class are "
-          + "delegating to it.", getMemberDescription(jsConstructor));
+              + "delegating to it.", getMemberDescription(jsConstructor));
     }
   }
 
   private List<JConstructor> getJsConstructors(JDeclaredType type) {
     return FluentIterable
-          .from(type.getConstructors())
-          .filter(new Predicate<JConstructor>() {
-            @Override
-            public boolean apply(JConstructor m) {
-              return m.isJsConstructor();
-            }
-          }).toList();
+        .from(type.getConstructors())
+        .filter(new Predicate<JConstructor>() {
+          @Override
+          public boolean apply(JConstructor m) {
+            return m.isJsConstructor();
+          }
+        }).toList();
   }
 
   private void checkJsConstructorSubtype(JDeclaredType type) {
@@ -322,10 +322,10 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
 
     if (method.getBody() == null
         || (!method.isFinal()
-            && !method.getEnclosingType().isFinal()
-            && !method.isPrivate()
-            && !method.isStatic()
-            && !method.isDefaultMethod())) {
+        && !method.getEnclosingType().isFinal()
+        && !method.isPrivate()
+        && !method.isStatic()
+        && !method.isDefaultMethod())) {
       logError(member, "JsOverlay method '%s' cannot be non-final nor native.", memberDescription);
     }
   }
@@ -363,7 +363,7 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
         if ((overridesObjectMethod(target) && target.getEnclosingType().isJsNative())
             || target.getEnclosingType() == jprogram.getTypeJavaLangObject()) {
           logError(x, "Cannot use super to call '%s.%s'. 'java.lang.Object' methods in native "
-              + "JsTypes cannot be called using super.",
+                  + "JsTypes cannot be called using super.",
               JjsUtils.getReadableDescription(superClass),
               target.getName());
           return;
@@ -495,7 +495,7 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
       public void endVisit(JsNameRef x, JsContext ctx) {
         if (x.getName() == varargParameter.getName()) {
           logError(x, "Cannot access vararg parameter '%s' from JSNI in JsMethod %s."
-              + " Use 'arguments' instead.", x.getIdent(),
+                  + " Use 'arguments' instead.", x.getIdent(),
               getMemberDescription(method));
         }
       }
@@ -534,8 +534,8 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
     }
 
     if (memberType.isPropertyAccessor() && member.isStatic() && !member.isJsNative()) {
-        logError(member, "Static property accessor '%s' can only be native.",
-            JjsUtils.getReadableDescription(member));
+      logError(member, "Static property accessor '%s' can only be native.",
+          JjsUtils.getReadableDescription(member));
     }
 
     return true;
@@ -567,13 +567,10 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
   private <T extends HasJsName & HasSourceInfo & CanBeJsNative> void checkJsName(T item) {
     if (item.getJsName().isEmpty()) {
       logError(item, "%s cannot have an empty name.", getDescription(item));
-    } else if (JsInteropUtil.isGlobal(item.getJsNamespace()) && item.isJsNative()) {
+    } else if ((item.isJsNative() && !JsUtils.isValidJsQualifiedName(item.getJsName()))
+        || (!item.isJsNative() && !JsUtils.isValidJsIdentifier(item.getJsName()))) {
       // Allow qualified names in the name field for JsPackage.GLOBAL native items for future
       // compatibility
-      if (!JsUtils.isValidJsQualifiedName(item.getJsName())) {
-        logError(item, "%s has invalid name '%s'.", getDescription(item), item.getJsName());
-      }
-    } else if (!JsUtils.isValidJsIdentifier(item.getJsName())) {
       logError(item, "%s has invalid name '%s'.", getDescription(item), item.getJsName());
     }
   }
@@ -1071,12 +1068,12 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
     // TODO(goktug): make this more precise to handle package visibilities.
     boolean visibilitiesMatchesForOverride =
         !method.isPackagePrivate() && !method.isPrivate()
-        && !potentiallyOverriddenMethod.isPackagePrivate()
-        && !potentiallyOverriddenMethod.isPrivate();
+            && !potentiallyOverriddenMethod.isPackagePrivate()
+            && !potentiallyOverriddenMethod.isPrivate();
 
     return visibilitiesMatchesForOverride
         && method.getJsniSignature(false, false)
-               .equals(potentiallyOverriddenMethod.getJsniSignature(false, false));
+        .equals(potentiallyOverriddenMethod.getJsniSignature(false, false));
   }
 
   private boolean isUnusableByJsSuppressed(CanHaveSuppressedWarnings x) {

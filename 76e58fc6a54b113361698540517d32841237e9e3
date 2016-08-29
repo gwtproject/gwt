@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45b8cef5_35ace77f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2561,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-08-29T18:33:54Z",
+      "side": 1,
+      "message": "Create bridges for interfaces too. This and setting the default flag if the bridge is in an interface are the only real changes in this file. The rest is just cleanup.",
+      "revId": "76e58fc6a54b113361698540517d32841237e9e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45b8cef5_b59fd74a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2793,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-08-29T18:33:54Z",
+      "side": 1,
+      "message": "this is the other real change.",
+      "range": {
+        "startLine": 2793,
+        "startChar": 0,
+        "endLine": 2793,
+        "endChar": 8
+      },
+      "revId": "76e58fc6a54b113361698540517d32841237e9e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

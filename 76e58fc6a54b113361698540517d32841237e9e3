@@ -39,6 +39,46 @@
       "revId": "76e58fc6a54b113361698540517d32841237e9e3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91e92d6c_42ae123b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2793,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2016-08-30T23:24:15Z",
+      "side": 1,
+      "message": "// Mark the bridges as default methods because the rest of the function processing pipeline expects methods defined in Interfaces to be marked that way.",
+      "range": {
+        "startLine": 2793,
+        "startChar": 8,
+        "endLine": 2793,
+        "endChar": 61
+      },
+      "revId": "76e58fc6a54b113361698540517d32841237e9e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5246297_257a6e4e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3647,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2016-08-30T23:24:15Z",
+      "side": 1,
+      "message": "maybe instead of a static function there should be an overload of ReferenceMapper.get() that takes an array and returns an iterable",
+      "revId": "76e58fc6a54b113361698540517d32841237e9e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

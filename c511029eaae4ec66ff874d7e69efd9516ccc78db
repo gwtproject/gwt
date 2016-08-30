@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b118f16f_13f98c69",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-08-30T13:50:20Z",
+      "side": 1,
+      "message": "Having an explicit String based function was on purpose to avoid unnecessary casts, see #9388 (https://github.com/gwtproject/gwt/issues/9388)",
+      "range": {
+        "startLine": 159,
+        "startChar": 2,
+        "endLine": 165,
+        "endChar": 73
+      },
+      "revId": "c511029eaae4ec66ff874d7e69efd9516ccc78db",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "11453d84_640f9e41",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2793,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-08-31T03:33:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91e92d6c_42ae123b",
+      "range": {
+        "startLine": 2793,
+        "startChar": 8,
+        "endLine": 2793,
+        "endChar": 61
+      },
+      "revId": "76e58fc6a54b113361698540517d32841237e9e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5246297_257a6e4e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
         "patchSetId": 3
@@ -76,6 +100,24 @@
       "writtenOn": "2016-08-30T23:24:15Z",
       "side": 1,
       "message": "maybe instead of a static function there should be an overload of ReferenceMapper.get() that takes an array and returns an iterable",
+      "revId": "76e58fc6a54b113361698540517d32841237e9e3",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11453d84_44070223",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3647,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-08-31T03:33:19Z",
+      "side": 1,
+      "message": "ReferenceMapper needs a real cleanup, so I\u0027ll leave this suggestion for later.",
+      "parentUuid": "e5246297_257a6e4e",
       "revId": "76e58fc6a54b113361698540517d32841237e9e3",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

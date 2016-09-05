@@ -15,7 +15,6 @@
  */
 package com.google.gwt.user.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -58,7 +57,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * </p>
  */
 public class History {
-
   private static class HistoryEventSource implements HasValueChangeHandlers<String> {
 
     private HandlerManager handlers = new HandlerManager(null);
@@ -196,9 +194,9 @@ public class History {
     }
   }
 
-  private static HistoryImpl impl = GWT.create(HistoryImpl.class);
+  private static HistoryImpl impl = createHistoryImpl();
   private static HistoryEventSource historyEventSource = new HistoryEventSource();
-  private static HistoryTokenEncoder tokenEncoder = GWT.create(HistoryTokenEncoder.class);
+  private static HistoryTokenEncoder tokenEncoder = createHistoryTokenEncoder();
   private static String token = getDecodedHash();
 
   /**
@@ -210,6 +208,20 @@ public class History {
   @Deprecated
   public static void addHistoryListener(HistoryListener listener) {
     WrapHistory.add(listener);
+  }
+
+  private static HistoryTokenEncoder createHistoryTokenEncoder() {
+    if ("true".equals(System.getProperty("history.noDoubleEncoding", "false"))) {
+      return new NoopHistoryTokenEncoder();
+    }
+    return new HistoryTokenEncoder();
+  }
+
+  private static HistoryImpl createHistoryImpl() {
+    if ("ie8".equals(System.getProperty("user.agent", "safari"))) {
+      return new HistoryImplIE8();
+    }
+    return new HistoryImpl();
   }
 
   /**

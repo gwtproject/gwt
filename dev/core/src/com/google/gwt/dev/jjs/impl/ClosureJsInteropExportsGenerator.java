@@ -25,6 +25,7 @@ import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsStatement;
 import com.google.gwt.dev.js.ast.JsStringLiteral;
+import com.google.gwt.thirdparty.guava.common.base.Joiner;
 
 import java.util.HashSet;
 import java.util.List;
@@ -94,11 +95,14 @@ class ClosureJsInteropExportsGenerator implements JsInteropExportsGenerator {
     // goog.provide("a.b.c")
     ensureGoogProvide(exportNamespace, sourceInfo);
     // a.b.c = a_b_c_obf
-    generateAssignment(bridgeOrAlias, qualifiedExportName, sourceInfo);
+    generateAssignment(
+        bridgeOrAlias, qualifiedExportName, sourceInfo);
   }
 
   private void ensureGoogProvide(String namespace, SourceInfo info) {
-    if (JsInteropUtil.isGlobal(namespace) || !providedNamespaces.add(namespace)) {
+    if (JsInteropUtil.isGlobal(namespace)
+        || JsInteropUtil.isWindow(namespace)
+        || !providedNamespaces.add(namespace)) {
       return;
     }
 
@@ -115,7 +119,10 @@ class ClosureJsInteropExportsGenerator implements JsInteropExportsGenerator {
   }
 
   private static JsExpression createExportQualifier(String namespace, SourceInfo sourceInfo) {
-    return JsUtils.createQualifiedNameRef(
-        JsInteropUtil.isGlobal(namespace) ? "window" : namespace, sourceInfo);
+    String components[] = namespace.split("\\.");
+    if (JsInteropUtil.isGlobal(components[0]) || JsInteropUtil.isWindow(components[0])) {
+      components[0] = "window";
+    }
+    return JsUtils.createQualifiedNameRef(Joiner.on(".").join(components), sourceInfo);
   }
 }

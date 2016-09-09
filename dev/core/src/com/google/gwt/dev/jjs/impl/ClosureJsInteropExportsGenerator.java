@@ -94,11 +94,14 @@ class ClosureJsInteropExportsGenerator implements JsInteropExportsGenerator {
     // goog.provide("a.b.c")
     ensureGoogProvide(exportNamespace, sourceInfo);
     // a.b.c = a_b_c_obf
-    generateAssignment(bridgeOrAlias, qualifiedExportName, sourceInfo);
+    generateAssignment(
+        bridgeOrAlias, JsInteropUtil.normalizeQualifier(qualifiedExportName), sourceInfo);
   }
 
   private void ensureGoogProvide(String namespace, SourceInfo info) {
-    if (JsInteropUtil.isGlobal(namespace) || !providedNamespaces.add(namespace)) {
+    if (JsInteropUtil.isGlobal(namespace)
+        || JsInteropUtil.isWindow(namespace)
+        || !providedNamespaces.add(namespace)) {
       return;
     }
 
@@ -116,6 +119,9 @@ class ClosureJsInteropExportsGenerator implements JsInteropExportsGenerator {
 
   private static JsExpression createExportQualifier(String namespace, SourceInfo sourceInfo) {
     return JsUtils.createQualifiedNameRef(
-        JsInteropUtil.isGlobal(namespace) ? "window" : namespace, sourceInfo);
+        JsInteropUtil.isGlobal(namespace) || JsInteropUtil.isWindow(namespace)
+            ? "window"
+            : namespace,
+        sourceInfo);
   }
 }

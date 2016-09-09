@@ -23,6 +23,7 @@ import com.google.gwt.dev.jjs.ast.JMember;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JParameter;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
+import com.google.gwt.thirdparty.guava.common.base.Joiner;
 
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
@@ -36,6 +37,28 @@ public final class JsInteropUtil {
 
   public static boolean isGlobal(String jsNamespace) {
     return "<global>".equals(jsNamespace);
+  }
+
+  public static boolean isWindow(String jsNamespace) {
+    return "<window>".equals(jsNamespace);
+  }
+
+  public static String normalizeQualifier(String qualifier) {
+    assert !qualifier.isEmpty();
+
+    String[] components = qualifier.split("\\.");
+    boolean isSpecialWindowNamespace = isWindow(components[0]);
+
+    if (isWindow(components[0]) || isGlobal(components[0])) {
+      // Remove special namespaces.
+      components[0] = null;
+    }
+
+    // Do not use $wnd and emit unqualified if '<window>' namespace was specified. The purpose of
+    // the'<window>' namespace is to allow distinguishing between unqualified references and
+    // references qualified by '$wnd'; it is useful when $wnd is not the top scope ((i.e. in the
+    // common scenario where the top scope is the iframe and $wnd is top window).
+    return (isSpecialWindowNamespace ? "" : "$wnd.") + Joiner.on('.').skipNulls().join(components);
   }
 
   public static void maybeSetJsInteropProperties(JDeclaredType type, Annotation[] annotations) {
@@ -129,4 +152,5 @@ public final class JsInteropUtil {
   private static AnnotationBinding getInteropAnnotation(Annotation[] annotations, String name) {
     return JdtUtil.getAnnotation(annotations, "jsinterop.annotations." + name);
   }
+
 }

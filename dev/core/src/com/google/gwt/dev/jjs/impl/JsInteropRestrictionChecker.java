@@ -576,7 +576,8 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
   }
 
   private <T extends HasJsName & HasSourceInfo> void checkJsNamespace(T item) {
-    if (JsInteropUtil.isGlobal(item.getJsNamespace())) {
+    if (JsInteropUtil.isGlobal(item.getJsNamespace())
+        || JsInteropUtil.isWindow(item.getJsNamespace())) {
       return;
     }
     if (item.getJsNamespace().isEmpty()) {

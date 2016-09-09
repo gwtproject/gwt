@@ -38,6 +38,27 @@ public final class JsInteropUtil {
     return "<global>".equals(jsNamespace);
   }
 
+  public static boolean isWindow(String jsNamespace) {
+    return "<window>".equals(jsNamespace);
+  }
+
+  public static String normalizeQualifier(String qualifier) {
+    assert !qualifier.isEmpty();
+
+    String[] components = qualifier.split("\\.");
+
+    if (isWindow(components[0])) {
+      // Remove the <window> prefix and emit unqualified (i.e. as iframe scope).
+      return  qualifier.substring(components[0].length() + 1);
+    }
+
+    // Emit as top window reference.
+    return "$wnd."+ (
+        isGlobal(components[0])
+            ? qualifier.substring(components[0].length() + 1) // remove the global prefix
+            : qualifier);
+  }
+
   public static void maybeSetJsInteropProperties(JDeclaredType type, Annotation[] annotations) {
     AnnotationBinding jsType = getInteropAnnotation(annotations, "JsType");
     String namespace = JdtUtil.getAnnotationParameterString(jsType, "namespace");
@@ -129,4 +150,5 @@ public final class JsInteropUtil {
   private static AnnotationBinding getInteropAnnotation(Annotation[] annotations, String name) {
     return JdtUtil.getAnnotation(annotations, "jsinterop.annotations." + name);
   }
+
 }

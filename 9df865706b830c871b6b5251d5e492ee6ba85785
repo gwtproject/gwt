@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abbcfece_59ca636c",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-09T23:48:36Z",
+      "side": 1,
+      "message": "[error] Unused import - com.gargoylesoftware.htmlunit.html.FrameWindow.",
+      "revId": "9df865706b830c871b6b5251d5e492ee6ba85785",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "abbcfece_79cf1f7b",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-09T23:48:36Z",
+      "side": 1,
+      "message": "[error] Unused import - jsinterop.annotations.JsMethod.",
+      "revId": "9df865706b830c871b6b5251d5e492ee6ba85785",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

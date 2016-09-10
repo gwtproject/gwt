@@ -1047,6 +1047,8 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsNamespaceOnMethod() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
 
     MockJavaResource jsNamespaceFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1086,6 +1088,8 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsNamespaceOnClass() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
 
     MockJavaResource jsNamespaceFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1124,6 +1128,7 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsFunction() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
 
     MockJavaResource jsFunctionIFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1170,6 +1175,8 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsProperty() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
 
     MockJavaResource jsPropertyIFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1222,6 +1229,8 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsType() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
 
     MockJavaResource jsTypeFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1256,6 +1265,8 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsTypeNative() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
 
     MockJavaResource nativeFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1295,6 +1306,8 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsIgnore() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setGenerateJsInteropExports(true);
+
 
     MockJavaResource jsIgnoreFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1329,6 +1342,8 @@ public class CompilerTest extends ArgProcessorTestBase {
     MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
     File applicationDir = Files.createTempDir();
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setGenerateJsInteropExports(true);
+
 
     // Simple compile with one dialog.alert() export succeeds.
     compileToJs(compilerOptions, applicationDir, "com.foo.SimpleModule", Lists.newArrayList(
@@ -1590,7 +1605,6 @@ public class CompilerTest extends ArgProcessorTestBase {
             "<module>",
             "  <source path=''/>",
             "  <entry-point class='com.foo.ErrorsEntryPoint'/>",
-            "  <add-linker name='xsiframe'/>",
             "</module>");
 
     MockJavaResource entryPointResource =
@@ -1652,6 +1666,64 @@ public class CompilerTest extends ArgProcessorTestBase {
     }
   }
 
+  public void testIncrementalRecompile_representedAsNative()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    MockResource moduleResource =
+        JavaResourceBase.createMockResource(
+            "com/foo/RepresentedAsNative.gwt.xml",
+            "<module>",
+            "  <source path=''/>",
+            "  <entry-point class='com.foo.RepresentedAsNativeEntryPoint'/>",
+            "</module>");
+
+    MockJavaResource entryPointResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.RepresentedAsNativeEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "public class RepresentedAsNativeEntryPoint implements EntryPoint {",
+            "  public void onModuleLoad() {",
+            "  Double d = new Double(1d);",
+            "  }",
+            "}");
+
+
+    MockJavaResource modifiedEntryPointResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.RepresentedAsNativeEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "public class RepresentedAsNativeEntryPoint implements EntryPoint {",
+            "  public void onModuleLoad() {",
+            "  Double d = new Double(\"1\");",
+            "  }",
+            "}");
+
+    PrintWriterTreeLogger logger = new PrintWriterTreeLogger();
+    logger.setMaxDetail(TreeLogger.ERROR);
+
+    MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
+    File applicationDir = Files.createTempDir();
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA8);
+    compilerOptions.setGenerateJsInteropExports(false);
+
+    // Compile the application with no errors.
+    compileToJs(logger, compilerOptions, applicationDir, "com.foo.RepresentedAsNative",
+        Lists.newArrayList(moduleResource, entryPointResource), minimalRebuildCache,
+        emptySet, JsOutputOption.OBFUSCATED);
+
+    // Recompile but now the changed file has an error
+    compileToJs(logger, compilerOptions, applicationDir, "com.foo.RepresentedAsNative",
+        Lists.newArrayList(modifiedEntryPointResource),
+        minimalRebuildCache,
+        stringSet(
+            "com.foo.RepresentedAsNativeEntryPoint",
+            getEntryMethodHolderTypeName("com.foo.RepresentedAsNative")),
+        JsOutputOption.OBFUSCATED);
+  }
+
   public void testIncrementalRecompile_functionSignatureChange() throws UnableToCompleteException,
       IOException, InterruptedException {
     // Not testing recompile equality with Pretty/Obfuscated output since the JsIncrementalNamer's
@@ -1708,6 +1780,13 @@ public class CompilerTest extends ArgProcessorTestBase {
       throws UnableToCompleteException, IOException, InterruptedException {
     checkIncrementalRecompile_typeHierarchyChange(JsOutputOption.OBFUSCATED);
     checkIncrementalRecompile_typeHierarchyChange(JsOutputOption.DETAILED);
+  }
+
+  public void testIncrementalRecompile_newDouble()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Tests that default method on superclasses are correctly constructed
+    checkIncrementalRecompile_newDouble(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_newDouble(JsOutputOption.DETAILED);
   }
 
   public void testIncrementalRecompile_defaultMethod()
@@ -1935,6 +2014,55 @@ public class CompilerTest extends ArgProcessorTestBase {
         Lists.<MockResource>newArrayList(), relinkMinimalRebuildCache, emptySet, output);
 
     assertTrue(originalJs.equals(relinkedJs));
+  }
+
+  private void checkIncrementalRecompile_newDouble(JsOutputOption output)
+      throws UnableToCompleteException, IOException, InterruptedException {
+    MockResource moduleResource =
+        JavaResourceBase.createMockResource(
+            "com/foo/NewDouble.gwt.xml",
+            "<module>",
+            "  <inherits name='com.google.gwt.user.User' />",
+            "  <set-property name='user.agent' value='safari'/>",
+            "  <source path=''/>",
+            "  <entry-point class='com.foo.NewDoubleEntryPoint'/>",
+            "  <add-linker name='xsiframe'/>",
+            "</module>");
+
+    MockJavaResource entryPointResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.NewDoubleEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "import com.google.gwt.user.client.ui.Button;",
+            "public class NewDoubleEntryPoint implements EntryPoint {",
+            "  public void onModuleLoad() {",
+            "    final Button b = new Button(\"Button\");",
+            "  }",
+            "}");
+
+    MockJavaResource modifiedEntryPointResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.NewDoubleEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "import com.google.gwt.user.client.ui.Button;",
+            "public class NewDoubleEntryPoint implements EntryPoint {",
+            "  public void onModuleLoad() {",
+            "    new Double(\"1234\");",
+            "    final Button b = new Button(\"Button\");",
+           "  }",
+            "}");
+
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA8);
+
+    checkRecompiledModifiedApp(compilerOptions, "com.foo.NewDouble",
+        Lists.newArrayList(moduleResource),
+        entryPointResource, modifiedEntryPointResource,
+        stringSet("com.foo.NewDoubleEntryPoint", getEntryMethodHolderTypeName("com.foo.NewDouble")),
+        output);
   }
 
   private void checkIncrementalRecompile_defaultMethod(JsOutputOption output)
@@ -2570,7 +2698,6 @@ public class CompilerTest extends ArgProcessorTestBase {
     // Setup options to perform a per-file compile, output to this new application directory and
     // compile the given module.
     compilerOptions.setIncrementalCompileEnabled(true);
-    compilerOptions.setGenerateJsInteropExports(true);
     compilerOptions.setWarDir(applicationDir);
     compilerOptions.setModuleNames(ImmutableList.of(moduleName));
     compilerOptions.setOutput(output);

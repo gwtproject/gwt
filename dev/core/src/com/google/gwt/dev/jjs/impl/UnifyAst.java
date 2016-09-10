@@ -824,7 +824,8 @@ public class UnifyAst {
     // Some fields and methods in codegen types might only become referenced as the result of
     // visitor execution after unification. Since we don't want those fields are methods to be
     // prematurely pruned here we defensively trace them now.
-    for (JClassType type : program.codeGenTypes) {
+    for (JClassType type
+        : Iterables.concat(program.codeGenTypes, program.getRepresentedAsNativeTypes())) {
       for (JMethod method : type.getMethods()) {
         flowInto(method);
       }

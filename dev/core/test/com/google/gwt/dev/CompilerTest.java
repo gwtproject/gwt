@@ -1640,6 +1640,13 @@ public class CompilerTest extends ArgProcessorTestBase {
     checkIncrementalRecompile_typeHierarchyChange(JsOutputOption.DETAILED);
   }
 
+  public void testIncrementalRecompile_newDouble()
+      throws UnableToCompleteException, IOException, InterruptedException {
+    // Tests that default method on superclasses are correctly constructed
+    checkIncrementalRecompile_newDouble(JsOutputOption.OBFUSCATED);
+    checkIncrementalRecompile_newDouble(JsOutputOption.DETAILED);
+  }
+
   public void testIncrementalRecompile_defaultMethod()
       throws UnableToCompleteException, IOException, InterruptedException {
     // Tests that default method on superclasses are correctly constructed
@@ -1865,6 +1872,55 @@ public class CompilerTest extends ArgProcessorTestBase {
         Lists.<MockResource>newArrayList(), relinkMinimalRebuildCache, emptySet, output);
 
     assertTrue(originalJs.equals(relinkedJs));
+  }
+
+  private void checkIncrementalRecompile_newDouble(JsOutputOption output)
+      throws UnableToCompleteException, IOException, InterruptedException {
+    MockResource moduleResource =
+        JavaResourceBase.createMockResource(
+            "com/foo/NewDouble.gwt.xml",
+            "<module>",
+            "  <inherits name='com.google.gwt.user.User' />",
+            "  <set-property name='user.agent' value='safari'/>",
+            "  <source path=''/>",
+            "  <entry-point class='com.foo.NewDoubleEntryPoint'/>",
+            "  <add-linker name='xsiframe'/>",
+            "</module>");
+
+    MockJavaResource entryPointResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.NewDoubleEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "import com.google.gwt.user.client.ui.Button;",
+            "public class NewDoubleEntryPoint implements EntryPoint {",
+            "  public void onModuleLoad() {",
+            "    final Button b = new Button(\"Button\");",
+            "  }",
+            "}");
+
+    MockJavaResource modifiedEntryPointResource =
+        JavaResourceBase.createMockJavaResource(
+            "com.foo.NewDoubleEntryPoint",
+            "package com.foo;",
+            "import com.google.gwt.core.client.EntryPoint;",
+            "import com.google.gwt.user.client.ui.Button;",
+            "public class NewDoubleEntryPoint implements EntryPoint {",
+            "  public void onModuleLoad() {",
+            "    new Double(\"1234\");",
+            "    final Button b = new Button(\"Button\");",
+           "  }",
+            "}");
+
+    CompilerOptions compilerOptions = new CompilerOptionsImpl();
+    compilerOptions.setUseDetailedTypeIds(true);
+    compilerOptions.setSourceLevel(SourceLevel.JAVA8);
+
+    checkRecompiledModifiedApp(compilerOptions, "com.foo.NewDouble",
+        Lists.newArrayList(moduleResource),
+        entryPointResource, modifiedEntryPointResource,
+        stringSet("com.foo.NewDoubleEntryPoint", getEntryMethodHolderTypeName("com.foo.NewDouble")),
+        output);
   }
 
   private void checkIncrementalRecompile_defaultMethod(JsOutputOption output)

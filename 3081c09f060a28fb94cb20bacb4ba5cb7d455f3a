@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ba48eca_bfe7b7d5",
+        "filename": "user/src/com/google/gwt/core/client/internal/Entry.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-09-11T16:48:42Z",
+      "side": 1,
+      "message": "2016?",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "3081c09f060a28fb94cb20bacb4ba5cb7d455f3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb74360d_4561aad8",
+        "filename": "user/src/com/google/gwt/xhr/client/XMLHttpRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-09-11T16:48:42Z",
+      "side": 1,
+      "message": "extraneous space",
+      "range": {
+        "startLine": 28,
+        "startChar": 70,
+        "endLine": 28,
+        "endChar": 83
+      },
+      "revId": "3081c09f060a28fb94cb20bacb4ba5cb7d455f3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b0baeaa_07d9d60f",
+        "filename": "user/src/com/google/gwt/xhr/client/XMLHttpRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-09-11T16:48:42Z",
+      "side": 1,
+      "message": "private?",
+      "range": {
+        "startLine": 266,
+        "startChar": 2,
+        "endLine": 266,
+        "endChar": 8
+      },
+      "revId": "3081c09f060a28fb94cb20bacb4ba5cb7d455f3a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

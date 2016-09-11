@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb4e920b_dc74ed2b",
+        "filename": "user/src/com/google/gwt/xhr/client/XMLHttpRequest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-09-11T16:48:42Z",
+      "side": 0,
+      "message": "Why delete those?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 6
+      },
+      "revId": "caf2f6fa9a35a2602ea7b16426473dd9fcc92cea",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

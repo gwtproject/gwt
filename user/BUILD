@@ -300,6 +300,7 @@ java_library(
             "src/com/google/gwt/json/client/JSONValue.java",
             "src/com/google/gwt/core/client/JsonUtils.java",
             "src/com/google/gwt/core/client/impl/WeakMapping.java",
+            "src/com/google/gwt/core/client/internal/Entry.java",
             "src/com/google/gwt/xhr/client/ReadyStateChangeHandler.java",
             "src/com/google/gwt/xhr/client/XMLHttpRequest.java",
             "src/com/google/gwt/user/client/Timer.java",
@@ -385,6 +386,7 @@ java_library(
     compatible_with = ["//buildenv/target:appengine"],
     deps = [
         ":gwt-dto-serializers",
+        ":gwt-jsinterop-annotations",
         ":jvm_regexp",
         "//third_party/java/servlet/servlet_api",
         "//third_party/java_src/gwt/svn/tools:servlet_deps",

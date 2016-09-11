@@ -15,18 +15,29 @@
  */
 package com.google.gwt.xhr.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.internal.Entry;
 import com.google.gwt.typedarrays.shared.ArrayBuffer;
 
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
 /**
- * The native XMLHttpRequest object. Most applications should use the higher-
- * level {@link com.google.gwt.http.client.RequestBuilder} class unless they
- * need specific functionality provided by the XMLHttpRequest object.
- * 
- * See <a href="http://www.w3.org/TR/XMLHttpRequest/"
- * >http://www.w3.org/TR/XMLHttpRequest/</a>/
+ * The native XMLHttpRequest object. Most applications should use the higher- level {@link
+ * com.google.gwt.http.client.RequestBuilder} class unless they need specific functionality provided
+ * by the XMLHttpRequest object.
+ *
+ * <p>See <a href="http://www.w3.org/TR/XMLHttpRequest/" >http://www.w3.org/TR/XMLHttpRequest/</a>/
  */
-public class XMLHttpRequest extends JavaScriptObject {
+@JsType(isNative = true, name = "XMLHttpRequest", namespace = JsPackage.GLOBAL)
+public class XMLHttpRequest {
+
+  @JsFunction
+  private interface Function {
+    void onEvent();
+  }
 
   /**
    * The type of response expected from the XHR.
@@ -46,15 +57,6 @@ public class XMLHttpRequest extends JavaScriptObject {
      * returns true.
      */
     ArrayBuffer("arraybuffer");
-
-    // not implemented yet
-    /*
-    Blob("blob"),
-    
-    Document("document"),
-    
-    Text("text");
-    */
 
     private final String responseTypeString;
 
@@ -84,6 +86,7 @@ public class XMLHttpRequest extends JavaScriptObject {
   /**
    * When constructed, the XMLHttpRequest object must be in the UNSENT state.
    */
+  @JsOverlay
   public static final int UNSENT = 0;
 
   /**
@@ -91,18 +94,21 @@ public class XMLHttpRequest extends JavaScriptObject {
    * successfully invoked. During this state request headers can be set using
    * setRequestHeader() and the request can be made using send().
    */
+  @JsOverlay
   public static final int OPENED = 1;
 
   /**
    * The HEADERS_RECEIVED state is the state of the object when all response
    * headers have been received.
    */
+  @JsOverlay
   public static final int HEADERS_RECEIVED = 2;
 
   /**
    * The LOADING state is the state of the object when the response entity body
    * is being received.
    */
+  @JsOverlay
   public static final int LOADING = 3;
 
   /**
@@ -110,6 +116,7 @@ public class XMLHttpRequest extends JavaScriptObject {
    * been completed or something went wrong during the transfer (infinite
    * redirects for instance).
    */
+  @JsOverlay
   public static final int DONE = 4;
 
   /**
@@ -117,9 +124,10 @@ public class XMLHttpRequest extends JavaScriptObject {
    * 
    * @return the created object
    */
-  public static native XMLHttpRequest create() /*-{
-    return new $wnd.XMLHttpRequest();
-  }-*/;
+  @JsOverlay
+  public static XMLHttpRequest create() {
+    return new XMLHttpRequest();
+  }
 
   protected XMLHttpRequest() {
   }
@@ -130,21 +138,27 @@ public class XMLHttpRequest extends JavaScriptObject {
    * See <a href="http://www.w3.org/TR/XMLHttpRequest/#the-abort-method"
    * >http://www.w3.org/TR/XMLHttpRequest/#the-abort-method</a>.
    */
-  public final native void abort() /*-{
-    this.abort();
-  }-*/;
+  public final native void abort();
 
   /**
    * Clears the {@link ReadyStateChangeHandler}.
-   * <p>
-   * See <a href="http://www.w3.org/TR/XMLHttpRequest/#handler-xhr-onreadystatechange"
+   *
+   * <p>See <a href="http://www.w3.org/TR/XMLHttpRequest/#handler-xhr-onreadystatechange"
    * >http://www.w3.org/TR/XMLHttpRequest/#handler-xhr-onreadystatechange</a>.
-   * 
+   *
    * @see #clearOnReadyStateChange()
    */
-  public final native void clearOnReadyStateChange() /*-{
-    this.onreadystatechange = function() {};
-  }-*/;
+  @JsOverlay
+  public final void clearOnReadyStateChange() {
+    onreadystatechange =
+        new Function() {
+          @Override
+          public void onEvent() {
+          }
+        };
+  }
+
+  private Function onreadystatechange;
 
   /**
    * Gets all the HTTP response headers, as a single string.
@@ -154,9 +168,7 @@ public class XMLHttpRequest extends JavaScriptObject {
    * 
    * @return the response headers.
    */
-  public final native String getAllResponseHeaders() /*-{
-    return this.getAllResponseHeaders();
-  }-*/;
+  public final native String getAllResponseHeaders();
 
   /**
    * Get's the current ready-state.
@@ -166,9 +178,8 @@ public class XMLHttpRequest extends JavaScriptObject {
    * 
    * @return the ready-state constant
    */
-  public final native int getReadyState() /*-{
-    return this.readyState;
-  }-*/;
+  @JsProperty
+  public final native int getReadyState();
 
   /**
    * Get the response as an {@link ArrayBuffer}.
@@ -176,9 +187,8 @@ public class XMLHttpRequest extends JavaScriptObject {
    * @return an {@link ArrayBuffer} containing the response, or null if the
    *     request is in progress or failed
    */
-  public final native ArrayBuffer getResponseArrayBuffer() /*-{
-    return this.response;
-  }-*/;
+  @JsProperty(name = "response")
+  public final native ArrayBuffer getResponseArrayBuffer();
 
   /**
    * Gets an HTTP response header.
@@ -189,9 +199,7 @@ public class XMLHttpRequest extends JavaScriptObject {
    * @param header the response header to be retrieved
    * @return the header value
    */
-  public final native String getResponseHeader(String header) /*-{
-    return this.getResponseHeader(header);
-  }-*/;
+  public final native String getResponseHeader(String header);
 
   /**
    * Gets the response text.
@@ -201,9 +209,8 @@ public class XMLHttpRequest extends JavaScriptObject {
    * 
    * @return the response text
    */
-  public final native String getResponseText() /*-{
-    return this.responseText;
-  }-*/;
+  @JsProperty
+  public final native String getResponseText();
 
   /**
    * Gets the response type.
@@ -213,9 +220,12 @@ public class XMLHttpRequest extends JavaScriptObject {
    *
    * @return the response type
    */
-  public final native String getResponseType() /*-{
-    return this.responseType || "";
-  }-*/;
+  @JsOverlay
+  public final String getResponseType() {
+    return responseType == null ? "" : responseType;
+  }
+
+  private String responseType;
 
   /**
    * Gets the status code.
@@ -225,9 +235,8 @@ public class XMLHttpRequest extends JavaScriptObject {
    * 
    * @return the status code
    */
-  public final native int getStatus() /*-{
-    return this.status;
-  }-*/;
+  @JsProperty
+  public final native int getStatus();
 
   /**
    * Gets the status text.
@@ -237,9 +246,8 @@ public class XMLHttpRequest extends JavaScriptObject {
    * 
    * @return the status text
    */
-  public final native String getStatusText() /*-{
-    return this.statusText;
-  }-*/;
+  @JsProperty
+  public final native String getStatusText();
 
   /**
    * Opens an asynchronous connection.
@@ -250,9 +258,12 @@ public class XMLHttpRequest extends JavaScriptObject {
    * @param httpMethod the HTTP method to use
    * @param url the URL to be opened
    */
-  public final native void open(String httpMethod, String url) /*-{
-    this.open(httpMethod, url, true);
-  }-*/;
+  @JsOverlay
+  public final void open(String httpMethod, String url) {
+    open(httpMethod, url, true);
+  }
+  
+  public final native void open(String httpMethod, String url, boolean async);
 
   /**
    * Opens an asynchronous connection.
@@ -264,34 +275,39 @@ public class XMLHttpRequest extends JavaScriptObject {
    * @param url the URL to be opened
    * @param user user to use in the URL
    */
-  public final native void open(String httpMethod, String url, String user) /*-{
-    this.open(httpMethod, url, true, user);
-  }-*/;
+  @JsOverlay
+  public final void open(String httpMethod, String url, String user) {
+    open(httpMethod, url, true, user);
+  }
+  
+  public final native void open(String httpMethod, String url, boolean async, String user);
 
   /**
    * Opens an asynchronous connection.
-   * <p>
-   * See <a href="http://www.w3.org/TR/XMLHttpRequest/#the-open-method"
+   *
+   * <p>See <a href="http://www.w3.org/TR/XMLHttpRequest/#the-open-method"
    * >http://www.w3.org/TR/XMLHttpRequest/#the-open-method</a>.
-   * 
+   *
    * @param httpMethod the HTTP method to use
    * @param url the URL to be opened
    * @param user user to use in the URL
    * @param password password to use in the URL
    */
-  public final native void open(String httpMethod, String url, String user,
-      String password) /*-{
+  @JsOverlay
+  public final void open(String httpMethod, String url, String user, String password) {
     this.open(httpMethod, url, true, user, password);
-  }-*/;
+  }
+
+  public final native void open(
+      String httpMethod, String url, boolean async, String user, String password);
 
   /**
    * Initiates a request with no request data. This simply calls
    * {@link #send(String)} with <code>null</code> as an argument, because the
    * no-argument <code>send()</code> method is unavailable on Firefox.
    */
-  public final void send() {
-    send(null);
-  }
+  
+  public final native void send();
 
   /**
    * Initiates a request with data.  If there is no data, specify null.
@@ -301,34 +317,32 @@ public class XMLHttpRequest extends JavaScriptObject {
    * 
    * @param requestData the data to be sent with the request
    */
-  public final native void send(String requestData) /*-{
-    this.send(requestData);
-  }-*/;
+  public final native void send(String requestData);
 
   /**
-   * Sets the {@link ReadyStateChangeHandler} to be notified when the object's
-   * ready-state changes.
-   * <p>
-   * See <a href="http://www.w3.org/TR/XMLHttpRequest/#handler-xhr-onreadystatechange"
+   * Sets the {@link ReadyStateChangeHandler} to be notified when the object's ready-state changes.
+   *
+   * <p>See <a href="http://www.w3.org/TR/XMLHttpRequest/#handler-xhr-onreadystatechange"
    * >http://www.w3.org/TR/XMLHttpRequest/#handler-xhr-onreadystatechange</a>.
-   * 
-   * <p>
-   * Note: Applications <em>must</em> call {@link #clearOnReadyStateChange()}
-   * when they no longer need this object, to ensure that it is cleaned up
-   * properly. Failure to do so will result in memory leaks on some browsers.
-   * </p>
-   * 
+   *
+   * <p>Note: Applications <em>must</em> call {@link #clearOnReadyStateChange()} when they no longer
+   * need this object, to ensure that it is cleaned up properly. Failure to do so will result in
+   * memory leaks on some browsers.
+   *
    * @param handler the handler to be called when the ready state changes
    * @see #clearOnReadyStateChange()
    */
-  public final native void setOnReadyStateChange(ReadyStateChangeHandler handler) /*-{
-    // The 'this' context is always supposed to point to the xhr object in the
-    // onreadystatechange handler, but we reference it via closure to be extra sure.
-    var _this = this;
-    this.onreadystatechange = $entry(function() {
-      handler.@com.google.gwt.xhr.client.ReadyStateChangeHandler::onReadyStateChange(Lcom/google/gwt/xhr/client/XMLHttpRequest;)(_this);
-    });
-  }-*/;
+  @JsOverlay
+  public final void setOnReadyStateChange(final ReadyStateChangeHandler handler) {
+    onreadystatechange =
+        Entry.wrapEntry(
+            new Function() {
+              @Override
+              public void onEvent() {
+                handler.onReadyStateChange(XMLHttpRequest.this);
+              }
+            });
+  }
 
   /**
    * Sets a request header.
@@ -339,9 +353,7 @@ public class XMLHttpRequest extends JavaScriptObject {
    * @param header the header to be set
    * @param value the header's value
    */
-  public final native void setRequestHeader(String header, String value) /*-{
-    this.setRequestHeader(header, value);
-  }-*/;
+  public final native void setRequestHeader(String header, String value);
 
   /**
    * Sets withCredentials attribute.
@@ -351,9 +363,8 @@ public class XMLHttpRequest extends JavaScriptObject {
    *
    * @param withCredentials whether to include credentials in XHR
    */
-  public final native void setWithCredentials(boolean withCredentials) /*-{
-    this.withCredentials = withCredentials;
-  }-*/;
+  @JsProperty
+  public final native void setWithCredentials(boolean withCredentials);
 
   /**
    * Sets the response type.
@@ -364,6 +375,7 @@ public class XMLHttpRequest extends JavaScriptObject {
    * @param responseType the type of response desired.  See {@link ResponseType}
    *     for limitations on using the different values
    */
+  @JsOverlay
   public final void setResponseType(ResponseType responseType) {
     this.setResponseType(responseType.getResponseTypeString());
   }
@@ -377,7 +389,6 @@ public class XMLHttpRequest extends JavaScriptObject {
    * @param responseType the type of response desired.  See {@link ResponseType}
    *     for limitations on using the different values
    */
-  public final native void setResponseType(String responseType) /*-{
-    this.responseType = responseType;
-  }-*/;
+  @JsProperty
+  public final native void setResponseType(String responseType);
 }

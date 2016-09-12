@@ -16,34 +16,38 @@
 
 package com.google.gwt.geolocation.client;
 
-import com.google.gwt.core.client.SingleJsoImpl;
-import com.google.gwt.geolocation.client.PositionImpl.CoordinatesImpl;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Represents information about the user's position as reported by the browser.
  */
-@SingleJsoImpl(PositionImpl.class)
+@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
 public interface Position {
 
   /**
    * Returns information about the coordinates reported by the browser.
    */
+  @JsProperty(name = "coords")
   Coordinates getCoordinates();
 
   /**
    * Returns the time this position was reported by the browser.
    */
+  @JsProperty
   double getTimestamp();
 
   /**
    * Represents position reported by the browser.
    */
-  @SingleJsoImpl(CoordinatesImpl.class)
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
   public interface Coordinates {
 
     /**
      * Returns the estimated accuracy reported by the browser, in meters.
      */
+    @JsProperty
     double getAccuracy();
 
     /**
@@ -52,13 +56,15 @@ public interface Position {
      * ellipsoid</a>, or <code>null</code> if the browser did not report an
      * altitude.
      */
-    Double getAltitude();
+    @JsProperty
+    double getAltitude();
 
     /**
      * Returns the estimated accuracy of the altitude reported by the browser,
      * in meters, or <code>null</code> if the browser did not report an
      * accuracy.
      */
+    @JsProperty
     Double getAltitudeAccuracy();
 
     /**
@@ -66,16 +72,19 @@ public interface Position {
      * based on previous calls to get the user's position, or <code>null</code>
      * if the browser did not report a heading.
      */
+    @JsProperty
     Double getHeading();
 
     /**
      * Returns the decimal latitude reported by the browser.
      */
+    @JsProperty
     double getLatitude();
 
     /**
      * Returns the decimal longitude reported by the browser.
      */
+    @JsProperty
     double getLongitude();
 
     /**
@@ -83,6 +92,7 @@ public interface Position {
      * previous calls to get the user's position, or <code>null</code> if the
      * browser did not report a speed.
      */
+    @JsProperty
     Double getSpeed();
   }
 }

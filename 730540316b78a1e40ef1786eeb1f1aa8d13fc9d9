@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bad0ab1_7e4b7156",
+        "filename": "user/src/com/google/gwt/geolocation/client/Geolocation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-09-12T21:46:48Z",
+      "side": 1,
+      "message": "Previous code was using $wnd.navigator.geolocation, is there a specific reason for using \"window.navigator\" here? (vs. \"navigator\", which would translate to $wnd.navigator) If yes, then better note it in a comment, otherwise then maybe use \"navigator\" to avoid wondering again later whether the \"window.\" prefix has a specific reason to be there ;-)",
+      "revId": "730540316b78a1e40ef1786eeb1f1aa8d13fc9d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb4e920b_3c8dd135",
+        "filename": "user/src/com/google/gwt/geolocation/client/Geolocation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-09-12T21:46:48Z",
+      "side": 1,
+      "message": "Should this be changed to 2 interfaces to (possibly) avoid casts? (see https://github.com/gwtproject/gwt/issues/9388 ) or there won\u0027t be casts because the generic arguments both are @JsType(isNative\u003dtrue) ?",
+      "revId": "730540316b78a1e40ef1786eeb1f1aa8d13fc9d9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

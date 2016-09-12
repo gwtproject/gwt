@@ -41,5 +41,4 @@ public class DOMNodeException extends DOMException {
   public DOMItem getItem() {
     return item;
   }
-
 }

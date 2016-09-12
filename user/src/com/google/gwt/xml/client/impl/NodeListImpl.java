@@ -15,9 +15,12 @@
  */
 package com.google.gwt.xml.client.impl;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.xml.client.Node;
 import com.google.gwt.xml.client.NodeList;
+import com.google.gwt.xml.client.impl.NodeImpl.NativeNodeImpl;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * This class implements the NodeList interface using the underlying
@@ -25,12 +28,22 @@ import com.google.gwt.xml.client.NodeList;
  */
 class NodeListImpl extends DOMItem implements NodeList {
 
-  protected NodeListImpl(JavaScriptObject o) {
-    super(o);
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static class NativeNodeListImpl extends NativeDomItem {
+    int length;
+    public native NativeNodeImpl item(int index);
   }
 
+  private final NativeNodeListImpl domList;
+
+  protected NodeListImpl(NativeNodeListImpl o) {
+    super(o);
+    this.domList = o;
+  }
+
+  @Override
   public int getLength() {
-    return XMLParserImpl.getLength(this.getJsObject());
+    return domList.length;
   }
 
   /**
@@ -40,8 +53,12 @@ class NodeListImpl extends DOMItem implements NodeList {
    * @return the item at this index
    * @see com.google.gwt.xml.client.NodeList#item(int)
    */
+  @Override
   public Node item(int index) {
-    return NodeImpl.build(XMLParserImpl.item(this.getJsObject(), index));
+    if (index >= domList.length) {
+      return null;
+    }
+    return NodeImpl.build(domList.item(index));
   }
 
   @Override

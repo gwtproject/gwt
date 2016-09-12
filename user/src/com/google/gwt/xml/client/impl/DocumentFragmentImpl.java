@@ -15,15 +15,21 @@
  */
 package com.google.gwt.xml.client.impl;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.xml.client.DocumentFragment;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * This class implements the XML DOM interface.
  */
 class DocumentFragmentImpl extends NodeImpl implements DocumentFragment {
 
-  protected DocumentFragmentImpl(JavaScriptObject o) {
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static class NativeDocumentFragmentImpl extends NativeNodeImpl {
+  }
+
+  protected DocumentFragmentImpl(NativeDocumentFragmentImpl o) {
     super(o);
   }
 }

@@ -15,29 +15,44 @@
  */
 package com.google.gwt.xml.client.impl;
 
-import com.google.gwt.core.client.JavaScriptException;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.xml.client.CharacterData;
 import com.google.gwt.xml.client.DOMException;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * This class implements the CharacterData interface.
  */
 abstract class CharacterDataImpl extends NodeImpl implements
     CharacterData {
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static class NativeCharacterDataImpl extends NativeNodeImpl {
+    String data;
+    int length;
+    native void appendData(String data);
+    native void deleteData(int offset, int count);
+    native void insertData(int offset, String arg);
+    native void replaceData(int offset, int count, String arg);
+    native String substringData(int offset, int count);
+  }
 
-  protected CharacterDataImpl(JavaScriptObject o) {
+  private NativeCharacterDataImpl charNode;
+
+  protected CharacterDataImpl(NativeCharacterDataImpl o) {
     super(o);
+    this.charNode = o;
   }
 
   /**
    * This function delegates to the native method <code>appendData</code> in
    * XMLParserImpl.
    */
+  @Override
   public void appendData(String arg) {
     try {
-      XMLParserImpl.appendData(this.getJsObject(), arg);
-    } catch (JavaScriptException e) {
+      charNode.appendData(arg);
+    } catch (Exception e) {
       throw new DOMNodeException(DOMException.INVALID_MODIFICATION_ERR, e, this);
     }
   }
@@ -46,10 +61,11 @@ abstract class CharacterDataImpl extends NodeImpl implements
    * This function delegates to the native method <code>deleteData</code> in
    * XMLParserImpl.
    */
+  @Override
   public void deleteData(int offset, int count) {
     try {
-      XMLParserImpl.deleteData(this.getJsObject(), offset, count);
-    } catch (JavaScriptException e) {
+      charNode.deleteData(offset, count);
+    } catch (Exception e) {
       throw new DOMNodeException(DOMException.INVALID_MODIFICATION_ERR, e, this);
     }
   }
@@ -58,26 +74,29 @@ abstract class CharacterDataImpl extends NodeImpl implements
    * This function delegates to the native method <code>getData</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getData() {
-    return XMLParserImpl.getData(this.getJsObject());
+    return charNode.data;
   }
 
   /**
    * This function delegates to the native method <code>getLength</code> in
    * XMLParserImpl.
    */
+  @Override
   public int getLength() {
-    return XMLParserImpl.getLength(this.getJsObject());
+    return charNode.length;
   }
 
   /**
    * This function delegates to the native method <code>insertData</code> in
    * XMLParserImpl.
    */
+  @Override
   public void insertData(int offset, String arg) {
     try {
-      XMLParserImpl.insertData(this.getJsObject(), offset, arg);
-    } catch (JavaScriptException e) {
+      charNode.insertData(offset, arg);
+    } catch (Exception e) {
       throw new DOMNodeException(DOMException.INVALID_MODIFICATION_ERR, e, this);
     }
   }
@@ -86,10 +105,11 @@ abstract class CharacterDataImpl extends NodeImpl implements
    * This function delegates to the native method <code>replaceData</code> in
    * XMLParserImpl.
    */
+  @Override
   public void replaceData(int offset, int count, String arg) {
     try {
-      XMLParserImpl.replaceData(this.getJsObject(), offset, count, arg);
-    } catch (JavaScriptException e) {
+      charNode.replaceData(offset, count, arg);
+    } catch (Exception e) {
       throw new DOMNodeException(DOMException.INVALID_MODIFICATION_ERR, e, this);
     }
   }
@@ -98,10 +118,11 @@ abstract class CharacterDataImpl extends NodeImpl implements
    * This function delegates to the native method <code>setData</code> in
    * XMLParserImpl.
    */
+  @Override
   public void setData(String data) {
     try {
-      XMLParserImpl.setData(this.getJsObject(), data);
-    } catch (JavaScriptException e) {
+      charNode.data = data;
+    } catch (Exception e) {
       throw new DOMNodeException(DOMException.INVALID_MODIFICATION_ERR, e, this);
     }
   }
@@ -110,10 +131,11 @@ abstract class CharacterDataImpl extends NodeImpl implements
    * This function delegates to the native method <code>substringData</code>
    * in XMLParserImpl.
    */
-  public String substringData(final int offset, final int count) {
+  @Override
+  public String substringData(int offset, int count) {
     try {
-      return XMLParserImpl.substringData(this.getJsObject(), offset, count);
-    } catch (JavaScriptException e) {
+      return charNode.substringData(offset, count);
+    } catch (Exception e) {
       throw new DOMNodeException(DOMException.INVALID_ACCESS_ERR, e, this);
     }
   }

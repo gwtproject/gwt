@@ -15,10 +15,11 @@
  */
 package com.google.gwt.xml.client.impl;
 
-import com.google.gwt.core.client.JavaScriptException;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.xml.client.DOMException;
 import com.google.gwt.xml.client.ProcessingInstruction;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * This class implements the XML DOM ProcessingInstruction interface.
@@ -26,38 +27,50 @@ import com.google.gwt.xml.client.ProcessingInstruction;
 class ProcessingInstructionImpl extends NodeImpl implements
     ProcessingInstruction {
 
-  protected ProcessingInstructionImpl(JavaScriptObject o) {
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static class NativeProcessingInstructionImpl extends NativeNodeImpl {
+    String data;
+    String target;
+  }
+
+  private final NativeProcessingInstructionImpl instructions;
+
+  protected ProcessingInstructionImpl(NativeProcessingInstructionImpl o) {
     super(o);
+    this.instructions = o;
   }
 
   /**
    * This function delegates to the native method <code>getData</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getData() {
-    return XMLParserImpl.getData(this.getJsObject());
+    return instructions.data;
   }
 
   /**
    * This function delegates to the native method <code>getTarget</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getTarget() {
-    return XMLParserImpl.getTarget(this.getJsObject());
+    return instructions.target;
   }
 
   /**
    * This function delegates to the native method <code>setData</code> in
    * XMLParserImpl.
    */
+  @Override
   public void setData(String data) {
     try {
-      XMLParserImpl.setData(this.getJsObject(), data);
-    } catch (JavaScriptException e) {
+      instructions.data = data;
+    } catch (Exception e) {
       throw new DOMNodeException(DOMException.INVALID_CHARACTER_ERR, e, this);
     }
   }
-  
+
   @Override
   public String toString() {
     return XMLParserImpl.getInstance().toStringImpl(this);

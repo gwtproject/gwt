@@ -15,60 +15,79 @@
  */
 package com.google.gwt.xml.client.impl;
 
-import com.google.gwt.core.client.JavaScriptException;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.xml.client.Attr;
 import com.google.gwt.xml.client.DOMException;
 import com.google.gwt.xml.client.Element;
 import com.google.gwt.xml.client.NodeList;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * This method implements the Element interface.
  */
 class ElementImpl extends NodeImpl implements Element {
 
-  protected ElementImpl(JavaScriptObject o) {
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static class NativeElementImpl extends NativeNodeImpl {
+    String data;
+    NativeElementImpl firstChild;
+    String tagName;
+
+    native String getAttribute(String name);
+    native NativeNodeImpl getAttributeNode(String name);
+    native void removeAttribute(String name);
+    native void setAttribute(String name, String value);
+  }
+
+  private final NativeElementImpl element;
+
+  protected ElementImpl(NativeElementImpl o) {
     super(o);
+    this.element = o;
   }
 
   /**
    * This function delegates to the native method <code>getAttribute</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getAttribute(String tagName) {
-    return XMLParserImpl.getAttribute(this.getJsObject(), tagName);
+    return element.getAttribute(tagName);
   }
 
   /**
    * This function delegates to the native method <code>getAttributeNode</code>
    * in XMLParserImpl.
    */
+  @Override
   public Attr getAttributeNode(String tagName) {
-    return (Attr) NodeImpl.build(XMLParserImpl.getAttributeNode(
-        this.getJsObject(), tagName));
+    return (Attr) NodeImpl.build(element.getAttributeNode(tagName));
   }
 
   /**
-   * This function delegates to the native method
-   * <code>getElementsByTagName</code> in XMLParserImpl.
+   * This function delegates to the native method <code>getElementsByTagName</code> in
+   * XMLParserImpl.
    */
+  @Override
   public NodeList getElementsByTagName(String tagName) {
-    return new NodeListImpl(XMLParserImpl.getElementsByTagName(
-        this.getJsObject(), tagName));
+    return new NodeListImpl(XMLParserImpl.getElementsByTagName(element, tagName));
   }
 
   /**
    * This function delegates to the native method <code>getTagName</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getTagName() {
-    return XMLParserImpl.getTagName(this.getJsObject());
+    return element.tagName;
   }
 
   /**
    * This function delegates to the native method <code>hasAttribute</code> in
    * XMLParserImpl.
    */
+  @Override
   public boolean hasAttribute(String tagName) {
     return getAttribute(tagName) != null;
   }
@@ -77,10 +96,11 @@ class ElementImpl extends NodeImpl implements Element {
    * This function delegates to the native method <code>removeAttribute</code>
    * in XMLParserImpl.
    */
+  @Override
   public void removeAttribute(String name) throws DOMNodeException {
     try {
-      XMLParserImpl.removeAttribute(this.getJsObject(), name);
-    } catch (JavaScriptException e) {
+      element.removeAttribute(name);
+    } catch (Exception e) {
       throw new DOMNodeException(DOMException.INVALID_MODIFICATION_ERR, e, this);
     }
   }
@@ -89,10 +109,11 @@ class ElementImpl extends NodeImpl implements Element {
    * This function delegates to the native method <code>setAttribute</code> in
    * XMLParserImpl.
    */
+  @Override
   public void setAttribute(String name, String value) throws DOMNodeException {
     try {
-      XMLParserImpl.setAttribute(this.getJsObject(), name, value);
-    } catch (JavaScriptException e) {
+      element.setAttribute(name, value);
+    } catch (Exception e) {
       throw new DOMNodeException(DOMException.INVALID_MODIFICATION_ERR, e, this);
     }
   }

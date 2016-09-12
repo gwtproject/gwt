@@ -15,29 +15,38 @@
  */
 package com.google.gwt.xml.client.impl;
 
-import com.google.gwt.core.client.JavaScriptException;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.xml.client.DOMException;
 import com.google.gwt.xml.client.Text;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * This class is the implementation of the XML DOM Text interface.
  */
 class TextImpl extends CharacterDataImpl implements Text {
 
-  protected TextImpl(JavaScriptObject o) {
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static class NativeTextImpl extends NativeCharacterDataImpl {
+    native NativeTextImpl splitText(int offset);
+  }
+
+  private final NativeTextImpl text;
+
+  protected TextImpl(NativeTextImpl o) {
     super(o);
+    this.text = o;
   }
 
   /**
    * This function delegates to the native method <code>splitText</code> in
    * XMLParserImpl.
    */
+  @Override
   public Text splitText(int offset) {
     try {
-      return (Text) NodeImpl.build(XMLParserImpl.splitText(this.getJsObject(),
-        offset));
-    } catch (JavaScriptException e) {
+      return (Text) NodeImpl.build(text.splitText(offset));
+    } catch (Exception e) {
       throw new DOMNodeException(DOMException.INVALID_MODIFICATION_ERR, e, this);
     }
   }

@@ -19,7 +19,6 @@ import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.xml.client.impl.DOMParseException;
-import com.google.gwt.xml.client.impl.XMLParserImplSafari;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -243,14 +242,8 @@ public class XMLTest extends GWTTestCase {
     assertFalse(d2.hasAttribute("depth"));
   }
 
+  @DoNotRunWith({Platform.HtmlUnitUnknown})
   public void testForIssue733() {
-    // TODO (knorton):
-    // http://code.google.com/p/google-web-toolkit/issues/detail?id=2346
-    // Fixing issue #733 has been deferred for Safari2. See the bug URL for more
-    // details. This should be enabled as soon as that bug is fixed.
-    if (XMLParserImplSafari.isSafari2LevelWebKit()) {
-      return;
-    }
 
     final Document document = XMLParser.createDocument();
     final Element element = document.createElement("foo");

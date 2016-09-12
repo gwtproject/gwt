@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abbcfece_35f3e303",
+        "filename": "user/src/com/google/gwt/geolocation/client/Geolocation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-12T20:45:46Z",
+      "side": 1,
+      "message": "[warning] Redundant \u0027final\u0027 modifier.",
+      "revId": "953e8bbe04d42c13e65b4a657efb027c39ae8ec5",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

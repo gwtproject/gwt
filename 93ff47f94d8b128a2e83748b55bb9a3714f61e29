@@ -50,6 +50,29 @@
       "revId": "93ff47f94d8b128a2e83748b55bb9a3714f61e29",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ba48eca_5fa78b5b",
+        "filename": "user/src/com/google/gwt/xml/client/impl/XMLParserImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-09-12T10:33:23Z",
+      "side": 1,
+      "message": "Use a switch-on-string?\n\n switch (userAgent) {\n case \"ie8\":\n case \"ie9\":\n   return new XMLParserImplIE8And9();\n case \"safari\":\n   return new XMLParserImplSafari();\n default:\n   return new XMLParserImplStandard();\n }",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 5
+      },
+      "revId": "93ff47f94d8b128a2e83748b55bb9a3714f61e29",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

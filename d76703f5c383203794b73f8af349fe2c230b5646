@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abbcfece_469c375f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/UnifyAst.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 5410
+      },
+      "writtenOn": "2016-09-12T23:16:06Z",
+      "side": 1,
+      "message": "ah ic, so sometimes this function would be called in \"do not report errors mode\" and in that mode it would put the compilation unit into the set, and then later when the function was called in \"do report errors mode\" it would think the unit had already been reported (since the unit would already by in the set)",
+      "revId": "d76703f5c383203794b73f8af349fe2c230b5646",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

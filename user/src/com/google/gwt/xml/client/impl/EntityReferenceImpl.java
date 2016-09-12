@@ -15,15 +15,21 @@
  */
 package com.google.gwt.xml.client.impl;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.xml.client.EntityReference;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * This class implements the XML DOM interface EntityReference.
  */
 class EntityReferenceImpl extends NodeImpl implements EntityReference {
 
-  protected EntityReferenceImpl(JavaScriptObject o) {
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static class NativeEntityReferenceImpl extends NativeNodeImpl {
+  }
+
+  protected EntityReferenceImpl(NativeEntityReferenceImpl o) {
     super(o);
   }
 }

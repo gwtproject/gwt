@@ -15,17 +15,22 @@
  */
 package com.google.gwt.xml.client.impl;
 
-import com.google.gwt.core.client.JavaScriptObject;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * This class is the base class for all DOM object wrappers.
  */
 class DOMItem {
 
-  private JavaScriptObject jsObject;
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static class NativeDomItem {
+  }
 
-  protected DOMItem(JavaScriptObject jso) {
-    this.jsObject = jso;
+  private NativeDomItem domItem;
+
+  protected DOMItem(NativeDomItem jso) {
+    this.domItem = jso;
   }
 
   /**
@@ -38,7 +43,7 @@ class DOMItem {
   @Override
   public boolean equals(final Object o) {
     if (o instanceof DOMItem) {
-      return this.getJsObject() == ((DOMItem) o).getJsObject();
+      return this.domItem == ((DOMItem) o).domItem;
     }
     return false;
   }
@@ -48,10 +53,6 @@ class DOMItem {
    */
   @Override
   public int hashCode() {
-    return jsObject.hashCode();
-  }
-
-  JavaScriptObject getJsObject() {
-    return jsObject;
+    return domItem.hashCode();
   }
 }

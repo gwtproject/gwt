@@ -15,15 +15,21 @@
  */
 package com.google.gwt.xml.client.impl;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.xml.client.Comment;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * This class implements the Comment interface.
  */
 class CommentImpl extends CharacterDataImpl implements Comment {
 
-  CommentImpl(JavaScriptObject o) {
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static class NativeCommentImpl extends NativeCharacterDataImpl {
+  }
+
+  CommentImpl(NativeCommentImpl o) {
     super(o);
   }
 

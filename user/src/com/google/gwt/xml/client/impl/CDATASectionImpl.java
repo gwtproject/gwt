@@ -15,15 +15,21 @@
  */
 package com.google.gwt.xml.client.impl;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.xml.client.CDATASection;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * This class implements the CDATASectionImpl interface.  
  */
-
 class CDATASectionImpl extends TextImpl implements CDATASection {
-  protected CDATASectionImpl(JavaScriptObject o) {
+
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static class NativeCDATASectionImpl extends NativeTextImpl {
+  }
+
+  protected CDATASectionImpl(NativeCDATASectionImpl o) {
     super(o);
   }
 

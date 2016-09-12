@@ -18,22 +18,4 @@
   <inherits name="com.google.gwt.useragent.UserAgent"/>
 
   <source path="client" />
-
-  <!-- Fall through to this rule for all other browsers -->
-  <replace-with class="com.google.gwt.xml.client.impl.XMLParserImplStandard">
-    <when-type-is class="com.google.gwt.xml.client.impl.XMLParserImpl"/>
-  </replace-with>
-
-  <replace-with class="com.google.gwt.xml.client.impl.XMLParserImplIE6">
-    <when-type-is class="com.google.gwt.xml.client.impl.XMLParserImpl"/>
-    <any>
-      <when-property-is name="user.agent" value="ie8"/>
-      <when-property-is name="user.agent" value="ie9"/>
-    </any>
-  </replace-with>
-
-  <replace-with class="com.google.gwt.xml.client.impl.XMLParserImplSafari">
-    <when-type-is class="com.google.gwt.xml.client.impl.XMLParserImpl"/>
-    <when-property-is name="user.agent" value="safari"/>
-  </replace-with>
 </module>

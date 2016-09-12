@@ -15,38 +15,54 @@
  */
 package com.google.gwt.xml.client.impl;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.xml.client.Attr;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * This class implements the XML Attr interface.
  */
 class AttrImpl extends NodeImpl implements Attr {
-  protected AttrImpl(JavaScriptObject o) {
+
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static class NativeAttrImpl extends NativeNodeImpl {
+    String name;
+    boolean specified;
+    String value;
+  }
+
+  private final NativeAttrImpl attrValue;
+
+  protected AttrImpl(NativeAttrImpl o) {
     super(o);
+    this.attrValue = o;
   }
 
   /**
    * This function delegates to the native method <code>getName</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getName() {
-    return XMLParserImpl.getName(this.getJsObject());
+    return attrValue.name;
   }
 
   /**
    * This function delegates to the native method <code>getSpecified</code> in
    * XMLParserImpl.
    */
+  @Override
   public boolean getSpecified() {
-    return XMLParserImpl.getSpecified(this.getJsObject());
+    return attrValue.specified;
   }
 
   /**
    * This function delegates to the native method <code>getValue</code> in
    * XMLParserImpl.
    */
+  @Override
   public String getValue() {
-    return XMLParserImpl.getValue(this.getJsObject());
+    return attrValue.value;
   }
 }

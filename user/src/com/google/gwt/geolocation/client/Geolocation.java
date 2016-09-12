@@ -17,9 +17,14 @@
 package com.google.gwt.geolocation.client;
 
 import com.google.gwt.core.client.Callback;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.internal.Entry;
 import com.google.gwt.dom.client.PartialSupport;
+
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * Implements the HTML5 Geolocation interface.
@@ -57,45 +62,58 @@ import com.google.gwt.dom.client.PartialSupport;
  *      Geolocation</a>
  */
 @PartialSupport
-public class Geolocation {
+public final class Geolocation {
+  
+  @JsProperty(name = "geolocation", namespace = "window.navigator")
+  private static native NativeGeolocation getGeoLocation();
+  
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  private static class NativeGeolocation {
+    native void getCurrentPosition(
+        NativeCallback<Position> success,
+        NativeCallback<NativeError> failure,
+        PositionOptions opt);
+    native int watchPosition(
+        NativeCallback<Position> success,
+        NativeCallback<NativeError> failure,
+        PositionOptions opt);
 
-  private static GeolocationSupportDetector detector;
+    native void clearWatch(int watchId);
+  }
+
   private static Geolocation impl;
-
-  /**
-   * Detector for browser support for Geolocation.
-   */
-  private static class GeolocationSupportDetector {
-
-    private static native boolean detectSupport() /*-{
-      return !!$wnd.navigator.geolocation;
-    }-*/;
-
-    private boolean supported = detectSupport();
-
-    public boolean isSupported() {
-      return supported;
-    }
-  }
-
-  /**
-   * Detector for browsers that do not support Geolocation.
-   */
-  @SuppressWarnings("unused")
-  private static class GeolocationSupportDetectorNo extends GeolocationSupportDetector {
-    @Override
-    public boolean isSupported() {
-      return false;
-    }
-  }
 
   /**
    * Additional options for receiving the user's location.
    */
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
   public static class PositionOptions {
-    private boolean enableHighAccuracy = false;
-    private int timeout = -1;
-    private int maximumAge = 0;
+    
+    private boolean enableHighAccuracy;
+    private int timeout;
+    private int maximumAge;
+    
+    @JsProperty
+    private native Object getEnableHighAccuracy();
+    @JsProperty
+    private native Object getTimeout();
+    @JsProperty
+    private native Object getMaximumAge();
+    
+    @JsOverlay
+    private final PositionOptions ensureDefaults() {
+      if (getEnableHighAccuracy() == null) {
+        enableHighAccuracy = false;
+      }
+      if (getTimeout() == null) {
+        timeout = -1;
+      }
+      
+      if (getMaximumAge() == null) {
+        maximumAge = 0;
+      }
+      return this;
+    }
 
     /**
      * Sets whether or not the application will request a more accurate position
@@ -115,7 +133,8 @@ public class Geolocation {
      * By default this is <code>false</code>
      * </p>
      */
-    public PositionOptions setHighAccuracyEnabled(boolean enabled) {
+    @JsOverlay
+    public final PositionOptions setHighAccuracyEnabled(boolean enabled) {
       this.enableHighAccuracy = enabled;
       return this;
     }
@@ -131,7 +150,8 @@ public class Geolocation {
      * used.
      * </p>
      */
-    public PositionOptions setMaximumAge(int maximumAge) {
+    @JsOverlay
+    public final PositionOptions setMaximumAge(int maximumAge) {
       this.maximumAge = maximumAge;
       return this;
     }
@@ -146,7 +166,8 @@ public class Geolocation {
      * timeout.
      * </p>
      */
-    public PositionOptions setTimeout(int timeout) {
+    @JsOverlay
+    public final PositionOptions setTimeout(int timeout) {
       this.timeout = timeout;
       return this;
     }
@@ -166,15 +187,16 @@ public class Geolocation {
       return impl;
     }
   }
-
+  
   /**
    * Returns <code>true</code> if the browser supports geolocation.
    */
   public static boolean isSupported() {
-    if (detector == null) {
-      detector = GWT.create(GeolocationSupportDetector.class);
+    String userAgent = System.getProperty("user.agent", "safari");
+    if (userAgent.equals("ie8")) {
+      return false;
     }
-    return detector.isSupported();
+    return getGeoLocation() != null;
   }
 
   private static void handleFailure(Callback<Position, PositionError> callback, int code,
@@ -182,22 +204,9 @@ public class Geolocation {
     callback.onFailure(new PositionError(code, msg));
   }
 
-  private static void handleSuccess(Callback<Position, PositionError> callback, PositionImpl pos) {
+  private static void handleSuccess(Callback<Position, PositionError> callback, Position pos) {
     callback.onSuccess(pos);
   }
-
-  private static native JavaScriptObject toJso(PositionOptions options) /*-{
-    var opt = {};
-    if (options) {
-      opt.enableHighAccuracy = options.@com.google.gwt.geolocation.client.Geolocation.PositionOptions::enableHighAccuracy;
-      opt.maximumAge = options.@com.google.gwt.geolocation.client.Geolocation.PositionOptions::maximumAge;
-
-      if (options.@com.google.gwt.geolocation.client.Geolocation.PositionOptions::timeout > 0) {
-        opt.timeout = options.@com.google.gwt.geolocation.client.Geolocation.PositionOptions::timeout;
-      }
-    }
-    return opt;
-  }-*/;
 
   /**
    * Should be instantiated by {@link #getIfSupported()}.
@@ -211,9 +220,9 @@ public class Geolocation {
    * @param watchId the ID of a position watch as returned by a previous call to
    *        {@link #watchPosition(Callback)}.
    */
-  public native void clearWatch(int watchId) /*-{
-    $wnd.navigator.geolocation.clearWatch(watchId);
-  }-*/;
+  public void clearWatch(int watchId) {
+    getGeoLocation().clearWatch(watchId);
+  }
 
   /**
    * Calls the callback with the user's current position.
@@ -222,27 +231,47 @@ public class Geolocation {
     getCurrentPosition(callback, null);
   }
 
+  @JsFunction
+  private interface NativeCallback<T> {
+    void onEvent(T t);
+  }
+  
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  private static class NativeError {
+    int code;
+    String message;
+  }
+  
   /**
-   * Calls the callback with the user's current position, with additional
-   * options.
+   * Calls the callback with the user's current position, with additional options.
    */
-  public native void getCurrentPosition(Callback<Position, PositionError> callback,
-      PositionOptions options) /*-{
-    var opt = @com.google.gwt.geolocation.client.Geolocation::toJso(*)(options);
-
-    var success = $entry(function(pos) {
-      @com.google.gwt.geolocation.client.Geolocation::handleSuccess(*)(callback, pos);
-    });
-
-    var failure = $entry(function(err) {
-      @com.google.gwt.geolocation.client.Geolocation::handleFailure(*)
-      (callback, err.code, err.message);
-    });
-
-    if (@com.google.gwt.geolocation.client.Geolocation::isSupported()) {
-      $wnd.navigator.geolocation.getCurrentPosition(success, failure, opt);
+  public void getCurrentPosition(
+      final Callback<Position, PositionError> callback, PositionOptions options) {
+    if (options == null) {
+      options = new PositionOptions();
     }
-  }-*/;
+
+    NativeCallback<Position> success =
+        new NativeCallback<Position>() {
+          @Override
+          public void onEvent(Position pos) {
+            handleSuccess(callback, pos);
+          }
+        };
+
+    NativeCallback<NativeError> failure =
+        new NativeCallback<NativeError>() {
+
+          @Override
+          public void onEvent(NativeError t) {
+            handleFailure(callback, t.code, t.message);
+          }
+        };
+
+    getGeoLocation()
+        .getCurrentPosition(
+            Entry.wrapEntry(success), Entry.wrapEntry(failure), options.ensureDefaults());
+  }
 
   /**
    * Repeatedly calls the given callback with the user's position, as it
@@ -263,41 +292,51 @@ public class Geolocation {
   }
 
   /**
-   * Repeatedly calls the given callback with the user's position, as it
-   * changes, with additional options.
-   * 
-   * <p>
-   * The frequency of these updates is entirely up to the browser. There is no
-   * guarantee that updates will be received at any set interval, but are
-   * instead designed to be sent when the user's position changes. This method
-   * should be used instead of polling the user's current position.
-   * </p>
-   * 
-   * <p>
-   * If the browser does not support geolocation, this method will do nothing,
-   * and will return -1.
-   * </p>
-   * 
-   * @return the ID of this watch, which can be passed to
-   *         {@link #clearWatch(int)} to stop watching the user's position.
+   * Repeatedly calls the given callback with the user's position, as it changes, with additional
+   * options.
+   *
+   * <p>The frequency of these updates is entirely up to the browser. There is no guarantee that
+   * updates will be received at any set interval, but are instead designed to be sent when the
+   * user's position changes. This method should be used instead of polling the user's current
+   * position.
+   *
+   * <p>If the browser does not support geolocation, this method will do nothing, and will return
+   * -1.
+   *
+   * @return the ID of this watch, which can be passed to {@link #clearWatch(int)} to stop watching
+   *     the user's position.
    */
-  public native int watchPosition(Callback<Position, PositionError> callback,
-      PositionOptions options) /*-{
-    var opt = @com.google.gwt.geolocation.client.Geolocation::toJso(*)(options);
+  public int watchPosition(
+      final Callback<Position, PositionError> callback, PositionOptions options) {
+    if (options == null) {
+      options = new PositionOptions();
+    }
 
-    var success = $entry(function(pos) {
-      @com.google.gwt.geolocation.client.Geolocation::handleSuccess(*)(callback, pos);
-    });
+    NativeCallback<Position> success =
+        new NativeCallback<Position>() {
 
-    var failure = $entry(function(err) {
-      @com.google.gwt.geolocation.client.Geolocation::handleFailure(*)
-      (callback, err.code, err.message);
-    });
+          @Override
+          public void onEvent(Position t) {
+            handleSuccess(callback, t);
+          }
+        };
 
-    var id = -1;
-    if (@com.google.gwt.geolocation.client.Geolocation::isSupported()) {
-      id = $wnd.navigator.geolocation.watchPosition(success, failure, opt);
+    NativeCallback<NativeError> failure =
+        new NativeCallback<NativeError>() {
+
+          @Override
+          public void onEvent(NativeError t) {
+            handleFailure(callback, t.code, t.message);
+          }
+        };
+
+    int id = -1;
+    if (isSupported()) {
+      id =
+          getGeoLocation()
+              .watchPosition(
+                  Entry.wrapEntry(success), Entry.wrapEntry(failure), options.ensureDefaults());
     }
     return id;
-  }-*/;
+  }
 }

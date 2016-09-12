@@ -15,7 +15,11 @@
  */
 package com.google.gwt.user.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.internal.Entry;
+
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 /**
  * A simplified, browser-safe timer class. This class serves the same purpose as
@@ -39,6 +43,10 @@ import com.google.gwt.core.client.JavaScriptObject;
  * </p>
  */
 public abstract class Timer {
+  @JsFunction
+  private interface NativeCallback {
+    void onEvent();
+  }
 
   private boolean isRepeating;
 
@@ -135,23 +143,25 @@ public abstract class Timer {
     run();
   }
 
-  private static native JavaScriptObject createCallback(Timer timer, int cancelCounter) /*-{
-    return $entry(function() { timer.@Timer::fire(I)(cancelCounter); });
-  }-*/;
+  private static NativeCallback createCallback(final Timer timer, final int cancelCounter) {
+    return Entry.wrapEntry(
+        new NativeCallback() {
+          @Override
+          public void onEvent() {
+            timer.fire(cancelCounter);
+          }
+        });
+  }
 
-  private static native int setInterval(JavaScriptObject func, int time) /*-{
-    return $wnd.setInterval(func, time);
-  }-*/;
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native int setInterval(NativeCallback func, int time);
 
-  private static native int setTimeout(JavaScriptObject func, int time) /*-{
-    return $wnd.setTimeout(func, time);
-  }-*/;
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native int setTimeout(NativeCallback func, int time);
 
-  private static native void clearInterval(int timerId) /*-{
-    $wnd.clearInterval(timerId);
-  }-*/;
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native void clearInterval(int timerId);
 
-  private static native void clearTimeout(int timerId) /*-{
-    $wnd.clearTimeout(timerId);
-  }-*/;
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native void clearTimeout(int timerId);
 }

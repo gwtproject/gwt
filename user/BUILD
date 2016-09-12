@@ -313,6 +313,7 @@ java_library(
             "src/com/google/gwt/core/client/JsDate.java",
             "src/com/google/gwt/core/client/Duration.java",
             "src/com/google/gwt/core/client/Scheduler.java",
+            "src/com/google/gwt/core/client/internal/Entry.java",
             "src/com/google/gwt/user/client/Window.java",
             "src/com/google/gwt/user/client/Window*.java",
             "src/com/google/gwt/user/client/BaseListenerWrapper.java",
@@ -384,6 +385,7 @@ java_library(
     ),
     compatible_with = ["//buildenv/target:appengine"],
     deps = [
+        ":gwt-jsinterop-annotations",
         ":gwt-dto-serializers",
         ":jvm_regexp",
         "//third_party/java/servlet/servlet_api",

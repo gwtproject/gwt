@@ -22,6 +22,30 @@
       "revId": "d76703f5c383203794b73f8af349fe2c230b5646",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "abbcfece_25dbb0e2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/RewriteConstructorCallsForUnboxedTypes.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-09-13T03:04:20Z",
+      "side": 0,
+      "message": "calling toString on a Type might be yield different strings depending whether the type is \"external\" or not.  The method pointed by a MethodCall, NewInstance or JsniMethod reference can be in a referenceOnly class, and its parameters might not have been unified and be present in \"external\" form.\n\ntoString is mainly for debugging and if the type is not external provides extra information such as supers, etc. external types only provide the name in toString.",
+      "parentUuid": "abbcfece_016b0988",
+      "range": {
+        "startLine": 52,
+        "startChar": 28,
+        "endLine": 52,
+        "endChar": 34
+      },
+      "revId": "d76703f5c383203794b73f8af349fe2c230b5646",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

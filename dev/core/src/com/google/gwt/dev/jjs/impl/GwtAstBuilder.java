@@ -1224,7 +1224,8 @@ public class GwtAstBuilder {
       // class lambda$0$Type implements T {}
 
       String innerLambdaClassName =
-          JdtUtil.getClassName(x.binding.declaringClass) + "$" + String.valueOf(x.binding.selector);
+          JdtUtil.getClassName(curClass.typeDecl.binding)
+              + "$" + String.valueOf(x.binding.selector);
       JClassType innerLambdaClass = createInnerClass(innerLambdaClassName, x, info, funcType);
       JConstructor ctor = new JConstructor(info, innerLambdaClass, AccessModifier.PRIVATE);
 
@@ -1470,7 +1471,7 @@ public class GwtAstBuilder {
     private JClassType createInnerClass(String name, FunctionalExpression x, SourceInfo info,
         JInterfaceType... funcType) {
       JClassType innerLambdaClass = new JClassType(info, name + "$Type", false, true);
-      innerLambdaClass.setEnclosingType((JDeclaredType) typeMap.get(x.binding.declaringClass));
+      innerLambdaClass.setEnclosingType((JDeclaredType) typeMap.get(curClass.typeDecl.binding));
       for (JInterfaceType type : funcType) {
         innerLambdaClass.addImplements(type);
       }
@@ -1806,7 +1807,7 @@ public class GwtAstBuilder {
       if (hasQualifier) {
         // this.$$outer = $$outer
         JField outerField = createAndBindCapturedLambdaParameter(info, OUTER_LAMBDA_PARAM_NAME,
-            innerLambdaClass.getEnclosingType(), ctor, ctorBody);
+            typeMap.get(x.binding.declaringClass), ctor, ctorBody);
         instance = new JFieldRef(info,
             new JThisRef(info, innerLambdaClass), outerField, innerLambdaClass);
       } else if (referredMethod instanceof JConstructor) {

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b28aa68_6c90cf43",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-15T19:08:11Z",
+      "side": 1,
+      "message": "[error] \u0027+\u0027 is not preceded with whitespace.",
+      "revId": "0cbd12b59400867cfef2000610c6fd293088cda1",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

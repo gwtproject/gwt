@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0462f6a_a306fa79",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-09-16T12:43:01Z",
+      "side": 1,
+      "message": "Remove that TODO, as this is what\u0027s fixed in this change, right?\n\nBTW, should we add a link to the issue somewhere here?",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "508b33e0_00a82629",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-09-16T12:43:01Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

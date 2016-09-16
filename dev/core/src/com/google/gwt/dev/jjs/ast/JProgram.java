@@ -1139,7 +1139,9 @@ public class JProgram extends JNode implements ArrayTypeCreator {
 
     JArrayType arrayType = (JArrayType) type;
     return arrayType.getElementType() == typeJavaLangObject
-        || arrayType.getLeafType().isJsNative();
+        || arrayType.getLeafType().isJsNative()
+        || arrayType.getElementType().isJsFunction()
+        || arrayType.getElementType().isJsFunctionImplementation();
   }
 
   public boolean isJavaLangString(JType type) {

@@ -214,12 +214,12 @@ public class ImplementClassLiteralsAsFields {
         // Replace array class literals by an expression to obtain the class literal from the
         // leaf type of the array.
         JArrayType arrayType = (JArrayType) type;
-        JClassLiteral leafTypeClassLiteral = arrayType.getLeafType().isJsNative()
+        JClassLiteral leafTypeClassLiteral = program.isUntypedArrayType(arrayType)
             ? new JClassLiteral(x.getSourceInfo(), program.getTypeJavaLangObject())
             : new JClassLiteral(x.getSourceInfo(), arrayType.getLeafType());
         resolveClassLiteral(leafTypeClassLiteral);
 
-        int dims = type.isJsNative() ? 1 : arrayType.getDims();
+        int dims = program.isUntypedArrayType(arrayType) ? 1 : arrayType.getDims();
         JExpression arrayClassLiteralExpression = program.createArrayClassLiteralExpression(
             x.getSourceInfo(), leafTypeClassLiteral, dims);
         ctx.replaceMe(arrayClassLiteralExpression);

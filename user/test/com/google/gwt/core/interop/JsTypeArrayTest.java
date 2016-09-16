@@ -203,36 +203,6 @@ public class JsTypeArrayTest extends GWTTestCase {
     assertTrue(array instanceof SimpleJsTypeReturnForMultiDimArray[][][]);
   }
 
-  @JsFunction
-  interface SomeFunction {
-    int m(int i);
-  }
-
-  @JsFunction
-  interface SomeOtherFunction {
-    int m(int i);
-  }
-
-  public void testJsFunctionArray() {
-    Object[] array = new SomeFunction[10];
-
-    array[0] = returnSomeFunction();
-
-    assertTrue(array instanceof SomeFunction[]);
-    assertFalse(array instanceof SomeOtherFunction[]);
-
-    try {
-      SomeOtherFunction[] other = (SomeOtherFunction[]) array;
-      fail("Should have thrown");
-    } catch (ClassCastException expected) {
-    }
-
-    try {
-      array[1] = new Object();
-      fail("Should have thrown");
-    } catch (ArrayStoreException expected) {
-    }
-  }
 
   private native Object returnObjectArrayFromNative() /*-{
     return ["1", "2", "3"];
@@ -247,23 +217,34 @@ public class JsTypeArrayTest extends GWTTestCase {
     int m();
   }
 
+  @JsFunction
+  interface SomeOtherJSFunction {
+    int m(int i);
+  }
+
+  @JsType(isNative = true)
+  interface NativeType {
+  }
+
   private native SomeJsFunction returnJsFunction(int n) /*-{
     return function() { return n };
   }-*/;
 
-  public void testJsFunctionArray2() {
-    SomeJsFunction[] jsFunctionArray = new SomeJsFunction[10];
+  public void testJsFunctionArray() {
+    Object[] array = new SomeJsFunction[10];
+
+    array[0] = returnSomeFunction();
+
+    assertTrue(array instanceof SomeJsFunction[]);
+    assertTrue(array instanceof SomeOtherJSFunction[]);
+    assertTrue(array instanceof NativeType[]);
+    assertTrue(array instanceof Object[]);
+
+    SomeJsFunction[] jsFunctionArray = (SomeJsFunction[]) (SomeOtherJSFunction[]) array;
     for (int i = 0; i < jsFunctionArray.length; i++) {
       jsFunctionArray[i] = returnJsFunction(i);
     }
 
     assertEquals(5, jsFunctionArray[2].m() + jsFunctionArray[3].m());
-
-    Object[] asObjectArray = jsFunctionArray;
-    try {
-      asObjectArray[3] = new Object();
-      fail("Should have thrown");
-    } catch (ArrayStoreException expected) {
-    }
   }
 }

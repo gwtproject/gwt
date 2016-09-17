@@ -18,6 +18,7 @@ package com.google.gwt.dev.jjs.impl;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.linker.ArtifactSet;
 import com.google.gwt.dev.CompilerContext;
 import com.google.gwt.dev.MinimalRebuildCache;
 import com.google.gwt.dev.cfg.ConfigurationProperty;
@@ -312,10 +313,8 @@ public class UnifyAst {
       HasName node = x.getNode();
       if (node instanceof JType) {
         node = translate((JType) node);
-      } else if (node instanceof JField) {
-        node = translate((JField) node);
-      } else if (node instanceof JMethod) {
-        node = translate((JMethod) node);
+      } else if (node instanceof JMember) {
+        node = translate((JMember) node);
       } else {
         assert false : "Should not get here";
       }
@@ -487,16 +486,19 @@ public class UnifyAst {
         }
         minimalRebuildCache.recordRebinderTypeForReboundType(reboundTypeName,
             currentMethod.getEnclosingType().getName());
-        rebindPermutationOracle.getGeneratorContext().setCurrentRebindBinaryTypeName(reboundTypeName);
+        rebindPermutationOracle
+            .getGeneratorContext().setCurrentRebindBinaryTypeName(reboundTypeName);
       }
-      String reqType = BinaryName.toSourceName(reboundTypeName);
+      String requestType = BinaryName.toSourceName(reboundTypeName);
       List<String> answers;
       try {
-        answers = Lists.newArrayList(rebindPermutationOracle.getAllPossibleRebindAnswers(logger, reqType));
+        answers = Lists.newArrayList(
+            rebindPermutationOracle.getAllPossibleRebindAnswers(logger, requestType));
         if (incrementalCompile) {
           // Accumulate generated artifacts so that they can be output on recompiles even if no
           // generators are run.
-          minimalRebuildCache.addGeneratedArtifacts(rebindPermutationOracle.getGeneratorContext().getArtifacts());
+          ArtifactSet artifacts = rebindPermutationOracle.getGeneratorContext().getArtifacts();
+          minimalRebuildCache.addGeneratedArtifacts(artifacts);
         }
         rebindPermutationOracle.getGeneratorContext().finish(logger);
         if (incrementalCompile) {
@@ -508,7 +510,7 @@ public class UnifyAst {
           fullFlowIntoRemainingStaleTypes();
         }
       } catch (UnableToCompleteException e) {
-        error(gwtCreateCall, "Failed to resolve '" + reqType + "' via deferred binding");
+        error(gwtCreateCall, "Failed to resolve '" + requestType + "' via deferred binding");
         return null;
       }
 
@@ -547,7 +549,7 @@ public class UnifyAst {
         return instantiationExpressions.get(0);
       }
       return JPermutationDependentValue
-          .createTypeRebind(program, gwtCreateCall.getSourceInfo(), reqType,
+          .createTypeRebind(program, gwtCreateCall.getSourceInfo(), requestType,
               answers, instantiationExpressions);
     }
 
@@ -857,8 +859,8 @@ public class UnifyAst {
     instantiate(program.getTypeJavaLangString());
     // ControlFlowAnalyzer.rescueByConcat().
     flowInto(program.getIndexedMethod(RuntimeConstants.OBJECT_TO_STRING));
-    processType(program.getTypeJavaLangString());
-    flowInto((JMethod) resolvedMembersByQualifiedName.get("java.lang.String.valueOf(C)Ljava/lang/String;"));
+    flowInto((JMethod)
+        resolvedMembersByQualifiedName.get("java.lang.String.valueOf(C)Ljava/lang/String;"));
 
     // FixAssignmentsToUnboxOrCast
     AutoboxUtils autoboxUtils = new AutoboxUtils(program);
@@ -1180,35 +1182,28 @@ public class UnifyAst {
     }
 
     liveFieldsAndMethods.add(method);
-    JType originalReturnType = translate(method.getOriginalReturnType());
-    List<JType> originalParamTypes =
-        Lists.newArrayListWithCapacity(method.getOriginalParamTypes().size());
-    for (JType originalParamType : method.getOriginalParamTypes()) {
-      originalParamTypes.add(translate(originalParamType));
-    }
-    JType returnType = translate(method.getType());
-    List<JClassType> thrownExceptions =
-        Lists.newArrayListWithCapacity(method.getThrownExceptions().size());
-    for (JClassType thrownException : method.getThrownExceptions()) {
-      thrownExceptions.add(translate(thrownException));
-    }
-    method.resolve(originalReturnType, originalParamTypes, returnType, thrownExceptions);
+
+    method.resolve(
+        translate(method.getOriginalReturnType()),
+        translate(method.getOriginalParamTypes()),
+        translate(method.getType()),
+        translate(method.getThrownExceptions()));
+
     if (method.isStatic()) {
       staticInitialize(method.getEnclosingType());
     } else if (method.canBePolymorphic()) {
       String signature = method.getSignature();
       if (!liveVirtualMethods.contains(signature)) {
         liveVirtualMethods.add(signature);
-        Iterable<JMethod> pending = pendingVirtualMethodsBySignature.removeAll(signature);
-        for (JMethod p : pending) {
-          assert instantiatedTypes.contains(p.getEnclosingType());
-          flowInto(p);
+        for (JMethod pendingMethod : pendingVirtualMethodsBySignature.removeAll(signature)) {
+          assert instantiatedTypes.contains(pendingMethod.getEnclosingType());
+          flowInto(pendingMethod);
         }
       }
     }
     resolveSpecialization(method);
 
-    // Queue up visit / resolve on the body.
+    // Queue up the method to resolve the method body.
     methodsPending.add(method);
   }
 
@@ -1218,7 +1213,6 @@ public class UnifyAst {
       return;
     }
     Specialization specialization = method.getSpecialization();
-    List<JType> resolvedParams = Lists.newArrayList();
     if (specialization.getParams() == null) {
       logger.log(Type.ERROR, "Missing 'params' attribute at @SpecializeMethod for method "
           + method.getQualifiedName());
@@ -1226,9 +1220,8 @@ public class UnifyAst {
       return;
     }
 
-    for (JType param : specialization.getParams()) {
-      resolvedParams.add(translate(param));
-    }
+    List<JType> resolvedParams = translate(specialization.getParams());
+
     JType resolvedReturn = translate(specialization.getReturns());
 
     String targetMethodSignature = JjsUtils.computeSignature(
@@ -1510,23 +1503,15 @@ public class UnifyAst {
   }
 
   /**
-   * Replaces an external (stub) reference node to a particular class by the actual AST node if
-   * necessary.
-   */
-  private JClassType translate(JClassType type) {
-    return (JClassType) translate((JDeclaredType) type);
-  }
-
-  /**
    * Replaces an external (stub) reference node to a particular type by the actual AST node if
    * necessary.
    */
-  private JDeclaredType translate(JDeclaredType type) {
+  private <T extends JDeclaredType> T translate(T type) {
     if (!type.isExternal()) {
       return type;
     }
 
-    type = internalFindType(type.getName(), binaryNameBasedTypeLocator, true);
+    type = (T) internalFindType(type.getName(), binaryNameBasedTypeLocator, true);
     if (type == null) {
       assert errorsFound;
       return type;
@@ -1589,5 +1574,13 @@ public class UnifyAst {
       return type;
     }
     return translate((JReferenceType) type);
+  }
+
+  private <T extends JType> List<T> translate(List<T> types) {
+    List<T> translatedTypes = Lists.newArrayListWithCapacity(types.size());
+    for (T type : types) {
+      translatedTypes.add((T) translate(type));
+    }
+    return translatedTypes;
   }
 }

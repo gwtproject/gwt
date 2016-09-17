@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "0b28aa68_b74cc741",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-17T01:03:40Z",
+      "side": 1,
+      "message": "it might be easier to read if you replace first component and do join?",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b28aa68_f73f1f73",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-17T01:03:40Z",
+      "side": 1,
+      "message": "random new line",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b28aa68_b7cf677c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-17T01:03:40Z",
+      "side": 1,
+      "message": "always remove global and window and if it is empty, make it window to preserve the behavior.\n\nbut probably removing logic is good.",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b28aa68_32b0e5e1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGenerator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-17T01:03:40Z",
+      "side": 1,
+      "message": "prevent with jsinterop restriction check",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0462f6a_a306fa79",
         "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
         "patchSetId": 6

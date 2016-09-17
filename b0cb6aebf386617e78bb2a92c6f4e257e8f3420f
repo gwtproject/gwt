@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b28aa68_5251e127",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-17T02:19:11Z",
+      "side": 1,
+      "message": "I think this last one is bad; the is always a java type so should be type-safe. Please also add the missing test for this case.",
+      "range": {
+        "startLine": 1144,
+        "startChar": 64,
+        "endLine": 1144,
+        "endChar": 67
+      },
+      "revId": "b0cb6aebf386617e78bb2a92c6f4e257e8f3420f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b28aa68_b2113568",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-17T02:19:11Z",
+      "side": 1,
+      "message": "Could you add a test that Object[].class !\u003d Object[][].class?",
+      "revId": "b0cb6aebf386617e78bb2a92c6f4e257e8f3420f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

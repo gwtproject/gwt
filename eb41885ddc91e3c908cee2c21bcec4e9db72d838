@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0b28aa68_9d8d29e1",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-09-18T21:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b28aa68_b74cc741",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b28aa68_f73f1f73",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-17T01:03:40Z",
       "side": 1,
       "message": "random new line",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b28aa68_5d83b1b4",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-09-18T21:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b28aa68_f73f1f73",
       "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0b28aa68_7d806da7",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-09-18T21:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b28aa68_b7cf677c",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b28aa68_32b0e5e1",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGenerator.java",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2016-09-17T01:03:40Z",
       "side": 1,
       "message": "prevent with jsinterop restriction check",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b28aa68_3d9ef50c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DefaultJsInteropExportsGenerator.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-09-18T21:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b28aa68_32b0e5e1",
       "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0b28aa68_bd8ae5c4",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-09-18T21:46:56Z",
+      "side": 1,
+      "message": "Done. I don\u0027t think referencing the issue here will be useful as the issue describes a transient state.",
+      "parentUuid": "b0462f6a_a306fa79",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "508b33e0_00a82629",
         "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
         "patchSetId": 6
@@ -98,6 +188,24 @@
       "writtenOn": "2016-09-16T12:43:01Z",
       "side": 1,
       "message": "nit: indentation",
+      "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b28aa68_ddb5e186",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-09-18T21:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "508b33e0_00a82629",
       "revId": "eb41885ddc91e3c908cee2c21bcec4e9db72d838",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "30b79fb7_b075f9c2",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JProgram.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-20T22:53:09Z",
+      "side": 1,
+      "message": "JsFunction implementations behave like Native types w.r.t. class literal. This allows to \"optimize\" them to plain functions with 0 overhead. So here we are just consistent.",
+      "parentUuid": "0b28aa68_5251e127",
+      "range": {
+        "startLine": 1144,
+        "startChar": 64,
+        "endLine": 1144,
+        "endChar": 67
+      },
+      "revId": "b0cb6aebf386617e78bb2a92c6f4e257e8f3420f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b28aa68_b2113568",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ImplementClassLiteralsAsFields.java",
         "patchSetId": 2

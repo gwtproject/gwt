@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "30b79fb7_e1888a59",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JsInteropUtil.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-20T22:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30b79fb7_10c40a56",
+      "revId": "2634e56d12b452376991135fa25d79923cd4925b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30b79fb7_70a8e68e",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-20T16:52:24Z",
       "side": 1,
       "message": "move to generate export",
+      "revId": "2634e56d12b452376991135fa25d79923cd4925b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30b79fb7_415b96f3",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-20T22:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30b79fb7_70a8e68e",
       "revId": "2634e56d12b452376991135fa25d79923cd4925b",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "30b79fb7_e15f2add",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ClosureJsInteropExportsGenerator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-20T22:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30b79fb7_f0aa968a",
+      "revId": "2634e56d12b452376991135fa25d79923cd4925b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30b79fb7_3b832f08",
         "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
         "patchSetId": 9
@@ -64,6 +118,30 @@
       "writtenOn": "2016-09-20T16:52:24Z",
       "side": 1,
       "message": "Seems easier to read:\n\n    if (JsInteropUtil.isGlobal(item.getJsNamespace()) {\n      return;\n    }\n    if (JsInteropUtil.isWindow(item.getJsNamespace()) {\n      if (item.isJsNative()) {\n        return;\n      }\n      logError(item, \"\u0027%s\u0027 can only be used as a namespace of native types and members.\",\n          item.getJsNamespace());\n    } else  ....",
+      "range": {
+        "startLine": 579,
+        "startChar": 0,
+        "endLine": 590,
+        "endChar": 5
+      },
+      "revId": "2634e56d12b452376991135fa25d79923cd4925b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30b79fb7_4174f65f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-20T22:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30b79fb7_3b832f08",
       "range": {
         "startLine": 579,
         "startChar": 0,

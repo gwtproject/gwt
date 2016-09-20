@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0462f6a_66b7f090",
+        "filename": "user/test/com/google/gwt/i18n/shared/DateTimeFormatTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-09-20T15:20:12Z",
+      "side": 1,
+      "message": "The correct package of this class is com.google.gwt.i18n.server if it only runs in server side",
+      "revId": "6d1702c9768f85ceb01a5cf4c58b89f0dfc9f97e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0462f6a_46bcf470",
+        "filename": "user/test/com/google/gwt/i18n/shared/DateTimeFormatTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-09-20T15:20:12Z",
+      "side": 1,
+      "message": "This test should be include in the suite: test/com/google/gwt/i18n//I18NJreSuite.java",
+      "revId": "6d1702c9768f85ceb01a5cf4c58b89f0dfc9f97e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

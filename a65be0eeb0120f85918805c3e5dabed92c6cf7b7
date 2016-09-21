@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "108ffb3e_ee035f68",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/waitForBodyLoaded.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 8355
+      },
+      "writtenOn": "2016-09-21T10:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0462f6a_462f54b0",
+      "range": {
+        "startLine": 17,
+        "startChar": 21,
+        "endLine": 17,
+        "endChar": 33
+      },
+      "revId": "a65be0eeb0120f85918805c3e5dabed92c6cf7b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0462f6a_26345800",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/waitForBodyLoaded.js",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "7089173e_49d0e1f0",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/waitForBodyLoaded.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 8355
+      },
+      "writtenOn": "2016-09-21T10:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0462f6a_26345800",
+      "range": {
+        "startLine": 30,
+        "startChar": 32,
+        "endLine": 30,
+        "endChar": 48
+      },
+      "revId": "a65be0eeb0120f85918805c3e5dabed92c6cf7b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "305b1f41_4deacd70",
         "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/waitForBodyLoaded.js",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2016-09-20T17:52:55Z",
       "side": 1,
       "message": "Since the check in isBodyLoaded() is very cheap we could potentially lower the interval here significantly.\n\nI would feel comfortable with 10ms intervals here",
+      "range": {
+        "startLine": 38,
+        "startChar": 7,
+        "endLine": 38,
+        "endChar": 9
+      },
+      "revId": "a65be0eeb0120f85918805c3e5dabed92c6cf7b7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10ca9b6e_f6d6e0b7",
+        "filename": "dev/core/src/com/google/gwt/core/ext/linker/impl/waitForBodyLoaded.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 8355
+      },
+      "writtenOn": "2016-09-21T10:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "305b1f41_4deacd70",
       "range": {
         "startLine": 38,
         "startChar": 7,

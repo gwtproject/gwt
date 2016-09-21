@@ -19,6 +19,7 @@ import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.interop.JsTypeSpecialTypesTest.SomeFunctionalInterface;
+import com.google.gwt.dev.jjs.ast.HasName.Util;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import javaemul.internal.annotations.DoNotInline;
@@ -436,4 +437,23 @@ public class NativeJsTypeTest extends GWTTestCase {
     assertEquals(5, NativeClassWithStaticOverlayFields.initializedInt);
     assertNull(NativeClassWithStaticOverlayFields.uninitializedString);
   }
+
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Error")
+  static class NativeError {
+  }
+
+  static class NativeErrorSubclass extends NativeError {
+  }
+
+  public void testObjectPropertiesAreCopied() {
+    NativeErrorSubclass error = new NativeErrorSubclass();
+    assertTrue(error instanceof NativeError);
+    // Make sure the Object properties are correctly copied.
+    assertTrue(areObjectPropertiesCopied(error));
+  }
+
+  public native static boolean areObjectPropertiesCopied(Object object) /*-{
+    return @com.google.gwt.lang.Util::hasTypeMarker(*)(object);
+  }-*/;
 }

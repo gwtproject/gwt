@@ -468,4 +468,24 @@ public class NativeJsTypeTest extends GWTTestCase {
     assertNotSame(IFrameWindow.window, MainWindow.window);
     assertSame(MainWindow.window, AlsoMainWindow.window);
   }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Error")
+  private static class NativeError {
+  }
+
+  private static class NativeErrorSubclass extends NativeError {
+  }
+
+  public void testObjectPropertiesAreCopied() {
+    Object error = new NativeErrorSubclass();
+    assertTrue(error instanceof NativeError);
+    // Make sure the Object properties are correctly copied.
+    assertTrue(areObjectPropertiesCopied(error));
+    assertFalse(error instanceof JavaScriptObject);
+    assertTrue(error.toString().matches("[0-9a-zA-Z$_.]+@[0-9a-fA-F]+"));
+  }
+
+  private native static boolean areObjectPropertiesCopied(Object object) /*-{
+    return @com.google.gwt.lang.Util::hasTypeMarker(*)(object);
+  }-*/;
 }

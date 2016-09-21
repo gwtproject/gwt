@@ -62,6 +62,7 @@ public class JsTypeObjectMethodsTest extends GWTTestCase {
       return n;
     }
   }
+
   static class ImplementsNativeObject implements NativeObject {
     private int n;
     public ImplementsNativeObject(int n) {

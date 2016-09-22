@@ -784,13 +784,25 @@ public class DateTimeFormat {
     // day, and the original date object, which is needed for figuring out
     // actual time zone offset.
 
+    final int dateTimezoneOffset = date.getTimezoneOffset();
     if (timeZone == null) {
       timeZone = createTimeZone(date.getTimezoneOffset());
     }
-    int diff = (date.getTimezoneOffset() - timeZone.getOffset(date)) * 60000;
+    int diff = (dateTimezoneOffset - timeZone.getOffset(date)) * 60000;
+    Date keepTime = new Date(date.getTime() + diff);
     Date keepDate = new Date(date.getTime() + diff);
-    Date keepTime = keepDate;
-    if (keepDate.getTimezoneOffset() != date.getTimezoneOffset()) {
+    final int keepDateTimezoneOffset = keepDate.getTimezoneOffset();
+    int diffKeepDate = (keepDateTimezoneOffset - dateTimezoneOffset) * 60000;
+    if (diffKeepDate != 0) {
+      Date newKeepDate = new Date(keepDate.getTime() + diffKeepDate);
+      int newTimezoneOffset = newKeepDate.getTimezoneOffset();
+
+      if (keepDateTimezoneOffset == newTimezoneOffset || diffKeepDate > 0) {
+        keepDate = newKeepDate;
+      }
+    }
+
+    if (keepTime.getTimezoneOffset() != date.getTimezoneOffset()) {
       if (diff > 0) {
         diff -= NUM_MILLISECONDS_IN_DAY;
       } else {

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3005dfc3_97a1c49e",
+        "filename": "user/test/com/google/gwt/i18n/rebind/LookupMethodCreatorTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-09-22T07:33:45Z",
+      "side": 1,
+      "message": "I guess this import is not necessary",
+      "revId": "3bc4a80ccbcc5b592c78d7370fa12e2c22beceed",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3005dfc3_f796403c",
+        "filename": "user/test/com/google/gwt/i18n/rebind/LookupMethodCreatorTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-09-22T07:33:45Z",
+      "side": 1,
+      "message": "same",
+      "revId": "3bc4a80ccbcc5b592c78d7370fa12e2c22beceed",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

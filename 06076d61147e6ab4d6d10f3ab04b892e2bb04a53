@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0f62fe4_d7a48c15",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GenerateJavaScriptAST.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-22T16:57:01Z",
+      "side": 1,
+      "message": "nit: per method name this now needs to be javaLangObjectPrototype",
+      "range": {
+        "startLine": 2022,
+        "startChar": 41,
+        "endLine": 2022,
+        "endChar": 54
+      },
+      "revId": "06076d61147e6ab4d6d10f3ab04b892e2bb04a53",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

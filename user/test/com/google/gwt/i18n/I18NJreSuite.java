@@ -19,6 +19,7 @@ import com.google.gwt.i18n.rebind.ConstantsWithLookupImplCreatorTest;
 import com.google.gwt.i18n.rebind.LocaleUtilsTest;
 import com.google.gwt.i18n.rebind.LocalizableGeneratorTest;
 import com.google.gwt.i18n.rebind.LookupMethodCreatorTest;
+import com.google.gwt.i18n.server.DateTimeFormatTest;
 import com.google.gwt.i18n.server.GwtLocaleTest;
 import com.google.gwt.i18n.server.MessageFormatParserTest;
 import com.google.gwt.i18n.server.PropertyCatalogFactoryTest;
@@ -44,6 +45,7 @@ public class I18NJreSuite {
     suite.addTestSuite(AnyRtlDirectionEstimatorTest.class);
     suite.addTestSuite(BidiFormatterTest.class);
     suite.addTestSuite(BidiUtilsTest.class);
+    suite.addTestSuite(DateTimeFormatTest.class);
     suite.addTestSuite(FirstStrongDirectionEstimatorTest.class);
     suite.addTestSuite(GwtLocaleTest.class);
     suite.addTestSuite(LocaleUtilsTest.class);

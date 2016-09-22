@@ -790,7 +790,15 @@ public class DateTimeFormat {
     int diff = (date.getTimezoneOffset() - timeZone.getOffset(date)) * 60000;
     Date keepDate = new Date(date.getTime() + diff);
     Date keepTime = keepDate;
-    if (keepDate.getTimezoneOffset() != date.getTimezoneOffset()) {
+    int diffKeepDate = (keepDate.getTimezoneOffset() - date.getTimezoneOffset()) * 60000;
+    if (diffKeepDate != 0) {
+      Date newKeepDate = new Date(keepDate.getTime() + diffKeepDate);
+      if (keepDate.getTimezoneOffset() == newKeepDate.getTimezoneOffset() || diffKeepDate > 0) {
+        keepDate = newKeepDate;
+      }
+    }
+
+    if (keepTime.getTimezoneOffset() != date.getTimezoneOffset()) {
       if (diff > 0) {
         diff -= NUM_MILLISECONDS_IN_DAY;
       } else {

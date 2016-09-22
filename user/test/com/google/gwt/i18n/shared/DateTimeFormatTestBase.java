@@ -82,4 +82,24 @@ public abstract class DateTimeFormatTestBase extends GWTTestCase {
     String str = dtf.format(date, TEST_TIMEZONE);
     assertEquals("Thu, 27 Jul 2006 08:10:10 -0500", str);
   }
+
+  @SuppressWarnings("deprecation")
+  public void testDstStartAndFixedDateDoesntSwitchDst() {
+    DateTimeFormat dtf = DateTimeFormat.getFormat(PredefinedFormat.RFC_2822);
+    Date date = new Date(Date.UTC(2016 - 1900, 3 - 1, 13, 10, 0, 0));
+    TimeZone formattingTimeZone =
+        com.google.gwt.i18n.client.TimeZone.createTimeZone(10 * 60);
+    String str = dtf.format(date, formattingTimeZone);
+    assertEquals("Sun, 13 Mar 2016 00:00:00 -1000", str);
+  }
+
+  @SuppressWarnings("deprecation")
+  public void testDstEndAndFixedDateDoesntSwitchDst() {
+    DateTimeFormat dtf = DateTimeFormat.getFormat(PredefinedFormat.RFC_2822);
+    Date date = new Date(Date.UTC(2016 - 1900, 11 - 1, 6, 9, 0, 0));
+    TimeZone formattingTimeZone =
+        com.google.gwt.i18n.client.TimeZone.createTimeZone(10 * 60);
+    String str = dtf.format(date, formattingTimeZone);
+    assertEquals("Sat, 5 Nov 2016 23:00:00 -1000", str);
+  }
 }

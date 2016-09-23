@@ -72,33 +72,34 @@ public class MethodCallTightener {
         return;
       }
 
-      JMethodCall newCall = maybeUpgradeToNonPolymorphicCall(x);
-
-      // If the call is still polymorphic, try tightening the method.
-      if (newCall.canBePolymorphic()) {
-        newCall = maybeTightenMethodCall(newCall);
+      JMethod mostSpecificTarget = getMostSpecificOverride(x);
+      if (mostSpecificTarget.getEnclosingType().isJsNative()) {
+        // Never tighten to a native implementations. This is mainly done so that
+        // java.lang.Object methods are dispatched through trampolines if they are not explicitly
+        // declared in the type declaration.
+        return;
       }
+
+      // Tighten the method call if a more specific override is available.
+      JMethodCall newCall = maybeReplaceTargetMethod(x, mostSpecificTarget);
+      maybeUpgradeToNonPolymorphicCall(newCall);
 
       if (newCall != x) {
         ctx.replaceMe(newCall);
       }
     }
 
-    private JMethodCall maybeUpgradeToNonPolymorphicCall(JMethodCall x) {
+    private void maybeUpgradeToNonPolymorphicCall(JMethodCall x) {
       JReferenceType instanceType = (JReferenceType) x.getInstance().getType();
 
-      if (!instanceType.canBeSubclass()) {
-        // Mark a call as non-polymorphic if the targeted type is guaranteed to be not a subclass.
-        x = maybeTightenMethodCall(x);
-        x.setCannotBePolymorphic();
-        madeChanges();
-      } else if (!hasPotentialOverride(instanceType, x.getTarget())) {
-        // Mark a call as non-polymorphic if the targeted method is the only possible dispatch.
+      if (!instanceType.canBeSubclass() || !hasPotentialOverride(instanceType, x.getTarget())) {
+        assert getMostSpecificOverride(x) == x.getTarget();
+
+        // Mark a call as non-polymorphic if the targeted type is guaranteed to be not a subclass
+        // or there are no overriding implementations.
         x.setCannotBePolymorphic();
         madeChanges();
        }
-
-      return x;
     }
 
     private boolean hasPotentialOverride(JReferenceType instanceType, JMethod target) {
@@ -117,25 +118,23 @@ public class MethodCallTightener {
       return false;
     }
 
-    private JMethodCall maybeTightenMethodCall(final JMethodCall methodCall) {
+    private JMethod getMostSpecificOverride(final JMethodCall methodCall) {
       JMethod original = methodCall.getTarget();
       JClassType underlyingType =
           (JClassType) methodCall.getInstance().getType().getUnderlyingType();
 
-      JMethod mostSpecificOverride =
-          program.typeOracle.findMostSpecificOverride(underlyingType, original);
+      return program.typeOracle.findMostSpecificOverride(underlyingType, original);
+    }
 
-      if (mostSpecificOverride == original
-          // Never tighten object methods to native implementations. This decision forces
-          // the use of the Object trampoline for hashcCode, equals and toString.
-          || (original.getEnclosingType().isJavaLangObject()
-              && mostSpecificOverride.isJsNative())) {
+    private JMethodCall maybeReplaceTargetMethod(JMethodCall methodCall, JMethod newTargetMethod) {
+      if (methodCall.getTarget() == newTargetMethod) {
         return methodCall;
       }
-      JMethodCall newCall = new JMethodCall(
-          methodCall.getSourceInfo(), methodCall.getInstance(), mostSpecificOverride);
-      newCall.addArgs(methodCall.getArgs());
-      return newCall;
+      return new JMethodCall(
+          methodCall.getSourceInfo(),
+          methodCall.getInstance(),
+          newTargetMethod,
+          methodCall.getArgs());
     }
 
     @Override

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d09643c8_59e024bc",
+        "filename": "user/test/com/google/gwt/core/interop/JsTypeObjectMethodsTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-23T20:28:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d09643c8_d15a4e21",
+      "revId": "f7ac55bd44ca1f21805ff0446d91d55dfe18ac65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d09643c8_314a9251",
         "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "d09643c8_992b8ced",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-23T20:28:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d09643c8_314a9251",
+      "revId": "f7ac55bd44ca1f21805ff0446d91d55dfe18ac65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d09643c8_51471e48",
         "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2016-09-23T15:52:24Z",
       "side": 1,
       "message": "I think we should put the expected behavior and comment the test if it is failing.",
+      "revId": "f7ac55bd44ca1f21805ff0446d91d55dfe18ac65",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d09643c8_d9fd1456",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-23T20:28:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d09643c8_51471e48",
       "revId": "f7ac55bd44ca1f21805ff0446d91d55dfe18ac65",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

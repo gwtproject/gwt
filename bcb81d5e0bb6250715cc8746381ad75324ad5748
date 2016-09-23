@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10329b87_7ff903ac",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JMethod.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-23T20:28:41Z",
+      "side": 1,
+      "message": "A method in a native type can not expose a nonJsMember.",
+      "range": {
+        "startLine": 202,
+        "startChar": 36,
+        "endLine": 202,
+        "endChar": 39
+      },
+      "revId": "bcb81d5e0bb6250715cc8746381ad75324ad5748",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10329b87_4ac1e320",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-23T20:28:41Z",
+      "side": 1,
+      "message": "This should actually be false, but at least for now we are sure that it takes the right trampoline branch.",
+      "range": {
+        "startLine": 485,
+        "startChar": 3,
+        "endLine": 485,
+        "endChar": 73
+      },
+      "revId": "bcb81d5e0bb6250715cc8746381ad75324ad5748",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

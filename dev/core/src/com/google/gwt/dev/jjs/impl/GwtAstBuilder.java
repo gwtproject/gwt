@@ -1551,12 +1551,12 @@ public class GwtAstBuilder {
           call.setStaticDispatchOnly();
         }
 
-        // The arguments come first...
+        // The arguments come first.
         call.addArgs(arguments);
 
         if (x.valueCast != null) {
           JType castType = typeMap.get(x.valueCast);
-          push(maybeCast(castType, call));
+          push(maybeCast(castType, call, isUnsafeGenericMethodCall(x)));
         } else {
           push(call);
         }
@@ -1568,7 +1568,6 @@ public class GwtAstBuilder {
     @Override
     public void endVisit(MethodDeclaration x, ClassScope scope) {
       try {
-
         if (x.isNative()) {
           processNativeMethod(x);
         } else {
@@ -3067,10 +3066,14 @@ public class GwtAstBuilder {
     }
 
     private JExpression maybeCast(JType expected, JExpression expression) {
+      return maybeCast(expected, expression, false);
+    }
+
+      private JExpression maybeCast(JType expected, JExpression expression, boolean isUnsafe) {
       if (expected != expression.getType()) {
         // Must be a generic; insert a cast operation.
         JReferenceType toType = (JReferenceType) expected;
-        return new JCastOperation(expression.getSourceInfo(), toType, expression);
+        return new JCastOperation(expression.getSourceInfo(), toType, expression, isUnsafe);
       } else {
         return expression;
       }
@@ -4152,7 +4155,15 @@ public class GwtAstBuilder {
     x.setSuppressedWarnings(JdtUtil.getSuppressedWarnings(annotations));
   }
 
-  private void maybeSetInliningMode(AbstractMethodDeclaration x, JMethod method) {
+  private static boolean isUnsafeGenericMethodCall(MessageSend messageSend) {
+    if (messageSend.binding.genericMethod() != null) {
+      return JdtUtil.getAnnotation(messageSend.binding.genericMethod(),
+          "javaemul.internal.annotations.UnsafeCast") != null;
+    }
+    return false;
+  }
+
+  private static void maybeSetInliningMode(AbstractMethodDeclaration x, JMethod method) {
     MethodBinding bind = x.binding;
     if (JdtUtil.getAnnotation(bind, "javaemul.internal.annotations.DoNotInline") != null) {
       method.setInliningMode(InliningMode.DO_NOT_INLINE);
@@ -4161,8 +4172,7 @@ public class GwtAstBuilder {
     }
   }
 
-  private void maybeSetHasNoSideEffects(AbstractMethodDeclaration x,
-      JMethod method) {
+  private static void maybeSetHasNoSideEffects(AbstractMethodDeclaration x, JMethod method) {
     if (JdtUtil.getAnnotation(x.binding,
         "javaemul.internal.annotations.HasNoSideEffects") != null) {
       method.setHasSideEffects(false);

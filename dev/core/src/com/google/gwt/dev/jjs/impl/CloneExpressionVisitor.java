@@ -124,8 +124,8 @@ public class CloneExpressionVisitor extends JVisitor {
 
   @Override
   public boolean visit(JCastOperation x, Context ctx) {
-    expression =
-        new JCastOperation(x.getSourceInfo(), x.getCastType(), cloneExpression(x.getExpr()));
+    expression = new JCastOperation(
+        x.getSourceInfo(), x.getCastType(), cloneExpression(x.getExpr()), x.isUnsafe());
     return false;
   }
 

@@ -21,10 +21,10 @@ import com.google.gwt.dev.jjs.ast.JExpression;
 import com.google.gwt.dev.jjs.ast.JPrimitiveType;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JVisitor;
+import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -46,9 +46,9 @@ public class JMultiExpression extends JExpression {
   /**
    * Construct a multi expression containing {@code expressions}.
    */
-  public JMultiExpression(SourceInfo info, Collection<JExpression> expressions) {
+  public JMultiExpression(SourceInfo info, Iterable<JExpression> expressions) {
     super(info);
-    this.expressions.addAll(expressions);
+    Iterables.addAll(this.expressions, expressions);
   }
 
   /**

@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45b1b3f0_77fd7051",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-26T20:26:13Z",
+      "side": 1,
+      "message": "pls make this clearer. I think our assumption here is, we could only have a mostSpecificOverride that is inside a native type, only if the method is java.lang.Object methods and we don\u0027t want trampoline for that. Maybe make it an assertion as well.",
+      "range": {
+        "startLine": 78,
+        "startChar": 3,
+        "endLine": 79,
+        "endChar": 44
+      },
+      "revId": "bfbd2d0223936e299967007f024a6f69f1cf02ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45b1b3f0_17e8b4a1",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/MethodCallTightener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-26T20:26:13Z",
+      "side": 1,
+      "message": "Could you order method definitions to match call order for easier follow?",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 48
+      },
+      "revId": "bfbd2d0223936e299967007f024a6f69f1cf02ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45b1b3f0_5746aca9",
+        "filename": "user/test/com/google/gwt/core/interop/NativeJsTypeTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-26T20:26:13Z",
+      "side": 1,
+      "message": "If you pass a msg in constructor then you can have a proper assert here that checks the msg.",
+      "revId": "bfbd2d0223936e299967007f024a6f69f1cf02ba",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

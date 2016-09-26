@@ -24,11 +24,17 @@ public class JCastOperation extends JExpression {
 
   private JType castType;
   private JExpression expr;
+  private final boolean isUnsafe;
 
-  public JCastOperation(SourceInfo info, JType castType, JExpression expr) {
+  public JCastOperation(SourceInfo info, JType castType, JExpression expr, boolean isUnsafe) {
     super(info);
     this.castType = castType;
     this.expr = expr;
+    this.isUnsafe = isUnsafe;
+  }
+
+  public JCastOperation(SourceInfo info, JType castType, JExpression expr) {
+    this(info, castType, expr, false);
   }
 
   public JType getCastType() {
@@ -74,4 +80,7 @@ public class JCastOperation extends JExpression {
     visitor.endVisit(this, ctx);
   }
 
+  public boolean isUnsafe() {
+    return isUnsafe;
+  }
 }

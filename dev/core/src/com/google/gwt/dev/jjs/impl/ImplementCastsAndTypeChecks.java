@@ -59,6 +59,11 @@ public class ImplementCastsAndTypeChecks {
       JType toType = x.getCastType();
       JExpression expr = x.getExpr();
 
+      if (x.isUnsafe()) {
+        ctx.replaceMe(expr);
+        return;
+      }
+
       SourceInfo info = x.getSourceInfo();
       if (pruneTrivialCasts && toType.isNullType()) {
         /**

@@ -408,7 +408,9 @@ public class TypeTightener {
     @Override
     public void endVisit(JCastOperation x, Context ctx) {
       JType argumentType = x.getExpr().getType();
-      if (!(x.getCastType() instanceof JReferenceType) || !(argumentType instanceof JReferenceType)) {
+      if (!(x.getCastType() instanceof JReferenceType)
+          || !(argumentType instanceof JReferenceType)
+          || x.isUnsafe()) {
         return;
       }
 

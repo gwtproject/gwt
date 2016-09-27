@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25dbdf69_9dfd0f9c",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-27T17:26:44Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "25e9367e2ec751689f47e13e561fbe2d2421c580",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25dbdf69_7d0383b7",
+        "filename": "user/test/com/google/gwt/dev/jjs/optimized/UncheckedCastOptimizationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-27T17:26:44Z",
+      "side": 1,
+      "message": "[error] \u0027jsinterop.annotations.JsPackage\u0027 should be separated from previous imports.",
+      "revId": "25e9367e2ec751689f47e13e561fbe2d2421c580",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25dbdf69_5d00c7a8",
+        "filename": "user/test/com/google/gwt/dev/jjs/optimized/UncheckedCastOptimizationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-27T17:26:44Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027javaemul.internal.annotations.UncheckedCast\u0027 import.",
+      "revId": "25e9367e2ec751689f47e13e561fbe2d2421c580",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

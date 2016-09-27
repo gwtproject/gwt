@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25dbdf69_77e9620a",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-27T04:13:03Z",
+      "side": 1,
+      "message": "Did you go over all castFailsTrivially call sites?",
+      "range": {
+        "startLine": 432,
+        "startChar": 29,
+        "endLine": 432,
+        "endChar": 47
+      },
+      "revId": "21843ae989d79f667daea14183f4766080d95cb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -15,6 +15,9 @@
  */
 package javaemul.internal;
 
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+
 /**
  * A helper to print log messages to console.
  * <p> Note that, this is not a public API and can change/disappear in any release.
@@ -24,11 +27,18 @@ public class ConsoleLogger {
     return isSupported() ? new ConsoleLogger() : null;
   }
 
-  private static native boolean isSupported() /*-{
-    return !!window.console;
-  }-*/;
+  @JsProperty(namespace = JsPackage.GLOBAL)
+  private static native Object getConsole();
 
-  public native void log(String level, String message) /*-{
+  private static boolean isSupported() {
+    return getConsole() != null;
+  }
+
+  public void log(String level, String message) {
+    log(getConsole(), level, message);
+  }
+
+  private native void log(Object console, String level, String message) /*-{
     console[level](message);
   }-*/;
 

@@ -22,6 +22,30 @@
       "revId": "21843ae989d79f667daea14183f4766080d95cb0",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25dbdf69_172b3e32",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/TypeTightener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-09-27T05:25:08Z",
+      "side": 1,
+      "message": "I went over the places that optimize casts away (these places use cast fails trivially). I\u0027ll double check tomorrow. But given that unsafeCast is trivially inlineable I believe the tests cover the optimization cases. \n\nBut now that you mention it I\u0027ll have to double check DeadCodeElimination and use more specific types to make sure these casts are not optimized away.",
+      "parentUuid": "25dbdf69_77e9620a",
+      "range": {
+        "startLine": 432,
+        "startChar": 29,
+        "endLine": 432,
+        "endChar": 47
+      },
+      "revId": "21843ae989d79f667daea14183f4766080d95cb0",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

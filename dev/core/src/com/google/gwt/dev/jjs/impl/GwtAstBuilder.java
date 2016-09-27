@@ -91,7 +91,6 @@ import com.google.gwt.dev.jjs.ast.JThrowStatement;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JUnaryOperator;
-import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.JVariable;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
@@ -1558,7 +1557,7 @@ public class GwtAstBuilder {
         if (x.valueCast != null) {
           JType targetType = typeMap.get(x.valueCast);
           push(isUncheckedGenericMethodCall(x)
-              ? maybeInsertUnsafeTypeCoersion(targetType, methodCall)
+              ? JjsUtils.maybeCoerceType(targetType, methodCall)
               : maybeCast(targetType, methodCall));
         } else {
           push(methodCall);
@@ -3072,15 +3071,6 @@ public class GwtAstBuilder {
       if (expected != expression.getType()) {
         // Must be a generic cast; insert a cast operation.
         return new JCastOperation(expression.getSourceInfo(), expected, expression);
-      }
-
-      return expression;
-    }
-
-      private JExpression maybeInsertUnsafeTypeCoersion(JType expected, JExpression expression) {
-      if (expected != expression.getType()) {
-        // A generic call marked as @UncheckedCast.
-        return new JUnsafeTypeCoercion(expression.getSourceInfo(), expected, expression);
       }
 
       return expression;

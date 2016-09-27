@@ -578,7 +578,7 @@ public class Pruner {
    * Transform a call to a pruned instance method (or static impl) into a call
    * to the null method, which will be used to replace <code>x</code>.
    */
-  public static JMethodCall transformToNullMethodCall(JMethodCall x, JProgram program) {
+  public static JExpression transformToNullMethodCall(JMethodCall x, JProgram program) {
     JExpression instance = x.getInstance();
     List<JExpression> args = x.getArgs();
     if (program.isStaticImpl(x.getTarget())) {
@@ -610,14 +610,13 @@ public class Pruner {
     }
 
     JMethodCall newCall = new JMethodCall(x.getSourceInfo(), instance, program.getNullMethod());
-    newCall.overrideReturnType(primitiveTypeOrNullTypeOrArray(program, x.getType()));
     // Retain the original arguments, they will be evaluated for side effects.
     for (JExpression arg : args) {
       if (arg.hasSideEffects()) {
         newCall.addArg(arg);
       }
     }
-    return newCall;
+    return JjsUtils.maybeCoerceType(primitiveTypeOrNullTypeOrArray(program, x.getType()), newCall);
   }
 
   /**

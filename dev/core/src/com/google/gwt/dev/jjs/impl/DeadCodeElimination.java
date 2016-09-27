@@ -61,6 +61,7 @@ import com.google.gwt.dev.jjs.ast.JSwitchStatement;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
 import com.google.gwt.dev.jjs.ast.JType;
 import com.google.gwt.dev.jjs.ast.JUnaryOperator;
+import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.JValueLiteral;
 import com.google.gwt.dev.jjs.ast.JVariableRef;
 import com.google.gwt.dev.jjs.ast.JVisitor;
@@ -726,6 +727,21 @@ public class DeadCodeElimination {
         // If there's no catch or finally, there's no point in this even being
         // a try statement, replace myself with the try block
         replaceMe(x.getTryBlock(), ctx);
+      }
+    }
+
+    @Override
+    public void endVisit(JUnsafeTypeCoercion x, Context ctx) {
+      if (x.getExpression() instanceof JMultiExpression) {
+        // (T)(a,b,c) -> a,b,(T) c
+        List<JExpression> expressions = ((JMultiExpression) x.getExpression()).getExpressions();
+        JMultiExpression result = new JMultiExpression(x.getSourceInfo());
+        result.addExpressions(expressions.subList(0, expressions.size() - 1));
+        result.addExpressions(
+            new JUnsafeTypeCoercion(x.getSourceInfo(), x.getCoercionType(), last(expressions)));
+        maybeReplaceMe(x, result, ctx);
+      } else if (x.getCoercionType() == x.getExpression().getType().getUnderlyingType()) {
+        ctx.replaceMe(x.getExpression());
       }
     }
 

@@ -138,11 +138,11 @@ public class ArrayNormalizer {
       JIntLiteral elementTypeCategory = getTypeCategoryLiteral(elementType);
       JExpression dim = x.getDimensionExpressions().get(0);
       JMethodCall call =
-          new JMethodCall(sourceInfo, null, initializeUnidimensionalArrayMethod);
-      call.overrideReturnType(arrayType);
-      call.addArgs(classLit, castableTypeMap, arrayElementRuntimeTypeReference, dim,
-          elementTypeCategory, program.getLiteralInt(arrayType.getDims()));
-      return call;
+          new JMethodCall(sourceInfo, null, initializeUnidimensionalArrayMethod,
+              classLit, castableTypeMap, arrayElementRuntimeTypeReference, dim,
+              elementTypeCategory, program.getLiteralInt(arrayType.getDims()));
+
+      return JjsUtils.maybeCoerceType(arrayType, call);
     }
 
     private JExpression initializeMultidimensionalArray(JNewArray x, JArrayType arrayType) {
@@ -170,11 +170,10 @@ public class ArrayNormalizer {
       JType leafElementType = currentElementType;
       JIntLiteral leafElementTypeCategory = getTypeCategoryLiteral(leafElementType);
       JMethodCall call =
-          new JMethodCall(sourceInfo, null, initializeMultidimensionalArrayMethod);
-      call.overrideReturnType(arrayType);
-      call.addArgs(classLit, castableTypeMaps, elementTypeReferences, leafElementTypeCategory,
-          dimList, program.getLiteralInt(x.getDimensionExpressions().size()));
-      return call;
+          new JMethodCall(sourceInfo, null, initializeMultidimensionalArrayMethod,
+              classLit, castableTypeMaps, elementTypeReferences, leafElementTypeCategory,
+              dimList, program.getLiteralInt(x.getDimensionExpressions().size()));
+      return JjsUtils.maybeCoerceType(arrayType, call);
     }
 
     private JExpression createArrayFromInitializers(JNewArray x, JArrayType arrayType) {
@@ -187,11 +186,10 @@ public class ArrayNormalizer {
       JsonArray initializers =
           new JsonArray(sourceInfo, program.getJavaScriptObject(), x.getInitializers());
       JIntLiteral leafElementTypeCategory = getTypeCategoryLiteral(arrayType.getElementType());
-      JMethodCall call = new JMethodCall(sourceInfo, null, stampJavaTypeInfoMethod);
-      call.overrideReturnType(arrayType);
-      call.addArgs(classLitExpression, castableTypeMap, elementTypeIds, leafElementTypeCategory,
+      JMethodCall call = new JMethodCall(sourceInfo, null, stampJavaTypeInfoMethod,
+          classLitExpression, castableTypeMap, elementTypeIds, leafElementTypeCategory,
           initializers);
-      return call;
+      return JjsUtils.maybeCoerceType(arrayType, call);
     }
 
     /**

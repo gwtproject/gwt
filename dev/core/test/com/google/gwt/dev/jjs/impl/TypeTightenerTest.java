@@ -63,7 +63,7 @@ public class TypeTightenerTest extends OptimizerTestBase {
     Result result =
         optimize("void", "A b = new B();", "((A)b).set();", "((B)b).set();", "((C)b).set();");
     result.intoString("EntryPoint$B b = new EntryPoint$B();", "b.set();", "b.set();",
-        "((null) b).nullMethod();");
+        "/*void*/ ((null) b).nullMethod();");
   }
 
   public void testConditional() throws Exception {

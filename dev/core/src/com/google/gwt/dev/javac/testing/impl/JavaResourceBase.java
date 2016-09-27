@@ -15,6 +15,8 @@
  */
 package com.google.gwt.dev.javac.testing.impl;
 
+import com.google.gwt.thirdparty.guava.common.base.Joiner;
+
 /**
  * Contains standard Java source files for testing.
  */
@@ -450,11 +452,7 @@ public class JavaResourceBase {
     return new MockJavaResource(resourceName) {
       @Override
       public CharSequence getContent() {
-        StringBuilder code = new StringBuilder();
-        for (String line : lines) {
-          code.append(line + "\n");
-        }
-        return code;
+        return Joiner.on('\n').join(lines);
       }
     };
   }
@@ -467,11 +465,7 @@ public class JavaResourceBase {
     return new MockResource(resourceName) {
       @Override
       public CharSequence getContent() {
-        StringBuilder code = new StringBuilder();
-        for (String line : lines) {
-          code.append(line + "\n");
-        }
-        return code;
+        return Joiner.on('\n').join(lines);
       }
     };
   }

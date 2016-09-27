@@ -53,6 +53,7 @@ import com.google.gwt.dev.jjs.ast.JStatement;
 import com.google.gwt.dev.jjs.ast.JStringLiteral;
 import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
 import com.google.gwt.dev.js.ast.JsBooleanLiteral;
 import com.google.gwt.dev.js.ast.JsExpression;
@@ -407,6 +408,13 @@ public class JjsUtils {
     return returnType == JPrimitiveType.VOID ?
         expression.makeStatement() :
         expression.makeReturnStatement();
+  }
+
+  public static JExpression maybeCoerceType(JType coercionType, JExpression expression) {
+    if (expression.getType() == coercionType) {
+      return expression;
+    }
+    return new JUnsafeTypeCoercion(expression.getSourceInfo(), coercionType, expression);
   }
 
   /**

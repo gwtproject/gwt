@@ -81,8 +81,7 @@ public class LongEmulationNormalizer {
 
       JMethod method = program.getIndexedMethod("LongLib." + methodName);
       JMethodCall call = new JMethodCall(x.getSourceInfo(), null, method, x.getLhs(), x.getRhs());
-      call.overrideReturnType(x.getType());
-      ctx.replaceMe(call);
+      ctx.replaceMe(JjsUtils.maybeCoerceType(x.getType(), call));
     }
 
     @Override
@@ -103,8 +102,7 @@ public class LongEmulationNormalizer {
       String methodName = getEmulationMethod(x.getOp());
       JMethod method = program.getIndexedMethod("LongLib." + methodName);
       JMethodCall call = new JMethodCall(x.getSourceInfo(), null, method, x.getArg());
-      call.overrideReturnType(x.getType());
-      ctx.replaceMe(call);
+      ctx.replaceMe(JjsUtils.maybeCoerceType(x.getType(), call));
     }
 
     private String getEmulationMethod(JBinaryOperator op) {

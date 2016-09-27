@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25dbdf69_8845cb43",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/js/JMultiExpression.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-27T18:18:02Z",
+      "side": 1,
+      "message": "let\u0027s rollback",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 3
+      },
+      "revId": "e86caf74e37349fa5cce95d048c00cfec1d5df4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

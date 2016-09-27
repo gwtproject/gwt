@@ -125,12 +125,12 @@ public class TypeCoercionNormalizerTest extends OptimizerTestBase {
   public void testDiv_NarrowResult() throws Exception {
     addSnippetImport("com.google.gwt.lang.Cast");
 
-    optimize("void", "long a = 2; byte b = 3;  double c = a / b;").into(
+    optimize("void", "long a = 2; byte b = 3;  double c = a / b;").intoString(
         "long a = 2;",
         "byte b = 3;",
-        "double c = Cast.narrow_long(a / b);"
+        "double c = /*long*/ Cast.narrow_long(a / b);"
     );
-    optimize("void", "char a = 2; char b = 3;  double c = a / b;").into(
+    optimize("void", "char a = 2; char b = 3;  double c = a / b;").intoString(
         "char a = 2;",
         "char b = 3;",
         "double c = Cast.narrow_int(a / b);"

@@ -115,7 +115,7 @@ public class PrunerTest extends OptimizerTestBase {
             "EntryPoint.returnUninstantiatedClass();",
             "EntryPoint.usedNativeMethod(null, null);",
             "EntryPoint.foo(null.nullField);",
-            "null.nullMethod();",
+            "/*int*/ null.nullMethod();",
             "EntryPoint.methodWithUninstantiatedParam();",
             "new EntryPoint$UsedClass();",
             "EntryPoint.returnUninstantiatedClass();",
@@ -348,7 +348,7 @@ public class PrunerTest extends OptimizerTestBase {
         )).intoString(
             "EntryPoint$MyJsFunctionInterface a = new EntryPoint$1();\n" +
             "return ((EntryPoint$MyOtherJsFunctionInterface) a).bar(0) +" // SAM is not pruned.
-            + " ((EntryPoint$MyPlainInterface) a).nullMethod();"
+            + " /*int*/ ((EntryPoint$MyPlainInterface) a).nullMethod();"
             );
 
     // JsFunction can be cross casted, or casted from JavaScript function

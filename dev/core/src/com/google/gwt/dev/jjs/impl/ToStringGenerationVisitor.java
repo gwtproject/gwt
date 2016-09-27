@@ -81,6 +81,7 @@ import com.google.gwt.dev.jjs.ast.JThisRef;
 import com.google.gwt.dev.jjs.ast.JThrowStatement;
 import com.google.gwt.dev.jjs.ast.JTryStatement;
 import com.google.gwt.dev.jjs.ast.JType;
+import com.google.gwt.dev.jjs.ast.JUnsafeTypeCoercion;
 import com.google.gwt.dev.jjs.ast.JWhileStatement;
 import com.google.gwt.dev.jjs.ast.js.JDebuggerStatement;
 import com.google.gwt.dev.jjs.ast.js.JMultiExpression;
@@ -899,6 +900,19 @@ public class ToStringGenerationVisitor extends TextOutputVisitor {
     return false;
   }
 
+  @Override
+  public boolean visit(JUnsafeTypeCoercion x, Context ctx) {
+    print("/*");
+    printType(x);
+    print("*/");
+    space();
+
+    JExpression expr = x.getExpression();
+    parenPush(x, expr);
+    accept(expr);
+    parenPop(x, expr);
+    return false;
+  }
   @Override
   public boolean visit(JWhileStatement x, Context ctx) {
     print(CHARS_WHILE);

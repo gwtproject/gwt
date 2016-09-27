@@ -65,7 +65,6 @@ public class JMethodCall extends JExpression {
   private List<JExpression> args = Collections.emptyList();
   private JExpression instance;
   private JMethod method;
-  private JType overriddenReturnType;
   private Polymorphism polymorphism = Polymorphism.NORMAL;
   private boolean markedAsSideAffectFree;
 
@@ -87,7 +86,6 @@ public class JMethodCall extends JExpression {
     super(other.getSourceInfo());
     this.instance = instance;
     this.method = other.method;
-    this.overriddenReturnType = other.overriddenReturnType;
     this.polymorphism = other.polymorphism;
     this.markedAsSideAffectFree = other.markedAsSideAffectFree;
     addArgs(args);
@@ -103,7 +101,6 @@ public class JMethodCall extends JExpression {
     assert (instance != null || method.isStatic() || this instanceof JNewInstance);
     this.instance = instance;
     this.method = method;
-    this.overriddenReturnType = null;
     addArgs(args);
   }
 
@@ -174,7 +171,7 @@ public class JMethodCall extends JExpression {
 
   @Override
   public JType getType() {
-    return overriddenReturnType != null ? overriddenReturnType : method.getType();
+    return method.getType();
   }
 
   public void markSideEffectFree() {
@@ -205,21 +202,6 @@ public class JMethodCall extends JExpression {
     return polymorphism.isVolatile();
   }
 
-  /**
-   * Override the return type.
-   * <p>
-   * The method call expression will have {@code overridentReturnType} as its type ignoring the
-   * return type of the target method. This is used during normalizing transformations to preserve
-   * type semantics when calling externally-defined compiler implementation methods.
-   * <p>
-   * For example, Cast.dynamicCast() returns Object but that method is used to implement the cast
-   * operation. Using a stronger type on the call expression allows us to preserve type information
-   * during the latter phases of compilation.
-   */
-  public void overrideReturnType(JType overridenReturnType) {
-    assert this.overriddenReturnType == null;
-    this.overriddenReturnType = overridenReturnType;
-  }
   /**
    * Resolve an external reference during AST stitching.
    */

@@ -277,9 +277,6 @@ public class UnifyAst {
         assert errorsFound;
         return;
       }
-      // Should not have an overridden type at this point.
-      assert x instanceof JNewInstance || x.getType() == target.getType();
-
       flowInto(target);
     }
 

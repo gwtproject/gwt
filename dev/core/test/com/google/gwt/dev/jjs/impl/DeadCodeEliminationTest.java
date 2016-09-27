@@ -95,6 +95,50 @@ public class DeadCodeEliminationTest extends OptimizerTestBase {
         "test = a != null;");
   }
 
+  public void testCast_removal() throws Exception {
+    addSnippetClassDecl("static class A {};");
+    optimize("void", "A a = (A) new A();").intoString(
+        "EntryPoint$A a = new EntryPoint$A();");
+  }
+
+  public void testCast_pushIntoMultiExpression() throws Exception {
+    runMethodInliner = true;
+    addSnippetClassDecl(
+        "static class A {",
+        "  static int f1 = 1;",
+        "  static A inlineableStatic() { return new A(); }",
+        "}");
+
+    optimize("void",  "Object a = (Object) A.inlineableStatic();").intoString(
+        "Object a = (EntryPoint$A.$clinit(), (Object) new EntryPoint$A());");
+  }
+
+  public void testUncheckedCast_removal() throws Exception {
+    runMethodInliner = true;
+    addSnippetImport("javaemul.internal.annotations.UncheckedCast;");
+    addSnippetClassDecl(
+        "static class A {",
+        "  @UncheckedCast",
+        "  static <T> T inlineableStatic(T t) { return t; }",
+        "}");
+    optimize("void",  "A a = A.inlineableStatic(new A());").intoString(
+        "EntryPoint$A a = new EntryPoint$A();");
+  }
+
+  public void testUncheckedCast_pushIntoMultiExpression() throws Exception {
+    runMethodInliner = true;
+    addSnippetImport("javaemul.internal.annotations.UncheckedCast;");
+    addSnippetClassDecl(
+        "static class A {",
+        "  static int f1 = 1;",
+        "  @UncheckedCast",
+        "  static <T> T inlineableStatic() { return (T) new A(); }",
+        "}");
+
+    optimize("void",  "A a = A.inlineableStatic();").intoString(
+        "EntryPoint$A a = (EntryPoint$A.$clinit(), /*EntryPoint$A*/ (Object) new EntryPoint$A());");
+  }
+
   public void testSwitchOverConstant_noMatchingCase() throws Exception {
     optimize("int", "switch (0) { case 1: return 1; } return 0;")
         .into("return 0;");

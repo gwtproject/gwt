@@ -129,7 +129,7 @@ public class Simplifier {
       // TODO(rluble): refactor common outward JMultiExpression movement.
       return newMulti;
     }
-    if (type == exp.getType()) {
+    if (type == exp.getType().getUnderlyingType()) {
       return exp;
     }
 

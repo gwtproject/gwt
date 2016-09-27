@@ -76,8 +76,7 @@ public class ImplementCastsAndTypeChecks {
             RuntimeConstants.CAST_THROW_CLASS_CAST_EXCEPTION_UNLESS_NULL);
         // Note, we must update the method call to return the null type.
         JMethodCall call = new JMethodCall(info, null, method, expr);
-        call.overrideReturnType(toType);
-        ctx.replaceMe(call);
+        ctx.replaceMe(JjsUtils.maybeCoerceType(toType, call));
         return;
       }
 
@@ -104,7 +103,7 @@ public class ImplementCastsAndTypeChecks {
         }
         // A cast is still needed.  Substitute the appropriate Cast implementation.
         ctx.replaceMe(implementCastOrInstanceOfOperation(x.getSourceInfo(), curExpr, refType,
-            dynamicCastMethodsByTargetTypeCategory, true));
+            dynamicCastMethodsByTargetTypeCategory, refType));
         return;
       }
 
@@ -178,8 +177,7 @@ public class ImplementCastsAndTypeChecks {
       if (methodName != null) {
         JMethod castMethod = program.getIndexedMethod(methodName);
         JMethodCall call = new JMethodCall(info, null, castMethod, expr);
-        call.overrideReturnType(toType);
-        ctx.replaceMe(call);
+        ctx.replaceMe(JjsUtils.maybeCoerceType(toType, call));
       } else {
         // Just remove the cast
         ctx.replaceMe(expr);
@@ -216,7 +214,7 @@ public class ImplementCastsAndTypeChecks {
         // Replace the instance of check by a call to the appropriate instanceof method in class
         // Cast.
         ctx.replaceMe(implementCastOrInstanceOfOperation(x.getSourceInfo(), x.getExpr(), toType,
-            instanceOfMethodsByTargetTypeCategory, false));
+            instanceOfMethodsByTargetTypeCategory, JPrimitiveType.BOOLEAN));
       }
     }
   }
@@ -235,31 +233,23 @@ public class ImplementCastsAndTypeChecks {
   /**
    * Returns an expression implementing the instanceof/dynamicCast operations.
    */
-  private JMethodCall implementCastOrInstanceOfOperation(SourceInfo sourceInfo,
+  private JExpression implementCastOrInstanceOfOperation(SourceInfo sourceInfo,
       JExpression targetExpression, JReferenceType targetType,
-      Map<TypeCategory, JMethod> targetMethodByTypeCategory, boolean overrideReturnType) {
+      Map<TypeCategory, JMethod> targetMethodByTypeCategory, JType expressionType) {
 
     TypeCategory targetTypeCategory = determineTypeCategoryForType(targetType);
     JMethod method = targetMethodByTypeCategory.get(targetTypeCategory);
     assert method != null;
     JMethodCall call = new JMethodCall(sourceInfo, null, method);
-    if (overrideReturnType) {
-      // Create a method call overriding the return type so that operations like Cast.dynamicCast
-      // don't change the type of the original method call expression.
-      call.overrideReturnType(targetType);
-    }
-
     call.addArg(targetExpression);
 
     if (method.getParams().size() < 2) {
       // The cast checking method does not require an additional parameter. This situation arises
       // when the call is a cast check and cast checking has been disabled or when the type category
       // provides enough information, e.g. TYPE_UNTYPED_ARRAY.
-      return call;
     } else if (targetTypeCategory.requiresTypeId()) {
       call.addArg((new JRuntimeTypeReference(sourceInfo, program.getTypeJavaLangObject(),
           targetType)));
-      return call;
     } else if (targetTypeCategory.requiresJsConstructor()) {
       JDeclaredType declaredType = (JDeclaredType) targetType;
 
@@ -267,10 +257,13 @@ public class ImplementCastsAndTypeChecks {
       assert jsConstructor != null &&  declaredType.isJsNative();
       call.addArg(new JsniMethodRef(sourceInfo, declaredType.getQualifiedJsName(), jsConstructor,
           program.getJavaScriptObject()));
-      return call;
     } else {
       throw new AssertionError();
     }
+
+    // Create a method call overriding the return type so that operations like Cast.dynamicCast
+    // don't change the type of the original method call expression.
+    return JjsUtils.maybeCoerceType(expressionType, call);
   }
 
   public static void exec(JProgram program, boolean pruneTrivialCasts) {

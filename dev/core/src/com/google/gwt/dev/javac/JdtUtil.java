@@ -27,13 +27,10 @@ import com.google.gwt.thirdparty.guava.common.collect.Iterables;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
-import org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.Annotation;
 import org.eclipse.jdt.internal.compiler.impl.BooleanConstant;
 import org.eclipse.jdt.internal.compiler.impl.StringConstant;
 import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
-import org.eclipse.jdt.internal.compiler.lookup.Binding;
-import org.eclipse.jdt.internal.compiler.lookup.ClassScope;
 import org.eclipse.jdt.internal.compiler.lookup.ElementValuePair;
 import org.eclipse.jdt.internal.compiler.lookup.FieldBinding;
 import org.eclipse.jdt.internal.compiler.lookup.LocalTypeBinding;
@@ -42,7 +39,6 @@ import org.eclipse.jdt.internal.compiler.lookup.NestedTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ReferenceBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.SyntheticArgumentBinding;
-import org.eclipse.jdt.internal.compiler.lookup.SyntheticMethodBinding;
 import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 
 import java.util.Arrays;
@@ -197,12 +193,13 @@ public final class JdtUtil {
   private JdtUtil() {
   }
 
-  public static String getAnnotationParameterString(AnnotationBinding a, String paramName) {
-    if (a != null) {
-      for (ElementValuePair maybeValue : a.getElementValuePairs()) {
-        if (maybeValue.getValue() instanceof StringConstant &&
-            paramName.equals(String.valueOf(maybeValue.getName()))) {
-          return ((StringConstant) maybeValue.getValue()).stringValue();
+  public static String getAnnotationParameterString(
+      AnnotationBinding annotationBinding, String parameterName) {
+    if (annotationBinding != null) {
+      for (ElementValuePair parameterNameValuePair : annotationBinding.getElementValuePairs()) {
+        if (parameterNameValuePair.getValue() instanceof StringConstant &&
+            parameterName.equals(String.valueOf(parameterNameValuePair.getName()))) {
+          return ((StringConstant) parameterNameValuePair.getValue()).stringValue();
         }
       }
     }
@@ -210,44 +207,59 @@ public final class JdtUtil {
   }
 
   public static boolean getAnnotationParameterBoolean(
-      AnnotationBinding a, String paramName, boolean defaultValue) {
-    Boolean rv = getAnnotationParameterBoolean(a, paramName);
-    return rv == null ? defaultValue : rv;
+      AnnotationBinding annotationBinding, String parameterName, boolean defaultValue) {
+    Boolean booleanParameterValue = getAnnotationParameterBoolean(annotationBinding, parameterName);
+    return booleanParameterValue == null ? defaultValue : booleanParameterValue;
   }
 
-  public static Boolean getAnnotationParameterBoolean(AnnotationBinding a, String paramName) {
-    if (a != null) {
-      for (ElementValuePair maybeValue : a.getElementValuePairs()) {
-        if (maybeValue.getValue() instanceof BooleanConstant &&
-            paramName.equals(String.valueOf(maybeValue.getName()))) {
-          return ((BooleanConstant) maybeValue.getValue()).booleanValue();
+  private static void assertAnnotationRetentionPolicy(AnnotationBinding annotationBinding) {
+    ReferenceBinding annotationReferenceBinding = annotationBinding.getAnnotationType();
+//    assert (annotationReferenceBinding.getAnnotationTagBits() | TagBits.AnnotationRetentionMASK)
+//        == TagBits.AnnotationRuntimeRetention
+//        || (annotationReferenceBinding.getAnnotationTagBits() | TagBits.AnnotationRetentionMASK)
+//        == TagBits.AnnotationSourceRetention :
+//        "Annotation " + Joiner.on('.').join(CharOperation.charArrayToStringArray(
+//            annotationBinding.getAnnotationType().compoundName)) + " is not CLASS nor RUNTIME.";
+  }
+
+  public static Boolean getAnnotationParameterBoolean(
+      AnnotationBinding annotationBinding, String parameterName) {
+    if (annotationBinding != null) {
+      for (ElementValuePair parameterNameValuePair : annotationBinding.getElementValuePairs()) {
+        if (parameterNameValuePair.getValue() instanceof BooleanConstant &&
+            parameterName.equals(String.valueOf(parameterNameValuePair.getName()))) {
+          return ((BooleanConstant) parameterNameValuePair.getValue()).booleanValue();
         }
       }
     }
     return null;
   }
 
-  static AnnotationBinding getAnnotation(AnnotationBinding[] annotations, String nameToFind) {
+  private static AnnotationBinding getAnnotationByName(
+      AnnotationBinding[] annotations, String name) {
     if (annotations != null) {
-      for (AnnotationBinding a : annotations) {
-        ReferenceBinding annBinding = a.getAnnotationType();
-        String annName = CharOperation.toString(annBinding.compoundName);
-        if (nameToFind.equals(annName)) {
-          return a;
+      for (AnnotationBinding annotationBinding : annotations) {
+        String annotationName =
+            CharOperation.toString(annotationBinding.getAnnotationType().compoundName);
+        if (name.equals(annotationName)) {
+          assertAnnotationRetentionPolicy(annotationBinding);
+          return annotationBinding;
         }
       }
     }
     return null;
   }
 
-  public static AnnotationBinding getAnnotation(Annotation[] annotations, String nameToFind) {
+  public static AnnotationBinding getAnnotationByName(Annotation[] annotations, String name) {
     if (annotations != null) {
-      for (Annotation a : annotations) {
-        AnnotationBinding annBinding = a.getCompilerAnnotation();
-        if (annBinding != null) {
-          String annName = CharOperation.toString(annBinding.getAnnotationType().compoundName);
-          if (nameToFind.equals(annName)) {
-            return annBinding;
+      for (Annotation annotation : annotations) {
+        AnnotationBinding annotationBinding = annotation.getCompilerAnnotation();
+        if (annotationBinding != null) {
+          String annotationName =
+              CharOperation.toString(annotationBinding.getAnnotationType().compoundName);
+          if (name.equals(annotationName)) {
+            assertAnnotationRetentionPolicy(annotationBinding);
+            return annotationBinding;
           }
         }
       }
@@ -255,31 +267,13 @@ public final class JdtUtil {
     return null;
   }
 
-  public static AnnotationBinding getAnnotation(Binding binding, String nameToFind) {
-    if (binding instanceof SourceTypeBinding) {
-      ClassScope scope = ((SourceTypeBinding) binding).scope;
-      return scope != null ? getAnnotation(scope.referenceType().annotations, nameToFind) : null;
-    } else if (binding instanceof ReferenceBinding) {
-      return getAnnotation(((ReferenceBinding) binding).getAnnotations(), nameToFind);
-    } else if (binding instanceof SyntheticMethodBinding) {
-      return null;
-    } else if (binding instanceof MethodBinding) {
-      AbstractMethodDeclaration abMethod = safeSourceMethod((MethodBinding) binding);
-      return abMethod != null ? getAnnotation(abMethod.annotations, nameToFind) : null;
-    } else if (binding instanceof FieldBinding) {
-      return getAnnotation(((FieldBinding) binding).sourceField().annotations, nameToFind);
-    } else {
-      return null;
-    }
-  }
-
   public static TypeBinding getAnnotationParameterTypeBinding(
-      AnnotationBinding a, String paramName) {
-    if (a != null) {
-      for (ElementValuePair maybeValue : a.getElementValuePairs()) {
-        if (maybeValue.getValue() instanceof Class &&
-            paramName.equals(String.valueOf(maybeValue.getName()))) {
-          return (TypeBinding)  maybeValue.getValue();
+      AnnotationBinding annotationBinding, String parameterName) {
+    if (annotationBinding != null) {
+      for (ElementValuePair parameterNameValuePair : annotationBinding.getElementValuePairs()) {
+        if (parameterNameValuePair.getValue() instanceof Class &&
+            parameterName.equals(String.valueOf(parameterNameValuePair.getName()))) {
+          return (TypeBinding)  parameterNameValuePair.getValue();
         }
       }
     }
@@ -287,14 +281,14 @@ public final class JdtUtil {
   }
 
   public static TypeBinding[] getAnnotationParameterTypeBindingArray(
-      AnnotationBinding annotationBinding, String paramName) {
+      AnnotationBinding annotationBinding, String parameterName) {
     if (annotationBinding == null) {
       return null;
     }
 
-    for (ElementValuePair maybeValue : annotationBinding.getElementValuePairs()) {
-      Object value = maybeValue.getValue();
-      if (!paramName.equals(String.valueOf(maybeValue.getName()))) {
+    for (ElementValuePair parameterNameValuePair : annotationBinding.getElementValuePairs()) {
+      Object value = parameterNameValuePair.getValue();
+      if (!parameterName.equals(String.valueOf(parameterNameValuePair.getName()))) {
         continue;
       }
       if (value instanceof Object[]) {
@@ -310,15 +304,15 @@ public final class JdtUtil {
   }
 
   public static StringConstant[] getAnnotationParameterStringConstantArray(
-      AnnotationBinding annotationBinding, String paramName) {
+      AnnotationBinding annotationBinding, String parameterName) {
     if (annotationBinding == null) {
       return null;
     }
-    for (ElementValuePair maybeValue : annotationBinding.getElementValuePairs()) {
-      if (!paramName.equals(String.valueOf(maybeValue.getName()))) {
+    for (ElementValuePair parameterNameValuePair : annotationBinding.getElementValuePairs()) {
+      if (!parameterName.equals(String.valueOf(parameterNameValuePair.getName()))) {
         continue;
       }
-      Object value = maybeValue.getValue();
+      Object value = parameterNameValuePair.getValue();
       if (value instanceof Object[]) {
         Object[] values = (Object[]) value;
         StringConstant[] stringConstants = new StringConstant[values.length];
@@ -336,7 +330,7 @@ public final class JdtUtil {
       return ImmutableSet.of();
     }
     AnnotationBinding suppressWarnings =
-        getAnnotation(annotations, SuppressWarnings.class.getName());
+        getAnnotationByName(annotations, SuppressWarnings.class.getName());
     if (suppressWarnings != null) {
       StringConstant[] values =
           JdtUtil.getAnnotationParameterStringConstantArray(suppressWarnings, "value");
@@ -350,17 +344,6 @@ public final class JdtUtil {
           .toSet();
     }
     return ImmutableSet.of();
-  }
-
-  /**
-   * Work around JDT bug.
-   */
-  public static AbstractMethodDeclaration safeSourceMethod(MethodBinding mb) {
-    try {
-      return mb.sourceMethod();
-    } catch (Exception e) {
-      return null;
-    }
   }
 
   public static String signature(FieldBinding binding) {

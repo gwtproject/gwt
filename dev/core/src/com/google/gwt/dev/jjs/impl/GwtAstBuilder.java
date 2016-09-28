@@ -4164,31 +4164,37 @@ public class GwtAstBuilder {
 
   private static boolean isUncheckedGenericMethodCall(MessageSend messageSend) {
     if (messageSend.binding.genericMethod() != null) {
-      return JdtUtil.getAnnotation(messageSend.binding.genericMethod(),
-          "javaemul.internal.annotations.UncheckedCast") != null;
+      // TODO(rluble): This only works when the source of the target method call is seen by JDT
+      // which may or may not be always the case. Refactor so that the annotation is reflected
+      // in the JMethod and the coercion is resolved later.
+      AbstractMethodDeclaration methodDeclaration =
+          messageSend.binding.genericMethod().sourceMethod();
+      return methodDeclaration != null && JdtUtil.getAnnotationByName(methodDeclaration.annotations,
+              "javaemul.internal.annotations.UncheckedCast") != null;
     }
     return false;
   }
 
   private static void maybeSetInliningMode(AbstractMethodDeclaration x, JMethod method) {
-    MethodBinding bind = x.binding;
-    if (JdtUtil.getAnnotation(bind, "javaemul.internal.annotations.DoNotInline") != null) {
+    if (JdtUtil.getAnnotationByName(
+        x.annotations, "javaemul.internal.annotations.DoNotInline") != null) {
       method.setInliningMode(InliningMode.DO_NOT_INLINE);
-    } else if (JdtUtil.getAnnotation(bind, "javaemul.internal.annotations.ForceInline") != null) {
+    } else if (JdtUtil.getAnnotationByName(
+        x.annotations, "javaemul.internal.annotations.ForceInline") != null) {
       method.setInliningMode(InliningMode.FORCE_INLINE);
     }
   }
 
   private static void maybeSetHasNoSideEffects(AbstractMethodDeclaration x, JMethod method) {
-    if (JdtUtil.getAnnotation(x.binding,
-        "javaemul.internal.annotations.HasNoSideEffects") != null) {
+    if (JdtUtil.getAnnotationByName(
+        x.annotations, "javaemul.internal.annotations.HasNoSideEffects") != null) {
       method.setHasSideEffects(false);
     }
   }
 
   private void maybeAddMethodSpecialization(AbstractMethodDeclaration x, JMethod method) {
-    AnnotationBinding specializeAnnotation =
-        JdtUtil.getAnnotation(x.binding, "javaemul.internal.annotations.SpecializeMethod");
+    AnnotationBinding specializeAnnotation = JdtUtil.getAnnotationByName(
+        x.annotations, "javaemul.internal.annotations.SpecializeMethod");
     if (specializeAnnotation == null) {
       return;
     }

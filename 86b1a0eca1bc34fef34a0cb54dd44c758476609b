@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25ccbff8_1b696fb2",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-28T18:17:05Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 102).",
+      "revId": "86b1a0eca1bc34fef34a0cb54dd44c758476609b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25ccbff8_7b66a3e1",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-28T18:17:05Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "86b1a0eca1bc34fef34a0cb54dd44c758476609b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

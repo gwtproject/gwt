@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25ccbff8_30056521",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JdtUtil.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-28T21:14:21Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.thirdparty.guava.common.base.Predicates.",
+      "revId": "f8b8a6945d51a4e419fd28b3eb87a06c5d0a796a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

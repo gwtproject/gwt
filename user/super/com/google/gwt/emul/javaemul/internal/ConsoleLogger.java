@@ -15,6 +15,9 @@
  */
 package javaemul.internal;
 
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+
 /**
  * A helper to print log messages to console.
  * <p> Note that, this is not a public API and can change/disappear in any release.
@@ -24,11 +27,18 @@ public class ConsoleLogger {
     return isSupported() ? new ConsoleLogger() : null;
   }
 
-  private static native boolean isSupported() /*-{
-    return !!window.console;
-  }-*/;
+  @JsProperty(namespace = JsPackage.GLOBAL)
+  private static native Object getConsole();
 
-  public native void log(String level, String message) /*-{
+  private static boolean isSupported() {
+    return getConsole() != null;
+  }
+
+  public void log(String level, String message) {
+    log(getConsole(), level, message);
+  }
+
+  private native void log(Object console, String level, String message) /*-{
     console[level](message);
   }-*/;
 
@@ -37,7 +47,7 @@ public class ConsoleLogger {
   }
 
   private void log(String level, Throwable t, String label, boolean expanded) {
-    groupStart(label + t.toString(), expanded);
+    groupStart(getConsole(), label + t.toString(), expanded);
     log(level, getBackingError(t, t.getBackingJsObject()));
     Throwable cause = t.getCause();
     if (cause != null) {
@@ -46,16 +56,16 @@ public class ConsoleLogger {
     for (Throwable suppressed : t.getSuppressed()) {
       log(level, suppressed, "Suppressed: ", false);
     }
-    groupEnd();
+    groupEnd(getConsole());
   }
 
-  private native void groupStart(String msg, boolean expanded) /*-{
+  private native void groupStart(Object console, String msg, boolean expanded) /*-{
     // Not all browsers support grouping:
     var groupStart = (!expanded && console.groupCollapsed) || console.group || console.log;
     groupStart.call(console, msg);
   }-*/;
 
-  private native void groupEnd() /*-{
+  private native void groupEnd(Object console) /*-{
     var groupEnd = console.groupEnd || function(){};
     groupEnd.call(console);
   }-*/;

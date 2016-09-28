@@ -22,7 +22,7 @@ import java.lang.annotation.Target;
  * An annotation to mark a method as unchecked to prevent the compiler from inserting casts on
  * returns call sites due to erasure.
  */
-@Target(ElementType.METHOD)
 @CompilerHint
+@Target(ElementType.METHOD)
 public @interface UncheckedCast {
 }

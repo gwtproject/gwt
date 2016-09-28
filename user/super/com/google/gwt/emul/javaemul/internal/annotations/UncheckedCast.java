@@ -16,6 +16,8 @@
 package javaemul.internal.annotations;
 
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
@@ -23,6 +25,7 @@ import java.lang.annotation.Target;
  * returns call sites due to erasure.
  */
 @Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
 @CompilerHint
 public @interface UncheckedCast {
 }

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25ccbff8_1ba16f41",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/JSORestrictionsChecker.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-28T18:07:19Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 102).",
+      "revId": "37573c508d25dc3549078355b4d9c92a89caa9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25ccbff8_7b9ea308",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 4179,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-28T18:07:19Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 106).",
+      "revId": "37573c508d25dc3549078355b4d9c92a89caa9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25ccbff8_5b9be716",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/GwtAstBuilder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 4182,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-09-28T18:07:19Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 106).",
+      "revId": "37573c508d25dc3549078355b4d9c92a89caa9c9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

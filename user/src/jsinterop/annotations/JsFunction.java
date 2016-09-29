@@ -24,19 +24,22 @@ import java.lang.annotation.Target;
 /**
  * Marks a type containing a Single Abstract Method (SAM) as eligible for automatic conversion into
  * a JavaScript function.
- * <p>
- * This enables lambda expressions to be passed directly to JavaScript as callbacks.
- * <p>
- * However there are some additional limitations that are imposed to make this practical and
+ *
+ * <p>This enables lambda expressions to be passed directly to JavaScript as callbacks.
+ *
+ * <p>However there are some additional limitations that are imposed to make this practical and
  * efficient:
- * <li>A class may not implement more than one @JsFunction type. This restriction allows the
- * compiler to construct a one-to-one mapping between the Java class and the generated JavaScript
- * function and preserve referential equality.
+ *
+ * <ul>
  * <li>A JsFunction interface cannot extend any other interfaces.
- * <li>A JsFunction interface cannot have defender methods.
- * <li>A class that implements a @JsFunction type (directly or indirectly) cannot be a @JsType.
- * <p>
- * As a best practice, we also recommend marking @JsFunction interfaces with @FunctionalInterface
+ * <li>A class may not implement more than one JsFunction interface.
+ * <li>A class that implements a JsFunction type cannot be a {@link JsType} (directly or
+ *     indirectly).
+ * <li>Fields and defender methods of the interfaces should be be marked with {@link JsOverlay} and
+ *     cannot be overridden by the implementations.
+ * </ul>
+ *
+ * <p>As a best practice, we also recommend marking JsFunction interfaces with FunctionalInterface
  * to get improved checking in IDEs.
  */
 @Retention(RetentionPolicy.RUNTIME)

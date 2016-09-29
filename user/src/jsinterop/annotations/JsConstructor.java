@@ -22,11 +22,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * JsConstructor marks a constructor that is the constructor function for the JavaScript
- * type.
- * <p>
- * Note that there can only be one JsConstructor in a type; all other constructors must delegate
- * to it.
+ * JsConstructor marks a constructor that is the constructor function for the JavaScript type.
+ *
+ * <p>Due to ES6 class semantics, there can only be one JsConstructor in a class; all other
+ * constructors must delegate to it. Subclasses of a class with JsConstructor should follow the same
+ * with the exception that the primary constructor is not required to be marked as JsConstructor.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.CONSTRUCTOR)

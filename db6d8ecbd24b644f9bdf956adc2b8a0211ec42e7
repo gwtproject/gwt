@@ -284,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "e29e1d21_f28ce534",
+        "filename": "user/src/jsinterop/annotations/JsIgnore.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-30T23:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0242517e_5de23b91",
+      "range": {
+        "startLine": 27,
+        "startChar": 34,
+        "endLine": 27,
+        "endChar": 61
+      },
+      "revId": "db6d8ecbd24b644f9bdf956adc2b8a0211ec42e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0242517e_bdf6df53",
         "filename": "user/src/jsinterop/annotations/JsIgnore.java",
         "patchSetId": 1
@@ -295,6 +319,30 @@
       "writtenOn": "2016-09-30T11:49:53Z",
       "side": 1,
       "message": "\"need to be ignored\" reads better (but I\u0027m not a native-English speaker… that said, none of us is afaik :-) )",
+      "range": {
+        "startLine": 27,
+        "startChar": 90,
+        "endLine": 28,
+        "endChar": 16
+      },
+      "revId": "db6d8ecbd24b644f9bdf956adc2b8a0211ec42e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e29e1d21_929b216c",
+        "filename": "user/src/jsinterop/annotations/JsIgnore.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-09-30T23:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0242517e_bdf6df53",
       "range": {
         "startLine": 27,
         "startChar": 90,

@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "e29e1d21_519a7e66",
+        "filename": "user/src/jsinterop/annotations/JsConstructor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-30T13:01:17Z",
+      "side": 1,
+      "message": "Maybe the wording I suggested was not clear.\n\nFor native types all constructors are JsConstructor, so yes you can model the native type for Image with two Java constructors Image() and Image(int, int) and you get a nice overloaded API in Java that ends up dispatching to the same JavaScript constructor. \n\nFor JsTypes that are not native, because each Java constructor is implemented as a different JavaScript method only one can be the \"real\" constructor for the JS perspective.",
+      "parentUuid": "0242517e_1de8b36f",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 94
+      },
+      "revId": "db6d8ecbd24b644f9bdf956adc2b8a0211ec42e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e29e1d21_df01bfaf",
         "filename": "user/src/jsinterop/annotations/JsConstructor.java",
         "patchSetId": 1
@@ -198,6 +222,24 @@
       "writtenOn": "2016-09-30T11:49:53Z",
       "side": 1,
       "message": "What\u0027s the difference with JsOverlay? Is JsOverlay only for JsType(isNative\u003dtrue) and JsIgnore only for JsType(isNative\u003dfalse)?",
+      "revId": "db6d8ecbd24b644f9bdf956adc2b8a0211ec42e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e29e1d21_71c0da26",
+        "filename": "user/src/jsinterop/annotations/JsIgnore.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-30T13:01:17Z",
+      "side": 1,
+      "message": "From the use perspective @JsIgnore allows to control which parts of an type that is implemented in Java object are \"seen\" from JavaScript. @JsOverlay serves a different purpose, which is to add a richer API to an objects that is defined externally in JS. JsOverlay comes with a set of restrictions (no overloading, etc) to guarantee that all its uses can be devirtualized and there is no \"modification\" to the actual native JS implementation.\n\nBecause they are mutually exclusive in use (one only applies to native types and the other to non native) and they share part of the meaning, i.e. methods marked with JsIgnore or JsOverlay can not be part of the \"exposed\" JavaScript API, I can see that an argument can be made for  one annotation instead of two. I still think that giving them different names is beneficial.",
+      "parentUuid": "0242517e_fdf06758",
       "revId": "db6d8ecbd24b644f9bdf956adc2b8a0211ec42e7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
@@ -358,6 +400,30 @@
         "startChar": 11,
         "endLine": 57,
         "endChar": 21
+      },
+      "revId": "db6d8ecbd24b644f9bdf956adc2b8a0211ec42e7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e29e1d21_91c56638",
+        "filename": "user/src/jsinterop/annotations/JsType.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-09-30T13:01:17Z",
+      "side": 1,
+      "message": "maybe \n\nand casts to them always succeed.",
+      "parentUuid": "0242517e_7d929708",
+      "range": {
+        "startLine": 57,
+        "startChar": 66,
+        "endLine": 57,
+        "endChar": 75
       },
       "revId": "db6d8ecbd24b644f9bdf956adc2b8a0211ec42e7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",

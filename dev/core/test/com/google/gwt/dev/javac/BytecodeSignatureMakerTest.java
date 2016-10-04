@@ -17,309 +17,285 @@ package com.google.gwt.dev.javac;
 
 import com.google.gwt.dev.javac.testing.impl.MockJavaResource;
 
+import com.google.gwt.thirdparty.guava.common.base.Joiner;
+
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 
 /**
  * Tests for {@link BytecodeSignatureMaker}
  */
 public class BytecodeSignatureMakerTest extends CompilationStateTestBase {
-  static final String CLASS_DEP_TYPE_NAME = "test.ClassDependency";
+  static final String TEST_CLASS_DEPENDENCY = "test.ClassDependency";
 
   public void testClassDependencySignature() {
     final MockJavaResource CLASS_DEP_ORIG =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  public int fieldPublic;\n");
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                "  static public final int fieldPublicStatic = 100;",
+                "  public int fieldPublic;",
+                "  protected int fieldProtected;",
+                "  int fieldDefault;",
+                "  private int fieldPrivate;",
+                "  public int methodPublic() {return 1;};",
+                "  protected int methodProtected(String arg) {return 1;};",
+                "  int methodDefault() {return 1;};",
+                "  private int methodPrivate(){return 1;};",
+                "}");
           }
         };
     // A verbatim copy of CLASS_DEP_ORIG
     final MockJavaResource CLASS_DEP_NO_CHANGE =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  public int fieldPublic;\n");
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
+            return CLASS_DEP_ORIG.getContent();
           }
         };
     final MockJavaResource CLASS_DEP_NO_PRIVATE =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  public int fieldPublic;\n");
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            // Missing fieldPrivate
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            // Missing methodPrivate
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                "  static public final int fieldPublicStatic = 100;",
+                "  public int fieldPublic;",
+                "  protected int fieldProtected;",
+                "  int fieldDefault;",
+                // Missing fieldPrivate
+                "  public int methodPublic() {return 1;};",
+                "  protected int methodProtected(String arg) {return 1;};",
+                "  int methodDefault() {return 1;};",
+                // Missing methodPrivate
+                "}");
           }
         };
     final MockJavaResource CLASS_DEP_NO_PROTECTED_FIELD =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  public int fieldPublic;\n");
+            return Joiner.on('\n').join(
+            "package test;",
+            "public class ClassDependency {",
+            "  static public final int fieldPublicStatic = 100;",
+            "  public int fieldPublic;",
             // missing fieldProtected
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
-          }
+            "  int fieldDefault;",
+            "  private int fieldPrivate;",
+            "  public int methodPublic() {return 1;};",
+            "  protected int methodProtected(String arg) {return 1;};",
+            "  int methodDefault() {return 1;};",
+            "  private int methodPrivate(){return 1;};",
+            "}");
+            }
         };
     final MockJavaResource CLASS_DEP_NO_DEFAULT_FIELD =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  public int fieldPublic;\n");
-            code.append("  protected int fieldProtected;\n");
-            // missing fieldDefault
-            code.append("  private int fieldPrivate;\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+              "package test;",
+              "public class ClassDependency {",
+              "  static public final int fieldPublicStatic = 100;",
+              "  public int fieldPublic;",
+              "  protected int fieldProtected;",
+              // missing fieldDefault
+              "  private int fieldPrivate;",
+              "  public int methodPublic() {return 1;};",
+              "  protected int methodProtected(String arg) {return 1;};",
+              "  int methodDefault() {return 1;};",
+              "  private int methodPrivate(){return 1;};",
+              "}");
           }
         };
     final MockJavaResource CLASS_DEP_NO_PUBLIC_FIELD =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            // missing public field
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+              "package test;",
+              "public class ClassDependency {",
+              "  static public final int fieldPublicStatic = 100;",
+              // missing public field
+              "  protected int fieldProtected;",
+              "  int fieldDefault;",
+              "  private int fieldPrivate;",
+              "  public int methodPublic() {return 1;};",
+              "  protected int methodProtected(String arg) {return 1;};",
+              "  int methodDefault() {return 1;};",
+              "  private int methodPrivate(){return 1;};",
+              "}");
           }
         };
     final MockJavaResource CLASS_DEP_FIELD_VALUE_CHANGE =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            // Value was 100
-            code.append("  static public final int fieldPublicStatic = 99;\n");
-            code.append("  public int fieldPublic;\n");
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                // Value was 100
+                "  static public final int fieldPublicStatic = 99;",
+                "  public int fieldPublic;",
+                "  protected int fieldProtected;",
+                "  int fieldDefault;",
+                "  private int fieldPrivate;",
+                "  public int methodPublic() {return 1;};",
+                "  protected int methodProtected(String arg) {return 1;};",
+                "  int methodDefault() {return 1;};",
+                "  private int methodPrivate(){return 1;};",
+                "}");
           }
         };
     final MockJavaResource CLASS_DEP_ORDER =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            // re-ordered this field
-            code.append("  public int fieldPublic;\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            // re-ordered this method
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                // re-ordered this field
+                "  public int fieldPublic;",
+                "  static public final int fieldPublicStatic = 100;",
+                "  protected int fieldProtected;",
+                "  int fieldDefault;",
+                "  private int fieldPrivate;",
+                "  public int methodPublic() {return 1;};",
+                // re-ordered this method
+                "  int methodDefault() {return 1;};",
+                "  protected int methodProtected(String arg) {return 1;};",
+                "  private int methodPrivate(){return 1;};",
+                "}");
           }
         };
     final MockJavaResource CLASS_DEP_INNER =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  public int fieldPublic;\n");
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            // Added an inner class definition
-            code.append("  public static class IgnoreMe {\n");
-            code.append("    private int ignoreThisMember;\n");
-            code.append("  }\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                "  static public final int fieldPublicStatic = 100;",
+                "  public int fieldPublic;",
+                "  protected int fieldProtected;",
+                "  int fieldDefault;",
+                "  private int fieldPrivate;",
+                "  public int methodPublic() {return 1;};",
+                "  protected int methodProtected(String arg) {return 1;};",
+                "  int methodDefault() {return 1;};",
+                "  private int methodPrivate(){return 1;};",
+                // Added an inner class definition
+                "  public static class IgnoreMe {",
+                "    private int ignoreThisMember;",
+                "  }",
+                "}");
           }
         };
     final MockJavaResource CLASS_DEP_DEPRECATED_FIELD =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  @Deprecated\n");
-            code.append("  public int fieldPublic;\n");
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                "  static public final int fieldPublicStatic = 100;",
+                "  @Deprecated",
+                "  public int fieldPublic;",
+                "  protected int fieldProtected;",
+                "  int fieldDefault;",
+                "  private int fieldPrivate;",
+                "  public int methodPublic() {return 1;};",
+                "  protected int methodProtected(String arg) {return 1;};",
+                "  int methodDefault() {return 1;};",
+                "  private int methodPrivate(){return 1;};",
+                "}");
           }
         };
     final MockJavaResource CLASS_DEP_DEPRECATED_METHOD =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  public int fieldPublic;\n");
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  @Deprecated\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                "  static public final int fieldPublicStatic = 100;",
+                "  public int fieldPublic;",
+                "  protected int fieldProtected;",
+                "  int fieldDefault;",
+                "  private int fieldPrivate;",
+                "  @Deprecated",
+                "  public int methodPublic() {return 1;};",
+                "  protected int methodProtected(String arg) {return 1;};",
+                "  int methodDefault() {return 1;};",
+                "  private int methodPrivate(){return 1;};",
+                "}");
           }
         };
 
     final MockJavaResource CLASS_DEP_ANNOTATED_FIELD =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  @TestAnnotation(\"Foo\")\n");
-            code.append("  public int fieldPublic;\n");
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                "  static public final int fieldPublicStatic = 100;",
+                "  @TestAnnotation(\"Foo\")",
+                "  public int fieldPublic;",
+                "  protected int fieldProtected;",
+                "  int fieldDefault;",
+                "  private int fieldPrivate;",
+                "  public int methodPublic() {return 1;};",
+                "  protected int methodProtected(String arg) {return 1;};",
+                "  int methodDefault() {return 1;};",
+                "  private int methodPrivate(){return 1;};",
+                "}");
           }
         };
     final MockJavaResource CLASS_DEP_ANNOTATED_METHOD =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  public int fieldPublic;\n");
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  @TestAnnotation(\"Foo\")\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                "  static public final int fieldPublicStatic = 100;",
+                "  public int fieldPublic;",
+                "  protected int fieldProtected;",
+                "  int fieldDefault;",
+                "  private int fieldPrivate;",
+                "  @TestAnnotation(\"Foo\")",
+                "  public int methodPublic() {return 1;};",
+                "  protected int methodProtected(String arg) {return 1;};",
+                "  int methodDefault() {return 1;};",
+                "  private int methodPrivate(){return 1;};",
+                "}");
           }
         };
     final MockJavaResource CLASS_DEP_JAVADOC =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  /** a static field */\n");
-            code.append("  static public final int fieldPublicStatic = 100;\n");
-            code.append("  /** a public field */\n");
-            code.append("  public int fieldPublic;\n");
-            code.append("  protected int fieldProtected;\n");
-            code.append("  int fieldDefault;\n");
-            code.append("  private int fieldPrivate;\n");
-            code.append("  /** a public method */\n");
-            code.append("  public int methodPublic() {return 1;};\n");
-            code.append("  protected int methodProtected(String arg) {return 1;};\n");
-            code.append("  int methodDefault() {return 1;};\n");
-            code.append("  private int methodPrivate(){return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                "  /** a static field */",
+                "  static public final int fieldPublicStatic = 100;",
+                "  /** a public field */",
+                "  public int fieldPublic;",
+                "  protected int fieldProtected;",
+                "  int fieldDefault;",
+                "  private int fieldPrivate;",
+                "  /** a public method */",
+                "  public int methodPublic() {return 1;};",
+                "  protected int methodProtected(String arg) {return 1;};",
+                "  int methodDefault() {return 1;};",
+                "  private int methodPrivate(){return 1;};",
+                "}");
           }
         };
 
@@ -327,12 +303,11 @@ public class BytecodeSignatureMakerTest extends CompilationStateTestBase {
         new MockJavaResource("test.TestAnnotation") {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public @interface TestAnnotation {\n");
-            code.append("  String value();");
-            code.append("}\n");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public @interface TestAnnotation {",
+                "  String value();",
+                "}");
           }
         };
     CompiledClass originalClass = buildClass(CLASS_DEP_ORIG);
@@ -365,80 +340,74 @@ public class BytecodeSignatureMakerTest extends CompilationStateTestBase {
         new MockJavaResource("java.lang.IllegalStateException") {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package java.lang;\n");
-            code.append("public class IllegalStateException extends Throwable {}\n");
-            return code;
+            return Joiner.on('\n').join(
+              "package java.lang;",
+              "public class IllegalStateException extends Throwable {}");
           }
         };
     MockJavaResource NUMBER_FORMAT_EXCEPTION =
         new MockJavaResource("java.lang.NumberFormatException") {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package java.lang;\n");
-            code.append("public class NumberFormatException extends Throwable {}\n");
-            return code;
+            return Joiner.on('\n').join(
+                "package java.lang;",
+                "public class NumberFormatException extends Throwable {}");
           }
         };
     MockJavaResource CLASS_DEP_EXCEPTION_ORIG =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  public int methodPublic(String arg) ");
-            code.append("      throws IllegalStateException, NumberFormatException {");
-            code.append("    return 1;\n");
-            code.append("  }\n");
-            code.append("}\n");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                "  public int methodPublic(String arg)",
+                "      throws IllegalStateException, NumberFormatException {",
+                "    return 1;",
+                "  }",
+                "}");
           }
         };
     MockJavaResource CLASS_DEP_EXCEPTION_MOD1 =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            // no exceptions declared
-            code.append("  public int methodPublic(String arg) {return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                // no exceptions declared
+                "  public int methodPublic(String arg) {return 1;};",
+                "}");
           }
         };
     MockJavaResource CLASS_DEP_EXCEPTION_MOD2 =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            // one exception declared
-            code.append("  public int methodPublic(String arg)");
-            code.append("     throws IllegalStateException {");
-            code.append("    return 1;\n");
-            code.append("  }\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                // one exception declared
+                "  public int methodPublic(String arg)",
+                "     throws IllegalStateException {",
+                "    return 1;",
+                "  }",
+                "}");
           }
         };
     MockJavaResource CLASS_DEP_EXCEPTION_MOD3 =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency {\n");
-            code.append("  public int methodPublic(String arg)");
-            // order of declared exceptions is flipped
-            code.append("     throws NumberFormatException, IllegalStateException {");
-            code.append("    return 1;\n");
-            code.append("  }\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency {",
+                "  public int methodPublic(String arg)",
+                // order of declared exceptions is flipped
+                "     throws NumberFormatException, IllegalStateException {",
+                "    return 1;",
+                "  }",
+                "}");
           }
         };
 
@@ -454,28 +423,26 @@ public class BytecodeSignatureMakerTest extends CompilationStateTestBase {
 
   public void testClassDependencySignatureWithGenerics() {
     MockJavaResource CLASS_DEP_GENERIC_ORIG =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("public class ClassDependency<T> {\n");
-            code.append("  public int methodPublic(T arg) {return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "public class ClassDependency<T> {",
+                "  public int methodPublic(T arg) {return 1;};",
+                "}");
           }
         };
     MockJavaResource CLASS_DEP_GENERIC_PARAMETERIZED =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("import java.util.Map;");
-            code.append("public class ClassDependency<T extends Map> {\n");
-            code.append("  public int methodPublic(T arg) {return 1;};\n");
-            code.append("}");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "import java.util.Map;",
+                "public class ClassDependency<T extends Map> {",
+                "  public int methodPublic(T arg) {return 1;};",
+                "}");
           }
         };
     CompiledClass originalClass = buildClass(CLASS_DEP_GENERIC_ORIG);
@@ -485,62 +452,58 @@ public class BytecodeSignatureMakerTest extends CompilationStateTestBase {
 
   public void testClassDependencySignatureWithInterfaces() {
     MockJavaResource CLASS_DEP_INTERFACE_ORIG =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("import java.util.Map;");
-            code.append("import java.util.Collection;");
-            code.append("public class ClassDependency implements Map, Collection {\n");
-            code.append("  public int methodPublic(String arg) { return 1;}\n");
-            code.append("}\n");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "import java.util.Map;",
+                "import java.util.Collection;",
+                "public class ClassDependency implements Map, Collection {",
+                "  public int methodPublic(String arg) { return 1;}",
+                "}");
           }
         };
     MockJavaResource CLASS_DEP_INTERFACE_MOD1 =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("import java.util.Map;");
-            code.append("import java.util.Collection;");
-            // no interfaces
-            code.append("public class ClassDependency {\n");
-            code.append("  public int methodPublic(String arg) { return 1;}\n");
-            code.append("}\n");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "import java.util.Map;",
+                "import java.util.Collection;",
+                // no interfaces
+                "public class ClassDependency {",
+                "  public int methodPublic(String arg) { return 1;}",
+                "}");
           }
         };
     MockJavaResource CLASS_DEP_INTERFACE_MOD2 =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("import java.util.Map;");
-            code.append("import java.util.Collection;");
-            // only one interface
-            code.append("public class ClassDependency implements Map {\n");
-            code.append("  public int methodPublic(String arg) { return 1;}\n");
-            code.append("}\n");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "import java.util.Map;",
+                "import java.util.Collection;",
+                // only one interface
+                "public class ClassDependency implements Map {",
+                "  public int methodPublic(String arg) { return 1;}",
+                "}");
           }
         };
     MockJavaResource CLASS_DEP_INTERFACE_MOD3 =
-        new MockJavaResource(CLASS_DEP_TYPE_NAME) {
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
           @Override
           public CharSequence getContent() {
-            StringBuilder code = new StringBuilder();
-            code.append("package test;\n");
-            code.append("import java.util.Map;");
-            code.append("import java.util.Collection;");
-            // flipped order of interface decls
-            code.append("public class ClassDependency implements Collection, Map {\n");
-            code.append("  public int methodPublic(String arg) { return 1;}\n");
-            code.append("}\n");
-            return code;
+            return Joiner.on('\n').join(
+                "package test;",
+                "import java.util.Map;",
+                "import java.util.Collection;",
+                // flipped order of interface decls
+                "public class ClassDependency implements Collection, Map {",
+                "  public int methodPublic(String arg) { return 1;}",
+                "}");
           }
         };
     CompiledClass originalClass = buildClass(CLASS_DEP_INTERFACE_ORIG);
@@ -549,6 +512,36 @@ public class BytecodeSignatureMakerTest extends CompilationStateTestBase {
     assertSignaturesNotEqual(originalClass,
         buildClass(CLASS_DEP_INTERFACE_MOD2));
     assertSignaturesEqual(originalClass, buildClass(CLASS_DEP_INTERFACE_MOD3));
+  }
+
+  public void testVarargChangesSignature() {
+    MockJavaResource CLASS_WITH_VARARG =
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
+          @Override
+          public CharSequence getContent() {
+            return Joiner.on('\n').join(
+                "package test;",
+                "import java.util.Map;",
+                "import java.util.Collection;",
+                "public class ClassDependency {",
+                "  public int methodPublic(String... arg) { return 1;}",
+                "}");
+          }
+        };
+    MockJavaResource CLASS_WITH_NOVARARG =
+        new MockJavaResource(TEST_CLASS_DEPENDENCY) {
+          @Override
+          public CharSequence getContent() {
+            return Joiner.on('\n').join(
+                "package test;",
+                "import java.util.Map;",
+                "import java.util.Collection;",
+                "public class ClassDependency {",
+                "  public int methodPublic(String[] arg) { return 1;}",
+                "}");
+          }
+        };
+    assertSignaturesNotEqual(buildClass(CLASS_WITH_NOVARARG), buildClass(CLASS_WITH_VARARG));
   }
 
   private void assertSignaturesEqual(CompiledClass original,

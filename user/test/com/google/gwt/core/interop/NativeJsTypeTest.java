@@ -490,4 +490,26 @@ public class NativeJsTypeTest extends GWTTestCase {
     assertFalse(error instanceof JavaScriptObject);
     assertTrue(error.toString().contains(ERROR_FROM_NATIVE_ERROR_SUBCLASS));
   }
+
+  @JsType(isNative = true)
+  interface InterfaceWithOverlay {
+
+    @JsProperty
+    int getLength();
+
+    @JsOverlay
+    default int len() {
+      return this.getLength();
+    }
+  }
+
+  @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+  static abstract class SubclassImplementingInterfaceWithOverlay implements InterfaceWithOverlay {
+  }
+
+  public void testInterfaceWithOverlayAndNativeSubclass() {
+    SubclassImplementingInterfaceWithOverlay object =
+        (SubclassImplementingInterfaceWithOverlay) (Object) new int[]{1, 2, 3};
+    assertEquals(3, object.len());
+  }
 }

@@ -49,7 +49,9 @@ public class BytecodeSignatureMaker {
      */
     private static final int ACCESS_FILTER_MASK =
         ~(Opcodes.ACC_DEPRECATED | Opcodes.ACC_NATIVE | Opcodes.ACC_STRICT
-            | Opcodes.ACC_SYNCHRONIZED | Opcodes.ACC_SUPER | Opcodes.ACC_TRANSIENT | Opcodes.ACC_VOLATILE);
+            | Opcodes.ACC_SYNCHRONIZED | Opcodes.ACC_SUPER | Opcodes.ACC_TRANSIENT
+            | Opcodes.ACC_VOLATILE)
+        | Opcodes.ACC_VARARGS;
 
     private String header;
     private Map<String, String> fields = new HashMap<String, String>();

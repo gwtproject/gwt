@@ -2190,8 +2190,23 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  public native void m(Object o);",
         "  public native void m(Object[] o);",
         "}",
-        "@JsType public static class Buggy extends Super {",
+        "public static class Buggy extends Super {",
         "  public void n(Object o) { }",
+        "}");
+
+    assertBuggySucceeds();
+  }
+
+  public void testClassesExtendingNativeJsTypeWithOverlaySucceeds() throws Exception {
+    addSnippetImport("jsinterop.annotations.JsOverlay");
+    addSnippetImport("jsinterop.annotations.JsType");
+    addSnippetClassDecl(
+        "@JsType(isNative=true) interface Super {",
+        "  @JsOverlay default void fun() {}",
+        "}",
+        "@JsType(isNative=true) abstract static class Buggy implements Super {",
+        "}",
+        "static class JavaSubclass implements Super {",
         "}");
 
     assertBuggySucceeds();

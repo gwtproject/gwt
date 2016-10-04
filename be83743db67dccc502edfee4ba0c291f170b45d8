@@ -33,6 +33,24 @@
       "revId": "be83743db67dccc502edfee4ba0c291f170b45d8",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ba8938_cf6c3dfd",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/JsInteropRestrictionCheckerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2209,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-10-04T21:45:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4267e99f_6acb9716",
+      "revId": "be83743db67dccc502edfee4ba0c291f170b45d8",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

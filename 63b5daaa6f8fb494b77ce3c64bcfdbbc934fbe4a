@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42ba8938_f5e2b0c0",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/BytecodeSignatureMakerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-10-04T22:39:49Z",
+      "side": 1,
+      "message": "[info] First sentence should end with a period.",
+      "revId": "63b5daaa6f8fb494b77ce3c64bcfdbbc934fbe4a",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

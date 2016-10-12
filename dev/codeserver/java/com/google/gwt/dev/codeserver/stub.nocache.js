@@ -21,7 +21,7 @@
   // document.head does not exist in IE8
   var $head = $doc.head || $doc.getElementsByTagName('head')[0];
   // Compute some codeserver urls so as the user does not need bookmarklets
-  var hostName = $wnd.location.hostname;
+  var hostName = '__BIND_ADDRESS__';
   var serverUrl = 'http://' + hostName + ':__SUPERDEV_PORT__';
   var module = '__MODULE_NAME__';
   var nocacheUrl = serverUrl + '/recompile-requester/' + module;

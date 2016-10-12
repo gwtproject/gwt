@@ -123,6 +123,7 @@ class LauncherDir {
     URL url = Resources.getResource(Recompiler.class, "stub.nocache.js");
     final String template = Resources.toString(url, Charsets.UTF_8);
     return template
+        .replace("__BIND_ADDRESS__", options.getBindAddress())
         .replace("__MODULE_NAME__", outputModuleName)
         .replace("__SUPERDEV_PORT__", String.valueOf(options.getPort()));
   }

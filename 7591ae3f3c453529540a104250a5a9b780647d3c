@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ca016a6_d1f3a4f7",
+        "filename": "dev/codeserver/java/com/google/gwt/dev/codeserver/LauncherDir.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5625
+      },
+      "writtenOn": "2016-10-12T22:35:51Z",
+      "side": 1,
+      "message": "providing 0.0.0.0 creates an error.",
+      "revId": "7591ae3f3c453529540a104250a5a9b780647d3c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

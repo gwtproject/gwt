@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ccef2f0_682c23b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5055
+      },
+      "writtenOn": "2016-10-16T20:21:01Z",
+      "side": 1,
+      "message": "Could you elaborate when and why this issue happens, or maybe link to an issue in github. \nBasically I want to know a way to reproduce the problem without the patch to verify that the patch fixes it.",
+      "revId": "b0e1c08fed765339fe82dda8f5fa8992357bf730",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

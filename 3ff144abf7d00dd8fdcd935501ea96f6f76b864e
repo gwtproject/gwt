@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c8e3bb3_c6c1b81e",
+        "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-10-21T09:16:16Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "3ff144abf7d00dd8fdcd935501ea96f6f76b864e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c8e3bb3_e6c6b433",
+        "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-10-21T09:16:16Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "3ff144abf7d00dd8fdcd935501ea96f6f76b864e",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

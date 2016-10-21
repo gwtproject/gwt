@@ -45,6 +45,35 @@ public final class UriUtils {
     GWT.isScript() ? RegExp.compile("%5D", "g") : null;
 
   /**
+   * Set this system property to add additional schemes which should be treated
+   * as safe.
+   * You can provide multiple values by separating them by ','.
+   * <p>
+   * The following schemes are always treated as safe:
+   * http, https, ftp, mailto and tel.
+   */
+  public static final String PROPERTY_ADDITIONAL_SAFE_SCHEMES =
+    "gwt.uriUtils.additionalSafeSchemes";
+
+  private static String[] additionalSafeSchemes = new String[0];
+
+  public static void initAdditionalSafeSchemes() {
+    final String additionalSafeSchemesString = System.getProperty(PROPERTY_ADDITIONAL_SAFE_SCHEMES);
+
+    if (additionalSafeSchemesString != null && !additionalSafeSchemesString.isEmpty()) {
+      additionalSafeSchemes = additionalSafeSchemesString.split(",");
+
+      for (int index = 0; index < additionalSafeSchemes.length; ++index) {
+        additionalSafeSchemes[index] = additionalSafeSchemes[index].trim().toLowerCase(Locale.ROOT);
+      }
+    }
+  }
+
+  static {
+    initAdditionalSafeSchemes();
+  }
+
+  /**
    * Encodes the URL.
    * <p>
    * In client code, this method delegates to {@link URL#encode(String)} and
@@ -225,19 +254,21 @@ public final class UriUtils {
     if (scheme == null) {
       return true;
     }
-    /*
-     * Special care is be taken with case-insensitive 'i' in the Turkish locale.
-     * i -> to upper in Turkish locale -> İ
-     * I -> to lower in Turkish locale -> ı
-     * For this reason there are two checks for mailto: "mailto" and "MAILTO"
-     * For details, see: http://www.i18nguy.com/unicode/turkish-i18n.html
-     */
+
     String schemeLc = scheme.toLowerCase(Locale.ROOT);
+
+    for (String additionalSafeScheme : additionalSafeSchemes) {
+
+      if (additionalSafeScheme.equals(schemeLc)) {
+        return true;
+      }
+    }
+
     return ("http".equals(schemeLc)
         || "https".equals(schemeLc)
         || "ftp".equals(schemeLc)
         || "mailto".equals(schemeLc)
-        || "MAILTO".equals(scheme.toUpperCase(Locale.ROOT)));
+        || "tel".equals(schemeLc));
   }
 
   /**

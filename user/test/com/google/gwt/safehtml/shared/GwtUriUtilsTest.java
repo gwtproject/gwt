@@ -26,6 +26,7 @@ public class GwtUriUtilsTest extends GWTTestCase {
   static final String INVALID_URL_UNPAIRED_SURROGATE = "a\uD800b";
   static final String JAVASCRIPT_URL = "javascript:alert('BOOM!');";
   static final String MAILTO_URL = "mailto:foo@example.com?subject=Hello%20world!";
+  static final String TEL_URL = "tel:+16502530000";
   static final String CONSTANT_URL =
       "http://gwt.google.com/samples/Showcase/Showcase.html?locale=fr#!CwCheckBox";
   static final String EMPTY_GIF_DATA_URL =
@@ -96,6 +97,7 @@ public class GwtUriUtilsTest extends GWTTestCase {
   public void testFromTrustedString() {
     assertEquals(CONSTANT_URL, UriUtils.fromTrustedString(CONSTANT_URL).asString());
     assertEquals(MAILTO_URL, UriUtils.fromTrustedString(MAILTO_URL).asString());
+    assertEquals(TEL_URL, UriUtils.fromTrustedString(TEL_URL).asString());
     assertEquals(EMPTY_GIF_DATA_URL, UriUtils.fromTrustedString(EMPTY_GIF_DATA_URL).asString());
     assertEquals(LONG_DATA_URL, UriUtils.fromTrustedString(LONG_DATA_URL).asString());
     assertEquals(JAVASCRIPT_URL, UriUtils.fromTrustedString(JAVASCRIPT_URL).asString());
@@ -125,6 +127,7 @@ public class GwtUriUtilsTest extends GWTTestCase {
   public void testUnsafeCastFromUntrustedString() {
     assertEquals(CONSTANT_URL, UriUtils.unsafeCastFromUntrustedString(CONSTANT_URL).asString());
     assertEquals(MAILTO_URL, UriUtils.unsafeCastFromUntrustedString(MAILTO_URL).asString());
+    assertEquals(TEL_URL, UriUtils.unsafeCastFromUntrustedString(TEL_URL).asString());
     assertEquals(EMPTY_GIF_DATA_URL, UriUtils.unsafeCastFromUntrustedString(EMPTY_GIF_DATA_URL)
         .asString());
     assertEquals(JAVASCRIPT_URL, UriUtils.unsafeCastFromUntrustedString(JAVASCRIPT_URL).asString());
@@ -141,6 +144,7 @@ public class GwtUriUtilsTest extends GWTTestCase {
   public void testFromString() {
     assertEquals(CONSTANT_URL, UriUtils.fromString(CONSTANT_URL).asString());
     assertEquals(MAILTO_URL, UriUtils.fromString(MAILTO_URL).asString());
+    assertEquals(TEL_URL, UriUtils.fromString(TEL_URL).asString());
     assertEquals(UriUtils.sanitizeUri(EMPTY_GIF_DATA_URL),
         UriUtils.fromString(EMPTY_GIF_DATA_URL).asString());
     assertEquals(UriUtils.sanitizeUri(JAVASCRIPT_URL),

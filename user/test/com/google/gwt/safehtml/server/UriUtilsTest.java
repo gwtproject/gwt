@@ -159,6 +159,11 @@ public class UriUtilsTest extends TestCase {
     for (UriTestCaseSpec uriSpec : BAD_URIS) {
       assertFalse(UriUtils.isSafeUri(uriSpec.getUri()));
     }
+    System.setProperty(UriUtils.PROPERTY_ADDITIONAL_SAFE_SCHEMES, null);
+    assertFalse(UriUtils.isSafeUri("javascript:evil"));
+    System.setProperty(UriUtils.PROPERTY_ADDITIONAL_SAFE_SCHEMES, "javascript");
+    assertTrue(UriUtils.isSafeUri("javascript:evil"));
+    System.setProperty(UriUtils.PROPERTY_ADDITIONAL_SAFE_SCHEMES, null);
   }
 
   public static void testSanitizeUri() {

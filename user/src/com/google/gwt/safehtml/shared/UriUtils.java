@@ -45,6 +45,16 @@ public final class UriUtils {
     GWT.isScript() ? RegExp.compile("%5D", "g") : null;
 
   /**
+   * Set this system property to add additional schemes which should be treated
+   * as safe.
+   * You can provide multiple values by separating them by ','.
+   * The following schemes are always treated as safe:
+   * http, https, ftp, mailto and tel.
+   */
+  public static final String PROPERTY_ADDITIONAL_SAFE_SCHEMES =
+    "gwt.uriUtils.additionalSafeSchemes";
+
+  /**
    * Encodes the URL.
    * <p>
    * In client code, this method delegates to {@link URL#encode(String)} and
@@ -233,11 +243,38 @@ public final class UriUtils {
      * For details, see: http://www.i18nguy.com/unicode/turkish-i18n.html
      */
     String schemeLc = scheme.toLowerCase(Locale.ROOT);
+
+    final String additionalSafeSchemes = System.getProperty(PROPERTY_ADDITIONAL_SAFE_SCHEMES);
+
+    if (additionalSafeSchemes != null && !additionalSafeSchemes.isEmpty()) {
+
+      for (String additionalSafeScheme : additionalSafeSchemes.split(",")) {
+        additionalSafeScheme = additionalSafeScheme.trim();
+        final String additionalSafeSchemeLc = additionalSafeScheme.toLowerCase(Locale.ROOT);
+
+        if (additionalSafeSchemeLc.equals(schemeLc)) {
+          return true;
+        }
+
+        if (additionalSafeSchemeLc.contains("i")) {
+
+          if (additionalSafeScheme.toUpperCase(Locale.ROOT)
+              .equals(scheme.toUpperCase(Locale.ROOT))) {
+            return true;
+          }
+
+        }
+
+      }
+
+    }
+
     return ("http".equals(schemeLc)
         || "https".equals(schemeLc)
         || "ftp".equals(schemeLc)
         || "mailto".equals(schemeLc)
-        || "MAILTO".equals(scheme.toUpperCase(Locale.ROOT)));
+        || "MAILTO".equals(scheme.toUpperCase(Locale.ROOT))
+        || "tel".equals(schemeLc));
   }
 
   /**

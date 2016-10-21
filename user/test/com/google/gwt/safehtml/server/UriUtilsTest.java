@@ -106,8 +106,9 @@ public class UriUtilsTest extends TestCase {
     goodUris.add(new UriTestCaseSpec("http://foo.com/bar", "http"));
     goodUris.add(new UriTestCaseSpec("http://foo.com/bar#baz", "http"));
 
-    // URIs with https, ftp, mailto scheme.
+    // URIs with https, ftp, mailto, tel scheme.
     goodUris.add(new UriTestCaseSpec("mailto:good@good.com", "mailto"));
+    goodUris.add(new UriTestCaseSpec("tel:+16502530000", "tel"));
     goodUris.add(new UriTestCaseSpec("https://foo.com", "https"));
     goodUris.add(new UriTestCaseSpec("ftp://foo.com", "ftp"));
 
@@ -158,6 +159,26 @@ public class UriUtilsTest extends TestCase {
     }
     for (UriTestCaseSpec uriSpec : BAD_URIS) {
       assertFalse(UriUtils.isSafeUri(uriSpec.getUri()));
+    }
+
+    final String additionalSafeSchemesBackup =
+      System.getProperty(UriUtils.PROPERTY_ADDITIONAL_SAFE_SCHEMES);
+    try {
+      System.setProperty(UriUtils.PROPERTY_ADDITIONAL_SAFE_SCHEMES, null);
+      UriUtils.initAdditionalSafeSchemes();
+      assertFalse(UriUtils.isSafeUri("javascript:evil"));
+      assertFalse(UriUtils.isSafeUri("javascript2:evil"));
+      System.setProperty(UriUtils.PROPERTY_ADDITIONAL_SAFE_SCHEMES, "javascript");
+      UriUtils.initAdditionalSafeSchemes();
+      assertTrue(UriUtils.isSafeUri("javascript:evil"));
+      assertFalse(UriUtils.isSafeUri("javascript2:evil"));
+      System.setProperty(UriUtils.PROPERTY_ADDITIONAL_SAFE_SCHEMES, "javascript,javascript2");
+      UriUtils.initAdditionalSafeSchemes();
+      assertTrue(UriUtils.isSafeUri("javascript:evil"));
+      assertTrue(UriUtils.isSafeUri("javascript2:evil"));
+    } finally {
+      System.setProperty(UriUtils.PROPERTY_ADDITIONAL_SAFE_SCHEMES, additionalSafeSchemesBackup);
+      UriUtils.initAdditionalSafeSchemes();
     }
   }
 

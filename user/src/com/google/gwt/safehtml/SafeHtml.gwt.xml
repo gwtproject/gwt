@@ -26,4 +26,6 @@
   <generate-with class="com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator">
     <when-type-assignable class="com.google.gwt.safehtml.client.SafeHtmlTemplates"/>
   </generate-with>
+  <define-configuration-property name="gwt.uriUtils.additionalSafeSchemes" is-multi-valued="false"/>
+  <set-configuration-property name="gwt.uriUtils.additionalSafeSchemes" value="" />
 </module>

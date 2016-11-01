@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6619660e_974ac49a",
+        "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-11-01T20:45:34Z",
+      "side": 1,
+      "message": "Given all the added overloads are public API I would prefer only allowing non-null parameters. If there are no extra allowed schemas, the call site should provide an empty set instead of null.",
+      "range": {
+        "startLine": 273,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 38
+      },
+      "revId": "ecc93c2dc653b6fc593ee962de5f92c5bea4f43f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6619660e_d7403c7e",
+        "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-11-01T20:45:34Z",
+      "side": 1,
+      "message": "IMHO it should fail if the list contains null values, thus I would remove these lines to force NPE.",
+      "range": {
+        "startLine": 277,
+        "startChar": 8,
+        "endLine": 279,
+        "endChar": 9
+      },
+      "revId": "ecc93c2dc653b6fc593ee962de5f92c5bea4f43f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -22,7 +22,9 @@ import com.google.gwt.safehtml.shared.annotations.IsSafeUri;
 import com.google.gwt.safehtml.shared.annotations.SuppressIsSafeUriCastCheck;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Collections;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * Utility class containing static methods for validating and sanitizing URIs.
@@ -188,7 +190,22 @@ public final class UriUtils {
    * @return a SafeUri instance
    */
   public static SafeUri fromString(String s) {
-    return new SafeUriString(sanitizeUri(s));
+    return fromString(s, Collections.<String> emptySet());
+  }
+
+  /**
+   * Returns a {@link SafeUri} obtained by sanitizing the provided string.
+   *
+   * <p>
+   * The input string is sanitized using {@link #sanitizeUri(String)}.
+   *
+   * @param s the input String
+   * @param extraAllowedSchemes extra allowed schemes (e.g. 'tel');
+   *        must be non-null; every scheme must be non-null and lowercase
+   * @return a SafeUri instance
+   */
+  public static SafeUri fromString(String s, Set<String> extraAllowedSchemes) {
+    return new SafeUriString(sanitizeUri(s, extraAllowedSchemes));
   }
 
   /**
@@ -221,23 +238,38 @@ public final class UriUtils {
    *         false} otherwise
    */
   public static boolean isSafeUri(String uri) {
+    return isSafeUri(uri, Collections.<String> emptySet());
+  }
+
+  /**
+   * Determines if a {@link String} is safe to use as the value of a URI-valued
+   * HTML attribute such as {@code src} or {@code href}.
+   *
+   * <p>
+   * In this context, a URI is safe if it can be established that using it as
+   * the value of a URI-valued HTML attribute such as {@code src} or {@code
+   * href} cannot result in script execution. Specifically, this method deems a
+   * URI safe if it either does not have a scheme, or its scheme is one of
+   * {@code http, https, ftp, mailto}.
+   *
+   * @param uri the URI to validate
+   * @param extraAllowedSchemes extra allowed schemes (e.g. 'tel');
+   *        must be non-null; every scheme must be non-null and lowercase
+   * @return {@code true} if {@code uri} is safe in the above sense; {@code
+   *         false} otherwise
+   */
+  public static boolean isSafeUri(String uri, Set<String> extraAllowedSchemes) {
     String scheme = extractScheme(uri);
     if (scheme == null) {
       return true;
     }
-    /*
-     * Special care is be taken with case-insensitive 'i' in the Turkish locale.
-     * i -> to upper in Turkish locale -> İ
-     * I -> to lower in Turkish locale -> ı
-     * For this reason there are two checks for mailto: "mailto" and "MAILTO"
-     * For details, see: http://www.i18nguy.com/unicode/turkish-i18n.html
-     */
+
     String schemeLc = scheme.toLowerCase(Locale.ROOT);
     return ("http".equals(schemeLc)
         || "https".equals(schemeLc)
         || "ftp".equals(schemeLc)
         || "mailto".equals(schemeLc)
-        || "MAILTO".equals(scheme.toUpperCase(Locale.ROOT)));
+        || extraAllowedSchemes.contains(schemeLc));
   }
 
   /**
@@ -254,7 +286,26 @@ public final class UriUtils {
   @IsSafeUri
   @SuppressIsSafeUriCastCheck
   public static String sanitizeUri(String uri) {
-    if (isSafeUri(uri)) {
+    return sanitizeUri(uri, Collections.<String> emptySet());
+  }
+
+  /**
+   * Sanitizes a URI.
+   *
+   * <p>
+   * This method returns the URI provided if it is safe to use as the value
+   * of a URI-valued HTML attribute according to {@link #isSafeUri}, or the URI
+   * "{@code #}" otherwise.
+   *
+   * @param uri the URI to sanitize
+   * @param extraAllowedSchemes extra allowed schemes (e.g. 'tel');
+   *        must be non-null; every scheme must be non-null and lowercase
+   * @return a sanitized String
+   */
+  @IsSafeUri
+  @SuppressIsSafeUriCastCheck
+  public static String sanitizeUri(String uri, Set<String> extraAllowedSchemes) {
+    if (isSafeUri(uri, extraAllowedSchemes)) {
       return encodeAllowEscapes(uri);
     } else {
       return "#";

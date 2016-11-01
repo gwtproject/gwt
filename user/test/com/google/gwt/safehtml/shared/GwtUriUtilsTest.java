@@ -47,6 +47,12 @@ public class GwtUriUtilsTest extends GWTTestCase {
           + "j4+fn5+vr6+/v7/Pz8/f39/v7+////AADF2QAAAAJ0Uk5T/wDltzBKAAAAH0lEQVR42mJghAAGGJ0GAQyMYAok"
           + "DqLA8mlI6gACDAC8pAaCn/ezogAAAABJRU5ErkJggg==";
 
+  // the telephone scheme
+  static final String TEL_SCHEME = "tel";
+
+  // a telephone URL
+  static final String TEL_URL = "tel:+15551212";
+
   public void testEncode_noEscape() {
     StringBuilder sb = new StringBuilder(UriUtils.DONT_NEED_ENCODING);
     final int upcaseOffset = 'A' - 'a';
@@ -99,6 +105,7 @@ public class GwtUriUtilsTest extends GWTTestCase {
     assertEquals(EMPTY_GIF_DATA_URL, UriUtils.fromTrustedString(EMPTY_GIF_DATA_URL).asString());
     assertEquals(LONG_DATA_URL, UriUtils.fromTrustedString(LONG_DATA_URL).asString());
     assertEquals(JAVASCRIPT_URL, UriUtils.fromTrustedString(JAVASCRIPT_URL).asString());
+    assertEquals(TEL_URL, UriUtils.fromTrustedString(TEL_URL).asString());
     if (GWT.isClient()) {
       assertEquals(GWT.getModuleBaseURL(),
           UriUtils.fromTrustedString(GWT.getModuleBaseURL()).asString());
@@ -130,6 +137,7 @@ public class GwtUriUtilsTest extends GWTTestCase {
     assertEquals(JAVASCRIPT_URL, UriUtils.unsafeCastFromUntrustedString(JAVASCRIPT_URL).asString());
     assertEquals(INVALID_URL_UNPAIRED_SURROGATE,
         UriUtils.unsafeCastFromUntrustedString(INVALID_URL_UNPAIRED_SURROGATE).asString());
+    assertEquals(TEL_URL, UriUtils.unsafeCastFromUntrustedString(TEL_URL).asString());
     if (GWT.isClient()) {
       assertEquals(GWT.getModuleBaseURL(), UriUtils.unsafeCastFromUntrustedString(
           GWT.getModuleBaseURL()).asString());
@@ -145,6 +153,13 @@ public class GwtUriUtilsTest extends GWTTestCase {
         UriUtils.fromString(EMPTY_GIF_DATA_URL).asString());
     assertEquals(UriUtils.sanitizeUri(JAVASCRIPT_URL),
         UriUtils.fromString(JAVASCRIPT_URL).asString());
+    assertEquals(UriUtils.sanitizeUri(TEL_URL), UriUtils.fromString(TEL_URL).asString());
+    assertNotEquals(UriUtils.sanitizeUri(TEL_URL),
+        UriUtils.fromString(TEL_URL, Collections.singleton(TEL_SCHEME)).asString());
+    assertNotEquals(UriUtils.sanitizeUri(TEL_URL, Collections.singleton(TEL_SCHEME)),
+        UriUtils.fromString(TEL_URL).asString());
+    assertEquals(UriUtils.sanitizeUri(TEL_URL, Collections.singleton(TEL_SCHEME)),
+        UriUtils.fromString(TEL_URL, Collections.singleton(TEL_SCHEME)).asString());
     if (GWT.isClient()) {
       assertEquals(GWT.getModuleBaseURL(),
           UriUtils.fromString(GWT.getModuleBaseURL()).asString());

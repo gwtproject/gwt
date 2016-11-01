@@ -132,6 +132,9 @@ public class UriUtilsTest extends TestCase {
     BAD_URIS = Collections.unmodifiableList(badUris);
   }
 
+  // a telephone URI
+  private static final UriTestCaseSpec TEL_URI = new UriTestCaseSpec("tel:+15551212", "tel");
+
   public static void testExtractScheme() {
     for (UriTestCaseSpec uriSpec : GOOD_URIS) {
       assertEquals(
@@ -159,6 +162,8 @@ public class UriUtilsTest extends TestCase {
     for (UriTestCaseSpec uriSpec : BAD_URIS) {
       assertFalse(UriUtils.isSafeUri(uriSpec.getUri()));
     }
+    assertFalse(UriUtils.isSafeUri(TEL_URI.getUri()));
+    assertTrue(UriUtils.isSafeUri(TEL_URI.getUri(), Collections.singleton(TEL_URI.getScheme())));
   }
 
   public static void testSanitizeUri() {
@@ -168,5 +173,8 @@ public class UriUtilsTest extends TestCase {
     for (UriTestCaseSpec uriSpec : BAD_URIS) {
       assertEquals("#", UriUtils.sanitizeUri(uriSpec.getUri()));
     }
+    assertEquals("#", UriUtils.sanitizeUri(TEL_URI.getUri()));
+    assertEquals(TEL_URI.getUri(),
+        UriUtils.sanitizeUri(TEL_URI.getUri(), Collections.singleton(TEL_URI.getScheme())));
   }
 }

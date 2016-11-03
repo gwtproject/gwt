@@ -165,14 +165,14 @@ public class JSONParser {
     var v;
     if (strict) {
       try {
-        v = JSON.parse(json);
+        v = $wnd.JSON.parse(json);
       } catch (e) {
         return @com.google.gwt.json.client.JSONParser::throwJSONException(Ljava/lang/String;)("Error parsing JSON: " + e);
       }
     } else {
       json = @com.google.gwt.core.client.JsonUtils::escapeJsonForEval(Ljava/lang/String;)(json);
       try {
-        v = eval('(' + json + ')');
+        v = $wnd.eval('(' + json + ')');
       } catch (e) { 
         return @com.google.gwt.json.client.JSONParser::throwJSONException(Ljava/lang/String;)("Error parsing JSON: " + e);
       }

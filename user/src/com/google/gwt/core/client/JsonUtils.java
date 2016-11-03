@@ -24,7 +24,7 @@ public class JsonUtils {
    * Converts a value to JSON.
    */
   public static native String stringify(JavaScriptObject obj) /*-{
-    return JSON.stringify(obj);
+    return $wnd.JSON.stringify(obj);
   }-*/;
 
   /**
@@ -34,7 +34,7 @@ public class JsonUtils {
    *        will each be indented by this string (or the first ten characters of it).
    */
   public static native String stringify(JavaScriptObject obj, String space) /*-{
-    return JSON.stringify(obj, null, space);
+    return $wnd.JSON.stringify(obj, null, space);
   }-*/;
 
   /**
@@ -72,7 +72,7 @@ public class JsonUtils {
    */
   public static native <T extends JavaScriptObject> T safeEval(String json) /*-{
     try {
-      return JSON.parse(json);
+      return $wnd.JSON.parse(json);
     } catch (e) {
       return @JsonUtils::throwIllegalArgumentException(*)("Error parsing JSON: " + e, json);
     }

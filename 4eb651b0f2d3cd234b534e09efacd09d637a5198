@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66d32697_93da5fcc",
+        "filename": "user/src/com/google/gwt/json/client/JSONParser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-11-03T19:28:46Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 122).",
+      "revId": "4eb651b0f2d3cd234b534e09efacd09d637a5198",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66d32697_73d7eba3",
+        "filename": "user/src/com/google/gwt/json/client/JSONParser.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-11-03T19:28:46Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 122).",
+      "revId": "4eb651b0f2d3cd234b534e09efacd09d637a5198",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

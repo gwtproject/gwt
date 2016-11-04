@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66d32697_84397796",
+        "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1715,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-11-04T00:47:35Z",
+      "side": 1,
+      "message": "pls fix formatting",
+      "range": {
+        "startLine": 1712,
+        "startChar": 0,
+        "endLine": 1715,
+        "endChar": 3
+      },
+      "revId": "1ee77487a7877353152a9bb7f1a7a8dbebff8b54",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

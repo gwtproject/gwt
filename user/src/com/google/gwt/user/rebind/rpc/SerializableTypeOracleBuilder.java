@@ -1249,7 +1249,7 @@ public class SerializableTypeOracleBuilder {
       TypePath subtypePath = TypePaths.createSubtypePath(path, candidate, originalType);
       TypeInfoComputed tic = ensureTypeInfoComputed(candidate, subtypePath);
       if (tic.isDone()) {
-        if (tic.isInstantiable()) {
+        if (tic.hasInstantiableSubtypes()) {
           anySubtypes = true;
           instSubtypes.add(candidate);
         }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b64332d_77774a7e",
+        "filename": "user/test/com/google/gwt/safehtml/server/UriUtilsTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-11-08T16:41:04Z",
+      "side": 1,
+      "message": "Just noticed this value; we should probably use a fictitious phone number here: https://en.wikipedia.org/wiki/Fictitious_telephone_number (though Google themselves use this number in their libphonenumber tests, so… anyway, we probably shouldn\u0027t be using Google\u0027s phone number without their approval)",
+      "range": {
+        "startLine": 136,
+        "startChar": 75,
+        "endLine": 136,
+        "endChar": 86
+      },
+      "revId": "96646d67cfdcfb2660ace4a703ffb27f73441d77",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

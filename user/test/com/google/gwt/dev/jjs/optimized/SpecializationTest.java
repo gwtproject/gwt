@@ -55,6 +55,21 @@ public class SpecializationTest extends GWTTestCase {
     }
   }
 
+  static class TestStaticImpl {
+    @SpecializeMethod(params = {String.class, Object.class}, target = "putString")
+    public static void put(Object k, Object v) {
+      if (k instanceof String) {
+        putString((String) k, v); // keeps putString from being pruned
+      }
+      throw new RuntimeException(MSG);
+    }
+
+    private static void putString(String k, Object v) {
+      assertEquals(KEY, k);
+      assertEquals(VALUE, v);
+    }
+  }
+
   @Override
   public String getModuleName() {
     return "com.google.gwt.dev.jjs.CompilerSuiteOptimized";
@@ -78,6 +93,24 @@ public class SpecializationTest extends GWTTestCase {
     TestImpl<Integer, Object> succ = new TestImpl<>();
     try {
       succ.put(42, VALUE);
+      fail();
+    } catch (Exception t) {
+      // swallow failure, we expect put() is called normally
+      assertEquals(MSG, t.getMessage());
+    }
+  }
+
+  public void testStaticSpecialization() {
+    try {
+      TestStaticImpl.put("key", VALUE);
+    } catch (Exception e) {
+      fail(e.getMessage());
+    }
+  }
+
+  public void testStaticSpecializationFallback() {
+    try {
+      TestStaticImpl.put(42, VALUE);
       fail();
     } catch (Exception t) {
       // swallow failure, we expect put() is called normally

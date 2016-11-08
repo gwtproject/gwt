@@ -39,6 +39,30 @@
       "revId": "bc175129a41b02e909ab18ff63a5f4539918769d",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b64332d_d720de63",
+        "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 8765
+      },
+      "writtenOn": "2016-11-08T17:31:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b1c6baf_a9b4d91f",
+      "range": {
+        "startLine": 259,
+        "startChar": 12,
+        "endLine": 259,
+        "endChar": 73
+      },
+      "revId": "bc175129a41b02e909ab18ff63a5f4539918769d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

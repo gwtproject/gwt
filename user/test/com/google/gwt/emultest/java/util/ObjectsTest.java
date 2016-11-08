@@ -32,6 +32,7 @@ public class ObjectsTest extends GWTTestCase {
 
   public void testCompare() {
     Comparator<Integer> intComparator = new Comparator<Integer>() {
+      @SuppressWarnings("NumberEquality")
       @Override
       public int compare(Integer a, Integer b) {
         if (a == b) {
@@ -76,17 +77,30 @@ public class ObjectsTest extends GWTTestCase {
 
   public void testEquals() {
     assertTrue(Objects.equals(null, null));
-    assertFalse(Objects.equals(null, "not null"));
-    assertFalse(Objects.equals("not null", null));
     assertFalse(Objects.equals(new Object(), new Object()));
 
     Object obj = new Object();
     assertTrue(Objects.equals(obj, obj));
   }
 
+  public void testStringEquality() {
+    assertTrue(Objects.equals(hideFromCompiler("a"), hideFromCompiler("a")));
+    assertFalse(Objects.equals(hideFromCompiler("a"), hideFromCompiler("b")));
+    assertFalse(Objects.equals(null, "not null"));
+    assertFalse(Objects.equals("not null", null));
+  }
+
   public void testHashCode() {
     assertEquals(0, Objects.hashCode(null));
     Object obj = new Object();
     assertEquals(obj.hashCode(), Objects.hashCode(obj));
+  }
+
+  private static <T> T hideFromCompiler(T value) {
+    if (Math.random() < -1) {
+      // Can never happen, but fools the compiler enough not to optimize this call.
+      fail();
+    }
+    return value;
   }
 }

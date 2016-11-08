@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b12739d_2a0a9b04",
+        "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-11-08T17:57:30Z",
+      "side": 1,
+      "message": "nit: scheme",
+      "range": {
+        "startLine": 206,
+        "startChar": 36,
+        "endLine": 206,
+        "endChar": 42
+      },
+      "revId": "ad177771258287b82d24b3b74d8230a368728cad",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

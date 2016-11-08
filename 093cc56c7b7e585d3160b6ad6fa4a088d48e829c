@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebe35fee_1353572a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-11-08T23:17:46Z",
+      "side": 1,
+      "message": "The hack in Guava cannot go away since J2CL doesn\u0027t support SpecializeMethod.",
+      "revId": "093cc56c7b7e585d3160b6ad6fa4a088d48e829c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -108,6 +108,30 @@
     },
     {
       "key": {
+        "uuid": "8be74356_c06b7e63",
+        "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5031
+      },
+      "writtenOn": "2016-11-09T23:12:02Z",
+      "side": 1,
+      "message": "Instead of applying this patch I did a quick test in an empty project, with the following method defined in the EntryPoint class:\n\n   public static boolean isSafeUri(String scheme, Set\u003cString\u003e extraAllowedSchemes) {\n    String schemeLc \u003d scheme.toLowerCase(Locale.ROOT);\n    for (String extraAllowedScheme : extraAllowedSchemes) {\n      if (extraAllowedScheme.equals(schemeLc)) {\n        return true;\n      }\n    }\n    return (\"http\".equals(schemeLc)\n            || \"https\".equals(schemeLc)\n            || \"ftp\".equals(schemeLc)\n            || \"mailto\".equals(schemeLc));\n  }\n\nA call with \"http\" and Collections.emptySet() becomes a one liner using comma operator doing the lower case and then the OR checks. So no for-loop in the final JS when using optimize 9.",
+      "parentUuid": "e641d62c_eb4031a3",
+      "range": {
+        "startLine": 273,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 38
+      },
+      "revId": "ecc93c2dc653b6fc593ee962de5f92c5bea4f43f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6619660e_d7403c7e",
         "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
         "patchSetId": 12

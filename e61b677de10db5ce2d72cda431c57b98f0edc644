@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bf9938d_ef0ffd4c",
+        "filename": "user/super/com/google/gwt/emul/java/lang/String.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-11-09T09:26:26Z",
+      "side": 1,
+      "message": "This could also be rewritten to call the native substring() I believe: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/substring",
+      "revId": "e61b677de10db5ce2d72cda431c57b98f0edc644",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

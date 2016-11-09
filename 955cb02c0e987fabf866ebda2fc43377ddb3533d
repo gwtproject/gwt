@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "8b62e38d_4bb259cd",
+        "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 7895
+      },
+      "writtenOn": "2016-11-09T19:48:36Z",
+      "side": 1,
+      "message": "I\u0027m not keen on an API that takes the extra allowed schemes from an unconstrained set of strings: That makes the API potentially unsafe, and hence all uses of it need to be security reviewed. \n\nIt would be preferable to specify a well-defined superset (e.g. an enum) of schemes that are potentially problematic in some contexts, but definitely won\u0027t cause XSS. Such as, tel:, sms:, etc.  Then allow extraAllowedSchemes to specify a subset of that. \n\nFor a scheme outside of that set, it\u0027s preferable to use fromTrustedString.\n\nThe latter is already on the list of APIs whose use always require security review.  In larger organizations, it\u0027s desirable to watch/constrain use of such \"must always security review\" via presubmit hooks, or tools such as http://errorprone.info/ (that\u0027s what we use at Google) and https://github.com/mikesamuel/fences-maven-enforcer-rule. It\u0027s undesirable to add to the set of \"must always be security reviewed\" APIs if possible.",
+      "range": {
+        "startLine": 207,
+        "startChar": 45,
+        "endLine": 207,
+        "endChar": 76
+      },
+      "revId": "955cb02c0e987fabf866ebda2fc43377ddb3533d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b9f4379_149fa4eb",
         "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
         "patchSetId": 23

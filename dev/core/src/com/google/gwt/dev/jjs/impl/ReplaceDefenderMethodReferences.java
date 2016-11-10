@@ -16,49 +16,56 @@
 package com.google.gwt.dev.jjs.impl;
 
 import com.google.gwt.dev.jjs.ast.Context;
+import com.google.gwt.dev.jjs.ast.JDeclaredType;
 import com.google.gwt.dev.jjs.ast.JMethod;
 import com.google.gwt.dev.jjs.ast.JMethodCall;
 import com.google.gwt.dev.jjs.ast.JModVisitor;
 import com.google.gwt.dev.jjs.ast.JProgram;
-import com.google.gwt.dev.jjs.ast.JThisRef;
+import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
 
 /**
- * Java8 defender methods are implemented by creating a forwarding method on each class that
- * inherits the implementation. For a concrete type C inheriting I.m(), there will be an
- * implementation <code>C.m() { return I.super.m(); }</code>.
- *
- * References to I.super.m() are replaced by creating a static version of this method on the
- * interface, and then delegating to it instead.
+ * Java8 default methods are implemented by creating a forwarding (with static dispatch) the
+ * implementing method on implementing classes to an the default method in an interface (which is
+ * modeled as an instance method). JavaScript lacks the notion of interfaces and GWT consequently
+ * does not generate prototypes nor instance method for interfaces. Due to that fact this pass
+ * devirtualizes the default methods into static interface methods.
  */
-public class ReplaceDefenderMethodReferences extends JModVisitor {
+public class ReplaceDefenderMethodReferences {
 
-  private final MakeCallsStatic.CreateStaticImplsVisitor staticImplCreator;
-  private JProgram program;
-
-  public static void exec(JProgram program) {
-    ReplaceDefenderMethodReferences visitor =
-        new ReplaceDefenderMethodReferences(program);
-    visitor.accept(program);
-  }
-
-  private ReplaceDefenderMethodReferences(JProgram program) {
-    this.program = program;
-    this.staticImplCreator = new MakeCallsStatic.CreateStaticImplsVisitor(program);
-  }
-
-  @Override
-  public void endVisit(JMethodCall x, Context ctx) {
-    JMethod targetMethod = x.getTarget();
-    if (targetMethod.isDefaultMethod() && x.isStaticDispatchOnly()) {
-      assert x.getInstance() instanceof JThisRef;
-
-      JMethod staticMethod = staticImplCreator.getOrCreateStaticImpl(program, targetMethod);
-      // Cannot use setStaticDispatchOnly() here because interfaces don't have prototypes
-      JMethodCall callStaticMethod = new JMethodCall(x.getSourceInfo(), null, staticMethod);
-      // add 'this' as first parameter
-      callStaticMethod.addArg(new JThisRef(x.getSourceInfo(), targetMethod.getEnclosingType()));
-      callStaticMethod.addArgs(x.getArgs());
-      ctx.replaceMe(callStaticMethod);
+  public static void exec(final JProgram program) {
+    final MakeCallsStatic.CreateStaticImplsVisitor staticImplCreator =
+        new MakeCallsStatic.CreateStaticImplsVisitor(program);
+    // 1. create the static implementations. Also process reference only types so that the mapping
+    // between a method and its devirtualized version is consistent during incremental compilation.
+    // NOTE: the process needs to be done in two steps because the creation of static implementation
+    // might introduce call sites in types that were already processed and hence would not be
+    // rewritten (bug #9453).
+    for (JDeclaredType type : program.getDeclaredTypes()) {
+      for (JMethod method : ImmutableList.copyOf(type.getMethods())) {
+        if (method.isDefaultMethod()) {
+          staticImplCreator.getOrCreateStaticImpl(program, method);
+        }
+      }
     }
+
+    // 2. Rewrite call sites.
+    new JModVisitor() {
+      @Override
+      public void endVisit(JMethodCall x, Context ctx) {
+        JMethod targetMethod = x.getTarget();
+        if (targetMethod.isDefaultMethod() && x.isStaticDispatchOnly()) {
+          assert x.getInstance() != null;
+
+          JMethod staticMethod = program.getStaticImpl(targetMethod);
+          assert staticMethod != null;
+          // Cannot use setStaticDispatchOnly() here because interfaces don't have prototypes
+          JMethodCall callStaticMethod = new JMethodCall(x.getSourceInfo(), null, staticMethod);
+          // add 'this' as first parameter
+          callStaticMethod.addArg(x.getInstance());
+          callStaticMethod.addArgs(x.getArgs());
+          ctx.replaceMe(callStaticMethod);
+        }
+      }
+    }.accept(program);
   }
 }

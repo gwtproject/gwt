@@ -160,6 +160,12 @@ public class JavaAstVerifier extends JVisitor {
     }
     assert membersByType.containsEntry(x.getTarget().getEnclosingType(), x.getTarget()) :
       "Method " + x.getTarget() + " is called but is not part of the AST";
+
+    JMethod staticImpl = program.getStaticImpl(x.getTarget());
+    assert  staticImpl == null
+        || membersByType.containsEntry(staticImpl.getEnclosingType(), staticImpl) :
+        "Method " + staticImpl + " is the static implementation of " + x.getTarget()
+            + " but is not part of the AST";
   }
 
   private void assertReferencedFieldIsInAst(JFieldRef x) {

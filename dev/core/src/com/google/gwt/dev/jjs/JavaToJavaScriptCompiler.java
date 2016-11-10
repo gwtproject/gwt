@@ -106,7 +106,7 @@ import com.google.gwt.dev.jjs.impl.RecordRebinds;
 import com.google.gwt.dev.jjs.impl.RemoveEmptySuperCalls;
 import com.google.gwt.dev.jjs.impl.RemoveSpecializations;
 import com.google.gwt.dev.jjs.impl.ReplaceCallsToNativeJavaLangObjectOverrides;
-import com.google.gwt.dev.jjs.impl.ReplaceDefenderMethodReferences;
+import com.google.gwt.dev.jjs.impl.ReplaceDefaultMethodForwardingByStaticImplementation;
 import com.google.gwt.dev.jjs.impl.ReplaceGetClassOverrides;
 import com.google.gwt.dev.jjs.impl.ResolvePermutationDependentValues;
 import com.google.gwt.dev.jjs.impl.ResolveRuntimeTypeReferences;
@@ -1151,8 +1151,8 @@ public final class JavaToJavaScriptCompiler {
       EnumNameObfuscator.exec(jprogram, logger, configurationProperties, options);
 
       // (3) Normalize the unresolved Java AST
-      // Replace defender method references
-      ReplaceDefenderMethodReferences.exec(jprogram);
+      // Replace default methods by static implementations.
+      ReplaceDefaultMethodForwardingByStaticImplementation.exec(jprogram);
       // Replace calls to native overrides of object methods.
       ReplaceCallsToNativeJavaLangObjectOverrides.exec(jprogram);
 

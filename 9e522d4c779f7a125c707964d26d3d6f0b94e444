@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b773781_95f0c478",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ReplaceDefenderMethodReferences.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-11-10T19:32:47Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 104).",
+      "revId": "9e522d4c779f7a125c707964d26d3d6f0b94e444",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b773781_b87a15dc",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-11-10T20:25:38Z",
+      "side": 1,
+      "message": "will rename this class to ReplaceDefaultMethodForwardingByStaticImplementation before submitting.",
+      "range": {
+        "startLine": 1155,
+        "startChar": 6,
+        "endLine": 1155,
+        "endChar": 37
+      },
+      "revId": "050b3910845561dd13f565a5bb3b66d1ca7688c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

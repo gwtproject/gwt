@@ -22,6 +22,8 @@ import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import jsinterop.annotations.JsFunction;
@@ -1716,6 +1718,35 @@ public class Java8Test extends GWTTestCase {
 
   public void testLocalClassConstructorReferenceInStaticMethod() {
     assertTrue(createInnerClassProducer().get() != null);
+  }
+
+  // Regression test for bug #9453.
+  // NOTE: DO NOT reorder the following classes order, the bug is order dependent.
+  interface SubSub_SuperDefaultMethodDevirtualizationOrder
+      extends Sub_SuperDefaultMethodDevirtualizationOrder {
+    default String m() {
+      return Sub_SuperDefaultMethodDevirtualizationOrder.super.m();
+    }
+  }
+
+  interface Sub_SuperDefaultMethodDevirtualizationOrder
+      extends Super_SuperDefaultMethodDevirtualizationOrder {
+    @Override
+    default String m() {
+      return Super_SuperDefaultMethodDevirtualizationOrder.super.m();
+    }
+  }
+
+  interface Super_SuperDefaultMethodDevirtualizationOrder {
+    default String m() {
+      return "Hi";
+    }
+  }
+
+  // Regression test for bug #9453.
+  public void testDefaultMethodDevirtualizationOrder() {
+    assertEquals("Hi", new SubSub_SuperDefaultMethod() {
+    }.m());
   }
 }
 

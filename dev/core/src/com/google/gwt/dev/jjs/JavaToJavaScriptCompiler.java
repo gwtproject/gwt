@@ -1151,7 +1151,7 @@ public final class JavaToJavaScriptCompiler {
       EnumNameObfuscator.exec(jprogram, logger, configurationProperties, options);
 
       // (3) Normalize the unresolved Java AST
-      // Replace defender method references
+      // Replace default methods by static implementations.
       ReplaceDefenderMethodReferences.exec(jprogram);
       // Replace calls to native overrides of object methods.
       ReplaceCallsToNativeJavaLangObjectOverrides.exec(jprogram);

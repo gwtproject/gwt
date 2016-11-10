@@ -293,7 +293,11 @@ public class JMethod extends JNode implements JMember, CanBeAbstract {
   }
 
   public void setDefaultMethod() {
-    this.defaultMethod = true;
+    setDefaultMethod(true);
+  }
+
+  public void setDefaultMethod(boolean defaultMethod) {
+    this.defaultMethod = defaultMethod;
   }
 
   @Override

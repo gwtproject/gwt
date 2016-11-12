@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b773781_26c89641",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/JavaToJavaScriptCompiler.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2016-11-12T03:28:32Z",
+      "side": 1,
+      "message": "[error] Wrong order for \u0027com.google.gwt.dev.jjs.impl.DevirtualizeDefaultMethodForwarding\u0027 import.",
+      "revId": "2ead08749315423c5ee956f0e8a51a1894a06f7f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

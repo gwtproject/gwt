@@ -16,6 +16,24 @@
       "revId": "b35c7d4e982771dc160ea6232ef1deb64447fbec",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b773781_a63d8681",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DevirtualizeDefaultMethodForwarding.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2016-11-12T15:04:56Z",
+      "side": 1,
+      "message": "What do you mean? Static methods are always added to the enclosing type otherwise the AST is malformed. Maybe you are getting confused with how we eventually emit static methods. It is only when lowering to JavaScript that those methods become just top level functions. \n\nBTW JavaAstVerifier explicitly checks that if there is a reference the corresponding element is reachable.\n\nIf the possibility of ConcurrentModificationException while transforming the AST seems new it is because normally the traversal of the list of methods (and all the other collections in the ast tree) is done by the list Context in JVisitor/JModVisitor (JVisitor:142) in old for loop style which would never throw.",
+      "parentUuid": "2b773781_a6af46c9",
+      "revId": "b35c7d4e982771dc160ea6232ef1deb64447fbec",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

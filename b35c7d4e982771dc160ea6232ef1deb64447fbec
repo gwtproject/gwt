@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b773781_a6af46c9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/DevirtualizeDefaultMethodForwarding.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-11-12T08:22:36Z",
+      "side": 1,
+      "message": "Is this even possible? I thought we were not adding the static method to current type...\nMaybe update the comment with your answer.",
+      "revId": "b35c7d4e982771dc160ea6232ef1deb64447fbec",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

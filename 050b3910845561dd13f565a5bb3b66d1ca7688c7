@@ -413,6 +413,24 @@
     },
     {
       "key": {
+        "uuid": "2b773781_e6093e11",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/Java8AstTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-11-12T08:22:36Z",
+      "side": 1,
+      "message": "Yeah I misread this.",
+      "parentUuid": "2b773781_268fb60b",
+      "revId": "050b3910845561dd13f565a5bb3b66d1ca7688c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b773781_e34e9037",
         "filename": "user/test-super/com/google/gwt/dev/jjs/super/com/google/gwt/dev/jjs/test/Java8Test.java",
         "patchSetId": 9
@@ -477,6 +495,24 @@
       "side": 1,
       "message": "For consistency? We should stop super sourcing this. Left for a potential follow up.",
       "parentUuid": "2b773781_03546cc4",
+      "revId": "050b3910845561dd13f565a5bb3b66d1ca7688c7",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b773781_060f1a14",
+        "filename": "user/test/com/google/gwt/dev/jjs/test/Java8Test.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-11-12T08:22:36Z",
+      "side": 1,
+      "message": "I wasn\u0027t asking for this particular patch.\nI noticed that we are wasting more time by following this pattern vs. replacing it.",
+      "parentUuid": "2b773781_a6a3c686",
       "revId": "050b3910845561dd13f565a5bb3b66d1ca7688c7",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

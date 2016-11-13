@@ -77,10 +77,10 @@ public class CwDictionaryExample extends ContentWidget {
 
     // Show the HTML variable that defines the dictionary
     HTML source = new HTML(
-        "<pre>var userInfo = {\n" + "&nbsp;&nbsp;name: \"Amelie Crutcher\",\n"
-            + "&nbsp;&nbsp;timeZone: \"EST\",\n"
-            + "&nbsp;&nbsp;userID: \"123\",\n"
-            + "&nbsp;&nbsp;lastLogOn: \"2/2/2006\"\n" + "};</pre>\n");
+        "<pre>var userInfo = {\n" + "&#160;&#160;name: \"Amelie Crutcher\",\n"
+            + "&#160;&#160;timeZone: \"EST\",\n"
+            + "&#160;&#160;userID: \"123\",\n"
+            + "&#160;&#160;lastLogOn: \"2/2/2006\"\n" + "};</pre>\n");
     source.getElement().setDir("ltr");
     source.getElement().getStyle().setProperty("textAlign", "left");
     layout.add(new HTML(constants.cwDictionaryExampleLinkText()));

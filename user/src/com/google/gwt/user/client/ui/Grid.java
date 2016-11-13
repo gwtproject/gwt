@@ -75,7 +75,7 @@ public class Grid extends HTMLTable {
    */
   private static native void addRows(Element table, int rows, int columns) /*-{
      var td = $doc.createElement("td");
-     td.innerHTML = "&nbsp;";
+     td.innerHTML = "&#160;";
      var row = $doc.createElement("tr");
      for(var cellNum = 0; cellNum < columns; cellNum++) {
        var cell = td.cloneNode(true);
@@ -130,7 +130,7 @@ public class Grid extends HTMLTable {
   public boolean clearCell(int row, int column) {
     Element td = getCellFormatter().getElement(row, column);
     boolean b = internalClearCell(td, false);
-    td.setInnerHTML("&nbsp;");
+    td.setInnerHTML("&#160;");
     return b;
   }
 
@@ -271,7 +271,7 @@ public class Grid extends HTMLTable {
 
     // Add a non-breaking space to the TD. This ensures that the cell is
     // displayed.
-    td.setInnerHTML("&nbsp;");
+    td.setInnerHTML("&#160;");
     return DOM.asOld(td);
   }
 

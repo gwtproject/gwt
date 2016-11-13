@@ -208,7 +208,7 @@ public class TabBar extends Composite implements SourcesTabEvents,
 
     panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_BOTTOM);
 
-    HTML first = new HTML("&nbsp;", true), rest = new HTML("&nbsp;", true);
+    HTML first = new HTML("&#160;", true), rest = new HTML("&#160;", true);
     first.setStyleName("gwt-TabBarFirst");
     rest.setStyleName("gwt-TabBarRest");
     first.setHeight("100%");

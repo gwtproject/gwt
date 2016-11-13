@@ -152,7 +152,7 @@ class DOMImplStandardBase extends DOMImplStandard {
    */
   @Override
   public native ButtonElement createButtonElement(Document doc, String type) /*-{
-    var e = doc.createElement("BUTTON");
+    var e = doc.createElement("button");
     e.setAttribute('type', type);
     return e;
   }-*/;

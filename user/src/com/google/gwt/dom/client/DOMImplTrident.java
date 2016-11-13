@@ -58,7 +58,7 @@ abstract class DOMImplTrident extends DOMImpl {
 
   @Override
   public native ButtonElement createButtonElement(Document doc, String type) /*-{
-    return doc.createElement("<BUTTON type='" + type + "'></BUTTON>");
+    return doc.createElement("<button type='" + type + "'></button>");
   }-*/;
 
   @Override
@@ -95,7 +95,7 @@ abstract class DOMImplTrident extends DOMImpl {
 
   @Override
   public native InputElement createInputRadioElement(Document doc, String name) /*-{
-    return doc.createElement("<INPUT type='RADIO' name='" + name + "'>");
+    return doc.createElement("<input type='radio' name='" + name + "'>");
   }-*/;
 
   @Override

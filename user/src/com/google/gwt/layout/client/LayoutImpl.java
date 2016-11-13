@@ -50,7 +50,7 @@ class LayoutImpl {
 
   protected static DivElement createRuler(Unit widthUnit, Unit heightUnit) {
     DivElement ruler = Document.get().createDivElement();
-    ruler.setInnerHTML("&nbsp;");
+    ruler.setInnerHTML("&#160;");
     Style style = ruler.getStyle();
     style.setPosition(Position.ABSOLUTE);
     style.setZIndex(-32767);

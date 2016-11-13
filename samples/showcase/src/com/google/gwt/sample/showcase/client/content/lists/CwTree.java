@@ -133,10 +133,10 @@ public class CwTree extends ContentWidget {
     grid.setCellPadding(2);
     grid.getRowFormatter().setVerticalAlign(1, HasVerticalAlignment.ALIGN_TOP);
     grid.setHTML(0, 0, constants.cwTreeStaticLabel());
-    grid.setHTML(0, 1, "&nbsp;&nbsp;&nbsp;");
+    grid.setHTML(0, 1, "&#160;&#160;&#160;");
     grid.setHTML(0, 2, constants.cwTreeDynamicLabel());
     grid.setWidget(1, 0, staticDecorator);
-    grid.setHTML(1, 1, "&nbsp;&nbsp;&nbsp;");
+    grid.setHTML(1, 1, "&#160;&#160;&#160;");
     grid.setWidget(1, 2, dynamicDecorator);
 
     // Wrap the trees in DecoratorPanels

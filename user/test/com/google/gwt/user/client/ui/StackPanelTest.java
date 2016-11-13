@@ -168,8 +168,8 @@ public class StackPanelTest extends PanelTestBase<StackPanel> {
 
     final StackPanel stackPanel = createStackPanel();
 
-    stackPanel.add(new HTML("&nbsp;"));
-    stackPanel.add(new HTML("&nbsp;"));
+    stackPanel.add(new HTML("&#160;"));
+    stackPanel.add(new HTML("&#160;"));
 
     Element tBody = stackPanel.getElement().getFirstChildElement();
     Element firstHeaderRow = tBody.getFirstChildElement();

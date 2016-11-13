@@ -199,7 +199,7 @@ public class LayoutTest extends GWTTestCase {
     DivElement container = doc.createDivElement();
     DivElement parent = doc.createDivElement();
     DivElement child = doc.createDivElement();
-    child.setInnerHTML("&nbsp;");
+    child.setInnerHTML("&#160;");
     doc.getBody().appendChild(container);
     container.appendChild(parent);
 

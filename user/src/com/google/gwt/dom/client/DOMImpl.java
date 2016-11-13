@@ -39,13 +39,13 @@ abstract class DOMImpl {
   }-*/;
 
   public native ButtonElement createButtonElement(Document doc, String type) /*-{
-    var e = doc.createElement("BUTTON");
+    var e = doc.createElement("button");
     e.type = type;
     return e;
   }-*/;
 
   public native InputElement createCheckInputElement(Document doc) /*-{
-    var e = doc.createElement("INPUT");
+    var e = doc.createElement("input");
     e.type = 'checkbox';
     e.value = 'on';
     return e;
@@ -59,7 +59,7 @@ abstract class DOMImpl {
       boolean canBubble, boolean cancelable);
 
   public native InputElement createInputElement(Document doc, String type) /*-{
-    var e = doc.createElement("INPUT");
+    var e = doc.createElement("input");
     e.type = type;
     return e;
   }-*/;

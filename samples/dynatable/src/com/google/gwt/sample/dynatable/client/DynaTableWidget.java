@@ -217,7 +217,7 @@ public class DynaTableWidget extends Composite {
   }
 
   public void clearStatusText() {
-    navbar.status.setHTML("&nbsp;");
+    navbar.status.setHTML("&#160;");
   }
 
   public void refresh() {

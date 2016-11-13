@@ -33,7 +33,7 @@ abstract class DOMImplStandard extends DOMImpl {
 
   @Override
   public native InputElement createInputRadioElement(Document doc, String name) /*-{
-    var elem = doc.createElement("INPUT");
+    var elem = doc.createElement("input");
     elem.type = 'radio';
     elem.name = name;
     elem.value = 'on';

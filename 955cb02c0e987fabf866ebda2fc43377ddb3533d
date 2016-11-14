@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "7008401c_f8095197",
+        "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 8765
+      },
+      "writtenOn": "2016-11-14T09:00:06Z",
+      "side": 1,
+      "message": "It is needed when running the GWT Ant build script...",
+      "parentUuid": "8b9f4379_149fa4eb",
+      "range": {
+        "startLine": 241,
+        "startChar": 38,
+        "endLine": 241,
+        "endChar": 47
+      },
+      "revId": "955cb02c0e987fabf866ebda2fc43377ddb3533d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0bb35316_85cca8c4",
         "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
         "patchSetId": 23
@@ -59,6 +83,30 @@
       "writtenOn": "2016-11-09T16:15:29Z",
       "side": 1,
       "message": "String schemeLc \u003d scheme.toLowerCase(Locale.ROOT);\n    return (\"http\".equals(schemeLc)\n        || \"https\".equals(schemeLc)\n        || \"ftp\".equals(schemeLc)\n        || \"mailto\".equals(schemeLc)\n        || extraAllowedScheme.contains(schemeLc));\n  }",
+      "range": {
+        "startLine": 267,
+        "startChar": 1,
+        "endLine": 280,
+        "endChar": 3
+      },
+      "revId": "955cb02c0e987fabf866ebda2fc43377ddb3533d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7008401c_b803d973",
+        "filename": "user/src/com/google/gwt/safehtml/shared/UriUtils.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 8765
+      },
+      "writtenOn": "2016-11-14T09:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bb35316_85cca8c4",
       "range": {
         "startLine": 267,
         "startChar": 1,

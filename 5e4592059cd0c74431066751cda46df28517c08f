@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90c77481_7984a75d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-11-21T18:54:02Z",
+      "side": 1,
+      "message": "Replace the commit comment by \n\n\nMake native NativeRegExp to refer to the iframe instance.\n\nBy doing this we avoid an JIT bug in MS Edge 11 and possible improve performance\nin some browsers.\n\nBug: #9458\nBug-Link: https://github.com/gwtproject/gwt/issues/9458",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "5e4592059cd0c74431066751cda46df28517c08f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

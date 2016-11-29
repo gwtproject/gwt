@@ -368,10 +368,14 @@ public class ApiCompatibilityChecker extends ToolBase {
       for (String includedPath : includedPathsAsString) {
         includedPaths.add(getFileFromName("source file: ", dirRoot + includedPath));
       }
-
+      if (dirRootAbsolutePath.startsWith("/") || dirRootAbsolutePath.startsWith("\\")) {
+        // Remove initial File.Separator to work with ant versions above and below 1.8.1.
+        dirRootAbsolutePath = dirRootAbsolutePath.substring(1);
+      }
       String fullExcludedPaths[] = new String[excludedPathsAsString.size()];
       int count = 0;
       String dirRootAbsolutePath = getFileFromName("dirRoot: ", dirRoot).getAbsolutePath();
+
       for (String excludedPath : excludedPathsAsString) {
         fullExcludedPaths[count++] = dirRootAbsolutePath + "/" + excludedPath;
       }
@@ -404,6 +408,10 @@ public class ApiCompatibilityChecker extends ToolBase {
       String pattern = "file:";
       if (fileName.indexOf(pattern) == 0) {
         fileName = fileName.substring(pattern.length());
+      }
+      if (fileName.startsWith("/") || fileName.startsWith("\\")) {
+        // Remove initial File.Separator to work with ant versions above and below 1.8.1.
+        fileName = fileName.substring(1);
       }
       return excludeScanner.match(fileName);
     }

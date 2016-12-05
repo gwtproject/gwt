@@ -15,6 +15,8 @@
  */
 package com.google.gwt.emultest.java.util;
 
+import com.google.gwt.junit.DoNotRunWith;
+import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
 
 import java.util.Comparator;
@@ -57,14 +59,20 @@ public class ObjectsTest extends GWTTestCase {
     assertEquals(0, Objects.compare(new Integer("12345"), new Integer(12345), intComparator));
   }
 
+  @DoNotRunWith(Platform.Devel)
   public void testDeepEquals() {
     assertTrue(Objects.deepEquals(null, null));
     assertFalse(Objects.deepEquals(null, "not null"));
     assertFalse(Objects.deepEquals("not null", null));
+    assertTrue(Objects.deepEquals(new Integer("1234"), new Integer(1234)));
     assertFalse(Objects.deepEquals(new Object(), new Object()));
 
     Object obj = new Object();
     assertTrue(Objects.deepEquals(obj, obj));
+
+    assertFalse(Objects.deepEquals(new int[]{1}, new double[]{1}));
+    assertFalse(Objects.deepEquals(new int[0], new double[0]));
+    assertTrue(Objects.deepEquals((Object) new Object[]{"one"}, (Object) new String[]{"one"}));
 
     int[] intArray1 = new int[] { 2, 3, 5};
     int[] intArray2 = new int[] { 3, 1};
@@ -73,6 +81,14 @@ public class ObjectsTest extends GWTTestCase {
     assertFalse(Objects.deepEquals(intArray2, intArray3));
     assertTrue(Objects.deepEquals(intArray1, intArray1));
     assertTrue(Objects.deepEquals(intArray1, intArray3));
+
+    double[] doubleArray1 = new double[] { 2, 3, 5};
+    double[] doubleArray2 = new double[] { 3, 1};
+    double[] doubleArray3 = new double[] { 2, 3, 5};
+    assertFalse(Objects.deepEquals(doubleArray1, doubleArray2));
+    assertFalse(Objects.deepEquals(doubleArray2, doubleArray3));
+    assertTrue(Objects.deepEquals(doubleArray1, doubleArray1));
+    assertTrue(Objects.deepEquals(doubleArray1, doubleArray3));
   }
 
   public void testEquals() {

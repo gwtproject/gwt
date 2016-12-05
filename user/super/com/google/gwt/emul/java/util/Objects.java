@@ -37,9 +37,6 @@ public final class Objects {
     if (a == null || b == null) {
       return false;
     }
-    if (a.equals(b)) {
-      return true;
-    }
 
     // We have to test and see if these are two arrays of the same type,
     // then see what types of arrays they are and dispatch to the
@@ -48,7 +45,7 @@ public final class Objects {
     Class<?> class1 = a.getClass();
     Class<?> class2 = b.getClass();
     if (!class1.isArray() || !class1.equals(class2)) {
-      return false;
+      return a.equals(b);
     }
 
     if (a instanceof Object[]) {
@@ -75,11 +72,8 @@ public final class Objects {
     if (a instanceof float[]) {
       return Arrays.equals((float[]) a, (float[]) b);
     }
-    if (a instanceof double[]) {
-      return Arrays.equals((double[]) a, (double[]) b);
-    }
-
-    return true;
+    // could only be double[]
+    return Arrays.equals((double[]) a, (double[]) b);
   }
 
   public static boolean equals(Object a, Object b) {

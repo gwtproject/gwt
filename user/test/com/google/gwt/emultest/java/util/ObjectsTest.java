@@ -62,6 +62,7 @@ public class ObjectsTest extends GWTTestCase {
     assertFalse(Objects.deepEquals(null, "not null"));
     assertFalse(Objects.deepEquals("not null", null));
     assertFalse(Objects.deepEquals(new Object(), new Object()));
+    assertFalse(Objects.deepEquals(new int[]{1}, new double[]{1}));
 
     Object obj = new Object();
     assertTrue(Objects.deepEquals(obj, obj));

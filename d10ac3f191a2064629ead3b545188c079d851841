@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd24f349_8e885c09",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-12-08T22:09:45Z",
+      "side": 1,
+      "message": "pls update if you are fixing the issue discussed.",
+      "revId": "d10ac3f191a2064629ead3b545188c079d851841",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd24f349_bab553d1",
+        "filename": "user/super/com/google/gwt/emul/java/util/Objects.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-12-08T22:09:45Z",
+      "side": 1,
+      "message": "No this won\u0027t solve the problem. Pls add an additional test by casting incompatible arguments to Object (assuming you are trying to fix the issue we discussed earlier?).",
+      "revId": "d10ac3f191a2064629ead3b545188c079d851841",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd24f349_ee7b102a",
+        "filename": "user/test/com/google/gwt/emultest/java/util/ObjectsTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2016-12-08T22:09:45Z",
+      "side": 1,
+      "message": "Could you also add double primitive array tests?",
+      "revId": "d10ac3f191a2064629ead3b545188c079d851841",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

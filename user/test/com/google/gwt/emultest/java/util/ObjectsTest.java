@@ -32,7 +32,6 @@ public class ObjectsTest extends GWTTestCase {
 
   public void testCompare() {
     Comparator<Integer> intComparator = new Comparator<Integer>() {
-      @SuppressWarnings("NumberEquality")
       @Override
       public int compare(Integer a, Integer b) {
         if (a == b) {
@@ -77,17 +76,12 @@ public class ObjectsTest extends GWTTestCase {
 
   public void testEquals() {
     assertTrue(Objects.equals(null, null));
+    assertFalse(Objects.equals(null, "not null"));
+    assertFalse(Objects.equals("not null", null));
     assertFalse(Objects.equals(new Object(), new Object()));
 
     Object obj = new Object();
     assertTrue(Objects.equals(obj, obj));
-  }
-
-  public void testStringEquality() {
-    assertTrue(Objects.equals("a", "a"));
-    assertFalse(Objects.equals("a", "b"));
-    assertFalse(Objects.equals(null, "not null"));
-    assertFalse(Objects.equals("not null", null));
   }
 
   public void testHashCode() {

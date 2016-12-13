@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aa1ffa9_d0863cfe",
+        "filename": "user/super/com/google/gwt/emul/java/util/Objects.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-12-13T15:18:01Z",
+      "side": 1,
+      "message": "All instanceof checks could be replaced with class component types equality checks",
+      "revId": "e15c04b42d62d2e3b3cd953718197d83fb19a38b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

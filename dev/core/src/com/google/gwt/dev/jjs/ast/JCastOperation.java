@@ -51,7 +51,11 @@ public class JCastOperation extends JExpression {
 
   @Override
   public boolean hasSideEffects() {
-    // Any live cast operations might throw a ClassCastException
+    if (castType.isPrimitiveType()) {
+      // Primitive cast has only side effect if the underlying expression has side effect.
+      return expr.hasSideEffects();
+    }
+    // Any live non-primitive cast operations might throw a ClassCastException
     //
     // TODO: revisit this when we support the concept of whether something
     // can/must complete normally!

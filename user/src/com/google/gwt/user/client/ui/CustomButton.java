@@ -750,7 +750,9 @@ public abstract class CustomButton extends ButtonBase {
       if (!enabled) {
         cleanupCaptureState();
         Roles.getButtonRole().removeAriaPressedState(getElement());
-      } else {
+        
+      // Issue #9471: If this is a PushButton do not set aria-pressed attribute
+      } else if (!(this instanceof PushButton)) {
         setAriaPressed(getCurrentFace());
       }
     }
@@ -926,7 +928,8 @@ public abstract class CustomButton extends ButtonBase {
       setCurrentFaceElement(newFace.getFace());
       addStyleDependentName(curFace.getName());
 
-      if (isEnabled()) {
+      // Issue #9471: If this is a PushButton do not set aria-pressed attribute
+      if (isEnabled() && !(this instanceof PushButton)) {
         setAriaPressed(newFace);
       }
     }

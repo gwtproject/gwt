@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a756307_74b0168f",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/ast/JCastOperation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2016-12-14T03:13:56Z",
+      "side": 1,
+      "message": "// Primitive casts do not throw and only have side effects if the expression has side effects.",
+      "range": {
+        "startLine": 55,
+        "startChar": 9,
+        "endLine": 55,
+        "endChar": 89
+      },
+      "revId": "42c5e51ef510b3c0039f1aed5de98652919f4454",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

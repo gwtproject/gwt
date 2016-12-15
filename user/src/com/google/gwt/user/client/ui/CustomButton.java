@@ -862,6 +862,16 @@ public abstract class CustomButton extends ButtonBase {
     cleanupCaptureState();
     setHovering(false);
   }
+    
+  /**
+   * Sets aria-pressed attribute.
+   *
+   * @param newFace
+   */
+  protected void setAriaPressed(Face newFace) {
+    boolean pressed = (newFace.getFaceID() & DOWN_ATTRIBUTE) == 1;
+    Roles.getButtonRole().setAriaPressedState(getElement(), PressedValue.of(pressed));
+  }
 
   /**
    * Sets whether this button is down.
@@ -996,11 +1006,6 @@ public abstract class CustomButton extends ButtonBase {
       default:
         throw new IllegalStateException(id + " is not a known face id.");
     }
-  }
-
-  private void setAriaPressed(Face newFace) {
-    boolean pressed = (newFace.getFaceID() & DOWN_ATTRIBUTE) == 1;
-    Roles.getButtonRole().setAriaPressedState(getElement(), PressedValue.of(pressed));
   }
 
   /**

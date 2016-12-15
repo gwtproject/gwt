@@ -199,4 +199,11 @@ public class PushButton extends CustomButton {
   protected void onClickStart() {
     setDown(true);
   }
+    
+  /**
+   * No-op override to prevent aria-pressed attribute from being set on PushButton (Issue #9471).
+   */
+  @Override
+  protected void setAriaPressed(Face newFace) {
+  }
 }

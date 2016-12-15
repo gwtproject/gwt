@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa7c0f2f_cc450fb9",
+        "filename": "user/src/com/google/gwt/user/client/ui/CustomButton.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 5030
+      },
+      "writtenOn": "2016-12-15T13:27:21Z",
+      "side": 1,
+      "message": "How about moving this into setAriaPressed? Or maybe we could make setAriaPressed package-private so it could be overridden in PushButton to make it a no-op?",
+      "revId": "3a2ea3643a5cc884087d94912b97da28fab3cf1c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

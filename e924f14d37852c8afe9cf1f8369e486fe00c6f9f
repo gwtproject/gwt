@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "376ec20e_d61c642d",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/IntStream.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-12-28T12:18:27Z",
+      "side": 1,
+      "message": "All other classes (except LongStream) use full name (i.e. FooStreamImpl.Empty). Maybe remove this import?",
+      "revId": "e924f14d37852c8afe9cf1f8369e486fe00c6f9f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "773d9abc_36fec08d",
+        "filename": "user/super/com/google/gwt/emul/java/util/stream/LongStream.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5542
+      },
+      "writtenOn": "2016-12-28T12:18:27Z",
+      "side": 1,
+      "message": "Same note as in IntStream class",
+      "revId": "e924f14d37852c8afe9cf1f8369e486fe00c6f9f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

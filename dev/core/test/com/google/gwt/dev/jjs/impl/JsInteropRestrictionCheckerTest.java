@@ -1293,7 +1293,14 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "  String x = someString();",
         "  static int y;",
         "}",
-        "public static String someString() { return \"hello\"; }");
+        "public static String someString() { return \"hello\"; }",
+        "@JsFunction",
+        "public interface Function2 {",
+        "  Object getFoo();",
+        "}",
+        "public static final class Buggy2 implements Function2 {",
+        "  public String getFoo() { return null;}",
+        "}");
 
     assertBuggySucceeds();
   }
@@ -1676,14 +1683,21 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetImport("jsinterop.annotations.JsOptional");
     addSnippetClassDecl(
         "interface Interface {",
-        "   @JsMethod void m(@JsOptional Object o);",
+        "  @JsMethod void foo(@JsOptional Object o);",
+        "  @JsMethod Object bar(@JsOptional Object o);",
         "}",
         "public static class Buggy implements Interface {",
-        "   @JsMethod public void m(Object o) {}",
+        "  @Override",
+        "  @JsMethod public void foo(Object o) {}",
+        "  @Override",
+        "  @JsMethod public String bar(Object o) { return null; }",
         "}");
 
-    assertBuggyFails("Line 9: Method 'void EntryPoint.Buggy.m(Object)' should declare "
-        + "parameter 'o' as JsOptional");
+    assertBuggyFails(
+        "Line 11: Method 'void EntryPoint.Buggy.foo(Object)' should declare "
+            + "parameter 'o' as JsOptional",
+        "Line 13: Method 'String EntryPoint.Buggy.bar(Object)' should declare "
+            + "parameter 'o' as JsOptional");
   }
 
   public void testJsOptionalNotAtEndFails() throws Exception {
@@ -1799,13 +1813,18 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetClassDecl(
         "@JsType(isNative=true) public interface IBuggy {",
         "  void m();",
+        "  Object n();",
         "}",
         "@JsType(isNative=true) public static class Buggy implements IBuggy {",
-        "  @JsOverlay public void m() { }",
+        "  @JsOverlay public final void m() { }",
+        "  @JsOverlay public final String n() { return null; }",
         "}");
 
-    assertBuggyFails("Line 9: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be nor override"
-        + " a JsProperty or a JsMethod.");
+    assertBuggyFails(
+        "Line 10: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be nor override"
+            + " a JsProperty or a JsMethod.",
+        "Line 11: JsOverlay method 'String EntryPoint.Buggy.n()' cannot be nor override"
+            + " a JsProperty or a JsMethod.");
   }
 
   public void testJsOverlayOverridingSuperclassMethodFails() {
@@ -1814,13 +1833,18 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
     addSnippetClassDecl(
         "@JsType(isNative=true) public static class Super {",
         "  public native void m();",
+        "  public native Object n();",
         "}",
         "@JsType(isNative=true) public static class Buggy extends Super {",
-        "  @JsOverlay public void m() { }",
+        "  @JsOverlay public final void m() { }",
+        "  @JsOverlay public final String n() { return null; }",
         "}");
 
-    assertBuggyFails("Line 9: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be nor override"
-        + " a JsProperty or a JsMethod.");
+    assertBuggyFails(
+        "Line 10: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be nor override"
+            + " a JsProperty or a JsMethod.",
+        "Line 11: JsOverlay method 'String EntryPoint.Buggy.n()' cannot be nor override"
+            + " a JsProperty or a JsMethod.");
   }
 
   public void testJsOverlayOnNonFinalMethodAndInstanceFieldFails() {
@@ -2063,7 +2087,14 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "@JsType(isNative=true) static class NativeTypeWithHashCode {",
         "  public native int hashCode();",
         "}",
-        "static class SomeClass3 extends NativeTypeWithHashCode implements A {}");
+        "static class SomeClass3 extends NativeTypeWithHashCode implements A {}",
+        "@JsType(isNative=true) interface NativeInterface {",
+        "  public Object foo();",
+        "}",
+        "@JsType(isNative=true) static class NativeTypeWithBridge implements NativeInterface {",
+        "  public String foo() { return null; }",
+        "}"
+    );
 
     assertBuggyFails(
         "Line 7: Native JsType member 'void EntryPoint.Interface.n()' cannot have @JsIgnore.",
@@ -2084,7 +2115,9 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
             + "'EntryPoint.B' that declares method 'hashCode' inherited from java.lang.Object.",
         "Line 29: 'int EntryPoint.NativeTypeWithHashCode.hashCode()' "
             + "(exposed by 'EntryPoint.SomeClass3') cannot be assigned a different JavaScript name"
-            + " than the method it overrides.");
+            + " than the method it overrides.",
+        "Line 36: Native JsType method 'String EntryPoint.NativeTypeWithBridge.foo()' should be"
+            + " native or abstract.");
   }
 
   public void testSubclassOfNativeJsTypeBadMembersFails() {
@@ -2103,6 +2136,10 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "}",
         "static class SubBuggy extends Buggy {",
         "  public boolean equals(Object obj) { return super.equals(obj); }",
+        "  public Object foo(Object obj) { return null; }",
+        "}",
+        "static class SubBuggy2 extends SubBuggy {",
+        "  public String foo(Object obj) { return super.toString(); }",
         "}");
 
     assertBuggyFails(
@@ -2115,6 +2152,8 @@ public class JsInteropRestrictionCheckerTest extends OptimizerTestBase {
         "Line 13: Cannot use super to call 'EntryPoint.NativeType.hashCode'. "
             + "'java.lang.Object' methods in native JsTypes cannot be called using super.",
         "Line 16: Cannot use super to call 'EntryPoint.NativeType.equals'. 'java.lang.Object' "
+            + "methods in native JsTypes cannot be called using super.",
+        "Line 20: Cannot use super to call 'EntryPoint.NativeType.equals'. 'java.lang.Object' "
             + "methods in native JsTypes cannot be called using super."
     );
   }

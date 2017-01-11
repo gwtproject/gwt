@@ -46,6 +46,10 @@ import com.google.gwt.dom.client.Style.WhiteSpace;
 import com.google.gwt.junit.DoNotRunWith;
 import com.google.gwt.junit.Platform;
 import com.google.gwt.junit.client.GWTTestCase;
+import com.google.gwt.safehtml.shared.UriUtils;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Tests the native {@link Style} class.
@@ -441,6 +445,22 @@ public class StyleTest extends GWTTestCase {
     assertEquals("1in", style.getWidth());
     style.setWidth(1, MM);
     assertEquals("1mm", style.getWidth());
+  }
+
+  public void testSetBackgroundImage() {
+    DivElement div = Document.get().createDivElement();
+    Style style = div.getStyle();
+
+    style.setBackgroundImage(UriUtils.fromSafeConstant("http://example.com/image.png"));
+    assertEquals("url(http://example.com/image.png)", style.getBackgroundImage());
+    style.setBackgroundImage(
+        Arrays.asList(
+            UriUtils.fromSafeConstant("http://example.com/1.png"),
+            UriUtils.fromSafeConstant("http://example.com/2.png")));
+    assertEquals(
+        "url(http://example.com/1.png), url(http://example.com/1.png)", style.getBackgroundImage());
+    style.setBackgroundImage(Collections.emptyList());
+    assertEquals("none", style.getBackgroundImage());
   }
 
   private void assertEquals(HasCssName enumValue, String cssValue) {

@@ -16,7 +16,9 @@
 package com.google.gwt.dom.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.safehtml.shared.annotations.IsSafeUri;
+import com.google.gwt.safehtml.shared.SafeUri;
+
+import java.util.Collection;
 
 /**
  * Provides programmatic access to properties of the style object.
@@ -1877,8 +1879,38 @@ public class Style extends JavaScriptObject {
 
   /**
    * Set the background-image css property.
+   *
+   * <p>Note that this method is not safe for setting urls as the background-image, use
+   * {@link #setBackgroundImage(SafeUri)} or {@link #setBackgroundImage(Collection)} instead.
    */
-  public final void setBackgroundImage(@IsSafeUri String value) {
+  public final void setBackgroundImage(String value) {
+    setProperty(STYLE_BACKGROUND_IMAGE, value);
+  }
+
+  /**
+   * Set the background-image css property to a list of urls or "none" if no SafeUris are provided.
+   */
+  public final void setBackgroundImage(SafeUri uri) {
+    setProperty(STYLE_BACKGROUND_IMAGE, "url(" + uri.asString() + ")");
+  }
+
+  /**
+   * Set the background-image css property to a list of urls or "none" if no SafeUris are provided.
+   */
+  public final void setBackgroundImage(Collection<? extends SafeUri> uris) {
+    String value;
+    if (uris.isEmpty()) {
+      value = "none";
+    } else {
+      StringBuilder valueBuilder = new StringBuilder();
+      for (SafeUri uri : uris) {
+        if (valueBuilder.length() > 0) {
+          valueBuilder.append(", ");
+        }
+        valueBuilder.append("url(").append(uri.asString()).append(")");
+      }
+      value = valueBuilder.toString();
+    }
     setProperty(STYLE_BACKGROUND_IMAGE, value);
   }
 
@@ -2274,3 +2306,4 @@ public class Style extends JavaScriptObject {
     this[name] = value;
   }-*/;
 }
+

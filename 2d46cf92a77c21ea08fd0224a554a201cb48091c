@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3d8490b_3ae9e587",
+        "filename": "user/src/com/google/gwt/dom/client/Style.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-11T15:57:32Z",
+      "side": 1,
+      "message": "[error] \u0027java.util.Arrays\u0027 should be separated from previous imports.",
+      "revId": "2d46cf92a77c21ea08fd0224a554a201cb48091c",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

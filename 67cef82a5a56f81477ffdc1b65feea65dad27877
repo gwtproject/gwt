@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3d8490b_3ad80529",
+        "filename": "user/src/com/google/gwt/dom/client/Style.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1883,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2017-01-11T18:36:00Z",
+      "side": 1,
+      "message": "Could you add a comment that this method is not safe for setting an url?",
+      "range": {
+        "startLine": 1881,
+        "startChar": 1,
+        "endLine": 1883,
+        "endChar": 5
+      },
+      "revId": "67cef82a5a56f81477ffdc1b65feea65dad27877",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3d8490b_3ae1e5de",
+        "filename": "user/src/com/google/gwt/dom/client/Style.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1898,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2017-01-11T18:36:00Z",
+      "side": 1,
+      "message": "I think the best is to provide:\n\n  /**\n   * Set the background-image css property to a url or \"none\" if no SafeUri are provided.\n   */\n  public final void setBackgroundImage(SafeUri uri) {\n    setBackgroundImage(Arrays.asList(uri));\n  }\n\n  /**\n   * Set the background-image css property to a list of urls or \"none\" if no SafeUris are provided.\n   */\n  public final void setBackgroundImage(Iterable\u003c? extends SafeUri\u003e uris) {\n\notherwise there is two methods with similar signature",
+      "range": {
+        "startLine": 1888,
+        "startChar": 2,
+        "endLine": 1898,
+        "endChar": 74
+      },
+      "revId": "67cef82a5a56f81477ffdc1b65feea65dad27877",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3d8490b_456e4aaa",
+        "filename": "user/src/com/google/gwt/dom/client/Style.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1915,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2017-01-11T18:36:00Z",
+      "side": 1,
+      "message": "I think you could simplify by using a simple for-loop:\n\n  StringBuilder valueBuilder \u003d new StringBuilder();\n\n  for (SafeUri uri: uris) {\n    if (valueBuilder.length() \u003e 0) {\n      valueBuilder.append(\", \");\n    }\n\n    valueBuilder.append(\"url(\").append(uri.asString()).append(\")\");\n  }\n\n  setProperty(STYLE_BACKGROUND_IMAGE, \n      valueBuilder.length() \u003d\u003d 0 ? \"none\" : valueBuilder.toString());",
+      "range": {
+        "startLine": 1899,
+        "startChar": 2,
+        "endLine": 1915,
+        "endChar": 47
+      },
+      "revId": "67cef82a5a56f81477ffdc1b65feea65dad27877",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

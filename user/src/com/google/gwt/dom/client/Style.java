@@ -16,7 +16,11 @@
 package com.google.gwt.dom.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.safehtml.shared.annotations.IsSafeUri;
+import com.google.gwt.safehtml.shared.SafeUri;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Provides programmatic access to properties of the style object.
@@ -1878,7 +1882,30 @@ public class Style extends JavaScriptObject {
   /**
    * Set the background-image css property.
    */
-  public final void setBackgroundImage(@IsSafeUri String value) {
+  public final void setBackgroundImage(String value) {
+    setProperty(STYLE_BACKGROUND_IMAGE, value);
+  }
+
+  /**
+   * Set the background-image css property to a list of urls or "none" if no SafeUris are provided.
+   */
+  public final void setBackgroundImage(SafeUri... uris) {
+    setBackgroundImage(Arrays.asList(uris));
+  }
+
+  /**
+   * Set the background-image css property to a list of urls or "none" if no SafeUris are provided.
+   */
+  public final void setBackgroundImage(Collection<? extends SafeUri> uris) {
+    String value;
+    if (uris.isEmpty()) {
+      value = "none";
+    } else {
+      value =
+          uris.stream()
+              .map(uri -> "url(" + uri.asString() + ")")
+              .collect(Collectors.joining(", "));
+    }
     setProperty(STYLE_BACKGROUND_IMAGE, value);
   }
 
@@ -2274,3 +2301,4 @@ public class Style extends JavaScriptObject {
     this[name] = value;
   }-*/;
 }
+

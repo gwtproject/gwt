@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3d8490b_405ab863",
+        "filename": "user/src/com/google/gwt/dom/client/Style.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1894,
+      "author": {
+        "id": 8835
+      },
+      "writtenOn": "2017-01-11T19:17:28Z",
+      "side": 1,
+      "message": "setBackgroundImage(Collections.singletonList(uri));",
+      "range": {
+        "startLine": 1894,
+        "startChar": 4,
+        "endLine": 1894,
+        "endChar": 71
+      },
+      "revId": "17802faddd24964e36ae4e29a496bfa2ca6fb61d",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -40,6 +40,7 @@ import com.google.gwt.thirdparty.guava.common.collect.Interner;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
 import com.google.gwt.thirdparty.guava.common.collect.Maps;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
+import com.google.gwt.util.regexfilter.RegexFilter;
 
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
@@ -127,7 +128,7 @@ public class CompilationStateBuilder {
               // The above checks might have recorded errors; so we need to check here again.
               // So only construct the GWT AST if no JDT errors and no errors from our checks.
               types = GwtAstBuilder.process(cud, builder.getSourceMapPath(), jsniMethods, jsniRefs,
-                  compilerContext);
+                  compilerContext, jsInteropExportFilter);
             }
 
             // Only run this pass if JDT was able to compile the unit with no errors, otherwise
@@ -206,9 +207,14 @@ public class CompilationStateBuilder {
 
     private CompilerContext compilerContext;
 
+    private RegexFilter jsInteropExportFilter;
+
     public CompileMoreLater(
-        CompilerContext compilerContext, AdditionalTypeProviderDelegate delegate) {
+        CompilerContext compilerContext,
+        AdditionalTypeProviderDelegate delegate,
+        RegexFilter jsInteropExportFilter) {
       this.compilerContext = compilerContext;
+      this.jsInteropExportFilter = jsInteropExportFilter;
       this.compiler = new JdtCompiler(
           compilerContext, new UnitProcessorImpl());
       this.suppressErrors = !compilerContext.getOptions().isStrict();
@@ -501,7 +507,20 @@ public class CompilationStateBuilder {
     // Units we don't want to rebuild unless we have to.
     Map<CompilationUnitBuilder, CompilationUnit> cachedUnits = Maps.newIdentityHashMap();
 
-    CompileMoreLater compileMoreLater = new CompileMoreLater(compilerContext, compilerDelegate);
+    CompileMoreLater compileMoreLater =
+        new CompileMoreLater(
+            compilerContext,
+            compilerDelegate,
+            new RegexFilter(logger, compilerContext.getOptions().getJsInteropExportRegexes()) {
+              @Override
+              protected boolean acceptByDefault() {
+                return false;
+              }
+              @Override
+              protected boolean entriesArePositiveByDefault() {
+                return true;
+              }
+            });
 
     // For each incoming Java source file...
     for (Resource resource : resources) {

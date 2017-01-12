@@ -15,12 +15,13 @@
  */
 package com.google.gwt.dev.util.arg;
 
+import java.util.List;
+
 /**
- * A flag to enabled/disable JsInterop export generation.
+ * An option to set JsInterop export filter.
  */
 public interface OptionGenerateJsInteropExports {
+  List<String> getJsInteropExportRegexes();
 
-  boolean shouldGenerateJsInteropExports();
-
-  void setGenerateJsInteropExports(boolean generateExports);
+  void addJsInteropExportRegex(String jsInteropExportRegex);
 }

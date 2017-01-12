@@ -115,7 +115,7 @@ abstract class UnmodifiableCompilerOptions implements CompilerOptions {
   }
 
   @Override
-  public void setGenerateJsInteropExports(boolean generateExports) {
+  public void addJsInteropExportRegex(String jsInteropExportRegex) {
     throw new UnsupportedOperationException();
   }
 

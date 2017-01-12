@@ -22,6 +22,7 @@ import com.google.gwt.dev.cfg.ModuleDef;
 import com.google.gwt.dev.jjs.JsOutputOption;
 import com.google.gwt.dev.util.arg.ArgHandlerBindAddress;
 import com.google.gwt.dev.util.arg.ArgHandlerClosureFormattedOutput;
+import com.google.gwt.dev.util.arg.ArgHandlerExcludeJsInteropExports;
 import com.google.gwt.dev.util.arg.ArgHandlerGenerateJsInteropExports;
 import com.google.gwt.dev.util.arg.ArgHandlerIncrementalCompile;
 import com.google.gwt.dev.util.arg.ArgHandlerLogLevel;
@@ -85,7 +86,7 @@ public class Options {
   private SourceLevel sourceLevel = SourceLevel.DEFAULT_SOURCE_LEVEL;
   private boolean failOnError = false;
   private int compileTestRecompiles = 0;
-  private boolean generateJsInteropExports = false;
+  private final List<String> jsInteropExportRegexes = new ArrayList<String>();
   private OptionMethodNameDisplayMode.Mode methodNameDisplayMode =
       OptionMethodNameDisplayMode.Mode.NONE;
   private boolean closureFormattedOutput = false;
@@ -301,8 +302,8 @@ public class Options {
     return failOnError;
   }
 
-  boolean shouldGenerateJsInteropExports() {
-    return generateJsInteropExports;
+  List<String> getJsInteropExportRegexes() {
+    return jsInteropExportRegexes;
   }
 
   JsOutputOption getOutput() {
@@ -411,17 +412,20 @@ public class Options {
           Options.this.logLevel = logLevel;
         }
       }));
-      registerHandler(new ArgHandlerGenerateJsInteropExports(new OptionGenerateJsInteropExports() {
-        @Override
-        public boolean shouldGenerateJsInteropExports() {
-          return Options.this.generateJsInteropExports;
-        }
+      OptionGenerateJsInteropExports optionGenerateJsInteropExport =
+          new OptionGenerateJsInteropExports() {
+            @Override
+            public List<String> getJsInteropExportRegexes() {
+              return Options.this.jsInteropExportRegexes;
+            }
 
-        @Override
-        public void setGenerateJsInteropExports(boolean generateExports) {
-          Options.this.generateJsInteropExports = generateExports;
-        }
-      }));
+            @Override
+            public void addJsInteropExportRegex(String jsInteropExportRegex) {
+              Options.this.jsInteropExportRegexes.add(jsInteropExportRegex);
+            }
+          };
+      registerHandler(new ArgHandlerGenerateJsInteropExports(optionGenerateJsInteropExport));
+      registerHandler(new ArgHandlerExcludeJsInteropExports(optionGenerateJsInteropExport));
       registerHandler(new ArgHandlerMethodNameDisplayMode(new OptionMethodNameDisplayMode() {
         @Override
         public OptionMethodNameDisplayMode.Mode getMethodNameDisplayMode() {

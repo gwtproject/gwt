@@ -41,7 +41,7 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   private final TreeLogger.Type logLevel;
   private final List<String> moduleNames;
   private final SourceLevel sourceLevel;
-  private final boolean generateJsInteropExports;
+  private final List<String> jsInteropExportRegexes;
   private final OptionMethodNameDisplayMode.Mode methodNameDisplayMode;
   private final ListMultimap<String, String> properties;
   private final boolean closureFormattedOutput;
@@ -54,7 +54,7 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
     this.sourceLevel = options.getSourceLevel();
     this.failOnError = options.isFailOnError();
     this.logLevel = options.getLogLevel();
-    this.generateJsInteropExports = options.shouldGenerateJsInteropExports();
+    this.jsInteropExportRegexes = Lists.newArrayList(options.getJsInteropExportRegexes());
     this.methodNameDisplayMode = options.getMethodNameDisplayMode();
     this.properties = LinkedListMultimap.create(options.getProperties());
     this.closureFormattedOutput = options.isClosureFormattedOutput();
@@ -92,8 +92,8 @@ class CompilerOptionsImpl extends UnmodifiableCompilerOptions {
   }
 
   @Override
-  public boolean shouldGenerateJsInteropExports() {
-    return generateJsInteropExports;
+  public List<String> getJsInteropExportRegexes() {
+    return jsInteropExportRegexes;
   }
 
   /**

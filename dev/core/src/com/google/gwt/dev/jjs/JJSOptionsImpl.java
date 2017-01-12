@@ -21,6 +21,8 @@ import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.arg.SourceLevel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Concrete class to implement all JJS options.
@@ -49,7 +51,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   private boolean soycExtra = false;
   private boolean soycHtmlDisabled = false;
   private boolean strict = false;
-  private boolean generateJsInteropExports = false;
+  private final List<String> jsInteropExportRegexes = new ArrayList<String>();
   private boolean useDetailedTypeIds = false;
   private OptionMethodNameDisplayMode.Mode methodNameDisplayMode =
       OptionMethodNameDisplayMode.Mode.NONE;
@@ -81,7 +83,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
     setStrict(other.isStrict());
     setSourceLevel(other.getSourceLevel());
     setNamespace(other.getNamespace());
-    setGenerateJsInteropExports(other.shouldGenerateJsInteropExports());
+    jsInteropExportRegexes.addAll(other.getJsInteropExportRegexes());
     setUseDetailedTypeIds(other.useDetailedTypeIds());
     setMethodNameDisplayMode(other.getMethodNameDisplayMode());
     setClosureCompilerFormatEnabled(other.isClosureCompilerFormatEnabled());
@@ -332,13 +334,13 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
-  public boolean shouldGenerateJsInteropExports() {
-    return generateJsInteropExports;
+  public List<String> getJsInteropExportRegexes() {
+    return jsInteropExportRegexes;
   }
 
   @Override
-  public void setGenerateJsInteropExports(boolean generateExports) {
-    generateJsInteropExports = generateExports;
+  public void addJsInteropExportRegex(String jsInteropExportRegex) {
+    jsInteropExportRegexes.add(jsInteropExportRegex);
   }
 
   @Override

@@ -26,6 +26,7 @@ import com.google.gwt.thirdparty.guava.common.collect.LinkedListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Concrete class to implement both precompile and compile task options.
@@ -90,8 +91,8 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
-  public boolean shouldGenerateJsInteropExports() {
-    return jjsOptions.shouldGenerateJsInteropExports();
+  public List<String> getJsInteropExportRegexes() {
+    return jjsOptions.getJsInteropExportRegexes();
   }
 
   @Override
@@ -259,8 +260,8 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
-  public void setGenerateJsInteropExports(boolean generateExports) {
-    jjsOptions.setGenerateJsInteropExports(generateExports);
+  public void addJsInteropExportRegex(String jsInteropExportRegex) {
+    jjsOptions.addJsInteropExportRegex(jsInteropExportRegex);
   }
 
   @Override

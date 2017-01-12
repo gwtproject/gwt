@@ -123,10 +123,8 @@ public class CodeServer {
             "style", options.getOutput().name(),
             "closureFormattedOutput",
                 Boolean.valueOf(options.isClosureFormattedOutput()).toString(),
-            "generateJsInteropExports",
-                Boolean.valueOf(options.shouldGenerateJsInteropExports()).toString(),
-            "methodDisplayMode", options.getMethodNameDisplayMode().name())
-    );
+            "generateJsInteropExports", options.getJsInteropExportRegexes().toString(),
+            "methodDisplayMode", options.getMethodNameDisplayMode().name()));
   }
 
   /**

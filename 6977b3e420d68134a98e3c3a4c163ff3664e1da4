@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23c0454e_7aa3913f",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-01-13T19:30:13Z",
+      "side": 1,
+      "message": "This should be accessible through the compilerContext like it was before for the boolean option. CompilerContext has all the options that affect compilation which this is one of them.",
+      "range": {
+        "startLine": 131,
+        "startChar": 35,
+        "endLine": 131,
+        "endChar": 56
+      },
+      "revId": "6977b3e420d68134a98e3c3a4c163ff3664e1da4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

@@ -46,6 +46,30 @@
       "revId": "6977b3e420d68134a98e3c3a4c163ff3664e1da4",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23c0454e_3a1cb987",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/CompilationStateBuilder.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-01-13T19:41:11Z",
+      "side": 1,
+      "message": "You can lazily create the filter in CC y the getter, or you can have the filter in the corresponding option and add a method to it to allow you to build it incrementally (this is probably the best because you can reuse the error checking logic from RegExFilter).\n\nAll of the compiler options should be accessed from the compiler context and not threaded through.",
+      "parentUuid": "23c0454e_7a28f1b3",
+      "range": {
+        "startLine": 131,
+        "startChar": 35,
+        "endLine": 131,
+        "endChar": 56
+      },
+      "revId": "6977b3e420d68134a98e3c3a4c163ff3664e1da4",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

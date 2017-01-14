@@ -165,8 +165,15 @@ public class SuperDevListener implements CodeServerListener {
       args.add("-logLevel");
       args.add(String.valueOf(options.getLogLevel()));
     }
-    if (options.shouldGenerateJsInteropExports()) {
-      args.add("-generateJsInteropExports");
+    List<String> jsInteropExportFilterValues = options.getJsInteropExportFilter().getValues();
+    if (jsInteropExportFilterValues.size() > 0) {
+      for (String regex : jsInteropExportFilterValues) {
+        if (regex.startsWith("-")) {
+          args.add("-excludeJsInteropExports " + regex.substring(1));
+        } else {
+          args.add("-generateJsInteropExports " + regex);
+        }
+      }
     }
 
     if (!options.isIncrementalCompileEnabled()) {

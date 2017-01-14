@@ -24,6 +24,7 @@ import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.SourceLevel;
 import com.google.gwt.thirdparty.guava.common.collect.LinkedListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
+import com.google.gwt.util.regexfilter.WhitelistRegexFilter;
 
 import java.io.File;
 
@@ -90,8 +91,8 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   }
 
   @Override
-  public boolean shouldGenerateJsInteropExports() {
-    return jjsOptions.shouldGenerateJsInteropExports();
+  public WhitelistRegexFilter getJsInteropExportFilter() {
+    return jjsOptions.getJsInteropExportFilter();
   }
 
   @Override
@@ -256,11 +257,6 @@ public class PrecompileTaskOptionsImpl extends CompileTaskOptionsImpl
   @Override
   public void setInlineLiteralParameters(boolean enabled) {
     jjsOptions.setInlineLiteralParameters(enabled);
-  }
-
-  @Override
-  public void setGenerateJsInteropExports(boolean generateExports) {
-    jjsOptions.setGenerateJsInteropExports(generateExports);
   }
 
   @Override

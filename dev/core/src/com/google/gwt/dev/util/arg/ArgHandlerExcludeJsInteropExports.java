@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Google Inc.
+ * Copyright 2016 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,25 +18,23 @@ package com.google.gwt.dev.util.arg;
 import com.google.gwt.util.tools.ArgHandler;
 
 /**
- * Enable the generation of JsInterop exports.
+ * Add exclusion patterns to the generation of JsInterop exports.
  */
-public class ArgHandlerGenerateJsInteropExports extends ArgHandler {
+public class ArgHandlerExcludeJsInteropExports extends ArgHandler {
   private final OptionGenerateJsInteropExports options;
 
-  public ArgHandlerGenerateJsInteropExports(OptionGenerateJsInteropExports options) {
+  public ArgHandlerExcludeJsInteropExports(OptionGenerateJsInteropExports options) {
     this.options = options;
   }
   @Override
   public String getPurpose() {
-    return "Generate exports for matching classes for JsInterop purposes."
-        + " This flag could be set multiple times to expand the inclusion patterns"
-        + " while -excludeJsInteropExports could be used for exclusions."
-        + " Later provided flags will overrule prior ones.";
+    return "Exclude exporting of matching classes for JsInterop purposes."
+        + " Flag could be set multiple times to expand the pattern.";
   }
 
   @Override
   public String getTag() {
-    return "-generateJsInteropExports";
+    return "-excludeJsInteropExports";
   }
 
   @Override
@@ -47,20 +45,15 @@ public class ArgHandlerGenerateJsInteropExports extends ArgHandler {
   @Override
   public int handle(String[] args, int startIndex) {
     if (startIndex + 1 < args.length) {
-      String arg = args[startIndex + 1];
-      if (!arg.startsWith("-")) {
-        try {
-          options.getJsInteropExportFilter().add(arg);
-          return 1;
-        } catch (IllegalArgumentException e) {
-          System.err.println("Not a valid regex\n" + e.getMessage());
-          return -1;
-        }
+      String regex = "-" + args[startIndex + 1];
+      try {
+        options.getJsInteropExportFilter().add(regex);
+        return 1;
+      } catch (IllegalArgumentException e) {
+        System.err.println("Not a valid regex\n" + e.getMessage());
+        return -1;
       }
     }
-
-    // TODO: warn here?
-    options.getJsInteropExportFilter().add(".*");
-    return 0;
+    return -1;
   }
 }

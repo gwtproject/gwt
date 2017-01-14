@@ -51,6 +51,7 @@ import com.google.gwt.dev.util.arg.ArgHandlerDisableRunAsync;
 import com.google.gwt.dev.util.arg.ArgHandlerDisableUpdateCheck;
 import com.google.gwt.dev.util.arg.ArgHandlerDraftCompile;
 import com.google.gwt.dev.util.arg.ArgHandlerEnableAssertions;
+import com.google.gwt.dev.util.arg.ArgHandlerExcludeJsInteropExports;
 import com.google.gwt.dev.util.arg.ArgHandlerExtraDir;
 import com.google.gwt.dev.util.arg.ArgHandlerGenDir;
 import com.google.gwt.dev.util.arg.ArgHandlerGenerateJsInteropExports;
@@ -287,6 +288,7 @@ public class JUnitShell extends DevMode {
       registerHandler(new ArgHandlerNamespace(options));
       registerHandler(new ArgHandlerOptimize(options));
       registerHandler(new ArgHandlerIncrementalCompile(options));
+      registerHandler(new ArgHandlerExcludeJsInteropExports(options));
       registerHandler(new ArgHandlerGenerateJsInteropExports(options));
       registerHandler(new ArgHandlerSetProperties(options));
       registerHandler(new ArgHandlerClosureFormattedOutput(options));

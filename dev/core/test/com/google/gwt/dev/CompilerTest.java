@@ -1047,7 +1047,7 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsNamespaceOnMethod() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setGenerateJsInteropExports(true);
+    compilerOptions.getJsInteropExportFilter().add(".*");
 
     MockJavaResource jsNamespaceFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1087,7 +1087,7 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsNamespaceOnClass() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setGenerateJsInteropExports(true);
+    compilerOptions.getJsInteropExportFilter().add(".*");
 
     MockJavaResource jsNamespaceFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1126,7 +1126,7 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsFunction() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setGenerateJsInteropExports(true);
+    compilerOptions.getJsInteropExportFilter().add(".*");
 
     MockJavaResource jsFunctionIFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1173,7 +1173,7 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsProperty() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setGenerateJsInteropExports(true);
+    compilerOptions.getJsInteropExportFilter().add(".*");
 
     MockJavaResource jsPropertyIFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1226,7 +1226,7 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsType() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setGenerateJsInteropExports(true);
+    compilerOptions.getJsInteropExportFilter().add(".*");
 
     MockJavaResource jsTypeFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1261,7 +1261,7 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsTypeNative() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setGenerateJsInteropExports(true);
+    compilerOptions.getJsInteropExportFilter().add(".*");
 
     MockJavaResource nativeFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1301,7 +1301,7 @@ public class CompilerTest extends ArgProcessorTestBase {
   public void testChangeJsIgnore() throws Exception {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
-    compilerOptions.setGenerateJsInteropExports(true);
+    compilerOptions.getJsInteropExportFilter().add(".*");
 
     MockJavaResource jsIgnoreFooResource =
         JavaResourceBase.createMockJavaResource(
@@ -1336,7 +1336,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     MinimalRebuildCache minimalRebuildCache = new MinimalRebuildCache();
     File applicationDir = Files.createTempDir();
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
-    compilerOptions.setGenerateJsInteropExports(true);
+    compilerOptions.getJsInteropExportFilter().add(".*");
 
     // Simple compile with one dialog.alert() export succeeds.
     compileToJs(compilerOptions, applicationDir, "com.foo.SimpleModule", Lists.newArrayList(
@@ -1474,7 +1474,7 @@ public class CompilerTest extends ArgProcessorTestBase {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     // Make sure it compiles successfully with no assertions
     compilerOptions.setEnableAssertions(true);
-    compilerOptions.setGenerateJsInteropExports(true);
+    compilerOptions.getJsInteropExportFilter().add(".*");
     compilerOptions.setOutput(JsOutputOption.PRETTY);
     compilerOptions.setOptimizationLevel(9);
     assertCompileSucceeds(compilerOptions, testEntryPoint.getTypeName(),
@@ -1699,7 +1699,6 @@ public class CompilerTest extends ArgProcessorTestBase {
     CompilerOptions compilerOptions = new CompilerOptionsImpl();
     compilerOptions.setUseDetailedTypeIds(true);
     compilerOptions.setSourceLevel(SourceLevel.JAVA8);
-    compilerOptions.setGenerateJsInteropExports(false);
 
     // Compile the application with no errors.
     compileToJs(logger, compilerOptions, applicationDir, "com.foo.RepresentedAsNative",
@@ -2449,7 +2448,7 @@ public class CompilerTest extends ArgProcessorTestBase {
 
       // Setup options to perform a per-file compile, output to this new application directory and
       // compile the given module.
-      compilerOptions.setGenerateJsInteropExports(true);
+      compilerOptions.getJsInteropExportFilter().add(".*");
       compilerOptions.setWarDir(applicationDir);
       compilerOptions.setModuleNames(ImmutableList.of(moduleName));
 

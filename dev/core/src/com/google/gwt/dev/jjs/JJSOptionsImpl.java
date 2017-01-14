@@ -19,6 +19,7 @@ import com.google.gwt.dev.js.JsNamespaceOption;
 import com.google.gwt.dev.util.arg.OptionMethodNameDisplayMode;
 import com.google.gwt.dev.util.arg.OptionOptimize;
 import com.google.gwt.dev.util.arg.SourceLevel;
+import com.google.gwt.util.regexfilter.WhitelistRegexFilter;
 
 import java.io.Serializable;
 
@@ -49,7 +50,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   private boolean soycExtra = false;
   private boolean soycHtmlDisabled = false;
   private boolean strict = false;
-  private boolean generateJsInteropExports = false;
+  private WhitelistRegexFilter jsInteropExportFilter = new WhitelistRegexFilter();
   private boolean useDetailedTypeIds = false;
   private OptionMethodNameDisplayMode.Mode methodNameDisplayMode =
       OptionMethodNameDisplayMode.Mode.NONE;
@@ -81,7 +82,7 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
     setStrict(other.isStrict());
     setSourceLevel(other.getSourceLevel());
     setNamespace(other.getNamespace());
-    setGenerateJsInteropExports(other.shouldGenerateJsInteropExports());
+    jsInteropExportFilter.addAll(other.getJsInteropExportFilter());
     setUseDetailedTypeIds(other.useDetailedTypeIds());
     setMethodNameDisplayMode(other.getMethodNameDisplayMode());
     setClosureCompilerFormatEnabled(other.isClosureCompilerFormatEnabled());
@@ -332,13 +333,8 @@ public class JJSOptionsImpl implements JJSOptions, Serializable {
   }
 
   @Override
-  public boolean shouldGenerateJsInteropExports() {
-    return generateJsInteropExports;
-  }
-
-  @Override
-  public void setGenerateJsInteropExports(boolean generateExports) {
-    generateJsInteropExports = generateExports;
+  public WhitelistRegexFilter getJsInteropExportFilter() {
+    return jsInteropExportFilter;
   }
 
   @Override

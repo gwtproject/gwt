@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "23c0454e_69dca3f9",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerGenerateJsInteropExports.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-01-17T18:51:53Z",
+      "side": 1,
+      "message": "so if it starts with \"-\" it is ignored?",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 33
+      },
+      "revId": "5f48d848da14c90c3859207fea79e168acf59fab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23c0454e_293e35de",
         "filename": "dev/core/src/com/google/gwt/dev/util/arg/OptionGenerateJsInteropExports.java",
         "patchSetId": 3
@@ -47,6 +70,29 @@
       "writtenOn": "2017-01-14T02:17:55Z",
       "side": 1,
       "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "5f48d848da14c90c3859207fea79e168acf59fab",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23c0454e_29caab25",
+        "filename": "dev/core/test/com/google/gwt/dev/ArgHandlerGenerateJsInteropExportsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-01-17T18:51:53Z",
+      "side": 1,
+      "message": "Add a couple for invalid options, and add \"-a.b\" which with the current code will not be an error but it should be.\n\nAlso add tests for -exlude...",
+      "range": {
+        "startLine": 52,
+        "startChar": 14,
+        "endLine": 52,
+        "endChar": 31
+      },
       "revId": "5f48d848da14c90c3859207fea79e168acf59fab",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false

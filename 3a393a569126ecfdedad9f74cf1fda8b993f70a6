@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "63915dce_0ddbbdff",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerFilterJsInteropExports.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-18T20:55:32Z",
+      "side": 1,
+      "message": "If we apply that semantic, then (which I think) the more common case of just having includeJsInteropExports becomes no-op and I should give the same error for that one.",
+      "parentUuid": "63915dce_013d4cdd",
+      "range": {
+        "startLine": 65,
+        "startChar": 37,
+        "endLine": 65,
+        "endChar": 61
+      },
+      "revId": "3a393a569126ecfdedad9f74cf1fda8b993f70a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63915dce_614c5081",
         "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerGenerateJsInteropExports.java",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-18T16:28:40Z",
       "side": 1,
       "message": "include/exclude can be used to scope the generation of exports. By default generates all exports.",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 17
+      },
+      "revId": "3a393a569126ecfdedad9f74cf1fda8b993f70a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63915dce_cd555564",
+        "filename": "dev/core/src/com/google/gwt/dev/util/arg/ArgHandlerGenerateJsInteropExports.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-18T20:55:32Z",
+      "side": 1,
+      "message": "Current one reads better to me. Let\u0027s talk about it.",
+      "parentUuid": "63915dce_614c5081",
       "range": {
         "startLine": 32,
         "startChar": 12,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "63915dce_4d2945ed",
+        "filename": "dev/core/src/com/google/gwt/util/regexfilter/RegexFilter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-18T20:55:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63915dce_01746ca7",
+      "range": {
+        "startLine": 96,
+        "startChar": 17,
+        "endLine": 96,
+        "endChar": 27
+      },
+      "revId": "3a393a569126ecfdedad9f74cf1fda8b993f70a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63915dce_01c2ac87",
         "filename": "dev/core/test/com/google/gwt/dev/ArgHandlerFilterJsInteropExportsTest.java",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2017-01-18T16:28:40Z",
       "side": 1,
       "message": "Add test for malformed regexp and one that starts with -",
+      "range": {
+        "startLine": 63,
+        "startChar": 33,
+        "endLine": 63,
+        "endChar": 34
+      },
+      "revId": "3a393a569126ecfdedad9f74cf1fda8b993f70a6",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63915dce_8d78addb",
+        "filename": "dev/core/test/com/google/gwt/dev/ArgHandlerFilterJsInteropExportsTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-18T20:55:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63915dce_01c2ac87",
       "range": {
         "startLine": 63,
         "startChar": 33,

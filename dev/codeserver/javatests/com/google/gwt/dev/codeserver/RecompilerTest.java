@@ -175,7 +175,7 @@ public class RecompilerTest extends TestCase {
     writeResourcesTo(originalResources, sourcePath);
 
     File baseCacheDir = Files.createTempDir();
-    UnitCache unitCache = UnitCacheSingleton.get(logger, null, baseCacheDir);
+    UnitCache unitCache = UnitCacheSingleton.get(logger, null, baseCacheDir, new CompilerOptionsImpl(null, null, options));
     MinimalRebuildCacheManager minimalRebuildCacheManager =
         new MinimalRebuildCacheManager(logger, baseCacheDir, ImmutableMap.<String, String>of());
     Recompiler recompiler = new Recompiler(OutboxDir.create(Files.createTempDir(), logger), null,
@@ -221,7 +221,8 @@ public class RecompilerTest extends TestCase {
     writeResourcesTo(originalResources, sourcePath);
 
     File baseCacheDir = Files.createTempDir();
-    UnitCache unitCache = UnitCacheSingleton.get(logger, null, baseCacheDir);
+    UnitCache unitCache = UnitCacheSingleton.get(
+        logger, null, baseCacheDir, new CompilerOptionsImpl(options));
     MinimalRebuildCacheManager minimalRebuildCacheManager =
         new MinimalRebuildCacheManager(logger, baseCacheDir, ImmutableMap.<String, String>of());
     Recompiler recompiler = new Recompiler(OutboxDir.create(Files.createTempDir(), logger), null,

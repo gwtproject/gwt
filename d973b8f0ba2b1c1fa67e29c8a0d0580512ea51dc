@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0847de68_0aea5fee",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/UnitCacheSingleton.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-21T00:46:48Z",
+      "side": 1,
+      "message": "[error] \u0027java.io.File\u0027 should be separated from previous imports.",
+      "revId": "d973b8f0ba2b1c1fa67e29c8a0d0580512ea51dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0847de68_eaeee300",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/UnitCacheSingleton.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-21T00:46:48Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 107).",
+      "revId": "d973b8f0ba2b1c1fa67e29c8a0d0580512ea51dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0847de68_cae32718",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/UnitCacheSingleton.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-21T00:46:48Z",
+      "side": 1,
+      "message": "[warning] Line is longer than 100 characters (found 111).",
+      "revId": "d973b8f0ba2b1c1fa67e29c8a0d0580512ea51dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0847de68_aae8ebf2",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/PersistentUnitCacheTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-21T00:46:48Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.PrecompileTaskOptionsImpl.",
+      "revId": "d973b8f0ba2b1c1fa67e29c8a0d0580512ea51dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0847de68_8add2f52",
+        "filename": "dev/core/test/com/google/gwt/dev/javac/PersistentUnitCacheTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-21T00:46:48Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.dev.jjs.JJSOptions.",
+      "revId": "d973b8f0ba2b1c1fa67e29c8a0d0580512ea51dc",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

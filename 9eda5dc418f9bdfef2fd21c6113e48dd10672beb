@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0847de68_5cf13dad",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-23T16:28:29Z",
+      "side": 0,
+      "message": "seems like we lost a dash (-) in the process but the tests seems like not missing it so not sure what is going on?",
+      "revId": "9eda5dc418f9bdfef2fd21c6113e48dd10672beb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

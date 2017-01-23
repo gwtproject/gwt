@@ -16,6 +16,24 @@
       "revId": "9eda5dc418f9bdfef2fd21c6113e48dd10672beb",
       "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0847de68_30efc53a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-01-23T17:36:12Z",
+      "side": 0,
+      "message": "Change the location of where we concat the dash to make it more readable.",
+      "parentUuid": "0847de68_5cf13dad",
+      "revId": "9eda5dc418f9bdfef2fd21c6113e48dd10672beb",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
     }
   ]
 }

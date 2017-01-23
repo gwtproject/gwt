@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0847de68_10a609fd",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/RecompilerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-23T17:46:48Z",
+      "side": 1,
+      "message": "pls fix and reformat",
+      "revId": "e314a8f4d2b84da074a84d8cc8e74271366fee7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0847de68_b068559c",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-23T17:46:48Z",
+      "side": 1,
+      "message": "+ \"-\"",
+      "range": {
+        "startLine": 69,
+        "startChar": 79,
+        "endLine": 69,
+        "endChar": 80
+      },
+      "revId": "e314a8f4d2b84da074a84d8cc8e74271366fee7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0847de68_50c3618a",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/UnitCacheSingleton.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-23T17:46:48Z",
+      "side": 1,
+      "message": "reformat",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 23
+      },
+      "revId": "e314a8f4d2b84da074a84d8cc8e74271366fee7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

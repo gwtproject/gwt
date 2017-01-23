@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0847de68_5046c113",
+        "filename": "dev/codeserver/javatests/com/google/gwt/dev/codeserver/RecompilerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-01-23T18:03:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0847de68_10a609fd",
+      "revId": "e314a8f4d2b84da074a84d8cc8e74271366fee7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0847de68_b068559c",
         "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
         "patchSetId": 4
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "0847de68_104049f2",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/PersistentUnitCacheDir.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-01-23T18:03:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0847de68_b068559c",
+      "range": {
+        "startLine": 69,
+        "startChar": 79,
+        "endLine": 69,
+        "endChar": 80
+      },
+      "revId": "e314a8f4d2b84da074a84d8cc8e74271366fee7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0847de68_50c3618a",
         "filename": "dev/core/src/com/google/gwt/dev/javac/UnitCacheSingleton.java",
         "patchSetId": 4
@@ -53,6 +95,30 @@
       "writtenOn": "2017-01-23T17:46:48Z",
       "side": 1,
       "message": "reformat",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 23
+      },
+      "revId": "e314a8f4d2b84da074a84d8cc8e74271366fee7b",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0847de68_f0fa4d97",
+        "filename": "dev/core/src/com/google/gwt/dev/javac/UnitCacheSingleton.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5105
+      },
+      "writtenOn": "2017-01-23T18:03:24Z",
+      "side": 1,
+      "message": "Left it as is",
+      "parentUuid": "0847de68_50c3618a",
       "range": {
         "startLine": 56,
         "startChar": 2,

@@ -878,6 +878,20 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
     return JjsUtils.getNativeSuperClassOrNull(type) != null;
   }
 
+  private void checkJsNameOnType(JDeclaredType type) {
+    if (!type.getJsName().equals("*") && !type.getJsName().equals("?")) {
+      checkJsName(type);
+      return;
+    }
+
+    if (!type.isJsNative()
+        || !(type instanceof JInterfaceType)
+        || !JsInteropUtil.isGlobal(type.getJsNamespace())) {
+      logError(type, "name '%s' can only be used for native interfaces with global namespace.",
+          type.getJsName());
+    }
+  }
+
   private void checkType(JDeclaredType type) {
     minimalRebuildCache.removeExportedNames(type.getName());
 
@@ -885,7 +899,7 @@ public class JsInteropRestrictionChecker extends AbstractRestrictionChecker {
       if (!checkJsType(type)) {
         return;
       }
-      checkJsName(type);
+      checkJsNameOnType(type);
       checkJsNamespace(type);
     }
 

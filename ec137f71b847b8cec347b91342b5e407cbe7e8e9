@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17733e11_c12182c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-25T23:35:41Z",
+      "side": 1,
+      "message": "[warning] Commit message lines should be 72 characters or fewer.",
+      "revId": "ec137f71b847b8cec347b91342b5e407cbe7e8e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0ba04fc_3611a38e",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-25T23:35:41Z",
+      "side": 1,
+      "message": "[error] Unused import - com.google.gwt.user.client.rpc.core.java.util.Collections.",
+      "revId": "ec137f71b847b8cec347b91342b5e407cbe7e8e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd99f8f0_3f005640",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-25T23:35:41Z",
+      "side": 1,
+      "message": "[error] \u0027java.util.List\u0027 should be separated from previous imports.",
+      "revId": "ec137f71b847b8cec347b91342b5e407cbe7e8e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6476ac5_e6b7628b",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-25T23:35:41Z",
+      "side": 1,
+      "message": "[error] Unused import - javax.annotation.Nullable.",
+      "revId": "ec137f71b847b8cec347b91342b5e407cbe7e8e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b106868e_40a6d459",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-25T23:35:41Z",
+      "side": 1,
+      "message": "[error] \u0027javax.annotation.Nullable\u0027 should be separated from previous imports.",
+      "revId": "ec137f71b847b8cec347b91342b5e407cbe7e8e9",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

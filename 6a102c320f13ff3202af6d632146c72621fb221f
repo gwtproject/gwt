@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5238708d_5410c067",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-25T20:20:13Z",
+      "side": 1,
+      "message": "[error] Line matches the illegal pattern \u0027newline before }\u0027.",
+      "revId": "6a102c320f13ff3202af6d632146c72621fb221f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4fc03dc9_94bafdba",
+        "filename": "dev/core/test/com/google/gwt/dev/jjs/impl/ControlFlowAnalyzerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 5445
+      },
+      "writtenOn": "2017-01-25T20:20:13Z",
+      "side": 1,
+      "message": "[info] Line matches the illegal pattern \u0027more than one blank line\u0027.",
+      "revId": "6a102c320f13ff3202af6d632146c72621fb221f",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

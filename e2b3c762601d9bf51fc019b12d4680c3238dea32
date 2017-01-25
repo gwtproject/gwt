@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45a4ab7f_605a28fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-25T02:21:20Z",
+      "side": 1,
+      "message": "Name \u0027?\u0027 (aka. unknown type) should be preferred over \u0027Object\u0027 when the type is unknown while \u0027*\u0027 (aka. any) as the super type of any type in JavaScript (incl. primitives).\n\nFor GWT there are no implications however other tools could utilize this value for better type information.",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "e2b3c762601d9bf51fc019b12d4680c3238dea32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c693fdb_84988472",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-25T02:21:20Z",
+      "side": 1,
+      "message": "could you add link to the bug in github?",
+      "revId": "e2b3c762601d9bf51fc019b12d4680c3238dea32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28461632_5a7ca1e9",
+        "filename": "dev/core/src/com/google/gwt/dev/jjs/impl/JsInteropRestrictionChecker.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 5110
+      },
+      "writtenOn": "2017-01-25T02:21:20Z",
+      "side": 1,
+      "message": "I understand this from a purist perspective but on the other hand it is just unnecessary extra typing for the developer. Kind of annoying. WDYT?",
+      "range": {
+        "startLine": 889,
+        "startChar": 8,
+        "endLine": 889,
+        "endChar": 57
+      },
+      "revId": "e2b3c762601d9bf51fc019b12d4680c3238dea32",
+      "serverId": "84fdd5b9-d3fc-3149-9ae9-e619898c4c46",
+      "unresolved": false
+    }
+  ]
+}

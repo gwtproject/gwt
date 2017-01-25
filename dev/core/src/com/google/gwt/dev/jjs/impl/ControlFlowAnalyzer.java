@@ -59,9 +59,13 @@ import com.google.gwt.dev.js.ast.JsFunction;
 import com.google.gwt.dev.js.ast.JsName;
 import com.google.gwt.dev.js.ast.JsNameRef;
 import com.google.gwt.dev.js.ast.JsVisitor;
+import com.google.gwt.thirdparty.guava.common.base.Predicate;
 import com.google.gwt.thirdparty.guava.common.collect.ArrayListMultimap;
+import com.google.gwt.thirdparty.guava.common.collect.Collections2;
+import com.google.gwt.thirdparty.guava.common.collect.LinkedHashMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.ListMultimap;
 import com.google.gwt.thirdparty.guava.common.collect.Lists;
+import com.google.gwt.thirdparty.guava.common.collect.Multimap;
 import com.google.gwt.thirdparty.guava.common.collect.Sets;
 
 import java.util.List;
@@ -520,7 +524,7 @@ public class ControlFlowAnalyzer {
       // Technically, JsType/JsFunction are also instantiatable in JavaScript but we don't track
       // them using similar to JSO as if we do that then after cast normalization, they got pruned.
       if (program.typeOracle.canBeJavaScriptObject(type)
-          || program.isRepresentedAsNativeJsPrimitive(type)) {
+          || representedAsNativeTypesBySupertype.containsKey(type)) {
         return true;
       }
 
@@ -595,6 +599,9 @@ public class ControlFlowAnalyzer {
     private void maybeRescueJavaScriptObjectPassingIntoJava(JType type) {
       if (!canBeInstantiatedInJavaScript(type)) {
         return;
+      }
+      for (JReferenceType representedAsNativeType : representedAsNativeTypesBySupertype.get(type)) {
+        rescue(representedAsNativeType, true);
       }
       rescue((JReferenceType) type, true);
       if (program.typeOracle.isSingleJsoImpl(type)) {
@@ -935,6 +942,8 @@ public class ControlFlowAnalyzer {
   private final RescueVisitor rescuer;
   private final JMethod runAsyncOnSuccess;
   private JMethod stringValueOfChar = null;
+  private Multimap<JType, JDeclaredType> representedAsNativeTypesBySupertype =
+      LinkedHashMultimap.create();
 
   public ControlFlowAnalyzer(ControlFlowAnalyzer cfa) {
     program = cfa.program;
@@ -955,15 +964,42 @@ public class ControlFlowAnalyzer {
           ArrayListMultimap.create(cfa.argumentsToRescueIfParameterRead);
     }
     rescuer = new RescueVisitor();
+    representedAsNativeTypesBySupertype = cfa.representedAsNativeTypesBySupertype;
   }
 
-  public ControlFlowAnalyzer(JProgram program) {
+  public ControlFlowAnalyzer(final JProgram program) {
     this.program = program;
     asyncFragmentOnLoad = program.getIndexedMethod(RuntimeConstants.ASYNC_FRAGMENT_LOADER_ON_LOAD);
     runAsyncOnSuccess = program.getIndexedMethod(RuntimeConstants.RUN_ASYNC_CALLBACK_ON_SUCCESS);
     getClassField = program.getIndexedField(RuntimeConstants.OBJECT_CLAZZ);
     getClassMethod = program.getIndexedMethod(RuntimeConstants.OBJECT_GET_CLASS);
     rescuer = new RescueVisitor();
+    Set<JDeclaredType> representedAsNativesAndSupertypes = Sets.newLinkedHashSet();
+    for (JDeclaredType type : program.getRepresentedAsNativeTypes()) {
+      representedAsNativesAndSupertypes.addAll(getSupertypesIncludingSelf(type));
+    }
+    for (final JDeclaredType type : representedAsNativesAndSupertypes) {
+      representedAsNativeTypesBySupertype.putAll(type, Collections2.filter(
+          program.getRepresentedAsNativeTypes(),
+          new Predicate<JDeclaredType>() {
+            @Override
+            public boolean apply(JDeclaredType possibleSubtype) {
+              return program.typeOracle.isSubType(type, possibleSubtype) || type == possibleSubtype;
+            }
+          }));
+    }
+  }
+
+  private Set<JDeclaredType> getSupertypesIncludingSelf(JDeclaredType type) {
+    Set<JDeclaredType> superTypes = Sets.newHashSet();
+    superTypes.add(type);
+    if (type.getSuperClass() != null) {
+      superTypes.addAll(getSupertypesIncludingSelf(type.getSuperClass()));
+    }
+    for (JInterfaceType interfaceType : type.getImplements()) {
+      superTypes.addAll(getSupertypesIncludingSelf(interfaceType));
+    }
+    return superTypes;
   }
 
   /**

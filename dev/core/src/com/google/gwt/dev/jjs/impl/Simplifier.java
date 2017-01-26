@@ -62,9 +62,11 @@ public class Simplifier {
    */
   private static JExpression maybeUnflipBoolean(JExpression expr) {
     if (expr instanceof JUnaryOperation) {
-      JUnaryOperation unop = (JUnaryOperation) expr;
-      if (unop.getOp() == JUnaryOperator.NOT) {
-        return unop.getArg();
+      JUnaryOperation unaryOperation = (JUnaryOperation) expr;
+      if (unaryOperation.getOp() == JUnaryOperator.NOT
+          // Don't flip negations on floating point comparisons
+          && !isFloatingPointComparison(unaryOperation.getArg())) {
+        return unaryOperation.getArg();
       }
     }
     return null;
@@ -120,7 +122,7 @@ public class Simplifier {
       JExpression exp) {
     info = getBestSourceInfo(original, info, exp);
     if (exp instanceof JMultiExpression) {
-      // (T)(a,b,c) -> a,b,(T) c
+      // (T) (a, b, c) -> (a, b,(T) c)
       JMultiExpression expMulti = (JMultiExpression) exp;
       JMultiExpression newMulti = new JMultiExpression(info);
       newMulti.addExpressions(allButLast(expMulti.getExpressions()));
@@ -326,74 +328,102 @@ public class Simplifier {
   /**
    * Simplifies an negation expression.
    *
-   * if(a,b,c) d else e -> {a; b; if(c) d else e; }
+   * !(a > b) => a <= b
    *
    * @param expr the expression to simplify.
    * @return the simplified expression if a simplification could be done and <code>expr</code>
    *         otherwise.
    */
   public static JExpression not(JPrefixOperation expr) {
+    if (isFloatingPointComparison(expr.getArg())) {
+      // Don't negate floating point expression because it changes the values when NaNs are
+      // involved. E.g. !(Nan > 3) is not equivalent to (Nan <= 3).
+      return expr;
+    }
     return notImpl(expr, expr.getSourceInfo(), expr.getArg());
   }
 
-  private static JExpression notImpl(JPrefixOperation original, SourceInfo info, JExpression arg) {
-    info = getBestSourceInfo(original, info, arg);
-    if (arg instanceof JMultiExpression) {
-      // !(a,b,c) -> (a,b,!c)
-      JMultiExpression argMulti = (JMultiExpression) arg;
-      JMultiExpression newMulti = new JMultiExpression(info);
-      newMulti.addExpressions(allButLast(argMulti.getExpressions()));
-      newMulti.addExpressions(notImpl(null, info, last(argMulti.getExpressions())));
-      // TODO(spoon): immediately simplify the newMulti
-      return newMulti;
+  private static boolean isFloatingPointComparison(JExpression expr) {
+    if (expr instanceof JBinaryOperation) {
+      JBinaryOperation binaryOperation = (JBinaryOperation) expr;
+      return
+          binaryOperation.getType() == JPrimitiveType.BOOLEAN
+          && (binaryOperation.getLhs().getType() == JPrimitiveType.FLOAT
+              || binaryOperation.getLhs().getType() == JPrimitiveType.DOUBLE
+              || binaryOperation.getRhs().getType() == JPrimitiveType.FLOAT
+              || binaryOperation.getRhs().getType() == JPrimitiveType.DOUBLE);
     }
-    if (arg instanceof JBinaryOperation) {
+    return false;
+  }
+
+  private static JExpression notImpl(
+      JPrefixOperation expression, SourceInfo info, JExpression argument) {
+    info = getBestSourceInfo(expression, info, argument);
+    if (argument instanceof JMultiExpression) {
+      // !(a,b,c) -> (a,b,!c)
+      JMultiExpression multiExpression = (JMultiExpression) argument;
+      JMultiExpression simplifiedExpression = new JMultiExpression(info);
+      simplifiedExpression.addExpressions(allButLast(multiExpression.getExpressions()));
+      simplifiedExpression.addExpressions(
+          notImpl(null, info, last(multiExpression.getExpressions())));
+      // TODO(spoon): immediately simplify the newMulti
+      return simplifiedExpression;
+    }
+    if (argument instanceof JBinaryOperation) {
       // try to invert the binary operator
-      JBinaryOperation argOp = (JBinaryOperation) arg;
-      JBinaryOperator op = argOp.getOp();
-      JBinaryOperator newOp = null;
-      if (op == JBinaryOperator.EQ) {
-        // e.g. !(x == y) -> x != y
-        newOp = JBinaryOperator.NEQ;
-      } else if (op == JBinaryOperator.NEQ) {
-        // e.g. !(x != y) -> x == y
-        newOp = JBinaryOperator.EQ;
-      } else if (op == JBinaryOperator.GT) {
-        // e.g. !(x > y) -> x <= y
-        newOp = JBinaryOperator.LTE;
-      } else if (op == JBinaryOperator.LTE) {
-        // e.g. !(x <= y) -> x > y
-        newOp = JBinaryOperator.GT;
-      } else if (op == JBinaryOperator.GTE) {
-        // e.g. !(x >= y) -> x < y
-        newOp = JBinaryOperator.LT;
-      } else if (op == JBinaryOperator.LT) {
-        // e.g. !(x < y) -> x >= y
-        newOp = JBinaryOperator.GTE;
+      JBinaryOperation binaryExpression = (JBinaryOperation) argument;
+      JBinaryOperator operator = binaryExpression.getOp();
+      JBinaryOperator negatedOperator = null;
+      switch (operator) {
+        case EQ:
+          // e.g. !(x == y) -> x != y
+          negatedOperator = JBinaryOperator.NEQ;
+          break;
+        case NEQ:
+          // e.g. !(x != y) -> x == y
+          negatedOperator = JBinaryOperator.EQ;
+          break;
+        case GT:
+          // e.g. !(x > y) -> x <= y
+          negatedOperator = JBinaryOperator.LTE;
+          break;
+        case LTE:
+          // e.g. !(x <= y) -> x > y
+          negatedOperator = JBinaryOperator.GT;
+          break;
+        case GTE:
+          // e.g. !(x >= y) -> x < y
+          negatedOperator = JBinaryOperator.LT;
+          break;
+        case LT:
+          // e.g. !(x < y) -> x >= y
+          negatedOperator = JBinaryOperator.GTE;
+          break;
       }
-      if (newOp != null) {
-        JBinaryOperation newBinOp =
-            new JBinaryOperation(info, argOp.getType(), newOp, argOp.getLhs(), argOp.getRhs());
-        return newBinOp;
+      if (negatedOperator != null) {
+        return new JBinaryOperation(info, binaryExpression.getType(), negatedOperator,
+            binaryExpression.getLhs(), binaryExpression.getRhs());
       }
-    } else if (arg instanceof JPrefixOperation) {
+    } else if (argument instanceof JPrefixOperation) {
       // try to invert the unary operator
-      JPrefixOperation argOp = (JPrefixOperation) arg;
-      JUnaryOperator op = argOp.getOp();
+      JPrefixOperation prefixExpression = (JPrefixOperation) argument;
       // e.g. !!x -> x
-      if (op == JUnaryOperator.NOT) {
-        return argOp.getArg();
+      if (prefixExpression.getOp() == JUnaryOperator.NOT) {
+        return prefixExpression.getArg();
       }
-    } else if (arg instanceof JBooleanLiteral) {
-      JBooleanLiteral booleanLit = (JBooleanLiteral) arg;
-      return JBooleanLiteral.get(!booleanLit.getValue());
+    } else if (argument instanceof JBooleanLiteral) {
+      JBooleanLiteral booleanLiteral = (JBooleanLiteral) argument;
+      return JBooleanLiteral.get(!booleanLiteral.getValue());
     }
 
-    // no simplification made
-    if (original != null) {
-      return original;
+    // no simplification made to the argument.
+    if (expression != null) {
+      // If there was an outer expression, just return it unchanged.
+      return expression;
     }
-    return new JPrefixOperation(info, JUnaryOperator.NOT, arg);
+
+    // Negate the argument.
+    return new JPrefixOperation(info, JUnaryOperator.NOT, argument);
   }
 
   /**
